@@ -81,7 +81,7 @@ Item {
 
         function add(obj) { model.insert(0, obj) }
         delegate: Rectangle {
-            height: 98
+            height: 88
             width: listView.width
 
             Text {
@@ -89,7 +89,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.topMargin: 16
+                anchors.topMargin: 11
                 elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 18

@@ -44,6 +44,15 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 1
+        color: "#DBDBDB"
+        visible: parent.checked
+    }
+
     Image {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
