@@ -6,7 +6,7 @@ Rectangle {
     states: [
         State {
             name: "Dashboard"
-            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
+//            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
         }, State {
             name: "History"
             PropertyChanges { target: loader; source: "pages/History.qml" }
