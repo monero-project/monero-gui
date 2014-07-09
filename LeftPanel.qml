@@ -10,6 +10,17 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
 
+    function selectItem(pos) {
+        menuColumn.previousButton.checked = false
+        if(pos === "Dashboard") menuColumn.previousButton = dashboardButton
+        else if(pos === "History") menuColumn.previousButton = historyButton
+        else if(pos === "Transfer") menuColumn.previousButton = transferButton
+        else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
+        else if(pos === "Minning") menuColumn.previousButton = miningButton
+        else if(pos === "Settings") menuColumn.previousButton = settingsButton
+        menuColumn.previousButton.checked = true
+    }
+
     width: 260
     color: "#FFFFFF"
 
@@ -106,6 +117,7 @@ Rectangle {
         color: "#1C1C1C"
 
         Column {
+            id: menuColumn
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top

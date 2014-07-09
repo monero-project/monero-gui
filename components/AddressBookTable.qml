@@ -47,7 +47,7 @@ ListView {
             Text {
                 id: paymentIdText
                 anchors.top: parent.top
-                width: text.length ? 122 : 0
+                width: text.length ? 139 : 0
                 font.family: "Arial"
                 font.bold: true
                 font.pixelSize: 19

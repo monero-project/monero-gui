@@ -21,6 +21,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Minning"
         else if(seq === "Ctrl+S") middlePanel.state = "Settings"
+        leftPanel.selectItem(middlePanel.state)
     }
     function mousePressed(obj, mouseX, mouseY) {
         if(obj.objectName === "appWindow")
