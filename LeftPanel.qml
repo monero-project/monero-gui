@@ -33,6 +33,7 @@ Rectangle {
             text: qsTr("Locked balance")
             anchors.left: parent.left
             anchors.leftMargin: 50
+            tipText: qsTr("Test tip 1<br/><br/>line 2")
         }
 
         Row {
@@ -66,6 +67,7 @@ Rectangle {
             text: qsTr("Unlocked")
             anchors.left: parent.left
             anchors.leftMargin: 50
+            tipText: qsTr("Test tip 2<br/><br/>line 2")
         }
 
         Text {

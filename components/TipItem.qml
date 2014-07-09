@@ -10,7 +10,7 @@ Rectangle {
     Image {
         anchors.top: parent.bottom
         anchors.left: parent.left
-        anchors.leftMargin: 8
+        anchors.leftMargin: 5
         source: "../images/tip.png"
     }
 
@@ -21,6 +21,7 @@ Rectangle {
         lineHeight: 0.7
         font.family: "Arial"
         font.pixelSize: 12
+        font.letterSpacing: -1
         color: "#FFFFFF"
     }
 }

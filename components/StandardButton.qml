@@ -5,6 +5,7 @@ Item {
     property string shadowColor
     property string pressedColor
     property string releasedColor
+    property string icon: ""
     property string textColor: "#FFFFFF"
     property alias text: label.text
     signal clicked()
@@ -36,6 +37,13 @@ Item {
         elide: Text.ElideRight
         font.pixelSize: 12
         color: parent.textColor
+        visible: parent.icon === ""
+    }
+
+    Image {
+        anchors.centerIn: parent
+        visible: parent.icon !== ""
+        source: parent.icon
     }
 
     MouseArea {

@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
 
     QObject::connect(eventFilter, SIGNAL(ctrlPressed()), rootObject, SLOT(ctrlKeyPressed()));
     QObject::connect(eventFilter, SIGNAL(ctrlReleased()), rootObject, SLOT(ctrlKeyReleased()));
+    QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant)), rootObject, SLOT(sequencePressed(QVariant)));
+    QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
+    QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
 
     return app.exec();
 }

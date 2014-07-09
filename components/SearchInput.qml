@@ -47,6 +47,19 @@ Item {
             anchors.right: button.left
             width: 154
 
+            function hide() { droplist.height = 0 }
+            function containsPoint(px, py) {
+                if(px < 0)
+                    return false
+                if(px > width)
+                    return false
+                if(py < 0)
+                    return false
+                if(py > height + droplist.height)
+                    return false
+                return true
+            }
+
             Row {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
@@ -81,7 +94,14 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: droplist.height = droplist.height === 0 ? dropcolumn.height : 0
+                onClicked: {
+                    if(droplist.height === 0) {
+                        appWindow.currentItem = dropdown
+                        droplist.height = dropcolumn.height
+                    } else {
+                        droplist.height = 0
+                    }
+                }
             }
         }
 

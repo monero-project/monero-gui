@@ -53,5 +53,9 @@
         <file>tabs/Twitter.qml</file>
         <file>tabs/tweetSearch.js</file>
         <file>tabs/TweetsModel.qml</file>
+        <file>components/Scroll.qml</file>
+        <file>components/AddressBookTable.qml</file>
+        <file>images/goToTransferIcon.png</file>
+        <file>images/deleteIcon.png</file>
     </qresource>
 </RCC>

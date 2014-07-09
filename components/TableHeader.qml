@@ -3,6 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: header
     signal sortRequest(bool desc, int column)
+    property alias dataModel: columnsRepeater.model
     property int activeSortColumn: -1
 
     height: 31
@@ -16,13 +17,6 @@ Rectangle {
         color: "#DBDBDB"
     }
 
-    ListModel {
-        id: columnsModel
-        ListElement { columnName: "Date"; columnWidth: 92 }
-        ListElement { columnName: "Amount"; columnWidth: 158 }
-        ListElement { columnName: "Balance"; columnWidth: 168 }
-    }
-
     Row {
         anchors.horizontalCenter: parent.horizontalCenter
 
@@ -34,7 +28,6 @@ Rectangle {
 
         Repeater {
             id: columnsRepeater
-            model: columnsModel
             delegate: Rectangle {
                 id: delegate
                 property bool desc: false

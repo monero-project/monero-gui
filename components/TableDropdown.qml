@@ -4,8 +4,23 @@ Item {
     id: dropdown
     property bool expanded: false
     signal collapsed()
+    signal optionClicked(int index)
     width: 72
     height: 37
+
+    onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
+    function hide() { dropdown.expanded = false }
+    function containsPoint(px, py) {
+        if(px < 0)
+            return false
+        if(px > width)
+            return false
+        if(py < 0)
+            return false
+        if(py > height + dropArea.height)
+            return false
+        return true
+    }
 
     Item {
         id: head
@@ -13,16 +28,16 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            anchors.topMargin: dropdown.expanded ? 0 : 1
+            anchors.topMargin: dropdown.expanded || dropArea.height > 0 ? 0 : 1
             radius: 3
-            color: dropdown.expanded ? "#888888" : "#DBDBDB"
+            color: dropdown.expanded || dropArea.height > 0 ? "#888888" : "#DBDBDB"
         }
 
         Rectangle {
             anchors.fill: parent
-            anchors.bottomMargin: dropdown.expanded ? 0 : 1
+            anchors.bottomMargin: dropdown.expanded || dropArea.height > 0 ? 0 : 1
             radius: 3
-            color: dropdown.expanded ? "#DBDBDB" : "#F0EEEE"
+            color: dropdown.expanded || dropArea.height > 0 ? "#DBDBDB" : "#F0EEEE"
         }
 
         Image {
@@ -37,7 +52,7 @@ Item {
             anchors.horizontalCenterOffset: 1
             height: 23
             width: 1
-            color: dropdown.expanded ? "#FFFFFF" : "#DBDBDB"
+            color: dropdown.expanded || dropArea.height > 0 ? "#FFFFFF" : "#DBDBDB"
         }
 
         Image {
@@ -54,6 +69,7 @@ Item {
     }
 
     Item {
+        id: dropArea
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: head.bottom
@@ -73,9 +89,9 @@ Item {
 
             ListModel {
                 id: dataModel
-                ListElement { name: "<b>text 1</b>"; icon: "../images/dropdownOption1.png" }
-                ListElement { name: "<b>longer text 2</b>"; icon: "../images/dropdownSend.png" }
-                ListElement { name: "<b>text3</b><br/><br/>lorem ipsum asdasd asdasd"; icon: "../images/dropdownSearch.png" }
+                ListElement { name: "<b>Add to adress book</b>"; icon: "../images/dropdownOption1.png" }
+                ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
+                ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
             }
 
             Repeater {
@@ -127,6 +143,11 @@ Item {
                             tipItem.visible = true
                         }
                         onExited: tipItem.visible = false
+                        onClicked: {
+                            dropdown.optionClicked(index)
+                            tipItem.visible = false
+                            dropdown.expanded = false
+                        }
                     }
                 }
             }

@@ -165,11 +165,12 @@ Rectangle {
         Tab { title: "About" }
 
         style: TabViewStyle {
-            frameOverlap: 2
+            frameOverlap: 0
             tabOverlap: 0
+
             tab: Rectangle {
                 implicitHeight: 31
-                implicitWidth: 68
+                implicitWidth: styleData.index === tabView.count - 1 ? tabView.width - (tabView.count - 1) * 68 : 68
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
@@ -197,6 +198,7 @@ Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
+                    anchors.bottomMargin: -1
                     height: 1
                     color: styleData.selected ? "#FFFFFF" : "#DBDBDB"
                 }
@@ -209,7 +211,7 @@ Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
-                    anchors.topMargin: 1
+                    //anchors.topMargin: 1
                     height: 1
                     color: "#DBDBDB"
                 }

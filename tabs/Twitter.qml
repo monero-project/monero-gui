@@ -1,9 +1,11 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import "tweetSearch.js" as Helper
+import "../components"
 
 Item {
     id: tab
+
     ListModel {
         id: testModel
         ListElement { head: "Monero || #xmr"; foot: "<b>@btcplanet</b> Duis turpis arcu, varius nec rutrum in, adipiscing at enim. Donec quis consequat ipsum," }
@@ -72,12 +74,20 @@ Item {
         }
     }
 
+    Scroll {
+        id: flickableScroll
+        anchors.rightMargin: -14
+        flickable: listView
+        yPos: listView.y
+    }
+
     ListView {
         id: listView
         model: ListModel { id: finalModel }
         anchors.fill: parent
         clip: true
         boundsBehavior: ListView.StopAtBounds
+        onContentYChanged: flickableScroll.flickableContentYChanged()
 
         function add(obj) { model.insert(0, obj) }
         delegate: Rectangle {

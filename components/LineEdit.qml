@@ -22,7 +22,7 @@ Item {
     Input {
         id: input
         anchors.fill: parent
-        anchors.leftMargin: 11
-        anchors.rightMargin: 11
+        anchors.leftMargin: 4
+        anchors.rightMargin: 4
     }
 }

@@ -6,14 +6,50 @@ import "components"
 
 ApplicationWindow {
     id: appWindow
+    objectName: "appWindow"
+    property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
     function ctrlKeyPressed() { ctrlPressed = true; }
     function ctrlKeyReleased() { ctrlPressed = false; }
+    function sequencePressed(seq) {
+        if(seq === undefined)
+            return
+        if(seq === "Ctrl+D") middlePanel.state = "Dashboard"
+        else if(seq === "Ctrl+H") middlePanel.state = "History"
+        else if(seq === "Ctrl+T") middlePanel.state = "Transfer"
+        else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
+        else if(seq === "Ctrl+M") middlePanel.state = "Minning"
+        else if(seq === "Ctrl+S") middlePanel.state = "Settings"
+    }
+    function mousePressed(obj, mouseX, mouseY) {
+        if(obj.objectName === "appWindow")
+            obj = rootItem
+
+        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
+        if(tmp !== undefined) {
+            mouseX = tmp.x
+            mouseY = tmp.y
+        }
+
+        if(currentItem !== undefined) {
+            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
+            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
+
+            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
+                currentItem.hide()
+                currentItem = undefined
+            }
+
+        }
+    }
+    function mouseReleased(obj, mouseX, mouseY) {
+
+    }
 
     visible: true
     width: 1269
-    height: 932
+    height: 900
     color: "#FFFFFF"
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2

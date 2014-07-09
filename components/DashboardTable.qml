@@ -59,7 +59,7 @@ ListView {
                 font.family: "Arial"
                 font.pixelSize: 14
                 color: "#545454"
-                text: address
+                text: description.length > 0 ? description : address
             }
         }
         
