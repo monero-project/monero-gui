@@ -37,7 +37,7 @@ ListView {
             
             Text {
                 id: paymentIdText
-                width: text.length ? 122 : 0
+                width: text.length ? 120 : 0
                 anchors.verticalCenter: dot.verticalCenter
                 font.family: "Arial"
                 font.bold: true
@@ -76,7 +76,7 @@ ListView {
             
             Column {
                 anchors.top: parent.top
-                width: 202
+                width: 215
                 
                 Text {
                     anchors.left: parent.left
@@ -86,11 +86,26 @@ ListView {
                     text: qsTr("Date")
                 }
                 
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    color: "#000000"
-                    text: date
+                Row {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    spacing: 33
+
+                    Text {
+                        font.family: "Arial"
+                        font.pixelSize: 18
+                        font.letterSpacing: -1
+                        color: "#000000"
+                        text: date
+                    }
+
+                    Text {
+                        font.family: "Arial"
+                        font.pixelSize: 18
+                        font.letterSpacing: -1
+                        color: "#000000"
+                        text: time
+                    }
                 }
             }
             
@@ -109,6 +124,7 @@ ListView {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
+                    font.letterSpacing: -1
                     color: "#000000"
                     text: amount
                 }
@@ -141,6 +157,7 @@ ListView {
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
+                        font.letterSpacing: -1
                         color: out ? "#FF4F41" : "#36B05B"
                         text: balance
                     }

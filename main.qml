@@ -49,7 +49,7 @@ ApplicationWindow {
 
     visible: true
     width: 1269
-    height: 900
+    height: 800
     color: "#FFFFFF"
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2

@@ -70,6 +70,8 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     font.family: "Arial"
                     font.pixelSize: 12
+                    font.bold: true
+                    font.letterSpacing: -1
                     color: "#4A4747"
                     text: "NAME"
                 }
@@ -150,6 +152,8 @@ Item {
                             anchors.leftMargin: 12
                             anchors.rightMargin: 12
                             font.family: "Arial"
+                            font.bold: true
+                            font.letterSpacing: -1
                             font.pixelSize: 12
                             color: delegateArea.pressed || parent.isCurrent ? "#FFFFFF" : "#4A4646"
                             text: name
@@ -177,7 +181,8 @@ Item {
             anchors.margins: 6
             width: 80
 
-            shadowColor: "#8C0B00"
+            shadowReleasedColor: "#C60F00"
+            shadowPressedColor: "#8C0B00"
             pressedColor: "#C60F00"
             releasedColor: "#FF4F41"
             text: qsTr("SEARCH")

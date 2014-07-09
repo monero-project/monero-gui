@@ -91,9 +91,10 @@ Rectangle {
 //        anchors.topMargin: 5
 //        width: 60
 
-//        shadowColor: "#8C0B00"
-//        pressedColor: "#C60F00"
-//        releasedColor: "#FF4F41"
+//        shadowReleasedColor: "#FF4304"
+//        shadowPressedColor: "#B32D00"
+//        releasedColor: "#FF6C3C"
+//        pressedColor: "#FF4304"
 //        text: qsTr("ADD")
 //    }
 

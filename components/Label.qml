@@ -43,7 +43,7 @@ Item {
             tipItem.visible = true
         }
         onExited: {
-            icon.visible = true
+            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
             tipItem.visible = false
         }
     }

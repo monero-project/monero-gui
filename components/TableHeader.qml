@@ -5,6 +5,7 @@ Rectangle {
     signal sortRequest(bool desc, int column)
     property alias dataModel: columnsRepeater.model
     property int activeSortColumn: -1
+    property int offset: 0
 
     height: 31
     color: "#FFFFFF"
@@ -18,7 +19,10 @@ Rectangle {
     }
 
     Row {
-        anchors.horizontalCenter: parent.horizontalCenter
+        id: row
+        anchors.horizontalCenter: header.offset !== 0 ? undefined: parent.horizontalCenter
+        anchors.left: header.offset !== 0 ? parent.left : undefined
+        anchors.leftMargin: header.offset
 
         Rectangle {
             height: 31

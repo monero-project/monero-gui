@@ -17,7 +17,8 @@ ListView {
             anchors.verticalCenter: parent.verticalCenter
             width: 37
             anchors.leftMargin: 3
-            shadowColor: "#FF4304"
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
             icon: "../images/goToTransferIcon.png"
@@ -29,7 +30,8 @@ ListView {
             anchors.verticalCenter: parent.verticalCenter
             width: 37
             anchors.rightMargin: 3
-            shadowColor: "#DBDBDB"
+            shadowReleasedColor: "#DBDBDB"
+            shadowPressedColor: "#888888"
             releasedColor: "#F0EEEE"
             pressedColor: "#DBDBDB"
             icon: "../images/deleteIcon.png"

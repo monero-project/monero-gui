@@ -27,17 +27,39 @@ Item {
         anchors.fill: parent
 
         Rectangle {
-            anchors.fill: parent
-            anchors.topMargin: dropdown.expanded || dropArea.height > 0 ? 0 : 1
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: parent.height - 1
+            y: dropdown.expanded || dropArea.height > 0 ? 0 : 1
             radius: 3
             color: dropdown.expanded || dropArea.height > 0 ? "#888888" : "#DBDBDB"
         }
 
         Rectangle {
-            anchors.fill: parent
-            anchors.bottomMargin: dropdown.expanded || dropArea.height > 0 ? 0 : 1
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: parent.height - 1
+            y: dropdown.expanded || dropArea.height > 0 ? 1 : 0
             radius: 3
             color: dropdown.expanded || dropArea.height > 0 ? "#DBDBDB" : "#F0EEEE"
+        }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            height: 3
+            width: 3
+            color: "#DBDBDB"
+            visible: dropdown.expanded || dropArea.height > 0
+        }
+
+        Rectangle {
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 3
+            width: 3
+            color: "#DBDBDB"
+            visible: dropdown.expanded || dropArea.height > 0
         }
 
         Image {
