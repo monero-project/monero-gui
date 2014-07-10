@@ -9,18 +9,18 @@ ApplicationWindow {
     objectName: "appWindow"
     property var currentItem
     property bool whatIsEnable: false
-    property bool ctrlPressed: false
-    function ctrlKeyPressed() { ctrlPressed = true; }
-    function ctrlKeyReleased() { ctrlPressed = false; }
+    property bool altPressed: false
+    function altKeyPressed() { altPressed = true; }
+    function altKeyReleased() { altPressed = false; }
     function sequencePressed(seq) {
         if(seq === undefined)
             return
-        if(seq === "Ctrl+D") middlePanel.state = "Dashboard"
-        else if(seq === "Ctrl+H") middlePanel.state = "History"
-        else if(seq === "Ctrl+T") middlePanel.state = "Transfer"
-        else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
-        else if(seq === "Ctrl+M") middlePanel.state = "Minning"
-        else if(seq === "Ctrl+S") middlePanel.state = "Settings"
+        if(seq === "Alt+D") middlePanel.state = "Dashboard"
+        else if(seq === "Alt+H") middlePanel.state = "History"
+        else if(seq === "Alt+T") middlePanel.state = "Transfer"
+        else if(seq === "Alt+B") middlePanel.state = "AddressBook"
+        else if(seq === "Alt+M") middlePanel.state = "Minning"
+        else if(seq === "Alt+S") middlePanel.state = "Settings"
         leftPanel.selectItem(middlePanel.state)
     }
     function mousePressed(obj, mouseX, mouseY) {

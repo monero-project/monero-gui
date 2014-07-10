@@ -8,7 +8,7 @@ class filter : public QObject
     Q_OBJECT
 
 private:
-    bool m_ctrlPressed;
+    bool m_altPressed;
     bool m_mousePressed;
 
 public:
@@ -18,8 +18,8 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
 
 signals:
-    void ctrlPressed();
-    void ctrlReleased();
+    void altPressed();
+    void altReleased();
     void sequencePressed(const QVariant &seq);
     void mousePressed(const QVariant &o, const QVariant &x, const QVariant &y);
     void mouseReleased(const QVariant &o, const QVariant &x, const QVariant &y);

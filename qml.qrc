@@ -57,5 +57,8 @@
         <file>components/AddressBookTable.qml</file>
         <file>images/goToTransferIcon.png</file>
         <file>images/deleteIcon.png</file>
+        <file>images/moneroIcon.png</file>
+        <file>components/StandardDropdown.qml</file>
+        <file>images/whiteDropIndicator.png</file>
     </qresource>
 </RCC>

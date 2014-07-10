@@ -69,7 +69,6 @@ Item {
                            "id": id,
                            "uri": Helper.insertLinks(item.user.url, item.user.entities),
                            "published": item.created_at });
-            console.log(item.created_at)
             ids.push(id)
         }
     }

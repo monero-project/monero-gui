@@ -5,16 +5,16 @@
 filter::filter(QObject *parent) :
     QObject(parent)
 {
-    m_ctrlPressed = true;
+    m_altPressed = true;
 }
 
 bool filter::eventFilter(QObject *obj, QEvent *ev) {
     switch(ev->type()) {
     case QEvent::KeyPress: {
         QKeyEvent *ke = static_cast<QKeyEvent*>(ev);
-        if(ke->key() == Qt::Key_Control) {
-            emit ctrlPressed();
-            m_ctrlPressed = true;
+        if(ke->key() == Qt::Key_Alt) {
+            emit altPressed();
+            m_altPressed = true;
         } else {
             QKeySequence ks(ke->modifiers() + ke->key());
             QString sks = ks.toString();
@@ -23,9 +23,9 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
     } break;
     case QEvent::KeyRelease: {
         QKeyEvent *ke = static_cast<QKeyEvent*>(ev);
-        if(ke->key() == Qt::Key_Control) {
-            emit ctrlReleased();
-            m_ctrlPressed = false;
+        if(ke->key() == Qt::Key_Alt) {
+            emit altReleased();
+            m_altPressed = false;
         }
     } break;
     case QEvent::MouseButtonPress: {

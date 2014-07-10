@@ -8,14 +8,14 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "#DBDBDB"
-        radius: 10
+        radius: 4
     }
 
     Rectangle {
         anchors.fill: parent
         anchors.topMargin: 1
         color: "#FFFFFF"
-        radius: 10
+        radius: 4
 
         Item {
             anchors.top: parent.top
