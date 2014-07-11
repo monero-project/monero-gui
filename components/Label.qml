@@ -4,8 +4,10 @@ Item {
     id: item
     property alias text: label.text
     property alias color: label.color
+    property alias textFormat: label.textFormat
     property string tipText: ""
     property int fontSize: 12
+    signal linkActivated()
     width: icon.x + icon.width
     height: icon.height
 
@@ -17,6 +19,7 @@ Item {
         font.family: "Arial"
         font.pixelSize: parent.fontSize
         color: "#555555"
+        onLinkActivated: item.linkActivated()
     }
 
     Image {

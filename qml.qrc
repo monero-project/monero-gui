@@ -60,5 +60,10 @@
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
+        <file>components/PrivacyLevel.qml</file>
+        <file>images/privacyTick.png</file>
+        <file>components/CheckBox.qml</file>
+        <file>images/checkedIcon.png</file>
+        <file>images/uncheckedIcon.png</file>
     </qresource>
 </RCC>
