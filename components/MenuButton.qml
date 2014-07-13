@@ -40,7 +40,7 @@ Rectangle {
             font.pixelSize: 11
             font.bold: true
             color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
-            visible: appWindow.altPressed
+            visible: appWindow.ctrlPressed
         }
     }
 

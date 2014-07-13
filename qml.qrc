@@ -65,5 +65,10 @@
         <file>components/CheckBox.qml</file>
         <file>images/checkedIcon.png</file>
         <file>images/uncheckedIcon.png</file>
+        <file>components/DatePicker.qml</file>
+        <file>images/datePicker.png</file>
+        <file>images/nextMonth.png</file>
+        <file>images/prevMonth.png</file>
+        <file>components/TitleBar.qml</file>
     </qresource>
 </RCC>

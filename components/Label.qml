@@ -37,7 +37,7 @@ Item {
         hoverEnabled: true
         onEntered: {
             icon.visible = false
-            var pos = rootItem.mapFromItem(icon, 0, -15)
+            var pos = appWindow.mapFromItem(icon, 0, -15)
             tipItem.text = item.tipText
             tipItem.x = pos.x
             if(tipItem.height > 30)

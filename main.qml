@@ -9,20 +9,50 @@ ApplicationWindow {
     objectName: "appWindow"
     property var currentItem
     property bool whatIsEnable: false
-    property bool altPressed: false
-    function altKeyPressed() { altPressed = true; }
-    function altKeyReleased() { altPressed = false; }
-    function sequencePressed(seq) {
+    property bool ctrlPressed: false
+    function altKeyReleased() { ctrlPressed = false; }
+    function showPageRequest(page) {
+        middlePanel.state = page
+        leftPanel.selectItem(page)
+    }
+    function sequencePressed(obj, seq) {
         if(seq === undefined)
             return
-        if(seq === "Alt+D") middlePanel.state = "Dashboard"
-        else if(seq === "Alt+H") middlePanel.state = "History"
-        else if(seq === "Alt+T") middlePanel.state = "Transfer"
-        else if(seq === "Alt+B") middlePanel.state = "AddressBook"
-        else if(seq === "Alt+M") middlePanel.state = "Minning"
-        else if(seq === "Alt+S") middlePanel.state = "Settings"
+        if(seq === "Ctrl") {
+            ctrlPressed = true
+            return
+        }
+
+        if(seq === "Ctrl+D") middlePanel.state = "Dashboard"
+        else if(seq === "Ctrl+H") middlePanel.state = "History"
+        else if(seq === "Ctrl+T") middlePanel.state = "Transfer"
+        else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
+        else if(seq === "Ctrl+M") middlePanel.state = "Mining"
+        else if(seq === "Ctrl+S") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+Tab") {
+            if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "Settings"
+            else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
+        } else if(seq === "Ctrl+Shift+Backtab") {
+            if(middlePanel.state === "Dashboard") middlePanel.state = "Settings"
+            else if(middlePanel.state === "Settings") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
+        }
+
         leftPanel.selectItem(middlePanel.state)
     }
+
+    function sequenceReleased(obj, seq) {
+        if(seq === "Ctrl")
+            ctrlPressed = false
+    }
+
     function mousePressed(obj, mouseX, mouseY) {
         if(obj.objectName === "appWindow")
             obj = rootItem
@@ -41,9 +71,9 @@ ApplicationWindow {
                 currentItem.hide()
                 currentItem = undefined
             }
-
         }
     }
+
     function mouseReleased(obj, mouseX, mouseY) {
 
     }

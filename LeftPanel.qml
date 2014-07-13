@@ -16,7 +16,7 @@ Rectangle {
         else if(pos === "History") menuColumn.previousButton = historyButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
-        else if(pos === "Minning") menuColumn.previousButton = miningButton
+        else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         menuColumn.previousButton.checked = true
     }

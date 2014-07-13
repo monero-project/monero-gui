@@ -72,7 +72,7 @@ Rectangle {
             text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                         lookng for security level and address book? go to <a href='#'>Transfer</a> tab")
             font.underline: false
-            onLinkActivated: console.log("link activated")
+            onLinkActivated: appWindow.showPageRequest("Transfer")
         }
     }
 

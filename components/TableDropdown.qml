@@ -161,7 +161,7 @@ Item {
                             anchors.fill: parent
                             propagateComposedEvents: true
                             onEntered: {
-                                var pos = rootItem.mapFromItem(delegate, 30, -20)
+                                var pos = appWindow.mapFromItem(delegate, 30, -20)
                                 tipItem.text = name
                                 tipItem.x = pos.x
                                 if(tipItem.height > 30)

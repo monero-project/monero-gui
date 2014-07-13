@@ -32,12 +32,26 @@ Item {
             anchors.left: parent.left
             anchors.margins: 4
             radius: 2
+            width: row.x
+
             color: {
                 if(item.fillLevel < 3) return "#FF6C3C"
                 if(item.fillLevel < repeater.count - 1) return "#FFE00A"
                 return "#36B25C"
             }
-            width: row.x
+
+            Timer {
+                interval: 500
+                running: true
+                repeat: false
+                onTriggered: fillRect.loaded = true
+            }
+
+            property bool loaded: false
+            Behavior on width {
+                enabled: fillRect.loaded
+                NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            }
         }
 
         MouseArea {
@@ -82,7 +96,6 @@ Item {
                 width: 1
                 height: 48
                 property bool mainTick: index === 0 || index === 3 || index === repeater.count - 1
-
                 Component.onCompleted: repeater.modelItems[index] = delegate
 
                 Image {
