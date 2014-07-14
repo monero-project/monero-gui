@@ -62,7 +62,10 @@ Row {
             id: minimizeArea
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: appWindow.visibility = Window.Minimized
+            onClicked: {
+                appWindow.visible = false
+                appWindow.visibility = Window.Minimized
+            }
         }
     }
 

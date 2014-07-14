@@ -129,7 +129,7 @@ Rectangle {
         spacing: 17
 
         LineEdit {
-            width: 156
+            width: parent.width - (checkBox.width + sendButton.width + 2 * parent.spacing)
         }
 
         StandardButton {
@@ -143,6 +143,7 @@ Rectangle {
         }
 
         CheckBox {
+            id: checkBox
             text: qsTr("Add to Address book")
             anchors.bottom: sendButton.bottom
         }

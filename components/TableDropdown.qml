@@ -93,6 +93,8 @@ Item {
         hoverEnabled: true
         onEntered: dropdown.expanded = true
         onExited: dropdown.expanded = false
+        preventStealing: true
+        z: 1
 
         Item {
             id: dropArea
