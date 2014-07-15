@@ -36,7 +36,7 @@ Item {
 
             color: {
                 if(item.fillLevel < 3) return "#FF6C3C"
-                if(item.fillLevel < repeater.count - 1) return "#FFE00A"
+                if(item.fillLevel < 13) return "#FFE00A"
                 return "#36B25C"
             }
 
@@ -59,8 +59,8 @@ Item {
             function positionBar() {
                 var xDiff = 999999
                 var index = -1
-                for(var i = 0; i < repeater.count; ++i) {
-                    var tmp = Math.abs(repeater.modelItems[i].x + row.x - mouseX)
+                for(var i = 0; i < 14; ++i) {
+                    var tmp = Math.abs(row.positions[i].currentX + row.x - mouseX)
                     if(tmp < xDiff) {
                         xDiff = tmp
                         index = i
@@ -68,7 +68,7 @@ Item {
                 }
 
                 if(index !== -1) {
-                    fillRect.width = Qt.binding(function(){ return repeater.modelItems[index].x + row.x; })
+                    fillRect.width = Qt.binding(function(){ return row.positions[index].currentX + row.x })
                     item.fillLevel = index
                 }
             }
@@ -84,51 +84,42 @@ Item {
         anchors.rightMargin: 8
         anchors.top: bar.bottom
         anchors.topMargin: -1
-        spacing: ((bar.width - 8) / 2) / 10
+        property var positions: new Array()
 
-        Repeater {
-            id: repeater
-            model: 14
-            property var modelItems: new Array()
+        Row {
+            id: row2
+            spacing: ((bar.width - 8) / 2) / 4
 
-            delegate: Item {
-                id: delegate
-                width: 1
-                height: 48
-                property bool mainTick: index === 0 || index === 3 || index === repeater.count - 1
-                Component.onCompleted: repeater.modelItems[index] = delegate
+            Repeater {
+                model: 4
 
-                Image {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.top: parent.top
-                    visible: parent.mainTick
-                    source: "../images/privacyTick.png"
-
-                    Text {
-                        anchors.right: parent.right
-                        anchors.rightMargin: 12
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 2
-                        font.family: "Arial"
-                        font.bold: true
-                        font.pixelSize: 12
-                        color: "#4A4949"
-                        text: {
-                            if(index === 0) return qsTr("LOW")
-                            if(index === 3) return qsTr("MEDIUM")
-                            if(index === repeater.count - 1) return qsTr("HIGH")
-                            return ""
-                        }
+                delegate: TickDelegate {
+                    id: delegateItem2
+                    currentX: x + row2.x
+                    currentIndex: index
+                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    Component.onCompleted: {
+                        row.positions[currentIndex] = delegateItem2
                     }
                 }
+            }
+        }
 
-                Rectangle {
-                    anchors.top: parent.top
-                    anchors.topMargin: 14
-                    width: 1
-                    color: "#DBDBDB"
-                    height: index === 8 ? 16 : 8
-                    visible: !parent.mainTick
+        Row {
+            id: row1
+            spacing: ((bar.width - 8) / 2) / 10
+
+            Repeater {
+                model: 10
+
+                delegate: TickDelegate {
+                    id: delegateItem1
+                    currentX: x + row1.x
+                    currentIndex: index + 4
+                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    Component.onCompleted: {
+                        row.positions[currentIndex] = delegateItem1
+                    }
                 }
             }
         }

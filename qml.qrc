@@ -70,5 +70,6 @@
         <file>images/nextMonth.png</file>
         <file>images/prevMonth.png</file>
         <file>components/TitleBar.qml</file>
+        <file>components/TickDelegate.qml</file>
     </qresource>
 </RCC>
