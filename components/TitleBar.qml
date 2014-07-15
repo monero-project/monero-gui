@@ -74,7 +74,7 @@ Rectangle {
             
             MouseArea {
                 id: maximizeArea
-                hoverEnabled: true
+                anchors.fill: parent
                 onClicked: {
                     parent.checked = !parent.checked
                     appWindow.visibility = parent.checked ? Window.FullScreen :
