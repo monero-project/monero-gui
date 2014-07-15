@@ -119,18 +119,24 @@ Rectangle {
         text: qsTr("Payment ID <font size='2'>( Optional )</font>")
     }
 
-    Row {
+    LineEdit {
+        id: paymentLine
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: paymentLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        spacing: 17
+    }
 
-        LineEdit {
-            width: parent.width - (checkBox.width + sendButton.width + 2 * parent.spacing)
-        }
+    Row {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: paymentLine.bottom
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
+        spacing: 17
 
         StandardButton {
             id: sendButton

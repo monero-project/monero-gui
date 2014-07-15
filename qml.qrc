@@ -8,9 +8,6 @@
         <file>images/helpIcon.png</file>
         <file>images/maximizeIcon.png</file>
         <file>images/minimizeIcon.png</file>
-        <file>images/helpIconHovered.png</file>
-        <file>images/maximizeIconHovered.png</file>
-        <file>images/minimizeIconHovered.png</file>
         <file>images/moneroLogo.png</file>
         <file>components/Label.qml</file>
         <file>images/whatIsIcon.png</file>
@@ -41,7 +38,6 @@
         <file>images/descSortIndicatorActived.png</file>
         <file>images/descSortIndicatorPressed.png</file>
         <file>images/backToWindowIcon.png</file>
-        <file>images/backToWindowIconHovered.png</file>
         <file>components/DashboardTable.qml</file>
         <file>components/TableDropdown.qml</file>
         <file>images/tableOptions.png</file>
@@ -69,7 +65,7 @@
         <file>images/datePicker.png</file>
         <file>images/nextMonth.png</file>
         <file>images/prevMonth.png</file>
-        <file>components/TitleBar.qml</file>
         <file>components/TickDelegate.qml</file>
+        <file>components/TitleBar.qml</file>
     </qresource>
 </RCC>

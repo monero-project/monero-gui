@@ -1,140 +1,104 @@
 import QtQuick 2.2
 import QtQuick.Window 2.0
 
-Row {
-    Rectangle {
-        width: 25
-        height: 25
-        radius: 5
-        clip: true
-        color: helpArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
-
-        Rectangle {
-            width: 25
-            height: 25
-            radius: 5
-            color: "#FFFFFF"
-            visible: helpArea.containsMouse
-            x: 1; y: 2
-        }
-
-        Image {
-            anchors.centerIn: parent
-            source: {
-                if(appWindow.whatIsEnable)
-                    return "../images/whatIsIcon.png"
-                return helpArea.containsMouse ? "../images/helpIconHovered.png" :
-                                                "../images/helpIcon.png"
-            }
-        }
-
-        MouseArea {
-            id: helpArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: appWindow.whatIsEnable = !appWindow.whatIsEnable
-        }
+Rectangle {
+    id: titleBar
+    height: 30
+    color: "#000000"
+    y: -height
+    property int mouseX: 0
+    property int mouseY: 0
+    
+    Behavior on y {
+        NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
-
-    Rectangle {
-        width: 25
-        height: 25
-        radius: 5
-        clip: true
-        color: minimizeArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
-
+    
+    Row {
+        id: row
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        
         Rectangle {
-            width: 25
-            height: 25
-            radius: 5
-            color: "#FFFFFF"
-            visible: minimizeArea.containsMouse
-            x: 1; y: 2
-        }
-
-        Image {
-            anchors.centerIn: parent
-            source: minimizeArea.containsMouse ? "../images/minimizeIconHovered.png" :
-                                                 "../images/minimizeIcon.png"
-        }
-
-        MouseArea {
-            id: minimizeArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: {
-                appWindow.visible = false
-                appWindow.visibility = Window.Minimized
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+            color: appWindow.whatIsEnable || containsMouse ? "#6B0072" : "#000000"
+            
+            Image {
+                anchors.centerIn: parent
+                source: "../images/helpIcon.png"
+            }
+            
+            MouseArea {
+                id: whatIsArea
+                anchors.fill: parent
+                onClicked: appWindow.whatIsEnable = !appWindow.whatIsEnable
             }
         }
-    }
-
-    Rectangle {
-        property bool checked: false
-        width: 25
-        height: 25
-        radius: 5
-        clip: true
-        color: maximizeArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
-
+        
         Rectangle {
-            width: 25
-            height: 25
-            radius: 5
-            color: "#FFFFFF"
-            visible: maximizeArea.containsMouse
-            x: 1; y: 2
-        }
-
-        Image {
-            anchors.centerIn: parent
-            source: {
-                if(parent.checked)
-                    return  maximizeArea.containsMouse ? "../images/backToWindowIconHovered.png" :
-                                                         "../images/backToWindowIcon.png"
-                return maximizeArea.containsMouse ? "../images/maximizeIconHovered.png" :
-                                                    "../images/maximizeIcon.png"
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+            color: containsMouse ? "#3665B3" : "#000000"
+            
+            Image {
+                anchors.centerIn: parent
+                source: "../images/minimizeIcon.png"
+            }
+            
+            MouseArea {
+                id: minimizeArea
+                anchors.fill: parent
+                onClicked: appWindow.visibility = Window.Minimized
             }
         }
+        
+        Rectangle {
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+            color: containsMouse ? "#FF6C3C" : "#000000"
+            property bool checked: false
+            
+            Image {
+                anchors.centerIn: parent
+                source: parent.checked ?  "../images/backToWindowIcon.png" :
+                                          "../images/maximizeIcon.png"
 
-        MouseArea {
-            id: maximizeArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: {
-                parent.checked = !parent.checked
-                appWindow.visibility = parent.checked ? Window.FullScreen :
-                                                        Window.Windowed
+            }
+            
+            MouseArea {
+                id: maximizeArea
+                hoverEnabled: true
+                onClicked: {
+                    parent.checked = !parent.checked
+                    appWindow.visibility = parent.checked ? Window.FullScreen :
+                                                            Window.Windowed
+                }
             }
         }
-    }
-
-    Rectangle {
-        width: 25
-        height: 25
-        radius: 5
-        clip: true
-        color: closeArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
-
+        
         Rectangle {
-            width: 25
-            height: 25
-            radius: 5
-            color: "#FFFFFF"
-            visible: closeArea.containsMouse
-            x: 1; y: 2
-        }
-
-        Image {
-            anchors.centerIn: parent
-            source: "../images/closeIcon.png"
-        }
-
-        MouseArea {
-            id: closeArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: Qt.quit()
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+            color: containsMouse ? "#E04343" : "#000000"
+            
+            Image {
+                anchors.centerIn: parent
+                source: "../images/closeIcon.png"
+            }
+            
+            MouseArea {
+                anchors.fill: parent
+                onClicked: Qt.quit()
+            }
         }
     }
 }

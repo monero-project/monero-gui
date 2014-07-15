@@ -140,5 +140,30 @@ ApplicationWindow {
             visible: false
             z: 100
         }
+
+        MouseArea {
+            id: frameArea
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 30
+            z: 1
+            hoverEnabled: true
+            onEntered: titleBar.y = 0
+            onExited: titleBar.y = -titleBar.height
+            propagateComposedEvents: true
+            onPressed: mouse.accepted = false
+            onReleased: mouse.accepted = false
+            onMouseXChanged: {
+                titleBar.mouseX = mouseX
+                titleBar.mouseY = mouseY
+            }
+        }
+
+        TitleBar {
+            id: titleBar
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
     }
 }
