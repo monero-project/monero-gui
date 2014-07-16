@@ -8,7 +8,9 @@ Rectangle {
         id: amountLabel
         anchors.left: parent.left
         anchors.top: parent.top
-        anchors.margins: 17
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
         text: qsTr("Amount")
         fontSize: 14
     }
@@ -129,10 +131,34 @@ Rectangle {
         anchors.topMargin: 5
     }
 
-    Row {
+    Label {
+        id: descriptionLabel
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: paymentLine.bottom
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
+        fontSize: 14
+        text: qsTr("Description <font size='2'>( Local database )</font>")
+        visible: checkBox.checked
+    }
+
+    LineEdit {
+        id: descriptionLine
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: descriptionLabel.bottom
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 5
+        visible: checkBox.checked
+    }
+
+    Row {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: checkBox.checked ? descriptionLine.bottom : paymentLine.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17

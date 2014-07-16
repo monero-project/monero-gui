@@ -49,35 +49,34 @@ Rectangle {
         text: qsTr("Payment ID <font size='2'>(Optional)</font>")
         fontSize: 14
         tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during thevtransfer")
-        width: 156
-    }
-
-    Label {
-        id: descriptionLabel
-        anchors.left: paymentIdLabel.right
-        anchors.top: addressLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Local database)</font>")
-        fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b><br/><br/>test line 2")
-        width: 156
     }
 
     LineEdit {
         id: paymentIdLine
         anchors.left: parent.left
+        anchors.right: parent.right
         anchors.top: paymentIdLabel.bottom
         anchors.leftMargin: 17
+        anchors.rightMargin: 17
         anchors.topMargin: 5
-        width: 156
+    }
+
+    Label {
+        id: descriptionLabel
+        anchors.left: parent.left
+        anchors.top: paymentIdLine.bottom
+        anchors.leftMargin: 17
+        anchors.topMargin: 17
+        text: qsTr("Description <font size='2'>(Local database)</font>")
+        fontSize: 14
+        tipText: qsTr("<b>Tip tekst test</b><br/><br/>test line 2")
     }
 
     LineEdit {
         id: descriptionLine
-        anchors.left: paymentIdLine.right
-        anchors.right: addButton.left
-        anchors.top: paymentIdLabel.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: descriptionLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
@@ -85,10 +84,10 @@ Rectangle {
 
     StandardButton {
         id: addButton
-        anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.top: descriptionLine.bottom
+        anchors.leftMargin: 17
+        anchors.topMargin: 17
         width: 60
 
         shadowReleasedColor: "#FF4304"
@@ -98,13 +97,39 @@ Rectangle {
         text: qsTr("ADD")
     }
 
+    Item {
+        id: expandItem
+        property bool expanded: false
+
+        anchors.right: parent.right
+        anchors.bottom: tableRect.top
+        width: 34
+        height: 34
+
+        Image {
+            anchors.centerIn: parent
+            source: "../images/expandTable.png"
+            rotation: parent.expanded ? 180 : 0
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: parent.expanded = !parent.expanded
+        }
+    }
+
     Rectangle {
+        id: tableRect
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.top: paymentIdLine.bottom
-        anchors.topMargin: 17
+        height: expandItem.expanded ? parent.height - newEntryText.y - newEntryText.height - 17 :
+                                      parent.height - addButton.y - addButton.height - 17
         color: "#FFFFFF"
+
+        Behavior on height {
+            NumberAnimation { duration: 200; easing.type: Easing.InQuad }
+        }
 
         Rectangle {
             anchors.left: parent.left
@@ -116,8 +141,9 @@ Rectangle {
 
         ListModel {
             id: columnsModel
+            ListElement { columnName: "Address"; columnWidth: 148 }
             ListElement { columnName: "Payment ID"; columnWidth: 148 }
-            ListElement { columnName: "Description"; columnWidth: 420 }
+            ListElement { columnName: "Description"; columnWidth: 148 }
         }
 
         TableHeader {
@@ -134,19 +160,19 @@ Rectangle {
 
         ListModel {
             id: testModel
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
             ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "Client from Australia" }
             ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; description: "" }
         }
 

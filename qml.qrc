@@ -51,7 +51,6 @@
         <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
-        <file>images/goToTransferIcon.png</file>
         <file>images/deleteIcon.png</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
@@ -70,5 +69,7 @@
         <file>images/collapseRightPanel.png</file>
         <file>images/expandRightPanel.png</file>
         <file>images/dropdownCopy.png</file>
+        <file>images/expandTable.png</file>
+        <file>images/dropdownDel.png</file>
     </qresource>
 </RCC>

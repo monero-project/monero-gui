@@ -1,92 +1,113 @@
 import QtQuick 2.0
+import moneroComponents 1.0
 
 ListView {
     id: listView
     clip: true
     boundsBehavior: ListView.StopAtBounds
 
+    property var previousItem
     delegate: Rectangle {
         id: delegate
         height: 64
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
+        function collapseDropdown() { dropdown.expanded = false }
 
-        StandardButton {
-            id: goToTransferButton
+        Text {
+            id: descriptionText
             anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            width: 37
-            anchors.leftMargin: 3
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            icon: "../images/goToTransferIcon.png"
-        }
+            anchors.top: parent.top
+            anchors.topMargin: 12
+            width: text.length ? (descriptionArea.containsMouse ? dropdown.x - x - 12 : 139) : 0
+            font.family: "Arial"
+            font.bold: true
+            font.pixelSize: 19
+            color: "#444444"
+            elide: Text.ElideRight
+            text: description
 
-        StandardButton {
-            id: removeButton
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            width: 37
-            anchors.rightMargin: 3
-            shadowReleasedColor: "#DBDBDB"
-            shadowPressedColor: "#888888"
-            releasedColor: "#F0EEEE"
-            pressedColor: "#DBDBDB"
-            icon: "../images/deleteIcon.png"
-        }
-
-        Row {
-            anchors.left: goToTransferButton.right
-            anchors.right: removeButton.left
-            anchors.leftMargin: 12
-            anchors.top: goToTransferButton.top
-            anchors.topMargin: -2
-
-            Text {
-                id: paymentIdText
-                anchors.top: parent.top
-                width: text.length ? 139 : 0
-                font.family: "Arial"
-                font.bold: true
-                font.pixelSize: 19
-                color: "#444444"
-                elide: Text.ElideRight
-                text: paymentId
-            }
-
-            Item { //separator
-                width: paymentIdText.width ? 12 : 0
-                height: 14
-            }
-
-            Text {
-                anchors.bottom: paymentIdText.bottom
-                width: parent.width - x - 12
-                elide: Text.ElideRight
-                font.family: "Arial"
-                font.pixelSize: 14
-                color: "#545454"
-                text: description
+            MouseArea {
+                id: descriptionArea
+                anchors.fill: parent
+                hoverEnabled: true
             }
         }
 
         Text {
-            anchors.top: description.length === 0 && paymentId.length === 0 ? goToTransferButton.top : undefined
-            anchors.bottom: description.length === 0 && paymentId.length === 0 ? undefined : goToTransferButton.bottom
-            anchors.topMargin: -2
-            anchors.bottomMargin: -2
-
-            anchors.left: goToTransferButton.right
-            anchors.right: removeButton.left
+            id: addressText
+            anchors.bottom: descriptionText.bottom
+            anchors.left: descriptionText.right
+            anchors.right: dropdown.left
+            anchors.leftMargin: description.length > 0 ? 12 : 0
             anchors.rightMargin: 12
-            anchors.leftMargin: 12
             elide: Text.ElideRight
             font.family: "Arial"
-            font.pixelSize: 14
+            font.pixelSize: 16
+            font.letterSpacing: -1
             color: "#545454"
             text: address
+        }
+
+        Text {
+            id: paymentLabel
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 12
+
+            width: 139
+            font.family: "Arial"
+            font.pixelSize: 12
+            font.letterSpacing: -1
+            color: "#535353"
+            text: qsTr("Payment ID:")
+        }
+
+        Text {
+            anchors.bottom: paymentLabel.bottom
+            anchors.left: paymentLabel.right
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
+            anchors.right: dropdown.left
+
+            elide: Text.ElideRight
+            font.family: "Arial"
+            font.pixelSize: 13
+            font.letterSpacing: -1
+            color: "#545454"
+            text: paymentId
+        }
+
+        ListModel {
+            id: dropModel
+            ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
+            ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
+            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
+            ListElement { name: "<b>Remove from history</b>"; icon: "../images/dropdownDel.png" }
+        }
+
+        Clipboard { id: clipboard }
+        TableDropdown {
+            id: dropdown
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 5
+            dataModel: dropModel
+            z: 1
+            onExpandedChanged: {
+                if(listView.previousItem !== undefined && listView.previousItem !== delegate)
+                    listView.previousItem.collapseDropdown()
+                if(expanded) {
+                    listView.previousItem = delegate
+                    listView.currentIndex = index
+                    listView.currentItem.z = 2
+                }
+            }
+            onCollapsed: delegate.z = 0
+            onOptionClicked: {
+                if(option === 0)
+                    clipboard.setText(address)
+            }
         }
 
         Rectangle {

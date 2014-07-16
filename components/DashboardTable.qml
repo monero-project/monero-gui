@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "../components"
 import moneroComponents 1.0
 
 ListView {
@@ -12,7 +11,6 @@ ListView {
         id: delegate
         height: 90
         width: listView.width
-        z: 0
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
         function collapseDropdown() { dropdown.expanded = false }
         
@@ -175,14 +173,6 @@ ListView {
             }
         }
 
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
-        }
-
         ListModel {
             id: dropModel
             ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
@@ -199,6 +189,7 @@ ListView {
             anchors.bottomMargin: 11
             anchors.rightMargin: 5
             dataModel: dropModel
+            z: 1
             onExpandedChanged: {
                 if(listView.previousItem !== undefined && listView.previousItem !== delegate)
                     listView.previousItem.collapseDropdown()
@@ -213,6 +204,14 @@ ListView {
                 if(option === 0)
                     clipboard.setText(address)
             }
+        }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 1
+            color: "#DBDBDB"
         }
     }
 }

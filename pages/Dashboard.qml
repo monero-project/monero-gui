@@ -9,7 +9,9 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.margins: 17
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
         z: 1
     }
 
@@ -114,16 +116,16 @@ Rectangle {
 
         ListModel {
             id: testModel
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "Martin"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
-            ListElement { paymentId: "Martin"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
             ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
             ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
             ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "Malkolm T."; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
         }
 
         Scroll {
