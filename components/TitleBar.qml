@@ -8,6 +8,15 @@ Rectangle {
     y: -height
     property int mouseX: 0
     property int mouseY: 0
+
+    Text {
+        anchors.centerIn: parent
+        font.family: "Arial"
+        font.pixelSize: 15
+        font.letterSpacing: -1
+        color: "#FFFFFF"
+        text: qsTr("Monero")
+    }
     
     Behavior on y {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }

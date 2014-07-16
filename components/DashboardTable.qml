@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "../components"
+import moneroComponents 1.0
 
 ListView {
     id: listView
@@ -36,30 +37,39 @@ ListView {
             }
             
             Text {
-                id: paymentIdText
-                width: text.length ? 120 : 0
+                id: descriptionText
+                width: text.length ? (descriptionArea.containsMouse ? parent.width - x - 12 : 120) : 0
                 anchors.verticalCenter: dot.verticalCenter
                 font.family: "Arial"
                 font.bold: true
                 font.pixelSize: 19
                 color: "#444444"
                 elide: Text.ElideRight
-                text: paymentId
+                text: description
+
+                MouseArea {
+                    id: descriptionArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                }
             }
             
             Item { //separator
-                width: paymentIdText.width ? 12 : 0
+                width: descriptionText.width ? 12 : 0
                 height: 14
+                visible: !descriptionArea.containsMouse
             }
             
             Text {
+                id: addressText
                 anchors.verticalCenter: dot.verticalCenter
                 width: parent.width - x - 12
                 elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 14
                 color: "#545454"
-                text: description.length > 0 ? description : address
+                text: address
+                visible: !descriptionArea.containsMouse
             }
         }
         
@@ -173,12 +183,22 @@ ListView {
             color: "#DBDBDB"
         }
 
+        ListModel {
+            id: dropModel
+            ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
+            ListElement { name: "<b>Add to address book</b>"; icon: "../images/dropdownAdd.png" }
+            ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
+            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
+        }
+
+        Clipboard { id: clipboard }
         TableDropdown {
             id: dropdown
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 11
             anchors.rightMargin: 5
+            dataModel: dropModel
             onExpandedChanged: {
                 if(listView.previousItem !== undefined && listView.previousItem !== delegate)
                     listView.previousItem.collapseDropdown()
@@ -189,6 +209,10 @@ ListView {
                 }
             }
             onCollapsed: delegate.z = 0
+            onOptionClicked: {
+                if(option === 0)
+                    clipboard.setText(address)
+            }
         }
     }
 }

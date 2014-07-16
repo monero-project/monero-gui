@@ -34,15 +34,15 @@ Rectangle {
 
         Image {
             id: logo
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 50
             source: "images/moneroLogo.png"
         }
 
         Image {
-            anchors.right: logo.left
+            anchors.left: parent.left
             anchors.verticalCenter: logo.verticalCenter
-            anchors.verticalCenterOffset: 5
-            anchors.rightMargin: 20
+            anchors.leftMargin: 19
             source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
                                                    "images/collapseRightPanel.png"
         }

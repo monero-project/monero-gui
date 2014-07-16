@@ -25,6 +25,10 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             QKeySequence ks(ke->modifiers() + ke->key());
             sks = ks.toString();
         }
+#ifndef Q_OS_MAC
+        if(sks.contains("Alt+Tab") || sks.contains("Alt+Shift+Backtab"))
+            break;
+#endif
         emit sequencePressed(QVariant::fromValue<QObject*>(obj), sks);
     } break;
     case QEvent::KeyRelease: {
@@ -39,6 +43,10 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
             QKeySequence ks(ke->modifiers() + ke->key());
             sks = ks.toString();
         }
+#ifndef Q_OS_MAC
+        if(sks.contains("Alt+Tab") || sks.contains("Alt+Shift+Backtab"))
+            break;
+#endif
         emit sequenceReleased(QVariant::fromValue<QObject*>(obj), sks);
     } break;
     case QEvent::MouseButtonPress: {

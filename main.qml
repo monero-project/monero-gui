@@ -11,6 +11,7 @@ ApplicationWindow {
     property bool whatIsEnable: false
     property bool ctrlPressed: false
     property bool rightPanelExpanded: true
+    property bool osx: false
 
     function altKeyReleased() { ctrlPressed = false; }
     function showPageRequest(page) {
@@ -31,14 +32,14 @@ ApplicationWindow {
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
         else if(seq === "Ctrl+S") middlePanel.state = "Settings"
-        else if(seq === "Ctrl+Tab") {
+        else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "Settings"
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
-        } else if(seq === "Ctrl+Shift+Backtab") {
+        } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             if(middlePanel.state === "Dashboard") middlePanel.state = "Settings"
             else if(middlePanel.state === "Settings") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"

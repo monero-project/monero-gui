@@ -3,8 +3,9 @@ import QtQuick 2.0
 Item {
     id: dropdown
     property bool expanded: false
+    property alias dataModel: repeater.model
     signal collapsed()
-    signal optionClicked(int index)
+    signal optionClicked(int option)
     width: 72
     height: 37
 
@@ -115,17 +116,8 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
 
-                ListModel {
-                    id: dataModel
-                    ListElement { name: "<b>Add to adress book</b>"; icon: "../images/dropdownOption1.png" }
-                    ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
-                    ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
-                }
-
                 Repeater {
                     id: repeater
-                    model: dataModel
-
                     delegate: Rectangle {
                         id: delegate
                         anchors.left: parent.left
@@ -163,7 +155,7 @@ Item {
                             anchors.fill: parent
                             propagateComposedEvents: true
                             onEntered: {
-                                var pos = appWindow.mapFromItem(delegate, 30, -20)
+                                var pos = rootItem.mapFromItem(delegate, 30, -20)
                                 tipItem.text = name
                                 tipItem.x = pos.x
                                 if(tipItem.height > 30)

@@ -41,7 +41,7 @@
         <file>components/DashboardTable.qml</file>
         <file>components/TableDropdown.qml</file>
         <file>images/tableOptions.png</file>
-        <file>images/dropdownOption1.png</file>
+        <file>images/dropdownAdd.png</file>
         <file>images/dropdownSearch.png</file>
         <file>images/dropdownSend.png</file>
         <file>components/TipItem.qml</file>
@@ -69,5 +69,6 @@
         <file>components/TitleBar.qml</file>
         <file>images/collapseRightPanel.png</file>
         <file>images/expandRightPanel.png</file>
+        <file>images/dropdownCopy.png</file>
     </qresource>
 </RCC>
