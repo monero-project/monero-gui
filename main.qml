@@ -10,6 +10,8 @@ ApplicationWindow {
     property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
+    property bool rightPanelExpanded: true
+
     function altKeyReleased() { ctrlPressed = false; }
     function showPageRequest(page) {
         middlePanel.state = page
@@ -79,7 +81,7 @@ ApplicationWindow {
     }
 
     visible: true
-    width: 1269
+    width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
     color: "#FFFFFF"
     x: (Screen.width - width) / 2
@@ -123,6 +125,8 @@ ApplicationWindow {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+            width: appWindow.rightPanelExpanded ? 300 : 0
+            visible: appWindow.rightPanelExpanded
         }
 
         MiddlePanel {

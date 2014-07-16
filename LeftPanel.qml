@@ -24,19 +24,40 @@ Rectangle {
     width: 260
     color: "#FFFFFF"
 
-    Image {
-        id: logo
-        anchors.horizontalCenter: parent.horizontalCenter
+    Item {
+        id: logoItem
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 31
-        source: "images/moneroLogo.png"
+        height: logo.implicitHeight
+
+        Image {
+            id: logo
+            anchors.horizontalCenter: parent.horizontalCenter
+            source: "images/moneroLogo.png"
+        }
+
+        Image {
+            anchors.right: logo.left
+            anchors.verticalCenter: logo.verticalCenter
+            anchors.verticalCenterOffset: 5
+            anchors.rightMargin: 10
+            source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
+                                                   "images/collapseRightPanel.png"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
+        }
     }
 
     Column {
         id: column1
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: logo.bottom
+        anchors.top: logoItem.bottom
         anchors.topMargin: 40
         spacing: 6
 
