@@ -42,7 +42,7 @@ Rectangle {
             anchors.right: logo.left
             anchors.verticalCenter: logo.verticalCenter
             anchors.verticalCenterOffset: 5
-            anchors.rightMargin: 10
+            anchors.rightMargin: 20
             source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
                                                    "images/collapseRightPanel.png"
         }

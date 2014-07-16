@@ -87,6 +87,7 @@ ApplicationWindow {
     x: (Screen.width - width) / 2
     y: (Screen.height - height) / 2
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
+    onWidthChanged: if(width < 1269) x -= 0
 
     Item {
         id: rootItem
