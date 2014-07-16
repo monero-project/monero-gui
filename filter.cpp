@@ -21,6 +21,10 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
         QString sks;
         if(ke->key() == Qt::Key_Control) {
             sks = "Ctrl";
+#ifdef Q_OS_MAC
+        } else if(ke->key() == Qt::Key_Meta) {
+            sks = "Ctrl";
+#endif
         } else {
             QKeySequence ks(ke->modifiers() + ke->key());
             sks = ks.toString();
@@ -28,6 +32,8 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
 #ifndef Q_OS_MAC
         if(sks.contains("Alt+Tab") || sks.contains("Alt+Shift+Backtab"))
             break;
+#else
+        sks.replace("Meta", "Ctrl");
 #endif
         emit sequencePressed(QVariant::fromValue<QObject*>(obj), sks);
     } break;
@@ -39,6 +45,10 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
         QString sks;
         if(ke->key() == Qt::Key_Control) {
             sks = "Ctrl";
+#ifdef Q_OS_MAC
+        } else if(ke->key() == Qt::Key_Meta) {
+            sks = "Ctrl";
+#endif
         } else {
             QKeySequence ks(ke->modifiers() + ke->key());
             sks = ks.toString();
@@ -46,6 +56,8 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
 #ifndef Q_OS_MAC
         if(sks.contains("Alt+Tab") || sks.contains("Alt+Shift+Backtab"))
             break;
+#else
+        sks.replace("Meta", "Ctrl");
 #endif
         emit sequenceReleased(QVariant::fromValue<QObject*>(obj), sks);
     } break;
