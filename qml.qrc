@@ -71,5 +71,6 @@
         <file>images/dropdownCopy.png</file>
         <file>images/expandTable.png</file>
         <file>images/dropdownDel.png</file>
+        <file>components/HistoryTable.qml</file>
     </qresource>
 </RCC>

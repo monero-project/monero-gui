@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Item {
     id: dropdown
+    property alias dataModel: repeater.model
     property string shadowPressedColor
     property string shadowReleasedColor
     property string pressedColor
@@ -154,13 +155,6 @@ Item {
             NumberAnimation { duration: 100; easing.type: Easing.InQuad }
         }
 
-        ListModel {
-            id: testModel
-            ListElement { column1: "LOW"; column2: "( fee: 0.0002 )" }
-            ListElement { column1: "MEDIUM"; column2: "( fee: 0.0004 )" }
-            ListElement { column1: "HIGH"; column2: "( fee: 0.0008 )" }
-        }
-
         Column {
             id: column
             anchors.left: parent.left
@@ -170,7 +164,6 @@ Item {
 
             Repeater {
                 id: repeater
-                model: testModel
 
                 delegate: Rectangle {
                     anchors.left: parent.left

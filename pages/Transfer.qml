@@ -46,6 +46,13 @@ Rectangle {
         }
     }
 
+    ListModel {
+        id: priorityModel
+        ListElement { column1: "LOW"; column2: "( fee: 0.0002 )" }
+        ListElement { column1: "MEDIUM"; column2: "( fee: 0.0004 )" }
+        ListElement { column1: "HIGH"; column2: "( fee: 0.0008 )" }
+    }
+
     StandardDropdown {
         id: priorityDropdown
         anchors.top: transactionPriority.bottom
@@ -57,6 +64,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
+        dataModel: priorityModel
         z: 1
     }
 
@@ -91,7 +99,6 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                     Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
