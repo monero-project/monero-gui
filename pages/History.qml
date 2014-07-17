@@ -147,7 +147,7 @@ Rectangle {
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #6B0072; font-size: 14px;}</style>\
                     looking for <a href='#'>Advance filtering?</a>")
         font.underline: false
-        onLinkActivated: tableRect.height = tableRect.collapsedHeight
+        onLinkActivated: tableRect.height = Qt.binding(function(){ return tableRect.collapsedHeight })
     }
 
     Label {
@@ -245,7 +245,7 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 parent.expanded = !parent.expanded
-                tableRect.height = parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight
+                tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
             }
         }
     }
