@@ -9,7 +9,7 @@ ListView {
     property var previousItem
     delegate: Rectangle {
         id: delegate
-        height: 90
+        height: 114
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
         function collapseDropdown() { dropdown.expanded = false }
@@ -71,10 +71,40 @@ ListView {
             }
         }
 
-        Row {
+        Text {
+            id: paymentLabel
             anchors.left: parent.left
             anchors.top: row1.bottom
-            anchors.topMargin: 8
+            anchors.topMargin: 4
+            anchors.leftMargin: 28
+
+            width: 118
+            font.family: "Arial"
+            font.pixelSize: 12
+            font.letterSpacing: -1
+            color: "#535353"
+            text: qsTr("Payment ID:")
+        }
+
+        Text {
+            anchors.bottom: paymentLabel.bottom
+            anchors.left: paymentLabel.right
+            anchors.right: parent.right
+            anchors.leftMargin: 12
+            anchors.rightMargin: 12
+
+            elide: Text.ElideRight
+            font.family: "Arial"
+            font.pixelSize: 13
+            font.letterSpacing: -1
+            color: "#545454"
+            text: paymentId
+        }
+
+        Row {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 11
             spacing: 12
 
             Item { //separator

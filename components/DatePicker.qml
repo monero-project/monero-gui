@@ -110,6 +110,12 @@ Item {
                             return day < 10 ? "0" + day : day
                         }
                     }
+                    onFocusChanged: {
+                        if(focus === false) {
+                            if(text.length === 0 || text === "0" || text === "00") text = "01"
+                            else if(text.length === 1) text = "0" + text
+                        }
+                    }
                 }
 
                 Text {
@@ -135,6 +141,12 @@ Item {
                             return month < 10 ? "0" + month : month
                         }
                     }
+                    onFocusChanged: {
+                        if(focus === false) {
+                            if(text.length === 0 || text === "0" || text === "00") text = "01"
+                            else if(text.length === 1) text = "0" + text
+                        }
+                    }
                 }
 
                 Text {
@@ -152,8 +164,16 @@ Item {
                     color: "#525252"
                     maximumLength: 4
                     horizontalAlignment: TextInput.AlignHCenter
-                    validator: IntValidator{bottom: 2000; top: 2100;}
+                    validator: IntValidator{bottom: 1000; top: 9999;}
                     text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
+                    onFocusChanged: {
+                        if(focus === false) {
+                            var d = new Date()
+                            var y = d.getFullYear()
+                            if(text.length != 4 || text[0] === "0")
+                                text = y
+                        }
+                    }
                 }
 
             }

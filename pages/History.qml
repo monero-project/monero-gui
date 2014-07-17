@@ -282,8 +282,9 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: "Address"; columnWidth: 148 }
-            ListElement { columnName: "Payment ID"; columnWidth: 148 }
+            ListElement { columnName: "Address"; columnWidth: 127 }
+            ListElement { columnName: "Date"; columnWidth: 100 }
+            ListElement { columnName: "Amount"; columnWidth: 148 }
             ListElement { columnName: "Description"; columnWidth: 148 }
         }
 
@@ -296,7 +297,41 @@ Rectangle {
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             dataModel: columnsModel
+            offset: 20
             onSortRequest: console.log("column: " + column + " desc: " + desc)
+        }
+
+        ListModel {
+            id: testModel
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: true }
+            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: "Client from Australia"; out: false }
+            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "19301.<font size='2'>870709159241</font>"; balance: "0.<font size='2'>000709159241</font>"; description: ""; out: false }
+        }
+
+        Scroll {
+            id: flickableScroll
+            anchors.rightMargin: -14
+            flickable: table
+            yPos: table.y
+        }
+
+        HistoryTable {
+            id: table
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: header.bottom
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 14
+            anchors.rightMargin: 14
+            onContentYChanged: flickableScroll.flickableContentYChanged()
+            model: testModel
         }
     }
 }
