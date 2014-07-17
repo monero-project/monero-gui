@@ -32,7 +32,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
-            radius: 4
+            //radius: 4
             y: 0
             color: "#DBDBDB"
         }
@@ -41,7 +41,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
-            radius: 4
+            //radius: 4
             y: 1
             color: "#FFFFFF"
 
@@ -204,7 +204,7 @@ Item {
         color: "#FFFFFF"
         height: datePicker.expanded ? calendar.height : 0
         clip: true
-        radius: 4
+        //radius: 4
 
         Behavior on height {
             NumberAnimation { duration: 100; easing.type: Easing.InQuad }

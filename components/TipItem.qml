@@ -5,7 +5,7 @@ Rectangle {
     width: content.width + 12
     height: content.height + 17
     color: "#FF6C3C"
-    radius: 3
+    //radius: 3
 
     Image {
         anchors.top: parent.bottom

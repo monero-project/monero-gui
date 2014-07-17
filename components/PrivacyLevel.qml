@@ -11,7 +11,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         height: 24
-        radius: 4
+        //radius: 4
         color: "#DBDBDB"
     }
 
@@ -22,7 +22,7 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 1
         height: 24
-        radius: 4
+        //radius: 4
         color: "#FFFFFF"
 
         Rectangle {
@@ -31,7 +31,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: 4
-            radius: 2
+            //radius: 2
             width: row.x
 
             color: {

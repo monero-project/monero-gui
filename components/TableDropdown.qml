@@ -32,7 +32,7 @@ Item {
             anchors.right: parent.right
             height: parent.height - 1
             y: dropdown.expanded || dropArea.height > 0 ? 0 : 1
-            radius: 3
+            //radius: 3
             color: dropdown.expanded || dropArea.height > 0 ? "#888888" : "#DBDBDB"
         }
 
@@ -41,7 +41,7 @@ Item {
             anchors.right: parent.right
             height: parent.height - 1
             y: dropdown.expanded || dropArea.height > 0 ? 1 : 0
-            radius: 3
+            //radius: 3
             color: dropdown.expanded || dropArea.height > 0 ? "#DBDBDB" : "#F0EEEE"
         }
 
@@ -124,7 +124,7 @@ Item {
                         anchors.right: parent.right
                         height: 30
                         color: delegateArea.containsMouse ? "#F0EEEE" : "#DBDBDB"
-                        radius: index === repeater.count - 1 ? 5 : 0
+                        //radius: index === repeater.count - 1 ? 5 : 0
 
                         Rectangle {
                             anchors.left: parent.left

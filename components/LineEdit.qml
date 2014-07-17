@@ -9,14 +9,14 @@ Item {
         anchors.fill: parent
         anchors.bottomMargin: 1
         color: "#DBDBDB"
-        radius: 4
+        //radius: 4
     }
 
     Rectangle {
         anchors.fill: parent
         anchors.topMargin: 1
         color: "#FFFFFF"
-        radius: 4
+        //radius: 4
     }
 
     Input {

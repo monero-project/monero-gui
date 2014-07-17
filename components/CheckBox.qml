@@ -13,7 +13,7 @@ Item {
         anchors.left: parent.left
         height: parent.height - 1
         width: 25
-        radius: 4
+        //radius: 4
         y: 0
         color: "#DBDBDB"
     }
@@ -22,7 +22,7 @@ Item {
         anchors.left: parent.left
         height: parent.height - 1
         width: 25
-        radius: 4
+        //radius: 4
         y: 1
         color: "#FFFFFF"
 

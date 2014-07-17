@@ -39,7 +39,7 @@ Item {
             height: parent.height - 1
             y: dropdown.expanded || droplist.height > 0 ? 0 : 1
             color: dropdown.expanded || droplist.height > 0 ? dropdown.shadowPressedColor : dropdown.shadowReleasedColor
-            radius: 4
+            //radius: 4
         }
 
         Rectangle {
@@ -48,7 +48,7 @@ Item {
             height: parent.height - 1
             y: dropdown.expanded || droplist.height > 0 ? 1 : 0
             color: dropdown.expanded || droplist.height > 0 ? dropdown.pressedColor : dropdown.releasedColor
-            radius: 4
+            //radius: 4
         }
 
         Rectangle {
@@ -135,7 +135,7 @@ Item {
         clip: true
         height: dropdown.expanded ? column.height : 0
         color: dropdown.pressedColor
-        radius: 4
+        //radius: 4
 
         Rectangle {
             anchors.left: parent.left
@@ -169,7 +169,7 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 30
-                    radius: index === repeater.count - 1 ? 4 : 0
+                    //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                     Text {
