@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Item {
+    id: button
     height: 37
     property string shadowPressedColor
     property string shadowReleasedColor
@@ -8,6 +9,7 @@ Item {
     property string releasedColor
     property string icon: ""
     property string textColor: "#FFFFFF"
+    property int fontSize: 12
     property alias text: label.text
     signal clicked()
 
@@ -39,7 +41,7 @@ Item {
         font.family: "Arial"
         font.bold: true
         font.letterSpacing: -1
-        font.pixelSize: 12
+        font.pixelSize: button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
     }

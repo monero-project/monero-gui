@@ -85,14 +85,18 @@ ApplicationWindow {
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
     color: "#FFFFFF"
-    x: (Screen.width - width) / 2
-    y: (Screen.height - height) / 2
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
-    onWidthChanged: if(width < 1269) x -= 0
+    onWidthChanged: x -= 0
+
+    Component.onCompleted: {
+        x = (Screen.width - width) / 2
+        y = (Screen.height - height) / 2
+    }
 
     Item {
         id: rootItem
         anchors.fill: parent
+        clip: true
 
         MouseArea {
             property var previousPosition
@@ -112,8 +116,8 @@ ApplicationWindow {
         LeftPanel {
             id: leftPanel
             anchors.left: parent.left
-            anchors.top: parent.top
             anchors.bottom: parent.bottom
+            height: parent.height
             onDashboardClicked: middlePanel.state = "Dashboard"
             onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
@@ -125,18 +129,18 @@ ApplicationWindow {
         RightPanel {
             id: rightPanel
             anchors.right: parent.right
-            anchors.top: parent.top
             anchors.bottom: parent.bottom
+            height: parent.height
             width: appWindow.rightPanelExpanded ? 300 : 0
             visible: appWindow.rightPanelExpanded
         }
 
         MiddlePanel {
             id: middlePanel
-            anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: leftPanel.right
             anchors.right: rightPanel.left
+            height: parent.height
             state: "Dashboard"
         }
 
@@ -147,16 +151,24 @@ ApplicationWindow {
             z: 100
         }
 
+        BasicPanel {
+            id: basicPanel
+            x: 0
+            anchors.bottom: parent.bottom
+            visible: false
+        }
+
         MouseArea {
             id: frameArea
+            property bool blocked: false
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
             height: 30
             z: 1
             hoverEnabled: true
-            onEntered: titleBar.y = 0
-            onExited: titleBar.y = -titleBar.height
+            onEntered: if(!blocked) titleBar.y = 0
+            onExited: if(!blocked) titleBar.y = -titleBar.height
             propagateComposedEvents: true
             onPressed: mouse.accepted = false
             onReleased: mouse.accepted = false
@@ -166,10 +178,115 @@ ApplicationWindow {
             }
         }
 
+        SequentialAnimation {
+            id: goToBasicAnimation
+            PropertyAction {
+                target: appWindow
+                properties: "visibility"
+                value: Window.Windowed
+            }
+            PropertyAction {
+                target: titleBar
+                properties: "maximizeButtonVisible"
+                value: false
+            }
+            PropertyAction {
+                target: frameArea
+                properties: "blocked"
+                value: true
+            }
+            NumberAnimation {
+                target: appWindow
+                properties: "height"
+                to: 30
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+            NumberAnimation {
+                target: appWindow
+                properties: "width"
+                to: 470
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+            PropertyAction {
+                targets: [leftPanel, middlePanel, rightPanel]
+                properties: "visible"
+                value: false
+            }
+            PropertyAction {
+                target: basicPanel
+                properties: "visible"
+                value: true
+            }
+            NumberAnimation {
+                target: appWindow
+                properties: "height"
+                to: 334
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+
+            onStopped: {
+                middlePanel.visible = false
+                rightPanel.visible = false
+                leftPanel.visible = false
+            }
+        }
+
+        SequentialAnimation {
+            id: goToProAnimation
+            NumberAnimation {
+                target: appWindow
+                properties: "height"
+                to: 30
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+            PropertyAction {
+                target: basicPanel
+                properties: "visible"
+                value: false
+            }
+            PropertyAction {
+                targets: [leftPanel, middlePanel, rightPanel]
+                properties: "visible"
+                value: true
+            }
+            NumberAnimation {
+                target: appWindow
+                properties: "width"
+                to: rightPanelExpanded ? 1269 : 1269 - 300
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+            NumberAnimation {
+                target: appWindow
+                properties: "height"
+                to: 800
+                easing.type: Easing.InCubic
+                duration: 200
+            }
+            PropertyAction {
+                target: frameArea
+                properties: "blocked"
+                value: false
+            }
+            PropertyAction {
+                target: titleBar
+                properties: "maximizeButtonVisible"
+                value: true
+            }
+        }
+
         TitleBar {
             id: titleBar
             anchors.left: parent.left
             anchors.right: parent.right
+            onGoToBasicVersion: {
+                if(yes) goToBasicAnimation.start()
+                else goToProAnimation.start()
+            }
         }
     }
 }

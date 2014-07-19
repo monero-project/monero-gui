@@ -8,6 +8,8 @@ Rectangle {
     y: -height
     property int mouseX: 0
     property int mouseY: 0
+    property alias maximizeButtonVisible: maximizeButton.visible
+    signal goToBasicVersion(bool yes)
 
     Text {
         anchors.centerIn: parent
@@ -20,6 +22,32 @@ Rectangle {
     
     Behavior on y {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+    }
+
+    Rectangle {
+        id: goToBasicVersionButton
+        property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
+        property bool checked: false
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        width: height
+        color:  containsMouse || checked ? "#FFE00A" : "#000000"
+
+        Image {
+            anchors.centerIn: parent
+            rotation: parent.checked ? 180 : 0
+            source: parent.containsMouse || parent.checked ? "../images/goToBasicVersionHovered.png" :
+                                                             "../images/gotoBasicVersion.png"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                parent.checked = !parent.checked
+                titleBar.goToBasicVersion(parent.checked)
+            }
+        }
     }
     
     Row {
@@ -69,17 +97,17 @@ Rectangle {
         }
         
         Rectangle {
+            id: maximizeButton
             property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
             color: containsMouse ? "#FF6C3C" : "#000000"
-            property bool checked: false
             
             Image {
                 anchors.centerIn: parent
-                source: parent.checked ?  "../images/backToWindowIcon.png" :
-                                          "../images/maximizeIcon.png"
+                source: appWindow.visibility === Window.FullScreen ?  "../images/backToWindowIcon.png" :
+                                                                      "../images/maximizeIcon.png"
 
             }
             
@@ -87,9 +115,8 @@ Rectangle {
                 id: maximizeArea
                 anchors.fill: parent
                 onClicked: {
-                    parent.checked = !parent.checked
-                    appWindow.visibility = parent.checked ? Window.FullScreen :
-                                                            Window.Windowed
+                    appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
+                                                                                        Window.Windowed
                 }
             }
         }
