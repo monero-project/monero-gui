@@ -99,7 +99,7 @@ Item {
                     width: 22
                     font.family: "Arial"
                     font.pixelSize: 18
-                    color: "#525252"
+                    // color: "#525252"
                     maximumLength: 2
                     horizontalAlignment: TextInput.AlignHCenter
                     validator: IntValidator{bottom: 01; top: 31;}
@@ -121,7 +121,7 @@ Item {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
-                    color: "#525252"
+                    // color: "#525252"
                     text: "."
                 }
 
@@ -130,7 +130,7 @@ Item {
                     width: 22
                     font.family: "Arial"
                     font.pixelSize: 18
-                    color: "#525252"
+                    // color: "#525252"
                     maximumLength: 2
                     horizontalAlignment: TextInput.AlignHCenter
                     validator: IntValidator{bottom: 01; top: 12;}
@@ -152,7 +152,7 @@ Item {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
-                    color: "#525252"
+                    // color: "#525252"
                     text: "."
                 }
 
@@ -161,7 +161,7 @@ Item {
                     width: 44
                     font.family: "Arial"
                     font.pixelSize: 18
-                    color: "#525252"
+                    /// color: "#525252"
                     maximumLength: 4
                     horizontalAlignment: TextInput.AlignHCenter
                     validator: IntValidator{bottom: 1000; top: 9999;}
