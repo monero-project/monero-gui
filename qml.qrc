@@ -76,5 +76,6 @@
         <file>images/goToBasicVersionHovered.png</file>
         <file>BasicPanel.qml</file>
         <file>images/moneroLogo2.png</file>
+        <file>components/PrivacyLevelSmall.qml</file>
     </qresource>
 </RCC>

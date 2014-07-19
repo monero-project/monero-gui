@@ -3,7 +3,7 @@ import "components"
 
 Rectangle {
     width: 470
-    height: 334
+    height: paymentId.y + paymentId.height + 12
     color: "#F0EEEE"
     border.width: 1
     border.color: "#DBDBDB"
@@ -137,6 +137,7 @@ Rectangle {
     }
 
     LineEdit {
+        id: destinationLine
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: row.bottom
@@ -144,5 +145,38 @@ Rectangle {
         fontSize: 15
         height: 32
         placeholderText: qsTr("destination...")
+    }
+
+    Text {
+        id: privacyLevelText
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: destinationLine.bottom
+        anchors.topMargin: 12
+
+        font.family: "Arial"
+        font.pixelSize: 12
+        color: "#535353"
+        text: qsTr("Privacy level")
+    }
+
+    PrivacyLevelSmall {
+        id: privacyLevel
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: privacyLevelText.bottom
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
+        anchors.topMargin: 12
+    }
+
+    LineEdit {
+        id: paymentId
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: privacyLevel.bottom
+        anchors.margins: 12
+        fontSize: 15
+        height: 32
+        placeholderText: qsTr("payment ID (optional)...")
     }
 }

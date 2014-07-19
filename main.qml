@@ -222,7 +222,7 @@ ApplicationWindow {
             NumberAnimation {
                 target: appWindow
                 properties: "height"
-                to: 334
+                to: basicPanel.height
                 easing.type: Easing.InCubic
                 duration: 200
             }

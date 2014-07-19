@@ -36,6 +36,7 @@ Item {
             anchors.bottom: parent.bottom
             anchors.right: dropdown.left
             anchors.leftMargin: 45
+            font.pixelSize: 18
             verticalAlignment: TextInput.AlignVCenter
             placeholderText: qsTr("Search by...")
         }
