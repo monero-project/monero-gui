@@ -61,7 +61,7 @@ Item {
             font.letterSpacing: -1
             font.bold: true
             color: "#000000"
-            x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 5 : 0) - width
+            x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
             text: qsTr("LOW")
         }
 
@@ -72,7 +72,7 @@ Item {
             font.letterSpacing: -1
             font.bold: true
             color: "#000000"
-            x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 5 : 0) - width
+            x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
             text: qsTr("MEDIUM")
         }
 
@@ -83,7 +83,7 @@ Item {
             font.letterSpacing: -1
             font.bold: true
             color: "#000000"
-            x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 5 : 0) - width
+            x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
             text: qsTr("HIGH")
         }
 
@@ -121,7 +121,7 @@ Item {
 
         Row {
             id: row2
-            spacing: ((bar.width - 8) / 2) / 4
+            spacing: ((bar.width - 8) / 2.23) / 4
 
             Repeater {
                 model: 4
@@ -141,7 +141,7 @@ Item {
 
         Row {
             id: row1
-            spacing: ((bar.width - 8) / 2) / 10
+            spacing: ((bar.width - 8) / 2.23) / 10
 
             Repeater {
                 model: 10

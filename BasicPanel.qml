@@ -31,6 +31,7 @@ Rectangle {
         Grid {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
+            width: 256
             columns: 3
 
             Text {
@@ -48,7 +49,7 @@ Rectangle {
 
             Text {
                 id: balanceText
-                width: 100
+                width: 110
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 18
@@ -86,7 +87,7 @@ Rectangle {
 
             Text {
                 id: availableBalanceText
-                width: 100
+                width: 110
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 14
