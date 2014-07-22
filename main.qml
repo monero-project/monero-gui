@@ -86,6 +86,7 @@ ApplicationWindow {
     height: 800
     color: "#FFFFFF"
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
+    onVisibilityChanged: visible = visibility !== Window.Minimized
     onWidthChanged: x -= 0
 
     Component.onCompleted: {

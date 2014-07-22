@@ -95,8 +95,6 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     appWindow.visibility = Window.Minimized
-//                    parent.containsMouse = Qt.binding(function(){ return titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width &&
-//                                                                  appWindow.visibility !== Window.Minimized })
                 }
             }
         }

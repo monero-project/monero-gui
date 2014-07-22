@@ -86,7 +86,7 @@ ListView {
             font.pixelSize: 12
             font.letterSpacing: -1
             color: "#535353"
-            text: qsTr("Payment ID:")
+            text: paymentId !== "" ? qsTr("Payment ID:") : ""
         }
 
         Text {

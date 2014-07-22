@@ -147,8 +147,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Description <font size='2'>( Local database )</font>")
-        visible: checkBox.checked
+        text: qsTr("Description <font size='2'>( An optional description that will be saved to the local address book if entered )</font>")
     }
 
     LineEdit {
@@ -159,34 +158,19 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        visible: checkBox.checked
     }
 
-    Row {
+    StandardButton {
+        id: sendButton
         anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: checkBox.checked ? descriptionLine.bottom : paymentLine.bottom
+        anchors.top: descriptionLine.bottom
         anchors.leftMargin: 17
-        anchors.rightMargin: 17
         anchors.topMargin: 17
-        spacing: 17
-
-        StandardButton {
-            id: sendButton
-            width: 60
-            text: qsTr("SEND")
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-        }
-
-        CheckBox {
-            id: checkBox
-            text: qsTr("Add to Address book")
-            anchors.bottom: sendButton.bottom
-            checkedIcon: "../images/checkedOrangeIcon.png"
-            uncheckedIcon: "../images/uncheckedIcon.png"
-        }
+        width: 60
+        text: qsTr("SEND")
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
     }
 }
