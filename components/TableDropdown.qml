@@ -86,16 +86,42 @@ Item {
         }
     }
 
+    Timer {
+        id: timer
+        interval: 50
+        repeat: false
+        running: false
+        onTriggered: {
+            if(((tipItem.visible && !tipItem.containsMouse) || !tipItem.visible) && !mouseArea.containsMouse) {
+                tipItem.visible = false
+                dropdown.expanded = false
+                currentIndex = -1
+            }
+        }
+    }
+
     MouseArea {
+        id: mouseArea
         anchors.left: head.left
         anchors.right: head.right
         anchors.top: head.top
         height: head.height + dropArea.height
         hoverEnabled: true
         onEntered: dropdown.expanded = true
-        onExited: dropdown.expanded = false
+
+        property int currentIndex: -1
+        onMouseYChanged: {
+            if(mouseY > head.height) {
+                var posY = parseInt((mouseY - head.height) / 30)
+                currentIndex = posY
+            } else {
+                currentIndex = -1
+            }
+        }
+
         preventStealing: true
         z: 1
+        onExited: timer.start()
 
         Item {
             id: dropArea
@@ -120,10 +146,11 @@ Item {
                     id: repeater
                     delegate: Rectangle {
                         id: delegate
+                        property bool containsMouse: index === mouseArea.currentIndex
                         anchors.left: parent.left
                         anchors.right: parent.right
                         height: 30
-                        color: delegateArea.containsMouse ? "#F0EEEE" : "#DBDBDB"
+                        color: containsMouse ? "#F0EEEE" : "#DBDBDB"
                         //radius: index === repeater.count - 1 ? 5 : 0
 
                         Rectangle {
@@ -149,27 +176,35 @@ Item {
                             source: icon
                         }
 
-                        MouseArea {
-                            id: delegateArea
-                            hoverEnabled: true
-                            anchors.fill: parent
-                            propagateComposedEvents: true
-                            onEntered: {
+                        onContainsMouseChanged: {
+                            if(containsMouse) {
                                 var pos = rootItem.mapFromItem(delegate, 30, -20)
                                 tipItem.text = name
-                                tipItem.x = pos.x
+                                tipItem.x = pos.x + appWindow.x
                                 if(tipItem.height > 30)
                                     pos.y -= tipItem.height - 30
-                                tipItem.y = pos.y
+                                tipItem.y = pos.y + appWindow.y
                                 tipItem.visible = true
-                            }
-                            onExited: tipItem.visible = false
-                            onClicked: {
-                                dropdown.optionClicked(index)
+                            } else {
                                 tipItem.visible = false
-                                dropdown.expanded = false
                             }
                         }
+
+//                        MouseArea {
+//                            id: delegateArea
+//                            hoverEnabled: true
+//                            anchors.fill: parent
+//                            propagateComposedEvents: true
+//                            onEntered: {
+
+//                            }
+//                            onExited: tipItem.visible = false
+//                            onClicked: {
+//                                dropdown.optionClicked(index)
+//                                tipItem.visible = false
+//                                dropdown.expanded = false
+//                            }
+//                        }
                     }
                 }
             }

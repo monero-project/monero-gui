@@ -98,21 +98,6 @@ ApplicationWindow {
         anchors.fill: parent
         clip: true
 
-        MouseArea {
-            property var previousPosition
-            anchors.fill: parent
-
-            onPressed: previousPosition = Qt.point(mouseX, mouseY)
-            onPositionChanged: {
-                if (pressedButtons == Qt.LeftButton) {
-                    var dx = mouseX - previousPosition.x
-                    var dy = mouseY - previousPosition.y
-                    appWindow.x += dx
-                    appWindow.y += dy
-                }
-            }
-        }
-
         LeftPanel {
             id: leftPanel
             anchors.left: parent.left
@@ -148,7 +133,6 @@ ApplicationWindow {
             id: tipItem
             text: "send to the same destination"
             visible: false
-            z: 100
         }
 
         BasicPanel {
@@ -286,6 +270,21 @@ ApplicationWindow {
             onGoToBasicVersion: {
                 if(yes) goToBasicAnimation.start()
                 else goToProAnimation.start()
+            }
+
+            MouseArea {
+                property var previousPosition
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onPressed: previousPosition = Qt.point(mouseX, mouseY)
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var dx = mouseX - previousPosition.x
+                        var dy = mouseY - previousPosition.y
+                        appWindow.x += dx
+                        appWindow.y += dy
+                    }
+                }
             }
         }
     }
