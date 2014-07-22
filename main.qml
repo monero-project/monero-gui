@@ -156,10 +156,8 @@ ApplicationWindow {
             propagateComposedEvents: true
             onPressed: mouse.accepted = false
             onReleased: mouse.accepted = false
-            onMouseXChanged: {
-                titleBar.mouseX = mouseX
-                titleBar.mouseY = mouseY
-            }
+            onMouseXChanged: titleBar.mouseX = mouseX
+            onContainsMouseChanged: titleBar.containsMouse = containsMouse
         }
 
         SequentialAnimation {

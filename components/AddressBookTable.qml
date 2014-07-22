@@ -12,7 +12,10 @@ ListView {
         height: 64
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
-        function collapseDropdown() { dropdown.expanded = false }
+        function collapseDropdown() {
+            z = 1
+            dropdown.expanded = false
+        }
 
         Text {
             id: descriptionText
@@ -95,8 +98,6 @@ ListView {
             dataModel: dropModel
             z: 1
             onExpandedChanged: {
-                if(listView.previousItem !== undefined && listView.previousItem !== delegate)
-                    listView.previousItem.collapseDropdown()
                 if(expanded) {
                     listView.previousItem = delegate
                     listView.currentIndex = index

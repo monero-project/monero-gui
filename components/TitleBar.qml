@@ -7,7 +7,7 @@ Rectangle {
     color: "#000000"
     y: -height
     property int mouseX: 0
-    property int mouseY: 0
+    property bool containsMouse: false
     property alias maximizeButtonVisible: maximizeButton.visible
     signal goToBasicVersion(bool yes)
 
@@ -57,7 +57,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
@@ -78,7 +78,7 @@ Rectangle {
         }
         
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
@@ -92,13 +92,17 @@ Rectangle {
             MouseArea {
                 id: minimizeArea
                 anchors.fill: parent
-                onClicked: appWindow.visibility = Window.Minimized
+                onClicked: {
+                    appWindow.visibility = Window.Minimized
+//                    parent.containsMouse = Qt.binding(function(){ return titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width &&
+//                                                                  appWindow.visibility !== Window.Minimized })
+                }
             }
         }
         
         Rectangle {
             id: maximizeButton
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
@@ -122,7 +126,7 @@ Rectangle {
         }
         
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width
+            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height

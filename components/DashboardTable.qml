@@ -192,7 +192,7 @@ ListView {
             anchors.bottomMargin: 11
             anchors.rightMargin: 5
             dataModel: dropModel
-            z: 5
+            z: 1
             onExpandedChanged: {
                 if(expanded) {
                     listView.previousItem = delegate
