@@ -185,6 +185,8 @@ Rectangle {
             id: checkBox
             text: qsTr("Add to Address book")
             anchors.bottom: sendButton.bottom
+            checkedIcon: "../images/checkedOrangeIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
         }
     }
 }

@@ -3,6 +3,8 @@ import QtQuick 2.0
 Item {
     id: checkBox
     property alias text: label.text
+    property string checkedIcon
+    property string uncheckedIcon
     property bool checked: false
     signal clicked()
     height: 25
@@ -28,8 +30,8 @@ Item {
 
         Image {
             anchors.centerIn: parent
-            source: checkBox.checked ? "../images/checkedIcon.png" :
-                                       "../images/uncheckedIcon.png"
+            source: checkBox.checked ? checkBox.checkedIcon :
+                                       checkBox.uncheckedIcon
         }
     }
 

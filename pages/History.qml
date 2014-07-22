@@ -136,18 +136,19 @@ Rectangle {
         pressedColor: "#4D0051"
     }
 
-    Text {
-        anchors.verticalCenter: filterButton.verticalCenter
+    CheckBox {
+        id: checkBox
+        text: qsTr("Advance filtering")
         anchors.left: filterButton.right
+        anchors.bottom: filterButton.bottom
         anchors.leftMargin: 17
-        font.family: "Arial"
-        font.pixelSize: 12
-        color: "#545454"
-        textFormat: Text.RichText
-        text: qsTr("<style type='text/css'>a {text-decoration: none; color: #6B0072; font-size: 14px;}</style>\
-                    looking for <a href='#'>Advance filtering?</a>")
-        font.underline: false
-        onLinkActivated: tableRect.height = Qt.binding(function(){ return tableRect.collapsedHeight })
+        checkedIcon: "../images/checkedVioletIcon.png"
+        uncheckedIcon: "../images/uncheckedIcon.png"
+        onClicked: {
+            if(checked) tableRect.height = Qt.binding(function(){ return tableRect.collapsedHeight })
+            else tableRect.height = Qt.binding(function(){ return tableRect.middleHeight })
+
+        }
     }
 
     Label {
@@ -245,7 +246,8 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 parent.expanded = !parent.expanded
-                tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
+                if(checkBox.checked) tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.collapsedHeight })
+                else tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
             }
         }
     }

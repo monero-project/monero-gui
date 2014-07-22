@@ -12,7 +12,7 @@ Rectangle {
         y = (flickable.contentY / (flickable.contentHeight - flickable.height)) * t + yPos
     }
 
-    width: 12
+    width: 15
     height: {
         var t = (flickable.height * flickable.height) / flickable.contentHeight
         return t < 20 ? 20 : t
