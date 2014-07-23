@@ -272,7 +272,7 @@ ApplicationWindow {
 
             Rectangle {
                 anchors.fill: parent
-                color: parent.containsMouse || parent.pressed ? "#4A4949" : "transparent"
+                color: parent.containsMouse || parent.pressed ? "#111111" : "transparent"
             }
 
             Image {
