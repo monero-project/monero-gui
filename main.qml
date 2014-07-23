@@ -267,8 +267,8 @@ ApplicationWindow {
             hoverEnabled: true
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: 48
-            width: 48
+            height: 30
+            width: 30
 
             Rectangle {
                 anchors.fill: parent

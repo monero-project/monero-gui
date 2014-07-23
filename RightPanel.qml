@@ -6,6 +6,7 @@ import "components"
 
 Rectangle {
     width: 330
+    color: "#FFFFFF"
 
     TabView {
         id: tabView
@@ -87,7 +88,7 @@ Rectangle {
         Rectangle { height: 8; width: parent.width / 5; color: "#6B0072" }
         Rectangle { height: 8; width: parent.width / 5; color: "#FF6C3C" }
         Rectangle { height: 8; width: parent.width / 5; color: "#FFD781" }
-        Rectangle { height: 8; width: parent.width / 5; color: "#FF4F41" }
+        Rectangle { height: 8; width: parent.width / 5 - 30; color: "#FF4F41" }
     }
 
     Rectangle {

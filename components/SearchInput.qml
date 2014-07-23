@@ -100,7 +100,7 @@ Item {
                 onClicked: {
                     if(droplist.height === 0) {
                         appWindow.currentItem = dropdown
-                        droplist.height = dropcolumn.height
+                        droplist.height = dropcolumn.height + 2
                     } else {
                         droplist.height = 0
                     }
@@ -117,7 +117,19 @@ Item {
             clip: true
             x: dropdown.x
             y: dropdown.height
+            border.width: 1
+            border.color: "#DBDBDB"
             color: "#FFFFFF"
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.leftMargin: 1
+                anchors.rightMargin: 1
+                height: 1
+                color: "#FFFFFF"
+            }
 
             Behavior on height {
                 NumberAnimation { duration: 100; easing.type: Easing.InQuad }
@@ -135,6 +147,7 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
+                anchors.margins: 1
 
                 Repeater {
                     model: dropdownModel
