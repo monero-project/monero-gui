@@ -89,13 +89,14 @@ Item {
     Timer {
         id: timer
         interval: 50
-        repeat: false
+        repeat: true
         running: false
         onTriggered: {
             if(((tipItem.visible && !tipItem.containsMouse) || !tipItem.visible) && !mouseArea.containsMouse) {
                 tipItem.visible = false
                 dropdown.expanded = false
                 currentIndex = -1
+                timer.stop()
             }
         }
     }
@@ -119,9 +120,9 @@ Item {
             }
         }
 
+        onExited: timer.start()
         preventStealing: true
         z: 1
-        onExited: timer.start()
 
         Item {
             id: dropArea
@@ -185,26 +186,8 @@ Item {
                                     pos.y -= tipItem.height - 30
                                 tipItem.y = pos.y + appWindow.y
                                 tipItem.visible = true
-                            } else {
-                                tipItem.visible = false
                             }
                         }
-
-//                        MouseArea {
-//                            id: delegateArea
-//                            hoverEnabled: true
-//                            anchors.fill: parent
-//                            propagateComposedEvents: true
-//                            onEntered: {
-
-//                            }
-//                            onExited: tipItem.visible = false
-//                            onClicked: {
-//                                dropdown.optionClicked(index)
-//                                tipItem.visible = false
-//                                dropdown.expanded = false
-//                            }
-//                        }
                     }
                 }
             }

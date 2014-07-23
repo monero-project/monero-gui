@@ -26,10 +26,8 @@ ListView {
         height: 114
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
-        function collapseDropdown() {
-            z = 1
-            dropdown.expanded = false
-        }
+        z: listView.count - index
+        function collapseDropdown() { dropdown.expanded = false }
 
         Row {
             id: row1
@@ -241,10 +239,8 @@ ListView {
                 if(expanded) {
                     listView.previousItem = delegate
                     listView.currentIndex = index
-                    listView.currentItem.z = 2
                 }
             }
-            onCollapsed: delegate.z = 0
             onOptionClicked: {
                 if(option === 0)
                     clipboard.setText(address)
