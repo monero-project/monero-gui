@@ -6,6 +6,20 @@ ListView {
     clip: true
     boundsBehavior: ListView.StopAtBounds
 
+    footer: Rectangle {
+        height: 127
+        width: listView.width
+        color: "#FFFFFF"
+
+        Text {
+            anchors.centerIn: parent
+            font.family: "Arial"
+            font.pixelSize: 14
+            color: "#545454"
+            text: qsTr("No more results")
+        }
+    }
+
     property var previousItem
     delegate: Rectangle {
         id: delegate

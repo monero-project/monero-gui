@@ -6,6 +6,20 @@ ListView {
     clip: true
     boundsBehavior: ListView.StopAtBounds
     
+    footer: Rectangle {
+        height: 127
+        width: listView.width
+        color: "#FFFFFF"
+
+        Text {
+            anchors.centerIn: parent
+            font.family: "Arial"
+            font.pixelSize: 14
+            color: "#545454"
+            text: qsTr("No more results")
+        }
+    }
+
     property var previousItem
     delegate: Rectangle {
         id: delegate
@@ -129,7 +143,7 @@ ListView {
                     font.family: "Arial"
                     font.pixelSize: 12
                     color: "#545454"
-                    text: qsTr("Amount")
+                    text: qsTr("Balance")
                 }
                 
                 Text {
@@ -137,7 +151,7 @@ ListView {
                     font.pixelSize: 18
                     font.letterSpacing: -1
                     color: "#000000"
-                    text: amount
+                    text: balance
                 }
             }
             
@@ -150,7 +164,7 @@ ListView {
                     font.family: "Arial"
                     font.pixelSize: 12
                     color: "#545454"
-                    text: qsTr("Balance")
+                    text: qsTr("Amount")
                 }
                 
                 Row {
@@ -170,7 +184,7 @@ ListView {
                         font.pixelSize: 18
                         font.letterSpacing: -1
                         color: out ? "#FF4F41" : "#36B05B"
-                        text: balance
+                        text: amount
                     }
                 }
             }

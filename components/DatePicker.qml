@@ -31,7 +31,7 @@ Item {
         Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
-            height: parent.height - 1
+            height: parent.height
             //radius: 4
             y: 0
             color: "#DBDBDB"
@@ -41,159 +41,160 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
+            anchors.leftMargin: datePicker.expanded ? 1 : 0
+            anchors.rightMargin: datePicker.expanded ? 1 : 0
             //radius: 4
             y: 1
             color: "#FFFFFF"
+        }
 
-            Item {
-                id: buttonItem
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.margins: 4
-                width: height
+        Item {
+            id: buttonItem
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 4
+            width: height
 
-                StandardButton {
-                    id: button
-                    anchors.fill: parent
-                    shadowReleasedColor: "#DBDBDB"
-                    shadowPressedColor: "#888888"
-                    releasedColor: "#F0EEEE"
-                    pressedColor: "#DBDBDB"
-                    icon: "../images/datePicker.png"
-                    visible: !datePicker.expanded
-                    onClicked: datePicker.expanded = true
-                }
-
-                Image {
-                    anchors.centerIn: parent
-                    source: "../images/datePicker.png"
-                    visible: datePicker.expanded
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: datePicker.expanded
-                    onClicked: datePicker.expanded = false
-                }
+            StandardButton {
+                id: button
+                anchors.fill: parent
+                shadowReleasedColor: "#DBDBDB"
+                shadowPressedColor: "#888888"
+                releasedColor: "#F0EEEE"
+                pressedColor: "#DBDBDB"
+                icon: "../images/datePicker.png"
+                visible: !datePicker.expanded
+                onClicked: datePicker.expanded = true
             }
 
-            Rectangle {
-                id: separator
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.right: buttonItem.left
-                anchors.rightMargin: 4
-                height: 16
-                width: 1
-                color: "#DBDBDB"
+            Image {
+                anchors.centerIn: parent
+                source: "../images/datePicker.png"
                 visible: datePicker.expanded
             }
 
-            Row {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-
-                TextInput {
-                    id: dayInput
-                    width: 22
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    // color: "#525252"
-                    maximumLength: 2
-                    horizontalAlignment: TextInput.AlignHCenter
-                    validator: IntValidator{bottom: 01; top: 31;}
-                    KeyNavigation.tab: monthInput
-                    text: {
-                        if(datePicker.showCurrentDate) {
-                            var day = datePicker.currentDate.getDate()
-                            return day < 10 ? "0" + day : day
-                        }
-                    }
-                    onFocusChanged: {
-                        if(focus === false) {
-                            if(text.length === 0 || text === "0" || text === "00") text = "01"
-                            else if(text.length === 1) text = "0" + text
-                        }
-                    }
-                }
-
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    // color: "#525252"
-                    text: "."
-                }
-
-                TextInput {
-                    id: monthInput
-                    width: 22
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    // color: "#525252"
-                    maximumLength: 2
-                    horizontalAlignment: TextInput.AlignHCenter
-                    validator: IntValidator{bottom: 01; top: 12;}
-                    KeyNavigation.tab: yearInput
-                    text: {
-                        if(datePicker.showCurrentDate) {
-                            var month = datePicker.currentDate.getMonth() + 1
-                            return month < 10 ? "0" + month : month
-                        }
-                    }
-                    onFocusChanged: {
-                        if(focus === false) {
-                            if(text.length === 0 || text === "0" || text === "00") text = "01"
-                            else if(text.length === 1) text = "0" + text
-                        }
-                    }
-                }
-
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    // color: "#525252"
-                    text: "."
-                }
-
-                TextInput {
-                    id: yearInput
-                    width: 44
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    /// color: "#525252"
-                    maximumLength: 4
-                    horizontalAlignment: TextInput.AlignHCenter
-                    validator: IntValidator{bottom: 1000; top: 9999;}
-                    text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
-                    onFocusChanged: {
-                        if(focus === false) {
-                            var d = new Date()
-                            var y = d.getFullYear()
-                            if(text.length != 4 || text[0] === "0")
-                                text = y
-                        }
-                    }
-                }
-
+            MouseArea {
+                anchors.fill: parent
+                enabled: datePicker.expanded
+                onClicked: datePicker.expanded = false
             }
         }
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            height: 3; width: 3
-            color: "#FFFFFF"
+            id: separator
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: buttonItem.left
+            anchors.rightMargin: 4
+            height: 16
+            width: 1
+            color: "#DBDBDB"
             visible: datePicker.expanded
         }
 
-        Rectangle {
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 3; width: 3
-            color: "#FFFFFF"
-            visible: datePicker.expanded
+        Row {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+
+            TextInput {
+                id: dayInput
+                width: 22
+                font.family: "Arial"
+                font.pixelSize: 18
+                // color: "#525252"
+                maximumLength: 2
+                horizontalAlignment: TextInput.AlignHCenter
+                validator: IntValidator{bottom: 01; top: 31;}
+                KeyNavigation.tab: monthInput
+                text: {
+                    if(datePicker.showCurrentDate) {
+                        var day = datePicker.currentDate.getDate()
+                        return day < 10 ? "0" + day : day
+                    }
+                }
+                onFocusChanged: {
+                    if(focus === false) {
+                        if(text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if(text.length === 1) text = "0" + text
+                    }
+                }
+            }
+
+            Text {
+                font.family: "Arial"
+                font.pixelSize: 18
+                // color: "#525252"
+                text: "."
+            }
+
+            TextInput {
+                id: monthInput
+                width: 22
+                font.family: "Arial"
+                font.pixelSize: 18
+                // color: "#525252"
+                maximumLength: 2
+                horizontalAlignment: TextInput.AlignHCenter
+                validator: IntValidator{bottom: 01; top: 12;}
+                KeyNavigation.tab: yearInput
+                text: {
+                    if(datePicker.showCurrentDate) {
+                        var month = datePicker.currentDate.getMonth() + 1
+                        return month < 10 ? "0" + month : month
+                    }
+                }
+                onFocusChanged: {
+                    if(focus === false) {
+                        if(text.length === 0 || text === "0" || text === "00") text = "01"
+                        else if(text.length === 1) text = "0" + text
+                    }
+                }
+            }
+
+            Text {
+                font.family: "Arial"
+                font.pixelSize: 18
+                // color: "#525252"
+                text: "."
+            }
+
+            TextInput {
+                id: yearInput
+                width: 44
+                font.family: "Arial"
+                font.pixelSize: 18
+                /// color: "#525252"
+                maximumLength: 4
+                horizontalAlignment: TextInput.AlignHCenter
+                validator: IntValidator{bottom: 1000; top: 9999;}
+                text: if(datePicker.showCurrentDate) datePicker.currentDate.getFullYear()
+                onFocusChanged: {
+                    if(focus === false) {
+                        var d = new Date()
+                        var y = d.getFullYear()
+                        if(text.length != 4 || text[0] === "0")
+                            text = y
+                    }
+                }
+            }
         }
+
+//        Rectangle {
+//            anchors.left: parent.left
+//            anchors.bottom: parent.bottom
+//            height: 3; width: 3
+//            color: "#FFFFFF"
+//            visible: datePicker.expanded
+//        }
+
+//        Rectangle {
+//            anchors.right: parent.right
+//            anchors.bottom: parent.bottom
+//            height: 3; width: 3
+//            color: "#FFFFFF"
+//            visible: datePicker.expanded
+//        }
     }
 
     Rectangle {
@@ -202,7 +203,9 @@ Item {
         anchors.right: parent.right
         anchors.top: head.bottom
         color: "#FFFFFF"
-        height: datePicker.expanded ? calendar.height : 0
+        border.width: 1
+        border.color: "#DBDBDB"
+        height: datePicker.expanded ? calendar.height + 2 : 0
         clip: true
         //radius: 4
 
@@ -212,23 +215,34 @@ Item {
 
         Rectangle {
             anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 1
+            anchors.rightMargin: 1
             anchors.top: parent.top
-            height: 3; width: 3
             color: "#FFFFFF"
+            height: 1
         }
 
-        Rectangle {
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: 3; width: 3
-            color: "#FFFFFF"
-        }
+//        Rectangle {
+//            anchors.left: parent.left
+//            anchors.top: parent.top
+//            height: 3; width: 3
+//            color: "#FFFFFF"
+//        }
+
+//        Rectangle {
+//            anchors.right: parent.right
+//            anchors.top: parent.top
+//            height: 3; width: 3
+//            color: "#FFFFFF"
+//        }
 
         Calendar {
             id: calendar
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
+            anchors.margins: 1
             height: 180
             frameVisible: false
 
