@@ -179,22 +179,6 @@ Item {
                 }
             }
         }
-
-//        Rectangle {
-//            anchors.left: parent.left
-//            anchors.bottom: parent.bottom
-//            height: 3; width: 3
-//            color: "#FFFFFF"
-//            visible: datePicker.expanded
-//        }
-
-//        Rectangle {
-//            anchors.right: parent.right
-//            anchors.bottom: parent.bottom
-//            height: 3; width: 3
-//            color: "#FFFFFF"
-//            visible: datePicker.expanded
-//        }
     }
 
     Rectangle {
@@ -222,20 +206,6 @@ Item {
             color: "#FFFFFF"
             height: 1
         }
-
-//        Rectangle {
-//            anchors.left: parent.left
-//            anchors.top: parent.top
-//            height: 3; width: 3
-//            color: "#FFFFFF"
-//        }
-
-//        Rectangle {
-//            anchors.right: parent.right
-//            anchors.top: parent.top
-//            height: 3; width: 3
-//            color: "#FFFFFF"
-//        }
 
         Calendar {
             id: calendar

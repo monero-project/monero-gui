@@ -75,9 +75,11 @@ Item {
 
     Scroll {
         id: flickableScroll
+        anchors.right: listView.right
         anchors.rightMargin: -14
+        anchors.top: listView.top
+        anchors.bottom: listView.bottom
         flickable: listView
-        yPos: listView.y
     }
 
     ListView {

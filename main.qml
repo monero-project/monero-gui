@@ -86,7 +86,6 @@ ApplicationWindow {
     height: 800
     color: "#FFFFFF"
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
-    onVisibilityChanged: visible = visibility !== Window.Minimized
     onWidthChanged: x -= 0
 
     Component.onCompleted: {
@@ -263,6 +262,46 @@ ApplicationWindow {
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
+        property int maxHeight: 700
+        MouseArea {
+            hoverEnabled: true
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 48
+            width: 48
+
+            Rectangle {
+                anchors.fill: parent
+                color: parent.containsMouse || parent.pressed ? "#4A4949" : "transparent"
+            }
+
+            Image {
+                anchors.centerIn: parent
+                source: parent.containsMouse || parent.pressed ? "images/resizeHovered.png" :
+                                                                 "images/resize.png"
+            }
+
+            property int previousX: 0
+            property int previousY: 0
+            onPressed: {
+                previousX = mouseX
+                previousY = mouseY
+            }
+
+            onPositionChanged: {
+                if(!pressed) return
+                var dx = previousX - mouseX
+                var dy = previousY - mouseY
+
+                if(appWindow.width - dx > parent.maxWidth)
+                    appWindow.width -= dx
+                else appWindow.width = parent.maxWidth
+
+                if(appWindow.height - dy > parent.maxHeight)
+                    appWindow.height -= dy
+                else appWindow.height = parent.maxHeight
+            }
+        }
 
 //        MouseArea {
 //            anchors.top: parent.top
@@ -279,49 +318,6 @@ ApplicationWindow {
 //                if(middlePanel.width - diff > 655)
 //                    appWindow.width -= diff
 //                else appWindow.width = parent.maxWidth
-//            }
-//        }
-
-//        MouseArea {
-//            anchors.left: parent.left
-//            anchors.top: parent.top
-//            anchors.bottom: parent.bottom
-//            anchors.topMargin: 30
-//            anchors.bottomMargin: 3
-//            cursorShape: Qt.SizeHorCursor
-//            width: 3
-//            property int previousX: 0
-//            property int maximumX: 0
-//            onPressed: {
-//                var diff = appWindow.width - parent.maxWidth
-//                maximumX = appWindow.x + diff
-//                previousX = mouseX
-//            }
-//            onPositionChanged: {
-//                var diff = previousX - mouseX
-//                if(appWindow.x + diff < maximumX) {
-//                    appWindow.width += diff
-//                    appWindow.x -= diff
-//                } else {
-//                    appWindow.width = parent.maxWidth
-//                    appWindow.x = maximumX
-//                }
-//            }
-//        }
-
-//        MouseArea {
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            anchors.bottom: parent.bottom
-//            anchors.leftMargin: 3
-//            anchors.rightMargin: 3
-//            height: 3
-//            cursorShape: Qt.SizeVerCursor
-//            property int previousY: 0
-//            onPressed: previousY = mouseY
-//            onPositionChanged: {
-//                var diff = previousY - mouseY
-//                appWindow.height -= diff
 //            }
 //        }
 

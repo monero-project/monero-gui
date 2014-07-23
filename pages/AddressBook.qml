@@ -178,9 +178,11 @@ Rectangle {
 
         Scroll {
             id: flickableScroll
+            anchors.right: table.right
             anchors.rightMargin: -14
+            anchors.top: table.top
+            anchors.bottom: table.bottom
             flickable: table
-            yPos: table.y
         }
 
         AddressBookTable {

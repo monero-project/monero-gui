@@ -78,5 +78,7 @@
         <file>images/moneroLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/checkedVioletIcon.png</file>
+        <file>images/resize.png</file>
+        <file>images/resizeHovered.png</file>
     </qresource>
 </RCC>
