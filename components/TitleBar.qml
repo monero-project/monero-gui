@@ -10,6 +10,7 @@ Rectangle {
     property string walletName: "Donations"
     property bool containsMouse: false
     property alias maximizeButtonVisible: maximizeButton.visible
+    property alias basicButtonVisible: goToBasicVersionButton.visible
     signal goToBasicVersion(bool yes)
 
     Text {

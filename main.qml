@@ -3,6 +3,7 @@ import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import "components"
+import "wizard"
 
 ApplicationWindow {
     id: appWindow
@@ -97,6 +98,26 @@ ApplicationWindow {
         id: rootItem
         anchors.fill: parent
         clip: true
+
+        state: "wizard"
+        states: [
+            State {
+                name: "wizard"
+                PropertyChanges { target: leftPanel; visible: false }
+                PropertyChanges { target: rightPanel; visible: false }
+                PropertyChanges { target: middlePanel; visible: false }
+                PropertyChanges { target: titleBar; basicButtonVisible: false }
+                PropertyChanges { target: wizard; visible: true }
+            },
+            State {
+                name: "normal"
+                PropertyChanges { target: leftPanel; visible: true }
+                PropertyChanges { target: rightPanel; visible: true }
+                PropertyChanges { target: middlePanel; visible: true }
+                PropertyChanges { target: titleBar; basicButtonVisible: true }
+                PropertyChanges { target: wizard; visible: false }
+            }
+        ]
 
         LeftPanel {
             id: leftPanel
@@ -259,6 +280,11 @@ ApplicationWindow {
                 properties: "maximizeButtonVisible"
                 value: true
             }
+        }
+
+        WizardMain {
+            id: wizard
+            anchors.fill: parent
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
