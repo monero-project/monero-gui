@@ -1,6 +1,8 @@
 import QtQuick 2.2
 
 Item {
+    id: page
+    signal createWalletClicked()
     opacity: 0
     visible: false
     Behavior on opacity {
@@ -56,6 +58,7 @@ Item {
                     id: createWalletArea
                     anchors.fill: parent
                     hoverEnabled: true
+                    onClicked: page.createWalletClicked()
                 }
             }
 

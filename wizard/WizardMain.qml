@@ -35,6 +35,7 @@ Rectangle {
         var pages = new Array()
         pages[0] = welcomePage
         pages[1] = optionsPage
+        pages[2] = createWalletPage
 
         if(next === false) {
             if(currentPage > 0) {
@@ -61,6 +62,17 @@ Rectangle {
 
     WizardOptions {
         id: optionsPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+        onCreateWalletClicked: wizard.switchPage(true)
+    }
+
+    WizardCreateWallet {
+        id: createWalletPage
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: nextButton.left
