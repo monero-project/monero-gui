@@ -108,6 +108,9 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
+                PropertyChanges { target: appWindow; width: 930; }
+                PropertyChanges { target: appWindow; height: 595; }
+                PropertyChanges { target: resizeArea; visible: false }
             },
             State {
                 name: "normal"
@@ -116,6 +119,9 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
+                PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
+                PropertyChanges { target: appWindow; height: 800; }
+                PropertyChanges { target: resizeArea; visible: true }
             }
         ]
 
@@ -290,6 +296,7 @@ ApplicationWindow {
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
         property int maxHeight: 700
         MouseArea {
+            id: resizeArea
             hoverEnabled: true
             anchors.right: parent.right
             anchors.bottom: parent.bottom

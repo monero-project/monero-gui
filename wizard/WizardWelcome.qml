@@ -14,21 +14,29 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 74
+        anchors.leftMargin: 16
+        anchors.rightMargin: 16
         spacing: 24
 
         Text {
+            anchors.left: parent.left
+            anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 28
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
+            wrapMode: Text.Wrap
             text: qsTr("Welcome")
         }
 
         Text {
+            anchors.left: parent.left
+            anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 18
             //renderType: Text.NativeRendering
             color: "#4A4646"
+            wrapMode: Text.Wrap
             text: qsTr("Please choose a language and regional format.")
         }
     }
@@ -50,6 +58,8 @@ Item {
         anchors.bottom: parent.bottom
         anchors.top: headerColumn.bottom
         anchors.topMargin: 24
+        anchors.leftMargin: 16
+        anchors.rightMargin: 16
         clip: true
 
         model: languagesModel

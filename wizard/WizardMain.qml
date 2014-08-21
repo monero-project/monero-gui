@@ -11,6 +11,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: 50
+        visible: wizard.currentPage !== 1 && wizard.currentPage !== 6
 
         width: 50; height: 50
         radius: 25
@@ -36,6 +37,10 @@ Rectangle {
         pages[0] = welcomePage
         pages[1] = optionsPage
         pages[2] = createWalletPage
+        pages[3] = passwordPage
+        pages[4] = configurePage
+        pages[5] = donationPage
+        pages[6] = finishPage
 
         if(next === false) {
             if(currentPage > 0) {
@@ -73,6 +78,46 @@ Rectangle {
 
     WizardCreateWallet {
         id: createWalletPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
+    WizardPassword {
+        id: passwordPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
+    WizardConfigure {
+        id: configurePage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
+    WizardDonation {
+        id: donationPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
+    WizardFinish {
+        id: finishPage
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: nextButton.left

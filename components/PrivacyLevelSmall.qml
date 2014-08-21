@@ -2,6 +2,8 @@ import QtQuick 2.0
 
 Item {
     id: item
+    property alias interactive: mouseArea.enabled
+    property alias background: bar.color
     property int fillLevel: 0
     height: 40
     clip: true
@@ -88,6 +90,7 @@ Item {
         }
 
         MouseArea {
+            id: mouseArea
             anchors.fill: parent
             function positionBar() {
                 var xDiff = 999999

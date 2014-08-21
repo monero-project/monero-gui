@@ -17,28 +17,37 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 74
+        anchors.leftMargin: 16
+        anchors.rightMargin: 16
         spacing: 24
 
         Text {
+            anchors.left: parent.left
+            anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 28
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
+            wrapMode: Text.Wrap
             text: qsTr("I want")
         }
 
         Text {
+            anchors.left: parent.left
+            anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 18
             //renderType: Text.NativeRendering
             color: "#4A4646"
+            wrapMode: Text.Wrap
             text: qsTr("Please select one of the following options:")
         }
     }
 
     Row {
+        anchors.verticalCenterOffset: 35
         anchors.centerIn: parent
-        spacing: 50
+        spacing: 40
 
         Column {
             anchors.verticalCenter: parent.verticalCenter

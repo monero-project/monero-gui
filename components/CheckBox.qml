@@ -6,6 +6,9 @@ Item {
     property string checkedIcon
     property string uncheckedIcon
     property bool checked: false
+    property alias background: backgroundRect.color
+    property int fontSize: 14
+    property alias fontColor: label.color
     signal clicked()
     height: 25
     width: label.x + label.width
@@ -21,6 +24,7 @@ Item {
     }
 
     Rectangle {
+        id: backgroundRect
         anchors.left: parent.left
         height: parent.height - 1
         width: 25
@@ -41,7 +45,7 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 25 + 12
         font.family: "Arial"
-        font.pixelSize: 14
+        font.pixelSize: checkBox.fontSize
         font.letterSpacing: -1
         color: "#525252"
     }

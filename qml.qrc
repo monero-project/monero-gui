@@ -89,5 +89,11 @@
         <file>images/openAccount.png</file>
         <file>images/recoverWallet.png</file>
         <file>wizard/WizardCreateWallet.qml</file>
+        <file>images/greyTriangle.png</file>
+        <file>images/copyToClipboard.png</file>
+        <file>wizard/WizardPassword.qml</file>
+        <file>wizard/WizardConfigure.qml</file>
+        <file>wizard/WizardDonation.qml</file>
+        <file>wizard/WizardFinish.qml</file>
     </qresource>
 </RCC>

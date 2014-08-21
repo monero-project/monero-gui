@@ -147,7 +147,6 @@ Rectangle {
         onClicked: {
             if(checked) tableRect.height = Qt.binding(function(){ return tableRect.collapsedHeight })
             else tableRect.height = Qt.binding(function(){ return tableRect.middleHeight })
-
         }
     }
 
