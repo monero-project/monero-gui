@@ -7,7 +7,7 @@ Rectangle {
     color: "#000000"
     y: -height
     property int mouseX: 0
-    property string walletName: "Donations"
+    property string title: "Monero  -  Donations"
     property bool containsMouse: false
     property alias maximizeButtonVisible: maximizeButton.visible
     property alias basicButtonVisible: goToBasicVersionButton.visible
@@ -19,7 +19,7 @@ Rectangle {
         font.pixelSize: 15
         font.letterSpacing: -1
         color: "#FFFFFF"
-        text: qsTr("Monero  -  %1").arg(titleBar.walletName)
+        text: titleBar.title
     }
     
     Behavior on y {

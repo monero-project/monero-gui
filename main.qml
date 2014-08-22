@@ -111,8 +111,11 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: 930; }
                 PropertyChanges { target: appWindow; height: 595; }
                 PropertyChanges { target: resizeArea; visible: false }
-            },
-            State {
+                PropertyChanges { target: titleBar; maximizeButtonVisible: false }
+                PropertyChanges { target: frameArea; blocked: true }
+                PropertyChanges { target: titleBar; y: 0 }
+                PropertyChanges { target: titleBar; title: "Program setup wizard" }
+            }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
                 PropertyChanges { target: rightPanel; visible: true }
@@ -122,6 +125,10 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
                 PropertyChanges { target: appWindow; height: 800; }
                 PropertyChanges { target: resizeArea; visible: true }
+                PropertyChanges { target: titleBar; maximizeButtonVisible: true }
+                PropertyChanges { target: frameArea; blocked: false }
+                PropertyChanges { target: titleBar; y: -titleBar.height }
+                PropertyChanges { target: titleBar; title: "Monero  -  Donations" }
             }
         ]
 
@@ -204,6 +211,11 @@ ApplicationWindow {
                 properties: "blocked"
                 value: true
             }
+            PropertyAction {
+                target: resizeArea
+                properties: "visible"
+                value: false
+            }
             NumberAnimation {
                 target: appWindow
                 properties: "height"
@@ -258,7 +270,7 @@ ApplicationWindow {
                 value: false
             }
             PropertyAction {
-                targets: [leftPanel, middlePanel, rightPanel]
+                targets: [leftPanel, middlePanel, rightPanel, resizeArea]
                 properties: "visible"
                 value: true
             }
@@ -335,24 +347,6 @@ ApplicationWindow {
                 else appWindow.height = parent.maxHeight
             }
         }
-
-//        MouseArea {
-//            anchors.top: parent.top
-//            anchors.bottom: parent.bottom
-//            anchors.right: parent.right
-//            anchors.topMargin: 30
-//            anchors.bottomMargin: 3
-//            cursorShape: Qt.SizeHorCursor
-//            width: 3
-//            property int previousX: 0
-//            onPressed: previousX = mouseX
-//            onPositionChanged: {
-//                var diff = previousX - mouseX
-//                if(middlePanel.width - diff > 655)
-//                    appWindow.width -= diff
-//                else appWindow.width = parent.maxWidth
-//            }
-//        }
 
         TitleBar {
             id: titleBar
