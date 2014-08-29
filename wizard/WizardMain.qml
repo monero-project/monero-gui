@@ -1,7 +1,9 @@
 import QtQuick 2.2
+import "../components"
 
 Rectangle {
     id: wizard
+    signal useMoneroClicked()
     border.color: "#DBDBDB"
     border.width: 1
     color: "#FFFFFF"
@@ -149,5 +151,20 @@ Rectangle {
             hoverEnabled: true
             onClicked: wizard.switchPage(false)
         }
+    }
+
+    StandardButton {
+        id: sendButton
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 50
+        width: 110
+        text: qsTr("USE MONERO")
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
+        visible: parent.currentPage === 6
+        onClicked: wizard.useMoneroClicked()
     }
 }

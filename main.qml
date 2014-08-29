@@ -303,6 +303,7 @@ ApplicationWindow {
         WizardMain {
             id: wizard
             anchors.fill: parent
+            onUseMoneroClicked: rootItem.state = "normal"
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
