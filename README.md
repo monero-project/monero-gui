@@ -41,7 +41,7 @@ The Bitcoin donation address is: 1FhnVJi2V1k4MqXm2nHoEbY5LV7FPai7bb
 
 Core development funding and/or some supporting services are also graciously provided by sponsors:
 
-[![MyMonero](//static.getmonero.org/images/sponsors/mymonero.png)](https://mymonero.com) [![Kitware](//static.getmonero.org/images/sponsors/kitware.png)](http://kitware.com) [![Dome9](//static.getmonero.org/images/sponsors/dome9.png)](http://dome9.com) [![Araxis](//static.getmonero.org/images/sponsors/araxis.png)](http://araxis.com) [![JetBrains](//static.getmonero.org/images/sponsors/jetbrains.png)](http://www.jetbrains.com/)
+[![MyMonero](https://static.getmonero.org/images/sponsors/mymonero.png)](https://mymonero.com) [![Kitware](https://static.getmonero.org/images/sponsors/kitware.png)](http://kitware.com) [![Dome9](https://static.getmonero.org/images/sponsors/dome9.png)](http://dome9.com) [![Araxis](https://static.getmonero.org/images/sponsors/araxis.png)](http://araxis.com) [![JetBrains](https://static.getmonero.org/images/sponsors/jetbrains.png)](http://www.jetbrains.com/)
 
 There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
 
