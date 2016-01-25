@@ -79,8 +79,10 @@ Item {
         XmlRole { name: "isCurrent"; query: "@enabled/string()" }
     }
 
-    ListView {
-        id: listView
+    GridView {
+        id: gridView
+        cellWidth: 140
+        cellHeight: 120
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -89,20 +91,20 @@ Item {
         anchors.leftMargin: 16
         anchors.rightMargin: 16
         clip: true
-
         model: languagesModel
+
         delegate: Item {
-            width: listView.width
-            height: 80
+            id: flagDelegate
+            width: gridView.cellWidth
+            height: gridView.cellHeight
+
 
             Rectangle {
                 id: flagRect
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
                 width: 60; height: 60
+                anchors.centerIn: parent
                 radius: 30
-                color: listView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
-
+                color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
                 Image {
                     anchors.centerIn: parent
                     source: "file:///" + applicationDirectory + flag
@@ -110,30 +112,20 @@ Item {
             }
 
             Text {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: flagRect.right
-                anchors.right: parent.right
-                anchors.leftMargin: 16
                 font.family: "Arial"
                 font.pixelSize: 24
-                font.bold: listView.currentIndex === index
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: flagRect.bottom
+                anchors.topMargin: 10
+                font.bold: gridView.currentIndex === index
                 elide: Text.ElideRight
                 color: "#3F3F3F"
                 text: name
             }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: "#DBDBDB"
-            }
-
             MouseArea {
                 id: delegateArea
                 anchors.fill: parent
-                onClicked: listView.currentIndex = index
+                onClicked: gridView.currentIndex = index
             }
         }
     }
