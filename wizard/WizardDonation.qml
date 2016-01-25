@@ -149,5 +149,33 @@ Item {
                        "as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% " +
                        "autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.")
         }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 12
+
+            CheckBox {
+                text: qsTr("Allow background mining?")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                background: "#F0EEEE"
+                fontColor: "#4A4646"
+                fontSize: 18
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: true
+            }
+
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                font.family: "Arial"
+                font.pixelSize: 15
+                color: "#4A4646"
+                wrapMode: Text.Wrap
+                text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
+                           "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+            }
+        }
     }
 }

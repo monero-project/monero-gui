@@ -137,35 +137,5 @@ Item {
                 text: qsTr("I want to recover my account<br/>from my 24 work seed")
             }
         }
-
-        Column {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 30
-
-            Rectangle {
-                width: 202; height: 202
-                radius: 101
-                color: openAccountArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
-
-                Image {
-                    anchors.centerIn: parent
-                    source: "qrc:///images/openAccount.png"
-                }
-
-                MouseArea {
-                    id: openAccountArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                }
-            }
-
-            Text {
-                font.family: "Arial"
-                font.pixelSize: 16
-                color: "#4A4949"
-                horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to open account file")
-            }
-        }
     }
 }

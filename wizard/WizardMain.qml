@@ -31,10 +31,33 @@ import "../components"
 
 Rectangle {
     id: wizard
+    property alias nextButton : nextButton
+
+
     signal useMoneroClicked()
     border.color: "#DBDBDB"
     border.width: 1
     color: "#FFFFFF"
+
+    function switchPage(next) {
+        if(next === false) {
+            if(currentPage > 0) {
+                pages[currentPage].opacity = 0
+                pages[--currentPage].opacity = 1
+            }
+        } else {
+            if(currentPage < pages.length - 1) {
+                pages[currentPage].opacity = 0
+                pages[++currentPage].opacity = 1
+            }
+        }
+
+        // disallow "next" button until password matches
+        if (pages[currentPage] === passwordPage) {
+            nextButton.visible = passwordPage.passwordValid
+        }
+    }
+
 
     Rectangle {
         id: nextButton
@@ -62,28 +85,8 @@ Rectangle {
     }
 
     property int currentPage: 0
-    function switchPage(next) {
-        var pages = new Array()
-        pages[0] = welcomePage
-        pages[1] = optionsPage
-        pages[2] = createWalletPage
-        pages[3] = passwordPage
-        pages[4] = configurePage
-        pages[5] = donationPage
-        pages[6] = finishPage
+    property var pages: [welcomePage, optionsPage, createWalletPage, passwordPage, /*configurePage,*/ donationPage, finishPage ]
 
-        if(next === false) {
-            if(currentPage > 0) {
-                pages[currentPage].opacity = 0
-                pages[--currentPage].opacity = 1
-            }
-        } else {
-            if(currentPage < pages.length - 1) {
-                pages[currentPage].opacity = 0
-                pages[++currentPage].opacity = 1
-            }
-        }
-    }
 
     WizardWelcome {
         id: welcomePage
@@ -126,15 +129,15 @@ Rectangle {
         anchors.rightMargin: 50
     }
 
-    WizardConfigure {
-        id: configurePage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
-    }
+//    WizardConfigure {
+//        id: configurePage
+//        anchors.top: parent.top
+//        anchors.bottom: parent.bottom
+//        anchors.right: nextButton.left
+//        anchors.left: prevButton.right
+//        anchors.leftMargin: 50
+//        anchors.rightMargin: 50
+//    }
 
     WizardDonation {
         id: donationPage
@@ -192,7 +195,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        visible: parent.currentPage === 6
+        visible: parent.pages[currentPage] === finishPage
         onClicked: wizard.useMoneroClicked()
     }
 }

@@ -38,6 +38,18 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function handlePassword() {
+        // allow to forward step only if passwords match
+        // print("pass1: ", passwordItem.password)
+        // print("pass2: ", retypePasswordItem.password)
+        // TODO: update password strength
+        wizard.nextButton.visible = passwordItem.password === retypePasswordItem.password
+    }
+
+    property bool passwordValid : passwordItem.password != ''
+                                  && passwordItem.password === retypePasswordItem.password
+
+
     Row {
         id: dotsRow
         anchors.top: parent.top
@@ -97,35 +109,17 @@ Item {
         }
     }
 
-    Item {
+
+    WizardPasswordInput {
         id: passwordItem
         anchors.top: headerColumn.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 24
         width: 300
         height: 62
-
-        TextInput {
-            anchors.fill: parent
-            horizontalAlignment: TextInput.AlignHCenter
-            verticalAlignment: TextInput.AlignVCenter
-            font.family: "Arial"
-            font.pixelSize: 32
-            renderType: Text.NativeRendering
-            color: "#35B05A"
-            passwordCharacter: "•"
-            echoMode: TextInput.Password
-            focus: true
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
-        }
+        onChanged: handlePassword()
     }
+
 
     PrivacyLevelSmall {
         id: privacyLevel
@@ -137,33 +131,13 @@ Item {
         interactive: false
     }
 
-    Item {
+    WizardPasswordInput {
         id: retypePasswordItem
         anchors.top: privacyLevel.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 24
         width: 300
         height: 62
-
-        TextInput {
-            anchors.fill: parent
-            horizontalAlignment: TextInput.AlignHCenter
-            verticalAlignment: TextInput.AlignVCenter
-            font.family: "Arial"
-            font.pixelSize: 32
-            renderType: Text.NativeRendering
-            color: "#35B05A"
-            passwordCharacter: "•"
-            echoMode: TextInput.Password
-            focus: true
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
-        }
+        onChanged: handlePassword()
     }
 }
