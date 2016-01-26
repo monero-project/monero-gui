@@ -32,7 +32,9 @@ import "../components"
 Rectangle {
     id: wizard
     property alias nextButton : nextButton
-
+    property var settings : ({})
+    property int currentPage: 0
+    property var pages: [welcomePage, optionsPage, createWalletPage, passwordPage, /*configurePage,*/ donationPage, finishPage ]
 
     signal useMoneroClicked()
     border.color: "#DBDBDB"
@@ -40,6 +42,12 @@ Rectangle {
     color: "#FFFFFF"
 
     function switchPage(next) {
+
+        // save settings for current page;
+        if (typeof pages[currentPage].saveSettings !== 'undefined') {
+            pages[currentPage].saveSettings(settings);
+        }
+
         if(next === false) {
             if(currentPage > 0) {
                 pages[currentPage].opacity = 0
@@ -52,9 +60,14 @@ Rectangle {
             }
         }
 
-        // disallow "next" button until password matches
+        // disallow "next" button until passwords match
         if (pages[currentPage] === passwordPage) {
             nextButton.visible = passwordPage.passwordValid
+        }
+
+        // display settings summary
+        if (pages[currentPage] === finishPage) {
+            finishPage.updateSettingsSummary();
         }
     }
 
@@ -84,8 +97,7 @@ Rectangle {
         }
     }
 
-    property int currentPage: 0
-    property var pages: [welcomePage, optionsPage, createWalletPage, passwordPage, /*configurePage,*/ donationPage, finishPage ]
+
 
 
     WizardWelcome {
@@ -128,16 +140,6 @@ Rectangle {
         anchors.leftMargin: 50
         anchors.rightMargin: 50
     }
-
-//    WizardConfigure {
-//        id: configurePage
-//        anchors.top: parent.top
-//        anchors.bottom: parent.bottom
-//        anchors.right: nextButton.left
-//        anchors.left: prevButton.right
-//        anchors.leftMargin: 50
-//        anchors.rightMargin: 50
-//    }
 
     WizardDonation {
         id: donationPage

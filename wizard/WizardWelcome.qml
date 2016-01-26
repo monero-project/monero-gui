@@ -36,6 +36,10 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function saveSettings(settingsObject) {
+        settingsObject['language'] = languagesModel.get(gridView.currentIndex).name
+    }
+
     Column {
         id: headerColumn
         anchors.left: parent.left
@@ -76,6 +80,8 @@ Item {
 
         XmlRole { name: "name"; query: "@name/string()" }
         XmlRole { name: "flag"; query: "@flag/string()" }
+        // TODO: XmlListModel is read only, we should store current language somewhere else
+        // and set current language accordingly
         XmlRole { name: "isCurrent"; query: "@enabled/string()" }
     }
 
@@ -125,7 +131,9 @@ Item {
             MouseArea {
                 id: delegateArea
                 anchors.fill: parent
-                onClicked: gridView.currentIndex = index
+                onClicked:  {
+                    gridView.currentIndex = index
+                }
             }
         }
     }

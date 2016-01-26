@@ -38,6 +38,12 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function saveSettings(settingsObject) {
+        settingsObject['auto_donations_enabled'] = enableAutoDonationCheckBox.checked;
+        settingsObject['auto_donations_amount']  = autoDonationAmountText.text;
+        settingsObject['allow_background_mining'] = allowBackgroundMiningCheckBox.checked;
+    }
+
     Row {
         id: dotsRow
         anchors.top: parent.top
@@ -94,6 +100,7 @@ Item {
             spacing: 2
 
             CheckBox {
+                id: enableAutoDonationCheckBox
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Enable auto-donations of?")
                 background: "#F0EEEE"
@@ -110,6 +117,7 @@ Item {
                 width: 41
 
                 TextInput {
+                    id: autoDonationAmountText
                     anchors.fill: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -155,6 +163,7 @@ Item {
             spacing: 12
 
             CheckBox {
+                id: allowBackgroundMiningCheckBox
                 text: qsTr("Allow background mining?")
                 anchors.left: parent.left
                 anchors.right: parent.right

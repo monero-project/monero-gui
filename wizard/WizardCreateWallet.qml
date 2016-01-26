@@ -39,6 +39,12 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function saveSettings(settingsObject) {
+        settingsObject['account_name'] = accountName.text
+        settingsObject['words'] = wordsText.text
+        settingsObject['wallet_path'] = fileUrlInput.text
+    }
+
     Row {
         id: dotsRow
         anchors.top: parent.top
@@ -106,6 +112,7 @@ Item {
         height: 62
 
         TextInput {
+            id: accountName
             anchors.fill: parent
             horizontalAlignment: TextInput.AlignHCenter
             verticalAlignment: TextInput.AlignVCenter
