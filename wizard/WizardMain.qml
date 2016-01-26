@@ -68,6 +68,9 @@ Rectangle {
         // display settings summary
         if (pages[currentPage] === finishPage) {
             finishPage.updateSettingsSummary();
+            nextButton.visible = false
+        } else {
+            nextButton.visible = true
         }
     }
 
