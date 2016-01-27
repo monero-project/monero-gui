@@ -95,5 +95,6 @@
         <file>wizard/WizardConfigure.qml</file>
         <file>wizard/WizardDonation.qml</file>
         <file>wizard/WizardFinish.qml</file>
+        <file>wizard/WizardPasswordInput.qml</file>
     </qresource>
 </RCC>

@@ -31,10 +31,49 @@ import "../components"
 
 Rectangle {
     id: wizard
+    property alias nextButton : nextButton
+    property var settings : ({})
+    property int currentPage: 0
+    property var pages: [welcomePage, optionsPage, createWalletPage, passwordPage, /*configurePage,*/ donationPage, finishPage ]
+
     signal useMoneroClicked()
     border.color: "#DBDBDB"
     border.width: 1
     color: "#FFFFFF"
+
+    function switchPage(next) {
+
+        // save settings for current page;
+        if (typeof pages[currentPage].saveSettings !== 'undefined') {
+            pages[currentPage].saveSettings(settings);
+        }
+
+        if(next === false) {
+            if(currentPage > 0) {
+                pages[currentPage].opacity = 0
+                pages[--currentPage].opacity = 1
+            }
+        } else {
+            if(currentPage < pages.length - 1) {
+                pages[currentPage].opacity = 0
+                pages[++currentPage].opacity = 1
+            }
+        }
+
+        // disallow "next" button until passwords match
+        if (pages[currentPage] === passwordPage) {
+            nextButton.visible = passwordPage.passwordValid
+        }
+
+        // display settings summary
+        if (pages[currentPage] === finishPage) {
+            finishPage.updateSettingsSummary();
+            nextButton.visible = false
+        } else {
+            nextButton.visible = true
+        }
+    }
+
 
     Rectangle {
         id: nextButton
@@ -61,29 +100,8 @@ Rectangle {
         }
     }
 
-    property int currentPage: 0
-    function switchPage(next) {
-        var pages = new Array()
-        pages[0] = welcomePage
-        pages[1] = optionsPage
-        pages[2] = createWalletPage
-        pages[3] = passwordPage
-        pages[4] = configurePage
-        pages[5] = donationPage
-        pages[6] = finishPage
 
-        if(next === false) {
-            if(currentPage > 0) {
-                pages[currentPage].opacity = 0
-                pages[--currentPage].opacity = 1
-            }
-        } else {
-            if(currentPage < pages.length - 1) {
-                pages[currentPage].opacity = 0
-                pages[++currentPage].opacity = 1
-            }
-        }
-    }
+
 
     WizardWelcome {
         id: welcomePage
@@ -118,16 +136,6 @@ Rectangle {
 
     WizardPassword {
         id: passwordPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
-    }
-
-    WizardConfigure {
-        id: configurePage
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: nextButton.left
@@ -192,7 +200,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        visible: parent.currentPage === 6
+        visible: parent.pages[currentPage] === finishPage
         onClicked: wizard.useMoneroClicked()
     }
 }

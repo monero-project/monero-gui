@@ -38,6 +38,12 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function saveSettings(settingsObject) {
+        settingsObject['auto_donations_enabled'] = enableAutoDonationCheckBox.checked;
+        settingsObject['auto_donations_amount']  = autoDonationAmountText.text;
+        settingsObject['allow_background_mining'] = allowBackgroundMiningCheckBox.checked;
+    }
+
     Row {
         id: dotsRow
         anchors.top: parent.top
@@ -94,6 +100,7 @@ Item {
             spacing: 2
 
             CheckBox {
+                id: enableAutoDonationCheckBox
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Enable auto-donations of?")
                 background: "#F0EEEE"
@@ -110,6 +117,7 @@ Item {
                 width: 41
 
                 TextInput {
+                    id: autoDonationAmountText
                     anchors.fill: parent
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -148,6 +156,35 @@ Item {
             text: qsTr("For every transaction, a small transaction fee is charged. This option lets you add an additional amount, " +
                        "as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% " +
                        "autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.")
+        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 12
+
+            CheckBox {
+                id: allowBackgroundMiningCheckBox
+                text: qsTr("Allow background mining?")
+                anchors.left: parent.left
+                anchors.right: parent.right
+                background: "#F0EEEE"
+                fontColor: "#4A4646"
+                fontSize: 18
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: true
+            }
+
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                font.family: "Arial"
+                font.pixelSize: 15
+                color: "#4A4646"
+                wrapMode: Text.Wrap
+                text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
+                           "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+            }
         }
     }
 }

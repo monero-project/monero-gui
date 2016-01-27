@@ -37,6 +37,22 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function buildSettingsString() {
+        var str = "<br>" + qsTr("<b>Language:</b> ") + wizard.settings['language'] + "<br>"
+            + qsTr("<b>Account name:</b> ") + wizard.settings['account_name'] + "<br>"
+            + qsTr("<b>Words:</b> ") + wizard.settings['words'] + "<br>"
+            + qsTr("<b>Wallet Path: </b>") + wizard.settings['wallet_path'] + "<br>"
+            + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
+            + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"
+            + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
+        return str;
+    }
+    function updateSettingsSummary() {
+        settingsText.text = qsTr("An overview of your Monero configuration is below:")
+                            + "<br>"
+                            + buildSettingsString();
+    }
+
     Row {
         id: dotsRow
         anchors.top: parent.top
@@ -84,14 +100,15 @@ Item {
         }
 
         Text {
+            id: settingsText
             anchors.left: parent.left
             anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 18
             wrapMode: Text.Wrap
+            textFormat: Text.RichText
             //renderType: Text.NativeRendering
             color: "#4A4646"
-            text: qsTr("An overview of your Monero configuration is below:")
         }
     }
 }
