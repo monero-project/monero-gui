@@ -28,7 +28,3 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-# copy language files (xml and images) to the output directory
-copydata.commands = $(COPY_DIR) $$shell_path($$PWD/lang) $$shell_path($$DESTDIR/lang)
-QMAKE_EXTRA_TARGETS += copydata
-POST_TARGETDEPS += copydata

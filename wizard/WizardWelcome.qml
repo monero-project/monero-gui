@@ -75,7 +75,7 @@ Item {
 
     XmlListModel {
         id: languagesModel
-        source: "file:///" + applicationDirectory + "/lang/languages.xml"
+        source: "/lang/languages.xml"
         query: "/languages/language"
 
         XmlRole { name: "name"; query: "@name/string()" }
@@ -113,7 +113,7 @@ Item {
                 color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
                 Image {
                     anchors.centerIn: parent
-                    source: "file:///" + applicationDirectory + flag
+                    source: flag
                 }
             }
 
