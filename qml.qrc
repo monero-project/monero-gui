@@ -96,5 +96,16 @@
         <file>wizard/WizardDonation.qml</file>
         <file>wizard/WizardFinish.qml</file>
         <file>wizard/WizardPasswordInput.qml</file>
+        <file>lang/languages.xml</file>
+        <file>lang/flags/bangladesh.png</file>
+        <file>lang/flags/brazil.png</file>
+        <file>lang/flags/china.png</file>
+        <file>lang/flags/german.png</file>
+        <file>lang/flags/india.png</file>
+        <file>lang/flags/palestine.png</file>
+        <file>lang/flags/rpa.png</file>
+        <file>lang/flags/russia.png</file>
+        <file>lang/flags/uk.png</file>
+        <file>lang/flags/usa.png</file>
     </qresource>
 </RCC>

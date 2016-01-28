@@ -62,11 +62,9 @@ Rectangle {
 
         // disallow "next" button until passwords match
         if (pages[currentPage] === passwordPage) {
-            nextButton.visible = passwordPage.passwordValid
-        }
-
-        // display settings summary
-        if (pages[currentPage] === finishPage) {
+            nextButton.visible = passwordPage.passwordValid;
+        } else if (pages[currentPage] === finishPage) {
+            // display settings summary
             finishPage.updateSettingsSummary();
             nextButton.visible = false
         } else {
