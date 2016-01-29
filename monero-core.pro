@@ -11,6 +11,30 @@ SOURCES += main.cpp \
     filter.cpp \
     clipboardAdapter.cpp
 
+lupdate_only {
+SOURCES = *.qml \
+          components/*.qml \
+          pages/*.qml \
+          wizard/*.qml
+}
+
+# translations files;
+TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
+               monero-core_de.ts  # Deutsch
+
+
+# extra make targets for lupdate and lrelease invocation
+lupdate.commands = lupdate $$_PRO_FILE_
+lupdate.depends = $$SOURCES $$HEADERS $$TRANSLATIONS
+lrelease.commands = lrelease $$_PRO_FILE_
+lrelease.depends = lupdate
+translate.commands = $(COPY) *.qm ${DESTDIR}
+translate.depends = lrelease
+
+QMAKE_EXTRA_TARGETS += lupdate lrelease
+
+
+
 CONFIG(release, debug|release) {
    DESTDIR=release
 }
