@@ -60,15 +60,16 @@ Rectangle {
             }
         }
 
-        // disallow "next" button until passwords match
+        // disable "next" button until passwords match
         if (pages[currentPage] === passwordPage) {
-            nextButton.visible = passwordPage.passwordValid;
+            nextButton.enabled = passwordPage.passwordValid;
         } else if (pages[currentPage] === finishPage) {
             // display settings summary
             finishPage.updateSettingsSummary();
             nextButton.visible = false
         } else {
             nextButton.visible = true
+            nextButton.enabled = true
         }
     }
 
@@ -79,10 +80,10 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 50
         visible: wizard.currentPage !== 1 && wizard.currentPage !== 6
-
         width: 50; height: 50
         radius: 25
-        color: nextArea.containsMouse ? "#FF4304" : "#FF6C3C"
+        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
+
 
         Image {
             anchors.centerIn: parent

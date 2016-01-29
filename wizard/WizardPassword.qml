@@ -40,10 +40,8 @@ Item {
 
     function handlePassword() {
         // allow to forward step only if passwords match
-        // print("pass1: ", passwordItem.password)
-        // print("pass2: ", retypePasswordItem.password)
         // TODO: update password strength
-        wizard.nextButton.visible = passwordItem.password === retypePasswordItem.password
+        wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
     }
 
     property bool passwordValid : passwordItem.password != ''
