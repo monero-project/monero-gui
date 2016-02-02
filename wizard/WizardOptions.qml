@@ -31,6 +31,7 @@ import QtQuick 2.2
 Item {
     id: page
     signal createWalletClicked()
+    signal recoveryWalletClicked()
     opacity: 0
     visible: false
     Behavior on opacity {
@@ -126,6 +127,7 @@ Item {
                     id: recoverWalletArea
                     anchors.fill: parent
                     hoverEnabled: true
+                    onClicked: page.recoveryWalletClicked()
                 }
             }
 

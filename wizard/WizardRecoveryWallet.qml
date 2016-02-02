@@ -48,7 +48,8 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        titleText: qsTr("A new wallet has been created for you")
-        wordsTextTitle: qsTr("This is the 24 word mnemonic for your wallet")
+        accountNameText: qsTr("My account name")
+        titleText: qsTr("We're ready to recover your account")
+        wordsTextTitle: qsTr("This is the 25 word mnemonic for your wallet")
     }
 }
