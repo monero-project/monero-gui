@@ -31,6 +31,7 @@
 #include <QtQml>
 #include "clipboardAdapter.h"
 #include "filter.h"
+#include "oscursor.h"
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +42,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
 
     QQmlApplicationEngine engine;
+
+    OSCursor cursor;
+    engine.rootContext()->setContextProperty("globalCursor", &cursor);
+
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     QObject *rootObject = engine.rootObjects().first();

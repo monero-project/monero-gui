@@ -355,17 +355,17 @@ ApplicationWindow {
                                                                  "images/resize.png"
             }
 
-            property int previousX: 0
-            property int previousY: 0
+            property var previousPosition
             onPressed: {
-                previousX = mouseX
-                previousY = mouseY
+                previousPosition = globalCursor.getPosition()
             }
 
             onPositionChanged: {
                 if(!pressed) return
-                var dx = previousX - mouseX
-                var dy = previousY - mouseY
+                var pos = globalCursor.getPosition()
+                //var delta = previousPosition - pos
+                var dx = previousPosition.x - pos.x
+                var dy = previousPosition.y - pos.y
 
                 if(appWindow.width - dx > parent.maxWidth)
                     appWindow.width -= dx
@@ -374,6 +374,7 @@ ApplicationWindow {
                 if(appWindow.height - dy > parent.maxHeight)
                     appWindow.height -= dy
                 else appWindow.height = parent.maxHeight
+                previousPosition = pos
             }
         }
 
@@ -390,13 +391,16 @@ ApplicationWindow {
                 property var previousPosition
                 anchors.fill: parent
                 propagateComposedEvents: true
-                onPressed: previousPosition = Qt.point(mouseX, mouseY)
+                onPressed: previousPosition = globalCursor.getPosition()
                 onPositionChanged: {
                     if (pressedButtons == Qt.LeftButton) {
-                        var dx = mouseX - previousPosition.x
-                        var dy = mouseY - previousPosition.y
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
+
                         appWindow.x += dx
                         appWindow.y += dy
+                        previousPosition = pos
                     }
                 }
             }

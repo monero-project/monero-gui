@@ -4,12 +4,14 @@ QT += qml quick widgets
 
 HEADERS += \
     filter.h \
-    clipboardAdapter.h
+    clipboardAdapter.h \
+    oscursor.h
 
 
 SOURCES += main.cpp \
     filter.cpp \
-    clipboardAdapter.cpp
+    clipboardAdapter.cpp \
+    oscursor.cpp
 
 lupdate_only {
 SOURCES = *.qml \
@@ -53,5 +55,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES += \
-    wizard/WizardManageWalletUI.qml
+    wizard/WizardManageWalletUI.qml \
+    .gitignore
 
