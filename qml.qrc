@@ -110,5 +110,6 @@
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
+        <file>wizard/utils.js</file>
     </qresource>
 </RCC>
