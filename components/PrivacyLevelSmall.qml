@@ -36,6 +36,13 @@ Item {
     height: 40
     clip: true
 
+    onFillLevelChanged: {
+        if (!interactive) {
+            //print("fillLevel: " + fillLevel)
+            fillRect.width = row.positions[fillLevel].currentX + row.x
+        }
+    }
+
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -134,6 +141,7 @@ Item {
                 if(index !== -1) {
                     fillRect.width = Qt.binding(function(){ return row.positions[index].currentX + row.x })
                     item.fillLevel = index
+                    print ("fillLevel: " + item.fillLevel)
                 }
             }
 
@@ -148,7 +156,7 @@ Item {
         anchors.rightMargin: 8
         anchors.top: bar.bottom
         anchors.topMargin: 5
-        property var positions: new Array()
+        property var positions: []
 
         Row {
             id: row2

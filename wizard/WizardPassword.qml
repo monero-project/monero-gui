@@ -28,10 +28,15 @@
 
 import QtQuick 2.2
 import "../components"
+import "utils.js" as Utils
 
 Item {
     opacity: 0
     visible: false
+    property bool passwordValid : passwordItem.password != ''
+                                  && passwordItem.password === retypePasswordItem.password
+
+    property alias titleText: titleText.text
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -40,12 +45,15 @@ Item {
 
     function handlePassword() {
         // allow to forward step only if passwords match
-        // TODO: update password strength
         wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
+        // scorePassword returns value from 1..100
+        var strength = Utils.scorePassword(passwordItem.password)
+        // privacyLevel component uses 1..13 scale
+        privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
     }
 
-    property bool passwordValid : passwordItem.password != ''
-                                  && passwordItem.password === retypePasswordItem.password
+
+
 
 
     Row {
@@ -84,6 +92,7 @@ Item {
         spacing: 24
 
         Text {
+            id: titleText
             anchors.left: parent.left
             width: headerColumn.width - dotsRow.width - 16
             font.family: "Arial"
@@ -91,7 +100,7 @@ Item {
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: qsTr("Now that your wallet has been created, please set a password for the wallet")
+
         }
 
         Text {

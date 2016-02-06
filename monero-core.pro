@@ -55,13 +55,14 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 
-DISTFILES += \
+
 
 
 OTHER_FILES += \
     .gitignore \
     monero-core_de.ts \
     monero-core_en.ts
+
 
 
 

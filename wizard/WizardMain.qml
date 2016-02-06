@@ -34,9 +34,13 @@ Rectangle {
     property alias nextButton : nextButton
     property var settings : ({})
     property int currentPage: 0
-    property var pages: [welcomePage, optionsPage, createWalletPage, recoveryWalletPage,
-                         passwordPage,/*configurePage,*/ donationPage, finishPage ]
-    property string path;
+
+    property var paths: {
+        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
+        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ]
+    }
+    property string currentPath: "create_wallet"
+    property var pages: paths[currentPath]
 
     signal useMoneroClicked()
     border.color: "#DBDBDB"
@@ -51,20 +55,8 @@ Rectangle {
         print ("switchpage: start: currentPage: ", currentPage);
 
         if (currentPage > 0 || currentPage < pages.length - 1) {
-
             pages[currentPage].opacity = 0
-
             var step_value = next ? 1 : -1
-            // special case - we stepping backward from password page:
-            // previous page "createWallet" or "recoveryWallet"
-            if (!next) {
-                print ("stepping back: current page: ", currentPage);
-                if ((pages[currentPage] === passwordPage && path === "create_walled")
-                        || (pages[currentPage] === recoveryWalletPage) ) {
-                    step_value *= 2;
-                }
-            }
-
             currentPage += step_value
             pages[currentPage].opacity = 1;
             handlePageChanged();
@@ -73,25 +65,38 @@ Rectangle {
     }
 
     function handlePageChanged() {
-        // disable "next" button until passwords match
-        if (pages[currentPage] === passwordPage) {
+        switch (pages[currentPage]) {
+        case passwordPage:
+            // disable "next" button until passwords match
             nextButton.enabled = passwordPage.passwordValid;
-        } else if (pages[currentPage] === finishPage) {
+            if (currentPath === "create_wallet") {
+                passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet")
+            } else {
+                passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet")
+            }
+            break;
+        case finishPage:
             // display settings summary
             finishPage.updateSettingsSummary();
-            nextButton.visible = false
-        } else {
-            var enableButton = pages[currentPage] !== optionsPage;
-            nextButton.visible = nextButton.enabled = enableButton
-            print ("nextButtonVisible: ", enableButton)
+            nextButton.visible = false;
+            break;
+        case recoveryWalletPage:
+            // TODO: disable "next button" until 25 words private key entered
+            // nextButton.enabled = false;
+            break
+        default:
+            var nextButtonVisible = pages[currentPage] !== optionsPage;
+            //nextButton.visible = nextButton.enabled = nextButtonVisible;
         }
+
     }
 
     function openCreateWalletPage() {
         print ("show create wallet page");
         pages[currentPage].opacity = 0;
         createWalletPage.opacity = 1
-        path = "create_wallet";
+        currentPath = "create_wallet"
+        pages = paths[currentPath]
         currentPage = pages.indexOf(createWalletPage)
         handlePageChanged()
     }
@@ -100,7 +105,8 @@ Rectangle {
         print ("show recovery wallet page");
         pages[currentPage].opacity = 0
         recoveryWalletPage.opacity = 1
-        path = "recovery_wallet"
+        currentPath = "recovery_wallet"
+        pages = paths[currentPath]
         currentPage = pages.indexOf(recoveryWalletPage)
         handlePageChanged()
     }
@@ -132,8 +138,6 @@ Rectangle {
             onClicked: wizard.switchPage(true)
         }
     }
-
-
 
 
     WizardWelcome {
@@ -246,7 +250,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        visible: parent.pages[currentPage] === finishPage
+        visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: wizard.useMoneroClicked()
     }
 }

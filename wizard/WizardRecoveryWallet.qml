@@ -55,5 +55,9 @@ Item {
         wordsTextItem.tipTextVisible: false
         wordsTextItem.memoTextReadOnly: false
         wordsTextItem.memoText: ""
+        wordsTextItem.onMemoTextChanged: {
+            var wordsArray = wordsTextItem.memoText.trim().split(" ")
+            //wizard.nextButton.enabled = wordsArray.length === 25
+        }
     }
 }
