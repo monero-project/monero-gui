@@ -50,6 +50,10 @@ Item {
         id: uiItem
         accountNameText: qsTr("My account name")
         titleText: qsTr("We're ready to recover your account")
-        wordsTextTitle: qsTr("This is the 25 word mnemonic for your wallet")
+        wordsTextTitle: qsTr("Please enter your 25 word private key")
+        wordsTextItem.clipboardButtonVisible: false
+        wordsTextItem.tipTextVisible: false
+        wordsTextItem.memoTextReadOnly: false
+        wordsTextItem.memoText: ""
     }
 }

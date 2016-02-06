@@ -109,5 +109,6 @@
         <file>lang/flags/usa.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
+        <file>wizard/WizardMemoTextInput.qml</file>
     </qresource>
 </RCC>

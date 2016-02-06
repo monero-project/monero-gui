@@ -37,9 +37,8 @@ Item {
     property alias titleText: titleText.text
     property alias accountNameText: accountName.text
     property alias wordsTextTitle: frameHeader.text
-    property alias wordsText: wordsText.text
-    property alias wordsTextTip: tipRect
     property alias walletPath: fileUrlInput.text
+    property alias wordsTextItem : memoTextItem
 
 
     // TODO extend properties if needed
@@ -147,81 +146,21 @@ Item {
         //renderType: Text.NativeRendering
         color: "#4A4646"
         elide: Text.ElideRight
-
+        horizontalAlignment: Text.AlignHCenter
     }
 
-    Rectangle {
-        id: wordsRect
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: frameHeader.bottom
+
+    WizardMemoTextInput {
+        id : memoTextItem
+        width: parent.width
+        anchors.top : frameHeader.bottom
         anchors.topMargin: 16
-        height: 182
-        border.width: 1
-        border.color: "#DBDBDB"
-
-        TextEdit {
-            id: wordsText
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: tipRect.top
-            anchors.margins: 16
-            font.family: "Arial"
-            font.pixelSize: 24
-            wrapMode: Text.Wrap
-            selectByMouse: true
-            readOnly: true
-            color: "#3F3F3F"
-            text: "bound class paint gasp task soul forgot past pleasure physical circle appear shore bathroom glove women crap busy beauty bliss idea give needle burden"
-        }
-
-        Image {
-            anchors.right: parent.right
-            anchors.bottom: tipRect.top
-            source: "qrc:///images/greyTriangle.png"
-
-            Image {
-                anchors.centerIn: parent
-                source: "qrc:///images/copyToClipboard.png"
-            }
-
-            Clipboard { id: clipboard }
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: clipboard.setText(wordsText.text)
-            }
-        }
-
-        Rectangle {
-            id: tipRect
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 65
-            color: "#DBDBDB"
-            property alias text: wordsTipText.text
-
-            Text {
-                id: wordsTipText
-                anchors.fill: parent
-                anchors.margins: 16
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.family: "Arial"
-                font.pixelSize: 15
-                color: "#4A4646"
-                wrapMode: Text.Wrap
-                text: qsTr("It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.")
-            }
-        }
     }
 
     Row {
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: wordsRect.bottom
+        anchors.top: memoTextItem.bottom
         anchors.topMargin: 24
         spacing: 16
 

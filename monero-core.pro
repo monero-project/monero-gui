@@ -27,7 +27,7 @@ TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
 
 # extra make targets for lupdate and lrelease invocation
 lupdate.commands = lupdate $$_PRO_FILE_
-lupdate.depends = $$SOURCES $$HEADERS $$TRANSLATIONS
+lupdate.depends = $$SOURCES $$HEADERS 
 lrelease.commands = lrelease $$_PRO_FILE_
 lrelease.depends = lupdate
 translate.commands = $(COPY) *.qm ${DESTDIR}
@@ -56,5 +56,6 @@ include(deployment.pri)
 
 DISTFILES += \
     wizard/WizardManageWalletUI.qml \
-    .gitignore
+    .gitignore \
+    wizard/WizardMemoTextInput.qml
 
