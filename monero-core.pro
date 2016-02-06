@@ -26,6 +26,7 @@ TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
 
 
 # extra make targets for lupdate and lrelease invocation
+# use "make lupdate" to update *.ts files and "make lrelease" to generate *.qm files
 lupdate.commands = lupdate $$_PRO_FILE_
 lupdate.depends = $$SOURCES $$HEADERS 
 lrelease.commands = lrelease $$_PRO_FILE_
@@ -55,7 +56,14 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 DISTFILES += \
-    wizard/WizardManageWalletUI.qml \
+
+
+OTHER_FILES += \
     .gitignore \
-    wizard/WizardMemoTextInput.qml
+    monero-core_de.ts \
+    monero-core_en.ts
+
+
+
+
 
