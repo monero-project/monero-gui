@@ -65,6 +65,8 @@ Rectangle {
     }
 
     function handlePageChanged() {
+        var nextButtonVisible = pages[currentPage] !== optionsPage;
+        nextButton.visible = nextButtonVisible;
         switch (pages[currentPage]) {
         case passwordPage:
             // disable "next" button until passwords match
@@ -85,8 +87,7 @@ Rectangle {
             // nextButton.enabled = false;
             break
         default:
-            var nextButtonVisible = pages[currentPage] !== optionsPage;
-            //nextButton.visible = nextButton.enabled = nextButtonVisible;
+
         }
 
     }
