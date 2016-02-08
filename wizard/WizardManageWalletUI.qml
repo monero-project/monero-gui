@@ -204,10 +204,12 @@ Item {
                 color: "#6B0072"
                 verticalAlignment: Text.AlignVCenter
                 selectByMouse: true
-                text: "~/.monero/mywallet/"
+
+                text: moneroAccountsDir + "/My Wallet"
                 onFocusChanged: {
                     if(focus) {
-                        fileDialog.visible = true
+                        fileDialog.folder = text
+                        fileDialog.open()
                     }
                 }
             }

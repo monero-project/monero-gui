@@ -29,6 +29,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
+#include <QStandardPaths>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -45,6 +46,20 @@ int main(int argc, char *argv[])
 
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
+
+//  export to QML monero accounts root directory
+//  wizard is talking about where
+//  to save the wallet file (.keys, .bin), they have to be user-accessible for
+//  backups - I reckon we save that in My Documents\Monero Accounts\ on
+//  Windows, ~/Monero Accounts/ on nix / osx
+#ifdef Q_OS_WIN
+    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+#elif defined(Q_OS_UNIX)
+    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+#endif
+    if (!moneroAccountsRootDir.empty()) {
+        engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsRootDir.at(0) + "/Monero Accounts");
+    }
 
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
