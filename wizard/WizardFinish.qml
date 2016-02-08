@@ -94,6 +94,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             text: qsTr("You’re all setup!")
@@ -107,6 +108,7 @@ Item {
             font.pixelSize: 18
             wrapMode: Text.Wrap
             textFormat: Text.RichText
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#4A4646"
         }

@@ -86,6 +86,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
         }
@@ -96,6 +97,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 18
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#4A4646"
             text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:")

@@ -58,7 +58,8 @@ Item {
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
-            text: qsTr("I want")
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("Welcome to Monero!")
         }
 
         Text {
@@ -69,6 +70,7 @@ Item {
             //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             text: qsTr("Please select one of the following options:")
         }
     }
