@@ -46,6 +46,12 @@ Item {
         settingsObject['wallet_path'] = uiItem.walletPath
     }
 
+    function createWallet(settingsObject) {
+        // print ("Language: " + settingsObject.language);
+        var wallet = walletManager.createWallet(uiItem.accountNameText, "", settingsObject.language);
+        uiItem.wordsTextItem.memoText = wallet.seed
+    }
+
     WizardManageWalletUI {
         id: uiItem
         titleText: qsTr("A new wallet has been created for you")
@@ -53,6 +59,5 @@ Item {
         wordsTextItem.clipboardButtonVisible: true
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true
-
     }
 }

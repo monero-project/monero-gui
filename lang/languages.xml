@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <languages>
-	<language name="US English" flag="/lang/flags/usa.png" qs="none"/>
-	<language name="UK English" flag="/lang/flags/uk.png" qs="none"/>
-	<language name="Russia" flag="/lang/flags/russia.png" qs="none"/>
-	<language name="RPA" flag="/lang/flags/rpa.png" qs="none"/>
-	<language name="Palestine" flag="/lang/flags/palestine.png" qs="none"/>
-	<language name="India" flag="/lang/flags/india.png" qs="none"/>
-	<language name="German" flag="/lang/flags/german.png" qs="none"/>
-	<language name="China" flag="/lang/flags/china.png" qs="none"/>
-	<language name="Brazil" flag="/lang/flags/brazil.png" qs="none"/>
-	<language name="Bangladesh" flag="/lang/flags/bangladesh.png" qs="none"/>
+	<language name="US English" locale="en_US" flag="/lang/flags/usa.png" qs="none"/>
+	<language name="UK English" locale="en_GB" flag="/lang/flags/uk.png" qs="none"/>
+	<language name="Russia"     locale="ru_RU" flag="/lang/flags/russia.png" qs="none"/>
+	<language name="RPA"        locale="TODO"  flag="/lang/flags/rpa.png" qs="none"/>
+	<language name="Palestine"  locale="TODO"  flag="/lang/flags/palestine.png" qs="none"/>
+	<language name="India"      locale="hi_IN" flag="/lang/flags/india.png" qs="none"/>
+	<language name="German"     locale="de_DE" flag="/lang/flags/german.png" qs="none"/>
+	<language name="China"      locale="zh_CN" flag="/lang/flags/china.png" qs="none"/>
+	<language name="Brazil"     locale="pt_BR" flag="/lang/flags/brazil.png" qs="none"/>
+	<language name="Bangladesh" locale="TODO"  flag="/lang/flags/bangladesh.png" qs="none"/>
 </languages>

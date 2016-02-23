@@ -99,7 +99,9 @@ Rectangle {
         currentPath = "create_wallet"
         pages = paths[currentPath]
         currentPage = pages.indexOf(createWalletPage)
+        createWalletPage.createWallet(settings)
         handlePageChanged()
+
     }
 
     function openRecoveryWalletPage() {

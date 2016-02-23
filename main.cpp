@@ -33,6 +33,9 @@
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
+#include "WalletManager.h"
+#include "Wallet.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -41,11 +44,13 @@ int main(int argc, char *argv[])
     app.installEventFilter(eventFilter);
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
+    qmlRegisterType<Wallet>("moneroWallet", 1, 0, "Wallet");
 
     QQmlApplicationEngine engine;
 
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
+    engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where

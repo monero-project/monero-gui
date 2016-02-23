@@ -25,7 +25,7 @@ Column {
         TextEdit {
             id: memoTextInput
             textMargin: 8
-            text: "bound class paint gasp task soul forgot past pleasure physical circle appear shore bathroom glove women crap busy beauty bliss idea give needle burden"
+            text: ""
             font.family: "Arial"
             font.pointSize: 16
             wrapMode: TextInput.Wrap

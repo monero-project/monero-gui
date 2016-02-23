@@ -2,16 +2,22 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
+
 HEADERS += \
     filter.h \
     clipboardAdapter.h \
-    oscursor.h
+    oscursor.h \
+    Wallet2Adaptor.h \
+    WalletManager.h \
+    Wallet.h
 
 
 SOURCES += main.cpp \
     filter.cpp \
     clipboardAdapter.cpp \
-    oscursor.cpp
+    oscursor.cpp \
+    WalletManager.cpp \
+    Wallet.cpp
 
 lupdate_only {
 SOURCES = *.qml \
@@ -62,6 +68,9 @@ OTHER_FILES += \
     .gitignore \
     monero-core_de.ts \
     monero-core_en.ts
+
+DISTFILES += \
+    notes.txt
 
 
 
