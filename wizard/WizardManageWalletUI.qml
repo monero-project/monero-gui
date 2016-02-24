@@ -183,9 +183,10 @@ Item {
             FileDialog {
                 id: fileDialog
                 selectMultiple: false
-                title: "Please choose a file"
+                selectFolder: true
+                title: "Please choose a directory"
                 onAccepted: {
-                    fileUrlInput.text = fileDialog.fileUrl
+                    fileUrlInput.text = fileDialog.folder
                     fileDialog.visible = false
                 }
                 onRejected: {

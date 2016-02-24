@@ -7,7 +7,6 @@ HEADERS += \
     filter.h \
     clipboardAdapter.h \
     oscursor.h \
-    Wallet2Adaptor.h \
     WalletManager.h \
     Wallet.h
 

@@ -44,12 +44,29 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
+
+
+        var new_wallet_filename = settingsObject.wallet_path + "/"
+                + settingsObject.account_name;
+
+        // moving wallet files to the new destination, if user changed it
+        if (new_wallet_filename !== settingsObject.wallet_filename) {
+            walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
+        }
     }
 
     function createWallet(settingsObject) {
-        // print ("Language: " + settingsObject.language);
-        var wallet = walletManager.createWallet(uiItem.accountNameText, "", settingsObject.language);
-        uiItem.wordsTextItem.memoText = wallet.seed
+        var wallet_filename = uiItem.walletPath + "/" + uiItem.accountNameText
+        if (typeof settingsObject.wallet === 'undefined') {
+            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+            uiItem.wordsTextItem.memoText = wallet.seed
+            // saving wallet in "global" settings object
+            // TODO: wallet should have a property pointing to the file where it stored or loaded from
+            settingsObject.wallet = wallet
+        } else {
+            print("wallet already created. we just stepping back");
+        }
+        settingsObject.wallet_filename = wallet_filename
     }
 
     WizardManageWalletUI {
