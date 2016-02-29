@@ -40,7 +40,7 @@ Item {
     function buildSettingsString() {
         var str = "<br>" + qsTr("<b>Language:</b> ") + wizard.settings['language'] + "<br>"
             + qsTr("<b>Account name:</b> ") + wizard.settings['account_name'] + "<br>"
-            + qsTr("<b>Words:</b> ") + wizard.settings['words'] + "<br>"
+            + qsTr("<b>Words:</b> ") + wizard.settings['wallet'].seed + "<br>"
             + qsTr("<b>Wallet Path: </b>") + wizard.settings['wallet_path'] + "<br>"
             + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
             + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"

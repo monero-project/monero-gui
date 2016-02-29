@@ -46,6 +46,10 @@ Item {
         settingsObject['wallet_path'] = uiItem.walletPath
     }
 
+    function recoveryWallet() {
+
+    }
+
     WizardManageWalletUI {
         id: uiItem
         accountNameText: qsTr("My account name")

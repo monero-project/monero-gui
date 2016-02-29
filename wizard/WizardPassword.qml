@@ -43,6 +43,10 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function saveSettings(settingsObject) {
+        settingsObject.wallet.setPassword(passwordItem.password)
+    }
+
     function handlePassword() {
         // allow to forward step only if passwords match
         wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
@@ -51,8 +55,6 @@ Item {
         // privacyLevel component uses 1..13 scale
         privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
     }
-
-
 
 
 

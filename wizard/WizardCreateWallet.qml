@@ -46,13 +46,19 @@ Item {
         settingsObject['wallet_path'] = uiItem.walletPath
 
 
+
         var new_wallet_filename = settingsObject.wallet_path + "/"
                 + settingsObject.account_name;
 
         // moving wallet files to the new destination, if user changed it
         if (new_wallet_filename !== settingsObject.wallet_filename) {
-            walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
+            // using previously saved wallet;
+            settingsObject.wallet.rename(new_wallet_filename);
+            //walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
         }
+
+        // saving wallet_filename;
+        settingsObject['wallet_filename'] = new_wallet_filename;
     }
 
     function createWallet(settingsObject) {
@@ -66,6 +72,7 @@ Item {
         } else {
             print("wallet already created. we just stepping back");
         }
+
         settingsObject.wallet_filename = wallet_filename
     }
 

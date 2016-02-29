@@ -9,21 +9,7 @@
 WalletManager * WalletManager::m_instance = nullptr;
 
 
-namespace {
-    bool createFileWrapper(const QString &filename)
-    {
-        QFile file(filename);
-        // qDebug("%s: about to create file: %s", __FUNCTION__, qPrintable(filename));
-        bool result = file.open(QIODevice::WriteOnly);
-        if (!result ){
-            qWarning("%s: error creating file '%s' : '%s'",
-                     __FUNCTION__,
-                     qPrintable(filename),
-                     qPrintable(file.errorString()));
-        }
-        return result;
-    }
-}
+
 
 
 WalletManager *WalletManager::instance()
@@ -38,24 +24,40 @@ WalletManager *WalletManager::instance()
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language)
 {
-    Wallet * wallet = new Wallet(this);
-    // Create dummy files for testing
     QFileInfo fi(path);
-    QDir tempDir;
-    tempDir.mkpath(fi.absolutePath());
-    createFileWrapper(path);
-    createFileWrapper(path + ".keys");
-    createFileWrapper(path + ".address.txt");
+    if (fi.exists()) {
+        qCritical("%s: already exists", __FUNCTION__);
+        // TODO: set error and error string
+        // return nullptr;
+    }
+    Wallet * wallet = new Wallet(path, password, language);
     return wallet;
 }
 
-Wallet *WalletManager::openWallet(const QString &path, const QString &language)
+Wallet *WalletManager::openWallet(const QString &path, const QString &language, const QString &password)
 {
+    QFileInfo fi(path);
+    if (fi.exists()) {
+        qCritical("%s: not exists", __FUNCTION__);
+        // TODO: set error and error string
+        // return nullptr;
+    }
+    // TODO: call the libwallet api here;
+    Wallet * wallet = new Wallet(path, password, language);
+
+    return wallet;
+}
+
+Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, const QString &language)
+{
+    // TODO: call the libwallet api here;
+
     return nullptr;
 }
 
 bool WalletManager::moveWallet(const QString &src, const QString &dst_)
 {
+    // TODO: move this to libwallet;
     QFile walletFile(src);
     if (!walletFile.exists()) {
         qWarning("%s: source file [%s] doesn't exits", __FUNCTION__,
@@ -81,8 +83,26 @@ bool WalletManager::moveWallet(const QString &src, const QString &dst_)
 
     return QFile::exists(dst) && QFile::exists(dstWalletKeysFile)
             && QFile::exists(dstWalletAddressFile);
+}
 
+void WalletManager::closeWallet(Wallet *wallet)
+{
+    delete wallet;
+}
 
+QString WalletManager::walletLanguage(const QString &locale)
+{
+    return "English";
+}
+
+int WalletManager::error() const
+{
+    return 0;
+}
+
+QString WalletManager::errorString() const
+{
+    return tr("Unknown error");
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
