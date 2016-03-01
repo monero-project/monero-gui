@@ -45,8 +45,6 @@ Item {
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
 
-
-
         var new_wallet_filename = settingsObject.wallet_path + "/"
                 + settingsObject.account_name;
 
@@ -64,7 +62,7 @@ Item {
     function createWallet(settingsObject) {
         var wallet_filename = uiItem.walletPath + "/" + uiItem.accountNameText
         if (typeof settingsObject.wallet === 'undefined') {
-            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.locale)
             uiItem.wordsTextItem.memoText = wallet.seed
             // saving wallet in "global" settings object
             // TODO: wallet should have a property pointing to the file where it stored or loaded from
