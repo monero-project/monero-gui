@@ -2,7 +2,13 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
+WALLET_ROOT=$$PWD/bitmonero
+
 CONFIG += c++11
+
+INCLUDEPATH += $$WALLET_ROOT/include
+
+message($$INCLUDEPATH)
 
 HEADERS += \
     filter.h \
@@ -25,6 +31,8 @@ SOURCES = *.qml \
           pages/*.qml \
           wizard/*.qml
 }
+
+LIBS += -L$$WALLET_ROOT/lib -lwallet
 
 # translations files;
 TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
@@ -71,9 +79,3 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt
-
-
-
-
-
-

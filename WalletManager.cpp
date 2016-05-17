@@ -1,5 +1,6 @@
 #include "WalletManager.h"
 #include "Wallet.h"
+#include "wallet/wallet2_api.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -17,6 +18,8 @@ WalletManager *WalletManager::instance()
     if (!m_instance) {
         m_instance = new WalletManager;
     }
+    // Checking linkage (doesn't work, TODO: have every dependencies linked statically into libwallet)
+    Bitmonero::WalletManager * wallet_manager_impl = Bitmonero::WalletManagerFactory::getWalletManager();
 
     return m_instance;
 }
