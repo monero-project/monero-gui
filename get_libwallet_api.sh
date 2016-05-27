@@ -19,7 +19,7 @@ rm -fr $BITMONERO_DIR/build
 mkdir -p $BITMONERO_DIR/build/release
 pushd $BITMONERO_DIR/build/release
 
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
+cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
 
 pushd $BITMONERO_DIR/build/release/src/wallet
 make -j$CPU_CORE_COUNT

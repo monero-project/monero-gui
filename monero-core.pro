@@ -8,7 +8,6 @@ CONFIG += c++11
 
 INCLUDEPATH += $$WALLET_ROOT/include
 
-message($$INCLUDEPATH)
 
 HEADERS += \
     filter.h \
@@ -32,7 +31,16 @@ SOURCES = *.qml \
           wizard/*.qml
 }
 
-LIBS += -L$$WALLET_ROOT/lib -lwallet
+LIBS += -L$$WALLET_ROOT/lib \
+        -lwallet_merged \
+        -lboost_serialization \
+        -lboost_thread \
+        -lboost_system \
+        -lboost_date_time \
+        -lboost_filesystem \
+        -lboost_regex
+
+
 
 # translations files;
 TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
