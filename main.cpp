@@ -44,7 +44,8 @@ int main(int argc, char *argv[])
     app.installEventFilter(eventFilter);
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
-    qmlRegisterType<Wallet>("moneroWallet", 1, 0, "Wallet");
+    //qmlRegisterType<Wallet>("moneroWallet", 1, 0, "Wallet");
+    qmlRegisterType<Wallet>();
 
     QQmlApplicationEngine engine;
 

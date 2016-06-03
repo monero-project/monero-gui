@@ -6,23 +6,24 @@ WALLET_ROOT=$$PWD/bitmonero
 
 CONFIG += c++11
 
-INCLUDEPATH += $$WALLET_ROOT/include
+INCLUDEPATH += $$WALLET_ROOT/include \
+                $$PWD/src/libwalletqt
 
 
 HEADERS += \
     filter.h \
     clipboardAdapter.h \
     oscursor.h \
-    WalletManager.h \
-    Wallet.h
+    src/libwalletqt/WalletManager.h \
+    src/libwalletqt/Wallet.h
 
 
 SOURCES += main.cpp \
     filter.cpp \
     clipboardAdapter.cpp \
     oscursor.cpp \
-    WalletManager.cpp \
-    Wallet.cpp
+    src/libwalletqt/WalletManager.cpp \
+    src/libwalletqt/Wallet.cpp
 
 lupdate_only {
 SOURCES = *.qml \
