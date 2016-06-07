@@ -3,13 +3,18 @@
 
 #include <QObject>
 
-struct WalletImpl;
+namespace Bitmonero {
+    class Wallet; // forward declaration
+}
 class Wallet : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString seed READ getSeed)
 public:
-    explicit Wallet(QObject *parent = 0);
+    enum Status {
+        Status_Ok = 0,
+        Status_Error = 1
+    };
 
     //! returns mnemonic seed
     Q_INVOKABLE QString getSeed() const;
@@ -17,28 +22,31 @@ public:
     //! returns seed language
     Q_INVOKABLE QString getSeedLanguage() const;
 
+    //! returns last operation's status
+    Q_INVOKABLE int status() const;
+
+    //! returns last operation's error message
+    Q_INVOKABLE QString errorString() const;
 
     //! changes the password using existing parameters (path, seed, seed lang)
     Q_INVOKABLE bool setPassword(const QString &password);
-    //! returns curret wallet password
-    Q_INVOKABLE QString getPassword() const;
 
-    //! renames/moves wallet files
-    Q_INVOKABLE bool rename(const QString &name);
+    //! returns wallet's public address
+    Q_INVOKABLE QString address() const;
 
-    //! returns current wallet name (basename, as wallet consists of several files)
-    Q_INVOKABLE QString getBasename() const;
+    //! saves wallet to the file by given path
+    Q_INVOKABLE bool store(const QString &path);
 
-    Q_INVOKABLE int error() const;
-    Q_INVOKABLE QString errorString() const;
+
 
 private:
-    Wallet(const QString &path, const QString &password, const QString &language);
+    Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
+    ~Wallet();
 
 private:
     friend class WalletManager;
-    //! pimpl wrapper for libwallet;
-    WalletImpl * m_pimpl;
+    //! libwallet's
+    Bitmonero::Wallet * m_walletImpl;
 };
 
 #endif // WALLET_H

@@ -110,6 +110,15 @@ ApplicationWindow {
 
     }
 
+    function walletsFound() {
+        var wallets = walletManager.findWallets(moneroAccountsDir);
+        if (wallets.length === 0) {
+            wallets = walletManager.findWallets(applicationDirectory);
+        }
+        print(wallets);
+        return wallets.length > 0;
+    }
+
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
@@ -120,6 +129,8 @@ ApplicationWindow {
     Component.onCompleted: {
         x = (Screen.width - width) / 2
         y = (Screen.height - height) / 2
+        //
+        rootItem.state = walletsFound() ? "normal" : "wizard";
     }
 
     Item {

@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QUrl>
 
+
+
 WalletManager * WalletManager::m_instance = nullptr;
 
 
@@ -18,89 +20,55 @@ WalletManager *WalletManager::instance()
     if (!m_instance) {
         m_instance = new WalletManager;
     }
-    // Checking linkage (doesn't work, TODO: have every dependencies linked statically into libwallet)
-    Bitmonero::WalletManager * wallet_manager_impl = Bitmonero::WalletManagerFactory::getWalletManager();
 
     return m_instance;
 }
 
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
-                                    const QString &language)
+                                    const QString &language, bool testnet)
 {
-    QFileInfo fi(path);
-    if (fi.exists()) {
-        qCritical("%s: already exists", __FUNCTION__);
-        // TODO: set error and error string
-        // return nullptr;
-    }
-    Wallet * wallet = new Wallet(path, password, language);
+    Bitmonero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
+                                                  language.toStdString(), testnet);
+    Wallet * wallet = new Wallet(w);
     return wallet;
 }
 
-Wallet *WalletManager::openWallet(const QString &path, const QString &language, const QString &password)
+Wallet *WalletManager::openWallet(const QString &path, const QString &password, bool testnet)
 {
-    QFileInfo fi(path);
-    if (fi.exists()) {
-        qCritical("%s: not exists", __FUNCTION__);
-        // TODO: set error and error string
-        // return nullptr;
-    }
     // TODO: call the libwallet api here;
-    Wallet * wallet = new Wallet(path, password, language);
 
+    Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
+    Wallet * wallet = new Wallet(w);
     return wallet;
 }
 
-Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, const QString &language)
-{
-    // TODO: call the libwallet api here;
 
-    return nullptr;
+Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, bool testnet)
+{
+    Bitmonero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet);
+    Wallet * wallet = new Wallet(w);
+    return wallet;
 }
 
-bool WalletManager::moveWallet(const QString &src, const QString &dst_)
-{
-    // TODO: move this to libwallet;
-    QFile walletFile(src);
-    if (!walletFile.exists()) {
-        qWarning("%s: source file [%s] doesn't exits", __FUNCTION__,
-                 qPrintable(src));
-        return false;
-    }
-    QString dst = QUrl(dst_).toLocalFile();
-    QString walletKeysFile = src + ".keys";
-    QString walletAddressFile = src + ".address.txt";
-
-    QString dstWalletKeysFile = dst + ".keys";
-    QString dstWalletAddressFile = dst + ".address.txt";
-
-    if (!walletFile.rename(dst)) {
-        qWarning("Error renaming file: '%s' to '%s' : (%s)",
-                 qPrintable(src),
-                 qPrintable(dst),
-                 qPrintable(walletFile.errorString()));
-        return false;
-    }
-    QFile::rename(walletKeysFile, dstWalletKeysFile);
-    QFile::rename(walletAddressFile, dstWalletAddressFile);
-
-    return QFile::exists(dst) && QFile::exists(dstWalletKeysFile)
-            && QFile::exists(dstWalletAddressFile);
-}
 
 void WalletManager::closeWallet(Wallet *wallet)
 {
     delete wallet;
 }
 
-QString WalletManager::walletLanguage(const QString &locale)
+bool WalletManager::walletExists(const QString &path) const
 {
-    return "English";
+    return m_pimpl->walletExists(path.toStdString());
 }
 
-int WalletManager::error() const
+QStringList WalletManager::findWallets(const QString &path)
 {
-    return 0;
+    std::vector<std::string> found_wallets = m_pimpl->findWallets(path.toStdString());
+    QStringList result;
+    for (const auto &w : found_wallets) {
+        result.append(QString::fromStdString(w));
+    }
+    return result;
 }
 
 QString WalletManager::errorString() const
@@ -108,9 +76,21 @@ QString WalletManager::errorString() const
     return tr("Unknown error");
 }
 
+bool WalletManager::moveWallet(const QString &src, const QString &dst)
+{
+    return true;
+}
+
+
+QString WalletManager::walletLanguage(const QString &locale)
+{
+    return "English";
+}
+
+
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
-
+    m_pimpl =  Bitmonero::WalletManagerFactory::getWalletManager();
 }
 
 
