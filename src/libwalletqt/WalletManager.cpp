@@ -87,6 +87,11 @@ QString WalletManager::walletLanguage(const QString &locale)
     return "English";
 }
 
+QString WalletManager::displayAmount(quint64 amount)
+{
+    return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
+}
+
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {

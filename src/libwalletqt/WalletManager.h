@@ -42,6 +42,9 @@ public:
     //! returns libwallet language name for given locale
     Q_INVOKABLE QString walletLanguage(const QString &locale);
 
+
+    //! since we can't call static method from QML, move it to this class
+    Q_INVOKABLE QString displayAmount(quint64 amount);
 signals:
 
 public slots:

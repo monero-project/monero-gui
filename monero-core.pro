@@ -15,7 +15,10 @@ HEADERS += \
     clipboardAdapter.h \
     oscursor.h \
     src/libwalletqt/WalletManager.h \
-    src/libwalletqt/Wallet.h
+    src/libwalletqt/Wallet.h \
+    src/libwalletqt/PendingTransaction.h \
+    src/libwalletqt/TransactionHistory.h \
+    src/libwalletqt/TransactionInfo.h
 
 
 SOURCES += main.cpp \
@@ -23,7 +26,10 @@ SOURCES += main.cpp \
     clipboardAdapter.cpp \
     oscursor.cpp \
     src/libwalletqt/WalletManager.cpp \
-    src/libwalletqt/Wallet.cpp
+    src/libwalletqt/Wallet.cpp \
+    src/libwalletqt/PendingTransaction.cpp \
+    src/libwalletqt/TransactionHistory.cpp \
+    src/libwalletqt/TransactionInfo.cpp
 
 lupdate_only {
 SOURCES = *.qml \
