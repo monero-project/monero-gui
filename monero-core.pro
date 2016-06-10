@@ -18,7 +18,8 @@ HEADERS += \
     src/libwalletqt/Wallet.h \
     src/libwalletqt/PendingTransaction.h \
     src/libwalletqt/TransactionHistory.h \
-    src/libwalletqt/TransactionInfo.h
+    src/libwalletqt/TransactionInfo.h \
+    oshelper.h
 
 
 SOURCES += main.cpp \
@@ -29,7 +30,8 @@ SOURCES += main.cpp \
     src/libwalletqt/Wallet.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
-    src/libwalletqt/TransactionInfo.cpp
+    src/libwalletqt/TransactionInfo.cpp \
+    oshelper.cpp
 
 lupdate_only {
 SOURCES = *.qml \

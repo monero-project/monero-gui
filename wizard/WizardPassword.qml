@@ -43,7 +43,7 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
+    function onPageClosed(settingsObject) {
         settingsObject.wallet.setPassword(passwordItem.password)
     }
 

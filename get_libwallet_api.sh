@@ -13,6 +13,9 @@ BITMONERO_DIR=$ROOT_DIR/bitmonero
 
 if [ ! -d $BITMONERO_DIR ]; then
     git clone --depth=1 $BITMONERO_URL $BITMONERO_DIR
+else
+    cd $BITMONERO_DIR;
+    git pull;
 fi
 
 rm -fr $BITMONERO_DIR/build

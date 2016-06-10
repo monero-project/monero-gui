@@ -206,7 +206,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 selectByMouse: true
 
-                text: moneroAccountsDir + "/My Wallet"
+                text: moneroAccountsDir + "/"
                 onFocusChanged: {
                     if(focus) {
                         fileDialog.folder = text

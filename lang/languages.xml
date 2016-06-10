@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <languages>
-	<language name="US English" locale="en_US" flag="/lang/flags/usa.png" qs="none"/>
-	<language name="UK English" locale="en_GB" flag="/lang/flags/uk.png" qs="none"/>
-	<language name="Russia"     locale="ru_RU" flag="/lang/flags/russia.png" qs="none"/>
-	<language name="RPA"        locale="TODO"  flag="/lang/flags/rpa.png" qs="none"/>
-	<language name="Palestine"  locale="TODO"  flag="/lang/flags/palestine.png" qs="none"/>
-	<language name="India"      locale="hi_IN" flag="/lang/flags/india.png" qs="none"/>
-	<language name="German"     locale="de_DE" flag="/lang/flags/german.png" qs="none"/>
-	<language name="China"      locale="zh_CN" flag="/lang/flags/china.png" qs="none"/>
-	<language name="Brazil"     locale="pt_BR" flag="/lang/flags/brazil.png" qs="none"/>
-	<language name="Bangladesh" locale="TODO"  flag="/lang/flags/bangladesh.png" qs="none"/>
+	<language display_name="US English" locale="en_US" wallet_name="English" flag="/lang/flags/usa.png" qs="none"/>
+	<language display_name="UK English" locale="en_GB" wallet_name="English" flag="/lang/flags/uk.png" qs="none"/>
+	<language display_name="Russia"     locale="ru_RU" wallet_name="English" flag="/lang/flags/russia.png" qs="none"/>
+	<language display_name="RPA"        locale="TODO"  wallet_name="English" flag="/lang/flags/rpa.png" qs="none"/>
+	<language display_name="Palestine"  locale="TODO"  wallet_name="English" flag="/lang/flags/palestine.png" qs="none"/>
+	<language display_name="India"      locale="hi_IN" wallet_name="English" flag="/lang/flags/india.png" qs="none"/>
+	<language display_name="German"     locale="de_DE" wallet_name="English" flag="/lang/flags/german.png" qs="none"/>
+	<language display_name="China"      locale="zh_CN" wallet_name="English" flag="/lang/flags/china.png" qs="none"/>
+	<language display_name="Brazil"     locale="pt_BR" wallet_name="English" flag="/lang/flags/brazil.png" qs="none"/>
+	<language display_name="Bangladesh" locale="TODO"  wallet_name="English" flag="/lang/flags/bangladesh.png" qs="none"/>
 </languages>

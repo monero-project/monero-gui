@@ -36,8 +36,11 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
-        settingsObject['language'] = languagesModel.get(gridView.currentIndex).name
+    function onPageClosed(settingsObject) {
+        var lang = languagesModel.get(gridView.currentIndex);
+        settingsObject['language'] = lang.display_name;
+        settingsObject['wallet_language'] = lang.wallet_name;
+        settingsObject['locale'] = lang.locale;
     }
 
     Column {
@@ -78,7 +81,9 @@ Item {
         source: "/lang/languages.xml"
         query: "/languages/language"
 
-        XmlRole { name: "name"; query: "@name/string()" }
+        XmlRole { name: "display_name"; query: "@display_name/string()" }
+        XmlRole { name: "locale"; query: "@locale/string()" }
+        XmlRole { name: "wallet_name"; query: "@wallet_name/string()" }
         XmlRole { name: "flag"; query: "@flag/string()" }
         // TODO: XmlListModel is read only, we should store current language somewhere else
         // and set current language accordingly
@@ -126,7 +131,7 @@ Item {
                 font.bold: gridView.currentIndex === index
                 elide: Text.ElideRight
                 color: "#3F3F3F"
-                text: name
+                text: display_name
             }
             MouseArea {
                 id: delegateArea

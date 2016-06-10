@@ -38,7 +38,7 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
+    function onPageClosed(settingsObject) {
         settingsObject['auto_donations_enabled'] = enableAutoDonationCheckBox.checked;
         settingsObject['auto_donations_amount']  = autoDonationAmountText.text;
         settingsObject['allow_background_mining'] = allowBackgroundMiningCheckBox.checked;

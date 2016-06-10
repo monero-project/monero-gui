@@ -40,18 +40,23 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
+    //! function called each time we display this page
+
+    function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
 
+        // put wallet files to the subdirectory with the same name as
+        // wallet name
         var new_wallet_filename = settingsObject.wallet_path + "/"
+                + settingsObject.account_name + "/"
                 + settingsObject.account_name;
 
         // moving wallet files to the new destination, if user changed it
         if (new_wallet_filename !== settingsObject.wallet_filename) {
             // using previously saved wallet;
-            settingsObject.wallet.rename(new_wallet_filename);
+            settingsObject.wallet.store(new_wallet_filename);
             //walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
         }
 
@@ -59,10 +64,18 @@ Item {
         settingsObject['wallet_filename'] = new_wallet_filename;
     }
 
+    //! function called each time we hide this page
+    //
+
+
     function createWallet(settingsObject) {
-        var wallet_filename = uiItem.walletPath + "/" + uiItem.accountNameText
+        // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
+        // page submitted or b) delete it when program closed before reaching final page
+
+        var wallet_filename = oshelper.temporaryFilename();
         if (typeof settingsObject.wallet === 'undefined') {
-            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.locale)
+            //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language)
             uiItem.wordsTextItem.memoText = wallet.seed
             // saving wallet in "global" settings object
             // TODO: wallet should have a property pointing to the file where it stored or loaded from
@@ -70,9 +83,11 @@ Item {
         } else {
             print("wallet already created. we just stepping back");
         }
-
         settingsObject.wallet_filename = wallet_filename
     }
+
+
+
 
     WizardManageWalletUI {
         id: uiItem

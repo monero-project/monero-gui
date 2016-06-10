@@ -49,8 +49,8 @@ Rectangle {
 
     function switchPage(next) {
         // save settings for current page;
-        if (typeof pages[currentPage].saveSettings !== 'undefined') {
-            pages[currentPage].saveSettings(settings);
+        if (typeof pages[currentPage].onPageClosed !== 'undefined') {
+            pages[currentPage].onPageClosed(settings);
         }
         print ("switchpage: start: currentPage: ", currentPage);
 
@@ -61,7 +61,6 @@ Rectangle {
             pages[currentPage].opacity = 1;
             handlePageChanged();
         }
-
     }
 
     function handlePageChanged() {
@@ -91,8 +90,8 @@ Rectangle {
             nextButton.enabled = true
 
         }
-
     }
+
 
     function openCreateWalletPage() {
         print ("show create wallet page");

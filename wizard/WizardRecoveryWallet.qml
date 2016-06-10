@@ -40,7 +40,7 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
+    function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath

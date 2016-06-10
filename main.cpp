@@ -33,8 +33,11 @@
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
+#include "oshelper.h"
 #include "WalletManager.h"
 #include "Wallet.h"
+
+
 
 
 int main(int argc, char *argv[])
@@ -51,6 +54,9 @@ int main(int argc, char *argv[])
 
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
+    OSHelper osHelper;
+    engine.rootContext()->setContextProperty("oshelper", &osHelper);
+
     engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
 
 //  export to QML monero accounts root directory
