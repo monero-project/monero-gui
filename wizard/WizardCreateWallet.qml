@@ -46,10 +46,7 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
-
-        // put wallet files to the subdirectory with the same name as
-        // wallet name
-
+        return true;
     }
 
     //! function called each time we hide this page

@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     app.installEventFilter(eventFilter);
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
-    qmlRegisterInterface<Wallet>("Wallet");
+    qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
 
     QQmlApplicationEngine engine;

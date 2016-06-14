@@ -53,6 +53,8 @@ Item {
                             + buildSettingsString();
     }
 
+
+
     Row {
         id: dotsRow
         anchors.top: parent.top

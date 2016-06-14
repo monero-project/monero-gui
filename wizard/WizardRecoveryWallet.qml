@@ -29,6 +29,7 @@
 import QtQuick 2.2
 import moneroComponents 1.0
 import QtQuick.Dialogs 1.2
+import Bitmonero.Wallet 1.0
 
 Item {
     opacity: 0
@@ -42,12 +43,25 @@ Item {
 
     function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
-        settingsObject['words'] = uiItem.wordsTexttext
+        settingsObject['words'] = cleanWordsInput(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
+        return recoveryWallet(settingsObject)
     }
 
-    function recoveryWallet() {
+    function recoveryWallet(settingsObject) {
+        var testnet = true;
+        var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet);
+        var success = wallet.status === Wallet.Status_Ok;
+        if (success) {
+            settingsObject['wallet'] = wallet;
+        } else {
+            walletManager.closeWallet(wallet);
+        }
+        return success;
+    }
 
+    function cleanWordsInput(text) {
+        return text.trim().replace(/(\r\n|\n|\r)/gm, " ");
     }
 
     WizardManageWalletUI {
@@ -60,8 +74,8 @@ Item {
         wordsTextItem.memoTextReadOnly: false
         wordsTextItem.memoText: ""
         wordsTextItem.onMemoTextChanged: {
-            var wordsArray = wordsTextItem.memoText.trim().split(" ")
-            //wizard.nextButton.enabled = wordsArray.length === 25
+            var wordsArray = cleanWordsInput(wordsTextItem.memoText).split(" ");
+            wizard.nextButton.enabled = wordsArray.length === 25
         }
     }
 }

@@ -49,8 +49,12 @@ Rectangle {
 
     function switchPage(next) {
         // save settings for current page;
-        if (typeof pages[currentPage].onPageClosed !== 'undefined') {
-            pages[currentPage].onPageClosed(settings);
+        if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
+            if (pages[currentPage].onPageClosed(settings) !== true) {
+                print ("Can't go to the next page");
+                return;
+            };
+
         }
         print ("switchpage: start: currentPage: ", currentPage);
 
@@ -59,6 +63,10 @@ Rectangle {
             var step_value = next ? 1 : -1
             currentPage += step_value
             pages[currentPage].opacity = 1;
+
+            if (next && typeof pages[currentPage].onPageOpened !== 'undefined') {
+                pages[currentPage].onPageOpened(settings)
+            }
             handlePageChanged();
         }
     }
@@ -84,7 +92,7 @@ Rectangle {
             break;
         case recoveryWalletPage:
             // TODO: disable "next button" until 25 words private key entered
-            // nextButton.enabled = false;
+            nextButton.enabled = false
             break
         default:
             nextButton.enabled = true
@@ -113,6 +121,27 @@ Rectangle {
         pages = paths[currentPath]
         currentPage = pages.indexOf(recoveryWalletPage)
         handlePageChanged()
+    }
+
+    //! actually writes the wallet
+    function applySettings() {
+        print ("Here we apply the settings");
+        // here we need to actually move wallet to the new location
+        // put wallet files to the subdirectory with the same name as
+        // wallet name
+        var new_wallet_filename = settings.wallet_path + "/"
+                + settings.account_name + "/"
+                + settings.account_name;
+
+        // moving wallet files to the new destination, if user changed it
+        if (new_wallet_filename !== settings.wallet_filename) {
+            // using previously saved wallet;
+            settings.wallet.store(new_wallet_filename);
+            //walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
+        }
+
+        // saving wallet_filename;
+        settings['wallet_filename'] = new_wallet_filename;
     }
 
 
@@ -255,6 +284,9 @@ Rectangle {
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
         visible: parent.paths[currentPath][currentPage] === finishPage
-        onClicked: wizard.useMoneroClicked()
+        onClicked: {
+            wizard.applySettings();
+            wizard.useMoneroClicked()
+        }
     }
 }

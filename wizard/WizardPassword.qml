@@ -45,6 +45,7 @@ Item {
 
     function onPageClosed(settingsObject) {
         settingsObject.wallet.setPassword(passwordItem.password)
+        return true
     }
 
     function handlePassword() {

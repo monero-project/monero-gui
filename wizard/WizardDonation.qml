@@ -43,22 +43,9 @@ Item {
         settingsObject['auto_donations_amount']  = autoDonationAmountText.text;
         settingsObject['allow_background_mining'] = allowBackgroundMiningCheckBox.checked;
 
-        // here we need to actually move wallet to the new location
-        // put wallet files to the subdirectory with the same name as
-        // wallet name
-        var new_wallet_filename = settingsObject.wallet_path + "/"
-                + settingsObject.account_name + "/"
-                + settingsObject.account_name;
 
-        // moving wallet files to the new destination, if user changed it
-        if (new_wallet_filename !== settingsObject.wallet_filename) {
-            // using previously saved wallet;
-            settingsObject.wallet.store(new_wallet_filename);
-            //walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
-        }
 
-        // saving wallet_filename;
-        settingsObject['wallet_filename'] = new_wallet_filename;
+        return true;
     }
 
     Row {

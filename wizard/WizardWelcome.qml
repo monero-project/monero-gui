@@ -41,6 +41,7 @@ Item {
         settingsObject['language'] = lang.display_name;
         settingsObject['wallet_language'] = lang.wallet_name;
         settingsObject['locale'] = lang.locale;
+        return true
     }
 
     Column {
