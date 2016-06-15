@@ -31,6 +31,10 @@ import "components"
 
 Rectangle {
     id: panel
+
+    property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias balanceText: balanceText.text
+
     signal dashboardClicked()
     signal historyClicked()
     signal transferClicked()
@@ -90,7 +94,7 @@ Rectangle {
         spacing: 6
 
         Label {
-            text: qsTr("Locked balance")
+            text: qsTr("Balance")
             anchors.left: parent.left
             anchors.leftMargin: 50
             tipText: qsTr("Test tip 1<br/><br/>line 2")
@@ -109,11 +113,12 @@ Rectangle {
             }
 
             Text {
+                id: balanceText
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Arial"
                 font.pixelSize: 26
                 color: "#000000"
-                text: "78.9239845"
+                text: "78.9245"
             }
         }
 
@@ -124,19 +129,20 @@ Rectangle {
         }
 
         Label {
-            text: qsTr("Unlocked")
+            text: qsTr("Unlocked balance")
             anchors.left: parent.left
             anchors.leftMargin: 50
             tipText: qsTr("Test tip 2<br/><br/>line 2")
         }
 
         Text {
+            id: unlockedBalanceText
             anchors.left: parent.left
             anchors.leftMargin: 50
             font.family: "Arial"
             font.pixelSize: 18
             color: "#000000"
-            text: "2324.9239845"
+            text: "2324.9245"
         }
     }
 

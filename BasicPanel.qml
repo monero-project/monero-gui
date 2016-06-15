@@ -35,6 +35,8 @@ Rectangle {
     color: "#F0EEEE"
     border.width: 1
     border.color: "#DBDBDB"
+    property alias balanceText : balanceText.text;
+    property alias unlockedBalanceText : availableBalanceText.text;
 
     Rectangle {
         id: header
@@ -63,6 +65,7 @@ Rectangle {
             columns: 3
 
             Text {
+
                 width: 116
                 height: 20
                 font.family: "Arial"

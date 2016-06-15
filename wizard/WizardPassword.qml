@@ -44,7 +44,9 @@ Item {
     onOpacityChanged: visible = opacity !== 0
 
     function onPageClosed(settingsObject) {
-        settingsObject.wallet.setPassword(passwordItem.password)
+        // TODO: set password on the final page
+        // settingsObject.wallet.setPassword(passwordItem.password)
+        settingsObject['wallet_password'] = passwordItem.password
         return true
     }
 

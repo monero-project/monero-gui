@@ -146,32 +146,33 @@ Rectangle {
         settings['wallet_filename'] = new_wallet_filename;
 
         // persist settings
-        persistentSettings.language = settings.language
-        persistentSettings.account_name = settings.account_name
-        persistentSettings.wallet_path = settings.wallet_path
-        persistentSettings.allow_background_mining = settings.allow_background_mining
-        persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
-        persistentSettings.auto_donations_amount = settings.auto_donations_amount
+        appWindow.persistentSettings.language = settings.language
+        appWindow.persistentSettings.account_name = settings.account_name
+        appWindow.persistentSettings.wallet_path = settings.wallet_path
+        appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining
+        appWindow.persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
+        appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
     }
 
     // reading settings from persistent storage
     Component.onCompleted: {
-        settings['allow_background_mining'] = persistentSettings.allow_background_mining
-        settings['auto_donations_enabled'] = persistentSettings.auto_donations_enabled
-        settings['auto_donations_amount'] = persistentSettings.auto_donations_amount
+        console.log("rootItem: ", appWindow);
+        settings['allow_background_mining'] = appWindow.persistentSettings.allow_background_mining
+        settings['auto_donations_enabled'] = appWindow.persistentSettings.auto_donations_enabled
+        settings['auto_donations_amount'] = appWindow.persistentSettings.auto_donations_amount
     }
 
 
-    Settings {
-        id: persistentSettings
+//    Settings {
+//        id: persistentSettings
 
-        property string language
-        property string account_name
-        property string wallet_path
-        property bool   auto_donations_enabled : true
-        property int    auto_donations_amount : 50
-        property bool   allow_background_mining : true
-    }
+//        property string language
+//        property string account_name
+//        property string wallet_path
+//        property bool   auto_donations_enabled : true
+//        property int    auto_donations_amount : 50
+//        property bool   allow_background_mining : true
+//    }
 
     Rectangle {
         id: nextButton

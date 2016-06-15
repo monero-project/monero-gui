@@ -30,7 +30,8 @@ import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
-
+import Qt.labs.settings 1.0
+import Bitmonero.Wallet 1.0
 
 import "components"
 import "wizard"
@@ -43,12 +44,16 @@ ApplicationWindow {
     property bool ctrlPressed: false
     property bool rightPanelExpanded: true
     property bool osx: false
+    property alias persistentSettings : persistentSettings
+    property var wallet;
 
     function altKeyReleased() { ctrlPressed = false; }
+
     function showPageRequest(page) {
         middlePanel.state = page
         leftPanel.selectItem(page)
     }
+
     function sequencePressed(obj, seq) {
         if(seq === undefined)
             return
@@ -112,6 +117,37 @@ ApplicationWindow {
 
     }
 
+
+    function initialize() {
+
+        if (typeof wizard.settings['wallet'] !== 'undefined') {
+            wallet = wizard.settings['wallet'];
+        }  else {
+            var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
+                    + persistentSettings.account_name;
+            console.log("opening wallet at: ", wallet_path);
+            // TODO: wallet password dialog
+            wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
+            if (wallet.status !== Wallet.Status_Ok) {
+                console.log("Error opening wallet: ", wallet.errorString);
+                return;
+            }
+            console.log("Wallet opened successfully: ", wallet.errorString);
+        }
+
+        if (!wallet.init(persistentSettings.daemon_address, 0)) {
+            console.log("Error initialize wallet: ", wallet.errorString);
+            return
+        }
+        // TODO: refresh asynchronously without blocking UI, implement signal(s)
+        wallet.refresh();
+
+        console.log("wallet balance: ", wallet.balance)
+        leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
+        leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
+    }
+
+
     function walletsFound() {
         var wallets = walletManager.findWallets(moneroAccountsDir);
         if (wallets.length === 0) {
@@ -133,6 +169,21 @@ ApplicationWindow {
         y = (Screen.height - height) / 2
         //
         rootItem.state = walletsFound() ? "normal" : "wizard";
+        if (rootItem.state === "normal") {
+            initialize(persistentSettings)
+        }
+    }
+
+    Settings {
+        id: persistentSettings
+        property string language
+        property string account_name
+        property string wallet_path
+        property bool   auto_donations_enabled : true
+        property int    auto_donations_amount : 50
+        property bool   allow_background_mining : true
+        property bool   testnet: true
+        property string daemon_address: "localhost:38081"
     }
 
     Item {
@@ -344,7 +395,10 @@ ApplicationWindow {
         WizardMain {
             id: wizard
             anchors.fill: parent
-            onUseMoneroClicked: rootItem.state = "normal"
+            onUseMoneroClicked: {
+                rootItem.state = "normal" // TODO: listen for this state change in appWindow;
+                appWindow.initialize();
+            }
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
