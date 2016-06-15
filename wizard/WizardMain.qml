@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import Qt.labs.settings 1.0
+
 import "../components"
 
 Rectangle {
@@ -142,10 +144,34 @@ Rectangle {
 
         // saving wallet_filename;
         settings['wallet_filename'] = new_wallet_filename;
+
+        // persist settings
+        persistentSettings.language = settings.language
+        persistentSettings.account_name = settings.account_name
+        persistentSettings.wallet_path = settings.wallet_path
+        persistentSettings.allow_background_mining = settings.allow_background_mining
+        persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
+        persistentSettings.auto_donations_amount = settings.auto_donations_amount
+    }
+
+    // reading settings from persistent storage
+    Component.onCompleted: {
+        settings['allow_background_mining'] = persistentSettings.allow_background_mining
+        settings['auto_donations_enabled'] = persistentSettings.auto_donations_enabled
+        settings['auto_donations_amount'] = persistentSettings.auto_donations_amount
     }
 
 
+    Settings {
+        id: persistentSettings
 
+        property string language
+        property string account_name
+        property string wallet_path
+        property bool   auto_donations_enabled : true
+        property int    auto_donations_amount : 50
+        property bool   allow_background_mining : true
+    }
 
     Rectangle {
         id: nextButton

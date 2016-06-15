@@ -43,6 +43,11 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    app.setApplicationName("monero-core");
+    app.setOrganizationDomain("getmonero.org");
+    app.setOrganizationName("The Monero Project");
+
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
