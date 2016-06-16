@@ -36,6 +36,7 @@
 #include "oshelper.h"
 #include "WalletManager.h"
 #include "Wallet.h"
+#include "PendingTransaction.h"
 
 
 
@@ -53,6 +54,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
     qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+    qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
+                                                   "PendingTransaction can't be instantiated directly");
 
 
     QQmlApplicationEngine engine;

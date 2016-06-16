@@ -24,6 +24,8 @@ public:
         Status_Error    = Bitmonero::PendingTransaction::Status_Error
     };
 
+    Q_ENUM(Status)
+
     Status status() const;
     QString errorString() const;
     Q_INVOKABLE bool commit();

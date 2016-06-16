@@ -45,6 +45,9 @@ public:
 
     //! since we can't call static method from QML, move it to this class
     Q_INVOKABLE QString displayAmount(quint64 amount);
+    Q_INVOKABLE quint64 amountFromString(const QString &amount);
+    Q_INVOKABLE quint64 amountFromDouble(double amount);
+
 signals:
 
 public slots:

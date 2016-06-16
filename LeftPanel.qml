@@ -56,6 +56,7 @@ Rectangle {
     width: 260
     color: "#FFFFFF"
 
+    // Item with monero logo
     Item {
         id: logoItem
         anchors.left: parent.left
@@ -84,6 +85,7 @@ Rectangle {
             onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
         }
     }
+
 
     Column {
         id: column1

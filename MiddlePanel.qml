@@ -30,6 +30,7 @@ import QtQuick 2.2
 
 Rectangle {
     color: "#F0EEEE"
+    signal paymentClicked(string address, string paymentId, double amount, double fee, int privacyLevel)
 
     states: [
         State {
@@ -72,6 +73,19 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
+        onLoaded: {
+            console.log("Loaded " + item);
+        }
+
+    }
+
+    Connections {
+        ignoreUnknownSignals: false
+        target: loader.item
+        onPaymentClicked : {
+            console.log("MiddlePanel: paymentClicked")
+            paymentClicked(address, paymentId, amount, fee, privacyLevel)
+        }
     }
 
     Rectangle {

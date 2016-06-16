@@ -30,7 +30,10 @@ import QtQuick 2.0
 import "../components"
 
 Rectangle {
+    signal paymentClicked(string address, string paymentId, double amount, double fee, int privacyLevel)
+
     color: "#F0EEEE"
+
 
     Label {
         id: amountLabel
@@ -67,8 +70,9 @@ Rectangle {
                 source: "../images/moneroIcon.png"
             }
         }
-
+        // Amount input
         LineEdit {
+            id: amountLine
             placeholderText: qsTr("Amount...")
             width: parent.width - 37 - 17
         }
@@ -133,7 +137,7 @@ Rectangle {
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
     }
-
+    // recipient address input
     LineEdit {
         id: addressLine
         anchors.left: parent.left
@@ -142,10 +146,11 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
     }
 
     Label {
-        id: paymentLabel
+        id: paymentIdLabel
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: addressLine.bottom
@@ -156,21 +161,23 @@ Rectangle {
         text: qsTr("Payment ID <font size='2'>( Optional )</font>")
     }
 
+    // payment id input
     LineEdit {
-        id: paymentLine
+        id: paymentIdLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentLabel.bottom
+        anchors.top: paymentIdLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        // validator: DoubleValidator { top: 0.0 }
     }
 
     Label {
         id: descriptionLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentLine.bottom
+        anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17
@@ -200,5 +207,13 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
+        onClicked: {
+            // do more smart validation
+
+            if (addressLine.text.length > 0 && amountLine.text.length > 0) {
+                console.log("paymentClicked")
+                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, 0.0002, 1)
+            }
+        }
     }
 }

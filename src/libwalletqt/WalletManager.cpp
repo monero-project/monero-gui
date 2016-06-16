@@ -92,6 +92,15 @@ QString WalletManager::displayAmount(quint64 amount)
     return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
 }
 
+quint64 WalletManager::amountFromString(const QString &amount)
+{
+    return Bitmonero::Wallet::amountFromString(amount.toStdString());
+}
+
+quint64 WalletManager::amountFromDouble(double amount)
+{
+    return Bitmonero::Wallet::amountFromDouble(amount);
+}
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {

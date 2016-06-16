@@ -32,6 +32,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import Qt.labs.settings 1.0
 import Bitmonero.Wallet 1.0
+import Bitmonero.PendingTransaction 1.0
 
 import "components"
 import "wizard"
@@ -120,6 +121,8 @@ ApplicationWindow {
 
     function initialize() {
 
+        middlePanel.paymentClicked.connect(handlePayment);
+
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             wallet = wizard.settings['wallet'];
         }  else {
@@ -155,6 +158,27 @@ ApplicationWindow {
         }
         print(wallets);
         return wallets.length > 0;
+    }
+
+    function handlePayment(address, paymentId, amount, fee, privacyLevel) {
+        console.log("Process payment here: ", address, paymentId, amount, fee, privacyLevel)
+        // TODO: handle payment id
+        // TODO: handle fee;
+        // TODO: handle mixins
+        var amountxmr = walletManager.amountFromString(amount);
+
+        console.log("integer amount: ", amountxmr);
+        var pendingTransaction = wallet.createTransaction(address, amountxmr);
+        if (pendingTransaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", pendingTransaction.errorString);
+        } else {
+            console.log("Transaction created, amount: " + walletManager.displayAmount(pendingTransaction.amount)
+                    + ", fee: " + walletManager.displayAmount(pendingTransaction.fee));
+            if (!pendingTransaction.commit()) {
+                console.log("Error committing transaction: " + pendingTransaction.errorString);
+            }
+        }
+        wallet.disposeTransaction(pendingTransaction);
     }
 
     visible: true
@@ -423,6 +447,7 @@ ApplicationWindow {
             }
 
             property var previousPosition
+
             onPressed: {
                 previousPosition = globalCursor.getPosition()
             }

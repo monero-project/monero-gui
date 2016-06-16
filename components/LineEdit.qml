@@ -31,7 +31,9 @@ import QtQuick 2.0
 Item {
     property alias placeholderText: input.placeholderText
     property alias text: input.text
+    property alias validator: input.validator
     property int fontSize: 18
+
     height: 37
 
     Rectangle {
@@ -54,5 +56,6 @@ Item {
         anchors.leftMargin: 4
         anchors.rightMargin: 4
         font.pixelSize: parent.fontSize
+
     }
 }
