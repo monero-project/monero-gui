@@ -142,10 +142,19 @@ ApplicationWindow {
             console.log("Error initialize wallet: ", wallet.errorString);
             return
         }
+
+        // subscribing for wallet updates
+        wallet.updated.connect(onWalletUpdate);
+
         // TODO: refresh asynchronously without blocking UI, implement signal(s)
         wallet.refresh();
 
         console.log("wallet balance: ", wallet.balance)
+
+    }
+
+    function onWalletUpdate() {
+        console.log("wallet updated")
         leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
         leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
     }
@@ -176,8 +185,11 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(pendingTransaction.fee));
             if (!pendingTransaction.commit()) {
                 console.log("Error committing transaction: " + pendingTransaction.errorString);
+            } else {
+                wallet.refresh();
             }
         }
+
         wallet.disposeTransaction(pendingTransaction);
     }
 

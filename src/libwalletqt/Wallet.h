@@ -85,6 +85,9 @@ public:
     TransactionHistory * history();
 
     // TODO: setListenter() when it implemented in API
+signals:
+    void updated();
+
 
 private:
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);

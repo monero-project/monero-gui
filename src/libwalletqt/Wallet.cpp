@@ -7,6 +7,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QUrl>
+#include <QTimer>
 
 namespace {
 
@@ -81,7 +82,10 @@ quint64 Wallet::unlockedBalance() const
 
 bool Wallet::refresh()
 {
-    return m_walletImpl->refresh();
+    bool result = m_walletImpl->refresh();
+    if (result)
+        emit updated();
+    return result;
 }
 
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, quint64 amount)
