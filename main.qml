@@ -43,7 +43,7 @@ ApplicationWindow {
     property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
-    property bool rightPanelExpanded: true
+    property bool rightPanelExpanded: false
     property bool osx: false
     property alias persistentSettings : persistentSettings
     property var wallet;
