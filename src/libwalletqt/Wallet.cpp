@@ -88,10 +88,10 @@ bool Wallet::refresh()
     return result;
 }
 
-PendingTransaction *Wallet::createTransaction(const QString &dst_addr, quint64 amount)
+PendingTransaction *Wallet::createTransaction(const QString &dst_addr, quint64 amount, quint32 mixin_count)
 {
     Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), amount);
+                dst_addr.toStdString(), amount, mixin_count);
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }

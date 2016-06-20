@@ -76,7 +76,7 @@ public:
 
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr,
-                                                       quint64 amount);
+                                                       quint64 amount, quint32 mixin_count);
 
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);

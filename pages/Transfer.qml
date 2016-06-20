@@ -30,9 +30,18 @@ import QtQuick 2.0
 import "../components"
 
 Rectangle {
-    signal paymentClicked(string address, string paymentId, double amount, double fee, int privacyLevel)
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount)
 
     color: "#F0EEEE"
+
+    function scaleValueToMixinCount(scaleValue) {
+        var scaleToMixinCount = [2,3,4,5,5,5,6,7,8,9,10,15,20,25];
+        if (scaleValue < scaleToMixinCount.length) {
+            return scaleToMixinCount[scaleValue];
+        } else {
+            return 0;
+        }
+    }
 
 
     Label {
@@ -125,6 +134,10 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        onFillLevelChanged: {
+            print ("PrivacyLevel changed:"  + fillLevel)
+            print ("mixin count:"  + scaleValueToMixinCount(fillLevel))
+        }
     }
 
 
@@ -230,7 +243,7 @@ Rectangle {
 
             if (addressLine.text.length > 0 && amountLine.text.length > 0) {
                 console.log("paymentClicked")
-                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, 0.0002, 1)
+                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel))
             }
         }
     }
