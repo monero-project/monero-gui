@@ -45,7 +45,7 @@ Rectangle {
         text: qsTr("Amount")
         fontSize: 14
     }
-
+    /*
     Label {
         id: transactionPriority
         anchors.top: parent.top
@@ -54,8 +54,11 @@ Rectangle {
         x: (parent.width - 17) / 2 + 17
         text: qsTr("Transaction prority")
     }
+    */
+
 
     Row {
+        id: amountRow
         anchors.top: amountLabel.bottom
         anchors.topMargin: 5
         anchors.left: parent.left
@@ -84,7 +87,7 @@ Rectangle {
         ListElement { column1: "MEDIUM"; column2: "( fee: 0.0004 )" }
         ListElement { column1: "HIGH"; column2: "( fee: 0.0008 )" }
     }
-
+    /*
     StandardDropdown {
         id: priorityDropdown
         anchors.top: transactionPriority.bottom
@@ -99,12 +102,14 @@ Rectangle {
         dataModel: priorityModel
         z: 1
     }
+    */
+
 
     Label {
         id: privacyLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: priorityDropdown.bottom
+        anchors.top: amountRow.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 30
@@ -121,6 +126,19 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
+
+
+    Label {
+        id: costLabel
+        anchors.right: parent.right
+        anchors.top: amountRow.bottom
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 30
+        fontSize: 14
+        text: qsTr("Cost")
+    }
+
 
     Label {
         id: addressLabel
