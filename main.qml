@@ -210,6 +210,12 @@ ApplicationWindow {
         }
     }
 
+    onRightPanelExpandedChanged: {
+        if (rightPanelExpanded) {
+            rightPanel.updateTweets()
+        }
+    }
+
     Settings {
         id: persistentSettings
         property string language

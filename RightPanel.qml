@@ -36,6 +36,11 @@ Rectangle {
     width: 330
     color: "#FFFFFF"
 
+    function updateTweets() {
+        tabView.twitter.item.updateTweets()
+    }
+
+
     TabView {
         id: tabView
         anchors.left: parent.left
@@ -45,11 +50,17 @@ Rectangle {
         anchors.leftMargin: 14
         anchors.rightMargin: 14
         anchors.topMargin: 40
+        property alias twitter: twitter
 
-        Tab { title: qsTr("Twitter"); source: "tabs/Twitter.qml" }
+
+
+
+        Tab { id: twitter; title: qsTr("Twitter"); source: "tabs/Twitter.qml" }
         Tab { title: "News" }
         Tab { title: "Help" }
         Tab { title: "About" }
+
+
 
         style: TabViewStyle {
             frameOverlap: 0
