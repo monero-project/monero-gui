@@ -60,30 +60,33 @@ Item {
         if (from == "" && phrase == "")
             return;
 
+        if (appWindow.rightPanelExpanded) {
+
 //! [requesting]
-        var req = new XMLHttpRequest;
-        req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?from=" + from +
-                        "&count=" + tweetsMaxCount + "&q=" + encodePhrase(phrase));
-        req.setRequestHeader("Authorization", "Bearer " + bearerToken);
-        req.onreadystatechange = function() {
-            status = req.readyState;
-            if (status === XMLHttpRequest.DONE) {
-                var objectArray = JSON.parse(req.responseText);
-                if (objectArray.errors !== undefined)
-                    console.log("Error fetching tweets: " + objectArray.errors[0].message)
-                else {
-                    for (var key in objectArray.statuses) {
-                        var jsonObject = objectArray.statuses[key];
-                        tweets.append(jsonObject);
+            var req = new XMLHttpRequest;
+            req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?from=" + from +
+                            "&count=" + tweetsMaxCount + "&q=" + encodePhrase(phrase));
+            req.setRequestHeader("Authorization", "Bearer " + bearerToken);
+            req.onreadystatechange = function() {
+                status = req.readyState;
+                if (status === XMLHttpRequest.DONE) {
+                    var objectArray = JSON.parse(req.responseText);
+                    if (objectArray.errors !== undefined)
+                        console.log("Error fetching tweets: " + objectArray.errors[0].message)
+                    else {
+                        for (var key in objectArray.statuses) {
+                            var jsonObject = objectArray.statuses[key];
+                            tweets.append(jsonObject);
+                        }
                     }
+                    if (wasLoading == true)
+                        wrapper.isLoaded()
                 }
-                if (wasLoading == true)
-                    wrapper.isLoaded()
+                wasLoading = (status === XMLHttpRequest.LOADING);
             }
-            wasLoading = (status === XMLHttpRequest.LOADING);
-        }
-        req.send();
+            req.send();
 //! [requesting]
+        }
     }
 
 
