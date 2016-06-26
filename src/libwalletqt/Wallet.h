@@ -23,6 +23,7 @@ class Wallet : public QObject
     Q_PROPERTY(quint64 balance READ balance)
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
+    Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
 
 public:
     enum Status {
@@ -75,7 +76,7 @@ public:
     Q_INVOKABLE bool refresh();
 
     //! creates transaction
-    Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr,
+    Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
                                                        quint64 amount, quint32 mixin_count);
 
     //! deletes transaction and frees memory
@@ -83,6 +84,18 @@ public:
 
     //! returns transaction history
     TransactionHistory * history();
+
+    //! generate payment id
+    Q_INVOKABLE QString generatePaymentId() const;
+
+    //! integrated address
+    Q_INVOKABLE QString integratedAddress(const QString &paymentId) const;
+
+
+    //! saved payment id
+    QString paymentId() const;
+
+    void setPaymentId(const QString &paymentId);
 
     // TODO: setListenter() when it implemented in API
 signals:
@@ -99,6 +112,7 @@ private:
     Bitmonero::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
+    QString m_paymentId;
 };
 
 #endif // WALLET_H

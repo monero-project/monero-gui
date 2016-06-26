@@ -31,6 +31,7 @@ import QtQuick 2.2
 Rectangle {
     color: "#F0EEEE"
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount)
+    signal generatePaymentIdInvoked()
 
     states: [
         State {
@@ -42,6 +43,9 @@ Rectangle {
         }, State {
             name: "Transfer"
             PropertyChanges { target: loader; source: "pages/Transfer.qml" }
+        }, State {
+           name: "Receive"
+           PropertyChanges { target: loader; source: "pages/Receive.qml" }
         }, State {
             name: "AddressBook"
             PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
@@ -79,6 +83,7 @@ Rectangle {
 
     }
 
+    /* connect "payment" click */
     Connections {
         ignoreUnknownSignals: false
         target: loader.item

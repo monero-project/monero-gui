@@ -226,6 +226,7 @@ ApplicationWindow {
         property bool   allow_background_mining : true
         property bool   testnet: true
         property string daemon_address: "localhost:38081"
+        property string payment_id
     }
 
     Item {
@@ -274,6 +275,7 @@ ApplicationWindow {
             onDashboardClicked: middlePanel.state = "Dashboard"
             onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
+            onReceiveClicked: middlePanel.state = "Receive"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
             onSettingsClicked: middlePanel.state = "Settings"
@@ -294,7 +296,7 @@ ApplicationWindow {
             anchors.left: leftPanel.right
             anchors.right: rightPanel.left
             height: parent.height
-            state: "Dashboard"
+            state: "Transfer"
         }
 
         TipItem {

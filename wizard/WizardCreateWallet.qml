@@ -60,7 +60,9 @@ Item {
         var wallet_filename = oshelper.temporaryFilename();
         if (typeof settingsObject.wallet === 'undefined') {
             //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
-            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language)
+            var testnet = appWindow.persistentSettings.testnet;
+            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
+                                                    testnet)
             uiItem.wordsTextItem.memoText = wallet.seed
             // saving wallet in "global" settings object
             // TODO: wallet should have a property pointing to the file where it stored or loaded from

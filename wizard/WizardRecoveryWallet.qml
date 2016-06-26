@@ -49,7 +49,7 @@ Item {
     }
 
     function recoveryWallet(settingsObject) {
-        var testnet = true;
+        var testnet = appWindow.persistentSettings.testnet;
         var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet);
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {

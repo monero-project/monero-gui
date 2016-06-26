@@ -34,10 +34,12 @@ Rectangle {
 
     property alias unlockedBalanceText: unlockedBalanceText.text
     property alias balanceText: balanceText.text
+    property alias networkStatus : networkStatus
 
     signal dashboardClicked()
     signal historyClicked()
     signal transferClicked()
+    signal receiveClicked()
     signal settingsClicked()
     signal addressBookClicked()
     signal miningClicked()
@@ -47,9 +49,11 @@ Rectangle {
         if(pos === "Dashboard") menuColumn.previousButton = dashboardButton
         else if(pos === "History") menuColumn.previousButton = historyButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
+        else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
+
         menuColumn.previousButton.checked = true
     }
 
@@ -120,7 +124,7 @@ Rectangle {
                 font.family: "Arial"
                 font.pixelSize: 26
                 color: "#000000"
-                text: "78.9245"
+                text: "N/A"
             }
         }
 
@@ -144,7 +148,7 @@ Rectangle {
             font.family: "Arial"
             font.pixelSize: 18
             color: "#000000"
-            text: "2324.9245"
+            text: "N/A"
         }
     }
 
@@ -179,7 +183,11 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
 
-            property var previousButton: dashboardButton
+            property var previousButton: transferButton
+
+            // ------------- Dashboard tab ---------------
+
+            /*
             MenuButton {
                 id: dashboardButton
                 anchors.left: parent.left
@@ -195,6 +203,7 @@ Rectangle {
                 }
             }
 
+
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -202,7 +211,10 @@ Rectangle {
                 color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
+            */
 
+
+            // ------------- Transfer tab ---------------
             MenuButton {
                 id: transferButton
                 anchors.left: parent.left
@@ -221,10 +233,35 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
+                color: transferButton.checked || receiveButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
 
+            // ------------- Receive tab ---------------
+            MenuButton {
+                id: receiveButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Receive")
+                symbol: qsTr("R")
+                dotColor: "#AAFFBB"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = receiveButton
+                    panel.receiveClicked()
+                }
+            }
+            /*
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
+                height: 1
+            }*/
+
+            // ------------- History tab ---------------
+            /*
             MenuButton {
                 id: historyButton
                 anchors.left: parent.left
@@ -246,6 +283,7 @@ Rectangle {
                 color: historyButton.checked || addressBookButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
+            // ------------- AddressBook tab ---------------
 
             MenuButton {
                 id: addressBookButton
@@ -269,6 +307,7 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
                 anchors.left: parent.left
@@ -291,6 +330,7 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Settings tab ---------------
             MenuButton {
                 id: settingsButton
                 anchors.left: parent.left
@@ -304,9 +344,11 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
+            */
         }
 
         NetworkStatusItem {
+            id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom

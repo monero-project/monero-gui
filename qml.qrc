@@ -111,5 +111,7 @@
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
         <file>wizard/utils.js</file>
+        <file>pages/Receive.qml</file>
+        <file>components/IconButton.qml</file>
     </qresource>
 </RCC>

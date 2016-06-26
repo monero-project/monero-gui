@@ -88,10 +88,11 @@ bool Wallet::refresh()
     return result;
 }
 
-PendingTransaction *Wallet::createTransaction(const QString &dst_addr, quint64 amount, quint32 mixin_count)
+PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
+                                              quint64 amount, quint32 mixin_count)
 {
     Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), amount, mixin_count);
+                dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count);
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -111,6 +112,26 @@ TransactionHistory *Wallet::history()
     return m_history;
 }
 
+
+QString Wallet::generatePaymentId() const
+{
+    return QString::fromStdString(Bitmonero::Wallet::genPaymentId());
+}
+
+QString Wallet::integratedAddress(const QString &paymentId) const
+{
+    return QString::fromStdString(m_walletImpl->integratedAddress(paymentId.toStdString()));
+}
+
+QString Wallet::paymentId() const
+{
+    return m_paymentId;
+}
+
+void Wallet::setPaymentId(const QString &paymentId)
+{
+    m_paymentId = paymentId;
+}
 
 
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)

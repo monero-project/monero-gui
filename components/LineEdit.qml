@@ -32,7 +32,9 @@ Item {
     property alias placeholderText: input.placeholderText
     property alias text: input.text
     property alias validator: input.validator
+    property alias readOnly : input.readOnly
     property int fontSize: 18
+
 
     height: 37
 
@@ -56,6 +58,5 @@ Item {
         anchors.leftMargin: 4
         anchors.rightMargin: 4
         font.pixelSize: parent.fontSize
-
     }
 }

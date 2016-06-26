@@ -2,6 +2,7 @@
 
 
 BITMONERO_URL=https://github.com/mbg033/bitmonero
+BITMONERO_BRANCH=fee-mul
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo)
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -13,6 +14,7 @@ BITMONERO_DIR=$ROOT_DIR/bitmonero
 
 if [ ! -d $BITMONERO_DIR ]; then
     git clone --depth=1 $BITMONERO_URL $BITMONERO_DIR
+    git checkout $BITMONERO_BRANCH
 else
     cd $BITMONERO_DIR;
     git pull;
