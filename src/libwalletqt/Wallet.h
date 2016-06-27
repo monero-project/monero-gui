@@ -3,13 +3,15 @@
 
 #include <QObject>
 
-#include "wallet/wallet2_api.h" // we need to access Status enum here;
+#include "wallet/wallet2_api.h" // we need to have an access to the Bitmonero::Wallet::Status enum here;
+#include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
+
 
 namespace Bitmonero {
     class Wallet; // forward declaration
 }
 
-class PendingTransaction;
+
 class TransactionHistory;
 
 class Wallet : public QObject
@@ -77,8 +79,8 @@ public:
 
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
-                                                       quint64 amount, quint32 mixin_count);
-
+                                                       quint64 amount, quint32 mixin_count,
+                                                       PendingTransaction::Priority priority = PendingTransaction::Priority_Low);
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 

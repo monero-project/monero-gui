@@ -169,15 +169,18 @@ ApplicationWindow {
         return wallets.length > 0;
     }
 
-    function handlePayment(address, paymentId, amount, mixinCount) {
-        console.log("Process payment here: ", address, paymentId, amount, mixinCount)
-        // TODO: handle payment id
-        // TODO: handle fee;
-        // TODO: handle mixins
+    function handlePayment(address, paymentId, amount, mixinCount, priority) {
+        console.log("Creating transaction: ")
+        console.log("\taddress: ", address,
+                    ", payment_id: ", paymentId,
+                    ", amount: ", amount,
+                    ", mixins: ", mixinCount,
+                    ", priority: ", priority);
+
         var amountxmr = walletManager.amountFromString(amount);
 
         console.log("integer amount: ", amountxmr);
-        var pendingTransaction = wallet.createTransaction(address, amountxmr, mixinCount);
+        var pendingTransaction = wallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
         if (pendingTransaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", pendingTransaction.errorString);
         } else {

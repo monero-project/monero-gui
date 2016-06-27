@@ -23,8 +23,15 @@ public:
         Status_Ok       = Bitmonero::PendingTransaction::Status_Ok,
         Status_Error    = Bitmonero::PendingTransaction::Status_Error
     };
-
     Q_ENUM(Status)
+
+    enum Priority {
+        Priority_Low    = Bitmonero::PendingTransaction::Priority_Low,
+        Priority_Medium = Bitmonero::PendingTransaction::Priority_Medium,
+        Priority_High   = Bitmonero::PendingTransaction::Priority_High
+    };
+    Q_ENUM(Priority)
+
 
     Status status() const;
     QString errorString() const;

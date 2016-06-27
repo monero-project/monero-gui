@@ -27,10 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import Bitmonero.PendingTransaction 1.0
 import "../components"
 
+
 Rectangle {
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount)
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
+                          int priority)
 
     color: "#F0EEEE"
 
@@ -54,7 +57,7 @@ Rectangle {
         text: qsTr("Amount")
         fontSize: 14
     }
-    /*
+
     Label {
         id: transactionPriority
         anchors.top: parent.top
@@ -63,8 +66,6 @@ Rectangle {
         x: (parent.width - 17) / 2 + 17
         text: qsTr("Transaction prority")
     }
-    */
-
 
     Row {
         id: amountRow
@@ -92,11 +93,11 @@ Rectangle {
 
     ListModel {
         id: priorityModel
-        ListElement { column1: "LOW"; column2: "( fee: 0.0002 )" }
-        ListElement { column1: "MEDIUM"; column2: "( fee: 0.0004 )" }
-        ListElement { column1: "HIGH"; column2: "( fee: 0.0008 )" }
+        ListElement { column1: "LOW"; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: "MEDIUM"; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: "HIGH"; column2: "";  priority: PendingTransaction.Priority_High }
     }
-    /*
+
     StandardDropdown {
         id: priorityDropdown
         anchors.top: transactionPriority.bottom
@@ -111,7 +112,7 @@ Rectangle {
         dataModel: priorityModel
         z: 1
     }
-    */
+
 
 
     Label {
@@ -243,7 +244,10 @@ Rectangle {
 
             if (addressLine.text.length > 0 && amountLine.text.length > 0) {
                 console.log("paymentClicked")
-                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel))
+                var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                console.log("priority: " + priority)
+                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                               priority)
             }
         }
     }
