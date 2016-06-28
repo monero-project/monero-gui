@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
     qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
+    qRegisterMetaType<PendingTransaction::Priority>();
 
 
     QQmlApplicationEngine engine;

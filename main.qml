@@ -30,6 +30,7 @@ import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
+import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
 import Bitmonero.Wallet 1.0
 import Bitmonero.PendingTransaction 1.0
@@ -47,6 +48,7 @@ ApplicationWindow {
     property bool osx: false
     property alias persistentSettings : persistentSettings
     property var wallet;
+    property var transaction;
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -133,6 +135,10 @@ ApplicationWindow {
             wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
             if (wallet.status !== Wallet.Status_Ok) {
                 console.log("Error opening wallet: ", wallet.errorString);
+                informationPopup.title  = qsTr("Error");
+                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                informationPopup.icon = StandardIcon.Critical
+                informationPopup.open()
                 return;
             }
             console.log("Wallet opened successfully: ", wallet.errorString);
@@ -169,6 +175,8 @@ ApplicationWindow {
         return wallets.length > 0;
     }
 
+
+    // called on "transfer"
     function handlePayment(address, paymentId, amount, mixinCount, priority) {
         console.log("Creating transaction: ")
         console.log("\taddress: ", address,
@@ -180,21 +188,52 @@ ApplicationWindow {
         var amountxmr = walletManager.amountFromString(amount);
 
         console.log("integer amount: ", amountxmr);
-        var pendingTransaction = wallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
-        if (pendingTransaction.status !== PendingTransaction.Status_Ok) {
-            console.error("Can't create transaction: ", pendingTransaction.errorString);
+        transaction = wallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error");
+            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            wallet.disposeTransaction(transaction);
+
         } else {
-            console.log("Transaction created, amount: " + walletManager.displayAmount(pendingTransaction.amount)
-                    + ", fee: " + walletManager.displayAmount(pendingTransaction.fee));
-            if (!pendingTransaction.commit()) {
-                console.log("Error committing transaction: " + pendingTransaction.errorString);
-            } else {
-                wallet.refresh();
-            }
+            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
+                    + ", fee: " + walletManager.displayAmount(transaction.fee));
+
+            // here we show confirmation popup;
+
+            transactionConfirmationPopup.title = qsTr("Confirmation")
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
+                        + "\naddress: " + address
+                        + "\npayment id: " + paymentId
+                        + "\namount: " + walletManager.displayAmount(transaction.amount)
+                        + "\nfee: " + walletManager.displayAmount(transaction.fee)
+            transactionConfirmationPopup.icon = StandardIcon.Question
+            transactionConfirmationPopup.open()
+            // committing transaction
+        }
+    }
+
+    // called after user confirms transaction
+    function handleTransactionConfirmed() {
+        if (!transaction.commit()) {
+            console.log("Error committing transaction: " + transaction.errorString);
+            informationPopup.title = qsTr("Error");
+            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+        } else {
+            informationPopup.title = qsTr("Information")
+            informationPopup.text  = qsTr("Money sent successfully")
+            informationPopup.icon  = StandardIcon.Information
         }
 
-        wallet.disposeTransaction(pendingTransaction);
+        informationPopup.open()
+        wallet.refresh()
+        wallet.disposeTransaction(transaction)
     }
+
 
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
@@ -231,6 +270,24 @@ ApplicationWindow {
         property string daemon_address: "localhost:38081"
         property string payment_id
     }
+
+    // TODO: replace with customized popups
+
+    // Information dialog
+    MessageDialog {
+        id: informationPopup
+        standardButtons: StandardButton.Ok
+    }
+
+    // Confrirmation aka question dialog
+    MessageDialog {
+        id: transactionConfirmationPopup
+        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+        onAccepted: {
+            handleTransactionConfirmed()
+        }
+    }
+
 
     Item {
         id: rootItem

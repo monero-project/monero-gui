@@ -1,5 +1,6 @@
 #include "PendingTransaction.h"
 
+
 PendingTransaction::Status PendingTransaction::status() const
 {
     return static_cast<Status>(m_pimpl->status());

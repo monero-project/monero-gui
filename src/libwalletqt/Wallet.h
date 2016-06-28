@@ -80,7 +80,7 @@ public:
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
                                                        quint64 amount, quint32 mixin_count,
-                                                       PendingTransaction::Priority priority = PendingTransaction::Priority_Low);
+                                                       PendingTransaction::Priority priority);
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 
