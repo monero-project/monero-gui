@@ -206,10 +206,10 @@ ApplicationWindow {
 
             transactionConfirmationPopup.title = qsTr("Confirmation")
             transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
-                        + "\naddress: " + address
-                        + "\npayment id: " + paymentId
-                        + "\namount: " + walletManager.displayAmount(transaction.amount)
-                        + "\nfee: " + walletManager.displayAmount(transaction.fee)
+                        + "\nAddress: " + address
+                        + "\nPayment ID: " + paymentId
+                        + "\nAmount: " + walletManager.displayAmount(transaction.amount)
+                        + "\nFee: " + walletManager.displayAmount(transaction.fee)
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
             // committing transaction
