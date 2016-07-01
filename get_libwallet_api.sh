@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-BITMONERO_URL=https://github.com/mbg033/bitmonero
+BITMONERO_URL=https://github.com/mbg033/bitmonero.git
 BITMONERO_BRANCH=fee-mul
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo)
 pushd $(pwd)
@@ -13,8 +13,7 @@ BITMONERO_DIR=$ROOT_DIR/bitmonero
 
 
 if [ ! -d $BITMONERO_DIR ]; then
-    git clone --depth=1 $BITMONERO_URL $BITMONERO_DIR
-    git checkout $BITMONERO_BRANCH
+    git clone --depth=1 $BITMONERO_URL $BITMONERO_DIR --branch $BITMONERO_BRANCH --single-branch
 else
     cd $BITMONERO_DIR;
     git pull;
@@ -24,7 +23,21 @@ rm -fr $BITMONERO_DIR/build
 mkdir -p $BITMONERO_DIR/build/release
 pushd $BITMONERO_DIR/build/release
 
-cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
+
+if [ "$(uname)" == "Darwin" ]; then
+    # Do something under Mac OS X platform        
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # Do something under GNU/Linux platform
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+    # Do something under Windows NT platform
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR" -G "MinGW Makefiles" ../..
+
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    # Do something under Windows NT platform
+fi
+
 
 pushd $BITMONERO_DIR/build/release/src/wallet
 make -j$CPU_CORE_COUNT
