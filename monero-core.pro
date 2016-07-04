@@ -42,12 +42,41 @@ SOURCES = *.qml \
 
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        -lwallet_merged2
+
+win32 {
+    #QMAKE_LFLAGS += -static
+    LIBS+= \
+        -Wl,-Bstatic \
+        -lboost_serialization-mt \
+        -lboost_thread-mt \
+        -lboost_system-mt \
+        -lboost_date_time-mt \
+        -lboost_filesystem-mt \
+        -lboost_regex-mt \
+        -lboost_chrono-mt \
+        -lboost_program_options-mt \
+        -lssl \
+        -lcrypto \
+        -Wl,-Bdynamic \
+        -lws2_32 \
+        -lwsock32 \
+        -lIphlpapi \
+        -lgdi32
+}
+
+unix {
+    LIBS+= \
         -lboost_serialization \
         -lboost_thread \
         -lboost_system \
         -lboost_date_time \
         -lboost_filesystem \
-        -lboost_regex
+        -lboost_regex \
+        -lboost_chrono \
+        -lboost_program_options
+
+}
 
 
 

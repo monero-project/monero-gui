@@ -32,10 +32,10 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
     # Do something under Windows NT platform
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR" -G "MinGW Makefiles" ../..
-
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR" -G "MSYS Makefiles" ../..
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under Windows NT platform
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR" -G "MSYS Makefiles" ../..
 fi
 
 
