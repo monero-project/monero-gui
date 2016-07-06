@@ -3,7 +3,8 @@
 
 BITMONERO_URL=https://github.com/mbg033/bitmonero.git
 BITMONERO_BRANCH=fee-mul
-CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo)
+# thanks to SO: http://stackoverflow.com/a/20283965/4118915
+CPU_CORE_COUNTS=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
