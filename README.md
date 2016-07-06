@@ -76,7 +76,11 @@ Process: TODO
 TODO
 
 ### On OS X:
-TODO
+1. install homebrew
+2. install dependencies: 
+`brew install boost --c++11`
+`brew install pkgconfig`
+
 
 ### On Windows:
 TODO
