@@ -77,6 +77,10 @@ public:
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
 
+
+    //! refreshes the wallet asynchronously
+    Q_INVOKABLE void refreshAsync();
+
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
                                                        quint64 amount, quint32 mixin_count,
@@ -103,6 +107,10 @@ public:
 signals:
     void updated();
 
+    // emitted when refresh process finished (could take a long time)
+    // signalling only after we
+    void refreshed();
+
 
 private:
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
@@ -110,6 +118,7 @@ private:
 
 private:
     friend class WalletManager;
+    friend class WalletListenerImpl;
     //! libwallet's
     Bitmonero::Wallet * m_walletImpl;
     // history lifetime managed by wallet;

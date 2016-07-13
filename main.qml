@@ -35,6 +35,7 @@ import Qt.labs.settings 1.0
 import Bitmonero.Wallet 1.0
 import Bitmonero.PendingTransaction 1.0
 
+
 import "components"
 import "wizard"
 
@@ -49,6 +50,7 @@ ApplicationWindow {
     property alias persistentSettings : persistentSettings
     property var wallet;
     property var transaction;
+
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -122,7 +124,7 @@ ApplicationWindow {
 
 
     function initialize() {
-
+        console.log("initializing..")
         middlePanel.paymentClicked.connect(handlePayment);
 
         if (typeof wizard.settings['wallet'] !== 'undefined') {
@@ -143,24 +145,34 @@ ApplicationWindow {
             }
             console.log("Wallet opened successfully: ", wallet.errorString);
         }
+        // display splash screen...
 
+        console.log("initializing with daemon address..")
         if (!wallet.init(persistentSettings.daemon_address, 0)) {
             console.log("Error initialize wallet: ", wallet.errorString);
             return
         }
+        console.log("Wallet initialized successfully")
+        // TODO: update network indicator
 
         // subscribing for wallet updates
         wallet.updated.connect(onWalletUpdate);
-
+        wallet.refreshed.connect(onWalletRefresh);
+        console.log("refreshing wallet async")
         // TODO: refresh asynchronously without blocking UI, implement signal(s)
-        wallet.refresh();
-
+        wallet.refreshAsync();
         console.log("wallet balance: ", wallet.balance)
 
     }
 
     function onWalletUpdate() {
-        console.log("wallet updated")
+        console.log(">>> wallet updated")
+        leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
+        leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
+    }
+
+    function onWalletRefresh() {
+        console.log(">>> wallet refreshed")
         leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
         leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
     }
@@ -206,10 +218,10 @@ ApplicationWindow {
 
             transactionConfirmationPopup.title = qsTr("Confirmation")
             transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
-                        + "\nAddress: " + address
-                        + "\nPayment ID: " + paymentId
-                        + "\nAmount: " + walletManager.displayAmount(transaction.amount)
-                        + "\nFee: " + walletManager.displayAmount(transaction.fee)
+                        + qsTr("\nAddress: ") + address
+                        + qsTr("\nPayment ID: ") + paymentId
+                        + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
             // committing transaction
@@ -286,6 +298,19 @@ ApplicationWindow {
         onAccepted: {
             handleTransactionConfirmed()
         }
+    }
+
+    Window {
+        id: walletInitializationSplash
+        modality: Qt.ApplicationModal
+        flags: Qt.SplashScreen
+        height: 100
+        width:  250
+        Text {
+            anchors.fill: parent
+            text: qsTr("Initializing Wallet...");
+        }
+
     }
 
 

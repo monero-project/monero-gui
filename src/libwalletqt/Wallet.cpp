@@ -14,6 +14,45 @@ namespace {
 
 }
 
+class WalletListenerImpl : public  Bitmonero::WalletListener
+{
+public:
+    WalletListenerImpl(Wallet * w)
+        : m_wallet(w)
+    {
+
+    }
+
+    virtual void moneySpent(const std::string &txId, uint64_t amount)
+    {
+        // TODO
+        Q_UNUSED(txId)
+        Q_UNUSED(amount)
+    }
+
+    virtual void moneyReceived(const std::string &txId, uint64_t amount)
+    {
+        // TODO
+        Q_UNUSED(txId)
+        Q_UNUSED(amount)
+    }
+
+    virtual void updated()
+    {
+        emit m_wallet->updated();
+    }
+
+    // called when wallet refreshed by background thread or explicitly
+    virtual void refreshed()
+    {
+        emit m_wallet->refreshed();
+    }
+
+private:
+    Wallet * m_wallet;
+};
+
+
 
 QString Wallet::getSeed() const
 {
@@ -86,6 +125,11 @@ bool Wallet::refresh()
     if (result)
         emit updated();
     return result;
+}
+
+void Wallet::refreshAsync()
+{
+    m_walletImpl->refreshAsync();
 }
 
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
