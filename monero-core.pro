@@ -86,13 +86,17 @@ unix {
 
 # translations files;
 TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
-               monero-core_de.ts  # Deutsch
+               monero-core_de.ts \ # Deutsch
+               monero-core_zh.ts \ # Chineese
+               monero-core_ru.ts \ # Russian
+               monero-core_it.ts \ # Italy
+
 
 
 # extra make targets for lupdate and lrelease invocation
 # use "make lupdate" to update *.ts files and "make lrelease" to generate *.qm files
 lupdate.commands = lupdate $$_PRO_FILE_
-lupdate.depends = $$SOURCES $$HEADERS 
+lupdate.depends = $$SOURCES $$HEADERS
 lrelease.commands = lrelease $$_PRO_FILE_
 lrelease.depends = lupdate
 translate.commands = $(COPY) *.qm ${DESTDIR}

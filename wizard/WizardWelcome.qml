@@ -118,7 +118,7 @@ Item {
                 radius: 30
                 color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
                 Image {
-                    anchors.centerIn: parent
+                    anchors.fill: parent
                     source: flag
                 }
             }

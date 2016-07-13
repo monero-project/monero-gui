@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AddressBook</name>
     <message>
@@ -251,23 +251,23 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="LeftPanel.qml" line="106"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="141"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="LeftPanel.qml" line="103"/>
         <source>Balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="LeftPanel.qml" line="106"/>
+        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="LeftPanel.qml" line="138"/>
         <source>Unlocked balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="LeftPanel.qml" line="141"/>
+        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -642,8 +642,6 @@
         <location filename="wizard/WizardPassword.qml" line="121"/>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <oldsource>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

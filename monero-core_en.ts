@@ -60,47 +60,47 @@
 <context>
     <name>BasicPanel</name>
     <message>
-        <location filename="BasicPanel.qml" line="75"/>
+        <location filename="BasicPanel.qml" line="78"/>
         <source>Locked Balance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="89"/>
+        <location filename="BasicPanel.qml" line="92"/>
         <source>78.9239845</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="113"/>
+        <location filename="BasicPanel.qml" line="116"/>
         <source>Availible Balance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="127"/>
+        <location filename="BasicPanel.qml" line="130"/>
         <source>2324.9239845</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="152"/>
+        <location filename="BasicPanel.qml" line="155"/>
         <source>amount...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="160"/>
+        <location filename="BasicPanel.qml" line="163"/>
         <source>SEND</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="176"/>
+        <location filename="BasicPanel.qml" line="179"/>
         <source>destination...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="188"/>
+        <location filename="BasicPanel.qml" line="191"/>
         <source>Privacy level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="BasicPanel.qml" line="209"/>
+        <location filename="BasicPanel.qml" line="212"/>
         <source>payment ID (optional)...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -251,83 +251,43 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="LeftPanel.qml" line="93"/>
-        <source>Locked balance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="96"/>
+        <location filename="LeftPanel.qml" line="106"/>
         <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="127"/>
-        <source>Unlocked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="130"/>
+        <location filename="LeftPanel.qml" line="141"/>
         <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="179"/>
-        <source>Dashboard</source>
+        <location filename="LeftPanel.qml" line="103"/>
+        <source>Balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="180"/>
-        <source>D</source>
+        <location filename="LeftPanel.qml" line="138"/>
+        <source>Unlocked balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="202"/>
+        <location filename="LeftPanel.qml" line="222"/>
         <source>Transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="203"/>
+        <location filename="LeftPanel.qml" line="223"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="LeftPanel.qml" line="224"/>
-        <source>History</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="225"/>
-        <source>H</source>
+        <location filename="LeftPanel.qml" line="245"/>
+        <source>Receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="LeftPanel.qml" line="246"/>
-        <source>Address book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="247"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="268"/>
-        <source>Mining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="269"/>
-        <source>M</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="290"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="LeftPanel.qml" line="291"/>
-        <source>S</source>
+        <source>R</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -352,25 +312,48 @@
 <context>
     <name>PrivacyLevelSmall</name>
     <message>
-        <location filename="components/PrivacyLevelSmall.qml" line="95"/>
+        <location filename="components/PrivacyLevelSmall.qml" line="102"/>
         <source>LOW</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="components/PrivacyLevelSmall.qml" line="106"/>
+        <location filename="components/PrivacyLevelSmall.qml" line="113"/>
         <source>MEDIUM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="components/PrivacyLevelSmall.qml" line="117"/>
+        <location filename="components/PrivacyLevelSmall.qml" line="124"/>
         <source>HIGH</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Receive</name>
+    <message>
+        <location filename="pages/Receive.qml" line="79"/>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="pages/Receive.qml" line="106"/>
+        <source>Integrated address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="pages/Receive.qml" line="136"/>
+        <source>Payment ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="pages/Receive.qml" line="168"/>
+        <source>Generate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RightPanel</name>
     <message>
-        <location filename="RightPanel.qml" line="49"/>
+        <location filename="RightPanel.qml" line="58"/>
         <source>Twitter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -409,42 +392,47 @@
 <context>
     <name>Transfer</name>
     <message>
-        <location filename="pages/Transfer.qml" line="42"/>
+        <location filename="pages/Transfer.qml" line="57"/>
         <source>Amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="52"/>
-        <source>Transaction prority</source>
+        <location filename="pages/Transfer.qml" line="67"/>
+        <source>Transaction priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="72"/>
+        <location filename="pages/Transfer.qml" line="89"/>
         <source>Amount...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="108"/>
+        <location filename="pages/Transfer.qml" line="127"/>
         <source>Privacy Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="131"/>
+        <location filename="pages/Transfer.qml" line="153"/>
+        <source>Cost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="pages/Transfer.qml" line="167"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="156"/>
+        <location filename="pages/Transfer.qml" line="193"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="178"/>
+        <location filename="pages/Transfer.qml" line="217"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/Transfer.qml" line="198"/>
+        <location filename="pages/Transfer.qml" line="237"/>
         <source>SEND</source>
         <translation type="unfinished"></translation>
     </message>
@@ -490,12 +478,12 @@
 <context>
     <name>WizardCreateWallet</name>
     <message>
-        <location filename="wizard/WizardCreateWallet.qml" line="51"/>
+        <location filename="wizard/WizardCreateWallet.qml" line="81"/>
         <source>A new wallet has been created for you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardCreateWallet.qml" line="52"/>
+        <location filename="wizard/WizardCreateWallet.qml" line="82"/>
         <source>This is the 25 word mnemonic for your wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -503,32 +491,32 @@
 <context>
     <name>WizardDonation</name>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="85"/>
+        <location filename="wizard/WizardDonation.qml" line="93"/>
         <source>Monero development is solely supported by donations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="105"/>
+        <location filename="wizard/WizardDonation.qml" line="113"/>
         <source>Enable auto-donations of?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="145"/>
+        <location filename="wizard/WizardDonation.qml" line="153"/>
         <source>% of my fee added to each transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="156"/>
+        <location filename="wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="167"/>
+        <location filename="wizard/WizardDonation.qml" line="175"/>
         <source>Allow background mining?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardDonation.qml" line="185"/>
+        <location filename="wizard/WizardDonation.qml" line="193"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -576,7 +564,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardFinish.qml" line="99"/>
+        <location filename="wizard/WizardFinish.qml" line="102"/>
         <source>You’re all setup!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -584,7 +572,17 @@
 <context>
     <name>WizardMain</name>
     <message>
-        <location filename="wizard/WizardMain.qml" line="244"/>
+        <location filename="wizard/WizardMain.qml" line="85"/>
+        <source>Now that your wallet has been created, please set a password for the wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="wizard/WizardMain.qml" line="87"/>
+        <source>Now that your wallet has been restored, please set a password for the wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="wizard/WizardMain.qml" line="308"/>
         <source>USE MONERO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -592,17 +590,17 @@
 <context>
     <name>WizardManageWalletUI</name>
     <message>
-        <location filename="wizard/WizardManageWalletUI.qml" line="101"/>
+        <location filename="wizard/WizardManageWalletUI.qml" line="103"/>
         <source>This is the name of your wallet. You can change it to a different name if you’d like:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardManageWalletUI.qml" line="123"/>
+        <location filename="wizard/WizardManageWalletUI.qml" line="125"/>
         <source>My account name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardManageWalletUI.qml" line="173"/>
+        <location filename="wizard/WizardManageWalletUI.qml" line="175"/>
         <source>Your wallet is stored in</source>
         <translation type="unfinished"></translation>
     </message>
@@ -618,22 +616,22 @@
 <context>
     <name>WizardOptions</name>
     <message>
-        <location filename="wizard/WizardOptions.qml" line="61"/>
-        <source>I want</source>
+        <location filename="wizard/WizardOptions.qml" line="62"/>
+        <source>Welcome to Monero!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardOptions.qml" line="72"/>
+        <location filename="wizard/WizardOptions.qml" line="74"/>
         <source>Please select one of the following options:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardOptions.qml" line="108"/>
+        <location filename="wizard/WizardOptions.qml" line="110"/>
         <source>This is my first time, I want to&lt;br/&gt;create a new account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardOptions.qml" line="139"/>
+        <location filename="wizard/WizardOptions.qml" line="141"/>
         <source>I want to recover my account&lt;br/&gt;from my 24 work seed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -641,12 +639,7 @@
 <context>
     <name>WizardPassword</name>
     <message>
-        <location filename="wizard/WizardPassword.qml" line="94"/>
-        <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="wizard/WizardPassword.qml" line="105"/>
+        <location filename="wizard/WizardPassword.qml" line="121"/>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
         <oldsource>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
@@ -657,17 +650,17 @@
 <context>
     <name>WizardRecoveryWallet</name>
     <message>
-        <location filename="wizard/WizardRecoveryWallet.qml" line="51"/>
+        <location filename="wizard/WizardRecoveryWallet.qml" line="69"/>
         <source>My account name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardRecoveryWallet.qml" line="52"/>
+        <location filename="wizard/WizardRecoveryWallet.qml" line="70"/>
         <source>We&apos;re ready to recover your account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardRecoveryWallet.qml" line="53"/>
+        <location filename="wizard/WizardRecoveryWallet.qml" line="71"/>
         <source>Please enter your 25 word private key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -675,13 +668,89 @@
 <context>
     <name>WizardWelcome</name>
     <message>
-        <location filename="wizard/WizardWelcome.qml" line="61"/>
+        <location filename="wizard/WizardWelcome.qml" line="65"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wizard/WizardWelcome.qml" line="72"/>
+        <location filename="wizard/WizardWelcome.qml" line="76"/>
         <source>Please choose a language and regional format.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="main.qml" line="140"/>
+        <location filename="main.qml" line="206"/>
+        <location filename="main.qml" line="235"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="141"/>
+        <source>Couldn&apos;t open wallet: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="207"/>
+        <source>Can&apos;t create transaction: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="219"/>
+        <source>Confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="220"/>
+        <source>Please confirm transaction:
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="221"/>
+        <source>
+Address: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="222"/>
+        <source>
+Payment ID: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="223"/>
+        <source>
+Amount: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="224"/>
+        <source>
+Fee: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="236"/>
+        <source>Couldn&apos;t send the money: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="239"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="240"/>
+        <source>Money sent successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="311"/>
+        <source>Initializing Wallet...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
