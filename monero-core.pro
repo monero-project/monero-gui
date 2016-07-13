@@ -67,6 +67,7 @@ win32 {
 
 unix {
     LIBS+= \
+        -Wl,-Bstatic \
         -lboost_serialization \
         -lboost_thread \
         -lboost_system \
@@ -74,8 +75,11 @@ unix {
         -lboost_filesystem \
         -lboost_regex \
         -lboost_chrono \
-        -lboost_program_options
-
+        -lboost_program_options \
+        -lssl \
+        -lcrypto \
+        -Wl,-Bdynamic \
+        -ldl
 }
 
 
