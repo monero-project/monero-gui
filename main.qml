@@ -145,23 +145,12 @@ ApplicationWindow {
             }
             console.log("Wallet opened successfully: ", wallet.errorString);
         }
-        // display splash screen...
-
-        console.log("initializing with daemon address..")
-        if (!wallet.init(persistentSettings.daemon_address, 0)) {
-            console.log("Error initialize wallet: ", wallet.errorString);
-            return
-        }
-        console.log("Wallet initialized successfully")
-        // TODO: update network indicator
-
         // subscribing for wallet updates
         wallet.updated.connect(onWalletUpdate);
         wallet.refreshed.connect(onWalletRefresh);
-        console.log("refreshing wallet async")
-        // TODO: refresh asynchronously without blocking UI, implement signal(s)
-        wallet.refreshAsync();
-        console.log("wallet balance: ", wallet.balance)
+
+        console.log("initializing with daemon address..")
+        wallet.initAsync(persistentSettings.daemon_address, 0);
 
     }
 
@@ -173,8 +162,7 @@ ApplicationWindow {
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
-        leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
-        leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
+        onWalletUpdate();
     }
 
 

@@ -28,6 +28,7 @@ public:
         // TODO
         Q_UNUSED(txId)
         Q_UNUSED(amount)
+        qDebug() << __FUNCTION__;
     }
 
     virtual void moneyReceived(const std::string &txId, uint64_t amount)
@@ -35,16 +36,19 @@ public:
         // TODO
         Q_UNUSED(txId)
         Q_UNUSED(amount)
+        qDebug() << __FUNCTION__;
     }
 
     virtual void updated()
     {
+        qDebug() << __FUNCTION__;
         emit m_wallet->updated();
     }
 
     // called when wallet refreshed by background thread or explicitly
     virtual void refreshed()
     {
+        qDebug() << __FUNCTION__;
         emit m_wallet->refreshed();
     }
 
@@ -74,6 +78,11 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
+bool Wallet::connected() const
+{
+    return m_walletImpl->connected();
+}
+
 QString Wallet::errorString() const
 {
     return QString::fromStdString(m_walletImpl->errorString());
@@ -97,6 +106,11 @@ bool Wallet::store(const QString &path)
 bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit)
 {
     return m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit);
+}
+
+void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit)
+{
+    m_walletImpl->initAsync(daemonAddress.toStdString(), upperTransactionLimit);
 }
 
 bool Wallet::connectToDaemon()
@@ -183,7 +197,7 @@ void Wallet::setPaymentId(const QString &paymentId)
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent), m_walletImpl(w), m_history(nullptr)
 {
-
+    m_walletImpl->setListener(new WalletListenerImpl(this));
 }
 
 Wallet::~Wallet()

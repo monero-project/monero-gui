@@ -20,12 +20,14 @@ class Wallet : public QObject
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
+    Q_PROPERTY(bool connected READ connected)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(QString address READ address)
     Q_PROPERTY(quint64 balance READ balance)
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
+
 
 public:
     enum Status {
@@ -47,6 +49,9 @@ public:
     //! returns last operation's status
     Status status() const;
 
+    //! returns of wallet connected
+    bool connected() const;
+
     //! returns last operation's error message
     QString errorString() const;
 
@@ -61,6 +66,9 @@ public:
 
     //! initializes wallet
     Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit);
+
+    //! initializes wallet asynchronously
+    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit);
 
     //! connects to daemon
     Q_INVOKABLE bool connectToDaemon();
@@ -124,6 +132,7 @@ private:
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     QString m_paymentId;
+
 };
 
 #endif // WALLET_H
