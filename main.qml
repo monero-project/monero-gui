@@ -162,6 +162,7 @@ ApplicationWindow {
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
+        leftPanel.networkStatus.connected = wallet.connected
         onWalletUpdate();
     }
 
@@ -362,6 +363,7 @@ ApplicationWindow {
             width: appWindow.rightPanelExpanded ? 300 : 0
             visible: appWindow.rightPanelExpanded
         }
+
 
         MiddlePanel {
             id: middlePanel
