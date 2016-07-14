@@ -65,7 +65,7 @@ win32 {
         -lgdi32
 }
 
-unix {
+linux {
     LIBS+= \
         -Wl,-Bstatic \
         -lboost_serialization \
@@ -79,6 +79,21 @@ unix {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
+        -ldl
+}
+
+macx {
+    LIBS+= \
+        -lboost_serialization \
+        -lboost_thread \
+        -lboost_system \
+        -lboost_date_time \
+        -lboost_filesystem \
+        -lboost_regex \
+        -lboost_chrono \
+        -lboost_program_options \
+        -lssl \
+        -lcrypto \
         -ldl
 }
 
