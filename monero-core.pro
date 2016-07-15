@@ -100,29 +100,35 @@ macx {
 
 
 # translations files;
-TRANSLATIONS = monero-core_en.ts \ # English (could be untranslated)
-               monero-core_de.ts \ # Deutsch
-               monero-core_zh.ts \ # Chineese
-               monero-core_ru.ts \ # Russian
-               monero-core_it.ts \ # Italy
+TRANSLATIONS = $$PWD/translations/monero-core_en.ts \ # English (could be untranslated)
+               $$PWD/translations/monero-core_de.ts \ # Deutsch
+               $$PWD/translations/monero-core_zh.ts \ # Chineese
+               $$PWD/translations/monero-core_ru.ts \ # Russian
+               $$PWD/translations/monero-core_it.ts \ # Italy
 
 
 
 # extra make targets for lupdate and lrelease invocation
 # use "make lupdate" to update *.ts files and "make lrelease" to generate *.qm files
-lupdate.commands = lupdate $$_PRO_FILE_
-lupdate.depends = $$SOURCES $$HEADERS
-lrelease.commands = lrelease $$_PRO_FILE_
-lrelease.depends = lupdate
-translate.commands = $(COPY) *.qm ${DESTDIR}
-translate.depends = lrelease
+trans_update.commands = lupdate $$_PRO_FILE_
+trans_update.depends = $$_PRO_FILE_
 
-QMAKE_EXTRA_TARGETS += lupdate lrelease
+trans_release.commands = lrelease $$_PRO_FILE_
+trans_release.depends = trans_update $$TRANSLATIONS
 
+translate.commands = $(COPY) $$PWD/*.qm ${DESTDIR}
+translate.depends = trans_release
 
+QMAKE_EXTRA_TARGETS += trans_update trans_release translate
+
+# updating transations only in release mode as this is requires to re-link project
+# even if no changes were made.
+
+#PRE_TARGETDEPS += translate
 
 CONFIG(release, debug|release) {
    DESTDIR=release
+   PRE_TARGETDEPS += translate
 }
 
 CONFIG(debug, debug|release) {
@@ -143,8 +149,7 @@ include(deployment.pri)
 
 OTHER_FILES += \
     .gitignore \
-    monero-core_de.ts \
-    monero-core_en.ts
+    $$TRANSLATIONS
 
 DISTFILES += \
     notes.txt
