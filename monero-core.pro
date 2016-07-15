@@ -104,7 +104,8 @@ TRANSLATIONS = $$PWD/translations/monero-core_en.ts \ # English (could be untran
                $$PWD/translations/monero-core_de.ts \ # Deutsch
                $$PWD/translations/monero-core_zh.ts \ # Chineese
                $$PWD/translations/monero-core_ru.ts \ # Russian
-               $$PWD/translations/monero-core_it.ts \ # Italy
+               $$PWD/translations/monero-core_it.ts \ # Italian
+               $$PWD/translations/monero-core_pl.ts \ # Polish
 
 
 
