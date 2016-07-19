@@ -147,6 +147,7 @@ Rectangle {
 
         // persist settings
         appWindow.persistentSettings.language = settings.language
+        appWindow.persistentSettings.locale   = settings.locale
         appWindow.persistentSettings.account_name = settings.account_name
         appWindow.persistentSettings.wallet_path = settings.wallet_path
         appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining

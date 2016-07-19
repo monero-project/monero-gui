@@ -100,7 +100,7 @@ Rectangle {
         spacing: 6
 
         Label {
-            text: qsTr("Balance")
+            text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
             tipText: qsTr("Test tip 1<br/><br/>line 2")

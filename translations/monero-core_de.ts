@@ -582,7 +582,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="308"/>
+        <location filename="../wizard/WizardMain.qml" line="309"/>
         <source>USE MONERO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -666,13 +666,12 @@
 <context>
     <name>WizardWelcome</name>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="49"/>
-        <location filename="../wizard/WizardWelcome.qml" line="73"/>
+        <location filename="../wizard/WizardWelcome.qml" line="69"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="86"/>
+        <location filename="../wizard/WizardWelcome.qml" line="82"/>
         <source>Please choose a language and regional format.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -680,75 +679,75 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="140"/>
-        <location filename="../main.qml" line="195"/>
-        <location filename="../main.qml" line="224"/>
+        <location filename="../main.qml" line="148"/>
+        <location filename="../main.qml" line="203"/>
+        <location filename="../main.qml" line="232"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="141"/>
+        <location filename="../main.qml" line="149"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="196"/>
+        <location filename="../main.qml" line="204"/>
         <source>Can&apos;t create transaction: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="208"/>
+        <location filename="../main.qml" line="216"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="209"/>
+        <location filename="../main.qml" line="217"/>
         <source>Please confirm transaction:
 
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="210"/>
+        <location filename="../main.qml" line="218"/>
         <source>
 Address: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="211"/>
+        <location filename="../main.qml" line="219"/>
         <source>
 Payment ID: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="212"/>
+        <location filename="../main.qml" line="220"/>
         <source>
 Amount: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="213"/>
+        <location filename="../main.qml" line="221"/>
         <source>
 Fee: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="225"/>
+        <location filename="../main.qml" line="233"/>
         <source>Couldn&apos;t send the money: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="228"/>
+        <location filename="../main.qml" line="236"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="229"/>
+        <location filename="../main.qml" line="237"/>
         <source>Money sent successfully</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="300"/>
+        <location filename="../main.qml" line="309"/>
         <source>Initializing Wallet...</source>
         <translation type="unfinished"></translation>
     </message>

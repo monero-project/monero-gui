@@ -125,7 +125,15 @@ ApplicationWindow {
 
     function initialize() {
         console.log("initializing..")
+
+        // setup language
+        var locale = persistentSettings.locale
+        if (locale !== "") {
+            translationManager.setLanguage(locale.split("_")[0]);
+        }
+
         middlePanel.paymentClicked.connect(handlePayment);
+
 
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             wallet = wizard.settings['wallet'];
@@ -262,6 +270,7 @@ ApplicationWindow {
     Settings {
         id: persistentSettings
         property string language
+        property string locale
         property string account_name
         property string wallet_path
         property bool   auto_donations_enabled : true

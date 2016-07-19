@@ -45,19 +45,6 @@ Item {
     }
 
 
-//    function retranslateUi() {
-//        welcomeText.text = qsTr("Welcome")
-//    }
-
-
-//    Connections {
-//        target: translationManager
-//        onEmptyStringChanged: {
-//            console.log("languageChanged")
-//            retranslateUi()
-//        }
-//    }
-
     Column {
         id: headerColumn
         anchors.left: parent.left
@@ -131,9 +118,6 @@ Item {
             id: flagDelegate
             width: gridView.cellWidth
             height: gridView.cellHeight
-
-
-
 
             Rectangle {
                 id: flagRect
