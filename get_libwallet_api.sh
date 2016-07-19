@@ -2,7 +2,7 @@
 
 
 BITMONERO_URL=https://github.com/mbg033/bitmonero.git
-BITMONERO_BRANCH=devel
+BITMONERO_BRANCH=master
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)

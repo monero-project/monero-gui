@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="47"/>
         <source>Add new entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая запись</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
@@ -666,14 +666,15 @@
 <context>
     <name>WizardWelcome</name>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="65"/>
+        <location filename="../wizard/WizardWelcome.qml" line="49"/>
+        <location filename="../wizard/WizardWelcome.qml" line="73"/>
         <source>Welcome</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро пожаловать</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="76"/>
+        <location filename="../wizard/WizardWelcome.qml" line="86"/>
         <source>Please choose a language and regional format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите язык и региональный формат.</translation>
     </message>
 </context>
 <context>

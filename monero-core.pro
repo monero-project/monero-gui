@@ -19,7 +19,8 @@ HEADERS += \
     src/libwalletqt/PendingTransaction.h \
     src/libwalletqt/TransactionHistory.h \
     src/libwalletqt/TransactionInfo.h \
-    oshelper.h
+    oshelper.h \
+    TranslationManager.h
 
 
 SOURCES += main.cpp \
@@ -31,7 +32,8 @@ SOURCES += main.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \
-    oshelper.cpp
+    oshelper.cpp \
+    TranslationManager.cpp
 
 lupdate_only {
 SOURCES = *.qml \
@@ -101,11 +103,11 @@ macx {
 
 # translations files;
 TRANSLATIONS = $$PWD/translations/monero-core_en.ts \ # English (could be untranslated)
-               $$PWD/translations/monero-core_de.ts \ # Deutsch
-               $$PWD/translations/monero-core_zh.ts \ # Chineese
-               $$PWD/translations/monero-core_ru.ts \ # Russian
-               $$PWD/translations/monero-core_it.ts \ # Italian
-               $$PWD/translations/monero-core_pl.ts \ # Polish
+                   $$PWD/translations/monero-core_de.ts \ # Deutsch
+                   $$PWD/translations/monero-core_zh.ts \ # Chineese
+                   $$PWD/translations/monero-core_ru.ts \ # Russian
+                   $$PWD/translations/monero-core_it.ts \ # Italian
+                   $$PWD/translations/monero-core_pl.ts \ # Polish
 
 
 
@@ -117,7 +119,7 @@ trans_update.depends = $$_PRO_FILE_
 trans_release.commands = lrelease $$_PRO_FILE_
 trans_release.depends = trans_update $$TRANSLATIONS
 
-translate.commands = $(COPY) $$PWD/*.qm ${DESTDIR}
+translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
 translate.depends = trans_release
 
 QMAKE_EXTRA_TARGETS += trans_update trans_release translate

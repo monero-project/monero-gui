@@ -666,12 +666,13 @@
 <context>
     <name>WizardWelcome</name>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="65"/>
+        <location filename="../wizard/WizardWelcome.qml" line="49"/>
+        <location filename="../wizard/WizardWelcome.qml" line="73"/>
         <source>Welcome</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="76"/>
+        <location filename="../wizard/WizardWelcome.qml" line="86"/>
         <source>Please choose a language and regional format.</source>
         <translation type="unfinished"></translation>
     </message>

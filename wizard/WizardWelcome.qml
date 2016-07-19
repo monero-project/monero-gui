@@ -39,10 +39,24 @@ Item {
     function onPageClosed(settingsObject) {
         var lang = languagesModel.get(gridView.currentIndex);
         settingsObject['language'] = lang.display_name;
-        settingsObject['wallet_language'] = lang.wallet_name;
+        settingsObject['wallet_language'] = lang.wallet_language;
         settingsObject['locale'] = lang.locale;
         return true
     }
+
+
+//    function retranslateUi() {
+//        welcomeText.text = qsTr("Welcome")
+//    }
+
+
+//    Connections {
+//        target: translationManager
+//        onEmptyStringChanged: {
+//            console.log("languageChanged")
+//            retranslateUi()
+//        }
+//    }
 
     Column {
         id: headerColumn
@@ -55,6 +69,7 @@ Item {
         spacing: 24
 
         Text {
+            id: welcomeText
             anchors.left: parent.left
             anchors.right: parent.right
             font.family: "Arial"
@@ -62,10 +77,14 @@ Item {
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
-            text: qsTr("Welcome")
+            // hack to implement dynamic translation
+            // https://wiki.qt.io/How_to_do_dynamic_translation_in_QML
+            text: qsTr("Welcome") +
+                  translationManager.emptyString
         }
 
         Text {
+            id: selectLanguageText
             anchors.left: parent.left
             anchors.right: parent.right
             font.family: "Arial"
@@ -74,6 +93,7 @@ Item {
             color: "#4A4646"
             wrapMode: Text.Wrap
             text: qsTr("Please choose a language and regional format.")
+                  + translationManager.emptyString
         }
     }
 
@@ -84,11 +104,13 @@ Item {
 
         XmlRole { name: "display_name"; query: "@display_name/string()" }
         XmlRole { name: "locale"; query: "@locale/string()" }
-        XmlRole { name: "wallet_name"; query: "@wallet_name/string()" }
+        XmlRole { name: "wallet_language"; query: "@wallet_language/string()" }
         XmlRole { name: "flag"; query: "@flag/string()" }
         // TODO: XmlListModel is read only, we should store current language somewhere else
         // and set current language accordingly
         XmlRole { name: "isCurrent"; query: "@enabled/string()" }
+
+
     }
 
     GridView {
@@ -109,6 +131,8 @@ Item {
             id: flagDelegate
             width: gridView.cellWidth
             height: gridView.cellHeight
+
+
 
 
             Rectangle {
@@ -139,8 +163,15 @@ Item {
                 anchors.fill: parent
                 onClicked:  {
                     gridView.currentIndex = index
+                    var data = languagesModel.get(gridView.currentIndex);
+                    if (data !== null || data !== undefined) {
+                        var locale = data.locale
+                        translationManager.setLanguage(locale.split("_")[0]);
+                    }
                 }
             }
-        }
+        } // delegate
+
+
     }
 }

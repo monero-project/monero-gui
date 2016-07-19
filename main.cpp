@@ -37,6 +37,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "PendingTransaction.h"
+#include "TranslationManager.h"
 
 
 
@@ -53,9 +54,17 @@ int main(int argc, char *argv[])
     app.installEventFilter(eventFilter);
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
+
     qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+
     qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
+
+    qmlRegisterUncreatableType<WalletManager>("Bitmonero.WalletManager", 1, 0, "WalletManager",
+                                                   "WalletManager can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TranslationManager>("moneroComponents", 1, 0, "TranslationManager",
+                                                   "TranslationManager can't be instantiated directly");
 
     qRegisterMetaType<PendingTransaction::Priority>();
 
@@ -68,6 +77,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
     engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
+
+    engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
