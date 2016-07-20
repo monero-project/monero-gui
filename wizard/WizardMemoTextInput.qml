@@ -74,6 +74,7 @@ Column {
                 color: "#4A4646"
                 wrapMode: Text.Wrap
                 text: qsTr("It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.")
+                    + translationManager.emptyString
             }
         }
     }

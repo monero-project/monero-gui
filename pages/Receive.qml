@@ -76,14 +76,14 @@ Rectangle {
             Label {
                 id: addressLabel
                 fontSize: 14
-                text: qsTr("Address")
+                text: qsTr("Address") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
             LineEdit {
                 id: addressLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: "ReadOnly wallet address displayed here";
+                placeholderText: qsTr("ReadOnly wallet address displayed here") + translationManager.emptyString;
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
@@ -103,7 +103,7 @@ Rectangle {
             Label {
                 id: integratedAddressLabel
                 fontSize: 14
-                text: qsTr("Integrated address")
+                text: qsTr("Integrated address") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
@@ -112,7 +112,7 @@ Rectangle {
 
                 id: integratedAddressLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: "ReadOnly wallet integrated address displayed here";
+                placeholderText: qsTr("ReadOnly wallet integrated address displayed here") + translationManager.emptyString
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
@@ -133,7 +133,7 @@ Rectangle {
             Label {
                 id: paymentIdLabel
                 fontSize: 14
-                text: qsTr("Payment ID")
+                text: qsTr("Payment ID") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
@@ -141,7 +141,7 @@ Rectangle {
             LineEdit {
                 id: paymentIdLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: "PaymentID here";
+                placeholderText: qsTr("PaymentID here") + translationManager.emptyString;
                 readOnly: false
 
                 width: mainLayout.editWidth

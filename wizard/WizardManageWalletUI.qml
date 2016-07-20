@@ -100,7 +100,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#4A4646"
-            text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:")
+            text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:") + translationManager.emptyString
         }
     }
 
@@ -122,7 +122,7 @@ Item {
             renderType: Text.NativeRendering
             color: "#FF6C3C"
             focus: true
-            text: qsTr("My account name")
+            text: qsTr("My account name") + translationManager.emptyString
         }
 
         Rectangle {
@@ -172,7 +172,7 @@ Item {
             font.pixelSize: 18
             //renderType: Text.NativeRendering
             color: "#4A4646"
-            text: qsTr("Your wallet is stored in")
+            text: qsTr("Your wallet is stored in") + translationManager.emptyString
         }
 
         Item {
@@ -184,7 +184,7 @@ Item {
                 id: fileDialog
                 selectMultiple: false
                 selectFolder: true
-                title: "Please choose a directory"
+                title: qsTr("Please choose a directory")  + translationManager.emptyString
                 onAccepted: {
                     fileUrlInput.text = fileDialog.folder
                     fileDialog.visible = false

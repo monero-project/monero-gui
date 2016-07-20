@@ -54,7 +54,7 @@ Rectangle {
         font.family: "Arial"
         font.pixelSize: 18
         color: "#4A4949"
-        text: qsTr("Quick transfer")
+        text: qsTr("Quick transfer") + translationManager.emptyString
     }
 
     LineEdit {
@@ -101,6 +101,7 @@ Rectangle {
             textFormat: Text.RichText
             text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                         lookng for security level and address book? go to <a href='#'>Transfer</a> tab")
+                     + translationManager.emptyString
             font.underline: false
             onLinkActivated: appWindow.showPageRequest("Transfer")
         }

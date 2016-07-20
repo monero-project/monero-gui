@@ -66,9 +66,9 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        accountNameText: qsTr("My account name")
-        titleText: qsTr("We're ready to recover your account")
-        wordsTextTitle: qsTr("Please enter your 25 word private key")
+        accountNameText: qsTr("My account name") + translationManager.emptyString
+        titleText: qsTr("We're ready to recover your account") + translationManager.emptyString
+        wordsTextTitle: qsTr("Please enter your 25 word private key") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: false
         wordsTextItem.tipTextVisible: false
         wordsTextItem.memoTextReadOnly: false

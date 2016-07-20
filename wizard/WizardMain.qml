@@ -82,9 +82,9 @@ Rectangle {
             // disable "next" button until passwords match
             nextButton.enabled = passwordPage.passwordValid;
             if (currentPath === "create_wallet") {
-                passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet")
+                passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
             } else {
-                passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet")
+                passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
             }
             break;
         case finishPage:
@@ -306,7 +306,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 50
         width: 110
-        text: qsTr("USE MONERO")
+        text: qsTr("USE MONERO") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"

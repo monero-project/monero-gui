@@ -52,9 +52,9 @@ Item {
             font.pixelSize: 12
             color: "#4A4949"
             text: {
-                if(currentIndex === 0) return qsTr("LOW")
-                if(currentIndex === 3) return qsTr("MEDIUM")
-                if(currentIndex === 13) return qsTr("HIGH")
+                if(currentIndex === 0) return qsTr("LOW") + translationManager.emptyString
+                if(currentIndex === 3) return qsTr("MEDIUM") + translationManager.emptyString
+                if(currentIndex === 13) return qsTr("HIGH") + translationManager.emptyString
                 return ""
             }
         }

@@ -44,7 +44,7 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 14
             color: "#545454"
-            text: qsTr("No more results")
+            text: qsTr("No more results") + translationManager.emptyString
         }
     }
 
@@ -103,7 +103,7 @@ ListView {
             font.pixelSize: 12
             font.letterSpacing: -1
             color: "#535353"
-            text: qsTr("Payment ID:")
+            text: qsTr("Payment ID:") +  + translationManager.emptyString
         }
 
         Text {

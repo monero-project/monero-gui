@@ -120,6 +120,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given<br/><br/>
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.")
+                    + translationManager.emptyString
         }
     }
 

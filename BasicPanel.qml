@@ -152,7 +152,7 @@ Rectangle {
             height: 32
             fontSize: 15
             width: parent.width - sendButton.width - row.spacing
-            placeholderText: qsTr("amount...")
+            placeholderText: qsTr("amount...") + translationManager.emptyString
         }
 
         StandardButton {
@@ -176,7 +176,7 @@ Rectangle {
         anchors.margins: 12
         fontSize: 15
         height: 32
-        placeholderText: qsTr("destination...")
+        placeholderText: qsTr("destination...") + translationManager.emptyString
     }
 
     Text {
@@ -188,7 +188,7 @@ Rectangle {
         font.family: "Arial"
         font.pixelSize: 12
         color: "#535353"
-        text: qsTr("Privacy level")
+        text: qsTr("Privacy level") + translationManager.emptyString
     }
 
     PrivacyLevelSmall {
@@ -209,6 +209,6 @@ Rectangle {
         anchors.margins: 12
         fontSize: 15
         height: 32
-        placeholderText: qsTr("payment ID (optional)...")
+        placeholderText: qsTr("payment ID (optional)...") + translationManager.emptyString
     }
 }

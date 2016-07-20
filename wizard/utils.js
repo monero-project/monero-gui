@@ -37,3 +37,8 @@ function mapScope (inputScopeFrom, inputScopeTo, outputScopeFrom, outputScopeTo,
     var result = outputScopeFrom + ((outputScopeTo - outputScopeFrom) * x);
     return result;
 }
+
+
+function tr(text) {
+    return qsTr(text) + translationManager.emptyString
+}

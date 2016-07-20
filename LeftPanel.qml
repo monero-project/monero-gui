@@ -103,7 +103,7 @@ Rectangle {
             text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 1<br/><br/>line 2")
+            tipText: qsTr("Test tip 1<br/><br/>line 2") + translationManager.emptyString
         }
 
         Row {
@@ -135,10 +135,10 @@ Rectangle {
         }
 
         Label {
-            text: qsTr("Unlocked balance")
+            text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 2<br/><br/>line 2")
+            tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString
         }
 
         Text {
@@ -192,8 +192,8 @@ Rectangle {
                 id: dashboardButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Dashboard")
-                symbol: qsTr("D")
+                text: qsTr("Dashboard") + translationManager.emptyString
+                symbol: qsTr("D") + translationManager.emptyString
                 dotColor: "#FFE00A"
                 checked: true
                 onClicked: {
@@ -219,8 +219,8 @@ Rectangle {
                 id: transferButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Transfer")
-                symbol: qsTr("T")
+                text: qsTr("Transfer") + translationManager.emptyString
+                symbol: qsTr("T") + translationManager.emptyString
                 dotColor: "#FF6C3C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -242,8 +242,8 @@ Rectangle {
                 id: receiveButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Receive")
-                symbol: qsTr("R")
+                text: qsTr("Receive") + translationManager.emptyString
+                symbol: qsTr("R") + translationManager.emptyString
                 dotColor: "#AAFFBB"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -266,8 +266,8 @@ Rectangle {
                 id: historyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("History")
-                symbol: qsTr("H")
+                text: qsTr("History") + translationManager.emptyString
+                symbol: qsTr("H") + translationManager.emptyString
                 dotColor: "#6B0072"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -289,8 +289,8 @@ Rectangle {
                 id: addressBookButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Address book")
-                symbol: qsTr("B")
+                text: qsTr("Address book") + translationManager.emptyString
+                symbol: qsTr("B") + translationManager.emptyString
                 dotColor: "#FF4F41"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -312,8 +312,8 @@ Rectangle {
                 id: miningButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Mining")
-                symbol: qsTr("M")
+                text: qsTr("Mining") + translationManager.emptyString
+                symbol: qsTr("M") + translationManager.emptyString
                 dotColor: "#FFD781"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -335,8 +335,8 @@ Rectangle {
                 id: settingsButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Settings")
-                symbol: qsTr("S")
+                text: qsTr("Settings") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
                 dotColor: "#36B25C"
                 onClicked: {
                     parent.previousButton.checked = false

@@ -59,7 +59,7 @@ Item {
             color: "#3F3F3F"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Welcome to Monero!")
+            text: qsTr("Welcome to Monero!") + translationManager.emptyString
         }
 
         Text {
@@ -71,7 +71,7 @@ Item {
             color: "#4A4646"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Please select one of the following options:")
+            text: qsTr("Please select one of the following options:") + translationManager.emptyString
         }
     }
 
@@ -107,7 +107,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("This is my first time, I want to<br/>create a new account")
+                text: qsTr("This is my first time, I want to<br/>create a new account") + translationManager.emptyString
             }
         }
 
@@ -138,7 +138,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to recover my account<br/>from my 24 work seed")
+                text: qsTr("I want to recover my account<br/>from my 24 work seed") + translationManager.emptyString
             }
         }
     }

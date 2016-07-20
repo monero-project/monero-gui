@@ -145,7 +145,7 @@ ApplicationWindow {
             wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
             if (wallet.status !== Wallet.Status_Ok) {
                 console.log("Error opening wallet: ", wallet.errorString);
-                informationPopup.title  = qsTr("Error");
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
                 informationPopup.icon = StandardIcon.Critical
                 informationPopup.open()
@@ -200,7 +200,7 @@ ApplicationWindow {
         transaction = wallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
-            informationPopup.title = qsTr("Error");
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
             informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
             informationPopup.open();
@@ -213,12 +213,13 @@ ApplicationWindow {
 
             // here we show confirmation popup;
 
-            transactionConfirmationPopup.title = qsTr("Confirmation")
+            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
             transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
                         + qsTr("\nAddress: ") + address
                         + qsTr("\nPayment ID: ") + paymentId
                         + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + translationManager.emptyString
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
             // committing transaction
@@ -229,12 +230,12 @@ ApplicationWindow {
     function handleTransactionConfirmed() {
         if (!transaction.commit()) {
             console.log("Error committing transaction: " + transaction.errorString);
-            informationPopup.title = qsTr("Error");
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
         } else {
-            informationPopup.title = qsTr("Information")
-            informationPopup.text  = qsTr("Money sent successfully")
+            informationPopup.title = qsTr("Information") + translationManager.emptyString
+            informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
         }
 
@@ -332,7 +333,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
                 PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: "Program setup wizard" }
+                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
@@ -346,7 +347,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
                 PropertyChanges { target: titleBar; y: -titleBar.height }
-                PropertyChanges { target: titleBar; title: "Monero  -  Donations" }
+                PropertyChanges { target: titleBar; title: qsTr("Monero  -  Donations") + translationManager.emptyString }
             }
         ]
 
@@ -385,7 +386,7 @@ ApplicationWindow {
 
         TipItem {
             id: tipItem
-            text: "send to the same destination"
+            text: qsTr("send to the same destination") + translationManager.emptyString
             visible: false
         }
 

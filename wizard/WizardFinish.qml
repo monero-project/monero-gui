@@ -45,10 +45,11 @@ Item {
             + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
             + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"
             + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
+            + translationManager.emptyString
         return str;
     }
     function updateSettingsSummary() {
-        settingsText.text = qsTr("An overview of your Monero configuration is below:")
+        settingsText.text = qsTr("An overview of your Monero configuration is below:") + translationManager.emptyString
                             + "<br>"
                             + buildSettingsString();
     }
@@ -99,7 +100,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: qsTr("You’re all setup!")
+            text: qsTr("You’re all setup!") + translationManager.emptyString
         }
 
         Text {

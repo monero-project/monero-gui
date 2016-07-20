@@ -54,7 +54,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Amount")
+        text: qsTr("Amount") + translationManager.emptyString
         fontSize: 14
     }
 
@@ -64,7 +64,7 @@ Rectangle {
         anchors.topMargin: 17
         fontSize: 14
         x: (parent.width - 17) / 2 + 17
-        text: qsTr("Transaction priority")
+        text: qsTr("Transaction priority") + translationManager.emptyString
     }
 
     Row {
@@ -86,16 +86,16 @@ Rectangle {
         // Amount input
         LineEdit {
             id: amountLine
-            placeholderText: qsTr("Amount...")
+            placeholderText: qsTr("Amount...") + translationManager.emptyString
             width: parent.width - 37 - 17
         }
     }
 
     ListModel {
         id: priorityModel
-        ListElement { column1: "LOW"; column2: ""; priority: PendingTransaction.Priority_Low }
-        ListElement { column1: "MEDIUM"; column2: ""; priority: PendingTransaction.Priority_Medium }
-        ListElement { column1: "HIGH"; column2: "";  priority: PendingTransaction.Priority_High }
+        ListElement { column1: qsTr("LOW") + translationManager.emptyString; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: qsTr("MEDIUM") + translationManager.emptyString; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: qsTr("HIGH") + translationManager.emptyString; column2: "";  priority: PendingTransaction.Priority_High }
     }
 
     StandardDropdown {
@@ -124,7 +124,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-        text: qsTr("Privacy Level")
+        text: qsTr("Privacy Level") + translationManager.emptyString
     }
 
     PrivacyLevel {
@@ -166,6 +166,7 @@ Rectangle {
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                     Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
     }
@@ -190,7 +191,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Payment ID <font size='2'>( Optional )</font>")
+        text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
     }
 
     // payment id input
@@ -215,6 +216,7 @@ Rectangle {
         anchors.topMargin: 17
         fontSize: 14
         text: qsTr("Description <font size='2'>( An optional description that will be saved to the local address book if entered )</font>")
+            + translationManager.emptyString
     }
 
     LineEdit {
@@ -234,7 +236,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 60
-        text: qsTr("SEND")
+        text: qsTr("SEND") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"

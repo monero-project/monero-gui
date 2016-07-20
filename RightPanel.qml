@@ -56,9 +56,9 @@ Rectangle {
 
 
         Tab { id: twitter; title: qsTr("Twitter"); source: "tabs/Twitter.qml" }
-        Tab { title: "News" }
-        Tab { title: "Help" }
-        Tab { title: "About" }
+        Tab { title: qsTr("News") + translationManager.emptyString }
+        Tab { title: qsTr("Help") + translationManager.emptyString }
+        Tab { title: qsTr("About") + translationManager.emptyString }
 
 
 
