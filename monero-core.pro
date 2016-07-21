@@ -6,8 +6,12 @@ WALLET_ROOT=$$PWD/bitmonero
 
 CONFIG += c++11
 
+# cleaning "auto-generated" bitmonero directory on "make clean"
+QMAKE_CLEAN += -r $$WALLET_ROOT
+
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt
+
 
 
 HEADERS += \
