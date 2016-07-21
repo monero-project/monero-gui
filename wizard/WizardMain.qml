@@ -58,7 +58,7 @@ Rectangle {
             };
 
         }
-        print ("switchpage: start: currentPage: ", currentPage);
+        print ("switchpage: currentPage: ", currentPage);
 
         if (currentPage > 0 || currentPage < pages.length - 1) {
             pages[currentPage].opacity = 0
@@ -66,40 +66,35 @@ Rectangle {
             currentPage += step_value
             pages[currentPage].opacity = 1;
 
+            var nextButtonVisible = pages[currentPage] !== optionsPage;
+            nextButton.visible = nextButtonVisible;
+
             if (next && typeof pages[currentPage].onPageOpened !== 'undefined') {
                 pages[currentPage].onPageOpened(settings)
             }
-            handlePageChanged();
+
+
+
         }
     }
 
+    // TODO: remove it
     function handlePageChanged() {
-        var nextButtonVisible = pages[currentPage] !== optionsPage;
-        nextButton.visible = nextButtonVisible;
-        print ("next button visible: " + nextButtonVisible);
-        switch (pages[currentPage]) {
-        case passwordPage:
-            // disable "next" button until passwords match
-            nextButton.enabled = passwordPage.passwordValid;
-            if (currentPath === "create_wallet") {
-                passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
-            } else {
-                passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
-            }
-            break;
-        case finishPage:
-            // display settings summary
-            finishPage.updateSettingsSummary();
-            nextButton.visible = false;
-            break;
-        case recoveryWalletPage:
-            // TODO: disable "next button" until 25 words private key entered
-            nextButton.enabled = false
-            break
-        default:
-            nextButton.enabled = true
 
-        }
+//        switch (pages[currentPage]) {
+////        case finishPage:
+////            // display settings summary
+////            finishPage.updateSettingsSummary();
+////            nextButton.visible = false;
+////            break;
+//        case recoveryWalletPage:
+//            // disable "next button" until 25 words private key entered
+//            nextButton.enabled = false
+//            break
+//        default:
+//            nextButton.enabled = true
+
+//        }
     }
 
 
@@ -111,7 +106,9 @@ Rectangle {
         pages = paths[currentPath]
         currentPage = pages.indexOf(createWalletPage)
         createWalletPage.createWallet(settings)
-        handlePageChanged()
+        wizard.nextButton.visible = true
+        createWalletPage.onPageOpened(settings);
+
 
     }
 
@@ -122,7 +119,9 @@ Rectangle {
         currentPath = "recovery_wallet"
         pages = paths[currentPath]
         currentPage = pages.indexOf(recoveryWalletPage)
-        handlePageChanged()
+        wizard.nextButton.visible = true
+        recoveryWalletPage.onPageOpened(settings);
+
     }
 
     //! actually writes the wallet

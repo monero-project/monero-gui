@@ -42,11 +42,20 @@ Item {
 
     //! function called each time we display this page
 
+    function onPageOpened(settingsOblect) {
+        checkNextButton()
+    }
+
     function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
         return true;
+    }
+
+    function checkNextButton() {
+        var wordsArray = cleanWordsInput(uiItem.wordsTextItem.memoText).split(" ");
+        wizard.nextButton.enabled = wordsArray.length === 25;
     }
 
     //! function called each time we hide this page

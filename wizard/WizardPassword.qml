@@ -31,10 +31,10 @@ import "../components"
 import "utils.js" as Utils
 
 Item {
+
+    id: passwordPage
     opacity: 0
     visible: false
-    property bool passwordValid : passwordItem.password != ''
-                                  && passwordItem.password === retypePasswordItem.password
 
     property alias titleText: titleText.text
     Behavior on opacity {
@@ -42,6 +42,17 @@ Item {
     }
 
     onOpacityChanged: visible = opacity !== 0
+
+
+    function onPageOpened(settingsObject) {
+        wizard.nextButton.enabled = true
+
+        if (wizard.currentPath === "create_wallet") {
+           passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
+        } else {
+           passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
+        }
+    }
 
     function onPageClosed(settingsObject) {
         // TODO: set password on the final page
@@ -52,11 +63,14 @@ Item {
 
     function handlePassword() {
         // allow to forward step only if passwords match
+
         wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
+
         // scorePassword returns value from 1..100
         var strength = Utils.scorePassword(passwordItem.password)
         // privacyLevel component uses 1..13 scale
         privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
+
     }
 
 
@@ -154,5 +168,9 @@ Item {
         width: 300
         height: 62
         onChanged: handlePassword()
+    }
+
+    Component.onCompleted: {
+        console.log
     }
 }

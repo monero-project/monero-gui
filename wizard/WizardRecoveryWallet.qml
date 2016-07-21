@@ -41,6 +41,15 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function onPageOpened(settingsObject) {
+        checkNextButton();
+    }
+
+    function checkNextButton() {
+        var wordsArray = cleanWordsInput(uiItem.wordsTextItem.memoText).split(" ");
+        wizard.nextButton.enabled = wordsArray.length === 25;
+    }
+
     function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = cleanWordsInput(uiItem.wordsTextItem.memoText)
@@ -74,8 +83,7 @@ Item {
         wordsTextItem.memoTextReadOnly: false
         wordsTextItem.memoText: ""
         wordsTextItem.onMemoTextChanged: {
-            var wordsArray = cleanWordsInput(wordsTextItem.memoText).split(" ");
-            wizard.nextButton.enabled = wordsArray.length === 25
+            checkNextButton();
         }
     }
 }

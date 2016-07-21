@@ -542,12 +542,12 @@
 <context>
     <name>WizardCreateWallet</name>
     <message>
-        <location filename="../wizard/WizardCreateWallet.qml" line="81"/>
+        <location filename="../wizard/WizardCreateWallet.qml" line="90"/>
         <source>A new wallet has been created for you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateWallet.qml" line="82"/>
+        <location filename="../wizard/WizardCreateWallet.qml" line="91"/>
         <source>This is the 25 word mnemonic for your wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -628,7 +628,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardFinish.qml" line="103"/>
+        <location filename="../wizard/WizardFinish.qml" line="107"/>
         <source>You’re all setup!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -636,17 +636,7 @@
 <context>
     <name>WizardMain</name>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="85"/>
-        <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardMain.qml" line="87"/>
-        <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardMain.qml" line="309"/>
+        <location filename="../wizard/WizardMain.qml" line="308"/>
         <source>USE MONERO</source>
         <translation type="unfinished"></translation>
     </message>
@@ -708,7 +698,17 @@
 <context>
     <name>WizardPassword</name>
     <message>
-        <location filename="../wizard/WizardPassword.qml" line="121"/>
+        <location filename="../wizard/WizardPassword.qml" line="51"/>
+        <source>Now that your wallet has been created, please set a password for the wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardPassword.qml" line="53"/>
+        <source>Now that your wallet has been restored, please set a password for the wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardPassword.qml" line="135"/>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
         <translation type="unfinished"></translation>
@@ -717,17 +717,17 @@
 <context>
     <name>WizardRecoveryWallet</name>
     <message>
-        <location filename="../wizard/WizardRecoveryWallet.qml" line="69"/>
+        <location filename="../wizard/WizardRecoveryWallet.qml" line="78"/>
         <source>My account name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRecoveryWallet.qml" line="70"/>
+        <location filename="../wizard/WizardRecoveryWallet.qml" line="79"/>
         <source>We&apos;re ready to recover your account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRecoveryWallet.qml" line="71"/>
+        <location filename="../wizard/WizardRecoveryWallet.qml" line="80"/>
         <source>Please enter your 25 word private key</source>
         <translation type="unfinished"></translation>
     </message>

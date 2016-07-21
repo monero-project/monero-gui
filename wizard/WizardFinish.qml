@@ -54,6 +54,10 @@ Item {
                             + buildSettingsString();
     }
 
+    function onPageOpened(settings) {
+        updateSettingsSummary();
+        wizard.nextButton.visible = false;
+    }
 
 
     Row {
