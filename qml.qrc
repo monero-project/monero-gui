@@ -114,5 +114,11 @@
         <file>pages/Receive.qml</file>
         <file>components/IconButton.qml</file>
         <file>lang/flags/italy.png</file>
+        <file>translations/monero-core_de.qm</file>
+        <file>translations/monero-core_en.qm</file>
+        <file>translations/monero-core_it.qm</file>
+        <file>translations/monero-core_pl.qm</file>
+        <file>translations/monero-core_ru.qm</file>
+        <file>translations/monero-core_zh.qm</file>
     </qresource>
 </RCC>

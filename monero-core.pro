@@ -90,8 +90,9 @@ linux {
 
 macx {
     LIBS+= \
-        -lboost_serialization \
-        -lboost_thread \
+	-L/usr/local/lib \
+	-lboost_serialization \
+        -lboost_thread-mt \
         -lboost_system \
         -lboost_date_time \
         -lboost_filesystem \
@@ -123,7 +124,7 @@ trans_update.depends = $$_PRO_FILE_
 trans_release.commands = lrelease $$_PRO_FILE_
 trans_release.depends = trans_update $$TRANSLATIONS
 
-translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
+#translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
 translate.depends = trans_release
 
 QMAKE_EXTRA_TARGETS += trans_update trans_release translate

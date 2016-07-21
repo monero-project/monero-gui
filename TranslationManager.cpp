@@ -25,8 +25,8 @@ bool TranslationManager::setLanguage(const QString &language)
         return true;
     }
 
-    // we expecting to have translation files in "i18n" directory
-    QString dir = qApp->applicationDirPath() + QDir::separator() + "i18n";
+    // translations are compiled into app binary
+    QString dir = ":/translations";
 
     QString filename = "monero-core_" + language;
 
