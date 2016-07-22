@@ -6,8 +6,8 @@ WALLET_ROOT=$$PWD/bitmonero
 
 CONFIG += c++11
 
-# cleaning "auto-generated" bitmonero directory on "make clean"
-QMAKE_CLEAN += -r $$WALLET_ROOT
+# cleaning "auto-generated" bitmonero directory on "make distclean"
+QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt
@@ -126,6 +126,8 @@ trans_release.depends = trans_update $$TRANSLATIONS
 
 #translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
 translate.depends = trans_release
+
+deploy.commands = pushd $QMAKE_
 
 QMAKE_EXTRA_TARGETS += trans_update trans_release translate
 
