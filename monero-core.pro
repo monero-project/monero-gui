@@ -5,6 +5,7 @@ QT += qml quick widgets
 WALLET_ROOT=$$PWD/bitmonero
 
 CONFIG += c++11
+CONFIG += debug_and_release
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
@@ -102,9 +103,12 @@ macx {
         -lssl \
         -lcrypto \
         -ldl
+
+    deploy.commands += macdeployqt $$sprintf("%1/release/%2.app", $$OUT_PWD,$$TARGET)
 }
 
 
+deploy.commands +=
 
 # translations files;
 TRANSLATIONS = $$PWD/translations/monero-core_en.ts \ # English (could be untranslated)
@@ -127,9 +131,9 @@ trans_release.depends = trans_update $$TRANSLATIONS
 #translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
 translate.depends = trans_release
 
-deploy.commands = pushd $QMAKE_
 
-QMAKE_EXTRA_TARGETS += trans_update trans_release translate
+
+QMAKE_EXTRA_TARGETS += trans_update trans_release translate deploy
 
 # updating transations only in release mode as this is requires to re-link project
 # even if no changes were made.
