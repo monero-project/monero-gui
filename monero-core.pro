@@ -5,15 +5,12 @@ QT += qml quick widgets
 WALLET_ROOT=$$PWD/bitmonero
 
 CONFIG += c++11
-CONFIG += debug_and_release
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt
-
-
 
 HEADERS += \
     filter.h \
@@ -104,51 +101,59 @@ macx {
         -lcrypto \
         -ldl
 
-    deploy.commands += macdeployqt $$sprintf("%1/release/%2.app", $$OUT_PWD,$$TARGET)
 }
 
 
-deploy.commands +=
-
-# translations files;
-TRANSLATIONS = $$PWD/translations/monero-core_en.ts \ # English (could be untranslated)
-                   $$PWD/translations/monero-core_de.ts \ # Deutsch
-                   $$PWD/translations/monero-core_zh.ts \ # Chineese
-                   $$PWD/translations/monero-core_ru.ts \ # Russian
-                   $$PWD/translations/monero-core_it.ts \ # Italian
-                   $$PWD/translations/monero-core_pl.ts \ # Polish
-
-
-
-# extra make targets for lupdate and lrelease invocation
-# use "make lupdate" to update *.ts files and "make lrelease" to generate *.qm files
-trans_update.commands = lupdate $$_PRO_FILE_
-trans_update.depends = $$_PRO_FILE_
-
-trans_release.commands = lrelease $$_PRO_FILE_
-trans_release.depends = trans_update $$TRANSLATIONS
-
-#translate.commands = $(MKDIR) ${DESTDIR}/i18n && $(COPY) $$PWD/translations/*.qm ${DESTDIR}/i18n
-translate.depends = trans_release
-
-
-
-QMAKE_EXTRA_TARGETS += trans_update trans_release translate deploy
-
-# updating transations only in release mode as this is requires to re-link project
-# even if no changes were made.
-
-#PRE_TARGETDEPS += translate
+# translation stuff
+TRANSLATIONS =  \ # English is default language, no explicit translation file
+                $$PWD/translations/monero-core_de.ts \ # Deutsch
+                $$PWD/translations/monero-core_zh.ts \ # Chineese
+                $$PWD/translations/monero-core_ru.ts \ # Russian
+                $$PWD/translations/monero-core_it.ts \ # Italian
+                $$PWD/translations/monero-core_pl.ts \ # Polish
 
 CONFIG(release, debug|release) {
-   DESTDIR=release
-   PRE_TARGETDEPS += translate
+    DESTDIR = release
+    LANGUPD_OPTIONS = -locations relative -no-ui-lines
+    LANGREL_OPTIONS = -compress -nounfinished -removeidentical
+
+} else {
+    DESTDIR = debug
+    LANGUPD_OPTIONS =
+    LANGREL_OPTIONS = -markuntranslated "MISS_TR "
 }
 
-CONFIG(debug, debug|release) {
-   DESTDIR=debug
+TARGET_FULL_PATH = $$OUT_PWD/$$DESTDIR
+
+macx {
+    TARGET_FULL_PATH = $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)
 }
 
+TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/Contents/Resources/translations
+
+isEmpty(QMAKE_LUPDATE) {
+    win32:LANGUPD = $$[QT_INSTALL_BINS]\lupdate.exe
+    else:LANGUPD = $$[QT_INSTALL_BINS]/lupdate
+}
+
+isEmpty(QMAKE_LRELEASE) {
+    win32:LANGREL = $$[QT_INSTALL_BINS]\lrelease.exe
+    else:LANGREL = $$[QT_INSTALL_BINS]/lrelease
+}
+
+langupd.command = \
+    $$LANGUPD $$LANGUPD_OPTIONS $$shell_path($$_PRO_FILE) -ts $$_PRO_FILE_PWD/$$TRANSLATIONS
+
+langrel.depends = langupd
+langrel.input = TRANSLATIONS
+langrel.output = $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
+langrel.commands = \
+    $$LANGREL $$LANGREL_OPTIONS ${QMAKE_FILE_IN} -qm $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
+langrel.CONFIG += no_link
+
+QMAKE_EXTRA_TARGETS += langupd deploy
+QMAKE_EXTRA_COMPILERS += langrel
+PRE_TARGETDEPS += langupd compiler_langrel_make_all
 
 RESOURCES += qml.qrc
 
@@ -157,6 +162,14 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+macx {
+    deploy.commands += macdeployqt $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)
+}
+
+win32 {
+    deploy.commands += windeployqt $$sprintf("%1/%2/%3", $$OUT_PWD, $$DESTDIR, $$TARGET)
+}
+
 
 
 
@@ -167,3 +180,4 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt
+

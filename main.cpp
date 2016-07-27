@@ -30,6 +30,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QStandardPaths>
+#include <QDebug>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -45,6 +46,8 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    qDebug() << "app startd";
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");

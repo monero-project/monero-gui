@@ -26,7 +26,11 @@ bool TranslationManager::setLanguage(const QString &language)
     }
 
     // translations are compiled into app binary
-    QString dir = ":/translations";
+#ifdef Q_OS_MACX
+    QString dir = qApp->applicationDirPath() + "/../Resources/translations";
+#else
+    QString dir = qApp->applicationDirPath() + "/translations";
+#endif
 
     QString filename = "monero-core_" + language;
 
