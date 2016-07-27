@@ -163,7 +163,7 @@ QML_IMPORT_PATH =
 # Default rules for deployment.
 include(deployment.pri)
 macx {
-    deploy.commands += macdeployqt $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)
+    deploy.commands += macdeployqt $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET) -qmldir=$$PWD
 }
 
 win32 {
