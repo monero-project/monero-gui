@@ -10,7 +10,7 @@ fi
  
 if [ ! -d build ]; then mkdir build; fi
 cd build
-echo $(pwd)
+
 qmake ../monero-core.pro "CONFIG+=release"
 make 
 make deploy

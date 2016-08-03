@@ -113,23 +113,25 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_pl.ts \ # Polish
 
 CONFIG(release, debug|release) {
-    DESTDIR = release
+    DESTDIR = release/bin
     LANGUPD_OPTIONS = -locations relative -no-ui-lines
     LANGREL_OPTIONS = -compress -nounfinished -removeidentical
 
 } else {
-    DESTDIR = debug
+    DESTDIR = debug/bin
     LANGUPD_OPTIONS =
     LANGREL_OPTIONS = -markuntranslated "MISS_TR "
 }
 
 TARGET_FULL_PATH = $$OUT_PWD/$$DESTDIR
+TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/translations
 
 macx {
     TARGET_FULL_PATH = $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)
+    TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/Contents/Resources/translations
 }
 
-TRANSLATION_TARGET_DIR = $$TARGET_FULL_PATH/Contents/Resources/translations
+
 
 isEmpty(QMAKE_LUPDATE) {
     win32:LANGUPD = $$[QT_INSTALL_BINS]\lupdate.exe
@@ -167,10 +169,8 @@ macx {
 }
 
 win32 {
-    deploy.commands += windeployqt $$sprintf("%1/%2/%3", $$OUT_PWD, $$DESTDIR, $$TARGET)
+    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -qmldir=$$PWD
 }
-
-
 
 
 
@@ -180,4 +180,3 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt
-
