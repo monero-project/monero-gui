@@ -181,3 +181,5 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt
+
+RC_FILE = monero-core.rc
