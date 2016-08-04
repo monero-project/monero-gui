@@ -153,7 +153,7 @@ langrel.commands = \
     $$LANGREL $$LANGREL_OPTIONS ${QMAKE_FILE_IN} -qm $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
 langrel.CONFIG += no_link
 
-QMAKE_EXTRA_TARGETS += langupd deploy
+QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
 QMAKE_EXTRA_COMPILERS += langrel
 PRE_TARGETDEPS += langupd compiler_langrel_make_all
 
@@ -170,6 +170,7 @@ macx {
 
 win32 {
     deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -qmldir=$$PWD
+    deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
 }
 
 
