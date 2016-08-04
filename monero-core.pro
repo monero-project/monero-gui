@@ -182,4 +182,8 @@ OTHER_FILES += \
 DISTFILES += \
     notes.txt
 
+# windows application icon
 RC_FILE = monero-core.rc
+
+# mac application icon
+ICON = $$PWD/images/appicon.icns
