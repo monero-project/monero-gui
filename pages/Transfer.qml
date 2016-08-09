@@ -93,9 +93,13 @@ Rectangle {
 
     ListModel {
         id: priorityModel
-        ListElement { column1: qsTr("LOW") + translationManager.emptyString; column2: ""; priority: PendingTransaction.Priority_Low }
-        ListElement { column1: qsTr("MEDIUM") + translationManager.emptyString; column2: ""; priority: PendingTransaction.Priority_Medium }
-        ListElement { column1: qsTr("HIGH") + translationManager.emptyString; column2: "";  priority: PendingTransaction.Priority_High }
+        // ListElement: cannot use script for property value, so
+        // code like this wont work:
+        // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+
+        ListElement { column1: qsTr("LOW") ; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: qsTr("MEDIUM") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: qsTr("HIGH")  ; column2: "";  priority: PendingTransaction.Priority_High }
     }
 
     StandardDropdown {
