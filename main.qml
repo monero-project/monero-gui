@@ -133,6 +133,7 @@ ApplicationWindow {
         }
 
         middlePanel.paymentClicked.connect(handlePayment);
+        basicPanel.paymentClicked.connect(handlePayment);
 
 
         if (typeof wizard.settings['wallet'] !== 'undefined') {
@@ -397,6 +398,9 @@ ApplicationWindow {
             id: basicPanel
             x: 0
             anchors.bottom: parent.bottom
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
             visible: false
         }
 

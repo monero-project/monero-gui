@@ -28,15 +28,32 @@
 
 import QtQuick 2.0
 import "components"
+import "pages"
 
 Rectangle {
+    id: root
     width: 470
-    height: paymentId.y + paymentId.height + 12
+    // height: paymentId.y + paymentId.height + 12
+    height: header.height + header.anchors.topMargin + transferBasic.height
     color: "#F0EEEE"
+
     border.width: 1
     border.color: "#DBDBDB"
+
     property alias balanceText : balanceText.text;
     property alias unlockedBalanceText : availableBalanceText.text;
+    // repeating signal to the outside world
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
+                          int priority)
+
+    Connections {
+        target: transferBasic
+        onPaymentClicked: {
+            console.log("BasicPanel: paymentClicked")
+            root.paymentClicked(address, paymentId, amount, mixinCount, priority)
+        }
+    }
+
 
     Rectangle {
         id: header
@@ -139,76 +156,16 @@ Rectangle {
             color: "#DBDBDB"
         }
     }
-
-    Row {
-        id: row
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Item {
         anchors.top: header.bottom
-        anchors.margins: 12
-        spacing: 12
-
-        LineEdit {
-            height: 32
-            fontSize: 15
-            width: parent.width - sendButton.width - row.spacing
-            placeholderText: qsTr("amount...") + translationManager.emptyString
-        }
-
-        StandardButton {
-            id: sendButton
-            width: 60
-            height: 32
-            fontSize: 11
-            text: qsTr("SEND")
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        Transfer {
+            id : transferBasic
+            anchors.fill: parent
         }
     }
 
-    LineEdit {
-        id: destinationLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: row.bottom
-        anchors.margins: 12
-        fontSize: 15
-        height: 32
-        placeholderText: qsTr("destination...") + translationManager.emptyString
-    }
 
-    Text {
-        id: privacyLevelText
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: destinationLine.bottom
-        anchors.topMargin: 12
-
-        font.family: "Arial"
-        font.pixelSize: 12
-        color: "#535353"
-        text: qsTr("Privacy level") + translationManager.emptyString
-    }
-
-    PrivacyLevelSmall {
-        id: privacyLevel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: privacyLevelText.bottom
-        anchors.leftMargin: 12
-        anchors.rightMargin: 12
-        anchors.topMargin: 12
-    }
-
-    LineEdit {
-        id: paymentId
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: privacyLevel.bottom
-        anchors.margins: 12
-        fontSize: 15
-        height: 32
-        placeholderText: qsTr("payment ID (optional)...") + translationManager.emptyString
-    }
 }
