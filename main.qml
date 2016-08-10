@@ -143,6 +143,8 @@ ApplicationWindow {
             console.log("opening wallet at: ", wallet_path);
             // TODO: wallet password dialog
             wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
+
+
             if (wallet.status !== Wallet.Status_Ok) {
                 console.log("Error opening wallet: ", wallet.errorString);
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
@@ -164,8 +166,9 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-        leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
-        leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
+        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
+        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
+
     }
 
     function onWalletRefresh() {
