@@ -347,7 +347,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
                 PropertyChanges { target: titleBar; y: -titleBar.height }
-                PropertyChanges { target: titleBar; title: qsTr("Monero  -  Donations") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
 
