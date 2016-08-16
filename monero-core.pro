@@ -155,6 +155,8 @@ langrel.CONFIG += no_link
 
 QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
 QMAKE_EXTRA_COMPILERS += langrel
+
+
 PRE_TARGETDEPS += langupd compiler_langrel_make_all
 
 RESOURCES += qml.qrc
@@ -180,7 +182,8 @@ OTHER_FILES += \
     $$TRANSLATIONS
 
 DISTFILES += \
-    notes.txt
+    notes.txt \
+    components/PasswordDialog.qml
 
 # windows application icon
 RC_FILE = monero-core.rc

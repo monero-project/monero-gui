@@ -78,24 +78,6 @@ Rectangle {
         }
     }
 
-    // TODO: remove it
-    function handlePageChanged() {
-
-//        switch (pages[currentPage]) {
-////        case finishPage:
-////            // display settings summary
-////            finishPage.updateSettingsSummary();
-////            nextButton.visible = false;
-////            break;
-//        case recoveryWalletPage:
-//            // disable "next button" until 25 words private key entered
-//            nextButton.enabled = false
-//            break
-//        default:
-//            nextButton.enabled = true
-
-//        }
-    }
 
 
     function openCreateWalletPage() {
@@ -126,10 +108,9 @@ Rectangle {
 
     //! actually writes the wallet
     function applySettings() {
-        print ("Here we apply the settings");
+        console.log("Here we apply the settings");
         // here we need to actually move wallet to the new location
-        // put wallet files to the subdirectory with the same name as
-        // wallet name
+
         var new_wallet_filename = settings.wallet_path + "/"
                 + settings.account_name + "/"
                 + settings.account_name;
@@ -138,8 +119,11 @@ Rectangle {
         if (new_wallet_filename !== settings.wallet_filename) {
             // using previously saved wallet;
             settings.wallet.store(new_wallet_filename);
-            //walletManager.moveWallet(settingsObject.wallet_filename, new_wallet_filename);
         }
+
+        // protecting wallet with password
+        console.log("Protecting wallet with password: " + settings.wallet_password)
+        settings.wallet.setPassword(settings.wallet_password);
 
         // saving wallet_filename;
         settings['wallet_filename'] = new_wallet_filename;
@@ -162,17 +146,6 @@ Rectangle {
         settings['auto_donations_amount'] = appWindow.persistentSettings.auto_donations_amount
     }
 
-
-//    Settings {
-//        id: persistentSettings
-
-//        property string language
-//        property string account_name
-//        property string wallet_path
-//        property bool   auto_donations_enabled : true
-//        property int    auto_donations_amount : 50
-//        property bool   allow_background_mining : true
-//    }
 
     Rectangle {
         id: nextButton

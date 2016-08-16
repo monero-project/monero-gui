@@ -139,19 +139,18 @@ ApplicationWindow {
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             wallet = wizard.settings['wallet'];
         }  else {
-            var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
-                    + persistentSettings.account_name;
+            var wallet_path = walletPath();
+
             console.log("opening wallet at: ", wallet_path);
             // TODO: wallet password dialog
             wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
 
 
             if (wallet.status !== Wallet.Status_Ok) {
-                console.log("Error opening wallet: ", wallet.errorString);
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-                informationPopup.icon = StandardIcon.Critical
-                informationPopup.open()
+                console.error("Error opening wallet with empty password: ", wallet.errorString);
+
+                // try to open wallet with password;
+                passwordDialog.open();
                 return;
             }
             console.log("Wallet opened successfully: ", wallet.errorString);
@@ -164,6 +163,13 @@ ApplicationWindow {
         wallet.initAsync(persistentSettings.daemon_address, 0);
 
     }
+
+    function walletPath() {
+        var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
+                + persistentSettings.account_name;
+        return wallet_path;
+    }
+
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
@@ -291,6 +297,7 @@ ApplicationWindow {
     // Information dialog
     MessageDialog {
         id: informationPopup
+
         standardButtons: StandardButton.Ok
     }
 
@@ -300,6 +307,25 @@ ApplicationWindow {
         standardButtons: StandardButton.Ok  + StandardButton.Cancel
         onAccepted: {
             handleTransactionConfirmed()
+        }
+    }
+
+    PasswordDialog {
+        id: passwordDialog
+        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+        onAccepted: {
+
+            var wallet_path = walletPath();
+            console.log("opening wallet with password: ", wallet_path);
+            wallet = walletManager.openWallet(wallet_path, password, persistentSettings.testnet);
+            if (wallet.status !== Wallet.Status_Ok) {
+                console.error("Error opening wallet with password: ", wallet.errorString);
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                informationPopup.icon = StandardIcon.Critical
+                informationPopup.open()
+
+            }
         }
     }
 

@@ -114,5 +114,6 @@
         <file>pages/Receive.qml</file>
         <file>components/IconButton.qml</file>
         <file>lang/flags/italy.png</file>
+        <file>components/PasswordDialog.qml</file>
     </qresource>
 </RCC>
