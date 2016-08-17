@@ -29,10 +29,13 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import QtGraphicalEffects 1.0
+
 import "tabs"
 import "components"
 
 Rectangle {
+    id: root
     width: 330
     color: "#FFFFFF"
 
@@ -144,5 +147,12 @@ Rectangle {
         anchors.right: parent.right
         width: 1
         color: "#DBDBDB"
+    }
+
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: root.enabled ? 0.0 : 1.0
     }
 }

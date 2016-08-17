@@ -27,8 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 
 Rectangle {
+    id: root
     color: "#F0EEEE"
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
@@ -115,5 +117,12 @@ Rectangle {
         anchors.bottom: parent.bottom
         height: 1
         color: "#DBDBDB"
+    }
+
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: root.enabled ? 0.0 : 1.0
     }
 }

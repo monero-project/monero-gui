@@ -41,7 +41,8 @@ import "wizard"
 
 ApplicationWindow {
     id: appWindow
-    objectName: "appWindow"
+
+
     property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
@@ -50,6 +51,8 @@ ApplicationWindow {
     property alias persistentSettings : persistentSettings
     property var wallet;
     property var transaction;
+    property alias password : passwordDialog.password
+
 
 
     function altKeyReleased() { ctrlPressed = false; }
@@ -98,24 +101,24 @@ ApplicationWindow {
     }
 
     function mousePressed(obj, mouseX, mouseY) {
-        if(obj.objectName === "appWindow")
-            obj = rootItem
+//        if(obj.objectName === "appWindow")
+//            obj = rootItem
 
-        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
-        if(tmp !== undefined) {
-            mouseX = tmp.x
-            mouseY = tmp.y
-        }
+//        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
+//        if(tmp !== undefined) {
+//            mouseX = tmp.x
+//            mouseY = tmp.y
+//        }
 
-        if(currentItem !== undefined) {
-            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
-            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
+//        if(currentItem !== undefined) {
+//            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
+//            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
 
-            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
-                currentItem.hide()
-                currentItem = undefined
-            }
-        }
+//            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
+//                currentItem.hide()
+//                currentItem = undefined
+//            }
+//        }
     }
 
     function mouseReleased(obj, mouseX, mouseY) {
@@ -142,17 +145,18 @@ ApplicationWindow {
             var wallet_path = walletPath();
 
             console.log("opening wallet at: ", wallet_path);
-            // TODO: wallet password dialog
-            wallet = walletManager.openWallet(wallet_path, "", persistentSettings.testnet);
-
-
+            wallet = walletManager.openWallet(wallet_path, appWindow.password,
+                                              persistentSettings.testnet);
             if (wallet.status !== Wallet.Status_Ok) {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
-
+                console.log("closing wallet...")
+                walletManager.closeWallet(wallet)
+                console.log("wallet closed")
                 // try to open wallet with password;
                 passwordDialog.open();
                 return;
             }
+
             console.log("Wallet opened successfully: ", wallet.errorString);
         }
         // subscribing for wallet updates
@@ -195,6 +199,8 @@ ApplicationWindow {
     }
 
 
+
+
     // called on "transfer"
     function handlePayment(address, paymentId, amount, mixinCount, priority) {
         console.log("Creating transaction: ")
@@ -213,6 +219,7 @@ ApplicationWindow {
             informationPopup.title = qsTr("Error") + translationManager.emptyString;
             informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
             informationPopup.open();
             // deleting transaction object, we don't want memleaks
             wallet.disposeTransaction(transaction);
@@ -248,19 +255,29 @@ ApplicationWindow {
             informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
         }
-
+        informationPopup.onCloseCallback = null
         informationPopup.open()
         wallet.refresh()
         wallet.disposeTransaction(transaction)
     }
 
+    // blocks UI if wallet can't be opened or no connection to the daemon
+    function enableUI(enable) {
+        middlePanel.enabled = enable;
+        leftPanel.enabled = enable;
+        rightPanel.enabled = enable;
+        basicPanel.enabled = enable;
+    }
 
+
+    objectName: "appWindow"
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
     color: "#FFFFFF"
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
     onWidthChanged: x -= 0
+
 
     Component.onCompleted: {
         x = (Screen.width - width) / 2
@@ -277,6 +294,7 @@ ApplicationWindow {
             rightPanel.updateTweets()
         }
     }
+
 
     Settings {
         id: persistentSettings
@@ -296,9 +314,15 @@ ApplicationWindow {
 
     // Information dialog
     MessageDialog {
+        // dynamically change onclose handler
+        property var onCloseCallback
         id: informationPopup
-
         standardButtons: StandardButton.Ok
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
     }
 
     // Confrirmation aka question dialog
@@ -317,6 +341,7 @@ ApplicationWindow {
 
             var wallet_path = walletPath();
             console.log("opening wallet with password: ", wallet_path);
+
             wallet = walletManager.openWallet(wallet_path, password, persistentSettings.testnet);
             if (wallet.status !== Wallet.Status_Ok) {
                 console.error("Error opening wallet with password: ", wallet.errorString);
@@ -324,8 +349,15 @@ ApplicationWindow {
                 informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
                 informationPopup.icon = StandardIcon.Critical
                 informationPopup.open()
-
+                informationPopup.onCloseCallback = appWindow.initialize
+                walletManager.closeWallet(wallet);
             }
+        }
+        onRejected: {
+            appWindow.enableUI(false)
+        }
+        onDiscard: {
+            appWindow.enableUI(false)
         }
     }
 
@@ -339,7 +371,6 @@ ApplicationWindow {
             anchors.fill: parent
             text: qsTr("Initializing Wallet...");
         }
-
     }
 
 

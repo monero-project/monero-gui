@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import "components"
 import "pages"
 
@@ -165,6 +166,13 @@ Rectangle {
             id : transferBasic
             anchors.fill: parent
         }
+    }
+
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: root.enabled ? 0.0 : 1.0
     }
 
 

@@ -146,6 +146,8 @@ isEmpty(QMAKE_LRELEASE) {
 langupd.command = \
     $$LANGUPD $$LANGUPD_OPTIONS $$shell_path($$_PRO_FILE) -ts $$_PRO_FILE_PWD/$$TRANSLATIONS
 
+
+
 langrel.depends = langupd
 langrel.input = TRANSLATIONS
 langrel.output = $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
@@ -157,7 +159,12 @@ QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
 QMAKE_EXTRA_COMPILERS += langrel
 
 
-PRE_TARGETDEPS += langupd compiler_langrel_make_all
+
+# temporary: do not update/release translations for "Debug" build,
+# as we have an issue with linking
+CONFIG(release, debug|release) {
+    PRE_TARGETDEPS += langupd compiler_langrel_make_all
+}
 
 RESOURCES += qml.qrc
 
@@ -182,8 +189,8 @@ OTHER_FILES += \
     $$TRANSLATIONS
 
 DISTFILES += \
-    notes.txt \
-    components/PasswordDialog.qml
+    notes.txt
+
 
 # windows application icon
 RC_FILE = monero-core.rc

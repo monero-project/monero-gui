@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 import "components"
 
 Rectangle {
@@ -355,4 +356,12 @@ Rectangle {
             connected: false
         }
     }
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: panel.enabled ? 0.0 : 1.0
+    }
+
+
 }
