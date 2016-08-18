@@ -16,15 +16,38 @@ public:
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
                                       const QString &language, bool testnet = false);
-    // just for future use
+
+    /*!
+     * \brief openWallet - opens wallet by given path
+     * \param path       - wallet filename
+     * \param password   - wallet password. Empty string in wallet isn't password protected
+     * \param testnet    - determines if we running testnet
+     * \return wallet object pointer
+     */
     Q_INVOKABLE Wallet * openWallet(const QString &path, const QString &password, bool testnet = false);
+
+    /*!
+     * \brief openWalletAsync - asynchronous version of "openWallet". Returns immediately. "walletOpened" signal
+     *                          emitted when wallet opened;
+     */
+    Q_INVOKABLE void openWalletAsync(const QString &path, const QString &password, bool testnet = false);
 
     // wizard: recoveryWallet path; hint: internally it recorvers wallet and set password = ""
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
                                        bool testnet = false);
 
-    //! utils: close wallet to free memory
-    Q_INVOKABLE void closeWallet(Wallet * wallet);
+    /*!
+     * \brief closeWallet - closes wallet and frees memory
+     * \param wallet
+     * \return wallet address
+     */
+    Q_INVOKABLE QString closeWallet(Wallet * wallet);
+
+    /*!
+     * \brief closeWalletAsync - asynchronous version of "closeWallet"
+     * \param wallet - wallet pointer;
+     */
+    Q_INVOKABLE void closeWalletAsync(Wallet * wallet);
 
     //! checks is given filename is a wallet;
     Q_INVOKABLE bool walletExists(const QString &path) const;
@@ -50,8 +73,10 @@ public:
 
 signals:
 
-public slots:
+    void walletOpened(Wallet * wallet);
+    void walletClosed(const QString &walletAddress);
 
+public slots:
 private:
 
     explicit WalletManager(QObject *parent = 0);

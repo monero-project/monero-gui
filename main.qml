@@ -49,9 +49,10 @@ ApplicationWindow {
     property bool rightPanelExpanded: false
     property bool osx: false
     property alias persistentSettings : persistentSettings
-    property var wallet;
+    property var currentWallet;
     property var transaction;
     property alias password : passwordDialog.password
+    property bool walletOpeningWithPassword: false
 
 
 
@@ -145,26 +146,9 @@ ApplicationWindow {
             var wallet_path = walletPath();
 
             console.log("opening wallet at: ", wallet_path);
-            wallet = walletManager.openWallet(wallet_path, appWindow.password,
+            walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
-            if (wallet.status !== Wallet.Status_Ok) {
-                console.error("Error opening wallet with empty password: ", wallet.errorString);
-                console.log("closing wallet...")
-                walletManager.closeWallet(wallet)
-                console.log("wallet closed")
-                // try to open wallet with password;
-                passwordDialog.open();
-                return;
-            }
-
-            console.log("Wallet opened successfully: ", wallet.errorString);
         }
-        // subscribing for wallet updates
-        wallet.updated.connect(onWalletUpdate);
-        wallet.refreshed.connect(onWalletRefresh);
-
-        console.log("initializing with daemon address..")
-        wallet.initAsync(persistentSettings.daemon_address, 0);
 
     }
 
@@ -174,6 +158,50 @@ ApplicationWindow {
         return wallet_path;
     }
 
+    function onWalletOpened(wallet) {
+        console.log(">>> wallet opened: " + wallet)
+
+        if (wallet.status !== Wallet.Status_Ok) {
+            if (!appWindow.walletOpeningWithPassword) {
+                console.error("Error opening wallet with empty password: ", wallet.errorString);
+                console.log("closing wallet async...")
+                walletManager.closeWalletAsync(wallet)
+                // try to open wallet with password;
+                appWindow.walletOpeningWithPassword = true
+                passwordDialog.open();
+            } else {
+                // opening with password but password doesn't match
+                console.error("Error opening wallet with password: ", wallet.errorString);
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                informationPopup.icon = StandardIcon.Critical
+                informationPopup.open()
+                informationPopup.onCloseCallback = appWindow.initialize
+                walletManager.closeWallet(wallet);
+            }
+            return;
+        }
+
+        // wallet opened successfully, subscribing for wallet updates
+        currentWallet = wallet
+//        wallet.updated.connect(appWindow.onWalletUpdate)
+//        wallet.refreshed.connect(appWindow.onWalletRefresh)
+        // currentWallet.refreshed.connect(onWalletRefresh)
+        var connectResult = currentWallet.refreshed.connect(function() {
+            console.log("QML: refreshed")
+        })
+
+        console.log("connected to refreshed: " + connectResult);
+        currentWallet.updated.connect(onWalletUpdate)
+        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+        currentWallet.initAsync(persistentSettings.daemon_address, 0);
+
+    }
+
+
+    function onWalletClosed(walletAddress) {
+        console.log(">>> wallet closed: " + walletAddress)
+    }
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
@@ -283,6 +311,9 @@ ApplicationWindow {
         x = (Screen.width - width) / 2
         y = (Screen.height - height) / 2
         //
+        walletManager.walletOpened.connect(onWalletOpened);
+        walletManager.walletClosed.connect(onWalletClosed);
+
         rootItem.state = walletsFound() ? "normal" : "wizard";
         if (rootItem.state === "normal") {
             initialize(persistentSettings)
@@ -342,16 +373,8 @@ ApplicationWindow {
             var wallet_path = walletPath();
             console.log("opening wallet with password: ", wallet_path);
 
-            wallet = walletManager.openWallet(wallet_path, password, persistentSettings.testnet);
-            if (wallet.status !== Wallet.Status_Ok) {
-                console.error("Error opening wallet with password: ", wallet.errorString);
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-                informationPopup.icon = StandardIcon.Critical
-                informationPopup.open()
-                informationPopup.onCloseCallback = appWindow.initialize
-                walletManager.closeWallet(wallet);
-            }
+            walletManager.openWalletAsync(wallet_path, password, persistentSettings.testnet);
+
         }
         onRejected: {
             appWindow.enableUI(false)

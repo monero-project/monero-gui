@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QUrl>
+#include <QtConcurrent/QtConcurrent>
 
 
 
@@ -42,6 +43,20 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
     return wallet;
 }
 
+void WalletManager::openWalletAsync(const QString &path, const QString &password, bool testnet)
+{
+    QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
+                                        path, password, testnet);
+    QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
+    watcher->setFuture(future);
+    connect(watcher, &QFutureWatcher<Wallet*>::finished,
+            this, [this, watcher]() {
+        QFuture<Wallet*> future = watcher->future();
+        watcher->deleteLater();
+        emit walletOpened(future.result());
+    });
+}
+
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, bool testnet)
 {
@@ -51,9 +66,26 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, 
 }
 
 
-void WalletManager::closeWallet(Wallet *wallet)
+QString WalletManager::closeWallet(Wallet *wallet)
 {
+    QString result = wallet->address();
     delete wallet;
+    return result;
+}
+
+void WalletManager::closeWalletAsync(Wallet *wallet)
+{
+    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet,
+                                                wallet);
+    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
+    watcher->setFuture(future);
+
+    connect(watcher, &QFutureWatcher<QString>::finished,
+            this, [this, watcher]() {
+       QFuture<QString> future = watcher->future();
+       watcher->deleteLater();
+       emit future.result();
+    });
 }
 
 bool WalletManager::walletExists(const QString &path) const
