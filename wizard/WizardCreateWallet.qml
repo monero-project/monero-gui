@@ -29,6 +29,7 @@
 import QtQuick 2.2
 import moneroComponents 1.0
 import QtQuick.Dialogs 1.2
+import 'utils.js' as Utils
 
 Item {
     opacity: 0
@@ -54,7 +55,7 @@ Item {
     }
 
     function checkNextButton() {
-        var wordsArray = cleanWordsInput(uiItem.wordsTextItem.memoText).split(" ");
+        var wordsArray = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText).split(" ");
         wizard.nextButton.enabled = wordsArray.length === 25;
     }
 

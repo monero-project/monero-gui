@@ -52,8 +52,6 @@ ApplicationWindow {
     property var currentWallet;
     property var transaction;
     property alias password : passwordDialog.password
-    property bool walletOpeningWithPassword: false
-
 
 
     function altKeyReleased() { ctrlPressed = false; }
@@ -140,16 +138,25 @@ ApplicationWindow {
         basicPanel.paymentClicked.connect(handlePayment);
 
 
+        // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
-            wallet = wizard.settings['wallet'];
+            connectWallet(wizard.settings['wallet'])
         }  else {
             var wallet_path = walletPath();
-
-            console.log("opening wallet at: ", wallet_path);
+            console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }
 
+    }
+
+
+    function connectWallet(wallet) {
+        currentWallet = wallet
+        currentWallet.refreshed.connect(onWalletRefresh)
+        currentWallet.updated.connect(onWalletUpdate)
+        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+        currentWallet.initAsync(persistentSettings.daemon_address, 0);
     }
 
     function walletPath() {
@@ -162,39 +169,32 @@ ApplicationWindow {
         console.log(">>> wallet opened: " + wallet)
 
         if (wallet.status !== Wallet.Status_Ok) {
-            if (!appWindow.walletOpeningWithPassword) {
+            if (appWindow.password === '') {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
-                console.log("closing wallet async...")
+                console.log("closing wallet async : " + wallet.address)
                 walletManager.closeWalletAsync(wallet)
                 // try to open wallet with password;
-                appWindow.walletOpeningWithPassword = true
                 passwordDialog.open();
             } else {
                 // opening with password but password doesn't match
                 console.error("Error opening wallet with password: ", wallet.errorString);
+
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
                 informationPopup.icon = StandardIcon.Critical
+                console.log("closing wallet async : " + wallet.address)
+                walletManager.closeWalletAsync(wallet);
                 informationPopup.open()
-                informationPopup.onCloseCallback = appWindow.initialize
-                walletManager.closeWallet(wallet);
+                informationPopup.onCloseCallback = function() {
+                    passwordDialog.open()
+                }
+
             }
             return;
         }
 
         // wallet opened successfully, subscribing for wallet updates
-        currentWallet = wallet
-//        wallet.updated.connect(appWindow.onWalletUpdate)
-//        wallet.refreshed.connect(appWindow.onWalletRefresh)
-        // currentWallet.refreshed.connect(onWalletRefresh)
-        var connectResult = currentWallet.refreshed.connect(function() {
-            console.log("QML: refreshed")
-        })
-
-        console.log("connected to refreshed: " + connectResult);
-        currentWallet.updated.connect(onWalletUpdate)
-        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
-        currentWallet.initAsync(persistentSettings.daemon_address, 0);
+        connectWallet(wallet)
 
     }
 
@@ -205,14 +205,14 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(wallet.unlockedBalance);
-        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(wallet.balance);
-
+        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText =
+                walletManager.displayAmount(currentWallet.unlockedBalance);
+        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
     }
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
-        leftPanel.networkStatus.connected = wallet.connected
+        leftPanel.networkStatus.connected = currentWallet.connected
         onWalletUpdate();
     }
 
@@ -369,12 +369,12 @@ ApplicationWindow {
         id: passwordDialog
         standardButtons: StandardButton.Ok  + StandardButton.Cancel
         onAccepted: {
+            appWindow.currentWallet = null
+            appWindow.initialize();
 
-            var wallet_path = walletPath();
-            console.log("opening wallet with password: ", wallet_path);
-
-            walletManager.openWalletAsync(wallet_path, password, persistentSettings.testnet);
-
+//            var wallet_path = walletPath();
+//            console.log("opening wallet with password: ", wallet_path);
+//            walletManager.openWalletAsync(wallet_path, password, persistentSettings.testnet);
         }
         onRejected: {
             appWindow.enableUI(false)

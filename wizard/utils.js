@@ -42,3 +42,8 @@ function mapScope (inputScopeFrom, inputScopeTo, outputScopeFrom, outputScopeTo,
 function tr(text) {
     return qsTr(text) + translationManager.emptyString
 }
+
+
+function lineBreaksToSpaces(text) {
+    return text.trim().replace(/(\r\n|\n|\r)/gm, " ");
+}

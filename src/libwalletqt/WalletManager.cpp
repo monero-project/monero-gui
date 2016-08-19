@@ -40,6 +40,13 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
 
     Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
     Wallet * wallet = new Wallet(w);
+
+    // move wallet to the GUI thread. Otherwise it wont be emitting signals
+    if (wallet->thread() != qApp->thread()) {
+        wallet->moveToThread(qApp->thread());
+    }
+
+
     return wallet;
 }
 
@@ -84,7 +91,7 @@ void WalletManager::closeWalletAsync(Wallet *wallet)
             this, [this, watcher]() {
        QFuture<QString> future = watcher->future();
        watcher->deleteLater();
-       emit future.result();
+       emit walletClosed(future.result());
     });
 }
 
