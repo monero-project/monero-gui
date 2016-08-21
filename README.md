@@ -74,7 +74,7 @@ Process: TODO
 
 ### On Linux:
 
-(Tested on Ubuntu 16.04 i386)
+(Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
 
 1. Install Bitmonero dependencies.
 
@@ -94,7 +94,13 @@ Process: TODO
 
 5. Install the GUI dependencies.
 
+  a) For Ubuntu 16.04 i386
+
 `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
+
+  b) For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+
+`sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
 
 6. Build the GUI.
 
