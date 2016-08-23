@@ -2,6 +2,7 @@
 #define WALLETMANAGER_H
 
 #include <QObject>
+#include <wallet/wallet2_api.h>
 
 class Wallet;
 namespace Bitmonero {
@@ -12,6 +13,17 @@ class WalletManager : public QObject
 {
     Q_OBJECT
 public:
+    enum LogLevel {
+        LogLevel_Silent = Bitmonero::WalletManagerFactory::LogLevel_Silent,
+        LogLevel_0 = Bitmonero::WalletManagerFactory::LogLevel_0,
+        LogLevel_1 = Bitmonero::WalletManagerFactory::LogLevel_1,
+        LogLevel_2 = Bitmonero::WalletManagerFactory::LogLevel_2,
+        LogLevel_3 = Bitmonero::WalletManagerFactory::LogLevel_3,
+        LogLevel_4 = Bitmonero::WalletManagerFactory::LogLevel_4,
+        LogLevel_Min = Bitmonero::WalletManagerFactory::LogLevel_Min,
+        LogLevel_Max = Bitmonero::WalletManagerFactory::LogLevel_Max,
+    };
+
     static WalletManager * instance();
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
@@ -70,6 +82,8 @@ public:
     Q_INVOKABLE QString displayAmount(quint64 amount);
     Q_INVOKABLE quint64 amountFromString(const QString &amount);
     Q_INVOKABLE quint64 amountFromDouble(double amount);
+
+    void setLogLevel(int logLevel);
 
 signals:
 

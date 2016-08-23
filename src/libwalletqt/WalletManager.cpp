@@ -8,12 +8,7 @@
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
 
-
-
 WalletManager * WalletManager::m_instance = nullptr;
-
-
-
 
 
 WalletManager *WalletManager::instance()
@@ -36,16 +31,17 @@ Wallet *WalletManager::createWallet(const QString &path, const QString &password
 
 Wallet *WalletManager::openWallet(const QString &path, const QString &password, bool testnet)
 {
-    // TODO: call the libwallet api here;
+    qDebug("%s: opening wallet at %s, testnet = %d ",
+           __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
     Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
+    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
     Wallet * wallet = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
     if (wallet->thread() != qApp->thread()) {
         wallet->moveToThread(qApp->thread());
     }
-
 
     return wallet;
 }
@@ -141,9 +137,12 @@ quint64 WalletManager::amountFromDouble(double amount)
     return Bitmonero::Wallet::amountFromDouble(amount);
 }
 
+void WalletManager::setLogLevel(int logLevel)
+{
+    Bitmonero::WalletManagerFactory::setLogLevel(logLevel);
+}
+
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Bitmonero::WalletManagerFactory::getWalletManager();
 }
-
-

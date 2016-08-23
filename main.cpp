@@ -111,5 +111,7 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
 
+    WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Max);
+
     return app.exec();
 }
