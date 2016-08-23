@@ -135,7 +135,7 @@ ApplicationWindow {
         }
 
         middlePanel.paymentClicked.connect(handlePayment);
-        basicPanel.paymentClicked.connect(handlePayment);
+        // basicPanel.paymentClicked.connect(handlePayment);
 
 
         // wallet already opened with wizard, we just need to initialize it
@@ -240,10 +240,25 @@ ApplicationWindow {
                     ", mixins: ", mixinCount,
                     ", priority: ", priority);
 
-        var amountxmr = walletManager.amountFromString(amount);
 
+        // validate amount;
+        var amountxmr = walletManager.amountFromString(amount);
         console.log("integer amount: ", amountxmr);
-        transaction = wallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
+        if (amountxmr <= 0) {
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
+                    .arg(walletManager.displayAmount(0))
+                    .arg(walletManager.maximumAllowedAmountAsSting())
+                    + translationManager.emptyString
+
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            return;
+        }
+
+        // validate address;
+        transaction = currentWallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString;
@@ -252,7 +267,7 @@ ApplicationWindow {
             informationPopup.onCloseCallback = null
             informationPopup.open();
             // deleting transaction object, we don't want memleaks
-            wallet.disposeTransaction(transaction);
+            currentWallet.disposeTransaction(transaction);
 
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
@@ -287,8 +302,8 @@ ApplicationWindow {
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
-        wallet.refresh()
-        wallet.disposeTransaction(transaction)
+        currentWallet.refresh()
+        currentWallet.disposeTransaction(transaction)
     }
 
     // blocks UI if wallet can't be opened or no connection to the daemon

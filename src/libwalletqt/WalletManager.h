@@ -12,6 +12,7 @@ namespace Bitmonero {
 class WalletManager : public QObject
 {
     Q_OBJECT
+
 public:
     enum LogLevel {
         LogLevel_Silent = Bitmonero::WalletManagerFactory::LogLevel_Silent,
@@ -79,9 +80,13 @@ public:
 
 
     //! since we can't call static method from QML, move it to this class
-    Q_INVOKABLE QString displayAmount(quint64 amount);
-    Q_INVOKABLE quint64 amountFromString(const QString &amount);
-    Q_INVOKABLE quint64 amountFromDouble(double amount);
+    Q_INVOKABLE QString displayAmount(quint64 amount) const;
+    Q_INVOKABLE quint64 amountFromString(const QString &amount) const;
+    Q_INVOKABLE quint64 amountFromDouble(double amount) const;
+    Q_INVOKABLE quint64 maximumAllowedAmount() const;
+
+    // QML JS engine doesn't support unsigned integers
+    Q_INVOKABLE QString maximumAllowedAmountAsSting() const;
 
     void setLogLevel(int logLevel);
 

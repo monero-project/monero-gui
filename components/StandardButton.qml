@@ -47,7 +47,10 @@ Item {
         height: parent.height - 1
         y: buttonArea.pressed ? 0 : 1
         //radius: 4
-        color: buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor
+        color: {
+            parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
+                           : Qt.lighter(parent.shadowReleasedColor)
+        }
     }
 
     Rectangle {
@@ -55,7 +58,11 @@ Item {
         anchors.right: parent.right
         height: parent.height - 1
         y: buttonArea.pressed ? 1 : 0
-        color: buttonArea.pressed ? parent.pressedColor : parent.releasedColor
+        color: {
+            parent.enabled ? (buttonArea.pressed ? parent.pressedColor : parent.releasedColor)
+                           : Qt.lighter(parent.releasedColor)
+
+        }
         //radius: 4
     }
 

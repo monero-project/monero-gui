@@ -122,17 +122,27 @@ QString WalletManager::walletLanguage(const QString &locale)
     return "English";
 }
 
-QString WalletManager::displayAmount(quint64 amount)
+quint64 WalletManager::maximumAllowedAmount() const
+{
+    return Bitmonero::Wallet::maximumAllowedAmount();
+}
+
+QString WalletManager::maximumAllowedAmountAsSting() const
+{
+    return WalletManager::displayAmount(WalletManager::maximumAllowedAmount());
+}
+
+QString WalletManager::displayAmount(quint64 amount) const
 {
     return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
 }
 
-quint64 WalletManager::amountFromString(const QString &amount)
+quint64 WalletManager::amountFromString(const QString &amount) const
 {
     return Bitmonero::Wallet::amountFromString(amount.toStdString());
 }
 
-quint64 WalletManager::amountFromDouble(double amount)
+quint64 WalletManager::amountFromDouble(double amount) const
 {
     return Bitmonero::Wallet::amountFromDouble(amount);
 }

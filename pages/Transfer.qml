@@ -32,6 +32,7 @@ import "../components"
 
 
 Rectangle {
+    id: root
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
                           int priority)
 
@@ -88,6 +89,11 @@ Rectangle {
             id: amountLine
             placeholderText: qsTr("Amount...") + translationManager.emptyString
             width: parent.width - 37 - 17
+            validator: DoubleValidator {
+                bottom: 0.0
+                notation: DoubleValidator.StandardNotation
+                locale: "C"
+            }
         }
     }
 
@@ -170,7 +176,7 @@ Rectangle {
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                     Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
-                + translationManager.emptyString
+              + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
     }
@@ -220,7 +226,7 @@ Rectangle {
         anchors.topMargin: 17
         fontSize: 14
         text: qsTr("Description <font size='2'>( An optional description that will be saved to the local address book if entered )</font>")
-            + translationManager.emptyString
+              + translationManager.emptyString
     }
 
     LineEdit {
@@ -245,16 +251,15 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
+        enabled : addressLine.text.length > 0 && amountLine.text.length > 0
         onClicked: {
-            // do more smart validation
-
-            if (addressLine.text.length > 0 && amountLine.text.length > 0) {
-                console.log("paymentClicked")
-                var priority = priorityModel.get(priorityDropdown.currentIndex).priority
-                console.log("priority: " + priority)
-                paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                               priority)
-            }
+            console.log("Transfer: paymentClicked")
+            var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+            console.log("priority: " + priority)
+            console.log("amount: " + amountLine.text)
+            root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                           priority)
         }
     }
 }
+
