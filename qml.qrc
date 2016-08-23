@@ -115,5 +115,6 @@
         <file>components/IconButton.qml</file>
         <file>lang/flags/italy.png</file>
         <file>components/PasswordDialog.qml</file>
+        <file>components/ProcessingSplash.qml</file>
     </qresource>
 </RCC>

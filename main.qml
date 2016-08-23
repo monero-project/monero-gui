@@ -147,11 +147,11 @@ ApplicationWindow {
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }
-
     }
 
 
     function connectWallet(wallet) {
+        showProcessingSplash()
         currentWallet = wallet
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
@@ -167,7 +167,6 @@ ApplicationWindow {
 
     function onWalletOpened(wallet) {
         console.log(">>> wallet opened: " + wallet)
-
         if (wallet.status !== Wallet.Status_Ok) {
             if (appWindow.password === '') {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
@@ -188,7 +187,6 @@ ApplicationWindow {
                 informationPopup.onCloseCallback = function() {
                     passwordDialog.open()
                 }
-
             }
             return;
         }
@@ -212,6 +210,10 @@ ApplicationWindow {
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
+        if (splash.visible) {
+            hideProcessingSplash()
+        }
+
         leftPanel.networkStatus.connected = currentWallet.connected
         onWalletUpdate();
     }
@@ -297,6 +299,19 @@ ApplicationWindow {
         basicPanel.enabled = enable;
     }
 
+    function showProcessingSplash(message) {
+        console.log("Displaying processing splash")
+        if (typeof message != 'undefined') {
+            splash.message = message
+        }
+        splash.show()
+    }
+
+    function hideProcessingSplash() {
+        console.log("Hiding processing splash")
+        splash.hide()
+    }
+
 
     objectName: "appWindow"
     visible: true
@@ -371,10 +386,6 @@ ApplicationWindow {
         onAccepted: {
             appWindow.currentWallet = null
             appWindow.initialize();
-
-//            var wallet_path = walletPath();
-//            console.log("opening wallet with password: ", wallet_path);
-//            walletManager.openWalletAsync(wallet_path, password, persistentSettings.testnet);
         }
         onRejected: {
             appWindow.enableUI(false)
@@ -384,17 +395,16 @@ ApplicationWindow {
         }
     }
 
-    Window {
-        id: walletInitializationSplash
-        modality: Qt.ApplicationModal
-        flags: Qt.SplashScreen
-        height: 100
-        width:  250
-        Text {
-            anchors.fill: parent
-            text: qsTr("Initializing Wallet...");
-        }
+
+    ProcessingSplash {
+        id: splash
+        width: appWindow.width / 2
+        height: appWindow.height / 2
+        x: (appWindow.width - width) / 2 + appWindow.x
+        y: (appWindow.height - height) / 2 + appWindow.y
+        message: qsTr("Please wait...")
     }
+
 
 
     Item {

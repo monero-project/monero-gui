@@ -27,42 +27,37 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
-import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
 
-// import "../components"
+Window {
+    id: splash
+    modality: Qt.ApplicationModal
+    flags: Qt.SplashScreen
+    property alias message: message.text
+    width: 200
+    height: 100
+    opacity: 0.5
 
-Dialog {
-    id: root
-    readonly property alias password: passwordInput.text
-    standardButtons: StandardButton.Ok + StandardButton.Cancel
     ColumnLayout {
-        id: column
-        height: 40
-        anchors.fill: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
-        Label {
-            text: qsTr("Please enter wallet password")
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            font.family: "Arial"
-            font.pixelSize: 32
+        BusyIndicator {
+            running: parent.visible
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
-        TextField {
-            id : passwordInput
-
-            echoMode: TextInput.Password
-            focus: true
-            Layout.fillWidth: true
-            font.family: "Arial"
-            font.pixelSize: 24
-            style: TextFieldStyle {
-                passwordCharacter: "•"
+        Text {
+            id: message
+            text: "Please wait..."
+            font {
+                pointSize: 22
             }
+            horizontalAlignment: Text.AlignHCenter
         }
     }
-}
 
+
+}

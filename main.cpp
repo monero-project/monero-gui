@@ -72,6 +72,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<PendingTransaction::Priority>();
 
 
+
+
     QQmlApplicationEngine engine;
 
     OSCursor cursor;
@@ -82,6 +84,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
+
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
