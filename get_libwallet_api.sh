@@ -2,7 +2,7 @@
 
 
 BITMONERO_URL=https://github.com/mbg033/bitmonero.git
-BITMONERO_BRANCH=master
+BITMONERO_BRANCH=develop
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)
@@ -17,10 +17,15 @@ if [ ! -d $BITMONERO_DIR ]; then
     git clone --depth=1 $BITMONERO_URL $BITMONERO_DIR --branch $BITMONERO_BRANCH --single-branch
 else
     cd $BITMONERO_DIR;
+    git checkout $BITMONERO_BRANCH
     git pull;
 fi
 
+echo "cleaning up existing bitmonero build dir, libs and includes"
 rm -fr $BITMONERO_DIR/build
+rm -fr $BITMONERO_DIR/lib
+rm -fr $BITMONERO_DIR/include
+
 mkdir -p $BITMONERO_DIR/build/release
 pushd $BITMONERO_DIR/build/release
 
