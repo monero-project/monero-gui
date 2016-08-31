@@ -76,7 +76,7 @@ Rectangle {
         anchors.topMargin: 17
         text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during thevtransfer")
+        tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
                 + translationManager.emptyString
     }
 
