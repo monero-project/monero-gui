@@ -138,7 +138,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to recover my account<br/>from my 24 work seed") + translationManager.emptyString
+                text: qsTr("I want to recover my account<br/>from my 25 word seed") + translationManager.emptyString
             }
         }
     }
