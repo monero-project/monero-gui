@@ -36,6 +36,13 @@ Item {
     height: 40
     clip: true
 
+    onFillLevelChanged: {
+        if (!interactive) {
+            //print("fillLevel: " + fillLevel)
+            fillRect.width = row.positions[fillLevel].currentX + row.x
+        }
+    }
+
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -92,7 +99,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
-            text: qsTr("LOW")
+            text: qsTr("LOW") + translationManager.emptyString
         }
 
         Text {
@@ -103,7 +110,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
-            text: qsTr("MEDIUM")
+            text: qsTr("MEDIUM") + translationManager.emptyString
         }
 
         Text {
@@ -114,7 +121,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
-            text: qsTr("HIGH")
+            text: qsTr("HIGH") + translationManager.emptyString
         }
 
         MouseArea {
@@ -134,6 +141,7 @@ Item {
                 if(index !== -1) {
                     fillRect.width = Qt.binding(function(){ return row.positions[index].currentX + row.x })
                     item.fillLevel = index
+                    print ("fillLevel: " + item.fillLevel)
                 }
             }
 
@@ -148,7 +156,7 @@ Item {
         anchors.rightMargin: 8
         anchors.top: bar.bottom
         anchors.topMargin: 5
-        property var positions: new Array()
+        property var positions: []
 
         Row {
             id: row2

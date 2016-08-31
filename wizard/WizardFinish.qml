@@ -40,18 +40,25 @@ Item {
     function buildSettingsString() {
         var str = "<br>" + qsTr("<b>Language:</b> ") + wizard.settings['language'] + "<br>"
             + qsTr("<b>Account name:</b> ") + wizard.settings['account_name'] + "<br>"
-            + qsTr("<b>Words:</b> ") + wizard.settings['words'] + "<br>"
+            + qsTr("<b>Words:</b> ") + wizard.settings['wallet'].seed + "<br>"
             + qsTr("<b>Wallet Path: </b>") + wizard.settings['wallet_path'] + "<br>"
             + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
             + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"
             + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
+            + translationManager.emptyString
         return str;
     }
     function updateSettingsSummary() {
-        settingsText.text = qsTr("An overview of your Monero configuration is below:")
+        settingsText.text = qsTr("An overview of your Monero configuration is below:") + translationManager.emptyString
                             + "<br>"
                             + buildSettingsString();
     }
+
+    function onPageOpened(settings) {
+        updateSettingsSummary();
+        wizard.nextButton.visible = false;
+    }
+
 
     Row {
         id: dotsRow
@@ -94,9 +101,10 @@ Item {
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: qsTr("You’re all setup!")
+            text: qsTr("You’re all setup!") + translationManager.emptyString
         }
 
         Text {
@@ -107,6 +115,7 @@ Item {
             font.pixelSize: 18
             wrapMode: Text.Wrap
             textFormat: Text.RichText
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#4A4646"
         }

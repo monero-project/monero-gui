@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import Qt.labs.settings 1.0
+
 import "../components"
 
 Rectangle {
@@ -34,7 +36,13 @@ Rectangle {
     property alias nextButton : nextButton
     property var settings : ({})
     property int currentPage: 0
-    property var pages: [welcomePage, optionsPage, createWalletPage, passwordPage, /*configurePage,*/ donationPage, finishPage ]
+
+    property var paths: {
+        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
+        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ]
+    }
+    property string currentPath: "create_wallet"
+    property var pages: paths[currentPath]
 
     signal useMoneroClicked()
     border.color: "#DBDBDB"
@@ -42,34 +50,100 @@ Rectangle {
     color: "#FFFFFF"
 
     function switchPage(next) {
-
         // save settings for current page;
-        if (typeof pages[currentPage].saveSettings !== 'undefined') {
-            pages[currentPage].saveSettings(settings);
+        if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
+            if (pages[currentPage].onPageClosed(settings) !== true) {
+                print ("Can't go to the next page");
+                return;
+            };
+
+        }
+        print ("switchpage: currentPage: ", currentPage);
+
+        if (currentPage > 0 || currentPage < pages.length - 1) {
+            pages[currentPage].opacity = 0
+            var step_value = next ? 1 : -1
+            currentPage += step_value
+            pages[currentPage].opacity = 1;
+
+            var nextButtonVisible = pages[currentPage] !== optionsPage;
+            nextButton.visible = nextButtonVisible;
+
+            if (next && typeof pages[currentPage].onPageOpened !== 'undefined') {
+                pages[currentPage].onPageOpened(settings)
+            }
+
+
+
+        }
+    }
+
+
+
+    function openCreateWalletPage() {
+        print ("show create wallet page");
+        pages[currentPage].opacity = 0;
+        createWalletPage.opacity = 1
+        currentPath = "create_wallet"
+        pages = paths[currentPath]
+        currentPage = pages.indexOf(createWalletPage)
+        createWalletPage.createWallet(settings)
+        wizard.nextButton.visible = true
+        createWalletPage.onPageOpened(settings);
+
+
+    }
+
+    function openRecoveryWalletPage() {
+        print ("show recovery wallet page");
+        pages[currentPage].opacity = 0
+        recoveryWalletPage.opacity = 1
+        currentPath = "recovery_wallet"
+        pages = paths[currentPath]
+        currentPage = pages.indexOf(recoveryWalletPage)
+        wizard.nextButton.visible = true
+        recoveryWalletPage.onPageOpened(settings);
+
+    }
+
+    //! actually writes the wallet
+    function applySettings() {
+        console.log("Here we apply the settings");
+        // here we need to actually move wallet to the new location
+
+        var new_wallet_filename = settings.wallet_path + "/"
+                + settings.account_name + "/"
+                + settings.account_name;
+
+        // moving wallet files to the new destination, if user changed it
+        if (new_wallet_filename !== settings.wallet_filename) {
+            // using previously saved wallet;
+            settings.wallet.store(new_wallet_filename);
         }
 
-        if(next === false) {
-            if(currentPage > 0) {
-                pages[currentPage].opacity = 0
-                pages[--currentPage].opacity = 1
-            }
-        } else {
-            if(currentPage < pages.length - 1) {
-                pages[currentPage].opacity = 0
-                pages[++currentPage].opacity = 1
-            }
-        }
+        // protecting wallet with password
+        console.log("Protecting wallet with password: " + settings.wallet_password)
+        settings.wallet.setPassword(settings.wallet_password);
 
-        // disallow "next" button until passwords match
-        if (pages[currentPage] === passwordPage) {
-            nextButton.visible = passwordPage.passwordValid;
-        } else if (pages[currentPage] === finishPage) {
-            // display settings summary
-            finishPage.updateSettingsSummary();
-            nextButton.visible = false
-        } else {
-            nextButton.visible = true
-        }
+        // saving wallet_filename;
+        settings['wallet_filename'] = new_wallet_filename;
+
+        // persist settings
+        appWindow.persistentSettings.language = settings.language
+        appWindow.persistentSettings.locale   = settings.locale
+        appWindow.persistentSettings.account_name = settings.account_name
+        appWindow.persistentSettings.wallet_path = settings.wallet_path
+        appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining
+        appWindow.persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
+        appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
+    }
+
+    // reading settings from persistent storage
+    Component.onCompleted: {
+        console.log("rootItem: ", appWindow);
+        settings['allow_background_mining'] = appWindow.persistentSettings.allow_background_mining
+        settings['auto_donations_enabled'] = appWindow.persistentSettings.auto_donations_enabled
+        settings['auto_donations_amount'] = appWindow.persistentSettings.auto_donations_amount
     }
 
 
@@ -79,10 +153,10 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 50
         visible: wizard.currentPage !== 1 && wizard.currentPage !== 6
-
         width: 50; height: 50
         radius: 25
-        color: nextArea.containsMouse ? "#FF4304" : "#FF6C3C"
+        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
+
 
         Image {
             anchors.centerIn: parent
@@ -97,8 +171,6 @@ Rectangle {
             onClicked: wizard.switchPage(true)
         }
     }
-
-
 
 
     WizardWelcome {
@@ -119,7 +191,8 @@ Rectangle {
         anchors.left: prevButton.right
         anchors.leftMargin: 50
         anchors.rightMargin: 50
-        onCreateWalletClicked: wizard.switchPage(true)
+        onCreateWalletClicked: wizard.openCreateWalletPage()
+        onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
     }
 
     WizardCreateWallet {
@@ -131,6 +204,18 @@ Rectangle {
         anchors.leftMargin: 50
         anchors.rightMargin: 50
     }
+
+    WizardRecoveryWallet {
+        id: recoveryWalletPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
+
 
     WizardPassword {
         id: passwordPage
@@ -193,12 +278,15 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: 50
         width: 110
-        text: qsTr("USE MONERO")
+        text: qsTr("USE MONERO") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        visible: parent.pages[currentPage] === finishPage
-        onClicked: wizard.useMoneroClicked()
+        visible: parent.paths[currentPath][currentPage] === finishPage
+        onClicked: {
+            wizard.applySettings();
+            wizard.useMoneroClicked()
+        }
     }
 }

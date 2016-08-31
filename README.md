@@ -62,3 +62,66 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Parts of the project are originally copyright (c) 2012-2013 The Cryptonote developers
+
+## Compiling Monero-core
+
+### Overview:
+
+Dependencies: TODO
+
+Process: TODO
+
+
+### On Linux:
+
+(Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
+
+1. Install Bitmonero dependencies.
+
+`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
+
+2. Go to the repository where the most recent version is.
+
+`git clone https://github.com/mbg033/monero-core.git`
+
+3. Go into the repository.
+
+`cd monero-core`
+
+4. Use the script to compile the bitmonero libs necessary to run the GUI.
+
+`./get_libwallet_api.sh`
+
+5. Install the GUI dependencies.
+
+  a) For Ubuntu 16.04 i386
+
+`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
+
+  b) For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+
+`sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
+
+6. Build the GUI.
+
+`qmake`
+
+`make`
+
+7. Before running the GUI, it's recommended you have a copy of bitmonero running in the background.
+
+`./bitmonerod --rpc-bind-port 38081`
+
+8. Run the GUI client.
+
+`./release/bin/monero-core`
+
+### On OS X:
+1. install homebrew
+2. install dependencies: 
+`brew install boost --c++11`
+`brew install pkgconfig`
+
+
+### On Windows:
+TODO

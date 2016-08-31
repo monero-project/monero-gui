@@ -34,6 +34,8 @@ import "../components"
 Item {
     id: tab
 
+
+
     ListModel {
         id: testModel
         ListElement { head: "Monero || #xmr"; foot: "<b>@btcplanet</b> Duis turpis arcu, varius nec rutrum in, adipiscing at enim. Donec quis consequat ipsum," }
@@ -56,9 +58,15 @@ Item {
     property var idx
     property var ids
 
+    function updateTweets() {
+        tweetsModel.reload()
+    }
+
+
     Component.onCompleted: {
         ids = new Array()
     }
+
 
     function idInModel(id) {
         for (var j = 0; j < ids.length; j++)

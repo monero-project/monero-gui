@@ -44,7 +44,7 @@ Rectangle {
         font.family: "Arial"
         font.pixelSize: 18
         color: "#4A4949"
-        text: qsTr("Add new entry")
+        text: qsTr("Add new entry") + translationManager.emptyString
     }
 
     Label {
@@ -55,7 +55,7 @@ Rectangle {
         anchors.topMargin: 17
         text: qsTr("Address")
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>")
+        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     LineEdit {
@@ -74,9 +74,10 @@ Rectangle {
         anchors.top: addressLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Payment ID <font size='2'>(Optional)</font>")
+        text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during thevtransfer")
+                + translationManager.emptyString
     }
 
     LineEdit {
@@ -95,9 +96,9 @@ Rectangle {
         anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Local database)</font>")
+        text: qsTr("Description <font size='2'>(Local database)</font>") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b><br/><br/>test line 2")
+        tipText: qsTr("<b>Tip tekst test</b><br/><br/>test line 2") + translationManager.emptyString
     }
 
     LineEdit {
@@ -169,9 +170,9 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: "Address"; columnWidth: 148 }
-            ListElement { columnName: "Payment ID"; columnWidth: 148 }
-            ListElement { columnName: "Description"; columnWidth: 148 }
+            ListElement { columnName: qsTr("Address") + translationManager.emptyString; columnWidth: 148 }
+            ListElement { columnName: qsTr("Payment ID") + translationManager.emptyString; columnWidth: 148 }
+            ListElement { columnName: qsTr("Description") + translationManager.emptyString; columnWidth: 148 }
         }
 
         TableHeader {

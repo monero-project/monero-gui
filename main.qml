@@ -30,23 +30,37 @@ import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
+import QtQuick.Dialogs 1.2
+import Qt.labs.settings 1.0
+import Bitmonero.Wallet 1.0
+import Bitmonero.PendingTransaction 1.0
+
+
 import "components"
 import "wizard"
 
 ApplicationWindow {
     id: appWindow
-    objectName: "appWindow"
+
+
     property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
-    property bool rightPanelExpanded: true
+    property bool rightPanelExpanded: false
     property bool osx: false
+    property alias persistentSettings : persistentSettings
+    property var currentWallet;
+    property var transaction;
+    property alias password : passwordDialog.password
+
 
     function altKeyReleased() { ctrlPressed = false; }
+
     function showPageRequest(page) {
         middlePanel.state = page
         leftPanel.selectItem(page)
     }
+
     function sequencePressed(obj, seq) {
         if(seq === undefined)
             return
@@ -86,30 +100,235 @@ ApplicationWindow {
     }
 
     function mousePressed(obj, mouseX, mouseY) {
-        if(obj.objectName === "appWindow")
-            obj = rootItem
+//        if(obj.objectName === "appWindow")
+//            obj = rootItem
 
-        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
-        if(tmp !== undefined) {
-            mouseX = tmp.x
-            mouseY = tmp.y
-        }
+//        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
+//        if(tmp !== undefined) {
+//            mouseX = tmp.x
+//            mouseY = tmp.y
+//        }
 
-        if(currentItem !== undefined) {
-            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
-            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
+//        if(currentItem !== undefined) {
+//            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
+//            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
 
-            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
-                currentItem.hide()
-                currentItem = undefined
-            }
-        }
+//            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
+//                currentItem.hide()
+//                currentItem = undefined
+//            }
+//        }
     }
 
     function mouseReleased(obj, mouseX, mouseY) {
 
     }
 
+
+    function initialize() {
+        console.log("initializing..")
+
+        // setup language
+        var locale = persistentSettings.locale
+        if (locale !== "") {
+            translationManager.setLanguage(locale.split("_")[0]);
+        }
+
+        middlePanel.paymentClicked.connect(handlePayment);
+        // basicPanel.paymentClicked.connect(handlePayment);
+
+
+        // wallet already opened with wizard, we just need to initialize it
+        if (typeof wizard.settings['wallet'] !== 'undefined') {
+            connectWallet(wizard.settings['wallet'])
+        }  else {
+            var wallet_path = walletPath();
+            console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
+            walletManager.openWalletAsync(wallet_path, appWindow.password,
+                                              persistentSettings.testnet);
+        }
+    }
+
+
+    function connectWallet(wallet) {
+        showProcessingSplash()
+        currentWallet = wallet
+        currentWallet.refreshed.connect(onWalletRefresh)
+        currentWallet.updated.connect(onWalletUpdate)
+        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+        currentWallet.initAsync(persistentSettings.daemon_address, 0);
+    }
+
+    function walletPath() {
+        var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
+                + persistentSettings.account_name;
+        return wallet_path;
+    }
+
+    function onWalletOpened(wallet) {
+        console.log(">>> wallet opened: " + wallet)
+        if (wallet.status !== Wallet.Status_Ok) {
+            if (appWindow.password === '') {
+                console.error("Error opening wallet with empty password: ", wallet.errorString);
+                console.log("closing wallet async : " + wallet.address)
+                walletManager.closeWalletAsync(wallet)
+                // try to open wallet with password;
+                passwordDialog.open();
+            } else {
+                // opening with password but password doesn't match
+                console.error("Error opening wallet with password: ", wallet.errorString);
+
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                informationPopup.icon = StandardIcon.Critical
+                console.log("closing wallet async : " + wallet.address)
+                walletManager.closeWalletAsync(wallet);
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    passwordDialog.open()
+                }
+            }
+            return;
+        }
+
+        // wallet opened successfully, subscribing for wallet updates
+        connectWallet(wallet)
+
+    }
+
+
+    function onWalletClosed(walletAddress) {
+        console.log(">>> wallet closed: " + walletAddress)
+    }
+
+    function onWalletUpdate() {
+        console.log(">>> wallet updated")
+        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText =
+                walletManager.displayAmount(currentWallet.unlockedBalance);
+        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+    }
+
+    function onWalletRefresh() {
+        console.log(">>> wallet refreshed")
+        if (splash.visible) {
+            hideProcessingSplash()
+        }
+
+        leftPanel.networkStatus.connected = currentWallet.connected
+        onWalletUpdate();
+    }
+
+
+    function walletsFound() {
+        var wallets = walletManager.findWallets(moneroAccountsDir);
+        if (wallets.length === 0) {
+            wallets = walletManager.findWallets(applicationDirectory);
+        }
+        print(wallets);
+        return wallets.length > 0;
+    }
+
+
+
+
+    // called on "transfer"
+    function handlePayment(address, paymentId, amount, mixinCount, priority) {
+        console.log("Creating transaction: ")
+        console.log("\taddress: ", address,
+                    ", payment_id: ", paymentId,
+                    ", amount: ", amount,
+                    ", mixins: ", mixinCount,
+                    ", priority: ", priority);
+
+
+        // validate amount;
+        var amountxmr = walletManager.amountFromString(amount);
+        console.log("integer amount: ", amountxmr);
+        if (amountxmr <= 0) {
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
+                    .arg(walletManager.displayAmount(0))
+                    .arg(walletManager.maximumAllowedAmountAsSting())
+                    + translationManager.emptyString
+
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            return;
+        }
+
+        // validate address;
+        transaction = currentWallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+
+        } else {
+            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
+                    + ", fee: " + walletManager.displayAmount(transaction.fee));
+
+            // here we show confirmation popup;
+
+            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
+                        + qsTr("\nAddress: ") + address
+                        + qsTr("\nPayment ID: ") + paymentId
+                        + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + translationManager.emptyString
+            transactionConfirmationPopup.icon = StandardIcon.Question
+            transactionConfirmationPopup.open()
+            // committing transaction
+        }
+    }
+
+    // called after user confirms transaction
+    function handleTransactionConfirmed() {
+        if (!transaction.commit()) {
+            console.log("Error committing transaction: " + transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
+            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+        } else {
+            informationPopup.title = qsTr("Information") + translationManager.emptyString
+            informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
+            informationPopup.icon  = StandardIcon.Information
+        }
+        informationPopup.onCloseCallback = null
+        informationPopup.open()
+        currentWallet.refresh()
+        currentWallet.disposeTransaction(transaction)
+    }
+
+    // blocks UI if wallet can't be opened or no connection to the daemon
+    function enableUI(enable) {
+        middlePanel.enabled = enable;
+        leftPanel.enabled = enable;
+        rightPanel.enabled = enable;
+        basicPanel.enabled = enable;
+    }
+
+    function showProcessingSplash(message) {
+        console.log("Displaying processing splash")
+        if (typeof message != 'undefined') {
+            splash.message = message
+        }
+        splash.show()
+    }
+
+    function hideProcessingSplash() {
+        console.log("Hiding processing splash")
+        splash.hide()
+    }
+
+
+    objectName: "appWindow"
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
@@ -117,10 +336,91 @@ ApplicationWindow {
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
     onWidthChanged: x -= 0
 
+
     Component.onCompleted: {
         x = (Screen.width - width) / 2
         y = (Screen.height - height) / 2
+        //
+        walletManager.walletOpened.connect(onWalletOpened);
+        walletManager.walletClosed.connect(onWalletClosed);
+
+        rootItem.state = walletsFound() ? "normal" : "wizard";
+        if (rootItem.state === "normal") {
+            initialize(persistentSettings)
+        }
     }
+
+    onRightPanelExpandedChanged: {
+        if (rightPanelExpanded) {
+            rightPanel.updateTweets()
+        }
+    }
+
+
+    Settings {
+        id: persistentSettings
+        property string language
+        property string locale
+        property string account_name
+        property string wallet_path
+        property bool   auto_donations_enabled : true
+        property int    auto_donations_amount : 50
+        property bool   allow_background_mining : true
+        property bool   testnet: true
+        property string daemon_address: "localhost:38081"
+        property string payment_id
+    }
+
+    // TODO: replace with customized popups
+
+    // Information dialog
+    MessageDialog {
+        // dynamically change onclose handler
+        property var onCloseCallback
+        id: informationPopup
+        standardButtons: StandardButton.Ok
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
+    }
+
+    // Confrirmation aka question dialog
+    MessageDialog {
+        id: transactionConfirmationPopup
+        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+        onAccepted: {
+            handleTransactionConfirmed()
+        }
+    }
+
+    PasswordDialog {
+        id: passwordDialog
+        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+        onAccepted: {
+            appWindow.currentWallet = null
+            appWindow.initialize();
+        }
+        onRejected: {
+            appWindow.enableUI(false)
+        }
+        onDiscard: {
+            appWindow.enableUI(false)
+        }
+    }
+
+
+    ProcessingSplash {
+        id: splash
+        width: appWindow.width / 2
+        height: appWindow.height / 2
+        x: (appWindow.width - width) / 2 + appWindow.x
+        y: (appWindow.height - height) / 2 + appWindow.y
+        message: qsTr("Please wait...")
+    }
+
+
 
     Item {
         id: rootItem
@@ -142,7 +442,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
                 PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: "Program setup wizard" }
+                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
@@ -156,7 +456,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
                 PropertyChanges { target: titleBar; y: -titleBar.height }
-                PropertyChanges { target: titleBar; title: "Monero  -  Donations" }
+                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
 
@@ -168,6 +468,7 @@ ApplicationWindow {
             onDashboardClicked: middlePanel.state = "Dashboard"
             onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
+            onReceiveClicked: middlePanel.state = "Receive"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
             onSettingsClicked: middlePanel.state = "Settings"
@@ -182,18 +483,19 @@ ApplicationWindow {
             visible: appWindow.rightPanelExpanded
         }
 
+
         MiddlePanel {
             id: middlePanel
             anchors.bottom: parent.bottom
             anchors.left: leftPanel.right
             anchors.right: rightPanel.left
             height: parent.height
-            state: "Dashboard"
+            state: "Transfer"
         }
 
         TipItem {
             id: tipItem
-            text: "send to the same destination"
+            text: qsTr("send to the same destination") + translationManager.emptyString
             visible: false
         }
 
@@ -201,6 +503,9 @@ ApplicationWindow {
             id: basicPanel
             x: 0
             anchors.bottom: parent.bottom
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
             visible: false
         }
 
@@ -331,7 +636,10 @@ ApplicationWindow {
         WizardMain {
             id: wizard
             anchors.fill: parent
-            onUseMoneroClicked: rootItem.state = "normal"
+            onUseMoneroClicked: {
+                rootItem.state = "normal" // TODO: listen for this state change in appWindow;
+                appWindow.initialize();
+            }
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
@@ -355,17 +663,18 @@ ApplicationWindow {
                                                                  "images/resize.png"
             }
 
-            property int previousX: 0
-            property int previousY: 0
+            property var previousPosition
+
             onPressed: {
-                previousX = mouseX
-                previousY = mouseY
+                previousPosition = globalCursor.getPosition()
             }
 
             onPositionChanged: {
                 if(!pressed) return
-                var dx = previousX - mouseX
-                var dy = previousY - mouseY
+                var pos = globalCursor.getPosition()
+                //var delta = previousPosition - pos
+                var dx = previousPosition.x - pos.x
+                var dy = previousPosition.y - pos.y
 
                 if(appWindow.width - dx > parent.maxWidth)
                     appWindow.width -= dx
@@ -374,6 +683,7 @@ ApplicationWindow {
                 if(appWindow.height - dy > parent.maxHeight)
                     appWindow.height -= dy
                 else appWindow.height = parent.maxHeight
+                previousPosition = pos
             }
         }
 
@@ -390,13 +700,16 @@ ApplicationWindow {
                 property var previousPosition
                 anchors.fill: parent
                 propagateComposedEvents: true
-                onPressed: previousPosition = Qt.point(mouseX, mouseY)
+                onPressed: previousPosition = globalCursor.getPosition()
                 onPositionChanged: {
                     if (pressedButtons == Qt.LeftButton) {
-                        var dx = mouseX - previousPosition.x
-                        var dy = mouseY - previousPosition.y
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
+
                         appWindow.x += dx
                         appWindow.y += dy
+                        previousPosition = pos
                     }
                 }
             }

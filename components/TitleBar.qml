@@ -35,7 +35,7 @@ Rectangle {
     color: "#000000"
     y: -height
     property int mouseX: 0
-    property string title: "Monero  -  Donations"
+    property string title
     property bool containsMouse: false
     property alias maximizeButtonVisible: maximizeButton.visible
     property alias basicButtonVisible: goToBasicVersionButton.visible

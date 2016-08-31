@@ -56,14 +56,12 @@ Item {
 
     function reload() {
         tweets.clear()
-
         if (from == "" && phrase == "")
             return;
-
-//! [requesting]
+        //! [requesting]
         var req = new XMLHttpRequest;
         req.open("GET", "https://api.twitter.com/1.1/search/tweets.json?from=" + from +
-                        "&count=" + tweetsMaxCount + "&q=" + encodePhrase(phrase));
+                 "&count=" + tweetsMaxCount + "&q=" + encodePhrase(phrase));
         req.setRequestHeader("Authorization", "Bearer " + bearerToken);
         req.onreadystatechange = function() {
             status = req.readyState;
@@ -83,9 +81,8 @@ Item {
             wasLoading = (status === XMLHttpRequest.LOADING);
         }
         req.send();
-//! [requesting]
+        //! [requesting]
     }
-
 
     Component.onCompleted: {
         if (consumerKey === "" || consumerSecret == "") {
@@ -93,7 +90,7 @@ Item {
             bearerToken = encodeURIComponent(Helper.demoToken())
             tweetsModel.phrase = ""
             tweetsModel.from = "@monerocurrency"
-            reload()
+            // reload()
             return;
         }
 

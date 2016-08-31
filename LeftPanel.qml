@@ -27,13 +27,20 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 import "components"
 
 Rectangle {
     id: panel
+
+    property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias balanceText: balanceText.text
+    property alias networkStatus : networkStatus
+
     signal dashboardClicked()
     signal historyClicked()
     signal transferClicked()
+    signal receiveClicked()
     signal settingsClicked()
     signal addressBookClicked()
     signal miningClicked()
@@ -43,15 +50,18 @@ Rectangle {
         if(pos === "Dashboard") menuColumn.previousButton = dashboardButton
         else if(pos === "History") menuColumn.previousButton = historyButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
+        else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
+
         menuColumn.previousButton.checked = true
     }
 
     width: 260
     color: "#FFFFFF"
 
+    // Item with monero logo
     Item {
         id: logoItem
         anchors.left: parent.left
@@ -81,6 +91,7 @@ Rectangle {
         }
     }
 
+
     Column {
         id: column1
         anchors.left: parent.left
@@ -90,10 +101,10 @@ Rectangle {
         spacing: 6
 
         Label {
-            text: qsTr("Locked balance")
+            text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 1<br/><br/>line 2")
+            tipText: qsTr("Test tip 1<br/><br/>line 2") + translationManager.emptyString
         }
 
         Row {
@@ -109,11 +120,12 @@ Rectangle {
             }
 
             Text {
+                id: balanceText
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Arial"
                 font.pixelSize: 26
                 color: "#000000"
-                text: "78.9239845"
+                text: "N/A"
             }
         }
 
@@ -124,19 +136,20 @@ Rectangle {
         }
 
         Label {
-            text: qsTr("Unlocked")
+            text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 2<br/><br/>line 2")
+            tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString
         }
 
         Text {
+            id: unlockedBalanceText
             anchors.left: parent.left
             anchors.leftMargin: 50
             font.family: "Arial"
             font.pixelSize: 18
             color: "#000000"
-            text: "2324.9239845"
+            text: "N/A"
         }
     }
 
@@ -171,13 +184,17 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
 
-            property var previousButton: dashboardButton
+            property var previousButton: transferButton
+
+            // ------------- Dashboard tab ---------------
+
+            /*
             MenuButton {
                 id: dashboardButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Dashboard")
-                symbol: qsTr("D")
+                text: qsTr("Dashboard") + translationManager.emptyString
+                symbol: qsTr("D") + translationManager.emptyString
                 dotColor: "#FFE00A"
                 checked: true
                 onClicked: {
@@ -187,6 +204,7 @@ Rectangle {
                 }
             }
 
+
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -194,13 +212,16 @@ Rectangle {
                 color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
+            */
 
+
+            // ------------- Transfer tab ---------------
             MenuButton {
                 id: transferButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Transfer")
-                symbol: qsTr("T")
+                text: qsTr("Transfer") + translationManager.emptyString
+                symbol: qsTr("T") + translationManager.emptyString
                 dotColor: "#FF6C3C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -213,16 +234,41 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
+                color: transferButton.checked || receiveButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
 
+            // ------------- Receive tab ---------------
+            MenuButton {
+                id: receiveButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Receive") + translationManager.emptyString
+                symbol: qsTr("R") + translationManager.emptyString
+                dotColor: "#AAFFBB"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = receiveButton
+                    panel.receiveClicked()
+                }
+            }
+            /*
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
+                height: 1
+            }*/
+
+            // ------------- History tab ---------------
+            /*
             MenuButton {
                 id: historyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("History")
-                symbol: qsTr("H")
+                text: qsTr("History") + translationManager.emptyString
+                symbol: qsTr("H") + translationManager.emptyString
                 dotColor: "#6B0072"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -238,13 +284,14 @@ Rectangle {
                 color: historyButton.checked || addressBookButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
+            // ------------- AddressBook tab ---------------
 
             MenuButton {
                 id: addressBookButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Address book")
-                symbol: qsTr("B")
+                text: qsTr("Address book") + translationManager.emptyString
+                symbol: qsTr("B") + translationManager.emptyString
                 dotColor: "#FF4F41"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -261,12 +308,13 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Mining")
-                symbol: qsTr("M")
+                text: qsTr("Mining") + translationManager.emptyString
+                symbol: qsTr("M") + translationManager.emptyString
                 dotColor: "#FFD781"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -283,12 +331,13 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Settings tab ---------------
             MenuButton {
                 id: settingsButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Settings")
-                symbol: qsTr("S")
+                text: qsTr("Settings") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
                 dotColor: "#36B25C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -296,13 +345,23 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
+            */
         }
 
         NetworkStatusItem {
+            id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            connected: true
+            connected: false
         }
     }
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: panel.enabled ? 0.0 : 1.0
+    }
+
+
 }

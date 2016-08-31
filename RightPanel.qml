@@ -29,12 +29,20 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import QtGraphicalEffects 1.0
+
 import "tabs"
 import "components"
 
 Rectangle {
+    id: root
     width: 330
     color: "#FFFFFF"
+
+    function updateTweets() {
+        tabView.twitter.item.updateTweets()
+    }
+
 
     TabView {
         id: tabView
@@ -45,11 +53,17 @@ Rectangle {
         anchors.leftMargin: 14
         anchors.rightMargin: 14
         anchors.topMargin: 40
+        property alias twitter: twitter
 
-        Tab { title: qsTr("Twitter"); source: "tabs/Twitter.qml" }
-        Tab { title: "News" }
-        Tab { title: "Help" }
-        Tab { title: "About" }
+
+
+
+        Tab { id: twitter; title: qsTr("Twitter"); source: "tabs/Twitter.qml" }
+        Tab { title: qsTr("News") + translationManager.emptyString }
+        Tab { title: qsTr("Help") + translationManager.emptyString }
+        Tab { title: qsTr("About") + translationManager.emptyString }
+
+
 
         style: TabViewStyle {
             frameOverlap: 0
@@ -133,5 +147,12 @@ Rectangle {
         anchors.right: parent.right
         width: 1
         color: "#DBDBDB"
+    }
+
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: root.enabled ? 0.0 : 1.0
     }
 }

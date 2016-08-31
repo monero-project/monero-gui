@@ -28,26 +28,51 @@
 
 import QtQuick 2.2
 import "../components"
+import "utils.js" as Utils
 
 Item {
+
+    id: passwordPage
     opacity: 0
     visible: false
+
+    property alias titleText: titleText.text
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
 
     onOpacityChanged: visible = opacity !== 0
 
-    function handlePassword() {
-        // allow to forward step only if passwords match
-        // print("pass1: ", passwordItem.password)
-        // print("pass2: ", retypePasswordItem.password)
-        // TODO: update password strength
-        wizard.nextButton.visible = passwordItem.password === retypePasswordItem.password
+
+    function onPageOpened(settingsObject) {
+        wizard.nextButton.enabled = true
+
+        if (wizard.currentPath === "create_wallet") {
+           passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
+        } else {
+           passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
+        }
     }
 
-    property bool passwordValid : passwordItem.password != ''
-                                  && passwordItem.password === retypePasswordItem.password
+    function onPageClosed(settingsObject) {
+        // TODO: set password on the final page
+        // settingsObject.wallet.setPassword(passwordItem.password)
+        settingsObject['wallet_password'] = passwordItem.password
+        return true
+    }
+
+    function handlePassword() {
+        // allow to forward step only if passwords match
+
+        wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
+
+        // scorePassword returns value from 1..100
+        var strength = Utils.scorePassword(passwordItem.password)
+        // privacyLevel component uses 1..13 scale
+        privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
+
+    }
+
 
 
     Row {
@@ -86,14 +111,16 @@ Item {
         spacing: 24
 
         Text {
+            id: titleText
             anchors.left: parent.left
             width: headerColumn.width - dotsRow.width - 16
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: qsTr("Now that your wallet has been created, please set a password for the wallet")
+
         }
 
         Text {
@@ -104,8 +131,10 @@ Item {
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#4A4646"
+            horizontalAlignment: Text.AlignHCenter
             text: qsTr("Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given<br/><br/>
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.")
+                    + translationManager.emptyString
         }
     }
 
@@ -139,5 +168,9 @@ Item {
         width: 300
         height: 62
         onChanged: handlePassword()
+    }
+
+    Component.onCompleted: {
+        console.log
     }
 }

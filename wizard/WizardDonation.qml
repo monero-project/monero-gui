@@ -38,10 +38,18 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
+    function onPageOpened(settingsObject) {
+        enableAutoDonationCheckBox.checked = settingsObject.auto_donations_enabled
+        autoDonationAmountText.text = settingsObject.auto_donations_amount
+        allowBackgroundMiningCheckBox.checked = settingsObject.allow_background_mining
+
+    }
+
+    function onPageClosed(settingsObject) {
         settingsObject['auto_donations_enabled'] = enableAutoDonationCheckBox.checked;
-        settingsObject['auto_donations_amount']  = autoDonationAmountText.text;
+        settingsObject['auto_donations_amount']  = parseInt(autoDonationAmountText.text);
         settingsObject['allow_background_mining'] = allowBackgroundMiningCheckBox.checked;
+        return true;
     }
 
     Row {
@@ -82,7 +90,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("Monero development is solely supported by donations")
+        text: qsTr("Monero development is solely supported by donations") + translationManager.emptyString
     }
 
     Column {
@@ -102,7 +110,7 @@ Item {
             CheckBox {
                 id: enableAutoDonationCheckBox
                 anchors.verticalCenter: parent.verticalCenter
-                text: qsTr("Enable auto-donations of?")
+                text: qsTr("Enable auto-donations of?") + translationManager.emptyString
                 background: "#F0EEEE"
                 fontColor: "#4A4646"
                 fontSize: 18
@@ -142,7 +150,7 @@ Item {
                 font.family: "Arial"
                 font.pixelSize: 18
                 color: "#4A4646"
-                text: qsTr("% of my fee added to each transaction")
+                text: qsTr("% of my fee added to each transaction") + translationManager.emptyString
             }
         }
 
@@ -156,6 +164,7 @@ Item {
             text: qsTr("For every transaction, a small transaction fee is charged. This option lets you add an additional amount, " +
                        "as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% " +
                        "autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.")
+                    + translationManager.emptyString
         }
         Column {
             anchors.left: parent.left
@@ -164,7 +173,7 @@ Item {
 
             CheckBox {
                 id: allowBackgroundMiningCheckBox
-                text: qsTr("Allow background mining?")
+                text: qsTr("Allow background mining?") + translationManager.emptyString
                 anchors.left: parent.left
                 anchors.right: parent.right
                 background: "#F0EEEE"
@@ -184,6 +193,7 @@ Item {
                 wrapMode: Text.Wrap
                 text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
                            "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                      + translationManager.emptyString
             }
         }
     }

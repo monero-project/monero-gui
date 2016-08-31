@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <languages>
-	<language name="US English" flag="/lang/flags/usa.png" qs="none"/>
-	<language name="UK English" flag="/lang/flags/uk.png" qs="none"/>
-	<language name="Russia" flag="/lang/flags/russia.png" qs="none"/>
-	<language name="RPA" flag="/lang/flags/rpa.png" qs="none"/>
-	<language name="Palestine" flag="/lang/flags/palestine.png" qs="none"/>
-	<language name="India" flag="/lang/flags/india.png" qs="none"/>
-	<language name="German" flag="/lang/flags/german.png" qs="none"/>
-	<language name="China" flag="/lang/flags/china.png" qs="none"/>
-	<language name="Brazil" flag="/lang/flags/brazil.png" qs="none"/>
-	<language name="Bangladesh" flag="/lang/flags/bangladesh.png" qs="none"/>
+
+<!--
+List of available languages for your wallet's seed:
+0 : English
+1 : Spanish
+2 : German
+3 : Italian
+4 : Portuguese
+5 : Russian
+6 : Japanese
+-->
+        <language display_name="US English" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
+        <language display_name="UK English" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
+        <language display_name="Russia"     locale="ru_RU" wallet_language="Russian" flag="/lang/flags/russia.png" qs="none"/>
+        <language display_name="RPA"        locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/>
+        <language display_name="Palestine"  locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/>
+        <language display_name="India"      locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/>
+        <language display_name="Italy"      locale="it_IT" wallet_language="Italian" flag="/lang/flags/italy.png" qs="none"/>
+        <language display_name="German"     locale="de_DE" wallet_language="German"  flag="/lang/flags/german.png" qs="none"/>
+        <language display_name="China"      locale="zh_CN" wallet_language="English" flag="/lang/flags/china.png" qs="none"/>
+        <language display_name="Brazil"     locale="pt_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/>
+        <language display_name="Bangladesh" locale="en_US" wallet_language="English" flag="/lang/flags/bangladesh.png" qs="none"/>
 </languages>

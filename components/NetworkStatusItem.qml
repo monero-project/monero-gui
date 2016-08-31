@@ -63,7 +63,7 @@ Row {
             font.family: "Arial"
             font.pixelSize: 18
             color: item.connected ? "#FF6C3B" : "#AAAAAA"
-            text: item.connected ? qsTr("Connected") : qsTr("Disconnected")
+            text: (item.connected ? qsTr("Connected") : qsTr("Disconnected")) + translationManager.emptyString
         }
     }
 }

@@ -27,10 +27,26 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import Bitmonero.PendingTransaction 1.0
 import "../components"
 
+
 Rectangle {
+    id: root
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
+                          int priority)
+
     color: "#F0EEEE"
+
+    function scaleValueToMixinCount(scaleValue) {
+        var scaleToMixinCount = [2,3,4,5,5,5,6,7,8,9,10,15,20,25];
+        if (scaleValue < scaleToMixinCount.length) {
+            return scaleToMixinCount[scaleValue];
+        } else {
+            return 0;
+        }
+    }
+
 
     Label {
         id: amountLabel
@@ -39,7 +55,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Amount")
+        text: qsTr("Amount") + translationManager.emptyString
         fontSize: 14
     }
 
@@ -49,10 +65,11 @@ Rectangle {
         anchors.topMargin: 17
         fontSize: 14
         x: (parent.width - 17) / 2 + 17
-        text: qsTr("Transaction prority")
+        text: qsTr("Transaction priority") + translationManager.emptyString
     }
 
     Row {
+        id: amountRow
         anchors.top: amountLabel.bottom
         anchors.topMargin: 5
         anchors.left: parent.left
@@ -67,18 +84,28 @@ Rectangle {
                 source: "../images/moneroIcon.png"
             }
         }
-
+        // Amount input
         LineEdit {
-            placeholderText: qsTr("Amount...")
+            id: amountLine
+            placeholderText: qsTr("Amount...") + translationManager.emptyString
             width: parent.width - 37 - 17
+            validator: DoubleValidator {
+                bottom: 0.0
+                notation: DoubleValidator.StandardNotation
+                locale: "C"
+            }
         }
     }
 
     ListModel {
         id: priorityModel
-        ListElement { column1: "LOW"; column2: "( fee: 0.0002 )" }
-        ListElement { column1: "MEDIUM"; column2: "( fee: 0.0004 )" }
-        ListElement { column1: "HIGH"; column2: "( fee: 0.0008 )" }
+        // ListElement: cannot use script for property value, so
+        // code like this wont work:
+        // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+
+        ListElement { column1: qsTr("LOW") ; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: qsTr("MEDIUM") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: qsTr("HIGH")  ; column2: "";  priority: PendingTransaction.Priority_High }
     }
 
     StandardDropdown {
@@ -96,16 +123,18 @@ Rectangle {
         z: 1
     }
 
+
+
     Label {
         id: privacyLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: priorityDropdown.bottom
+        anchors.top: amountRow.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-        text: qsTr("Privacy Level")
+        text: qsTr("Privacy Level") + translationManager.emptyString
     }
 
     PrivacyLevel {
@@ -116,7 +145,24 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        onFillLevelChanged: {
+            print ("PrivacyLevel changed:"  + fillLevel)
+            print ("mixin count:"  + scaleValueToMixinCount(fillLevel))
+        }
     }
+
+
+    Label {
+        id: costLabel
+        anchors.right: parent.right
+        anchors.top: amountRow.bottom
+        anchors.leftMargin: 17
+        anchors.rightMargin: 17
+        anchors.topMargin: 30
+        fontSize: 14
+        text: qsTr("Cost")
+    }
+
 
     Label {
         id: addressLabel
@@ -130,10 +176,11 @@ Rectangle {
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                     Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+              + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
     }
-
+    // recipient address input
     LineEdit {
         id: addressLine
         anchors.left: parent.left
@@ -142,10 +189,11 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
     }
 
     Label {
-        id: paymentLabel
+        id: paymentIdLabel
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: addressLine.bottom
@@ -153,29 +201,32 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Payment ID <font size='2'>( Optional )</font>")
+        text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
     }
 
+    // payment id input
     LineEdit {
-        id: paymentLine
+        id: paymentIdLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentLabel.bottom
+        anchors.top: paymentIdLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        // validator: DoubleValidator { top: 0.0 }
     }
 
     Label {
         id: descriptionLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentLine.bottom
+        anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
         text: qsTr("Description <font size='2'>( An optional description that will be saved to the local address book if entered )</font>")
+              + translationManager.emptyString
     }
 
     LineEdit {
@@ -195,10 +246,20 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 60
-        text: qsTr("SEND")
+        text: qsTr("SEND") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
+        enabled : addressLine.text.length > 0 && amountLine.text.length > 0
+        onClicked: {
+            console.log("Transfer: paymentClicked")
+            var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+            console.log("priority: " + priority)
+            console.log("amount: " + amountLine.text)
+            root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                           priority)
+        }
     }
 }
+

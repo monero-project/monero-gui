@@ -27,9 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 
 Rectangle {
+    id: root
     color: "#F0EEEE"
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
+    signal generatePaymentIdInvoked()
 
     states: [
         State {
@@ -41,6 +45,9 @@ Rectangle {
         }, State {
             name: "Transfer"
             PropertyChanges { target: loader; source: "pages/Transfer.qml" }
+        }, State {
+           name: "Receive"
+           PropertyChanges { target: loader; source: "pages/Receive.qml" }
         }, State {
             name: "AddressBook"
             PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
@@ -72,6 +79,20 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
+        onLoaded: {
+            console.log("Loaded " + item);
+        }
+
+    }
+
+    /* connect "payment" click */
+    Connections {
+        ignoreUnknownSignals: false
+        target: loader.item
+        onPaymentClicked : {
+            console.log("MiddlePanel: paymentClicked")
+            paymentClicked(address, paymentId, amount, mixinCount, priority)
+        }
     }
 
     Rectangle {
@@ -96,5 +117,12 @@ Rectangle {
         anchors.bottom: parent.bottom
         height: 1
         color: "#DBDBDB"
+    }
+
+    // indicate disabled state
+    Desaturate {
+        anchors.fill: parent
+        source: parent
+        desaturation: root.enabled ? 0.0 : 1.0
     }
 }

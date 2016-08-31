@@ -29,252 +29,69 @@
 import QtQuick 2.2
 import moneroComponents 1.0
 import QtQuick.Dialogs 1.2
+import 'utils.js' as Utils
 
 Item {
     opacity: 0
     visible: false
+
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
 
     onOpacityChanged: visible = opacity !== 0
 
-    function saveSettings(settingsObject) {
-        settingsObject['account_name'] = accountName.text
-        settingsObject['words'] = wordsText.text
-        settingsObject['wallet_path'] = fileUrlInput.text
+    //! function called each time we display this page
+
+    function onPageOpened(settingsOblect) {
+        checkNextButton()
     }
 
-    Row {
-        id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
-        spacing: 6
-
-        ListModel {
-            id: dotsModel
-            ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
-            ListElement { dotColor: "#DBDBDB" }
-            ListElement { dotColor: "#DBDBDB" }
-        }
-
-        Repeater {
-            model: dotsModel
-            delegate: Rectangle {
-                width: 12; height: 12
-                radius: 6
-                color: dotColor
-            }
-        }
+    function onPageClosed(settingsObject) {
+        settingsObject['account_name'] = uiItem.accountNameText
+        settingsObject['words'] = uiItem.wordsTexttext
+        settingsObject['wallet_path'] = uiItem.walletPath
+        return true;
     }
 
-    Column {
-        id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        spacing: 24
-
-        Text {
-            anchors.left: parent.left
-            width: headerColumn.width - dotsRow.width - 16
-            font.family: "Arial"
-            font.pixelSize: 28
-            wrapMode: Text.Wrap
-            //renderType: Text.NativeRendering
-            color: "#3F3F3F"
-            text: qsTr("A new wallet has been created for you")
-        }
-
-        Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            font.family: "Arial"
-            font.pixelSize: 18
-            wrapMode: Text.Wrap
-            //renderType: Text.NativeRendering
-            color: "#4A4646"
-            text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:")
-        }
+    function checkNextButton() {
+        var wordsArray = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText).split(" ");
+        wizard.nextButton.enabled = wordsArray.length === 25;
     }
 
-    Item {
-        id: walletNameItem
-        anchors.top: headerColumn.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
+    //! function called each time we hide this page
+    //
 
-        TextInput {
-            id: accountName
-            anchors.fill: parent
-            horizontalAlignment: TextInput.AlignHCenter
-            verticalAlignment: TextInput.AlignVCenter
-            font.family: "Arial"
-            font.pixelSize: 32
-            renderType: Text.NativeRendering
-            color: "#FF6C3C"
-            text: qsTr("My account name")
-            focus: true
-        }
 
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
+    function createWallet(settingsObject) {
+        // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
+        // page submitted or b) delete it when program closed before reaching final page
+
+        var wallet_filename = oshelper.temporaryFilename();
+        if (typeof settingsObject.wallet === 'undefined') {
+            //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+            var testnet = appWindow.persistentSettings.testnet;
+            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
+                                                    testnet)
+            uiItem.wordsTextItem.memoText = wallet.seed
+            // saving wallet in "global" settings object
+            // TODO: wallet should have a property pointing to the file where it stored or loaded from
+            settingsObject.wallet = wallet
+        } else {
+            print("wallet already created. we just stepping back");
         }
+        settingsObject.wallet_filename = wallet_filename
     }
 
-    Text {
-        id: frameHeader
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: walletNameItem.bottom
-        anchors.topMargin: 24
-        font.family: "Arial"
-        font.pixelSize: 18
-        //renderType: Text.NativeRendering
-        color: "#4A4646"
-        elide: Text.ElideRight
-        text: qsTr("This is the 24 word mnemonic for your wallet")
-    }
 
-    Rectangle {
-        id: wordsRect
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: frameHeader.bottom
-        anchors.topMargin: 16
-        height: 182
-        border.width: 1
-        border.color: "#DBDBDB"
 
-        TextEdit {
-            id: wordsText
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.bottom: tipRect.top
-            anchors.margins: 16
-            font.family: "Arial"
-            font.pixelSize: 24
-            wrapMode: Text.Wrap
-            selectByMouse: true
-            readOnly: true
-            color: "#3F3F3F"
-            text: "bound class paint gasp task soul forgot past pleasure physical circle appear shore bathroom glove women crap busy beauty bliss idea give needle burden"
-        }
 
-        Image {
-            anchors.right: parent.right
-            anchors.bottom: tipRect.top
-            source: "qrc:///images/greyTriangle.png"
-
-            Image {
-                anchors.centerIn: parent
-                source: "qrc:///images/copyToClipboard.png"
-            }
-
-            Clipboard { id: clipboard }
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: clipboard.setText(wordsText.text)
-            }
-        }
-
-        Rectangle {
-            id: tipRect
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 65
-            color: "#DBDBDB"
-
-            Text {
-                anchors.fill: parent
-                anchors.margins: 16
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.family: "Arial"
-                font.pixelSize: 15
-                color: "#4A4646"
-                wrapMode: Text.Wrap
-                text: qsTr("It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.")
-            }
-        }
-    }
-
-    Row {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: wordsRect.bottom
-        anchors.topMargin: 24
-        spacing: 16
-
-        Text {
-            anchors.verticalCenter: parent.verticalCenter
-            font.family: "Arial"
-            font.pixelSize: 18
-            //renderType: Text.NativeRendering
-            color: "#4A4646"
-            text: qsTr("Your wallet is stored in")
-        }
-
-        Item {
-            anchors.verticalCenter: parent.verticalCenter
-            width: parent.width - x
-            height: 34
-
-            FileDialog {
-                id: fileDialog
-                selectMultiple: false
-                title: "Please choose a file"
-                onAccepted: {
-                    fileUrlInput.text = fileDialog.fileUrl
-                    fileDialog.visible = false
-                }
-                onRejected: {
-                    fileDialog.visible = false
-                }
-            }
-
-            TextInput {
-                id: fileUrlInput
-                anchors.fill: parent
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                clip: true
-                font.family: "Arial"
-                font.pixelSize: 18
-                color: "#6B0072"
-                verticalAlignment: Text.AlignVCenter
-                selectByMouse: true
-                text: "~/.monero/mywallet/"
-                onFocusChanged: {
-                    if(focus) {
-                        fileDialog.visible = true
-                    }
-                }
-            }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: "#DBDBDB"
-            }
-        }
+    WizardManageWalletUI {
+        id: uiItem
+        titleText: qsTr("A new wallet has been created for you") + translationManager.emptyString
+        wordsTextTitle: qsTr("This is the 25 word mnemonic for your wallet") + translationManager.emptyString
+        wordsTextItem.clipboardButtonVisible: true
+        wordsTextItem.tipTextVisible: true
+        wordsTextItem.memoTextReadOnly: true
     }
 }

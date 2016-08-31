@@ -31,6 +31,7 @@ import QtQuick 2.2
 Item {
     id: page
     signal createWalletClicked()
+    signal recoveryWalletClicked()
     opacity: 0
     visible: false
     Behavior on opacity {
@@ -57,7 +58,8 @@ Item {
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
-            text: qsTr("I want")
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("Welcome to Monero!") + translationManager.emptyString
         }
 
         Text {
@@ -68,7 +70,8 @@ Item {
             //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
-            text: qsTr("Please select one of the following options:")
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("Please select one of the following options:") + translationManager.emptyString
         }
     }
 
@@ -104,7 +107,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("This is my first time, I want to<br/>create a new account")
+                text: qsTr("This is my first time, I want to<br/>create a new account") + translationManager.emptyString
             }
         }
 
@@ -126,6 +129,7 @@ Item {
                     id: recoverWalletArea
                     anchors.fill: parent
                     hoverEnabled: true
+                    onClicked: page.recoveryWalletClicked()
                 }
             }
 
@@ -134,7 +138,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to recover my account<br/>from my 24 work seed")
+                text: qsTr("I want to recover my account<br/>from my 25 word seed") + translationManager.emptyString
             }
         }
     }

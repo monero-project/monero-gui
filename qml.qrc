@@ -107,5 +107,14 @@
         <file>lang/flags/russia.png</file>
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
+        <file>wizard/WizardManageWalletUI.qml</file>
+        <file>wizard/WizardRecoveryWallet.qml</file>
+        <file>wizard/WizardMemoTextInput.qml</file>
+        <file>wizard/utils.js</file>
+        <file>pages/Receive.qml</file>
+        <file>components/IconButton.qml</file>
+        <file>lang/flags/italy.png</file>
+        <file>components/PasswordDialog.qml</file>
+        <file>components/ProcessingSplash.qml</file>
     </qresource>
 </RCC>

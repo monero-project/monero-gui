@@ -66,7 +66,7 @@ Item {
             anchors.leftMargin: 45
             font.pixelSize: 18
             verticalAlignment: TextInput.AlignVCenter
-            placeholderText: qsTr("Search by...")
+            placeholderText: qsTr("Search by...") + translationManager.emptyString
         }
 
         Item {

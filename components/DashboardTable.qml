@@ -44,7 +44,7 @@ ListView {
             font.family: "Arial"
             font.pixelSize: 14
             color: "#545454"
-            text: qsTr("No more results")
+            text: qsTr("No more results") + translationManager.emptyString
         }
     }
 
@@ -134,7 +134,7 @@ ListView {
                     font.family: "Arial"
                     font.pixelSize: 12
                     color: "#545454"
-                    text: qsTr("Date")
+                    text: qsTr("Date")  + translationManager.emptyString
                 }
                 
                 Row {
@@ -169,7 +169,7 @@ ListView {
                     font.family: "Arial"
                     font.pixelSize: 12
                     color: "#545454"
-                    text: qsTr("Balance")
+                    text: qsTr("Balance") + translationManager.emptyString
                 }
                 
                 Text {
@@ -190,7 +190,7 @@ ListView {
                     font.family: "Arial"
                     font.pixelSize: 12
                     color: "#545454"
-                    text: qsTr("Amount")
+                    text: qsTr("Amount") + translationManager.emptyString
                 }
                 
                 Row {

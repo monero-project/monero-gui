@@ -76,7 +76,7 @@ Item {
         wrapMode: Text.Wrap
         //renderType: Text.NativeRendering
         color: "#3F3F3F"
-        text: qsTr("We’re almost there - let’s just configure some Monero preferences")
+        text: qsTr("We’re almost there - let’s just configure some Monero preferences") + translationManager.emptyString
     }
 
     Column {
@@ -94,7 +94,7 @@ Item {
             spacing: 12
 
             CheckBox {
-                text: qsTr("Kickstart the Monero blockchain?")
+                text: qsTr("Kickstart the Monero blockchain?") + translationManager.emptyString
                 anchors.left: parent.left
                 anchors.right: parent.right
                 background: "#F0EEEE"
@@ -114,6 +114,7 @@ Item {
                 wrapMode: Text.Wrap
                 text: qsTr("It is very important to write it down as this is the only backup you will need for your wallet. " +
                            "You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.")
+                        + translationManager.emptyString
             }
         }
 
@@ -123,7 +124,7 @@ Item {
             spacing: 12
 
             CheckBox {
-                text: qsTr("Enable disk conservation mode?")
+                text: qsTr("Enable disk conservation mode?") + translationManager.emptyString
                 anchors.left: parent.left
                 anchors.right: parent.right
                 background: "#F0EEEE"
@@ -144,6 +145,7 @@ Item {
                 text: qsTr("Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as " +
                            "a regular Monero instance. However, storing the full blockchain is beneficial to the security " +
                            "of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.")
+                        + translationManager.emptyString
             }
         }
 
@@ -153,7 +155,7 @@ Item {
             spacing: 12
 
             CheckBox {
-                text: qsTr("Allow background mining?")
+                text: qsTr("Allow background mining?") + translationManager.emptyString
                 anchors.left: parent.left
                 anchors.right: parent.right
                 background: "#F0EEEE"
@@ -173,6 +175,7 @@ Item {
                 wrapMode: Text.Wrap
                 text: qsTr("Mining secures the Monero network, and also pays a small reward for the work done. This option " +
                            "will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.")
+                        + translationManager.emptyString
             }
         }
     }

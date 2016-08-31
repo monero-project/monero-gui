@@ -29,18 +29,82 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
+#include <QStandardPaths>
+#include <QDebug>
 #include "clipboardAdapter.h"
 #include "filter.h"
+#include "oscursor.h"
+#include "oshelper.h"
+#include "WalletManager.h"
+#include "Wallet.h"
+#include "PendingTransaction.h"
+#include "TranslationManager.h"
+
+
+
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    qDebug() << "app startd";
+
+    app.setApplicationName("monero-core");
+    app.setOrganizationDomain("getmonero.org");
+    app.setOrganizationName("The Monero Project");
+
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
     qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
 
+    qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+
+    qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
+                                                   "PendingTransaction can't be instantiated directly");
+
+    qmlRegisterUncreatableType<WalletManager>("Bitmonero.WalletManager", 1, 0, "WalletManager",
+                                                   "WalletManager can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TranslationManager>("moneroComponents", 1, 0, "TranslationManager",
+                                                   "TranslationManager can't be instantiated directly");
+
+    qRegisterMetaType<PendingTransaction::Priority>();
+
+
+
+
     QQmlApplicationEngine engine;
+
+    OSCursor cursor;
+    engine.rootContext()->setContextProperty("globalCursor", &cursor);
+    OSHelper osHelper;
+    engine.rootContext()->setContextProperty("oshelper", &osHelper);
+
+    engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
+
+    engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
+
+
+//  export to QML monero accounts root directory
+//  wizard is talking about where
+//  to save the wallet file (.keys, .bin), they have to be user-accessible for
+//  backups - I reckon we save that in My Documents\Monero Accounts\ on
+//  Windows, ~/Monero Accounts/ on nix / osx
+
+#ifdef Q_OS_WIN
+    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+#elif defined(Q_OS_UNIX)
+    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+#endif
+
+    if (!moneroAccountsRootDir.empty()) {
+        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero Accounts";
+        QDir tempDir;
+        tempDir.mkpath(moneroAccountsDir);
+        engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
+    }
+
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     QObject *rootObject = engine.rootObjects().first();
@@ -49,6 +113,8 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
+
+    WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Silent);
 
     return app.exec();
 }
