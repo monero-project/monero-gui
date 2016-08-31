@@ -100,7 +100,7 @@ Rectangle {
             color: "#545454"
             textFormat: Text.RichText
             text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                        lookng for security level and address book? go to <a href='#'>Transfer</a> tab")
+                        looking for security level and address book? go to <a href='#'>Transfer</a> tab")
                      + translationManager.emptyString
             font.underline: false
             onLinkActivated: appWindow.showPageRequest("Transfer")
