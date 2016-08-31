@@ -131,7 +131,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignBottom
                 color: "#535353"
-                text: qsTr("Availible Balance:")
+                text: qsTr("Available Balance:")
             }
 
             Text {
