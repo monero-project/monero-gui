@@ -82,7 +82,7 @@
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="116"/>
-        <source>Availible Balance:</source>
+        <source>Available Balance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
