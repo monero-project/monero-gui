@@ -44,7 +44,7 @@ Rectangle {
         font.family: "Arial"
         font.pixelSize: 18
         color: "#4A4949"
-        text: qsTr("Filter trasactions history") + translationManager.emptyString
+        text: qsTr("Filter transactions history") + translationManager.emptyString
     }
 
     Label {
