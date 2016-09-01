@@ -45,8 +45,7 @@ SOURCES = *.qml \
 }
 
 LIBS += -L$$WALLET_ROOT/lib \
-        -lwallet_merged \
-        -lwallet_merged2
+        -lwallet_merged 
 
 win32 {
     #QMAKE_LFLAGS += -static
