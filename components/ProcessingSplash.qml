@@ -34,7 +34,7 @@ import QtQuick.Layouts 1.1
 Window {
     id: splash
     modality: Qt.ApplicationModal
-    flags: Qt.SplashScreen
+    flags: Qt.Window | Qt.FramelessWindowHint
     property alias message: message.text
     width: 200
     height: 100
