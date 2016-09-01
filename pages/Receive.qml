@@ -46,11 +46,11 @@ Rectangle {
         if (payment_id.length === 0) {
             payment_id = appWindow.wallet.generatePaymentId()
             appWindow.persistentSettings.payment_id = payment_id
-            appWindow.wallet.payment_id = payment_id
+            appWindow.currentWallet.payment_id = payment_id
         }
         paymentIdLine.text = payment_id
-        addressLine.text = appWindow.wallet.address
-        integratedAddressLine.text = appWindow.wallet.integratedAddress(payment_id)
+        addressLine.text = appWindow.currentWallet.address
+        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
     }
 
     Clipboard { id: clipboard }
@@ -168,7 +168,7 @@ Rectangle {
                 text: qsTr("Generate")
                 anchors.right: parent.right
                 onClicked: {
-                    appWindow.persistentSettings.payment_id = appWindow.wallet.generatePaymentId();
+                    appWindow.persistentSettings.payment_id = appWindow.currentWallet.generatePaymentId();
                     updatePaymentId()
                 }
             }

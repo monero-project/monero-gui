@@ -324,7 +324,7 @@ ApplicationWindow {
 
     function hideProcessingSplash() {
         console.log("Hiding processing splash")
-        splash.hide()
+        splash.close()
     }
 
 

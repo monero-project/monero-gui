@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-BITMONERO_URL=https://github.com/mbg033/bitmonero.git
-BITMONERO_BRANCH=develop
+BITMONERO_URL=https://github.com/monero-project/bitmonero.git
+BITMONERO_BRANCH=master
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)
