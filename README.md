@@ -134,17 +134,14 @@ Process: TODO
     where ```Qt5``` is the folder you selected to install Qt
 6. Clone repository and build:
   
-  ```git clone https://github.com/monero-project/monero-core.git```
- 
-  ```cd monero-core```
-
-  ```build.sh```
-
-
-
-
-
-
-
+  ```
+  git clone https://github.com/monero-project/monero-core.git
+  
+  cd monero-core
+  
+  build.sh
+  
+  ```
+  
 ### On Windows:
 TODO
