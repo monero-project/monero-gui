@@ -117,10 +117,33 @@ Process: TODO
 `./release/bin/monero-core`
 
 ### On OS X:
-1. install homebrew
-2. install dependencies: 
-`brew install boost --c++11`
-`brew install pkgconfig`
+1. install Xcode from AppStore
+2. install [homebrew] (http://brew.sh/)
+3. install [bitmonero] (https://github.com/monero-project/bitmonero) dependencies: 
+    ```brew install boost --c++11```
+
+    ```brew install pkgconfig```
+    
+    ```brew install cmake```
+    
+4. install latest Qt using official installer from [qt.io] (https://www.qt.io/download-open-source/), homebrew version might be outdated
+5. Add Qt bin dir to your path:
+    
+     ```export PATH=$PATH:$HOME/Qt5/5.7clang_64/bin``` 
+    
+    where ```Qt5``` is the folder you selected to install Qt
+6. Clone repository and build:
+  
+  ```git clone https://github.com/monero-project/monero-core.git```
+ 
+  ```cd monero-core```
+
+  ```build.sh```
+
+
+
+
+
 
 
 ### On Windows:
