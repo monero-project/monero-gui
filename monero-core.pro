@@ -69,8 +69,10 @@ win32 {
 }
 
 linux {
+    CONFIG(static) {
+        LIBS+= -Wl,-Bstatic
+    }
     LIBS+= \
-        -Wl,-Bstatic \
         -lboost_serialization \
         -lboost_thread \
         -lboost_system \
