@@ -53,14 +53,19 @@ There are also several mining pools that kindly donate a portion of their fees, 
 
 See [LICENSE](LICENSE).
 
-## Compiling Monero-core
+## Installing Monero-core from a Package
 
-### Overview:
+Packages are available for
 
-Dependencies: TODO
+* Arch Linux via AUR: [monero-core-git](https://aur.archlinux.org/packages/monero-core-git/)
 
-Process: TODO
+Packaging for your favorite distribution would be a welcome contribution!
 
+## Compiling Monero-core from Source
+
+### Dependencies
+
+TODO
 
 ### On Linux:
 
