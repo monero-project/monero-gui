@@ -84,6 +84,7 @@ linux {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
+        -lunwind \
         -ldl
 }
 
