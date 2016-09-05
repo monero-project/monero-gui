@@ -207,13 +207,16 @@ Item {
                 selectByMouse: true
 
                 text: moneroAccountsDir + "/"
-                onFocusChanged: {
-                    if(focus) {
-                        fileDialog.folder = text
+                // workaround for the bug "filechooser only opens once"
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mouse.accepted = false
+                        fileDialog.folder = walletManager.localPathToUrl(fileUrlInput.text)
                         fileDialog.open()
+                        fileUrlInput.focus = true
                     }
                 }
-
             }
 
             Rectangle {
