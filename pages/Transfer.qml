@@ -257,9 +257,11 @@ Rectangle {
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority
             console.log("priority: " + priority)
             console.log("amount: " + amountLine.text)
+            addressLine.text = addressLine.text.trim()
+            paymentIdLine.text = paymentIdLine.text.trim()
             root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
                            priority)
+
         }
     }
 }
-
