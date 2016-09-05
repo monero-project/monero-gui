@@ -186,7 +186,7 @@ Item {
                 selectFolder: true
                 title: qsTr("Please choose a directory")  + translationManager.emptyString
                 onAccepted: {
-                    fileUrlInput.text = fileDialog.folder
+                    fileUrlInput.text = walletManager.urlToLocalPath(fileDialog.folder)
                     fileDialog.visible = false
                 }
                 onRejected: {
@@ -213,6 +213,7 @@ Item {
                         fileDialog.open()
                     }
                 }
+
             }
 
             Rectangle {

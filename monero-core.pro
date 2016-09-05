@@ -41,7 +41,8 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
-          wizard/*.qml
+          wizard/*.qml \
+          wizard/*js
 }
 
 LIBS += -L$$WALLET_ROOT/lib \
