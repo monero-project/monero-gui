@@ -132,6 +132,8 @@ QString WalletManager::maximumAllowedAmountAsSting() const
     return WalletManager::displayAmount(WalletManager::maximumAllowedAmount());
 }
 
+
+
 QString WalletManager::displayAmount(quint64 amount) const
 {
     return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
@@ -150,6 +152,16 @@ quint64 WalletManager::amountFromDouble(double amount) const
 void WalletManager::setLogLevel(int logLevel)
 {
     Bitmonero::WalletManagerFactory::setLogLevel(logLevel);
+}
+
+QString WalletManager::urlToLocalPath(const QUrl &url) const
+{
+    return QDir::toNativeSeparators(url.toLocalFile());
+}
+
+QUrl WalletManager::localPathToUrl(const QString &path) const
+{
+    return QUrl::fromLocalFile(path);
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)

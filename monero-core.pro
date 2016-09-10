@@ -41,11 +41,13 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
-          wizard/*.qml
+          wizard/*.qml \
+          wizard/*js
 }
 
 LIBS += -L$$WALLET_ROOT/lib \
-        -lwallet_merged 
+        -lwallet_merged \
+        -lunbound
 
 win32 {
     #QMAKE_LFLAGS += -static
