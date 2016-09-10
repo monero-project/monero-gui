@@ -41,36 +41,31 @@ The Bitcoin donation address is: 1FhnVJi2V1k4MqXm2nHoEbY5LV7FPai7bb
 
 Core development funding and/or some supporting services are also graciously provided by sponsors:
 
-[![MyMonero](https://static.getmonero.org/images/sponsors/mymonero.png)](https://mymonero.com) [![Kitware](https://static.getmonero.org/images/sponsors/kitware.png)](http://kitware.com) [![Dome9](https://static.getmonero.org/images/sponsors/dome9.png)](http://dome9.com) [![Araxis](https://static.getmonero.org/images/sponsors/araxis.png)](http://araxis.com) [![JetBrains](https://static.getmonero.org/images/sponsors/jetbrains.png)](http://www.jetbrains.com/)
+[<img width="80" src="https://static.getmonero.org/images/sponsors/mymonero.png"/>](https://mymonero.com)
+[<img width="150" src="https://static.getmonero.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
+[<img width="100" src="https://static.getmonero.org/images/sponsors/dome9.png"/>](http://dome9.com)
+[<img width="150" src="https://static.getmonero.org/images/sponsors/araxis.png"/>](http://araxis.com)
+[<img width="150" src="https://static.getmonero.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
 
 There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
 
 ## License
 
-Copyright (c) 2014-2015, The Monero Project
+See [LICENSE](LICENSE).
 
-All rights reserved.
+## Installing Monero-core from a Package
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Packages are available for
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Arch Linux via AUR: [monero-core-git](https://aur.archlinux.org/packages/monero-core-git/)
 
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Packaging for your favorite distribution would be a welcome contribution!
 
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+## Compiling Monero-core from Source
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+### Dependencies
 
-Parts of the project are originally copyright (c) 2012-2013 The Cryptonote developers
-
-## Compiling Monero-core
-
-### Overview:
-
-Dependencies: TODO
-
-Process: TODO
-
+TODO
 
 ### On Linux:
 
