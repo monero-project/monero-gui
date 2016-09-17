@@ -31,7 +31,7 @@ pushd $BITMONERO_DIR/build/release
 
 if [ "$(uname)" == "Darwin" ]; then
     # Do something under Mac OS X platform        
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$BITMONERO_DIR"  ../..
