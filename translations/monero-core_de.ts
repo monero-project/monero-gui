@@ -108,7 +108,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="191"/>
         <source>Privacy level</source>
-        <translation>Geheimhaltungslevel</translation>
+        <translation>Privatsphärelevel</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="212"/>
@@ -162,12 +162,12 @@
     <message>
         <location filename="../pages/History.qml" line="47"/>
         <source>Filter transactions history</source>
-        <translation>Verlauf filtern</translation>
+        <translation>Transaktionsverlauf filtern</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="56"/>
         <source>Address</source>
-        <translation>Addresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="58"/>
@@ -187,7 +187,7 @@
     <message>
         <location filename="../pages/History.qml" line="79"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
-        <translation>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ein eindeutiger Benutzername aus&lt;br/&gt;dem Addressbuch. Wird nicht zum&lt;br/&gt;Transfer von Informationen verwendet</translation>
+        <translation>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ein eindeutiger Benutzername aus&lt;br/&gt;dem Adressbuch. Wird nicht zum&lt;br/&gt;Transfer von Informationen verwendet</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="99"/>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="129"/>
         <source>Payment ID:</source>
-        <translation>Payment ID:</translation>
+        <translation>Zahlungs ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="167"/>
@@ -343,7 +343,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="79"/>
         <source>Address</source>
-        <translation>Addresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="86"/>
@@ -353,22 +353,22 @@
     <message>
         <location filename="../pages/Receive.qml" line="106"/>
         <source>Integrated address</source>
-        <translation>Integrierte Addresse</translation>
+        <translation>Integrierte Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="115"/>
         <source>ReadOnly wallet integrated address displayed here</source>
-        <translation type="unfinished"></translation>
+        <translation>NurLesen Wallets integrierte Adresse wird hier angezeigt</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="136"/>
         <source>Payment ID</source>
-        <translation>Payment ID</translation>
+        <translation>Zahlungs ID</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="144"/>
         <source>PaymentID here</source>
-        <translation>Payment ID hierhin</translation>
+        <translation>Zahlungs ID hierhin</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="168"/>
@@ -386,7 +386,7 @@
     <message>
         <location filename="../RightPanel.qml" line="59"/>
         <source>News</source>
-        <translation>News</translation>
+        <translation>NACHRICHTEN</translation>
     </message>
     <message>
         <location filename="../RightPanel.qml" line="60"/>
@@ -473,7 +473,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="127"/>
         <source>Privacy Level</source>
-        <translation>Geheimhaltungslevel</translation>
+        <translation>Privatsphärelevel</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="153"/>
@@ -493,7 +493,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="218"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
-        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;( Eine optionale Beschreibung die im lokalen Addressbuch gespeichert wird )&lt;/font&gt;</translation>
+        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;( Eine optionale Beschreibung die im lokalen Adressbuch gespeichert wird )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="239"/>
@@ -506,7 +506,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Fast da - lass uns noch ein paar Einstellungen vornehmen</translation>
+        <translation>Fast geschafft - lass uns noch ein paar Einstellungen vornehmen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
@@ -516,7 +516,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation>Es ist sehr wichtig dass du dir diesen Text aufschreibst da er deine einzige Wiederherstellungsmöglichkeit ist. Auf der nächsten Seite musst du den Text erneut eingeben um sicherzustellen dass dir kein Fehler unterlaufen ist.</translation>
+        <translation>Es ist sehr wichtig, dass Du dir diesen Text aufschreibst, da es Deine einzige Wiederherstellungsmöglichkeit ist. Auf der nächsten Seite musst Du den Text erneut eingeben, um sicherzustellen, dass Dir kein Fehler unterlaufen ist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="127"/>
@@ -526,7 +526,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="145"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz aber dieselbe Menge an Bandbreite, um das Netzwerk und deine Privatsphähre zu schützen solltest du aber eine Kopie der Blockchain haben. Sofern du wenig Speicherplatz hast solltest du diesen Modus verwenden.</translation>
+        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz aber dieselbe Menge an Bandbreite, um das Netzwerk und Deine Privatsphähre zu schützen solltest Du aber eine Kopie der Blockchain haben. Sofern Du wenig Speicherplatz hast, solltest Du diesen Modus verwenden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="158"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="176"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt dich dafür im Gegenzug. Diese Option sorgt dafür dass dein Computer mined während du ihn nicht verwendest. Sobald du ihn wieder verwendest wird das Mining unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald du ihn wieder verwendest, wird das Mining unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -544,12 +544,12 @@
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="90"/>
         <source>A new wallet has been created for you</source>
-        <translation>Eine Geldbörse wurde für dich erstellt</translation>
+        <translation>Eine Geldbörse (Wallet) wurde für Dich erstellt</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="91"/>
         <source>This is the 25 word mnemonic for your wallet</source>
-        <translation>Dies ist dein aus 25 Wörtern bestehender mnemonischer Seed</translation>
+        <translation>Dies ist der Mnemonische Code bestehend aus 25 Wörtern</translation>
     </message>
 </context>
 <context>
@@ -562,7 +562,7 @@
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
         <source>Enable auto-donations of?</source>
-        <translation>Automatisch spenden?</translation>
+        <translation>Automatisch spenden aktivieren?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
@@ -572,7 +572,7 @@
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Jede Transaktion kostet dich eine kleine Gebühr. Mit dieser Option kannst du einen zusätzlichen Prozentsatz dieser Kosten an die Entwickler spenden. Bei einer 50%igen Spende und einer Gebühr von 0.005 XMR gehen zusätzliche 0.0025 XMR von deinem Konto an die Entwickler.</translation>
+        <translation>Jede Transaktion kostet Dich eine kleine Gebühr. Mit dieser Option kannst Du einen zusätzlichen Prozentsatz dieser Kosten an die Entwickler spenden. Bei einer 50%igen Spende und einer Gebühr von 0.005 XMR gehen zusätzliche 0.0025 XMR von Deinem Konto an die Entwickler.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt dich dafür im Gegenzug. Diese Option sorgt dafür dass dein Computer mined während du ihn nicht verwendest. Sobald du ihn wieder verwendest wird das Mining unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird das Mining unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -605,12 +605,12 @@
     <message>
         <location filename="../wizard/WizardFinish.qml" line="44"/>
         <source>&lt;b&gt;Wallet Path: &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Pfad zur Geldbörse: &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Pfad zur Geldbörse (Wallet): &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="45"/>
         <source>&lt;b&gt;Enable auto donation: &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Aktivierte Spende: &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Aktiviere automatisches Spenden: &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="46"/>
@@ -620,12 +620,12 @@
     <message>
         <location filename="../wizard/WizardFinish.qml" line="47"/>
         <source>&lt;b&gt;Allow background mining: &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Hintergrund - Mining: &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Erlaube Hintergrund - Mining: &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="52"/>
         <source>An overview of your Monero configuration is below:</source>
-        <translation>Hier ist die Zusammenfassung deiner Konfiguration:</translation>
+        <translation>Hier ist die Zusammenfassung Deiner Konfiguration:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="107"/>
@@ -646,7 +646,7 @@
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="103"/>
         <source>This is the name of your wallet. You can change it to a different name if you’d like:</source>
-        <translation>Das ist der Name deiner Geldbörse. Du kannst sie nennen wie du möchtest:</translation>
+        <translation>Das ist der Name Deiner Geldbörse (Wallet). Du kannst sie nennen wie Du möchtest:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="125"/>
@@ -656,7 +656,7 @@
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="175"/>
         <source>Your wallet is stored in</source>
-        <translation>Deine Geldbörse findest du in</translation>
+        <translation>Deine Geldbörse (Wallet) findest du in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="187"/>
@@ -669,7 +669,7 @@
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="76"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation>Es ist sehr wichtig dass du dir diesen Text aufschreibst da er deine einzige Wiederherstellungsmöglichkeit ist. Auf der nächsten Seite musst du den Text erneut eingeben um sicherzustellen dass dir kein Fehler unterlaufen ist.</translation>
+        <translation>Es ist sehr wichtig, dass Du dir diesen Text aufschreibst, da er Deine einzige Wiederherstellungsmöglichkeit ist. Auf der nächsten Seite musst Du den Text erneut eingeben, um sicherzustellen dass Dir kein Fehler unterlaufen ist.</translation>
     </message>
 </context>
 <context>
@@ -687,12 +687,12 @@
     <message>
         <location filename="../wizard/WizardOptions.qml" line="110"/>
         <source>This is my first time, I want to&lt;br/&gt;create a new account</source>
-        <translation>Das ist mein erstes Mal, ich möchte&lt;br/&gt;einen Account erstellen</translation>
+        <translation>Das ist mein erstes Mal, ich möchte&lt;br/&gt;ein neues Benutzerkonto erstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="141"/>
         <source>I want to recover my account&lt;br/&gt;from my 25 word seed</source>
-        <translation>Ich möchte meinen Account&lt;br/&gt;mit meinem Seed wiederherstellen</translation>
+        <translation>Ich möchte mein Benutzerkonto&lt;br/&gt;mit meinem Menomischen Code wiederherstellen</translation>
     </message>
 </context>
 <context>
@@ -700,19 +700,19 @@
     <message>
         <location filename="../wizard/WizardPassword.qml" line="51"/>
         <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation>Jetzt wo deine Geldbörse erstellt wurde solltest du es mit einem Passwort schützen</translation>
+        <translation>Jetzt wo Deine Geldbörse (Wallet) erstellt wurde, solltest Du sie mit einem Passwort schützen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="53"/>
         <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation>Jetzt wo deine Geldbörse wiederhergestellt wurde solltest du es mit einem Passwort schützen</translation>
+        <translation>Jetzt wo Deine Geldbörse (Wallet) wiederhergestellt wurde, solltest Du sie mit einem Passwort schützen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="135"/>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation>Merke: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst kannst du nur Zugriff auf deine Geldbörse bekommen indem du den&lt;br/&gt;&lt;br/&gt;
-                        Seed eingibst der dir angezeigt wurde. Das Passwort schützt die Geldbörse und jede Aktion damit, verwende also ein sicheres Passwort.</translation>
+        <translation>Merke: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf Deine Geldbörse (Wallet) bekommen indem du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt die Geldbörse (Wallet) und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
     </message>
 </context>
 <context>
@@ -725,12 +725,12 @@
     <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="79"/>
         <source>We&apos;re ready to recover your account</source>
-        <translation>Dein Account kann wiederhergestellt werden</translation>
+        <translation>Dein Benutzerkonto kann wiederhergestellt werden</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="80"/>
         <source>Please enter your 25 word private key</source>
-        <translation>Bitte gib den aus 25 Wörtern bestehenden Seed ein</translation>
+        <translation>Bitte gib den aus 25 Wörtern bestehenden mnemonischen Code ein</translation>
     </message>
 </context>
 <context>
@@ -758,7 +758,7 @@
     <message>
         <location filename="../main.qml" line="149"/>
         <source>Couldn&apos;t open wallet: </source>
-        <translation>Geldböhrse konnte nicht geöffnet werden: </translation>
+        <translation>Geldbörse (Wallet) konnte nicht geöffnet werden: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="204"/>
@@ -784,14 +784,14 @@
         <source>
 Address: </source>
         <translation>
-Addresse: </translation>
+Adresse: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="219"/>
         <source>
 Payment ID: </source>
         <translation>
-Payment ID: </translation>
+Zahlungs ID: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="220"/>
@@ -825,7 +825,7 @@ Gebühr: </translation>
     <message>
         <location filename="../main.qml" line="310"/>
         <source>Initializing Wallet...</source>
-        <translation>Initialisiere Geldböhrse...</translation>
+        <translation>Initialisiere Geldbörse (Wallet)...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="336"/>
@@ -840,7 +840,7 @@ Gebühr: </translation>
     <message>
         <location filename="../main.qml" line="389"/>
         <source>send to the same destination</source>
-        <translation>an dieselbe addresse senden</translation>
+        <translation>an die selbe Adresse senden</translation>
     </message>
 </context>
 </TS>
