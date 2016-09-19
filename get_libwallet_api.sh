@@ -31,7 +31,7 @@ pushd $MONERO_DIR/build/release
 
 if [ "$(uname)" == "Darwin" ]; then
     # Do something under Mac OS X platform        
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
     PLATFORM="Linux"
@@ -54,6 +54,7 @@ popd
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound from repository, so we don't need to build it
 if [ $PLATFORM != "Linux" ]; then
+    echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
     make -j$CPU_CORE_COUNT
     make install -j$CPU_CORE_COUNT
