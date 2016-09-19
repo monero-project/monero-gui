@@ -52,7 +52,7 @@ popd
 
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)
-# for Linux, we use libunbound from repository, so we don't need to build it
+# for Linux, we use libunbound shipped with the system, so we don't need to build it
 
 if [ "$PLATFORM" != "Linux" ]; then
     echo "Building libunbound..."
