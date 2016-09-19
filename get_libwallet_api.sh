@@ -38,10 +38,10 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
     # Do something under Windows NT platform
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under Windows NT platform
-    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
 fi
 
 
@@ -53,7 +53,8 @@ popd
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound from repository, so we don't need to build it
-if [ $PLATFORM != "Linux" ]; then
+
+if [ "$PLATFORM" != "Linux" ]; then
     echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
     make -j$CPU_CORE_COUNT
