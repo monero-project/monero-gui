@@ -2,7 +2,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/bitmonero
+WALLET_ROOT=$$PWD/monero
 
 CONFIG += c++11
 
@@ -86,7 +86,8 @@ linux {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
-        -lunwind \
+        # currently monero has an issue with "static" build and linunwind-dev
+        # -lunwind \
         -ldl
 }
 
