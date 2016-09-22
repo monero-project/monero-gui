@@ -45,6 +45,8 @@ Item {
             + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
             + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"
             + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
+            + qsTr("<b>Daemon address: </b>") + wizard.settings['daemon_address'] + "<br>"
+            + qsTr("<b>testnet: </b>") + wizard.settings['testnet'] + "<br>"
             + translationManager.emptyString
         return str;
     }

@@ -39,6 +39,7 @@ Item {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
 
+
     onOpacityChanged: visible = opacity !== 0
 
     //! function called each time we display this page

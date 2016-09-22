@@ -27,6 +27,9 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQml 2.2
+import QtQuick.Layouts 1.1
+import "../components"
 
 Item {
     id: page
@@ -34,6 +37,18 @@ Item {
     signal recoveryWalletClicked()
     opacity: 0
     visible: false
+
+    function saveDaemonAddress() {
+        wizard.settings["daemon_address"] = daemonAddress.text
+        wizard.settings["testnet"] = testNet.checked
+    }
+
+    QtObject {
+        id: d
+        readonly property string daemonAddressTestnet : "localhost:38081"
+        readonly property string daemonAddressMainnet : "localhost:18081"
+    }
+
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -76,6 +91,7 @@ Item {
     }
 
     Row {
+        id: selectPath
         anchors.verticalCenterOffset: 35
         anchors.centerIn: parent
         spacing: 40
@@ -98,7 +114,10 @@ Item {
                     id: createWalletArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: page.createWalletClicked()
+                    onClicked: {
+                        page.saveDaemonAddress()
+                        page.createWalletClicked()
+                    }
                 }
             }
 
@@ -129,7 +148,10 @@ Item {
                     id: recoverWalletArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: page.recoveryWalletClicked()
+                    onClicked: {
+                        page.saveDaemonAddress()
+                        page.recoveryWalletClicked()
+                    }
                 }
             }
 
@@ -142,4 +164,62 @@ Item {
             }
         }
     }
+
+
+
+        ColumnLayout {
+            anchors.top: selectPath.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: 35
+
+            spacing: 5
+            Layout.fillWidth: true
+
+            Rectangle {
+                Layout.alignment: Qt.AlignCenter
+                width: 200
+                height: 1
+                color: "gray"
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignCenter
+                font.family: "Arial"
+                font.pixelSize: 16
+
+                color: "#4A4646"
+                wrapMode: Text.Wrap
+                text: qsTr("Please setup daemon address below.")
+                                  + translationManager.emptyString
+            }
+
+            RowLayout {
+                spacing: 20
+                Layout.alignment: Qt.AlignCenter
+
+                LineEdit {
+                    id: daemonAddress
+                    Layout.alignment: Qt.AlignCenter
+                    width: 200
+                    fontSize: 14
+                    text: testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
+                }
+
+                CheckBox {
+                    id: testNet
+                    Layout.alignment: Qt.AlignCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: qsTr("Testnet") + translationManager.emptyString
+                    background: "#F0EEEE"
+                    fontColor: "#4A4646"
+                    fontSize: 16
+                    checkedIcon: "../images/checkedVioletIcon.png"
+                    uncheckedIcon: "../images/uncheckedIcon.png"
+                    checked: false
+                }
+            }
+        }
+
 }
+
