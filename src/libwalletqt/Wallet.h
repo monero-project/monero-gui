@@ -113,11 +113,17 @@ public:
 
     // TODO: setListenter() when it implemented in API
 signals:
+    // emitted on every event happened with wallet
+    // (money sent/received, new block)
     void updated();
 
     // emitted when refresh process finished (could take a long time)
     // signalling only after we
     void refreshed();
+
+    void moneySpent(const QString &txId, quint64 amount);
+    void moneyReceived(const QString &txId, quint64 amount);
+    void newBlock(quint64 height);
 
 
 private:

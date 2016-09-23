@@ -25,18 +25,22 @@ public:
 
     virtual void moneySpent(const std::string &txId, uint64_t amount)
     {
-        // TODO
-        Q_UNUSED(txId)
-        Q_UNUSED(amount)
         qDebug() << __FUNCTION__;
+        emit m_wallet->moneySpent(QString::fromStdString(txId), amount);
     }
+
 
     virtual void moneyReceived(const std::string &txId, uint64_t amount)
     {
-        // TODO
-        Q_UNUSED(txId)
-        Q_UNUSED(amount)
+
         qDebug() << __FUNCTION__;
+        emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
+    }
+
+    virtual void newBlock(uint64_t height)
+    {
+        qDebug() << __FUNCTION__;
+        emit m_wallet->newBlock(height);
     }
 
     virtual void updated()
