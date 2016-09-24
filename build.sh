@@ -2,9 +2,9 @@
 
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BITMOMERO_DIR=bitmonero
+MONERO_DIR=monero
 
-if [ ! -d $BITMOMERO_DIR ]; then 
+if [ ! -d $MONERO_DIR ]; then
     $SHELL get_libwallet_api.sh
 fi
  
