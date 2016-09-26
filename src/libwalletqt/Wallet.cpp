@@ -10,8 +10,7 @@
 #include <QTimer>
 
 namespace {
-
-
+    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 60;
 }
 
 class WalletListenerImpl : public  Bitmonero::WalletListener
@@ -39,7 +38,7 @@ public:
 
     virtual void newBlock(uint64_t height)
     {
-        qDebug() << __FUNCTION__;
+        // qDebug() << __FUNCTION__;
         emit m_wallet->newBlock(height);
     }
 
@@ -137,6 +136,23 @@ quint64 Wallet::unlockedBalance() const
     return m_walletImpl->unlockedBalance();
 }
 
+quint64 Wallet::blockChainHeight() const
+{
+    return m_walletImpl->blockChainHeight();
+}
+
+quint64 Wallet::daemonBlockChainHeight() const
+{
+    // cache daemon blockchain height for some time (60 seconds by default)
+
+    if (m_daemonBlockChainHeight == 0
+            || m_daemonBlockChainHeightTime.elapsed() / 1000 > m_daemonBlockChainHeightTtl) {
+        m_daemonBlockChainHeight = m_walletImpl->daemonBlockChainHeight();
+        m_daemonBlockChainHeightTime.restart();
+    }
+    return m_daemonBlockChainHeight;
+}
+
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();
@@ -148,6 +164,16 @@ bool Wallet::refresh()
 void Wallet::refreshAsync()
 {
     m_walletImpl->refreshAsync();
+}
+
+void Wallet::setAutoRefreshInterval(int seconds)
+{
+    m_walletImpl->setAutoRefreshInterval(seconds);
+}
+
+int Wallet::autoRefreshInterval() const
+{
+    return m_walletImpl->autoRefreshInterval();
 }
 
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
@@ -199,7 +225,11 @@ void Wallet::setPaymentId(const QString &paymentId)
 
 
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
-    : QObject(parent), m_walletImpl(w), m_history(nullptr)
+    : QObject(parent)
+    , m_walletImpl(w)
+    , m_history(nullptr)
+    , m_daemonBlockChainHeight(0)
+    , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
 {
     m_walletImpl->setListener(new WalletListenerImpl(this));
 }
