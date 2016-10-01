@@ -52,6 +52,8 @@ Item {
         } else {
            passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
         }
+
+        passwordItem.focus = true;
     }
 
     function onPageClosed(settingsObject) {
@@ -146,28 +148,32 @@ Item {
         anchors.topMargin: 24
         width: 300
         height: 62
+        placeholderText : qsTr("Password") + translationManager.emptyString;
+        KeyNavigation.tab: retypePasswordItem
         onChanged: handlePassword()
+
     }
 
+    WizardPasswordInput {
+        id: retypePasswordItem
+        anchors.top: passwordItem.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 24
+        width: 300
+        height: 62
+        placeholderText : qsTr("Confirm password") + translationManager.emptyString;
+        KeyNavigation.tab: passwordItem
+        onChanged: handlePassword()
+    }
 
     PrivacyLevelSmall {
         id: privacyLevel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: passwordItem.bottom
-        anchors.topMargin: 24
+        anchors.top: retypePasswordItem.bottom
+        anchors.topMargin: 60
         background: "#F0EEEE"
         interactive: false
-    }
-
-    WizardPasswordInput {
-        id: retypePasswordItem
-        anchors.top: privacyLevel.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
-        onChanged: handlePassword()
     }
 
     Component.onCompleted: {

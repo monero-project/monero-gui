@@ -27,24 +27,34 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
-Item {
+FocusScope {
     property alias password: password.text
+    property alias placeholderText: password.placeholderText
     signal changed(string password)
 
 
-    TextInput {
+    TextField {
         id : password
+        focus:true
         anchors.fill: parent
-        horizontalAlignment: TextInput.AlignHCenter
+        horizontalAlignment: TextInput.AlignLeft
         verticalAlignment: TextInput.AlignVCenter
         font.family: "Arial"
         font.pixelSize: 32
-        renderType: Text.NativeRendering
-        color: "#35B05A"
-        passwordCharacter: "•"
         echoMode: TextInput.Password
-        focus: true
+        style: TextFieldStyle {
+            renderType: Text.NativeRendering
+            textColor: "#35B05A"
+            passwordCharacter: "•"
+            background: Rectangle {
+                radius: 0
+                border.width: 0
+            }
+        }
+
         Keys.onReleased: {
             changed(text)
         }

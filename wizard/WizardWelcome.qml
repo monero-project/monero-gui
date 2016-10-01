@@ -163,6 +163,7 @@ Item {
                     if (data !== null || data !== undefined) {
                         var locale = data.locale
                         translationManager.setLanguage(locale.split("_")[0]);
+                        wizard.switchPage(true)
                     }
                 }
             }
