@@ -40,7 +40,6 @@ Dialog {
     standardButtons: StandardButton.Ok + StandardButton.Cancel
     ColumnLayout {
         id: column
-        height: 40
         anchors.fill: parent
 
         Label {
