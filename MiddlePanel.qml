@@ -37,6 +37,7 @@ Rectangle {
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property History historyView: History { }
+
     property Item currentView
 
     onCurrentViewChanged: {
@@ -81,6 +82,7 @@ Rectangle {
             }, State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
+                PropertyChanges { target: historyView; model: appWindow.currentWallet.historyModel }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }

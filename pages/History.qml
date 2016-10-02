@@ -32,7 +32,12 @@ import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 
 Rectangle {
+    id: root
+    property ListModel model: testModel
+
     color: "#F0EEEE"
+
+
 
     Text {
         id: filterHeaderText
@@ -365,7 +370,7 @@ Rectangle {
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
-            model: testModel
+            model: root.model
         }
     }
 }
