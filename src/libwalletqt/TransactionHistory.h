@@ -16,14 +16,15 @@ class TransactionHistory : public QObject
     Q_PROPERTY(int count READ count)
 
 public:
-    int count() const;
     Q_INVOKABLE TransactionInfo *transaction(int index);
     Q_INVOKABLE TransactionInfo * transaction(const QString &id);
     Q_INVOKABLE QList<TransactionInfo*> getAll() const;
     Q_INVOKABLE void refresh();
+    quint64 count() const;
 
 signals:
-    void invalidated();
+    void refreshStarted();
+    void refreshFinished();
 
 public slots:
 

@@ -10,8 +10,8 @@ class TransactionInfo : public QObject
     Q_PROPERTY(Direction direction READ direction)
     Q_PROPERTY(bool isPending READ isPending)
     Q_PROPERTY(bool isFailed READ isFailed)
-    Q_PROPERTY(quint64 amount READ amount)
-    Q_PROPERTY(quint64 fee READ fee)
+    Q_PROPERTY(QString amount READ amount)
+    Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
     Q_PROPERTY(QString hash READ hash)
     Q_PROPERTY(QString timestamp READ timestamp)
@@ -23,6 +23,8 @@ public:
         Direction_Out =  Bitmonero::TransactionInfo::Direction_Out
     };
 
+    Q_ENUM(Direction)
+
 //   TODO: implement as separate class;
 
 //    struct Transfer {
@@ -30,11 +32,12 @@ public:
 //        const uint64_t amount;
 //        const std::string address;
 //    };
+
     Direction  direction() const;
     bool isPending() const;
     bool isFailed() const;
-    quint64 amount() const;
-    quint64 fee() const;
+    QString amount() const;
+    QString fee() const;
     quint64 blockHeight() const;
     //! transaction_id
     QString hash() const;
@@ -50,5 +53,8 @@ private:
     friend class TransactionHistory;
     Bitmonero::TransactionInfo * m_pimpl;
 };
+
+// in order to wrap it to QVariant
+Q_DECLARE_METATYPE(TransactionInfo*)
 
 #endif // TRANSACTIONINFO_H

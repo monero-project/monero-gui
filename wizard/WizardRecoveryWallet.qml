@@ -27,9 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
-import moneroComponents 1.0
 import QtQuick.Dialogs 1.2
-import Bitmonero.Wallet 1.0
+import moneroComponents.Wallet 1.0
 import 'utils.js' as Utils
 
 Item {

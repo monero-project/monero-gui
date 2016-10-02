@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-MONERO_URL=https://github.com/monero-project/monero.git
-MONERO_BRANCH=master
-# MONERO_URL=https://github.com/mbg033/monero.git
-# MONERO_BRANCH=develop
+# MONERO_URL=https://github.com/monero-project/monero.git
+# MONERO_BRANCH=master
+MONERO_URL=https://github.com/mbg033/monero.git
+MONERO_BRANCH=develop
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
 pushd $(pwd)

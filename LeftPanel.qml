@@ -252,17 +252,17 @@ Rectangle {
                     panel.receiveClicked()
                 }
             }
-            /*
+
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
                 color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
-            }*/
+            }
 
             // ------------- History tab ---------------
-            /*
+
             MenuButton {
                 id: historyButton
                 anchors.left: parent.left
@@ -276,7 +276,7 @@ Rectangle {
                     panel.historyClicked()
                 }
             }
-
+            /*
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right

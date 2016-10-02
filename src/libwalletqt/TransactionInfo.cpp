@@ -1,4 +1,6 @@
 #include "TransactionInfo.h"
+#include "WalletManager.h"
+
 #include <QDateTime>
 
 TransactionInfo::Direction TransactionInfo::direction() const
@@ -16,15 +18,15 @@ bool TransactionInfo::isFailed() const
     return m_pimpl->isFailed();
 }
 
-quint64 TransactionInfo::amount() const
+
+QString TransactionInfo::amount() const
 {
-    return m_pimpl->amount();
+    return WalletManager::instance()->displayAmount(m_pimpl->amount());
 }
 
-quint64 TransactionInfo::fee() const
+QString TransactionInfo::fee() const
 {
-    return m_pimpl->fee();
-
+    return WalletManager::instance()->displayAmount(m_pimpl->fee());
 }
 
 quint64 TransactionInfo::blockHeight() const

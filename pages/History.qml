@@ -28,6 +28,8 @@
 
 import QtQuick 2.0
 import "../components"
+import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
 
 Rectangle {
     color: "#F0EEEE"

@@ -13,6 +13,7 @@ namespace Bitmonero {
 
 
 class TransactionHistory;
+class TransactionHistoryModel;
 
 class Wallet : public QObject
 {
@@ -27,8 +28,11 @@ class Wallet : public QObject
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
+    Q_PROPERTY(TransactionHistoryModel * historyModel READ historyModel)
 
 public:
+
+
     enum Status {
         Status_Ok       = Bitmonero::Wallet::Status_Ok,
         Status_Error    = Bitmonero::Wallet::Status_Error
@@ -111,6 +115,9 @@ public:
     //! returns transaction history
     TransactionHistory * history();
 
+    //! returns transaction history model
+    TransactionHistoryModel * historyModel();
+
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
 
@@ -139,9 +146,9 @@ signals:
 
 
 private:
+    Wallet(QObject * parent = nullptr);
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
     ~Wallet();
-
 private:
     friend class WalletManager;
     friend class WalletListenerImpl;
@@ -149,11 +156,15 @@ private:
     Bitmonero::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
+    // Used for UI history view
+    TransactionHistoryModel * m_historyModel;
     QString m_paymentId;
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
 
 };
+
+
 
 #endif // WALLET_H

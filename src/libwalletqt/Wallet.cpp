@@ -1,6 +1,7 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TransactionHistory.h"
+#include "model/TransactionHistoryModel.h"
 #include "wallet/wallet2_api.h"
 
 #include <QFile>
@@ -59,7 +60,10 @@ private:
     Wallet * m_wallet;
 };
 
-
+Wallet::Wallet(QObject * parent)
+    : Wallet(nullptr, parent)
+{
+}
 
 QString Wallet::getSeed() const
 {
@@ -202,6 +206,16 @@ TransactionHistory *Wallet::history()
     return m_history;
 }
 
+TransactionHistoryModel *Wallet::historyModel()
+{
+    if (!m_historyModel) {
+        m_historyModel = new TransactionHistoryModel(this);
+        m_historyModel->setTransactionHistory(this->history());
+    }
+
+    return m_historyModel;
+}
+
 
 QString Wallet::generatePaymentId() const
 {
@@ -228,6 +242,7 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
     , m_history(nullptr)
+    , m_historyModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
 {
@@ -236,5 +251,6 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
 
 Wallet::~Wallet()
 {
+
     Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
 }

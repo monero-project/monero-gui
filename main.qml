@@ -32,8 +32,9 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
-import Bitmonero.Wallet 1.0
-import Bitmonero.PendingTransaction 1.0
+
+import moneroComponents.Wallet 1.0
+import moneroComponents.PendingTransaction 1.0
 
 
 import "components"
@@ -146,7 +147,7 @@ ApplicationWindow {
         }  else {
             var wallet_path = walletPath();
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
-            console.log("opening wallet at: ", wallet_path);
+            console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }

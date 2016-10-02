@@ -39,7 +39,7 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TranslationManager.h"
-
+#include "model/TransactionHistoryModel.h"
 
 
 
@@ -56,14 +56,15 @@ int main(int argc, char *argv[])
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
-    qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
+    qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
 
-    qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+    qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
-    qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
+
+    qmlRegisterUncreatableType<PendingTransaction>("moneroComponents.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
 
-    qmlRegisterUncreatableType<WalletManager>("Bitmonero.WalletManager", 1, 0, "WalletManager",
+    qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
                                                    "WalletManager can't be instantiated directly");
 
     qmlRegisterUncreatableType<TranslationManager>("moneroComponents", 1, 0, "TranslationManager",
@@ -72,6 +73,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<PendingTransaction::Priority>();
 
 
+    qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents", 1, 0, "TransactionHistoryModel",
+                                                        "TranslationManager can't be instantiated directly");
 
 
     QQmlApplicationEngine engine;

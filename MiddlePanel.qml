@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQml 2.0
+import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 
 Rectangle {
@@ -72,6 +74,18 @@ Rectangle {
         Rectangle { height: 4; width: parent.width / 5; color: "#FFD781" }
         Rectangle { height: 4; width: parent.width / 5; color: "#FF4F41" }
     }
+
+
+
+    // TODO: replace loader with StackView
+
+//    StackView {
+//        id: stackView
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        anchors.top: styledRow.bottom
+//        anchors.bottom: parent.bottom
+//    }
 
     Loader {
         id: loader

@@ -3,11 +3,6 @@
 #include <wallet/wallet2_api.h>
 
 
-int TransactionHistory::count() const
-{
-    return m_pimpl->count();
-}
-
 TransactionInfo *TransactionHistory::transaction(int index)
 {
     // box up Bitmonero::TransactionInfo
@@ -39,9 +34,16 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
 void TransactionHistory::refresh()
 {
     // XXX this invalidates previously saved history that might be used by clients
+    emit refreshStarted();
     m_pimpl->refresh();
-    emit invalidated();
+    emit refreshFinished();
 }
+
+quint64 TransactionHistory::count() const
+{
+    return m_pimpl->count();
+}
+
 
 TransactionHistory::TransactionHistory(Bitmonero::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl)
