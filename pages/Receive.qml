@@ -43,14 +43,13 @@ Rectangle {
 
     function updatePaymentId() {
         var payment_id = appWindow.persistentSettings.payment_id
-        if (payment_id.length === 0) {
-            payment_id = appWindow.wallet.generatePaymentId()
+        if (typeof appWindow.currentWallet !== 'undefined') {
+            payment_id = appWindow.currentWallet.generatePaymentId()
             appWindow.persistentSettings.payment_id = payment_id
-            appWindow.currentWallet.payment_id = payment_id
+            addressLine.text = appWindow.currentWallet.address
+            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
         }
         paymentIdLine.text = payment_id
-        addressLine.text = appWindow.currentWallet.address
-        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
     }
 
     Clipboard { id: clipboard }

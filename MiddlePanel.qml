@@ -30,37 +30,74 @@ import QtQuick 2.2
 import QtQml 2.0
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
+import "pages"
 
 Rectangle {
     id: root
+    property Transfer transferView: Transfer { }
+    property Receive receiveView: Receive { }
+    property History historyView: History { }
+    property Item currentView
+
+    onCurrentViewChanged: {
+        if (currentView) {
+            stackView.replace(currentView)
+        }
+    }
+
     color: "#F0EEEE"
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
 
-    states: [
-        State {
-            name: "Dashboard"
-            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-        }, State {
-            name: "History"
-            PropertyChanges { target: loader; source: "pages/History.qml" }
-        }, State {
-            name: "Transfer"
-            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-        }, State {
-           name: "Receive"
-           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-        }, State {
-            name: "AddressBook"
-            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-        }, State {
-            name: "Settings"
-            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-        }, State {
-            name: "Mining"
-            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-        }
-    ]
+//    states: [
+//        State {
+//            name: "Dashboard"
+//            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
+//        }, State {
+//            name: "History"
+//            PropertyChanges { target: loader; source: "pages/History.qml" }
+//        }, State {
+//            name: "Transfer"
+//            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
+//        }, State {
+//           name: "Receive"
+//           PropertyChanges { target: loader; source: "pages/Receive.qml" }
+//        }, State {
+//            name: "AddressBook"
+//            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
+//        }, State {
+//            name: "Settings"
+//            PropertyChanges { target: loader; source: "pages/Settings.qml" }
+//        }, State {
+//            name: "Mining"
+//            PropertyChanges { target: loader; source: "pages/Mining.qml" }
+//        }
+//    ]
+
+        states: [
+            State {
+                name: "Dashboard"
+                PropertyChanges {  }
+            }, State {
+                name: "History"
+                PropertyChanges { target: root; currentView: historyView }
+            }, State {
+                name: "Transfer"
+                PropertyChanges { target: root; currentView: transferView }
+            }, State {
+               name: "Receive"
+               PropertyChanges { target: root; currentView: receiveView }
+            }, State {
+                name: "AddressBook"
+                PropertyChanges { /*TODO*/ }
+            }, State {
+                name: "Settings"
+                PropertyChanges { /*TODO*/ }
+            }, State {
+                name: "Mining"
+                PropertyChanges { /*TODO*/ }
+            }
+        ]
 
     Row {
         id: styledRow
@@ -75,34 +112,18 @@ Rectangle {
         Rectangle { height: 4; width: parent.width / 5; color: "#FF4F41" }
     }
 
-
-
-    // TODO: replace loader with StackView
-
-//    StackView {
-//        id: stackView
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        anchors.top: styledRow.bottom
-//        anchors.bottom: parent.bottom
-//    }
-
-    Loader {
-        id: loader
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: styledRow.bottom
-        anchors.bottom: parent.bottom
-        onLoaded: {
-            console.log("Loaded " + item);
-        }
-
+    StackView {
+        id: stackView
+        initialItem: transferView
+        anchors.fill: parent
+        anchors.margins: 4
+        clip: true // otherwise animation will affect left panel
     }
 
     /* connect "payment" click */
     Connections {
         ignoreUnknownSignals: false
-        target: loader.item
+        target: transferView
         onPaymentClicked : {
             console.log("MiddlePanel: paymentClicked")
             paymentClicked(address, paymentId, amount, mixinCount, priority)
