@@ -37,6 +37,7 @@ Rectangle {
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property History historyView: History { }
+    property Settings settingsView: Settings { }
 
     property Item currentView
 
@@ -94,7 +95,7 @@ Rectangle {
                 PropertyChanges { /*TODO*/ }
             }, State {
                 name: "Settings"
-                PropertyChanges { /*TODO*/ }
+               PropertyChanges { target: root; currentView: settingsView }
             }, State {
                 name: "Mining"
                 PropertyChanges { /*TODO*/ }
