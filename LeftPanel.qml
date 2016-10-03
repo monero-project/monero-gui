@@ -36,6 +36,7 @@ Rectangle {
     property alias unlockedBalanceText: unlockedBalanceText.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
+    property alias daemonProgress : daemonProgress
 
     signal dashboardClicked()
     signal historyClicked()
@@ -352,8 +353,15 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors.bottom: (daemonProgress.visible)? daemonProgress.top : parent.bottom;
             connected: false
+        }
+
+        DaemonProgress {
+            id: daemonProgress
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
         }
     }
     // indicate disabled state

@@ -92,6 +92,9 @@ public:
     //! returns daemon's blockchain height
     Q_INVOKABLE quint64 daemonBlockChainHeight() const;
 
+    //! returns daemon's blockchain target height
+    Q_INVOKABLE quint64 daemonBlockChainTargetHeight() const;
+
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
 
@@ -162,7 +165,7 @@ private:
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
-
+    mutable quint64 m_daemonBlockChainTargetHeight;
 };
 
 

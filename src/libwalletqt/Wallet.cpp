@@ -157,6 +157,12 @@ quint64 Wallet::daemonBlockChainHeight() const
     return m_daemonBlockChainHeight;
 }
 
+quint64 Wallet::daemonBlockChainTargetHeight() const
+{
+    m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+    return m_daemonBlockChainTargetHeight;
+}
+
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();
