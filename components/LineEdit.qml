@@ -33,6 +33,7 @@ Item {
     property alias text: input.text
     property alias validator: input.validator
     property alias readOnly : input.readOnly
+    property alias cursorPosition: input.cursorPosition
     property int fontSize: 18
 
 

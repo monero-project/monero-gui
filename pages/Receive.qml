@@ -86,6 +86,8 @@ Rectangle {
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
+                onTextChanged: cursorPosition = 0
+
                 IconButton {
                     imageSource: "../images/copyToClipboard.png"
                     onClicked: {
@@ -115,6 +117,9 @@ Rectangle {
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
+
+                onTextChanged: cursorPosition = 0
+
                 IconButton {
                     imageSource: "../images/copyToClipboard.png"
                     onClicked: {
