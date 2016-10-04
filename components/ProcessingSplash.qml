@@ -32,13 +32,15 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 
 Window {
-    id: splash
+    id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-    property alias message: message.text
+    property alias messageText: messageTitle.text
+    property alias heightProgressText : heightProgress.text
+
     width: 200
     height: 100
-    opacity: 0.5
+    opacity: 0.7
 
     ColumnLayout {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -50,14 +52,23 @@ Window {
         }
 
         Text {
-            id: message
+            id: messageTitle
             text: "Please wait..."
             font {
                 pointSize: 22
             }
             horizontalAlignment: Text.AlignHCenter
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        }
+
+
+        Text {
+            id: heightProgress
+            font {
+                pointSize: 18
+            }
+            horizontalAlignment: Text.AlignHCenter
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
     }
-
-
 }

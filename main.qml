@@ -52,7 +52,7 @@ ApplicationWindow {
     property var currentWallet;
     property var transaction;
     property alias password : passwordDialog.password
-
+    property int splashCounter: 0
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -156,8 +156,12 @@ ApplicationWindow {
         currentWallet = wallet
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
+        currentWallet.newBlock.connect(onWalletNewBlock)
+
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+
         currentWallet.initAsync(persistentSettings.daemon_address, 0);
+
     }
 
     function walletPath() {
@@ -217,6 +221,18 @@ ApplicationWindow {
 
         leftPanel.networkStatus.connected = currentWallet.connected
         onWalletUpdate();
+    }
+
+    function onWalletNewBlock(blockHeight) {
+        if (splash.visible) {
+            var currHeight = blockHeight.toFixed(0)
+            if(currHeight > splashCounter + 1000){
+              splashCounter = currHeight
+              var progressText = qsTr("Synchronizing blocks %1/%2").arg(currHeight).arg(currentWallet.daemonBlockChainHeight().toFixed(0));
+              console.log("Progress text: " + progressText);
+              splash.heightProgressText = progressText
+            }
+        }
     }
 
 
@@ -418,7 +434,7 @@ ApplicationWindow {
         height: appWindow.height / 2
         x: (appWindow.width - width) / 2 + appWindow.x
         y: (appWindow.height - height) / 2 + appWindow.y
-        message: qsTr("Please wait...")
+        messageText: qsTr("Please wait...")
     }
 
 

@@ -2,10 +2,10 @@
 #define WALLET_H
 
 #include <QObject>
+#include <QTime>
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Bitmonero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
-
 
 namespace Bitmonero {
     class Wallet; // forward declaration
@@ -27,7 +27,6 @@ class Wallet : public QObject
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
-
 
 public:
     enum Status {
@@ -77,10 +76,17 @@ public:
     Q_INVOKABLE void setTrustedDaemon(bool arg);
 
     //! returns balance
-    quint64 balance() const;
+    Q_INVOKABLE quint64 balance() const;
 
     //! returns unlocked balance
-    quint64 unlockedBalance() const;
+    Q_INVOKABLE quint64 unlockedBalance() const;
+
+    //! returns current wallet's block height
+    //! (can be less than daemon's blockchain height when wallet sync in progress)
+    Q_INVOKABLE quint64 blockChainHeight() const;
+
+    //! returns daemon's blockchain height
+    Q_INVOKABLE quint64 daemonBlockChainHeight() const;
 
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
@@ -88,6 +94,12 @@ public:
 
     //! refreshes the wallet asynchronously
     Q_INVOKABLE void refreshAsync();
+
+    //! setup auto-refresh interval in seconds
+    Q_INVOKABLE void setAutoRefreshInterval(int seconds);
+
+    //! return auto-refresh interval in seconds
+    Q_INVOKABLE int autoRefreshInterval() const;
 
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
@@ -113,11 +125,17 @@ public:
 
     // TODO: setListenter() when it implemented in API
 signals:
+    // emitted on every event happened with wallet
+    // (money sent/received, new block)
     void updated();
 
     // emitted when refresh process finished (could take a long time)
     // signalling only after we
     void refreshed();
+
+    void moneySpent(const QString &txId, quint64 amount);
+    void moneyReceived(const QString &txId, quint64 amount);
+    void newBlock(quint64 height);
 
 
 private:
@@ -132,6 +150,9 @@ private:
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     QString m_paymentId;
+    mutable QTime   m_daemonBlockChainHeightTime;
+    mutable quint64 m_daemonBlockChainHeight;
+    int     m_daemonBlockChainHeightTtl;
 
 };
 
