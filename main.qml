@@ -139,11 +139,19 @@ ApplicationWindow {
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
 
+        // currentWallet is defined on daemon address change - close/reopen
+        if (currentWallet !== undefined) {
+            console.log("closing currentWallet")
+            walletManager.closeWallet(currentWallet);
+        }
 
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
+            console.log("using wizard wallet")
             connectWallet(wizard.settings['wallet'])
             isNewWallet = true
+            // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
+            delete wizard.settings['wallet']
         }  else {
             var wallet_path = walletPath();
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
