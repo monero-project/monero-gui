@@ -86,9 +86,15 @@ linux {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
-        # currently monero has an issue with "static" build and linunwind-dev
-        # -lunwind \
         -ldl
+    # currently monero has an issue with "static" build and linunwind-dev,
+    # so we link libunwind-dev only for non-Ubuntu distros
+    CONFIG(libunwind_off) {
+        message(Building without libunwind)
+    } else {
+        message(Building with libunwind)
+        LIBS += -Wl,-Bdynamic -lunwind
+    }
 }
 
 macx {

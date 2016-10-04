@@ -8,6 +8,8 @@ CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.nc
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source $ROOT_DIR/utils.sh
+
 
 INSTALL_DIR=$ROOT_DIR/wallet
 MONERO_DIR=$ROOT_DIR/monero
@@ -29,19 +31,29 @@ rm -fr $MONERO_DIR/include
 mkdir -p $MONERO_DIR/build/release
 pushd $MONERO_DIR/build/release
 
-if [ "$(uname)" == "Darwin" ]; then
+# reusing function from "utils.sh"
+platform=$(get_platform)
+
+if [ "$platform" == "darwin" ]; then
     # Do something under Mac OS X platform        
+    echo "Configuring build for MacOS.."
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$platform" == "linux" ]; then
     # Do something under GNU/Linux platform
-    PLATFORM="Linux"
+    echo "Configuring build for Linux.."
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
+elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
+    echo "Configuring build for MINGW64.."
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
-elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
+    echo "Configuring build for MINGW32.."
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+else
+    echo "Unsupported platform: $platform"
+    popd
+    exit 1
 fi
 
 
@@ -54,10 +66,11 @@ popd
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound shipped with the system, so we don't need to build it
 
-if [ "$PLATFORM" != "Linux" ]; then
+if [ "$platform" != "linux" ]; then
     echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
-    make -j$CPU_CORE_COUNT
+    # no need to make, it was already built as dependency for libwallet
+    # make -j$CPU_CORE_COUNT
     make install -j$CPU_CORE_COUNT
     popd
 fi
