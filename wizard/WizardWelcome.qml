@@ -28,13 +28,24 @@
 
 import QtQuick 2.2
 import QtQuick.XmlListModel 2.0
+import QtQuick.Layouts 1.1
+import QtQml 2.2
+
 
 Item {
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
 
+    QtObject {
+        id: d
+        readonly property string daemonAddressTestnet : "localhost:38018";
+        readonly property string daemonAddressMainnet : "localhost:18018";
+    }
+
     onOpacityChanged: visible = opacity !== 0
+
+
 
     function onPageClosed(settingsObject) {
         var lang = languagesModel.get(gridView.currentIndex);
@@ -44,7 +55,7 @@ Item {
         return true
     }
 
-
+    // Welcome text
     Column {
         id: headerColumn
         anchors.left: parent.left
@@ -66,8 +77,8 @@ Item {
             wrapMode: Text.Wrap
             // hack to implement dynamic translation
             // https://wiki.qt.io/How_to_do_dynamic_translation_in_QML
-            text: qsTr("Welcome") +
-                  translationManager.emptyString
+            text: qsTr("Welcome") /*+
+                  translationManager.emptyString*/
         }
 
         Text {
@@ -80,10 +91,10 @@ Item {
             color: "#4A4646"
             wrapMode: Text.Wrap
             text: qsTr("Please choose a language and regional format.")
-                  + translationManager.emptyString
+//                  + translationManager.emptyString
         }
     }
-
+    // Flags model
     XmlListModel {
         id: languagesModel
         source: "/lang/languages.xml"
@@ -100,6 +111,7 @@ Item {
 
     }
 
+    // Flags view
     GridView {
         id: gridView
         cellWidth: 140
@@ -158,4 +170,6 @@ Item {
 
 
     }
+
+
 }

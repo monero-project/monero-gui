@@ -143,7 +143,8 @@ ApplicationWindow {
             connectWallet(wizard.settings['wallet'])
         }  else {
             var wallet_path = walletPath();
-            console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
+            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
+            console.log("opening wallet at: ", wallet_path);
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }

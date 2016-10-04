@@ -122,7 +122,6 @@ Rectangle {
         }
 
         // protecting wallet with password
-        console.log("Protecting wallet with password: " + settings.wallet_password)
         settings.wallet.setPassword(settings.wallet_password);
 
         // saving wallet_filename;
@@ -136,6 +135,9 @@ Rectangle {
         appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining
         appWindow.persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
         appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
+        appWindow.persistentSettings.daemon_address = settings.daemon_address
+        appWindow.persistentSettings.testnet = settings.testnet
+
     }
 
     // reading settings from persistent storage
