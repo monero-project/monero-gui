@@ -260,7 +260,10 @@ ApplicationWindow {
             var currHeight = blockHeight.toFixed(0)
             if(currHeight > splashCounter + 1000){
               splashCounter = currHeight
-              var progressText = qsTr("Synchronizing blocks %1/%2").arg(currHeight).arg(currentWallet.daemonBlockChainHeight().toFixed(0));
+              var locale = Qt.locale()
+              var currHeightString = currHeight.toLocaleString(locale,"f",0)
+              var targetHeightString = currentWallet.daemonBlockChainHeight().toLocaleString(locale,"f",0)
+              var progressText = qsTr("Synchronizing blocks %1/%2").arg(currHeightString).arg(targetHeightString);
               console.log("Progress text: " + progressText);
               splash.heightProgressText = progressText
             }
