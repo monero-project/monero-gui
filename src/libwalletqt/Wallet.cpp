@@ -40,12 +40,14 @@ public:
     virtual void newBlock(uint64_t height)
     {
         // qDebug() << __FUNCTION__;
+        m_wallet->m_history->refresh();
         emit m_wallet->newBlock(height);
     }
 
     virtual void updated()
     {
         qDebug() << __FUNCTION__;
+        m_wallet->m_history->refresh();
         emit m_wallet->updated();
     }
 
@@ -53,6 +55,7 @@ public:
     virtual void refreshed()
     {
         qDebug() << __FUNCTION__;
+
         emit m_wallet->refreshed();
     }
 
@@ -166,6 +169,7 @@ quint64 Wallet::daemonBlockChainTargetHeight() const
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();
+    m_history->refresh();
     if (result)
         emit updated();
     return result;
@@ -205,10 +209,10 @@ void Wallet::disposeTransaction(PendingTransaction *t)
 
 TransactionHistory *Wallet::history()
 {
-    if (!m_history) {
-        Bitmonero::TransactionHistory * impl = m_walletImpl->history();
-        m_history = new TransactionHistory(impl, this);
-    }
+//    if (m_history->count() == 0) {
+//        m_history->refresh();
+//    }
+
     return m_history;
 }
 
@@ -252,6 +256,7 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
 {
+    m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
 }
 

@@ -39,13 +39,23 @@ QString TransactionInfo::hash() const
     return QString::fromStdString(m_pimpl->hash());
 }
 
-QString TransactionInfo::timestamp()
+QDateTime TransactionInfo::timestamp() const
 {
-    QString result = QDateTime::fromTime_t(m_pimpl->timestamp()).toString(Qt::ISODate);
+    QDateTime result = QDateTime::fromTime_t(m_pimpl->timestamp());
     return result;
 }
 
-QString TransactionInfo::paymentId()
+QString TransactionInfo::date() const
+{
+    return timestamp().date().toString(Qt::ISODate);
+}
+
+QString TransactionInfo::time() const
+{
+    return timestamp().time().toString(Qt::ISODate);
+}
+
+QString TransactionInfo::paymentId() const
 {
     return QString::fromStdString(m_pimpl->paymentId());
 }

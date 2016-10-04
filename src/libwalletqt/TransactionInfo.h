@@ -1,8 +1,9 @@
 #ifndef TRANSACTIONINFO_H
 #define TRANSACTIONINFO_H
 
-#include <QObject>
 #include <wallet/wallet2_api.h>
+#include <QObject>
+#include <QDateTime>
 
 class TransactionInfo : public QObject
 {
@@ -14,7 +15,9 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
     Q_PROPERTY(QString hash READ hash)
-    Q_PROPERTY(QString timestamp READ timestamp)
+    Q_PROPERTY(QDateTime timestamp READ timestamp)
+    Q_PROPERTY(QString date READ date)
+    Q_PROPERTY(QString time READ time)
     Q_PROPERTY(QString paymentId READ paymentId)
 
 public:
@@ -41,8 +44,11 @@ public:
     quint64 blockHeight() const;
     //! transaction_id
     QString hash() const;
-    QString timestamp();
-    QString paymentId();
+    QDateTime timestamp() const;
+    QString date() const;
+    QString time() const;
+    QString paymentId() const;
+
 
     // TODO: implement it
     //! only applicable for output transactions
@@ -56,5 +62,6 @@ private:
 
 // in order to wrap it to QVariant
 Q_DECLARE_METATYPE(TransactionInfo*)
+
 
 #endif // TRANSACTIONINFO_H

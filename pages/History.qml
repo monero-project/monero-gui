@@ -33,10 +33,13 @@ import moneroComponents.WalletManager 1.0
 
 Rectangle {
     id: root
-    property ListModel model: testModel
+    property var model: testModel
 
     color: "#F0EEEE"
 
+    onModelChanged: {
+        console.log("model.rowCount: " + model.rowCount())
+    }
 
 
     Text {

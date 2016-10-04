@@ -2,6 +2,8 @@
 #include "TransactionHistory.h"
 #include "TransactionInfo.h"
 
+#include <QDateTime>
+
 
 TransactionHistoryModel::TransactionHistoryModel(QObject *parent)
     : QAbstractListModel(parent), m_transactionHistory(nullptr)
@@ -14,6 +16,12 @@ void TransactionHistoryModel::setTransactionHistory(TransactionHistory *th)
     beginResetModel();
     m_transactionHistory = th;
     endResetModel();
+
+    connect(m_transactionHistory, &TransactionHistory::refreshStarted,
+            this, &TransactionHistoryModel::beginResetModel);
+    connect(m_transactionHistory, &TransactionHistory::refreshFinished,
+            this, &TransactionHistoryModel::endResetModel);
+
     emit transactionHistoryChanged();
 }
 
@@ -72,6 +80,15 @@ QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
     case TransactionPaymentIdRole:
         result = tInfo->paymentId();
         break;
+    case TransactionIsOutRole:
+        result = tInfo->direction() == TransactionInfo::Direction_Out;
+        break;
+    case TransactionDateRole:
+        result = tInfo->date();
+        break;
+    case TransactionTimeRole:
+        result = tInfo->time();
+        break;
     }
 
     return result;
@@ -96,6 +113,9 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     roleNames.insert(TransactionHashRole, "hash");
     roleNames.insert(TransactionTimeStampRole, "timeStamp");
     roleNames.insert(TransactionPaymentIdRole, "paymentId");
+    roleNames.insert(TransactionIsOutRole, "isOut");
+    roleNames.insert(TransactionDateRole, "date");
+    roleNames.insert(TransactionTimeRole, "time");
     return roleNames;
 }
 

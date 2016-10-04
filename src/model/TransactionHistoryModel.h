@@ -25,7 +25,12 @@ public:
         TransactionBlockHeightRole,
         TransactionHashRole,
         TransactionTimeStampRole,
-        TransactionPaymentIdRole
+        TransactionPaymentIdRole,
+        // extra role (alias) for TransactionDirectionRole (as UI currently wants just boolean "out")
+        TransactionIsOutRole,
+        // extra roles for date and time (as UI wants date and time separately)
+        TransactionDateRole,
+        TransactionTimeRole
     };
 
     TransactionHistoryModel(QObject * parent = 0);
@@ -33,9 +38,9 @@ public:
     TransactionHistory * transactionHistory() const;
 
     /// QAbstractListModel
-     virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
-     virtual int rowCount(const QModelIndex & parent = QModelIndex()) const override;
-     virtual QHash<int, QByteArray> roleNames() const  override;
+    virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
+    virtual int rowCount(const QModelIndex & parent = QModelIndex()) const override;
+    virtual QHash<int, QByteArray> roleNames() const  override;
 
 signals:
     void transactionHistoryChanged();

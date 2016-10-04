@@ -39,6 +39,7 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TranslationManager.h"
+#include "TransactionInfo.h"
 #include "model/TransactionHistoryModel.h"
 
 
@@ -71,6 +72,8 @@ int main(int argc, char *argv[])
                                                    "TranslationManager can't be instantiated directly");
 
     qRegisterMetaType<PendingTransaction::Priority>();
+
+    qRegisterMetaType<TransactionInfo::Direction>();
 
 
     qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents", 1, 0, "TransactionHistoryModel",
