@@ -93,7 +93,11 @@ TODO
 
 `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
 
-  b) For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+  b) For Ubuntu 16.04 x64
+
+`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
+
+  c) For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
 
 `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
 
