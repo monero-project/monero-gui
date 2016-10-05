@@ -53,6 +53,7 @@ ApplicationWindow {
     property var transaction;
     property alias password : passwordDialog.password
     property int splashCounter: 0
+    property bool isNewWallet: false
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -141,6 +142,7 @@ ApplicationWindow {
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             connectWallet(wizard.settings['wallet'])
+            isNewWallet = true
         }  else {
             var wallet_path = walletPath();
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
@@ -217,6 +219,14 @@ ApplicationWindow {
         console.log(">>> wallet refreshed")
         if (splash.visible) {
             hideProcessingSplash()
+        }
+
+        // Store wallet after first refresh. To prevent broken wallet after a crash
+        // TODO: Move this to libwallet?
+        if(isNewWallet && currentWallet.blockChainHeight() > 0){
+            currentWallet.store(persistentSettings.wallet_path)
+            isNewWallet = false
+            console.log("wallet stored after first successfull refresh")
         }
 
         leftPanel.networkStatus.connected = currentWallet.connected
