@@ -6,7 +6,7 @@ WALLET_ROOT=$$PWD/monero
 
 CONFIG += c++11
 
-# cleaning "auto-generated" monero directory on "make distclean"
+# cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH += $$WALLET_ROOT/include \
