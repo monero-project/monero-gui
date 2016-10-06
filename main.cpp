@@ -40,6 +40,7 @@
 #include "PendingTransaction.h"
 #include "TranslationManager.h"
 #include "TransactionInfo.h"
+#include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
 
 
@@ -57,6 +58,7 @@ int main(int argc, char *argv[])
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
+    // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
 
     qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
@@ -77,7 +79,9 @@ int main(int argc, char *argv[])
 
 
     qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents", 1, 0, "TransactionHistoryModel",
-                                                        "TranslationManager can't be instantiated directly");
+                                                        "TransactionHistoryModel can't be instantiated directly");
+    qmlRegisterUncreatableType<TransactionHistory>("moneroComponents", 1, 0, "TransactionHistory",
+                                                        "TransactionHistory can't be instantiated directly");
 
 
     QQmlApplicationEngine engine;

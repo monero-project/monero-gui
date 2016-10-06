@@ -80,6 +80,7 @@ ListView {
             }
 
             // -- description aka recepient name from address book (TODO)
+            /*
             Text {
                 id: descriptionText
                 width: text.length ? (descriptionArea.containsMouse ? parent.width - x - 12 : 120) : 0
@@ -97,12 +98,14 @@ ListView {
                     hoverEnabled: true
                 }
             }
-
+            */
+            /*
             Item { //separator
                 width: descriptionText.width ? 12 : 0
                 height: 14
                 visible: !descriptionArea.containsMouse
             }
+            */
             // -- address (in case outgoing transaction) - N/A in case of incoming
             Text {
                 id: addressText
@@ -113,7 +116,7 @@ ListView {
                 font.pixelSize: 14
                 color: "#545454"
                 text: hash
-                visible: !descriptionArea.containsMouse
+                // visible: !descriptionArea.containsMouse
             }
         }
         // -- "PaymentID" title

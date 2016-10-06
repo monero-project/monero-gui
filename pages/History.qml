@@ -33,7 +33,7 @@ import moneroComponents.WalletManager 1.0
 
 Rectangle {
     id: root
-    property var model: testModel
+    property var model
 
     color: "#F0EEEE"
 
@@ -340,7 +340,7 @@ Rectangle {
             offset: 20
             onSortRequest: console.log("column: " + column + " desc: " + desc)
         }
-
+        /*
         ListModel {
             id: testModel
             ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
@@ -354,6 +354,7 @@ Rectangle {
             ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
             ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
         }
+        */
 
         Scroll {
             id: flickableScroll

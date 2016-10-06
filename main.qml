@@ -55,6 +55,8 @@ ApplicationWindow {
     property alias password : passwordDialog.password
     property int splashCounter: 0
     property bool isNewWallet: false
+    // true if wallet ever synchronized
+    property bool walletInitialized : false
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -168,11 +170,10 @@ ApplicationWindow {
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
-
+        currentWallet.moneySpent.connect(onWalletMoneySent)
+        currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
-
         currentWallet.initAsync(persistentSettings.daemon_address, 0);
-
     }
 
     function walletPath() {
@@ -241,6 +242,13 @@ ApplicationWindow {
             console.log("wallet stored after first successfull refresh")
         }
 
+        // initialize transaction history once wallet is initializef first time;
+        if (!walletInitialized) {
+            currentWallet.history.refresh()
+            walletInitialized = true
+
+        }
+
         leftPanel.networkStatus.connected = currentWallet.connected
 
         onWalletUpdate();
@@ -256,6 +264,18 @@ ApplicationWindow {
               splash.heightProgressText = progressText
             }
         }
+    }
+
+    function onWalletMoneyReceived(txId, amount) {
+        // refresh transaction history here
+        currentWallet.refresh()
+        currentWallet.history.refresh() // this will refresh model
+    }
+
+    function onWalletMoneySent(txId, amount) {
+        // refresh transaction history here
+        currentWallet.refresh()
+        currentWallet.history.refresh() // this will refresh model
     }
 
 

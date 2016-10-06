@@ -22,6 +22,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(bool connected READ connected)
+    Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(QString address READ address)
     Q_PROPERTY(quint64 balance READ balance)
@@ -52,8 +53,12 @@ public:
     //! returns last operation's status
     Status status() const;
 
-    //! returns of wallet connected
+    //! returns true if wallet connected
     bool connected() const;
+
+    //! returns true if wallet was ever synchronized
+    bool synchronized() const;
+
 
     //! returns last operation's error message
     QString errorString() const;
@@ -98,7 +103,6 @@ public:
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
 
-
     //! refreshes the wallet asynchronously
     Q_INVOKABLE void refreshAsync();
 
@@ -116,10 +120,10 @@ public:
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 
     //! returns transaction history
-    TransactionHistory * history();
+    TransactionHistory * history() const;
 
     //! returns transaction history model
-    TransactionHistoryModel * historyModel();
+    TransactionHistoryModel * historyModel() const;
 
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
@@ -160,7 +164,7 @@ private:
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     // Used for UI history view
-    TransactionHistoryModel * m_historyModel;
+    mutable TransactionHistoryModel * m_historyModel;
     QString m_paymentId;
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;

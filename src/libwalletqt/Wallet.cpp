@@ -32,7 +32,6 @@ public:
 
     virtual void moneyReceived(const std::string &txId, uint64_t amount)
     {
-
         qDebug() << __FUNCTION__;
         emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
     }
@@ -40,14 +39,12 @@ public:
     virtual void newBlock(uint64_t height)
     {
         // qDebug() << __FUNCTION__;
-        m_wallet->m_history->refresh();
         emit m_wallet->newBlock(height);
     }
 
     virtual void updated()
     {
         qDebug() << __FUNCTION__;
-        m_wallet->m_history->refresh();
         emit m_wallet->updated();
     }
 
@@ -55,7 +52,6 @@ public:
     virtual void refreshed()
     {
         qDebug() << __FUNCTION__;
-
         emit m_wallet->refreshed();
     }
 
@@ -91,6 +87,11 @@ Wallet::Status Wallet::status() const
 bool Wallet::connected() const
 {
     return m_walletImpl->connected();
+}
+
+bool Wallet::synchronized() const
+{
+    return m_walletImpl->synchronized();
 }
 
 QString Wallet::errorString() const
@@ -207,19 +208,16 @@ void Wallet::disposeTransaction(PendingTransaction *t)
     delete t;
 }
 
-TransactionHistory *Wallet::history()
+TransactionHistory *Wallet::history() const
 {
-//    if (m_history->count() == 0) {
-//        m_history->refresh();
-//    }
-
     return m_history;
 }
 
-TransactionHistoryModel *Wallet::historyModel()
+TransactionHistoryModel *Wallet::historyModel() const
 {
     if (!m_historyModel) {
-        m_historyModel = new TransactionHistoryModel(this);
+        Wallet * w = const_cast<Wallet*>(this);
+        m_historyModel = new TransactionHistoryModel(w);
         m_historyModel->setTransactionHistory(this->history());
     }
 
