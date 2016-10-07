@@ -54,12 +54,14 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
+        settingsObject['restoreHeight'] = parseInt(uiItem.restoreHeight)
         return recoveryWallet(settingsObject)
     }
 
     function recoveryWallet(settingsObject) {
         var testnet = appWindow.persistentSettings.testnet;
-        var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet);
+        var restoreHeight = settingsObject.restoreHeight;
+        var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet, restoreHeight);
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             settingsObject['wallet'] = wallet;
@@ -80,6 +82,7 @@ Item {
         wordsTextItem.tipTextVisible: false
         wordsTextItem.memoTextReadOnly: false
         wordsTextItem.memoText: ""
+        restoreHeightVisible: true
         wordsTextItem.onMemoTextChanged: {
             checkNextButton();
         }
