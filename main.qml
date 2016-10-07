@@ -55,6 +55,8 @@ ApplicationWindow {
     property alias password : passwordDialog.password
     property int splashCounter: 0
     property bool isNewWallet: false
+    property int restoreHeight:0
+
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
@@ -150,7 +152,15 @@ ApplicationWindow {
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
+            //Set restoreHeight
+            if(persistentSettings.restoreHeight > 0){
+                restoreHeight = persistentSettings.restoreHeight
+            }
+
+            console.log("using wizard wallet")
+
             connectWallet(wizard.settings['wallet'])
+
             isNewWallet = true
             // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
             delete wizard.settings['wallet']
@@ -242,11 +252,22 @@ ApplicationWindow {
             console.log("wallet stored after first successfull refresh")
         }
 
+        var dCurrentBlock = currentWallet.daemonBlockChainHeight();
+        var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
+        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
+
+        // Store wallet after first refresh. To prevent broken wallet after a crash
+        // TODO: Move this to libwallet?
+        if(isNewWallet && currentWallet.blockChainHeight() > 0){
+            currentWallet.store(persistentSettings.wallet_path)
+            isNewWallet = false
+            console.log("wallet stored after first successfull refresh")
+        }
+
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
             currentWallet.history.refresh()
             walletInitialized = true
-
         }
 
         leftPanel.networkStatus.connected = currentWallet.connected
@@ -256,8 +277,12 @@ ApplicationWindow {
 
     function onWalletNewBlock(blockHeight) {
         if (splash.visible) {
-            var currHeight = blockHeight.toFixed(0)
-            if(currHeight > splashCounter + 1000){
+            var currHeight = blockHeight
+
+            //fast refresh until restoreHeight is reached
+            var increment = ((restoreHeight == 0) || currHeight < restoreHeight)? 1000 : 10
+
+            if(currHeight > splashCounter + increment){
               splashCounter = currHeight
               var locale = Qt.locale()
               var currHeightString = currHeight.toLocaleString(locale,"f",0)
@@ -433,6 +458,7 @@ ApplicationWindow {
         property bool   testnet: true
         property string daemon_address: "localhost:38081"
         property string payment_id
+        property int restoreHeight:0
     }
 
     // TODO: replace with customized popups
