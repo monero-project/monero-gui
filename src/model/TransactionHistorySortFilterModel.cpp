@@ -3,6 +3,39 @@
 
 #include <QDebug>
 
+namespace {
+    /**
+     * helper to extract scope value from filter
+     */
+    template <typename T>
+    T scopeFilterValue(const QMap<int, QVariant> &filters, int role, int scopeIndex)
+    {
+        if (!filters.contains(role)) {
+            return T();
+        }
+        return filters.value(role).toList().at(scopeIndex).value<T>();
+    }
+
+    /**
+     * helper to setup scope value to filter
+     */
+    template <typename T>
+    void setScopeFilterValue(QMap<int, QVariant> &filters, int role, int scopeIndex, const T &value)
+    {
+        QVariantList scopeFilter;
+
+        if (filters.contains(role)) {
+            scopeFilter = filters.value(role).toList();
+        }
+        while (scopeFilter.size() < 2) {
+            scopeFilter.append(T());
+        }
+        scopeFilter[scopeIndex] = QVariant::fromValue(value);
+        filters[role] = scopeFilter;
+    }
+}
+
+
 TransactionHistorySortFilterModel::TransactionHistorySortFilterModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
@@ -25,13 +58,13 @@ void TransactionHistorySortFilterModel::setPaymentIdFilter(const QString &arg)
 
 QDate TransactionHistorySortFilterModel::dateFromFilter() const
 {
-    return dateFromToFilter(From);
+    return scopeFilterValue<QDate>(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::From);
 }
 
 void TransactionHistorySortFilterModel::setDateFromFilter(const QDate &date)
 {
     if (date != dateFromFilter()) {
-        setDateFromToFilter(From, date);
+        setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::From, date);
         emit dateFromFilterChanged();
         invalidateFilter();
     }
@@ -39,17 +72,46 @@ void TransactionHistorySortFilterModel::setDateFromFilter(const QDate &date)
 
 QDate TransactionHistorySortFilterModel::dateToFilter() const
 {
-    return dateFromToFilter(To);
+    return scopeFilterValue<QDate>(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::To);
 }
 
 void TransactionHistorySortFilterModel::setDateToFilter(const QDate &date)
 {
     if (date != dateToFilter()) {
-        setDateFromToFilter(To, date);
-        emit dateFromFilterChanged();
+        setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionTimeStampRole, ScopeIndex::To, date);
+        emit dateToFilterChanged();
         invalidateFilter();
     }
 }
+
+double TransactionHistorySortFilterModel::amountFromFilter() const
+{
+    return scopeFilterValue<double>(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::From);
+}
+
+void TransactionHistorySortFilterModel::setAmountFromFilter(double value)
+{
+    if (value != amountFromFilter()) {
+        setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::From, value);
+        emit amountFromFilterChanged();
+        invalidateFilter();
+    }
+}
+
+double TransactionHistorySortFilterModel::amountToFilter() const
+{
+    return scopeFilterValue<double>(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::To);
+}
+
+void TransactionHistorySortFilterModel::setAmountToFilter(double value)
+{
+    if (value != amountToFilter()) {
+        setScopeFilterValue(m_filterValues, TransactionHistoryModel::TransactionAmountRole, ScopeIndex::To, value);
+        emit amountToFilterChanged();
+        invalidateFilter();
+    }
+}
+
 
 void TransactionHistorySortFilterModel::sort(int column, Qt::SortOrder order)
 {
@@ -93,9 +155,22 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
                 bool matchTo = to.isNull() || timestamp.isNull() || timestamp <= to;
                 result = matchFrom && matchTo;
             }
+                break;
+            case TransactionHistoryModel::TransactionAmountRole:
+            {
+                double from = amountFromFilter();
+                double to = amountToFilter();
+                double amount = data.toDouble();
+
+                bool matchFrom = from < 0 || amount  >= from;
+                bool matchTo = to < 0 || amount <= to;
+                result = matchFrom && matchTo;
+            }
+                break;
             default:
                 break;
             }
+
             if (!result) // stop the loop once filter doesn't match
                 break;
         }
@@ -119,7 +194,7 @@ void TransactionHistorySortFilterModel::setFilterValue(int role, const QVariant 
     m_filterValues[role] = filterValue;
 }
 
-QDate TransactionHistorySortFilterModel::dateFromToFilter(TransactionHistorySortFilterModel::DateScopeIndex index) const
+QDate TransactionHistorySortFilterModel::dateFromToFilter(TransactionHistorySortFilterModel::ScopeIndex index) const
 {
     int role = TransactionHistoryModel::TransactionTimeStampRole;
     if (!m_filterValues.contains(role)) {
@@ -128,7 +203,7 @@ QDate TransactionHistorySortFilterModel::dateFromToFilter(TransactionHistorySort
     return m_filterValues.value(role).toList().at(index).toDate();
 }
 
-void TransactionHistorySortFilterModel::setDateFromToFilter(TransactionHistorySortFilterModel::DateScopeIndex index, const QDate &value)
+void TransactionHistorySortFilterModel::setDateFromToFilter(TransactionHistorySortFilterModel::ScopeIndex index, const QDate &value)
 {
     QVariantList scopeFilter;
     int role = TransactionHistoryModel::TransactionTimeStampRole;
@@ -141,3 +216,6 @@ void TransactionHistorySortFilterModel::setDateFromToFilter(TransactionHistorySo
     scopeFilter[index] = QVariant::fromValue(value);
     m_filterValues[role] = scopeFilter;
 }
+
+
+

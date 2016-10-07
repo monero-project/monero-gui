@@ -160,9 +160,6 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         z: 2
-        onCurrentDateChanged: {
-            console.log("CurrentDate: " + currentDate)
-        }
     }
 
     // DateTo picker
@@ -202,11 +199,21 @@ Rectangle {
             model.paymentIdFilter = paymentIdLine.text
             model.dateFromFilter  = fromDatePicker.currentDate
             model.dateToFilter    = toDatePicker.currentDate
+            if (advancedFilteringCheckBox.checked) {
+                if (amountFromLine.text.length) {
+                    model.amountFromFilter = parseFloat(amountFromLine.text)
+                }
+                if (amountToLine.text.length) {
+                    model.amountToFilter = parseFloat(amountToLine.text)
+                }
+            }
+
+
         }
     }
 
     CheckBox {
-        id: checkBox
+        id: advancedFilteringCheckBox
         text: qsTr("Advance filtering")
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
@@ -233,9 +240,10 @@ Rectangle {
 
     ListModel {
         id: transactionsModel
+        ListElement { column1: "ALL"; column2: "" }
         ListElement { column1: "SENT"; column2: "" }
-        ListElement { column1: "RECIVE"; column2: "" }
-        ListElement { column1: "ON HOLD"; column2: "" }
+        ListElement { column1: "RECEIVED"; column2: "" }
+
     }
 
     StandardDropdown {
