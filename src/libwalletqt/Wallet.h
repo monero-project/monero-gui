@@ -30,7 +30,7 @@ class Wallet : public QObject
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
-    Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel)
+    Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
 
 public:
 
@@ -151,6 +151,7 @@ signals:
     void moneySpent(const QString &txId, quint64 amount);
     void moneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height);
+    void historyModelChanged() const;
 
 
 private:

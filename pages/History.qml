@@ -42,7 +42,11 @@ Rectangle {
     color: "#F0EEEE"
 
     onModelChanged: {
-        console.log("model.rowCount: " + model.rowCount())
+        if (typeof model !== 'undefined') {
+            // setup date filter scope according to real transactions
+            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+            toDatePicker.currentDate = model.transactionHistory.lastDateTime
+        }
     }
 
 
@@ -107,6 +111,8 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+
+
     }
 
     // Filter by description input (not implemented yet)
@@ -154,6 +160,9 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         z: 2
+        onCurrentDateChanged: {
+            console.log("CurrentDate: " + currentDate)
+        }
     }
 
     // DateTo picker
@@ -188,6 +197,12 @@ Rectangle {
         shadowPressedColor: "#2D002F"
         releasedColor: "#6B0072"
         pressedColor: "#4D0051"
+        onClicked:  {
+            // Apply filter here;
+            model.paymentIdFilter = paymentIdLine.text
+            model.dateFromFilter  = fromDatePicker.currentDate
+            model.dateToFilter    = toDatePicker.currentDate
+        }
     }
 
     CheckBox {
@@ -373,21 +388,6 @@ Rectangle {
                 model.sort(0, desc ? Qt.DescendingOrder : Qt.AscendingOrder)
             }
         }
-        /*
-        ListModel {
-            id: testModel
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: true }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: true }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-        }
-        */
 
         Scroll {
             id: flickableScroll
