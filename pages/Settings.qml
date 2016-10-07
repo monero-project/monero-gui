@@ -34,8 +34,9 @@ import QtQuick.Dialogs 1.2
 
 
 import "../components"
-import moneroComponents 1.0
+
 import moneroComponents.Clipboard 1.0
+
 
 Rectangle {
 
