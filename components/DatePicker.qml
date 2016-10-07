@@ -33,12 +33,13 @@ import QtQuick.Controls.Styles 1.2
 Item {
     id: datePicker
     property bool expanded: false
-    property var currentDate: new Date()
+    property date currentDate
     property bool showCurrentDate: true
     height: 37
     width: 156
 
     onExpandedChanged: if(expanded) appWindow.currentItem = datePicker
+
     function hide() { datePicker.expanded = false }
     function containsPoint(px, py) {
         if(px < 0)
@@ -121,12 +122,29 @@ Item {
         }
 
         Row {
+            id: dateInput
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10
 
+            function setDate(date) {
+                var day = date.getDate()
+                var month = date.getMonth() + 1
+                dayInput.text = day < 10 ? "0" + day : day
+                monthInput.text = month < 10 ? "0" + month : month
+                yearInput.text = date.getFullYear()
+            }
+
+            Connections {
+                target: datePicker
+                onCurrentDateChanged: {
+                    dateInput.setDate(datePicker.currentDate)
+                }
+            }
+
             TextInput {
                 id: dayInput
+                readOnly: true
                 width: 22
                 font.family: "Arial"
                 font.pixelSize: 18
@@ -135,6 +153,7 @@ Item {
                 horizontalAlignment: TextInput.AlignHCenter
                 validator: IntValidator{bottom: 01; top: 31;}
                 KeyNavigation.tab: monthInput
+
                 text: {
                     if(datePicker.showCurrentDate) {
                         var day = datePicker.currentDate.getDate()
@@ -158,6 +177,7 @@ Item {
 
             TextInput {
                 id: monthInput
+                readOnly: true
                 width: 22
                 font.family: "Arial"
                 font.pixelSize: 18
@@ -277,12 +297,7 @@ Item {
                         anchors.fill: parent
                         onClicked: {
                             if(styleData.visibleMonth) {
-                                var date = styleData.date
-                                var day = date.getDate()
-                                var month = date.getMonth() + 1
-                                dayInput.text = day < 10 ? "0" + day : day
-                                monthInput.text = month < 10 ? "0" + month : month
-                                yearInput.text = date.getFullYear()
+                                currentDate = styleData.date
                                 datePicker.expanded = false
                             } else {
                                 var date = styleData.date
