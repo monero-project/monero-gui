@@ -24,7 +24,8 @@ HEADERS += \
     src/libwalletqt/TransactionInfo.h \
     oshelper.h \
     TranslationManager.h \
-    src/model/TransactionHistoryModel.h
+    src/model/TransactionHistoryModel.h \
+    src/model/TransactionHistorySortFilterModel.h
 
 
 SOURCES += main.cpp \
@@ -38,7 +39,8 @@ SOURCES += main.cpp \
     src/libwalletqt/TransactionInfo.cpp \
     oshelper.cpp \
     TranslationManager.cpp \
-    src/model/TransactionHistoryModel.cpp
+    src/model/TransactionHistoryModel.cpp \
+    src/model/TransactionHistorySortFilterModel.cpp
 
 lupdate_only {
 SOURCES = *.qml \

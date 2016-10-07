@@ -11,7 +11,8 @@ class TransactionInfo : public QObject
     Q_PROPERTY(Direction direction READ direction)
     Q_PROPERTY(bool isPending READ isPending)
     Q_PROPERTY(bool isFailed READ isFailed)
-    Q_PROPERTY(QString amount READ amount)
+    Q_PROPERTY(double amount READ amount)
+    Q_PROPERTY(QString displayAmount READ displayAmount)
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
     Q_PROPERTY(QString hash READ hash)
@@ -39,7 +40,8 @@ public:
     Direction  direction() const;
     bool isPending() const;
     bool isFailed() const;
-    QString amount() const;
+    double amount() const;
+    QString displayAmount() const;
     QString fee() const;
     quint64 blockHeight() const;
     //! transaction_id

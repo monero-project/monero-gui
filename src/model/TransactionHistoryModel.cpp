@@ -65,6 +65,9 @@ QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
     case TransactionAmountRole:
         result = tInfo->amount();
         break;
+    case TransactionDisplayAmountRole:
+        result = tInfo->displayAmount();
+        break;
     case TransactionFeeRole:
         result = tInfo->fee();
         break;
@@ -108,6 +111,7 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     roleNames.insert(TransactionPendingRole, "isPending");
     roleNames.insert(TransactionFailedRole, "isFailed");
     roleNames.insert(TransactionAmountRole, "amount");
+    roleNames.insert(TransactionDisplayAmountRole, "displayAmount");
     roleNames.insert(TransactionFeeRole, "fee");
     roleNames.insert(TransactionBlockHeightRole, "blockHeight");
     roleNames.insert(TransactionHashRole, "hash");

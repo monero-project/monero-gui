@@ -2,6 +2,7 @@
 #include "PendingTransaction.h"
 #include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
+#include "model/TransactionHistorySortFilterModel.h"
 #include "wallet/wallet2_api.h"
 
 #include <QFile>
@@ -213,15 +214,17 @@ TransactionHistory *Wallet::history() const
     return m_history;
 }
 
-TransactionHistoryModel *Wallet::historyModel() const
+TransactionHistorySortFilterModel *Wallet::historyModel() const
 {
     if (!m_historyModel) {
         Wallet * w = const_cast<Wallet*>(this);
         m_historyModel = new TransactionHistoryModel(w);
         m_historyModel->setTransactionHistory(this->history());
+        m_historySortFilterModel = new TransactionHistorySortFilterModel(w);
+        m_historySortFilterModel->setSourceModel(m_historyModel);
     }
 
-    return m_historyModel;
+    return m_historySortFilterModel;
 }
 
 

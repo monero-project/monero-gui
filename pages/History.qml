@@ -27,9 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import "../components"
+
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
+import moneroComponents.TransactionHistory 1.0
+import moneroComponents.TransactionHistoryModel 1.0
+
+import "../components"
 
 Rectangle {
     id: root
@@ -57,6 +61,8 @@ Rectangle {
         text: qsTr("Filter transactions history") + translationManager.emptyString
     }
 
+    // Filter by Address input (senseless, removing)
+    /*
     Label {
         id: addressLabel
         anchors.left: parent.left
@@ -77,11 +83,14 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
+    */
+
+    // Filter by Payment ID input
 
     Label {
         id: paymentIdLabel
         anchors.left: parent.left
-        anchors.top: addressLine.bottom
+        anchors.top: filterHeaderText.bottom // addressLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
@@ -94,12 +103,14 @@ Rectangle {
         id: paymentIdLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom
+        anchors.top: paymentIdLabel.bottom // addressLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
 
+    // Filter by description input (not implemented yet)
+    /*
     Label {
         id: descriptionLabel
         anchors.left: parent.left
@@ -120,11 +131,14 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
+    */
 
+
+    // DateFrom picker
     Label {
         id: dateFromText
         anchors.left: parent.left
-        anchors.top: descriptionLine.bottom
+        anchors.top:  paymentIdLine.bottom // descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
@@ -142,10 +156,11 @@ Rectangle {
         z: 2
     }
 
+    // DateTo picker
     Label {
         id: dateToText
         anchors.left: dateFromText.right
-        anchors.top: descriptionLine.bottom
+        anchors.top:  paymentIdLine.bottom //descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("To")
@@ -322,10 +337,11 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: "Address"; columnWidth: 127 }
+
+            ListElement { columnName: "Payment ID"; columnWidth: 127 }
             ListElement { columnName: "Date"; columnWidth: 100 }
             ListElement { columnName: "Amount"; columnWidth: 148 }
-            ListElement { columnName: "Description"; columnWidth: 148 }
+            // ListElement { columnName: "Description"; columnWidth: 148 }
         }
 
         TableHeader {
@@ -338,7 +354,24 @@ Rectangle {
             anchors.rightMargin: 14
             dataModel: columnsModel
             offset: 20
-            onSortRequest: console.log("column: " + column + " desc: " + desc)
+            onSortRequest: {
+                console.log("column: " + column + " desc: " + desc)
+                switch (column) {
+                case 0:
+                    // Payment ID
+                    model.sortRole = TransactionHistoryModel.TransactionPaymentIdRole
+                    break;
+                case 1:
+                    // Date;
+                    model.sortRole = TransactionHistoryModel.TransactionDateRole
+                    break;
+                case 2:
+                    // Amount;
+                    model.sortRole = TransactionHistoryModel.TransactionAmountRole
+                    break;
+                }
+                model.sort(0, desc ? Qt.DescendingOrder : Qt.AscendingOrder)
+            }
         }
         /*
         ListModel {

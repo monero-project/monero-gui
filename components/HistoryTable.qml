@@ -252,7 +252,7 @@ ListView {
                         font.pixelSize: 18
                         font.letterSpacing: -1
                         color: isOut ? "#FF4F41" : "#36B05B"
-                        text: amount
+                        text: displayAmount
                     }
                 }
             }

@@ -42,7 +42,7 @@
 #include "TransactionInfo.h"
 #include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
-
+#include "model/TransactionHistorySortFilterModel.h"
 
 
 int main(int argc, char *argv[])
@@ -70,19 +70,23 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
                                                    "WalletManager can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TranslationManager>("moneroComponents", 1, 0, "TranslationManager",
+    qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
 
-    qRegisterMetaType<PendingTransaction::Priority>();
-
-    qRegisterMetaType<TransactionInfo::Direction>();
 
 
-    qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents", 1, 0, "TransactionHistoryModel",
+    qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
                                                         "TransactionHistoryModel can't be instantiated directly");
-    qmlRegisterUncreatableType<TransactionHistory>("moneroComponents", 1, 0, "TransactionHistory",
+
+    qmlRegisterUncreatableType<TransactionHistorySortFilterModel>("moneroComponents.TransactionHistorySortFilterModel", 1, 0, "TransactionHistorySortFilterModel",
+                                                        "TransactionHistorySortFilterModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TransactionHistory>("moneroComponents.TransactionHistory", 1, 0, "TransactionHistory",
                                                         "TransactionHistory can't be instantiated directly");
 
+    qRegisterMetaType<PendingTransaction::Priority>();
+    qRegisterMetaType<TransactionInfo::Direction>();
+    qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
     QQmlApplicationEngine engine;
 

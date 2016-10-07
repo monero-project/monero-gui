@@ -9,6 +9,7 @@ class TransactionInfo;
 /**
  * @brief The TransactionHistoryModel class - read-only list model for Transaction History
  */
+
 class TransactionHistoryModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -21,6 +22,7 @@ public:
         TransactionPendingRole,
         TransactionFailedRole,
         TransactionAmountRole,
+        TransactionDisplayAmountRole,
         TransactionFeeRole,
         TransactionBlockHeightRole,
         TransactionHashRole,
@@ -32,10 +34,24 @@ public:
         TransactionDateRole,
         TransactionTimeRole
     };
+    Q_ENUM(TransactionInfoRole)
 
     TransactionHistoryModel(QObject * parent = 0);
     void setTransactionHistory(TransactionHistory * th);
     TransactionHistory * transactionHistory() const;
+    /**
+     * @brief dateFrom - returns firstmost transaction datetime
+     * @return
+     */
+    QDateTime firstDateTime() const;
+
+    /**
+     * @brief dateTo - returns lastmost transaction datetime
+     * @return
+     */
+    QDateTime lastDateTime() const;
+
+
 
     /// QAbstractListModel
     virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
@@ -47,7 +63,6 @@ signals:
 
 private:
     TransactionHistory * m_transactionHistory;
-
 };
 
 #endif // TRANSACTIONHISTORYMODEL_H

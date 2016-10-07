@@ -19,7 +19,13 @@ bool TransactionInfo::isFailed() const
 }
 
 
-QString TransactionInfo::amount() const
+double TransactionInfo::amount() const
+{
+    // there's no unsigned uint64 for JS, so better use double
+    return WalletManager::instance()->displayAmount(m_pimpl->amount()).toDouble();
+}
+
+QString TransactionInfo::displayAmount() const
 {
     return WalletManager::instance()->displayAmount(m_pimpl->amount());
 }

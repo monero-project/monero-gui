@@ -14,6 +14,7 @@ namespace Bitmonero {
 
 class TransactionHistory;
 class TransactionHistoryModel;
+class TransactionHistorySortFilterModel;
 
 class Wallet : public QObject
 {
@@ -29,7 +30,7 @@ class Wallet : public QObject
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
-    Q_PROPERTY(TransactionHistoryModel * historyModel READ historyModel)
+    Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel)
 
 public:
 
@@ -123,7 +124,7 @@ public:
     TransactionHistory * history() const;
 
     //! returns transaction history model
-    TransactionHistoryModel * historyModel() const;
+    TransactionHistorySortFilterModel *historyModel() const;
 
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
@@ -165,6 +166,7 @@ private:
     TransactionHistory * m_history;
     // Used for UI history view
     mutable TransactionHistoryModel * m_historyModel;
+    mutable TransactionHistorySortFilterModel * m_historySortFilterModel;
     QString m_paymentId;
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
