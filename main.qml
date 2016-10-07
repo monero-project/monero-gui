@@ -55,6 +55,7 @@ ApplicationWindow {
     property alias password : passwordDialog.password
     property int splashCounter: 0
     property bool isNewWallet: false
+
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
