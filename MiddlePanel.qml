@@ -38,13 +38,13 @@ Rectangle {
 
     property Item currentView
     property bool basicMode : false
+    property string balanceText
+    property string unlockedBalanceText
+
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property History historyView: History { }
     property Settings settingsView: Settings { }
-
-    property string balanceText
-    property string unlockedBalanceText
 
 
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
@@ -64,31 +64,31 @@ Rectangle {
     }
 
 
-
-//    states: [
-//        State {
-//            name: "Dashboard"
-//            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-//        }, State {
-//            name: "History"
-//            PropertyChanges { target: loader; source: "pages/History.qml" }
-//        }, State {
-//            name: "Transfer"
-//            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-//        }, State {
-//           name: "Receive"
-//           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-//        }, State {
-//            name: "AddressBook"
-//            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-//        }, State {
-//            name: "Settings"
-//            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-//        }, State {
-//            name: "Mining"
-//            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-//        }
-//    ]
+    //   XXX: just for memo, to be removed
+    //    states: [
+    //        State {
+    //            name: "Dashboard"
+    //            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
+    //        }, State {
+    //            name: "History"
+    //            PropertyChanges { target: loader; source: "pages/History.qml" }
+    //        }, State {
+    //            name: "Transfer"
+    //            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
+    //        }, State {
+    //           name: "Receive"
+    //           PropertyChanges { target: loader; source: "pages/Receive.qml" }
+    //        }, State {
+    //            name: "AddressBook"
+    //            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
+    //        }, State {
+    //            name: "Settings"
+    //            PropertyChanges { target: loader; source: "pages/Settings.qml" }
+    //        }, State {
+    //            name: "Mining"
+    //            PropertyChanges { target: loader; source: "pages/Mining.qml" }
+    //        }
+    //    ]
 
         states: [
             State {
@@ -115,7 +115,6 @@ Rectangle {
                 PropertyChanges { /*TODO*/ }
             }
         ]
-
 
     // color stripe at the top
     Row {
