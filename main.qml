@@ -252,10 +252,6 @@ ApplicationWindow {
             console.log("wallet stored after first successfull refresh")
         }
 
-        var dCurrentBlock = currentWallet.daemonBlockChainHeight();
-        var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
-        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
-
         // Store wallet after first refresh. To prevent broken wallet after a crash
         // TODO: Move this to libwallet?
         if(isNewWallet && currentWallet.blockChainHeight() > 0){
