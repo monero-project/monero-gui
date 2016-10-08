@@ -277,7 +277,7 @@ ListView {
                         font.family: "Arial"
                         font.pixelSize: 18
                         font.letterSpacing: -1
-                        color: isOut ? "#FF4F41" : "#36B05B"
+                        color: "#FF4F41"
                         text:  fee
                     }
                 }
@@ -286,7 +286,9 @@ ListView {
 
 
 
-
+        /*
+        // Transaction dropdown menu.
+        // Disable for now until AddressBook implemented
         TableDropdown {
             id: dropdown
             anchors.right: parent.right
@@ -314,6 +316,7 @@ ListView {
             height: 1
             color: "#DBDBDB"
         }
+        */
     }
 
     ListModel {
