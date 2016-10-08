@@ -326,8 +326,11 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 parent.expanded = !parent.expanded
-                if(checkBox.checked) tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.collapsedHeight })
-                else tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
+                if (advancedFilteringCheckBox.checked) {
+                    tableRect.height = Qt.binding(function() { return parent.expanded ? tableRect.expandedHeight : tableRect.collapsedHeight })
+                } else {
+                    tableRect.height = Qt.binding(function() { return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
+                }
             }
         }
     }
