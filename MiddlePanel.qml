@@ -43,6 +43,10 @@ Rectangle {
     property History historyView: History { }
     property Settings settingsView: Settings { }
 
+    property string balanceText
+    property string unlockedBalanceText
+
+
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
 
@@ -144,7 +148,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 64
             color: "#FFFFFF"
-            visible: false
+            visible: basicMode
 
             Image {
                 id: logo
@@ -172,7 +176,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Locked Balance:")
+                    text: qsTr("Balance:")
                 }
 
                 Text {
@@ -186,7 +190,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#000000"
-                    text: qsTr("78.9239845")
+                    text: root.balanceText
                 }
 
                 Item {
@@ -210,7 +214,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Available Balance:")
+                    text: qsTr("Unlocked Balance:")
                 }
 
                 Text {
@@ -224,7 +228,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#000000"
-                    text: qsTr("2324.9239845")
+                    text: root.unlockedBalanceText
                 }
             }
 

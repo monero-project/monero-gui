@@ -230,9 +230,8 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-//        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText =
-//                walletManager.displayAmount(currentWallet.unlockedBalance);
-//        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
+        middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
     }
 
     function onWalletRefresh() {
