@@ -252,7 +252,33 @@ ListView {
                         font.pixelSize: 18
                         font.letterSpacing: -1
                         color: isOut ? "#FF4F41" : "#36B05B"
-                        text: displayAmount
+                        text:  displayAmount
+                    }
+                }
+            }
+
+            // -- "Fee column
+            Column {
+                anchors.top: parent.top
+                width: 148
+                visible: isOut
+                Text {
+                    anchors.left: parent.left
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    color: "#545454"
+                    text: qsTr("Fee") + translationManager.emptyString
+                }
+
+                Row {
+                    spacing: 2
+                    Text {
+                        anchors.bottom: parent.bottom
+                        font.family: "Arial"
+                        font.pixelSize: 18
+                        font.letterSpacing: -1
+                        color: isOut ? "#FF4F41" : "#36B05B"
+                        text:  fee
                     }
                 }
             }
