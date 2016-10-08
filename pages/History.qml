@@ -41,7 +41,6 @@ Rectangle {
     property var model
 
     color: "#F0EEEE"
-
     onModelChanged: {
         if (typeof model !== 'undefined') {
             // setup date filter scope according to real transactions

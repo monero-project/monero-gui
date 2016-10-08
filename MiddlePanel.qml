@@ -29,17 +29,24 @@
 import QtQuick 2.2
 import QtQml 2.0
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import "pages"
 
 Rectangle {
     id: root
+
+    property Item currentView
+    property bool basicMode : false
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property History historyView: History { }
     property Settings settingsView: Settings { }
 
-    property Item currentView
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
+    signal generatePaymentIdInvoked()
+
+    color: "#F0EEEE"
 
     onCurrentViewChanged: {
         if (currentView) {
@@ -52,9 +59,7 @@ Rectangle {
         }
     }
 
-    color: "#F0EEEE"
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
-    signal generatePaymentIdInvoked()
+
 
 //    states: [
 //        State {
@@ -107,11 +112,15 @@ Rectangle {
             }
         ]
 
+
+    // color stripe at the top
     Row {
         id: styledRow
+        height: 4
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: parent.top
+
 
         Rectangle { height: 4; width: parent.width / 5; color: "#FFE00A" }
         Rectangle { height: 4; width: parent.width / 5; color: "#6B0072" }
@@ -120,24 +129,127 @@ Rectangle {
         Rectangle { height: 4; width: parent.width / 5; color: "#FF4F41" }
     }
 
-    StackView {
-        id: stackView
-        initialItem: transferView
+    ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 4
-        clip: true // otherwise animation will affect left panel
-    }
+        anchors.margins: 2
+        anchors.topMargin: 30
+        spacing: 0
 
-    /* connect "payment" click */
-    Connections {
-        ignoreUnknownSignals: false
-        target: transferView
-        onPaymentClicked : {
-            console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority)
+
+        // BasicPanel header
+        Rectangle {
+            id: header
+            anchors.leftMargin: 1
+            anchors.rightMargin: 1
+            Layout.fillWidth: true
+            Layout.preferredHeight: 64
+            color: "#FFFFFF"
+            visible: false
+
+            Image {
+                id: logo
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: -5
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                source: "images/moneroLogo2.png"
+            }
+
+            Grid {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                width: 256
+                columns: 3
+
+                Text {
+
+                    width: 116
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#535353"
+                    text: qsTr("Locked Balance:")
+                }
+
+                Text {
+                    id: balanceText
+                    width: 110
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 18
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#000000"
+                    text: qsTr("78.9239845")
+                }
+
+                Item {
+                    height: 20
+                    width: 20
+
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        source: "images/lockIcon.png"
+                    }
+                }
+
+                Text {
+                    width: 116
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#535353"
+                    text: qsTr("Available Balance:")
+                }
+
+                Text {
+                    id: availableBalanceText
+                    width: 110
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 14
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#000000"
+                    text: qsTr("2324.9239845")
+                }
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                height: 1
+                color: "#DBDBDB"
+            }
+        }
+
+        // Views container
+        StackView {
+            id: stackView
+            initialItem: transferView
+            anchors.topMargin: 30
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            anchors.top: styledRow.bottom
+            anchors.margins: 4
+            clip: true // otherwise animation will affect left panel
         }
     }
-
+    // border
     Rectangle {
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
@@ -160,12 +272,25 @@ Rectangle {
         anchors.bottom: parent.bottom
         height: 1
         color: "#DBDBDB"
+
     }
 
-    // indicate disabled state
+
+    // indicates disabled state
     Desaturate {
         anchors.fill: parent
         source: parent
         desaturation: root.enabled ? 0.0 : 1.0
+    }
+
+
+    /* connect "payment" click */
+    Connections {
+        ignoreUnknownSignals: false
+        target: transferView
+        onPaymentClicked : {
+            console.log("MiddlePanel: paymentClicked")
+            paymentClicked(address, paymentId, amount, mixinCount, priority)
+        }
     }
 }
