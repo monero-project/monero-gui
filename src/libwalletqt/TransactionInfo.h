@@ -24,7 +24,8 @@ class TransactionInfo : public QObject
 public:
     enum Direction {
         Direction_In  =  Bitmonero::TransactionInfo::Direction_In,
-        Direction_Out =  Bitmonero::TransactionInfo::Direction_Out
+        Direction_Out =  Bitmonero::TransactionInfo::Direction_Out,
+        Direction_Both // invalid direction value, used for filtering
     };
 
     Q_ENUM(Direction)

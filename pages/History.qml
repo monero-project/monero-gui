@@ -31,6 +31,7 @@ import QtQuick 2.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
+import moneroComponents.TransactionInfo 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 
 import "../components"
@@ -206,6 +207,10 @@ Rectangle {
                 if (amountToLine.text.length) {
                     model.amountToFilter = parseFloat(amountToLine.text)
                 }
+
+                var directionFilter = transactionsModel.get(transactionTypeDropdown.currentIndex).value
+                console.log("Direction filter: " + directionFilter)
+                model.directionFilter = directionFilter
             }
 
 
@@ -240,9 +245,9 @@ Rectangle {
 
     ListModel {
         id: transactionsModel
-        ListElement { column1: "ALL"; column2: "" }
-        ListElement { column1: "SENT"; column2: "" }
-        ListElement { column1: "RECEIVED"; column2: "" }
+        ListElement { column1: "ALL"; column2: ""; value: TransactionInfo.Direction_Both }
+        ListElement { column1: "SENT"; column2: ""; value: TransactionInfo.Direction_Out }
+        ListElement { column1: "RECEIVED"; column2: ""; value: TransactionInfo.Direction_In }
 
     }
 

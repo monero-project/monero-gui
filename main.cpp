@@ -84,6 +84,9 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<TransactionHistory>("moneroComponents.TransactionHistory", 1, 0, "TransactionHistory",
                                                         "TransactionHistory can't be instantiated directly");
 
+    qmlRegisterUncreatableType<TransactionInfo>("moneroComponents.TransactionInfo", 1, 0, "TransactionInfo",
+                                                        "TransactionHistory can't be instantiated directly");
+
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();

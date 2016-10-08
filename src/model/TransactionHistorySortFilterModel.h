@@ -1,11 +1,13 @@
 #ifndef TRANSACTIONHISTORYSORTFILTERMODEL_H
 #define TRANSACTIONHISTORYSORTFILTERMODEL_H
 
+#include "TransactionInfo.h"
 
 #include <QSortFilterProxyModel>
 #include <QMap>
 #include <QVariant>
 #include <QDate>
+
 
 class TransactionHistory;
 
@@ -17,6 +19,8 @@ class TransactionHistorySortFilterModel: public QSortFilterProxyModel
     Q_PROPERTY(QDate dateToFilter READ dateToFilter WRITE setDateToFilter NOTIFY dateToFilterChanged)
     Q_PROPERTY(double amountFromFilter READ amountFromFilter WRITE setAmountFromFilter NOTIFY amountFromFilterChanged)
     Q_PROPERTY(double amountToFilter READ amountToFilter WRITE setAmountToFilter NOTIFY amountToFilterChanged)
+    Q_PROPERTY(int directionFilter READ directionFilter WRITE setDirectionFilter NOTIFY directionFilterChanged)
+
     Q_PROPERTY(TransactionHistory * transactionHistory READ transactionHistory)
 
 public:
@@ -41,6 +45,9 @@ public:
     double amountToFilter() const;
     void setAmountToFilter(double value);
 
+    //! filtering by direction
+    int directionFilter() const;
+    void setDirectionFilter(int value);
 
     Q_INVOKABLE void sort(int column, Qt::SortOrder order);
     TransactionHistory * transactionHistory() const;
@@ -51,6 +58,7 @@ signals:
     void dateToFilterChanged();
     void amountFromFilterChanged();
     void amountToFilterChanged();
+    void directionFilterChanged();
 
 protected:
     // QSortFilterProxyModel overrides
@@ -63,15 +71,6 @@ private:
         From = 0,
         To   = 1
     };
-
-    QVariant filterValue(int role);
-    void setFilterValue(int role, const QVariant &filterValue);
-    QDate dateFromToFilter(ScopeIndex index) const;
-    void setDateFromToFilter(ScopeIndex index, const QDate &value);
-//    double amountFromToFilter(ScopeIndex index) const;
-//    void setAmountFromToFilter(ScopeIndex index, double value);
-
-
 
 private:
     QMap<int, QVariant> m_filterValues;

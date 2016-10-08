@@ -112,6 +112,20 @@ void TransactionHistorySortFilterModel::setAmountToFilter(double value)
     }
 }
 
+int TransactionHistorySortFilterModel::directionFilter() const
+{
+    return m_filterValues.value(TransactionHistoryModel::TransactionDirectionRole).value<TransactionInfo::Direction>();
+}
+
+void TransactionHistorySortFilterModel::setDirectionFilter(int value)
+{
+    if (value != directionFilter()) {
+        m_filterValues[TransactionHistoryModel::TransactionDirectionRole] = QVariant::fromValue(value);
+        emit directionFilterChanged();
+        invalidateFilter();
+    }
+}
+
 
 void TransactionHistorySortFilterModel::sort(int column, Qt::SortOrder order)
 {
@@ -150,6 +164,7 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
             {
                 QDateTime from = QDateTime(dateFromFilter());
                 QDateTime to   = QDateTime(dateToFilter());
+                to = to.addDays(1); // including upperbound
                 QDateTime timestamp = data.toDateTime();
                 bool matchFrom = from.isNull() || timestamp.isNull() || timestamp >= from;
                 bool matchTo = to.isNull() || timestamp.isNull() || timestamp <= to;
@@ -162,17 +177,26 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
                 double to = amountToFilter();
                 double amount = data.toDouble();
 
-                bool matchFrom = from < 0 || amount  >= from;
-                bool matchTo = to < 0 || amount <= to;
+                bool matchFrom = from <= 0 || amount  >= from;
+                bool matchTo = to <= 0 || amount <= to;
                 result = matchFrom && matchTo;
             }
                 break;
+            case TransactionHistoryModel::TransactionDirectionRole:
+                result = directionFilter() == TransactionInfo::Direction_Both ? true
+                                                  : data.toInt() == directionFilter();
+
+
+                break;
+
             default:
                 break;
             }
 
-            if (!result) // stop the loop once filter doesn't match
+
+            if (!result) { // stop the loop once filter doesn't match
                 break;
+            }
         }
     }
 
@@ -183,39 +207,3 @@ bool TransactionHistorySortFilterModel::lessThan(const QModelIndex &source_left,
 {
     return QSortFilterProxyModel::lessThan(source_left, source_right);
 }
-
-QVariant TransactionHistorySortFilterModel::filterValue(int role)
-{
-    return m_filterValues.value(role);
-}
-
-void TransactionHistorySortFilterModel::setFilterValue(int role, const QVariant &filterValue)
-{
-    m_filterValues[role] = filterValue;
-}
-
-QDate TransactionHistorySortFilterModel::dateFromToFilter(TransactionHistorySortFilterModel::ScopeIndex index) const
-{
-    int role = TransactionHistoryModel::TransactionTimeStampRole;
-    if (!m_filterValues.contains(role)) {
-        return QDate();
-    }
-    return m_filterValues.value(role).toList().at(index).toDate();
-}
-
-void TransactionHistorySortFilterModel::setDateFromToFilter(TransactionHistorySortFilterModel::ScopeIndex index, const QDate &value)
-{
-    QVariantList scopeFilter;
-    int role = TransactionHistoryModel::TransactionTimeStampRole;
-    if (m_filterValues.contains(role)) {
-        scopeFilter = m_filterValues.value(role).toList();
-    }
-    while (scopeFilter.size() < 2) {
-        scopeFilter.append(QDate());
-    }
-    scopeFilter[index] = QVariant::fromValue(value);
-    m_filterValues[role] = scopeFilter;
-}
-
-
-
