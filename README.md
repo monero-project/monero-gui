@@ -124,7 +124,7 @@ TODO
 4. install latest Qt using official installer from [qt.io] (https://www.qt.io/download-open-source/), homebrew version might be outdated
 5. Add Qt bin dir to your path:
     
-     ```export PATH=$PATH:$HOME/Qt5/5.7clang_64/bin``` 
+     ```export PATH=$PATH:$HOME/Qt5/5.7/clang_64/bin``` 
     
     where ```Qt5``` is the folder you selected to install Qt
 6. Clone repository and build:
