@@ -47,7 +47,7 @@ Item {
             + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
             + qsTr("<b>Daemon address: </b>") + wizard.settings['daemon_address'] + "<br>"
             + qsTr("<b>testnet: </b>") + wizard.settings['testnet'] + "<br>"
-            + qsTr("<b>Restore height: </b>") + wizard.settings['restoreHeight'] + "<br>"
+            + (wizard.settings['restore_height'] === undefined ? "" : qsTr("<b>Restore height: </b>") + wizard.settings['restore_height']) + "<br>"
             + translationManager.emptyString
         return str;
     }
