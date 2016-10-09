@@ -37,7 +37,7 @@ pushd $MONERO_DIR/build/release
 platform=$(get_platform)
 
 if [ "$platform" == "darwin" ]; then
-    # Do something under Mac OS X platform        
+    # Do something under Mac OS X platform
     echo "Configuring build for MacOS.."
     cmake -D CMAKE_BUILD_TYPE=Release -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
 elif [ "$platform" == "linux" ]; then
