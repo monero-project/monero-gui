@@ -43,8 +43,13 @@ Window {
     opacity: 0.7
 
     ColumnLayout {
+        id: rootLayout
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: 30
+        anchors.rightMargin: 30
 
         BusyIndicator {
             running: parent.visible
@@ -59,6 +64,7 @@ Window {
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.fillWidth: true
         }
 
 
@@ -69,6 +75,7 @@ Window {
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.fillWidth: true
         }
     }
 }

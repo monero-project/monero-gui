@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-# MONERO_URL=https://github.com/monero-project/monero.git
-# MONERO_BRANCH=master
-MONERO_URL=https://github.com/mbg033/monero.git
-MONERO_BRANCH=develop
+MONERO_URL=https://github.com/monero-project/monero.git
+MONERO_BRANCH=master
+# MONERO_URL=https://github.com/mbg033/monero.git
+# MONERO_BRANCH=develop
 # Buidling "debug" build optionally
 BUILD_TYPE=$1
 if [ -z $BUILD_TYPE ]; then

@@ -282,7 +282,7 @@ ApplicationWindow {
               var locale = Qt.locale()
               var currHeightString = currHeight.toLocaleString(locale,"f",0)
               var targetHeightString = currentWallet.daemonBlockChainHeight().toLocaleString(locale,"f",0)
-              var progressText = qsTr("Synchronizing blocks %1/%2").arg(currHeightString).arg(targetHeightString);
+              var progressText = qsTr("Synchronizing blocks %1 / %2").arg(currHeightString).arg(targetHeightString);
               console.log("Progress text: " + progressText);
               splash.heightProgressText = progressText
             }
@@ -498,7 +498,7 @@ ApplicationWindow {
 
     ProcessingSplash {
         id: splash
-        width: appWindow.width / 2
+        width: appWindow.width / 1.5
         height: appWindow.height / 2
         x: (appWindow.width - width) / 2 + appWindow.x
         y: (appWindow.height - height) / 2 + appWindow.y
