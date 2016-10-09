@@ -52,7 +52,7 @@ There are also several mining pools that kindly donate a portion of their fees, 
 
 See [LICENSE](LICENSE).
 
-## Installing Monero-core from a Package
+## Installing Monero Core from a Package
 
 Packages are available for
 
@@ -60,7 +60,7 @@ Packages are available for
 
 Packaging for your favorite distribution would be a welcome contribution!
 
-## Compiling Monero-core from Source
+## Compiling Monero Core from Source
 
 ### Dependencies
 
@@ -76,7 +76,7 @@ TODO
 
 2. Go to the repository where the most recent version is.
 
-`git clone https://github.com/mbg033/monero-core.git`
+`git clone https://github.com/monero-project/monero-core.git`
 
 3. Go into the repository.
 
