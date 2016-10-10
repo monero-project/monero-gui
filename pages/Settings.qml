@@ -76,7 +76,7 @@ Rectangle {
                 memoTextInput.text = currentWallet.seed
                 showSeedButton.visible = false
             }
-
+            settingsPasswordDialog.password = ""
         }
         onRejected: {
 

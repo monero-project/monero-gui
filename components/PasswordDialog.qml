@@ -36,7 +36,7 @@ import QtQuick.Controls.Styles 1.4
 
 Dialog {
     id: root
-    readonly property alias password: passwordInput.text
+    property alias password: passwordInput.text
     standardButtons: StandardButton.Ok + StandardButton.Cancel
     ColumnLayout {
         id: column
