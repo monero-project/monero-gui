@@ -137,7 +137,7 @@ Rectangle {
         appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
         appWindow.persistentSettings.daemon_address = settings.daemon_address
         appWindow.persistentSettings.testnet = settings.testnet
-        appWindow.persistentSettings.restore_height = parseInt(settings.restore_height)
+        appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
 
     }

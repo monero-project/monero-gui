@@ -144,7 +144,8 @@ ApplicationWindow {
         // basicPanel.paymentClicked.connect(handlePayment);
 
         // currentWallet is defined on daemon address change - close/reopen
-        if (currentWallet !== undefined) {
+        // TODO: strict comparison here (!==) causes crash after passwordDialog on previously crashed unsynced wallets
+        if (currentWallet != undefined) {
             console.log("closing currentWallet")
             walletManager.closeWallet(currentWallet);
         }
