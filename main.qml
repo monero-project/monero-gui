@@ -144,7 +144,7 @@ ApplicationWindow {
         // basicPanel.paymentClicked.connect(handlePayment);
 
         // currentWallet is defined on daemon address change - close/reopen
-        if (currentWallet !== undefined) {
+        if (currentWallet != undefined) {
             console.log("closing currentWallet")
             walletManager.closeWallet(currentWallet);
         }
