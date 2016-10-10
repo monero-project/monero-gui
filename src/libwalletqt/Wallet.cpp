@@ -115,13 +115,18 @@ bool Wallet::store(const QString &path)
     return m_walletImpl->store(path.toStdString());
 }
 
-bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit)
+bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
     return m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit);
 }
 
-void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit)
+void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
+    if (isRecovering){
+        qDebug() << "RESTORING";
+        m_walletImpl->setRecoveringFromSeed(true);
+        m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
+    }
     m_walletImpl->initAsync(daemonAddress.toStdString(), upperTransactionLimit);
 }
 
@@ -263,6 +268,5 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
 
 Wallet::~Wallet()
 {
-
     Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
 }

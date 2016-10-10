@@ -74,10 +74,10 @@ public:
     Q_INVOKABLE bool store(const QString &path);
 
     //! initializes wallet
-    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit);
+    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
 
     //! initializes wallet asynchronously
-    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit);
+    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
 
     //! connects to daemon
     Q_INVOKABLE bool connectToDaemon();
