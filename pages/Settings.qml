@@ -72,7 +72,7 @@ Rectangle {
         id: settingsPasswordDialog
         standardButtons: StandardButton.Ok  + StandardButton.Cancel
         onAccepted: {
-            if(appWindow.password == settingsPasswordDialog.password){
+            if(appWindow.password === settingsPasswordDialog.password){
                 memoTextInput.text = currentWallet.seed
                 showSeedButton.visible = false
             }
