@@ -153,8 +153,8 @@ ApplicationWindow {
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
-            if(persistentSettings.restoreHeight > 0){
-                restoreHeight = persistentSettings.restoreHeight
+            if(persistentSettings.restore_height > 0){
+                restoreHeight = persistentSettings.restore_height
             }
 
             console.log("using wizard wallet")
@@ -445,7 +445,7 @@ ApplicationWindow {
         property bool   testnet: true
         property string daemon_address: "localhost:38081"
         property string payment_id
-        property int restoreHeight:0
+        property int restore_height:0
     }
 
     // TODO: replace with customized popups
