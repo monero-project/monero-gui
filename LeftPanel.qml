@@ -36,6 +36,7 @@ Rectangle {
     property alias unlockedBalanceText: unlockedBalanceText.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
+    property alias daemonProgress : daemonProgress
 
     signal dashboardClicked()
     signal historyClicked()
@@ -252,17 +253,17 @@ Rectangle {
                     panel.receiveClicked()
                 }
             }
-            /*
+
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
                 color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
-            }*/
+            }
 
             // ------------- History tab ---------------
-            /*
+
             MenuButton {
                 id: historyButton
                 anchors.left: parent.left
@@ -276,7 +277,7 @@ Rectangle {
                     panel.historyClicked()
                 }
             }
-
+            /*
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -330,7 +331,7 @@ Rectangle {
                 color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
-
+            */
             // ------------- Settings tab ---------------
             MenuButton {
                 id: settingsButton
@@ -345,15 +346,22 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
-            */
+
         }
 
         NetworkStatusItem {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors.bottom: (daemonProgress.visible)? daemonProgress.top : parent.bottom;
             connected: false
+        }
+
+        DaemonProgress {
+            id: daemonProgress
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
         }
     }
     // indicate disabled state

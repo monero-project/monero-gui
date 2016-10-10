@@ -27,44 +27,103 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQml 2.0
+import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
+import "pages"
 
 Rectangle {
     id: root
-    color: "#F0EEEE"
+
+    property Item currentView
+    property bool basicMode : false
+    property string balanceText
+    property string unlockedBalanceText
+
+    property Transfer transferView: Transfer { }
+    property Receive receiveView: Receive { }
+    property History historyView: History { }
+    property Settings settingsView: Settings { }
+
+
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
 
-    states: [
-        State {
-            name: "Dashboard"
-            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-        }, State {
-            name: "History"
-            PropertyChanges { target: loader; source: "pages/History.qml" }
-        }, State {
-            name: "Transfer"
-            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-        }, State {
-           name: "Receive"
-           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-        }, State {
-            name: "AddressBook"
-            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-        }, State {
-            name: "Settings"
-            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-        }, State {
-            name: "Mining"
-            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-        }
-    ]
+    color: "#F0EEEE"
 
+    onCurrentViewChanged: {
+        if (currentView) {
+            stackView.replace(currentView)
+
+            // Component.onCompleted is called before wallet is initilized
+            if (typeof currentView.onPageCompleted === "function") {
+                currentView.onPageCompleted();
+            }
+        }
+    }
+
+
+    //   XXX: just for memo, to be removed
+    //    states: [
+    //        State {
+    //            name: "Dashboard"
+    //            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
+    //        }, State {
+    //            name: "History"
+    //            PropertyChanges { target: loader; source: "pages/History.qml" }
+    //        }, State {
+    //            name: "Transfer"
+    //            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
+    //        }, State {
+    //           name: "Receive"
+    //           PropertyChanges { target: loader; source: "pages/Receive.qml" }
+    //        }, State {
+    //            name: "AddressBook"
+    //            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
+    //        }, State {
+    //            name: "Settings"
+    //            PropertyChanges { target: loader; source: "pages/Settings.qml" }
+    //        }, State {
+    //            name: "Mining"
+    //            PropertyChanges { target: loader; source: "pages/Mining.qml" }
+    //        }
+    //    ]
+
+        states: [
+            State {
+                name: "Dashboard"
+                PropertyChanges {  }
+            }, State {
+                name: "History"
+                PropertyChanges { target: root; currentView: historyView }
+                PropertyChanges { target: historyView; model: appWindow.currentWallet.historyModel }
+            }, State {
+                name: "Transfer"
+                PropertyChanges { target: root; currentView: transferView }
+            }, State {
+               name: "Receive"
+               PropertyChanges { target: root; currentView: receiveView }
+            }, State {
+                name: "AddressBook"
+                PropertyChanges { /*TODO*/ }
+            }, State {
+                name: "Settings"
+               PropertyChanges { target: root; currentView: settingsView }
+            }, State {
+                name: "Mining"
+                PropertyChanges { /*TODO*/ }
+            }
+        ]
+
+    // color stripe at the top
     Row {
         id: styledRow
+        height: 4
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: parent.top
+
 
         Rectangle { height: 4; width: parent.width / 5; color: "#FFE00A" }
         Rectangle { height: 4; width: parent.width / 5; color: "#6B0072" }
@@ -73,28 +132,127 @@ Rectangle {
         Rectangle { height: 4; width: parent.width / 5; color: "#FF4F41" }
     }
 
-    Loader {
-        id: loader
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: styledRow.bottom
-        anchors.bottom: parent.bottom
-        onLoaded: {
-            console.log("Loaded " + item);
+    ColumnLayout {
+        anchors.fill: parent
+        anchors.margins: 2
+        anchors.topMargin: 30
+        spacing: 0
+
+
+        // BasicPanel header
+        Rectangle {
+            id: header
+            anchors.leftMargin: 1
+            anchors.rightMargin: 1
+            Layout.fillWidth: true
+            Layout.preferredHeight: 64
+            color: "#FFFFFF"
+            visible: basicMode
+
+            Image {
+                id: logo
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: -5
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                source: "images/moneroLogo2.png"
+            }
+
+            Grid {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                width: 256
+                columns: 3
+
+                Text {
+
+                    width: 116
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#535353"
+                    text: qsTr("Balance:")
+                }
+
+                Text {
+                    id: balanceText
+                    width: 110
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 18
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#000000"
+                    text: root.balanceText
+                }
+
+                Item {
+                    height: 20
+                    width: 20
+
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        source: "images/lockIcon.png"
+                    }
+                }
+
+                Text {
+                    width: 116
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#535353"
+                    text: qsTr("Unlocked Balance:")
+                }
+
+                Text {
+                    id: availableBalanceText
+                    width: 110
+                    height: 20
+                    font.family: "Arial"
+                    font.pixelSize: 14
+                    font.letterSpacing: -1
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignLeft
+                    verticalAlignment: Text.AlignBottom
+                    color: "#000000"
+                    text: root.unlockedBalanceText
+                }
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                height: 1
+                color: "#DBDBDB"
+            }
         }
 
-    }
-
-    /* connect "payment" click */
-    Connections {
-        ignoreUnknownSignals: false
-        target: loader.item
-        onPaymentClicked : {
-            console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority)
+        // Views container
+        StackView {
+            id: stackView
+            initialItem: transferView
+            anchors.topMargin: 30
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            anchors.top: styledRow.bottom
+            anchors.margins: 4
+            clip: true // otherwise animation will affect left panel
         }
     }
-
+    // border
     Rectangle {
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
@@ -117,12 +275,25 @@ Rectangle {
         anchors.bottom: parent.bottom
         height: 1
         color: "#DBDBDB"
+
     }
 
-    // indicate disabled state
+
+    // indicates disabled state
     Desaturate {
         anchors.fill: parent
         source: parent
         desaturation: root.enabled ? 0.0 : 1.0
+    }
+
+
+    /* connect "payment" click */
+    Connections {
+        ignoreUnknownSignals: false
+        target: transferView
+        onPaymentClicked : {
+            console.log("MiddlePanel: paymentClicked")
+            paymentClicked(address, paymentId, amount, mixinCount, priority)
+        }
     }
 }

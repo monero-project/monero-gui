@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2015, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -32,7 +32,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 
 import "../components"
-import moneroComponents 1.0
+import moneroComponents.Clipboard 1.0
 
 Rectangle {
 
@@ -43,14 +43,14 @@ Rectangle {
 
     function updatePaymentId() {
         var payment_id = appWindow.persistentSettings.payment_id
-        if (payment_id.length === 0) {
-            payment_id = appWindow.wallet.generatePaymentId()
+        if (typeof appWindow.currentWallet !== 'undefined') {
+            payment_id = appWindow.currentWallet.generatePaymentId()
             appWindow.persistentSettings.payment_id = payment_id
-            appWindow.currentWallet.payment_id = payment_id
+            addressLine.text = appWindow.currentWallet.address
+            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
         }
+
         paymentIdLine.text = payment_id
-        addressLine.text = appWindow.currentWallet.address
-        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
     }
 
     Clipboard { id: clipboard }
@@ -87,6 +87,8 @@ Rectangle {
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
+                onTextChanged: cursorPosition = 0
+
                 IconButton {
                     imageSource: "../images/copyToClipboard.png"
                     onClicked: {
@@ -116,6 +118,9 @@ Rectangle {
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
+
+                onTextChanged: cursorPosition = 0
+
                 IconButton {
                     imageSource: "../images/copyToClipboard.png"
                     onClicked: {
@@ -176,9 +181,13 @@ Rectangle {
 
     }
 
-    Component.onCompleted: {
+    function onPageCompleted() {
         console.log("Receive page loaded");
-        updatePaymentId()
+
+        if(addressLine.text.length == 0) {
+            updatePaymentId()
+        }
+
     }
 
 }

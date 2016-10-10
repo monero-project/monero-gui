@@ -1,6 +1,8 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TransactionHistory.h"
+#include "model/TransactionHistoryModel.h"
+#include "model/TransactionHistorySortFilterModel.h"
 #include "wallet/wallet2_api.h"
 
 #include <QFile>
@@ -31,7 +33,6 @@ public:
 
     virtual void moneyReceived(const std::string &txId, uint64_t amount)
     {
-
         qDebug() << __FUNCTION__;
         emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
     }
@@ -59,7 +60,10 @@ private:
     Wallet * m_wallet;
 };
 
-
+Wallet::Wallet(QObject * parent)
+    : Wallet(nullptr, parent)
+{
+}
 
 QString Wallet::getSeed() const
 {
@@ -84,6 +88,11 @@ Wallet::Status Wallet::status() const
 bool Wallet::connected() const
 {
     return m_walletImpl->connected();
+}
+
+bool Wallet::synchronized() const
+{
+    return m_walletImpl->synchronized();
 }
 
 QString Wallet::errorString() const
@@ -153,9 +162,16 @@ quint64 Wallet::daemonBlockChainHeight() const
     return m_daemonBlockChainHeight;
 }
 
+quint64 Wallet::daemonBlockChainTargetHeight() const
+{
+    m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+    return m_daemonBlockChainTargetHeight;
+}
+
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();
+    m_history->refresh();
     if (result)
         emit updated();
     return result;
@@ -193,13 +209,22 @@ void Wallet::disposeTransaction(PendingTransaction *t)
     delete t;
 }
 
-TransactionHistory *Wallet::history()
+TransactionHistory *Wallet::history() const
 {
-    if (!m_history) {
-        Bitmonero::TransactionHistory * impl = m_walletImpl->history();
-        m_history = new TransactionHistory(impl, this);
-    }
     return m_history;
+}
+
+TransactionHistorySortFilterModel *Wallet::historyModel() const
+{
+    if (!m_historyModel) {
+        Wallet * w = const_cast<Wallet*>(this);
+        m_historyModel = new TransactionHistoryModel(w);
+        m_historyModel->setTransactionHistory(this->history());
+        m_historySortFilterModel = new TransactionHistorySortFilterModel(w);
+        m_historySortFilterModel->setSourceModel(m_historyModel);
+    }
+
+    return m_historySortFilterModel;
 }
 
 
@@ -228,13 +253,16 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
     , m_history(nullptr)
+    , m_historyModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
 {
+    m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
 }
 
 Wallet::~Wallet()
 {
+
     Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
 }

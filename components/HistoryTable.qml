@@ -27,12 +27,14 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import moneroComponents 1.0
+import moneroComponents.Clipboard 1.0
+
 
 ListView {
     id: listView
     clip: true
     boundsBehavior: ListView.StopAtBounds
+    property var previousItem
 
     footer: Rectangle {
         height: 127
@@ -48,7 +50,7 @@ ListView {
         }
     }
 
-    property var previousItem
+
     delegate: Rectangle {
         id: delegate
         height: 114
@@ -63,13 +65,13 @@ ListView {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.topMargin: 14
-
+            // -- direction indicator
             Rectangle {
                 id: dot
                 width: 14
                 height: width
                 radius: width / 2
-                color: out ? "#FF4F41" : "#36B05B"
+                color: isOut ? "#FF4F41" : "#36B05B"
             }
 
             Item { //separator
@@ -77,6 +79,8 @@ ListView {
                 height: 14
             }
 
+            // -- description aka recepient name from address book (TODO)
+            /*
             Text {
                 id: descriptionText
                 width: text.length ? (descriptionArea.containsMouse ? parent.width - x - 12 : 120) : 0
@@ -94,13 +98,15 @@ ListView {
                     hoverEnabled: true
                 }
             }
-
+            */
+            /*
             Item { //separator
                 width: descriptionText.width ? 12 : 0
                 height: 14
                 visible: !descriptionArea.containsMouse
             }
-
+            */
+            // -- address (in case outgoing transaction) - N/A in case of incoming
             Text {
                 id: addressText
                 anchors.verticalCenter: dot.verticalCenter
@@ -109,11 +115,11 @@ ListView {
                 font.family: "Arial"
                 font.pixelSize: 14
                 color: "#545454"
-                text: address
-                visible: !descriptionArea.containsMouse
+                text: hash
+                // visible: !descriptionArea.containsMouse
             }
         }
-
+        // -- "PaymentID" title
         Text {
             id: paymentLabel
             anchors.left: parent.left
@@ -128,7 +134,7 @@ ListView {
             color: "#535353"
             text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
         }
-
+        // -- "PaymentID" value
         Text {
             anchors.bottom: paymentLabel.bottom
             anchors.left: paymentLabel.right
@@ -143,7 +149,7 @@ ListView {
             color: "#545454"
             text: paymentId
         }
-
+        // -- "Date", "Balance" and "Amound" section
         Row {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
@@ -155,6 +161,7 @@ ListView {
                 height: 14
             }
 
+            // -- "Date" column
             Column {
                 anchors.top: parent.top
                 width: 215
@@ -189,10 +196,13 @@ ListView {
                     }
                 }
             }
-
+            // -- "Balance" column
+            // XXX: we don't have a balance
+            /*
             Column {
                 anchors.top: parent.top
                 width: 148
+                visible: false
 
                 Text {
                     anchors.left: parent.left
@@ -210,7 +220,9 @@ ListView {
                     text: balance
                 }
             }
+            */
 
+            // -- "Amount column
             Column {
                 anchors.top: parent.top
                 width: 148
@@ -230,8 +242,8 @@ ListView {
                         anchors.bottomMargin: 3
                         font.family: "Arial"
                         font.pixelSize: 16
-                        color: out ? "#FF4F41" : "#36B05B"
-                        text: out ? "↓" : "↑"
+                        color: isOut ? "#FF4F41" : "#36B05B"
+                        text: isOut ? "↓" : "↑"
                     }
 
                     Text {
@@ -239,22 +251,44 @@ ListView {
                         font.family: "Arial"
                         font.pixelSize: 18
                         font.letterSpacing: -1
-                        color: out ? "#FF4F41" : "#36B05B"
-                        text: amount
+                        color: isOut ? "#FF4F41" : "#36B05B"
+                        text:  displayAmount
+                    }
+                }
+            }
+
+            // -- "Fee column
+            Column {
+                anchors.top: parent.top
+                width: 148
+                visible: isOut
+                Text {
+                    anchors.left: parent.left
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                    color: "#545454"
+                    text: qsTr("Fee") + translationManager.emptyString
+                }
+
+                Row {
+                    spacing: 2
+                    Text {
+                        anchors.bottom: parent.bottom
+                        font.family: "Arial"
+                        font.pixelSize: 18
+                        font.letterSpacing: -1
+                        color: "#FF4F41"
+                        text:  fee
                     }
                 }
             }
         }
 
-        ListModel {
-            id: dropModel
-            ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
-            ListElement { name: "<b>Add to address book</b>"; icon: "../images/dropdownAdd.png" }
-            ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
-            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
-        }
 
-        Clipboard { id: clipboard }
+
+        /*
+        // Transaction dropdown menu.
+        // Disable for now until AddressBook implemented
         TableDropdown {
             id: dropdown
             anchors.right: parent.right
@@ -282,5 +316,16 @@ ListView {
             height: 1
             color: "#DBDBDB"
         }
+        */
     }
+
+    ListModel {
+        id: dropModel
+        ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
+        ListElement { name: "<b>Add to address book</b>"; icon: "../images/dropdownAdd.png" }
+        ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
+        ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
+    }
+
+    Clipboard { id: clipboard }
 }

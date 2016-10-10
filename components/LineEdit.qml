@@ -33,6 +33,7 @@ Item {
     property alias text: input.text
     property alias validator: input.validator
     property alias readOnly : input.readOnly
+    property alias cursorPosition: input.cursorPosition
     property int fontSize: 18
 
 
@@ -56,7 +57,7 @@ Item {
         id: input
         anchors.fill: parent
         anchors.leftMargin: 4
-        anchors.rightMargin: 4
+        anchors.rightMargin: 30
         font.pixelSize: parent.fontSize
     }
 }

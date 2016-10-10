@@ -27,10 +27,28 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+
+import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
+import moneroComponents.TransactionHistory 1.0
+import moneroComponents.TransactionInfo 1.0
+import moneroComponents.TransactionHistoryModel 1.0
+
 import "../components"
 
 Rectangle {
+    id: root
+    property var model
+
     color: "#F0EEEE"
+    onModelChanged: {
+        if (typeof model !== 'undefined') {
+            // setup date filter scope according to real transactions
+            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+            toDatePicker.currentDate = model.transactionHistory.lastDateTime
+        }
+    }
+
 
     Text {
         id: filterHeaderText
@@ -47,6 +65,8 @@ Rectangle {
         text: qsTr("Filter transactions history") + translationManager.emptyString
     }
 
+    // Filter by Address input (senseless, removing)
+    /*
     Label {
         id: addressLabel
         anchors.left: parent.left
@@ -67,11 +87,14 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
+    */
+
+    // Filter by Payment ID input
 
     Label {
         id: paymentIdLabel
         anchors.left: parent.left
-        anchors.top: addressLine.bottom
+        anchors.top: filterHeaderText.bottom // addressLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
@@ -84,12 +107,16 @@ Rectangle {
         id: paymentIdLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom
+        anchors.top: paymentIdLabel.bottom // addressLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+
+
     }
 
+    // Filter by description input (not implemented yet)
+    /*
     Label {
         id: descriptionLabel
         anchors.left: parent.left
@@ -110,11 +137,14 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
     }
+    */
 
+
+    // DateFrom picker
     Label {
         id: dateFromText
         anchors.left: parent.left
-        anchors.top: descriptionLine.bottom
+        anchors.top:  paymentIdLine.bottom // descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
@@ -132,10 +162,11 @@ Rectangle {
         z: 2
     }
 
+    // DateTo picker
     Label {
         id: dateToText
         anchors.left: dateFromText.right
-        anchors.top: descriptionLine.bottom
+        anchors.top:  paymentIdLine.bottom //descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("To")
@@ -163,10 +194,30 @@ Rectangle {
         shadowPressedColor: "#2D002F"
         releasedColor: "#6B0072"
         pressedColor: "#4D0051"
+        onClicked:  {
+            // Apply filter here;
+            model.paymentIdFilter = paymentIdLine.text
+            model.dateFromFilter  = fromDatePicker.currentDate
+            model.dateToFilter    = toDatePicker.currentDate
+            if (advancedFilteringCheckBox.checked) {
+                if (amountFromLine.text.length) {
+                    model.amountFromFilter = parseFloat(amountFromLine.text)
+                }
+                if (amountToLine.text.length) {
+                    model.amountToFilter = parseFloat(amountToLine.text)
+                }
+
+                var directionFilter = transactionsModel.get(transactionTypeDropdown.currentIndex).value
+                console.log("Direction filter: " + directionFilter)
+                model.directionFilter = directionFilter
+            }
+
+
+        }
     }
 
     CheckBox {
-        id: checkBox
+        id: advancedFilteringCheckBox
         text: qsTr("Advance filtering")
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
@@ -193,9 +244,10 @@ Rectangle {
 
     ListModel {
         id: transactionsModel
-        ListElement { column1: "SENT"; column2: "" }
-        ListElement { column1: "RECIVE"; column2: "" }
-        ListElement { column1: "ON HOLD"; column2: "" }
+        ListElement { column1: "ALL"; column2: ""; value: TransactionInfo.Direction_Both }
+        ListElement { column1: "SENT"; column2: ""; value: TransactionInfo.Direction_Out }
+        ListElement { column1: "RECEIVED"; column2: ""; value: TransactionInfo.Direction_In }
+
     }
 
     StandardDropdown {
@@ -274,8 +326,11 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 parent.expanded = !parent.expanded
-                if(checkBox.checked) tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.collapsedHeight })
-                else tableRect.height = Qt.binding(function(){ return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
+                if (advancedFilteringCheckBox.checked) {
+                    tableRect.height = Qt.binding(function() { return parent.expanded ? tableRect.expandedHeight : tableRect.collapsedHeight })
+                } else {
+                    tableRect.height = Qt.binding(function() { return parent.expanded ? tableRect.expandedHeight : tableRect.middleHeight })
+                }
             }
         }
     }
@@ -312,10 +367,11 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: "Address"; columnWidth: 127 }
+
+            ListElement { columnName: "Payment ID"; columnWidth: 127 }
             ListElement { columnName: "Date"; columnWidth: 100 }
             ListElement { columnName: "Amount"; columnWidth: 148 }
-            ListElement { columnName: "Description"; columnWidth: 148 }
+            // ListElement { columnName: "Description"; columnWidth: 148 }
         }
 
         TableHeader {
@@ -328,21 +384,24 @@ Rectangle {
             anchors.rightMargin: 14
             dataModel: columnsModel
             offset: 20
-            onSortRequest: console.log("column: " + column + " desc: " + desc)
-        }
-
-        ListModel {
-            id: testModel
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: true }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: true }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: ""; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: "Client from Australia"; out: false }
-            ListElement { paymentId: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; address: "faef56b9acf67a7dba75ec01f403497049d7cff111628edfe7b57278554dc798"; date: "Jan 12, 2014"; time: "12:23 <font size='2'>AM</font>"; amount: "0.<font size='2'>000709159241</font>"; balance: "19301.<font size='2'>870709159241</font>"; description: ""; out: false }
+            onSortRequest: {
+                console.log("column: " + column + " desc: " + desc)
+                switch (column) {
+                case 0:
+                    // Payment ID
+                    model.sortRole = TransactionHistoryModel.TransactionPaymentIdRole
+                    break;
+                case 1:
+                    // Date;
+                    model.sortRole = TransactionHistoryModel.TransactionDateRole
+                    break;
+                case 2:
+                    // Amount;
+                    model.sortRole = TransactionHistoryModel.TransactionAmountRole
+                    break;
+                }
+                model.sort(0, desc ? Qt.DescendingOrder : Qt.AscendingOrder)
+            }
         }
 
         Scroll {
@@ -363,7 +422,7 @@ Rectangle {
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
-            model: testModel
+            model: root.model
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Bitmonero {
 
 
 class TransactionHistory;
+class TransactionHistoryModel;
+class TransactionHistorySortFilterModel;
 
 class Wallet : public QObject
 {
@@ -21,14 +23,18 @@ class Wallet : public QObject
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(bool connected READ connected)
+    Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(QString address READ address)
     Q_PROPERTY(quint64 balance READ balance)
     Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
+    Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
 
 public:
+
+
     enum Status {
         Status_Ok       = Bitmonero::Wallet::Status_Ok,
         Status_Error    = Bitmonero::Wallet::Status_Error
@@ -48,8 +54,12 @@ public:
     //! returns last operation's status
     Status status() const;
 
-    //! returns of wallet connected
+    //! returns true if wallet connected
     bool connected() const;
+
+    //! returns true if wallet was ever synchronized
+    bool synchronized() const;
+
 
     //! returns last operation's error message
     QString errorString() const;
@@ -88,9 +98,11 @@ public:
     //! returns daemon's blockchain height
     Q_INVOKABLE quint64 daemonBlockChainHeight() const;
 
+    //! returns daemon's blockchain target height
+    Q_INVOKABLE quint64 daemonBlockChainTargetHeight() const;
+
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
-
 
     //! refreshes the wallet asynchronously
     Q_INVOKABLE void refreshAsync();
@@ -109,7 +121,10 @@ public:
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 
     //! returns transaction history
-    TransactionHistory * history();
+    TransactionHistory * history() const;
+
+    //! returns transaction history model
+    TransactionHistorySortFilterModel *historyModel() const;
 
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
@@ -136,12 +151,13 @@ signals:
     void moneySpent(const QString &txId, quint64 amount);
     void moneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height);
+    void historyModelChanged() const;
 
 
 private:
+    Wallet(QObject * parent = nullptr);
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
     ~Wallet();
-
 private:
     friend class WalletManager;
     friend class WalletListenerImpl;
@@ -149,11 +165,16 @@ private:
     Bitmonero::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
+    // Used for UI history view
+    mutable TransactionHistoryModel * m_historyModel;
+    mutable TransactionHistorySortFilterModel * m_historySortFilterModel;
     QString m_paymentId;
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
-
+    mutable quint64 m_daemonBlockChainTargetHeight;
 };
+
+
 
 #endif // WALLET_H

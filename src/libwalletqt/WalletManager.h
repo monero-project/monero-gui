@@ -48,7 +48,7 @@ public:
 
     // wizard: recoveryWallet path; hint: internally it recorvers wallet and set password = ""
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
-                                       bool testnet = false);
+                                       bool testnet = false, quint64 restoreHeight = 0);
 
     /*!
      * \brief closeWallet - closes wallet and frees memory

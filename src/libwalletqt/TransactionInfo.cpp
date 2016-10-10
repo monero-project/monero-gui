@@ -1,4 +1,6 @@
 #include "TransactionInfo.h"
+#include "WalletManager.h"
+
 #include <QDateTime>
 
 TransactionInfo::Direction TransactionInfo::direction() const
@@ -16,15 +18,21 @@ bool TransactionInfo::isFailed() const
     return m_pimpl->isFailed();
 }
 
-quint64 TransactionInfo::amount() const
+
+double TransactionInfo::amount() const
 {
-    return m_pimpl->amount();
+    // there's no unsigned uint64 for JS, so better use double
+    return WalletManager::instance()->displayAmount(m_pimpl->amount()).toDouble();
 }
 
-quint64 TransactionInfo::fee() const
+QString TransactionInfo::displayAmount() const
 {
-    return m_pimpl->fee();
+    return WalletManager::instance()->displayAmount(m_pimpl->amount());
+}
 
+QString TransactionInfo::fee() const
+{
+    return WalletManager::instance()->displayAmount(m_pimpl->fee());
 }
 
 quint64 TransactionInfo::blockHeight() const
@@ -37,13 +45,23 @@ QString TransactionInfo::hash() const
     return QString::fromStdString(m_pimpl->hash());
 }
 
-QString TransactionInfo::timestamp()
+QDateTime TransactionInfo::timestamp() const
 {
-    QString result = QDateTime::fromTime_t(m_pimpl->timestamp()).toString(Qt::ISODate);
+    QDateTime result = QDateTime::fromTime_t(m_pimpl->timestamp());
     return result;
 }
 
-QString TransactionInfo::paymentId()
+QString TransactionInfo::date() const
+{
+    return timestamp().date().toString(Qt::ISODate);
+}
+
+QString TransactionInfo::time() const
+{
+    return timestamp().time().toString(Qt::ISODate);
+}
+
+QString TransactionInfo::paymentId() const
 {
     return QString::fromStdString(m_pimpl->paymentId());
 }

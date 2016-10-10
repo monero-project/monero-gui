@@ -39,8 +39,10 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TranslationManager.h"
-
-
+#include "TransactionInfo.h"
+#include "TransactionHistory.h"
+#include "model/TransactionHistoryModel.h"
+#include "model/TransactionHistorySortFilterModel.h"
 
 
 int main(int argc, char *argv[])
@@ -56,23 +58,38 @@ int main(int argc, char *argv[])
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
-    qmlRegisterType<clipboardAdapter>("moneroComponents", 1, 0, "Clipboard");
+    // registering types for QML
+    qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
 
-    qmlRegisterUncreatableType<Wallet>("Bitmonero.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+    qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
-    qmlRegisterUncreatableType<PendingTransaction>("Bitmonero.PendingTransaction", 1, 0, "PendingTransaction",
+
+    qmlRegisterUncreatableType<PendingTransaction>("moneroComponents.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
 
-    qmlRegisterUncreatableType<WalletManager>("Bitmonero.WalletManager", 1, 0, "WalletManager",
+    qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
                                                    "WalletManager can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TranslationManager>("moneroComponents", 1, 0, "TranslationManager",
+    qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
 
+
+
+    qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
+                                                        "TransactionHistoryModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TransactionHistorySortFilterModel>("moneroComponents.TransactionHistorySortFilterModel", 1, 0, "TransactionHistorySortFilterModel",
+                                                        "TransactionHistorySortFilterModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TransactionHistory>("moneroComponents.TransactionHistory", 1, 0, "TransactionHistory",
+                                                        "TransactionHistory can't be instantiated directly");
+
+    qmlRegisterUncreatableType<TransactionInfo>("moneroComponents.TransactionInfo", 1, 0, "TransactionInfo",
+                                                        "TransactionHistory can't be instantiated directly");
+
     qRegisterMetaType<PendingTransaction::Priority>();
-
-
-
+    qRegisterMetaType<TransactionInfo::Direction>();
+    qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
     QQmlApplicationEngine engine;
 

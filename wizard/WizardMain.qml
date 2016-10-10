@@ -137,6 +137,7 @@ Rectangle {
         appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
         appWindow.persistentSettings.daemon_address = settings.daemon_address
         appWindow.persistentSettings.testnet = settings.testnet
+        appWindow.persistentSettings.restore_height = parseInt(settings.restore_height)
 
     }
 

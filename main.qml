@@ -32,8 +32,9 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
-import Bitmonero.Wallet 1.0
-import Bitmonero.PendingTransaction 1.0
+
+import moneroComponents.Wallet 1.0
+import moneroComponents.PendingTransaction 1.0
 
 
 import "components"
@@ -54,6 +55,10 @@ ApplicationWindow {
     property alias password : passwordDialog.password
     property int splashCounter: 0
     property bool isNewWallet: false
+    property int restoreHeight:0
+
+    // true if wallet ever synchronized
+    property bool walletInitialized : false
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -138,15 +143,31 @@ ApplicationWindow {
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
 
+        // currentWallet is defined on daemon address change - close/reopen
+        if (currentWallet !== undefined) {
+            console.log("closing currentWallet")
+            walletManager.closeWallet(currentWallet);
+        }
 
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
+            console.log("using wizard wallet")
+            //Set restoreHeight
+            if(persistentSettings.restoreHeight > 0){
+                restoreHeight = persistentSettings.restoreHeight
+            }
+
+            console.log("using wizard wallet")
+
             connectWallet(wizard.settings['wallet'])
+
             isNewWallet = true
+            // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
+            delete wizard.settings['wallet']
         }  else {
             var wallet_path = walletPath();
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
-            console.log("opening wallet at: ", wallet_path);
+            console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }
@@ -159,11 +180,10 @@ ApplicationWindow {
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
-
+        currentWallet.moneySpent.connect(onWalletMoneySent)
+        currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
-
         currentWallet.initAsync(persistentSettings.daemon_address, 0);
-
     }
 
     function walletPath() {
@@ -210,9 +230,8 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-        basicPanel.unlockedBalanceText = leftPanel.unlockedBalanceText =
-                walletManager.displayAmount(currentWallet.unlockedBalance);
-        basicPanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
+        middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
     }
 
     function onWalletRefresh() {
@@ -220,6 +239,9 @@ ApplicationWindow {
         if (splash.visible) {
             hideProcessingSplash()
         }
+        var dCurrentBlock = currentWallet.daemonBlockChainHeight();
+        var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
+        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // Store wallet after first refresh. To prevent broken wallet after a crash
         // TODO: Move this to libwallet?
@@ -229,21 +251,48 @@ ApplicationWindow {
             console.log("wallet stored after first successfull refresh")
         }
 
+        // initialize transaction history once wallet is initializef first time;
+        if (!walletInitialized) {
+            currentWallet.history.refresh()
+            walletInitialized = true
+        }
+
         leftPanel.networkStatus.connected = currentWallet.connected
+
         onWalletUpdate();
     }
 
     function onWalletNewBlock(blockHeight) {
         if (splash.visible) {
-            var currHeight = blockHeight.toFixed(0)
-            if(currHeight > splashCounter + 1000){
+            var currHeight = blockHeight
+
+            //fast refresh until restoreHeight is reached
+            var increment = ((restoreHeight == 0) || currHeight < restoreHeight)? 1000 : 10
+
+            if(currHeight > splashCounter + increment){
               splashCounter = currHeight
-              var progressText = qsTr("Synchronizing blocks %1/%2").arg(currHeight).arg(currentWallet.daemonBlockChainHeight().toFixed(0));
+              var locale = Qt.locale()
+              var currHeightString = currHeight.toLocaleString(locale,"f",0)
+              var targetHeightString = currentWallet.daemonBlockChainHeight().toLocaleString(locale,"f",0)
+              var progressText = qsTr("Synchronizing blocks %1 / %2").arg(currHeightString).arg(targetHeightString);
               console.log("Progress text: " + progressText);
               splash.heightProgressText = progressText
             }
         }
     }
+
+    function onWalletMoneyReceived(txId, amount) {
+        // refresh transaction history here
+        currentWallet.refresh()
+        currentWallet.history.refresh() // this will refresh model
+    }
+
+    function onWalletMoneySent(txId, amount) {
+        // refresh transaction history here
+        currentWallet.refresh()
+        currentWallet.history.refresh() // this will refresh model
+    }
+
 
 
     function walletsFound() {
@@ -338,7 +387,7 @@ ApplicationWindow {
         middlePanel.enabled = enable;
         leftPanel.enabled = enable;
         rightPanel.enabled = enable;
-        basicPanel.enabled = enable;
+        // basicPanel.enabled = enable;
     }
 
     function showProcessingSplash(message) {
@@ -396,6 +445,7 @@ ApplicationWindow {
         property bool   testnet: true
         property string daemon_address: "localhost:38081"
         property string payment_id
+        property int restoreHeight:0
     }
 
     // TODO: replace with customized popups
@@ -440,7 +490,7 @@ ApplicationWindow {
 
     ProcessingSplash {
         id: splash
-        width: appWindow.width / 2
+        width: appWindow.width / 1.5
         height: appWindow.height / 2
         x: (appWindow.width - width) / 2 + appWindow.x
         y: (appWindow.height - height) / 2 + appWindow.y
@@ -514,7 +564,7 @@ ApplicationWindow {
         MiddlePanel {
             id: middlePanel
             anchors.bottom: parent.bottom
-            anchors.left: leftPanel.right
+            anchors.left: leftPanel.visible ?  leftPanel.right : parent.left
             anchors.right: rightPanel.left
             height: parent.height
             state: "Transfer"
@@ -523,16 +573,6 @@ ApplicationWindow {
         TipItem {
             id: tipItem
             text: qsTr("send to the same destination") + translationManager.emptyString
-            visible: false
-        }
-
-        BasicPanel {
-            id: basicPanel
-            x: 0
-            anchors.bottom: parent.bottom
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
             visible: false
         }
 
@@ -591,25 +631,26 @@ ApplicationWindow {
                 duration: 200
             }
             PropertyAction {
-                targets: [leftPanel, middlePanel, rightPanel]
+                targets: [leftPanel, rightPanel]
                 properties: "visible"
                 value: false
             }
             PropertyAction {
-                target: basicPanel
-                properties: "visible"
+                target: middlePanel
+                properties: "basicMode"
                 value: true
             }
+
             NumberAnimation {
                 target: appWindow
                 properties: "height"
-                to: basicPanel.height
+                to: middlePanel.height
                 easing.type: Easing.InCubic
                 duration: 200
             }
 
             onStopped: {
-                middlePanel.visible = false
+                // middlePanel.visible = false
                 rightPanel.visible = false
                 leftPanel.visible = false
             }
@@ -625,8 +666,8 @@ ApplicationWindow {
                 duration: 200
             }
             PropertyAction {
-                target: basicPanel
-                properties: "visible"
+                target: middlePanel
+                properties: "basicMode"
                 value: false
             }
             PropertyAction {
@@ -719,8 +760,13 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             onGoToBasicVersion: {
-                if(yes) goToBasicAnimation.start()
-                else goToProAnimation.start()
+                if (yes) {
+                    // basicPanel.currentView = middlePanel.currentView
+                    goToBasicAnimation.start()
+                } else {
+                    // middlePanel.currentView = basicPanel.currentView
+                    goToProAnimation.start()
+                }
             }
 
             MouseArea {

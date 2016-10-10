@@ -31,6 +31,8 @@ import QtGraphicalEffects 1.0
 import "components"
 import "pages"
 
+// mbg033 @ 2016-10-08: Not used anymore, to be deleted
+
 Rectangle {
     id: root
     width: 470

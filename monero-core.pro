@@ -10,7 +10,8 @@ CONFIG += c++11
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH += $$WALLET_ROOT/include \
-                $$PWD/src/libwalletqt
+                $$PWD/src/libwalletqt \
+                $$PWD/src
 
 HEADERS += \
     filter.h \
@@ -22,7 +23,9 @@ HEADERS += \
     src/libwalletqt/TransactionHistory.h \
     src/libwalletqt/TransactionInfo.h \
     oshelper.h \
-    TranslationManager.h
+    TranslationManager.h \
+    src/model/TransactionHistoryModel.h \
+    src/model/TransactionHistorySortFilterModel.h
 
 
 SOURCES += main.cpp \
@@ -35,7 +38,9 @@ SOURCES += main.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \
     oshelper.cpp \
-    TranslationManager.cpp
+    TranslationManager.cpp \
+    src/model/TransactionHistoryModel.cpp \
+    src/model/TransactionHistorySortFilterModel.cpp
 
 lupdate_only {
 SOURCES = *.qml \

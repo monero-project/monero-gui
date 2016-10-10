@@ -27,8 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
-import moneroComponents 1.0
+import moneroComponents.TranslationManager 1.0
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.1
+import "../components"
 
 // Reusable component for managing wallet (account name, path, private key)
 
@@ -39,6 +41,8 @@ Item {
     property alias wordsTextTitle: frameHeader.text
     property alias walletPath: fileUrlInput.text
     property alias wordsTextItem : memoTextItem
+    property alias restoreHeight : restoreHeightItem.text
+    property alias restoreHeightVisible: restoreHeightItem.visible
 
 
     // TODO extend properties if needed
@@ -112,7 +116,7 @@ Item {
         width: 300
         height: 62
 
-        TextInput {
+        TextEdit {
             id: accountName
             anchors.fill: parent
             horizontalAlignment: TextInput.AlignHCenter
@@ -159,10 +163,22 @@ Item {
         anchors.topMargin: 16
     }
 
+    // Restore Height
+    LineEdit {
+        id: restoreHeightItem
+        anchors.top: memoTextItem.bottom
+        width: 250
+        anchors.topMargin: 20
+        placeholderText: qsTr("Restore height")
+        Layout.alignment: Qt.AlignCenter
+        validator: IntValidator {
+            bottom:0
+        }
+    }
     Row {
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: memoTextItem.bottom
+        anchors.top: (restoreHeightItem.visible)? restoreHeightItem.bottom : memoTextItem.bottom
         anchors.topMargin: 24
         spacing: 16
 
