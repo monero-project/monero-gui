@@ -794,4 +794,8 @@ ApplicationWindow {
             }
         }
     }
+    onClosing: {
+        walletManager.closeWallet(currentWallet);
+        console.log("onClosing called");
+    }
 }
