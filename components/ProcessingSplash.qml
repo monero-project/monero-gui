@@ -44,10 +44,11 @@ Window {
 
     ColumnLayout {
         id: rootLayout
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
         anchors.leftMargin: 30
         anchors.rightMargin: 30
 

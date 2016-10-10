@@ -370,6 +370,7 @@ Rectangle {
 
             ListElement { columnName: "Payment ID"; columnWidth: 127 }
             ListElement { columnName: "Date"; columnWidth: 100 }
+            ListElement { columnName: "BlockHeight"; columnWidth: 150 }
             ListElement { columnName: "Amount"; columnWidth: 148 }
             // ListElement { columnName: "Description"; columnWidth: 148 }
         }
@@ -396,6 +397,10 @@ Rectangle {
                     model.sortRole = TransactionHistoryModel.TransactionDateRole
                     break;
                 case 2:
+                    // BlockHeight;
+                    model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
+                    break;
+                case 3:
                     // Amount;
                     model.sortRole = TransactionHistoryModel.TransactionAmountRole
                     break;

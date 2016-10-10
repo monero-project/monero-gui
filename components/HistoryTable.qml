@@ -119,36 +119,64 @@ ListView {
                 // visible: !descriptionArea.containsMouse
             }
         }
-        // -- "PaymentID" title
-        Text {
-            id: paymentLabel
+
+        Row {
+            // - Payment ID + block height row
+            id: row2
             anchors.left: parent.left
-            anchors.top: row1.bottom
-            anchors.topMargin: 4
-            anchors.leftMargin: 28
-
-            width: 118
-            font.family: "Arial"
-            font.pixelSize: 12
-            font.letterSpacing: -1
-            color: "#535353"
-            text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
-        }
-        // -- "PaymentID" value
-        Text {
-            anchors.bottom: paymentLabel.bottom
-            anchors.left: paymentLabel.right
             anchors.right: parent.right
-            anchors.leftMargin: 12
-            anchors.rightMargin: 12
+            anchors.top: parent.top
+            anchors.topMargin: 40
+            anchors.leftMargin: 26
 
-            elide: Text.ElideRight
-            font.family: "Arial"
-            font.pixelSize: 13
-            font.letterSpacing: -1
-            color: "#545454"
-            text: paymentId
+            // -- "PaymentID" title
+            Text {
+                id: paymentLabel
+                width: 86
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 12
+                font.letterSpacing: -1
+                color: "#535353"
+                text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
+            }
+            // -- "PaymentID" value
+            Text {
+                id: paymentIdValue
+                width: 136
+                anchors.bottom: parent.bottom
+                elide: Text.ElideRight
+                font.family: "Arial"
+                font.pixelSize:13
+                font.letterSpacing: -1
+                color: "#545454"
+                text: paymentId
+            }
+            // -- "BlockHeight" title
+            Text {
+                id: blockHeghtTitle
+                anchors.bottom: parent.bottom
+                width: 86
+                font.family: "Arial"
+                font.pixelSize: 12
+                font.letterSpacing: -1
+                color: "#535353"
+                text:  qsTr("BlockHeight:")  + translationManager.emptyString
+            }
+            // -- "BlockHeight" value
+            Text {
+                width: 85
+                anchors.bottom: parent.bottom
+                elide: Text.ElideRight
+                font.family: "Arial"
+                font.pixelSize: 13
+                font.letterSpacing: -1
+                color: "#545454"
+                text: blockHeight
+            }
         }
+
+
         // -- "Date", "Balance" and "Amound" section
         Row {
             anchors.left: parent.left
