@@ -54,17 +54,18 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
-        settingsObject['restoreHeight'] = parseInt(uiItem.restoreHeight)
+        settingsObject['restore_height'] = parseInt(uiItem.restoreHeight)
         return recoveryWallet(settingsObject)
     }
 
     function recoveryWallet(settingsObject) {
         var testnet = appWindow.persistentSettings.testnet;
-        var restoreHeight = settingsObject.restoreHeight;
+        var restoreHeight = settingsObject.restore_height;
         var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet, restoreHeight);
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             settingsObject['wallet'] = wallet;
+            settingsObject['is_recovering'] = true;
         } else {
             walletManager.closeWallet(wallet);
         }

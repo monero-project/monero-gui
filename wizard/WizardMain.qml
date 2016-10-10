@@ -138,6 +138,7 @@ Rectangle {
         appWindow.persistentSettings.daemon_address = settings.daemon_address
         appWindow.persistentSettings.testnet = settings.testnet
         appWindow.persistentSettings.restore_height = parseInt(settings.restore_height)
+        appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
 
     }
 

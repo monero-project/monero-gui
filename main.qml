@@ -158,7 +158,6 @@ ApplicationWindow {
             }
 
             console.log("using wizard wallet")
-
             connectWallet(wizard.settings['wallet'])
 
             isNewWallet = true
@@ -183,7 +182,9 @@ ApplicationWindow {
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
-        currentWallet.initAsync(persistentSettings.daemon_address, 0);
+        console.log("Recovering from seed: ", persistentSettings.is_recovering)
+        console.log("restore Height", persistentSettings.restore_height)
+        currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
     }
 
     function walletPath() {
@@ -244,7 +245,6 @@ ApplicationWindow {
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // Store wallet after first refresh. To prevent broken wallet after a crash
-        // TODO: Move this to libwallet?
         if(isNewWallet && currentWallet.blockChainHeight() > 0){
             currentWallet.store(persistentSettings.wallet_path)
             isNewWallet = false
@@ -255,6 +255,11 @@ ApplicationWindow {
         if (!walletInitialized) {
             currentWallet.history.refresh()
             walletInitialized = true
+        }
+
+        // recovering from seed is finished after first refresh
+        if(persistentSettings.is_recovering) {
+            persistentSettings.is_recovering = false
         }
 
         leftPanel.networkStatus.connected = currentWallet.connected
@@ -445,7 +450,8 @@ ApplicationWindow {
         property bool   testnet: true
         property string daemon_address: "localhost:38081"
         property string payment_id
-        property int restore_height:0
+        property int    restore_height : 0
+        property bool   is_recovering : false
     }
 
     // TODO: replace with customized popups
@@ -787,5 +793,9 @@ ApplicationWindow {
                 }
             }
         }
+    }
+    onClosing: {
+        walletManager.closeWallet(currentWallet);
+        console.log("onClosing called");
     }
 }
