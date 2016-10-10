@@ -65,7 +65,7 @@ Item {
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             settingsObject['wallet'] = wallet;
-            settingsObject['is_restoring'] = true;
+            settingsObject['is_recovering'] = true;
         } else {
             walletManager.closeWallet(wallet);
         }
