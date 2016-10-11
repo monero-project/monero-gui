@@ -78,6 +78,7 @@ Rectangle {
             source: "images/moneroLogo.png"
         }
 
+      /* Disable twitter/news panel
         Image {
             anchors.left: parent.left
             anchors.verticalCenter: logo.verticalCenter
@@ -90,6 +91,7 @@ Rectangle {
             anchors.fill: parent
             onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
         }
+      */
     }
 
 
