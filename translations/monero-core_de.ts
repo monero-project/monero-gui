@@ -243,22 +243,17 @@
         <translation>Keine weiteren Ergebnisse</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="141"/>
+        <location filename="../components/HistoryTable.qml" line="135"/>
         <source>Payment ID:</source>
         <translation>Zahlungs ID:</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="164"/>
-        <source>BlockHeight:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTable.qml" line="202"/>
+        <location filename="../components/HistoryTable.qml" line="174"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="298"/>
+        <location filename="../components/HistoryTable.qml" line="270"/>
         <source>Fee</source>
         <translation type="unfinished"></translation>
     </message>
@@ -267,7 +262,7 @@
         <translation type="vanished">Guthaben</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="263"/>
+        <location filename="../components/HistoryTable.qml" line="235"/>
         <source>Amount</source>
         <translation>Menge</translation>
     </message>
@@ -748,7 +743,7 @@
 <context>
     <name>WizardMain</name>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="288"/>
+        <location filename="../wizard/WizardMain.qml" line="285"/>
         <source>USE MONERO</source>
         <translation>VERWENDE MONERO</translation>
     </message>
