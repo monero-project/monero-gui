@@ -62,7 +62,7 @@ Rectangle {
         font.family: "Arial"
         font.pixelSize: 18
         color: "#4A4949"
-        text: qsTr("Filter transactions history") + translationManager.emptyString
+        text: qsTr("Filter transaction history") + translationManager.emptyString
     }
 
     // Filter by Address input (senseless, removing)
@@ -237,7 +237,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
-        text: qsTr("Type of transation") + translationManager.emptyString
+        text: qsTr("Type of transaction") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }

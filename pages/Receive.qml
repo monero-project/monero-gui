@@ -146,7 +146,7 @@ Rectangle {
             LineEdit {
                 id: paymentIdLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("PaymentID here") + translationManager.emptyString;
+                placeholderText: qsTr("Payment ID here") + translationManager.emptyString;
                 readOnly: false
 
                 width: mainLayout.editWidth
