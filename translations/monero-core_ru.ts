@@ -163,7 +163,7 @@
     </message>
     <message>
         <location filename="../pages/History.qml" line="65"/>
-        <source>Filter transactions history</source>
+        <source>Filter transaction history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -194,7 +194,7 @@
     </message>
     <message>
         <location filename="../pages/History.qml" line="240"/>
-        <source>Type of transation</source>
+        <source>Type of transaction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -211,17 +211,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="135"/>
+        <location filename="../components/HistoryTable.qml" line="141"/>
         <source>Payment ID:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="174"/>
+        <location filename="../components/HistoryTable.qml" line="164"/>
+        <source>BlockHeight:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTable.qml" line="202"/>
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="270"/>
+        <location filename="../components/HistoryTable.qml" line="298"/>
         <source>Fee</source>
         <translation type="unfinished"></translation>
     </message>
@@ -230,7 +235,7 @@
         <translation type="obsolete">Баланс</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="235"/>
+        <location filename="../components/HistoryTable.qml" line="263"/>
         <source>Amount</source>
         <translation type="unfinished"></translation>
     </message>
@@ -238,62 +243,62 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="105"/>
+        <location filename="../LeftPanel.qml" line="107"/>
         <source>Balance</source>
         <translation>Баланс</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="108"/>
+        <location filename="../LeftPanel.qml" line="110"/>
         <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="140"/>
+        <location filename="../LeftPanel.qml" line="142"/>
         <source>Unlocked balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="143"/>
+        <location filename="../LeftPanel.qml" line="145"/>
         <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="224"/>
+        <location filename="../LeftPanel.qml" line="226"/>
         <source>Transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="225"/>
+        <location filename="../LeftPanel.qml" line="227"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="247"/>
+        <location filename="../LeftPanel.qml" line="249"/>
         <source>Receive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="248"/>
+        <location filename="../LeftPanel.qml" line="250"/>
         <source>R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="271"/>
+        <location filename="../LeftPanel.qml" line="273"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="272"/>
+        <location filename="../LeftPanel.qml" line="274"/>
         <source>H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="340"/>
+        <location filename="../LeftPanel.qml" line="342"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="341"/>
+        <location filename="../LeftPanel.qml" line="343"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
@@ -301,12 +306,12 @@
 <context>
     <name>MiddlePanel</name>
     <message>
-        <location filename="../MiddlePanel.qml" line="178"/>
+        <location filename="../MiddlePanel.qml" line="180"/>
         <source>Balance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MiddlePanel.qml" line="216"/>
+        <location filename="../MiddlePanel.qml" line="218"/>
         <source>Unlocked Balance:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -384,7 +389,7 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="149"/>
-        <source>PaymentID here</source>
+        <source>Payment ID here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -704,7 +709,7 @@
 <context>
     <name>WizardMain</name>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="285"/>
+        <location filename="../wizard/WizardMain.qml" line="288"/>
         <source>USE MONERO</source>
         <translation type="unfinished"></translation>
     </message>
