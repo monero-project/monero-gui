@@ -326,11 +326,22 @@ ApplicationWindow {
         // validate amount;
         var amountxmr = walletManager.amountFromString(amount);
         console.log("integer amount: ", amountxmr);
+        console.log("integer unlocked",currentWallet.unlockedBalance)
         if (amountxmr <= 0) {
             informationPopup.title = qsTr("Error") + translationManager.emptyString;
             informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
                     .arg(walletManager.displayAmount(0))
                     .arg(walletManager.maximumAllowedAmountAsSting())
+                    + translationManager.emptyString
+
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            return;
+        } else if (amountxmr > currentWallet.unlockedBalance) {
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("insufficient funds. Unlocked balance: %1")
+                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
                     + translationManager.emptyString
 
             informationPopup.icon  = StandardIcon.Critical
