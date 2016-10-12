@@ -1,4 +1,3 @@
-# Monero Core
 
 Copyright (c) 2014-2016, The Monero Project
 
@@ -144,4 +143,22 @@ TODO
   
 ### On Windows:
 
-TODO
+1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
+2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero)
+3. Install git:
+
+    ```
+    pacman -S git
+    ```
+4. Install Qt5:
+- if you need to build x86 application, install:
+  
+     ```
+     pacman -S mingw-w64-i686-qt5
+     ```
+
+- if you need to build x64 application, install:
+
+    ```
+    pacman -S mingw-w64-x86_64-qt5
+    ```
