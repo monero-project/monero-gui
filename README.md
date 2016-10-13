@@ -150,17 +150,17 @@ TODO
     pacman -S git
     ```
 4. Install Qt5:
-- if you need to build x86 application, install:
+    - if you need to build x86 application, install:
   
-     ```
-     pacman -S mingw-w64-i686-qt5
-     ```
+       ```
+      pacman -S mingw-w64-i686-qt5
+      ```
 
-- if you need to build x64 application, install:
+    - if you need to build x64 application, install:
 
-    ```
-    pacman -S mingw-w64-x86_64-qt5
-    ```
+      ```
+      pacman -S mingw-w64-x86_64-qt5
+      ```
 5. Open ```mingw``` shell. MSYS2 will install start menu items for both mingw32 and mingw64 environments, so
    you need to open appropriate one:
    ```%MSYS_ROOT%\msys2_shell.cmd -mingw32``` for x86 targed
