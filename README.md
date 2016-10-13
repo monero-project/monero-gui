@@ -175,10 +175,13 @@ TODO
     ```
 
 7. Build the project:
-  ```
-  cd monero-core
-  ./build.sh
-  ```
+    ```
+    cd monero-core
+    ./build.sh
+    ```
 8. Take result binary and dependencies in ```./build/release/bin```
-  
+
+   **important: if you testing application within VirtualBox virtual machine, make sure 3D acceleration is enabled
+   in machine's settings:
+   Machine > Settings > Display > [v] Enable 3D Acceleration**
    
