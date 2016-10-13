@@ -1,4 +1,3 @@
-
 Copyright (c) 2014-2016, The Monero Project
 
 ## Development Resources
@@ -162,3 +161,24 @@ TODO
     ```
     pacman -S mingw-w64-x86_64-qt5
     ```
+5. Open ```mingw``` shell. MSYS2 will install start menu items for both mingw32 and mingw64 environments, so
+   you need to open appropriate one:
+   ```%MSYS_ROOT%\msys2_shell.cmd -mingw32``` for x86 targed
+   or 
+   ```%MSYS_ROOT%\msys2_shell.cmd -mingw64``` for x64 targed
+
+   Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
+   is x64-based
+6. Clone git repository:
+    ```
+    git clone https://github.com/monero-project/monero-core.git
+    ```
+
+7. Build the project:
+  ```
+  cd monero-core
+  ./build.sh
+  ```
+8. Take result binary and dependencies in ```./build/release/bin```
+  
+   
