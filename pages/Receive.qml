@@ -41,16 +41,19 @@ Rectangle {
     property alias paymentIdText : paymentIdLine.text
     property alias integratedAddressText : integratedAddressLine.text
 
-    function updatePaymentId() {
-        var payment_id = appWindow.persistentSettings.payment_id
-        if (typeof appWindow.currentWallet !== 'undefined') {
+    function updatePaymentId(payment_id) {
+        if (typeof appWindow.currentWallet === 'undefined')
+            return
+        // generate a new one if not given as argument
+        if (typeof payment_id === 'undefined') {
             payment_id = appWindow.currentWallet.generatePaymentId()
             appWindow.persistentSettings.payment_id = payment_id
-            addressLine.text = appWindow.currentWallet.address
-            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
+            paymentIdLine.text = payment_id
         }
-
-        paymentIdLine.text = payment_id
+        addressLine.text = appWindow.currentWallet.address
+        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
+        if (integratedAddressLine.text === "")
+          integratedAddressLine.text = qsTr("Invalid payment ID")
     }
 
     Clipboard { id: clipboard }
@@ -148,6 +151,7 @@ Rectangle {
                 fontSize: mainLayout.lineEditFontSize
                 placeholderText: qsTr("Payment ID here") + translationManager.emptyString;
                 readOnly: false
+                onTextChanged: updatePaymentId(paymentIdLine.text)
 
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
