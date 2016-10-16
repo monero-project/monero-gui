@@ -251,7 +251,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        enabled : addressLine.text.length > 0 && amountLine.text.length > 0
+        enabled : addressLine.text.length > 0 && amountLine.text.length > 0 && (paymentIdLine.text.trim() === "" || walletManager.paymentIdValid(paymentIdLine.text.trim()))
         onClicked: {
             console.log("Transfer: paymentClicked")
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority

@@ -149,6 +149,11 @@ quint64 WalletManager::amountFromDouble(double amount) const
     return Bitmonero::Wallet::amountFromDouble(amount);
 }
 
+bool WalletManager::paymentIdValid(const QString &payment_id) const
+{
+    return Bitmonero::Wallet::paymentIdValid(payment_id.toStdString());
+}
+
 void WalletManager::setLogLevel(int logLevel)
 {
     Bitmonero::WalletManagerFactory::setLogLevel(logLevel);
