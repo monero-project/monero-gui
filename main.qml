@@ -246,8 +246,9 @@ ApplicationWindow {
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // Store wallet after every refresh.
-        currentWallet.store(walletPath())
-        console.log("Saving to "+walletPath());
+        //TODO: Doesn't need path after creation. Change libwalletqt
+        currentWallet.store("")
+        console.log("Saving wallet");
         isNewWallet = false
 
         // initialize transaction history once wallet is initializef first time;
