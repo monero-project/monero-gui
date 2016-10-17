@@ -111,10 +111,16 @@ Rectangle {
         console.log("Here we apply the settings");
         // here we need to actually move wallet to the new location
 
+        // Remove trailing slash - (default on windows and mac)
+        if (settings.wallet_path.substring(settings.wallet_path.length -1) === "/"){
+            settings.wallet_path = settings.wallet_path.substring(0,settings.wallet_path.length -1)
+        }
+
         var new_wallet_filename = settings.wallet_path + "/"
                 + settings.account_name + "/"
                 + settings.account_name;
 
+        console.log("saving to wizard: "+ new_wallet_filename)
         // moving wallet files to the new destination, if user changed it
         if (new_wallet_filename !== settings.wallet_filename) {
             // using previously saved wallet;
