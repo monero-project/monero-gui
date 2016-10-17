@@ -246,8 +246,9 @@ ApplicationWindow {
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // Store wallet after every refresh.
-        currentWallet.store(persistentSettings.wallet_path)
-
+        currentWallet.store(walletPath())
+        console.log("Saving to "+walletPath());
+        isNewWallet = false
 
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
