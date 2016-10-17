@@ -245,12 +245,9 @@ ApplicationWindow {
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
-        // Store wallet after first refresh. To prevent broken wallet after a crash
-        if(isNewWallet && currentWallet.blockChainHeight() > 0){
-            currentWallet.store(persistentSettings.wallet_path)
-            isNewWallet = false
-            console.log("wallet stored after first successfull refresh")
-        }
+        // Store wallet after every refresh.
+        currentWallet.store(persistentSettings.wallet_path)
+
 
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
