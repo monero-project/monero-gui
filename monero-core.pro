@@ -73,6 +73,17 @@ win32 {
         -lwsock32 \
         -lIphlpapi \
         -lgdi32
+
+
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        message("x86 build")
+        ## Windows x86 (32bit) specific build here
+        QMAKE_LFLAGS += -Wl,--stack,4194304
+    } else {
+        message("x64 build")
+    }
+
+
 }
 
 linux {
