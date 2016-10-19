@@ -78,6 +78,8 @@ win32 {
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("x86 build")
         ## Windows x86 (32bit) specific build here
+        ## there's 2Mb stack in libwallet allocated internally
+        ## this fixes app crash for x86 Windows build
         QMAKE_LFLAGS += -Wl,--stack,4194304
     } else {
         message("x64 build")
