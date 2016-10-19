@@ -17,7 +17,7 @@ fi
  
 if [ ! -d build ]; then mkdir build; fi
 
-if [ $BUILD_TYPE == "Release" ]; then
+if [ "$BUILD_TYPE" == "Release" ]; then
 	CONFIG="CONFIG+=release";
 else
 	CONFIG="CONFIG+=debug"
@@ -35,6 +35,6 @@ fi
 cd build
 qmake ../monero-core.pro "$CONFIG"
 make 
-make deploy
+# make deploy
 popd
 
