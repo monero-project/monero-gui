@@ -54,8 +54,31 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lunbound
 
+
+# currently we only support x86 build as qt.io only provides prebuilt qt for x86 mingw
+
 win32 {
-    #QMAKE_LFLAGS += -static
+    
+    contains(QMAKE_HOST.arch, x86_64) {
+        message("Host is 64bit")
+        MSYS_PATH=c:/msys64/mingw32
+    } else {
+        message("Host is 32bit")
+        MSYS_PATH=c:/msys32/mingw32
+    }
+
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        message("Target is 32bit")
+        ## Windows x86 (32bit) specific build here
+        ## there's 2Mb stack in libwallet allocated internally, so we set stack=4Mb
+        ## this fixes app crash for x86 Windows build
+        QMAKE_LFLAGS += -Wl,--stack,4194304
+    } else {
+        message("Target is 64bit")
+    }
+
+    LIBS+=-L$$MSYS_PATH/lib
+    
     LIBS+= \
         -Wl,-Bstatic \
         -lboost_serialization-mt \
@@ -74,16 +97,6 @@ win32 {
         -lIphlpapi \
         -lgdi32
 
-
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        message("x86 build")
-        ## Windows x86 (32bit) specific build here
-        ## there's 2Mb stack in libwallet allocated internally
-        ## this fixes app crash for x86 Windows build
-        QMAKE_LFLAGS += -Wl,--stack,4194304
-    } else {
-        message("x64 build")
-    }
 
 
 }

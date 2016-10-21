@@ -143,45 +143,53 @@ TODO
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
-2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero)
-3. Install git:
+2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero) into msys2 environment.
+   **As we only build application for x86, install only dependencies for x86 architecture (i686 in package name)**
+
+3. Install git into msys2 environment:
 
     ```
     pacman -S git
     ```
-4. Install Qt5:
-    - if you need to build x86 application, install:
-  
-       ```
-      pacman -S mingw-w64-i686-qt5
-      ```
 
-    - if you need to build x64 application, install:
+4. Install Qt5 from [official site](https://www.qt.io/download-open-source/).
+   - download unified installer, run and select following options:
+       - Qt > Qt 5.7 > MinGW 5.3.0 32 bit
+       - Tools > MinGW 5.3.0
+   - continue with installation
 
-      ```
-      pacman -S mingw-w64-x86_64-qt5
-      ```
-5. Open ```mingw``` shell. MSYS2 will install start menu items for both mingw32 and mingw64 environments, so
-   you need to open appropriate one:
-   ```%MSYS_ROOT%\msys2_shell.cmd -mingw32``` for x86 targed
-   or 
-   ```%MSYS_ROOT%\msys2_shell.cmd -mingw64``` for x64 targed
+5. Open ```mingw``` shell:
 
+   ```%MSYS_ROOT%\msys2_shell.cmd -mingw32```
+   
    Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
    is x64-based
+
 6. Clone git repository:
     ```
     git clone https://github.com/monero-project/monero-core.git
     ```
 
-7. Build the project:
+7. Build libwallet:
     ```
     cd monero-core
-    ./build.sh
+    ./get_libwallet_api.sh
     ```
-8. Take result binary and dependencies in ```./build/release/bin```
+      close ```mingw``` shell after it done
 
-   **important: if you testing application within VirtualBox virtual machine, make sure 3D acceleration is enabled
-   in machine's settings:
-   Machine > Settings > Display > [v] Enable 3D Acceleration**
-   
+8. Build application:
+
+    - open ```Qt environment``` shell (Qt 5.7 for Desktop (MinGW 5.3.0 32 bit) is shortcut name) 
+    - navigate to the project dir and build the app: 
+      ```
+      cd %MSYS_ROOT%\%USERNAME%\monero-core
+      mkdir build
+      cd build
+      qmake ..\ -r "CONFIG+=release"
+      mingw32-make release
+      mingw32-make deploy
+      ```
+    - grab result binary and dependencies in ```.\release\bin```
+
+
+
