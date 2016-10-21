@@ -165,7 +165,7 @@ TODO
    Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
    is x64-based
 
-6. Clone git repository:
+6. Clone repository:
     ```
     git clone https://github.com/monero-project/monero-core.git
     ```
