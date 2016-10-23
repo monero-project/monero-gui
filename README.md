@@ -102,9 +102,9 @@ TODO
 
 6. Build the GUI.
 
-`qmake`
+`sudo qmake`
 
-`make`
+`sudo make`
 
 7. Before running the GUI, it's recommended you have a copy of bitmonero running in the background.
 
