@@ -87,7 +87,7 @@ Rectangle {
         // Amount input
         LineEdit {
             id: amountLine
-            placeholderText: qsTr("Amount...") + translationManager.emptyString
+            placeholderText: qsTr("") + translationManager.emptyString
             width: parent.width - 37 - 17
             validator: DoubleValidator {
                 bottom: 0.0
@@ -160,7 +160,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-        text: qsTr("Cost")
+        text: qsTr("Transaction cost")
     }
 
 
