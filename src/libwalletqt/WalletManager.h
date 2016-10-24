@@ -89,6 +89,10 @@ public:
     // QML JS engine doesn't support unsigned integers
     Q_INVOKABLE QString maximumAllowedAmountAsSting() const;
 
+    Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
+    Q_INVOKABLE bool addressValid(const QString &address, bool testnet) const;
+    Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
+
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;
