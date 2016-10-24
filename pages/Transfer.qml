@@ -189,6 +189,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: "4..."
         // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
     }
 
@@ -213,6 +214,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
         // validator: DoubleValidator { top: 0.0 }
     }
 
