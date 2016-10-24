@@ -1,5 +1,3 @@
-# Monero Core
-
 Copyright (c) 2014-2016, The Monero Project
 
 ## Development Resources
@@ -144,4 +142,46 @@ TODO
   
 ### On Windows:
 
-TODO
+1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
+2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero)
+3. Install git:
+
+    ```
+    pacman -S git
+    ```
+4. Install Qt5:
+    - if you need to build x86 application, install:
+  
+       ```
+      pacman -S mingw-w64-i686-qt5
+      ```
+
+    - if you need to build x64 application, install:
+
+      ```
+      pacman -S mingw-w64-x86_64-qt5
+      ```
+5. Open ```mingw``` shell. MSYS2 will install start menu items for both mingw32 and mingw64 environments, so
+   you need to open appropriate one:
+   ```%MSYS_ROOT%\msys2_shell.cmd -mingw32``` for x86 targed
+   or 
+   ```%MSYS_ROOT%\msys2_shell.cmd -mingw64``` for x64 targed
+
+   Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
+   is x64-based
+6. Clone git repository:
+    ```
+    git clone https://github.com/monero-project/monero-core.git
+    ```
+
+7. Build the project:
+    ```
+    cd monero-core
+    ./build.sh
+    ```
+8. Take result binary and dependencies in ```./build/release/bin```
+
+   **important: if you testing application within VirtualBox virtual machine, make sure 3D acceleration is enabled
+   in machine's settings:
+   Machine > Settings > Display > [v] Enable 3D Acceleration**
+   
