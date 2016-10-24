@@ -219,7 +219,7 @@ Rectangle {
 
     CheckBox {
         id: advancedFilteringCheckBox
-        text: qsTr("Advance filtering")
+        text: qsTr("Advanced filtering")
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
         anchors.leftMargin: 17
@@ -371,7 +371,7 @@ Rectangle {
 
             ListElement { columnName: "Payment ID"; columnWidth: 127 }
             ListElement { columnName: "Date"; columnWidth: 100 }
-            ListElement { columnName: "BlockHeight"; columnWidth: 150 }
+            ListElement { columnName: "Block height"; columnWidth: 150 }
             ListElement { columnName: "Amount"; columnWidth: 148 }
             // ListElement { columnName: "Description"; columnWidth: 148 }
         }
