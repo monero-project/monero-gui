@@ -29,8 +29,8 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
     qDeleteAll(m_tinfo);
     m_tinfo.clear();
 
-    QDateTime firstDateTime = QDateTime::currentDateTime();
-    QDateTime lastDateTime  = QDateTime(QDate(1970, 1, 1));
+    QDateTime firstDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
+    QDateTime lastDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
 
     TransactionHistory * parent = const_cast<TransactionHistory*>(this);
     for (const auto i : m_pimpl->getAll()) {
@@ -85,6 +85,6 @@ QDateTime TransactionHistory::lastDateTime() const
 TransactionHistory::TransactionHistory(Bitmonero::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl)
 {
-    m_firstDateTime = QDateTime(QDate(1970, 1, 1));
-    m_lastDateTime  = QDateTime::currentDateTime();
+    m_firstDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
+    m_lastDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
 }
