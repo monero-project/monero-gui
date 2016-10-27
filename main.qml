@@ -246,20 +246,24 @@ ApplicationWindow {
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // Store wallet after every refresh.
-        //TODO: Doesn't need path after creation. Change libwalletqt
-        currentWallet.store("")
-        console.log("Saving wallet");
+        if (currentWallet.blockChainHeight() > 1){
+
+            //TODO: Doesn't need path after creation. Change libwalletqt
+            currentWallet.store("")
+            console.log("Saving wallet");
+
+            // recovering from seed is finished after first refresh
+            if(persistentSettings.is_recovering) {
+                persistentSettings.is_recovering = false
+            }
+        }
+
         isNewWallet = false
 
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
             currentWallet.history.refresh()
             walletInitialized = true
-        }
-
-        // recovering from seed is finished after first refresh
-        if(persistentSettings.is_recovering) {
-            persistentSettings.is_recovering = false
         }
 
         leftPanel.networkStatus.connected = currentWallet.connected
