@@ -56,15 +56,6 @@ Rectangle {
         daemonAddress = persistentSettings.daemon_address.split(":");
         console.log("address: " + persistentSettings.daemon_address)
         // try connecting to daemon
-        var connectedToDaemon =  currentWallet.connectToDaemon();
-
-        if(!connectedToDaemon){
-            console.log("not connected");
-            //TODO: Print error?
-            //daemonStatusText.text = qsTr("Unable to connect to Daemon.")
-            //daemonStatusText.visible = true
-        }
-
     }
 
 
@@ -237,40 +228,6 @@ Rectangle {
                 }
             }
 
-        }
-
-
-        RowLayout {
-            id: daemonStatusRow
-
-            Layout.fillWidth: true
-
-            Text {
-                id: daemonStatusText
-                font.family: "Arial"
-                font.pixelSize: 18
-                wrapMode: Text.Wrap
-                textFormat: Text.RichText
-                horizontalAlignment: Text.AlignHCenter
-                color: "#FF0000"
-                visible: true //!currentWallet.connected
-            }
-
-//            StandardButton {
-//                id: checkConnectionButton
-//                anchors.left: daemonStatusText.right
-//                anchors.leftMargin: 30
-//                width: 90
-//                text: qsTr("Check again") + translationManager.emptyString
-//                shadowReleasedColor: "#FF4304"
-//                shadowPressedColor: "#B32D00"
-//                releasedColor: "#FF6C3C"
-//                pressedColor: "#FF4304"
-//                visible: true
-//                onClicked: {
-//                    checkDaemonConnection();
-//                }
-//          }
         }
 
     }
