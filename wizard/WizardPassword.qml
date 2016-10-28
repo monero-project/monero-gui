@@ -46,6 +46,7 @@ Item {
 
     function onPageOpened(settingsObject) {
         wizard.nextButton.enabled = true
+        handlePassword();
 
         if (wizard.currentPath === "create_wallet") {
            passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
