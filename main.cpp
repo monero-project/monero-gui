@@ -116,9 +116,7 @@ int main(int argc, char *argv[])
 #endif
 
     if (!moneroAccountsRootDir.empty()) {
-        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero Accounts";
-        QDir tempDir;
-        tempDir.mkpath(moneroAccountsDir);
+        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/monero/wallets";
         engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
     }
 
