@@ -230,6 +230,50 @@ Rectangle {
 
         }
 
+
+        RowLayout {
+            Label {
+                id: closeWalletLabel
+
+                Layout.fillWidth: true
+                color: "#4A4949"
+                text: qsTr("Manage wallet") + translationManager.emptyString
+                fontSize: 16
+            }
+        }
+        RowLayout {
+
+            Text {
+                id: closeWalletTip
+                font.family: "Arial"
+                font.pointSize: 12
+                color: "#4A4646"
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+                text: qsTr("Close current wallet and open wizard")
+                      + translationManager.emptyString
+            }
+
+
+            StandardButton {
+                id: closeWalletButton
+
+//                Layout.leftMargin: 30
+//                Layout.minimumWidth: 100
+                width: 100
+                text: qsTr("Close wallet") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: true
+                onClicked: {
+                    console.log("closing wallet button clicked")
+                    appWindow.showWizard();
+                }
+            }
+        }
+
     }
 
 
