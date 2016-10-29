@@ -70,7 +70,6 @@ Rectangle {
     }
 
     function switchPage(next) {
-        console.log("hepp")
         // save settings for current page;
         if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
             if (pages[currentPage].onPageClosed(settings) !== true) {
@@ -79,7 +78,7 @@ Rectangle {
             };
 
         }
-        print ("switchpage: currentPage: ", currentPage);
+        console.log("switchpage: currentPage: ", currentPage);
 
         if (currentPage > 0 || currentPage < pages.length - 1) {
             pages[currentPage].opacity = 0
