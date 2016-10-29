@@ -150,9 +150,9 @@ Rectangle {
     }
 
     // indicate disabled state
-    Desaturate {
-        anchors.fill: parent
-        source: parent
-        desaturation: root.enabled ? 0.0 : 1.0
-    }
+//    Desaturate {
+//        anchors.fill: parent
+//        source: parent
+//        desaturation: root.enabled ? 0.0 : 1.0
+//    }
 }
