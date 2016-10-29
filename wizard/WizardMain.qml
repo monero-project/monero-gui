@@ -39,17 +39,35 @@ Rectangle {
 
     property var paths: {
         "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
-        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ]
+        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ],
+
     }
     property string currentPath: "create_wallet"
     property var pages: paths[currentPath]
 
     signal useMoneroClicked()
+    signal openWalletFromFileClicked()
     border.color: "#DBDBDB"
     border.width: 1
     color: "#FFFFFF"
 
+    function restart(){
+        wizard.currentPage = 0;
+        wizard.settings = ({})
+        wizard.currentPath = "create_wallet"
+        wizard.pages = paths[currentPath]
+
+        //hide all pages except first
+        for (var i = 1; i < wizard.pages.length; i++){
+            wizard.pages[i].opacity = 0;
+        }
+        //Show first pages
+        wizard.pages[0].opacity = 1;
+
+    }
+
     function switchPage(next) {
+        console.log("hepp")
         // save settings for current page;
         if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
             if (pages[currentPage].onPageClosed(settings) !== true) {
@@ -103,13 +121,19 @@ Rectangle {
         currentPage = pages.indexOf(recoveryWalletPage)
         wizard.nextButton.visible = true
         recoveryWalletPage.onPageOpened(settings);
+    }
 
+    function openOpenWalletPage() {
+        console.log("open wallet from file page");
+         wizard.openWalletFromFileClicked();
     }
 
     //! actually writes the wallet
     function applySettings() {
         console.log("Here we apply the settings");
         // here we need to actually move wallet to the new location
+        console.log(settings.wallet_full_path);
+
 
         // Remove trailing slash - (default on windows and mac)
         if (settings.wallet_path.substring(settings.wallet_path.length -1) === "/"){
@@ -120,7 +144,7 @@ Rectangle {
                 + settings.account_name + "/"
                 + settings.account_name;
 
-        console.log("saving to wizard: "+ new_wallet_filename)
+        console.log("saving in wizard: "+ new_wallet_filename)
         // moving wallet files to the new destination, if user changed it
         if (new_wallet_filename !== settings.wallet_filename) {
             // using previously saved wallet;
@@ -140,7 +164,7 @@ Rectangle {
         appWindow.persistentSettings.language = settings.language
         appWindow.persistentSettings.locale   = settings.locale
         appWindow.persistentSettings.account_name = settings.account_name
-        appWindow.persistentSettings.wallet_path = settings.wallet_path
+        appWindow.persistentSettings.wallet_path = new_wallet_filename
         appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining
         appWindow.persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
         appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
@@ -153,7 +177,6 @@ Rectangle {
 
     // reading settings from persistent storage
     Component.onCompleted: {
-        console.log("rootItem: ", appWindow);
         settings['allow_background_mining'] = appWindow.persistentSettings.allow_background_mining
         settings['auto_donations_enabled'] = appWindow.persistentSettings.auto_donations_enabled
         settings['auto_donations_amount'] = appWindow.persistentSettings.auto_donations_amount
@@ -206,6 +229,7 @@ Rectangle {
         anchors.rightMargin: 50
         onCreateWalletClicked: wizard.openCreateWalletPage()
         onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
+        onOpenWalletClicked: wizard.openOpenWalletPage();
     }
 
     WizardCreateWallet {
@@ -227,8 +251,6 @@ Rectangle {
         anchors.leftMargin: 50
         anchors.rightMargin: 50
     }
-
-
 
     WizardPassword {
         id: passwordPage
@@ -299,7 +321,7 @@ Rectangle {
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
             wizard.applySettings();
-            wizard.useMoneroClicked()
+            wizard.useMoneroClicked();
         }
     }
 }
