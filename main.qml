@@ -551,7 +551,8 @@ ApplicationWindow {
             appWindow.initialize();
         }
         onRejected: {
-            appWindow.enableUI(false)
+            //appWindow.enableUI(false)
+            rootItem.state = "wizard"
         }
         onDiscard: {
             appWindow.enableUI(false)
