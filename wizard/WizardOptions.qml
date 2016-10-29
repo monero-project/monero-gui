@@ -35,8 +35,10 @@ Item {
     id: page
     signal createWalletClicked()
     signal recoveryWalletClicked()
+    signal openWalletClicked()
     opacity: 0
     visible: false
+    property var buttonSize: 190
 
     function saveDaemonAddress() {
         wizard.settings["daemon_address"] = daemonAddress.text
@@ -96,16 +98,23 @@ Item {
         anchors.centerIn: parent
         spacing: 40
 
+
         Column {
             anchors.verticalCenter: parent.verticalCenter
             spacing: 30
 
             Rectangle {
-                width: 202; height: 202
-                radius: 101
+                width: page.buttonSize; height: page.buttonSize
+                radius: page.buttonSize
                 color: createWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
+
                 Image {
+                    width:page.buttonSize -30
+                    height:page.buttonSize -30
+                    fillMode: Image.PreserveAspectFit
+                    horizontalAlignment: Image.AlignRight
+                    verticalAlignment: Image.AlignTop
                     anchors.centerIn: parent
                     source: "qrc:///images/createWallet.png"
                 }
@@ -126,7 +135,9 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("This is my first time, I want to<br/>create a new account") + translationManager.emptyString
+                width:page.buttonSize
+                wrapMode: Text.WordWrap
+                text: qsTr("This is my first time, I want to create a new account") + translationManager.emptyString
             }
         }
 
@@ -135,11 +146,14 @@ Item {
             spacing: 30
 
             Rectangle {
-                width: 202; height: 202
-                radius: 101
+                width: page.buttonSize; height: page.buttonSize
+                radius: page.buttonSize
                 color: recoverWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
                 Image {
+                    width:page.buttonSize -30
+                    height:page.buttonSize -30
+                    fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     source: "qrc:///images/recoverWallet.png"
                 }
@@ -160,9 +174,53 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to recover my account<br/>from my 25 word seed") + translationManager.emptyString
+                text: qsTr("I want to recover my account from my 25 word seed") + translationManager.emptyString
+                width:page.buttonSize
+                wrapMode: Text.WordWrap
             }
         }
+
+        Column {
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 30
+
+            Rectangle {
+                width: page.buttonSize; height: page.buttonSize
+                radius: page.buttonSize
+                color: openWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
+
+                Image {
+                    width:page.buttonSize -30
+                    height:page.buttonSize -30
+                    fillMode: Image.PreserveAspectFit
+                    anchors.centerIn: parent
+                    source: "qrc:///images/recoverWallet.png"
+                }
+
+                MouseArea {
+                    id: openWalletArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: {
+                        page.saveDaemonAddress()
+                        page.openWalletClicked()
+                    }
+                }
+            }
+
+            Text {
+                font.family: "Arial"
+                font.pixelSize: 16
+                color: "#4A4949"
+                horizontalAlignment: Text.AlignHCenter
+                text: qsTr("I want to open a wallet from file") + translationManager.emptyString
+                width:page.buttonSize
+                wrapMode: Text.WordWrap
+            }
+        }
+
+
+
     }
 
 
