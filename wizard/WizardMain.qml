@@ -38,8 +38,11 @@ Rectangle {
     property int currentPage: 0
 
     property var paths: {
-        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
-        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ],
+     //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
+     //   "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ],
+        // disable donation page
+        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage,  finishPage ],
+        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage,  finishPage ],
 
     }
     property string currentPath: "create_wallet"
@@ -165,13 +168,14 @@ Rectangle {
         appWindow.persistentSettings.locale   = settings.locale
         appWindow.persistentSettings.account_name = settings.account_name
         appWindow.persistentSettings.wallet_path = new_wallet_filename
-        appWindow.persistentSettings.allow_background_mining = settings.allow_background_mining
-        appWindow.persistentSettings.auto_donations_enabled = settings.auto_donations_enabled
-        appWindow.persistentSettings.auto_donations_amount = settings.auto_donations_amount
+        appWindow.persistentSettings.allow_background_mining = false //settings.allow_background_mining
+        appWindow.persistentSettings.auto_donations_enabled = false //settings.auto_donations_enabled
+        appWindow.persistentSettings.auto_donations_amount = false //settings.auto_donations_amount
         appWindow.persistentSettings.daemon_address = settings.daemon_address
         appWindow.persistentSettings.testnet = settings.testnet
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
+
 
     }
 
