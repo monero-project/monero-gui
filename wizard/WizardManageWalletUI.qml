@@ -126,7 +126,13 @@ Item {
             renderType: Text.NativeRendering
             color: "#FF6C3C"
             focus: true
-            text: qsTr("My account name") + translationManager.emptyString
+            text: defaultAccountName
+
+
+            Keys.onReleased: {
+                wizard.nextButton.enabled = (accountName.length > 0)
+            }
+
         }
 
         Rectangle {
