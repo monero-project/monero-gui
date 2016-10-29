@@ -436,7 +436,7 @@ ApplicationWindow {
 
     // close wallet and show wizard
     function showWizard(){
-
+        walletInitialized = false;
         splashCounter = 0;
         walletManager.closeWallet(currentWallet);
         wizard.restart();
