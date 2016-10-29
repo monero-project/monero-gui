@@ -130,6 +130,12 @@ ApplicationWindow {
 
     }
 
+    function openWalletFromFile(){
+        persistentSettings.restore_height = 0
+        persistentSettings.is_recovering = false
+        appWindow.password = ""
+        fileDialog.open();
+    }
 
     function initialize() {
         console.log("initializing..")
@@ -148,6 +154,12 @@ ApplicationWindow {
         if (currentWallet != undefined) {
             console.log("closing currentWallet")
             walletManager.closeWallet(currentWallet);
+        } else {
+
+            // set page to transfer if not changing daemon
+            middlePanel.state = "Transfer";
+            leftPanel.selectItem(middlePanel.state)
+
         }
 
         // wallet already opened with wizard, we just need to initialize it
@@ -158,7 +170,6 @@ ApplicationWindow {
                 restoreHeight = persistentSettings.restore_height
             }
 
-            console.log("using wizard wallet")
             connectWallet(wizard.settings['wallet'])
 
             isNewWallet = true
@@ -171,6 +182,7 @@ ApplicationWindow {
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }
+
     }
 
 
@@ -189,8 +201,7 @@ ApplicationWindow {
     }
 
     function walletPath() {
-        var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
-                + persistentSettings.account_name;
+        var wallet_path = persistentSettings.wallet_path
         return wallet_path;
     }
 
@@ -309,8 +320,8 @@ ApplicationWindow {
         if (wallets.length === 0) {
             wallets = walletManager.findWallets(applicationDirectory);
         }
-        print(wallets);
-        return wallets.length > 0;
+        console.log("wallets found: ",wallets);
+        return wallets.length;
     }
 
 
@@ -423,6 +434,16 @@ ApplicationWindow {
         splash.close()
     }
 
+    // close wallet and show wizard
+    function showWizard(){
+
+        splashCounter = 0;
+        walletManager.closeWallet(currentWallet);
+        wizard.restart();
+        rootItem.state = "wizard"
+
+    }
+
 
     objectName: "appWindow"
     visible: true
@@ -439,11 +460,22 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
+        var numWalletsFound = walletsFound();
 
-        rootItem.state = walletsFound() ? "normal" : "wizard";
-        if (rootItem.state === "normal") {
-            initialize(persistentSettings)
+        if(!numWalletsFound) {
+            rootItem.state = "wizard"
+        } else {
+            rootItem.state = "normal"
+
+            // If more than 1 wallet found, open file dialog.
+            // TODO: implement prettier wallet picker
+            if(numWalletsFound > 1) {
+                openWalletFromFile();
+            } else {
+                initialize(persistentSettings);
+            }
         }
+
     }
 
     onRightPanelExpandedChanged: {
@@ -491,6 +523,24 @@ ApplicationWindow {
         onAccepted: {
             handleTransactionConfirmed()
         }
+    }
+
+    //Open Wallet from file
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: "file://" +moneroAccountsDir
+
+        onAccepted: {
+            console.log("You chose: " + walletManager.urlToLocalPath(fileDialog.fileUrl))
+            persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            initialize();
+        }
+        onRejected: {
+            console.log("Canceled")
+            rootItem.state = "wizard";
+        }
+
     }
 
     PasswordDialog {
@@ -728,6 +778,10 @@ ApplicationWindow {
             onUseMoneroClicked: {
                 rootItem.state = "normal" // TODO: listen for this state change in appWindow;
                 appWindow.initialize();
+            }
+            onOpenWalletFromFileClicked: {
+                rootItem.state = "normal" // TODO: listen for this state change in appWindow;
+                appWindow.openWalletFromFile();
             }
         }
 
