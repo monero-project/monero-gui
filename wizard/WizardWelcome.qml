@@ -45,13 +45,18 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-
-
     function onPageClosed(settingsObject) {
+
+        // set default language to first item if none selected
+        if(gridView.currentIndex === -1) {
+            gridView.currentIndex = 0
+        }
+
         var lang = languagesModel.get(gridView.currentIndex);
         settingsObject['language'] = lang.display_name;
         settingsObject['wallet_language'] = lang.wallet_language;
         settingsObject['locale'] = lang.locale;
+        console.log("Language chosen: ",lang.display_name)
         return true
     }
 
@@ -108,7 +113,15 @@ Item {
         // and set current language accordingly
         XmlRole { name: "isCurrent"; query: "@enabled/string()" }
 
-
+        onStatusChanged: {
+            if(status === XmlListModel.Ready){
+                console.log("languages availible: ",count);
+                if(count === 1){
+                    console.log("Skipping language page until more languages are availible")
+                    wizard.switchPage(true);
+                }
+            }
+        }
     }
 
     // Flags view
