@@ -316,12 +316,19 @@ ApplicationWindow {
 
 
     function walletsFound() {
+        if (persistentSettings.wallet_path.length > 0) {
+            var lastOpenedExists = walletManager.walletExists(persistentSettings.wallet_path);
+            if (lastOpenedExists) {
+                console.log("Last opened wallet exists in:",persistentSettings.wallet_path)
+            }
+         }
+
+        // Check if wallets exists in default path
         var wallets = walletManager.findWallets(moneroAccountsDir);
         if (wallets.length === 0) {
             wallets = walletManager.findWallets(applicationDirectory);
         }
-        console.log("wallets found: ",wallets);
-        return wallets.length;
+        return (wallets.length > 0 || lastOpenedExists);
     }
 
 
@@ -438,6 +445,7 @@ ApplicationWindow {
     function showWizard(){
         walletInitialized = false;
         splashCounter = 0;
+        // we can't close async here. Gui crashes if wallet is open
         walletManager.closeWallet(currentWallet);
         wizard.restart();
         rootItem.state = "wizard"
@@ -460,20 +468,12 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
-        var numWalletsFound = walletsFound();
 
-        if(!numWalletsFound) {
+        if(!walletsFound()) {
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
-
-            // If more than 1 wallet found, open file dialog.
-            // TODO: implement prettier wallet picker
-            if(numWalletsFound > 1) {
-                openWalletFromFile();
-            } else {
                 initialize(persistentSettings);
-            }
         }
 
     }
@@ -530,9 +530,9 @@ ApplicationWindow {
         id: fileDialog
         title: "Please choose a file"
         folder: "file://" +moneroAccountsDir
+        nameFilters: [ "Wallet files (*.keys)"]
 
         onAccepted: {
-            console.log("You chose: " + walletManager.urlToLocalPath(fileDialog.fileUrl))
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
             initialize();
         }
@@ -865,7 +865,6 @@ ApplicationWindow {
         }
     }
     onClosing: {
-        walletManager.closeWallet(currentWallet);
-        console.log("onClosing called");
+       //walletManager.closeWallet(currentWallet);
     }
 }
