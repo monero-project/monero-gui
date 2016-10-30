@@ -71,19 +71,21 @@ Item {
         // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
         // page submitted or b) delete it when program closed before reaching final page
 
-        var wallet_filename = oshelper.temporaryFilename();
-        if (typeof settingsObject.wallet === 'undefined') {
-            //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
-            var testnet = appWindow.persistentSettings.testnet;
-            var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
-                                                    testnet)
-            uiItem.wordsTextItem.memoText = wallet.seed
-            // saving wallet in "global" settings object
-            // TODO: wallet should have a property pointing to the file where it stored or loaded from
-            settingsObject.wallet = wallet
-        } else {
-            print("wallet already created. we just stepping back");
+        // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
+        if (typeof settingsObject.wallet !== 'undefined') {
+            settingsObject.wallet.destroy()
+            console.log("deleting wallet")
         }
+
+        var wallet_filename = oshelper.temporaryFilename();
+        //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+        var testnet = appWindow.persistentSettings.testnet;
+        var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
+                                                testnet)
+        uiItem.wordsTextItem.memoText = wallet.seed
+        // saving wallet in "global" settings object
+        // TODO: wallet should have a property pointing to the file where it stored or loaded from
+        settingsObject.wallet = wallet
         settingsObject.wallet_filename = wallet_filename
     }
 
