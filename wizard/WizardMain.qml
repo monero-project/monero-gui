@@ -28,6 +28,7 @@
 
 import QtQuick 2.2
 import Qt.labs.settings 1.0
+import QtQuick.Dialogs 1.2
 
 import "../components"
 
@@ -130,21 +131,31 @@ Rectangle {
          wizard.openWalletFromFileClicked();
     }
 
+    function createWalletPath(folder_path,account_name){
+
+        // Remove trailing slash - (default on windows and mac)
+        if (folder_path.substring(folder_path.length -1) === "/"){
+            folder_path = folder_path.substring(0,folder_path.length -1)
+        }
+
+        return folder_path + "/" + account_name + "/" + account_name
+    }
+
+    function walletExists(path){
+        if(walletManager.walletExists(path)){
+            walletExistsErrorDialog.open();
+            return true;
+        }
+        return false;
+    }
+
     //! actually writes the wallet
     function applySettings() {
         console.log("Here we apply the settings");
         // here we need to actually move wallet to the new location
         console.log(settings.wallet_full_path);
 
-
-        // Remove trailing slash - (default on windows and mac)
-        if (settings.wallet_path.substring(settings.wallet_path.length -1) === "/"){
-            settings.wallet_path = settings.wallet_path.substring(0,settings.wallet_path.length -1)
-        }
-
-        var new_wallet_filename = settings.wallet_path + "/"
-                + settings.account_name + "/"
-                + settings.account_name;
+        var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
 
         console.log("saving in wizard: "+ new_wallet_filename)
         // moving wallet files to the new destination, if user changed it
@@ -185,6 +196,13 @@ Rectangle {
         settings['auto_donations_amount'] = appWindow.persistentSettings.auto_donations_amount
     }
 
+    MessageDialog {
+        id: walletExistsErrorDialog
+        title: "Error"
+        text: qsTr("A wallet with same name already exists. Please change wallet name") + translationManager.emptyString
+        onAccepted: {
+        }
+    }
 
     Rectangle {
         id: nextButton

@@ -54,7 +54,8 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
-        return true;
+        var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
+        return !wizard.walletExists(walletFullPath);
     }
 
     function checkNextButton() {
@@ -85,9 +86,6 @@ Item {
         }
         settingsObject.wallet_filename = wallet_filename
     }
-
-
-
 
     WizardManageWalletUI {
         id: uiItem

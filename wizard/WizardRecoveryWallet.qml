@@ -55,6 +55,10 @@ Item {
         settingsObject['words'] = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
         settingsObject['restore_height'] = parseInt(uiItem.restoreHeight)
+        var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
+        if(wizard.walletExists(walletFullPath)){
+           return false
+        }
         return recoveryWallet(settingsObject)
     }
 
