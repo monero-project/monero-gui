@@ -194,7 +194,7 @@ Item {
                     height:page.buttonSize -30
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
-                    source: "qrc:///images/recoverWallet.png"
+                    source: "qrc:///images/openAccount.png"
                 }
 
                 MouseArea {
