@@ -31,37 +31,129 @@ import QtQuick.Controls 1.4
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Window 2.0
 
-// import "../components"
+import "../components" as MoneroComponents
 
-Dialog {
+Window {
     id: root
+    modality: Qt.ApplicationModal
+    flags: Qt.Window | Qt.FramelessWindowHint
     property alias password: passwordInput.text
-    standardButtons: StandardButton.Ok + StandardButton.Cancel
+
+    // same signals as Dialog has
+    signal accepted()
+    signal rejected()
+
+
+    function open() {
+        show()
+    }
+
+    // TODO: implement without hardcoding sizes
+    width: 480
+    height: 200
+
     ColumnLayout {
-        id: column
-        anchors.fill: parent
+        id: mainLayout
+        spacing: 10
+        anchors { fill: parent; margins: 35 }
 
-        Label {
-            text: qsTr("Please enter wallet password")
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-            font.family: "Arial"
-            font.pixelSize: 32
+        ColumnLayout {
+            id: column
+            //anchors {fill: parent; margins: 16 }
+            Layout.alignment: Qt.AlignHCenter
+
+            Label {
+                text: qsTr("Please enter wallet password")
+                Layout.alignment: Qt.AlignHCenter
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: 24
+                font.family: "Arial"
+                color: "#555555"
+            }
+
+            TextField {
+                id : passwordInput
+                focus:true
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: TextInput.AlignHCenter
+                verticalAlignment: TextInput.AlignVCenter
+                font.family: "Arial"
+                font.pixelSize: 32
+                echoMode: TextInput.Password
+                style: TextFieldStyle {
+                    renderType: Text.NativeRendering
+                    textColor: "#35B05A"
+                    passwordCharacter: "•"
+                    // no background
+                    background: Rectangle {
+                        radius: 0
+                        border.width: 0
+                    }
+                }
+
+            }
+            // underline
+            Rectangle {
+                height: 1
+                color: "#DBDBDB"
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                anchors.bottomMargin: 3
+
+            }
+            // padding
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                height: 10
+                opacity: 0
+                color: "black"
+            }
         }
+        // Ok/Cancel buttons
+        RowLayout {
+            id: buttons
+            spacing: 60
+            Layout.alignment: Qt.AlignHCenter
 
-        TextField {
-            id : passwordInput
+            MoneroComponents.StandardButton {
+                id: okButton
+                width: 120
+                fontSize: 14
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Ok")
 
-            echoMode: TextInput.Password
-            focus: true
-            Layout.fillWidth: true
-            font.family: "Arial"
-            font.pixelSize: 24
-            style: TextFieldStyle {
-                passwordCharacter: "•"
+                onClicked: {
+                    accepted()
+                    close()
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                id: cancelButton
+                width: 120
+                fontSize: 14
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Cancel")
+                onClicked: {
+                    rejected()
+                    close()
+                }
             }
         }
     }
 }
+
+
 

@@ -495,7 +495,7 @@ ApplicationWindow {
 
     PasswordDialog {
         id: passwordDialog
-        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+
         onAccepted: {
             appWindow.currentWallet = null
             appWindow.initialize();
@@ -503,9 +503,7 @@ ApplicationWindow {
         onRejected: {
             appWindow.enableUI(false)
         }
-        onDiscard: {
-            appWindow.enableUI(false)
-        }
+
     }
 
 
