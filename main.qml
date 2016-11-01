@@ -56,6 +56,7 @@ ApplicationWindow {
     property int splashCounter: 0
     property bool isNewWallet: false
     property int restoreHeight:0
+    property bool daemonSynced: false
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -241,9 +242,20 @@ ApplicationWindow {
         if (splash.visible) {
             hideProcessingSplash()
         }
+
+        // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
+
+        // Daemon connected
+        leftPanel.networkStatus.connected = currentWallet.connected
+
+        // Daemon fully synced
+        // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
+        daemonSynced = (currentWallet.connected && dCurrentBlock >= dTargetBlock)
+
+
 
         // Store wallet after every refresh.
         if (currentWallet.blockChainHeight() > 1){
@@ -266,7 +278,6 @@ ApplicationWindow {
             walletInitialized = true
         }
 
-        leftPanel.networkStatus.connected = currentWallet.connected
 
         onWalletUpdate();
     }
