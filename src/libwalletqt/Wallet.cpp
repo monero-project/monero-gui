@@ -12,7 +12,8 @@
 #include <QTimer>
 
 namespace {
-    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 60;
+    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
+    static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 60;
 }
 
 class WalletListenerImpl : public  Bitmonero::WalletListener
@@ -169,7 +170,13 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
-    m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+
+    if (m_daemonBlockChainTargetHeight == 0
+            || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
+        m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+        m_daemonBlockChainTargetHeightTime.restart();
+    }
+
     return m_daemonBlockChainTargetHeight;
 }
 
@@ -261,6 +268,8 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     , m_historyModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
+    , m_daemonBlockChainTargetHeight(0)
+    , m_daemonBlockChainTargetHeightTtl(DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
