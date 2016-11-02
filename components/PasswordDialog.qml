@@ -37,7 +37,7 @@ import QtQuick.Controls.Styles 1.4
 Dialog {
     id: root
     property alias password: passwordInput.text
-    standardButtons: StandardButton.Ok + StandardButton.Cancel
+    standardButtons:  StandardButton.Cancel + StandardButton.Ok
     ColumnLayout {
         id: column
         anchors.fill: parent
