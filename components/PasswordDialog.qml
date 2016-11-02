@@ -77,7 +77,7 @@ Window {
 
             TextField {
                 id : passwordInput
-                focus:true
+                focus: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 horizontalAlignment: TextInput.AlignHCenter
@@ -85,6 +85,8 @@ Window {
                 font.family: "Arial"
                 font.pixelSize: 32
                 echoMode: TextInput.Password
+                KeyNavigation.tab: okButton
+
                 style: TextFieldStyle {
                     renderType: Text.NativeRendering
                     textColor: "#35B05A"
@@ -95,6 +97,16 @@ Window {
                         border.width: 0
                     }
                 }
+                Keys.onReturnPressed: {
+                    root.accepted()
+                    root.close()
+                }
+
+                Keys.onEscapePressed: {
+                    root.rejected()
+                    root.close()
+                }
+
 
             }
             // underline
@@ -130,10 +142,10 @@ Window {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Ok")
-
+                KeyNavigation.tab: cancelButton
                 onClicked: {
-                    accepted()
-                    close()
+                    root.accepted()
+                    root.close()
                 }
             }
 
@@ -146,13 +158,15 @@ Window {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Cancel")
+                KeyNavigation.tab: passwordInput
                 onClicked: {
-                    rejected()
-                    close()
+                    root.rejected()
+                    root.close()
                 }
             }
         }
     }
+
 }
 
 
