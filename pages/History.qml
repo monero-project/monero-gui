@@ -394,8 +394,8 @@ Rectangle {
                     model.sortRole = TransactionHistoryModel.TransactionPaymentIdRole
                     break;
                 case 1:
-                    // Date;
-                    model.sortRole = TransactionHistoryModel.TransactionDateRole
+                    // Date (actually sort by timestamp as we want to have transactions sorted within one day as well);
+                    model.sortRole = TransactionHistoryModel.TransactionTimeStampRole
                     break;
                 case 2:
                     // BlockHeight;
