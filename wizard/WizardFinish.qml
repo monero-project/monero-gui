@@ -55,11 +55,11 @@ Item {
             + trStart + qsTr("Account name") + trMiddle + wizard.settings["account_name"] + trEnd
             + trStart + qsTr("Words") + trMiddle + wizard.settings["wallet"].seed + trEnd
             + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
-            + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
-            + (autoDonationEnabled
-                ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
-                : "")
-            + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
+            // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
+            // + (autoDonationEnabled
+                // ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
+                // : "")
+            // + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
             + trStart + qsTr("Daemon address") + trMiddle + wizard.settings["daemon_address"] + trEnd
             + trStart + qsTr("Testnet") + trMiddle + testnetText + trEnd
             + (restoreHeightEnabled
