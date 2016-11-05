@@ -52,6 +52,9 @@ Rectangle {
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
 
+    // Disable transfer page if daemon isnt fully synced
+    enabled: (currentView !== transferView || appWindow.daemonSynced)
+
     color: "#F0EEEE"
 
     onCurrentViewChanged: {
@@ -279,14 +282,13 @@ Rectangle {
         color: "#DBDBDB"
 
     }
-
-
-    // indicates disabled state
-//    Desaturate {
-//        anchors.fill: parent
-//        source: parent
-//        desaturation: root.enabled ? 0.0 : 1.0
-//    }
+    Rectangle {
+        id:desaturate
+        color:"black"
+        anchors.fill: parent
+        opacity: 0.1
+        visible: (root.enabled)? 0 : 1;
+    }
 
 
     /* connect "payment" click */
