@@ -41,11 +41,28 @@ Rectangle {
     property var model
 
     color: "#F0EEEE"
+
+    function getSelectedAmount() {
+      var total = 0
+      var count = model.rowCount()
+      for (var i = 0; i < count; ++i) {
+          var idx = model.index(i, 0)
+          var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
+          var amount = model.data(idx, TransactionHistoryModel.TransactionAmountRole);
+          if (isout)
+              total -= amount
+          else
+              total += amount
+      }
+      return count + qsTr(" selected: ") + total;
+    }
+
     onModelChanged: {
         if (typeof model !== 'undefined') {
             // setup date filter scope according to real transactions
             fromDatePicker.currentDate = model.transactionHistory.firstDateTime
             toDatePicker.currentDate = model.transactionHistory.lastDateTime
+            selectedAmount.text = getSelectedAmount()
         }
     }
 
@@ -64,6 +81,18 @@ Rectangle {
         color: "#4A4949"
         text: qsTr("Filter transaction history") + translationManager.emptyString
     }
+
+    Label {
+        id: selectedAmount
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
+        text: getSelectedAmount()
+        fontSize: 14
+        tipText: qsTr("<b>Total amount of selected payments</b>") + translationManager.emptyString
+    }
+
 
     // Filter by Address input (senseless, removing)
     /*
@@ -213,6 +242,7 @@ Rectangle {
                 model.directionFilter = directionFilter
             }
 
+            selectedAmount.text = getSelectedAmount()
 
         }
     }
