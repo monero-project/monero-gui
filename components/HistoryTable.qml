@@ -35,6 +35,7 @@ ListView {
     clip: true
     boundsBehavior: ListView.StopAtBounds
     property var previousItem
+    property int rowSpacing: 12
 
     footer: Rectangle {
         height: 127
@@ -53,7 +54,7 @@ ListView {
 
     delegate: Rectangle {
         id: delegate
-        height: 114
+        height: 144
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
         z: listView.count - index
@@ -107,11 +108,13 @@ ListView {
             }
             */
             // -- address (in case outgoing transaction) - N/A in case of incoming
-            Text {
+            TextEdit {
                 id: addressText
+                readOnly: true
+                selectByMouse: true
                 anchors.verticalCenter: dot.verticalCenter
                 width: parent.width - x - 12
-                elide: Text.ElideRight
+                //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 14
                 color: "#545454"
@@ -121,7 +124,7 @@ ListView {
         }
 
         Row {
-            // - Payment ID + block height row
+            // - Payment ID
             id: row2
             anchors.left: parent.left
             anchors.right: parent.right
@@ -141,17 +144,30 @@ ListView {
                 text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
             }
             // -- "PaymentID" value
-            Text {
+            TextEdit {
+                readOnly: true
+                selectByMouse: true
                 id: paymentIdValue
                 width: 136
                 anchors.bottom: parent.bottom
-                elide: Text.ElideRight
+                //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize:13
                 font.letterSpacing: -1
                 color: "#545454"
                 text: paymentId
+
             }
+        }
+        Row {
+            // block height row
+            id: row3
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: row2.bottom
+            anchors.topMargin: rowSpacing
+            anchors.leftMargin: 26
+
             // -- "BlockHeight" title
             Text {
                 id: blockHeghtTitle
@@ -164,10 +180,12 @@ ListView {
                 text:  qsTr("BlockHeight:")  + translationManager.emptyString
             }
             // -- "BlockHeight" value
-            Text {
+            TextEdit {
+                readOnly: true
+                selectByMouse: true
                 width: 85
                 anchors.bottom: parent.bottom
-                elide: Text.ElideRight
+                //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 13
                 font.letterSpacing: -1
@@ -176,13 +194,13 @@ ListView {
             }
         }
 
-
         // -- "Date", "Balance" and "Amound" section
         Row {
+            id: row4
+            anchors.top: row3.bottom
             anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 11
             spacing: 12
+            anchors.topMargin: rowSpacing
 
             Item { //separator
                 width: 14
