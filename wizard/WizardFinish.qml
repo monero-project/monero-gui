@@ -38,19 +38,37 @@ Item {
     onOpacityChanged: visible = opacity !== 0
 
     function buildSettingsString() {
-        var str = "<br>" + qsTr("<b>Language:</b> ") + wizard.settings['language'] + "<br>"
-            + qsTr("<b>Account name:</b> ") + wizard.settings['account_name'] + "<br>"
-            + qsTr("<b>Words:</b> ") + wizard.settings['wallet'].seed + "<br>"
-            + qsTr("<b>Wallet Path: </b>") + wizard.settings['wallet_path'] + "<br>"
-            + qsTr("<b>Enable auto donation: </b>") + wizard.settings['auto_donations_enabled'] + "<br>"
-            + qsTr("<b>Auto donation amount: </b>") + wizard.settings['auto_donations_amount'] + "<br>"
-            + qsTr("<b>Allow background mining: </b>") + wizard.settings['allow_background_mining'] + "<br>"
-            + qsTr("<b>Daemon address: </b>") + wizard.settings['daemon_address'] + "<br>"
-            + qsTr("<b>testnet: </b>") + wizard.settings['testnet'] + "<br>"
-            + (wizard.settings['restore_height'] === undefined ? "" : qsTr("<b>Restore height: </b>") + wizard.settings['restore_height']) + "<br>"
-            + translationManager.emptyString
-        return str;
+        var trStart = '<tr><td style="padding-top:5px;"><b>',
+            trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
+            trEnd = "</td></tr>",
+            autoDonationEnabled = wizard.settings['auto_donations_enabled'] === true,
+            autoDonationText = autoDonationEnabled ? qsTr("Enabled") : qsTr("Disabled"),
+            autoDonationAmount = wizard.settings["auto_donations_amount"] + " %",
+            backgroundMiningEnabled = wizard.settings["allow_background_mining"] === true,
+            backgroundMiningText = backgroundMiningEnabled ? qsTr("Enabled") : qsTr("Disabled"),
+            testnetEnabled = wizard.settings['testnet'] === true,
+            testnetText = testnetEnabled ? qsTr("Enabled") : qsTr("Disabled"),
+            restoreHeightEnabled = wizard.settings['restore_height'] !== undefined;
+
+        return "<table>"
+            + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
+            + trStart + qsTr("Account name") + trMiddle + wizard.settings["account_name"] + trEnd
+            + trStart + qsTr("Words") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
+            // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
+            // + (autoDonationEnabled
+                // ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
+                // : "")
+            // + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
+            + trStart + qsTr("Daemon address") + trMiddle + wizard.settings["daemon_address"] + trEnd
+            + trStart + qsTr("Testnet") + trMiddle + testnetText + trEnd
+            + (restoreHeightEnabled
+                ? trStart + qsTr("Restore height") + trMiddle + wizard.settings['restore_height'] + trEnd
+                : "")
+            + "</table>"
+            + translationManager.emptyString;
     }
+
     function updateSettingsSummary() {
         settingsText.text = qsTr("An overview of your Monero configuration is below:") + translationManager.emptyString
                             + "<br>"
@@ -115,10 +133,10 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 16
             wrapMode: Text.Wrap
             textFormat: Text.RichText
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Text.AlignHLeft
             //renderType: Text.NativeRendering
             color: "#4A4646"
         }
