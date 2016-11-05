@@ -37,7 +37,6 @@ import "../components"
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
-
     property var daemonAddress
 
     color: "#F0EEEE"
@@ -268,6 +267,44 @@ Rectangle {
                 onClicked: {
                     console.log("closing wallet button clicked")
                     appWindow.showWizard();
+                }
+            }
+        }
+
+        RowLayout {
+            Label {
+                id: manageDaemonLabel
+                color: "#4A4949"
+                text: qsTr("Manage daemon") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            StandardButton {
+                visible: true
+                id: startDaemonButton
+                width: 110
+                text: qsTr("Start daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonManager.start();
+                }
+            }
+
+            StandardButton {
+                visible: false
+                id: stopDaemonButton
+                width: 110
+                text: qsTr("Stop daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+
+                    //daemonManager.stop();
                 }
             }
         }
