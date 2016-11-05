@@ -318,6 +318,18 @@ ApplicationWindow {
         }
 
 
+
+
+       // daemonManager.daemonConsole();
+       // console.log("Daemon runnnig: ",daemonManager.running());
+
+        if(!daemonManager.running()){
+            daemonManagerDialog.open();
+        }
+
+
+
+
         onWalletUpdate();
     }
 
@@ -721,6 +733,10 @@ ApplicationWindow {
 
     }
 
+    DaemonManagerDialog {
+        id: daemonManagerDialog
+
+    }
 
     ProcessingSplash {
         id: splash
