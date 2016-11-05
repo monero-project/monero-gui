@@ -90,8 +90,8 @@ Window {
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     daemonManager.start();
-                    root.accepted()
                     root.close()
+                   // root.accepted()
                 }
             }
 
