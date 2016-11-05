@@ -107,7 +107,7 @@ TODO
 
 7. Before running the GUI, it's recommended that you have the Monero daemon running in the background.
 
-	`./monerod --rpc-bind-port 38081`
+	`./monerod`
 
 8. Run the GUI client.
 
