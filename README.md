@@ -68,49 +68,50 @@ TODO
 
 (Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
 
-1. Install Bitmonero dependencies.
+1. Install Monero dependencies.
 
-`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
 
-2. Go to the repository where the most recent version is.
+2. Grab an up-to-date copy of the monero-core repository.
 
-`git clone https://github.com/monero-project/monero-core.git`
+	`git clone https://github.com/monero-project/monero-core.git`
 
 3. Go into the repository.
 
-`cd monero-core`
+	`cd monero-core`
 
-4. Use the script to compile the bitmonero libs necessary to run the GUI.
+4. Use the script to compile the Monero libs necessary to run the GUI.
 
-`./get_libwallet_api.sh`
+	`./get_libwallet_api.sh`
+    
 
 5. Install the GUI dependencies.
 
-  a) For Ubuntu 16.04 i386
+  - For Ubuntu 16.04 i386
 
-`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
+	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
 
-  b) For Ubuntu 16.04 x64
+  - For Ubuntu 16.04 x64
   
-`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
+     `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
 
-  c) For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+  - For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
 
-`sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
+     `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
 
 6. Build the GUI.
 
-`qmake`
+	`qmake`
 
-`make`
+	`make`
 
-7. Before running the GUI, it's recommended you have a copy of bitmonero running in the background.
+7. Before running the GUI, it's recommended that you have the Monero daemon running in the background.
 
-`./bitmonerod --rpc-bind-port 38081`
+	`./monerod --rpc-bind-port 38081`
 
 8. Run the GUI client.
 
-`./release/bin/monero-core`
+	`./release/bin/monero-core`
 
 ### On OS X:
 
