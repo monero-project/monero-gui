@@ -49,7 +49,7 @@ Rectangle {
     property Settings settingsView: Settings { }
 
 
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
+    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority, string description)
     signal generatePaymentIdInvoked()
 
     // Disable transfer page if daemon isnt fully synced
@@ -297,7 +297,7 @@ Rectangle {
         target: transferView
         onPaymentClicked : {
             console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority)
+            paymentClicked(address, paymentId, amount, mixinCount, priority, description)
         }
     }
 }

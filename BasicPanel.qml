@@ -47,13 +47,13 @@ Rectangle {
     property alias unlockedBalanceText : availableBalanceText.text;
     // repeating signal to the outside world
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
-                          int priority)
+                          int priority, string description)
 
     Connections {
         target: transferBasic
         onPaymentClicked: {
             console.log("BasicPanel: paymentClicked")
-            root.paymentClicked(address, paymentId, amount, mixinCount, priority)
+            root.paymentClicked(address, paymentId, amount, mixinCount, priority, description)
         }
     }
 

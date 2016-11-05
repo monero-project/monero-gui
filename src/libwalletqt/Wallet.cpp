@@ -260,6 +260,15 @@ void Wallet::setPaymentId(const QString &paymentId)
     m_paymentId = paymentId;
 }
 
+bool Wallet::setUserNote(const QString &txid, const QString &note)
+{
+  return m_walletImpl->setUserNote(txid.toStdString(), note.toStdString());
+}
+
+QString Wallet::getUserNote(const QString &txid) const
+{
+  return QString::fromStdString(m_walletImpl->getUserNote(txid.toStdString()));
+}
 
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent)

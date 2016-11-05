@@ -34,7 +34,7 @@ import "../components"
 Rectangle {
     id: root
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
-                          int priority)
+                          int priority, string description)
 
     color: "#F0EEEE"
 
@@ -277,7 +277,7 @@ Rectangle {
             addressLine.text = addressLine.text.trim()
             paymentIdLine.text = paymentIdLine.text.trim()
             root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                           priority)
+                           priority, descriptionLine.text)
 
         }
     }
