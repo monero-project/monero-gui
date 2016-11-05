@@ -112,6 +112,7 @@
         <file>wizard/WizardMemoTextInput.qml</file>
         <file>wizard/utils.js</file>
         <file>pages/Receive.qml</file>
+        <file>pages/TxKey.qml</file>
         <file>components/IconButton.qml</file>
         <file>lang/flags/italy.png</file>
         <file>components/PasswordDialog.qml</file>

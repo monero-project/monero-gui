@@ -149,6 +149,7 @@ ApplicationWindow {
 
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
+        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
         // currentWallet is defined on daemon address change - close/reopen
         // TODO: strict comparison here (!==) causes crash after passwordDialog on previously crashed unsynced wallets
@@ -432,6 +433,53 @@ ApplicationWindow {
         currentWallet.disposeTransaction(transaction)
     }
 
+    // called on "checkPayment"
+    function handleCheckPayment(address, txid, txkey) {
+        console.log("Checking payment: ")
+        console.log("\taddress: ", address,
+                    ", txid: ", txid,
+                    ", txkey: ", txkey);
+
+        var result = walletManager.checkPayment(address, txid, txkey, persistentSettings.daemon_address);
+        var results = result.split("|");
+        if (results.length < 4) {
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = "internal error";
+            informationPopup.icon = StandardIcon.Critical
+            informationPopup.open()
+            return
+        }
+        var success = results[0] == "true";
+        var received = results[1]
+        var height = results[2]
+        var error = results[3]
+        if (success) {
+            informationPopup.title  = qsTr("Payment check") + translationManager.emptyString;
+            informationPopup.icon = StandardIcon.Information
+            if (received > 0) {
+                received = received / 1e12
+                if (height == 0) {
+                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
+                }
+                else {
+                    var dCurrentBlock = currentWallet.daemonBlockChainHeight();
+                    var confirmations = dCurrentBlock - height
+                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmations").arg(received).arg(confirmations);
+                }
+            }
+            else {
+                informationPopup.text = qsTr("This address received nothing");
+            }
+        }
+        else {
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = error;
+            informationPopup.icon = StandardIcon.Critical
+        }
+        informationPopup.open()
+    }
+
+
     // blocks UI if wallet can't be opened or no connection to the daemon
     function enableUI(enable) {
         middlePanel.enabled = enable;
@@ -628,6 +676,7 @@ ApplicationWindow {
             onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
             onReceiveClicked: middlePanel.state = "Receive"
+            onTxkeyClicked: middlePanel.state = "TxKey"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
             onSettingsClicked: middlePanel.state = "Settings"

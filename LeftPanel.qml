@@ -42,6 +42,7 @@ Rectangle {
     signal historyClicked()
     signal transferClicked()
     signal receiveClicked()
+    signal txkeyClicked()
     signal settingsClicked()
     signal addressBookClicked()
     signal miningClicked()
@@ -54,6 +55,7 @@ Rectangle {
         else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
+        else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
 
         menuColumn.previousButton.checked = true
@@ -253,6 +255,21 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = receiveButton
                     panel.receiveClicked()
+                }
+            }
+
+            // ------------- TxKey tab ---------------
+            MenuButton {
+                id: txkeyButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Tx Key") + translationManager.emptyString
+                symbol: qsTr("K") + translationManager.emptyString
+                dotColor: "#AAFFBB"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = txkeyButton
+                    panel.txkeyClicked()
                 }
             }
 
