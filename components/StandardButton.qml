@@ -41,6 +41,7 @@ Item {
     property alias text: label.text
     signal clicked()
 
+
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -51,6 +52,9 @@ Item {
             parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
                            : Qt.lighter(parent.shadowReleasedColor)
         }
+        border.color: Qt.darker(parent.releasedColor)
+        border.width: parent.focus ? 1 : 0
+
     }
 
     Rectangle {
@@ -64,6 +68,8 @@ Item {
 
         }
         //radius: 4
+
+
     }
 
     Text {
@@ -92,4 +98,7 @@ Item {
         anchors.fill: parent
         onClicked: parent.clicked()
     }
+
+    Keys.onSpacePressed: clicked()
+    Keys.onReturnPressed: clicked()
 }

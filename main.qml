@@ -546,7 +546,7 @@ ApplicationWindow {
 
     PasswordDialog {
         id: passwordDialog
-        standardButtons: StandardButton.Ok  + StandardButton.Cancel
+
         onAccepted: {
             appWindow.currentWallet = null
             appWindow.initialize();
@@ -555,9 +555,7 @@ ApplicationWindow {
             //appWindow.enableUI(false)
             rootItem.state = "wizard"
         }
-        onDiscard: {
-            appWindow.enableUI(false)
-        }
+
     }
 
 
