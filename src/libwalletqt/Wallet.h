@@ -172,7 +172,9 @@ private:
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
+    mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
+    int     m_daemonBlockChainTargetHeightTtl;
 };
 
 
