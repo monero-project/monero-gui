@@ -390,11 +390,12 @@ ApplicationWindow {
             // here we show confirmation popup;
 
             transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n\n")
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
                         + qsTr("\nAddress: ") + address
                         + qsTr("\nPayment ID: ") + paymentId
-                        + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + qsTr("\n\nMixin: ") + mixinCount
                         + translationManager.emptyString
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
