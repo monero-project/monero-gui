@@ -43,6 +43,8 @@ Item {
 
     function onPageOpened(settingsObject) {
         checkNextButton();
+        // Empty seedText when restoring multiple times in one session
+        uiItem.wordsTextItem.memoText = "";
     }
 
     function checkNextButton() {
@@ -54,7 +56,12 @@ Item {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
-        settingsObject['restore_height'] = parseInt(uiItem.restoreHeight)
+        var restoreHeight = parseInt(uiItem.restoreHeight);
+        settingsObject['restore_height'] = isNaN(restoreHeight)? 0 : restoreHeight
+        var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
+        if(wizard.walletExists(walletFullPath)){
+           return false
+        }
         return recoveryWallet(settingsObject)
     }
 
@@ -76,7 +83,7 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        accountNameText: qsTr("My account name") + translationManager.emptyString
+        accountNameText: defaultAccountName
         titleText: qsTr("We're ready to recover your account") + translationManager.emptyString
         wordsTextTitle: qsTr("Please enter your 25 word private key") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: false

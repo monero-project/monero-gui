@@ -116,12 +116,21 @@ int main(int argc, char *argv[])
 #endif
 
     if (!moneroAccountsRootDir.empty()) {
-        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero Accounts";
-        QDir tempDir;
-        tempDir.mkpath(moneroAccountsDir);
+        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
         engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
     }
 
+
+    // Get default account name
+    QString accountName = qgetenv("USER"); // mac/linux
+    if (accountName.isEmpty()){
+        accountName = qgetenv("USERNAME"); // Windows
+    }
+    if (accountName.isEmpty()) {
+        accountName = "My monero Account";
+    }
+
+    engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     QObject *rootObject = engine.rootObjects().first();

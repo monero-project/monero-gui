@@ -130,6 +130,12 @@ ApplicationWindow {
 
     }
 
+    function openWalletFromFile(){
+        persistentSettings.restore_height = 0
+        persistentSettings.is_recovering = false
+        appWindow.password = ""
+        fileDialog.open();
+    }
 
     function initialize() {
         console.log("initializing..")
@@ -148,6 +154,12 @@ ApplicationWindow {
         if (currentWallet != undefined) {
             console.log("closing currentWallet")
             walletManager.closeWallet(currentWallet);
+        } else {
+
+            // set page to transfer if not changing daemon
+            middlePanel.state = "Transfer";
+            leftPanel.selectItem(middlePanel.state)
+
         }
 
         // wallet already opened with wizard, we just need to initialize it
@@ -158,7 +170,6 @@ ApplicationWindow {
                 restoreHeight = persistentSettings.restore_height
             }
 
-            console.log("using wizard wallet")
             connectWallet(wizard.settings['wallet'])
 
             isNewWallet = true
@@ -171,6 +182,7 @@ ApplicationWindow {
             walletManager.openWalletAsync(wallet_path, appWindow.password,
                                               persistentSettings.testnet);
         }
+
     }
 
 
@@ -189,8 +201,7 @@ ApplicationWindow {
     }
 
     function walletPath() {
-        var wallet_path = persistentSettings.wallet_path + "/" + persistentSettings.account_name + "/"
-                + persistentSettings.account_name;
+        var wallet_path = persistentSettings.wallet_path
         return wallet_path;
     }
 
@@ -305,12 +316,19 @@ ApplicationWindow {
 
 
     function walletsFound() {
+        if (persistentSettings.wallet_path.length > 0) {
+            var lastOpenedExists = walletManager.walletExists(persistentSettings.wallet_path);
+            if (lastOpenedExists) {
+                console.log("Last opened wallet exists in:",persistentSettings.wallet_path)
+            }
+         }
+
+        // Check if wallets exists in default path
         var wallets = walletManager.findWallets(moneroAccountsDir);
         if (wallets.length === 0) {
             wallets = walletManager.findWallets(applicationDirectory);
         }
-        print(wallets);
-        return wallets.length > 0;
+        return (wallets.length > 0 || lastOpenedExists);
     }
 
 
@@ -423,6 +441,17 @@ ApplicationWindow {
         splash.close()
     }
 
+    // close wallet and show wizard
+    function showWizard(){
+        walletInitialized = false;
+        splashCounter = 0;
+        // we can't close async here. Gui crashes if wallet is open
+        walletManager.closeWallet(currentWallet);
+        wizard.restart();
+        rootItem.state = "wizard"
+
+    }
+
 
     objectName: "appWindow"
     visible: true
@@ -440,10 +469,13 @@ ApplicationWindow {
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
 
-        rootItem.state = walletsFound() ? "normal" : "wizard";
-        if (rootItem.state === "normal") {
-            initialize(persistentSettings)
+        if(!walletsFound()) {
+            rootItem.state = "wizard"
+        } else {
+            rootItem.state = "normal"
+                initialize(persistentSettings);
         }
+
     }
 
     onRightPanelExpandedChanged: {
@@ -493,6 +525,24 @@ ApplicationWindow {
         }
     }
 
+    //Open Wallet from file
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: "file://" +moneroAccountsDir
+        nameFilters: [ "Wallet files (*.keys)"]
+
+        onAccepted: {
+            persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            initialize();
+        }
+        onRejected: {
+            console.log("Canceled")
+            rootItem.state = "wizard";
+        }
+
+    }
+
     PasswordDialog {
         id: passwordDialog
         standardButtons: StandardButton.Ok  + StandardButton.Cancel
@@ -501,7 +551,8 @@ ApplicationWindow {
             appWindow.initialize();
         }
         onRejected: {
-            appWindow.enableUI(false)
+            //appWindow.enableUI(false)
+            rootItem.state = "wizard"
         }
         onDiscard: {
             appWindow.enableUI(false)
@@ -729,6 +780,10 @@ ApplicationWindow {
                 rootItem.state = "normal" // TODO: listen for this state change in appWindow;
                 appWindow.initialize();
             }
+            onOpenWalletFromFileClicked: {
+                rootItem.state = "normal" // TODO: listen for this state change in appWindow;
+                appWindow.openWalletFromFile();
+            }
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
@@ -810,7 +865,6 @@ ApplicationWindow {
         }
     }
     onClosing: {
-        walletManager.closeWallet(currentWallet);
-        console.log("onClosing called");
+       //walletManager.closeWallet(currentWallet);
     }
 }
