@@ -11,7 +11,9 @@ if [ -z $BUILD_TYPE ]; then
     BUILD_TYPE=Release
 fi
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
-CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+if test -z "$CPU_CORE_COUNT"; then
+  CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+fi
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
