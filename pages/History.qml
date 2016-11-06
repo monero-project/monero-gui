@@ -229,10 +229,12 @@ Rectangle {
             model.paymentIdFilter = paymentIdLine.text
             model.dateFromFilter  = fromDatePicker.currentDate
             model.dateToFilter    = toDatePicker.currentDate
+
             if (advancedFilteringCheckBox.checked) {
                 if (amountFromLine.text.length) {
                     model.amountFromFilter = parseFloat(amountFromLine.text)
                 }
+
                 if (amountToLine.text.length) {
                     model.amountToFilter = parseFloat(amountToLine.text)
                 }
@@ -243,7 +245,6 @@ Rectangle {
             }
 
             selectedAmount.text = getSelectedAmount()
-
         }
     }
 
@@ -315,6 +316,15 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         width: 156
+        validator: DoubleValidator {
+            locale: "C"
+            notation: DoubleValidator.StandardNotation
+            bottom: 0.0
+            top: {
+                console.log("top");
+                parseFloat(amountToLine.text)
+            }
+        }
     }
 
     Label {
@@ -336,6 +346,15 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         width: 156
+        validator: DoubleValidator {
+            locale: "C"
+            notation: DoubleValidator.StandardNotation
+            bottom: {
+                console.log("Botton")
+                parseFloat(amountFromLine.text)
+            }
+        }
+
     }
 
     Item {
