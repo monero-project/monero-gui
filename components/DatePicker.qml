@@ -35,6 +35,10 @@ Item {
     property bool expanded: false
     property date currentDate
     property bool showCurrentDate: true
+    property color backgroundColor : "#FFFFFF"
+    property color errorColor : "#FFDDDD"
+    property bool error: false
+
     height: 37
     width: 156
 
@@ -56,7 +60,6 @@ Item {
     Item {
         id: head
         anchors.fill: parent
-
         Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
@@ -64,6 +67,7 @@ Item {
             //radius: 4
             y: 0
             color: "#DBDBDB"
+
         }
 
         Rectangle {
@@ -74,7 +78,7 @@ Item {
             anchors.rightMargin: datePicker.expanded ? 1 : 0
             //radius: 4
             y: 1
-            color: "#FFFFFF"
+            color: datePicker.error ? datePicker.errorColor : datePicker.backgroundColor
         }
 
         Item {
