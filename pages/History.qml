@@ -66,6 +66,20 @@ Rectangle {
         }
     }
 
+    function onFilterChanged() {
+        var datesValid = fromDatePicker.currentDate <= toDatePicker.currentDate
+        var amountsValid = amountFromLine.text === "" ? true :
+                            amountToLine.text === "" ? true:
+                                parseFloat(amountFromLine.text) <= parseFloat(amountToLine.text)
+
+        // reset error state if amount filter valid
+        if (amountsValid) {
+            amountFromLine.error = amountToLine.error = false
+        }
+
+        filterButton.enabled = datesValid && amountsValid
+    }
+
 
     Text {
         id: filterHeaderText
@@ -141,6 +155,9 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
         placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+        validator: RegExpValidator {
+            regExp: /[0-9a-fA-F]+/
+        }
 
 
     }
@@ -190,6 +207,10 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         z: 2
+        onCurrentDateChanged: {
+            error = currentDate > toDatePicker.currentDate
+            onFilterChanged()
+        }
     }
 
     // DateTo picker
@@ -211,7 +232,13 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 5
         z: 2
+        onCurrentDateChanged: {
+            error = currentDate < fromDatePicker.currentDate
+            onFilterChanged()
+        }
     }
+
+
 
     StandardButton {
         id: filterButton
@@ -226,9 +253,15 @@ Rectangle {
         pressedColor: "#4D0051"
         onClicked:  {
             // Apply filter here;
+
             model.paymentIdFilter = paymentIdLine.text
-            model.dateFromFilter  = fromDatePicker.currentDate
-            model.dateToFilter    = toDatePicker.currentDate
+
+            if (fromDatePicker.currentDate > toDatePicker.currentDate) {
+                console.error("Invalid date filter set: ", fromDatePicker.currentDate, toDatePicker.currentDate)
+            } else {
+                model.dateFromFilter  = fromDatePicker.currentDate
+                model.dateToFilter    = toDatePicker.currentDate
+            }
 
             if (advancedFilteringCheckBox.checked) {
                 if (amountFromLine.text.length) {
@@ -325,7 +358,14 @@ Rectangle {
         validator: DoubleValidator {
             locale: "C"
             notation: DoubleValidator.StandardNotation
+            bottom: 0
         }
+        onTextChanged: {
+            // indicating error
+            amountFromLine.error = amountFromLine.text === "" ? false : parseFloat(amountFromLine.text) > parseFloat(amountToLine.text)
+            onFilterChanged()
+        }
+
     }
 
     Label {
@@ -350,6 +390,13 @@ Rectangle {
         validator: DoubleValidator {
             locale: "C"
             notation: DoubleValidator.StandardNotation
+            bottom: 0.0
+        }
+
+        onTextChanged: {
+            // indicating error
+            amountToLine.error = amountToLine.text === "" ? false : parseFloat(amountFromLine.text) > parseFloat(amountToLine.text)
+            onFilterChanged()
         }
 
     }
