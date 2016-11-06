@@ -63,6 +63,16 @@ Rectangle {
             fromDatePicker.currentDate = model.transactionHistory.firstDateTime
             toDatePicker.currentDate = model.transactionHistory.lastDateTime
             selectedAmount.text = getSelectedAmount()
+
+            /* Default sorting by timestamp desc */
+            /* Sort indicator on table header */
+                /* index of 'sort by blockheight' column */
+            header.activeSortColumn = 1
+            /* Sorting model */
+
+            model.sortRole = TransactionHistoryModel.TransactionTimeStampRole
+            model.sort(0, Qt.DescendingOrder);
+            // TODO: public interface for 'Header' item that will cause 'sortRequest' signal
         }
     }
 
