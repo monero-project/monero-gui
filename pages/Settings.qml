@@ -281,6 +281,7 @@ Rectangle {
 
             StandardButton {
                 visible: true
+                enabled: !appWindow.daemonRunning
                 id: startDaemonButton
                 width: 110
                 text: qsTr("Start daemon") + translationManager.emptyString
@@ -294,7 +295,8 @@ Rectangle {
             }
 
             StandardButton {
-                visible: false
+                visible: true
+                enabled: appWindow.daemonRunning
                 id: stopDaemonButton
                 width: 110
                 text: qsTr("Stop daemon") + translationManager.emptyString
@@ -303,8 +305,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
-
-                    //daemonManager.stop();
+                    daemonManager.stop();
                 }
             }
         }
