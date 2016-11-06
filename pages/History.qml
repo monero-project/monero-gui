@@ -40,22 +40,31 @@ Rectangle {
     id: root
     property var model
 
+    QtObject {
+        id: d
+        property bool initialized: false
+    }
+
     color: "#F0EEEE"
     onModelChanged: {
         if (typeof model !== 'undefined') {
-            // setup date filter scope according to real transactions
-            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
-            toDatePicker.currentDate = model.transactionHistory.lastDateTime
+            if (!d.initialized) {
+                // setup date filter scope according to real transactions
+                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+                toDatePicker.currentDate = model.transactionHistory.lastDateTime
 
-            /* Default sorting by timestamp desc */
-            /* Sort indicator on table header */
+                /* Default sorting by timestamp desc */
+                /* Sort indicator on table header */
                 /* index of 'sort by blockheight' column */
-            header.activeSortColumn = 1
-            /* Sorting model */
+                header.activeSortColumn = 1
+                /* Sorting model */
 
-            model.sortRole = TransactionHistoryModel.TransactionTimeStampRole
-            model.sort(0, Qt.DescendingOrder);
-            // TODO: public interface for 'Header' item that will cause 'sortRequest' signal
+                model.sortRole = TransactionHistoryModel.TransactionTimeStampRole
+                model.sort(0, Qt.DescendingOrder);
+                d.initialized = true
+                // TODO: public interface for 'Header' item that will cause 'sortRequest' signal
+            }
+
         }
     }
 
