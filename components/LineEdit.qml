@@ -35,9 +35,17 @@ Item {
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
     property int fontSize: 18
+    property bool error: false
 
 
     height: 37
+
+    function getColor(error) {
+      if (error)
+        return "#FFDDDD"
+      else
+        return "#FFFFFF"
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -49,7 +57,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         anchors.topMargin: 1
-        color: "#FFFFFF"
+        color: getColor(error)
         //radius: 4
     }
 
