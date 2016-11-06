@@ -36,6 +36,22 @@ ListView {
     boundsBehavior: ListView.StopAtBounds
     property var previousItem
 
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note) {
+        var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
+            trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
+            trEnd = "</td></tr>";
+
+        return '<table border="0">'
+            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
+            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId  + trEnd : "")
+            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
+            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note  + trEnd : "")
+            + "</table>"
+            + translationManager.emptyString;
+    }
+
+
+
     footer: Rectangle {
         height: 127
         width: listView.width
@@ -50,6 +66,12 @@ ListView {
         }
     }
 
+    StandardDialog {
+        id: detailsPopup
+        cancelVisible: false
+        okVisible: true
+    }
+
 
     delegate: Rectangle {
         id: delegate
@@ -58,6 +80,33 @@ ListView {
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
+
+        StandardButton {
+            id: detailsButton
+            anchors.right:parent.right
+            anchors.rightMargin: 15
+            anchors.top: parent.top
+            anchors.topMargin: parent.height/2 - this.height/2
+            width: 80
+            fontSize: 14
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            text: qsTr("Details")
+            onClicked: {
+                console.log(hash)
+                var tx_key = currentWallet.getTxKey(hash)
+                var tx_note = currentWallet.getUserNote(hash)
+                console.log("key",tx_key);
+                detailsPopup.title = "Transaction details";
+                detailsPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note);
+                detailsPopup.open();
+
+            }
+        }
+
+
 
         Row {
             id: row1
@@ -311,7 +360,6 @@ ListView {
                 }
             }
         }
-
 
 
         /*
