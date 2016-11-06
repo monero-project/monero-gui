@@ -56,10 +56,10 @@ Rectangle {
                 /* Default sorting by timestamp desc */
                 /* Sort indicator on table header */
                 /* index of 'sort by blockheight' column */
-                header.activeSortColumn = 1
+                header.activeSortColumn = 2
                 /* Sorting model */
 
-                model.sortRole = TransactionHistoryModel.TransactionTimeStampRole
+                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
                 model.sort(0, Qt.DescendingOrder);
                 d.initialized = true
                 // TODO: public interface for 'Header' item that will cause 'sortRequest' signal
