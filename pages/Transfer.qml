@@ -244,15 +244,11 @@ Rectangle {
     }
 
     function checkAddressAndPaymentID(address, payment_id, testnet) {
-      print ("testing")
       if (!walletManager.addressValid(address, testnet))
         return false
-      print ("address is valid")
       var ipid = walletManager.paymentIdFromAddress(address, testnet)
-      print ("ipid: [" + ipid + "]")
       if (ipid.length > 0)
          return payment_id === ""
-      print ("payment_id: [" + payment_id + "]")
       return payment_id === "" || walletManager.paymentIdValid(payment_id)
     }
 
