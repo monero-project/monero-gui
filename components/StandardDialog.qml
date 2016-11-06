@@ -40,9 +40,11 @@ Window {
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
     property alias title: dialogTitle.text
-    property alias content: dialogContent.text
+    property alias text: dialogContent.text
+    property alias content: root.text
     property alias cancelVisible: cancelButton.visible
     property alias okVisible: okButton.visible
+    property var icon
 
     // same signals as Dialog has
     signal accepted()
@@ -54,8 +56,8 @@ Window {
     }
 
     // TODO: implement without hardcoding sizes
-    width: 600
-    height: 480
+    width: 800
+    height: 580
 
     ColumnLayout {
         id: mainLayout
@@ -80,6 +82,8 @@ Window {
         RowLayout {
             TextArea {
                 id : dialogContent
+                width: 750
+                height: 480
                 Layout.fillWidth: true
                 font.family: "Arial"
                 textFormat: TextEdit.AutoText
