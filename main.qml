@@ -147,6 +147,10 @@ ApplicationWindow {
             translationManager.setLanguage(locale.split("_")[0]);
         }
 
+        // disconnect handlers before connecting
+        middlePanel.paymentClicked.disconnect(handlePayment);
+        middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
 
@@ -190,11 +194,21 @@ ApplicationWindow {
     function connectWallet(wallet) {
         showProcessingSplash()
         currentWallet = wallet
+
+        // Disconnect before connecting
+        currentWallet.refreshed.disconnect(onWalletRefresh)
+        currentWallet.updated.disconnect(onWalletUpdate)
+        currentWallet.newBlock.disconnect(onWalletNewBlock)
+        currentWallet.moneySpent.disconnect(onWalletMoneySent)
+        currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
+
+
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
