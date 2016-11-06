@@ -119,7 +119,6 @@ Window {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Cancel")
-                KeyNavigation.tab: passwordInput
                 onClicked: {
                     root.rejected()
                     root.close()
