@@ -141,6 +141,8 @@ public:
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
 
+    Q_INVOKABLE QString getTxKey(const QString &txid) const;
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
