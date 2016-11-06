@@ -46,7 +46,7 @@ Rectangle {
     property alias balanceText : balanceText.text;
     property alias unlockedBalanceText : availableBalanceText.text;
     // repeating signal to the outside world
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
+    signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
                           int priority)
 
     Connections {
