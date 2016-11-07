@@ -264,7 +264,7 @@ ApplicationWindow {
 
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
-        daemonSynced = (currentWallet.connected && dCurrentBlock >= dTargetBlock)
+        daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
 
 
 
@@ -387,7 +387,10 @@ ApplicationWindow {
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            if (currentWallet.connected == Wallet.ConnectionStatus_WrongVersion)
+                informationPopup.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
+            else
+                informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
             informationPopup.onCloseCallback = null
             informationPopup.open();

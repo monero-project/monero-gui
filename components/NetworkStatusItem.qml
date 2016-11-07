@@ -27,10 +27,35 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import moneroComponents.Wallet 1.0
 
 Row {
     id: item
-    property bool connected: false
+    property var connected: Wallet.ConnectionStatus_Disconnected
+
+    function getConnectionStatusImage(status) {
+        if (status == Wallet.ConnectionStatus_Connected)
+            return "../images/statusConnected.png"
+        else
+            return "../images/statusDisconnected.png"
+    }
+
+    function getConnectionStatusColor(status) {
+        if (status == Wallet.ConnectionStatus_Connected)
+            return "#FF6C3B"
+        else
+            return "#AAAAAA"
+    }
+
+    function getConnectionStatusString(status) {
+        if (status == Wallet.ConnectionStatus_Connected)
+            return qsTr("Connected")
+        if (status == Wallet.ConnectionStatus_WrongVersion)
+            return qsTr("Wrong version")
+        if (status == Wallet.ConnectionStatus_Disconnected)
+            return qsTr("Disconnected")
+        return qsTr("Invalid connection status")
+    }
 
     Item {
         id: iconItem
@@ -40,8 +65,7 @@ Row {
 
         Image {
             anchors.centerIn: parent
-            source: item.connected ? "../images/statusConnected.png" :
-                                     "../images/statusDisconnected.png"
+            source: getConnectionStatusImage(item.connected)
         }
     }
 
@@ -62,8 +86,8 @@ Row {
             anchors.left: parent.left
             font.family: "Arial"
             font.pixelSize: 18
-            color: item.connected ? "#FF6C3B" : "#AAAAAA"
-            text: (item.connected ? qsTr("Connected") : qsTr("Disconnected")) + translationManager.emptyString
+            color: getConnectionStatusColor(item.connected)
+            text: getConnectionStatusString(item.connected) + translationManager.emptyString
         }
     }
 }

@@ -22,7 +22,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
-    Q_PROPERTY(bool connected READ connected)
+    Q_PROPERTY(ConnectionStatus connected READ connected)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(QString address READ address)
@@ -42,6 +42,14 @@ public:
 
     Q_ENUM(Status)
 
+    enum ConnectionStatus {
+        ConnectionStatus_Connected       = Bitmonero::Wallet::ConnectionStatus_Connected,
+        ConnectionStatus_Disconnected    = Bitmonero::Wallet::ConnectionStatus_Disconnected,
+        ConnectionStatus_WrongVersion    = Bitmonero::Wallet::ConnectionStatus_WrongVersion
+    };
+
+    Q_ENUM(ConnectionStatus)
+
     //! returns mnemonic seed
     QString getSeed() const;
 
@@ -54,8 +62,8 @@ public:
     //! returns last operation's status
     Status status() const;
 
-    //! returns true if wallet connected
-    bool connected() const;
+    //! returns whether the wallet is connected, and version status
+    ConnectionStatus connected() const;
 
     //! returns true if wallet was ever synchronized
     bool synchronized() const;
