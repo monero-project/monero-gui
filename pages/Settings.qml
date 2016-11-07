@@ -308,16 +308,56 @@ Rectangle {
                     daemonManager.stop();
                 }
             }
+
+            StandardButton {
+                visible: true
+             //  enabled: appWindow.daemonRunning
+                id: daemonConsolePopupButton
+                width: 110
+                text: qsTr("Show concole") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonConsolePopup.open();
+                }
+            }
+
         }
 
     }
 
+    // Daemon console
+    StandardDialog {
+        id: daemonConsolePopup
+        height:800
+        width:800
+        cancelVisible: false
+        title: qsTr("Daemon console")
+        onAccepted: {
+            close();
+        }
+    }
 
 
+    // fires on every page load
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
     }
+
+    // fires only once
+    Component.onCompleted: {
+        daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+    }
+
+    function onDaemonConsoleUpdated(message){
+        // Update daemon console
+        daemonConsolePopup.textArea.append(message)
+    }
+
+
 
 
 }
