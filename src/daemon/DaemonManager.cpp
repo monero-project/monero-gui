@@ -21,17 +21,33 @@ DaemonManager *DaemonManager::instance()
 
 bool DaemonManager::start()
 {
-    QString        program = QApplication::applicationDirPath() + "/monerod";
-    qDebug() << "starting monerod " + program;
+
+    //
+    QString process;
+#ifdef Q_OS_WIN
+    process = QApplication::applicationDirPath() + "/monerod.exe";
+#elif defined(Q_OS_UNIX)
+    process = QApplication::applicationDirPath() + "/monerod";
+#endif
+
+    if(process.length() == 0) {
+        qDebug() << "no daemon binary defined for current platform";
+        return false;
+    }
+
+    qDebug() << "starting monerod " + process;
+
+    // TODO: forward CLI arguments
     QStringList arguments;
 
     m_daemon = new QProcess();
 
+    // Connect output slots
     connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
 
-    m_daemon->start(program);
+    m_daemon->start(process);
     bool started =  m_daemon->waitForStarted();
 
     if(!started){
@@ -48,8 +64,8 @@ bool DaemonManager::stop()
     if(m_daemon){
         qDebug() << "stopping daemon";
         m_daemon->terminate();
-        // Wait until stopped. Max 30 seconds
-        bool stopped = m_daemon->waitForFinished(30000);
+        // Wait until stopped. Max 10 seconds
+        bool stopped = m_daemon->waitForFinished(10000);
         if(stopped) emit daemonStopped();
         return stopped;
     }
