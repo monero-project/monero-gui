@@ -41,6 +41,7 @@ bool DaemonManager::start()
     QStringList arguments;
 
     m_daemon = new QProcess();
+    initialized = true;
 
     // Connect output slots
     connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
@@ -61,7 +62,7 @@ bool DaemonManager::start()
 
 bool DaemonManager::stop()
 {
-    if(m_daemon){
+    if(initialized){
         qDebug() << "stopping daemon";
         m_daemon->terminate();
         // Wait until stopped. Max 10 seconds
@@ -80,7 +81,8 @@ void DaemonManager::printOutput()
 
     foreach (QString line, strLines){
        // dConsole.append(line+"\n");
-        qDebug() << "Daemon: " + line;
+        emit daemonConsoleUpdated(line);
+       // qDebug() << "Daemon: " + line;
     }
 }
 
@@ -91,13 +93,20 @@ void DaemonManager::printError()
 
     foreach (QString line, strLines){
        // dConsole.append(line+"\n");
-        qDebug() << "Daemon ERROR: " + line;
+        emit daemonConsoleUpdated(line);
+       // qDebug() << "Daemon ERROR: " + line;
     }
 }
 
 bool DaemonManager::running() const
 {
-    return m_daemon && m_daemon->state() > QProcess::NotRunning;
+    if(initialized){
+        qDebug() << m_daemon->state();
+        qDebug() << QProcess::NotRunning;
+
+        return m_daemon->state() > QProcess::NotRunning;
+    }
+    return false;
 }
 
 QString DaemonManager::console() const

@@ -23,6 +23,7 @@ public:
 signals:
     void daemonStarted();
     void daemonStopped();
+    void daemonConsoleUpdated(QString message);
 
 public slots:
     void printOutput();
@@ -34,6 +35,7 @@ private:
     static DaemonManager * m_instance;
     QProcess *m_daemon;
     QString dConsole;
+    bool initialized = false;
 
 };
 
