@@ -44,6 +44,7 @@ Window {
     property alias content: root.text
     property alias cancelVisible: cancelButton.visible
     property alias okVisible: okButton.visible
+    property alias textArea: dialogContent
     property var icon
 
     // same signals as Dialog has
@@ -56,8 +57,8 @@ Window {
     }
 
     // TODO: implement without hardcoding sizes
-    width: 800
-    height: 580
+    width:  480
+    height: 280
 
     ColumnLayout {
         id: mainLayout
@@ -82,9 +83,8 @@ Window {
         RowLayout {
             TextArea {
                 id : dialogContent
-                width: 750
-                height: 480
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 font.family: "Arial"
                 textFormat: TextEdit.AutoText
                 readOnly: true
