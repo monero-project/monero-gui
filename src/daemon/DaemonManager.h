@@ -15,7 +15,6 @@ public:
 
     Q_INVOKABLE bool start();
     Q_INVOKABLE bool stop();
-    Q_INVOKABLE QString console() const;
 
     // return true if daemon process is started
     Q_INVOKABLE bool running() const;
@@ -34,7 +33,6 @@ private:
     explicit DaemonManager(QObject *parent = 0);
     static DaemonManager * m_instance;
     QProcess *m_daemon;
-    QString dConsole;
     bool initialized = false;
 
 };

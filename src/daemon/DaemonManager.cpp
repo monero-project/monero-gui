@@ -80,9 +80,8 @@ void DaemonManager::printOutput()
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines){
-       // dConsole.append(line+"\n");
         emit daemonConsoleUpdated(line);
-       // qDebug() << "Daemon: " + line;
+        qDebug() << "Daemon: " + line;
     }
 }
 
@@ -92,9 +91,8 @@ void DaemonManager::printError()
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines){
-       // dConsole.append(line+"\n");
         emit daemonConsoleUpdated(line);
-       // qDebug() << "Daemon ERROR: " + line;
+        qDebug() << "Daemon ERROR: " + line;
     }
 }
 
@@ -108,12 +106,6 @@ bool DaemonManager::running() const
     }
     return false;
 }
-
-QString DaemonManager::console() const
-{
-    return dConsole;
-}
-
 
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
