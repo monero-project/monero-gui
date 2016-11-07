@@ -69,6 +69,7 @@ ListView {
 
     StandardDialog {
         id: detailsPopup
+        width:600
         cancelVisible: false
         okVisible: true
     }
