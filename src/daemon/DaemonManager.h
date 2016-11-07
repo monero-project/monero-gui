@@ -27,6 +27,7 @@ signals:
 public slots:
     void printOutput();
     void printError();
+    void closing();
 
 private:
 

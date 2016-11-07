@@ -123,3 +123,8 @@ DaemonManager::DaemonManager(QObject *parent)
 
 }
 
+void DaemonManager::closing()
+{
+    qDebug() << __FUNCTION__;
+    stop();
+}
