@@ -41,6 +41,7 @@ Window {
     flags: Qt.Window | Qt.FramelessWindowHint
 
     signal rejected()
+    signal started();
 
     function open() {
         show()
@@ -91,7 +92,7 @@ Window {
                 onClicked: {
                     daemonManager.start();
                     root.close()
-                   // root.accepted()
+                    root.started()
                 }
             }
 
@@ -106,8 +107,8 @@ Window {
                 text: qsTr("Cancel")
 
                 onClicked: {
-                    root.rejected()
                     root.close()
+                    root.rejected()
                 }
             }
         }
