@@ -9,11 +9,15 @@
 #include <QProcess>
 
 DaemonManager * DaemonManager::m_instance = nullptr;
+QStringList DaemonManager::clArgs;
 
-DaemonManager *DaemonManager::instance()
+DaemonManager *DaemonManager::instance(QStringList args)
 {
     if (!m_instance) {
         m_instance = new DaemonManager;
+        // store command line arguments for later use
+        clArgs = args;
+        clArgs.removeFirst();
     }
 
     return m_instance;
@@ -35,10 +39,16 @@ bool DaemonManager::start()
         return false;
     }
 
-    qDebug() << "starting monerod " + process;
 
-    // TODO: forward CLI arguments
+    // prepare command line arguments and pass to monerod
     QStringList arguments;
+    foreach (const QString &str, clArgs) {
+          qDebug() << QString(" [%1] ").arg(str);
+          arguments << str;
+    }
+
+    qDebug() << "starting monerod " + process;
+    qDebug() << "With command line arguments " << arguments;
 
     m_daemon = new QProcess();
     initialized = true;
@@ -47,8 +57,8 @@ bool DaemonManager::start()
     connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
-
-    m_daemon->start(process);
+    // Start monerod
+    m_daemon->start(process,arguments);
     bool started =  m_daemon->waitForStarted();
 
     if(!started){

@@ -11,7 +11,7 @@ class DaemonManager : public QObject
 
 public:
 
-    static DaemonManager * instance();
+    static DaemonManager * instance(QStringList args);
 
     Q_INVOKABLE bool start();
     Q_INVOKABLE bool stop();
@@ -32,6 +32,7 @@ private:
 
     explicit DaemonManager(QObject *parent = 0);
     static DaemonManager * m_instance;
+    static QStringList clArgs;
     QProcess *m_daemon;
     bool initialized = false;
 
