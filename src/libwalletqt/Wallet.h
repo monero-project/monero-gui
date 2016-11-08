@@ -125,6 +125,10 @@ public:
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
                                                        quint64 amount, quint32 mixin_count,
                                                        PendingTransaction::Priority priority);
+    //! creates async transaction
+    Q_INVOKABLE void createTransactionAsync(const QString &dst_addr, const QString &payment_id,
+                                            quint64 amount, quint32 mixin_count,
+                                            PendingTransaction::Priority priority);
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 
@@ -166,6 +170,8 @@ signals:
     void newBlock(quint64 height);
     void historyModelChanged() const;
 
+    // emitted when transaction is created async
+    void transactionCreated(PendingTransaction * transaction);
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -188,6 +194,7 @@ private:
     mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
+    QObject * m_walletManager;
 };
 
 
