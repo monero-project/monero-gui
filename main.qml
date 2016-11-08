@@ -207,12 +207,14 @@ ApplicationWindow {
         currentWallet.newBlock.disconnect(onWalletNewBlock)
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
         currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+        currentWallet.transactionCreated.disconnect(onTransactionCreated)
 
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
+        currentWallet.transactionCreated.connect(onTransactionCreated)
 
 
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
@@ -363,6 +365,43 @@ ApplicationWindow {
     }
 
 
+    function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
+        console.log("Transaction created");
+        hideProcessingSplash();
+        transaction = pendingTransaction;
+        // validate address;
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            if (currentWallet.connected == Wallet.ConnectionStatus_WrongVersion)
+                informationPopup.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
+            else
+                informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+
+        } else {
+            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
+                    + ", fee: " + walletManager.displayAmount(transaction.fee));
+
+            // here we show confirmation popup;
+
+            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
+                        + qsTr("\nAddress: ") + address
+                        + qsTr("\nPayment ID: ") + paymentId
+                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + qsTr("\n\nMixin: ") + mixinCount
+                        + qsTr("\n\nDescription: ") + transactionDescription;
+                        + translationManager.emptyString
+            transactionConfirmationPopup.icon = StandardIcon.Question
+            transactionConfirmationPopup.open()
+        }
+    }
 
 
     // called on "transfer"
@@ -375,7 +414,10 @@ ApplicationWindow {
                     ", priority: ", priority,
                     ", description: ", description);
 
-
+        showProcessingSplash("Creating transaction");
+        
+        transactionDescription = description;
+        
         // validate amount;
         var amountxmr = walletManager.amountFromString(amount);
         console.log("integer amount: ", amountxmr);
@@ -403,42 +445,7 @@ ApplicationWindow {
             return;
         }
 
-        // validate address;
-        transaction = currentWallet.createTransaction(address, paymentId, amountxmr, mixinCount, priority);
-        if (transaction.status !== PendingTransaction.Status_Ok) {
-            console.error("Can't create transaction: ", transaction.errorString);
-            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            if (currentWallet.connected == Wallet.ConnectionStatus_WrongVersion)
-                informationPopup.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
-            else
-                informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open();
-            // deleting transaction object, we don't want memleaks
-            currentWallet.disposeTransaction(transaction);
-
-        } else {
-            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
-                    + ", fee: " + walletManager.displayAmount(transaction.fee));
-
-            transactionDescription = description;
-
-            // here we show confirmation popup;
-
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + qsTr("\nAddress: ") + address
-                        + qsTr("\nPayment ID: ") + paymentId
-                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
-                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + qsTr("\n\nMixin: ") + mixinCount
-                        + qsTr("\n\nDescription: ") + description
-                        + translationManager.emptyString
-            transactionConfirmationPopup.icon = StandardIcon.Question
-            transactionConfirmationPopup.open()
-            // committing transaction
-        }
+        currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
     }
 
     // called after user confirms transaction
@@ -536,7 +543,8 @@ ApplicationWindow {
     function showProcessingSplash(message) {
         console.log("Displaying processing splash")
         if (typeof message != 'undefined') {
-            splash.message = message
+            splash.messageText = message
+            splash.heightProgressText = ""
         }
         splash.show()
     }
