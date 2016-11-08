@@ -149,8 +149,10 @@ ApplicationWindow {
 
         // disconnect handlers before connecting
         middlePanel.paymentClicked.disconnect(handlePayment);
-        middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
-
+        // TODO: remove if statement when PR #111 is merged
+        if(typeof(handleCheckPayment) !== "undefined") {
+            middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+        }
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
 
