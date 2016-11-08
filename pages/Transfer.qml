@@ -244,16 +244,30 @@ Rectangle {
     }
 
     function checkAddressAndPaymentID(address, payment_id, testnet) {
-      print ("testing")
       if (!walletManager.addressValid(address, testnet))
         return false
-      print ("address is valid")
       var ipid = walletManager.paymentIdFromAddress(address, testnet)
-      print ("ipid: [" + ipid + "]")
       if (ipid.length > 0)
          return payment_id === ""
-      print ("payment_id: [" + payment_id + "]")
       return payment_id === "" || walletManager.paymentIdValid(payment_id)
+    }
+
+    function checkInformation(amount, address, payment_id, testnet) {
+      address = address.trim()
+      payment_id = payment_id.trim()
+
+      var amount_ok = amount.length > 0
+      var address_ok = walletManager.addressValid(address, testnet)
+      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+      var ipid = walletManager.paymentIdFromAddress(address, testnet)
+      if (ipid.length > 0 && payment_id.length > 0)
+         payment_id_ok = false
+
+      addressLine.error = !address_ok
+      amountLine.error = !amount_ok
+      paymentIdLine.error = !payment_id_ok
+
+      return amount_ok && address_ok && payment_id_ok
     }
 
     StandardButton {
@@ -268,7 +282,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        enabled : amountLine.text.length > 0 && checkAddressAndPaymentID(addressLine.text.trim(), paymentIdLine.text.trim(), appWindow.persistentSettings.testnet)
+        enabled : checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
         onClicked: {
             console.log("Transfer: paymentClicked")
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority
