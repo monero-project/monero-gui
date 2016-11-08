@@ -45,12 +45,14 @@ Rectangle {
 
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
+    property TxKey txkeyView: TxKey { }
     property History historyView: History { }
     property Settings settingsView: Settings { }
 
 
     signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority)
     signal generatePaymentIdInvoked()
+    signal checkPaymentClicked(string address, string txid, string txkey);
 
     // Disable transfer page if daemon isnt fully synced
     enabled: (currentView !== transferView || appWindow.daemonSynced)
@@ -109,6 +111,9 @@ Rectangle {
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
+            }, State {
+               name: "TxKey"
+               PropertyChanges { target: root; currentView: txkeyView }
             }, State {
                 name: "AddressBook"
                 PropertyChanges { /*TODO*/ }
