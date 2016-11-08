@@ -194,7 +194,6 @@ private:
     mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
-    QObject * m_walletManager;
 };
 
 

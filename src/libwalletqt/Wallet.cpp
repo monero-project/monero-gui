@@ -212,7 +212,7 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
     Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
                 static_cast<Bitmonero::PendingTransaction::Priority>(priority));
-    PendingTransaction * result = new PendingTransaction(ptImpl, m_walletManager);
+    PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
 
@@ -307,7 +307,6 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
-    m_walletManager = parent;
 }
 
 Wallet::~Wallet()
