@@ -27,12 +27,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="79"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
-        <translation>&lt;b&gt;ID PAgameto&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
+        <translation>&lt;b&gt;ID Pagameto&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation>Desscrizione &lt;font size=&apos;2&apos;&gt;(Database locale)&lt;/font&gt;</translation>
+        <translation>Descrizione &lt;font size=&apos;2&apos;&gt;(Database locale)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="101"/>
@@ -47,7 +47,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="174"/>
         <source>Payment ID</source>
-        <translation>ID Pagameto</translation>
+        <translation>ID Pagamento</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="175"/>
@@ -169,7 +169,7 @@
     <message>
         <location filename="../pages/History.qml" line="102"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
-        <translation>&lt;b&gt;ID PAgameto&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
+        <translation>&lt;b&gt;ID Pagameto&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="151"/>
@@ -185,7 +185,7 @@
     <message>
         <location filename="../pages/History.qml" line="192"/>
         <source>FILTER</source>
-        <translation>FLITRA</translation>
+        <translation>FILTRA</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="221"/>
@@ -251,7 +251,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="142"/>
         <source>Unlocked balance</source>
-        <translation>Totale bloccato</translation>
+        <translation>Totale sbloccato</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="145"/>
@@ -309,7 +309,7 @@
     <message>
         <location filename="../MiddlePanel.qml" line="218"/>
         <source>Unlocked Balance:</source>
-        <translation>Totale Bloccato:</translation>
+        <translation>Totale Sbloccato:</translation>
     </message>
 </context>
 <context>
@@ -322,12 +322,12 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="66"/>
         <source>Connected</source>
-        <translation>Conesso</translation>
+        <translation>Connesso</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="66"/>
         <source>Disconnected</source>
-        <translation>Disconesso</translation>
+        <translation>Disconnesso</translation>
     </message>
 </context>
 <context>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="46"/>
         <source>Please enter wallet password</source>
-        <translation>Inserisci la passowrd del tuo portafoglio</translation>
+        <translation>Inserisci la password del tuo portafoglio</translation>
     </message>
 </context>
 <context>
@@ -391,7 +391,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="173"/>
         <source>Generate</source>
-        <translation>Generato</translation>
+        <translation>Genera</translation>
     </message>
 </context>
 <context>
@@ -484,7 +484,7 @@
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
         <source>MEDIUM</source>
-        <translation>MEDIO</translation>
+        <translation>MEDIA</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="57"/>
@@ -570,7 +570,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation>à veramente importante che ti salvi queste parole in quanto sono l&apos;unico backup che serve per il tuo portafoglio. Ti sarà chiesto di confermarle nella prossima schermata per essere sicuri che tu le abbia copiate correttamente.</translation>
+        <translation>E' veramente importante che ti salvi queste parole in quanto sono l&apos;unico backup che serve per il tuo portafoglio. Ti sarà chiesto di confermarle nella prossima schermata per essere sicuri che tu le abbia copiate correttamente.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="127"/>
@@ -580,7 +580,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="145"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>La modalità conservazione del disco usa meno spazio, ma la stessa quantità di banda coem una normale instanza Monero. In ogni caso, conservare la blockchain completa è utile alla sicurezza della rete di Monero. Se sei in un device con spazio sul disco limitato allora questa opzione fa al caso tuo.</translation>
+        <translation>La modalità conservazione del disco usa meno spazio, ma la stessa quantità di banda come una normale instanza Monero. In ogni caso, conservare la blockchain completa è utile alla sicurezza della rete di Monero. Se sei in un device con spazio sul disco limitato allora questa opzione fa al caso tuo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="158"/>
@@ -743,7 +743,7 @@
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="76"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation>è veramente importante che ti salvi queste parole in quanto sono l&apos;unico backup che serve per il tuo portafoglio. Ti sarà chiesto di confermarle nella prossima schermata per essere sicuri che tu le abbia copiate correttamente.</translation>
+        <translation>E' veramente importante che ti salvi queste parole in quanto sono l&apos;unico backup che serve per il tuo portafoglio. Ti sarà chiesto di confermarle nella prossima schermata per essere sicuri che tu le abbia copiate correttamente.</translation>
     </message>
 </context>
 <context>
@@ -760,13 +760,18 @@
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="129"/>
-        <source>This is my first time, I want to&lt;br/&gt;create a new account</source>
-        <translation>Questa la mia prima volta, vorrei&lt;br/&gt;creare un nuovo account</translation>
+        <source>This is my first time, I want to create a new account</source>
+        <translation>Questa è la mia prima volta, vorrei creare un nuovo account</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardOptions.qml" line="216"/>
+        <source>I want to open a wallet from file</source>
+        <translation>Vorrei aprire un portafoglio da un file</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="163"/>
-        <source>I want to recover my account&lt;br/&gt;from my 25 word seed</source>
-        <translation>Vorrei recuperare il mio account&lt;br/&gt;dalle mie 25 parole</translation>
+        <source>I want to recover my account from my 25 word seed</source>
+        <translation>Vorrei recuperare il mio account dalle mie 25 parole</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="193"/>
@@ -836,8 +841,8 @@
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="93"/>
-        <source>Please choose a language and regional format</source>
-        <translation>Seleziona una lingua e un formato regionale</translation>
+        <source>Please choose a language and regional format.</source>
+        <translation>Seleziona una lingua e un formato regionale.</translation>
     </message>
 </context>
 <context>
@@ -898,7 +903,7 @@ Payment ID: </source>
         <location filename="../main.qml" line="364"/>
         <source>
 Amount: </source>
-        <translation>Totlae: </translation>
+        <translation>Totale: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="365"/>
