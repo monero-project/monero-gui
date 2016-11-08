@@ -124,6 +124,8 @@ TODO
     
     ```brew install cmake```
     
+    ```brew install openssl``` - to install openssl headers
+    
 4. install latest Qt using official installer from [qt.io] (https://www.qt.io/download-open-source/), homebrew version might be outdated
 5. Add Qt bin dir to your path:
     
@@ -136,7 +138,11 @@ TODO
   git clone https://github.com/monero-project/monero-core.git
   
   cd monero-core
+  ```
+6.1 add ```-L/usr/local/opt/openssl/lib \``` in here ./monero-core.pro#L133-L134
+  ```
   
+  get_libwallet_api.sh
   build.sh
   
   ```
