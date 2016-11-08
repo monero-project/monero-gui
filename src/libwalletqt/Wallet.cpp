@@ -226,10 +226,10 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
     QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
     watcher->setFuture(future);
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
-            this, [this, watcher]() {
+            this, [this, watcher,dst_addr,payment_id,mixin_count]() {
         QFuture<PendingTransaction*> future = watcher->future();
         watcher->deleteLater();
-        emit transactionCreated(future.result());
+        emit transactionCreated(future.result(),dst_addr,payment_id,mixin_count);
     });
 }
 

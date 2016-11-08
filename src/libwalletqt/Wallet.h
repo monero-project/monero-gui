@@ -171,7 +171,7 @@ signals:
     void historyModelChanged() const;
 
     // emitted when transaction is created async
-    void transactionCreated(PendingTransaction * transaction);
+    void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
 private:
     Wallet(QObject * parent = nullptr);
