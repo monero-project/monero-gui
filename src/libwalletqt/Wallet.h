@@ -130,6 +130,11 @@ public:
     Q_INVOKABLE void createTransactionAsync(const QString &dst_addr, const QString &payment_id,
                                             quint64 amount, quint32 mixin_count,
                                             PendingTransaction::Priority priority);
+
+    //
+    //! creates sweep unmixable transaction
+    Q_INVOKABLE PendingTransaction * createSweepUnmixableTransaction();
+
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
 
