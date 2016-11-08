@@ -724,6 +724,7 @@ ApplicationWindow {
             onTxkeyClicked: middlePanel.state = "TxKey"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
+            onSignClicked: middlePanel.state = "Sign"
             onSettingsClicked: middlePanel.state = "Settings"
         }
 

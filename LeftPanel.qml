@@ -47,6 +47,7 @@ Rectangle {
     signal settingsClicked()
     signal addressBookClicked()
     signal miningClicked()
+    signal signClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -57,6 +58,7 @@ Rectangle {
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
+        else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
 
         menuColumn.previousButton.checked = true
@@ -352,6 +354,20 @@ Rectangle {
                 height: 1
             }
             */
+            // ------------- Sign/verify tab ---------------
+            MenuButton {
+                id: signButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Sign/verify") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
+                dotColor: "#AAFFBB"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = signButton
+                    panel.signClicked()
+                }
+            }
             // ------------- Settings tab ---------------
             MenuButton {
                 id: settingsButton

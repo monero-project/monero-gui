@@ -275,6 +275,78 @@ QString Wallet::getTxKey(const QString &txid) const
   return QString::fromStdString(m_walletImpl->getTxKey(txid.toStdString()));
 }
 
+QString Wallet::signMessage(const QString &message, bool filename) const
+{
+  if (filename) {
+    QFile file(message);
+    uchar *data = NULL;
+
+    try {
+      if (!file.open(QIODevice::ReadOnly))
+        return "";
+      quint64 size = file.size();
+      if (size == 0) {
+        file.close();
+        return QString::fromStdString(m_walletImpl->signMessage(std::string()));
+      }
+      data = file.map(0, size);
+      if (!data) {
+        file.close();
+        return "";
+      }
+      std::string signature = m_walletImpl->signMessage(std::string((const char*)data, size));
+      file.unmap(data);
+      file.close();
+      return QString::fromStdString(signature);
+    }
+    catch (const std::exception &e) {
+      if (data)
+        file.unmap(data);
+      file.close();
+      return "";
+    }
+  }
+  else {
+    return QString::fromStdString(m_walletImpl->signMessage(message.toStdString()));
+  }
+}
+
+bool Wallet::verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename) const
+{
+  if (filename) {
+    QFile file(message);
+    uchar *data = NULL;
+
+    try {
+      if (!file.open(QIODevice::ReadOnly))
+        return false;
+      quint64 size = file.size();
+      if (size == 0) {
+        file.close();
+        return m_walletImpl->verifySignedMessage(std::string(), address.toStdString(), signature.toStdString());
+      }
+      data = file.map(0, size);
+      if (!data) {
+        file.close();
+        return false;
+      }
+      bool ret = m_walletImpl->verifySignedMessage(std::string((const char*)data, size), address.toStdString(), signature.toStdString());
+      file.unmap(data);
+      file.close();
+      return ret;
+    }
+    catch (const std::exception &e) {
+      if (data)
+        file.unmap(data);
+      file.close();
+      return false;
+    }
+  }
+  else {
+    return m_walletImpl->verifySignedMessage(message.toStdString(), address.toStdString(), signature.toStdString());
+  }
+}
+
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
