@@ -58,7 +58,7 @@ LIBS += -L$$WALLET_ROOT/lib \
 # currently we only support x86 build as qt.io only provides prebuilt qt for x86 mingw
 
 win32 {
-    
+
     contains(QMAKE_HOST.arch, x86_64) {
         message("Host is 64bit")
         MSYS_PATH=c:/msys64/mingw32
@@ -78,7 +78,7 @@ win32 {
     }
 
     LIBS+=-L$$MSYS_PATH/lib
-    
+
     LIBS+= \
         -Wl,-Bstatic \
         -lboost_serialization-mt \
@@ -130,8 +130,10 @@ linux {
 
 macx {
     LIBS+= \
-	-L/usr/local/lib \
-	-lboost_serialization \
+        -L/usr/local/lib \
+        -L/usr/local/opt/openssl/lib \
+        -L/usr/local/opt/boost/lib \
+        -lboost_serialization \
         -lboost_thread-mt \
         -lboost_system \
         -lboost_date_time \
