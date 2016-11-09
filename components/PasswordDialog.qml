@@ -101,7 +101,6 @@ Window {
                     root.accepted()
                     root.close()
                 }
-
                 Keys.onEscapePressed: {
                     root.rejected()
                     root.close()
@@ -132,23 +131,7 @@ Window {
             id: buttons
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
-
-            MoneroComponents.StandardButton {
-                id: okButton
-                width: 120
-                fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Ok")
-                KeyNavigation.tab: cancelButton
-                onClicked: {
-                    root.accepted()
-                    root.close()
-                }
-            }
-
+            
             MoneroComponents.StandardButton {
                 id: cancelButton
                 width: 120
@@ -164,9 +147,23 @@ Window {
                     root.close()
                 }
             }
+            MoneroComponents.StandardButton {
+                id: okButton
+                width: 120
+                fontSize: 14
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Ok")
+                KeyNavigation.tab: cancelButton
+                onClicked: {
+                    root.accepted()
+                    root.close()
+                }
+            }
         }
     }
-
 }
 
 
