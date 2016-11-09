@@ -28,6 +28,7 @@
 
 import QtQuick 2.2
 import QtGraphicalEffects 1.0
+import moneroComponents.Wallet 1.0
 import "components"
 
 Rectangle {
@@ -373,7 +374,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: (daemonProgress.visible)? daemonProgress.top : parent.bottom;
-            connected: false
+            connected: Wallet.ConnectionStatus_Disconnected
         }
 
         DaemonProgress {

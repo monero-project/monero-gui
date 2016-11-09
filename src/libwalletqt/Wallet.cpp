@@ -86,9 +86,9 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
-bool Wallet::connected() const
+Wallet::ConnectionStatus Wallet::connected() const
 {
-    return m_walletImpl->connected();
+    return static_cast<ConnectionStatus>(m_walletImpl->connected());
 }
 
 bool Wallet::synchronized() const
