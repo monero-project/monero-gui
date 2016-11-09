@@ -131,6 +131,8 @@ linux {
 macx {
     LIBS+= \
 	-L/usr/local/lib \
+    -L/usr/local/opt/openssl/lib \
+    -L/usr/local/opt/boost/lib \
 	-lboost_serialization \
         -lboost_thread-mt \
         -lboost_system \
