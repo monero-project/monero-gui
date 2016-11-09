@@ -232,6 +232,16 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
     });
 }
 
+PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const QString &payment_id,
+                                                 quint32 mixin_count, PendingTransaction::Priority priority)
+{
+    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+                dst_addr.toStdString(), payment_id.toStdString(), Bitmonero::optional<uint64_t>(), mixin_count,
+                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    return result;
+}
+
 PendingTransaction *Wallet::createSweepUnmixableTransaction()
 {
     Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();

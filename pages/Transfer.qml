@@ -89,7 +89,7 @@ Rectangle {
         LineEdit {
             id: amountLine
             placeholderText: qsTr("") + translationManager.emptyString
-            width: parent.width - 37 - 17
+            width: parent.width - 37 - 17 - 60
             validator: DoubleValidator {
                 bottom: 0.0
                 top: 18446744.073709551615
@@ -97,6 +97,21 @@ Rectangle {
                 notation: DoubleValidator.StandardNotation
                 locale: "C"
             }
+        }
+
+        StandardButton {
+            id: amountAllButton
+            //anchors.left: amountLine.right
+            //anchors.top: amountLine.top
+            //anchors.bottom: amountLine.bottom
+            width: 60
+            text: qsTr("or ALL") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            enabled : true
+            onClicked: amountLine.text = "(all)"
         }
     }
 
