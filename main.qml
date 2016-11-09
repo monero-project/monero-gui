@@ -142,6 +142,8 @@ ApplicationWindow {
     function initialize() {
         console.log("initializing..")
 
+        walletInitialized = false;
+
         // setup language
         var locale = persistentSettings.locale
         if (locale !== "") {
