@@ -138,6 +138,9 @@ public:
 
     void setPaymentId(const QString &paymentId);
 
+    Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
+    Q_INVOKABLE QString getUserNote(const QString &txid) const;
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
