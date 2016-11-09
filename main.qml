@@ -52,6 +52,7 @@ ApplicationWindow {
     property alias persistentSettings : persistentSettings
     property var currentWallet;
     property var transaction;
+    property var transactionDescription;
     property alias password : passwordDialog.password
     property int splashCounter: 0
     property bool isNewWallet: false
@@ -149,6 +150,7 @@ ApplicationWindow {
 
         middlePanel.paymentClicked.connect(handlePayment);
         // basicPanel.paymentClicked.connect(handlePayment);
+        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
         // currentWallet is defined on daemon address change - close/reopen
         // TODO: strict comparison here (!==) causes crash after passwordDialog on previously crashed unsynced wallets
@@ -346,13 +348,14 @@ ApplicationWindow {
 
 
     // called on "transfer"
-    function handlePayment(address, paymentId, amount, mixinCount, priority) {
+    function handlePayment(address, paymentId, amount, mixinCount, priority, description) {
         console.log("Creating transaction: ")
         console.log("\taddress: ", address,
                     ", payment_id: ", paymentId,
                     ", amount: ", amount,
                     ", mixins: ", mixinCount,
-                    ", priority: ", priority);
+                    ", priority: ", priority,
+                    ", description: ", description);
 
 
         // validate amount;
@@ -398,6 +401,8 @@ ApplicationWindow {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
+            transactionDescription = description;
+
             // here we show confirmation popup;
 
             transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
@@ -407,6 +412,7 @@ ApplicationWindow {
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
                         + qsTr("\n\nMixin: ") + mixinCount
+                        + qsTr("\n\nDescription: ") + description
                         + translationManager.emptyString
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
@@ -416,6 +422,16 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed() {
+        // grab transaction.txid before commit, since it clears it.
+        // we actually need to copy it, because QML will incredibly
+        // call the function multiple times when the variable is used
+        // after commit, where it returns another result...
+        // Of course, this loop is also calling the function multiple
+        // times, but at least with the same result.
+        var txid = [], txid_org = transaction.txid, txid_text = ""
+        for (var i = 0; i < txid_org.length; ++i)
+          txid[i] = txid_org[i]
+
         if (!transaction.commit()) {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
@@ -423,14 +439,70 @@ ApplicationWindow {
             informationPopup.icon  = StandardIcon.Critical
         } else {
             informationPopup.title = qsTr("Information") + translationManager.emptyString
-            informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
+            for (var i = 0; i < txid.length; ++i) {
+                if (txid_text.length > 0)
+                    txid_text += ", "
+                txid_text += txid[i]
+            }
+            informationPopup.text  = qsTr("Money sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
+            if (transactionDescription.length > 0) {
+                for (var i = 0; i < txid.length; ++i)
+                  currentWallet.setUserNote(txid[i], transactionDescription);
+            }
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
     }
+
+    // called on "checkPayment"
+    function handleCheckPayment(address, txid, txkey) {
+        console.log("Checking payment: ")
+        console.log("\taddress: ", address,
+                    ", txid: ", txid,
+                    ", txkey: ", txkey);
+
+        var result = walletManager.checkPayment(address, txid, txkey, persistentSettings.daemon_address);
+        var results = result.split("|");
+        if (results.length < 4) {
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = "internal error";
+            informationPopup.icon = StandardIcon.Critical
+            informationPopup.open()
+            return
+        }
+        var success = results[0] == "true";
+        var received = results[1]
+        var height = results[2]
+        var error = results[3]
+        if (success) {
+            informationPopup.title  = qsTr("Payment check") + translationManager.emptyString;
+            informationPopup.icon = StandardIcon.Information
+            if (received > 0) {
+                received = received / 1e12
+                if (height == 0) {
+                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
+                }
+                else {
+                    var dCurrentBlock = currentWallet.daemonBlockChainHeight();
+                    var confirmations = dCurrentBlock - height
+                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmations").arg(received).arg(confirmations);
+                }
+            }
+            else {
+                informationPopup.text = qsTr("This address received nothing");
+            }
+        }
+        else {
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = error;
+            informationPopup.icon = StandardIcon.Critical
+        }
+        informationPopup.open()
+    }
+
 
     // blocks UI if wallet can't be opened or no connection to the daemon
     function enableUI(enable) {
@@ -628,6 +700,7 @@ ApplicationWindow {
             onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
             onReceiveClicked: middlePanel.state = "Receive"
+            onTxkeyClicked: middlePanel.state = "TxKey"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
             onSettingsClicked: middlePanel.state = "Settings"

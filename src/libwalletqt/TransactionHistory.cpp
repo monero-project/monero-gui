@@ -29,8 +29,8 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
     qDeleteAll(m_tinfo);
     m_tinfo.clear();
 
-    QDateTime firstDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
-    QDateTime lastDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
+    QDateTime firstDateTime = QDateTime(QDate(2014, 4, 18)); // the genesis block
+    QDateTime lastDateTime  = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
 
     TransactionHistory * parent = const_cast<TransactionHistory*>(this);
     for (const auto i : m_pimpl->getAll()) {

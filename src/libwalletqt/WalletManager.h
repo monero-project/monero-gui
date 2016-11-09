@@ -93,6 +93,8 @@ public:
     Q_INVOKABLE bool addressValid(const QString &address, bool testnet) const;
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
+    Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
+
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;

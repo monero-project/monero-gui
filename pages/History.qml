@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2015, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -40,12 +40,47 @@ Rectangle {
     id: root
     property var model
 
+    QtObject {
+        id: d
+        property bool initialized: false
+    }
+
     color: "#F0EEEE"
+
+    function getSelectedAmount() {
+      var total = 0
+      var count = model.rowCount()
+      for (var i = 0; i < count; ++i) {
+          var idx = model.index(i, 0)
+          var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
+          var amount = model.data(idx, TransactionHistoryModel.TransactionAmountRole);
+          if (isout)
+              total -= amount
+          else
+              total += amount
+      }
+      return count + qsTr(" selected: ") + total;
+    }
+
     onModelChanged: {
         if (typeof model !== 'undefined') {
-            // setup date filter scope according to real transactions
-            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
-            toDatePicker.currentDate = model.transactionHistory.lastDateTime
+            if (!d.initialized) {
+                // setup date filter scope according to real transactions
+                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
+                toDatePicker.currentDate = model.transactionHistory.lastDateTime
+                selectedAmount.text = getSelectedAmount()
+
+                /* Default sorting by timestamp desc */
+                /* Sort indicator on table header */
+                /* index of 'sort by blockheight' column */
+                header.activeSortColumn = 2
+                /* Sorting model */
+
+                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
+                model.sort(0, Qt.DescendingOrder);
+                d.initialized = true
+                // TODO: public interface for 'Header' item that will cause 'sortRequest' signal
+            }
         }
     }
 
@@ -64,6 +99,18 @@ Rectangle {
         color: "#4A4949"
         text: qsTr("Filter transaction history") + translationManager.emptyString
     }
+
+    Label {
+        id: selectedAmount
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
+        text: getSelectedAmount()
+        fontSize: 14
+        tipText: qsTr("<b>Total amount of selected payments</b>") + translationManager.emptyString
+    }
+
 
     // Filter by Address input (senseless, removing)
     /*
@@ -213,6 +260,7 @@ Rectangle {
                 model.directionFilter = directionFilter
             }
 
+            selectedAmount.text = getSelectedAmount()
 
         }
     }

@@ -31,6 +31,15 @@ quint64 PendingTransaction::fee() const
     return m_pimpl->fee();
 }
 
+QList<QString> PendingTransaction::txid() const
+{
+    QList<QString> list;
+    std::vector<std::string> txid = m_pimpl->txid();
+    for (const auto &t: txid)
+        list.append(QString::fromStdString(t));
+    return list;
+}
+
 PendingTransaction::PendingTransaction(Bitmonero::PendingTransaction *pt, QObject *parent)
     : QObject(parent), m_pimpl(pt)
 {

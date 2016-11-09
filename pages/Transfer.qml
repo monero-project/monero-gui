@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2015, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -33,8 +33,8 @@ import "../components"
 
 Rectangle {
     id: root
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
-                          int priority)
+    signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
+                          int priority, string description)
 
     color: "#F0EEEE"
 
@@ -244,16 +244,30 @@ Rectangle {
     }
 
     function checkAddressAndPaymentID(address, payment_id, testnet) {
-      print ("testing")
       if (!walletManager.addressValid(address, testnet))
         return false
-      print ("address is valid")
       var ipid = walletManager.paymentIdFromAddress(address, testnet)
-      print ("ipid: [" + ipid + "]")
       if (ipid.length > 0)
          return payment_id === ""
-      print ("payment_id: [" + payment_id + "]")
       return payment_id === "" || walletManager.paymentIdValid(payment_id)
+    }
+
+    function checkInformation(amount, address, payment_id, testnet) {
+      address = address.trim()
+      payment_id = payment_id.trim()
+
+      var amount_ok = amount.length > 0
+      var address_ok = walletManager.addressValid(address, testnet)
+      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+      var ipid = walletManager.paymentIdFromAddress(address, testnet)
+      if (ipid.length > 0 && payment_id.length > 0)
+         payment_id_ok = false
+
+      addressLine.error = !address_ok
+      amountLine.error = !amount_ok
+      paymentIdLine.error = !payment_id_ok
+
+      return amount_ok && address_ok && payment_id_ok
     }
 
     StandardButton {
@@ -268,7 +282,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        enabled : amountLine.text.length > 0 && checkAddressAndPaymentID(addressLine.text.trim(), paymentIdLine.text.trim(), appWindow.persistentSettings.testnet)
+        enabled : checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
         onClicked: {
             console.log("Transfer: paymentClicked")
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority
@@ -277,7 +291,7 @@ Rectangle {
             addressLine.text = addressLine.text.trim()
             paymentIdLine.text = paymentIdLine.text.trim()
             root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                           priority)
+                           priority, descriptionLine.text)
 
         }
     }

@@ -107,7 +107,7 @@ TODO
 
 7. Before running the GUI, it's recommended that you have the Monero daemon running in the background.
 
-	`./monerod --rpc-bind-port 38081`
+	`./monerod`
 
 8. Run the GUI client.
 
@@ -115,32 +115,39 @@ TODO
 
 ### On OS X:
 
-1. install Xcode from AppStore
-2. install [homebrew] (http://brew.sh/)
-3. install [bitmonero] (https://github.com/monero-project/bitmonero) dependencies: 
-    ```brew install boost --c++11```
+1. Install Xcode from AppStore
+2. Install [homebrew](http://brew.sh/)
+3. Install [monero](https://github.com/monero-project/monero) dependencies:
+
+	```brew install boost --c++11```
+
+	```brew install openssl``` - to install openssl headers
 
     ```brew install pkgconfig```
-    
+
     ```brew install cmake```
-    
-4. install latest Qt using official installer from [qt.io] (https://www.qt.io/download-open-source/), homebrew version might be outdated
+
+4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
 5. Add Qt bin dir to your path:
-    
-     ```export PATH=$PATH:$HOME/Qt5/5.7/clang_64/bin``` 
-    
-    where ```Qt5``` is the folder you selected to install Qt
-6. Clone repository and build:
-  
-  ```
-  git clone https://github.com/monero-project/monero-core.git
-  
-  cd monero-core
-  
-  build.sh
-  
-  ```
-  
+
+     ```export PATH=$PATH:$HOME/Qt/5.7/clang_64/bin```
+
+    where ```Qt``` is the folder you selected to install Qt.
+
+6. Grab an up-to-date copy of the monero-core repository.
+
+	`git clone https://github.com/monero-project/monero-core.git`
+
+7. Go into the repository.
+
+	`cd monero-core`
+
+8. Start the build:
+
+  `build.sh`
+
+The executable can be found in the `build/release/bin` folder.
+
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
