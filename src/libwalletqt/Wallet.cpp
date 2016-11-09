@@ -270,6 +270,11 @@ QString Wallet::getUserNote(const QString &txid) const
   return QString::fromStdString(m_walletImpl->getUserNote(txid.toStdString()));
 }
 
+QString Wallet::getTxKey(const QString &txid) const
+{
+  return QString::fromStdString(m_walletImpl->getTxKey(txid.toStdString()));
+}
+
 Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
