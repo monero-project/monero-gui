@@ -83,7 +83,7 @@ TODO
 4. Use the script to compile the Monero libs necessary to run the GUI.
 
 	`./get_libwallet_api.sh`
-    
+
 
 5. Install the GUI dependencies.
 
@@ -92,7 +92,7 @@ TODO
 	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
 
   - For Ubuntu 16.04 x64
-  
+
      `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
 
   - For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
@@ -115,32 +115,39 @@ TODO
 
 ### On OS X:
 
-1. install Xcode from AppStore
-2. install [homebrew] (http://brew.sh/)
-3. install [bitmonero] (https://github.com/monero-project/bitmonero) dependencies: 
-    ```brew install boost --c++11```
+1. Install Xcode from AppStore
+2. Install [homebrew](http://brew.sh/)
+3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-    ```brew install pkgconfig```
-    
-    ```brew install cmake```
-    
-4. install latest Qt using official installer from [qt.io] (https://www.qt.io/download-open-source/), homebrew version might be outdated
+	`brew install boost --c++11`
+
+	`brew install openssl` - to install openssl headers
+
+    `brew install pkgconfig`
+
+    `brew install cmake`
+
+4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
 5. Add Qt bin dir to your path:
-    
-     ```export PATH=$PATH:$HOME/Qt5/5.7/clang_64/bin``` 
-    
-    where ```Qt5``` is the folder you selected to install Qt
-6. Clone repository and build:
-  
-  ```
-  git clone https://github.com/monero-project/monero-core.git
-  
-  cd monero-core
-  
-  build.sh
-  
-  ```
-  
+
+    `export PATH=$PATH:$HOME/Qt/5.7/clang_64/bin`
+
+    where ```Qt``` is the folder you selected to install Qt.
+
+6. Grab an up-to-date copy of the monero-core repository.
+
+	`git clone https://github.com/monero-project/monero-core.git`
+
+7. Go into the repository.
+
+	`cd monero-core`
+
+8. Start the build:
+
+  `build.sh`
+
+The executable can be found in the `build/release/bin` folder.
+
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
@@ -162,7 +169,7 @@ TODO
 5. Open ```mingw``` shell:
 
    ```%MSYS_ROOT%\msys2_shell.cmd -mingw32```
-   
+
    Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
    is x64-based
 
@@ -180,8 +187,8 @@ TODO
 
 8. Build application:
 
-    - open ```Qt environment``` shell (Qt 5.7 for Desktop (MinGW 5.3.0 32 bit) is shortcut name) 
-    - navigate to the project dir and build the app: 
+    - open ```Qt environment``` shell (Qt 5.7 for Desktop (MinGW 5.3.0 32 bit) is shortcut name)
+    - navigate to the project dir and build the app:
       ```
       cd %MSYS_ROOT%\%USERNAME%\monero-core
       mkdir build
@@ -191,6 +198,3 @@ TODO
       mingw32-make deploy
       ```
     - grab result binary and dependencies in ```.\release\bin```
-
-
-
