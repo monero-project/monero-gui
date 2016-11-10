@@ -79,7 +79,8 @@ public:
     QString address() const;
 
     //! saves wallet to the file by given path
-    Q_INVOKABLE bool store(const QString &path);
+    //! empty path stores in current location
+    Q_INVOKABLE bool store(const QString &path = "");
 
     //! initializes wallet
     Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);

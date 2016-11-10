@@ -294,8 +294,7 @@ ApplicationWindow {
             // Wallet is nomrmally saved to disk on app exit. This prevents rescan from block 0 after app crash
             if(isNewWallet){
                 console.log("Saving wallet after first refresh");
-                //TODO: Doesn't need path argument after creation. Change libwalletqt
-                currentWallet.store("")
+                currentWallet.store()
                 isNewWallet = false
             }
 
