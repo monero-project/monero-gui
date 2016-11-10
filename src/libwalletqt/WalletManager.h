@@ -101,6 +101,11 @@ public:
 
     void setLogLevel(int logLevel);
 
+    Q_INVOKABLE quint64 add(quint64 x, quint64 y) const { return x + y; }
+    Q_INVOKABLE quint64 sub(quint64 x, quint64 y) const { return x - y; }
+    Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
+    Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
+
 signals:
 
     void walletOpened(Wallet * wallet);

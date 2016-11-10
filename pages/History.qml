@@ -48,13 +48,19 @@ Rectangle {
       for (var i = 0; i < count; ++i) {
           var idx = model.index(i, 0)
           var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
-          var amount = model.data(idx, TransactionHistoryModel.TransactionAmountRole);
+          var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
           if (isout)
-              total -= amount
+              total = walletManager.subi(total, amount)
           else
-              total += amount
+              total = walletManager.addi(total, amount)
       }
-      return count + qsTr(" selected: ") + total;
+
+      var sign = ""
+      if (total < 0) {
+        total = -total
+        sign = "-"
+      }
+      return count + qsTr(" selected: ") + sign + walletManager.displayAmount(total);
     }
 
     onModelChanged: {
