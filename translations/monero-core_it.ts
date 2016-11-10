@@ -169,7 +169,7 @@
     <message>
         <location filename="../pages/History.qml" line="102"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
-        <translation>&lt;b&gt;ID Pagameto&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
+        <translation>&lt;b&gt;ID Pagamento&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Utente unico usato nella&lt;br/&gt;rubrica.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="151"/>
