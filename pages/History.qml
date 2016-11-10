@@ -43,6 +43,8 @@ Rectangle {
     color: "#F0EEEE"
 
     function getSelectedAmount() {
+      if (typeof model === 'undefined')
+        return ""
       var total = 0
       var count = model.rowCount()
       for (var i = 0; i < count; ++i) {
