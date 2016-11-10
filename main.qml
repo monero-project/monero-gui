@@ -287,13 +287,17 @@ ApplicationWindow {
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
 
 
-
-        // Store wallet after every refresh.
+        // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
 
-            //TODO: Doesn't need path after creation. Change libwalletqt
-            currentWallet.store("")
-            console.log("Saving wallet");
+            // Save new wallet after first refresh
+            // Wallet is nomrmally saved to disk on app exit. This prevents rescan from block 0 after app crash
+            if(isNewWallet){
+                console.log("Saving wallet after first refresh");
+                //TODO: Doesn't need path argument after creation. Change libwalletqt
+                currentWallet.store("")
+                isNewWallet = false
+            }
 
             // recovering from seed is finished after first refresh
             if(persistentSettings.is_recovering) {
@@ -301,7 +305,6 @@ ApplicationWindow {
             }
         }
 
-        isNewWallet = false
 
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
@@ -969,6 +972,7 @@ ApplicationWindow {
         }
     }
     onClosing: {
-       //walletManager.closeWallet(currentWallet);
+       // Close and save to disk on app close
+       walletManager.closeWallet(currentWallet);
     }
 }
