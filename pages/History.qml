@@ -233,10 +233,16 @@ Rectangle {
             if (advancedFilteringCheckBox.checked) {
                 if (amountFromLine.text.length) {
                     model.amountFromFilter = parseFloat(amountFromLine.text)
+                } else {
+                    // negative value disables filter here;
+                    model.amountFromFilter = -1;
                 }
 
                 if (amountToLine.text.length) {
                     model.amountToFilter = parseFloat(amountToLine.text)
+                } else {
+                    // negative value disables filter here;
+                    model.amountToFilter = -1;
                 }
 
                 var directionFilter = transactionsModel.get(transactionTypeDropdown.currentIndex).value
@@ -319,11 +325,6 @@ Rectangle {
         validator: DoubleValidator {
             locale: "C"
             notation: DoubleValidator.StandardNotation
-            bottom: 0.0
-            top: {
-                console.log("top");
-                parseFloat(amountToLine.text)
-            }
         }
     }
 
@@ -349,10 +350,6 @@ Rectangle {
         validator: DoubleValidator {
             locale: "C"
             notation: DoubleValidator.StandardNotation
-            bottom: {
-                console.log("Botton")
-                parseFloat(amountFromLine.text)
-            }
         }
 
     }
