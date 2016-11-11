@@ -33,7 +33,7 @@ import "../components"
 
 Rectangle {
     id: root
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount,
+    signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
                           int priority, string description)
 
     color: "#F0EEEE"

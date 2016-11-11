@@ -50,7 +50,7 @@ Rectangle {
     property Settings settingsView: Settings { }
 
 
-    signal paymentClicked(string address, string paymentId, double amount, int mixinCount, int priority, string description)
+    signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal generatePaymentIdInvoked()
     signal checkPaymentClicked(string address, string txid, string txkey);
 
