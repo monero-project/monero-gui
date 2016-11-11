@@ -119,5 +119,6 @@
         <file>components/ProcessingSplash.qml</file>
         <file>components/DaemonProgress.qml</file>
         <file>components/StandardDialog.qml</file>
+        <file>pages/Sign.qml</file>
     </qresource>
 </RCC>

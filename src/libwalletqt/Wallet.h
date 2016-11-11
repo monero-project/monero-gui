@@ -140,6 +140,12 @@ public:
     //! integrated address
     Q_INVOKABLE QString integratedAddress(const QString &paymentId) const;
 
+    //! signing a message
+    Q_INVOKABLE QString signMessage(const QString &message, bool filename = false) const;
+
+    //! verify a signed message
+    Q_INVOKABLE bool verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
+
 
     //! saved payment id
     QString paymentId() const;

@@ -47,6 +47,7 @@ Rectangle {
     property Receive receiveView: Receive { }
     property TxKey txkeyView: TxKey { }
     property History historyView: History { }
+    property Sign signView: Sign { }
     property Settings settingsView: Settings { }
 
 
@@ -117,6 +118,9 @@ Rectangle {
             }, State {
                 name: "AddressBook"
                 PropertyChanges { /*TODO*/ }
+            }, State {
+                name: "Sign"
+               PropertyChanges { target: root; currentView: signView }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
