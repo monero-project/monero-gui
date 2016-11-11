@@ -32,7 +32,8 @@ public:
         TransactionIsOutRole,
         // extra roles for date and time (as UI wants date and time separately)
         TransactionDateRole,
-        TransactionTimeRole
+        TransactionTimeRole,
+        TransactionAtomicAmountRole
     };
     Q_ENUM(TransactionInfoRole)
 

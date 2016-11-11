@@ -12,6 +12,7 @@ class TransactionInfo : public QObject
     Q_PROPERTY(bool isPending READ isPending)
     Q_PROPERTY(bool isFailed READ isFailed)
     Q_PROPERTY(double amount READ amount)
+    Q_PROPERTY(quint64 atomicAmount READ atomicAmount)
     Q_PROPERTY(QString displayAmount READ displayAmount)
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
@@ -42,6 +43,7 @@ public:
     bool isPending() const;
     bool isFailed() const;
     double amount() const;
+    quint64 atomicAmount() const;
     QString displayAmount() const;
     QString fee() const;
     quint64 blockHeight() const;
