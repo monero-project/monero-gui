@@ -83,11 +83,11 @@ Rectangle {
         property int editWidth: 400
         property int lineEditFontSize: 12
 
-
         RowLayout {
             ColumnLayout {
+
                 Text {
-                    text: qsTr("You can verify a third party made a payment by supplying:") + translationManager.emptyString
+                    text: qsTr("You can verify that a third party made a payment by supplying:") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
@@ -103,8 +103,9 @@ Rectangle {
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr("If a payment was made up of several tranactions, each transaction must be checked, and the results added") + translationManager.emptyString
+                    text: qsTr("If a payment was made up of several transactions, each transaction must be checked, and the results added") + translationManager.emptyString
                     wrapMode: Text.Wrap
+                    Layout.fillWidth: true;
                 }
             }
         }

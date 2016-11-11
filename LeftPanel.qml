@@ -266,7 +266,7 @@ Rectangle {
                 id: txkeyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Tx Key") + translationManager.emptyString
+                text: qsTr("Verify payment") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
                 dotColor: "#AAFFBB"
                 onClicked: {
