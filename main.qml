@@ -386,6 +386,14 @@ ApplicationWindow {
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
+        } else if (transaction.txCount == 0) {
+            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.icon = StandardIcon.Information
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
@@ -394,13 +402,13 @@ ApplicationWindow {
 
             transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
             transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + qsTr("\nAddress: ") + address
-                        + qsTr("\nPayment ID: ") + paymentId
+                        + (address === "" ? "" : (qsTr("\nAddress: ") + address))
+                        + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
                         + qsTr("\n\nMixin: ") + mixinCount
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
-                        + qsTr("\n\nDescription: ") + transactionDescription
+                        + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
                         + translationManager.emptyString
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
