@@ -82,8 +82,9 @@ Item {
             wrapMode: Text.Wrap
             // hack to implement dynamic translation
             // https://wiki.qt.io/How_to_do_dynamic_translation_in_QML
-            text: qsTr("Welcome") /*+
-                  translationManager.emptyString*/
+            text: qsTr("Welcome") +
+                  translationManager.emptyString
+
         }
 
         Text {
@@ -95,8 +96,7 @@ Item {
             //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
-            text: qsTr("Please choose a language and regional format.")
-//                  + translationManager.emptyString
+            text: qsTr("Please choose a language and regional format.") + translationManager.emptyString
         }
     }
     // Flags model
