@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QUrl>
 #include <QTimer>
+#include <QtConcurrent/QtConcurrent>
 
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
@@ -211,9 +212,28 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
     Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
                 static_cast<Bitmonero::PendingTransaction::Priority>(priority));
-    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
+
+
+void Wallet::createTransactionAsync(const QString &dst_addr, const QString &payment_id,
+                               quint64 amount, quint32 mixin_count,
+                               PendingTransaction::Priority priority)
+{
+    QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransaction,
+                                  dst_addr, payment_id,amount, mixin_count, priority);
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    watcher->setFuture(future);
+    connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
+            this, [this, watcher,dst_addr,payment_id,mixin_count]() {
+        QFuture<PendingTransaction*> future = watcher->future();
+        watcher->deleteLater();
+        emit transactionCreated(future.result(),dst_addr,payment_id,mixin_count);
+    });
+}
+
+
 
 void Wallet::disposeTransaction(PendingTransaction *t)
 {
