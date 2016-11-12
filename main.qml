@@ -606,11 +606,11 @@ ApplicationWindow {
         property string locale
         property string account_name
         property string wallet_path
-        property bool   auto_donations_enabled : true
+        property bool   auto_donations_enabled : false
         property int    auto_donations_amount : 50
-        property bool   allow_background_mining : true
-        property bool   testnet: true
-        property string daemon_address: "localhost:38081"
+        property bool   allow_background_mining : false
+        property bool   testnet: false
+        property string daemon_address: "localhost:18081"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
