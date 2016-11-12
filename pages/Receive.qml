@@ -188,7 +188,7 @@ Rectangle {
     function onPageCompleted() {
         console.log("Receive page loaded");
 
-        if(addressLine.text.length == 0) {
+        if(addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
             updatePaymentId()
         }
 
