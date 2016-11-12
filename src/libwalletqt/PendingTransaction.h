@@ -17,7 +17,8 @@ class PendingTransaction : public QObject
     Q_PROPERTY(quint64 amount READ amount)
     Q_PROPERTY(quint64 dust READ dust)
     Q_PROPERTY(quint64 fee READ fee)
-    Q_PROPERTY(QList<QString> txid READ txid)
+    Q_PROPERTY(QStringList txid READ txid)
+    Q_PROPERTY(quint64 txCount READ txCount)
 
 public:
     enum Status {
@@ -40,7 +41,9 @@ public:
     quint64 amount() const;
     quint64 dust() const;
     quint64 fee() const;
-    QList<QString> txid() const;
+    QStringList txid() const;
+    quint64 txCount() const;
+
 private:
     explicit PendingTransaction(Bitmonero::PendingTransaction * pt, QObject *parent = 0);
 
