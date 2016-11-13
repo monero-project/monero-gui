@@ -152,7 +152,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-        text: qsTr("Privacy Level") + translationManager.emptyString
+        text: qsTr("Privacy level") + translationManager.emptyString
     }
 
     PrivacyLevel {

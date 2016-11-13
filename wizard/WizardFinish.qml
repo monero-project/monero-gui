@@ -53,7 +53,7 @@ Item {
         return "<table>"
             + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
             + trStart + qsTr("Account name") + trMiddle + wizard.settings["account_name"] + trEnd
-            + trStart + qsTr("Words") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            + trStart + qsTr("Seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
             + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
             // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
             // + (autoDonationEnabled
