@@ -67,6 +67,7 @@ fi
 
 
 pushd $MONERO_DIR/build/release/src/wallet
+make version -C ../..
 make -j$CPU_CORE_COUNT
 make install -j$CPU_CORE_COUNT
 popd
