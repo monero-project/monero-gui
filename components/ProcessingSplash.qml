@@ -34,7 +34,7 @@ import QtQuick.Layouts 1.1
 Window {
     id: root
     modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    flags: Qt.Window
     property alias messageText: messageTitle.text
     property alias heightProgressText : heightProgress.text
 
