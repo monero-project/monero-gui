@@ -35,6 +35,7 @@ Rectangle {
     id: root
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
                           int priority, string description)
+    signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
 
@@ -88,7 +89,7 @@ Rectangle {
         LineEdit {
             id: amountLine
             placeholderText: qsTr("") + translationManager.emptyString
-            width: parent.width - 37 - 17
+            width: parent.width - 37 - 17 - 60
             validator: DoubleValidator {
                 bottom: 0.0
                 top: 18446744.073709551615
@@ -96,6 +97,21 @@ Rectangle {
                 notation: DoubleValidator.StandardNotation
                 locale: "C"
             }
+        }
+
+        StandardButton {
+            id: amountAllButton
+            //anchors.left: amountLine.right
+            //anchors.top: amountLine.top
+            //anchors.bottom: amountLine.bottom
+            width: 60
+            text: qsTr("or ALL") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            enabled : true
+            onClicked: amountLine.text = "(all)"
         }
     }
 
@@ -292,6 +308,26 @@ Rectangle {
             paymentIdLine.text = paymentIdLine.text.trim()
             root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
                            priority, descriptionLine.text)
+
+        }
+    }
+
+    StandardButton {
+        id: sweepUnmixableButton
+        anchors.right: parent.right
+        anchors.top: descriptionLine.bottom
+        anchors.rightMargin: 17
+        anchors.topMargin: 17
+        width: 60*2
+        text: qsTr("SWEEP UNMIXABLE") + translationManager.emptyString
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
+        enabled : true
+        onClicked: {
+            console.log("Transfer: sweepUnmixableClicked")
+            root.sweepUnmixableClicked()
 
         }
     }

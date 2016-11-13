@@ -216,7 +216,6 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
     return result;
 }
 
-
 void Wallet::createTransactionAsync(const QString &dst_addr, const QString &payment_id,
                                quint64 amount, quint32 mixin_count,
                                PendingTransaction::Priority priority)
@@ -233,7 +232,51 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
     });
 }
 
+PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const QString &payment_id,
+                                                 quint32 mixin_count, PendingTransaction::Priority priority)
+{
+    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+                dst_addr.toStdString(), payment_id.toStdString(), Bitmonero::optional<uint64_t>(), mixin_count,
+                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    return result;
+}
 
+void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &payment_id,
+                               quint32 mixin_count,
+                               PendingTransaction::Priority priority)
+{
+    QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransactionAll,
+                                  dst_addr, payment_id, mixin_count, priority);
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    watcher->setFuture(future);
+    connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
+            this, [this, watcher,dst_addr,payment_id,mixin_count]() {
+        QFuture<PendingTransaction*> future = watcher->future();
+        watcher->deleteLater();
+        emit transactionCreated(future.result(),dst_addr,payment_id,mixin_count);
+    });
+}
+
+PendingTransaction *Wallet::createSweepUnmixableTransaction()
+{
+    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
+    PendingTransaction * result = new PendingTransaction(ptImpl, this);
+    return result;
+}
+
+void Wallet::createSweepUnmixableTransactionAsync()
+{
+    QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createSweepUnmixableTransaction);
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    watcher->setFuture(future);
+    connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
+            this, [this, watcher]() {
+        QFuture<PendingTransaction*> future = watcher->future();
+        watcher->deleteLater();
+        emit transactionCreated(future.result(),"","",0);
+    });
+}
 
 void Wallet::disposeTransaction(PendingTransaction *t)
 {

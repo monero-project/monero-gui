@@ -157,6 +157,7 @@ ApplicationWindow {
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
         }
         middlePanel.paymentClicked.connect(handlePayment);
+        middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         // basicPanel.paymentClicked.connect(handlePayment);
         middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
@@ -385,6 +386,14 @@ ApplicationWindow {
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
+        } else if (transaction.txCount == 0) {
+            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.icon = StandardIcon.Information
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
@@ -393,13 +402,13 @@ ApplicationWindow {
 
             transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
             transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + qsTr("\nAddress: ") + address
-                        + qsTr("\nPayment ID: ") + paymentId
+                        + (address === "" ? "" : (qsTr("\nAddress: ") + address))
+                        + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
                         + qsTr("\n\nMixin: ") + mixinCount
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
-                        + qsTr("\n\nDescription: ") + transactionDescription
+                        + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
                         + translationManager.emptyString
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
@@ -422,33 +431,77 @@ ApplicationWindow {
         transactionDescription = description;
 
         // validate amount;
-        var amountxmr = walletManager.amountFromString(amount);
-        console.log("integer amount: ", amountxmr);
-        console.log("integer unlocked",currentWallet.unlockedBalance)
-        if (amountxmr <= 0) {
-            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
-                    .arg(walletManager.displayAmount(0))
-                    .arg(walletManager.maximumAllowedAmountAsSting())
-                    + translationManager.emptyString
+        if (amount !== "(all)") {
+            var amountxmr = walletManager.amountFromString(amount);
+            console.log("integer amount: ", amountxmr);
+            console.log("integer unlocked",currentWallet.unlockedBalance)
+            if (amountxmr <= 0) {
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
+                        .arg(walletManager.displayAmount(0))
+                        .arg(walletManager.maximumAllowedAmountAsSting())
+                        + translationManager.emptyString
 
-            informationPopup.icon  = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
-            return;
-        } else if (amountxmr > currentWallet.unlockedBalance) {
-            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text  = qsTr("insufficient funds. Unlocked balance: %1")
-                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
-                    + translationManager.emptyString
+                informationPopup.icon  = StandardIcon.Critical
+                informationPopup.onCloseCallback = null
+                informationPopup.open()
+                return;
+            } else if (amountxmr > currentWallet.unlockedBalance) {
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("insufficient funds. Unlocked balance: %1")
+                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
+                        + translationManager.emptyString
 
-            informationPopup.icon  = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
-            return;
+                informationPopup.icon  = StandardIcon.Critical
+                informationPopup.onCloseCallback = null
+                informationPopup.open()
+                return;
+            }
         }
 
-        currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
+        if (amount === "(all)")
+            currentWallet.createTransactionAllAsync(address, paymentId, amountxmr, mixinCount, priority);
+        else
+            currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
+    }
+
+    function handleSweepUnmixable() {
+        console.log("Creating transaction: ")
+
+        transaction = currentWallet.createSweepUnmixableTransaction();
+        if (transaction.status !== PendingTransaction.Status_Ok) {
+            console.error("Can't create transaction: ", transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+
+        } else if (transaction.txCount == 0) {
+            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.icon = StandardIcon.Information
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            // deleting transaction object, we don't want memleaks
+            currentWallet.disposeTransaction(transaction);
+        } else {
+            console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
+                    + ", fee: " + walletManager.displayAmount(transaction.fee));
+
+            // here we show confirmation popup;
+
+            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
+                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
+                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
+                        + translationManager.emptyString
+            transactionConfirmationPopup.icon = StandardIcon.Question
+            transactionConfirmationPopup.open()
+            // committing transaction
+        }
     }
 
     // called after user confirms transaction

@@ -52,6 +52,7 @@ Rectangle {
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
+    signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
     signal checkPaymentClicked(string address, string txid, string txkey);
 
@@ -307,6 +308,10 @@ Rectangle {
         onPaymentClicked : {
             console.log("MiddlePanel: paymentClicked")
             paymentClicked(address, paymentId, amount, mixinCount, priority, description)
+        }
+        onSweepUnmixableClicked : {
+            console.log("MiddlePanel: sweepUnmixableClicked")
+            sweepUnmixableClicked()
         }
     }
 }
