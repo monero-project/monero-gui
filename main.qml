@@ -199,7 +199,7 @@ ApplicationWindow {
 
 
     function connectWallet(wallet) {
-        showProcessingSplash()
+        showProcessingSplash("Please wait...")
         currentWallet = wallet
 
         // Disconnect before connecting
