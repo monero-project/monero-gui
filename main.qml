@@ -771,7 +771,7 @@ ApplicationWindow {
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
-                PropertyChanges { target: titleBar; y: -titleBar.height }
+                PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
@@ -826,8 +826,11 @@ ApplicationWindow {
             height: 30
             z: 1
             hoverEnabled: true
+            // Uncomment to enable 'auto-hidden' titlebar
+            /*
             onEntered: if(!blocked) titleBar.y = 0
             onExited: if(!blocked) titleBar.y = -titleBar.height
+            */
             propagateComposedEvents: true
             onPressed: mouse.accepted = false
             onReleased: mouse.accepted = false
