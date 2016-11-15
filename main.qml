@@ -244,6 +244,10 @@ ApplicationWindow {
 
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+                // Catch 32bit/64bit cache error
+                if (wallet.errorString === "basic_string::_M_replace_aux"){
+                    informationPopup.text = informationPopup.text + "\n\n" + qsTr("You may want to remove the wallet cache and try again")
+                }
                 informationPopup.icon = StandardIcon.Critical
                 console.log("closing wallet async : " + wallet.address)
                 walletManager.closeWalletAsync(wallet);
