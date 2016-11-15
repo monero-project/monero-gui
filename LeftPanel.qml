@@ -228,7 +228,7 @@ Rectangle {
                 id: transferButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Transfer") + translationManager.emptyString
+                text: qsTr("Send") + translationManager.emptyString
                 symbol: qsTr("T") + translationManager.emptyString
                 dotColor: "#FF6C3C"
                 onClicked: {
