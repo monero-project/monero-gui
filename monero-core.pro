@@ -204,11 +204,13 @@ QMAKE_EXTRA_COMPILERS += langrel
 
 
 
-# temporary: do not update/release translations for "Debug" build,
-# as we have an issue with linking
-CONFIG(release, debug|release) {
-    PRE_TARGETDEPS += langupd compiler_langrel_make_all
-}
+# Update: no issues with the "slow link process" anymore,
+# for development, just build debug version of libwallet_merged lib
+# by invoking 'get_libwallet_api.sh Debug'
+# so we update translations everytime even for debug build
+
+PRE_TARGETDEPS += langupd compiler_langrel_make_all
+
 
 RESOURCES += qml.qrc
 
