@@ -48,7 +48,7 @@ Rectangle {
     color: "#F0EEEE"
 
     function getSelectedAmount() {
-      if (typeof model === 'undefined')
+      if (typeof model === 'undefined' || model == null)
         return ""
       var total = 0
       var count = model.rowCount()
