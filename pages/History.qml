@@ -70,6 +70,15 @@ Rectangle {
       return count + qsTr(" selected: ") + sign + walletManager.displayAmount(total);
     }
 
+    function resetFilter(model) {
+        model.dateFromFilter = "2014-04-18" // genesis block
+        model.dateToFilter = "9999-09-09" // fix before september 9999
+        // negative values disable filters here;
+        model.amountFromFilter = -1;
+        model.amountToFilter = -1;
+        model.directionFilter = TransactionInfo.Direction_Both;
+    }
+
     onModelChanged: {
         if (typeof model !== 'undefined') {
 
@@ -285,6 +294,8 @@ Rectangle {
 
             model.paymentIdFilter = paymentIdLine.text
 
+            resetFilter(model)
+
             if (fromDatePicker.currentDate > toDatePicker.currentDate) {
                 console.error("Invalid date filter set: ", fromDatePicker.currentDate, toDatePicker.currentDate)
             } else {
@@ -295,16 +306,10 @@ Rectangle {
             if (advancedFilteringCheckBox.checked) {
                 if (amountFromLine.text.length) {
                     model.amountFromFilter = parseFloat(amountFromLine.text)
-                } else {
-                    // negative value disables filter here;
-                    model.amountFromFilter = -1;
                 }
 
                 if (amountToLine.text.length) {
                     model.amountToFilter = parseFloat(amountToLine.text)
-                } else {
-                    // negative value disables filter here;
-                    model.amountToFilter = -1;
                 }
 
                 var directionFilter = transactionsModel.get(transactionTypeDropdown.currentIndex).value
