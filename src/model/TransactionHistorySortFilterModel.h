@@ -14,6 +14,7 @@ class TransactionHistory;
 class TransactionHistorySortFilterModel: public QSortFilterProxyModel
 {
     Q_OBJECT
+    Q_PROPERTY(QString searchFilter READ searchFilter WRITE setSearchFilter NOTIFY searchFilterChanged)
     Q_PROPERTY(QString paymentIdFilter READ paymentIdFilter WRITE setPaymentIdFilter NOTIFY paymentIdFilterChanged)
     Q_PROPERTY(QDate dateFromFilter READ dateFromFilter WRITE setDateFromFilter NOTIFY dateFromFilterChanged)
     Q_PROPERTY(QDate dateToFilter READ dateToFilter WRITE setDateToFilter NOTIFY dateToFilterChanged)
@@ -25,6 +26,10 @@ class TransactionHistorySortFilterModel: public QSortFilterProxyModel
 
 public:
     TransactionHistorySortFilterModel(QObject * parent = nullptr);
+    //! filtering by string search
+    QString searchFilter() const;
+    void setSearchFilter(const QString &arg);
+
     //! filtering by payment id
     QString paymentIdFilter() const;
     void setPaymentIdFilter(const QString &arg);
@@ -53,6 +58,7 @@ public:
     TransactionHistory * transactionHistory() const;
 
 signals:
+    void searchFilterChanged();
     void paymentIdFilterChanged();
     void dateFromFilterChanged();
     void dateToFilterChanged();
@@ -74,6 +80,7 @@ private:
 
 private:
     QMap<int, QVariant> m_filterValues;
+    QString m_searchString;
 };
 
 #endif // TRANSACTIONHISTORYSORTFILTERMODEL_H

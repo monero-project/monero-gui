@@ -42,6 +42,20 @@ TransactionHistorySortFilterModel::TransactionHistorySortFilterModel(QObject *pa
     setDynamicSortFilter(true);
 }
 
+QString TransactionHistorySortFilterModel::searchFilter() const
+{
+    return m_searchString;
+}
+
+void TransactionHistorySortFilterModel::setSearchFilter(const QString &arg)
+{
+    if (searchFilter() != arg) {
+        m_searchString = arg;
+        emit searchFilterChanged();
+        invalidateFilter();
+    }
+}
+
 QString TransactionHistorySortFilterModel::paymentIdFilter() const
 {
     return m_filterValues.value(TransactionHistoryModel::TransactionPaymentIdRole).toString();
@@ -200,7 +214,32 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
         }
     }
 
-    return result;
+    if (!result || m_searchString.isEmpty())
+        return result;
+
+    QVariant data = sourceModel()->data(index, TransactionHistoryModel::TransactionPaymentIdRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionDisplayAmountRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionBlockHeightRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionFeeRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionHashRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionDateRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionTimeRole);
+    if (data.toString().contains(m_searchString))
+        return true;
+
+    return false;
 }
 
 bool TransactionHistorySortFilterModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
