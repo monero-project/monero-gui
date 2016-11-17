@@ -349,24 +349,12 @@ ApplicationWindow {
         currentWallet.history.refresh() // this will refresh model
     }
 
-
-
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
-            var lastOpenedExists = walletManager.walletExists(persistentSettings.wallet_path);
-            if (lastOpenedExists) {
-                console.log("Last opened wallet exists in:",persistentSettings.wallet_path)
-            }
-         }
-
-        // Check if wallets exists in default path
-        var wallets = walletManager.findWallets(moneroAccountsDir);
-        if (wallets.length === 0) {
-            wallets = walletManager.findWallets(applicationDirectory);
+            return walletManager.walletExists(persistentSettings.wallet_path);
         }
-        return (wallets.length > 0 || lastOpenedExists);
+        return false;
     }
-
 
     function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
         console.log("Transaction created");
