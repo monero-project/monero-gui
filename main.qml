@@ -603,7 +603,10 @@ ApplicationWindow {
         walletInitialized = false;
         splashCounter = 0;
         // we can't close async here. Gui crashes if wallet is open
-        walletManager.closeWallet(currentWallet);
+        if (currentWallet != undefined) {
+            walletManager.closeWallet(currentWallet);
+            currentWallet = undefined
+        }
         wizard.restart();
         rootItem.state = "wizard"
 
@@ -1026,6 +1029,9 @@ ApplicationWindow {
     }
     onClosing: {
        // Close and save to disk on app close
-       walletManager.closeWallet(currentWallet);
+       if (currentWallet != undefined) {
+           walletManager.closeWallet(currentWallet);
+           currentWallet = undefined
+       }
     }
 }
