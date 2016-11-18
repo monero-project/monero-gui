@@ -106,7 +106,7 @@ Rectangle {
             }, State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
-                PropertyChanges { target: historyView; model: appWindow.currentWallet.historyModel }
+                PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
