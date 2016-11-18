@@ -427,5 +427,6 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
 Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
+    delete m_history;
     Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
 }
