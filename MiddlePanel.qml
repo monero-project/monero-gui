@@ -150,7 +150,7 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 2
-        anchors.topMargin: 30
+        anchors.topMargin: 0
         spacing: 0
 
 
@@ -169,12 +169,13 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.verticalCenterOffset: -5
                 anchors.left: parent.left
-                anchors.leftMargin: 20
+                anchors.leftMargin: 40
                 source: "images/moneroLogo2.png"
             }
 
             Grid {
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.top: parent.top
                 anchors.right: parent.right
                 width: 256
                 columns: 3
