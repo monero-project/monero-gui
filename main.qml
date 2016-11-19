@@ -615,7 +615,7 @@ ApplicationWindow {
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: 800
     color: "#FFFFFF"
-    flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
+    flags: Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint
     onWidthChanged: x -= 0
 
 
@@ -743,10 +743,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: 930; }
                 PropertyChanges { target: appWindow; height: 595; }
                 PropertyChanges { target: resizeArea; visible: false }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: false }
                 PropertyChanges { target: frameArea; blocked: true }
-                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
@@ -757,10 +754,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
                 PropertyChanges { target: appWindow; height: 800; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
-                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
 
@@ -814,11 +808,6 @@ ApplicationWindow {
             height: 30
             z: 1
             hoverEnabled: true
-            // Uncomment to enable 'auto-hidden' titlebar
-            /*
-            onEntered: if(!blocked) titleBar.y = 0
-            onExited: if(!blocked) titleBar.y = -titleBar.height
-            */
             propagateComposedEvents: true
             onPressed: mouse.accepted = false
             onReleased: mouse.accepted = false
@@ -832,11 +821,6 @@ ApplicationWindow {
                 target: appWindow
                 properties: "visibility"
                 value: Window.Windowed
-            }
-            PropertyAction {
-                target: titleBar
-                properties: "maximizeButtonVisible"
-                value: false
             }
             PropertyAction {
                 target: frameArea
@@ -926,11 +910,6 @@ ApplicationWindow {
                 properties: "blocked"
                 value: false
             }
-            PropertyAction {
-                target: titleBar
-                properties: "maximizeButtonVisible"
-                value: true
-            }
         }
 
         WizardMain {
@@ -993,8 +972,10 @@ ApplicationWindow {
 
         TitleBar {
             id: titleBar
-            anchors.left: parent.left
-            anchors.right: parent.right
+            x: 0
+            y: 0
+            width: 30
+            height: 30
             onGoToBasicVersion: {
                 if (yes) {
                     // basicPanel.currentView = middlePanel.currentView
@@ -1002,24 +983,6 @@ ApplicationWindow {
                 } else {
                     // middlePanel.currentView = basicPanel.currentView
                     goToProAnimation.start()
-                }
-            }
-
-            MouseArea {
-                property var previousPosition
-                anchors.fill: parent
-                propagateComposedEvents: true
-                onPressed: previousPosition = globalCursor.getPosition()
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var pos = globalCursor.getPosition()
-                        var dx = pos.x - previousPosition.x
-                        var dy = pos.y - previousPosition.y
-
-                        appWindow.x += dx
-                        appWindow.y += dy
-                        previousPosition = pos
-                    }
                 }
             }
         }
