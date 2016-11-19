@@ -685,11 +685,11 @@ ApplicationWindow {
     // TODO: replace with customized popups
 
     // Information dialog
-    MessageDialog {
+    StandardDialog {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
-        standardButtons: StandardButton.Ok
+        cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
                 onCloseCallback()
@@ -698,10 +698,10 @@ ApplicationWindow {
     }
 
     // Confrirmation aka question dialog
-    MessageDialog {
+    StandardDialog {
         id: transactionConfirmationPopup
-        standardButtons: StandardButton.Ok  + StandardButton.Cancel
         onAccepted: {
+            close();
             handleTransactionConfirmed()
         }
     }
