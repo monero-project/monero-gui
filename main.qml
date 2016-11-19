@@ -527,6 +527,7 @@ ApplicationWindow {
         informationPopup.open()
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
+        currentWallet.store();
     }
 
     // called on "checkPayment"
