@@ -56,6 +56,23 @@ Rectangle {
           integratedAddressLine.text = qsTr("Invalid payment ID")
     }
 
+    function makeQRCodeString() {
+        var s = "monero:"
+        var nfields = 0
+        s += addressLine.text
+        var amount = amountLine.text.trim()
+        if (amount !== "") {
+          s += (nfields++ ? "&" : "?")
+          s += "tx_amount=" + amount
+        }
+        var pid = paymentIdLine.text.trim()
+        if (pid !== "") {
+          s += (nfields++ ? "&" : "?")
+          s += "tx_payment_id=" + pid
+        }
+        return s
+    }
+
     Clipboard { id: clipboard }
 
 
@@ -71,6 +88,7 @@ Rectangle {
         property int labelWidth: 120
         property int editWidth: 400
         property int lineEditFontSize: 12
+        property int qrCodeSize: 240
 
 
         RowLayout {
@@ -183,6 +201,43 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            id: amountRow
+            Label {
+                id: amountLabel
+                fontSize: 14
+                text: qsTr("Amount") + translationManager.emptyString
+                width: mainLayout.labelWidth
+            }
+
+
+            LineEdit {
+                id: amountLine
+                fontSize: mainLayout.lineEditFontSize
+                placeholderText: qsTr("Amount") + translationManager.emptyString
+                readOnly: false
+                width: mainLayout.editWidth
+                Layout.fillWidth: true
+                validator: DoubleValidator {
+                    bottom: 0.0
+                    top: 18446744.073709551615
+                    decimals: 12
+                    notation: DoubleValidator.StandardNotation
+                    locale: "C"
+                }
+            }
+        }
+
+        Image {
+            id: qrCode
+            anchors.margins: 50
+            anchors.top: amountRow.bottom
+            Layout.fillWidth: true
+            Layout.minimumHeight: mainLayout.qrCodeSize
+            smooth: false
+            fillMode: Image.PreserveAspectFit
+            source: "image://qrcode/" + makeQRCodeString()
+        }
     }
 
     function onPageCompleted() {
