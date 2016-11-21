@@ -918,7 +918,7 @@ ApplicationWindow {
             NumberAnimation {
                 target: appWindow
                 properties: "height"
-                to: 800
+                to: maxWindowHeight
                 easing.type: Easing.InCubic
                 duration: 200
             }
