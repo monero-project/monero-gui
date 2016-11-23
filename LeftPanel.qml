@@ -242,7 +242,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: transferButton.checked || receiveButton.checked ? "#1C1C1C" : "#505050"
+                color: "#505050"
                 height: 1
             }
 
@@ -260,7 +260,13 @@ Rectangle {
                     panel.receiveClicked()
                 }
             }
-
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
             // ------------- TxKey tab ---------------
             MenuButton {
                 id: txkeyButton
@@ -275,12 +281,11 @@ Rectangle {
                     panel.txkeyClicked()
                 }
             }
-
             Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: transferButton.checked || historyButton.checked ? "#1C1C1C" : "#505050"
+                color: "#505050"
                 height: 1
             }
 
@@ -298,6 +303,13 @@ Rectangle {
                     parent.previousButton = historyButton
                     panel.historyClicked()
                 }
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
             }
             /*
             Rectangle {
@@ -367,6 +379,13 @@ Rectangle {
                     parent.previousButton = signButton
                     panel.signClicked()
                 }
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
             }
             // ------------- Settings tab ---------------
             MenuButton {
