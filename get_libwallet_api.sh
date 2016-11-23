@@ -42,7 +42,8 @@ pushd $MONERO_DIR/build/release
 
 # reusing function from "utils.sh"
 platform=$(get_platform)
-
+# default make executable
+make_exec="make"
 if [ "$platform" == "darwin" ]; then
     # Do something under Mac OS X platform        
     echo "Configuring build for MacOS.."
@@ -59,6 +60,7 @@ elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."
     cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    make_exec="mingw32-make"
 else
     echo "Unsupported platform: $platform"
     popd
@@ -67,9 +69,9 @@ fi
 
 
 pushd $MONERO_DIR/build/release/src/wallet
-make version -C ../..
-make -j$CPU_CORE_COUNT
-make install -j$CPU_CORE_COUNT
+eval $make_exec version -C ../..
+eval $make_exec  -j$CPU_CORE_COUNT
+eval $make_exec  install -j$CPU_CORE_COUNT
 popd
 
 # unbound is one more dependency. can't be merged to the wallet_merged
@@ -86,4 +88,3 @@ if [ "$platform" != "linux" ]; then
 fi
 
 popd
-
