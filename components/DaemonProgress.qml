@@ -26,13 +26,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.6
 
 Item {
     id: item
     property int fillLevel: 0
-    height: 44
-    anchors.margins: 10
+    height: 22
+    anchors.margins:15
     visible: false
     //clip: true
 
@@ -56,7 +56,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 18
+        height: 22
         //radius: 4
         color: "#FFFFFF"
 
@@ -66,25 +66,28 @@ Item {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.margins: 2
+            height: bar.height
             property int maxWidth: parent.width - 4
             width: (maxWidth * fillLevel) / 100
-
             color: {
-               if(item.fillLevel < 99) return "#FF6C3C"
+               if(item.fillLevel < 99 ) return "#FF6C3C"
                //if(item.fillLevel < 99) return "#FFE00A"
                 return "#36B25C"
             }
 
         }
-    }
 
-    Text {
-        id:progressText
-        anchors.bottom: parent.bottom
-        font.family: "Arial"
-        font.pixelSize: 12
-        color: "#545454"
-        text: qsTr("Synchronizing blocks")
+        Text {
+            id:progressText
+            anchors.bottom: parent.bottom
+            font.family: "Arial"
+            font.pixelSize: 12
+            leftPadding: 8
+            color: "#000"
+            height: 18
+            verticalAlignment: Text.alignVCenter
+            text: qsTr("Synchronizing blocks")
+        }
     }
 
 }
