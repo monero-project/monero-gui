@@ -11,6 +11,7 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
+                $$PWD/src/QR-Code-generator \
                 $$PWD/src
 
 HEADERS += \
@@ -22,10 +23,14 @@ HEADERS += \
     src/libwalletqt/PendingTransaction.h \
     src/libwalletqt/TransactionHistory.h \
     src/libwalletqt/TransactionInfo.h \
+    src/libwalletqt/QRCodeImageProvider.h \
     oshelper.h \
     TranslationManager.h \
     src/model/TransactionHistoryModel.h \
-    src/model/TransactionHistorySortFilterModel.h
+    src/model/TransactionHistorySortFilterModel.h \
+    src/QR-Code-generator/BitBuffer.hpp \
+    src/QR-Code-generator/QrCode.hpp \
+    src/QR-Code-generator/QrSegment.hpp
 
 
 SOURCES += main.cpp \
@@ -37,10 +42,14 @@ SOURCES += main.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \
+    src/libwalletqt/QRCodeImageProvider.cpp \
     oshelper.cpp \
     TranslationManager.cpp \
     src/model/TransactionHistoryModel.cpp \
-    src/model/TransactionHistorySortFilterModel.cpp
+    src/model/TransactionHistorySortFilterModel.cpp \
+    src/QR-Code-generator/BitBuffer.cpp \
+    src/QR-Code-generator/QrCode.cpp \
+    src/QR-Code-generator/QrSegment.cpp
 
 lupdate_only {
 SOURCES = *.qml \

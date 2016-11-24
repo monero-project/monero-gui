@@ -37,6 +37,7 @@
 #include "oshelper.h"
 #include "WalletManager.h"
 #include "Wallet.h"
+#include "QRCodeImageProvider.h"
 #include "PendingTransaction.h"
 #include "TranslationManager.h"
 #include "TransactionInfo.h"
@@ -102,6 +103,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
+    engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
