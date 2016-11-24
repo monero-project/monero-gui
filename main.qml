@@ -135,6 +135,7 @@ ApplicationWindow {
 
     function openWalletFromFile(){
         persistentSettings.restore_height = 0
+        restoreHeight = 0;
         persistentSettings.is_recovering = false
         appWindow.password = ""
         fileDialog.open();
@@ -180,6 +181,7 @@ ApplicationWindow {
             console.log("using wizard wallet")
             //Set restoreHeight
             if(persistentSettings.restore_height > 0){
+                // We store restore height in own variable for performance reasons.
                 restoreHeight = persistentSettings.restore_height
             }
 
