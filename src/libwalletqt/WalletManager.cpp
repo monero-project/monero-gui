@@ -174,6 +174,36 @@ QString WalletManager::checkPayment(const QString &address, const QString &txid,
     return QString::fromStdString(result);
 }
 
+void WalletManager::setDaemonAddress(const QString &address)
+{
+    m_pimpl->setDaemonAddress(address.toStdString());
+}
+
+bool WalletManager::connected() const
+{
+    return m_pimpl->connected();
+}
+
+quint64 WalletManager::networkDifficulty() const
+{
+    return m_pimpl->networkDifficulty();
+}
+
+quint64 WalletManager::blockchainHeight() const
+{
+    return m_pimpl->blockchainHeight();
+}
+
+quint64 WalletManager::blockchainTargetHeight() const
+{
+    return m_pimpl->blockchainTargetHeight();
+}
+
+double WalletManager::miningHashRate() const
+{
+    return m_pimpl->miningHashRate();
+}
+
 void WalletManager::setLogLevel(int logLevel)
 {
     Bitmonero::WalletManagerFactory::setLogLevel(logLevel);

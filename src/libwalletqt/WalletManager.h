@@ -13,6 +13,7 @@ namespace Bitmonero {
 class WalletManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool connected READ connected)
 
 public:
     enum LogLevel {
@@ -94,6 +95,13 @@ public:
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
     Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
+
+    Q_INVOKABLE void setDaemonAddress(const QString &address);
+    Q_INVOKABLE bool connected() const;
+    Q_INVOKABLE quint64 networkDifficulty() const;
+    Q_INVOKABLE quint64 blockchainHeight() const;
+    Q_INVOKABLE quint64 blockchainTargetHeight() const;
+    Q_INVOKABLE double miningHashRate() const;
 
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
