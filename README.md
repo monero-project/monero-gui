@@ -142,9 +142,13 @@ TODO
 
 	`cd monero-core`
 
-8. Start the build:
+8. Build libwallet
 
-  `build.sh`
+  `./get_libwallet_api.sh`
+
+9. Start the build:
+
+  `./build.sh`
 
 The executable can be found in the `build/release/bin` folder.
 
