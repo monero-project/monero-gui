@@ -167,7 +167,7 @@ Rectangle {
             
             MouseArea {
                 anchors.fill: parent
-                onClicked: Qt.quit()
+                onClicked: appWindow.close();
             }
         }
     }
