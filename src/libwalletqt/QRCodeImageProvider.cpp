@@ -10,7 +10,7 @@ QImage QRCodeImageProvider::requestImage(const QString &id, QSize *size, const Q
   QImage img = QImage(qrcode.size, qrcode.size, QImage::Format_Mono);
   for (int y = 0; y < qrcode.size; ++y)
     for (int x = 0; x < qrcode.size; ++x)
-      img.setPixel(x, y, qrcode.getModule(x, y));
+      img.setPixel(x, y, !qrcode.getModule(x, y)); // 1 is black, not "255/white"
   if (size)
     *size = QSize(qrcode.size, qrcode.size);
   return img;
