@@ -448,7 +448,7 @@ ApplicationWindow {
         }
 
         if (amount === "(all)")
-            currentWallet.createTransactionAllAsync(address, paymentId, amountxmr, mixinCount, priority);
+            currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
         else
             currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
     }
