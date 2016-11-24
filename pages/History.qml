@@ -170,34 +170,32 @@ Rectangle {
     }
     */
 
-    // Filter by Payment ID input
+    // Filter by string
 
     Label {
-        id: paymentIdLabel
+        id: searchLabel
         anchors.left: parent.left
         anchors.top: filterHeaderText.bottom // addressLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
+        text: qsTr("Incremental search") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during thevtransfer")
-            + translationManager.emptyString
+        tipText: qsTr("Search transfers for a given string") + translationManager.emptyString
     }
 
     LineEdit {
-        id: paymentIdLine
+        id: searchLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom // addressLabel.bottom
+        anchors.top: searchLabel.bottom // addressLabel.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
-        validator: RegExpValidator {
-            regExp: /[0-9a-fA-F]+/
+        placeholderText: qsTr("Type search string") + translationManager.emptyString
+        onTextChanged:  {
+            model.searchFilter = searchLine.text
+            selectedAmount.text = getSelectedAmount()
         }
-
-
     }
 
     // Filter by description input (not implemented yet)
@@ -205,7 +203,7 @@ Rectangle {
     Label {
         id: descriptionLabel
         anchors.left: parent.left
-        anchors.top: paymentIdLine.bottom
+        anchors.top: searchLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("Description <font size='2'>(Local database)</font>") + translationManager.emptyString
@@ -229,7 +227,7 @@ Rectangle {
     Label {
         id: dateFromText
         anchors.left: parent.left
-        anchors.top:  paymentIdLine.bottom // descriptionLine.bottom
+        anchors.top:  searchLine.bottom // descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
@@ -255,7 +253,7 @@ Rectangle {
     Label {
         id: dateToText
         anchors.left: dateFromText.right
-        anchors.top:  paymentIdLine.bottom //descriptionLine.bottom
+        anchors.top:  searchLine.bottom //descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("To")
@@ -291,8 +289,6 @@ Rectangle {
         pressedColor: "#4D0051"
         onClicked:  {
             // Apply filter here;
-
-            model.paymentIdFilter = paymentIdLine.text
 
             resetFilter(model)
 
