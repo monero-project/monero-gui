@@ -58,6 +58,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
+    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -617,7 +618,7 @@ ApplicationWindow {
     objectName: "appWindow"
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
-    height: 800
+    height: maxWindowHeight;
     color: "#FFFFFF"
     flags: Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
     onWidthChanged: x -= 0
@@ -625,7 +626,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         x = (Screen.width - width) / 2
-        y = (Screen.height - height) / 2
+        y = (Screen.height - maxWindowHeight) / 2
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
@@ -759,7 +760,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
                 PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
-                PropertyChanges { target: appWindow; height: 800; }
+                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
@@ -921,7 +922,7 @@ ApplicationWindow {
             NumberAnimation {
                 target: appWindow
                 properties: "height"
-                to: 800
+                to: maxWindowHeight
                 easing.type: Easing.InCubic
                 duration: 200
             }
