@@ -42,7 +42,7 @@ Rectangle {
     property alias integratedAddressText : integratedAddressLine.text
 
     function updatePaymentId(payment_id) {
-        if (typeof appWindow.currentWallet === 'undefined')
+        if (typeof appWindow.currentWallet === 'undefined' || appWindow.currentWallet == null)
             return
         // generate a new one if not given as argument
         if (typeof payment_id === 'undefined') {
