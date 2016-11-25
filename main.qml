@@ -59,6 +59,7 @@ ApplicationWindow {
     property int restoreHeight:0
     property bool daemonSynced: false
     property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property bool daemonRunning: false
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -292,6 +293,10 @@ ApplicationWindow {
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
 
+        // If wallet isnt connected and no daemon is running - Ask
+        if(!currentWallet.connected && !daemonManager.running() && !walletInitialized){
+            daemonManagerDialog.open();
+        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -317,21 +322,18 @@ ApplicationWindow {
             walletInitialized = true
         }
 
-
-
-
-       // daemonManager.daemonConsole();
-       // console.log("Daemon runnnig: ",daemonManager.running());
-
-        if(!daemonManager.running()){
-            daemonManagerDialog.open();
-        }
-
-
-
-
         onWalletUpdate();
     }
+
+    function onDaemonStarted(){
+        console.log("daemon started");
+        daemonRunning = true;
+    }
+    function onDaemonStopped(){
+        console.log("daemon stopped");
+        daemonRunning = false;
+    }
+
 
     function onWalletNewBlock(blockHeight) {
         if (splash.visible) {
@@ -644,6 +646,9 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
+
+        daemonManager.daemonStarted.connect(onDaemonStarted);
+        daemonManager.daemonStopped.connect(onDaemonStopped);
 
         if(!walletsFound()) {
             rootItem.state = "wizard"

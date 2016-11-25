@@ -21,8 +21,7 @@ public:
     Q_INVOKABLE bool running() const;
 
 signals:
-
-    void daemonStarted(const QProcess &d);
+    void daemonStarted();
     void daemonStopped();
 
 public slots:

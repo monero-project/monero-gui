@@ -36,6 +36,8 @@ bool DaemonManager::start()
 
     if(!started){
         qDebug() << "Daemon start error: " + m_daemon->errorString();
+    } else {
+        emit daemonStarted();
     }
 
     return started;
@@ -43,6 +45,15 @@ bool DaemonManager::start()
 
 bool DaemonManager::stop()
 {
+    if(m_daemon){
+        qDebug() << "stopping daemon";
+        m_daemon->terminate();
+        // Wait until stopped. Max 30 seconds
+        bool stopped = m_daemon->waitForFinished(30000);
+        if(stopped) emit daemonStopped();
+        return stopped;
+    }
+
     return true;
 }
 
