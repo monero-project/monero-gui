@@ -115,9 +115,6 @@ int main(int argc, char *argv[])
     QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 
-
->>>>>>> cc05e1a... Shutdown daemon and close wallet properly on app exit
-
 //  export to QML monero accounts root directory
 //  wizard is talking about where
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
