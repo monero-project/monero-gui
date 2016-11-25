@@ -1053,12 +1053,13 @@ ApplicationWindow {
         }
     }
     onClosing: {
-       // Close and save to disk on app close
-       if (currentWallet != undefined) {
-           walletManager.closeWallet(currentWallet);
-           currentWallet = undefined
-       }
-       // Stop daemon
-       daemonManager.stop();
+        // Make sure wallet is closed before app exit (~Wallet() isn't always invoked)
+        // Daemon shutdown is handled with signal/slot in main.cpp
+        if (currentWallet != undefined) {
+            walletManager.closeWallet(currentWallet);
+            currentWallet = undefined
+        }
+        // Stop daemon
+        daemonManager.stop();
     }
 }

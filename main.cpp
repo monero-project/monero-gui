@@ -31,6 +31,7 @@
 #include <QtQml>
 #include <QStandardPaths>
 #include <QDebug>
+#include <QObject>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -109,6 +110,13 @@ int main(int argc, char *argv[])
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
 
     engine.rootContext()->setContextProperty("daemonManager", DaemonManager::instance(QCoreApplication::arguments()));
+
+    DaemonManager * daemonManager = DaemonManager::instance(QCoreApplication::arguments());
+    QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
+    engine.rootContext()->setContextProperty("daemonManager", daemonManager);
+
+
+>>>>>>> cc05e1a... Shutdown daemon and close wallet properly on app exit
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
