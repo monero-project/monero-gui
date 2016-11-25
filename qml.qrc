@@ -120,5 +120,6 @@
         <file>components/DaemonProgress.qml</file>
         <file>components/StandardDialog.qml</file>
         <file>pages/Sign.qml</file>
+        <file>components/DaemonManagerDialog.qml</file>
     </qresource>
 </RCC>

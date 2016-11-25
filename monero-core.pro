@@ -30,7 +30,8 @@ HEADERS += \
     src/model/TransactionHistorySortFilterModel.h \
     src/QR-Code-generator/BitBuffer.hpp \
     src/QR-Code-generator/QrCode.hpp \
-    src/QR-Code-generator/QrSegment.hpp
+    src/QR-Code-generator/QrSegment.hpp \
+    src/daemon/DaemonManager.h
 
 
 SOURCES += main.cpp \
@@ -49,7 +50,8 @@ SOURCES += main.cpp \
     src/model/TransactionHistorySortFilterModel.cpp \
     src/QR-Code-generator/BitBuffer.cpp \
     src/QR-Code-generator/QrCode.cpp \
-    src/QR-Code-generator/QrSegment.cpp
+    src/QR-Code-generator/QrSegment.cpp \
+    src/daemon/DaemonManager.cpp
 
 lupdate_only {
 SOURCES = *.qml \
