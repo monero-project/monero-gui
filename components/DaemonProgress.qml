@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.6
+import QtQuick 2.0
 
 Item {
     id: item
@@ -42,7 +42,6 @@ Item {
             fillLevel = progressLevel
             console.log("target block: ",progressLevel)
             progressText.text = qsTr("Synchronizing blocks %1/%2").arg(currentBlock.toFixed(0)).arg(targetBlock.toFixed(0));
-            console.log("Progress text: " + progressText.text);
 
             // TODO: lower daemon block height cache, ttl and refresh interval?
 
@@ -57,7 +56,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         height: 22
-        //radius: 4
+        radius: 2
         color: "#FFFFFF"
 
         Rectangle {
@@ -77,16 +76,21 @@ Item {
 
         }
 
-        Text {
-            id:progressText
+        Rectangle {
+            color:"#333"
             anchors.bottom: parent.bottom
-            font.family: "Arial"
-            font.pixelSize: 12
-            leftPadding: 8
-            color: "#000"
-            height: 18
-            verticalAlignment: Text.alignVCenter
-            text: qsTr("Synchronizing blocks")
+            anchors.left: parent.left
+            anchors.leftMargin: 8
+
+            Text {
+                id:progressText
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 12
+                color: "#000"
+                text: qsTr("Synchronizing blocks")
+                height:18
+            }
         }
     }
 
