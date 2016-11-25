@@ -1058,5 +1058,7 @@ ApplicationWindow {
            walletManager.closeWallet(currentWallet);
            currentWallet = undefined
        }
+       // Stop daemon
+       daemonManager.stop();
     }
 }
