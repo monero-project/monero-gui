@@ -51,8 +51,6 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    qDebug() << "app startd";
-
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("The Monero Project");
@@ -108,7 +106,7 @@ int main(int argc, char *argv[])
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
 
-    engine.rootContext()->setContextProperty("daemonManager", DaemonManager::instance());
+    engine.rootContext()->setContextProperty("daemonManager", DaemonManager::instance(QCoreApplication::arguments()));
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
