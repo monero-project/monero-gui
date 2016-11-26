@@ -294,7 +294,7 @@ ApplicationWindow {
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!currentWallet.connected && !daemonManager.running() && !walletInitialized){
+        if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
             daemonManagerDialog.open();
         }
 
