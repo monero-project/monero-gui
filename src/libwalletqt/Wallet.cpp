@@ -88,13 +88,13 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
-Wallet::ConnectionStatus Wallet::connected()
+Wallet::ConnectionStatus Wallet::connected() const
 {
     // cache connection status
-    if(!m_initialized || m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl){
+    if (!m_initialized || m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl) {
         m_initialized = true;
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
-        if(newStatus != m_connectionStatus) {
+        if (newStatus != m_connectionStatus) {
             m_connectionStatus = newStatus;
             emit connectionStatusChanged();
         }

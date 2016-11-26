@@ -108,10 +108,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
-
-    engine.rootContext()->setContextProperty("daemonManager", DaemonManager::instance(QCoreApplication::arguments()));
-
-    DaemonManager * daemonManager = DaemonManager::instance(QCoreApplication::arguments());
+    const QStringList arguments = QCoreApplication::arguments();
+    DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 

@@ -63,7 +63,7 @@ public:
     Status status() const;
 
     //! returns whether the wallet is connected, and version status
-    ConnectionStatus connected();
+    ConnectionStatus connected() const;
 
     //! returns true if wallet was ever synchronized
     bool synchronized() const;
@@ -196,7 +196,7 @@ signals:
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
-    void connectionStatusChanged();
+    void connectionStatusChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -219,10 +219,10 @@ private:
     mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
-    ConnectionStatus m_connectionStatus;
+    mutable ConnectionStatus m_connectionStatus;
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
-    bool    m_initialized;
+    mutable bool    m_initialized;
 };
 
 

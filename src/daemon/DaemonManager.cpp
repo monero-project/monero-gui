@@ -9,15 +9,15 @@
 #include <QProcess>
 
 DaemonManager * DaemonManager::m_instance = nullptr;
-QStringList DaemonManager::clArgs;
+QStringList DaemonManager::m_clArgs;
 
-DaemonManager *DaemonManager::instance(QStringList args)
+DaemonManager *DaemonManager::instance(const QStringList *args)
 {
     if (!m_instance) {
         m_instance = new DaemonManager;
         // store command line arguments for later use
-        clArgs = args;
-        clArgs.removeFirst();
+        m_clArgs = *args;
+        m_clArgs.removeFirst();
     }
 
     return m_instance;
@@ -25,7 +25,6 @@ DaemonManager *DaemonManager::instance(QStringList args)
 
 bool DaemonManager::start()
 {
-
     //
     QString process;
 #ifdef Q_OS_WIN
@@ -34,7 +33,7 @@ bool DaemonManager::start()
     process = QApplication::applicationDirPath() + "/monerod";
 #endif
 
-    if(process.length() == 0) {
+    if (process.length() == 0) {
         qDebug() << "no daemon binary defined for current platform";
         return false;
     }
@@ -42,7 +41,7 @@ bool DaemonManager::start()
 
     // prepare command line arguments and pass to monerod
     QStringList arguments;
-    foreach (const QString &str, clArgs) {
+    foreach (const QString &str, m_clArgs) {
           qDebug() << QString(" [%1] ").arg(str);
           arguments << str;
     }
@@ -64,7 +63,7 @@ bool DaemonManager::start()
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
 
-    if(!started){
+    if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
     } else {
         emit daemonStarted();
@@ -75,7 +74,7 @@ bool DaemonManager::start()
 
 bool DaemonManager::stop()
 {
-    if(initialized){
+    if (initialized) {
         qDebug() << "stopping daemon";
         // we can't use QProcess::terminate() on windows console process
         // write exit command to stdin
@@ -88,7 +87,7 @@ bool DaemonManager::stop()
 void DaemonManager::stateChanged(QProcess::ProcessState state)
 {
     qDebug() << "STATE CHANGED: " << state;
-    if(state == QProcess::NotRunning) {
+    if (state == QProcess::NotRunning) {
         emit daemonStopped();
     }
 }
@@ -98,7 +97,7 @@ void DaemonManager::printOutput()
     QByteArray byteArray = m_daemon->readAllStandardOutput();
     QStringList strLines = QString(byteArray).split("\n");
 
-    foreach (QString line, strLines){
+    foreach (QString line, strLines) {
         emit daemonConsoleUpdated(line);
         qDebug() << "Daemon: " + line;
     }
@@ -109,7 +108,7 @@ void DaemonManager::printError()
     QByteArray byteArray = m_daemon->readAllStandardError();
     QStringList strLines = QString(byteArray).split("\n");
 
-    foreach (QString line, strLines){
+    foreach (QString line, strLines) {
         emit daemonConsoleUpdated(line);
         qDebug() << "Daemon ERROR: " + line;
     }
@@ -117,7 +116,7 @@ void DaemonManager::printError()
 
 bool DaemonManager::running() const
 {
-    if(initialized){
+    if (initialized) {
         qDebug() << m_daemon->state();
         qDebug() << QProcess::NotRunning;
        // m_daemon->write("status\n");
@@ -137,7 +136,7 @@ void DaemonManager::closing()
     qDebug() << __FUNCTION__;
     stop();
     // Wait for daemon to stop before exiting (max 10 secs)
-    if(initialized){
+    if (initialized) {
         m_daemon->waitForFinished(10000);
     }
 }
