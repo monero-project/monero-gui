@@ -314,7 +314,7 @@ Rectangle {
              //  enabled: appWindow.daemonRunning
                 id: daemonConsolePopupButton
                 width: 110
-                text: qsTr("Show concole") + translationManager.emptyString
+                text: qsTr("Show log") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -331,10 +331,10 @@ Rectangle {
     // Daemon console
     StandardDialog {
         id: daemonConsolePopup
-        height:800
+        height:500
         width:800
         cancelVisible: false
-        title: qsTr("Daemon console")
+        title: qsTr("Daemon log")
         onAccepted: {
             close();
         }
