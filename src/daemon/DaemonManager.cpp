@@ -61,6 +61,9 @@ bool DaemonManager::start()
     m_daemon->start(process,arguments);
     bool started =  m_daemon->waitForStarted();
 
+    // add state changed listener
+    connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
+
     if(!started){
         qDebug() << "Daemon start error: " + m_daemon->errorString();
     } else {
@@ -74,14 +77,20 @@ bool DaemonManager::stop()
 {
     if(initialized){
         qDebug() << "stopping daemon";
-        m_daemon->terminate();
-        // Wait until stopped. Max 10 seconds
-        bool stopped = m_daemon->waitForFinished(10000);
-        if(stopped) emit daemonStopped();
-        return stopped;
+        // we can't use QProcess::terminate() on windows console process
+        // write exit command to stdin
+        m_daemon->write("exit\n");
     }
 
     return true;
+}
+
+void DaemonManager::stateChanged(QProcess::ProcessState state)
+{
+    qDebug() << "STATE CHANGED: " << state;
+    if(state == QProcess::NotRunning) {
+        emit daemonStopped();
+    }
 }
 
 void DaemonManager::printOutput()
@@ -111,7 +120,7 @@ bool DaemonManager::running() const
     if(initialized){
         qDebug() << m_daemon->state();
         qDebug() << QProcess::NotRunning;
-
+       // m_daemon->write("status\n");
         return m_daemon->state() > QProcess::NotRunning;
     }
     return false;

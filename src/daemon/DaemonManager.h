@@ -28,6 +28,7 @@ public slots:
     void printOutput();
     void printError();
     void closing();
+    void stateChanged(QProcess::ProcessState state);
 
 private:
 
