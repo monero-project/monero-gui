@@ -290,7 +290,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
-                    daemonManager.start();
+                    appWindow.startDaemon()
                 }
             }
 
@@ -305,7 +305,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
-                    daemonManager.stop();
+                    appWindow.stopDaemon()
                 }
             }
 

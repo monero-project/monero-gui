@@ -325,6 +325,15 @@ ApplicationWindow {
         onWalletUpdate();
     }
 
+    function startDaemon(){
+        appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
+        daemonManager.start();
+    }
+    function stopDaemon(){
+        appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
+        daemonManager.stop();
+    }
+
     function onDaemonStarted(){
         console.log("daemon started");
         daemonRunning = true;
