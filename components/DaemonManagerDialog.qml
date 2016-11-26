@@ -90,8 +90,8 @@ Window {
                 text: qsTr("Start daemon")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
-                    daemonManager.start();
                     root.close()
+                    appWindow.startDaemon();
                     root.started()
                 }
             }
