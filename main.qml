@@ -240,7 +240,7 @@ ApplicationWindow {
                 console.log("closing wallet async : " + wallet.address)
                 walletManager.closeWalletAsync(wallet)
                 // try to open wallet with password;
-                passwordDialog.open();
+                passwordDialog.open(wallet.path);
             } else {
                 // opening with password but password doesn't match
                 console.error("Error opening wallet with password: ", wallet.errorString);
@@ -252,7 +252,7 @@ ApplicationWindow {
                 walletManager.closeWalletAsync(wallet);
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
-                    passwordDialog.open()
+                    passwordDialog.open(wallet.path)
                 }
             }
             return;

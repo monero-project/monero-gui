@@ -31,6 +31,7 @@ class Wallet : public QObject
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
+    Q_PROPERTY(QString path READ path)
 
 public:
 
@@ -77,6 +78,9 @@ public:
 
     //! returns wallet's public address
     QString address() const;
+
+    //! returns wallet file's path
+    QString path() const;
 
     //! saves wallet to the file by given path
     //! empty path stores in current location

@@ -112,6 +112,11 @@ QString Wallet::address() const
     return QString::fromStdString(m_walletImpl->address());
 }
 
+QString Wallet::path() const
+{
+    return QString::fromStdString(m_walletImpl->path());
+}
+
 bool Wallet::store(const QString &path)
 {
     return m_walletImpl->store(path.toStdString());
