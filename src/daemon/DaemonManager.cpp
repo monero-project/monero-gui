@@ -136,4 +136,8 @@ void DaemonManager::closing()
 {
     qDebug() << __FUNCTION__;
     stop();
+    // Wait for daemon to stop before exiting (max 10 secs)
+    if(initialized){
+        m_daemon->waitForFinished(10000);
+    }
 }
