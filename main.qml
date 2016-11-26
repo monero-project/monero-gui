@@ -213,6 +213,7 @@ ApplicationWindow {
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
         currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
         currentWallet.transactionCreated.disconnect(onTransactionCreated)
+        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
 
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
@@ -220,6 +221,7 @@ ApplicationWindow {
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
+        currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
 
 
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
@@ -231,6 +233,11 @@ ApplicationWindow {
     function walletPath() {
         var wallet_path = persistentSettings.wallet_path
         return wallet_path;
+    }
+
+    function onWalletConnectionStatusChanged(){
+        console.log("Wallet connection status changed")
+        middlePanel.updateStatus();
     }
 
     function onWalletOpened(wallet) {
