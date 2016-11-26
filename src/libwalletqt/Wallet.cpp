@@ -87,9 +87,15 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
-Wallet::ConnectionStatus Wallet::connected() const
+Wallet::ConnectionStatus Wallet::connected()
 {
-    return static_cast<ConnectionStatus>(m_walletImpl->connected());
+    qDebug("Checking wallet connection status");
+    ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
+    if(newStatus != m_connectionStatus) {
+        m_connectionStatus = newStatus;
+        emit connectionStatusChanged();
+    }
+    return newStatus;
 }
 
 bool Wallet::synchronized() const
@@ -422,6 +428,7 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
+    m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
 }
 
 Wallet::~Wallet()

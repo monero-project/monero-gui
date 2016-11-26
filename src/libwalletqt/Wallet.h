@@ -63,7 +63,7 @@ public:
     Status status() const;
 
     //! returns whether the wallet is connected, and version status
-    ConnectionStatus connected() const;
+    ConnectionStatus connected();
 
     //! returns true if wallet was ever synchronized
     bool synchronized() const;
@@ -196,6 +196,8 @@ signals:
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
+    void connectionStatusChanged();
+
 private:
     Wallet(QObject * parent = nullptr);
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
@@ -217,6 +219,7 @@ private:
     mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
+    ConnectionStatus m_connectionStatus;
 };
 
 
