@@ -222,6 +222,7 @@ private:
     ConnectionStatus m_connectionStatus;
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
+    bool    m_initialized;
 };
 
 

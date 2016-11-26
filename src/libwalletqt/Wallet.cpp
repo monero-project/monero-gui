@@ -90,11 +90,9 @@ Wallet::Status Wallet::status() const
 
 Wallet::ConnectionStatus Wallet::connected()
 {
-    qDebug("Checking wallet connection status");
-
     // cache connection status
-    if(m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl){
-        qDebug("connectionStatus query");
+    if(!m_initialized || m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl){
+        m_initialized = true;
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
         if(newStatus != m_connectionStatus) {
             m_connectionStatus = newStatus;
@@ -442,6 +440,7 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     m_connectionStatusTime.restart();
     m_daemonBlockChainHeightTime.restart();
     m_daemonBlockChainTargetHeightTime.restart();
+    m_initialized = false;
 }
 
 Wallet::~Wallet()
