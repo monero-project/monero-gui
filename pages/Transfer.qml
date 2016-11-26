@@ -121,9 +121,9 @@ Rectangle {
         // code like this wont work:
         // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
 
-        ListElement { column1: qsTr("LOW") ; column2: ""; priority: PendingTransaction.Priority_Low }
-        ListElement { column1: qsTr("MEDIUM") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-        ListElement { column1: qsTr("HIGH")  ; column2: "";  priority: PendingTransaction.Priority_High }
+        ListElement { column1: qsTr("LOW (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: qsTr("MEDIUM (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: qsTr("HIGH (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
     }
 
     StandardDropdown {
