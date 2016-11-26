@@ -29,6 +29,7 @@
 import QtQuick 2.0
 import moneroComponents.PendingTransaction 1.0
 import "../components"
+import moneroComponents.Wallet 1.0
 
 
 Rectangle {
@@ -328,6 +329,71 @@ Rectangle {
         onClicked: {
             console.log("Transfer: sweepUnmixableClicked")
             root.sweepUnmixableClicked()
+
+        }
+    }
+
+    Rectangle {
+        id:desaturate
+        color:"black"
+        anchors.fill: parent
+        opacity: 0.1
+        visible: (root.enabled)? 0 : 1;
+    }
+
+    Rectangle {
+        x: root.width/2 - width/2
+        y: root.height/2 - height/2
+        height:statusText.paintedHeight + 50
+        width:statusText.paintedWidth + 40
+        visible: statusText.text != ""
+        opacity: 0.9
+
+        Text {
+            id: statusText
+            anchors.fill:parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+    }
+
+    Component.onCompleted: {
+        //Disable password page until enabled by updateStatus
+        root.enabled = false
+    }
+
+    // fires on every page load
+    function onPageCompleted() {
+        console.log("transfer page loaded")
+        updateStatus();
+    }
+
+    //TODO: Add daemon sync status
+    //TODO: enable send page when we're connected and daemon is synced
+
+    function updateStatus() {
+        console.log("updated transfer page status")
+        if(typeof currentWallet === "undefined") {
+            statusText.text = qsTr("Wallet is not connected to daemon.")
+            return;
+        }
+
+        switch (currentWallet.connected) {
+        case Wallet.ConnectionStatus_Disconnected:
+            statusText.text = qsTr("Wallet is not connected to daemon.")
+            break
+        case Wallet.ConnectionStatus_WrongVersion:
+            statusText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
+                                   "Please upgrade or connect to another daemon")
+            break
+        default:
+            if(!appWindow.daemonSynced){
+                statusText.text = qsTr("Waiting on daemon synchronization to finish")
+            } else {
+                // everything OK, enable transfer page
+                root.enabled = true;
+                statusText.text = "";
+            }
 
         }
     }

@@ -32,6 +32,7 @@ import QtQuick 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
+import moneroComponents.Wallet 1.0
 
 import "./pages"
 
@@ -56,9 +57,6 @@ Rectangle {
     signal generatePaymentIdInvoked()
     signal checkPaymentClicked(string address, string txid, string txkey);
 
-    // Disable transfer page if daemon isnt fully synced
-    enabled: (currentView !== transferView || appWindow.daemonSynced)
-
     color: "#F0EEEE"
 
     onCurrentViewChanged: {
@@ -70,6 +68,10 @@ Rectangle {
                 currentView.onPageCompleted();
             }
         }
+    }
+
+    function updateStatus(){
+        transferView.updateStatus();
     }
 
 
@@ -292,14 +294,6 @@ Rectangle {
         color: "#DBDBDB"
 
     }
-    Rectangle {
-        id:desaturate
-        color:"black"
-        anchors.fill: parent
-        opacity: 0.1
-        visible: (root.enabled)? 0 : 1;
-    }
-
 
     /* connect "payment" click */
     Connections {
