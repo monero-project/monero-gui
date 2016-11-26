@@ -288,17 +288,17 @@ ApplicationWindow {
             hideProcessingSplash()
         }
 
+        // Daemon connected
+        leftPanel.networkStatus.connected = currentWallet.connected
+
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
-        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
-
-        // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet.connected
 
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
+        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
 
         // If wallet isnt connected and no daemon is running - Ask
         if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
@@ -336,6 +336,7 @@ ApplicationWindow {
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         daemonManager.start();
     }
+
     function stopDaemon(){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
         daemonManager.stop();
