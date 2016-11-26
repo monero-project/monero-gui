@@ -15,6 +15,7 @@
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
     static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 60;
+    static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
 
 class WalletListenerImpl : public  Bitmonero::WalletListener
@@ -90,12 +91,19 @@ Wallet::Status Wallet::status() const
 Wallet::ConnectionStatus Wallet::connected()
 {
     qDebug("Checking wallet connection status");
-    ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
-    if(newStatus != m_connectionStatus) {
-        m_connectionStatus = newStatus;
-        emit connectionStatusChanged();
+
+    // cache connection status
+    if(m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl){
+        qDebug("connectionStatus query");
+        ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
+        if(newStatus != m_connectionStatus) {
+            m_connectionStatus = newStatus;
+            emit connectionStatusChanged();
+        }
+        m_connectionStatusTime.restart();
     }
-    return newStatus;
+
+    return m_connectionStatus;
 }
 
 bool Wallet::synchronized() const
@@ -425,10 +433,15 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
     , m_daemonBlockChainTargetHeightTtl(DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS)
+    , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
+    // start cache timers
+    m_connectionStatusTime.restart();
+    m_daemonBlockChainHeightTime.restart();
+    m_daemonBlockChainTargetHeightTime.restart();
 }
 
 Wallet::~Wallet()

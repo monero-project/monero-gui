@@ -220,6 +220,8 @@ private:
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
     ConnectionStatus m_connectionStatus;
+    int     m_connectionStatusTtl;
+    mutable QTime   m_connectionStatusTime;
 };
 
 
