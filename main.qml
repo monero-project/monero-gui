@@ -299,6 +299,7 @@ ApplicationWindow {
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
         leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
+        middlePanel.updateStatus();
 
         // If wallet isnt connected and no daemon is running - Ask
         if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
