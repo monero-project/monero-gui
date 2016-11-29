@@ -55,7 +55,7 @@ Item {
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
         var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
-        return !wizard.walletExists(walletFullPath);
+        return wizard.walletPathValid(walletFullPath);
     }
 
     function checkNextButton() {
