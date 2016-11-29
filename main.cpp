@@ -110,12 +110,14 @@ int main(int argc, char *argv[])
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
 //  Windows, ~/Monero Accounts/ on nix / osx
-
+    bool isWindows = false;
 #ifdef Q_OS_WIN
+    isWindows = true;
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
 #elif defined(Q_OS_UNIX)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
+    engine.rootContext()->setContextProperty("isWindows", isWindows);
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
