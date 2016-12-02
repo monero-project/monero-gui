@@ -488,7 +488,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="194"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>भुगतान आईडी &lt;font size=&apos;2&apos;&gt;( वैकल्पिक )&lt;/font&gt</translation>
+        <translation>भुगतान आईडी &lt;font size=&apos;2&apos;&gt;( वैकल्पिक )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="218"/>
