@@ -24,6 +24,7 @@ HEADERS += \
     src/libwalletqt/TransactionHistory.h \
     src/libwalletqt/TransactionInfo.h \
     src/libwalletqt/QRCodeImageProvider.h \
+    src/libwalletqt/Transfer.h \
     oshelper.h \
     TranslationManager.h \
     src/model/TransactionHistoryModel.h \
