@@ -28,8 +28,6 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
-import moneroComponents.TransactionHistory 1.0
-import moneroComponents.TransactionInfo 1.0
 
 
 ListView {
