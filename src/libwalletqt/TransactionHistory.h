@@ -41,7 +41,6 @@ private:
 
 private:
     friend class Wallet;
-
     Bitmonero::TransactionHistory * m_pimpl;
     mutable QList<TransactionInfo*> m_tinfo;
     mutable QDateTime   m_firstDateTime;

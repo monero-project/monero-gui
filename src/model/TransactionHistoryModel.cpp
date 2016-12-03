@@ -95,6 +95,9 @@ QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
     case TransactionTimeRole:
         result = tInfo->time();
         break;
+    case TransactionDestinationsRole:
+        result = tInfo->destinations_formatted();
+        break;
     }
 
     return result;
@@ -124,6 +127,7 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     roleNames.insert(TransactionIsOutRole, "isOut");
     roleNames.insert(TransactionDateRole, "date");
     roleNames.insert(TransactionTimeRole, "time");
+    roleNames.insert(TransactionDestinationsRole, "destinations");
     return roleNames;
 }
 
