@@ -262,7 +262,7 @@ Rectangle {
             anchors.topMargin: 30
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.top: styledRow.bottom
+            anchors.top: parent.top
             anchors.margins: 4
             clip: true // otherwise animation will affect left panel
 
