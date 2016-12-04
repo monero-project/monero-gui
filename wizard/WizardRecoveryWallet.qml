@@ -79,7 +79,7 @@ Item {
             settingsObject['wallet'] = wallet;
             settingsObject['is_recovering'] = true;
         } else {
-            walletManager.closeWallet(wallet);
+            walletManager.closeWallet();
         }
         return success;
     }
