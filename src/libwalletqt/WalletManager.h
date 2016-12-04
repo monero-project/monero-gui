@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QUrl>
 #include <wallet/wallet2_api.h>
+#include <QMutex>
+#include <QPointer>
 
 class Wallet;
 namespace Bitmonero {
@@ -55,7 +57,7 @@ public:
      * \param wallet
      * \return wallet address
      */
-    Q_INVOKABLE QString closeWallet(Wallet * wallet);
+    Q_INVOKABLE QString closeWallet(Wallet * _wallet);
 
     /*!
      * \brief closeWalletAsync - asynchronous version of "closeWallet"
@@ -117,6 +119,7 @@ private:
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
     Bitmonero::WalletManager * m_pimpl;
+    QMutex mutex;
 
 };
 

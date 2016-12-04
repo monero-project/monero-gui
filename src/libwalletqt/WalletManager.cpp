@@ -7,9 +7,9 @@
 #include <QDebug>
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
+#include <QMutex>
 
 WalletManager * WalletManager::m_instance = nullptr;
-
 
 WalletManager *WalletManager::instance()
 {
@@ -69,10 +69,19 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, 
 }
 
 
-QString WalletManager::closeWallet(Wallet *wallet)
+QString WalletManager::closeWallet(Wallet *_wallet)
 {
-    QString result = wallet->address();
-    delete wallet;
+    QPointer<Wallet> wallet = _wallet;
+    mutex.lock();
+    QString result;
+    if (wallet) {
+        result = wallet->address();
+        delete wallet;
+    } else {
+        qCritical() << "Trying to close non existing wallet " << wallet;
+        result = "0";
+    }
+    mutex.unlock();
     return result;
 }
 
