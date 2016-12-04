@@ -8,6 +8,7 @@
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
 #include <QMutex>
+#include <QMutexLocker>
 
 WalletManager * WalletManager::m_instance = nullptr;
 
@@ -23,27 +24,37 @@ WalletManager *WalletManager::instance()
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language, bool testnet)
 {
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
     Bitmonero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
                                                   language.toStdString(), testnet);
-    Wallet * wallet = new Wallet(w);
-    return wallet;
+    m_currentWallet  = new Wallet(w);
+    return m_currentWallet;
 }
 
 Wallet *WalletManager::openWallet(const QString &path, const QString &password, bool testnet)
 {
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
     qDebug("%s: opening wallet at %s, testnet = %d ",
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
     Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
-    Wallet * wallet = new Wallet(w);
+    m_currentWallet  = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
-    if (wallet->thread() != qApp->thread()) {
-        wallet->moveToThread(qApp->thread());
+    if (m_currentWallet->thread() != qApp->thread()) {
+        m_currentWallet->moveToThread(qApp->thread());
     }
 
-    return wallet;
+    return m_currentWallet;
 }
 
 void WalletManager::openWalletAsync(const QString &path, const QString &password, bool testnet)
@@ -63,32 +74,34 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, bool testnet, quint64 restoreHeight)
 {
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
     Bitmonero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
-    Wallet * wallet = new Wallet(w);
-    return wallet;
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
 }
 
 
-QString WalletManager::closeWallet(Wallet *_wallet)
+QString WalletManager::closeWallet()
 {
-    QPointer<Wallet> wallet = _wallet;
-    mutex.lock();
+    QMutexLocker locker(&m_mutex);
     QString result;
-    if (wallet) {
-        result = wallet->address();
-        delete wallet;
+    if (m_currentWallet) {
+        result = m_currentWallet->address();
+        delete m_currentWallet;
     } else {
-        qCritical() << "Trying to close non existing wallet " << wallet;
+        qCritical() << "Trying to close non existing wallet " << m_currentWallet;
         result = "0";
     }
-    mutex.unlock();
     return result;
 }
 
-void WalletManager::closeWalletAsync(Wallet *wallet)
+void WalletManager::closeWalletAsync()
 {
-    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet,
-                                                wallet);
+    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
     QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
     watcher->setFuture(future);
 
