@@ -265,6 +265,25 @@ Rectangle {
             anchors.top: styledRow.bottom
             anchors.margins: 4
             clip: true // otherwise animation will affect left panel
+
+            delegate: StackViewDelegate {
+                pushTransition: StackViewTransition {
+                    PropertyAnimation {
+                        target: enterItem
+                        property: "x"
+                        from: 0 - target.width
+                        to: 0
+                        duration: 300
+                    }
+                    PropertyAnimation {
+                        target: exitItem
+                        property: "x"
+                        from: 0
+                        to: target.width
+                        duration: 300
+                    }
+                }
+            }
         }
     }
     // border
