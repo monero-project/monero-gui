@@ -108,30 +108,8 @@ ApplicationWindow {
             ctrlPressed = false
     }
 
-    function mousePressed(obj, mouseX, mouseY) {
-//        if(obj.objectName === "appWindow")
-//            obj = rootItem
-
-//        var tmp = rootItem.mapFromItem(obj, mouseX, mouseY)
-//        if(tmp !== undefined) {
-//            mouseX = tmp.x
-//            mouseY = tmp.y
-//        }
-
-//        if(currentItem !== undefined) {
-//            var tmp_x = rootItem.mapToItem(currentItem, mouseX, mouseY).x
-//            var tmp_y = rootItem.mapToItem(currentItem, mouseX, mouseY).y
-
-//            if(!currentItem.containsPoint(tmp_x, tmp_y)) {
-//                currentItem.hide()
-//                currentItem = undefined
-//            }
-//        }
-    }
-
-    function mouseReleased(obj, mouseX, mouseY) {
-
-    }
+    function mousePressed(obj, mouseX, mouseY) {}
+    function mouseReleased(obj, mouseX, mouseY) {}
 
     function openWalletFromFile(){
         persistentSettings.restore_height = 0
@@ -152,22 +130,10 @@ ApplicationWindow {
             translationManager.setLanguage(locale.split("_")[0]);
         }
 
-        // disconnect handlers before connecting
-        middlePanel.paymentClicked.disconnect(handlePayment);
-        // TODO: remove if statement when PR #111 is merged
-        if(typeof(handleCheckPayment) !== "undefined") {
-            middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
-        }
-        middlePanel.paymentClicked.connect(handlePayment);
-        middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
-        // basicPanel.paymentClicked.connect(handlePayment);
-        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
-
-        // currentWallet is defined on daemon address change - close/reopen
-        // TODO: strict comparison here (!==) causes crash after passwordDialog on previously crashed unsynced wallets
-        if (currentWallet != undefined) {
-            console.log("closing currentWallet")
-            walletManager.closeWallet(currentWallet);
+        // If currentWallet exists, we're just switching daemon - close/reopen wallet
+        if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+            console.log("Daemon change - closing " + currentWallet)
+            walletManager.closeWalletAsync(currentWallet);
         } else {
 
             // set page to transfer if not changing daemon
@@ -212,14 +178,20 @@ ApplicationWindow {
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
         currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
         currentWallet.transactionCreated.disconnect(onTransactionCreated)
+        middlePanel.paymentClicked.disconnect(handlePayment);
+        middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
+        middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
 
+        // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
-
+        middlePanel.paymentClicked.connect(handlePayment);
+        middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
+        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
@@ -585,7 +557,6 @@ ApplicationWindow {
         middlePanel.enabled = enable;
         leftPanel.enabled = enable;
         rightPanel.enabled = enable;
-        // basicPanel.enabled = enable;
     }
 
     function showProcessingSplash(message) {
@@ -606,14 +577,9 @@ ApplicationWindow {
     function showWizard(){
         walletInitialized = false;
         splashCounter = 0;
-        // we can't close async here. Gui crashes if wallet is open
-        if (currentWallet != undefined) {
-            walletManager.closeWallet(currentWallet);
-            currentWallet = undefined
-        }
+        walletManager.closeWalletAsync(currentWallet);
         wizard.restart();
         rootItem.state = "wizard"
-
     }
 
 
@@ -711,7 +677,6 @@ ApplicationWindow {
         id: passwordDialog
 
         onAccepted: {
-            appWindow.currentWallet = null
             appWindow.initialize();
         }
         onRejected: {
@@ -1032,10 +997,8 @@ ApplicationWindow {
         }
     }
     onClosing: {
-       // Close and save to disk on app close
-       if (currentWallet != undefined) {
-           walletManager.closeWallet(currentWallet);
-           currentWallet = undefined
-       }
+        // Close and save to disk on app close
+        console.log(currentWallet +" "+ typeof currentWallet)
+        walletManager.closeWallet(currentWallet);
     }
 }
