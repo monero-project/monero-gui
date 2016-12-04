@@ -73,7 +73,7 @@ Item {
 
         // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
         if (typeof settingsObject.wallet !== 'undefined') {
-            settingsObject.wallet.destroy()
+            walletManager.closeWallet(settingsObject.wallet)
             console.log("deleting wallet")
         }
 
