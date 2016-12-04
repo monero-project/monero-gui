@@ -60,10 +60,6 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling Monero Core from Source
 
-### Dependencies
-
-TODO
-
 ### On Linux:
 
 (Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
