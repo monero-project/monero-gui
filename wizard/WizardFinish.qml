@@ -125,7 +125,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
-            text: qsTr("You’re all setup!") + translationManager.emptyString
+            text: qsTr("You’re all set up!") + translationManager.emptyString
         }
 
         Text {
