@@ -64,6 +64,12 @@ Item {
         return true
     }
 
+    function onWizardRestarted(){
+        // Reset password fields
+        passwordItem.password = "";
+        retypePasswordItem.password = "";
+    }
+
     function handlePassword() {
         // allow to forward step only if passwords match
 
@@ -178,6 +184,6 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log
+        parent.wizardRestarted.connect(onWizardRestarted)
     }
 }

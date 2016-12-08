@@ -44,6 +44,11 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function onWizardRestarted() {
+        // reset account name field
+        uiItem.accountNameText = defaultAccountName
+    }
+
     //! function called each time we display this page
 
     function onPageOpened(settingsOblect) {
@@ -97,5 +102,9 @@ Item {
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true
         restoreHeightVisible:false
+    }
+
+    Component.onCompleted: {
+        parent.wizardRestarted.connect(onWizardRestarted)
     }
 }
