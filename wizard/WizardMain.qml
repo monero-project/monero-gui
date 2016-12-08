@@ -141,12 +141,30 @@ Rectangle {
         return folder_path + "/" + account_name + "/" + account_name
     }
 
-    function walletExists(path){
-        if(walletManager.walletExists(path)){
-            walletExistsErrorDialog.open();
-            return true;
+    function walletPathValid(path){
+        if (walletManager.walletExists(path)) {
+            walletErrorDialog.text = qsTr("A wallet with same name already exists. Please change wallet name") + translationManager.emptyString;
+            walletErrorDialog.open();
+            return false;
         }
-        return false;
+
+        // Don't allow non ascii characters in path on windows platforms until supported by Wallet2
+        if (isWindows) {
+            if (!isAscii(path)) {
+                walletErrorDialog.text = qsTr("Non-ASCII characters are not allowed in wallet path or account name")  + translationManager.emptyString;
+                walletErrorDialog.open();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function isAscii(str){
+        for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 127)
+                return false;
+        }
+        return true;
     }
 
     //! actually writes the wallet
@@ -197,9 +215,8 @@ Rectangle {
     }
 
     MessageDialog {
-        id: walletExistsErrorDialog
+        id: walletErrorDialog
         title: "Error"
-        text: qsTr("A wallet with same name already exists. Please change wallet name") + translationManager.emptyString
         onAccepted: {
         }
     }

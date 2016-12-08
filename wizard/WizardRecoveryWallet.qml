@@ -59,7 +59,7 @@ Item {
         var restoreHeight = parseInt(uiItem.restoreHeight);
         settingsObject['restore_height'] = isNaN(restoreHeight)? 0 : restoreHeight
         var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
-        if(wizard.walletExists(walletFullPath)){
+        if(!wizard.walletPathValid(walletFullPath)){
            return false
         }
         return recoveryWallet(settingsObject)
