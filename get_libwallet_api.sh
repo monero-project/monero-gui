@@ -59,7 +59,7 @@ elif [ "$platform" == "mingw64" ]; then
 elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
     make_exec="mingw32-make"
 else
     echo "Unsupported platform: $platform"
@@ -83,7 +83,7 @@ if [ "$platform" != "linux" ]; then
     pushd $MONERO_DIR/build/release/external/unbound
     # no need to make, it was already built as dependency for libwallet
     # make -j$CPU_CORE_COUNT
-    make install -j$CPU_CORE_COUNT
+    $make_exec install -j$CPU_CORE_COUNT
     popd
 fi
 
