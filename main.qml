@@ -954,7 +954,7 @@ ApplicationWindow {
         }
 
         property int maxWidth: leftPanel.width + 655 + rightPanel.width
-        property int maxHeight: 700
+        property int minHeight: 720
         MouseArea {
             id: resizeArea
             hoverEnabled: true
@@ -991,9 +991,9 @@ ApplicationWindow {
                     appWindow.width -= dx
                 else appWindow.width = parent.maxWidth
 
-                if(appWindow.height - dy > parent.maxHeight)
+                if(appWindow.height - dy > parent.minHeight)
                     appWindow.height -= dy
-                else appWindow.height = parent.maxHeight
+                else appWindow.height = parent.minHeight
                 previousPosition = pos
             }
         }
