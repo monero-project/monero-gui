@@ -40,6 +40,7 @@ Rectangle {
     id: root
 
     property Item currentView
+    property Item previousView
     property bool basicMode : false
     property string balanceText
     property string unlockedBalanceText
@@ -60,6 +61,12 @@ Rectangle {
     color: "#F0EEEE"
 
     onCurrentViewChanged: {
+        if (previousView) {
+            if (typeof previousView.onPageClosed === "function") {
+                previousView.onPageClosed();
+            }
+        }
+        previousView = currentView
         if (currentView) {
             stackView.replace(currentView)
 

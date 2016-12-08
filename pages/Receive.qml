@@ -30,9 +30,14 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.2
 
 import "../components"
 import moneroComponents.Clipboard 1.0
+import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
+import moneroComponents.TransactionHistory 1.0
+import moneroComponents.TransactionHistoryModel 1.0
 
 Rectangle {
 
@@ -40,6 +45,8 @@ Rectangle {
     property alias addressText : addressLine.text
     property alias paymentIdText : paymentIdLine.text
     property alias integratedAddressText : integratedAddressLine.text
+    property var model
+    property string trackingLineText: ""
 
     function updatePaymentId(payment_id) {
         if (typeof appWindow.currentWallet === 'undefined' || appWindow.currentWallet == null)
@@ -54,6 +61,7 @@ Rectangle {
         integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
         if (integratedAddressLine.text === "")
           integratedAddressLine.text = qsTr("Invalid payment ID")
+        update()
     }
 
     function makeQRCodeString() {
@@ -71,6 +79,80 @@ Rectangle {
           s += "tx_payment_id=" + pid
         }
         return s
+    }
+
+    function setTrackingLineText(text) {
+        // don't replace with same text, it wrecks selection while the user is selecting
+        // also keep track of text, because when we read back the text from the widget,
+        // we do not get what we put it, but some extra HTML stuff on top
+        if (text != trackingLineText) {
+            trackingLine.text = text
+            trackingLineText = text
+        }
+    }
+
+    function update() {
+        if (!appWindow.currentWallet) {
+            setTrackingLineText("-")
+            return
+        }
+        if (appWindow.currentWallet.connected == Wallet.ConnectionStatus_Disconnected) {
+            setTrackingLineText(qsTr("WARNING: no connection to daemon"))
+            return
+        }
+
+        var model = appWindow.currentWallet.historyModel
+        var count = model.rowCount()
+        var totalAmount = 0
+        var nTransactions = 0
+        var list = ""
+        var blockchainHeight = 0
+        for (var i = 0; i < count; ++i) {
+            var idx = model.index(i, 0)
+            var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
+            var payment_id = model.data(idx, TransactionHistoryModel.TransactionPaymentIdRole);
+            if (!isout && payment_id == paymentIdLine.text) {
+                var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
+                totalAmount = walletManager.addi(totalAmount, amount)
+                nTransactions += 1
+
+                var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
+                var blockHeight = model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+                if (blockHeight == 0) {
+                    list += qsTr("in the txpool: %1").arg(txid) + translationManager.emptyString
+                } else {
+                    if (blockchainHeight == 0)
+                        blockchainHeight = walletManager.blockchainHeight()
+                    var confirmations = blockchainHeight - blockHeight - 1
+                    var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
+                    if (confirmations > 1) {
+                        list += qsTr("%2 confirmations: %3 (%1)").arg(txid).arg(confirmations).arg(displayAmount) + translationManager.emptyString
+                    } else {
+                        list += qsTr("1 confirmation: %2 (%1)").arg(txid).arg(displayAmount) + translationManager.emptyString
+                    }
+                }
+                list += "<br>"
+            }
+        }
+
+        if (nTransactions == 0) {
+            setTrackingLineText(qsTr("No transaction found yet...") + translationManager.emptyString)
+            return
+        }
+
+        var text = ((nTransactions == 1) ? qsTr("Transaction found") : qsTr("%1 transactions found").arg(nTransactions)) + translationManager.emptyString
+
+        var expectedAmount = walletManager.amountFromString(amountLine.text)
+        if (expectedAmount && expectedAmount != amount) {
+            var displayTotalAmount = walletManager.displayAmount(totalAmount)
+            if (amount > expectedAmount) {
+                text += qsTr(" with more money (%1)").arg(displayTotalAmount) + translationManager.emptyString
+            } else if (amount < expectedAmount) {
+                text += qsTr(" with not enough money (%1)").arg(displayTotalAmount) + translationManager.emptyString
+            }
+        }
+
+        setTrackingLineText(text + "<br>" + list)
     }
 
     Clipboard { id: clipboard }
@@ -228,10 +310,58 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            id: trackingRow
+
+            Label {
+                id: trackingLabel
+                fontSize: 14
+                textFormat: Text.RichText
+                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
+                           Tracking <font size='2'> (</font><a href='#'>help</a><font size='2'>)</font>")
+                           + translationManager.emptyString
+                width: mainLayout.labelWidth
+                onLinkActivated: {
+                    trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
+                    trackingHowToUseDialog.text = qsTr(
+                        "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
+                        "<p>Click Generate to create a random payment id for a new customer</p> " +
+                        "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
+                        "supports QR code scanning).</p>" +
+                        "<p>This page will automatically scan the blockchain and the tx pool " +
+                        "for incoming transactions using this QR code. If you input an amount, it will also check " +
+                        "that incoming transactions total up to that amount.</p>" +
+                        "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
+                        "confirmed in short order, but there is still a possibility they might not, so for larger " +
+                        "values you may want to wait for one or more confirmation(s).</p>"
+                    )
+                    trackingHowToUseDialog.icon = StandardIcon.Information
+                    trackingHowToUseDialog.open()
+                }
+            }
+
+            TextEdit {
+                id: trackingLine
+                anchors.top: trackingRow.top
+                textFormat: Text.RichText
+                text: ""
+                readOnly: true
+                width: mainLayout.editWidth
+                Layout.fillWidth: true
+                selectByMouse: true
+            }
+
+        }
+
+        MessageDialog {
+            id: trackingHowToUseDialog
+            standardButtons: StandardButton.Ok
+        }
+
         Image {
             id: qrCode
             anchors.margins: 50
-            anchors.top: amountRow.bottom
+            anchors.top: trackingRow.bottom
             Layout.fillWidth: true
             Layout.minimumHeight: mainLayout.qrCodeSize
             smooth: false
@@ -240,13 +370,24 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: timer
+        interval: 2000; running: false; repeat: true
+        onTriggered: update()
+    }
+
     function onPageCompleted() {
         console.log("Receive page loaded");
 
         if(addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
             updatePaymentId()
         }
+        update()
+        timer.running = true
 
     }
 
+    function onPageClosed() {
+        timer.running = false
+    }
 }

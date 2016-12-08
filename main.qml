@@ -177,6 +177,8 @@ ApplicationWindow {
 
         }
 
+        walletManager.setDaemonAddress(persistentSettings.daemon_address)
+
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
