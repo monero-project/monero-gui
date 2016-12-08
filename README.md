@@ -148,6 +148,19 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 The executable can be found in the `build/release/bin` folder.
 
+**Note:** Workaround for "ERROR: Xcode not set up properly"
+
+Edit `$HOME/Qt/5.7/clang_64/mkspecs/features/mac/default_pre.prf`
+
+replace
+`isEmpty($$list($$system("/usr/bin/xcrun -find xcrun 2>/dev/null")))`
+
+with
+`isEmpty($$list($$system("/usr/bin/xcrun -find xcodebuild 2>/dev/null")))`
+
+More info: http://stackoverflow.com/a/35098040/1683164
+
+
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
