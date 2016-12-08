@@ -196,7 +196,7 @@ Rectangle {
                 id: daemonPort
                 Layout.preferredWidth: 100
                 Layout.fillWidth: true
-                text: (daemonAddress !== undefined) ? daemonAddress[1] : ""
+                text: (daemonAddress !== undefined) ? daemonAddress[1] : "18081"
                 placeholderText: qsTr("Port")
             }
 
