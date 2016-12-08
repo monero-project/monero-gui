@@ -37,7 +37,7 @@ ListView {
     property var previousItem
     property int rowSpacing: 12
 
-    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note) {
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations) {
         var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
@@ -47,6 +47,7 @@ ListView {
             + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId  + trEnd : "")
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
             + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note  + trEnd : "")
+            + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
             + "</table>"
             + translationManager.emptyString;
     }
@@ -72,6 +73,7 @@ ListView {
         width:600
         cancelVisible: false
         okVisible: true
+        width:850
     }
 
 
@@ -97,12 +99,10 @@ ListView {
             pressedColor: "#FF4304"
             text: qsTr("Details")
             onClicked: {
-                console.log(hash)
                 var tx_key = currentWallet.getTxKey(hash)
                 var tx_note = currentWallet.getUserNote(hash)
-                console.log("key",tx_key);
                 detailsPopup.title = "Transaction details";
-                detailsPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note);
+                detailsPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
                 detailsPopup.open();
 
             }

@@ -1,7 +1,8 @@
 #include "TransactionInfo.h"
 #include "WalletManager.h"
-
+#include "Transfer.h"
 #include <QDateTime>
+#include <QDebug>
 
 TransactionInfo::Direction TransactionInfo::direction() const
 {
@@ -69,6 +70,31 @@ QString TransactionInfo::time() const
 QString TransactionInfo::paymentId() const
 {
     return QString::fromStdString(m_pimpl->paymentId());
+}
+
+QString TransactionInfo::destinations_formatted() const
+{
+    QString destinations;
+    for (auto const& t: transfers()) {
+        if (!destinations.isEmpty())
+          destinations += "<br> ";
+        destinations +=  WalletManager::instance()->displayAmount(t->amount()) + ": " + t->address();
+    }
+    return destinations;
+}
+
+QList<Transfer*> TransactionInfo::transfers() const
+{
+    if (!m_transfers.isEmpty()) {
+        return m_transfers;
+    }
+
+    for(auto const& t: m_pimpl->transfers()) {
+        TransactionInfo * parent = const_cast<TransactionInfo*>(this);
+        Transfer * transfer = new Transfer(t.amount, QString::fromStdString(t.address), parent);
+        m_transfers.append(transfer);
+    }
+    return m_transfers;
 }
 
 TransactionInfo::TransactionInfo(Bitmonero::TransactionInfo *pimpl, QObject *parent)

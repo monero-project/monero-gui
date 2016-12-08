@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QDateTime>
 
+class Transfer;
+
 class TransactionInfo : public QObject
 {
     Q_OBJECT
@@ -21,6 +23,7 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString date READ date)
     Q_PROPERTY(QString time READ time)
     Q_PROPERTY(QString paymentId READ paymentId)
+    Q_PROPERTY(QString destinations_formatted READ destinations_formatted)
 
 public:
     enum Direction {
@@ -30,14 +33,6 @@ public:
     };
 
     Q_ENUM(Direction)
-
-//   TODO: implement as separate class;
-
-//    struct Transfer {
-//        Transfer(uint64_t _amount, const std::string &address);
-//        const uint64_t amount;
-//        const std::string address;
-//    };
 
     Direction  direction() const;
     bool isPending() const;
@@ -53,16 +48,17 @@ public:
     QString date() const;
     QString time() const;
     QString paymentId() const;
-
-
-    // TODO: implement it
     //! only applicable for output transactions
-    // virtual const std::vector<Transfer> & transfers() const = 0;
+    //! used in tx details popup
+    QString destinations_formatted() const;
+    //! Could be useful later when addressbook is implemented
+    Q_INVOKABLE QList<Transfer*> transfers() const;
 private:
     explicit TransactionInfo(Bitmonero::TransactionInfo * pimpl, QObject *parent = 0);
 private:
     friend class TransactionHistory;
     Bitmonero::TransactionInfo * m_pimpl;
+    mutable QList<Transfer*> m_transfers;
 };
 
 // in order to wrap it to QVariant
