@@ -171,27 +171,15 @@ Rectangle {
     */
 
     // Filter by string
-
-    Label {
-        id: searchLabel
-        anchors.left: parent.left
-        anchors.top: filterHeaderText.bottom // addressLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Incremental search") + translationManager.emptyString
-        fontSize: 14
-        tipText: qsTr("Search transfers for a given string") + translationManager.emptyString
-    }
-
     LineEdit {
         id: searchLine
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: searchLabel.bottom // addressLabel.bottom
+        anchors.top: filterHeaderText.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        placeholderText: qsTr("Type search string") + translationManager.emptyString
+        placeholderText: qsTr("Type for incremental search...") + translationManager.emptyString
         onTextChanged:  {
             model.searchFilter = searchLine.text
             selectedAmount.text = getSelectedAmount()
