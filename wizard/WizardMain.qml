@@ -128,6 +128,11 @@ Rectangle {
 
     function openOpenWalletPage() {
         console.log("open wallet from file page");
+        if (typeof wizard.settings['wallet'] !== 'undefined') {
+            settings.wallet.destroy();
+            delete wizard.settings['wallet'];
+        }
+
          wizard.openWalletFromFileClicked();
     }
 
