@@ -40,19 +40,28 @@ Window {
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
     property alias password: passwordInput.text
+    property string walletName
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
 
 
-    function open() {
+    function open(walletName) {
+        root.walletName = walletName ? walletName : ""
         show()
+    }
+
+    function usefulName(path) {
+        // arbitrary "short enough" limit
+        if (path.length < 32)
+            return path
+        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
     // TODO: implement without hardcoding sizes
     width: 480
-    height: 200
+    height: walletName ? 240 : 200
 
     ColumnLayout {
         id: mainLayout
@@ -65,7 +74,7 @@ Window {
             Layout.alignment: Qt.AlignHCenter
 
             Label {
-                text: qsTr("Please enter wallet password")
+                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for:<br>") + usefulName(root.walletName) : qsTr("Please enter wallet password")
                 Layout.alignment: Qt.AlignHCenter
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
