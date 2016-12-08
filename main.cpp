@@ -31,6 +31,7 @@
 #include <QtQml>
 #include <QStandardPaths>
 #include <QDebug>
+#include <QObject>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -44,6 +45,7 @@
 #include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
+#include "daemon/DaemonManager.h"
 
 
 int main(int argc, char *argv[])
@@ -88,6 +90,8 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<TransactionInfo>("moneroComponents.TransactionInfo", 1, 0, "TransactionInfo",
                                                         "TransactionHistory can't be instantiated directly");
 
+    qmlRegisterUncreatableType<DaemonManager>("moneroComponents.DaemonManager", 1, 0, "DaemonManager",
+                                                   "DaemonManager can't be instantiated directly");
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
@@ -104,6 +108,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
+    const QStringList arguments = QCoreApplication::arguments();
+    DaemonManager * daemonManager = DaemonManager::instance(&arguments);
+    QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
+    engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where

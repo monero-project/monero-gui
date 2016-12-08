@@ -152,8 +152,8 @@ Window {
                 text: qsTr("Cancel")
                 KeyNavigation.tab: passwordInput
                 onClicked: {
-                    root.rejected()
                     root.close()
+                    root.rejected()
                 }
             }
             MoneroComponents.StandardButton {
@@ -167,8 +167,8 @@ Window {
                 text: qsTr("Ok")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
-                    root.accepted()
                     root.close()
+                    root.accepted()
                 }
             }
         }

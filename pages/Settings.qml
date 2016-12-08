@@ -37,7 +37,6 @@ import "../components"
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
-
     property var daemonAddress
 
     color: "#F0EEEE"
@@ -272,14 +271,93 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            Label {
+                id: manageDaemonLabel
+                color: "#4A4949"
+                text: qsTr("Manage daemon") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            StandardButton {
+                visible: true
+                enabled: !appWindow.daemonRunning
+                id: startDaemonButton
+                width: 110
+                text: qsTr("Start daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.startDaemon()
+                }
+            }
+
+            StandardButton {
+                visible: true
+                enabled: appWindow.daemonRunning
+                id: stopDaemonButton
+                width: 110
+                text: qsTr("Stop daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.stopDaemon()
+                }
+            }
+
+            StandardButton {
+                visible: true
+             //  enabled: appWindow.daemonRunning
+                id: daemonConsolePopupButton
+                width: 110
+                text: qsTr("Show log") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonConsolePopup.open();
+                }
+            }
+
+        }
+
+    }
+
+    // Daemon console
+    StandardDialog {
+        id: daemonConsolePopup
+        height:500
+        width:800
+        cancelVisible: false
+        title: qsTr("Daemon log")
+        onAccepted: {
+            close();
+        }
     }
 
 
-
+    // fires on every page load
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
     }
+
+    // fires only once
+    Component.onCompleted: {
+        daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+    }
+
+    function onDaemonConsoleUpdated(message){
+        // Update daemon console
+        daemonConsolePopup.textArea.append(message)
+    }
+
+
 
 
 }

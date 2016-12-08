@@ -200,6 +200,8 @@ signals:
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
+    void connectionStatusChanged() const;
+
 private:
     Wallet(QObject * parent = nullptr);
     Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
@@ -221,6 +223,10 @@ private:
     mutable QTime   m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
+    mutable ConnectionStatus m_connectionStatus;
+    int     m_connectionStatusTtl;
+    mutable QTime   m_connectionStatusTime;
+    mutable bool    m_initialized;
 };
 
 

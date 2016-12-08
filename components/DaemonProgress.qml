@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import moneroComponents.Wallet 1.0
 
 Item {
     id: item
@@ -45,7 +46,7 @@ Item {
 
             // TODO: lower daemon block height cache, ttl and refresh interval?
 
-            item.visible = (currentBlock < targetBlock)
+            item.visible = (currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (currentBlock < targetBlock)
 
         }
     }

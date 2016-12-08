@@ -59,6 +59,7 @@ ApplicationWindow {
     property int restoreHeight:0
     property bool daemonSynced: false
     property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property bool daemonRunning: false
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -212,6 +213,7 @@ ApplicationWindow {
         currentWallet.moneySpent.disconnect(onWalletMoneySent)
         currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
         currentWallet.transactionCreated.disconnect(onTransactionCreated)
+        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
 
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
@@ -219,6 +221,7 @@ ApplicationWindow {
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
+        currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
 
 
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
@@ -230,6 +233,11 @@ ApplicationWindow {
     function walletPath() {
         var wallet_path = persistentSettings.wallet_path
         return wallet_path;
+    }
+
+    function onWalletConnectionStatusChanged(){
+        console.log("Wallet connection status changed")
+        middlePanel.updateStatus();
     }
 
     function onWalletOpened(wallet) {
@@ -280,18 +288,23 @@ ApplicationWindow {
             hideProcessingSplash()
         }
 
+        // Daemon connected
+        leftPanel.networkStatus.connected = currentWallet.connected
+
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
-        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
-
-        // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet.connected
 
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
+        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
+        middlePanel.updateStatus();
 
+        // If wallet isnt connected and no daemon is running - Ask
+        if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
+            daemonManagerDialog.open();
+        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -317,9 +330,28 @@ ApplicationWindow {
             walletInitialized = true
         }
 
-
         onWalletUpdate();
     }
+
+    function startDaemon(){
+        appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
+        daemonManager.start();
+    }
+
+    function stopDaemon(){
+        appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
+        daemonManager.stop();
+    }
+
+    function onDaemonStarted(){
+        console.log("daemon started");
+        daemonRunning = true;
+    }
+    function onDaemonStopped(){
+        console.log("daemon stopped");
+        daemonRunning = false;
+    }
+
 
     function onWalletNewBlock(blockHeight) {
         if (splash.visible) {
@@ -633,6 +665,9 @@ ApplicationWindow {
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
 
+        daemonManager.daemonStarted.connect(onDaemonStarted);
+        daemonManager.daemonStopped.connect(onDaemonStopped);
+
         if(!walletsFound()) {
             rootItem.state = "wizard"
         } else {
@@ -668,11 +703,11 @@ ApplicationWindow {
     // TODO: replace with customized popups
 
     // Information dialog
-    MessageDialog {
+    StandardDialog {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
-        standardButtons: StandardButton.Ok
+        cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
                 onCloseCallback()
@@ -681,10 +716,10 @@ ApplicationWindow {
     }
 
     // Confrirmation aka question dialog
-    MessageDialog {
+    StandardDialog {
         id: transactionConfirmationPopup
-        standardButtons: StandardButton.Ok  + StandardButton.Cancel
         onAccepted: {
+            close();
             handleTransactionConfirmed()
         }
     }
@@ -721,6 +756,10 @@ ApplicationWindow {
 
     }
 
+    DaemonManagerDialog {
+        id: daemonManagerDialog
+
+    }
 
     ProcessingSplash {
         id: splash
@@ -1032,10 +1071,13 @@ ApplicationWindow {
         }
     }
     onClosing: {
-       // Close and save to disk on app close
-       if (currentWallet != undefined) {
-           walletManager.closeWallet(currentWallet);
-           currentWallet = undefined
-       }
+        // Make sure wallet is closed before app exit (~Wallet() isn't always invoked)
+        // Daemon shutdown is handled with signal/slot in main.cpp
+        if (currentWallet != undefined) {
+            walletManager.closeWallet(currentWallet);
+            currentWallet = undefined
+        }
+        // Stop daemon
+        daemonManager.stop();
     }
 }

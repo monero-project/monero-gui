@@ -39,60 +39,41 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-    property alias title: dialogTitle.text
-    property alias text: dialogContent.text
-    property alias content: root.text
-    property alias cancelVisible: cancelButton.visible
-    property alias okVisible: okButton.visible
-    property alias textArea: dialogContent
-    property var icon
 
-    // same signals as Dialog has
-    signal accepted()
     signal rejected()
-
+    signal started();
 
     function open() {
         show()
     }
 
     // TODO: implement without hardcoding sizes
-    width:  480
-    height: 280
+    width: 480
+    height: 200
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
         anchors { fill: parent; margins: 35 }
 
-        RowLayout {
+        ColumnLayout {
             id: column
             //anchors {fill: parent; margins: 16 }
             Layout.alignment: Qt.AlignHCenter
 
             Label {
-                id: dialogTitle
+                text: qsTr("Daemon doesn't appear to be running")
+                Layout.alignment: Qt.AlignHCenter
+                Layout.columnSpan: 2
+                Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
+                font.pixelSize: 24
                 font.family: "Arial"
                 color: "#555555"
             }
 
         }
 
-        RowLayout {
-            TextArea {
-                id : dialogContent
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                font.family: "Arial"
-                textFormat: TextEdit.AutoText
-                readOnly: true
-                font.pixelSize: 12
-            }
-        }
-
-        // Ok/Cancel buttons
         RowLayout {
             id: buttons
             spacing: 60
@@ -106,12 +87,12 @@ Window {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Ok")
+                text: qsTr("Start daemon")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()
-                    root.accepted()
-
+                    appWindow.startDaemon();
+                    root.started()
                 }
             }
 
@@ -124,6 +105,7 @@ Window {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Cancel")
+
                 onClicked: {
                     root.close()
                     root.rejected()
