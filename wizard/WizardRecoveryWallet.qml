@@ -41,6 +41,11 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
+    function onWizardRestarted() {
+        // reset account name field
+        uiItem.accountNameText = defaultAccountName
+    }
+
     function onPageOpened(settingsObject) {
         checkNextButton();
         // Empty seedText when restoring multiple times in one session
@@ -94,5 +99,9 @@ Item {
         wordsTextItem.onMemoTextChanged: {
             checkNextButton();
         }
+    }
+
+    Component.onCompleted: {
+        parent.wizardRestarted.connect(onWizardRestarted)
     }
 }

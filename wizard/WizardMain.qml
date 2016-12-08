@@ -49,6 +49,7 @@ Rectangle {
     property string currentPath: "create_wallet"
     property var pages: paths[currentPath]
 
+    signal wizardRestarted();
     signal useMoneroClicked()
     signal openWalletFromFileClicked()
     border.color: "#DBDBDB"
@@ -60,6 +61,7 @@ Rectangle {
         wizard.settings = ({})
         wizard.currentPath = "create_wallet"
         wizard.pages = paths[currentPath]
+        wizardRestarted();
 
         //hide all pages except first
         for (var i = 1; i < wizard.pages.length; i++){
