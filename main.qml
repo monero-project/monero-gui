@@ -625,7 +625,7 @@ ApplicationWindow {
     width: rightPanelExpanded ? 1269 : 1269 - 300
     height: maxWindowHeight;
     color: "#FFFFFF"
-    flags: Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint
+    flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
     onWidthChanged: x -= 0
 
 
@@ -669,6 +669,7 @@ ApplicationWindow {
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
+        property bool   customDecorations : true
     }
 
     // Information dialog
@@ -757,8 +758,11 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: 930; }
                 PropertyChanges { target: appWindow; height: 595; }
                 PropertyChanges { target: resizeArea; visible: false }
+                PropertyChanges { target: titleBar; maximizeButtonVisible: false }
                 PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
+                PropertyChanges { target: titleBar; y: 0 }
+                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
@@ -769,8 +773,11 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
+                PropertyChanges { target: titleBar; maximizeButtonVisible: true }
                 PropertyChanges { target: frameArea; blocked: false }
                 PropertyChanges { target: titleBar; visible: true }
+                PropertyChanges { target: titleBar; y: 0 }
+                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
 
@@ -837,6 +844,11 @@ ApplicationWindow {
                 target: appWindow
                 properties: "visibility"
                 value: Window.Windowed
+            }
+            PropertyAction {
+                target: titleBar
+                properties: "maximizeButtonVisible"
+                value: false
             }
             PropertyAction {
                 target: frameArea
@@ -926,6 +938,11 @@ ApplicationWindow {
                 properties: "blocked"
                 value: false
             }
+            PropertyAction {
+                target: titleBar
+                properties: "maximizeButtonVisible"
+                value: true
+            }
         }
 
         WizardMain {
@@ -988,10 +1005,11 @@ ApplicationWindow {
 
         TitleBar {
             id: titleBar
+            anchors.left: parent.left
+            anchors.right: parent.right
             x: 0
             y: 0
-            width: 30
-            height: 30
+            customDecorations: persistentSettings.customDecorations
             onGoToBasicVersion: {
                 if (yes) {
                     // basicPanel.currentView = middlePanel.currentView
@@ -999,6 +1017,25 @@ ApplicationWindow {
                 } else {
                     // middlePanel.currentView = basicPanel.currentView
                     goToProAnimation.start()
+                }
+            }
+
+            MouseArea {
+                enabled: persistentSettings.customDecorations
+                property var previousPosition
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onPressed: previousPosition = globalCursor.getPosition()
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
+
+                        appWindow.x += dx
+                        appWindow.y += dy
+                        previousPosition = pos
+                    }
                 }
             }
         }
