@@ -65,7 +65,15 @@ Rectangle {
             if(appWindow.password === settingsPasswordDialog.password){
                 memoTextInput.text = currentWallet.seed
                 showSeedButton.visible = false
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Wrong password");
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    settingsPasswordDialog.open()
+                }
             }
+
             settingsPasswordDialog.password = ""
         }
         onRejected: {
