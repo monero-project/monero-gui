@@ -1,3 +1,4 @@
 *.user
 *.user.*
 translations/*.qm
+build
