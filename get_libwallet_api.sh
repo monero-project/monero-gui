@@ -78,10 +78,14 @@ eval $make_exec  install -j$CPU_CORE_COUNT
 popd
 
 # Build monerod
-pushd $MONERO_DIR/build/release/src/daemon
-eval $make_exec  -j$CPU_CORE_COUNT
-eval $make_exec  install -j$CPU_CORE_COUNT
-popd
+# win32 need to build daemon manually with msys2 toolchain
+if [ "$platform" != "mingw32" ]; then
+    pushd $MONERO_DIR/build/release/src/daemon
+    eval make  -j$CPU_CORE_COUNT
+    eval make  install -j$CPU_CORE_COUNT
+    popd
+fi
+
 
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)

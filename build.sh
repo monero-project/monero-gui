@@ -48,7 +48,9 @@ qmake ../monero-core.pro "$CONFIG"
 make 
 
 # Copy monerod to bin folder
+if [ "$platform" != "mingw32" ]; then
 cp ../$MONERO_DIR/bin/$MONEROD_EXEC $BIN_PATH
+fi
 
 # make deploy
 popd
