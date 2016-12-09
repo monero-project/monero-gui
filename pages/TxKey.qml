@@ -207,7 +207,6 @@ Rectangle {
             id: checkButton
             anchors.left: parent.left
             anchors.top: txKeyRow.bottom
-            anchors.leftMargin: 17
             anchors.topMargin: 17
             width: 60
             text: qsTr("CHECK") + translationManager.emptyString
