@@ -186,6 +186,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.top: parent.top
                 anchors.right: parent.right
+                anchors.topMargin: 10
                 width: 256
                 columns: 3
 
@@ -272,7 +273,6 @@ Rectangle {
             anchors.topMargin: 30
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.top: parent.top
             anchors.margins: 4
             clip: true // otherwise animation will affect left panel
 
