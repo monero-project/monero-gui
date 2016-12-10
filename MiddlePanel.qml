@@ -51,6 +51,7 @@ Rectangle {
     property History historyView: History { }
     property Sign signView: Sign { }
     property Settings settingsView: Settings { }
+    property AddressBook addressBookView: AddressBook { }
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
@@ -79,6 +80,12 @@ Rectangle {
 
     function updateStatus(){
         transferView.updateStatus();
+    }
+
+    // send from AddressBook
+    function sendTo(address, paymentId, description){
+        root.state = "Transfer";
+        transferView.sendTo(address, paymentId, description);
     }
 
 
@@ -127,7 +134,7 @@ Rectangle {
                PropertyChanges { target: root; currentView: txkeyView }
             }, State {
                 name: "AddressBook"
-                PropertyChanges { /*TODO*/ }
+                PropertyChanges {  target: root; currentView: addressBookView  }
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }

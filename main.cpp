@@ -46,6 +46,8 @@
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "daemon/DaemonManager.h"
+#include "AddressBook.h"
+#include "model/AddressBookModel.h"
 
 
 int main(int argc, char *argv[])
@@ -92,6 +94,13 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<DaemonManager>("moneroComponents.DaemonManager", 1, 0, "DaemonManager",
                                                    "DaemonManager can't be instantiated directly");
+
+    qmlRegisterUncreatableType<AddressBookModel>("moneroComponents.AddressBookModel", 1, 0, "AddressBookModel",
+                                                        "AddressBookModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<AddressBook>("moneroComponents.AddressBook", 1, 0, "AddressBook",
+                                                        "AddressBook can't be instantiated directly");
+
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
@@ -152,7 +161,7 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
 
-    // WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Max);
+    //WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Max);
 
     return app.exec();
 }

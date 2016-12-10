@@ -148,6 +148,10 @@ Item {
             }
         }
 
+        onClicked: {
+            optionClicked(currentIndex)
+        }
+
         onExited: timer.start()
         preventStealing: true
         z: 1
@@ -216,6 +220,7 @@ Item {
                                 tipItem.visible = true
                             }
                         }
+
                     }
                 }
             }

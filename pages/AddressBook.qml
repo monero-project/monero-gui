@@ -28,9 +28,13 @@
 
 import QtQuick 2.0
 import "../components"
+import moneroComponents.AddressBook 1.0
+import moneroComponents.AddressBookModel 1.0
 
 Rectangle {
     color: "#F0EEEE"
+    id: root
+    property var model
 
     Text {
         id: newEntryText
@@ -66,6 +70,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        error: true;
     }
 
     Label {
@@ -124,6 +129,27 @@ Rectangle {
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
         text: qsTr("ADD")
+        enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+
+        onClicked: {
+            if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                // TODO: check currentWallet.addressBook.errorString() instead.
+                if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                     informationPopup.text  = qsTr("Invalid address")
+                else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                     informationPopup.text  = qsTr("Invalid Payment ID")
+                else
+                     informationPopup.text  = qsTr("Can't create entry")
+
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
+            } else {
+                addressLine.text = "";
+                paymentIdLine.text = "";
+                descriptionLine.text = "";
+            }
+        }
     }
 
     Item {
@@ -170,9 +196,10 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: qsTr("Address") + translationManager.emptyString; columnWidth: 148 }
-            ListElement { columnName: qsTr("Payment ID") + translationManager.emptyString; columnWidth: 148 }
-            ListElement { columnName: qsTr("Description") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Address") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Payment ID") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Description") + translationManager.emptyString; columnWidth: 148 }
+//
         }
 
         TableHeader {
@@ -223,7 +250,30 @@ Rectangle {
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
-            model: testModel
+            model: root.model
         }
     }
+
+    function checkInformation(address, payment_id, testnet) {
+      address = address.trim()
+      payment_id = payment_id.trim()
+
+      var address_ok = walletManager.addressValid(address, testnet)
+      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+      var ipid = walletManager.paymentIdFromAddress(address, testnet)
+      if (ipid.length > 0 && payment_id.length > 0)
+         payment_id_ok = false
+
+      addressLine.error = !address_ok
+      paymentIdLine.error = !payment_id_ok
+
+      return address_ok && payment_id_ok
+    }
+
+    function onPageCompleted() {
+        console.log("adress book");
+        root.model = currentWallet.addressBookModel;
+    }
+
+
 }
