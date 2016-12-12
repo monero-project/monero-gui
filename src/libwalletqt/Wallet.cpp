@@ -192,6 +192,11 @@ quint64 Wallet::daemonBlockChainTargetHeight() const
     if (m_daemonBlockChainTargetHeight == 0
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+        // Target height is set to 0 if daemon is synced.
+        // Use current height from daemon when target height < current height
+        if (m_daemonBlockChainTargetHeight < m_daemonBlockChainHeight){
+            m_daemonBlockChainTargetHeight = m_daemonBlockChainHeight;
+        }
         m_daemonBlockChainTargetHeightTime.restart();
     }
 
