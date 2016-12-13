@@ -6,7 +6,7 @@
 #include <wallet/wallet2_api.h>
 
 class Wallet;
-namespace Bitmonero {
+namespace Monero {
     class WalletManager;
 }
 
@@ -17,14 +17,14 @@ class WalletManager : public QObject
 
 public:
     enum LogLevel {
-        LogLevel_Silent = Bitmonero::WalletManagerFactory::LogLevel_Silent,
-        LogLevel_0 = Bitmonero::WalletManagerFactory::LogLevel_0,
-        LogLevel_1 = Bitmonero::WalletManagerFactory::LogLevel_1,
-        LogLevel_2 = Bitmonero::WalletManagerFactory::LogLevel_2,
-        LogLevel_3 = Bitmonero::WalletManagerFactory::LogLevel_3,
-        LogLevel_4 = Bitmonero::WalletManagerFactory::LogLevel_4,
-        LogLevel_Min = Bitmonero::WalletManagerFactory::LogLevel_Min,
-        LogLevel_Max = Bitmonero::WalletManagerFactory::LogLevel_Max,
+        LogLevel_Silent = Monero::WalletManagerFactory::LogLevel_Silent,
+        LogLevel_0 = Monero::WalletManagerFactory::LogLevel_0,
+        LogLevel_1 = Monero::WalletManagerFactory::LogLevel_1,
+        LogLevel_2 = Monero::WalletManagerFactory::LogLevel_2,
+        LogLevel_3 = Monero::WalletManagerFactory::LogLevel_3,
+        LogLevel_4 = Monero::WalletManagerFactory::LogLevel_4,
+        LogLevel_Min = Monero::WalletManagerFactory::LogLevel_Min,
+        LogLevel_Max = Monero::WalletManagerFactory::LogLevel_Max,
     };
 
     static WalletManager * instance();
@@ -124,7 +124,7 @@ private:
 
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
-    Bitmonero::WalletManager * m_pimpl;
+    Monero::WalletManager * m_pimpl;
 
 };
 

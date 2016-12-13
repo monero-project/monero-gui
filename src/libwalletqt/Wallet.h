@@ -4,10 +4,10 @@
 #include <QObject>
 #include <QTime>
 
-#include "wallet/wallet2_api.h" // we need to have an access to the Bitmonero::Wallet::Status enum here;
+#include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 
-namespace Bitmonero {
+namespace Monero {
     class Wallet; // forward declaration
 }
 
@@ -37,16 +37,16 @@ public:
 
 
     enum Status {
-        Status_Ok       = Bitmonero::Wallet::Status_Ok,
-        Status_Error    = Bitmonero::Wallet::Status_Error
+        Status_Ok       = Monero::Wallet::Status_Ok,
+        Status_Error    = Monero::Wallet::Status_Error
     };
 
     Q_ENUM(Status)
 
     enum ConnectionStatus {
-        ConnectionStatus_Connected       = Bitmonero::Wallet::ConnectionStatus_Connected,
-        ConnectionStatus_Disconnected    = Bitmonero::Wallet::ConnectionStatus_Disconnected,
-        ConnectionStatus_WrongVersion    = Bitmonero::Wallet::ConnectionStatus_WrongVersion
+        ConnectionStatus_Connected       = Monero::Wallet::ConnectionStatus_Connected,
+        ConnectionStatus_Disconnected    = Monero::Wallet::ConnectionStatus_Disconnected,
+        ConnectionStatus_WrongVersion    = Monero::Wallet::ConnectionStatus_WrongVersion
     };
 
     Q_ENUM(ConnectionStatus)
@@ -204,13 +204,13 @@ signals:
 
 private:
     Wallet(QObject * parent = nullptr);
-    Wallet(Bitmonero::Wallet *w, QObject * parent = 0);
+    Wallet(Monero::Wallet *w, QObject * parent = 0);
     ~Wallet();
 private:
     friend class WalletManager;
     friend class WalletListenerImpl;
     //! libwallet's
-    Bitmonero::Wallet * m_walletImpl;
+    Monero::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     // Used for UI history view

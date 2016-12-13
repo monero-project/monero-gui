@@ -5,7 +5,7 @@
 
 #include <wallet/wallet2_api.h>
 
-//namespace Bitmonero {
+//namespace Monero {
 //class PendingTransaction;
 //}
 
@@ -22,15 +22,15 @@ class PendingTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Bitmonero::PendingTransaction::Status_Ok,
-        Status_Error    = Bitmonero::PendingTransaction::Status_Error
+        Status_Ok       = Monero::PendingTransaction::Status_Ok,
+        Status_Error    = Monero::PendingTransaction::Status_Error
     };
     Q_ENUM(Status)
 
     enum Priority {
-        Priority_Low    = Bitmonero::PendingTransaction::Priority_Low,
-        Priority_Medium = Bitmonero::PendingTransaction::Priority_Medium,
-        Priority_High   = Bitmonero::PendingTransaction::Priority_High
+        Priority_Low    = Monero::PendingTransaction::Priority_Low,
+        Priority_Medium = Monero::PendingTransaction::Priority_Medium,
+        Priority_High   = Monero::PendingTransaction::Priority_High
     };
     Q_ENUM(Priority)
 
@@ -45,11 +45,11 @@ public:
     quint64 txCount() const;
 
 private:
-    explicit PendingTransaction(Bitmonero::PendingTransaction * pt, QObject *parent = 0);
+    explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Bitmonero::PendingTransaction * m_pimpl;
+    Monero::PendingTransaction * m_pimpl;
 };
 
 #endif // PENDINGTRANSACTION_H

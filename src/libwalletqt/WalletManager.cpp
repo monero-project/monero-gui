@@ -23,7 +23,7 @@ WalletManager *WalletManager::instance()
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language, bool testnet)
 {
-    Bitmonero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
+    Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
                                                   language.toStdString(), testnet);
     Wallet * wallet = new Wallet(w);
     return wallet;
@@ -34,7 +34,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
     qDebug("%s: opening wallet at %s, testnet = %d ",
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
-    Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
+    Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
     Wallet * wallet = new Wallet(w);
 
@@ -63,7 +63,7 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, bool testnet, quint64 restoreHeight)
 {
-    Bitmonero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
+    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
     Wallet * wallet = new Wallet(w);
     return wallet;
 }
@@ -124,7 +124,7 @@ QString WalletManager::walletLanguage(const QString &locale)
 
 quint64 WalletManager::maximumAllowedAmount() const
 {
-    return Bitmonero::Wallet::maximumAllowedAmount();
+    return Monero::Wallet::maximumAllowedAmount();
 }
 
 QString WalletManager::maximumAllowedAmountAsSting() const
@@ -136,32 +136,32 @@ QString WalletManager::maximumAllowedAmountAsSting() const
 
 QString WalletManager::displayAmount(quint64 amount) const
 {
-    return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
+    return QString::fromStdString(Monero::Wallet::displayAmount(amount));
 }
 
 quint64 WalletManager::amountFromString(const QString &amount) const
 {
-    return Bitmonero::Wallet::amountFromString(amount.toStdString());
+    return Monero::Wallet::amountFromString(amount.toStdString());
 }
 
 quint64 WalletManager::amountFromDouble(double amount) const
 {
-    return Bitmonero::Wallet::amountFromDouble(amount);
+    return Monero::Wallet::amountFromDouble(amount);
 }
 
 bool WalletManager::paymentIdValid(const QString &payment_id) const
 {
-    return Bitmonero::Wallet::paymentIdValid(payment_id.toStdString());
+    return Monero::Wallet::paymentIdValid(payment_id.toStdString());
 }
 
 bool WalletManager::addressValid(const QString &address, bool testnet) const
 {
-    return Bitmonero::Wallet::addressValid(address.toStdString(), testnet);
+    return Monero::Wallet::addressValid(address.toStdString(), testnet);
 }
 
 QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet) const
 {
-    return QString::fromStdString(Bitmonero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
+    return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
 }
 
 QString WalletManager::checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const
@@ -206,7 +206,7 @@ double WalletManager::miningHashRate() const
 
 void WalletManager::setLogLevel(int logLevel)
 {
-    Bitmonero::WalletManagerFactory::setLogLevel(logLevel);
+    Monero::WalletManagerFactory::setLogLevel(logLevel);
 }
 
 QString WalletManager::urlToLocalPath(const QUrl &url) const
@@ -221,5 +221,5 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
-    m_pimpl =  Bitmonero::WalletManagerFactory::getWalletManager();
+    m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
 }

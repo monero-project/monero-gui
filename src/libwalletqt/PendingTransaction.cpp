@@ -47,7 +47,7 @@ quint64 PendingTransaction::txCount() const
     return m_pimpl->txCount();
 }
 
-PendingTransaction::PendingTransaction(Bitmonero::PendingTransaction *pt, QObject *parent)
+PendingTransaction::PendingTransaction(Monero::PendingTransaction *pt, QObject *parent)
     : QObject(parent), m_pimpl(pt)
 {
 
