@@ -18,7 +18,7 @@ namespace {
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
 
-class WalletListenerImpl : public  Bitmonero::WalletListener
+class WalletListenerImpl : public  Monero::WalletListener
 {
 public:
     WalletListenerImpl(Wallet * w)
@@ -226,9 +226,9 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
                                               quint64 amount, quint32 mixin_count,
                                               PendingTransaction::Priority priority)
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
-                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+                static_cast<Monero::PendingTransaction::Priority>(priority));
     PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
@@ -252,9 +252,9 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
 PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const QString &payment_id,
                                                  quint32 mixin_count, PendingTransaction::Priority priority)
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), payment_id.toStdString(), Bitmonero::optional<uint64_t>(), mixin_count,
-                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+                dst_addr.toStdString(), payment_id.toStdString(), Monero::optional<uint64_t>(), mixin_count,
+                static_cast<Monero::PendingTransaction::Priority>(priority));
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -277,7 +277,7 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
 
 PendingTransaction *Wallet::createSweepUnmixableTransaction()
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -322,7 +322,7 @@ TransactionHistorySortFilterModel *Wallet::historyModel() const
 
 QString Wallet::generatePaymentId() const
 {
-    return QString::fromStdString(Bitmonero::Wallet::genPaymentId());
+    return QString::fromStdString(Monero::Wallet::genPaymentId());
 }
 
 QString Wallet::integratedAddress(const QString &paymentId) const
@@ -427,7 +427,7 @@ bool Wallet::verifySignedMessage(const QString &message, const QString &address,
   }
 }
 
-Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
+Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
     , m_history(nullptr)
@@ -452,5 +452,5 @@ Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
     delete m_history;
-    Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+    Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
 }

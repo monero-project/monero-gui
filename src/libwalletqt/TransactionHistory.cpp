@@ -82,7 +82,7 @@ QDateTime TransactionHistory::lastDateTime() const
 }
 
 
-TransactionHistory::TransactionHistory(Bitmonero::TransactionHistory *pimpl, QObject *parent)
+TransactionHistory::TransactionHistory(Monero::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl)
 {
     m_firstDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
