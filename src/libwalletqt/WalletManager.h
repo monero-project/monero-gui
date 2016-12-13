@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QUrl>
 #include <wallet/wallet2_api.h>
+#include <QMutex>
+#include <QPointer>
 
 class Wallet;
 namespace Monero {
@@ -52,17 +54,15 @@ public:
                                        bool testnet = false, quint64 restoreHeight = 0);
 
     /*!
-     * \brief closeWallet - closes wallet and frees memory
-     * \param wallet
+     * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
      */
-    Q_INVOKABLE QString closeWallet(Wallet * wallet);
+    Q_INVOKABLE QString closeWallet();
 
     /*!
      * \brief closeWalletAsync - asynchronous version of "closeWallet"
-     * \param wallet - wallet pointer;
      */
-    Q_INVOKABLE void closeWalletAsync(Wallet * wallet);
+    Q_INVOKABLE void closeWalletAsync();
 
     //! checks is given filename is a wallet;
     Q_INVOKABLE bool walletExists(const QString &path) const;
@@ -125,6 +125,8 @@ private:
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
     Monero::WalletManager * m_pimpl;
+    QMutex m_mutex;
+    QPointer<Wallet> m_currentWallet;
 
 };
 
