@@ -2,7 +2,6 @@
 #define ADDRESSBOOKMODEL_H
 
 #include <QAbstractListModel>
-//#include "wallet/wallet2_api.h" // we need to have an access to the Bitmonero::Wallet::AddressBook
 
 class AddressBook;
 
