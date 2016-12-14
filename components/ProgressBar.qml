@@ -41,13 +41,8 @@ Item {
         if(targetBlock > 0) {
             var progressLevel = ((currentBlock/targetBlock) * 100).toFixed(0);
             fillLevel = progressLevel
-            console.log("target block: ",progressLevel)
             progressText.text = qsTr("Synchronizing blocks %1/%2").arg(currentBlock.toFixed(0)).arg(targetBlock.toFixed(0));
-
-            // TODO: lower daemon block height cache, ttl and refresh interval?
-
             item.visible = (currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (currentBlock < targetBlock)
-
         }
     }
 

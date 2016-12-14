@@ -37,7 +37,7 @@ Rectangle {
     property alias unlockedBalanceText: unlockedBalanceText.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
-    property alias daemonProgress : daemonProgress
+    property alias progressBar : progressBar
 
     signal dashboardClicked()
     signal historyClicked()
@@ -408,12 +408,12 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: (daemonProgress.visible)? daemonProgress.top : parent.bottom;
+            anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
         }
 
-        DaemonProgress {
-            id: daemonProgress
+        ProgressBar {
+            id: progressBar
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
