@@ -121,7 +121,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
@@ -307,7 +307,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
