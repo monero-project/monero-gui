@@ -135,6 +135,7 @@ ApplicationWindow {
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
             console.log("Daemon change - closing " + currentWallet)
             walletManager.closeWalletAsync();
+            currentWallet = undefined
         } else {
 
             // set page to transfer if not changing daemon
@@ -221,6 +222,8 @@ ApplicationWindow {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
                 console.log("closing wallet async : " + wallet.address)
                 walletManager.closeWalletAsync()
+                currentWallet = undefined
+
                 // try to open wallet with password;
                 passwordDialog.open(wallet.path);
             } else {
@@ -232,6 +235,7 @@ ApplicationWindow {
                 informationPopup.icon = StandardIcon.Critical
                 console.log("closing wallet async : " + wallet.address)
                 walletManager.closeWalletAsync();
+                currentWallet = undefined
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
                     passwordDialog.open(wallet.path)
@@ -612,6 +616,7 @@ ApplicationWindow {
         walletInitialized = false;
         splashCounter = 0;
         walletManager.closeWalletAsync();
+        currentWallet = undefined
         wizard.restart();
         rootItem.state = "wizard"
     }
