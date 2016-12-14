@@ -77,7 +77,7 @@ win32 {
         MSYS_PATH=c:/msys64/mingw32
 
         # boost root path
-        BOOST_PATH=/msys2/mingw64/boost
+        BOOST_PATH=c:/msys64/mingw64/boost
 
     # WIN32 Host settings
     } else {
