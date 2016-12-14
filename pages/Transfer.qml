@@ -198,7 +198,7 @@ Rectangle {
         fontSize: 14
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                    Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                    Address")
               + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
