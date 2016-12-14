@@ -57,7 +57,8 @@ elif [ "$platform" == "linux" ]; then
 elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW64.."
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    BOOST_ROOT=/msys2/mingw64/boost
+    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON BOOST_ROOT="$BOOST_ROOT" -D ARCH="x86-64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
 elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."

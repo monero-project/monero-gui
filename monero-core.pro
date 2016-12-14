@@ -71,30 +71,27 @@ LIBS += -L$$WALLET_ROOT/lib \
 
 win32 {
 
+    # Win64 Host settings
     contains(QMAKE_HOST.arch, x86_64) {
         message("Host is 64bit")
         MSYS_PATH=c:/msys64/mingw32
+
+        # boost root path
+        BOOST_PATH=c:/msys64/mingw64/boost
+
+    # WIN32 Host settings
     } else {
         message("Host is 32bit")
         MSYS_PATH=c:/msys32/mingw32
-    }
 
-    # boost root path
-    BOOST_PATH=/c/Qt/Qt5.7.0/Tools/mingw530_32/boost
+        # boost root path
+        BOOST_PATH=/c/Qt/Qt5.7.0/Tools/mingw530_32/boost
 
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        message("Target is 32bit")
-        ## Windows x86 (32bit) specific build here
-        ## there's 2Mb stack in libwallet allocated internally, so we set stack=4Mb
-        ## this fixes app crash for x86 Windows build
-        QMAKE_LFLAGS += -Wl,--stack,4194304
-    } else {
-        message("Target is 64bit")
     }
 
     LIBS+=-L$$MSYS_PATH/lib
     LIBS+=-L$$BOOST_PATH/lib
-
+    
     LIBS+= \
         -Wl,-Bstatic \
         -lboost_serialization-mt-s \
@@ -112,8 +109,16 @@ win32 {
         -lwsock32 \
         -lIphlpapi \
         -lgdi32
-
-
+    
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        message("Target is 32bit")
+        ## Windows x86 (32bit) specific build here
+        ## there's 2Mb stack in libwallet allocated internally, so we set stack=4Mb
+        ## this fixes app crash for x86 Windows build
+        QMAKE_LFLAGS += -Wl,--stack,4194304
+    } else {
+        message("Target is 64bit")
+    }
 
 }
 
@@ -241,6 +246,10 @@ macx {
 
 win32 {
     deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -release -qmldir=$$PWD
+    # Win64 msys2 deploy settings
+    contains(QMAKE_HOST.arch, x86_64) {
+        deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
+    }
 }
 
 
