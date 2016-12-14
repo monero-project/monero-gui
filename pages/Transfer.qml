@@ -39,6 +39,7 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
+    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>"
 
     function scaleValueToMixinCount(scaleValue) {
         var scaleToMixinCount = [4,5,6,7,8,9,10,11,12,13,14,15,20,25];
@@ -50,6 +51,9 @@ Rectangle {
     }
 
 
+    Item {
+      id: pageRoot
+      anchors.fill: parent
     Label {
         id: amountLabel
         anchors.left: parent.left
@@ -299,7 +303,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        enabled : checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+        enabled : pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
         onClicked: {
             console.log("Transfer: paymentClicked")
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority
@@ -338,8 +342,9 @@ Rectangle {
         color:"black"
         anchors.fill: parent
         opacity: 0.1
-        visible: (root.enabled)? 0 : 1;
+        visible: (pageRoot.enabled)? 0 : 1;
     }
+    } // Rectangle
 
     Rectangle {
         x: root.width/2 - width/2
@@ -354,12 +359,14 @@ Rectangle {
             anchors.fill:parent
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
+            textFormat: Text.RichText
+            onLinkActivated: { appWindow.startDaemon(); }
         }
     }
 
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus
-        root.enabled = false
+        pageRoot.enabled = false
     }
 
     // fires on every page load
@@ -374,13 +381,13 @@ Rectangle {
     function updateStatus() {
         console.log("updated transfer page status")
         if(typeof currentWallet === "undefined") {
-            statusText.text = qsTr("Wallet is not connected to daemon.")
+            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
             return;
         }
 
         switch (currentWallet.connected) {
         case Wallet.ConnectionStatus_Disconnected:
-            statusText.text = qsTr("Wallet is not connected to daemon.")
+            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
             break
         case Wallet.ConnectionStatus_WrongVersion:
             statusText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
@@ -391,7 +398,7 @@ Rectangle {
                 statusText.text = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
-                root.enabled = true;
+                pageRoot.enabled = true;
                 statusText.text = "";
             }
 
