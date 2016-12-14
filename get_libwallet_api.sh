@@ -36,6 +36,8 @@ echo "cleaning up existing monero build dir, libs and includes"
 rm -fr $MONERO_DIR/build
 rm -fr $MONERO_DIR/lib
 rm -fr $MONERO_DIR/include
+rm -fr $MONERO_DIR/bin
+
 
 mkdir -p $MONERO_DIR/build/release
 pushd $MONERO_DIR/build/release
@@ -68,11 +70,22 @@ else
 fi
 
 
+# Build libwallet_merged
 pushd $MONERO_DIR/build/release/src/wallet
 eval $make_exec version -C ../..
 eval $make_exec  -j$CPU_CORE_COUNT
 eval $make_exec  install -j$CPU_CORE_COUNT
 popd
+
+# Build monerod
+# win32 need to build daemon manually with msys2 toolchain
+if [ "$platform" != "mingw32" ]; then
+    pushd $MONERO_DIR/build/release/src/daemon
+    eval make  -j$CPU_CORE_COUNT
+    eval make  install -j$CPU_CORE_COUNT
+    popd
+fi
+
 
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)
