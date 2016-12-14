@@ -198,7 +198,7 @@ Rectangle {
         fontSize: 14
         textFormat: Text.RichText
         text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                    Address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                    Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
               + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
@@ -250,7 +250,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Description <font size='2'>( An optional description that will be saved to the local address book if entered )</font>")
+        text: qsTr("Description <font size='2'>( Optional - saved to local wallet history )</font>")
               + translationManager.emptyString
     }
 
