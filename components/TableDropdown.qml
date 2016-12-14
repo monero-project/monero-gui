@@ -185,7 +185,6 @@ Item {
                         height: 30
                         color: containsMouse ? "#F0EEEE" : "#DBDBDB"
                         //radius: index === repeater.count - 1 ? 5 : 0
-
                         Rectangle {
                             anchors.left: parent.left
                             anchors.top: parent.top
@@ -218,6 +217,7 @@ Item {
                                     pos.y -= tipItem.height - 30
                                 tipItem.y = pos.y + appWindow.y
                                 tipItem.visible = true
+                                tipItem.raise()
                             }
                         }
 
