@@ -87,23 +87,23 @@ Rectangle {
             ColumnLayout {
 
                 Text {
-                    text: qsTr("You can verify that a third party made a payment by supplying:") + translationManager.emptyString
+                    text: qsTr("Verify that a third party made a payment by supplying:") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr(" - the recipient address,") + translationManager.emptyString
+                    text: qsTr(" - the recipient address") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr(" - the transaction ID,") + translationManager.emptyString
+                    text: qsTr(" - the transaction ID") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr(" - the tx secret key supplied by the sender") + translationManager.emptyString
+                    text: qsTr(" - the secret transaction key supplied by the sender") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr("If a payment was made up of several transactions, each transaction must be checked, and the results added") + translationManager.emptyString
+                    text: qsTr("If a payment had several transactions then each must must be checked and the results combined.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.fillWidth: true;
                 }
@@ -154,7 +154,7 @@ Rectangle {
 
                 id: txIdLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Transaction ID here") + translationManager.emptyString
+                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
                 readOnly: false
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
@@ -186,7 +186,7 @@ Rectangle {
             LineEdit {
                 id: txKeyLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Transaction key here") + translationManager.emptyString;
+                placeholderText: qsTr("Paste tx key") + translationManager.emptyString;
                 readOnly: false
 
                 width: mainLayout.editWidth
