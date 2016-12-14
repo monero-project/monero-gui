@@ -91,11 +91,11 @@ Rectangle {
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr(" - the recipient address,") + translationManager.emptyString
+                    text: qsTr(" - the recipient address") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr(" - the transaction ID,") + translationManager.emptyString
+                    text: qsTr(" - the transaction ID") + translationManager.emptyString
                     wrapMode: Text.Wrap
                 }
                 Text {
@@ -103,7 +103,7 @@ Rectangle {
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr("If a payment had several transactions then each must must be checked and the results combined") + translationManager.emptyString
+                    text: qsTr("If a payment had several transactions then each must must be checked and the results combined.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.fillWidth: true;
                 }
