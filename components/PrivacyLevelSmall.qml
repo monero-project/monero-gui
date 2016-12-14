@@ -99,7 +99,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
-            text: qsTr("LOW (x1 fee)") + translationManager.emptyString
+            text: qsTr("LOW") + translationManager.emptyString
         }
 
         Text {
@@ -110,7 +110,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
-            text: qsTr("MEDIUM (x20 fee)") + translationManager.emptyString
+            text: qsTr("MEDIUM") + translationManager.emptyString
         }
 
         Text {
@@ -121,7 +121,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
-            text: qsTr("HIGH (x166 fee)") + translationManager.emptyString
+            text: qsTr("HIGH") + translationManager.emptyString
         }
 
         MouseArea {
