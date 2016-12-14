@@ -760,6 +760,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; height: 595; }
                 PropertyChanges { target: resizeArea; visible: false }
                 PropertyChanges { target: frameArea; blocked: true }
+                PropertyChanges { target: titleBar; visible: false }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
@@ -771,6 +772,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: frameArea; blocked: false }
+                PropertyChanges { target: titleBar; visible: true }
             }
         ]
 
