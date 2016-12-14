@@ -442,7 +442,7 @@ Rectangle {
                 width: mainLayout.labelWidth
                 textFormat: Text.RichText
                 text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                            Signing address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                            Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
                       + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
