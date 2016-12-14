@@ -276,7 +276,7 @@ ApplicationWindow {
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
-        leftPanel.daemonProgress.updateProgress(dCurrentBlock,dTargetBlock);
+        leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
         middlePanel.updateStatus();
 
         // If wallet isnt connected and no daemon is running - Ask
@@ -327,27 +327,22 @@ ApplicationWindow {
     }
     function onDaemonStopped(){
         console.log("daemon stopped");
+        hideProcessingSplash();
         daemonRunning = false;
     }
 
 
     function onWalletNewBlock(blockHeight) {
-        if (splash.visible) {
-            var currHeight = blockHeight
 
+            // Update progress bar
+            var currHeight = blockHeight
             //fast refresh until restoreHeight is reached
             var increment = ((restoreHeight == 0) || currHeight < restoreHeight)? 1000 : 10
 
             if(currHeight > splashCounter + increment){
               splashCounter = currHeight
-              var locale = Qt.locale()
-              var currHeightString = currHeight.toLocaleString(locale,"f",0)
-              var targetHeightString = currentWallet.daemonBlockChainTargetHeight().toLocaleString(locale,"f",0)
-              var progressText = qsTr("Synchronizing blocks %1 / %2").arg(currHeightString).arg(targetHeightString);
-              console.log("Progress text: " + progressText);
-              splash.heightProgressText = progressText
+              leftPanel.progressBar.updateProgress(currHeight,currentWallet.daemonBlockChainTargetHeight());
             }
-        }
     }
 
     function onWalletMoneyReceived(txId, amount) {

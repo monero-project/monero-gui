@@ -117,7 +117,7 @@
         <file>lang/flags/italy.png</file>
         <file>components/PasswordDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
-        <file>components/DaemonProgress.qml</file>
+        <file>components/ProgressBar.qml</file>
         <file>components/StandardDialog.qml</file>
         <file>pages/Sign.qml</file>
         <file>components/DaemonManagerDialog.qml</file>
