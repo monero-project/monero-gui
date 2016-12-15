@@ -116,7 +116,7 @@ Item {
         width: 300
         height: 62
 
-        TextEdit {
+        TextInput {
             id: accountName
             anchors.fill: parent
             horizontalAlignment: TextInput.AlignHCenter
@@ -127,7 +127,7 @@ Item {
             color: "#FF6C3C"
             focus: true
             text: defaultAccountName
-
+            selectByMouse: true
 
             Keys.onReleased: {
                 wizard.nextButton.enabled = (accountName.length > 0)
