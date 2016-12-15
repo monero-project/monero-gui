@@ -173,19 +173,20 @@ ApplicationWindow {
     function closeWallet() {
 
         // Disconnect all listeners
-        currentWallet.refreshed.disconnect(onWalletRefresh)
-        currentWallet.updated.disconnect(onWalletUpdate)
-        currentWallet.newBlock.disconnect(onWalletNewBlock)
-        currentWallet.moneySpent.disconnect(onWalletMoneySent)
-        currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
-        currentWallet.transactionCreated.disconnect(onTransactionCreated)
-        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
-        middlePanel.paymentClicked.disconnect(handlePayment);
-        middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
-        middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
-
-        walletManager.closeWalletAsync();
+        if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+            currentWallet.refreshed.disconnect(onWalletRefresh)
+            currentWallet.updated.disconnect(onWalletUpdate)
+            currentWallet.newBlock.disconnect(onWalletNewBlock)
+            currentWallet.moneySpent.disconnect(onWalletMoneySent)
+            currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+            currentWallet.transactionCreated.disconnect(onTransactionCreated)
+            currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
+            middlePanel.paymentClicked.disconnect(handlePayment);
+            middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
+            middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+        }
         currentWallet = undefined;
+        walletManager.closeWalletAsync();
     }
 
     function connectWallet(wallet) {
@@ -227,8 +228,6 @@ ApplicationWindow {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
                 console.log("closing wallet async : " + wallet.address)
                 closeWallet();
-                currentWallet = undefined
-
                 // try to open wallet with password;
                 passwordDialog.open(wallet.path);
             } else {
@@ -240,7 +239,6 @@ ApplicationWindow {
                 informationPopup.icon = StandardIcon.Critical
                 console.log("closing wallet async : " + wallet.address)
                 closeWallet();
-                currentWallet = undefined
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
                     passwordDialog.open(wallet.path)
@@ -616,6 +614,7 @@ ApplicationWindow {
         walletInitialized = false;
         splashCounter = 0;
         closeWallet();
+        currentWallet = undefined;
         wizard.restart();
         rootItem.state = "wizard"
     }
