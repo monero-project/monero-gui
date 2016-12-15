@@ -50,7 +50,8 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
         result = QString::fromStdString(ar->getPaymentId());
         break;
     case AddressBookRowIdRole:
-        result = ar->getRowId();
+        // Qt doesnt support size_t overload type casting
+        result.setValue(ar->getRowId());
         break;
     }
 
