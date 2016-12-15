@@ -30,7 +30,7 @@ fi
 
 # Platform indepenent settings
 platform=$(get_platform)
-if [ "$platform" == "linux" ]; then
+if [ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]; then
     distro=$(lsb_release -is)
     if [ "$distro" == "Ubuntu" ]; then
         CONFIG="$CONFIG libunwind_off"
