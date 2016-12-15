@@ -264,15 +264,6 @@ Rectangle {
         anchors.topMargin: 5
     }
 
-    function checkAddressAndPaymentID(address, payment_id, testnet) {
-      if (!walletManager.addressValid(address, testnet))
-        return false
-      var ipid = walletManager.paymentIdFromAddress(address, testnet)
-      if (ipid.length > 0)
-         return payment_id === ""
-      return payment_id === "" || walletManager.paymentIdValid(payment_id)
-    }
-
     function checkInformation(amount, address, payment_id, testnet) {
       address = address.trim()
       payment_id = payment_id.trim()
@@ -403,5 +394,12 @@ Rectangle {
             }
 
         }
+    }
+
+    // Popuplate fields from addressbook.
+    function sendTo(address, paymentId, description){
+        addressLine.text = address
+        paymentIdLine.text = paymentId
+        descriptionLine.text = description
     }
 }

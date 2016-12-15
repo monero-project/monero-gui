@@ -23,7 +23,8 @@ class PendingTransaction : public QObject
 public:
     enum Status {
         Status_Ok       = Monero::PendingTransaction::Status_Ok,
-        Status_Error    = Monero::PendingTransaction::Status_Error
+        Status_Error    = Monero::PendingTransaction::Status_Error,
+        Status_Critical    = Monero::PendingTransaction::Status_Critical
     };
     Q_ENUM(Status)
 

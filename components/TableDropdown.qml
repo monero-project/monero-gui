@@ -120,8 +120,8 @@ Item {
         repeat: true
         running: false
         onTriggered: {
-            if(((tipItem.visible && !tipItem.containsMouse) || !tipItem.visible) && !mouseArea.containsMouse) {
-                tipItem.visible = false
+            if(((appWindow.toolTip.visible && !appWindow.toolTip.containsMouse) || !appWindow.toolTip.visible) && !mouseArea.containsMouse) {
+                appWindow.toolTip.visible = false
                 dropdown.expanded = false
                 currentIndex = -1
                 timer.stop()
@@ -146,6 +146,10 @@ Item {
             } else {
                 currentIndex = -1
             }
+        }
+
+        onClicked: {
+            optionClicked(currentIndex)
         }
 
         onExited: timer.start()
@@ -181,7 +185,6 @@ Item {
                         height: 30
                         color: containsMouse ? "#F0EEEE" : "#DBDBDB"
                         //radius: index === repeater.count - 1 ? 5 : 0
-
                         Rectangle {
                             anchors.left: parent.left
                             anchors.top: parent.top
@@ -207,15 +210,18 @@ Item {
 
                         onContainsMouseChanged: {
                             if(containsMouse) {
-                                var pos = rootItem.mapFromItem(delegate, 30, -20)
-                                tipItem.text = name
-                                tipItem.x = pos.x + appWindow.x
-                                if(tipItem.height > 30)
-                                    pos.y -= tipItem.height - 30
-                                tipItem.y = pos.y + appWindow.y
-                                tipItem.visible = true
+                                var pos = rootItem.mapFromItem(delegate, 30, -25)
+                                appWindow.toolTip.text = name
+                                appWindow.toolTip.x = pos.x - appWindow.toolTip.width
+//                                if(appWindow.toolTip.height > 30)
+//                                    pos.y -= appWindow.toolTip.height - 30
+                                appWindow.toolTip.y = pos.y
+                                appWindow.toolTip.visible = true
+                                appWindow.toolTip.z = 3
+
                             }
                         }
+
                     }
                 }
             }

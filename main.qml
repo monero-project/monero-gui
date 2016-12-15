@@ -60,6 +60,7 @@ ApplicationWindow {
     property bool daemonSynced: false
     property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
     property bool daemonRunning: false
+    property alias toolTip: toolTip
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -999,6 +1000,37 @@ ApplicationWindow {
                 }
             }
         }
+
+        // new ToolTip
+        Rectangle {
+            id: toolTip
+            property alias text: content.text
+            width: content.width + 12
+            height: content.height + 17
+            color: "#FF6C3C"
+            //radius: 3
+            visible:false;
+
+            Image {
+                id: tip
+                anchors.top: parent.bottom
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                source: "../images/tip.png"
+            }
+
+            Text {
+                id: content
+                anchors.horizontalCenter: parent.horizontalCenter
+                y: 6
+                lineHeight: 0.7
+                font.family: "Arial"
+                font.pixelSize: 12
+                font.letterSpacing: -1
+                color: "#FFFFFF"
+            }
+        }
+
     }
     onClosing: {
         // Close wallet

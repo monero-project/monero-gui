@@ -1,8 +1,10 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
 #include "TransactionHistory.h"
+#include "AddressBook.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
+#include "model/AddressBookModel.h"
 #include "wallet/wallet2_api.h"
 
 #include <QFile>
@@ -11,6 +13,8 @@
 #include <QUrl>
 #include <QTimer>
 #include <QtConcurrent/QtConcurrent>
+#include <QList>
+#include <QVector>
 
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
@@ -48,7 +52,6 @@ public:
 
     virtual void updated()
     {
-        qDebug() << __FUNCTION__;
         emit m_wallet->updated();
     }
 
@@ -324,6 +327,22 @@ TransactionHistorySortFilterModel *Wallet::historyModel() const
     return m_historySortFilterModel;
 }
 
+AddressBook *Wallet::addressBook() const
+{
+    return m_addressBook;
+}
+
+AddressBookModel *Wallet::addressBookModel() const
+{
+
+    if (!m_addressBookModel) {
+        Wallet * w = const_cast<Wallet*>(this);
+        m_addressBookModel = new AddressBookModel(w,m_addressBook);
+    }
+
+    return m_addressBookModel;
+}
+
 
 QString Wallet::generatePaymentId() const
 {
@@ -437,6 +456,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_walletImpl(w)
     , m_history(nullptr)
     , m_historyModel(nullptr)
+    , m_addressBook(nullptr)
+    , m_addressBookModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
@@ -444,6 +465,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
+    m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
     // start cache timers
@@ -456,6 +478,9 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
 Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
+
     delete m_history;
+
     Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+
 }

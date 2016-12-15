@@ -311,14 +311,7 @@ Rectangle {
                 color: "#505050"
                 height: 1
             }
-            /*
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: historyButton.checked || addressBookButton.checked ? "#1C1C1C" : "#505050"
-                height: 1
-            }
+
             // ------------- AddressBook tab ---------------
 
             MenuButton {
@@ -339,11 +332,11 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: addressBookButton.checked || miningButton.checked ? "#1C1C1C" : "#505050"
+                color: "#505050"
                 height: 1
             }
 
-            // ------------- Mining tab ---------------
+          /*  // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
                 anchors.left: parent.left

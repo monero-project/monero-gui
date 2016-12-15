@@ -77,14 +77,14 @@ ListView {
             }
         }
 
-        Text {
+        TextEdit {
             id: addressText
+            selectByMouse: true
             anchors.bottom: descriptionText.bottom
             anchors.left: descriptionText.right
             anchors.right: dropdown.left
             anchors.leftMargin: description.length > 0 ? 12 : 0
-            anchors.rightMargin: 12
-            elide: Text.ElideRight
+            anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
             font.letterSpacing: -1
@@ -103,17 +103,18 @@ ListView {
             font.pixelSize: 12
             font.letterSpacing: -1
             color: "#535353"
-            text: qsTr("Payment ID:") +  + translationManager.emptyString
+            text: qsTr("Payment ID:") + translationManager.emptyString
         }
 
-        Text {
+        TextEdit {
+            selectByMouse: true;
             anchors.bottom: paymentLabel.bottom
             anchors.left: paymentLabel.right
             anchors.leftMargin: 12
             anchors.rightMargin: 12
             anchors.right: dropdown.left
 
-            elide: Text.ElideRight
+
             font.family: "Arial"
             font.pixelSize: 13
             font.letterSpacing: -1
@@ -125,7 +126,7 @@ ListView {
             id: dropModel
             ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
             ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
-            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
+//            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
             ListElement { name: "<b>Remove from history</b>"; icon: "../images/dropdownDel.png" }
         }
 
@@ -146,6 +147,16 @@ ListView {
             onOptionClicked: {
                 if(option === 0)
                     clipboard.setText(address)
+                else if(option === 1){
+                   console.log("Sending to: ", address +" "+ paymentId);
+                   middlePanel.sendTo(address, paymentId, description);
+                   leftPanel.selectItem(middlePanel.state)
+                } else if(option === 2){
+                    console.log("Delete: ", rowId);
+                    currentWallet.addressBookModel.deleteRow(rowId);
+                }
+
+
             }
         }
 

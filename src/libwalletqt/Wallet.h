@@ -15,6 +15,8 @@ namespace Monero {
 class TransactionHistory;
 class TransactionHistoryModel;
 class TransactionHistorySortFilterModel;
+class AddressBook;
+class AddressBookModel;
 
 class Wallet : public QObject
 {
@@ -32,13 +34,17 @@ class Wallet : public QObject
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
     Q_PROPERTY(QString path READ path)
+    Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
+    Q_PROPERTY(AddressBook * addressBook READ addressBook)
+
 
 public:
 
 
     enum Status {
         Status_Ok       = Monero::Wallet::Status_Ok,
-        Status_Error    = Monero::Wallet::Status_Error
+        Status_Error    = Monero::Wallet::Status_Error,
+        Status_Critical = Monero::Wallet::Status_Critical
     };
 
     Q_ENUM(Status)
@@ -159,6 +165,12 @@ public:
     //! returns transaction history model
     TransactionHistorySortFilterModel *historyModel() const;
 
+    //! returns Address book
+    AddressBook *addressBook() const;
+
+    //! returns adress book model
+    AddressBookModel *addressBookModel() const;
+
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
 
@@ -227,6 +239,8 @@ private:
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
     mutable bool    m_initialized;
+    AddressBook * m_addressBook;
+    mutable AddressBookModel * m_addressBookModel;
 };
 
 
