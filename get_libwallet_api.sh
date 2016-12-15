@@ -50,10 +50,14 @@ if [ "$platform" == "darwin" ]; then
     # Do something under Mac OS X platform        
     echo "Configuring build for MacOS.."
     cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
-elif [ "$platform" == "linux" ]; then
+elif [ "$platform" == "linux64" ]; then
     # Do something under GNU/Linux platform
     echo "Configuring build for Linux.."
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+elif [ "$platform" == "linux32" ]; then
+    # Do something under GNU/Linux platform
+    echo "Configuring build for Linux.."
+    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
 elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW64.."
