@@ -103,7 +103,7 @@ Rectangle {
                     wrapMode: Text.Wrap
                 }
                 Text {
-                    text: qsTr("If a payment had several transactions then each must must be checked and the results combined.") + translationManager.emptyString
+                    text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.fillWidth: true;
                 }
