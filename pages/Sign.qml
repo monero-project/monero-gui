@@ -121,7 +121,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
@@ -307,7 +307,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
@@ -442,7 +442,7 @@ Rectangle {
                 width: mainLayout.labelWidth
                 textFormat: Text.RichText
                 text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                            Signing address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                            Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
                       + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
