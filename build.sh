@@ -17,6 +17,9 @@ if [ ! -d $MONERO_DIR ]; then
     $SHELL get_libwallet_api.sh $BUILD_TYPE
 fi
  
+# build zxcvbn
+make -C src/zxcvbn-c
+
 if [ ! -d build ]; then mkdir build; fi
 
 if [ "$BUILD_TYPE" == "Release" ]; then
@@ -26,7 +29,6 @@ else
 	CONFIG="CONFIG+=debug"
   BIN_PATH=debug/bin
 fi
-
 
 # Platform indepenent settings
 platform=$(get_platform)

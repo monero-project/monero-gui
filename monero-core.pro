@@ -34,7 +34,8 @@ HEADERS += \
     src/QR-Code-generator/QrSegment.hpp \
     src/daemon/DaemonManager.h \
     src/model/AddressBookModel.h \
-    src/libwalletqt/AddressBook.h
+    src/libwalletqt/AddressBook.h \
+    src/zxcvbn-c/zxcvbn.h
 
 
 SOURCES += main.cpp \
@@ -56,7 +57,8 @@ SOURCES += main.cpp \
     src/QR-Code-generator/QrSegment.cpp \
     src/daemon/DaemonManager.cpp \
     src/model/AddressBookModel.cpp \
-    src/libwalletqt/AddressBook.cpp
+    src/libwalletqt/AddressBook.cpp \
+    src/zxcvbn-c/zxcvbn.c
 
 lupdate_only {
 SOURCES = *.qml \
@@ -235,7 +237,6 @@ QMAKE_EXTRA_COMPILERS += langrel
 # so we update translations everytime even for debug build
 
 PRE_TARGETDEPS += langupd compiler_langrel_make_all
-
 
 RESOURCES += qml.qrc
 
