@@ -135,7 +135,7 @@ ApplicationWindow {
         // If currentWallet exists, we're just switching daemon - close/reopen wallet
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
             console.log("Daemon change - closing " + currentWallet)
-            walletManager.closeWalletAsync();
+            closeWallet();
             currentWallet = undefined
         } else {
 
@@ -170,13 +170,9 @@ ApplicationWindow {
         }
 
     }
+    function closeWallet() {
 
-
-    function connectWallet(wallet) {
-        showProcessingSplash("Please wait...")
-        currentWallet = wallet
-
-        // Disconnect before connecting
+        // Disconnect all listeners
         currentWallet.refreshed.disconnect(onWalletRefresh)
         currentWallet.updated.disconnect(onWalletUpdate)
         currentWallet.newBlock.disconnect(onWalletNewBlock)
@@ -187,6 +183,14 @@ ApplicationWindow {
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
         middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+
+        walletManager.closeWalletAsync();
+        currentWallet = undefined;
+    }
+
+    function connectWallet(wallet) {
+        showProcessingSplash("Please wait...")
+        currentWallet = wallet
 
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
@@ -222,7 +226,7 @@ ApplicationWindow {
             if (appWindow.password === '') {
                 console.error("Error opening wallet with empty password: ", wallet.errorString);
                 console.log("closing wallet async : " + wallet.address)
-                walletManager.closeWalletAsync()
+                closeWallet();
                 currentWallet = undefined
 
                 // try to open wallet with password;
@@ -235,7 +239,7 @@ ApplicationWindow {
                 informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
                 informationPopup.icon = StandardIcon.Critical
                 console.log("closing wallet async : " + wallet.address)
-                walletManager.closeWalletAsync();
+                closeWallet();
                 currentWallet = undefined
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
@@ -611,8 +615,7 @@ ApplicationWindow {
     function showWizard(){
         walletInitialized = false;
         splashCounter = 0;
-        walletManager.closeWalletAsync();
-        currentWallet = undefined
+        closeWallet();
         wizard.restart();
         rootItem.state = "wizard"
     }
@@ -1033,7 +1036,7 @@ ApplicationWindow {
 
     }
     onClosing: {
-        // Close wallet
+        // Close wallet non async on exit
         walletManager.closeWallet();
         // Stop daemon
         daemonManager.stop();
