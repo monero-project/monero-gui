@@ -96,7 +96,7 @@ fi
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound shipped with the system, so we don't need to build it
 
-if [ "$platform" != "linux" ]; then
+if [ "$platform" != "linux32" ] && [ "$platform" != "linux64" ]; then
     echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
     # no need to make, it was already built as dependency for libwallet
