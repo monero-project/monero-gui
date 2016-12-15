@@ -49,7 +49,7 @@ make_exec="make"
 if [ "$platform" == "darwin" ]; then
     # Do something under Mac OS X platform        
     echo "Configuring build for MacOS.."
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
 elif [ "$platform" == "linux64" ]; then
     # Do something under GNU/Linux platform
     echo "Configuring build for Linux.."
