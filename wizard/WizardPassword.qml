@@ -26,6 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import moneroComponents.WalletManager 1.0
 import QtQuick 2.2
 import "../components"
 import "utils.js" as Utils
@@ -76,7 +77,7 @@ Item {
         wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
 
         // scorePassword returns value from 1..100
-        var strength = Utils.scorePassword(passwordItem.password)
+        var strength = walletManager.getPasswordStrength(passwordItem.password);
         // privacyLevel component uses 1..13 scale
         privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
 

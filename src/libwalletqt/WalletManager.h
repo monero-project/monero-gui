@@ -114,6 +114,8 @@ public:
     Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
     Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
 
+    Q_INVOKABLE double getPasswordStrength(const QString &password) const;
+
 signals:
 
     void walletOpened(Wallet * wallet);

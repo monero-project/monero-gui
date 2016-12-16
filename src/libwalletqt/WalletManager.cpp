@@ -1,6 +1,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "wallet/wallet2_api.h"
+#include "zxcvbn-c/zxcvbn.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -239,6 +240,21 @@ QString WalletManager::urlToLocalPath(const QUrl &url) const
 QUrl WalletManager::localPathToUrl(const QString &path) const
 {
     return QUrl::fromLocalFile(path);
+}
+
+double WalletManager::getPasswordStrength(const QString &password) const
+{
+    static const char *local_dict[] = {
+        "monero", "fluffypony", NULL
+    };
+
+    if (!ZxcvbnInit("zxcvbn.dict")) {
+        fprintf(stderr, "Failed to open zxcvbn.dict\n");
+        return 0.0;
+    }
+    double e = ZxcvbnMatch(password.toStdString().c_str(), local_dict, NULL);
+    ZxcvbnUnInit();
+    return e;
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
