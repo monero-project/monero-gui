@@ -15,11 +15,12 @@ SONAME = libzxcvbn.so.0
 
 WORDS = words-eng_wiki.txt words-female.txt words-male.txt words-passwd.txt words-surname.txt words-tv_film.txt
 
-all: test-file test-inline test-c++inline test-c++file test-shlib test-statlib
+#all: test-file test-inline test-c++inline test-c++file test-shlib test-statlib
+all: test-statlib
 
 test-shlib: test.c $(TARGET_LIB)
 	if [ ! -e libzxcvbn.so ]; then ln -s $(TARGET_LIB) libzxcvbn.so; fi
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< -L. $(LDFLAGS) -lzxcvbn -lm
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< -L. $(LDFLAGS) libzxcvbn.so -lm
 
 $(TARGET_LIB): zxcvbn-inline-pic.o
 	$(CC) $(CPPFLAGS) $(CFLAGS) \

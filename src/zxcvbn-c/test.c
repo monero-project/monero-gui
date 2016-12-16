@@ -36,11 +36,6 @@
 #include <sys/time.h>
 #include <zxcvbn.h>
 
-/* For pre-compiled headers under windows */
-#ifdef _WIN32
-#include "stdafx.h"
-#endif
-
 const char *UsrDict[] =
 {
     "Onename.Twoname@example.com", "Onename", "Twoname", "example.com", "example",
