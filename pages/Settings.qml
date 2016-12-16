@@ -143,7 +143,7 @@ Rectangle {
                 color: "#4A4646"
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
-                text: qsTr("Write this down and keep it secret! This seed is the only backup you need to restore your wallet.")
+                text: qsTr("This is very important to write down and keep secret. It is all you need to restore your wallet.")
                       + translationManager.emptyString
             }
 
