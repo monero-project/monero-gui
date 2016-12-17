@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.2
 import moneroComponents.PendingTransaction 1.0
 import "../components"
 import moneroComponents.Wallet 1.0
@@ -50,6 +52,35 @@ Rectangle {
         }
     }
 
+    function isValidOpenAliasAddress(address) {
+      address = address.trim()
+      var dot = address.indexOf('.')
+      if (dot < 0)
+        return false
+      // we can get an awful lot of valid domains, including non ASCII chars... accept anything
+      return true
+    }
+
+    function oa_message(text) {
+      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
+      oaPopup.text = text
+      oaPopup.icon = StandardIcon.Information
+      oaPopup.onCloseCallback = null
+      oaPopup.open()
+    }
+
+    // Information dialog
+    StandardDialog {
+        // dynamically change onclose handler
+        property var onCloseCallback
+        id: oaPopup
+        cancelVisible: false
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
+    }
 
     Item {
       id: pageRoot
@@ -204,23 +235,74 @@ Rectangle {
         onLinkActivated: appWindow.showPageRequest("AddressBook")
     }
     // recipient address input
-    LineEdit {
-        id: addressLine
+    RowLayout {
+        id: addressLineRow
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        placeholderText: "4..."
-        // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
+
+        LineEdit {
+            id: addressLine
+            anchors.left: parent.left
+            anchors.right: resolveButton.left
+            anchors.leftMargin: 17
+            anchors.topMargin: 5
+            placeholderText: "4..."
+            // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
+        }
+
+        StandardButton {
+            id: resolveButton
+            anchors.right: parent.right
+            anchors.leftMargin: 17
+            anchors.topMargin: 17
+            anchors.rightMargin: 17
+            width: 60
+            text: qsTr("RESOLVE") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            enabled : isValidOpenAliasAddress(addressLine.text)
+            onClicked: {
+                var result = walletManager.resolveOpenAlias(addressLine.text)
+                if (result) {
+                  var parts = result.split("|")
+                  if (parts.length == 2) {
+                    var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                    if (parts[0] === "true") {
+                      if (address_ok) {
+                        addressLine.text = parts[1]
+                        addressLine.cursorPosition = 0
+                      }
+                      else
+                        oa_message(qsTr("No valid address found at this OpenAlias address"))
+                    } else if (parts[0] === "false") {
+                      if (address_ok) {
+                        addressLine.text = parts[1]
+                        addressLine.cursorPosition = 0
+                        oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                      } else {
+                        oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                      }
+                    } else {
+                      oa_message(qsTr("Internal error"))
+                    }
+                  } else {
+                    oa_message(qsTr("Internal error"))
+                  }
+                } else {
+                  oa_message(qsTr("No address found"))
+                }
+            }
+        }
     }
 
     Label {
         id: paymentIdLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: addressLine.bottom
+        anchors.top: addressLineRow.bottom
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 17

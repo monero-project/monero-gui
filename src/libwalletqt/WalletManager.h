@@ -116,6 +116,8 @@ public:
 
     Q_INVOKABLE double getPasswordStrength(const QString &password) const;
 
+    Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
+
 signals:
 
     void walletOpened(Wallet * wallet);
