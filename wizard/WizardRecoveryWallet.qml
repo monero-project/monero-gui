@@ -44,12 +44,12 @@ Item {
     function onWizardRestarted() {
         // reset account name field
         uiItem.accountNameText = defaultAccountName
+        // Empty seedText
+        uiItem.wordsTextItem.memoText = "";
     }
 
     function onPageOpened(settingsObject) {
-        checkNextButton();
-        // Empty seedText when restoring multiple times in one session
-        uiItem.wordsTextItem.memoText = "";
+        checkNextButton();            
     }
 
     function checkNextButton() {
