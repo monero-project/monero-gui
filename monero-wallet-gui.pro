@@ -91,7 +91,7 @@ win32 {
         MSYS_PATH=c:/msys32/mingw32
 
         # boost root path
-        BOOST_PATH=/c/Qt/Qt5.7.0/Tools/mingw530_32/boost
+        BOOST_PATH=c:/msys32/mingw32/boost
 
     }
 
