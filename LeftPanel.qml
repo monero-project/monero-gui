@@ -229,7 +229,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Send") + translationManager.emptyString
-                symbol: qsTr("T") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
                 dotColor: "#FF6C3C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -365,7 +365,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
-                symbol: qsTr("S") + translationManager.emptyString
+                symbol: qsTr("I") + translationManager.emptyString
                 dotColor: "#AAFFBB"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -386,7 +386,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Settings") + translationManager.emptyString
-                symbol: qsTr("S") + translationManager.emptyString
+                symbol: qsTr("E") + translationManager.emptyString
                 dotColor: "#36B25C"
                 onClicked: {
                     parent.previousButton.checked = false

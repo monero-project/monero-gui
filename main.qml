@@ -81,24 +81,33 @@ ApplicationWindow {
         }
 
         if(seq === "Ctrl+D") middlePanel.state = "Dashboard"
+        else if(seq === "Ctrl+S") middlePanel.state = "Transfer"
+        else if(seq === "Ctrl+R") middlePanel.state = "Receive"
+        else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
-        else if(seq === "Ctrl+T") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
-        else if(seq === "Ctrl+S") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+I") middlePanel.state = "Sign"
+        else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "History"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Mining"
-            else if(middlePanel.state === "Mining") middlePanel.state = "Settings"
+            else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
+            else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             if(middlePanel.state === "Dashboard") middlePanel.state = "Settings"
-            else if(middlePanel.state === "Settings") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Settings") middlePanel.state = "Sign"
+            else if(middlePanel.state === "Sign") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "History") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
         }
 
@@ -780,10 +789,10 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
             height: parent.height
             onDashboardClicked: middlePanel.state = "Dashboard"
-            onHistoryClicked: middlePanel.state = "History"
             onTransferClicked: middlePanel.state = "Transfer"
             onReceiveClicked: middlePanel.state = "Receive"
             onTxkeyClicked: middlePanel.state = "TxKey"
+            onHistoryClicked: middlePanel.state = "History"
             onAddressBookClicked: middlePanel.state = "AddressBook"
             onMiningClicked: middlePanel.state = "Minning"
             onSignClicked: middlePanel.state = "Sign"
