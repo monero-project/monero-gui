@@ -90,6 +90,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
+            /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
@@ -99,9 +100,18 @@ ApplicationWindow {
             else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
+            */
+            if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Sign"
+            else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
+            /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Settings"
-            else if(middlePanel.state === "Settings") middlePanel.state = "Sign"
+            if(middlePanel.state === "Settings") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
@@ -109,6 +119,14 @@ ApplicationWindow {
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
+            */
+            if(middlePanel.state === "Settings") middlePanel.state = "Sign"
+            else if(middlePanel.state === "Sign") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
         }
 
         leftPanel.selectItem(middlePanel.state)
