@@ -92,8 +92,8 @@ Rectangle {
             var nextButtonVisible = pages[currentPage] !== optionsPage;
             nextButton.visible = nextButtonVisible;
 
-            if (next && typeof pages[currentPage].onPageOpened !== 'undefined') {
-                pages[currentPage].onPageOpened(settings)
+            if (typeof pages[currentPage].onPageOpened !== 'undefined') {
+                pages[currentPage].onPageOpened(settings,next)
             }
 
 
@@ -113,8 +113,6 @@ Rectangle {
         createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
         createWalletPage.onPageOpened(settings);
-
-
     }
 
     function openRecoveryWalletPage() {
