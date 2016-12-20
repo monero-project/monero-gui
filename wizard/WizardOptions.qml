@@ -137,7 +137,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 width:page.buttonSize
                 wrapMode: Text.WordWrap
-                text: qsTr("This is my first time, I want to create a new account") + translationManager.emptyString
+                text: qsTr("Create a new wallet") + translationManager.emptyString
             }
         }
 
@@ -174,7 +174,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to recover my account from my 25 word seed") + translationManager.emptyString
+                text: qsTr("Recover wallet from 25 word mnemonic seed") + translationManager.emptyString
                 width:page.buttonSize
                 wrapMode: Text.WordWrap
             }
@@ -213,7 +213,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("I want to open a wallet from file") + translationManager.emptyString
+                text: qsTr("Open a wallet from file") + translationManager.emptyString
                 width:page.buttonSize
                 wrapMode: Text.WordWrap
             }
@@ -248,7 +248,7 @@ Item {
 
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("Please setup daemon address below.")
+                text: qsTr("Custom daemon address (optional)")
                                   + translationManager.emptyString
             }
 
