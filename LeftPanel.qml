@@ -73,7 +73,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 48
+        anchors.topMargin: 40
         height: logo.implicitHeight
 
         Image {
@@ -105,8 +105,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: logoItem.bottom
-        anchors.topMargin: 40
-        spacing: 6
+        anchors.topMargin: 30
+        spacing: 5
 
         Label {
             text: qsTr("Balance") + translationManager.emptyString

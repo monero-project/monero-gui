@@ -36,7 +36,7 @@ Rectangle {
     property alias symbol: symbolText.text
     signal clicked()
 
-    height: (appWindow.height >= 800) ? 64 : 60
+    height: (appWindow.height >= 800) ? 64 : 56
     color: checked ? "#FFFFFF" : "#1C1C1C"
 
     Item {
