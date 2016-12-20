@@ -227,6 +227,14 @@ double WalletManager::miningHashRate() const
     return m_pimpl->miningHashRate();
 }
 
+QString WalletManager::resolveOpenAlias(const QString &address) const
+{
+    bool dnssec_valid = false;
+    std::string res = m_pimpl->resolveOpenAlias(address.toStdString(), dnssec_valid);
+    res = std::string(dnssec_valid ? "true" : "false") + "|" + res;
+    return QString::fromStdString(res);
+}
+
 void WalletManager::setLogLevel(int logLevel)
 {
     Monero::WalletManagerFactory::setLogLevel(logLevel);
