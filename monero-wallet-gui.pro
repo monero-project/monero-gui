@@ -129,9 +129,7 @@ win32 {
 }
 
 linux {
-    CONFIG(static) {
-        LIBS+= -Wl,-Bstatic
-    }
+    LIBS+= -Wl,-Bstatic
     LIBS+= \
         -lboost_serialization \
         -lboost_thread \
@@ -261,6 +259,10 @@ win32 {
     contains(QMAKE_HOST.arch, x86_64) {
         deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
     }
+}
+
+linux {
+    deploy.commands += $$escape_expand(\n\t) $$PWD/linuxdeploy_helper.sh $$DESTDIR $$TARGET
 }
 
 
