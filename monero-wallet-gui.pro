@@ -263,6 +263,10 @@ win32 {
     }
 }
 
+linux {
+    deploy.commands += $$escape_expand(\n\t) $$PWD/linuxdeploy_helper.sh $$DESTDIR $$TARGET
+}
+
 
 
 OTHER_FILES += \
