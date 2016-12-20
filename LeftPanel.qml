@@ -246,6 +246,31 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- AddressBook tab ---------------
+
+            MenuButton {
+                id: addressBookButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Address book") + translationManager.emptyString
+                symbol: qsTr("B") + translationManager.emptyString
+                dotColor: "#FF4F41"
+                under: transferButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = addressBookButton
+                    panel.addressBookClicked()
+                }
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
             // ------------- Receive tab ---------------
             MenuButton {
                 id: receiveButton
@@ -258,27 +283,6 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = receiveButton
                     panel.receiveClicked()
-                }
-            }
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: "#505050"
-                height: 1
-            }
-            // ------------- TxKey tab ---------------
-            MenuButton {
-                id: txkeyButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Verify payment") + translationManager.emptyString
-                symbol: qsTr("K") + translationManager.emptyString
-                dotColor: "#AAFFBB"
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = txkeyButton
-                    panel.txkeyClicked()
                 }
             }
             Rectangle {
@@ -312,30 +316,6 @@ Rectangle {
                 height: 1
             }
 
-            // ------------- AddressBook tab ---------------
-
-            MenuButton {
-                id: addressBookButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Address book") + translationManager.emptyString
-                symbol: qsTr("B") + translationManager.emptyString
-                dotColor: "#FF4F41"
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = addressBookButton
-                    panel.addressBookClicked()
-                }
-            }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: "#505050"
-                height: 1
-            }
-
           /*  // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
@@ -359,6 +339,50 @@ Rectangle {
                 height: 1
             }
             */
+            // ------------- Advanced tab ---------------
+            MenuButton {
+                id: advancedButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Advanced") + translationManager.emptyString
+                symbol: qsTr("A") + translationManager.emptyString
+                dotColor: "#AAFFBB"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = advancedButton
+                }
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
+            // ------------- TxKey tab ---------------
+            MenuButton {
+                id: txkeyButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Verify payment") + translationManager.emptyString
+                symbol: qsTr("K") + translationManager.emptyString
+                dotColor: "#AAFFBB"
+                under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = txkeyButton
+                    panel.txkeyClicked()
+                }
+            }
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
             // ------------- Sign/verify tab ---------------
             MenuButton {
                 id: signButton
@@ -367,6 +391,7 @@ Rectangle {
                 text: qsTr("Sign/verify") + translationManager.emptyString
                 symbol: qsTr("I") + translationManager.emptyString
                 dotColor: "#AAFFBB"
+                under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = signButton
