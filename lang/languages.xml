@@ -12,7 +12,7 @@ List of available languages for your wallet's seed:
 6 : Japanese
 -->
         <language display_name="US English" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
-        <!-- <language display_name="UK English" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
+        <language display_name="UK English" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
         <language display_name="Russia"     locale="ru_RU" wallet_language="Russian" flag="/lang/flags/russia.png" qs="none"/>
         <language display_name="RPA"        locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/>
         <language display_name="Palestine"  locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/>
@@ -21,5 +21,5 @@ List of available languages for your wallet's seed:
         <language display_name="German"     locale="de_DE" wallet_language="German"  flag="/lang/flags/german.png" qs="none"/>
         <language display_name="China"      locale="zh_CN" wallet_language="English" flag="/lang/flags/china.png" qs="none"/>
         <language display_name="Brazil"     locale="pt_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/>
-        <language display_name="Bangladesh" locale="en_US" wallet_language="English" flag="/lang/flags/bangladesh.png" qs="none"/> -->
+        <language display_name="Bangladesh" locale="en_US" wallet_language="English" flag="/lang/flags/bangladesh.png" qs="none"/>
 </languages>
