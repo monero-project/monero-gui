@@ -40,13 +40,13 @@ if [ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]; then
 fi
 
 if [ "$platform" == "darwin" ]; then
-    BIN_PATH=$BIN_PATH/monero-core.app/Contents/MacOS/
+    BIN_PATH=$BIN_PATH/monero-wallet-gui.app/Contents/MacOS/
 elif [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
     MONEROD_EXEC=monerod.exe
 fi
 
 cd build
-qmake ../monero-core.pro "$CONFIG"
+qmake ../monero-wallet-gui.pro "$CONFIG"
 make 
 
 # Copy monerod to bin folder
