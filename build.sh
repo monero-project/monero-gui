@@ -45,6 +45,10 @@ elif [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
     MONEROD_EXEC=monerod.exe
 fi
 
+# force version update
+get_tag
+echo "var VERSION = \"$VERSIONTAG\"" > version.js
+
 cd build
 qmake ../monero-wallet-gui.pro "$CONFIG"
 make 
