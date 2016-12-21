@@ -174,7 +174,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Recover wallet from 25 word mnemonic seed") + translationManager.emptyString
+                text: qsTr("Restore wallet from 25 word mnemonic seed") + translationManager.emptyString
                 width:page.buttonSize
                 wrapMode: Text.WordWrap
             }
