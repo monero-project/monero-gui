@@ -127,7 +127,7 @@ ListView {
             ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
             ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
 //            ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
-            ListElement { name: "<b>Remove from history</b>"; icon: "../images/dropdownDel.png" }
+            ListElement { name: "<b>Remove from address book</b>"; icon: "../images/dropdownDel.png" }
         }
 
         Clipboard { id: clipboard }
@@ -145,6 +145,8 @@ ListView {
                 }
             }
             onOptionClicked: {
+                // Ensure tooltip is closed
+                appWindow.toolTip.visible = false;
                 if(option === 0)
                     clipboard.setText(address)
                 else if(option === 1){
@@ -155,8 +157,6 @@ ListView {
                     console.log("Delete: ", rowId);
                     currentWallet.addressBookModel.deleteRow(rowId);
                 }
-
-
             }
         }
 
