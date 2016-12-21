@@ -23,7 +23,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
     return m_instance;
 }
 
-bool DaemonManager::start()
+bool DaemonManager::start(const QString &flags)
 {
     //
     QString process;
@@ -43,8 +43,17 @@ bool DaemonManager::start()
     QStringList arguments;
     foreach (const QString &str, m_clArgs) {
           qDebug() << QString(" [%1] ").arg(str);
-          arguments << str;
+          if (!str.isEmpty())
+            arguments << str;
     }
+
+    // Custom startup flags for daemon
+    foreach (const QString &str, flags.split(" ")) {
+          qDebug() << QString(" [%1] ").arg(str);
+          if (!str.isEmpty())
+            arguments << str;
+    }
+
 
     qDebug() << "starting monerod " + process;
     qDebug() << "With command line arguments " << arguments;

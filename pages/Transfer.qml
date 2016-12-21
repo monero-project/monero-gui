@@ -433,7 +433,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             textFormat: Text.RichText
-            onLinkActivated: { appWindow.startDaemon(); }
+            onLinkActivated: { appWindow.startDaemon(appWindow.persistentSettings.daemonFlags); }
         }
     }
 
