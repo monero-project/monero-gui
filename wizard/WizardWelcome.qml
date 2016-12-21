@@ -158,7 +158,7 @@ Item {
 
             Text {
                 font.family: "Arial"
-                font.pixelSize: 24
+                font.pixelSize: 18
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: flagRect.bottom
                 anchors.topMargin: 10
