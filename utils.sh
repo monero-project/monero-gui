@@ -21,6 +21,33 @@ function get_platform {
 }
 
 
+function get_tag()
+{
+  COMMIT=$(git rev-parse --short HEAD | sed -e 's/[\t ]*//')
+  if test $? -ne 0
+  then
+    echo "Cannot determine current commit. Make sure that you are building either from a Git working tree or from a source archive."
+    VERSIONTAG="unknown"
+  else
+    echo "You are currently on commit ${COMMIT}"
+    TAGGEDCOMMIT=$(git rev-list --tags --max-count=1 --abbrev-commit | sed -e 's/[\t ]*//')
+    if test -z "$TAGGEDCOMMIT"
+    then
+      echo "Cannot determine most recent tag. Make sure that you are building either from a Git working tree or from a source archive."
+      VERSIONTAG=$COMMIT
+    else
+      echo "The most recent tag was at ${TAGGEDCOMMIT}"
+      if test "$TAGGEDCOMMIT" = "$COMMIT"
+      then
+        echo "You are building a tagged release"
+        VERSIONTAG="release"
+      else
+        echo "You are ahead of or behind a tagged release"
+        VERSIONTAG="$COMMIT"
+      fi
+    fi
+  fi
+}
 
 
 

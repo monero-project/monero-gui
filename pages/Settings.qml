@@ -31,6 +31,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import "../version.js" as Version
 
 
 import "../components"
@@ -343,6 +344,14 @@ Rectangle {
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
             }
+        }
+
+        Label {
+            id: guiVersion
+            Layout.topMargin: 8
+            color: "#4A4949"
+            text: qsTr("GUI version: ") + Version.VERSION + translationManager.emptyString
+            fontSize: 16
         }
 
     }
