@@ -50,9 +50,9 @@ Item {
         handlePassword();
 
         if (wizard.currentPath === "create_wallet") {
-           passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
+           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         } else {
-           passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
+           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         }
 
         passwordItem.focus = true;
@@ -148,8 +148,8 @@ Item {
             //renderType: Text.NativeRendering
             color: "#4A4646"
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given<br/><br/>
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.")
+            text: qsTr("Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.<br/><br/>
+                        Enter a secure password (using letters, numbers, and/or symbols):")
                     + translationManager.emptyString
         }
     }

@@ -96,8 +96,8 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        titleText: qsTr("A new wallet has been created for you") + translationManager.emptyString
-        wordsTextTitle: qsTr("This is the 25 word mnemonic for your wallet") + translationManager.emptyString
+        titleText: qsTr("Give your new wallet a name") + translationManager.emptyString
+        wordsTextTitle: qsTr("Here is your wallet's 25 word mnemonic seed") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: true
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true

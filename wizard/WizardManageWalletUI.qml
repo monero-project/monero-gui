@@ -104,7 +104,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#4A4646"
-            text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:") + translationManager.emptyString
+            text: qsTr("or use the name suggested below:") + translationManager.emptyString
         }
     }
 
@@ -175,7 +175,7 @@ Item {
         anchors.top: memoTextItem.bottom
         width: 250
         anchors.topMargin: 20
-        placeholderText: qsTr("Restore height")
+        placeholderText: qsTr("Restore height (optional)")
         Layout.alignment: Qt.AlignCenter
         validator: IntValidator {
             bottom:0
