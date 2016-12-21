@@ -341,9 +341,10 @@ ApplicationWindow {
         onWalletUpdate();
     }
 
-    function startDaemon(){
+    function startDaemon(flags){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start();
+        daemonManager.start(flags);
+        persistentSettings.daemonFlags = flags
     }
 
     function stopDaemon(){
@@ -714,6 +715,7 @@ ApplicationWindow {
         property int    restore_height : 0
         property bool   is_recovering : false
         property bool   customDecorations : true
+        property string daemonFlags
     }
 
     // Information dialog

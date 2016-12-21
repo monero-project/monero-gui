@@ -13,7 +13,7 @@ public:
 
     static DaemonManager * instance(const QStringList *args);
 
-    Q_INVOKABLE bool start();
+    Q_INVOKABLE bool start(const QString &flags);
     Q_INVOKABLE bool stop();
 
     // return true if daemon process is started

@@ -91,7 +91,7 @@ Window {
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()
-                    appWindow.startDaemon();
+                    appWindow.startDaemon(daemonFlags.text);
                     root.started()
                 }
             }
@@ -111,6 +111,24 @@ Window {
                     root.rejected()
                 }
             }
+        }
+        RowLayout {
+            id: advancedRow
+            MoneroComponents.Label {
+                id: daemonFlagsLabel
+                color: "#4A4949"
+                text: qsTr("Daemon startup flags") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            MoneroComponents.LineEdit {
+                id: daemonFlags
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: appWindow.persistentSettings.daemonFlags;
+                placeholderText: qsTr("(optional)")
+            }
+
         }
     }
 
