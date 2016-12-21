@@ -47,7 +47,11 @@ fi
 
 # force version update
 get_tag
-echo "var VERSION = \"$VERSIONTAG\"" > version.js
+echo "var GUI_VERSION = \"$VERSIONTAG\"" > version.js
+pushd "$MONERO_DIR"
+get_tag
+popd
+echo "var GUI_MONERO_VERSION = \"$VERSIONTAG\"" >> version.js
 
 cd build
 qmake ../monero-wallet-gui.pro "$CONFIG"

@@ -350,7 +350,14 @@ Rectangle {
             id: guiVersion
             Layout.topMargin: 8
             color: "#4A4949"
-            text: qsTr("GUI version: ") + Version.VERSION + translationManager.emptyString
+            text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
+            fontSize: 16
+        }
+
+        Label {
+            id: guiMoneroVersion
+            color: "#4A4949"
+            text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
             fontSize: 16
         }
 
