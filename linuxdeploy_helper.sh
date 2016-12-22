@@ -21,7 +21,7 @@ cp -v /usr/lib/x86_64-linux-gnu/libQt5XmlPatterns.so.5 $TARGET/libs
 # Create start script
 cat > $TARGET/start-gui.sh <<EOL
 #!/bin/bash
-export LD_LIBRARY_PATH=\`pwd\`/libs
+# export LD_LIBRARY_PATH=\`pwd\`/libs
 export QT_PLUGIN_PATH=\`pwd\`/plugins
 export QML2_IMPORT_PATH=\`pwd\`/qml
 ./$GUI_EXEC
