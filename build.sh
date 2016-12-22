@@ -1,8 +1,26 @@
 #!/bin/bash
 
 BUILD_TYPE=$1
+# default build type
 if [ -z $BUILD_TYPE ]; then
-    BUILD_TYPE=Release
+    BUILD_TYPE=release
+fi
+
+if [ "$BUILD_TYPE" == "release" ]; then
+    echo "Building release"
+    CONFIG="CONFIG+=release";
+    BIN_PATH=release/bin
+elif [ "$BUILD_TYPE" == "release-static" ]; then
+    echo "Building release-static"
+	CONFIG="CONFIG+=release static";
+    BIN_PATH=release/bin
+elif [ "$BUILD_TYPE" == "debug" ]; then
+    echo "Building debug"
+	CONFIG="CONFIG+=debug"
+    BIN_PATH=debug/bin
+else
+    echo "Valid build types are release, release-static and debug"
+    exit 1;
 fi
 
 
@@ -22,13 +40,6 @@ make -C src/zxcvbn-c
 
 if [ ! -d build ]; then mkdir build; fi
 
-if [ "$BUILD_TYPE" == "Release" ]; then
-	CONFIG="CONFIG+=release";
-  BIN_PATH=release/bin
-else
-	CONFIG="CONFIG+=debug"
-  BIN_PATH=debug/bin
-fi
 
 # Platform indepenent settings
 platform=$(get_platform)
