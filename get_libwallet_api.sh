@@ -6,10 +6,30 @@ MONERO_BRANCH=master
 # MONERO_URL=https://github.com/mbg033/monero.git
 # MONERO_BRANCH=develop
 # Buidling "debug" build optionally
+
+# default build type
 BUILD_TYPE=$1
 if [ -z $BUILD_TYPE ]; then
-    BUILD_TYPE=Release
+    BUILD_TYPE=release
 fi
+
+STATIC=false
+if [ "$BUILD_TYPE" == "release" ]; then
+    echo "Building libwallet release"
+    CMAKE_BUILD_TYPE=Release
+elif [ "$BUILD_TYPE" == "release-static" ]; then
+    echo "Building libwallet release-static"
+    CMAKE_BUILD_TYPE=Release
+    STATIC=true
+elif [ "$BUILD_TYPE" == "debug" ]; then
+    echo "Building libwallet debug"
+    CMAKE_BUILD_TYPE=Debug
+else
+    echo "Valid build types are release, release-static and debug"
+    exit 1;
+fi
+
+
 # thanks to SO: http://stackoverflow.com/a/20283965/4118915
 if test -z "$CPU_CORE_COUNT"; then
   CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
@@ -46,31 +66,57 @@ pushd $MONERO_DIR/build/release
 platform=$(get_platform)
 # default make executable
 make_exec="make"
+
+## OS X
 if [ "$platform" == "darwin" ]; then
-    # Do something under Mac OS X platform        
     echo "Configuring build for MacOS.."
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    if [ "$STATIC" == true ]; then
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    else
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE  -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    fi
+
+## LINUX 64
 elif [ "$platform" == "linux64" ]; then
-    # Do something under GNU/Linux platform
     echo "Configuring build for Linux x64"
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    if [ "$STATIC" == true ]; then
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    else
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    fi
+
+## LINUX 32
 elif [ "$platform" == "linux32" ]; then
-    # Do something under GNU/Linux platform
     echo "Configuring build for Linux i686"
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    if [ "$STATIC" == true ]; then
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    else
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    fi
+
+## LINUX other (arm7 for example)
 elif [ "$platform" == "linux" ]; then
     echo "Configuring build for Linux general"
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    if [ "$STATIC" == true ]; then
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    else
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    fi
+
+## Windows 64
+## Windows is always static to work outside msys2
 elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW64.."
     BOOST_ROOT=/mingw64/boost
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="x86-64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="x86-64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+
+## Windows 32
 elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."
     BOOST_ROOT=/mingw32/boost
-    cmake -D CMAKE_BUILD_TYPE=$BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" ../..
     make_exec="mingw32-make"
 else
     echo "Unsupported platform: $platform"
@@ -91,7 +137,7 @@ popd
 if [ "$platform" != "mingw32" ]; then
     pushd $MONERO_DIR/build/release/src/daemon
     eval make  -j$CPU_CORE_COUNT
-    eval make  install -j$CPU_CORE_COUNT
+    eval make install -j$CPU_CORE_COUNT
     popd
 fi
 
