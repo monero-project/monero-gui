@@ -97,17 +97,11 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 6. Build the GUI.
 
-	`qmake`
+	`./build.sh`
 
-	`make`
+7. Run the GUI client.
 
-7. Before running the GUI, it's recommended that you have the Monero daemon running in the background.
-
-	`./monerod`
-
-8. Run the GUI client.
-
-	`./release/bin/monero-core`
+	`./release/bin/monero-wallet-gui`
 
 ### On OS X:
 
