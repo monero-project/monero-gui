@@ -101,8 +101,8 @@ Item {
         ListModel {
             id: dotsModel
             ListElement { dotColor: "#36B05B" }
-            ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
+            ListElement { dotColor: "#36B05B" }
+            //ListElement { dotColor: "#FFE00A" }
             ListElement { dotColor: "#DBDBDB" }
         }
 
