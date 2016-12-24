@@ -63,6 +63,11 @@ bool AddressBookModel::deleteRow(int row)
     m_addressBook->deleteRow(row);
 }
 
+int AddressBookModel::lookupPaymentID(const QString &payment_id) const
+{
+    return m_addressBook->lookupPaymentID(payment_id);
+}
+
 QHash<int, QByteArray> AddressBookModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames = QAbstractListModel::roleNames();

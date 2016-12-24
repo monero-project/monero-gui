@@ -68,3 +68,8 @@ quint64 AddressBook::count() const
 {
     return m_rows.size();
 }
+
+int AddressBook::lookupPaymentID(const QString &payment_id) const
+{
+    return m_addressBookImpl->lookupPaymentID(payment_id.toStdString());
+}
