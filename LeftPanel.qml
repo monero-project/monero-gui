@@ -131,7 +131,7 @@ Rectangle {
                 id: balanceText
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Arial"
-                font.pixelSize: 26
+                font.pixelSize: 24
                 color: "#000000"
                 text: "N/A"
             }
