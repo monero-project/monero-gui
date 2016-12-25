@@ -54,6 +54,7 @@ FocusScope {
                 border.width: 0
             }
         }
+        onTextChanged: changed(text)
 
         Keys.onReleased: {
             changed(text)
