@@ -84,9 +84,11 @@ Item {
             strength = 0
         // use a slight parabola to discourage short passwords
         strength = strength ^ 1.2 / 3
+        // mapScope does not clamp
+        if (strength > 100)
+            strength = 100
         // privacyLevel component uses 1..13 scale
         privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
-
     }
 
 
