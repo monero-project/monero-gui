@@ -69,6 +69,14 @@ Rectangle {
       oaPopup.open()
     }
 
+    function updateMixin() {
+        var fillLevel = privacyLevelItem.fillLevel
+        var mixin = scaleValueToMixinCount(fillLevel)
+        print ("PrivacyLevel changed:"  + fillLevel)
+        print ("mixin count: "  + mixin)
+        privacyLabel.text = qsTr("Privacy level (mixin %1)").arg(mixin) + translationManager.emptyString
+    }
+
     // Information dialog
     StandardDialog {
         // dynamically change onclose handler
@@ -188,7 +196,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 30
         fontSize: 14
-        text: qsTr("Privacy level") + translationManager.emptyString
+        text: ""
     }
 
     PrivacyLevel {
@@ -199,10 +207,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        onFillLevelChanged: {
-            print ("PrivacyLevel changed:"  + fillLevel)
-            print ("mixin count:"  + scaleValueToMixinCount(fillLevel))
-        }
+        onFillLevelChanged: updateMixin()
     }
 
 
@@ -440,6 +445,7 @@ Rectangle {
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus
         pageRoot.enabled = false
+        updateMixin()
     }
 
     // fires on every page load
