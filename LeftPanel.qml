@@ -316,29 +316,6 @@ Rectangle {
                 height: 1
             }
 
-          /*  // ------------- Mining tab ---------------
-            MenuButton {
-                id: miningButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Mining") + translationManager.emptyString
-                symbol: qsTr("M") + translationManager.emptyString
-                dotColor: "#FFD781"
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = miningButton
-                    panel.miningClicked()
-                }
-            }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
-                height: 1
-            }
-            */
             // ------------- Advanced tab ---------------
             MenuButton {
                 id: advancedButton
@@ -360,6 +337,29 @@ Rectangle {
                 height: 1
             }
 
+            // ------------- Mining tab ---------------
+            MenuButton {
+                id: miningButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Mining") + translationManager.emptyString
+                symbol: qsTr("M") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = miningButton
+                    panel.miningClicked()
+                }
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
+                height: 1
+            }
             // ------------- TxKey tab ---------------
             MenuButton {
                 id: txkeyButton

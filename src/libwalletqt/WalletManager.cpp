@@ -227,6 +227,21 @@ double WalletManager::miningHashRate() const
     return m_pimpl->miningHashRate();
 }
 
+bool WalletManager::isMining() const
+{
+    return m_pimpl->isMining();
+}
+
+bool WalletManager::startMining(const QString &address, quint32 threads)
+{
+    return m_pimpl->startMining(address.toStdString(), threads);
+}
+
+bool WalletManager::stopMining()
+{
+    return m_pimpl->stopMining();
+}
+
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
     bool dnssec_valid = false;

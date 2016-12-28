@@ -362,7 +362,6 @@ ApplicationWindow {
         daemonRunning = false;
     }
 
-
     function onWalletNewBlock(blockHeight) {
 
             // Update progress bar
@@ -838,7 +837,7 @@ ApplicationWindow {
             onTxkeyClicked: middlePanel.state = "TxKey"
             onHistoryClicked: middlePanel.state = "History"
             onAddressBookClicked: middlePanel.state = "AddressBook"
-            onMiningClicked: middlePanel.state = "Minning"
+            onMiningClicked: middlePanel.state = "Mining"
             onSignClicked: middlePanel.state = "Sign"
             onSettingsClicked: middlePanel.state = "Settings"
         }
@@ -1120,7 +1119,7 @@ ApplicationWindow {
     onClosing: {
         // Close wallet non async on exit
         walletManager.closeWallet();
-        // Stop daemon
+        // Stop daemon and pool miner
         daemonManager.stop();
     }
 }
