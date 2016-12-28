@@ -60,6 +60,7 @@ rm -fr $MONERO_DIR/bin
 
 
 mkdir -p $MONERO_DIR/build/release
+mkdir -p $MONERO_DIR/lib
 pushd $MONERO_DIR/build/release
 
 # reusing function from "utils.sh"
@@ -82,7 +83,7 @@ elif [ "$platform" == "linux64" ]; then
     if [ "$STATIC" == true ]; then
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
         # Create symbolic link to static version of libstdc++ in monero/lib
-        ln -s `g++ -print-file-name=libstdc++.a` ../../lib/libstdc++.a
+        ln -s `g++ -print-file-name=libstdc++.a` $MONERO_DIR/lib/libstdc++.a
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
