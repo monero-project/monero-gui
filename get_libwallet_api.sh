@@ -60,6 +60,7 @@ rm -fr $MONERO_DIR/bin
 
 
 mkdir -p $MONERO_DIR/build/release
+mkdir -p $MONERO_DIR/lib
 pushd $MONERO_DIR/build/release
 
 # reusing function from "utils.sh"
@@ -80,7 +81,9 @@ if [ "$platform" == "darwin" ]; then
 elif [ "$platform" == "linux64" ]; then
     echo "Configuring build for Linux x64"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        # Create symbolic link to static version of libstdc++ in monero/lib
+        ln -s `g++ -print-file-name=libstdc++.a` $MONERO_DIR/lib/libstdc++.a
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
@@ -89,7 +92,7 @@ elif [ "$platform" == "linux64" ]; then
 elif [ "$platform" == "linux32" ]; then
     echo "Configuring build for Linux i686"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
@@ -145,8 +148,9 @@ fi
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound shipped with the system, so we don't need to build it
+# except for static build that requires vendored unbound
 
-if [ "$platform" != "linux32" ] && [ "$platform" != "linux64" ]; then
+if [ "$platform" != "linux32" ] && [ "$platform" != "linux64" ] || [ "$STATIC" == true ]; then
     echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
     # no need to make, it was already built as dependency for libwallet

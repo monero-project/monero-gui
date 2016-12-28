@@ -131,7 +131,8 @@ win32 {
 linux {
     CONFIG(static) {
         message("using static libraries")
-        LIBS+= -Wl,-Bstatic    
+        LIBS+= -Wl,-Bstatic
+        QMAKE_LFLAGS = -static -static-libstdc++
     }
     LIBS+= \
         -lboost_serialization \
