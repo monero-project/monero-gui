@@ -107,7 +107,7 @@ Item {
             font.bold: true
             font.pixelSize: 12
             color: "#FFFFFF"
-            text: repeater.model.get(column.currentIndex).column1
+            text: column.currentIndex < repeater.model.rowCount() ? repeater.model.get(column.currentIndex).column1 : ""
         }
 
         Text {
@@ -119,7 +119,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 12
             color: "#FFFFFF"
-            text: repeater.model.get(column.currentIndex).column2
+            text: column.currentIndex < repeater.model.rowCount() ? repeater.model.get(column.currentIndex).column2 : ""
 
             property int w: 0
             Component.onCompleted: w = implicitWidth
