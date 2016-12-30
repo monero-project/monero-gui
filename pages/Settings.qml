@@ -105,17 +105,19 @@ Rectangle {
         TextArea {
             id: memoTextInput
             textMargin: 6
-            font.family: "Arial"
-            font.pointSize: 14
             wrapMode: TextEdit.WordWrap
             readOnly: true
             selectByMouse: true
-
+            font.pixelSize: 18
             Layout.fillWidth: true
             Layout.preferredHeight: 100
             Layout.alignment: Qt.AlignHCenter
 
             text: qsTr("Click button to show seed") + translationManager.emptyString
+
+            style: TextAreaStyle {
+                  backgroundColor: "#FFFFFF"
+              }
 
             Image {
                 id : clipboardButton
