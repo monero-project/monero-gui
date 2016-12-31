@@ -363,6 +363,27 @@ Rectangle {
             }
         }
 
+        // Log level
+        RowLayout {
+            Label {
+                id: logLevelLabel
+                color: "#4A4949"
+                text: qsTr("Log level") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            ComboBox {
+                id: logLevel
+                model: [0,1,2,3,4]
+                currentIndex : appWindow.persistentSettings.logLevel;
+                onCurrentIndexChanged: {
+                    console.log("log level changed: ",currentIndex);
+                    walletManager.setLogLevel(currentIndex);
+                    appWindow.persistentSettings.logLevel = currentIndex;
+                }
+            }
+        }
+
         Label {
             id: guiVersion
             Layout.topMargin: 8
@@ -377,7 +398,6 @@ Rectangle {
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
             fontSize: 16
         }
-
     }
 
     // Daemon console
