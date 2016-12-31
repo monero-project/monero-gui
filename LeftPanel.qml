@@ -131,9 +131,17 @@ Rectangle {
                 id: balanceText
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Arial"
-                font.pixelSize: 26
                 color: "#000000"
                 text: "N/A"
+                // dynamically adjust text size
+                font.pixelSize: {
+                    var digits = text.split('.')[0].length
+                    var defaultSize = 25;
+                    if(digits > 2) {
+                        return defaultSize - 1.1*digits
+                    }
+                    return defaultSize;
+                }
             }
         }
 
@@ -155,9 +163,17 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 50
             font.family: "Arial"
-            font.pixelSize: 18
             color: "#000000"
             text: "N/A"
+            // dynamically adjust text size
+            font.pixelSize: {
+                var digits = text.split('.')[0].length
+                var defaultSize = 18;
+                if(digits > 3) {
+                    return defaultSize - 0.6*digits
+                }
+                return defaultSize;
+            }
         }
     }
 
