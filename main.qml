@@ -219,6 +219,7 @@ ApplicationWindow {
     function connectWallet(wallet) {
         showProcessingSplash("Please wait...")
         currentWallet = wallet
+        updateSyncing(false)
 
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
@@ -307,6 +308,7 @@ ApplicationWindow {
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
+        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (dCurrentBlock < dTargetBlock))
         middlePanel.updateStatus();
 
         // If wallet isnt connected and no daemon is running - Ask
@@ -615,6 +617,11 @@ ApplicationWindow {
         informationPopup.open()
     }
 
+    function updateSyncing(syncing) {
+        var text = (syncing ? qsTr("Balance (syncing)") : qsTr("Balance")) + translationManager.emptyString
+        leftPanel.balanceLabelText = text
+        middlePanel.balanceLabelText = text
+    }
 
     // blocks UI if wallet can't be opened or no connection to the daemon
     function enableUI(enable) {

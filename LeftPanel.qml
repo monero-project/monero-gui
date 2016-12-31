@@ -35,6 +35,7 @@ Rectangle {
     id: panel
 
     property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
@@ -109,6 +110,7 @@ Rectangle {
         spacing: 5
 
         Label {
+            id: balanceLabel
             text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50

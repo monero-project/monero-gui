@@ -42,6 +42,7 @@ Rectangle {
     property Item currentView
     property Item previousView
     property bool basicMode : false
+    property string balanceLabelText: qsTr("Balance")
     property string balanceText
     property string unlockedBalanceText
 
@@ -198,7 +199,7 @@ Rectangle {
                 columns: 3
 
                 Text {
-
+                    id: balanceLabel
                     width: 116
                     height: 20
                     font.family: "Arial"
@@ -208,7 +209,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Balance:")
+                    text: root.balanceLabelText + ":"
                 }
 
                 Text {
