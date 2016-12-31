@@ -320,7 +320,6 @@ ListView {
             // -- "Amount column
             Column {
                 anchors.top: parent.top
-                width: 148
 
                 Text {
                     anchors.left: parent.left
@@ -342,6 +341,7 @@ ListView {
                     }
 
                     Text {
+                        id: amountText
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
