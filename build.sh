@@ -14,12 +14,22 @@ elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
 	CONFIG="CONFIG+=release static";
     BIN_PATH=release/bin
+elif [ "$BUILD_TYPE" == "release-android" ]; then
+    echo "Building release for ANDROID"
+    CONFIG="CONFIG+=release static";
+    ANDROID=true
+    BIN_PATH=release/bin
+elif [ "$BUILD_TYPE" == "debug-android" ]; then
+    echo "Building debug for ANDROID : ultra INSECURE !!"
+    CONFIG="CONFIG+=debug qml_debug";
+    ANDROID=true
+    BIN_PATH=debug/bin
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building debug"
 	CONFIG="CONFIG+=debug"
     BIN_PATH=debug/bin
 else
-    echo "Valid build types are release, release-static and debug"
+    echo "Valid build types are release, release-static, release-android, debug-android and debug"
     exit 1;
 fi
 
@@ -69,7 +79,7 @@ qmake ../monero-wallet-gui.pro "$CONFIG"
 make 
 
 # Copy monerod to bin folder
-if [ "$platform" != "mingw32" ]; then
+if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
 cp ../$MONERO_DIR/bin/$MONEROD_EXEC $BIN_PATH
 fi
 

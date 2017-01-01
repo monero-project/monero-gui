@@ -14,6 +14,7 @@ if [ -z $BUILD_TYPE ]; then
 fi
 
 STATIC=false
+ANDROID=false
 if [ "$BUILD_TYPE" == "release" ]; then
     echo "Building libwallet release"
     CMAKE_BUILD_TYPE=Release
@@ -21,11 +22,21 @@ elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building libwallet release-static"
     CMAKE_BUILD_TYPE=Release
     STATIC=true
+elif [ "$BUILD_TYPE" == "release-android" ]; then
+    echo "Building libwallet release-static for ANDROID"
+    CMAKE_BUILD_TYPE=Release
+    STATIC=true
+    ANDROID=true
+elif [ "$BUILD_TYPE" == "debug-android" ]; then
+    echo "Building libwallet debug-static for ANDROID"
+    CMAKE_BUILD_TYPE=Debug
+    STATIC=true
+    ANDROID=true
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building libwallet debug"
     CMAKE_BUILD_TYPE=Debug
 else
-    echo "Valid build types are release, release-static and debug"
+    echo "Valid build types are release, release-static, release-android, debug-android and debug"
     exit 1;
 fi
 
@@ -79,7 +90,10 @@ if [ "$platform" == "darwin" ]; then
 ## LINUX 64
 elif [ "$platform" == "linux64" ]; then
     echo "Configuring build for Linux x64"
-    if [ "$STATIC" == true ]; then
+    if [ "$ANDROID" == true ]; then
+        echo "Configuring build for Android on Linux host"
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="armv7-a" -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+    elif [ "$STATIC" == true ]; then
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
@@ -134,7 +148,7 @@ popd
 
 # Build monerod
 # win32 need to build daemon manually with msys2 toolchain
-if [ "$platform" != "mingw32" ]; then
+if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
     pushd $MONERO_DIR/build/release/src/daemon
     eval make  -j$CPU_CORE_COUNT
     eval make install -j$CPU_CORE_COUNT
@@ -146,7 +160,7 @@ fi
 # since filename conflict (random.c.obj)
 # for Linux, we use libunbound shipped with the system, so we don't need to build it
 
-if [ "$platform" != "linux32" ] && [ "$platform" != "linux64" ]; then
+if [ "$platform" != "linux32" ] && ([ "$ANDROID" == true ] || [ "$platform" != "linux64" ]); then
     echo "Building libunbound..."
     pushd $MONERO_DIR/build/release/external/unbound
     # no need to make, it was already built as dependency for libwallet
