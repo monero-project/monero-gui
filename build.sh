@@ -53,7 +53,7 @@ if [ ! -d build ]; then mkdir build; fi
 
 # Platform indepenent settings
 platform=$(get_platform)
-if [ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]; then
+if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]); then
     distro=$(lsb_release -is)
     if [ "$distro" == "Ubuntu" ]; then
         CONFIG="$CONFIG libunwind_off"
