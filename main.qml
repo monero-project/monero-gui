@@ -252,12 +252,20 @@ ApplicationWindow {
         return wallet_path;
     }
 
+    function usefulName(path) {
+        // arbitrary "short enough" limit
+        if (path.length < 32)
+            return path
+        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+    }
+
     function onWalletConnectionStatusChanged(){
         console.log("Wallet connection status changed")
         middlePanel.updateStatus();
     }
 
     function onWalletOpened(wallet) {
+        walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
             if (appWindow.password === '') {
@@ -265,7 +273,7 @@ ApplicationWindow {
                 console.log("closing wallet async : " + wallet.address)
                 closeWallet();
                 // try to open wallet with password;
-                passwordDialog.open(wallet.path);
+                passwordDialog.open(walletName);
             } else {
                 // opening with password but password doesn't match
                 console.error("Error opening wallet with password: ", wallet.errorString);
@@ -277,7 +285,7 @@ ApplicationWindow {
                 closeWallet();
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
-                    passwordDialog.open(wallet.path)
+                    passwordDialog.open(walletName)
                 }
             }
             return;
@@ -673,7 +681,6 @@ ApplicationWindow {
         wizard.restart();
         rootItem.state = "wizard"
     }
-
 
     objectName: "appWindow"
     visible: true
