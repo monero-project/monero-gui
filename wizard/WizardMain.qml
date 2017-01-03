@@ -174,18 +174,14 @@ Rectangle {
 
     //! actually writes the wallet
     function applySettings() {
-        console.log("Here we apply the settings");
-        // here we need to actually move wallet to the new location
-        console.log(settings.wallet_full_path);
-
+        // Save wallet files in user specified location
         var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
-
         console.log("saving in wizard: "+ new_wallet_filename)
-        // moving wallet files to the new destination, if user changed it
-        if (new_wallet_filename !== settings.wallet_filename) {
-            // using previously saved wallet;
-            settings.wallet.store(new_wallet_filename);
-        }
+        settings.wallet.store(new_wallet_filename);
+
+        // make sure temporary wallet files are deleted
+        console.log("Removing temporary wallet: "+ settings.tmp_wallet_filename)
+        oshelper.removeTemporaryWallet(settings.tmp_wallet_filename)
 
         // protecting wallet with password
         settings.wallet.setPassword(settings.wallet_password);
@@ -208,7 +204,6 @@ Rectangle {
         appWindow.persistentSettings.testnet = settings.testnet
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
-
 
     }
 

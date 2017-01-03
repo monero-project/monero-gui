@@ -82,16 +82,16 @@ Item {
             console.log("deleting wallet")
         }
 
-        var wallet_filename = oshelper.temporaryFilename();
-        //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+        var tmp_wallet_filename = oshelper.temporaryFilename();
+        console.log("Creating temporary wallet", tmp_wallet_filename)
         var testnet = appWindow.persistentSettings.testnet;
-        var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
+        var wallet = walletManager.createWallet(tmp_wallet_filename, "", settingsObject.wallet_language,
                                                 testnet)
         uiItem.wordsTextItem.memoText = wallet.seed
         // saving wallet in "global" settings object
         // TODO: wallet should have a property pointing to the file where it stored or loaded from
         settingsObject.wallet = wallet
-        settingsObject.wallet_filename = wallet_filename
+        settingsObject.tmp_wallet_filename = tmp_wallet_filename
     }
 
     WizardManageWalletUI {
