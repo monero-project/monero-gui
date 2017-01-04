@@ -464,6 +464,11 @@ Rectangle {
             return;
         }
 
+        if (currentWallet.viewOnly) {
+            statusText.text = qsTr("Wallet is view only.")
+            return;
+        }
+
         switch (currentWallet.connected) {
         case Wallet.ConnectionStatus_Disconnected:
             statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText

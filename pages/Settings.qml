@@ -39,48 +39,23 @@ import moneroComponents.Clipboard 1.0
 
 Rectangle {
     property var daemonAddress
+    property bool viewOnly: false
 
     color: "#F0EEEE"
 
     Clipboard { id: clipboard }
 
     function initSettings() {
+        //runs on every page load
 
-
-        // Mnemonic seed settings
-        memoTextInput.text = qsTr("Click button to show seed") + translationManager.emptyString
-        showSeedButton.visible = true
+        // Mnemonic seed setting
+        memoTextInput.text = (viewOnly)? qsTr("View only wallets doesn't have a mnemonic seed") : qsTr("Click button to show seed") + translationManager.emptyString
+        showSeedButton.enabled = !viewOnly
 
         // Daemon settings
-
         daemonAddress = persistentSettings.daemon_address.split(":");
         console.log("address: " + persistentSettings.daemon_address)
         // try connecting to daemon
-    }
-
-
-    PasswordDialog {
-        id: settingsPasswordDialog
-
-        onAccepted: {
-            if(appWindow.password === settingsPasswordDialog.password){
-                memoTextInput.text = currentWallet.seed
-                showSeedButton.visible = false
-            } else {
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Wrong password");
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    settingsPasswordDialog.open()
-                }
-            }
-
-            settingsPasswordDialog.password = ""
-        }
-        onRejected: {
-
-        }
-
     }
 
 
@@ -92,17 +67,59 @@ Rectangle {
         anchors.right: parent.right
         spacing: 10
 
-
-        Label {
-            id: seedLabel
-            color: "#4A4949"
-            fontSize: 16
-            text: qsTr("Mnemonic seed: ") + translationManager.emptyString
-            Layout.preferredWidth: 100
-            Layout.alignment: Qt.AlignLeft
+        //! Manage wallet
+        RowLayout {
+            Label {
+                id: manageWalletLabel
+                Layout.fillWidth: true
+                color: "#4A4949"
+                text: qsTr("Manage wallet") + translationManager.emptyString
+                fontSize: 16
+                Layout.topMargin: 10
+            }
         }
 
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+
+        RowLayout {
+            StandardButton {
+                id: closeWalletButton
+                width: 100
+                text: qsTr("Close wallet") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: true
+                onClicked: {
+                    console.log("closing wallet button clicked")
+                    appWindow.showWizard();
+                }
+            }
+
+            StandardButton {
+                enabled: !viewOnly
+                id: createViewOnlyWalletButton
+                text: qsTr("Create view only wallet") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: true
+                onClicked: {
+                    wizard.openCreateViewOnlyWalletPage();
+                }
+            }
+
+        }
+
+        //! show seed
         TextArea {
+            enabled: !viewOnly
             id: memoTextInput
             textMargin: 6
             wrapMode: TextEdit.WordWrap
@@ -113,7 +130,7 @@ Rectangle {
             Layout.preferredHeight: 100
             Layout.alignment: Qt.AlignHCenter
 
-            text: qsTr("Click button to show seed") + translationManager.emptyString
+            text: (viewOnly)? qsTr("View only wallets doesn't have a mnemonic seed") : qsTr("Click button to show seed") + translationManager.emptyString
 
             style: TextAreaStyle {
                   backgroundColor: "#FFFFFF"
@@ -137,7 +154,9 @@ Rectangle {
             }
         }
 
+
         RowLayout {
+            enabled: !viewOnly
             Layout.fillWidth: true
             Text {
                 id: wordsTipText
@@ -151,26 +170,30 @@ Rectangle {
             }
 
             StandardButton {
-
                 id: showSeedButton
-
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Show seed")
                 Layout.alignment: Qt.AlignRight
-                Layout.preferredWidth: 100
                 onClicked: {
                     settingsPasswordDialog.open();
                 }
             }
         }
 
-
-
-
+        //! Manage daemon
+        RowLayout {
+            Label {
+                id: manageDaemonLabel
+                color: "#4A4949"
+                text: qsTr("Manage daemon") + translationManager.emptyString
+                fontSize: 16
+                anchors.topMargin: 30
+                Layout.topMargin: 30
+            }
+        }
         Rectangle {
             Layout.fillWidth: true
             height: 1
@@ -178,10 +201,68 @@ Rectangle {
         }
 
         RowLayout {
+            StandardButton {
+                visible: true
+                enabled: !appWindow.daemonRunning
+                id: startDaemonButton
+                text: qsTr("Start daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.startDaemon(daemonFlags.text)
+                }
+            }
+
+            StandardButton {
+                visible: true
+                enabled: appWindow.daemonRunning
+                id: stopDaemonButton
+                text: qsTr("Stop daemon") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.stopDaemon()
+                }
+            }
+
+            StandardButton {
+                visible: true
+                id: daemonConsolePopupButton
+                text: qsTr("Show log") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonConsolePopup.open();
+                }
+            }
+        }
+
+        RowLayout {
+            id: daemonFlagsRow
+            Label {
+                id: daemonFlagsLabel
+                color: "#4A4949"
+                text: qsTr("Daemon startup flags") + translationManager.emptyString
+                fontSize: 16
+            }
+            LineEdit {
+                id: daemonFlags
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: appWindow.persistentSettings.daemonFlags;
+                placeholderText: qsTr("(optional)") + translationManager.emptyString
+            }
+        }
+
+        RowLayout {
             id: daemonAddrRow
             Layout.fillWidth: true
-            Layout.preferredHeight: 40
-            Layout.topMargin: 40
             spacing: 10
 
             Label {
@@ -213,12 +294,8 @@ Rectangle {
 
             StandardButton {
                 id: daemonAddrSave
-
                 Layout.fillWidth: false
-
                 Layout.leftMargin: 30
-                Layout.minimumWidth: 100
-                width: 60
                 text: qsTr("Save") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -238,120 +315,19 @@ Rectangle {
 
         }
 
-
         RowLayout {
             Label {
-                id: closeWalletLabel
-
-                Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Manage wallet") + translationManager.emptyString
+                text: qsTr("Layout settings") + translationManager.emptyString
                 fontSize: 16
+                anchors.topMargin: 30
+                Layout.topMargin: 30
             }
         }
-        RowLayout {
-
-            Text {
-                id: closeWalletTip
-                font.family: "Arial"
-                font.pointSize: 12
-                color: "#4A4646"
-                Layout.fillWidth: true
-                wrapMode: Text.WordWrap
-                text: qsTr("Close current wallet and open wizard")
-                      + translationManager.emptyString
-            }
-
-
-            StandardButton {
-                id: closeWalletButton
-
-//                Layout.leftMargin: 30
-//                Layout.minimumWidth: 100
-                width: 100
-                text: qsTr("Close wallet") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                visible: true
-                onClicked: {
-                    console.log("closing wallet button clicked")
-                    appWindow.showWizard();
-                }
-            }
-        }
-
-        RowLayout {
-            Label {
-                id: manageDaemonLabel
-                color: "#4A4949"
-                text: qsTr("Manage daemon") + translationManager.emptyString
-                fontSize: 16
-            }
-
-            StandardButton {
-                visible: true
-                enabled: !appWindow.daemonRunning
-                id: startDaemonButton
-                width: 110
-                text: qsTr("Start daemon") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    appWindow.startDaemon(daemonFlags.text)
-                }
-            }
-
-            StandardButton {
-                visible: true
-                enabled: appWindow.daemonRunning
-                id: stopDaemonButton
-                width: 110
-                text: qsTr("Stop daemon") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    appWindow.stopDaemon()
-                }
-            }
-
-            StandardButton {
-                visible: true
-             //  enabled: appWindow.daemonRunning
-                id: daemonConsolePopupButton
-                width: 110
-                text: qsTr("Show log") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    daemonConsolePopup.open();
-                }
-            }
-
-        }
-
-        RowLayout {
-            id: daemonFlagsRow
-            Label {
-                id: daemonFlagsLabel
-                color: "#4A4949"
-                text: qsTr("Daemon startup flags") + translationManager.emptyString
-                fontSize: 16
-            }
-            LineEdit {
-                id: daemonFlags
-                Layout.preferredWidth:  200
-                Layout.fillWidth: true
-                text: appWindow.persistentSettings.daemonFlags;
-                placeholderText: qsTr("(optional)") + translationManager.emptyString
-            }
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
         }
 
         RowLayout {
@@ -386,6 +362,22 @@ Rectangle {
             }
         }
 
+        // Version
+        RowLayout {
+            Label {
+                color: "#4A4949"
+                text: qsTr("Version") + translationManager.emptyString
+                fontSize: 16
+                anchors.topMargin: 30
+                Layout.topMargin: 30
+            }
+        }
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+
         Label {
             id: guiVersion
             Layout.topMargin: 8
@@ -414,11 +406,35 @@ Rectangle {
         }
     }
 
+    PasswordDialog {
+        id: settingsPasswordDialog
+
+        onAccepted: {
+            if(appWindow.password === settingsPasswordDialog.password){
+                memoTextInput.text = currentWallet.seed
+                showSeedButton.enabled = false
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Wrong password");
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    settingsPasswordDialog.open()
+                }
+            }
+
+            settingsPasswordDialog.password = ""
+        }
+        onRejected: {
+
+        }
+
+    }
 
     // fires on every page load
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
+        viewOnly = currentWallet.viewOnly;
     }
 
     // fires only once
