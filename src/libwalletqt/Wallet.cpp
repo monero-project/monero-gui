@@ -152,6 +152,15 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
     m_walletImpl->initAsync(daemonAddress.toStdString(), upperTransactionLimit);
 }
 
+//! create a view only wallet
+bool Wallet::createViewOnly(const QString &path, const QString &password) const
+{
+    // Create path
+    QDir d = QFileInfo(path).absoluteDir();
+    d.mkpath(d.absolutePath());
+    return m_walletImpl->createWatchOnly(path.toStdString(),password.toStdString(),m_walletImpl->getSeedLanguage());
+}
+
 bool Wallet::connectToDaemon()
 {
     return m_walletImpl->connectToDaemon();
@@ -160,6 +169,11 @@ bool Wallet::connectToDaemon()
 void Wallet::setTrustedDaemon(bool arg)
 {
     m_walletImpl->setTrustedDaemon(arg);
+}
+
+bool Wallet::viewOnly() const
+{
+    return m_walletImpl->watchOnly();
 }
 
 quint64 Wallet::balance() const

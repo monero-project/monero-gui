@@ -44,6 +44,7 @@ Rectangle {
         // disable donation page
         "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage,  finishPage ],
         "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage,  finishPage ],
+        "create_view_only_wallet" : [ createViewOnlyWalletPage, passwordPage ],
 
     }
     property string currentPath: "create_wallet"
@@ -89,15 +90,12 @@ Rectangle {
             currentPage += step_value
             pages[currentPage].opacity = 1;
 
-            var nextButtonVisible = pages[currentPage] !== optionsPage;
+            var nextButtonVisible = pages[currentPage] !== optionsPage && currentPage < pages.length - 1;
             nextButton.visible = nextButtonVisible;
 
             if (typeof pages[currentPage].onPageOpened !== 'undefined') {
                 pages[currentPage].onPageOpened(settings,next)
             }
-
-
-
         }
     }
 
@@ -128,6 +126,16 @@ Rectangle {
         }
         optionsPage.onPageClosed(settings)
         wizard.openWalletFromFileClicked();
+    }
+
+    function openCreateViewOnlyWalletPage(){
+        pages[currentPage].opacity = 0
+        currentPath = "create_view_only_wallet"
+        pages = paths[currentPath]
+        currentPage = pages.indexOf(createViewOnlyWalletPage)
+        createViewOnlyWalletPage.opacity = 1
+        nextButton.visible = true
+        rootItem.state = "wizard";
     }
 
     function createWalletPath(folder_path,account_name){
@@ -274,6 +282,16 @@ Rectangle {
         anchors.rightMargin: 50
     }
 
+    WizardCreateViewOnlyWallet {
+        id: createViewOnlyWalletPage
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: nextButton.left
+        anchors.left: prevButton.right
+        anchors.leftMargin: 50
+        anchors.rightMargin: 50
+    }
+
     WizardRecoveryWallet {
         id: recoveryWalletPage
         anchors.top: parent.top
@@ -356,4 +374,59 @@ Rectangle {
             wizard.useMoneroClicked();
         }
     }
+
+    StandardButton {
+       id: createViewOnlyWalletButton
+       anchors.right: parent.right
+       anchors.bottom: parent.bottom
+       anchors.margins: 50
+       width: 110
+       text: qsTr("Create wallet") + translationManager.emptyString
+       shadowReleasedColor: "#FF4304"
+       shadowPressedColor: "#B32D00"
+       releasedColor: "#FF6C3C"
+       pressedColor: "#FF4304"
+       visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
+       enabled: passwordPage.passwordsMatch
+       onClicked: {
+           if (currentWallet.createViewOnly(settings['view_only_wallet_path'],passwordPage.password)) {
+               console.log("view only wallet created in ",settings['view_only_wallet_path']);
+               informationPopup.title  = qsTr("Success") + translationManager.emptyString;
+               informationPopup.text = qsTr('The view only wallet has been created. You can open it by closing this current wallet, clicking the "Open wallet from file" option, and selecting the view wallet in: \n%1')
+                                        .arg(settings['view_only_wallet_path']);
+               informationPopup.open()
+               informationPopup.onCloseCallback = null
+               rootItem.state = "normal"
+               wizard.restart();
+
+           } else {
+               informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+               informationPopup.text = currentWallet.errorString;
+               informationPopup.open()
+           }
+
+       }
+   }
+
+   StandardButton {
+       id: abortViewOnlyButton
+       anchors.right: createViewOnlyWalletButton.left
+       anchors.bottom: parent.bottom
+       anchors.margins: 50
+       width: 110
+       text: qsTr("Abort") + translationManager.emptyString
+       shadowReleasedColor: "#FF4304"
+       shadowPressedColor: "#B32D00"
+       releasedColor: "#FF6C3C"
+       pressedColor: "#FF4304"
+       visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
+       onClicked: {
+           wizard.restart();
+           rootItem.state = "normal"
+       }
+   }
+
+
+
+
 }

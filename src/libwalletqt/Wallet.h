@@ -36,7 +36,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
-
+    Q_PROPERTY(bool viewOnly READ viewOnly)
 
 public:
 
@@ -98,6 +98,9 @@ public:
     //! initializes wallet asynchronously
     Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
 
+    //! create a view only wallet
+    Q_INVOKABLE bool createViewOnly(const QString &path, const QString &password) const;
+
     //! connects to daemon
     Q_INVOKABLE bool connectToDaemon();
 
@@ -109,6 +112,9 @@ public:
 
     //! returns unlocked balance
     Q_INVOKABLE quint64 unlockedBalance() const;
+
+    //! returns if view only wallet
+    Q_INVOKABLE bool viewOnly() const;
 
     //! returns current wallet's block height
     //! (can be less than daemon's blockchain height when wallet sync in progress)
@@ -182,7 +188,6 @@ public:
 
     //! verify a signed message
     Q_INVOKABLE bool verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
-
 
     //! saved payment id
     QString paymentId() const;

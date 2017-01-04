@@ -36,8 +36,9 @@ Item {
     id: passwordPage
     opacity: 0
     visible: false
-
     property alias titleText: titleText.text
+    property alias passwordsMatch: passwordUI.passwordsMatch
+    property alias password: passwordUI.password
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -47,7 +48,7 @@ Item {
 
     function onPageOpened(settingsObject) {
         wizard.nextButton.enabled = true
-        handlePassword();
+        passwordUI.handlePassword();
 
         if (wizard.currentPath === "create_wallet") {
            passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
@@ -55,43 +56,21 @@ Item {
            passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         }
 
-        passwordItem.focus = true;
+        passwordUI.focus = true;
     }
 
     function onPageClosed(settingsObject) {
         // TODO: set password on the final page
         // settingsObject.wallet.setPassword(passwordItem.password)
-        settingsObject['wallet_password'] = passwordItem.password
+        settingsObject['wallet_password'] = passwordUI.password
         return true
     }
 
     function onWizardRestarted(){
         // Reset password fields
-        passwordItem.password = "";
-        retypePasswordItem.password = "";
+        passwordUI.password = "";
+        passwordUI.confirmPassword = "";
     }
-
-    function handlePassword() {
-        // allow to forward step only if passwords match
-
-        wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
-
-        // scorePassword returns value from 0 to... lots
-        var strength = walletManager.getPasswordStrength(passwordItem.password);
-        // consider anything below 10 bits as dire
-        strength -= 10
-        if (strength < 0)
-            strength = 0
-        // use a slight parabola to discourage short passwords
-        strength = strength ^ 1.2 / 3
-        // mapScope does not clamp
-        if (strength > 100)
-            strength = 100
-        // privacyLevel component uses 1..13 scale
-        privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
-    }
-
-
 
     Row {
         id: dotsRow
@@ -111,6 +90,9 @@ Item {
         Repeater {
             model: dotsModel
             delegate: Rectangle {
+                // Password page is last page when creating view only wallet
+                // TODO: make this dynamic for all pages in wizard
+                visible: (wizard.currentPath != "create_view_only_wallet" || index < 2)
                 width: 12; height: 12
                 radius: 6
                 color: dotColor
@@ -157,39 +139,12 @@ Item {
     }
 
 
-    WizardPasswordInput {
-        id: passwordItem
-        anchors.top: headerColumn.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
-        placeholderText : qsTr("Password") + translationManager.emptyString;
-        KeyNavigation.tab: retypePasswordItem
-        onChanged: handlePassword()
-
-    }
-
-    WizardPasswordInput {
-        id: retypePasswordItem
-        anchors.top: passwordItem.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
-        placeholderText : qsTr("Confirm password") + translationManager.emptyString;
-        KeyNavigation.tab: passwordItem
-        onChanged: handlePassword()
-    }
-
-    PrivacyLevelSmall {
-        id: privacyLevel
-        anchors.left: parent.left
+    WizardPasswordUI {
+        id: passwordUI
         anchors.right: parent.right
-        anchors.top: retypePasswordItem.bottom
-        anchors.topMargin: 60
-        background: "#F0EEEE"
-        interactive: false
+        anchors.left:  parent.left
+        anchors.top: headerColumn.bottom
+        anchors.topMargin: 30
     }
 
     Component.onCompleted: {
