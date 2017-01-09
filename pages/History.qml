@@ -540,6 +540,11 @@ Rectangle {
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
+            addressBookModel: null
         }
+    }
+
+    function onPageCompleted() {
+        table.addressBookModel = appWindow.currentWallet ? appWindow.currentWallet.addressBookModel : null
     }
 }

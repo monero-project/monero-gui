@@ -28,6 +28,7 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import moneroComponents.AddressBookModel 1.0
 
 
 ListView {
@@ -36,6 +37,7 @@ ListView {
     boundsBehavior: ListView.StopAtBounds
     property var previousItem
     property int rowSpacing: 12
+    property var addressBookModel: null
 
     function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations) {
         var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
@@ -52,6 +54,15 @@ ListView {
             + translationManager.emptyString;
     }
 
+    function lookupPaymentID(paymentId) {
+        if (!addressBookModel)
+            return ""
+        var idx = addressBookModel.lookupPaymentID(paymentId)
+        if (idx < 0)
+            return ""
+        idx = addressBookModel.index(idx, 0)
+        return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
+    }
 
 
     footer: Rectangle {
@@ -206,6 +217,21 @@ ListView {
                 color: "#545454"
                 text: paymentId
 
+            }
+            // Address book lookup
+            TextEdit {
+                readOnly: true
+                selectByMouse: true
+                id: addressBookLookupValue
+                width: 136
+                anchors.bottom: parent.bottom
+                //elide: Text.ElideRight
+                font.family: "Arial"
+                font.pixelSize:13
+                font.letterSpacing: -1
+                color: "#545454"
+                text: "(" + lookupPaymentID(paymentId) + ")"
+                visible: text !== "()"
             }
         }
         Row {
