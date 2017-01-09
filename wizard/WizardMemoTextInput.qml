@@ -73,7 +73,7 @@ Column {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("This seed is VERY important to write down and keep secret. It is all you need to backup and restore your wallet.")
+                text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.")
                     + translationManager.emptyString
             }
         }

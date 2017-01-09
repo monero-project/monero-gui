@@ -151,7 +151,7 @@ Item {
             color: "#4A4646"
             horizontalAlignment: Text.AlignHCenter
             text: qsTr("Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.<br/><br/>
-                        Enter a secure password (using letters, numbers, and/or symbols):")
+                        <b>Enter a strong password</b> (using letters, numbers, and/or symbols):")
                     + translationManager.emptyString
         }
     }
