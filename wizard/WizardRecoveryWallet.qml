@@ -73,11 +73,14 @@ Item {
     function recoveryWallet(settingsObject) {
         var testnet = appWindow.persistentSettings.testnet;
         var restoreHeight = settingsObject.restore_height;
-        var wallet = walletManager.recoveryWallet(oshelper.temporaryFilename(), settingsObject.words, testnet, restoreHeight);
+        var tmp_wallet_filename = oshelper.temporaryFilename()
+        console.log("Creating temporary wallet", tmp_wallet_filename)
+        var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight);
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             settingsObject['wallet'] = wallet;
             settingsObject['is_recovering'] = true;
+            settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {
             walletManager.closeWallet();
         }
