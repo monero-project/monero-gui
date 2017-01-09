@@ -40,6 +40,17 @@ Item {
     visible: false
     property var buttonSize: 190
 
+    function onPageClosed() {
+        // Save settings used in open from file.
+        // other wizard settings are saved on last page in applySettings()
+        appWindow.persistentSettings.testnet = wizard.settings["testnet"]
+        appWindow.persistentSettings.daemon_address = wizard.settings["daemon_address"]
+        appWindow.persistentSettings.language = wizard.settings.language
+        appWindow.persistentSettings.locale   = wizard.settings.locale
+
+        return true;
+    }
+
     function saveDaemonAddress() {
         wizard.settings["daemon_address"] = daemonAddress.text
         wizard.settings["testnet"] = testNet.checked
@@ -261,7 +272,12 @@ Item {
                     Layout.alignment: Qt.AlignCenter
                     width: 200
                     fontSize: 14
-                    text: testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
+                    text: {
+                        if(appWindow.persistentSettings.daemon_address)
+                            return appWindow.persistentSettings.daemon_address;
+                        return testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
+                    }
+
                 }
 
                 CheckBox {
@@ -274,7 +290,7 @@ Item {
                     fontSize: 16
                     checkedIcon: "../images/checkedVioletIcon.png"
                     uncheckedIcon: "../images/uncheckedIcon.png"
-                    checked: false
+                    checked: appWindow.persistentSettings.testnet;
                 }
             }
         }

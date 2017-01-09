@@ -105,25 +105,19 @@ Rectangle {
 
     function openCreateWalletPage() {
         print ("show create wallet page");
-        pages[currentPage].opacity = 0;
-        createWalletPage.opacity = 1
         currentPath = "create_wallet"
-        pages = paths[currentPath]
-        currentPage = pages.indexOf(createWalletPage)
         createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
-        createWalletPage.onPageOpened(settings);
+        // goto next page
+        switchPage(true);
     }
 
     function openRecoveryWalletPage() {
         print ("show recovery wallet page");
-        pages[currentPage].opacity = 0
-        recoveryWalletPage.opacity = 1
         currentPath = "recovery_wallet"
-        pages = paths[currentPath]
-        currentPage = pages.indexOf(recoveryWalletPage)
         wizard.nextButton.visible = true
-        recoveryWalletPage.onPageOpened(settings);
+        // goto next page
+        switchPage(true);
     }
 
     function openOpenWalletPage() {
@@ -132,8 +126,8 @@ Rectangle {
             settings.wallet.destroy();
             delete wizard.settings['wallet'];
         }
-
-         wizard.openWalletFromFileClicked();
+        optionsPage.onPageClosed(settings)
+        wizard.openWalletFromFileClicked();
     }
 
     function createWalletPath(folder_path,account_name){
