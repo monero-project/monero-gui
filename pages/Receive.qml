@@ -204,39 +204,6 @@ Rectangle {
         }
 
         RowLayout {
-            id: integratedAddressRow
-            Label {
-                id: integratedAddressLabel
-                fontSize: 14
-                text: qsTr("Integrated address") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-
-                id: integratedAddressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("ReadOnly wallet integrated address displayed here") + translationManager.emptyString
-                readOnly: true
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                onTextChanged: cursorPosition = 0
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (integratedAddressLine.text.length > 0) {
-                            clipboard.setText(integratedAddressLine.text)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        RowLayout {
             id: paymentIdRow
             Label {
                 id: paymentIdLabel
@@ -280,6 +247,39 @@ Rectangle {
                     appWindow.persistentSettings.payment_id = appWindow.currentWallet.generatePaymentId();
                     updatePaymentId()
                 }
+            }
+        }
+        
+        RowLayout {
+            id: integratedAddressRow
+            Label {
+                id: integratedAddressLabel
+                fontSize: 14
+                text: qsTr("Integrated address") + translationManager.emptyString
+                width: mainLayout.labelWidth
+            }
+
+
+            LineEdit {
+
+                id: integratedAddressLine
+                fontSize: mainLayout.lineEditFontSize
+                placeholderText: qsTr("ReadOnly wallet integrated address displayed here") + translationManager.emptyString
+                readOnly: true
+                width: mainLayout.editWidth
+                Layout.fillWidth: true
+
+                onTextChanged: cursorPosition = 0
+
+                IconButton {
+                    imageSource: "../images/copyToClipboard.png"
+                    onClicked: {
+                        if (integratedAddressLine.text.length > 0) {
+                            clipboard.setText(integratedAddressLine.text)
+                        }
+                    }
+                }
+
             }
         }
 
