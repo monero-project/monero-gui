@@ -93,7 +93,7 @@ Item {
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
-            ListElement { dotColor: "#36B05B" }
+            //ListElement { dotColor: "#36B05B" }
         }
 
         Repeater {
