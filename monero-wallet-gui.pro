@@ -12,7 +12,8 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
-                $$PWD/src
+                $$PWD/src \
+                $$WALLET_ROOT/src
 
 HEADERS += \
     filter.h \
@@ -274,10 +275,13 @@ win32 {
     }
 }
 
-linux {
+linux:!android {
     deploy.commands += $$escape_expand(\n\t) $$PWD/linuxdeploy_helper.sh $$DESTDIR $$TARGET
 }
 
+android{
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+}
 
 
 OTHER_FILES += \
