@@ -265,7 +265,7 @@ ListView {
                 font.pixelSize: 13
                 font.letterSpacing: -1
                 color: "#545454"
-                text: blockHeight
+                text: (typeof blockHeight != "undefined")? blockHeight : qsTr("Pending")  + translationManager.emptyString
             }
         }
 

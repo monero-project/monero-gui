@@ -75,7 +75,11 @@ QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
         result = tInfo->fee();
         break;
     case TransactionBlockHeightRole:
-        result = tInfo->blockHeight();
+        // Use NULL QVariant for transactions without height.
+        // Forces them to be displayed at top when sorted by blockHeight.
+        if (tInfo->blockHeight() != 0) {
+            result = tInfo->blockHeight();
+        }
         break;
     case TransactionHashRole:
         result = tInfo->hash();
