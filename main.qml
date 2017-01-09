@@ -150,8 +150,10 @@ ApplicationWindow {
 
     function initialize() {
         console.log("initializing..")
-
         walletInitialized = false;
+
+        // Use stored log level
+        walletManager.setLogLevel(persistentSettings.logLevel)
 
         // setup language
         var locale = persistentSettings.locale
@@ -716,6 +718,7 @@ ApplicationWindow {
         property bool   is_recovering : false
         property bool   customDecorations : true
         property string daemonFlags
+        property int logLevel: 0
     }
 
     // Information dialog
