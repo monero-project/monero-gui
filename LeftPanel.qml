@@ -282,6 +282,7 @@ Rectangle {
             }
 
             Rectangle {
+                visible: addressBookButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -394,6 +395,7 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: txkeyButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -417,6 +419,7 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: signButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
