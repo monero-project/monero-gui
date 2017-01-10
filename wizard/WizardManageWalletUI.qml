@@ -43,7 +43,8 @@ Item {
     property alias wordsTextItem : memoTextItem
     property alias restoreHeight : restoreHeightItem.text
     property alias restoreHeightVisible: restoreHeightItem.visible
-
+    property alias walletName : accountName.text
+    property alias progressDotsModel : progressDots.model
 
     // TODO extend properties if needed
 
@@ -64,6 +65,7 @@ Item {
         }
 
         Repeater {
+            id: progressDots
             model: dotsModel
             delegate: Rectangle {
                 width: 12; height: 12
@@ -184,7 +186,7 @@ Item {
     Row {
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: (restoreHeightItem.visible)? restoreHeightItem.bottom : memoTextItem.bottom
+        anchors.top: (restoreHeightItem.visible)? restoreHeightItem.bottom : (memoTextItem.visible)? memoTextItem.bottom : frameHeader.bottom
         anchors.topMargin: 24
         spacing: 16
 

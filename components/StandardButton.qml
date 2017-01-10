@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 
 Item {
     id: button
@@ -40,6 +41,10 @@ Item {
     property int fontSize: 12
     property alias text: label.text
     signal clicked()
+
+    // Dynamic label width
+    width: label.contentWidth + 20
+    Layout.minimumWidth: 100
 
 
     Rectangle {
@@ -78,13 +83,13 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
         font.family: "Arial"
         font.bold: true
         font.letterSpacing: -1
         font.pixelSize: button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
+        font.capitalization : Font.AllUppercase
     }
 
     Image {

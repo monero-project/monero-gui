@@ -15,3 +15,10 @@ function tr(text) {
 function lineBreaksToSpaces(text) {
     return text.trim().replace(/(\r\n|\n|\r)/gm, " ");
 }
+
+function usefulName(path) {
+    // arbitrary "short enough" limit
+    if (path.length < 32)
+        return path
+    return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+}
