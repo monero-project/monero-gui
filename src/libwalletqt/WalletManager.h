@@ -117,6 +117,7 @@ public:
     Q_INVOKABLE double getPasswordStrength(const QString &password) const;
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
+    Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
 
 signals:
 

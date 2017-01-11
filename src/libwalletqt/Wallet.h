@@ -183,6 +183,8 @@ public:
     //! verify a signed message
     Q_INVOKABLE bool verifySignedMessage(const QString &message, const QString &address, const QString &signature, bool filename = false) const;
 
+    //! Parse URI
+    Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
 
     //! saved payment id
     QString paymentId() const;

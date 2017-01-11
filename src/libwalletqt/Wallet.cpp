@@ -450,6 +450,23 @@ bool Wallet::verifySignedMessage(const QString &message, const QString &address,
     return m_walletImpl->verifySignedMessage(message.toStdString(), address.toStdString(), signature.toStdString());
   }
 }
+bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
+{
+   std::string s_address, s_payment_id, s_tx_description, s_recipient_name, s_error;
+   std::vector<std::string> s_unknown_parameters;
+   bool res= m_walletImpl->parse_uri(uri.toStdString(), s_address, s_payment_id, amount, s_tx_description, s_recipient_name, s_unknown_parameters, s_error);
+   if(res)
+   {
+       address = QString::fromStdString(s_address);
+       payment_id = QString::fromStdString(s_payment_id);
+       tx_description = QString::fromStdString(s_tx_description);
+       recipient_name = QString::fromStdString(s_recipient_name);
+       for( const auto &p : s_unknown_parameters )
+           unknown_parameters.append(QString::fromStdString(p));
+   }
+   error = QString::fromStdString(s_error);
+   return res;
+}
 
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
