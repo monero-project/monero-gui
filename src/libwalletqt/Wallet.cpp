@@ -1,5 +1,6 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
+#include "UnsignedTransaction.h"
 #include "TransactionHistory.h"
 #include "AddressBook.h"
 #include "model/TransactionHistoryModel.h"
@@ -211,7 +212,6 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
-
     if (m_daemonBlockChainTargetHeight == 0
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
@@ -323,9 +323,28 @@ void Wallet::createSweepUnmixableTransactionAsync()
     });
 }
 
+UnsignedTransaction * Wallet::loadTxFile(const QString &fileName)
+{
+    qDebug() << "Trying to sign " << fileName;
+    Monero::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTx(fileName.toStdString());
+    UnsignedTransaction * result = new UnsignedTransaction(ptImpl, this);
+    return result;
+}
+
+bool Wallet::submitTxFile(const QString &fileName) const
+{
+    qDebug() << "Trying to submit " << fileName;
+    return m_walletImpl->submitTransaction(fileName.toStdString());
+}
+
 void Wallet::disposeTransaction(PendingTransaction *t)
 {
     m_walletImpl->disposeTransaction(t->m_pimpl);
+    delete t;
+}
+
+void Wallet::disposeTransaction(UnsignedTransaction *t)
+{
     delete t;
 }
 

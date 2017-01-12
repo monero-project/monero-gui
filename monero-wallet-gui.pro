@@ -9,7 +9,7 @@ CONFIG += c++11
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
-INCLUDEPATH += $$WALLET_ROOT/include \
+INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
                 $$PWD/src \
@@ -36,7 +36,8 @@ HEADERS += \
     src/daemon/DaemonManager.h \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
-    src/zxcvbn-c/zxcvbn.h
+    src/zxcvbn-c/zxcvbn.h \
+    src/libwalletqt/UnsignedTransaction.h
 
 
 SOURCES += main.cpp \
@@ -59,7 +60,8 @@ SOURCES += main.cpp \
     src/daemon/DaemonManager.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
-    src/zxcvbn-c/zxcvbn.c
+    src/zxcvbn-c/zxcvbn.c \
+    src/libwalletqt/UnsignedTransaction.cpp
 
 lupdate_only {
 SOURCES = *.qml \
@@ -289,7 +291,8 @@ OTHER_FILES += \
     $$TRANSLATIONS
 
 DISTFILES += \
-    notes.txt
+    notes.txt \
+    monero/src/wallet/CMakeLists.txt
 
 
 # windows application icon

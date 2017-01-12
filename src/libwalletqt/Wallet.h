@@ -6,6 +6,7 @@
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
+#include "UnsignedTransaction.h"
 
 namespace Monero {
     class Wallet; // forward declaration
@@ -162,8 +163,18 @@ public:
     //! creates async sweep unmixable transaction
     Q_INVOKABLE void createSweepUnmixableTransactionAsync();
 
+    //! Sign a transfer from file
+    Q_INVOKABLE UnsignedTransaction * loadTxFile(const QString &fileName);
+
+    //! Submit a transfer from file
+    Q_INVOKABLE bool submitTxFile(const QString &fileName) const;
+
+
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
+
+    //! deletes unsigned transaction and frees memory
+    Q_INVOKABLE void disposeTransaction(UnsignedTransaction * t);
 
     //! returns transaction history
     TransactionHistory * history() const;

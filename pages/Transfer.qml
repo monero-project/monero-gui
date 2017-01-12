@@ -92,7 +92,10 @@ Rectangle {
 
     Item {
       id: pageRoot
-      anchors.fill: parent
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+      height:550
     Label {
         id: amountLabel
         anchors.left: parent.left
@@ -381,7 +384,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        enabled : pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+        enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
         onClicked: {
             console.log("Transfer: paymentClicked")
             var priority = priorityModel.get(priorityDropdown.currentIndex).priority
@@ -395,25 +398,7 @@ Rectangle {
         }
     }
 
-    StandardButton {
-        id: sweepUnmixableButton
-        anchors.right: parent.right
-        anchors.top: descriptionLine.bottom
-        anchors.rightMargin: 17
-        anchors.topMargin: 17
-        width: 60*2
-        text: qsTr("SWEEP UNMIXABLE") + translationManager.emptyString
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        enabled : true
-        onClicked: {
-            console.log("Transfer: sweepUnmixableClicked")
-            root.sweepUnmixableClicked()
-
-        }
-    }
+    } // pageRoot
 
     Rectangle {
         id:desaturate
@@ -422,7 +407,192 @@ Rectangle {
         opacity: 0.1
         visible: (pageRoot.enabled)? 0 : 1;
     }
-    } // Rectangle
+
+    ColumnLayout {
+        anchors.top: pageRoot.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 17
+        spacing:10
+        enabled: !viewOnly || pageRoot.enabled
+
+        RowLayout {
+            Label {
+                id: manageWalletLabel
+                Layout.fillWidth: true
+                color: "#4A4949"
+                text: qsTr("Advanced") + translationManager.emptyString
+                fontSize: 16
+                Layout.topMargin: 20
+            }
+        }
+
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+
+        RowLayout {
+            StandardButton {
+                id: sweepUnmixableButton
+                text: qsTr("SWEEP UNMIXABLE") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                enabled : pageRoot.enabled
+                onClicked: {
+                    console.log("Transfer: sweepUnmixableClicked")
+                    root.sweepUnmixableClicked()
+                }
+            }
+
+            StandardButton {
+                id: saveTxButton
+                text: qsTr("create tx file") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: appWindow.viewOnly
+                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+                onClicked: {
+                    console.log("Transfer: saveTx Clicked")
+                    var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                    console.log("priority: " + priority)
+                    console.log("amount: " + amountLine.text)
+                    addressLine.text = addressLine.text.trim()
+                    paymentIdLine.text = paymentIdLine.text.trim()
+                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                                   priority, descriptionLine.text)
+
+                }
+            }
+
+            StandardButton {
+                id: signTxButton
+                text: qsTr("sign tx file") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: !appWindow.viewOnly
+                onClicked: {
+                    console.log("Transfer: sign tx clicked")
+                    signTxDialog.open();
+                }
+            }
+
+            StandardButton {
+                id: submitTxButton
+                text: qsTr("submit tx file") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible: appWindow.viewOnly
+                enabled: pageRoot.enabled
+                onClicked: {
+                    console.log("Transfer: submit tx clicked")
+                    submitTxDialog.open();
+                }
+            }
+        }
+
+
+    }
+
+
+
+    //SignTxDialog
+    FileDialog {
+        id: signTxDialog
+        title: "Please choose a file"
+        folder: "file://" +moneroAccountsDir
+        nameFilters: [ "Unsigned transfers (*)"]
+
+        onAccepted: {
+            var path = walletManager.urlToLocalPath(fileUrl);
+            // Load the unsigned tx from file
+            var transaction = currentWallet.loadTxFile(path);
+
+            if (transaction.status !== PendingTransaction.Status_Ok) {
+                console.error("Can't load unsigned transaction: ", transaction.errorString);
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Can't load unsigned transaction: ") + transaction.errorString
+                informationPopup.icon  = StandardIcon.Critical
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
+                // deleting transaction object, we don't want memleaks
+                transaction.destroy();
+            } else {
+                    confirmationDialog.text =  qsTr("\nNumber of transactions: ") + transaction.txCount
+                for (var i = 0; i < transaction.txCount; ++i) {
+                    confirmationDialog.text += qsTr("\nTransaction #%1").arg(i+1)
+                    +qsTr("\nRecipient: ") + transaction.recipientAddress[i]
+                    + (transaction.paymentId[i] == "" ? "" : qsTr("\n\payment ID: ") + transaction.paymentId[i])
+                    + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount(i))
+                    + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee(i))
+                    + qsTr("\nMixin: ") + transaction.mixin(i)
+
+                    // TODO: add descriptions to unsigned_tx_set?
+    //              + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
+                    + translationManager.emptyString
+                    if (i > 0) {
+                        confirmationDialog.text += "\n\n"
+                    }
+
+                }
+
+                console.log(transaction.confirmationMessage);
+
+                // Show confirmation dialog
+                confirmationDialog.title = qsTr("Confirmation") + translationManager.emptyString
+                confirmationDialog.icon = StandardIcon.Question
+                confirmationDialog.onAcceptedCallback = function() {
+                    transaction.sign(path+"_signed");
+                    transaction.destroy();
+                };
+                confirmationDialog.onRejectedCallback = transaction.destroy;
+
+                confirmationDialog.open()
+            }
+
+        }
+        onRejected: {
+            // File dialog closed
+            console.log("Canceled")
+        }
+    }
+
+    //SignTxDialog
+    FileDialog {
+        id: submitTxDialog
+        title: "Please choose a file"
+        folder: "file://" +moneroAccountsDir
+        nameFilters: [ "signed transfers (*)"]
+
+        onAccepted: {
+            if(!currentWallet.submitTxFile(walletManager.urlToLocalPath(fileUrl))){
+                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Can't submit transaction: ") + currentWallet.errorString
+                informationPopup.icon  = StandardIcon.Critical
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
+            } else {
+                informationPopup.title = qsTr("Information") + translationManager.emptyString
+                informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
+                informationPopup.icon  = StandardIcon.Information
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
+            }
+        }
+        onRejected: {
+            console.log("Canceled")
+        }
+
+    }
 
     Rectangle {
         x: root.width/2 - width/2
@@ -465,9 +635,10 @@ Rectangle {
         }
 
         if (currentWallet.viewOnly) {
-            statusText.text = qsTr("Wallet is view only.")
-            return;
+           // statusText.text = qsTr("Wallet is view only.")
+           //return;
         }
+        pageRoot.enabled = false;
 
         switch (currentWallet.connected) {
         case Wallet.ConnectionStatus_Disconnected:
