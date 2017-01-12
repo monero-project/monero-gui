@@ -263,9 +263,18 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 13
-                font.letterSpacing: -1
-                color: "#545454"
-                text: (typeof blockHeight != "undefined")? blockHeight : qsTr("Pending")  + translationManager.emptyString
+                color:  (confirmations < 10)? "#FF6C3C" : "#545454"
+                text: {
+                    if (!isPending)
+                        if(confirmations < 10)
+                            return blockHeight + " " + qsTr("(%1/10 confirmations)").arg(confirmations)
+                        else
+                            return blockHeight
+                    if (!isOut)
+                        return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    return qsTr("PENDING") + translationManager.emptyString
+
+                }
             }
         }
 

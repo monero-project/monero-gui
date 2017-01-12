@@ -208,6 +208,7 @@ ApplicationWindow {
             currentWallet.newBlock.disconnect(onWalletNewBlock)
             currentWallet.moneySpent.disconnect(onWalletMoneySent)
             currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+            currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
             currentWallet.transactionCreated.disconnect(onTransactionCreated)
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             middlePanel.paymentClicked.disconnect(handlePayment);
@@ -229,6 +230,7 @@ ApplicationWindow {
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
+        currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         middlePanel.paymentClicked.connect(handlePayment);
@@ -378,12 +380,21 @@ ApplicationWindow {
               splashCounter = currHeight
               leftPanel.progressBar.updateProgress(currHeight,currentWallet.daemonBlockChainTargetHeight());
             }
+
+            // Update num of confirmations on history page
+            // TODO: check performance on big wallets. Maybe no need to refresh full history?
+            currentWallet.history.refresh()
     }
 
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
         currentWallet.refresh()
         currentWallet.history.refresh() // this will refresh model
+    }
+
+    function onWalletUnconfirmedMoneyReceived(txId, amount) {
+        // refresh history
+        currentWallet.history.refresh()
     }
 
     function onWalletMoneySent(txId, amount) {

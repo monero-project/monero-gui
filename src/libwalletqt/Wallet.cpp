@@ -44,6 +44,12 @@ public:
         emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
     }
 
+    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount)
+    {
+        qDebug() << __FUNCTION__;
+        emit m_wallet->unconfirmedMoneyReceived(QString::fromStdString(txId), amount);
+    }
+
     virtual void newBlock(uint64_t height)
     {
         // qDebug() << __FUNCTION__;
