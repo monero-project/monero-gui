@@ -507,6 +507,11 @@ bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id
    return res;
 }
 
+bool Wallet::rescanSpent()
+{
+    return m_walletImpl->rescanSpent();
+}
+
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)

@@ -498,6 +498,32 @@ Rectangle {
                     submitTxDialog.open();
                 }
             }
+
+            StandardButton {
+                id: rescanSpentButton
+                text: qsTr("Rescan spent") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                enabled: pageRoot.enabled
+                onClicked: {
+                    if (!currentWallet.rescanSpent()) {
+                        console.error("Error: ", currentWallet.errorString);
+                        informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
+                        informationPopup.icon  = StandardIcon.Critical
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    } else {
+                        informationPopup.title = qsTr("Information") + translationManager.emptyString
+                        informationPopup.text  = qsTr("Sucessfully rescanned spent outputs") + translationManager.emptyString
+                        informationPopup.icon  = StandardIcon.Information
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    }
+                }
+            }
         }
 
 
