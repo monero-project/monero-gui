@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets multimedia
 
 WALLET_ROOT=$$PWD/monero
 
@@ -12,6 +12,7 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 INCLUDEPATH += $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
+                $$PWD/src/QR-Code-scanner \
                 $$PWD/src \
                 $$WALLET_ROOT/src
 
@@ -36,8 +37,9 @@ HEADERS += \
     src/daemon/DaemonManager.h \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
-    src/zxcvbn-c/zxcvbn.h
-
+    src/zxcvbn-c/zxcvbn.h \
+    src/QR-Code-scanner/QZBarThread.h \
+    src/QR-Code-scanner/QrCodeScanner.h 
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -59,7 +61,9 @@ SOURCES += main.cpp \
     src/daemon/DaemonManager.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
-    src/zxcvbn-c/zxcvbn.c
+    src/zxcvbn-c/zxcvbn.c \
+    src/QR-Code-scanner/QZBarThread.cpp \
+    src/QR-Code-scanner/QrCodeScanner.cpp 
 
 lupdate_only {
 SOURCES = *.qml \
@@ -111,6 +115,7 @@ win32 {
         -lboost_program_options-mt-s \
         -lssl \
         -lcrypto \
+        -lzbar \
         -Wl,-Bdynamic \
         -lws2_32 \
         -lwsock32 \
@@ -162,6 +167,14 @@ linux {
     
 }
 
+linux:!android {
+    LIBS += -lzbar
+}
+android {
+    INCLUDEPATH += $$PWD/../ZBar/include
+    LIBS += -lzbarjni -liconv
+}
+
 macx {
     # mixing static and shared libs are not supported on mac
     # CONFIG(static) {
@@ -182,6 +195,7 @@ macx {
         -lboost_program_options \
         -lssl \
         -lcrypto \
+        -lzbar \
         -ldl
 
 }

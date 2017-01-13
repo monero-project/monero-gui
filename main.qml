@@ -795,7 +795,10 @@ ApplicationWindow {
         messageText: qsTr("Please wait...")
     }
 
-
+    QRCodeScanner {
+        id: cameraUi
+        visible : false
+    }
 
     Item {
         id: rootItem

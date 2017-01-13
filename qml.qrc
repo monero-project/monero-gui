@@ -122,5 +122,6 @@
         <file>pages/Sign.qml</file>
         <file>components/DaemonManagerDialog.qml</file>
         <file>version.js</file>
+        <file>components/QRCodeScanner.qml</file>
     </qresource>
 </RCC>
