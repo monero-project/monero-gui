@@ -327,14 +327,17 @@ UnsignedTransaction * Wallet::loadTxFile(const QString &fileName)
 {
     qDebug() << "Trying to sign " << fileName;
     Monero::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTx(fileName.toStdString());
-    UnsignedTransaction * result = new UnsignedTransaction(ptImpl, this);
+    UnsignedTransaction * result = new UnsignedTransaction(ptImpl, m_walletImpl, this);
     return result;
 }
 
 bool Wallet::submitTxFile(const QString &fileName) const
 {
     qDebug() << "Trying to submit " << fileName;
-    return m_walletImpl->submitTransaction(fileName.toStdString());
+    if (!m_walletImpl->submitTransaction(fileName.toStdString()))
+        return false;
+    // import key images
+    return m_walletImpl->importKeyImages(fileName.toStdString() + "_keyImages");
 }
 
 void Wallet::disposeTransaction(PendingTransaction *t)

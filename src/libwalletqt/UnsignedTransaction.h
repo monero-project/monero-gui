@@ -47,12 +47,13 @@ public:
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit UnsignedTransaction(Monero::UnsignedTransaction * pt, QObject *parent = 0);
+    explicit UnsignedTransaction(Monero::UnsignedTransaction * pt, Monero::Wallet *walletImpl, QObject *parent = 0);
     ~UnsignedTransaction();
 private:
     friend class Wallet;
     Monero::UnsignedTransaction * m_pimpl;
     QString m_fileName;
+    Monero::Wallet * m_walletImpl;
 };
 
 #endif // UNSIGNEDTRANSACTION_H

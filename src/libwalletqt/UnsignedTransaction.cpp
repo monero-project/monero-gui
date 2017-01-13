@@ -69,7 +69,10 @@ QStringList UnsignedTransaction::recipientAddress() const
 
 bool UnsignedTransaction::sign(const QString &fileName) const
 {
-    return m_pimpl->sign(fileName.toStdString());
+    if(!m_pimpl->sign(fileName.toStdString()))
+        return false;
+    // export key images
+    return m_walletImpl->exportKeyImages(fileName.toStdString() + "_keyImages");
 }
 
 void UnsignedTransaction::setFilename(const QString &fileName)
@@ -77,8 +80,8 @@ void UnsignedTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
-UnsignedTransaction::UnsignedTransaction(Monero::UnsignedTransaction *pt, QObject *parent)
-    : QObject(parent), m_pimpl(pt)
+UnsignedTransaction::UnsignedTransaction(Monero::UnsignedTransaction *pt, Monero::Wallet *walletImpl, QObject *parent)
+    : QObject(parent), m_pimpl(pt), m_walletImpl(walletImpl)
 {
 
 }
