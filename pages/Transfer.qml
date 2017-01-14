@@ -29,6 +29,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import QtMultimedia 5.4
 import moneroComponents.PendingTransaction 1.0
 import "../components"
 import moneroComponents.Wallet 1.0
@@ -75,6 +76,15 @@ Rectangle {
         print ("PrivacyLevel changed:"  + fillLevel)
         print ("mixin count: "  + mixin)
         privacyLabel.text = qsTr("Privacy level (mixin %1)").arg(mixin) + translationManager.emptyString
+    }
+
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        addressLine.text = address
+        paymentIdLine.text = payment_id
+        amountLine.text = amount
+        descriptionLine.text = recipient_name + " " + tx_description
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
     // Information dialog
@@ -246,11 +256,29 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
 
+        StandardButton {
+            id: qrfinderButton
+            anchors.left: parent.left
+            anchors.leftMargin: 17
+            anchors.topMargin: 5
+            text: qsTr("QRCODE") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            visible : QtMultimedia.availableCameras.length > 0
+            enabled : visible
+            width: visible ? 60 : 0
+            onClicked: {
+                cameraUi.state = "PhotoCapture"
+                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+            }
+        }
         LineEdit {
             id: addressLine
-            anchors.left: parent.left
+            anchors.left: qrfinderButton.right
             anchors.right: resolveButton.left
-            anchors.leftMargin: 17
+            //anchors.leftMargin: 17
             anchors.topMargin: 5
             placeholderText: "4..."
             // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
