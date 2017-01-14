@@ -103,6 +103,10 @@ public:
     Q_INVOKABLE quint64 blockchainTargetHeight() const;
     Q_INVOKABLE double miningHashRate() const;
 
+    Q_INVOKABLE bool isMining() const;
+    Q_INVOKABLE bool startMining(const QString &address, quint32 threads);
+    Q_INVOKABLE bool stopMining();
+
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;

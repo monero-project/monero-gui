@@ -52,6 +52,7 @@ Rectangle {
     property History historyView: History { }
     property Sign signView: Sign { }
     property Settings settingsView: Settings { }
+    property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
 
 
@@ -144,7 +145,7 @@ Rectangle {
                PropertyChanges { target: root; currentView: settingsView }
             }, State {
                 name: "Mining"
-                PropertyChanges { /*TODO*/ }
+                PropertyChanges { target: root; currentView: miningView }
             }
         ]
 
