@@ -249,6 +249,12 @@ QString WalletManager::resolveOpenAlias(const QString &address) const
     res = std::string(dnssec_valid ? "true" : "false") + "|" + res;
     return QString::fromStdString(res);
 }
+bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
+{
+    if (m_currentWallet)
+        return m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
+    return false;
+}
 
 void WalletManager::setLogLevel(int logLevel)
 {
