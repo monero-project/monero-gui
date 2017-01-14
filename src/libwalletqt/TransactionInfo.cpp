@@ -46,6 +46,11 @@ quint64 TransactionInfo::blockHeight() const
     return m_pimpl->blockHeight();
 }
 
+quint64 TransactionInfo::confirmations() const
+{
+    return m_pimpl->confirmations();
+}
+
 QString TransactionInfo::hash() const
 {
     return QString::fromStdString(m_pimpl->hash());

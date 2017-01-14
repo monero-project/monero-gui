@@ -138,7 +138,7 @@ Rectangle {
                 if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
                      informationPopup.text  = qsTr("Invalid address")
                 else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
-                     informationPopup.text  = qsTr("Invalid Payment ID")
+                     informationPopup.text  = currentWallet.addressBook.errorString()
                 else
                      informationPopup.text  = qsTr("Can't create entry")
 

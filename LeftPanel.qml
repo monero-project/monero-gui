@@ -39,6 +39,7 @@ Rectangle {
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
+    property alias minutesToUnlockTxt: unlockedBalanceLabel.text
 
     signal dashboardClicked()
     signal historyClicked()
@@ -154,7 +155,8 @@ Rectangle {
         }
 
         Label {
-            text: qsTr("Unlocked balance") + translationManager.emptyString
+            id: unlockedBalanceLabel
+            text: qsTr("Unlocked balance")
             anchors.left: parent.left
             anchors.leftMargin: 50
             tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString

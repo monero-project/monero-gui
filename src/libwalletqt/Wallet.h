@@ -206,6 +206,7 @@ signals:
 
     void moneySpent(const QString &txId, quint64 amount);
     void moneyReceived(const QString &txId, quint64 amount);
+    void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height);
     void historyModelChanged() const;
 

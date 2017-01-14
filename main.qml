@@ -61,6 +61,10 @@ ApplicationWindow {
     property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
+    property string walletName
+    property bool viewOnly: false
+    property bool foundNewBlock: false
+    property int timeToUnlock: 0
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -208,6 +212,7 @@ ApplicationWindow {
             currentWallet.newBlock.disconnect(onWalletNewBlock)
             currentWallet.moneySpent.disconnect(onWalletMoneySent)
             currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+            currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
             currentWallet.transactionCreated.disconnect(onTransactionCreated)
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             middlePanel.paymentClicked.disconnect(handlePayment);
@@ -229,6 +234,7 @@ ApplicationWindow {
         currentWallet.newBlock.connect(onWalletNewBlock)
         currentWallet.moneySpent.connect(onWalletMoneySent)
         currentWallet.moneyReceived.connect(onWalletMoneyReceived)
+        currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         middlePanel.paymentClicked.connect(handlePayment);
@@ -291,6 +297,15 @@ ApplicationWindow {
         console.log(">>> wallet updated")
         middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
         middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+        console.log("time to unlock: ", currentWallet.history.minutesToUnlock);
+        // Update history if new block found since last update and balance is locked.
+        if(foundNewBlock && currentWallet.history.locked) {
+            foundNewBlock = false;
+            console.log("New block found - updating history")
+            currentWallet.history.refresh()
+            timeToUnlock = currentWallet.history.minutesToUnlock
+            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
+        }
     }
 
     function onWalletRefresh() {
@@ -335,13 +350,11 @@ ApplicationWindow {
             }
         }
 
-
         // initialize transaction history once wallet is initializef first time;
         if (!walletInitialized) {
             currentWallet.history.refresh()
             walletInitialized = true
-        }
-
+        } 
         onWalletUpdate();
     }
 
@@ -368,7 +381,6 @@ ApplicationWindow {
 
 
     function onWalletNewBlock(blockHeight) {
-
             // Update progress bar
             var currHeight = blockHeight
             //fast refresh until restoreHeight is reached
@@ -378,12 +390,19 @@ ApplicationWindow {
               splashCounter = currHeight
               leftPanel.progressBar.updateProgress(currHeight,currentWallet.daemonBlockChainTargetHeight());
             }
+            foundNewBlock = true;
     }
 
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
         currentWallet.refresh()
         currentWallet.history.refresh() // this will refresh model
+    }
+
+    function onWalletUnconfirmedMoneyReceived(txId, amount) {
+        // refresh history
+        console.log("unconfirmed money found")
+        currentWallet.history.refresh()
     }
 
     function onWalletMoneySent(txId, amount) {
