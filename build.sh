@@ -41,7 +41,7 @@ MONERO_DIR=monero
 MONEROD_EXEC=monerod
 
 # Build libwallet if monero folder doesnt exist
-if [ ! -d $MONERO_DIR ]; then 
+if [ ! -d $MONERO_DIR/src ]; then 
     $SHELL get_libwallet_api.sh $BUILD_TYPE
 fi
  

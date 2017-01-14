@@ -54,14 +54,11 @@ source $ROOT_DIR/utils.sh
 INSTALL_DIR=$ROOT_DIR/wallet
 MONERO_DIR=$ROOT_DIR/monero
 
-
-if [ ! -d $MONERO_DIR ]; then
-    git clone --depth=1 $MONERO_URL $MONERO_DIR --branch $MONERO_BRANCH --single-branch
-else
-    cd $MONERO_DIR;
-    git checkout $MONERO_BRANCH
-    git pull;
+# init and update monero submodule
+if [ ! -d $MONERO_DIR/src ]; then
+    git submodule init monero
 fi
+git submodule update
 
 echo "cleaning up existing monero build dir, libs and includes"
 rm -fr $MONERO_DIR/build
