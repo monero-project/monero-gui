@@ -76,7 +76,7 @@ Rectangle {
             Label {
                 id: soloTitleLabel
                 fontSize: 24
-                text: qsTr("Monero solo mining")
+                text: qsTr("Solo mining")
             }
 
             Label {
@@ -103,7 +103,7 @@ Rectangle {
                 Label {
                     id: soloMinerThreadsLabel
                     color: "#4A4949"
-                    text: qsTr("Solo miner threads") + translationManager.emptyString
+                    text: qsTr("CPU threads") + translationManager.emptyString
                     fontSize: 16
                 }
                 LineEdit {
@@ -119,7 +119,7 @@ Rectangle {
                 Label {
                     id: manageSoloMinerLabel
                     color: "#4A4949"
-                    text: qsTr("Manage solo miner") + translationManager.emptyString
+                    text: qsTr("Manage miner") + translationManager.emptyString
                     fontSize: 16
                 }
 
