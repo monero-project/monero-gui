@@ -40,6 +40,7 @@
 #include "Wallet.h"
 #include "QRCodeImageProvider.h"
 #include "PendingTransaction.h"
+#include "UnsignedTransaction.h"
 #include "TranslationManager.h"
 #include "TransactionInfo.h"
 #include "TransactionHistory.h"
@@ -71,6 +72,9 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<PendingTransaction>("moneroComponents.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
+
+    qmlRegisterUncreatableType<UnsignedTransaction>("moneroComponents.UnsignedTransaction", 1, 0, "UnsignedTransaction",
+                                                   "UnsignedTransaction can't be instantiated directly");
 
     qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
                                                    "WalletManager can't be instantiated directly");

@@ -13,7 +13,10 @@ QString PendingTransaction::errorString() const
 
 bool PendingTransaction::commit()
 {
-    return m_pimpl->commit();
+    // Save transaction to file if fileName is set.
+    if(!m_fileName.isEmpty())
+        return m_pimpl->commit(m_fileName.toStdString());
+    return m_pimpl->commit(m_fileName.toStdString());
 }
 
 quint64 PendingTransaction::amount() const
@@ -45,6 +48,11 @@ QStringList PendingTransaction::txid() const
 quint64 PendingTransaction::txCount() const
 {
     return m_pimpl->txCount();
+}
+
+void PendingTransaction::setFilename(const QString &fileName)
+{
+    m_fileName = fileName;
 }
 
 PendingTransaction::PendingTransaction(Monero::PendingTransaction *pt, QObject *parent)

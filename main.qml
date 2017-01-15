@@ -228,6 +228,8 @@ ApplicationWindow {
         currentWallet = wallet
         updateSyncing(false)
 
+        viewOnly = currentWallet.viewOnly;
+
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
@@ -252,12 +254,20 @@ ApplicationWindow {
         return wallet_path;
     }
 
+    function usefulName(path) {
+        // arbitrary "short enough" limit
+        if (path.length < 32)
+            return path
+        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+    }
+
     function onWalletConnectionStatusChanged(){
         console.log("Wallet connection status changed")
         middlePanel.updateStatus();
     }
 
     function onWalletOpened(wallet) {
+        walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
             if (appWindow.password === '') {
@@ -265,7 +275,7 @@ ApplicationWindow {
                 console.log("closing wallet async : " + wallet.address)
                 closeWallet();
                 // try to open wallet with password;
-                passwordDialog.open(wallet.path);
+                passwordDialog.open(walletName);
             } else {
                 // opening with password but password doesn't match
                 console.error("Error opening wallet with password: ", wallet.errorString);
@@ -277,7 +287,7 @@ ApplicationWindow {
                 closeWallet();
                 informationPopup.open()
                 informationPopup.onCloseCallback = function() {
-                    passwordDialog.open(wallet.path)
+                    passwordDialog.open(walletName)
                 }
             }
             return;
@@ -285,7 +295,6 @@ ApplicationWindow {
 
         // wallet opened successfully, subscribing for wallet updates
         connectWallet(wallet)
-
     }
 
 
@@ -466,7 +475,7 @@ ApplicationWindow {
 
 
     // called on "transfer"
-    function handlePayment(address, paymentId, amount, mixinCount, priority, description) {
+    function handlePayment(address, paymentId, amount, mixinCount, priority, description, createFile) {
         console.log("Creating transaction: ")
         console.log("\taddress: ", address,
                     ", payment_id: ", paymentId,
@@ -514,6 +523,24 @@ ApplicationWindow {
             currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
     }
 
+    //Choose where to save transaction
+    FileDialog {
+        id: saveTxDialog
+        title: "Please choose a location"
+        folder: "file://" +moneroAccountsDir
+        selectExisting: false;
+
+        onAccepted: {
+            handleTransactionConfirmed()
+        }
+        onRejected: {
+            // do nothing
+
+        }
+
+    }
+
+
     function handleSweepUnmixable() {
         console.log("Creating transaction: ")
 
@@ -554,7 +581,7 @@ ApplicationWindow {
     }
 
     // called after user confirms transaction
-    function handleTransactionConfirmed() {
+    function handleTransactionConfirmed(fileName) {
         // grab transaction.txid before commit, since it clears it.
         // we actually need to copy it, because QML will incredibly
         // call the function multiple times when the variable is used
@@ -564,6 +591,20 @@ ApplicationWindow {
         var txid = [], txid_org = transaction.txid, txid_text = ""
         for (var i = 0; i < txid_org.length; ++i)
           txid[i] = txid_org[i]
+
+        // View only wallet - we save the tx
+        if(viewOnly && saveTxDialog.fileUrl){
+            // No file specified - abort
+            if(!saveTxDialog.fileUrl) {
+                currentWallet.disposeTransaction(transaction)
+                return;
+            }
+
+            var path = walletManager.urlToLocalPath(saveTxDialog.fileUrl)
+
+            // Store to file
+            transaction.setFilename(path);
+        }
 
         if (!transaction.commit()) {
             console.log("Error committing transaction: " + transaction.errorString);
@@ -577,7 +618,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = qsTr("Money sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Money sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -674,7 +715,6 @@ ApplicationWindow {
         rootItem.state = "wizard"
     }
 
-
     objectName: "appWindow"
     visible: true
     width: rightPanelExpanded ? 1269 : 1269 - 300
@@ -764,9 +804,30 @@ ApplicationWindow {
         id: transactionConfirmationPopup
         onAccepted: {
             close();
-            handleTransactionConfirmed()
+
+            // Save transaction to file if view only wallet
+            if(viewOnly) {
+                saveTxDialog.open();
+                return;
+            } else
+                handleTransactionConfirmed()
+        }        
+    }
+
+    StandardDialog {
+        id: confirmationDialog
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted:  {
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+        onRejected: {
+            if (onRejectedCallback)
+                onRejectedCallback();
         }
     }
+
 
     //Open Wallet from file
     FileDialog {

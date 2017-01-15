@@ -6,6 +6,7 @@
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
+#include "UnsignedTransaction.h"
 
 namespace Monero {
     class Wallet; // forward declaration
@@ -36,7 +37,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
-
+    Q_PROPERTY(bool viewOnly READ viewOnly)
 
 public:
 
@@ -98,6 +99,9 @@ public:
     //! initializes wallet asynchronously
     Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
 
+    //! create a view only wallet
+    Q_INVOKABLE bool createViewOnly(const QString &path, const QString &password) const;
+
     //! connects to daemon
     Q_INVOKABLE bool connectToDaemon();
 
@@ -109,6 +113,9 @@ public:
 
     //! returns unlocked balance
     Q_INVOKABLE quint64 unlockedBalance() const;
+
+    //! returns if view only wallet
+    Q_INVOKABLE bool viewOnly() const;
 
     //! returns current wallet's block height
     //! (can be less than daemon's blockchain height when wallet sync in progress)
@@ -156,8 +163,18 @@ public:
     //! creates async sweep unmixable transaction
     Q_INVOKABLE void createSweepUnmixableTransactionAsync();
 
+    //! Sign a transfer from file
+    Q_INVOKABLE UnsignedTransaction * loadTxFile(const QString &fileName);
+
+    //! Submit a transfer from file
+    Q_INVOKABLE bool submitTxFile(const QString &fileName) const;
+
+
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
+
+    //! deletes unsigned transaction and frees memory
+    Q_INVOKABLE void disposeTransaction(UnsignedTransaction * t);
 
     //! returns transaction history
     TransactionHistory * history() const;
@@ -193,8 +210,9 @@ public:
 
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
-
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
+    // Rescan spent outputs
+    Q_INVOKABLE bool rescanSpent();
 
     // TODO: setListenter() when it implemented in API
 signals:

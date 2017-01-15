@@ -44,6 +44,7 @@ public:
     quint64 fee() const;
     QStringList txid() const;
     quint64 txCount() const;
+    Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
     explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
@@ -51,6 +52,7 @@ private:
 private:
     friend class Wallet;
     Monero::PendingTransaction * m_pimpl;
+    QString m_fileName;
 };
 
 #endif // PENDINGTRANSACTION_H
