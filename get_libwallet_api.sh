@@ -1,11 +1,82 @@
 #!/bin/bash
-
-
 MONERO_URL=https://github.com/monero-project/monero.git
 MONERO_BRANCH=master
-# MONERO_URL=https://github.com/mbg033/monero.git
-# MONERO_BRANCH=develop
-# Buidling "debug" build optionally
+
+pushd $(pwd)
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source $ROOT_DIR/utils.sh
+
+INSTALL_DIR=$ROOT_DIR/wallet
+MONERO_DIR=$ROOT_DIR/monero
+BUILD_LIBWALLET=false
+
+# init and update monero submodule
+if [ ! -d $MONERO_DIR/src ]; then
+    git submodule init monero
+fi
+git submodule update
+
+# get monero core tag
+get_tag
+# create local monero branch
+git -C $MONERO_DIR checkout -B $VERSIONTAG
+
+# Merge monero PR dependencies
+
+# Workaround for git username requirements
+# Save current user settings and revert back when we are done with merging PR's
+OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.user)
+OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
+git -C $MONERO_DIR config user.name "Monero GUI"
+git -C $MONERO_DIR config user.email "gui@monero.local"
+# check for PR requirements in most recent commit message (i.e requires #xxxx)
+for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
+    echo "Merging monero push request #$PR"
+    # fetch pull request and merge
+    git -C $MONERO_DIR fetch origin pull/$PR/head:PR-$PR
+    git -C $MONERO_DIR merge --quiet PR-$PR  -m "Merge monero PR #$PR"
+    BUILD_LIBWALLET=true
+done
+
+# revert back to old git config
+$(git -C $MONERO_DIR config user.user "$OLD_GIT_USER")
+$(git -C $MONERO_DIR config user.email "$OLD_GIT_EMAIL")
+
+# Build libwallet if it doesnt exist
+if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
+    echo "libwallet_merged.a not found - Building libwallet"
+    BUILD_LIBWALLET=true
+# Build libwallet if no previous version file exists
+elif [ ! -f $MONERO_DIR/version.sh ]; then 
+    echo "monero/version.h not found - Building libwallet"
+    BUILD_LIBWALLET=true
+## Compare previously built version with submodule + merged PR's version. 
+else
+    source $MONERO_DIR/version.sh
+    # compare submodule version with latest build
+    pushd "$MONERO_DIR"
+    get_tag
+    popd
+    echo "latest libwallet version: $GUI_MONERO_VERSION"
+    echo "Installed libwallet version: $VERSIONTAG"
+    # check if recent
+    if [ "$VERSIONTAG" != "$GUI_MONERO_VERSION" ]; then
+        echo "Building new libwallet version $GUI_MONERO_VERSION"
+        BUILD_LIBWALLET=true
+    else
+        echo "latest libwallet ($GUI_MONERO_VERSION) is already built. Remove monero/lib/libwallet_merged.a to force rebuild"
+    fi
+fi
+
+if [ "$BUILD_LIBWALLET" != true ]; then
+    # exit this script
+    return
+fi
+
+echo "GUI_MONERO_VERSION=\"$VERSIONTAG\"" > $MONERO_DIR/version.sh
+
+## Continue building libwallet
 
 # default build type
 BUILD_TYPE=$1
@@ -41,27 +112,8 @@ else
 fi
 
 
-# thanks to SO: http://stackoverflow.com/a/20283965/4118915
-if test -z "$CPU_CORE_COUNT"; then
-  CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
-fi
-pushd $(pwd)
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source $ROOT_DIR/utils.sh
-
-
-INSTALL_DIR=$ROOT_DIR/wallet
-MONERO_DIR=$ROOT_DIR/monero
-
-# init and update monero submodule
-if [ ! -d $MONERO_DIR/src ]; then
-    git submodule init monero
-fi
-git submodule update
-
 echo "cleaning up existing monero build dir, libs and includes"
-rm -fr $MONERO_DIR/build
+#rm -fr $MONERO_DIR/build
 rm -fr $MONERO_DIR/lib
 rm -fr $MONERO_DIR/include
 rm -fr $MONERO_DIR/bin
@@ -135,6 +187,11 @@ else
     exit 1
 fi
 
+# set CPU core count
+# thanks to SO: http://stackoverflow.com/a/20283965/4118915
+if test -z "$CPU_CORE_COUNT"; then
+  CPU_CORE_COUNT=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || sysctl -n hw.ncpu)
+fi
 
 # Build libwallet_merged
 pushd $MONERO_DIR/build/release/src/wallet
@@ -151,7 +208,6 @@ if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
     eval make install -j$CPU_CORE_COUNT
     popd
 fi
-
 
 # unbound is one more dependency. can't be merged to the wallet_merged
 # since filename conflict (random.c.obj)
