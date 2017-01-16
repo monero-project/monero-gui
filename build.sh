@@ -44,6 +44,9 @@ MONEROD_EXEC=monerod
 if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
     echo "libwallet_merged.a not found - Building libwallet"
     $SHELL get_libwallet_api.sh $BUILD_TYPE
+elif [ ! -f $MONERO_DIR/version.sh ]; then 
+    echo "monero/version.h not found - Building libwallet"
+    $SHELL get_libwallet_api.sh $BUILD_TYPE 
 else 
     source ./$MONERO_DIR/version.sh
     # update monero submodule
