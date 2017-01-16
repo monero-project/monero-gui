@@ -352,12 +352,33 @@ Rectangle {
 
             ComboBox {
                 id: logLevel
-                model: [0,1,2,3,4]
+                model: [0,1,2,3,4,"custom"]
                 currentIndex : appWindow.persistentSettings.logLevel;
                 onCurrentIndexChanged: {
-                    console.log("log level changed: ",currentIndex);
-                    walletManager.setLogLevel(currentIndex);
+                    if (currentIndex == 5) {
+                        console.log("log categories changed: ", logCategories.text);
+                        walletManager.setLogCategories(logCategories.text);
+                    }
+                    else {
+                        console.log("log level changed: ",currentIndex);
+                        walletManager.setLogLevel(currentIndex);
+                    }
                     appWindow.persistentSettings.logLevel = currentIndex;
+                }
+            }
+
+            LineEdit {
+                id: logCategories
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: ""
+                placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
+                enabled: logLevel.currentIndex == 5
+                onEditingFinished: {
+                    if(enabled) {
+                        console.log("log categories changed: ", text);
+                        walletManager.setLogCategories(text);
+                    }
                 }
             }
         }
