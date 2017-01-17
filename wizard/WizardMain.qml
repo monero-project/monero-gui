@@ -104,6 +104,7 @@ Rectangle {
     function openCreateWalletPage() {
         print ("show create wallet page");
         currentPath = "create_wallet"
+        pages = paths[currentPath]
         createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
         // goto next page
@@ -113,6 +114,7 @@ Rectangle {
     function openRecoveryWalletPage() {
         print ("show recovery wallet page");
         currentPath = "recovery_wallet"
+        pages = paths[currentPath]
         wizard.nextButton.visible = true
         // goto next page
         switchPage(true);
