@@ -73,6 +73,7 @@ SOURCES = *.qml \
 
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        monero/build/release/contrib/epee/src/libepee.a \
         -lunbound
 
 

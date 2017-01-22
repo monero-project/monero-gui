@@ -261,6 +261,11 @@ void WalletManager::setLogLevel(int logLevel)
     Monero::WalletManagerFactory::setLogLevel(logLevel);
 }
 
+void WalletManager::setLogCategories(const QString &categories)
+{
+    Monero::WalletManagerFactory::setLogCategories(categories.toStdString());
+}
+
 QString WalletManager::urlToLocalPath(const QUrl &url) const
 {
     return QDir::toNativeSeparators(url.toLocalFile());

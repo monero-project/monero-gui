@@ -112,6 +112,7 @@ public:
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;
 
     Q_INVOKABLE void setLogLevel(int logLevel);
+    Q_INVOKABLE void setLogCategories(const QString &categories);
 
     Q_INVOKABLE quint64 add(quint64 x, quint64 y) const { return x + y; }
     Q_INVOKABLE quint64 sub(quint64 x, quint64 y) const { return x - y; }
