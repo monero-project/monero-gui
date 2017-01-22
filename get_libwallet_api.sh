@@ -15,7 +15,7 @@ BUILD_LIBWALLET=false
 if [ ! -d $MONERO_DIR/src ]; then
     git submodule init monero
 fi
-git submodule update
+git submodule update --remote
 
 # get monero core tag
 get_tag
