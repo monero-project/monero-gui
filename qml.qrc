@@ -124,5 +124,6 @@
         <file>version.js</file>
         <file>wizard/WizardPasswordUI.qml</file>
         <file>wizard/WizardCreateViewOnlyWallet.qml</file>
+        <file>components/DaemonConsole.qml</file>
     </qresource>
 </RCC>

@@ -241,6 +241,23 @@ Rectangle {
                     daemonConsolePopup.open();
                 }
             }
+
+            StandardButton {
+                visible: true
+                id: daemonStatusButton
+                text: qsTr("Status") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonManager.sendCommand("status",currentWallet.testnet);
+                    daemonConsolePopup.open();
+                }
+            }
+
+
+
         }
 
         RowLayout {
@@ -416,11 +433,10 @@ Rectangle {
     }
 
     // Daemon console
-    StandardDialog {
+    DaemonConsole {
         id: daemonConsolePopup
         height:500
         width:800
-        cancelVisible: false
         title: qsTr("Daemon log")
         onAccepted: {
             close();

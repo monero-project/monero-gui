@@ -98,6 +98,11 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
+bool Wallet::testnet() const
+{
+    return m_walletImpl->testnet();
+}
+
 Wallet::ConnectionStatus Wallet::connected() const
 {
     // cache connection status

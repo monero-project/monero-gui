@@ -38,6 +38,7 @@ Item {
     property int fontSize: 18
     property bool error: false
     signal editingFinished()
+    signal accepted();
 
     height: 37
 
@@ -69,5 +70,6 @@ Item {
         anchors.rightMargin: 30
         font.pixelSize: parent.fontSize
         onEditingFinished: item.editingFinished()
+        onAccepted: item.accepted();
     }
 }
