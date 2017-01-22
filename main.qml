@@ -663,7 +663,7 @@ ApplicationWindow {
                 else {
                     var dCurrentBlock = currentWallet.daemonBlockChainHeight();
                     var confirmations = dCurrentBlock - height
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmations").arg(received).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
             else {
