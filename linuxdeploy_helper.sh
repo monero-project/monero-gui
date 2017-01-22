@@ -11,12 +11,12 @@ platform=$(get_platform)
 
 # Copy dependencies
 EXCLUDE='libstdc++|libgcc_s.so|libc.so|libpthread'
-cp -rv /usr/lib/x86_64-linux-gnu/qt5/qml $TARGET
-cp -rv /usr/lib/x86_64-linux-gnu/qt5/plugins $TARGET
-mkdir -p $TARGET/libs
-ldd $TARGET/$GUI_EXEC | grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs
-ldd $TARGET/plugins/platforms/libqxcb.so| grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs
-cp -v /usr/lib/x86_64-linux-gnu/libQt5XmlPatterns.so.5 $TARGET/libs
+cp -rv /usr/lib/x86_64-linux-gnu/qt5/qml $TARGET || exit
+cp -rv /usr/lib/x86_64-linux-gnu/qt5/plugins $TARGET || exit
+mkdir -p $TARGET/libs || exit
+ldd $TARGET/$GUI_EXEC | grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
+ldd $TARGET/plugins/platforms/libqxcb.so| grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
+cp -v /usr/lib/x86_64-linux-gnu/libQt5XmlPatterns.so.5 $TARGET/libs || exit
 
 # Create start script
 cat > $TARGET/start-gui.sh <<EOL
