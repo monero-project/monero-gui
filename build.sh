@@ -40,31 +40,8 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MONERO_DIR=monero
 MONEROD_EXEC=monerod
 
-# Build libwallet if it doesnt exist
-if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
-    echo "libwallet_merged.a not found - Building libwallet"
-    $SHELL get_libwallet_api.sh $BUILD_TYPE
-elif [ ! -f $MONERO_DIR/version.sh ]; then 
-    echo "monero/version.h not found - Building libwallet"
-    $SHELL get_libwallet_api.sh $BUILD_TYPE 
-else 
-    source ./$MONERO_DIR/version.sh
-    # update monero submodule
-    git submodule update
-    # compare submodule version with latest build
-    pushd "$MONERO_DIR"
-    get_tag
-    popd
-    echo "latest libwallet version: $GUI_MONERO_VERSION"
-    echo "Installed libwallet version: $VERSIONTAG"
-    # check if recent
-    if [ "$VERSIONTAG" != "$GUI_MONERO_VERSION" ]; then
-        echo "Building new libwallet version $GUI_MONERO_VERSION"
-        $SHELL get_libwallet_api.sh $BUILD_TYPE 
-    else
-        echo "latest libwallet ($GUI_MONERO_VERSION) is already built. Run ./get_libwallet_api.sh to force rebuild"
-    fi
-fi
+# build libwallet
+$SHELL get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
 make -C src/zxcvbn-c
@@ -94,7 +71,6 @@ pushd "$MONERO_DIR"
 get_tag
 popd
 echo "var GUI_MONERO_VERSION = \"$VERSIONTAG\"" >> version.js
-echo "GUI_MONERO_VERSION=\"$VERSIONTAG\"" >> $MONERO_DIR/version.sh
 
 cd build
 qmake ../monero-wallet-gui.pro "$CONFIG"
