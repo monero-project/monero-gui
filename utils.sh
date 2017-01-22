@@ -10,7 +10,11 @@ function get_platform {
             platform="linux64"
         elif [ "$(expr substr $(uname -m) 1 4)" == "i686" ]; then
             platform="linux32"
-        else
+        elif [ "$(expr substr $(uname -m) 1 6)" == "armv7l" ]; then
+            platform="linuxarmv7"
+	elif [ "$(expr substr $(uname -m) 1 7)" == "aarch64" ]; then
+            platform="linuxarmv8"
+	else
             platform="linux"
         fi
     elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
