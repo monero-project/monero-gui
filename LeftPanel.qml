@@ -344,7 +344,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
                 symbol: qsTr("A") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                dotColor: "#FFD781"
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
@@ -388,7 +388,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Check payment") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -412,7 +412,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
                 symbol: qsTr("I") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
