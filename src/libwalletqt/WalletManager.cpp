@@ -2,6 +2,7 @@
 #include "Wallet.h"
 #include "wallet/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
+#include "QRCodeImageProvider.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -289,6 +290,13 @@ double WalletManager::getPasswordStrength(const QString &password) const
     double e = ZxcvbnMatch(password.toStdString().c_str(), local_dict, NULL);
     ZxcvbnUnInit();
     return e;
+}
+
+bool WalletManager::saveQrCode(const QString &code, const QString &path) const
+{
+    QSize size;
+    // 240 <=> mainLayout.qrCodeSize (Receive.qml)
+    return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
