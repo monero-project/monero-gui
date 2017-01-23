@@ -94,7 +94,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
-        placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+        placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
     }
 
     Label {
