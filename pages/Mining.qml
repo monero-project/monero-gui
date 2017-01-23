@@ -91,9 +91,9 @@ Rectangle {
                 id: soloMainLabel
                 text: qsTr("Mining helps the Monero network build resilience.<br>")
                       + qsTr("The more mining is done, the harder it is to attack the network.<br>")
-                      + qsTr("Moreover, mining gives you a small chance to earn some Monero.<br>")
+                      + qsTr("Mining also gives you a small chance to earn some Monero.<br>")
                       + qsTr("Your computer will search for Monero block solutions.<br>")
-                      + qsTr("If you find one, you will get the associated block reward.<br>")
+                      + qsTr("If you find a block, you will get the associated reward.<br>")
                       + translationManager.emptyString
                 wrapMode: Text.Wrap
             }
