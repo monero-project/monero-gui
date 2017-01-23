@@ -71,6 +71,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 5
         error: true;
+        placeholderText: qsTr("4...") + translationManager.emptyString
     }
 
     Label {
@@ -93,6 +94,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
     }
 
     Label {
@@ -101,7 +103,7 @@ Rectangle {
         anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Local database)</font>") + translationManager.emptyString
+        text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip test test</b><br/><br/>test line 2") + translationManager.emptyString
     }
@@ -114,6 +116,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Saved to local wallet") + translationManager.emptyString
     }
 
     StandardButton {
