@@ -86,6 +86,22 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, 
     return m_currentWallet;
 }
 
+Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &language, bool testnet,
+                                            const QString &address, const QString &viewkey, const QString &spendkey,
+                                            quint64 restoreHeight)
+{
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+        m_currentWallet = NULL;
+    }
+    Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), language.toStdString(), testnet, restoreHeight,
+                                                       address.toStdString(), viewkey.toStdString(), spendkey.toStdString());
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
+}
+
 
 QString WalletManager::closeWallet()
 {
@@ -181,6 +197,16 @@ bool WalletManager::paymentIdValid(const QString &payment_id) const
 bool WalletManager::addressValid(const QString &address, bool testnet) const
 {
     return Monero::Wallet::addressValid(address.toStdString(), testnet);
+}
+
+bool WalletManager::keyValid(const QString &key, const QString &address, bool isViewKey,  bool testnet) const
+{
+    std::string error;
+    if(!Monero::Wallet::keyValid(key.toStdString(), address.toStdString(), isViewKey, testnet, error)){
+        qDebug() << QString::fromStdString(error);
+        return false;
+    }
+    return true;
 }
 
 QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet) const
