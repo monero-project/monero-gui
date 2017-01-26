@@ -80,11 +80,12 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        titleText: qsTr("Give your view only wallet a name") + translationManager.emptyString
+        titleText: qsTr("Create view only wallet") + translationManager.emptyString
         wordsTextItem.visible: false
         restoreHeightVisible:false
         walletName: appWindow.walletName + "-viewonly"
         progressDotsModel: dotsModel
+        recoverMode: false
     }
 
 

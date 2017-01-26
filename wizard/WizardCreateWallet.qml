@@ -96,12 +96,13 @@ Item {
 
     WizardManageWalletUI {
         id: uiItem
-        titleText: qsTr("Give your new wallet a name") + translationManager.emptyString
+        titleText: qsTr("Create a new wallet") + translationManager.emptyString
         wordsTextTitle: qsTr("Here is your wallet's 25 word mnemonic seed") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: true
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true
         restoreHeightVisible:false
+        recoverMode: false
     }
 
     Component.onCompleted: {
