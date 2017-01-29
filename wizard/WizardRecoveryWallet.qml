@@ -92,6 +92,9 @@ Item {
             settingsObject['is_recovering'] = true;
             settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {
+            console.log(wallet.errorString)
+            walletErrorDialog.text = wallet.errorString;
+            walletErrorDialog.open();
             walletManager.closeWallet();
         }
         return success;
