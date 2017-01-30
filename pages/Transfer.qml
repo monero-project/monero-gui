@@ -340,7 +340,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Description <font size='2'>( Optional - saved to local wallet history )</font>")
+        text: qsTr("Description <font size='2'>( Optional )</font>")
               + translationManager.emptyString
     }
 
@@ -352,6 +352,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
     }
 
     function checkInformation(amount, address, payment_id, testnet) {
