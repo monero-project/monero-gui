@@ -152,7 +152,7 @@ Rectangle {
             //anchors.top: amountLine.top
             //anchors.bottom: amountLine.bottom
             width: 60
-            text: qsTr("or ALL") + translationManager.emptyString
+            text: qsTr("ALL") + translationManager.emptyString
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
