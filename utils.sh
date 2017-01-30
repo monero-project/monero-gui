@@ -5,6 +5,8 @@ function get_platform {
     local platform="unknown"
     if [ "$(uname)" == "Darwin" ]; then
         platform="darwin"
+    elif [ "$(uname)" == "FreeBSD" ]; then
+        platform="freebsd"
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         if [ "$(expr substr $(uname -m) 1 6)" == "x86_64" ]; then
             platform="linux64"
