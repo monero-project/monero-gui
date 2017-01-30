@@ -256,6 +256,8 @@ double WalletManager::miningHashRate() const
 
 bool WalletManager::isMining() const
 {
+    if(!m_currentWallet->connected())
+        return false;
     return m_pimpl->isMining();
 }
 
