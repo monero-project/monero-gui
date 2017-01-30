@@ -67,6 +67,7 @@ ApplicationWindow {
     property int timeToUnlock: 0
     property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
     property int blocksToSync: 1
+    property var isMobile: (appWindow.width > 700) ? false : true
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -191,7 +192,6 @@ ApplicationWindow {
         }
 
         walletManager.setDaemonAddress(persistentSettings.daemon_address)
-
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
@@ -237,6 +237,7 @@ ApplicationWindow {
 
     function connectWallet(wallet) {
         currentWallet = wallet
+        walletName = usefulName(wallet.path)
         updateSyncing(false)
 
         viewOnly = currentWallet.viewOnly;
@@ -1137,7 +1138,7 @@ ApplicationWindow {
             }
         }
 
-        property int maxWidth: leftPanel.width + 655 + rightPanel.width
+        property int minWidth: 326
         property int minHeight: 720
         MouseArea {
             id: resizeArea
@@ -1171,9 +1172,9 @@ ApplicationWindow {
                 var dx = previousPosition.x - pos.x
                 var dy = previousPosition.y - pos.y
 
-                if(appWindow.width - dx > parent.maxWidth)
+                if(appWindow.width - dx > parent.minWidth)
                     appWindow.width -= dx
-                else appWindow.width = parent.maxWidth
+                else appWindow.width = parent.minWidth
 
                 if(appWindow.height - dy > parent.minHeight)
                     appWindow.height -= dy

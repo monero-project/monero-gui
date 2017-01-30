@@ -31,14 +31,15 @@ import QtQml 2.2
 import QtQuick.Layouts 1.1
 import "../components"
 
-Item {
+ColumnLayout {
     id: page
     signal createWalletClicked()
     signal recoveryWalletClicked()
     signal openWalletClicked()
     opacity: 0
     visible: false
-    property var buttonSize: 190
+    property int buttonSize: (isMobile) ? 80 : 190
+    property int buttonImageSize: (isMobile) ? buttonSize - 10 : buttonSize - 30
 
     function onPageClosed() {
         // Save settings used in open from file.
@@ -68,19 +69,15 @@ Item {
 
     onOpacityChanged: visible = opacity !== 0
 
-    Column {
+    ColumnLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        spacing: 24
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.bottomMargin: (!isMobile) ? 40 : 20
+        spacing: 30
 
         Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
             font.family: "Arial"
             font.pixelSize: 28
             //renderType: Text.NativeRendering
@@ -91,8 +88,7 @@ Item {
         }
 
         Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
             font.family: "Arial"
             font.pixelSize: 18
             //renderType: Text.NativeRendering
@@ -103,26 +99,34 @@ Item {
         }
     }
 
-    Row {
-        id: selectPath
-        anchors.verticalCenterOffset: 35
-        anchors.centerIn: parent
-        spacing: 40
+    GridLayout {
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.alignment: Qt.AlignCenter
+        id: actionButtons
+        columnSpacing: 40
+        rowSpacing: 10
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
 
-
-        Column {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 30
+        GridLayout {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
+            rowSpacing: 20
+            columnSpacing: 10
 
             Rectangle {
-                width: page.buttonSize; height: page.buttonSize
+                Layout.preferredHeight: page.buttonSize
+                Layout.preferredWidth: page.buttonSize
                 radius: page.buttonSize
                 color: createWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
 
                 Image {
-                    width:page.buttonSize -30
-                    height:page.buttonSize -30
+                    width: page.buttonImageSize
+                    height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
                     horizontalAlignment: Image.AlignRight
                     verticalAlignment: Image.AlignTop
@@ -142,28 +146,32 @@ Item {
             }
 
             Text {
+                Layout.preferredWidth: 190
                 font.family: "Arial"
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                width:page.buttonSize
                 wrapMode: Text.WordWrap
                 text: qsTr("Create a new wallet") + translationManager.emptyString
             }
         }
 
-        Column {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 30
+        GridLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
+            rowSpacing: 20
+            columnSpacing: 10
 
             Rectangle {
-                width: page.buttonSize; height: page.buttonSize
+                Layout.preferredHeight: page.buttonSize
+                Layout.preferredWidth:  page.buttonSize
                 radius: page.buttonSize
                 color: recoverWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
                 Image {
-                    width:page.buttonSize -30
-                    height:page.buttonSize -30
+                    width: page.buttomImageSize
+                    height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     source: "qrc:///images/recoverWallet.png"
@@ -181,6 +189,7 @@ Item {
             }
 
             Text {
+                Layout.preferredWidth: 190
                 font.family: "Arial"
                 font.pixelSize: 16
                 color: "#4A4949"
@@ -191,18 +200,22 @@ Item {
             }
         }
 
-        Column {
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 30
+        GridLayout {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
+            rowSpacing: 20
+            columnSpacing: 10
 
             Rectangle {
-                width: page.buttonSize; height: page.buttonSize
+                Layout.preferredHeight: page.buttonSize
+                Layout.preferredWidth:  page.buttonSize
                 radius: page.buttonSize
                 color: openWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
                 Image {
-                    width:page.buttonSize -30
-                    height:page.buttonSize -30
+                    width: page.buttonImageSize
+                    height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
                     source: "qrc:///images/openAccount.png"
@@ -220,12 +233,12 @@ Item {
             }
 
             Text {
+                Layout.preferredWidth: 190
                 font.family: "Arial"
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Open a wallet from file") + translationManager.emptyString
-                width:page.buttonSize
                 wrapMode: Text.WordWrap
             }
         }
@@ -234,34 +247,29 @@ Item {
 
     }
 
+    // daemon select
+    // TODO: Move to separate page
+
+    ColumnLayout {
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.alignment: Qt.AlignCenter
 
 
-        ColumnLayout {
-            anchors.top: selectPath.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.topMargin: 35
+        Label {
+            Layout.topMargin: 20
+            fontSize: 14
+            text: qsTr("Custom daemon address (optional)") + translationManager.emptyString
+                  + translationManager.emptyString
+        }
 
-            spacing: 5
+        GridLayout {
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
 
-            Rectangle {
-                Layout.alignment: Qt.AlignCenter
-                width: 200
-                height: 1
-                color: "gray"
-            }
-
-            Text {
-                Layout.alignment: Qt.AlignCenter
-                font.family: "Arial"
-                font.pixelSize: 16
-
-                color: "#4A4646"
-                wrapMode: Text.Wrap
-                text: qsTr("Custom daemon address (optional)")
-                                  + translationManager.emptyString
-            }
+            columnSpacing: 20
+            rowSpacing: 20
+            flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
 
             RowLayout {
                 spacing: 20
@@ -294,6 +302,7 @@ Item {
                 }
             }
         }
+    }
 
 }
 
