@@ -26,7 +26,7 @@ git -C $MONERO_DIR checkout -B $VERSIONTAG
 
 # Workaround for git username requirements
 # Save current user settings and revert back when we are done with merging PR's
-OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.user)
+OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
 OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
 git -C $MONERO_DIR config user.name "Monero GUI"
 git -C $MONERO_DIR config user.email "gui@monero.local"
@@ -40,7 +40,7 @@ for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-
 done
 
 # revert back to old git config
-$(git -C $MONERO_DIR config user.user "$OLD_GIT_USER")
+$(git -C $MONERO_DIR config user.name "$OLD_GIT_USER")
 $(git -C $MONERO_DIR config user.email "$OLD_GIT_EMAIL")
 
 # Build libwallet if it doesnt exist
