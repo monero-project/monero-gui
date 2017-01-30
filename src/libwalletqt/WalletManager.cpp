@@ -64,13 +64,14 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
     QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
                                         path, password, testnet);
     QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<Wallet*>::finished,
             this, [this, watcher]() {
         QFuture<Wallet*> future = watcher->future();
         watcher->deleteLater();
         emit walletOpened(future.result());
     });
+    watcher->setFuture(future);
 }
 
 
@@ -121,7 +122,6 @@ void WalletManager::closeWalletAsync()
 {
     QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
     QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
-    watcher->setFuture(future);
 
     connect(watcher, &QFutureWatcher<QString>::finished,
             this, [this, watcher]() {
@@ -129,6 +129,7 @@ void WalletManager::closeWalletAsync()
        watcher->deleteLater();
        emit walletClosed(future.result());
     });
+    watcher->setFuture(future);
 }
 
 bool WalletManager::walletExists(const QString &path) const
