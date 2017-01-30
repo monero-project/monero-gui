@@ -1,6 +1,8 @@
 #!/bin/bash
 
 BUILD_TYPE=$1
+source ./utils.sh
+platform=$(get_platform)
 # default build type
 if [ -z $BUILD_TYPE ]; then
     BUILD_TYPE=release
@@ -12,7 +14,13 @@ if [ "$BUILD_TYPE" == "release" ]; then
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
-	CONFIG="CONFIG+=release static";
+    if [ "$platform" != "darwin" ]; then
+	    CONFIG="CONFIG+=release static";
+    else
+        # OS X: build static libwallet but dynamic Qt. 
+        echo "OS X: Building Qt project without static flag"
+        CONFIG="CONFIG+=release";
+    fi    
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then
     echo "Building release for ANDROID"
@@ -50,7 +58,6 @@ if [ ! -d build ]; then mkdir build; fi
 
 
 # Platform indepenent settings
-platform=$(get_platform)
 if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]); then
     distro=$(lsb_release -is)
     if [ "$distro" == "Ubuntu" ]; then
