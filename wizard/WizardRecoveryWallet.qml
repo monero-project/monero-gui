@@ -49,39 +49,52 @@ Item {
     }
 
     function onPageOpened(settingsObject) {
-        checkNextButton();            
-    }
-
-    function checkNextButton() {
-        var wordsArray = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText).split(" ");
-        wizard.nextButton.enabled = wordsArray.length === 25;
+        console.log("on page opened")
+        uiItem.checkNextButton();
     }
 
     function onPageClosed(settingsObject) {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText)
         settingsObject['wallet_path'] = uiItem.walletPath
+        settingsObject['recover_address'] = uiItem.recoverFromKeysAddress
+        settingsObject['recover_viewkey'] = uiItem.recoverFromKeysViewKey
+        settingsObject['recover_spendkey'] = uiItem.recoverFromKeysSpendKey
+
+
         var restoreHeight = parseInt(uiItem.restoreHeight);
         settingsObject['restore_height'] = isNaN(restoreHeight)? 0 : restoreHeight
         var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
         if(!wizard.walletPathValid(walletFullPath)){
            return false
         }
-        return recoveryWallet(settingsObject)
+        return recoveryWallet(settingsObject, uiItem.recoverFromSeedMode)
     }
 
-    function recoveryWallet(settingsObject) {
+    function recoveryWallet(settingsObject, fromSeed) {
         var testnet = appWindow.persistentSettings.testnet;
         var restoreHeight = settingsObject.restore_height;
         var tmp_wallet_filename = oshelper.temporaryFilename()
         console.log("Creating temporary wallet", tmp_wallet_filename)
-        var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight);
+
+        // From seed or keys
+        if(fromSeed)
+            var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight)
+        else
+            var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.language, testnet,
+                                                            settingsObject.recover_address, settingsObject.recover_viewkey,
+                                                            settingsObject.recover_spendkey, restoreHeight)
+
+
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             settingsObject['wallet'] = wallet;
             settingsObject['is_recovering'] = true;
             settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {
+            console.log(wallet.errorString)
+            walletErrorDialog.text = wallet.errorString;
+            walletErrorDialog.open();
             walletManager.closeWallet();
         }
         return success;
@@ -92,13 +105,15 @@ Item {
     WizardManageWalletUI {
         id: uiItem
         accountNameText: defaultAccountName
-        titleText: qsTr("Give your restored wallet a name") + translationManager.emptyString
+        titleText: qsTr("Restore wallet") + translationManager.emptyString
         wordsTextTitle: qsTr("Enter your 25 word mnemonic seed:") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: false
         wordsTextItem.tipTextVisible: false
         wordsTextItem.memoTextReadOnly: false
         wordsTextItem.memoText: ""
+        wordsTextItem.visible: true
         restoreHeightVisible: true
+        recoverMode: true
         wordsTextItem.onMemoTextChanged: {
             checkNextButton();
         }

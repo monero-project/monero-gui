@@ -24,15 +24,27 @@ Column {
 
         TextEdit {
             id: memoTextInput
+            property alias placeholderText: memoTextPlaceholder.text
             textMargin: 8
             text: ""
             font.family: "Arial"
-            font.pointSize: 16
+            font.pixelSize: 16
             wrapMode: TextInput.Wrap
             width: parent.width
             selectByMouse: true
             property int minimumHeight: 100
             height: contentHeight > minimumHeight ? contentHeight : minimumHeight
+
+            Text {
+                id: memoTextPlaceholder
+                anchors.fill:parent
+                font.pixelSize: 16
+                anchors.margins: 8
+                font.bold:true
+                text: qsTr("Enter your 25 word mnemonic seed")
+                color: "#BABABA"
+                visible: !memoTextInput.text/* && !parent.focus*/
+            }
         }
         Image {
             id : clipboardButton

@@ -106,7 +106,6 @@ Window {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Close")
-                KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()
                     root.accepted()
