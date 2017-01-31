@@ -127,9 +127,9 @@ void Wallet::updateConnectionStatusAsync()
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
-    qDebug() << "Checking connection status";
     // cache connection status
     if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
+        qDebug() << "Checking connection status";
         m_connectionStatusRunning = true;
         m_initialized = true;
         m_connectionStatusTime.restart();

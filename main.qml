@@ -54,7 +54,6 @@ ApplicationWindow {
     property var transaction;
     property var transactionDescription;
     property alias password : passwordDialog.password
-    property int splashCounter: 0
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -261,10 +260,12 @@ ApplicationWindow {
         return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
-    function onWalletConnectionStatusChanged(){
+    function onWalletConnectionStatusChanged(status){
         console.log("Wallet connection status changed")
         middlePanel.updateStatus();
-    }
+        leftPanel.networkStatus.connected = status
+        leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
+     }
 
     function onWalletOpened(wallet) {
         walletName = usefulName(wallet.path)
@@ -306,7 +307,6 @@ ApplicationWindow {
         console.log(">>> wallet updated")
         middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
         middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
-        console.log("time to unlock: ", currentWallet.history.minutesToUnlock);
         // Update history if new block found since last update and balance is locked.
         if(foundNewBlock && currentWallet.history.locked) {
             foundNewBlock = false;
@@ -332,10 +332,15 @@ ApplicationWindow {
 
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
-        daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
+        daemonSynced = dCurrentBlock >= dTargetBlock
+        // Update daemon sync progress
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (dCurrentBlock < dTargetBlock))
+        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected !== Wallet.ConnectionStatus_Disconnected
+        // Update wallet sync progress
+        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
+        // Update transfer page status
         middlePanel.updateStatus();
+
 
         // If wallet isnt connected and no daemon is running - Ask
         if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
@@ -388,17 +393,10 @@ ApplicationWindow {
         daemonRunning = false;
     }
 
-    function onWalletNewBlock(blockHeight) {
-            // Update progress bar
-            var currHeight = blockHeight
-            //fast refresh until restoreHeight is reached
-            var increment = ((restoreHeight == 0) || currHeight < restoreHeight)? 1000 : 10
-
-            if(currHeight > splashCounter + increment){
-              splashCounter = currHeight
-              leftPanel.progressBar.updateProgress(currHeight,currentWallet.daemonBlockChainTargetHeight());
-            }
-            foundNewBlock = true;
+    function onWalletNewBlock(blockHeight, targetHeight) {
+        // Update progress bar
+        leftPanel.progressBar.updateProgress(blockHeight,targetHeight);
+        foundNewBlock = true;
     }
 
     function onWalletMoneyReceived(txId, amount) {
@@ -708,7 +706,6 @@ ApplicationWindow {
     // close wallet and show wizard
     function showWizard(){
         walletInitialized = false;
-        splashCounter = 0;
         closeWallet();
         currentWallet = undefined;
         wizard.restart();
