@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets multimedia
 
 WALLET_ROOT=$$PWD/monero
 
@@ -12,6 +12,7 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
+                $$PWD/src/QR-Code-scanner \
                 $$PWD/src \
                 $$WALLET_ROOT/src
 
@@ -37,8 +38,8 @@ HEADERS += \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
     src/zxcvbn-c/zxcvbn.h \
-    src/libwalletqt/UnsignedTransaction.h
-
+    src/libwalletqt/UnsignedTransaction.h \
+    src/QR-Code-scanner/QrCodeScanner.h 
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -61,7 +62,8 @@ SOURCES += main.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/zxcvbn-c/zxcvbn.c \
-    src/libwalletqt/UnsignedTransaction.cpp
+    src/libwalletqt/UnsignedTransaction.cpp \
+    src/QR-Code-scanner/QrCodeScanner.cpp 
 
 lupdate_only {
 SOURCES = *.qml \
@@ -76,6 +78,22 @@ LIBS += -L$$WALLET_ROOT/lib \
          $$WALLET_ROOT/build/release/contrib/epee/src/libepee.a \
         -lunbound
 
+CONFIG(WITH_SCANNER) {
+    if( greaterThan(QT_MINOR_VERSION, 5) ) {
+        message("using camera scanner")
+        DEFINES += "WITH_SCANNER"
+        HEADERS += src/QR-Code-scanner/QrScanThread.h
+        SOURCES += src/QR-Code-scanner/QrScanThread.cpp
+        android {
+            INCLUDEPATH += $$PWD/../ZBar/include
+            LIBS += -lzbarjni -liconv
+        } else {
+            LIBS += -lzbar
+        }
+    } else {
+        message("Skipping camera scanner because of Incompatible Qt Version !")
+    }
+}
 
 # currently we only support x86 build as qt.io only provides prebuilt qt for x86 mingw
 

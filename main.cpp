@@ -39,6 +39,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "QRCodeImageProvider.h"
+#include "QrCodeScanner.h"
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
 #include "TranslationManager.h"
@@ -109,6 +110,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
+    qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
+
     QQmlApplicationEngine engine;
 
     OSCursor cursor;
@@ -166,6 +169,16 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
 
     //WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Max);
+
+    bool builtWithScanner = false;
+#ifdef WITH_SCANNER
+    builtWithScanner = true;
+    QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
+    QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
+    QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
+    qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
+#endif
+    engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
     return app.exec();
 }

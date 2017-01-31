@@ -32,6 +32,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
+import QtMultimedia 5.4
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
@@ -65,6 +66,7 @@ ApplicationWindow {
     property bool viewOnly: false
     property bool foundNewBlock: false
     property int timeToUnlock: 0
+    property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -874,7 +876,10 @@ ApplicationWindow {
         messageText: qsTr("Please wait...")
     }
 
-
+    QRCodeScanner {
+        id: cameraUi
+        visible : false
+    }
 
     Item {
         id: rootItem

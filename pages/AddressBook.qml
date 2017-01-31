@@ -62,12 +62,31 @@ Rectangle {
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
+    StandardButton {
+        id: qrfinderButton
+        anchors.left: parent.left
+        anchors.leftMargin: 17
+        anchors.topMargin: 5
+        anchors.top: addressLabel.bottom
+        text: qsTr("QRCODE") + translationManager.emptyString
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
+        visible : appWindow.qrScannerEnabled
+        enabled : visible
+        width: visible ? 60 : 0
+        onClicked: {
+            cameraUi.state = "Capture"
+            cameraUi.qrcode_decoded.connect(updateFromQrCode)
+        }
+    }
+
     LineEdit {
         id: addressLine
-        anchors.left: parent.left
+        anchors.left: qrfinderButton.right
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
-        anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
         error: true;
@@ -275,5 +294,13 @@ Rectangle {
         root.model = currentWallet.addressBookModel;
     }
 
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        addressLine.text = address
+        paymentIdLine.text = payment_id
+        //amountLine.text = amount
+        descriptionLine.text = recipient_name + " " + tx_description
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
 
 }
