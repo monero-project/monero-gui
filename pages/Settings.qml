@@ -324,8 +324,8 @@ Rectangle {
                     var newDaemon = daemonAddr.text + ":" + daemonPort.text
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
-                        //reconnect wallet
-                        appWindow.initialize();
+                        //Reinit wallet
+                        currentWallet.initAsync(newDaemon)
                     }
                 }
             }
