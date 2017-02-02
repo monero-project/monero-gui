@@ -48,11 +48,16 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MONERO_DIR=monero
 MONEROD_EXEC=monerod
 
+MAKE='make'
+if [[ $platform == *bsd* ]]; then
+    MAKE='gmake'
+fi
+
 # build libwallet
 $SHELL get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
-make -C src/zxcvbn-c
+$MAKE -C src/zxcvbn-c || exit
 
 if [ ! -d build ]; then mkdir build; fi
 
@@ -80,8 +85,8 @@ popd
 echo "var GUI_MONERO_VERSION = \"$VERSIONTAG\"" >> version.js
 
 cd build
-qmake ../monero-wallet-gui.pro "$CONFIG"
-make 
+qmake ../monero-wallet-gui.pro "$CONFIG" || exit
+$MAKE || exit 
 
 # Copy monerod to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
