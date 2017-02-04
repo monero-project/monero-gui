@@ -466,7 +466,7 @@ ApplicationWindow {
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + qsTr("\n\nRing size: ") + mixinCount + 1
+                        + qsTr("\n\nRing size: ") + (mixinCount + 1)
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
                         + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
                         + translationManager.emptyString
