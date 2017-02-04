@@ -48,10 +48,6 @@ Rectangle {
     function initSettings() {
         //runs on every page load
 
-        // Mnemonic seed setting
-        memoTextInput.text = (viewOnly)? qsTr("View only wallets doesn't have a mnemonic seed") : qsTr("Click button to show seed") + translationManager.emptyString
-        showSeedButton.enabled = !viewOnly
-
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
         console.log("address: " + persistentSettings.daemon_address)
@@ -113,60 +109,6 @@ Rectangle {
                 onClicked: {
                     wizard.openCreateViewOnlyWalletPage();
                 }
-            }
-
-        }
-
-        //! show seed
-        TextArea {
-            enabled: !viewOnly
-            id: memoTextInput
-            textMargin: 6
-            wrapMode: TextEdit.WordWrap
-            readOnly: true
-            selectByMouse: true
-            font.pixelSize: 18
-            Layout.fillWidth: true
-            Layout.preferredHeight: 100
-            Layout.alignment: Qt.AlignHCenter
-
-            text: (viewOnly)? qsTr("View only wallets doesn't have a mnemonic seed") : qsTr("Click button to show seed") + translationManager.emptyString
-
-            style: TextAreaStyle {
-                  backgroundColor: "#FFFFFF"
-              }
-
-            Image {
-                id : clipboardButton
-                anchors.right: memoTextInput.right
-                anchors.bottom: memoTextInput.bottom
-                source: "qrc:///images/greyTriangle.png"
-
-                Image {
-                    anchors.centerIn: parent
-                    source: "qrc:///images/copyToClipboard.png"
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: clipboard.setText(memoTextInput.text)
-                }
-            }
-        }
-
-
-        RowLayout {
-            enabled: !viewOnly
-            Layout.fillWidth: true
-            Text {
-                id: wordsTipText
-                font.family: "Arial"
-                font.pointSize: 12
-                color: "#4A4646"
-                Layout.fillWidth: true
-                wrapMode: Text.WordWrap
-                text: qsTr("This is very important to write down and keep secret. It is all you need to restore your wallet.")
-                      + translationManager.emptyString
             }
 
             StandardButton {
@@ -449,8 +391,13 @@ Rectangle {
 
         onAccepted: {
             if(appWindow.password === settingsPasswordDialog.password){
-                memoTextInput.text = currentWallet.seed
-                showSeedButton.enabled = false
+                informationPopup.title  = qsTr("Wallet mnemonic seed") + translationManager.emptyString;
+                informationPopup.text = currentWallet.seed
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    informationPopup.text = ""
+                }
+
             } else {
                 informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text = qsTr("Wrong password");
