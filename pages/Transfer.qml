@@ -682,7 +682,6 @@ Rectangle {
     //TODO: enable send page when we're connected and daemon is synced
 
     function updateStatus() {
-        console.log("updated transfer page status")
         if(typeof currentWallet === "undefined") {
             statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
             return;
