@@ -74,7 +74,7 @@ Rectangle {
         var mixin = scaleValueToMixinCount(fillLevel)
         print ("PrivacyLevel changed:"  + fillLevel)
         print ("mixin count: "  + mixin)
-        privacyLabel.text = qsTr("Privacy level (mixin %1)").arg(mixin) + translationManager.emptyString
+        privacyLabel.text = qsTr("Privacy level (ring size %1)").arg(mixin+1) + translationManager.emptyString
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
@@ -588,7 +588,7 @@ Rectangle {
                     + (transaction.paymentId[i] == "" ? "" : qsTr("\n\payment ID: ") + transaction.paymentId[i])
                     + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount(i))
                     + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee(i))
-                    + qsTr("\nMixin: ") + transaction.mixin(i)
+                    + qsTr("\nRing size: ") + transaction.mixin(i+1)
 
                     // TODO: add descriptions to unsigned_tx_set?
     //              + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
