@@ -24,12 +24,12 @@ elif [ "$BUILD_TYPE" == "release-static" ]; then
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then
     echo "Building release for ANDROID"
-    CONFIG="CONFIG+=release static";
+    CONFIG="CONFIG+=release static WITH_SCANNER";
     ANDROID=true
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "debug-android" ]; then
     echo "Building debug for ANDROID : ultra INSECURE !!"
-    CONFIG="CONFIG+=debug qml_debug";
+    CONFIG="CONFIG+=debug qml_debug WITH_SCANNER";
     ANDROID=true
     BIN_PATH=debug/bin
 elif [ "$BUILD_TYPE" == "debug" ]; then
