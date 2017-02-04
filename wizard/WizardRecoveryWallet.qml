@@ -45,7 +45,10 @@ Item {
         // reset account name field
         uiItem.accountNameText = defaultAccountName
         // Empty seedText
-        uiItem.wordsTextItem.memoText = "";
+        uiItem.wordsTextItem.memoText = ""
+        uiItem.recoverFromKeysAddress = ""
+        uiItem.recoverFromKeysSpendKey = ""
+        uiItem.recoverFromKeysViewKey = ""
     }
 
     function onPageOpened(settingsObject) {
