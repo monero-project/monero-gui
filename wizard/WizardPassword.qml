@@ -56,7 +56,7 @@ Item {
            passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         }
 
-        passwordUI.focus = true;
+        passwordUI.resetFocus()
     }
 
     function onPageClosed(settingsObject) {
