@@ -265,10 +265,20 @@ ApplicationWindow {
     }
 
     function onWalletConnectionStatusChanged(status){
-        console.log("Wallet connection status changed")
+        console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
         leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
+
+        // If wallet isnt connected and no daemon is running - Ask
+        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running()){
+            daemonManagerDialog.open();
+        }
+        // initialize transaction history once wallet is initialized first time;
+        if (!walletInitialized) {
+            currentWallet.history.refresh()
+            walletInitialized = true
+        }
      }
 
     function onWalletOpened(wallet) {
@@ -345,12 +355,6 @@ ApplicationWindow {
         // Update transfer page status
         middlePanel.updateStatus();
 
-
-        // If wallet isnt connected and no daemon is running - Ask
-        if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
-            daemonManagerDialog.open();
-        }
-
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
 
@@ -368,11 +372,6 @@ ApplicationWindow {
             }
         }
 
-        // initialize transaction history once wallet is initializef first time;
-        if (!walletInitialized) {
-            currentWallet.history.refresh()
-            walletInitialized = true
-        } 
         onWalletUpdate();
     }
 
