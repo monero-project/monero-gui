@@ -160,7 +160,10 @@ ApplicationWindow {
         walletInitialized = false;
 
         // Use stored log level
-        walletManager.setLogLevel(persistentSettings.logLevel)
+        if (persistentSettings.logLevel == 5)
+          walletManager.setLogCategories(persistentSettings.logCategories)
+        else
+          walletManager.setLogLevel(persistentSettings.logLevel)
 
         // setup language
         var locale = persistentSettings.locale
@@ -785,6 +788,7 @@ ApplicationWindow {
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
+        property string logCategories: ""
     }
 
     // Information dialog
