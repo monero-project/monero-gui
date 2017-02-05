@@ -49,15 +49,23 @@
 #include "model/TransactionHistorySortFilterModel.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
+#include "wallet/wallet2_api.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
 #include "daemon/DaemonManager.h"
 #endif
 
+void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    // Send all message types to logger
+    Monero::Wallet::debug(msg.toStdString());
+}
+
 int main(int argc, char *argv[])
 {
 
+    qInstallMessageHandler(messageHandler);
     QApplication app(argc, argv);
 
     qDebug() << "app startd";
@@ -195,3 +203,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
