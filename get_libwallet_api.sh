@@ -219,6 +219,8 @@ if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
     eval make  -j$CPU_CORE_COUNT
     eval make install -j$CPU_CORE_COUNT
     popd
+else
+    eval make -C $MONERO_DIR/build/release/contrib/epee all install
 fi
 
 # unbound is one more dependency. can't be merged to the wallet_merged
