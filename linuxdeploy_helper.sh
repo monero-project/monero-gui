@@ -31,18 +31,22 @@ fi
 
 # Copy dependencies
 EXCLUDE='libstdc++|libgcc_s.so|libc.so|libpthread'
+INCLUDE='libunbound'
 cp -rv $QT_DIR/qml $TARGET || exit
 cp -rv $QT_DIR/plugins $TARGET || exit
 mkdir -p $TARGET/libs || exit
-ldd $TARGET/$GUI_EXEC | grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
-ldd $TARGET/plugins/platforms/libqxcb.so| grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
-cp -v $QTXML_DIR/libQt5XmlPatterns.so.5 $TARGET/libs || exit
+#ldd $TARGET/$GUI_EXEC | grep "=> /" | awk '{print $3}' | grep $INCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
+#ldd $TARGET/$GUI_EXEC | grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
+#ldd $TARGET/plugins/platforms/libqxcb.so| grep "=> /" | awk '{print $3}' | grep -Ev $EXCLUDE | xargs -I '{}' cp -v '{}' $TARGET/libs || exit
+#cp -v $QTXML_DIR/libQt5XmlPatterns.so.5 $TARGET/libs || exit
 
 # Create start script
 cat > $TARGET/start-gui.sh <<EOL
 #!/bin/bash
-# export LD_LIBRARY_PATH=\`pwd\`/libs
+export LD_LIBRARY_PATH=\`pwd\`/libs
 export QT_PLUGIN_PATH=\`pwd\`/plugins
 export QML2_IMPORT_PATH=\`pwd\`/qml
 ./$GUI_EXEC
 EOL
+
+chmod +x $TARGET/start-gui.sh

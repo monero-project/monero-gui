@@ -143,7 +143,7 @@ elif [ "$platform" == "linux64" ]; then
         echo "Configuring build for Android on Linux host"
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="armv7-a" -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     elif [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
@@ -170,7 +170,7 @@ elif [ "$platform" == "linuxarmv7" ]; then
 elif [ "$platform" == "linux" ]; then
     echo "Configuring build for Linux general"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
         cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
@@ -219,21 +219,19 @@ if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
     eval make  -j$CPU_CORE_COUNT
     eval make install -j$CPU_CORE_COUNT
     popd
-else
-    eval make -C $MONERO_DIR/build/release/contrib/epee all install
 fi
 
-# unbound is one more dependency. can't be merged to the wallet_merged
-# since filename conflict (random.c.obj)
-# for Linux, we use libunbound shipped with the system, so we don't need to build it
+# build install epee
+eval make -C $MONERO_DIR/build/release/contrib/epee all install
 
-if [ "$platform" != "linux32" ] && ([ "$ANDROID" == true ] || [ "$platform" != "linux64" ]); then
-    echo "Building libunbound..."
-    pushd $MONERO_DIR/build/release/external/unbound
-    # no need to make, it was already built as dependency for libwallet
-    # make -j$CPU_CORE_COUNT
-    $make_exec install -j$CPU_CORE_COUNT
-    popd
-fi
+
+# Install libunwind
+echo "Installing libunbound..."
+pushd $MONERO_DIR/build/release/external/unbound
+# no need to make, it was already built as dependency for libwallet
+# make -j$CPU_CORE_COUNT
+$make_exec install -j$CPU_CORE_COUNT
+popd
+
 
 popd
