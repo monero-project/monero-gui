@@ -628,6 +628,10 @@ ApplicationWindow {
                 for (var i = 0; i < txid.length; ++i)
                   currentWallet.setUserNote(txid[i], transactionDescription);
             }
+
+            // Clear tx fields
+            middlePanel.transferView.clearFields()
+
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()

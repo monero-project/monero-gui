@@ -86,6 +86,13 @@ Rectangle {
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
+    function clearFields() {
+        addressLine.text = ""
+        paymentIdLine.text = ""
+        amountLine.text = ""
+        descriptionLine.text = ""
+    }
+
     // Information dialog
     StandardDialog {
         // dynamically change onclose handler
