@@ -115,7 +115,8 @@ void Wallet::updateConnectionStatusAsync()
         QFuture<Monero::Wallet::ConnectionStatus> future = connectionWatcher->future();
         connectionWatcher->deleteLater();
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(future.result());
-        if (newStatus != m_connectionStatus) {
+        if (newStatus != m_connectionStatus || !m_initialized) {
+            m_initialized = true;
             m_connectionStatus = newStatus;
             emit connectionStatusChanged(newStatus);
         }
@@ -131,7 +132,6 @@ Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
     if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
         qDebug() << "Checking connection status";
         m_connectionStatusRunning = true;
-        m_initialized = true;
         m_connectionStatusTime.restart();
         updateConnectionStatusAsync();
     }
@@ -184,8 +184,11 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
 void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
     qDebug() << "initAsync: " + daemonAddress;
-    m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
-    emit connectionStatusChanged(m_connectionStatus);
+    // Change status to disconnected if connected
+    if(m_connectionStatus != Wallet::ConnectionStatus_Disconnected) {
+        m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
+        emit connectionStatusChanged(m_connectionStatus);
+    }
 
     QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
                                   daemonAddress, upperTransactionLimit, isRecovering, restoreHeight);
