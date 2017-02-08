@@ -285,7 +285,7 @@ Item {
                     Layout.alignment: Qt.AlignCenter
                     anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("Testnet") + translationManager.emptyString
-                    background: "#F0EEEE"
+                    background: "#FFFFFF"
                     fontColor: "#4A4646"
                     fontSize: 16
                     checkedIcon: "../images/checkedVioletIcon.png"

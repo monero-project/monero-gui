@@ -248,14 +248,9 @@ ColumnLayout {
                   + translationManager.emptyString
         }
 
-        TextInput {
+        LineEdit {
             Layout.fillWidth: true
             id: fileUrlInput
-            clip: true
-            font.family: "Arial"
-            font.pixelSize: 18
-            color: "#6B0072"
-            selectByMouse: true
             text: moneroAccountsDir + "/"
             // workaround for the bug "filechooser only opens once"
             MouseArea {
