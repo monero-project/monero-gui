@@ -39,6 +39,7 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "QRCodeImageProvider.h"
+#include "QrCodeScanner.h"
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
 #include "TranslationManager.h"
@@ -46,13 +47,17 @@
 #include "TransactionHistory.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
-#include "daemon/DaemonManager.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
 
+// IOS exclusions
+#ifndef Q_OS_IOS
+#include "daemon/DaemonManager.h"
+#endif
 
 int main(int argc, char *argv[])
 {
+
     QApplication app(argc, argv);
 
     qDebug() << "app startd";
@@ -95,10 +100,10 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<TransactionInfo>("moneroComponents.TransactionInfo", 1, 0, "TransactionInfo",
                                                         "TransactionHistory can't be instantiated directly");
-
+#ifndef Q_OS_IOS
     qmlRegisterUncreatableType<DaemonManager>("moneroComponents.DaemonManager", 1, 0, "DaemonManager",
                                                    "DaemonManager can't be instantiated directly");
-
+#endif
     qmlRegisterUncreatableType<AddressBookModel>("moneroComponents.AddressBookModel", 1, 0, "AddressBookModel",
                                                         "AddressBookModel can't be instantiated directly");
 
@@ -108,6 +113,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
+
+    qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
 
     QQmlApplicationEngine engine;
 
@@ -122,9 +129,13 @@ int main(int argc, char *argv[])
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
     const QStringList arguments = QCoreApplication::arguments();
+
+// Exclude daemon manager from IOS
+#ifndef Q_OS_IOS
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
+#endif
 
 //  export to QML monero accounts root directory
 //  wizard is talking about where
@@ -132,13 +143,18 @@ int main(int argc, char *argv[])
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
 //  Windows, ~/Monero Accounts/ on nix / osx
     bool isWindows = false;
+    bool isIOS = false;
 #ifdef Q_OS_WIN
     isWindows = true;
+    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+#elif defined(Q_OS_IOS)
+    isIOS = true;
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
 #elif defined(Q_OS_UNIX)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
     engine.rootContext()->setContextProperty("isWindows", isWindows);
+    engine.rootContext()->setContextProperty("isIOS", isIOS);
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
@@ -157,6 +173,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+
+    // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     QObject *rootObject = engine.rootObjects().first();
 
@@ -165,7 +183,15 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
 
-    //WalletManager::instance()->setLogLevel(WalletManager::LogLevel_Max);
+    bool builtWithScanner = false;
+#ifdef WITH_SCANNER
+    builtWithScanner = true;
+    QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
+    QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
+    QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
+    qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
+#endif
+    engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
     return app.exec();
 }

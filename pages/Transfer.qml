@@ -74,7 +74,23 @@ Rectangle {
         var mixin = scaleValueToMixinCount(fillLevel)
         print ("PrivacyLevel changed:"  + fillLevel)
         print ("mixin count: "  + mixin)
-        privacyLabel.text = qsTr("Privacy level (mixin %1)").arg(mixin) + translationManager.emptyString
+        privacyLabel.text = qsTr("Privacy level (ring size %1)").arg(mixin+1) + translationManager.emptyString
+    }
+
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        addressLine.text = address
+        paymentIdLine.text = payment_id
+        amountLine.text = amount
+        descriptionLine.text = recipient_name + " " + tx_description
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
+
+    function clearFields() {
+        addressLine.text = ""
+        paymentIdLine.text = ""
+        amountLine.text = ""
+        descriptionLine.text = ""
     }
 
     // Information dialog
@@ -152,7 +168,7 @@ Rectangle {
             //anchors.top: amountLine.top
             //anchors.bottom: amountLine.bottom
             width: 60
-            text: qsTr("or ALL") + translationManager.emptyString
+            text: qsTr("ALL") + translationManager.emptyString
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
@@ -249,11 +265,29 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
 
+        StandardButton {
+            id: qrfinderButton
+            anchors.left: parent.left
+            anchors.leftMargin: 17
+            anchors.topMargin: 5
+            text: qsTr("QRCODE") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            visible : appWindow.qrScannerEnabled
+            enabled : visible
+            width: visible ? 60 : 0
+            onClicked: {
+                cameraUi.state = "Capture"
+                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+            }
+        }
         LineEdit {
             id: addressLine
-            anchors.left: parent.left
+            anchors.left: qrfinderButton.right
             anchors.right: resolveButton.left
-            anchors.leftMargin: 17
+            //anchors.leftMargin: 17
             anchors.topMargin: 5
             placeholderText: "4..."
             // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
@@ -340,7 +374,7 @@ Rectangle {
         anchors.rightMargin: 17
         anchors.topMargin: 17
         fontSize: 14
-        text: qsTr("Description <font size='2'>( Optional - saved to local wallet history )</font>")
+        text: qsTr("Description <font size='2'>( Optional )</font>")
               + translationManager.emptyString
     }
 
@@ -352,6 +386,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
     }
 
     function checkInformation(amount, address, payment_id, testnet) {
@@ -560,7 +595,7 @@ Rectangle {
                     + (transaction.paymentId[i] == "" ? "" : qsTr("\n\payment ID: ") + transaction.paymentId[i])
                     + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount(i))
                     + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee(i))
-                    + qsTr("\nMixin: ") + transaction.mixin(i)
+                    + qsTr("\nRing size: ") + transaction.mixin(i+1)
 
                     // TODO: add descriptions to unsigned_tx_set?
     //              + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
@@ -654,7 +689,6 @@ Rectangle {
     //TODO: enable send page when we're connected and daemon is synced
 
     function updateStatus() {
-        console.log("updated transfer page status")
         if(typeof currentWallet === "undefined") {
             statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
             return;

@@ -241,6 +241,23 @@ Rectangle {
                     daemonConsolePopup.open();
                 }
             }
+
+            StandardButton {
+                visible: true
+                id: daemonStatusButton
+                text: qsTr("Status") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    daemonManager.sendCommand("status",currentWallet.testnet);
+                    daemonConsolePopup.open();
+                }
+            }
+
+
+
         }
 
         RowLayout {
@@ -307,8 +324,8 @@ Rectangle {
                     var newDaemon = daemonAddr.text + ":" + daemonPort.text
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
-                        //reconnect wallet
-                        appWindow.initialize();
+                        //Reinit wallet
+                        currentWallet.initAsync(newDaemon)
                     }
                 }
             }
@@ -352,12 +369,34 @@ Rectangle {
 
             ComboBox {
                 id: logLevel
-                model: [0,1,2,3,4]
+                model: [0,1,2,3,4,"custom"]
                 currentIndex : appWindow.persistentSettings.logLevel;
                 onCurrentIndexChanged: {
-                    console.log("log level changed: ",currentIndex);
-                    walletManager.setLogLevel(currentIndex);
+                    if (currentIndex == 5) {
+                        console.log("log categories changed: ", logCategories.text);
+                        walletManager.setLogCategories(logCategories.text);
+                    }
+                    else {
+                        console.log("log level changed: ",currentIndex);
+                        walletManager.setLogLevel(currentIndex);
+                    }
                     appWindow.persistentSettings.logLevel = currentIndex;
+                }
+            }
+
+            LineEdit {
+                id: logCategories
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: appWindow.persistentSettings.logCategories
+                placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
+                enabled: logLevel.currentIndex == 5
+                onEditingFinished: {
+                    if(enabled) {
+                        console.log("log categories changed: ", text);
+                        walletManager.setLogCategories(text);
+                        appWindow.persistentSettings.logCategories = text;
+                    }
                 }
             }
         }
@@ -395,11 +434,10 @@ Rectangle {
     }
 
     // Daemon console
-    StandardDialog {
+    DaemonConsole {
         id: daemonConsolePopup
         height:500
         width:800
-        cancelVisible: false
         title: qsTr("Daemon log")
         onAccepted: {
             close();

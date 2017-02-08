@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QTime>
+#include <QMutex>
+#include <QtConcurrent/QtConcurrent>
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
@@ -25,6 +27,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
+    Q_PROPERTY(bool testnet READ testnet)
     Q_PROPERTY(ConnectionStatus connected READ connected)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
@@ -70,8 +73,12 @@ public:
     //! returns last operation's status
     Status status() const;
 
+    //! returns true testnet wallet.
+    bool testnet() const;
+
     //! returns whether the wallet is connected, and version status
-    ConnectionStatus connected() const;
+    ConnectionStatus connected(bool forceCheck = false);
+    void updateConnectionStatusAsync();
 
     //! returns true if wallet was ever synchronized
     bool synchronized() const;
@@ -94,10 +101,10 @@ public:
     Q_INVOKABLE bool store(const QString &path = "");
 
     //! initializes wallet
-    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, quint64 restoreHeight = 0);
 
     //! initializes wallet asynchronously
-    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, quint64 restoreHeight = 0);
 
     //! create a view only wallet
     Q_INVOKABLE bool createViewOnly(const QString &path, const QString &password) const;
@@ -227,13 +234,13 @@ signals:
     void moneySpent(const QString &txId, quint64 amount);
     void moneyReceived(const QString &txId, quint64 amount);
     void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
-    void newBlock(quint64 height);
+    void newBlock(quint64 height, quint64 targetHeight);
     void historyModelChanged() const;
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
-    void connectionStatusChanged() const;
+    void connectionStatusChanged(ConnectionStatus status) const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -262,6 +269,8 @@ private:
     mutable bool    m_initialized;
     AddressBook * m_addressBook;
     mutable AddressBookModel * m_addressBookModel;
+    QMutex m_connectionStatusMutex;
+    bool m_connectionStatusRunning;
 };
 
 

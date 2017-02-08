@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2015, The Monero Project
-// 
+// Copyright (c) 2014-2017, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,46 +26,54 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+#ifndef QRCODESCANNER_H_
+#define QRCODESCANNER_H_
 
-Item {
-    id: delegateItem
-    width: 1
-    height: 48
-    property bool mainTick: false
-    property int currentIndex
-    property int currentX
+#include <QImage>
+#include <QVideoFrame>
+#ifdef WITH_SCANNER
+#include "QrScanThread.h"
+#endif
 
-    Image {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        visible: parent.mainTick
-        source: "../images/privacyTick.png"
+class QVideoProbe;
+class QCamera;
 
-        Text {
-            anchors.right: parent.right
-            anchors.rightMargin: 12
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 2
-            font.family: "Arial"
-            font.bold: true
-            font.pixelSize: 12
-            color: "#4A4949"
-            text: {
-                if(currentIndex === 0) return qsTr("NORMAL") + translationManager.emptyString
-                if(currentIndex === 3) return qsTr("MEDIUM") + translationManager.emptyString
-                if(currentIndex === 13) return qsTr("HIGH") + translationManager.emptyString
-                return ""
-            }
-        }
-    }
+class QrCodeScanner : public QObject
+{
+    Q_OBJECT
 
-    Rectangle {
-        anchors.top: parent.top
-        anchors.topMargin: 14
-        width: 1
-        color: "#DBDBDB"
-        height: currentIndex === 8 ? 16 : 8
-        visible: !parent.mainTick
-    }
-}
+    Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+
+public:
+    QrCodeScanner(QObject *parent = Q_NULLPTR);
+
+    void setSource(QCamera*);
+
+    bool enabled() const;
+    void setEnabled(bool enabled);
+
+public Q_SLOTS:
+    void processCode(int type, const QString &data);
+    void processFrame(QVideoFrame);
+
+Q_SIGNALS:
+    void enabledChanged();
+
+    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name);
+    void decode(int type, const QString &data);
+    void notifyError(const QString &error, bool warning = false);
+
+protected:
+#ifdef WITH_SCANNER
+    void timerEvent(QTimerEvent *);
+    QrScanThread *m_thread;
+#endif
+    int m_processTimerId;
+    int m_processInterval;
+    int m_enabled;
+    QVideoFrame m_curFrame;
+    QVideoProbe *m_probe;
+};
+
+#endif
+

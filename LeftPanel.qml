@@ -62,6 +62,7 @@ Rectangle {
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
+        else if(pos === "Advanced") menuColumn.previousButton = advancedButton
 
         menuColumn.previousButton.checked = true
     }
@@ -259,6 +260,7 @@ Rectangle {
             }
 
             Rectangle {
+                visible: transferButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -307,6 +309,7 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: receiveButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -330,6 +333,7 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: historyButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -343,14 +347,15 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
-                symbol: qsTr("A") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                symbol: qsTr("D") + translationManager.emptyString
+                dotColor: "#FFD781"
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
                 }
             }
             Rectangle {
+                visible: advancedButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -375,6 +380,7 @@ Rectangle {
             }
 
             Rectangle {
+                visible: miningButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -388,7 +394,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Check payment") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
@@ -412,7 +418,7 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
                 symbol: qsTr("I") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false

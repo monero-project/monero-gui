@@ -29,6 +29,7 @@
 import QtQuick 2.0
 
 Item {
+    id: item
     property alias placeholderText: input.placeholderText
     property alias text: input.text
     property alias validator: input.validator
@@ -36,7 +37,9 @@ Item {
     property alias cursorPosition: input.cursorPosition
     property int fontSize: 18
     property bool error: false
-
+    signal editingFinished()
+    signal accepted();
+    signal textUpdated();
 
     height: 37
 
@@ -67,5 +70,8 @@ Item {
         anchors.leftMargin: 4
         anchors.rightMargin: 30
         font.pixelSize: parent.fontSize
+        onEditingFinished: item.editingFinished()
+        onAccepted: item.accepted();
+        onTextChanged: item.textUpdated()
     }
 }

@@ -358,6 +358,32 @@ Rectangle {
             standardButtons: StandardButton.Ok
         }
 
+        FileDialog {
+            id: qrFileDialog
+            title: "Please choose a name"
+            folder: shortcuts.pictures
+            selectExisting: false
+            nameFilters: [ "Image (*.png)"]
+            onAccepted: {
+                if( ! walletManager.saveQrCode(makeQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                    trackingHowToUseDialog.title  = qsTr("Save QrCode") + translationManager.emptyString;
+                    trackingHowToUseDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                    trackingHowToUseDialog.icon = StandardIcon.Error
+                    trackingHowToUseDialog.open()
+                }
+            }
+        }
+
+        Menu {
+            id: qrMenu
+            title: "QrCode"
+            MenuItem {
+               text: qsTr("Save As")
+               onTriggered: qrFileDialog.open()
+            }
+        }
+
         Image {
             id: qrCode
             anchors.margins: 50
@@ -367,6 +393,15 @@ Rectangle {
             smooth: false
             fillMode: Image.PreserveAspectFit
             source: "image://qrcode/" + makeQRCodeString()
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onClicked: {
+                    if (mouse.button == Qt.RightButton)
+                        qrMenu.popup()
+                }
+                onPressAndHold: qrFileDialog.open()
+            }
         }
     }
 

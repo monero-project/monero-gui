@@ -32,6 +32,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
+import QtMultimedia 5.4
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
@@ -54,7 +55,6 @@ ApplicationWindow {
     property var transaction;
     property var transactionDescription;
     property alias password : passwordDialog.password
-    property int splashCounter: 0
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -65,6 +65,7 @@ ApplicationWindow {
     property bool viewOnly: false
     property bool foundNewBlock: false
     property int timeToUnlock: 0
+    property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -84,8 +85,9 @@ ApplicationWindow {
             return
         }
 
-        if(seq === "Ctrl+D") middlePanel.state = "Dashboard"
-        else if(seq === "Ctrl+S") middlePanel.state = "Transfer"
+        // Dashboard is not implemented
+        // if(seq === "Ctrl+") middlePanel.state = "Dashboard"
+        if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
         else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
@@ -93,6 +95,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
@@ -157,7 +160,10 @@ ApplicationWindow {
         walletInitialized = false;
 
         // Use stored log level
-        walletManager.setLogLevel(persistentSettings.logLevel)
+        if (persistentSettings.logLevel == 5)
+          walletManager.setLogCategories(persistentSettings.logCategories)
+        else
+          walletManager.setLogLevel(persistentSettings.logLevel)
 
         // setup language
         var locale = persistentSettings.locale
@@ -261,10 +267,22 @@ ApplicationWindow {
         return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
-    function onWalletConnectionStatusChanged(){
-        console.log("Wallet connection status changed")
+    function onWalletConnectionStatusChanged(status){
+        console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
-    }
+        leftPanel.networkStatus.connected = status
+        leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
+
+        // If wallet isnt connected and no daemon is running - Ask
+        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running()){
+            daemonManagerDialog.open();
+        }
+        // initialize transaction history once wallet is initialized first time;
+        if (!walletInitialized) {
+            currentWallet.history.refresh()
+            walletInitialized = true
+        }
+     }
 
     function onWalletOpened(wallet) {
         walletName = usefulName(wallet.path)
@@ -306,7 +324,6 @@ ApplicationWindow {
         console.log(">>> wallet updated")
         middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
         middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
-        console.log("time to unlock: ", currentWallet.history.minutesToUnlock);
         // Update history if new block found since last update and balance is locked.
         if(foundNewBlock && currentWallet.history.locked) {
             foundNewBlock = false;
@@ -332,15 +349,14 @@ ApplicationWindow {
 
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
-        daemonSynced = (currentWallet.connected != Wallet.ConnectionStatus_Disconnected && dCurrentBlock >= dTargetBlock)
+        daemonSynced = dCurrentBlock >= dTargetBlock
+        // Update daemon sync progress
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (dCurrentBlock < dTargetBlock))
+        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected !== Wallet.ConnectionStatus_Disconnected
+        // Update wallet sync progress
+        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
+        // Update transfer page status
         middlePanel.updateStatus();
-
-        // If wallet isnt connected and no daemon is running - Ask
-        if(currentWallet.connected === Wallet.ConnectionStatus_Disconnected && !daemonManager.running() && !walletInitialized){
-            daemonManagerDialog.open();
-        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -359,11 +375,6 @@ ApplicationWindow {
             }
         }
 
-        // initialize transaction history once wallet is initializef first time;
-        if (!walletInitialized) {
-            currentWallet.history.refresh()
-            walletInitialized = true
-        } 
         onWalletUpdate();
     }
 
@@ -388,17 +399,10 @@ ApplicationWindow {
         daemonRunning = false;
     }
 
-    function onWalletNewBlock(blockHeight) {
-            // Update progress bar
-            var currHeight = blockHeight
-            //fast refresh until restoreHeight is reached
-            var increment = ((restoreHeight == 0) || currHeight < restoreHeight)? 1000 : 10
-
-            if(currHeight > splashCounter + increment){
-              splashCounter = currHeight
-              leftPanel.progressBar.updateProgress(currHeight,currentWallet.daemonBlockChainTargetHeight());
-            }
-            foundNewBlock = true;
+    function onWalletNewBlock(blockHeight, targetHeight) {
+        // Update progress bar
+        leftPanel.progressBar.updateProgress(blockHeight,targetHeight);
+        foundNewBlock = true;
     }
 
     function onWalletMoneyReceived(txId, amount) {
@@ -464,7 +468,7 @@ ApplicationWindow {
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + qsTr("\n\nMixin: ") + mixinCount
+                        + qsTr("\n\nRing size: ") + (mixinCount + 1)
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
                         + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
                         + translationManager.emptyString
@@ -624,6 +628,10 @@ ApplicationWindow {
                 for (var i = 0; i < txid.length; ++i)
                   currentWallet.setUserNote(txid[i], transactionDescription);
             }
+
+            // Clear tx fields
+            middlePanel.transferView.clearFields()
+
         }
         informationPopup.onCloseCallback = null
         informationPopup.open()
@@ -663,7 +671,7 @@ ApplicationWindow {
                 else {
                     var dCurrentBlock = currentWallet.daemonBlockChainHeight();
                     var confirmations = dCurrentBlock - height
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmations").arg(received).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
             else {
@@ -708,7 +716,6 @@ ApplicationWindow {
     // close wallet and show wizard
     function showWizard(){
         walletInitialized = false;
-        splashCounter = 0;
         closeWallet();
         currentWallet = undefined;
         wizard.restart();
@@ -784,6 +791,7 @@ ApplicationWindow {
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
+        property string logCategories: ""
     }
 
     // Information dialog
@@ -874,7 +882,10 @@ ApplicationWindow {
         messageText: qsTr("Please wait...")
     }
 
-
+    QRCodeScanner {
+        id: cameraUi
+        visible : false
+    }
 
     Item {
         id: rootItem

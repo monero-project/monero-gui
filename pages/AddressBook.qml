@@ -62,15 +62,35 @@ Rectangle {
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
+    StandardButton {
+        id: qrfinderButton
+        anchors.left: parent.left
+        anchors.leftMargin: 17
+        anchors.topMargin: 5
+        anchors.top: addressLabel.bottom
+        text: qsTr("QRCODE") + translationManager.emptyString
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
+        visible : appWindow.qrScannerEnabled
+        enabled : visible
+        width: visible ? 60 : 0
+        onClicked: {
+            cameraUi.state = "Capture"
+            cameraUi.qrcode_decoded.connect(updateFromQrCode)
+        }
+    }
+
     LineEdit {
         id: addressLine
-        anchors.left: parent.left
+        anchors.left: qrfinderButton.right
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
-        anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
         error: true;
+        placeholderText: qsTr("4...") + translationManager.emptyString
     }
 
     Label {
@@ -93,6 +113,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
     }
 
     Label {
@@ -101,7 +122,7 @@ Rectangle {
         anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Local database)</font>") + translationManager.emptyString
+        text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip test test</b><br/><br/>test line 2") + translationManager.emptyString
     }
@@ -114,6 +135,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
     }
 
     StandardButton {
@@ -275,5 +297,13 @@ Rectangle {
         root.model = currentWallet.addressBookModel;
     }
 
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        addressLine.text = address
+        paymentIdLine.text = payment_id
+        //amountLine.text = amount
+        descriptionLine.text = recipient_name + " " + tx_description
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
 
 }

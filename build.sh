@@ -1,6 +1,8 @@
 #!/bin/bash
 
 BUILD_TYPE=$1
+source ./utils.sh
+platform=$(get_platform)
 # default build type
 if [ -z $BUILD_TYPE ]; then
     BUILD_TYPE=release
@@ -12,16 +14,22 @@ if [ "$BUILD_TYPE" == "release" ]; then
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
-	CONFIG="CONFIG+=release static";
+    if [ "$platform" != "darwin" ]; then
+	    CONFIG="CONFIG+=release static";
+    else
+        # OS X: build static libwallet but dynamic Qt. 
+        echo "OS X: Building Qt project without static flag"
+        CONFIG="CONFIG+=release";
+    fi    
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then
     echo "Building release for ANDROID"
-    CONFIG="CONFIG+=release static";
+    CONFIG="CONFIG+=release static WITH_SCANNER";
     ANDROID=true
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "debug-android" ]; then
     echo "Building debug for ANDROID : ultra INSECURE !!"
-    CONFIG="CONFIG+=debug qml_debug";
+    CONFIG="CONFIG+=debug qml_debug WITH_SCANNER";
     ANDROID=true
     BIN_PATH=debug/bin
 elif [ "$BUILD_TYPE" == "debug" ]; then
@@ -40,40 +48,21 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MONERO_DIR=monero
 MONEROD_EXEC=monerod
 
-# Build libwallet if it doesnt exist
-if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
-    echo "libwallet_merged.a not found - Building libwallet"
-    $SHELL get_libwallet_api.sh $BUILD_TYPE
-elif [ ! -f $MONERO_DIR/version.sh ]; then 
-    echo "monero/version.h not found - Building libwallet"
-    $SHELL get_libwallet_api.sh $BUILD_TYPE 
-else 
-    source ./$MONERO_DIR/version.sh
-    # update monero submodule
-    git submodule update
-    # compare submodule version with latest build
-    pushd "$MONERO_DIR"
-    get_tag
-    popd
-    echo "latest libwallet version: $GUI_MONERO_VERSION"
-    echo "Installed libwallet version: $VERSIONTAG"
-    # check if recent
-    if [ "$VERSIONTAG" != "$GUI_MONERO_VERSION" ]; then
-        echo "Building new libwallet version $GUI_MONERO_VERSION"
-        $SHELL get_libwallet_api.sh $BUILD_TYPE 
-    else
-        echo "latest libwallet ($GUI_MONERO_VERSION) is already built. Run ./get_libwallet_api.sh to force rebuild"
-    fi
+MAKE='make'
+if [[ $platform == *bsd* ]]; then
+    MAKE='gmake'
 fi
+
+# build libwallet
+$SHELL get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
-make -C src/zxcvbn-c
+$MAKE -C src/zxcvbn-c || exit
 
 if [ ! -d build ]; then mkdir build; fi
 
 
 # Platform indepenent settings
-platform=$(get_platform)
 if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]); then
     distro=$(lsb_release -is)
     if [ "$distro" == "Ubuntu" ]; then
@@ -94,11 +83,10 @@ pushd "$MONERO_DIR"
 get_tag
 popd
 echo "var GUI_MONERO_VERSION = \"$VERSIONTAG\"" >> version.js
-echo "GUI_MONERO_VERSION=\"$VERSIONTAG\"" >> $MONERO_DIR/version.sh
 
 cd build
-qmake ../monero-wallet-gui.pro "$CONFIG"
-make 
+qmake ../monero-wallet-gui.pro "$CONFIG" || exit
+$MAKE || exit 
 
 # Copy monerod to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then

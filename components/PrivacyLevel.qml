@@ -64,7 +64,7 @@ Item {
 
             color: {
                 if(item.fillLevel < 3) return "#FF6C3C"
-                if(item.fillLevel < 13) return "#FFE00A"
+                if(item.fillLevel < 13) return "#AAFFBB"
                 return "#36B25C"
             }
 

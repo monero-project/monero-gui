@@ -25,20 +25,6 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
 
 bool DaemonManager::start(const QString &flags)
 {
-    //
-    QString process;
-#ifdef Q_OS_WIN
-    process = QApplication::applicationDirPath() + "/monerod.exe";
-#elif defined(Q_OS_UNIX)
-    process = QApplication::applicationDirPath() + "/monerod";
-#endif
-
-    if (process.length() == 0) {
-        qDebug() << "no daemon binary defined for current platform";
-        return false;
-    }
-
-
     // prepare command line arguments and pass to monerod
     QStringList arguments;
     foreach (const QString &str, m_clArgs) {
@@ -55,8 +41,8 @@ bool DaemonManager::start(const QString &flags)
     }
 
 
-    qDebug() << "starting monerod " + process;
-    qDebug() << "With command line arguments " << arguments;
+    qDebug() << "starting monerod " + m_monerod;
+    qDebug() << "With command line arguments " << m_monerod;
 
     m_daemon = new QProcess();
     initialized = true;
@@ -66,7 +52,7 @@ bool DaemonManager::start(const QString &flags)
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
-    m_daemon->start(process,arguments);
+    m_daemon->start(m_monerod, arguments);
     bool started =  m_daemon->waitForStarted();
 
     // add state changed listener
@@ -134,10 +120,47 @@ bool DaemonManager::running() const
     return false;
 }
 
+bool DaemonManager::sendCommand(const QString &cmd,bool testnet)
+{
+    // If daemon is started by GUI - interactive mode
+    if (initialized && running()) {
+        m_daemon->write(cmd.toUtf8() +"\n");
+        return true;
+    }
+
+    // else send external command
+    QProcess p;
+    QString external_cmd = m_monerod + " " + cmd;
+
+    // Add nestnet flag if needed
+    if (testnet)
+        external_cmd += " --testnet";
+    external_cmd += "\n";
+
+    p.start(external_cmd);
+    bool started = p.waitForFinished(-1);
+    QString p_stdout = p.readAllStandardOutput();
+    qDebug() << p_stdout;
+    emit daemonConsoleUpdated(p_stdout);
+
+    return started;
+}
+
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
 {
 
+    // Platform depetent path to monerod
+#ifdef Q_OS_WIN
+    m_monerod = QApplication::applicationDirPath() + "/monerod.exe";
+#elif defined(Q_OS_UNIX)
+    m_monerod = QApplication::applicationDirPath() + "/monerod";
+#endif
+
+    if (m_monerod.length() == 0) {
+        qCritical() << "no daemon binary defined for current platform";
+        m_has_daemon = false;
+    }
 }
 
 void DaemonManager::closing()

@@ -2,6 +2,7 @@
 #include "Wallet.h"
 #include "wallet/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
+#include "QRCodeImageProvider.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -63,13 +64,14 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
     QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
                                         path, password, testnet);
     QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<Wallet*>::finished,
             this, [this, watcher]() {
         QFuture<Wallet*> future = watcher->future();
         watcher->deleteLater();
         emit walletOpened(future.result());
     });
+    watcher->setFuture(future);
 }
 
 
@@ -81,6 +83,22 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, 
         delete m_currentWallet;
     }
     Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
+}
+
+Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &language, bool testnet,
+                                            const QString &address, const QString &viewkey, const QString &spendkey,
+                                            quint64 restoreHeight)
+{
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+        m_currentWallet = NULL;
+    }
+    Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), language.toStdString(), testnet, restoreHeight,
+                                                       address.toStdString(), viewkey.toStdString(), spendkey.toStdString());
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
 }
@@ -104,7 +122,6 @@ void WalletManager::closeWalletAsync()
 {
     QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
     QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
-    watcher->setFuture(future);
 
     connect(watcher, &QFutureWatcher<QString>::finished,
             this, [this, watcher]() {
@@ -112,6 +129,7 @@ void WalletManager::closeWalletAsync()
        watcher->deleteLater();
        emit walletClosed(future.result());
     });
+    watcher->setFuture(future);
 }
 
 bool WalletManager::walletExists(const QString &path) const
@@ -182,6 +200,16 @@ bool WalletManager::addressValid(const QString &address, bool testnet) const
     return Monero::Wallet::addressValid(address.toStdString(), testnet);
 }
 
+bool WalletManager::keyValid(const QString &key, const QString &address, bool isViewKey,  bool testnet) const
+{
+    std::string error;
+    if(!Monero::Wallet::keyValid(key.toStdString(), address.toStdString(), isViewKey, testnet, error)){
+        qDebug() << QString::fromStdString(error);
+        return false;
+    }
+    return true;
+}
+
 QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet) const
 {
     return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
@@ -229,6 +257,8 @@ double WalletManager::miningHashRate() const
 
 bool WalletManager::isMining() const
 {
+    if(!m_currentWallet->connected())
+        return false;
     return m_pimpl->isMining();
 }
 
@@ -261,6 +291,11 @@ void WalletManager::setLogLevel(int logLevel)
     Monero::WalletManagerFactory::setLogLevel(logLevel);
 }
 
+void WalletManager::setLogCategories(const QString &categories)
+{
+    Monero::WalletManagerFactory::setLogCategories(categories.toStdString());
+}
+
 QString WalletManager::urlToLocalPath(const QUrl &url) const
 {
     return QDir::toNativeSeparators(url.toLocalFile());
@@ -284,6 +319,13 @@ double WalletManager::getPasswordStrength(const QString &password) const
     double e = ZxcvbnMatch(password.toStdString().c_str(), local_dict, NULL);
     ZxcvbnUnInit();
     return e;
+}
+
+bool WalletManager::saveQrCode(const QString &code, const QString &path) const
+{
+    QSize size;
+    // 240 <=> mainLayout.qrCodeSize (Receive.qml)
+    return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)

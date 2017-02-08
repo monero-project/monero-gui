@@ -185,7 +185,7 @@ Item {
                 font.pixelSize: 16
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
-                text: qsTr("Restore wallet from 25 word mnemonic seed") + translationManager.emptyString
+                text: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
                 width:page.buttonSize
                 wrapMode: Text.WordWrap
             }
@@ -285,7 +285,7 @@ Item {
                     Layout.alignment: Qt.AlignCenter
                     anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("Testnet") + translationManager.emptyString
-                    background: "#F0EEEE"
+                    background: "#FFFFFF"
                     fontColor: "#4A4646"
                     fontSize: 16
                     checkedIcon: "../images/checkedVioletIcon.png"

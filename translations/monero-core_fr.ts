@@ -22,17 +22,17 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="77"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;(Optionnel)&lt;/font&gt;</translation>
+        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;(optionnel)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="79"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;Identifiant de paiement&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Un nom d&apos;utilisateur unique utilisé dans&lt;br/&gt;le carnet d&apos;adresses. Ce n&apos;est pas un&lt;br/&gt;transfert d&apos;information envoyé&lt;br/&gt;pendant le transfert</translation>
+        <translation>&lt;b&gt;Identifiant de paiement&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;un nom d&apos;utilisateur unique utilisé dans&lt;br/&gt;le carnet d&apos;adresses. Ce n&apos;est pas un&lt;br/&gt;transfert d&apos;information envoyé&lt;br/&gt;pendant le transfert</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation>Description &lt;font size=&apos;2&apos;&gt;(Base de données locale)&lt;/font&gt;</translation>
+        <translation>Description &lt;font size=&apos;2&apos;&gt;(base de données locale)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="101"/>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Pas d&apos;autre résultat</translation>
+        <translation>Pas d&apos;autres résultats</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="106"/>
         <source>Payment ID:</source>
-        <translation>Identifiant de paiement :</translation>
+        <translation>Identifiant de paiement&#160;:</translation>
     </message>
 </context>
 <context>
@@ -73,22 +73,22 @@
     <message>
         <location filename="../BasicPanel.qml" line="98"/>
         <source>Locked Balance:</source>
-        <translation>Solde bloqué :</translation>
+        <translation>Solde bloqué&#160;:</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="112"/>
         <source>78.9239845</source>
-        <translation>78.9239845</translation>
+        <translation>78,9239845</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="136"/>
         <source>Available Balance:</source>
-        <translation>Solde disponible :</translation>
+        <translation>Solde disponible&#160;:</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="150"/>
         <source>2324.9239845</source>
-        <translation>2324.9239845</translation>
+        <translation>2324,9239845</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../pages/History.qml" line="70"/>
         <source> selected: </source>
-        <translation> séléctionné : </translation>
+        <translation> sélectionné&#160;: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="134"/>
@@ -223,23 +223,23 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="46"/>
         <source>Tx ID:</source>
-        <translation>Identifiant transaction :</translation>
+        <translation>Identifiant transaction&#160;:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="47"/>
         <location filename="../components/HistoryTable.qml" line="193"/>
         <source>Payment ID:</source>
-        <translation>Identifiant paiement :</translation>
+        <translation>Identifiant paiement&#160;:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx key:</source>
-        <translation>Clé transaction :</translation>
+        <translation>Clé transaction&#160;:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
         <source>Tx note:</source>
-        <translation>Note transaction :</translation>
+        <translation>Note transaction&#160;:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="66"/>
@@ -254,7 +254,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="229"/>
         <source>BlockHeight:</source>
-        <translation>Hauteur bloc :</translation>
+        <translation>Hauteur de bloc&#160;:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="269"/>
@@ -356,12 +356,12 @@
     <message>
         <location filename="../MiddlePanel.qml" line="193"/>
         <source>Balance:</source>
-        <translation>Solde :</translation>
+        <translation>Solde&#160;:</translation>
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="231"/>
         <source>Unlocked Balance:</source>
-        <translation>Solde débloqué :</translation>
+        <translation>Solde débloqué&#160;:</translation>
     </message>
 </context>
 <context>
@@ -505,7 +505,7 @@
     <message>
         <location filename="../components/SearchInput.qml" line="69"/>
         <source>Search by...</source>
-        <translation>Chercher par...</translation>
+        <translation>Chercher par…</translation>
     </message>
     <message>
         <location filename="../components/SearchInput.qml" line="230"/>
@@ -524,7 +524,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="92"/>
         <source>Mnemonic seed: </source>
-        <translation>Graine mnémonique :</translation>
+        <translation>Graine mnémonique&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="139"/>
@@ -597,13 +597,13 @@
     <message>
         <location filename="../pages/Sign.qml" line="123"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>Signer un message ou un fichier avec votre adresse :</translation>
+        <translation>Signer un message ou un fichier avec votre adresse&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="133"/>
         <location filename="../pages/Sign.qml" line="319"/>
         <source>Either message:</source>
-        <translation>Soit un message :</translation>
+        <translation>Soit un message&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="148"/>
@@ -620,7 +620,7 @@
         <location filename="../pages/Sign.qml" line="183"/>
         <location filename="../pages/Sign.qml" line="368"/>
         <source>Or file:</source>
-        <translation>Ou un fichier :</translation>
+        <translation>Ou un fichier&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="208"/>
@@ -644,7 +644,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="309"/>
         <source>Verify a message or file signature from an address:</source>
-        <translation>Vérifier la signature d&apos;un message ou d&apos;un fichier avec une adresse :</translation>
+        <translation>Vérifier la signature d&apos;un message ou d&apos;un fichier avec une adresse&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="334"/>
@@ -754,7 +754,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="223"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;( Optionnel )&lt;/font&gt;</translation>
+        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;( optionnel )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="235"/>
@@ -782,7 +782,7 @@
     <message>
         <location filename="../pages/TxKey.qml" line="90"/>
         <source>You can verify that a third party made a payment by supplying:</source>
-        <translation>Vous pouvez vérifier qu&apos;un tiers a effectué en fournissant :</translation>
+        <translation>Vous pouvez vérifier qu&apos;un tiers a effectué un paiement en fournissant&#160;:</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="94"/>
@@ -792,7 +792,7 @@
     <message>
         <location filename="../pages/TxKey.qml" line="98"/>
         <source> - the transaction ID,</source>
-        <translation> - l&apos;identifiant de la transaction</translation>
+        <translation> - l&apos;identifiant de la transaction,</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="102"/>
@@ -850,7 +850,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation>Démarrer la chaîne de blocs Monero ?</translation>
+        <translation>Démarrer la chaîne de blocs Monero&#x202f;?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -860,7 +860,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="127"/>
         <source>Enable disk conservation mode?</source>
-        <translation>Activer le mode conservation de disque ?</translation>
+        <translation>Activer le mode conservation de disque&#x202f;?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="145"/>
@@ -870,7 +870,7 @@
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="158"/>
         <source>Allow background mining?</source>
-        <translation>Autoriser l&apos;extraction minière en arrière plan ?</translation>
+        <translation>Autoriser l&apos;extraction minière en arrière plan&#x202f;?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="176"/>
@@ -901,7 +901,7 @@
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
         <source>Enable auto-donations of?</source>
-        <translation>Activer l&apos;auto-don de ?</translation>
+        <translation>Activer l&apos;auto-don de&#x202f;?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
@@ -916,7 +916,7 @@
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
         <source>Allow background mining?</source>
-        <translation>Autoriser l&apos;extraction minière en arrière plan ?</translation>
+        <translation>Autoriser l&apos;extraction minière en arrière plan&#x202f;?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
@@ -978,12 +978,12 @@
     <message>
         <location filename="../wizard/WizardFinish.qml" line="73"/>
         <source>An overview of your Monero configuration is below:</source>
-        <translation>Un aperçu de votre configuration Monero se trouve ci-dessous :</translation>
+        <translation>Un aperçu de votre configuration Monero se trouve ci-dessous&#160;:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
         <source>You’re all setup!</source>
-        <translation>Vous êtes paré !</translation>
+        <translation>Vous êtes paré&#x202f;!</translation>
     </message>
 </context>
 <context>
@@ -1035,12 +1035,12 @@
     <message>
         <location filename="../wizard/WizardOptions.qml" line="79"/>
         <source>Welcome to Monero!</source>
-        <translation>Bienvenue dans Monero !</translation>
+        <translation>Bienvenue dans Monero&#x202f;!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="91"/>
         <source>Please select one of the following options:</source>
-        <translation>Veuillez sélectionner une des options suivantes :</translation>
+        <translation>Veuillez sélectionner une des options suivantes&#160;:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="140"/>
@@ -1078,13 +1078,13 @@
     <message>
         <location filename="../wizard/WizardPassword.qml" line="54"/>
         <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation>Maintenant que votre portefeuille a été restoré, veuillez choisir un mot de passe pour le portefeuille</translation>
+        <translation>Maintenant que votre portefeuille a été restauré, veuillez choisir un mot de passe pour le portefeuille</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="138"/>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation>Notez que ce mot de passe ne pourra pas être restoré, et si vous l&apos;oubliez vous devrez restorer votre portefeuille avec la graine mnémonique qui vous a juste été donnée&lt;br/&gt;&lt;br/&gt;
+        <translation>Notez que ce mot de passe ne pourra pas être restauré, et si vous l&apos;oubliez vous devrez restaurer votre portefeuille avec la graine mnémonique qui vous a juste été donnée&lt;br/&gt;&lt;br/&gt;
                         Votre mot de passe sera utilisé pour protéger votre portefeuille et pour confirmer certaines actions, donc assurez-vous que votre mot de passe soit suffisamment sûr.</translation>
     </message>
     <message>
@@ -1141,7 +1141,7 @@
     <message>
         <location filename="../main.qml" line="249"/>
         <source>Couldn&apos;t open wallet: </source>
-        <translation>Impossible d&apos;ouvrir le portefeuille : </translation>
+        <translation>Impossible d&apos;ouvrir le portefeuille&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="336"/>
@@ -1151,13 +1151,13 @@
     <message>
         <location filename="../main.qml" line="371"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Impossible de créer la transaction : Mauvaise version de démon : </translation>
+        <translation>Impossible de créer la transaction&#160;: mauvaise version de démon&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="373"/>
         <location filename="../main.qml" line="466"/>
         <source>Can&apos;t create transaction: </source>
-        <translation>Impossible de créer la transaction : </translation>
+        <translation>Impossible de créer la transaction&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="381"/>
@@ -1178,7 +1178,7 @@
         <location filename="../main.qml" line="488"/>
         <source>Please confirm transaction:
 </source>
-        <translation>Veuillez confirmer la transaction :
+        <translation>Veuillez confirmer la transaction&#160;:
 </translation>
     </message>
     <message>
@@ -1186,14 +1186,14 @@
         <source>
 Address: </source>
         <translation>
-Adresse : </translation>
+Adresse&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="397"/>
         <source>
 Payment ID: </source>
         <translation>
-Identifiant de paiement : </translation>
+Identifiant de paiement&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="398"/>
@@ -1246,12 +1246,12 @@ Description : </translation>
     <message>
         <location filename="../main.qml" line="442"/>
         <source>insufficient funds. Unlocked balance: %1</source>
-        <translation>fonds insuffisants. Solde débloqué : %1</translation>
+        <translation>fonds insuffisants. Solde débloqué&#160;: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="513"/>
         <source>Couldn&apos;t send the money: </source>
-        <translation>Impossible d&apos;envoyer l&apos;argent : </translation>
+        <translation>Impossible d&apos;envoyer l&apos;argent&#160;: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="516"/>
@@ -1261,7 +1261,7 @@ Description : </translation>
     <message>
         <location filename="../main.qml" line="522"/>
         <source>Money sent successfully: %1 transaction(s) </source>
-        <translation>Argent envoyé avec succès : %1 transaction(s) </translation>
+        <translation>Argent envoyé avec succès&#160;: %1 transaction(s) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="557"/>
@@ -1276,7 +1276,7 @@ Description : </translation>
     <message>
         <location filename="../main.qml" line="567"/>
         <source>This address received %1 monero, with %2 confirmations</source>
-        <translation>Cette adresse a reçu %1 monero, avec  %2 confirmations</translation>
+        <translation>Cette adresse a reçu %1 monero, avec %2 confirmations</translation>
     </message>
     <message>
         <location filename="../main.qml" line="571"/>
@@ -1286,7 +1286,7 @@ Description : </translation>
     <message>
         <location filename="../main.qml" line="731"/>
         <source>Please wait...</source>
-        <translation>Veuillez patienter...</translation>
+        <translation>Veuillez patienter…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="756"/>

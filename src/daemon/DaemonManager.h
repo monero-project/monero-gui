@@ -18,6 +18,7 @@ public:
 
     // return true if daemon process is started
     Q_INVOKABLE bool running() const;
+    Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet);
 
 signals:
     void daemonStarted();
@@ -37,6 +38,8 @@ private:
     static QStringList m_clArgs;
     QProcess *m_daemon;
     bool initialized = false;
+    QString m_monerod;
+    bool m_has_daemon = true;
 
 };
 

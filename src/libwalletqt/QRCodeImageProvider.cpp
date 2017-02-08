@@ -2,7 +2,7 @@
 
 #include "QRCodeImageProvider.h"
 
-QImage QRCodeImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+QImage QRCodeImageProvider::genQrImage(const QString &id, QSize *size)
 {
   using namespace qrcodegen;
 
@@ -14,4 +14,9 @@ QImage QRCodeImageProvider::requestImage(const QString &id, QSize *size, const Q
   if (size)
     *size = QSize(qrcode.size, qrcode.size);
   return img;
+}
+
+QImage QRCodeImageProvider::requestImage(const QString &id, QSize *size, const QSize &/* requestedSize */)
+{
+  return genQrImage(id, size);
 }

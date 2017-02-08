@@ -53,6 +53,14 @@ public:
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
                                        bool testnet = false, quint64 restoreHeight = 0);
 
+    Q_INVOKABLE Wallet * createWalletFromKeys(const QString &path,
+                                              const QString &language,
+                                              bool testnet,
+                                              const QString &address,
+                                              const QString &viewkey,
+                                              const QString &spendkey = "",
+                                              quint64 restoreHeight = 0);
+
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
@@ -92,6 +100,8 @@ public:
 
     Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
     Q_INVOKABLE bool addressValid(const QString &address, bool testnet) const;
+    Q_INVOKABLE bool keyValid(const QString &key, const QString &address, bool isViewKey, bool testnet) const;
+
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
     Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
@@ -112,6 +122,7 @@ public:
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;
 
     Q_INVOKABLE void setLogLevel(int logLevel);
+    Q_INVOKABLE void setLogCategories(const QString &categories);
 
     Q_INVOKABLE quint64 add(quint64 x, quint64 y) const { return x + y; }
     Q_INVOKABLE quint64 sub(quint64 x, quint64 y) const { return x - y; }
@@ -122,6 +133,7 @@ public:
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
+    Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
 
 signals:
 

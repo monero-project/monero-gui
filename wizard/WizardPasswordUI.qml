@@ -56,6 +56,10 @@ FocusScope {
       privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)      
     }
 
+    function resetFocus() {
+        passwordItem.focus = true
+    }
+
     WizardPasswordInput {
         id: passwordItem
         anchors.horizontalCenter: parent.horizontalCenter

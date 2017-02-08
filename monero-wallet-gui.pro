@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets multimedia
 
 WALLET_ROOT=$$PWD/monero
 
@@ -12,6 +12,7 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
+                $$PWD/src/QR-Code-scanner \
                 $$PWD/src \
                 $$WALLET_ROOT/src
 
@@ -33,12 +34,11 @@ HEADERS += \
     src/QR-Code-generator/BitBuffer.hpp \
     src/QR-Code-generator/QrCode.hpp \
     src/QR-Code-generator/QrSegment.hpp \
-    src/daemon/DaemonManager.h \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
     src/zxcvbn-c/zxcvbn.h \
-    src/libwalletqt/UnsignedTransaction.h
-
+    src/libwalletqt/UnsignedTransaction.h \
+    src/QR-Code-scanner/QrCodeScanner.h 
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -57,11 +57,16 @@ SOURCES += main.cpp \
     src/QR-Code-generator/BitBuffer.cpp \
     src/QR-Code-generator/QrCode.cpp \
     src/QR-Code-generator/QrSegment.cpp \
-    src/daemon/DaemonManager.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/zxcvbn-c/zxcvbn.c \
-    src/libwalletqt/UnsignedTransaction.cpp
+    src/libwalletqt/UnsignedTransaction.cpp \
+    src/QR-Code-scanner/QrCodeScanner.cpp 
+
+!ios {
+    HEADERS += src/daemon/DaemonManager.h
+    SOURCES += src/daemon/DaemonManager.cpp
+}
 
 lupdate_only {
 SOURCES = *.qml \
@@ -71,9 +76,66 @@ SOURCES = *.qml \
           wizard/*js
 }
 
+
+ios:armv7 {
+    message("target is armv7")
+    LIBS += \
+        -L$$PWD/ofxiOSBoost/build/libs/boost/lib/armv7 \
+}
+ios:arm64 {
+    message("target is arm64")
+    LIBS += \
+        -L$$PWD/ofxiOSBoost/build/libs/boost/lib/arm64 \
+}
+!ios {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        -lepee \
         -lunbound
+}
+
+ios {
+    message("Host is IOS")
+
+    QMAKE_LFLAGS += -v
+    QMAKE_IOS_DEVICE_ARCHS = arm64
+    CONFIG += arm64
+    LIBS += -L$$WALLET_ROOT/lib-ios \
+        -lwallet_merged \
+        -lepee \
+        -lunbound
+
+    LIBS+= \
+        -L$$PWD/OpenSSL-for-iPhone/lib \
+        -lboost_serialization \
+        -lboost_thread \
+        -lboost_system \
+        -lboost_date_time \
+        -lboost_filesystem \
+        -lboost_regex \
+        -lboost_chrono \
+        -lboost_program_options \
+        -lssl \
+        -lcrypto \
+        -ldl
+}
+
+CONFIG(WITH_SCANNER) {
+    if( greaterThan(QT_MINOR_VERSION, 5) ) {
+        message("using camera scanner")
+        DEFINES += "WITH_SCANNER"
+        HEADERS += src/QR-Code-scanner/QrScanThread.h
+        SOURCES += src/QR-Code-scanner/QrScanThread.cpp
+        android {
+            INCLUDEPATH += $$PWD/../ZBar/include
+            LIBS += -lzbarjni -liconv
+        } else {
+            LIBS += -lzbar
+        }
+    } else {
+        message("Skipping camera scanner because of Incompatible Qt Version !")
+    }
+}
 
 
 # currently we only support x86 build as qt.io only provides prebuilt qt for x86 mingw
@@ -134,7 +196,7 @@ win32 {
 linux {
     CONFIG(static) {
         message("using static libraries")
-        LIBS+= -Wl,-Bstatic    
+        LIBS+= -Wl,-Bstatic
     }
     LIBS+= \
         -lboost_serialization \
@@ -223,31 +285,35 @@ macx {
 }
 
 
+!ios {
+    isEmpty(QMAKE_LUPDATE) {
+        win32:LANGUPD = $$[QT_INSTALL_BINS]\lupdate.exe
+        else:LANGUPD = $$[QT_INSTALL_BINS]/lupdate
+    }
 
-isEmpty(QMAKE_LUPDATE) {
-    win32:LANGUPD = $$[QT_INSTALL_BINS]\lupdate.exe
-    else:LANGUPD = $$[QT_INSTALL_BINS]/lupdate
+    isEmpty(QMAKE_LRELEASE) {
+        win32:LANGREL = $$[QT_INSTALL_BINS]\lrelease.exe
+        else:LANGREL = $$[QT_INSTALL_BINS]/lrelease
+    }
+
+    langupd.command = \
+        $$LANGUPD $$LANGUPD_OPTIONS $$shell_path($$_PRO_FILE) -ts $$_PRO_FILE_PWD/$$TRANSLATIONS
+
+
+
+    langrel.depends = langupd
+    langrel.input = TRANSLATIONS
+    langrel.output = $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
+    langrel.commands = \
+        $$LANGREL $$LANGREL_OPTIONS ${QMAKE_FILE_IN} -qm $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
+    langrel.CONFIG += no_link
+
+    QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
+    QMAKE_EXTRA_COMPILERS += langrel
 }
 
-isEmpty(QMAKE_LRELEASE) {
-    win32:LANGREL = $$[QT_INSTALL_BINS]\lrelease.exe
-    else:LANGREL = $$[QT_INSTALL_BINS]/lrelease
-}
-
-langupd.command = \
-    $$LANGUPD $$LANGUPD_OPTIONS $$shell_path($$_PRO_FILE) -ts $$_PRO_FILE_PWD/$$TRANSLATIONS
 
 
-
-langrel.depends = langupd
-langrel.input = TRANSLATIONS
-langrel.output = $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
-langrel.commands = \
-    $$LANGREL $$LANGREL_OPTIONS ${QMAKE_FILE_IN} -qm $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
-langrel.CONFIG += no_link
-
-QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
-QMAKE_EXTRA_COMPILERS += langrel
 
 
 

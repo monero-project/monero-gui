@@ -42,7 +42,7 @@ Item {
             var progressLevel = ((currentBlock/targetBlock) * 100).toFixed(0);
             fillLevel = progressLevel
             progressText.text = qsTr("Synchronizing blocks %1/%2").arg(currentBlock.toFixed(0)).arg(targetBlock.toFixed(0));
-            item.visible = (currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && (currentBlock < targetBlock)
+            progressBar.visible = currentBlock < targetBlock
         }
     }
 

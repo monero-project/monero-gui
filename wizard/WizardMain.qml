@@ -29,10 +29,12 @@
 import QtQuick 2.2
 import Qt.labs.settings 1.0
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.2
 
 import "../components"
 
-Rectangle {
+GridLayout {
+    anchors.fill: parent
     id: wizard
     property alias nextButton : nextButton
     property var settings : ({})
@@ -53,9 +55,9 @@ Rectangle {
     signal wizardRestarted();
     signal useMoneroClicked()
     signal openWalletFromFileClicked()
-    border.color: "#DBDBDB"
-    border.width: 1
-    color: "#FFFFFF"
+//    border.color: "#DBDBDB"
+//    border.width: 1
+//    color: "#FFFFFF"
 
     function restart(){
         wizard.currentPage = 0;
@@ -104,6 +106,7 @@ Rectangle {
     function openCreateWalletPage() {
         print ("show create wallet page");
         currentPath = "create_wallet"
+        pages = paths[currentPath]
         createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
         // goto next page
@@ -113,6 +116,7 @@ Rectangle {
     function openRecoveryWalletPage() {
         print ("show recovery wallet page");
         currentPath = "recovery_wallet"
+        pages = paths[currentPath]
         wizard.nextButton.visible = true
         // goto next page
         switchPage(true);
