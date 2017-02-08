@@ -388,13 +388,14 @@ Rectangle {
                 id: logCategories
                 Layout.preferredWidth:  200
                 Layout.fillWidth: true
-                text: ""
+                text: appWindow.persistentSettings.logCategories
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
                 enabled: logLevel.currentIndex == 5
                 onEditingFinished: {
                     if(enabled) {
                         console.log("log categories changed: ", text);
                         walletManager.setLogCategories(text);
+                        appWindow.persistentSettings.logCategories = text;
                     }
                 }
             }
