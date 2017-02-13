@@ -12,7 +12,7 @@ List of available languages for your wallet's seed:
 6 : Japanese
 -->
         <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
-        <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
+        <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
         <language display_name="English (ZA)"        locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/>
         <language display_name="Russian"     locale="ru_RU" wallet_language="Russian" flag="/lang/flags/russia.png" qs="none"/>
         <language display_name="Arabic (PS)"  locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/>
@@ -20,5 +20,5 @@ List of available languages for your wallet's seed:
         <language display_name="Italian"      locale="it_IT" wallet_language="Italian" flag="/lang/flags/italy.png" qs="none"/>
         <language display_name="German"     locale="de_DE" wallet_language="German"  flag="/lang/flags/german.png" qs="none"/>
         <language display_name="Mandarin"      locale="zh_CN" wallet_language="English" flag="/lang/flags/china.png" qs="none"/>
-        <language display_name="Portuguese (BR)"     locale="pt_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/> -->
+        <language display_name="Portuguese (BR)"     locale="pt_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/>
 </languages>
