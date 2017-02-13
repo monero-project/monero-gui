@@ -273,7 +273,7 @@ CONFIG(release, debug|release) {
 } else {
     DESTDIR = debug/bin
     LANGUPD_OPTIONS =
-    LANGREL_OPTIONS = -markuntranslated "MISS_TR "
+#    LANGREL_OPTIONS = -markuntranslated "MISS_TR "
 }
 
 TARGET_FULL_PATH = $$OUT_PWD/$$DESTDIR
