@@ -110,7 +110,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="107"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation type="unfinished">Annuleren</translation>
     </message>
 </context>
 <context>
