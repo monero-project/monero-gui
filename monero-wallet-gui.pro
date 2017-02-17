@@ -196,8 +196,13 @@ win32 {
 linux {
     CONFIG(static) {
         message("using static libraries")
-        LIBS+= -Wl,-Bstatic
+        LIBS+= -Wl,-Bstatic    
+        QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+        contains(QT_ARCH, x86_64) {
+            LIBS+= -lunbound
+        }
     }
+
     LIBS+= \
         -lboost_serialization \
         -lboost_thread \
@@ -210,7 +215,7 @@ linux {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
-        -ldl
+        -lGL
     # currently monero has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
@@ -219,11 +224,6 @@ linux {
         message(Building with libunwind)
         LIBS += -Wl,-Bdynamic -lunwind
     }
-    
-
-    QMAKE_LFLAGS_RPATH=
-    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/libs\'"
-    
 }
 
 macx {
