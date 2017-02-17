@@ -100,12 +100,12 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="65"/>
         <source>Daemon doesn&apos;t appear to be running</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon scheint nicht aktiv zu sein</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="90"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte den Deamon</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="107"/>
@@ -206,7 +206,7 @@
     <message>
         <location filename="../pages/History.qml" line="182"/>
         <source>Type for incremental search...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tippe für eine Vorschlagssuche</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="222"/>
@@ -217,7 +217,7 @@
         <location filename="../pages/History.qml" line="247"/>
         <location filename="../pages/History.qml" line="396"/>
         <source>To</source>
-        <translation>Bis</translation>
+        <translation>bis</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="273"/>
@@ -275,7 +275,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Destinations:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziele:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="99"/>
@@ -433,7 +433,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="77"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bitte gebe dein Wallet Passwort ein:&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="152"/>
@@ -487,7 +487,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="100"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">WARNUNG: Keine Verbindung zum Deamon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="122"/>
@@ -497,17 +497,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="129"/>
         <source>%2 confirmations: %3 (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%2 Bestätigungen: &%3 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="131"/>
         <source>1 confirmation: %2 (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1 Bestätigung %2 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
         <source>No transaction found yet...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Noch keine Transaktion gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="143"/>
@@ -517,17 +517,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="143"/>
         <source>%1 transactions found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 Transaktionen gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="149"/>
         <source> with more money (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mit mehr Geld (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="151"/>
         <source> with not enough money (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ohne genug Geld (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="182"/>
@@ -537,7 +537,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="189"/>
         <source>ReadOnly wallet address displayed here</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schreibgeschütztes Wallet wird hier angezeigt</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="211"/>
@@ -547,7 +547,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="220"/>
         <source>ReadOnly wallet integrated address displayed here</source>
-        <translation>NurLesen Wallets integrierte Adresse wird hier angezeigt</translation>
+        <translation type="unfinished">NurLesen Wallet integrierte Adresse wird hier angezeigt</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="244"/>
@@ -573,7 +573,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="325"/>
         <source>Tracking payments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zahlungen tracken</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="326"/>
@@ -638,7 +638,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="70"/>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Falsches Passwort</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="99"/>
@@ -678,27 +678,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="286"/>
         <source>Manage daemon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Daemon verwalten</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="295"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Starte den Deamon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="310"/>
         <source>Stop daemon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stoppe den Deamon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="325"/>
         <source>Show log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zeige Bericht</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="345"/>
         <source>Daemon log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Deamon Bericht</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="198"/>
@@ -880,17 +880,17 @@
     <message>
         <location filename="../pages/Transfer.qml" line="129"/>
         <source>LOW (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Niedrig (x1 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="130"/>
         <source>MEDIUM (x20 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mittel (x20 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="131"/>
         <source>HIGH (x166 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hoch (x166 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="160"/>
@@ -916,13 +916,14 @@
         <location filename="../pages/Transfer.qml" line="384"/>
         <location filename="../pages/Transfer.qml" line="390"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wallet ist nicht mit dem Deamon verbunden.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="393"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Der verbundene Deamon ist nicht mit der GUI kompatibel.
+        Bitte installiere die neuste Version oder verbinde dich zu einem anderen Deamon.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="398"/>
@@ -968,17 +969,17 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="94"/>
         <source> - the recipient address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> - die Empfänger Adresse</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="98"/>
         <source> - the transaction ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> - die Transaktions-ID</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="102"/>
         <source> - the secret transaction key supplied by the sender</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> - der geheime Transaktionsschlüssel des Senders</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
@@ -988,7 +989,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="119"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adresse</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="126"/>
@@ -998,27 +999,27 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="148"/>
         <source>Transaction ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transaktions-ID</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="157"/>
         <source>Paste tx ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Füge tx-ID ein</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="189"/>
         <source>Paste tx key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Füge tx-ID ein</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="181"/>
         <source>Transaction key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transaktions Schlüssel</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="212"/>
         <source>CHECK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PRÜFE</translation>
     </message>
 </context>
 <context>
@@ -1168,7 +1169,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
         <source>You’re all set up!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Du bist fertig soweit!</translation>
     </message>
     <message>
         <source>You’re all setup!</source>
@@ -1185,7 +1186,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMain.qml" line="161"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nur ASCII Zeichen sind im Walletpfad oder im Walletname erlaubt.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="361"/>
@@ -1376,7 +1377,9 @@ Please upgrade or connect to another daemon</source>
         <source>
 
 Amount: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+        
+Betrag: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="405"/>
@@ -1389,14 +1392,14 @@ Mixin: </source>
         <location filename="../main.qml" line="406"/>
         <source>
 Number of transactions: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anzahl an Transaktionen: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="407"/>
         <source>
 
 Description: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beschreibung: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="436"/>
@@ -1406,27 +1409,27 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="527"/>
         <source>Money sent successfully: %1 transaction(s) </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geld erfolgreich verschickt: %1 Transaktion(en)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="562"/>
         <source>Payment check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zahlungscheck</translation>
     </message>
     <message>
         <location filename="../main.qml" line="567"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Diese Adresse hat %1 Monero empfangen, aber die Transaktion wurde noch nicht geminet.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="572"/>
         <source>This address received %1 monero, with %2 confirmations</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Diese Adresse hat %1 Monero empfangen, mit %2 Bestätigungen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="576"/>
         <source>This address received nothing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Die Adresse hat nichts empfangen.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="378"/>
@@ -1437,12 +1440,12 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="315"/>
         <source>Waiting for daemon to start...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warte auf Start des Deamons...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="320"/>
         <source>Waiting for daemon to stop...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warte bis der Demon beendet wird...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="399"/>
