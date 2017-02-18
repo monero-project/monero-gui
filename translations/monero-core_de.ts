@@ -497,7 +497,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="129"/>
         <source>%2 confirmations: %3 (%1)</source>
-        <translation type="unfinished">%2 Bestätigungen: &%3 (%1)</translation>
+        <translation type="unfinished">%2 Bestätigungen: %3 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="131"/>
