@@ -214,6 +214,7 @@ linux {
         -lboost_program_options \
         -lssl \
         -lcrypto \
+        -ldl \
         -Wl,-Bdynamic \
         -lGL
     # currently monero has an issue with "static" build and linunwind-dev,
