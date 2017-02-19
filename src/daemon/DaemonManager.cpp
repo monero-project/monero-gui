@@ -40,9 +40,10 @@ bool DaemonManager::start(const QString &flags)
             arguments << str;
     }
 
+    arguments << "--updates" << "disabled";
 
     qDebug() << "starting monerod " + m_monerod;
-    qDebug() << "With command line arguments " << m_monerod;
+    qDebug() << "With command line arguments " << arguments;
 
     m_daemon = new QProcess();
     initialized = true;
