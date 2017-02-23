@@ -13,26 +13,27 @@ public:
 
     static DaemonManager * instance(const QStringList *args);
 
-    Q_INVOKABLE bool start(const QString &flags);
-    Q_INVOKABLE bool stop();
+    Q_INVOKABLE bool start(const QString &flags, bool testnet);
+    Q_INVOKABLE bool stop(bool testnet);
 
     // return true if daemon process is started
-    Q_INVOKABLE bool running() const;
-    Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet);
+    Q_INVOKABLE bool running(bool testnet) const;
+    // Send daemon command from qml and prints output in console window.
+    Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet) const;
 
+private:
+    bool sendCommand(const QString &cmd, bool testnet, QString &message) const;
 signals:
-    void daemonStarted();
-    void daemonStopped();
-    void daemonConsoleUpdated(QString message);
+    void daemonStarted() const;
+    void daemonStopped() const;
+    void daemonConsoleUpdated(QString message) const;
 
 public slots:
     void printOutput();
     void printError();
-    void closing();
     void stateChanged(QProcess::ProcessState state);
 
 private:
-
     explicit DaemonManager(QObject *parent = 0);
     static DaemonManager * m_instance;
     static QStringList m_clArgs;

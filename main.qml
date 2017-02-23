@@ -147,6 +147,11 @@ ApplicationWindow {
     function mousePressed(obj, mouseX, mouseY) {}
     function mouseReleased(obj, mouseX, mouseY) {}
 
+    function loadPage(page) {
+        middlePanel.state = page;
+        leftPanel.selectItem(page);
+    }
+
     function openWalletFromFile(){
         persistentSettings.restore_height = 0
         restoreHeight = 0;
@@ -274,7 +279,7 @@ ApplicationWindow {
         leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running()){
+        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -341,7 +346,7 @@ ApplicationWindow {
         }
 
         // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet.connected
+        leftPanel.networkStatus.connected = currentWallet.connected()
 
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
@@ -352,9 +357,9 @@ ApplicationWindow {
         daemonSynced = dCurrentBlock >= dTargetBlock
         // Update daemon sync progress
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected !== Wallet.ConnectionStatus_Disconnected
+        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected
         // Update wallet sync progress
-        updateSyncing((currentWallet.connected !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
+        updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
 
@@ -380,23 +385,25 @@ ApplicationWindow {
 
     function startDaemon(flags){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags);
+        daemonManager.start(flags, persistentSettings.testnet);
         persistentSettings.daemonFlags = flags
     }
 
     function stopDaemon(){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
-        daemonManager.stop();
+        daemonManager.stop(persistentSettings.testnet);
     }
 
     function onDaemonStarted(){
         console.log("daemon started");
         daemonRunning = true;
+        hideProcessingSplash();
     }
     function onDaemonStopped(){
         console.log("daemon stopped");
         hideProcessingSplash();
         daemonRunning = false;
+        currentWallet.connected(true);
     }
 
     function onWalletNewBlock(blockHeight, targetHeight) {
@@ -438,7 +445,7 @@ ApplicationWindow {
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            if (currentWallet.connected == Wallet.ConnectionStatus_WrongVersion)
+            if (currentWallet.connected() == Wallet.ConnectionStatus_WrongVersion)
                 informationPopup.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
             else
                 informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
@@ -870,6 +877,9 @@ ApplicationWindow {
 
     DaemonManagerDialog {
         id: daemonManagerDialog
+        onRejected: {
+            loadPage("Settings");
+        }
 
     }
 
@@ -1220,7 +1230,5 @@ ApplicationWindow {
     onClosing: {
         // Close wallet non async on exit
         walletManager.closeWallet();
-        // Stop daemon and pool miner
-        daemonManager.stop();
     }
 }

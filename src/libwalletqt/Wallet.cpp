@@ -20,7 +20,7 @@
 #include <QMutexLocker>
 
 namespace {
-    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
+    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
     static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 60;
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
@@ -118,6 +118,7 @@ void Wallet::updateConnectionStatusAsync()
         if (newStatus != m_connectionStatus || !m_initialized) {
             m_initialized = true;
             m_connectionStatus = newStatus;
+            qDebug() << "NEW STATUS " << newStatus;
             emit connectionStatusChanged(newStatus);
         }
         // Release lock

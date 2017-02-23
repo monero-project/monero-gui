@@ -64,6 +64,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    Monero::Wallet::init(argv[0], "monero-wallet-gui");
 
     qInstallMessageHandler(messageHandler);
     QApplication app(argc, argv);
@@ -141,7 +142,6 @@ int main(int argc, char *argv[])
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
-    QObject::connect(&app, SIGNAL(aboutToQuit()), daemonManager, SLOT(closing()));
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
 
