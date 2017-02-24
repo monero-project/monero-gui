@@ -21,7 +21,7 @@
 
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
-    static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 60;
+    static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 30;
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
 
@@ -262,7 +262,7 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
-    if (m_daemonBlockChainTargetHeight == 0
+    if (m_daemonBlockChainTargetHeight <= 1
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
 

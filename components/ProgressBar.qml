@@ -38,6 +38,13 @@ Item {
     //clip: true
 
     function updateProgress(currentBlock,targetBlock){
+        if(targetBlock == 1) {
+            fillLevel = 0
+            progressText.text = qsTr("Establishing connection...");
+            progressBar.visible = true
+            return
+        }
+
         if(targetBlock > 0) {
             var progressLevel = ((currentBlock/targetBlock) * 100).toFixed(0);
             fillLevel = progressLevel

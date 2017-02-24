@@ -351,10 +351,10 @@ ApplicationWindow {
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
-
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
-        daemonSynced = dCurrentBlock >= dTargetBlock
+        // targetBlock = currentBlock = 1 before network connection is established.
+        daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
         // Update daemon sync progress
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
         leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected
