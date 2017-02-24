@@ -201,6 +201,9 @@ linux {
         contains(QT_ARCH, x86_64) {
             LIBS+= -lunbound
         }
+    } else {
+      # On some distro's we need to add dynload
+      LIBS+= -ldl
     }
 
     LIBS+= \
