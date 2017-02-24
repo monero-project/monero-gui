@@ -700,7 +700,7 @@ Rectangle {
         }
         pageRoot.enabled = false;
 
-        switch (currentWallet.connected) {
+        switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Disconnected:
             statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
             break

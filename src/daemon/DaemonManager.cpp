@@ -23,10 +23,14 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
     return m_instance;
 }
 
-bool DaemonManager::start(const QString &flags)
+bool DaemonManager::start(const QString &flags, bool testnet)
 {
     // prepare command line arguments and pass to monerod
     QStringList arguments;
+    arguments << "--detach";
+    if(testnet)
+        arguments << "--testnet";
+
     foreach (const QString &str, m_clArgs) {
           qDebug() << QString(" [%1] ").arg(str);
           if (!str.isEmpty())
@@ -53,8 +57,7 @@ bool DaemonManager::start(const QString &flags)
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
-    m_daemon->start(m_monerod, arguments);
-    bool started =  m_daemon->waitForStarted();
+    bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
@@ -68,16 +71,14 @@ bool DaemonManager::start(const QString &flags)
     return started;
 }
 
-bool DaemonManager::stop()
+bool DaemonManager::stop(bool testnet)
 {
-    if (initialized) {
-        qDebug() << "stopping daemon";
-        // we can't use QProcess::terminate() on windows console process
-        // write exit command to stdin
-        m_daemon->write("exit\n");
-    }
-
-    return true;
+    QString message;
+    bool stopped = sendCommand("exit",testnet,message);
+    qDebug() << message;
+    if(stopped)
+        emit daemonStopped();
+    return stopped;
 }
 
 void DaemonManager::stateChanged(QProcess::ProcessState state)
@@ -110,40 +111,42 @@ void DaemonManager::printError()
     }
 }
 
-bool DaemonManager::running() const
-{
-    if (initialized) {
-        qDebug() << m_daemon->state();
-        qDebug() << QProcess::NotRunning;
-       // m_daemon->write("status\n");
-        return m_daemon->state() > QProcess::NotRunning;
-    }
-    return false;
-}
-
-bool DaemonManager::sendCommand(const QString &cmd,bool testnet)
-{
-    // If daemon is started by GUI - interactive mode
-    if (initialized && running()) {
-        m_daemon->write(cmd.toUtf8() +"\n");
+bool DaemonManager::running(bool testnet) const
+{ 
+    QString status;
+    sendCommand("status",testnet, status);
+    qDebug() << status;
+    // `./monerod status` returns BUSY when syncing.
+    // Treat busy as connected, until fixed upstream.
+    if (status.contains("Height:") || status.contains("BUSY") ) {
+        emit daemonStarted();
         return true;
     }
+    emit daemonStopped();
+    return false;
+}
+bool DaemonManager::sendCommand(const QString &cmd,bool testnet) const
+{
+    QString message;
+    return sendCommand(cmd, testnet, message);
+}
 
-    // else send external command
+bool DaemonManager::sendCommand(const QString &cmd,bool testnet, QString &message) const
+{
     QProcess p;
     QString external_cmd = m_monerod + " " + cmd;
+    qDebug() << "sending external cmd: " << external_cmd;
 
-    // Add nestnet flag if needed
+    // Add testnet flag if needed
     if (testnet)
         external_cmd += " --testnet";
     external_cmd += "\n";
 
     p.start(external_cmd);
-    bool started = p.waitForFinished(-1);
-    QString p_stdout = p.readAllStandardOutput();
-    qDebug() << p_stdout;
-    emit daemonConsoleUpdated(p_stdout);
 
+    bool started = p.waitForFinished(-1);
+    message = p.readAllStandardOutput();
+    emit daemonConsoleUpdated(message);
     return started;
 }
 
@@ -161,15 +164,5 @@ DaemonManager::DaemonManager(QObject *parent)
     if (m_monerod.length() == 0) {
         qCritical() << "no daemon binary defined for current platform";
         m_has_daemon = false;
-    }
-}
-
-void DaemonManager::closing()
-{
-    qDebug() << __FUNCTION__;
-    stop();
-    // Wait for daemon to stop before exiting (max 10 secs)
-    if (initialized) {
-        m_daemon->waitForFinished(10000);
     }
 }

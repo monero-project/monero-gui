@@ -173,21 +173,8 @@ Rectangle {
 
             StandardButton {
                 visible: true
-                id: daemonConsolePopupButton
-                text: qsTr("Show log") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    daemonConsolePopup.open();
-                }
-            }
-
-            StandardButton {
-                visible: true
                 id: daemonStatusButton
-                text: qsTr("Status") + translationManager.emptyString
+                text: qsTr("Show status") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -420,6 +407,7 @@ Rectangle {
         console.log("Settings page loaded");
         initSettings();
         viewOnly = currentWallet.viewOnly;
+        daemonManager.running(persistentSettings.testnet)
     }
 
     // fires only once

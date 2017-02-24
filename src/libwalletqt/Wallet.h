@@ -28,7 +28,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(bool testnet READ testnet)
-    Q_PROPERTY(ConnectionStatus connected READ connected)
+//    Q_PROPERTY(ConnectionStatus connected READ connected)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(QString address READ address)
@@ -77,7 +77,7 @@ public:
     bool testnet() const;
 
     //! returns whether the wallet is connected, and version status
-    ConnectionStatus connected(bool forceCheck = false);
+    Q_INVOKABLE ConnectionStatus connected(bool forceCheck = false);
     void updateConnectionStatusAsync();
 
     //! returns true if wallet was ever synchronized

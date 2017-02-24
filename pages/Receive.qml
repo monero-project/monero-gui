@@ -96,7 +96,7 @@ Rectangle {
             setTrackingLineText("-")
             return
         }
-        if (appWindow.currentWallet.connected == Wallet.ConnectionStatus_Disconnected) {
+        if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
             setTrackingLineText(qsTr("WARNING: no connection to daemon"))
             return
         }
