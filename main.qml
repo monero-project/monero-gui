@@ -66,6 +66,7 @@ ApplicationWindow {
     property bool foundNewBlock: false
     property int timeToUnlock: 0
     property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
+    property int blocksToSync: 1
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -408,7 +409,12 @@ ApplicationWindow {
 
     function onWalletNewBlock(blockHeight, targetHeight) {
         // Update progress bar
-        leftPanel.progressBar.updateProgress(blockHeight,targetHeight);
+        var remaining = targetHeight - blockHeight;
+        if(blocksToSync < remaining) {
+            blocksToSync = remaining;
+        }
+
+        leftPanel.progressBar.updateProgress(blockHeight,targetHeight, blocksToSync);
         foundNewBlock = true;
     }
 

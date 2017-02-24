@@ -37,7 +37,7 @@ Item {
     visible: false
     //clip: true
 
-    function updateProgress(currentBlock,targetBlock){
+    function updateProgress(currentBlock,targetBlock, blocksToSync){
         if(targetBlock == 1) {
             fillLevel = 0
             progressText.text = qsTr("Establishing connection...");
@@ -46,9 +46,15 @@ Item {
         }
 
         if(targetBlock > 0) {
-            var progressLevel = ((currentBlock/targetBlock) * 100).toFixed(0);
+            var remaining = targetBlock - currentBlock
+            // wallet sync
+            if(blocksToSync > 0)
+                var progressLevel = (100*(blocksToSync - remaining)/blocksToSync).toFixed(0);
+            // Daemon sync
+            else
+                var progressLevel = (100*(currentBlock/targetBlock)).toFixed(0);
             fillLevel = progressLevel
-            progressText.text = qsTr("Synchronizing blocks %1/%2").arg(currentBlock.toFixed(0)).arg(targetBlock.toFixed(0));
+            progressText.text = qsTr("Blocks remaining: %1").arg(remaining.toFixed(0));
             progressBar.visible = currentBlock < targetBlock
         }
     }
