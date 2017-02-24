@@ -202,7 +202,7 @@ linux {
             LIBS+= -lunbound
         }
     } else {
-      # On some distro's we need to all dynload
+      # On some distro's we need to add dynload
       LIBS+= -ldl
     }
 
