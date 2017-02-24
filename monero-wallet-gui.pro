@@ -216,9 +216,13 @@ linux {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
-        -lcrypto \
-        -Wl,-Bdynamic \
-        -lGL
+        -lcrypto
+
+    if(!android) {
+        LIBS+= \
+            -Wl,-Bdynamic \
+            -lGL
+    }
     # currently monero has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
