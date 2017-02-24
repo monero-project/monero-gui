@@ -201,6 +201,9 @@ linux {
         contains(QT_ARCH, x86_64) {
             LIBS+= -lunbound
         }
+    } else {
+      # On some distro's we need to all dynload
+      LIBS+= -ldl
     }
 
     LIBS+= \
@@ -214,7 +217,6 @@ linux {
         -lboost_program_options \
         -lssl \
         -lcrypto \
-        -ldl \
         -Wl,-Bdynamic \
         -lGL
     # currently monero has an issue with "static" build and linunwind-dev,
