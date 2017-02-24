@@ -126,5 +126,6 @@
         <file>wizard/WizardCreateViewOnlyWallet.qml</file>
         <file>components/DaemonConsole.qml</file>
         <file>components/QRCodeScanner.qml</file>
+        <file>components/Notifier.qml</file>
     </qresource>
 </RCC>

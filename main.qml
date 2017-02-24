@@ -765,6 +765,7 @@ ApplicationWindow {
                 initialize(persistentSettings);
         }
 
+        checkUpdates();
     }
 
     onRightPanelExpandedChanged: {
@@ -1216,6 +1217,9 @@ ApplicationWindow {
             }
         }
 
+        Notifier {
+            id: notifier
+        }
     }
     onClosing: {
         // Close wallet non async on exit
@@ -1223,4 +1227,30 @@ ApplicationWindow {
         // Stop daemon and pool miner
         daemonManager.stop();
     }
+
+    function checkUpdates() {
+        var update = walletManager.checkUpdates("monero-gui", "gui")
+        if (update === "")
+            return
+        print("Update found: " + update)
+        var parts = update.split("|")
+        if (parts.length == 4) {
+          var version = parts[0]
+          var hash = parts[1]
+          var user_url = parts[2]
+          var auto_url = parts[3]
+          var msg = qsTr("New version of monero-wallet-gui is available: %1<br>%2").arg(version).arg(user_url) + translationManager.emptyString
+          notifier.show(msg)
+        }
+        else {
+          print("Failed to parse update spec")
+        }
+    }
+
+    Timer {
+        id: updatesTimer
+        interval: 3600*1000; running: true; repeat: true
+        onTriggered: checkUpdates()
+    }
+
 }
