@@ -30,6 +30,7 @@ private:
 signals:
     void daemonStarted() const;
     void daemonStopped() const;
+    void daemonStartFailure() const;
     void daemonConsoleUpdated(QString message) const;
 
 public slots:

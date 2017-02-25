@@ -7,6 +7,11 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QApplication>
 #include <QProcess>
+#include <QTime>
+
+namespace {
+    static const int DAEMON_START_TIMEOUT_SECONDS = 30;
+}
 
 DaemonManager * DaemonManager::m_instance = nullptr;
 QStringList DaemonManager::m_clArgs;
@@ -67,8 +72,11 @@ bool DaemonManager::start(const QString &flags, bool testnet)
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
 
-    if (!started)
+    if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
+        emit daemonStartFailure();
+        return false;
+    }
 
     // Start start watcher
     QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::startWatcher, testnet);
@@ -77,14 +85,15 @@ bool DaemonManager::start(const QString &flags, bool testnet)
             this, [this, watcher]() {
         QFuture<bool> future = watcher->future();
         watcher->deleteLater();
-        if(future.result()) {
+        if(future.result())
             emit daemonStarted();
-        }
+        else
+            emit daemonStartFailure();
     });
     watcher->setFuture(future);
 
 
-    return started;
+    return true;
 }
 
 bool DaemonManager::stop(bool testnet)
@@ -112,12 +121,17 @@ bool DaemonManager::stop(bool testnet)
 bool DaemonManager::startWatcher(bool testnet) const
 {
     // Check if daemon is started every 2 seconds
-    while(true && !m_app_exit) {
+    QTime timer;
+    timer.restart();
+    while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
         QThread::sleep(2);
         if(!running(testnet)) {
             qDebug() << "daemon not running. checking again in 2 seconds.";
-        } else
+        } else {
+            qDebug() << "daemon is started. Waiting 5 seconds to let daemon catch up";
+            QThread::sleep(5);
             return true;
+        }
     }
     return false;
 }
