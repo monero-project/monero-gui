@@ -236,7 +236,35 @@ Rectangle {
                 text: (daemonAddress !== undefined) ? daemonAddress[1] : "18081"
                 placeholderText: qsTr("Port")
             }
+        }
 
+        RowLayout {
+
+            Label {
+                id: daemonLoginLabel
+                Layout.fillWidth: true
+                color: "#4A4949"
+                text: qsTr("Login (optional)") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            LineEdit {
+                id: daemonUsername
+                Layout.preferredWidth:  100
+                Layout.fillWidth: true
+                text: persistentSettings.daemonUsername
+                placeholderText: qsTr("Username")
+            }
+
+
+            LineEdit {
+                id: daemonPassword
+                Layout.preferredWidth: 100
+                Layout.fillWidth: true
+                text: persistentSettings.daemonPassword
+                placeholderText: qsTr("Password")
+                echoMode: TextInput.Password
+            }
 
             StandardButton {
                 id: daemonAddrSave
@@ -253,12 +281,17 @@ Rectangle {
                     var newDaemon = daemonAddr.text + ":" + daemonPort.text
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
-                        //Reinit wallet
-                        currentWallet.initAsync(newDaemon)
                     }
+
+                    // Update daemon login
+                    persistentSettings.daemonUsername = daemonUsername.text;
+                    persistentSettings.daemonPassword = daemonPassword.text;
+                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
+                    //Reinit wallet
+                    currentWallet.initAsync(newDaemon);
                 }
             }
-
         }
 
         RowLayout {

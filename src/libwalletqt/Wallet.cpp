@@ -178,8 +178,15 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
         m_walletImpl->setRecoveringFromSeed(true);
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
-    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit);
+    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
     return true;
+}
+
+void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemonPassword)
+{
+    // store daemon login
+    m_daemonUsername = daemonUsername;
+    m_daemonPassword = daemonPassword;
 }
 
 void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
@@ -593,6 +600,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_daemonBlockChainTargetHeightTime.restart();
     m_initialized = false;
     m_connectionStatusRunning = false;
+    m_daemonUsername = "";
+    m_daemonPassword = "";
 }
 
 Wallet::~Wallet()

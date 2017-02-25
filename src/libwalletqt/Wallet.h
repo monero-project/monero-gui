@@ -106,6 +106,9 @@ public:
     //! initializes wallet asynchronously
     Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, quint64 restoreHeight = 0);
 
+    // Set daemon rpc user/pass
+    Q_INVOKABLE void setDaemonLogin(const QString &daemonUsername = "", const QString &daemonPassword = "");
+
     //! create a view only wallet
     Q_INVOKABLE bool createViewOnly(const QString &path, const QString &password) const;
 
@@ -271,6 +274,8 @@ private:
     mutable AddressBookModel * m_addressBookModel;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
+    QString m_daemonUsername;
+    QString m_daemonPassword;
 };
 
 
