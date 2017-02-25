@@ -407,7 +407,7 @@ Rectangle {
         console.log("Settings page loaded");
         initSettings();
         viewOnly = currentWallet.viewOnly;
-        daemonManager.running(persistentSettings.testnet)
+        appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
     }
 
     // fires only once

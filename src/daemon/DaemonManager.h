@@ -20,9 +20,13 @@ public:
     Q_INVOKABLE bool running(bool testnet) const;
     // Send daemon command from qml and prints output in console window.
     Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet) const;
+    Q_INVOKABLE void exit();
 
 private:
+
     bool sendCommand(const QString &cmd, bool testnet, QString &message) const;
+    bool startWatcher(bool testnet) const;
+    bool stopWatcher(bool testnet) const;
 signals:
     void daemonStarted() const;
     void daemonStopped() const;
@@ -41,6 +45,7 @@ private:
     bool initialized = false;
     QString m_monerod;
     bool m_has_daemon = true;
+    bool m_app_exit = false;
 
 };
 

@@ -67,11 +67,22 @@ bool DaemonManager::start(const QString &flags, bool testnet)
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
 
-    if (!started) {
+    if (!started)
         qDebug() << "Daemon start error: " + m_daemon->errorString();
-    } else {
-        emit daemonStarted();
-    }
+
+    // Start start watcher
+    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::startWatcher, testnet);
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    connect(watcher, &QFutureWatcher<bool>::finished,
+            this, [this, watcher]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        if(future.result()) {
+            emit daemonStarted();
+        }
+    });
+    watcher->setFuture(future);
+
 
     return started;
 }
@@ -79,12 +90,62 @@ bool DaemonManager::start(const QString &flags, bool testnet)
 bool DaemonManager::stop(bool testnet)
 {
     QString message;
-    bool stopped = sendCommand("exit",testnet,message);
+    sendCommand("exit",testnet,message);
     qDebug() << message;
-    if(stopped)
-        emit daemonStopped();
-    return stopped;
+
+    // Start stop watcher - Will kill if not shutting down
+    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::stopWatcher, testnet);
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    connect(watcher, &QFutureWatcher<bool>::finished,
+            this, [this, watcher]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        if(future.result()) {
+            emit daemonStopped();
+        }
+    });
+    watcher->setFuture(future);
+
+    return true;
 }
+
+bool DaemonManager::startWatcher(bool testnet) const
+{
+    // Check if daemon is started every 2 seconds
+    while(true && !m_app_exit) {
+        QThread::sleep(2);
+        if(!running(testnet)) {
+            qDebug() << "daemon not running. checking again in 2 seconds.";
+        } else
+            return true;
+    }
+    return false;
+}
+
+bool DaemonManager::stopWatcher(bool testnet) const
+{
+    // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
+    int counter = 0;
+    while(true && !m_app_exit) {
+        QThread::sleep(2);
+        counter++;
+        if(running(testnet)) {
+            qDebug() << "Daemon still running.  " << counter;
+            if(counter >= 5) {
+                qDebug() << "Killing it! ";
+#ifdef Q_OS_WIN
+                QProcess::execute("taskkill /F /IM monerod.exe");
+#else
+                QProcess::execute("pkill monerod");
+#endif
+            }
+
+        } else
+            return true;
+    }
+    return false;
+}
+
 
 void DaemonManager::stateChanged(QProcess::ProcessState state)
 {
@@ -124,10 +185,8 @@ bool DaemonManager::running(bool testnet) const
     // `./monerod status` returns BUSY when syncing.
     // Treat busy as connected, until fixed upstream.
     if (status.contains("Height:") || status.contains("BUSY") ) {
-        emit daemonStarted();
         return true;
     }
-    emit daemonStopped();
     return false;
 }
 bool DaemonManager::sendCommand(const QString &cmd,bool testnet) const
@@ -153,6 +212,12 @@ bool DaemonManager::sendCommand(const QString &cmd,bool testnet, QString &messag
     message = p.readAllStandardOutput();
     emit daemonConsoleUpdated(message);
     return started;
+}
+
+void DaemonManager::exit()
+{
+    qDebug("DaemonManager: exit()");
+    m_app_exit = true;
 }
 
 DaemonManager::DaemonManager(QObject *parent)

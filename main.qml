@@ -235,7 +235,6 @@ ApplicationWindow {
     }
 
     function connectWallet(wallet) {
-        showProcessingSplash("Please wait...")
         currentWallet = wallet
         updateSyncing(false)
 
@@ -341,9 +340,6 @@ ApplicationWindow {
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
-        if (splash.visible) {
-            hideProcessingSplash()
-        }
 
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet.connected()
@@ -398,6 +394,7 @@ ApplicationWindow {
         console.log("daemon started");
         daemonRunning = true;
         hideProcessingSplash();
+        currentWallet.connected(true);
     }
     function onDaemonStopped(){
         console.log("daemon stopped");
@@ -1233,6 +1230,7 @@ ApplicationWindow {
     }
     onClosing: {
         // Close wallet non async on exit
+        daemonManager.exit();
         walletManager.closeWallet();
     }
 
