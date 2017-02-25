@@ -302,6 +302,16 @@ int Wallet::autoRefreshInterval() const
     return m_walletImpl->autoRefreshInterval();
 }
 
+void Wallet::startRefresh() const
+{
+    m_walletImpl->startRefresh();
+}
+
+void Wallet::pauseRefresh() const
+{
+    m_walletImpl->pauseRefresh();
+}
+
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
                                               quint64 amount, quint32 mixin_count,
                                               PendingTransaction::Priority priority)

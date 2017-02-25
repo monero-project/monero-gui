@@ -146,6 +146,10 @@ public:
     //! return auto-refresh interval in seconds
     Q_INVOKABLE int autoRefreshInterval() const;
 
+    // pause/resume refresh
+    Q_INVOKABLE void startRefresh() const;
+    Q_INVOKABLE void pauseRefresh() const;
+
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
                                                        quint64 amount, quint32 mixin_count,
