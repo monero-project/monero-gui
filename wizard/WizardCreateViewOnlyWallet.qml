@@ -47,6 +47,7 @@ ColumnLayout {
 
     function onPageOpened(settingsObject) {
         wizard.nextButton.enabled = true
+        wizard.nextButton.visible = true
     }
 
     function onPageClosed(settingsObject) {      
