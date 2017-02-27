@@ -21,4 +21,5 @@ List of available languages for your wallet's seed:
         <language display_name="German"     locale="de_DE" wallet_language="German"  flag="/lang/flags/german.png" qs="none"/>
         <language display_name="Mandarin"      locale="zh_CN" wallet_language="English" flag="/lang/flags/china.png" qs="none"/>
         <language display_name="Portuguese (BR)"     locale="pt_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/>
+        <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/indonesia.png" qs="none"/>
 </languages>
