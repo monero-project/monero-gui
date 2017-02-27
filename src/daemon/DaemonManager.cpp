@@ -27,7 +27,12 @@ bool DaemonManager::start(const QString &flags, bool testnet)
 {
     // prepare command line arguments and pass to monerod
     QStringList arguments;
+
+    // Start daemon with --detach flag on non-windows platforms
+#ifndef Q_OS_WIN
     arguments << "--detach";
+#endif
+
     if(testnet)
         arguments << "--testnet";
 
