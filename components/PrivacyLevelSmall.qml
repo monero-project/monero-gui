@@ -99,7 +99,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
-            text: qsTr("LOW") + translationManager.emptyString
+            text: qsTr("Low") + translationManager.emptyString
         }
 
         Text {
@@ -110,7 +110,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
-            text: qsTr("MEDIUM") + translationManager.emptyString
+            text: qsTr("Medium") + translationManager.emptyString
         }
 
         Text {
@@ -121,7 +121,7 @@ Item {
             font.bold: true
             color: "#000000"
             x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
-            text: qsTr("HIGH") + translationManager.emptyString
+            text: qsTr("High") + translationManager.emptyString
         }
 
         MouseArea {
