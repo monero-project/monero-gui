@@ -66,6 +66,7 @@ ApplicationWindow {
     property bool foundNewBlock: false
     property int timeToUnlock: 0
     property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
+    property int blocksToSync: 1
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -351,10 +352,10 @@ ApplicationWindow {
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
-
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
-        daemonSynced = dCurrentBlock >= dTargetBlock
+        // targetBlock = currentBlock = 1 before network connection is established.
+        daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
         // Update daemon sync progress
         leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
         leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected
@@ -408,7 +409,12 @@ ApplicationWindow {
 
     function onWalletNewBlock(blockHeight, targetHeight) {
         // Update progress bar
-        leftPanel.progressBar.updateProgress(blockHeight,targetHeight);
+        var remaining = targetHeight - blockHeight;
+        if(blocksToSync < remaining) {
+            blocksToSync = remaining;
+        }
+
+        leftPanel.progressBar.updateProgress(blockHeight,targetHeight, blocksToSync);
         foundNewBlock = true;
     }
 

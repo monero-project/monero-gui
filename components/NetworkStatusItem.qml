@@ -48,8 +48,11 @@ Row {
     }
 
     function getConnectionStatusString(status) {
-        if (status == Wallet.ConnectionStatus_Connected)
+        if (status == Wallet.ConnectionStatus_Connected) {
+            if(!appWindow.daemonSynced)
+                return qsTr("Synchronizing")
             return qsTr("Connected")
+        }
         if (status == Wallet.ConnectionStatus_WrongVersion)
             return qsTr("Wrong version")
         if (status == Wallet.ConnectionStatus_Disconnected)
