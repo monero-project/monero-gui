@@ -665,7 +665,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="444"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Endereço que assina &lt;font size=&apos;2&apos;&gt;  ( Digite ou selecione da &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;caderneta&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; de endereços )&lt;/font&gt</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Endereço que assina &lt;font size=&apos;2&apos;&gt;  ( Digite ou selecione da &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;caderneta&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; de endereços )&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
