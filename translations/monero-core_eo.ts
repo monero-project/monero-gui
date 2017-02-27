@@ -474,7 +474,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="87"/>
         <source>Synchronizing blocks</source>
-        <translation>Sinkronigado de blokoj/translation>
+        <translation>Sinkronigado de blokoj</translation>
     </message>
 </context>
 <context>
