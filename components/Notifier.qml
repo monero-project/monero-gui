@@ -36,11 +36,9 @@ Item {
     property bool active: false
     height: 120
     width: 240
-    x: parent.width - width
-    y: parent.height - height * scale.yScale
-    anchors.margins:15
-    anchors.bottom: parent.bottom
-    anchors.right: parent.right
+    property int margin: 15
+    x: parent.width - width - margin
+    y: parent.height - height * scale.yScale - margin * scale.yScale
 
     Rectangle {
         color: "#FF6C3C"
