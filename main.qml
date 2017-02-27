@@ -822,6 +822,7 @@ ApplicationWindow {
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
+        property bool transferShowAdvanced: false
     }
 
     // Information dialog
