@@ -236,7 +236,6 @@ ApplicationWindow {
     }
 
     function connectWallet(wallet) {
-        showProcessingSplash("Please wait...")
         currentWallet = wallet
         updateSyncing(false)
 
@@ -342,9 +341,6 @@ ApplicationWindow {
 
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
-        if (splash.visible) {
-            hideProcessingSplash()
-        }
 
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet.connected()
@@ -385,6 +381,9 @@ ApplicationWindow {
     }
 
     function startDaemon(flags){
+        // Pause refresh while starting daemon
+        currentWallet.pauseRefresh();
+
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         daemonManager.start(flags, persistentSettings.testnet);
         persistentSettings.daemonFlags = flags
@@ -399,12 +398,28 @@ ApplicationWindow {
         console.log("daemon started");
         daemonRunning = true;
         hideProcessingSplash();
+        currentWallet.connected(true);
+        // resume refresh
+        currentWallet.startRefresh();
     }
     function onDaemonStopped(){
         console.log("daemon stopped");
         hideProcessingSplash();
         daemonRunning = false;
         currentWallet.connected(true);
+    }
+
+    function onDaemonStartFailure(){
+        console.log("daemon start failed");
+        hideProcessingSplash();
+        // resume refresh
+        currentWallet.startRefresh();
+        daemonRunning = false;
+        informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
+        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        informationPopup.icon  = StandardIcon.Critical
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
     }
 
     function onWalletNewBlock(blockHeight, targetHeight) {
@@ -769,6 +784,7 @@ ApplicationWindow {
         walletManager.walletClosed.connect(onWalletClosed);
 
         daemonManager.daemonStarted.connect(onDaemonStarted);
+        daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
         daemonManager.daemonStopped.connect(onDaemonStopped);
 
         if(!walletsFound()) {
@@ -1239,6 +1255,7 @@ ApplicationWindow {
     }
     onClosing: {
         // Close wallet non async on exit
+        daemonManager.exit();
         walletManager.closeWallet();
     }
 
