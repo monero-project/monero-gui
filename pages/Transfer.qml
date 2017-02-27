@@ -112,6 +112,7 @@ Rectangle {
       anchors.top: parent.top
       anchors.left: parent.left
       anchors.right: parent.right
+      anchors.topMargin: 20
       height: 400
 
       Label {
