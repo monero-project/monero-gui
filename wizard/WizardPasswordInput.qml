@@ -43,7 +43,7 @@ FocusScope {
         horizontalAlignment: TextInput.AlignLeft
         verticalAlignment: TextInput.AlignVCenter
         font.family: "Arial"
-        font.pixelSize: 32
+        font.pixelSize: 26
         echoMode: TextInput.Password
         style: TextFieldStyle {
             renderType: Text.NativeRendering
