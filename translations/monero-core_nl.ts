@@ -1165,7 +1165,7 @@ Graag updaten of verbind met een andere node</translation>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
         <source>You’re all set up!</source>
-        <translation>Je bent klaar met instelling!</translation>
+        <translation>U bent klaar met instellen!</translation>
     </message>
     <message>
         <source>You’re all setup!</source>
