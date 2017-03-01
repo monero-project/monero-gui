@@ -64,6 +64,10 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    // Enable high DPI scaling on windows & linux
+#if !defined(Q_OS_ANDROID)
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
 
     qInstallMessageHandler(messageHandler);
