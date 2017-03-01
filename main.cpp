@@ -50,6 +50,7 @@
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
 #include "wallet/wallet2_api.h"
+#include "MainApp.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
 
     qInstallMessageHandler(messageHandler);
-    QApplication app(argc, argv);
+    MainApp app(argc, argv);
 
     qDebug() << "app startd";
 
@@ -139,6 +140,8 @@ int main(int argc, char *argv[])
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
     const QStringList arguments = QCoreApplication::arguments();
 
+    engine.rootContext()->setContextProperty("mainApp", &app);
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
@@ -203,4 +206,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-

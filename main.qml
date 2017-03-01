@@ -681,6 +681,7 @@ ApplicationWindow {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = "internal error";
             informationPopup.icon = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
             informationPopup.open()
             return
         }
@@ -786,6 +787,9 @@ ApplicationWindow {
         daemonManager.daemonStarted.connect(onDaemonStarted);
         daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
         daemonManager.daemonStopped.connect(onDaemonStopped);
+
+        // Connect app exit to qml window exit handling
+        mainApp.closing.connect(appWindow.close);
 
         if(!walletsFound()) {
             rootItem.state = "wizard"
@@ -1253,10 +1257,39 @@ ApplicationWindow {
             id: notifier
         }
     }
+
     onClosing: {
+
+        // If daemon is running - prompt user before exiting
+        if(typeof daemonManager != undefined && daemonManager.running(persistentSettings.testnet)) {
+            close.accepted = false;
+
+            // Show confirmation dialog
+            confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
+            confirmationDialog.text  = qsTr("Daemon will still be running in background when GUI is closed.");
+            confirmationDialog.icon = StandardIcon.Question
+            confirmationDialog.cancelText = qsTr("Stop daemon")
+            confirmationDialog.onAcceptedCallback = function() {
+                closeAccepted();
+            }
+
+            confirmationDialog.onRejectedCallback = function() {
+                daemonManager.stop(persistentSettings.testnet);
+                closeAccepted();
+            };
+
+            confirmationDialog.open()
+
+        } else {
+            closeAccepted();
+        }
+    }
+
+    function closeAccepted(){
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
+        Qt.quit();
     }
 
     function checkUpdates() {

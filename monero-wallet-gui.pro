@@ -38,7 +38,8 @@ HEADERS += \
     src/libwalletqt/AddressBook.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
-    src/QR-Code-scanner/QrCodeScanner.h 
+    src/QR-Code-scanner/QrCodeScanner.h \  
+    MainApp.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -61,7 +62,8 @@ SOURCES += main.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
-    src/QR-Code-scanner/QrCodeScanner.cpp 
+    src/QR-Code-scanner/QrCodeScanner.cpp \  
+    MainApp.cpp
 
 !ios {
     HEADERS += src/daemon/DaemonManager.h
