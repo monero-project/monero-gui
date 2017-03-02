@@ -35,6 +35,7 @@ Item {
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
+    property alias echoMode: input.echoMode
     property int fontSize: 18
     property bool error: false
     signal editingFinished()
