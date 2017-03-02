@@ -28,10 +28,11 @@
 
 import moneroComponents.WalletManager 1.0
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import "../components"
 import "utils.js" as Utils
 
-Item {
+ColumnLayout {
 
     id: passwordPage
     opacity: 0
@@ -46,6 +47,7 @@ Item {
 
     function onPageOpened(settingsObject) {
         wizard.nextButton.enabled = true
+        wizard.nextButton.visible = true
     }
 
     function onPageClosed(settingsObject) {      
@@ -53,29 +55,6 @@ Item {
         settingsObject['view_only_wallet_path'] = walletFullPath
         console.log("wallet path", walletFullPath)
         return wizard.walletPathValid(walletFullPath);
-    }
-
-    Row {
-        id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
-        spacing: 6
-
-        ListModel {
-            id: dotsModel
-            ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
-        }
-
-        Repeater {
-            model: dotsModel
-            delegate: Rectangle {
-                width: 12; height: 12
-                radius: 6
-                color: dotColor
-            }
-        }
     }
 
     WizardManageWalletUI {
@@ -87,7 +66,6 @@ Item {
         progressDotsModel: dotsModel
         recoverMode: false
     }
-
 
     Component.onCompleted: {
         //parent.wizardRestarted.connect(onWizardRestarted)

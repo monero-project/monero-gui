@@ -28,10 +28,13 @@
 
 import moneroComponents.WalletManager 1.0
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import "../components"
 import "utils.js" as Utils
 
-Item {
+ColumnLayout {
+    Layout.leftMargin: wizardLeftMargin
+    Layout.rightMargin: wizardRightMargin
 
     id: passwordPage
     opacity: 0
@@ -72,12 +75,9 @@ Item {
         passwordUI.confirmPassword = "";
     }
 
-    Row {
+    RowLayout {
         id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
-        spacing: 6
+        Layout.alignment: Qt.AlignRight
 
         ListModel {
             id: dotsModel
@@ -100,20 +100,12 @@ Item {
         }
     }
 
-    Column {
+    ColumnLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        spacing: 24
 
         Text {
+            Layout.fillWidth: true
             id: titleText
-            anchors.left: parent.left
-            width: headerColumn.width - dotsRow.width - 16
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
@@ -124,8 +116,8 @@ Item {
         }
 
         Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
+            Layout.bottomMargin: 30
             font.family: "Arial"
             font.pixelSize: 18
             wrapMode: Text.Wrap
@@ -138,14 +130,13 @@ Item {
         }
     }
 
-
-    WizardPasswordUI {
-        id: passwordUI
-        anchors.right: parent.right
-        anchors.left:  parent.left
-        anchors.top: headerColumn.bottom
-        anchors.topMargin: 30
+    ColumnLayout {
+        Layout.fillWidth: true;
+        WizardPasswordUI {
+            id: passwordUI
+        }
     }
+
 
     Component.onCompleted: {
         parent.wizardRestarted.connect(onWizardRestarted)

@@ -29,16 +29,21 @@
 import QtQuick 2.2
 import Qt.labs.settings 1.0
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.1
 
 import "../components"
 
-GridLayout {
+ColumnLayout {
     anchors.fill: parent
+    Layout.fillHeight: true
     id: wizard
     property alias nextButton : nextButton
     property var settings : ({})
     property int currentPage: 0
+    property int wizardLeftMargin: (!isMobile) ?  150 : 25
+    property int wizardRightMargin: (!isMobile) ? 150 : 25
+    property int wizardBottomMargin: (isMobile) ? 150 : 25
+    property int wizardTopMargin: (isMobile) ? 15 : 50
 
     property var paths: {
      //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
@@ -86,14 +91,20 @@ GridLayout {
         }
         console.log("switchpage: currentPage: ", currentPage);
 
+        // Update prev/next button positions for mobile/desktop
+        prevButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+        prevButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+        nextButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+        nextButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+
         if (currentPage > 0 || currentPage < pages.length - 1) {
             pages[currentPage].opacity = 0
             var step_value = next ? 1 : -1
             currentPage += step_value
             pages[currentPage].opacity = 1;
 
-            var nextButtonVisible = pages[currentPage] !== optionsPage && currentPage < pages.length - 1;
-            nextButton.visible = nextButtonVisible;
+            var nextButtonVisible = currentPage > 1 && currentPage < pages.length - 1
+            nextButton.visible = nextButtonVisible
 
             if (typeof pages[currentPage].onPageOpened !== 'undefined') {
                 pages[currentPage].onPageOpened(settings,next)
@@ -227,50 +238,17 @@ GridLayout {
         }
     }
 
-    Rectangle {
-        id: nextButton
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 50
-        visible: wizard.currentPage !== 1 && wizard.currentPage !== 6
-        width: 50; height: 50
-        radius: 25
-        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
-
-
-        Image {
-            anchors.centerIn: parent
-            anchors.horizontalCenterOffset: 3
-            source: "qrc:///images/nextPage.png"
-        }
-
-        MouseArea {
-            id: nextArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: wizard.switchPage(true)
-        }
-    }
-
-
     WizardWelcome {
         id: welcomePage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+//        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+
     }
 
     WizardOptions {
         id: optionsPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
         onCreateWalletClicked: wizard.openCreateWalletPage()
         onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
         onOpenWalletClicked: wizard.openOpenWalletPage();
@@ -278,69 +256,46 @@ GridLayout {
 
     WizardCreateWallet {
         id: createWalletPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardCreateViewOnlyWallet {
         id: createViewOnlyWalletPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardRecoveryWallet {
         id: recoveryWalletPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardPassword {
         id: passwordPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardDonation {
         id: donationPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardFinish {
         id: finishPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     Rectangle {
         id: prevButton
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: wizard.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 50
+        anchors.leftMargin: isMobile ?  20 :  50
+        anchors.bottomMargin: isMobile ?  20 :  50
         visible: parent.currentPage > 0
 
         width: 50; height: 50
@@ -361,12 +316,37 @@ GridLayout {
         }
     }
 
+    Rectangle {
+        id: nextButton
+        anchors.verticalCenter: wizard.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: isMobile ?  20 :  50
+        anchors.bottomMargin: isMobile ?  20 :  50
+        visible: currentPage > 1 && currentPage < pages.length - 1
+        width: 50; height: 50
+        radius: 25
+        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
+
+
+        Image {
+            anchors.centerIn: parent
+            anchors.horizontalCenterOffset: 3
+            source: "qrc:///images/nextPage.png"
+        }
+
+        MouseArea {
+            id: nextArea
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: wizard.switchPage(true)
+        }
+    }
+
     StandardButton {
         id: sendButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 50
-        width: 110
+        anchors.margins:  (isMobile) ? 20 : 50
         text: qsTr("USE MONERO") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
@@ -383,8 +363,7 @@ GridLayout {
        id: createViewOnlyWalletButton
        anchors.right: parent.right
        anchors.bottom: parent.bottom
-       anchors.margins: 50
-       width: 110
+       anchors.margins: (isMobile) ? 20 : 50
        text: qsTr("Create wallet") + translationManager.emptyString
        shadowReleasedColor: "#FF4304"
        shadowPressedColor: "#B32D00"
@@ -416,8 +395,7 @@ GridLayout {
        id: abortViewOnlyButton
        anchors.right: createViewOnlyWalletButton.left
        anchors.bottom: parent.bottom
-       anchors.margins: 50
-       width: 110
+       anchors.margins:  (isMobile) ? 20 : 50
        text: qsTr("Abort") + translationManager.emptyString
        shadowReleasedColor: "#FF4304"
        shadowPressedColor: "#B32D00"

@@ -31,12 +31,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="102"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;(optionnel)&lt;/font&gt;</translation>
+        <translation>ID de paiement &lt;font size=&apos;2&apos;&gt;(Facultatif)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="104"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;Identifiant de paiement&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;un nom d&apos;utilisateur unique utilisé dans&lt;br/&gt;le carnet d&apos;adresses. Ce n&apos;est pas un&lt;br/&gt;transfert d&apos;information envoyé&lt;br/&gt;pendant le transfert</translation>
+        <translation>&lt;b&gt;ID de paiement&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;un nom d&apos;utilisateur unique utilisé dans&lt;br/&gt;le carnet d&apos;adresses. Ce n&apos;est pas un&lt;br/&gt;transfert d&apos;information envoyé&lt;br/&gt;pendant le transfert</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="116"/>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Payment ID</source>
-        <translation type="vanished">Identifiant de paiement</translation>
+        <translation type="vanished">ID de paiement</translation>
     </message>
     <message>
         <source>Description</source>
@@ -101,7 +101,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="106"/>
         <source>Payment ID:</source>
-        <translation>Identifiant de paiement :</translation>
+        <translation>ID de paiement :</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="90"/>
         <source>Start daemon</source>
-        <translation>Démarrer le démon</translation>
+        <translation>Démarrer démon</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="107"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="120"/>
         <source>Daemon startup flags</source>
-        <translation>Options de démarrage du démon</translation>
+        <translation>Options de démarrage</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="129"/>
@@ -300,13 +300,13 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>Identifiant de transaction :</translation>
+        <translation>ID de transaction :</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
         <location filename="../components/HistoryTable.qml" line="204"/>
         <source>Payment ID:</source>
-        <translation>Identifiant de paiement :</translation>
+        <translation>ID de paiement :</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
@@ -462,7 +462,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="395"/>
         <source>Check payment</source>
-        <translation>Vérifier un paiement</translation>
+        <translation>Vérifier paiement</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="419"/>
@@ -547,7 +547,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="106"/>
         <source>CPU threads</source>
-        <translation>Threads du processeur</translation>
+        <translation>Threads CPU</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="113"/>
@@ -562,7 +562,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="131"/>
         <source>Start mining</source>
-        <translation>Démarrer l&apos;extraction minière</translation>
+        <translation>Démarrer</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="141"/>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Stop mining</source>
-        <translation>Arrêter l&apos;extraction minière</translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="173"/>
@@ -638,12 +638,12 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="70"/>
         <source>Please enter wallet password</source>
-        <translation>Veuillez entrer le mot de passe du portefeuille</translation>
+        <translation>Entrez le mot de passe du portefeuille</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="70"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation>Veuillez entrer le mot de passe du portefeuille pour :&lt;br&gt;</translation>
+        <translation>Entrez le mot de passe du portefeuille pour :&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
@@ -692,7 +692,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="63"/>
         <source>Invalid payment ID</source>
-        <translation>Identifiant de paiement invalide</translation>
+        <translation>ID de paiement invalide</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="100"/>
@@ -792,7 +792,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="211"/>
         <source>Payment ID</source>
-        <translation>Identifiant de paiement</translation>
+        <translation>ID de paiement</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="219"/>
@@ -872,7 +872,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="107"/>
         <source>Create view only wallet</source>
-        <translation>Créer un portefeuille en vue seule</translation>
+        <translation>Créer portefeuille vue seule</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="168"/>
@@ -892,12 +892,12 @@
     <message>
         <location filename="../pages/Settings.qml" line="208"/>
         <source>Start daemon</source>
-        <translation>Démarrer le démon</translation>
+        <translation>Lancer démon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="222"/>
         <source>Stop daemon</source>
-        <translation>Arrêter le démon</translation>
+        <translation>Arrêter démon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="235"/>
@@ -912,7 +912,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="268"/>
         <source>Daemon startup flags</source>
-        <translation>Options de démarrage du démon</translation>
+        <translation>Options de démarrage</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="276"/>
@@ -952,7 +952,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="366"/>
         <source>Log level</source>
-        <translation>Niveau de journalisation</translation>
+        <translation>Niveau journal</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="392"/>
@@ -1001,7 +1001,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="92"/>
         <source>Close wallet</source>
-        <translation>Fermer le portefeuille</translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
@@ -1235,22 +1235,22 @@
     <message>
         <location filename="../pages/Transfer.qml" line="488"/>
         <source>create tx file</source>
-        <translation>créer un fichier de transaction</translation>
+        <translation>créer fichier tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="510"/>
         <source>sign tx file</source>
-        <translation>signer un fichier de transaction</translation>
+        <translation>signer fichier tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="524"/>
         <source>submit tx file</source>
-        <translation>Soumettre un fichier de transaction</translation>
+        <translation>Soumettre fichier tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="539"/>
         <source>Rescan spent</source>
-        <translation>Rescanner les dépenses</translation>
+        <translation>Scan dépenses</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="548"/>
@@ -1399,7 +1399,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="352"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Identifiant de paiement &lt;font size=&apos;2&apos;&gt;( optionnel )&lt;/font&gt;</translation>
+        <translation>ID de paiement &lt;font size=&apos;2&apos;&gt;( Facultatif )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="364"/>
@@ -1408,7 +1408,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     </message>
     <message>
         <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
-        <translation type="vanished">Description &lt;font size=&apos;2&apos;&gt;( Une description optionnelle qui sera sauvegardée dans le carnet d&apos;adresses local )&lt;/font&gt;</translation>
+        <translation type="vanished">Description &lt;font size=&apos;2&apos;&gt;( Une description facultative qui sera sauvegardée dans le carnet d&apos;adresses local )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="417"/>
@@ -1423,7 +1423,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="474"/>
         <source>SWEEP UNMIXABLE</source>
-        <translation>BALAYER NON MÉLANGEABLE</translation>
+        <translation>NON MÉLANGEABLES</translation>
     </message>
 </context>
 <context>
@@ -1486,7 +1486,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="148"/>
         <source>Transaction ID</source>
-        <translation>Identifiant de transaction</translation>
+        <translation>ID de transaction</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="157"/>
@@ -1500,7 +1500,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     </message>
     <message>
         <source>Transaction ID here</source>
-        <translation type="vanished">Identifiant de transaction ici</translation>
+        <translation type="vanished">ID de transaction ici</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="181"/>
@@ -1564,7 +1564,7 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="83"/>
         <source>Create view only wallet</source>
-        <translation>Créer un portefeuille en vue seule</translation>
+        <translation>Créer portefeuille vue seule</translation>
     </message>
 </context>
 <context>
@@ -2044,7 +2044,7 @@ Adresse : </translation>
         <source>
 Payment ID: </source>
         <translation>
-Identifiant de paiement : </translation>
+ID de paiement : </translation>
     </message>
     <message>
         <location filename="../main.qml" line="469"/>

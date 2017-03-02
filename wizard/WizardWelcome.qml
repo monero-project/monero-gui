@@ -32,7 +32,9 @@ import QtQuick.Layouts 1.1
 import QtQml 2.2
 
 
-Item {
+
+ColumnLayout {
+//    anchors.fill:parent
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -60,45 +62,35 @@ Item {
         return true
     }
 
-    // Welcome text
-    Column {
+    ColumnLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        spacing: 24
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
+        Layout.bottomMargin: 40
+        spacing: 20
 
         Text {
-            id: welcomeText
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
             font.family: "Arial"
             font.pixelSize: 28
-            //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
-            // hack to implement dynamic translation
-            // https://wiki.qt.io/How_to_do_dynamic_translation_in_QML
-            text: qsTr("Welcome") +
-                  translationManager.emptyString
-
+            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("Welcome to Monero!") + translationManager.emptyString
         }
 
         Text {
-            id: selectLanguageText
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
             font.family: "Arial"
             font.pixelSize: 18
-            //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
             text: qsTr("Please choose a language and regional format.") + translationManager.emptyString
         }
     }
+
+
     // Flags model
     XmlListModel {
         id: languagesModel
@@ -124,63 +116,72 @@ Item {
         }
     }
 
-    // Flags view
-    GridView {
-        id: gridView
-        cellWidth: 140
-        cellHeight: 120
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.top: headerColumn.bottom
-        anchors.topMargin: 24
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        clip: true
-        model: languagesModel
+    ColumnLayout{
+        // Flags view
+        GridView {
+            property int margin: (isMobile) ? 0 : Math.floor(appWindow.width/12);
 
-        delegate: Item {
-            id: flagDelegate
-            width: gridView.cellWidth
-            height: gridView.cellHeight
+            id: gridView
+            cellWidth: 140
+            cellHeight: 120
+            model: languagesModel
+            // Hack to center the flag grid
+            property int columns: Math.floor(appWindow.width/140)
+            Layout.leftMargin: margin + (appWindow.width - cellWidth*columns) /2
+            Layout.rightMargin: margin
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-            Rectangle {
-                id: flagRect
-                width: 60; height: 60
-                anchors.centerIn: parent
-                radius: 30
-                color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
-                Image {
-                    anchors.fill: parent
-                    source: flag
-                }
-            }
 
-            Text {
-                font.family: "Arial"
-                font.pixelSize: 18
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: flagRect.bottom
-                anchors.topMargin: 10
-                font.bold: gridView.currentIndex === index
-                elide: Text.ElideRight
-                color: "#3F3F3F"
-                text: display_name
-            }
-            MouseArea {
-                id: delegateArea
-                anchors.fill: parent
-                onClicked:  {
-                    gridView.currentIndex = index
-                    var data = languagesModel.get(gridView.currentIndex);
-                    if (data !== null || data !== undefined) {
-                        var locale = data.locale
-                        translationManager.setLanguage(locale.split("_")[0]);
-                        wizard.switchPage(true)
+            clip: true
+
+            delegate: ColumnLayout {
+                id: flagDelegate
+                width: gridView.cellWidth
+//                height: gridView.cellHeight
+//                Layout.alignment: Qt.AlignHCenter
+                Rectangle {
+                    id: flagRect
+                    width: 60; height: 60
+//                    anchors.centerIn: parent
+                    radius: 30
+                    Layout.alignment: Qt.AlignHCenter
+                    color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
+                    Image {
+                        anchors.fill: parent
+                        source: flag
                     }
                 }
-            }
-        } // delegate
+
+                Text {
+                    font.family: "Arial"
+                    font.pixelSize: 18
+//                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.bold: gridView.currentIndex === index
+//                    elide: Text.ElideRight
+                    color: "#3F3F3F"
+                    text: display_name
+//                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                MouseArea {
+                    id: delegateArea
+                    anchors.fill: parent
+                    onClicked:  {
+                        gridView.currentIndex = index
+                        var data = languagesModel.get(gridView.currentIndex);
+                        if (data !== null || data !== undefined) {
+                            var locale = data.locale
+                            translationManager.setLanguage(locale.split("_")[0]);
+                            wizard.switchPage(true)
+                        }
+                    }
+                }
+            } // delegate
+
+    }
+
+
 
 
     }

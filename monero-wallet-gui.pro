@@ -38,7 +38,8 @@ HEADERS += \
     src/libwalletqt/AddressBook.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
-    src/QR-Code-scanner/QrCodeScanner.h 
+    src/QR-Code-scanner/QrCodeScanner.h \  
+    MainApp.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -61,7 +62,8 @@ SOURCES += main.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
-    src/QR-Code-scanner/QrCodeScanner.cpp 
+    src/QR-Code-scanner/QrCodeScanner.cpp \  
+    MainApp.cpp
 
 !ios {
     HEADERS += src/daemon/DaemonManager.h
@@ -275,7 +277,7 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_nl.ts \ # Dutch
                 $$PWD/translations/monero-core_pl.ts \ # Polish
                 $$PWD/translations/monero-core_ru.ts \ # Russian
-                $$PWD/translations/monero-core_zh.ts \ # Chinese (Taiwan)
+                $$PWD/translations/monero-core_zh.ts \ # Chinese (Traditional)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin

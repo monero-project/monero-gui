@@ -42,6 +42,7 @@ Rectangle {
 
     color: "#F0EEEE"
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>"
+    property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
         var scaleToMixinCount = [4,5,6,7,8,9,10,11,12,13,14,15,20,25];
@@ -111,328 +112,294 @@ Rectangle {
       anchors.top: parent.top
       anchors.left: parent.left
       anchors.right: parent.right
-      height:550
-    Label {
-        id: amountLabel
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Amount") + translationManager.emptyString
-        fontSize: 14
-    }
+      anchors.topMargin: 20
+      height: 400
 
-    Label {
-        id: transactionPriority
-        anchors.top: parent.top
-        anchors.topMargin: 17
-        fontSize: 14
-        x: (parent.width - 17) / 2 + 17
-        text: qsTr("Transaction priority") + translationManager.emptyString
-    }
+      Label {
+          id: amountLabel
+          anchors.left: parent.left
+          anchors.top: parent.top
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 17
+          text: qsTr("Amount") + translationManager.emptyString
+          fontSize: 14
+      }
 
-    Row {
-        id: amountRow
-        anchors.top: amountLabel.bottom
-        anchors.topMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 7
-        width: (parent.width - 17) / 2 + 10
-        Item {
-            width: 37
-            height: 37
+      Label {
+          id: transactionPriority
+          anchors.top: parent.top
+          anchors.topMargin: 17
+          fontSize: 14
+          x: (parent.width - 17) / 2 + 17
+          text: qsTr("Transaction priority") + translationManager.emptyString
+      }
 
-            Image {
-                anchors.centerIn: parent
-                source: "../images/moneroIcon.png"
-            }
-        }
-        // Amount input
-        LineEdit {
-            id: amountLine
-            placeholderText: qsTr("") + translationManager.emptyString
-            width: parent.width - 37 - 17 - 60
-            validator: DoubleValidator {
-                bottom: 0.0
-                top: 18446744.073709551615
-                decimals: 12
-                notation: DoubleValidator.StandardNotation
-                locale: "C"
-            }
-        }
 
-        StandardButton {
-            id: amountAllButton
-            //anchors.left: amountLine.right
-            //anchors.top: amountLine.top
-            //anchors.bottom: amountLine.bottom
-            width: 60
-            text: qsTr("ALL") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            enabled : true
-            onClicked: amountLine.text = "(all)"
-        }
-    }
+      Row {
+          id: amountRow
+          anchors.top: amountLabel.bottom
+          anchors.topMargin: 5
+          anchors.left: parent.left
+          anchors.leftMargin: 7
+          width: (parent.width - 17) / 2 + 10
+          Item {
+              width: 37
+              height: 37
 
-    ListModel {
-        id: priorityModel
-        // ListElement: cannot use script for property value, so
-        // code like this wont work:
-        // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+              Image {
+                  anchors.centerIn: parent
+                  source: "../images/moneroIcon.png"
+              }
+          }
+          // Amount input
+          LineEdit {
+              id: amountLine
+              placeholderText: qsTr("") + translationManager.emptyString
+              width: parent.width - 37 - 17 - 60
+              validator: DoubleValidator {
+                  bottom: 0.0
+                  top: 18446744.073709551615
+                  decimals: 12
+                  notation: DoubleValidator.StandardNotation
+                  locale: "C"
+              }
+          }
 
-        ListElement { column1: qsTr("LOW (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-        ListElement { column1: qsTr("MEDIUM (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-        ListElement { column1: qsTr("HIGH (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
-    }
-
-    StandardDropdown {
-        id: priorityDropdown
-        anchors.top: transactionPriority.bottom
-        anchors.right: parent.right
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        anchors.left: transactionPriority.left
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        dataModel: priorityModel
-        z: 1
-    }
+          StandardButton {
+              id: amountAllButton
+              //anchors.left: amountLine.right
+              //anchors.top: amountLine.top
+              //anchors.bottom: amountLine.bottom
+              width: 60
+              text: qsTr("All") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              enabled : true
+              onClicked: amountLine.text = "(all)"
+          }
+      }
 
 
 
-    Label {
-        id: privacyLabel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: amountRow.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 30
-        fontSize: 14
-        text: ""
-    }
+      ListModel {
+           id: priorityModel
+           // ListElement: cannot use script for property value, so
+           // code like this wont work:
+           // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
 
-    PrivacyLevel {
-        id: privacyLevelItem
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: privacyLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        onFillLevelChanged: updateMixin()
-    }
+           ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
+           ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+           ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
+       }
 
+      StandardDropdown {
+          id: priorityDropdown
+          anchors.top: transactionPriority.bottom
+          anchors.right: parent.right
+          anchors.rightMargin: 17
+          anchors.topMargin: 5
+          anchors.left: transactionPriority.left
+          shadowReleasedColor: "#FF4304"
+          shadowPressedColor: "#B32D00"
+          releasedColor: "#FF6C3C"
+          pressedColor: "#FF4304"
+          dataModel: priorityModel
+          z: 1
+      }
 
-    Label {
-        id: costLabel
-        anchors.right: parent.right
-        anchors.top: amountRow.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 30
-        fontSize: 14
-        text: qsTr("Transaction cost")
-    }
+      Label {
+          id: addressLabel
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: amountRow.bottom
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 30
+          fontSize: 14
+          textFormat: Text.RichText
+          text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
+                      Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                + translationManager.emptyString
 
+          onLinkActivated: appWindow.showPageRequest("AddressBook")
+      }
+      // recipient address input
+      RowLayout {
+          id: addressLineRow
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: addressLabel.bottom
 
-    Label {
-        id: addressLabel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: privacyLevelItem.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 30
-        fontSize: 14
-        textFormat: Text.RichText
-        text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                    Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-              + translationManager.emptyString
+          StandardButton {
+              id: qrfinderButton
+              anchors.left: parent.left
+              anchors.leftMargin: 17
+              anchors.topMargin: 5
+              text: qsTr("QR Code") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              visible : appWindow.qrScannerEnabled
+              enabled : visible
+              width: visible ? 60 : 0
+              onClicked: {
+                  cameraUi.state = "Capture"
+                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
+          }
+          LineEdit {
+              id: addressLine
+              anchors.left: qrfinderButton.right
+              anchors.right: resolveButton.left
+              //anchors.leftMargin: 17
+              anchors.topMargin: 5
+              placeholderText: "4..."
+              // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
+          }
 
-        onLinkActivated: appWindow.showPageRequest("AddressBook")
-    }
-    // recipient address input
-    RowLayout {
-        id: addressLineRow
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: addressLabel.bottom
-
-        StandardButton {
-            id: qrfinderButton
-            anchors.left: parent.left
-            anchors.leftMargin: 17
-            anchors.topMargin: 5
-            text: qsTr("QRCODE") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            visible : appWindow.qrScannerEnabled
-            enabled : visible
-            width: visible ? 60 : 0
-            onClicked: {
-                cameraUi.state = "Capture"
-                cameraUi.qrcode_decoded.connect(updateFromQrCode)
-            }
-        }
-        LineEdit {
-            id: addressLine
-            anchors.left: qrfinderButton.right
-            anchors.right: resolveButton.left
-            //anchors.leftMargin: 17
-            anchors.topMargin: 5
-            placeholderText: "4..."
-            // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
-        }
-
-        StandardButton {
-            id: resolveButton
-            anchors.right: parent.right
-            anchors.leftMargin: 17
-            anchors.topMargin: 17
-            anchors.rightMargin: 17
-            width: 60
-            text: qsTr("RESOLVE") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            enabled : isValidOpenAliasAddress(addressLine.text)
-            onClicked: {
-                var result = walletManager.resolveOpenAlias(addressLine.text)
-                if (result) {
-                  var parts = result.split("|")
-                  if (parts.length == 2) {
-                    var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
-                    if (parts[0] === "true") {
-                      if (address_ok) {
-                        addressLine.text = parts[1]
-                        addressLine.cursorPosition = 0
-                      }
-                      else
-                        oa_message(qsTr("No valid address found at this OpenAlias address"))
-                    } else if (parts[0] === "false") {
-                      if (address_ok) {
-                        addressLine.text = parts[1]
-                        addressLine.cursorPosition = 0
-                        oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+          StandardButton {
+              id: resolveButton
+              anchors.right: parent.right
+              anchors.leftMargin: 17
+              anchors.topMargin: 17
+              anchors.rightMargin: 17
+              width: 60
+              text: qsTr("Resolve") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              enabled : isValidOpenAliasAddress(addressLine.text)
+              onClicked: {
+                  var result = walletManager.resolveOpenAlias(addressLine.text)
+                  if (result) {
+                    var parts = result.split("|")
+                    if (parts.length == 2) {
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                      if (parts[0] === "true") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
+                        }
+                        else
+                          oa_message(qsTr("No valid address found at this OpenAlias address"))
+                      } else if (parts[0] === "false") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
+                          oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                        } else {
+                          oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                        }
                       } else {
-                        oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                        oa_message(qsTr("Internal error"))
                       }
                     } else {
                       oa_message(qsTr("Internal error"))
                     }
                   } else {
-                    oa_message(qsTr("Internal error"))
+                    oa_message(qsTr("No address found"))
                   }
-                } else {
-                  oa_message(qsTr("No address found"))
-                }
-            }
-        }
-    }
+              }
+          }
+      }
 
-    Label {
-        id: paymentIdLabel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: addressLineRow.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 17
-        fontSize: 14
-        text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
-    }
+      Label {
+          id: paymentIdLabel
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: addressLineRow.bottom
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 17
+          fontSize: 14
+          text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+      }
 
-    // payment id input
-    LineEdit {
-        id: paymentIdLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
-        // validator: DoubleValidator { top: 0.0 }
-    }
+      // payment id input
+      LineEdit {
+          id: paymentIdLine
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: paymentIdLabel.bottom
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 5
+          placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+          // validator: DoubleValidator { top: 0.0 }
+      }
 
-    Label {
-        id: descriptionLabel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: paymentIdLine.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 17
-        fontSize: 14
-        text: qsTr("Description <font size='2'>( Optional )</font>")
-              + translationManager.emptyString
-    }
+      Label {
+          id: descriptionLabel
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: paymentIdLine.bottom
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 17
+          fontSize: 14
+          text: qsTr("Description <font size='2'>( Optional )</font>")
+                + translationManager.emptyString
+      }
 
-    LineEdit {
-        id: descriptionLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: descriptionLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
-    }
+      LineEdit {
+          id: descriptionLine
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: descriptionLabel.bottom
+          anchors.leftMargin: 17
+          anchors.rightMargin: 17
+          anchors.topMargin: 5
+          placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+      }
 
-    function checkInformation(amount, address, payment_id, testnet) {
-      address = address.trim()
-      payment_id = payment_id.trim()
+      function checkInformation(amount, address, payment_id, testnet) {
+        address = address.trim()
+        payment_id = payment_id.trim()
 
-      var amount_ok = amount.length > 0
-      var address_ok = walletManager.addressValid(address, testnet)
-      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
-      var ipid = walletManager.paymentIdFromAddress(address, testnet)
-      if (ipid.length > 0 && payment_id.length > 0)
-         payment_id_ok = false
+        var amount_ok = amount.length > 0
+        var address_ok = walletManager.addressValid(address, testnet)
+        var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+        var ipid = walletManager.paymentIdFromAddress(address, testnet)
+        if (ipid.length > 0 && payment_id.length > 0)
+           payment_id_ok = false
 
-      addressLine.error = !address_ok
-      amountLine.error = !amount_ok
-      paymentIdLine.error = !payment_id_ok
+        addressLine.error = !address_ok
+        amountLine.error = !amount_ok
+        paymentIdLine.error = !payment_id_ok
 
-      return amount_ok && address_ok && payment_id_ok
-    }
+        return amount_ok && address_ok && payment_id_ok
+      }
 
-    StandardButton {
-        id: sendButton
-        anchors.left: parent.left
-        anchors.top: descriptionLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        width: 60
-        text: qsTr("SEND") + translationManager.emptyString
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
-        onClicked: {
-            console.log("Transfer: paymentClicked")
-            var priority = priorityModel.get(priorityDropdown.currentIndex).priority
-            console.log("priority: " + priority)
-            console.log("amount: " + amountLine.text)
-            addressLine.text = addressLine.text.trim()
-            paymentIdLine.text = paymentIdLine.text.trim()
-            root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                           priority, descriptionLine.text)
+      StandardButton {
+          id: sendButton
+          anchors.left: parent.left
+          anchors.top: descriptionLine.bottom
+          anchors.leftMargin: 17
+          anchors.topMargin: 17
+          width: 60
+          text: qsTr("Send") + translationManager.emptyString
+          shadowReleasedColor: "#FF4304"
+          shadowPressedColor: "#B32D00"
+          releasedColor: "#FF6C3C"
+          pressedColor: "#FF4304"
+          enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+          onClicked: {
+              console.log("Transfer: paymentClicked")
+              var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+              console.log("priority: " + priority)
+              console.log("amount: " + amountLine.text)
+              addressLine.text = addressLine.text.trim()
+              paymentIdLine.text = paymentIdLine.text.trim()
+              root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                             priority, descriptionLine.text)
 
-        }
-    }
-
+          }
+      }
     } // pageRoot
 
     Rectangle {
@@ -452,26 +419,71 @@ Rectangle {
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
-            Label {
-                id: manageWalletLabel
-                Layout.fillWidth: true
-                color: "#4A4949"
-                text: qsTr("Advanced") + translationManager.emptyString
-                fontSize: 16
-                Layout.topMargin: 20
+//            Label {
+//                id: manageWalletLabel
+//                Layout.fillWidth: true
+//                color: "#4A4949"
+//                text: qsTr("Advanced options") + translationManager.emptyString
+//                fontSize: 16
+//                Layout.topMargin: 20
+//            }
+
+            CheckBox {
+                id: showAdvancedCheckbox
+                checked: persistentSettings.transferShowAdvanced
+                onClicked: {
+                    persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
+                }
+                text: qsTr("Show advanced options") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
 
         Rectangle {
+            visible: persistentSettings.transferShowAdvanced
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
+            Layout.bottomMargin: 30
         }
 
+
         RowLayout {
+            visible: persistentSettings.transferShowAdvanced
+            anchors.left: parent.left
+            anchors.right: parent.right
+            Label {
+                id: privacyLabel
+                fontSize: 14
+                text: ""
+            }
+
+            Label {
+                id: costLabel
+                fontSize: 14
+                text: qsTr("Transaction cost")
+                anchors.right: parent.right
+            }
+        }
+
+
+
+        PrivacyLevel {
+            visible: persistentSettings.transferShowAdvanced
+            id: privacyLevelItem
+            anchors.left: parent.left
+            anchors.right: parent.right
+            onFillLevelChanged: updateMixin()
+        }
+
+
+        RowLayout {
+            visible: persistentSettings.transferShowAdvanced
+            Layout.topMargin: 50
             StandardButton {
                 id: sweepUnmixableButton
-                text: qsTr("SWEEP UNMIXABLE") + translationManager.emptyString
+                text: qsTr("Sweep Unmixable") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

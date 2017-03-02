@@ -67,6 +67,7 @@ ApplicationWindow {
     property int timeToUnlock: 0
     property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
     property int blocksToSync: 1
+    property var isMobile: (appWindow.width > 700) ? false : true
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -191,7 +192,6 @@ ApplicationWindow {
         }
 
         walletManager.setDaemonAddress(persistentSettings.daemon_address)
-
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
@@ -237,6 +237,7 @@ ApplicationWindow {
 
     function connectWallet(wallet) {
         currentWallet = wallet
+        walletName = usefulName(wallet.path)
         updateSyncing(false)
 
         viewOnly = currentWallet.viewOnly;
@@ -257,6 +258,10 @@ ApplicationWindow {
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
+
+        // Use saved daemon rpc login settings
+        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
         currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
     }
 
@@ -681,6 +686,7 @@ ApplicationWindow {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
             informationPopup.text = "internal error";
             informationPopup.icon = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
             informationPopup.open()
             return
         }
@@ -787,6 +793,9 @@ ApplicationWindow {
         daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
         daemonManager.daemonStopped.connect(onDaemonStopped);
 
+        // Connect app exit to qml window exit handling
+        mainApp.closing.connect(appWindow.close);
+
         if(!walletsFound()) {
             rootItem.state = "wizard"
         } else {
@@ -813,6 +822,7 @@ ApplicationWindow {
         property bool   auto_donations_enabled : false
         property int    auto_donations_amount : 50
         property bool   allow_background_mining : false
+        property bool   miningIgnoreBattery : true
         property bool   testnet: false
         property string daemon_address: "localhost:18081"
         property string payment_id
@@ -822,6 +832,9 @@ ApplicationWindow {
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
+        property string daemonUsername: ""
+        property string daemonPassword: ""
+        property bool transferShowAdvanced: false
     }
 
     // Information dialog
@@ -849,7 +862,7 @@ ApplicationWindow {
                 return;
             } else
                 handleTransactionConfirmed()
-        }        
+        }
     }
 
     StandardDialog {
@@ -1039,19 +1052,15 @@ ApplicationWindow {
                 properties: "visible"
                 value: false
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: 30
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 30
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "width"
-                to: 470
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 470
             }
             PropertyAction {
                 targets: [leftPanel, rightPanel]
@@ -1064,12 +1073,10 @@ ApplicationWindow {
                 value: true
             }
 
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: middlePanel.height
-                easing.type: Easing.InCubic
-                duration: 200
+                value: middlePanel.height
             }
 
             onStopped: {
@@ -1081,12 +1088,10 @@ ApplicationWindow {
 
         SequentialAnimation {
             id: goToProAnimation
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: 30
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 30
             }
             PropertyAction {
                 target: middlePanel
@@ -1098,19 +1103,15 @@ ApplicationWindow {
                 properties: "visible"
                 value: true
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "width"
-                to: rightPanelExpanded ? 1269 : 1269 - 300
-                easing.type: Easing.InCubic
-                duration: 200
+                value: rightPanelExpanded ? 1269 : 1269 - 300
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: maxWindowHeight
-                easing.type: Easing.InCubic
-                duration: 200
+                value: maxWindowHeight
             }
             PropertyAction {
                 target: frameArea
@@ -1137,7 +1138,7 @@ ApplicationWindow {
             }
         }
 
-        property int maxWidth: leftPanel.width + 655 + rightPanel.width
+        property int minWidth: 326
         property int minHeight: 720
         MouseArea {
             id: resizeArea
@@ -1171,9 +1172,9 @@ ApplicationWindow {
                 var dx = previousPosition.x - pos.x
                 var dy = previousPosition.y - pos.y
 
-                if(appWindow.width - dx > parent.maxWidth)
+                if(appWindow.width - dx > parent.minWidth)
                     appWindow.width -= dx
-                else appWindow.width = parent.maxWidth
+                else appWindow.width = parent.minWidth
 
                 if(appWindow.height - dy > parent.minHeight)
                     appWindow.height -= dy
@@ -1253,10 +1254,39 @@ ApplicationWindow {
             id: notifier
         }
     }
+
     onClosing: {
+
+        // If daemon is running - prompt user before exiting
+        if(typeof daemonManager != undefined && daemonManager.running(persistentSettings.testnet)) {
+            close.accepted = false;
+
+            // Show confirmation dialog
+            confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
+            confirmationDialog.text  = qsTr("Daemon will still be running in background when GUI is closed.");
+            confirmationDialog.icon = StandardIcon.Question
+            confirmationDialog.cancelText = qsTr("Stop daemon")
+            confirmationDialog.onAcceptedCallback = function() {
+                closeAccepted();
+            }
+
+            confirmationDialog.onRejectedCallback = function() {
+                daemonManager.stop(persistentSettings.testnet);
+                closeAccepted();
+            };
+
+            confirmationDialog.open()
+
+        } else {
+            closeAccepted();
+        }
+    }
+
+    function closeAccepted(){
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
+        Qt.quit();
     }
 
     function checkUpdates() {

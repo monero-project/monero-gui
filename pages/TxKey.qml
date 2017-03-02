@@ -209,7 +209,7 @@ Rectangle {
             anchors.top: txKeyRow.bottom
             anchors.topMargin: 17
             width: 60
-            text: qsTr("CHECK") + translationManager.emptyString
+            text: qsTr("Check") + translationManager.emptyString
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"

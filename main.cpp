@@ -50,6 +50,7 @@
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
 #include "wallet/wallet2_api.h"
+#include "MainApp.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -64,10 +65,18 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
-    Monero::Wallet::init(argv[0], "monero-wallet-gui");
+    // Enable high DPI scaling on windows & linux
+#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qDebug() << "High DPI auto scaling - enabled";
+#endif
 
+    // Log settings
+    Monero::Wallet::init(argv[0], "monero-wallet-gui");
     qInstallMessageHandler(messageHandler);
-    QApplication app(argc, argv);
+
+    MainApp app(argc, argv);
+
 
     qDebug() << "app startd";
 
@@ -139,6 +148,8 @@ int main(int argc, char *argv[])
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
     const QStringList arguments = QCoreApplication::arguments();
 
+    engine.rootContext()->setContextProperty("mainApp", &app);
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
@@ -152,6 +163,7 @@ int main(int argc, char *argv[])
 //  Windows, ~/Monero Accounts/ on nix / osx
     bool isWindows = false;
     bool isIOS = false;
+    bool isMac = false;
 #ifdef Q_OS_WIN
     isWindows = true;
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
@@ -161,6 +173,10 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_UNIX)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
+#ifdef Q_OS_MAC
+    isMac = true;
+#endif
+
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
 
@@ -203,4 +219,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-
