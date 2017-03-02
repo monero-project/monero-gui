@@ -57,14 +57,6 @@ Rectangle {
         anchors.bottom: parent.bottom
         spacing: 20
 
-        Rectangle {
-            anchors.fill: soloBox
-            color: "#00000000"
-            border.width: 2
-            border.color: "#CCCCCC"
-            anchors.margins: -15
-        }
-
         // solo
         ColumnLayout {
             id: soloBox
@@ -116,12 +108,6 @@ Rectangle {
             }
 
             RowLayout {
-                Label {
-                    id: manageSoloMinerLabel
-                    color: "#4A4949"
-                    text: qsTr("Manage miner") + translationManager.emptyString
-                    fontSize: 16
-                }
 
                 StandardButton {
                     visible: true
