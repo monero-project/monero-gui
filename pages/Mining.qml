@@ -64,6 +64,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
+            spacing: 20
 
             Label {
                 id: soloTitleLabel
@@ -97,6 +98,7 @@ Rectangle {
                     color: "#4A4949"
                     text: qsTr("CPU threads") + translationManager.emptyString
                     fontSize: 16
+                    Layout.preferredWidth: 120
                 }
                 LineEdit {
                     id: soloMinerThreadsLine
@@ -108,6 +110,43 @@ Rectangle {
             }
 
             RowLayout {
+                // Disable this option until stable
+                visible: false
+                Layout.leftMargin: 125
+                CheckBox {
+                    id: backgroundMining
+                    enabled: startSoloMinerButton.enabled
+                    checked: persistentSettings.allow_background_mining
+                    onClicked: {persistentSettings.allow_background_mining = checked}
+                    text: qsTr("Background mining (experimental)") + translationManager.emptyString
+                    checkedIcon: "../images/checkedVioletIcon.png"
+                    uncheckedIcon: "../images/uncheckedIcon.png"
+                }
+
+            }
+
+            RowLayout {
+                // Disable this option until stable
+                visible: false
+                Layout.leftMargin: 125
+                CheckBox {
+                    id: ignoreBattery
+                    enabled: startSoloMinerButton.enabled
+                    checked: !persistentSettings.miningIgnoreBattery
+                    onClicked: {persistentSettings.miningIgnoreBattery = !checked}
+                    text: qsTr("Enable mining when running on battery") + translationManager.emptyString
+                    checkedIcon: "../images/checkedVioletIcon.png"
+                    uncheckedIcon: "../images/uncheckedIcon.png"
+                }
+            }
+
+            RowLayout {
+                Label {
+                    id: manageSoloMinerLabel
+                    color: "#4A4949"
+                    text: qsTr("Manage miner") + translationManager.emptyString
+                    fontSize: 16
+                }
 
                 StandardButton {
                     visible: true
@@ -120,7 +159,7 @@ Rectangle {
                     releasedColor: "#FF6C3C"
                     pressedColor: "#FF4304"
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address, soloMinerThreadsLine.text)
+                        var success = walletManager.startMining(appWindow.currentWallet.address, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                         if (success) {
                             update()
                         } else {
