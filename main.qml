@@ -813,6 +813,7 @@ ApplicationWindow {
         property bool   auto_donations_enabled : false
         property int    auto_donations_amount : 50
         property bool   allow_background_mining : false
+        property bool   miningIgnoreBattery : true
         property bool   testnet: false
         property string daemon_address: "localhost:18081"
         property string payment_id
@@ -849,7 +850,7 @@ ApplicationWindow {
                 return;
             } else
                 handleTransactionConfirmed()
-        }        
+        }
     }
 
     StandardDialog {
