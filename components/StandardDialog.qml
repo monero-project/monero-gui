@@ -45,6 +45,9 @@ Window {
     property alias cancelVisible: cancelButton.visible
     property alias okVisible: okButton.visible
     property alias textArea: dialogContent
+    property alias okText: okButton.text
+    property alias cancelText: cancelButton.text
+
     property var icon
 
     // same signals as Dialog has
