@@ -29,11 +29,11 @@
 import QtQuick 2.2
 import moneroComponents.WalletManager 1.0
 import moneroComponents.Wallet 1.0
-
+import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import 'utils.js' as Utils
 
-Item {
+ColumnLayout {
     opacity: 0
     visible: false
 
@@ -97,7 +97,6 @@ Item {
     WizardManageWalletUI {
         id: uiItem
         titleText: qsTr("Create a new wallet") + translationManager.emptyString
-        wordsTextTitle: qsTr("Here is your wallet's 25 word mnemonic seed") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: true
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true

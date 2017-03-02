@@ -29,9 +29,10 @@
 import QtQuick 2.2
 import QtQuick.Dialogs 1.2
 import moneroComponents.Wallet 1.0
+import QtQuick.Layouts 1.1
 import 'utils.js' as Utils
 
-Item {
+ColumnLayout {
     opacity: 0
     visible: false
 
@@ -109,7 +110,6 @@ Item {
         id: uiItem
         accountNameText: defaultAccountName
         titleText: qsTr("Restore wallet") + translationManager.emptyString
-        wordsTextTitle: qsTr("Enter your 25 word mnemonic seed:") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: false
         wordsTextItem.tipTextVisible: false
         wordsTextItem.memoTextReadOnly: false
