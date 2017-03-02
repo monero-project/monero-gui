@@ -50,7 +50,7 @@ Rectangle {
 
     color: checked ? "#FFFFFF" : "#1C1C1C"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 64 : 56) : 0
+    height: present ? ((appWindow.height >= 800) ? 64 : 52) : 0
 
     transform: Scale {
         yScale: button.present ? 1 : 0
