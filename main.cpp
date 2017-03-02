@@ -159,6 +159,7 @@ int main(int argc, char *argv[])
 //  Windows, ~/Monero Accounts/ on nix / osx
     bool isWindows = false;
     bool isIOS = false;
+    bool isMac = false;
 #ifdef Q_OS_WIN
     isWindows = true;
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
@@ -168,6 +169,10 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_UNIX)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
 #endif
+#ifdef Q_OS_MAC
+    isMac = true;
+#endif
+
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
 

@@ -114,7 +114,7 @@ public:
     Q_INVOKABLE double miningHashRate() const;
 
     Q_INVOKABLE bool isMining() const;
-    Q_INVOKABLE bool startMining(const QString &address, quint32 threads);
+    Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
     Q_INVOKABLE bool stopMining();
 
     // QML missing such functionality, implementing these helpers here
