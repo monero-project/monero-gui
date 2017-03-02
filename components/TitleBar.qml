@@ -41,6 +41,7 @@ Rectangle {
     y: -height
     property string title
     property alias maximizeButtonVisible: maximizeButton.visible
+    z: 1
 
     Text {
         anchors.centerIn: parent
@@ -52,28 +53,26 @@ Rectangle {
         visible: customDecorations
     }
 
-    Behavior on y {
-        NumberAnimation { duration: 100; easing.type: Easing.InQuad }
-    }
-
     Rectangle {
         id: goToBasicVersionButton
         property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  containsMouse || checked ? "#FFE00A" : "#000000"
+        color:  basicMouseArea.containsMouse || checked ? "#FFE00A" : "#000000"
         height: 30
         width: height
 
         Image {
             anchors.centerIn: parent
             rotation: parent.checked ? 180 : 0
-            source: parent.containsMouse || parent.checked ? "../images/goToBasicVersionHovered.png" :
+            source: parent.customDecorations || parent.checked ? "../images/goToBasicVersionHovered.png" :
                                                              "../images/gotoBasicVersion.png"
         }
 
         MouseArea {
+            id: basicMouseArea
+            hoverEnabled: true
             anchors.fill: parent
             onClicked: {
                 parent.checked = !parent.checked
