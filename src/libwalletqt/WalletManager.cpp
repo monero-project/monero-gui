@@ -264,6 +264,8 @@ bool WalletManager::isMining() const
 
 bool WalletManager::startMining(const QString &address, quint32 threads)
 {
+    if(threads == 0)
+        threads = 1;
     return m_pimpl->startMining(address.toStdString(), threads);
 }
 
