@@ -270,7 +270,7 @@ Rectangle {
         anchors.left: toDatePicker.right
         anchors.leftMargin: 17
         width: 60
-        text: qsTr("FILTER")
+        text: qsTr("Filter")
         shadowReleasedColor: "#4D0051"
         shadowPressedColor: "#2D002F"
         releasedColor: "#6B0072"
@@ -333,9 +333,9 @@ Rectangle {
 
     ListModel {
         id: transactionsModel
-        ListElement { column1: "ALL"; column2: ""; value: TransactionInfo.Direction_Both }
-        ListElement { column1: "SENT"; column2: ""; value: TransactionInfo.Direction_Out }
-        ListElement { column1: "RECEIVED"; column2: ""; value: TransactionInfo.Direction_In }
+        ListElement { column1: "All"; column2: ""; value: TransactionInfo.Direction_Both }
+        ListElement { column1: "Sent"; column2: ""; value: TransactionInfo.Direction_Out }
+        ListElement { column1: "Received"; column2: ""; value: TransactionInfo.Direction_In }
 
     }
 
