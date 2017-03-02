@@ -1039,19 +1039,15 @@ ApplicationWindow {
                 properties: "visible"
                 value: false
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: 30
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 30
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "width"
-                to: 470
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 470
             }
             PropertyAction {
                 targets: [leftPanel, rightPanel]
@@ -1064,12 +1060,10 @@ ApplicationWindow {
                 value: true
             }
 
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: middlePanel.height
-                easing.type: Easing.InCubic
-                duration: 200
+                value: middlePanel.height
             }
 
             onStopped: {
@@ -1081,12 +1075,10 @@ ApplicationWindow {
 
         SequentialAnimation {
             id: goToProAnimation
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: 30
-                easing.type: Easing.InCubic
-                duration: 200
+                value: 30
             }
             PropertyAction {
                 target: middlePanel
@@ -1098,19 +1090,15 @@ ApplicationWindow {
                 properties: "visible"
                 value: true
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "width"
-                to: rightPanelExpanded ? 1269 : 1269 - 300
-                easing.type: Easing.InCubic
-                duration: 200
+                value: rightPanelExpanded ? 1269 : 1269 - 300
             }
-            NumberAnimation {
+            PropertyAction {
                 target: appWindow
                 properties: "height"
-                to: maxWindowHeight
-                easing.type: Easing.InCubic
-                duration: 200
+                value: maxWindowHeight
             }
             PropertyAction {
                 target: frameArea
