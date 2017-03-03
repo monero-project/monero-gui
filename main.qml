@@ -754,6 +754,8 @@ ApplicationWindow {
         currentWallet = undefined;
         wizard.restart();
         rootItem.state = "wizard"
+        // reset balance
+        leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
     }
 
     objectName: "appWindow"
