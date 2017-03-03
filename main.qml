@@ -65,7 +65,7 @@ ApplicationWindow {
     property bool viewOnly: false
     property bool foundNewBlock: false
     property int timeToUnlock: 0
-    property bool qrScannerEnabled: builtWithScanner && (QtMultimedia.availableCameras.length > 0)
+    property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner && (QtMultimedia.availableCameras.length > 0)
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700) ? false : true
 
