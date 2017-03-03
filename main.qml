@@ -935,7 +935,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
                 PropertyChanges { target: appWindow; width: 930; }
-                PropertyChanges { target: appWindow; height: 595; }
+                PropertyChanges { target: appWindow; height: 650; }
                 PropertyChanges { target: resizeArea; visible: false }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
                 PropertyChanges { target: frameArea; blocked: true }
