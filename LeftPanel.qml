@@ -76,7 +76,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 36
+        anchors.topMargin: (persistentSettings.customDecorations)? 66 : 36
         height: logo.implicitHeight
 
         Image {
