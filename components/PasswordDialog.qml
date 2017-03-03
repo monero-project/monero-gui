@@ -100,12 +100,14 @@ Window {
                     }
                 }
                 Keys.onReturnPressed: {
-                    root.accepted()
                     root.close()
+                    root.accepted()
+
                 }
                 Keys.onEscapePressed: {
-                    root.rejected()
                     root.close()
+                    root.rejected()
+
                 }
 
 
