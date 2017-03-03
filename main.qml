@@ -829,6 +829,7 @@ ApplicationWindow {
         property string logCategories: ""
         property string daemonUsername: ""
         property string daemonPassword: ""
+        property bool transferShowAdvanced: false
     }
 
     // Information dialog
