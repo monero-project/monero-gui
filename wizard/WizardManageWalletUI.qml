@@ -220,25 +220,12 @@ ColumnLayout {
             onTextUpdated: checkNextButton()
         }
     }
-
-    RowLayout {
-        Text {
-            visible: false
-            Layout.fillWidth: true
-            id: frameHeader
-            font.family: "Arial"
-            font.pixelSize: 24
-            font.bold: true
-            wrapMode: Text.Wrap
-            color: "#4A4646"
-        }
-    }
     
     // Restore Height
     RowLayout {
-        visible: restoreHeightItem.visible // Prevents empty RowLayout bug
         LineEdit {
             id: restoreHeightItem
+            Layout.fillWidth: true
             Layout.maximumWidth: 600
             Layout.minimumWidth: 200
             placeholderText: qsTr("Restore height (optional)")
