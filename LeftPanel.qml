@@ -76,7 +76,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 40
+        anchors.topMargin: 36
         height: logo.implicitHeight
 
         Image {
@@ -108,7 +108,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: logoItem.bottom
-        anchors.topMargin: 30
+        anchors.topMargin: 26
         spacing: 5
 
         Label {
