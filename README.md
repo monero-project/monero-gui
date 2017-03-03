@@ -205,3 +205,4 @@ More info: http://stackoverflow.com/a/35098040/1683164
       mingw32-make deploy
       ```
     - grab result binary and dependencies in ```.\release\bin```
+
