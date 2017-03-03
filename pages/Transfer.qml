@@ -168,7 +168,7 @@ Rectangle {
             //anchors.top: amountLine.top
             //anchors.bottom: amountLine.bottom
             width: 60
-            text: qsTr("ALL") + translationManager.emptyString
+            text: qsTr("All") + translationManager.emptyString
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
@@ -182,11 +182,11 @@ Rectangle {
         id: priorityModel
         // ListElement: cannot use script for property value, so
         // code like this wont work:
-        // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+        // ListElement { column1: qsTr("Low") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
 
-        ListElement { column1: qsTr("LOW (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-        ListElement { column1: qsTr("MEDIUM (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-        ListElement { column1: qsTr("HIGH (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
+        ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
+        ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+        ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
     }
 
     StandardDropdown {
@@ -300,7 +300,7 @@ Rectangle {
             anchors.topMargin: 17
             anchors.rightMargin: 17
             width: 60
-            text: qsTr("RESOLVE") + translationManager.emptyString
+            text: qsTr("Resolve") + translationManager.emptyString
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
@@ -414,7 +414,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 60
-        text: qsTr("SEND") + translationManager.emptyString
+        text: qsTr("Send") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
@@ -471,7 +471,7 @@ Rectangle {
         RowLayout {
             StandardButton {
                 id: sweepUnmixableButton
-                text: qsTr("SWEEP UNMIXABLE") + translationManager.emptyString
+                text: qsTr("Sweep Unmixable") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

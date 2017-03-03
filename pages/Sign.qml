@@ -164,7 +164,7 @@ Rectangle {
                     id: signMessageButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
+                    text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -205,7 +205,7 @@ Rectangle {
                     id: loadFileToSignButton
                     anchors.rightMargin: 17
                     width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
+                    text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -239,7 +239,7 @@ Rectangle {
                     id: signFileButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
+                    text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -349,7 +349,7 @@ Rectangle {
                     id: verifyMessageButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
+                    text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -390,7 +390,7 @@ Rectangle {
                     id: loadFileToVerifyButton
                     anchors.rightMargin: 17
                     width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
+                    text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -423,7 +423,7 @@ Rectangle {
                     id: verifyFileButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
+                    text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
