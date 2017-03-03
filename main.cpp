@@ -182,6 +182,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
 
+    // Load main window (context properties needs to be defined obove this line)
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    QObject *rootObject = engine.rootObjects().first();
+
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
     builtWithScanner = true;
@@ -191,10 +195,6 @@ int main(int argc, char *argv[])
     qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
-
-    // Load main window (context properties needs to be defined obove this line)
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
-    QObject *rootObject = engine.rootObjects().first();
 
     QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant,QVariant)), rootObject, SLOT(sequencePressed(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
