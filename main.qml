@@ -374,6 +374,9 @@ ApplicationWindow {
                 console.log("Saving wallet after first refresh");
                 currentWallet.store()
                 isNewWallet = false
+
+                // Update History
+                currentWallet.history.refresh();
             }
 
             // recovering from seed is finished after first refresh
