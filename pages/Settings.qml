@@ -250,7 +250,7 @@ Rectangle {
                 visible: true
                 onClicked: {
                     console.log("saving daemon adress settings")
-                    var newDaemon = daemonAddr.text + ":" + daemonPort.text
+                    var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
                         //Reinit wallet
