@@ -94,34 +94,28 @@ Item {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
-            text: qsTr("LOW") + translationManager.emptyString
+            text: qsTr("Low") + translationManager.emptyString
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
-            text: qsTr("MEDIUM") + translationManager.emptyString
+            text: qsTr("Medium") + translationManager.emptyString
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
-            text: qsTr("HIGH") + translationManager.emptyString
+            text: qsTr("High") + translationManager.emptyString
         }
 
         MouseArea {
