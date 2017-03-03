@@ -107,6 +107,7 @@
         <file>lang/flags/russia.png</file>
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
+        <file>lang/flags/indonesia.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
