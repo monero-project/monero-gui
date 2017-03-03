@@ -257,6 +257,10 @@ ApplicationWindow {
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
+
+        // Use saved daemon rpc login settings
+        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
         currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
     }
 
@@ -822,6 +826,8 @@ ApplicationWindow {
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
+        property string daemonUsername: ""
+        property string daemonPassword: ""
     }
 
     // Information dialog
