@@ -147,23 +147,29 @@ win32 {
     # Win64 Host settings
     contains(QMAKE_HOST.arch, x86_64) {
         message("Host is 64bit")
-        MSYS_PATH=c:/msys64/mingw32
+        MSYS_PATH=c:/msys64/mingw64
+	MSYS_MINGW_PATH=/mingw64
 
         # boost root path
         BOOST_PATH=c:/msys64/mingw64/boost
+	BOOST_MINGW_PATH=/mingw64/boost
 
     # WIN32 Host settings
     } else {
         message("Host is 32bit")
         MSYS_PATH=c:/msys32/mingw32
+	MSYS_MING_PATH=/mingw32
 
         # boost root path
         BOOST_PATH=c:/msys32/mingw32/boost
+	BOOST_MINGW_PATH=/mingw32/boost
 
     }
 
     LIBS+=-L$$MSYS_PATH/lib
+    LIBS+=-L$$MSYS_MINGW_PATH/lib
     LIBS+=-L$$BOOST_PATH/lib
+    LIBS+=-L$$BOOST_MINGW_PATH/lib
     
     LIBS+= \
         -Wl,-Bstatic \
