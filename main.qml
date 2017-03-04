@@ -334,8 +334,8 @@ ApplicationWindow {
         console.log(">>> wallet updated")
         middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
         middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
-        // Update history if new block found since last update and balance is locked.
-        if(foundNewBlock && currentWallet.history.locked) {
+        // Update history if new block found since last update
+        if(foundNewBlock) {
             foundNewBlock = false;
             console.log("New block found - updating history")
             currentWallet.history.refresh()
