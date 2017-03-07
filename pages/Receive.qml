@@ -216,7 +216,7 @@ Rectangle {
             LineEdit {
                 id: paymentIdLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString;
+                placeholderText: qsTr("16 hexadecimal characters") + translationManager.emptyString;
                 readOnly: false
                 onTextChanged: updatePaymentId(paymentIdLine.text)
 
