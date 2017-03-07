@@ -53,6 +53,7 @@ ColumnLayout {
     property bool recoverMode: false
     // Recover form seed or keys
     property bool recoverFromSeedMode: true
+    property int rowSpacing: 10
 
     function checkFields(){
         var addressOK = walletManager.addressValid(addressLine.text, wizard.settings.testnet)

@@ -57,6 +57,12 @@ ColumnLayout {
         return wizard.walletPathValid(walletFullPath);
     }
 
+    ListModel {
+        id: dotsModel
+        ListElement { dotColor: "#36B05B" }
+        ListElement { dotColor: "#DBDBDB" }
+    }
+
     WizardManageWalletUI {
         id: uiItem
         titleText: qsTr("Create view only wallet") + translationManager.emptyString
