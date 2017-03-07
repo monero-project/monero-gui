@@ -158,8 +158,13 @@ More info: http://stackoverflow.com/a/35098040/1683164
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
+
 2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero) into msys2 environment.
    **As we only build application for x86, install only dependencies for x86 architecture (i686 in package name)**
+   ```
+   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-boost
+
+   ```
 
 3. Install git into msys2 environment:
 
@@ -173,35 +178,35 @@ More info: http://stackoverflow.com/a/35098040/1683164
        - Tools > MinGW 5.3.0
    - continue with installation
 
-5. Open ```mingw``` shell:
+5. Open ```MinGW-w64 Win32 Shell``` shell:
 
    ```%MSYS_ROOT%\msys2_shell.cmd -mingw32```
 
    Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
    is x64-based
 
-6. Clone repository:
+6. Install the latest version of boost, specificly the required static libraries:
     ```
+    cd
+    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
+    tar xjf boost_1_63_0.tar.bz2
+    cd boost_1_63_0
+    ./bootstrap.sh mingw
+    ./b2 --prefix=/mingw32/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
+    ```
+
+7. Clone repository:
+    ```
+    cd
     git clone https://github.com/monero-project/monero-core.git
     ```
 
-7. Build libwallet:
+8. Build the GUI:
     ```
     cd monero-core
-    ./get_libwallet_api.sh
+    export PATH=$(ls -rd /c/Qt/5.[6,7,8]/mingw53_32/bin | head -1):$PATH
+    ./build.sh
+    cd build
+    make deploy
     ```
-      close ```mingw``` shell after it done
-
-8. Build application:
-
-    - open ```Qt environment``` shell (Qt 5.7 for Desktop (MinGW 5.3.0 32 bit) is shortcut name)
-    - navigate to the project dir and build the app:
-      ```
-      cd %MSYS_ROOT%\%USERNAME%\monero-core
-      mkdir build
-      cd build
-      qmake ..\ -r "CONFIG+=release"
-      mingw32-make release
-      mingw32-make deploy
-      ```
-    - grab result binary and dependencies in ```.\release\bin```
+    The resulting executable can be found in ```.\release\bin```
