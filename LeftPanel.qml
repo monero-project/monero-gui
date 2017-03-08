@@ -157,7 +157,7 @@ Rectangle {
 
         Label {
             id: unlockedBalanceLabel
-            text: qsTr("Unlocked balance")
+            text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
             tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString
