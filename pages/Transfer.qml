@@ -375,31 +375,36 @@ Rectangle {
         return amount_ok && address_ok && payment_id_ok
       }
 
-      StandardButton {
-          id: sendButton
+
+      RowLayout {
           anchors.left: parent.left
           anchors.top: descriptionLine.bottom
           anchors.leftMargin: 17
           anchors.topMargin: 17
-          width: 60
-          text: qsTr("Send") + translationManager.emptyString
-          shadowReleasedColor: "#FF4304"
-          shadowPressedColor: "#B32D00"
-          releasedColor: "#FF6C3C"
-          pressedColor: "#FF4304"
-          enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
-          onClicked: {
-              console.log("Transfer: paymentClicked")
-              var priority = priorityModel.get(priorityDropdown.currentIndex).priority
-              console.log("priority: " + priority)
-              console.log("amount: " + amountLine.text)
-              addressLine.text = addressLine.text.trim()
-              paymentIdLine.text = paymentIdLine.text.trim()
-              root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                             priority, descriptionLine.text)
 
+          StandardButton {
+              id: sendButton
+              text: qsTr("Send") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+              onClicked: {
+                  console.log("Transfer: paymentClicked")
+                  var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                  console.log("priority: " + priority)
+                  console.log("amount: " + amountLine.text)
+                  addressLine.text = addressLine.text.trim()
+                  paymentIdLine.text = paymentIdLine.text.trim()
+                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                                 priority, descriptionLine.text)
+
+              }
           }
       }
+
+
     } // pageRoot
 
     Rectangle {
