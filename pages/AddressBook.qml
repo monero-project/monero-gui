@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import "../components"
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
@@ -138,41 +139,45 @@ Rectangle {
         placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
     }
 
-    StandardButton {
+
+    RowLayout {
         id: addButton
         anchors.left: parent.left
         anchors.top: descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        width: 60
 
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        text: qsTr("Add") + translationManager.emptyString
-        enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+        StandardButton {
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            text: qsTr("Add") + translationManager.emptyString
+            enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
 
-        onClicked: {
-            if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
-                informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                // TODO: check currentWallet.addressBook.errorString() instead.
-                if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
-                     informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
-                else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
-                     informationPopup.text  = currentWallet.addressBook.errorString()
-                else
-                     informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
+            onClicked: {
+                if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
+                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                    // TODO: check currentWallet.addressBook.errorString() instead.
+                    if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                         informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                    else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                         informationPopup.text  = currentWallet.addressBook.errorString()
+                    else
+                         informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
 
-                informationPopup.onCloseCallback = null
-                informationPopup.open();
-            } else {
-                addressLine.text = "";
-                paymentIdLine.text = "";
-                descriptionLine.text = "";
+                    informationPopup.onCloseCallback = null
+                    informationPopup.open();
+                } else {
+                    addressLine.text = "";
+                    paymentIdLine.text = "";
+                    descriptionLine.text = "";
+                }
             }
         }
     }
+
+
 
     Item {
         id: expandItem
