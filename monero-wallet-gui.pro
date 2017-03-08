@@ -161,11 +161,11 @@ win32 {
 
     # WIN64 Target settings
     contains(QMAKE_HOST.arch, x86_64) {
-        MSYS_MINGW_PATH=/mingw32
+        MSYS_MINGW_PATH=/mingw64
 
     # WIN32 Target settings
     } else {
-        MSYS_MINGW_PATH=/mingw64
+        MSYS_MINGW_PATH=/mingw32
     }
     
     MSYS_PATH=$$MSYS_ROOT_PATH$$MSYS_MINGW_PATH
