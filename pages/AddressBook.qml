@@ -150,7 +150,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        text: qsTr("Add")
+        text: qsTr("Add") + translationManager.emptyString
         enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
 
         onClicked: {
