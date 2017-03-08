@@ -148,27 +148,31 @@ win32 {
     # Obtaining arch through uname should be reliable. This also fixes building the project in Qt creator without changes.
     MSYS_HOST_ARCH = $$system(uname -a | grep -o "x86_64")
 
-    # Even if host is 64bit, we are building win32 spec, so mingw path should allways be "/mingw32"
-    MSYS_MINGW_PATH=/mingw32
-    BOOST_MINGW_PATH=$$MSYS_MINGW_PATH/boost
-
-    # Win64 Host settings
+    # WIN64 Host settings
     contains(MSYS_HOST_ARCH, x86_64) {
         message("Host is 64bit")
-        MSYS_PATH=c:/msys64/mingw32
-
-        # boost root path
-        BOOST_PATH=$$MSYS_PATH/boost
+        MSYS_ROOT_PATH=c:/msys64
 
     # WIN32 Host settings
     } else {
         message("Host is 32bit")
-        MSYS_PATH=c:/msys32/mingw32
-
-        # boost root path
-        BOOST_PATH=$$MSYS_PATH/boost
-
+        MSYS_ROOT_PATH=c:/msys32
     }
+
+    # WIN64 Target settings
+    contains(QMAKE_HOST.arch, x86_64) {
+        MSYS_MINGW_PATH=/mingw32
+
+    # WIN32 Target settings
+    } else {
+        MSYS_MINGW_PATH=/mingw64
+    }
+    
+    MSYS_PATH=$$MSYS_ROOT_PATH$$MSYS_MINGW_PATH
+
+    # boost root path
+    BOOST_PATH=$$MSYS_PATH/boost
+    BOOST_MINGW_PATH=$$MSYS_MINGW_PATH/boost
 
     LIBS+=-L$$MSYS_PATH/lib
     LIBS+=-L$$MSYS_MINGW_PATH/lib
