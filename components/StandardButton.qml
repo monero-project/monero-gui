@@ -43,8 +43,8 @@ Item {
     signal clicked()
 
     // Dynamic label width
-    width: label.contentWidth + 20
-    Layout.minimumWidth: 100
+    Layout.minimumWidth: (label.contentWidth > 100)? label.contentWidth + 20 : 100
+
 
 
     Rectangle {

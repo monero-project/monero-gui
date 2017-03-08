@@ -84,7 +84,6 @@ Rectangle {
         RowLayout {
             StandardButton {
                 id: closeWalletButton
-                width: 100
                 text: qsTr("Close wallet") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -118,7 +117,6 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Show seed") + translationManager.emptyString
-                Layout.alignment: Qt.AlignRight
                 onClicked: {
                     settingsPasswordDialog.open();
                 }
