@@ -1,3 +1,5 @@
+# Monero GUI
+
 Copyright (c) 2014-2017, The Monero Project
 
 ## Development Resources
@@ -109,28 +111,33 @@ Packaging for your favorite distribution would be a welcome contribution!
 2. Install [homebrew](http://brew.sh/)
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-	`brew install boost --c++11`
+  `brew install boost --c++11`
 
-	`brew install openssl` - to install openssl headers
+  `brew install openssl` - to install openssl headers
 
-    `brew install pkgconfig`
+  `brew install pkgconfig`
 
-    `brew install cmake`
+  `brew install cmake`
 
-4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
-5. Add Qt bin dir to your path:
+  `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
 
-    `export PATH=$PATH:$HOME/Qt/5.7/clang_64/bin`
+  If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
 
-    where ```Qt``` is the folder you selected to install Qt.
+  `brew link --force --overwrite qt5`
+
+5. Add Qt bin dir to your path.  Example:
+
+    `export PATH=$PATH:/usr/local/opt/qt5/bin`
+
+    make sure this is where Qt 5.x is installed on **your** system eg `$HOME/Qt/5.8/clang_64/bin` if you downloaded from qt.io.
 
 6. Grab an up-to-date copy of the monero-core repository.
 
-	`git clone https://github.com/monero-project/monero-core.git`
+  `git clone https://github.com/monero-project/monero-core.git`
 
 7. Go into the repository.
 
-	`cd monero-core`
+  `cd monero-core`
 
 8. Build libwallet
 
