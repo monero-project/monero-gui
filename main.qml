@@ -178,6 +178,9 @@ ApplicationWindow {
             translationManager.setLanguage(locale.split("_")[0]);
         }
 
+        // Reload transfer page with translations enabled
+        middlePanel.transferView.onPageCompleted();
+
         // If currentWallet exists, we're just switching daemon - close/reopen wallet
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
             console.log("Daemon change - closing " + currentWallet)
