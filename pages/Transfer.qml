@@ -41,7 +41,7 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
-    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>"
+    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
@@ -462,7 +462,7 @@ Rectangle {
             Label {
                 id: costLabel
                 fontSize: 14
-                text: qsTr("Transaction cost")
+                text: qsTr("Transaction cost") + translationManager.emptyString
                 anchors.right: parent.right
             }
         }
@@ -581,7 +581,7 @@ Rectangle {
     //SignTxDialog
     FileDialog {
         id: signTxDialog
-        title: "Please choose a file"
+        title: qsTr("Please choose a file") + translationManager.emptyString
         folder: "file://" +moneroAccountsDir
         nameFilters: [ "Unsigned transfers (*)"]
 
@@ -642,7 +642,7 @@ Rectangle {
     //SignTxDialog
     FileDialog {
         id: submitTxDialog
-        title: "Please choose a file"
+        title: qsTr("Please choose a file") + translationManager.emptyString
         folder: "file://" +moneroAccountsDir
         nameFilters: [ "signed transfers (*)"]
 

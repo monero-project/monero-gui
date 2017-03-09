@@ -117,7 +117,7 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Show seed")
+                text: qsTr("Show seed") + translationManager.emptyString
                 Layout.alignment: Qt.AlignRight
                 onClicked: {
                     settingsPasswordDialog.open();
@@ -225,7 +225,7 @@ Rectangle {
                 Layout.preferredWidth:  200
                 Layout.fillWidth: true
                 text: (daemonAddress !== undefined) ? daemonAddress[0] : ""
-                placeholderText: qsTr("Hostname / IP")
+                placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
             }
 
 
@@ -234,7 +234,7 @@ Rectangle {
                 Layout.preferredWidth: 100
                 Layout.fillWidth: true
                 text: (daemonAddress !== undefined) ? daemonAddress[1] : "18081"
-                placeholderText: qsTr("Port")
+                placeholderText: qsTr("Port") + translationManager.emptyString
             }
         }
 
@@ -253,7 +253,7 @@ Rectangle {
                 Layout.preferredWidth:  100
                 Layout.fillWidth: true
                 text: persistentSettings.daemonUsername
-                placeholderText: qsTr("Username")
+                placeholderText: qsTr("Username") + translationManager.emptyString
             }
 
 
@@ -262,7 +262,7 @@ Rectangle {
                 Layout.preferredWidth: 100
                 Layout.fillWidth: true
                 text: persistentSettings.daemonPassword
-                placeholderText: qsTr("Password")
+                placeholderText: qsTr("Password") + translationManager.emptyString
                 echoMode: TextInput.Password
             }
 
@@ -400,7 +400,7 @@ Rectangle {
         id: daemonConsolePopup
         height:500
         width:800
-        title: qsTr("Daemon log")
+        title: qsTr("Daemon log") + translationManager.emptyString
         onAccepted: {
             close();
         }

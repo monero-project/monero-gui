@@ -192,7 +192,7 @@ Rectangle {
 
                 FileDialog {
                     id: signFileDialog
-                    title: "Please choose a file to sign"
+                    title: qsTr("Please choose a file to sign") + translationManager.emptyString;
                     folder: "file://"
                     nameFilters: [ "*"]
 
@@ -377,7 +377,7 @@ Rectangle {
 
                 FileDialog {
                     id: verifyFileDialog
-                    title: "Please choose a file to verify"
+                    title: qsTr("Please choose a file to verify") + translationManager.emptyString;
                     folder: "file://"
                     nameFilters: [ "*"]
 
