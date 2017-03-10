@@ -241,7 +241,7 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Generate")
+                text: qsTr("Generate") + translationManager.emptyString;
                 anchors.right: parent.right
                 onClicked: {
                     appWindow.persistentSettings.payment_id = appWindow.currentWallet.generatePaymentId();
@@ -379,7 +379,7 @@ Rectangle {
             id: qrMenu
             title: "QrCode"
             MenuItem {
-               text: qsTr("Save As")
+               text: qsTr("Save As") + translationManager.emptyString;
                onTriggered: qrFileDialog.open()
             }
         }

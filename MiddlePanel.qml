@@ -42,8 +42,9 @@ Rectangle {
     property Item currentView
     property Item previousView
     property bool basicMode : false
-    property string balanceLabelText: qsTr("Balance")
+    property string balanceLabelText: qsTr("Balance") + translationManager.emptyString
     property string balanceText
+    property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
 
     property Transfer transferView: Transfer { }
@@ -239,6 +240,7 @@ Rectangle {
                 }
 
                 Text {
+                    id: availableBalanceLabel
                     width: 116
                     height: 20
                     font.family: "Arial"
@@ -248,7 +250,7 @@ Rectangle {
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Unlocked Balance:")
+                    text: root.unlockedBalanceLabelText + ":"
                 }
 
                 Text {

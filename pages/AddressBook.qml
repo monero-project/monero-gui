@@ -57,7 +57,7 @@ Rectangle {
         anchors.top: newEntryText.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Address")
+        text: qsTr("Address") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
@@ -150,7 +150,7 @@ Rectangle {
         shadowPressedColor: "#B32D00"
         releasedColor: "#FF6C3C"
         pressedColor: "#FF4304"
-        text: qsTr("Add")
+        text: qsTr("Add") + translationManager.emptyString
         enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
 
         onClicked: {
@@ -158,11 +158,11 @@ Rectangle {
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 // TODO: check currentWallet.addressBook.errorString() instead.
                 if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
-                     informationPopup.text  = qsTr("Invalid address")
+                     informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
                 else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
                      informationPopup.text  = currentWallet.addressBook.errorString()
                 else
-                     informationPopup.text  = qsTr("Can't create entry")
+                     informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
 
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
