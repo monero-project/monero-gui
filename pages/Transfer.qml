@@ -688,13 +688,13 @@ Rectangle {
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus
         pageRoot.enabled = false
-        updateMixin()
     }
 
     // fires on every page load
     function onPageCompleted() {
         console.log("transfer page loaded")
         updateStatus();
+        updateMixin();
     }
 
     //TODO: Add daemon sync status
