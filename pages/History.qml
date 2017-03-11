@@ -244,7 +244,7 @@ Rectangle {
         anchors.top:  searchLine.bottom //descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("To")
+        text: qsTr("To") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
@@ -270,7 +270,7 @@ Rectangle {
         anchors.left: toDatePicker.right
         anchors.leftMargin: 17
         width: 60
-        text: qsTr("Filter")
+        text: qsTr("Filter") + translationManager.emptyString
         shadowReleasedColor: "#4D0051"
         shadowPressedColor: "#2D002F"
         releasedColor: "#6B0072"
@@ -307,7 +307,7 @@ Rectangle {
 
     CheckBox {
         id: advancedFilteringCheckBox
-        text: qsTr("Advanced filtering")
+        text: qsTr("Advanced filtering") + translationManager.emptyString
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
         anchors.leftMargin: 17
@@ -393,7 +393,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
-        text: qsTr("To")
+        text: qsTr("To") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }

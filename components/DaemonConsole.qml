@@ -105,7 +105,7 @@ Window {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Close")
+                text: qsTr("Close") + translationManager.emptyString
                 onClicked: {
                     root.close()
                     root.accepted()
@@ -116,7 +116,7 @@ Window {
             MoneroComponents.LineEdit {
                 id: sendCommandText
                 width: 300
-                placeholderText: qsTr("command + enter (e.g help)")
+                placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
                 onAccepted: {
                     if(text.length > 0)
                         daemonManager.sendCommand(text,currentWallet.testnet);

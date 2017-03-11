@@ -82,7 +82,7 @@ Row {
             font.family: "Arial"
             font.pixelSize: 12
             color: "#545454"
-            text: qsTr("Network status")
+            text: qsTr("Network status") + translationManager.emptyString
         }
 
         Text {
