@@ -69,7 +69,7 @@ Rectangle {
             Label {
                 id: soloTitleLabel
                 fontSize: 24
-                text: qsTr("Solo mining")
+                text: qsTr("Solo mining") + translationManager.emptyString
             }
 
             Label {

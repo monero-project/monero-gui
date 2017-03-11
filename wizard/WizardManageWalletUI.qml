@@ -200,7 +200,7 @@ ColumnLayout {
             id: addressLine
             Layout.maximumWidth: 600
             Layout.minimumWidth: 200
-            placeholderText: qsTr("Account address (public)")
+            placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
         }
         LineEdit {
@@ -208,7 +208,7 @@ ColumnLayout {
             id: viewKeyLine
             Layout.maximumWidth: 600
             Layout.minimumWidth: 200
-            placeholderText: qsTr("View key (private)")
+            placeholderText: qsTr("View key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
 
         }
@@ -217,7 +217,7 @@ ColumnLayout {
             Layout.maximumWidth: 600
             Layout.minimumWidth: 200
             id: spendKeyLine
-            placeholderText: qsTr("Spend key (private)")
+            placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
         }
     }
@@ -229,7 +229,7 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: 600
             Layout.minimumWidth: 200
-            placeholderText: qsTr("Restore height (optional)")
+            placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
             validator: IntValidator {
                 bottom:0
             }
