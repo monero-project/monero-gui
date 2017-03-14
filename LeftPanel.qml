@@ -204,7 +204,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: column1.bottom
-        anchors.topMargin: 50
+        anchors.topMargin: 25
         color: "#1C1C1C"
 
         Column {

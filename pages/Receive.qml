@@ -161,7 +161,8 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 17
+        anchors.topMargin: 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -236,7 +237,6 @@ Rectangle {
             StandardButton {
                 id: generatePaymentId
                 width: 80
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
