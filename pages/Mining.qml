@@ -50,7 +50,9 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 10
+        anchors.margins: 40
+        anchors.bottomMargin: 10
+
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -60,7 +62,6 @@ Rectangle {
         // solo
         ColumnLayout {
             id: soloBox
-            anchors.margins: 40
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
@@ -82,13 +83,9 @@ Rectangle {
 
             Text {
                 id: soloMainLabel
-                text: qsTr("Mining helps the Monero network build resilience.<br>")
-                      + qsTr("The more mining is done, the harder it is to attack the network.<br>")
-                      + qsTr("Mining also gives you a small chance to earn some Monero.<br>")
-                      + qsTr("Your computer will search for Monero block solutions.<br>")
-                      + qsTr("If you find a block, you will get the associated reward.<br>")
-                      + translationManager.emptyString
+                text: qsTr("Mining helps the Monero network build resilience. The more mining is done, the harder it is to attack the network. Mining also gives you a small chance to earn some Monero. Your computer will search for Monero block solutions. If you find a block, you will get the associated reward.") + translationManager.emptyString
                 wrapMode: Text.Wrap
+                Layout.fillWidth: true
             }
 
             RowLayout {
@@ -193,7 +190,6 @@ Rectangle {
 
         Text {
             id: statusText
-            anchors.leftMargin: 40
             anchors.topMargin: 17
             text: qsTr("Status: not mining")
             textFormat: Text.RichText
