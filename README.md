@@ -118,9 +118,9 @@ Packaging for your favorite distribution would be a welcome contribution!
     `brew install cmake`
 
 4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
-5. Add Qt bin dir to your path:
+5. Add Qt bin dir to your path (check first if directory exists; 5.8 is the current version)
 
-    `export PATH=$PATH:$HOME/Qt/5.7/clang_64/bin`
+    `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
 
     where ```Qt``` is the folder you selected to install Qt.
 
