@@ -386,37 +386,37 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="116"/>
+        <location filename="../LeftPanel.qml" line="128"/>
         <source>Balance</source>
         <translation>Saldo</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="119"/>
+        <location filename="../LeftPanel.qml" line="131"/>
         <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="160"/>
+        <location filename="../LeftPanel.qml" line="172"/>
         <source>Unlocked balance</source>
         <translation>Beschikbaar saldo</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="163"/>
+        <location filename="../LeftPanel.qml" line="175"/>
         <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="252"/>
+        <location filename="../LeftPanel.qml" line="264"/>
         <source>Send</source>
         <translation>Verzenden</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="302"/>
+        <location filename="../LeftPanel.qml" line="314"/>
         <source>Receive</source>
         <translation>Ontvangen</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="303"/>
+        <location filename="../LeftPanel.qml" line="315"/>
         <source>R</source>
         <translation>R</translation>
     </message>
@@ -425,78 +425,83 @@
         <translation type="vanished">Betaling controleren</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="396"/>
+        <location filename="../LeftPanel.qml" line="408"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="326"/>
+        <location filename="../LeftPanel.qml" line="338"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="277"/>
+        <location filename="../LeftPanel.qml" line="92"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../LeftPanel.qml" line="289"/>
         <source>Address book</source>
         <translation>Adresboek</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="278"/>
+        <location filename="../LeftPanel.qml" line="290"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="327"/>
+        <location filename="../LeftPanel.qml" line="339"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="349"/>
+        <location filename="../LeftPanel.qml" line="361"/>
         <source>Advanced</source>
         <translation>Geavanceerd</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="350"/>
+        <location filename="../LeftPanel.qml" line="362"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="371"/>
+        <location filename="../LeftPanel.qml" line="383"/>
         <source>Mining</source>
         <translatorcomment>Wat is een juiste vertaling voor minen/mining? Winning misschien, zoals het winnen van delfstoffen. Of ontginning/ontginnen?</translatorcomment>
         <translation>Minen</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="372"/>
+        <location filename="../LeftPanel.qml" line="384"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="395"/>
+        <location filename="../LeftPanel.qml" line="407"/>
         <source>Check payment</source>
         <translation>Betaling controleren</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="419"/>
+        <location filename="../LeftPanel.qml" line="431"/>
         <source>Sign/verify</source>
         <translation>Signeren/verifiëren</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="420"/>
+        <location filename="../LeftPanel.qml" line="432"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="442"/>
+        <location filename="../LeftPanel.qml" line="454"/>
         <source>Settings</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="443"/>
+        <location filename="../LeftPanel.qml" line="455"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="253"/>
+        <location filename="../LeftPanel.qml" line="265"/>
         <source>S</source>
         <translation>S</translation>
     </message>
@@ -525,107 +530,107 @@
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="72"/>
+        <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
         <translation>Solo minen</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="79"/>
+        <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
         <translation>(alleen beschikbaar voor lokale nodes)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="85"/>
         <source>Mining helps the Monero network build resilience.&lt;br&gt;</source>
-        <translation>Minen help het Monero-netwerk weerstand op te bouwen.&lt;br&gt;</translation>
+        <translation type="vanished">Minen help het Monero-netwerk weerstand op te bouwen.&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>The more mining is done, the harder it is to attack the network.&lt;br&gt;</source>
+        <translation type="vanished">Des te meer er gemined wordt, des te moeilijker het is om het Monero-netwerk aan te vallen.&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Mining also gives you a small chance to earn some Monero.&lt;br&gt;</source>
+        <translation type="vanished">Minen geeft je een kleine kans om Monero te verdienen.&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>Your computer will search for Monero block solutions.&lt;br&gt;</source>
+        <translation type="vanished">Uw computer zal zoeken naar Monero-block oplossingen.&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>If you find a block, you will get the associated reward.&lt;br&gt;</source>
+        <translation type="vanished">Als u een blok vindt, zal u de bijbehorende beloning ontvangen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
-        <source>The more mining is done, the harder it is to attack the network.&lt;br&gt;</source>
-        <translation>Des te meer er gemined wordt, des te moeilijker het is om het Monero-netwerk aan te vallen.&lt;br&gt;</translation>
+        <source>Mining helps the Monero network build resilience. The more mining is done, the harder it is to attack the network. Mining also gives you a small chance to earn some Monero. Your computer will search for Monero block solutions. If you find a block, you will get the associated reward.</source>
+        <translation>Minen help het Monero-netwerk weerstand op te bouwen. Des te meer er gemined wordt, des te moeilijker het is om het Monero-netwerk aan te vallen. Minen geeft je een kleine kans om Monero te verdienen. Uw computer zal zoeken naar Monero-block oplossingen. Als u een blok vindt, zal u de bijbehorende beloning ontvangen.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="87"/>
-        <source>Mining also gives you a small chance to earn some Monero.&lt;br&gt;</source>
-        <translation>Minen geeft je een kleine kans om Monero te verdienen.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="88"/>
-        <source>Your computer will search for Monero block solutions.&lt;br&gt;</source>
-        <translation>Uw computer zal zoeken naar Monero-block oplossingen.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="89"/>
-        <source>If you find a block, you will get the associated reward.&lt;br&gt;</source>
-        <translation>Als u een blok vindt, zal u de bijbehorende beloning ontvangen.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="99"/>
+        <location filename="../pages/Mining.qml" line="96"/>
         <source>CPU threads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="107"/>
+        <location filename="../pages/Mining.qml" line="104"/>
         <source>(optional)</source>
         <translation>(optioneel)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="121"/>
+        <location filename="../pages/Mining.qml" line="118"/>
         <source>Background mining (experimental)</source>
         <translation>Achtergrond minen (experimenteel)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="137"/>
+        <location filename="../pages/Mining.qml" line="134"/>
         <source>Enable mining when running on battery</source>
         <translation>Start het minen ook, wanneer de accu gebruikt wordt</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="147"/>
+        <location filename="../pages/Mining.qml" line="144"/>
         <source>Manage miner</source>
         <translation>Beheer de miner</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="156"/>
+        <location filename="../pages/Mining.qml" line="153"/>
         <source>Start mining</source>
         <translation>Start het minen</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="166"/>
+        <location filename="../pages/Mining.qml" line="163"/>
         <source>Error starting mining</source>
         <translation>Fout opgetreden bij het starten van de miner</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="167"/>
+        <location filename="../pages/Mining.qml" line="164"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Kon niet starten met minen.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="169"/>
+        <location filename="../pages/Mining.qml" line="166"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Minen is alleen beschikbaar voor lokale nodes. Start een lokale node om te kunnen minen.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="181"/>
+        <location filename="../pages/Mining.qml" line="178"/>
         <source>Stop mining</source>
         <translation>Stop het minen</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="198"/>
+        <location filename="../pages/Mining.qml" line="194"/>
         <source>Status: not mining</source>
         <translation>Status: er wordt niet gemined</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="209"/>
+        <location filename="../pages/Mining.qml" line="205"/>
         <source>Mining at %1 H/s</source>
         <translation>Er wordt gemined met een snelheid van %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="212"/>
+        <location filename="../pages/Mining.qml" line="208"/>
         <source>Not mining</source>
         <translation>Er wordt niet gemined</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="214"/>
+        <location filename="../pages/Mining.qml" line="210"/>
         <source>Status: </source>
         <translation>Status:</translation>
     </message>
