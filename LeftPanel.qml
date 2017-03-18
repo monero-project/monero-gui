@@ -86,6 +86,18 @@ Rectangle {
             source: "images/moneroLogo.png"
         }
 
+        Text {
+            id: testnetLabel
+            visible: persistentSettings.testnet
+            text: qsTr("Testnet") + translationManager.emptyString
+            anchors.top: logo.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            font.bold: true
+            color: "red"
+        }
+
       /* Disable twitter/news panel
         Image {
             anchors.left: parent.left
