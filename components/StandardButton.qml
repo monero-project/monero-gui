@@ -43,7 +43,7 @@ Item {
     signal clicked()
 
     // Dynamic label width
-    Layout.minimumWidth: (label.contentWidth > 100)? label.contentWidth + 20 : 100
+    Layout.minimumWidth: (label.contentWidth > 80)? label.contentWidth + 20 : 100
 
 
 
@@ -88,7 +88,7 @@ Item {
         font.pixelSize: button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
-        font.capitalization : Font.Capitalize
+//        font.capitalization : Font.Capitalize
     }
 
     Image {
