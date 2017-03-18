@@ -64,6 +64,7 @@ Rectangle {
               integratedAddressLine.text = qsTr("Invalid payment ID")
         }
         else {
+            paymentIdLine.text = ""
             integratedAddressLine.text = ""
         }
 
@@ -248,8 +249,19 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Generate") + translationManager.emptyString;
-                anchors.right: parent.right
                 onClicked: updatePaymentId()
+            }
+
+            StandardButton {
+                id: clearPaymentId
+                enabled: !!paymentIdLine.text
+                width: 80
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Clear") + translationManager.emptyString;
+                onClicked: updatePaymentId("")
             }
         }
 
