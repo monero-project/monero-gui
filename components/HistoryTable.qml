@@ -226,7 +226,6 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize:13
-                font.letterSpacing: -1
                 color: "#545454"
                 text: "(" + lookupPaymentID(paymentId) + ")"
                 visible: text !== "()"
@@ -309,7 +308,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: date
                     }
@@ -317,7 +315,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: time
                     }
@@ -342,7 +339,6 @@ ListView {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
-                    font.letterSpacing: -1
                     color: "#000000"
                     text: balance
                 }
@@ -377,7 +373,6 @@ ListView {
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: isOut ? "#FF4F41" : "#36B05B"
                         text:  displayAmount
                     }
@@ -403,7 +398,6 @@ ListView {
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#FF4F41"
                         text:  fee
                     }
