@@ -264,7 +264,7 @@ Rectangle {
 
                 id: integratedAddressLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("ReadOnly wallet integrated address displayed here") + translationManager.emptyString
+                placeholderText: qsTr("Generate payment ID for integrated address") + translationManager.emptyString
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
