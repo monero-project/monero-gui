@@ -172,7 +172,7 @@ Rectangle {
               //anchors.top: amountLine.top
               //anchors.bottom: amountLine.bottom
               width: 60
-              text: qsTr("all") + translationManager.emptyString
+              text: qsTr("All") + translationManager.emptyString
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
               releasedColor: "#FF6C3C"
@@ -524,7 +524,7 @@ Rectangle {
 
             StandardButton {
                 id: signTxButton
-                text: qsTr("sign tx file") + translationManager.emptyString
+                text: qsTr("Sign tx file") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -538,7 +538,7 @@ Rectangle {
 
             StandardButton {
                 id: submitTxButton
-                text: qsTr("submit tx file") + translationManager.emptyString
+                text: qsTr("Submit tx file") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
