@@ -87,7 +87,6 @@ ListView {
             anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
-            font.letterSpacing: -1
             color: "#545454"
             text: address
         }
@@ -101,7 +100,6 @@ ListView {
             width: 139
             font.family: "Arial"
             font.pixelSize: 12
-            font.letterSpacing: -1
             color: "#535353"
             text: qsTr("Payment ID:") + translationManager.emptyString
         }
@@ -117,7 +115,6 @@ ListView {
 
             font.family: "Arial"
             font.pixelSize: 13
-            font.letterSpacing: -1
             color: "#545454"
             text: paymentId
         }
