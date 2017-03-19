@@ -76,7 +76,6 @@ Item {
         anchors.leftMargin: 25 + 12
         font.family: "Arial"
         font.pixelSize: checkBox.fontSize
-        font.letterSpacing: -1
         color: "#525252"
     }
 
