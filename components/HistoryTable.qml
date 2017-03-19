@@ -199,7 +199,6 @@ ListView {
                 anchors.bottom: parent.bottom
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 color: "#535353"
                 text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
             }
@@ -213,7 +212,6 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize:13
-                font.letterSpacing: -1
                 color: "#545454"
                 text: paymentId
 
@@ -250,7 +248,6 @@ ListView {
                 width: 86
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 color: "#535353"
                 text:  qsTr("BlockHeight:")  + translationManager.emptyString
             }
