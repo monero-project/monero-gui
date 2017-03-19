@@ -51,16 +51,23 @@ Rectangle {
     function updatePaymentId(payment_id) {
         if (typeof appWindow.currentWallet === 'undefined' || appWindow.currentWallet == null)
             return
+
         // generate a new one if not given as argument
         if (typeof payment_id === 'undefined') {
             payment_id = appWindow.currentWallet.generatePaymentId()
-            appWindow.persistentSettings.payment_id = payment_id
             paymentIdLine.text = payment_id
         }
-        addressLine.text = appWindow.currentWallet.address
-        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
-        if (integratedAddressLine.text === "")
-          integratedAddressLine.text = qsTr("Invalid payment ID")
+
+        if (payment_id.length > 0) {
+            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
+            if (integratedAddressLine.text === "")
+              integratedAddressLine.text = qsTr("Invalid payment ID")
+        }
+        else {
+            paymentIdLine.text = ""
+            integratedAddressLine.text = ""
+        }
+
         update()
     }
 
@@ -242,14 +249,22 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Generate") + translationManager.emptyString;
-                anchors.right: parent.right
-                onClicked: {
-                    appWindow.persistentSettings.payment_id = appWindow.currentWallet.generatePaymentId();
-                    updatePaymentId()
-                }
+                onClicked: updatePaymentId()
+            }
+
+            StandardButton {
+                id: clearPaymentId
+                enabled: !!paymentIdLine.text
+                width: 80
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Clear") + translationManager.emptyString;
+                onClicked: updatePaymentId("")
             }
         }
-        
+
         RowLayout {
             id: integratedAddressRow
             Label {
@@ -414,12 +429,14 @@ Rectangle {
     function onPageCompleted() {
         console.log("Receive page loaded");
 
-        if(addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
-            updatePaymentId()
+        if (appWindow.currentWallet) {
+            if (addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
+                addressLine.text = appWindow.currentWallet.address
+            }
         }
+
         update()
         timer.running = true
-
     }
 
     function onPageClosed() {
