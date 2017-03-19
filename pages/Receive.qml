@@ -311,7 +311,7 @@ Rectangle {
             LineEdit {
                 id: amountLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Amount") + translationManager.emptyString
+                placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                 readOnly: false
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
