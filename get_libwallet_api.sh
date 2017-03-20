@@ -15,7 +15,9 @@ BUILD_LIBWALLET=false
 if [ ! -d $MONERO_DIR/src ]; then
     git submodule init monero
 fi
-git submodule update
+#git submodule update
+git -C $MONERO_DIR fetch --tags
+git -C $MONERO_DIR checkout v0.10.3
 
 # get monero core tag
 get_tag
