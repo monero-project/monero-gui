@@ -537,6 +537,7 @@ ApplicationWindow {
             console.log("integer amount: ", amountxmr);
             console.log("integer unlocked",currentWallet.unlockedBalance)
             if (amountxmr <= 0) {
+                hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
                         .arg(walletManager.displayAmount(0))
@@ -548,6 +549,7 @@ ApplicationWindow {
                 informationPopup.open()
                 return;
             } else if (amountxmr > currentWallet.unlockedBalance) {
+                hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("insufficient funds. Unlocked balance: %1")
                         .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
