@@ -1,4 +1,6 @@
-Copyright (c) 2014-2016, The Monero Project
+# Monero GUI
+
+Copyright (c) 2014-2017, The Monero Project
 
 ## Development Resources
 
@@ -62,7 +64,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ### On Linux:
 
-(Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
+(Tested on Ubuntu 16.04 x86, 16.10 x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
 
 1. Install Monero dependencies.
 
@@ -83,31 +85,25 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 5. Install the GUI dependencies.
 
-  - For Ubuntu 16.04 i386
+  - For Ubuntu 16.04 x86
 
-	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
+	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs libzbar-dev`
 
-  - For Ubuntu 16.04 x64
+  - For Ubuntu 16.04+ x64
 
-     `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
+     `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qtmultimedia5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects libzbar-dev`
 
-  - For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+  - For Linux Mint 18 "Sarah" - Cinnamon x64
 
-     `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
+     `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects libzbar-dev`
 
 6. Build the GUI.
 
-	`qmake`
+	`./build.sh`
 
-	`make`
+7. Run the GUI client.
 
-7. Before running the GUI, it's recommended that you have the Monero daemon running in the background.
-
-	`./monerod`
-
-8. Run the GUI client.
-
-	`./release/bin/monero-core`
+	`./build/release/bin/monero-wallet-gui`
 
 ### On OS X:
 
@@ -115,28 +111,33 @@ Packaging for your favorite distribution would be a welcome contribution!
 2. Install [homebrew](http://brew.sh/)
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-	`brew install boost --c++11`
+  `brew install boost --c++11`
 
-	`brew install openssl` - to install openssl headers
+  `brew install openssl` - to install openssl headers
 
-    `brew install pkgconfig`
+  `brew install pkgconfig`
 
-    `brew install cmake`
+  `brew install cmake`
 
-4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
-5. Add Qt bin dir to your path:
+  `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
 
-    `export PATH=$PATH:$HOME/Qt/5.7/clang_64/bin`
+  If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
 
-    where ```Qt``` is the folder you selected to install Qt.
+  `brew link --force --overwrite qt5`
+
+5. Add Qt bin dir to your path.  Example:
+
+    `export PATH=$PATH:/usr/local/opt/qt5/bin`
+
+    make sure this is where Qt 5.x is installed on **your** system eg `$HOME/Qt/5.8/clang_64/bin` if you downloaded from qt.io.
 
 6. Grab an up-to-date copy of the monero-core repository.
 
-	`git clone https://github.com/monero-project/monero-core.git`
+  `git clone https://github.com/monero-project/monero-core.git`
 
 7. Go into the repository.
 
-	`cd monero-core`
+  `cd monero-core`
 
 8. Build libwallet
 
@@ -164,8 +165,13 @@ More info: http://stackoverflow.com/a/35098040/1683164
 ### On Windows:
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
+
 2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero) into msys2 environment.
    **As we only build application for x86, install only dependencies for x86 architecture (i686 in package name)**
+   ```
+   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-boost
+
+   ```
 
 3. Install git into msys2 environment:
 
@@ -179,35 +185,35 @@ More info: http://stackoverflow.com/a/35098040/1683164
        - Tools > MinGW 5.3.0
    - continue with installation
 
-5. Open ```mingw``` shell:
+5. Open ```MinGW-w64 Win32 Shell``` shell:
 
    ```%MSYS_ROOT%\msys2_shell.cmd -mingw32```
 
    Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
    is x64-based
 
-6. Clone repository:
+6. Install the latest version of boost, specificly the required static libraries:
     ```
+    cd
+    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
+    tar xjf boost_1_63_0.tar.bz2
+    cd boost_1_63_0
+    ./bootstrap.sh mingw
+    ./b2 --prefix=/mingw32/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
+    ```
+
+7. Clone repository:
+    ```
+    cd
     git clone https://github.com/monero-project/monero-core.git
     ```
 
-7. Build libwallet:
+8. Build the GUI:
     ```
     cd monero-core
-    ./get_libwallet_api.sh
+    export PATH=$(ls -rd /c/Qt/5.[6,7,8]/mingw53_32/bin | head -1):$PATH
+    ./build.sh
+    cd build
+    make deploy
     ```
-      close ```mingw``` shell after it done
-
-8. Build application:
-
-    - open ```Qt environment``` shell (Qt 5.7 for Desktop (MinGW 5.3.0 32 bit) is shortcut name)
-    - navigate to the project dir and build the app:
-      ```
-      cd %MSYS_ROOT%\%USERNAME%\monero-core
-      mkdir build
-      cd build
-      qmake ..\ -r "CONFIG+=release"
-      mingw32-make release
-      mingw32-make deploy
-      ```
-    - grab result binary and dependencies in ```.\release\bin```
+    The resulting executable can be found in ```.\release\bin```

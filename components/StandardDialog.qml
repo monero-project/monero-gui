@@ -45,6 +45,9 @@ Window {
     property alias cancelVisible: cancelButton.visible
     property alias okVisible: okButton.visible
     property alias textArea: dialogContent
+    property alias okText: okButton.text
+    property alias cancelText: cancelButton.text
+
     property var icon
 
     // same signals as Dialog has
@@ -99,6 +102,21 @@ Window {
             Layout.alignment: Qt.AlignHCenter
 
             MoneroComponents.StandardButton {
+                id: cancelButton
+                width: 120
+                fontSize: 14
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Cancel") + translationManager.emptyString
+                onClicked: {
+                    root.close()
+                    root.rejected()
+                }
+            }
+
+            MoneroComponents.StandardButton {
                 id: okButton
                 width: 120
                 fontSize: 14
@@ -112,21 +130,6 @@ Window {
                     root.close()
                     root.accepted()
 
-                }
-            }
-
-            MoneroComponents.StandardButton {
-                id: cancelButton
-                width: 120
-                fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Cancel")
-                onClicked: {
-                    root.close()
-                    root.rejected()
                 }
             }
         }

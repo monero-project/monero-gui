@@ -42,7 +42,9 @@ Rectangle {
     property Item currentView
     property Item previousView
     property bool basicMode : false
+    property string balanceLabelText: qsTr("Balance") + translationManager.emptyString
     property string balanceText
+    property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
 
     property Transfer transferView: Transfer { }
@@ -51,6 +53,8 @@ Rectangle {
     property History historyView: History { }
     property Sign signView: Sign { }
     property Settings settingsView: Settings { }
+    property Mining miningView: Mining { }
+    property AddressBook addressBookView: AddressBook { }
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
@@ -79,6 +83,12 @@ Rectangle {
 
     function updateStatus(){
         transferView.updateStatus();
+    }
+
+    // send from AddressBook
+    function sendTo(address, paymentId, description){
+        root.state = "Transfer";
+        transferView.sendTo(address, paymentId, description);
     }
 
 
@@ -127,7 +137,7 @@ Rectangle {
                PropertyChanges { target: root; currentView: txkeyView }
             }, State {
                 name: "AddressBook"
-                PropertyChanges { /*TODO*/ }
+                PropertyChanges {  target: root; currentView: addressBookView  }
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
@@ -136,7 +146,7 @@ Rectangle {
                PropertyChanges { target: root; currentView: settingsView }
             }, State {
                 name: "Mining"
-                PropertyChanges { /*TODO*/ }
+                PropertyChanges { target: root; currentView: miningView }
             }
         ]
 
@@ -159,7 +169,7 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 2
-        anchors.topMargin: 0
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 30 : 0
         spacing: 0
 
 
@@ -178,7 +188,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.verticalCenterOffset: -5
                 anchors.left: parent.left
-                anchors.leftMargin: 40
+                anchors.leftMargin: appWindow.persistentSettings.customDecorations ? 20 : 40
                 source: "images/moneroLogo2.png"
             }
 
@@ -186,21 +196,21 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.top: parent.top
                 anchors.right: parent.right
+                anchors.topMargin: 10
                 width: 256
                 columns: 3
 
                 Text {
-
+                    id: balanceLabel
                     width: 116
                     height: 20
                     font.family: "Arial"
                     font.pixelSize: 12
-                    font.letterSpacing: -1
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Balance:")
+                    text: root.balanceLabelText + ":"
                 }
 
                 Text {
@@ -209,7 +219,6 @@ Rectangle {
                     height: 20
                     font.family: "Arial"
                     font.pixelSize: 18
-                    font.letterSpacing: -1
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
@@ -229,16 +238,16 @@ Rectangle {
                 }
 
                 Text {
+                    id: availableBalanceLabel
                     width: 116
                     height: 20
                     font.family: "Arial"
                     font.pixelSize: 12
-                    font.letterSpacing: -1
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
                     color: "#535353"
-                    text: qsTr("Unlocked Balance:")
+                    text: root.unlockedBalanceLabelText + ":"
                 }
 
                 Text {
@@ -247,7 +256,6 @@ Rectangle {
                     height: 20
                     font.family: "Arial"
                     font.pixelSize: 14
-                    font.letterSpacing: -1
                     elide: Text.ElideRight
                     horizontalAlignment: Text.AlignLeft
                     verticalAlignment: Text.AlignBottom
@@ -272,7 +280,6 @@ Rectangle {
             anchors.topMargin: 30
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.top: parent.top
             anchors.margins: 4
             clip: true // otherwise animation will affect left panel
 

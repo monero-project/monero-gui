@@ -107,7 +107,7 @@ Item {
             font.bold: true
             font.pixelSize: 12
             color: "#FFFFFF"
-            text: repeater.model.get(column.currentIndex).column1
+            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
         }
 
         Text {
@@ -119,7 +119,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 12
             color: "#FFFFFF"
-            text: repeater.model.get(column.currentIndex).column2
+            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
 
             property int w: 0
             Component.onCompleted: w = implicitWidth
@@ -193,6 +193,15 @@ Item {
             Repeater {
                 id: repeater
 
+                // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+                property string stringLow: qsTr("Low (x1 fee)") + translationManager.emptyString
+                property string stringMedium:  qsTr("Medium (x20 fee)") + translationManager.emptyString
+                property string stringHigh:  qsTr("High (x166 fee)") + translationManager.emptyString
+                property string stringAll:  qsTr("All") + translationManager.emptyString
+                property string stringSent:  qsTr("Sent") + translationManager.emptyString
+                property string stringReceived:  qsTr("Received") + translationManager.emptyString
+
+
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
@@ -210,7 +219,7 @@ Item {
                         font.bold: true
                         font.pixelSize: 12
                         color: "#FFFFFF"
-                        text: column1
+                        text: qsTr(column1) + translationManager.emptyString
                     }
 
                     Text {

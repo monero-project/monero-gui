@@ -34,15 +34,48 @@ Rectangle {
     property bool checked: false
     property alias dotColor: dot.color
     property alias symbol: symbolText.text
+    property int numSelectedChildren: 0
+    property var under: null
     signal clicked()
 
-    height: (appWindow.height >= 800) ? 64 : 60
+    function getOffset() {
+        var offset = 0
+        var item = button
+        while (item.under) {
+            offset += 20
+            item = item.under
+        }
+        return offset
+    }
+
     color: checked ? "#FFFFFF" : "#1C1C1C"
+    property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
+    height: present ? ((appWindow.height >= 800) ? 64 : 52) : 0
+
+    transform: Scale {
+        yScale: button.present ? 1 : 0
+
+        Behavior on yScale {
+            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+        }
+    }
+
+    Behavior on height {
+        SequentialAnimation {
+            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+        }
+    }
+
+    Behavior on checked {
+        // we get the value of checked before the change
+        ScriptAction { script: if (under) under.numSelectedChildren += checked > 0 ? -1 : 1 }
+    }
 
     Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
+        anchors.leftMargin: parent.getOffset()
         width: 50
 
         Rectangle {
@@ -85,6 +118,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: 20
+        anchors.leftMargin: parent.getOffset()
         source: "../images/menuIndicator.png"
     }
 
@@ -92,7 +126,7 @@ Rectangle {
         id: label
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 50
+        anchors.leftMargin: parent.getOffset() + 50
         font.family: "Arial"
         font.pixelSize: 18
         color: parent.checked ? "#000000" : "#FFFFFF"

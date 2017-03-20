@@ -72,8 +72,8 @@ Item {
             width: row.x
 
             color: {
-                if(item.fillLevel < 3) return "#FF6C3C"
-                if(item.fillLevel < 13) return "#FFE00A"
+                if(item.fillLevel < 5) return "#FF6C3C"
+                if(item.fillLevel < 13) return "#AAFFBB"
                 return "#36B25C"
             }
 
@@ -94,34 +94,28 @@ Item {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
-            text: qsTr("LOW (x1 fee)") + translationManager.emptyString
+            text: qsTr("Low") + translationManager.emptyString
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
-            text: qsTr("MEDIUM (x20 fee)") + translationManager.emptyString
+            text: qsTr("Medium") + translationManager.emptyString
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
-            font.pixelSize: 11
-            font.letterSpacing: -1
-            font.bold: true
+            font.pixelSize: 15
             color: "#000000"
             x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
-            text: qsTr("HIGH (x166 fee)") + translationManager.emptyString
+            text: qsTr("High") + translationManager.emptyString
         }
 
         MouseArea {

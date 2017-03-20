@@ -7,6 +7,11 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QApplication>
 #include <QProcess>
+#include <QTime>
+
+namespace {
+    static const int DAEMON_START_TIMEOUT_SECONDS = 30;
+}
 
 DaemonManager * DaemonManager::m_instance = nullptr;
 QStringList DaemonManager::m_clArgs;
@@ -23,30 +28,35 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
     return m_instance;
 }
 
-bool DaemonManager::start()
+bool DaemonManager::start(const QString &flags, bool testnet)
 {
-    //
-    QString process;
-#ifdef Q_OS_WIN
-    process = QApplication::applicationDirPath() + "/monerod.exe";
-#elif defined(Q_OS_UNIX)
-    process = QApplication::applicationDirPath() + "/monerod";
-#endif
-
-    if (process.length() == 0) {
-        qDebug() << "no daemon binary defined for current platform";
-        return false;
-    }
-
-
     // prepare command line arguments and pass to monerod
     QStringList arguments;
+
+    // Start daemon with --detach flag on non-windows platforms
+#ifndef Q_OS_WIN
+    arguments << "--detach";
+#endif
+
+    if(testnet)
+        arguments << "--testnet";
+
     foreach (const QString &str, m_clArgs) {
           qDebug() << QString(" [%1] ").arg(str);
-          arguments << str;
+          if (!str.isEmpty())
+            arguments << str;
     }
 
-    qDebug() << "starting monerod " + process;
+    // Custom startup flags for daemon
+    foreach (const QString &str, flags.split(" ")) {
+          qDebug() << QString(" [%1] ").arg(str);
+          if (!str.isEmpty())
+            arguments << str;
+    }
+
+    arguments << "--check-updates" << "disabled";
+
+    qDebug() << "starting monerod " + m_monerod;
     qDebug() << "With command line arguments " << arguments;
 
     m_daemon = new QProcess();
@@ -57,32 +67,99 @@ bool DaemonManager::start()
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
-    m_daemon->start(process,arguments);
-    bool started =  m_daemon->waitForStarted();
+    bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
-    } else {
-        emit daemonStarted();
+        emit daemonStartFailure();
+        return false;
     }
 
-    return started;
-}
+    // Start start watcher
+    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::startWatcher, testnet);
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    connect(watcher, &QFutureWatcher<bool>::finished,
+            this, [this, watcher]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        if(future.result())
+            emit daemonStarted();
+        else
+            emit daemonStartFailure();
+    });
+    watcher->setFuture(future);
 
-bool DaemonManager::stop()
-{
-    if (initialized) {
-        qDebug() << "stopping daemon";
-        // we can't use QProcess::terminate() on windows console process
-        // write exit command to stdin
-        m_daemon->write("exit\n");
-    }
 
     return true;
 }
+
+bool DaemonManager::stop(bool testnet)
+{
+    QString message;
+    sendCommand("exit",testnet,message);
+    qDebug() << message;
+
+    // Start stop watcher - Will kill if not shutting down
+    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::stopWatcher, testnet);
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    connect(watcher, &QFutureWatcher<bool>::finished,
+            this, [this, watcher]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        if(future.result()) {
+            emit daemonStopped();
+        }
+    });
+    watcher->setFuture(future);
+
+    return true;
+}
+
+bool DaemonManager::startWatcher(bool testnet) const
+{
+    // Check if daemon is started every 2 seconds
+    QTime timer;
+    timer.restart();
+    while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
+        QThread::sleep(2);
+        if(!running(testnet)) {
+            qDebug() << "daemon not running. checking again in 2 seconds.";
+        } else {
+            qDebug() << "daemon is started. Waiting 5 seconds to let daemon catch up";
+            QThread::sleep(5);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DaemonManager::stopWatcher(bool testnet) const
+{
+    // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
+    int counter = 0;
+    while(true && !m_app_exit) {
+        QThread::sleep(2);
+        counter++;
+        if(running(testnet)) {
+            qDebug() << "Daemon still running.  " << counter;
+            if(counter >= 5) {
+                qDebug() << "Killing it! ";
+#ifdef Q_OS_WIN
+                QProcess::execute("taskkill /F /IM monerod.exe");
+#else
+                QProcess::execute("pkill monerod");
+#endif
+            }
+
+        } else
+            return true;
+    }
+    return false;
+}
+
 
 void DaemonManager::stateChanged(QProcess::ProcessState state)
 {
@@ -114,29 +191,62 @@ void DaemonManager::printError()
     }
 }
 
-bool DaemonManager::running() const
-{
-    if (initialized) {
-        qDebug() << m_daemon->state();
-        qDebug() << QProcess::NotRunning;
-       // m_daemon->write("status\n");
-        return m_daemon->state() > QProcess::NotRunning;
+bool DaemonManager::running(bool testnet) const
+{ 
+    QString status;
+    sendCommand("status",testnet, status);
+    qDebug() << status;
+    // `./monerod status` returns BUSY when syncing.
+    // Treat busy as connected, until fixed upstream.
+    if (status.contains("Height:") || status.contains("BUSY") ) {
+        return true;
     }
     return false;
+}
+bool DaemonManager::sendCommand(const QString &cmd,bool testnet) const
+{
+    QString message;
+    return sendCommand(cmd, testnet, message);
+}
+
+bool DaemonManager::sendCommand(const QString &cmd,bool testnet, QString &message) const
+{
+    QProcess p;
+    QString external_cmd = m_monerod + " " + cmd;
+    qDebug() << "sending external cmd: " << external_cmd;
+
+    // Add testnet flag if needed
+    if (testnet)
+        external_cmd += " --testnet";
+    external_cmd += "\n";
+
+    p.start(external_cmd);
+
+    bool started = p.waitForFinished(-1);
+    message = p.readAllStandardOutput();
+    emit daemonConsoleUpdated(message);
+    return started;
+}
+
+void DaemonManager::exit()
+{
+    qDebug("DaemonManager: exit()");
+    m_app_exit = true;
 }
 
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
 {
 
-}
+    // Platform depetent path to monerod
+#ifdef Q_OS_WIN
+    m_monerod = QApplication::applicationDirPath() + "/monerod.exe";
+#elif defined(Q_OS_UNIX)
+    m_monerod = QApplication::applicationDirPath() + "/monerod";
+#endif
 
-void DaemonManager::closing()
-{
-    qDebug() << __FUNCTION__;
-    stop();
-    // Wait for daemon to stop before exiting (max 10 secs)
-    if (initialized) {
-        m_daemon->waitForFinished(10000);
+    if (m_monerod.length() == 0) {
+        qCritical() << "no daemon binary defined for current platform";
+        m_has_daemon = false;
     }
 }

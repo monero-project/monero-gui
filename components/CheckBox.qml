@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 
 Item {
     id: checkBox
@@ -40,6 +41,7 @@ Item {
     signal clicked()
     height: 25
     width: label.x + label.width
+    Layout.minimumWidth: label.x + label.contentWidth
     clip: true
 
     Rectangle {
@@ -74,7 +76,6 @@ Item {
         anchors.leftMargin: 25 + 12
         font.family: "Arial"
         font.pixelSize: checkBox.fontSize
-        font.letterSpacing: -1
         color: "#525252"
     }
 

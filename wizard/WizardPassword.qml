@@ -26,17 +26,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import moneroComponents.WalletManager 1.0
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import "../components"
 import "utils.js" as Utils
 
-Item {
+ColumnLayout {
+    Layout.leftMargin: wizardLeftMargin
+    Layout.rightMargin: wizardRightMargin
 
     id: passwordPage
     opacity: 0
     visible: false
-
     property alias titleText: titleText.text
+    property alias passwordsMatch: passwordUI.passwordsMatch
+    property alias password: passwordUI.password
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -46,62 +51,48 @@ Item {
 
     function onPageOpened(settingsObject) {
         wizard.nextButton.enabled = true
-        handlePassword();
+        passwordUI.handlePassword();
 
         if (wizard.currentPath === "create_wallet") {
-           passwordPage.titleText = qsTr("Now that your wallet has been created, please set a password for the wallet") + translationManager.emptyString
+           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         } else {
-           passwordPage.titleText = qsTr("Now that your wallet has been restored, please set a password for the wallet") + translationManager.emptyString
+           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
         }
 
-        passwordItem.focus = true;
+        passwordUI.resetFocus()
     }
 
     function onPageClosed(settingsObject) {
         // TODO: set password on the final page
         // settingsObject.wallet.setPassword(passwordItem.password)
-        settingsObject['wallet_password'] = passwordItem.password
+        settingsObject['wallet_password'] = passwordUI.password
         return true
     }
 
     function onWizardRestarted(){
         // Reset password fields
-        passwordItem.password = "";
-        retypePasswordItem.password = "";
+        passwordUI.password = "";
+        passwordUI.confirmPassword = "";
     }
 
-    function handlePassword() {
-        // allow to forward step only if passwords match
-
-        wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
-
-        // scorePassword returns value from 1..100
-        var strength = Utils.scorePassword(passwordItem.password)
-        // privacyLevel component uses 1..13 scale
-        privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
-
-    }
-
-
-
-    Row {
+    RowLayout {
         id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
-        spacing: 6
+        Layout.alignment: Qt.AlignRight
 
         ListModel {
             id: dotsModel
             ListElement { dotColor: "#36B05B" }
-            ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
+            ListElement { dotColor: "#36B05B" }
+            //ListElement { dotColor: "#FFE00A" }
             ListElement { dotColor: "#DBDBDB" }
         }
 
         Repeater {
             model: dotsModel
             delegate: Rectangle {
+                // Password page is last page when creating view only wallet
+                // TODO: make this dynamic for all pages in wizard
+                visible: (wizard.currentPath != "create_view_only_wallet" || index < 2)
                 width: 12; height: 12
                 radius: 6
                 color: dotColor
@@ -109,20 +100,12 @@ Item {
         }
     }
 
-    Column {
+    ColumnLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        spacing: 24
 
         Text {
+            Layout.fillWidth: true
             id: titleText
-            anchors.left: parent.left
-            width: headerColumn.width - dotsRow.width - 16
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
@@ -133,55 +116,27 @@ Item {
         }
 
         Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.fillWidth: true
+            Layout.bottomMargin: 30
             font.family: "Arial"
             font.pixelSize: 18
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#4A4646"
             horizontalAlignment: Text.AlignHCenter
-            text: qsTr("Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given<br/><br/>
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.")
+            text: qsTr(" <br>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.<br/><br/>
+                        <b>Enter a strong password</b> (using letters, numbers, and/or symbols):")
                     + translationManager.emptyString
         }
     }
 
-
-    WizardPasswordInput {
-        id: passwordItem
-        anchors.top: headerColumn.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
-        placeholderText : qsTr("Password") + translationManager.emptyString;
-        KeyNavigation.tab: retypePasswordItem
-        onChanged: handlePassword()
-
+    ColumnLayout {
+        Layout.fillWidth: true;
+        WizardPasswordUI {
+            id: passwordUI
+        }
     }
 
-    WizardPasswordInput {
-        id: retypePasswordItem
-        anchors.top: passwordItem.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
-        placeholderText : qsTr("Confirm password") + translationManager.emptyString;
-        KeyNavigation.tab: passwordItem
-        onChanged: handlePassword()
-    }
-
-    PrivacyLevelSmall {
-        id: privacyLevel
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: retypePasswordItem.bottom
-        anchors.topMargin: 60
-        background: "#F0EEEE"
-        interactive: false
-    }
 
     Component.onCompleted: {
         parent.wizardRestarted.connect(onWizardRestarted)

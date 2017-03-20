@@ -31,7 +31,9 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
 
     QDateTime firstDateTime = QDateTime(QDate(2014, 4, 18)); // the genesis block
     QDateTime lastDateTime  = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
-
+    quint64 lastTxHeight = 0;
+    m_locked = false;
+    m_minutesToUnlock = 0;
     TransactionHistory * parent = const_cast<TransactionHistory*>(this);
     for (const auto i : m_pimpl->getAll()) {
         TransactionInfo * ti = new TransactionInfo(i, parent);
@@ -43,6 +45,14 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
         if (ti->timestamp() <= firstDateTime) {
             firstDateTime = ti->timestamp();
         }
+        // store last tx height
+        if (ti->confirmations() < 10 && ti->blockHeight() >= lastTxHeight ){
+            lastTxHeight = ti->blockHeight();
+            // TODO: Fetch block time and confirmations needed from wallet2?
+            m_minutesToUnlock = (10 - ti->confirmations()) * 2;
+            m_locked = true;
+        }
+
     }
     emit refreshFinished();
 
@@ -81,9 +91,19 @@ QDateTime TransactionHistory::lastDateTime() const
     return m_lastDateTime;
 }
 
+quint64 TransactionHistory::minutesToUnlock() const
+{
+    return m_minutesToUnlock;
+}
 
-TransactionHistory::TransactionHistory(Bitmonero::TransactionHistory *pimpl, QObject *parent)
-    : QObject(parent), m_pimpl(pimpl)
+bool TransactionHistory::TransactionHistory::locked() const
+{
+    return m_locked;
+}
+
+
+TransactionHistory::TransactionHistory(Monero::TransactionHistory *pimpl, QObject *parent)
+    : QObject(parent), m_pimpl(pimpl), m_minutesToUnlock(0), m_locked(false)
 {
     m_firstDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
     m_lastDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)

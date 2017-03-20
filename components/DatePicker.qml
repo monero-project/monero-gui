@@ -285,7 +285,6 @@ Item {
                         anchors.centerIn: parent
                         font.family: "Arial"
                         font.pixelSize: 12
-                        font.letterSpacing: -1
                         font.bold: dayArea.pressed
                         text: styleData.date.getDate()
                         color: {
@@ -322,7 +321,6 @@ Item {
                         elide: Text.ElideRight
                         font.family: "Arial"
                         font.pixelSize: 9
-                        font.letterSpacing: -1
                         color: "#535353"
                         text: {
                             var locale = Qt.locale()
@@ -339,7 +337,6 @@ Item {
                         anchors.centerIn: parent
                         font.family: "Arial"
                         font.pixelSize: 12
-                        font.letterSpacing: -1
                         color: "#4A4646"
                         text: styleData.title
                     }

@@ -28,6 +28,7 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import moneroComponents.AddressBookModel 1.0
 
 
 ListView {
@@ -36,6 +37,7 @@ ListView {
     boundsBehavior: ListView.StopAtBounds
     property var previousItem
     property int rowSpacing: 12
+    property var addressBookModel: null
 
     function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations) {
         var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
@@ -52,6 +54,15 @@ ListView {
             + translationManager.emptyString;
     }
 
+    function lookupPaymentID(paymentId) {
+        if (!addressBookModel)
+            return ""
+        var idx = addressBookModel.lookupPaymentID(paymentId)
+        if (idx < 0)
+            return ""
+        idx = addressBookModel.index(idx, 0)
+        return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
+    }
 
 
     footer: Rectangle {
@@ -188,7 +199,6 @@ ListView {
                 anchors.bottom: parent.bottom
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 color: "#535353"
                 text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
             }
@@ -202,10 +212,23 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize:13
-                font.letterSpacing: -1
                 color: "#545454"
                 text: paymentId
 
+            }
+            // Address book lookup
+            TextEdit {
+                readOnly: true
+                selectByMouse: true
+                id: addressBookLookupValue
+                width: 136
+                anchors.bottom: parent.bottom
+                //elide: Text.ElideRight
+                font.family: "Arial"
+                font.pixelSize:13
+                color: "#545454"
+                text: "(" + lookupPaymentID(paymentId) + ")"
+                visible: text !== "()"
             }
         }
         Row {
@@ -224,7 +247,6 @@ ListView {
                 width: 86
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 color: "#535353"
                 text:  qsTr("BlockHeight:")  + translationManager.emptyString
             }
@@ -237,9 +259,18 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 13
-                font.letterSpacing: -1
-                color: "#545454"
-                text: blockHeight
+                color:  (confirmations < 10)? "#FF6C3C" : "#545454"
+                text: {
+                    if (!isPending)
+                        if(confirmations < 10)
+                            return blockHeight + " " + qsTr("(%1/10 confirmations)").arg(confirmations)
+                        else
+                            return blockHeight
+                    if (!isOut)
+                        return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    return qsTr("PENDING") + translationManager.emptyString
+
+                }
             }
         }
 
@@ -277,7 +308,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: date
                     }
@@ -285,7 +315,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: time
                     }
@@ -310,7 +339,6 @@ ListView {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
-                    font.letterSpacing: -1
                     color: "#000000"
                     text: balance
                 }
@@ -320,7 +348,6 @@ ListView {
             // -- "Amount column
             Column {
                 anchors.top: parent.top
-                width: 148
 
                 Text {
                     anchors.left: parent.left
@@ -342,10 +369,10 @@ ListView {
                     }
 
                     Text {
+                        id: amountText
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: isOut ? "#FF4F41" : "#36B05B"
                         text:  displayAmount
                     }
@@ -371,7 +398,6 @@ ListView {
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#FF4F41"
                         text:  fee
                     }

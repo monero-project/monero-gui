@@ -29,14 +29,21 @@
 import QtQuick 2.2
 import Qt.labs.settings 1.0
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.1
 
 import "../components"
 
-Rectangle {
+ColumnLayout {
+    anchors.fill: parent
+    Layout.fillHeight: true
     id: wizard
     property alias nextButton : nextButton
     property var settings : ({})
     property int currentPage: 0
+    property int wizardLeftMargin: (!isMobile) ?  150 : 25
+    property int wizardRightMargin: (!isMobile) ? 150 : 25
+    property int wizardBottomMargin: (isMobile) ? 150 : 25
+    property int wizardTopMargin: (isMobile) ? 15 : 50
 
     property var paths: {
      //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
@@ -44,6 +51,7 @@ Rectangle {
         // disable donation page
         "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage,  finishPage ],
         "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage,  finishPage ],
+        "create_view_only_wallet" : [ createViewOnlyWalletPage, passwordPage ],
 
     }
     property string currentPath: "create_wallet"
@@ -52,9 +60,9 @@ Rectangle {
     signal wizardRestarted();
     signal useMoneroClicked()
     signal openWalletFromFileClicked()
-    border.color: "#DBDBDB"
-    border.width: 1
-    color: "#FFFFFF"
+//    border.color: "#DBDBDB"
+//    border.width: 1
+//    color: "#FFFFFF"
 
     function restart(){
         wizard.currentPage = 0;
@@ -83,21 +91,24 @@ Rectangle {
         }
         console.log("switchpage: currentPage: ", currentPage);
 
+        // Update prev/next button positions for mobile/desktop
+        prevButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+        prevButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+        nextButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+        nextButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+
         if (currentPage > 0 || currentPage < pages.length - 1) {
             pages[currentPage].opacity = 0
             var step_value = next ? 1 : -1
             currentPage += step_value
             pages[currentPage].opacity = 1;
 
-            var nextButtonVisible = pages[currentPage] !== optionsPage;
-            nextButton.visible = nextButtonVisible;
+            var nextButtonVisible = currentPage > 1 && currentPage < pages.length - 1
+            nextButton.visible = nextButtonVisible
 
-            if (next && typeof pages[currentPage].onPageOpened !== 'undefined') {
-                pages[currentPage].onPageOpened(settings)
+            if (typeof pages[currentPage].onPageOpened !== 'undefined') {
+                pages[currentPage].onPageOpened(settings,next)
             }
-
-
-
         }
     }
 
@@ -105,27 +116,21 @@ Rectangle {
 
     function openCreateWalletPage() {
         print ("show create wallet page");
-        pages[currentPage].opacity = 0;
-        createWalletPage.opacity = 1
         currentPath = "create_wallet"
         pages = paths[currentPath]
-        currentPage = pages.indexOf(createWalletPage)
         createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
-        createWalletPage.onPageOpened(settings);
-
-
+        // goto next page
+        switchPage(true);
     }
 
     function openRecoveryWalletPage() {
         print ("show recovery wallet page");
-        pages[currentPage].opacity = 0
-        recoveryWalletPage.opacity = 1
         currentPath = "recovery_wallet"
         pages = paths[currentPath]
-        currentPage = pages.indexOf(recoveryWalletPage)
         wizard.nextButton.visible = true
-        recoveryWalletPage.onPageOpened(settings);
+        // goto next page
+        switchPage(true);
     }
 
     function openOpenWalletPage() {
@@ -134,8 +139,18 @@ Rectangle {
             settings.wallet.destroy();
             delete wizard.settings['wallet'];
         }
+        optionsPage.onPageClosed(settings)
+        wizard.openWalletFromFileClicked();
+    }
 
-         wizard.openWalletFromFileClicked();
+    function openCreateViewOnlyWalletPage(){
+        pages[currentPage].opacity = 0
+        currentPath = "create_view_only_wallet"
+        pages = paths[currentPath]
+        currentPage = pages.indexOf(createViewOnlyWalletPage)
+        createViewOnlyWalletPage.opacity = 1
+        nextButton.visible = true
+        rootItem.state = "wizard";
     }
 
     function createWalletPath(folder_path,account_name){
@@ -176,18 +191,14 @@ Rectangle {
 
     //! actually writes the wallet
     function applySettings() {
-        console.log("Here we apply the settings");
-        // here we need to actually move wallet to the new location
-        console.log(settings.wallet_full_path);
-
+        // Save wallet files in user specified location
         var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
-
         console.log("saving in wizard: "+ new_wallet_filename)
-        // moving wallet files to the new destination, if user changed it
-        if (new_wallet_filename !== settings.wallet_filename) {
-            // using previously saved wallet;
-            settings.wallet.store(new_wallet_filename);
-        }
+        settings.wallet.store(new_wallet_filename);
+
+        // make sure temporary wallet files are deleted
+        console.log("Removing temporary wallet: "+ settings.tmp_wallet_filename)
+        oshelper.removeTemporaryWallet(settings.tmp_wallet_filename)
 
         // protecting wallet with password
         settings.wallet.setPassword(settings.wallet_password);
@@ -211,7 +222,6 @@ Rectangle {
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
 
-
     }
 
     // reading settings from persistent storage
@@ -228,50 +238,17 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        id: nextButton
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 50
-        visible: wizard.currentPage !== 1 && wizard.currentPage !== 6
-        width: 50; height: 50
-        radius: 25
-        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
-
-
-        Image {
-            anchors.centerIn: parent
-            anchors.horizontalCenterOffset: 3
-            source: "qrc:///images/nextPage.png"
-        }
-
-        MouseArea {
-            id: nextArea
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: wizard.switchPage(true)
-        }
-    }
-
-
     WizardWelcome {
         id: welcomePage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+//        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+
     }
 
     WizardOptions {
         id: optionsPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
         onCreateWalletClicked: wizard.openCreateWalletPage()
         onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
         onOpenWalletClicked: wizard.openOpenWalletPage();
@@ -279,59 +256,46 @@ Rectangle {
 
     WizardCreateWallet {
         id: createWalletPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+    }
+
+    WizardCreateViewOnlyWallet {
+        id: createViewOnlyWalletPage
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardRecoveryWallet {
         id: recoveryWalletPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardPassword {
         id: passwordPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardDonation {
         id: donationPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     WizardFinish {
         id: finishPage
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: nextButton.left
-        anchors.left: prevButton.right
-        anchors.leftMargin: 50
-        anchors.rightMargin: 50
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
     }
 
     Rectangle {
         id: prevButton
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: wizard.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 50
+        anchors.leftMargin: isMobile ?  20 :  50
+        anchors.bottomMargin: isMobile ?  20 :  50
         visible: parent.currentPage > 0
 
         width: 50; height: 50
@@ -352,12 +316,37 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        id: nextButton
+        anchors.verticalCenter: wizard.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: isMobile ?  20 :  50
+        anchors.bottomMargin: isMobile ?  20 :  50
+        visible: currentPage > 1 && currentPage < pages.length - 1
+        width: 50; height: 50
+        radius: 25
+        color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
+
+
+        Image {
+            anchors.centerIn: parent
+            anchors.horizontalCenterOffset: 3
+            source: "qrc:///images/nextPage.png"
+        }
+
+        MouseArea {
+            id: nextArea
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: wizard.switchPage(true)
+        }
+    }
+
     StandardButton {
         id: sendButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: 50
-        width: 110
+        anchors.margins:  (isMobile) ? 20 : 50
         text: qsTr("USE MONERO") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
@@ -369,4 +358,57 @@ Rectangle {
             wizard.useMoneroClicked();
         }
     }
+
+    StandardButton {
+       id: createViewOnlyWalletButton
+       anchors.right: parent.right
+       anchors.bottom: parent.bottom
+       anchors.margins: (isMobile) ? 20 : 50
+       text: qsTr("Create wallet") + translationManager.emptyString
+       shadowReleasedColor: "#FF4304"
+       shadowPressedColor: "#B32D00"
+       releasedColor: "#FF6C3C"
+       pressedColor: "#FF4304"
+       visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
+       enabled: passwordPage.passwordsMatch
+       onClicked: {
+           if (currentWallet.createViewOnly(settings['view_only_wallet_path'],passwordPage.password)) {
+               console.log("view only wallet created in ",settings['view_only_wallet_path']);
+               informationPopup.title  = qsTr("Success") + translationManager.emptyString;
+               informationPopup.text = qsTr('The view only wallet has been created. You can open it by closing this current wallet, clicking the "Open wallet from file" option, and selecting the view wallet in: \n%1')
+                                        .arg(settings['view_only_wallet_path']);
+               informationPopup.open()
+               informationPopup.onCloseCallback = null
+               rootItem.state = "normal"
+               wizard.restart();
+
+           } else {
+               informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+               informationPopup.text = currentWallet.errorString;
+               informationPopup.open()
+           }
+
+       }
+   }
+
+   StandardButton {
+       id: abortViewOnlyButton
+       anchors.right: createViewOnlyWalletButton.left
+       anchors.bottom: parent.bottom
+       anchors.margins:  (isMobile) ? 20 : 50
+       text: qsTr("Abort") + translationManager.emptyString
+       shadowReleasedColor: "#FF4304"
+       shadowPressedColor: "#B32D00"
+       releasedColor: "#FF6C3C"
+       pressedColor: "#FF4304"
+       visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
+       onClicked: {
+           wizard.restart();
+           rootItem.state = "normal"
+       }
+   }
+
+
+
+
 }

@@ -100,7 +100,6 @@ Item {
                     font.family: "Arial"
                     font.pixelSize: 12
                     font.bold: true
-                    font.letterSpacing: -1
                     color: "#4A4747"
                     text: "NAME"
                 }
@@ -195,7 +194,6 @@ Item {
                             anchors.rightMargin: 12
                             font.family: "Arial"
                             font.bold: true
-                            font.letterSpacing: -1
                             font.pixelSize: 12
                             color: delegateArea.pressed || parent.isCurrent ? "#FFFFFF" : "#4A4646"
                             text: name

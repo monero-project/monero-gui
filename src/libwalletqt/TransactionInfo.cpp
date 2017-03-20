@@ -46,6 +46,11 @@ quint64 TransactionInfo::blockHeight() const
     return m_pimpl->blockHeight();
 }
 
+quint64 TransactionInfo::confirmations() const
+{
+    return m_pimpl->confirmations();
+}
+
 QString TransactionInfo::hash() const
 {
     return QString::fromStdString(m_pimpl->hash());
@@ -97,7 +102,7 @@ QList<Transfer*> TransactionInfo::transfers() const
     return m_transfers;
 }
 
-TransactionInfo::TransactionInfo(Bitmonero::TransactionInfo *pimpl, QObject *parent)
+TransactionInfo::TransactionInfo(Monero::TransactionInfo *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl)
 {
 

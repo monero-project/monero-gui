@@ -27,8 +27,12 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 
-Item {
+
+ColumnLayout {
+    Layout.leftMargin: wizardLeftMargin
+    Layout.rightMargin: wizardRightMargin
     opacity: 0
     visible: false
     Behavior on opacity {
@@ -52,8 +56,8 @@ Item {
 
         return "<table>"
             + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
-            + trStart + qsTr("Account name") + trMiddle + wizard.settings["account_name"] + trEnd
-            + trStart + qsTr("Seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            + trStart + qsTr("Wallet name") + trMiddle + wizard.settings["account_name"] + trEnd
+            + trStart + qsTr("Backup seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
             + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
             // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
             // + (autoDonationEnabled
@@ -70,9 +74,15 @@ Item {
     }
 
     function updateSettingsSummary() {
-        settingsText.text = qsTr("An overview of your Monero configuration is below:") + translationManager.emptyString
-                            + "<br>"
-                            + buildSettingsString();
+        if (!isMobile){
+            settingsText.text = qsTr("New wallet details:") + translationManager.emptyString
+                                + "<br>"
+                                + buildSettingsString();
+        } else {
+            settingsText.text = qsTr("Don't forget to write down your seed. You can view your seed and change your settings on settings page.")
+        }
+
+
     }
 
     function onPageOpened(settings) {
@@ -81,19 +91,16 @@ Item {
     }
 
 
-    Row {
+    RowLayout {
         id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
-        spacing: 6
+        Layout.alignment: Qt.AlignRight
 
         ListModel {
             id: dotsModel
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
-            ListElement { dotColor: "#36B05B" }
+            //ListElement { dotColor: "#36B05B" }
         }
 
         Repeater {
@@ -106,19 +113,12 @@ Item {
         }
     }
 
-    Column {
+    ColumnLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        spacing: 24
+        Layout.fillWidth: true
 
         Text {
-            anchors.left: parent.left
-            width: headerColumn.width - dotsRow.width - 16
+            Layout.fillWidth: true
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
@@ -129,9 +129,8 @@ Item {
         }
 
         Text {
+            Layout.fillWidth: true
             id: settingsText
-            anchors.left: parent.left
-            anchors.right: parent.right
             font.family: "Arial"
             font.pixelSize: 16
             wrapMode: Text.Wrap

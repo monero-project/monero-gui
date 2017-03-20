@@ -29,11 +29,11 @@
 import QtQuick 2.2
 import moneroComponents.WalletManager 1.0
 import moneroComponents.Wallet 1.0
-
+import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import 'utils.js' as Utils
 
-Item {
+ColumnLayout {
     opacity: 0
     visible: false
 
@@ -78,30 +78,30 @@ Item {
 
         // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
         if (typeof settingsObject.wallet !== 'undefined') {
-            settingsObject.wallet.destroy()
+            walletManager.closeWallet()
             console.log("deleting wallet")
         }
 
-        var wallet_filename = oshelper.temporaryFilename();
-        //var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.language)
+        var tmp_wallet_filename = oshelper.temporaryFilename();
+        console.log("Creating temporary wallet", tmp_wallet_filename)
         var testnet = appWindow.persistentSettings.testnet;
-        var wallet = walletManager.createWallet(wallet_filename, "", settingsObject.wallet_language,
+        var wallet = walletManager.createWallet(tmp_wallet_filename, "", settingsObject.wallet_language,
                                                 testnet)
         uiItem.wordsTextItem.memoText = wallet.seed
         // saving wallet in "global" settings object
         // TODO: wallet should have a property pointing to the file where it stored or loaded from
         settingsObject.wallet = wallet
-        settingsObject.wallet_filename = wallet_filename
+        settingsObject.tmp_wallet_filename = tmp_wallet_filename
     }
 
     WizardManageWalletUI {
         id: uiItem
-        titleText: qsTr("A new wallet has been created for you") + translationManager.emptyString
-        wordsTextTitle: qsTr("This is the 25 word mnemonic for your wallet") + translationManager.emptyString
+        titleText: qsTr("Create a new wallet") + translationManager.emptyString
         wordsTextItem.clipboardButtonVisible: true
         wordsTextItem.tipTextVisible: true
         wordsTextItem.memoTextReadOnly: true
         restoreHeightVisible:false
+        recoverMode: false
     }
 
     Component.onCompleted: {

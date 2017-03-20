@@ -244,7 +244,7 @@ Rectangle {
         anchors.top:  searchLine.bottom //descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("To")
+        text: qsTr("To") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
@@ -270,7 +270,7 @@ Rectangle {
         anchors.left: toDatePicker.right
         anchors.leftMargin: 17
         width: 60
-        text: qsTr("FILTER")
+        text: qsTr("Filter") + translationManager.emptyString
         shadowReleasedColor: "#4D0051"
         shadowPressedColor: "#2D002F"
         releasedColor: "#6B0072"
@@ -307,7 +307,7 @@ Rectangle {
 
     CheckBox {
         id: advancedFilteringCheckBox
-        text: qsTr("Advanced filtering")
+        text: qsTr("Advanced filtering") + translationManager.emptyString
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
         anchors.leftMargin: 17
@@ -333,9 +333,9 @@ Rectangle {
 
     ListModel {
         id: transactionsModel
-        ListElement { column1: "ALL"; column2: ""; value: TransactionInfo.Direction_Both }
-        ListElement { column1: "SENT"; column2: ""; value: TransactionInfo.Direction_Out }
-        ListElement { column1: "RECEIVED"; column2: ""; value: TransactionInfo.Direction_In }
+        ListElement { column1: "All"; column2: ""; value: TransactionInfo.Direction_Both }
+        ListElement { column1: "Sent"; column2: ""; value: TransactionInfo.Direction_Out }
+        ListElement { column1: "Received"; column2: ""; value: TransactionInfo.Direction_In }
 
     }
 
@@ -393,7 +393,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         width: 156
-        text: qsTr("To")
+        text: qsTr("To") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
@@ -540,6 +540,11 @@ Rectangle {
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
+            addressBookModel: null
         }
+    }
+
+    function onPageCompleted() {
+        table.addressBookModel = appWindow.currentWallet ? appWindow.currentWallet.addressBookModel : null
     }
 }

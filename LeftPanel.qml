@@ -35,9 +35,11 @@ Rectangle {
     id: panel
 
     property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
-    property alias daemonProgress : daemonProgress
+    property alias progressBar : progressBar
+    property alias minutesToUnlockTxt: unlockedBalanceLabel.text
 
     signal dashboardClicked()
     signal historyClicked()
@@ -60,6 +62,7 @@ Rectangle {
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
+        else if(pos === "Advanced") menuColumn.previousButton = advancedButton
 
         menuColumn.previousButton.checked = true
     }
@@ -73,7 +76,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: 48
+        anchors.topMargin: (persistentSettings.customDecorations)? 66 : 36
         height: logo.implicitHeight
 
         Image {
@@ -81,6 +84,18 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 50
             source: "images/moneroLogo.png"
+        }
+
+        Text {
+            id: testnetLabel
+            visible: persistentSettings.testnet
+            text: qsTr("Testnet") + translationManager.emptyString
+            anchors.top: logo.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            font.bold: true
+            color: "red"
         }
 
       /* Disable twitter/news panel
@@ -105,10 +120,11 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: logoItem.bottom
-        anchors.topMargin: 40
-        spacing: 6
+        anchors.topMargin: 26
+        spacing: 5
 
         Label {
+            id: balanceLabel
             text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
@@ -131,9 +147,17 @@ Rectangle {
                 id: balanceText
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Arial"
-                font.pixelSize: 26
                 color: "#000000"
                 text: "N/A"
+                // dynamically adjust text size
+                font.pixelSize: {
+                    var digits = text.split('.')[0].length
+                    var defaultSize = 25;
+                    if(digits > 2) {
+                        return defaultSize - 1.1*digits
+                    }
+                    return defaultSize;
+                }
             }
         }
 
@@ -144,6 +168,7 @@ Rectangle {
         }
 
         Label {
+            id: unlockedBalanceLabel
             text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
@@ -155,9 +180,17 @@ Rectangle {
             anchors.left: parent.left
             anchors.leftMargin: 50
             font.family: "Arial"
-            font.pixelSize: 18
             color: "#000000"
             text: "N/A"
+            // dynamically adjust text size
+            font.pixelSize: {
+                var digits = text.split('.')[0].length
+                var defaultSize = 18;
+                if(digits > 3) {
+                    return defaultSize - 0.6*digits
+                }
+                return defaultSize;
+            }
         }
     }
 
@@ -183,7 +216,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: column1.bottom
-        anchors.topMargin: 50
+        anchors.topMargin: 25
         color: "#1C1C1C"
 
         Column {
@@ -229,7 +262,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Send") + translationManager.emptyString
-                symbol: qsTr("T") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
                 dotColor: "#FF6C3C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -239,6 +272,33 @@ Rectangle {
             }
 
             Rectangle {
+                visible: transferButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
+            // ------------- AddressBook tab ---------------
+
+            MenuButton {
+                id: addressBookButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Address book") + translationManager.emptyString
+                symbol: qsTr("B") + translationManager.emptyString
+                dotColor: "#FF4F41"
+                under: transferButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = addressBookButton
+                    panel.addressBookClicked()
+                }
+            }
+
+            Rectangle {
+                visible: addressBookButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -261,27 +321,7 @@ Rectangle {
                 }
             }
             Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: "#505050"
-                height: 1
-            }
-            // ------------- TxKey tab ---------------
-            MenuButton {
-                id: txkeyButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Verify payment") + translationManager.emptyString
-                symbol: qsTr("K") + translationManager.emptyString
-                dotColor: "#AAFFBB"
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = txkeyButton
-                    panel.txkeyClicked()
-                }
-            }
-            Rectangle {
+                visible: receiveButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -305,41 +345,33 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: historyButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
                 color: "#505050"
                 height: 1
             }
-            /*
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: historyButton.checked || addressBookButton.checked ? "#1C1C1C" : "#505050"
-                height: 1
-            }
-            // ------------- AddressBook tab ---------------
 
+            // ------------- Advanced tab ---------------
             MenuButton {
-                id: addressBookButton
+                id: advancedButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Address book") + translationManager.emptyString
-                symbol: qsTr("B") + translationManager.emptyString
-                dotColor: "#FF4F41"
+                text: qsTr("Advanced") + translationManager.emptyString
+                symbol: qsTr("D") + translationManager.emptyString
+                dotColor: "#FFD781"
                 onClicked: {
                     parent.previousButton.checked = false
-                    parent.previousButton = addressBookButton
-                    panel.addressBookClicked()
+                    parent.previousButton = advancedButton
                 }
             }
-
             Rectangle {
+                visible: advancedButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: addressBookButton.checked || miningButton.checked ? "#1C1C1C" : "#505050"
+                color: "#505050"
                 height: 1
             }
 
@@ -351,6 +383,7 @@ Rectangle {
                 text: qsTr("Mining") + translationManager.emptyString
                 symbol: qsTr("M") + translationManager.emptyString
                 dotColor: "#FFD781"
+                under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = miningButton
@@ -359,21 +392,46 @@ Rectangle {
             }
 
             Rectangle {
+                visible: miningButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
                 color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
                 height: 1
             }
-            */
+            // ------------- TxKey tab ---------------
+            MenuButton {
+                id: txkeyButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Check payment") + translationManager.emptyString
+                symbol: qsTr("K") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = txkeyButton
+                    panel.txkeyClicked()
+                }
+            }
+            Rectangle {
+                visible: txkeyButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
             // ------------- Sign/verify tab ---------------
             MenuButton {
                 id: signButton
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
-                symbol: qsTr("S") + translationManager.emptyString
-                dotColor: "#AAFFBB"
+                symbol: qsTr("I") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: advancedButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = signButton
@@ -381,6 +439,7 @@ Rectangle {
                 }
             }
             Rectangle {
+                visible: signButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
@@ -393,7 +452,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Settings") + translationManager.emptyString
-                symbol: qsTr("S") + translationManager.emptyString
+                symbol: qsTr("E") + translationManager.emptyString
                 dotColor: "#36B25C"
                 onClicked: {
                     parent.previousButton.checked = false
@@ -408,12 +467,12 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: (daemonProgress.visible)? daemonProgress.top : parent.bottom;
+            anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
         }
 
-        DaemonProgress {
-            id: daemonProgress
+        ProgressBar {
+            id: progressBar
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom

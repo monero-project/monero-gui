@@ -51,16 +51,23 @@ Rectangle {
     function updatePaymentId(payment_id) {
         if (typeof appWindow.currentWallet === 'undefined' || appWindow.currentWallet == null)
             return
+
         // generate a new one if not given as argument
         if (typeof payment_id === 'undefined') {
             payment_id = appWindow.currentWallet.generatePaymentId()
-            appWindow.persistentSettings.payment_id = payment_id
             paymentIdLine.text = payment_id
         }
-        addressLine.text = appWindow.currentWallet.address
-        integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
-        if (integratedAddressLine.text === "")
-          integratedAddressLine.text = qsTr("Invalid payment ID")
+
+        if (payment_id.length > 0) {
+            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
+            if (integratedAddressLine.text === "")
+              integratedAddressLine.text = qsTr("Invalid payment ID")
+        }
+        else {
+            paymentIdLine.text = ""
+            integratedAddressLine.text = ""
+        }
+
         update()
     }
 
@@ -96,7 +103,7 @@ Rectangle {
             setTrackingLineText("-")
             return
         }
-        if (appWindow.currentWallet.connected == Wallet.ConnectionStatus_Disconnected) {
+        if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
             setTrackingLineText(qsTr("WARNING: no connection to daemon"))
             return
         }
@@ -161,7 +168,8 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 17
+        anchors.topMargin: 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -204,39 +212,6 @@ Rectangle {
         }
 
         RowLayout {
-            id: integratedAddressRow
-            Label {
-                id: integratedAddressLabel
-                fontSize: 14
-                text: qsTr("Integrated address") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-
-                id: integratedAddressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("ReadOnly wallet integrated address displayed here") + translationManager.emptyString
-                readOnly: true
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                onTextChanged: cursorPosition = 0
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (integratedAddressLine.text.length > 0) {
-                            clipboard.setText(integratedAddressLine.text)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        RowLayout {
             id: paymentIdRow
             Label {
                 id: paymentIdLabel
@@ -249,7 +224,7 @@ Rectangle {
             LineEdit {
                 id: paymentIdLine
                 fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString;
+                placeholderText: qsTr("16 hexadecimal characters") + translationManager.emptyString;
                 readOnly: false
                 onTextChanged: updatePaymentId(paymentIdLine.text)
 
@@ -269,17 +244,57 @@ Rectangle {
             StandardButton {
                 id: generatePaymentId
                 width: 80
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Generate")
-                anchors.right: parent.right
-                onClicked: {
-                    appWindow.persistentSettings.payment_id = appWindow.currentWallet.generatePaymentId();
-                    updatePaymentId()
+                text: qsTr("Generate") + translationManager.emptyString;
+                onClicked: updatePaymentId()
+            }
+
+            StandardButton {
+                id: clearPaymentId
+                enabled: !!paymentIdLine.text
+                width: 80
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Clear") + translationManager.emptyString;
+                onClicked: updatePaymentId("")
+            }
+        }
+
+        RowLayout {
+            id: integratedAddressRow
+            Label {
+                id: integratedAddressLabel
+                fontSize: 14
+                text: qsTr("Integrated address") + translationManager.emptyString
+                width: mainLayout.labelWidth
+            }
+
+
+            LineEdit {
+
+                id: integratedAddressLine
+                fontSize: mainLayout.lineEditFontSize
+                placeholderText: qsTr("Generate payment ID for integrated address") + translationManager.emptyString
+                readOnly: true
+                width: mainLayout.editWidth
+                Layout.fillWidth: true
+
+                onTextChanged: cursorPosition = 0
+
+                IconButton {
+                    imageSource: "../images/copyToClipboard.png"
+                    onClicked: {
+                        if (integratedAddressLine.text.length > 0) {
+                            clipboard.setText(integratedAddressLine.text)
+                        }
+                    }
                 }
+
             }
         }
 
@@ -358,6 +373,32 @@ Rectangle {
             standardButtons: StandardButton.Ok
         }
 
+        FileDialog {
+            id: qrFileDialog
+            title: "Please choose a name"
+            folder: shortcuts.pictures
+            selectExisting: false
+            nameFilters: [ "Image (*.png)"]
+            onAccepted: {
+                if( ! walletManager.saveQrCode(makeQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
+                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
+                    trackingHowToUseDialog.title  = qsTr("Save QrCode") + translationManager.emptyString;
+                    trackingHowToUseDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                    trackingHowToUseDialog.icon = StandardIcon.Error
+                    trackingHowToUseDialog.open()
+                }
+            }
+        }
+
+        Menu {
+            id: qrMenu
+            title: "QrCode"
+            MenuItem {
+               text: qsTr("Save As") + translationManager.emptyString;
+               onTriggered: qrFileDialog.open()
+            }
+        }
+
         Image {
             id: qrCode
             anchors.margins: 50
@@ -367,6 +408,15 @@ Rectangle {
             smooth: false
             fillMode: Image.PreserveAspectFit
             source: "image://qrcode/" + makeQRCodeString()
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onClicked: {
+                    if (mouse.button == Qt.RightButton)
+                        qrMenu.popup()
+                }
+                onPressAndHold: qrFileDialog.open()
+            }
         }
     }
 
@@ -379,12 +429,14 @@ Rectangle {
     function onPageCompleted() {
         console.log("Receive page loaded");
 
-        if(addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
-            updatePaymentId()
+        if (appWindow.currentWallet) {
+            if (addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
+                addressLine.text = appWindow.currentWallet.address
+            }
         }
+
         update()
         timer.running = true
-
     }
 
     function onPageClosed() {

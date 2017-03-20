@@ -24,15 +24,27 @@ Column {
 
         TextEdit {
             id: memoTextInput
+            property alias placeholderText: memoTextPlaceholder.text
             textMargin: 8
             text: ""
             font.family: "Arial"
-            font.pointSize: 16
+            font.pixelSize: 16
             wrapMode: TextInput.Wrap
             width: parent.width
             selectByMouse: true
             property int minimumHeight: 100
             height: contentHeight > minimumHeight ? contentHeight : minimumHeight
+
+            Text {
+                id: memoTextPlaceholder
+                anchors.fill:parent
+                font.pixelSize: 16
+                anchors.margins: 8
+                font.bold:true
+                text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
+                color: "#BABABA"
+                visible: !memoTextInput.text/* && !parent.focus*/
+            }
         }
         Image {
             id : clipboardButton
@@ -73,7 +85,7 @@ Column {
                 font.pixelSize: 15
                 color: "#4A4646"
                 wrapMode: Text.Wrap
-                text: qsTr("It is very important to write it down as this is the only backup you will need for your wallet.")
+                text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.")
                     + translationManager.emptyString
             }
         }

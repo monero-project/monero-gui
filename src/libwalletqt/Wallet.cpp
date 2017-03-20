@@ -1,8 +1,11 @@
 #include "Wallet.h"
 #include "PendingTransaction.h"
+#include "UnsignedTransaction.h"
 #include "TransactionHistory.h"
+#include "AddressBook.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
+#include "model/AddressBookModel.h"
 #include "wallet/wallet2_api.h"
 
 #include <QFile>
@@ -11,14 +14,18 @@
 #include <QUrl>
 #include <QTimer>
 #include <QtConcurrent/QtConcurrent>
+#include <QList>
+#include <QVector>
+#include <QMutex>
+#include <QMutexLocker>
 
 namespace {
-    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 10;
-    static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 60;
+    static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
+    static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 30;
     static const int WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS = 5;
 }
 
-class WalletListenerImpl : public  Bitmonero::WalletListener
+class WalletListenerImpl : public  Monero::WalletListener
 {
 public:
     WalletListenerImpl(Wallet * w)
@@ -40,15 +47,20 @@ public:
         emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
     }
 
+    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount)
+    {
+        qDebug() << __FUNCTION__;
+        emit m_wallet->unconfirmedMoneyReceived(QString::fromStdString(txId), amount);
+    }
+
     virtual void newBlock(uint64_t height)
     {
         // qDebug() << __FUNCTION__;
-        emit m_wallet->newBlock(height);
+        emit m_wallet->newBlock(height, m_wallet->daemonBlockChainTargetHeight());
     }
 
     virtual void updated()
     {
-        qDebug() << __FUNCTION__;
         emit m_wallet->updated();
     }
 
@@ -88,17 +100,41 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
-Wallet::ConnectionStatus Wallet::connected() const
+bool Wallet::testnet() const
+{
+    return m_walletImpl->testnet();
+}
+
+
+void Wallet::updateConnectionStatusAsync()
+{
+    QFuture<Monero::Wallet::ConnectionStatus> future = QtConcurrent::run(m_walletImpl, &Monero::Wallet::connected);
+    QFutureWatcher<Monero::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Monero::Wallet::ConnectionStatus>();
+
+    connect(connectionWatcher, &QFutureWatcher<Monero::Wallet::ConnectionStatus>::finished, [=]() {
+        QFuture<Monero::Wallet::ConnectionStatus> future = connectionWatcher->future();
+        connectionWatcher->deleteLater();
+        ConnectionStatus newStatus = static_cast<ConnectionStatus>(future.result());
+        if (newStatus != m_connectionStatus || !m_initialized) {
+            m_initialized = true;
+            m_connectionStatus = newStatus;
+            qDebug() << "NEW STATUS " << newStatus;
+            emit connectionStatusChanged(newStatus);
+        }
+        // Release lock
+        m_connectionStatusRunning = false;
+    });
+    connectionWatcher->setFuture(future);
+}
+
+Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
     // cache connection status
-    if (!m_initialized || m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl) {
-        m_initialized = true;
-        ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
-        if (newStatus != m_connectionStatus) {
-            m_connectionStatus = newStatus;
-            emit connectionStatusChanged();
-        }
+    if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
+        qDebug() << "Checking connection status";
+        m_connectionStatusRunning = true;
         m_connectionStatusTime.restart();
+        updateConnectionStatusAsync();
     }
 
     return m_connectionStatus;
@@ -136,17 +172,57 @@ bool Wallet::store(const QString &path)
 
 bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
-    return m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit);
-}
-
-void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
-{
+    qDebug() << "init non async";
     if (isRecovering){
         qDebug() << "RESTORING";
         m_walletImpl->setRecoveringFromSeed(true);
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
-    m_walletImpl->initAsync(daemonAddress.toStdString(), upperTransactionLimit);
+    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
+    return true;
+}
+
+void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemonPassword)
+{
+    // store daemon login
+    m_daemonUsername = daemonUsername;
+    m_daemonPassword = daemonPassword;
+}
+
+void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
+{
+    qDebug() << "initAsync: " + daemonAddress;
+    // Change status to disconnected if connected
+    if(m_connectionStatus != Wallet::ConnectionStatus_Disconnected) {
+        m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
+        emit connectionStatusChanged(m_connectionStatus);
+    }
+
+    QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
+                                  daemonAddress, upperTransactionLimit, isRecovering, restoreHeight);
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+
+    connect(watcher, &QFutureWatcher<bool>::finished,
+            this, [this, watcher, daemonAddress, upperTransactionLimit, isRecovering, restoreHeight]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        if(future.result()){
+            qDebug() << "init async finished - starting refresh";
+            connected(true);
+            m_walletImpl->startRefresh();
+
+        }
+    });
+    watcher->setFuture(future);
+}
+
+//! create a view only wallet
+bool Wallet::createViewOnly(const QString &path, const QString &password) const
+{
+    // Create path
+    QDir d = QFileInfo(path).absoluteDir();
+    d.mkpath(d.absolutePath());
+    return m_walletImpl->createWatchOnly(path.toStdString(),password.toStdString(),m_walletImpl->getSeedLanguage());
 }
 
 bool Wallet::connectToDaemon()
@@ -157,6 +233,11 @@ bool Wallet::connectToDaemon()
 void Wallet::setTrustedDaemon(bool arg)
 {
     m_walletImpl->setTrustedDaemon(arg);
+}
+
+bool Wallet::viewOnly() const
+{
+    return m_walletImpl->watchOnly();
 }
 
 quint64 Wallet::balance() const
@@ -188,10 +269,15 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
-
-    if (m_daemonBlockChainTargetHeight == 0
+    if (m_daemonBlockChainTargetHeight <= 1
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
+
+        // Target height is set to 0 if daemon is synced.
+        // Use current height from daemon when target height < current height
+        if (m_daemonBlockChainTargetHeight < m_daemonBlockChainHeight){
+            m_daemonBlockChainTargetHeight = m_daemonBlockChainHeight;
+        }
         m_daemonBlockChainTargetHeightTime.restart();
     }
 
@@ -209,6 +295,7 @@ bool Wallet::refresh()
 
 void Wallet::refreshAsync()
 {
+    qDebug() << "refresh async";
     m_walletImpl->refreshAsync();
 }
 
@@ -222,13 +309,23 @@ int Wallet::autoRefreshInterval() const
     return m_walletImpl->autoRefreshInterval();
 }
 
+void Wallet::startRefresh() const
+{
+    m_walletImpl->startRefresh();
+}
+
+void Wallet::pauseRefresh() const
+{
+    m_walletImpl->pauseRefresh();
+}
+
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
                                               quint64 amount, quint32 mixin_count,
                                               PendingTransaction::Priority priority)
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
-                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+                static_cast<Monero::PendingTransaction::Priority>(priority));
     PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
@@ -240,21 +337,22 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransaction,
                                   dst_addr, payment_id,amount, mixin_count, priority);
     QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher,dst_addr,payment_id,mixin_count]() {
         QFuture<PendingTransaction*> future = watcher->future();
         watcher->deleteLater();
         emit transactionCreated(future.result(),dst_addr,payment_id,mixin_count);
     });
+    watcher->setFuture(future);
 }
 
 PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const QString &payment_id,
                                                  quint32 mixin_count, PendingTransaction::Priority priority)
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), payment_id.toStdString(), Bitmonero::optional<uint64_t>(), mixin_count,
-                static_cast<Bitmonero::PendingTransaction::Priority>(priority));
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
+                dst_addr.toStdString(), payment_id.toStdString(), Monero::optional<uint64_t>(), mixin_count,
+                static_cast<Monero::PendingTransaction::Priority>(priority));
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -266,18 +364,19 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransactionAll,
                                   dst_addr, payment_id, mixin_count, priority);
     QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher,dst_addr,payment_id,mixin_count]() {
         QFuture<PendingTransaction*> future = watcher->future();
         watcher->deleteLater();
         emit transactionCreated(future.result(),dst_addr,payment_id,mixin_count);
     });
+    watcher->setFuture(future);
 }
 
 PendingTransaction *Wallet::createSweepUnmixableTransaction()
 {
-    Bitmonero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
+    Monero::PendingTransaction * ptImpl = m_walletImpl->createSweepUnmixableTransaction();
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -286,18 +385,41 @@ void Wallet::createSweepUnmixableTransactionAsync()
 {
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createSweepUnmixableTransaction);
     QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher]() {
         QFuture<PendingTransaction*> future = watcher->future();
         watcher->deleteLater();
         emit transactionCreated(future.result(),"","",0);
     });
+    watcher->setFuture(future);
+}
+
+UnsignedTransaction * Wallet::loadTxFile(const QString &fileName)
+{
+    qDebug() << "Trying to sign " << fileName;
+    Monero::UnsignedTransaction * ptImpl = m_walletImpl->loadUnsignedTx(fileName.toStdString());
+    UnsignedTransaction * result = new UnsignedTransaction(ptImpl, m_walletImpl, this);
+    return result;
+}
+
+bool Wallet::submitTxFile(const QString &fileName) const
+{
+    qDebug() << "Trying to submit " << fileName;
+    if (!m_walletImpl->submitTransaction(fileName.toStdString()))
+        return false;
+    // import key images
+    return m_walletImpl->importKeyImages(fileName.toStdString() + "_keyImages");
 }
 
 void Wallet::disposeTransaction(PendingTransaction *t)
 {
     m_walletImpl->disposeTransaction(t->m_pimpl);
+    delete t;
+}
+
+void Wallet::disposeTransaction(UnsignedTransaction *t)
+{
     delete t;
 }
 
@@ -319,10 +441,26 @@ TransactionHistorySortFilterModel *Wallet::historyModel() const
     return m_historySortFilterModel;
 }
 
+AddressBook *Wallet::addressBook() const
+{
+    return m_addressBook;
+}
+
+AddressBookModel *Wallet::addressBookModel() const
+{
+
+    if (!m_addressBookModel) {
+        Wallet * w = const_cast<Wallet*>(this);
+        m_addressBookModel = new AddressBookModel(w,m_addressBook);
+    }
+
+    return m_addressBookModel;
+}
+
 
 QString Wallet::generatePaymentId() const
 {
-    return QString::fromStdString(Bitmonero::Wallet::genPaymentId());
+    return QString::fromStdString(Monero::Wallet::genPaymentId());
 }
 
 QString Wallet::integratedAddress(const QString &paymentId) const
@@ -426,12 +564,36 @@ bool Wallet::verifySignedMessage(const QString &message, const QString &address,
     return m_walletImpl->verifySignedMessage(message.toStdString(), address.toStdString(), signature.toStdString());
   }
 }
+bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
+{
+   std::string s_address, s_payment_id, s_tx_description, s_recipient_name, s_error;
+   std::vector<std::string> s_unknown_parameters;
+   bool res= m_walletImpl->parse_uri(uri.toStdString(), s_address, s_payment_id, amount, s_tx_description, s_recipient_name, s_unknown_parameters, s_error);
+   if(res)
+   {
+       address = QString::fromStdString(s_address);
+       payment_id = QString::fromStdString(s_payment_id);
+       tx_description = QString::fromStdString(s_tx_description);
+       recipient_name = QString::fromStdString(s_recipient_name);
+       for( const auto &p : s_unknown_parameters )
+           unknown_parameters.append(QString::fromStdString(p));
+   }
+   error = QString::fromStdString(s_error);
+   return res;
+}
 
-Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
+bool Wallet::rescanSpent()
+{
+    return m_walletImpl->rescanSpent();
+}
+
+Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
     , m_history(nullptr)
     , m_historyModel(nullptr)
+    , m_addressBook(nullptr)
+    , m_addressBookModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
@@ -439,6 +601,7 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
+    m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
     // start cache timers
@@ -446,11 +609,19 @@ Wallet::Wallet(Bitmonero::Wallet *w, QObject *parent)
     m_daemonBlockChainHeightTime.restart();
     m_daemonBlockChainTargetHeightTime.restart();
     m_initialized = false;
+    m_connectionStatusRunning = false;
+    m_daemonUsername = "";
+    m_daemonPassword = "";
 }
 
 Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
+
     delete m_history;
-    Bitmonero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+    m_history = NULL;
+    //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+    delete m_walletImpl;
+    m_walletImpl = NULL;
+    qDebug("m_walletImpl deleted");
 }

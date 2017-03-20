@@ -5,7 +5,7 @@
 
 #include <wallet/wallet2_api.h>
 
-//namespace Bitmonero {
+//namespace Monero {
 //class PendingTransaction;
 //}
 
@@ -22,15 +22,16 @@ class PendingTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Bitmonero::PendingTransaction::Status_Ok,
-        Status_Error    = Bitmonero::PendingTransaction::Status_Error
+        Status_Ok       = Monero::PendingTransaction::Status_Ok,
+        Status_Error    = Monero::PendingTransaction::Status_Error,
+        Status_Critical    = Monero::PendingTransaction::Status_Critical
     };
     Q_ENUM(Status)
 
     enum Priority {
-        Priority_Low    = Bitmonero::PendingTransaction::Priority_Low,
-        Priority_Medium = Bitmonero::PendingTransaction::Priority_Medium,
-        Priority_High   = Bitmonero::PendingTransaction::Priority_High
+        Priority_Low    = Monero::PendingTransaction::Priority_Low,
+        Priority_Medium = Monero::PendingTransaction::Priority_Medium,
+        Priority_High   = Monero::PendingTransaction::Priority_High
     };
     Q_ENUM(Priority)
 
@@ -43,13 +44,15 @@ public:
     quint64 fee() const;
     QStringList txid() const;
     quint64 txCount() const;
+    Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit PendingTransaction(Bitmonero::PendingTransaction * pt, QObject *parent = 0);
+    explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Bitmonero::PendingTransaction * m_pimpl;
+    Monero::PendingTransaction * m_pimpl;
+    QString m_fileName;
 };
 
 #endif // PENDINGTRANSACTION_H

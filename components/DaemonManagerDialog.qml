@@ -39,12 +39,14 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-
+    property int countDown: 5;
     signal rejected()
     signal started();
 
     function open() {
         show()
+        countDown = 5;
+        timer.start();
     }
 
     // TODO: implement without hardcoding sizes
@@ -61,15 +63,29 @@ Window {
             //anchors {fill: parent; margins: 16 }
             Layout.alignment: Qt.AlignHCenter
 
-            Label {
-                text: qsTr("Daemon doesn't appear to be running")
+            Timer {
+                id: timer
+                interval: 1000;
+                running: false;
+                repeat: true
+                onTriggered: {
+                    countDown--;
+                    if(countDown < 0){
+                        running = false;
+                        // Start daemon
+                        root.close()
+                        appWindow.startDaemon(persistentSettings.daemonFlags);
+                        root.started();
+                    }
+                }
+            }
+
+            Text {
+                text: qsTr("Starting Monero daemon in %1 seconds").arg(countDown);
+                font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
-                Layout.columnSpan: 2
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 24
-                font.family: "Arial"
-                color: "#555555"
             }
 
         }
@@ -81,39 +97,39 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
+                visible:false
                 fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Start daemon")
+                text: qsTr("Start daemon (%1)").arg(countDown)
                 KeyNavigation.tab: cancelButton
                 onClicked: {
+                    timer.stop();
                     root.close()
-                    appWindow.startDaemon();
+                    appWindow.startDaemon(persistentSettings.daemonFlags);
                     root.started()
                 }
             }
 
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
                 fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Cancel")
+                text: qsTr("Use custom settings")
 
                 onClicked: {
+                    timer.stop();
                     root.close()
                     root.rejected()
                 }
             }
         }
     }
-
 }
 
 

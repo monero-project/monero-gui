@@ -52,13 +52,6 @@ Window {
         show()
     }
 
-    function usefulName(path) {
-        // arbitrary "short enough" limit
-        if (path.length < 32)
-            return path
-        return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
-    }
-
     // TODO: implement without hardcoding sizes
     width: 480
     height: walletName ? 240 : 200
@@ -74,7 +67,7 @@ Window {
             Layout.alignment: Qt.AlignHCenter
 
             Label {
-                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for:<br>") + usefulName(root.walletName) : qsTr("Please enter wallet password")
+                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for:<br>") + root.walletName : qsTr("Please enter wallet password")
                 Layout.alignment: Qt.AlignHCenter
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
@@ -107,12 +100,14 @@ Window {
                     }
                 }
                 Keys.onReturnPressed: {
-                    root.accepted()
                     root.close()
+                    root.accepted()
+
                 }
                 Keys.onEscapePressed: {
-                    root.rejected()
                     root.close()
+                    root.rejected()
+
                 }
 
 
@@ -149,7 +144,7 @@ Window {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Cancel")
+                text: qsTr("Cancel") + translationManager.emptyString
                 KeyNavigation.tab: passwordInput
                 onClicked: {
                     root.close()

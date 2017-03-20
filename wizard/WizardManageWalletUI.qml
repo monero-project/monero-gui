@@ -29,41 +29,78 @@
 import QtQuick 2.2
 import moneroComponents.TranslationManager 1.0
 import QtQuick.Dialogs 1.2
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.2
 import "../components"
+import 'utils.js' as Utils
 
-// Reusable component for managing wallet (account name, path, private key)
-
-Item {
-
+// Reusable component for mnaging wallet (account name, path, private key)
+ColumnLayout {
+    id: page
+    Layout.leftMargin: wizardLeftMargin
+    Layout.rightMargin: wizardRightMargin
     property alias titleText: titleText.text
     property alias accountNameText: accountName.text
-    property alias wordsTextTitle: frameHeader.text
     property alias walletPath: fileUrlInput.text
     property alias wordsTextItem : memoTextItem
     property alias restoreHeight : restoreHeightItem.text
     property alias restoreHeightVisible: restoreHeightItem.visible
+    property alias walletName : accountName.text
+    property alias progressDotsModel : progressDots.model
+    property alias recoverFromKeysAddress: addressLine.text;
+    property alias recoverFromKeysViewKey: viewKeyLine.text;
+    property alias recoverFromKeysSpendKey: spendKeyLine.text;
+    // recover mode or create new wallet
+    property bool recoverMode: false
+    // Recover form seed or keys
+    property bool recoverFromSeedMode: true
+    property int rowSpacing: 10
 
+    function checkFields(){
+        var addressOK = walletManager.addressValid(addressLine.text, wizard.settings.testnet)
+        var viewKeyOK = walletManager.keyValid(viewKeyLine.text, addressLine.text, true, wizard.settings.testnet)
+        // Spendkey is optional
+        var spendKeyOK = (spendKeyLine.text.length > 0)? walletManager.keyValid(spendKeyLine.text, addressLine.text, false, wizard.settings.testnet) : true
 
-    // TODO extend properties if needed
+        addressLine.error = !addressOK && addressLine.text.length != 0
+        viewKeyLine.error = !viewKeyOK && viewKeyLine.text.length != 0
+        spendKeyLine.error = !spendKeyOK && spendKeyLine.text.length != 0
 
-    anchors.fill: parent
-    Row {
+        return addressOK && viewKeyOK && spendKeyOK
+    }
+
+    function checkNextButton(){
+        wizard.nextButton.enabled = false
+        console.log("check next", recoverFromSeed.visible)
+        if(recoverMode && !recoverFromSeedMode) {
+            console.log("checking key fields")
+            wizard.nextButton.enabled = checkFields();
+        } else if (recoverMode && recoverFromSeedMode) {
+            wizard.nextButton.enabled = checkSeed()
+        } else
+            wizard.nextButton.enabled = true;
+    }
+
+    function checkSeed() {
+        console.log("Checking seed")
+        var wordsArray = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText).split(" ");
+        return wordsArray.length === 25
+    }
+
+    RowLayout {
         id: dotsRow
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 85
+        Layout.alignment: Qt.AlignRight
         spacing: 6
 
         ListModel {
             id: dotsModel
-            ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
+            ListElement { dotColor: "#36B05B" }
+            //ListElement { dotColor: "#DBDBDB" }
             ListElement { dotColor: "#DBDBDB" }
             ListElement { dotColor: "#DBDBDB" }
         }
 
         Repeater {
+            id: progressDots
             model: dotsModel
             delegate: Rectangle {
                 width: 12; height: 12
@@ -73,180 +110,172 @@ Item {
         }
     }
 
-    Column {
+    RowLayout {
         id: headerColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: parent.top
-        anchors.topMargin: 74
-        spacing: 24
-
+        Layout.fillWidth: true
         Text {
+            Layout.fillWidth: true
+            horizontalAlignment: Text.AlignHCenter
             id: titleText
-            anchors.left: parent.left
-            width: headerColumn.width - dotsRow.width - 16
             font.family: "Arial"
             font.pixelSize: 28
             wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            //renderType: Text.NativeRendering
             color: "#3F3F3F"
         }
-
-        Text {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            font.family: "Arial"
-            font.pixelSize: 18
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            //renderType: Text.NativeRendering
-            color: "#4A4646"
-            text: qsTr("This is the name of your wallet. You can change it to a different name if you’d like:") + translationManager.emptyString
-        }
     }
 
-    Item {
-        id: walletNameItem
-        anchors.top: headerColumn.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 24
-        width: 300
-        height: 62
+    ColumnLayout {
+        Layout.bottomMargin: rowSpacing
 
-        TextEdit {
+        Label {
+            Layout.topMargin: 20
+            fontSize: 14
+            text:  qsTr("Wallet name")
+                   + translationManager.emptyString
+        }
+
+        LineEdit {
             id: accountName
-            anchors.fill: parent
-            horizontalAlignment: TextInput.AlignHCenter
-            verticalAlignment: TextInput.AlignVCenter
-            font.family: "Arial"
-            font.pixelSize: 32
-            renderType: Text.NativeRendering
-            color: "#FF6C3C"
-            focus: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
             text: defaultAccountName
+            onTextUpdated: checkNextButton()
+        }
+    }
 
-
-            Keys.onReleased: {
-                wizard.nextButton.enabled = (accountName.length > 0)
+    RowLayout{
+        visible: recoverMode
+        spacing: 0
+        StandardButton {
+            id: recoverFromSeedButton
+            text: qsTr("Restore from seed") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            enabled: recoverFromKeys.visible
+            onClicked: {
+                recoverFromSeedMode = true;
+                checkNextButton();
             }
-
         }
 
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
+        StandardButton {
+            id: recoverFromKeysButton
+            text: qsTr("Restore from keys") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            enabled: recoverFromSeed.visible
+            onClicked: {
+                recoverFromSeedMode = false;
+                checkNextButton();
+            }
         }
     }
 
-    Text {
-        id: frameHeader
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 16
-        anchors.rightMargin: 16
-        anchors.top: walletNameItem.bottom
-        anchors.topMargin: 24
-        font.family: "Arial"
-        font.pixelSize: 24
-        font.bold: true
-        //renderType: Text.NativeRendering
-        color: "#4A4646"
-        elide: Text.ElideRight
-        horizontalAlignment: Text.AlignHCenter
+    // Recover from seed
+    RowLayout {
+        id: recoverFromSeed
+        visible: !recoverMode || ( recoverMode && recoverFromSeedMode)
+        WizardMemoTextInput {
+            id : memoTextItem
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+        }
     }
 
+    // Recover from keys
+    GridLayout {
+        Layout.bottomMargin: page.rowSpacing
+        rowSpacing: page.rowSpacing
+        id: recoverFromKeys
+        visible: recoverMode && !recoverFromSeedMode
+        columns: 1
+        LineEdit {
+            Layout.fillWidth: true
+            id: addressLine
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+            placeholderText: qsTr("Account address (public)") + translationManager.emptyString
+            onTextUpdated: checkNextButton()
+        }
+        LineEdit {
+            Layout.fillWidth: true
+            id: viewKeyLine
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+            placeholderText: qsTr("View key (private)") + translationManager.emptyString
+            onTextUpdated: checkNextButton()
 
-    WizardMemoTextInput {
-        id : memoTextItem
-        width: parent.width
-        anchors.top : frameHeader.bottom
-        anchors.topMargin: 16
+        }
+        LineEdit {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+            id: spendKeyLine
+            placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
+            onTextUpdated: checkNextButton()
+        }
     }
-
+    
     // Restore Height
-    LineEdit {
-        id: restoreHeightItem
-        anchors.top: memoTextItem.bottom
-        width: 250
-        anchors.topMargin: 20
-        placeholderText: qsTr("Restore height")
-        Layout.alignment: Qt.AlignCenter
-        validator: IntValidator {
-            bottom:0
+    RowLayout {
+        LineEdit {
+            id: restoreHeightItem
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+            placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
+            validator: IntValidator {
+                bottom:0
+            }
         }
     }
-    Row {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: (restoreHeightItem.visible)? restoreHeightItem.bottom : memoTextItem.bottom
-        anchors.topMargin: 24
-        spacing: 16
 
-        Text {
-            anchors.verticalCenter: parent.verticalCenter
-            font.family: "Arial"
-            font.pixelSize: 18
-            //renderType: Text.NativeRendering
-            color: "#4A4646"
+    // Wallet store location
+    ColumnLayout {
+        Label {
+            Layout.fillWidth: true
+            Layout.topMargin: 20
+            fontSize: 14
             text: qsTr("Your wallet is stored in") + translationManager.emptyString
+                  + translationManager.emptyString
         }
 
-        Item {
-            anchors.verticalCenter: parent.verticalCenter
-            width: parent.width - x
-            height: 34
+        LineEdit {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600
+            Layout.minimumWidth: 200
+            id: fileUrlInput
+            text: moneroAccountsDir + "/"
 
-            FileDialog {
-                id: fileDialog
-                selectMultiple: false
-                selectFolder: true
-                title: qsTr("Please choose a directory")  + translationManager.emptyString
-                onAccepted: {
-                    fileUrlInput.text = walletManager.urlToLocalPath(fileDialog.folder)
-                    fileDialog.visible = false
-                }
-                onRejected: {
-                    fileDialog.visible = false
-                }
-            }
-
-            TextInput {
-                id: fileUrlInput
+            // workaround for the bug "filechooser only opens once"
+            MouseArea {
                 anchors.fill: parent
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                clip: true
-                font.family: "Arial"
-                font.pixelSize: 18
-                color: "#6B0072"
-                verticalAlignment: Text.AlignVCenter
-                selectByMouse: true
-
-                text: moneroAccountsDir + "/"
-                // workaround for the bug "filechooser only opens once"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        mouse.accepted = false
-                        fileDialog.folder = walletManager.localPathToUrl(fileUrlInput.text)
-                        fileDialog.open()
-                        fileUrlInput.focus = true
-                    }
+                onClicked: {
+                    mouse.accepted = false
+                    fileDialog.folder = walletManager.localPathToUrl(fileUrlInput.text)
+                    fileDialog.open()
+                    fileUrlInput.focus = true
                 }
             }
+        }
 
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: "#DBDBDB"
+        FileDialog {
+            id: fileDialog
+            selectMultiple: false
+            selectFolder: true
+            title: qsTr("Please choose a directory")  + translationManager.emptyString
+            onAccepted: {
+                fileUrlInput.text = walletManager.urlToLocalPath(fileDialog.folder)
+                fileDialog.visible = false
+            }
+            onRejected: {
+                fileDialog.visible = false
             }
         }
     }

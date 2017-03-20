@@ -121,7 +121,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
@@ -164,7 +164,7 @@ Rectangle {
                     id: signMessageButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
+                    text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -192,7 +192,7 @@ Rectangle {
 
                 FileDialog {
                     id: signFileDialog
-                    title: "Please choose a file to sign"
+                    title: qsTr("Please choose a file to sign") + translationManager.emptyString;
                     folder: "file://"
                     nameFilters: [ "*"]
 
@@ -205,7 +205,7 @@ Rectangle {
                     id: loadFileToSignButton
                     anchors.rightMargin: 17
                     width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
+                    text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -239,7 +239,7 @@ Rectangle {
                     id: signFileButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("SIGN") + translationManager.emptyString
+                    text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -307,7 +307,7 @@ Rectangle {
                     spacing: 8
                     Label {
                         text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 18
+                        fontSize: 16
                     }
                     Label {}
                 }
@@ -349,7 +349,7 @@ Rectangle {
                     id: verifyMessageButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
+                    text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -377,7 +377,7 @@ Rectangle {
 
                 FileDialog {
                     id: verifyFileDialog
-                    title: "Please choose a file to verify"
+                    title: qsTr("Please choose a file to verify") + translationManager.emptyString;
                     folder: "file://"
                     nameFilters: [ "*"]
 
@@ -390,7 +390,7 @@ Rectangle {
                     id: loadFileToVerifyButton
                     anchors.rightMargin: 17
                     width: 60
-                    text: qsTr("SELECT") + translationManager.emptyString
+                    text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -423,7 +423,7 @@ Rectangle {
                     id: verifyFileButton
                     anchors.right: parent.right
                     width: 60
-                    text: qsTr("VERIFY") + translationManager.emptyString
+                    text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
@@ -442,7 +442,7 @@ Rectangle {
                 width: mainLayout.labelWidth
                 textFormat: Text.RichText
                 text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                            Signing address <font size='2'>  ( Type in  or select from </font> <a href='#'>Address</a><font size='2'> book )</font>")
+                            Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
                       + translationManager.emptyString
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")

@@ -27,10 +27,15 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import "../components"
+import moneroComponents.AddressBook 1.0
+import moneroComponents.AddressBookModel 1.0
 
 Rectangle {
     color: "#F0EEEE"
+    id: root
+    property var model
 
     Text {
         id: newEntryText
@@ -53,19 +58,40 @@ Rectangle {
         anchors.top: newEntryText.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Address")
+        text: qsTr("Address") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
+    StandardButton {
+        id: qrfinderButton
+        anchors.left: parent.left
+        anchors.leftMargin: 17
+        anchors.topMargin: 5
+        anchors.top: addressLabel.bottom
+        text: qsTr("QRCODE") + translationManager.emptyString
+        shadowReleasedColor: "#FF4304"
+        shadowPressedColor: "#B32D00"
+        releasedColor: "#FF6C3C"
+        pressedColor: "#FF4304"
+        visible : appWindow.qrScannerEnabled
+        enabled : visible
+        width: visible ? 60 : 0
+        onClicked: {
+            cameraUi.state = "Capture"
+            cameraUi.qrcode_decoded.connect(updateFromQrCode)
+        }
+    }
+
     LineEdit {
         id: addressLine
-        anchors.left: parent.left
+        anchors.left: qrfinderButton.right
         anchors.right: parent.right
         anchors.top: addressLabel.bottom
-        anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        error: true;
+        placeholderText: qsTr("4...") + translationManager.emptyString
     }
 
     Label {
@@ -88,6 +114,7 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
     }
 
     Label {
@@ -96,7 +123,7 @@ Rectangle {
         anchors.top: paymentIdLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Local database)</font>") + translationManager.emptyString
+        text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
         fontSize: 14
         tipText: qsTr("<b>Tip test test</b><br/><br/>test line 2") + translationManager.emptyString
     }
@@ -109,22 +136,48 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.rightMargin: 17
         anchors.topMargin: 5
+        placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
     }
 
-    StandardButton {
+
+    RowLayout {
         id: addButton
         anchors.left: parent.left
         anchors.top: descriptionLine.bottom
         anchors.leftMargin: 17
         anchors.topMargin: 17
-        width: 60
 
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        text: qsTr("ADD")
+        StandardButton {
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            text: qsTr("Add") + translationManager.emptyString
+            enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+
+            onClicked: {
+                if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
+                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                    // TODO: check currentWallet.addressBook.errorString() instead.
+                    if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                         informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                    else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                         informationPopup.text  = currentWallet.addressBook.errorString()
+                    else
+                         informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
+
+                    informationPopup.onCloseCallback = null
+                    informationPopup.open();
+                } else {
+                    addressLine.text = "";
+                    paymentIdLine.text = "";
+                    descriptionLine.text = "";
+                }
+            }
+        }
     }
+
+
 
     Item {
         id: expandItem
@@ -170,9 +223,10 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-            ListElement { columnName: qsTr("Address") + translationManager.emptyString; columnWidth: 148 }
-            ListElement { columnName: qsTr("Payment ID") + translationManager.emptyString; columnWidth: 148 }
-            ListElement { columnName: qsTr("Description") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Address") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Payment ID") + translationManager.emptyString; columnWidth: 148 }
+//            ListElement { columnName: qsTr("Description") + translationManager.emptyString; columnWidth: 148 }
+//
         }
 
         TableHeader {
@@ -223,7 +277,38 @@ Rectangle {
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
-            model: testModel
+            model: root.model
         }
     }
+
+    function checkInformation(address, payment_id, testnet) {
+      address = address.trim()
+      payment_id = payment_id.trim()
+
+      var address_ok = walletManager.addressValid(address, testnet)
+      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+      var ipid = walletManager.paymentIdFromAddress(address, testnet)
+      if (ipid.length > 0 && payment_id.length > 0)
+         payment_id_ok = false
+
+      addressLine.error = !address_ok
+      paymentIdLine.error = !payment_id_ok
+
+      return address_ok && payment_id_ok
+    }
+
+    function onPageCompleted() {
+        console.log("adress book");
+        root.model = currentWallet.addressBookModel;
+    }
+
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        addressLine.text = address
+        paymentIdLine.text = payment_id
+        //amountLine.text = amount
+        descriptionLine.text = recipient_name + " " + tx_description
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
+
 }

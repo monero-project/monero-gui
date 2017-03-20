@@ -1,15 +1,18 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "wallet/wallet2_api.h"
+#include "zxcvbn-c/zxcvbn.h"
+#include "QRCodeImageProvider.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
 #include <QDebug>
 #include <QUrl>
 #include <QtConcurrent/QtConcurrent>
+#include <QMutex>
+#include <QMutexLocker>
 
 WalletManager * WalletManager::m_instance = nullptr;
-
 
 WalletManager *WalletManager::instance()
 {
@@ -23,27 +26,37 @@ WalletManager *WalletManager::instance()
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language, bool testnet)
 {
-    Bitmonero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
+    Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
                                                   language.toStdString(), testnet);
-    Wallet * wallet = new Wallet(w);
-    return wallet;
+    m_currentWallet  = new Wallet(w);
+    return m_currentWallet;
 }
 
 Wallet *WalletManager::openWallet(const QString &path, const QString &password, bool testnet)
 {
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
     qDebug("%s: opening wallet at %s, testnet = %d ",
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
-    Bitmonero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
+    Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
-    Wallet * wallet = new Wallet(w);
+    m_currentWallet  = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
-    if (wallet->thread() != qApp->thread()) {
-        wallet->moveToThread(qApp->thread());
+    if (m_currentWallet->thread() != qApp->thread()) {
+        m_currentWallet->moveToThread(qApp->thread());
     }
 
-    return wallet;
+    return m_currentWallet;
 }
 
 void WalletManager::openWalletAsync(const QString &path, const QString &password, bool testnet)
@@ -51,37 +64,64 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
     QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
                                         path, password, testnet);
     QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
-    watcher->setFuture(future);
+
     connect(watcher, &QFutureWatcher<Wallet*>::finished,
             this, [this, watcher]() {
         QFuture<Wallet*> future = watcher->future();
         watcher->deleteLater();
         emit walletOpened(future.result());
     });
+    watcher->setFuture(future);
 }
 
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, bool testnet, quint64 restoreHeight)
 {
-    Bitmonero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
-    Wallet * wallet = new Wallet(w);
-    return wallet;
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+    }
+    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), memo.toStdString(), testnet, restoreHeight);
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
+}
+
+Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &language, bool testnet,
+                                            const QString &address, const QString &viewkey, const QString &spendkey,
+                                            quint64 restoreHeight)
+{
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+        m_currentWallet = NULL;
+    }
+    Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), language.toStdString(), testnet, restoreHeight,
+                                                       address.toStdString(), viewkey.toStdString(), spendkey.toStdString());
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
 }
 
 
-QString WalletManager::closeWallet(Wallet *wallet)
+QString WalletManager::closeWallet()
 {
-    QString result = wallet->address();
-    delete wallet;
+    QMutexLocker locker(&m_mutex);
+    QString result;
+    if (m_currentWallet) {
+        result = m_currentWallet->address();
+        delete m_currentWallet;
+    } else {
+        qCritical() << "Trying to close non existing wallet " << m_currentWallet;
+        result = "0";
+    }
     return result;
 }
 
-void WalletManager::closeWalletAsync(Wallet *wallet)
+void WalletManager::closeWalletAsync()
 {
-    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet,
-                                                wallet);
+    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
     QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
-    watcher->setFuture(future);
 
     connect(watcher, &QFutureWatcher<QString>::finished,
             this, [this, watcher]() {
@@ -89,6 +129,7 @@ void WalletManager::closeWalletAsync(Wallet *wallet)
        watcher->deleteLater();
        emit walletClosed(future.result());
     });
+    watcher->setFuture(future);
 }
 
 bool WalletManager::walletExists(const QString &path) const
@@ -124,7 +165,7 @@ QString WalletManager::walletLanguage(const QString &locale)
 
 quint64 WalletManager::maximumAllowedAmount() const
 {
-    return Bitmonero::Wallet::maximumAllowedAmount();
+    return Monero::Wallet::maximumAllowedAmount();
 }
 
 QString WalletManager::maximumAllowedAmountAsSting() const
@@ -136,32 +177,42 @@ QString WalletManager::maximumAllowedAmountAsSting() const
 
 QString WalletManager::displayAmount(quint64 amount) const
 {
-    return QString::fromStdString(Bitmonero::Wallet::displayAmount(amount));
+    return QString::fromStdString(Monero::Wallet::displayAmount(amount));
 }
 
 quint64 WalletManager::amountFromString(const QString &amount) const
 {
-    return Bitmonero::Wallet::amountFromString(amount.toStdString());
+    return Monero::Wallet::amountFromString(amount.toStdString());
 }
 
 quint64 WalletManager::amountFromDouble(double amount) const
 {
-    return Bitmonero::Wallet::amountFromDouble(amount);
+    return Monero::Wallet::amountFromDouble(amount);
 }
 
 bool WalletManager::paymentIdValid(const QString &payment_id) const
 {
-    return Bitmonero::Wallet::paymentIdValid(payment_id.toStdString());
+    return Monero::Wallet::paymentIdValid(payment_id.toStdString());
 }
 
 bool WalletManager::addressValid(const QString &address, bool testnet) const
 {
-    return Bitmonero::Wallet::addressValid(address.toStdString(), testnet);
+    return Monero::Wallet::addressValid(address.toStdString(), testnet);
+}
+
+bool WalletManager::keyValid(const QString &key, const QString &address, bool isViewKey,  bool testnet) const
+{
+    std::string error;
+    if(!Monero::Wallet::keyValid(key.toStdString(), address.toStdString(), isViewKey, testnet, error)){
+        qDebug() << QString::fromStdString(error);
+        return false;
+    }
+    return true;
 }
 
 QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet) const
 {
-    return QString::fromStdString(Bitmonero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
+    return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
 }
 
 QString WalletManager::checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const
@@ -204,9 +255,47 @@ double WalletManager::miningHashRate() const
     return m_pimpl->miningHashRate();
 }
 
+bool WalletManager::isMining() const
+{
+    if(!m_currentWallet->connected())
+        return false;
+    return m_pimpl->isMining();
+}
+
+bool WalletManager::startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery)
+{
+    if(threads == 0)
+        threads = 1;
+    return m_pimpl->startMining(address.toStdString(), threads, backgroundMining, ignoreBattery);
+}
+
+bool WalletManager::stopMining()
+{
+    return m_pimpl->stopMining();
+}
+
+QString WalletManager::resolveOpenAlias(const QString &address) const
+{
+    bool dnssec_valid = false;
+    std::string res = m_pimpl->resolveOpenAlias(address.toStdString(), dnssec_valid);
+    res = std::string(dnssec_valid ? "true" : "false") + "|" + res;
+    return QString::fromStdString(res);
+}
+bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
+{
+    if (m_currentWallet)
+        return m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
+    return false;
+}
+
 void WalletManager::setLogLevel(int logLevel)
 {
-    Bitmonero::WalletManagerFactory::setLogLevel(logLevel);
+    Monero::WalletManagerFactory::setLogLevel(logLevel);
+}
+
+void WalletManager::setLogCategories(const QString &categories)
+{
+    Monero::WalletManagerFactory::setLogCategories(categories.toStdString());
 }
 
 QString WalletManager::urlToLocalPath(const QUrl &url) const
@@ -219,7 +308,37 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
     return QUrl::fromLocalFile(path);
 }
 
+double WalletManager::getPasswordStrength(const QString &password) const
+{
+    static const char *local_dict[] = {
+        "monero", "fluffypony", NULL
+    };
+
+    if (!ZxcvbnInit("zxcvbn.dict")) {
+        fprintf(stderr, "Failed to open zxcvbn.dict\n");
+        return 0.0;
+    }
+    double e = ZxcvbnMatch(password.toStdString().c_str(), local_dict, NULL);
+    ZxcvbnUnInit();
+    return e;
+}
+
+bool WalletManager::saveQrCode(const QString &code, const QString &path) const
+{
+    QSize size;
+    // 240 <=> mainLayout.qrCodeSize (Receive.qml)
+    return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
+}
+
+QString WalletManager::checkUpdates(const QString &software, const QString &subdir) const
+{
+  const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
+  if (!std::get<0>(result))
+    return QString("");
+  return QString::fromStdString(std::get<1>(result) + "|" + std::get<2>(result) + "|" + std::get<3>(result) + "|" + std::get<4>(result));
+}
+
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
-    m_pimpl =  Bitmonero::WalletManagerFactory::getWalletManager();
+    m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
 }

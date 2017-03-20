@@ -61,7 +61,7 @@ Window {
             id: messageTitle
             text: "Please wait..."
             font {
-                pointSize: 22
+                pixelSize: 22
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
@@ -72,7 +72,7 @@ Window {
         Text {
             id: heightProgress
             font {
-                pointSize: 18
+                pixelSize: 18
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter

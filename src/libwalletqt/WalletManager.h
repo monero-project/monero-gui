@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QUrl>
 #include <wallet/wallet2_api.h>
+#include <QMutex>
+#include <QPointer>
 
 class Wallet;
-namespace Bitmonero {
+namespace Monero {
     class WalletManager;
 }
 
@@ -17,14 +19,14 @@ class WalletManager : public QObject
 
 public:
     enum LogLevel {
-        LogLevel_Silent = Bitmonero::WalletManagerFactory::LogLevel_Silent,
-        LogLevel_0 = Bitmonero::WalletManagerFactory::LogLevel_0,
-        LogLevel_1 = Bitmonero::WalletManagerFactory::LogLevel_1,
-        LogLevel_2 = Bitmonero::WalletManagerFactory::LogLevel_2,
-        LogLevel_3 = Bitmonero::WalletManagerFactory::LogLevel_3,
-        LogLevel_4 = Bitmonero::WalletManagerFactory::LogLevel_4,
-        LogLevel_Min = Bitmonero::WalletManagerFactory::LogLevel_Min,
-        LogLevel_Max = Bitmonero::WalletManagerFactory::LogLevel_Max,
+        LogLevel_Silent = Monero::WalletManagerFactory::LogLevel_Silent,
+        LogLevel_0 = Monero::WalletManagerFactory::LogLevel_0,
+        LogLevel_1 = Monero::WalletManagerFactory::LogLevel_1,
+        LogLevel_2 = Monero::WalletManagerFactory::LogLevel_2,
+        LogLevel_3 = Monero::WalletManagerFactory::LogLevel_3,
+        LogLevel_4 = Monero::WalletManagerFactory::LogLevel_4,
+        LogLevel_Min = Monero::WalletManagerFactory::LogLevel_Min,
+        LogLevel_Max = Monero::WalletManagerFactory::LogLevel_Max,
     };
 
     static WalletManager * instance();
@@ -51,18 +53,24 @@ public:
     Q_INVOKABLE Wallet * recoveryWallet(const QString &path, const QString &memo,
                                        bool testnet = false, quint64 restoreHeight = 0);
 
+    Q_INVOKABLE Wallet * createWalletFromKeys(const QString &path,
+                                              const QString &language,
+                                              bool testnet,
+                                              const QString &address,
+                                              const QString &viewkey,
+                                              const QString &spendkey = "",
+                                              quint64 restoreHeight = 0);
+
     /*!
-     * \brief closeWallet - closes wallet and frees memory
-     * \param wallet
+     * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
      */
-    Q_INVOKABLE QString closeWallet(Wallet * wallet);
+    Q_INVOKABLE QString closeWallet();
 
     /*!
      * \brief closeWalletAsync - asynchronous version of "closeWallet"
-     * \param wallet - wallet pointer;
      */
-    Q_INVOKABLE void closeWalletAsync(Wallet * wallet);
+    Q_INVOKABLE void closeWalletAsync();
 
     //! checks is given filename is a wallet;
     Q_INVOKABLE bool walletExists(const QString &path) const;
@@ -92,6 +100,8 @@ public:
 
     Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
     Q_INVOKABLE bool addressValid(const QString &address, bool testnet) const;
+    Q_INVOKABLE bool keyValid(const QString &key, const QString &address, bool isViewKey, bool testnet) const;
+
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
     Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
@@ -103,16 +113,28 @@ public:
     Q_INVOKABLE quint64 blockchainTargetHeight() const;
     Q_INVOKABLE double miningHashRate() const;
 
+    Q_INVOKABLE bool isMining() const;
+    Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
+    Q_INVOKABLE bool stopMining();
+
     // QML missing such functionality, implementing these helpers here
     Q_INVOKABLE QString urlToLocalPath(const QUrl &url) const;
     Q_INVOKABLE QUrl localPathToUrl(const QString &path) const;
 
-    void setLogLevel(int logLevel);
+    Q_INVOKABLE void setLogLevel(int logLevel);
+    Q_INVOKABLE void setLogCategories(const QString &categories);
 
     Q_INVOKABLE quint64 add(quint64 x, quint64 y) const { return x + y; }
     Q_INVOKABLE quint64 sub(quint64 x, quint64 y) const { return x - y; }
     Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
     Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
+
+    Q_INVOKABLE double getPasswordStrength(const QString &password) const;
+
+    Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
+    Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
+    Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
+    Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
 signals:
 
@@ -124,7 +146,9 @@ private:
 
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
-    Bitmonero::WalletManager * m_pimpl;
+    Monero::WalletManager * m_pimpl;
+    QMutex m_mutex;
+    QPointer<Wallet> m_currentWallet;
 
 };
 
