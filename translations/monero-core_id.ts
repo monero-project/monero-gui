@@ -2298,7 +2298,7 @@ Description: </source>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
-        <source>insufficient funds. Unlocked balance: %1</source>
+        <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Dana tidak mencukupi. Saldo rekening yang tidak terkunci: %1</translation>
     </message>
     <message>
