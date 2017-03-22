@@ -551,7 +551,7 @@ ApplicationWindow {
             } else if (amountxmr > currentWallet.unlockedBalance) {
                 hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text  = qsTr("insufficient funds. Unlocked balance: %1")
+                informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
                         .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
                         + translationManager.emptyString
 

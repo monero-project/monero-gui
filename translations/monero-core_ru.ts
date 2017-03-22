@@ -2002,7 +2002,7 @@ Fee: </source>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
-        <source>insufficient funds. Unlocked balance: %1</source>
+        <source>Insufficient funds. Unlocked balance: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

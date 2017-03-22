@@ -2303,7 +2303,7 @@ Descrição: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
-        <source>insufficient funds. Unlocked balance: %1</source>
+        <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Saldo insuficiente. Total desbloqueado: %1</translation>
     </message>
     <message>

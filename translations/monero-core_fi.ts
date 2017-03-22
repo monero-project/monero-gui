@@ -2285,7 +2285,7 @@ Kuvaus:</translation>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
-        <source>insufficient funds. Unlocked balance: %1</source>
+        <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>riittämättömät varat. Lukitsematon saldo: %1</translation>
     </message>
     <message>
