@@ -107,7 +107,7 @@
         <translation>これ以上表示するデータがありません</translation>
     </message>
     <message>
-        <location filename="../components/AddressBookTable.qml" line="106"/>
+        <location filename="../components/AddressBookTable.qml" line="104"/>
         <source>Payment ID:</source>
         <translation>ペイメントID:</translation>
     </message>
@@ -115,22 +115,22 @@
 <context>
     <name>BasicPanel</name>
     <message>
-        <location filename="../BasicPanel.qml" line="98"/>
+        <location filename="../BasicPanel.qml" line="97"/>
         <source>Locked Balance:</source>
         <translation>ロックされた残高:</translation>
     </message>
     <message>
-        <location filename="../BasicPanel.qml" line="112"/>
+        <location filename="../BasicPanel.qml" line="110"/>
         <source>78.9239845</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../BasicPanel.qml" line="136"/>
+        <location filename="../BasicPanel.qml" line="134"/>
         <source>Available Balance:</source>
         <translation type="unfinished">使用可能な残高:</translation>
     </message>
     <message>
-        <location filename="../BasicPanel.qml" line="150"/>
+        <location filename="../BasicPanel.qml" line="147"/>
         <source>2324.9239845</source>
         <translation type="unfinished"></translation>
     </message>
@@ -228,12 +228,12 @@
         <translation>日付</translation>
     </message>
     <message>
-        <location filename="../components/DashboardTable.qml" line="172"/>
+        <location filename="../components/DashboardTable.qml" line="170"/>
         <source>Balance</source>
         <translation>残高</translation>
     </message>
     <message>
-        <location filename="../components/DashboardTable.qml" line="193"/>
+        <location filename="../components/DashboardTable.qml" line="190"/>
         <source>Amount</source>
         <translation>金額</translation>
     </message>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
-        <location filename="../components/HistoryTable.qml" line="204"/>
+        <location filename="../components/HistoryTable.qml" line="203"/>
         <source>Payment ID:</source>
         <translation>ペイメントID:</translation>
     </message>
@@ -372,32 +372,32 @@
         <translation>詳細</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="255"/>
+        <location filename="../components/HistoryTable.qml" line="251"/>
         <source>BlockHeight:</source>
         <translation>ブロック高</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="270"/>
+        <location filename="../components/HistoryTable.qml" line="266"/>
         <source>(%1/10 confirmations)</source>
         <translation>(%1/10 承認済)</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="274"/>
+        <location filename="../components/HistoryTable.qml" line="270"/>
         <source>UNCONFIRMED</source>
         <translation>未承認</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="275"/>
+        <location filename="../components/HistoryTable.qml" line="271"/>
         <source>PENDING</source>
         <translation>ペンディング</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="304"/>
+        <location filename="../components/HistoryTable.qml" line="300"/>
         <source>Date</source>
         <translation>日付</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="400"/>
+        <location filename="../components/HistoryTable.qml" line="392"/>
         <source>Fee</source>
         <translation>手数料</translation>
     </message>
@@ -406,7 +406,7 @@
         <translation type="vanished">残高</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="364"/>
+        <location filename="../components/HistoryTable.qml" line="357"/>
         <source>Amount</source>
         <translation>金額</translation>
     </message>
@@ -588,7 +588,7 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
-        <source>Mining helps the Monero network build resilience. The more mining is done, the harder it is to attack the network. Mining also gives you a small chance to earn some Monero. Your computer will search for Monero block solutions. If you find a block, you will get the associated reward.</source>
+        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -773,118 +773,131 @@
 <context>
     <name>Receive</name>
     <message>
-        <location filename="../pages/Receive.qml" line="63"/>
+        <location filename="../pages/Receive.qml" line="64"/>
         <source>Invalid payment ID</source>
         <translation>不正なペイメントID</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="100"/>
+        <location filename="../pages/Receive.qml" line="107"/>
         <source>WARNING: no connection to daemon</source>
         <translation>警告: デーモンに接続していません</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="122"/>
+        <location filename="../pages/Receive.qml" line="129"/>
         <source>in the txpool: %1</source>
         <translation>メモリプール中: %1</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="129"/>
+        <location filename="../pages/Receive.qml" line="136"/>
         <source>%2 confirmations: %3 (%1)</source>
         <translation>%2 回の承認: %3 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="131"/>
+        <location filename="../pages/Receive.qml" line="138"/>
         <source>1 confirmation: %2 (%1)</source>
         <translation>1 回の承認: %2 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="139"/>
+        <location filename="../pages/Receive.qml" line="146"/>
         <source>No transaction found yet...</source>
         <translation>取引はまだ見つかっていません...</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="143"/>
+        <location filename="../pages/Receive.qml" line="150"/>
         <source>Transaction found</source>
         <translation>取引を発見</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="143"/>
+        <location filename="../pages/Receive.qml" line="150"/>
         <source>%1 transactions found</source>
         <translation>%1 個の取引を発見</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="149"/>
+        <location filename="../pages/Receive.qml" line="156"/>
         <source> with more money (%1)</source>
         <translation>: 指定の金額を上回っています (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="151"/>
+        <location filename="../pages/Receive.qml" line="158"/>
         <source> with not enough money (%1)</source>
         <translation>: 指定の金額を下回っています (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="183"/>
+        <location filename="../pages/Receive.qml" line="190"/>
         <source>Address</source>
         <translation>アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="190"/>
+        <location filename="../pages/Receive.qml" line="197"/>
         <source>ReadOnly wallet address displayed here</source>
         <translation>読み取り専用ウォレットのアドレスがここに表示されます</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="220"/>
+        <location filename="../pages/Receive.qml" line="227"/>
         <source>16 hexadecimal characters</source>
         <translation>16桁の16進数</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="258"/>
+        <location filename="../pages/Receive.qml" line="263"/>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="273"/>
         <source>Integrated address</source>
         <translation>統合アドレス</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="267"/>
-        <source>ReadOnly wallet integrated address displayed here</source>
-        <translation>読み取り専用ウォレットの統合アドレスがここに表示されます</translation>
+        <location filename="../pages/Receive.qml" line="282"/>
+        <source>Generate payment ID for integrated address</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="291"/>
-        <location filename="../pages/Receive.qml" line="299"/>
+        <source>ReadOnly wallet integrated address displayed here</source>
+        <translation type="vanished">読み取り専用ウォレットの統合アドレスがここに表示されます</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="306"/>
         <source>Amount</source>
         <translation>金額</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="320"/>
+        <location filename="../pages/Receive.qml" line="314"/>
+        <source>Amount to receive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="335"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                           Tracking &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                           トラッキング &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;ヘルプ&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="325"/>
+        <location filename="../pages/Receive.qml" line="340"/>
         <source>Tracking payments</source>
         <translation>支払いをトラッキング中</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="326"/>
+        <location filename="../pages/Receive.qml" line="341"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;これはシンプルな支払いトラッカーです:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;「生成」ボタンをクリックすると、新しいお客さんのための新しいペイメントIDが作成されます。&lt;/p&gt; &lt;p&gt;あなたのお客さんがQRコードに対応したソフトウェアを持っている場合は、このQRコードをスキャンしてもらうことで支払いを簡単に行うことができます。&lt;/p&gt;&lt;p&gt;このページではブロックチェーンと取引プールを自動的にスキャンすることで、このQRコードを使った送金をリアルタイムでチェックします。もし金額も指定した場合は、取引の合計金額についてもチェックします。&lt;/p&gt;未承認の取引を正式な入金と見なすかどうかはあなた次第です。未承認の取引はすぐに承認される場合がほとんどですが、承認されないことも可能性としてはあり得ますので、金額が大きい場合は1回または複数回の承認を待った方が良いかも知れません。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="370"/>
+        <location filename="../pages/Receive.qml" line="385"/>
         <source>Save QrCode</source>
         <translation>QRコードを保存</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="371"/>
+        <location filename="../pages/Receive.qml" line="386"/>
         <source>Failed to save QrCode to </source>
         <translation>QRコードの保存に失敗しました </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="382"/>
+        <location filename="../pages/Receive.qml" line="397"/>
         <source>Save As</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="212"/>
+        <location filename="../pages/Receive.qml" line="219"/>
         <source>Payment ID</source>
         <translation>ペイメントID</translation>
     </message>
@@ -893,7 +906,7 @@
         <translation type="vanished">ここにペイメントIDを入力</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="244"/>
+        <location filename="../pages/Receive.qml" line="251"/>
         <source>Generate</source>
         <translation>生成</translation>
     </message>
@@ -929,7 +942,7 @@
         <translation>検索...</translation>
     </message>
     <message>
-        <location filename="../components/SearchInput.qml" line="230"/>
+        <location filename="../components/SearchInput.qml" line="228"/>
         <source>SEARCH</source>
         <translation>検索</translation>
     </message>
@@ -1357,6 +1370,11 @@
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりません</translation>
     </message>
     <message>
+        <location filename="../pages/Transfer.qml" line="175"/>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../pages/Transfer.qml" line="294"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
@@ -1403,9 +1421,8 @@
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;デーモンの開始&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="175"/>
         <source>all</source>
-        <translation>全額</translation>
+        <translation type="vanished">全額</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="193"/>
@@ -1459,12 +1476,12 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="527"/>
-        <source>sign tx file</source>
+        <source>Sign tx file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="541"/>
-        <source>submit tx file</source>
+        <source>Submit tx file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2106,9 +2123,14 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
+        <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
+                        &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>このパスワードは復元できません。もしパスワードを忘れてしまった場合は、25個のニーモニックシードからウォレットを復元する必要があります。&lt;br/&gt;&lt;br/&gt;
+        <translation type="vanished">このパスワードは復元できません。もしパスワードを忘れてしまった場合は、25個のニーモニックシードからウォレットを復元する必要があります。&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;パスワードを入力してください&lt;/b&gt; (半角英数字と記号を使用できます):</translation>
     </message>
 </context>
@@ -2313,22 +2335,22 @@ Ringsize: </source>
         <translation>残高</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1273"/>
+        <location filename="../main.qml" line="1272"/>
         <source>Daemon is running</source>
         <translation>デーモンが起動中です</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1274"/>
+        <location filename="../main.qml" line="1273"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>GUIを閉じた後もバックグラウンドでデーモンを起動し続けます。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1276"/>
+        <location filename="../main.qml" line="1275"/>
         <source>Stop daemon</source>
         <translation>デーモンを停止</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1311"/>
+        <location filename="../main.qml" line="1310"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>新しいバージョンのmonero-wallet-guiを入手できます: %1&lt;br&gt;%2</translation>
     </message>
