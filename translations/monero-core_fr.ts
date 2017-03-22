@@ -318,13 +318,13 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>ID de transaction :</translation>
+        <translation>ID transaction :</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
         <location filename="../components/HistoryTable.qml" line="203"/>
         <source>Payment ID:</source>
-        <translation>ID de paiement :</translation>
+        <translation>ID paiement :</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
@@ -354,7 +354,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="251"/>
         <source>BlockHeight:</source>
-        <translation>Hauteur de bloc :</translation>
+        <translation>Hauteur bloc :</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
@@ -445,7 +445,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="92"/>
         <source>Testnet</source>
-        <translation type="unfinished">Testnet</translation>
+        <translation>Testnet</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="289"/>
@@ -569,7 +569,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;extraction minière avec votre ordinateur renforce le réseau Monero. Plus il y en a, plus il est difficile d&apos;attaquer le réseau, donc chaque mineur est utile.&lt;br&gt; &lt;br&gt;La mine vous donne aussi une petite chance de gagner des Moneros. Votre ordinateur va calculer des empreintes pour essayer de créer un bloc valide. Si vous trouvez un bloc, vous obtiendrez la récompense associée. Bonne chance !</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -820,7 +820,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="263"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="273"/>
@@ -830,7 +830,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="314"/>
         <source>Amount to receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Montant à recevoir</translation>
     </message>
     <message>
         <source>ReadOnly wallet integrated address displayed here</source>
@@ -883,7 +883,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="282"/>
         <source>Generate payment ID for integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>Générer un identifiant de paiement pour une adresse intégrée</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="306"/>
@@ -1242,32 +1242,32 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="197"/>
         <source>Low (x1 fee)</source>
-        <translation type="unfinished">Bas (frais x1)</translation>
+        <translation>Bas (frais x1)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="198"/>
         <source>Medium (x20 fee)</source>
-        <translation type="unfinished">Moyen (frais x20)</translation>
+        <translation>Moyen (frais x20)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="199"/>
         <source>High (x166 fee)</source>
-        <translation type="unfinished">Haut (frais x166)</translation>
+        <translation>Haut (frais x166)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyé</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation>Reçu</translation>
     </message>
 </context>
 <context>
@@ -1275,22 +1275,22 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Copier l&apos;adresse dans le presse-papiers&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Envoyer à cette destination&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
         <source>&lt;b&gt;Find similar transactions&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Trouver des transactions similaires&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
         <source>&lt;b&gt;Remove from address book&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Supprimer du carnet d&apos;adresses&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1298,22 +1298,22 @@
     <message>
         <location filename="../components/TableHeader.qml" line="65"/>
         <source>Payment ID</source>
-        <translation type="unfinished">ID de paiement</translation>
+        <translation>ID paiement</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="66"/>
         <source>Date</source>
-        <translation type="unfinished">Date</translation>
+        <translation>Date</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="67"/>
         <source>Block height</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur bloc</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation type="unfinished">Montant</translation>
+        <translation>Montant</translation>
     </message>
 </context>
 <context>
@@ -1416,7 +1416,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="193"/>
@@ -1507,12 +1507,12 @@
     <message>
         <location filename="../pages/Transfer.qml" line="527"/>
         <source>Sign tx file</source>
-        <translation type="unfinished"></translation>
+        <translation>Signer fichier tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="541"/>
         <source>Submit tx file</source>
-        <translation type="unfinished"></translation>
+        <translation>Soumettre fichier tx</translation>
     </message>
     <message>
         <source>sign tx file</source>
@@ -1525,7 +1525,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
         <source>Rescan spent</source>
-        <translation>Scan dépenses</translation>
+        <translation>Rescanner dépenses</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="565"/>
@@ -2197,7 +2197,8 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;br&gt;Note : ce mot de passe ne pourra pas être recupéré. Si vous l&apos;oubliez vous devrez restaurer votre portefeuille avec sa graine mnémonique de 25 mots.&lt;br/&gt;&lt;br/&gt;
+                        &lt;b&gt;Entez un mot de passe fort&lt;/b&gt; (utilisant des lettres, chiffres, et/ou symboles) :</translation>
     </message>
     <message>
         <source>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
