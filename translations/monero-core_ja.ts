@@ -76,7 +76,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="167"/>
         <source>Can&apos;t create entry</source>
-        <translation type="unfinished"></translation>
+        <translation>項目を作成できません</translation>
     </message>
     <message>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
@@ -127,7 +127,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="134"/>
         <source>Available Balance:</source>
-        <translation type="unfinished">使用可能な残高:</translation>
+        <translation>使用可能な残高:</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="147"/>
@@ -282,7 +282,7 @@
     <message>
         <location filename="../pages/History.qml" line="145"/>
         <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;選択された支払いの総額&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="182"/>
@@ -440,7 +440,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="92"/>
         <source>Testnet</source>
-        <translation type="unfinished">テストネット</translation>
+        <translation>テストネット</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="264"/>
@@ -589,7 +589,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>あなたのコンピュータでマイニングを行うことで、モネロのネットワークをより強固にすることができます。マイニングをする人が増えるほど、ネットワークへの攻撃が難しくなります。一人一人の協力が大切です。&lt;br&gt; &lt;br&gt;マイニングをすると、低確率ですがモネロを獲得できる可能性があります。あなたのコンピュータは、ある計算問題の解となるブロックとそのハッシュ値を計算します。正解のブロックが見つかると、あなたはそれに伴う報酬を得ます。グッドラック!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -1226,32 +1226,32 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="197"/>
         <source>Low (x1 fee)</source>
-        <translation type="unfinished">低 (標準の手数料)</translation>
+        <translation>低 (標準の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="198"/>
         <source>Medium (x20 fee)</source>
-        <translation type="unfinished">中 (20倍の手数料)</translation>
+        <translation>中 (20倍の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="199"/>
         <source>High (x166 fee)</source>
-        <translation type="unfinished">高 (166倍の手数料)</translation>
+        <translation>高 (166倍の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>すべて</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>出金</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation>入金</translation>
     </message>
 </context>
 <context>
@@ -1259,22 +1259,22 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;アドレスをクリップボードへコピー&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;このアドレスに送金&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
         <source>&lt;b&gt;Find similar transactions&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;類似する取引を検索&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
         <source>&lt;b&gt;Remove from address book&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;アドレス帳から削除&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1282,22 +1282,22 @@
     <message>
         <location filename="../components/TableHeader.qml" line="65"/>
         <source>Payment ID</source>
-        <translation type="unfinished">ペイメントID</translation>
+        <translation>ペイメントID</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="66"/>
         <source>Date</source>
-        <translation type="unfinished">日付</translation>
+        <translation>日付</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="67"/>
         <source>Block height</source>
-        <translation type="unfinished"></translation>
+        <translation>ブロック高</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation type="unfinished">金額</translation>
+        <translation>金額</translation>
     </message>
 </context>
 <context>
@@ -1382,7 +1382,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="296"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished"></translation>
+        <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりませんでしたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="299"/>
@@ -1472,17 +1472,17 @@
     <message>
         <location filename="../pages/Transfer.qml" line="505"/>
         <source>create tx file</source>
-        <translation type="unfinished"></translation>
+        <translation>取引ファイルを生成</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="527"/>
         <source>Sign tx file</source>
-        <translation type="unfinished"></translation>
+        <translation>取引ファイルに署名</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="541"/>
         <source>Submit tx file</source>
-        <translation type="unfinished"></translation>
+        <translation>取引ファイルを送信</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
@@ -1510,7 +1510,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="572"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>使用済みアウトプットの再スキャンを完了しました</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
@@ -1724,7 +1724,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットを復元する際に必要となる唯一の情報ですので、必ず書き写してください。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
@@ -1739,7 +1739,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
         <source>Allow background mining?</source>
-        <translation>Mining im Hintergrund erlauben?</translation>
+        <translation>バックグラウンドでのマイニングを許可しますか?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="175"/>
@@ -1796,7 +1796,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
         <source>Allow background mining?</source>
-        <translation>バックグラウンドでの採掘を許可しますか?</translation>
+        <translation>バックグラウンドでのマイニングを許可しますか?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
@@ -1896,7 +1896,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="68"/>
         <source>Testnet</source>
-        <translation type="unfinished">テストネット</translation>
+        <translation>テストネット</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
@@ -1911,7 +1911,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation type="unfinished"></translation>
+        <translation>シードを忘れずに書き写してください。設定ページでシードを表示したり設定を変更することができます。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
@@ -2088,7 +2088,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="295"/>
         <source>Testnet</source>
-        <translation type="unfinished">テストネット</translation>
+        <translation>テストネット</translation>
     </message>
 </context>
 <context>
@@ -2164,7 +2164,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="112"/>
         <source>Restore wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットの復元</translation>
     </message>
 </context>
 <context>
@@ -2176,7 +2176,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="79"/>
         <source>Welcome to Monero!</source>
-        <translation type="unfinished">モネロへようこそ!</translation>
+        <translation>モネロへようこそ!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="89"/>
@@ -2210,7 +2210,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="541"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation type="unfinished">金額が不正です: %1から%2の範囲内としてください</translation>
+        <translation>金額が不正です: %1から%2の範囲内としてください</translation>
     </message>
     <message>
         <location filename="../main.qml" line="483"/>
@@ -2221,7 +2221,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="346"/>
         <source>Unlocked balance (~%1 min)</source>
-        <translation type="unfinished"></translation>
+        <translation>ロック解除された残高 (~%1分)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="346"/>
@@ -2231,32 +2231,32 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="346"/>
         <source>Unlocked balance (waiting for block)</source>
-        <translation type="unfinished"></translation>
+        <translation>ロック解除された残高 (ブロックの待機中)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="398"/>
         <source>Waiting for daemon to start...</source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンが開始するのを待っています...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="404"/>
         <source>Waiting for daemon to stop...</source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンが停止するのを待っています...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="429"/>
         <source>Daemon failed to start</source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンの起動に失敗しました</translation>
     </message>
     <message>
         <location filename="../main.qml" line="430"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットとデーモンのログを参照してエラーを確認してください。手動で%1を起動することもできます。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンのバージョンが不正なため、取引を作成できません: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="491"/>
@@ -2264,7 +2264,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../main.qml" line="602"/>
         <location filename="../main.qml" line="603"/>
         <source>No unmixable outputs to sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>スイープするミックス不能なアウトプットがありません</translation>
     </message>
     <message>
         <location filename="../main.qml" line="504"/>
@@ -2277,7 +2277,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../main.qml" line="616"/>
         <source>Please confirm transaction:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>取引内容を確認してください:</translation>
     </message>
     <message>
         <location filename="../main.qml" line="508"/>
@@ -2285,24 +2285,24 @@ Please upgrade or connect to another daemon</source>
         <source>
 
 Amount: </source>
-        <translation type="unfinished"></translation>
+        <translation>金額: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="510"/>
         <source>
 
 Ringsize: </source>
-        <translation type="unfinished"></translation>
+        <translation>リングサイズ: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="664"/>
         <source>Transaction saved to file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>取引データをファイルに保存しました: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="664"/>
         <source>Money sent successfully: %1 transaction(s) </source>
-        <translation type="unfinished"></translation>
+        <translation>送金に成功しました: %1個の取引</translation>
     </message>
     <message>
         <location filename="../main.qml" line="704"/>
@@ -2394,19 +2394,19 @@ Fee: </source>
         <location filename="../main.qml" line="511"/>
         <source>
 Number of transactions: </source>
-        <translation type="unfinished">取引の数: </translation>
+        <translation>取引の数: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="512"/>
         <source>
 
 Description: </source>
-        <translation type="unfinished"></translation>
+        <translation>説明: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>残高不足です。ロック解除された残高: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="655"/>
@@ -2425,12 +2425,12 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="936"/>
         <source>Please wait...</source>
-        <translation type="unfinished">お待ちください...</translation>
+        <translation>お待ちください...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="980"/>
         <source>Monero</source>
-        <translation type="unfinished">モネロ</translation>
+        <translation>モネロ</translation>
     </message>
     <message>
         <source>Initializing Wallet...</source>
