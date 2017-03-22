@@ -14,20 +14,20 @@ List of available languages for your wallet's seed:
         <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
         <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/> -->
         <!-- <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/> -->
-        <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/>
-        <language display_name="Deutsch" locale="de_DE" wallet_language="German" flag="/lang/flags/german.png" qs="none"/>
-        <language display_name="Esperanto" locale="eo" wallet_language="English" flag="/lang/flags/esperanto.png" qs="none"/>
-        <language display_name="Español" locale="es_ES" wallet_language="Spanish" flag="/lang/flags/spain.png" qs="none"/>
-        <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/>
+        <!-- <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/> -->
+        <!-- <language display_name="Deutsch" locale="de_DE" wallet_language="German" flag="/lang/flags/german.png" qs="none"/> -->
+        <!-- <language display_name="Esperanto" locale="eo" wallet_language="English" flag="/lang/flags/esperanto.png" qs="none"/> -->
+        <!-- <language display_name="Español" locale="es_ES" wallet_language="Spanish" flag="/lang/flags/spain.png" qs="none"/> -->
+        <!-- <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/> -->
         <language display_name="Français" locale="fr_FR" wallet_language="English" flag="/lang/flags/france.png" qs="none"/>
-        <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/croatia.png" qs="none"/>
-        <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/>
+        <!-- <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/croatia.png" qs="none"/> -->
+        <!-- <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/> -->
         <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/indonesia.png" qs="none"/>
         <language display_name="Italiano" locale="it_IT" wallet_language="Italian" flag="/lang/flags/italy.png" qs="none"/>
         <language display_name="日本語" locale="ja_JP" wallet_language="Japanese" flag="/lang/flags/japan.png" qs="none"/>
         <language display_name="Nederlands" locale="nl_NL" wallet_language="English" flag="/lang/flags/netherlands.png" qs="none"/>
-        <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/>
-        <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/>
-        <language display_name="русский язык" locale="ru_RU" wallet_language="Russian" flag="/lang/flags/russia.png" qs="none"/>
+        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/> -->
+        <!-- <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Portuguese" flag="/lang/flags/brazil.png" qs="none"/> -->
+        <!-- <language display_name="русский язык" locale="ru_RU" wallet_language="Russian" flag="/lang/flags/russia.png" qs="none"/> -->
         <language display_name="繁體中文 (台灣)" locale="zh_TW" wallet_language="English" flag="/lang/flags/taiwan.png" qs="none"/>
 </languages>
