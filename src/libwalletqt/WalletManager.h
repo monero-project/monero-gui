@@ -136,6 +136,8 @@ public:
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
+    Q_INVOKABLE bool useForkRules(quint8 version) const;
+
 signals:
 
     void walletOpened(Wallet * wallet);
