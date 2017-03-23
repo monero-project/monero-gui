@@ -277,7 +277,7 @@ macx {
 # translation stuff
 TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_ar.ts \ # Arabic
-                $$PWD/translations/monero-core_br.ts \ # Portuguese (Brazil)
+                $$PWD/translations/monero-core_pt-br.ts \ # Portuguese (Brazil)
                 $$PWD/translations/monero-core_de.ts \ # German
                 $$PWD/translations/monero-core_eo.ts \ # Esperanto
                 $$PWD/translations/monero-core_es.ts \ # Spanish
@@ -285,7 +285,7 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_fr.ts \ # French
                 $$PWD/translations/monero-core_hr.ts \ # Croatian
                 $$PWD/translations/monero-core_id.ts \ # Indonesian
-                $$PWD/translations/monero-core_in.ts \ # Hindi
+                $$PWD/translations/monero-core_hi.ts \ # Hindi
                 $$PWD/translations/monero-core_it.ts \ # Italian
                 $$PWD/translations/monero-core_ja.ts \ # Japanese
                 $$PWD/translations/monero-core_nl.ts \ # Dutch
