@@ -587,6 +587,11 @@ bool Wallet::rescanSpent()
     return m_walletImpl->rescanSpent();
 }
 
+bool Wallet::useForkRules(quint8 required_version, quint64 earlyBlocks) const
+{
+    return m_walletImpl->useForkRules(required_version,earlyBlocks);
+}
+
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)

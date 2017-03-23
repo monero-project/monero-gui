@@ -286,6 +286,9 @@ ApplicationWindow {
         leftPanel.networkStatus.connected = status
         leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
 
+        // Update fee multiplier dropdown on transfer page
+        middlePanel.transferView.updatePriorityDropdown();
+
         // If wallet isnt connected and no daemon is running - Ask
         if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();

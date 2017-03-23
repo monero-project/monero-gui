@@ -338,16 +338,6 @@ QString WalletManager::checkUpdates(const QString &software, const QString &subd
   return QString::fromStdString(std::get<1>(result) + "|" + std::get<2>(result) + "|" + std::get<3>(result) + "|" + std::get<4>(result));
 }
 
-bool WalletManager::useForkRules(quint8 required_version) const
-{
-    quint64 earliest_height;
-    quint8 version;
-    m_pimpl->hardForkInfo(version, earliest_height);
-    return version >= required_version;
-}
-
-
-
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
