@@ -68,6 +68,7 @@ ApplicationWindow {
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700) ? false : true
     property var cameraUi
+    property bool remoteNodeConnected: false
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -194,7 +195,11 @@ ApplicationWindow {
 
         }
 
+
+        // Local daemon settings
         walletManager.setDaemonAddress(persistentSettings.daemon_address)
+
+
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.settings['wallet'] !== 'undefined') {
             console.log("using wizard wallet")
@@ -290,7 +295,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if(persistentSettings.startLocalNode && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -350,6 +355,16 @@ ApplicationWindow {
         }
     }
 
+    function connectRemoteNode() {
+        currentWallet.initAsync(persistentSettings.remoteNodeAddress);
+        remoteNodeConnected = true;
+    }
+
+    function disconnectRemoteNode() {
+        currentWallet.initAsync(persistentSettings.daemon_address);
+        remoteNodeConnected = false;
+    }
+
     function onWalletRefresh() {
         console.log(">>> wallet refreshed")
 
@@ -370,6 +385,29 @@ ApplicationWindow {
         updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
+
+        // Use remote node while local daemon is syncing
+        if (persistentSettings.useRemoteNode) {
+            var localNodeConnected = walletManager.connected;
+            var localNodeSynced = localNodeConnected && walletManager.localDaemonSynced()
+            if (!currentWallet.connected() || !localNodeSynced) {
+                console.log("Using remote node while local node is syncing")
+                // Connect to remote node if not already connected
+                if(!remoteNodeConnected || !currentWallet.connected()) {
+                    connectRemoteNode();
+                }
+
+                //update local daemon sync progress bar
+                if(localNodeConnected) {
+                    leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
+                    leftPanel.progressBar.visible = true
+                }
+
+            // local daemon is synced - use it!
+            } else if (localNodeSynced && remoteNodeConnected) {
+                disconnectRemoteNode();
+            }
+        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -860,6 +898,10 @@ ApplicationWindow {
         property string daemonUsername: ""
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
+        property bool startLocalNode: true
+        property bool useRemoteNode: false
+        property string remoteNodeAddress: "";
+
     }
 
     // Information dialog
