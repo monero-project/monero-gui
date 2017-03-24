@@ -138,5 +138,7 @@
         <file>components/DaemonConsole.qml</file>
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
+        <file>wizard/WizardDaemonSettings.qml</file>
+        <file>components/RemoteNodeDropdown.qml</file>
     </qresource>
 </RCC>

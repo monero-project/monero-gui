@@ -57,7 +57,9 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.leftMargin: 40
+        anchors.rightMargin: 40
+        anchors.topMargin: 20
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -71,7 +73,7 @@ Rectangle {
                 color: "#4A4949"
                 text: qsTr("Manage wallet") + translationManager.emptyString
                 fontSize: 16
-                Layout.topMargin: 10
+//                Layout.topMargin: 10
             }
         }
 
@@ -129,10 +131,9 @@ Rectangle {
                 id: manageDaemonLabel
                 Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Manage daemon") + translationManager.emptyString
+                text: qsTr("Manage Daemon") + translationManager.emptyString
                 fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                Layout.topMargin: 20
             }
         }
         Rectangle {
@@ -149,12 +150,15 @@ Rectangle {
                 visible: true
                 enabled: !appWindow.daemonRunning
                 id: startDaemonButton
-                text: qsTr("Start daemon") + translationManager.emptyString
+                text: qsTr("Start Daemon") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
+                    // Reset default daemon address settings
+                    persistentSettings.daemon_address = (persistentSettings.testnet) ? "localhost:28081" :  "localhost:18081"
+                    initSettings()
                     appWindow.startDaemon(daemonFlags.text)
                 }
             }
@@ -163,7 +167,7 @@ Rectangle {
                 visible: true
                 enabled: appWindow.daemonRunning
                 id: stopDaemonButton
-                text: qsTr("Stop daemon") + translationManager.emptyString
+                text: qsTr("Stop Daemon") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -196,7 +200,7 @@ Rectangle {
             Label {
                 id: daemonFlagsLabel
                 color: "#4A4949"
-                text: qsTr("Daemon startup flags") + translationManager.emptyString
+                text: qsTr("Local daemon startup flags") + translationManager.emptyString
                 fontSize: 16
             }
             LineEdit {
@@ -283,15 +287,68 @@ Rectangle {
                     var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
+                        walletManager.setDaemonAddress(persistentSettings.daemon_address)
                     }
 
                     // Update daemon login
                     persistentSettings.daemonUsername = daemonUsername.text;
                     persistentSettings.daemonPassword = daemonPassword.text;
+
                     currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
 
                     //Reinit wallet
                     currentWallet.initAsync(newDaemon);
+                }
+            }
+        }
+
+        RowLayout {
+            RowLayout {
+                Label {
+                    color: "#4A4949"
+                    text: qsTr("Remote node") + translationManager.emptyString
+                    fontSize: 16
+                }
+
+                RemoteNodeDropdown {
+                    Layout.maximumWidth: 200
+                    id: remoteNodeDropDown
+                }
+
+
+                StandardButton {
+                    id: remoteConnect
+                    enabled: !appWindow.remoteNodeConnected
+                    Layout.fillWidth: false
+                    Layout.leftMargin: 30
+                    text: qsTr("Connect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    visible: true
+                    onClicked: {
+                        persistentSettings.useRemoteNode = true
+                        persistentSettings.remoteNodeAddress = remoteNodeDropDown.getSelected();
+                        appWindow.connectRemoteNode();
+                    }
+                }
+
+                StandardButton {
+                    id: remoteDisconnect
+                    enabled: appWindow.remoteNodeConnected
+                    Layout.fillWidth: false
+                    Layout.leftMargin: 30
+                    text: qsTr("Disconnect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    visible: true
+                    onClicked: {
+                        persistentSettings.useRemoteNode = false
+                        appWindow.disconnectRemoteNode();
+                    }
                 }
             }
         }
