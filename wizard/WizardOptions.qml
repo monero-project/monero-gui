@@ -59,7 +59,7 @@ ColumnLayout {
 
     QtObject {
         id: d
-        readonly property string daemonAddressTestnet : "localhost:38081"
+        readonly property string daemonAddressTestnet : "localhost:28081"
         readonly property string daemonAddressMainnet : "localhost:18081"
     }
 
