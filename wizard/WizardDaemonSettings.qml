@@ -40,8 +40,6 @@ ColumnLayout {
     opacity: 0
     visible: false
     property alias titleText: titleText.text
-    property alias passwordsMatch: passwordUI.passwordsMatch
-    property alias password: passwordUI.password
     Behavior on opacity {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
@@ -50,29 +48,15 @@ ColumnLayout {
 
 
     function onPageOpened(settingsObject) {
-        wizard.nextButton.enabled = true
-        passwordUI.handlePassword();
-
-        if (wizard.currentPath === "create_wallet") {
-           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
-        } else {
-           passwordPage.titleText = qsTr("Give your wallet a password") + translationManager.emptyString
-        }
-
-        passwordUI.resetFocus()
+    }
+    function onWizardRestarted(){
     }
 
     function onPageClosed(settingsObject) {
-        // TODO: set password on the final page
-        // settingsObject.wallet.setPassword(passwordItem.password)
-        settingsObject['wallet_password'] = passwordUI.password
+        appWindow.persistentSettings.useRemoteNode = remoteNode.checked
+        appWindow.persistentSettings.startLocalNode = localNode.checked
+        appWindow.persistentSettings.remoteNodeAddress = remoteNodeDropDown.getSelected();
         return true
-    }
-
-    function onWizardRestarted(){
-        // Reset password fields
-        passwordUI.password = "";
-        passwordUI.confirmPassword = "";
     }
 
     RowLayout {
@@ -82,8 +66,8 @@ ColumnLayout {
         ListModel {
             id: dotsModel
             ListElement { dotColor: "#36B05B" }
+            ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#FFE00A" }
-            ListElement { dotColor: "#DBDBDB" }
             ListElement { dotColor: "#DBDBDB" }
         }
 
@@ -112,29 +96,111 @@ ColumnLayout {
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
+            text: "Daemon settings"
 
         }
 
         Text {
             Layout.fillWidth: true
+            Layout.topMargin: 30
             Layout.bottomMargin: 30
             font.family: "Arial"
             font.pixelSize: 18
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#4A4646"
-            horizontalAlignment: Text.AlignHCenter
-            text: qsTr(" <br>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.<br/><br/>
-                        <b>Enter a strong password</b> (using letters, numbers, and/or symbols):")
+            textFormat: Text.RichText
+//            horizontalAlignment: Text.AlignHCenter
+            text: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.
+                        <br><br>
+                        If you don't have the option to run an own node there's an option to connect to a remote node.")
                     + translationManager.emptyString
         }
     }
 
     ColumnLayout {
-        Layout.fillWidth: true;
-        WizardPasswordUI {
-            id: passwordUI
+
+        CheckBox {
+            id: localNode
+            text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
+            background: "#FFFFFF"
+            fontColor: "#4A4646"
+            fontSize: 16
+            checkedIcon: "../images/checkedVioletIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
+            checked: appWindow.persistentSettings.startLocalNode
         }
+
+        CheckBox {
+            id: remoteNode
+            text: (localNode.checked) ? qsTr("Connect to a 3rd party remote node until my own node has finished syncing") + translationManager.emptyString
+                                      : qsTr("Connect to a 3rd party remote node") + translationManager.emptyString
+            Layout.topMargin: 15
+            background: "#FFFFFF"
+            fontColor: "#4A4646"
+            fontSize: 16
+            checkedIcon: "../images/checkedVioletIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
+            checked: appWindow.persistentSettings.useRemoteNode
+        }
+
+
+        RowLayout {
+            Label {
+                fontSize: 14
+                text: qsTr("Choose a remote node from the list:") + translationManager.emptyString
+            }
+
+            RemoteNodeDropdown {
+                Layout.maximumWidth: 200
+                enabled: remoteNode.checked
+                id: remoteNodeDropDown
+            }
+        }
+
+
+
+
+//        CheckBox {
+//            id: customNode
+//            text: qsTr("Use custom node settings") + translationManager.emptyString
+//            background: "#FFFFFF"
+//            fontColor: "#4A4646"
+//            fontSize: 16
+//            checkedIcon: "../images/checkedVioletIcon.png"
+//            uncheckedIcon: "../images/uncheckedIcon.png"
+//            checked: false
+//        }
+
+
+//        RowLayout {
+//            visible: customNode.checked
+//            spacing: 20
+
+//            LineEdit {
+//                id: daemonAddress
+//                width: 200
+//                fontSize: 14
+//                text: {
+//                    if(appWindow.persistentSettings.daemon_address)
+//                        return appWindow.persistentSettings.daemon_address;
+//                    return testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
+//                }
+
+//            }
+
+//            CheckBox {
+//                id: testNet
+//                anchors.verticalCenter: parent.verticalCenter
+//                text: qsTr("Testnet") + translationManager.emptyString
+//                background: "#FFFFFF"
+//                fontColor: "#4A4646"
+//                fontSize: 16
+//                checkedIcon: "../images/checkedVioletIcon.png"
+//                uncheckedIcon: "../images/uncheckedIcon.png"
+//                checked: appWindow.persistentSettings.testnet;
+//            }
+//        }
     }
 
 
