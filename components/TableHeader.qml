@@ -60,6 +60,13 @@ Rectangle {
 
         Repeater {
             id: columnsRepeater
+
+            // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+            property string stringPaymentID: qsTr("Payment ID") + translationManager.emptyString
+            property string stringDate: qsTr("Date") + translationManager.emptyString
+            property string stringBlockHeight: qsTr("Block height") + translationManager.emptyString
+            property string stringAmount: qsTr("Amount") + translationManager.emptyString
+
             delegate: Rectangle {
                 id: delegate
                 property bool desc: false
@@ -81,7 +88,7 @@ Rectangle {
                             return "#FF4304"
                         return index === header.activeSortColumn || delegateArea.containsMouse ? "#FF6C3C" : "#4A4949"
                     }
-                    text: columnName
+                    text: qsTr(columnName) + translationManager.emptyString
                 }
 
                 MouseArea {

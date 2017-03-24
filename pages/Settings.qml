@@ -127,6 +127,7 @@ Rectangle {
         RowLayout {
             Label {
                 id: manageDaemonLabel
+                Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Manage daemon") + translationManager.emptyString
                 fontSize: 16
@@ -141,6 +142,9 @@ Rectangle {
         }
 
         RowLayout {
+            id: daemonStatusRow
+            Layout.fillWidth: true
+
             StandardButton {
                 visible: true
                 enabled: !appWindow.daemonRunning

@@ -177,6 +177,13 @@ Item {
 
                 Repeater {
                     id: repeater
+
+                    // Workaround for translations in listElements. All translated strings needs to be listed in this file.
+                    property string stringCopy: qsTr("<b>Copy address to clipboard</b>") + translationManager.emptyString
+                    property string stringSend: qsTr("<b>Send to same destination</b>") + translationManager.emptyString
+                    property string stringFind: qsTr("<b>Find similar transactions</b>") + translationManager.emptyString
+                    property string stringRemove: qsTr("<b>Remove from address book</b>") + translationManager.emptyString
+
                     delegate: Rectangle {
                         id: delegate
                         property bool containsMouse: index === mouseArea.currentIndex
@@ -211,7 +218,7 @@ Item {
                         onContainsMouseChanged: {
                             if(containsMouse) {
                                 var pos = rootItem.mapFromItem(delegate, 30, -25)
-                                appWindow.toolTip.text = name
+                                appWindow.toolTip.text = qsTr(name) + translationManager.emptyString
                                 appWindow.toolTip.x = pos.x - appWindow.toolTip.width
 //                                if(appWindow.toolTip.height > 30)
 //                                    pos.y -= appWindow.toolTip.height - 30
