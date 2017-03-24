@@ -26,7 +26,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="94"/>
         <source>4...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">4...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="103"/>
@@ -521,7 +521,7 @@
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="45"/>
-        <source>Balance</source
+        <source>Balance</source>
         <translation>Saldo</translation>
     </message>
     <message>
@@ -1688,7 +1688,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="212"/>
         <source>Check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kontrolu</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="181"/>
@@ -2089,7 +2089,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Donu pasvorton al via monujo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
@@ -2282,7 +2282,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
         <location filename="../main.qml" line="616"/>
         <source>Please confirm transaction:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Bonvolu konfirmu transakcion: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="506"/>
