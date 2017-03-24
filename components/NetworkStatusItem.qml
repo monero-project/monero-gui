@@ -51,6 +51,8 @@ Row {
         if (status == Wallet.ConnectionStatus_Connected) {
             if(!appWindow.daemonSynced)
                 return qsTr("Synchronizing")
+            if(appWindow.remoteNodeConnected)
+                return qsTr("Remote node")
             return qsTr("Connected")
         }
         if (status == Wallet.ConnectionStatus_WrongVersion)
