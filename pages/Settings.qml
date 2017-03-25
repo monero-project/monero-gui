@@ -272,7 +272,7 @@ Rectangle {
                 id: daemonAddrSave
                 Layout.fillWidth: false
                 Layout.leftMargin: 30
-                text: qsTr("Save") + translationManager.emptyString
+                text: qsTr("Connect") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
