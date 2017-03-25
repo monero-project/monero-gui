@@ -26,7 +26,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="94"/>
         <source>4...</source>
-        <translation type="unfinished">4...</translation>
+        <translation>4...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="103"/>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Priskribo &lt;font size=&apos;2&apos;&gt;(Malnepra)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="128"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="119"/>
         <source>command + enter (e.g help)</source>
-        <translation type="unfinished"></translation>
+        <translation>komanda + eniga klavo (ekz. helpu)</translation>
     </message>
 </context>
 <context>
@@ -441,7 +441,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="92"/>
         <source>Testnet</source>
-        <translation type="unfinished">Testreto</translation>
+        <translation>Testreto</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="289"/>
@@ -555,7 +555,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="104"/>
         <source>(optional)</source>
-        <source>(malnepre)</source>
+        <source>(malnepra)</source>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="118"/>
@@ -791,12 +791,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="227"/>
         <source>16 hexadecimal characters</source>
-        <translation type="unfinished"></translation>
+        <translation>16 deksesumaj signoj</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="263"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vakigu</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="273"/>
@@ -806,7 +806,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="282"/>
         <source>Generate payment ID for integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>Generu pagan ID-on por integrita adreso</translation>
     </message>
     <message>
         <source>ReadOnly wallet integrated address displayed here</source>
@@ -815,17 +815,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="385"/>
         <source>Save QrCode</source>
-        <translation type="unfinished"></translation>
+        <translation>Konservu QR-kodon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="386"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished"></translation>
+        <translation>Malsukcesis konservi QR-kodon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="397"/>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Konservu Kiel</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="219"/>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="314"/>
         <source>Amount to receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvanto por ricevi</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="335"/>
@@ -1688,7 +1688,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="212"/>
         <source>Check</source>
-        <translation type="unfinished">Kontrolu</translation>
+        <translation>Kontrolu</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="181"/>
@@ -1866,7 +1866,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne forgesu noti vian semon. Vi povas vidi vian semon kaj ŝanĝi viajn agordojn en la agorda paĝo.</translation>
     </message>
     <message>
         <source>An overview of your Monero configuration is below:</source>
@@ -2089,7 +2089,7 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">Donu pasvorton al via monujo</translation>
+        <translation>Donu pasvorton al via monujo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
