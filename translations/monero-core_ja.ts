@@ -1527,25 +1527,29 @@
         <location filename="../pages/Transfer.qml" line="608"/>
         <source>
 Number of transactions: </source>
-        <translation>取引の数: </translation>
+        <translation>
+取引の数: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="610"/>
         <source>
 Transaction #%1</source>
-        <translation>取引 #%1</translation>
+        <translation>
+取引 #%1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="611"/>
         <source>
 Recipient: </source>
-        <translation>受取人: </translation>
+        <translation>
+受取人: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="612"/>
         <source>
 payment ID: </source>
-        <translation>ペイメントID: </translation>
+        <translation>
+ペイメントID: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="613"/>
@@ -1593,7 +1597,8 @@ Ringsize: </source>
         <location filename="../pages/Transfer.qml" line="725"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>接続しているデーモンにGUIとの互換性がありません。デーモンを更新するか、他のデーモンに接続してください。</translation>
+        <translation>接続しているデーモンにGUIとの互換性がありません。
+デーモンを更新するか、他のデーモンに接続してください。</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="730"/>
@@ -2285,14 +2290,18 @@ Please upgrade or connect to another daemon</source>
         <source>
 
 Amount: </source>
-        <translation>金額: </translation>
+        <translation>
+
+金額: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="510"/>
         <source>
 
 Ringsize: </source>
-        <translation>リングサイズ: </translation>
+        <translation>
+
+リングサイズ: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="664"/>
@@ -2394,14 +2403,17 @@ Fee: </source>
         <location filename="../main.qml" line="511"/>
         <source>
 Number of transactions: </source>
-        <translation>取引の数: </translation>
+        <translation>
+取引の数: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="512"/>
         <source>
 
 Description: </source>
-        <translation>説明: </translation>
+        <translation>
+
+説明: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="552"/>
