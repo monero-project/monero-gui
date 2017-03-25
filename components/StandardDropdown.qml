@@ -197,6 +197,9 @@ Item {
                 property string stringLow: qsTr("Low (x1 fee)") + translationManager.emptyString
                 property string stringMedium:  qsTr("Medium (x20 fee)") + translationManager.emptyString
                 property string stringHigh:  qsTr("High (x166 fee)") + translationManager.emptyString
+                property string stringAll:  qsTr("All") + translationManager.emptyString
+                property string stringSent:  qsTr("Sent") + translationManager.emptyString
+                property string stringReceived:  qsTr("Received") + translationManager.emptyString
 
 
                 delegate: Rectangle {

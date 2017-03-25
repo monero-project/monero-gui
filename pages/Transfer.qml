@@ -172,7 +172,7 @@ Rectangle {
               //anchors.top: amountLine.top
               //anchors.bottom: amountLine.bottom
               width: 60
-              text: qsTr("all") + translationManager.emptyString
+              text: qsTr("All") + translationManager.emptyString
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
               releasedColor: "#FF6C3C"
@@ -195,6 +195,17 @@ Rectangle {
            ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
        }
 
+      // Priorites after v5
+      ListModel {
+           id: priorityModelV5
+
+           ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: 1}
+           ListElement { column1: qsTr("Default (x4 fee)") ; column2: ""; priority: 2 }
+           ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: 3 }
+           ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: 4 }
+
+       }
+
       StandardDropdown {
           id: priorityDropdown
           anchors.top: transactionPriority.bottom
@@ -206,7 +217,6 @@ Rectangle {
           shadowPressedColor: "#B32D00"
           releasedColor: "#FF6C3C"
           pressedColor: "#FF4304"
-          dataModel: priorityModel
           z: 1
       }
 
@@ -524,7 +534,7 @@ Rectangle {
 
             StandardButton {
                 id: signTxButton
-                text: qsTr("sign tx file") + translationManager.emptyString
+                text: qsTr("Sign tx file") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -538,7 +548,7 @@ Rectangle {
 
             StandardButton {
                 id: submitTxButton
-                text: qsTr("submit tx file") + translationManager.emptyString
+                text: qsTr("Submit tx file") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -700,6 +710,19 @@ Rectangle {
         console.log("transfer page loaded")
         updateStatus();
         updateMixin();
+        updatePriorityDropdown()
+    }
+
+    function updatePriorityDropdown() {
+        // Use new fee multipliers after v5 fork
+        if (typeof currentWallet != "undefined" && currentWallet.useForkRules(5)) {
+            priorityDropdown.dataModel = priorityModelV5;
+            priorityDropdown.currentIndex = 1
+        } else {
+            priorityDropdown.dataModel = priorityModel;
+            priorityDropdown.currentIndex = 0
+        }
+
     }
 
     //TODO: Add daemon sync status

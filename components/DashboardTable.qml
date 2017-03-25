@@ -145,7 +145,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: date
                     }
@@ -153,7 +152,6 @@ ListView {
                     Text {
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: "#000000"
                         text: time
                     }
@@ -175,7 +173,6 @@ ListView {
                 Text {
                     font.family: "Arial"
                     font.pixelSize: 18
-                    font.letterSpacing: -1
                     color: "#000000"
                     text: balance
                 }
@@ -208,7 +205,6 @@ ListView {
                         anchors.bottom: parent.bottom
                         font.family: "Arial"
                         font.pixelSize: 18
-                        font.letterSpacing: -1
                         color: out ? "#FF4F41" : "#36B05B"
                         text: amount
                     }

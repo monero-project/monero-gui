@@ -228,6 +228,9 @@ public:
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 
+    // check if fork rules should be used
+    Q_INVOKABLE bool useForkRules(quint8 version, quint64 earlyBlocks) const;
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet

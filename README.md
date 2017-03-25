@@ -1,3 +1,5 @@
+# Monero GUI
+
 Copyright (c) 2014-2017, The Monero Project
 
 ## Development Resources
@@ -62,7 +64,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ### On Linux:
 
-(Tested on Ubuntu 16.04 i386 and Linux Mint 18 "Sarah" - Cinnamon (64-bit))
+(Tested on Ubuntu 16.04 x86, 16.10 x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
 
 1. Install Monero dependencies.
 
@@ -83,17 +85,17 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 5. Install the GUI dependencies.
 
-  - For Ubuntu 16.04 i386
+  - For Ubuntu 16.04 x86
 
-	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs libzbar-dev`
+	`sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
 
-  - For Ubuntu 16.04 x64
+  - For Ubuntu 16.04+ x64
 
-     `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qtmultimedia5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects libzbar-dev`
+     `sudo apt-get install qtbase5-dev qt5-default qtdeclarative5-dev qtmultimedia5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects qml-module-qtmultimedia`
 
-  - For Linux Mint 18 "Sarah" - Cinnamon (64-bit)
+  - For Linux Mint 18 "Sarah" - Cinnamon x64
 
-     `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects libzbar-dev`
+     `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
 
 6. Build the GUI.
 
@@ -101,7 +103,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 7. Run the GUI client.
 
-	`./release/bin/monero-wallet-gui`
+	`./build/release/bin/monero-wallet-gui`
 
 ### On OS X:
 
@@ -109,28 +111,38 @@ Packaging for your favorite distribution would be a welcome contribution!
 2. Install [homebrew](http://brew.sh/)
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-	`brew install boost --c++11`
+  `brew install boost --c++11`
 
-	`brew install openssl` - to install openssl headers
+  `brew install openssl` - to install openssl headers
 
-    `brew install pkgconfig`
+  `brew install pkgconfig`
 
-    `brew install cmake`
+  `brew install cmake`
+
+  `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
+
+  If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
+  
+  `brew link --force --overwrite qt5`
 
 4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
 5. Add Qt bin dir to your path (check first if directory exists; 5.8 is the current version)
 
     `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
 
-    where ```Qt``` is the folder you selected to install Qt.
+5. Add Qt bin dir to your path.  Example:
+
+    `export PATH=$PATH:/usr/local/opt/qt5/bin`
+
+    make sure this is where Qt 5.x is installed on **your** system eg `$HOME/Qt/5.8/clang_64/bin` if you downloaded from qt.io.
 
 6. Grab an up-to-date copy of the monero-core repository.
 
-	`git clone https://github.com/monero-project/monero-core.git`
+  `git clone https://github.com/monero-project/monero-core.git`
 
 7. Go into the repository.
 
-	`cd monero-core`
+  `cd monero-core`
 
 8. Build libwallet
 

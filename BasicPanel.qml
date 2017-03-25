@@ -90,7 +90,6 @@ Rectangle {
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignBottom
@@ -104,7 +103,6 @@ Rectangle {
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 18
-                font.letterSpacing: -1
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignBottom
@@ -128,7 +126,6 @@ Rectangle {
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 12
-                font.letterSpacing: -1
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignBottom
@@ -142,7 +139,6 @@ Rectangle {
                 height: 20
                 font.family: "Arial"
                 font.pixelSize: 14
-                font.letterSpacing: -1
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignBottom
