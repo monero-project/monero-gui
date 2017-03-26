@@ -146,61 +146,12 @@ ColumnLayout {
 
 
         RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Choose a remote node from the list:") + translationManager.emptyString
-            }
-
             RemoteNodeDropdown {
-                Layout.maximumWidth: 200
-                enabled: remoteNode.checked
+                Layout.minimumWidth: 300
+                opacity: remoteNode.checked
                 id: remoteNodeDropDown
             }
         }
-
-
-
-
-//        CheckBox {
-//            id: customNode
-//            text: qsTr("Use custom node settings") + translationManager.emptyString
-//            background: "#FFFFFF"
-//            fontColor: "#4A4646"
-//            fontSize: 16
-//            checkedIcon: "../images/checkedVioletIcon.png"
-//            uncheckedIcon: "../images/uncheckedIcon.png"
-//            checked: false
-//        }
-
-
-//        RowLayout {
-//            visible: customNode.checked
-//            spacing: 20
-
-//            LineEdit {
-//                id: daemonAddress
-//                width: 200
-//                fontSize: 14
-//                text: {
-//                    if(appWindow.persistentSettings.daemon_address)
-//                        return appWindow.persistentSettings.daemon_address;
-//                    return testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
-//                }
-
-//            }
-
-//            CheckBox {
-//                id: testNet
-//                anchors.verticalCenter: parent.verticalCenter
-//                text: qsTr("Testnet") + translationManager.emptyString
-//                background: "#FFFFFF"
-//                fontColor: "#4A4646"
-//                fontSize: 16
-//                checkedIcon: "../images/checkedVioletIcon.png"
-//                uncheckedIcon: "../images/uncheckedIcon.png"
-//                checked: appWindow.persistentSettings.testnet;
-//            }
-//        }
     }
 
 

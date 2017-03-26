@@ -34,23 +34,23 @@ import QtQuick.Layouts 1.1
 RowLayout {
     Layout.preferredWidth: 200
     function getSelected() {
-        return remoteNodeList.get(remoteNodeDropdown.currentIndex).url;
+        return daemonAddr.text + ":" + daemonPort.text
     }
 
-    ListModel {
-         id: remoteNodeList
-         ListElement { column1: "node.xmrbackb.one" ; column2: ""; url: "node.xmrbackb.one:18081" }
-         ListElement { column1: "node.moneroworld.com" ; column2: ""; url: "node.moneroworld.com:18081" }
-     }
-
-    StandardDropdown {
+    LineEdit {
+        id: daemonAddr
+        Layout.preferredWidth:  200
         Layout.fillWidth: true
-        id: remoteNodeDropdown
-        shadowReleasedColor: (parent.enabled)? "#FF4304" : "#c1c1bf"
-        shadowPressedColor: "#B32D00"
-        releasedColor: (parent.enabled)? "#FF6C3C" : "#c1c1bf"
-        pressedColor: "#FF4304"
-        dataModel: remoteNodeList
-        z: 1
+        text: persistentSettings.remoteNodeAddress.split(":")[0]
+        placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
+    }
+
+
+    LineEdit {
+        id: daemonPort
+        Layout.preferredWidth: 100
+        Layout.fillWidth: true
+        text: persistentSettings.remoteNodeAddress.split(":")[1]
+        placeholderText: qsTr("Port") + translationManager.emptyString
     }
 }
