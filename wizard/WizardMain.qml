@@ -49,8 +49,8 @@ ColumnLayout {
      //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
      //   "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, donationPage, finishPage ],
         // disable donation page
-        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage,  finishPage ],
-        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage,  finishPage ],
+        "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, daemonSettingsPage, finishPage ],
+        "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, daemonSettingsPage, finishPage ],
         "create_view_only_wallet" : [ createViewOnlyWalletPage, passwordPage ],
 
     }
@@ -221,7 +221,6 @@ ColumnLayout {
         appWindow.persistentSettings.testnet = settings.testnet
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
-
     }
 
     // reading settings from persistent storage
@@ -274,6 +273,12 @@ ColumnLayout {
 
     WizardPassword {
         id: passwordPage
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+    }
+
+    WizardDaemonSettings {
+        id: daemonSettingsPage
         Layout.bottomMargin: wizardBottomMargin
         Layout.topMargin: wizardTopMargin
     }

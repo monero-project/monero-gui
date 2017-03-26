@@ -112,6 +112,7 @@ public:
     Q_INVOKABLE quint64 blockchainHeight() const;
     Q_INVOKABLE quint64 blockchainTargetHeight() const;
     Q_INVOKABLE double miningHashRate() const;
+    Q_INVOKABLE bool localDaemonSynced() const;
 
     Q_INVOKABLE bool isMining() const;
     Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
