@@ -589,7 +589,14 @@ bool Wallet::rescanSpent()
 
 bool Wallet::useForkRules(quint8 required_version, quint64 earlyBlocks) const
 {
-    return m_walletImpl->useForkRules(required_version,earlyBlocks);
+    if(m_connectionStatus == Wallet::ConnectionStatus_Disconnected)
+        return false;
+    try {
+        return m_walletImpl->useForkRules(required_version,earlyBlocks);
+    } catch (const std::exception &e) {
+        qDebug() << e.what();
+        return false;
+    }
 }
 
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
