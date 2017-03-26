@@ -127,13 +127,20 @@ Rectangle {
 
         //! Manage daemon
         RowLayout {
+            Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
-                Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Manage Daemon") + translationManager.emptyString
                 fontSize: 16
-                Layout.topMargin: 20
+            }
+
+            CheckBox {
+                id: daemonAdvanced
+                Layout.leftMargin: 15
+                text: qsTr("Show advanced") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
         Rectangle {
@@ -147,10 +154,9 @@ Rectangle {
             Layout.fillWidth: true
 
             StandardButton {
-                visible: true
-                enabled: !appWindow.daemonRunning
+                visible: !appWindow.daemonRunning
                 id: startDaemonButton
-                text: qsTr("Start Daemon") + translationManager.emptyString
+                text: qsTr("Start Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -164,10 +170,9 @@ Rectangle {
             }
 
             StandardButton {
-                visible: true
-                enabled: appWindow.daemonRunning
+                visible: appWindow.daemonRunning
                 id: stopDaemonButton
-                text: qsTr("Stop Daemon") + translationManager.emptyString
+                text: qsTr("Stop Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -190,12 +195,10 @@ Rectangle {
                     daemonConsolePopup.open();
                 }
             }
-
-
-
         }
 
         RowLayout {
+            visible: daemonAdvanced.checked
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -213,6 +216,7 @@ Rectangle {
         }
 
         RowLayout {
+            visible: daemonAdvanced.checked
             id: daemonAddrRow
             Layout.fillWidth: true
             spacing: 10
@@ -245,7 +249,7 @@ Rectangle {
         }
 
         RowLayout {
-
+            visible: daemonAdvanced.checked
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -304,29 +308,22 @@ Rectangle {
 
         RowLayout {
             RowLayout {
-                Label {
-                    color: "#4A4949"
-                    text: qsTr("Remote node") + translationManager.emptyString
-                    fontSize: 16
-                }
-
                 RemoteNodeDropdown {
-                    Layout.maximumWidth: 200
+                    Layout.minimumWidth: 300
                     id: remoteNodeDropDown
                 }
 
 
                 StandardButton {
                     id: remoteConnect
-                    enabled: !appWindow.remoteNodeConnected
+                    visible: !appWindow.remoteNodeConnected
                     Layout.fillWidth: false
                     Layout.leftMargin: 30
-                    text: qsTr("Connect") + translationManager.emptyString
+                    text: qsTr("Connect Remote Node") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
                     pressedColor: "#FF4304"
-                    visible: true
                     onClicked: {
                         persistentSettings.useRemoteNode = true
                         persistentSettings.remoteNodeAddress = remoteNodeDropDown.getSelected();
@@ -336,15 +333,14 @@ Rectangle {
 
                 StandardButton {
                     id: remoteDisconnect
-                    enabled: appWindow.remoteNodeConnected
+                    visible: appWindow.remoteNodeConnected
                     Layout.fillWidth: false
                     Layout.leftMargin: 30
-                    text: qsTr("Disconnect") + translationManager.emptyString
+                    text: qsTr("Disconnect Remote Node") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#FF6C3C"
                     pressedColor: "#FF4304"
-                    visible: true
                     onClicked: {
                         persistentSettings.useRemoteNode = false
                         appWindow.disconnectRemoteNode();
