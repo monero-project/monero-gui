@@ -78,7 +78,7 @@ Rectangle {
         var amount = amountLine.text.trim()
         if (amount !== "") {
           s += (nfields++ ? "&" : "?")
-          s += "tx_amount=" + amount
+          s += "tx_amount=" + walletManager.amountFromString(amount)
         }
         var pid = paymentIdLine.text.trim()
         if (pid !== "") {
