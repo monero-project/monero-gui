@@ -229,7 +229,7 @@ public:
     Q_INVOKABLE bool rescanSpent();
 
     // check if fork rules should be used
-    Q_INVOKABLE bool useForkRules(quint8 version, quint64 earlyBlocks) const;
+    Q_INVOKABLE bool useForkRules(quint8 version, quint64 earlyBlocks = 0) const;
 
     // TODO: setListenter() when it implemented in API
 signals:
