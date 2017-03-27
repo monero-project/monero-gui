@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets multimedia
+QT += qml quick widgets
 
 WALLET_ROOT=$$PWD/monero
 
@@ -12,7 +12,6 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
-                $$PWD/src/QR-Code-scanner \
                 $$PWD/src \
                 $$WALLET_ROOT/src
 
@@ -38,7 +37,6 @@ HEADERS += \
     src/libwalletqt/AddressBook.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
-    src/QR-Code-scanner/QrCodeScanner.h \  
     MainApp.h
 
 SOURCES += main.cpp \
@@ -62,7 +60,6 @@ SOURCES += main.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
-    src/QR-Code-scanner/QrCodeScanner.cpp \  
     MainApp.cpp
 
 !ios {
@@ -125,9 +122,15 @@ ios {
 CONFIG(WITH_SCANNER) {
     if( greaterThan(QT_MINOR_VERSION, 5) ) {
         message("using camera scanner")
+        QT += multimedia
         DEFINES += "WITH_SCANNER"
-        HEADERS += src/QR-Code-scanner/QrScanThread.h
-        SOURCES += src/QR-Code-scanner/QrScanThread.cpp
+        INCLUDEPATH += $$PWD/src/QR-Code-scanner
+        HEADERS += \
+            src/QR-Code-scanner/QrScanThread.h \
+            src/QR-Code-scanner/QrCodeScanner.h
+        SOURCES += \
+            src/QR-Code-scanner/QrScanThread.cpp \
+            src/QR-Code-scanner/QrCodeScanner.cpp
         android {
             INCLUDEPATH += $$PWD/../ZBar/include
             LIBS += -lzbarjni -liconv

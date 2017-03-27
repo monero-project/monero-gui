@@ -37,14 +37,12 @@ QrCodeScanner::QrCodeScanner(QObject *parent)
     , m_processInterval(750)
     , m_enabled(true)
 {
-#ifdef WITH_SCANNER
     m_probe = new QVideoProbe(this);
     m_thread = new QrScanThread(this);
     m_thread->start();
     QObject::connect(m_thread, SIGNAL(decoded(int,QString)), this, SLOT(processCode(int,QString)));
     QObject::connect(m_thread, SIGNAL(notifyError(const QString &, bool)), this, SIGNAL(notifyError(const QString &, bool)));
     connect(m_probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));
-#endif
 }
 void QrCodeScanner::setSource(QCamera *camera)
 {
@@ -97,12 +95,10 @@ void QrCodeScanner::setEnabled(bool enabled)
     }
     emit enabledChanged();
 }
-#ifdef WITH_SCANNER
 void QrCodeScanner::timerEvent(QTimerEvent *event)
 {
     if( (event->timerId() == m_processTimerId) ){
         m_thread->addFrame(m_curFrame);
     }
 }
-#endif
 

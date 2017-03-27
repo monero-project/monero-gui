@@ -39,7 +39,6 @@
 #include "WalletManager.h"
 #include "Wallet.h"
 #include "QRCodeImageProvider.h"
-#include "QrCodeScanner.h"
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
 #include "TranslationManager.h"
@@ -55,6 +54,10 @@
 // IOS exclusions
 #ifndef Q_OS_IOS
 #include "daemon/DaemonManager.h"
+#endif
+
+#ifdef WITH_SCANNER
+#include "QrCodeScanner.h"
 #endif
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -131,7 +134,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
+#ifdef WITH_SCANNER
     qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
+#endif
 
     QQmlApplicationEngine engine;
 
@@ -197,19 +202,27 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
 
+    bool builtWithScanner = false;
+#ifdef WITH_SCANNER
+    builtWithScanner = true;
+#endif
+    engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
+
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     QObject *rootObject = engine.rootObjects().first();
 
-    bool builtWithScanner = false;
 #ifdef WITH_SCANNER
-    builtWithScanner = true;
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
-    QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
-    QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
-    qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
+    if( qmlCamera ){
+        qDebug() << "QrCodeScanner : object found";
+        QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
+        QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
+        qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
+    } else {
+        qDebug() << "QrCodeScanner : something went wrong !";
+    }
 #endif
-    engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
     QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant,QVariant)), rootObject, SLOT(sequencePressed(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
