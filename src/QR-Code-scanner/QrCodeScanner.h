@@ -31,9 +31,7 @@
 
 #include <QImage>
 #include <QVideoFrame>
-#ifdef WITH_SCANNER
 #include "QrScanThread.h"
-#endif
 
 class QVideoProbe;
 class QCamera;
@@ -64,10 +62,8 @@ Q_SIGNALS:
     void notifyError(const QString &error, bool warning = false);
 
 protected:
-#ifdef WITH_SCANNER
     void timerEvent(QTimerEvent *);
     QrScanThread *m_thread;
-#endif
     int m_processTimerId;
     int m_processInterval;
     int m_enabled;

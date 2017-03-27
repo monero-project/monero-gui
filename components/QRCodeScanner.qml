@@ -131,4 +131,11 @@ Rectangle {
             root.state = "Stopped"
         }
     }
+
+    Component.onCompleted: {
+        if( QtMultimedia.availableCameras.length == 0) {
+            console.log("No camera available. Disable qrScannerEnabled");
+            appWindow.qrScannerEnabled = false;
+        }
+    }
 }
