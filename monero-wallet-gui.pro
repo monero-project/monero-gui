@@ -217,9 +217,9 @@ linux {
         message("using static libraries")
         LIBS+= -Wl,-Bstatic    
         QMAKE_LFLAGS += -static-libgcc -static-libstdc++
-        contains(QT_ARCH, x86_64) {
+   #     contains(QT_ARCH, x86_64) {
             LIBS+= -lunbound
-        }
+   #     }
     } else {
       # On some distro's we need to add dynload
       LIBS+= -ldl
