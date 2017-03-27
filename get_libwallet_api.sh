@@ -17,7 +17,7 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 #git submodule update
 git -C $MONERO_DIR fetch --tags
-git -C $MONERO_DIR checkout v0.10.3
+git -C $MONERO_DIR checkout v0.10.3.1
 
 # get monero core tag
 get_tag
