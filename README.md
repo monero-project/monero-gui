@@ -126,8 +126,13 @@ Packaging for your favorite distribution would be a welcome contribution!
   `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
 
   If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
-
+  
   `brew link --force --overwrite qt5`
+
+4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
+5. Add Qt bin dir to your path (check first if directory exists; 5.8 is the current version)
+
+    `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
 
 5. Add Qt bin dir to your path.  Example:
 
