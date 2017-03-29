@@ -800,7 +800,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="263"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cancella</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="273"/>
@@ -891,7 +891,7 @@
     <message>
         <location filename="../RightPanel.qml" line="64"/>
         <source>About</source>
-        <translation>About</translation>
+        <translation>Informazioni</translation>
     </message>
 </context>
 <context>
@@ -969,7 +969,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="152"/>
         <source>Start daemon</source>
-        <translation type="unfinished">Start daemon</translation>
+        <translation type="unfinished">Avvia daemon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="166"/>
@@ -1205,17 +1205,17 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tutte</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inviate</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ricevute</translation>
     </message>
 </context>
 <context>
@@ -1256,7 +1256,7 @@
     <message>
         <location filename="../components/TableHeader.qml" line="67"/>
         <source>Block height</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Altezza blocco</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
