@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="52"/>
         <source>Add new entry</source>
-        <translation>增加付款地址</translation>
+        <translation>新增付款地址</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="61"/>
