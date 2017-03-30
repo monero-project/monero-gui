@@ -212,15 +212,17 @@ bool DaemonManager::sendCommand(const QString &cmd,bool testnet) const
 bool DaemonManager::sendCommand(const QString &cmd,bool testnet, QString &message) const
 {
     QProcess p;
-    QString external_cmd = m_monerod + " " + cmd;
-    qDebug() << "sending external cmd: " << external_cmd;
+    QStringList external_cmd;
+    external_cmd << cmd;
 
     // Add testnet flag if needed
     if (testnet)
-        external_cmd += " --testnet";
-    external_cmd += "\n";
+        external_cmd << "--testnet";
 
-    p.start(external_cmd);
+    qDebug() << "sending external cmd: " << external_cmd;
+
+
+    p.start(m_monerod, external_cmd);
 
     bool started = p.waitForFinished(-1);
     message = p.readAllStandardOutput();
