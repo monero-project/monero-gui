@@ -434,15 +434,6 @@ Rectangle {
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
-//            Label {
-//                id: manageWalletLabel
-//                Layout.fillWidth: true
-//                color: "#4A4949"
-//                text: qsTr("Advanced options") + translationManager.emptyString
-//                fontSize: 16
-//                Layout.topMargin: 20
-//            }
-
             CheckBox {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
@@ -462,7 +453,6 @@ Rectangle {
             color: "#DEDEDE"
             Layout.bottomMargin: 30
         }
-
 
         RowLayout {
             visible: persistentSettings.transferShowAdvanced
@@ -493,9 +483,13 @@ Rectangle {
         }
 
 
-        RowLayout {
+        GridLayout {
             visible: persistentSettings.transferShowAdvanced
             Layout.topMargin: 50
+
+
+            columns: (isMobile) ? 2 : 6
+
             StandardButton {
                 id: sweepUnmixableButton
                 text: qsTr("Sweep Unmixable") + translationManager.emptyString
@@ -722,7 +716,6 @@ Rectangle {
             priorityDropdown.dataModel = priorityModel;
             priorityDropdown.currentIndex = 0
         }
-
     }
 
     //TODO: Add daemon sync status

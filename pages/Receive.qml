@@ -168,8 +168,9 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 17
+        anchors.margins: (isMobile)? 17 : 40
         anchors.topMargin: 40
+
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -181,9 +182,8 @@ Rectangle {
         property int qrCodeSize: 240
 
 
-        RowLayout {
+        ColumnLayout {
             id: addressRow
-
             Label {
                 id: addressLabel
                 fontSize: 14
@@ -204,6 +204,7 @@ Rectangle {
                     imageSource: "../images/copyToClipboard.png"
                     onClicked: {
                         if (addressLine.text.length > 0) {
+                            console.log(addressLine.text + " copied to clipboard")
                             clipboard.setText(addressLine.text)
                         }
                     }
@@ -211,9 +212,11 @@ Rectangle {
             }
         }
 
-        RowLayout {
+        GridLayout {
             id: paymentIdRow
+            columns:2
             Label {
+                Layout.columnSpan: 2
                 id: paymentIdLabel
                 fontSize: 14
                 text: qsTr("Payment ID") + translationManager.emptyString
@@ -264,8 +267,8 @@ Rectangle {
                 onClicked: updatePaymentId("")
             }
         }
-
-        RowLayout {
+         
+        ColumnLayout {
             id: integratedAddressRow
             Label {
                 id: integratedAddressLabel
@@ -298,7 +301,7 @@ Rectangle {
             }
         }
 
-        RowLayout {
+        ColumnLayout {
             id: amountRow
             Label {
                 id: amountLabel

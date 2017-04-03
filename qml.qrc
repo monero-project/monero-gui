@@ -139,5 +139,6 @@
         <file>components/DaemonConsole.qml</file>
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
+        <file>components/MobileHeader.qml</file>
     </qresource>
 </RCC>

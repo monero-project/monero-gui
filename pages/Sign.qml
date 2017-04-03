@@ -40,7 +40,7 @@ Rectangle {
     id: mainLayout
 
     property int labelWidth: 120
-    property int editWidth: 400
+//    property int editWidth: 400
     property int lineEditFontSize: 12
 
     color: "#F0EEEE"
@@ -92,7 +92,7 @@ Rectangle {
 
     // sign / verify
     ColumnLayout {
-        anchors.margins: 10
+        anchors.margins: 17
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -100,21 +100,9 @@ Rectangle {
 
         spacing: 20
 
-        Rectangle {
-            anchors.fill: signBox
-            color: "#00000000"
-            border.width: 2
-            border.color: "#CCCCCC"
-            anchors.margins: -15
-        }
-
         // sign
         ColumnLayout {
             id: signBox
-            anchors.margins: 40
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
 
             RowLayout {
                 ColumnLayout {
@@ -122,6 +110,7 @@ Rectangle {
                     Label {
                         text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
                         fontSize: 16
+                        wrapMode: Text.Wrap
                     }
                     Label {}
                 }
@@ -147,7 +136,7 @@ Rectangle {
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Message to sign") + translationManager.emptyString;
                     readOnly: false
-                    Layout.fillWidth: true
+//                    Layout.fillWidth: true
                     onTextChanged: signSignatureLine.text = ""
 
                     IconButton {
@@ -254,21 +243,16 @@ Rectangle {
 
             RowLayout {
                 id: signSignatureRow
-                anchors.left: parent.left
-                anchors.right: parent.right
                 anchors.topMargin: 17
 
                 Label {
                     id: signSignatureLabel
                     fontSize: 14
                     text: qsTr("Signature") + translationManager.emptyString
-                    width: mainLayout.labelWidth
                 }
 
                 LineEdit {
                     id: signSignatureLine
-                    anchors.left: signSignatureLabel.right
-                    anchors.right: parent.right
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     readOnly: true
@@ -286,21 +270,10 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            anchors.fill: verifyBox
-            color: "#00000000"
-            border.width: 2
-            border.color: "#CCCCCC"
-            anchors.margins: -15
-        }
 
         // verify
         ColumnLayout {
             id: verifyBox
-            anchors.margins: 40
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: signBox.bottom
 
             RowLayout {
                 ColumnLayout {
@@ -308,6 +281,8 @@ Rectangle {
                     Label {
                         text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
                         fontSize: 16
+//                        Layout.fillWidth: true
+                        wrapMode: Text.Wrap
                     }
                     Label {}
                 }
@@ -444,6 +419,8 @@ Rectangle {
                 text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                             Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
                       + translationManager.emptyString
+//                Layout.fillWidth: true
+                wrapMode: Text.Wrap
 
         onLinkActivated: appWindow.showPageRequest("AddressBook")
             }
@@ -460,24 +437,21 @@ Rectangle {
 
             RowLayout {
                 id: verifySignatureRow
-                anchors.left: parent.left
-                anchors.right: parent.right
                 anchors.topMargin: 17
 
                 Label {
                     id: verifySignatureLabel
                     fontSize: 14
                     text: qsTr("Signature") + translationManager.emptyString
-                    width: mainLayout.labelWidth
+                    Layout.fillWidth: true
                 }
 
                 LineEdit {
                     id: verifySignatureLine
-                    anchors.left: verifySignatureLabel.right
-                    anchors.right: parent.right
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignLeft
 
                     IconButton {
                         imageSource: "../images/copyToClipboard.png"

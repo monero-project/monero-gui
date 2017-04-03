@@ -57,7 +57,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
-    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property int maxWindowHeight: Screen.height// (Screen.height < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
     property string walletName
@@ -211,6 +211,8 @@ ApplicationWindow {
             delete wizard.settings['wallet']
         }  else {
             var wallet_path = walletPath();
+            if(isIOS)
+                wallet_path = moneroAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
             console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
             walletManager.openWalletAsync(wallet_path, appWindow.password,
@@ -235,7 +237,11 @@ ApplicationWindow {
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
         }
         currentWallet = undefined;
-        walletManager.closeWalletAsync();
+        if (isIOS) {
+            console.log("closing sync - ios")
+            walletManager.closeWallet();
+        } else
+            walletManager.closeWalletAsync();
     }
 
     function connectWallet(wallet) {
@@ -467,7 +473,10 @@ ApplicationWindow {
 
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
-            return walletManager.walletExists(persistentSettings.wallet_path);
+            if(isIOS)
+                return walletManager.walletExists(moneroAccountsDir + persistentSettings.wallet_path);
+            else
+                return walletManager.walletExists(persistentSettings.wallet_path);
         }
         return false;
     }
@@ -769,10 +778,21 @@ ApplicationWindow {
         leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
     }
 
+    function hideMenu() {
+        goToBasicAnimation.start();
+        console.log(appWindow.width)
+    }
+
+    function showMenu() {
+        goToProAnimation.start();
+        console.log(appWindow.width)
+    }
+
+
     objectName: "appWindow"
     visible: true
-    width: rightPanelExpanded ? 1269 : 1269 - 300
-    height: maxWindowHeight;
+//    width: Screen.width //rightPanelExpanded ? 1269 : 1269 - 300
+//    height: 900 //300//maxWindowHeight;
     color: "#FFFFFF"
     flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
     onWidthChanged: x -= 0
@@ -802,9 +822,13 @@ ApplicationWindow {
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
 
-        daemonManager.daemonStarted.connect(onDaemonStarted);
-        daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
-        daemonManager.daemonStopped.connect(onDaemonStopped);
+        if(typeof daemonManager != "undefined") {
+            daemonManager.daemonStarted.connect(onDaemonStarted);
+            daemonManager.daemonStartFailure.connect(onDaemonStartFailure);
+            daemonManager.daemonStopped.connect(onDaemonStopped);
+        }
+
+
 
         // Connect app exit to qml window exit handling
         mainApp.closing.connect(appWindow.close);
@@ -822,6 +846,11 @@ ApplicationWindow {
         } else console.log("qrScannerEnabled disabled");
 
         if(!walletsFound()) {
+            console.log("no wallet found")
+            console.log(persistentSettings.wallet_path)
+            //var/mobile/Containers/Data/Application/588FFCBE-8972-43AB-B096-FC38526A40B2/Documents/Monero/wallets/Aaa/Aaa
+            ///var/mobile/Containers/Data/Application/EA9EA534-5E09-41D2-BDEA-951BACB68765/Documents/Monero/wallets/BB/BB
+            walletManager.setLogLevel(2);
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
@@ -965,55 +994,62 @@ ApplicationWindow {
                 PropertyChanges { target: leftPanel; visible: false }
                 PropertyChanges { target: rightPanel; visible: false }
                 PropertyChanges { target: middlePanel; visible: false }
-                PropertyChanges { target: titleBar; basicButtonVisible: false }
+//                PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: 930; }
-                PropertyChanges { target: appWindow; height: 650; }
+//                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
+//                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: false }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
-                PropertyChanges { target: frameArea; blocked: true }
+//                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
                 PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
             }, State {
                 name: "normal"
-                PropertyChanges { target: leftPanel; visible: true }
+                PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
                 PropertyChanges { target: rightPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
-                PropertyChanges { target: titleBar; basicButtonVisible: true }
+//                PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width: rightPanelExpanded ? 1269 : 1269 - 300; }
-                PropertyChanges { target: appWindow; height: maxWindowHeight; }
+//                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+//                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
-                PropertyChanges { target: frameArea; blocked: false }
-                PropertyChanges { target: titleBar; visible: true }
-                PropertyChanges { target: titleBar; y: 0 }
+                PropertyChanges { target: frameArea; blocked: true }
+//                PropertyChanges { target: titleBar; visible: true }
+//                PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
         ]
 
+        MobileHeader {
+            id: mobileHeader
+            visible: isMobile
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: visible? 65 : 0
+        }
+
         LeftPanel {
             id: leftPanel
+            anchors.top: mobileHeader.bottom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            height: parent.height
-            onDashboardClicked: middlePanel.state = "Dashboard"
-            onTransferClicked: middlePanel.state = "Transfer"
-            onReceiveClicked: middlePanel.state = "Receive"
-            onTxkeyClicked: middlePanel.state = "TxKey"
-            onHistoryClicked: middlePanel.state = "History"
-            onAddressBookClicked: middlePanel.state = "AddressBook"
-            onMiningClicked: middlePanel.state = "Mining"
-            onSignClicked: middlePanel.state = "Sign"
-            onSettingsClicked: middlePanel.state = "Settings"
+            onDashboardClicked: {middlePanel.state = "Dashboard"; if(isMobile) hideMenu()}
+            onTransferClicked: {middlePanel.state = "Transfer"; if(isMobile) hideMenu()}
+            onReceiveClicked: {middlePanel.state = "Receive"; if(isMobile) hideMenu()}
+            onTxkeyClicked: {middlePanel.state = "TxKey"; if(isMobile) hideMenu()}
+            onHistoryClicked: {middlePanel.state = "History"; if(isMobile) hideMenu()}
+            onAddressBookClicked: {middlePanel.state = "AddressBook"; if(isMobile) hideMenu()}
+            onMiningClicked: {middlePanel.state = "Mining"; if(isMobile) hideMenu()}
+            onSignClicked: {middlePanel.state = "Sign"; if(isMobile) hideMenu()}
+            onSettingsClicked: {middlePanel.state = "Settings"; if(isMobile) hideMenu()}
         }
 
         RightPanel {
             id: rightPanel
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: parent.height
             width: appWindow.rightPanelExpanded ? 300 : 0
             visible: appWindow.rightPanelExpanded
         }
@@ -1021,10 +1057,10 @@ ApplicationWindow {
 
         MiddlePanel {
             id: middlePanel
+            anchors.top: mobileHeader.bottom
             anchors.bottom: parent.bottom
             anchors.left: leftPanel.visible ?  leftPanel.right : parent.left
-            anchors.right: rightPanel.left
-            height: parent.height
+            anchors.right: parent.right
             state: "Transfer"
         }
 
@@ -1034,54 +1070,54 @@ ApplicationWindow {
             visible: false
         }
 
-        MouseArea {
-            id: frameArea
-            property bool blocked: false
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 30
-            z: 1
-            hoverEnabled: true
-            propagateComposedEvents: true
-            onPressed: mouse.accepted = false
-            onReleased: mouse.accepted = false
-            onMouseXChanged: titleBar.mouseX = mouseX
-            onContainsMouseChanged: titleBar.containsMouse = containsMouse
-        }
+//        MouseArea {
+//            id: frameArea
+//            property bool blocked: false
+//            anchors.top: parent.top
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+//            height: 30
+//            z: 1
+//            hoverEnabled: true
+//            propagateComposedEvents: true
+//            onPressed: mouse.accepted = false
+//            onReleased: mouse.accepted = false
+//            onMouseXChanged: titleBar.mouseX = mouseX
+//            onContainsMouseChanged: titleBar.containsMouse = containsMouse
+//        }
 
         SequentialAnimation {
             id: goToBasicAnimation
-            PropertyAction {
-                target: appWindow
-                properties: "visibility"
-                value: Window.Windowed
-            }
-            PropertyAction {
-                target: titleBar
-                properties: "maximizeButtonVisible"
-                value: false
-            }
-            PropertyAction {
-                target: frameArea
-                properties: "blocked"
-                value: true
-            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "visibility"
+//                value: Window.Windowed
+//            }
+//            PropertyAction {
+//                target: titleBar
+//                properties: "maximizeButtonVisible"
+//                value: false
+//            }
+//            PropertyAction {
+//                target: frameArea
+//                properties: "blocked"
+//                value: true
+//            }
             PropertyAction {
                 target: resizeArea
                 properties: "visible"
-                value: false
+                value: true
             }
-            PropertyAction {
-                target: appWindow
-                properties: "height"
-                value: 30
-            }
-            PropertyAction {
-                target: appWindow
-                properties: "width"
-                value: 470
-            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "height"
+//                value: 30
+//            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "width"
+//                value: 326
+//            }
             PropertyAction {
                 targets: [leftPanel, rightPanel]
                 properties: "visible"
@@ -1093,11 +1129,11 @@ ApplicationWindow {
                 value: true
             }
 
-            PropertyAction {
-                target: appWindow
-                properties: "height"
-                value: middlePanel.height
-            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "height"
+//                value: middlePanel.height
+//            }
 
             onStopped: {
                 // middlePanel.visible = false
@@ -1108,11 +1144,11 @@ ApplicationWindow {
 
         SequentialAnimation {
             id: goToProAnimation
-            PropertyAction {
-                target: appWindow
-                properties: "height"
-                value: 30
-            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "height"
+//                value: 30
+//            }
             PropertyAction {
                 target: middlePanel
                 properties: "basicMode"
@@ -1123,26 +1159,26 @@ ApplicationWindow {
                 properties: "visible"
                 value: true
             }
-            PropertyAction {
-                target: appWindow
-                properties: "width"
-                value: rightPanelExpanded ? 1269 : 1269 - 300
-            }
-            PropertyAction {
-                target: appWindow
-                properties: "height"
-                value: maxWindowHeight
-            }
-            PropertyAction {
-                target: frameArea
-                properties: "blocked"
-                value: false
-            }
-            PropertyAction {
-                target: titleBar
-                properties: "maximizeButtonVisible"
-                value: true
-            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "width"
+//                value: rightPanelExpanded ? 1269 : 1269 - 300
+//            }
+//            PropertyAction {
+//                target: appWindow
+//                properties: "height"
+//                value: maxWindowHeight
+//            }
+//            PropertyAction {
+//                target: frameArea
+//                properties: "blocked"
+//                value: false
+//            }
+//            PropertyAction {
+//                target: titleBar
+//                properties: "maximizeButtonVisible"
+//                value: true
+//            }
         }
 
         WizardMain {
@@ -1159,7 +1195,7 @@ ApplicationWindow {
         }
 
         property int minWidth: 326
-        property int minHeight: 720
+        property int minHeight: 400
         MouseArea {
             id: resizeArea
             hoverEnabled: true
@@ -1220,24 +1256,24 @@ ApplicationWindow {
                 }
             }
 
-            MouseArea {
-                enabled: persistentSettings.customDecorations
-                property var previousPosition
-                anchors.fill: parent
-                propagateComposedEvents: true
-                onPressed: previousPosition = globalCursor.getPosition()
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var pos = globalCursor.getPosition()
-                        var dx = pos.x - previousPosition.x
-                        var dy = pos.y - previousPosition.y
+//            MouseArea {
+//                enabled: persistentSettings.customDecorations
+//                property var previousPosition
+//                anchors.fill: parent
+//                propagateComposedEvents: true
+//                onPressed: previousPosition = globalCursor.getPosition()
+//                onPositionChanged: {
+//                    if (pressedButtons == Qt.LeftButton) {
+//                        var pos = globalCursor.getPosition()
+//                        var dx = pos.x - previousPosition.x
+//                        var dy = pos.y - previousPosition.y
 
-                        appWindow.x += dx
-                        appWindow.y += dy
-                        previousPosition = pos
-                    }
-                }
-            }
+//                        appWindow.x += dx
+//                        appWindow.y += dy
+//                        previousPosition = pos
+//                    }
+//                }
+//            }
         }
 
         // new ToolTip
@@ -1270,6 +1306,7 @@ ApplicationWindow {
         }
 
         Notifier {
+            visible:false
             id: notifier
         }
     }
@@ -1277,7 +1314,7 @@ ApplicationWindow {
     onClosing: {
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != undefined && daemonManager.running(persistentSettings.testnet)) {
+        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
             close.accepted = false;
 
             // Show confirmation dialog

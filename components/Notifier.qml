@@ -75,6 +75,7 @@ Item {
     }
 
     function show(message) {
+        item.visible = true
         item.message = message
         item.active = true
         hider.running = true

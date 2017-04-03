@@ -29,6 +29,7 @@
 
 import QtQml 2.0
 import QtQuick 2.2
+import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
@@ -41,11 +42,13 @@ Rectangle {
 
     property Item currentView
     property Item previousView
-    property bool basicMode : false
+    property bool basicMode : isMobile
     property string balanceLabelText: qsTr("Balance") + translationManager.emptyString
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
+    property int minHeight: 800
+//    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
@@ -73,7 +76,6 @@ Rectangle {
         previousView = currentView
         if (currentView) {
             stackView.replace(currentView)
-
             // Component.onCompleted is called before wallet is initilized
             if (typeof currentView.onPageCompleted === "function") {
                 currentView.onPageCompleted();
@@ -126,27 +128,35 @@ Rectangle {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
                 PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
+                PropertyChanges { target: mainFlickable; contentHeight: 1000 }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
+               PropertyChanges { target: mainFlickable; contentHeight: minHeight }
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
+               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }, State {
                 name: "AddressBook"
                 PropertyChanges {  target: root; currentView: addressBookView  }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight }
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
+               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }
         ]
 
@@ -172,136 +182,46 @@ Rectangle {
         anchors.topMargin: appWindow.persistentSettings.customDecorations ? 30 : 0
         spacing: 0
 
-
-        // BasicPanel header
-        Rectangle {
-            id: header
-            anchors.leftMargin: 1
-            anchors.rightMargin: 1
-            Layout.fillWidth: true
-            Layout.preferredHeight: 64
-            color: "#FFFFFF"
-            visible: basicMode
-
-            Image {
-                id: logo
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.verticalCenterOffset: -5
-                anchors.left: parent.left
-                anchors.leftMargin: appWindow.persistentSettings.customDecorations ? 20 : 40
-                source: "images/moneroLogo2.png"
-            }
-
-            Grid {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.topMargin: 10
-                width: 256
-                columns: 3
-
-                Text {
-                    id: balanceLabel
-                    width: 116
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#535353"
-                    text: root.balanceLabelText + ":"
-                }
-
-                Text {
-                    id: balanceText
-                    width: 110
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#000000"
-                    text: root.balanceText
-                }
-
-                Item {
-                    height: 20
-                    width: 20
-
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        source: "images/lockIcon.png"
-                    }
-                }
-
-                Text {
-                    id: availableBalanceLabel
-                    width: 116
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#535353"
-                    text: root.unlockedBalanceLabelText + ":"
-                }
-
-                Text {
-                    id: availableBalanceText
-                    width: 110
-                    height: 20
-                    font.family: "Arial"
-                    font.pixelSize: 14
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignBottom
-                    color: "#000000"
-                    text: root.unlockedBalanceText
-                }
-            }
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: 1
-                color: "#DBDBDB"
-            }
-        }
-
-        // Views container
-        StackView {
-            id: stackView
-            initialItem: transferView
-            anchors.topMargin: 30
+        Flickable {
+            id: mainFlickable
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.margins: 4
-            clip: true // otherwise animation will affect left panel
+            clip: true
+            ScrollIndicator.vertical: ScrollIndicator { }
+            ScrollBar.vertical: ScrollBar { }       // uncomment to test
 
-            delegate: StackViewDelegate {
-                pushTransition: StackViewTransition {
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: 0 - target.width
-                        to: 0
-                        duration: 300
-                    }
-                    PropertyAnimation {
-                        target: exitItem
-                        property: "x"
-                        from: 0
-                        to: target.width
-                        duration: 300
+            // Views container
+            StackView {
+                id: stackView
+                initialItem: transferView
+    //            anchors.topMargin: 30
+    //                Layout.fillWidth: true
+    //                Layout.fillHeight: true
+                anchors.fill:parent
+    //            anchors.margins: 4
+                clip: true // otherwise animation will affect left panel
+
+                delegate: StackViewDelegate {
+                    pushTransition: StackViewTransition {
+                        PropertyAnimation {
+                            target: enterItem
+                            property: "x"
+                            from: 0 - target.width
+                            to: 0
+                            duration: 300
+                        }
+                        PropertyAnimation {
+                            target: exitItem
+                            property: "x"
+                            from: 0
+                            to: target.width
+                            duration: 300
+                        }
                     }
                 }
             }
-        }
+
+        }// flickable
     }
     // border
     Rectangle {

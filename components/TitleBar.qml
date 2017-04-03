@@ -58,14 +58,15 @@ Rectangle {
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  basicMouseArea.containsMouse || checked ? "#FFE00A" : "#000000"
+        color:  basicMouseArea.containsMouse || !leftPanel.visible ? "#FFE00A" : "#000000"
         height: 30
         width: height
+        visible: isMobile
 
         Image {
             anchors.centerIn: parent
-            rotation: parent.checked ? 180 : 0
-            source: parent.customDecorations || parent.checked ? "../images/goToBasicVersionHovered.png" :
+            rotation: !leftPanel.visible ? 180 : 0
+            source: parent.customDecorations || !leftPanel.visible ? "../images/goToBasicVersionHovered.png" :
                                                              "../images/gotoBasicVersion.png"
         }
 
@@ -75,7 +76,7 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 parent.checked = !parent.checked
-                titleBar.goToBasicVersion(parent.checked)
+                titleBar.goToBasicVersion(leftPanel.visible)
             }
         }
     }

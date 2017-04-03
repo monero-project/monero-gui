@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 
 Item {
     id: item
@@ -35,6 +36,7 @@ Item {
     property alias textFormat: label.textFormat
     property string tipText: ""
     property int fontSize: 12
+    property alias wrapMode: label.wrapMode
     signal linkActivated()
     width: icon.x + icon.width
     height: icon.height
@@ -59,23 +61,23 @@ Item {
         visible: appWindow.whatIsEnable
     }
 
-    MouseArea {
-        anchors.fill: icon
-        enabled: appWindow.whatIsEnable
-        hoverEnabled: true
-        onEntered: {
-            icon.visible = false
-            var pos = appWindow.mapFromItem(icon, 0, -15)
-            tipItem.text = item.tipText
-            tipItem.x = pos.x
-            if(tipItem.height > 30)
-                pos.y -= tipItem.height - 28
-            tipItem.y = pos.y
-            tipItem.visible = true
-        }
-        onExited: {
-            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
-            tipItem.visible = false
-        }
-    }
+//    MouseArea {
+//        anchors.fill: icon
+//        enabled: appWindow.whatIsEnable
+//        hoverEnabled: true
+//        onEntered: {
+//            icon.visible = false
+//            var pos = appWindow.mapFromItem(icon, 0, -15)
+//            tipItem.text = item.tipText
+//            tipItem.x = pos.x
+//            if(tipItem.height > 30)
+//                pos.y -= tipItem.height - 28
+//            tipItem.y = pos.y
+//            tipItem.visible = true
+//        }
+//        onExited: {
+//            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
+//            tipItem.visible = false
+//        }
+//    }
 }
