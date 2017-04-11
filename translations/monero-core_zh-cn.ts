@@ -1950,7 +1950,7 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <source>Restore height</source>
-        <translation type="vanished">回复区块高度</translation>
+        <translation type="vanished">恢复区块高度</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="133"/>
@@ -1960,12 +1960,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="152"/>
         <source>Restore from seed</source>
-        <translation>从种子码(seed)回复</translation>
+        <translation>从种子码(seed)恢复</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="166"/>
         <source>Restore from keys</source>
-        <translation>从密钥回复</translation>
+        <translation>从密钥恢复</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="203"/>
@@ -1985,7 +1985,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="232"/>
         <source>Restore height (optional)</source>
-        <translation>回复特定区块高度 (可选)</translation>
+        <translation>恢复特定区块高度 (可选)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2012,7 +2012,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>这种子码是&lt;b&gt;非常重要&lt;/b&gt;必须要抄写下来并妥善保管的信息，这是你回复钱包时所需要的所有信息。</translation>
+        <translation>这种子码是&lt;b&gt;非常重要&lt;/b&gt;必须要抄写下来并妥善保管的信息，这是你恢复钱包时所需要的所有信息。</translation>
     </message>
 </context>
 <context>
@@ -2035,7 +2035,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>从密钥或种子码回复钱包</translation>
+        <translation>从密钥或种子码恢复钱包</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="241"/>
@@ -2053,7 +2053,7 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <source>I want to recover my account from my 25 word seed</source>
-        <translation type="vanished">我想要从一组25字种子码回复我的账户</translation>
+        <translation type="vanished">我想要从一组25字种子码恢复我的账户</translation>
     </message>
     <message>
         <source>I want to open a wallet from file</source>
@@ -2077,12 +2077,12 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation type="vanished">您的钱包已被成功回复，请为它设定一组密码</translation>
+        <translation type="vanished">您的钱包已被成功恢复，请为它设定一组密码</translation>
     </message>
     <message>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation type="vanished">请注意:这个密码无法被回复，如果忘记了这组密码，您将需要用刚刚获得的辅助记忆种子码重新回复您的钱包&lt;br/&gt;&lt;br/&gt;
+        <translation type="vanished">请注意:这个密码无法被恢复，如果忘记了这组密码，您将需要用刚刚获得的辅助记忆种子码重新恢复您的钱包&lt;br/&gt;&lt;br/&gt;
                         密码将会用来保护您的钱包或确认重要的动作，所以请确认您的密码强度足够安全。</translation>
     </message>
     <message>
@@ -2103,13 +2103,13 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>注意: 这个密码无法被回复，如果您忘记了这个密码，则必须使用25字种子码回复您的钱包。&lt;br/&gt;&lt;br/&gt;
+        <translation>注意: 这个密码无法被恢复，如果您忘记了这个密码，则必须使用25字种子码恢复您的钱包。&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;请输入足够强度的密码&lt;/b&gt; (使用字母, 数字或可搭配符号):</translation>
     </message>
     <message>
         <source>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation type="vanished">注意: 这个密码无法被回复，如果您忘记了这个密码，则必须使用25字种子码回复您的钱包。&lt;br/&gt;&lt;br/&gt;
+        <translation type="vanished">注意: 这个密码无法被恢复，如果您忘记了这个密码，则必须使用25字种子码恢复您的钱包。&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;请输入足够强度的密码&lt;/b&gt; (使用字母, 数字或可搭配符号):</translation>
     </message>
 </context>
@@ -2130,7 +2130,7 @@ Please upgrade or connect to another daemon</source>
     <name>WizardRecoveryWallet</name>
     <message>
         <source>We&apos;re ready to recover your account</source>
-        <translation type="vanished">已准备好回复您的钱包</translation>
+        <translation type="vanished">已准备好恢复您的钱包</translation>
     </message>
     <message>
         <source>Please enter your 25 word private key</source>
@@ -2139,7 +2139,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="112"/>
         <source>Restore wallet</source>
-        <translation>回复钱包</translation>
+        <translation>恢复钱包</translation>
     </message>
 </context>
 <context>
