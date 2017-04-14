@@ -199,10 +199,10 @@ Rectangle {
       ListModel {
            id: priorityModelV5
 
-           ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: 1}
-           ListElement { column1: qsTr("Default (x4 fee)") ; column2: ""; priority: 2 }
-           ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: 3 }
-           ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: 4 }
+           ListElement { column1: qsTr("Low (x0.25 fee)") ; column2: ""; priority: 1}
+           ListElement { column1: qsTr("Default (x1 fee)") ; column2: ""; priority: 2 }
+           ListElement { column1: qsTr("Medium (x5 fee)") ; column2: ""; priority: 3 }
+           ListElement { column1: qsTr("High (x41.5 fee)")  ; column2: "";  priority: 4 }
 
        }
 
