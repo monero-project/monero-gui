@@ -545,27 +545,27 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Mining mit deinem Computer hilft dabei, das Monero Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger wird es das Netzwerk anzugreifen, und jeder noch so kleine Teil ist hierbei von Bedeutung..&lt;br&gt; &lt;br&gt;Mit dem Mining hast du zusätzlich die Chance Moneros zu verdienen. Dein Computer kreiert bei der Suche nach den Lösungen für die Blöcke Hashes und findest du eine Lösung, bekommst du die damit assoziierte Belohnung. Viel Glück! </translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
         <source>CPU threads</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU Threads</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="104"/>
         <source>(optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>(optional)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="118"/>
         <source>Background mining (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Hintergrund minen (experimentell)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="134"/>
         <source>Enable mining when running on battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Mining im Batteriemodus</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="144"/>
@@ -615,7 +615,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="210"/>
         <source>Status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
 </context>
 <context>
@@ -633,7 +633,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="53"/>
         <source>Synchronizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronisation</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="57"/>
@@ -661,17 +661,17 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="70"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation type="unfinished">Bitte gebe dein Wallet Passwort ein:&lt;br&gt;</translation>
+        <translation>Bitte gebe dein Wallet Passwort ein:&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="147"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="162"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -691,17 +691,17 @@
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="100"/>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig</translation>
     </message>
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="109"/>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittel</translation>
     </message>
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="118"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
 </context>
 <context>
@@ -718,12 +718,12 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="57"/>
         <source>Blocks remaining: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbleibende Blöcke: %1</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="100"/>
         <source>Synchronizing blocks</source>
-        <translation type="unfinished">Synchronisiere Blöcke</translation>
+        <translation>Synchronisiere Blöcke</translation>
     </message>
 </context>
 <context>
@@ -736,7 +736,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="107"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">WARNUNG: Keine Verbindung zum Deamon</translation>
+        <translation>WARNUNG: Keine Verbindung zum Deamon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="129"/>
