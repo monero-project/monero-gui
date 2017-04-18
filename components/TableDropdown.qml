@@ -180,7 +180,7 @@ Item {
 
                     // Workaround for translations in listElements. All translated strings needs to be listed in this file.
                     property string stringCopy: qsTr("<b>Copy address to clipboard</b>") + translationManager.emptyString
-                    property string stringSend: qsTr("<b>Send to same destination</b>") + translationManager.emptyString
+                    property string stringSend: qsTr("<b>Send to this address</b>") + translationManager.emptyString
                     property string stringFind: qsTr("<b>Find similar transactions</b>") + translationManager.emptyString
                     property string stringRemove: qsTr("<b>Remove from address book</b>") + translationManager.emptyString
 
