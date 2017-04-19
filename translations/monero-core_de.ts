@@ -535,7 +535,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
-        <translation>Solo mining</translation>
+        <translation>Solo Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
@@ -570,47 +570,47 @@
     <message>
         <location filename="../pages/Mining.qml" line="144"/>
         <source>Manage miner</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwalte Miner</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
         <source>Start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="163"/>
         <source>Error starting mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Starten des Miningvorgangs</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Miningvorgang konnte nicht gestartet werden.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="166"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Minen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="178"/>
         <source>Stop mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Beende Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="194"/>
         <source>Status: not mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Status: Nicht am minen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="205"/>
         <source>Mining at %1 H/s</source>
-        <translation type="unfinished"></translation>
+        <translation>Minen mit %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
         <source>Not mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht am minen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="210"/>
@@ -713,7 +713,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="43"/>
         <source>Establishing connection...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung wird aufgebaut...</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="57"/>
@@ -746,37 +746,37 @@
     <message>
         <location filename="../pages/Receive.qml" line="136"/>
         <source>%2 confirmations: %3 (%1)</source>
-        <translation type="unfinished">%2 Bestätigungen: %3 (%1)</translation>
+        <translation>%2 Bestätigungen: %3 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
         <source>1 confirmation: %2 (%1)</source>
-        <translation type="unfinished">1 Bestätigung %2 (%1)</translation>
+        <translation>1 Bestätigung %2 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="146"/>
         <source>No transaction found yet...</source>
-        <translation type="unfinished">Noch keine Transaktion gefunden</translation>
+        <translation>Noch keine Transaktion gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="150"/>
         <source>Transaction found</source>
-        <translation type="unfinished"></translation>
+        <translation>Transaktion gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="150"/>
         <source>%1 transactions found</source>
-        <translation type="unfinished">%1 Transaktionen gefunden</translation>
+        <translation>%1 Transaktionen gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="156"/>
         <source> with more money (%1)</source>
-        <translation type="unfinished">mit mehr Geld (%1)</translation>
+        <translation>mit mehr Geld (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
         <source> with not enough money (%1)</source>
-        <translation type="unfinished">ohne genug Geld (%1)</translation>
+        <translation>nicht ausreichend Geld (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="190"/>
@@ -786,17 +786,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="197"/>
         <source>ReadOnly wallet address displayed here</source>
-        <translation type="unfinished">Schreibgeschütztes Wallet wird hier angezeigt</translation>
+        <translation>Schreibgeschützte Wallet wird hier angezeigt</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="227"/>
         <source>16 hexadecimal characters</source>
-        <translation type="unfinished"></translation>
+        <translation>16 Hexadezimale Zeichen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="263"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="273"/>
@@ -806,7 +806,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="282"/>
         <source>Generate payment ID for integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle Zahlungs-ID für die integrierte Adresse</translation>
     </message>
     <message>
         <source>ReadOnly wallet integrated address displayed here</source>
@@ -815,17 +815,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="385"/>
         <source>Save QrCode</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere QR-Code</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="386"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Speichern des QR-Codes nach</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="397"/>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern unter</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="219"/>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="314"/>
         <source>Amount to receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu erhaltender Betrag</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="335"/>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="340"/>
         <source>Tracking payments</source>
-        <translation type="unfinished">Zahlungen tracken</translation>
+        <translation>Zahlungen nachverfolgen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="251"/>
         <source>Generate</source>
-        <translation>Generieren</translation>
+        <translation>Erzeugen</translation>
     </message>
 </context>
 <context>
@@ -912,12 +912,12 @@
     <message>
         <location filename="../pages/Settings.qml" line="424"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="425"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Falsches Passwort</translation>
+        <translation>Falsches Passwort</translation>
     </message>
     <message>
         <source>Mnemonic seed: </source>
@@ -954,22 +954,22 @@
     <message>
         <location filename="../pages/Settings.qml" line="102"/>
         <source>Create view only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eine </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="132"/>
         <source>Manage daemon</source>
-        <translation type="unfinished">Daemon verwalten</translation>
+        <translation>Daemon verwalten</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="152"/>
         <source>Start daemon</source>
-        <translation type="unfinished">Starte den Deamon</translation>
+        <translation>Starte den Daemon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="166"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Stoppe den Deamon</translation>
+        <translation>Beende den Daemon</translation>
     </message>
     <message>
         <source>Show log</source>
@@ -983,27 +983,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="207"/>
         <source>(optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>(optional)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="249"/>
         <source>Login (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>Login (optional)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="258"/>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="267"/>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="302"/>
         <source>Layout settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout Einstellungen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="319"/>
@@ -1013,32 +1013,32 @@
     <message>
         <location filename="../pages/Settings.qml" line="330"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>Detailgrad des Berichts</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="356"/>
         <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
-        <translation type="unfinished"></translation>
+        <translation>(z.B. *:WARNING,net.p2p:DEBUG)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="388"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>GUI Version:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="395"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Eingebettete Monero Version:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="405"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Deamon Bericht</translation>
+        <translation>Deamon Bericht</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="416"/>
@@ -1053,7 +1053,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="179"/>
         <source>Show status</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Status</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="239"/>
@@ -1108,29 +1108,29 @@
         <location filename="../pages/Sign.qml" line="167"/>
         <location filename="../pages/Sign.qml" line="242"/>
         <source>Sign</source>
-        <translation type="unfinished"></translation>
+        <translation>Signieren</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="195"/>
         <source>Please choose a file to sign</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wähle eine zu signierende Datei aus</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="208"/>
         <location filename="../pages/Sign.qml" line="393"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswählen</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="352"/>
         <location filename="../pages/Sign.qml" line="426"/>
         <source>Verify</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifizieren</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="380"/>
         <source>Please choose a file to verify</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wähle eine zu verifizierende Datei aus</translation>
     </message>
     <message>
         <source>SIGN</source>
@@ -1202,32 +1202,32 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="197"/>
         <source>Low (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig (x1 Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="198"/>
         <source>Medium (x20 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittel (x20 Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="199"/>
         <source>High (x166 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch (x166 Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation>Erhalten</translation>
     </message>
 </context>
 <context>
@@ -1235,7 +1235,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kopiere Adresse in die Zwischenablage&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
