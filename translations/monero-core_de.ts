@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="72"/>
         <source>QRCODE</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="94"/>
@@ -140,12 +140,12 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="108"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../components/DaemonConsole.qml" line="119"/>
         <source>command + enter (e.g help)</source>
-        <translation type="unfinished"></translation>
+        <translation>Steuerung + Eingabe (z.B. Hilfe)</translation>
     </message>
 </context>
 <context>
@@ -165,17 +165,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="84"/>
         <source>Starting Monero daemon in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Monero Daemon in %1 Sekunden</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="106"/>
         <source>Start daemon (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Daemon (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="123"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende benutzerdefinierte Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -259,7 +259,7 @@
     <message>
         <location filename="../pages/History.qml" line="273"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Incremental search</source>
@@ -305,7 +305,7 @@
     <message>
         <location filename="../pages/History.qml" line="329"/>
         <source>Type of transaction</source>
-        <translation>Art</translation>
+        <translation>Art der Transaktion</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="364"/>
@@ -741,7 +741,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="129"/>
         <source>in the txpool: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>im Tx-Pool: %1</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="136"/>
@@ -954,7 +954,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="102"/>
         <source>Create view only wallet</source>
-        <translation type="unfinished">Eine </translation>
+        <translation>Eine "view only" Wallet erstellen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="132"/>
