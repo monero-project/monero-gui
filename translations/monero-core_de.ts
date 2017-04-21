@@ -359,7 +359,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
         <source>(%1/10 confirmations)</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1/10 Bestätigungen)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="270"/>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch dennoch die Gefahr, dass dies nicht geschieht, weswegen du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="251"/>
@@ -1008,7 +1008,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="319"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerdefinierte Gestaltung</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="330"/>
@@ -1043,7 +1043,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="416"/>
         <source>Wallet mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mnemonischer Code der Wallet</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="230"/>
@@ -1342,7 +1342,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="66"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenAlias Fehler</translation>
     </message>
     <message>
         <source>LOW (x1 fee)</source>
@@ -1364,57 +1364,57 @@
     <message>
         <location filename="../pages/Transfer.qml" line="78"/>
         <source>Privacy level (ringsize %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertraulichkeitsstufe (Ringgröße %1)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="193"/>
         <source>Low (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig (x1 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="194"/>
         <source>Medium (x20 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittel (x20 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
         <source>High (x166 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch (x166 Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="223"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;Adresse &lt;font size=&apos;2&apos;&gt;  ( Füge ein oder wähle aus dem &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="241"/>
         <source>QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="271"/>
         <source>Resolve</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflösen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="289"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine gültige Adresse unter dieser OpenAlias Adresse gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="294"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse gefunden, aber die DNSSEC Signaturen konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="296"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine gültige Adresse unter dieser OpenAlias Adresse gefunden und die DNSSEC konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="299"/>
@@ -1435,7 +1435,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="357"/>
         <source>Saved to local wallet history</source>
-        <translation type="unfinished"></translation>
+        <translation>Wird in die lokale Wallet Historie gespeichert</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="387"/>
@@ -1450,7 +1450,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="491"/>
         <source>Sweep Unmixable</source>
-        <translation type="unfinished"></translation>
+        <translation>Sweep unvermischbar</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="505"/>
@@ -1460,7 +1460,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
         <source>Rescan spent</source>
-        <translation type="unfinished"></translation>
+        <translation>Erneuter Scan der Ausgaben</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="565"/>
@@ -1483,7 +1483,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="572"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgaben erfolgreich erneut gescannt</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="589"/>
@@ -1666,7 +1666,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn eine Zahlung aus verschiedenen Transaktionen bestand, muss jede überprüft werden und die Ergebnisse kombiniert werden. </translation>
     </message>
     <message>
         <source>CHECK</source>
@@ -1720,7 +1720,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle eine Nur-Lese Wallet</translation>
     </message>
 </context>
 <context>
@@ -1809,7 +1809,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
         <source>Backup seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mnemonischer Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
@@ -1834,12 +1834,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="78"/>
         <source>New wallet details:</source>
-        <translation>Neue Wallet Details:</translation>
+        <translation>Details der neuen Wallet:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergiss nicht, den mnemonischen Code aufzuschreiben. Du kannst ihn unter dem Menüpunkt Einstellungen einsehen.</translation>
     </message>
     <message>
         <source>An overview of your Monero configuration is below:</source>
@@ -1886,7 +1886,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardMain.qml" line="378"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Nur-Lese Wallet wurde erstellt. Du kannst sie öffnen, indem du aktuelle Wallet schließt, auf &quot;Öffne Wallet aus einer Datei&quot; klickst und die Nur-Lese Wallet in auswählst:%1</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
@@ -1921,12 +1921,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="152"/>
         <source>Restore from seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit dem mnemonischen Code wiederherstellen  </translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="166"/>
         <source>Restore from keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit den Schlüsseln wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="203"/>
@@ -1936,12 +1936,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="211"/>
         <source>View key (private)</source>
-        <translation type="unfinished"></translation>
+        <translation>Betrachtungs-Schlüssel (Privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="220"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe-Schlüssel (Privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="232"/>
@@ -1972,12 +1972,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gib deinen aus 25 Wörtern bestehenden mnemonischen Code ein</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was du brauchst, um deine Wallet zu sichern und wiederherzustellen.</translation>
     </message>
 </context>
 <context>
@@ -2000,7 +2000,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Stelle Wallet mit den Keys oder dem Mnemonic Code wieder her</translation>
+        <translation>Stelle Wallet mit den Keys oder dem mnemonischen Code wieder her</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="241"/>
@@ -2068,8 +2068,8 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf Deine Geldbörse (Wallet) bekommen, indem du den&lt;br/&gt;&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt die Geldbörse (Wallet) und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
+        <translation>Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf deine Wallet bekommen, indem du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt die Wallet und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
     </message>
 </context>
 <context>
