@@ -848,8 +848,8 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="335"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                           Tracking &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt; Tracking &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt; Tracking &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="340"/>
@@ -1181,7 +1181,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="444"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Paste in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signierende Adresse &lt;font size=&apos;2&apos;&gt;  ( Füge ein oder wähle aus dem &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -1359,7 +1359,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="44"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Starte Daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="78"/>
@@ -1414,7 +1414,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="296"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">Keine gültige Adresse unter dieser OpenAlias Adresse gefunden und die DNSSEC konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
+        <translation>Keine gültige Adresse unter dieser OpenAlias Adresse gefunden und die DNSSEC Signaturen konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="299"/>
@@ -1977,7 +1977,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished">Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was du brauchst, um deine Wallet zu sichern und wiederherzustellen.</translation>
+        <translation>Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was du brauchst, um deine Wallet zu sichern und wiederherzustellen.</translation>
     </message>
 </context>
 <context>
