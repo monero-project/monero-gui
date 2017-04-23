@@ -1263,7 +1263,7 @@ ApplicationWindow {
                     // reset width
                     width = undefined
                     // expand if content is wide
-                    width = (contentWidth > 150) ? 200 : contentWidth
+                    width = (contentWidth > 200) ? 200 : contentWidth
                 }
             }
         }
