@@ -92,7 +92,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: height
-            color: containsMouse ? "#6B0072" : "#000000"
+            color: containsMouse || appWindow.whatIsEnable ? "#6B0072" : "#000000"
 
             Image {
                 anchors.centerIn: parent
@@ -103,6 +103,8 @@ Rectangle {
                 id: whatIsArea
                 anchors.fill: parent
                 onClicked: {
+
+                    appWindow.whatIsEnable = !appWindow.whatIsEnable
 
                 }
             }

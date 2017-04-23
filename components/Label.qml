@@ -56,26 +56,27 @@ Item {
         anchors.left: label.right
         anchors.leftMargin: 5
         source: "../images/whatIsIcon.png"
-        visible: appWindow.whatIsEnable
+        visible: appWindow.whatIsEnable && item.tipText != ""
     }
 
     MouseArea {
         anchors.fill: icon
-        enabled: appWindow.whatIsEnable
+        enabled: appWindow.whatIsEnable && icon.visible
         hoverEnabled: true
         onEntered: {
-            icon.visible = false
-            var pos = appWindow.mapFromItem(icon, 0, -15)
-            tipItem.text = item.tipText
-            tipItem.x = pos.x
-            if(tipItem.height > 30)
-                pos.y -= tipItem.height - 28
-            tipItem.y = pos.y
-            tipItem.visible = true
+            var pos = rootItem.mapFromItem(icon, 20, -35)
+            appWindow.toolTip.text = item.tipText
+            appWindow.toolTip.x = pos.x - appWindow.toolTip.width/2
+            appWindow.toolTip.tipX = appWindow.toolTip.width/2 - 10;
+            if(appWindow.toolTip.height > 30)
+                pos.y -= appWindow.toolTip.height - 30
+            appWindow.toolTip.y = pos.y
+            appWindow.toolTip.visible = true
+            appWindow.toolTip.z = 3
+
         }
         onExited: {
-            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
-            tipItem.visible = false
+            appWindow.toolTip.visible = false
         }
     }
 }

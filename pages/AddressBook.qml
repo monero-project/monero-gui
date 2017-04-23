@@ -60,7 +60,7 @@ Rectangle {
         anchors.topMargin: 17
         text: qsTr("Address") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
+        tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
     }
 
     StandardButton {
@@ -101,9 +101,8 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
+        tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
-                + translationManager.emptyString
     }
 
     LineEdit {
@@ -124,8 +123,8 @@ Rectangle {
         anchors.leftMargin: 17
         anchors.topMargin: 17
         text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
+        tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip test test</b><br/><br/>test line 2") + translationManager.emptyString
     }
 
     LineEdit {
