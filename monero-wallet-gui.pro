@@ -279,6 +279,7 @@ macx {
 
 # translation stuff
 TRANSLATIONS =  \ # English is default language, no explicit translation file
+                $$PWD/translations/monero-core.ts \ # translation source (copy this file when creating a new translation)
                 $$PWD/translations/monero-core_ar.ts \ # Arabic
                 $$PWD/translations/monero-core_pt-br.ts \ # Portuguese (Brazil)
                 $$PWD/translations/monero-core_de.ts \ # German

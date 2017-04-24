@@ -125,12 +125,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../BasicPanel.qml" line="134"/>
+        <location filename="../BasicPanel.qml" line="133"/>
         <source>Available Balance:</source>
         <translation>使用可能な残高:</translation>
     </message>
     <message>
-        <location filename="../BasicPanel.qml" line="147"/>
+        <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1043,8 +1043,12 @@
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="275"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Save</source>
-        <translation>保存</translation>
+        <translation type="vanished">保存</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="302"/>
@@ -1360,53 +1364,53 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="470"/>
+        <location filename="../pages/Transfer.qml" line="480"/>
         <source>Transaction cost</source>
         <translation>取引のコスト</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="289"/>
+        <location filename="../pages/Transfer.qml" line="299"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりません</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">すべて</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="294"/>
+        <location filename="../pages/Transfer.qml" line="304"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="296"/>
+        <location filename="../pages/Transfer.qml" line="306"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりませんでしたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="299"/>
-        <location filename="../pages/Transfer.qml" line="302"/>
+        <location filename="../pages/Transfer.qml" line="309"/>
+        <location filename="../pages/Transfer.qml" line="312"/>
         <source>Internal error</source>
         <translation>内部エラー</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="305"/>
+        <location filename="../pages/Transfer.qml" line="315"/>
         <source>No address found</source>
         <translation>アドレスが見つかりません</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="332"/>
+        <location filename="../pages/Transfer.qml" line="342"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16文字または64文字の16進数の文字列</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="345"/>
+        <location filename="../pages/Transfer.qml" line="355"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>説明 &lt;font size=&apos;2&apos;&gt;( オプショナル )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="357"/>
+        <location filename="../pages/Transfer.qml" line="367"/>
         <source>Saved to local wallet history</source>
         <translation>ローカル上の履歴に保存されます</translation>
     </message>
@@ -1426,182 +1430,190 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="193"/>
+        <location filename="../pages/Transfer.qml" line="202"/>
         <source>Low (x1 fee)</source>
         <translation>低 (標準の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="194"/>
+        <location filename="../pages/Transfer.qml" line="204"/>
         <source>Medium (x20 fee)</source>
         <translation>中 (20倍の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
+        <location filename="../pages/Transfer.qml" line="205"/>
         <source>High (x166 fee)</source>
         <translation>高 (166倍の手数料)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="223"/>
+        <location filename="../pages/Transfer.qml" line="203"/>
+        <source>Default (x4 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="233"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      アドレス &lt;font size=&apos;2&apos;&gt;  ( 貼り付けるか、&lt;/font&gt; &lt;a href=&apos;#&apos;&gt;アドレス帳&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;から選択 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="241"/>
+        <location filename="../pages/Transfer.qml" line="251"/>
         <source>QR Code</source>
         <translation>QRコード</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="271"/>
+        <location filename="../pages/Transfer.qml" line="281"/>
         <source>Resolve</source>
         <translation>名前解決</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="387"/>
+        <location filename="../pages/Transfer.qml" line="397"/>
         <source>Send</source>
         <translation>送金</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="442"/>
+        <location filename="../pages/Transfer.qml" line="452"/>
         <source>Show advanced options</source>
         <translation>高度な設定を表示</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="491"/>
+        <location filename="../pages/Transfer.qml" line="501"/>
         <source>Sweep Unmixable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="505"/>
+        <location filename="../pages/Transfer.qml" line="515"/>
         <source>create tx file</source>
         <translation>取引ファイルを生成</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="527"/>
+        <location filename="../pages/Transfer.qml" line="537"/>
         <source>Sign tx file</source>
         <translation>取引ファイルに署名</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="541"/>
+        <location filename="../pages/Transfer.qml" line="551"/>
         <source>Submit tx file</source>
         <translation>取引ファイルを送信</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="556"/>
+        <location filename="../pages/Transfer.qml" line="566"/>
         <source>Rescan spent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="565"/>
-        <location filename="../pages/Transfer.qml" line="600"/>
-        <location filename="../pages/Transfer.qml" line="656"/>
+        <location filename="../pages/Transfer.qml" line="575"/>
+        <location filename="../pages/Transfer.qml" line="610"/>
+        <location filename="../pages/Transfer.qml" line="666"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="566"/>
+        <location filename="../pages/Transfer.qml" line="576"/>
         <source>Error: </source>
         <translation>エラー: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="571"/>
-        <location filename="../pages/Transfer.qml" line="662"/>
+        <location filename="../pages/Transfer.qml" line="581"/>
+        <location filename="../pages/Transfer.qml" line="672"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="572"/>
+        <location filename="../pages/Transfer.qml" line="582"/>
         <source>Sucessfully rescanned spent outputs</source>
         <translation>使用済みアウトプットの再スキャンを完了しました</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
-        <location filename="../pages/Transfer.qml" line="650"/>
+        <location filename="../pages/Transfer.qml" line="599"/>
+        <location filename="../pages/Transfer.qml" line="660"/>
         <source>Please choose a file</source>
         <translation>ファイルを選択してください</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="601"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>未署名の取引を読み込めませんでした</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="608"/>
+        <location filename="../pages/Transfer.qml" line="618"/>
         <source>
 Number of transactions: </source>
         <translation>
 取引の数: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="610"/>
+        <location filename="../pages/Transfer.qml" line="620"/>
         <source>
 Transaction #%1</source>
         <translation>
 取引 #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="611"/>
+        <location filename="../pages/Transfer.qml" line="621"/>
         <source>
 Recipient: </source>
         <translation>
 受取人: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="612"/>
+        <location filename="../pages/Transfer.qml" line="622"/>
         <source>
 payment ID: </source>
         <translation>
 ペイメントID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="613"/>
+        <location filename="../pages/Transfer.qml" line="623"/>
         <source>
 Amount: </source>
         <translation>
 金額: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="614"/>
+        <location filename="../pages/Transfer.qml" line="624"/>
         <source>
 Fee: </source>
         <translation>
 手数料: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="615"/>
+        <location filename="../pages/Transfer.qml" line="625"/>
         <source>
 Ringsize: </source>
         <translation>
 リングサイズ: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="629"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="657"/>
+        <location filename="../pages/Transfer.qml" line="667"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>取引を送信できません</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="663"/>
+        <location filename="../pages/Transfer.qml" line="673"/>
         <source>Money sent successfully</source>
         <translation>送金に成功しました</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="710"/>
-        <location filename="../pages/Transfer.qml" line="722"/>
+        <location filename="../pages/Transfer.qml" line="733"/>
+        <location filename="../pages/Transfer.qml" line="745"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>ウォレットがデーモンに接続していません</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="725"/>
+        <location filename="../pages/Transfer.qml" line="748"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>接続しているデーモンにGUIとの互換性がありません。
 デーモンを更新するか、他のデーモンに接続してください。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="730"/>
+        <location filename="../pages/Transfer.qml" line="753"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>同期が終了するのを待っています</translation>
     </message>
@@ -1634,7 +1646,7 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    アドレス &lt;font size=&apos;2&apos;&gt;  (タイプするか、&lt;/font&gt; &lt;a href=&apos;#&apos;&gt;アドレス帳&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; から選択してください )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="320"/>
+        <location filename="../pages/Transfer.qml" line="330"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>ペイメントID &lt;font size=&apos;2&apos;&gt;( オプショナル )&lt;/font&gt;</translation>
     </message>
@@ -2192,19 +2204,19 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="314"/>
-        <location filename="../main.qml" line="479"/>
-        <location filename="../main.qml" line="540"/>
-        <location filename="../main.qml" line="551"/>
-        <location filename="../main.qml" line="593"/>
-        <location filename="../main.qml" line="654"/>
-        <location filename="../main.qml" line="692"/>
-        <location filename="../main.qml" line="722"/>
+        <location filename="../main.qml" line="317"/>
+        <location filename="../main.qml" line="482"/>
+        <location filename="../main.qml" line="544"/>
+        <location filename="../main.qml" line="556"/>
+        <location filename="../main.qml" line="598"/>
+        <location filename="../main.qml" line="659"/>
+        <location filename="../main.qml" line="697"/>
+        <location filename="../main.qml" line="727"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="315"/>
+        <location filename="../main.qml" line="318"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>ウォレットを開けませんでした: </translation>
     </message>
@@ -2213,80 +2225,80 @@ Please upgrade or connect to another daemon</source>
         <translation type="obsolete">ブロックを同期中 %1 / %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="541"/>
+        <location filename="../main.qml" line="545"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>金額が不正です: %1から%2の範囲内としてください</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="483"/>
-        <location filename="../main.qml" line="594"/>
+        <location filename="../main.qml" line="486"/>
+        <location filename="../main.qml" line="599"/>
         <source>Can&apos;t create transaction: </source>
         <translation>取引データを作成できません: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="346"/>
+        <location filename="../main.qml" line="349"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>ロック解除された残高 (~%1分)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="346"/>
+        <location filename="../main.qml" line="349"/>
         <source>Unlocked balance</source>
         <translation>ロック解除された残高</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="346"/>
+        <location filename="../main.qml" line="349"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>ロック解除された残高 (ブロックの待機中)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="398"/>
+        <location filename="../main.qml" line="401"/>
         <source>Waiting for daemon to start...</source>
         <translation>デーモンが開始するのを待っています...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="404"/>
+        <location filename="../main.qml" line="407"/>
         <source>Waiting for daemon to stop...</source>
         <translation>デーモンが停止するのを待っています...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="429"/>
+        <location filename="../main.qml" line="432"/>
         <source>Daemon failed to start</source>
         <translation>デーモンの起動に失敗しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="433"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>ウォレットとデーモンのログを参照してエラーを確認してください。手動で%1を起動することもできます。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="481"/>
+        <location filename="../main.qml" line="484"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>デーモンのバージョンが不正なため、取引を作成できません: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="491"/>
-        <location filename="../main.qml" line="492"/>
-        <location filename="../main.qml" line="602"/>
-        <location filename="../main.qml" line="603"/>
+        <location filename="../main.qml" line="494"/>
+        <location filename="../main.qml" line="495"/>
+        <location filename="../main.qml" line="607"/>
+        <location filename="../main.qml" line="608"/>
         <source>No unmixable outputs to sweep</source>
         <translation>スイープするミックス不能なアウトプットがありません</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="504"/>
-        <location filename="../main.qml" line="615"/>
+        <location filename="../main.qml" line="507"/>
+        <location filename="../main.qml" line="620"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="505"/>
-        <location filename="../main.qml" line="616"/>
+        <location filename="../main.qml" line="508"/>
+        <location filename="../main.qml" line="621"/>
         <source>Please confirm transaction:
 </source>
         <translation>取引内容を確認してください:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="508"/>
-        <location filename="../main.qml" line="617"/>
+        <location filename="../main.qml" line="511"/>
+        <location filename="../main.qml" line="622"/>
         <source>
 
 Amount: </source>
@@ -2295,7 +2307,7 @@ Amount: </source>
 金額: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="510"/>
+        <location filename="../main.qml" line="513"/>
         <source>
 
 Ringsize: </source>
@@ -2304,62 +2316,62 @@ Ringsize: </source>
 リングサイズ: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="664"/>
+        <location filename="../main.qml" line="669"/>
         <source>Transaction saved to file: %1</source>
         <translation>取引データをファイルに保存しました: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="664"/>
+        <location filename="../main.qml" line="669"/>
         <source>Money sent successfully: %1 transaction(s) </source>
         <translation>送金に成功しました: %1個の取引</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="704"/>
+        <location filename="../main.qml" line="709"/>
         <source>Payment check</source>
         <translation>支払いの検証</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="709"/>
+        <location filename="../main.qml" line="714"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>このアドレスは%1XMRを受け取りましたが、取引はまだ採掘されていません。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="714"/>
+        <location filename="../main.qml" line="719"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>このアドレスは%1XMRを受け取り、その取引は%2回承認されました。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="718"/>
+        <location filename="../main.qml" line="723"/>
         <source>This address received nothing</source>
         <translation>このアドレスはこの取引において何も受け取っていません。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="730"/>
+        <location filename="../main.qml" line="735"/>
         <source>Balance (syncing)</source>
         <translation>残高 (同期中)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="730"/>
+        <location filename="../main.qml" line="735"/>
         <source>Balance</source>
         <translation>残高</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1272"/>
+        <location filename="../main.qml" line="1284"/>
         <source>Daemon is running</source>
         <translation>デーモンが起動中です</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1273"/>
+        <location filename="../main.qml" line="1285"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>GUIを閉じた後もバックグラウンドでデーモンを起動し続けます。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1275"/>
+        <location filename="../main.qml" line="1287"/>
         <source>Stop daemon</source>
         <translation>デーモンを停止</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1310"/>
+        <location filename="../main.qml" line="1322"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>新しいバージョンのmonero-wallet-guiを入手できます: %1&lt;br&gt;%2</translation>
     </message>
@@ -2372,14 +2384,14 @@ Ringsize: </source>
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="506"/>
+        <location filename="../main.qml" line="509"/>
         <source>
 Address: </source>
         <translation>
 アドレス: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="507"/>
+        <location filename="../main.qml" line="510"/>
         <source>
 Payment ID: </source>
         <translation>
@@ -2392,22 +2404,22 @@ Amount: </source>
 金額: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="509"/>
-        <location filename="../main.qml" line="618"/>
+        <location filename="../main.qml" line="512"/>
+        <location filename="../main.qml" line="623"/>
         <source>
 Fee: </source>
         <translation>
 手数料: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="511"/>
+        <location filename="../main.qml" line="514"/>
         <source>
 Number of transactions: </source>
         <translation>
 取引の数: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="512"/>
+        <location filename="../main.qml" line="515"/>
         <source>
 
 Description: </source>
@@ -2416,17 +2428,17 @@ Description: </source>
 説明: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="552"/>
+        <location filename="../main.qml" line="557"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>残高不足です。ロック解除された残高: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="655"/>
+        <location filename="../main.qml" line="660"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>送金できませんでした</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="658"/>
+        <location filename="../main.qml" line="663"/>
         <source>Information</source>
         <translation>情報</translation>
     </message>
@@ -2435,12 +2447,12 @@ Description: </source>
         <translation type="vanished">送金に成功しました</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="936"/>
+        <location filename="../main.qml" line="953"/>
         <source>Please wait...</source>
         <translation>お待ちください...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="980"/>
+        <location filename="../main.qml" line="992"/>
         <source>Monero</source>
         <translation>モネロ</translation>
     </message>
@@ -2449,7 +2461,7 @@ Description: </source>
         <translation type="vanished">ウォレットを初期化しています...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="965"/>
+        <location filename="../main.qml" line="977"/>
         <source>Program setup wizard</source>
         <translation>プログラムセットアップウィザード</translation>
     </message>
@@ -2458,7 +2470,7 @@ Description: </source>
         <translation type="vanished">モネロ  -  寄付</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1021"/>
+        <location filename="../main.qml" line="1033"/>
         <source>send to the same destination</source>
         <translation>同じ宛先に送金する</translation>
     </message>

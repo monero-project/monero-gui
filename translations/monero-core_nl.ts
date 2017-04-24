@@ -2438,42 +2438,42 @@ Ringgrootte:</translation>
         <translation>Saldo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="941"/>
+        <location filename="../main.qml" line="953"/>
         <source>Please wait...</source>
         <translation>Even geduld alstublieft…</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="970"/>
+        <location filename="../main.qml" line="977"/>
         <source>Program setup wizard</source>
         <translation>Installatie-assistent</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="985"/>
+        <location filename="../main.qml" line="992"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1026"/>
+        <location filename="../main.qml" line="1033"/>
         <source>send to the same destination</source>
         <translation>naar hetzelfde adres verzenden</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1277"/>
+        <location filename="../main.qml" line="1284"/>
         <source>Daemon is running</source>
         <translation>Node is gestart</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1278"/>
+        <location filename="../main.qml" line="1285"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>Node zal nog steeds in de achtergrond blijven lopen als de GUI gesloten is.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1280"/>
+        <location filename="../main.qml" line="1287"/>
         <source>Stop daemon</source>
         <translation>Stop node</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1315"/>
+        <location filename="../main.qml" line="1322"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nieuwe monero-wallet-gu versiei is beschikbaar: %1&lt;br&gt;%2</translation>
     </message>
