@@ -295,6 +295,7 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_nl.ts \ # Dutch
                 $$PWD/translations/monero-core_pl.ts \ # Polish
                 $$PWD/translations/monero-core_ru.ts \ # Russian
+                $$PWD/translations/monero-core_sv.ts \ # Swedish
                 $$PWD/translations/monero-core_zh-cn.ts \ # Chinese (Simplified-China)
                 $$PWD/translations/monero-core_zh-tw.ts \ # Chinese (Traditional-Taiwan)
 
