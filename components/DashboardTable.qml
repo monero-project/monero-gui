@@ -216,7 +216,7 @@ ListView {
             id: dropModel
             ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
             ListElement { name: "<b>Add to address book</b>"; icon: "../images/dropdownAdd.png" }
-            ListElement { name: "<b>Send to same destination</b>"; icon: "../images/dropdownSend.png" }
+            ListElement { name: "<b>Send to this address</b>"; icon: "../images/dropdownSend.png" }
             ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
         }
 
