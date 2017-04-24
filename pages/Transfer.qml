@@ -512,7 +512,7 @@ Rectangle {
 
             StandardButton {
                 id: saveTxButton
-                text: qsTr("create tx file") + translationManager.emptyString
+                text: qsTr("Create tx file") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
