@@ -1423,7 +1423,7 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation>Membuat arsip transaksi</translation>
     </message>
     <message>
