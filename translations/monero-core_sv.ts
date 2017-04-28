@@ -1497,16 +1497,16 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
-        <translation>skapa tx-fil</translation>
+        <source>Create tx file</source>
+        <translation>Skapa tx-fil</translation>
     </message>
     <message>
-        <source>sign tx file</source>
-        <translation type="obsolete">signera tx-fil</translation>
+        <source>Sign tx file</source>
+        <translation type="obsolete">Signera tx-fil</translation>
     </message>
     <message>
-        <source>submit tx file</source>
-        <translation type="obsolete">sänd tx-fil</translation>
+        <source>Submit tx file</source>
+        <translation type="obsolete">Sänd tx-fil</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>

@@ -1419,15 +1419,15 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation>建立交易檔案(tx file)</translation>
     </message>
     <message>
-        <source>sign tx file</source>
+        <source>Sign tx file</source>
         <translation type="vanished">簽署交易檔案(tx file)</translation>
     </message>
     <message>
-        <source>submit tx file</source>
+        <source>Submit tx file</source>
         <translation type="vanished">提交交易檔案(tx file)</translation>
     </message>
     <message>
