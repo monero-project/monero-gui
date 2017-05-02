@@ -41,6 +41,10 @@ class Wallet : public QObject
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
     Q_PROPERTY(bool viewOnly READ viewOnly)
+    Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
+    Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
+    Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
+    Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
 
 public:
 
@@ -230,6 +234,12 @@ public:
 
     // check if fork rules should be used
     Q_INVOKABLE bool useForkRules(quint8 version, quint64 earlyBlocks = 0) const;
+
+    //! Get wallet keys
+    QString getSecretViewKey() const {return QString::fromStdString(m_walletImpl->secretViewKey());}
+    QString getPublicViewKey() const {return QString::fromStdString(m_walletImpl->publicViewKey());}
+    QString getSecretSpendKey() const {return QString::fromStdString(m_walletImpl->secretSpendKey());}
+    QString getPublicSpendKey() const {return QString::fromStdString(m_walletImpl->publicSpendKey());}
 
     // TODO: setListenter() when it implemented in API
 signals:

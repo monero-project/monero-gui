@@ -116,7 +116,7 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Show seed") + translationManager.emptyString
+                text: qsTr("Show seed & keys") + translationManager.emptyString
                 onClicked: {
                     settingsPasswordDialog.open();
                 }
@@ -413,11 +413,17 @@ Rectangle {
 
         onAccepted: {
             if(appWindow.password === settingsPasswordDialog.password){
-                informationPopup.title  = qsTr("Wallet mnemonic seed") + translationManager.emptyString;
-                informationPopup.text = currentWallet.seed
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    informationPopup.text = ""
+                seedPopup.title  = qsTr("Wallet seed & keys") + translationManager.emptyString;
+                seedPopup.text = "<b>Wallet Mnemonic seed</b> <br>" + currentWallet.seed
+                        + "<br><br> <b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
+                        + "<br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
+                        + "<br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey
+                        + "<br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
+                seedPopup.open()
+                seedPopup.width = 600
+                seedPopup.height = 300
+                seedPopup.onCloseCallback = function() {
+                    seedPopup.text = ""
                 }
 
             } else {
@@ -435,6 +441,21 @@ Rectangle {
 
         }
 
+    }
+
+    StandardDialog {
+        id: seedPopup
+        cancelVisible: false
+        okVisible: true
+        width:600
+        height:400
+
+        property var onCloseCallback
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
     }
 
     // fires on every page load
