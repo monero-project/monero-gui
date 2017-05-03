@@ -123,6 +123,7 @@ Rectangle {
             }
 
 
+/*          Rescan cache - Disabled until we know it's needed
 
             StandardButton {
                 id: rescanWalletbutton
@@ -156,7 +157,7 @@ Rectangle {
 
                 }
             }
-
+*/
         }
 
         //! Manage daemon
