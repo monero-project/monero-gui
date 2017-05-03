@@ -53,6 +53,15 @@ Window {
     width: 480
     height: 200
 
+    // Make window draggable
+    MouseArea {
+        anchors.fill: parent
+        property point lastMousePos: Qt.point(0, 0)
+        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
+        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
+        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
+    }
+
     ColumnLayout {
         id: mainLayout
         spacing: 10
