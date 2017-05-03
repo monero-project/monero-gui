@@ -500,7 +500,7 @@ ApplicationWindow {
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             informationPopup.icon = StandardIcon.Information
             informationPopup.onCloseCallback = null
@@ -613,7 +613,7 @@ ApplicationWindow {
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             informationPopup.icon = StandardIcon.Information
             informationPopup.onCloseCallback = null
