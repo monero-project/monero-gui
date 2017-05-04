@@ -224,11 +224,38 @@ Rectangle {
                 }
             }
 
-
-
         }
 
-        ColumnLayout {
+        RowLayout {
+            id: blockchainFolderRow
+            Label {
+                id: blockchainFolderLabel
+                color: "#4A4949"
+                text: qsTr("Blockchain location") + translationManager.emptyString
+                fontSize: 16
+            }
+            LineEdit {
+                id: blockchainFolder
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: persistentSettings.blockchainDataDir
+                placeholderText: qsTr("(optional)") + translationManager.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mouse.accepted = false
+                        if(persistentSettings.blockchainDataDir != "")
+                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir
+                        blockchainFileDialog.open()
+                        blockchainFolder.focus = true
+                    }
+                }
+
+            }
+        }
+
+        RowLayout {
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -515,6 +542,62 @@ Rectangle {
                 onCloseCallback()
             }
         }
+    }
+
+    // Choose blockchain folder
+    FileDialog {
+        id: blockchainFileDialog
+        title: qsTr("Please choose a folder") + translationManager.emptyString;
+        selectFolder: true
+        folder: "file://" + persistentSettings.blockchainDataDir
+
+        onAccepted: {
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var validator = daemonManager.validateDataDir(dataDir);
+            if(!validator.valid) {
+
+                confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                confirmationDialog.text = "";
+                if(validator.readOnly) {
+                    confirmationDialog.text  += qsTr("Error: Filesystem is read only") + "\n\n"                  
+                }
+                
+                if(validator.storageAvailable < 20) {
+                    confirmationDialog.text  += qsTr("Warning: There's only %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(15) + "\n\n"     
+                } else {
+                    confirmationDialog.text  += qsTr("Note: There's %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(15) + "\n\n"
+                }
+                
+                if(!validator.lmdbExists) {
+                    confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n" 
+                }
+   
+
+                confirmationDialog.icon = StandardIcon.Question
+                confirmationDialog.cancelText = qsTr("Cancel")
+
+                // Continue
+                confirmationDialog.onAcceptedCallback = function() {
+                    persistentSettings.blockchainDataDir = dataDir
+                }
+
+                // Cancel
+                confirmationDialog.onRejectedCallback = function() {
+                };
+
+                confirmationDialog.open()
+            } else {
+                persistentSettings.blockchainDataDir = dataDir
+            }
+
+            delete validator;
+
+
+        }
+        onRejected: {
+            console.log("data dir selection canceled")
+        }
+
     }
 
     // fires on every page load
