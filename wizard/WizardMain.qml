@@ -115,6 +115,7 @@ ColumnLayout {
 
 
     function openCreateWalletPage() {
+        wizardRestarted();
         print ("show create wallet page");
         currentPath = "create_wallet"
         pages = paths[currentPath]
@@ -125,6 +126,7 @@ ColumnLayout {
     }
 
     function openRecoveryWalletPage() {
+        wizardRestarted();
         print ("show recovery wallet page");
         currentPath = "recovery_wallet"
         pages = paths[currentPath]
