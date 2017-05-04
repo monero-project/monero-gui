@@ -55,7 +55,7 @@ ColumnLayout {
     function onPageClosed(settingsObject) {
         appWindow.persistentSettings.useRemoteNode = remoteNode.checked
         appWindow.persistentSettings.startLocalNode = localNode.checked
-        appWindow.persistentSettings.remoteNodeAddress = remoteNodeDropDown.getSelected();
+        appWindow.persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
         return true
     }
 
@@ -180,10 +180,10 @@ ColumnLayout {
         }
 
         RowLayout {
-            RemoteNodeDropdown {
+            RemoteNodeEdit {
                 Layout.minimumWidth: 300
                 opacity: remoteNode.checked
-                id: remoteNodeDropDown
+                id: remoteNodeEdit
             }
         }
     }

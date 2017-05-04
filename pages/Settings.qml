@@ -338,9 +338,9 @@ Rectangle {
 
         RowLayout {
             RowLayout {
-                RemoteNodeDropdown {
+                RemoteNodeEdit {
                     Layout.minimumWidth: 300
-                    id: remoteNodeDropDown
+                    id: remoteNodeEdit
                 }
 
 
@@ -356,7 +356,7 @@ Rectangle {
                     pressedColor: "#FF4304"
                     onClicked: {
                         persistentSettings.useRemoteNode = true
-                        persistentSettings.remoteNodeAddress = remoteNodeDropDown.getSelected();
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
                         appWindow.connectRemoteNode();
                     }
                 }
