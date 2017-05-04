@@ -590,7 +590,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="166"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Schürfen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
+        <translation>Schürfen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu schürfen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="178"/>
@@ -1692,7 +1692,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Es ist wichtig, dass Sie sich die Wörter notieren, da Sie damit Ihr Wallet wiederherstellen können.</translation>
+        <translation>Es ist wichtig, dass du dir die Wörter notierst, da du damit dein Wallet wiederherstellen kannst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
