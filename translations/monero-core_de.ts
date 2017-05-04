@@ -545,7 +545,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Das Mining mit deinem Computer hilft dabei, das Monero Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger wird es das Netzwerk anzugreifen, und jeder noch so kleine Teil ist hierbei von Bedeutung..&lt;br&gt; &lt;br&gt;Mit dem Mining hast du zusätzlich die Chance Moneros zu verdienen. Dein Computer kreiert bei der Suche nach den Lösungen für die Blöcke Hashes und findest du eine Lösung, bekommst du die damit assoziierte Belohnung. Viel Glück! </translation>
+        <translation>Das Schürfen mit deinem Computer hilft dabei, das Monero Netzwerk zu stärken. Je mehr Leute schürfen, desto schwieriger wird es, das Netzwerk anzugreifen. Jeder noch so kleine Teil ist hierbei von Bedeutung..&lt;br&gt; &lt;br&gt;Mit dem Schürfen hast du zusätzlich die Chance Moneros zu verdienen. Dein Computer kreiert bei der Suche nach den Lösungen für die Blöcke Hashes und findest du eine Lösung, bekommst du die damit assoziierte Belohnung. Viel Glück! </translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -560,57 +560,57 @@
     <message>
         <location filename="../pages/Mining.qml" line="118"/>
         <source>Background mining (experimental)</source>
-        <translation>Im Hintergrund minen (experimentell)</translation>
+        <translation>Im Hintergrund schürfen (experimentell)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="134"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktiviere Mining im Batteriemodus</translation>
+        <translation>Aktiviere das Schürfen im Batteriemodus</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="144"/>
         <source>Manage miner</source>
-        <translation>Verwalte Miner</translation>
+        <translation>Verwalte Schürfer</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
         <source>Start mining</source>
-        <translation>Starte Mining</translation>
+        <translation>Starte Schürfvorgang</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="163"/>
         <source>Error starting mining</source>
-        <translation>Fehler beim Starten des Miningvorgangs</translation>
+        <translation>Fehler beim Starten des Schürfvorgangs</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>Der Miningvorgang konnte nicht gestartet werden.&lt;br&gt;</translation>
+        <translation>Der Schürfvorgang konnte nicht gestartet werden.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="166"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Minen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
+        <translation>Schürfen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="178"/>
         <source>Stop mining</source>
-        <translation>Beende Mining</translation>
+        <translation>Beende Schürfvorgang</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="194"/>
         <source>Status: not mining</source>
-        <translation>Status: Nicht am minen</translation>
+        <translation>Status: Nicht am schürfen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="205"/>
         <source>Mining at %1 H/s</source>
-        <translation>Minen mit %1 H/s</translation>
+        <translation>Schürfen mit %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
         <source>Not mining</source>
-        <translation>Nicht am minen</translation>
+        <translation>Nicht am schürfen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="210"/>
