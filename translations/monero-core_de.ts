@@ -471,7 +471,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="383"/>
         <source>Mining</source>
-        <translation>Mining</translation>
+        <translation>Schürfen</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="384"/>
@@ -486,7 +486,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="431"/>
         <source>Sign/verify</source>
-        <translation>Signieren/Verifizieren</translation>
+        <translation>Unterzeichnen/Verifizieren</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="432"/>
@@ -535,7 +535,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
-        <translation>Solo Mining</translation>
+        <translation>Allein schürfen</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
@@ -776,7 +776,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="158"/>
         <source> with not enough money (%1)</source>
-        <translation>nicht ausreichend Geld (%1)</translation>
+        <translation>mit ungenügendem Guthaben (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="190"/>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="197"/>
         <source>ReadOnly wallet address displayed here</source>
-        <translation>Schreibgeschützte Wallet wird hier angezeigt</translation>
+        <translation>Schreibgeschütztes Wallet wird hier angezeigt</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="227"/>
@@ -815,7 +815,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="385"/>
         <source>Save QrCode</source>
-        <translation>Speichere QR-Code</translation>
+        <translation>QR-Code speichern</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="386"/>
@@ -1043,7 +1043,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="416"/>
         <source>Wallet mnemonic seed</source>
-        <translation>Mnemonischer Code der Wallet</translation>
+        <translation>Mnemonischer Code des Wallets</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="230"/>
@@ -1091,13 +1091,13 @@
     <message>
         <location filename="../pages/Sign.qml" line="123"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>Nachricht oder Datei mit deiner Adresse signieren:</translation>
+        <translation>Nachricht oder Datei mit deiner Adresse unterzeichnen:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="133"/>
         <location filename="../pages/Sign.qml" line="319"/>
         <source>Either message:</source>
-        <translation>Entweder Nachricht:</translation>
+        <translation>Jegliche Nachricht:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="148"/>
@@ -1240,7 +1240,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation>&lt;b&gt;An denselben Empfänger senden&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;An denselben Empfänger verschicken&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1250,7 +1250,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
         <source>&lt;b&gt;Remove from address book&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Aus dem Adressbuch entfernen&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Aus dem Adressbuch löschen&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1364,7 +1364,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="78"/>
         <source>Privacy level (ringsize %1)</source>
-        <translation>Vertraulichkeitsstufe (Ringgröße %1)</translation>
+        <translation>Geheimhaltungsstufe (Ringgröße %1)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
@@ -1450,7 +1450,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="491"/>
         <source>Sweep Unmixable</source>
-        <translation>Sweep unvermischbar</translation>
+        <translation>Unvermischbares zusammenfegen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="505"/>
@@ -1720,7 +1720,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Erstelle eine Nur-Lese Wallet</translation>
+        <translation>Erstelle ein schreibgeschütztes Wallet</translation>
     </message>
 </context>
 <context>
@@ -1736,7 +1736,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="99"/>
         <source>Create a new wallet</source>
-        <translation>Erstelle eine neue Wallet</translation>
+        <translation>Erstelle ein neues Wallet</translation>
     </message>
 </context>
 <context>
@@ -1860,7 +1860,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMain.qml" line="168"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Eine Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Wallet-Namen</translation>
+        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Wallet-Namen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="176"/>
@@ -1886,7 +1886,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardMain.qml" line="378"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Die Nur-Lese Wallet wurde erstellt. Du kannst sie öffnen, indem du aktuelle Wallet schließt, auf &quot;Öffne Wallet aus einer Datei&quot; klickst und die Nur-Lese Wallet in auswählst:%1</translation>
+        <translation>Das schreibgeschützte Wallet wurde erstellt. Du kannst es öffnen, indem du das aktuelle Wallet schließt, auf &quot;Öffne Wallet aus einer Datei&quot; klickst und das schreibgeschützte Wallet in auswählst:%1</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
@@ -1926,7 +1926,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="166"/>
         <source>Restore from keys</source>
-        <translation>Mit den Schlüsseln wiederherstellen</translation>
+        <translation>Mit Schlüssel wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="203"/>
@@ -1951,7 +1951,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
         <source>Your wallet is stored in</source>
-        <translation>Deine Wallet ist hier gespeichert</translation>
+        <translation>Dein Wallet ist hier gespeichert</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="272"/>
@@ -2062,7 +2062,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Erstelle ein Passwort für deine Wallet</translation>
+        <translation>Erstelle ein Passwort für dein Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
