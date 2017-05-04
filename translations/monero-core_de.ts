@@ -954,7 +954,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="102"/>
         <source>Create view only wallet</source>
-        <translation>Eine "view only" Wallet erstellen</translation>
+        <translation>Ein schreibgeschütztes Wallet erstellen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="132"/>
@@ -1707,12 +1707,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
         <source>Allow background mining?</source>
-        <translation>Mining im Hintergrund erlauben?</translation>
+        <translation>Schürfen im Hintergrund erlauben?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="175"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald du ihn wieder verwendest, wird das Mining unterbrochen.</translation>
+        <translation>Schürfen schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer schürft während Du ihn nicht verwendest. Sobald du ihn wieder verwendest, wird der Schürfvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -1764,12 +1764,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
         <source>Allow background mining?</source>
-        <translation>Mining im Hintergrund erlauben?</translation>
+        <translation>Schürfen im Hintergrund erlauben?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird das Mining unterbrochen.</translation>
+        <translation>Schürfen schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer schürft während du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Schürfvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
