@@ -341,12 +341,16 @@ Rectangle {
                 RemoteNodeEdit {
                     Layout.minimumWidth: 300
                     id: remoteNodeEdit
+                    onEditingFinished: {
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
+                    }
                 }
 
 
                 StandardButton {
                     id: remoteConnect
                     visible: !appWindow.remoteNodeConnected
+                    enabled: remoteNodeEdit.daemonAddrText != "" && remoteNodeEdit.daemonPortText != ""
                     Layout.fillWidth: false
                     Layout.leftMargin: 30
                     text: qsTr("Connect Remote Node") + translationManager.emptyString

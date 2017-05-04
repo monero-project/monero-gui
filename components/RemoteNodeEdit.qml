@@ -32,6 +32,12 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
 RowLayout {
+    id: root
+    property alias daemonAddrText: daemonAddr.text
+    property alias daemonPortText: daemonPort.text
+
+    signal editingFinished()
+
     Layout.preferredWidth: 200
     function getSelected() {
         return daemonAddr.text + ":" + daemonPort.text
@@ -42,7 +48,8 @@ RowLayout {
         Layout.preferredWidth:  200
         Layout.fillWidth: true
         text: persistentSettings.remoteNodeAddress.split(":")[0]
-        placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
+        placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
     }
 
 
@@ -50,7 +57,8 @@ RowLayout {
         id: daemonPort
         Layout.preferredWidth: 100
         Layout.fillWidth: true
-        text: persistentSettings.remoteNodeAddress.split(":")[1]
+        text: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
         placeholderText: qsTr("Port") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
     }
 }

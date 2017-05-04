@@ -133,14 +133,14 @@ ColumnLayout {
             }
         }
 
-        RowLayout {
+        ColumnLayout {
             visible: localNode.checked
             id: blockchainFolderRow
             Label {
-                id: blockchainFolderLabel
-                color: "#4A4949"
+                Layout.fillWidth: true
+                Layout.topMargin: 20
+                fontSize: 14
                 text: qsTr("Blockchain location") + translationManager.emptyString
-                fontSize: 16
             }
             LineEdit {
                 id: blockchainFolder
@@ -168,7 +168,7 @@ ColumnLayout {
                 id: remoteNode
                 text: (localNode.checked) ? qsTr("Connect to a 3rd party remote node until my own node has finished syncing") + translationManager.emptyString
                                           : qsTr("Connect to a 3rd party remote node") + translationManager.emptyString
-                Layout.topMargin: 15
+                Layout.topMargin: 20
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16
