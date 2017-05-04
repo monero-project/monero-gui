@@ -120,30 +120,64 @@ ColumnLayout {
 
     ColumnLayout {
 
-        CheckBox {
-            id: localNode
-            text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
-            background: "#FFFFFF"
-            fontColor: "#4A4646"
-            fontSize: 16
-            checkedIcon: "../images/checkedVioletIcon.png"
-            uncheckedIcon: "../images/uncheckedIcon.png"
-            checked: appWindow.persistentSettings.startLocalNode
+        RowLayout {
+            CheckBox {
+                id: localNode
+                text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
+                background: "#FFFFFF"
+                fontColor: "#4A4646"
+                fontSize: 16
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: appWindow.persistentSettings.startLocalNode
+            }
         }
 
-        CheckBox {
-            id: remoteNode
-            text: (localNode.checked) ? qsTr("Connect to a 3rd party remote node until my own node has finished syncing") + translationManager.emptyString
-                                      : qsTr("Connect to a 3rd party remote node") + translationManager.emptyString
-            Layout.topMargin: 15
-            background: "#FFFFFF"
-            fontColor: "#4A4646"
-            fontSize: 16
-            checkedIcon: "../images/checkedVioletIcon.png"
-            uncheckedIcon: "../images/uncheckedIcon.png"
-            checked: appWindow.persistentSettings.useRemoteNode
+        RowLayout {
+            visible: localNode.checked
+            id: blockchainFolderRow
+            Label {
+                id: blockchainFolderLabel
+                color: "#4A4949"
+                text: qsTr("Blockchain location") + translationManager.emptyString
+                fontSize: 16
+            }
+            LineEdit {
+                id: blockchainFolder
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: persistentSettings.blockchainDataDir
+                placeholderText: qsTr("(optional)") + translationManager.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mouse.accepted = false
+                        if(persistentSettings.blockchainDataDir != "")
+                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir
+                        blockchainFileDialog.open()
+                        blockchainFolder.focus = true
+                    }
+                }
+
+            }
         }
 
+        RowLayout {
+            CheckBox {
+                id: remoteNode
+                text: (localNode.checked) ? qsTr("Connect to a 3rd party remote node until my own node has finished syncing") + translationManager.emptyString
+                                          : qsTr("Connect to a 3rd party remote node") + translationManager.emptyString
+                Layout.topMargin: 15
+                background: "#FFFFFF"
+                fontColor: "#4A4646"
+                fontSize: 16
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: appWindow.persistentSettings.useRemoteNode
+            }
+
+        }
 
         RowLayout {
             RemoteNodeDropdown {
