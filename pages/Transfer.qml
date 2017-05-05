@@ -123,6 +123,7 @@ Rectangle {
           anchors.rightMargin: 17
           anchors.topMargin: 17
           text: qsTr("Amount") + translationManager.emptyString
+          tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
           fontSize: 14
       }
 
@@ -133,6 +134,7 @@ Rectangle {
           fontSize: 14
           x: (parent.width - 17) / 2 + 17
           text: qsTr("Transaction priority") + translationManager.emptyString
+          tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
       }
 
 
@@ -233,6 +235,7 @@ Rectangle {
           text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                       Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
+          tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
 
           onLinkActivated: appWindow.showPageRequest("AddressBook")
       }
@@ -328,6 +331,7 @@ Rectangle {
           anchors.topMargin: 17
           fontSize: 14
           text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+          tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
       }
 
       // payment id input
@@ -354,6 +358,7 @@ Rectangle {
           fontSize: 14
           text: qsTr("Description <font size='2'>( Optional )</font>")
                 + translationManager.emptyString
+          tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
       }
 
       LineEdit {
@@ -472,6 +477,7 @@ Rectangle {
                 id: privacyLabel
                 fontSize: 14
                 text: ""
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
             }
 
             Label {

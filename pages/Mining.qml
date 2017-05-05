@@ -94,6 +94,7 @@ Rectangle {
                     id: soloMinerThreadsLabel
                     color: "#4A4949"
                     text: qsTr("CPU threads") + translationManager.emptyString
+                    tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
                 }

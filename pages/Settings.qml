@@ -234,6 +234,7 @@ Rectangle {
                 id: daemonFlagsLabel
                 color: "#4A4949"
                 text: qsTr("Daemon startup flags") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
             }
             LineEdit {
@@ -256,6 +257,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Daemon address") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
             }
 
@@ -284,6 +286,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Login (optional)") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
             }
 
@@ -337,6 +340,7 @@ Rectangle {
             Label {
                 color: "#4A4949"
                 text: qsTr("Layout settings") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
                 anchors.topMargin: 30
                 Layout.topMargin: 30
@@ -365,6 +369,7 @@ Rectangle {
                 id: logLevelLabel
                 color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
             }
 
@@ -407,6 +412,7 @@ Rectangle {
             Label {
                 color: "#4A4949"
                 text: qsTr("Version") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 fontSize: 16
                 anchors.topMargin: 30
                 Layout.topMargin: 30

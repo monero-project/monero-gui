@@ -32,6 +32,7 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.0
+import QtQuick.Layouts 1.1
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
@@ -1028,12 +1029,6 @@ ApplicationWindow {
             state: "Transfer"
         }
 
-        TipItem {
-            id: tipItem
-            text: qsTr("send to the same destination") + translationManager.emptyString
-            visible: false
-        }
-
         MouseArea {
             id: frameArea
             property bool blocked: false
@@ -1244,17 +1239,15 @@ ApplicationWindow {
         Rectangle {
             id: toolTip
             property alias text: content.text
+            property alias tipX: tip.x
             width: content.width + 12
-            height: content.height + 17
+            height: content.height + 12
             color: "#FF6C3C"
-            //radius: 3
             visible:false;
 
             Image {
                 id: tip
                 anchors.top: parent.bottom
-                anchors.right: parent.right
-                anchors.rightMargin: 5
                 source: "../images/tip.png"
             }
 
@@ -1262,10 +1255,16 @@ ApplicationWindow {
                 id: content
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 6
-                lineHeight: 0.7
                 font.family: "Arial"
                 font.pixelSize: 12
                 color: "#FFFFFF"
+                wrapMode: Text.Wrap
+                onTextChanged: {
+                    // reset width
+                    width = undefined
+                    // expand if content is wide
+                    width = (contentWidth > 200) ? 200 : contentWidth
+                }
             }
         }
 

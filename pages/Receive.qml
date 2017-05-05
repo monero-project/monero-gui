@@ -175,7 +175,7 @@ Rectangle {
         anchors.right: parent.right
 
         spacing: 20
-        property int labelWidth: 120
+        property int labelWidth: 140
         property int editWidth: 400
         property int lineEditFontSize: 12
         property int qrCodeSize: 240
@@ -188,6 +188,7 @@ Rectangle {
                 id: addressLabel
                 fontSize: 14
                 text: qsTr("Address") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
@@ -217,6 +218,7 @@ Rectangle {
                 id: paymentIdLabel
                 fontSize: 14
                 text: qsTr("Payment ID") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
@@ -271,6 +273,7 @@ Rectangle {
                 id: integratedAddressLabel
                 fontSize: 14
                 text: qsTr("Integrated address") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
@@ -304,6 +307,7 @@ Rectangle {
                 id: amountLabel
                 fontSize: 14
                 text: qsTr("Amount") + translationManager.emptyString
+                tipText: qsTr("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 

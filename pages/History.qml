@@ -142,7 +142,7 @@ Rectangle {
         anchors.topMargin: 17
         text: getSelectedAmount()
         fontSize: 14
-        tipText: qsTr("<b>Total amount of selected payments</b>") + translationManager.emptyString
+        tipText: qsTr("Total amount of selected payments") + translationManager.emptyString
     }
 
 
@@ -221,7 +221,6 @@ Rectangle {
         width: 156
         text: qsTr("Date from") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     DatePicker {
@@ -246,7 +245,6 @@ Rectangle {
         anchors.topMargin: 17
         text: qsTr("To") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     DatePicker {
@@ -328,7 +326,6 @@ Rectangle {
         width: 156
         text: qsTr("Type of transaction") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     ListModel {
@@ -363,7 +360,6 @@ Rectangle {
         width: 156
         text: qsTr("Amount from") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     LineEdit {
@@ -395,7 +391,6 @@ Rectangle {
         width: 156
         text: qsTr("To") + translationManager.emptyString
         fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
     }
 
     LineEdit {

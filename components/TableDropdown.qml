@@ -220,8 +220,7 @@ Item {
                                 var pos = rootItem.mapFromItem(delegate, 30, -25)
                                 appWindow.toolTip.text = qsTr(name) + translationManager.emptyString
                                 appWindow.toolTip.x = pos.x - appWindow.toolTip.width
-//                                if(appWindow.toolTip.height > 30)
-//                                    pos.y -= appWindow.toolTip.height - 30
+                                appWindow.toolTip.tipX = appWindow.toolTip.width - 10
                                 appWindow.toolTip.y = pos.y
                                 appWindow.toolTip.visible = true
                                 appWindow.toolTip.z = 3
