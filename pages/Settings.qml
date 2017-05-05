@@ -121,6 +121,43 @@ Rectangle {
                     settingsPasswordDialog.open();
                 }
             }
+
+
+/*          Rescan cache - Disabled until we know it's needed
+
+            StandardButton {
+                id: rescanWalletbutton
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Rescan wallet cache") + translationManager.emptyString
+                onClicked: {
+                    // Show confirmation dialog
+                    confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
+                    confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
+                                                    + "The following information will be deleted\n"
+                                                    + "- Recipient addresses\n"
+                                                    + "- Tx keys\n"
+                                                    + "- Tx descriptions\n\n"
+                                                    + "The old wallet cache file will be renamed and can be restored later.\n"
+                                                    );
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
+                    confirmationDialog.onAcceptedCallback = function() {
+                        walletManager.closeWallet();
+                        walletManager.clearWalletCache(persistentSettings.wallet_path);
+                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.password,
+                                                          persistentSettings.testnet);
+                    }
+
+                    confirmationDialog.onRejectedCallback = null;
+
+                    confirmationDialog.open()
+
+                }
+            }
+*/
         }
 
         //! Manage daemon

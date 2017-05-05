@@ -136,6 +136,9 @@ public:
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
+    // clear/rename wallet cache
+    Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
+
 signals:
 
     void walletOpened(Wallet * wallet);
