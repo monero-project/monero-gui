@@ -40,6 +40,7 @@ import moneroComponents.Clipboard 1.0
 Rectangle {
     property var daemonAddress
     property bool viewOnly: false
+    id: page
 
     color: "#F0EEEE"
 
@@ -54,10 +55,9 @@ Rectangle {
         // try connecting to daemon
     }
 
-
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 17
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -81,7 +81,8 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        RowLayout {
+        GridLayout {
+            columns: (isMobile)? 2 : 3
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
@@ -178,10 +179,9 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        RowLayout {
+        GridLayout {
             id: daemonStatusRow
-            Layout.fillWidth: true
-
+            columns: (isMobile) ?  2 : 4
             StandardButton {
                 visible: true
                 enabled: !appWindow.daemonRunning
@@ -228,7 +228,7 @@ Rectangle {
 
         }
 
-        RowLayout {
+        ColumnLayout {
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -246,22 +246,27 @@ Rectangle {
         }
 
         RowLayout {
-            id: daemonAddrRow
             Layout.fillWidth: true
             spacing: 10
 
             Label {
                 id: daemonAddrLabel
-
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Daemon address") + translationManager.emptyString
                 fontSize: 16
             }
+        }
+
+        GridLayout {
+            id: daemonAddrRow
+            Layout.fillWidth: true
+            columnSpacing: 10
+            columns: (isMobile) ?  2 : 3
 
             LineEdit {
                 id: daemonAddr
-                Layout.preferredWidth:  200
+                Layout.preferredWidth:  100
                 Layout.fillWidth: true
                 text: (daemonAddress !== undefined) ? daemonAddress[0] : ""
                 placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
@@ -278,7 +283,8 @@ Rectangle {
         }
 
         RowLayout {
-
+            Layout.fillWidth: true
+            spacing: 10
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -286,6 +292,10 @@ Rectangle {
                 text: qsTr("Login (optional)") + translationManager.emptyString
                 fontSize: 16
             }
+
+        }
+
+        RowLayout {
 
             LineEdit {
                 id: daemonUsername
@@ -314,7 +324,6 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                visible: true
                 onClicked: {
                     console.log("saving daemon adress settings")
                     var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
@@ -360,14 +369,22 @@ Rectangle {
         }
 
         // Log level
+
         RowLayout {
             Label {
-                id: logLevelLabel
                 color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
                 fontSize: 16
+                anchors.topMargin: 30
+                Layout.topMargin: 30
             }
-
+        }
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+        ColumnLayout {
             ComboBox {
                 id: logLevel
                 model: [0,1,2,3,4,"custom"]
@@ -500,12 +517,19 @@ Rectangle {
         console.log("Settings page loaded");
         initSettings();
         viewOnly = currentWallet.viewOnly;
-        appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
+
+        if(typeof daemonManager != "undefined")
+            appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
+
+        console.log(currentWallet.seed);
     }
 
     // fires only once
     Component.onCompleted: {
-        daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+        if(typeof daemonManager != "undefined")
+            daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+
+
     }
 
     function onDaemonConsoleUpdated(message){

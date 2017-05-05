@@ -89,18 +89,22 @@ Rectangle {
                 Text {
                     text: qsTr("Verify that a third party made a payment by supplying:") + translationManager.emptyString
                     wrapMode: Text.Wrap
+                    Layout.fillWidth: true;
                 }
                 Text {
                     text: qsTr(" - the recipient address") + translationManager.emptyString
                     wrapMode: Text.Wrap
+                    Layout.fillWidth: true;
                 }
                 Text {
                     text: qsTr(" - the transaction ID") + translationManager.emptyString
                     wrapMode: Text.Wrap
+                    Layout.fillWidth: true;
                 }
                 Text {
                     text: qsTr(" - the secret transaction key supplied by the sender") + translationManager.emptyString
                     wrapMode: Text.Wrap
+                    Layout.fillWidth: true;
                 }
                 Text {
                     text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString

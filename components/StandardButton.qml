@@ -45,8 +45,6 @@ Item {
     // Dynamic label width
     Layout.minimumWidth: (label.contentWidth > 80)? label.contentWidth + 20 : 100
 
-
-
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
