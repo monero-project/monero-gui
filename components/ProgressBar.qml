@@ -37,7 +37,7 @@ Item {
     visible: false
     //clip: true
 
-    function updateProgress(currentBlock,targetBlock, blocksToSync){
+    function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
         if(targetBlock == 1) {
             fillLevel = 0
             progressText.text = qsTr("Establishing connection...");
@@ -54,7 +54,14 @@ Item {
             else
                 var progressLevel = (100*(currentBlock/targetBlock)).toFixed(0);
             fillLevel = progressLevel
-            progressText.text = qsTr("Blocks remaining: %1").arg(remaining.toFixed(0));
+            if(typeof statusTxt != "undefined" && statusTxt != "") {
+                progressText.text = statusTxt + (" %1").arg(remaining.toFixed(0));
+            } else {
+                progressText.text = qsTr("Blocks remaining: %1").arg(remaining.toFixed(0));
+            }
+
+
+
             progressBar.visible = currentBlock < targetBlock
         }
     }

@@ -57,7 +57,9 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.leftMargin: 40
+        anchors.rightMargin: 40
+        anchors.topMargin: 20
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -71,7 +73,7 @@ Rectangle {
                 color: "#4A4949"
                 text: qsTr("Manage wallet") + translationManager.emptyString
                 fontSize: 16
-                Layout.topMargin: 10
+//                Layout.topMargin: 10
             }
         }
 
@@ -162,14 +164,20 @@ Rectangle {
 
         //! Manage daemon
         RowLayout {
+            Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
-                Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Manage daemon") + translationManager.emptyString
+                text: qsTr("Manage Daemon") + translationManager.emptyString
                 fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+            }
+
+            CheckBox {
+                id: daemonAdvanced
+                Layout.leftMargin: 15
+                text: qsTr("Show advanced") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
         Rectangle {
@@ -183,24 +191,25 @@ Rectangle {
             Layout.fillWidth: true
 
             StandardButton {
-                visible: true
-                enabled: !appWindow.daemonRunning
+                visible: !appWindow.daemonRunning
                 id: startDaemonButton
-                text: qsTr("Start daemon") + translationManager.emptyString
+                text: qsTr("Start Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
+                    // Reset default daemon address settings
+                    persistentSettings.daemon_address = (persistentSettings.testnet) ? "localhost:28081" :  "localhost:18081"
+                    initSettings()
                     appWindow.startDaemon(daemonFlags.text)
                 }
             }
 
             StandardButton {
-                visible: true
-                enabled: appWindow.daemonRunning
+                visible: appWindow.daemonRunning
                 id: stopDaemonButton
-                text: qsTr("Stop daemon") + translationManager.emptyString
+                text: qsTr("Stop Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -223,17 +232,45 @@ Rectangle {
                     daemonConsolePopup.open();
                 }
             }
-
-
-
         }
 
         RowLayout {
+            id: blockchainFolderRow
+            Label {
+                id: blockchainFolderLabel
+                color: "#4A4949"
+                text: qsTr("Blockchain location") + translationManager.emptyString
+                fontSize: 16
+            }
+            LineEdit {
+                id: blockchainFolder
+                Layout.preferredWidth:  200
+                Layout.fillWidth: true
+                text: persistentSettings.blockchainDataDir
+                placeholderText: qsTr("(optional)") + translationManager.emptyString
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mouse.accepted = false
+                        if(persistentSettings.blockchainDataDir != "")
+                            blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir
+                        blockchainFileDialog.open()
+                        blockchainFolder.focus = true
+                    }
+                }
+
+            }
+        }
+
+
+        RowLayout {
+            visible: daemonAdvanced.checked
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
                 color: "#4A4949"
-                text: qsTr("Daemon startup flags") + translationManager.emptyString
+                text: qsTr("Local daemon startup flags") + translationManager.emptyString
                 fontSize: 16
             }
             LineEdit {
@@ -246,6 +283,7 @@ Rectangle {
         }
 
         RowLayout {
+            visible: daemonAdvanced.checked
             id: daemonAddrRow
             Layout.fillWidth: true
             spacing: 10
@@ -278,7 +316,7 @@ Rectangle {
         }
 
         RowLayout {
-
+            visible: daemonAdvanced.checked
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -320,15 +358,64 @@ Rectangle {
                     var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
                     if(persistentSettings.daemon_address != newDaemon) {
                         persistentSettings.daemon_address = newDaemon
+                        walletManager.setDaemonAddress(persistentSettings.daemon_address)
                     }
 
                     // Update daemon login
                     persistentSettings.daemonUsername = daemonUsername.text;
                     persistentSettings.daemonPassword = daemonPassword.text;
+
                     currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
 
                     //Reinit wallet
                     currentWallet.initAsync(newDaemon);
+                }
+            }
+        }
+
+        RowLayout {
+            RowLayout {
+                RemoteNodeEdit {
+                    Layout.minimumWidth: 300
+                    id: remoteNodeEdit
+                    onEditingFinished: {
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
+                    }
+                }
+
+
+                StandardButton {
+                    id: remoteConnect
+                    visible: !appWindow.remoteNodeConnected
+                    enabled: remoteNodeEdit.daemonAddrText != "" && remoteNodeEdit.daemonPortText != ""
+                    Layout.fillWidth: false
+                    Layout.leftMargin: 30
+                    text: qsTr("Connect Remote Node") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        persistentSettings.useRemoteNode = true
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
+                        appWindow.connectRemoteNode();
+                    }
+                }
+
+                StandardButton {
+                    id: remoteDisconnect
+                    visible: appWindow.remoteNodeConnected
+                    Layout.fillWidth: false
+                    Layout.leftMargin: 30
+                    text: qsTr("Disconnect Remote Node") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        persistentSettings.useRemoteNode = false
+                        appWindow.disconnectRemoteNode();
+                    }
                 }
             }
         }
