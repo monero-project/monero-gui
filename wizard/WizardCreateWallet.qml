@@ -59,6 +59,7 @@ ColumnLayout {
         settingsObject['account_name'] = uiItem.accountNameText
         settingsObject['words'] = uiItem.wordsTexttext
         settingsObject['wallet_path'] = uiItem.walletPath
+        console.log("path " +uiItem.walletPath);
         var walletFullPath = wizard.createWalletPath(uiItem.walletPath,uiItem.accountNameText);
         return wizard.walletPathValid(walletFullPath);
     }

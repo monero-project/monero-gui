@@ -115,6 +115,7 @@ ColumnLayout {
 
 
     function openCreateWalletPage() {
+        wizardRestarted();
         print ("show create wallet page");
         currentPath = "create_wallet"
         pages = paths[currentPath]
@@ -125,6 +126,7 @@ ColumnLayout {
     }
 
     function openRecoveryWalletPage() {
+        wizardRestarted();
         print ("show recovery wallet page");
         currentPath = "recovery_wallet"
         pages = paths[currentPath]
@@ -160,10 +162,16 @@ ColumnLayout {
             folder_path = folder_path.substring(0,folder_path.length -1)
         }
 
+        // Store releative path on ios.
+        if(isIOS)
+            folder_path = "";
+
         return folder_path + "/" + account_name + "/" + account_name
     }
 
     function walletPathValid(path){
+        if(isIOS)
+            path = moneroAccountsDir + path;
         if (walletManager.walletExists(path)) {
             walletErrorDialog.text = qsTr("A wallet with same name already exists. Please change wallet name") + translationManager.emptyString;
             walletErrorDialog.open();
@@ -193,8 +201,16 @@ ColumnLayout {
     function applySettings() {
         // Save wallet files in user specified location
         var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
-        console.log("saving in wizard: "+ new_wallet_filename)
-        settings.wallet.store(new_wallet_filename);
+        if(isIOS) {
+            console.log("saving in ios: "+ moneroAccountsDir + new_wallet_filename)
+            settings.wallet.store(moneroAccountsDir + new_wallet_filename);
+        } else {
+            console.log("saving in wizard: "+ new_wallet_filename)
+            settings.wallet.store(new_wallet_filename);
+
+        }
+
+
 
         // make sure temporary wallet files are deleted
         console.log("Removing temporary wallet: "+ settings.tmp_wallet_filename)

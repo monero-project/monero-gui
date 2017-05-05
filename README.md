@@ -84,12 +84,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 	`cd monero-core`
 
-4. Use the script to compile the Monero libs necessary to run the GUI.
-
-	`./get_libwallet_api.sh`
-
-
-5. Install the GUI dependencies.
+4. Install the GUI dependencies.
 
   - For Ubuntu 16.04 x86
 
@@ -119,7 +114,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
       `emerge dev-qt/qtmultimedia:5 media-gfx/zbar`
 
-6. Build the GUI.
+5. Build the GUI.
 
   - For Ubuntu and Mint
 
@@ -129,7 +124,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
     `QT_SELECT=5 ./build.sh`
 
-7. Run the GUI client.
+6. Run the GUI client.
 
 	`./build/release/bin/monero-wallet-gui`
 
@@ -153,16 +148,11 @@ Packaging for your favorite distribution would be a welcome contribution!
   
   `brew link --force --overwrite qt5`
 
-4. Install latest Qt using official installer from [qt.io](https://www.qt.io/download-open-source/) (homebrew version might be outdated).
-5. Add Qt bin dir to your path (check first if directory exists; 5.8 is the current version)
+5. Add the Qt bin directory to your path
 
-    `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
+    Example: `export PATH=$PATH:$HOME/Qt/5.8/clang_64/bin`
 
-5. Add Qt bin dir to your path.  Example:
-
-    `export PATH=$PATH:/usr/local/opt/qt5/bin`
-
-    make sure this is where Qt 5.x is installed on **your** system eg `$HOME/Qt/5.8/clang_64/bin` if you downloaded from qt.io.
+    This is the directory where Qt 5.x is installed on **your** system
 
 6. Grab an up-to-date copy of the monero-core repository.
 
@@ -172,11 +162,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   `cd monero-core`
 
-8. Build libwallet
-
-  `./get_libwallet_api.sh`
-
-9. Start the build:
+8. Start the build:
 
   `./build.sh`
 

@@ -40,6 +40,7 @@ import moneroComponents.Clipboard 1.0
 Rectangle {
     property var daemonAddress
     property bool viewOnly: false
+    id: page
 
     color: "#F0EEEE"
 
@@ -54,10 +55,9 @@ Rectangle {
         // try connecting to daemon
     }
 
-
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 17
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -81,7 +81,8 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        RowLayout {
+        GridLayout {
+            columns: (isMobile)? 2 : 3
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
@@ -116,11 +117,48 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Show seed") + translationManager.emptyString
+                text: qsTr("Show seed & keys") + translationManager.emptyString
                 onClicked: {
                     settingsPasswordDialog.open();
                 }
             }
+
+
+/*          Rescan cache - Disabled until we know it's needed
+
+            StandardButton {
+                id: rescanWalletbutton
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Rescan wallet cache") + translationManager.emptyString
+                onClicked: {
+                    // Show confirmation dialog
+                    confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
+                    confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
+                                                    + "The following information will be deleted\n"
+                                                    + "- Recipient addresses\n"
+                                                    + "- Tx keys\n"
+                                                    + "- Tx descriptions\n\n"
+                                                    + "The old wallet cache file will be renamed and can be restored later.\n"
+                                                    );
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
+                    confirmationDialog.onAcceptedCallback = function() {
+                        walletManager.closeWallet();
+                        walletManager.clearWalletCache(persistentSettings.wallet_path);
+                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.password,
+                                                          persistentSettings.testnet);
+                    }
+
+                    confirmationDialog.onRejectedCallback = null;
+
+                    confirmationDialog.open()
+
+                }
+            }
+*/
         }
 
         //! Manage daemon
@@ -141,10 +179,9 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        RowLayout {
+        GridLayout {
             id: daemonStatusRow
-            Layout.fillWidth: true
-
+            columns: (isMobile) ?  2 : 4
             StandardButton {
                 visible: true
                 enabled: !appWindow.daemonRunning
@@ -191,7 +228,7 @@ Rectangle {
 
         }
 
-        RowLayout {
+        ColumnLayout {
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -209,22 +246,27 @@ Rectangle {
         }
 
         RowLayout {
-            id: daemonAddrRow
             Layout.fillWidth: true
             spacing: 10
 
             Label {
                 id: daemonAddrLabel
-
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Daemon address") + translationManager.emptyString
                 fontSize: 16
             }
+        }
+
+        GridLayout {
+            id: daemonAddrRow
+            Layout.fillWidth: true
+            columnSpacing: 10
+            columns: (isMobile) ?  2 : 3
 
             LineEdit {
                 id: daemonAddr
-                Layout.preferredWidth:  200
+                Layout.preferredWidth:  100
                 Layout.fillWidth: true
                 text: (daemonAddress !== undefined) ? daemonAddress[0] : ""
                 placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
@@ -241,7 +283,8 @@ Rectangle {
         }
 
         RowLayout {
-
+            Layout.fillWidth: true
+            spacing: 10
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -249,6 +292,10 @@ Rectangle {
                 text: qsTr("Login (optional)") + translationManager.emptyString
                 fontSize: 16
             }
+
+        }
+
+        RowLayout {
 
             LineEdit {
                 id: daemonUsername
@@ -277,7 +324,6 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                visible: true
                 onClicked: {
                     console.log("saving daemon adress settings")
                     var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
@@ -323,14 +369,22 @@ Rectangle {
         }
 
         // Log level
+
         RowLayout {
             Label {
-                id: logLevelLabel
                 color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
                 fontSize: 16
+                anchors.topMargin: 30
+                Layout.topMargin: 30
             }
-
+        }
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+        ColumnLayout {
             ComboBox {
                 id: logLevel
                 model: [0,1,2,3,4,"custom"]
@@ -413,11 +467,17 @@ Rectangle {
 
         onAccepted: {
             if(appWindow.password === settingsPasswordDialog.password){
-                informationPopup.title  = qsTr("Wallet mnemonic seed") + translationManager.emptyString;
-                informationPopup.text = currentWallet.seed
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    informationPopup.text = ""
+                seedPopup.title  = qsTr("Wallet seed & keys") + translationManager.emptyString;
+                seedPopup.text = "<b>Wallet Mnemonic seed</b> <br>" + currentWallet.seed
+                        + "<br><br> <b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
+                        + "<br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
+                        + "<br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey
+                        + "<br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
+                seedPopup.open()
+                seedPopup.width = 600
+                seedPopup.height = 300
+                seedPopup.onCloseCallback = function() {
+                    seedPopup.text = ""
                 }
 
             } else {
@@ -437,17 +497,39 @@ Rectangle {
 
     }
 
+    StandardDialog {
+        id: seedPopup
+        cancelVisible: false
+        okVisible: true
+        width:600
+        height:400
+
+        property var onCloseCallback
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
+    }
+
     // fires on every page load
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
         viewOnly = currentWallet.viewOnly;
-        appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
+
+        if(typeof daemonManager != "undefined")
+            appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
+
+        console.log(currentWallet.seed);
     }
 
     // fires only once
     Component.onCompleted: {
-        daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+        if(typeof daemonManager != "undefined")
+            daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
+
+
     }
 
     function onDaemonConsoleUpdated(message){

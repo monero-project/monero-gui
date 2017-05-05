@@ -107,8 +107,6 @@ Rectangle {
             }
 
             RowLayout {
-                // Disable this option until stable
-                visible: false
                 Layout.leftMargin: 125
                 CheckBox {
                     id: backgroundMining

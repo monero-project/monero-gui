@@ -36,7 +36,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="105"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;Betalnings-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ett unikt användarnamn använt i &lt;br/&gt;adressboken. Det är inte&lt;br/&gt;information som skickas&lt;br/&gt;med överföringen</translation>
+        <translation>&lt;b&gt;Betalnings-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ett unikt användarnamn som används i &lt;br/&gt;adressboken. Det är inte&lt;br/&gt;information som skickas&lt;br/&gt;med överföringen</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="117"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Inga fler resulstat</translation>
+        <translation>Inga fler resultat</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="104"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        letar efter säkerhetsnivå och adressbok? gå till &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        letar du efter säkerhetsnivå och adressbok? gå till &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</translation>
     </message>
 </context>
 <context>
@@ -584,7 +584,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="118"/>
         <source>Background mining (experimental)</source>
-        <translation>Bakgrundsutvinning (experimentiell)</translation>
+        <translation>Bakgrundsutvinning (experimentell)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="134"/>
@@ -599,7 +599,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
         <source>Start mining</source>
-        <translation>Börja utvinna</translation>
+        <translation>Starta utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="163"/>
@@ -609,7 +609,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>Kunde inte börja utvinna.&lt;br&gt;</translation>
+        <translation>Kunde inte starta utvinning.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="166"/>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicka för att generera ett slumpmässigt betalnings-id för en ny kund&lt;/p&gt; &lt;p&gt;Låt din kund läsa in den där QR-koden för att göra en betalning (om den kunden har programvara som stödjer inläsning av QR-koder).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt läsa in blockkedjan och ts-poolen för inkommande överföringar till dig oavsett du accepterar obekräftade överföringar eller inte. Det är troligt de blir bekräftade inom kort, men det är fortfarande en möjlighet att de inte blir det, så för större belopp vill du nog vänta för en eller fler bekräftelser.</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicka för att generera ett slumpmässigt betalnings-id för en ny kund&lt;/p&gt; &lt;p&gt;Låt din kund läsa in den där QR-koden för att göra en betalning (om den kunden har programvara som stödjer inläsning av QR-koder).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt läsa in blockkedjan och tx-poolen för inkommande överföringar till dig oavsett du accepterar obekräftade överföringar eller inte. Det är troligt de blir bekräftade inom kort, men det är fortfarande en möjlighet att de inte blir det, så för större belopp vill du nog vänta på en eller fler bekräftelser.</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="385"/>
@@ -1443,17 +1443,17 @@
     <message>
         <location filename="../pages/Transfer.qml" line="299"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Ingen giltig adress hittade vid denna OpenAlias-adress</translation>
+        <translation>Ingen giltig adress hittades vid denna OpenAlias-adress</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="304"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Adress hittad, men DNSSEC-signaturen kunde inte verifieras, så denna adress kan vara förfalskad</translation>
+        <translation>Adress hittad, men DNSSEC-signaturer kunde inte verifieras, så denna adress kan vara förfalskad</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="306"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Ingen giltig adress hittades vid denna OpenAlias-adress, men DNSSEC-signaturen kunde inte verifieras, så den kan vara förfalskad</translation>
+        <translation>Ingen giltig adress hittades vid denna OpenAlias-adress, men DNSSEC-signaturer kunde inte verifieras, så den kan vara förfalskad</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="309"/>
@@ -1651,7 +1651,7 @@ Uppgradera eller anslut till en annan nod</translation>
     </message>
     <message>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Adress &lt;font size=&apos;2&apos;&gt;  ( Ange eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
+        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Adress &lt;font size=&apos;2&apos;&gt;  ( Skriv eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="330"/>
@@ -1700,7 +1700,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
-        <translation>Om en betalning har flera överföringar måste var och en kontrolleras och resultatet läggas samman.</translation>
+        <translation>Om en betalning har flera överföringar måste var och en kontrolleras och resultaten läggas samman.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="119"/>
@@ -1768,7 +1768,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Vi är nästan klara - låt oss bara ställa in några Monero-inställningar</translation>
+        <translation>Vi är nästan klara - låt oss bara göra några Monero-inställningar</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
@@ -1792,7 +1792,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Disksparläge använder markant mindre diskutrymme, men samma mängd bandbredd som en vanlig Monero-instans. Att spara hela blockkedjan är fördelaktigt för säkerheten för hela Monero-nätverket. Om du är på en enhet med begränsat diskutrymme så är denna inställning lämpad för dig.</translation>
+        <translation>Disksparläge använder markant mindre diskutrymme, men samma mängd bandbredd som en vanlig Monero-instans. Att spara hela blockkedjan är fördelaktigt för säkerheten för hela Monero-nätverket. Om du använder en enhet med begränsat diskutrymme så är denna inställning lämpad för dig.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
@@ -1849,7 +1849,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>En liten överföringsavgift tas ut för varje överföring. Denna inställning låter dig lägga till ett ytterligare belopp, som en procent av den avgiften, till din överföring för att stöda utveckligen av Monero. Till exempel, en 50% automatisk donation tar en överföringsavgift på 0.005 XMR och lägger på 0.0025 XMR för att stödja utvecklingen av Monero.</translation>
+        <translation>En liten överföringsavgift tas ut för varje överföring. Denna inställning låter dig lägga till ett ytterligare belopp, som en procent av den avgiften, till din överföring för att stödja utveckligen av Monero. Till exempel, en 50 % automatisk donation tar en överföringsavgift på 0,005 XMR och lägger på 0,0025 XMR för att stödja utvecklingen av Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -1918,7 +1918,7 @@ Uppgradera eller anslut till en annan nod</translation>
     </message>
     <message>
         <source>An overview of your Monero configuration is below:</source>
-        <translation type="obsolete">En översikt av din Monero-konfiguration ses nedan:</translation>
+        <translation type="obsolete">En översikt av din Monero-konfiguration visas nedan:</translation>
     </message>
     <message>
         <source>You’re all setup!</source>
@@ -2130,7 +2130,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
                         Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation type="obsolete">Notera att detta lösenord kan inte återskapas, och om det glöms bort måste du återkapa plånboken från minnesfröet som du just fick&lt;br/&gt;&lt;br/&gt;
+        <translation type="obsolete">Notera att detta lösenord inte kan återskapas, och om det glöms bort måste du återskapa plånboken från minnesfröet som du just fick&lt;br/&gt;&lt;br/&gt;
                         Ditt lösenord kommer att användas för att skydda din plånbok och för att bekräfta handlingar, så säkerställ att ditt lösenord är tillräckligt säkert.</translation>
     </message>
     <message>
@@ -2198,7 +2198,7 @@ Uppgradera eller anslut till en annan nod</translation>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="89"/>
         <source>Please choose a language and regional format.</source>
-        <translation>Vänligen ange ett språk och regionala format.</translation>
+        <translation>Vänligen ange ett språk och regionalt format.</translation>
     </message>
 </context>
 <context>
@@ -2387,16 +2387,16 @@ Ringstorlek:</translation>
     <message>
         <location filename="../main.qml" line="714"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Denna adress mottog %1 monero, men överföringen har ännu inte bekräftats</translation>
+        <translation>Denna adress tog emot %1 monero, men överföringen har ännu inte bekräftats</translation>
     </message>
     <message>
         <source>This address received %1 monero, with %2 confirmations</source>
-        <translation type="obsolete">Denna adress mottog %1 monero, med %2 bekräftelser</translation>
+        <translation type="obsolete">Denna adress tog emot %1 monero, med %2 bekräftelser</translation>
     </message>
     <message>
         <location filename="../main.qml" line="723"/>
         <source>This address received nothing</source>
-        <translation>Denna adress mottog ingenting</translation>
+        <translation>Denna adress tog emot ingenting</translation>
     </message>
     <message>
         <location filename="../main.qml" line="669"/>
@@ -2429,7 +2429,7 @@ Ringstorlek:</translation>
     <message>
         <location filename="../main.qml" line="719"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Denna adress mottog %1 monero, med %2 bekräftelse(r).</translation>
+        <translation>Denna adress tog emot %1 monero, med %2 bekräftelse(r).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="735"/>

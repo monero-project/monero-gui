@@ -120,6 +120,7 @@ Rectangle {
 
 
     Text {
+        visible: !isMobile
         id: filterHeaderText
         anchors.left: parent.left
         anchors.right: parent.right
@@ -135,6 +136,7 @@ Rectangle {
     }
 
     Label {
+        visible: !isMobile
         id: selectedAmount
         anchors.right: parent.right
         anchors.top: parent.top
@@ -172,6 +174,7 @@ Rectangle {
 
     // Filter by string
     LineEdit {
+        visible: !isMobile
         id: searchLine
         anchors.left: parent.left
         anchors.right: parent.right
@@ -213,6 +216,7 @@ Rectangle {
 
     // DateFrom picker
     Label {
+        visible: !isMobile
         id: dateFromText
         anchors.left: parent.left
         anchors.top:  searchLine.bottom // descriptionLine.bottom
@@ -225,6 +229,7 @@ Rectangle {
     }
 
     DatePicker {
+        visible: !isMobile
         id: fromDatePicker
         anchors.left: parent.left
         anchors.top: dateFromText.bottom
@@ -239,6 +244,7 @@ Rectangle {
 
     // DateTo picker
     Label {
+        visible: !isMobile
         id: dateToText
         anchors.left: dateFromText.right
         anchors.top:  searchLine.bottom //descriptionLine.bottom
@@ -250,6 +256,7 @@ Rectangle {
     }
 
     DatePicker {
+        visible: !isMobile
         id: toDatePicker
         anchors.left: fromDatePicker.right
         anchors.top: dateToText.bottom
@@ -265,6 +272,7 @@ Rectangle {
 
 
     StandardButton {
+        visible: !isMobile
         id: filterButton
         anchors.bottom: toDatePicker.bottom
         anchors.left: toDatePicker.right
@@ -306,6 +314,7 @@ Rectangle {
     }
 
     CheckBox {
+        visible: !isMobile
         id: advancedFilteringCheckBox
         text: qsTr("Advanced filtering") + translationManager.emptyString
         anchors.left: filterButton.right
@@ -320,6 +329,7 @@ Rectangle {
     }
 
     Label {
+        visible: !isMobile
         id: transactionTypeText
         anchors.left: parent.left
         anchors.top: fromDatePicker.bottom
@@ -340,6 +350,7 @@ Rectangle {
     }
 
     StandardDropdown {
+        visible: !isMobile
         id: transactionTypeDropdown
         anchors.left: parent.left
         anchors.top: transactionTypeText.bottom
@@ -355,6 +366,7 @@ Rectangle {
     }
 
     Label {
+        visible: !isMobile
         id: amountFromText
         anchors.left: transactionTypeText.right
         anchors.top: fromDatePicker.bottom
@@ -367,6 +379,7 @@ Rectangle {
     }
 
     LineEdit {
+        visible: !isMobile
         id: amountFromLine
         anchors.left: transactionTypeDropdown.right
         anchors.top: amountFromText.bottom
@@ -387,6 +400,7 @@ Rectangle {
     }
 
     Label {
+        visible: !isMobile
         id: amountToText
         anchors.left: amountFromText.right
         anchors.top: fromDatePicker.bottom
@@ -399,6 +413,7 @@ Rectangle {
     }
 
     LineEdit {
+        visible: !isMobile
         id: amountToLine
         anchors.left: amountFromLine.right
         anchors.top: amountToText.bottom
@@ -420,6 +435,7 @@ Rectangle {
     }
 
     Item {
+        visible: !isMobile
         id: expandItem
         property bool expanded: false
 
@@ -455,10 +471,11 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+//        anchors.top: parent.top
         color: "#FFFFFF"
         z: 1
 
-        height: middleHeight
+        height: (isMobile)? parent.height : middleHeight
         onHeightChanged: {
             if(height === middleHeight) z = 1
             else if(height === collapsedHeight) z = 0
