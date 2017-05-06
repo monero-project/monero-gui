@@ -204,7 +204,7 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        du suchst das addressbuch und das geheimhaltungslevel? wechsle zum &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; reiter</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        du suchst das Addressbuch und die Vertraulichkeitsstufe? wechsle zum &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; reiter</translation>
     </message>
 </context>
 <context>
@@ -656,7 +656,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="70"/>
         <source>Please enter wallet password</source>
-        <translation>Bitte Wallet-Passwort eingeben</translation>
+        <translation>Bitte Wallet Passwort eingeben</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="70"/>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch dennoch die Gefahr, dass dies nicht geschieht, weswegen du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch die Gefahr, dass dies nicht geschieht, weswegen du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="251"/>
@@ -930,7 +930,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="119"/>
         <source>Show seed</source>
-        <translation>Wörter anzeigen</translation>
+        <translation>Wiederherstellungs-Wörter anzeigen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="221"/>
@@ -1102,18 +1102,18 @@
     <message>
         <location filename="../pages/Sign.qml" line="148"/>
         <source>Message to sign</source>
-        <translation>Zu signierende Nachricht</translation>
+        <translation>Zu unterzeichnende Nachricht</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="167"/>
         <location filename="../pages/Sign.qml" line="242"/>
         <source>Sign</source>
-        <translation>Signieren</translation>
+        <translation>Unterzeichnen</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="195"/>
         <source>Please choose a file to sign</source>
-        <translation>Bitte wähle eine zu signierende Datei aus</translation>
+        <translation>Bitte wähle eine zu unterzeichnende Datei aus</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="208"/>
@@ -1149,7 +1149,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="223"/>
         <source>Filename with message to sign</source>
-        <translation>Dateiname mit zu signierenden Inhalt</translation>
+        <translation>Dateiname mit zu unterzeichnendem Inhalt</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="264"/>
@@ -1157,7 +1157,7 @@
         <location filename="../pages/Sign.qml" line="470"/>
         <location filename="../pages/Sign.qml" line="479"/>
         <source>Signature</source>
-        <translation>Signatur</translation>
+        <translation>Unterzeichnung</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="309"/>
@@ -1494,7 +1494,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="601"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation>Unsignierte Transaktion kann nicht geladen werden</translation>
+        <translation>Nicht unterzeichnete Transaktion kann nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="608"/>
@@ -1702,7 +1702,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz aber dieselbe Menge an Bandbreite, um das Netzwerk und Deine Privatsphähre zu schützen solltest Du aber eine Kopie der Blockchain haben. Sofern Du wenig Speicherplatz hast, solltest Du diesen Modus verwenden.</translation>
+        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz, aber dieselbe Menge an Bandbreite. Um das Netzwerk und Deine Privatsphähre zu schützen, solltest Du deshalb eine Kopie der Blockchain haben und diesen Modus nur verwenden, falls nicht ausreichend Speicherplatz verfügbar ist.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
@@ -1744,7 +1744,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
         <source>Monero development is solely supported by donations</source>
-        <translation>Die Weiterentwicklung von Monero wird alleine durch Spenden finanziert</translation>
+        <translation>Die Weiterentwicklung von Monero wird ausschließlich durch Spenden finanziert</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -1834,7 +1834,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="78"/>
         <source>New wallet details:</source>
-        <translation>Details der neuen Wallet:</translation>
+        <translation>Details des neuen Wallets:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
@@ -2000,7 +2000,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Stelle Wallet mit den Keys oder dem mnemonischen Code wieder her</translation>
+        <translation>Stelle Wallet mit Schlüssel oder mnemonischen Code wieder her</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="241"/>
