@@ -57,7 +57,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
-    property int maxWindowHeight: Screen.height// (Screen.height < 900)? 720 : 800;
+    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
     property string walletName
@@ -846,11 +846,6 @@ ApplicationWindow {
         } else console.log("qrScannerEnabled disabled");
 
         if(!walletsFound()) {
-            console.log("no wallet found")
-            console.log(persistentSettings.wallet_path)
-            //var/mobile/Containers/Data/Application/588FFCBE-8972-43AB-B096-FC38526A40B2/Documents/Monero/wallets/Aaa/Aaa
-            ///var/mobile/Containers/Data/Application/EA9EA534-5E09-41D2-BDEA-951BACB68765/Documents/Monero/wallets/BB/BB
-            walletManager.setLogLevel(2);
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
@@ -994,10 +989,10 @@ ApplicationWindow {
                 PropertyChanges { target: leftPanel; visible: false }
                 PropertyChanges { target: rightPanel; visible: false }
                 PropertyChanges { target: middlePanel; visible: false }
-//                PropertyChanges { target: titleBar; basicButtonVisible: false }
+                PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-//                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
-//                PropertyChanges { target: appWindow; height: maxWindowHeight; }
+                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
+                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: false }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
 //                PropertyChanges { target: frameArea; blocked: true }
@@ -1009,14 +1004,14 @@ ApplicationWindow {
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
                 PropertyChanges { target: rightPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
-//                PropertyChanges { target: titleBar; basicButtonVisible: true }
+                PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-//                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
-//                PropertyChanges { target: appWindow; height: maxWindowHeight; }
+                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
-                PropertyChanges { target: frameArea; blocked: true }
-//                PropertyChanges { target: titleBar; visible: true }
+//                PropertyChanges { target: frameArea; blocked: true }
+                PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
             }
@@ -1256,24 +1251,24 @@ ApplicationWindow {
                 }
             }
 
-//            MouseArea {
-//                enabled: persistentSettings.customDecorations
-//                property var previousPosition
-//                anchors.fill: parent
-//                propagateComposedEvents: true
-//                onPressed: previousPosition = globalCursor.getPosition()
-//                onPositionChanged: {
-//                    if (pressedButtons == Qt.LeftButton) {
-//                        var pos = globalCursor.getPosition()
-//                        var dx = pos.x - previousPosition.x
-//                        var dy = pos.y - previousPosition.y
+            MouseArea {
+                enabled: persistentSettings.customDecorations
+                property var previousPosition
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onPressed: previousPosition = globalCursor.getPosition()
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
 
-//                        appWindow.x += dx
-//                        appWindow.y += dy
-//                        previousPosition = pos
-//                    }
-//                }
-//            }
+                        appWindow.x += dx
+                        appWindow.y += dy
+                        previousPosition = pos
+                    }
+                }
+            }
         }
 
         // new ToolTip
