@@ -565,7 +565,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="134"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktiviere das Schürfen im Batteriemodus</translation>
+        <translation>Aktiviere Schürfvorgang im Batteriemodus</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="144"/>
@@ -1860,12 +1860,12 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardMain.qml" line="168"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Wallet-Namen</translation>
+        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="176"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation>Nur ASCII Zeichen sind im Walletpfad oder im Walletname erlaubt.</translation>
+        <translation>Nur ASCII Zeichen sind im Walletpfad oder im Namen des Wallets erlaubt.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="350"/>
@@ -1886,7 +1886,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardMain.qml" line="378"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Das schreibgeschützte Wallet wurde erstellt. Du kannst es öffnen, indem du das aktuelle Wallet schließt, auf &quot;Öffne Wallet aus einer Datei&quot; klickst und das schreibgeschützte Wallet in auswählst:%1</translation>
+        <translation>Das schreibgeschützte Wallet wurde erstellt. Du kannst es öffnen, indem du das aktuelle Wallet schließt, auf &quot;Öffne Wallet aus einer Datei&quot; klickst und das schreibgeschützte Wallet in :%1 auswählst</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
@@ -1995,7 +1995,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="155"/>
         <source>Create a new wallet</source>
-        <translation>Erstelle eine neue Wallet</translation>
+        <translation>Erstelle ein neues Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
@@ -2068,8 +2068,8 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf deine Wallet bekommen, indem du den&lt;br/&gt;&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt die Wallet und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
+        <translation>Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf dein Wallet bekommen, indem du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt das Wallet und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
     </message>
 </context>
 <context>
@@ -2271,7 +2271,7 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="430"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe deine Wallet und den Daemon Bericht nach Fehlern. Du kannst auch versuchen %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfe dein Wallet und den Daemon Bericht nach Fehlern. Du kannst auch versuchen %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="504"/>
