@@ -90,7 +90,8 @@ ios:arm64 {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
-        -lunbound
+        -lunbound \
+        -leasylogging
 }
 
 

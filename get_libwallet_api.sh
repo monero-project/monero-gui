@@ -226,6 +226,8 @@ fi
 # build install epee
 eval make -C $MONERO_DIR/build/release/contrib/epee all install
 
+# install easylogging
+eval make -C $MONERO_DIR/build/release/external/easylogging++ all install
 
 # Install libunwind
 echo "Installing libunbound..."
