@@ -978,7 +978,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="199"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Befehlszeilenoptionen für Daemon Inbetriebnahme</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="207"/>
@@ -2152,7 +2152,7 @@ Please upgrade or connect to another daemon</source>
         <location filename="../main.qml" line="602"/>
         <location filename="../main.qml" line="603"/>
         <source>No unmixable outputs to sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine unvermischbaren Ausgänge zum zusammenfegen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="505"/>
