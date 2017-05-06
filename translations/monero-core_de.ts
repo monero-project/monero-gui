@@ -1661,7 +1661,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="181"/>
         <source>Transaction key</source>
-        <translation>Transaktions Schlüssel</translation>
+        <translation>Transaktionsschlüssel</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
