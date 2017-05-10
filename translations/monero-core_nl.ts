@@ -1508,7 +1508,7 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation>Maak TX bestand</translation>
     </message>
     <message>

@@ -1438,7 +1438,7 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation>Kreu tr dosieron</translation>
     </message>
     <message>

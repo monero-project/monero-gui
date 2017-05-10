@@ -1497,8 +1497,8 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
-        <translation>skapa tx-fil</translation>
+        <source>Create tx file</source>
+        <translation>Skapa tx-fil</translation>
     </message>
     <message>
         <source>sign tx file</source>

@@ -1513,8 +1513,8 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
-        <translation>créer fichier tx</translation>
+        <source>Create tx file</source>
+        <translation>Créer fichier tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="537"/>

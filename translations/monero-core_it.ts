@@ -1496,7 +1496,7 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation type="unfinished">crea file tx</translation>
     </message>
     <message>
