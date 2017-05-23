@@ -1,5 +1,6 @@
 TEMPLATE = app
-
+CONFIG+=declarative_debug
+CONFIG+=qml_debug
 QT += qml quick widgets
 
 WALLET_ROOT=$$PWD/monero
@@ -79,20 +80,31 @@ SOURCES = *.qml \
 ios:armv7 {
     message("target is armv7")
     LIBS += \
-        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/armv7 \
+        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/armv7 \
 }
 ios:arm64 {
     message("target is arm64")
     LIBS += \
-        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
+        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
-!ios {
+!ios&&!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
         -lunbound \
         -leasylogging
 }
+
+android {
+    message("Host is Android")
+    LIBS += -L$$WALLET_ROOT/lib \
+        -lwallet_merged \
+        -lepee \
+        -lunbound \
+        -leasylogging
+}
+
+
 
 
 ios {
@@ -107,8 +119,8 @@ ios {
         -lunbound
 
     LIBS+= \
-        -L$$PWD/../OpenSSL-for-iPhone/lib \
-        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
+        -L$$PWD/../../OpenSSL-for-iPhone/lib \
+        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/arm64 \
         -lboost_serialization \
         -lboost_thread \
         -lboost_system \
@@ -397,7 +409,8 @@ OTHER_FILES += \
 DISTFILES += \
     notes.txt \
     monero/src/wallet/CMakeLists.txt \
-    components/MobileHeader.qml
+    components/MobileHeader.qml \
+    pages/Keys.qml
 
 
 # windows application icon

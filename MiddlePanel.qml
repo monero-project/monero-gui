@@ -47,7 +47,7 @@ Rectangle {
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
-    property int minHeight: 800
+    property int minHeight: 800 * scaleRatio
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
@@ -58,6 +58,7 @@ Rectangle {
     property Settings settingsView: Settings { }
     property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
+    property Keys keysView: Keys { }
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
@@ -132,7 +133,7 @@ Rectangle {
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 1000 }
+                PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
@@ -152,10 +153,14 @@ Rectangle {
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+            }, State {
+                name: "Keys"
+                PropertyChanges { target: root; currentView: keysView }
                 PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }
         ]

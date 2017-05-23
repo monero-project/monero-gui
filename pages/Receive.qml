@@ -169,24 +169,23 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         anchors.margins: (isMobile)? 17 : 40
-        anchors.topMargin: 40
+        anchors.topMargin: 40 * scaleRatio
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 20
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 12
-        property int qrCodeSize: 240
+        spacing: 20 * scaleRatio
+        property int labelWidth: 120 * scaleRatio
+        property int editWidth: 400 * scaleRatio
+        property int lineEditFontSize: 12 * scaleRatio
+        property int qrCodeSize: 240 * scaleRatio
 
 
         ColumnLayout {
             id: addressRow
             Label {
                 id: addressLabel
-                fontSize: 14
                 text: qsTr("Address") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
@@ -218,7 +217,6 @@ Rectangle {
             Label {
                 Layout.columnSpan: 2
                 id: paymentIdLabel
-                fontSize: 14
                 text: qsTr("Payment ID") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
@@ -246,7 +244,6 @@ Rectangle {
 
             StandardButton {
                 id: generatePaymentId
-                width: 80
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -258,7 +255,6 @@ Rectangle {
             StandardButton {
                 id: clearPaymentId
                 enabled: !!paymentIdLine.text
-                width: 80
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -272,7 +268,6 @@ Rectangle {
             id: integratedAddressRow
             Label {
                 id: integratedAddressLabel
-                fontSize: 14
                 text: qsTr("Integrated address") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
@@ -305,7 +300,6 @@ Rectangle {
             id: amountRow
             Label {
                 id: amountLabel
-                fontSize: 14
                 text: qsTr("Amount") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
@@ -333,7 +327,6 @@ Rectangle {
 
             Label {
                 id: trackingLabel
-                fontSize: 14
                 textFormat: Text.RichText
                 text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                            Tracking <font size='2'> (</font><a href='#'>help</a><font size='2'>)</font>")
@@ -404,7 +397,7 @@ Rectangle {
 
         Image {
             id: qrCode
-            anchors.margins: 50
+            anchors.margins: 50 * scaleRatio
             anchors.top: trackingRow.bottom
             Layout.fillWidth: true
             Layout.minimumHeight: mainLayout.qrCodeSize

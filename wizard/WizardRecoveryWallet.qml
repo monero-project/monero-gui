@@ -92,7 +92,7 @@ ColumnLayout {
 
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
-            settingsObject['wallet'] = wallet;
+            m_wallet = wallet;
             settingsObject['is_recovering'] = true;
             settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {

@@ -5,10 +5,12 @@
 #include <QTime>
 #include <QMutex>
 #include <QtConcurrent/QtConcurrent>
+#include <QNetworkReply>
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
+
 
 namespace Monero {
     class Wallet; // forward declaration
@@ -45,6 +47,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
+    Q_PROPERTY(quint64 restoreHeight READ getRestoreHeight)
 
 public:
 
@@ -241,6 +244,12 @@ public:
     QString getSecretSpendKey() const {return QString::fromStdString(m_walletImpl->secretSpendKey());}
     QString getPublicSpendKey() const {return QString::fromStdString(m_walletImpl->publicSpendKey());}
 
+    //! get wallet creation date
+    //! TODO: implement getRestoreHeight in libwallet
+    Q_INVOKABLE quint64 getRestoreHeight() const { return 1270121; }
+
+    Q_INVOKABLE void setLightWallet(bool enable);
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
@@ -261,7 +270,8 @@ signals:
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
     void connectionStatusChanged(ConnectionStatus status) const;
-
+public slots:
+    void replyFinished(QNetworkReply*);
 private:
     Wallet(QObject * parent = nullptr);
     Wallet(Monero::Wallet *w, QObject * parent = 0);
@@ -293,6 +303,7 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
+    bool m_lightWallet;
 };
 
 

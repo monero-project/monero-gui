@@ -51,19 +51,20 @@ Rectangle {
 
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
-        console.log("address: " + persistentSettings.daemon_address)
-        // try connecting to daemon
+
+        if(persistentSettings.lightWallet)
+            walletTypeDropdown.currentIndex = 1
+        else
+            walletTypeDropdown.currentIndex = 0
     }
 
     ColumnLayout {
         id: mainLayout
-        anchors.leftMargin: 40
-        anchors.rightMargin: 40
-        anchors.topMargin: 20
+        anchors.margins: 17 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 10
+        spacing: 10 * scaleRatio
 
         //! Manage wallet
         RowLayout {
@@ -72,8 +73,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Manage wallet") + translationManager.emptyString
-                fontSize: 16
-//                Layout.topMargin: 10
+                Layout.topMargin: 10 * scaleRatio
             }
         }
 
@@ -186,9 +186,77 @@ Rectangle {
             }
         }
 
+        // Wallet type dropdown
+        RowLayout {
+            z: parent.z +1
+            Label {
+                id: walletTypeLabel
+                color: "#4A4949"
+                text: qsTr("Wallet type") + translationManager.emptyString
+                fontSize: 16
+            }
+
+            ListModel {
+                 id: walletTypeModel
+
+                 ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
+                 ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
+
+             }
+
+            StandardDropdown {
+                Layout.minimumWidth: 100
+                id: walletTypeDropdown
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                z: parent.z + 1
+                dataModel: walletTypeModel
+                onChanged: {
+                    console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
+                    console.log(walletTypeDropdown.currentIndex);
+
+                    // Enable Light Wallet
+                    if(!persistentSettings.lightWallet) {
+                        console.log("enabling lightwallet");
+                        confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                        confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
+
+                        confirmationDialog.icon = StandardIcon.Question
+                        confirmationDialog.cancelText = qsTr("Cancel")
+
+                        // Continue
+                        confirmationDialog.onAcceptedCallback = function() {
+                            persistentSettings.lightWallet = true
+                            currentWallet.setLightWallet(true);
+                            walletTypeDropdown.currentIndex = 1
+                        }
+
+                        // Cancel
+                        confirmationDialog.onRejectedCallback = function() {
+                            persistentSettings.lightWallet = false
+                            walletTypeDropdown.currentIndex = 0
+                        };
+
+                        confirmationDialog.open()
+
+                    // Disable light wallet
+                    } else {
+                        currentWallet.setLightWallet(false);
+                        persistentSettings.lightWallet = false
+                    }
+
+                }
+            }
+
+        }
+
+
         //! Manage daemon
         RowLayout {
             Layout.topMargin: 20
+            visible: !isMobile
             Label {
                 id: manageDaemonLabel
                 color: "#4A4949"
@@ -205,12 +273,14 @@ Rectangle {
             }
         }
         Rectangle {
+            visible: !isMobile
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
         }
 
         GridLayout {
+            visible: !isMobile
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
@@ -259,6 +329,7 @@ Rectangle {
 
         ColumnLayout {
             id: blockchainFolderRow
+            visible: !isMobile
             Label {
                 id: blockchainFolderLabel
                 color: "#4A4949"
@@ -288,7 +359,7 @@ Rectangle {
 
 
         RowLayout {
-            visible: daemonAdvanced.checked
+            visible: daemonAdvanced.checked && !isMobile
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -305,22 +376,25 @@ Rectangle {
             }
         }
 
-        RowLayout {
-            visible: daemonAdvanced.checked
-            id: daemonAddrRow
-            Layout.fillWidth: true
-            spacing: 10
 
-            Label {
-                id: daemonAddrLabel
-                Layout.fillWidth: true
-                color: "#4A4949"
-                text: qsTr("Daemon address") + translationManager.emptyString
-                fontSize: 16
-            }
-        }
+//        RowLayout {
+//            v
+//            id: daemonAddrRow
+//            Layout.fillWidth: true
+//            spacing: 10
+
+//            Label {
+//                id: daemonAddrLabel
+//                Layout.fillWidth: true
+//                color: "#4A4949"
+//                text: qsTr("Daemon address") + translationManager.emptyString
+//                fontSize: 16
+//            }
+//        }
+
 
         GridLayout {
+            visible: daemonAdvanced.checked
             id: daemonAddrRow
             Layout.fillWidth: true
             columnSpacing: 10
@@ -345,6 +419,7 @@ Rectangle {
         }
 
         RowLayout {
+            Layout.topMargin: 17 * scaleRatio
             Layout.fillWidth: true
             spacing: 10
             visible: daemonAdvanced.checked
@@ -408,6 +483,7 @@ Rectangle {
         }
 
         RowLayout {
+
             RowLayout {
                 Label {
                     color: "#4A4949"
@@ -459,15 +535,16 @@ Rectangle {
         }
 
         RowLayout {
+            visible: !isMobile
             Label {
                 color: "#4A4949"
                 text: qsTr("Layout settings") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
+            visible: !isMobile
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
@@ -475,6 +552,7 @@ Rectangle {
 
         RowLayout {
             CheckBox {
+                visible: !isMobile
                 id: customDecorationsCheckBox
                 checked: persistentSettings.customDecorations
                 onClicked: appWindow.setCustomWindowDecorations(checked)
@@ -490,9 +568,8 @@ Rectangle {
             Label {
                 color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
@@ -520,7 +597,7 @@ Rectangle {
 
             LineEdit {
                 id: logCategories
-                Layout.preferredWidth:  200
+                Layout.preferredWidth:  200 * scaleRatio
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
@@ -540,9 +617,8 @@ Rectangle {
             Label {
                 color: "#4A4949"
                 text: qsTr("Version") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
@@ -553,17 +629,15 @@ Rectangle {
 
         Label {
             id: guiVersion
-            Layout.topMargin: 8
+            Layout.topMargin: 8 * scaleRatio
             color: "#4A4949"
             text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
-            fontSize: 16
         }
 
         Label {
             id: guiMoneroVersion
             color: "#4A4949"
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
-            fontSize: 16
         }
     }
 
@@ -578,52 +652,10 @@ Rectangle {
         }
     }
 
-    PasswordDialog {
-        id: settingsPasswordDialog
-
-        onAccepted: {
-            if(appWindow.password === settingsPasswordDialog.password){
-                if(currentWallet.seedLanguage == "") {
-                    console.log("No seed language set. Using English as default");
-                    currentWallet.setSeedLanguage("English");
-                }
-
-                seedPopup.title  = qsTr("Wallet seed & keys") + translationManager.emptyString;
-                seedPopup.text = "<b>Wallet Mnemonic seed</b> <br>" + currentWallet.seed
-                        + "<br><br> <b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
-                        + "<br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
-                        + "<br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey
-                        + "<br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
-                seedPopup.open()
-                seedPopup.width = 600
-                seedPopup.height = 300
-                seedPopup.onCloseCallback = function() {
-                    seedPopup.text = ""
-                }
-
-            } else {
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Wrong password");
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    settingsPasswordDialog.open()
-                }
-            }
-
-            settingsPasswordDialog.password = ""
-        }
-        onRejected: {
-
-        }
-
-    }
-
     StandardDialog {
         id: seedPopup
         cancelVisible: false
         okVisible: true
-        width:600
-        height:400
 
         property var onCloseCallback
         onAccepted:  {
@@ -693,7 +725,7 @@ Rectangle {
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
-        viewOnly = currentWallet.viewOnly;
+
 
         if(typeof daemonManager != "undefined")
             appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
@@ -703,8 +735,6 @@ Rectangle {
     Component.onCompleted: {
         if(typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
-
-
     }
 
     function onDaemonConsoleUpdated(message){

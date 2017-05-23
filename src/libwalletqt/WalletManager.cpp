@@ -289,8 +289,36 @@ QString WalletManager::resolveOpenAlias(const QString &address) const
 }
 bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
 {
-    if (m_currentWallet)
-        return m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
+    if (m_currentWallet) {
+        m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
+        return true;
+    } else {
+        // QR code reader in wizard before wallet is initialized
+
+        if (!uri.startsWith("monero:"))
+        {
+          error = "URI has wrong scheme (expected \"monero:\"): " + uri;
+          return false;
+        }
+        QString remainder = uri.mid(7);
+        qDebug() << remainder;
+        int address_end = remainder.indexOf("?");
+        qDebug() << address_end;
+        address = remainder.mid(0,address_end);
+        remainder = remainder.mid(address_end+1);
+        qDebug() << remainder;
+        QStringList up_list = remainder.split("&");
+        qDebug() << up_list;
+        foreach (QString up, up_list) {
+            unknown_parameters << up;
+        }
+        qDebug() << unknown_parameters;
+        //Parse address
+
+        return true;
+//        std::string remainder = uri.substr(7);
+
+    }
     return false;
 }
 

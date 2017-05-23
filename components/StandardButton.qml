@@ -31,19 +31,19 @@ import QtQuick.Layouts 1.1
 
 Item {
     id: button
-    height: 37
-    property string shadowPressedColor
-    property string shadowReleasedColor
-    property string pressedColor
-    property string releasedColor
+    height: 37 * scaleRatio
+    property string shadowPressedColor: "#B32D00"
+    property string shadowReleasedColor: "#FF4304"
+    property string pressedColor: "#FF4304"
+    property string releasedColor: "#FF6C3C"
     property string icon: ""
     property string textColor: "#FFFFFF"
-    property int fontSize: 12
+    property int fontSize: 12 * scaleRatio
     property alias text: label.text
     signal clicked()
 
     // Dynamic label width
-    Layout.minimumWidth: (label.contentWidth > 80)? label.contentWidth + 20 : 100
+    Layout.minimumWidth: (label.contentWidth + 20 * scaleRatio)  //  (label.contentWidth > 80)? label.contentWidth + 20 : 100
 
     Rectangle {
         anchors.left: parent.left

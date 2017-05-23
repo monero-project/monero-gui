@@ -19,6 +19,10 @@
 #include <QMutex>
 #include <QMutexLocker>
 
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
     static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 30;
@@ -129,6 +133,10 @@ void Wallet::updateConnectionStatusAsync()
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
+    //TODO: lightwallet only
+    if(m_lightWallet)
+        return Wallet::ConnectionStatus_Connected;
+
     // cache connection status
     if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
         qDebug() << "Checking connection status";
@@ -136,7 +144,6 @@ Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
         m_connectionStatusTime.restart();
         updateConnectionStatusAsync();
     }
-
     return m_connectionStatus;
 }
 
@@ -178,8 +185,20 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
         m_walletImpl->setRecoveringFromSeed(true);
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
-    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
-    return true;
+    try {
+        bool lightWalletNewAddress;
+        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), m_lightWallet, lightWalletNewAddress);
+        if(lightWalletNewAddress) {
+            // Lightwallet server havent seen the address before. Consider full rescan.
+            qDebug("LIGHTWALLET address is new!");
+        } else
+            qDebug("LIGHTWALLET address is old!");
+
+    } catch (const std::exception &e) {
+        qDebug() << e.what();
+        return false;
+    }
+     return true;
 }
 
 void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemonPassword)
@@ -198,6 +217,9 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
         emit connectionStatusChanged(m_connectionStatus);
     }
 
+    qDebug() << "Pausing refresh before re-init: ";
+    m_walletImpl->pauseRefresh();
+
     QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
                                   daemonAddress, upperTransactionLimit, isRecovering, restoreHeight);
     QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
@@ -210,10 +232,17 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
             qDebug() << "init async finished - starting refresh";
             connected(true);
             m_walletImpl->startRefresh();
-
         }
     });
     watcher->setFuture(future);
+}
+
+void Wallet::setLightWallet(bool enable) {
+    m_lightWallet = enable;
+    initAsync("localhost:18081");
+    qDebug() << "Setting lightwallet to " << enable;
+    qDebug() << "re-initing";
+
 }
 
 //! create a view only wallet
@@ -242,7 +271,17 @@ bool Wallet::viewOnly() const
 
 quint64 Wallet::balance() const
 {
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager();
+    connect(manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(replyFinished(QNetworkReply*)));
+
     return m_walletImpl->balance();
+}
+
+void Wallet::replyFinished(QNetworkReply * reply) {
+    qDebug() << "Reply finished";
+    qDebug() << reply->readAll();
 }
 
 quint64 Wallet::unlockedBalance() const
@@ -257,8 +296,11 @@ quint64 Wallet::blockChainHeight() const
 
 quint64 Wallet::daemonBlockChainHeight() const
 {
-    // cache daemon blockchain height for some time (60 seconds by default)
+    // TODO: implement ux for showing if light wallet isnt synced.
+    if(m_lightWallet)
+        return 0;
 
+    // cache daemon blockchain height for some time (60 seconds by default)
     if (m_daemonBlockChainHeight == 0
             || m_daemonBlockChainHeightTime.elapsed() / 1000 > m_daemonBlockChainHeightTtl) {
         m_daemonBlockChainHeight = m_walletImpl->daemonBlockChainHeight();
@@ -269,6 +311,9 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
+    if(m_lightWallet)
+        return 0;
+
     if (m_daemonBlockChainTargetHeight <= 1
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
@@ -624,6 +669,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_connectionStatusRunning = false;
     m_daemonUsername = "";
     m_daemonPassword = "";
+    m_lightWallet = false;
 }
 
 Wallet::~Wallet()

@@ -57,7 +57,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void enabledChanged();
 
-    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name);
+    void decoded(const QString &address, const QString &payment_id, const QString &amount, const QString &tx_description, const QString &recipient_name, const QVariantMap &extra_parameters);
     void decode(int type, const QString &data);
     void notifyError(const QString &error, bool warning = false);
 

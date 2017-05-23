@@ -35,40 +35,77 @@ import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
 
-Window {
+Item {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    visible: false
+//    modality: Qt.ApplicationModal
+//    flags: Qt.Window | Qt.FramelessWindowHint
+
+//    color: "white"
+    Rectangle {
+        id: bg
+        z: parent.z + 1
+        anchors.fill: parent
+        color: "white"
+        opacity: 0.9
+
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: {
+//                console.log("content is blocked!");
+//            }
+//        }
+
+    }
+
     property alias password: passwordInput.text
     property string walletName
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
-
+    signal closeCallback()
 
     function open(walletName) {
         root.walletName = walletName ? walletName : ""
+        // Center
+//        root.x = appWindow.width/2 - root.width/2
+//        root.y = screenHeight/2 - root.height/2
+        leftPanel.enabled = false
+        middlePanel.enabled = false
+        titleBar.enabled = false
         show()
+        root.visible = true;
+        passwordInput.focus = true
     }
+
+    function close() {
+        leftPanel.enabled = true
+        middlePanel.enabled = true
+        titleBar.enabled = true
+        root.visible = false;
+        closeCallback();
+    }
+
 
     // TODO: implement without hardcoding sizes
-    width: 480
-    height: walletName ? 240 : 200
+//    width: isMobile ? screenWidth : 480
+//    height: isMobile ? screenHeight - mobileHeader.height : walletName ? 240 : 200
 
     // Make window draggable
-    MouseArea {
-        anchors.fill: parent
-        property point lastMousePos: Qt.point(0, 0)
-        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
-        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
-        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
-    }
+//    MouseArea {
+//        anchors.fill: parent
+//        property point lastMousePos: Qt.point(0, 0)
+//        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
+//        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
+//        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
+//    }
 
     ColumnLayout {
+        z: bg.z + 1
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 }
+        anchors { fill: parent; margins: 35 * scaleRatio }
 
         ColumnLayout {
             id: column
@@ -81,20 +118,20 @@ Window {
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 24
+                font.pixelSize: 24 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
 
             TextField {
                 id : passwordInput
-                focus: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
+                Layout.maximumWidth: 400 * scaleRatio
                 horizontalAlignment: TextInput.AlignHCenter
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: "Arial"
-                font.pixelSize: 32
+                font.pixelSize: 32 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
 
@@ -128,27 +165,26 @@ Window {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 anchors.bottomMargin: 3
+                Layout.maximumWidth: passwordInput.width
 
             }
             // padding
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                height: 10
-                opacity: 0
-                color: "black"
-            }
+//            Rectangle {
+//                Layout.fillWidth: true
+//                Layout.alignment: Qt.AlignHCenter
+//                height: 10 * scaleRatio
+//                opacity: 0
+//                color: "black"
+//            }
         }
         // Ok/Cancel buttons
         RowLayout {
             id: buttons
-            spacing: 60
+            spacing: 60 * scaleRatio
             Layout.alignment: Qt.AlignHCenter
             
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -162,8 +198,6 @@ Window {
             }
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

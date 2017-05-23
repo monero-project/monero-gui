@@ -61,15 +61,26 @@ void QrCodeScanner::processCode(int type, const QString &data)
         emit notifyError(error);
         return;
     }
+    QVariantMap parsed_unknown_parameters;
     if(unknown_parameters.size() > 0)
     {
         qDebug() << "unknown parameters " << unknown_parameters;
+        foreach(const QString &item, unknown_parameters )
+        {
+            QStringList parsed_item = item.split("=");
+            qDebug() << "parsed_item: " << parsed_item;
+            qDebug() << "parsed_item size: " << parsed_item.size();
+            if(parsed_item.size() == 2) {
+                qDebug() << "adding parsed item: " << parsed_item[0] << " " << parsed_item[1];
+                parsed_unknown_parameters.insert(parsed_item[0], parsed_item[1]);
+            }
+        }
         emit notifyError(error, true);
     }
     qDebug() << "Parsed URI : " << address << " " << payment_id << " " << amount << " " << tx_description << " " << recipient_name << " " << error;
     QString s_amount = WalletManager::instance()->displayAmount(amount);
     qDebug() << "Amount passed " << s_amount ;
-    emit decoded(address, payment_id, s_amount, tx_description, recipient_name);
+    emit decoded(address, payment_id, s_amount, tx_description, recipient_name, parsed_unknown_parameters);
 }
 void QrCodeScanner::processFrame(QVideoFrame frame)
 {

@@ -36,18 +36,19 @@ Item {
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
-    property int fontSize: 14
+    property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
     signal clicked()
-    height: 25
-    width: label.x + label.width
-    Layout.minimumWidth: label.x + label.contentWidth
-    clip: true
+    height: 25 * scaleRatio
+//    width: label.x + label.width
+//    Layout.minimumWidth: label.x + label.contentWidth
+    width:100
+//    clip: true
 
     Rectangle {
         anchors.left: parent.left
         height: parent.height - 1
-        width: 25
+        width: 25 * scaleRatio
         //radius: 4
         y: 0
         color: "#DBDBDB"
@@ -57,7 +58,7 @@ Item {
         id: backgroundRect
         anchors.left: parent.left
         height: parent.height - 1
-        width: 25
+        width: 25 * scaleRatio
         //radius: 4
         y: 1
         color: "#FFFFFF"
@@ -70,13 +71,15 @@ Item {
     }
 
     Text {
+//        Layout.fillWidth: true
         id: label
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 25 + 12
+        anchors.leftMargin: (25 + 12) * scaleRatio
         font.family: "Arial"
         font.pixelSize: checkBox.fontSize
         color: "#525252"
+        wrapMode: Text.Wrap
     }
 
     MouseArea {

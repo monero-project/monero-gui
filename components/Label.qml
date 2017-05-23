@@ -35,7 +35,7 @@ Item {
     property alias color: label.color
     property alias textFormat: label.textFormat
     property string tipText: ""
-    property int fontSize: 12
+    property int fontSize: 16 * scaleRatio
     property alias wrapMode: label.wrapMode
     signal linkActivated()
     width: icon.x + icon.width
@@ -47,7 +47,7 @@ Item {
         anchors.bottomMargin: 2
         anchors.left: parent.left
         font.family: "Arial"
-        font.pixelSize: parent.fontSize
+        font.pixelSize: fontSize
         color: "#555555"
         onLinkActivated: item.linkActivated()
     }

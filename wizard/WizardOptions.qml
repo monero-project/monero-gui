@@ -38,14 +38,14 @@ ColumnLayout {
     signal openWalletClicked()
     opacity: 0
     visible: false
-    property int buttonSize: (isMobile) ? 80 : 190
-    property int buttonImageSize: (isMobile) ? buttonSize - 10 : buttonSize - 30
+    property int buttonSize: (isMobile) ? 80 * scaleRatio : 190
+    property int buttonImageSize: (isMobile) ? buttonSize - 10 * scaleRatio : buttonSize - 30
 
     function onPageClosed() {
         // Save settings used in open from file.
         // other wizard settings are saved on last page in applySettings()
         appWindow.persistentSettings.testnet = wizard.settings["testnet"]
-        appWindow.persistentSettings.daemon_address = wizard.settings["daemon_address"]
+//        appWindow.persistentSettings.daemon_address = wizard.settings["daemon_address"]
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
@@ -53,7 +53,7 @@ ColumnLayout {
     }
 
     function saveDaemonAddress() {
-        wizard.settings["daemon_address"] = daemonAddress.text
+//        wizard.settings["daemon_address"] = daemonAddress.text
         wizard.settings["testnet"] = testNet.checked
     }
 
@@ -73,13 +73,13 @@ ColumnLayout {
         id: headerColumn
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
-        Layout.bottomMargin: (!isMobile) ? 40 : 20
-        spacing: 30
+        Layout.bottomMargin: (!isMobile) ? 40 * scaleRatio : 20
+        spacing: 30 * scaleRatio
 
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
@@ -90,7 +90,7 @@ ColumnLayout {
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 18 * scaleRatio
             //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
@@ -104,8 +104,8 @@ ColumnLayout {
         Layout.rightMargin: wizardRightMargin
         Layout.alignment: Qt.AlignCenter
         id: actionButtons
-        columnSpacing: 40
-        rowSpacing: 10
+        columnSpacing: 40 * scaleRatio
+        rowSpacing: 10 * scaleRatio
         Layout.fillWidth: true
         Layout.fillHeight: true
         flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
@@ -114,8 +114,8 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -146,9 +146,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: 190 * scaleRatio
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
@@ -160,8 +160,8 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -189,9 +189,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: 190 * scaleRatio
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
@@ -204,8 +204,8 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -233,9 +233,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: 190 * scaleRatio
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Open a wallet from file") + translationManager.emptyString
@@ -247,60 +247,25 @@ ColumnLayout {
 
     }
 
-    // daemon select
-    // TODO: Move to separate page
+    RowLayout {
+//        Layout.leftMargin: wizardLeftMargin
+//        Layout.rightMargin: wizardRightMargin
+        Layout.fillWidth: true
+        Layout.topMargin: 30 * scaleRatio
 
-    ColumnLayout {
-        Layout.leftMargin: wizardLeftMargin
-        Layout.rightMargin: wizardRightMargin
-        Layout.alignment: Qt.AlignCenter
-
-
-        Label {
-            Layout.topMargin: 20
-            fontSize: 14
-            text: qsTr("Custom daemon address (optional)") + translationManager.emptyString
-                  + translationManager.emptyString
-        }
-
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-
-            columnSpacing: 20
-            rowSpacing: 20
-            flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-
-            RowLayout {
-                spacing: 20
-                Layout.alignment: Qt.AlignCenter
-
-                LineEdit {
-                    id: daemonAddress
-                    Layout.alignment: Qt.AlignCenter
-                    width: 200
-                    fontSize: 14
-                    text: {
-                        if(appWindow.persistentSettings.daemon_address)
-                            return appWindow.persistentSettings.daemon_address;
-                        return testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
-                    }
-
-                }
-
-                CheckBox {
-                    id: testNet
-                    Layout.alignment: Qt.AlignCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: qsTr("Testnet") + translationManager.emptyString
-                    background: "#FFFFFF"
-                    fontColor: "#4A4646"
-                    fontSize: 16
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
-                    checked: appWindow.persistentSettings.testnet;
-                }
-            }
+        CheckBox {
+            id: testNet
+            Layout.alignment: Qt.AlignRight
+//            Layout.alignment: Qt.AlignCenter
+//            anchors.verticalCenter: parent.verticalCenter
+//            anchors.horizontalCenter: parent.horizontalCenter;
+            text: qsTr("Testnet") + translationManager.emptyString
+            background: "#FFFFFF"
+            fontColor: "#4A4646"
+            fontSize: 16 * scaleRatio
+            checkedIcon: "../images/checkedVioletIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
+            checked: appWindow.persistentSettings.testnet;
         }
     }
 

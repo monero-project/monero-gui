@@ -73,8 +73,8 @@ Rectangle {
     function updateMixin() {
         var fillLevel = privacyLevelItem.fillLevel
         var mixin = scaleValueToMixinCount(fillLevel)
-        print ("PrivacyLevel changed:"  + fillLevel)
-        print ("mixin count: "  + mixin)
+        console.log("PrivacyLevel changed:"  + fillLevel)
+        console.log("mixin count: "  + mixin)
         privacyLabel.text = qsTr("Privacy level (ringsize %1)").arg(mixin+1) + translationManager.emptyString
     }
 
@@ -113,25 +113,25 @@ Rectangle {
       anchors.left: parent.left
       anchors.right: parent.right
       anchors.topMargin: 20
-      height: 400
+      height: 400 * scaleRatio
 
       Label {
           id: amountLabel
           anchors.left: parent.left
           anchors.top: parent.top
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 17 * scaleRatio
           text: qsTr("Amount") + translationManager.emptyString
-          fontSize: 14
+//          fontSize: 14
       }
 
       Label {
           id: transactionPriority
           anchors.top: parent.top
-          anchors.topMargin: 17
-          fontSize: 14
-          x: (parent.width - 17) / 2 + 17
+          anchors.topMargin: 17 * scaleRatio
+//          fontSize: 14
+          x: (parent.width - 17 * scaleRatio) / 2 + 17 * scaleRatio
           text: qsTr("Transaction priority") + translationManager.emptyString
       }
 
@@ -139,13 +139,13 @@ Rectangle {
       Row {
           id: amountRow
           anchors.top: amountLabel.bottom
-          anchors.topMargin: 5
+          anchors.topMargin: 5 * scaleRatio
           anchors.left: parent.left
-          anchors.leftMargin: 7
-          width: (parent.width - 17) / 2 + 10
+          anchors.leftMargin: 7 * scaleRatio
+          width: (parent.width - (17 * scaleRatio)) / 2 + 10
           Item {
-              width: 37
-              height: 37
+              width: 37 * scaleRatio
+              height: 37 * scaleRatio
 
               Image {
                   anchors.centerIn: parent
@@ -156,7 +156,7 @@ Rectangle {
           LineEdit {
               id: amountLine
               placeholderText: qsTr("") + translationManager.emptyString
-              width: parent.width - 37 - 17 - 60
+              width: parent.width - 37 * scaleRatio - 17 * scaleRatio - 60 * scaleRatio
               validator: DoubleValidator {
                   bottom: 0.0
                   top: 18446744.073709551615
@@ -171,7 +171,7 @@ Rectangle {
               //anchors.left: amountLine.right
               //anchors.top: amountLine.top
               //anchors.bottom: amountLine.bottom
-              width: 60
+              width: 60 * scaleRatio
               text: qsTr("All") + translationManager.emptyString
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
@@ -210,8 +210,8 @@ Rectangle {
           id: priorityDropdown
           anchors.top: transactionPriority.bottom
           anchors.right: parent.right
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 5 * scaleRatio
           anchors.left: transactionPriority.left
           shadowReleasedColor: "#FF4304"
           shadowPressedColor: "#B32D00"
@@ -225,10 +225,10 @@ Rectangle {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.top: amountRow.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 30
-          fontSize: 14
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 30 * scaleRatio
+//          fontSize: 14
           textFormat: Text.RichText
           text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
                       Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
@@ -246,8 +246,8 @@ Rectangle {
           StandardButton {
               id: qrfinderButton
               anchors.left: parent.left
-              anchors.leftMargin: 17
-              anchors.topMargin: 5
+              anchors.leftMargin: 17 * scaleRatio
+              anchors.topMargin: 5 * scaleRatio
               text: qsTr("QR Code") + translationManager.emptyString
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
@@ -255,7 +255,7 @@ Rectangle {
               pressedColor: "#FF4304"
               visible : appWindow.qrScannerEnabled
               enabled : visible
-              width: visible ? 60 : 0
+              width: visible ? 60 * scaleRatio : 0
               onClicked: {
                   cameraUi.state = "Capture"
                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
@@ -266,7 +266,7 @@ Rectangle {
               anchors.left: qrfinderButton.right
               anchors.right: resolveButton.left
               //anchors.leftMargin: 17
-              anchors.topMargin: 5
+              anchors.topMargin: 5 * scaleRatio
               placeholderText: "4..."
               // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
           }
@@ -274,10 +274,10 @@ Rectangle {
           StandardButton {
               id: resolveButton
               anchors.right: parent.right
-              anchors.leftMargin: 17
-              anchors.topMargin: 17
-              anchors.rightMargin: 17
-              width: 60
+              anchors.leftMargin: 17 * scaleRatio
+              anchors.topMargin: 17 * scaleRatio
+              anchors.rightMargin: 17 * scaleRatio
+              width: 60 * scaleRatio
               text: qsTr("Resolve") + translationManager.emptyString
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
@@ -323,10 +323,10 @@ Rectangle {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.top: addressLineRow.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
-          fontSize: 14
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 17 * scaleRatio
+//          fontSize: 14
           text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
       }
 
@@ -336,9 +336,9 @@ Rectangle {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.top: paymentIdLabel.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 5 * scaleRatio
           placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
           // validator: DoubleValidator { top: 0.0 }
       }
@@ -348,10 +348,10 @@ Rectangle {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.top: paymentIdLine.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
-          fontSize: 14
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 17 * scaleRatio
+//          fontSize: 14
           text: qsTr("Description <font size='2'>( Optional )</font>")
                 + translationManager.emptyString
       }
@@ -361,9 +361,9 @@ Rectangle {
           anchors.left: parent.left
           anchors.right: parent.right
           anchors.top: descriptionLabel.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.rightMargin: 17 * scaleRatio
+          anchors.topMargin: 5 * scaleRatio
           placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
       }
 
@@ -389,8 +389,8 @@ Rectangle {
       RowLayout {
           anchors.left: parent.left
           anchors.top: descriptionLine.bottom
-          anchors.leftMargin: 17
-          anchors.topMargin: 17
+          anchors.leftMargin: 17 * scaleRatio
+          anchors.topMargin: 17 * scaleRatio
 
           StandardButton {
               id: sendButton
@@ -429,8 +429,8 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 17
-        spacing:10
+        anchors.margins: 17 * scaleRatio
+        spacing: 10 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
@@ -451,7 +451,7 @@ Rectangle {
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
-            Layout.bottomMargin: 30
+            Layout.bottomMargin: 30 * scaleRatio
         }
 
         RowLayout {
@@ -460,13 +460,13 @@ Rectangle {
             anchors.right: parent.right
             Label {
                 id: privacyLabel
-                fontSize: 14
+//                fontSize: 14
                 text: ""
             }
 
             Label {
                 id: costLabel
-                fontSize: 14
+//                fontSize: 14
                 text: qsTr("Transaction cost") + translationManager.emptyString
                 anchors.right: parent.right
             }
@@ -485,7 +485,7 @@ Rectangle {
 
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
-            Layout.topMargin: 50
+            Layout.topMargin: 50 * scaleRatio
 
 
             columns: (isMobile) ? 2 : 6
@@ -653,8 +653,8 @@ Rectangle {
     Rectangle {
         x: root.width/2 - width/2
         y: root.height/2 - height/2
-        height:statusText.paintedHeight + 50
-        width:statusText.paintedWidth + 40
+        height:statusText.paintedHeight + 50 * scaleRatio
+        width:statusText.paintedWidth + 40 * scaleRatio
         visible: statusText.text != ""
         opacity: 0.9
 

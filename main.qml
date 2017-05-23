@@ -43,7 +43,6 @@ import "wizard"
 ApplicationWindow {
     id: appWindow
 
-
     property var currentItem
     property bool whatIsEnable: false
     property bool ctrlPressed: false
@@ -57,7 +56,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
-    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property int maxWindowHeight: screenHeight //(screenHeight < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
     property string walletName
@@ -66,7 +65,7 @@ ApplicationWindow {
     property int timeToUnlock: 0
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
-    property var isMobile: (appWindow.width > 700) ? false : true
+    property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
     property bool remoteNodeConnected: false
 
@@ -167,6 +166,9 @@ ApplicationWindow {
         console.log("initializing..")
         walletInitialized = false;
 
+        // removed store value for backwards compatibility
+        persistentSettings.daemon_address =  "localhost:18081";
+
         // Use stored log level
         if (persistentSettings.logLevel == 5)
           walletManager.setLogCategories(persistentSettings.logCategories)
@@ -201,7 +203,7 @@ ApplicationWindow {
 
 
         // wallet already opened with wizard, we just need to initialize it
-        if (typeof wizard.settings['wallet'] !== 'undefined') {
+        if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
             if(persistentSettings.restore_height > 0){
@@ -209,11 +211,11 @@ ApplicationWindow {
                 restoreHeight = persistentSettings.restore_height
             }
 
-            connectWallet(wizard.settings['wallet'])
+            connectWallet(wizard.m_wallet)
 
             isNewWallet = true
             // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
-            delete wizard.settings['wallet']
+            delete wizard.m_wallet
         }  else {
             var wallet_path = walletPath();
             if(isIOS)
@@ -226,7 +228,7 @@ ApplicationWindow {
 
     }
     function closeWallet() {
-
+        console.log("CLOSE WALLET CALLED");
         // Disconnect all listeners
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
             currentWallet.refreshed.disconnect(onWalletRefresh)
@@ -242,11 +244,13 @@ ApplicationWindow {
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
         }
         currentWallet = undefined;
-        if (isIOS) {
-            console.log("closing sync - ios")
-            walletManager.closeWallet();
-        } else
-            walletManager.closeWalletAsync();
+//        if (isIOS) {
+//            console.log("closing sync - ios")
+//            walletManager.closeWallet();
+//        } else
+//            walletManager.closeWalletAsync();
+
+        walletManager.closeWallet();
     }
 
     function connectWallet(wallet) {
@@ -277,6 +281,8 @@ ApplicationWindow {
         currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
 
         currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+
+//        middlePanel.state = "Keys";
     }
 
     function walletPath() {
@@ -301,7 +307,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(persistentSettings.startLocalNode && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if (!isMobile && persistentSettings.startLocalNode && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)) {
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -415,6 +421,9 @@ ApplicationWindow {
                 disconnectRemoteNode();
             }
         }
+
+        // Update History
+        currentWallet.history.refresh();
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -830,11 +839,11 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-//    width: Screen.width //rightPanelExpanded ? 1269 : 1269 - 300
+//    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
 //    height: 900 //300//maxWindowHeight;
     color: "#FFFFFF"
     flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
-    onWidthChanged: x -= 0
+//    onWidthChanged: x -= 0
 
     function setCustomWindowDecorations(custom) {
       var x = appWindow.x
@@ -855,8 +864,11 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        x = (Screen.width - width) / 2
-        y = (Screen.height - maxWindowHeight) / 2
+        console.log("width" + screenWidth);
+        console.log("height" + screenHeight);
+        
+        x = (screenWidth - width) / 2
+        y = (screenHeight - maxWindowHeight) / 2
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
@@ -936,6 +948,8 @@ ApplicationWindow {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
+        anchors.fill: parent
+        z: parent.z + 1
         cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
@@ -946,6 +960,7 @@ ApplicationWindow {
 
     // Confrirmation aka question dialog
     StandardDialog {
+        z:10
         id: transactionConfirmationPopup
         onAccepted: {
             close();
@@ -960,6 +975,7 @@ ApplicationWindow {
     }
 
     StandardDialog {
+        z:11
         id: confirmationDialog
         property var onAcceptedCallback
         property var onRejectedCallback
@@ -1046,13 +1062,47 @@ ApplicationWindow {
 
     PasswordDialog {
         id: passwordDialog
-
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
         onAccepted: {
             appWindow.initialize();
         }
         onRejected: {
             //appWindow.enableUI(false)
             rootItem.state = "wizard"
+        }
+
+    }
+
+    PasswordDialog {
+        id: settingsPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
+        onAccepted: {
+            if(appWindow.password === settingsPasswordDialog.password){
+                if(currentWallet.seedLanguage == "") {
+                    console.log("No seed language set. Using English as default");
+                    currentWallet.setSeedLanguage("English");
+                }
+
+                // Load keys page
+                middlePanel.state = "Keys"
+
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Wrong password");
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    settingsPasswordDialog.open()
+                }
+            }
+
+            settingsPasswordDialog.password = ""
+        }
+        onRejected: {
+
         }
 
     }
@@ -1088,14 +1138,15 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
+                PropertyChanges { target: appWindow; width: (screenWidth < 930 || isMobile)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
-                PropertyChanges { target: resizeArea; visible: false }
+                PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
                 PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: false }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
@@ -1103,7 +1154,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; width:  (screenWidth < 969 || isMobile)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
@@ -1111,15 +1162,16 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
 
         MobileHeader {
             id: mobileHeader
-            visible: isMobile
+            visible: false
             anchors.left: parent.left
             anchors.right: parent.right
-            height: visible? 65 : 0
+            height: visible? 65 * scaleRatio : 0
         }
 
         LeftPanel {

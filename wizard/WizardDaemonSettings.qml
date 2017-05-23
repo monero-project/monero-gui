@@ -91,7 +91,7 @@ ColumnLayout {
             Layout.fillWidth: true
             id: titleText
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
@@ -102,10 +102,10 @@ ColumnLayout {
 
         Text {
             Layout.fillWidth: true
-            Layout.topMargin: 30
-            Layout.bottomMargin: 30
+            Layout.topMargin: 30 * scaleRatio
+            Layout.bottomMargin: 30 * scaleRatio
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 18 * scaleRatio
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#4A4646"
@@ -126,7 +126,7 @@ ColumnLayout {
                 text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
-                fontSize: 16
+                fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.startLocalNode
@@ -138,13 +138,13 @@ ColumnLayout {
             id: blockchainFolderRow
             Label {
                 Layout.fillWidth: true
-                Layout.topMargin: 20
-                fontSize: 14
+                Layout.topMargin: 20 * scaleRatio
+                fontSize: 14 * scaleRatio
                 text: qsTr("Blockchain location") + translationManager.emptyString
             }
             LineEdit {
                 id: blockchainFolder
-                Layout.preferredWidth:  200
+                Layout.preferredWidth:  200 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.blockchainDataDir
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
@@ -165,13 +165,28 @@ ColumnLayout {
 
         RowLayout {
             CheckBox {
+                id: lightWallet
+                text: qsTr("Light Wallet - Do not download blockchain") + translationManager.emptyString
+                Layout.topMargin: 20 * scaleRatio
+                background: "#FFFFFF"
+                fontColor: "#4A4646"
+                fontSize: 16 * scaleRatio
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: appWindow.persistentSettings.lightWallet
+            }
+
+        }
+
+        RowLayout {
+            CheckBox {
                 id: remoteNode
                 text: (localNode.checked) ? qsTr("Connect to a 3rd party remote node until my own node has finished syncing") + translationManager.emptyString
                                           : qsTr("Connect to a 3rd party remote node") + translationManager.emptyString
-                Layout.topMargin: 20
+                Layout.topMargin: 20 * scaleRatio
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
-                fontSize: 16
+                fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.useRemoteNode
@@ -181,7 +196,7 @@ ColumnLayout {
 
         RowLayout {
             RemoteNodeEdit {
-                Layout.minimumWidth: 300
+                Layout.minimumWidth: 300 * scaleRatio
                 opacity: remoteNode.checked
                 id: remoteNodeEdit
             }

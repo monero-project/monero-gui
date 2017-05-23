@@ -33,7 +33,7 @@ import QtQuick 2.2
 TextField {
     font.family: "Arial"
     horizontalAlignment: TextInput.AlignLeft
-
+    selectByMouse: true
     style: TextFieldStyle {
         textColor: "#3F3F3F"
         placeholderTextColor: "#BABABA"
