@@ -520,8 +520,6 @@ Rectangle {
 
         if(typeof daemonManager != "undefined")
             appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
-
-        console.log(currentWallet.seed);
     }
 
     // fires only once
