@@ -85,7 +85,7 @@ ColumnLayout {
         if(fromSeed)
             var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight)
         else
-            var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.language, testnet,
+            var wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, settingsObject.wallet_language, testnet,
                                                             settingsObject.recover_address, settingsObject.recover_viewkey,
                                                             settingsObject.recover_spendkey, restoreHeight)
 
