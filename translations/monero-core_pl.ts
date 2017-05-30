@@ -1485,7 +1485,7 @@ Uaktualnij go lub podłącz się do innego procesu</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
