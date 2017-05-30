@@ -1468,8 +1468,16 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
-        <translation>crea file tx</translation>
+        <source>Create tx file</source>
+        <translation>Crea file tx</translation>
+    </message>
+    <message>
+        <source>sign tx file</source>
+        <translation type="obsolete">firma file tx</translation>
+    </message>
+    <message>
+        <source>submit tx file</source>
+        <translation type="obsolete">sottoponi file tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="566"/>

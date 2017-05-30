@@ -1419,7 +1419,7 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <source>Create tx file</source>
         <translation>建立交易檔案(tx file)</translation>
     </message>
     <message>

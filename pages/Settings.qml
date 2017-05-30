@@ -467,6 +467,11 @@ Rectangle {
 
         onAccepted: {
             if(appWindow.password === settingsPasswordDialog.password){
+                if(currentWallet.seedLanguage == "") {
+                    console.log("No seed language set. Using English as default");
+                    currentWallet.setSeedLanguage("English");
+                }
+
                 seedPopup.title  = qsTr("Wallet seed & keys") + translationManager.emptyString;
                 seedPopup.text = "<b>Wallet Mnemonic seed</b> <br>" + currentWallet.seed
                         + "<br><br> <b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
@@ -520,8 +525,6 @@ Rectangle {
 
         if(typeof daemonManager != "undefined")
             appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
-
-        console.log(currentWallet.seed);
     }
 
     // fires only once

@@ -1243,8 +1243,8 @@
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
-        <translation>crear fichero tx</translation>
+        <source>Create tx file</source>
+        <translation>Crear fichero tx</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="537"/>
