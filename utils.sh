@@ -53,6 +53,12 @@ function get_tag()
         echo "You are ahead of or behind a tagged release"
         VERSIONTAG="$COMMIT"
       fi
+      # save tag name + commit if availible
+      TAGNAME=$(git describe | sed -e 's/[\t ]*//')
+      if test -z "$TAGNAME"
+      then
+        TAGNAME="$VERSIONTAG"
+      fi
     fi
   fi
 }
