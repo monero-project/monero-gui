@@ -405,7 +405,7 @@ ApplicationWindow {
         currentWallet.pauseRefresh();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.testnet);
+        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir);
         persistentSettings.daemonFlags = flags
     }
 
@@ -884,6 +884,7 @@ ApplicationWindow {
         property string daemonUsername: ""
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
+        property string blockchainDataDir: ""
     }
 
     // Information dialog

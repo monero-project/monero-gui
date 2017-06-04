@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QUrl>
 #include <QProcess>
+#include <QVariantMap>
 
 class DaemonManager : public QObject
 {
@@ -13,7 +14,7 @@ public:
 
     static DaemonManager * instance(const QStringList *args);
 
-    Q_INVOKABLE bool start(const QString &flags, bool testnet);
+    Q_INVOKABLE bool start(const QString &flags, bool testnet, const QString &dataDir = "");
     Q_INVOKABLE bool stop(bool testnet);
 
     // return true if daemon process is started
@@ -21,6 +22,7 @@ public:
     // Send daemon command from qml and prints output in console window.
     Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet) const;
     Q_INVOKABLE void exit();
+    Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
 
 private:
 
