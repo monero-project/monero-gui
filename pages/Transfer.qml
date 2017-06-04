@@ -132,7 +132,7 @@ Rectangle {
           anchors.topMargin: 17
           fontSize: 14
           x: (parent.width - 17) / 2 + 17
-          text: qsTr("Transaction priority") + translationManager.emptyString
+          text: qsTr("Transaction speed") + translationManager.emptyString
       }
 
 
