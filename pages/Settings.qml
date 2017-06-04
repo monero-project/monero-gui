@@ -82,7 +82,7 @@ Rectangle {
         }
 
         GridLayout {
-            columns: (isMobile)? 2 : 3
+            columns: (isMobile)? 2 : 4
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
@@ -123,7 +123,6 @@ Rectangle {
                 }
             }
 
-
 /*          Rescan cache - Disabled until we know it's needed
 
             StandardButton {
@@ -159,6 +158,30 @@ Rectangle {
                 }
             }
 */
+            StandardButton {
+                id: rescanSpentButton
+                text: qsTr("Rescan wallet balance") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    if (!currentWallet.rescanSpent()) {
+                        console.error("Error: ", currentWallet.errorString);
+                        informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
+                        informationPopup.icon  = StandardIcon.Critical
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    } else {
+                        informationPopup.title = qsTr("Information") + translationManager.emptyString
+                        informationPopup.text  = qsTr("Sucessfully rescanned spent outputs") + translationManager.emptyString
+                        informationPopup.icon  = StandardIcon.Information
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    }
+                }
+            }
         }
 
         //! Manage daemon
