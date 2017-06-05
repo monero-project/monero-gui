@@ -242,7 +242,7 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: 20
             fontSize: 14
-            text: qsTr("Your wallet is stored in") + fileUrlInput.text;
+            text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
 
         LineEdit {

@@ -405,7 +405,7 @@ ApplicationWindow {
         currentWallet.pauseRefresh();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.testnet);
+        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir);
         persistentSettings.daemonFlags = flags
     }
 
@@ -500,7 +500,7 @@ ApplicationWindow {
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             informationPopup.icon = StandardIcon.Information
             informationPopup.onCloseCallback = null
@@ -613,7 +613,7 @@ ApplicationWindow {
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             informationPopup.icon = StandardIcon.Information
             informationPopup.onCloseCallback = null
@@ -884,6 +884,7 @@ ApplicationWindow {
         property string daemonUsername: ""
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
+        property string blockchainDataDir: ""
     }
 
     // Information dialog
