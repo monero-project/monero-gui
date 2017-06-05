@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="63"/>
         <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Tip tekst test&lt;/b&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="72"/>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation type="unfinished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        Cerchi il livello di sicurezza e la lista degli indirizzi? vai qui: &lt;a href=&apos;#&apos;&gt;Invia&lt;/a&gt; tab</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        Cerchi il livello di sicurezza e la lista degli indirizzi? vai qui: &lt;a href=&apos;#&apos;&gt;Invia&lt;/a&gt; tab</translation>
     </message>
 </context>
 <context>
@@ -524,7 +524,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
-        <translation>(disponibile solo per daemons locali</translation>
+        <translation>(disponibile solo per daemons locali)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
@@ -564,7 +564,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="163"/>
         <source>Error starting mining</source>
-        <translation type="unfinished">Errore durante inizio mining</translation>
+        <translation>Errore durante inizio mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
@@ -632,7 +632,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="60"/>
         <source>Invalid connection status</source>
-        <translation type="unfinished">Connessione invalida</translation>
+        <translation>Connessione invalida</translation>
     </message>
 </context>
 <context>
@@ -810,7 +810,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="282"/>
         <source>Generate payment ID for integrated address</source>
-        <translation type="unfinished">Genera ID Pagamento per l'indirizzo integrato</translation>
+        <translation>Genera ID Pagamento per l'indirizzo integrato</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="306"/>
@@ -1010,7 +1010,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="388"/>
         <source>GUI version: </source>
-        <translation>Versione interfaccia grafica(GUI):</translation>
+        <translation>Versione interfaccia grafica (GUI):</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="395"/>
@@ -1213,7 +1213,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
         <source>&lt;b&gt;Find similar transactions&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Trova transazioni simili&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Trova transazioni simili&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
@@ -1820,7 +1820,7 @@ Ringsize: </source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
         <source>Wallet path</source>
-        <translation type="unfinished">Percorso del portafoglio</translation>
+        <translation>Percorso del portafoglio</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="67"/>
@@ -2255,7 +2255,7 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="719"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Questo indirizzo ha ricevuto %1 monero con %2 conferme.</translation>
+        <translation>Questo indirizzo ha ricevuto %1 monero con %2 conferma/e.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1284"/>
@@ -2275,7 +2275,7 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="1322"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation type="unfinished">Una nuova versione dell'interfaccia grafica è disponibile: %1&lt;br&gt;%2</translation>
+        <translation>Una nuova versione dell'interfaccia grafica è disponibile: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <source>Please confirm transaction:
