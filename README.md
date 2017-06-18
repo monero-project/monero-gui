@@ -115,6 +115,9 @@ Packaging for your favorite distribution would be a welcome contribution!
       `emerge dev-qt/qtmultimedia:5 media-gfx/zbar`
 
 5. Build the GUI
+  - Checkout submodules
+   
+        `git submodule update --init --recursive`
 
   - For Ubuntu and Mint
 
@@ -159,8 +162,12 @@ The executable can be found in the build/release/bin folder.
 7. Go into the repository
 
   `cd monero-core`
+  
+8. Checkout submodules
 
-8. Start the build
+  `git submodule update --init --recursive`
+
+9. Start the build
 
   `./build.sh`
 
@@ -228,6 +235,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 8. Build the GUI
     ```
     cd monero-core
+    git submodule update --init --recursive
     export PATH=$(ls -rd /c/Qt/5.[6,7,8]/mingw53_32/bin | head -1):$PATH
     ./build.sh
     cd build
