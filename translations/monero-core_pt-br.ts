@@ -529,7 +529,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Minerar com seu computador ajudar a fortalecer a rede do Monero. Quanto mais pessoas minerarem, mais difícil para a rede ser atacada, qualquer quantidade ajuda. &lt;br&gt; &lt;br&gt;Minerar também lhe garante uma pequena chance de ganhar Monero. Seu computador irá criar hashes procurando por blocos. Caso encontre um bloco, você receberá a recompensa associada. Boa sorte!</translation>
+        <translation>Minerar com seu computador ajuda a fortalecer a rede do Monero. Quanto mais pessoas minerarem, mais difícil é para a rede ser atacada, qualquer quantidade ajuda. &lt;br&gt; &lt;br&gt;Minerar também lhe garante uma pequena chance de ganhar Monero. Seu computador irá criar hashes procurando por blocos. Caso encontre um bloco, você receberá a recompensa associada. Boa sorte!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -607,7 +607,7 @@
     <message>
         <location filename="../components/MobileHeader.qml" line="94"/>
         <source>Unlocked Balance:</source>
-        <translation type="unfinished">Saldo desbloqueado:</translation>
+        <translation>Saldo desbloqueado:</translation>
     </message>
 </context>
 <context>
@@ -937,7 +937,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="286"/>
         <source>Daemon startup flags</source>
-        <translation>Bandeiras de inicialização do daemon</translation>
+        <translation>Flags de inicialização do daemon</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="265"/>
@@ -948,32 +948,32 @@
     <message>
         <location filename="../pages/Settings.qml" line="120"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar keys da semente</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="163"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Escanear saldo da carteira novamente</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="172"/>
         <source>Error: </source>
-        <translation type="unfinished">Erro: </translation>
+        <translation>Erro: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="177"/>
         <source>Information</source>
-        <translation type="unfinished">Informação</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="178"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished">Saidas gastas escaneadas novamente</translation>
+        <translation>Saidas gastas escaneadas novamente</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
         <source>Blockchain location</source>
-        <translation type="unfinished"></translation>
+        <translation>Localização da Blockchain</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="306"/>
@@ -1008,42 +1008,42 @@
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="573"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor escolha um diretório</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="582"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Alerta</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="585"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: Filesystem é apenas de leitura</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="589"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="591"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atenção: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="595"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso: Diretório do lmdb não encontrado. Um novo diretório será criado.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Save</source>
@@ -1102,27 +1102,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="525"/>
         <source>Wallet seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Keys da semente</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="527"/>
         <source>Secret view key</source>
-        <translation type="unfinished"></translation>
+        <translation>View key secreta</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="528"/>
         <source>Public view key</source>
-        <translation type="unfinished"></translation>
+        <translation>View key pública</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="529"/>
         <source>Secret spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Spend key secreta</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="530"/>
         <source>Public spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Spend key pública</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="540"/>
@@ -1326,7 +1326,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Enviar a este endereço&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1437,22 +1437,22 @@
     <message>
         <location filename="../pages/Transfer.qml" line="202"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lenta (taxa x0.25)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="203"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão (taxa x1)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="204"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rápida (taxa x5)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="205"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais rápida (taxa x41.5)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="233"/>
@@ -1477,12 +1477,12 @@
     <message>
         <location filename="../pages/Transfer.qml" line="304"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Endereço encontrado, porém as assinaturas do DNSSEC não poderam ser verificas, este endereço pode ser falsificado</translation>
+        <translation>Endereço encontrado, porém as assinaturas do DNSSEC não puderam ser verificas, este endereço pode ser falsificado</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="306"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Nenhum endereço válido encontrado neste endereço OpenAlias, porém as assinaturas do DNSSEC não poderam ser verificas, então este pode ter sido falsificado</translation>
+        <translation>Nenhum endereço válido encontrado neste endereço OpenAlias, porém as assinaturas do DNSSEC não puderam ser verificas, então este pode ter sido falsificado</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="309"/>
