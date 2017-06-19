@@ -94,33 +94,6 @@ Rectangle {
         transferView.sendTo(address, paymentId, description);
     }
 
-
-    //   XXX: just for memo, to be removed
-    //    states: [
-    //        State {
-    //            name: "Dashboard"
-    //            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-    //        }, State {
-    //            name: "History"
-    //            PropertyChanges { target: loader; source: "pages/History.qml" }
-    //        }, State {
-    //            name: "Transfer"
-    //            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-    //        }, State {
-    //           name: "Receive"
-    //           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-    //        }, State {
-    //            name: "AddressBook"
-    //            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-    //        }, State {
-    //            name: "Settings"
-    //            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-    //        }, State {
-    //            name: "Mining"
-    //            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-    //        }
-    //    ]
-
         states: [
             State {
                 name: "Dashboard"
@@ -192,18 +165,14 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
-            ScrollIndicator.vertical: ScrollIndicator { }
-            ScrollBar.vertical: ScrollBar { }       // uncomment to test
-
+            // Disabled scrollbars, gives crash on startup on windows
+//            ScrollIndicator.vertical: ScrollIndicator { }
+//            ScrollBar.vertical: ScrollBar { }       // uncomment to test
             // Views container
             StackView {
                 id: stackView
                 initialItem: transferView
-    //            anchors.topMargin: 30
-    //                Layout.fillWidth: true
-    //                Layout.fillHeight: true
                 anchors.fill:parent
-    //            anchors.margins: 4
                 clip: true // otherwise animation will affect left panel
 
                 delegate: StackViewDelegate {

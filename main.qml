@@ -243,7 +243,9 @@ ApplicationWindow {
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
         }
+
         currentWallet = undefined;
+
 //        if (isIOS) {
 //            console.log("closing sync - ios")
 //            walletManager.closeWallet();
@@ -251,6 +253,7 @@ ApplicationWindow {
 //            walletManager.closeWalletAsync();
 
         walletManager.closeWallet();
+
     }
 
     function connectWallet(wallet) {
@@ -279,8 +282,16 @@ ApplicationWindow {
 
         // Use saved daemon rpc login settings
         currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+        persistentSettings.lightWallet = true
+        // load wallet mode from settings
+        currentWallet.setLightWallet(persistentSettings.lightWallet);
+        var daemonAddress
+        if(persistentSettings.lightWallet)
+            daemonAddress = persistentSettings.lightWalletServerAddress
+        else
+            daemonAddress = persistentSettings.daemon_address
 
-        currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        currentWallet.initAsync(daemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
 
 //        middlePanel.state = "Keys";
     }
@@ -400,7 +411,7 @@ ApplicationWindow {
         middlePanel.updateStatus();
 
         // Use remote node while local daemon is syncing
-        if (persistentSettings.useRemoteNode) {
+        if (!persistentSettings.lightWallet && persistentSettings.useRemoteNode) {
             var localNodeConnected = walletManager.connected;
             var localNodeSynced = localNodeConnected && walletManager.localDaemonSynced()
             if (!currentWallet.connected() || !localNodeSynced) {
@@ -900,10 +911,11 @@ ApplicationWindow {
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
-                initialize(persistentSettings);
+            initialize(persistentSettings);
         }
-
-        checkUpdates();
+        console.log("Checking updates");
+        // TODO: Move to other place or make asynchronous
+        //checkUpdates();
     }
 
     onRightPanelExpandedChanged: {
@@ -1102,7 +1114,7 @@ ApplicationWindow {
             settingsPasswordDialog.password = ""
         }
         onRejected: {
-
+            appWindow.showPageRequest("Settings");
         }
 
     }
@@ -1138,7 +1150,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (screenWidth < 930 || isMobile)? screenWidth : 930; }
+                PropertyChanges { target: appWindow; width: (screenWidth < 930)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
@@ -1154,7 +1166,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width:  (screenWidth < 969 || isMobile)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; width: (screenWidth < 969)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
@@ -1188,6 +1200,7 @@ ApplicationWindow {
             onMiningClicked: {middlePanel.state = "Mining"; if(isMobile) hideMenu()}
             onSignClicked: {middlePanel.state = "Sign"; if(isMobile) hideMenu()}
             onSettingsClicked: {middlePanel.state = "Settings"; if(isMobile) hideMenu()}
+            onKeysClicked: {settingsPasswordDialog.open(); if(isMobile) hideMenu()}
         }
 
         RightPanel {
@@ -1483,6 +1496,7 @@ ApplicationWindow {
     }
 
     function closeAccepted(){
+        console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();

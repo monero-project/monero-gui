@@ -182,35 +182,6 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
             }
         }
-
-//        ColumnLayout {
-//            Layout.fillWidth: true
-//            Label {
-//                Layout.fillWidth: true
-//                color: "#4A4949"
-//                text: qsTr("Mnemonic seed") + translationManager.emptyString
-//                Layout.topMargin: 20 * scaleRatio
-//                Layout.bottomMargin: 10 * scaleRatio
-//            }
-//            Text {
-//                id: privateSpendKeyText
-//                wrapMode: Text.Wrap
-//                Layout.fillWidth: true;
-//                font.pixelSize: 12 * scaleRatio
-//            }
-//        }
-
-
-        RowLayout {
-
-//            Text {
-//                id: keysText
-//            }
-        }
-
-//        RowLayout {
-
-
     }
 
     // fires on every page load
@@ -218,19 +189,23 @@ Rectangle {
         console.log("keys page loaded");
 
         keysText.text = "<b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
-                + "<br><br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
-                + "<br><br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey
-                + "<br><br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
+        keysText.text += "<br><br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
+        keysText.text += (!currentWallet.viewOnly) ? "<br><br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey : ""
+        keysText.text += "<br><br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
 
         seedText.text = currentWallet.seed
-//        privateSpendKeyText.text = currentWallet.secretSpendKey
 
         if(typeof currentWallet != "undefined") {
             viewOnlyQRCode.source = "image://qrcode/monero:" + currentWallet.address+"?secret_view_key="+currentWallet.secretViewKey+"&restore_height="+currentWallet.restoreHeight
             fullWalletQRCode.source = viewOnlyQRCode.source +"&secret_spend_key="+currentWallet.secretSpendKey
-        }
 
-//        console.log(seedQRCode.source);
+            if(currentWallet.viewOnly) {
+                viewOnlyQRCode.visible = true
+                showFullQr.visible = false
+                showViewOnlyQr.visible = false
+                seedText.text = qsTr("(View Only Wallet -  No mnemonic seed available)") + translationManager.emptyString
+            }
+        }
     }
 
     // fires only once

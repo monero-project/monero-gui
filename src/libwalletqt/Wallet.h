@@ -5,7 +5,6 @@
 #include <QTime>
 #include <QMutex>
 #include <QtConcurrent/QtConcurrent>
-#include <QNetworkReply>
 
 #include "wallet/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
@@ -246,7 +245,7 @@ public:
 
     //! get wallet creation date
     //! TODO: implement getRestoreHeight in libwallet
-    Q_INVOKABLE quint64 getRestoreHeight() const { return 1270121; }
+    Q_INVOKABLE quint64 getRestoreHeight() const { return m_walletImpl->getRefreshFromBlockHeight(); }
 
     Q_INVOKABLE void setLightWallet(bool enable);
 
@@ -270,8 +269,6 @@ signals:
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
     void connectionStatusChanged(ConnectionStatus status) const;
-public slots:
-    void replyFinished(QNetworkReply*);
 private:
     Wallet(QObject * parent = nullptr);
     Wallet(Monero::Wallet *w, QObject * parent = 0);

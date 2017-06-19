@@ -19,10 +19,6 @@
 #include <QMutex>
 #include <QMutexLocker>
 
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
     static const int DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS = 30;
@@ -112,6 +108,7 @@ bool Wallet::testnet() const
 
 void Wallet::updateConnectionStatusAsync()
 {
+    qDebug() << "Updating connection status";
     QFuture<Monero::Wallet::ConnectionStatus> future = QtConcurrent::run(m_walletImpl, &Monero::Wallet::connected);
     QFutureWatcher<Monero::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Monero::Wallet::ConnectionStatus>();
 
@@ -133,10 +130,6 @@ void Wallet::updateConnectionStatusAsync()
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
-    //TODO: lightwallet only
-    if(m_lightWallet)
-        return Wallet::ConnectionStatus_Connected;
-
     // cache connection status
     if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
         qDebug() << "Checking connection status";
@@ -239,10 +232,7 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
 
 void Wallet::setLightWallet(bool enable) {
     m_lightWallet = enable;
-    initAsync("localhost:18081");
-    qDebug() << "Setting lightwallet to " << enable;
-    qDebug() << "re-initing";
-
+    qDebug() << "Setting lightwallet mode to " << enable;
 }
 
 //! create a view only wallet
@@ -271,17 +261,7 @@ bool Wallet::viewOnly() const
 
 quint64 Wallet::balance() const
 {
-
-    QNetworkAccessManager *manager = new QNetworkAccessManager();
-    connect(manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(replyFinished(QNetworkReply*)));
-
     return m_walletImpl->balance();
-}
-
-void Wallet::replyFinished(QNetworkReply * reply) {
-    qDebug() << "Reply finished";
-    qDebug() << reply->readAll();
 }
 
 quint64 Wallet::unlockedBalance() const
@@ -675,6 +655,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
 Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
+    delete m_addressBook;
+    m_addressBook = NULL;
 
     delete m_history;
     m_history = NULL;

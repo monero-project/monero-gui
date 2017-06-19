@@ -50,6 +50,7 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
     signal signClicked()
+    signal keysClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -480,6 +481,22 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
+            // ------------- Sign/verify tab ---------------
+            MenuButton {
+                id: keysButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Seed & Keys") + translationManager.emptyString
+                symbol: qsTr("Y") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: settingsButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = keysButton
+                    panel.keysClicked()
+                }
+            }
+
 
         }
 

@@ -52,6 +52,7 @@ Rectangle {
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
 
+        walletTypeDropdown.dataModel = walletTypeModel
         if(persistentSettings.lightWallet)
             walletTypeDropdown.currentIndex = 1
         else
@@ -110,18 +111,6 @@ Rectangle {
                 visible: true
                 onClicked: {
                     wizard.openCreateViewOnlyWalletPage();
-                }
-            }
-
-            StandardButton {
-                id: showSeedButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Show seed & keys") + translationManager.emptyString
-                onClicked: {
-                    settingsPasswordDialog.open();
                 }
             }
 
@@ -212,7 +201,6 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 z: parent.z + 1
-                dataModel: walletTypeModel
                 onChanged: {
                     console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
                     console.log(walletTypeDropdown.currentIndex);
@@ -230,6 +218,9 @@ Rectangle {
                         confirmationDialog.onAcceptedCallback = function() {
                             persistentSettings.lightWallet = true
                             currentWallet.setLightWallet(true);
+                            closeWallet();
+                            initialize();
+                            //currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
                             walletTypeDropdown.currentIndex = 1
                         }
 
@@ -243,13 +234,15 @@ Rectangle {
 
                     // Disable light wallet
                     } else {
+                        console.log("disabling light wallet")
                         currentWallet.setLightWallet(false);
+                        closeWallet();
+                        initialize();
                         persistentSettings.lightWallet = false
                     }
 
                 }
             }
-
         }
 
 
