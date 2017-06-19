@@ -106,6 +106,7 @@
         <file>lang/flags/france.png</file>
         <file>lang/flags/german.png</file>
         <file>lang/flags/india.png</file>
+        <file>lang/flags/indonesia.png</file>
         <file>lang/flags/italy.png</file>
         <file>lang/flags/japan.png</file>
         <file>lang/flags/netherlands.png</file>
@@ -118,7 +119,6 @@
         <file>lang/flags/taiwan.png</file>
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
-        <file>lang/flags/indonesia.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
@@ -126,7 +126,6 @@
         <file>pages/Receive.qml</file>
         <file>pages/TxKey.qml</file>
         <file>components/IconButton.qml</file>
-        <file>lang/flags/italy.png</file>
         <file>components/PasswordDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
         <file>components/ProgressBar.qml</file>
