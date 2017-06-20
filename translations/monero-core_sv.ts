@@ -647,7 +647,7 @@
     <message>
         <location filename="../components/MobileHeader.qml" line="94"/>
         <source>Unlocked Balance:</source>
-        <translation type="unfinished">Olåst saldo:</translation>
+        <translation>Olåst saldo:</translation>
     </message>
 </context>
 <context>
@@ -980,27 +980,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="120"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa frö &amp; nycklar</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="163"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Läs om plånbokens saldo</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="172"/>
         <source>Error: </source>
-        <translation type="unfinished">Fel:</translation>
+        <translation>Fel: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="177"/>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="178"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished">Spenderade utgångar har lästs om</translation>
+        <translation>Spenderade utgångar har lästs om</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="193"/>
@@ -1020,7 +1020,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
         <source>Blockchain location</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockkedjans plats</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="286"/>
@@ -1050,37 +1050,37 @@
     <message>
         <location filename="../pages/Settings.qml" line="573"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj en katalog</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="582"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="585"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Fel: Filsystem är endast läsbart</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="589"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varning: Det är endast %1 GB tillgängligt på enheten. Blockkedjan kräver ~%2 GB av data.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="591"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Notera: Det är %1 GB tillgängligt på enheten. Blockkedjan kräver ~%2 GB av data.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="595"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Notera: lmdb katalog hittades inte. En ny katalog kommer att skapas.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Wallet mnemonic seed</source>
@@ -1095,27 +1095,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="525"/>
         <source>Wallet seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Plånboksfrö &amp; nycklar</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="527"/>
         <source>Secret view key</source>
-        <translation type="unfinished"></translation>
+        <translation>Hemlig läsnyckel</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="528"/>
         <source>Public view key</source>
-        <translation type="unfinished"></translation>
+        <translation>Publik läsnyckel</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="529"/>
         <source>Secret spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Hemlig spenderingsnyckel</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="530"/>
         <source>Public spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Publik spenderingsnyckel</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="540"/>
@@ -1370,7 +1370,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Skicka till denna adress&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1527,22 +1527,22 @@
     <message>
         <location filename="../pages/Transfer.qml" line="202"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Långsam (x0.25 avgift)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="203"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished">Standard (x4 avgift) {1 ?}</translation>
+        <translation>Standard (x1 avgift)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="204"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Snabb (x5 avgift)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="205"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Snabbast (x41.5 avgift)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="233"/>
