@@ -197,6 +197,10 @@ Item {
                 property string stringLow: qsTr("Low (x1 fee)") + translationManager.emptyString
                 property string stringMedium:  qsTr("Medium (x20 fee)") + translationManager.emptyString
                 property string stringHigh:  qsTr("High (x166 fee)") + translationManager.emptyString
+                property string stringSlow: qsTr("Slow (x0.25 fee)") + translationManager.emptyString
+                property string stringDefault: qsTr("Default (x1 fee)") + translationManager.emptyString
+                property string stringFast: qsTr("Fast (x5 fee)") + translationManager.emptyString
+                property string stringFastest: qsTr("Fastest (x41.5 fee)") + translationManager.emptyString
                 property string stringAll:  qsTr("All") + translationManager.emptyString
                 property string stringSent:  qsTr("Sent") + translationManager.emptyString
                 property string stringReceived:  qsTr("Received") + translationManager.emptyString
