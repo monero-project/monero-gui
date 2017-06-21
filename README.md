@@ -100,7 +100,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Gentoo
 
-    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtquickcontrols:5 dev-qt/qtgraphicaleffects:5`
+    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtquickcontrols:5 dev-qt/qtquickcontrols2:5 dev-qt/qtgraphicaleffects:5`
 
   - Optional : To build the flag `WITH_SCANNER`
 
