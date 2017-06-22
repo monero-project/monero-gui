@@ -29,7 +29,8 @@
 
 import QtQml 2.0
 import QtQuick 2.2
-import QtQuick.Controls 2.0
+// QtQuick.Controls 2.0 isn't stable enough yet. Needs more testing.
+//import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
@@ -168,6 +169,7 @@ Rectangle {
             // Disabled scrollbars, gives crash on startup on windows
 //            ScrollIndicator.vertical: ScrollIndicator { }
 //            ScrollBar.vertical: ScrollBar { }       // uncomment to test
+
             // Views container
             StackView {
                 id: stackView
