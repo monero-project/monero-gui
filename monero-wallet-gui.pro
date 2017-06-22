@@ -80,14 +80,14 @@ SOURCES = *.qml \
 ios:armv7 {
     message("target is armv7")
     LIBS += \
-        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/armv7 \
+        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/armv7 \
 }
 ios:arm64 {
     message("target is arm64")
     LIBS += \
-        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/arm64 \
+        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
-!ios&&!android {
+!ios:!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
@@ -116,11 +116,12 @@ ios {
     LIBS += -L$$WALLET_ROOT/lib-ios \
         -lwallet_merged \
         -lepee \
-        -lunbound
+        -lunbound \
+        -leasylogging
 
     LIBS+= \
-        -L$$PWD/../../OpenSSL-for-iPhone/lib \
-        -L$$PWD/../../ofxiOSBoost/build/libs/boost/lib/arm64 \
+        -L$$PWD/../OpenSSL-for-iPhone/lib \
+        -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
         -lboost_serialization \
         -lboost_thread \
         -lboost_system \

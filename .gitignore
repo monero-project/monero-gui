@@ -3,3 +3,14 @@
 translations/*.qm
 build
 version.js
+# IOS XCode files below
+moc_*
+.qmake.stash
+Debug-iphoneos/
+Info.plist
+debug/
+monero-wallet-gui.build/
+monero-wallet-gui.xcodeproj/
+monero-wallet-gui_plugin_import.cpp
+monero-wallet-gui_qml_plugin_import.cpp
+qrc_qml.cpp
