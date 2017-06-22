@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
 
     // Log settings
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
-//    qInstallMessageHandler(messageHandler);
+    // Disable easylogging redirection until we find a way to redirect qml debug info.
+    // qInstallMessageHandler(messageHandler);
 
     MainApp app(argc, argv);
 
