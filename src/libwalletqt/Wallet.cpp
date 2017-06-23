@@ -180,9 +180,10 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
     }
     try {
         bool lightWalletNewAddress;
-        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), m_lightWallet, lightWalletNewAddress);
+        bool use_ssl = m_lightWallet;
+        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), use_ssl ,m_lightWallet, lightWalletNewAddress);
         if(lightWalletNewAddress) {
-            // Lightwallet server havent seen the address before. Consider full rescan.
+            // Lightwallet server hasn't seen the address before. Consider full rescan.
             qDebug("LIGHTWALLET address is new!");
         } else
             qDebug("LIGHTWALLET address is old!");

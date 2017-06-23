@@ -129,7 +129,8 @@ ColumnLayout {
                 fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.startLocalNode
+                checked: appWindow.persistentSettings.startLocalNode && !isAndroid && !isIOS
+                visible: !isAndroid && !isIOS
             }
         }
 

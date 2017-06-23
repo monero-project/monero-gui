@@ -52,11 +52,11 @@ Rectangle {
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
 
-        walletTypeDropdown.dataModel = walletTypeModel
-        if(persistentSettings.lightWallet)
-            walletTypeDropdown.currentIndex = 1
-        else
-            walletTypeDropdown.currentIndex = 0
+//        walletTypeDropdown.dataModel = walletTypeModel
+//        if(persistentSettings.lightWallet)
+//            walletTypeDropdown.currentIndex = 1
+//        else
+//            walletTypeDropdown.currentIndex = 0
     }
 
     ColumnLayout {
@@ -177,73 +177,146 @@ Rectangle {
 
         // Wallet type dropdown
         RowLayout {
-            z: parent.z +1
             Label {
                 id: walletTypeLabel
                 color: "#4A4949"
                 text: qsTr("Wallet type") + translationManager.emptyString
                 fontSize: 16
             }
+        }
 
-            ListModel {
-                 id: walletTypeModel
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
 
-                 ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
-                 ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
-
-             }
-
-            StandardDropdown {
-                Layout.minimumWidth: 100
-                id: walletTypeDropdown
+        RowLayout {
+            StandardButton {
+                id: remoteDisconnect
+                enabled: persistentSettings.useRemoteNode || persistentSettings.lightWallet
+                Layout.fillWidth: false
+                Layout.leftMargin: 30
+                text: qsTr("Normal") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                z: parent.z + 1
-                onChanged: {
-                    console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
-                    console.log(walletTypeDropdown.currentIndex);
+                onClicked: {
+                    appWindow.disconnectRemoteNode();
+                }
+            }
 
-                    // Enable Light Wallet
-                    if(!persistentSettings.lightWallet) {
-                        console.log("enabling lightwallet");
-                        confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
-                        confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
+            StandardButton {
+                id: lightWalletConnect
+                enabled: !persistentSettings.lightWallet
+                Layout.fillWidth: false
+                Layout.leftMargin: 30
+                text: qsTr("Light") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                    confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
 
-                        confirmationDialog.icon = StandardIcon.Question
-                        confirmationDialog.cancelText = qsTr("Cancel")
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
 
-                        // Continue
-                        confirmationDialog.onAcceptedCallback = function() {
-                            persistentSettings.lightWallet = true
-                            currentWallet.setLightWallet(true);
-                            closeWallet();
-                            initialize();
-                            //currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
-                            walletTypeDropdown.currentIndex = 1
-                        }
-
-                        // Cancel
-                        confirmationDialog.onRejectedCallback = function() {
-                            persistentSettings.lightWallet = false
-                            walletTypeDropdown.currentIndex = 0
-                        };
-
-                        confirmationDialog.open()
-
-                    // Disable light wallet
-                    } else {
-                        console.log("disabling light wallet")
-                        currentWallet.setLightWallet(false);
-                        closeWallet();
-                        initialize();
-                        persistentSettings.lightWallet = false
+                    // Continue
+                    confirmationDialog.onAcceptedCallback = function() {
+                        appWindow.connectLightWallet();
                     }
 
+                    // Cancel
+                    confirmationDialog.onRejectedCallback = function() {
+                    };
+
+                    confirmationDialog.open()
+                }
+            }
+
+
+            StandardButton {
+                id: remoteConnect
+                enabled: remoteNodeEdit.daemonAddrText != "" && remoteNodeEdit.daemonPortText != "" && !appWindow.remoteNodeConnected
+                Layout.fillWidth: false
+                Layout.leftMargin: 30
+                text: qsTr("Remote Node") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.connectRemoteNode();
                 }
             }
         }
+
+
+
+
+//            ListModel {
+//                 id: walletTypeModel
+
+//                 ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
+//                 ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
+
+//             }
+
+// Alternate wallet switch option
+//            StandardDropdown {
+//                Layout.minimumWidth: 100
+//                id: walletTypeDropdown
+//                shadowReleasedColor: "#FF4304"
+//                shadowPressedColor: "#B32D00"
+//                releasedColor: "#FF6C3C"
+//                pressedColor: "#FF4304"
+//                z: parent.z + 1
+//                onChanged: {
+//                    console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
+//                    console.log(walletTypeDropdown.currentIndex);
+
+//                    // Enable Light Wallet
+//                    if(!persistentSettings.lightWallet) {
+//                        console.log("enabling lightwallet");
+//                        confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+//                        confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
+
+//                        confirmationDialog.icon = StandardIcon.Question
+//                        confirmationDialog.cancelText = qsTr("Cancel")
+
+//                        // Continue
+//                        confirmationDialog.onAcceptedCallback = function() {
+//                            persistentSettings.lightWallet = true
+//                            currentWallet.setLightWallet(true);
+//                            closeWallet();
+//                            initialize();
+//                            //currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
+//                            walletTypeDropdown.currentIndex = 1
+//                        }
+
+//                        // Cancel
+//                        confirmationDialog.onRejectedCallback = function() {
+//                            persistentSettings.lightWallet = false
+//                            walletTypeDropdown.currentIndex = 0
+//                        };
+
+//                        confirmationDialog.open()
+
+//                    // Disable light wallet
+//                    } else {
+//                        console.log("disabling light wallet")
+//                        currentWallet.setLightWallet(false);
+//                        closeWallet();
+//                        initialize();
+//                        persistentSettings.lightWallet = false
+//                    }
+
+//                }
+//            }
+//        }
 
 
         //! Manage daemon
@@ -488,40 +561,6 @@ Rectangle {
                     id: remoteNodeEdit
                     onEditingFinished: {
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
-                    }
-                }
-
-                StandardButton {
-                    id: remoteConnect
-                    visible: !appWindow.remoteNodeConnected
-                    enabled: remoteNodeEdit.daemonAddrText != "" && remoteNodeEdit.daemonPortText != ""
-                    Layout.fillWidth: false
-                    Layout.leftMargin: 30
-                    text: qsTr("Connect Remote Node") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    onClicked: {
-                        persistentSettings.useRemoteNode = true
-                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
-                        appWindow.connectRemoteNode();
-                    }
-                }
-
-                StandardButton {
-                    id: remoteDisconnect
-                    visible: appWindow.remoteNodeConnected
-                    Layout.fillWidth: false
-                    Layout.leftMargin: 30
-                    text: qsTr("Disconnect Remote Node") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
-                    onClicked: {
-                        persistentSettings.useRemoteNode = false
-                        appWindow.disconnectRemoteNode();
                     }
                 }
             }

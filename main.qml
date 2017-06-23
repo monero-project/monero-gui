@@ -164,7 +164,7 @@ ApplicationWindow {
 
     function initialize() {
         console.log("initializing..")
-        walletInitialized = false;
+        //walletInitialized = false;
 
         // removed store value for backwards compatibility
         persistentSettings.daemon_address =  "localhost:18081";
@@ -189,7 +189,7 @@ ApplicationWindow {
             console.log("Daemon change - closing " + currentWallet)
             closeWallet();
             currentWallet = undefined
-        } else {
+        } else if (!walletInitialized) {
 
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
@@ -282,12 +282,14 @@ ApplicationWindow {
 
         // Use saved daemon rpc login settings
         currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
-        persistentSettings.lightWallet = true
+
         // load wallet mode from settings
         currentWallet.setLightWallet(persistentSettings.lightWallet);
         var daemonAddress
         if(persistentSettings.lightWallet)
             daemonAddress = persistentSettings.lightWalletServerAddress
+        else if(persistentSettings.useRemoteNode)
+            daemonAddress = persistentSettings.remoteNodeAddress
         else
             daemonAddress = persistentSettings.daemon_address
 
@@ -378,13 +380,31 @@ ApplicationWindow {
         }
     }
 
+    function connectLightWallet() {
+        persistentSettings.useRemoteNode = false;
+        persistentSettings.lightWallet = true
+        currentWallet.setLightWallet(true);
+//        closeWallet();
+//        initialize();
+        currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
+    }
+
     function connectRemoteNode() {
         //TODO: make sure this doesnt create multiple refresh threads
+
+        console.log("connecting remote node");
+        currentWallet.setLightWallet(false);
+        persistentSettings.lightWallet = false;
+        persistentSettings.useRemoteNode = true;
         currentWallet.initAsync(persistentSettings.remoteNodeAddress);
         remoteNodeConnected = true;
     }
 
     function disconnectRemoteNode() {
+        console.log("disconnecting remote node");
+        persistentSettings.useRemoteNode = false;
+        currentWallet.setLightWallet(false);
+        persistentSettings.lightWallet = false;
         currentWallet.initAsync(persistentSettings.daemon_address);
         remoteNodeConnected = false;
     }
@@ -417,7 +437,7 @@ ApplicationWindow {
             if (!currentWallet.connected() || !localNodeSynced) {
                 console.log("Using remote node while local node is syncing")
                 // Connect to remote node if not already connected
-                if(!remoteNodeConnected || !currentWallet.connected()) {
+                if(!remoteNodeConnected) {
                     connectRemoteNode();
                 }
 
@@ -1150,7 +1170,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (screenWidth < 930)? screenWidth : 930; }
+                PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
@@ -1166,7 +1186,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width: (screenWidth < 969)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
