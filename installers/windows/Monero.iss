@@ -3,10 +3,10 @@
 ; See LICENSE
 
 [Setup]
-AppName=Monero Core + GUI Wallet
+AppName=Monero GUI Wallet
 AppVersion=0.10.3.1
-DefaultDirName={pf}\Monero Core
-DefaultGroupName=Monero Core + GUI Wallet
+DefaultDirName={pf}\Monero GUI Wallet
+DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
 PrivilegesRequired=admin
 ArchitecturesInstallIn64BitMode=x64
@@ -320,7 +320,7 @@ end;
 
 
 [Icons]
-; Icons in the "Monero Core + GUI Wallet" program group
+; Icons in the "Monero GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
 Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"
 Name: "{group}\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}

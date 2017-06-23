@@ -1,4 +1,4 @@
-# Monero Core + GUI Wallet Beta 2 Windows Installer #
+# Monero GUI Wallet Beta 2 Windows Installer #
 
 Copyright (c) 2014-2017, The Monero Project
 
