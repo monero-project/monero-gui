@@ -38,8 +38,8 @@ ColumnLayout {
     signal openWalletClicked()
     opacity: 0
     visible: false
-    property int buttonSize: (isMobile) ? 80 * scaleRatio : 190
-    property int buttonImageSize: (isMobile) ? buttonSize - 10 * scaleRatio : buttonSize - 30
+    property int buttonSize: (isMobile) ? 80 * scaleRatio : 190 * scaleRatio
+    property int buttonImageSize: (isMobile) ? buttonSize - 10 * scaleRatio : buttonSize - 30 * scaleRatio
 
     function onPageClosed() {
         // Save settings used in open from file.
@@ -146,7 +146,7 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190 * scaleRatio
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
                 font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
@@ -189,7 +189,7 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190 * scaleRatio
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
                 font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
@@ -233,7 +233,7 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190 * scaleRatio
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
                 font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
