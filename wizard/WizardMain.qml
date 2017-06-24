@@ -83,6 +83,10 @@ ColumnLayout {
     }
 
     function switchPage(next) {
+
+        // Android focus workaround
+        releaseFocus();
+
         // save settings for current page;
         if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
             if (pages[currentPage].onPageClosed(settings) !== true) {

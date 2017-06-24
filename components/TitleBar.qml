@@ -83,6 +83,7 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 console.log("menu button clicked")
+                releaseFocus()
                 parent.checked = !parent.checked
                 titleBar.goToBasicVersion(leftPanel.visible)
             }
