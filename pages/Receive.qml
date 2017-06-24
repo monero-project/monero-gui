@@ -385,33 +385,33 @@ Rectangle {
                 }
             }
         }
-
-        Menu {
-            id: qrMenu
-            title: "QrCode"
-            MenuItem {
-               text: qsTr("Save As") + translationManager.emptyString;
-               onTriggered: qrFileDialog.open()
-            }
-        }
-
-        Image {
-            id: qrCode
-            anchors.margins: 50 * scaleRatio
-            anchors.top: trackingRow.bottom
-            Layout.fillWidth: true
-            Layout.minimumHeight: mainLayout.qrCodeSize
-            smooth: false
-            fillMode: Image.PreserveAspectFit
-            source: "image://qrcode/" + makeQRCodeString()
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.RightButton
-                onClicked: {
-                    if (mouse.button == Qt.RightButton)
-                        qrMenu.popup()
+        ColumnLayout {
+            Menu {
+                id: qrMenu
+                title: "QrCode"
+                MenuItem {
+                   text: qsTr("Save As") + translationManager.emptyString;
+                   onTriggered: qrFileDialog.open()
                 }
-                onPressAndHold: qrFileDialog.open()
+            }
+
+            Image {
+                id: qrCode
+                anchors.margins: 50 * scaleRatio
+                Layout.fillWidth: true
+                Layout.minimumHeight: mainLayout.qrCodeSize
+                smooth: false
+                fillMode: Image.PreserveAspectFit
+                source: "image://qrcode/" + makeQRCodeString()
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.RightButton
+                    onClicked: {
+                        if (mouse.button == Qt.RightButton)
+                            qrMenu.popup()
+                    }
+                    onPressAndHold: qrFileDialog.open()
+                }
             }
         }
     }

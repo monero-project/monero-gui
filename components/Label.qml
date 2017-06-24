@@ -41,6 +41,7 @@ Item {
     signal linkActivated()
     width: icon.x + icon.width
     height: icon.height
+    Layout.topMargin: 10 * scaleRatio
 
     Text {
         id: label
