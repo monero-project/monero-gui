@@ -45,6 +45,12 @@ Item {
     // Dynamic label width
     Layout.minimumWidth: (label.contentWidth + 20 * scaleRatio)  //  (label.contentWidth > 80)? label.contentWidth + 20 : 100
 
+    function doClick() {
+        // Android workaround
+        releaseFocus();
+        clicked();
+    }
+
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -98,9 +104,9 @@ Item {
     MouseArea {
         id: buttonArea
         anchors.fill: parent
-        onClicked: parent.clicked()
+        onClicked: doClick()
     }
 
-    Keys.onSpacePressed: clicked()
-    Keys.onReturnPressed: clicked()
+    Keys.onSpacePressed: doClick()
+    Keys.onReturnPressed: doClick()
 }

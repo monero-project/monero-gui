@@ -944,7 +944,6 @@ ApplicationWindow {
         }
     }
 
-
     Settings {
         id: persistentSettings
         property string language
@@ -1247,22 +1246,6 @@ ApplicationWindow {
             visible: false
         }
 
-//        MouseArea {
-//            id: frameArea
-//            property bool blocked: false
-//            anchors.top: parent.top
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            height: 30
-//            z: 1
-//            hoverEnabled: true
-//            propagateComposedEvents: true
-//            onPressed: mouse.accepted = false
-//            onReleased: mouse.accepted = false
-//            onMouseXChanged: titleBar.mouseX = mouseX
-//            onContainsMouseChanged: titleBar.containsMouse = containsMouse
-//        }
-
         SequentialAnimation {
             id: goToBasicAnimation
 //            PropertyAction {
@@ -1548,4 +1531,15 @@ ApplicationWindow {
         onTriggered: checkUpdates()
     }
 
+
+    function releaseFocus() {
+        // Workaround to release focus from textfield when scrolling (https://bugreports.qt.io/browse/QTBUG-34867)
+        if(isAndroid) {
+            console.log("releasing focus")
+            middlePanel.focus = true
+            middlePanel.focus = false
+        }
+
+
+    }
 }
