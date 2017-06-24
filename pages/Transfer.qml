@@ -429,7 +429,9 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 17 * scaleRatio
+        anchors.leftMargin: 17 * scaleRatio
+        anchors.topMargin: 17 * scaleRatio
+        anchors.bottomMargin: 17 * scaleRatio
         spacing: 10 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
@@ -458,15 +460,16 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced
             anchors.left: parent.left
             anchors.right: parent.right
+            Layout.fillWidth: true
             Label {
                 id: privacyLabel
-//                fontSize: 14
+                fontSize: 14
                 text: ""
             }
 
             Label {
                 id: costLabel
-//                fontSize: 14
+                fontSize: 14
                 text: qsTr("Transaction cost") + translationManager.emptyString
                 anchors.right: parent.right
             }
@@ -479,6 +482,7 @@ Rectangle {
             id: privacyLevelItem
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.rightMargin: 17 * scaleRatio
             onFillLevelChanged: updateMixin()
         }
 

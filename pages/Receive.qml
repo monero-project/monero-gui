@@ -324,7 +324,7 @@ Rectangle {
 
         RowLayout {
             id: trackingRow
-
+            visible: !isAndroid && !isIOS && !persistentSettings.lightWallet
             Label {
                 id: trackingLabel
                 textFormat: Text.RichText

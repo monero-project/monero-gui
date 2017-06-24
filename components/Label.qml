@@ -37,6 +37,7 @@ Item {
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
     property alias wrapMode: label.wrapMode
+    property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
     width: icon.x + icon.width
     height: icon.height

@@ -399,6 +399,7 @@ Rectangle {
             // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
+                visible: !isAndroid && !isIOS && !persistentSettings.lightWallet
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString
