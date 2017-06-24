@@ -248,26 +248,25 @@ ColumnLayout {
     }
 
     RowLayout {
-//        Layout.leftMargin: wizardLeftMargin
-//        Layout.rightMargin: wizardRightMargin
-        Layout.fillWidth: true
+        Layout.leftMargin: wizardLeftMargin
+        Layout.rightMargin: wizardRightMargin
         Layout.topMargin: 30 * scaleRatio
+        Layout.alignment: Qt.AlignCenter
+        Layout.fillWidth: true
 
-        CheckBox {
-            id: testNet
-            Layout.alignment: Qt.AlignRight
-//            Layout.alignment: Qt.AlignCenter
-//            anchors.verticalCenter: parent.verticalCenter
-//            anchors.horizontalCenter: parent.horizontalCenter;
-            text: qsTr("Testnet") + translationManager.emptyString
-            background: "#FFFFFF"
-            fontColor: "#4A4646"
-            fontSize: 16 * scaleRatio
-            checkedIcon: "../images/checkedVioletIcon.png"
-            uncheckedIcon: "../images/uncheckedIcon.png"
-            checked: appWindow.persistentSettings.testnet;
+        Rectangle {
+            width: 100 * scaleRatio
+            CheckBox {
+                id: testNet
+                text: qsTr("Testnet") + translationManager.emptyString
+                background: "#FFFFFF"
+                fontColor: "#4A4646"
+                fontSize: 16 * scaleRatio
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: appWindow.persistentSettings.testnet;
+            }
         }
     }
-
 }
 
