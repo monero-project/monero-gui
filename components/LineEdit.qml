@@ -53,14 +53,14 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        anchors.bottomMargin: 1
+        anchors.bottomMargin: 1 * scaleRatio
         color: "#DBDBDB"
         //radius: 4
     }
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: 1
+        anchors.topMargin: 1 * scaleRatio
         color: getColor(error)
         //radius: 4
     }

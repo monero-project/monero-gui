@@ -39,14 +39,14 @@ Item {
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
-    width: icon.x + icon.width
-    height: icon.height
+    width: icon.x + icon.width * scaleRatio
+    height: icon.height * scaleRatio
     Layout.topMargin: 10 * scaleRatio
 
     Text {
         id: label
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 2
+        anchors.bottomMargin: 2 * scaleRatio
         anchors.left: parent.left
         font.family: "Arial"
         font.pixelSize: fontSize
@@ -58,7 +58,7 @@ Item {
         id: icon
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: label.right
-        anchors.leftMargin: 5
+        anchors.leftMargin: 5 * scaleRatio
         source: "../images/whatIsIcon.png"
         visible: appWindow.whatIsEnable
     }

@@ -71,7 +71,7 @@ Rectangle {
     }
 
     function updateMixin() {
-        var fillLevel = privacyLevelItem.fillLevel
+        var fillLevel = (isMobile) ? privacyLevelItemSmall.fillLevel : privacyLevelItem.fillLevel
         var mixin = scaleValueToMixinCount(fillLevel)
         console.log("PrivacyLevel changed:"  + fillLevel)
         console.log("mixin count: "  + mixin)
@@ -427,8 +427,17 @@ Rectangle {
 
 
         PrivacyLevel {
-            visible: persistentSettings.transferShowAdvanced
+            visible: persistentSettings.transferShowAdvanced && !isMobile
             id: privacyLevelItem
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.rightMargin: 17 * scaleRatio
+            onFillLevelChanged: updateMixin()
+        }
+
+        PrivacyLevelSmall {
+            visible: persistentSettings.transferShowAdvanced && isMobile
+            id: privacyLevelItemSmall
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.rightMargin: 17 * scaleRatio
