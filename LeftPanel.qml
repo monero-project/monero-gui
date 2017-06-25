@@ -448,6 +448,7 @@ Rectangle {
             // ------------- Sign/verify tab ---------------
             MenuButton {
                 id: signButton
+                visible: !isAndroid && !isIOS && !persistentSettings.lightWallet
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
