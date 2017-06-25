@@ -113,3 +113,15 @@ void QrCodeScanner::timerEvent(QTimerEvent *event)
     }
 }
 
+QrCodeScanner::~QrCodeScanner()
+{
+    m_thread->stop();
+    m_thread->quit();
+    if(!m_thread->wait(5000))
+    {
+        m_thread->terminate();
+        m_thread->wait();
+    }
+
+}
+

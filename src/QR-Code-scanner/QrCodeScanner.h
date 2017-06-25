@@ -44,7 +44,7 @@ class QrCodeScanner : public QObject
 
 public:
     QrCodeScanner(QObject *parent = Q_NULLPTR);
-
+    ~QrCodeScanner();
     void setSource(QCamera*);
 
     bool enabled() const;
