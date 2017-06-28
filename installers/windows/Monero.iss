@@ -195,6 +195,10 @@ Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
 Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: comparetimestamp
 
 
+[Tasks]
+Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:";
+
+
 [Run]
 Filename: "{app}\ReadMe.htm"; Description: "Show ReadMe"; Flags: postinstall shellexec skipifsilent
 
@@ -313,7 +317,7 @@ var s: String;
 begin
   s := 'Please note: Uninstall will not delete any downloaded blockchain. ';
   s := s + 'If you do not need it anymore you have to delete it manually.';
-  s := s + #13#10#13#10 + 'Uninstall also will not delete any wallets that you created.';
+  s := s + #13#10#13#10 + 'Uninstall will not delete any wallets that you created either.';
   MsgBox(s, mbInformation, MB_OK);
   Result := true;
 end;
@@ -323,22 +327,28 @@ end;
 ; Icons in the "Monero GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
 Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"
-Name: "{group}\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}
-Name: "{group}\Read Me"; Filename: "{app}\ReadMe.htm"
-Name: "{group}\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"
+Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
+
+; Sub-folder "Utilities";
+; Note that Windows 10, unlike Windows 7, ignores such sub-folders completely
+; and insists on displaying ALL icons on one single level
+Name: "{group}\Utilities\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}
+Name: "{group}\Utilities\Read Me"; Filename: "{app}\ReadMe.htm"
+Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"
 
 ; Icons for troubleshooting problems / testing / debugging
-; For Windows 7 it would be ok to go one level deeper with those icons into a folder, e.g. called "Troubleshooting"
-;   Syntax would be:   Name: "{group}\Troubleshooting\GUI Wallet Low Graphics Mode" ...
-; However, Windows 10 stupidly insists on displayin ALL icons on one single level despite finding them in such a folder
-; So just make those icons visually different from the others by text, and make them sort at the end by the help of "x" in front 
-Name: "{group}\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}\start-low-graphics-mode.bat"
-Name: "{group}\x (Try Daemon, Exit Confirm)"; Filename: "{app}\monero-daemon.bat"
-Name: "{group}\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM monerod.exe /T /F"
-Name: "{group}\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: "{app}\monero-wallet-gui.log"
-Name: "{group}\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
-Name: "{group}\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: "{userdocs}\Monero\wallets"
-Name: "{group}\x (Check Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
+; To show that they are in some way different (not for everyday use), make them visually different
+; from the others by text, and make them sort at the end by the help of "x" in front 
+Name: "{group}\Utilities\x (Check Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
+Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
+Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: "{userdocs}\Monero\wallets"
+Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: "{app}\monero-wallet-gui.log"
+Name: "{group}\Utilities\x (Try Daemon, Exit Confirm)"; Filename: "{app}\monero-daemon.bat"
+Name: "{group}\Utilities\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}\start-low-graphics-mode.bat"
+Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM monerod.exe /T /F"
+
+; Desktop icons, optional with the help of the "Task" section
+Name: "{userdesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Tasks: desktopicon
 
 
 [Registry]
