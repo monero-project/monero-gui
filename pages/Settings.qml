@@ -56,6 +56,8 @@ Rectangle {
             walletTypeDropdown.currentIndex = 1
         else
             walletTypeDropdown.currentIndex = 0
+
+        walletTypeDropdown.update()
     }
 
     ColumnLayout {

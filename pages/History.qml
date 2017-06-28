@@ -563,5 +563,6 @@ Rectangle {
 
     function onPageCompleted() {
         table.addressBookModel = appWindow.currentWallet ? appWindow.currentWallet.addressBookModel : null
+        transactionTypeDropdown.update()
     }
 }

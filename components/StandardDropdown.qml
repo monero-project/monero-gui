@@ -57,6 +57,12 @@ Item {
         return true
     }
 
+    // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
+    function update() {
+        firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
+        secondColText.text =  column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
+    }
+
     Item {
         id: head
         anchors.left: parent.left
@@ -110,7 +116,6 @@ Item {
             font.bold: true
             font.pixelSize: 12 * scaleRatio
             color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
         }
 
         Text {
@@ -122,8 +127,6 @@ Item {
             font.family: "Arial"
             font.pixelSize: 12 * scaleRatio
             color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
-
             property int w: 0
             Component.onCompleted: w = implicitWidth
         }

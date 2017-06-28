@@ -652,6 +652,7 @@ Rectangle {
             priorityDropdown.dataModel = priorityModel;
             priorityDropdown.currentIndex = 0
         }
+        priorityDropdown.update()
     }
 
     //TODO: Add daemon sync status
