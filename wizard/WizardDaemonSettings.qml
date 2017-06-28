@@ -55,7 +55,7 @@ ColumnLayout {
     function onPageClosed(settingsObject) {
         appWindow.persistentSettings.useRemoteNode = remoteNode.checked
         appWindow.persistentSettings.startLocalNode = localNode.checked
-        appWindow.persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
+        appWindow.persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
         return true
     }
 

@@ -172,15 +172,19 @@ bool Wallet::store(const QString &path)
 
 bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
-    qDebug() << "init non async";
+    qDebug() << __FUNCTION__;
     if (isRecovering){
         qDebug() << "RESTORING";
         m_walletImpl->setRecoveringFromSeed(true);
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
     try {
-        bool lightWalletNewAddress;
+        bool lightWalletNewAddress = false;
+        // TODO: openmonero nodes may not use SSL
         bool use_ssl = m_lightWallet;
+        qDebug() << "use ssl" << use_ssl;
+        qDebug() << "light wallet" << m_lightWallet;
+
         m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), use_ssl ,m_lightWallet, lightWalletNewAddress);
         if(lightWalletNewAddress) {
             // Lightwallet server hasn't seen the address before. Consider full rescan.
@@ -211,9 +215,6 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
         emit connectionStatusChanged(m_connectionStatus);
     }
 
-    qDebug() << "Pausing refresh before re-init: ";
-    m_walletImpl->pauseRefresh();
-
     QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
                                   daemonAddress, upperTransactionLimit, isRecovering, restoreHeight);
     QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
@@ -226,6 +227,8 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
             qDebug() << "init async finished - starting refresh";
             connected(true);
             m_walletImpl->startRefresh();
+        } else {
+            qDebug() << "init failed";
         }
     });
     watcher->setFuture(future);

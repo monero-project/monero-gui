@@ -390,8 +390,7 @@ ApplicationWindow {
         persistentSettings.useRemoteNode = false;
         persistentSettings.lightWallet = true
         currentWallet.setLightWallet(true);
-//        closeWallet();
-//        initialize();
+        remoteNodeConnected = false;
         currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
     }
 

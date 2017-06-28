@@ -43,7 +43,7 @@ Item {
     signal clicked()
 
     // Dynamic label width
-    Layout.minimumWidth: (label.contentWidth + 20 * scaleRatio)  //  (label.contentWidth > 80)? label.contentWidth + 20 : 100
+    Layout.minimumWidth: (label.contentWidth + 10 * scaleRatio)  //  (label.contentWidth > 80)? label.contentWidth + 20 : 100
 
     function doClick() {
         // Android workaround

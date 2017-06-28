@@ -52,11 +52,10 @@ Rectangle {
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
 
-//        walletTypeDropdown.dataModel = walletTypeModel
-//        if(persistentSettings.lightWallet)
-//            walletTypeDropdown.currentIndex = 1
-//        else
-//            walletTypeDropdown.currentIndex = 0
+        if(persistentSettings.lightWallet)
+            walletTypeDropdown.currentIndex = 1
+        else
+            walletTypeDropdown.currentIndex = 0
     }
 
     ColumnLayout {
@@ -85,7 +84,7 @@ Rectangle {
         }
 
         GridLayout {
-            columns: (isMobile)? 2 : 4
+            columns: (isMobile)? 1 : 4
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
@@ -151,6 +150,7 @@ Rectangle {
 */
             StandardButton {
                 id: rescanSpentButton
+                enabled: !persistentSettings.useRemoteNode && !persistentSettings.lightWallet
                 text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -181,7 +181,6 @@ Rectangle {
                 id: walletTypeLabel
                 color: "#4A4949"
                 text: qsTr("Wallet type") + translationManager.emptyString
-                fontSize: 16
             }
         }
 
@@ -191,13 +190,66 @@ Rectangle {
             color: "#DEDEDE"
         }
 
+        ListModel {
+             id: walletTypeModel
+
+             ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
+             ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
+
+         }
+
+        StandardDropdown {
+            Layout.minimumWidth: 100
+            id: walletTypeDropdown
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            z: parent.z + 1
+            dataModel: walletTypeModel
+            onChanged: {
+                console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
+                console.log(walletTypeDropdown.currentIndex);
+
+                // Enable Light Wallet
+                if(!persistentSettings.lightWallet) {
+                    console.log("enabling lightwallet");
+                    confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                    confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
+
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
+
+                    // Continue
+                    confirmationDialog.onAcceptedCallback = function() {
+                        appWindow.connectLightWallet()
+                        walletTypeDropdown.currentIndex = 1
+                    }
+
+                    // Cancel
+                    confirmationDialog.onRejectedCallback = function() {
+                        persistentSettings.lightWallet = false
+                        walletTypeDropdown.currentIndex = 0
+                    };
+
+                    confirmationDialog.open()
+
+                // Disable light wallet
+                } else {
+                    appWindow.disconnectRemoteNode()
+                }
+
+            }
+        }
+
         RowLayout {
+
             StandardButton {
+                visible: !persistentSettings.lightWallet
                 id: remoteDisconnect
-                enabled: persistentSettings.useRemoteNode || persistentSettings.lightWallet
+                enabled: persistentSettings.useRemoteNode
                 Layout.fillWidth: false
-                Layout.leftMargin: 30
-                text: qsTr("Normal") + translationManager.emptyString
+                text: qsTr("Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -208,41 +260,10 @@ Rectangle {
             }
 
             StandardButton {
-                id: lightWalletConnect
-                enabled: !persistentSettings.lightWallet
-                Layout.fillWidth: false
-                Layout.leftMargin: 30
-                text: qsTr("Light") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
-                    confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
-
-                    confirmationDialog.icon = StandardIcon.Question
-                    confirmationDialog.cancelText = qsTr("Cancel")
-
-                    // Continue
-                    confirmationDialog.onAcceptedCallback = function() {
-                        appWindow.connectLightWallet();
-                    }
-
-                    // Cancel
-                    confirmationDialog.onRejectedCallback = function() {
-                    };
-
-                    confirmationDialog.open()
-                }
-            }
-
-
-            StandardButton {
+                visible: !persistentSettings.lightWallet
                 id: remoteConnect
-                enabled: remoteNodeEdit.daemonAddrText != "" && remoteNodeEdit.daemonPortText != "" && !appWindow.remoteNodeConnected
+                enabled: !persistentSettings.useRemoteNode
                 Layout.fillWidth: false
-                Layout.leftMargin: 30
                 text: qsTr("Remote Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -254,80 +275,14 @@ Rectangle {
             }
         }
 
-
-
-
-//            ListModel {
-//                 id: walletTypeModel
-
-//                 ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
-//                 ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
-
-//             }
-
-// Alternate wallet switch option
-//            StandardDropdown {
-//                Layout.minimumWidth: 100
-//                id: walletTypeDropdown
-//                shadowReleasedColor: "#FF4304"
-//                shadowPressedColor: "#B32D00"
-//                releasedColor: "#FF6C3C"
-//                pressedColor: "#FF4304"
-//                z: parent.z + 1
-//                onChanged: {
-//                    console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
-//                    console.log(walletTypeDropdown.currentIndex);
-
-//                    // Enable Light Wallet
-//                    if(!persistentSettings.lightWallet) {
-//                        console.log("enabling lightwallet");
-//                        confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
-//                        confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
-
-//                        confirmationDialog.icon = StandardIcon.Question
-//                        confirmationDialog.cancelText = qsTr("Cancel")
-
-//                        // Continue
-//                        confirmationDialog.onAcceptedCallback = function() {
-//                            persistentSettings.lightWallet = true
-//                            currentWallet.setLightWallet(true);
-//                            closeWallet();
-//                            initialize();
-//                            //currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
-//                            walletTypeDropdown.currentIndex = 1
-//                        }
-
-//                        // Cancel
-//                        confirmationDialog.onRejectedCallback = function() {
-//                            persistentSettings.lightWallet = false
-//                            walletTypeDropdown.currentIndex = 0
-//                        };
-
-//                        confirmationDialog.open()
-
-//                    // Disable light wallet
-//                    } else {
-//                        console.log("disabling light wallet")
-//                        currentWallet.setLightWallet(false);
-//                        closeWallet();
-//                        initialize();
-//                        persistentSettings.lightWallet = false
-//                    }
-
-//                }
-//            }
-//        }
-
-
         //! Manage daemon
         RowLayout {
-            Layout.topMargin: 20
             visible: !isMobile
+            Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
                 color: "#4A4949"
                 text: qsTr("Manage Daemon") + translationManager.emptyString
-                fontSize: 16
             }
 
             CheckBox {
@@ -339,7 +294,6 @@ Rectangle {
             }
         }
         Rectangle {
-            visible: !isMobile
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
@@ -400,7 +354,6 @@ Rectangle {
                 id: blockchainFolderLabel
                 color: "#4A4949"
                 text: qsTr("Blockchain location") + translationManager.emptyString
-                fontSize: 16
             }
             LineEdit {
                 id: blockchainFolder
@@ -431,7 +384,6 @@ Rectangle {
                 id: daemonFlagsLabel
                 color: "#4A4949"
                 text: qsTr("Local daemon startup flags") + translationManager.emptyString
-                fontSize: 16
             }
             LineEdit {
                 id: daemonFlags
@@ -444,7 +396,6 @@ Rectangle {
 
 
 //        RowLayout {
-//            v
 //            id: daemonAddrRow
 //            Layout.fillWidth: true
 //            spacing: 10
@@ -454,56 +405,27 @@ Rectangle {
 //                Layout.fillWidth: true
 //                color: "#4A4949"
 //                text: qsTr("Daemon address") + translationManager.emptyString
-//                fontSize: 16
 //            }
 //        }
 
 
-        GridLayout {
-            visible: daemonAdvanced.checked
-            id: daemonAddrRow
-            Layout.fillWidth: true
-            columnSpacing: 10
-            columns: (isMobile) ?  2 : 3
-
-            LineEdit {
-                id: daemonAddr
-                Layout.preferredWidth:  100
-                Layout.fillWidth: true
-                text: (daemonAddress !== undefined) ? daemonAddress[0] : ""
-                placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
-            }
-
-
-            LineEdit {
-                id: daemonPort
-                Layout.preferredWidth: 100
-                Layout.fillWidth: true
-                text: (daemonAddress !== undefined) ? daemonAddress[1] : "18081"
-                placeholderText: qsTr("Port") + translationManager.emptyString
-            }
-        }
-
         RowLayout {
-            Layout.topMargin: 17 * scaleRatio
             Layout.fillWidth: true
-            spacing: 10
-            visible: daemonAdvanced.checked
+            visible: daemonAdvanced.checked || isMobile
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Login (optional)") + translationManager.emptyString
-                fontSize: 16
+                text: qsTr("Node login (optional)") + translationManager.emptyString
             }
 
         }
 
-        RowLayout {
-
+        ColumnLayout {
+            visible: daemonAdvanced.checked || isMobile
             LineEdit {
                 id: daemonUsername
-                Layout.preferredWidth:  100
+                Layout.preferredWidth:  100 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.daemonUsername
                 placeholderText: qsTr("Username") + translationManager.emptyString
@@ -512,55 +434,47 @@ Rectangle {
 
             LineEdit {
                 id: daemonPassword
-                Layout.preferredWidth: 100
+                Layout.preferredWidth: 100 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.daemonPassword
                 placeholderText: qsTr("Password") + translationManager.emptyString
                 echoMode: TextInput.Password
             }
-
-            StandardButton {
-                id: daemonAddrSave
-                Layout.fillWidth: false
-                Layout.leftMargin: 30
-                text: qsTr("Connect") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    console.log("saving daemon adress settings")
-                    var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
-                    if(persistentSettings.daemon_address != newDaemon) {
-                        persistentSettings.daemon_address = newDaemon
-                        walletManager.setDaemonAddress(persistentSettings.daemon_address)
-                    }
-
-                    // Update daemon login
-                    persistentSettings.daemonUsername = daemonUsername.text;
-                    persistentSettings.daemonPassword = daemonPassword.text;
-
-                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
-
-                    //Reinit wallet
-                    currentWallet.initAsync(newDaemon);
-                }
-            }
         }
 
         RowLayout {
 
-            RowLayout {
+            ColumnLayout {
                 Label {
                     color: "#4A4949"
-                   text: qsTr("Remote node") + translationManager.emptyString
-                    fontSize: 16
+                    text: qsTr("Remote node") + translationManager.emptyString
                 }
                 RemoteNodeEdit {
-                    Layout.minimumWidth: 300
+                    Layout.minimumWidth: 100 * scaleRatio
                     id: remoteNodeEdit
                     onEditingFinished: {
-                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getSelected();
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                        console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
+                    }
+                }
+
+                StandardButton {
+                    id: remoteNodeSave
+                    text: qsTr("Connect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        // Update daemon login
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                        persistentSettings.daemonUsername = daemonUsername.text;
+                        persistentSettings.daemonPassword = daemonPassword.text;
+                        persistentSettings.useRemoteNode = true
+
+                        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
+                        appWindow.connectRemoteNode()
                     }
                 }
             }
@@ -629,7 +543,6 @@ Rectangle {
 
             LineEdit {
                 id: logCategories
-                Layout.preferredWidth:  200 * scaleRatio
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
@@ -659,17 +572,23 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        Label {
+
+
+        Text {
             id: guiVersion
             Layout.topMargin: 8 * scaleRatio
             color: "#4A4949"
             text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
         }
 
-        Label {
+        Text {
             id: guiMoneroVersion
             color: "#4A4949"
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
         }
     }
 
