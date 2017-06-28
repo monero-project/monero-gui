@@ -201,7 +201,9 @@ Rectangle {
          }
 
         StandardDropdown {
+            Layout.fillWidth: true
             Layout.minimumWidth: 100
+            Layout.maximumWidth: 300
             id: walletTypeDropdown
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
@@ -452,6 +454,7 @@ Rectangle {
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
                 RemoteNodeEdit {
+                    visible: !persistentSettings.lightWallet
                     Layout.minimumWidth: 100 * scaleRatio
                     id: remoteNodeEdit
                     onEditingFinished: {
