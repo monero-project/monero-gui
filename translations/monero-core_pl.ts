@@ -21,12 +21,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="72"/>
         <source>QRCODE</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QR Kod</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="94"/>
         <source>4...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">4...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="103"/>
@@ -41,12 +41,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="117"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wklej 64 znaki w postaci heksadecymalnej (dodaj na początku adresu '0x'))</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opis &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="128"/>
@@ -56,12 +56,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="139"/>
         <source>Give this entry a name or description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dodaj nazwę lub opis dla tego wpisu</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="155"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dodaj</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="160"/>
@@ -71,12 +71,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Invalid address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Niepoprawny adres</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="167"/>
         <source>Can&apos;t create entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można utworzyć wpisu</translation>
     </message>
     <message>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
@@ -136,12 +136,12 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="117"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zamknij</translation>
     </message>
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">windows + enter lub command + enter (pomoc)</translation>
     </message>
 </context>
 <context>
@@ -161,17 +161,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting Monero daemon in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uruchomienie procesu Monero za %1 sekund</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uruchom proces (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Użyj własnych ustawień</translation>
     </message>
 </context>
 <context>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../pages/History.qml" line="281"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filtruj</translation>
     </message>
     <message>
         <source>FILTER</source>
@@ -328,17 +328,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
         <source>(%1/10 confirmations)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(%1/10 potwierdzeń)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="270"/>
         <source>UNCONFIRMED</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">NIEPOTWIERDZONE</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="271"/>
         <source>PENDING</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OCZEKUJĄCE</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="300"/>
@@ -434,12 +434,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="378"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zaawansowane</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="379"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="400"/>
@@ -454,7 +454,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="424"/>
         <source>Check payment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprawdź płatność</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="448"/>
@@ -464,7 +464,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="449"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="471"/>
@@ -497,7 +497,7 @@
     <message>
         <location filename="../MiddlePanel.qml" line="48"/>
         <source>Unlocked Balance</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dostępne saldo</translation>
     </message>
     <message>
         <source>Unlocked Balance:</source>
@@ -509,77 +509,77 @@
     <message>
         <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopanie solo</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(dostępne jedynie dla lokalnego procesu/daemona)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopanie z udziałem twojego komputera wzmacnia sieć Monero. Im więcej osób kopie tym trudniej zaatakować sieć, a każdy najmniejszy wkład jest pomocny. Dodatkowo kopanie daje ci małą szansę na zarobienie Monero. Twój komputer utworzy hashe/sumy kontrolne aby znaleźć rozwiązanie dla bloku. Jeżeli znajdziesz rozwiązanie wtedy otrzymasz swój udział w postaci zapłaty w Monero. Powodzenia!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
         <source>CPU threads</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wątki CPU</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="104"/>
         <source>(optional)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(opcjonalnie)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="116"/>
         <source>Background mining (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopanie w tle (wersja eksperymentalna)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="132"/>
         <source>Enable mining when running on battery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uruchom kopanie gdy działasz na baterii</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="142"/>
         <source>Manage miner</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zarządzaj koparką</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="151"/>
         <source>Start mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uruchom kopanie</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Error starting mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Błąd uruchamiania koparki</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="162"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można było uruchomić kopania.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopanie jest możliwe tylko mając uruchomiony proces daemona loklanie. Uruchom daemona aby mieć możliwość kopania.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="176"/>
         <source>Stop mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zatrzymaj kopanie</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="192"/>
         <source>Status: not mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Status: nie kopie</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="203"/>
         <source>Mining at %1 H/s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Szybkość kopania: %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="206"/>
