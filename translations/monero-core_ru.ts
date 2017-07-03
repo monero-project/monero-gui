@@ -29,10 +29,6 @@
         <translation>ID платежа &lt;font size=&apos;2&apos;&gt;(Опционально)&lt;/font&gt;</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation type="vanished">&lt;b&gt;ID платежа&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Уникальное имя пользователя использовано в&lt;br/&gt;адресной книге. Это не&lt;br/&gt;передача информации об отправке&lt;br/&gt;во время отправки</translation>
-    </message>
-    <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Paste 64 hexadecimal characters</source>
         <translation>Вставьте 64 шестнадцатеричных символа</translation>
@@ -189,10 +185,6 @@
         <translation> выбрано: </translation>
     </message>
     <message>
-        <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Общая сумма выбранных платежей&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
         <translation>Введите для пошагового поиска...</translation>
@@ -298,10 +290,6 @@
         <translation>Комиссия</translation>
     </message>
     <message>
-        <source>Balance</source>
-        <translation type="vanished">Баланс</translation>
-    </message>
-    <message>
         <location filename="../components/HistoryTable.qml" line="357"/>
         <source>Amount</source>
         <translation>Количество</translation>
@@ -315,42 +303,32 @@
         <translation>Баланс</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="135"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="178"/>
+        <location filename="../LeftPanel.qml" line="177"/>
         <source>Unlocked balance</source>
         <translation>Доступный баланс</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="181"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="281"/>
+        <location filename="../LeftPanel.qml" line="279"/>
         <source>Send</source>
         <translation>Отправить</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="331"/>
+        <location filename="../LeftPanel.qml" line="329"/>
         <source>Receive</source>
         <translation>Получить</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="332"/>
+        <location filename="../LeftPanel.qml" line="330"/>
         <source>R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="425"/>
+        <location filename="../LeftPanel.qml" line="423"/>
         <source>K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="355"/>
+        <location filename="../LeftPanel.qml" line="353"/>
         <source>History</source>
         <translation>История</translation>
     </message>
@@ -360,67 +338,67 @@
         <translation>Тестовая сеть</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="306"/>
+        <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
         <translation>Адресная книга</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="307"/>
+        <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="356"/>
+        <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="378"/>
+        <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
         <translation>Дополнительно</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="379"/>
+        <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="400"/>
+        <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
         <translation>Майнинг</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="401"/>
+        <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="424"/>
+        <location filename="../LeftPanel.qml" line="422"/>
         <source>Check payment</source>
         <translation>Проверить платеж</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="448"/>
+        <location filename="../LeftPanel.qml" line="446"/>
         <source>Sign/verify</source>
         <translation>Войти/проверить</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="449"/>
+        <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="471"/>
+        <location filename="../LeftPanel.qml" line="469"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="472"/>
+        <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="282"/>
+        <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
@@ -834,10 +812,6 @@
         <translation>Неверный пароль</translation>
     </message>
     <message>
-        <source>Show seed</source>
-        <translation type="vanished">Показать сиды</translation>
-    </message>
-    <message>
         <location filename="../pages/Settings.qml" line="306"/>
         <source>Daemon address</source>
         <translation>Адрес демона</translation>
@@ -1007,10 +981,6 @@
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
-    </message>
-    <message>
-        <source>Wallet mnemonic seed</source>
-        <translation type="vanished">Мнемоническая фраза (seed) кошелька</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="322"/>
@@ -1208,10 +1178,6 @@
         <translation>&lt;b&gt;Скопировать адрес в буфер обмена&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Отправить тому же получателю&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
@@ -1305,12 +1271,6 @@
         <location filename="../pages/Transfer.qml" line="716"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Кошелек не подключен к демону</translation>
-    </message>
-    <message>
-        <source>Connected daemon is not compatible with GUI.
-Please upgrade or connect to another daemon</source>
-        <translation type="vanished">Подключенный демон несовместим с графическим интерфейсом.
-Обновите или подключитесь к другому демону</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="724"/>
@@ -1425,10 +1385,6 @@ Please upgrade or connect to another daemon</source>
         <translation>Высокая (x166 комиссия)</translation>
     </message>
     <message>
-        <source>Default (x4 fee)</source>
-        <translation type="vanished">Стандартная (x4 комиссия)</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="237"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Адрес &lt;font size=&apos;2&apos;&gt;  ( Вставить или выбрать из &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Адресная книга&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
@@ -1464,27 +1420,15 @@ Please upgrade or connect to another daemon</source>
         <translation>создать файл транзакции</translation>
     </message>
     <message>
-        <source>Rescan spent</source>
-        <translation type="vanished">Пересканировать потраченые</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="582"/>
         <location filename="../pages/Transfer.qml" line="638"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <source>Error: </source>
-        <translation type="vanished">Ошибка: </translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="644"/>
         <source>Information</source>
         <translation>Информация</translation>
-    </message>
-    <message>
-        <source>Sucessfully rescanned spent outputs</source>
-        <translation type="vanished">Успешно пересканированые потраченые выходы</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="571"/>
@@ -1813,12 +1757,6 @@ Ringsize: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in:
-%1</source>
-        <translation type="vanished">Был создан только кошелек для просмотра. Вы можете открыть его, закрыв этот текущий кошелек, нажав кнопку &quot; Открыть кошелек из файла &quot; и выбрав кошелек просмотра в:
-%1</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardMain.qml" line="402"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -1968,10 +1906,6 @@ Ringsize: </source>
 <context>
     <name>WizardWelcome</name>
     <message>
-        <source>Welcome</source>
-        <translation type="vanished">Добро пожаловать</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardWelcome.qml" line="79"/>
         <source>Welcome to Monero!</source>
         <translation>Добро подаловать в Monero!</translation>
@@ -2002,10 +1936,6 @@ Ringsize: </source>
         <location filename="../main.qml" line="324"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Невозможно открыть кошелек</translation>
-    </message>
-    <message>
-        <source>Unlocked balance (ожидание блоков)</source>
-        <translation type="vanished">Доступный баланс ()</translation>
     </message>
     <message>
         <location filename="../main.qml" line="438"/>

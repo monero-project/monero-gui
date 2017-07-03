@@ -132,7 +132,6 @@ Rectangle {
             text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 1<br/><br/>line 2") + translationManager.emptyString
         }
 
         Row {
@@ -178,7 +177,6 @@ Rectangle {
             text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString
         }
 
         Text {

@@ -14,10 +14,6 @@
         <translation>Dirección</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Tip tekst test&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
         <translation>QRCODE</translation>
@@ -31,10 +27,6 @@
         <location filename="../pages/AddressBook.qml" line="102"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>ID de Pago &lt;font size=&apos;2&apos;&gt;(Opcional)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation type="vanished">&lt;b&gt;ID de pago&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Nombre de usuario único usado en&lt;br/&gt;la libreta de direcciones. No es una &lt;br/&gt;transferencia de información enviada&lt;br/&gt;durante la transacción</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
@@ -65,10 +57,6 @@
         <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Can&apos;t create entry</source>
         <translation>No se puede crear la entrada</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</source>
-        <translation type="vanished">&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="135"/>
@@ -197,10 +185,6 @@
         <translation>Filtrar historial de transacciones</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Cantidad total de los pagos seleccionados&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
         <translation>Escriba para búsqueda incremental...</translation>
@@ -209,10 +193,6 @@
         <location filename="../pages/History.qml" line="223"/>
         <source>Date from</source>
         <translation>Fecha desde</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Tip tekst test&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="249"/>
@@ -323,42 +303,32 @@
         <translation>Balance</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="135"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="178"/>
+        <location filename="../LeftPanel.qml" line="177"/>
         <source>Unlocked balance</source>
         <translation>Balance desbloqueado</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="181"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="281"/>
+        <location filename="../LeftPanel.qml" line="279"/>
         <source>Send</source>
         <translation>Enviar</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="331"/>
+        <location filename="../LeftPanel.qml" line="329"/>
         <source>Receive</source>
         <translation>Recibir</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="332"/>
+        <location filename="../LeftPanel.qml" line="330"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="425"/>
+        <location filename="../LeftPanel.qml" line="423"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="355"/>
+        <location filename="../LeftPanel.qml" line="353"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
@@ -368,67 +338,67 @@
         <translation>Testnet</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="306"/>
+        <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
         <translation>Libreta de direcciones</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="307"/>
+        <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="356"/>
+        <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="378"/>
+        <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
         <translation>Avanzado</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="379"/>
+        <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="400"/>
+        <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
         <translation>Minado</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="401"/>
+        <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="424"/>
+        <location filename="../LeftPanel.qml" line="422"/>
         <source>Check payment</source>
         <translation>Comprobar pago</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="448"/>
+        <location filename="../LeftPanel.qml" line="446"/>
         <source>Sign/verify</source>
         <translation>Firmar/verificar</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="472"/>
+        <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="282"/>
+        <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="449"/>
+        <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="471"/>
+        <location filename="../LeftPanel.qml" line="469"/>
         <source>Settings</source>
         <translation>Opciones</translation>
     </message>
@@ -811,10 +781,6 @@
         <translation>Crear un monedero de sólo lectura</translation>
     </message>
     <message>
-        <source>Show seed</source>
-        <translation type="vanished">Mostrar semilla</translation>
-    </message>
-    <message>
         <location filename="../pages/Settings.qml" line="193"/>
         <source>Manage daemon</source>
         <translation>Administrar daemon</translation>
@@ -984,10 +950,6 @@
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
-    </message>
-    <message>
-        <source>Wallet mnemonic seed</source>
-        <translation type="vanished">mnemónico de monedero</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="171"/>
@@ -1216,10 +1178,6 @@
         <translation>&lt;b&gt;Copiar dirección al portapapeles&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Enviar a la misma destinación&lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
@@ -1299,10 +1257,6 @@
         <translation>Toda</translation>
     </message>
     <message>
-        <source>Default (x4 fee)</source>
-        <translation type="vanished">Por defecto (comisión x4)</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>No se ha encontrado una dirección OpenAlias válida</translation>
@@ -1369,27 +1323,15 @@
         <translation>Enviar fichero tx</translation>
     </message>
     <message>
-        <source>Rescan spent</source>
-        <translation type="vanished">Re-escanear gasto</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="582"/>
         <location filename="../pages/Transfer.qml" line="638"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <source>Error: </source>
-        <translation type="vanished">Error: </translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="644"/>
         <source>Information</source>
         <translation>Información</translation>
-    </message>
-    <message>
-        <source>Sucessfully rescanned spent outputs</source>
-        <translation type="vanished">Gastos re-escaneados correctamente</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="571"/>

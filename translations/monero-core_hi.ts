@@ -63,22 +63,6 @@
         <source>Can&apos;t create entry</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation type="vanished">विवरण &lt;font size=&apos;2&apos;&gt;(स्थानीय डेटाबेस)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>ADD</source>
-        <translation type="vanished">जोड़ें</translation>
-    </message>
-    <message>
-        <source>Payment ID</source>
-        <translation type="vanished">भुगतान आईडी</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">विवरण</translation>
-    </message>
 </context>
 <context>
     <name>AddressBookTable</name>
@@ -114,26 +98,6 @@
         <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>amount...</source>
-        <translation type="vanished">राशि...</translation>
-    </message>
-    <message>
-        <source>SEND</source>
-        <translation type="vanished">भेजें</translation>
-    </message>
-    <message>
-        <source>destination...</source>
-        <translation type="vanished">गंतव्य...</translation>
-    </message>
-    <message>
-        <source>Privacy level</source>
-        <translation type="vanished">गोपनीयता स्तर</translation>
-    </message>
-    <message>
-        <source>payment ID (optional)...</source>
-        <translation type="vanished">भुगतान आईडी (वैकल्पिक)...</translation>
     </message>
 </context>
 <context>
@@ -211,22 +175,6 @@
 <context>
     <name>History</name>
     <message>
-        <source>Filter trasactions history</source>
-        <translation type="vanished">लेनदेन इतिहास फिल्टर करें</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="vanished">पता</translation>
-    </message>
-    <message>
-        <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation type="vanished">भुगतान आईडी &lt;font size=&apos;2&apos;&gt;(वैकल्पिक)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation type="vanished">विवरण &lt;font size=&apos;2&apos;&gt;(स्थानीय डेटाबेस)&lt;/font&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="70"/>
         <source> selected: </source>
         <translation type="unfinished"></translation>
@@ -258,10 +206,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FILTER</source>
-        <translation type="vanished">फिल्टर करें</translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="314"/>
         <source>Advanced filtering</source>
         <translation type="unfinished"></translation>
@@ -270,14 +214,6 @@
         <location filename="../pages/History.qml" line="334"/>
         <source>Type of transaction</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Advance filtering</source>
-        <translation type="vanished">उन्नत फिल्टर</translation>
-    </message>
-    <message>
-        <source>Type of transation</source>
-        <translation type="vanished">लेनदेन के प्रकार</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="370"/>
@@ -354,10 +290,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Balance</source>
-        <translation type="vanished">धनराशि</translation>
-    </message>
-    <message>
         <location filename="../components/HistoryTable.qml" line="357"/>
         <source>Amount</source>
         <translation>राशि</translation>
@@ -376,111 +308,97 @@
         <translation>धनराशि</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="135"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation>परीक्षण उपाय 1&lt;br/&gt;&lt;br/&gt;line 2</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="178"/>
+        <location filename="../LeftPanel.qml" line="177"/>
         <source>Unlocked balance</source>
         <translation>खुली धनराशि</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="181"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation>परीक्षण उपाय 2&lt;br/&gt;&lt;br/&gt;line 2</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="281"/>
+        <location filename="../LeftPanel.qml" line="279"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="282"/>
+        <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="306"/>
+        <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="307"/>
+        <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="355"/>
+        <location filename="../LeftPanel.qml" line="353"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="356"/>
+        <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="378"/>
+        <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="379"/>
+        <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="400"/>
+        <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="401"/>
+        <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="424"/>
+        <location filename="../LeftPanel.qml" line="422"/>
         <source>Check payment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="425"/>
+        <location filename="../LeftPanel.qml" line="423"/>
         <source>K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="448"/>
+        <location filename="../LeftPanel.qml" line="446"/>
         <source>Sign/verify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="449"/>
+        <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="471"/>
+        <location filename="../LeftPanel.qml" line="469"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="472"/>
+        <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Transfer</source>
-        <translation type="vanished">स्थानांतरण</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="331"/>
+        <location filename="../LeftPanel.qml" line="329"/>
         <source>Receive</source>
         <translation>प्राप्त करें</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="332"/>
+        <location filename="../LeftPanel.qml" line="330"/>
         <source>R</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,18 +571,6 @@
 <context>
     <name>PrivacyLevelSmall</name>
     <message>
-        <source>LOW</source>
-        <translation type="vanished">निम्न</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">मध्यम</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">उच्च</translation>
-    </message>
-    <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="100"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
@@ -781,10 +687,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ReadOnly wallet integrated address displayed here</source>
-        <translation type="vanished">यहाँ केवल पठनीय वॉलेट एकीकृत पता प्रदर्शित है</translation>
-    </message>
-    <message>
         <location filename="../pages/Receive.qml" line="309"/>
         <source>Amount</source>
         <translation type="unfinished">राशि</translation>
@@ -828,10 +730,6 @@
         <location filename="../pages/Receive.qml" line="222"/>
         <source>Payment ID</source>
         <translation>भुगतान आईडी</translation>
-    </message>
-    <message>
-        <source>PaymentID here</source>
-        <translation type="vanished">भुगतान आईडी यहाँ</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="254"/>
@@ -1321,18 +1219,6 @@
 <context>
     <name>TickDelegate</name>
     <message>
-        <source>LOW</source>
-        <translation type="vanished">निम्न</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">मध्यम</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">उच्च</translation>
-    </message>
-    <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
@@ -1346,13 +1232,6 @@
         <location filename="../components/TickDelegate.qml" line="57"/>
         <source>High</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TitleBar</name>
-    <message>
-        <source>Monero  -  Donations</source>
-        <translation type="vanished">Monero  -  डोनेशन</translation>
     </message>
 </context>
 <context>
@@ -1615,45 +1494,9 @@ Please upgrade or connect to another daemon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Amount...</source>
-        <translation type="vanished">राशि....</translation>
-    </message>
-    <message>
-        <source>LOW</source>
-        <translation type="vanished">निम्न</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">मध्यम</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">उच्च</translation>
-    </message>
-    <message>
-        <source>Privacy Level</source>
-        <translation type="vanished">गोपनीयता स्तर</translation>
-    </message>
-    <message>
-        <source>Cost</source>
-        <translation type="vanished">मूल्य</translation>
-    </message>
-    <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    पता &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;पता&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; पुस्तिका  )&lt;/font&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="334"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>भुगतान आईडी &lt;font size=&apos;2&apos;&gt;( वैकल्पिक )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
-        <translation type="vanished">विवरण &lt;font size=&apos;2&apos;&gt;( एक वैकल्पिक विवरण जिसे दर्ज़ करने पर यह स्थानीय पता पुस्तिका में सहेजा जायेगा )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>SEND</source>
-        <translation type="vanished">भेजें</translation>
     </message>
 </context>
 <context>
@@ -1732,10 +1575,6 @@ Please upgrade or connect to another daemon</source>
         <translation>Kickstart the Monero ब्लॉकचेन?</translation>
     </message>
     <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="vanished">इसे लिखना बहुत आवश्यक है क्योंकि अपने वॉलेट के लिए आपको बस इस एकमात्र बैकअप की जरुरत पड़ेगी। यह सही से कॉपी किया गया है यह सुनिश्चित करने के लिए आपको अगली स्क्रीन पर सीड की पुष्टि करने के लिए कहा जायेगा।</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
         <translation type="unfinished"></translation>
@@ -1771,14 +1610,6 @@ Please upgrade or connect to another daemon</source>
 </context>
 <context>
     <name>WizardCreateWallet</name>
-    <message>
-        <source>A new wallet has been created for you</source>
-        <translation type="vanished">आपके लिए एक नया वॉलेट बनाया गया है</translation>
-    </message>
-    <message>
-        <source>This is the 25 word mnemonic for your wallet</source>
-        <translation type="vanished">यह आपके वॉलेट के लिए 25 शब्दों का स्मरक है</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="100"/>
         <source>Create a new wallet</source>
@@ -1820,42 +1651,6 @@ Please upgrade or connect to another daemon</source>
 </context>
 <context>
     <name>WizardFinish</name>
-    <message>
-        <source>&lt;b&gt;Language:&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;भाषा:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Account name:&lt;/b&gt; </source>
-        <translation type="vanished">&lt;b&gt;खाता नाम:&lt;/b&gt; </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Words:&lt;/b&gt; </source>
-        <translation type="vanished">&lt;b&gt;शब्द:&lt;/b&gt; </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Wallet Path: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;वॉलेट पाथ: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Enable auto donation: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;ऑटो डोनेशन सक्षम करें: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Auto donation amount: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;ऑटो डोनेशन राशि: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Allow background mining: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;बैकग्राउंड माइनिंग की अनुमति दें: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>An overview of your Monero configuration is below:</source>
-        <translation type="vanished">आपके Monero कॉन्फ़िगरेशन की समीक्षा नीचे दी गयी है:</translation>
-    </message>
-    <message>
-        <source>You’re all setup!</source>
-        <translation type="vanished">आप बिल्कुल तैयार हैं!</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="49"/>
         <location filename="../wizard/WizardFinish.qml" line="52"/>
@@ -1968,14 +1763,6 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardManageWalletUI</name>
     <message>
-        <source>This is the name of your wallet. You can change it to a different name if you’d like:</source>
-        <translation type="vanished">यह आपके वॉलेट का नाम है। यदि आप चाहें तो इसे दूसरे नाम में बदल सकते हैं:</translation>
-    </message>
-    <message>
-        <source>My account name</source>
-        <translation type="vanished">मेरा खाता नाम</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="133"/>
         <source>Wallet name</source>
         <translation type="unfinished"></translation>
@@ -2024,10 +1811,6 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardMemoTextInput</name>
     <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="vanished">इसे लिखना बहुत आवश्यक है क्योंकि अपने वॉलेट के लिए आपको बस इस एकमात्र बैकअप की जरुरत पड़ेगी। यह सही से कॉपी किया गया है यह सुनिश्चित करने के लिए आपको अगली स्क्रीन पर सीड की पुष्टि करने के लिए कहा जायेगा।</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
         <translation type="unfinished"></translation>
@@ -2075,31 +1858,9 @@ Please upgrade or connect to another daemon</source>
         <source>Testnet</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>This is my first time, I want to&lt;br/&gt;create a new account</source>
-        <translation type="vanished">यह मेरे लिए पहली बार है, मैं एक नया&lt;br/&gt;खाता बनाना चाहता हूँ</translation>
-    </message>
-    <message>
-        <source>I want to recover my account&lt;br/&gt;from my 24 work seed</source>
-        <translation type="vanished">मैं अपने 24 वर्क सीड से अपना खाता&lt;br/&gt;रिकवर करना चाहता हूँ </translation>
-    </message>
 </context>
 <context>
     <name>WizardPassword</name>
-    <message>
-        <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation type="vanished">अब जबकि आपका वॉलेट बन गया है, कृपया वॉलेट के लिए पासवर्ड निर्धारित करें</translation>
-    </message>
-    <message>
-        <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation type="vanished">अब जबकि आपका वॉलेट पुनर्स्थापित हो गया है, कृपया वॉलेट के लिए पासवर्ड निर्धारित करें</translation>
-    </message>
-    <message>
-        <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation type="vanished">ध्यान रखें, यह पासवर्ड दोबारा प्राप्त नहीं किया जा सकता है, और यदि आप इसे भूल जाते हैं तो आपको दिए गए स्मरक सीड से अपना वॉलेट पुनर्स्थापित करने की जरुरत पड़ेगी &lt;br/&gt;&lt;br/&gt;
-                        आपका पासवर्ड वॉलेट सुरक्षित रखने के लिए और गतिविधियों की पुष्टि करने के लिए प्रयोग किया जायेगा, तो इस बात का ध्यान रखें कि आपका पासवर्ड पर्याप्त रूप से सुरक्षित रहे।</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
@@ -2129,18 +1890,6 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardRecoveryWallet</name>
     <message>
-        <source>My account name</source>
-        <translation type="vanished">मेरा खाता नाम</translation>
-    </message>
-    <message>
-        <source>We&apos;re ready to recover your account</source>
-        <translation type="vanished">हम आपका खाता रिकवर करने के लिए तैयार हैं</translation>
-    </message>
-    <message>
-        <source>Please enter your 25 word private key</source>
-        <translation type="vanished">कृपया अपनी 25 शब्दों की गोपनीय कुंजी डालें</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="112"/>
         <source>Restore wallet</source>
         <translation type="unfinished"></translation>
@@ -2148,10 +1897,6 @@ Please upgrade or connect to another daemon</source>
 </context>
 <context>
     <name>WizardWelcome</name>
-    <message>
-        <source>Welcome</source>
-        <translation type="vanished">आपका स्वागत है</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="79"/>
         <source>Welcome to Monero!</source>
@@ -2377,26 +2122,6 @@ Description: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please confirm transaction:</source>
-        <translation type="vanished">कृपया लेनदेन की पुष्टि करें:</translation>
-    </message>
-    <message>
-        <source>Address: </source>
-        <translation type="vanished">पता:</translation>
-    </message>
-    <message>
-        <source>Payment ID: </source>
-        <translation type="vanished">भुगतान आईडी:</translation>
-    </message>
-    <message>
-        <source>Amount: </source>
-        <translation type="vanished">राशि:</translation>
-    </message>
-    <message>
-        <source>Fee: </source>
-        <translation type="vanished">शुल्क:</translation>
-    </message>
-    <message>
         <location filename="../main.qml" line="669"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>पैसेनहीं भेज पाया: </translation>
@@ -2407,21 +2132,9 @@ Description: </source>
         <translation>जानकारी</translation>
     </message>
     <message>
-        <source>Money sent successfully</source>
-        <translation type="vanished">पैसे सफलतापूर्वक भेजे गए</translation>
-    </message>
-    <message>
-        <source>Initializing Wallet...</source>
-        <translation type="vanished">वॉलेट प्रारंभ हो रहा है...</translation>
-    </message>
-    <message>
         <location filename="../main.qml" line="1002"/>
         <source>Program setup wizard</source>
         <translation>प्रोग्राम सेटअप विज़ार्ड</translation>
-    </message>
-    <message>
-        <source>Monero  -  Donations</source>
-        <translation type="vanished">Monero  -  डोनेशन</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1065"/>
