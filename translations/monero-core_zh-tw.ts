@@ -14,73 +14,62 @@
         <translation>位址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="63"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="72"/>
+        <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
         <translation>QR碼</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="94"/>
+        <location filename="../pages/AddressBook.qml" line="93"/>
         <source>4...</source>
         <translation>4...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="103"/>
+        <location filename="../pages/AddressBook.qml" line="102"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>付款 ID &lt;font size=&apos;2&apos;&gt;(可選填)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="105"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;付款 ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;在位址簿裡&lt;br/&gt;用以區分的使用者名稱&lt;br/&gt;這不是付款時&lt;br/&gt;傳送的資訊</translation>
+        <translation type="vanished">&lt;b&gt;付款 ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;在位址簿裡&lt;br/&gt;用以區分的使用者名稱&lt;br/&gt;這不是付款時&lt;br/&gt;傳送的資訊</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="117"/>
+        <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Paste 64 hexadecimal characters</source>
         <translation>貼上16進位字元之位址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="126"/>
+        <location filename="../pages/AddressBook.qml" line="123"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>標記 &lt;font size=&apos;2&apos;&gt;(選填)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="139"/>
+        <location filename="../pages/AddressBook.qml" line="135"/>
         <source>Give this entry a name or description</source>
         <translation>給予這個地址一個名稱或標記</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="155"/>
+        <location filename="../pages/AddressBook.qml" line="151"/>
         <source>Add</source>
         <translation>新增</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="160"/>
+        <location filename="../pages/AddressBook.qml" line="156"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="163"/>
+        <location filename="../pages/AddressBook.qml" line="159"/>
         <source>Invalid address</source>
         <translation>無效的位址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="167"/>
+        <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Can&apos;t create entry</source>
         <translation>無法新增位址</translation>
     </message>
     <message>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
         <translation type="vanished">描述 &lt;font size=&apos;2&apos;&gt;(本地資訊)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="128"/>
-        <source>&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>ADD</source>
@@ -227,17 +216,16 @@
         <translation>交易紀錄篩選</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="147"/>
         <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation>&lt;b&gt;已選擇的付款總金額&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;已選擇的付款總金額&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="185"/>
+        <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
         <translation>輸入篩選條件...</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="281"/>
+        <location filename="../pages/History.qml" line="276"/>
         <source>Filter</source>
         <translation>篩選</translation>
     </message>
@@ -254,22 +242,13 @@
         <translation type="vanished">輸入搜尋關鍵字</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="226"/>
+        <location filename="../pages/History.qml" line="223"/>
         <source>Date from</source>
         <translation>日期從</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="228"/>
-        <location filename="../pages/History.qml" line="255"/>
-        <location filename="../pages/History.qml" line="341"/>
-        <location filename="../pages/History.qml" line="378"/>
-        <location filename="../pages/History.qml" line="412"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="253"/>
-        <location filename="../pages/History.qml" line="410"/>
+        <location filename="../pages/History.qml" line="249"/>
+        <location filename="../pages/History.qml" line="403"/>
         <source>To</source>
         <translation>到</translation>
     </message>
@@ -278,17 +257,17 @@
         <translation type="vanished">篩選</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="319"/>
+        <location filename="../pages/History.qml" line="314"/>
         <source>Advanced filtering</source>
         <translation>進階篩選</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="339"/>
+        <location filename="../pages/History.qml" line="334"/>
         <source>Type of transaction</source>
         <translation>交易種類</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="376"/>
+        <location filename="../pages/History.qml" line="370"/>
         <source>Amount from</source>
         <translation>金額從</translation>
     </message>
@@ -1310,16 +1289,36 @@
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
+        <source>Slow (x0.25 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <source>Default (x1 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <source>Fast (x5 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="203"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>Sent</source>
         <translation>付款</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Received</source>
         <translation>收款</translation>
     </message>
@@ -1436,108 +1435,108 @@
         <translation type="vanished">全部</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="193"/>
+        <location filename="../pages/Transfer.qml" line="197"/>
         <source>Low (x1 fee)</source>
         <translation>低 (1倍手續費)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="194"/>
+        <location filename="../pages/Transfer.qml" line="198"/>
         <source>Medium (x20 fee)</source>
         <translation>中 (20倍手續費)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="195"/>
+        <location filename="../pages/Transfer.qml" line="199"/>
         <source>High (x166 fee)</source>
         <translation>高 (166倍手續費)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="202"/>
+        <location filename="../pages/Transfer.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="203"/>
+        <location filename="../pages/Transfer.qml" line="207"/>
         <source>Default (x1 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="204"/>
+        <location filename="../pages/Transfer.qml" line="208"/>
         <source>Fast (x5 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="205"/>
+        <location filename="../pages/Transfer.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="233"/>
+        <location filename="../pages/Transfer.qml" line="237"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      位址&lt;font size=&apos;2&apos;&gt; ( 貼上或從&lt;/font&gt; &lt;a href=&apos;#&apos;&gt;位址簿&lt;/a&gt; &lt;font size=&apos;2&apos;&gt; 中選擇 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="251"/>
+        <location filename="../pages/Transfer.qml" line="255"/>
         <source>QR Code</source>
         <translation>QR碼</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="281"/>
+        <location filename="../pages/Transfer.qml" line="285"/>
         <source>Resolve</source>
         <translation>解析</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="299"/>
+        <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>無效的 OpenAlias address 位址</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="304"/>
+        <location filename="../pages/Transfer.qml" line="308"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>已找到位址，但無法驗證其 DNSSEC 的簽署，此位址有可能受到欺騙攻擊的風險</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="306"/>
+        <location filename="../pages/Transfer.qml" line="310"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>無法找到有效位址，但無法驗證其 DNSSEC 的簽署，此位址有可能受到欺騙攻擊的風險</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="309"/>
-        <location filename="../pages/Transfer.qml" line="312"/>
+        <location filename="../pages/Transfer.qml" line="313"/>
+        <location filename="../pages/Transfer.qml" line="316"/>
         <source>Internal error</source>
         <translation>內部錯誤</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="315"/>
+        <location filename="../pages/Transfer.qml" line="319"/>
         <source>No address found</source>
         <translation>沒有找到位址</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="355"/>
+        <location filename="../pages/Transfer.qml" line="359"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>標記 &lt;font size=&apos;2&apos;&gt;( 選填 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="367"/>
+        <location filename="../pages/Transfer.qml" line="371"/>
         <source>Saved to local wallet history</source>
         <translation>儲存至本機錢包紀錄</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="397"/>
+        <location filename="../pages/Transfer.qml" line="401"/>
         <source>Send</source>
         <translation>付款</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="443"/>
+        <location filename="../pages/Transfer.qml" line="447"/>
         <source>Show advanced options</source>
         <translation>顯示進階選項</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="495"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>Sweep Unmixable</source>
         <translation>去除無法混幣的金額</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="509"/>
+        <location filename="../pages/Transfer.qml" line="513"/>
         <source>Create tx file</source>
         <translation>建立交易檔案(tx file)</translation>
     </message>
@@ -1555,12 +1554,12 @@
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="531"/>
+        <location filename="../pages/Transfer.qml" line="535"/>
         <source>Sign tx file</source>
         <translation>簽署一個交易檔案</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="545"/>
+        <location filename="../pages/Transfer.qml" line="549"/>
         <source>Submit tx file</source>
         <translation>提交交易檔案</translation>
     </message>
@@ -1569,8 +1568,8 @@
         <translation type="vanished">重新掃描付款狀態</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="578"/>
-        <location filename="../pages/Transfer.qml" line="634"/>
+        <location filename="../pages/Transfer.qml" line="582"/>
+        <location filename="../pages/Transfer.qml" line="638"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
@@ -1579,7 +1578,7 @@
         <translation type="vanished">錯誤: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="640"/>
+        <location filename="../pages/Transfer.qml" line="644"/>
         <source>Information</source>
         <translation>資訊</translation>
     </message>
@@ -1588,95 +1587,95 @@
         <translation type="vanished">掃描付款狀態的結果</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
-        <location filename="../pages/Transfer.qml" line="628"/>
+        <location filename="../pages/Transfer.qml" line="571"/>
+        <location filename="../pages/Transfer.qml" line="632"/>
         <source>Please choose a file</source>
         <translation>請選擇一個檔案</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="579"/>
+        <location filename="../pages/Transfer.qml" line="583"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>無法載入未簽署的交易: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="586"/>
+        <location filename="../pages/Transfer.qml" line="590"/>
         <source>
 Number of transactions: </source>
         <translation>
 交易數量: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="588"/>
+        <location filename="../pages/Transfer.qml" line="592"/>
         <source>
 Transaction #%1</source>
         <translation>
 交易 #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
+        <location filename="../pages/Transfer.qml" line="593"/>
         <source>
 Recipient: </source>
         <translation>
 接收方: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="590"/>
+        <location filename="../pages/Transfer.qml" line="594"/>
         <source>
 payment ID: </source>
         <translation>
 付款 ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="591"/>
+        <location filename="../pages/Transfer.qml" line="595"/>
         <source>
 Amount: </source>
         <translation>
 金額: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="592"/>
+        <location filename="../pages/Transfer.qml" line="596"/>
         <source>
 Fee: </source>
         <translation>
 手續費: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="593"/>
+        <location filename="../pages/Transfer.qml" line="597"/>
         <source>
 Ringsize: </source>
         <translation>
 環簽大小: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="607"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="635"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>無法送出交易: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="641"/>
+        <location filename="../pages/Transfer.qml" line="645"/>
         <source>Money sent successfully</source>
         <translation>已成功完成 Monero 付款</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="700"/>
-        <location filename="../pages/Transfer.qml" line="712"/>
+        <location filename="../pages/Transfer.qml" line="704"/>
+        <location filename="../pages/Transfer.qml" line="716"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>錢包沒有與區塊同步程式(daemon)建立連線。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="715"/>
+        <location filename="../pages/Transfer.qml" line="719"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>已連接的區塊同步程式與此GUI錢包不相容
 請升級區塊同步程式或是連接至另一個同步程式</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="720"/>
+        <location filename="../pages/Transfer.qml" line="724"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>正在等待區塊同步程式完成同步</translation>
     </message>
@@ -1706,7 +1705,7 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">隱私等級</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="470"/>
+        <location filename="../pages/Transfer.qml" line="474"/>
         <source>Transaction cost</source>
         <translation>交易所需的花費</translation>
     </message>
@@ -1715,12 +1714,12 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    位址 &lt;font size=&apos;2&apos;&gt;  ( 輸入位址或從 &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; 簿選擇 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="330"/>
+        <location filename="../pages/Transfer.qml" line="334"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>付款ID &lt;font size=&apos;2&apos;&gt;( 可不填 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="342"/>
+        <location filename="../pages/Transfer.qml" line="346"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16 或 64 十六進位字元</translation>
     </message>

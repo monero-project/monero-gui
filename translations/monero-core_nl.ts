@@ -14,67 +14,56 @@
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="63"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="72"/>
+        <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
         <translation>QRCODE</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="94"/>
+        <location filename="../pages/AddressBook.qml" line="93"/>
         <source>4...</source>
         <translation>4...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="103"/>
+        <location filename="../pages/AddressBook.qml" line="102"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>Betaal-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="105"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;Betaal-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Een unieke gebruikersnaam die gebruikt wordt in&lt;br/&gt;het adresboek. Deze wordt niet gebruikt voor&lt;br/&gt;het verzenden van informatie;br/&gt;tijdens de transfer</translation>
+        <translation type="vanished">&lt;b&gt;Betaal-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Een unieke gebruikersnaam die gebruikt wordt in&lt;br/&gt;het adresboek. Deze wordt niet gebruikt voor&lt;br/&gt;het verzenden van informatie;br/&gt;tijdens de transfer</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="117"/>
+        <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Paste 64 hexadecimal characters</source>
         <translation>Plak 64 hexadecimale karakters</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="126"/>
+        <location filename="../pages/AddressBook.qml" line="123"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>Omschrijving &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="128"/>
-        <source>&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="139"/>
+        <location filename="../pages/AddressBook.qml" line="135"/>
         <source>Give this entry a name or description</source>
         <translation>Geef deze vermelding een naam of omschrijving</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="155"/>
+        <location filename="../pages/AddressBook.qml" line="151"/>
         <source>Add</source>
         <translation>Toevoegen</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="160"/>
+        <location filename="../pages/AddressBook.qml" line="156"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="163"/>
+        <location filename="../pages/AddressBook.qml" line="159"/>
         <source>Invalid address</source>
         <translation>Ongeldig adres</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="167"/>
+        <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Can&apos;t create entry</source>
         <translation>Kan vermelding niet opslaan</translation>
     </message>
@@ -229,15 +218,6 @@
 <context>
     <name>History</name>
     <message>
-        <location filename="../pages/History.qml" line="228"/>
-        <location filename="../pages/History.qml" line="255"/>
-        <location filename="../pages/History.qml" line="341"/>
-        <location filename="../pages/History.qml" line="378"/>
-        <location filename="../pages/History.qml" line="412"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="135"/>
         <source>Filter transaction history</source>
         <translation>Filter transactiegeschiedenis</translation>
@@ -248,12 +228,11 @@
         <translation> geselecteerd: </translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="147"/>
         <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Totaalbedrag van geselecteerde betalingen&lt;/b&gt;</translation>
+        <translation type="vanished">&lt;b&gt;Totaalbedrag van geselecteerde betalingen&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="281"/>
+        <location filename="../pages/History.qml" line="276"/>
         <source>Filter</source>
         <translation>Filteren</translation>
     </message>
@@ -270,18 +249,18 @@
         <translation type="vanished">Zoekterm ingeven</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="185"/>
+        <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
         <translation>Begin te typen voor incrementeel zoeken...</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="226"/>
+        <location filename="../pages/History.qml" line="223"/>
         <source>Date from</source>
         <translation>Startdatum</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="253"/>
-        <location filename="../pages/History.qml" line="410"/>
+        <location filename="../pages/History.qml" line="249"/>
+        <location filename="../pages/History.qml" line="403"/>
         <source>To</source>
         <translation>Tot</translation>
     </message>
@@ -290,7 +269,7 @@
         <translation type="vanished">FILTEREN</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="319"/>
+        <location filename="../pages/History.qml" line="314"/>
         <source>Advanced filtering</source>
         <translation>Geavanceerd filteren</translation>
     </message>
@@ -299,12 +278,12 @@
         <translation type="vanished">Geavanceerd filteren</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="339"/>
+        <location filename="../pages/History.qml" line="334"/>
         <source>Type of transaction</source>
         <translation>Soort transactie</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="376"/>
+        <location filename="../pages/History.qml" line="370"/>
         <source>Amount from</source>
         <translation>Bedrag van</translation>
     </message>
@@ -1343,16 +1322,36 @@
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
+        <source>Slow (x0.25 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <source>Default (x1 fee)</source>
+        <translation type="unfinished">Normaal (×4 vergoeding) {1 ?}</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <source>Fast (x5 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="203"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>All</source>
         <translation>Alles</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>Sent</source>
         <translation>Verzonden</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Received</source>
         <translation>Ontvangen</translation>
     </message>
@@ -1487,7 +1486,7 @@
         <translation type="vanished">Privacyniveau</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="470"/>
+        <location filename="../pages/Transfer.qml" line="474"/>
         <source>Transaction cost</source>
         <translation>Transactiekosten</translation>
     </message>
@@ -1520,103 +1519,103 @@
         <translation type="vanished">alles</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="193"/>
+        <location filename="../pages/Transfer.qml" line="197"/>
         <source>Low (x1 fee)</source>
         <translation>Laag (×1 vergoeding)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="194"/>
+        <location filename="../pages/Transfer.qml" line="198"/>
         <source>Medium (x20 fee)</source>
         <translation>Gemiddeld (×20 vergoeding)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="195"/>
+        <location filename="../pages/Transfer.qml" line="199"/>
         <source>High (x166 fee)</source>
         <translation>Hoog (×166 vergoeding)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="202"/>
+        <location filename="../pages/Transfer.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="203"/>
+        <location filename="../pages/Transfer.qml" line="207"/>
         <source>Default (x1 fee)</source>
         <translation type="unfinished">Normaal (×4 vergoeding) {1 ?}</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="204"/>
+        <location filename="../pages/Transfer.qml" line="208"/>
         <source>Fast (x5 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="205"/>
+        <location filename="../pages/Transfer.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="233"/>
+        <location filename="../pages/Transfer.qml" line="237"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Adres &lt;font size=&apos;2&apos;&gt;  (Vul in of selecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Addresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="251"/>
+        <location filename="../pages/Transfer.qml" line="255"/>
         <source>QR Code</source>
         <translation>QR-Code</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="281"/>
+        <location filename="../pages/Transfer.qml" line="285"/>
         <source>Resolve</source>
         <translation>Oplossen</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="299"/>
+        <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Geen geldig adres gevonden onder dit OpenAlias adres</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="304"/>
+        <location filename="../pages/Transfer.qml" line="308"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Adres gevonden, maar DNSSEC handtekeningen konden niet geverifiëerd worden, dus het adres kan mogelijk gespoofed en dus ongeldig zijn</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="306"/>
+        <location filename="../pages/Transfer.qml" line="310"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Geen geldig adres gevonden onder het opgegeven OpenAlias adres, en de DNSSEC handtekeningen konden niet geverifiëerd worden, dus het adres kan mogelijk gespoofed en dus ongeldig zijn</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="309"/>
-        <location filename="../pages/Transfer.qml" line="312"/>
+        <location filename="../pages/Transfer.qml" line="313"/>
+        <location filename="../pages/Transfer.qml" line="316"/>
         <source>Internal error</source>
         <translation>Interne fout</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="315"/>
+        <location filename="../pages/Transfer.qml" line="319"/>
         <source>No address found</source>
         <translation>Geen adres gevonden</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="355"/>
+        <location filename="../pages/Transfer.qml" line="359"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Omschrijving &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="367"/>
+        <location filename="../pages/Transfer.qml" line="371"/>
         <source>Saved to local wallet history</source>
         <translation>Wordt opgeslagen in de lokale portemonnee-geschiedenis</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="397"/>
+        <location filename="../pages/Transfer.qml" line="401"/>
         <source>Send</source>
         <translation>Verzenden</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="443"/>
+        <location filename="../pages/Transfer.qml" line="447"/>
         <source>Show advanced options</source>
         <translation>Laat geavanceerde opties zien</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="715"/>
+        <location filename="../pages/Transfer.qml" line="719"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation type="unfinished"></translation>
@@ -1626,13 +1625,13 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">Privacy niveau (ringgrootte 5)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="495"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>Sweep Unmixable</source>
         <translatorcomment>Lastig te vertalen deze. Misschien heeft iemand anders een beter idee dan, &quot;Schoonvegen van niet-te-mengen posten&quot;</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="509"/>
+        <location filename="../pages/Transfer.qml" line="513"/>
         <source>Create tx file</source>
         <translation>Maak TX bestand</translation>
     </message>
@@ -1654,12 +1653,12 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">Normaal (×4 vergoeding)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="531"/>
+        <location filename="../pages/Transfer.qml" line="535"/>
         <source>Sign tx file</source>
         <translation>Signeer TX bestand</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="545"/>
+        <location filename="../pages/Transfer.qml" line="549"/>
         <source>Submit tx file</source>
         <translation>Verzend TX bestand</translation>
     </message>
@@ -1668,8 +1667,8 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">Doorzoek uitgaven</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="578"/>
-        <location filename="../pages/Transfer.qml" line="634"/>
+        <location filename="../pages/Transfer.qml" line="582"/>
+        <location filename="../pages/Transfer.qml" line="638"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
@@ -1678,7 +1677,7 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">Fout:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="640"/>
+        <location filename="../pages/Transfer.qml" line="644"/>
         <source>Information</source>
         <translation>Informatie</translation>
     </message>
@@ -1687,83 +1686,83 @@ Please upgrade or connect to another daemon</source>
         <translation type="vanished">Met succes de uitgaven doorzocht</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
-        <location filename="../pages/Transfer.qml" line="628"/>
+        <location filename="../pages/Transfer.qml" line="571"/>
+        <location filename="../pages/Transfer.qml" line="632"/>
         <source>Please choose a file</source>
         <translation>Kies een bestand</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="579"/>
+        <location filename="../pages/Transfer.qml" line="583"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Het laden van de niet-ondertekende transactie is mislukt: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="586"/>
+        <location filename="../pages/Transfer.qml" line="590"/>
         <source>
 Number of transactions: </source>
         <translation>
 Aantal transacties:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="588"/>
+        <location filename="../pages/Transfer.qml" line="592"/>
         <source>
 Transaction #%1</source>
         <translation>
 Transactie #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
+        <location filename="../pages/Transfer.qml" line="593"/>
         <source>
 Recipient: </source>
         <translation>
 Ontvanger:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="590"/>
+        <location filename="../pages/Transfer.qml" line="594"/>
         <source>
 payment ID: </source>
         <translation>
 Betaal-ID:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="591"/>
+        <location filename="../pages/Transfer.qml" line="595"/>
         <source>
 Amount: </source>
         <translation>
 Bedrag: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="592"/>
+        <location filename="../pages/Transfer.qml" line="596"/>
         <source>
 Fee: </source>
         <translation>
 Vergoeding: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="593"/>
+        <location filename="../pages/Transfer.qml" line="597"/>
         <source>
 Ringsize: </source>
         <translation>
 Ringgrootte: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="607"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Confirmation</source>
         <translation>Bevestiging</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="635"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Kan transactie niet insturen: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="641"/>
+        <location filename="../pages/Transfer.qml" line="645"/>
         <source>Money sent successfully</source>
         <translation>Geld is succesvol verstuurd</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="700"/>
-        <location filename="../pages/Transfer.qml" line="712"/>
+        <location filename="../pages/Transfer.qml" line="704"/>
+        <location filename="../pages/Transfer.qml" line="716"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Portemonnee is niet verbonden met de node.</translation>
     </message>
@@ -1774,7 +1773,7 @@ Please upgrade or connect to another daemon</source>
 Graag upgraden of verbinden met een andere node</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="720"/>
+        <location filename="../pages/Transfer.qml" line="724"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>Wachten totdat de synchronisatie met de node compleet is</translation>
     </message>
@@ -1783,12 +1782,12 @@ Graag upgraden of verbinden met een andere node</translation>
         <translation type="vanished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Adres &lt;font size=&apos;2&apos;&gt;  (Vul in of selecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adres&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; boek)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="330"/>
+        <location filename="../pages/Transfer.qml" line="334"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Betaal-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="342"/>
+        <location filename="../pages/Transfer.qml" line="346"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16 of 64 hexadecimale tekens</translation>
     </message>
