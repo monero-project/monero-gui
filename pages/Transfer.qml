@@ -183,12 +183,16 @@ Rectangle {
       }
 
 
+      // Note: workaround for translations in listElements
+      // ListElement: cannot use script for property value, so
+      // code like this wont work:
+      // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+      // For translations to work, the strings need to be listed in
+      // the file components/StandardDropdown.qml too.
 
+      // Priorities before v5
       ListModel {
            id: priorityModel
-           // ListElement: cannot use script for property value, so
-           // code like this wont work:
-           // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
 
            ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
            ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
