@@ -46,7 +46,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(optional)&lt;/font&gt;</translation>
+        <translation>Beschreibung &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="128"/>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during thevtransfer</source>
-        <translation type="obsolete">&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ein eindeutiger Benutzername aus&lt;br/&gt;dem Adressbuch. Wird nicht zum&lt;br/&gt;Transfer von Informationen verwendet</translation>
+        <translation type="obsolete">&lt;b&gt;Zahlungs-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ein eindeutiger Benutzername aus&lt;br/&gt;dem Adressbuch. Wird nicht zum&lt;br/&gt;Transfer von Informationen verwendet</translation>
     </message>
     <message>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
@@ -145,14 +145,14 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation>Befehl + Eingabe (z.B. help)</translation>
+        <translation>Befehl + Eingabe (z. B. help)</translation>
     </message>
 </context>
 <context>
     <name>DaemonManagerDialog</name>
     <message>
         <source>Daemon doesn&apos;t appear to be running</source>
-        <translation type="vanished">Dämon scheint nicht aktiv zu sein</translation>
+        <translation type="vanished">Daemon scheint nicht aktiv zu sein</translation>
     </message>
     <message>
         <source>Start daemon</source>
@@ -165,17 +165,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting Monero daemon in %1 seconds</source>
-        <translation>Starte Monero-Dämon in %1 Sekunden</translation>
+        <translation>Starte Monero-Daemon in %1 Sekunden</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation>Starte Dämon (%1)</translation>
+        <translation>Starte Daemon (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
-        <translation>Verwende benutzerdefinierte Einstellungen</translation>
+        <translation>Benutzerdefinierte Einstellungen verwenden</translation>
     </message>
 </context>
 <context>
@@ -267,7 +267,7 @@
     </message>
     <message>
         <source>Search transfers for a given string</source>
-        <translation type="vanished">Überweisungen nach Text suchen</translation>
+        <translation type="vanished">Überweisungen nach Text-Übereinstimmungen suchen</translation>
     </message>
     <message>
         <source>Type search string</source>
@@ -276,7 +276,7 @@
     <message>
         <location filename="../pages/History.qml" line="185"/>
         <source>Type for incremental search...</source>
-        <translation>Tippe für eine Vorschlagssuche</translation>
+        <translation>Für Suchvervollständigung tippen...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="226"/>
@@ -287,7 +287,7 @@
         <location filename="../pages/History.qml" line="253"/>
         <location filename="../pages/History.qml" line="410"/>
         <source>To</source>
-        <translation>bis</translation>
+        <translation>Bis</translation>
     </message>
     <message>
         <source>FILTER</source>
@@ -334,12 +334,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <translation>Transaktionsschlüssel</translation>
+        <translation>Transaktionsschlüssel:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Tx note:</source>
-        <translation>Transaktions-Notiz</translation>
+        <translation>Transaktions-Notiz:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
@@ -471,7 +471,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="400"/>
         <source>Mining</source>
-        <translation>Schürfen</translation>
+        <translation>Mining</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="401"/>
@@ -486,7 +486,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="448"/>
         <source>Sign/verify</source>
-        <translation>Unterzeichnen/Verifizieren</translation>
+        <translation>Signieren/Verifizieren</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="449"/>
@@ -535,17 +535,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
-        <translation>Allein schürfen</translation>
+        <translation>Solo-Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
-        <translation>(nur verfügbar bei lokalem Dämon)</translation>
+        <translation>(nur verfügbar bei lokalem Daemon)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Mit deinem Computer zu schürfen (Mining) hilft dabei, das Monero-Netzwerk zu stärken. Je mehr Leute schürfen, desto schwieriger kann das Netzwerk angegriffen werden. Jeder kann helfen! &lt;br&gt; &lt;br&gt;Das Schürfen bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errechnet dabei Hash-Werte für neue Blöcke. Wenn du einen neuen Block findest, bekommst du die Belohnung dafür. Viel Erfolg!</translation>
+        <translation>Mit deinem Computer zu minen hilft dabei, das Monero-Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger kann das Netzwerk angegriffen werden. Jeder kann helfen! &lt;br&gt; &lt;br&gt;Das Mining bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errechnet dabei Hash-Werte für neue Blöcke. Wenn du einen neuen Block findest, bekommst du die Belohnung dafür. Viel Erfolg!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -560,57 +560,57 @@
     <message>
         <location filename="../pages/Mining.qml" line="116"/>
         <source>Background mining (experimental)</source>
-        <translation>Im Hintergrund schürfen (experimentell)</translation>
+        <translation>Im Hintergrund minen (experimentell)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="132"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktiviere Schürfvorgang im Batterie-Betrieb</translation>
+        <translation>Aktiviere Mining im Akkubetrieb</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="142"/>
         <source>Manage miner</source>
-        <translation>Verwalte Schürfer</translation>
+        <translation>Verwalte Miner</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="151"/>
         <source>Start mining</source>
-        <translation>Starte Schürfvorgang</translation>
+        <translation>Starte Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Error starting mining</source>
-        <translation>Fehler beim Starten des Schürfvorgangs</translation>
+        <translation>Fehler beim Starten des Minings</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="162"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>Der Schürfvorgang konnte nicht gestartet werden.&lt;br&gt;</translation>
+        <translation>Das Mining konnte nicht gestartet werden.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="164"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Schürfen kann man nur auf dem lokalen Daemon. Starte den lokalen Daemon, um zu schürfen.</translation>
+        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="176"/>
         <source>Stop mining</source>
-        <translation>Beende Schürfvorgang</translation>
+        <translation>Beende Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="192"/>
         <source>Status: not mining</source>
-        <translation>Status: Nicht am schürfen</translation>
+        <translation>Status: Kein Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="203"/>
         <source>Mining at %1 H/s</source>
-        <translation>Schürfen mit %1 H/s</translation>
+        <translation>Mining mit %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="206"/>
         <source>Not mining</source>
-        <translation>Nicht am schürfen</translation>
+        <translation>Kein Mining</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
@@ -744,7 +744,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="107"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>WARNUNG: Keine Verbindung zum Dämon</translation>
+        <translation>WARNUNG: Keine Verbindung zum Daemon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="129"/>
@@ -759,7 +759,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
         <source>1 confirmation: %2 (%1)</source>
-        <translation>Eine Bestätigung: %2 (%1)</translation>
+        <translation>1 Bestätigung: %2 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="146"/>
@@ -915,7 +915,7 @@
     <name>Settings</name>
     <message>
         <source>Click button to show seed</source>
-        <translation type="vanished">Schlatfläche drücken um die Wiederherstellungs-Wörter einzusehen</translation>
+        <translation type="vanished">Schaltfläche drücken um die Wiederherstellungs-Wörter einzusehen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="171"/>
@@ -2556,7 +2556,7 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="1002"/>
         <source>Program setup wizard</source>
-        <translation>Installations - Assistent</translation>
+        <translation>Installations-Assistent</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1017"/>
@@ -2566,7 +2566,7 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="1065"/>
         <source>send to the same destination</source>
-        <translation>an die selbe Adresse senden</translation>
+        <translation>an dieselbe Adresse senden</translation>
     </message>
 </context>
 </TS>
