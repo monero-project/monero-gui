@@ -647,7 +647,7 @@
     <message>
         <location filename="../components/MobileHeader.qml" line="94"/>
         <source>Unlocked Balance:</source>
-        <translation type="unfinished">Solde débloqué :</translation>
+        <translation>Solde débloqué :</translation>
     </message>
 </context>
 <context>
@@ -1008,32 +1008,32 @@
     <message>
         <location filename="../pages/Settings.qml" line="120"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer graine et clés</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="163"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Rescanner le solde du portefeuille</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="172"/>
         <source>Error: </source>
-        <translation type="unfinished">Erreur : </translation>
+        <translation>Erreur : </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="177"/>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="178"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished">Les sorties dépensées ont été rescannées avec succès</translation>
+        <translation>Les sorties dépensées ont été rescannées avec succès</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
         <source>Blockchain location</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement de la chaîne de blocs</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="306"/>
@@ -1068,37 +1068,37 @@
     <message>
         <location filename="../pages/Settings.qml" line="573"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez choisir un répertoire</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="582"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="585"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur : Système de fichiers en lecture seule</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="589"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention : Il y a seulement %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="591"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Note : Il y a %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="595"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Note : répertoire lmdb non trouvé. Un nouveau répertoire va être créé.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Save</source>
@@ -1107,7 +1107,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connecter</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="398"/>
@@ -1162,27 +1162,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="525"/>
         <source>Wallet seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Clés et graine du portefeuille</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="527"/>
         <source>Secret view key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé secrète d&apos;audit</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="528"/>
         <source>Public view key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé publique d&apos;audit</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="529"/>
         <source>Secret spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé secrète de dépense</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="530"/>
         <source>Public spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé publique de dépense</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="540"/>
@@ -1386,7 +1386,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Envoyer à cette adresse&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1542,22 +1542,22 @@
     <message>
         <location filename="../pages/Transfer.qml" line="202"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lent (frais x0.25)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="203"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut (frais x1)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="204"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rapide (frais x5)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="205"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Très rapide (frais x41.5)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="233"/>
