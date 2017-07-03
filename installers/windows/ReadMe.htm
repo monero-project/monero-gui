@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>Monero GUI Wallet Beta 2</title>
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif">
+<h1>Monero GUI Wallet Beta 2</h1>
+
+  <p>Copyright (c) 2014-2017, The Monero Project<br>
+  Date: June 28, 2017</p>
+
+<h2>Preface</h2>
+
+  <p>This ReadMe does not aim to be a complete introduction to Monero. If you are new to Monero or even to
+    cryptocurrencies in general you find a good introduction on reddit at
+    <a href="https://www.reddit.com/r/Monero/comments/5zgail/rmonero_newcomers_please_read_everything_you_need/">Newcomers Please Read. Everything You Need To Know</a>.
+    You also find a lot of good tutorials on <a href="https://www.monero.how/">Monero.How</a>.
+  </p>
+
+  <p>Please note that Monero and its software are constantly evolving and progressing; it probably won't take
+  long for some of the information here to become outdated.
+  </p>
+
+<h2>Content of the Package</h2>
+
+  <p>You just installed the Beta 2 of the <i>Monero GUI Wallet</i> for Windows, more exact version 0.10.3.1. The wallet
+  enables you to send and receive moneroj in a secure and very private way.
+  </p>
+
+  <p>Also included is the <i>Monero daemon</i>, so you have everything now to run a so-called <i>full node</i>
+  and become part of the network of nodes that manages the Monero blockchain; you don't need to install additional
+  packages in order to start.</p>
+
+  <p>For checking whether there are already newer versions of this package you can go to the
+  <a href="https://getmonero.org/downloads/">Downloads</a> page on <a href="https://getmonero.org/home">getmonero.org</a>,
+  the official Monero site.</p> 
+
+<h2>Access to the Blockchain</h2>
+
+  <p>Any Monero wallet needs access to the <i>blockchain</i>, the ongoing ledger of all Monero transactions. For the
+  GUI wallet there are two principal ways to get that access: You can let Monero sync with the network
+  i.e. let it download the blockchain and store it locally on your computer, or you can configure your wallet to
+  access a remote <i>open node</i> to get indirect access to the blockchain.</p>
+
+  <p>Working with your own copy of the blockchain is <b>preferred</b>: It strengthens the Monero network, and it
+  provides the most security and privacy possible for you.</p>
+
+  <p>However if your Internet access makes it difficult to run a full node, or if you have simply no room to store
+  the blockchain locally (over 17 GB in summer 2017, and of course growing), you can compromise and try to connect
+  to a remote node. One way of finding such a node is checking
+  <a href="https://moneroworld.com/pages/nodes.html">this page</a>.
+  </p>
+
+<h2>Initial Blockchain Download</h2>
+
+  <p>Please do read the following <b>before</b> jumping right in and starting the GUI wallet:</p>
+
+  <p>If you decide to work with your own copy of the blockchain, which you should whenever possible, you have to
+  download it first; it's not part of the installed package.
+  Beside the GUI wallet there is second program, the so-called <i>Monero daemon</i>, which will carry out that download.
+  You find it in the <i>Utilities</i> sub-folder of the program group.</p>
+
+  <p>Depending on your Internet access and the speed of your computer this can take
+  <b>several hours</b>, in some cases <b>more than a day</b>. Furthermore there are unfortunate cases where the
+  download gets stuck somehow or doesn't work at all, e.g. because a firewall prevents access to other nodes of the
+  Monero network.</p>
+
+  <p>The GUI wallet can start the daemon for you, but that way you will not see much during initial blockchain
+  download, especially you probably won't see any error messages in case something goes wrong. By starting the
+  daemon yourself "by hand" using the <i>Monero Daemon</i> icon in the <i>Utilities</i> sub-folder of the
+  Monero program group you will see it running and displaying messages in a separate window.</p>
+   
+  <p>If all goes well the daemon will finally display a message like this:
+  <i>You are now synchronized with the network.</i></p>
+
+  <p><b>Then</b> you are ready for sure to start your Monero adventures by starting the GUI wallet.</p>
+
+<h2>Allowing Other Nodes to Connect to Your Node</h2>
+
+  <p>When the Monero daemon downloads the blockchain it does so by connecting to other nodes of the network.</p>
+
+  <p>If you allow incoming TCP/IP connections to port 18080 on your computer and let your daemon run for extended
+  periods of time you can "return the favor" and help others in turn to get access to Monero. However, depending on
+  your Internet connection, firewall, modem, router, ISP etc. this might not be possible, and opening a port in such
+  a way usually requires some technical knowledge.</p>
+
+  <p>If you want to try you may start e.g. with
+  <a href="https://monero.stackexchange.com/questions/2479/how-do-i-enable-incoming-connections-eli5">this Monero Stack Exchange</a>
+  question.</p>
+
+<h2>Troubleshooting</h2>
+
+  <p>The Monero software and especially the GUI wallet are "work in progress", as you can expect seeing the word
+  <i>Beta</i> in the name of the package, and sometimes things go wrong.</p>
+
+  <p>Please note that despite any technical problems that you may encounter your moneroj are almost always safe: You may
+  not be able to move them or you even may not see how many you currently have, but you most probably won't loose any.
+  But do remember that the seed needed to re-create the wallet <b>is</b> critical, however: <b>Never loose your
+  seed!</b></p>
+
+  <p>There is a <b>bug</b> in this beta of the GUI wallet that triggers if it is installed in a path that contains spaces /
+  blank characters, like the default location for Windows programs <i>C:\Program Files</i> unfortunately does.
+  Symptoms are problems in the communication between the wallet and the daemon, e.g. the wallet not "seeing" the
+  daemon and then not knowing whether it is "synchronized" with the network and thus ready to work or not. You can
+  avoid these problems by starting the daemon yourself, with the help of the <i>Monero Daemon</i> icon in the
+  <i>Utilities</i> sub-folder of the Monero program group.</p>
+
+  <p>In the <i>Utilities</i> sub-folder there are several more icons that may help you to solve problems.
+  These are the icons with a <i>x</i> in front and the name <i>(in parenthesis)</i> to make them visually stand
+  apart from the "normal" ones because you will probably only need them in case of trouble, but not during normal
+  usage of Monero.</p>
+
+  <p>Here an overview and short info what each icon does:</p>
+
+  <table cellpadding="3" border="1">
+    <tr>
+      <td><i>x (Try GUI Wallet Low Graphics Mode)</i></td>
+      <td>Run the GUI wallet in a mode that allows for low-graphics
+        environments, e.g. systems with very simple non-hardware-accelerated or emulated / virtualized video cards;
+       also try if the display is simply slow or lags
+      </td>
+    </tr>
+
+    <tr>
+      <td><i>x (Try Daemon, Exit Confirm)</i></td>
+      <td>
+        Run the Monero daemon in a window that does not automatically close if
+        the daemon should exit because of a fatal error; useful in cases where the normal daemon icon
+        just leads to a window that closes right away
+      </td>
+    </tr>
+
+    <tr>
+      <td><i>x (Try Kill Daemon)</i></td>
+      <td>
+        Kill any running daemon (technically, any process called <i>monerod.exe</i>), whether
+        with or without any visible window, for starting "with a clean slate"; easier than
+        killing such tasks with the help of the Windows Task Manager
+      </td>
+    </tr>
+
+    <tr>
+      <td><i>x (Check GUI Wallet Log)</i></td>
+      <td>Open the log with status and error messages of the GUI wallet program in Notepad;
+      experienced people have a chance to diagnose technical problems with the wallet by looking at the last few lines
+      of this log</td>
+    </tr>
+
+    <tr>
+      <td><i>x (Check Daemon Log)</i></td>
+      <td>
+        Open the log with status and error messages of the daemon in Notepad; again, the last few
+        lines of this (possible very long) log are the most important for troubleshooting
+      </td>
+    </tr>
+
+    <tr>
+      <td><i>x (Check Default Wallet Folder)</i></td>
+      <td>
+        Open the standard wallet folder in Windows Explorer; useful e.g. if you want to backup
+        your wallets
+      </td>
+    </tr>
+
+    <tr>
+      <td><i>x (Check Blockchain Folder)</i></td>
+      <td>
+        Open the folder containing the blockchain in Windows Explorer
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
