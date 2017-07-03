@@ -39,10 +39,6 @@ import moneroComponents.WalletManager 1.0
 Rectangle {
     id: mainLayout
 
-    property int labelWidth: 120
-//    property int editWidth: 400
-    property int lineEditFontSize: 12
-
     color: "#F0EEEE"
 
     Clipboard { id: clipboard }
@@ -92,35 +88,31 @@ Rectangle {
 
     // sign / verify
     ColumnLayout {
-        anchors.margins: 17
+        anchors.margins: 17 * scaleRatio
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        spacing: 20
+        spacing: 20 * scaleRatio
 
         // sign
         ColumnLayout {
             id: signBox
 
             RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 16
-                        wrapMode: Text.Wrap
-                    }
-                    Label {}
+
+                Text {
+                    text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 14 * scaleRatio
+                    Layout.fillWidth: true
                 }
             }
 
             Label {
                 id: signMessageLabel
-                fontSize: 14
                 text: qsTr("Either message:") + translationManager.emptyString
-                width: mainLayout.labelWidth
             }
 
             RowLayout {
@@ -133,10 +125,8 @@ Rectangle {
                     id: signMessageLine
                     anchors.left: parent.left
                     anchors.right: signMessageButton.left
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Message to sign") + translationManager.emptyString;
                     readOnly: false
-//                    Layout.fillWidth: true
                     onTextChanged: signSignatureLine.text = ""
 
                     IconButton {
@@ -152,7 +142,6 @@ Rectangle {
                 StandardButton {
                     id: signMessageButton
                     anchors.right: parent.right
-                    width: 60
                     text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -168,9 +157,7 @@ Rectangle {
 
             Label {
                 id: signMessageFileLabel
-                fontSize: 14
                 text: qsTr("Or file:") + translationManager.emptyString
-                width: mainLayout.labelWidth
             }
 
             RowLayout {
@@ -192,8 +179,7 @@ Rectangle {
 
                 StandardButton {
                     id: loadFileToSignButton
-                    anchors.rightMargin: 17
-                    width: 60
+                    anchors.rightMargin: 17 * scaleRatio
                     text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -208,7 +194,6 @@ Rectangle {
                     id: signFileLine
                     anchors.left: loadFileToSignButton.right
                     anchors.right: signFileButton.left
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Filename with message to sign") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
@@ -227,7 +212,6 @@ Rectangle {
                 StandardButton {
                     id: signFileButton
                     anchors.right: parent.right
-                    width: 60
                     text: qsTr("Sign") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -241,19 +225,17 @@ Rectangle {
                 }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: signSignatureRow
-                anchors.topMargin: 17
+                anchors.topMargin: 17 * scaleRatio
 
                 Label {
                     id: signSignatureLabel
-                    fontSize: 14
                     text: qsTr("Signature") + translationManager.emptyString
                 }
 
                 LineEdit {
                     id: signSignatureLine
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     readOnly: true
                     Layout.fillWidth: true
@@ -275,29 +257,24 @@ Rectangle {
         ColumnLayout {
             id: verifyBox
 
-            RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 16
-//                        Layout.fillWidth: true
-                        wrapMode: Text.Wrap
-                    }
-                    Label {}
+            RowLayout {  
+                Text {
+                    text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 14 * scaleRatio
+                    Layout.fillWidth: true
                 }
+
             }
 
             Label {
                 id: verifyMessageLabel
-                fontSize: 14
                 text: qsTr("Either message:") + translationManager.emptyString
-                width: mainLayout.labelWidth
             }
 
             RowLayout {
                 id: verifyMessageRow
-                anchors.topMargin: 17
+                anchors.topMargin: 17 * scaleRatio
                 anchors.left: parent.left
                 anchors.right: parent.right
 
@@ -305,7 +282,6 @@ Rectangle {
                     id: verifyMessageLine
                     anchors.left: parent.left
                     anchors.right: verifyMessageButton.left
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Message to verify") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
@@ -323,7 +299,6 @@ Rectangle {
                 StandardButton {
                     id: verifyMessageButton
                     anchors.right: parent.right
-                    width: 60
                     text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -339,16 +314,14 @@ Rectangle {
 
             Label {
                 id: verifyMessageFileLabel
-                fontSize: 14
                 text: qsTr("Or file:") + translationManager.emptyString
-                width: mainLayout.labelWidth
             }
 
             RowLayout {
                 id: verifyFileRow
-                anchors.topMargin: 17
+                anchors.topMargin: 17 * scaleRatio
                 anchors.left: parent.left
-		anchors.right: parent.right
+                anchors.right: parent.right
 
                 FileDialog {
                     id: verifyFileDialog
@@ -363,8 +336,7 @@ Rectangle {
 
                 StandardButton {
                     id: loadFileToVerifyButton
-                    anchors.rightMargin: 17
-                    width: 60
+                    anchors.rightMargin: 17 * scaleRatio
                     text: qsTr("Select") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -379,7 +351,6 @@ Rectangle {
                     id: verifyFileLine
                     anchors.left: loadFileToVerifyButton.right
                     anchors.right: verifyFileButton.left
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Filename with message to verify") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
@@ -397,7 +368,6 @@ Rectangle {
                 StandardButton {
                     id: verifyFileButton
                     anchors.right: parent.right
-                    width: 60
                     text: qsTr("Verify") + translationManager.emptyString
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
@@ -411,18 +381,16 @@ Rectangle {
                 }
             }
 
-            Label {
+            Text {
                 id: verifyAddressLabel
-                fontSize: 14
-                width: mainLayout.labelWidth
-                textFormat: Text.RichText
-                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                            Signing address <font size='2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: %1px;}</style>\
+                            Signing address <font size='%2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='%3'> )</font>").arg(14 * scaleRatio).arg(2 * scaleRatio).arg(2 * scaleRatio)
                       + translationManager.emptyString
-//                Layout.fillWidth: true
                 wrapMode: Text.Wrap
-
-        onLinkActivated: appWindow.showPageRequest("AddressBook")
+                font.pixelSize: 14 * scaleRatio
+                Layout.fillWidth: true
+                textFormat: Text.RichText
+                onLinkActivated: appWindow.showPageRequest("AddressBook")
             }
 
             LineEdit {
@@ -430,25 +398,23 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: verifyAddressLabel.bottom
-                anchors.topMargin: 5
+                anchors.topMargin: 5 * scaleRatio
                 placeholderText: "4..."
                 // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: verifySignatureRow
-                anchors.topMargin: 17
+                anchors.topMargin: 17 * scaleRatio
 
                 Label {
                     id: verifySignatureLabel
-                    fontSize: 14
                     text: qsTr("Signature") + translationManager.emptyString
                     Layout.fillWidth: true
                 }
 
                 LineEdit {
                     id: verifySignatureLine
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignLeft

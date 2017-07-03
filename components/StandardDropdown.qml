@@ -38,7 +38,10 @@ Item {
     property string textColor: "#FFFFFF"
     property alias currentIndex: column.currentIndex
     property bool expanded: false
-    height: 37
+
+    signal changed();
+
+    height: 37 * scaleRatio
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -54,12 +57,18 @@ Item {
         return true
     }
 
+    // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
+    function update() {
+        firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
+        secondColText.text =  column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
+    }
+
     Item {
         id: head
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 37
+        height: 37 * scaleRatio
 
         Rectangle {
             anchors.left: parent.left
@@ -82,8 +91,8 @@ Item {
         Rectangle {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            height: 3
-            width: 3
+            height: 3 * scaleRatio
+            width: 3 * scaleRatio
             color: dropdown.pressedColor
             visible: dropdown.expanded || droplist.height > 0
         }
@@ -91,8 +100,8 @@ Item {
         Rectangle {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: 3
-            width: 3
+            height: 3 * scaleRatio
+            width: 3 * scaleRatio
             color: dropdown.pressedColor
             visible: dropdown.expanded || droplist.height > 0
         }
@@ -101,26 +110,23 @@ Item {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 12
+            anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
             font.family: "Arial"
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: 12 * scaleRatio
             color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
         }
 
         Text {
             id: secondColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: separator.left
-            anchors.rightMargin: 12
+            anchors.rightMargin: 12 * scaleRatio
             width: dropdown.expanded ? w : (separator.x - 12) - (firstColText.x + firstColText.width + 5)
             font.family: "Arial"
-            font.pixelSize: 12
+            font.pixelSize: 12 * scaleRatio
             color: "#FFFFFF"
-            text: column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
-
             property int w: 0
             Component.onCompleted: w = implicitWidth
         }
@@ -129,7 +135,7 @@ Item {
             id: separator
             anchors.right: dropIndicator.left
             anchors.verticalCenter: parent.verticalCenter
-            height: 18
+            height: 18 * scaleRatio
             width: 1
             color: "#FFFFFF"
         }
@@ -139,12 +145,12 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32
+            width: 32 * scaleRatio
 
             Image {
                 anchors.centerIn: parent
                 source: "../images/whiteDropIndicator.png"
-                rotation: dropdown.expanded ? 180 : 0
+                rotation: dropdown.expanded ? 180  * scaleRatio : 0
             }
         }
 
@@ -168,14 +174,14 @@ Item {
         Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
-            width: 3; height: 3
+            width: 3 * scaleRatio; height: 3 * scaleRatio
             color: dropdown.pressedColor
         }
 
         Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
-            width: 3; height: 3
+            width: 3 * scaleRatio; height: 3 * scaleRatio
             color: dropdown.pressedColor
         }
 
@@ -205,7 +211,7 @@ Item {
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30
+                    height: 30 * scaleRatio
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
@@ -213,11 +219,11 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: col2Text.left
-                        anchors.leftMargin: 12
-                        anchors.rightMargin: column2.length > 0 ? 12 : 0
+                        anchors.leftMargin: 12 * scaleRatio
+                        anchors.rightMargin: column2.length > 0 ? 12  * scaleRatio: 0
                         font.family: "Arial"
                         font.bold: true
-                        font.pixelSize: 12
+                        font.pixelSize: 12 * scaleRatio
                         color: "#FFFFFF"
                         text: qsTr(column1) + translationManager.emptyString
                     }
@@ -226,9 +232,9 @@ Item {
                         id: col2Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        anchors.rightMargin: 45
+                        anchors.rightMargin: 45 * scaleRatio
                         font.family: "Arial"
-                        font.pixelSize: 12
+                        font.pixelSize: 12 * scaleRatio
                         color: "#FFFFFF"
                         text: column2
                     }
@@ -236,14 +242,14 @@ Item {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
-                        width: 3; height: 3
+                        width: 3 * scaleRatio; height: 3 * scaleRatio
                         color: parent.color
                     }
 
                     Rectangle {
                         anchors.right: parent.right
                         anchors.top: parent.top
-                        width: 3; height: 3
+                        width: 3 * scaleRatio; height: 3 * scaleRatio
                         color: parent.color
                     }
 
@@ -254,6 +260,7 @@ Item {
                         onClicked: {
                             dropdown.expanded = false
                             column.currentIndex = index
+                            changed();
                         }
                     }
                 }

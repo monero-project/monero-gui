@@ -139,5 +139,9 @@
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
         <file>components/MobileHeader.qml</file>
+        <file>wizard/WizardDaemonSettings.qml</file>
+        <file>components/RemoteNodeEdit.qml</file>
+        <file>images/menu.png</file>
+        <file>pages/Keys.qml</file>
     </qresource>
 </RCC>

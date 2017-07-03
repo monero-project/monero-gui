@@ -38,11 +38,18 @@ Rectangle {
     property var under: null
     signal clicked()
 
+    function doClick() {
+        // Android workaround
+        releaseFocus();
+        clicked();
+    }
+
+
     function getOffset() {
         var offset = 0
         var item = button
         while (item.under) {
-            offset += 20
+            offset += 20 * scaleRatio
             item = item.under
         }
         return offset
@@ -50,7 +57,7 @@ Rectangle {
 
     color: checked ? "#FFFFFF" : "#1C1C1C"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 64 : 52) : 0
+    height: present ? ((appWindow.height >= 800) ? 64 * scaleRatio  : 52 * scaleRatio ) : 0
 
     transform: Scale {
         yScale: button.present ? 1 : 0
@@ -76,18 +83,18 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.leftMargin: parent.getOffset()
-        width: 50
+        width: 50 * scaleRatio
 
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: 16
+            width: 16 * scaleRatio
             height: width
             radius: height / 2
 
             Rectangle {
                 anchors.centerIn: parent
-                width: 12
+                width: 12 * scaleRatio
                 height: width
                 radius: height / 2
                 color: "#1C1C1C"
@@ -98,7 +105,7 @@ Rectangle {
         Text {
             id: symbolText
             anchors.centerIn: parent
-            font.pixelSize: 11
+            font.pixelSize: 11 * scaleRatio
             font.bold: true
             color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
             visible: appWindow.ctrlPressed
@@ -117,7 +124,7 @@ Rectangle {
     Image {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.rightMargin: 20 * scaleRatio
         anchors.leftMargin: parent.getOffset()
         source: "../images/menuIndicator.png"
     }
@@ -126,9 +133,9 @@ Rectangle {
         id: label
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: parent.getOffset() + 50
+        anchors.leftMargin: parent.getOffset() + 50 * scaleRatio
         font.family: "Arial"
-        font.pixelSize: 18
+        font.pixelSize: 18 * scaleRatio
         color: parent.checked ? "#000000" : "#FFFFFF"
     }
 
@@ -139,7 +146,7 @@ Rectangle {
         onClicked: {
             if(parent.checked)
                 return
-            button.clicked()
+            button.doClick()
             parent.checked = true
         }
     }

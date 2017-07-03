@@ -1,5 +1,6 @@
 TEMPLATE = app
-
+CONFIG+=declarative_debug
+CONFIG+=qml_debug
 QT += qml quick widgets
 
 WALLET_ROOT=$$PWD/monero
@@ -86,13 +87,24 @@ ios:arm64 {
     LIBS += \
         -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
-!ios {
+!ios:!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
         -lunbound \
         -leasylogging
 }
+
+android {
+    message("Host is Android")
+    LIBS += -L$$WALLET_ROOT/lib \
+        -lwallet_merged \
+        -lepee \
+        -lunbound \
+        -leasylogging
+}
+
+
 
 
 ios {
@@ -104,7 +116,8 @@ ios {
     LIBS += -L$$WALLET_ROOT/lib-ios \
         -lwallet_merged \
         -lepee \
-        -lunbound
+        -lunbound \
+        -leasylogging
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
@@ -397,7 +410,8 @@ OTHER_FILES += \
 DISTFILES += \
     notes.txt \
     monero/src/wallet/CMakeLists.txt \
-    components/MobileHeader.qml
+    components/MobileHeader.qml \
+    pages/Keys.qml
 
 
 # windows application icon

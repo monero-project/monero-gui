@@ -78,7 +78,7 @@ ColumnLayout {
         // page submitted or b) delete it when program closed before reaching final page
 
         // Always delete the wallet object before creating new - we could be stepping back from recovering wallet
-        if (typeof settingsObject.wallet !== 'undefined') {
+        if (typeof m_wallet !== 'undefined') {
             walletManager.closeWallet()
             console.log("deleting wallet")
         }
@@ -91,8 +91,9 @@ ColumnLayout {
         uiItem.wordsTextItem.memoText = wallet.seed
         // saving wallet in "global" settings object
         // TODO: wallet should have a property pointing to the file where it stored or loaded from
-        settingsObject.wallet = wallet
-        settingsObject.tmp_wallet_filename = tmp_wallet_filename
+        m_wallet = wallet;
+        settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
+        console.log("wallet saved to m_wallet")
     }
 
     WizardManageWalletUI {

@@ -33,180 +33,141 @@ import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 
 Rectangle {
-    color: "#F0EEEE"
     id: root
+    color: "#F0EEEE"
     property var model
 
-    Text {
-        id: newEntryText
+    ColumnLayout {
+        anchors.margins: 17 * scaleRatio
         anchors.left: parent.left
-        anchors.right: parent.right
         anchors.top: parent.top
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
+        anchors.right: parent.right
+        spacing: 10 * scaleRatio
 
-        elide: Text.ElideRight
-        font.family: "Arial"
-        font.pixelSize: 18
-        color: "#4A4949"
-        text: qsTr("Add new entry") + translationManager.emptyString
-    }
-
-    Label {
-        id: addressLabel
-        anchors.left: parent.left
-        anchors.top: newEntryText.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Address") + translationManager.emptyString
-        fontSize: 14
-        tipText: qsTr("<b>Tip tekst test</b>") + translationManager.emptyString
-    }
-
-    StandardButton {
-        id: qrfinderButton
-        anchors.left: parent.left
-        anchors.leftMargin: 17
-        anchors.topMargin: 5
-        anchors.top: addressLabel.bottom
-        text: qsTr("QRCODE") + translationManager.emptyString
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
-        visible : appWindow.qrScannerEnabled
-        enabled : visible
-        width: visible ? 60 : 0
-        onClicked: {
-            cameraUi.state = "Capture"
-            cameraUi.qrcode_decoded.connect(updateFromQrCode)
+        Label {
+            id: addressLabel
+            anchors.left: parent.left
+            text: qsTr("Address") + translationManager.emptyString
         }
-    }
 
-    LineEdit {
-        id: addressLine
-        anchors.left: qrfinderButton.right
-        anchors.right: parent.right
-        anchors.top: addressLabel.bottom
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        error: true;
-        placeholderText: qsTr("4...") + translationManager.emptyString
-    }
+        RowLayout {
+            StandardButton {
+                id: qrfinderButton
+                text: qsTr("QRCODE") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                visible : appWindow.qrScannerEnabled
+                enabled : visible
+                width: visible ? 60 * scaleRatio : 0
+                onClicked: {
+                    cameraUi.state = "Capture"
+                    cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                }
+            }
 
-    Label {
-        id: paymentIdLabel
-        anchors.left: parent.left
-        anchors.top: addressLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
-        fontSize: 14
-        tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
-                + translationManager.emptyString
-    }
+            LineEdit {
+                Layout.fillWidth: true;
+                id: addressLine
+                error: true;
+                placeholderText: qsTr("4...") + translationManager.emptyString
+            }
+        }
 
-    LineEdit {
-        id: paymentIdLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: paymentIdLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
-    }
+        Label {
+            id: paymentIdLabel
+            text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
+            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
+                    + translationManager.emptyString
+        }
 
-    Label {
-        id: descriptionLabel
-        anchors.left: parent.left
-        anchors.top: paymentIdLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
-        fontSize: 14
-        tipText: qsTr("<b>Tip test test</b><br/><br/>test line 2") + translationManager.emptyString
-    }
+        LineEdit {
+            id: paymentIdLine
+            Layout.fillWidth: true;
+            placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
+        }
 
-    LineEdit {
-        id: descriptionLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: descriptionLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-        placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
-    }
+        Label {
+            id: descriptionLabel
+            text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
+        }
+
+        LineEdit {
+            id: descriptionLine
+            Layout.fillWidth: true;
+            placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
+        }
 
 
-    RowLayout {
-        id: addButton
-        anchors.left: parent.left
-        anchors.top: descriptionLine.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
+        RowLayout {
+            id: addButton
+            Layout.bottomMargin: 17 * scaleRatio
+            StandardButton {
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                text: qsTr("Add") + translationManager.emptyString
+                enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
 
-        StandardButton {
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            text: qsTr("Add") + translationManager.emptyString
-            enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+                onClicked: {
+                    if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
+                        informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                        // TODO: check currentWallet.addressBook.errorString() instead.
+                        if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                             informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                        else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                             informationPopup.text  = currentWallet.addressBook.errorString()
+                        else
+                             informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
 
-            onClicked: {
-                if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
-                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                    // TODO: check currentWallet.addressBook.errorString() instead.
-                    if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
-                         informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
-                    else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
-                         informationPopup.text  = currentWallet.addressBook.errorString()
-                    else
-                         informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
-
-                    informationPopup.onCloseCallback = null
-                    informationPopup.open();
-                } else {
-                    addressLine.text = "";
-                    paymentIdLine.text = "";
-                    descriptionLine.text = "";
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    } else {
+                        addressLine.text = "";
+                        paymentIdLine.text = "";
+                        descriptionLine.text = "";
+                    }
                 }
             }
         }
+
     }
 
 
 
-    Item {
-        id: expandItem
-        property bool expanded: false
 
-        anchors.right: parent.right
-        anchors.bottom: tableRect.top
-        width: 34
-        height: 34
 
-        Image {
-            anchors.centerIn: parent
-            source: "../images/expandTable.png"
-            rotation: parent.expanded ? 180 : 0
-        }
+//    Item {
+//        id: expandItem
+//        property bool expanded: false
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: parent.expanded = !parent.expanded
-        }
-    }
+//        anchors.right: parent.right
+//        anchors.bottom: tableRect.top
+//        width: 34
+//        height: 34
+
+//        Image {
+//            anchors.centerIn: parent
+//            source: "../images/expandTable.png"
+//            rotation: parent.expanded ? 180 : 0
+//        }
+
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: parent.expanded = !parent.expanded
+//        }
+//    }
 
     Rectangle {
         id: tableRect
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: expandItem.expanded ? parent.height - newEntryText.y - newEntryText.height - 17 :
-                                      parent.height - addButton.y - addButton.height - 17
+//        height: expandItem.expanded ? parent.height - 36 * scaleRatio :
+//                                      parent.height - addButton.y - addButton.height - 36 * scaleRatio
+        height: parent.height - addButton.y - addButton.height - 36 * scaleRatio
         color: "#FFFFFF"
 
         Behavior on height {

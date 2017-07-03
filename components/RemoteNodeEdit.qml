@@ -29,18 +29,34 @@
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 
-TextField {
-    font.family: "Arial"
-    horizontalAlignment: TextInput.AlignLeft
-    selectByMouse: true
-    style: TextFieldStyle {
-        textColor: "#3F3F3F"
-        placeholderTextColor: "#BABABA"
+GridLayout {
+    columns: (isMobile) ? 1 : 2
+    id: root
+    property alias daemonAddrText: daemonAddr.text
+    property alias daemonPortText: daemonPort.text
 
-        background: Rectangle {
-            border.width: 0
-            color: "transparent"
-        }
+    signal editingFinished()
+
+    function getAddress() {
+        return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
+    }
+
+    LineEdit {
+        id: daemonAddr
+        Layout.fillWidth: true
+        text: persistentSettings.remoteNodeAddress.split(":")[0]
+        placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
+    }
+
+
+    LineEdit {
+        id: daemonPort
+        Layout.fillWidth: true
+        text: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+        placeholderText: qsTr("Port") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
     }
 }

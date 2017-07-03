@@ -32,6 +32,8 @@
 #include <QStandardPaths>
 #include <QDebug>
 #include <QObject>
+#include <QDesktopWidget>
+#include <QScreen>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -70,13 +72,14 @@ int main(int argc, char *argv[])
 {
 //    // Enable high DPI scaling on windows & linux
 //#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
-//    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//    qDebug() << "High DPI auto scaling - enabled";
+    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //qDebug() << "High DPI auto scaling - enabled";
 //#endif
 
     // Log settings
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
-    qInstallMessageHandler(messageHandler);
+    // Disable easylogging redirection until we find a way to redirect qml debug info.
+    // qInstallMessageHandler(messageHandler);
 
     MainApp app(argc, argv);
 
@@ -168,6 +171,7 @@ int main(int argc, char *argv[])
     bool isWindows = false;
     bool isIOS = false;
     bool isMac = false;
+    bool isAndroid = false;
 #ifdef Q_OS_WIN
     isWindows = true;
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
@@ -180,9 +184,42 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_MAC
     isMac = true;
 #endif
+#ifdef Q_OS_ANDROID
+    isAndroid = true;
+#endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
+    engine.rootContext()->setContextProperty("isAndroid", isAndroid);
+
+    // screen settings
+    // Mobile is designed on 128dpi
+    qreal ref_dpi = 128;
+    QRect geo = QApplication::desktop()->availableGeometry();
+    QRect rect = QGuiApplication::primaryScreen()->geometry();
+    qreal height = qMax(rect.width(), rect.height());
+    qreal width = qMin(rect.width(), rect.height());
+    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+    qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
+    qreal calculated_ratio = physicalDpi/ref_dpi;
+
+    engine.rootContext()->setContextProperty("screenWidth", geo.width());
+    engine.rootContext()->setContextProperty("screenHeight", geo.height());
+#ifdef Q_OS_ANDROID
+    engine.rootContext()->setContextProperty("scaleRatio", calculated_ratio);
+#else
+    engine.rootContext()->setContextProperty("scaleRatio", 1);
+#endif
+
+    qDebug() << "available width: " << geo.width();
+    qDebug() << "available height: " << geo.height();
+    qDebug() << "devicePixelRatio: " << app.devicePixelRatio();
+    qDebug() << "screen height: " << height;
+    qDebug() << "screen width: " << width;
+    qDebug() << "screen logical dpi: " << dpi;
+    qDebug() << "screen Physical dpi: " << physicalDpi;
+    qDebug() << "screen calculated ratio: " << calculated_ratio;
+
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
