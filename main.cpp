@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 
     // Log settings
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
-    qInstallMessageHandler(messageHandler);
+//    qInstallMessageHandler(messageHandler);
 
     MainApp app(argc, argv);
 
