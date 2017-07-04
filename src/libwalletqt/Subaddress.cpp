@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,55 +26,59 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+#include "Subaddress.h"
+#include <QDebug>
 
-Item {
-    id: item
-    property alias placeholderText: input.placeholderText
-    property alias text: input.text
-    property alias validator: input.validator
-    property alias readOnly : input.readOnly
-    property alias cursorPosition: input.cursorPosition
-    property alias echoMode: input.echoMode
-    property int fontSize: 18 * scaleRatio
-    property bool showBorder: true
-    property bool error: false
-    signal editingFinished()
-    signal accepted();
-    signal textUpdated();
+Subaddress::Subaddress(Monero::Subaddress *subaddressImpl, QObject *parent)
+  : QObject(parent), m_subaddressImpl(subaddressImpl)
+{
+    qDebug(__FUNCTION__);
+    getAll();
+}
 
-    height: 37 * scaleRatio
+QList<Monero::SubaddressRow*> Subaddress::getAll(bool update) const
+{
+    qDebug(__FUNCTION__);
 
-    function getColor(error) {
-      if (error)
-        return "#FFDDDD"
-      else
-        return "#FFFFFF"
+    emit refreshStarted();
+
+    if(update)
+        m_rows.clear();
+
+    if (m_rows.empty()){
+        for (auto &row: m_subaddressImpl->getAll()) {
+            m_rows.append(row);
+        }
     }
 
-    Rectangle {
-        visible: showBorder
-        anchors.fill: parent
-        anchors.bottomMargin: 1 * scaleRatio
-        color: "#DBDBDB"
-        //radius: 4
-    }
+    emit refreshFinished();
+    return m_rows;
+}
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.topMargin: 1 * scaleRatio
-        color: getColor(error)
-        //radius: 4
-    }
+Monero::SubaddressRow * Subaddress::getRow(int index) const
+{
+    return m_rows.at(index);
+}
 
-    Input {
-        id: input
-        anchors.fill: parent
-        anchors.leftMargin: 4 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
-        font.pixelSize: parent.fontSize
-        onEditingFinished: item.editingFinished()
-        onAccepted: item.accepted();
-        onTextChanged: item.textUpdated()
-    }
+void Subaddress::addRow(quint32 accountIndex, const QString &label) const
+{
+    m_subaddressImpl->addRow(accountIndex, label.toStdString());
+    getAll(true);
+}
+
+void Subaddress::setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const
+{
+    m_subaddressImpl->setLabel(accountIndex, addressIndex, label.toStdString());
+    getAll(true);
+}
+
+void Subaddress::refresh(quint32 accountIndex) const
+{
+    m_subaddressImpl->refresh(accountIndex);
+    getAll(true);
+}
+
+quint64 Subaddress::count() const
+{
+    return m_rows.size();
 }

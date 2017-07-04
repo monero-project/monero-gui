@@ -50,6 +50,8 @@
 #include "model/TransactionHistorySortFilterModel.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
+#include "Subaddress.h"
+#include "model/SubaddressModel.h"
 #include "wallet/api/wallet2_api.h"
 #include "MainApp.h"
 
@@ -132,6 +134,12 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<AddressBook>("moneroComponents.AddressBook", 1, 0, "AddressBook",
                                                         "AddressBook can't be instantiated directly");
+
+    qmlRegisterUncreatableType<SubaddressModel>("moneroComponents.SubaddressModel", 1, 0, "SubaddressModel",
+                                                        "SubaddressModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<Subaddress>("moneroComponents.Subaddress", 1, 0, "Subaddress",
+                                                        "Subaddress can't be instantiated directly");
 
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();

@@ -2,6 +2,8 @@
 #define PENDINGTRANSACTION_H
 
 #include <QObject>
+#include <QList>
+#include <QVariant>
 
 #include <wallet/api/wallet2_api.h>
 
@@ -19,6 +21,7 @@ class PendingTransaction : public QObject
     Q_PROPERTY(quint64 fee READ fee)
     Q_PROPERTY(QStringList txid READ txid)
     Q_PROPERTY(quint64 txCount READ txCount)
+    Q_PROPERTY(QList<QVariant> subaddrIndices READ subaddrIndices)
 
 public:
     enum Status {
@@ -44,6 +47,7 @@ public:
     quint64 fee() const;
     QStringList txid() const;
     quint64 txCount() const;
+    QList<QVariant> subaddrIndices() const;
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:

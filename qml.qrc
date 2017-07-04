@@ -51,6 +51,7 @@
         <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
+        <file>components/SubaddressTable.qml</file>
         <file>images/deleteIcon.png</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
@@ -136,6 +137,7 @@
         <file>components/IconButton.qml</file>
         <file>components/PasswordDialog.qml</file>
         <file>components/NewPasswordDialog.qml</file>
+        <file>components/InputDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
         <file>components/ProgressBar.qml</file>
         <file>components/StandardDialog.qml</file>

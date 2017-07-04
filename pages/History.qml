@@ -546,7 +546,7 @@ Rectangle {
 
     function onPageCompleted() {
         if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             table.addressBookModel = currentWallet ? currentWallet.addressBookModel : null
             transactionTypeDropdown.update()
         }

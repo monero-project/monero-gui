@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,55 +26,37 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+#ifndef SUBADDRESSMODEL_H
+#define SUBADDRESSMODEL_H
 
-Item {
-    id: item
-    property alias placeholderText: input.placeholderText
-    property alias text: input.text
-    property alias validator: input.validator
-    property alias readOnly : input.readOnly
-    property alias cursorPosition: input.cursorPosition
-    property alias echoMode: input.echoMode
-    property int fontSize: 18 * scaleRatio
-    property bool showBorder: true
-    property bool error: false
-    signal editingFinished()
-    signal accepted();
-    signal textUpdated();
+#include <QAbstractListModel>
 
-    height: 37 * scaleRatio
+class Subaddress;
 
-    function getColor(error) {
-      if (error)
-        return "#FFDDDD"
-      else
-        return "#FFFFFF"
-    }
+class SubaddressModel : public QAbstractListModel
+{
+    Q_OBJECT
 
-    Rectangle {
-        visible: showBorder
-        anchors.fill: parent
-        anchors.bottomMargin: 1 * scaleRatio
-        color: "#DBDBDB"
-        //radius: 4
-    }
+public:
+    enum SubaddressRowRole {
+        SubaddressRole = Qt::UserRole + 1, // for the SubaddressRow object;
+        SubaddressAddressRole,
+        SubaddressLabelRole,
+    };
+    Q_ENUM(SubaddressRowRole)
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.topMargin: 1 * scaleRatio
-        color: getColor(error)
-        //radius: 4
-    }
+    SubaddressModel(QObject *parent, Subaddress *subaddress);
 
-    Input {
-        id: input
-        anchors.fill: parent
-        anchors.leftMargin: 4 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
-        font.pixelSize: parent.fontSize
-        onEditingFinished: item.editingFinished()
-        onAccepted: item.accepted();
-        onTextChanged: item.textUpdated()
-    }
-}
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const  override;
+
+public slots:
+    void startReset();
+    void endReset();
+
+private:
+    Subaddress *m_subaddress;
+};
+
+#endif // SUBADDRESSMODEL_H

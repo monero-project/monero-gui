@@ -38,14 +38,17 @@ import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
+import moneroComponents.Subaddress 1.0
+import moneroComponents.SubaddressModel 1.0
 
 Rectangle {
-
+    id: pageReceive
     color: "#F0EEEE"
-    property alias addressText : addressLine.text
+    property var model
+    property var current_address
+    property alias addressText : pageReceive.current_address
     property alias paymentIdText : paymentIdLine.text
     property alias integratedAddressText : integratedAddressLine.text
-    property var model
     property string trackingLineText: ""
 
     function updatePaymentId(payment_id) {
@@ -80,7 +83,7 @@ Rectangle {
     function makeQRCodeString() {
         var s = "monero:"
         var nfields = 0
-        s += addressLine.text
+        s += current_address;
         var amount = amountLine.text.trim()
         if (amount !== "") {
           s += (nfields++ ? "&" : "?")
@@ -192,27 +195,66 @@ Rectangle {
             id: addressRow
             Label {
                 id: addressLabel
-                text: qsTr("Address") + translationManager.emptyString
+                text: qsTr("Addresses") + translationManager.emptyString
                 width: mainLayout.labelWidth
             }
 
-            LineEdit {
-                id: addressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("ReadOnly wallet address displayed here") + translationManager.emptyString;
-                readOnly: true
-                width: mainLayout.editWidth
+            Rectangle {
+                id: tableRect
                 Layout.fillWidth: true
-                onTextChanged: cursorPosition = 0
+                Layout.preferredHeight: 200
+                color: "#FFFFFF"
+                Scroll {
+                    id: flickableScroll
+                    anchors.right: table.right
+                    anchors.top: table.top
+                    anchors.bottom: table.bottom
+                    flickable: table
+                }
+                SubaddressTable {
+                    id: table
+                    anchors.fill: parent
+                    onContentYChanged: flickableScroll.flickableContentYChanged()
+                    onCurrentItemChanged: {
+                        current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex);
+                    }
+                }
+            }
 
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
+            RowLayout {
+                spacing: 20
+                StandardButton {
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    text: qsTr("Create new address") + translationManager.emptyString;
                     onClicked: {
-                        if (addressLine.text.length > 0) {
-                            console.log(addressLine.text + " copied to clipboard")
-                            clipboard.setText(addressLine.text)
-                            appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
+                        inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
+                        inputDialog.inputText = qsTr("(Untitled)")
+                        inputDialog.onAcceptedCallback = function() {
+                            appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
+                            table.currentIndex = appWindow.currentWallet.numSubaddresses() - 1
                         }
+                        inputDialog.onRejectedCallback = null;
+                        inputDialog.open()
+                    }
+                }
+                StandardButton {
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    enabled: table.currentIndex > 0
+                    text: qsTr("Rename") + translationManager.emptyString;
+                    onClicked: {
+                        inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString
+                        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex)
+                        inputDialog.onAcceptedCallback = function() {
+                            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex, inputDialog.inputText)
+                        }
+                        inputDialog.onRejectedCallback = null;
+                        inputDialog.open()
                     }
                 }
             }
@@ -436,11 +478,12 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("Receive page loaded");
+        table.model = currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
-            if (addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
-                addressLine.text = appWindow.currentWallet.address
-            }
+            current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
+            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            table.currentIndex = 0
         }
 
         update()

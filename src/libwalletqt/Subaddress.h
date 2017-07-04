@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -26,55 +26,36 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+#ifndef SUBADDRESS_H
+#define SUBADDRESS_H
 
-Item {
-    id: item
-    property alias placeholderText: input.placeholderText
-    property alias text: input.text
-    property alias validator: input.validator
-    property alias readOnly : input.readOnly
-    property alias cursorPosition: input.cursorPosition
-    property alias echoMode: input.echoMode
-    property int fontSize: 18 * scaleRatio
-    property bool showBorder: true
-    property bool error: false
-    signal editingFinished()
-    signal accepted();
-    signal textUpdated();
+#include <wallet/api/wallet2_api.h>
+#include <QObject>
+#include <QList>
+#include <QDateTime>
 
-    height: 37 * scaleRatio
+class Subaddress : public QObject
+{
+    Q_OBJECT
+public:
+    Q_INVOKABLE QList<Monero::SubaddressRow*> getAll(bool update = false) const;
+    Q_INVOKABLE Monero::SubaddressRow * getRow(int index) const;
+    Q_INVOKABLE void addRow(quint32 accountIndex, const QString &label) const;
+    Q_INVOKABLE void setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const;
+    Q_INVOKABLE void refresh(quint32 accountIndex) const;
+    quint64 count() const;
 
-    function getColor(error) {
-      if (error)
-        return "#FFDDDD"
-      else
-        return "#FFFFFF"
-    }
+signals:
+    void refreshStarted() const;
+    void refreshFinished() const;
 
-    Rectangle {
-        visible: showBorder
-        anchors.fill: parent
-        anchors.bottomMargin: 1 * scaleRatio
-        color: "#DBDBDB"
-        //radius: 4
-    }
+public slots:
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.topMargin: 1 * scaleRatio
-        color: getColor(error)
-        //radius: 4
-    }
+private:
+    explicit Subaddress(Monero::Subaddress * subaddressImpl, QObject *parent);
+    friend class Wallet;
+    Monero::Subaddress * m_subaddressImpl;
+    mutable QList<Monero::SubaddressRow*> m_rows;
+};
 
-    Input {
-        id: input
-        anchors.fill: parent
-        anchors.leftMargin: 4 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
-        font.pixelSize: parent.fontSize
-        onEditingFinished: item.editingFinished()
-        onAccepted: item.accepted();
-        onTextChanged: item.textUpdated()
-    }
-}
+#endif // SUBADDRESS_H
