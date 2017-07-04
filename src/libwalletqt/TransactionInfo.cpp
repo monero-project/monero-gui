@@ -46,6 +46,24 @@ quint64 TransactionInfo::blockHeight() const
     return m_pimpl->blockHeight();
 }
 
+QSet<quint32> TransactionInfo::subaddrIndex() const
+{
+    QSet<quint32> result;
+    for (uint32_t i : m_pimpl->subaddrIndex())
+        result.insert(i);
+    return result;
+}
+
+quint32 TransactionInfo::subaddrAccount() const
+{
+    return m_pimpl->subaddrAccount();
+}
+
+QString TransactionInfo::label() const
+{
+    return QString::fromStdString(m_pimpl->label());
+}
+
 quint64 TransactionInfo::confirmations() const
 {
     return m_pimpl->confirmations();

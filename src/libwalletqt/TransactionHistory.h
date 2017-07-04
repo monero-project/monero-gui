@@ -23,8 +23,8 @@ class TransactionHistory : public QObject
 public:
     Q_INVOKABLE TransactionInfo *transaction(int index);
     // Q_INVOKABLE TransactionInfo * transaction(const QString &id);
-    Q_INVOKABLE QList<TransactionInfo*> getAll() const;
-    Q_INVOKABLE void refresh();
+    Q_INVOKABLE QList<TransactionInfo*> getAll(quint32 accountIndex) const;
+    Q_INVOKABLE void refresh(quint32 accountIndex);
     quint64 count() const;
     QDateTime firstDateTime() const;
     QDateTime lastDateTime() const;

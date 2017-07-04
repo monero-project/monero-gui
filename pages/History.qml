@@ -555,5 +555,8 @@ Rectangle {
 
     function onPageCompleted() {
         table.addressBookModel = appWindow.currentWallet ? appWindow.currentWallet.addressBookModel : null
+        if (appWindow.currentWallet) {
+            appWindow.currentWallet.history.refresh(appWindow.currentWallet.currentSubaddressAccount)
+        }
     }
 }

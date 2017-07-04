@@ -20,6 +20,10 @@ class TransactionHistoryModel;
 class TransactionHistorySortFilterModel;
 class AddressBook;
 class AddressBookModel;
+class Subaddress;
+class SubaddressModel;
+class SubaddressAccount;
+class SubaddressAccountModel;
 
 class Wallet : public QObject
 {
@@ -29,17 +33,20 @@ class Wallet : public QObject
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(bool testnet READ testnet)
 //    Q_PROPERTY(ConnectionStatus connected READ connected)
+    Q_PROPERTY(QString mainAddress READ mainAddress)
+    Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
-    Q_PROPERTY(QString address READ address)
-    Q_PROPERTY(quint64 balance READ balance)
-    Q_PROPERTY(quint64 unlockedBalance READ unlockedBalance)
     Q_PROPERTY(TransactionHistory * history READ history)
     Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
+    Q_PROPERTY(SubaddressModel * subaddressModel READ subaddressModel)
+    Q_PROPERTY(Subaddress * subaddress READ subaddress)
+    Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
+    Q_PROPERTY(SubaddressAccount * subaddressAccount READ subaddressAccount)
     Q_PROPERTY(bool viewOnly READ viewOnly)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
@@ -98,7 +105,10 @@ public:
     Q_INVOKABLE bool setPassword(const QString &password);
 
     //! returns wallet's public address
-    QString address() const;
+    Q_INVOKABLE QString address(quint32 accountIndex, quint32 addressIndex) const;
+    Q_INVOKABLE QString address(quint32 addressIndex) const { return address(currentSubaddressAccount(), addressIndex); }
+    Q_INVOKABLE QString address() const { return address(0); }
+    QString mainAddress() const { return address(0, 0); }
 
     //! returns wallet file's path
     QString path() const;
@@ -126,10 +136,27 @@ public:
     Q_INVOKABLE void setTrustedDaemon(bool arg);
 
     //! returns balance
-    Q_INVOKABLE quint64 balance() const;
+    Q_INVOKABLE quint64 balance(quint32 accountIndex) const;
+    Q_INVOKABLE quint64 balance() const { return balance(currentSubaddressAccount()); }
+    Q_INVOKABLE quint64 balanceAll() const;
 
     //! returns unlocked balance
-    Q_INVOKABLE quint64 unlockedBalance() const;
+    Q_INVOKABLE quint64 unlockedBalance(quint32 accountIndex) const;
+    Q_INVOKABLE quint64 unlockedBalance() const { return unlockedBalance(currentSubaddressAccount()); }
+    Q_INVOKABLE quint64 unlockedBalanceAll() const;
+
+    //! account/address management
+    quint32 currentSubaddressAccount() const;
+    Q_INVOKABLE void switchSubaddressAccount(quint32 accountIndex);
+    Q_INVOKABLE void addSubaddressAccount(const QString& label);
+    Q_INVOKABLE quint32 numSubaddressAccounts() const;
+    Q_INVOKABLE quint32 numSubaddresses(quint32 accountIndex) const;
+    Q_INVOKABLE quint32 numSubaddresses() const { return numSubaddresses(currentSubaddressAccount()); }
+    Q_INVOKABLE void addSubaddress(const QString& label);
+    Q_INVOKABLE QString getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) const;
+    Q_INVOKABLE QString getSubaddressLabel(quint32 addressIndex) const { return getSubaddressLabel(currentSubaddressAccount(), addressIndex); }
+    Q_INVOKABLE void setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label);
+    Q_INVOKABLE void setSubaddressLabel(quint32 addressIndex, const QString &label) { setSubaddressLabel(currentSubaddressAccount(), addressIndex, label); }
 
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
@@ -208,6 +235,18 @@ public:
 
     //! returns adress book model
     AddressBookModel *addressBookModel() const;
+
+    //! returns subaddress
+    Subaddress *subaddress();
+
+    //! returns subadress model
+    SubaddressModel *subaddressModel();
+
+    //! returns subaddress account
+    SubaddressAccount *subaddressAccount();
+
+    //! returns subadress account model
+    SubaddressAccountModel *subaddressAccountModel();
 
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
@@ -294,8 +333,13 @@ private:
     int     m_connectionStatusTtl;
     mutable QTime   m_connectionStatusTime;
     mutable bool    m_initialized;
+    uint32_t m_currentSubaddressAccount;
     AddressBook * m_addressBook;
     mutable AddressBookModel * m_addressBookModel;
+    Subaddress * m_subaddress;
+    SubaddressModel * m_subaddressModel;
+    SubaddressAccount * m_subaddressAccount;
+    SubaddressAccountModel * m_subaddressAccountModel;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
     QString m_daemonUsername;

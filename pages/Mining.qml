@@ -142,7 +142,7 @@ Rectangle {
                     releasedColor: "#FF6C3C"
                     pressedColor: "#FF4304"
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                        var success = walletManager.startMining(appWindow.currentWallet.mainAddress, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                         if (success) {
                             update()
                         } else {
