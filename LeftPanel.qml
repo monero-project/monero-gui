@@ -40,6 +40,8 @@ Rectangle {
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
+    property alias accountIndexText: accountIndex.text
+    property alias accountLabelText: accountLabel.text
 
     signal dashboardClicked()
     signal historyClicked()
@@ -51,6 +53,7 @@ Rectangle {
     signal miningClicked()
     signal signClicked()
     signal keysClicked()
+    signal accountClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -64,6 +67,7 @@ Rectangle {
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
+        else if(pos === "Account") menuColumn.previousButton = accountButton
 
         menuColumn.previousButton.checked = true
     }
@@ -140,6 +144,19 @@ Rectangle {
         anchors.top: logoItem.bottom
         anchors.topMargin: 26
         spacing: 5
+
+        Text {
+            id: accountIndex
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            font.bold: true
+        }
+
+        Text {
+            id: accountLabel
+            anchors.left: parent.left
+            anchors.leftMargin: 60
+        }
 
         Label {
             visible: !isMobile
@@ -286,6 +303,30 @@ Rectangle {
             }
             */
 
+
+            // ------------- Account tab ---------------
+            MenuButton {
+                id: accountButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Account") + translationManager.emptyString
+                symbol: qsTr("U") + translationManager.emptyString
+                dotColor: "#44AAFF"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = accountButton
+                    panel.accountClicked()
+                }
+            }
+
+            Rectangle {
+                visible: accountButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
 
             // ------------- Transfer tab ---------------
             MenuButton {

@@ -18,6 +18,7 @@
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
+        <file>pages/Account.qml</file>
         <file>pages/Mining.qml</file>
         <file>pages/Settings.qml</file>
         <file>components/NetworkStatusItem.qml</file>
@@ -51,6 +52,8 @@
         <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
+        <file>components/SubaddressTable.qml</file>
+        <file>components/SubaddressAccountTable.qml</file>
         <file>images/deleteIcon.png</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
@@ -132,6 +135,7 @@
         <file>pages/TxKey.qml</file>
         <file>components/IconButton.qml</file>
         <file>components/PasswordDialog.qml</file>
+        <file>components/InputDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
         <file>components/ProgressBar.qml</file>
         <file>components/StandardDialog.qml</file>

@@ -49,7 +49,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
     Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
-    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
+    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0 ,0).c_str(), w->status());
     m_currentWallet  = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
@@ -110,7 +110,7 @@ QString WalletManager::closeWallet()
     QMutexLocker locker(&m_mutex);
     QString result;
     if (m_currentWallet) {
-        result = m_currentWallet->address();
+        result = m_currentWallet->address(0, 0);
         delete m_currentWallet;
     } else {
         qCritical() << "Trying to close non existing wallet " << m_currentWallet;

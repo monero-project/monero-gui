@@ -38,6 +38,8 @@ import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
+import moneroComponents.Subaddress 1.0
+import moneroComponents.SubaddressModel 1.0
 
 Rectangle {
 
@@ -213,6 +215,79 @@ Rectangle {
                             clipboard.setText(addressLine.text)
                             appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
                         }
+                    }
+                }
+            }
+
+            ListModel {
+                id: testModel
+                ListElement { address: "9uPkEUFcFujaw1YCDHhcvuUqQm9cGBBuu5KkGggFR9XMjQtXtFzUDbRU9oy4XYer9SeaSGAhtoT1xDsBuVDRqfg9GG2ji9U"; label: "Default" }
+                ListElement { address: "BZ9PfXYboScf2vs4EcnMBdT2dvzmE1hLnZixxnmAP2vs52jQiLTmDzTDhdwVyuBWMhCeiTxD4bVCJipsfmGxtBTwSq4HwAh"; label: "ShapeShift purchase on 2017-Jul-08" }
+                ListElement { address: "BfhF533yqmNfxfgoDXK1411DYveWMU1xRQzMPPpHVrZgeoCoVrQ9GCjY1mvDQQaoiCZYhKhGVHLkm51cgZYfDUpt5Bw4ZgB"; label: "ShapeShift purchase on 2017-Jul-09" }
+                ListElement { address: "BhTfiQY1Xj6AKXPUtDbunJPmqrbkha5qvNgYoipp6L7FQ8KTDciDWjF3YQ5g2dCLNLjJoUEJKVeYt9Rpb8tgDzT36fSoS9D"; label: "" }
+                ListElement { address: "BYoaHkHjFEY371Jq9fY9x9TJjaMeDXBYS9AfqCJ7SJoe5vuJLDPsyhU3RzDFNXKkEqBDqQMX1bDuUQbXKXctTGXY9ZgdGa1"; label: "ShapeShift purchase on 2017-Jul-11" }
+                ListElement { address: "BcxioZpKqYaZsSDHP6pmesaV7gMrPYxvHXsnkG5ceVGkasPR83cEJyvGNpckYvs2wP76HsM1KGo1mbEmmiburnCUT4aSEv1"; label: "ShapeShift purchase on 2017-Jul-13" }
+                ListElement { address: "BZzdxkqM8fJhZLATeyD3bd2cSrehGsANH4CgyJ4DBUamJAdyRTqkZ1W3kvN1UpzLz1iQU8XfEQUi15QyobFyMQVb3LDj4gZ"; label: "ShapeShift purchase on 2017-Jul-17" }
+                ListElement { address: "BYNUQQfEtg2gshraM8RPGvPUNbWcHHu33Tzhxy8ZrL7r7MYDkdPUCDFYxNawBNSAdjhKUCsiWjg5tQoReRMKGQ1fJS2QuEB"; label: "ShapeShift purchase on 2017-Jul-21" }
+            }
+
+            Rectangle {
+                id: tableRect
+                Layout.fillWidth: true
+                Layout.preferredHeight: 200
+                color: "#FFFFFF"
+                Scroll {
+                    id: flickableScroll
+                    anchors.right: table.right
+                    anchors.top: table.top
+                    anchors.bottom: table.bottom
+                    flickable: table
+                }
+                SubaddressTable {
+                    id: table
+                    anchors.fill: parent
+                    onContentYChanged: flickableScroll.flickableContentYChanged()
+                    onCurrentItemChanged: {
+                        if (appWindow.currentWallet !== undefined)
+                            addressLine.text = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex)
+                    }
+                }
+            }
+
+            RowLayout {
+                spacing: 20
+                StandardButton {
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    text: qsTr("Create new address") + translationManager.emptyString;
+                    onClicked: {
+                        inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
+                        inputDialog.inputText = qsTr("(Untitled)")
+                        inputDialog.onAcceptedCallback = function() {
+                            appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
+                            table.currentIndex = appWindow.currentWallet.numSubaddresses() - 1
+                        }
+                        inputDialog.onRejectedCallback = null;
+                        inputDialog.open()
+                    }
+                }
+                StandardButton {
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    enabled: table.currentIndex > 0
+                    text: qsTr("Rename") + translationManager.emptyString;
+                    onClicked: {
+                        inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString
+                        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex)
+                        inputDialog.onAcceptedCallback = function() {
+                            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex, inputDialog.inputText)
+                        }
+                        inputDialog.onRejectedCallback = null;
+                        inputDialog.open()
                     }
                 }
             }
@@ -431,13 +506,23 @@ Rectangle {
         onTriggered: update()
     }
 
+    InputDialog {
+        id: inputDialog
+        property var onAcceptedCallback
+        onAccepted:  {
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+    }
+
     function onPageCompleted() {
         console.log("Receive page loaded");
+        table.model = currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
-            if (addressLine.text.length === 0 || addressLine.text !== appWindow.currentWallet.address) {
-                addressLine.text = appWindow.currentWallet.address
-            }
+            addressLine.text = appWindow.currentWallet.address()
+            appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
+            table.currentIndex = 0
         }
 
         update()

@@ -60,6 +60,7 @@ Rectangle {
     property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
     property Keys keysView: Keys { }
+    property Account accountView: Account { }
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
@@ -137,6 +138,10 @@ Rectangle {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
                 PropertyChanges { target: mainFlickable; contentHeight: minHeight  + 200 * scaleRatio }
+            }, State {
+                name: "Account"
+                PropertyChanges { target: root; currentView: accountView }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }
         ]
 

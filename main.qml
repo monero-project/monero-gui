@@ -104,6 +104,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
+        else if(seq === "Ctrl+U") middlePanel.state = "Account"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
@@ -116,7 +117,8 @@ ApplicationWindow {
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
+            if(middlePanel.state === "Settings") middlePanel.state = "Account"
+            else if(middlePanel.state === "Account") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "History"
@@ -141,7 +143,8 @@ ApplicationWindow {
             else if(middlePanel.state === "History") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Account"
+            else if(middlePanel.state === "Account") middlePanel.state = "Settings"
         }
 
         if (middlePanel.state !== "Advanced") updateBalance();
@@ -310,8 +313,10 @@ ApplicationWindow {
     }
 
     function updateBalance() {
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance);
-        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance);
+        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+        leftPanel.accountIndexText = qsTr("Account #") + currentWallet.currentSubaddressAccount
+        leftPanel.accountLabelText = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0)
     }
 
     function onWalletConnectionStatusChanged(status){
@@ -329,7 +334,7 @@ ApplicationWindow {
         }
         // initialize transaction history once wallet is initialized first time;
         if (!walletInitialized) {
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             walletInitialized = true
         }
      }
@@ -377,7 +382,7 @@ ApplicationWindow {
         if(foundNewBlock) {
             foundNewBlock = false;
             console.log("New block found - updating history")
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             timeToUnlock = currentWallet.history.minutesToUnlock
             leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
         }
@@ -453,6 +458,9 @@ ApplicationWindow {
                 console.log("Saving wallet after first refresh");
                 currentWallet.store()
                 isNewWallet = false
+
+                // Update History
+                currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
             }
 
             // recovering from seed is finished after first refresh
@@ -463,7 +471,7 @@ ApplicationWindow {
 
         // Update history on every refresh if it's empty
         if(currentWallet.history.count == 0)
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
 
         onWalletUpdate();
     }
@@ -526,19 +534,22 @@ ApplicationWindow {
         currentWallet.refresh()
         console.log("Confirmed money found")
         // history refresh is handled by walletUpdated
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
+        currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount)
+        currentWallet.subaddressAccount.refresh()
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
         // refresh history
         console.log("unconfirmed money found")
-        currentWallet.history.refresh()
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
     }
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
         console.log("money sent found")
         currentWallet.refresh()
-        currentWallet.history.refresh() // this will refresh model
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
     }
 
     function walletsFound() {
@@ -584,8 +595,11 @@ ApplicationWindow {
             // here we show confirmation popup;
 
             transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + (address === "" ? "" : (qsTr("\nAddress: ") + address))
+            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n");
+            for (var i = 0; i < transaction.subaddrIndices.length; ++i)
+                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i]
+            transactionConfirmationPopup.text +=
+                          (address === "" ? "" : (qsTr("\n\nAddress: ") + address))
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
                         + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
                         + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
@@ -1196,6 +1210,23 @@ ApplicationWindow {
         }
     }
 
+    InputDialog {
+        id: inputDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted:  {
+            if (onAcceptedCallback)
+                onAcceptedCallback()
+        }
+        onRejected:  {
+            if (onRejectedCallback)
+                onRejectedCallback()
+        }
+    }
+
     DaemonManagerDialog {
         id: daemonManagerDialog
         onRejected: {
@@ -1279,6 +1310,7 @@ ApplicationWindow {
             onSignClicked: { middlePanel.state = "Sign"; if(isMobile) hideMenu(); updateBalance(); }
             onSettingsClicked: { middlePanel.state = "Settings"; if(isMobile) hideMenu(); updateBalance(); }
             onKeysClicked: { settingsPasswordDialog.open(); if(isMobile) hideMenu(); updateBalance(); }
+            onAccountClicked: {middlePanel.state = "Account"; if(isMobile) hideMenu(); updateBalance(); }
         }
 
         RightPanel {
