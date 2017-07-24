@@ -454,9 +454,11 @@ Rectangle {
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
                 RemoteNodeEdit {
+                    id: remoteNodeEdit
                     visible: !persistentSettings.lightWallet
                     Layout.minimumWidth: 100 * scaleRatio
-                    id: remoteNodeEdit
+                    daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0]
+                    daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
                     onEditingFinished: {
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                         console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
@@ -484,6 +486,56 @@ Rectangle {
                 }
             }
         }
+
+        RowLayout {
+
+            ColumnLayout {
+                Label {
+                    color: "#4A4949"
+                    text: qsTr("Light Wallet server") + translationManager.emptyString
+                }
+                RemoteNodeEdit {
+                    visible: persistentSettings.lightWallet
+                    Layout.minimumWidth: 100 * scaleRatio
+                    id: lightWalletServerEdit
+                    daemonAddrText: persistentSettings.lightWalletServerAddress.split(":")[0]
+                    daemonPortText: (persistentSettings.lightWalletServerAddress.split(":")[1] == "") ? "18081" : persistentSettings.lightWalletServerAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.lightWalletServerAddress = lightWalletServerEdit.getAddress();
+                        console.log("setting remote node to " + persistentSettings.lightWalletServerAddress)
+                    }
+                }
+
+
+                CheckBox {
+                    id: useSSL
+                    checked: persistentSettings.useSSL
+                    onClicked: {
+                        persistentSettings.useSSL = !persistentSettings.useSSL
+                        currentWallet.setSSLMode(persistentSettings.useSSL)
+                    }
+                    text: qsTr("SSL") + translationManager.emptyString
+                    checkedIcon: "../images/checkedVioletIcon.png"
+                    uncheckedIcon: "../images/uncheckedIcon.png"
+                }
+
+
+                StandardButton {
+                    id: lightWalletNodeSave
+                    text: qsTr("Connect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        // Update daemon login
+                        persistentSettings.lightWalletServerAddress = lightWalletServerEdit.getAddress();
+                        appWindow.connectLightWallet()
+                    }
+                }
+            }
+        }
+
 
         RowLayout {
             visible: !isMobile

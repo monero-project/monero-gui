@@ -249,6 +249,8 @@ public:
 
     Q_INVOKABLE void setLightWallet(bool enable);
 
+    Q_INVOKABLE void setSSLMode(bool enable);
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
@@ -301,6 +303,7 @@ private:
     QString m_daemonUsername;
     QString m_daemonPassword;
     bool m_lightWallet;
+    bool m_useSSL;
 };
 
 

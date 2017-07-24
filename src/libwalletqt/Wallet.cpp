@@ -180,12 +180,10 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
     }
     try {
         bool lightWalletNewAddress = false;
-        // TODO: openmonero nodes may not use SSL
-        bool use_ssl = m_lightWallet;
-        qDebug() << "use ssl" << use_ssl;
+        qDebug() << "use ssl" << m_useSSL;
         qDebug() << "light wallet" << m_lightWallet;
 
-        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), use_ssl ,m_lightWallet, lightWalletNewAddress);
+        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), m_useSSL ,m_lightWallet, lightWalletNewAddress);
         if(lightWalletNewAddress) {
             // Lightwallet server hasn't seen the address before. Consider full rescan.
             qDebug("LIGHTWALLET address is new!");
@@ -234,6 +232,11 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
     watcher->setFuture(future);
 }
 
+void Wallet::setSSLMode(bool enable) {
+    m_useSSL = enable;
+    qDebug() << "setting SSL mode: " << enable;
+}
+
 void Wallet::setLightWallet(bool enable) {
     m_lightWallet = enable;
     qDebug() << "Setting lightwallet mode to " << enable;
@@ -280,10 +283,6 @@ quint64 Wallet::blockChainHeight() const
 
 quint64 Wallet::daemonBlockChainHeight() const
 {
-    // TODO: implement ux for showing if light wallet isnt synced.
-    if(m_lightWallet)
-        return 0;
-
     // cache daemon blockchain height for some time (60 seconds by default)
     if (m_daemonBlockChainHeight == 0
             || m_daemonBlockChainHeightTime.elapsed() / 1000 > m_daemonBlockChainHeightTtl) {
@@ -295,9 +294,6 @@ quint64 Wallet::daemonBlockChainHeight() const
 
 quint64 Wallet::daemonBlockChainTargetHeight() const
 {
-    if(m_lightWallet)
-        return 0;
-
     if (m_daemonBlockChainTargetHeight <= 1
             || m_daemonBlockChainTargetHeightTime.elapsed() / 1000 > m_daemonBlockChainTargetHeightTtl) {
         m_daemonBlockChainTargetHeight = m_walletImpl->daemonBlockChainTargetHeight();
@@ -654,6 +650,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_daemonUsername = "";
     m_daemonPassword = "";
     m_lightWallet = false;
+    m_useSSL = false;
+
 }
 
 Wallet::~Wallet()

@@ -286,10 +286,13 @@ ApplicationWindow {
         console.log("restore Height", persistentSettings.restore_height)
 
         // Use saved daemon rpc login settings
-        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
+
+        // Set SSL mode
+        currentWallet.setSSLMode(persistentSettings.useSSL)
 
         // load wallet mode from settings
-        currentWallet.setLightWallet(persistentSettings.lightWallet);
+        currentWallet.setLightWallet(persistentSettings.lightWallet)
         var daemonAddress
         if(persistentSettings.lightWallet)
             daemonAddress = persistentSettings.lightWalletServerAddress
@@ -976,6 +979,7 @@ ApplicationWindow {
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
         property bool lightWallet: true
+        property bool useSSL: false
         property string lightWalletServerAddress: "api.mymonero.com:8443"
     }
 

@@ -46,7 +46,6 @@ GridLayout {
     LineEdit {
         id: daemonAddr
         Layout.fillWidth: true
-        text: persistentSettings.remoteNodeAddress.split(":")[0]
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         onEditingFinished: root.editingFinished()
     }
@@ -55,7 +54,6 @@ GridLayout {
     LineEdit {
         id: daemonPort
         Layout.fillWidth: true
-        text: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
         placeholderText: qsTr("Port") + translationManager.emptyString
         onEditingFinished: root.editingFinished()
     }

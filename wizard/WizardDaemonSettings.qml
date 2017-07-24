@@ -200,6 +200,8 @@ ColumnLayout {
                 Layout.minimumWidth: 300 * scaleRatio
                 opacity: remoteNode.checked
                 id: remoteNodeEdit
+                daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0]
+                daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
             }
         }
     }
