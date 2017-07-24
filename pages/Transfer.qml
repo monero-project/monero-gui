@@ -679,10 +679,11 @@ Rectangle {
                                    "Please upgrade or connect to another daemon")
             break
         default:
-            if(!appWindow.daemonSynced){
+            if(!appWindow.daemonSynced && !persistentSettings.lightWallet){
                 statusText.text = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
+                // Light wallet is always ready
                 pageRoot.enabled = true;
                 statusText.text = "";
             }
