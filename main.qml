@@ -269,6 +269,12 @@ ApplicationWindow {
 
         viewOnly = currentWallet.viewOnly;
 
+        // New wallets saves the testnet flag in keys file.
+        if(persistentSettings.testnet != currentWallet.testnet) {
+            console.log("Using testnet flag from keys file")
+            persistentSettings.testnet = currentWallet.testnet;
+        }
+
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
