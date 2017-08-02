@@ -244,6 +244,7 @@ ApplicationWindow {
             currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
             currentWallet.transactionCreated.disconnect(onTransactionCreated)
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
+            currentWallet.lightWalletLoginError.disconnect(onLightWalletLoginError)
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
@@ -277,6 +278,7 @@ ApplicationWindow {
         currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
+        currentWallet.lightWalletLoginError.connect(onLightWalletLoginError)
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.checkPaymentClicked.connect(handleCheckPayment);
@@ -338,6 +340,15 @@ ApplicationWindow {
             walletInitialized = true
         }
      }
+
+    function onLightWalletLoginError(message) {
+        loadPage("Settings");
+        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+        informationPopup.text = qsTr("Failed on lightwallet login. Check connection settings") + message;
+        informationPopup.icon = StandardIcon.Critical
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
+    }
 
     function onWalletOpened(wallet) {
         walletName = usefulName(wallet.path)
@@ -1542,7 +1553,7 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
+        if(!persistentSettings.lightWallet && typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
 
             // Show confirmation dialog
             confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;

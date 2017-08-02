@@ -251,6 +251,8 @@ public:
 
     Q_INVOKABLE void setSSLMode(bool enable);
 
+    Q_INVOKABLE QVariantMap sendLightWalletImportRequest();
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
@@ -271,6 +273,10 @@ signals:
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
     void connectionStatusChanged(ConnectionStatus status) const;
+
+    void lightWalletLoginError(const QString &msg) const;
+
+
 private:
     Wallet(QObject * parent = nullptr);
     Wallet(Monero::Wallet *w, QObject * parent = 0);
