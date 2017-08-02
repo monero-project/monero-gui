@@ -58,6 +58,7 @@ Rectangle {
             walletTypeDropdown.currentIndex = 0
 
         walletTypeDropdown.update()
+        lightNodeServiceDropdown.update()
     }
 
     ColumnLayout {
@@ -286,10 +287,11 @@ Rectangle {
             Label {
                 id: manageDaemonLabel
                 color: "#4A4949"
-                text: qsTr("Manage Daemon") + translationManager.emptyString
+                text: (!persistentSettings.lightWallet ? qsTr("Manage Daemon") : qsTr("Light Wallet Settings")) + translationManager.emptyString
             }
 
             CheckBox {
+                visible: !persistentSettings.lightWallet
                 id: daemonAdvanced
                 Layout.leftMargin: 15
                 text: qsTr("Show advanced") + translationManager.emptyString
@@ -304,7 +306,7 @@ Rectangle {
         }
 
         GridLayout {
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.lightWallet
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
@@ -353,7 +355,7 @@ Rectangle {
 
         ColumnLayout {
             id: blockchainFolderRow
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.lightWallet
             Label {
                 id: blockchainFolderLabel
                 color: "#4A4949"
@@ -382,7 +384,7 @@ Rectangle {
 
 
         RowLayout {
-            visible: daemonAdvanced.checked && !isMobile
+            visible: daemonAdvanced.checked && !isMobile && !persistentSettings.lightWallet
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -415,7 +417,7 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            visible: daemonAdvanced.checked || isMobile
+            visible: !persistentSettings.lightWallet && (daemonAdvanced.checked || isMobile)
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -426,7 +428,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            visible: daemonAdvanced.checked || isMobile
+            visible: !persistentSettings.lightWallet && (daemonAdvanced.checked || isMobile)
             LineEdit {
                 id: daemonUsername
                 Layout.preferredWidth:  100 * scaleRatio
@@ -447,7 +449,7 @@ Rectangle {
         }
 
         RowLayout {
-
+            visible: persistentSettings.useRemoteNode
             ColumnLayout {
                 Label {
                     color: "#4A4949"
@@ -487,13 +489,39 @@ Rectangle {
             }
         }
 
+        // Light wallet settings
         RowLayout {
+            z: parent.z + 1
+            ListModel {
+                 id: lightNodeServiceModel
+                 ListElement { column1: qsTr("OpenMonero") ; column2: "openmonero.org:1984"; ssl:false}
+                 ListElement { column1: qsTr("MyMonero") ; column2: "api.mymonero.com:8443"; ssl:true}
+                 ListElement { column1: qsTr("Custom") ; column2: ":"; ssl:false}
+             }
 
-            ColumnLayout {
-                Label {
-                    color: "#4A4949"
-                    text: qsTr("Light Wallet server") + translationManager.emptyString
+            StandardDropdown {
+                Layout.fillWidth: true
+                Layout.minimumWidth: 100
+                Layout.maximumWidth: 300
+                id: lightNodeServiceDropdown
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                z: parent.z + 1
+                dataModel: lightNodeServiceModel
+                onChanged: {
+                    persistentSettings.lightWalletServerAddress = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).column2
+                    persistentSettings.useSSL = useSSL.checked = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).ssl
+                    currentWallet.setSSLMode(persistentSettings.useSSL)
+                    appWindow.connectLightWallet()
                 }
+            }
+        }
+
+        RowLayout {
+            visible: persistentSettings.lightWallet
+            ColumnLayout {
                 RemoteNodeEdit {
                     visible: persistentSettings.lightWallet
                     Layout.minimumWidth: 100 * scaleRatio
@@ -506,7 +534,6 @@ Rectangle {
                     }
                 }
 
-
                 CheckBox {
                     id: useSSL
                     checked: persistentSettings.useSSL
@@ -514,11 +541,10 @@ Rectangle {
                         persistentSettings.useSSL = !persistentSettings.useSSL
                         currentWallet.setSSLMode(persistentSettings.useSSL)
                     }
-                    text: qsTr("SSL") + translationManager.emptyString
+                    text: qsTr("Use SSL") + translationManager.emptyString
                     checkedIcon: "../images/checkedVioletIcon.png"
                     uncheckedIcon: "../images/uncheckedIcon.png"
                 }
-
 
                 StandardButton {
                     id: lightWalletNodeSave
@@ -536,6 +562,26 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            StandardButton {
+                id: sendImportRequest
+                enabled: leftPanel.networkStatus.connected
+                text: qsTr("Send import wallet request") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    //TODO: make async
+                    var response = currentWallet.sendLightWalletImportRequest();
+                    console.log(response.payment_id);
+                    console.log(walletManager.displayAmount(response.fee));
+                    console.log(response.new_request);
+                    console.log(response.payment_address);
+                    console.log(response.status);
+                }
+            }
+        }
 
         RowLayout {
             visible: !isMobile
@@ -676,6 +722,7 @@ Rectangle {
     // Choose blockchain folder
     FileDialog {
         id: blockchainFileDialog
+        visible: !persistentSettings.lightWallet && !persistentSettings.useRemoteNode
         title: qsTr("Please choose a folder") + translationManager.emptyString;
         selectFolder: true
         folder: "file://" + persistentSettings.blockchainDataDir
