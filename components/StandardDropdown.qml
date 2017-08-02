@@ -261,6 +261,7 @@ Item {
                             dropdown.expanded = false
                             column.currentIndex = index
                             changed();
+                            dropdown.update()
                         }
                     }
                 }
