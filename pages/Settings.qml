@@ -494,14 +494,14 @@ Rectangle {
             z: parent.z + 1
             ListModel {
                  id: lightNodeServiceModel
-                 ListElement { column1: qsTr("OpenMonero") ; column2: "openmonero.org:1984"; ssl:false}
-                 ListElement { column1: qsTr("MyMonero") ; column2: "api.mymonero.com:8443"; ssl:true}
-                 ListElement { column1: qsTr("Custom") ; column2: ":"; ssl:false}
+                 ListElement { column1: qsTr("OpenMonero (testnet only)") ; column2: ""; host: "openmonero.org:1984"; ssl:false}
+                 ListElement { column1: qsTr("MyMonero (mainnet only)") ; column2: ""; host: "api.mymonero.com:8443"; ssl:true}
+                 ListElement { column1: qsTr("Custom") ; column2: ""; host: ":"; ssl:false}
              }
 
             StandardDropdown {
                 Layout.fillWidth: true
-                Layout.minimumWidth: 100
+                Layout.minimumWidth: 150
                 Layout.maximumWidth: 300
                 id: lightNodeServiceDropdown
                 shadowReleasedColor: "#FF4304"
@@ -511,10 +511,11 @@ Rectangle {
                 z: parent.z + 1
                 dataModel: lightNodeServiceModel
                 onChanged: {
-                    persistentSettings.lightWalletServerAddress = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).column2
+                    persistentSettings.lightWalletServerAddress = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).host
                     persistentSettings.useSSL = useSSL.checked = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).ssl
                     currentWallet.setSSLMode(persistentSettings.useSSL)
                     appWindow.connectLightWallet()
+//                    lightNodeServiceDropdown.update();
                 }
             }
         }
