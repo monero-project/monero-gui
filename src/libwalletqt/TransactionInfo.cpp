@@ -51,6 +51,11 @@ quint64 TransactionInfo::confirmations() const
     return m_pimpl->confirmations();
 }
 
+quint64 TransactionInfo::unlockTime() const
+{
+    return m_pimpl->unlockTime();
+}
+
 QString TransactionInfo::hash() const
 {
     return QString::fromStdString(m_pimpl->hash());

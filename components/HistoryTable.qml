@@ -259,11 +259,11 @@ ListView {
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 13
-                color:  (confirmations < 10)? "#FF6C3C" : "#545454"
+                color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
                 text: {
                     if (!isPending)
-                        if(confirmations < 10)
-                            return blockHeight + " " + qsTr("(%1/10 confirmations)").arg(confirmations)
+                        if(confirmations < confirmationsRequired)
+                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
                         else
                             return blockHeight
                     if (!isOut)

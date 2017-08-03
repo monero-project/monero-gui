@@ -45,11 +45,12 @@ QList<TransactionInfo *> TransactionHistory::getAll() const
         if (ti->timestamp() <= firstDateTime) {
             firstDateTime = ti->timestamp();
         }
+        quint64 requiredConfirmations = (ti->blockHeight() < ti->unlockTime()) ? ti->unlockTime() - ti->blockHeight() : 0;
         // store last tx height
-        if (ti->confirmations() < 10 && ti->blockHeight() >= lastTxHeight ){
+        if (ti->confirmations() < requiredConfirmations && ti->blockHeight() >= lastTxHeight) {
             lastTxHeight = ti->blockHeight();
             // TODO: Fetch block time and confirmations needed from wallet2?
-            m_minutesToUnlock = (10 - ti->confirmations()) * 2;
+            m_minutesToUnlock = (requiredConfirmations - ti->confirmations()) * 2;
             m_locked = true;
         }
 
