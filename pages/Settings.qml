@@ -202,9 +202,8 @@ Rectangle {
          }
 
         StandardDropdown {
-            Layout.fillWidth: true
+            Layout.fillWidth: isMobile
             Layout.minimumWidth: 100
-            Layout.maximumWidth: 300
             id: walletTypeDropdown
             shadowReleasedColor: "#FF4304"
             shadowPressedColor: "#B32D00"
@@ -491,6 +490,7 @@ Rectangle {
 
         // Light wallet settings
         RowLayout {
+            Layout.fillWidth: true
             z: parent.z + 1
             ListModel {
                  id: lightNodeServiceModel
@@ -500,9 +500,8 @@ Rectangle {
              }
 
             StandardDropdown {
-                Layout.fillWidth: true
-                Layout.minimumWidth: 150
-                Layout.maximumWidth: 300
+                Layout.fillWidth: isMobile
+                Layout.minimumWidth: 250
                 id: lightNodeServiceDropdown
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
