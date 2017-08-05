@@ -331,8 +331,26 @@ bool WalletManager::saveQrCode(const QString &code, const QString &path) const
     return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
+void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir) const
+{
+    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::checkUpdates,
+                                        software, subdir);
+    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
+    connect(watcher, &QFutureWatcher<Wallet*>::finished,
+            this, [this, watcher]() {
+        QFuture<QString> future = watcher->future();
+        watcher->deleteLater();
+        qDebug() << "Checking for updates - done";
+        emit checkUpdatesComplete(future.result());
+    });
+    watcher->setFuture(future);
+}
+
+
+
 QString WalletManager::checkUpdates(const QString &software, const QString &subdir) const
 {
+  qDebug() << "Checking for updates";
   const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
   if (!std::get<0>(result))
     return QString("");

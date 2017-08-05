@@ -821,6 +821,7 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
+        walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
 
         if(typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);
@@ -1341,8 +1342,7 @@ ApplicationWindow {
         Qt.quit();
     }
 
-    function checkUpdates() {
-        var update = walletManager.checkUpdates("monero-gui", "gui")
+    function onWalletCheckUpdatesComplete(update) {
         if (update === "")
             return
         print("Update found: " + update)
@@ -1358,6 +1358,10 @@ ApplicationWindow {
         else {
           print("Failed to parse update spec")
         }
+    }
+
+    function checkUpdates() {
+        walletManager.checkUpdatesAsync("monero-gui", "gui")
     }
 
     Timer {
