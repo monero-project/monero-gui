@@ -42,19 +42,22 @@ ColumnLayout {
 
       wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
 
-      // scorePassword returns value from 0 to... lots
-      var strength = walletManager.getPasswordStrength(passwordItem.password);
-      // consider anything below 10 bits as dire
-      strength -= 10
-      if (strength < 0)
-          strength = 0
-      // use a slight parabola to discourage short passwords
-      strength = strength ^ 1.2 / 3
-      // mapScope does not clamp
-      if (strength > 100)
-          strength = 100
-      // privacyLevel component uses 1..13 scale
-      privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)      
+      // TODO: password strength meter segfaults on Android.
+      if (!isMobile) {
+          // scorePassword returns value from 0 to... lots
+          var strength = walletManager.getPasswordStrength(passwordItem.password);
+          // consider anything below 10 bits as dire
+          strength -= 10
+          if (strength < 0)
+              strength = 0
+          // use a slight parabola to discourage short passwords
+          strength = strength ^ 1.2 / 3
+          // mapScope does not clamp
+          if (strength > 100)
+              strength = 100
+          // privacyLevel component uses 1..13 scale
+          privacyLevel.fillLevel = Utils.mapScope(1, 100, 1, 13, strength)
+      }
     }
 
     function resetFocus() {
@@ -85,6 +88,7 @@ ColumnLayout {
     }
 
     PrivacyLevelSmall {
+        visible: !isMobile //TODO: strength meter doesnt work on Android
         Layout.topMargin: isMobile ? 20 * scaleRatio : 40 * scaleRatio
         Layout.fillWidth: true
         id: privacyLevel
