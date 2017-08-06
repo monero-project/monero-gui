@@ -275,6 +275,11 @@ bool WalletManager::stopMining()
     return m_pimpl->stopMining();
 }
 
+bool WalletManager::localDaemonSynced() const
+{
+    return blockchainHeight() > 1 && blockchainHeight() >= blockchainTargetHeight();
+}
+
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
     bool dnssec_valid = false;
