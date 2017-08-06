@@ -143,5 +143,7 @@
         <file>components/Notifier.qml</file>
         <file>components/MobileHeader.qml</file>
         <file>components/TextBlock.qml</file>
+        <file>wizard/WizardDaemonSettings.qml</file>
+        <file>components/RemoteNodeEdit.qml</file>
     </qresource>
 </RCC>
