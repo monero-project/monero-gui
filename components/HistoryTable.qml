@@ -383,7 +383,7 @@ ListView {
             Column {
                 anchors.top: parent.top
                 width: 148
-                visible: isOut
+                visible: isOut && fee != ""
                 Text {
                     anchors.left: parent.left
                     font.family: "Arial"
