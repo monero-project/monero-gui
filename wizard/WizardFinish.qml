@@ -100,7 +100,7 @@ ColumnLayout {
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
-            //ListElement { dotColor: "#36B05B" }
+            ListElement { dotColor: "#FFE00A" }
         }
 
         Repeater {

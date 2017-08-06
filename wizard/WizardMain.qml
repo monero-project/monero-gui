@@ -44,6 +44,8 @@ ColumnLayout {
     property int wizardRightMargin: (!isMobile) ? 150 : 25 * scaleRatio
     property int wizardBottomMargin: (isMobile) ? 150 : 25 * scaleRatio
     property int wizardTopMargin: (isMobile) ? 15 * scaleRatio : 50
+    // Storing wallet in Settings object doesn't work in qt 5.8 on android
+    property var m_wallet;
 
     property var paths: {
      //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
@@ -137,9 +139,8 @@ ColumnLayout {
 
     function openOpenWalletPage() {
         console.log("open wallet from file page");
-        if (typeof wizard.settings['wallet'] !== 'undefined') {
-            settings.wallet.destroy();
-            delete wizard.settings['wallet'];
+        if (typeof m_wallet !== 'undefined' && m_wallet != null) {
+            walletManager.closeWallet()
         }
         optionsPage.onPageClosed(settings)
         wizard.openWalletFromFileClicked();
@@ -203,11 +204,10 @@ ColumnLayout {
         var new_wallet_filename = createWalletPath(settings.wallet_path,settings.account_name)
         if(isIOS) {
             console.log("saving in ios: "+ moneroAccountsDir + new_wallet_filename)
-            settings.wallet.store(moneroAccountsDir + new_wallet_filename);
+            m_wallet.store(moneroAccountsDir + new_wallet_filename);
         } else {
             console.log("saving in wizard: "+ new_wallet_filename)
-            settings.wallet.store(new_wallet_filename);
-
+            m_wallet.store(new_wallet_filename);
         }
 
 
@@ -217,7 +217,7 @@ ColumnLayout {
         oshelper.removeTemporaryWallet(settings.tmp_wallet_filename)
 
         // protecting wallet with password
-        settings.wallet.setPassword(settings.wallet_password);
+        m_wallet.setPassword(settings.wallet_password);
 
         // Store password in session to be able to use password protected functions (e.g show seed)
         appWindow.password = settings.wallet_password

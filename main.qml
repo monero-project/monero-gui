@@ -196,7 +196,7 @@ ApplicationWindow {
 
         walletManager.setDaemonAddress(persistentSettings.daemon_address)
         // wallet already opened with wizard, we just need to initialize it
-        if (typeof wizard.settings['wallet'] !== 'undefined') {
+        if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
             if(persistentSettings.restore_height > 0){
@@ -204,11 +204,11 @@ ApplicationWindow {
                 restoreHeight = persistentSettings.restore_height
             }
 
-            connectWallet(wizard.settings['wallet'])
+            connectWallet(wizard.m_wallet)
 
             isNewWallet = true
             // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
-            delete wizard.settings['wallet']
+            delete wizard.m_wallet
         }  else {
             var wallet_path = walletPath();
             if(isIOS)
