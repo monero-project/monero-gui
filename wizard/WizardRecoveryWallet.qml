@@ -81,6 +81,12 @@ ColumnLayout {
         var tmp_wallet_filename = oshelper.temporaryFilename()
         console.log("Creating temporary wallet", tmp_wallet_filename)
 
+        // delete the temporary wallet object before creating new
+        if (typeof m_wallet !== 'undefined') {
+            walletManager.closeWallet()
+            console.log("deleting temporary wallet")
+        }
+
         // From seed or keys
         if(fromSeed)
             var wallet = walletManager.recoveryWallet(tmp_wallet_filename, settingsObject.words, testnet, restoreHeight)

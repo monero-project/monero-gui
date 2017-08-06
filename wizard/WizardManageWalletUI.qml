@@ -86,6 +86,31 @@ ColumnLayout {
         return wordsArray.length === 25
     }
 
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
+        // Switch to recover from keys
+        recoverFromSeedMode = false
+        spendKeyLine.text = ""
+        viewKeyLine.text = ""
+        restoreHeightItem.text = ""
+
+
+        if(typeof extra_parameters.secret_view_key != "undefined") {
+            viewKeyLine.text = extra_parameters.secret_view_key
+        }
+        if(typeof extra_parameters.secret_spend_key != "undefined") {
+            spendKeyLine.text = extra_parameters.secret_spend_key
+        }
+        if(typeof extra_parameters.restore_height != "undefined") {
+            restoreHeightItem.text = extra_parameters.restore_height
+        }
+        addressLine.text = address
+
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+
+        // Check if keys are correct
+        checkNextButton();
+    }
+
     RowLayout {
         id: dotsRow
         Layout.alignment: Qt.AlignRight
@@ -144,9 +169,10 @@ ColumnLayout {
         }
     }
 
-    RowLayout{
+    GridLayout{
+        columns: (isMobile)? 2 : 4
         visible: recoverMode
-        spacing: 0
+
         StandardButton {
             id: recoverFromSeedButton
             text: qsTr("Restore from seed") + translationManager.emptyString
@@ -174,6 +200,22 @@ ColumnLayout {
                 checkNextButton();
             }
         }
+
+        StandardButton {
+            id: qrfinderButton
+            text: qsTr("From QR Code") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            visible : true //appWindow.qrScannerEnabled
+            enabled : visible
+            onClicked: {
+                cameraUi.state = "Capture"
+                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+            }
+        }
+
     }
 
     // Recover from seed

@@ -132,6 +132,8 @@ ColumnLayout {
         print ("show recovery wallet page");
         currentPath = "recovery_wallet"
         pages = paths[currentPath]
+        // Create temporary wallet
+        createWalletPage.createWallet(settings)
         wizard.nextButton.visible = true
         // goto next page
         switchPage(true);
