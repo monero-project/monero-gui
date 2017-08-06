@@ -107,7 +107,7 @@ ColumnLayout {
             Layout.fillWidth: true
             id: titleText
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
@@ -117,9 +117,9 @@ ColumnLayout {
 
         Text {
             Layout.fillWidth: true
-            Layout.bottomMargin: 30
+            Layout.bottomMargin: 30 * scaleRatio
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 18 * scaleRatio
             wrapMode: Text.Wrap
             //renderType: Text.NativeRendering
             color: "#4A4646"

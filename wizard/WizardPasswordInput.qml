@@ -42,7 +42,7 @@ ColumnLayout {
         id : password
         focus:true
         font.family: "Arial"
-        font.pixelSize: (isMobile) ? 25 : 26
+        font.pixelSize: (isMobile) ? 25 * scaleRatio : 26 * scaleRatio
         echoMode: TextInput.Password
         style: TextFieldStyle {
             renderType: Text.NativeRendering

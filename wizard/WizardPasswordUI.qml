@@ -64,8 +64,8 @@ ColumnLayout {
     WizardPasswordInput {
         id: passwordItem
         Layout.fillWidth: true
-        Layout.maximumWidth: 300
-        Layout.minimumWidth: 200
+        Layout.maximumWidth: 300 * scaleRatio
+        Layout.minimumWidth: 200 * scaleRatio
         Layout.alignment: Qt.AlignHCenter
         placeholderText : qsTr("Password") + translationManager.emptyString;
         KeyNavigation.tab: retypePasswordItem
@@ -76,8 +76,8 @@ ColumnLayout {
     WizardPasswordInput {
         id: retypePasswordItem
         Layout.fillWidth: true
-        Layout.maximumWidth: 300
-        Layout.minimumWidth: 200
+        Layout.maximumWidth: 300 * scaleRatio
+        Layout.minimumWidth: 200 * scaleRatio
         Layout.alignment: Qt.AlignHCenter
         placeholderText : qsTr("Confirm password") + translationManager.emptyString;
         KeyNavigation.tab: passwordItem
@@ -85,7 +85,7 @@ ColumnLayout {
     }
 
     PrivacyLevelSmall {
-        Layout.topMargin: isMobile ? 20 : 40
+        Layout.topMargin: isMobile ? 20 * scaleRatio : 40 * scaleRatio
         Layout.fillWidth: true
         id: privacyLevel
         background: "#F0EEEE"

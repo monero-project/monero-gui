@@ -38,8 +38,8 @@ ColumnLayout {
     signal openWalletClicked()
     opacity: 0
     visible: false
-    property int buttonSize: (isMobile) ? 80 : 190
-    property int buttonImageSize: (isMobile) ? buttonSize - 10 : buttonSize - 30
+    property int buttonSize: (isMobile) ? 80 * scaleRatio : 190 * scaleRatio
+    property int buttonImageSize: (isMobile) ? buttonSize - 10 * scaleRatio : buttonSize - 30 * scaleRatio
 
     function onPageClosed() {
         // Save settings used in open from file.
@@ -60,13 +60,13 @@ ColumnLayout {
         id: headerColumn
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
-        Layout.bottomMargin: (!isMobile) ? 40 : 20
-        spacing: 30
+        Layout.bottomMargin: (!isMobile) ? 40 * scaleRatio : 20
+        spacing: 30 * scaleRatio
 
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             //renderType: Text.NativeRendering
             color: "#3F3F3F"
             wrapMode: Text.Wrap
@@ -77,7 +77,7 @@ ColumnLayout {
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 18
+            font.pixelSize: 18 * scaleRatio
             //renderType: Text.NativeRendering
             color: "#4A4646"
             wrapMode: Text.Wrap
@@ -91,8 +91,8 @@ ColumnLayout {
         Layout.rightMargin: wizardRightMargin
         Layout.alignment: Qt.AlignCenter
         id: actionButtons
-        columnSpacing: 40
-        rowSpacing: 10
+        columnSpacing: 40 * scaleRatio
+        rowSpacing: 10 * scaleRatio
         Layout.fillWidth: true
         Layout.fillHeight: true
         flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
@@ -101,8 +101,8 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -132,9 +132,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
@@ -146,8 +146,8 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -156,7 +156,7 @@ ColumnLayout {
                 color: recoverWalletArea.containsMouse ? "#DBDBDB" : "#FFFFFF"
 
                 Image {
-                    width: page.buttomImageSize
+                    width: page.buttonImageSize
                     height: page.buttonImageSize
                     fillMode: Image.PreserveAspectFit
                     anchors.centerIn: parent
@@ -174,9 +174,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
@@ -189,8 +189,8 @@ ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true
             flow: !isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-            rowSpacing: 20
-            columnSpacing: 10
+            rowSpacing: 20 * scaleRatio
+            columnSpacing: 10 * scaleRatio
 
             Rectangle {
                 Layout.preferredHeight: page.buttonSize
@@ -217,9 +217,9 @@ ColumnLayout {
             }
 
             Text {
-                Layout.preferredWidth: 190
+                Layout.preferredWidth: page.buttonSize
                 font.family: "Arial"
-                font.pixelSize: 16
+                font.pixelSize: 16 * scaleRatio
                 color: "#4A4949"
                 horizontalAlignment: Text.AlignHCenter
                 text: qsTr("Open a wallet from file") + translationManager.emptyString

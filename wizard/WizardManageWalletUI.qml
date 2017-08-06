@@ -118,7 +118,7 @@ ColumnLayout {
             horizontalAlignment: Text.AlignHCenter
             id: titleText
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             wrapMode: Text.Wrap
             color: "#3F3F3F"
         }
@@ -128,8 +128,8 @@ ColumnLayout {
         Layout.bottomMargin: rowSpacing
 
         Label {
-            Layout.topMargin: 20
-            fontSize: 14
+            Layout.topMargin: 20 * scaleRatio
+            fontSize: 14 * scaleRatio
             text:  qsTr("Wallet name")
                    + translationManager.emptyString
         }
@@ -137,8 +137,8 @@ ColumnLayout {
         LineEdit {
             id: accountName
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             text: defaultAccountName
             onTextUpdated: checkNextButton()
         }
@@ -183,8 +183,8 @@ ColumnLayout {
         WizardMemoTextInput {
             id : memoTextItem
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
         }
     }
 
@@ -198,24 +198,24 @@ ColumnLayout {
         LineEdit {
             Layout.fillWidth: true
             id: addressLine
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
         }
         LineEdit {
             Layout.fillWidth: true
             id: viewKeyLine
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
 
         }
         LineEdit {
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             id: spendKeyLine
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
@@ -227,8 +227,8 @@ ColumnLayout {
         LineEdit {
             id: restoreHeightItem
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
             validator: IntValidator {
                 bottom:0
@@ -240,15 +240,15 @@ ColumnLayout {
     ColumnLayout {
         Label {
             Layout.fillWidth: true
-            Layout.topMargin: 20
+            Layout.topMargin: 20 * scaleRatio
             fontSize: 14
             text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
 
         LineEdit {
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             id: fileUrlInput
             text: moneroAccountsDir + "/"
 

@@ -40,10 +40,10 @@ ColumnLayout {
     property alias nextButton : nextButton
     property var settings : ({})
     property int currentPage: 0
-    property int wizardLeftMargin: (!isMobile) ?  150 : 25
-    property int wizardRightMargin: (!isMobile) ? 150 : 25
-    property int wizardBottomMargin: (isMobile) ? 150 : 25
-    property int wizardTopMargin: (isMobile) ? 15 : 50
+    property int wizardLeftMargin: (!isMobile) ?  150 : 25 * scaleRatio
+    property int wizardRightMargin: (!isMobile) ? 150 : 25 * scaleRatio
+    property int wizardBottomMargin: (isMobile) ? 150 : 25 * scaleRatio
+    property int wizardTopMargin: (isMobile) ? 15 * scaleRatio : 50
 
     property var paths: {
      //   "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, donationPage, finishPage ],
@@ -308,10 +308,10 @@ ColumnLayout {
         anchors.verticalCenter: wizard.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: isMobile ?  20 :  50
-        anchors.bottomMargin: isMobile ?  20 :  50
+        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: parent.currentPage > 0
 
-        width: 50; height: 50
+        width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
         color: prevArea.containsMouse ? "#FF4304" : "#FF6C3C"
 
@@ -333,10 +333,10 @@ ColumnLayout {
         id: nextButton
         anchors.verticalCenter: wizard.verticalCenter
         anchors.right: parent.right
-        anchors.rightMargin: isMobile ?  20 :  50
-        anchors.bottomMargin: isMobile ?  20 :  50
+        anchors.rightMargin: isMobile ?  20 * scaleRatio :  50
+        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: currentPage > 1 && currentPage < pages.length - 1
-        width: 50; height: 50
+        width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
         color: enabled ? nextArea.containsMouse ? "#FF4304" : "#FF6C3C" : "#DBDBDB"
 
@@ -359,7 +359,7 @@ ColumnLayout {
         id: sendButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins:  (isMobile) ? 20 : 50
+        anchors.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
         text: qsTr("USE MONERO") + translationManager.emptyString
         shadowReleasedColor: "#FF4304"
         shadowPressedColor: "#B32D00"
@@ -376,7 +376,7 @@ ColumnLayout {
        id: createViewOnlyWalletButton
        anchors.right: parent.right
        anchors.bottom: parent.bottom
-       anchors.margins: (isMobile) ? 20 : 50
+       anchors.margins: (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Create wallet") + translationManager.emptyString
        shadowReleasedColor: "#FF4304"
        shadowPressedColor: "#B32D00"
@@ -408,7 +408,7 @@ ColumnLayout {
        id: abortViewOnlyButton
        anchors.right: createViewOnlyWalletButton.left
        anchors.bottom: parent.bottom
-       anchors.margins:  (isMobile) ? 20 : 50
+       anchors.margins:  (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Abort") + translationManager.emptyString
        shadowReleasedColor: "#FF4304"
        shadowPressedColor: "#B32D00"
