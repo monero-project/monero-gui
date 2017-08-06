@@ -234,18 +234,18 @@ ColumnLayout {
     RowLayout {
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
-        Layout.topMargin: 30
+        Layout.topMargin: 30 * scaleRatio
         Layout.alignment: Qt.AlignCenter
         Layout.fillWidth: true
 
         Rectangle {
-            width: 100
+            width: 100 * scaleRatio
             CheckBox {
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
-                fontSize: 16
+                fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.testnet;
