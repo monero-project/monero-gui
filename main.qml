@@ -68,6 +68,10 @@ ApplicationWindow {
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
+    property bool remoteNodeConnected: false
+    // Default daemon addresses
+    readonly property string localDaemonAddress : !persistentSettings.testnet ? "localhost:18081" : "localhost:28081"
+    property string currentDaemonAddress;
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -164,7 +168,6 @@ ApplicationWindow {
 
     function initialize() {
         console.log("initializing..")
-        walletInitialized = false;
 
         // Use stored log level
         if (persistentSettings.logLevel == 5)
@@ -186,7 +189,7 @@ ApplicationWindow {
             console.log("Daemon change - closing " + currentWallet)
             closeWallet();
             currentWallet = undefined
-        } else {
+        } else if (!walletInitialized) {
 
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
@@ -194,7 +197,11 @@ ApplicationWindow {
 
         }
 
-        walletManager.setDaemonAddress(persistentSettings.daemon_address)
+
+        // Local daemon settings
+        walletManager.setDaemonAddress(localDaemonAddress)
+
+
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
@@ -270,14 +277,20 @@ ApplicationWindow {
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
-        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
+
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
         // Use saved daemon rpc login settings
-        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
 
-        currentWallet.initAsync(persistentSettings.daemon_address, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        if(persistentSettings.useRemoteNode)
+            currentDaemonAddress = persistentSettings.remoteNodeAddress
+        else
+            currentDaemonAddress = localDaemonAddress
+
+        console.log("initializing with daemon address: ", currentDaemonAddress)
+        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
     }
 
     function walletPath() {
@@ -302,7 +315,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if(!isMobile && isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -358,8 +371,23 @@ ApplicationWindow {
             console.log("New block found - updating history")
             currentWallet.history.refresh()
             timeToUnlock = currentWallet.history.minutesToUnlock
-            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)").arg(timeToUnlock) : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
+            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
         }
+    }
+
+    function connectRemoteNode() {
+        console.log("connecting remote node");
+        persistentSettings.useRemoteNode = true;
+        currentWallet.initAsync(persistentSettings.remoteNodeAddress);
+        remoteNodeConnected = true;
+    }
+
+    function disconnectRemoteNode() {
+        console.log("disconnecting remote node");
+        persistentSettings.useRemoteNode = false;
+        currentDaemonAddress = localDaemonAddress
+        currentWallet.initAsync(currentDaemonAddress);
+        remoteNodeConnected = false;
     }
 
     function onWalletRefresh() {
@@ -382,6 +410,29 @@ ApplicationWindow {
         updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
+
+        // Use remote node while local daemon is syncing
+        if (persistentSettings.useRemoteNode) {
+            var localNodeConnected = walletManager.connected;
+            var localNodeSynced = localNodeConnected && walletManager.localDaemonSynced()
+            if (!currentWallet.connected() || !localNodeSynced) {
+                console.log("Using remote node while local node is syncing")
+                // Connect to remote node if not already connected
+                if(!remoteNodeConnected) {
+                    connectRemoteNode();
+                }
+
+                //update local daemon sync progress bar
+                if(localNodeConnected) {
+                    leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
+                    leftPanel.progressBar.visible = true
+                }
+
+            // local daemon is synced - use it!
+            } else if (localNodeSynced && remoteNodeConnected) {
+                disconnectRemoteNode();
+            }
+        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
@@ -706,7 +757,7 @@ ApplicationWindow {
                     ", txid: ", txid,
                     ", txkey: ", txkey);
 
-        var result = walletManager.checkPayment(address, txid, txkey, persistentSettings.daemon_address);
+        var result = walletManager.checkPayment(address, txid, txkey, currentDaemonAddress);
         var results = result.split("|");
         if (results.length < 4) {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
@@ -892,6 +943,9 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property string blockchainDataDir: ""
+        property bool startLocalNode: true
+        property bool useRemoteNode: false
+        property string remoteNodeAddress: ""
     }
 
     // Information dialog

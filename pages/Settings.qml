@@ -38,7 +38,6 @@ import "../components"
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
-    property var daemonAddress
     property bool viewOnly: false
     id: page
 
@@ -48,9 +47,6 @@ Rectangle {
 
     function initSettings() {
         //runs on every page load
-
-        // Daemon settings
-        daemonAddress = persistentSettings.daemon_address.split(":");
     }
 
     ColumnLayout {
@@ -79,7 +75,7 @@ Rectangle {
         }
 
         GridLayout {
-            columns: (isMobile)? 2 : 4
+            columns: (isMobile)? 1 : 4
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
@@ -145,6 +141,7 @@ Rectangle {
 */
             StandardButton {
                 id: rescanSpentButton
+                enabled: !persistentSettings.useRemoteNode
                 text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -169,16 +166,53 @@ Rectangle {
             }
         }
 
+        RowLayout {
+
+            StandardButton {
+                id: remoteDisconnect
+                enabled: persistentSettings.useRemoteNode
+                Layout.fillWidth: false
+                text: qsTr("Local Node") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.disconnectRemoteNode();
+                }
+            }
+
+            StandardButton {
+                id: remoteConnect
+                enabled: !persistentSettings.useRemoteNode
+                Layout.fillWidth: false
+                text: qsTr("Remote Node") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    appWindow.connectRemoteNode();
+                }
+            }
+        }
+
         //! Manage daemon
         RowLayout {
+            visible: !isMobile
+            Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
-                Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Manage daemon") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                text: qsTr("Manage Daemon") + translationManager.emptyString
+            }
+
+            CheckBox {
+                id: daemonAdvanced
+                Layout.leftMargin: 15
+                text: qsTr("Show advanced") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
         Rectangle {
@@ -188,27 +222,28 @@ Rectangle {
         }
 
         GridLayout {
+            visible: !isMobile
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
-                visible: true
-                enabled: !appWindow.daemonRunning
+                visible: !appWindow.daemonRunning
                 id: startDaemonButton
-                text: qsTr("Start daemon") + translationManager.emptyString
+                text: qsTr("Start Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
+                    // Set current daemon address to local
+                    appWindow.currentDaemonAddress = appWindow.localDaemonAddress
                     appWindow.startDaemon(daemonFlags.text)
                 }
             }
 
             StandardButton {
-                visible: true
-                enabled: appWindow.daemonRunning
+                visible: appWindow.daemonRunning
                 id: stopDaemonButton
-                text: qsTr("Stop daemon") + translationManager.emptyString
+                text: qsTr("Stop Local Node") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -231,11 +266,11 @@ Rectangle {
                     daemonConsolePopup.open();
                 }
             }
-
         }
 
-        RowLayout {
+        ColumnLayout {
             id: blockchainFolderRow
+            visible: !isMobile
             Label {
                 id: blockchainFolderLabel
                 color: "#4A4949"
@@ -262,13 +297,14 @@ Rectangle {
             }
         }
 
+
         RowLayout {
+            visible: daemonAdvanced.checked && !isMobile
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
                 color: "#4A4949"
-                text: qsTr("Daemon startup flags") + translationManager.emptyString
-                fontSize: 16
+                text: qsTr("Local daemon startup flags") + translationManager.emptyString
             }
             LineEdit {
                 id: daemonFlags
@@ -281,59 +317,21 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: 10
-
-            Label {
-                id: daemonAddrLabel
-                Layout.fillWidth: true
-                color: "#4A4949"
-                text: qsTr("Daemon address") + translationManager.emptyString
-                fontSize: 16
-            }
-        }
-
-        GridLayout {
-            id: daemonAddrRow
-            Layout.fillWidth: true
-            columnSpacing: 10
-            columns: (isMobile) ?  2 : 3
-
-            LineEdit {
-                id: daemonAddr
-                Layout.preferredWidth:  100
-                Layout.fillWidth: true
-                text: (daemonAddress !== undefined) ? daemonAddress[0] : ""
-                placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
-            }
-
-
-            LineEdit {
-                id: daemonPort
-                Layout.preferredWidth: 100
-                Layout.fillWidth: true
-                text: (daemonAddress !== undefined) ? daemonAddress[1] : "18081"
-                placeholderText: qsTr("Port") + translationManager.emptyString
-            }
-        }
-
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: 10
+            visible: daemonAdvanced.checked || isMobile
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
                 color: "#4A4949"
-                text: qsTr("Login (optional)") + translationManager.emptyString
-                fontSize: 16
+                text: qsTr("Node login (optional)") + translationManager.emptyString
             }
 
         }
 
-        RowLayout {
-
+        ColumnLayout {
+            visible: daemonAdvanced.checked || isMobile
             LineEdit {
                 id: daemonUsername
-                Layout.preferredWidth:  100
+                Layout.preferredWidth:  100 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.daemonUsername
                 placeholderText: qsTr("Username") + translationManager.emptyString
@@ -342,50 +340,65 @@ Rectangle {
 
             LineEdit {
                 id: daemonPassword
-                Layout.preferredWidth: 100
+                Layout.preferredWidth: 100 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.daemonPassword
                 placeholderText: qsTr("Password") + translationManager.emptyString
                 echoMode: TextInput.Password
             }
+        }
 
-            StandardButton {
-                id: daemonAddrSave
-                Layout.fillWidth: false
-                Layout.leftMargin: 30
-                text: qsTr("Connect") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                onClicked: {
-                    console.log("saving daemon adress settings")
-                    var newDaemon = daemonAddr.text.trim() + ":" + daemonPort.text.trim()
-                    if(persistentSettings.daemon_address != newDaemon) {
-                        persistentSettings.daemon_address = newDaemon
+        RowLayout {
+            visible: persistentSettings.useRemoteNode
+            ColumnLayout {
+                Label {
+                    color: "#4A4949"
+                    text: qsTr("Remote node") + translationManager.emptyString
+                }
+                RemoteNodeEdit {
+                    id: remoteNodeEdit
+                    Layout.minimumWidth: 100 * scaleRatio
+                    daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0]
+                    daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1] == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                        console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
                     }
+                }
 
-                    // Update daemon login
-                    persistentSettings.daemonUsername = daemonUsername.text;
-                    persistentSettings.daemonPassword = daemonPassword.text;
-                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+                StandardButton {
+                    id: remoteNodeSave
+                    text: qsTr("Connect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        // Update daemon login
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                        persistentSettings.daemonUsername = daemonUsername.text;
+                        persistentSettings.daemonPassword = daemonPassword.text;
+                        persistentSettings.useRemoteNode = true
 
-                    //Reinit wallet
-                    currentWallet.initAsync(newDaemon);
+                        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
+                        appWindow.connectRemoteNode()
+                    }
                 }
             }
         }
 
         RowLayout {
+            visible: !isMobile
             Label {
                 color: "#4A4949"
                 text: qsTr("Layout settings") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
+            visible: !isMobile
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
@@ -393,6 +406,7 @@ Rectangle {
 
         RowLayout {
             CheckBox {
+                visible: !isMobile
                 id: customDecorationsCheckBox
                 checked: persistentSettings.customDecorations
                 onClicked: appWindow.setCustomWindowDecorations(checked)
@@ -627,7 +641,7 @@ Rectangle {
     function onPageCompleted() {
         console.log("Settings page loaded");
         initSettings();
-        viewOnly = currentWallet.viewOnly;
+
 
         if(typeof daemonManager != "undefined")
             appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
