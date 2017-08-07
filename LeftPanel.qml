@@ -70,6 +70,8 @@ Rectangle {
 
     width: (isMobile)? appWindow.width : 260
     color: "#FFFFFF"
+    anchors.bottom: parent.bottom
+    anchors.top: parent.top
 
     // Item with monero logo
     Item {
@@ -139,8 +141,8 @@ Rectangle {
             visible: !isMobile
             Item {
                 anchors.verticalCenter: parent.verticalCenter
-                height: 26
-                width: 50
+                height: 26 * scaleRatio
+                width: 50 * scaleRatio
 
                 Image {
                     anchors.centerIn: parent
@@ -229,7 +231,8 @@ Rectangle {
 
 
         Flickable {
-            contentHeight: 500
+            id:flicker
+            contentHeight: 500 * scaleRatio
             anchors.fill: parent
             clip: true
 
@@ -240,7 +243,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-
+            clip: true
             property var previousButton: transferButton
 
             // ------------- Dashboard tab ---------------
@@ -518,6 +521,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
+            height: 58 * scaleRatio
         }
 
         ProgressBar {
@@ -525,8 +529,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
+            height: 35 * scaleRatio
         }
-    }
+    } // menuRect
 
 
 
