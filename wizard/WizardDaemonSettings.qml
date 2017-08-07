@@ -166,21 +166,6 @@ ColumnLayout {
 
         RowLayout {
             CheckBox {
-                id: lightWallet
-                text: qsTr("Light Wallet - Do not download blockchain") + translationManager.emptyString
-                Layout.topMargin: 20 * scaleRatio
-                background: "#FFFFFF"
-                fontColor: "#4A4646"
-                fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.lightWallet
-            }
-
-        }
-
-        RowLayout {
-            CheckBox {
                 id: remoteNode
                 text: (localNode.checked) ? qsTr("Connect to a remote node until my own node has finished syncing") + translationManager.emptyString
                                           : qsTr("Connect to a remote node") + translationManager.emptyString
