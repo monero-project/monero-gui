@@ -29,6 +29,7 @@
 
 import QtQml 2.0
 import QtQuick 2.2
+// QtQuick.Controls 2.0 isn't stable enough yet. Needs more testing.
 //import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
@@ -47,7 +48,7 @@ Rectangle {
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
-    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800
+    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
@@ -106,7 +107,7 @@ Rectangle {
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 1000 }
+                PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
@@ -126,7 +127,7 @@ Rectangle {
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
