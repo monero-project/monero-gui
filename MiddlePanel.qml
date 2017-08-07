@@ -58,6 +58,7 @@ Rectangle {
     property Settings settingsView: Settings { }
     property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
+    property Keys keysView: Keys { }
 
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
@@ -92,33 +93,6 @@ Rectangle {
         root.state = "Transfer";
         transferView.sendTo(address, paymentId, description);
     }
-
-
-    //   XXX: just for memo, to be removed
-    //    states: [
-    //        State {
-    //            name: "Dashboard"
-    //            PropertyChanges { target: loader; source: "pages/Dashboard.qml" }
-    //        }, State {
-    //            name: "History"
-    //            PropertyChanges { target: loader; source: "pages/History.qml" }
-    //        }, State {
-    //            name: "Transfer"
-    //            PropertyChanges { target: loader; source: "pages/Transfer.qml" }
-    //        }, State {
-    //           name: "Receive"
-    //           PropertyChanges { target: loader; source: "pages/Receive.qml" }
-    //        }, State {
-    //            name: "AddressBook"
-    //            PropertyChanges { target: loader; source: "pages/AddressBook.qml" }
-    //        }, State {
-    //            name: "Settings"
-    //            PropertyChanges { target: loader; source: "pages/Settings.qml" }
-    //        }, State {
-    //            name: "Mining"
-    //            PropertyChanges { target: loader; source: "pages/Mining.qml" }
-    //        }
-    //    ]
 
         states: [
             State {
@@ -156,6 +130,10 @@ Rectangle {
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+            }, State {
+                name: "Keys"
+                PropertyChanges { target: root; currentView: keysView }
                 PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }
         ]
@@ -195,11 +173,7 @@ Rectangle {
             StackView {
                 id: stackView
                 initialItem: transferView
-    //            anchors.topMargin: 30
-    //                Layout.fillWidth: true
-    //                Layout.fillHeight: true
                 anchors.fill:parent
-    //            anchors.margins: 4
                 clip: true // otherwise animation will affect left panel
 
                 delegate: StackViewDelegate {

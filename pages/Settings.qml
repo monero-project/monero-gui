@@ -111,18 +111,6 @@ Rectangle {
                 }
             }
 
-            StandardButton {
-                id: showSeedButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Show seed & keys") + translationManager.emptyString
-                onClicked: {
-                    settingsPasswordDialog.open();
-                }
-            }
-
 /*          Rescan cache - Disabled until we know it's needed
 
             StandardButton {
@@ -585,61 +573,6 @@ Rectangle {
         title: qsTr("Daemon log") + translationManager.emptyString
         onAccepted: {
             close();
-        }
-    }
-
-    PasswordDialog {
-        id: settingsPasswordDialog
-
-        onAccepted: {
-            if(appWindow.password === settingsPasswordDialog.password){
-                if(currentWallet.seedLanguage == "") {
-                    console.log("No seed language set. Using English as default");
-                    currentWallet.setSeedLanguage("English");
-                }
-
-                seedPopup.title  = qsTr("Wallet seed & keys") + translationManager.emptyString;
-                seedPopup.text = "<b>Wallet Mnemonic seed</b> <br>" + currentWallet.seed
-                        + "<br><br> <b>" + qsTr("Secret view key") + ":</b> " + currentWallet.secretViewKey
-                        + "<br><b>" + qsTr("Public view key") + ":</b> " + currentWallet.publicViewKey
-                        + "<br><b>" + qsTr("Secret spend key") + ":</b> " + currentWallet.secretSpendKey
-                        + "<br><b>" + qsTr("Public spend key") + ":</b> " + currentWallet.publicSpendKey
-                seedPopup.open()
-                seedPopup.width = 600
-                seedPopup.height = 300
-                seedPopup.onCloseCallback = function() {
-                    seedPopup.text = ""
-                }
-
-            } else {
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Wrong password");
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    settingsPasswordDialog.open()
-                }
-            }
-
-            settingsPasswordDialog.password = ""
-        }
-        onRejected: {
-
-        }
-
-    }
-
-    StandardDialog {
-        id: seedPopup
-        cancelVisible: false
-        okVisible: true
-        width:600
-        height:400
-
-        property var onCloseCallback
-        onAccepted:  {
-            if (onCloseCallback) {
-                onCloseCallback()
-            }
         }
     }
 

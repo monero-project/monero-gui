@@ -50,6 +50,7 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
     signal signClicked()
+    signal keysClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -483,10 +484,33 @@ Rectangle {
                 color: "#505050"
                 height: 1
             }
+            // ------------- Sign/verify tab ---------------
+            MenuButton {
+                id: keysButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Seed & Keys") + translationManager.emptyString
+                symbol: qsTr("Y") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: settingsButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = keysButton
+                    panel.keysClicked()
+                }
+            }
+            Rectangle {
+                visible: settingsButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
 
-        }
+        } // Column
 
-        }
+        } // Flickable
 
         NetworkStatusItem {
             id: networkStatus

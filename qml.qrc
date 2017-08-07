@@ -146,5 +146,6 @@
         <file>components/TextBlock.qml</file>
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>components/RemoteNodeEdit.qml</file>
+        <file>pages/Keys.qml</file>
     </qresource>
 </RCC>

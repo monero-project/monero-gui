@@ -988,6 +988,37 @@ ApplicationWindow {
                 onAcceptedCallback();
         }
     }
+    
+    PasswordDialog {
+        id: settingsPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
+        onAccepted: {
+            if(appWindow.password === settingsPasswordDialog.password){
+                if(currentWallet.seedLanguage == "") {
+                    console.log("No seed language set. Using English as default");
+                    currentWallet.setSeedLanguage("English");
+                }
+
+                // Load keys page
+                middlePanel.state = "Keys"
+
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text = qsTr("Wrong password");
+                informationPopup.open()
+                informationPopup.onCloseCallback = function() {
+                    settingsPasswordDialog.open()
+                }
+            }
+
+            settingsPasswordDialog.password = ""
+        }
+        onRejected: {
+            appWindow.showPageRequest("Settings");
+        }
+    }
 
     DaemonManagerDialog {
         id: daemonManagerDialog
@@ -1068,6 +1099,7 @@ ApplicationWindow {
             onMiningClicked: {middlePanel.state = "Mining"; if(isMobile) hideMenu()}
             onSignClicked: {middlePanel.state = "Sign"; if(isMobile) hideMenu()}
             onSettingsClicked: {middlePanel.state = "Settings"; if(isMobile) hideMenu()}
+            onKeysClicked: {settingsPasswordDialog.open(); if(isMobile) hideMenu()}
         }
 
         RightPanel {
