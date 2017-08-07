@@ -37,7 +37,7 @@ Rectangle {
     property alias basicButtonVisible: goToBasicVersionButton.visible
     property bool customDecorations: true
     signal goToBasicVersion(bool yes)
-    height: customDecorations ? 30 : 0
+    height: customDecorations && !isMobile ? 30 : 0
     y: -height
     property string title
     property alias maximizeButtonVisible: maximizeButton.visible
@@ -59,7 +59,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         color:  basicMouseArea.containsMouse || !leftPanel.visible ? "#FFE00A" : "#000000"
-        height: 30
+        height: 30 * scaleRatio
         width: height
         visible: isMobile
 

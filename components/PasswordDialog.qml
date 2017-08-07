@@ -53,8 +53,8 @@ Window {
     }
 
     // TODO: implement without hardcoding sizes
-    width: 480
-    height: walletName ? 240 : 200
+//    width: isMobile ? screenWidth : 480
+//    height: isMobile ? screenHeight - mobileHeader.height : walletName ? 240 : 200
 
     // Make window draggable
     MouseArea {
@@ -68,7 +68,7 @@ Window {
     ColumnLayout {
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 }
+        anchors { fill: parent; margins: 35 * scaleRatio }
 
         ColumnLayout {
             id: column
@@ -81,20 +81,20 @@ Window {
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 24
+                font.pixelSize: 24 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
 
             TextField {
                 id : passwordInput
-                focus: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
+                Layout.maximumWidth: 400 * scaleRatio
                 horizontalAlignment: TextInput.AlignHCenter
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: "Arial"
-                font.pixelSize: 32
+                font.pixelSize: 32 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
 
@@ -142,13 +142,11 @@ Window {
         // Ok/Cancel buttons
         RowLayout {
             id: buttons
-            spacing: 60
+            spacing: 60 * scaleRatio
             Layout.alignment: Qt.AlignHCenter
             
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -162,8 +160,6 @@ Window {
             }
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

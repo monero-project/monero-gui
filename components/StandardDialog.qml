@@ -68,8 +68,8 @@ Window {
     }
 
     // TODO: implement without hardcoding sizes
-    width:  480
-    height: 280
+    width: isMobile ? screenWidth : 480
+    height: isMobile ? screenHeight : 280
 
     ColumnLayout {
         id: mainLayout
@@ -84,7 +84,7 @@ Window {
             Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
+                font.pixelSize: 32 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
@@ -99,7 +99,7 @@ Window {
                 font.family: "Arial"
                 textFormat: TextEdit.AutoText
                 readOnly: true
-                font.pixelSize: 12
+                font.pixelSize: 12 * scaleRatio
             }
         }
 
@@ -111,8 +111,6 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -126,8 +124,6 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

@@ -49,7 +49,7 @@ Item {
             anchors.bottomMargin: 2
             font.family: "Arial"
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: 12 * scaleRatio
             color: "#4A4949"
             text: {
                 if(currentIndex === 0) return qsTr("Normal") + translationManager.emptyString
