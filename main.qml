@@ -1439,4 +1439,14 @@ ApplicationWindow {
         return false
     }
 
+    function releaseFocus() {
+        // Workaround to release focus from textfield when scrolling (https://bugreports.qt.io/browse/QTBUG-34867)
+        if(isAndroid) {
+            console.log("releasing focus")
+            middlePanel.focus = true
+            middlePanel.focus = false
+        }
+
+
+    }
 }
