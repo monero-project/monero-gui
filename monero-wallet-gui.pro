@@ -86,7 +86,7 @@ ios:arm64 {
     LIBS += \
         -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
-!ios {
+!ios:!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
@@ -94,6 +94,17 @@ LIBS += -L$$WALLET_ROOT/lib \
         -leasylogging \
         -lreadline \
 }
+
+android {
+    message("Host is Android")
+    LIBS += -L$$WALLET_ROOT/lib \
+        -lwallet_merged \
+        -lepee \
+        -lunbound \
+        -leasylogging
+}
+
+
 
 
 ios {
