@@ -116,7 +116,8 @@ ios {
     LIBS += -L$$WALLET_ROOT/lib-ios \
         -lwallet_merged \
         -lepee \
-        -lunbound
+        -lunbound \
+        -leasylogging
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
