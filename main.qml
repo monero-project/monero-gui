@@ -57,7 +57,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
-    property int maxWindowHeight: (Screen.height < 900)? 720 : 800;
+    property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
     property string walletName
@@ -66,7 +66,7 @@ ApplicationWindow {
     property int timeToUnlock: 0
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
-    property var isMobile: (appWindow.width > 700) ? false : true
+    property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
 
     // true if wallet ever synchronized
@@ -797,7 +797,7 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-//    width: Screen.width //rightPanelExpanded ? 1269 : 1269 - 300
+//    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
 //    height: 900 //300//maxWindowHeight;
     color: "#FFFFFF"
     flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
@@ -1051,7 +1051,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: titleBar; basicButtonVisible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (Screen.width < 930)? Screen.width : 930; }
+                PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: false }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
@@ -1066,7 +1066,7 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width:  (Screen.width < 969)? Screen.width : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
+                PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: true }
@@ -1074,6 +1074,7 @@ ApplicationWindow {
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
 
@@ -1082,7 +1083,7 @@ ApplicationWindow {
             visible: isMobile
             anchors.left: parent.left
             anchors.right: parent.right
-            height: visible? 65 : 0
+            height: visible? 65 * scaleRatio : 0
         }
 
         LeftPanel {
@@ -1125,22 +1126,6 @@ ApplicationWindow {
             text: qsTr("send to the same destination") + translationManager.emptyString
             visible: false
         }
-
-//        MouseArea {
-//            id: frameArea
-//            property bool blocked: false
-//            anchors.top: parent.top
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            height: 30
-//            z: 1
-//            hoverEnabled: true
-//            propagateComposedEvents: true
-//            onPressed: mouse.accepted = false
-//            onReleased: mouse.accepted = false
-//            onMouseXChanged: titleBar.mouseX = mouseX
-//            onContainsMouseChanged: titleBar.containsMouse = containsMouse
-//        }
 
         SequentialAnimation {
             id: goToBasicAnimation
@@ -1356,7 +1341,7 @@ ApplicationWindow {
                 y: 6
                 lineHeight: 0.7
                 font.family: "Arial"
-                font.pixelSize: 12
+                font.pixelSize: 12 * scaleRatio
                 color: "#FFFFFF"
             }
         }
