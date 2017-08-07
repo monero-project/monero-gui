@@ -488,7 +488,7 @@ Rectangle {
 
         ListModel {
             id: columnsModel
-
+            property int pidWidth: 127 * scaleRatio
             ListElement { columnName: "Payment ID"; columnWidth: 127 }
             ListElement { columnName: "Date"; columnWidth: 100 }
             ListElement { columnName: "Block height"; columnWidth: 150 }
@@ -498,12 +498,13 @@ Rectangle {
 
         TableHeader {
             id: header
+            visible: !isMobile
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.topMargin: 17
-            anchors.leftMargin: 14
-            anchors.rightMargin: 14
+            anchors.topMargin: 17 * scaleRatio
+            anchors.leftMargin: 14 * scaleRatio
+            anchors.rightMargin: 14 * scaleRatio
             dataModel: columnsModel
             offset: 20
             onSortRequest: {
@@ -533,7 +534,7 @@ Rectangle {
         Scroll {
             id: flickableScroll
             anchors.right: table.right
-            anchors.rightMargin: -14
+            anchors.rightMargin: !isMobile ? -14 * scaleRatio : 0
             anchors.top: table.top
             anchors.bottom: table.bottom
             flickable: table
@@ -545,8 +546,8 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: header.bottom
             anchors.bottom: parent.bottom
-            anchors.leftMargin: 14
-            anchors.rightMargin: 14
+            anchors.leftMargin: 14 * scaleRatio
+            anchors.rightMargin: 14 * scaleRatio
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
             addressBookModel: null

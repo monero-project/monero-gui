@@ -51,17 +51,15 @@ Rectangle {
 
         // Daemon settings
         daemonAddress = persistentSettings.daemon_address.split(":");
-        console.log("address: " + persistentSettings.daemon_address)
-        // try connecting to daemon
     }
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 17
+        anchors.margins: 17 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 10
+        spacing: 10 * scaleRatio
 
         //! Manage wallet
         RowLayout {
@@ -70,8 +68,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: "#4A4949"
                 text: qsTr("Manage wallet") + translationManager.emptyString
-                fontSize: 16
-                Layout.topMargin: 10
+                Layout.topMargin: 10 * scaleRatio
             }
         }
 
@@ -243,7 +240,6 @@ Rectangle {
                 id: blockchainFolderLabel
                 color: "#4A4949"
                 text: qsTr("Blockchain location") + translationManager.emptyString
-                fontSize: 16
             }
             LineEdit {
                 id: blockchainFolder
@@ -412,9 +408,8 @@ Rectangle {
             Label {
                 color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
-                fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
@@ -442,7 +437,6 @@ Rectangle {
 
             LineEdit {
                 id: logCategories
-                Layout.preferredWidth:  200
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
@@ -463,8 +457,8 @@ Rectangle {
                 color: "#4A4949"
                 text: qsTr("Debug info") + translationManager.emptyString
                 fontSize: 16
-                anchors.topMargin: 30
-                Layout.topMargin: 30
+                anchors.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30 * scaleRatio
             }
         }
         Rectangle {
@@ -472,13 +466,11 @@ Rectangle {
             height: 1
             color: "#DEDEDE"
         }
-
         TextBlock {
             Layout.topMargin: 8
             Layout.fillWidth: true
             text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
         }
-
         TextBlock {
             id: guiMoneroVersion
             Layout.fillWidth: true
@@ -603,7 +595,6 @@ Rectangle {
                 if(!validator.lmdbExists) {
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n" 
                 }
-   
 
                 confirmationDialog.icon = StandardIcon.Question
                 confirmationDialog.cancelText = qsTr("Cancel")
@@ -646,8 +637,6 @@ Rectangle {
     Component.onCompleted: {
         if(typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
-
-
     }
 
     function onDaemonConsoleUpdated(message){

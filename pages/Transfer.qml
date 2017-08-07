@@ -433,8 +433,10 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 17
-        spacing:10
+        anchors.leftMargin: 17 * scaleRatio
+        anchors.topMargin: 17 * scaleRatio
+        anchors.bottomMargin: 17 * scaleRatio
+        spacing: 10 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
@@ -455,13 +457,14 @@ Rectangle {
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
-            Layout.bottomMargin: 30
+            Layout.bottomMargin: 30 * scaleRatio
         }
 
         RowLayout {
             visible: persistentSettings.transferShowAdvanced
             anchors.left: parent.left
             anchors.right: parent.right
+            Layout.fillWidth: true
             Label {
                 id: privacyLabel
                 fontSize: 14
@@ -489,7 +492,7 @@ Rectangle {
 
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
-            Layout.topMargin: 50
+            Layout.topMargin: 50 * scaleRatio
 
 
             columns: (isMobile) ? 2 : 6
@@ -657,8 +660,8 @@ Rectangle {
     Rectangle {
         x: root.width/2 - width/2
         y: root.height/2 - height/2
-        height:statusText.paintedHeight + 50
-        width:statusText.paintedWidth + 40
+        height:statusText.paintedHeight + 50 * scaleRatio
+        width:statusText.paintedWidth + 40 * scaleRatio
         visible: statusText.text != ""
         opacity: 0.9
 
