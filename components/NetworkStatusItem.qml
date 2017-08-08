@@ -29,7 +29,7 @@
 import QtQuick 2.0
 import moneroComponents.Wallet 1.0
 
-Row {
+Rectangle {
     id: item
     property var connected: Wallet.ConnectionStatus_Disconnected
 
@@ -51,6 +51,8 @@ Row {
         if (status == Wallet.ConnectionStatus_Connected) {
             if(!appWindow.daemonSynced)
                 return qsTr("Synchronizing")
+            if(appWindow.remoteNodeConnected)
+                return qsTr("Remote node")
             return qsTr("Connected")
         }
         if (status == Wallet.ConnectionStatus_WrongVersion)
