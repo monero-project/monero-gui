@@ -101,14 +101,12 @@ Rectangle {
             id: signBox
 
             RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
-                        fontSize: 16
-                        wrapMode: Text.Wrap
-                    }
-                    Label {}
+
+                Text {
+                    text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 14 * scaleRatio
+                    Layout.fillWidth: true
                 }
             }
 
@@ -196,7 +194,6 @@ Rectangle {
                     id: signFileLine
                     anchors.left: loadFileToSignButton.right
                     anchors.right: signFileButton.left
-                    fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Filename with message to sign") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
@@ -228,7 +225,7 @@ Rectangle {
                 }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: signSignatureRow
                 anchors.topMargin: 17 * scaleRatio
 
@@ -260,17 +257,14 @@ Rectangle {
         ColumnLayout {
             id: verifyBox
 
-            RowLayout {
-                ColumnLayout {
-                    spacing: 8
-                    Label {
-                        text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
-                        fontSize: 16
-//                        Layout.fillWidth: true
-                        wrapMode: Text.Wrap
-                    }
-                    Label {}
+            RowLayout {  
+                Text {
+                    text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 14 * scaleRatio
+                    Layout.fillWidth: true
                 }
+
             }
 
             Label {
@@ -409,7 +403,7 @@ Rectangle {
                 // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
             }
 
-            RowLayout {
+            ColumnLayout {
                 id: verifySignatureRow
                 anchors.topMargin: 17 * scaleRatio
 
