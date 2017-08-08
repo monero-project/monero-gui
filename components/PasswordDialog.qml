@@ -35,37 +35,45 @@ import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
 
-Window {
+Item {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    visible: false
+    Rectangle {
+        id: bg
+        z: parent.z + 1
+        anchors.fill: parent
+        color: "white"
+        opacity: 0.9
+    }
+
     property alias password: passwordInput.text
     property string walletName
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
-
+    signal closeCallback()
 
     function open(walletName) {
         root.walletName = walletName ? walletName : ""
+        leftPanel.enabled = false
+        middlePanel.enabled = false
+        titleBar.enabled = false
         show()
+        root.visible = true;
+        passwordInput.focus = true
     }
 
-    // TODO: implement without hardcoding sizes
-//    width: isMobile ? screenWidth : 480
-//    height: isMobile ? screenHeight - mobileHeader.height : walletName ? 240 : 200
-
-    // Make window draggable
-    MouseArea {
-        anchors.fill: parent
-        property point lastMousePos: Qt.point(0, 0)
-        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
-        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
-        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
+    function close() {
+        leftPanel.enabled = true
+        middlePanel.enabled = true
+        titleBar.enabled = true
+        root.visible = false;
+        closeCallback();
     }
 
     ColumnLayout {
+        z: bg.z + 1
         id: mainLayout
         spacing: 10
         anchors { fill: parent; margins: 35 * scaleRatio }
@@ -128,15 +136,8 @@ Window {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 anchors.bottomMargin: 3
+                Layout.maximumWidth: passwordInput.width
 
-            }
-            // padding
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                height: 10
-                opacity: 0
-                color: "black"
             }
         }
         // Ok/Cancel buttons
@@ -174,6 +175,3 @@ Window {
         }
     }
 }
-
-
-
