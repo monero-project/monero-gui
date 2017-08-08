@@ -38,6 +38,13 @@ Rectangle {
     property var under: null
     signal clicked()
 
+    function doClick() {
+        // Android workaround
+        releaseFocus();
+        clicked();
+    }
+
+
     function getOffset() {
         var offset = 0
         var item = button
@@ -139,7 +146,7 @@ Rectangle {
         onClicked: {
             if(parent.checked)
                 return
-            button.clicked()
+            button.doClick()
             parent.checked = true
         }
     }
