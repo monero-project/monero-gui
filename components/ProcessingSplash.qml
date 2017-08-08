@@ -31,16 +31,25 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 
-Window {
+Rectangle {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window
+    color: "white"
+    visible: false
+    z:11
     property alias messageText: messageTitle.text
     property alias heightProgressText : heightProgress.text
 
     width: 200 * scaleRatio
     height: 100 * scaleRatio
     opacity: 0.7
+
+    function show() {
+        root.visible = true;
+    }
+
+    function close() {
+        root.visible = false;
+    }
 
     ColumnLayout {
         id: rootLayout
