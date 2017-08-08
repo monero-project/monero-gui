@@ -244,12 +244,10 @@ ApplicationWindow {
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
             middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
         }
+
         currentWallet = undefined;
-        if (isIOS) {
-            console.log("closing sync - ios")
-            walletManager.closeWallet();
-        } else
-            walletManager.closeWalletAsync();
+        walletManager.closeWallet();
+
     }
 
     function connectWallet(wallet) {
