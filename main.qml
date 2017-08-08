@@ -955,6 +955,8 @@ ApplicationWindow {
         // dynamically change onclose handler
         property var onCloseCallback
         id: informationPopup
+        anchors.fill: parent
+        z: parent.z + 1
         cancelVisible: false
         onAccepted:  {
             if (onCloseCallback) {
@@ -965,6 +967,7 @@ ApplicationWindow {
 
     // Confrirmation aka question dialog
     StandardDialog {
+        z:10
         id: transactionConfirmationPopup
         onAccepted: {
             close();
@@ -991,6 +994,7 @@ ApplicationWindow {
     }
 
     StandardDialog {
+        z:11
         id: confirmationDialog
         property var onAcceptedCallback
         property var onRejectedCallback
@@ -1077,7 +1081,9 @@ ApplicationWindow {
 
     PasswordDialog {
         id: passwordDialog
-
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
         onAccepted: {
             appWindow.initialize();
         }
@@ -1161,12 +1167,13 @@ ApplicationWindow {
                 PropertyChanges { target: wizard; visible: true }
                 PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
-                PropertyChanges { target: resizeArea; visible: false }
+                PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; maximizeButtonVisible: false }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
                 PropertyChanges { target: titleBar; y: 0 }
                 PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
+                PropertyChanges { target: mobileHeader; visible: false }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
