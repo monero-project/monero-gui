@@ -69,6 +69,7 @@ ApplicationWindow {
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
     property bool remoteNodeConnected: false
+    property bool androidCloseTapped: false;
     // Default daemon addresses
     readonly property string localDaemonAddress : !persistentSettings.testnet ? "localhost:18081" : "localhost:28081"
     property string currentDaemonAddress;
@@ -1406,11 +1407,69 @@ ApplicationWindow {
         }
     }
 
+    // TODO: Make the callback dynamic
+    Timer {
+        id: statusMessageTimer
+        interval: 5;
+        running: false;
+        repeat: false
+        onTriggered: resetAndroidClose()
+        triggeredOnStart: false
+    }
+
+    Rectangle {
+        id: statusMessage
+        visible: false
+        property alias text: statusMessageText.text
+        anchors.bottom: parent.bottom
+        width: 200 * scaleRatio
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: "black"
+        height: 40 * scaleRatio
+        Text {
+            id: statusMessageText
+            anchors.fill: parent
+            anchors.margins: 10 * scaleRatio
+            font.pixelSize: 14 * scaleRatio
+            color: "white"
+        }
+    }
+
+    function resetAndroidClose() {
+        console.log("resetting android close");
+        androidCloseTapped = false;
+        statusMessage.visible = false
+    }
+
+    function showStatusMessage(msg,timeout) {
+        console.log("showing status message")
+        statusMessageTimer.interval = timeout * 1000;
+        statusMessageTimer.start()
+        statusMessageText.text = msg;
+        statusMessage.visible = true
+    }
+
     onClosing: {
+        close.accepted = false;
+        console.log("blocking close event");
+        if(isAndroid) {
+            console.log("blocking android exit");
+            if(qrScannerEnabled)
+                cameraUi.state = "Stopped"
+
+            if(!androidCloseTapped) {
+                androidCloseTapped = true;
+                appWindow.showStatusMessage(qsTr("Tap again to close..."),3)
+
+                // first close
+                return;
+            }
+
+
+        }
 
         // If daemon is running - prompt user before exiting
         if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
-            close.accepted = false;
 
             // Show confirmation dialog
             confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
@@ -1434,6 +1493,7 @@ ApplicationWindow {
     }
 
     function closeAccepted(){
+        console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
         walletManager.closeWallet();
