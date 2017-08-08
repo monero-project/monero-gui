@@ -28,6 +28,7 @@
 
 import QtQuick 2.2
 import QtQuick.Window 2.0
+import QtQuick.Layouts 1.1
 
 Rectangle {
     id: titleBar
@@ -53,6 +54,7 @@ Rectangle {
     }
 
     Rectangle {
+
         id: goToBasicVersionButton
         property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
         property bool checked: false
@@ -64,10 +66,10 @@ Rectangle {
         visible: isMobile
 
         Image {
+            width: parent.width * 2/3;
+            height: width;
             anchors.centerIn: parent
-            rotation: !leftPanel.visible ? 180 : 0
-            source: parent.customDecorations || !leftPanel.visible ? "../images/goToBasicVersionHovered.png" :
-                                                             "../images/gotoBasicVersion.png"
+            source: "../images/menu.png"
         }
 
         MouseArea {
@@ -75,6 +77,7 @@ Rectangle {
             hoverEnabled: true
             anchors.fill: parent
             onClicked: {
+                releaseFocus()
                 parent.checked = !parent.checked
                 titleBar.goToBasicVersion(leftPanel.visible)
             }

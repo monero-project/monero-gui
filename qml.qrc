@@ -147,5 +147,6 @@
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
+        <file>images/menu.png</file>
     </qresource>
 </RCC>
