@@ -35,10 +35,10 @@ import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
 
-Window {
+Rectangle {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    color: "white"
+    visible: false
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
     property alias content: root.text
@@ -53,6 +53,7 @@ Window {
     // same signals as Dialog has
     signal accepted()
     signal rejected()
+    signal closeCallback();
 
     // Make window draggable
     MouseArea {
@@ -64,7 +65,19 @@ Window {
     }
 
     function open() {
+        // Center
+        if(!isMobile) {
+            root.x = appWindow.width/2 - root.width/2
+            root.y = screenHeight/2 - root.height/2
+        }
         show()
+        root.z = 11
+        root.visible = true;
+    }
+
+    function close() {
+        root.visible = false;
+        closeCallback();
     }
 
     // TODO: implement without hardcoding sizes
