@@ -442,9 +442,6 @@ ApplicationWindow {
                 console.log("Saving wallet after first refresh");
                 currentWallet.store()
                 isNewWallet = false
-
-                // Update History
-                currentWallet.history.refresh();
             }
 
             // recovering from seed is finished after first refresh
@@ -452,6 +449,10 @@ ApplicationWindow {
                 persistentSettings.is_recovering = false
             }
         }
+
+        // Update history on every refresh if it's empty
+        if(currentWallet.history.count == 0)
+            currentWallet.history.refresh()
 
         onWalletUpdate();
     }
@@ -512,7 +513,8 @@ ApplicationWindow {
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
         currentWallet.refresh()
-        currentWallet.history.refresh() // this will refresh model
+        console.log("Confirmed money found")
+        // history refresh is handled by walletUpdated
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
@@ -523,6 +525,7 @@ ApplicationWindow {
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
+        console.log("money sent found")
         currentWallet.refresh()
         currentWallet.history.refresh() // this will refresh model
     }
