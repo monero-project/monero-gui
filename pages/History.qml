@@ -80,7 +80,7 @@ Rectangle {
     }
 
     onModelChanged: {
-        if (typeof model !== 'undefined') {
+        if (typeof model !== 'undefined' && model != null) {
 
             selectedAmount.text = getSelectedAmount()
 
@@ -145,30 +145,6 @@ Rectangle {
         text: getSelectedAmount()
         fontSize: 14
     }
-
-
-    // Filter by Address input (senseless, removing)
-    /*
-    Label {
-        id: addressLabel
-        anchors.left: parent.left
-        anchors.top: filterHeaderText.bottom
-        anchors.leftMargin: 17
-        anchors.topMargin: 17
-        text: qsTr("Address")
-        fontSize: 14
-    }
-
-    LineEdit {
-        id: addressLine
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: addressLabel.bottom
-        anchors.leftMargin: 17
-        anchors.rightMargin: 17
-        anchors.topMargin: 5
-    }
-    */
 
     // Filter by string
     LineEdit {
@@ -533,6 +509,7 @@ Rectangle {
 
         Scroll {
             id: flickableScroll
+            visible: !isMobile
             anchors.right: table.right
             anchors.rightMargin: !isMobile ? -14 * scaleRatio : 0
             anchors.top: table.top
@@ -542,6 +519,7 @@ Rectangle {
 
         HistoryTable {
             id: table
+            visible: !isMobile
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: header.bottom
@@ -549,12 +527,29 @@ Rectangle {
             anchors.leftMargin: 14 * scaleRatio
             anchors.rightMargin: 14 * scaleRatio
             onContentYChanged: flickableScroll.flickableContentYChanged()
-            model: root.model
+            model: !isMobile ? root.model : null
+            addressBookModel: null
+        }
+
+        HistoryTableMobile {
+            id: tableMobile
+            visible: isMobile
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            onContentYChanged: flickableScroll.flickableContentYChanged()
+            model: isMobile ? root.model : null
             addressBookModel: null
         }
     }
 
     function onPageCompleted() {
-        table.addressBookModel = appWindow.currentWallet ? appWindow.currentWallet.addressBookModel : null
+        if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
+            currentWallet.history.refresh()
+            table.addressBookModel = currentWallet ? currentWallet.addressBookModel : null
+            transactionTypeDropdown.update()
+        }
+
     }
 }
