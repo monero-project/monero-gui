@@ -686,14 +686,9 @@ Rectangle {
     }
 
     function updatePriorityDropdown() {
-        // Use new fee multipliers after v5 fork
-        if (typeof currentWallet != "undefined" && currentWallet.useForkRules(5)) {
-            priorityDropdown.dataModel = priorityModelV5;
-            priorityDropdown.currentIndex = 1
-        } else {
-            priorityDropdown.dataModel = priorityModel;
-            priorityDropdown.currentIndex = 0
-        }
+        priorityDropdown.dataModel = priorityModelV5;
+        priorityDropdown.currentIndex = 1
+        priorityDropdown.update()
     }
 
     //TODO: Add daemon sync status
