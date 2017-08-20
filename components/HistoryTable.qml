@@ -79,14 +79,6 @@ ListView {
         }
     }
 
-    StandardDialog {
-        id: detailsPopup
-        cancelVisible: false
-        okVisible: true
-        width:850
-    }
-
-
     delegate: Rectangle {
         id: delegate
         height: 144
@@ -111,10 +103,10 @@ ListView {
             onClicked: {
                 var tx_key = currentWallet.getTxKey(hash)
                 var tx_note = currentWallet.getUserNote(hash)
-                detailsPopup.title = "Transaction details";
-                detailsPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
-                detailsPopup.open();
-
+                informationPopup.title = "Transaction details";
+                informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
             }
         }
 

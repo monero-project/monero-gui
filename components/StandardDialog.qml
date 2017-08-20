@@ -67,7 +67,7 @@ Rectangle {
     function open() {
         // Center
         if(!isMobile) {
-            root.x = appWindow.width/2 - root.width/2
+            root.x = parent.width/2 - root.width/2
             root.y = screenHeight/2 - root.height/2
         }
         show()

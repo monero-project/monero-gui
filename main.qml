@@ -1146,8 +1146,8 @@ ApplicationWindow {
         id: splash
         width: appWindow.width / 1.5
         height: appWindow.height / 2
-        x: (appWindow.width - width) / 2 + appWindow.x
-        y: (appWindow.height - height) / 2 + appWindow.y
+        x: (appWindow.width - width) / 2
+        y: (appWindow.height - height) / 2
         messageText: qsTr("Please wait...")
     }
 
