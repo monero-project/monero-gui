@@ -425,6 +425,8 @@ ApplicationWindow {
                 if(localNodeConnected) {
                     leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
                     leftPanel.progressBar.visible = true
+                } else if (persistentSettings.startLocalNode) {
+                    daemonManagerDialog.open()
                 }
 
             // local daemon is synced - use it!
