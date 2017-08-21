@@ -212,9 +212,9 @@ More info: http://stackoverflow.com/a/35098040/1683164
 6. Install the latest version of boost, specificly the required static libraries
     ```
     cd
-    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
-    tar xjf boost_1_63_0.tar.bz2
-    cd boost_1_63_0
+    wget http://sourceforge.net/projects/boost/files/boost/1.64.0/boost_1_64_0.tar.bz2
+    tar xjf boost_1_64_0.tar.bz2
+    cd boost_1_64_0
     ./bootstrap.sh mingw
     ./b2 --prefix=/mingw32/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
     ```
