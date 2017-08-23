@@ -26,6 +26,7 @@ public:
         TransactionFeeRole,
         TransactionBlockHeightRole,
         TransactionConfirmationsRole,
+        TransactionConfirmationsRequiredRole,
         TransactionHashRole,
         TransactionTimeStampRole,
         TransactionPaymentIdRole,
