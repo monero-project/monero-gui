@@ -47,7 +47,7 @@ Rectangle {
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
-    property int minHeight: 800
+    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
