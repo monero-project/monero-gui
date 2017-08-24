@@ -473,7 +473,7 @@ Rectangle {
         RowLayout {
             Label {
                 color: "#4A4949"
-                text: qsTr("Version") + translationManager.emptyString
+                text: qsTr("Debug info") + translationManager.emptyString
                 fontSize: 16
                 anchors.topMargin: 30
                 Layout.topMargin: 30
@@ -485,19 +485,28 @@ Rectangle {
             color: "#DEDEDE"
         }
 
-        Label {
-            id: guiVersion
+        TextBlock {
             Layout.topMargin: 8
-            color: "#4A4949"
+            Layout.fillWidth: true
             text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
-            fontSize: 16
         }
 
-        Label {
+        TextBlock {
             id: guiMoneroVersion
-            color: "#4A4949"
+            Layout.fillWidth: true
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
-            fontSize: 16
+        }
+        TextBlock {
+            Layout.fillWidth: true
+            text: (typeof currentWallet == "undefined") ? "" : qsTr("Wallet creation height: ") + currentWallet.walletCreationHeight + translationManager.emptyString
+        }
+        TextBlock {
+            Layout.fillWidth: true
+            text:  (typeof currentWallet == "undefined") ? "" : qsTr("Wallet log path: ") + currentWallet.walletLogPath + translationManager.emptyString
+        }
+        TextBlock {
+            Layout.fillWidth: true
+            text:  (typeof currentWallet == "undefined") ? "" : qsTr("Daemon log path: ") + currentWallet.daemonLogPath + translationManager.emptyString
         }
     }
 
