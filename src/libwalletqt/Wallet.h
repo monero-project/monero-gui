@@ -45,6 +45,8 @@ class Wallet : public QObject
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
+    Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
+    Q_PROPERTY(QString walletLogPath READ getWalletLogPath CONSTANT)
 
 public:
 
@@ -240,6 +242,9 @@ public:
     QString getPublicViewKey() const {return QString::fromStdString(m_walletImpl->publicViewKey());}
     QString getSecretSpendKey() const {return QString::fromStdString(m_walletImpl->secretSpendKey());}
     QString getPublicSpendKey() const {return QString::fromStdString(m_walletImpl->publicSpendKey());}
+
+    QString getDaemonLogPath() const;
+    QString getWalletLogPath() const;
 
     // TODO: setListenter() when it implemented in API
 signals:

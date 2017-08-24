@@ -599,6 +599,16 @@ bool Wallet::useForkRules(quint8 required_version, quint64 earlyBlocks) const
     }
 }
 
+QString Wallet::getDaemonLogPath() const
+{
+    return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
+}
+
+QString Wallet::getWalletLogPath() const
+{
+    return QCoreApplication::applicationDirPath() + "/monero-wallet-gui.log";
+}
+
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
