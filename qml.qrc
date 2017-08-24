@@ -140,5 +140,6 @@
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
         <file>components/MobileHeader.qml</file>
+        <file>components/TextBlock.qml</file>
     </qresource>
 </RCC>
