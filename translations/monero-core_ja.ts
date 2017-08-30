@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>4...</source>
-        <translation type="unfinished"></translation>
+        <translation>4...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="102"/>
@@ -87,7 +87,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="110"/>
         <source>78.9239845</source>
-        <translation type="unfinished"></translation>
+        <translation>78.9239845</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="133"/>
@@ -97,7 +97,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
-        <translation type="unfinished"></translation>
+        <translation>2324.9239845</translation>
     </message>
 </context>
 <context>
@@ -325,7 +325,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="329"/>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="330"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="353"/>
@@ -345,7 +345,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="376"/>
@@ -355,7 +355,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="398"/>
@@ -365,7 +365,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="422"/>
@@ -375,7 +375,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="423"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="446"/>
@@ -385,7 +385,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="469"/>
@@ -395,12 +395,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
 </context>
 <context>
@@ -509,7 +509,7 @@
     <message>
         <location filename="../components/MobileHeader.qml" line="94"/>
         <source>Unlocked Balance:</source>
-        <translation type="unfinished">ロック解除された残高</translation>
+        <translation>ロック解除された残高:</translation>
     </message>
 </context>
 <context>
@@ -565,7 +565,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="171"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -674,7 +674,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="266"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>クリア</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="276"/>
@@ -684,7 +684,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="285"/>
         <source>Generate payment ID for integrated address</source>
-        <translation type="unfinished"></translation>
+        <translation>統合アドレス使うためにペイメントID作る</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="309"/>
@@ -694,7 +694,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="317"/>
         <source>Amount to receive</source>
-        <translation type="unfinished"></translation>
+        <translation>受ける金額</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="338"/>
@@ -793,27 +793,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="120"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>シードと鍵を見せて</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="163"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>残高を再スキャンする</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="172"/>
         <source>Error: </source>
-        <translation type="unfinished">エラー: </translation>
+        <translation>エラー: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="177"/>
         <source>Information</source>
-        <translation type="unfinished">情報</translation>
+        <translation>情報</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="178"/>
         <source>Sucessfully rescanned spent outputs</source>
-        <translation type="unfinished">使用済みアウトプットの再スキャンを完了しました</translation>
+        <translation>使用済みアウトプットの再スキャンを完了しました</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="193"/>
@@ -838,7 +838,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
         <source>Blockchain location</source>
-        <translation type="unfinished"></translation>
+        <translation>ブロックチェーンの場所</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="286"/>
@@ -848,37 +848,37 @@
     <message>
         <location filename="../pages/Settings.qml" line="573"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダを選んでください</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="582"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="585"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished"></translation>
+        <translation>エラー:　ファイルシステムは読み取り専用です</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="589"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>警告: デバイスに使用できるギガバイトはわずか１％です。ブロックチェーンには２％以上が必要です。</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="591"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>備考: デバイスに使用できるギガバイトはわずか１％です。ブロックチェーンには２％以上が必要です。</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="595"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished"></translation>
+        <translation>lmdbのフォルダ見つかりませんでした。新しいの作ります。</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="265"/>
@@ -919,7 +919,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>コネクトする</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="398"/>
@@ -939,7 +939,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="460"/>
         <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
-        <translation type="unfinished"></translation>
+        <translation>(例えば *:WARNING,net.p2p:DEBUG)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="476"/>
@@ -970,27 +970,27 @@
     <message>
         <location filename="../pages/Settings.qml" line="525"/>
         <source>Wallet seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットのシードとキー</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="527"/>
         <source>Secret view key</source>
-        <translation type="unfinished"></translation>
+        <translation>ビューキー (秘密)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="528"/>
         <source>Public view key</source>
-        <translation type="unfinished"></translation>
+        <translation>ビューキー (公開)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="529"/>
         <source>Secret spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>スペンドキー (秘密)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="530"/>
         <source>Public spend key</source>
-        <translation type="unfinished"></translation>
+        <translation>スペンドキー (公開)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="540"/>
@@ -1109,7 +1109,7 @@
     <message>
         <location filename="../components/StandardDialog.qml" line="135"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="120"/>
@@ -1137,22 +1137,22 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>遅い (.25倍の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>既定 (標準の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>早い (5倍の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="203"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>最速 (41.5倍の手数料)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="204"/>
@@ -1180,7 +1180,7 @@
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>このアドレスに送る</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1269,27 +1269,27 @@
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
         <source>All</source>
-        <translation type="unfinished">すべて</translation>
+        <translation>すべて</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>遅い (.25倍の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>既定 (標準の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="208"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>早い (5倍の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>最速 (41.5倍の手数料)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="308"/>
@@ -1380,7 +1380,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="499"/>
         <source>Sweep Unmixable</source>
-        <translation type="unfinished"></translation>
+        <translation>ミックス不能なアウトプットをスイープする</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="513"/>
@@ -1491,7 +1491,7 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="719"/>
-        <source>Connected daemon is not compatible with GUI. 
+        <source>Connected daemon is not compatible with GUI.
 Please upgrade or connect to another daemon</source>
         <translation>接続しているデーモンにGUIとの互換性がありません。
 デーモンを更新するか、他のデーモンに接続してください。</translation>
@@ -1580,7 +1580,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation type="unfinished"></translation>
+        <translation>モネロのブロックチェーンを初期化しますか？</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1753,7 +1753,7 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="394"/>
-        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
+        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in:
 %1</source>
         <translation>ViewOnlyウォレットが作成されました。これを開くには現在のウォレットを閉じて、&quot;ファイルからウォレットを開く&quot; オプションから、このViewOnlyウォレットを選択してください:
         %1</translation>
@@ -1880,7 +1880,8 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;br&gt;備考: 作る後でこのパスワードは復元できませんよ。 パスワードを忘れてしまった場合、ウォレットはウォレットの25語ニーモニックシードで復元する必要があります。&lt;br/&gt;&lt;br/&gt;
+                        &lt;b&gt;強力なパスワードを入力してください。&lt;/b&gt; (文字、番号、記号を使えます):</translation>
     </message>
 </context>
 <context>
