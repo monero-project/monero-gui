@@ -50,23 +50,23 @@ Item {
         z: 100
     }
 
-//    MouseArea {
-//        id: buttonArea
-//        anchors.fill: parent
+    MouseArea {
+        id: buttonArea
+        anchors.fill: parent
 
 
-//        onPressed: {
-//            buttonImage.x = buttonImage.x + 2
-//            buttonImage.y = buttonImage.y + 2
-//        }
-//        onReleased: {
-//            buttonImage.x = buttonImage.x - 2
-//            buttonImage.y = buttonImage.y - 2
-//        }
+        onPressed: {
+            buttonImage.x = buttonImage.x + 2
+            buttonImage.y = buttonImage.y + 2
+        }
+        onReleased: {
+            buttonImage.x = buttonImage.x - 2
+            buttonImage.y = buttonImage.y - 2
+        }
 
-//        onClicked: {
-//            parent.clicked(mouse)
-//        }
-//    }
+        onClicked: {
+            parent.clicked(mouse)
+        }
+    }
 
 }
