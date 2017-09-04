@@ -37,16 +37,6 @@ Rectangle {
     color: "#F0EEEE"
     property var currentHashRate: 0
 
-    function isDaemonLocal() {
-        var daemonAddress = appWindow.persistentSettings.daemon_address
-        if (daemonAddress === "")
-            return false
-        var daemonHost = daemonAddress.split(":")[0]
-        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
-            return true
-        return false
-    }
-
     /* main layout */
     ColumnLayout {
         id: mainLayout
