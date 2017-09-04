@@ -443,7 +443,6 @@ Rectangle {
                     id: verifySignatureLabel
                     fontSize: 14
                     text: qsTr("Signature") + translationManager.emptyString
-                    Layout.fillWidth: true
                 }
 
                 LineEdit {
@@ -451,7 +450,6 @@ Rectangle {
                     fontSize: mainLayout.lineEditFontSize
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignLeft
 
                     IconButton {
                         imageSource: "../images/copyToClipboard.png"
