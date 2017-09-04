@@ -457,7 +457,7 @@ Rectangle {
 
     Rectangle {
         id: tableRect
-        property int expandedHeight: parent.height - filterHeaderText.y - filterHeaderText.height - 17
+        property int expandedHeight: parent.height - filterHeaderText.y - filterHeaderText.height - 5
         property int middleHeight: parent.height - fromDatePicker.y - fromDatePicker.height - 17
         property int collapsedHeight: parent.height - transactionTypeDropdown.y - transactionTypeDropdown.height - 17
         anchors.left: parent.left
