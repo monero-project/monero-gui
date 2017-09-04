@@ -51,8 +51,6 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         anchors.margins: 40
-        anchors.bottomMargin: 10
-
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -188,7 +186,6 @@ Rectangle {
 
         Text {
             id: statusText
-            anchors.topMargin: 17
             text: qsTr("Status: not mining")
             textFormat: Text.RichText
             wrapMode: Text.Wrap
