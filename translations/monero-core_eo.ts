@@ -177,12 +177,12 @@
     <message>
         <location filename="../pages/History.qml" line="135"/>
         <source>Filter transaction history</source>
-        <translation>Filtru transakcia historio</translation>
+        <translation>Filtru transakcian historion</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="70"/>
         <source> selected: </source>
-        <translation> selektita: </translation>
+        <translation> elektita: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="276"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
-        <translation>Adresaron</translation>
+        <translation>Adresaro</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="305"/>
@@ -451,7 +451,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="132"/>
         <source>Enable mining when running on battery</source>
-        <translation>Ŝalti la minadon kiam uzantas baterion</translation>
+        <translation>Ŝalti la minadon kiam uziĝas baterio</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="142"/>
