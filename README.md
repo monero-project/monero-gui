@@ -56,7 +56,7 @@ See [LICENSE](LICENSE).
 
 Packages are available for
 
-* Arch Linux via AUR: [monero-core-git](https://aur.archlinux.org/packages/monero-core-git/)
+* Arch Linux via AUR: [monero-wallet-qt](https://aur.archlinux.org/packages/monero-wallet-qt/)
 
 Packaging for your favorite distribution would be a welcome contribution!
 
