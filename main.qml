@@ -243,7 +243,8 @@ ApplicationWindow {
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
-            middlePanel.checkPaymentClicked.disconnect(handleCheckPayment);
+            middlePanel.getTxProofClicked.disconnect(handleGetTxProof);
+            middlePanel.checkTxProofClicked.disconnect(handleCheckTxProof);
         }
 
         currentWallet = undefined;
@@ -275,7 +276,8 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
-        middlePanel.checkPaymentClicked.connect(handleCheckPayment);
+        middlePanel.getTxProofClicked.connect(handleGetTxProof);
+        middlePanel.checkTxProofClicked.connect(handleCheckTxProof);
 
 
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
@@ -755,38 +757,54 @@ ApplicationWindow {
         currentWallet.store();
     }
 
-    // called on "checkPayment"
-    function handleCheckPayment(address, txid, txkey) {
-        console.log("Checking payment: ")
-        console.log("\taddress: ", address,
-                    ", txid: ", txid,
-                    ", txkey: ", txkey);
+    // called on "getTxProof"
+    function handleGetTxProof(txid, address, message) {
+        console.log("Getting payment proof: ")
+        console.log("\ttxid: ", txid,
+                    ", address: ", address,
+                    ", message: ", message);
 
-        var result = walletManager.checkPayment(address, txid, txkey, currentDaemonAddress);
-        var results = result.split("|");
-        if (results.length < 4) {
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = "internal error";
-            informationPopup.icon = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
-            return
+        var result = currentWallet.getTxProof(txid, address, message);
+        informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
+        if (result.startsWith("error|")) {
+            var errorString = result.split("|")[1];
+            informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
+            informationPopup.icon = StandardIcon.Critical;
+        } else {
+            informationPopup.text  = result;
+            informationPopup.icon = StandardIcon.Critical;
         }
-        var success = results[0] == "true";
-        var received = results[1]
-        var height = results[2]
-        var error = results[3]
-        if (success) {
-            informationPopup.title  = qsTr("Payment check") + translationManager.emptyString;
+        informationPopup.onCloseCallback = null
+        informationPopup.open()
+    }
+
+    // called on "checkTxProof"
+    function handleCheckTxProof(txid, address, message, signature) {
+        console.log("Checking payment proof: ")
+        console.log("\ttxid: ", txid,
+                    ", address: ", address,
+                    ", message: ", message,
+                    ", signature: ", signature);
+
+        var result = currentWallet.checkTxProof(txid, address, message, signature);
+        var results = result.split("|");
+        if (results.length == 5 && results[0] == "true") {
+            var good = results[1] == "true";
+            var received = results[2];
+            var in_pool = results[3] == "true";
+            var confirmations = results[4];
+
+            informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
             informationPopup.icon = StandardIcon.Information
-            if (received > 0) {
+            if (!good) {
+                informationPopup.text = qsTr("Bad signature");
+                informationPopup.icon = StandardIcon.Critical;
+            } else if (received > 0) {
                 received = received / 1e12
-                if (height == 0) {
+                if (in_pool) {
                     informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(received);
                 }
                 else {
-                    var dCurrentBlock = currentWallet.daemonBlockChainHeight();
-                    var confirmations = dCurrentBlock - height
                     informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(received).arg(confirmations);
                 }
             }
@@ -796,9 +814,10 @@ ApplicationWindow {
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = error;
+            informationPopup.text = currentWallet.errorString;
             informationPopup.icon = StandardIcon.Critical
         }
+        informationPopup.onCloseCallback = null
         informationPopup.open()
     }
 

@@ -232,6 +232,9 @@ public:
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
+    Q_INVOKABLE QString checkTxKey(const QString &txid, const QString &tx_key, const QString &address);
+    Q_INVOKABLE QString getTxProof(const QString &txid, const QString &address, const QString &message) const;
+    Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 
