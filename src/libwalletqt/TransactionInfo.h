@@ -19,6 +19,7 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
     Q_PROPERTY(quint64 confirmations READ confirmations)
+    Q_PROPERTY(quint64 unlockTime READ unlockTime)
     Q_PROPERTY(QString hash READ hash)
     Q_PROPERTY(QDateTime timestamp READ timestamp)
     Q_PROPERTY(QString date READ date)
@@ -44,6 +45,7 @@ public:
     QString fee() const;
     quint64 blockHeight() const;
     quint64 confirmations() const;
+    quint64 unlockTime() const;
     //! transaction_id
     QString hash() const;
     QDateTime timestamp() const;

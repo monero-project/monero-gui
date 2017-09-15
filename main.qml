@@ -42,7 +42,7 @@ import "wizard"
 
 ApplicationWindow {
     id: appWindow
-
+    title: "Monero"
 
     property var currentItem
     property bool whatIsEnable: false
@@ -251,6 +251,12 @@ ApplicationWindow {
 
         viewOnly = currentWallet.viewOnly;
 
+        // New wallets saves the testnet flag in keys file.
+        if(persistentSettings.testnet != currentWallet.testnet) {
+            console.log("Using testnet flag from keys file")
+            persistentSettings.testnet = currentWallet.testnet;
+        }
+
         // connect handlers
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
@@ -296,7 +302,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if(isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -821,6 +827,7 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
+        walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
 
         if(typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);
@@ -1341,8 +1348,7 @@ ApplicationWindow {
         Qt.quit();
     }
 
-    function checkUpdates() {
-        var update = walletManager.checkUpdates("monero-gui", "gui")
+    function onWalletCheckUpdatesComplete(update) {
         if (update === "")
             return
         print("Update found: " + update)
@@ -1360,10 +1366,24 @@ ApplicationWindow {
         }
     }
 
+    function checkUpdates() {
+        walletManager.checkUpdatesAsync("monero-gui", "gui")
+    }
+
     Timer {
         id: updatesTimer
         interval: 3600*1000; running: true; repeat: true
         onTriggered: checkUpdates()
+    }
+
+    function isDaemonLocal() {
+        var daemonAddress = appWindow.persistentSettings.daemon_address
+        if (daemonAddress === "")
+            return false
+        var daemonHost = daemonAddress.split(":")[0]
+        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
+            return true
+        return false
     }
 
 }

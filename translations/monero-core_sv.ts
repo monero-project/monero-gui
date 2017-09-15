@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sv_SE">
+<TS version="2.0" language="sv_SE">
 <context>
     <name>AddressBook</name>
     <message>
@@ -14,85 +14,54 @@
         <translation>Adress</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="63"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="72"/>
+        <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
         <translation>QRKOD</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="94"/>
+        <location filename="../pages/AddressBook.qml" line="93"/>
         <source>4...</source>
         <translation>4...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="103"/>
+        <location filename="../pages/AddressBook.qml" line="102"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>Betalnings-ID &lt;font size=&apos;2&apos;&gt;(Valfritt)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="105"/>
-        <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;Betalnings-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Ett unikt användarnamn som används i &lt;br/&gt;adressboken. Det är inte&lt;br/&gt;information som skickas&lt;br/&gt;med överföringen</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="117"/>
+        <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Paste 64 hexadecimal characters</source>
         <translation>Klistra in 64 hexadecimala tecken</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="126"/>
+        <location filename="../pages/AddressBook.qml" line="123"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>Beskrivning &lt;font size=&apos;2&apos;&gt;(Valfritt)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="128"/>
-        <source>&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="139"/>
+        <location filename="../pages/AddressBook.qml" line="135"/>
         <source>Give this entry a name or description</source>
         <translation>Ge den här posten ett namn eller beskrivning</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="155"/>
+        <location filename="../pages/AddressBook.qml" line="151"/>
         <source>Add</source>
         <translation>Lägg till</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="160"/>
+        <location filename="../pages/AddressBook.qml" line="156"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="163"/>
+        <location filename="../pages/AddressBook.qml" line="159"/>
         <source>Invalid address</source>
         <translation>Ogiltig adress</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="167"/>
+        <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Can&apos;t create entry</source>
         <translation>Kan inte skapa post</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation type="obsolete">Beskrivning &lt;font size=&apos;2&apos;&gt;(Lokal databas)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>ADD</source>
-        <translation type="obsolete">LÄGG TILL</translation>
-    </message>
-    <message>
-        <source>Payment ID</source>
-        <translation type="obsolete">Betalnings-ID</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Beskrivning</translation>
     </message>
 </context>
 <context>
@@ -147,18 +116,6 @@
 <context>
     <name>DaemonManagerDialog</name>
     <message>
-        <source>Daemon doesn&apos;t appear to be running</source>
-        <translation type="obsolete">Noden verkar inte köras</translation>
-    </message>
-    <message>
-        <source>Start daemon</source>
-        <translation type="obsolete">Starta nod</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Avbryt</translation>
-    </message>
-    <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting Monero daemon in %1 seconds</source>
         <translation>Monero-nod startar om %1 sekunder</translation>
@@ -172,17 +129,6 @@
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
         <translation>Använd anpassade inställningar</translation>
-    </message>
-</context>
-<context>
-    <name>DaemonProgress</name>
-    <message>
-        <source>Synchronizing blocks %1/%2</source>
-        <translation type="obsolete">Synkroniserar block %1/%2</translation>
-    </message>
-    <message>
-        <source>Synchronizing blocks</source>
-        <translation type="obsolete">Synkroniserar block</translation>
     </message>
 </context>
 <context>
@@ -229,15 +175,6 @@
 <context>
     <name>History</name>
     <message>
-        <location filename="../pages/History.qml" line="228"/>
-        <location filename="../pages/History.qml" line="255"/>
-        <location filename="../pages/History.qml" line="341"/>
-        <location filename="../pages/History.qml" line="378"/>
-        <location filename="../pages/History.qml" line="412"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="135"/>
         <source>Filter transaction history</source>
         <translation>Filtrera överföringshistorik</translation>
@@ -248,63 +185,38 @@
         <translation> vald: </translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="147"/>
-        <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Totalt belopp för valda betalningar&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="281"/>
+        <location filename="../pages/History.qml" line="276"/>
         <source>Filter</source>
         <translation>Filtrera</translation>
     </message>
     <message>
-        <source>Incremental search</source>
-        <translation type="obsolete">Inkrementell sökning</translation>
-    </message>
-    <message>
-        <source>Search transfers for a given string</source>
-        <translation type="obsolete">Genomsök överföringar efter en given sträng</translation>
-    </message>
-    <message>
-        <source>Type search string</source>
-        <translation type="obsolete">Ange söksträng</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="185"/>
+        <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
         <translation>Skriv för inkrementell sökning...</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="226"/>
+        <location filename="../pages/History.qml" line="223"/>
         <source>Date from</source>
         <translation>Datum från</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="253"/>
-        <location filename="../pages/History.qml" line="410"/>
+        <location filename="../pages/History.qml" line="249"/>
+        <location filename="../pages/History.qml" line="403"/>
         <source>To</source>
         <translation>Till</translation>
     </message>
     <message>
-        <source>FILTER</source>
-        <translation type="obsolete">FILTRERA</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="319"/>
+        <location filename="../pages/History.qml" line="314"/>
         <source>Advanced filtering</source>
         <translation>Avancerad filtrering</translation>
     </message>
     <message>
-        <source>Advance filtering</source>
-        <translation type="obsolete">Avancerad filtrering</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="339"/>
+        <location filename="../pages/History.qml" line="334"/>
         <source>Type of transaction</source>
         <translation>Typ av överföring</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="376"/>
+        <location filename="../pages/History.qml" line="370"/>
         <source>Amount from</source>
         <translation>Belopp från</translation>
     </message>
@@ -354,8 +266,8 @@
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
-        <source>(%1/10 confirmations)</source>
-        <translation>(%1/10 bekräftelser)</translation>
+        <source>(%1/%2 confirmations)</source>
+        <translation>(%1/%2 bekräftelser)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="270"/>
@@ -391,46 +303,32 @@
         <translation>Saldo</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="135"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="178"/>
+        <location filename="../LeftPanel.qml" line="177"/>
         <source>Unlocked balance</source>
         <translation>Olåst saldo</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="181"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="281"/>
+        <location filename="../LeftPanel.qml" line="279"/>
         <source>Send</source>
         <translation>Skicka</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="331"/>
+        <location filename="../LeftPanel.qml" line="329"/>
         <source>Receive</source>
         <translation>Ta emot</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="332"/>
+        <location filename="../LeftPanel.qml" line="330"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <source>Verify payment</source>
-        <translation type="obsolete">Verifiera betalning</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="425"/>
+        <location filename="../LeftPanel.qml" line="423"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="355"/>
+        <location filename="../LeftPanel.qml" line="353"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
@@ -440,85 +338,73 @@
         <translation>Testnet</translation>
     </message>
     <message>
-        <source>T</source>
-        <translation type="obsolete">T</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="306"/>
+        <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
         <translation>Adressbok</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="307"/>
+        <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="356"/>
+        <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="378"/>
+        <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
         <translation>Avancerat</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="379"/>
+        <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="400"/>
+        <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
         <translation>Utvinning</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="401"/>
+        <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="424"/>
+        <location filename="../LeftPanel.qml" line="422"/>
         <source>Check payment</source>
         <translation>Kontrollera betalning</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="448"/>
+        <location filename="../LeftPanel.qml" line="446"/>
         <source>Sign/verify</source>
         <translation>Signera/verifiera</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="449"/>
+        <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="471"/>
+        <location filename="../LeftPanel.qml" line="469"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="472"/>
+        <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="282"/>
+        <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
         <translation>S</translation>
     </message>
 </context>
 <context>
     <name>MiddlePanel</name>
-    <message>
-        <source>Balance:</source>
-        <translation type="obsolete">Saldo:</translation>
-    </message>
-    <message>
-        <source>Unlocked Balance:</source>
-        <translation type="obsolete">Olåst saldo:</translation>
-    </message>
     <message>
         <location filename="../MiddlePanel.qml" line="46"/>
         <source>Balance</source>
@@ -541,30 +427,6 @@
         <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
         <translation>(endast tillgängligt för lokala noder)</translation>
-    </message>
-    <message>
-        <source>Mining helps the Monero network build resilience.&lt;br&gt;</source>
-        <translation type="obsolete">Utvinning hjälper Monero-nätverket att bli motståndskraftigt.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>The more mining is done, the harder it is to attack the network.&lt;br&gt;</source>
-        <translation type="obsolete">Ju mer monero som utvinns, desto svårare blir det att angripa nätverket.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Mining also gives you a small chance to earn some Monero.&lt;br&gt;</source>
-        <translation type="obsolete">Utvinning ger dig även en liten möjlighet att tjäna några Monero.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Your computer will search for Monero block solutions.&lt;br&gt;</source>
-        <translation type="obsolete">Din dator kommer att leta efter lösningar för Monero-block.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>If you find a block, you will get the associated reward.&lt;br&gt;</source>
-        <translation type="obsolete">Om du hittar ett block får du den tillhörande belöningen.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Mining helps the Monero network build resilience. The more mining is done, the harder it is to attack the network. Mining also gives you a small chance to earn some Monero. Your computer will search for Monero block solutions. If you find a block, you will get the associated reward.</source>
-        <translation type="obsolete">Utvinning hjälper Monero-nätverket att bli motståndskraftigt. Ju mer monero som utvinns, desto svårare blir det att angripa nätverket. Utvinning ger dig även en liten möjlighet att tjäna några Monero. Din dator kommer att leta efter lösningar för Monero-block. Om du hittar ett block får du den tillhörande belöningen.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
@@ -709,18 +571,6 @@
 <context>
     <name>PrivacyLevelSmall</name>
     <message>
-        <source>LOW</source>
-        <translation type="obsolete">LÅG</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="obsolete">MEDEL</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="obsolete">HÖG</translation>
-    </message>
-    <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="100"/>
         <source>Low</source>
         <translation>Låg</translation>
@@ -738,10 +588,6 @@
 </context>
 <context>
     <name>ProgressBar</name>
-    <message>
-        <source>Synchronizing blocks %1/%2</source>
-        <translation type="obsolete">Synkroniserar block %1/%2</translation>
-    </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="43"/>
         <source>Establishing connection...</source>
@@ -846,10 +692,6 @@
         <translation>Rensa</translation>
     </message>
     <message>
-        <source>ReadOnly wallet integrated address displayed here</source>
-        <translation type="obsolete">Integrerad adress för endast läsbar plånbok visas här</translation>
-    </message>
-    <message>
         <location filename="../pages/Receive.qml" line="285"/>
         <source>Generate payment ID for integrated address</source>
         <translation>Generera betalnings-ID för integrerad adress</translation>
@@ -862,7 +704,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="344"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicka för att generera ett slumpmässigt betalnings-id för en ny kund&lt;/p&gt; &lt;p&gt;Låt din kund läsa in den där QR-koden för att göra en betalning (om den kunden har programvara som stödjer inläsning av QR-koder).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt läsa in blockkedjan och tx-poolen för inkommande överföringar till dig oavsett du accepterar obekräftade överföringar eller inte. Det är troligt de blir bekräftade inom kort, men det är fortfarande en möjlighet att de inte blir det, så för större belopp vill du nog vänta på en eller fler bekräftelser.</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicka för att generera ett slumpmässigt betalnings-id för en ny kund&lt;/p&gt; &lt;p&gt;Låt din kund läsa in den där QR-koden för att göra en betalning (om den kunden har programvara som stödjer inläsning av QR-koder).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt läsa in blockkedjan och tx-poolen för inkommande överföringar till dig oavsett du accepterar obekräftade överföringar eller inte. Det är troligt de blir bekräftade inom kort, men det är fortfarande en möjlighet att de inte blir det, så för större belopp vill du nog vänta på en eller fler bekräftelser.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="388"/>
@@ -873,10 +715,6 @@
         <location filename="../pages/Receive.qml" line="222"/>
         <source>Payment ID</source>
         <translation>Betalnings-ID</translation>
-    </message>
-    <message>
-        <source>16 or 64 hexadecimal characters</source>
-        <translation type="obsolete">16 eller 64 hexadecimala tecken</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="309"/>
@@ -938,22 +776,6 @@
 <context>
     <name>Settings</name>
     <message>
-        <source>Click button to show seed</source>
-        <translation type="obsolete">Klicka på knappen för att visa frö</translation>
-    </message>
-    <message>
-        <source>Mnemonic seed: </source>
-        <translation type="obsolete">Minnesfrö:</translation>
-    </message>
-    <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation type="obsolete">Det är väldigt viktigt att skriva ner det, då detta är den enda backup du behöver för din plånbok.</translation>
-    </message>
-    <message>
-        <source>Show seed</source>
-        <translation type="vanished">Visa frö</translation>
-    </message>
-    <message>
         <location filename="../pages/Settings.qml" line="306"/>
         <source>Daemon address</source>
         <translation>Adress för nod</translation>
@@ -962,10 +784,6 @@
         <location filename="../pages/Settings.qml" line="72"/>
         <source>Manage wallet</source>
         <translation>Hantera plånbok</translation>
-    </message>
-    <message>
-        <source>Close current wallet and open wizard</source>
-        <translation type="obsolete">Stäng nuvarande plånbok och öppna guide</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="88"/>
@@ -1083,10 +901,6 @@
         <translation>Avbryt</translation>
     </message>
     <message>
-        <source>Wallet mnemonic seed</source>
-        <translation type="vanished">Plånbokens minnesfrö</translation>
-    </message>
-    <message>
         <location filename="../pages/Settings.qml" line="171"/>
         <location filename="../pages/Settings.qml" line="539"/>
         <source>Error</source>
@@ -1147,10 +961,6 @@
         <location filename="../pages/Settings.qml" line="355"/>
         <source>Username</source>
         <translation>Användarnamn</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Spara</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
@@ -1260,18 +1070,10 @@
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signeringsadress &lt;font size=&apos;2&apos;&gt;  ( Klistra in eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <source>SIGN</source>
-        <translation type="obsolete">SIGNERA</translation>
-    </message>
-    <message>
         <location filename="../pages/Sign.qml" line="172"/>
         <location filename="../pages/Sign.qml" line="343"/>
         <source>Or file:</source>
         <translation>Eller fil:</translation>
-    </message>
-    <message>
-        <source>SELECT</source>
-        <translation type="obsolete">VÄLJ</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="212"/>
@@ -1297,17 +1099,9 @@
         <translation>Meddelande att verifiera</translation>
     </message>
     <message>
-        <source>VERIFY</source>
-        <translation type="obsolete">VERIFIERA</translation>
-    </message>
-    <message>
         <location filename="../pages/Sign.qml" line="383"/>
         <source>Filename with message to verify</source>
         <translation>Filnamn med meddelande att verifiera</translation>
-    </message>
-    <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signeringsadress &lt;font size=&apos;2&apos;&gt;  ( Ange eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -1342,16 +1136,36 @@
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
+        <source>Slow (x0.25 fee)</source>
+        <translation>Långsam (x0.25 avgift)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <source>Default (x1 fee)</source>
+        <translation>Standard (x1 avgift)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <source>Fast (x5 fee)</source>
+        <translation>Snabb (x5 avgift)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="203"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation>Snabbast (x41.5 avgift)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>All</source>
         <translation>Alla</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>Sent</source>
         <translation>Skickade</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Received</source>
         <translation>Mottagna</translation>
     </message>
@@ -1362,10 +1176,6 @@
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
         <translation>&lt;b&gt;Kopiera adress till urklipp&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Skicka till samma mottagare&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
@@ -1409,18 +1219,6 @@
 <context>
     <name>TickDelegate</name>
     <message>
-        <source>LOW</source>
-        <translation type="obsolete">LÅG</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="obsolete">MEDEL</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="obsolete">HÖG</translation>
-    </message>
-    <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Normal</source>
         <translation>Normal</translation>
@@ -1449,46 +1247,14 @@
         <translation>Överföringsprioritet</translation>
     </message>
     <message>
-        <source>LOW</source>
-        <translation type="obsolete">LÅG</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="obsolete">HÖG</translation>
-    </message>
-    <message>
-        <source>or ALL</source>
-        <translation type="obsolete">eller ALLT</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="91"/>
         <source></source>
         <translation></translation>
     </message>
     <message>
-        <source>Privacy level</source>
-        <translation type="obsolete">Integritetsnivå</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="470"/>
+        <location filename="../pages/Transfer.qml" line="474"/>
         <source>Transaction cost</source>
         <translation>Överföringskostnad</translation>
-    </message>
-    <message>
-        <source>MEDIUM (x20 fee)</source>
-        <translation type="obsolete">MEDEL (x20 avgift)</translation>
-    </message>
-    <message>
-        <source>HIGH (x166 fee)</source>
-        <translation type="obsolete">HÖG (x166 avgift)</translation>
-    </message>
-    <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Adress &lt;font size=&apos;2&apos;&gt;  ( Klistra in eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;( Optional - saved to local wallet history )&lt;/font&gt;</source>
-        <translation type="obsolete">Beskrivning &lt;font size=&apos;2&apos;&gt;( Valfritt - spara i historik för lokal plånbok )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="66"/>
@@ -1506,126 +1272,110 @@
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Starta lokal nod&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <source>all</source>
-        <translation type="obsolete">allt</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="193"/>
+        <location filename="../pages/Transfer.qml" line="197"/>
         <source>Low (x1 fee)</source>
         <translation>Låg (x1 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="194"/>
+        <location filename="../pages/Transfer.qml" line="198"/>
         <source>Medium (x20 fee)</source>
         <translation>Medel (x20 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="195"/>
+        <location filename="../pages/Transfer.qml" line="199"/>
         <source>High (x166 fee)</source>
         <translation>Hög (x166 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="202"/>
+        <location filename="../pages/Transfer.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
         <translation>Långsam (x0.25 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="203"/>
+        <location filename="../pages/Transfer.qml" line="207"/>
         <source>Default (x1 fee)</source>
         <translation>Standard (x1 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="204"/>
+        <location filename="../pages/Transfer.qml" line="208"/>
         <source>Fast (x5 fee)</source>
         <translation>Snabb (x5 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="205"/>
+        <location filename="../pages/Transfer.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Snabbast (x41.5 avgift)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="233"/>
+        <location filename="../pages/Transfer.qml" line="237"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Adress &lt;font size=&apos;2&apos;&gt;  ( Klistra in eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="251"/>
+        <location filename="../pages/Transfer.qml" line="255"/>
         <source>QR Code</source>
         <translation>QR-kod</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="281"/>
+        <location filename="../pages/Transfer.qml" line="285"/>
         <source>Resolve</source>
         <translation>Lös</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="299"/>
+        <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Ingen giltig adress hittades vid denna OpenAlias-adress</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="304"/>
+        <location filename="../pages/Transfer.qml" line="308"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Adress hittad, men DNSSEC-signaturer kunde inte verifieras, så denna adress kan vara förfalskad</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="306"/>
+        <location filename="../pages/Transfer.qml" line="310"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Ingen giltig adress hittades vid denna OpenAlias-adress, men DNSSEC-signaturer kunde inte verifieras, så den kan vara förfalskad</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="309"/>
-        <location filename="../pages/Transfer.qml" line="312"/>
+        <location filename="../pages/Transfer.qml" line="313"/>
+        <location filename="../pages/Transfer.qml" line="316"/>
         <source>Internal error</source>
         <translation>Internt fel</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="315"/>
+        <location filename="../pages/Transfer.qml" line="319"/>
         <source>No address found</source>
         <translation>Ingen adress hittad</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="355"/>
+        <location filename="../pages/Transfer.qml" line="359"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Beskrivning &lt;font size=&apos;2&apos;&gt;( Valfritt )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="367"/>
+        <location filename="../pages/Transfer.qml" line="371"/>
         <source>Saved to local wallet history</source>
         <translation>Sparad till historik för lokal plånbok</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="397"/>
+        <location filename="../pages/Transfer.qml" line="401"/>
         <source>Send</source>
         <translation>Skicka</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="443"/>
+        <location filename="../pages/Transfer.qml" line="447"/>
         <source>Show advanced options</source>
         <translation>Visa avancerade inställningar</translation>
     </message>
     <message>
-        <source>Privacy level (ringsize 5)</source>
-        <translation type="obsolete">Integritetsnivå (ringstorlek 5)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="495"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>Sweep Unmixable</source>
         <translation>Städa bort omixbara</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="509"/>
+        <location filename="../pages/Transfer.qml" line="513"/>
         <source>Create tx file</source>
         <translation>Skapa tx-fil</translation>
-    </message>
-    <message>
-        <source>sign tx file</source>
-        <translation type="obsolete">signera tx-fil</translation>
-    </message>
-    <message>
-        <source>submit tx file</source>
-        <translation type="obsolete">sänd tx-fil</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="175"/>
@@ -1633,160 +1383,128 @@
         <translation>Allt</translation>
     </message>
     <message>
-        <source>Default (x4 fee)</source>
-        <translation type="vanished">Standard (x4 avgift)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="531"/>
+        <location filename="../pages/Transfer.qml" line="535"/>
         <source>Sign tx file</source>
         <translation>Signera tx-fil</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="545"/>
+        <location filename="../pages/Transfer.qml" line="549"/>
         <source>Submit tx file</source>
         <translation>Sänd tx-fil</translation>
     </message>
     <message>
-        <source>Rescan spent</source>
-        <translation type="vanished">Läs om spenderat</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="578"/>
-        <location filename="../pages/Transfer.qml" line="634"/>
+        <location filename="../pages/Transfer.qml" line="582"/>
+        <location filename="../pages/Transfer.qml" line="638"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <source>Error: </source>
-        <translation type="vanished">Fel:</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="640"/>
+        <location filename="../pages/Transfer.qml" line="644"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <source>Sucessfully rescanned spent outputs</source>
-        <translation type="vanished">Spenderade utgångar har lästs om</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
-        <location filename="../pages/Transfer.qml" line="628"/>
+        <location filename="../pages/Transfer.qml" line="571"/>
+        <location filename="../pages/Transfer.qml" line="632"/>
         <source>Please choose a file</source>
         <translation>Välj en fil</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="579"/>
+        <location filename="../pages/Transfer.qml" line="583"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Kan inte läsa in osignerade överföringar: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="586"/>
+        <location filename="../pages/Transfer.qml" line="590"/>
         <source>
 Number of transactions: </source>
         <translation>
 Antal överföringar: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="588"/>
+        <location filename="../pages/Transfer.qml" line="592"/>
         <source>
 Transaction #%1</source>
         <translation>
 Överföring #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
+        <location filename="../pages/Transfer.qml" line="593"/>
         <source>
 Recipient: </source>
         <translation>
 Mottagare:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="590"/>
+        <location filename="../pages/Transfer.qml" line="594"/>
         <source>
 payment ID: </source>
         <translation>
 betalnings-ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="591"/>
+        <location filename="../pages/Transfer.qml" line="595"/>
         <source>
 Amount: </source>
         <translation>
 Belopp: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="592"/>
+        <location filename="../pages/Transfer.qml" line="596"/>
         <source>
 Fee: </source>
         <translation>
 Avgift: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="593"/>
+        <location filename="../pages/Transfer.qml" line="597"/>
         <source>
 Ringsize: </source>
         <translation>
 Ringstorlek:</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="607"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Confirmation</source>
         <translation>Bekräftelse</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="635"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Kan inte sända överföring: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="641"/>
+        <location filename="../pages/Transfer.qml" line="645"/>
         <source>Money sent successfully</source>
         <translation>Lyckades skicka pengar</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="700"/>
-        <location filename="../pages/Transfer.qml" line="712"/>
+        <location filename="../pages/Transfer.qml" line="699"/>
+        <location filename="../pages/Transfer.qml" line="711"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Plånboken är inte ansluten till nod.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="715"/>
+        <location filename="../pages/Transfer.qml" line="714"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Ansluten nod är inte kompatibel med GUI.
 Uppgradera eller anslut till en annan nod</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="720"/>
+        <location filename="../pages/Transfer.qml" line="719"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>Väntar på att nod-synkronisering blir färdig</translation>
     </message>
     <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Adress &lt;font size=&apos;2&apos;&gt;  ( Skriv eller välj från &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbok&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="330"/>
+        <location filename="../pages/Transfer.qml" line="334"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Betalnings-ID &lt;font size=&apos;2&apos;&gt;( Valfritt )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="342"/>
+        <location filename="../pages/Transfer.qml" line="346"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16 eller 64 hexadecimala tecken</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
-        <translation type="obsolete">Beskrivning &lt;font size=&apos;2&apos;&gt;( En valfri beskrivning som sparas i den lokala adressboken om angiven )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>SEND</source>
-        <translation type="obsolete">SKICKA</translation>
-    </message>
-    <message>
-        <source>SWEEP UNMIXABLE</source>
-        <translation type="obsolete">STÄDA BORT OMIXBARA</translation>
     </message>
 </context>
 <context>
@@ -1795,10 +1513,6 @@ Uppgradera eller anslut till en annan nod</translation>
         <location filename="../pages/TxKey.qml" line="90"/>
         <source>Verify that a third party made a payment by supplying:</source>
         <translation>Verifiera att en tredje part genomfört en betalning genom att tillhandahålla:</translation>
-    </message>
-    <message>
-        <source>You can verify that a third party made a payment by supplying:</source>
-        <translation type="obsolete">Du kan verifiera att en tredjepart gjort en betalning genom att tillhandahålla:</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="95"/>
@@ -1841,26 +1555,14 @@ Uppgradera eller anslut till en annan nod</translation>
         <translation>Klistra in tx-nyckeln</translation>
     </message>
     <message>
-        <source> - the transaction ID,</source>
-        <translation type="obsolete"> - överföringens ID,</translation>
-    </message>
-    <message>
         <location filename="../pages/TxKey.qml" line="105"/>
         <source> - the secret transaction key supplied by the sender</source>
         <translation> - den hemliga överföringsnyckeln som tillhandahölls av avsändaren</translation>
     </message>
     <message>
-        <source> - the tx secret key supplied by the sender</source>
-        <translation type="obsolete"> - den hemliga tx-nyckeln som tillhandahölls av avsändaren</translation>
-    </message>
-    <message>
         <location filename="../pages/TxKey.qml" line="185"/>
         <source>Transaction key</source>
         <translation>Överföringsnyckel</translation>
-    </message>
-    <message>
-        <source>CHECK</source>
-        <translation type="obsolete">KONTROLLERA</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="216"/>
@@ -1871,8 +1573,9 @@ Uppgradera eller anslut till en annan nod</translation>
 <context>
     <name>WalletManager</name>
     <message>
+        <location filename="../src/libwalletqt/WalletManager.cpp" line="153"/>
         <source>Unknown error</source>
-        <translation type="vanished">Okänt fel</translation>
+        <translation>Okänt fel</translation>
     </message>
 </context>
 <context>
@@ -1886,10 +1589,6 @@ Uppgradera eller anslut till en annan nod</translation>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
         <translation>Kickstarta Monero-blockkedjan?</translation>
-    </message>
-    <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="obsolete">Det är väldigt viktigt att skriva ner det, då detta är den enda backup som du kommer behöva för din plånbok. Du kommer att ombedas bekräfta fröet på nästa sida, för att säkerställa att det har skrivits ner korrekt.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1927,14 +1626,6 @@ Uppgradera eller anslut till en annan nod</translation>
 </context>
 <context>
     <name>WizardCreateWallet</name>
-    <message>
-        <source>A new wallet has been created for you</source>
-        <translation type="obsolete">En ny plånbok har skapats åt dig</translation>
-    </message>
-    <message>
-        <source>This is the 25 word mnemonic for your wallet</source>
-        <translation type="obsolete">Detta är minnesfröet på 25 ord för din plånbok</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="100"/>
         <source>Create a new wallet</source>
@@ -1996,14 +1687,6 @@ Uppgradera eller anslut till en annan nod</translation>
         <translation>Språk</translation>
     </message>
     <message>
-        <source>Account name</source>
-        <translation type="obsolete">Kontonamn</translation>
-    </message>
-    <message>
-        <source>Seed</source>
-        <translation type="obsolete">Frö</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardFinish.qml" line="59"/>
         <source>Wallet name</source>
         <translation>Plånboksnamn</translation>
@@ -2027,14 +1710,6 @@ Uppgradera eller anslut till en annan nod</translation>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
         <source>Restore height</source>
         <translation>Höjd att återskapa</translation>
-    </message>
-    <message>
-        <source>An overview of your Monero configuration is below:</source>
-        <translation type="obsolete">En översikt av din Monero-konfiguration visas nedan:</translation>
-    </message>
-    <message>
-        <source>You’re all setup!</source>
-        <translation type="obsolete">Du är konfiguerad och klar!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
@@ -2105,14 +1780,6 @@ Uppgradera eller anslut till en annan nod</translation>
 <context>
     <name>WizardManageWalletUI</name>
     <message>
-        <source>This is the name of your wallet. You can change it to a different name if you’d like:</source>
-        <translation type="obsolete">Det här är namnet på din plånbok. Du kan ändra det till ett annat namn om du önskar:</translation>
-    </message>
-    <message>
-        <source>Restore height</source>
-        <translation type="obsolete">Höjd att återskapa</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
         <source>Your wallet is stored in</source>
         <translation>Din plånbok lagras i</translation>
@@ -2161,10 +1828,6 @@ Uppgradera eller anslut till en annan nod</translation>
 <context>
     <name>WizardMemoTextInput</name>
     <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="obsolete">Det är väldigt viktigt att skriva ner det, då detta är den enda backup som du kommer behöva för din plånbok. Du kommer att ombedas bekräfta fröet på nästa sida, för att säkerställa att det har skrivits ner korrekt.</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
         <translation>Ange ditt 25-ords minnesfrö</translation>
@@ -2203,22 +1866,6 @@ Uppgradera eller anslut till en annan nod</translation>
         <translation>Öppna en plånbok från fil</translation>
     </message>
     <message>
-        <source>This is my first time, I want to create a new account</source>
-        <translation type="obsolete">Det här är min första gång, jag vill skapa ett nytt konto</translation>
-    </message>
-    <message>
-        <source>I want to recover my account from my 25 word seed</source>
-        <translation type="obsolete">Jag vill återskapa mitt konto från mitt 25-ords frö</translation>
-    </message>
-    <message>
-        <source>I want to open a wallet from file</source>
-        <translation type="obsolete">Jag vill öppna en plånbok från fil</translation>
-    </message>
-    <message>
-        <source>Please setup daemon address below.</source>
-        <translation type="obsolete">Ställ in adress för nod nedan.</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardOptions.qml" line="295"/>
         <source>Testnet</source>
         <translation>Testnet</translation>
@@ -2231,28 +1878,6 @@ Uppgradera eller anslut till en annan nod</translation>
 </context>
 <context>
     <name>WizardPassword</name>
-    <message>
-        <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation type="obsolete">Nu när din plånbok har skapats, ange ett lösenord för plånboken</translation>
-    </message>
-    <message>
-        <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation type="obsolete">Nu när din plånbok har återskapats, ange ett lösenord för plånboken</translation>
-    </message>
-    <message>
-        <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation type="obsolete">Notera att detta lösenord inte kan återskapas, och om det glöms bort måste du återskapa plånboken från minnesfröet som du just fick&lt;br/&gt;&lt;br/&gt;
-                        Ditt lösenord kommer att användas för att skydda din plånbok och för att bekräfta handlingar, så säkerställ att ditt lösenord är tillräckligt säkert.</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="obsolete">Lösenord</translation>
-    </message>
-    <message>
-        <source>Confirm password</source>
-        <translation type="obsolete">Bekräfta lösenord</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
@@ -2283,14 +1908,6 @@ Uppgradera eller anslut till en annan nod</translation>
 <context>
     <name>WizardRecoveryWallet</name>
     <message>
-        <source>We&apos;re ready to recover your account</source>
-        <translation type="obsolete">Vi är redo att återskapa ditt konto</translation>
-    </message>
-    <message>
-        <source>Please enter your 25 word private key</source>
-        <translation type="obsolete">Ange ditt 25-ords privata nyckel</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="112"/>
         <source>Restore wallet</source>
         <translation>Återskapa plånbok</translation>
@@ -2298,10 +1915,6 @@ Uppgradera eller anslut till en annan nod</translation>
 </context>
 <context>
     <name>WizardWelcome</name>
-    <message>
-        <source>Welcome</source>
-        <translation type="obsolete">Välkommen</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="79"/>
         <source>Welcome to Monero!</source>
@@ -2316,42 +1929,38 @@ Uppgradera eller anslut till en annan nod</translation>
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="323"/>
-        <location filename="../main.qml" line="491"/>
-        <location filename="../main.qml" line="503"/>
-        <location filename="../main.qml" line="553"/>
-        <location filename="../main.qml" line="565"/>
-        <location filename="../main.qml" line="607"/>
-        <location filename="../main.qml" line="616"/>
-        <location filename="../main.qml" line="668"/>
-        <location filename="../main.qml" line="706"/>
-        <location filename="../main.qml" line="736"/>
+        <location filename="../main.qml" line="329"/>
+        <location filename="../main.qml" line="497"/>
+        <location filename="../main.qml" line="509"/>
+        <location filename="../main.qml" line="559"/>
+        <location filename="../main.qml" line="571"/>
+        <location filename="../main.qml" line="613"/>
+        <location filename="../main.qml" line="622"/>
+        <location filename="../main.qml" line="674"/>
+        <location filename="../main.qml" line="712"/>
+        <location filename="../main.qml" line="742"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="324"/>
+        <location filename="../main.qml" line="330"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Kunde inte öppna plånbok:</translation>
     </message>
     <message>
-        <source>Synchronizing blocks %1 / %2</source>
-        <translation type="obsolete">Synkroniserar block %1 / %2</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="493"/>
+        <location filename="../main.qml" line="499"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Kan inte skapa överföring: Felaktig nod-version: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="504"/>
-        <location filename="../main.qml" line="617"/>
+        <location filename="../main.qml" line="510"/>
+        <location filename="../main.qml" line="623"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Inga omixbara utgångar att städa bort</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="520"/>
-        <location filename="../main.qml" line="631"/>
+        <location filename="../main.qml" line="526"/>
+        <location filename="../main.qml" line="637"/>
         <source>
 
 Amount: </source>
@@ -2360,22 +1969,14 @@ Amount: </source>
 Belopp: </translation>
     </message>
     <message>
-        <source>
-
-Mixin: </source>
-        <translation type="obsolete">
-
-Inmixning:</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="523"/>
+        <location filename="../main.qml" line="529"/>
         <source>
 Number of transactions: </source>
         <translation>
 Antal överföringar: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="524"/>
+        <location filename="../main.qml" line="530"/>
         <source>
 
 Description: </source>
@@ -2384,111 +1985,111 @@ Description: </source>
 Beskrivning: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="554"/>
+        <location filename="../main.qml" line="560"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Beloppet är felaktigt: borde varit mellan %1 och %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="678"/>
+        <location filename="../main.qml" line="684"/>
         <source>Money sent successfully: %1 transaction(s) </source>
         <translation>Lyckades skicka pengar: %1 överföring(ar)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="718"/>
+        <location filename="../main.qml" line="724"/>
         <source>Payment check</source>
         <translation>Betalningskontroll</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="495"/>
-        <location filename="../main.qml" line="608"/>
+        <location filename="../main.qml" line="501"/>
+        <location filename="../main.qml" line="614"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Kan inte skapa överföring: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="516"/>
-        <location filename="../main.qml" line="629"/>
+        <location filename="../main.qml" line="522"/>
+        <location filename="../main.qml" line="635"/>
         <source>Confirmation</source>
         <translation>Bekräftelse</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="518"/>
+        <location filename="../main.qml" line="524"/>
         <source>
 Address: </source>
         <translation>
 Adress: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="519"/>
+        <location filename="../main.qml" line="525"/>
         <source>
 Payment ID: </source>
         <translation>
 Betalnings-ID: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="521"/>
-        <location filename="../main.qml" line="632"/>
+        <location filename="../main.qml" line="527"/>
+        <location filename="../main.qml" line="638"/>
         <source>
 Fee: </source>
         <translation>
 Avgift: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="355"/>
+        <location filename="../main.qml" line="361"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>Olåst saldo (~%1 min)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="566"/>
+        <location filename="../main.qml" line="572"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Otillräckliga tillgångar. Olåst saldo: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="669"/>
+        <location filename="../main.qml" line="675"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Kunde inte skicka pengar: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="672"/>
+        <location filename="../main.qml" line="678"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="413"/>
+        <location filename="../main.qml" line="419"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Väntar på att noden ska avsluta...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="438"/>
+        <location filename="../main.qml" line="444"/>
         <source>Daemon failed to start</source>
         <translation>Noden misslyckades att starta</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="439"/>
+        <location filename="../main.qml" line="445"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Kontrollera din plånbok och nod-logg efter fel. Du kan också försöka starta %1 manuellt.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="978"/>
+        <location filename="../main.qml" line="985"/>
         <source>Please wait...</source>
         <translation>Vänta...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1002"/>
+        <location filename="../main.qml" line="1009"/>
         <source>Program setup wizard</source>
         <translation>Konfigurationsguide</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1017"/>
+        <location filename="../main.qml" line="1024"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1065"/>
+        <location filename="../main.qml" line="1072"/>
         <source>send to the same destination</source>
         <translation>skicka till samma mottagare</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="522"/>
+        <location filename="../main.qml" line="528"/>
         <source>
 
 Ringsize: </source>
@@ -2497,79 +2098,75 @@ Ringsize: </source>
 Ringstorlek:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="723"/>
+        <location filename="../main.qml" line="729"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Denna adress tog emot %1 monero, men överföringen har ännu inte bekräftats</translation>
     </message>
     <message>
-        <source>This address received %1 monero, with %2 confirmations</source>
-        <translation type="obsolete">Denna adress tog emot %1 monero, med %2 bekräftelser</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="732"/>
+        <location filename="../main.qml" line="738"/>
         <source>This address received nothing</source>
         <translation>Denna adress tog emot ingenting</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="678"/>
+        <location filename="../main.qml" line="684"/>
         <source>Transaction saved to file: %1</source>
         <translation>Överföring sparad till fil: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="355"/>
+        <location filename="../main.qml" line="361"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>Olåst saldo (väntar på block)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="355"/>
+        <location filename="../main.qml" line="361"/>
         <source>Unlocked balance</source>
         <translation>Olåst saldo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="407"/>
+        <location filename="../main.qml" line="413"/>
         <source>Waiting for daemon to start...</source>
         <translation>Vänta på att nod startar...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="517"/>
-        <location filename="../main.qml" line="630"/>
+        <location filename="../main.qml" line="523"/>
+        <location filename="../main.qml" line="636"/>
         <source>Please confirm transaction:
 </source>
         <translation>Bekräfta överföring:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="728"/>
+        <location filename="../main.qml" line="734"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Denna adress tog emot %1 monero, med %2 bekräftelse(r).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="744"/>
+        <location filename="../main.qml" line="750"/>
         <source>Balance (syncing)</source>
         <translation>Saldo (synkroniserar)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="744"/>
+        <location filename="../main.qml" line="750"/>
         <source>Balance</source>
         <translation>Saldo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1317"/>
+        <location filename="../main.qml" line="1324"/>
         <source>Daemon is running</source>
         <translation>Nod körs</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1318"/>
+        <location filename="../main.qml" line="1325"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>Noden kommer fortfarande att köras i bakgrunden när applikationen stängts ner.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1320"/>
+        <location filename="../main.qml" line="1327"/>
         <source>Stop daemon</source>
         <translation>Stoppa nod</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1355"/>
+        <location filename="../main.qml" line="1361"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Ny version av monero-wallet-gui finns tillgänglig: %1&lt;br&gt;%2</translation>
     </message>

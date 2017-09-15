@@ -301,6 +301,8 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_sv.ts \ # Swedish
                 $$PWD/translations/monero-core_zh-cn.ts \ # Chinese (Simplified-China)
                 $$PWD/translations/monero-core_zh-tw.ts \ # Chinese (Traditional-Taiwan)
+                $$PWD/translations/monero-core_he.ts \ # Hebrew
+                $$PWD/translations/monero-core_ko.ts \ # Korean
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin

@@ -119,6 +119,8 @@
         <file>lang/flags/taiwan.png</file>
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
+        <file>lang/flags/israel.png</file>
+        <file>lang/flags/south_korea.png</file>        
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
@@ -139,5 +141,6 @@
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
         <file>components/MobileHeader.qml</file>
+        <file>components/TextBlock.qml</file>
     </qresource>
 </RCC>
