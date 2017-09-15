@@ -1494,7 +1494,6 @@ Bonvolu plibonigi aŭ konekti al alia demono</translation>
         <translation></translation>
     </message>
     <message>
-<<<<<<< HEAD
         <location filename="../pages/Transfer.qml" line="704"/>
         <location filename="../pages/Transfer.qml" line="716"/>
         <source>Wallet is not connected to daemon.</source>
