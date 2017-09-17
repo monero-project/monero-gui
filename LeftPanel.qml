@@ -477,6 +477,14 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
+            Rectangle {
+                visible: settingsButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
 
         }
 
