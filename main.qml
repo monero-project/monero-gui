@@ -912,13 +912,25 @@ ApplicationWindow {
         id: transactionConfirmationPopup
         onAccepted: {
             close();
-
-            // Save transaction to file if view only wallet
-            if(viewOnly) {
-                saveTxDialog.open();
-                return;
-            } else
-                handleTransactionConfirmed()
+            transactionConfirmationPasswordDialog.onAcceptedCallback = function() {
+                if(appWindow.password === transactionConfirmationPasswordDialog.password){
+                    // Save transaction to file if view only wallet
+                    if(viewOnly) {
+                        saveTxDialog.open();
+                    } else {
+                        handleTransactionConfirmed()
+                    }
+                } else {
+                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text = qsTr("Wrong password");
+                    informationPopup.open()
+                    informationPopup.onCloseCallback = function() {
+                        transactionConfirmationPasswordDialog.open()
+                    }
+                }
+                transactionConfirmationPasswordDialog.password = ""
+            }
+            transactionConfirmationPasswordDialog.open()
         }
     }
 
@@ -966,6 +978,15 @@ ApplicationWindow {
             rootItem.state = "wizard"
         }
 
+    }
+
+    PasswordDialog {
+        id: transactionConfirmationPasswordDialog
+        property var onAcceptedCallback
+        onAccepted: {
+            if (onAcceptedCallback())
+                onAcceptedCallback();
+        }
     }
 
     DaemonManagerDialog {
