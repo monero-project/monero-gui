@@ -1,13 +1,13 @@
 <html>
 <head>
-<title>Monero GUI Wallet Beta 2</title>
+<title>Monero Helium Hydra GUI Wallet</title>
 </head>
 
 <body style="font-family: Arial, Helvetica, sans-serif">
-<h1>Monero GUI Wallet Beta 2</h1>
+<h1>Monero Helium Hydra GUI Wallet</h1>
 
   <p>Copyright (c) 2014-2017, The Monero Project<br>
-  Date: June 28, 2017</p>
+  Date: September 19, 2017</p>
 
 <h2>Preface</h2>
 
@@ -23,8 +23,8 @@
 
 <h2>Content of the Package</h2>
 
-  <p>You just installed the Beta 2 of the <i>Monero GUI Wallet</i> for Windows, more exact version 0.10.3.1. The wallet
-  enables you to send and receive moneroj in a secure and very private way.
+  <p>You just installed the <i>Monero GUI wallet</i> for Windows, release Helium Hydra, more exact version 0.11.0.0.
+  The wallet enables you to send and receive Moneroj in a secure and very private way.
   </p>
 
   <p>Also included is the <i>Monero daemon</i>, so you have everything now to run a so-called <i>full node</i>
@@ -33,7 +33,22 @@
 
   <p>For checking whether there are already newer versions of this package you can go to the
   <a href="https://getmonero.org/downloads/">Downloads</a> page on <a href="https://getmonero.org/home">getmonero.org</a>,
-  the official Monero site.</p> 
+  the official Monero site.</p>
+
+<h2>Upgrading</h2>
+  
+  <p>If you have already a release of the GUI wallet software on your computer that was installed with the help
+  of this installer (in an earlier version), upgrading is easy: Just run the new installer; there is no need to
+  uninstall the old Monero release first.</p>
+
+  <p>But if you run a release of the GUI wallet software that you downloaded as a .zip file and unzipped into a
+  folder, if you "installed it manually" so to say, don't try to upgrade by pointing the installer to that folder,
+  because this might lead to problems e.g. if you try to uninstall everything later.</p>
+  
+  <p>It's better to let the installer put the software into another folder and then delete the old folder, either
+  outright or after moving away any additional files that you may have stored there. (If you did not change
+  default locations for wallets and the blockchain, you don't have to worry about them, they won't be in that
+  particular folder, but elsewhere "in safety".)</p>
 
 <h2>Access to the Blockchain</h2>
 
@@ -46,7 +61,7 @@
   provides the most security and privacy possible for you.</p>
 
   <p>However if your Internet access makes it difficult to run a full node, or if you have simply no room to store
-  the blockchain locally (over 17 GB in summer 2017, and of course growing), you can compromise and try to connect
+  the blockchain locally (over 30 GB in fall 2017, and of course growing), you can compromise and try to connect
   to a remote node. One way of finding such a node is checking
   <a href="https://moneroworld.com/pages/nodes.html">this page</a>.
   </p>
@@ -90,20 +105,12 @@
 
 <h2>Troubleshooting</h2>
 
-  <p>The Monero software and especially the GUI wallet are "work in progress", as you can expect seeing the word
-  <i>Beta</i> in the name of the package, and sometimes things go wrong.</p>
+  <p>The Monero software and especially the GUI wallet are "work in progress", and sometimes things go wrong.</p>
 
   <p>Please note that despite any technical problems that you may encounter your moneroj are almost always safe: You may
   not be able to move them or you even may not see how many you currently have, but you most probably won't loose any.
   But do remember that the seed needed to re-create the wallet <b>is</b> critical, however: <b>Never loose your
   seed!</b></p>
-
-  <p>There is a <b>bug</b> in this beta of the GUI wallet that triggers if it is installed in a path that contains spaces /
-  blank characters, like the default location for Windows programs <i>C:\Program Files</i> unfortunately does.
-  Symptoms are problems in the communication between the wallet and the daemon, e.g. the wallet not "seeing" the
-  daemon and then not knowing whether it is "synchronized" with the network and thus ready to work or not. You can
-  avoid these problems by starting the daemon yourself, with the help of the <i>Monero Daemon</i> icon in the
-  <i>Utilities</i> sub-folder of the Monero program group.</p>
 
   <p>In the <i>Utilities</i> sub-folder there are several more icons that may help you to solve problems.
   These are the icons with a <i>x</i> in front and the name <i>(in parenthesis)</i> to make them visually stand
@@ -142,15 +149,15 @@
     <tr>
       <td><i>x (Check GUI Wallet Log)</i></td>
       <td>Open the log with status and error messages of the GUI wallet program in Notepad;
-      experienced people have a chance to diagnose technical problems with the wallet by looking at the last few lines
-      of this log</td>
+      experienced people have a chance to diagnose technical problems with the wallet,
+      usually by looking at the last few lines of this log</td>
     </tr>
 
     <tr>
       <td><i>x (Check Daemon Log)</i></td>
       <td>
         Open the log with status and error messages of the daemon in Notepad; again, the last few
-        lines of this (possible very long) log are the most important for troubleshooting
+        lines of this (possible very long) log are usually the most important for troubleshooting
       </td>
     </tr>
 
