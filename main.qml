@@ -1162,6 +1162,29 @@ ApplicationWindow {
         }
     }
 
+    NewPasswordDialog {
+        id: newPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
+        onAccepted: {
+            if (currentWallet.setPassword(newPasswordDialog.password)) {
+                appWindow.walletPassword = newPasswordDialog.password;
+                informationPopup.title = qsTr("Information") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
+                informationPopup.icon  = StandardIcon.Information;
+            } else {
+                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                informationPopup.text  = qsTr("Error: ") + currentWallet.errorString;
+                informationPopup.icon  = StandardIcon.Critical;
+            }
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
+        }
+        onRejected: {
+        }
+    }
+
     DaemonManagerDialog {
         id: daemonManagerDialog
         onRejected: {
