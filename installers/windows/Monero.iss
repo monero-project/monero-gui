@@ -341,7 +341,10 @@ Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 ; and insists on displaying ALL icons on one single level
 Name: "{group}\Utilities\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}
 Name: "{group}\Utilities\Read Me"; Filename: "{app}\ReadMe.htm"
-Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"
+
+; CLI wallet: Needs a working directory ("Start in:") set in the icon, because with no such directory set
+; it tries to create new wallets without a path given in the probably non-writable program folder and will abort with an error
+Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"; WorkingDir: "{userdocs}\Monero\wallets"
 
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
