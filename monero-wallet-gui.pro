@@ -91,7 +91,8 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
         -lepee \
         -lunbound \
-        -leasylogging
+        -leasylogging \
+        -lreadline \
 }
 
 
