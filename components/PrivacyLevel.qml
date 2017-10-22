@@ -95,7 +95,7 @@ Item {
                     }
                 }
 
-                if(index !== -1) {
+                if(index !== -1 && index !== 4) {
                     fillRect.width = Qt.binding(function(){ return row.positions[index].currentX + row.x })
                     item.fillLevel = index
                 }
