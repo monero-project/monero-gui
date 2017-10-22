@@ -10,6 +10,11 @@ Copyright (c) 2014-2017, The Monero Project
 - Github: [https://github.com/monero-project/monero-core](https://github.com/monero-project/monero-core)
 - IRC: [#monero-dev on Freenode](irc://chat.freenode.net/#monero-dev)
 
+## Vulnerability Response
+
+- Our [Vulnerability Response Process](https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md) encourages responsible disclosure
+- We are also available via [HackerOne](https://hackerone.com/monero)
+
 ## Introduction
 
 Monero is a private, secure, untraceable, decentralised digital currency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
