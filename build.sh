@@ -54,7 +54,7 @@ if [[ $platform == *bsd* ]]; then
 fi
 
 # build libwallet
-$SHELL get_libwallet_api.sh $BUILD_TYPE
+./get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
 $MAKE -C src/zxcvbn-c || exit
