@@ -45,7 +45,7 @@ Rectangle {
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [4,5,6,7,8,9,10,11,12,13,14,15,20,25];
+        var scaleToMixinCount = [4,5,6,7,8,9,10,11,12,14,16,18,21,25];
         if (scaleValue < scaleToMixinCount.length) {
             return scaleToMixinCount[scaleValue];
         } else {
