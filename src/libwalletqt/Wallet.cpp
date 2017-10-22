@@ -643,6 +643,12 @@ Wallet::~Wallet()
     delete m_history;
     m_history = NULL;
     //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
+    if(status() == Status_Critical)
+        qDebug("Not storing wallet cache");
+    else if( m_walletImpl->store(""))
+        qDebug("Wallet cache stored successfully");
+    else
+        qDebug("Error storing wallet cache");
     delete m_walletImpl;
     m_walletImpl = NULL;
     qDebug("m_walletImpl deleted");
