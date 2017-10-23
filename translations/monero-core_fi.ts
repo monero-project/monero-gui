@@ -16,12 +16,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
-        <translation type="unfinished"></translation>
+        <translation>QR koodi</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>4...</source>
-        <translation type="unfinished"></translation>
+        <translation>4...</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="102"/>
@@ -31,37 +31,37 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Liitä 64 heksadesimaalimerkkiä</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="123"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuvaus &lt;font size=&apos;2&apos;&gt;(Valinnainen)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="135"/>
         <source>Give this entry a name or description</source>
-        <translation type="unfinished"></translation>
+        <translation>Anna tähän nimi tai kuvaus</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="151"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="156"/>
         <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
+        <translation>Virhe</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="159"/>
         <source>Invalid address</source>
-        <translation type="unfinished"></translation>
+        <translation>Virheellinen osoite</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="163"/>
         <source>Can&apos;t create entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei voida lisätä merkintää</translation>
     </message>
 </context>
 <context>
@@ -105,12 +105,12 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="117"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sulje</translation>
     </message>
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation type="unfinished"></translation>
+        <translation>Käsky + enter (esim. help)</translation>
     </message>
 </context>
 <context>
@@ -118,17 +118,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting Monero daemon in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistetään Monero taustaohjelma %1 sekunnin kuluttua</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Käynnistä taustaohjelma (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Käytä omavalintaisia asetuksia</translation>
     </message>
 </context>
 <context>
@@ -187,12 +187,12 @@
     <message>
         <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirjoita hakeaksesi...</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="276"/>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtteri</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="223"/>
@@ -248,7 +248,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Destinations:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kohteet:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="78"/>
@@ -268,17 +268,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
         <source>(%1/10 confirmations)</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1/10 vahvistusta)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="270"/>
         <source>UNCONFIRMED</source>
-        <translation type="unfinished"></translation>
+        <translation>VAHVISTAMATON</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="271"/>
         <source>PENDING</source>
-        <translation type="unfinished"></translation>
+        <translation>VIREILLÄ</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="300"/>
@@ -336,47 +336,47 @@
     <message>
         <location filename="../LeftPanel.qml" line="93"/>
         <source>Testnet</source>
-        <translation type="unfinished">Testnet</translation>
+        <translation>Testnet</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
-        <translation type="unfinished"></translation>
+        <translation>Osoitekirja</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="305"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="354"/>
         <source>H</source>
-        <translation></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Edistynyt</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="377"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Louhinta</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="399"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="422"/>
         <source>Check payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarkista maksu</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="446"/>
@@ -386,17 +386,17 @@
     <message>
         <location filename="../LeftPanel.qml" line="470"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="280"/>
         <source>S</source>
-        <translation></translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="447"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="469"/>
@@ -409,12 +409,12 @@
     <message>
         <location filename="../MiddlePanel.qml" line="46"/>
         <source>Balance</source>
-        <translation type="unfinished">Saldo</translation>
+        <translation>Saldo</translation>
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="48"/>
         <source>Unlocked Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Lukittamaton Saldo</translation>
     </message>
 </context>
 <context>
@@ -422,17 +422,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="73"/>
         <source>Solo mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Soololouhinta</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="80"/>
         <source>(only available for local daemons)</source>
-        <translation type="unfinished"></translation>
+        <translation>(saatavilla vain paikallisille taustaohjelmille)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation type="unfinished"></translation>
+        <translation>Louhinta tietokoneellasi auttaa vahvistamaan Moneroverkkoa. Mitä enemmän ihmiset louhivat, sitä vaikeampaa on hyökätä verkkoon ja jokainen pieni osa auttaa.&lt;br&gt; &lt;br&gt;Louhinta myös antaa sinulle pienen mahdollisuuden ansaita vähän Moneroa. Tietokoneesi luo haketta etsien lohkon ratkaisuja. Jos löydät lohkon, saat siihen liittyvän palkinnon. Onnea!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -442,17 +442,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="104"/>
         <source>(optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>(valinnainen)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="116"/>
         <source>Background mining (experimental)</source>
-        <translation type="unfinished"></translation>
+        <translation>Louhinta taustalla (kokeellinen)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="132"/>
         <source>Enable mining when running on battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Salli louhinta akkuvirralla</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="142"/>
@@ -462,12 +462,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="151"/>
         <source>Start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Aloita louhinta</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Error starting mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Virhe louhinnan aloittamisessa</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="162"/>
