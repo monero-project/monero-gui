@@ -116,7 +116,7 @@ Item {
 
         Row {
             id: row2
-            spacing: ((bar.width - 8) / 2) / 4
+            spacing: bar.width / 14
 
             Repeater {
                 model: 4
@@ -125,7 +125,7 @@ Item {
                     id: delegateItem2
                     currentX: x + row2.x
                     currentIndex: index
-                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    mainTick: currentIndex === 0
                     Component.onCompleted: {
                         row.positions[currentIndex] = delegateItem2
                     }
@@ -135,7 +135,7 @@ Item {
 
         Row {
             id: row1
-            spacing: ((bar.width - 8) / 2) / 10
+            spacing: bar.width / 14
 
             Repeater {
                 model: 10
@@ -144,7 +144,7 @@ Item {
                     id: delegateItem1
                     currentX: x + row1.x
                     currentIndex: index + 4
-                    mainTick: currentIndex === 0 || currentIndex === 3 || currentIndex === 13
+                    mainTick: currentIndex === 13
                     Component.onCompleted: {
                         row.positions[currentIndex] = delegateItem1
                     }
