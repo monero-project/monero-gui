@@ -44,23 +44,10 @@ ColumnLayout {
     function onPageClosed() {
         // Save settings used in open from file.
         // other wizard settings are saved on last page in applySettings()
-        appWindow.persistentSettings.testnet = wizard.settings["testnet"]
-        appWindow.persistentSettings.daemon_address = wizard.settings["daemon_address"]
         appWindow.persistentSettings.language = wizard.settings.language
         appWindow.persistentSettings.locale   = wizard.settings.locale
 
         return true;
-    }
-
-    function saveDaemonAddress() {
-        wizard.settings["daemon_address"] = daemonAddress.text
-        wizard.settings["testnet"] = testNet.checked
-    }
-
-    QtObject {
-        id: d
-        readonly property string daemonAddressTestnet : "localhost:38081"
-        readonly property string daemonAddressMainnet : "localhost:18081"
     }
 
     Behavior on opacity {
@@ -139,7 +126,6 @@ ColumnLayout {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
-                        page.saveDaemonAddress()
                         page.createWalletClicked()
                     }
                 }
@@ -182,7 +168,6 @@ ColumnLayout {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
-                        page.saveDaemonAddress()
                         page.recoveryWalletClicked()
                     }
                 }
@@ -226,7 +211,6 @@ ColumnLayout {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
-                        page.saveDaemonAddress()
                         page.openWalletClicked()
                     }
                 }
@@ -247,62 +231,30 @@ ColumnLayout {
 
     }
 
-    // daemon select
-    // TODO: Move to separate page
-
-    ColumnLayout {
+    RowLayout {
         Layout.leftMargin: wizardLeftMargin
         Layout.rightMargin: wizardRightMargin
+        Layout.topMargin: 30
         Layout.alignment: Qt.AlignCenter
+        Layout.fillWidth: true
 
-
-        Label {
-            Layout.topMargin: 20
-            fontSize: 14
-            text: qsTr("Custom daemon address (optional)") + translationManager.emptyString
-                  + translationManager.emptyString
-        }
-
-        GridLayout {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-
-            columnSpacing: 20
-            rowSpacing: 20
-            flow: isMobile ? GridLayout.TopToBottom : GridLayout.LeftToRight
-
-            RowLayout {
-                spacing: 20
-                Layout.alignment: Qt.AlignCenter
-
-                LineEdit {
-                    id: daemonAddress
-                    Layout.alignment: Qt.AlignCenter
-                    width: 200
-                    fontSize: 14
-                    text: {
-                        if(appWindow.persistentSettings.daemon_address)
-                            return appWindow.persistentSettings.daemon_address;
-                        return testNet.checked ? d.daemonAddressTestnet : d.daemonAddressMainnet
-                    }
-
-                }
-
-                CheckBox {
-                    id: testNet
-                    Layout.alignment: Qt.AlignCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: qsTr("Testnet") + translationManager.emptyString
-                    background: "#FFFFFF"
-                    fontColor: "#4A4646"
-                    fontSize: 16
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
-                    checked: appWindow.persistentSettings.testnet;
+        Rectangle {
+            width: 100
+            CheckBox {
+                id: testNet
+                text: qsTr("Testnet") + translationManager.emptyString
+                background: "#FFFFFF"
+                fontColor: "#4A4646"
+                fontSize: 16
+                checkedIcon: "../images/checkedVioletIcon.png"
+                uncheckedIcon: "../images/uncheckedIcon.png"
+                checked: appWindow.persistentSettings.testnet;
+                onClicked: {
+                    persistentSettings.testnet = testNet.checked
+                    console.log("testnet set to ", persistentSettings.testnet)
                 }
             }
         }
     }
-
 }
 

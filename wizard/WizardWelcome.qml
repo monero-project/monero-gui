@@ -39,12 +39,6 @@ ColumnLayout {
         NumberAnimation { duration: 100; easing.type: Easing.InQuad }
     }
 
-    QtObject {
-        id: d
-        readonly property string daemonAddressTestnet : "localhost:38018";
-        readonly property string daemonAddressMainnet : "localhost:18018";
-    }
-
     onOpacityChanged: visible = opacity !== 0
 
     function onPageClosed(settingsObject) {
