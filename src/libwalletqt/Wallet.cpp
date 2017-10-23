@@ -599,6 +599,12 @@ bool Wallet::useForkRules(quint8 required_version, quint64 earlyBlocks) const
     }
 }
 
+void Wallet::setWalletCreationHeight(quint64 height)
+{
+    m_walletImpl->setRefreshFromBlockHeight(height);
+    emit walletCreationHeightChanged();
+}
+
 QString Wallet::getDaemonLogPath() const
 {
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";

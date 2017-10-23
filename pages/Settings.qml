@@ -497,9 +497,78 @@ Rectangle {
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
         }
         TextBlock {
+            id: restoreHeightText
             Layout.fillWidth: true
-            text: (typeof currentWallet == "undefined") ? "" : qsTr("Wallet creation height: ") + currentWallet.walletCreationHeight + translationManager.emptyString
+            textFormat: Text.RichText
+            property var txt: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C}</style>" + qsTr("Wallet creation height: ") + currentWallet.walletCreationHeight + translationManager.emptyString
+            property var linkTxt: qsTr(" <a href='#'>(Click to change)</a>") + translationManager.emptyString
+            text: (typeof currentWallet == "undefined") ? "" : txt + linkTxt
+
+            onLinkActivated: {
+                restoreHeightRow.visible = true;
+                text = txt
+            }
+
         }
+
+        RowLayout {
+            id: restoreHeightRow
+            visible: false
+            LineEdit {
+                id: restoreHeight
+                Layout.preferredWidth: 80
+                Layout.fillWidth: true
+                text: currentWallet.walletCreationHeight
+                validator: IntValidator {
+                    bottom:0
+                }
+            }
+
+            StandardButton {
+                id: restoreHeightSave
+                Layout.fillWidth: false
+                Layout.leftMargin: 30
+                text: qsTr("Save") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+
+                onClicked: {
+                    currentWallet.walletCreationHeight = restoreHeight.text
+                    // Restore height is saved in .keys file. Set password to trigger rewrite.
+                    currentWallet.setPassword(appWindow.password)
+                    restoreHeightText.text = restoreHeightText.txt + restoreHeightText.linkTxt
+                    restoreHeightRow.visible = false
+
+                    // Show confirmation dialog
+                    confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
+                    confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
+                                                    + "The following information will be deleted\n"
+                                                    + "- Recipient addresses\n"
+                                                    + "- Tx keys\n"
+                                                    + "- Tx descriptions\n\n"
+                                                    + "The old wallet cache file will be renamed and can be restored later.\n"
+                                                    );
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
+                    confirmationDialog.onAcceptedCallback = function() {
+                        walletManager.closeWallet();
+                        walletManager.clearWalletCache(persistentSettings.wallet_path);
+                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.password,
+                                                          persistentSettings.testnet);
+                    }
+
+                    confirmationDialog.onRejectedCallback = null;
+
+                    confirmationDialog.open()
+
+                }
+            }
+        }
+
+
+
         TextBlock {
             Layout.fillWidth: true
             text:  (typeof currentWallet == "undefined") ? "" : qsTr("Wallet log path: ") + currentWallet.walletLogPath + translationManager.emptyString
