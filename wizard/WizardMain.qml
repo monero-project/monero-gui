@@ -233,11 +233,8 @@ ColumnLayout {
         appWindow.persistentSettings.allow_background_mining = false //settings.allow_background_mining
         appWindow.persistentSettings.auto_donations_enabled = false //settings.auto_donations_enabled
         appWindow.persistentSettings.auto_donations_amount = false //settings.auto_donations_amount
-        appWindow.persistentSettings.daemon_address = settings.daemon_address
-        appWindow.persistentSettings.testnet = settings.testnet
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
-
     }
 
     // reading settings from persistent storage

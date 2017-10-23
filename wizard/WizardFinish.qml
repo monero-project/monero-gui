@@ -50,7 +50,7 @@ ColumnLayout {
             autoDonationAmount = wizard.settings["auto_donations_amount"] + " %",
             backgroundMiningEnabled = wizard.settings["allow_background_mining"] === true,
             backgroundMiningText = backgroundMiningEnabled ? qsTr("Enabled") : qsTr("Disabled"),
-            testnetEnabled = wizard.settings['testnet'] === true,
+            testnetEnabled = appWindow.persistentSettings.testnet,
             testnetText = testnetEnabled ? qsTr("Enabled") : qsTr("Disabled"),
             restoreHeightEnabled = wizard.settings['restore_height'] !== undefined;
 
@@ -64,7 +64,7 @@ ColumnLayout {
                 // ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
                 // : "")
             // + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
-            + trStart + qsTr("Daemon address") + trMiddle + wizard.settings["daemon_address"] + trEnd
+            + trStart + qsTr("Daemon address") + trMiddle + persistentSettings.daemon_address + trEnd
             + trStart + qsTr("Testnet") + trMiddle + testnetText + trEnd
             + (restoreHeightEnabled
                 ? trStart + qsTr("Restore height") + trMiddle + wizard.settings['restore_height'] + trEnd
