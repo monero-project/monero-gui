@@ -47,7 +47,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
     Q_PROPERTY(QString walletLogPath READ getWalletLogPath CONSTANT)
-    Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight CONSTANT)
+    Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
 
 public:
 
@@ -245,6 +245,8 @@ public:
     QString getPublicSpendKey() const {return QString::fromStdString(m_walletImpl->publicSpendKey());}
 
     quint64 getWalletCreationHeight() const {return m_walletImpl->getRefreshFromBlockHeight();}
+    void setWalletCreationHeight(quint64 height);
+
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
 
@@ -263,6 +265,7 @@ signals:
     void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height, quint64 targetHeight);
     void historyModelChanged() const;
+    void walletCreationHeightChanged();
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
