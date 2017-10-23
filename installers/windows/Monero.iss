@@ -1,10 +1,14 @@
-; Monero GUI Wallet Beta 2 Installer for Windows
+; Monero Helium Hydra GUI Wallet Installer for Windows
 ; Copyright (c) 2014-2017, The Monero Project
 ; See LICENSE
 
 [Setup]
 AppName=Monero GUI Wallet
-AppVersion=0.10.3.1
+; For InnoSetup this is the property that uniquely identifies the application as such
+; Thus it's important to keep this stable over releases
+; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
+
+AppVersion=0.11.1.0
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -36,7 +40,7 @@ Source: "FinishImage.bmp"; Flags: dontcopy
 Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; Monero GUI wallet log file
-; Beta 2 does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
+; The GUI wallet does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
 ; so pre-create the file and give the necessary permissions to the wallet to write into it
 Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: comparetimestamp; Permissions: users-modify
 
@@ -55,7 +59,9 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: comparetimestamp;
 ; Monero blockchain utilities
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: comparetimestamp
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: comparetimestamp
+
+; was present in 0.10.3.1, not present anymore in 0.11.1.0
+; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; Various .qm files for translating the wallet UI "on the fly" into all supported languages
 Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs comparetimestamp
@@ -161,7 +167,8 @@ Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: comparetimestamp
 Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; JasPer, support for JPEG-2000
-Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; was present in 0.10.3.1, not present anymore in 0.11.1.0
+; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; libjpeg, C library for reading and writing JPEG image files
 Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
@@ -228,7 +235,7 @@ begin
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitmonero');
   s := 'The default folder to store the Monero blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need up to 20 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need more than 30 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
@@ -334,7 +341,10 @@ Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 ; and insists on displaying ALL icons on one single level
 Name: "{group}\Utilities\Monero Daemon"; Filename: "{app}\monerod.exe"; Parameters: {code:DaemonFlags}
 Name: "{group}\Utilities\Read Me"; Filename: "{app}\ReadMe.htm"
-Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"
+
+; CLI wallet: Needs a working directory ("Start in:") set in the icon, because with no such directory set
+; it tries to create new wallets without a path given in the probably non-writable program folder and will abort with an error
+Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-cli.exe"; WorkingDir: "{userdocs}\Monero\wallets"
 
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
