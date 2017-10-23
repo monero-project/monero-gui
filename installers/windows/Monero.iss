@@ -8,7 +8,7 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.11.0.0
+AppVersion=0.11.1.0
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -60,7 +60,7 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: comparetimestamp;
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: comparetimestamp
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: comparetimestamp
 
-; was present in 0.10.3.1, not present anymore in 0.11.0.0
+; was present in 0.10.3.1, not present anymore in 0.11.1.0
 ; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; Various .qm files for translating the wallet UI "on the fly" into all supported languages
@@ -167,7 +167,7 @@ Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: comparetimestamp
 Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; JasPer, support for JPEG-2000
-; was present in 0.10.3.1, not present anymore in 0.11.0.0
+; was present in 0.10.3.1, not present anymore in 0.11.1.0
 ; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
 
 ; libjpeg, C library for reading and writing JPEG image files
