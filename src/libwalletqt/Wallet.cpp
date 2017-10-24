@@ -207,6 +207,7 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
         QFuture<bool> future = watcher->future();
         watcher->deleteLater();
         if(future.result()){
+            emit walletCreationHeightChanged();
             qDebug() << "init async finished - starting refresh";
             connected(true);
             m_walletImpl->startRefresh();

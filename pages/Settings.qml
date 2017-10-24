@@ -506,7 +506,6 @@ Rectangle {
 
             onLinkActivated: {
                 restoreHeightRow.visible = true;
-                text = txt
             }
 
         }
@@ -538,7 +537,6 @@ Rectangle {
                     currentWallet.walletCreationHeight = restoreHeight.text
                     // Restore height is saved in .keys file. Set password to trigger rewrite.
                     currentWallet.setPassword(appWindow.password)
-                    restoreHeightText.text = restoreHeightText.txt + restoreHeightText.linkTxt
                     restoreHeightRow.visible = false
 
                     // Show confirmation dialog
