@@ -2,6 +2,8 @@
 MONERO_URL=https://github.com/monero-project/monero.git
 MONERO_BRANCH=master
 
+
+#medusa dummy build trigger
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
