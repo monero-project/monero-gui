@@ -1,4 +1,5 @@
 #!/bin/bash
+#fake trigger
 
 BUILD_TYPE=$1
 source ./utils.sh
