@@ -930,6 +930,9 @@ ApplicationWindow {
                 }
                 transactionConfirmationPasswordDialog.password = ""
             }
+            transactionConfirmationPasswordDialog.onRejectedCallback = function() {
+                transactionConfirmationPasswordDialog.password = ""
+            }
             transactionConfirmationPasswordDialog.open()
         }
     }
@@ -983,9 +986,14 @@ ApplicationWindow {
     PasswordDialog {
         id: transactionConfirmationPasswordDialog
         property var onAcceptedCallback
+        property var onRejectedCallback
         onAccepted: {
-            if (onAcceptedCallback())
+            if (onAcceptedCallback)
                 onAcceptedCallback();
+        }
+        onRejected: {
+            if (onRejectedCallback)
+                onRejectedCallback();
         }
     }
 
