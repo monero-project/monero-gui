@@ -269,7 +269,9 @@ ApplicationWindow {
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.checkPaymentClicked.connect(handleCheckPayment);
-
+        
+        persistentSettings.is_recovering = true;
+        
         console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
