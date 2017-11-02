@@ -53,7 +53,7 @@ Rectangle {
         RowLayout {
             StandardButton {
                 id: qrfinderButton
-                text: qsTr("QRCODE") + translationManager.emptyString
+                text: qsTr("Qr Code") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"

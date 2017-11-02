@@ -97,7 +97,7 @@ Rectangle {
             Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32 * scaleRatio
+                font.pixelSize: 18 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
@@ -114,6 +114,7 @@ Rectangle {
                 readOnly: true
                 font.pixelSize: 12 * scaleRatio
                 selectByMouse: false
+                wrapMode: TextEdit.Wrap
 
                 MouseArea {
                     anchors.fill: parent
@@ -156,7 +157,7 @@ Rectangle {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Ok")
+                text: qsTr("OK")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()

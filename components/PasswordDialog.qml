@@ -89,7 +89,7 @@ Item {
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 24 * scaleRatio
+                font.pixelSize: 18 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
@@ -165,7 +165,7 @@ Item {
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Ok")
+                text: qsTr("Continue")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()

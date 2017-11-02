@@ -969,7 +969,7 @@ ApplicationWindow {
 
     // Confrirmation aka question dialog
     StandardDialog {
-        z:10
+        z: parent.z + 1
         id: transactionConfirmationPopup
         onAccepted: {
             close();
@@ -996,8 +996,9 @@ ApplicationWindow {
     }
 
     StandardDialog {
-        z:11
+        z: parent.z + 1
         id: confirmationDialog
+        anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
         onAccepted:  {
