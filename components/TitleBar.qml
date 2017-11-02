@@ -60,7 +60,7 @@ Rectangle {
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  basicMouseArea.containsMouse || !leftPanel.visible ? "#FFE00A" : "#000000"
+        color:  "#FFE00A"
         height: 30 * scaleRatio
         width: height
         visible: isMobile
