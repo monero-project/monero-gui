@@ -75,10 +75,14 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                    }
+                    onDoubleClicked: {
                         parent.selectAll()
                         parent.copy()
                         parent.deselect()
                         console.log("copied to clipboard");
+                        appWindow.showStatusMessage(qsTr("Seed copied to clipboard"),3)
                     }
                 }
             }
@@ -105,10 +109,14 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                    }
+                    onDoubleClicked: {
                         parent.selectAll()
                         parent.copy()
                         parent.deselect()
                         console.log("copied to clipboard");
+                        appWindow.showStatusMessage(qsTr("Keys copied to clipboard"),3)
                     }
                 }
             }

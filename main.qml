@@ -1481,10 +1481,11 @@ ApplicationWindow {
 
     Rectangle {
         id: statusMessage
+        z: 99
         visible: false
         property alias text: statusMessageText.text
         anchors.bottom: parent.bottom
-        width: 200 * scaleRatio
+        width: statusMessageText.contentWidth + 20 * scaleRatio
         anchors.horizontalCenter: parent.horizontalCenter
         color: "black"
         height: 40 * scaleRatio

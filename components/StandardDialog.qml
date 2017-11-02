@@ -113,6 +113,21 @@ Rectangle {
                 textFormat: TextEdit.AutoText
                 readOnly: true
                 font.pixelSize: 12 * scaleRatio
+                selectByMouse: false
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                    }
+                    onDoubleClicked: {
+                        parent.selectAll()
+                        parent.copy()
+                        parent.deselect()
+                        console.log("copied to clipboard");
+                        appWindow.showStatusMessage(qsTr("Content copied to clipboard"),3)
+                    }
+                }
             }
         }
 

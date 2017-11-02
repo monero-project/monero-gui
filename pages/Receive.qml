@@ -205,6 +205,7 @@ Rectangle {
                         if (addressLine.text.length > 0) {
                             console.log(addressLine.text + " copied to clipboard")
                             clipboard.setText(addressLine.text)
+                            appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
                         }
                     }
                 }
@@ -237,6 +238,7 @@ Rectangle {
                     onClicked: {
                         if (paymentIdLine.text.length > 0) {
                             clipboard.setText(paymentIdLine.text)
+                            appWindow.showStatusMessage(qsTr("Payment ID copied to clipboard"),3)
                         }
                     }
                 }
@@ -289,6 +291,7 @@ Rectangle {
                     onClicked: {
                         if (integratedAddressLine.text.length > 0) {
                             clipboard.setText(integratedAddressLine.text)
+                            appWindow.showStatusMessage(qsTr("Integrated address copied to clipboard"),3)
                         }
                     }
                 }

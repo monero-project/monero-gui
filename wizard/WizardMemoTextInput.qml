@@ -59,7 +59,11 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: clipboard.setText(memoTextInput.text)
+                onClicked: {
+                    clipboard.setText(memoTextInput.text)
+                    appWindow.showStatusMessage(qsTr("Seed copied to clipboard"),3)
+                }
+
             }
         }
         Rectangle {
