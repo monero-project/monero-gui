@@ -80,26 +80,14 @@ ListView {
 
     delegate: Rectangle {
         id: delegate
-        height: tableContent.height + 10 * scaleRatio
+        height: tableContent.height + 20 * scaleRatio
         width: listView.width
         color: index % 2 ? "#F8F8F8" : "#FFFFFF"
+        Layout.leftMargin: 10 * scaleRatio
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
-
-        StandardButton {
-            id: detailsButton
-            anchors.right:parent.right
-            anchors.rightMargin: 15 * scaleRatio
-            anchors.top: parent.top
-            anchors.topMargin: parent.height/2 - this.height/2
-            width: 40 * scaleRatio
-            height: 20 * scaleRatio
-            fontSize: 6 * scaleRatio
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            text: qsTr("Details")
+        MouseArea {
+            anchors.fill: parent
             onClicked: {
                 var tx_key = currentWallet.getTxKey(hash)
                 var tx_note = currentWallet.getUserNote(hash)
@@ -111,23 +99,40 @@ ListView {
             }
         }
 
+        Rectangle {
+            anchors.right: parent.right
+            anchors.rightMargin: 15 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: parent.height/2 - this.height/2
+            width: 30 * scaleRatio; height: 30 * scaleRatio
+            radius: 25
+            color: "#FF4304"
+
+            Image {
+                width: 20 * scaleRatio
+                height: 20 * scaleRatio
+                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                source: "qrc:///images/nextPage.png"
+            }
+        }
 
         ColumnLayout {
             id: tableContent
             // Date
             RowLayout {
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 20 * scaleRatio
                 Layout.leftMargin: 10 * scaleRatio
                 Text {
                     font.family: "Arial"
-                    font.pixelSize: 10 * scaleRatio
+                    font.pixelSize: 14 * scaleRatio
                     color: "#555555"
                     text: date
                 }
 
                 Text {
                     font.family: "Arial"
-                    font.pixelSize: 10 * scaleRatio
+                    font.pixelSize: 14 * scaleRatio
                     color: "#555555"
                     text: time
                 }
@@ -137,7 +142,7 @@ ListView {
                     visible: confirmations < confirmationsRequired || isPending
                     Layout.leftMargin: 5 * scaleRatio
                     font.family: "Arial"
-                    font.pixelSize: 10 * scaleRatio
+                    font.pixelSize: 14 * scaleRatio
                     color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
                     text: {
                         if (!isPending)
@@ -158,7 +163,7 @@ ListView {
                 spacing: 2
                 Text {
                     font.family: "Arial"
-                    font.pixelSize: 10 * scaleRatio
+                    font.pixelSize: 14 * scaleRatio
                     color: isOut ? "#FF4F41" : "#36B05B"
                     text: isOut ? "↓" : "↑"
                 }
@@ -166,7 +171,7 @@ ListView {
                 Text {
                     id: amountText
                     font.family: "Arial"
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 18 * scaleRatio
                     color: isOut ? "#FF4F41" : "#36B05B"
                     text:  displayAmount
                 }
