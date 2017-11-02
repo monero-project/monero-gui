@@ -135,7 +135,7 @@ Rectangle {
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+                PropertyChanges { target: mainFlickable; contentHeight: minHeight  + 200 * scaleRatio }
             }
         ]
 
