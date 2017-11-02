@@ -1017,9 +1017,17 @@ ApplicationWindow {
         title: "Please choose a file"
         folder: "file://" +moneroAccountsDir
         nameFilters: [ "Wallet files (*.keys)"]
+        sidebarVisible: false
+
 
         onAccepted: {
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
+            if(isIOS)
+                persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir,"")
+            console.log("ÖPPPPNA")
+            console.log(moneroAccountsDir)
+            console.log(fileDialog.fileUrl)
+            console.log(persistentSettings.wallet_path)
             initialize();
         }
         onRejected: {
