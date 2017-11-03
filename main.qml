@@ -73,6 +73,7 @@ ApplicationWindow {
     // Default daemon addresses
     readonly property string localDaemonAddress : !persistentSettings.testnet ? "localhost:18081" : "localhost:28081"
     property string currentDaemonAddress;
+    property bool startLocalNodeCancelled: false
 
     // true if wallet ever synchronized
     property bool walletInitialized : false
@@ -425,7 +426,7 @@ ApplicationWindow {
                 if(localNodeConnected) {
                     leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
                     leftPanel.progressBar.visible = true
-                } else if (persistentSettings.startLocalNode) {
+                } else if (persistentSettings.startLocalNode && !startLocalNodeCancelled) {
                     daemonManagerDialog.open()
                 }
 
@@ -1149,6 +1150,7 @@ ApplicationWindow {
         id: daemonManagerDialog
         onRejected: {
             loadPage("Settings");
+            startLocalNodeCancelled = true
         }
 
     }
