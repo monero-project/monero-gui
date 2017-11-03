@@ -86,6 +86,31 @@ ColumnLayout {
         return wordsArray.length === 25
     }
 
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
+        // Switch to recover from keys
+        recoverFromSeedMode = false
+        spendKeyLine.text = ""
+        viewKeyLine.text = ""
+        restoreHeightItem.text = ""
+
+
+        if(typeof extra_parameters.secret_view_key != "undefined") {
+            viewKeyLine.text = extra_parameters.secret_view_key
+        }
+        if(typeof extra_parameters.secret_spend_key != "undefined") {
+            spendKeyLine.text = extra_parameters.secret_spend_key
+        }
+        if(typeof extra_parameters.restore_height != "undefined") {
+            restoreHeightItem.text = extra_parameters.restore_height
+        }
+        addressLine.text = address
+
+        cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+
+        // Check if keys are correct
+        checkNextButton();
+    }
+
     RowLayout {
         id: dotsRow
         Layout.alignment: Qt.AlignRight
@@ -93,8 +118,8 @@ ColumnLayout {
 
         ListModel {
             id: dotsModel
-            ListElement { dotColor: "#36B05B" }
-            //ListElement { dotColor: "#DBDBDB" }
+            ListElement { dotColor: "#FFE00A" }
+            ListElement { dotColor: "#DBDBDB" }
             ListElement { dotColor: "#DBDBDB" }
             ListElement { dotColor: "#DBDBDB" }
         }
@@ -118,7 +143,7 @@ ColumnLayout {
             horizontalAlignment: Text.AlignHCenter
             id: titleText
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             wrapMode: Text.Wrap
             color: "#3F3F3F"
         }
@@ -128,8 +153,8 @@ ColumnLayout {
         Layout.bottomMargin: rowSpacing
 
         Label {
-            Layout.topMargin: 20
-            fontSize: 14
+            Layout.topMargin: 20 * scaleRatio
+            fontSize: 14 * scaleRatio
             text:  qsTr("Wallet name")
                    + translationManager.emptyString
         }
@@ -137,16 +162,17 @@ ColumnLayout {
         LineEdit {
             id: accountName
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             text: defaultAccountName
             onTextUpdated: checkNextButton()
         }
     }
 
-    RowLayout{
+    GridLayout{
+        columns: (isMobile)? 2 : 4
         visible: recoverMode
-        spacing: 0
+
         StandardButton {
             id: recoverFromSeedButton
             text: qsTr("Restore from seed") + translationManager.emptyString
@@ -174,6 +200,22 @@ ColumnLayout {
                 checkNextButton();
             }
         }
+
+        StandardButton {
+            id: qrfinderButton
+            text: qsTr("From QR Code") + translationManager.emptyString
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            visible : true //appWindow.qrScannerEnabled
+            enabled : visible
+            onClicked: {
+                cameraUi.state = "Capture"
+                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+            }
+        }
+
     }
 
     // Recover from seed
@@ -183,8 +225,8 @@ ColumnLayout {
         WizardMemoTextInput {
             id : memoTextItem
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
         }
     }
 
@@ -198,24 +240,24 @@ ColumnLayout {
         LineEdit {
             Layout.fillWidth: true
             id: addressLine
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
         }
         LineEdit {
             Layout.fillWidth: true
             id: viewKeyLine
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
 
         }
         LineEdit {
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             id: spendKeyLine
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
@@ -227,8 +269,8 @@ ColumnLayout {
         LineEdit {
             id: restoreHeightItem
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
             validator: IntValidator {
                 bottom:0
@@ -240,15 +282,15 @@ ColumnLayout {
     ColumnLayout {
         Label {
             Layout.fillWidth: true
-            Layout.topMargin: 20
+            Layout.topMargin: 20 * scaleRatio
             fontSize: 14
             text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
 
         LineEdit {
             Layout.fillWidth: true
-            Layout.maximumWidth: 600
-            Layout.minimumWidth: 200
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
             id: fileUrlInput
             text: moneroAccountsDir + "/"
 

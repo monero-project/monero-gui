@@ -38,6 +38,8 @@ QString TransactionInfo::displayAmount() const
 
 QString TransactionInfo::fee() const
 {
+    if(m_pimpl->fee() == 0)
+        return "";
     return WalletManager::instance()->displayAmount(m_pimpl->fee());
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -29,18 +29,32 @@
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 
-TextField {
-    font.family: "Arial"
-    horizontalAlignment: TextInput.AlignLeft
-    selectByMouse: true
-    style: TextFieldStyle {
-        textColor: "#3F3F3F"
-        placeholderTextColor: "#BABABA"
+GridLayout {
+    columns: (isMobile) ? 1 : 2
+    id: root
+    property alias daemonAddrText: daemonAddr.text
+    property alias daemonPortText: daemonPort.text
 
-        background: Rectangle {
-            border.width: 0
-            color: "transparent"
-        }
+    signal editingFinished()
+
+    function getAddress() {
+        return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
+    }
+
+    LineEdit {
+        id: daemonAddr
+        Layout.fillWidth: true
+        placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
+    }
+
+
+    LineEdit {
+        id: daemonPort
+        Layout.fillWidth: true
+        placeholderText: qsTr("Port") + translationManager.emptyString
+        onEditingFinished: root.editingFinished()
     }
 }

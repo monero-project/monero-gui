@@ -646,6 +646,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
 Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
+    delete m_addressBook;
+    m_addressBook = NULL;
 
     delete m_history;
     m_history = NULL;

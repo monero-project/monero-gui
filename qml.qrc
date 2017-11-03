@@ -72,6 +72,7 @@
         <file>images/expandTable.png</file>
         <file>images/dropdownDel.png</file>
         <file>components/HistoryTable.qml</file>
+        <file>components/HistoryTableMobile.qml</file>
         <file>images/gotoBasicVersion.png</file>
         <file>images/goToBasicVersionHovered.png</file>
         <file>BasicPanel.qml</file>
@@ -143,5 +144,9 @@
         <file>components/Notifier.qml</file>
         <file>components/MobileHeader.qml</file>
         <file>components/TextBlock.qml</file>
+        <file>wizard/WizardDaemonSettings.qml</file>
+        <file>components/RemoteNodeEdit.qml</file>
+        <file>pages/Keys.qml</file>
+        <file>images/menu.png</file>
     </qresource>
 </RCC>

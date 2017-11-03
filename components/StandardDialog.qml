@@ -35,10 +35,10 @@ import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
 
-Window {
+Rectangle {
     id: root
-    modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
+    color: "white"
+    visible: false
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
     property alias content: root.text
@@ -53,6 +53,7 @@ Window {
     // same signals as Dialog has
     signal accepted()
     signal rejected()
+    signal closeCallback();
 
     // Make window draggable
     MouseArea {
@@ -64,12 +65,24 @@ Window {
     }
 
     function open() {
+        // Center
+        if(!isMobile) {
+            root.x = parent.width/2 - root.width/2
+            root.y = screenHeight/2 - root.height/2
+        }
         show()
+        root.z = 11
+        root.visible = true;
+    }
+
+    function close() {
+        root.visible = false;
+        closeCallback();
     }
 
     // TODO: implement without hardcoding sizes
-    width:  480
-    height: 280
+    width: isMobile ? screenWidth : 480
+    height: isMobile ? screenHeight : 280
 
     ColumnLayout {
         id: mainLayout
@@ -84,7 +97,7 @@ Window {
             Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
+                font.pixelSize: 18 * scaleRatio
                 font.family: "Arial"
                 color: "#555555"
             }
@@ -99,7 +112,23 @@ Window {
                 font.family: "Arial"
                 textFormat: TextEdit.AutoText
                 readOnly: true
-                font.pixelSize: 12
+                font.pixelSize: 12 * scaleRatio
+                selectByMouse: false
+                wrapMode: TextEdit.Wrap
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
+                    }
+                    onDoubleClicked: {
+                        parent.selectAll()
+                        parent.copy()
+                        parent.deselect()
+                        console.log("copied to clipboard");
+                        appWindow.showStatusMessage(qsTr("Content copied to clipboard"),3)
+                    }
+                }
             }
         }
 
@@ -111,8 +140,6 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: cancelButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
@@ -126,13 +153,11 @@ Window {
 
             MoneroComponents.StandardButton {
                 id: okButton
-                width: 120
-                fontSize: 14
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
-                text: qsTr("Ok")
+                text: qsTr("OK")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     root.close()

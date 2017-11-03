@@ -100,7 +100,7 @@ ColumnLayout {
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
             ListElement { dotColor: "#36B05B" }
-            //ListElement { dotColor: "#36B05B" }
+            ListElement { dotColor: "#FFE00A" }
         }
 
         Repeater {
@@ -120,7 +120,7 @@ ColumnLayout {
         Text {
             Layout.fillWidth: true
             font.family: "Arial"
-            font.pixelSize: 28
+            font.pixelSize: 28 * scaleRatio
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             //renderType: Text.NativeRendering
@@ -132,7 +132,7 @@ ColumnLayout {
             Layout.fillWidth: true
             id: settingsText
             font.family: "Arial"
-            font.pixelSize: 16
+            font.pixelSize: 16 * scaleRatio
             wrapMode: Text.Wrap
             textFormat: Text.RichText
             horizontalAlignment: Text.AlignHLeft

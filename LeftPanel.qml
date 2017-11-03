@@ -50,6 +50,7 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
     signal signClicked()
+    signal keysClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -69,6 +70,8 @@ Rectangle {
 
     width: (isMobile)? appWindow.width : 260
     color: "#FFFFFF"
+    anchors.bottom: parent.bottom
+    anchors.top: parent.top
 
     // Item with monero logo
     Item {
@@ -138,8 +141,8 @@ Rectangle {
             visible: !isMobile
             Item {
                 anchors.verticalCenter: parent.verticalCenter
-                height: 26
-                width: 50
+                height: 26 * scaleRatio
+                width: 50 * scaleRatio
 
                 Image {
                     anchors.centerIn: parent
@@ -228,7 +231,8 @@ Rectangle {
 
 
         Flickable {
-            contentHeight: 500
+            id:flicker
+            contentHeight: 500 * scaleRatio
             anchors.fill: parent
             clip: true
 
@@ -239,7 +243,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-
+            clip: true
             property var previousButton: transferButton
 
             // ------------- Dashboard tab ---------------
@@ -393,6 +397,7 @@ Rectangle {
             // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
+                visible: !isAndroid && !isIOS
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString
@@ -483,10 +488,33 @@ Rectangle {
                 color: "#505050"
                 height: 1
             }
+            // ------------- Sign/verify tab ---------------
+            MenuButton {
+                id: keysButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Seed & Keys") + translationManager.emptyString
+                symbol: qsTr("Y") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: settingsButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = keysButton
+                    panel.keysClicked()
+                }
+            }
+            Rectangle {
+                visible: settingsButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
 
-        }
+        } // Column
 
-        }
+        } // Flickable
 
         NetworkStatusItem {
             id: networkStatus
@@ -494,6 +522,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
+            height: 58 * scaleRatio
         }
 
         ProgressBar {
@@ -501,8 +530,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
+            height: 35 * scaleRatio
         }
-    }
+    } // menuRect
 
 
 
