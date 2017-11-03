@@ -273,24 +273,34 @@ ApplicationWindow {
         currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
+        currentWallet.lightWalletLoginError.connect(onLightWalletLoginError)
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.checkPaymentClicked.connect(handleCheckPayment);
 
-
+        console.log("initializing with daemon address: ", persistentSettings.daemon_address)
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
         // Use saved daemon rpc login settings
         currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
 
-        if(persistentSettings.useRemoteNode)
-            currentDaemonAddress = persistentSettings.remoteNodeAddress
-        else
-            currentDaemonAddress = localDaemonAddress
+        // Set SSL mode
+        currentWallet.setSSLMode(persistentSettings.useSSL)
 
-        console.log("initializing with daemon address: ", currentDaemonAddress)
-        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        // load wallet mode from settings
+        currentWallet.setLightWallet(persistentSettings.lightWallet)
+        var daemonAddress
+        if(persistentSettings.lightWallet)
+            daemonAddress = persistentSettings.lightWalletServerAddress
+        else if(persistentSettings.useRemoteNode)
+            daemonAddress = persistentSettings.remoteNodeAddress
+        else
+            daemonAddress = persistentSettings.daemon_address
+
+        console.log("connecting to: ",daemonAddress)
+        currentWallet.initAsync(daemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+
     }
 
     function walletPath() {
@@ -315,15 +325,24 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!isMobile && isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if (!isMobile && persistentSettings.startLocalNode && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)) {
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
         if (!walletInitialized) {
-            currentWallet.history.refresh()
+//            currentWallet.history.refresh()
             walletInitialized = true
         }
      }
+
+    function onLightWalletLoginError(message) {
+        loadPage("Settings");
+        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+        informationPopup.text = qsTr("Failed on lightwallet login. Check connection settings") + message;
+        informationPopup.icon = StandardIcon.Critical
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
+    }
 
     function onWalletOpened(wallet) {
         walletName = usefulName(wallet.path)
@@ -375,8 +394,20 @@ ApplicationWindow {
         }
     }
 
+    function connectLightWallet() {
+        persistentSettings.useRemoteNode = false;
+        persistentSettings.lightWallet = true
+        currentWallet.setLightWallet(true);
+        remoteNodeConnected = false;
+        currentWallet.initAsync(persistentSettings.lightWalletServerAddress);
+    }
+
     function connectRemoteNode() {
+        //TODO: make sure this doesnt create multiple refresh threads
+
         console.log("connecting remote node");
+        currentWallet.setLightWallet(false);
+        persistentSettings.lightWallet = false;
         persistentSettings.useRemoteNode = true;
         currentWallet.initAsync(persistentSettings.remoteNodeAddress);
         remoteNodeConnected = true;
@@ -385,8 +416,9 @@ ApplicationWindow {
     function disconnectRemoteNode() {
         console.log("disconnecting remote node");
         persistentSettings.useRemoteNode = false;
-        currentDaemonAddress = localDaemonAddress
-        currentWallet.initAsync(currentDaemonAddress);
+        currentWallet.setLightWallet(false);
+        persistentSettings.lightWallet = false;
+        currentWallet.initAsync(persistentSettings.daemon_address);
         remoteNodeConnected = false;
     }
 
@@ -412,7 +444,7 @@ ApplicationWindow {
         middlePanel.updateStatus();
 
         // Use remote node while local daemon is syncing
-        if (persistentSettings.useRemoteNode) {
+        if (!persistentSettings.lightWallet && persistentSettings.useRemoteNode) {
             var localNodeConnected = walletManager.connected;
             var localNodeSynced = localNodeConnected && walletManager.localDaemonSynced()
             if (!currentWallet.connected() || !localNodeSynced) {
@@ -445,6 +477,9 @@ ApplicationWindow {
                 console.log("Saving wallet after first refresh");
                 currentWallet.store()
                 isNewWallet = false
+
+                // Update History
+                currentWallet.history.refresh();
             }
 
             // recovering from seed is finished after first refresh
@@ -516,8 +551,9 @@ ApplicationWindow {
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
         currentWallet.refresh()
+        // Refresh handled by new block
         console.log("Confirmed money found")
-        // history refresh is handled by walletUpdated
+       // currentWallet.history.refresh() // this will refresh model
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
@@ -762,7 +798,7 @@ ApplicationWindow {
                     ", txid: ", txid,
                     ", txkey: ", txkey);
 
-        var result = walletManager.checkPayment(address, txid, txkey, currentDaemonAddress);
+        var result = walletManager.checkPayment(address, txid, txkey, persistentSettings.daemon_address);
         var results = result.split("|");
         if (results.length < 4) {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;
@@ -903,7 +939,7 @@ ApplicationWindow {
                 console.log("Camera component ready");
                 cameraUi = component.createObject(appWindow);
             } else {
-                console.log("component not READY !!!");
+                console.log("Error loading Camera component:", component.errorString());
                 appWindow.qrScannerEnabled = false;
             }
         } else console.log("qrScannerEnabled disabled");
@@ -951,6 +987,9 @@ ApplicationWindow {
         property bool startLocalNode: true
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
+        property bool lightWallet: true
+        property bool useSSL: false
+        property string lightWalletServerAddress: "openmonero.org:1984"
     }
 
     // Information dialog
@@ -974,6 +1013,7 @@ ApplicationWindow {
         id: transactionConfirmationPopup
         onAccepted: {
             close();
+            console.log("transaction cofnrim dialog accepted. Showing password");
             transactionConfirmationPasswordDialog.onAcceptedCallback = function() {
                 if(appWindow.password === transactionConfirmationPasswordDialog.password){
                     // Save transaction to file if view only wallet
@@ -1026,7 +1066,6 @@ ApplicationWindow {
             persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
             if(isIOS)
                 persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir,"")
-            console.log("ÖPPPPNA")
             console.log(moneroAccountsDir)
             console.log(fileDialog.fileUrl)
             console.log(persistentSettings.wallet_path)
@@ -1108,6 +1147,9 @@ ApplicationWindow {
 
     PasswordDialog {
         id: transactionConfirmationPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
         property var onAcceptedCallback
         onAccepted: {
             if (onAcceptedCallback())
@@ -1543,7 +1585,7 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
+        if(!persistentSettings.lightWallet && typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.testnet)) {
 
             // Show confirmation dialog
             confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;

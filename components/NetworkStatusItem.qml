@@ -49,6 +49,10 @@ Rectangle {
 
     function getConnectionStatusString(status) {
         if (status == Wallet.ConnectionStatus_Connected) {
+            if(persistentSettings.lightWallet) {
+                return qsTr("Light Wallet")
+            }
+
             if(!appWindow.daemonSynced)
                 return qsTr("Synchronizing")
             if(appWindow.remoteNodeConnected)

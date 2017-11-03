@@ -172,14 +172,33 @@ bool Wallet::store(const QString &path)
 
 bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
 {
-    qDebug() << "init non async";
+    qDebug() << __FUNCTION__;
     if (isRecovering){
         qDebug() << "RESTORING";
         m_walletImpl->setRecoveringFromSeed(true);
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
-    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
-    return true;
+    try {
+        // Only lightwallet nodes support SSL so far.
+        qDebug() << "use ssl" << (m_useSSL && m_lightWallet);
+        qDebug() << "light wallet" << m_lightWallet;
+        m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), m_useSSL && m_lightWallet ,m_lightWallet);
+        if(m_lightWallet) {
+            bool lightWalletNewAddress = false;
+            if (!m_walletImpl->lightWalletLogin(lightWalletNewAddress))
+                emit lightWalletLoginError(errorString());
+            if(lightWalletNewAddress) {
+                // Lightwallet server hasn't seen the address before. Consider full rescan.
+                qDebug("LIGHTWALLET address is new!");
+            } else
+                qDebug("LIGHTWALLET address is old!");
+        }
+
+    } catch (const std::exception &e) {
+        qDebug() << e.what();
+        return false;
+    }
+     return true;
 }
 
 void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemonPassword)
@@ -211,10 +230,41 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
             qDebug() << "init async finished - starting refresh";
             connected(true);
             m_walletImpl->startRefresh();
-
+        } else {
+            qDebug() << "init failed";
         }
     });
     watcher->setFuture(future);
+}
+
+void Wallet::setSSLMode(bool enable) {
+    m_useSSL = enable;
+    qDebug() << "setting SSL mode: " << enable;
+}
+
+void Wallet::setLightWallet(bool enable) {
+    m_lightWallet = enable;
+    qDebug() << "Setting lightwallet mode to " << enable;
+}
+
+QVariantMap Wallet::sendLightWalletImportRequest(){
+    std::string payment_id;
+    quint64 fee;
+    bool new_request;
+    bool request_fulfilled;
+    std::string payment_address;
+    std::string status;
+    qDebug("sending import request!");
+
+    m_walletImpl->lightWalletImportWalletRequest(payment_id, fee, new_request, request_fulfilled, payment_address, status);
+
+    QVariantMap response;
+    response.insert("payment_id", QString::fromStdString(payment_id));
+    response.insert("fee", fee);
+    response.insert("new_request", new_request);
+    response.insert("payment_address", QString::fromStdString(payment_address));
+    response.insert("status", QString::fromStdString(status));
+    return response;
 }
 
 //! create a view only wallet
@@ -641,6 +691,9 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_connectionStatusRunning = false;
     m_daemonUsername = "";
     m_daemonPassword = "";
+    m_lightWallet = false;
+    m_useSSL = false;
+
 }
 
 Wallet::~Wallet()
