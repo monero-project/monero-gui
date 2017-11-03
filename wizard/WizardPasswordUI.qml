@@ -43,7 +43,7 @@ ColumnLayout {
       wizard.nextButton.enabled = passwordItem.password === retypePasswordItem.password
 
       // TODO: password strength meter segfaults on Android.
-      if (!isMobile) {
+      if (!isAndroid) {
           // scorePassword returns value from 0 to... lots
           var strength = walletManager.getPasswordStrength(passwordItem.password);
           // consider anything below 10 bits as dire
@@ -88,8 +88,8 @@ ColumnLayout {
     }
 
     PrivacyLevelSmall {
-        visible: !isMobile //TODO: strength meter doesnt work on Android
-        Layout.topMargin: isMobile ? 20 * scaleRatio : 40 * scaleRatio
+        visible: !isAndroid //TODO: strength meter doesnt work on Android
+        Layout.topMargin: isAndroid ? 20 * scaleRatio : 40 * scaleRatio
         Layout.fillWidth: true
         id: privacyLevel
         background: "#F0EEEE"
