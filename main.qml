@@ -1056,9 +1056,9 @@ ApplicationWindow {
                 if(validator.readOnly)
                     confirmationDialog.text  += qsTr("Error: Filesystem is read only") + "\n\n"
                 if(validator.storageAvailable < 20)
-                    confirmationDialog.text  += qsTr("Warning: There's only %1 GB available on the device. Blockchain requires ~%30 GB of data.").arg(validator.storageAvailable).arg(15) + "\n\n"
+                    confirmationDialog.text  += qsTr("Warning: There's only %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(30) + "\n\n"
                 else
-                    confirmationDialog.text  += qsTr("Note: There's %1 GB available on the device. Blockchain requires ~%30 GB of data.").arg(validator.storageAvailable).arg(15) + "\n\n"
+                    confirmationDialog.text  += qsTr("Note: There's %1 GB available on the device. Blockchain requires ~%2 GB of data.").arg(validator.storageAvailable).arg(30) + "\n\n"
                 if(!validator.lmdbExists)
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
 
