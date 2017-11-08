@@ -1022,7 +1022,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="120"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Seed &amp; Schlüssel</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="163"/>
