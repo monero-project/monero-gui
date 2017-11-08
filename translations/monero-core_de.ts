@@ -2363,7 +2363,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="723"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Diese Adresse hat %1 Monero empfangen, aber die Transaktion wurde noch nicht geschürft.</translation>
+        <translation>Diese Adresse hat %1 Monero empfangen, aber die Transaktion wurde noch nicht geschürft</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1317"/>
@@ -2373,7 +2373,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="1318"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Daemon wird im Hintergrund laufen, wenn GUI Wallet geschlossen wird.</translation>
+        <translation>Daemon wird weiter Hintergrund laufen, wenn die GUI geschlossen wird.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1320"/>
@@ -2392,7 +2392,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="732"/>
         <source>This address received nothing</source>
-        <translation>Die Adresse hat nichts empfangen.</translation>
+        <translation>Diese Adresse hat nichts empfangen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="495"/>
@@ -2413,17 +2413,17 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="355"/>
         <source>Unlocked balance (waiting for block)</source>
-        <translation>Verfügbares Guthaben (auf Block wartend)</translation>
+        <translation>Verfügbares Guthaben (warte auf Block)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="407"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Warte auf Start des Deamons...</translation>
+        <translation>Warte auf Start des Deamons &hellip;</translation>
     </message>
     <message>
         <location filename="../main.qml" line="413"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Warte bis der Demon beendet wird...</translation>
+        <translation>Warte bis der Demon beendet wird &hellip;</translation>
     </message>
     <message>
         <location filename="../main.qml" line="438"/>
@@ -2433,7 +2433,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../main.qml" line="439"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe dein Wallet und den Daemon Bericht nach Fehlern. Du kannst auch versuchen %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfe deine Wallet und das Daemon-Protokoll auf Fehler. Du kannst auch versuchen, %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="516"/>
@@ -2464,19 +2464,22 @@ Betrag: </translation>
         <location filename="../main.qml" line="630"/>
         <source>Please confirm transaction:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte bestätige Transaktion:
+</translation>
     </message>
     <message>
         <location filename="../main.qml" line="518"/>
         <source>
 Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Adresse: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="519"/>
         <source>
 Payment ID: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Zahlungs-ID: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="520"/>
@@ -2484,14 +2487,17 @@ Payment ID: </source>
         <source>
 
 Amount: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Betrag: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="521"/>
         <location filename="../main.qml" line="632"/>
         <source>
 Fee: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Gebühr: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="522"/>
@@ -2504,24 +2510,27 @@ Ringsize: </source>
         <location filename="../main.qml" line="523"/>
         <source>
 Number of transactions: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Anzahl an Transaktionen: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="524"/>
         <source>
 
 Description: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Beschreibung: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="566"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>Nicht ausreichend Geldmittel. Verfügbares Guthaben: %1</translation>
+        <translation>Kein ausreichended Guthaben. Verfügbar: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="669"/>
         <source>Couldn&apos;t send the money: </source>
-        <translation>Geld konnte nicht versendet werden</translation>
+        <translation>Geld konnte nicht versendet werden: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="672"/>
@@ -2536,12 +2545,12 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="728"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Diese Adresse hat %1 Monero erhalten, mit %2 Bestätigung(en)</translation>
+        <translation>Diese Adresse hat %1 Monero erhalten, mit %2 Bestätigung(en).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="744"/>
         <source>Balance (syncing)</source>
-        <translation>Guthaben (synchronisierend)</translation>
+        <translation>Guthaben (Synchronisation)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="744"/>
