@@ -431,7 +431,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Mit deinem Computer zu minen hilft dabei, das Monero-Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger kann das Netzwerk angegriffen werden. Jeder kann helfen! &lt;br&gt; &lt;br&gt;Das Mining bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errechnet dabei Hash-Werte für neue Blöcke. Wenn du einen neuen Block findest, bekommst du die Belohnung dafür. Viel Erfolg!</translation>
+        <translation>Mit Deinem Computer zu minen hilft dabei, das Monero-Netzwerk zu stärken. Je mehr Leute minen, desto schwieriger kann das Netzwerk angegriffen werden. Jeder kann helfen! &lt;br&gt; &lt;br&gt;Das Mining bietet Dir die Möglichkeit, Monero zu verdienen. Dein Computer errechnet dabei Hash-Werte für neue Blöcke. Wenn Du einen neuen Block findest, bekommst Du die Belohnung dafür. Viel Erfolg!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="96"/>
@@ -555,7 +555,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="79"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation>Bitte gib dein Wallet-Passwort ein:&lt;br&gt;</translation>
+        <translation>Bitte gib Dein Wallet-Passwort ein:&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="156"/>
@@ -729,7 +729,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="344"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch die Gefahr, dass dies nicht geschieht, weswegen du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse Deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es Dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn Du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob Du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch die Gefahr, dass dies nicht geschieht, weswegen Du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="254"/>
@@ -1023,7 +1023,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="111"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>Nachricht oder Inhalt einer Datei mit deiner Adresse signieren:</translation>
+        <translation>Nachricht oder Inhalt einer Datei mit Deiner Adresse signieren:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="122"/>
@@ -1101,7 +1101,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="419"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Paste in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Unterzeichnende Adresse &lt;font size=&apos;2&apos;&gt;  ( Füge ein oder wähle aus dem &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signierende Adresse &lt;font size=&apos;2&apos;&gt;  ( Füge ein oder wähle aus dem &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
@@ -1404,7 +1404,7 @@ Bitte aktualisiere oder verbinde einen anderen Daemon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="583"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation>Nicht unterzeichnete Transaktion kann nicht geladen werden: </translation>
+        <translation>Unsignierte Transaktion kann nicht geladen werden: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="611"/>
@@ -1429,7 +1429,7 @@ Bitte aktualisiere oder verbinde einen anderen Daemon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="535"/>
         <source>Sign tx file</source>
-        <translation>Tx-Datei unterzeichnen</translation>
+        <translation>Tx-Datei signieren</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="549"/>
@@ -1585,7 +1585,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Es ist wichtig, dass du dir die Wörter notierst, da du damit dein Wallet wiederherstellen kannst.</translation>
+        <translation>Es ist wichtig, dass Du Dir die Wörter notierst, da Du damit Dein Wallet wiederherstellen kannst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
@@ -1605,7 +1605,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="175"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -1654,7 +1654,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -1813,7 +1813,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="271"/>
         <source>Please choose a directory</source>
-        <translation>Wähle einen Ordner</translation>
+        <translation>Wähle ein Verzeichnis</translation>
     </message>
 </context>
 <context>
@@ -1821,12 +1821,12 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation>Gib deinen aus 25 Wörtern bestehenden mnemonischen Code ein</translation>
+        <translation>Gib Deinen aus 25 Wörtern bestehenden mnemonischen Code ein</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was du brauchst, um dein Wallet zu sichern und wiederherzustellen.</translation>
+        <translation>Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was Du brauchst, um Dein Wallet zu sichern und wiederherzustellen.</translation>
     </message>
 </context>
 <context>
@@ -1873,13 +1873,13 @@ Ringgröße: </translation>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Erstelle ein Passwort für dein Wallet</translation>
+        <translation>Erstelle ein Passwort für Dein Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn du es vergisst, kannst Du nur Zugriff auf dein Wallet bekommen, indem du den&lt;br/&gt;&lt;br/&gt;
+        <translation> &lt;br&gt;Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet bekommen, indem Du den&lt;br/&gt;&lt;br/&gt;
                         aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt das Wallet und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
     </message>
 </context>
@@ -2033,7 +2033,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../main.qml" line="439"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe dein Wallet und das Daemon-Protokoll auf Fehler. Du kannst auch versuchen, %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfe Dein Wallet und das Daemon-Protokoll auf Fehler. Du kannst auch versuchen, %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="516"/>
