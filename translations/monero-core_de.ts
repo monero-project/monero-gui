@@ -110,7 +110,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation>Befehl + Eingabe (z. B. help)</translation>
+        <translation>Befehl + Eingabe (z.&#x202f;B. help)</translation>
     </message>
 </context>
 <context>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../pages/History.qml" line="183"/>
         <source>Type for incremental search...</source>
-        <translation>Für Suchvervollständigung tippen...</translation>
+        <translation>Für Suchvervollständigung tippen …</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="223"/>
@@ -591,7 +591,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="43"/>
         <source>Establishing connection...</source>
-        <translation>Stelle Verbindung her...</translation>
+        <translation>Stelle Verbindung her …</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="57"/>
@@ -634,7 +634,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="146"/>
         <source>No transaction found yet...</source>
-        <translation>Noch keine Transaktion gefunden...</translation>
+        <translation>Noch keine Transaktion gefunden …</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="150"/>
@@ -729,7 +729,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="344"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse Deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es Dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn Du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob Du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch die Gefahr, dass dies nicht geschieht, weswegen Du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dies ist ein einfacher Verkaufs-Tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klicke auf Erzeugen, um eine zufällige Zahlungs-ID für einen neuen Kunden zu erstellen.&lt;/p&gt; &lt;p&gt;Lasse Deinen Kunden mit Hilfe des QR-Codes eine Zahlung tätigen. Dies setzt voraus, dass der Kunde die hierfür notwendige Software besitzt.&lt;/p&gt;&lt;p&gt;Diese Seite ermöglicht es Dir, die Blockchain und den TX-Pool automatisch nach eingehenden Transaktionen zu suchen, die mit diesem QR-Code getätigt wurden. Wenn Du einen Betrag angibst, wird zusätzlich überprüft ob die eingehenden Transaktionen aufsummiert diesen Betrag ergeben.&lt;/p&gt;Du entscheidest, ob Du unbestätigte Transaktionen akzeptieren möchtest. Es ist wahrscheinlich, dass die Transaktionen innerhalb kürzester Zeit bestätigt werden. Es besteht jedoch die Gefahr, dass dies nicht geschieht, weswegen Du bei größeren Beträgen eine oder mehrere Bestätigung(en) abwarten solltest.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="254"/>
@@ -765,7 +765,7 @@
     <message>
         <location filename="../components/SearchInput.qml" line="69"/>
         <source>Search by...</source>
-        <translation>Suche nach...</translation>
+        <translation>Suche nach …</translation>
     </message>
     <message>
         <location filename="../components/SearchInput.qml" line="228"/>
@@ -925,7 +925,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="460"/>
         <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
-        <translation>(z. B. *:WARNING,net.p2p:DEBUG)</translation>
+        <translation>(z.&#x202f;B. *:WARNING,net.p2p:DEBUG)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="476"/>
@@ -1008,7 +1008,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="69"/>
         <source>This is a good signature</source>
-        <translation>Die Signatur ist gültig</translation>
+        <translation>Diese Signatur ist gültig</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="73"/>
@@ -1274,37 +1274,37 @@
     <message>
         <location filename="../pages/Transfer.qml" line="197"/>
         <source>Low (x1 fee)</source>
-        <translation>Niedrig (x1-Gebühr)</translation>
+        <translation>Niedrig (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="198"/>
         <source>Medium (x20 fee)</source>
-        <translation>Mittel (x20-Gebühr)</translation>
+        <translation>Mittel (20-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="199"/>
         <source>High (x166 fee)</source>
-        <translation>Hoch (x166-Gebühr)</translation>
+        <translation>Hoch (166-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Langsam (x0.25-Gebühr)</translation>
+        <translation>Langsam (0,25-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation>Standard (x1-Gebühr)</translation>
+        <translation>Standard (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="208"/>
         <source>Fast (x5 fee)</source>
-        <translation>Schnell (x5-Gebühr)</translation>
+        <translation>Schnell (5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Am schnellsten (x41.5-Gebühr)</translation>
+        <translation>Am schnellsten (41,5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="237"/>
@@ -1329,12 +1329,12 @@
     <message>
         <location filename="../pages/Transfer.qml" line="308"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Die Adresse wurde zwar gefunden, jedoch konnten die DNSSEC-Signaturen nicht verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
+        <translation>Die Adresse wurde zwar gefunden, jedoch konnten die DNSSEC-Signaturen nicht verifiziert werden. Möglicherweise wurde diese Adresse manipuliert</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="310"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Unter dieser OpenAlias-Adresse konnte weder eine gültige Adresse gefunden werden, noch konnten die DNSSEC-Signaturen verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
+        <translation>Unter dieser OpenAlias-Adresse konnte weder eine gültige Adresse gefunden werden, noch konnten die DNSSEC-Signaturen verifiziert werden. Möglicherweise wurde diese Adresse manipuliert</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="313"/>
@@ -1370,7 +1370,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="499"/>
         <source>Sweep Unmixable</source>
-        <translation>Unvermischbares zusammenfegen</translation>
+        <translation>Unmischbare Beträge zusammenführen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="513"/>
@@ -1489,12 +1489,12 @@ Ringgröße: </translation>
         <location filename="../pages/Transfer.qml" line="704"/>
         <location filename="../pages/Transfer.qml" line="716"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Wallet ist nicht mit dem Deamon verbunden.</translation>
+        <translation>Wallet ist nicht mit dem Daemon verbunden.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="724"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Warte auf die vollständige Daemon-Synchronisation</translation>
+        <translation>Warte auf vollständige Daemon-Synchronisation</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="334"/>
@@ -1537,7 +1537,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../pages/TxKey.qml" line="130"/>
         <source>Recipient&apos;s wallet address</source>
-        <translation>Wallet Adresse des Empfängers</translation>
+        <translation>Wallet-Adresse des Empfängers</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="152"/>
@@ -1567,7 +1567,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../pages/TxKey.qml" line="110"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
-        <translation>Wenn eine Zahlung aus verschiedenen Transaktionen bestand, muss jede überprüft und die Ergebnisse kombiniert werden.</translation>
+        <translation>Wenn eine Zahlung aus mehreren Transaktionen bestand, muss jede einzeln überprüft und die Ergebnisse kombiniert werden.</translation>
     </message>
 </context>
 <context>
@@ -1575,7 +1575,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Fast geschafft - lass uns noch ein paar Einstellungen vornehmen</translation>
+        <translation>Fast geschafft – lass uns noch ein paar Einstellungen vornehmen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
@@ -1634,12 +1634,12 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
         <source>Enable auto-donations of?</source>
-        <translation>Automatisch Spenden aktivieren?</translation>
+        <translation>Automatisches Spenden aktivieren?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
         <source>% of my fee added to each transaction</source>
-        <translation>% meiner Gebühren von jeder Transaktion</translation>
+        <translation>% meiner Gebühren aus jeder Transaktion</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
@@ -1729,7 +1729,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardMain.qml" line="176"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets</translation>
+        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="184"/>
@@ -1947,7 +1947,7 @@ Ringgröße: </translation>
         <location filename="../main.qml" line="504"/>
         <location filename="../main.qml" line="617"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Keine unvermischbaren Ausgänge zum zusammenfegen</translation>
+        <translation>Keine unvermischbaren Ausgänge zum zusammenführen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="554"/>
@@ -2018,12 +2018,12 @@ Ringgröße: </translation>
     <message>
         <location filename="../main.qml" line="407"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Warte auf Start des Daemons...</translation>
+        <translation>Warte auf Start des Daemons …</translation>
     </message>
     <message>
         <location filename="../main.qml" line="413"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Warte bis der Daemon beendet wird...</translation>
+        <translation>Warte bis der Daemon beendet wird …</translation>
     </message>
     <message>
         <location filename="../main.qml" line="438"/>
@@ -2144,7 +2144,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="978"/>
         <source>Please wait...</source>
-        <translation>Bitte warten ...</translation>
+        <translation>Bitte warten …</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1002"/>
