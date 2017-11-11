@@ -819,7 +819,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="72"/>
         <source>Manage wallet</source>
-        <translation>Кправление кошельком</translation>
+        <translation>Управление кошельком</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="88"/>
