@@ -1729,7 +1729,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardMain.qml" line="176"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets.</translation>
+        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="184"/>
@@ -1947,7 +1947,7 @@ Ringgröße: </translation>
         <location filename="../main.qml" line="504"/>
         <location filename="../main.qml" line="617"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Keine unvermischbaren Ausgänge zum zusammenführen</translation>
+        <translation>Keine unmischbaren Ausgänge zum Zusammenführen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="554"/>
