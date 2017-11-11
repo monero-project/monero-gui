@@ -1018,7 +1018,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="74"/>
         <source>This signature did not verify</source>
-        <translation>Diese Signatur konnte nicht verifiziert werden</translation>
+        <translation>Diese Signatur ist nicht gültig</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="111"/>
@@ -1122,37 +1122,37 @@
     <message>
         <location filename="../components/StandardDropdown.qml" line="197"/>
         <source>Low (x1 fee)</source>
-        <translation>Niedrig (x1-Gebühr)</translation>
+        <translation>Niedrig (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="198"/>
         <source>Medium (x20 fee)</source>
-        <translation>Mittel (x20-Gebühr)</translation>
+        <translation>Mittel (20-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="199"/>
         <source>High (x166 fee)</source>
-        <translation>Hoch (x166-Gebühr)</translation>
+        <translation>Hoch (166-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="200"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Langsam (x0.25-Gebühr)</translation>
+        <translation>Langsam (0,25-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="201"/>
         <source>Default (x1 fee)</source>
-        <translation>Standard (x1-Gebühr)</translation>
+        <translation>Standard (1-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="202"/>
         <source>Fast (x5 fee)</source>
-        <translation>Schnell (x5-Gebühr)</translation>
+        <translation>Schnell (5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="203"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Am schnellsten (x41.5-Gebühr)</translation>
+        <translation>Am schnellsten (41,5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="204"/>
@@ -1324,17 +1324,17 @@
     <message>
         <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Keine gültige Adresse unter dieser OpenAlias-Adresse gefunden</translation>
+        <translation>Es wurde keine gültige Adresse unter dieser OpenAlias-Adresse gefunden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="308"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Adresse gefunden, aber die DNSSEC-Signaturen konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
+        <translation>Die Adresse wurde zwar gefunden, jedoch konnten die DNSSEC-Signaturen nicht verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="310"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Keine gültige Adresse unter dieser OpenAlias-Adresse gefunden und die DNSSEC-Signaturen konnten nicht verifiziert werden, sodass diese Adresse ggf. manipuliert wurde</translation>
+        <translation>Unter dieser OpenAlias-Adresse konnte weder eine gültige Adresse gefunden werden, noch konnten die DNSSEC-Signaturen verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="313"/>
@@ -1644,7 +1644,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Jede Transaktion kostet Dich eine kleine Gebühr. Mit dieser Option kannst Du einen zusätzlichen Prozentsatz dieser Kosten an die Entwickler spenden. Bei einer 50-prozentigen Spende und einer Gebühr von 0.005 XMR gehen zusätzliche 0.0025 XMR von Deinem Konto an die Entwickler.</translation>
+        <translation>Für jede Transaktion fällt eine kleine Gebühr an. Mit dieser Option kannst Du diese Gebühr um einen zusätzlichen Prozentsatz erhöhen, um die Entwicklung von Monero voranzutreiben. Bei einer 50-%igen automatischen Spende und einer Transaktionsgebühr von 0.005 XMR würden somit zusätzliche 0.0025 der Entwicklung von Monero zukommen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -1879,7 +1879,7 @@ Ringgröße: </translation>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Beachte: Das Passwort kann nicht wiederhergestellt werden und wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet bekommen, indem Du den&lt;br/&gt;&lt;br/&gt;
+        <translation> &lt;br&gt;Beachte: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet bekommen, indem Du den&lt;br/&gt;&lt;br/&gt;
                         aus 25 Wörtern bestehenden mnemonischen Code eingibst, der Dir bei der Einrichtung angezeigt wurde. Das Passwort schützt das Wallet und jede damit verbundene Aktion. Verwende also ein sicheres Passwort.</translation>
     </message>
 </context>
@@ -1982,7 +1982,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../main.qml" line="1320"/>
         <source>Stop daemon</source>
-        <translation>Stoppe Daemon</translation>
+        <translation>Daemon stoppen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1355"/>
@@ -2109,7 +2109,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="566"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>Keine ausreichenden Geldmittel. Verfügbares Guthaben: %1</translation>
+        <translation>Guthaben reicht nicht aus. Verfügbar: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="669"/>
@@ -2129,12 +2129,12 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="728"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Diese Adresse hat %1 Monero erhalten, mit %2 Bestätigung(en)</translation>
+        <translation>Diese Adresse hat %1 Monero erhalten, mit %2 Bestätigung(en).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="744"/>
         <source>Balance (syncing)</source>
-        <translation>Guthaben (Synchronisation)</translation>
+        <translation>Guthaben (synchronisiert sich)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="744"/>
@@ -2144,7 +2144,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="978"/>
         <source>Please wait...</source>
-        <translation>Bitte warten...</translation>
+        <translation>Bitte warten ...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1002"/>
