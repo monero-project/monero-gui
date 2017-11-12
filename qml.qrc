@@ -163,5 +163,7 @@
         <file>pages/Keys.qml</file>
         <file>images/menu.png</file>
         <file>images/appicon.ico</file>
+        <file>images/right.png</file>
+        <file>images/card-background.png</file>
     </qresource>
 </RCC>
