@@ -1533,6 +1533,15 @@ ApplicationWindow {
                     }
                 }
             }
+
+            Rectangle {
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                anchors.left: parent.left
+                height:1
+                color: "#2F2F2F"
+                z: 2
+            }
         }
 
         // new ToolTip
