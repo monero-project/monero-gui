@@ -209,30 +209,12 @@ Rectangle {
     }
 
     Rectangle {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: menuRect.top
-        width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: 1
-        color: "#DBDBDB"
-    }
-
-
-
-    Rectangle {
         id: menuRect
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: (isMobile)? parent.top : column1.bottom
-        anchors.topMargin: (isMobile)? 0 : 25
+        anchors.topMargin: (isMobile)? 0 : 4
         color: "#1C1C1C"
 
 
