@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Rectangle {
     id: button
@@ -55,9 +56,25 @@ Rectangle {
         return offset
     }
 
-    color: checked ? "#FFFFFF" : "#1C1C1C"
+    color: "black"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 48 * scaleRatio  : 36 * scaleRatio ) : 0
+    height: present ? ((appWindow.height >= 800) ? 40 * scaleRatio  : 52 * scaleRatio ) : 0
+
+    Item {
+        visible: parent.checked ? true : false
+        width: 300
+        height: 40
+
+        LinearGradient {
+            anchors.fill: parent
+            start: Qt.point(0, 0)
+            end: Qt.point(300, 0)
+            gradient: Gradient {
+               GradientStop { position: 1.0; color: "#333333" }
+               GradientStop { position: 0.0; color: "black" }
+            }
+        }
+    }
 
     transform: Scale {
         yScale: button.present ? 1 : 0
@@ -83,18 +100,18 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.leftMargin: parent.getOffset()
-        width: 50 * scaleRatio
+        width: 46 * scaleRatio
 
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: 14 * scaleRatio
+            width: 8 * scaleRatio
             height: width
             radius: height / 2
 
             Rectangle {
                 anchors.centerIn: parent
-                width: 10 * scaleRatio
+                width: 8 * scaleRatio
                 height: width
                 radius: height / 2
                 color: "#1C1C1C"
@@ -112,31 +129,33 @@ Rectangle {
         }
     }
 
-    Rectangle {
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: 1
-        color: "#DBDBDB"
-        visible: parent.checked
-    }
+//    Rectangle {
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//        anchors.bottom: parent.bottom
+//        width: 1
+//        color: "#DBDBDB"
+//        visible: parent.checked
+//    }
 
+    // menu button arrow
     Image {
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: 20 * scaleRatio
         anchors.leftMargin: parent.getOffset()
-        source: "../images/menuIndicator.png"
+        source: "../images/right.png"
     }
 
+    // menu button text
     Text {
         id: label
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: parent.getOffset() + 50 * scaleRatio
+        anchors.leftMargin: parent.getOffset() + 38 * scaleRatio
         font.family: "Arial"
         font.pixelSize: 16 * scaleRatio
-        color: parent.checked ? "#000000" : "#FFFFFF"
+        color: "#FFFFFF"
     }
 
     MouseArea {
