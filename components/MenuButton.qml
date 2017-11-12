@@ -63,13 +63,13 @@ Rectangle {
         yScale: button.present ? 1 : 0
 
         Behavior on yScale {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
     }
 
     Behavior on height {
         SequentialAnimation {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
     }
 
