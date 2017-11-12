@@ -165,5 +165,8 @@
         <file>images/appicon.ico</file>
         <file>images/right.png</file>
         <file>images/card-background.png</file>
+        <file>images/minimize.png</file>
+        <file>images/fullscreen.png</file>
+        <file>images/close.png</file>
     </qresource>
 </RCC>
