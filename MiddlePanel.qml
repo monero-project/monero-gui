@@ -212,30 +212,14 @@ Rectangle {
 
         }// flickable
     }
+
     // border
     Rectangle {
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.top: styledRow.bottom
-        anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: 1
-        color: "#DBDBDB"
-
+        color: "#313131"
     }
 
     /* connect "payment" click */
