@@ -15,7 +15,7 @@
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -77,146 +77,136 @@ Rectangle {
     anchors.bottom: parent.bottom
     anchors.top: parent.top
 
-    // Item with monero logo
-    Item {
-        visible: !isMobile
-        id: logoItem
+    // card with monero logo
+    Column {
+        visible: true
+        id: column1
+        height: 200
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: (persistentSettings.customDecorations)? 66 : 36
-        height: logo.implicitHeight
-
-        Image {
-            id: logo
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            source: "images/moneroLogo.png"
-        }
-
-        Text {
-            id: viewOnlyLabel
-            visible: viewOnly
-            text: qsTr("View Only") + translationManager.emptyString
-            anchors.top: logo.bottom
-            anchors.topMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            font.bold: true
-            color: "blue"
-        }
-
-        Text {
-            id: testnetLabel
-            visible: persistentSettings.nettype !== NetworkType.MAINNET
-            text: (persistentSettings.nettype === NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
-            anchors.top: logo.bottom
-            anchors.topMargin: 5
-            anchors.left: viewOnly ? viewOnlyLabel.right : parent.left
-            anchors.leftMargin: viewOnly ? 10 : 50
-            font.bold: true
-            color: "red"
-        }
-
-      /* Disable twitter/news panel
-        Image {
-            anchors.left: parent.left
-            anchors.verticalCenter: logo.verticalCenter
-            anchors.leftMargin: 19
-            source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
-                                                   "images/collapseRightPanel.png"
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
-        }
-      */
-    }
-
-
-
-    Column {
-        visible: !isMobile
-        id: column1
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: logoItem.bottom
-        anchors.topMargin: 26
-        spacing: 5
-
-        Label {
-            visible: !isMobile
-            id: balanceLabel
-            text: qsTr("Balance") + translationManager.emptyString
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-        }
+        anchors.topMargin: (persistentSettings.customDecorations)? 56 : 36
 
         Row {
-            visible: !isMobile
+            visible: true
             Item {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                height: 26 * scaleRatio
+                height: 490 * scaleRatio
                 width: 50 * scaleRatio
 
                 Image {
-                    anchors.centerIn: parent
-                    source: "images/lockIcon.png"
+                    width: 259; height:170
+                    fillMode: Image.PreserveAspectFit
+                    source: "images/card-background.png"
                 }
-            }
 
-            Text {
-                visible: !isMobile
-                id: balanceText
-                anchors.verticalCenter: parent.verticalCenter
-                font.family: "Arial"
-                color: "#000000"
-                text: "N/A"
-                // dynamically adjust text size
-                font.pixelSize: {
-                    var digits = text.split('.')[0].length
-                    var defaultSize = 25;
-                    if(digits > 2) {
-                        return defaultSize - 1.1*digits
+                Text {
+                    visible: !isMobile
+                    id: balanceText
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 76
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    // dynamically adjust text size
+                    font.pixelSize: {
+                        var digits = text.split('.')[0].length
+                        var defaultSize = 22;
+                        if(digits > 2) {
+                            return defaultSize - 1.1*digits
+                        }
+                        return defaultSize;
                     }
-                    return defaultSize;
                 }
-            }
-        }
 
-        Item { //separator
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 1
-        }
-
-        Label {
-            id: unlockedBalanceLabel
-            text: qsTr("Unlocked balance") + translationManager.emptyString
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-        }
-
-        Text {
-            id: unlockedBalanceText
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            font.family: "Arial"
-            color: "#000000"
-            text: "N/A"
-            // dynamically adjust text size
-            font.pixelSize: {
-                var digits = text.split('.')[0].length
-                var defaultSize = 18;
-                if(digits > 3) {
-                    return defaultSize - 0.6*digits
+                Text {
+                    id: unlockedBalanceText
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 126
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    // dynamically adjust text size
+                    font.pixelSize: {
+                        var digits = text.split('.')[0].length
+                        var defaultSize = 20;
+                        if(digits > 3) {
+                            return defaultSize - 0.6*digits
+                        }
+                        return defaultSize;
+                    }
                 }
-                return defaultSize;
+                Text {
+                    id: testnetLabel
+                    visible: persistentSettings.testnet
+                    text: qsTr("Testnet") + translationManager.emptyString
+                    anchors.top: logo.bottom
+                    anchors.topMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    font.bold: true
+                    color: "red"
+                }
+// @TODO: implement
+//                Text {
+//                    id: viewOnlyLabel
+//                    visible: viewOnly
+//                    text: qsTr("View Only") + translationManager.emptyString
+//                    anchors.top: logo.bottom
+//                    anchors.topMargin: 5
+//                    anchors.left: parent.left
+//                    anchors.leftMargin: 50
+//                    font.bold: true
+//                    color: "blue"
+//                }
+                Label {
+                    id: unlockedBalanceLabel
+                    text: qsTr("Unlocked balance") + translationManager.emptyString
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 110
+                }
+
+                Label {
+                    visible: !isMobile
+                    id: balanceLabel
+                    text: qsTr("Balance") + translationManager.emptyString
+                    fontSize: 14
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 60
+                }
+                Item { //separator
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 1
+                }
+              /* Disable twitter/news panel
+                Image {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: logo.verticalCenter
+                    anchors.leftMargin: 19
+                    source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
+                                                           "images/collapseRightPanel.png"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
+                }
+              */
             }
         }
     }
-
 
     Rectangle {
         anchors.top: parent.top
