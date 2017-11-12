@@ -172,5 +172,6 @@
         <file>images/moneroIcon-trans28x28.png</file>
         <file>images/moneroIcon-trans84x84.png</file>
         <file>images/moneroIcon-trans56x56.png</file>
+        <file>images/question.png</file>
     </qresource>
 </RCC>
