@@ -190,6 +190,7 @@ Rectangle {
                             from: 0 - target.width
                             to: 0
                             duration: 300
+                            easing.type: Easing.OutCubic
                         }
                         PropertyAnimation {
                             target: exitItem
@@ -197,6 +198,7 @@ Rectangle {
                             from: 0
                             to: target.width
                             duration: 300
+                            easing.type: Easing.OutCubic
                         }
                     }
                 }
