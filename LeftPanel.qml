@@ -72,8 +72,8 @@ Rectangle {
         menuColumn.previousButton.checked = true
     }
 
-    width: (isMobile)? appWindow.width : 260
-    color: "#FFFFFF"
+    width: (isMobile)? appWindow.width : 300
+    color: "black"
     anchors.bottom: parent.bottom
     anchors.top: parent.top
 
