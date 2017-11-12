@@ -168,5 +168,6 @@
         <file>images/minimize.png</file>
         <file>images/fullscreen.png</file>
         <file>images/close.png</file>
+        <file>images/moneroLogo_white.png</file>
     </qresource>
 </RCC>
