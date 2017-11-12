@@ -85,7 +85,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: (persistentSettings.customDecorations)? 56 : 36
+        anchors.topMargin: (persistentSettings.customDecorations)? 76 : 56
 
         Row {
             visible: true
@@ -147,7 +147,7 @@ Rectangle {
                     id: testnetLabel
                     visible: persistentSettings.testnet
                     text: qsTr("Testnet") + translationManager.emptyString
-                    anchors.top: logo.bottom
+                    anchors.top: unlockedBalanceText.bottom
                     anchors.topMargin: 5
                     anchors.left: parent.left
                     anchors.leftMargin: 50
@@ -255,7 +255,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#505050"
+                color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#313131"
                 height: 1
             }
             */
@@ -281,7 +281,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -307,7 +307,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -330,7 +330,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -354,7 +354,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -376,7 +376,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -402,7 +402,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
+                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#313131"
                 height: 1
             }
             // ------------- TxKey tab ---------------
@@ -448,7 +448,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -473,7 +473,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Settings tab ---------------
@@ -495,7 +495,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Sign/verify tab ---------------
@@ -518,7 +518,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
