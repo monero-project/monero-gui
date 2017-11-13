@@ -108,6 +108,7 @@ elif [ "$BUILD_TYPE" == "debug-android" ]; then
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building libwallet debug"
     CMAKE_BUILD_TYPE=Debug
+    STATIC=true
 else
     echo "Valid build types are release, release-static, release-android, debug-android and debug"
     exit 1;
