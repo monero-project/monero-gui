@@ -42,6 +42,7 @@ Rectangle {
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
+    property int titleBarHeight: 50
 
     signal dashboardClicked()
     signal historyClicked()
@@ -85,13 +86,29 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: (persistentSettings.customDecorations)? 76 : 56
+        // @TODO: customDecorations?
+        anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
+
+        Row {
+            Item {
+                x: 0
+                y: 0
+                width: 300
+                height: 232
+
+                Image {
+                    width: 300; height: 232
+                    source: "images/balanceGradient.jpg"
+                }
+            }
+        }
 
         Row {
             visible: true
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
+                anchors.topMargin: 20
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 height: 490 * scaleRatio
@@ -102,6 +119,16 @@ Rectangle {
                     fillMode: Image.PreserveAspectFit
                     source: "images/card-background.png"
                 }
+            }
+
+            Item {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                anchors.leftMargin: 20
+                anchors.verticalCenter: parent.verticalCenter
+                height: 490 * scaleRatio
+                width: 50 * scaleRatio
 
                 Text {
                     visible: !isMobile
@@ -214,7 +241,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: (isMobile)? parent.top : column1.bottom
-        anchors.topMargin: (isMobile)? 0 : 4
+        anchors.topMargin: (isMobile)? 0 : 32
         color: "#1C1C1C"
 
 
