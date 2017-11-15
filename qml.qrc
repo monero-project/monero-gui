@@ -173,5 +173,8 @@
         <file>images/moneroIcon-trans84x84.png</file>
         <file>images/moneroIcon-trans56x56.png</file>
         <file>images/question.png</file>
+        <file>images/expand.png</file>
+        <file>images/balanceGradient.jpg</file>
+        <file>images/titlebarGradient.jpg</file>
     </qresource>
 </RCC>
