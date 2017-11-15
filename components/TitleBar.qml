@@ -29,47 +29,85 @@
 import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 
 Rectangle {
     id: titleBar
-    color: "#000000"
+
     property int mouseX: 0
     property bool containsMouse: false
     property alias basicButtonVisible: goToBasicVersionButton.visible
     property bool customDecorations: true
     signal goToBasicVersion(bool yes)
-    height: customDecorations && !isMobile ? 30 : 0
+    height: customDecorations && !isMobile ? 50 : 0
     y: -height
     property string title
     property alias maximizeButtonVisible: maximizeButton.visible
     z: 1
 
-    Text {
-        anchors.centerIn: parent
-        font.family: "Arial"
-        font.pixelSize: 15
-        color: "#FFFFFF"
-        text: titleBar.title
-        visible: customDecorations
+    Item {
+        id: test
+        width: parent.width
+        height: 50
+        z: 1
+
+        LinearGradient {
+            anchors.fill: parent
+            start: Qt.point(0, 0)
+            end: Qt.point(parent.width, 0)
+            gradient: Gradient {
+               GradientStop { position: 1.0; color: "#1a1a1a" }
+               GradientStop { position: 0.0; color: "black" }
+            }
+        }
     }
 
-    Rectangle {
+    Item{
+        id: titlebarlogo
+        width: 128
+        height: 50
+        anchors.centerIn: parent
+        visible: customDecorations
+        z: 1
 
+        Image {
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.topMargin: 11
+            width: 86
+            height: 26
+            fillMode: Image.PreserveAspectFit
+            source: "../images/moneroLogo_white.png"
+        }
+
+        Image {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 11
+            width: 28
+            height: 28
+            source: "../images/moneroIcon-trans28x28.png"
+        }
+    }
+
+    // collapse left panel
+    Rectangle {
         id: goToBasicVersionButton
         property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  "#FFE00A"
-        height: 30 * scaleRatio
+        color:  "black"
+        height: 50 * scaleRatio
         width: height
         visible: isMobile
+        z: 2
 
         Image {
-            width: parent.width * 2/3;
-            height: width;
+            width: 14
+            height: 14
             anchors.centerIn: parent
-            source: "../images/menu.png"
+            source: "../images/expand.png"
         }
 
         MouseArea {
@@ -90,17 +128,20 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         visible: parent.customDecorations
+        z: 2
 
         Rectangle {
             property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#6B0072" : "#000000"
+            width: 42
+            color: containsMouse ? "#6B0072" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/helpIcon.png"
+                width: 9
+                height: 16
+                source: "../images/question.png"
             }
 
             MouseArea {
@@ -116,12 +157,12 @@ Rectangle {
             property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#3665B3" : "#000000"
+            width: 42
+            color: containsMouse ? "#3665B3" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/minimizeIcon.png"
+                source: "../images/minimize.png"
             }
 
             MouseArea {
@@ -138,13 +179,15 @@ Rectangle {
             property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#FF6C3C" : "#000000"
+            width: 42
+            color: containsMouse ? "#FF6C3C" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
+                height: 16
+                width: 16
                 source: appWindow.visibility === Window.FullScreen ?  "../images/backToWindowIcon.png" :
-                                                                      "../images/maximizeIcon.png"
+                                                                      "../images/fullscreen.png"
 
             }
 
@@ -162,12 +205,14 @@ Rectangle {
             property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#E04343" : "#000000"
+            width: 42
+            color: containsMouse ? "#E04343" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/closeIcon.png"
+                width: 16
+                height: 16
+                source: "../images/close.png"
             }
 
             MouseArea {
