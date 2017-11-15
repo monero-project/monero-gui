@@ -157,7 +157,7 @@ Rectangle {
                         informationPopup.open();
                     } else {
                         informationPopup.title = qsTr("Information") + translationManager.emptyString
-                        informationPopup.text  = qsTr("Sucessfully rescanned spent outputs") + translationManager.emptyString
+                        informationPopup.text  = qsTr("Successfully rescanned spent outputs.") + translationManager.emptyString
                         informationPopup.icon  = StandardIcon.Information
                         informationPopup.onCloseCallback = null
                         informationPopup.open();
