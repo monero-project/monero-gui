@@ -59,6 +59,15 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 52 * scaleRatio ) : 0
 
+    // Load custom fonts @TODO: should probably do this somewhere else
+    Text {
+        FontLoader  { id: sfuid; source: "../fonts/SFUIDisplay-Bold.otf"; }
+        FontLoader  { source: "../fonts/SFUIDisplay-Medium.otf"; }
+        FontLoader  { source: "../fonts/SFUIDisplay-Light.otf"; }
+        FontLoader  { source: "../fonts/SFUIDisplay-Regular.otf"; }
+        font.family: "SFUIDisplay";
+    }
+
     // Button gradient whilst checked
     // @TODO: replace by .png - gradient not available in 2d renderer
     LinearGradient {
@@ -105,7 +114,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: 8 * scaleRatio
-            font.family: "Arial"
+            font.family: "SFUIDisplay"
             font.bold: true
             font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"
