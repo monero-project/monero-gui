@@ -45,7 +45,6 @@ Rectangle {
         clicked();
     }
 
-
     function getOffset() {
         var offset = 0
         var item = button
@@ -58,21 +57,89 @@ Rectangle {
 
     color: "black"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 40 * scaleRatio  : 52 * scaleRatio ) : 0
+    height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 52 * scaleRatio ) : 0
 
-    Item {
-        visible: parent.checked ? true : false
-        width: 300
-        height: 40
+    // Button gradient whilst checked
+    // @TODO: replace by .png - gradient not available in 2d renderer
+    LinearGradient {
+        visible: button.checked ? true : false
+        anchors.fill: parent
+        start: Qt.point(0, 0)
+        end: Qt.point(300, 0)
+        gradient: Gradient {
+           GradientStop { position: 1.0; color: "#333333" }
+           GradientStop { position: 0.0; color: "black" }
+        }
+    }
 
-        LinearGradient {
-            anchors.fill: parent
-            start: Qt.point(0, 0)
-            end: Qt.point(300, 0)
-            gradient: Gradient {
-               GradientStop { position: 1.0; color: "#333333" }
-               GradientStop { position: 0.0; color: "black" }
-            }
+    // button decorations that are subject to leftMargin offsets
+    Rectangle {
+        anchors.left: parent.left
+        anchors.leftMargin: parent.getOffset() + 20 * scaleRatio
+        height: parent.height
+        width: button.checked ? 20: 10
+        color: "#00000000"
+
+        // dot if unchecked
+        Rectangle {
+            id: dot
+            anchors.centerIn: parent
+            width: 8 * scaleRatio
+            height: 8 * scaleRatio
+            radius: 4 * scaleRatio
+            color: button.dotColor
+            visible: !button.checked
+        }
+
+        // arrow if checked
+        Image {
+            anchors.centerIn: parent
+            anchors.left: parent.left
+            source: "../images/menuArrow.png"
+            visible: button.checked
+        }
+
+        // button text
+        Text {
+            id: label
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.right
+            anchors.leftMargin: 8 * scaleRatio
+            font.family: "Arial"
+            font.bold: true
+            font.pixelSize: 16 * scaleRatio
+            color: "#FFFFFF"
+        }
+    }
+
+    // menu button right arrow
+    Image {
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 20 * scaleRatio
+        anchors.leftMargin: parent.getOffset()
+        source: "../images/right.png"
+        opacity: button.checked ? 1.0 : 0.4
+    }
+
+    Text {
+        id: symbolText
+        anchors.centerIn: parent
+        font.pixelSize: 11 * scaleRatio
+        font.bold: true
+        color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
+        visible: appWindow.ctrlPressed
+    }
+
+    MouseArea {
+        id: buttonArea
+        anchors.fill: parent
+        hoverEnabled: true
+        onClicked: {
+            if(parent.checked)
+                return
+            button.doClick()
+            parent.checked = true
         }
     }
 
@@ -93,80 +160,5 @@ Rectangle {
     Behavior on checked {
         // we get the value of checked before the change
         ScriptAction { script: if (under) under.numSelectedChildren += checked > 0 ? -1 : 1 }
-    }
-
-    Item {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.leftMargin: parent.getOffset()
-        width: 46 * scaleRatio
-
-        Rectangle {
-            id: dot
-            anchors.centerIn: parent
-            width: 8 * scaleRatio
-            height: width
-            radius: height / 2
-
-            Rectangle {
-                anchors.centerIn: parent
-                width: 8 * scaleRatio
-                height: width
-                radius: height / 2
-                color: "#1C1C1C"
-                visible: !button.checked && !buttonArea.containsMouse
-            }
-        }
-
-        Text {
-            id: symbolText
-            anchors.centerIn: parent
-            font.pixelSize: 11 * scaleRatio
-            font.bold: true
-            color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
-            visible: appWindow.ctrlPressed
-        }
-    }
-
-//    Rectangle {
-//        anchors.left: parent.left
-//        anchors.top: parent.top
-//        anchors.bottom: parent.bottom
-//        width: 1
-//        color: "#DBDBDB"
-//        visible: parent.checked
-//    }
-
-    // menu button arrow
-    Image {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 20 * scaleRatio
-        anchors.leftMargin: parent.getOffset()
-        source: "../images/right.png"
-    }
-
-    // menu button text
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: parent.getOffset() + 38 * scaleRatio
-        font.family: "Arial"
-        font.pixelSize: 16 * scaleRatio
-        color: "#FFFFFF"
-    }
-
-    MouseArea {
-        id: buttonArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: {
-            if(parent.checked)
-                return
-            button.doClick()
-            parent.checked = true
-        }
     }
 }
