@@ -26,8 +26,9 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtGraphicalEffects 1.0
+import "." 1.0
 
 Rectangle {
     id: button
@@ -59,15 +60,6 @@ Rectangle {
     color: "black"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 52 * scaleRatio ) : 0
-
-    // Load custom fonts @TODO: should probably do this somewhere else
-    Text {
-        FontLoader  { id: sfuid; source: "../fonts/SFUIDisplay-Bold.otf"; }
-        FontLoader  { source: "../fonts/SFUIDisplay-Medium.otf"; }
-        FontLoader  { source: "../fonts/SFUIDisplay-Light.otf"; }
-        FontLoader  { source: "../fonts/SFUIDisplay-Regular.otf"; }
-        font.family: "SFUIDisplay";
-    }
 
     // Button gradient whilst checked
     // @TODO: replace by .png - gradient not available in 2d renderer
@@ -115,7 +107,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: 8 * scaleRatio
-            font.family: "SFUIDisplay"
+            font.family: Style.fontMedium.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"

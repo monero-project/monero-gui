@@ -182,5 +182,7 @@
         <file>fonts/SFUIDisplay-Regular.otf</file>
         <file>fonts/SFUIDisplay-Light.otf</file>
         <file>fonts/SFUIDisplay-Bold.otf</file>
+        <file>components/Style.qml</file>
+        <file>components/qmldir</file>
     </qresource>
 </RCC>
