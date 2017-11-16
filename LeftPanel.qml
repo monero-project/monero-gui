@@ -289,6 +289,14 @@ Rectangle {
             }
             */
 
+            // top border
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#313131"
+                height: 1
+            }
 
             // ------------- Transfer tab ---------------
             MenuButton {
