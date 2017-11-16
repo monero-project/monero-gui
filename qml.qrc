@@ -176,5 +176,6 @@
         <file>images/expand.png</file>
         <file>images/balanceGradient.jpg</file>
         <file>images/titlebarGradient.jpg</file>
+        <file>images/titlebarLogo.png</file>
     </qresource>
 </RCC>
