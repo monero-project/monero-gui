@@ -64,29 +64,19 @@ Rectangle {
 
     Item{
         id: titlebarlogo
-        width: 128
+        width: 125
         height: 50
         anchors.centerIn: parent
         visible: customDecorations
         z: 1
 
         Image {
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.topMargin: 11
-            width: 86
-            height: 26
-            fillMode: Image.PreserveAspectFit
-            source: "../images/moneroLogo_white.png"
-        }
-
-        Image {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 11
-            width: 28
+            width: 125
             height: 28
-            source: "../images/moneroIcon-trans28x28.png"
+            source: "../images/titlebarLogo.png"
         }
     }
 
