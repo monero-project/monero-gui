@@ -1111,6 +1111,9 @@ ApplicationWindow {
 
     PasswordDialog {
         id: transactionConfirmationPasswordDialog
+        z: parent.z + 1
+        visible:false
+        anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
         onAccepted: {
