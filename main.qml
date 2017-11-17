@@ -53,7 +53,7 @@ ApplicationWindow {
     property var currentWallet;
     property var transaction;
     property var transactionDescription;
-    property alias password : passwordDialog.password
+    property var walletPassword
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -166,7 +166,7 @@ ApplicationWindow {
         persistentSettings.restore_height = 0
         restoreHeight = 0;
         persistentSettings.is_recovering = false
-        appWindow.password = ""
+        walletPassword = ""
         fileDialog.open();
     }
 
@@ -226,7 +226,7 @@ ApplicationWindow {
                 wallet_path = moneroAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
             console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
-            walletManager.openWalletAsync(wallet_path, appWindow.password,
+            walletManager.openWalletAsync(wallet_path, walletPassword,
                                               persistentSettings.testnet);
         }
 
@@ -338,25 +338,25 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
-            if (appWindow.password === '') {
-                console.error("Error opening wallet with empty password: ", wallet.errorString);
-                console.log("closing wallet async : " + wallet.address)
-                closeWallet();
-                // try to open wallet with password;
-                passwordDialog.open(walletName);
-            } else {
-                // opening with password but password doesn't match
-                console.error("Error opening wallet with password: ", wallet.errorString);
-
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-                informationPopup.icon = StandardIcon.Critical
-                console.log("closing wallet async : " + wallet.address)
-                closeWallet();
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    passwordDialog.open(walletName)
-                }
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
+                appWindow.initialize();
+            }
+            passwordDialog.onRejectedCallback = function() {
+                walletPassword = "";
+                //appWindow.enableUI(false)
+                rootItem.state = "wizard";
+            }
+            // opening with password but password doesn't match
+            console.error("Error opening wallet with password: ", wallet.errorString);
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
+            informationPopup.icon = StandardIcon.Critical
+            console.log("closing wallet async : " + wallet.address)
+            closeWallet();
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                passwordDialog.open(walletName)
             }
             return;
         }
@@ -951,7 +951,14 @@ ApplicationWindow {
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
                 initialize(persistentSettings);
+            }
+            passwordDialog.onRejectedCallback = function() {
+                rootItem.state = "wizard"
+            }
+            passwordDialog.open(usefulName(walletPath()))
         }
 
         checkUpdates();
@@ -1013,8 +1020,8 @@ ApplicationWindow {
         id: transactionConfirmationPopup
         onAccepted: {
             close();
-            transactionConfirmationPasswordDialog.onAcceptedCallback = function() {
-                if(appWindow.password === transactionConfirmationPasswordDialog.password){
+            passwordDialog.onAcceptedCallback = function() {
+                if(walletPassword === passwordDialog.password){
                     // Save transaction to file if view only wallet
                     if(viewOnly) {
                         saveTxDialog.open();
@@ -1026,15 +1033,12 @@ ApplicationWindow {
                     informationPopup.text = qsTr("Wrong password");
                     informationPopup.open()
                     informationPopup.onCloseCallback = function() {
-                        transactionConfirmationPasswordDialog.open()
+                        passwordDialog.open()
                     }
                 }
-                transactionConfirmationPasswordDialog.password = ""
             }
-            transactionConfirmationPasswordDialog.onRejectedCallback = function() {
-                transactionConfirmationPasswordDialog.password = ""
-            }
-            transactionConfirmationPasswordDialog.open()
+            passwordDialog.onRejectedCallback = null;
+            passwordDialog.open()
         }
     }
 
@@ -1072,7 +1076,15 @@ ApplicationWindow {
             console.log(moneroAccountsDir)
             console.log(fileDialog.fileUrl)
             console.log(persistentSettings.wallet_path)
-            initialize();
+            passwordDialog.onAcceptedCallback = function() {
+                walletPassword = passwordDialog.password;
+                initialize();
+            }
+            passwordDialog.onRejectedCallback = function() {
+                console.log("Canceled")
+                rootItem.state = "wizard";
+            }
+            passwordDialog.open(usefulName(walletPath()));
         }
         onRejected: {
             console.log("Canceled")
@@ -1138,21 +1150,6 @@ ApplicationWindow {
         visible: false
         z: parent.z + 1
         anchors.fill: parent
-        onAccepted: {
-            appWindow.initialize();
-        }
-        onRejected: {
-            //appWindow.enableUI(false)
-            rootItem.state = "wizard"
-        }
-
-    }
-
-    PasswordDialog {
-        id: transactionConfirmationPasswordDialog
-        z: parent.z + 1
-        visible:false
-        anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
         onAccepted: {
@@ -1162,37 +1159,6 @@ ApplicationWindow {
         onRejected: {
             if (onRejectedCallback)
                 onRejectedCallback();
-        }
-    }
-
-    PasswordDialog {
-        id: settingsPasswordDialog
-        z: parent.z + 1
-        visible:false
-        anchors.fill: parent
-        onAccepted: {
-            if(appWindow.password === settingsPasswordDialog.password){
-                if(currentWallet.seedLanguage == "") {
-                    console.log("No seed language set. Using English as default");
-                    currentWallet.setSeedLanguage("English");
-                }
-
-                // Load keys page
-                middlePanel.state = "Keys"
-
-            } else {
-                informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text = qsTr("Wrong password");
-                informationPopup.open()
-                informationPopup.onCloseCallback = function() {
-                    settingsPasswordDialog.open()
-                }
-            }
-
-            settingsPasswordDialog.password = ""
-        }
-        onRejected: {
-            appWindow.showPageRequest("Settings");
         }
     }
 
@@ -1278,7 +1244,31 @@ ApplicationWindow {
             onMiningClicked: { middlePanel.state = "Mining"; if(isMobile) hideMenu(); updateBalance(); }
             onSignClicked: { middlePanel.state = "Sign"; if(isMobile) hideMenu(); updateBalance(); }
             onSettingsClicked: { middlePanel.state = "Settings"; if(isMobile) hideMenu(); updateBalance(); }
-            onKeysClicked: { settingsPasswordDialog.open(); if(isMobile) hideMenu(); updateBalance(); }
+            onKeysClicked: {
+                passwordDialog.onAcceptedCallback = function() {
+                    if(walletPassword === passwordDialog.password){
+                        if(currentWallet.seedLanguage == "") {
+                            console.log("No seed language set. Using English as default");
+                            currentWallet.setSeedLanguage("English");
+                        }
+                        // Load keys page
+                        middlePanel.state = "Keys"
+                    } else {
+                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text = qsTr("Wrong password");
+                        informationPopup.open()
+                        informationPopup.onCloseCallback = function() {
+                            passwordDialog.open()
+                        }
+                    }
+                }
+                passwordDialog.onRejectedCallback = function() {
+                    appWindow.showPageRequest("Settings");
+                }
+                passwordDialog.open();
+                if(isMobile) hideMenu();
+                updateBalance();
+            }
         }
 
         RightPanel {
