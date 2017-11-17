@@ -38,6 +38,7 @@ import "../components"
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
+    property var daemonAddress
     property bool viewOnly: false
     id: page
 
@@ -47,6 +48,17 @@ Rectangle {
 
     function initSettings() {
         //runs on every page load
+
+        // Daemon settings
+        daemonAddress = persistentSettings.daemon_address.split(":");
+
+        if(persistentSettings.lightWallet)
+            walletTypeDropdown.currentIndex = 1
+        else
+            walletTypeDropdown.currentIndex = 0
+
+        walletTypeDropdown.update()
+        lightNodeServiceDropdown.update()
     }
 
     ColumnLayout {
@@ -141,7 +153,7 @@ Rectangle {
 */
             StandardButton {
                 id: rescanSpentButton
-                enabled: !persistentSettings.useRemoteNode
+                enabled: !persistentSettings.useRemoteNode && !persistentSettings.lightWallet
                 text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 shadowReleasedColor: "#FF4304"
                 shadowPressedColor: "#B32D00"
@@ -166,9 +178,78 @@ Rectangle {
             }
         }
 
+        // Wallet type dropdown
+        RowLayout {
+            Label {
+                id: walletTypeLabel
+                color: "#4A4949"
+                text: qsTr("Wallet type") + translationManager.emptyString
+            }
+        }
+
+        Rectangle {
+            Layout.fillWidth: true
+            height: 1
+            color: "#DEDEDE"
+        }
+
+        ListModel {
+             id: walletTypeModel
+
+             ListElement { column1: qsTr("Full") ; column2: ""; type: "full"}
+             ListElement { column1: qsTr("Light") ; column2: ""; type: "light" }
+
+         }
+
+        StandardDropdown {
+            Layout.fillWidth: isMobile
+            Layout.minimumWidth: 100
+            id: walletTypeDropdown
+            shadowReleasedColor: "#FF4304"
+            shadowPressedColor: "#B32D00"
+            releasedColor: "#FF6C3C"
+            pressedColor: "#FF4304"
+            z: parent.z + 1
+            dataModel: walletTypeModel
+            onChanged: {
+                console.log("wallet type: ", walletTypeModel.get(walletTypeDropdown.currentIndex).type)
+                console.log(walletTypeDropdown.currentIndex);
+
+                // Enable Light Wallet
+                if(!persistentSettings.lightWallet) {
+                    console.log("enabling lightwallet");
+                    confirmationDialog.title = qsTr("Warning") + translationManager.emptyString;
+                    confirmationDialog.text = qsTr("Your view key will be sent to the light wallet server") + translationManager.emptyString;
+
+                    confirmationDialog.icon = StandardIcon.Question
+                    confirmationDialog.cancelText = qsTr("Cancel")
+
+                    // Continue
+                    confirmationDialog.onAcceptedCallback = function() {
+                        appWindow.connectLightWallet()
+                        walletTypeDropdown.currentIndex = 1
+                    }
+
+                    // Cancel
+                    confirmationDialog.onRejectedCallback = function() {
+                        persistentSettings.lightWallet = false
+                        walletTypeDropdown.currentIndex = 0
+                    };
+
+                    confirmationDialog.open()
+
+                // Disable light wallet
+                } else {
+                    appWindow.disconnectRemoteNode()
+                }
+
+            }
+        }
+
         RowLayout {
 
             StandardButton {
+                visible: !persistentSettings.lightWallet
                 id: remoteDisconnect
                 enabled: persistentSettings.useRemoteNode
                 Layout.fillWidth: false
@@ -183,6 +264,7 @@ Rectangle {
             }
 
             StandardButton {
+                visible: !persistentSettings.lightWallet
                 id: remoteConnect
                 enabled: !persistentSettings.useRemoteNode
                 Layout.fillWidth: false
@@ -204,10 +286,11 @@ Rectangle {
             Label {
                 id: manageDaemonLabel
                 color: "#4A4949"
-                text: qsTr("Manage Daemon") + translationManager.emptyString
+                text: (!persistentSettings.lightWallet ? qsTr("Manage Daemon") : qsTr("Light Wallet Settings")) + translationManager.emptyString
             }
 
             CheckBox {
+                visible: !persistentSettings.lightWallet
                 id: daemonAdvanced
                 Layout.leftMargin: 15
                 text: qsTr("Show advanced") + translationManager.emptyString
@@ -222,7 +305,7 @@ Rectangle {
         }
 
         GridLayout {
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.lightWallet
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
@@ -234,8 +317,9 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
-                    // Set current daemon address to local
-                    appWindow.currentDaemonAddress = appWindow.localDaemonAddress
+                    // Reset default daemon address settings
+                    persistentSettings.daemon_address = (persistentSettings.testnet) ? "localhost:28081" :  "localhost:18081"
+                    initSettings()
                     appWindow.startDaemon(daemonFlags.text)
                 }
             }
@@ -270,7 +354,7 @@ Rectangle {
 
         ColumnLayout {
             id: blockchainFolderRow
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.lightWallet
             Label {
                 id: blockchainFolderLabel
                 color: "#4A4949"
@@ -299,7 +383,7 @@ Rectangle {
 
 
         RowLayout {
-            visible: daemonAdvanced.checked && !isMobile
+            visible: daemonAdvanced.checked && !isMobile && !persistentSettings.lightWallet
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -317,7 +401,7 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            visible: daemonAdvanced.checked || isMobile
+            visible: !persistentSettings.lightWallet && (daemonAdvanced.checked || isMobile)
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -328,7 +412,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            visible: daemonAdvanced.checked || isMobile
+            visible: !persistentSettings.lightWallet && (daemonAdvanced.checked || isMobile)
             LineEdit {
                 id: daemonUsername
                 Layout.preferredWidth:  100 * scaleRatio
@@ -357,6 +441,7 @@ Rectangle {
                 }
                 RemoteNodeEdit {
                     id: remoteNodeEdit
+                    visible: !persistentSettings.lightWallet
                     Layout.minimumWidth: 100 * scaleRatio
                     daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
                     daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
@@ -384,6 +469,102 @@ Rectangle {
 
                         appWindow.connectRemoteNode()
                     }
+                }
+            }
+        }
+
+        // Light wallet settings
+        RowLayout {
+            Layout.fillWidth: true
+            z: parent.z + 1
+            ListModel {
+                 id: lightNodeServiceModel
+                 ListElement { column1: qsTr("OpenMonero (testnet only)") ; column2: ""; host: "openmonero.org:1984"; ssl:false}
+                 ListElement { column1: qsTr("MyMonero (mainnet only)") ; column2: ""; host: "api.mymonero.com:8443"; ssl:true}
+                 ListElement { column1: qsTr("Custom") ; column2: ""; host: ":"; ssl:false}
+             }
+
+            StandardDropdown {
+                Layout.fillWidth: isMobile
+                Layout.minimumWidth: 250
+                id: lightNodeServiceDropdown
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                z: parent.z + 1
+                visible: persistentSettings.lightWallet
+                dataModel: lightNodeServiceModel
+                onChanged: {
+                    persistentSettings.lightWalletServerAddress = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).host
+                    persistentSettings.useSSL = useSSL.checked = lightNodeServiceModel.get(lightNodeServiceDropdown.currentIndex).ssl
+                    currentWallet.setSSLMode(persistentSettings.useSSL)
+                    appWindow.connectLightWallet()
+                    lightNodeServiceDropdown.update();
+                }
+            }
+        }
+
+        RowLayout {
+            visible: persistentSettings.lightWallet
+            ColumnLayout {
+                RemoteNodeEdit {
+                    visible: persistentSettings.lightWallet
+                    Layout.minimumWidth: 100 * scaleRatio
+                    id: lightWalletServerEdit
+                    daemonAddrText: persistentSettings.lightWalletServerAddress.split(":")[0]
+                    daemonPortText: (persistentSettings.lightWalletServerAddress.split(":")[1] == "") ? "18081" : persistentSettings.lightWalletServerAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.lightWalletServerAddress = lightWalletServerEdit.getAddress();
+                        console.log("setting remote node to " + persistentSettings.lightWalletServerAddress)
+                    }
+                }
+
+                CheckBox {
+                    id: useSSL
+                    checked: persistentSettings.useSSL
+                    onClicked: {
+                        persistentSettings.useSSL = !persistentSettings.useSSL
+                        currentWallet.setSSLMode(persistentSettings.useSSL)
+                    }
+                    text: qsTr("Use SSL") + translationManager.emptyString
+                    checkedIcon: "../images/checkedVioletIcon.png"
+                    uncheckedIcon: "../images/uncheckedIcon.png"
+                }
+
+                StandardButton {
+                    id: lightWalletNodeSave
+                    text: qsTr("Connect") + translationManager.emptyString
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#FF6C3C"
+                    pressedColor: "#FF4304"
+                    onClicked: {
+                        // Update daemon login
+                        persistentSettings.lightWalletServerAddress = lightWalletServerEdit.getAddress();
+                        appWindow.connectLightWallet()
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            StandardButton {
+                id: sendImportRequest
+                enabled: leftPanel.networkStatus.connected
+                text: qsTr("Send import wallet request") + translationManager.emptyString
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#FF6C3C"
+                pressedColor: "#FF4304"
+                onClicked: {
+                    //TODO: make async
+                    var response = currentWallet.sendLightWalletImportRequest();
+                    console.log(response.payment_id);
+                    console.log(walletManager.displayAmount(response.fee));
+                    console.log(response.new_request);
+                    console.log(response.payment_address);
+                    console.log(response.status);
                 }
             }
         }

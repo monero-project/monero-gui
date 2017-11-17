@@ -246,9 +246,13 @@ public:
 
     quint64 getWalletCreationHeight() const {return m_walletImpl->getRefreshFromBlockHeight();}
     void setWalletCreationHeight(quint64 height);
+    Q_INVOKABLE void setLightWallet(bool enable);
+
+    Q_INVOKABLE void setSSLMode(bool enable);
 
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
+    Q_INVOKABLE QVariantMap sendLightWalletImportRequest();
 
     // TODO: setListenter() when it implemented in API
 signals:
@@ -271,6 +275,9 @@ signals:
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
     void connectionStatusChanged(ConnectionStatus status) const;
+
+    void lightWalletLoginError(const QString &msg) const;
+
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -303,6 +310,8 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
+    bool m_lightWallet;
+    bool m_useSSL;
 };
 
 
