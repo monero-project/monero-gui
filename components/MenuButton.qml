@@ -58,7 +58,7 @@ Rectangle {
 
     color: "black"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 52 * scaleRatio ) : 0
+    height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
 
     // Button gradient whilst checked
     // @TODO: replace by .png - gradient not available in 2d renderer
