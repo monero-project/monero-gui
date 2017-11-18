@@ -119,6 +119,31 @@ Rectangle {
                     fillMode: Image.PreserveAspectFit
                     source: "images/card-background.png"
                 }
+
+                Text {
+                    id: testnetLabel
+                    visible: persistentSettings.testnet
+                    text: qsTr("Testnet") + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 8
+                    anchors.left: parent.left
+                    anchors.leftMargin: 190
+                    font.bold: true
+                    color: "white"
+                }
+
+                // @TODO: implement
+                //                Text {
+                //                    id: viewOnlyLabel
+                //                    visible: viewOnly
+                //                    text: qsTr("View Only") + translationManager.emptyString
+                //                    anchors.top: logo.bottom
+                //                    anchors.topMargin: 5
+                //                    anchors.left: parent.left
+                //                    anchors.leftMargin: 50
+                //                    font.bold: true
+                //                    color: "blue"
+                //                }
             }
 
             Item {
@@ -170,29 +195,7 @@ Rectangle {
                         return defaultSize;
                     }
                 }
-                Text {
-                    id: testnetLabel
-                    visible: persistentSettings.testnet
-                    text: qsTr("Testnet") + translationManager.emptyString
-                    anchors.top: unlockedBalanceText.bottom
-                    anchors.topMargin: 5
-                    anchors.left: parent.left
-                    anchors.leftMargin: 50
-                    font.bold: true
-                    color: "red"
-                }
-// @TODO: implement
-//                Text {
-//                    id: viewOnlyLabel
-//                    visible: viewOnly
-//                    text: qsTr("View Only") + translationManager.emptyString
-//                    anchors.top: logo.bottom
-//                    anchors.topMargin: 5
-//                    anchors.left: parent.left
-//                    anchors.leftMargin: 50
-//                    font.bold: true
-//                    color: "blue"
-//                }
+
                 Label {
                     id: unlockedBalanceLabel
                     text: qsTr("Unlocked balance") + translationManager.emptyString
