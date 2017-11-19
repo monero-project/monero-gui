@@ -27,10 +27,11 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import "." 1.0
 
 Item {
     id: item
-    property alias placeholderText: input.placeholderText
+    property alias placeholderText: placeholderLabel.text
     property alias text: input.text
     property alias validator: input.validator
     property alias readOnly : input.readOnly
@@ -43,21 +44,47 @@ Item {
     signal accepted();
     signal textUpdated();
 
-    height: 37 * scaleRatio
+    height: 48 * scaleRatio
 
-    function getColor(error) {
-      if (error)
-        return "#FFDDDD"
-      else
-        return "#FFFFFF"
+    onTextUpdated: {
+        // check to remove placeholder text when there is content
+        if(item.isEmpty()){
+            placeholderLabel.visible = true
+        } else {
+            placeholderLabel.visible = false
+        }
     }
 
-    Rectangle {
-        visible: showBorder
-        anchors.fill: parent
-        anchors.bottomMargin: 1 * scaleRatio
-        color: "#DBDBDB"
-        //radius: 4
+    function isEmpty(){
+        var val = input.text;
+        if(val === "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function getColor(error) {
+        // @TODO: replace/remove this (implement as ternary?)
+        if (error)
+            return Style.inputBoxBackground
+        else
+            return Style.inputBoxBackground
+    }
+
+    Text {
+        id: placeholderLabel
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        opacity: 0.25
+        font.family: Style.fontRegular.name
+        font.pixelSize: 20 * scaleRatio
+        color: "#FFFFFF"
+        text: ""
+        visible: item.setPlaceholder() ? false : true
+        z: 3
     }
 
     Rectangle {
@@ -70,8 +97,6 @@ Item {
     Input {
         id: input
         anchors.fill: parent
-        anchors.leftMargin: 4 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
         font.pixelSize: parent.fontSize
         onEditingFinished: item.editingFinished()
         onAccepted: item.accepted();

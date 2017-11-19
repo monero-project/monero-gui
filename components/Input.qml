@@ -26,21 +26,21 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
-import QtQuick 2.2
+import QtQuick.Controls 2.2
+import QtQuick 2.10
+import "." 1.0
 
 TextField {
-    font.family: "Arial"
+    font.family: Style.fontRegular.name
+    font.pixelSize: 22
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    style: TextFieldStyle {
-        textColor: "#3F3F3F"
-        placeholderTextColor: "#BABABA"
+    color: "white"
 
-        background: Rectangle {
-            border.width: 0
-            color: "transparent"
-        }
+    background: Rectangle {
+        color: "transparent"
+        border.width: 1
+        border.color: Qt.rgba(1, 1, 1, 0.25)
+        radius: 4
     }
 }
