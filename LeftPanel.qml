@@ -127,7 +127,7 @@ Rectangle {
                     anchors.top: parent.top
                     anchors.topMargin: 8
                     anchors.left: parent.left
-                    anchors.leftMargin: 190
+                    anchors.leftMargin: 184
                     font.bold: true
                     color: "white"
                 }

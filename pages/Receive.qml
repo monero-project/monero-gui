@@ -44,6 +44,9 @@ import moneroComponents.SubaddressModel 1.0
 Rectangle {
     id: pageReceive
     color: "#F0EEEE"
+    property alias addressText : addressLine.text
+    property alias paymentIdText : paymentIdLine.text
+    property alias integratedAddressText : integratedAddressLine.text
     property var model
     property var current_address
     property alias addressText : pageReceive.current_address
@@ -240,7 +243,7 @@ Rectangle {
 
             LineEdit {
                 id: amountLine
-                fontSize: mainLayout.lineEditFontSize
+//                fontSize: mainLayout.lineEditFontSize
                 placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                 readOnly: false
                 width: mainLayout.editWidth

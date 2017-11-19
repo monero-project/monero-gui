@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.2
 import moneroComponents.PendingTransaction 1.0
 import "../components"
 import moneroComponents.Wallet 1.0
+import "." 1.0
 
 
 Rectangle {
@@ -40,11 +41,8 @@ Rectangle {
                           int priority, string description)
     signal sweepUnmixableClicked()
 
-    color: "#F0EEEE"
-    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>" +
-                                   qsTr("Start daemon") +
-                                   "</a><font size='2'>)</font>" +
-                                   translationManager.emptyString
+    color: "black"
+    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
@@ -118,10 +116,23 @@ Rectangle {
       anchors.margins: 17 * scaleRatio
       spacing: 0
 
+      RowLayout{
+          Layout.fillWidth: true
+          Layout.bottomMargin: 20
+
+          Text {
+              id: panelHeader
+              font.family: Style.fontMedium.name
+              font.pixelSize: 32 * scaleRatio
+              color: "#FFFFFF"
+              text: "Send"
+              height: 150
+          }
+      }
+
       GridLayout {
           columns: (isMobile)? 1 : 2
           Layout.fillWidth: true
-
           ColumnLayout {
               Layout.fillWidth: true
               Label {
@@ -210,6 +221,65 @@ Rectangle {
           }
           // Make sure dropdown is on top
           z: parent.z + 1
+      }
+
+      ColumnLayout {
+          id: amountRowx
+          Label {
+              id: amountLabelx
+              text: qsTr("Amount") + translationManager.emptyString
+              width: mainLayout.labelWidth
+          }
+
+            // this LineEdit is for testing purposes
+          LineEdit {
+              id: amountLinex
+              fontSize: mainLayout.lineEditFontSize
+              placeholderText: qsTr("Amount to receive") + translationManager.emptyString
+              readOnly: false
+              width: mainLayout.editWidth
+              Layout.fillWidth: true
+//              validator: DoubleValidator {
+//                  bottom: 0.0
+//                  top: 18446744.073709551615
+//                  decimals: 12
+//                  notation: DoubleValidator.StandardNotation
+//                  locale: "C"
+//              }
+
+              Rectangle{
+                  color: "#808080"
+                  border.color: "black"
+                  height: 20
+                  width: 40
+                  radius: 3
+
+                  anchors.top: parent.top
+                  anchors.right: parent.right
+                  anchors.rightMargin: 8
+                  anchors.topMargin: 8
+
+                  Text {
+                      id: xee
+                      font.family: Style.fontBold.name
+                      font.pixelSize: 16 * scaleRatio
+                      color: "#FFFFFF"
+                      text: "Send"
+                      anchors.top: parent.top + 2
+                      anchors.left: parent.left + 6
+                  }
+              }
+
+//                IconButton {
+//                    imageSource: "../images/copyToClipboard.png"
+//                    onClicked: {
+//                        if (integratedAddressLine.text.length > 0) {
+//                            clipboard.setText(integratedAddressLine.text)
+//                            appWindow.showStatusMessage(qsTr("Integrated address copied to clipboard"),3)
+//                        }
+//                    }
+//                }
+          }
       }
 
       ColumnLayout {

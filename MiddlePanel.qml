@@ -69,7 +69,7 @@ Rectangle {
     signal getProofClicked(string txid, string address, string message);
     signal checkProofClicked(string txid, string address, string message, string signature);
 
-    color: "#F0EEEE"
+    color: "black"
 
     onCurrentViewChanged: {
         if (previousView) {
@@ -163,8 +163,8 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 2
-        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 30 : 0
+        anchors.margins: 18
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
         spacing: 0
 
         Flickable {
