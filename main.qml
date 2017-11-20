@@ -764,7 +764,11 @@ ApplicationWindow {
                     ", address: ", address,
                     ", message: ", message);
 
-        var result = currentWallet.getTxProof(txid, address, message);
+        var result;
+        if (address.length > 0)
+            result = currentWallet.getTxProof(txid, address, message);
+        if (!result || result.startsWith("error|"))
+            result = currentWallet.getSpendProof(txid, message);
         informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
         if (result.startsWith("error|")) {
             var errorString = result.split("|")[1];
@@ -786,12 +790,16 @@ ApplicationWindow {
                     ", message: ", message,
                     ", signature: ", signature);
 
-        var result = currentWallet.checkTxProof(txid, address, message, signature);
+        var result;
+        if (address.length > 0)
+            result = currentWallet.checkTxProof(txid, address, message, signature);
+        else
+            result = currentWallet.checkSpendProof(txid, message, signature);
         var results = result.split("|");
-        if (results.length == 5 && results[0] == "true") {
-            var good = results[1] == "true";
+        if (address.length > 0 && results.length == 5 && results[0] === "true") {
+            var good = results[1] === "true";
             var received = results[2];
-            var in_pool = results[3] == "true";
+            var in_pool = results[3] === "true";
             var confirmations = results[4];
 
             informationPopup.title  = qsTr("Payment proof check") + translationManager.emptyString;
@@ -811,6 +819,12 @@ ApplicationWindow {
             else {
                 informationPopup.text = qsTr("This address received nothing");
             }
+        }
+        else if (results.length == 2 && results[0] === "true") {
+            var good = results[1] === "true";
+            informationPopup.title = qsTr("Payment proof check") + translationManager.emptyString;
+            informationPopup.icon = good ? StandardIcon.Information : StandardIcon.Critical;
+            informationPopup.text = good ? qsTr("Good signature") : qsTr("Bad signature");
         }
         else {
             informationPopup.title  = qsTr("Error") + translationManager.emptyString;

@@ -235,6 +235,8 @@ public:
     Q_INVOKABLE QString checkTxKey(const QString &txid, const QString &tx_key, const QString &address);
     Q_INVOKABLE QString getTxProof(const QString &txid, const QString &address, const QString &message) const;
     Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
+    Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
+    Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 

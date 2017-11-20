@@ -523,6 +523,22 @@ QString Wallet::checkTxProof(const QString &txid, const QString &address, const 
     return QString::fromStdString(result);
 }
 
+Q_INVOKABLE QString Wallet::getSpendProof(const QString &txid, const QString &message) const
+{
+    std::string result = m_walletImpl->getSpendProof(txid.toStdString(), message.toStdString());
+    if (result.empty())
+        result = "error|" + m_walletImpl->errorString();
+    return QString::fromStdString(result);
+}
+
+Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &message, const QString &signature) const
+{
+    bool good;
+    bool success = m_walletImpl->checkSpendProof(txid.toStdString(), message.toStdString(), signature.toStdString(), good);
+    std::string result = std::string(success ? "true" : "false") + "|" + std::string(!success ? m_walletImpl->errorString() : good ? "true" : "false");
+    return QString::fromStdString(result);
+}
+
 QString Wallet::signMessage(const QString &message, bool filename) const
 {
   if (filename) {

@@ -72,6 +72,10 @@ Rectangle {
             if ((signature.length - 9) % 132 != 0)
                 return false;
             return check256(signature, signature.length);
+        } else if (signature.startsWith("SpendProofV")) {
+            if ((signature.length - 12) % 88 != 0)
+                return false;
+            return check256(signature, signature.length);
         }
         return false;
     }
@@ -90,7 +94,8 @@ Rectangle {
         property int lineEditFontSize: 12
 
         Text {
-            text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message:") + translationManager.emptyString
+            text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
+                       "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
         }
@@ -183,7 +188,7 @@ Rectangle {
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
-            enabled: checkTxID(getProofTxIdLine.text) && checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet)
+            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
             onClicked: {
                 console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
                 root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
@@ -201,7 +206,8 @@ Rectangle {
         }
 
         Text {
-            text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature:") + translationManager.emptyString
+            text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
+                       "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
         }
@@ -322,7 +328,7 @@ Rectangle {
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
-            enabled: checkTxID(checkProofTxIdLine.text) && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet) && checkSignature(checkProofSignatureLine.text)
+            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.startsWith("SpendProofV") && checkProofAddressLine.text.length == 0) || (!checkProofSignatureLine.text.startsWith("SpendProofV") && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
             onClicked: {
                 console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
                 root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
