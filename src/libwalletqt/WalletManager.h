@@ -104,8 +104,6 @@ public:
 
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
-    Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
-
     Q_INVOKABLE void setDaemonAddress(const QString &address);
     Q_INVOKABLE bool connected() const;
     Q_INVOKABLE quint64 networkDifficulty() const;

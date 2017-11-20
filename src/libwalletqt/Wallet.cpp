@@ -494,6 +494,36 @@ QString Wallet::getTxKey(const QString &txid) const
   return QString::fromStdString(m_walletImpl->getTxKey(txid.toStdString()));
 }
 
+QString Wallet::checkTxKey(const QString &txid, const QString &tx_key, const QString &address)
+{
+    uint64_t received;
+    bool in_pool;
+    uint64_t confirmations;
+    bool success = m_walletImpl->checkTxKey(txid.toStdString(), tx_key.toStdString(), address.toStdString(), received, in_pool, confirmations);
+    std::string result = std::string(success ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + std::string(in_pool ? "true" : "false") + "|" + QString::number(confirmations).toStdString();
+    return QString::fromStdString(result);
+}
+
+QString Wallet::getTxProof(const QString &txid, const QString &address, const QString &message) const
+{
+    std::string error_str;
+    QString result = QString::fromStdString(m_walletImpl->getTxProof(txid.toStdString(), address.toStdString(), message.toStdString(), error_str));
+    if (!error_str.empty())
+        result = QString::fromStdString("error|" + error_str);
+    return result;
+}
+
+QString Wallet::checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature)
+{
+    bool good;
+    uint64_t received;
+    bool in_pool;
+    uint64_t confirmations;
+    bool success = m_walletImpl->checkTxProof(txid.toStdString(), address.toStdString(), message.toStdString(), signature.toStdString(), good, received, in_pool, confirmations);
+    std::string result = std::string(success ? "true" : "false") + "|" + std::string(good ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + std::string(in_pool ? "true" : "false") + "|" + QString::number(confirmations).toStdString();
+    return QString::fromStdString(result);
+}
+
 QString Wallet::signMessage(const QString &message, bool filename) const
 {
   if (filename) {

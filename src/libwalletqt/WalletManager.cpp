@@ -216,16 +216,6 @@ QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet
     return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
 }
 
-QString WalletManager::checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const
-{
-    uint64_t received = 0, height = 0;
-    std::string error = "";
-    bool ret = m_pimpl->checkPayment(address.toStdString(), txid.toStdString(), txkey.toStdString(), daemon_address.toStdString(), received, height, error);
-    // bypass qml being unable to pass structures without preposterous complexity
-    std::string result = std::string(ret ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + QString::number(height).toStdString() + "|" + error;
-    return QString::fromStdString(result);
-}
-
 void WalletManager::setDaemonAddress(const QString &address)
 {
     m_pimpl->setDaemonAddress(address.toStdString());

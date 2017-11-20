@@ -424,7 +424,7 @@ Rectangle {
                 id: txkeyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Check payment") + translationManager.emptyString
+                text: qsTr("Prove/check") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
                 dotColor: "#FFD781"
                 under: advancedButton
