@@ -65,8 +65,8 @@ Rectangle {
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
-    signal getTxProofClicked(string txid, string address, string message);
-    signal checkTxProofClicked(string txid, string address, string message, string signature);
+    signal getProofClicked(string txid, string address, string message);
+    signal checkProofClicked(string txid, string address, string message, string signature);
 
     color: "#F0EEEE"
 

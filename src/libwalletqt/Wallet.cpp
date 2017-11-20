@@ -506,11 +506,10 @@ QString Wallet::checkTxKey(const QString &txid, const QString &tx_key, const QSt
 
 QString Wallet::getTxProof(const QString &txid, const QString &address, const QString &message) const
 {
-    std::string error_str;
-    QString result = QString::fromStdString(m_walletImpl->getTxProof(txid.toStdString(), address.toStdString(), message.toStdString(), error_str));
-    if (!error_str.empty())
-        result = QString::fromStdString("error|" + error_str);
-    return result;
+    std::string result = m_walletImpl->getTxProof(txid.toStdString(), address.toStdString(), message.toStdString());
+    if (result.empty())
+        result = "error|" + m_walletImpl->errorString();
+    return QString::fromStdString(result);
 }
 
 QString Wallet::checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature)
