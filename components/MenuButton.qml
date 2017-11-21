@@ -62,7 +62,7 @@ Rectangle {
 
     // button gradient while checked
     Image {
-        height: 40
+        height: parent.height
         width: 260
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
