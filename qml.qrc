@@ -174,7 +174,6 @@
         <file>images/moneroIcon-trans56x56.png</file>
         <file>images/question.png</file>
         <file>images/expand.png</file>
-        <file>images/balanceGradient.jpg</file>
         <file>images/titlebarGradient.jpg</file>
         <file>images/titlebarLogo.png</file>
         <file>images/menuArrow.png</file>
@@ -187,5 +186,6 @@
         <file>components/qmldir</file>
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
+        <file>images/leftPanelBg.jpg</file>
     </qresource>
 </RCC>

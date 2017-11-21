@@ -74,13 +74,23 @@ Rectangle {
     }
 
     width: (isMobile)? appWindow.width : 300
-    color: "black"
+    color: "transparent"
     anchors.bottom: parent.bottom
     anchors.top: parent.top
+
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: panel.height
+        source: "images/leftPanelBg.jpg"
+        z: 1
+    }
 
     // card with monero logo
     Column {
         visible: true
+        z: 2
         id: column1
         height: 200
         anchors.left: parent.left
@@ -88,20 +98,6 @@ Rectangle {
         anchors.top: parent.top
         // @TODO: customDecorations?
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
-
-        Row {
-            Item {
-                x: 0
-                y: 0
-                width: 300
-                height: 232
-
-                Image {
-                    width: 300; height: 232
-                    source: "images/balanceGradient.jpg"
-                }
-            }
-        }
 
         Row {
             visible: true
@@ -115,7 +111,7 @@ Rectangle {
                 width: 50 * scaleRatio
 
                 Image {
-                    width: 259; height:170
+                    width: 259; height: 170
                     fillMode: Image.PreserveAspectFit
                     source: "images/card-background.png"
                 }
@@ -242,12 +238,13 @@ Rectangle {
 
     Rectangle {
         id: menuRect
+        z: 2
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: (isMobile)? parent.top : column1.bottom
         anchors.topMargin: (isMobile)? 0 : 32
-        color: "black"
+        color: "transparent"
 
 
         Flickable {

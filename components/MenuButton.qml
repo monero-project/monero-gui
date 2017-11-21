@@ -56,7 +56,7 @@ Rectangle {
         return offset
     }
 
-    color: "black"
+    color: "transparent"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
 
