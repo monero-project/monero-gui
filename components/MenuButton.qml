@@ -61,6 +61,17 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
 
+    // button gradient while checked
+    Image {
+        width: 260
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.leftMargin: parent.getOffset()
+        source: "../images/menuButtonGradient.png"
+        visible: button.checked
+    }
+
     // button decorations that are subject to leftMargin offsets
     Rectangle {
         anchors.left: parent.left
@@ -99,17 +110,6 @@ Rectangle {
             font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"
         }
-    }
-
-    // button gradient while checked
-    Image {
-        width: 160
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.leftMargin: parent.getOffset()
-        source: "../images/menuButtonGradient.png"
-        visible: button.checked
     }
 
     // menu button right arrow
