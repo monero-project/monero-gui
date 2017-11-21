@@ -60,19 +60,6 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
 
-    // Button gradient whilst checked
-    // @TODO: replace by .png - gradient not available in 2d renderer
-    LinearGradient {
-        visible: button.checked ? true : false
-        anchors.fill: parent
-        start: Qt.point(0, 0)
-        end: Qt.point(300, 0)
-        gradient: Gradient {
-           GradientStop { position: 1.0; color: "#333333" }
-           GradientStop { position: 0.0; color: "black" }
-        }
-    }
-
     // button decorations that are subject to leftMargin offsets
     Rectangle {
         anchors.left: parent.left
@@ -111,6 +98,17 @@ Rectangle {
             font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"
         }
+    }
+
+    // button gradient while checked
+    Image {
+        width: 160
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.leftMargin: parent.getOffset()
+        source: "../images/menuButtonGradient.png"
+        visible: button.checked
     }
 
     // menu button right arrow

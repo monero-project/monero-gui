@@ -178,6 +178,7 @@
         <file>images/titlebarGradient.jpg</file>
         <file>images/titlebarLogo.png</file>
         <file>images/menuArrow.png</file>
+	<file>images/menuButtonGradient.png</file>
         <file>fonts/SFUIDisplay-Medium.otf</file>
         <file>fonts/SFUIDisplay-Regular.otf</file>
         <file>fonts/SFUIDisplay-Light.otf</file>
