@@ -62,10 +62,11 @@ Rectangle {
 
     // button gradient while checked
     Image {
+        height: 40
         width: 260
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        anchors.rightMargin: 0
+        anchors.rightMargin: -20
         anchors.leftMargin: parent.getOffset()
         source: "../images/menuButtonGradient.png"
         visible: button.checked
