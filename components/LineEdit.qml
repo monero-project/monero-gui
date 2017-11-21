@@ -37,6 +37,7 @@ Item {
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
+    property alias inlineButtonText: inlineButtonId.text
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool error: false
@@ -101,5 +102,10 @@ Item {
         onEditingFinished: item.editingFinished()
         onAccepted: item.accepted();
         onTextChanged: item.textUpdated()
+    }
+
+    InlineButton {
+        id: inlineButtonId
+        visible: item.inlineButtonText ? true : false
     }
 }

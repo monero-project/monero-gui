@@ -28,13 +28,15 @@
 
 import QtQuick 2.0
 import moneroComponents.Wallet 1.0
+import "." 1.0
 
 Rectangle {
     id: item
     property int fillLevel: 0
     property string syncType // Wallet or Daemon
     property string syncText: qsTr("%1 blocks remaining: ").arg(syncType)
-    color: "#1C1C1C"
+    visible: false
+    color: "transparent"
 
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
         if(targetBlock > 0) {
@@ -50,29 +52,57 @@ Rectangle {
     }
 
     Item {
+        anchors.topMargin: 10 * scaleRatio
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: 15 * scaleRatio
         anchors.fill: parent
+
+        Text {
+            id: progressText
+            anchors.top: item.top
+            anchors.topMargin: 6
+            font.family: Style.fontMedium.name
+            font.pixelSize: 13 * scaleRatio
+            font.bold: true
+            color: "white"
+            text: qsTr("Synchronizing blocks")
+            height:18 * scaleRatio
+        }
+
+        Text {
+            id: progressTextValue
+            anchors.top: item.top
+            anchors.topMargin: 6
+            anchors.right: parent.right
+            font.family: Style.fontMedium.name
+            font.pixelSize: 13 * scaleRatio
+            font.bold: true
+            color: "white"
+            height:18 * scaleRatio
+        }
+
+
         Rectangle {
             id: bar
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: parent.top
-            height: 22 * scaleRatio
-            radius: 2 * scaleRatio
-            color: "#FFFFFF"
+            anchors.top: progressText.bottom
+            anchors.topMargin: 4
+            height: 8 * scaleRatio
+            radius: 8 * scaleRatio
+            color: "#333333" // progressbar bg
 
             Rectangle {
                 id: fillRect
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
-                anchors.margins: 2 * scaleRatio
                 height: bar.height
                 property int maxWidth: parent.width - 4 * scaleRatio
                 width: (maxWidth * fillLevel) / 100
+                radius: 8
                 color: {
-                   if(item.fillLevel < 99 ) return "#FF6C3C"
+                   if(item.fillLevel < 99 ) return "#FA6800"
                    //if(item.fillLevel < 99) return "#FFE00A"
                     return "#36B25C"
                 }
