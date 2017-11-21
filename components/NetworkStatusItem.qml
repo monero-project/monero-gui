@@ -28,21 +28,23 @@
 
 import QtQuick 2.0
 import moneroComponents.Wallet 1.0
+import "." 1.0
 
 Rectangle {
     id: item
+    color: "transparent"
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusImage(status) {
         if (status == Wallet.ConnectionStatus_Connected)
-            return "../images/statusConnected.png"
+            return "../images/lightning.png"
         else
             return "../images/statusDisconnected.png"
     }
 
     function getConnectionStatusColor(status) {
         if (status == Wallet.ConnectionStatus_Connected)
-            return "#FF6C3B"
+            return "white"
         else
             return "#AAAAAA"
     }
@@ -62,39 +64,50 @@ Rectangle {
         return qsTr("Invalid connection status")
     }
 
-
-    color: "#1C1C1C"
     Row {
-        height: 60 * scaleRatio
+        height: 40 * scaleRatio
+
         Item {
             id: iconItem
-            anchors.bottom: parent.bottom
-            width: 50 * scaleRatio
-            height: 50 * scaleRatio
+            anchors.top: parent.top
+            width: 40 * scaleRatio
+            height: 40 * scaleRatio
 
             Image {
-                anchors.centerIn: parent
+                anchors.top: parent.top
+                anchors.topMargin: 6
+                anchors.right: parent.right
+                anchors.rightMargin: 11
                 source: getConnectionStatusImage(item.connected)
             }
         }
 
-        Column {
-            anchors.bottom: parent.bottom
-            height: 53 * scaleRatio
-            spacing: 3 * scaleRatio
+        Item {
+            anchors.top: parent.top
+            anchors.left: iconItem.right
+            height: 40 * scaleRatio
+            width: 260 * scaleRatio
 
             Text {
+                id: statusText
                 anchors.left: parent.left
-                font.family: "Arial"
-                font.pixelSize: 12 * scaleRatio
-                color: "#545454"
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.family: Style.fontMedium.name
+                font.bold: true
+                font.pixelSize: 13 * scaleRatio
+                color: "white"
+                opacity: 0.5
                 text: qsTr("Network status") + translationManager.emptyString
             }
 
             Text {
+                id: statusTextVal
                 anchors.left: parent.left
-                font.family: "Arial"
-                font.pixelSize: 18 * scaleRatio
+                anchors.top: parent.top
+                anchors.topMargin: 14
+                font.family: Style.fontMedium.name
+                font.pixelSize: 20 * scaleRatio
                 color: getConnectionStatusColor(item.connected)
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
             }

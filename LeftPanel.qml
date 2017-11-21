@@ -127,9 +127,11 @@ Rectangle {
                     anchors.top: parent.top
                     anchors.topMargin: 8
                     anchors.left: parent.left
-                    anchors.leftMargin: 184
+                    anchors.leftMargin: 192
                     font.bold: true
+                    font.pixelSize: 12
                     color: "white"
+                    opacity: 0.6
                 }
 
                 // @TODO: implement
@@ -245,7 +247,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.top: (isMobile)? parent.top : column1.bottom
         anchors.topMargin: (isMobile)? 0 : 32
-        color: "#1C1C1C"
+        color: "black"
 
         Flickable {
             id:flicker
@@ -570,7 +572,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
-            height: 58 * scaleRatio
+            height: 40 * scaleRatio
         }
 
         ProgressBar {
@@ -588,9 +590,9 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: 35 * scaleRatio
             syncType: qsTr("Daemon")
             visible: networkStatus.connected
+            height: 62 * scaleRatio
         }
     } // menuRect
 

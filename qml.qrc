@@ -185,5 +185,7 @@
         <file>fonts/SFUIDisplay-Bold.otf</file>
         <file>components/Style.qml</file>
         <file>components/qmldir</file>
+        <file>components/InlineButton.qml</file>
+        <file>images/lightning.png</file>
     </qresource>
 </RCC>
