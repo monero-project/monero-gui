@@ -29,7 +29,6 @@
 import QtQuick 2.2
 import QtQuick.Window 2.0
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
 
 Rectangle {
     id: titleBar
@@ -50,7 +49,7 @@ Rectangle {
         width: parent.width
         height: 50
         z: 1
-           
+
         // use jpg for gradiency
         Image {
            anchors.fill: parent
