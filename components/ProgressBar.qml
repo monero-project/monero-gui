@@ -81,7 +81,6 @@ Rectangle {
             height:18 * scaleRatio
         }
 
-
         Rectangle {
             id: bar
             anchors.left: parent.left
@@ -101,12 +100,8 @@ Rectangle {
                 property int maxWidth: parent.width - 4 * scaleRatio
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
-                color: {
-                   if(item.fillLevel < 99 ) return "#FA6800"
-                   //if(item.fillLevel < 99) return "#FFE00A"
-                    return "#36B25C"
-                }
-
+                // could change color based on progressbar status; if(item.fillLevel < 99 )
+                color: "#FA6800"
             }
 
             Rectangle {
