@@ -47,7 +47,9 @@ Item {
     anchors.rightMargin: 8
     anchors.topMargin: 8
 
-    function onClicked(){}
+    function onClicked(){
+        console.log("debug click");
+    }
 
     function doClick() {
         // Android workaround

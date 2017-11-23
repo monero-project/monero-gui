@@ -38,6 +38,7 @@ Item {
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
     property alias inlineButtonText: inlineButtonId.text
+    property alias inlineIcon: inlineIcon.visible
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool error: false
@@ -78,7 +79,7 @@ Item {
         id: placeholderLabel
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: inlineIcon.visible ? 50 : 10
         opacity: 0.25
         font.family: Style.fontRegular.name
         font.pixelSize: 20 * scaleRatio
@@ -95,9 +96,30 @@ Item {
         //radius: 4
     }
 
+    Rectangle {
+        color: "transparent"
+        border.width: 1
+        border.color: Qt.rgba(1, 1, 1, 0.25)
+        radius: 4
+        anchors.fill: parent
+    }
+
+    Image {
+        id: inlineIcon
+        width: 28 * scaleRatio
+        height: 28 * scaleRatio
+        anchors.top: parent.top
+        anchors.topMargin: 10 * scaleRatio
+        anchors.left: parent.left
+        anchors.leftMargin: 12 * scaleRatio
+        source: "../images/moneroIcon-28x28.png"
+        visible: false
+    }
+
     Input {
         id: input
         anchors.fill: parent
+        anchors.leftMargin: inlineIcon.visible ? 38 : 0
         font.pixelSize: parent.fontSize
         onEditingFinished: item.editingFinished()
         onAccepted: item.accepted();
