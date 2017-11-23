@@ -36,6 +36,8 @@ Rectangle {
     id: panel
 
     property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias unlockedBalanceVisible: unlockedBalanceText.visible
+    property alias unlockedBalanceLabelVisible: unlockedBalanceLabel.visible
     property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
@@ -176,6 +178,7 @@ Rectangle {
 
                 Text {
                     id: unlockedBalanceText
+                    visible: false
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.top: parent.top
@@ -196,6 +199,7 @@ Rectangle {
 
                 Label {
                     id: unlockedBalanceLabel
+                    visible: false
                     text: qsTr("Unlocked balance") + translationManager.emptyString
                     anchors.left: parent.left
                     anchors.leftMargin: 20
@@ -592,8 +596,6 @@ Rectangle {
             height: 62 * scaleRatio
         }
     } // menuRect
-
-
 
     // indicate disabled state
 //    Desaturate {
