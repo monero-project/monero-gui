@@ -35,20 +35,6 @@ Rectangle {
     color: "transparent"
     property var connected: Wallet.ConnectionStatus_Disconnected
 
-    function getConnectionStatusImage(status) {
-        if (status == Wallet.ConnectionStatus_Connected)
-            return "../images/lightning.png"
-        else
-            return "../images/statusDisconnected.png"
-    }
-
-    function getConnectionStatusColor(status) {
-        if (status == Wallet.ConnectionStatus_Connected)
-            return "white"
-        else
-            return "#AAAAAA"
-    }
-
     function getConnectionStatusString(status) {
         if (status == Wallet.ConnectionStatus_Connected) {
             if(!appWindow.daemonSynced)
@@ -72,13 +58,27 @@ Rectangle {
             anchors.top: parent.top
             width: 40 * scaleRatio
             height: 40 * scaleRatio
+            opacity: {
+                if(item.connected == Wallet.ConnectionStatus_Connected){
+                    return 1
+                } else {
+                    return 0.5
+                }
+            }
 
             Image {
                 anchors.top: parent.top
                 anchors.topMargin: 6
                 anchors.right: parent.right
                 anchors.rightMargin: 11
-                source: getConnectionStatusImage(item.connected)
+                source: {
+                    if(item.connected == Wallet.ConnectionStatus_Connected){
+                        return "../images/lightning.png"
+                    } else {
+                        return "../images/lightning-white.png"
+                    }
+                }
+                //getConnectionStatusImage(item.connected)
             }
         }
 
@@ -108,7 +108,7 @@ Rectangle {
                 anchors.topMargin: 14
                 font.family: Style.fontMedium.name
                 font.pixelSize: 20 * scaleRatio
-                color: getConnectionStatusColor(item.connected)
+                color: "white"
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
             }
         }

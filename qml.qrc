@@ -187,5 +187,7 @@
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
         <file>images/leftPanelBg.jpg</file>
+        <file>images/moneroIcon-28x28.png</file>
+        <file>images/lightning-white.png</file>
     </qresource>
 </RCC>
