@@ -39,8 +39,5 @@ TextField {
 
     background: Rectangle {
         color: "transparent"
-        border.width: 1
-        border.color: Qt.rgba(1, 1, 1, 0.25)
-        radius: 4
     }
 }
