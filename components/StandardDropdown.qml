@@ -41,7 +41,7 @@ Item {
 
     signal changed();
 
-    height: 37 * scaleRatio
+    height: 48 * scaleRatio
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -60,7 +60,6 @@ Item {
     // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
     function update() {
         firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
-        secondColText.text =  column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
     }
 
     Item {
@@ -68,42 +67,15 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 37 * scaleRatio
+        height: 48 * scaleRatio
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 0 : 1
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.shadowPressedColor : dropdown.shadowReleasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 1 : 0
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.pressedColor : dropdown.releasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            height: 3 * scaleRatio
-            width: 3 * scaleRatio
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
-        }
-
-        Rectangle {
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 3 * scaleRatio
-            width: 3 * scaleRatio
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
+            color: "transparent"
+            border.width: 1
+            border.color: Qt.rgba(1, 1, 1, 0.25)
+            radius: 4
+            anchors.fill: parent
+            z: 4
         }
 
         Text {
@@ -112,31 +84,9 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
-            font.family: "Arial"
+            font.family: Style.fontRegular.name
             font.bold: true
-            font.pixelSize: 12 * scaleRatio
-            color: "#FFFFFF"
-        }
-
-        Text {
-            id: secondColText
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: separator.left
-            anchors.rightMargin: 12 * scaleRatio
-            width: dropdown.expanded ? w : (separator.x - 12) - (firstColText.x + firstColText.width + 5)
-            font.family: "Arial"
-            font.pixelSize: 12 * scaleRatio
-            color: "#FFFFFF"
-            property int w: 0
-            Component.onCompleted: w = implicitWidth
-        }
-
-        Rectangle {
-            id: separator
-            anchors.right: dropIndicator.left
-            anchors.verticalCenter: parent.verticalCenter
-            height: 18 * scaleRatio
-            width: 1
+            font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"
         }
 
