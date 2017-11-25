@@ -189,5 +189,6 @@
         <file>images/leftPanelBg.jpg</file>
         <file>images/moneroIcon-28x28.png</file>
         <file>images/lightning-white.png</file>
+        <file>images/middlePanelBg.jpg</file>
     </qresource>
 </RCC>
