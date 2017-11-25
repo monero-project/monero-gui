@@ -30,8 +30,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import moneroComponents.PendingTransaction 1.0
-import "../components"
 import moneroComponents.Wallet 1.0
+import "../components"
 import "." 1.0
 
 
@@ -41,9 +41,17 @@ Rectangle {
                           int priority, string description)
     signal sweepUnmixableClicked()
 
-    color: "black"
+    color: "transparent"
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
+
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: panel.height
+        source: "../images/leftPanelBg.jpg"
+    }
 
     function scaleValueToMixinCount(scaleValue) {
         var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
@@ -119,6 +127,7 @@ Rectangle {
       RowLayout{
           Layout.fillWidth: true
           Layout.bottomMargin: 20
+          height: 150
 
           Text {
               id: panelHeader
@@ -144,22 +153,16 @@ Rectangle {
                   Layout.fillWidth: true
                   id: amountRow
                   Layout.minimumWidth: 200
-                  Item {
-                      visible: !isMobile
-                      width: 37 * scaleRatio
-                      height: 37 * scaleRatio
 
-                      Image {
-                          anchors.centerIn: parent
-                          source: "../images/moneroIcon.png"
-                      }
-                  }
                   // Amount input
                   LineEdit {
-                      Layout.fillWidth: true
                       id: amountLine
+                      Layout.fillWidth: true
+                      inlineIcon: true
                       placeholderText: qsTr("") + translationManager.emptyString
-                      width:100
+                      width: 100
+                      inlineButtonText: qsTr("All") + translationManager.emptyString
+                      inlineButton.onClicked: amountLine.text = "(all)"
                       validator: DoubleValidator {
                           bottom: 0.0
                           top: 18446744.073709551615
@@ -168,21 +171,7 @@ Rectangle {
                           locale: "C"
                       }
                   }
-
-                  StandardButton {
-                      id: amountAllButton
-                      width: 60 * scaleRatio
-                      text: qsTr("All") + translationManager.emptyString
-                      shadowReleasedColor: "#FF4304"
-                      shadowPressedColor: "#B32D00"
-                      releasedColor: "#FF6C3C"
-                      pressedColor: "#FF4304"
-                      enabled : true
-                      onClicked: amountLine.text = "(all)"
-                  }
               }
-
-
           }
 
           ColumnLayout {
@@ -197,7 +186,20 @@ Rectangle {
               // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
               // For translations to work, the strings need to be listed in
               // the file components/StandardDropdown.qml too.
+<<<<<<< HEAD
               
+=======
+
+              // Priorities before v5
+              ListModel {
+                  id: priorityModel
+
+                  ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
+                  ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
+                  ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
+               }
+
+>>>>>>> InlineButton development
               // Priorites after v5
               ListModel {
                    id: priorityModelV5
@@ -215,8 +217,8 @@ Rectangle {
                   id: priorityDropdown
                   shadowReleasedColor: "#FF4304"
                   shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
+                  releasedColor: "black"
+                  pressedColor: "#404040"
               }
           }
           // Make sure dropdown is on top
@@ -224,36 +226,23 @@ Rectangle {
       }
 
       ColumnLayout {
-          id: amountRowx
-          Label {
-              id: amountLabelx
-              text: qsTr("Amount") + translationManager.emptyString
-              width: mainLayout.labelWidth
-          }
-
-          // this LineEdit is for testing purposes
-          LineEdit {
-              id: amountLinex
-              fontSize: mainLayout.lineEditFontSize
-              placeholderText: qsTr("Amount to receive") + translationManager.emptyString
-              readOnly: false
-              width: mainLayout.editWidth
-              Layout.fillWidth: true
-              inlineButtonText: "Testy"
-          }
-      }
-
-      ColumnLayout {
           Layout.fillWidth: true
           Label {
               id: addressLabel
               textFormat: Text.RichText
+<<<<<<< HEAD
               text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
                     qsTr("Address") +
                     "<font size='2'> ( " +
                     qsTr("Paste in or select from <a href='#'>Address book</a>") +
                     " )</font>" +
                     translationManager.emptyString
+=======
+              text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                          Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                    + translationManager.emptyString
+
+>>>>>>> InlineButton development
               onLinkActivated: appWindow.showPageRequest("AddressBook")
               Layout.fillWidth: true
           }
@@ -282,19 +271,9 @@ Rectangle {
                   Layout.fillWidth: true
                   anchors.topMargin: 5 * scaleRatio
                   placeholderText: "4..."
-                  // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
-              }
-
-              StandardButton {
-                  id: resolveButton
-                  width: 60 * scaleRatio
-                  text: qsTr("Resolve") + translationManager.emptyString
-                  shadowReleasedColor: "#FF4304"
-                  shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
-                  enabled : isValidOpenAliasAddress(addressLine.text)
-                  onClicked: {
+                  inlineButtonText: qsTr("Resolve") + translationManager.emptyString
+                  inlineButton.enabled: isValidOpenAliasAddress(addressLine.text)
+                  inlineButton.onClicked: {
                       var result = walletManager.resolveOpenAlias(addressLine.text)
                       if (result) {
                         var parts = result.split("|")
@@ -325,6 +304,7 @@ Rectangle {
                         oa_message(qsTr("No address found"))
                       }
                   }
+                  // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
               }
           }
 

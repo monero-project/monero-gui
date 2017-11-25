@@ -37,6 +37,7 @@ Item {
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
+    property alias inlineButton: inlineButtonId
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property int fontSize: 18 * scaleRatio
@@ -70,9 +71,9 @@ Item {
     function getColor(error) {
         // @TODO: replace/remove this (implement as ternary?)
         if (error)
-            return Style.inputBoxBackground
+            return "transparent"
         else
-            return Style.inputBoxBackground
+            return "transparent"
     }
 
     Text {
@@ -85,7 +86,7 @@ Item {
         font.pixelSize: 20 * scaleRatio
         color: "#FFFFFF"
         text: ""
-        visible: item.setPlaceholder() ? false : true
+        visible: input.text ? false : true
         z: 3
     }
 
@@ -128,6 +129,7 @@ Item {
 
     InlineButton {
         id: inlineButtonId
+        onClicked: inlineButtonId.onClicked
         visible: item.inlineButtonText ? true : false
     }
 }

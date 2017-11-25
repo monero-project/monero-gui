@@ -47,10 +47,6 @@ Item {
     anchors.rightMargin: 8
     anchors.topMargin: 8
 
-    function onClicked(){
-        console.log("debug click");
-    }
-
     function doClick() {
         // Android workaround
         releaseFocus();
@@ -58,10 +54,11 @@ Item {
     }
 
     Rectangle{
-        color: "#808080"
+        id: rect
+        color: rect.enabled ?  "#808080" : "#3b3b3b"
         border.color: "black"
         height: 32
-        width: inlineText.width + 20
+        width: inlineText.width + 22
         radius: 4
 
         anchors.top: parent.top
@@ -70,14 +67,16 @@ Item {
         Text {
             id: inlineText
             font.family: Style.fontBold.name
+            font.bold: true
             font.pixelSize: 16 * scaleRatio
-            color: "#FFFFFF"
+            color: "black"
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
         MouseArea {
             id: buttonArea
+            cursorShape: Qt.PointingHandCursor
             anchors.fill: parent
             onClicked: doClick()
         }
