@@ -34,6 +34,7 @@ import "." 1.0
 TextField {
     font.family: Style.fontRegular.name
     font.pixelSize: 22
+    font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: "white"
