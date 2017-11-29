@@ -150,6 +150,8 @@ ListView {
                                 return qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
                         if (!isOut)
                             return qsTr("UNCONFIRMED") + translationManager.emptyString
+                        if (isFailed)
+                            return qsTr("FAILED") + translationManager.emptyString
                         return qsTr("PENDING") + translationManager.emptyString
 
                     }

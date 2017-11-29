@@ -260,6 +260,8 @@ ListView {
                             return blockHeight
                     if (!isOut)
                         return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    if (isFailed)
+                        return qsTr("FAILED") + translationManager.emptyString
                     return qsTr("PENDING") + translationManager.emptyString
 
                 }
