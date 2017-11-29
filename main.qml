@@ -243,8 +243,8 @@ ApplicationWindow {
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
-            middlePanel.getTxProofClicked.disconnect(handleGetTxProof);
-            middlePanel.checkTxProofClicked.disconnect(handleCheckTxProof);
+            middlePanel.getProofClicked.disconnect(handleGetProof);
+            middlePanel.checkProofClicked.disconnect(handleCheckProof);
         }
 
         currentWallet = undefined;
@@ -276,8 +276,8 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
-        middlePanel.getTxProofClicked.connect(handleGetTxProof);
-        middlePanel.checkTxProofClicked.connect(handleCheckTxProof);
+        middlePanel.getProofClicked.connect(handleGetProof);
+        middlePanel.checkProofClicked.connect(handleCheckProof);
 
 
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
@@ -757,8 +757,8 @@ ApplicationWindow {
         currentWallet.store();
     }
 
-    // called on "getTxProof"
-    function handleGetTxProof(txid, address, message) {
+    // called on "getProof"
+    function handleGetProof(txid, address, message) {
         console.log("Getting payment proof: ")
         console.log("\ttxid: ", txid,
                     ", address: ", address,
@@ -778,8 +778,8 @@ ApplicationWindow {
         informationPopup.open()
     }
 
-    // called on "checkTxProof"
-    function handleCheckTxProof(txid, address, message, signature) {
+    // called on "checkProof"
+    function handleCheckProof(txid, address, message, signature) {
         console.log("Checking payment proof: ")
         console.log("\ttxid: ", txid,
                     ", address: ", address,

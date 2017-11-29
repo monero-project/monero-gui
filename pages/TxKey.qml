@@ -64,8 +64,16 @@ Rectangle {
     }
 
     function checkSignature(signature) {
-        return signature.startsWith("OutProofV") && check256(signature, 142) ||
-               signature.startsWith("InProofV")  && check256(signature, 141)
+        if (signature.startsWith("OutProofV")) {
+            if ((signature.length - 10) % 132 != 0)
+                return false;
+            return check256(signature, signature.length);
+        } else if (signature.startsWith("InProofV")) {
+            if ((signature.length - 9) % 132 != 0)
+                return false;
+            return check256(signature, signature.length);
+        }
+        return false;
     }
 
     /* main layout */
