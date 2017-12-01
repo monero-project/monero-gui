@@ -33,173 +33,187 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 
 [Files]
-Source: "ReadMe.htm"; DestDir: "{app}"; Flags: comparetimestamp
+; The use of the flag "ignoreversion" for the following entries leads to the following behaviour:
+; When updating / upgrading an existing installation ALL existing files are replaced with the files in this
+; installer, regardless of file dates, version info within the files, or type of file (textual file or
+; .exe/.dll file possibly with version info).
+;
+; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
+; As of version 0.11.1.0, the Monero .exe files do not carry version info anyway in their .exe headers.
+; The only small drawback seems to be somewhat longer update times because each and every file is
+; copied again, even if already present with correct file date and identical content.
+;
+; Note that it would be very dangerous to use "ignoreversion" on files that may be shared with other
+; applications somehow. Luckily this is no issue here because ALL files are "private" to Monero.
+
+Source: "ReadMe.htm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
 
 ; Monero GUI wallet
-Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero GUI wallet log file
 ; The GUI wallet does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
 ; so pre-create the file and give the necessary permissions to the wallet to write into it
-Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: comparetimestamp; Permissions: users-modify
+; Flag is "onlyifdoesntexist": We do not want to overwrite an already existing log
+Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Permissions: users-modify
 
 ; Monero CLI wallet
-Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero wallet RPC interface implementation
-Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon
-Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon wrapped in a batch file that stops before the text window closes, to see any error messages
-Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: comparetimestamp;
+Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
 ; Monero blockchain utilities
-Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; was present in 0.10.3.1, not present anymore in 0.11.1.0
-; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: comparetimestamp
+; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Various .qm files for translating the wallet UI "on the fly" into all supported languages
-Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs comparetimestamp
+Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs ignoreversion
 
 ; Core Qt runtime
-Source: "bin\Qt5Core.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Multimedia.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5MultimediaQuick_p.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Network.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Qml.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Quick.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Svg.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\Qt5XmlPatterns.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Multimedia.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5MultimediaQuick_p.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Qml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Quick.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Qt5XmlPatterns.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt QML elements like the local files selector "FolderListModel" and "Settings"
-Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs comparetimestamp
+Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs ignoreversion
 
 ; Qt audio support
-Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs comparetimestamp
+Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs ignoreversion
 
 ; Qt bearer / network connection management
-Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs comparetimestamp
+Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignoreversion
 
 ; Qt Windows platform plugin	
-Source: "bin\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: comparetimestamp
+Source: "bin\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
 
 ; Qt support for SVG icons	
-Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs comparetimestamp
+Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
 
 ; Qt support for various image formats (JPEG, BMP, SVG etc)	
-Source: "bin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs comparetimestamp
+Source: "bin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs ignoreversion
 
 ; Qt multimedia support	
-Source: "bin\QtMultimedia\*"; DestDir: "{app}\QtMultimedia"; Flags: recursesubdirs comparetimestamp
-Source: "bin\mediaservice\*"; DestDir: "{app}\mediaservice"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtMultimedia\*"; DestDir: "{app}\QtMultimedia"; Flags: recursesubdirs ignoreversion
+Source: "bin\mediaservice\*"; DestDir: "{app}\mediaservice"; Flags: recursesubdirs ignoreversion
 
 ; Qt support for "m3u" playlists
 ; candidate for elimination? Don't think the GUI wallet needs such playlists	
-Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recursesubdirs comparetimestamp
+Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recursesubdirs ignoreversion
 
 ; Qt graphical effects as part of the core runtime, effects like blurring and blending
-Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
 
 ; Some more Qt graphical effects
 ; "private" as a name for this directory looks a little strange. Historical reasons?	
-Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs comparetimestamp
+Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
 
 ; Qt QML files
-Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick files
-Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs comparetimestamp
-Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs comparetimestamp
+Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs ignoreversion
+Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
-Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs comparetimestamp
-Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs ignoreversion
+Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Mesa, open-source OpenGL implementation; part of "low-level graphics" support
-Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Left out subdirectory "qmltooling" with the Qt QML debugger: Probably not relevant in an end-user package
 
 ; Microsoft Direct3D runtime
-Source: "bin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; bzip2 support
-Source: "bin\libbz2-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libbz2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; ANGLE ("Almost Native Graphics Layer Engine") support, as used by Qt
-Source: "bin\libEGL.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libGLESV2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; FreeType font engine, as used by Qt
-Source: "bin\libfreetype-6.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; GCC runtime, x64 version
-Source: "bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; GLib, low level core library e.g. for GNOME and GTK+
 ; Really needed under Windows?
-Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Graphite font support
 ; Really needed?
-Source: "bin\libgraphite2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libgraphite2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; HarfBuzz OpenType text shaping engine
 ; Really needed?
-Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; LibIconv, conversions between character encodings
-Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Part of cygwin? Needed by Qt somehow?
-Source: "bin\libicudt57.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libicuin57.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libicudt57.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuin57.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Library for native language support, part of GNU gettext
-Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; JasPer, support for JPEG-2000
 ; was present in 0.10.3.1, not present anymore in 0.11.1.0
-; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libjpeg, C library for reading and writing JPEG image files
-Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Little CMS, color management system
-Source: "bin\liblcms2-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\liblcms2-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; XZ Utils, LZMA compression library
-Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; MNG / Portable Network Graphics ("animated PNG") 
-Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; PCRE, Perl Compatible Regular Expressions
-Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
-Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libpng, the official PNG reference library
-Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libstdc++, GNU Standard C++ Library
-Source: "bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; LibTIFF, TIFF Library and Utilities
-Source: "bin\libtiff-5.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libtiff-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; C++ threading support
-Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; zlib compression library
-Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: comparetimestamp
+Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 
 [Tasks]
