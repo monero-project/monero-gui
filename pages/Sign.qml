@@ -383,9 +383,12 @@ Rectangle {
 
             Text {
                 id: verifyAddressLabel
-                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: %1px;}</style>\
-                            Signing address <font size='%2'>  ( Paste in  or select from </font> <a href='#'>Address book</a><font size='%3'> )</font>").arg(14 * scaleRatio).arg(2 * scaleRatio).arg(2 * scaleRatio)
-                      + translationManager.emptyString
+                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: " + (14 * scaleRatio) + "px;}</style>" +
+                      qsTr("Signing address") +
+                      "<font size='" + (2 * scaleRatio) + "'>  ( " +
+                      qsTr("Paste in or select from <a href='#'>Address book</a>") +
+                      " )</font>" +
+                      translationManager.emptyString
                 wrapMode: Text.Wrap
                 font.pixelSize: 14 * scaleRatio
                 Layout.fillWidth: true
