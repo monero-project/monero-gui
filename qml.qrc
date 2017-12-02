@@ -122,9 +122,10 @@
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
         <file>lang/flags/israel.png</file>
-        <file>lang/flags/south_korea.png</file>        
+        <file>lang/flags/south_korea.png</file>
         <file>lang/flags/romania.png</file>
         <file>lang/flags/czech.png</file>
+        <file>lang/flags/slovakia.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
