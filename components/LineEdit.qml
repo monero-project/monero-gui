@@ -40,6 +40,7 @@ Item {
     property alias inlineButton: inlineButtonId
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
+    property alias copyButton: copyButton.visible
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool error: false
@@ -51,12 +52,12 @@ Item {
     property bool labelFontBold: false
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
-    signal labelLinkActivated();
+    signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished()
     signal accepted();
     signal textUpdated();
 
-    height: (inputLabel.height + inputItem.height + 10) * scaleRatio
+    height: (inputLabel.height + inputItem.height + 2) * scaleRatio
 
     onTextUpdated: {
         // check to remove placeholder text when there is content
@@ -88,8 +89,8 @@ Item {
     Text {
         id: inputLabel
         anchors.top: parent.top
-        anchors.topMargin: 10 * scaleRatio
         anchors.left: parent.left
+        anchors.topMargin: 2
         font.family: Style.fontRegular.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
@@ -101,6 +102,48 @@ Item {
             anchors.fill: parent
             acceptedButtons: Qt.NoButton
             cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
+    }
+
+    Rectangle{
+        id: copyButton
+        color: "#808080"
+        radius: 3
+        height: 20
+        width: 44
+        anchors.right: parent.right
+        visible: false
+
+        Text {
+            id: copyButtonText
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.family: Style.fontRegular.name
+            font.pixelSize: 12
+            font.bold: true
+            text: "Copy"
+            color: "black"
+        }
+
+        MouseArea {
+            cursorShape: Qt.PointingHandCursor
+            anchors.fill: parent
+            hoverEnabled: true
+            onClicked: {
+                if (addressLine.text.length > 0) {
+                    console.log(addressLine.text + " copied to clipboard")
+                    clipboard.setText(addressLine.text)
+                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
+                }
+            }
+            onEntered: {
+                copyButton.color = "#707070";
+                copyButtonText.opacity = 0.8;
+            }
+            onExited: {
+                copyButtonText.opacity = 1.0;
+                copyButton.color = "#808080";
+            }
         }
     }
 
