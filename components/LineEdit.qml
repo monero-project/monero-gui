@@ -31,8 +31,8 @@ import "." 1.0
 
 Item {
     id: item
-    property alias placeholderText: placeholderLabel.text
     property alias text: input.text
+    property alias placeholderText: placeholderLabel.text
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
@@ -43,11 +43,20 @@ Item {
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool error: false
+    property alias labelText: inputLabel.text
+    property alias labelColor: inputLabel.color
+    property alias labelTextFormat: inputLabel.textFormat
+    property string tipText: ""
+    property int labelFontSize: 16 * scaleRatio
+    property bool labelFontBold: false
+    property alias labelWrapMode: inputLabel.wrapMode
+    property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
+    signal labelLinkActivated();
     signal editingFinished()
     signal accepted();
     signal textUpdated();
 
-    height: 48 * scaleRatio
+    height: (inputLabel.height + inputItem.height + 10) * scaleRatio
 
     onTextUpdated: {
         // check to remove placeholder text when there is content
@@ -77,59 +86,84 @@ Item {
     }
 
     Text {
-        id: placeholderLabel
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: inlineIcon.visible ? 50 : 10
-        opacity: 0.25
-        font.family: Style.fontRegular.name
-        font.pixelSize: 20 * scaleRatio
-        color: "#FFFFFF"
-        text: ""
-        visible: input.text ? false : true
-        z: 3
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        anchors.topMargin: 1 * scaleRatio
-        color: getColor(error)
-        //radius: 4
-    }
-
-    Rectangle {
-        color: "transparent"
-        border.width: 1
-        border.color: Qt.rgba(1, 1, 1, 0.25)
-        radius: 4
-        anchors.fill: parent
-    }
-
-    Image {
-        id: inlineIcon
-        width: 28 * scaleRatio
-        height: 28 * scaleRatio
+        id: inputLabel
         anchors.top: parent.top
         anchors.topMargin: 10 * scaleRatio
         anchors.left: parent.left
-        anchors.leftMargin: 12 * scaleRatio
-        source: "../images/moneroIcon-28x28.png"
-        visible: false
+        font.family: Style.fontRegular.name
+        font.pixelSize: labelFontSize
+        font.bold: labelFontBold
+        textFormat: Text.RichText
+        color: "white"
+        onLinkActivated: item.labelLinkActivated()
     }
 
-    Input {
-        id: input
-        anchors.fill: parent
-        anchors.leftMargin: inlineIcon.visible ? 38 : 0
-        font.pixelSize: parent.fontSize
-        onEditingFinished: item.editingFinished()
-        onAccepted: item.accepted();
-        onTextChanged: item.textUpdated()
-    }
+    Item{
+        id: inputItem
+        height: 48 * scaleRatio
+        anchors.top: inputLabel.bottom
+        anchors.topMargin: 6
+        width: parent.width
 
-    InlineButton {
-        id: inlineButtonId
-        onClicked: inlineButtonId.onClicked
-        visible: item.inlineButtonText ? true : false
+        Text {
+            id: placeholderLabel
+            visible: input.text ? false : true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: inlineIcon.visible ? 50 : 10
+            opacity: 0.25
+            color: "#FFFFFF"
+            font.family: Style.fontRegular.name
+            font.pixelSize: 20 * scaleRatio
+            text: ""
+            z: 3
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            anchors.topMargin: 1 * scaleRatio
+            color: getColor(error)
+            //radius: 4
+        }
+
+        Rectangle {
+            color: "transparent"
+            border.width: 1
+            border.color: Qt.rgba(1, 1, 1, 0.25)
+            radius: 4
+            anchors.fill: parent
+        }
+
+        Image {
+            id: inlineIcon
+            width: 28 * scaleRatio
+            height: 28 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: 10 * scaleRatio
+            anchors.left: parent.left
+            anchors.leftMargin: 12 * scaleRatio
+            source: "../images/moneroIcon-28x28.png"
+            visible: false
+        }
+
+        Input {
+            id: input
+            anchors.fill: parent
+            anchors.leftMargin: inlineIcon.visible ? 38 : 0
+            font.pixelSize: item.fontSize
+            onEditingFinished: item.editingFinished()
+            onAccepted: item.accepted();
+            onTextChanged: item.textUpdated()
+        }
+
+        InlineButton {
+            id: inlineButtonId
+            onClicked: inlineButtonId.onClicked
+            visible: item.inlineButtonText ? true : false
+            anchors.right: parent.right
+            anchors.rightMargin: 8
+            anchors.top: parent.top
+            anchors.topMargin: 8
+        }
     }
 }
