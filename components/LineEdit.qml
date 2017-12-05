@@ -96,6 +96,12 @@ Item {
         textFormat: Text.RichText
         color: "white"
         onLinkActivated: item.labelLinkActivated()
+
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
     }
 
     Item{
