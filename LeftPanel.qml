@@ -128,8 +128,8 @@ Rectangle {
                     anchors.leftMargin: 192
                     font.bold: true
                     font.pixelSize: 12
-                    color: "white"
-                    opacity: 0.6
+                    color: "red"
+                    opacity: 1
                 }
 
                 // @TODO: implement
