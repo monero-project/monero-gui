@@ -11,4 +11,8 @@ QtObject {
     property string inputBoxBackground: "black"
     property string inputBoxBackgroundError: "#FFDDDD"
     property string inputBoxColor: "white"
+    property string buttonBackgroundColor: "#FA6800"
+    property string buttonBackgroundColorDisabled: "#3B3B3B"
+    property string buttonTextColor: "white"
+    property string buttonTextColorDisabled: "black"
 }
