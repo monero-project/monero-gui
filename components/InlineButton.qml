@@ -42,11 +42,6 @@ Item {
     property alias text: inlineText.text
     signal clicked()
 
-    anchors.top: parent.top
-    anchors.right: parent.right
-    anchors.rightMargin: 8
-    anchors.topMargin: 8
-
     function doClick() {
         // Android workaround
         releaseFocus();
@@ -76,9 +71,18 @@ Item {
 
         MouseArea {
             id: buttonArea
-            cursorShape: Qt.PointingHandCursor
+            cursorShape: rect.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+            hoverEnabled: true
             anchors.fill: parent
             onClicked: doClick()
+            onEntered: {
+                rect.color = "#707070";
+                rect.opacity = 0.8;
+            }
+            onExited: {
+                rect.opacity = 1.0;
+                rect.color = "#808080";
+            }
         }
     }
 
