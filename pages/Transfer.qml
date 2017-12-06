@@ -262,51 +262,11 @@ Rectangle {
                       }
                   }
               }
-              LineEdit {
-                  id: addressLine
-                  Layout.fillWidth: true
-                  anchors.topMargin: 5 * scaleRatio
-                  placeholderText: "4..."
-                  inlineButtonText: qsTr("Resolve") + translationManager.emptyString
-                  inlineButton.enabled: isValidOpenAliasAddress(addressLine.text)
-                  inlineButton.onClicked: {
-                      var result = walletManager.resolveOpenAlias(addressLine.text)
-                      if (result) {
-                        var parts = result.split("|")
-                        if (parts.length == 2) {
-                          var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                          if (parts[0] === "true") {
-                            if (address_ok) {
-                              addressLine.text = parts[1]
-                              addressLine.cursorPosition = 0
-                            }
-                            else
-                              oa_message(qsTr("No valid address found at this OpenAlias address"))
-                          } else if (parts[0] === "false") {
-                            if (address_ok) {
-                              addressLine.text = parts[1]
-                              addressLine.cursorPosition = 0
-                              oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                            } else {
-                              oa_message(qsTr("No address found"))
-                            }
-                        }
-                          onEntered: {
-                              resolveButton.color = "#707070";
-                              resolveButtonText.opacity = 0.8;
-                          }
-                          onExited: {
-                              resolveButtonText.opacity = 1.0;
-                              resolveButton.color = "#808080";
-                          }
-                      }
-                  }
-              }
 
               InputMulti {
-//                  validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
                   id: addressLine
                   readOnly: false
+                  addressValidation: true
                   anchors.top: inputLabelRect.bottom
                   placeholderText: "4..."
                   Layout.fillWidth: true
@@ -426,9 +386,8 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: 17 * scaleRatio
-        anchors.topMargin: 17 * scaleRatio
-        anchors.bottomMargin: 17 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 40
+        anchors.topMargin: 40 * scaleRatio
         spacing: 20 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
