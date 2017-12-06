@@ -28,17 +28,18 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import "." 1.0
 
 Item {
     id: button
     height: 37 * scaleRatio
-    property string shadowPressedColor: "#B32D00"
-    property string shadowReleasedColor: "#FF4304"
-    property string pressedColor: "#FF4304"
-    property string releasedColor: "#FF6C3C"
+    property string shadowPressedColor: Style.buttonBackgroundColor
+    property string shadowReleasedColor: Style.buttonBackgroundColor
+    property string pressedColor: Style.buttonBackgroundColor
+    property string releasedColor: Style.buttonBackgroundColor
     property string icon: ""
-    property string textColor: "#FFFFFF"
-    property int fontSize: 12 * scaleRatio
+    property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
+    property int fontSize: 18 * scaleRatio
     property alias text: label.text
     signal clicked()
 
@@ -56,30 +57,31 @@ Item {
         anchors.right: parent.right
         height: parent.height - 1
         y: buttonArea.pressed ? 0 : 1
-        //radius: 4
-        color: {
-            parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
-                           : Qt.lighter(parent.shadowReleasedColor)
-        }
+        radius: 3
+        color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
+//        color: {
+//            parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
+//                           : Qt.lighter(parent.shadowReleasedColor)
+//        }
         border.color: Qt.darker(parent.releasedColor)
         border.width: parent.focus ? 1 : 0
 
     }
 
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height - 1
-        y: buttonArea.pressed ? 1 : 0
-        color: {
-            parent.enabled ? (buttonArea.pressed ? parent.pressedColor : parent.releasedColor)
-                           : Qt.lighter(parent.releasedColor)
+//    Rectangle {
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        height: parent.height - 1
+//        y: buttonArea.pressed ? 1 : 0
+//        color: {
+//            parent.enabled ? (buttonArea.pressed ? parent.pressedColor : parent.releasedColor)
+//                           : Qt.lighter(parent.releasedColor)
 
-        }
-        //radius: 4
+//        }
+//        //radius: 4
 
 
-    }
+//    }
 
     Text {
         id: label
@@ -87,7 +89,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         horizontalAlignment: Text.AlignHCenter
-        font.family: "Arial"
+        font.family: Style.fontBold.name
         font.bold: true
         font.pixelSize: button.fontSize
         color: parent.textColor
