@@ -34,7 +34,7 @@ import moneroComponents.AddressBookModel 1.0
 
 Rectangle {
     id: root
-    color: "#F0EEEE"
+    color: "transparent"
     property var model
 
     ColumnLayout {
@@ -43,12 +43,6 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
         spacing: 10 * scaleRatio
-
-        Label {
-            id: addressLabel
-            anchors.left: parent.left
-            text: qsTr("Address") + translationManager.emptyString
-        }
 
         RowLayout {
             StandardButton {
@@ -70,32 +64,25 @@ Rectangle {
             LineEdit {
                 Layout.fillWidth: true;
                 id: addressLine
+                labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
                 placeholderText: qsTr("4...") + translationManager.emptyString
             }
         }
 
-        Label {
-            id: paymentIdLabel
-            text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
-            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
-                    + translationManager.emptyString
-        }
-
         LineEdit {
             id: paymentIdLine
             Layout.fillWidth: true;
+            labelText: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
-        }
-
-        Label {
-            id: descriptionLabel
-            text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
+//            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
+//                    + translationManager.emptyString
         }
 
         LineEdit {
             id: descriptionLine
             Layout.fillWidth: true;
+            labelText: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
         }
 
@@ -132,7 +119,6 @@ Rectangle {
                 }
             }
         }
-
     }
 
     Rectangle {
@@ -141,7 +127,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height - addButton.y - addButton.height - 36 * scaleRatio
-        color: "#FFFFFF"
+        color: "transparent"
 
         Behavior on height {
             NumberAnimation { duration: 200; easing.type: Easing.InQuad }
@@ -152,7 +138,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             height: 1
-            color: "#DBDBDB"
+            color: "#808080"
         }
 
         Scroll {

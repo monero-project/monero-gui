@@ -37,13 +37,13 @@ ListView {
     footer: Rectangle {
         height: 127
         width: listView.width
-        color: "#FFFFFF"
+        color: "transparent"
 
         Text {
             anchors.centerIn: parent
             font.family: "Arial"
             font.pixelSize: 14
-            color: "#545454"
+            color: "#808080"
             text: qsTr("No more results") + translationManager.emptyString
         }
     }
@@ -164,7 +164,7 @@ ListView {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             height: 1
-            color: "#DBDBDB"
+            color: "#808080"
         }
     }
 }
