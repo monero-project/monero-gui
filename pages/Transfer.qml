@@ -29,6 +29,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
 import "../components"
@@ -45,13 +46,7 @@ Rectangle {
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
-    Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: panel.height
-        source: "../images/leftPanelBg.jpg"
-    }
+    Clipboard { id: clipboard }
 
     function scaleValueToMixinCount(scaleValue) {
         var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
@@ -118,36 +113,22 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.top: parent.top
+      anchors.margins: (isMobile)? 17 : 40
+      anchors.topMargin: 40 * scaleRatio
+
       anchors.left: parent.left
+      anchors.top: parent.top
       anchors.right: parent.right
-      anchors.margins: 17 * scaleRatio
-      spacing: 0
 
-      RowLayout{
-          Layout.fillWidth: true
-          Layout.bottomMargin: 20
-          height: 150
-
-          Text {
-              id: panelHeader
-              font.family: Style.fontMedium.name
-              font.pixelSize: 32 * scaleRatio
-              color: "#FFFFFF"
-              text: "Send"
-              height: 150
-          }
-      }
+      spacing: 20 * scaleRatio
 
       GridLayout {
           columns: (isMobile)? 1 : 2
           Layout.fillWidth: true
+          columnSpacing: 48
+
           ColumnLayout {
               Layout.fillWidth: true
-              Label {
-                  id: amountLabel
-                  text: qsTr("Amount") + translationManager.emptyString
-              }
 
               RowLayout {
                   Layout.fillWidth: true
@@ -159,6 +140,7 @@ Rectangle {
                       id: amountLine
                       Layout.fillWidth: true
                       inlineIcon: true
+                      labelText: qsTr("Amount") + translationManager.emptyString
                       placeholderText: qsTr("") + translationManager.emptyString
                       width: 100
                       inlineButtonText: qsTr("All") + translationManager.emptyString
@@ -186,20 +168,7 @@ Rectangle {
               // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
               // For translations to work, the strings need to be listed in
               // the file components/StandardDropdown.qml too.
-<<<<<<< HEAD
-              
-=======
 
-              // Priorities before v5
-              ListModel {
-                  id: priorityModel
-
-                  ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-                  ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-                  ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
-               }
-
->>>>>>> InlineButton development
               // Priorites after v5
               ListModel {
                    id: priorityModelV5
@@ -209,7 +178,6 @@ Rectangle {
                    ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
                    ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
                    ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
-
                }
 
               StandardDropdown {
@@ -217,53 +185,81 @@ Rectangle {
                   id: priorityDropdown
                   shadowReleasedColor: "#FF4304"
                   shadowPressedColor: "#B32D00"
-                  releasedColor: "black"
-                  pressedColor: "#404040"
+                  releasedColor: "#363636"
+                  pressedColor: "#202020"
               }
           }
           // Make sure dropdown is on top
           z: parent.z + 1
       }
 
-      ColumnLayout {
+      // recipient address input
+      RowLayout {
+          id: addressLineRow
           Layout.fillWidth: true
-          Label {
-              id: addressLabel
-              textFormat: Text.RichText
-<<<<<<< HEAD
-              text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                    qsTr("Address") +
-                    "<font size='2'> ( " +
-                    qsTr("Paste in or select from <a href='#'>Address book</a>") +
-                    " )</font>" +
-                    translationManager.emptyString
-=======
-              text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                          Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                    + translationManager.emptyString
 
->>>>>>> InlineButton development
-              onLinkActivated: appWindow.showPageRequest("AddressBook")
-              Layout.fillWidth: true
-          }
-          // recipient address input
-          RowLayout {
-              id: addressLineRow
-              Layout.fillWidth: true
+          ColumnLayout {
+              Rectangle{
+                  id: inputLabelRect
+                  color: "transparent"
+                  Layout.fillWidth: true
+                  height: inputLabel.height + 10
 
-              StandardButton {
-                  id: qrfinderButton
-                  text: qsTr("QR Code") + translationManager.emptyString
-                  shadowReleasedColor: "#FF4304"
-                  shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
-                  visible : appWindow.qrScannerEnabled
-                  enabled : visible
-                  width: visible ? 60 * scaleRatio : 0
-                  onClicked: {
-                      cameraUi.state = "Capture"
-                      cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                  Text {
+                      id: inputLabel
+                      anchors.top: parent.top
+                      anchors.left: parent.left
+                      font.family: Style.fontRegular.name
+                      font.pixelSize: 16 * scaleRatio
+                      font.bold: labelFontBold
+                      textFormat: Text.RichText
+                      color: "white"
+                      onLinkActivated: { appWindow.showPageRequest("AddressBook") }
+                      text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                        Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                        + translationManager.emptyString
+                  }
+
+                  Rectangle{
+                      id: copyButton
+                      color: "#808080"
+                      radius: 3
+                      height: 20
+                      width: copyButtonText.width + 8
+                      anchors.right: parent.right
+                      visible: addressLine.text !== ""
+
+                      Text {
+                          id: copyButtonText
+                          anchors.verticalCenter: parent.verticalCenter
+                          anchors.horizontalCenter: parent.horizontalCenter
+                          font.family: Style.fontRegular.name
+                          font.pixelSize: 12
+                          font.bold: true
+                          text: qsTr("Copy") + translationManager.emptyString
+                          color: "black"
+                      }
+
+                      MouseArea {
+                          cursorShape: Qt.PointingHandCursor
+                          anchors.fill: parent
+                          hoverEnabled: true
+                          onClicked: {
+                              if (addressLine.text.length > 0) {
+                                  console.log(addressLine.text + " copied to clipboard");
+                                  clipboard.setText(addressLine.text);
+                                  appWindow.showStatusMessage(qsTr("Address copied to clipboard"), 3);
+                              }
+                          }
+                          onEntered: {
+                              copyButton.color = "#707070";
+                              copyButtonText.opacity = 0.8;
+                          }
+                          onExited: {
+                              copyButtonText.opacity = 1.0;
+                              copyButton.color = "#808080";
+                          }
+                      }
                   }
               }
               LineEdit {
@@ -292,55 +288,98 @@ Rectangle {
                               addressLine.cursorPosition = 0
                               oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
                             } else {
-                              oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                              oa_message(qsTr("No address found"))
                             }
-                          } else {
-                            oa_message(qsTr("Internal error"))
-                          }
-                        } else {
-                          oa_message(qsTr("Internal error"))
                         }
-                      } else {
-                        oa_message(qsTr("No address found"))
+                          onEntered: {
+                              resolveButton.color = "#707070";
+                              resolveButtonText.opacity = 0.8;
+                          }
+                          onExited: {
+                              resolveButtonText.opacity = 1.0;
+                              resolveButton.color = "#808080";
+                          }
                       }
                   }
-                  // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
+              }
+
+              InputMulti {
+//                  validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
+                  id: addressLine
+                  readOnly: false
+                  anchors.top: inputLabelRect.bottom
+                  placeholderText: "4..."
+                  Layout.fillWidth: true
+
+                  Rectangle {
+                      color: "transparent"
+                      border.width: 1
+                      border.color: {
+                        if(addressLine.error && addressLine.text !== ""){
+                            return Qt.rgba(255, 0, 0, 0.45);
+                        } else if(addressLine.activeFocus){
+                            return Qt.rgba(255, 255, 255, 0.35);
+                        } else {
+                            return Qt.rgba(255, 255, 255, 0.25);
+                        }
+                      }
+                      radius: 4
+                      anchors.fill: parent
+                  }
               }
           }
 
-          Label {
-              id: paymentIdLabel
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+          StandardButton {
+              id: qrfinderButton
+              text: qsTr("QR Code") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              visible : appWindow.qrScannerEnabled
+              enabled : visible
+              width: visible ? 60 * scaleRatio : 0
+              onClicked: {
+                  cameraUi.state = "Capture"
+                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
           }
+      }
 
+      RowLayout {
           // payment id input
           LineEdit {
               id: paymentIdLine
+              labelText: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
               Layout.fillWidth: true
           }
+      }
 
-          Label {
-              text: qsTr("Description <font size='2'>( Optional )</font>")
-                    + translationManager.emptyString
-          }
-
+      RowLayout {
           LineEdit {
               id: descriptionLine
+              labelText: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
               Layout.fillWidth: true
           }
+      }
 
+      RowLayout {
           StandardButton {
               id: sendButton
               Layout.bottomMargin: 17 * scaleRatio
               Layout.topMargin: 17 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
+<<<<<<< HEAD
               shadowReleasedColor: "#FF4304"
               shadowPressedColor: "#B32D00"
               releasedColor: "#FF6C3C"
               pressedColor: "#FF4304"
               enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+=======
+              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+>>>>>>> Transfer page QML development
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -390,7 +429,7 @@ Rectangle {
         anchors.leftMargin: 17 * scaleRatio
         anchors.topMargin: 17 * scaleRatio
         anchors.bottomMargin: 17 * scaleRatio
-        spacing: 10 * scaleRatio
+        spacing: 20 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
@@ -432,8 +471,6 @@ Rectangle {
                 anchors.right: parent.right
             }
         }
-
-
 
         PrivacyLevel {
             visible: persistentSettings.transferShowAdvanced && !isMobile
