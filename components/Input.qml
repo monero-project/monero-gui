@@ -29,10 +29,12 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.10
 import "." 1.0
+import "../components"
+
 
 TextField {
     font.family: Style.fontRegular.name
-    font.pixelSize: 22
+    font.pixelSize: 18 * scaleRatio
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
