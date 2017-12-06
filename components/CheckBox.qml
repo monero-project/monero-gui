@@ -52,9 +52,10 @@ RowLayout {
             anchors.left: parent.left
             width: 25 * scaleRatio
             height: checkBox.height - 1
-            //radius: 4
+            radius: 3
             y: 0
-            color: "#DBDBDB"
+            color: "transparent"
+            border.color: Qt.rgba(1, 1, 1, 0.25)
         }
 
         Rectangle {
@@ -64,7 +65,7 @@ RowLayout {
             height: checkBox.height - 1
             //radius: 4
             y: 1
-            color: "#FFFFFF"
+            color: "transparent"
 
             Image {
                 anchors.centerIn: parent
