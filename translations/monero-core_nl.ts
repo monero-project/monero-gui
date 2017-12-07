@@ -1718,7 +1718,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>Vergeet u hersteltekst niet op te schrijven. U kunt u hersteltekst bekijken en instellingen aanpassen op de instellingen pagina.</translation>
+        <translation>Vergeet uw hersteltekst niet op te schrijven. U kunt uw hersteltekst bekijken en instellingen aanpassen op de instellingen pagina.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
