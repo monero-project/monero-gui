@@ -102,8 +102,6 @@ Rectangle {
                     checked: persistentSettings.allow_background_mining
                     onClicked: {persistentSettings.allow_background_mining = checked}
                     text: qsTr("Background mining (experimental)") + translationManager.emptyString
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
                 }
 
             }
@@ -118,8 +116,6 @@ Rectangle {
                     checked: !persistentSettings.miningIgnoreBattery
                     onClicked: {persistentSettings.miningIgnoreBattery = !checked}
                     text: qsTr("Enable mining when running on battery") + translationManager.emptyString
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
                 }
             }
 

@@ -291,8 +291,6 @@ Rectangle {
         anchors.left: filterButton.right
         anchors.bottom: filterButton.bottom
         anchors.leftMargin: 17
-        checkedIcon: "../images/checkedVioletIcon.png"
-        uncheckedIcon: "../images/uncheckedIcon.png"
         onClicked: {
             if(checked) tableRect.height = Qt.binding(function(){ return tableRect.collapsedHeight })
             else tableRect.height = Qt.binding(function(){ return tableRect.middleHeight })

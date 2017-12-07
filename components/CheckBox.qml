@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.1
 RowLayout {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon
+    property string checkedIcon: "../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color

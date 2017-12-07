@@ -191,5 +191,6 @@
         <file>images/lightning-white.png</file>
         <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>
+        <file>images/checkedIcon-black.png</file>
     </qresource>
 </RCC>
