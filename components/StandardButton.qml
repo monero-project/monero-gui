@@ -39,12 +39,12 @@ Item {
     property string releasedColor: Style.buttonBackgroundColor
     property string icon: ""
     property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
-    property int fontSize: 18 * scaleRatio
+    property int fontSize: 16 * scaleRatio
     property alias text: label.text
     signal clicked()
 
     // Dynamic label width
-    Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 10 : 60
+    Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 22 : 60
 
     function doClick() {
         // Android workaround
@@ -56,16 +56,27 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: parent.height - 1
-        y: buttonArea.pressed ? 0 : 1
         radius: 3
         color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
-//        color: {
-//            parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
-//                           : Qt.lighter(parent.shadowReleasedColor)
-//        }
         border.color: Qt.darker(parent.releasedColor)
         border.width: parent.focus ? 1 : 0
 
+        MouseArea{
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+
+            propagateComposedEvents: true
+
+            onEntered: {
+                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
+                else parent.color = Style.buttonBackgroundColorDisabledHover;
+            }
+            onExited: {
+                if(button.enabled) parent.color = Style.buttonBackgroundColor;
+                else parent.color = Style.buttonBackgroundColorDisabled;
+            }
+        }
     }
 
 //    Rectangle {
@@ -91,7 +102,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         font.family: Style.fontBold.name
         font.bold: true
-        font.pixelSize: button.fontSize
+        font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
 //        font.capitalization : Font.Capitalize
