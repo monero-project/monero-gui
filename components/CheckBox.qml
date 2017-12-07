@@ -55,7 +55,7 @@ RowLayout {
             radius: 3
             y: 0
             color: "transparent"
-            border.color: Qt.rgba(1, 1, 1, 0.25)
+            border.color: checkBox.checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
         }
 
         Rectangle {
@@ -69,8 +69,8 @@ RowLayout {
 
             Image {
                 anchors.centerIn: parent
-                source: checkBox.checked ? checkBox.checkedIcon :
-                                           checkBox.uncheckedIcon
+                source: checkBox.checkedIcon
+                visible: checkBox.checked
             }
 
             MouseArea {

@@ -399,8 +399,7 @@ Rectangle {
                     persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
                 }
                 text: qsTr("Show advanced options") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
+                checkedIcon: "../images/checkedIcon-black.png"
             }
         }
 
