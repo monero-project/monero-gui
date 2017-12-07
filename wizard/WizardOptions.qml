@@ -248,28 +248,7 @@ ColumnLayout {
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.nettype === NetworkType.TESTNET;
-                onClicked: {
-                    persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
-                    stageNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype === NetworkType.TESTNET ? "Testnet" : "Mainnet")
-                }
-            }
-        }
-
-        Rectangle {
-            width: 100 * scaleRatio
-            CheckBox {
-                id: stageNet
-                text: qsTr("Stagenet") + translationManager.emptyString
-                background: "#FFFFFF"
-                fontColor: "#4A4646"
-                fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.nettype === NetworkType.STAGENET;
+                checked: appWindow.persistentSettings.testnet;
                 onClicked: {
                     persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
                     testNet.checked = false;

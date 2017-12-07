@@ -331,15 +331,7 @@ Rectangle {
               Layout.bottomMargin: 17 * scaleRatio
               Layout.topMargin: 17 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
-<<<<<<< HEAD
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
-=======
               enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
->>>>>>> Transfer page QML development
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -399,7 +391,6 @@ Rectangle {
                     persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
                 }
                 text: qsTr("Show advanced options") + translationManager.emptyString
-                checkedIcon: "../images/checkedIcon-black.png"
             }
         }
 

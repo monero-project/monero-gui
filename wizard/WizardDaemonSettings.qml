@@ -127,8 +127,6 @@ ColumnLayout {
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
                 visible: !isAndroid && !isIOS
                 onClicked: {
@@ -189,8 +187,6 @@ ColumnLayout {
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.useRemoteNode
                 onClicked: {
                     checked = true
