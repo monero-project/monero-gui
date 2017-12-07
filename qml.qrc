@@ -190,5 +190,6 @@
         <file>images/moneroIcon-28x28.png</file>
         <file>images/lightning-white.png</file>
         <file>images/middlePanelBg.jpg</file>
+        <file>components/InputMulti.qml</file>
     </qresource>
 </RCC>
