@@ -237,7 +237,10 @@ ApplicationWindow {
                                               persistentSettings.nettype);
         }
 
+        // Hide titlebar based on persistentSettings.customDecorations
+        titleBar.visible = persistentSettings.customDecorations;
     }
+
     function closeWallet() {
 
         // Disconnect all listeners
@@ -928,11 +931,14 @@ ApplicationWindow {
         x = 0
       if (y < 0)
         y = 0
-      persistentSettings.customDecorations = custom
+      persistentSettings.customDecorations = custom;
+      titleBar.visible = custom; // hides custom titlebar based on customDecorations
+
       if (custom)
-        appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
+          appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint;
       else
-        appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint
+          appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint;
+
       appWindow.hide()
       appWindow.x = x
       appWindow.y = y
