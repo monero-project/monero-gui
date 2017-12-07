@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+
 import "." 1.0
 
 Item {
@@ -95,7 +96,7 @@ Item {
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
-        color: "white"
+        color: Style.defaultFontColor
         onLinkActivated: item.labelLinkActivated()
 
         MouseArea {

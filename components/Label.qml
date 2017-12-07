@@ -29,6 +29,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "." 1.0
+
 Item {
     id: item
     property alias text: label.text
@@ -49,10 +51,10 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * scaleRatio
         anchors.left: parent.left
-        font.family: "Arial"
+        font.family: Style.fontRegular.name
         font.pixelSize: fontSize
         font.bold: fontBold
-        color: "white"
+        color: Style.defaultFontColor
         onLinkActivated: item.linkActivated()
     }
 

@@ -213,7 +213,7 @@ Rectangle {
                       font.pixelSize: 16 * scaleRatio
                       font.bold: labelFontBold
                       textFormat: Text.RichText
-                      color: "white"
+                      color: Style.defaultFontColor
                       onLinkActivated: { appWindow.showPageRequest("AddressBook") }
                       text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                         Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
@@ -292,10 +292,6 @@ Rectangle {
           StandardButton {
               id: qrfinderButton
               text: qsTr("QR Code") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
               visible : appWindow.qrScannerEnabled
               enabled : visible
               width: visible ? 60 * scaleRatio : 0
@@ -398,7 +394,8 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
             Layout.bottomMargin: 30 * scaleRatio
         }
 
@@ -450,10 +447,6 @@ Rectangle {
             StandardButton {
                 id: sweepUnmixableButton
                 text: qsTr("Sweep Unmixable") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 enabled : pageRoot.enabled
                 onClicked: {
                     console.log("Transfer: sweepUnmixableClicked")
@@ -464,10 +457,6 @@ Rectangle {
             StandardButton {
                 id: saveTxButton
                 text: qsTr("Create tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: appWindow.viewOnly
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
                 onClicked: {
@@ -486,10 +475,6 @@ Rectangle {
             StandardButton {
                 id: signTxButton
                 text: qsTr("Sign tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: !appWindow.viewOnly
                 onClicked: {
                     console.log("Transfer: sign tx clicked")

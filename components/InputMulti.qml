@@ -41,7 +41,7 @@ TextArea {
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: "white"
+    color: Style.defaultFontColor
     wrapMode: Text.WrapAnywhere
     onTextChanged: {
         if(addressValidation){
