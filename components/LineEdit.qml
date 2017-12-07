@@ -95,7 +95,7 @@ Item {
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
-        color: "white"
+        color: Style.defaultFontColor
         onLinkActivated: item.labelLinkActivated()
 
         MouseArea {

@@ -29,7 +29,6 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.10
 import "." 1.0
-import "../components"
 
 
 TextField {
@@ -38,7 +37,7 @@ TextField {
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: "white"
+    color: Style.defaultFontColor
 
     background: Rectangle {
         color: "transparent"
