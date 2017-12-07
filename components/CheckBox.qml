@@ -88,6 +88,8 @@ RowLayout {
             color: "#525252"
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            anchors.left: backgroundRect.right
+            anchors.leftMargin: !isMobile ? 10 : 8
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

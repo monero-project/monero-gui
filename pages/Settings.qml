@@ -274,6 +274,7 @@ Rectangle {
                 id: blockchainFolder
                 Layout.preferredWidth:  200
                 Layout.fillWidth: true
+                labelText: qsTr("Blockchain location") + translationManager.emptyString
                 text: persistentSettings.blockchainDataDir
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
 
