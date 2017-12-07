@@ -41,7 +41,7 @@ Rectangle {
     property bool viewOnly: false
     id: page
 
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
 
@@ -62,7 +62,6 @@ Rectangle {
             Label {
                 id: manageWalletLabel
                 Layout.fillWidth: true
-                color: "#4A4949"
                 text: qsTr("Manage wallet") + translationManager.emptyString
                 Layout.topMargin: 10 * scaleRatio
             }
@@ -71,7 +70,8 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
         }
 
         GridLayout {
@@ -79,10 +79,6 @@ Rectangle {
             StandardButton {
                 id: closeWalletButton
                 text: qsTr("Close wallet") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: true
                 onClicked: {
                     console.log("closing wallet button clicked")
@@ -94,10 +90,6 @@ Rectangle {
                 enabled: !viewOnly
                 id: createViewOnlyWalletButton
                 text: qsTr("Create view only wallet") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: true
                 onClicked: {
                     wizard.openCreateViewOnlyWalletPage();
@@ -143,10 +135,6 @@ Rectangle {
                 id: rescanSpentButton
                 enabled: !persistentSettings.useRemoteNode
                 text: qsTr("Rescan wallet balance") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     if (!currentWallet.rescanSpent()) {
                         console.error("Error: ", currentWallet.errorString);
@@ -199,10 +187,6 @@ Rectangle {
                 enabled: persistentSettings.useRemoteNode
                 Layout.fillWidth: false
                 text: qsTr("Local Node") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     appWindow.disconnectRemoteNode();
                 }
@@ -213,10 +197,6 @@ Rectangle {
                 enabled: !persistentSettings.useRemoteNode
                 Layout.fillWidth: false
                 text: qsTr("Remote Node") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     appWindow.connectRemoteNode();
                 }
@@ -229,7 +209,6 @@ Rectangle {
             Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
-                color: "#4A4949"
                 text: qsTr("Manage Daemon") + translationManager.emptyString
             }
 
@@ -237,14 +216,13 @@ Rectangle {
                 id: daemonAdvanced
                 Layout.leftMargin: 15
                 text: qsTr("Show advanced") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
         Rectangle {
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
         }
 
         GridLayout {
@@ -255,10 +233,6 @@ Rectangle {
                 visible: !appWindow.daemonRunning
                 id: startDaemonButton
                 text: qsTr("Start Local Node") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     // Update bootstrap daemon address
                     persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
@@ -273,10 +247,6 @@ Rectangle {
                 visible: appWindow.daemonRunning
                 id: stopDaemonButton
                 text: qsTr("Stop Local Node") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     appWindow.stopDaemon()
                 }
@@ -286,10 +256,6 @@ Rectangle {
                 visible: true
                 id: daemonStatusButton
                 text: qsTr("Show status") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     daemonManager.sendCommand("status",currentWallet.nettype);
                     daemonConsolePopup.open();
@@ -302,7 +268,6 @@ Rectangle {
             visible: !isMobile && !persistentSettings.useRemoteNode
             Label {
                 id: blockchainFolderLabel
-                color: "#4A4949"
                 text: qsTr("Blockchain location") + translationManager.emptyString
             }
             LineEdit {
@@ -332,7 +297,6 @@ Rectangle {
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
-                color: "#4A4949"
                 text: qsTr("Local daemon startup flags") + translationManager.emptyString
             }
             LineEdit {
@@ -350,7 +314,6 @@ Rectangle {
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
-                color: "#4A4949"
                 text: qsTr("Node login (optional)") + translationManager.emptyString
             }
 
@@ -401,7 +364,6 @@ Rectangle {
             visible: persistentSettings.useRemoteNode
             ColumnLayout {
                 Label {
-                    color: "#4A4949"
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
                 RemoteNodeEdit {
@@ -419,10 +381,6 @@ Rectangle {
                 StandardButton {
                     id: remoteNodeSave
                     text: qsTr("Connect") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     onClicked: {
                         // Update daemon login
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
@@ -441,7 +399,6 @@ Rectangle {
         RowLayout {
             visible: !isMobile
             Label {
-                color: "#4A4949"
                 text: qsTr("Layout settings") + translationManager.emptyString
                 anchors.topMargin: 30 * scaleRatio
                 Layout.topMargin: 30 * scaleRatio
@@ -451,7 +408,8 @@ Rectangle {
             visible: !isMobile
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
         }
 
         RowLayout {
@@ -461,8 +419,6 @@ Rectangle {
                 checked: persistentSettings.customDecorations
                 onClicked: appWindow.setCustomWindowDecorations(checked)
                 text: qsTr("Custom decorations") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
 
@@ -470,7 +426,6 @@ Rectangle {
 
         RowLayout {
             Label {
-                color: "#4A4949"
                 text: qsTr("Log level") + translationManager.emptyString
                 anchors.topMargin: 30 * scaleRatio
                 Layout.topMargin: 30 * scaleRatio
@@ -479,7 +434,8 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
         }
         ColumnLayout {
             ComboBox {
@@ -518,7 +474,6 @@ Rectangle {
         // Version
         RowLayout {
             Label {
-                color: "#4A4949"
                 text: qsTr("Debug info") + translationManager.emptyString
                 fontSize: 16
                 anchors.topMargin: 30 * scaleRatio
@@ -528,7 +483,8 @@ Rectangle {
         Rectangle {
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
         }
         TextBlock {
             Layout.topMargin: 8
@@ -572,10 +528,6 @@ Rectangle {
                 Layout.fillWidth: false
                 Layout.leftMargin: 30
                 text: qsTr("Save") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
 
                 onClicked: {
                     currentWallet.walletCreationHeight = restoreHeight.text
