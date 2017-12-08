@@ -192,5 +192,7 @@
         <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>
         <file>images/checkedIcon-black.png</file>
+        <file>components/LineEditMulti.qml</file>
+        <file>components/LabelButton.qml</file>
     </qresource>
 </RCC>
