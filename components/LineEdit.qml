@@ -43,6 +43,7 @@ Item {
     property bool copyButton: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
+    property bool fontBold: true
     property bool error: false
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
@@ -53,7 +54,7 @@ Item {
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     signal labelLinkActivated(); // input label, rich text <a> signal
-    signal editingFinished()
+    signal editingFinished();
     signal accepted();
     signal textUpdated();
 
@@ -82,7 +83,7 @@ Item {
         id: inputLabel
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: 2
+        anchors.topMargin: 2 * scaleRatio
         font.family: Style.fontRegular.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
@@ -97,53 +98,25 @@ Item {
         }
     }
 
-    Rectangle{
-        id: copyButtonRect
-        color: "#808080"
-        radius: 3
-        height: 20
-        width: 44
+    LabelButton {
+        id: copyButtonId
+        text: qsTr("Copy")
         anchors.right: parent.right
-        visible: copyButton && input.text !== "" ? true : false
-
-        Text {
-            id: copyButtonText
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.family: Style.fontRegular.name
-            font.pixelSize: 12
-            font.bold: true
-            text: "Copy"
-            color: "black"
-        }
-
-        MouseArea {
-            cursorShape: Qt.PointingHandCursor
-            anchors.fill: parent
-            hoverEnabled: true
-            onClicked: {
-                if (addressLine.text.length > 0) {
-                    console.log(addressLine.text + " copied to clipboard")
-                    clipboard.setText(addressLine.text)
-                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
-                }
-            }
-            onEntered: {
-                copyButtonRect.color = "#707070";
-                copyButtonText.opacity = 0.8;
-            }
-            onExited: {
-                copyButtonRect.color = "#808080";
-                copyButtonText.opacity = 1.0;
+        onClicked: {
+            if (input.text.length > 0) {
+                console.log(input.text + " copied to clipboard")
+                clipboard.setText(input.text)
+                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
             }
         }
+        visible: input.text && copyButton ? true : false
     }
 
     Item{
         id: inputItem
         height: 40 * scaleRatio
         anchors.top: inputLabel.bottom
-        anchors.topMargin: 6
+        anchors.topMargin: 6 * scaleRatio
         width: parent.width
 
         Text {
@@ -151,7 +124,7 @@ Item {
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: inlineIcon.visible ? 50 : 10
+            anchors.leftMargin: inlineIcon.visible ? 50 * scaleRatio : 10 * scaleRatio
             opacity: 0.25
             color: Style.defaultFontColor
             font.family: Style.fontRegular.name
@@ -197,6 +170,7 @@ Item {
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 38 : 0
             font.pixelSize: item.fontSize
+            font.bold: fontBold
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()
@@ -204,12 +178,11 @@ Item {
 
         InlineButton {
             id: inlineButtonId
-            onClicked: inlineButtonId.onClicked
             visible: item.inlineButtonText ? true : false
             anchors.right: parent.right
-            anchors.rightMargin: 8
+            anchors.rightMargin: 8 * scaleRatio
             anchors.top: parent.top
-            anchors.topMargin: 6
+            anchors.topMargin: 6 * scaleRatio
         }
     }
 }

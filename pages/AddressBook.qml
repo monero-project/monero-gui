@@ -38,11 +38,11 @@ Rectangle {
     property var model
 
     ColumnLayout {
-        anchors.margins: 17 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 10 * scaleRatio
+        spacing: 26 * scaleRatio
 
         RowLayout {
             StandardButton {

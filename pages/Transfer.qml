@@ -113,19 +113,19 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.margins: (isMobile)? 17 : 40
+      anchors.margins: (isMobile)? 17 : 20
       anchors.topMargin: 40 * scaleRatio
 
       anchors.left: parent.left
       anchors.top: parent.top
       anchors.right: parent.right
 
-      spacing: 20 * scaleRatio
+      spacing: 26 * scaleRatio
 
       GridLayout {
           columns: (isMobile)? 1 : 2
           Layout.fillWidth: true
-          columnSpacing: 48
+          columnSpacing: 32
 
           ColumnLayout {
               Layout.fillWidth: true
@@ -198,96 +198,168 @@ Rectangle {
           id: addressLineRow
           Layout.fillWidth: true
 
-          ColumnLayout {
-              Rectangle{
-                  id: inputLabelRect
-                  color: "transparent"
-                  Layout.fillWidth: true
-                  height: inputLabel.height + 10
+          LineEditMulti{
+              id: addressLine
+              spacing: 0
+//                       @TODO:
+//                       - fix wrong copy @ receive.qml
+//                       - resolve button click @ multiline @ transfer.qml
 
-                  Text {
-                      id: inputLabel
-                      anchors.top: parent.top
-                      anchors.left: parent.left
-                      font.family: Style.fontRegular.name
-                      font.pixelSize: 16 * scaleRatio
-                      font.bold: labelFontBold
-                      textFormat: Text.RichText
-                      color: Style.defaultFontColor
-                      onLinkActivated: { appWindow.showPageRequest("AddressBook") }
-                      text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                        Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                        + translationManager.emptyString
-                  }
-
-                  Rectangle{
-                      id: copyButton
-                      color: "#808080"
-                      radius: 3
-                      height: 20
-                      width: copyButtonText.width + 8
-                      anchors.right: parent.right
-                      visible: addressLine.text !== ""
-
-                      Text {
-                          id: copyButtonText
-                          anchors.verticalCenter: parent.verticalCenter
-                          anchors.horizontalCenter: parent.horizontalCenter
-                          font.family: Style.fontRegular.name
-                          font.pixelSize: 12
-                          font.bold: true
-                          text: qsTr("Copy") + translationManager.emptyString
-                          color: "black"
-                      }
-
-                      MouseArea {
-                          cursorShape: Qt.PointingHandCursor
-                          anchors.fill: parent
-                          hoverEnabled: true
-                          onClicked: {
-                              if (addressLine.text.length > 0) {
-                                  console.log(addressLine.text + " copied to clipboard");
-                                  clipboard.setText(addressLine.text);
-                                  appWindow.showStatusMessage(qsTr("Address copied to clipboard"), 3);
-                              }
-                          }
-                          onEntered: {
-                              copyButton.color = "#707070";
-                              copyButtonText.opacity = 0.8;
-                          }
-                          onExited: {
-                              copyButtonText.opacity = 1.0;
-                              copyButton.color = "#808080";
-                          }
-                      }
-                  }
-              }
-
-              InputMulti {
-                  id: addressLine
-                  readOnly: false
-                  addressValidation: true
-                  anchors.top: inputLabelRect.bottom
-                  placeholderText: "4..."
-                  Layout.fillWidth: true
-
-                  Rectangle {
-                      color: "transparent"
-                      border.width: 1
-                      border.color: {
-                        if(addressLine.error && addressLine.text !== ""){
-                            return Qt.rgba(255, 0, 0, 0.45);
-                        } else if(addressLine.activeFocus){
-                            return Qt.rgba(255, 255, 255, 0.35);
-                        } else {
-                            return Qt.rgba(255, 255, 255, 0.25);
+              inputLabelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                + translationManager.emptyString
+              labelButtonText: qsTr("Resolve") + translationManager.emptyString
+              placeholderText: "4.."
+              onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
+              onLabelButtonClicked: {
+                  var result = walletManager.resolveOpenAlias(addressLine.text)
+                  if (result) {
+                    var parts = result.split("|")
+                    if (parts.length == 2) {
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                      if (parts[0] === "true") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
                         }
+                        else
+                          oa_message(qsTr("No valid address found at this OpenAlias address"))
+                      } else if (parts[0] === "false") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
+                          oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                        } else {
+                          oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                        }
+                      } else {
+                        oa_message(qsTr("Internal error"))
                       }
-                      radius: 4
-                      anchors.fill: parent
+                    } else {
+                      oa_message(qsTr("Internal error"))
+                    }
+                  } else {
+                    oa_message(qsTr("No address found"))
                   }
               }
           }
+
+//          ColumnLayout {
+//              spacing: 0
+//              Rectangle{
+//                  id: inputLabelRect
+//                  color: "transparent"
+//                  Layout.fillWidth: true
+//                  height: inputLabel.height + 10
+
+//                  Text {
+//                      id: inputLabel
+//                      anchors.top: parent.top
+//                      anchors.left: parent.left
+//                      font.family: Style.fontRegular.name
+//                      font.pixelSize: 16 * scaleRatio
+//                      font.bold: labelFontBold
+//                      textFormat: Text.RichText
+//                      color: Style.defaultFontColor
+//                      onLinkActivated: { appWindow.showPageRequest("AddressBook") }
+//                      text: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+//                        Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
+//                        + translationManager.emptyString
+//                  }
+
+//                  Rectangle{
+//                      id: resolveButton
+//                      color: "#808080"
+//                      radius: 3
+//                      height: 20
+//                      width: resolveButtonText.width + 8
+//                      anchors.right: copyButton.left
+//                      anchors.rightMargin: 6
+//                      visible: isValidOpenAliasAddress(addressLine.text)
+
+//                      Text {
+//                          id: resolveButtonText
+//                          anchors.verticalCenter: parent.verticalCenter
+//                          anchors.horizontalCenter: parent.horizontalCenter
+//                          font.family: Style.fontRegular.name
+//                          font.pixelSize: 12
+//                          font.bold: true
+//                          text: qsTr("Resolve") + translationManager.emptyString
+//                          color: "black"
+//                      }
+
+//                      MouseArea {
+//                          cursorShape: Qt.PointingHandCursor
+//                          anchors.fill: parent
+//                          hoverEnabled: true
+//                          onClicked: {
+//                            var result = walletManager.resolveOpenAlias(addressLine.text)
+//                            if (result) {
+//                              var parts = result.split("|")
+//                              if (parts.length == 2) {
+//                                var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+//                                if (parts[0] === "true") {
+//                                  if (address_ok) {
+//                                    addressLine.text = parts[1]
+//                                    addressLine.cursorPosition = 0
+//                                  }
+//                                  else
+//                                    oa_message(qsTr("No valid address found at this OpenAlias address"))
+//                                } else if (parts[0] === "false") {
+//                                  if (address_ok) {
+//                                    addressLine.text = parts[1]
+//                                    addressLine.cursorPosition = 0
+//                                    oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+//                                  } else {
+//                                    oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+//                                  }
+//                                } else {
+//                                  oa_message(qsTr("Internal error"))
+//                                }
+//                              } else {
+//                                oa_message(qsTr("Internal error"))
+//                              }
+//                            } else {
+//                              oa_message(qsTr("No address found"))
+//                            }
+//                        }
+//                          onEntered: {
+//                              resolveButton.color = "#707070";
+//                              resolveButtonText.opacity = 0.8;
+//                          }
+//                          onExited: {
+//                              resolveButtonText.opacity = 1.0;
+//                              resolveButton.color = "#808080";
+//                          }
+//                      }
+//                  }
+//              }
+
+//              InputMulti {
+//                  id: addressLine
+//                  readOnly: false
+//                  addressValidation: true
+//                  anchors.top: inputLabelRect.bottom
+//                  placeholderText: "4..."
+//                  Layout.fillWidth: true
+
+//                  Rectangle {
+//                      color: "transparent"
+//                      border.width: 1
+//                      border.color: {
+//                        if(addressLine.error && addressLine.text !== ""){
+//                            return Qt.rgba(255, 0, 0, 0.45);
+//                        } else if(addressLine.activeFocus){
+//                            return Qt.rgba(255, 255, 255, 0.35);
+//                        } else {
+//                            return Qt.rgba(255, 255, 255, 0.25);
+//                        }
+//                      }
+//                      radius: 4
+//                      anchors.fill: parent
+//                  }
+//              }
+//          }
 
           StandardButton {
               id: qrfinderButton
@@ -374,9 +446,9 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 : 40
+        anchors.margins: (isMobile)? 17 : 20
         anchors.topMargin: 40 * scaleRatio
-        spacing: 20 * scaleRatio
+        spacing: 26 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
