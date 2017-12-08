@@ -1,7 +1,7 @@
 #ifndef ADDRESSBOOK_H
 #define ADDRESSBOOK_H
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QObject>
 #include <QList>
 #include <QDateTime>
