@@ -156,6 +156,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+            anchors.topMargin: 14
             anchors.leftMargin: 14
             anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()

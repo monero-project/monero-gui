@@ -53,7 +53,7 @@ ListView {
         id: delegate
         height: 64
         width: listView.width
-        color: index % 2 ? "#F8F8F8" : "#FFFFFF"
+        color: index % 2 ? "#ee6000" : "#3e3e3e"
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
 
@@ -66,7 +66,7 @@ ListView {
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 19
-            color: "#444444"
+            color: "#ffffff"
             elide: Text.ElideRight
             text: description
 
@@ -87,7 +87,7 @@ ListView {
             anchors.rightMargin: 40
             font.family: "Arial"
             font.pixelSize: 16
-            color: "#545454"
+            color: "#ffffff"
             text: address
         }
 
@@ -100,7 +100,7 @@ ListView {
             width: 139
             font.family: "Arial"
             font.pixelSize: 12
-            color: "#535353"
+            color: "#ffffff"
             text: qsTr("Payment ID:") + translationManager.emptyString
         }
 
