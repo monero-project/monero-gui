@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-
 import "." 1.0
 
 Item {
@@ -41,7 +40,7 @@ Item {
     property alias inlineButton: inlineButtonId
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
-    property alias copyButton: copyButton.visible
+    property bool copyButton: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool error: false
@@ -79,14 +78,6 @@ Item {
         }
     }
 
-    function getColor(error) {
-        // @TODO: replace/remove this (implement as ternary?)
-        if (error)
-            return "transparent"
-        else
-            return "transparent"
-    }
-
     Text {
         id: inputLabel
         anchors.top: parent.top
@@ -107,13 +98,13 @@ Item {
     }
 
     Rectangle{
-        id: copyButton
+        id: copyButtonRect
         color: "#808080"
         radius: 3
         height: 20
         width: 44
         anchors.right: parent.right
-        visible: false
+        visible: copyButton && input.text !== "" ? true : false
 
         Text {
             id: copyButtonText
@@ -138,19 +129,19 @@ Item {
                 }
             }
             onEntered: {
-                copyButton.color = "#707070";
+                copyButtonRect.color = "#707070";
                 copyButtonText.opacity = 0.8;
             }
             onExited: {
+                copyButtonRect.color = "#808080";
                 copyButtonText.opacity = 1.0;
-                copyButton.color = "#808080";
             }
         }
     }
 
     Item{
         id: inputItem
-        height: 48 * scaleRatio
+        height: 40 * scaleRatio
         anchors.top: inputLabel.bottom
         anchors.topMargin: 6
         width: parent.width
@@ -162,9 +153,9 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: inlineIcon.visible ? 50 : 10
             opacity: 0.25
-            color: "#FFFFFF"
+            color: Style.defaultFontColor
             font.family: Style.fontRegular.name
-            font.pixelSize: 20 * scaleRatio
+            font.pixelSize: 18 * scaleRatio
             text: ""
             z: 3
         }
@@ -172,24 +163,29 @@ Item {
         Rectangle {
             anchors.fill: parent
             anchors.topMargin: 1 * scaleRatio
-            color: getColor(error)
-            //radius: 4
+            color: "transparent"
         }
 
         Rectangle {
             color: "transparent"
             border.width: 1
-            border.color: Qt.rgba(1, 1, 1, 0.25)
+            border.color: {
+                if(input.activeFocus){
+                    return Qt.rgba(255, 255, 255, 0.35);
+                } else {
+                    return Qt.rgba(255, 255, 255, 0.25);
+                }
+            }
             radius: 4
             anchors.fill: parent
         }
 
         Image {
             id: inlineIcon
-            width: 28 * scaleRatio
-            height: 28 * scaleRatio
+            width: 26 * scaleRatio
+            height: 26 * scaleRatio
             anchors.top: parent.top
-            anchors.topMargin: 10 * scaleRatio
+            anchors.topMargin: 8 * scaleRatio
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
             source: "../images/moneroIcon-28x28.png"
@@ -213,7 +209,7 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 8
             anchors.top: parent.top
-            anchors.topMargin: 8
+            anchors.topMargin: 6
         }
     }
 }

@@ -15,8 +15,8 @@ QtObject {
 
     property string buttonBackgroundColor: "#FA6800"
     property string buttonBackgroundColorHover: "#E65E00"
-    property string buttonBackgroundColorDisabled: "#3B3B3B"
-    property string buttonBackgroundColorDisabledHover: "#4F4F4F"
+    property string buttonBackgroundColorDisabled: "#707070"
+    property string buttonBackgroundColorDisabledHover: "#808080"
 
     property string buttonTextColor: "white"
     property string buttonTextColorDisabled: "black"

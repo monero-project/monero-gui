@@ -42,7 +42,7 @@ Item {
 
     signal changed();
 
-    height: 48 * scaleRatio
+    height: 40 * scaleRatio
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -68,7 +68,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 48 * scaleRatio
+        height: 40 * scaleRatio
 
         Rectangle {
             color: "transparent"

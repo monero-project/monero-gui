@@ -30,6 +30,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import "." 1.0
 
+
 Item {
     id: button
     height: 37 * scaleRatio

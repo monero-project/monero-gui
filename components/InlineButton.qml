@@ -28,10 +28,11 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import "." 1.0
 
 Item {
     id: inlineButton
-    height: 32 * scaleRatio
+    height: rect.height * scaleRatio
     property string shadowPressedColor: "#B32D00"
     property string shadowReleasedColor: "#FF4304"
     property string pressedColor: "#FF4304"
@@ -50,10 +51,10 @@ Item {
 
     Rectangle{
         id: rect
-        color: rect.enabled ?  "#808080" : "#3b3b3b"
+        color: Style.buttonBackgroundColorDisabled
         border.color: "black"
-        height: 32
-        width: inlineText.width + 22
+        height: 28 * scaleRatio
+        width: inlineText.width + 22 * scaleRatio
         radius: 4
 
         anchors.top: parent.top
