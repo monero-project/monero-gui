@@ -29,7 +29,7 @@
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
 import moneroComponents.AddressBookModel 1.0
-
+import "../components" as MoneroComponents
 
 ListView {
     id: listView
@@ -160,10 +160,8 @@ ListView {
             }
             */
             // -- address (in case outgoing transaction) - N/A in case of incoming
-            TextEdit {
+            MoneroComponents.TextBlock {
                 id: addressText
-                readOnly: true
-                selectByMouse: true
                 anchors.verticalCenter: dot.verticalCenter
                 width: parent.width - x - 12
                 //elide: Text.ElideRight
@@ -195,9 +193,7 @@ ListView {
                 text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
             }
             // -- "PaymentID" value
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
+            MoneroComponents.TextBlock {
                 id: paymentIdValue
                 width: 136
                 anchors.bottom: parent.bottom
@@ -209,9 +205,7 @@ ListView {
 
             }
             // Address book lookup
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
+            MoneroComponents.TextBlock {
                 id: addressBookLookupValue
                 width: 136
                 anchors.bottom: parent.bottom
@@ -243,10 +237,8 @@ ListView {
                 text:  qsTr("BlockHeight:")  + translationManager.emptyString
             }
             // -- "BlockHeight" value
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
-                width: 85
+            MoneroComponents.TextBlock {
+                width: 200
                 anchors.bottom: parent.bottom
                 //elide: Text.ElideRight
                 font.family: "Arial"
