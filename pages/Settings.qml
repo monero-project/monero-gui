@@ -51,27 +51,33 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 17 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 10 * scaleRatio
+        spacing: 26 * scaleRatio
 
         //! Manage wallet
         RowLayout {
+            Layout.fillWidth: true
             Label {
                 id: manageWalletLabel
+                fontSize: 22 * scaleRatio
                 Layout.fillWidth: true
                 text: qsTr("Manage wallet") + translationManager.emptyString
                 Layout.topMargin: 10 * scaleRatio
             }
-        }
 
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
+            Rectangle {
+                anchors.top: manageWalletLabel.bottom
+                anchors.topMargin: 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Layout.fillWidth: true
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+            }
         }
 
         GridLayout {
@@ -209,20 +215,20 @@ Rectangle {
             Layout.topMargin: 20
             Label {
                 id: manageDaemonLabel
+                fontSize: 22 * scaleRatio
                 text: qsTr("Manage Daemon") + translationManager.emptyString
             }
 
-            CheckBox {
-                id: daemonAdvanced
-                Layout.leftMargin: 15
-                text: qsTr("Show advanced") + translationManager.emptyString
+            Rectangle {
+                anchors.top: manageDaemonLabel.bottom
+                anchors.topMargin: 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Layout.fillWidth: true
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
             }
-        }
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
         }
 
         GridLayout {
@@ -292,12 +298,19 @@ Rectangle {
             }
         }
 
+        RowLayout{
+            CheckBox {
+                id: daemonAdvanced
+                text: qsTr("Show advanced") + translationManager.emptyString
+            }
+        }
 
         RowLayout {
             visible: daemonAdvanced.checked && !isMobile && !persistentSettings.useRemoteNode
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
+                fontSize: 16 * scaleRatio
                 text: qsTr("Local daemon startup flags") + translationManager.emptyString
             }
             LineEdit {
@@ -314,10 +327,10 @@ Rectangle {
             visible: (daemonAdvanced.checked || isMobile) && persistentSettings.useRemoteNode
             Label {
                 id: daemonLoginLabel
+                fontSize: 16 * scaleRatio
                 Layout.fillWidth: true
                 text: qsTr("Node login (optional)") + translationManager.emptyString
             }
-
         }
 
         ColumnLayout {
@@ -329,7 +342,6 @@ Rectangle {
                 text: persistentSettings.daemonUsername
                 placeholderText: qsTr("Username") + translationManager.emptyString
             }
-
 
             LineEdit {
                 id: daemonPassword
@@ -365,8 +377,27 @@ Rectangle {
             visible: persistentSettings.useRemoteNode
             ColumnLayout {
                 Label {
+                    id: remoteNodeLabel
+                    fontSize: 22 * scaleRatio
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
+
+                Rectangle {
+                    anchors.top: remoteNodeLabel.bottom
+                    anchors.topMargin: 4
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    Layout.fillWidth: true
+                    height: 2
+                    color: Style.dividerColor
+                    opacity: Style.dividerOpacity
+                }
+            }
+        }
+
+        RowLayout {
+            visible: persistentSettings.useRemoteNode
+            ColumnLayout{
                 RemoteNodeEdit {
                     id: remoteNodeEdit
                     Layout.minimumWidth: 100 * scaleRatio
@@ -400,17 +431,23 @@ Rectangle {
         RowLayout {
             visible: !isMobile
             Label {
+                id: layoutSettingsLabel
+                fontSize: 22 * scaleRatio
                 text: qsTr("Layout settings") + translationManager.emptyString
                 anchors.topMargin: 30 * scaleRatio
                 Layout.topMargin: 30 * scaleRatio
             }
-        }
-        Rectangle {
-            visible: !isMobile
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
+
+            Rectangle {
+                anchors.top: layoutSettingsLabel.bottom
+                anchors.topMargin: 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Layout.fillWidth: true
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+            }
         }
 
         RowLayout {
@@ -427,17 +464,25 @@ Rectangle {
 
         RowLayout {
             Label {
+                id: logLevelLabel
+                fontSize: 22 * scaleRatio
                 text: qsTr("Log level") + translationManager.emptyString
                 anchors.topMargin: 30 * scaleRatio
                 Layout.topMargin: 30 * scaleRatio
             }
+
+            Rectangle {
+                anchors.top: logLevelLabel.bottom
+                anchors.topMargin: 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Layout.fillWidth: true
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+            }
         }
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
-        }
+
         ColumnLayout {
             ComboBox {
                 id: logLevel
@@ -475,18 +520,25 @@ Rectangle {
         // Version
         RowLayout {
             Label {
+                id: debugLabel
                 text: qsTr("Debug info") + translationManager.emptyString
-                fontSize: 16
+                fontSize: 22
                 anchors.topMargin: 30 * scaleRatio
                 Layout.topMargin: 30 * scaleRatio
             }
+
+            Rectangle {
+                anchors.top: debugLabel.bottom
+                anchors.topMargin: 4
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Layout.fillWidth: true
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+            }
         }
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
-        }
+
         TextBlock {
             Layout.topMargin: 8
             Layout.fillWidth: true
