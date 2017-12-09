@@ -43,11 +43,18 @@ Rectangle {
 
     color: "transparent"
 
-    Clipboard { id: clipboard }
+    // fires on every page load
+    function onPageCompleted() {
+        console.log("Settings page loaded");
 
-    function initSettings() {
-        //runs on every page load
+        if(typeof daemonManager != "undefined"){
+            appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet);
+        }
+
+        logLevelDropdown.update()
     }
+
+    Clipboard { id: clipboard }
 
     ColumnLayout {
         id: mainLayout
@@ -483,28 +490,66 @@ Rectangle {
             }
         }
 
-        ColumnLayout {
-            ComboBox {
-                id: logLevel
-                model: [0,1,2,3,4,"custom"]
-                currentIndex : appWindow.persistentSettings.logLevel;
-                onCurrentIndexChanged: {
-                    if (currentIndex == 5) {
-                        console.log("log categories changed: ", logCategories.text);
-                        walletManager.setLogCategories(logCategories.text);
+        GridLayout {
+            columns: (isMobile)? 1 : 3
+            Layout.fillWidth: true
+            columnSpacing: 32
+
+            ColumnLayout {
+                spacing: 0
+                Layout.fillWidth: true
+
+                ListModel {
+                     id: logLevel
+                     ListElement { name: "wow"; column1: "0"; }
+                     ListElement { column1: "1"; }
+                     ListElement { column1: "2"; }
+                     ListElement { column1: "3"; }
+                     ListElement { column1: "4"; }
+                     ListElement { column1: "custom"; }
+                 }
+
+                StandardDropdown {
+                    id: logLevelDropdown
+                    dataModel: logLevel
+                    currentIndex: appWindow.persistentSettings.logLevel;
+                    onChanged: {
+                        if (currentIndex == 5) {
+                            console.log("log categories changed: ", logCategories.text);
+                            walletManager.setLogCategories(logCategories.text);
+                        }
+                        else {
+                            console.log("log level changed: ",currentIndex);
+                            walletManager.setLogLevel(currentIndex);
+                        }
+                        appWindow.persistentSettings.logLevel = currentIndex;
                     }
-                    else {
-                        console.log("log level changed: ",currentIndex);
-                        walletManager.setLogLevel(currentIndex);
-                    }
-                    appWindow.persistentSettings.logLevel = currentIndex;
+                    Layout.fillWidth: true
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#363636"
+                    pressedColor: "#202020"
                 }
+                // Make sure dropdown is on top
+                z: parent.z + 30
             }
 
+            ColumnLayout {
+                Layout.fillWidth: true
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+            }
+        }
+
+        ColumnLayout {
             LineEdit {
                 id: logCategories
+                Layout.topMargin: 16 * scaleRatio
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
+                labelText: "Log Categories"
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
                 enabled: logLevel.currentIndex == 5
                 onEditingFinished: {
