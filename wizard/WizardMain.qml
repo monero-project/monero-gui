@@ -365,10 +365,6 @@ ColumnLayout {
         anchors.bottom: parent.bottom
         anchors.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
         text: qsTr("USE MONERO") + translationManager.emptyString
-        shadowReleasedColor: "#FF4304"
-        shadowPressedColor: "#B32D00"
-        releasedColor: "#FF6C3C"
-        pressedColor: "#FF4304"
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
             wizard.applySettings();
@@ -382,10 +378,6 @@ ColumnLayout {
        anchors.bottom: parent.bottom
        anchors.margins: (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Create wallet") + translationManager.emptyString
-       shadowReleasedColor: "#FF4304"
-       shadowPressedColor: "#B32D00"
-       releasedColor: "#FF6C3C"
-       pressedColor: "#FF4304"
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        enabled: passwordPage.passwordsMatch
        onClicked: {
@@ -414,10 +406,6 @@ ColumnLayout {
        anchors.bottom: parent.bottom
        anchors.margins:  (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Abort") + translationManager.emptyString
-       shadowReleasedColor: "#FF4304"
-       shadowPressedColor: "#B32D00"
-       releasedColor: "#FF6C3C"
-       pressedColor: "#FF4304"
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        onClicked: {
            wizard.restart();

@@ -33,9 +33,12 @@ import QtQuick.Layouts 1.1
 
 GridLayout {
     columns: (isMobile) ? 1 : 2
+    columnSpacing: 32
     id: root
     property alias daemonAddrText: daemonAddr.text
     property alias daemonPortText: daemonPort.text
+    property alias daemonAddrLabelText: daemonAddr.labelText
+    property alias daemonPortLabelText: daemonPort.labelText
 
     signal editingFinished()
 
@@ -49,7 +52,6 @@ GridLayout {
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         onEditingFinished: root.editingFinished()
     }
-
 
     LineEdit {
         id: daemonPort

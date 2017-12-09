@@ -324,11 +324,7 @@ Rectangle {
             anchors.topMargin: 17
             width: 60
             text: qsTr("Check") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype)))
+            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
             onClicked: {
                 console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
                 root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)

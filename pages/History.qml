@@ -250,10 +250,6 @@ Rectangle {
         anchors.leftMargin: 17
         width: 60
         text: qsTr("Filter") + translationManager.emptyString
-        shadowReleasedColor: "#4D0051"
-        shadowPressedColor: "#2D002F"
-        releasedColor: "#6B0072"
-        pressedColor: "#4D0051"
         onClicked:  {
             // Apply filter here;
 

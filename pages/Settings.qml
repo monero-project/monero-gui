@@ -404,33 +404,42 @@ Rectangle {
 
         RowLayout {
             visible: persistentSettings.useRemoteNode
-            ColumnLayout{
+            ColumnLayout {
+                Layout.fillWidth: true
+
                 RemoteNodeEdit {
                     id: remoteNodeEdit
                     Layout.minimumWidth: 100 * scaleRatio
                     property var rna: persistentSettings.remoteNodeAddress
                     daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
                     daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : rna.split(":")[1] : ""
+                    daemonAddrLabelText: qsTr("Address")
+                    daemonPortLabelText: qsTr("Port")
                     onEditingFinished: {
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                         console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
                     }
                 }
+            }
+        }
 
-                StandardButton {
-                    id: remoteNodeSave
-                    text: qsTr("Connect") + translationManager.emptyString
-                    onClicked: {
-                        // Update daemon login
-                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                        persistentSettings.daemonUsername = daemonUsername.text;
-                        persistentSettings.daemonPassword = daemonPassword.text;
-                        persistentSettings.useRemoteNode = true
+        RowLayout{
+            visible: persistentSettings.useRemoteNode
+            Layout.fillWidth: true
 
-                        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+            StandardButton {
+                id: remoteNodeSave
+                text: qsTr("Connect") + translationManager.emptyString
+                onClicked: {
+                    // Update daemon login
+                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                    persistentSettings.daemonUsername = daemonUsername.text;
+                    persistentSettings.daemonPassword = daemonPassword.text;
+                    persistentSettings.useRemoteNode = true
 
-                        appWindow.connectRemoteNode()
-                    }
+                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
+                    appWindow.connectRemoteNode()
                 }
             }
         }

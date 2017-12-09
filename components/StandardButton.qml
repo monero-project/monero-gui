@@ -33,10 +33,6 @@ import "." 1.0
 Item {
     id: button
     height: 37 * scaleRatio
-    property string shadowPressedColor: Style.buttonBackgroundColor
-    property string shadowReleasedColor: Style.buttonBackgroundColor
-    property string pressedColor: Style.buttonBackgroundColor
-    property string releasedColor: Style.buttonBackgroundColor
     property string icon: ""
     property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
     property int fontSize: 16 * scaleRatio
@@ -57,8 +53,8 @@ Item {
         anchors.right: parent.right
         height: parent.height - 1
         radius: 3
+//        color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
         color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
-        border.color: Qt.darker(parent.releasedColor)
         border.width: parent.focus ? 1 : 0
 
         MouseArea{
@@ -68,31 +64,17 @@ Item {
 
             propagateComposedEvents: true
 
+            // possibly do some hover effects here
             onEntered: {
-                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
-                else parent.color = Style.buttonBackgroundColorDisabledHover;
+//                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
+//                else parent.color = Style.buttonBackgroundColorDisabledHover;
             }
             onExited: {
-                if(button.enabled) parent.color = Style.buttonBackgroundColor;
-                else parent.color = Style.buttonBackgroundColorDisabled;
+//                if(button.enabled) parent.color = Style.buttonBackgroundColor;
+//                else parent.color = Style.buttonBackgroundColorDisabled;
             }
         }
     }
-
-//    Rectangle {
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        height: parent.height - 1
-//        y: buttonArea.pressed ? 1 : 0
-//        color: {
-//            parent.enabled ? (buttonArea.pressed ? parent.pressedColor : parent.releasedColor)
-//                           : Qt.lighter(parent.releasedColor)
-
-//        }
-//        //radius: 4
-
-
-//    }
 
     Text {
         id: label
@@ -105,7 +87,6 @@ Item {
         font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
-//        font.capitalization : Font.Capitalize
     }
 
     Image {
@@ -118,6 +99,7 @@ Item {
         id: buttonArea
         anchors.fill: parent
         onClicked: doClick()
+        cursorShape: Qt.PointingHandCursor
     }
 
     Keys.onSpacePressed: doClick()
