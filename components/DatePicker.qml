@@ -92,10 +92,6 @@ Item {
             StandardButton {
                 id: button
                 anchors.fill: parent
-                shadowReleasedColor: "#DBDBDB"
-                shadowPressedColor: "#888888"
-                releasedColor: "#F0EEEE"
-                pressedColor: "#DBDBDB"
                 icon: "../images/datePicker.png"
                 visible: !datePicker.expanded
                 onClicked: datePicker.expanded = true

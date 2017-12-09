@@ -436,10 +436,6 @@ Rectangle {
             StandardButton {
                 id: submitTxButton
                 text: qsTr("Submit tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: appWindow.viewOnly
                 enabled: pageRoot.enabled
                 onClicked: {

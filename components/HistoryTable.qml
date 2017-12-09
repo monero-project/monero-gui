@@ -96,10 +96,6 @@ ListView {
             anchors.topMargin: parent.height/2 - this.height/2
             width: 80
             fontSize: 14
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
             text: qsTr("Details")
             onClicked: {
                 var tx_key = currentWallet.getTxKey(hash)

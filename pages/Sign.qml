@@ -143,10 +143,6 @@ Rectangle {
                     id: signMessageButton
                     anchors.right: parent.right
                     text: qsTr("Sign") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       var signature = appWindow.currentWallet.signMessage(signMessageLine.text, false)
@@ -181,10 +177,6 @@ Rectangle {
                     id: loadFileToSignButton
                     anchors.rightMargin: 17 * scaleRatio
                     text: qsTr("Select") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       signFileDialog.open()
@@ -213,10 +205,6 @@ Rectangle {
                     id: signFileButton
                     anchors.right: parent.right
                     text: qsTr("Sign") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       var signature = appWindow.currentWallet.signMessage(signFileLine.text, true)
@@ -300,10 +288,6 @@ Rectangle {
                     id: verifyMessageButton
                     anchors.right: parent.right
                     text: qsTr("Verify") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       var verified = appWindow.currentWallet.verifySignedMessage(verifyMessageLine.text, verifyAddressLine.text, verifySignatureLine.text, false)
@@ -338,10 +322,6 @@ Rectangle {
                     id: loadFileToVerifyButton
                     anchors.rightMargin: 17 * scaleRatio
                     text: qsTr("Select") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       verifyFileDialog.open()
@@ -369,10 +349,6 @@ Rectangle {
                     id: verifyFileButton
                     anchors.right: parent.right
                     text: qsTr("Verify") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     enabled: true
                     onClicked: {
                       var verified = appWindow.currentWallet.verifySignedMessage(verifyFileLine.text, verifyAddressLine.text, verifySignatureLine.text, true)
