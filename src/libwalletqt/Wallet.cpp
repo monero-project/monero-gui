@@ -6,7 +6,7 @@
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "model/AddressBookModel.h"
-#include "wallet/wallet2_api.h"
+#include "wallet/api/wallet2_api.h"
 
 #include <QFile>
 #include <QDir>

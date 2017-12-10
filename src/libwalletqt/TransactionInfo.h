@@ -1,7 +1,7 @@
 #ifndef TRANSACTIONINFO_H
 #define TRANSACTIONINFO_H
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QObject>
 #include <QDateTime>
 

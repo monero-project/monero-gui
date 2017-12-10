@@ -1,7 +1,7 @@
 #ifndef TRANSFER_H
 #define TRANSFER_H
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QObject>
 
 class Transfer : public QObject

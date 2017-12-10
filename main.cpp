@@ -50,7 +50,7 @@
 #include "model/TransactionHistorySortFilterModel.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
-#include "wallet/wallet2_api.h"
+#include "wallet/api/wallet2_api.h"
 #include "MainApp.h"
 
 // IOS exclusions

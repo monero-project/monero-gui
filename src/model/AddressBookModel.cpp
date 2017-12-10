@@ -2,7 +2,7 @@
 #include "AddressBook.h"
 #include <QDebug>
 #include <QHash>
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 
 AddressBookModel::AddressBookModel(QObject *parent, AddressBook *addressBook)
     : QAbstractListModel(parent) , m_addressBook(addressBook)

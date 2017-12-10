@@ -1,6 +1,6 @@
 #include "TransactionHistory.h"
 #include "TransactionInfo.h"
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 
 #include <QDebug>
 

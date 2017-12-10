@@ -1,6 +1,6 @@
 #include "WalletManager.h"
 #include "Wallet.h"
-#include "wallet/wallet2_api.h"
+#include "wallet/api/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
 #include <QFile>

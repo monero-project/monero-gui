@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 
 //namespace Monero {
 //class PendingTransaction;
