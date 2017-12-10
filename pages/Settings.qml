@@ -376,16 +376,6 @@ Rectangle {
             }
         }
 
-        RowLayout {
-            visible: daemonAdvanced.checked && !isMobile
-            Layout.fillWidth: true
-            Layout.bottomMargin: 0 * scaleRatio
-
-            LabelSubheader {
-                text: qsTr("Advanced daemon options") + translationManager.emptyString
-            }
-        }
-
         RowLayout{
             CheckBox {
                 id: daemonAdvanced
