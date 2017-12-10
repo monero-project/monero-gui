@@ -62,6 +62,7 @@ Item {
         show()
         root.visible = true;
         passwordInput.focus = true
+        passwordInput.text = ""
     }
 
     function close() {
