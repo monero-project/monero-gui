@@ -194,5 +194,6 @@
         <file>images/checkedIcon-black.png</file>
         <file>components/LineEditMulti.qml</file>
         <file>components/LabelButton.qml</file>
+        <file>components/LabelSubheader.qml</file>
     </qresource>
 </RCC>

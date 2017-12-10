@@ -53,12 +53,13 @@ Item {
     property bool labelFontBold: false
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
+    property bool showingHeader: inputLabel.text !== "" || copyButton
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();
     signal textUpdated();
 
-    height: (inputLabel.height + inputItem.height + 2) * scaleRatio
+    height: showingHeader ? (inputLabel.height + inputItem.height + 2) * scaleRatio : 42 * scaleRatio
 
     onTextUpdated: {
         // check to remove placeholder text when there is content
@@ -109,14 +110,14 @@ Item {
                 appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
             }
         }
-        visible: input.text && copyButton ? true : false
+        visible: copyButton && input.text !== ""
     }
 
     Item{
         id: inputItem
         height: 40 * scaleRatio
-        anchors.top: inputLabel.bottom
-        anchors.topMargin: 6 * scaleRatio
+        anchors.top: showingHeader ? inputLabel.bottom : parent.top
+        anchors.topMargin: showingHeader ? 6 * scaleRatio : 2
         width: parent.width
 
         Text {

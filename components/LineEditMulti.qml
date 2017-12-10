@@ -71,7 +71,7 @@ ColumnLayout {
 
         LabelButton {
             id: copyButtonId
-            visible: copyButton
+            visible: copyButton && multiLine.text !== ""
             text: qsTr("Copy")
             anchors.right: labelButton.visible ? inputLabel.right : parent.right
             anchors.rightMargin: labelButton.visible? 4 : 0

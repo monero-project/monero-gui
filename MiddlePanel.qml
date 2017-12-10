@@ -139,7 +139,7 @@ Rectangle {
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio }
+               PropertyChanges { target: mainFlickable; contentHeight: 1400 * scaleRatio }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
