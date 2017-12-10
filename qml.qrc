@@ -195,5 +195,6 @@
         <file>components/LineEditMulti.qml</file>
         <file>components/LabelButton.qml</file>
         <file>components/LabelSubheader.qml</file>
+        <file>images/arrow-right-medium-white.png</file>
     </qresource>
 </RCC>
