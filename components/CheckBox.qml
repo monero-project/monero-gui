@@ -76,6 +76,7 @@ RowLayout {
 
             MouseArea {
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     toggle()
                 }
@@ -93,6 +94,7 @@ RowLayout {
             anchors.leftMargin: !isMobile ? 10 : 8
             MouseArea {
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     toggle()
                 }
