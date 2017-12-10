@@ -39,13 +39,13 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-    property int countDown: 5;
+    property int countDown: 10;
     signal rejected()
     signal started();
 
     function open() {
         show()
-        countDown = 5;
+        countDown = 10;
         timer.start();
     }
 
