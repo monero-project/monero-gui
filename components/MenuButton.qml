@@ -84,19 +84,17 @@ Rectangle {
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: 8 * scaleRatio
-            height: 8 * scaleRatio
-            radius: 4 * scaleRatio
+            width: button.checked ? 20 * scaleRatio : 8 * scaleRatio
+            height: button.checked ? 20 * scaleRatio : 8 * scaleRatio
+            radius: button.checked ? 20 * scaleRatio : 4 * scaleRatio
             color: button.dotColor
-            visible: !button.checked
-        }
-
-        // arrow if checked
-        Image {
-            anchors.centerIn: parent
-            anchors.left: parent.left
-            source: "../images/menuArrow.png"
-            visible: button.checked
+            // arrow if checked
+            Image {
+                anchors.centerIn: parent
+                anchors.left: parent.left
+                source: "../images/arrow-right-medium-white.png"
+                visible: button.checked
+            }
         }
 
         // button text
@@ -135,6 +133,7 @@ Rectangle {
         id: buttonArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
             if(parent.checked)
                 return
