@@ -76,11 +76,11 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Ubuntu and Mint
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev`
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc sys-libs/libunwind`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind`
 
 2. Grab an up-to-date copy of the monero-core repository
 
@@ -135,7 +135,9 @@ The executable can be found in the build/release/bin folder.
 ### On OS X:
 
 1. Install Xcode from AppStore
+
 2. Install [homebrew](http://brew.sh/)
+
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
   `brew install boost --c++11`
@@ -145,6 +147,12 @@ The executable can be found in the build/release/bin folder.
   `brew install pkgconfig`
 
   `brew install cmake`
+
+  `brew install zeromq`
+
+  *Note*: If cmake can not find zmq.hpp file on OS X, installing `zmq.hpp` from https://github.com/zeromq/cppzmq to `/usr/local/include` should fix that error.
+
+4. Install Qt:
 
   `brew install qt5`  (or download QT 5.8+ from [qt.io](https://www.qt.io/download-open-source/))
 
@@ -192,7 +200,7 @@ More info: http://stackoverflow.com/a/35098040/1683164
 2. Install monero dependencies as described in [monero documentation](https://github.com/monero-project/monero) into msys2 environment
    **As we only build application for x86, install only dependencies for x86 architecture (i686 in package name)**
    ```
-   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-boost
+   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-boost mingw-w64-i686-openssl mingw-w64-i686-zeromq mingw-w64-i686-libsodium
 
    ```
 
