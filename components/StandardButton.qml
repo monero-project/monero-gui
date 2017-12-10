@@ -33,15 +33,20 @@ import "." 1.0
 
 Item {
     id: button
-    height: 37 * scaleRatio
     property string icon: ""
     property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
-    property int fontSize: 16 * scaleRatio
+    property bool small: false
     property alias text: label.text
+    property int fontSize: {
+        if(small) return 14 * scaleRatio;
+        else return 16 * scaleRatio;
+    }
     signal clicked()
 
-    // Dynamic label width
+    // Dynamic height/width
     Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 22 : 60
+    height: small ?  30 * scaleRatio : 36 * scaleRatio
+
 
     function doClick() {
         // Android workaround

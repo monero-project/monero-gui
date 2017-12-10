@@ -91,6 +91,7 @@ Rectangle {
             columns: (isMobile)? 1 : 4
             StandardButton {
                 id: closeWalletButton
+                small: true
                 text: qsTr("Close wallet") + translationManager.emptyString
                 visible: true
                 onClicked: {
@@ -100,8 +101,9 @@ Rectangle {
             }
 
             StandardButton {
-                enabled: !viewOnly
                 id: createViewOnlyWalletButton
+                enabled: !viewOnly
+                small: true
                 text: qsTr("Create view only wallet") + translationManager.emptyString
                 visible: true
                 onClicked: {
@@ -146,6 +148,7 @@ Rectangle {
 */
             StandardButton {
                 id: rescanSpentButton
+                small: true
                 enabled: !persistentSettings.useRemoteNode
                 text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 onClicked: {
@@ -194,9 +197,17 @@ Rectangle {
         }
 
         RowLayout {
+            Layout.fillWidth: true
 
+            LabelSubheader {
+                text: qsTr("Wallet mode") + translationManager.emptyString
+            }
+        }
+
+        RowLayout {
             StandardButton {
                 id: remoteDisconnect
+                small: true
                 enabled: persistentSettings.useRemoteNode
                 Layout.fillWidth: false
                 text: qsTr("Local Node") + translationManager.emptyString
@@ -207,6 +218,7 @@ Rectangle {
 
             StandardButton {
                 id: remoteConnect
+                small: true
                 enabled: !persistentSettings.useRemoteNode
                 Layout.fillWidth: false
                 text: qsTr("Remote Node") + translationManager.emptyString
@@ -216,10 +228,52 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            visible: persistentSettings.useRemoteNode
+            ColumnLayout {
+                Layout.fillWidth: true
+
+                RemoteNodeEdit {
+                    id: remoteNodeEdit
+                    Layout.minimumWidth: 100 * scaleRatio
+                    daemonAddrLabelText: qsTr("Address")
+                    daemonPortLabelText: qsTr("Port")
+                    daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
+                    daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                        console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
+                    }
+                }
+            }
+        }
+
+        RowLayout{
+            visible: persistentSettings.useRemoteNode
+            Layout.fillWidth: true
+
+            StandardButton {
+                id: remoteNodeSave
+                small: true
+                text: qsTr("Connect") + translationManager.emptyString
+                onClicked: {
+                    // Update daemon login
+                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+                    persistentSettings.daemonUsername = daemonUsername.text;
+                    persistentSettings.daemonPassword = daemonPassword.text;
+                    persistentSettings.useRemoteNode = true
+
+                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+
+                    appWindow.connectRemoteNode()
+                }
+            }
+        }
+
         //! Manage daemon
         RowLayout {
             visible: !isMobile
-            Layout.topMargin: 20
+
             Label {
                 id: manageDaemonLabel
                 fontSize: 22 * scaleRatio
@@ -243,8 +297,9 @@ Rectangle {
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
-                visible: !appWindow.daemonRunning
                 id: startDaemonButton
+                small: true
+                visible: !appWindow.daemonRunning
                 text: qsTr("Start Local Node") + translationManager.emptyString
                 onClicked: {
                     // Update bootstrap daemon address
@@ -257,8 +312,9 @@ Rectangle {
             }
 
             StandardButton {
-                visible: appWindow.daemonRunning
                 id: stopDaemonButton
+                small: true
+                visible: appWindow.daemonRunning
                 text: qsTr("Stop Local Node") + translationManager.emptyString
                 onClicked: {
                     appWindow.stopDaemon()
@@ -266,8 +322,9 @@ Rectangle {
             }
 
             StandardButton {
-                visible: true
                 id: daemonStatusButton
+                small: true
+                visible: true
                 text: qsTr("Show status") + translationManager.emptyString
                 onClicked: {
                     daemonManager.sendCommand("status",currentWallet.nettype);
@@ -279,29 +336,55 @@ Rectangle {
         ColumnLayout {
             id: blockchainFolderRow
             visible: !isMobile && !persistentSettings.useRemoteNode
-            Label {
-                id: blockchainFolderLabel
-                text: qsTr("Blockchain location") + translationManager.emptyString
-            }
-            LineEdit {
-                id: blockchainFolder
-                Layout.preferredWidth:  200
-                Layout.fillWidth: true
-                labelText: qsTr("Blockchain location") + translationManager.emptyString
-                text: persistentSettings.blockchainDataDir
-                placeholderText: qsTr("(optional)") + translationManager.emptyString
 
-                MouseArea {
-                    anchors.fill: parent
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.bottomMargin: 14 * scaleRatio
+
+                LabelSubheader {
+                    text: qsTr("Blockchain location") + translationManager.emptyString
+                }
+            }
+
+            RowLayout {
+                visible: persistentSettings.blockchainDataDir.length > 0
+
+                LineEdit {
+                    id: blockchainFolder
+                    Layout.preferredWidth: 200
+
+                    Layout.fillWidth: true
+                    text: persistentSettings.blockchainDataDir;
+                    placeholderText: qsTr("(optional)") + translationManager.emptyString
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.topMargin: 8
+                StandardButton {
+                    id: blockchainFolderButton
+                    small: true
+                    visible: true
+                    text: qsTr("Change location") + translationManager.emptyString
                     onClicked: {
-                        mouse.accepted = false
+                        //mouse.accepted = false
                         if(persistentSettings.blockchainDataDir != "")
                             blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir
                         blockchainFileDialog.open()
                         blockchainFolder.focus = true
                     }
                 }
+            }
+        }
 
+        RowLayout {
+            visible: daemonAdvanced.checked && !isMobile
+            Layout.fillWidth: true
+            Layout.bottomMargin: 0 * scaleRatio
+
+            LabelSubheader {
+                text: qsTr("Advanced daemon options") + translationManager.emptyString
             }
         }
 
@@ -315,131 +398,38 @@ Rectangle {
         RowLayout {
             visible: daemonAdvanced.checked && !isMobile && !persistentSettings.useRemoteNode
             id: daemonFlagsRow
-            Label {
-                id: daemonFlagsLabel
-                fontSize: 16 * scaleRatio
-                text: qsTr("Local daemon startup flags") + translationManager.emptyString
-            }
+
             LineEdit {
                 id: daemonFlags
                 Layout.preferredWidth:  200
                 Layout.fillWidth: true
+                labelText: qsTr("Local daemon startup flags") + translationManager.emptyString
                 text: appWindow.persistentSettings.daemonFlags;
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
             }
         }
 
-        RowLayout {
-            Layout.fillWidth: true
-            visible: (daemonAdvanced.checked || isMobile) && persistentSettings.useRemoteNode
-            Label {
-                id: daemonLoginLabel
-                fontSize: 16 * scaleRatio
-                Layout.fillWidth: true
-                text: qsTr("Node login (optional)") + translationManager.emptyString
-            }
-        }
-
         ColumnLayout {
             visible: (daemonAdvanced.checked || isMobile) && persistentSettings.useRemoteNode
-            LineEdit {
-                id: daemonUsername
-                Layout.preferredWidth:  100 * scaleRatio
-                Layout.fillWidth: true
-                text: persistentSettings.daemonUsername
-                placeholderText: qsTr("Username") + translationManager.emptyString
-            }
+            GridLayout {
+                columns: (isMobile) ? 1 : 2
+                columnSpacing: 32
 
-            LineEdit {
-                id: daemonPassword
-                Layout.preferredWidth: 100 * scaleRatio
-                Layout.fillWidth: true
-                text: persistentSettings.daemonPassword
-                placeholderText: qsTr("Password") + translationManager.emptyString
-                echoMode: TextInput.Password
-            }
-        }
-
-        RowLayout {
-            visible: !isMobile && !persistentSettings.useRemoteNode
-            ColumnLayout {
-                Label {
-                    color: "#4A4949"
-                    text: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
-                }
-                RemoteNodeEdit {
-                    id: bootstrapNodeEdit
-                    Layout.minimumWidth: 100 * scaleRatio
-                    daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                    daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
-                    onEditingFinished: {
-                        persistentSettings.bootstrapNodeAddress = daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
-                        console.log("setting bootstrap node to " + persistentSettings.bootstrapNodeAddress)
-                    }
-                }
-            }
-        }
-
-        RowLayout {
-            visible: persistentSettings.useRemoteNode
-            ColumnLayout {
-                Label {
-                    id: remoteNodeLabel
-                    fontSize: 22 * scaleRatio
-                    text: qsTr("Remote node") + translationManager.emptyString
-                }
-
-                Rectangle {
-                    anchors.top: remoteNodeLabel.bottom
-                    anchors.topMargin: 4
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                LineEdit {
+                    id: daemonUsername
                     Layout.fillWidth: true
-                    height: 2
-                    color: Style.dividerColor
-                    opacity: Style.dividerOpacity
+                    labelText: "Daemon username"
+                    text: persistentSettings.daemonUsername
+                    placeholderText: qsTr("Username") + translationManager.emptyString
                 }
-            }
-        }
 
-        RowLayout {
-            visible: persistentSettings.useRemoteNode
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                RemoteNodeEdit {
-                    id: remoteNodeEdit
-                    Layout.minimumWidth: 100 * scaleRatio
-                    property var rna: persistentSettings.remoteNodeAddress
-                    daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-                    daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : rna.split(":")[1] : ""
-                    daemonAddrLabelText: qsTr("Address")
-                    daemonPortLabelText: qsTr("Port")
-                    onEditingFinished: {
-                        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                        console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
-                    }
-                }
-            }
-        }
-
-        RowLayout{
-            visible: persistentSettings.useRemoteNode
-            Layout.fillWidth: true
-
-            StandardButton {
-                id: remoteNodeSave
-                text: qsTr("Connect") + translationManager.emptyString
-                onClicked: {
-                    // Update daemon login
-                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                    persistentSettings.daemonUsername = daemonUsername.text;
-                    persistentSettings.daemonPassword = daemonPassword.text;
-                    persistentSettings.useRemoteNode = true
-
-                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
-
-                    appWindow.connectRemoteNode()
+                LineEdit {
+                    id: daemonPassword
+                    Layout.fillWidth: true
+                    labelText: "Daemon password"
+                    text: persistentSettings.daemonPassword
+                    placeholderText: qsTr("Password") + translationManager.emptyString
+                    echoMode: TextInput.Password
                 }
             }
         }
@@ -450,8 +440,6 @@ Rectangle {
                 id: layoutSettingsLabel
                 fontSize: 22 * scaleRatio
                 text: qsTr("Layout settings") + translationManager.emptyString
-                anchors.topMargin: 30 * scaleRatio
-                Layout.topMargin: 30 * scaleRatio
             }
 
             Rectangle {
@@ -483,8 +471,6 @@ Rectangle {
                 id: logLevelLabel
                 fontSize: 22 * scaleRatio
                 text: qsTr("Log level") + translationManager.emptyString
-                anchors.topMargin: 30 * scaleRatio
-                Layout.topMargin: 30 * scaleRatio
             }
 
             Rectangle {
@@ -555,12 +541,11 @@ Rectangle {
         ColumnLayout {
             LineEdit {
                 id: logCategories
-                Layout.topMargin: 16 * scaleRatio
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
                 labelText: "Log Categories"
                 placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
-                enabled: logLevel.currentIndex == 5
+                enabled: logLevelDropdown.currentIndex === 5
                 onEditingFinished: {
                     if(enabled) {
                         console.log("log categories changed: ", text);
@@ -632,6 +617,7 @@ Rectangle {
 
             StandardButton {
                 id: restoreHeightSave
+                small: true
                 Layout.fillWidth: false
                 Layout.leftMargin: 30
                 text: qsTr("Save") + translationManager.emptyString
@@ -703,7 +689,8 @@ Rectangle {
         folder: "file://" + persistentSettings.blockchainDataDir
 
         onAccepted: {
-            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl)
+            var dataDir = walletManager.urlToLocalPath(blockchainFileDialog.fileUrl);
+            console.log(dataDir);
             var validator = daemonManager.validateDataDir(dataDir);
             if(!validator.valid) {
 
@@ -770,10 +757,6 @@ Rectangle {
         // Update daemon console
         daemonConsolePopup.textArea.append(message)
     }
-
-
-
-
 }
 
 

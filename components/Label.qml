@@ -42,8 +42,10 @@ Item {
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
-    width: icon.x + icon.width * scaleRatio
-    height: icon.height * scaleRatio
+//    width: icon.x + icon.width * scaleRatio
+//    height: icon.height * scaleRatio
+    height: label.height * scaleRatio
+    width: label.width * scaleRatio
     Layout.topMargin: 10 * scaleRatio
 
     Text {
@@ -58,14 +60,15 @@ Item {
         onLinkActivated: item.linkActivated()
     }
 
-    Image {
-        id: icon
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: label.right
-        anchors.leftMargin: 5 * scaleRatio
-        source: "../images/whatIsIcon.png"
-        visible: appWindow.whatIsEnable
-    }
+// @TODO: figure out significance of whatIsIcon.png, remove for now
+//    Image {
+//        id: icon
+//        anchors.verticalCenter: parent.verticalCenter
+//        anchors.left: label.right
+//        anchors.leftMargin: 5 * scaleRatio
+//        source: "../images/whatIsIcon.png"
+//        visible: appWindow.whatIsEnable
+//    }
 
 //    MouseArea {
 //        anchors.fill: icon
