@@ -28,6 +28,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import "." 1.0
 
 RowLayout {
     id: checkBox
@@ -83,9 +84,9 @@ RowLayout {
 
         Text {
             id: label
-            font.family: "Arial"
+            font.family: Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: "#525252"
+            color: Style.defaultFontColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             anchors.left: backgroundRect.right

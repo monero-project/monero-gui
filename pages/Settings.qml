@@ -32,8 +32,6 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../version.js" as Version
-
-
 import "../components"
 import moneroComponents.Clipboard 1.0
 
