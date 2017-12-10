@@ -91,13 +91,25 @@ Rectangle {
         }
 
         Text {
+            id: viewOnlyLabel
+            visible: viewOnly
+            text: qsTr("View Only") + translationManager.emptyString
+            anchors.top: logo.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            font.bold: true
+            color: "blue"
+        }
+
+        Text {
             id: testnetLabel
             visible: persistentSettings.testnet
             text: qsTr("Testnet") + translationManager.emptyString
             anchors.top: logo.bottom
             anchors.topMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 50
+            anchors.left: viewOnly ? viewOnlyLabel.right : parent.left
+            anchors.leftMargin: viewOnly ? 10 : 50
             font.bold: true
             color: "red"
         }
