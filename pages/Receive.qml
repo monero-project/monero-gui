@@ -80,8 +80,8 @@ Rectangle {
           s += (nfields++ ? "&" : "?")
           s += "tx_amount=" + amount
         }
-        var pid = paymentIdLine.text.trim()
-        if (pid !== "") {
+        var pid = paymentIdLine.text.trim().toLowerCase()
+        if (pid !== "" && walletManager.paymentIdValid(pid)) {
           s += (nfields++ ? "&" : "?")
           s += "tx_payment_id=" + pid
         }
