@@ -317,7 +317,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected and no daemon is running - Ask
-        if(!isMobile && isDaemonLocal() && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
+        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.testnet)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -1630,16 +1630,6 @@ ApplicationWindow {
         id: updatesTimer
         interval: 3600*1000; running: true; repeat: true
         onTriggered: checkUpdates()
-    }
-
-    function isDaemonLocal() {
-        var daemonAddress = appWindow.persistentSettings.daemon_address
-        if (daemonAddress === "")
-            return false
-        var daemonHost = daemonAddress.split(":")[0]
-        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
-            return true
-        return false
     }
 
     function releaseFocus() {

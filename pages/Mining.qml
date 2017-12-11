@@ -37,15 +37,6 @@ Rectangle {
     color: "#F0EEEE"
     property var currentHashRate: 0
 
-    function isDaemonLocal() {
-        if (appWindow.currentDaemonAddress === "")
-            return false
-        var daemonHost = appWindow.currentDaemonAddress.split(":")[0]
-        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
-            return true
-        return false
-    }
-
     /* main layout */
     ColumnLayout {
         id: mainLayout
@@ -75,7 +66,7 @@ Rectangle {
                 fontSize: 18
                 color: "#D02020"
                 text: qsTr("(only available for local daemons)")
-                visible: !isDaemonLocal()
+                visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
             }
 
             Text {
@@ -157,7 +148,7 @@ Rectangle {
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
                             errorPopup.text = qsTr("Couldn't start mining.<br>")
-                            if (!isDaemonLocal())
+                            if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
                                 errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
                             errorPopup.icon = StandardIcon.Critical
                             errorPopup.open()
@@ -225,7 +216,7 @@ Rectangle {
         console.log("Mining page loaded");
 
         update()
-        timer.running = isDaemonLocal()
+        timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
     }
     function onPageClosed() {
