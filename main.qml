@@ -104,6 +104,11 @@ ApplicationWindow {
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
+        else if(seq === "Ctrl+Y") {
+            leftPanel.selectItem("Keys")
+            settingsPasswordDialog.open()
+            return
+        }
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
