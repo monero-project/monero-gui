@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="71"/>
         <source>QRCODE</source>
-        <translation type="unfinished">QR Kod</translation>
+        <translation type="unfinished">Kod QR</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
@@ -118,6 +118,10 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting Monero daemon in %1 seconds</source>
+        <!-- 
+            Polish uses different noun forms for different numbers (e.g. 1 sekundę, 2 sekundy, 5 - sekund) 
+            AFAIK Mozzilla provides scripts that allow to choose valid version for language
+        -->
         <translation type="unfinished">Uruchomienie procesu Monero za %1 sekund</translation>
     </message>
     <message>
@@ -237,22 +241,24 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>Identyfikator tx:</translation>
+        <translation>Identyfikator trans.:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <translation>Klucz tx:</translation>
+        <!-- If tx is abbrev from transaction, Klucz trans. or Klucz op. should be used --> 
+        <translation>Klucz trans.:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Tx note:</source>
-        <translation>Notatka tx:</translation>
+        <translation>Notatka trans.:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Destinations:</source>
-        <translation>Cel:</translation>
+        <!-- If it is transaction receivers adresses Odbiorcy is valid, otherwise Cele: -->
+        <translation>Odbiorcy:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="110"/>
@@ -267,17 +273,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="266"/>
         <source>(%1/10 confirmations)</source>
-        <translation type="unfinished">(%1/10 potwierdzeń)</translation>
+        <translation>(%1/10 potwierdzeń)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="270"/>
         <source>UNCONFIRMED</source>
-        <translation type="unfinished">NIEPOTWIERDZONE</translation>
+        <translation>NIEPOTWIERDZONE</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="271"/>
         <source>PENDING</source>
-        <translation type="unfinished">OCZEKUJĄCE</translation>
+        <translation>OCZEKUJĄCE</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="300"/>
@@ -335,12 +341,14 @@
     <message>
         <location filename="../LeftPanel.qml" line="93"/>
         <source>Testnet</source>
+        <!-- Monero users knows what Testnet means and there is no good, short, polish word for it --> 
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="304"/>
         <source>Address book</source>
-        <translation type="unfinished"></translation>
+        <!-- Odbiorcy is maybe even better in this context -->
+        <translation>Książka adresowa</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="305"/>
@@ -355,7 +363,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="376"/>
         <source>Advanced</source>
-        <translation type="unfinished">Zaawansowane</translation>
+        <translation>Zaawansowane</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="377"/>
@@ -365,7 +373,8 @@
     <message>
         <location filename="../LeftPanel.qml" line="398"/>
         <source>Mining</source>
-        <translation type="unfinished"></translation>
+        <!-- It may be untranslated also -->
+        <translation type="unfinished">Kopanie</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="399"/>
@@ -408,12 +417,12 @@
     <message>
         <location filename="../MiddlePanel.qml" line="46"/>
         <source>Balance</source>
-        <translation type="unfinished">Saldo</translation>
+        <translation>Saldo</translation>
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="48"/>
         <source>Unlocked Balance</source>
-        <translation type="unfinished">Dostępne saldo</translation>
+        <translation>Dostępne saldo</translation>
     </message>
 </context>
 <context>
@@ -430,6 +439,7 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="86"/>
+        <!--- In my opinion this text should start with "Mining gives you a chance to earn Monero" --> 
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation type="unfinished">Kopanie z udziałem twojego komputera wzmacnia sieć Monero. Im więcej osób kopie tym trudniej zaatakować sieć, a każdy najmniejszy wkład jest pomocny. Dodatkowo kopanie daje ci małą szansę na zarobienie Monero. Twój komputer utworzy hashe/sumy kontrolne aby znaleźć rozwiązanie dla bloku. Jeżeli znajdziesz rozwiązanie wtedy otrzymasz swój udział w postaci zapłaty w Monero. Powodzenia!</translation>
     </message>
@@ -466,7 +476,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Error starting mining</source>
-        <translation type="unfinished">Błąd uruchamiania koparki</translation>
+        <translation type="unfinished">Nie udało się rozpocząć kopania</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="162"/>
@@ -496,7 +506,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="206"/>
         <source>Not mining</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">W spoczynku (nie kopie)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="208"/>
