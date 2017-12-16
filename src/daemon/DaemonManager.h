@@ -5,7 +5,9 @@
 #include <QUrl>
 #include <QProcess>
 #include <QVariantMap>
-
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 class DaemonManager : public QObject
 {
     Q_OBJECT
@@ -17,7 +19,7 @@ public:
     Q_INVOKABLE bool start(const QString &flags, bool testnet, const QString &dataDir = "");
     Q_INVOKABLE bool stop(bool testnet);
 
-    // return true if daemon process is started
+    // return true if daemon process run now
     Q_INVOKABLE bool running(bool testnet) const;
     // Send daemon command from qml and prints output in console window.
     Q_INVOKABLE bool sendCommand(const QString &cmd, bool testnet) const;
@@ -49,7 +51,9 @@ private:
     QString m_monerod;
     bool m_has_daemon = true;
     bool m_app_exit = false;
-
+#ifdef Q_OS_WIN
+	HANDLE cl,b;
+#endif
 };
 
 #endif // DAEMONMANAGER_H

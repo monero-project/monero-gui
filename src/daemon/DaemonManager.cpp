@@ -82,8 +82,14 @@ bool DaemonManager::start(const QString &flags, bool testnet, const QString &dat
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
 
+#ifndef Q_OS_WIN
+    bool started = m_daemon->startDetached(m_monerod, arguments);
+#else
+	long long bt;
+	bool started = m_daemon->startDetached(m_monerod, arguments,QString(),&bt);
+	if(started) b =  OpenProcess(SYNCHRONIZE, FALSE, bt);
+#endif
     // add state changed listener
     connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
 
@@ -155,6 +161,17 @@ bool DaemonManager::stopWatcher(bool testnet) const
 {
     // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
     int counter = 0;
+	
+#ifdef Q_OS_WIN
+	HANDLE t[]={cl , b};
+	DWORD c = WaitForMultipleObjects(2,t,0,20000); // 20 seconds
+	if(c==WAIT_OBJECT_0 + 1) { CloseHandle(b); return 1; } 
+	if(c==WAIT_TIMEOUT) QProcess::execute("taskkill /F /IM monerod.exe");
+	else  return 0;
+	c = WaitForMultipleObjects(2,t,0,INFINITE);
+	if(c==WAIT_OBJECT_0) return false;
+	else  { CloseHandle(b); return 1; }
+#else
     while(true && !m_app_exit) {
         QThread::sleep(2);
         counter++;
@@ -162,17 +179,14 @@ bool DaemonManager::stopWatcher(bool testnet) const
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
-#ifdef Q_OS_WIN
-                QProcess::execute("taskkill /F /IM monerod.exe");
-#else
                 QProcess::execute("pkill monerod");
-#endif
             }
 
         } else
             return true;
     }
     return false;
+#endif
 }
 
 
@@ -247,8 +261,12 @@ bool DaemonManager::sendCommand(const QString &cmd,bool testnet, QString &messag
 
 void DaemonManager::exit()
 {
-    qDebug("DaemonManager: exit()");
+#ifdef Q_OS_WIN
+	SetEvent(cl);
+#endif
+	qDebug("DaemonManager: exit()");
     m_app_exit = true;
+
 }
 
 QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
@@ -296,6 +314,7 @@ DaemonManager::DaemonManager(QObject *parent)
     // Platform depetent path to monerod
 #ifdef Q_OS_WIN
     m_monerod = QApplication::applicationDirPath() + "/monerod.exe";
+	cl = CreateEvent(NULL,1,0,NULL);
 #elif defined(Q_OS_UNIX)
     m_monerod = QApplication::applicationDirPath() + "/monerod";
 #endif
