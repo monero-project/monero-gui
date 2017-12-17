@@ -144,6 +144,8 @@ ApplicationWindow {
             else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
         }
 
+        if (middlePanel.state !== "Advanced") updateBalance();
+
         leftPanel.selectItem(middlePanel.state)
     }
 
@@ -307,6 +309,11 @@ ApplicationWindow {
         return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
+    function updateBalance() {
+        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance);
+        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance);
+    }
+
     function onWalletConnectionStatusChanged(status){
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
@@ -365,8 +372,7 @@ ApplicationWindow {
 
     function onWalletUpdate() {
         console.log(">>> wallet updated")
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  walletManager.displayAmount(currentWallet.unlockedBalance);
-        middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
+        updateBalance();
         // Update history if new block found since last update
         if(foundNewBlock) {
             foundNewBlock = false;
@@ -1158,7 +1164,7 @@ ApplicationWindow {
                 onRejectedCallback();
         }
     }
-    
+
     PasswordDialog {
         id: settingsPasswordDialog
         z: parent.z + 1
@@ -1263,16 +1269,16 @@ ApplicationWindow {
             anchors.top: mobileHeader.bottom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            onDashboardClicked: {middlePanel.state = "Dashboard"; if(isMobile) hideMenu()}
-            onTransferClicked: {middlePanel.state = "Transfer"; if(isMobile) hideMenu()}
-            onReceiveClicked: {middlePanel.state = "Receive"; if(isMobile) hideMenu()}
-            onTxkeyClicked: {middlePanel.state = "TxKey"; if(isMobile) hideMenu()}
-            onHistoryClicked: {middlePanel.state = "History"; if(isMobile) hideMenu()}
-            onAddressBookClicked: {middlePanel.state = "AddressBook"; if(isMobile) hideMenu()}
-            onMiningClicked: {middlePanel.state = "Mining"; if(isMobile) hideMenu()}
-            onSignClicked: {middlePanel.state = "Sign"; if(isMobile) hideMenu()}
-            onSettingsClicked: {middlePanel.state = "Settings"; if(isMobile) hideMenu()}
-            onKeysClicked: {settingsPasswordDialog.open(); if(isMobile) hideMenu()}
+            onDashboardClicked: { middlePanel.state = "Dashboard"; if(isMobile) hideMenu(); updateBalance(); }
+            onTransferClicked: { middlePanel.state = "Transfer"; if(isMobile) hideMenu(); updateBalance(); }
+            onReceiveClicked: { middlePanel.state = "Receive"; if(isMobile) hideMenu(); updateBalance(); }
+            onTxkeyClicked: { middlePanel.state = "TxKey"; if(isMobile) hideMenu(); updateBalance(); }
+            onHistoryClicked: { middlePanel.state = "History"; if(isMobile) hideMenu(); updateBalance(); }
+            onAddressBookClicked: { middlePanel.state = "AddressBook"; if(isMobile) hideMenu(); updateBalance(); }
+            onMiningClicked: { middlePanel.state = "Mining"; if(isMobile) hideMenu(); updateBalance(); }
+            onSignClicked: { middlePanel.state = "Sign"; if(isMobile) hideMenu(); updateBalance(); }
+            onSettingsClicked: { middlePanel.state = "Settings"; if(isMobile) hideMenu(); updateBalance(); }
+            onKeysClicked: { settingsPasswordDialog.open(); if(isMobile) hideMenu(); updateBalance(); }
         }
 
         RightPanel {
