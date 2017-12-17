@@ -184,15 +184,6 @@ Rectangle {
               // For translations to work, the strings need to be listed in
               // the file components/StandardDropdown.qml too.
               
-              // Priorities before v5
-              ListModel {
-                  id: priorityModel
-
-                  ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-                  ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-                  ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
-               }
-
               // Priorites after v5
               ListModel {
                    id: priorityModelV5
@@ -335,7 +326,7 @@ Rectangle {
               enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
               onClicked: {
                   console.log("Transfer: paymentClicked")
-                  var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                  var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                   console.log("priority: " + priority)
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
@@ -478,7 +469,7 @@ Rectangle {
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
-                    var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                    var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                     console.log("priority: " + priority)
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
