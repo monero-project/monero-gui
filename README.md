@@ -2,7 +2,7 @@
 
 Copyright (c) 2014-2017, The Monero Project
 
-## Development Resources
+## Development resources
 
 - Web: [getmonero.org](https://getmonero.org)
 - Forum: [forum.getmonero.org](https://forum.getmonero.org)
