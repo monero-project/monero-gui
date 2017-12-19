@@ -197,10 +197,14 @@ More info: http://stackoverflow.com/a/35098040/1683164
 
 1. Install [msys2](http://msys2.github.io/), follow the instructions on that page on how to update packages to the latest versions
 
-2. Install Monero dependencies as described in [monero documentation](https://github.com/monero-project/monero) into msys2 environment
-   **As we only build application for x86, install only dependencies for x86 architecture (i686 in package name)**
+pacman -Syu  
+
+pacman -Su
+
+
+2. Install Monero dependencies 
    ```
-   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-boost mingw-w64-i686-openssl mingw-w64-i686-zeromq mingw-w64-i686-libsodium
+   pacman -S mingw-w64-i686-toolchain make mingw-w64-i686-cmake mingw-w64-i686-openssl mingw-w64-i686-zeromq mingw-w64-i686-libsodium
 
    ```
 
@@ -216,26 +220,19 @@ More info: http://stackoverflow.com/a/35098040/1683164
        - Tools > MinGW 5.3.0
    - continue with installation
 
-5. Open ```MinGW-w64 Win32 Shell``` shell
-
-   ```%MSYS_ROOT%\msys2_shell.cmd -mingw32```
-
-   Where ```%MSYS_ROOT%``` will be ```c:\msys32``` if your host OS is x86-based or ```c:\msys64``` if your host OS
-   is x64-based
+5. Open MSYS2 MinGW 32-bit
 
 6. Install the latest version of boost, specifically the required static libraries
-    ```
-    cd
-    wget http://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2
-    tar xjf boost_1_63_0.tar.bz2
-    cd boost_1_63_0
+    https://sourceforge.net/projects/boost/files/boost/1.65.1/boost_1_65_1.7z/download?use_mirror=netix&r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2F&use_mirror=netix  
+	Unzip it someway
+	```
+    cd 
     ./bootstrap.sh mingw
     ./b2 --prefix=/mingw32/boost --layout=tagged --without-mpi --without-python toolset=gcc address-model=32 variant=debug,release link=static threading=multi runtime-link=static -j$(nproc) install
     ```
 
 7. Clone repository
     ```
-    cd
     git clone https://github.com/monero-project/monero-gui.git
     ```
 
