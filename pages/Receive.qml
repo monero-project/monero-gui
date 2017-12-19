@@ -60,12 +60,18 @@ Rectangle {
 
         if (payment_id.length > 0) {
             integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
-            if (integratedAddressLine.text === "")
-              integratedAddressLine.text = qsTr("Invalid payment ID")
+            if (integratedAddressLine.text === "") {
+                integratedAddressLine.text = qsTr("Invalid payment ID")
+                paymentIdLine.error = true
+            }
+            else {
+                paymentIdLine.error = false
+            }
         }
         else {
             paymentIdLine.text = ""
             integratedAddressLine.text = ""
+            paymentIdLine.error = false
         }
 
         update()
