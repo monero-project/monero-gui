@@ -1068,7 +1068,7 @@
     <message>
         <location filename="../pages/Sign.qml" line="419"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Paste in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Adres voor ondertekenen &lt;font size=&apos;2&apos;&gt;  (Vul in of slecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Addresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Adres voor ondertekenen &lt;font size=&apos;2&apos;&gt;  (Vul in of slecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="172"/>
@@ -1311,7 +1311,7 @@
     <message>
         <location filename="../pages/Transfer.qml" line="237"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Adres &lt;font size=&apos;2&apos;&gt;  (Vul in of selecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Addresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Adres &lt;font size=&apos;2&apos;&gt;  (Vul in of selecteer uit het &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="255"/>
@@ -1825,7 +1825,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation>Vul u hersteltekst van 25 woorden in</translation>
+        <translation>Vul uw hersteltekst van 25 woorden in</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
@@ -1853,7 +1853,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="197"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Herstel een portemonnee met behulp van u hersteltekst of sleutels</translation>
+        <translation>Herstel een portemonnee met behulp van uw hersteltekst of sleutels</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="241"/>
@@ -1877,7 +1877,7 @@ Ringgrootte: </translation>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Beveilig u portemonnee met een wachtwoord</translation>
+        <translation>Beveilig uw portemonnee met een wachtwoord</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="127"/>
