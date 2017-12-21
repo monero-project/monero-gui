@@ -567,6 +567,10 @@ Rectangle {
         }
         TextBlock {
             Layout.fillWidth: true
+            text: qsTr("Wallet Name: ") + walletName + translationManager.emptyString
+        }
+        TextBlock {
+            Layout.fillWidth: true
             text:  (typeof currentWallet == "undefined") ? "" : qsTr("Daemon log path: ") + currentWallet.daemonLogPath + translationManager.emptyString
         }
     }
