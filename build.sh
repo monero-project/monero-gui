@@ -24,14 +24,16 @@ elif [ "$BUILD_TYPE" == "release-static" ]; then
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then
     echo "Building release for ANDROID"
-    CONFIG="CONFIG+=release static WITH_SCANNER";
+    CONFIG="CONFIG+=release static WITH_SCANNER DISABLE_PASS_STRENGTH_METER";
     ANDROID=true
     BIN_PATH=release/bin
+    DISABLE_PASS_STRENGTH_METER=true
 elif [ "$BUILD_TYPE" == "debug-android" ]; then
     echo "Building debug for ANDROID : ultra INSECURE !!"
-    CONFIG="CONFIG+=debug qml_debug WITH_SCANNER";
+    CONFIG="CONFIG+=debug qml_debug WITH_SCANNER DISABLE_PASS_STRENGTH_METER";
     ANDROID=true
     BIN_PATH=debug/bin
+    DISABLE_PASS_STRENGTH_METER=true
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building debug"
 	CONFIG="CONFIG+=debug"
@@ -57,7 +59,9 @@ fi
 ./get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
-$MAKE -C src/zxcvbn-c || exit
+if [ "$DISABLE_PASS_STRENGTH_METER" != true ]; then
+    $MAKE -C src/zxcvbn-c || exit
+fi
 
 if [ ! -d build ]; then mkdir build; fi
 
