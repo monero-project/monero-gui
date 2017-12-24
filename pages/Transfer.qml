@@ -275,6 +275,7 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
+              rightIcon: "../images/rightIcon.png"
               Layout.bottomMargin: 17 * scaleRatio
               Layout.topMargin: 17 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
