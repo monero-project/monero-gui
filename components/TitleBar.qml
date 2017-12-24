@@ -84,7 +84,7 @@ Rectangle {
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  "black"
+        color:  "transparent"
         height: 50 * scaleRatio
         width: height
         visible: isMobile
@@ -101,6 +101,9 @@ Rectangle {
             id: basicMouseArea
             hoverEnabled: true
             anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onEntered: goToBasicVersionButton.color = "#262626";
+            onExited: goToBasicVersionButton.color = "transparent";
             onClicked: {
                 releaseFocus()
                 parent.checked = !parent.checked
@@ -118,7 +121,7 @@ Rectangle {
         z: 2
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: whatIsAreaButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -134,6 +137,9 @@ Rectangle {
             MouseArea {
                 id: whatIsArea
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onEntered: whatIsAreaButton.color = "#262626";
+                onExited: whatIsAreaButton.color = "transparent";
                 onClicked: {
 
                 }
@@ -141,11 +147,11 @@ Rectangle {
         }
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: minimizeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
-            color: containsMouse ? "#3665B3" : "#00000000"
+            color: "transparent"
 
             Image {
                 anchors.centerIn: parent
@@ -155,6 +161,10 @@ Rectangle {
             MouseArea {
                 id: minimizeArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: minimizeButton.color = "#262626";
+                onExited: minimizeButton.color = "transparent";
                 onClicked: {
                     appWindow.visibility = Window.Minimized
                 }
@@ -163,11 +173,10 @@ Rectangle {
 
         Rectangle {
             id: maximizeButton
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
-            color: containsMouse ? "#FF6C3C" : "#00000000"
+            color: "transparent";
 
             Image {
                 anchors.centerIn: parent
@@ -175,12 +184,15 @@ Rectangle {
                 width: 16
                 source: appWindow.visibility === Window.FullScreen ?  "../images/backToWindowIcon.png" :
                                                                       "../images/fullscreen.png"
-
             }
 
             MouseArea {
                 id: maximizeArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: maximizeButton.color = "#262626";
+                onExited: maximizeButton.color = "transparent";
                 onClicked: {
                     appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
                                                                                         Window.Windowed
@@ -189,7 +201,7 @@ Rectangle {
         }
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: closeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -205,6 +217,10 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: appWindow.close();
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: closeButton.color = "#262626";
+                onExited: closeButton.color = "transparent";
             }
         }
     }

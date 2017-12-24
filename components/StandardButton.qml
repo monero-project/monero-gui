@@ -32,6 +32,7 @@ import "." 1.0
 
 Item {
     id: button
+    property string rightIcon: ""
     property string icon: ""
     property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
     property bool small: false
@@ -58,7 +59,6 @@ Item {
         anchors.right: parent.right
         height: parent.height - 1
         radius: 3
-//        color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
         color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
