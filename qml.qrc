@@ -197,5 +197,9 @@
         <file>components/LabelSubheader.qml</file>
         <file>images/arrow-right-medium-white.png</file>
         <file>images/rightArrow.png</file>
+        <file>images/upArrow-green.png</file>
+        <file>images/downArrow.png</file>
+        <file>images/historyBorderRadius.png</file>
+        <file>components/HistoryTableInnerColumn.qml</file>
     </qresource>
 </RCC>

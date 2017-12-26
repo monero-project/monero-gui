@@ -37,7 +37,7 @@ import "../components" as MoneroComponents
 
 Rectangle {
     id: root
-    color: "white"
+    color: "transparent"
     visible: false
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
@@ -54,6 +54,14 @@ Rectangle {
     signal accepted()
     signal rejected()
     signal closeCallback();
+
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        source: "../images/middlePanelBg.jpg"
+    }
 
     // Make window draggable
     MouseArea {
@@ -99,7 +107,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 18 * scaleRatio
                 font.family: "Arial"
-                color: "#555555"
+                color: Style.defaultFontColor
             }
 
         }
@@ -115,6 +123,10 @@ Rectangle {
                 font.pixelSize: 12 * scaleRatio
                 selectByMouse: false
                 wrapMode: TextEdit.Wrap
+                textColor: Style.defaultFontColor
+                style: TextAreaStyle {
+                    backgroundColor: "black"
+                }
 
                 MouseArea {
                     anchors.fill: parent

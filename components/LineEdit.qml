@@ -33,6 +33,8 @@ Item {
     id: item
     property alias text: input.text
     property alias placeholderText: placeholderLabel.text
+    property bool placeholderCenter: false
+    property int placeholderFontSize: 18
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
@@ -41,6 +43,7 @@ Item {
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
+    property bool borderDisabled: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool fontBold: true
@@ -48,12 +51,14 @@ Item {
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
+    property string backgroundColor: "transparent"
     property string tipText: ""
     property int labelFontSize: 16 * scaleRatio
     property bool labelFontBold: false
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
+    property int inputHeight: 42
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();
@@ -115,7 +120,7 @@ Item {
 
     Item{
         id: inputItem
-        height: 40 * scaleRatio
+        height: inputHeight * scaleRatio
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
         anchors.topMargin: showingHeader ? 6 * scaleRatio : 2
         width: parent.width
@@ -124,12 +129,20 @@ Item {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: inlineIcon.visible ? 50 * scaleRatio : 10 * scaleRatio
+            anchors.horizontalCenter: placeholderCenter ? parent.horizontalCenter : undefined
+            anchors.left: placeholderCenter ? undefined : parent.left
+            anchors.leftMargin: {
+                if(placeholderCenter){
+                    return undefined;
+                }
+                else if(inlineIcon.visible){ return 50 * scaleRatio; }
+                else { return 10 * scaleRatio; }
+            }
+
             opacity: 0.25
             color: Style.defaultFontColor
             font.family: Style.fontRegular.name
-            font.pixelSize: 18 * scaleRatio
+            font.pixelSize: placeholderFontSize * scaleRatio
             text: ""
             z: 3
         }
@@ -141,8 +154,10 @@ Item {
         }
 
         Rectangle {
-            color: "transparent"
-            border.width: 1
+            id: inputFill
+            color: backgroundColor
+            anchors.fill: parent
+            border.width: borderDisabled ? 0 : 1
             border.color: {
                 if(input.activeFocus){
                     return Qt.rgba(255, 255, 255, 0.35);
@@ -151,7 +166,6 @@ Item {
                 }
             }
             radius: 4
-            anchors.fill: parent
         }
 
         Image {

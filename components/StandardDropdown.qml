@@ -39,10 +39,16 @@ Item {
     property string textColor: "#FFFFFF"
     property alias currentIndex: column.currentIndex
     property bool expanded: false
+    property int dropdownHeight: 40
+    property int fontHeaderSize: 16 * scaleRatio
+    property int fontItemSize: 14 * scaleRatio
+    property string colorHeaderBackground: "transparent"
+    property bool headerBorder: true
+    property bool headerFontBold: true
+
+    height: dropdownHeight
 
     signal changed();
-
-    height: 40 * scaleRatio
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -68,15 +74,14 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 40 * scaleRatio
+        height: dropdown.dropdownHeight
 
         Rectangle {
-            color: "transparent"
-            border.width: 1
+            color: dropdown.colorHeaderBackground
+            border.width: dropdown.headerBorder ? 1 : 0
             border.color: Qt.rgba(1, 1, 1, 0.25)
             radius: 4
             anchors.fill: parent
-            z: 4
         }
 
         Text {
@@ -86,8 +91,8 @@ Item {
             anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
             font.family: Style.fontRegular.name
-            font.bold: true
-            font.pixelSize: 16 * scaleRatio
+            font.bold: dropdown.headerFontBold
+            font.pixelSize: dropdown.fontHeaderSize
             color: "#FFFFFF"
         }
 
@@ -109,6 +114,8 @@ Item {
             id: dropArea
             anchors.fill: parent
             onClicked: dropdown.expanded = !dropdown.expanded
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
         }
     }
 
@@ -162,23 +169,23 @@ Item {
                 property string stringSent:  qsTr("Sent") + translationManager.emptyString
                 property string stringReceived:  qsTr("Received") + translationManager.emptyString
 
-
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30 * scaleRatio
+                    height: (dropdown.dropdownHeight * 0.75) * scaleRatio
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                     Text {
+                        id: col1Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: col2Text.left
                         anchors.leftMargin: 12 * scaleRatio
-                        anchors.rightMargin: column2.length > 0 ? 12  * scaleRatio: 0
+                        anchors.rightMargin: 0
                         font.family: Style.fontRegular.name
                         font.bold: true
-                        font.pixelSize: 14 * scaleRatio
+                        font.pixelSize: fontItemSize
                         color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
                         text: qsTr(column1) + translationManager.emptyString
                     }
@@ -191,7 +198,7 @@ Item {
                         font.family: Style.fontRegular.name
                         font.pixelSize: 14 * scaleRatio
                         color: "#FFFFFF"
-                        text: column2
+                        text: ""
                     }
 
                     Rectangle {
