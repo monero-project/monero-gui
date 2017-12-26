@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2018, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -29,18 +29,23 @@
 import QtQuick 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
+import "../components"
+import "." 1.0
+
 
 Item {
     id: datePicker
     property bool expanded: false
     property date currentDate
     property bool showCurrentDate: true
-    property color backgroundColor : "#FFFFFF"
-    property color errorColor : "#FFDDDD"
+    property color backgroundColor : "#404040"
+    property color errorColor : "red"
     property bool error: false
+    property alias inputLabel: inputLabel
 
-    height: 37
-    width: 156
+    signal dateChanged();
+
+    height: 50
 
     onExpandedChanged: if(expanded) appWindow.currentItem = datePicker
 
@@ -57,28 +62,48 @@ Item {
         return true
     }
 
+    Rectangle {
+        id: inputLabelRect
+        color: "transparent"
+        height: 22
+        width: parent.width
+
+        Text {
+            id: inputLabel
+            anchors.top: parent.top
+            anchors.left: parent.left
+            font.family: Style.fontRegular.name
+            font.pixelSize: 16
+            font.bold: false
+            textFormat: Text.RichText
+            color: Style.defaultFontColor
+
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.NoButton
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            }
+        }
+    }
+
     Item {
         id: head
-        anchors.fill: parent
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height
-            //radius: 4
-            y: 0
-            color: "#DBDBDB"
-
-        }
+        anchors.top: inputLabelRect.bottom
+        anchors.topMargin: 6 * scaleRatio
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 28
 
         Rectangle {
+            anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height - 1
             anchors.leftMargin: datePicker.expanded ? 1 : 0
             anchors.rightMargin: datePicker.expanded ? 1 : 0
-            //radius: 4
+            radius: 4
             y: 1
-            color: datePicker.error ? datePicker.errorColor : datePicker.backgroundColor
+            color: datePicker.backgroundColor
         }
 
         Item {
@@ -89,24 +114,18 @@ Item {
             anchors.margins: 4
             width: height
 
-            StandardButton {
-                id: button
-                anchors.fill: parent
-                icon: "../images/datePicker.png"
-                visible: !datePicker.expanded
-                onClicked: datePicker.expanded = true
-            }
-
             Image {
+                id: button
                 anchors.centerIn: parent
-                source: "../images/datePicker.png"
-                visible: datePicker.expanded
+                source: "../images/whiteDropIndicator.png"
+                rotation: datePicker.expanded ? 180 : 0
             }
 
             MouseArea {
                 anchors.fill: parent
-                enabled: datePicker.expanded
-                onClicked: datePicker.expanded = false
+                onClicked: datePicker.expanded = !datePicker.expanded
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
             }
         }
 
@@ -117,7 +136,7 @@ Item {
             anchors.rightMargin: 4
             height: 16
             width: 1
-            color: "#DBDBDB"
+            color: "#808080"
             visible: datePicker.expanded
         }
 
@@ -146,9 +165,9 @@ Item {
                 id: dayInput
                 readOnly: true
                 width: 22
-                font.family: "Arial"
-                font.pixelSize: 18
-                // color: "#525252"
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14
+                color: datePicker.error ? errorColor : Style.defaultFontColor
                 maximumLength: 2
                 horizontalAlignment: TextInput.AlignHCenter
                 validator: IntValidator{bottom: 01; top: 31;}
@@ -169,19 +188,19 @@ Item {
             }
 
             Text {
-                font.family: "Arial"
-                font.pixelSize: 18
-                // color: "#525252"
-                text: "."
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14
+                color: datePicker.error ? errorColor : Style.defaultFontColor
+                text: "-"
             }
 
             TextInput {
                 id: monthInput
                 readOnly: true
                 width: 22
-                font.family: "Arial"
-                font.pixelSize: 18
-                // color: "#525252"
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14
+                color: datePicker.error ? errorColor : Style.defaultFontColor
                 maximumLength: 2
                 horizontalAlignment: TextInput.AlignHCenter
                 validator: IntValidator{bottom: 01; top: 12;}
@@ -201,18 +220,18 @@ Item {
             }
 
             Text {
-                font.family: "Arial"
-                font.pixelSize: 18
-                // color: "#525252"
-                text: "."
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14
+                color: datePicker.error ? errorColor : Style.defaultFontColor
+                text: "-"
             }
 
             TextInput {
                 id: yearInput
                 width: 44
-                font.family: "Arial"
-                font.pixelSize: 18
-                /// color: "#525252"
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14
+                color: datePicker.error ? errorColor : Style.defaultFontColor
                 maximumLength: 4
                 horizontalAlignment: TextInput.AlignHCenter
                 validator: IntValidator{bottom: 1000; top: 9999;}
@@ -268,6 +287,7 @@ Item {
                 gridVisible: false
                 background: Rectangle { color: "transparent" }
                 dayDelegate: Item {
+                    z: 8
                     implicitHeight: implicitWidth
                     implicitWidth: calendar.width / 7
 
@@ -304,6 +324,8 @@ Item {
                                     calendar.showNextMonth()
                                 else calendar.showPreviousMonth()
                             }
+
+                            dateChanged();
                         }
                     }
                 }

@@ -39,13 +39,14 @@ ColumnLayout {
     property alias readOnly: multiLine.readOnly
     property alias addressValidation: multiLine.addressValidation
     property alias labelButtonText: labelButton.text
+    property bool labelFontBold: false
     property bool labelButtonVisible: false
     property bool copyButton: false
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
 
     spacing: 0
-    Rectangle{
+    Rectangle {
         id: inputLabelRect
         color: "transparent"
         Layout.fillWidth: true
@@ -77,9 +78,9 @@ ColumnLayout {
             anchors.rightMargin: labelButton.visible? 4 : 0
             onClicked: {
                 if (multiLine.text.length > 0) {
-                    console.log(multiLine.text + " copied to clipboard")
-                    clipboard.setText(multiLine.text)
-                    appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                    console.log(multiLine.text + " copied to clipboard");
+                    clipboard.setText(multiLine.text);
+                    appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
                 }
             }
         }
@@ -91,6 +92,8 @@ ColumnLayout {
         addressValidation: true
         anchors.top: inputLabelRect.bottom
         Layout.fillWidth: true
+        topPadding: 10
+        bottomPadding: 10
 
         Text {
             id: placeholderLabel

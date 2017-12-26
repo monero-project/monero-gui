@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2018, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -30,6 +30,7 @@ import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
 import moneroComponents.AddressBookModel 1.0
 import "../components" as MoneroComponents
+import "." 1.0
 
 ListView {
     id: listView
@@ -65,11 +66,10 @@ ListView {
         return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
     }
 
-
     footer: Rectangle {
-        height: 127
+        height: 127 * scaleRatio
         width: listView.width
-        color: "#FFFFFF"
+        color: "transparent"
 
         Text {
             anchors.centerIn: parent
@@ -80,396 +80,370 @@ ListView {
         }
     }
 
+    function get_color(i){
+        if (i === 0){
+            return "green";
+        } else {
+            return "red";
+        }
+    }
+
     delegate: Rectangle {
         id: delegate
-        height: 144
+        property bool collapsed: index ? false : true
+        height: collapsed ? 180 * scaleRatio : 70 * scaleRatio
         width: listView.width
-        color: index % 2 ? "#F8F8F8" : "#FFFFFF"
-        z: listView.count - index
-        function collapseDropdown() { dropdown.expanded = false }
+        color: "#CC000000"
 
-        StandardButton {
-            id: detailsButton
-            anchors.right:parent.right
-            anchors.rightMargin: 15
-            anchors.top: parent.top
-            anchors.topMargin: parent.height/2 - this.height/2
-            width: 80
-            fontSize: 14
-            text: qsTr("Details")
-            onClicked: {
-                var tx_key = currentWallet.getTxKey(hash)
-                var tx_note = currentWallet.getUserNote(hash)
-                var rings = currentWallet.getRings(hash)
-                if (rings)
-                    rings = rings.replace(/\|/g, '\n')
-                informationPopup.title = "Transaction details";
-                informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations, rings);
-                informationPopup.onCloseCallback = null
-                informationPopup.open();
-            }
+        function collapse(){
+            delegate.height = 180 * scaleRatio;
         }
 
-
-
-        Row {
-            id: row1
-            anchors.left: parent.left
+        // borders
+        Rectangle{
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.topMargin: 14
-            // -- direction indicator
-            Rectangle {
-                id: dot
-                width: 14
-                height: width
-                radius: width / 2
-                color: isOut ? "#FF4F41" : "#36B05B"
-            }
-
-            Item { //separator
-                width: 12
-                height: 14
-            }
-
-            // -- description aka recepient name from address book (TODO)
-            /*
-            Text {
-                id: descriptionText
-                width: text.length ? (descriptionArea.containsMouse ? parent.width - x - 12 : 120) : 0
-                anchors.verticalCenter: dot.verticalCenter
-                font.family: "Arial"
-                font.bold: true
-                font.pixelSize: 19
-                color: "#444444"
-                elide: Text.ElideRight
-                text: description
-
-                MouseArea {
-                    id: descriptionArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                }
-            }
-            */
-            /*
-            Item { //separator
-                width: descriptionText.width ? 12 : 0
-                height: 14
-                visible: !descriptionArea.containsMouse
-            }
-            */
-            // -- address (in case outgoing transaction) - N/A in case of incoming
-            MoneroComponents.TextBlock {
-                id: addressText
-                anchors.verticalCenter: dot.verticalCenter
-                width: parent.width - x - 12
-                //elide: Text.ElideRight
-                font.family: "Arial"
-                font.pixelSize: 14
-                color: "#545454"
-                text: hash
-                // visible: !descriptionArea.containsMouse
-            }
+            anchors.bottom: parent.bottom
+            width: 1
+            color: "#404040"
         }
 
-        Row {
-            // - Payment ID
-            id: row2
+        Rectangle{
             anchors.left: parent.left
-            anchors.right: parent.right
             anchors.top: parent.top
-            anchors.topMargin: 40
-            anchors.leftMargin: 26
-
-            // -- "PaymentID" title
-            Text {
-                id: paymentLabel
-                width: 86
-                anchors.bottom: parent.bottom
-                font.family: "Arial"
-                font.pixelSize: 12
-                color: "#535353"
-                text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
-            }
-            // -- "PaymentID" value
-            MoneroComponents.TextBlock {
-                id: paymentIdValue
-                width: 136
-                anchors.bottom: parent.bottom
-                //elide: Text.ElideRight
-                font.family: "Arial"
-                font.pixelSize:13
-                color: "#545454"
-                text: paymentId
-
-            }
-            // Address book lookup
-            MoneroComponents.TextBlock {
-                id: addressBookLookupValue
-                width: 136
-                anchors.bottom: parent.bottom
-                //elide: Text.ElideRight
-                font.family: "Arial"
-                font.pixelSize:13
-                color: "#545454"
-                text: "(" + lookupPaymentID(paymentId) + ")"
-                visible: text !== "()"
-            }
+            anchors.bottom: parent.bottom
+            width: collapsed ? 2 : 1
+            color: collapsed ? "#BBBBBB" : "#404040"
         }
-        Row {
-            // block height row
-            id: row3
-            anchors.left: parent.left
+
+        Rectangle{
             anchors.right: parent.right
-            anchors.top: row2.bottom
-            anchors.topMargin: rowSpacing
-            anchors.leftMargin: 26
-
-            // -- "BlockHeight" title
-            Text {
-                id: blockHeghtTitle
-                anchors.bottom: parent.bottom
-                width: 86
-                font.family: "Arial"
-                font.pixelSize: 12
-                color: "#535353"
-                text:  qsTr("BlockHeight:")  + translationManager.emptyString
-            }
-            // -- "BlockHeight" value
-            MoneroComponents.TextBlock {
-                width: 200
-                anchors.bottom: parent.bottom
-                //elide: Text.ElideRight
-                font.family: "Arial"
-                font.pixelSize: 13
-                color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
-                text: {
-                    if (!isPending)
-                        if(confirmations < confirmationsRequired)
-                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
-                        else
-                            return blockHeight
-                    if (!isOut)
-                        return qsTr("UNCONFIRMED") + translationManager.emptyString
-                    if (isFailed)
-                        return qsTr("FAILED") + translationManager.emptyString
-                    return qsTr("PENDING") + translationManager.emptyString
-
-                }
-            }
-            Item { //separator
-                width: 100
-                height: 14
-            }
-            // -- "Received by" title
-            Text {
-                anchors.bottom: parent.bottom
-                font.family: "Arial"
-                font.pixelSize: 12
-                color: "#535353"
-                text: (isOut ? qsTr("Spent from:") : qsTr("Received by:")) + translationManager.emptyString
-            }
-            Item { //separator
-                width: 5
-                height: 14
-            }
-            // -- "Index" value
-            Text {
-                anchors.bottom: parent.bottom
-                font.family: "Arial"
-                font.pixelSize: 13
-                font.bold: true
-                color: "#545454"
-                text: "#" + subaddrIndex
-            }
-            Item { //separator
-                width: 5
-                height: 14
-            }
-            // -- "Label" value
-            Text {
-                anchors.bottom: parent.bottom
-                font.family: "Arial"
-                font.pixelSize: 13
-                color: "#545454"
-                text: label
-                elide: Text.ElideRight
-                width: detailsButton.x - x - 30
-            }
-        }
-
-        // -- "Date", "Balance" and "Amound" section
-        Row {
-            id: row4
-            anchors.top: row3.bottom
+            anchors.bottom: parent.top
             anchors.left: parent.left
-            spacing: 12
-            anchors.topMargin: rowSpacing
-
-            Item { //separator
-                width: 14
-                height: 14
-            }
-
-            // -- "Date" column
-            Column {
-                anchors.top: parent.top
-                width: 215
-
-                Text {
-                    anchors.left: parent.left
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    color: "#545454"
-                    text: qsTr("Date") + translationManager.emptyString
-                }
-
-                Row {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    spacing: 33
-
-                    Text {
-                        font.family: "Arial"
-                        font.pixelSize: 18
-                        color: "#000000"
-                        text: date
-                    }
-
-                    Text {
-                        font.family: "Arial"
-                        font.pixelSize: 18
-                        color: "#000000"
-                        text: time
-                    }
-                }
-            }
-            // -- "Balance" column
-            // XXX: we don't have a balance
-            /*
-            Column {
-                anchors.top: parent.top
-                width: 148
-                visible: false
-
-                Text {
-                    anchors.left: parent.left
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    color: "#545454"
-                    text: qsTr("Balance") + translationManager.emptyString
-                }
-
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18
-                    color: "#000000"
-                    text: balance
-                }
-            }
-            */
-
-            // -- "Amount column
-            Column {
-                anchors.top: parent.top
-
-                Text {
-                    anchors.left: parent.left
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    color: "#545454"
-                    text: qsTr("Amount") + translationManager.emptyString
-                }
-
-                Row {
-                    spacing: 2
-                    Text {
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 3
-                        font.family: "Arial"
-                        font.pixelSize: 16
-                        color: isOut ? "#FF4F41" : "#36B05B"
-                        text: isOut ? "↓" : "↑"
-                    }
-
-                    Text {
-                        id: amountText
-                        anchors.bottom: parent.bottom
-                        font.family: "Arial"
-                        font.pixelSize: 18
-                        color: isOut ? "#FF4F41" : "#36B05B"
-                        text:  displayAmount
-                    }
-                }
-            }
-
-            // -- "Fee column
-            Column {
-                anchors.top: parent.top
-                width: 148
-                visible: isOut && fee != ""
-                Text {
-                    anchors.left: parent.left
-                    font.family: "Arial"
-                    font.pixelSize: 12
-                    color: "#545454"
-                    text: qsTr("Fee") + translationManager.emptyString
-                }
-
-                Row {
-                    spacing: 2
-                    Text {
-                        anchors.bottom: parent.bottom
-                        font.family: "Arial"
-                        font.pixelSize: 18
-                        color: "#FF4F41"
-                        text:  fee
-                    }
-                }
-            }
+            height: 1
+            color: "#404040"
         }
 
-
-        /*
-        // Transaction dropdown menu.
-        // Disable for now until AddressBook implemented
-        TableDropdown {
-            id: dropdown
+        Rectangle{
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 11
-            anchors.rightMargin: 5
-            dataModel: dropModel
-            z: 1
-            onExpandedChanged: {
-                if(expanded) {
-                    listView.previousItem = delegate
-                    listView.currentIndex = index
-                }
+            anchors.left: parent.left
+            height: 1
+            color: "#404040"
+        }
+
+        Rectangle {
+            id: row1
+            anchors.left: parent.left
+            anchors.leftMargin: 20 * scaleRatio
+            anchors.right: parent.right
+            anchors.rightMargin: 20 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: 15 * scaleRatio
+            height: 40 * scaleRatio
+            color: "transparent"
+
+            Image {
+                id: arrowImage
+                source: isOut ? "../images/downArrow.png" : "../images/upArrow-green.png"
+                height: 18 * scaleRatio
+                width: 12 * scaleRatio
+                anchors.top: parent.top
+                anchors.topMargin: 12 * scaleRatio
             }
-            onOptionClicked: {
-                if(option === 0)
-                    clipboard.setText(address)
+
+            Text {
+                id: txrxLabel
+                anchors.left: arrowImage.right
+                anchors.leftMargin: 18 * scaleRatio
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14 * scaleRatio
+                text: isOut ? "Sent" : "Received"
+                color: "#808080"
+            }
+
+//            // -- "BlockHeight" value
+//            TextEdit {
+//                readOnly: true
+//                selectByMouse: true
+//                width: 85
+//                anchors.bottom: parent.bottom
+//                //elide: Text.ElideRight
+//                font.family: "Arial"
+//                font.pixelSize: 13
+//                color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
+//                text: {
+//                    if (!isPending)
+//                        if(confirmations < confirmationsRequired)
+//                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
+//                        else
+//                            return blockHeight
+//                    if (!isOut)
+//                        return qsTr("UNCONFIRMED") + translationManager.emptyString
+//                    if (isFailed)
+//                        return qsTr("FAILED") + translationManager.emptyString
+//                    return qsTr("PENDING") + translationManager.emptyString
+//                }
+//            }
+
+            Text {
+                id: amountLabel
+                anchors.left: arrowImage.right
+                anchors.leftMargin: 18 * scaleRatio
+                anchors.top: txrxLabel.bottom
+                anchors.topMargin: 0 * scaleRatio
+                font.family: Style.fontBold.name
+                font.pixelSize: 18 * scaleRatio
+                font.bold: true
+                text: { return (displayAmount * 1) + " XMR" }  // hack, removes trailing zeros
+                color: isOut ? "white" : "#2eb358"
+            }
+
+            Rectangle {
+                anchors.right: parent.right
+                width: 300 * scaleRatio
+                height: parent.height
+                color: "transparent"
+
+                Text {
+                    id: dateLabel
+                    anchors.left: parent.left
+                    font.family: Style.fontRegular.name
+                    font.pixelSize: 14 * scaleRatio
+                    text: date
+                    color: "#808080"
+                }
+
+                Text {
+                    id: timeLabel
+                    anchors.left: dateLabel.right
+                    anchors.leftMargin: 7 * scaleRatio
+                    anchors.top: parent.top
+                    anchors.topMargin: 3 * scaleRatio
+                    font.pixelSize: 12 * scaleRatio
+                    text: time
+                    color: "#808080"
+                }
+
+                Text {
+                    id: toLabel
+                    property string address: ""
+                    color: "#BBBBBB"
+                    anchors.left: parent.left
+                    anchors.top: dateLabel.bottom
+                    anchors.topMargin: 0
+                    font.family: Style.fontRegular.name
+                    font.pixelSize: 16 * scaleRatio
+                    text: {
+                        if(isOut){
+                            var _address = destinations.split(" ")[1];
+                            if(_address === undefined) return ""
+
+                            if(_address){
+                                address = _address;
+                                var address_truncated = address.substring(0, 6) + "..." + address.substring(address.length-6);
+                                return "To " + address_truncated;
+                            } else {
+                                return "Unknown recipient";
+                            }
+                        }
+                        return ""
+                    }
+
+                    MouseArea{
+                        visible: parent.address !== undefined
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: {
+                            toLabel.color = "white";
+                        }
+                        onExited: {
+                            toLabel.color = "#BBBBBB";
+                        }
+                        onClicked: {
+                            if(parent.address){
+                                console.log(parent.address + " copied to clipboard");
+                                clipboard.setText(parent.address);
+                                appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    height: 24 * scaleRatio
+                    width: 24 * scaleRatio
+                    color: "transparent"
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Image {
+                        id: dropdownImage
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: delegate.collapsed ? 180 : 0
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            delegate.collapsed = !delegate.collapsed;
+                        }
+                    }
+                }
             }
         }
 
         Rectangle {
+            id: row2
             anchors.left: parent.left
+            anchors.leftMargin: 20 * scaleRatio
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 1
-            color: "#DBDBDB"
-        }
-        */
-    }
+            anchors.rightMargin: 20 * scaleRatio
+            anchors.top: row1.bottom
+            anchors.topMargin: 15 * scaleRatio
+            height: 40 * scaleRatio
+            color: "transparent"
+            visible: delegate.collapsed
 
-    ListModel {
-        id: dropModel
-        ListElement { name: "<b>Copy address to clipboard</b>"; icon: "../images/dropdownCopy.png" }
-        ListElement { name: "<b>Add to address book</b>"; icon: "../images/dropdownAdd.png" }
-        ListElement { name: "<b>Send to this address</b>"; icon: "../images/dropdownSend.png" }
-        ListElement { name: "<b>Find similar transactions</b>"; icon: "../images/dropdownSearch.png" }
+            // left column
+            HistoryTableInnerColumn{
+                anchors.left: parent.left
+                anchors.leftMargin: 30 * scaleRatio
+
+                labelHeader: "Transaction ID"
+                labelValue: hash.substring(0, 18) + "..."
+                copyValue: hash
+            }
+
+            // right column
+            HistoryTableInnerColumn{
+                anchors.right: parent.right
+                anchors.rightMargin: 100 * scaleRatio
+                width: 200 * scaleRatio
+                height: parent.height
+                color: "transparent"
+
+                labelHeader: qsTr("Fee")
+                labelValue: {
+                    if(!isOut && !fee){
+                        return "-";
+                    } else if(isOut && fee){
+                        return fee + " XMR";
+                    } else {
+                        return "Unknown"
+                    }
+                }
+                copyValue: {
+                    if(isOut && fee){ return fee }
+                    else { return "" }
+                }
+            }
+
+        }
+
+        Rectangle {
+            id: row3
+            anchors.left: parent.left
+            anchors.leftMargin: 20 * scaleRatio
+            anchors.right: parent.right
+            anchors.rightMargin: 20 * scaleRatio
+            anchors.top: row2.bottom
+            anchors.topMargin: 15 * scaleRatio
+            height: 40 * scaleRatio
+            color: "transparent"
+            visible: delegate.collapsed
+
+            // left column
+            HistoryTableInnerColumn{
+                anchors.left: parent.left
+                anchors.leftMargin: 30 * scaleRatio
+                labelHeader: qsTr("Payment ID")
+                labelValue: paymentId !== "" && !paymentId.startsWith("00000000") ? paymentId.substring(0, 32) + "..." : "-"
+                copyValue: {
+                    if(paymentId !== "") { return paymentId }
+                    else { return undefined }
+                }
+            }
+
+            // right column
+            HistoryTableInnerColumn {
+                visible: currentWallet.getUserNote(hash)
+                anchors.right: parent.right
+                anchors.rightMargin: 80 * scaleRatio
+                width: 220 * scaleRatio
+                height: parent.height
+                color: "transparent"
+
+                labelHeader: qsTr("Description")
+                labelValue: {
+                    var note = currentWallet.getUserNote(hash);
+                    if(note){
+                        if(note.length > 28) {
+                            return note.substring(0, 28) + "...";
+                        } else {
+                            return note;
+                        }
+                    } else {
+                        return "";
+                    }
+                }
+                copyValue: {
+                    return currentWallet.getUserNote(hash);
+                }
+            }
+
+            Rectangle {
+                id: detailsButton
+                color: "#404040"
+                height: 24 * scaleRatio
+                width: 24 * scaleRatio
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 6
+                radius: 20 * scaleRatio
+
+                MouseArea {
+                    id: detailsButtonMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        var tx_key = currentWallet.getTxKey(hash)
+                        var tx_note = currentWallet.getUserNote(hash)
+                        var rings = currentWallet.getRings(hash)
+                        if (rings)
+                            rings = rings.replace(/\|/g, '\n')
+                        informationPopup.title = "Transaction details";
+                        informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations, rings);
+                        informationPopup.onCloseCallback = null
+                        informationPopup.open();
+                    }
+
+                    onEntered: {
+                        detailsButton.color = "#656565";
+                    }
+
+                    onExited: {
+                        detailsButton.color = "#404040";
+                    }
+                }
+
+                Text {
+                    color: Style.defaultFontColor
+                    text: "?"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 14 * scaleRatio
+                }
+            }
+        }
     }
 
     Clipboard { id: clipboard }

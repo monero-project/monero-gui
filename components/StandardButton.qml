@@ -62,7 +62,7 @@ Item {
         color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
-        MouseArea{
+        MouseArea {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true

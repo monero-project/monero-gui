@@ -388,7 +388,6 @@ Rectangle {
             onFillLevelChanged: updateMixin()
         }
 
-
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
             Layout.topMargin: 50 * scaleRatio

@@ -49,6 +49,7 @@ Rectangle {
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
     property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
+    property alias contentHeight: mainFlickable.contentHeight
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
@@ -111,7 +112,7 @@ Rectangle {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
                 PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.tableHeight + 220 * scaleRatio }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
