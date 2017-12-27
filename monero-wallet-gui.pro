@@ -318,6 +318,7 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_ko.ts \ # Korean
                 $$PWD/translations/monero-core_ro.ts \ # Romanian
                 $$PWD/translations/monero-core_da.ts \ # Danish
+                $$PWD/translations/monero-core_cs.ts \ # Czech
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
