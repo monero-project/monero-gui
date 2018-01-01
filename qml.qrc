@@ -126,6 +126,7 @@
         <file>lang/flags/romania.png</file>
         <file>lang/flags/czech.png</file>
         <file>lang/flags/slovakia.png</file>
+        <file>lang/flags/egypt.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
