@@ -8,6 +8,22 @@ if [ -z $BUILD_TYPE ]; then
     BUILD_TYPE=release
 fi
 
+# Return 0 if the command exists, 1 if it does not.
+exists() {
+    command -v "$1" &>/dev/null
+}
+
+# Return the first value in $@ that's a runnable command.
+find_command() {
+    for arg in "$@"; do
+        if exists "$arg"; then
+           echo "$arg"
+           return 0
+        fi
+    done
+    return 1
+}
+
 if [ "$BUILD_TYPE" == "release" ]; then
     echo "Building release"
     CONFIG="CONFIG+=release";
@@ -64,8 +80,8 @@ if [ ! -d build ]; then mkdir build; fi
 
 # Platform indepenent settings
 if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "linux64" ]); then
-    distro=$(lsb_release -is)
-    if [ "$distro" == "Ubuntu" ]; then
+    exists lsb_release && distro="$(lsb_release -is)"
+    if [ "$distro" = "Ubuntu" ] || [ "$distro" = "Fedora" ] || test -f /etc/fedora-release; then
         CONFIG="$CONFIG libunwind_off"
     fi
 fi
@@ -85,7 +101,11 @@ popd
 echo "var GUI_MONERO_VERSION = \"$TAGNAME\"" >> version.js
 
 cd build
-qmake ../monero-wallet-gui.pro "$CONFIG" || exit
+if ! QMAKE=$(find_command qmake qmake-qt5); then
+    echo "Failed to find suitable qmake command."
+    exit 1
+fi
+$QMAKE ../monero-wallet-gui.pro "$CONFIG" || exit
 $MAKE || exit 
 
 # Copy monerod to bin folder
