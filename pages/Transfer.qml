@@ -41,7 +41,10 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
+    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>" +
+                                   qsTr("Start daemon") +
+                                   "</a><font size='2'>)</font>" +
+                                   translationManager.emptyString
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
@@ -213,10 +216,12 @@ Rectangle {
           Label {
               id: addressLabel
               textFormat: Text.RichText
-              text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                          Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                    + translationManager.emptyString
-
+              text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                    qsTr("Address") +
+                    "<font size='2'> ( " +
+                    qsTr("Paste in or select from <a href='#'>Address book</a>") +
+                    " )</font>" +
+                    translationManager.emptyString
               onLinkActivated: appWindow.showPageRequest("AddressBook")
               Layout.fillWidth: true
           }

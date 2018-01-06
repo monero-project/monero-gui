@@ -337,9 +337,12 @@ Rectangle {
             Label {
                 id: trackingLabel
                 textFormat: Text.RichText
-                text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                           Tracking <font size='2'> (</font><a href='#'>help</a><font size='2'>)</font>")
-                           + translationManager.emptyString
+                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                      qsTr("Tracking") +
+                      "<font size='2'> (</font><a href='#'>" +
+                      qsTr("help") +
+                      "</a><font size='2'>)</font>" +
+                      translationManager.emptyString
                 width: mainLayout.labelWidth
                 onLinkActivated: {
                     trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
