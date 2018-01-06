@@ -62,6 +62,12 @@ SOURCES += main.cpp \
     src/libwalletqt/UnsignedTransaction.cpp \
     MainApp.cpp
 
+CONFIG(DISABLE_PASS_STRENGTH_METER) {
+    HEADERS -= src/zxcvbn-c/zxcvbn.h
+    SOURCES -= src/zxcvbn-c/zxcvbn.c
+    DEFINES += "DISABLE_PASS_STRENGTH_METER"
+}
+
 !ios {
     HEADERS += src/daemon/DaemonManager.h
     SOURCES += src/daemon/DaemonManager.cpp

@@ -304,6 +304,7 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
     return QUrl::fromLocalFile(path);
 }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
 double WalletManager::getPasswordStrength(const QString &password) const
 {
     static const char *local_dict[] = {
@@ -318,6 +319,7 @@ double WalletManager::getPasswordStrength(const QString &password) const
     ZxcvbnUnInit();
     return e;
 }
+#endif
 
 bool WalletManager::saveQrCode(const QString &code, const QString &path) const
 {

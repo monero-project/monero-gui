@@ -88,21 +88,20 @@ APP_CFLAGS +=  -target armv7-none-linux-androideabi -fexceptions -fstack-protect
     && android update project --path . -t "${ANDROID_API}" \
     && CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ ant -Dndk.dir=${ANDROID_NDK_ROOT} -Diconv.src=${WORKDIR}/libiconv-${ICONV_VERSION} zbar-clean zbar-ndk-build
 
-#Can't directly call build.sh because of env variables
-RUN git clone https://github.com/monero-project/monero-core.git \
-    && cd monero-core \
-    && git submodule update \
-    && CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ BOOST_ROOT=/opt/android/boost_1_62_0 BOOST_LIBRARYDIR=${WORKDIR}/boost_${BOOST_VERSION}/android32/lib/  OPENSSL_ROOT_DIR=${WORKDIR}/openssl/ ./get_libwallet_api.sh release-android
-
 RUN cp openssl/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/lib
 RUN cp boost_${BOOST_VERSION}/android32/lib/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/lib
 RUN cp ZBar/android/obj/local/armeabi-v7a/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/lib
 
-ENV PATH $ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:${WORKDIR}/Qt-${QT_VERSION}/bin:$CLEAN_PATH
-
-# NB : zxcvbn-c needs to build a local binary and Qt don't care about these environnement variable
-RUN cd monero-core \
-    && CC="gcc" CXX="g++" ./build.sh release-android \
+RUN git clone https://github.com/monero-project/monero-gui.git \
+    && cd monero-gui \
+    && git submodule update \
+    && CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ BOOST_ROOT=/opt/android/boost_1_62_0 \
+         BOOST_LIBRARYDIR=${WORKDIR}/boost_${BOOST_VERSION}/android32/lib/ \
+         OPENSSL_ROOT_DIR=${WORKDIR}/openssl/ \
+         CMAKE_INCLUDE_PATH=${WORKDIR}/cppzmq/ \
+         CMAKE_LIBRARY_PATH=${WORKDIR}/zeromq4-1/.libs \
+         CXXFLAGS="-I ${WORKDIR}/zeromq4-1/include/" \
+         ./build.sh release-android \
     && cd build \
     && make deploy
 

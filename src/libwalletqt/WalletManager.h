@@ -128,7 +128,9 @@ public:
     Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
     Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
     Q_INVOKABLE double getPasswordStrength(const QString &password) const;
+#endif
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
