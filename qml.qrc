@@ -135,6 +135,7 @@
         <file>pages/TxKey.qml</file>
         <file>components/IconButton.qml</file>
         <file>components/PasswordDialog.qml</file>
+        <file>components/NewPasswordDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
         <file>components/ProgressBar.qml</file>
         <file>components/StandardDialog.qml</file>

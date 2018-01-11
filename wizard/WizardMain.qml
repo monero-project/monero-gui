@@ -226,7 +226,7 @@ ColumnLayout {
         m_wallet.setPassword(settings.wallet_password);
 
         // Store password in session to be able to use password protected functions (e.g show seed)
-        appWindow.password = settings.wallet_password
+        appWindow.walletPassword = settings.wallet_password
 
         // saving wallet_filename;
         settings['wallet_filename'] = new_wallet_filename;
