@@ -103,6 +103,7 @@ Rectangle {
 
         Row {
             visible: true
+
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
@@ -110,7 +111,7 @@ Rectangle {
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 height: 490 * scaleRatio
-                width: 50 * scaleRatio
+                width: 259 * scaleRatio
 
                 Image {
                     width: 259; height: 170
@@ -128,22 +129,21 @@ Rectangle {
                     anchors.leftMargin: 192
                     font.bold: true
                     font.pixelSize: 12
-                    color: "red"
-                    opacity: 1
+                    color: "#f33434"
                 }
 
-                // @TODO: implement
-                //                Text {
-                //                    id: viewOnlyLabel
-                //                    visible: viewOnly
-                //                    text: qsTr("View Only") + translationManager.emptyString
-                //                    anchors.top: logo.bottom
-                //                    anchors.topMargin: 5
-                //                    anchors.left: parent.left
-                //                    anchors.leftMargin: 50
-                //                    font.bold: true
-                //                    color: "blue"
-                //                }
+                Text {
+                    id: viewOnlyLabel
+                    visible: viewOnly
+                    text: qsTr("View Only") + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 8
+                    anchors.right: testnetLabel.visible ? testnetLabel.left : parent.right
+                    anchors.rightMargin: 8
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#ff9323"
+                }
             }
 
             Item {

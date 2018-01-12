@@ -166,14 +166,15 @@ Rectangle {
                     }
                 }
             }
+        }
+
+        RowLayout{
+            Layout.fillWidth: true
 
             StandardButton {
                 id: changePasswordButton
+                small: true
                 text: qsTr("Change password") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 onClicked: {
                     passwordDialog.onAcceptedCallback = function() {
                         if(appWindow.walletPassword === passwordDialog.password){

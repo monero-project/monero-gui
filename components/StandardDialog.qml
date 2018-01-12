@@ -120,7 +120,7 @@ Rectangle {
                 font.family: "Arial"
                 textFormat: TextEdit.AutoText
                 readOnly: true
-                font.pixelSize: 12 * scaleRatio
+                font.pixelSize: 14 * scaleRatio
                 selectByMouse: false
                 wrapMode: TextEdit.Wrap
                 textColor: Style.defaultFontColor
