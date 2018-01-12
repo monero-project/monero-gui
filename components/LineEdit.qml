@@ -34,7 +34,7 @@ Item {
     property alias text: input.text
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
-    property int placeholderFontSize: 18
+    property int placeholderFontSize: 18 * scaleRatio
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
@@ -53,12 +53,12 @@ Item {
     property alias labelTextFormat: inputLabel.textFormat
     property string backgroundColor: "transparent"
     property string tipText: ""
-    property int labelFontSize: 16 * scaleRatio
-    property bool labelFontBold: false
+    property int labelFontSize: 14 * scaleRatio
+    property bool labelFontBold: true
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
-    property int inputHeight: 42
+    property int inputHeight: 42 * scaleRatio
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();

@@ -161,6 +161,8 @@ Rectangle {
               Label {
                   id: transactionPriority
                   text: qsTr("Transaction priority") + translationManager.emptyString
+                  fontBold: true
+                  fontSize: 14
               }
               // Note: workaround for translations in listElements
               // ListElement: cannot use script for property value, so

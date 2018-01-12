@@ -71,10 +71,11 @@ Item {
         Text {
             id: inputLabel
             anchors.top: parent.top
+            anchors.topMargin: 2
             anchors.left: parent.left
             font.family: Style.fontRegular.name
-            font.pixelSize: 16
-            font.bold: false
+            font.pixelSize: 14
+            font.bold: true
             textFormat: Text.RichText
             color: Style.defaultFontColor
 
