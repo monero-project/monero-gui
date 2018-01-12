@@ -184,11 +184,7 @@ Rectangle {
             anchors.topMargin: 17
             width: 60
             text: qsTr("Generate") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
-            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype))
+            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
             onClicked: {
                 console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
                 root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
