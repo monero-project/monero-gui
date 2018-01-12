@@ -39,7 +39,7 @@ ColumnLayout {
     property alias readOnly: multiLine.readOnly
     property alias addressValidation: multiLine.addressValidation
     property alias labelButtonText: labelButton.text
-    property bool labelFontBold: false
+    property bool labelFontBold: true
     property bool labelButtonVisible: false
     property bool copyButton: false
     signal labelButtonClicked();
@@ -50,14 +50,14 @@ ColumnLayout {
         id: inputLabelRect
         color: "transparent"
         Layout.fillWidth: true
-        height: inputLabel.height + 10
+        height: (inputLabel.height + 10) * scaleRatio
 
         Text {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
             font.family: Style.fontRegular.name
-            font.pixelSize: 16 * scaleRatio
+            font.pixelSize: 14 * scaleRatio
             font.bold: labelFontBold
             textFormat: Text.RichText
             color: Style.defaultFontColor
@@ -92,15 +92,15 @@ ColumnLayout {
         addressValidation: true
         anchors.top: inputLabelRect.bottom
         Layout.fillWidth: true
-        topPadding: 10
-        bottomPadding: 10
+        topPadding: 10 * scaleRatio
+        bottomPadding: 10 * scaleRatio
 
         Text {
             id: placeholderLabel
             visible: multiLine.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 10
+            anchors.leftMargin: 10 * scaleRatio
             opacity: 0.25
             color: Style.defaultFontColor
             font.family: Style.fontRegular.name
