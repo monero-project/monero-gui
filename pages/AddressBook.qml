@@ -38,6 +38,7 @@ Rectangle {
     property var model
 
     ColumnLayout {
+        id: columnLayout
         anchors.margins: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.top: parent.top
@@ -115,6 +116,9 @@ Rectangle {
 
     Rectangle {
         id: tableRect
+        anchors.top: columnLayout.bottom
+        anchors.leftMargin: (isMobile)? 17 : 40
+        anchors.rightMargin: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -123,14 +127,6 @@ Rectangle {
 
         Behavior on height {
             NumberAnimation { duration: 200; easing.type: Easing.InQuad }
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: 1
-            color: "#808080"
         }
 
         Scroll {
@@ -148,9 +144,6 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.topMargin: 14
-            anchors.leftMargin: 14
-            anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
         }
