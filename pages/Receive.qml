@@ -47,38 +47,7 @@ Rectangle {
     property var model
     property var current_address
     property alias addressText : pageReceive.current_address
-    property alias paymentIdText : paymentIdLine.text
-    property alias integratedAddressText : integratedAddressLine.text
     property string trackingLineText: ""
-
-    function updatePaymentId(payment_id) {
-        if (typeof appWindow.currentWallet === 'undefined' || appWindow.currentWallet == null)
-            return
-
-        // generate a new one if not given as argument
-        if (typeof payment_id === 'undefined') {
-            payment_id = appWindow.currentWallet.generatePaymentId()
-            paymentIdLine.text = payment_id
-        }
-
-        if (payment_id.length > 0) {
-            integratedAddressLine.text = appWindow.currentWallet.integratedAddress(payment_id)
-            if (integratedAddressLine.text === "") {
-                integratedAddressLine.text = qsTr("Invalid payment ID")
-                paymentIdLine.error = true
-            }
-            else {
-                paymentIdLine.error = false
-            }
-        }
-        else {
-            paymentIdLine.text = ""
-            integratedAddressLine.text = ""
-            paymentIdLine.error = false
-        }
-
-        update()
-    }
 
     function makeQRCodeString() {
         var s = "monero:"
@@ -88,11 +57,6 @@ Rectangle {
         if (amount !== "") {
           s += (nfields++ ? "&" : "?")
           s += "tx_amount=" + amount
-        }
-        var pid = paymentIdLine.text.trim().toLowerCase()
-        if (pid !== "" && walletManager.paymentIdValid(pid)) {
-          s += (nfields++ ? "&" : "?")
-          s += "tx_payment_id=" + pid
         }
         return s
     }
@@ -121,13 +85,14 @@ Rectangle {
         var count = model.rowCount()
         var totalAmount = 0
         var nTransactions = 0
-        var list = ""
+        var list = []
         var blockchainHeight = 0
         for (var i = 0; i < count; ++i) {
             var idx = model.index(i, 0)
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
-            var payment_id = model.data(idx, TransactionHistoryModel.TransactionPaymentIdRole);
-            if (!isout && payment_id == paymentIdLine.text) {
+            var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
+            var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
+            if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == table.currentIndex) {
                 var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
                 totalAmount = walletManager.addi(totalAmount, amount)
                 nTransactions += 1
@@ -135,20 +100,24 @@ Rectangle {
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
                 var blockHeight = model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
                 if (blockHeight == 0) {
-                    list += qsTr("in the txpool: %1").arg(txid) + translationManager.emptyString
+                    list.push(qsTr("in the txpool: %1").arg(txid) + translationManager.emptyString)
                 } else {
                     if (blockchainHeight == 0)
                         blockchainHeight = walletManager.blockchainHeight()
                     var confirmations = blockchainHeight - blockHeight - 1
                     var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                     if (confirmations > 1) {
-                        list += qsTr("%2 confirmations: %3 (%1)").arg(txid).arg(confirmations).arg(displayAmount) + translationManager.emptyString
+                        list.push(qsTr("%2 confirmations: %3 (%1)").arg(txid).arg(confirmations).arg(displayAmount) + translationManager.emptyString)
                     } else {
-                        list += qsTr("1 confirmation: %2 (%1)").arg(txid).arg(displayAmount) + translationManager.emptyString
+                        list.push(qsTr("1 confirmation: %2 (%1)").arg(txid).arg(displayAmount) + translationManager.emptyString)
                     }
                 }
-                list += "<br>"
             }
+        }
+        // if there are too many txes, only show the first 3
+        if (list.length > 3) {
+            list.length = 3;
+            list.push("...");
         }
 
         if (nTransactions == 0) {
@@ -168,7 +137,7 @@ Rectangle {
             }
         }
 
-        setTrackingLineText(text + "<br>" + list)
+        setTrackingLineText(text + "<br>" + list.join("<br>"))
     }
 
     Clipboard { id: clipboard }
@@ -260,93 +229,6 @@ Rectangle {
             }
         }
 
-        GridLayout {
-            id: paymentIdRow
-            columns:2
-            Label {
-                Layout.columnSpan: 2
-                id: paymentIdLabel
-                text: qsTr("Payment ID") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-                id: paymentIdLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("16 hexadecimal characters") + translationManager.emptyString;
-                readOnly: false
-                onTextChanged: updatePaymentId(paymentIdLine.text)
-
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (paymentIdLine.text.length > 0) {
-                            clipboard.setText(paymentIdLine.text)
-                            appWindow.showStatusMessage(qsTr("Payment ID copied to clipboard"),3)
-                        }
-                    }
-                }
-            }
-
-            StandardButton {
-                id: generatePaymentId
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Generate") + translationManager.emptyString;
-                onClicked: updatePaymentId()
-            }
-
-            StandardButton {
-                id: clearPaymentId
-                enabled: !!paymentIdLine.text
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Clear") + translationManager.emptyString;
-                onClicked: updatePaymentId("")
-            }
-        }
-         
-        ColumnLayout {
-            id: integratedAddressRow
-            Label {
-                id: integratedAddressLabel
-                text: qsTr("Integrated address") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-
-                id: integratedAddressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Generate payment ID for integrated address") + translationManager.emptyString
-                readOnly: true
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                onTextChanged: cursorPosition = 0
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (integratedAddressLine.text.length > 0) {
-                            clipboard.setText(integratedAddressLine.text)
-                            appWindow.showStatusMessage(qsTr("Integrated address copied to clipboard"),3)
-                        }
-                    }
-                }
-
-            }
-        }
-
         ColumnLayout {
             id: amountRow
             Label {
@@ -390,7 +272,6 @@ Rectangle {
                     trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
                     trackingHowToUseDialog.text = qsTr(
                         "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
-                        "<p>Click Generate to create a random payment id for a new customer</p> " +
                         "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
                         "supports QR code scanning).</p>" +
                         "<p>This page will automatically scan the blockchain and the tx pool " +
