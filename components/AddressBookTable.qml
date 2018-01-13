@@ -53,7 +53,7 @@ ListView {
         id: delegate
         height: 64
         width: listView.width
-        color: index % 2 ? "#ee6000" : "#3e3e3e"
+        color: "transparent"
         z: listView.count - index
         function collapseDropdown() { dropdown.expanded = false }
 
@@ -62,7 +62,7 @@ ListView {
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 12
-            width: text.length ? (descriptionArea.containsMouse ? dropdown.x - x - 12 : 139) : 0
+            width: text.length ? (descriptionArea.containsMouse ? 139 : 139) : 0
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 19
@@ -89,6 +89,7 @@ ListView {
             font.pixelSize: 16
             color: "#ffffff"
             text: address
+            readOnly: true
         }
 
         Text {
@@ -111,7 +112,7 @@ ListView {
             anchors.leftMargin: 12
             anchors.rightMargin: 12
             anchors.right: dropdown.left
-
+            readOnly: true
 
             font.family: "Arial"
             font.pixelSize: 13
@@ -164,7 +165,7 @@ ListView {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             height: 1
-            color: "#808080"
+            color: "#404040"
         }
     }
 }
