@@ -280,22 +280,35 @@ macx {
     #     message("using static libraries")
     #     LIBS+= -Wl,-Bstatic
     # }
+    system(which brew) {
+        LIBS+= \
+            -L/usr/local/lib \
+            -L/usr/local/opt/openssl/lib \
+            -L/usr/local/opt/boost/lib \
+            -lboost_serialization \
+            -lboost_system \
+            -lboost_date_time \
+            -lboost_filesystem \
+            -lboost_regex \
+            -lboost_chrono \
+            -lboost_program_options
+    } else {
+        LIBS+= \
+            -L/opt/local/lib \
+            -lboost_serialization-mt \
+            -lboost_system-mt \
+            -lboost_date_time-mt \
+            -lboost_filesystem-mt \
+            -lboost_regex-mt \
+            -lboost_chrono-mt \
+            -lboost_program_options-mt
+    }
+
     LIBS+= \
-        -L/usr/local/lib \
-        -L/usr/local/opt/openssl/lib \
-        -L/usr/local/opt/boost/lib \
-        -lboost_serialization \
         -lboost_thread-mt \
-        -lboost_system \
-        -lboost_date_time \
-        -lboost_filesystem \
-        -lboost_regex \
-        -lboost_chrono \
-        -lboost_program_options \
         -lssl \
         -lcrypto \
         -ldl
-
 }
 
 
