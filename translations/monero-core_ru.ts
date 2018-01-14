@@ -272,7 +272,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/10 подтверждений) {1/%2 ?}</translation>
+        <translation type="unfinished">(%1/%2 подтверждений)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/10 подтверждений) {1/%2 ?}</translation>
+        <translation type="unfinished">(%1/%2 подтверждений)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
@@ -1380,7 +1380,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDropdown.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished">Стандартная (x4 комиссия) {1 ?}</translation>
+        <translation type="unfinished">Стандартная (x1 комиссия)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="208"/>
@@ -1538,7 +1538,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished">Стандартная (x4 комиссия) {1 ?}</translation>
+        <translation type="unfinished">Стандартная (x1 комиссия)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="196"/>

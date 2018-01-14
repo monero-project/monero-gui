@@ -272,7 +272,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/10 confirmações) {1/%2 ?}</translation>
+        <translation type="unfinished">(%1/%2 confirmações)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/10 confirmações) {1/%2 ?}</translation>
+        <translation type="unfinished">(%1/%2 confirmações)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
