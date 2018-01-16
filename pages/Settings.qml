@@ -128,7 +128,7 @@ Rectangle {
                     confirmationDialog.onAcceptedCallback = function() {
                         walletManager.closeWallet();
                         walletManager.clearWalletCache(persistentSettings.wallet_path);
-                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.password,
+                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
                                                           persistentSettings.testnet);
                     }
 
@@ -556,7 +556,7 @@ Rectangle {
                 onClicked: {
                     currentWallet.walletCreationHeight = restoreHeight.text
                     // Restore height is saved in .keys file. Set password to trigger rewrite.
-                    currentWallet.setPassword(appWindow.password)
+                    currentWallet.setPassword(appWindow.walletPassword)
                     restoreHeightRow.visible = false
 
                     // Show confirmation dialog
@@ -573,7 +573,7 @@ Rectangle {
                     confirmationDialog.onAcceptedCallback = function() {
                         walletManager.closeWallet();
                         walletManager.clearWalletCache(persistentSettings.wallet_path);
-                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.password,
+                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
                                                           persistentSettings.testnet);
                     }
 

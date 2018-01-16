@@ -224,7 +224,7 @@ ApplicationWindow {
             var wallet_path = walletPath();
             if(isIOS)
                 wallet_path = moneroAccountsDir + wallet_path;
-            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.password);
+            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", testnet: ", persistentSettings.testnet);
             walletManager.openWalletAsync(wallet_path, walletPassword,
                                               persistentSettings.testnet);
