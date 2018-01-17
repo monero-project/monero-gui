@@ -1825,7 +1825,7 @@ Ringsize: </source>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Эту seed-фразу очень важно записать и хранить в тайне. Это все что нужно для резервной копии и восстановления вашого кошелька.</translation>
+        <translation>Эту seed-фразу очень важно записать и хранить в тайне. Это все что нужно для резервной копии и восстановления вашего кошелька.</translation>
     </message>
 </context>
 <context>
