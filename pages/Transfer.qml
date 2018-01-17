@@ -191,8 +191,9 @@ Rectangle {
               ListModel {
                    id: priorityModelV5
 
+                   ListElement { column1: qsTr("Default") ; column2: ""; priority: 0}
                    ListElement { column1: qsTr("Slow (x0.25 fee)") ; column2: ""; priority: 1}
-                   ListElement { column1: qsTr("Default (x1 fee)") ; column2: ""; priority: 2 }
+                   ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
                    ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
                    ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
 
@@ -642,7 +643,7 @@ Rectangle {
 
     function updatePriorityDropdown() {
         priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 1
+        priorityDropdown.currentIndex = 0
         priorityDropdown.update()
     }
 
