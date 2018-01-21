@@ -43,14 +43,23 @@ Item {
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
+    property string borderColor: {
+        if(input.activeFocus){
+            return Qt.rgba(255, 255, 255, 0.35);
+        } else {
+            return Qt.rgba(255, 255, 255, 0.25);
+        }
+    }
     property bool borderDisabled: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
     property bool fontBold: true
+    property alias fontColor: input.color
     property bool error: false
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
+    property string labelFontFamily: Style.fontRegular.name
     property string backgroundColor: "transparent"
     property string tipText: ""
     property int labelFontSize: 14 * scaleRatio
@@ -59,6 +68,7 @@ Item {
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
     property int inputHeight: 42 * scaleRatio
+
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();
@@ -90,7 +100,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 2 * scaleRatio
-        font.family: Style.fontRegular.name
+        font.family: labelFontFamily
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
@@ -158,13 +168,7 @@ Item {
             color: backgroundColor
             anchors.fill: parent
             border.width: borderDisabled ? 0 : 1
-            border.color: {
-                if(input.activeFocus){
-                    return Qt.rgba(255, 255, 255, 0.35);
-                } else {
-                    return Qt.rgba(255, 255, 255, 0.25);
-                }
-            }
+            border.color: borderColor
             radius: 4
         }
 

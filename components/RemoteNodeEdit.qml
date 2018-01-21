@@ -40,6 +40,11 @@ GridLayout {
     property alias daemonAddrLabelText: daemonAddr.labelText
     property alias daemonPortLabelText: daemonPort.labelText
 
+    property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
+    property string lineEditBackgroundColor: "white"
+    property string lineEditFontColor: "black"
+    property bool lineEditFontBold: true
+
     signal editingFinished()
 
     function getAddress() {
@@ -51,6 +56,10 @@ GridLayout {
         Layout.fillWidth: true
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         onEditingFinished: root.editingFinished()
+        borderColor: lineEditBorderColor
+        backgroundColor: lineEditBackgroundColor
+        fontColor: lineEditFontColor
+        fontBold: lineEditFontBold
     }
 
     LineEdit {
@@ -58,5 +67,10 @@ GridLayout {
         Layout.fillWidth: true
         placeholderText: qsTr("Port") + translationManager.emptyString
         onEditingFinished: root.editingFinished()
+
+        borderColor: lineEditBorderColor
+        backgroundColor: lineEditBackgroundColor
+        fontColor: lineEditFontColor
+        fontBold: lineEditFontBold
     }
 }

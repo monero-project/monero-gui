@@ -124,6 +124,7 @@ ColumnLayout {
             CheckBox {
                 id: localNode
                 text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
@@ -151,6 +152,11 @@ ColumnLayout {
                 Layout.fillWidth: true
                 text: persistentSettings.blockchainDataDir
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
+
+                borderColor: Qt.rgba(0, 0, 0, 0.15)
+                backgroundColor: "white"
+                fontColor: "black"
+                fontBold: false
 
                 MouseArea {
                     anchors.fill: parent
@@ -193,7 +199,6 @@ ColumnLayout {
                     localNode.checked = false
                 }
             }
-
         }
 
         RowLayout {
@@ -204,6 +209,10 @@ ColumnLayout {
                 property var rna: persistentSettings.remoteNodeAddress
                 daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
                 daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+                lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
+                lineEditBackgroundColor: "white"
+                lineEditFontColor: "black"
+                lineEditFontBold: false
             }
         }
     }
