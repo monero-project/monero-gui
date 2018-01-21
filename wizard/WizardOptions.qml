@@ -245,6 +245,7 @@ ColumnLayout {
             CheckBox {
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
+                checkedIcon: "../images/checkedVioletIcon.png"
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio

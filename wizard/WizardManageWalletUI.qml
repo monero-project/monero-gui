@@ -154,6 +154,8 @@ ColumnLayout {
 
         Label {
             Layout.topMargin: 20 * scaleRatio
+            fontFamily: "Ariel"
+            fontColor: "#555555"
             fontSize: 14 * scaleRatio
             text:  qsTr("Wallet name")
                    + translationManager.emptyString
@@ -166,6 +168,10 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             text: defaultAccountName
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
 
@@ -232,6 +238,10 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
         LineEdit {
             Layout.fillWidth: true
@@ -240,6 +250,10 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
 
         }
         LineEdit {
@@ -249,6 +263,10 @@ ColumnLayout {
             id: spendKeyLine
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
     
@@ -263,6 +281,10 @@ ColumnLayout {
             validator: IntValidator {
                 bottom:0
             }
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
 
@@ -272,6 +294,8 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: 20 * scaleRatio
             fontSize: 14
+            fontFamily: "Ariel"
+            fontColor: "#555555"
             text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
 
@@ -292,6 +316,10 @@ ColumnLayout {
                     fileUrlInput.focus = true
                 }
             }
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
 
         FileDialog {

@@ -39,6 +39,8 @@ Item {
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
     property bool fontBold: false
+    property string fontColor: Style.defaultFontColor
+    property string fontFamily: Style.fontRegular.name
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
@@ -53,10 +55,10 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * scaleRatio
         anchors.left: parent.left
-        font.family: Style.fontRegular.name
+        font.family: fontFamily
         font.pixelSize: fontSize
         font.bold: fontBold
-        color: Style.defaultFontColor
+        color: fontColor
         onLinkActivated: item.linkActivated()
     }
 
