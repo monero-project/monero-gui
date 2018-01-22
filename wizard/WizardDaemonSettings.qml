@@ -55,6 +55,7 @@ ColumnLayout {
     function onPageClosed(settingsObject) {
         appWindow.persistentSettings.useRemoteNode = remoteNode.checked
         appWindow.persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+        appWindow.persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
         return true
     }
 
@@ -164,6 +165,19 @@ ColumnLayout {
                     }
                 }
 
+            }
+            Label {
+                Layout.fillWidth: true
+                Layout.topMargin: 20 * scaleRatio
+                fontSize: 14 * scaleRatio
+                text: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
+            }
+            RemoteNodeEdit {
+                Layout.minimumWidth: 300 * scaleRatio
+                opacity: localNode.checked
+                id: bootstrapNodeEdit
+                daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
+                daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
             }
         }
 

@@ -478,7 +478,7 @@ ApplicationWindow {
         currentWallet.pauseRefresh();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir);
+        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress);
         persistentSettings.daemonFlags = flags
     }
 
@@ -1006,6 +1006,7 @@ ApplicationWindow {
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
+        property string bootstrapNodeAddress: ""
     }
 
     // Information dialog

@@ -14,7 +14,7 @@ public:
 
     static DaemonManager * instance(const QStringList *args);
 
-    Q_INVOKABLE bool start(const QString &flags, bool testnet, const QString &dataDir = "");
+    Q_INVOKABLE bool start(const QString &flags, bool testnet, const QString &dataDir = "", const QString &bootstrapNodeAddress = "");
     Q_INVOKABLE bool stop(bool testnet);
 
     // return true if daemon process is started

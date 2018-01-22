@@ -32,7 +32,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
     return m_instance;
 }
 
-bool DaemonManager::start(const QString &flags, bool testnet, const QString &dataDir)
+bool DaemonManager::start(const QString &flags, bool testnet, const QString &dataDir, const QString &bootstrapNodeAddress)
 {
     // prepare command line arguments and pass to monerod
     QStringList arguments;
@@ -65,6 +65,11 @@ bool DaemonManager::start(const QString &flags, bool testnet, const QString &dat
         else
             arguments << "--data-dir";
         arguments << dataDir;
+    }
+
+    // Bootstrap node address
+    if(!bootstrapNodeAddress.isEmpty()) {
+        arguments << "--bootstrap-daemon-address" << bootstrapNodeAddress;
     }
 
     arguments << "--check-updates" << "disabled";

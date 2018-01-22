@@ -260,6 +260,9 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
+                    // Update bootstrap daemon address
+                    persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+
                     // Set current daemon address to local
                     appWindow.currentDaemonAddress = appWindow.localDaemonAddress
                     appWindow.startDaemon(daemonFlags.text)
@@ -371,6 +374,26 @@ Rectangle {
                 text: persistentSettings.daemonPassword
                 placeholderText: qsTr("Password") + translationManager.emptyString
                 echoMode: TextInput.Password
+            }
+        }
+
+        RowLayout {
+            visible: persistentSettings.startLocalNode
+            ColumnLayout {
+                Label {
+                    color: "#4A4949"
+                    text: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
+                }
+                RemoteNodeEdit {
+                    id: bootstrapNodeEdit
+                    Layout.minimumWidth: 100 * scaleRatio
+                    daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
+                    daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.bootstrapNodeAddress = daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+                        console.log("setting bootstrap node to " + persistentSettings.bootstrapNodeAddress)
+                    }
+                }
             }
         }
 
