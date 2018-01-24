@@ -130,6 +130,10 @@ ColumnLayout {
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
                 visible: !isAndroid && !isIOS
+                onClicked: {
+                    checked = true;
+                    remoteNode.checked = false;
+                }
             }
         }
 
@@ -175,6 +179,10 @@ ColumnLayout {
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.useRemoteNode
+                onClicked: {
+                    checked = true
+                    localNode.checked = false
+                }
             }
 
         }

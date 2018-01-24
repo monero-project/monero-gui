@@ -248,7 +248,7 @@ Rectangle {
         }
 
         GridLayout {
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.useRemoteNode
             id: daemonStatusRow
             columns: (isMobile) ?  2 : 4
             StandardButton {
@@ -325,7 +325,7 @@ Rectangle {
 
 
         RowLayout {
-            visible: daemonAdvanced.checked && !isMobile
+            visible: daemonAdvanced.checked && !isMobile && !persistentSettings.useRemoteNode
             id: daemonFlagsRow
             Label {
                 id: daemonFlagsLabel
@@ -343,7 +343,7 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            visible: daemonAdvanced.checked || isMobile
+            visible: (daemonAdvanced.checked || isMobile) && persistentSettings.useRemoteNode
             Label {
                 id: daemonLoginLabel
                 Layout.fillWidth: true
@@ -354,7 +354,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            visible: daemonAdvanced.checked || isMobile
+            visible: (daemonAdvanced.checked || isMobile) && persistentSettings.useRemoteNode
             LineEdit {
                 id: daemonUsername
                 Layout.preferredWidth:  100 * scaleRatio
