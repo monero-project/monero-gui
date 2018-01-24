@@ -54,7 +54,6 @@ ColumnLayout {
 
     function onPageClosed(settingsObject) {
         appWindow.persistentSettings.useRemoteNode = remoteNode.checked
-        appWindow.persistentSettings.startLocalNode = localNode.checked
         appWindow.persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
         return true
     }
@@ -129,7 +128,7 @@ ColumnLayout {
                 fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.startLocalNode && !isAndroid && !isIOS
+                checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
                 visible: !isAndroid && !isIOS
             }
         }

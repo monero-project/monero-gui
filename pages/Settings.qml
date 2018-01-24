@@ -296,7 +296,7 @@ Rectangle {
 
         ColumnLayout {
             id: blockchainFolderRow
-            visible: !isMobile
+            visible: !isMobile && !persistentSettings.useRemoteNode
             Label {
                 id: blockchainFolderLabel
                 color: "#4A4949"

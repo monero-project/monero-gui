@@ -436,7 +436,7 @@ ApplicationWindow {
                 if(localNodeConnected) {
                     leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
                     leftPanel.progressBar.visible = true
-                } else if (persistentSettings.startLocalNode && !startLocalNodeCancelled) {
+                } else if (!persistentSettings.useRemoteNode && !startLocalNodeCancelled) {
                     daemonManagerDialog.open()
                 }
 
@@ -1004,7 +1004,6 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property string blockchainDataDir: ""
-        property bool startLocalNode: true
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
     }
