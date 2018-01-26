@@ -35,6 +35,8 @@ HEADERS += \
     src/QR-Code-generator/QrSegment.hpp \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
+    src/model/SubaddressModel.h \
+    src/libwalletqt/Subaddress.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
     MainApp.h
@@ -58,6 +60,8 @@ SOURCES += main.cpp \
     src/QR-Code-generator/QrSegment.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
+    src/model/SubaddressModel.cpp \
+    src/libwalletqt/Subaddress.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
     MainApp.cpp
