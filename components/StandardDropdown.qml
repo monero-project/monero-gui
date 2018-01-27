@@ -39,12 +39,12 @@ Item {
     property string textColor: "#FFFFFF"
     property alias currentIndex: column.currentIndex
     property bool expanded: false
-    property int dropdownHeight: 40
+    property int dropdownHeight: 42
     property int fontHeaderSize: 16 * scaleRatio
     property int fontItemSize: 14 * scaleRatio
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
-    property bool headerFontBold: true
+    property bool headerFontBold: false
 
     height: dropdownHeight
 
@@ -90,7 +90,7 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
-            font.family: Style.fontRegular.name
+            font.family: Style.fontRegular
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
             color: "#FFFFFF"

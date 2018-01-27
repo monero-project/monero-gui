@@ -35,14 +35,21 @@ import "." 1.0
 TextArea {
     property bool error: false
     property bool addressValidation: false
+    property bool wrapAnywhere: true
     id: textArea
     font.family: Style.fontRegular.name
     font.pixelSize: 18 * scaleRatio
-    font.bold: true
+    font.bold: false
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: Style.defaultFontColor
-    wrapMode: Text.WrapAnywhere
+    wrapMode: {
+        if(wrapAnywhere){
+            return Text.WrapAnywhere;
+        } else {
+            return Text.WordWrap;
+        }
+    }
     onTextChanged: {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`

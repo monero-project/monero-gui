@@ -156,7 +156,7 @@ ListView {
                 id: txrxLabel
                 anchors.left: arrowImage.right
                 anchors.leftMargin: 18 * scaleRatio
-                font.family: Style.fontRegular.name
+                font.family: Style.fontLight.name
                 font.pixelSize: 14 * scaleRatio
                 text: isOut ? "Sent" : "Received"
                 color: "#808080"
@@ -195,7 +195,22 @@ ListView {
                 font.family: Style.fontBold.name
                 font.pixelSize: 18 * scaleRatio
                 font.bold: true
-                text: { return (displayAmount * 1) + " XMR" }  // hack, removes trailing zeros
+                text: {
+                    // hack, removes trailing zeros
+                    var amount = (displayAmount * 1);
+
+                    // sometimes, displayAmount is 0 - no idea why.
+                    // in that case, we try to get the amount from
+                    // the `destinations` string.
+                    if(amount === 0){
+                        amount = destinations.split(" ")[0].split(":")[0];
+                        amount = (amount *1);
+                    }
+
+                    // sometimes this destinations string also shows 0,
+                    // at which point we run out of options.
+                    return amount + " XMR";
+                }
                 color: isOut ? "white" : "#2eb358"
             }
 

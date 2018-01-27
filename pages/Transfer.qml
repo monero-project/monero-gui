@@ -120,7 +120,7 @@ Rectangle {
       anchors.top: parent.top
       anchors.right: parent.right
 
-      spacing: 26 * scaleRatio
+      spacing: 30 * scaleRatio
 
       GridLayout {
           columns: (isMobile)? 1 : 2
@@ -160,8 +160,9 @@ Rectangle {
               Layout.fillWidth: true
               Label {
                   id: transactionPriority
+                  Layout.topMargin: 14
                   text: qsTr("Transaction priority") + translationManager.emptyString
-                  fontBold: true
+                  fontBold: false
                   fontSize: 14
               }
               // Note: workaround for translations in listElements
@@ -185,6 +186,7 @@ Rectangle {
               StandardDropdown {
                   Layout.fillWidth: true
                   id: priorityDropdown
+                  Layout.topMargin: 6
                   shadowReleasedColor: "#FF4304"
                   shadowPressedColor: "#B32D00"
                   releasedColor: "#363636"
@@ -278,8 +280,7 @@ Rectangle {
           StandardButton {
               id: sendButton
               rightIcon: "../images/rightIcon.png"
-              Layout.bottomMargin: 17 * scaleRatio
-              Layout.topMargin: 17 * scaleRatio
+              Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
               enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
               onClicked: {
@@ -317,7 +318,7 @@ Rectangle {
     } // pageRoot
 
     Rectangle {
-        id:desaturate
+        id: desaturate
         color:"black"
         anchors.fill: parent
         opacity: 0.1
@@ -329,18 +330,18 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: (isMobile)? 17 : 20
-        anchors.topMargin: 40 * scaleRatio
+        anchors.topMargin: 32 * scaleRatio
         spacing: 26 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
-            CheckBox {
+            CheckBox2 {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
                 onClicked: {
                     persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
                 }
-                text: qsTr("Show advanced options") + translationManager.emptyString
+                text: qsTr("Advanced options") + translationManager.emptyString
             }
         }
 
@@ -401,6 +402,7 @@ Rectangle {
                 id: sweepUnmixableButton
                 text: qsTr("Sweep Unmixable") + translationManager.emptyString
                 enabled : pageRoot.enabled
+                small: true
                 onClicked: {
                     console.log("Transfer: sweepUnmixableClicked")
                     root.sweepUnmixableClicked()
@@ -412,6 +414,7 @@ Rectangle {
                 text: qsTr("Create tx file") + translationManager.emptyString
                 visible: appWindow.viewOnly
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+                small: true
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
                     var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -428,6 +431,7 @@ Rectangle {
             StandardButton {
                 id: signTxButton
                 text: qsTr("Sign tx file") + translationManager.emptyString
+                small: true
                 visible: !appWindow.viewOnly
                 onClicked: {
                     console.log("Transfer: sign tx clicked")
@@ -438,6 +442,7 @@ Rectangle {
             StandardButton {
                 id: submitTxButton
                 text: qsTr("Submit tx file") + translationManager.emptyString
+                small: true
                 visible: appWindow.viewOnly
                 enabled: pageRoot.enabled
                 onClicked: {
@@ -446,11 +451,7 @@ Rectangle {
                 }
             }
         }
-
-
     }
-
-
 
     //SignTxDialog
     FileDialog {

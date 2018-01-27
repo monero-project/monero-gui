@@ -144,6 +144,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 20 * scaleRatio
                 fontSize: 14 * scaleRatio
+                fontColor: "black"
                 text: qsTr("Blockchain location") + translationManager.emptyString
             }
             LineEdit {

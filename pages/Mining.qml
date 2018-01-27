@@ -34,7 +34,7 @@ import moneroComponents.Wallet 1.0
 
 Rectangle {
     id: root
-    color: "#F0EEEE"
+    color: "transparent"
     property var currentHashRate: 0
 
     /* main layout */
@@ -74,13 +74,16 @@ Rectangle {
                 text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
+                font.family: Style.fontRegular
+                font.pixelSize: 14 * scaleRatio
+                color: Style.defaultFontColor
             }
 
             RowLayout {
                 id: soloMinerThreadsRow
                 Label {
                     id: soloMinerThreadsLabel
-                    color: "#4A4949"
+                    color: Style.defaultFontColor
                     text: qsTr("CPU threads") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
@@ -122,7 +125,7 @@ Rectangle {
             RowLayout {
                 Label {
                     id: manageSoloMinerLabel
-                    color: "#4A4949"
+                    color: Style.defaultFontColor
                     text: qsTr("Manage miner") + translationManager.emptyString
                     fontSize: 16
                 }
@@ -165,6 +168,7 @@ Rectangle {
         Text {
             id: statusText
             text: qsTr("Status: not mining")
+            color: Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.Wrap
         }

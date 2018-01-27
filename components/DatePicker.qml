@@ -73,9 +73,9 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 2
             anchors.left: parent.left
-            font.family: Style.fontRegular.name
+            font.family: Style.fontLight
             font.pixelSize: 14
-            font.bold: true
+            font.bold: false
             textFormat: Text.RichText
             color: Style.defaultFontColor
 

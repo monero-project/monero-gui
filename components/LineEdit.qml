@@ -53,17 +53,16 @@ Item {
     property bool borderDisabled: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
-    property bool fontBold: true
+    property bool fontBold: false
     property alias fontColor: input.color
     property bool error: false
     property alias labelText: inputLabel.text
     property alias labelColor: inputLabel.color
     property alias labelTextFormat: inputLabel.textFormat
-    property string labelFontFamily: Style.fontRegular.name
     property string backgroundColor: "transparent"
     property string tipText: ""
     property int labelFontSize: 14 * scaleRatio
-    property bool labelFontBold: true
+    property bool labelFontBold: false
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
@@ -100,7 +99,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 2 * scaleRatio
-        font.family: labelFontFamily
+        font.family: Style.fontLight
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
@@ -132,7 +131,7 @@ Item {
         id: inputItem
         height: inputHeight * scaleRatio
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
-        anchors.topMargin: showingHeader ? 6 * scaleRatio : 2
+        anchors.topMargin: showingHeader ? 12 * scaleRatio : 2
         width: parent.width
 
         Text {
@@ -189,7 +188,7 @@ Item {
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 38 : 0
             font.pixelSize: item.fontSize
-            font.bold: fontBold
+            font.bold: item.fontBold
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()

@@ -219,7 +219,6 @@ Rectangle {
                     Layout.minimumWidth: 120 * scaleRatio
                     text: qsTr("Sort") + translationManager.emptyString
                     fontSize: 14
-                    fontBold: true
                 }
 
                 ListModel {
