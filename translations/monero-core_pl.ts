@@ -2062,27 +2062,29 @@ Opłata: </translation>
     <message>
         <location filename="../main.qml" line="1317"/>
         <source>Daemon is running</source>
-        <translation type="unfinished"></translation>
+        <!-- Daemon has no good translation in Polish. Closest one is usługa (eng. Service) -->
+        <translation type="unfinished">Usługa działa w tle</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1318"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation type="unfinished"></translation>
+        <!-- From non-power-user point of view this translation is good enough -->
+        <translation type="unfinished">Usługa będzie dalej działała w tle po zamknięciu okna</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1320"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Zatrzymaj proces</translation>
+        <translation type="unfinished">Zatrzymaj działanie w tle</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1355"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dostępna jest nowa wersja programu monero-wallet-gui: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="566"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>niewystarczające środki: Dostępne saldo: %1</translation>
+        <translation>Niewystarczające środki: Dostępne saldo: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="669"/>
@@ -2097,7 +2099,7 @@ Opłata: </translation>
     <message>
         <location filename="../main.qml" line="678"/>
         <source>Transaction saved to file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trnsakcja zapisana do pliku: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="728"/>
@@ -2107,7 +2109,7 @@ Opłata: </translation>
     <message>
         <location filename="../main.qml" line="744"/>
         <source>Balance (syncing)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Saldo (aktualizacja)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="744"/>
@@ -2138,6 +2140,8 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../main.qml" line="723"/>
+        <!-- In my opinion it should changed to: -->
+        <!-- This address received %1 monero, but the transaction is not yet confirmed -->
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Ten adres otrzymał %1 monero, ale transakcja nie została jeszcze wykopana</translation>
     </message>
@@ -2149,16 +2153,18 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="1002"/>
         <source>Program setup wizard</source>
-        <translation type="unfinished"></translation>
+        <!-- I don't know good translation for this but this one occurs commonly -->
+        <translation type="unfinished">Kreator instalacji programu</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1017"/>
         <source>Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Monero</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1065"/>
         <source>send to the same destination</source>
+        <!-- I think: Wyślij do tego samego odbiorcy would be better -->
         <translation>wyślij do tego samego celu</translation>
     </message>
 </context>
