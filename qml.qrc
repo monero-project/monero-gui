@@ -201,5 +201,6 @@
         <file>images/downArrow.png</file>
         <file>images/historyBorderRadius.png</file>
         <file>components/HistoryTableInnerColumn.qml</file>
+        <file>components/CheckBox2.qml</file>
     </qresource>
 </RCC>

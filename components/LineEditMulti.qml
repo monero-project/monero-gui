@@ -39,9 +39,10 @@ ColumnLayout {
     property alias readOnly: multiLine.readOnly
     property alias addressValidation: multiLine.addressValidation
     property alias labelButtonText: labelButton.text
-    property bool labelFontBold: true
+    property bool labelFontBold: false
     property bool labelButtonVisible: false
     property bool copyButton: false
+    property bool wrapAnywhere: true
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
 
@@ -56,7 +57,7 @@ ColumnLayout {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: Style.fontRegular.name
+            font.family: Style.fontLight
             font.pixelSize: 14 * scaleRatio
             font.bold: labelFontBold
             textFormat: Text.RichText
@@ -94,6 +95,7 @@ ColumnLayout {
         Layout.fillWidth: true
         topPadding: 10 * scaleRatio
         bottomPadding: 10 * scaleRatio
+        wrapAnywhere: parent.wrapAnywhere
 
         Text {
             id: placeholderLabel

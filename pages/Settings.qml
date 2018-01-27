@@ -239,6 +239,9 @@ Rectangle {
                     Layout.minimumWidth: 100 * scaleRatio
                     daemonAddrLabelText: qsTr("Address")
                     daemonPortLabelText: qsTr("Port")
+                    lineEditBackgroundColor: "transparent"
+                    lineEditFontColor: "white"
+                    lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
                     daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
                     daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
                     onEditingFinished: {

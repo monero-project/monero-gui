@@ -40,12 +40,10 @@ Item {
     property int fontSize: 16 * scaleRatio
     property bool fontBold: false
     property string fontColor: Style.defaultFontColor
-    property string fontFamily: Style.fontRegular.name
+    property string fontFamily: ""
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
-//    width: icon.x + icon.width * scaleRatio
-//    height: icon.height * scaleRatio
     height: label.height * scaleRatio
     width: label.width * scaleRatio
     Layout.topMargin: 10 * scaleRatio
@@ -55,7 +53,13 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * scaleRatio
         anchors.left: parent.left
-        font.family: fontFamily
+        font.family: {
+            if(fontFamily){
+                return fontFamily;
+            } else {
+                return Style.fontLight;
+            }
+        }
         font.pixelSize: fontSize
         font.bold: fontBold
         color: fontColor
