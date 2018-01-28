@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -546,7 +546,7 @@ Rectangle {
 
     function onPageCompleted() {
         if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
-            currentWallet.history.refresh()
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             table.addressBookModel = currentWallet ? currentWallet.addressBookModel : null
             transactionTypeDropdown.update()
         }

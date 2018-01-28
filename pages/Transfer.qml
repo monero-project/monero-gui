@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -41,7 +41,10 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
+    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>" +
+                                   qsTr("Start daemon") +
+                                   "</a><font size='2'>)</font>" +
+                                   translationManager.emptyString
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
@@ -184,15 +187,6 @@ Rectangle {
               // For translations to work, the strings need to be listed in
               // the file components/StandardDropdown.qml too.
               
-              // Priorities before v5
-              ListModel {
-                  id: priorityModel
-
-                  ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-                  ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-                  ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
-               }
-
               // Priorites after v5
               ListModel {
                    id: priorityModelV5
@@ -222,10 +216,12 @@ Rectangle {
           Label {
               id: addressLabel
               textFormat: Text.RichText
-              text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                          Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                    + translationManager.emptyString
-
+              text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                    qsTr("Address") +
+                    "<font size='2'> ( " +
+                    qsTr("Paste in or select from <a href='#'>Address book</a>") +
+                    " )</font>" +
+                    translationManager.emptyString
               onLinkActivated: appWindow.showPageRequest("AddressBook")
               Layout.fillWidth: true
           }
@@ -335,7 +331,7 @@ Rectangle {
               enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
               onClicked: {
                   console.log("Transfer: paymentClicked")
-                  var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                  var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                   console.log("priority: " + priority)
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
@@ -478,7 +474,7 @@ Rectangle {
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
-                    var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                    var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                     console.log("priority: " + priority)
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
