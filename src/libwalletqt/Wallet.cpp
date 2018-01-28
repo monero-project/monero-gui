@@ -3,9 +3,11 @@
 #include "UnsignedTransaction.h"
 #include "TransactionHistory.h"
 #include "AddressBook.h"
+#include "Subaddress.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "model/AddressBookModel.h"
+#include "model/SubaddressModel.h"
 #include "wallet/api/wallet2_api.h"
 
 #include <QFile>
@@ -155,9 +157,9 @@ bool Wallet::setPassword(const QString &password)
     return m_walletImpl->setPassword(password.toStdString());
 }
 
-QString Wallet::address() const
+QString Wallet::address(quint32 accountIndex, quint32 addressIndex) const
 {
-    return QString::fromStdString(m_walletImpl->address());
+    return QString::fromStdString(m_walletImpl->address(accountIndex, addressIndex));
 }
 
 QString Wallet::path() const
@@ -241,14 +243,63 @@ bool Wallet::viewOnly() const
     return m_walletImpl->watchOnly();
 }
 
-quint64 Wallet::balance() const
+quint64 Wallet::balance(quint32 accountIndex) const
 {
-    return m_walletImpl->balance();
+    return m_walletImpl->balance(accountIndex);
 }
 
-quint64 Wallet::unlockedBalance() const
+quint64 Wallet::balanceAll() const
 {
-    return m_walletImpl->unlockedBalance();
+    return m_walletImpl->balanceAll();
+}
+
+quint64 Wallet::unlockedBalance(quint32 accountIndex) const
+{
+    return m_walletImpl->unlockedBalance(accountIndex);
+}
+
+quint64 Wallet::unlockedBalanceAll() const
+{
+    return m_walletImpl->unlockedBalanceAll();
+}
+
+quint32 Wallet::currentSubaddressAccount() const
+{
+    return m_currentSubaddressAccount;
+}
+void Wallet::switchSubaddressAccount(quint32 accountIndex)
+{
+    if (accountIndex < numSubaddressAccounts())
+    {
+        m_currentSubaddressAccount = accountIndex;
+        m_subaddress->refresh(m_currentSubaddressAccount);
+        m_history->refresh(m_currentSubaddressAccount);
+    }
+}
+void Wallet::addSubaddressAccount(const QString& label)
+{
+    m_walletImpl->addSubaddressAccount(label.toStdString());
+    switchSubaddressAccount(numSubaddressAccounts() - 1);
+}
+quint32 Wallet::numSubaddressAccounts() const
+{
+    return m_walletImpl->numSubaddressAccounts();
+}
+quint32 Wallet::numSubaddresses(quint32 accountIndex) const
+{
+    return m_walletImpl->numSubaddresses(accountIndex);
+}
+void Wallet::addSubaddress(const QString& label)
+{
+    m_walletImpl->addSubaddress(currentSubaddressAccount(), label.toStdString());
+}
+QString Wallet::getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) const
+{
+    return QString::fromStdString(m_walletImpl->getSubaddressLabel(accountIndex, addressIndex));
+}
+void Wallet::setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label)
+{
+    m_walletImpl->setSubaddressLabel(accountIndex, addressIndex, label.toStdString());
 }
 
 quint64 Wallet::blockChainHeight() const
@@ -288,7 +339,8 @@ quint64 Wallet::daemonBlockChainTargetHeight() const
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();
-    m_history->refresh();
+    m_history->refresh(currentSubaddressAccount());
+    m_subaddress->refresh(currentSubaddressAccount());
     if (result)
         emit updated();
     return result;
@@ -324,9 +376,10 @@ PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QSt
                                               quint64 amount, quint32 mixin_count,
                                               PendingTransaction::Priority priority)
 {
+    std::set<uint32_t> subaddr_indices;
     Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
-                static_cast<Monero::PendingTransaction::Priority>(priority));
+                static_cast<Monero::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
     PendingTransaction * result = new PendingTransaction(ptImpl,0);
     return result;
 }
@@ -351,9 +404,10 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
 PendingTransaction *Wallet::createTransactionAll(const QString &dst_addr, const QString &payment_id,
                                                  quint32 mixin_count, PendingTransaction::Priority priority)
 {
+    std::set<uint32_t> subaddr_indices;
     Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
                 dst_addr.toStdString(), payment_id.toStdString(), Monero::optional<uint64_t>(), mixin_count,
-                static_cast<Monero::PendingTransaction::Priority>(priority));
+                static_cast<Monero::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
     PendingTransaction * result = new PendingTransaction(ptImpl, this);
     return result;
 }
@@ -458,6 +512,18 @@ AddressBookModel *Wallet::addressBookModel() const
     return m_addressBookModel;
 }
 
+Subaddress *Wallet::subaddress()
+{
+    return m_subaddress;
+}
+
+SubaddressModel *Wallet::subaddressModel()
+{
+    if (!m_subaddressModel) {
+        m_subaddressModel = new SubaddressModel(this, m_subaddress);
+    }
+    return m_subaddressModel;
+}
 
 QString Wallet::generatePaymentId() const
 {
@@ -520,6 +586,22 @@ QString Wallet::checkTxProof(const QString &txid, const QString &address, const 
     uint64_t confirmations;
     bool success = m_walletImpl->checkTxProof(txid.toStdString(), address.toStdString(), message.toStdString(), signature.toStdString(), good, received, in_pool, confirmations);
     std::string result = std::string(success ? "true" : "false") + "|" + std::string(good ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + std::string(in_pool ? "true" : "false") + "|" + QString::number(confirmations).toStdString();
+    return QString::fromStdString(result);
+}
+
+Q_INVOKABLE QString Wallet::getSpendProof(const QString &txid, const QString &message) const
+{
+    std::string result = m_walletImpl->getSpendProof(txid.toStdString(), message.toStdString());
+    if (result.empty())
+        result = "error|" + m_walletImpl->errorString();
+    return QString::fromStdString(result);
+}
+
+Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &message, const QString &signature) const
+{
+    bool good;
+    bool success = m_walletImpl->checkSpendProof(txid.toStdString(), message.toStdString(), signature.toStdString(), good);
+    std::string result = std::string(success ? "true" : "false") + "|" + std::string(!success ? m_walletImpl->errorString() : good ? "true" : "false");
     return QString::fromStdString(result);
 }
 
@@ -652,14 +734,18 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_historyModel(nullptr)
     , m_addressBook(nullptr)
     , m_addressBookModel(nullptr)
+    , m_subaddress(nullptr)
+    , m_subaddressModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
     , m_daemonBlockChainTargetHeightTtl(DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
+    , m_currentSubaddressAccount(0)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
+    m_subaddress = new Subaddress(m_walletImpl->subaddress(), this);
     m_walletImpl->setListener(new WalletListenerImpl(this));
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
     // start cache timers
@@ -680,6 +766,10 @@ Wallet::~Wallet()
 
     delete m_history;
     m_history = NULL;
+    delete m_addressBook;
+    m_addressBook = NULL;
+    delete m_subaddress;
+    m_subaddress = NULL;
     //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
     if(status() == Status_Critical)
         qDebug("Not storing wallet cache");

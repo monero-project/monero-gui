@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -112,7 +112,7 @@ Rectangle {
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }

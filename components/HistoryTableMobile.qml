@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -150,6 +150,8 @@ ListView {
                                 return qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
                         if (!isOut)
                             return qsTr("UNCONFIRMED") + translationManager.emptyString
+                        if (isFailed)
+                            return qsTr("FAILED") + translationManager.emptyString
                         return qsTr("PENDING") + translationManager.emptyString
 
                     }
