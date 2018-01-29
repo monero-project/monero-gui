@@ -27,9 +27,9 @@ public:
     Q_ENUM(Status)
 
     enum Priority {
-        Priority_Low    = Monero::UnsignedTransaction::Priority_Low,
-        Priority_Medium = Monero::UnsignedTransaction::Priority_Medium,
-        Priority_High   = Monero::UnsignedTransaction::Priority_High
+        Priority_Low    = Monero::PendingTransaction::Priority_Low,
+        Priority_Medium = Monero::PendingTransaction::Priority_Medium,
+        Priority_High   = Monero::PendingTransaction::Priority_High
     };
     Q_ENUM(Priority)
 
