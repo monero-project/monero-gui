@@ -26,13 +26,6 @@ public:
     };
     Q_ENUM(Status)
 
-    enum Priority {
-        Priority_Low    = Monero::UnsignedTransaction::Priority_Low,
-        Priority_Medium = Monero::UnsignedTransaction::Priority_Medium,
-        Priority_High   = Monero::UnsignedTransaction::Priority_High
-    };
-    Q_ENUM(Priority)
-
     Status status() const;
     QString errorString() const;
     Q_INVOKABLE quint64 amount(int index) const;
