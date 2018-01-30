@@ -658,7 +658,13 @@ QString Wallet::getDaemonLogPath() const
 
 QString Wallet::getWalletLogPath() const
 {
-    return QCoreApplication::applicationDirPath() + "/monero-wallet-gui.log";
+    const QString filename("monero-wallet-gui.log");
+
+#ifdef Q_OS_MACOS
+    return QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs/" + filename;
+#else
+    return QCoreApplication::applicationDirPath() + "/" + filename;
+#endif
 }
 
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
