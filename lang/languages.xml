@@ -13,6 +13,7 @@ List of available languages for your wallet's seed:
 7 : русский язык    (Russian)
 8 : 日本語          (Japanese)
 9 : 简体中文 (中国) (Simplified Chinese (Mainland))
+11 : Turkey         (Turkish)
 -->
         <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
         <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/> -->
@@ -43,9 +44,7 @@ List of available languages for your wallet's seed:
         <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/slovakia.png" qs="none"/>
         <language display_name="Arabic" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
         <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/slovenia.png" qs="none"/>
-<<<<<<< HEAD
         <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
-=======
         <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
->>>>>>> Catalan translation
+        <language display_name="Turkish" locale="tr_TR" wallet_language="Turkish" flag="/lang/flags/tr.png" qs="none"/>
 </languages>
