@@ -520,7 +520,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
         <source>Seed &amp; Keys</source>
-        <translation>Seed & sleutels</translation>
+        <translation>Seed &amp; sleutels</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
