@@ -129,6 +129,7 @@
         <file>lang/flags/taiwan.png</file>
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
+        <file>lang/flags/srbija.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
