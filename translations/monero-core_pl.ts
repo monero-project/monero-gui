@@ -123,10 +123,6 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <!-- 
-            Polish uses different noun forms for different numbers (e.g. 1 sekundę, 2 sekundy, 5 - sekund) 
-            AFAIK Mozzilla provides scripts that allow to choose valid version for language
-        -->
         <translation type="unfinished">Uruchomienie węzła za %1 sekund</translation>
     </message>
     <message>
@@ -251,7 +247,6 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <!-- If tx is abbrev from transaction, Klucz trans. or Klucz op. should be used --> 
         <translation>Klucz trans.:</translation>
     </message>
     <message>
@@ -262,7 +257,6 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Destinations:</source>
-        <!-- If it is transaction receivers adresses Odbiorcy is valid, otherwise Cele: -->
         <translation>Odbiorcy:</translation>
     </message>
     <message>
@@ -485,13 +479,11 @@
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
-        <!-- Monero users knows what Testnet means and there is no good, short, polish word for it --> 
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="320"/>
         <source>Address book</source>
-        <!-- Odbiorcy is maybe even better in this context -->
         <translation>Książka adresowa</translation>
     </message>
     <message>
@@ -517,7 +509,6 @@
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
         <source>Mining</source>
-        <!-- It may be untranslated also -->
         <translation type="unfinished">Kopanie</translation>
     </message>
     <message>
@@ -588,9 +579,6 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
-        <!--- In my opinion this text should start with:
-        "Mining gives you a chance to earn extra Monero, in exchange to you computer power." 
-        It shows what user can gain with mining   --> 
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation type="unfinished">Kopanie z udziałem twojego komputera wzmacnia sieć Monero. Im więcej osób kopie tym trudniej zaatakować sieć, a każdy najmniejszy wkład jest pomocny. Dodatkowo kopanie daje ci małą szansę na zarobienie Monero. Twój komputer utworzy hashe/sumy kontrolne aby znaleźć rozwiązanie dla bloku. Jeżeli znajdziesz rozwiązanie wtedy otrzymasz swój udział w postaci zapłaty w Monero. Powodzenia!</translation>
     </message>
@@ -1152,12 +1140,12 @@
     <message>
         <location filename="../pages/Settings.qml" line="550"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="563"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odśwież dane portfela</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="564"/>
@@ -1169,52 +1157,58 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Czy na pewno chcesz odświeżyć dane portfela?
+Następujące dane zostaną skasowane
+- Dane odbiorców
+- Klucze transakcji
+- Opisy transakcji
+
+Nazwa starego pliku danych portfela zostanie zmieniona, co umożliwi jego odzyskanie.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ścieżka pliku dizennika: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="596"/>
         <source>Wallet Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa porfela</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Daemon log path: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ścieżka pliku dziennika procesu:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="609"/>
         <source>Daemon log</source>
-        <translation>Log procesu</translation>
+        <translation type="unfinished">Log procesu</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="618"/>
         <source>Please choose a folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wskazać folder</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="627"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="630"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd: System plików tylko do odczytu.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="634"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzeżenie: Ten nośnik ma tylko %1 GB dostępnego miejsca. Blockchain wymaga przynajmniej ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="636"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwaga: Ten nośnik ma tylko %1 GB dostępnego miejsca. Blockchain wymaga przynajmniej ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="640"/>
@@ -1505,19 +1499,19 @@ The old wallet cache file will be renamed and can be restored later.
         <location filename="../pages/Transfer.qml" line="654"/>
         <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Potrfel nie jest podłączony do procesu.</translation>
+        <translation>Potrfel nie jest podłączony do usługi.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Połączony proces nie jest kompatybilny z interfejsem graficznym.
-Uaktualnij go lub podłącz się do innego procesu</translation>
+        <translation>Połączony usługa nie jest kompatybilna z interfejsem graficznym.
+Uaktualnij ją lub podłącz się do innej usługi</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="674"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Poczekaj na zakończenie synchronizacji procesu</translation>
+        <translation>Poczekaj na zakończenie synchronizacji usługi</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
@@ -1670,7 +1664,7 @@ Uaktualnij go lub podłącz się do innego procesu</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="45"/>
         <source>Start daemon</source>
-        <translation type="unfinished">Uruchom proces</translation>
+        <translation type="unfinished">Uruchom usługę</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="538"/>
@@ -1971,7 +1965,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="67"/>
         <source>Daemon address</source>
-        <translation>Adres procesu</translation>
+        <translation>Adres usługi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="68"/>
@@ -2222,7 +2216,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="563"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Nie można zrealizować transakcji: Zła wersja procesu: </translation>
+        <translation>Nie można zrealizować transakcji: Zła wersja usługi: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="574"/>
@@ -2303,17 +2297,17 @@ Opis: </translation>
     <message>
         <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Czekam na start procesu...</translation>
+        <translation>Czekam na start usługi...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Czekam na zakończenie procesu...</translation>
+        <translation>Czekam na zakończenie usługi...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="506"/>
         <source>Daemon failed to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się uruchomić usługi</translation>
     </message>
     <message>
         <location filename="../main.qml" line="507"/>
@@ -2430,13 +2424,11 @@ Opłata: </translation>
     <message>
         <location filename="../main.qml" line="1612"/>
         <source>Daemon is running</source>
-        <!-- Daemon has no good translation in Polish. Closest one is usługa (eng. Service) -->
         <translation type="unfinished">Usługa działa w tle</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1613"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <!-- From non-power-user point of view this translation is good enough -->
         <translation type="unfinished">Usługa będzie dalej działała w tle po zamknięciu okna</translation>
     </message>
     <message>
@@ -2504,8 +2496,6 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../main.qml" line="819"/>
-        <!-- In my opinion it should changed to: -->
-        <!-- This address received %1 monero, but the transaction is not yet confirmed -->
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Ten adres otrzymał %1 monero, ale transakcja nie została jeszcze wykopana</translation>
     </message>
@@ -2517,7 +2507,6 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <!-- I don't know good translation for this but this one occurs commonly -->
         <translation type="unfinished">Kreator instalacji programu</translation>
     </message>
     <message>
@@ -2528,7 +2517,6 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="1317"/>
         <source>send to the same destination</source>
-        <!-- I think: Wyślij do tego samego odbiorcy would be better -->
         <translation>wyślij do tego samego celu</translation>
     </message>
 </context>
