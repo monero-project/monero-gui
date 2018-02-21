@@ -257,7 +257,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Destinations:</source>
-        <translation>Odbiorcy:</translation>
+        <translation>Adresy docelowe:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="102"/>
@@ -479,7 +479,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sieć testowa</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="320"/>
