@@ -23,7 +23,7 @@ List of available languages for your wallet's seed:
         <language display_name="Español" locale="es_ES" wallet_language="Español" flag="/lang/flags/spain.png" qs="none"/>
         <!-- <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/> -->
         <language display_name="Français" locale="fr_FR" wallet_language="Français" flag="/lang/flags/france.png" qs="none"/>
-        <language display_name="Swedish" locale="sv_SE" wallet_language="English" flag="/lang/flags/sweden.png" qs="none"/>
+        <language display_name="Svenska" locale="sv_SE" wallet_language="English" flag="/lang/flags/sweden.png" qs="none"/>
         <!-- <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/croatia.png" qs="none"/> -->
         <!-- <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/> -->
         <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/indonesia.png" qs="none"/>
@@ -42,4 +42,5 @@ List of available languages for your wallet's seed:
         <language display_name="Česky" locale="cs_CZ" wallet_language="English" flag="/lang/flags/czech.png" qs="none"/>
         <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/slovakia.png" qs="none"/>
         <language display_name="Arabic" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
+        <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/slovenia.png" qs="none"/>
 </languages>

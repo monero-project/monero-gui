@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr_FR">
+<TS version="2.1" language="sl_SI">
 <context>
     <name>AddressBook</name>
     <message>
         <location filename="../pages/AddressBook.qml" line="50"/>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
         <source>Qr Code</source>
-        <translation>Code QR</translation>
+        <translation>QR koda</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
-        <translation>4...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>ID de paiement &lt;font size=&apos;2&apos;&gt;(Facultatif)&lt;/font&gt;</translation>
+        <translation>ID plačila &lt;font size=&apos;2&apos;&gt;(neobvezno)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;ID de Paiement&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Un nom d'utilisateur unique qui a été uilisé dans&lt;br/&gt;le carnet d'adresse. Il n'est pas un&lt;br/&gt;transfert d'information énvoyé&lt;br/&gt;durant le transfert</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="88"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation>Coller 64 caractères hexadécimaux</translation>
+        <translation>Prilepi 64 šestnajstiških znakov</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Description &lt;font size=&apos;2&apos;&gt;(Facultatif)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="111"/>
-        <source>Add</source>
-        <translation>Ajouter</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="116"/>
-        <source>Error</source>
-        <translation>Erreur</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="119"/>
-        <source>Invalid address</source>
-        <translation>Adresse invalide</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="123"/>
-        <source>Can&apos;t create entry</source>
-        <translation>Impossible de créer l&apos;entrée</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Give this entry a name or description</source>
-        <translation>Donner un nom ou une description pour cette entrée</translation>
+        <translation>Poimenuj oz. opiši vnos</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="111"/>
+        <source>Add</source>
+        <translation>Dodaj</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="116"/>
+        <source>Error</source>
+        <translation>Napaka</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="119"/>
+        <source>Invalid address</source>
+        <translation>Neveljaven naslov</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="123"/>
+        <source>Can&apos;t create entry</source>
+        <translation>Vnosa ne morem ustvariti</translation>
     </message>
 </context>
 <context>
@@ -69,17 +69,17 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Pas d&apos;autres résultats</translation>
+        <translation>Ni dodatnih rezultatov</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="104"/>
         <source>Payment ID:</source>
-        <translation>ID de paiement :</translation>
+        <translation>ID plačila:</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
         <source>Address copied to clipboard</source>
-        <translation>Adresse copiée dans le presse-papier</translation>
+        <translation>Naslov je skopiran v odložišče</translation>
     </message>
 </context>
 <context>
@@ -87,22 +87,22 @@
     <message>
         <location filename="../BasicPanel.qml" line="97"/>
         <source>Locked Balance:</source>
-        <translation>Solde bloqué :</translation>
+        <translation>Zaklenjeno stanje:</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="110"/>
         <source>78.9239845</source>
-        <translation>78,9239845</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="133"/>
         <source>Available Balance:</source>
-        <translation>Solde disponible :</translation>
+        <translation>Na voljo:</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
-        <translation>2324,9239845</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -110,12 +110,12 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="117"/>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation>Zapri</translation>
     </message>
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation>commande + entrée (e.g. help)</translation>
+        <translation>ukaz + potrdi (npr. pomoč)</translation>
     </message>
 </context>
 <context>
@@ -123,17 +123,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>Lancement du démon local Monero dans %1 secondes</translation>
+        <translation>Lokalno vozlišče se bo zagnalo v %1 sekundah</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation>Lancer démon (%1)</translation>
+        <translation>Zaženi prikriti proces (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
-        <translation>Paramètres personnalisés</translation>
+        <translation>Nastavitve po meri</translation>
     </message>
 </context>
 <context>
@@ -141,17 +141,17 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="57"/>
         <source>Quick transfer</source>
-        <translation>Transfert rapide</translation>
+        <translation>Hitri prenos</translation>
     </message>
     <message>
         <location filename="../pages/Dashboard.qml" line="89"/>
         <source>SEND</source>
-        <translation>ENVOYER</translation>
+        <translation>POŠLJI</translation>
     </message>
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        pour le niveau de sécurité et le carnet d&apos;adresses, aller à l&apos;onglet &lt;a href=&apos;#&apos;&gt;Transfert&lt;/a&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -159,22 +159,22 @@
     <message>
         <location filename="../components/DashboardTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Pas d&apos;autre résultat</translation>
+        <translation>Ni dodatnih rezultatov</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="137"/>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="170"/>
         <source>Balance</source>
-        <translation>Solde</translation>
+        <translation>Stanje</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="190"/>
         <source>Amount</source>
-        <translation>Montant</translation>
+        <translation>Znesek</translation>
     </message>
 </context>
 <context>
@@ -182,48 +182,48 @@
     <message>
         <location filename="../pages/History.qml" line="70"/>
         <source> selected: </source>
-        <translation> sélectionné : </translation>
+        <translation> izbran:</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="135"/>
         <source>Filter transaction history</source>
-        <translation>Filtrer l&apos;historique des transactions</translation>
+        <translation>Filtriraj zgodovino transakcij</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Type for incremental search...</source>
-        <translation>Entrez du texte pour la recherche incrémentale...</translation>
+        <translation>Tipkaj za sprotno iskanje...</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="252"/>
+        <source>Filter</source>
+        <translation>Filter</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="199"/>
         <source>Date from</source>
-        <translation>Date du</translation>
+        <translation>Datum od</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="225"/>
         <location filename="../pages/History.qml" line="379"/>
         <source>To</source>
-        <translation>Au</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="252"/>
-        <source>Filter</source>
-        <translation>Filtrer</translation>
+        <translation>do</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="290"/>
         <source>Advanced filtering</source>
-        <translation>Filtrage avancé</translation>
+        <translation>Napredno filtriranje</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="310"/>
         <source>Type of transaction</source>
-        <translation>Type de transaction</translation>
+        <translation>Vrsta transakcije</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="346"/>
         <source>Amount from</source>
-        <translation>Montant à partir de</translation>
+        <translation>Znesek od</translation>
     </message>
 </context>
 <context>
@@ -231,78 +231,78 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>ID transaction :</translation>
+        <translation>ID transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
         <location filename="../components/HistoryTable.qml" line="195"/>
         <source>Payment ID:</source>
-        <translation>ID paiement :</translation>
+        <translation>ID plačila:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <translation>Clé de transaction :</translation>
+        <translation>Ključ transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Tx note:</source>
-        <translation>Note de transaction :</translation>
+        <translation>Opomba transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Destinations:</source>
-        <translation>Destinations :</translation>
+        <translation>Destinacije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="78"/>
         <source>No more results</source>
-        <translation>Pas d&apos;autre résultat</translation>
+        <translation>Ni dodatnih rezultatov</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="102"/>
         <source>Details</source>
-        <translation>Détails</translation>
+        <translation>Podrobnosti</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="243"/>
         <source>BlockHeight:</source>
-        <translation>Hauteur bloc :</translation>
+        <translation>Višina bloka:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation>(%1/%2 confirmations)</translation>
+        <translation>(%1/%2 potrditev)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
         <source>UNCONFIRMED</source>
-        <translation>NON CONFIRMÉ</translation>
+        <translation>NEPOTRJENO</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="264"/>
         <source>FAILED</source>
-        <translation>ÉCHEC</translation>
+        <translation>NEUSPEŠNO</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="265"/>
         <source>PENDING</source>
-        <translation>EN ATTENTE</translation>
+        <translation>V TEKU</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="294"/>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="351"/>
         <source>Amount</source>
-        <translation>Montant</translation>
+        <translation>Znesek</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="386"/>
         <source>Fee</source>
-        <translation>Frais</translation>
+        <translation>Provizija</translation>
     </message>
 </context>
 <context>
@@ -310,52 +310,52 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="47"/>
         <source>Tx ID:</source>
-        <translation>ID transaction :</translation>
+        <translation>ID transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
         <source>Payment ID:</source>
-        <translation>ID de Paiement :</translation>
+        <translation>ID plačila:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx key:</source>
-        <translation>Clé de transaction :</translation>
+        <translation>Ključ transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Tx note:</source>
-        <translation>Note de transaction :</translation>
+        <translation>Opomba transakcije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
         <source>Destinations:</source>
-        <translation>Destinations :</translation>
+        <translation>Destinacije:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="77"/>
         <source>No more results</source>
-        <translation>Plus de résultats</translation>
+        <translation>Ni dodatnih rezultatov</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation>(%1/%2 confirmations)</translation>
+        <translation>(%1/%2 potrditev)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
         <source>UNCONFIRMED</source>
-        <translation>NON CONFIRMÉE</translation>
+        <translation>NEPOTRJENO</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="154"/>
         <source>FAILED</source>
-        <translation>ÉCHEC</translation>
+        <translation>NEUSPEŠNO</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="155"/>
         <source>PENDING</source>
-        <translation>EN ATTENTE</translation>
+        <translation>V TEKU</translation>
     </message>
 </context>
 <context>
@@ -363,70 +363,70 @@
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
         <source>Mnemonic seed</source>
-        <translation>Phrase mnémonique</translation>
+        <translation>Mnemonično seme</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation>Double tapez pour copier</translation>
+        <translation>Dvakrat se dotaknite za kopiranje</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>Seed copied to clipboard</source>
-        <translation>Votre phrase mnémonique a été copié</translation>
+        <translation>Seme je skopirano v odložišče</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="95"/>
         <source>Keys</source>
-        <translation>Clés</translation>
+        <translation>Ključi</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="119"/>
         <source>Keys copied to clipboard</source>
-        <translation>Vos clés ont été copiées</translation>
+        <translation>Ključi skopirani v odložišče</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="129"/>
         <source>Export wallet</source>
-        <translation>Exporter portefeuille</translation>
+        <translation>Izvozi denarnico</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation>Portefeuille de dépense</translation>
+        <translation type="unfinished">denarnica za potrošit</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>View Only Wallet</source>
-        <translation>Portefeuille d'audit</translation>
+        <translation type="unfinished">Denarnica samo na vpogled</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="191"/>
         <source>Secret view key</source>
-        <translation>Clé secrète d&apos;audit</translation>
+        <translation type="unfinished">Skrivni ključ za vpogled</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="192"/>
         <source>Public view key</source>
-        <translation>Clé publique d&apos;audit</translation>
+        <translation type="unfinished">Javni ključ za vpogled</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="193"/>
         <source>Secret spend key</source>
-        <translation>Clé secrète de dépense</translation>
+        <translation type="unfinished">Skrivni ključ za porabo</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="194"/>
         <source>Public spend key</source>
-        <translation>Clé publique de dépense</translation>
+        <translation type="unfinished">Javni ključ za porabo</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="206"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation>(Portefeuille d'audit - phrase mnémonique non disponible)</translation>
+        <translation type="unfinished">(Denarnica samo na vpogled -  mnemonično seme ni na voljo)</translation>
     </message>
 </context>
 <context>
@@ -434,122 +434,122 @@
     <message>
         <location filename="../LeftPanel.qml" line="147"/>
         <source>Balance</source>
-        <translation>Solde</translation>
+        <translation>Stanje</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="192"/>
         <source>Unlocked balance</source>
-        <translation>Solde débloqué</translation>
+        <translation>Odklenjeno stanje</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="295"/>
         <source>Send</source>
-        <translation>Envoyer</translation>
+        <translation>Pošlji</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="345"/>
         <source>Receive</source>
-        <translation>Recevoir</translation>
+        <translation>Prejmi</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
         <source>Prove/check</source>
-        <translation>Prouver/Vérifier</translation>
+        <translation>Dokaži/preveri</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
-        <translation>K</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="369"/>
         <source>History</source>
-        <translation>Historique</translation>
+        <translation>Zgodovina</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="96"/>
         <source>View Only</source>
-        <translation>Audit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
-        <translation>Testnet</translation>
+        <translation type="unfinished">Testna mreža</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="320"/>
         <source>Address book</source>
-        <translation>Carnet d&apos;adresses</translation>
+        <translation>Imenik</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
-        <translation>H</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="392"/>
         <source>Advanced</source>
-        <translation>Avancé</translation>
+        <translation>Napredno</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
         <source>Mining</source>
-        <translation>Mine</translation>
+        <translation>Rudarjenje</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
         <source>Seed &amp; Keys</source>
-        <translation>Phrase mnémonique &amp; Clés</translation>
+        <translation>Seme &amp; ključi</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
         <source>Sign/verify</source>
-        <translation>Signer/vérifier</translation>
+        <translation>Podpiši/preveri</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation>E</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation>S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation>I</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
         <source>Settings</source>
-        <translation>Réglages</translation>
+        <translation>Nastavitve</translation>
     </message>
 </context>
 <context>
@@ -557,12 +557,12 @@
     <message>
         <location filename="../MiddlePanel.qml" line="47"/>
         <source>Balance</source>
-        <translation>Solde</translation>
+        <translation>Stanje</translation>
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="49"/>
         <source>Unlocked Balance</source>
-        <translation>Solde Débloqué</translation>
+        <translation>Odklenjeno stanje</translation>
     </message>
 </context>
 <context>
@@ -570,87 +570,87 @@
     <message>
         <location filename="../pages/Mining.qml" line="70"/>
         <source>Solo mining</source>
-        <translation>Extraction minière en solo</translation>
+        <translation>Posamično rudarjenje</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="77"/>
         <source>(only available for local daemons)</source>
-        <translation>(disponible uniquement pour les démons locaux)</translation>
+        <translation>(na voljo samo za lokalne prikrite procese)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>L&apos;extraction minière avec votre ordinateur renforce le réseau Monero. Plus il y en a, plus il est difficile d&apos;attaquer le réseau, donc chaque mineur est utile.&lt;br&gt; &lt;br&gt;La mine vous donne aussi une petite chance de gagner des Moneros. Votre ordinateur va calculer des empreintes pour essayer de créer un bloc valide. Si vous trouvez un bloc, vous obtiendrez la récompense associée. Bonne chance !</translation>
+        <translation>Rudarjenje na vašem računalniku krepi omrežje Monero. Več ljudi rudari, težje je napasti omrežje. Vsak prispevek pomaga.&lt;br&gt; &lt;br&gt;Z rudarjenjem imate tudi manjšo možnost pridobitve nekaj Monera. Vaš računalnik bo z računanjem zgoščenih vrednosti iskal rešitev za nastanek bloka. Če najdete blok, boste prejeli z njim povezano nagrado . Srečno!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="93"/>
         <source>CPU threads</source>
-        <translation>Threads CPU</translation>
+        <translation>CPE niti</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="101"/>
         <source>(optional)</source>
-        <translation>(facultatif)</translation>
+        <translation>(neobvezno)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="113"/>
         <source>Background mining (experimental)</source>
-        <translation>Mine en arrière plan (expérimental)</translation>
+        <translation>Rudarjenje v ozadju (eksperimentalno)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
-        <translation>Activer la mine en cas de fonctionnement sur batterie</translation>
+        <translation>Omogoči rudarjenje tudi na baterijskem napajanju</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="139"/>
         <source>Manage miner</source>
-        <translation>Gérer le mineur</translation>
+        <translation>Uredi rudarjenje</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="148"/>
         <source>Start mining</source>
-        <translation>Démarrer</translation>
+        <translation>Zaženi rudarjenje</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="158"/>
         <source>Error starting mining</source>
-        <translation>Erreur lors du démarrage de l&apos;extraction minière</translation>
+        <translation>Napaka pri zagonu rudarjenja</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="159"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>Impossible de démarrer l&apos;extraction minière.&lt;br&gt;</translation>
+        <translation>Zagon rudarjenja neuspešen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>L&apos;extraction minière n&apos;est disponible que pour les démons locaux. Démarrez un démon local pour pouvoir l&apos;utiliser.&lt;br&gt;</translation>
+        <translation>Rudarjenje je mogoče samo z lokalnim prikritim procesom. Omogočeno bo z zagonom lokalnega procesa.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="173"/>
         <source>Stop mining</source>
-        <translation>Arrêter</translation>
+        <translation>Ustavi rudarjenje</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="188"/>
         <source>Status: not mining</source>
-        <translation>Statut : pas d&apos;extraction minière</translation>
+        <translation>Status: ne rudarim</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="199"/>
         <source>Mining at %1 H/s</source>
-        <translation>Extraction minière à %1 H/s</translation>
+        <translation>Hitrost rudarjenja %s H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="202"/>
         <source>Not mining</source>
-        <translation>Pas d&apos;extraction minière</translation>
+        <translation>Ne rudarim</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="204"/>
         <source>Status: </source>
-        <translation>Statut :</translation>
+        <translation>Status: </translation>
     </message>
 </context>
 <context>
@@ -658,7 +658,7 @@
     <message>
         <location filename="../components/MobileHeader.qml" line="92"/>
         <source>Unlocked Balance:</source>
-        <translation>Solde débloqué :</translation>
+        <translation>Odklenjeno stanje:</translation>
     </message>
 </context>
 <context>
@@ -666,37 +666,37 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="53"/>
         <source>Synchronizing</source>
-        <translation>Synchronisation</translation>
+        <translation>Sinhroniziram</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="55"/>
         <source>Remote node</source>
-        <translation>Démon distant</translation>
+        <translation>Oddaljeno vozlišče</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="56"/>
         <source>Connected</source>
-        <translation>Connecté</translation>
+        <translation>Povezan</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="59"/>
         <source>Wrong version</source>
-        <translation>Mauvaise version</translation>
+        <translation>Napačna verzija</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="61"/>
         <source>Disconnected</source>
-        <translation>Déconnecté</translation>
+        <translation>Prekinjen</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="62"/>
         <source>Invalid connection status</source>
-        <translation>État de connexion invalide</translation>
+        <translation>Nepravilen status povezave</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="91"/>
         <source>Network status</source>
-        <translation>État du réseau</translation>
+        <translation>Status omrežja</translation>
     </message>
 </context>
 <context>
@@ -704,22 +704,22 @@
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="100"/>
         <source>Please enter new password</source>
-        <translation>Veuillez saisir un nouveau mot de passe</translation>
+        <translation>Vnesi novo geslo</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="157"/>
         <source>Please confirm new password</source>
-        <translation>Veuillez confirmer votre nouveau mot de passe</translation>
+        <translation>Potrdi novo geslo</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="231"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="244"/>
         <source>Continue</source>
-        <translation >Continuer</translation>
+        <translation>Nadaljuj</translation>
     </message>
 </context>
 <context>
@@ -727,22 +727,22 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="88"/>
         <source>Please enter wallet password</source>
-        <translation>Entrez le mot de passe du portefeuille</translation>
+        <translation>Vnesite geslo denarnice</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="88"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation>Entrez le mot de passe du portefeuille pour :&lt;br&gt;</translation>
+        <translation>Vnesite geslo denarnice za:&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="156"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="169"/>
         <source>Continue</source>
-        <translation>Continuer</translation>
+        <translation>Nadaljuj</translation>
     </message>
 </context>
 <context>
@@ -750,17 +750,17 @@
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="100"/>
         <source>Low</source>
-        <translation>Bas</translation>
+        <translation>Nizek</translation>
     </message>
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="109"/>
         <source>Medium</source>
-        <translation>Moyen</translation>
+        <translation>Srednji</translation>
     </message>
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="118"/>
         <source>High</source>
-        <translation>Haut</translation>
+        <translation>Visok</translation>
     </message>
 </context>
 <context>
@@ -768,17 +768,17 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="41"/>
         <source>Establishing connection...</source>
-        <translation>Établissement de la connexion...</translation>
+        <translation>Vzpostavljam povezavo...</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="58"/>
         <source>Blocks remaining: %1</source>
-        <translation>Blocs restants : %1</translation>
+        <translation>Preostali bloki: %1</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="109"/>
         <source>Synchronizing blocks</source>
-        <translation>Synchronisation des blocs</translation>
+        <translation>Sinhroniziranje blokov</translation>
     </message>
 </context>
 <context>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../components/QRCodeScanner.qml" line="129"/>
         <source>QrCode Scanned</source>
-        <translation>Code QR Scanné</translation>
+        <translation>QR koda odčitana</translation>
     </message>
 </context>
 <context>
@@ -794,152 +794,152 @@
     <message>
         <location filename="../pages/Receive.qml" line="64"/>
         <source>Invalid payment ID</source>
-        <translation>ID de paiement invalide</translation>
+        <translation>Neveljaven ID plačila</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="113"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>ATTENTION : non connecté au démon</translation>
+        <translation>OPOZORILO: ni povezave do prikritega procesa</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="135"/>
         <source>in the txpool: %1</source>
-        <translation>dans le pool de transactions : %1</translation>
+        <translation>v bazenu transakcij: %1</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="142"/>
         <source>%2 confirmations: %3 (%1)</source>
-        <translation>%2 confirmations: %3 (%1)</translation>
+        <translation>%2 potrditev: %3 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="144"/>
         <source>1 confirmation: %2 (%1)</source>
-        <translation>1 confirmation: %2 (%1)</translation>
+        <translation>1 potrditev: %2 (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="152"/>
         <source>No transaction found yet...</source>
-        <translation>Pas de transaction trouvée pour le moment...</translation>
+        <translation>Še ni najdenih transakcij...</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="156"/>
         <source>Transaction found</source>
-        <translation>Transaction trouvée</translation>
+        <translation>Transakcija najdena</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="156"/>
         <source>%1 transactions found</source>
-        <translation>%1 transactions trouvées</translation>
+        <translation>%1 transakcij najdenih</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="162"/>
         <source> with more money (%1)</source>
-        <translation> avec plus d&apos;argent (%1)</translation>
+        <translation>z več denarja (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="164"/>
         <source> with not enough money (%1)</source>
-        <translation> avec trop peu d&apos;argent (%1)</translation>
+        <translation> s premalo denarja (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="195"/>
         <source>Address</source>
-        <translation>Adresse</translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="202"/>
         <source>ReadOnly wallet address displayed here</source>
-        <translation>Adresse du portefeuille LectureSeule affichée ici</translation>
+        <translation>Naslov ReadOnly denarnice je prikazan tu</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="214"/>
         <source>Address copied to clipboard</source>
-        <translation>Adresse copiée dans le presse-papier</translation>
+        <translation>Naslov skopiran v odložišče</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="235"/>
         <source>16 hexadecimal characters</source>
-        <translation>16 caractères hexadécimaux</translation>
+        <translation>16 šestnajstiških znakov</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="247"/>
         <source>Payment ID copied to clipboard</source>
-        <translation>ID Paiement copié dans le presse-papier</translation>
+        <translation>ID plačila je skopiran v odložišče</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="270"/>
         <source>Clear</source>
-        <translation>Effacer</translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="279"/>
         <source>Integrated address</source>
-        <translation>Adresse intégrée</translation>
+        <translation>Integriran naslov</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
         <source>Integrated address copied to clipboard</source>
-        <translation>Adresse intégrée copiée dans le presse-papier</translation>
+        <translation>Integriran naslov je skopiran v odložišče</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="320"/>
         <source>Amount to receive</source>
-        <translation>Montant à recevoir</translation>
+        <translation>Željen (prejet) znesek</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>Tracking</source>
-        <translation>Suivi</translation>
+        <translation>Sledenje</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="343"/>
         <source>help</source>
-        <translation>Aide</translation>
+        <translation>pomoč</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="348"/>
         <source>Tracking payments</source>
-        <translation>Suivi des paiements</translation>
+        <translation>Sledenje plačilom</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="349"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Ceci est un simple suivi des ventes :&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Cliquez sur Générer pour créer un identifiant de paiement aléatoire pour un nouveau client&lt;/p&gt; &lt;p&gt;Laissez votre client scanner le code QR pour faire un paiement (si ce client a un logiciel permettant de scanner les codes QR).&lt;/p&gt;&lt;p&gt;Cette page va automatiquement scanner la chaîne de blocs et le pool de transactions pour trouver les transactions entrantes utilisant ce code QR. Si vous entrez un montant, il sera aussi vérifié que le total des transactions entrantes arrive à ce montant.&lt;/p&gt;C&apos;est à vous de décider si vous acceptez les transactions non confirmées ou pas. Il est probable qu&apos;elles seront confirmées assez rapidement, mais il y a toujours une possibilité qu&apos;elles ne le soient pas, donc pour de gros montants vous devriez attendre qu&apos;il y ait une confirmation ou plus.&lt;/p&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="393"/>
         <source>Save QrCode</source>
-        <translation>Enregistrer le code QR</translation>
+        <translation>Shrani QR kodo</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="394"/>
         <source>Failed to save QrCode to </source>
-        <translation>Impossible d&apos;enregistrer le code QR vers </translation>
+        <translation>Neuspešno shranil QR kodo v </translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="405"/>
         <source>Save As</source>
-        <translation>Enregistrer sous</translation>
+        <translation>Shrani kot</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="227"/>
         <source>Payment ID</source>
-        <translation>ID de paiement</translation>
+        <translation>ID plačila</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="259"/>
         <source>Generate</source>
-        <translation>Générer</translation>
+        <translation>Ustvari</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="288"/>
         <source>Generate payment ID for integrated address</source>
-        <translation>Générer un identifiant de paiement pour une adresse intégrée</translation>
+        <translation>Ustvari ID plačila za intergriran naslov</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="312"/>
         <source>Amount</source>
-        <translation>Montant</translation>
+        <translation>Znesek</translation>
     </message>
 </context>
 <context>
@@ -947,12 +947,12 @@
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="49"/>
         <source>Remote Node Hostname / IP</source>
-        <translation>IP/domaine du démon distant</translation>
+        <translation>Ime oddaljenega vozlišča / IP</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="57"/>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation>Vrata</translation>
     </message>
 </context>
 <context>
@@ -960,12 +960,12 @@
     <message>
         <location filename="../components/SearchInput.qml" line="69"/>
         <source>Search by...</source>
-        <translation>Chercher par…</translation>
+        <translation>Išči pod...</translation>
     </message>
     <message>
         <location filename="../components/SearchInput.qml" line="228"/>
         <source>SEARCH</source>
-        <translation>CHERCHER</translation>
+        <translation>ISKANJE</translation>
     </message>
 </context>
 <context>
@@ -973,258 +973,252 @@
     <message>
         <location filename="../pages/Settings.qml" line="96"/>
         <source>Create view only wallet</source>
-        <translation>Créer portefeuille d&apos;audit</translation>
+        <translation>Ustvari view only denarnico</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="285"/>
         <source>Show status</source>
-        <translation>Montrer statut</translation>
+        <translation>Prikaži status</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="310"/>
         <location filename="../pages/Settings.qml" line="340"/>
         <source>(optional)</source>
-        <translation>(facultatif)</translation>
+        <translation>(neobvezno)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="145"/>
         <source>Rescan wallet balance</source>
-        <translation>Rescanner le solde du portefeuille</translation>
+        <translation>Osveži stanje denarnice</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="154"/>
         <source>Error: </source>
-        <translation>Erreur : </translation>
+        <translation>Napaka: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="159"/>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="303"/>
         <source>Blockchain location</source>
-        <translation>Emplacement de la chaîne de blocs</translation>
+        <translation>Blockchain lokacija</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="363"/>
         <source>Username</source>
-        <translation>Nom d&apos;utilisateur</translation>
+        <translation>Uporabnik</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="372"/>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>Geslo</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="397"/>
+        <source>Connect</source>
+        <translation>Poveži</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="421"/>
+        <source>Layout settings</source>
+        <translation type="unfinished">Nastavitve razporeditev</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="439"/>
+        <source>Custom decorations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="450"/>
+        <source>Log level</source>
+        <translation>Nivo beleženja</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="482"/>
+        <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="160"/>
+        <source>Successfully rescanned spent outputs.</source>
+        <translation type="unfinished">Uspešno poskeniral potrošene izhode.</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="170"/>
+        <source>Change password</source>
+        <translation>Spremeni geslo</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="181"/>
+        <source>Wrong password</source>
+        <translation>Napačno geslo</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="201"/>
+        <source>Local Node</source>
+        <translation>Lokalno vozlišče</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="215"/>
+        <source>Remote Node</source>
+        <translation>Oddaljeno vozlišče</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="233"/>
+        <source>Manage Daemon</source>
+        <translation>Upravljaj prikriti proces</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="239"/>
+        <source>Show advanced</source>
+        <translation>Prikaži napredno</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="257"/>
+        <source>Start Local Node</source>
+        <translation>Zaženi lokalno vozlišče</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="272"/>
+        <source>Stop Local Node</source>
+        <translation>Ustavi lokalno vozlišče</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="333"/>
+        <source>Local daemon startup flags</source>
+        <translation>Zagonske zastavice</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="351"/>
+        <source>Node login (optional)</source>
+        <translation>Vozliščna prijava (neobvezno)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="382"/>
+        <source>Remote node</source>
+        <translation>Oddaljeno vozlišče</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="498"/>
         <source>Debug info</source>
-        <translation>Info de débogage</translation>
+        <translation type="unfinished">Informacije o produktu</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="512"/>
+        <source>GUI version: </source>
+        <translation>Verzija grafičnega vmesnika: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="517"/>
+        <source>Embedded Monero version: </source>
+        <translation>Vgrajena verzija Monera: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="523"/>
         <source>Wallet creation height: </source>
-        <translation>Hauteur de bloc lors de la création du portefeuille : </translation>
+        <translation>Denarnica ustvarjena od bloka: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="524"/>
         <source> &lt;a href=&apos;#&apos;&gt;(Click to change)&lt;/a&gt;</source>
-        <translation>&lt;a href=&apos;#&apos;&gt;(Cliquer pour changer)&lt;/a&gt;</translation>
+        <translation> &lt;a href=&apos;#&apos;&gt;(Klikni za spremembo)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="550"/>
         <source>Save</source>
-        <translation>Enregistrer</translation>
+        <translation>Shrani</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="563"/>
         <source>Rescan wallet cache</source>
-        <translation>Rescanner le cache du portefeuille</translation>
+        <translation>Osveži predpomnilnik denarnice</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="564"/>
         <source>Are you sure you want to rebuild the wallet cache?
 The following information will be deleted
-- Recipient adresses
+- Recipient addresses
 - Tx keys
 - Tx descriptions
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation>Êtes-vous sûr de vouloir reconstruire le cache du portefeuille
-		Les informations suivantes seront supprimées  
-		- Adresses destinataires
-		- Clés de transactions
-		- Descriptions de transactions
-		L'ancien fichier de cache du portefeuille sera renommé et il pourra être restauré plus tard
-        </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
         <source>Wallet log path: </source>
-        <translation>Chemin du journal du portefeuille : </translation>
+        <translation type="unfinished">Pot dnevnika denarnice: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="596"/>
         <source>Wallet Name: </source>
-        <translation>Nom du portefeuille : </translation>
+        <translation>Ime denarnice: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Daemon log path: </source>
-        <translation>Chemin du journal du démon : </translation>
+        <translation type="unfinished">Pot dnevnika prikritega procesa: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="609"/>
+        <source>Daemon log</source>
+        <translation type="unfinished">Dnevnik prikritega procesa</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="618"/>
         <source>Please choose a folder</source>
-        <translation>Veuillez choisir un répertoire</translation>
+        <translation>Izberi mapo</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="627"/>
         <source>Warning</source>
-        <translation>Attention</translation>
+        <translation>Opozorilo</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="630"/>
         <source>Error: Filesystem is read only</source>
-        <translation>Erreur : Système de fichiers en lecture seule</translation>
+        <translation>Napaka: datotečni sistem omogoča samo branje</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="634"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Attention : Il y a seulement %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
+        <translation>Opozorilo: Na napravi je na voljo samo %1 GB prostora. Blockchain zahteva ~%2 GB podatkov.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="636"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Note : Il y a %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
+        <translation>Opomba: Na napravi je na voljo samo %1 GB prostora. Blockchain zahteva ~%2 GB podatkov.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="640"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation>Note : répertoire lmdb non trouvé. Un nouveau répertoire va être créé.</translation>
+        <translation>Opomba: ne najdem mape lmdb. Ustvarjena bo nova mapa.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="572"/>
         <location filename="../pages/Settings.qml" line="644"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="160"/>
-        <source>Successfully rescanned spent outputs.</source>
-        <translation>Transactions sortantes rescannées avec succès.</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="170"/>
-        <source>Change password</source>
-        <translation>Modifier votre mot de passe</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="201"/>
-        <source>Local Node</source>
-        <translation>Démon Local</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="215"/>
-        <source>Remote Node</source>
-        <translation>Démon Distant</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="233"/>
-        <source>Manage Daemon</source>
-        <translation>Gérer le Démon</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="239"/>
-        <source>Show advanced</source>
-        <translation>Montrer Avancés</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="257"/>
-        <source>Start Local Node</source>
-        <translation>Lancer un démon local</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="272"/>
-        <source>Stop Local Node</source>
-        <translation>Terminer le démon local</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="333"/>
-        <source>Local daemon startup flags</source>
-        <translation>Options de lancement pour votre démon local</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="351"/>
-        <source>Node login (optional)</source>
-        <translation>Identifiants pour le démon (facultatif)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="382"/>
-        <source>Remote node</source>
-        <translation>Démon Distant</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="397"/>
-        <source>Connect</source>
-        <translation>Connecter</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="421"/>
-        <source>Layout settings</source>
-        <translation>Réglages d&apos;agencement</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="439"/>
-        <source>Custom decorations</source>
-        <translation>Décorations personnalisées</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="450"/>
-        <source>Log level</source>
-        <translation>Niveau journal</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="482"/>
-        <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
-        <translation>(e.g. *:WARNING,net.p2p:DEBUG)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="512"/>
-        <source>GUI version: </source>
-        <translation>Version de l&apos;interface graphique : </translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="517"/>
-        <source>Embedded Monero version: </source>
-        <translation>Version de Monero incorporée : </translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="609"/>
-        <source>Daemon log</source>
-        <translation>Journal du démon</translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="153"/>
         <location filename="../pages/Settings.qml" line="180"/>
         <source>Error</source>
-        <translation>Erreur</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="181"/>
-        <source>Wrong password</source>
-        <translation>Mauvais mot de passe</translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="66"/>
         <source>Manage wallet</source>
-        <translation>Gérer le portefeuille</translation>
+        <translation>Upravljaj denarnico</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="81"/>
         <source>Close wallet</source>
-        <translation>Fermer</translation>
+        <translation>Zapri denarnico</translation>
     </message>
 </context>
 <context>
@@ -1232,87 +1226,87 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="64"/>
         <source>Good signature</source>
-        <translation>Bonne signature</translation>
+        <translation type="unfinished">Dober/pravilen podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="65"/>
         <source>This is a good signature</source>
-        <translation>Ceci est une bonne signature</translation>
+        <translation type="unfinished">To je dober/pravilen podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="69"/>
         <source>Bad signature</source>
-        <translation>Mauvaise signature</translation>
+        <translation type="unfinished">Slab podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="70"/>
         <source>This signature did not verify</source>
-        <translation>Cette signature n&apos;a pas réussi le test de vérification</translation>
+        <translation type="unfinished">Podpis se ni (uspešno?) preveril</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="106"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>Signer un message ou un fichier avec votre adresse :</translation>
+        <translation type="unfinished">Podpiši sporočilo ali vsebino datoteke z svojim naslovom:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="115"/>
         <location filename="../pages/Sign.qml" line="272"/>
         <source>Either message:</source>
-        <translation>Soit un message :</translation>
+        <translation type="unfinished">bodisi sporočilo:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="128"/>
         <source>Message to sign</source>
-        <translation>Message à signer</translation>
+        <translation type="unfinished">Sporočilo za podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="145"/>
         <location filename="../pages/Sign.qml" line="215"/>
         <source>Sign</source>
-        <translation>Signer</translation>
+        <translation type="unfinished">Podpiši</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="171"/>
         <source>Please choose a file to sign</source>
-        <translation>Veuillez choisir un fichier à signer</translation>
+        <translation type="unfinished">Izberi datoteko za podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="183"/>
         <location filename="../pages/Sign.qml" line="340"/>
         <source>Select</source>
-        <translation>Sélectionner</translation>
+        <translation type="unfinished">Izberi</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="302"/>
         <location filename="../pages/Sign.qml" line="371"/>
         <source>Verify</source>
-        <translation>Vérifier</translation>
+        <translation type="unfinished">Preveri</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="328"/>
         <source>Please choose a file to verify</source>
-        <translation>Veuillez choisir un fichier à vérifier</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation>Adresse du signataire</translation>
+        <translation type="unfinished">Naslov za podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation>Coller ou sélectionner dans &lt;a href=&apos;#&apos;&gt;le carnet d'adresses&lt;/a&gt;</translation>
+        <translation type="unfinished">Prilepi ali izberi iz &lt;a href=&apos;#&apos;&gt;imenika&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="160"/>
         <location filename="../pages/Sign.qml" line="317"/>
         <source>Or file:</source>
-        <translation>Ou un fichier :</translation>
+        <translation type="unfinished">Ali datoteka:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="197"/>
         <source>Filename with message to sign</source>
-        <translation>Nom du ficher avec le message à signer</translation>
+        <translation type="unfinished">Datoteka s sporočilom za podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="234"/>
@@ -1320,22 +1314,22 @@ The old wallet cache file will be renamed and can be restored later.
         <location filename="../pages/Sign.qml" line="415"/>
         <location filename="../pages/Sign.qml" line="420"/>
         <source>Signature</source>
-        <translation>Signature</translation>
+        <translation type="unfinished">Podpis</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="262"/>
         <source>Verify a message or file signature from an address:</source>
-        <translation>Vérifier la signature d&apos;un message ou d&apos;un fichier avec une adresse :</translation>
+        <translation type="unfinished">Preveri sporočilo ali podpisano datoteko z naslova:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="285"/>
         <source>Message to verify</source>
-        <translation>Message à vérifier</translation>
+        <translation type="unfinished">Sporočilo za preveriti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="354"/>
         <source>Filename with message to verify</source>
-        <translation>Nom du ficher avec le message à vérifier</translation>
+        <translation type="unfinished">Datoteka s sporočilom za preveriti</translation>
     </message>
 </context>
 <context>
@@ -1343,22 +1337,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="122"/>
         <source>Double tap to copy</source>
-        <translation>Double tapez pour copier</translation>
+        <translation>Dvakrat se dotaknite za kopiranje</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="129"/>
         <source>Content copied to clipboard</source>
-        <translation>Le contenu a été copié</translation>
+        <translation>Vsebina skopirana v odložišče</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="147"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="160"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>V redu</translation>
     </message>
 </context>
 <context>
@@ -1366,52 +1360,52 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDropdown.qml" line="203"/>
         <source>Low (x1 fee)</source>
-        <translation>Bas (frais x1)</translation>
+        <translation>Nizka (x1 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>Medium (x20 fee)</source>
-        <translation>Moyen (frais x20)</translation>
+        <translation>Srednja (x20 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>High (x166 fee)</source>
-        <translation>Haut (frais x166)</translation>
+        <translation>Visoka (x166 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Lent (frais x0.25)</translation>
+        <translation>Počasno (x0.25 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation>Par défaut (frais x1)</translation>
+        <translation>Privzeto (x1 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="208"/>
         <source>Fast (x5 fee)</source>
-        <translation>Rapide (frais x5)</translation>
+        <translation>Hitro (x5 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Très rapide (frais x41.5)</translation>
+        <translation>Najhitreje (x41,5 provizija)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="210"/>
         <source>All</source>
-        <translation>Tout</translation>
+        <translation>Vsi</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="211"/>
         <source>Sent</source>
-        <translation>Envoyé</translation>
+        <translation>Poslano</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="212"/>
         <source>Received</source>
-        <translation>Reçu</translation>
+        <translation>Prejeto</translation>
     </message>
 </context>
 <context>
@@ -1419,22 +1413,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Copier l&apos;adresse dans le presse-papiers&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Kopiraj naslov v odložišče&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Envoyer à cette adresse&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Pošlji na ta naslov&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
         <source>&lt;b&gt;Find similar transactions&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Trouver des transactions similaires&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Najdi podobne transakcije&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
         <source>&lt;b&gt;Remove from address book&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Supprimer du carnet d&apos;adresses&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Odstrani iz imenika&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1442,22 +1436,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="65"/>
         <source>Payment ID</source>
-        <translation>ID paiement</translation>
+        <translation>ID plačila</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="66"/>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="67"/>
         <source>Block height</source>
-        <translation>Hauteur bloc</translation>
+        <translation>Višina bloka</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation>Montant</translation>
+        <translation>Znesek</translation>
     </message>
 </context>
 <context>
@@ -1465,12 +1459,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation>Privzeto</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
         <source>High</source>
-        <translation>Haut</translation>
+        <translation>Visok</translation>
     </message>
 </context>
 <context>
@@ -1478,242 +1472,222 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="69"/>
         <source>OpenAlias error</source>
-        <translation>Erreur OpenAlias</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="129"/>
-        <source>Amount</source>
-        <translation>Montant</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="181"/>
-        <source>Transaction priority</source>
-        <translation>Priorité de transaction</translation>
+        <translation>OpenAlias napaka</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="81"/>
         <source>Privacy level (ringsize %1)</source>
-        <translation>Niveau de confidentialité (taille du cercle %1)</translation>
+        <translation type="unfinished">Nivo zasebnosti (ringsize %1)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="129"/>
+        <source>Amount</source>
+        <translation>Znesek</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="181"/>
+        <source>Transaction priority</source>
+        <translation>Prioriteta transakcije</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="164"/>
         <source>All</source>
-        <translation>Tout</translation>
+        <translation>Vsi</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="194"/>
-        <source>Slow (x0.25 fee)</source>
-        <translation>Lent (frais x0.25)</translation>
+        <location filename="../pages/Transfer.qml" line="45"/>
+        <source>Start daemon</source>
+        <translation>Zaženi prikriti proces</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="195"/>
-        <source>Default (x1 fee)</source>
-        <translation>Par défaut (frais x1)</translation>
+        <location filename="../pages/Transfer.qml" line="220"/>
+        <source>Address</source>
+        <translation>Naslov</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="196"/>
-        <source>Fast (x5 fee)</source>
-        <translation>Rapide (frais x5)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="197"/>
-        <source>Fastest (x41.5 fee)</source>
-        <translation>Très rapide (frais x41.5)</translation>
+        <location filename="../pages/Transfer.qml" line="222"/>
+        <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
+        <translation type="unfinished">Prilepi ali izberi iz &lt;a href=&apos;#&apos;&gt;imenika&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="235"/>
         <source>QR Code</source>
-        <translation>Code QR</translation>
+        <translation>QR koda</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="259"/>
         <source>Resolve</source>
-        <translation>Résoudre</translation>
+        <translation>Razreši</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="277"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Pas d&apos;adresse valide trouvée à cette adresse OpenAlias</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="282"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Adresse trouvée, mais les signatures DNSSEC n&apos;ont pas pu être vérifiées, donc cette adresse pourrait avoit été falsifiée</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="284"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Pas d&apos;adresse valide trouvée à cette adresse OpenAlias, mais les signatures DNSSEC n&apos;ont pas pu être vérifiées, donc ceci pourrait être avoir été falsifié</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="287"/>
         <location filename="../pages/Transfer.qml" line="290"/>
         <source>Internal error</source>
-        <translation>Erreur interne</translation>
+        <translation>Notranja napaka</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="293"/>
         <source>No address found</source>
-        <translation>Pas d&apos;adresse trouvée</translation>
+        <translation>Ne najdem naslova</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="312"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Description &lt;font size=&apos;2&apos;&gt;( Facultatif )&lt;/font&gt;</translation>
+        <translation>Opis &lt;font size=&apos;2&apos;&gt;( neobvezno )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="318"/>
         <source>Saved to local wallet history</source>
-        <translation>Enregistré dans l&apos;historique du portefeuille local</translation>
+        <translation>Shranjeno v zgodovino lokalne denarnice</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="326"/>
         <source>Send</source>
-        <translation>Envoyer</translation>
+        <translation>Pošlji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="391"/>
         <source>Show advanced options</source>
-        <translation>Options avancées</translation>
+        <translation>Prikaži napredne možnosti</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="454"/>
         <source>Sweep Unmixable</source>
-        <translation>Non Mélangeables</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="468"/>
         <source>Create tx file</source>
-        <translation>Créer fichier tx</translation>
+        <translation type="unfinished">Ustvari transakcijsko datoteko</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="490"/>
         <source>Sign tx file</source>
-        <translation>Signer fichier tx</translation>
+        <translation type="unfinished">Podpiši transakcijsko datoteko</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="504"/>
         <source>Submit tx file</source>
-        <translation>Soumettre fichier tx</translation>
+        <translation type="unfinished">Predloži transakcijsko datoteko</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="537"/>
         <location filename="../pages/Transfer.qml" line="593"/>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="599"/>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="526"/>
         <location filename="../pages/Transfer.qml" line="587"/>
         <source>Please choose a file</source>
-        <translation>Veuillez choisir un fichier</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="45"/>
-        <source>Start daemon</source>
-        <translation>Lancer démon</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="220"/>
-        <source>Address</source>
-        <translation>Adresse</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="222"/>
-        <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation>Coller ou sélectionner dans &lt;a href=&apos;#&apos;&gt;le carnet d'adresses&lt;/a&gt;</translation>
+        <translation>Izberi datoteko</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="538"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation>Impossible de charger une transaction non signée : </translation>
+        <translation>Ne morem naložiti nepodpisane transakcije: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="545"/>
         <source>
 Number of transactions: </source>
         <translation>
-Nombre de transactions : </translation>
+Število transakcij: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="547"/>
         <source>
 Transaction #%1</source>
         <translation>
-Transaction #%1</translation>
+Transakcija #%1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="548"/>
         <source>
 Recipient: </source>
         <translation>
-Destinataire : </translation>
+Prejemnik: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="549"/>
         <source>
 payment ID: </source>
         <translation>
-identifiant de paiement : </translation>
+ID plačila: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="550"/>
         <source>
 Amount: </source>
         <translation>
-Montant : </translation>
+Znesek: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="551"/>
         <source>
 Fee: </source>
         <translation>
-Frais : </translation>
+Provizija: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="552"/>
         <source>
 Ringsize: </source>
-        <translation>
-Taille du cercle : </translation>
+        <translation type="unfinished">
+Velikost obroča:</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="566"/>
         <source>Confirmation</source>
-        <translation>Confirmation</translation>
+        <translation>Potrditev</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="594"/>
         <source>Can&apos;t submit transaction: </source>
-        <translation>Impossible de soumettre la transaction : </translation>
+        <translation>Ne morem poslati transakcije: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="600"/>
         <source>Money sent successfully</source>
-        <translation>Argent envoyé avec succès</translation>
+        <translation>Denar uspešno poslan</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="654"/>
         <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Le portefeuille n&apos;est pas connecté au démon.</translation>
+        <translation>Denarnica ni povezana s prikritim procesom</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Le démon connecté n&apos;est pas compatible avec l&apos;interface graphique. 
-Veuillez mettre à jour ou vous connecter à un autre démon</translation>
+        <translation>Povezan prikriti proces ni združljiv z grafičnim vmesnikom.
+Prosim nadgradite vmesnik ali ga povežite z drugim procesom</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="674"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Attente de la fin de la synchronisation avec le démon</translation>
+        <translation>Čakam, da prikriti proces zaključi sinhronizacijo</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -1723,17 +1697,37 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="419"/>
         <source>Transaction cost</source>
-        <translation>Coût de transaction</translation>
+        <translation>Strošek transakcije</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>ID de paiement &lt;font size=&apos;2&apos;&gt;( Facultatif )&lt;/font&gt;</translation>
+        <translation>ID plačila &lt;font size=&apos;2&apos;&gt;( neobvezno )&lt;/font&gt;</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="194"/>
+        <source>Slow (x0.25 fee)</source>
+        <translation>Počasno (x0.25)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="195"/>
+        <source>Default (x1 fee)</source>
+        <translation>Privzeto (x1 provizija)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="196"/>
+        <source>Fast (x5 fee)</source>
+        <translation>Hitro (x5)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="197"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation>Najhitrejše (x41.5)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="307"/>
         <source>16 or 64 hexadecimal characters</source>
-        <translation>16 ou 64 caractères hexadécimaux</translation>
+        <translation>16 ali 64 šestnajstiških znakov</translation>
     </message>
 </context>
 <context>
@@ -1741,78 +1735,75 @@ Veuillez mettre à jour ou vous connecter à un autre démon</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="349"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
-        <translation>Si un paiement est constitué de plusieurs transactions, chaque transaction doit être vérifiée et les résultats ajoutés.</translation>
+        <translation>Če je plačilo iz večih transakcij, se mora vsaka preveriti in rezultati združiti.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="133"/>
         <location filename="../pages/TxKey.qml" line="245"/>
         <source>Address</source>
-        <translation>Adresse</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="97"/>
-        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
-For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation> Générer une preuve de votre paiement en fournissant l'ID de transaction, l'adresse du destinataire et un message facultatif.
-        Pour le cas des paiements sortants, vous pouvez obtenir un &apos;Preuve dedépense&apos; qui prouve l'auteur d'une transaction. En ce cas, il ne faut pas spécifier une adresse destinaire.
-        </translation>
+        <translation>Naslov</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="140"/>
         <location filename="../pages/TxKey.qml" line="252"/>
         <source>Recipient&apos;s wallet address</source>
-        <translation>Adresse du portefeuille du destinataire</translation>
+        <translation>Prejemnikov naslov denarnice</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="159"/>
         <location filename="../pages/TxKey.qml" line="271"/>
         <source>Message</source>
-        <translation>Message</translation>
+        <translation>Sporočilo</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation>Message facultatif sur lequel la signature est signée</translation>
+        <translation type="unfinished">Neobvezno sporočilo katerega podpis je podpisan</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
         <source>Generate</source>
-        <translation>Générer</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="209"/>
-        <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
-For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation> Vérifier que de l'argent a été payé à une adresse en fournissant l'ID de transaction, l'adresse destinaire, le message qui a été utilisé pour la signature et la signature
-Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'adresse du destinataire.</translation>
+        <translation>Ustvari</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="297"/>
         <source>Signature</source>
-        <translation>Signature</translation>
+        <translation>Podpis</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="305"/>
         <source>Paste tx proof</source>
-        <translation>Coller preuve de transaction</translation>
+        <translation>Prilepi dokaz transakcije</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
         <location filename="../pages/TxKey.qml" line="218"/>
         <source>Transaction ID</source>
-        <translation>ID de transaction</translation>
+        <translation>ID transakcije</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="97"/>
+        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
+For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="113"/>
         <location filename="../pages/TxKey.qml" line="225"/>
         <source>Paste tx ID</source>
-        <translation>Coller l&apos;identifiant de transaction</translation>
+        <translation>Prilepi ID transakcije</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="209"/>
+        <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
+For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
+         <translation type="unfinished">Preveri prenos sredstev na naslov z ID transakcije, prejemnikovim naslovom, sporočilom uporabljenim za podpisovanje ter samim podpisom.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="326"/>
         <source>Check</source>
-        <translation>Vérifier</translation>
+        <translation>Preveri</translation>
     </message>
 </context>
 <context>
@@ -1820,37 +1811,37 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Nous y sommes presque - configurons juste quelques paramètres de Monero</translation>
+        <translation>Smo skoraj pri koncu. Samo še konfiguriramo Monero nastavitve</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation>Démarrer la chaîne de blocs Monero ?</translation>
+        <translation>Spodbudimo nalaganje Monero blockchaina?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Il est très important de l&apos;écrire sur papier car c&apos;est la seule sauvegarde dont vous aurez besoin pour votre portefeuille.</translation>
+        <translation>Zelo pomembno je, da si to nekam zapišete. Je zagotovilo, in edina potrebna reč, za varno hranjenje vaše denarnice.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
         <source>Enable disk conservation mode?</source>
-        <translation>Activer le mode conservation de disque ?</translation>
+        <translation>Omogoči ohranjevalni način za disk?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Le mode conservation de disque utilise substantiellement moins d&apos;espace disque, mais la même quantité de bande passante qu&apos;une instance normale de Monero. Cependant, stocker la chaîne de blocs complète est bénéfique pour la sécurité du réseau Monero. Si vous êtes sur un appareil ayant un espace disque limité, alors cette option est appropriée pour vous.</translation>
+        <translation>Ohranjevalni način za disk potrebuje bistveno manj prostora, a enako mrežno pasovno širino kot običajen Monero program. A vendarle je hranjenje celotnega blockchaina koristno za varnost omrežja Monero. Če uporabljate napravo z omejenim diskovnim prostorom, je način za vas primeren.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
         <source>Allow background mining?</source>
-        <translation>Autoriser l&apos;extraction minière en arrière plan ?</translation>
+        <translation>Dovolim rudarjenje v ozadju?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="175"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>L&apos;extraction minière sécurise le réseau Monero, et paye une petite somme pour le travail effectué. Cette option laissera l&apos;extraction Monero travailler quand votre ordinateur est inactif et alimenté par le réseau électrique. L&apos;extraction se mettra en pause lorsque l&apos;ordinateur sera en cours d&apos;utilisation.</translation>
+        <translation>Rudarjenje zagotavlja varnost omrežja Monero, hkrati pa tudi izplača majhno nagrado za opravljeno delo. Ta opcija dovoli aplikaciji Monero rudariti, ko je vaš računalnik na glavnem napajanju ter nedejaven. Preneha rudariti, ko nadaljujete z delom.</translation>
     </message>
 </context>
 <context>
@@ -1858,7 +1849,7 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Créer portefeuille d'audit</translation>
+        <translation>Ustvari view only denarnico</translation>
     </message>
 </context>
 <context>
@@ -1866,7 +1857,7 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="100"/>
         <source>Create a new wallet</source>
-        <translation>Créer un nouveau portefeuille</translation>
+        <translation>Ustvari novo denarnico</translation>
     </message>
 </context>
 <context>
@@ -1874,32 +1865,32 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
-        <translation>Il faut être connecté à un démon Monero pour communiquer avec le réseau Monero. Pour la meilleure confidentialité vous devriez utiliser un démon local. </translation>
+        <translation>Da je mogoče komunicirati z omrežjem Monero, mora vaša denarnica biti povezana z vozliščem Monero. Za najboljšo zasebnost je priporočeno, da poganjate lastno vozlišče.                      &lt;br&gt;&lt;br&gt;                         Če nimate možnosti poganjati lastno vozlišče, se je možno povezati na oddaljeno vozlišče.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Lancer un démon automatiquement en arrière-plan (conseillé)</translation>
+        <translation>Samodejno zaženi vozlišče v ozadju (priporočeno)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="144"/>
         <source>Blockchain location</source>
-        <translation>Emplacement de la chaîne de blocs</translation>
+        <translation>Lokacija blockchaina</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="151"/>
         <source>(optional)</source>
-        <translation>(facultatif)</translation>
+        <translation>(neobvezno)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="170"/>
         <source>Connect to a remote node until my own node has finished syncing</source>
-        <translation>Connectez-vous à un démon distant pendant que votre propre démon est en train de se synchroniser</translation>
+        <translation>Poveži se z oddaljenim vozliščem dokler lastno vozlišče ne zaključi sinhronizacije</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="171"/>
         <source>Connect to a remote node</source>
-        <translation>Se connecter à un démon distant</translation>
+        <translation>Poveži z oddaljenim vozliščem</translation>
     </message>
 </context>
 <context>
@@ -1907,32 +1898,32 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
         <source>Monero development is solely supported by donations</source>
-        <translation>Le développement de Monero est soutenu uniquement par des dons</translation>
+        <translation>Razvoj Monera je financiran izključno preko donacij</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
         <source>Enable auto-donations of?</source>
-        <translation>Activer l&apos;auto-don de ?</translation>
+        <translation>Omogoči samodejne donacije?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
         <source>% of my fee added to each transaction</source>
-        <translation>% de mes frais ajouté à chaque transaction</translation>
+        <translation>% moje provizije dodan vsaki transakciji</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Pour chaque transaction, de petits frais de transaction doivent être payés. Cette option vous laisse ajouter un montant additionnel, un pourcentage de ces frais, à votre transaction pour soutenir le développement de Monero. Par exemple, un auto-don de 50% avec des frais de transaction de 0.005 XMR ajoutera 0.0025 XMR pour soutenir le développement de Monero.</translation>
+        <translation>Za vsako transakcijo je zaračunana majhna provizija. Ta opcija omogoči dodaten znesek k tej proviziji, kot odstotek te provizije. Na ta način vaše transakcije podpirajo razvoj sistema Monero. Na primer, 50% samodejna donacija bo transakciji s provizijo 0.005 XMR, dodala provizijo 0.0025 XMR, ki bo namenjena razvoju Monera.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
         <source>Allow background mining?</source>
-        <translation>Autoriser l&apos;extraction minière en arrière plan ?</translation>
+        <translation>Dovoli rudarjenje v ozadju?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>L&apos;extraction minière sécurise le réseau Monero, et paye une petite somme pour le travail effectué. Cette option laissera l&apos;extraction Monero travailler quand votre ordinateur est inactif et alimenté par le réseau électrique. L&apos;extraction se mettra en pause lorsque l&apos;ordinateur sera en cours d&apos;utilisation.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1942,64 +1933,64 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
         <location filename="../wizard/WizardFinish.qml" line="52"/>
         <location filename="../wizard/WizardFinish.qml" line="54"/>
         <source>Enabled</source>
-        <translation>Activé</translation>
+        <translation>Omogočeno</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="49"/>
         <location filename="../wizard/WizardFinish.qml" line="52"/>
         <location filename="../wizard/WizardFinish.qml" line="54"/>
         <source>Disabled</source>
-        <translation>Désactivé</translation>
+        <translation>Onemogočeno</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="58"/>
         <source>Language</source>
-        <translation>Langue</translation>
+        <translation>Jezik</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="59"/>
         <source>Wallet name</source>
-        <translation>Nom du portefeuille</translation>
+        <translation>Ime denarnice</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
         <source>Backup seed</source>
-        <translation>Graine de sauvegarde</translation>
+        <translation>Varnostna kopija semena</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
         <source>Wallet path</source>
-        <translation>Chemin du portefeuille</translation>
+        <translation>Pot do denarnice</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="67"/>
         <source>Daemon address</source>
-        <translation>Adresse du démon</translation>
+        <translation>Naslov prikritega procesa</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="68"/>
         <source>Testnet</source>
-        <translation>Testnet</translation>
+        <translation>Testno omrežje</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
         <source>Restore height</source>
-        <translation>Hauteur de réstoration</translation>
+        <translation type="unfinished">Višina obnovitve</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="78"/>
         <source>New wallet details:</source>
-        <translation>Détails du nouveau portefeuille :</translation>
+        <translation>Podrobnost nove denarnice:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>N&apos;oubliez pas d&apos;écrire votre graine sur papier. Vous pouvez voir votre graine et changer vos réglages sur la page réglages.</translation>
+        <translation>Ne pozabite shraniti oz. zapisati vašega semena. Vaše seme je vidno v nastavitvah na strani Nastavitve.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
         <source>You’re all set up!</source>
-        <translation>Vous êtes paré !</translation>
+        <translation>Vse je nared!</translation>
     </message>
 </context>
 <context>
@@ -2007,44 +1998,43 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Un portefeuille avec le même nom existe déjà. Veuillez changer le nom du portefeuille</translation>
+        <translation>Denarnica s tem imenom že obstaja. Zamenjaj ime denarnice.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="191"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation>Les caractères non ASCII ne sont pas autorisés dans le chemin du portefeuille ou le nom du compte</translation>
+        <translation>Ne ASCII znaki niso dovoljeni v poti denarnice ali imenu računa</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="375"/>
         <source>USE MONERO</source>
-        <translation>UTILISER MONERO</translation>
+        <translation>UPORABI MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="392"/>
         <source>Create wallet</source>
-        <translation>Créer un portefeuille</translation>
+        <translation>Ustvari denarnico</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="402"/>
         <source>Success</source>
-        <translation>Succès</translation>
+        <translation>Uspelo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Le portefeuille d'audit a été créé. Vous pouvez l&apos;ouvrir en fermant le portefeuille actuel, puis en cliquant sur l&apos;option &quot;Ouvrir un fichier portefeuille&quot; et en sélectionnant le portefeuille d'audit dans : 
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="411"/>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="424"/>
         <source>Abort</source>
-        <translation>Abandonner</translation>
+        <translation>Prekini</translation>
     </message>
 </context>
 <context>
@@ -2052,52 +2042,52 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="158"/>
         <source>Wallet name</source>
-        <translation>Nom du portefeuille</translation>
+        <translation>Ime denarnice</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="178"/>
         <source>Restore from seed</source>
-        <translation>Restaurer à partir de la graine</translation>
+        <translation>Obnovi iz semena</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="192"/>
         <source>Restore from keys</source>
-        <translation>Restaurer à partir des clés</translation>
+        <translation>Obnovi iz ključev</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation>Depuis un Code QR</translation>
+        <translation>Iz QR kode</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
         <source>Account address (public)</source>
-        <translation>Adresse du compte (publique)</translation>
+        <translation>Naslov računa (javni)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="253"/>
         <source>View key (private)</source>
-        <translation>Clé d&apos;audit (privée)</translation>
+        <translation type="unfinished">Poglej ključ (privatni)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="262"/>
         <source>Spend key (private)</source>
-        <translation>Clé de dépense (privée)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="274"/>
         <source>Restore height (optional)</source>
-        <translation>Hauteur de restoration (facultatif)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="287"/>
         <source>Your wallet is stored in</source>
-        <translation>Votre portefeuille est stocké dans</translation>
+        <translation>Vaša denarnica je shranjena v</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="313"/>
         <source>Please choose a directory</source>
-        <translation>Veuillez choisir un répertoire</translation>
+        <translation>Izberite mapo</translation>
     </message>
 </context>
 <context>
@@ -2105,17 +2095,17 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation>Entrez votre phrase mnémonique de 25 mots</translation>
+        <translation>Vnesi 25 besed mnemoničnega semena</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="64"/>
         <source>Seed copied to clipboard</source>
-        <translation>Phrase mnémonique copiée</translation>
+        <translation>Seme je skopirano v odložišče</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="92"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Il est &lt;b&gt;très&lt;/b&gt; important d&apos;&apos;écrire cette graine sur papier et de la garder secrète. C&apos;est tout ce dont vous avez besoin pour sauvegarder et restaurer votre portefeuille.</translation>
+        <translation>Seme je &lt;b&gt;zelo&lt;/b&gt; pomembno zapisati in skrivaj shraniti. Je vse kar potrebujete, da varno shranite in obnovite vašo denarnico.</translation>
     </message>
 </context>
 <context>
@@ -2123,32 +2113,32 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardOptions.qml" line="74"/>
         <source>Welcome to Monero!</source>
-        <translation>Bienvenue dans Monero !</translation>
+        <translation>Dobrodošli v Monero!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="85"/>
         <source>Please select one of the following options:</source>
-        <translation>Veuillez sélectionner une des options suivantes :</translation>
+        <translation>Izberite eno od sledečih možnosti:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="141"/>
         <source>Create a new wallet</source>
-        <translation>Créer un nouveau portefeuille</translation>
+        <translation>Ustvari novo denarnico</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="182"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Restaurer un portefeuille à partir des clés ou de la phrase mnémonique</translation>
+        <translation>Obnovi denarnico s ključem ali mnemoničnim semenom</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="225"/>
         <source>Open a wallet from file</source>
-        <translation>Ouvrir un fichier portefeuille</translation>
+        <translation>Odpri denarnico iz datoteke</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="245"/>
         <source>Testnet</source>
-        <translation>Testnet</translation>
+        <translation type="unfinished">Testna mreža</translation>
     </message>
 </context>
 <context>
@@ -2157,14 +2147,14 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Mettre un mot de passe à votre portefeuille</translation>
+        <translation>Ustvarite geslo za denarnico</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Note : ce mot de passe ne pourra pas être récuperé. Si vous l&apos;oubliez vous devrez restaurer votre portefeuille avec sa phrase mnémonique de 25 mots.&lt;br/&gt;&lt;br/&gt;
-                        &lt;b&gt;Entrez un mot de passe fort&lt;/b&gt; (utilisant des lettres, chiffres, et/ou symboles) :</translation>
+        <translation> &lt;br&gt;Opomba: gesla se ne da obnoviti. Ce ga pozabite, se denarnica obnovi iz 25 besed dolgega mnemonicnega semena.&lt;br/&gt;&lt;br/&gt;
+                        &lt;b&gt;Vnesite mocno geslo&lt;/b&gt; (uporabite crke, štefilke in/ali simbole):</translation>
     </message>
 </context>
 <context>
@@ -2172,12 +2162,12 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardPasswordUI.qml" line="73"/>
         <source>Password</source>
-        <translation>Mot de passe</translation>
+        <translation>Geslo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPasswordUI.qml" line="85"/>
         <source>Confirm password</source>
-        <translation>Confirmer le mot de passe</translation>
+        <translation>Potrdi geslo</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2175,7 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardRecoveryWallet.qml" line="118"/>
         <source>Restore wallet</source>
-        <translation>Restaurer un portefeuille</translation>
+        <translation>Obnovi denarnico</translation>
     </message>
 </context>
 <context>
@@ -2193,12 +2183,12 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="73"/>
         <source>Welcome to Monero!</source>
-        <translation>Bienvenue dans Monero !</translation>
+        <translation>Dobrodošli v Monero!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
         <source>Please choose a language and regional format.</source>
-        <translation>Veuillez choisir une langue et un format régional.</translation>
+        <translation>Izberite jezik in krajevne nastavitve.</translation>
     </message>
 </context>
 <context>
@@ -2217,82 +2207,82 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
         <location filename="../main.qml" line="1177"/>
         <location filename="../main.qml" line="1280"/>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <location filename="../main.qml" line="353"/>
         <source>Couldn&apos;t open wallet: </source>
-        <translation>Impossible d&apos;ouvrir le portefeuille : </translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="382"/>
-        <source>Unlocked balance (~%1 min)</source>
-        <translation>Solde débloqué (~%1 min)</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="382"/>
-        <source>Unlocked balance</source>
-        <translation>Solde débloqué</translation>
+        <translation>Ne morem odpreti denarnice: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="382"/>
         <source>Unlocked balance (waiting for block)</source>
-        <translation>Solde débloqué (attente de bloc)</translation>
+        <translation>Odklenjeno stanje (čakam na blok)</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="382"/>
+        <source>Unlocked balance (~%1 min)</source>
+        <translation>Odklenjeno stanje (~%1 min)</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="382"/>
+        <source>Unlocked balance</source>
+        <translation>Odklenjeno stanje</translation>
     </message>
     <message>
         <location filename="../main.qml" line="435"/>
         <source>Remaining blocks (local node):</source>
-        <translation>Blocs restants (démon local) :</translation>
+        <translation>Preostali blocki (lokalno vozlišče):</translation>
     </message>
     <message>
         <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Attente du démarrage du démon...</translation>
+        <translation>Čakam na zagon prikritega procesa...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Attente de l&apos;arrêt du démon...</translation>
+        <translation>Čakam, da se prikriti proces zaustavi...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="506"/>
         <source>Daemon failed to start</source>
-        <translation>Échec du lancement du démon</translation>
+        <translation>Prikriti proces neuspešno zagnan</translation>
     </message>
     <message>
         <location filename="../main.qml" line="507"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Veuillez vérifier les erreurs dans les journaux du portefeuille et du démon. Vous pouvez aussi essayer de lancer %1 manuellement.</translation>
+        <translation>Preverite vašo denarnico in dnevnik prikritega procesa za morebitne napake. Lahko tudi poskusite zagnati %1 ročno.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="563"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Impossible de créer la transaction : mauvaise version de démon : </translation>
+        <translation>Ne uspem ustvariti transakcije: napačna verzija prikritega procesa: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="565"/>
         <location filename="../main.qml" line="678"/>
         <source>Can&apos;t create transaction: </source>
-        <translation>Impossible de créer la transaction : </translation>
+        <translation>Ne uspem ustvariti transakcije: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="574"/>
         <location filename="../main.qml" line="687"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Aucune sortie non mélangeable à balayer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="586"/>
         <location filename="../main.qml" line="699"/>
         <source>Confirmation</source>
-        <translation>Confirmation</translation>
+        <translation>Potrditev</translation>
     </message>
     <message>
         <location filename="../main.qml" line="587"/>
         <location filename="../main.qml" line="700"/>
         <source>Please confirm transaction:
 </source>
-        <translation>Veuillez confirmer la transaction :
+        <translation>Prosim potrdite transakcijo:
 </translation>
     </message>
     <message>
@@ -2300,14 +2290,14 @@ Pour le cas d'une preuve de dépense, il n'est pas nécessaire de spécifier l'a
         <source>
 Address: </source>
         <translation>
-Adresse : </translation>
+Naslov: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="589"/>
         <source>
 Payment ID: </source>
         <translation>
-ID de paiement : </translation>
+ID plačila: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="590"/>
@@ -2316,8 +2306,7 @@ ID de paiement : </translation>
 
 Amount: </source>
         <translation>
-
-Montant : </translation>
+Znesek: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="591"/>
@@ -2325,134 +2314,132 @@ Montant : </translation>
         <source>
 Fee: </source>
         <translation>
-Frais : </translation>
+Provizija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="592"/>
         <source>
 
 Ringsize: </source>
-        <translation>
-
-Taille du cercle : </translation>
+        <translation type="unfinished">
+Velikost obroča: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="778"/>
         <source>Payment proof</source>
-        <translation>Preuve de Paiement</translation>
+        <translation>Dokaz plačila</translation>
     </message>
     <message>
         <location filename="../main.qml" line="781"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
-        <translation>Impossible de générer une preuve pour la raison suivante : 
+        <translation>Ne uspem ustvariti dokaza zaradi sledečih razlogov:
 </translation>
     </message>
     <message>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation>Vérification de preuve de paiement</translation>
+        <translation>Preverjanje dokaza plačila</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation>Mauvaise signature</translation>
+        <translation type="unfinished">Slab podpis</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="822"/>
+        <source>This address received %1 monero, with %2 confirmation(s).</source>
+        <translation>Ta naslov je prejel %1 monerov, s %2 potrditev.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="833"/>
         <source>Good signature</source>
-        <translation>Bonne signature</translation>
+        <translation>Dober podpis</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1033"/>
         <location filename="../main.qml" line="1281"/>
         <source>Wrong password</source>
-        <translation>Mot de passe incorrect</translation>
+        <translation>Napačno geslo</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation>Attention</translation>
+        <translation>Opozorilo</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
         <source>Error: Filesystem is read only</source>
-        <translation>Erreur : Système de fichiers en lecture seule</translation>
+        <translation>Napaka: datotečni sistem je samo za branje</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1113"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Attention : Il y a seulement %1 GB disponibles sur le périphérique. La chaîne de blocs a besoin de ~%2 GB.</translation>
+        <translation>Opozorilo: Na napravi je na voljo samo %1 GB prostora. Blockchain zahteva ~%2 GB podatkov.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1115"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Note : Il y a %1 GB disponibles sur le appareil. La chaîne de blocs a besoin de ~%2 GB.</translation>
+        <translation>Opomba: Na napravi je na voljo samo %1 GB prostora. Blockchain zahteva ~%2 GB podatkov.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1117"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation>Note : dossier lmdb non trouvé. Un nouveau répertoire va être créé.</translation>
+        <translation>Opomba: ne najdem mape lmdb. Ustvarjena bo nova mapa.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1121"/>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation>Mot de passe changé avec succès</translation>
+        <translation>Geslo uspešno spremenjeno</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
-        <translation>Erreur : </translation>
+        <translation>Napaka: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation>Tapez encore pour fermer...</translation>
+        <translation>Ponovno se dotakni, da zapreš...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
         <source>Daemon is running</source>
-        <translation>Le démon fonctionne</translation>
+        <translation>Prikriti proces teče</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1613"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Le démon fonctionnera toujours en arrière plan après fermeture de l&apos;interface graphique.</translation>
+        <translation>Ko zaprete grafični vmesnik, bo prikriti proces nadaljeval v ozadju.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1615"/>
         <source>Stop daemon</source>
-        <translation>Arrêter démon</translation>
+        <translation>Ustavi prikriti proces</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1650"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Une nouvelle version de monero-wallet-gui est disponible : %1&lt;br&gt;%2</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="822"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Cette adresse a reçu %1 monero, avec %2 confirmation(s).</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="313"/>
-        <location filename="../main.qml" line="314"/>
-        <source>HIDDEN</source>
-        <translation>CACHÉ</translation>
+        <translation>Na voljo je nova različica grafičnega vmesnika (monero-wallet-gui): %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="593"/>
         <source>
 Number of transactions: </source>
-        <translation>
-Nombre de transactions : </translation>
+        <translation>Število transakcij: </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="313"/>
+        <location filename="../main.qml" line="314"/>
+        <source>HIDDEN</source>
+        <translation>SKRIT</translation>
     </message>
     <message>
         <location filename="../main.qml" line="594"/>
@@ -2461,78 +2448,78 @@ Nombre de transactions : </translation>
 Description: </source>
         <translation>
 
-Description : </translation>
+Opis: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="624"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation>Montant erroné : nombre entre %1 et %2 attendu</translation>
+        <translation>Napačen znesek: pričakovano število je od %1 do %2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="636"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>fonds insuffisants. Solde débloqué : %1</translation>
+        <translation>Ni dovolj sredstev. Odklenjeno stanje: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="739"/>
         <source>Couldn&apos;t send the money: </source>
-        <translation>Impossible d&apos;envoyer l&apos;argent : </translation>
+        <translation>Ne morem poslati denarja: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="742"/>
         <location filename="../main.qml" line="1173"/>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <location filename="../main.qml" line="748"/>
         <source>Money sent successfully: %1 transaction(s) </source>
-        <translation>Argent envoyé avec succès : %1 transaction(s) </translation>
+        <translation>Denar uspešno poslan: %1 transakcij(a) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="748"/>
         <source>Transaction saved to file: %1</source>
-        <translation>Transaction enregistrée dans le fichier : %1</translation>
+        <translation>Transakcija shranjena v datoteko: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="819"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Cette adresse a reçu %1 monero, mais la transaction n&apos;a pas encore été incluse dans un bloc</translation>
+        <translation>Ta naslov je prejel %1 monera(ov), ampak transakcija še ni v bloku</translation>
     </message>
     <message>
         <location filename="../main.qml" line="826"/>
         <source>This address received nothing</source>
-        <translation>Cette adresse n&apos;a rien reçu</translation>
+        <translation>Ta naslov ni prejel ničesar</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
         <source>Balance (syncing)</source>
-        <translation>Solde (synchronisation en cours)</translation>
+        <translation>Stanje (sinhroniziram)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
         <source>Balance</source>
-        <translation>Solde</translation>
+        <translation>Stanje</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1203"/>
         <source>Please wait...</source>
-        <translation>Veuillez patienter…</translation>
+        <translation>Počakajte...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <translation>Assistant de configuration du programme</translation>
+        <translation>Čarovnik nastavitve</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1243"/>
         <source>Monero</source>
-        <translation>Monero</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="1317"/>
         <source>send to the same destination</source>
-        <translation>envoyer à la même destination</translation>
+        <translation>Pošlji na isti naslov</translation>
     </message>
 </context>
 </TS>
