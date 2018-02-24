@@ -904,7 +904,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="349"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Este é um rastreador de vendas:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Clique para gerar um ID de pagamento aleatório para um novo cliente&lt;/p&gt; &lt;p&gt;Permita seu cliente escanear o código QR para realizar um pagamento (se o cliente possuir software que suporte leitura de código QR).&lt;/p&gt;&lt;p&gt;Esta página irá escanear automaticamente a blockchain e a txpool em busca de transações utilizando este código QR. Caso você especifique uma quantidade, também checará por transação sendo recebida atá a quantidade especificada.&lt;/p&gt;Depende de você caso queira aceitar transações sem confirmações. É provavel que elas serão confirmadas em pouco tempo porém existe uma possibilidade de que não sejam, para valores altos é recomendado aguardar uma ou mais confirmações.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Este é um rastreador de vendas:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Clique para gerar um ID de pagamento aleatório para um novo cliente&lt;/p&gt; &lt;p&gt;Permita seu cliente escanear o código QR para realizar um pagamento (se o cliente possuir software que suporte leitura de código QR).&lt;/p&gt;&lt;p&gt;Esta página irá escanear automaticamente o blockchain e a txpool em busca de transações utilizando este código QR. Caso você especifique uma quantidade, também checará por transação sendo recebida atá a quantidade especificada.&lt;/p&gt;Depende de você caso queira aceitar transações sem confirmações. É provavel que elas serão confirmadas em pouco tempo porém existe uma possibilidade de que não sejam, para valores altos é recomendado aguardar uma ou mais confirmações.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="393"/>
@@ -1004,7 +1004,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="303"/>
         <source>Blockchain location</source>
-        <translation>Localização da Blockchain</translation>
+        <translation>Localização do Blockchain</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="363"/>
@@ -1098,12 +1098,12 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../pages/Settings.qml" line="634"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Aviso: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
+        <translation>Aviso: Existe apenas %1 GB disponível no dispositivo. O Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="636"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Atenção: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
+        <translation>Atenção: Existe apenas %1 GB disponível no dispositivo. O Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="640"/>
@@ -1297,12 +1297,12 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Endereço de assinatura</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cole ou selecione da &lt;a href=&apos;#&apos;&gt;agenda de endereços&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="160"/>
@@ -1344,12 +1344,12 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../components/StandardDialog.qml" line="122"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toque duas vezes para copiar</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="129"/>
         <source>Content copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Conteúdo copiado para Área de Transferência</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="147"/>
@@ -1359,7 +1359,7 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../components/StandardDialog.qml" line="160"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ok</translation>
     </message>
 </context>
 <context>
@@ -1466,7 +1466,7 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Padrão</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
@@ -1627,7 +1627,7 @@ O cache da carteira antiga será renomeado e poderá ser resturado depois.
     <message>
         <location filename="../pages/Transfer.qml" line="222"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cole ou selecione da &lt;a href=&apos;#&apos;&gt;agenda de endereços&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="538"/>
@@ -1754,7 +1754,8 @@ Por favor atualize ou conecte outro daemon</translation>
         <location filename="../pages/TxKey.qml" line="97"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message.
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gere uma prova dos seus recebimentos/pagamentos fornecendo o ID da transação, o destinatário e uma mensagem opicional.
+Para o caso de pagamentos, você pode pegar uma &apos;Spend Proof&apos; que prove a autoria de uma transação. Neste caso, você não precisa especificar o endereço do destinatário.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="140"/>
@@ -1766,13 +1767,13 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="159"/>
         <location filename="../pages/TxKey.qml" line="271"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mensagem</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mensagem opicional com a qual a assinatura é assinada</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
@@ -1783,7 +1784,8 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="209"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verifique que fundos foram pagos para um endereço fornecendo o ID da transação, o endereço do destinatário, a mensagem usada para assinar e a assinatura.
+Para o caso com Spend Proof, você não precisa especificar o endereço do destinatário.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="297"/>
@@ -1793,7 +1795,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../pages/TxKey.qml" line="305"/>
         <source>Paste tx proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Colar prova da transação</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
@@ -1823,7 +1825,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation>Iniciar a blockchain do Monero?</translation>
+        <translation>Iniciar o blockchain do Monero?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1838,7 +1840,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Modo de conservação de espaço no disco usa menos espaço em disco porém a mesma quantidade de banda que o modo normal. Armazenar a blockchain completa ajuda a proteger a rede do Monero. Caso esteja em um dispositivo com espaço em disco limitado, esta opção é para você.</translation>
+        <translation>Modo de conservação de espaço no disco usa menos espaço em disco porém a mesma quantidade de banda que o modo normal. Armazenar o blockchain completo ajuda a proteger a rede do Monero. Caso esteja em um dispositivo com espaço em disco limitado, esta opção é para você.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
@@ -1872,17 +1874,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Para se comunicar com a rede Monero, sua carteira precisa estar conectada com um nó Monero. Para uma maior privacidade, é recomendado que você rode seu próprio nó.                         &lt;br&gt;&lt;br&gt;                         Se você não tem a opção de rodar seu próprio nó, existe a opção de conectar-se a um nó remoto.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Iniciar automaticamente um nó remoto no plano de fundo (recomendado)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="144"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Localização da Blockchain</translation>
+        <translation type="unfinished">Localização do Blockchain</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="151"/>
@@ -1892,12 +1894,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="170"/>
         <source>Connect to a remote node until my own node has finished syncing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Conectar com um nó remoto até que meu próprio nó tenha terminado de sincronizar</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="171"/>
         <source>Connect to a remote node</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Conectar com um nó remoto</translation>
     </message>
 </context>
 <context>
@@ -2065,7 +2067,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">De um QR Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2108,7 +2110,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="64"/>
         <source>Seed copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Semente copiada para Área de Transferência</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="92"/>
@@ -2240,7 +2242,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="435"/>
         <source>Remaining blocks (local node):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Blocos restantes (nó local):</translation>
     </message>
     <message>
         <location filename="../main.qml" line="475"/>
@@ -2336,19 +2338,20 @@ Ringsize: </translation>
     <message>
         <location filename="../main.qml" line="778"/>
         <source>Payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prova do pagamento</translation>
     </message>
     <message>
         <location filename="../main.qml" line="781"/>
         <source>Couldn&apos;t generate a proof because of the following reason:
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Não foi possível gerar uma prova devido aos seguintes motivos:
+</translation>
     </message>
     <message>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Checar prova do pagamento</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
@@ -2385,12 +2388,12 @@ Ringsize: </translation>
     <message>
         <location filename="../main.qml" line="1113"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">Aviso: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
+        <translation type="unfinished">Aviso: Existe apenas %1 GB disponível no dispositivo. O Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1115"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">Atenção: Existe apenas %1 GB disponível no dispositivo. A Blockchain necessita de ~%2 GB de dados.</translation>
+        <translation type="unfinished">Atenção: Existe apenas %1 GB disponível no dispositivo. O Blockchain necessita de ~%2 GB de dados.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1117"/>
@@ -2405,7 +2408,7 @@ Ringsize: </translation>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Senha alterada com sucesso</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
@@ -2415,7 +2418,7 @@ Ringsize: </translation>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toque novamente para fechar...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2448,7 +2451,7 @@ Número de transações: </translation>
         <location filename="../main.qml" line="313"/>
         <location filename="../main.qml" line="314"/>
         <source>HIDDEN</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ESCONDIDO</translation>
     </message>
     <message>
         <location filename="../main.qml" line="594"/>
