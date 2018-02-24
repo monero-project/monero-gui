@@ -1019,7 +1019,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="498"/>
         <source>Debug info</source>
-        <translation type="unfinished">Informații depanare</translation>
+        <translation>Informații depanare</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="523"/>
@@ -1580,7 +1580,7 @@ Fișierul vechi de cache va fi redenumit și poate fi refolosit în viitor.
     <message>
         <location filename="../pages/Transfer.qml" line="454"/>
         <source>Sweep Unmixable</source>
-        <translation type="unfinished">Sweep Unmixable</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="468"/>
@@ -1773,7 +1773,7 @@ Pentru plățile trimise, poți obține o &apos;dovadă de plată&apos; care ate
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation type="unfinished">Mesaj opțional atașat semnăturii</translation>
+        <translation>Mesaj opțional atașat semnăturii</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
@@ -2279,7 +2279,7 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
         <location filename="../main.qml" line="574"/>
         <location filename="../main.qml" line="687"/>
         <source>No unmixable outputs to sweep</source>
-        <translation type="unfinished">No unmixable outputs to sweep</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="586"/>
