@@ -218,6 +218,13 @@ win32 {
         -lboost_regex-mt-s \
         -lboost_chrono-mt-s \
         -lboost_program_options-mt-s \
+        -lboost_locale-mt-s \
+        -licuio \
+        -licuin \
+        -licuuc \
+        -licudt \
+        -licutu \
+        -liconv \
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
