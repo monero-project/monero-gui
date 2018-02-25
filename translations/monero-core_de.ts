@@ -11,11 +11,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
         <source>Qr Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QR-Code</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
+        <translatorcomment>Placeholder value</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -26,6 +27,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
+        <translatorcomment>TODO: Make sense of it!</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -79,7 +81,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adresse in die Zwischenablage kopiert</translation>
     </message>
 </context>
 <context>
@@ -151,7 +153,8 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        du suchst das addressbuch und das geheimhaltungslevel? wechsle zum &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; reiter</translation>
+        <translatorcomment>TODO: Geheimhaltungslevel oder Sicherheitslevel?</translatorcomment>
+        <translation type="unfinished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        Du suchst das Adressbuch und das Geheimhaltungslevel? wechsle zum &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; reiter</translation>
     </message>
 </context>
 <context>
@@ -786,7 +789,7 @@
     <message>
         <location filename="../components/QRCodeScanner.qml" line="129"/>
         <source>QrCode Scanned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">QR-Code gescannt</translation>
     </message>
 </context>
 <context>
@@ -2057,7 +2060,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mit QR-Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
