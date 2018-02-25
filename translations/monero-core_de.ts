@@ -1249,7 +1249,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="106"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>Nachricht oder Inhalt einer Datei mit Deiner Adresse signieren:</translation>
+        <translation>Nachricht oder Dateiinhalt mit Deiner Adresse signieren:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="115"/>
@@ -1293,12 +1293,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> </translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen oder von  &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="160"/>
@@ -1322,7 +1322,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="262"/>
         <source>Verify a message or file signature from an address:</source>
-        <translation>Nachricht oder Datei einer Adresse verifizieren:</translation>
+        <translation>Nachricht oder Dateisignatur einer Adresse verifizieren:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="285"/>
@@ -1340,12 +1340,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="122"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppelklicken zum kopieren</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="129"/>
         <source>Content copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalt wurde in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="147"/>
@@ -1355,7 +1355,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="160"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1393,7 +1393,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDropdown.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Am schnellsten (41,5-fache Gebühr)</translation>
+        <translation>Schnellste (41,5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="210"/>
@@ -1431,7 +1431,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableDropdown.qml" line="185"/>
         <source>&lt;b&gt;Remove from address book&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Aus dem Adressbuch löschen&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Aus dem Adressbuch entfernen&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -1454,7 +1454,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation>Betrag</translation>
+        <translation>Menge</translation>
     </message>
 </context>
 <context>
@@ -1462,7 +1462,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
@@ -1475,7 +1475,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="129"/>
         <source>Amount</source>
-        <translation>Betrag</translation>
+        <translation>Menge</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="181"/>
@@ -1495,7 +1495,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="81"/>
         <source>Privacy level (ringsize %1)</source>
-        <translation>Geheimhaltungsstufe (Ringgröße %1)</translation>
+        <translation>Privatsphärestufe (Ringgröße %1)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="164"/>
@@ -1520,7 +1520,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="197"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Am schnellsten (41,5-fache Gebühr)</translation>
+        <translation>Schnellste (41,5-fache Gebühr)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="235"/>
@@ -1586,14 +1586,14 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="468"/>
         <source>Create tx file</source>
-        <translation>Erstelle Tx-Datei</translation>
+        <translation>Erstelle TX-Datei</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Verbundener Daemon ist nicht mit der GUI kompatibel.
-Bitte aktualisiere oder verbinde einen anderen Daemon</translation>
+Bitte aktualisiere das Programm oder verbinde dich mit einem anderen Daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="537"/>
@@ -1625,7 +1625,7 @@ Bitte aktualisiere oder verbinde einen anderen Daemon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="594"/>
         <source>Can&apos;t submit transaction: </source>
-        <translation>Transaktion kann nicht eingereicht werden</translation>
+        <translation>Transaktion kann nicht abgesendet werden: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="600"/>
@@ -1640,27 +1640,27 @@ Bitte aktualisiere oder verbinde einen anderen Daemon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="45"/>
         <source>Start daemon</source>
-        <translation type="unfinished">Daemon starten</translation>
+        <translation>Daemon starten</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="220"/>
         <source>Address</source>
-        <translation type="unfinished">Adresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="222"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen oder von  &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="490"/>
         <source>Sign tx file</source>
-        <translation>Tx-Datei signieren</translation>
+        <translation>TX-Datei signieren</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="504"/>
         <source>Submit tx file</source>
-        <translation>Tx-Datei einreichen</translation>
+        <translation>TX-Datei absenden</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="545"/>
@@ -1694,8 +1694,8 @@ Zahlungs-ID: </translation>
         <location filename="../pages/Transfer.qml" line="550"/>
         <source>
 Amount: </source>
-        <translation type="unfinished">
-Betrag: </translation>
+        <translation>
+Menge: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="551"/>
@@ -1725,7 +1725,7 @@ Ringgröße: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Zahlungs-ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</translation>
+        <translation>Zahlungs-ID &lt;font size=&apos;2&apos;&gt;( optional )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="307"/>
@@ -1757,46 +1757,48 @@ Ringgröße: </translation>
         <location filename="../pages/TxKey.qml" line="97"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle einen Nachweis deiner Eingangs- und Ausgangszahlungen, indem du die Transaktions-ID, die Empfängeradresse und eine optionale Nachricht angibst. Für den Fall von Ausgangszahlungen, kann du einen Ausgabennachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall musst du die Empfängeradresse nicht angeben.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="113"/>
         <location filename="../pages/TxKey.qml" line="225"/>
         <source>Paste tx ID</source>
-        <translation>Füge tx-ID ein</translation>
+        <translation>Füge TX-ID ein</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="159"/>
         <location filename="../pages/TxKey.qml" line="271"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionale Nachricht, gegen die die Signatur signiert wird</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
         <source>Generate</source>
-        <translation type="unfinished">Generieren</translation>
+        <translation>Generieren</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="209"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Sendenachweis richtig? Nochmal nachsehen.</translatorcomment>
+        <translation type="unfinished"> Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
+Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werden.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="297"/>
         <source>Signature</source>
-        <translation type="unfinished">Signatur</translation>
+        <translation>Signatur</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="305"/>
         <source>Paste tx proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge TX-Nachweis ein</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="326"/>
@@ -1814,27 +1816,28 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Fast geschafft – lass uns noch ein paar Einstellungen vornehmen</translation>
+        <translation>Fast geschafft - lass uns noch ein paar Einstellungen vornehmen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation>Die Blockchain ankurbeln?</translation>
+        <translatorcomment>WTF?</translatorcomment>
+        <translation type="unfinished"> Die Blockchain ankurbeln?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Es ist wichtig, dass Du Dir die Wörter notierst, da Du damit Dein Wallet wiederherstellen kannst.</translation>
+        <translation>Es ist sehr wichtig, dass du die Wörter aufschreibst, da es das einzige Backup ist, dass du für dein Wallet brauchst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
         <source>Enable disk conservation mode?</source>
-        <translation>Festplatten-Sparmodus aktivieren?</translation>
+        <translation>Festplattensparmodus aktivieren?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz, aber dieselbe Menge an Bandbreite. Um das Netzwerk und Deine Privatsphähre zu schützen, solltest Du deshalb eine Kopie der Blockchain haben und diesen Modus nur verwenden, falls nicht ausreichend Speicherplatz verfügbar ist.</translation>
+        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz, aber dieselbe Menge an Bandbreite. Die Speicherung der gesamten Blockchain ist jedoch vorteilhaft für die Sicherheit des Monero-Netzwerks. Wenn du dich an einem Gerät mit begrenztem Speicherplat befindest, ist diese Option für dich geeignet.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
@@ -1844,7 +1847,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="175"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und du bekommst dafür im Gegenzug eine kleine Belohung. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -1852,7 +1855,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Erstelle ein schreibgeschütztes Wallet</translation>
+        <translation type="unfinished"> Ein view-only Wallet erstellen</translation>
     </message>
 </context>
 <context>
@@ -1860,40 +1863,40 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet.qml" line="100"/>
         <source>Create a new wallet</source>
-        <translation>Erstelle ein neues Wallet</translation>
+        <translation>Ein neues Wallet erstellen</translation>
     </message>
 </context>
 <context>
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation type="unfinished"></translation>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <translation>Um mit dem Monero-Netzwerk kommunizieren zu können, muss dein Wallet mit einem Monero-Node verbunden sein. Für optimale Privatsphäre empfiehlt es sich, einen eigenen Node zu betreiben.                         &lt;br&gt;&lt;br&gt;                         Wenn du die Möglichkeit nicht hast, deinen eigenen Node zu betreiben, gibt es die Option, dass du dich mit einem remote-Node verbindest.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>Node automatisch im Hintergrund starten (empfohlen)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="144"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Blockchain-Speicherort</translation>
+        <translation>Blockchain-Speicherort</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="151"/>
         <source>(optional)</source>
-        <translation type="unfinished">(optional)</translation>
+        <translation>(optional)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="170"/>
         <source>Connect to a remote node until my own node has finished syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit einem remote-Node verbinden bis der eigene Node die Synchronisierung abgeschlossen hat</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="171"/>
         <source>Connect to a remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit einem remote-Node verbinden</translation>
     </message>
 </context>
 <context>
@@ -1911,12 +1914,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
         <source>% of my fee added to each transaction</source>
-        <translation>% meiner Gebühren aus jeder Transaktion</translation>
+        <translation>% meiner Gebühren jeder Transaktion hinzufügen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Für jede Transaktion fällt eine kleine Gebühr an. Mit dieser Option kannst Du diese Gebühr um einen zusätzlichen Prozentsatz erhöhen, um die Entwicklung von Monero voranzutreiben. Bei einer 50-%igen automatischen Spende und einer Transaktionsgebühr von 0.005 XMR würden somit zusätzliche 0.0025 der Entwicklung von Monero zukommen.</translation>
+        <translation>Für jede Transaktion fällt eine kleine Transaktionsgebühr an. Mit dieser Option kannst Du diese Gebühr um einen zusätzlichen Prozentsatz erhöhen, um die Entwicklung von Monero voranzutreiben. Beispielsweise würden bei einer 50-%igen automatischen Spende und einer Transaktionsgebühr von 0.005 XMR zusätzliche 0.0025 XMR der Entwicklung von Monero zukommen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -1926,7 +1929,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDonation.qml" line="194"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Mining schützt das Netzwerk und bezahlt Dich dafür im Gegenzug. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
+        <translation>Mining schützt das Netzwerk und du bekommst dafür im Gegenzug eine kleine Belohung. Diese Option sorgt dafür, dass Dein Computer mined während Du ihn nicht verwendest. Sobald Du ihn wieder verwendest, wird der Miningvorgang unterbrochen.</translation>
     </message>
 </context>
 <context>
@@ -1953,12 +1956,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="59"/>
         <source>Wallet name</source>
-        <translation>Name des Wallets</translation>
+        <translation>Walletname</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
         <source>Backup seed</source>
-        <translation>Mnemonischer Code</translation>
+        <translation>Mnemonischer Seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
@@ -1978,7 +1981,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
         <source>Restore height</source>
-        <translation>Wiederherstellungspunkt</translation>
+        <translation>Wiederherstellungshöhe</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="78"/>
@@ -1988,7 +1991,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>Vergiss nicht, den mnemonischen Code aufzuschreiben. Du kannst ihn unter dem Menüpunkt Einstellungen einsehen.</translation>
+        <translation>Vergiss nicht, den mnemonischen Seed aufzuschreiben. Du kannst ihn unter dem Menüpunkt Einstellungen einsehen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
@@ -2001,17 +2004,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte ändere den Namen des Wallets</translation>
+        <translation>Ein Wallet mit diesem Namen ist bereits vorhanden. Bitte wähle einen anderen Namen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="191"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation>Nur ASCII-Zeichen sind im Walletpfad oder im Walletname erlaubt</translation>
+        <translation type="unfinished">Nicht-ASCII Zeichen sind im Walletpfad oder -namen nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="375"/>
         <source>USE MONERO</source>
-        <translation>VERWENDE MONERO</translation>
+        <translation type="unfinished">BENUTZE MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="392"/>
@@ -2027,7 +2030,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="411"/>
@@ -2050,7 +2053,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="178"/>
         <source>Restore from seed</source>
-        <translation>Mit mnemonischem Code wiederherstellen</translation>
+        <translation>Mit mnemonischem Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="192"/>
@@ -2060,7 +2063,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation type="unfinished">Mit QR-Code</translation>
+        <translation>Von QR-Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2070,27 +2073,27 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="253"/>
         <source>View key (private)</source>
-        <translation>View-Schlüssel (privat)</translation>
+        <translation>View-Key (privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="262"/>
         <source>Spend key (private)</source>
-        <translation>Spend-Schlüssel (privat)</translation>
+        <translation>Spend-Key (privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="274"/>
         <source>Restore height (optional)</source>
-        <translation>Wiederherstellungspunkt (optional)</translation>
+        <translation>Wiederherstellungshöhe (optional)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="287"/>
         <source>Your wallet is stored in</source>
-        <translation>Dein Wallet ist hier gespeichert</translation>
+        <translation>Dein Wallet ist gespeichert unter</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="313"/>
         <source>Please choose a directory</source>
-        <translation>Wähle ein Verzeichnis</translation>
+        <translation>Bitte wähle ein Verzeichnis</translation>
     </message>
 </context>
 <context>
@@ -2098,17 +2101,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
-        <translation>Gib Deinen aus 25 Wörtern bestehenden mnemonischen Code ein</translation>
+        <translation>Gib Deinen aus 25 Wörtern bestehenden mnemonischen Seed ein</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="64"/>
         <source>Seed copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Seed wurde in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="92"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Code aufgeschrieben und geheim gehalten wird. Das ist alles was Du brauchst, um Dein Wallet zu sichern und wiederherzustellen.</translation>
+        <translation>Es ist &lt;b&gt;sehr&lt;/b&gt; wichtig, dass dieser Seed aufgeschrieben und geheim gehalten wird. Es ist alles was Du brauchst, um dein Wallet zu sichern und wiederherzustellen.</translation>
     </message>
 </context>
 <context>
@@ -2116,7 +2119,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="74"/>
         <source>Welcome to Monero!</source>
-        <translation>Willkommen zu Monero!</translation>
+        <translation>Willkommen bei Monero!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="85"/>
@@ -2131,12 +2134,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="182"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Stelle Wallet mit Schlüssel oder mnemonischen Code wieder her</translation>
+        <translation type="unfinished"> Stelle Wallet mit Schlüssel oder mnemonischem Seed wieder her</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="225"/>
         <source>Open a wallet from file</source>
-        <translation>Öffne Wallet aus einer Datei</translation>
+        <translation>Öffne Wallet von einer Datei</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="245"/>
@@ -2150,14 +2153,14 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
-        <translation>Erstelle ein Passwort für Dein Wallet</translation>
+        <translation>Erstelle ein Passwort für dein Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Beachte: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Code eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Symbolen):</translation>
+        <translation type="unfinished">  &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
     </message>
 </context>
 <context>
@@ -2191,6 +2194,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardWelcome.qml" line="83"/>
         <source>Please choose a language and regional format.</source>
+        <translatorcomment>Oder &quot;regionales Format&quot; statt &quot;Anzeigeformat&quot;?</translatorcomment>
         <translation>Bitte wähle eine Sprache und ein Anzeigeformat.</translation>
     </message>
 </context>
@@ -2226,7 +2230,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../main.qml" line="574"/>
         <location filename="../main.qml" line="687"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Keine unmischbaren Ausgänge zum Zusammenführen</translation>
+        <translation>Keine unmischbaren Outputs zum zusammenführen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="624"/>
@@ -2236,7 +2240,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="748"/>
         <source>Money sent successfully: %1 transaction(s) </source>
-        <translation>Geld erfolgreich verschickt: %1 Transaktion(en)</translation>
+        <translation>Geld erfolgreich verschickt: %1 Transaktion(en) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="819"/>
@@ -2246,7 +2250,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation>Drücke erneut zum schließen...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2256,7 +2260,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="1613"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Daemon wird weiter im Hintergrund laufen, wenn das GUI geschlossen wird.</translation>
+        <translation>Daemon wird weiter im Hintergrund laufen, wenn die GUI geschlossen wird.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1615"/>
@@ -2266,7 +2270,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="1650"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Eine neue Version der monero-wallet-gui ist verfügbar: %1&lt;br&gt;%2</translation>
+        <translation>Eine neue Version von monero-wallet-gui ist verfügbar: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="826"/>
@@ -2288,7 +2292,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../main.qml" line="313"/>
         <location filename="../main.qml" line="314"/>
         <source>HIDDEN</source>
-        <translation type="unfinished"></translation>
+        <translation>VERSTECKT</translation>
     </message>
     <message>
         <location filename="../main.qml" line="382"/>
@@ -2303,17 +2307,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="435"/>
         <source>Remaining blocks (local node):</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbleibende Blöcke (lokaler Node):</translation>
     </message>
     <message>
         <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Warte auf Start des Daemons …</translation>
+        <translation>Warte bis der daeom gestartet wurde…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Warte bis der Daemon beendet wird …</translation>
+        <translation>Warte bis der Daemon beendet wird…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="506"/>
@@ -2323,7 +2327,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="507"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe Dein Wallet und das Daemon-Protokoll auf Fehler. Du kannst auch versuchen, %1 manuell zu starten.</translation>
+        <translation>Bitte überprüfe dein Wallet und Daemon-Log auf Fehler. Du kannst auch versuchen %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="586"/>
@@ -2361,7 +2365,7 @@ Zahlungs-ID: </translation>
 Amount: </source>
         <translation>
 
-Gebühr: </translation>
+Menge: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="591"/>
@@ -2404,7 +2408,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="739"/>
         <source>Couldn&apos;t send the money: </source>
-        <translation>Geld konnte nicht versendet werden</translation>
+        <translation>Konnte Geld nicht versenden: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="742"/>
@@ -2415,30 +2419,31 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="748"/>
         <source>Transaction saved to file: %1</source>
-        <translation>Transaktion gespeichert in Datei: %1</translation>
+        <translation>Transaktion wurde in Datei gespeichert: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="778"/>
         <source>Payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahlungsnachweis</translation>
     </message>
     <message>
         <location filename="../main.qml" line="781"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nachweis konnte aus folgendem Grund nicht generiert werden: 
+</translation>
     </message>
     <message>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zahlungsnachweis </translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation type="unfinished">Ungültige Signatur</translation>
+        <translation>Ungültige Signatur</translation>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
@@ -2448,12 +2453,12 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="833"/>
         <source>Good signature</source>
-        <translation type="unfinished">Gültige Signatur</translation>
+        <translation>Gültige Signatur</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
         <source>Balance (syncing)</source>
-        <translation>Guthaben (synchronisiert sich)</translation>
+        <translation>Guthaben (synchronisierend)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
@@ -2464,47 +2469,47 @@ Beschreibung: </translation>
         <location filename="../main.qml" line="1033"/>
         <location filename="../main.qml" line="1281"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Falsches Passwort</translation>
+        <translation>Falsches Passwort</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation type="unfinished">Warnung</translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished">Fehler: Dateisystem ist nicht beschreibbar</translation>
+        <translation>Fehler: Dateisystem ist schreibgeschützt</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1113"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">Warnung: Es sind nur %1 GB Speicherplatz auf diesem Laufwerk verfügbar, die Blockchain benötigt jedoch ~%2 GB an Speicherplatz.</translation>
+        <translation>Warnung: Es sind nur %1 GB Speicherplatz auf diesem Laufwerk verfügbar, die Blockchain benötigt ~%2 GB Speicherplatz.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1115"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">Info: Es sind %1 GB Speicherplatz auf diesem Laufwerk verfügbar. Die Blockchain benötigt ~%2 GB an Speicherplatz.</translation>
+        <translation>Info: Es sind %1 GB Speicherplatz auf diesem Laufwerk verfügbar. Die Blockchain benötigt ~%2 GB Speicherplatz.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1117"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished">Info: lmdb-Ordner wurde nicht gefunden. Ein neuer Ordner wird erstellt.</translation>
+        <translation>Info: lmdb-Ordner wurde nicht gefunden. Ein neuer Ordner wird erstellt.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1121"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort erfolgreich geändert</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
-        <translation type="unfinished">Fehler: </translation>
+        <translation>Fehler: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1203"/>
@@ -2514,7 +2519,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <translation>Installations-Assistent</translation>
+        <translation>Installationsassistent</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1243"/>
@@ -2524,7 +2529,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="1317"/>
         <source>send to the same destination</source>
-        <translation>an dieselbe Adresse senden</translation>
+        <translation>an den selben Empfänger senden</translation>
     </message>
 </context>
 </TS>
