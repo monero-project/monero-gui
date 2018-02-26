@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -50,7 +50,9 @@
 #include "model/TransactionHistorySortFilterModel.h"
 #include "AddressBook.h"
 #include "model/AddressBookModel.h"
-#include "wallet/wallet2_api.h"
+#include "Subaddress.h"
+#include "model/SubaddressModel.h"
+#include "wallet/api/wallet2_api.h"
 #include "MainApp.h"
 
 // IOS exclusions
@@ -70,6 +72,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    Monero::Utils::onStartup();
 //    // Enable high DPI scaling on windows & linux
 //#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
 //    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -131,6 +134,12 @@ int main(int argc, char *argv[])
 
     qmlRegisterUncreatableType<AddressBook>("moneroComponents.AddressBook", 1, 0, "AddressBook",
                                                         "AddressBook can't be instantiated directly");
+
+    qmlRegisterUncreatableType<SubaddressModel>("moneroComponents.SubaddressModel", 1, 0, "SubaddressModel",
+                                                        "SubaddressModel can't be instantiated directly");
+
+    qmlRegisterUncreatableType<Subaddress>("moneroComponents.Subaddress", 1, 0, "Subaddress",
+                                                        "Subaddress can't be instantiated directly");
 
     qRegisterMetaType<PendingTransaction::Priority>();
     qRegisterMetaType<TransactionInfo::Direction>();

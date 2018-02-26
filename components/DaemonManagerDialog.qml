@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -39,13 +39,13 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
-    property int countDown: 5;
+    property int countDown: 10;
     signal rejected()
     signal started();
 
     function open() {
         show()
-        countDown = 5;
+        countDown = 10;
         timer.start();
     }
 

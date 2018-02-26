@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -65,7 +65,8 @@ Rectangle {
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
-    signal checkPaymentClicked(string address, string txid, string txkey);
+    signal getProofClicked(string txid, string address, string message);
+    signal checkProofClicked(string txid, string address, string message, string signature);
 
     color: "#F0EEEE"
 
@@ -111,7 +112,7 @@ Rectangle {
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
@@ -190,6 +191,7 @@ Rectangle {
                             from: 0 - target.width
                             to: 0
                             duration: 300
+                            easing.type: Easing.OutCubic
                         }
                         PropertyAnimation {
                             target: exitItem
@@ -197,6 +199,7 @@ Rectangle {
                             from: 0
                             to: target.width
                             duration: 300
+                            easing.type: Easing.OutCubic
                         }
                     }
                 }

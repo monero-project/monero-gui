@@ -1,6 +1,6 @@
 #include "WalletManager.h"
 #include "Wallet.h"
-#include "wallet/wallet2_api.h"
+#include "wallet/api/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
 #include <QFile>
@@ -49,7 +49,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
     Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
-    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
+    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), w->status());
     m_currentWallet  = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
@@ -110,7 +110,7 @@ QString WalletManager::closeWallet()
     QMutexLocker locker(&m_mutex);
     QString result;
     if (m_currentWallet) {
-        result = m_currentWallet->address();
+        result = m_currentWallet->address(0, 0);
         delete m_currentWallet;
     } else {
         qCritical() << "Trying to close non existing wallet " << m_currentWallet;
@@ -216,16 +216,6 @@ QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet
     return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
 }
 
-QString WalletManager::checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const
-{
-    uint64_t received = 0, height = 0;
-    std::string error = "";
-    bool ret = m_pimpl->checkPayment(address.toStdString(), txid.toStdString(), txkey.toStdString(), daemon_address.toStdString(), received, height, error);
-    // bypass qml being unable to pass structures without preposterous complexity
-    std::string result = std::string(ret ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + QString::number(height).toStdString() + "|" + error;
-    return QString::fromStdString(result);
-}
-
 void WalletManager::setDaemonAddress(const QString &address)
 {
     m_pimpl->setDaemonAddress(address.toStdString());
@@ -314,6 +304,7 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
     return QUrl::fromLocalFile(path);
 }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
 double WalletManager::getPasswordStrength(const QString &password) const
 {
     static const char *local_dict[] = {
@@ -328,6 +319,7 @@ double WalletManager::getPasswordStrength(const QString &password) const
     ZxcvbnUnInit();
     return e;
 }
+#endif
 
 bool WalletManager::saveQrCode(const QString &code, const QString &path) const
 {

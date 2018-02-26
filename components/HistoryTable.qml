@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -260,9 +260,50 @@ ListView {
                             return blockHeight
                     if (!isOut)
                         return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    if (isFailed)
+                        return qsTr("FAILED") + translationManager.emptyString
                     return qsTr("PENDING") + translationManager.emptyString
 
                 }
+            }
+            Item { //separator
+                width: 100
+                height: 14
+            }
+            // -- "Received by" title
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 12
+                color: "#535353"
+                text: (isOut ? qsTr("Spent from:") : qsTr("Received by:")) + translationManager.emptyString
+            }
+            Item { //separator
+                width: 5
+                height: 14
+            }
+            // -- "Index" value
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 13
+                font.bold: true
+                color: "#545454"
+                text: "#" + subaddrIndex
+            }
+            Item { //separator
+                width: 5
+                height: 14
+            }
+            // -- "Label" value
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 13
+                color: "#545454"
+                text: label
+                elide: Text.ElideRight
+                width: detailsButton.x - x - 30
             }
         }
 
