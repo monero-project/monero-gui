@@ -2954,7 +2954,7 @@ Description: </source>
     <message>
         <location filename="../LeftPanel.qml" line="192"/>
         <source>Unlocked balance</source>
-        <translation>Ulåst saldo</translation>
+        <translation>Oplåst saldo</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="295"/>
@@ -3077,7 +3077,7 @@ Description: </source>
     <message>
         <location filename="../MiddlePanel.qml" line="49"/>
         <source>Unlocked Balance</source>
-        <translation>Ulåst Saldo</translation>
+        <translation>Oplåst Saldo</translation>
     </message>
 </context>
 <context>
