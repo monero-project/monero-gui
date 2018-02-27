@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <languages>
 
 <!--
@@ -32,6 +32,8 @@ List of available languages for your wallet's seed:
         <language display_name="日本語" locale="ja_JP" wallet_language="日本語" flag="/lang/flags/japan.png" qs="none"/>
         <language display_name="Nederlands" locale="nl_NL" wallet_language="Nederlands" flag="/lang/flags/netherlands.png" qs="none"/>
         <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/>
+        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/> -->
+        <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/portugal.png" qs="none"/>
         <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/brazil.png" qs="none"/>
         <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/russia.png" qs="none"/>
         <language display_name="简体中文 (中国)" locale="zh-cn_CN" wallet_language="简体中文 (中国)" flag="/lang/flags/china.png" qs="none"/>
@@ -47,5 +49,5 @@ List of available languages for your wallet's seed:
         <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
         <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
         <language display_name="Turkish" locale="tr_TR" wallet_language="Turkish" flag="/lang/flags/tr.png" qs="none"/>
-	<language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
+        <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
 </languages>
