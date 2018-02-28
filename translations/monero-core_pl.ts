@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>AddressBook</name>
     <message>
@@ -242,17 +242,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>Identyfikator tx:</translation>
+        <translation>ID trans.:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <translation>Klucz tx:</translation>
+        <translation>Klucz transakcji:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Tx note:</source>
-        <translation>Notatka tx:</translation>
+        <translation>Notatka do transakcji:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
@@ -297,7 +297,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="386"/>
         <source>Fee</source>
-        <translation>Opłata</translation>
+        <translation>Prowizja</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="351"/>
@@ -310,7 +310,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="47"/>
         <source>Tx ID:</source>
-        <translation>Identyfikator tx:</translation>
+        <translation>ID trans.:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
@@ -320,12 +320,12 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx key:</source>
-        <translation>Klucz tx:</translation>
+        <translation>Klucz transakcji:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Tx note:</source>
-        <translation>Notatka do tx:</translation>
+        <translation>Notatka do transakcji:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
@@ -406,7 +406,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="191"/>
         <source>Secret view key</source>
-        <translation>Sekretny klucz do podglądu</translation>
+        <translation>Prywatny klucz do podglądu</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="192"/>
@@ -416,7 +416,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="193"/>
         <source>Secret spend key</source>
-        <translation>Sekretny klucz do wydawania</translation>
+        <translation>Prywatny klucz do wydawania</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="194"/>
@@ -454,7 +454,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translation>O</translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
@@ -464,7 +464,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
-        <translation>D</translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="369"/>
@@ -489,7 +489,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
-        <translation>K</translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
@@ -504,7 +504,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
-        <translation>Z</translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
@@ -524,7 +524,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation>S</translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
@@ -534,7 +534,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation>P</translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
@@ -544,12 +544,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation>U</translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation>W</translation>
+        <translation>S</translation>
     </message>
 </context>
 <context>
@@ -799,12 +799,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="113"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>UWAGA: brak połączenia z procesem</translation>
+        <translation>UWAGA: brak połączenia z demonem</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="135"/>
         <source>in the txpool: %1</source>
-        <translation>w puli tx: %1</translation>
+        <translation>w puli transakcji: %1</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="142"/>
@@ -934,7 +934,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="349"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Tutaj możesz śledzić sprzedaż:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Kliknij w Generuj aby stworzyć losowy identyfikator płatności dla nowego klienta&lt;/p&gt; &lt;p&gt;Klient może także zeskanować kod aby dokonać płatności (jeśli posiada oprogramowanie do skanowania kodów).&lt;/p&gt;&lt;p&gt;Ta strona automatycznie śledzi blockchain i pulę tx wyszukująć transakcji przychodzących. Jeśli wprowadzisz wartość, będzie szukała transakcji do maksymalnie tej wartości.&lt;/p&gt;Sam decydujesz, czy akceptujesz niepotwierdzone transakcje czy nie. Powinny zostać zatwierdzone niedługo potem, ale istenieje prawdopodobieństwo, że nie zostaną. Dla wiekszych kwot możesz chcieć poczekać na jedno lub więcej powiadomień.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Tutaj możesz śledzić sprzedaż:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Kliknij w Generuj aby stworzyć losowy identyfikator płatności dla nowego klienta&lt;/p&gt; &lt;p&gt;Klient może także zeskanować kod aby dokonać płatności (jeśli posiada oprogramowanie do skanowania kodów).&lt;/p&gt;&lt;p&gt;Ta strona automatycznie śledzi blockchain i pulę transakcji wyszukująć transakcji przychodzących. Jeśli wprowadzisz wartość, będzie szukała transakcji do maksymalnie tej wartości.&lt;/p&gt;Sam decydujesz, czy akceptujesz niepotwierdzone transakcje czy nie. Powinny zostać zatwierdzone niedługo potem, ale istenieje prawdopodobieństwo, że nie zostaną. Dla wiekszych kwot możesz chcieć poczekać na jedno lub więcej powiadomień.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="259"/>
@@ -1169,7 +1169,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
         <source>Wallet log path: </source>
-        <translation>Ścieżka loga portfela: </translation>
+        <translation>Ścieżka dziennika portfela: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="596"/>
@@ -1179,12 +1179,12 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Daemon log path: </source>
-        <translation>Ścieżka loga demona: </translation>
+        <translation>Ścieżka dziennika demona: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="609"/>
         <source>Daemon log</source>
-        <translation>Log procesu</translation>
+        <translation>Dziennik demona</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="618"/>
@@ -1367,37 +1367,37 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../components/StandardDropdown.qml" line="203"/>
         <source>Low (x1 fee)</source>
-        <translation>Niski (x1 opłaty)</translation>
+        <translation>Niski (x1 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>Medium (x20 fee)</source>
-        <translation>Średni (x20 opłaty)</translation>
+        <translation>Średni (x20 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>High (x166 fee)</source>
-        <translation>Wysoki (x166 opłaty)</translation>
+        <translation>Wysoki (x166 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Niski (x0.25 opłaty)</translation>
+        <translation>Niski (x0.25 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation>Domyślny (x1 opłaty)</translation>
+        <translation>Domyślny (x1 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="208"/>
         <source>Fast (x5 fee)</source>
-        <translation>Szybki (x5 opłaty)</translation>
+        <translation>Szybki (x5 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Najszybszy (x41.5 opłaty)</translation>
+        <translation>Najszybszy (x41.5 prowizji)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="210"/>
@@ -1500,19 +1500,19 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
         <location filename="../pages/Transfer.qml" line="654"/>
         <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Potrfel nie jest podłączony do procesu.</translation>
+        <translation>Potrfel nie jest podłączony do demona.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Połączony proces nie jest kompatybilny z interfejsem graficznym.
-Uaktualnij go lub podłącz się do innego procesu</translation>
+        <translation>Połączony demon nie jest kompatybilny z interfejsem graficznym.
+Uaktualnij go lub podłącz się do innego demona</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="674"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Poczekaj na zakończenie synchronizacji procesu</translation>
+        <translation>Poczekaj na zakończenie synchronizacji demona</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
@@ -1532,22 +1532,22 @@ Uaktualnij go lub podłącz się do innego procesu</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="194"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Wolny (x0.25 opłaty)</translation>
+        <translation>Wolny (x0.25 prowizji)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
         <source>Default (x1 fee)</source>
-        <translation>Domyślny (x1 opłaty)</translation>
+        <translation>Domyślny (x1 prowizji)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="196"/>
         <source>Fast (x5 fee)</source>
-        <translation>Szybki (x5 opłaty)</translation>
+        <translation>Szybki (x5 prowizji)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="197"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Najszybszy (x41.5 opłaty)</translation>
+        <translation>Najszybszy (x41.5 prowizji)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="220"/>
@@ -1567,12 +1567,12 @@ Uaktualnij go lub podłącz się do innego procesu</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="282"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Znaleziono adres, ale podpisy DNSSEC nie mogły być zweryfikowane, więc ten adres może być zespoofowany</translation>
+        <translation>Znaleziono adres, ale podpisy DNSSEC nie mogły być zweryfikowane, więc ten adres mógł być podmieniony</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="284"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Nie znaleziono poprawnego adresu w tym OpenAliasowym adresie, ale podpisy DNSSEC nie mogły być zweryfikowane, więc ten adres może być zespoofowany</translation>
+        <translation>Nie znaleziono poprawnego adresu w tym OpenAliasowym adresie, ale podpisy DNSSEC nie mogły być zweryfikowane, więc ten adres mógł być podmieniony</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="287"/>
@@ -1633,17 +1633,17 @@ Uaktualnij go lub podłącz się do innego procesu</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="468"/>
         <source>Create tx file</source>
-        <translation>Utwórz plik tx</translation>
+        <translation>Utwórz plik transakcji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="490"/>
         <source>Sign tx file</source>
-        <translation>Podpisz plik tx</translation>
+        <translation>Podpisz plik transakcji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="504"/>
         <source>Submit tx file</source>
-        <translation>Prześlij plik tx</translation>
+        <translation>Prześlij plik transakcji</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="537"/>
@@ -1712,7 +1712,7 @@ Kwota: </translation>
         <source>
 Fee: </source>
         <translation>
-Opłata: </translation>
+Prowizja: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="552"/>
@@ -1755,7 +1755,7 @@ Rozmiar pierścienia: </translation>
         <location filename="../pages/TxKey.qml" line="106"/>
         <location filename="../pages/TxKey.qml" line="218"/>
         <source>Transaction ID</source>
-        <translation>Identyfikator transakcji</translation>
+        <translation>Identyfikator trans.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="97"/>
@@ -1768,7 +1768,7 @@ Dla płatności wychodzących możesz otrzymać &apos;Dowód wydania&apos;, któ
         <location filename="../pages/TxKey.qml" line="113"/>
         <location filename="../pages/TxKey.qml" line="225"/>
         <source>Paste tx ID</source>
-        <translation>Wklej identyfikator tx</translation>
+        <translation>Wklej identyfikator transakcji</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="159"/>
@@ -1917,12 +1917,12 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardDonation.qml" line="153"/>
         <source>% of my fee added to each transaction</source>
-        <translation>% opłaty dodawanej do każdej transakcji</translation>
+        <translation>% prowizji dodawanej do każdej transakcji</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Od każdej transakcji, pobierana jest niewielka opłata. Ta opcja pozwala ją powiększyć o pewien procent, aby wspierać rozwój Monero. Dla przykładu, 50% dotacja automatyczna pobiera opłatę 0,005 XMR oraz 0,0025 XMR na wsparcie rozwoju Monero.</translation>
+        <translation>Od każdej transakcji, pobierana jest niewielka prowizja. Ta opcja pozwala ją powiększyć o pewien procent, aby wspierać rozwój Monero. Dla przykładu, 50% dotacja automatyczna pobiera prowizję 0,005 XMR oraz 0,0025 XMR na wsparcie rozwoju Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -1974,7 +1974,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardFinish.qml" line="67"/>
         <source>Daemon address</source>
-        <translation>Adres procesu</translation>
+        <translation>Adres demona</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="68"/>
@@ -2148,7 +2148,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardOptions.qml" line="245"/>
         <source>Testnet</source>
-        <translation>Śieć testowa</translation>
+        <translation>Sieć testowa</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2227,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../main.qml" line="563"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Nie można zrealizować transakcji: Zła wersja procesu: </translation>
+        <translation>Nie można zrealizować transakcji: Zła wersja demona: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="574"/>
@@ -2309,12 +2309,12 @@ Opis: </translation>
     <message>
         <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Czekam na start procesu...</translation>
+        <translation>Czekam na start demona...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Czekam na zakończenie procesu...</translation>
+        <translation>Czekam na zakończenie demona...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="506"/>
@@ -2352,7 +2352,7 @@ Identyfikator płatności: </translation>
         <source>
 Fee: </source>
         <translation>
-Opłata: </translation>
+Prowizja: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="778"/>
