@@ -115,7 +115,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
-        <translation>windows + enter lub command + enter (pomoc)</translation>
+        <translation>komenda + enter (np. pomoc)</translation>
     </message>
 </context>
 <context>
@@ -732,7 +732,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="88"/>
         <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation>Podaj hasło dla portefela:&lt;br&gt;</translation>
+        <translation>Podaj hasło dla portfela:&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="156"/>
@@ -1500,7 +1500,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
         <location filename="../pages/Transfer.qml" line="654"/>
         <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Potrfel nie jest podłączony do demona.</translation>
+        <translation>Portfel nie jest podłączony do demona.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
@@ -2007,7 +2007,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
-        <translation>Portfel o takiej nazwie istenieje. Podaj inną nazwę</translation>
+        <translation>Portfel o takiej nazwie istnieje. Podaj inną nazwę.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="191"/>
@@ -2092,7 +2092,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="287"/>
         <source>Your wallet is stored in</source>
-        <translation>Twoj portfel został zachowany w</translation>
+        <translation>Twój portfel został zachowany w</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="313"/>
