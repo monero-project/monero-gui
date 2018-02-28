@@ -406,22 +406,22 @@
     <message>
         <location filename="../pages/Keys.qml" line="191"/>
         <source>Secret view key</source>
-        <translation>Prywatny klucz do podglądu</translation>
+        <translation>Klucz prywatny do podglądu</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="192"/>
         <source>Public view key</source>
-        <translation>Publiczny klucz do podglądu</translation>
+        <translation>Klucz publiczny do podglądu</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="193"/>
         <source>Secret spend key</source>
-        <translation>Prywatny klucz do wydawania</translation>
+        <translation>Klucz prywatny do wydawania</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="194"/>
         <source>Public spend key</source>
-        <translation>Publiczny klucz do wydawania</translation>
+        <translation>Klucz publiczny do wydawania</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="206"/>
