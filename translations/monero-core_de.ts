@@ -93,7 +93,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="110"/>
         <source>78.9239845</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="133"/>
@@ -103,7 +103,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -273,7 +273,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 Bestätigungen)</translation>
+        <translation>(%1/%2 Bestätigungen)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
@@ -283,7 +283,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="264"/>
         <source>FAILED</source>
-        <translation type="unfinished">FEHLGESCHLAGEN</translation>
+        <translation>FEHLGESCHLAGEN</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="265"/>
@@ -311,12 +311,12 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="47"/>
         <source>Tx ID:</source>
-        <translation type="unfinished">Tx-ID:</translation>
+        <translation>Tx-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
         <source>Payment ID:</source>
-        <translation type="unfinished">Zahlungs-ID:</translation>
+        <translation>Zahlungs-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
@@ -326,37 +326,37 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Tx note:</source>
-        <translation type="unfinished">Tx-Notiz:</translation>
+        <translation>Tx-Notiz:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
         <source>Destinations:</source>
-        <translation type="unfinished">Ziele:</translation>
+        <translation>Ziele:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="77"/>
         <source>No more results</source>
-        <translation type="unfinished">Keine weiteren Ergebnisse</translation>
+        <translation>Keine weiteren Ergebnisse</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 Bestätigungen)</translation>
+        <translation>(%1/%2 Bestätigungen)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
         <source>UNCONFIRMED</source>
-        <translation type="unfinished">UNBESTÄTIGT</translation>
+        <translation>UNBESTÄTIGT</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="154"/>
         <source>FAILED</source>
-        <translation type="unfinished">FEHLGESCHLAGEN</translation>
+        <translation>FEHLGESCHLAGEN</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="155"/>
         <source>PENDING</source>
-        <translation type="unfinished">AUSSTEHEND</translation>
+        <translation>AUSSTEHEND</translation>
     </message>
 </context>
 <context>
@@ -370,7 +370,7 @@
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished">Zum Kopieren doppelt tappen</translation>
+        <translation>Zum Kopieren doppelt tappen</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
@@ -380,17 +380,17 @@
     <message>
         <location filename="../pages/Keys.qml" line="95"/>
         <source>Keys</source>
-        <translation type="unfinished">Schlüssel</translation>
+        <translation>Schlüssel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="119"/>
         <source>Keys copied to clipboard</source>
-        <translation type="unfinished">Schlüssel in die Zwischenablage kopiert</translation>
+        <translation>Schlüssel in die Zwischenablage kopiert</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="129"/>
         <source>Export wallet</source>
-        <translation type="unfinished">Wallet exportieren</translation>
+        <translation>Wallet exportieren</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="142"/>
@@ -520,7 +520,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
         <source>Seed &amp; Keys</source>
-        <translation type="unfinished">Seed &amp; Schlüssel</translation>
+        <translation>Seed &amp; Schlüssel</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
@@ -626,7 +626,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="161"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.</translation>
+        <translation>Mining ist nur auf dem lokalen Daemon verfügbar. Starte den lokalen Daemon, um zu minen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="173"/>
@@ -1117,7 +1117,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="498"/>
         <source>Debug info</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Informationen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="512"/>
