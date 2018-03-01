@@ -27,8 +27,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translatorcomment>TODO: Make sense of it!</translatorcomment>
-        <translation type="unfinished"> </translation>
+        <translation>&lt;b&gt;Zahlungs-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Der Anzeigename im Adressbuch.&lt;br/&gt;Diese Information wird während&lt;br/&gt; einer Transaktion nicht versendet.</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="88"/>
@@ -177,7 +176,7 @@
     <message>
         <location filename="../components/DashboardTable.qml" line="190"/>
         <source>Amount</source>
-        <translation type="unfinished"> Betrag</translation>
+        <translation type="unfinished">Betrag</translation>
     </message>
 </context>
 <context>
@@ -305,7 +304,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="351"/>
         <source>Amount</source>
-        <translation type="unfinished"> Betrag</translation>
+        <translation type="unfinished">Betrag</translation>
     </message>
 </context>
 <context>
@@ -922,12 +921,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="312"/>
         <source>Amount</source>
-        <translation type="unfinished"> Betrag</translation>
+        <translation type="unfinished">Betrag</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="320"/>
         <source>Amount to receive</source>
-        <translation type="unfinished"> Zu erhaltender Betrag</translation>
+        <translation type="unfinished">Zu erhaltender Betrag</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="348"/>
@@ -1053,7 +1052,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="450"/>
         <source>Log level</source>
-        <translation type="unfinished">Detailgrad des Berichts</translation>
+        <translation type="unfinished">Log-Level</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="482"/>
@@ -1063,7 +1062,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="160"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbrauchte Outputs erfolgreich neu eingelesen.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="170"/>
@@ -1165,7 +1164,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wallet-Log-Pfad: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="596"/>
@@ -1175,12 +1174,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Daemon log path: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Daemon-Log-Pfad: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="609"/>
         <source>Daemon log</source>
-        <translation>Daemon-Protokoll</translation>
+        <translation type="unfinished">Daemon-Log</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="618"/>
@@ -1229,7 +1228,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="64"/>
         <source>Good signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Gültige Signatur</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="65"/>
@@ -1293,7 +1292,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished">Signing Adresse</translation>
+        <translation type="unfinished"> </translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
@@ -1454,7 +1453,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation>Menge</translation>
+        <translation type="unfinished">Betrag</translation>
     </message>
 </context>
 <context>
@@ -1475,7 +1474,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="129"/>
         <source>Amount</source>
-        <translation>Menge</translation>
+        <translation type="unfinished">Betrag</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="181"/>
@@ -1694,8 +1693,8 @@ Zahlungs-ID: </translation>
         <location filename="../pages/Transfer.qml" line="550"/>
         <source>
 Amount: </source>
-        <translation>
-Menge: </translation>
+        <translation type="unfinished">
+Betrag: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="551"/>
@@ -1786,7 +1785,8 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="209"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation>Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
+        <translatorcomment>Sendenachweis richtig? Nochmal nachsehen.</translatorcomment>
+        <translation type="unfinished"> Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
 Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werden.</translation>
     </message>
     <message>
@@ -1820,8 +1820,8 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translatorcomment>WTF?</translatorcomment>
-        <translation>Die Blockchain ankurbeln?</translation>
+        <translatorcomment>EASTEREGG, bitte stehen lassen :)</translatorcomment>
+        <translation type="unfinished">Die Blockchain ankurbeln?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1854,7 +1854,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Ein view-only Wallet erstellen</translation>
+        <translation type="unfinished"> Ein view-only Wallet erstellen</translation>
     </message>
 </context>
 <context>
@@ -2008,12 +2008,12 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardMain.qml" line="191"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation>Nicht-ASCII Zeichen sind im Walletpfad oder -namen nicht erlaubt</translation>
+        <translation type="unfinished">Nicht-ASCII Zeichen sind im Walletpfad oder -namen nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="375"/>
         <source>USE MONERO</source>
-        <translation>BENUTZE MONERO</translation>
+        <translation type="unfinished">BENUTZE MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="392"/>
@@ -2029,7 +2029,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
         <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
+        <translation type="unfinished">Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="411"/>
@@ -2062,7 +2062,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation>Mit QR-Code</translation>
+        <translation type="unfinished">Mit QR-Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2133,7 +2133,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardOptions.qml" line="182"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Wallet mit Schlüssel oder mnemonischem Seed wiederherstellen</translation>
+        <translation type="unfinished"> Stelle Wallet mit Schlüssel oder mnemonischem Seed wieder her</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="225"/>
@@ -2158,8 +2158,8 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort&lt;/b&gt; (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
+        <translation type="unfinished">  &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
     </message>
 </context>
 <context>
@@ -2326,7 +2326,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../main.qml" line="507"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Bitte überprüfe dein Wallet und Daemon-Log auf Fehler. Du kannst auch versuchen %1 manuell zu starten.</translation>
+        <translation type="unfinished">Bitte überprüfe dein Wallet und Daemon-Log auf Fehler. Du kannst auch versuchen %1 manuell zu starten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="586"/>
@@ -2362,9 +2362,9 @@ Zahlungs-ID: </translation>
         <source>
 
 Amount: </source>
-        <translation>
+        <translation type="unfinished">
 
-Menge: </translation>
+Betrag: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="591"/>
@@ -2436,13 +2436,13 @@ Beschreibung: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation>Prüfung des Zahlungsnachweises</translation>
+        <translation type="unfinished">Zahlungsnachweis </translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation>Ungültige Signatur</translation>
+        <translation type="unfinished">Ungültige Signatur</translation>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
