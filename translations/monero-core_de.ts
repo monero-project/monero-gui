@@ -1229,7 +1229,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="64"/>
         <source>Good signature</source>
-        <translation>Gültige Signatur</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="65"/>
@@ -1293,7 +1293,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished"> </translation>
+        <translation type="unfinished">Signing Adresse</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
@@ -1786,8 +1786,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="209"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translatorcomment>Sendenachweis richtig? Nochmal nachsehen.</translatorcomment>
-        <translation type="unfinished"> Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
+        <translation>Vergewissere dich, dass das Geld an eine Adresse gezahlt wurde, indem du die Transaktions-ID, die Empfängeradresse, die Nachricht, welche zum signieren genutzt wurde, und die Signatur angibst.
 Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werden.</translation>
     </message>
     <message>
@@ -1822,7 +1821,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
         <translatorcomment>WTF?</translatorcomment>
-        <translation type="unfinished"> Die Blockchain ankurbeln?</translation>
+        <translation>Die Blockchain ankurbeln?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1855,7 +1854,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation type="unfinished"> Ein view-only Wallet erstellen</translation>
+        <translation>Ein view-only Wallet erstellen</translation>
     </message>
 </context>
 <context>
@@ -2009,12 +2008,12 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardMain.qml" line="191"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
-        <translation type="unfinished">Nicht-ASCII Zeichen sind im Walletpfad oder -namen nicht erlaubt</translation>
+        <translation>Nicht-ASCII Zeichen sind im Walletpfad oder -namen nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="375"/>
         <source>USE MONERO</source>
-        <translation type="unfinished">BENUTZE MONERO</translation>
+        <translation>BENUTZE MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="392"/>
@@ -2030,7 +2029,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
         <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation type="unfinished">Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
+        <translation>Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="411"/>
@@ -2063,7 +2062,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation>Von QR-Code</translation>
+        <translation>Mit QR-Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2134,7 +2133,7 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
     <message>
         <location filename="../wizard/WizardOptions.qml" line="182"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished"> Stelle Wallet mit Schlüssel oder mnemonischem Seed wieder her</translation>
+        <translation>Wallet mit Schlüssel oder mnemonischem Seed wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="225"/>
@@ -2159,8 +2158,8 @@ Für den Fall mit Sendenachweis  muss die Empfängeradresse nicht angegeben werd
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation type="unfinished">  &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf Dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
-                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
+        <translation> &lt;br&gt;Info: Das Passwort kann nicht wiederhergestellt werden. Wenn Du es vergisst, kannst Du nur Zugriff auf dein Wallet erhalten, indem Du den&lt;br/&gt;&lt;br/&gt;
+                        aus 25 Wörtern bestehenden mnemonischen Seed eingibst. Wähle ein sicheres Passwort&lt;/b&gt; (bestehend aus Buchstaben, Zahlen und/oder Sonderzeichen):</translation>
     </message>
 </context>
 <context>
@@ -2437,7 +2436,7 @@ Beschreibung: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished">Zahlungsnachweis </translation>
+        <translation>Prüfung des Zahlungsnachweises</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
