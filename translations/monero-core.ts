@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
