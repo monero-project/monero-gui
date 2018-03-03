@@ -185,8 +185,9 @@ ColumnLayout {
                 Layout.minimumWidth: 300 * scaleRatio
                 opacity: remoteNode.checked
                 id: remoteNodeEdit
-                daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
-                daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+                property var rna: persistentSettings.remoteNodeAddress
+                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
+                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1] : ""
             }
         }
     }
