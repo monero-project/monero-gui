@@ -11,7 +11,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
         <source>Qr Code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR-Code</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
