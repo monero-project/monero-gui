@@ -79,7 +79,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
         <source>Address copied to clipboard</source>
-        <translation>Adres gekopieerd naar prikbord</translation>
+        <translation>Adres gekopieerd naar klembord</translation>
     </message>
 </context>
 <context>
