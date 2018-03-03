@@ -123,12 +123,12 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Start van lokale daemon in %1 seconden</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation>Start node (%1)</translation>
+        <translation>Start daemon (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
@@ -2408,13 +2408,15 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation>Betaalbewijs gecheckt</translation>
+    </message>
+    </message>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation type="unfinished">Ongeldige handtekening</translation>
+        <translation>Ongeldige handtekening</translation>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
@@ -2424,7 +2426,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="833"/>
         <source>Good signature</source>
-        <translation type="unfinished">Geldige handtekening</translation>
+        <translation>Geldige handtekening</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
@@ -2440,12 +2442,12 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="1033"/>
         <location filename="../main.qml" line="1281"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Verkeerd wachtwoord</translation>
+        <translation>Verkeerd wachtwoord</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation type="unfinished">Waarschuwing</translation>
+        <translation">Waarschuwing</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
@@ -2465,22 +2467,23 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1117"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished">LMDB-map niet gevonden. Er wordt een nieuwe map gemaakt.</translation>
+        <translation>LMDB-map niet gevonden. Er wordt een nieuwe map gemaakt.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1121"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord succesvol veranderd</translation>
+    </message>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
-        <translation type="unfinished">Fout: </translation>
+        <translation>Fout: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1203"/>
@@ -2490,7 +2493,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <translation>Installatie-assistent</translation>
+        <translation>Installatie-Asistent</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1243"/>
@@ -2505,7 +2508,8 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw klikken om te sluiten.</translation>
+    </message>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2520,7 +2524,8 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1615"/>
         <source>Stop daemon</source>
-        <translation>Stop node</translation>
+        <translation>Stop daemon</translation>
+    </message>
     </message>
     <message>
         <location filename="../main.qml" line="1650"/>
