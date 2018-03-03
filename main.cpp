@@ -255,7 +255,17 @@ int main(int argc, char *argv[])
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    if (engine.rootObjects().isEmpty())
+    {
+        qCritical() << "Error: no root objects";
+        return 1;
+    }
     QObject *rootObject = engine.rootObjects().first();
+    if (!rootObject)
+    {
+        qCritical() << "Error: no root objects";
+        return 1;
+    }
 
 #ifdef WITH_SCANNER
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
