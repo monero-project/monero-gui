@@ -230,7 +230,7 @@ eval make -C $MONERO_DIR/build/$BUILD_TYPE/contrib/epee all install
 # install easylogging
 eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/easylogging++ all install
 
-# Install libunwind
+# Install libunbound
 echo "Installing libunbound..."
 pushd $MONERO_DIR/build/$BUILD_TYPE/external/unbound
 # no need to make, it was already built as dependency for libwallet
