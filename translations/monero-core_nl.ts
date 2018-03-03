@@ -2410,8 +2410,6 @@ Ringgrootte: </translation>
         <source>Payment proof check</source>
         <translation>Betaalbewijs gecheckt</translation>
     </message>
-    </message>
-    </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
@@ -2479,7 +2477,6 @@ Ringgrootte: </translation>
         <source>Password changed successfully</source>
         <translation>Wachtwoord succesvol veranderd</translation>
     </message>
-    </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
@@ -2510,7 +2507,6 @@ Ringgrootte: </translation>
         <source>Tap again to close...</source>
         <translation>Opnieuw klikken om te sluiten.</translation>
     </message>
-    </message>
     <message>
         <location filename="../main.qml" line="1612"/>
         <source>Daemon is running</source>
@@ -2525,7 +2521,6 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="1615"/>
         <source>Stop daemon</source>
         <translation>Stop daemon</translation>
-    </message>
     </message>
     <message>
         <location filename="../main.qml" line="1650"/>
