@@ -11,7 +11,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
         <source>Qr Code</source>
-        <translation type="unfinished"></translation>
+        <translation>QR Code</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres gekopieerd naar klembord</translation>
     </message>
 </context>
 <context>
@@ -123,12 +123,12 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Start van lokale daemon in %1 seconden</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
-        <translation>Start node (%1)</translation>
+        <translation>Start daemon (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="132"/>
@@ -272,7 +272,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 bevestigingen)</translation>
+        <translation>(%1/%2 bevestigingen)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
@@ -282,7 +282,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="264"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation>Mislukt</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="265"/>
@@ -310,37 +310,37 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="47"/>
         <source>Tx ID:</source>
-        <translation type="unfinished">Transactie-ID:</translation>
+        <translation>Transactie-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
         <source>Payment ID:</source>
-        <translation type="unfinished">Betaal-ID:</translation>
+        <translation>Betaal-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx key:</source>
-        <translation type="unfinished">Transactiesleutel:</translation>
+        <translation>Transactie-sleutel:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Tx note:</source>
-        <translation type="unfinished">Transactienotitie:</translation>
+        <translation>Transactienotitie:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
         <source>Destinations:</source>
-        <translation type="unfinished">Bestemmingen:</translation>
+        <translation>Bestemmingen:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="77"/>
         <source>No more results</source>
-        <translation type="unfinished">Verder geen resultaten</translation>
+        <translation>Verder geen resultaten</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 bevestigingen)</translation>
+        <translation>(%1/%2 bevestigingen)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
@@ -350,12 +350,12 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="154"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="155"/>
         <source>PENDING</source>
-        <translation type="unfinished">IN AFWACHTING</translation>
+        <translation>IN AFWACHTING</translation>
     </message>
 </context>
 <context>
@@ -363,65 +363,65 @@
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geheugensteun zin</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dubbel klikken om te kopieren</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>Seed copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geheugensteun gekopieerd naar klembord</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="95"/>
         <source>Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutels</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="119"/>
         <source>Keys copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutels gekopieerd naar klembord</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="129"/>
         <source>Export wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer portemonnee</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uitgaven portemonnee</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>View Only Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aleen bekijken portemonnee</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="191"/>
         <source>Secret view key</source>
-        <translation type="unfinished">Geheime alleen-lezen sleutel</translation>
+        <translation>Geheime alleen-lezen sleutel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="192"/>
         <source>Public view key</source>
-        <translation type="unfinished">Openbare alleen-lezen sleutel</translation>
+        <translation>Openbare alleen-lezen sleutel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="193"/>
         <source>Secret spend key</source>
-        <translation type="unfinished">Geheime bestedingssleutel</translation>
+        <translation>Geheime bestedingssleutel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="194"/>
         <source>Public spend key</source>
-        <translation type="unfinished">Openbare bestedingssleutel</translation>
+        <translation>Openbare bestedingssleutel</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="206"/>
@@ -459,7 +459,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
         <source>Prove/check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bewijs/Check</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
@@ -474,12 +474,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="96"/>
         <source>View Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alleen inzien</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
-        <translation>Testnet</translation>
+        <translation>Test netwerk</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="320"/>
@@ -525,7 +525,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Y</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
@@ -576,7 +576,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="77"/>
         <source>(only available for local daemons)</source>
-        <translation>(alleen beschikbaar voor lokale nodes)</translation>
+        <translation>(alleen beschikbaar voor lokale daemons)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -705,12 +705,12 @@
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="100"/>
         <source>Please enter new password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voer nieuw wachtwoord in</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="157"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bevestig nieuw wachtwoord</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="231"/>
@@ -720,7 +720,7 @@
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="244"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verder</translation>
     </message>
 </context>
 <context>
@@ -787,7 +787,7 @@
     <message>
         <location filename="../components/QRCodeScanner.qml" line="129"/>
         <source>QrCode Scanned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Qr-code gescand</translation>
     </message>
 </context>
 <context>
@@ -800,7 +800,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="113"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>WAARSCHUWING: er is geen verbinding met een node</translation>
+        <translation>WAARSCHUWING: er is geen verbinding met de daemon</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="135"/>
@@ -835,7 +835,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="162"/>
         <source> with more money (%1)</source>
-        <translation> met meer geld (%1)</translation>
+        <translation> Met meer geld (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="164"/>
@@ -865,7 +865,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="247"/>
         <source>Payment ID copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Betalings-ID gekopieerd naar klembord</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="270"/>
@@ -890,12 +890,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>Tracking</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Traceren</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="343"/>
         <source>help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">hulp</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="393"/>
@@ -2408,13 +2408,13 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation>Betaalbewijs gecheckt</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation type="unfinished">Ongeldige handtekening</translation>
+        <translation>Ongeldige handtekening</translation>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
@@ -2424,7 +2424,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="833"/>
         <source>Good signature</source>
-        <translation type="unfinished">Geldige handtekening</translation>
+        <translation>Geldige handtekening</translation>
     </message>
     <message>
         <location filename="../main.qml" line="845"/>
@@ -2440,12 +2440,12 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="1033"/>
         <location filename="../main.qml" line="1281"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Verkeerd wachtwoord</translation>
+        <translation>Verkeerd wachtwoord</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation type="unfinished">Waarschuwing</translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
@@ -2465,22 +2465,22 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1117"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished">LMDB-map niet gevonden. Er wordt een nieuwe map gemaakt.</translation>
+        <translation>LMDB-map niet gevonden. Er wordt een nieuwe map gemaakt.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1121"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord succesvol veranderd</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
-        <translation type="unfinished">Fout: </translation>
+        <translation>Fout: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1203"/>
@@ -2490,7 +2490,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <translation>Installatie-assistent</translation>
+        <translation>Installatie-Asistent</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1243"/>
@@ -2505,7 +2505,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw klikken om te sluiten.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2520,7 +2520,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1615"/>
         <source>Stop daemon</source>
-        <translation>Stop node</translation>
+        <translation>Stop daemon</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1650"/>
