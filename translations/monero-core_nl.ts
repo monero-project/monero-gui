@@ -2396,7 +2396,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="778"/>
         <source>Payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Betalingsbewijs</translation>
     </message>
     <message>
         <location filename="../main.qml" line="781"/>
@@ -2408,7 +2408,7 @@ Ringgrootte: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Betaling bewijs check</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
@@ -2475,7 +2475,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wachtwoord succesvol veranderd</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
@@ -2490,7 +2490,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
-        <translation>Installatie-assistent</translation>
+        <translation>Installatie-Assistent</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1243"/>
@@ -2505,7 +2505,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Klik opnieuw om te sluiten</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2529,3 +2529,4 @@ Ringgrootte: </translation>
     </message>
 </context>
 </TS>
+
