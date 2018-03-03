@@ -2447,7 +2447,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation">Waarschuwing</translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
