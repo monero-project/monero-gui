@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_NL">
+<TS version="2.1" language="nl_NL" sourcelanguage="en">
 <context>
     <name>AddressBook</name>
     <message>
@@ -21,13 +21,13 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Betaal-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
+        <translation>Betalings-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
         <translatorcomment>Can we remove hard-coded line breaks within the sentence? In this case, the line breaks after the first two could ruin the formatting.</translatorcomment>
-        <translation>&lt;b&gt;Betaal-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Een unieke gebruikersnaam&lt;br/&gt;voor het adresboek. Het is&lt;br/&gt;geen informatie die wordt&lt;br/&gt;verzonden</translation>
+        <translation>&lt;b&gt;Betalings-ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Een unieke gebruikersnaam&lt;br/&gt;voor het adresboek. Het is&lt;br/&gt;geen informatie die wordt&lt;br/&gt;verzonden</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="88"/>
@@ -75,7 +75,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="104"/>
         <source>Payment ID:</source>
-        <translation>Betaal-ID:</translation>
+        <translation>Betalings-ID:</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
@@ -238,7 +238,7 @@
         <location filename="../components/HistoryTable.qml" line="49"/>
         <location filename="../components/HistoryTable.qml" line="195"/>
         <source>Payment ID:</source>
-        <translation>Betaal-ID:</translation>
+        <translation>Betalings-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
@@ -316,7 +316,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
         <source>Payment ID:</source>
-        <translation>Betaal-ID:</translation>
+        <translation>Betalings-ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
@@ -370,7 +370,7 @@
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation>Dubbeltik om te kopiëren</translation>
+        <translation>Dubbeltikken om te kopiëren</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
@@ -455,7 +455,8 @@
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translatorcomment>Are these letters hotkeys for the preceding item?</translatorcomment>
+        <translatorcomment>Hotkeys visible when you press Alt Gr: 
+S Send, R Receive, H History, D Advanced, E Settings.</translatorcomment>
         <translation>O</translation>
     </message>
     <message>
@@ -466,6 +467,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
+        <translatorcomment>Hotkey for Advanced - Check payment</translatorcomment>
         <translation>C</translation>
     </message>
     <message>
@@ -491,13 +493,14 @@
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
+        <translatorcomment>Hotkey for Send - Address book</translatorcomment>
         <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
-        <translatorcomment>What does H refer to? Help?</translatorcomment>
-        <translation>H</translation>
+        <translatorcomment>Hotkey for History</translatorcomment>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="392"/>
@@ -507,17 +510,18 @@
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
+        <translatorcomment>Hotkey for Advanced</translatorcomment>
         <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
         <source>Mining</source>
-        <translatorcomment>Wat is een juiste vertaling voor minen/mining? Winning misschien, zoals het winnen van delfstoffen. Of ontginning/ontginnen?</translatorcomment>
         <translation>Minen</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
+        <translatorcomment>Hotkey for Advanced - Mining</translatorcomment>
         <translation>M</translation>
     </message>
     <message>
@@ -528,6 +532,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
+        <translatorcomment>Hotkey for Seed &amp; Keys?</translatorcomment>
         <translation>T</translation>
     </message>
     <message>
@@ -538,7 +543,8 @@
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation>I</translation>
+        <translatorcomment>Hotkey for Advanced - Sign/verify</translatorcomment>
+        <translation>O</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
@@ -548,12 +554,14 @@
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation>E</translation>
+        <translatorcomment>Hotkey for Settings</translatorcomment>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation>S</translation>
+        <translatorcomment>Hotkey for Send</translatorcomment>
+        <translation>Z</translation>
     </message>
 </context>
 <context>
@@ -798,7 +806,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="64"/>
         <source>Invalid payment ID</source>
-        <translation>Ongeldige betaal-ID</translation>
+        <translation>Ongeldige betalings-ID</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="113"/>
@@ -868,7 +876,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="247"/>
         <source>Payment ID copied to clipboard</source>
-        <translation>Betaal-ID gekopieerd naar klembord</translation>
+        <translation>Betalings-ID gekopieerd naar klembord</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="270"/>
@@ -883,7 +891,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="288"/>
         <source>Generate payment ID for integrated address</source>
-        <translation>Genereer Betaal-ID voor geïntegreerd adres</translation>
+        <translation>Genereer betalings-ID voor geïntegreerd adres</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -918,7 +926,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="227"/>
         <source>Payment ID</source>
-        <translation>Betaal-ID</translation>
+        <translation>Betalings-ID</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="312"/>
@@ -938,7 +946,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="349"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dit is een eenvoudige verkooptracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klik hier om een willekeurige betaal-ID te maken voor een nieuwe klant&lt;/p&gt; &lt;p&gt;Laat uw klant deze QR-code scannen om een betaling uit te voeren (als die klant over software beschikt die QR-codes kan scannen).&lt;/p&gt;&lt;p&gt;Deze pagina zal automatisch de blockchain en transactiepoel doorzoeken op inkomende transacties met behulp van deze QR-code. Als u een bedrag invult, wordt er ook gecontroleerd of het complete bedrag ontvangen is.&lt;/p&gt;Het is aan u om eventuele onbevestigde transacties te accepteren of niet. Het is zeer waarschijnlijk dat deze op korte termijn bevestigd zullen worden, maar er is nog steeds een mogelijkheid dat dit niet gebeurt. Bij grote bedragen is het dus aan te raden om te wachten op een of meer bevestigingen.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dit is een eenvoudige verkooptracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Klik hier om een willekeurige betalings-ID te maken voor een nieuwe klant&lt;/p&gt; &lt;p&gt;Laat uw klant deze QR-code scannen om een betaling uit te voeren (als die klant over software beschikt die QR-codes kan scannen).&lt;/p&gt;&lt;p&gt;Deze pagina zal automatisch de blockchain en transactiepoel doorzoeken op inkomende transacties met behulp van deze QR-code. Als u een bedrag invult, wordt er ook gecontroleerd of het complete bedrag ontvangen is.&lt;/p&gt;Het is aan u om eventuele onbevestigde transacties te accepteren of niet. Het is zeer waarschijnlijk dat deze op korte termijn bevestigd zullen worden, maar er is nog steeds een mogelijkheid dat dit niet gebeurt. Bij grote bedragen is het dus aan te raden om te wachten op een of meer bevestigingen.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="259"/>
@@ -1349,7 +1357,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../components/StandardDialog.qml" line="122"/>
         <source>Double tap to copy</source>
-        <translation>Dubbeltik om te kopiëren</translation>
+        <translation>Dubbeltikken om te kopiëren</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="129"/>
@@ -1448,7 +1456,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../components/TableHeader.qml" line="65"/>
         <source>Payment ID</source>
-        <translation>Betaal-ID</translation>
+        <translation>Betalings-ID</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="66"/>
@@ -1683,7 +1691,7 @@ Ontvanger: </translation>
         <source>
 payment ID: </source>
         <translation>
-Betaal-ID: </translation>
+betalings-ID: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="550"/>
@@ -1735,7 +1743,7 @@ Ringgrootte: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="301"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Betaal-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
+        <translation>Betalings-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="307"/>
@@ -1881,7 +1889,7 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
         <translatorcomment>Please don&apos;t use hard-coded spaces for formatting. The text will be longer in the translation.</translatorcomment>
-        <translation type="unfinished">Om te kunnen communiceren met het Monero-netwerk moet uw portemonnee verbonden zijn met een Monero-node. Het is voor uw privacy het beste om uw eigen node te gebruiken.&lt;br&gt;&lt;br&gt;Als u niet uw eigen node kunt gebruiken, kunt u verbinding maken met een externe node.</translation>
+        <translation>Om te kunnen communiceren met het Monero-netwerk moet uw portemonnee verbonden zijn met een Monero-node. Het is voor uw privacy het beste om uw eigen node te gebruiken.&lt;br&gt;&lt;br&gt;Als u niet uw eigen node kunt gebruiken, kunt u verbinding maken met een externe node.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
@@ -2367,7 +2375,7 @@ Adres: </translation>
         <source>
 Payment ID: </source>
         <translation>
-Betaal-ID: </translation>
+Betalings-ID: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="591"/>
