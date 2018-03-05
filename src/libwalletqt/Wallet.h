@@ -9,6 +9,7 @@
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
+#include "NetworkType.h"
 
 namespace Monero {
     class Wallet; // forward declaration
@@ -29,7 +30,7 @@ class Wallet : public QObject
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
-    Q_PROPERTY(bool testnet READ testnet)
+    Q_PROPERTY(NetworkType::Type nettype READ nettype)
 //    Q_PROPERTY(ConnectionStatus connected READ connected)
     Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount)
     Q_PROPERTY(bool synchronized READ synchronized)
@@ -82,8 +83,8 @@ public:
     //! returns last operation's status
     Status status() const;
 
-    //! returns true testnet wallet.
-    bool testnet() const;
+    //! returns network type of the wallet.
+    NetworkType::Type nettype() const;
 
     //! returns whether the wallet is connected, and version status
     Q_INVOKABLE ConnectionStatus connected(bool forceCheck = false);

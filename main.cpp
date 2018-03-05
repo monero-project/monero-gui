@@ -145,6 +145,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<TransactionInfo::Direction>();
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
+    qRegisterMetaType<NetworkType::Type>();
+    qmlRegisterType<NetworkType>("moneroComponents.NetworkType", 1, 0, "NetworkType");
+
 #ifdef WITH_SCANNER
     qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
 #endif

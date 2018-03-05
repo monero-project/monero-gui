@@ -129,7 +129,7 @@ Rectangle {
                         walletManager.closeWallet();
                         walletManager.clearWalletCache(persistentSettings.wallet_path);
                         walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                          persistentSettings.testnet);
+                                                          persistentSettings.nettype);
                     }
 
                     confirmationDialog.onRejectedCallback = null;
@@ -291,7 +291,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 onClicked: {
-                    daemonManager.sendCommand("status",currentWallet.testnet);
+                    daemonManager.sendCommand("status",currentWallet.nettype);
                     daemonConsolePopup.open();
                 }
             }
@@ -598,7 +598,7 @@ Rectangle {
                         walletManager.closeWallet();
                         walletManager.clearWalletCache(persistentSettings.wallet_path);
                         walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                          persistentSettings.testnet);
+                                                          persistentSettings.nettype);
                     }
 
                     confirmationDialog.onRejectedCallback = null;
@@ -698,7 +698,7 @@ Rectangle {
 
 
         if(typeof daemonManager != "undefined")
-            appWindow.daemonRunning =  daemonManager.running(persistentSettings.testnet)
+            appWindow.daemonRunning =  daemonManager.running(persistentSettings.nettype)
     }
 
     // fires only once

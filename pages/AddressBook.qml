@@ -109,7 +109,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 text: qsTr("Add") + translationManager.emptyString
-                enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+                enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
 
                 onClicked: {
                     if (!currentWallet.addressBook.addRow(addressLine.text.trim(), paymentIdLine.text.trim(), descriptionLine.text)) {
@@ -177,13 +177,13 @@ Rectangle {
         }
     }
 
-    function checkInformation(address, payment_id, testnet) {
+    function checkInformation(address, payment_id, nettype) {
       address = address.trim()
       payment_id = payment_id.trim()
 
-      var address_ok = walletManager.addressValid(address, testnet)
+      var address_ok = walletManager.addressValid(address, nettype)
       var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
-      var ipid = walletManager.paymentIdFromAddress(address, testnet)
+      var ipid = walletManager.paymentIdFromAddress(address, nettype)
       if (ipid.length > 0 && payment_id.length > 0)
          payment_id_ok = false
 
