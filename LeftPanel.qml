@@ -29,6 +29,7 @@
 import QtQuick 2.2
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
+import moneroComponents.NetworkType 1.0
 import "components"
 
 Rectangle {
@@ -105,8 +106,8 @@ Rectangle {
 
         Text {
             id: testnetLabel
-            visible: persistentSettings.testnet
-            text: qsTr("Testnet") + translationManager.emptyString
+            visible: persistentSettings.nettype !== NetworkType.MAINNET
+            text: (persistentSettings.nettype === NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
             anchors.top: logo.bottom
             anchors.topMargin: 5
             anchors.left: viewOnly ? viewOnlyLabel.right : parent.left

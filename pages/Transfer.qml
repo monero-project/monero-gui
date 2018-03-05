@@ -268,7 +268,7 @@ Rectangle {
                       if (result) {
                         var parts = result.split("|")
                         if (parts.length == 2) {
-                          var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                          var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
                           if (parts[0] === "true") {
                             if (address_ok) {
                               addressLine.text = parts[1]
@@ -329,7 +329,7 @@ Rectangle {
               shadowPressedColor: "#B32D00"
               releasedColor: "#FF6C3C"
               pressedColor: "#FF4304"
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -344,14 +344,14 @@ Rectangle {
           }
       }
 
-      function checkInformation(amount, address, payment_id, testnet) {
+      function checkInformation(amount, address, payment_id, nettype) {
         address = address.trim()
         payment_id = payment_id.trim()
 
         var amount_ok = amount.length > 0
-        var address_ok = walletManager.addressValid(address, testnet)
+        var address_ok = walletManager.addressValid(address, nettype)
         var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
-        var ipid = walletManager.paymentIdFromAddress(address, testnet)
+        var ipid = walletManager.paymentIdFromAddress(address, nettype)
         if (ipid.length > 0 && payment_id.length > 0)
            payment_id_ok = false
 
@@ -472,7 +472,7 @@ Rectangle {
                 releasedColor: "#FF6C3C"
                 pressedColor: "#FF4304"
                 visible: appWindow.viewOnly
-                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
                     var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
