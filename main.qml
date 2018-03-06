@@ -436,7 +436,7 @@ ApplicationWindow {
                 if(localNodeConnected) {
                     leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
                     leftPanel.progressBar.visible = true
-                } else if (persistentSettings.startLocalNode && !startLocalNodeCancelled) {
+                } else if (!persistentSettings.useRemoteNode && !startLocalNodeCancelled) {
                     daemonManagerDialog.open()
                 }
 
@@ -478,7 +478,7 @@ ApplicationWindow {
         currentWallet.pauseRefresh();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir);
+        daemonManager.start(flags, persistentSettings.testnet, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress);
         persistentSettings.daemonFlags = flags
     }
 
@@ -1004,9 +1004,9 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property string blockchainDataDir: ""
-        property bool startLocalNode: true
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
+        property string bootstrapNodeAddress: ""
     }
 
     // Information dialog
