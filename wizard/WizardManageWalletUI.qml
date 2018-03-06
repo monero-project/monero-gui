@@ -83,7 +83,7 @@ ColumnLayout {
     function checkSeed() {
         console.log("Checking seed")
         var wordsArray = Utils.lineBreaksToSpaces(uiItem.wordsTextItem.memoText).split(" ");
-        return wordsArray.length === 25
+        return wordsArray.length === 25 || wordsArray.length === 24
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
