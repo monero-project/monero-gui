@@ -64,15 +64,15 @@ Rectangle {
     }
 
     function checkSignature(signature) {
-        if (signature.startsWith("OutProofV")) {
+        if (signature.indexOf("OutProofV") === 0) {
             if ((signature.length - 10) % 132 != 0)
                 return false;
             return check256(signature, signature.length);
-        } else if (signature.startsWith("InProofV")) {
+        } else if (signature.indexOf("InProofV") === 0) {
             if ((signature.length - 9) % 132 != 0)
                 return false;
             return check256(signature, signature.length);
-        } else if (signature.startsWith("SpendProofV")) {
+        } else if (signature.indexOf("SpendProofV") === 0) {
             if ((signature.length - 12) % 88 != 0)
                 return false;
             return check256(signature, signature.length);
@@ -328,7 +328,7 @@ Rectangle {
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
-            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.startsWith("SpendProofV") && checkProofAddressLine.text.length == 0) || (!checkProofSignatureLine.text.startsWith("SpendProofV") && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
+            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
             onClicked: {
                 console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
                 root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)

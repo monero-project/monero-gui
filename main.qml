@@ -783,10 +783,10 @@ ApplicationWindow {
         var result;
         if (address.length > 0)
             result = currentWallet.getTxProof(txid, address, message);
-        if (!result || result.startsWith("error|"))
+        if (!result || result.indexOf("error|") === 0)
             result = currentWallet.getSpendProof(txid, message);
         informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
-        if (result.startsWith("error|")) {
+        if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
             informationPopup.text = qsTr("Couldn't generate a proof because of the following reason: \n") + errorString + translationManager.emptyString;
             informationPopup.icon = StandardIcon.Critical;
