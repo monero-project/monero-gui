@@ -61,6 +61,7 @@ Packages are available for
 
 * Arch Linux via AUR: [monero-wallet-qt](https://aur.archlinux.org/packages/monero-wallet-qt/)
 * Void Linux: xbps-install -S monero-core
+* GuixSD: guix package -i monero-core
 
 Packaging for your favorite distribution would be a welcome contribution!
 
