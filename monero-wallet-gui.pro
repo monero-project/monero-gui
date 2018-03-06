@@ -116,6 +116,8 @@ android {
 
 
 
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
 
 ios {
     message("Host is IOS")
@@ -236,6 +238,7 @@ win32 {
         message("Target is 64bit")
     }
 
+    QMAKE_LFLAGS += -Wl,--dynamicbase -Wl,--nxcompat
 }
 
 linux {
@@ -276,6 +279,8 @@ linux {
         message(Building with libunwind)
         LIBS += -Wl,-Bdynamic -lunwind
     }
+
+    QMAKE_LFLAGS += -pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack
 }
 
 macx {
@@ -300,6 +305,7 @@ macx {
         -lcrypto \
         -ldl
 
+    QMAKE_LFLAGS += -pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack
 }
 
 

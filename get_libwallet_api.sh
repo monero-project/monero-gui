@@ -122,8 +122,8 @@ rm -fr $MONERO_DIR/include
 rm -fr $MONERO_DIR/bin
 
 
-mkdir -p $MONERO_DIR/build/release
-pushd $MONERO_DIR/build/release
+mkdir -p $MONERO_DIR/build/$BUILD_TYPE
+pushd $MONERO_DIR/build/$BUILD_TYPE
 
 # reusing function from "utils.sh"
 platform=$(get_platform)
@@ -209,7 +209,7 @@ if test -z "$CPU_CORE_COUNT"; then
 fi
 
 # Build libwallet_merged
-pushd $MONERO_DIR/build/release/src/wallet
+pushd $MONERO_DIR/build/$BUILD_TYPE/src/wallet
 eval $make_exec version -C ../..
 eval $make_exec  -j$CPU_CORE_COUNT
 eval $make_exec  install -j$CPU_CORE_COUNT
@@ -218,21 +218,21 @@ popd
 # Build monerod
 # win32 need to build daemon manually with msys2 toolchain
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
-    pushd $MONERO_DIR/build/release/src/daemon
+    pushd $MONERO_DIR/build/$BUILD_TYPE/src/daemon
     eval make  -j$CPU_CORE_COUNT
     eval make install -j$CPU_CORE_COUNT
     popd
 fi
 
 # build install epee
-eval make -C $MONERO_DIR/build/release/contrib/epee all install
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/contrib/epee all install
 
 # install easylogging
-eval make -C $MONERO_DIR/build/release/external/easylogging++ all install
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/easylogging++ all install
 
-# Install libunwind
+# Install libunbound
 echo "Installing libunbound..."
-pushd $MONERO_DIR/build/release/external/unbound
+pushd $MONERO_DIR/build/$BUILD_TYPE/external/unbound
 # no need to make, it was already built as dependency for libwallet
 # make -j$CPU_CORE_COUNT
 $make_exec install -j$CPU_CORE_COUNT
