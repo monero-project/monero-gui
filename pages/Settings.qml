@@ -378,7 +378,7 @@ Rectangle {
         }
 
         RowLayout {
-            visible: persistentSettings.startLocalNode
+            visible: !isMobile && !persistentSettings.useRemoteNode
             ColumnLayout {
                 Label {
                     color: "#4A4949"
