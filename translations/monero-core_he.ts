@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="he">
 <context>
     <name>AddressBook</name>
     <message>
@@ -11,7 +11,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="56"/>
         <source>Qr Code</source>
-        <translation type="unfinished"></translation>
+        <translation>קוד QR</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;מזהה תשלום&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;שם משתמש ייחודי&lt;br/&gt;לספר כתובות. זה לא&lt;br/&gt;מידע שישלח&lt;br/&gt;בזמן השליחה</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="88"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="149"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>הכתובת הועתקה ללוח</translation>
     </message>
 </context>
 <context>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>מתחיל צומת מקומית בעוד %1 שניות</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="115"/>
@@ -151,7 +151,7 @@
     <message>
         <location filename="../pages/Dashboard.qml" line="102"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        looking for security level and address book? go to &lt;a href=&apos;#&apos;&gt;Transfer&lt;/a&gt; tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;א {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                        מחפש רמות אבטחה וספר כתובות? לך ללשונית &lt;a href=&apos;#&apos;&gt;שלח&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
@@ -231,23 +231,23 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="48"/>
         <source>Tx ID:</source>
-        <translation>מזהה העברה (Tx ID):</translation>
+        <translation>מזהה העברה:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
         <location filename="../components/HistoryTable.qml" line="195"/>
         <source>Payment ID:</source>
-        <translation>מזהה תשלום (Payment ID)</translation>
+        <translation>מזהה תשלום:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx key:</source>
-        <translation>מפתח העברה (Tx key):</translation>
+        <translation>מפתח העברה:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Tx note:</source>
-        <translation>הערות העברה</translation>
+        <translation>הערות העברה:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
@@ -272,7 +272,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="258"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 אישורים)</translation>
+        <translation>(%1/%2 אישורים)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="262"/>
@@ -282,7 +282,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="264"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation>נכשל</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="265"/>
@@ -310,52 +310,52 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="47"/>
         <source>Tx ID:</source>
-        <translation type="unfinished">מזהה העברה (Tx ID):</translation>
+        <translation>מזהה העברה:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="48"/>
         <source>Payment ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>מזהה תשלום:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx key:</source>
-        <translation type="unfinished">מפתח העברה (Tx key):</translation>
+        <translation>מפתח העברה (Tx key):</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Tx note:</source>
-        <translation type="unfinished">הערות העברה</translation>
+        <translation>הערות העברה:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
         <source>Destinations:</source>
-        <translation type="unfinished">יעדים:</translation>
+        <translation>יעדים:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="77"/>
         <source>No more results</source>
-        <translation type="unfinished"></translation>
+        <translation>אין תוצאות נוספות</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="150"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 אישורים)</translation>
+        <translation>(%1/%2 אישורים)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="152"/>
         <source>UNCONFIRMED</source>
-        <translation type="unfinished">ממתין לאישור</translation>
+        <translation>ממתין לאישור</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="154"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation>נכשל</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="155"/>
         <source>PENDING</source>
-        <translation type="unfinished">ממתין להישלח</translation>
+        <translation>ממתין לשליחה</translation>
     </message>
 </context>
 <context>
@@ -363,70 +363,70 @@
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>גרעין מנמוני (mnemonic seed)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>לחץ פעמיים כדי להעתיק</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
         <source>Seed copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>גרעין (seed) הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="95"/>
         <source>Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>מפתחות</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="119"/>
         <source>Keys copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>המפתחות הועתקו ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="129"/>
         <source>Export wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>יצא ארנק</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>ארנק ניתן לשימוש (spendable)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>View Only Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>ארנק לצפיה בלבד</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="191"/>
         <source>Secret view key</source>
-        <translation type="unfinished">מפתח צפייה סודי</translation>
+        <translation>מפתח צפייה סודי</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="192"/>
         <source>Public view key</source>
-        <translation type="unfinished">מפתח צפייה ציבורי</translation>
+        <translation>מפתח צפייה ציבורי</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="193"/>
         <source>Secret spend key</source>
-        <translation type="unfinished">מפתח שימוש סודי</translation>
+        <translation>מפתח שימוש סודי</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="194"/>
         <source>Public spend key</source>
-        <translation type="unfinished">מפתח שימוש ציבורי</translation>
+        <translation>מפתח שימוש ציבורי</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="206"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation type="unfinished"></translation>
+        <translation>(ארנק לצפיה בלבד - גרעין מנמוני לא קיים)</translation>
     </message>
 </context>
 <context>
@@ -454,17 +454,17 @@
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>ק</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
         <source>Prove/check</source>
-        <translation type="unfinished"></translation>
+        <translation>הוכח/בדוק</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>ב</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="369"/>
@@ -474,12 +474,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="96"/>
         <source>View Only</source>
-        <translation type="unfinished"></translation>
+        <translation>צפיה בלבד</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testnet</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="320"/>
@@ -489,12 +489,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>ס</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>ט</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="392"/>
@@ -504,7 +504,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>מ</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
@@ -514,17 +514,17 @@
     <message>
         <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>כ</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
         <source>Seed &amp; Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>גרעין ומפתחות</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>ג</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
@@ -534,17 +534,17 @@
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>ה</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>ש</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>א</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
@@ -605,7 +605,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="139"/>
         <source>Manage miner</source>
-        <translation>נהל את תהליך הכרייה</translation>
+        <translation>נהל את הכרייה</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="148"/>
@@ -671,7 +671,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="55"/>
         <source>Remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>צומת מרוחקת</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="56"/>
@@ -704,22 +704,22 @@
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="100"/>
         <source>Please enter new password</source>
-        <translation type="unfinished"></translation>
+        <translation>אנא הכנס סיסמה חדשה</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="157"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished"></translation>
+        <translation>אנא אמת סיסמה חדשה</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="231"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>בטל</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="244"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>המשך</translation>
     </message>
 </context>
 <context>
@@ -742,7 +742,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="169"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>המשך</translation>
     </message>
 </context>
 <context>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../components/QRCodeScanner.qml" line="129"/>
         <source>QrCode Scanned</source>
-        <translation type="unfinished"></translation>
+        <translation>קוד QR נסרק</translation>
     </message>
 </context>
 <context>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="214"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>הכתובת הועתקה ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="235"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="247"/>
         <source>Payment ID copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>מזהה התשלום הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="270"/>
@@ -879,7 +879,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
         <source>Integrated address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>כתובת משולבת הועתקה ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="320"/>
@@ -889,12 +889,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>Tracking</source>
-        <translation type="unfinished"></translation>
+        <translation>מעקב</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="343"/>
         <source>help</source>
-        <translation type="unfinished"></translation>
+        <translation>עזרה</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="348"/>
@@ -947,12 +947,12 @@
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="49"/>
         <source>Remote Node Hostname / IP</source>
-        <translation type="unfinished"></translation>
+        <translation>צומת מרוחקת Hostname או IP</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="57"/>
         <source>Port</source>
-        <translation type="unfinished">פורט</translation>
+        <translation>פורט</translation>
     </message>
 </context>
 <context>
@@ -1029,7 +1029,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="439"/>
         <source>Custom decorations</source>
-        <translation>עיצובים מיוחדים</translation>
+        <translation>            עיצובים מיוחדים</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="450"/>
@@ -1044,62 +1044,62 @@
     <message>
         <location filename="../pages/Settings.qml" line="160"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>פלטים שיצאו נסרקו מחדש בהצלחה.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="170"/>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>שנה סיסמה</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="201"/>
         <source>Local Node</source>
-        <translation type="unfinished"></translation>
+        <translation>צומת מקומית</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="215"/>
         <source>Remote Node</source>
-        <translation type="unfinished"></translation>
+        <translation>צומת מרוחקת</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="233"/>
         <source>Manage Daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>נהל סנכרון</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="239"/>
         <source>Show advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>מתקדם</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
         <source>Start Local Node</source>
-        <translation type="unfinished"></translation>
+        <translation>התחל צומת מקומית</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="272"/>
         <source>Stop Local Node</source>
-        <translation type="unfinished"></translation>
+        <translation>עצור צומת מקומית</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="333"/>
         <source>Local daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>דגלי אתחול למסנכרן רשת מקומי</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="351"/>
         <source>Node login (optional)</source>
-        <translation type="unfinished"></translation>
+        <translation>פרטי התחברות לצומת (אופציונלי)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="382"/>
         <source>Remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>צומת מרוחקת</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="498"/>
         <source>Debug info</source>
-        <translation type="unfinished"></translation>
+        <translation>ניפוי אינפורמציה</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="512"/>
@@ -1114,22 +1114,22 @@
     <message>
         <location filename="../pages/Settings.qml" line="523"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>גובה יציאת הארנק: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="524"/>
         <source> &lt;a href=&apos;#&apos;&gt;(Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt;(לחץ כאן כדי לשנות)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="550"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="563"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>סרוק מחדש מטמון הארנק</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="564"/>
@@ -1141,22 +1141,29 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>האם אתה בטוח שאתה רוצה לבנות מחדש את מטמון הארנק?
+המידע הבא יימחק
+- כתובות נמענים
+- מפתחות העברה
+- תיאורי העברות
+
+קובץ מטמון הארנק הישן יקבל שם אחר וניתן לשחזרו בעתיד.
+</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>מיקום קבצי רישום לארנק: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="596"/>
         <source>Wallet Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>שם הארנק: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="600"/>
         <source>Daemon log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>מיקום קבצי רישום למסנכרן: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="609"/>
@@ -1181,12 +1188,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Settings.qml" line="634"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>אזהרה: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע</translation>
+        <translation>אזהרה: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="636"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>שים לב: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע</translation>
+        <translation>שים לב: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="640"/>
@@ -1246,7 +1253,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="106"/>
         <source>Sign a message or file contents with your address:</source>
-        <translation>חתום על הודעה או קובץ עם הכתובת שלך</translation>
+        <translation>חתום על הודעה או קובץ עם הכתובת שלך:</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="115"/>
@@ -1290,12 +1297,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished"></translation>
+        <translation>כתובת חתימה</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>הדבק או בחר מ &lt;a href=&apos;#&apos;&gt;ספר הכתובות&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="160"/>
@@ -1337,12 +1344,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="122"/>
         <source>Double tap to copy</source>
-        <translation type="unfinished"></translation>
+        <translation>לחץ פעמיים כדי להעתיק</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="129"/>
         <source>Content copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>התוכן הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="147"/>
@@ -1352,7 +1359,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="160"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>אישור</translation>
     </message>
 </context>
 <context>
@@ -1375,22 +1382,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDropdown.qml" line="206"/>
         <source>Slow (x0.25 fee)</source>
-        <translation type="unfinished">איטי (עמלה x0.25)</translation>
+        <translation>איטי (עמלה x0.25)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="207"/>
         <source>Default (x1 fee)</source>
-        <translation type="unfinished">ברירת מחדל (עמלה x1)</translation>
+        <translation>ברירת מחדל (עמלה x1)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="208"/>
         <source>Fast (x5 fee)</source>
-        <translation type="unfinished">מהיר (עמלה x5)</translation>
+        <translation>מהיר (עמלה x5)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="209"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation type="unfinished">הכי מהיר (עמלה x41.5)</translation>
+        <translation>הכי מהיר (עמלה x41.5)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="210"/>
@@ -1436,22 +1443,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="65"/>
         <source>Payment ID</source>
-        <translation>מזהה תשלום</translation>
+        <translation>    מזהה תשלום</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="66"/>
         <source>Date</source>
-        <translation>תאריך</translation>
+        <translation>    תאריך</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="67"/>
         <source>Block height</source>
-        <translation>גובה בלוק</translation>
+        <translation>    גובה בלוק</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="68"/>
         <source>Amount</source>
-        <translation>סכום</translation>
+        <translation>    סכום</translation>
     </message>
 </context>
 <context>
@@ -1459,7 +1466,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>ברירת מחדל</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
@@ -1590,52 +1597,57 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="45"/>
         <source>Start daemon</source>
-        <translation type="unfinished">התחל סנכרון</translation>
+        <translation>התחל סנכרון</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="220"/>
         <source>Address</source>
-        <translation type="unfinished">כתובת</translation>
+        <translation>כתובת</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="222"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>הדבק או בחר מ &lt;a href=&apos;#&apos;&gt;ספר הכתובות&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="538"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation>לא ניתן לטעון עסקאות לא חתומות</translation>
+        <translation>לא ניתן לטעון עסקאות לא חתומות: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="545"/>
         <source>
 Number of transactions: </source>
-        <translation>מספר עסקאות: </translation>
+        <translation>
+מספר עסקאות: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="547"/>
         <source>
 Transaction #%1</source>
-        <translation>העברה #%1</translation>
+        <translation>
+העברה #%1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="548"/>
         <source>
 Recipient: </source>
-        <translation>נמען (מקבל)</translation>
+        <translation>
+נמען (מקבל): </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="549"/>
         <source>
 payment ID: </source>
-        <translation>מזהה תשלום</translation>
+        <translation>
+מזהה תשלום: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="550"/>
         <source>
 Amount: </source>
-        <translation>סכום: </translation>
+        <translation>
+סכום: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="551"/>
@@ -1670,7 +1682,7 @@ Ringsize: </source>
         <location filename="../pages/Transfer.qml" line="654"/>
         <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>הארנק אינו מחובר למסנכרן רשת</translation>
+        <translation>הארנק אינו מחובר למסנכרן רשת.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="669"/>
@@ -1730,7 +1742,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/TxKey.qml" line="349"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
-        <translation>אם בתשלום היו מספר עסקאות, יש לוודא כל אחת מהעסקאות</translation>
+        <translation>אם בתשלום היו מספר עסקאות, יש לוודא כל אחת מהעסקאות.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="133"/>
@@ -1742,7 +1754,8 @@ Please upgrade or connect to another daemon</source>
         <location filename="../pages/TxKey.qml" line="97"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation>צור הוכחה של תשלום יוצא או נכנס על-ידי מזהה ההעברה, כתובת הנמען והודעה אופציונלית. 
+במקרה של תשלום יוצא, ניתן לקבל &apos;הוכחת בזבוז&apos; שמאפשר להוכיח את מחבר ההעברה. במקרה זה, אין צורך לספק את כתובת הנמען.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="140"/>
@@ -1754,34 +1767,35 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="159"/>
         <location filename="../pages/TxKey.qml" line="271"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>הודעה</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation type="unfinished"></translation>
+        <translation>הודעה אופציונלית שעליה חתומה החתימה</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
         <source>Generate</source>
-        <translation type="unfinished">צור</translation>
+        <translation>צור</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="209"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation type="unfinished"></translation>
+        <translation>אמת שכסף שולם לכתובת על-ידי הזנת מזהה ההעברה, כתובת הנמען, ההודעה ששומשה לחתימת החתימה
+במקרה של הוכחת בזבו, אין צורך לספק את כתובת הנמען.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="297"/>
         <source>Signature</source>
-        <translation type="unfinished">חתימה</translation>
+        <translation>חתימה</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="305"/>
         <source>Paste tx proof</source>
-        <translation type="unfinished"></translation>
+        <translation>הדבק הוכחת העברה</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="106"/>
@@ -1811,12 +1825,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation type="unfinished"></translation>
+        <translation>התנעת בסיס הנתונים של מונרו?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>חשוב מאוד לרשום זאת כי זהו הגיבוי היחיד שצריך בשביל הארנק</translation>
+        <translation>חשוב מאוד לרשום זאת כי זהו הגיבוי היחיד שצריך בשביל הארנק.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="126"/>
@@ -1860,32 +1874,32 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
-        <translation type="unfinished"></translation>
+        <translation>בשביל לאפשר תקשורת לרשת מונרו הארנק שלך צריך להיות מחובר לצומת. בשביל פרטיות מקסימלית מומלץ להריץ צומת מקומית.                         &lt;br&gt;&lt;br&gt;                         אם אין באפשרותך להריץ צומת מקומית משלך, יש אופציה להתחבר לצומת מרוחקת.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation type="unfinished"></translation>
+        <translation>התחלת צומת מקומית ברקע (מומלץ)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="144"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">מיקום בסיס נתונים</translation>
+        <translation>מיקום בסיס נתונים</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="151"/>
         <source>(optional)</source>
-        <translation type="unfinished">(אופציונלי)</translation>
+        <translation>(אופציונלי)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="170"/>
         <source>Connect to a remote node until my own node has finished syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>התחבר לצומת מרוחקת עד שהצומת המקומית תסיים להסתנכרן</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="171"/>
         <source>Connect to a remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>התחבר לצומת מרוחקת</translation>
     </message>
 </context>
 <context>
@@ -1908,7 +1922,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDonation.qml" line="164"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>לכל העברה קיימת עמלה. אופציה זו מאפשרת לך להוסיף, בנוסף לעמלה, אחוז מסוים מעמלה זו כדי לתמוך בפיתוח של מונרו. למשל, תרומה אוטומטית של 50% עבור עמלה בסך 0.005 XMR תוסיף עוד 0.0025 XMR שיישלחו לצוות הפיתוח של מונרו</translation>
+        <translation>לכל העברה קיימת עמלה. אופציה זו מאפשרת לך להוסיף, בנוסף לעמלה, אחוז מסוים מעמלה זו כדי לתמוך בפיתוח של מונרו. למשל, תרומה אוטומטית של 50% עבור עמלה בסך 0.005 XMR תוסיף עוד 0.0025 XMR שיישלחו לצוות הפיתוח של מונרו.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="176"/>
@@ -1965,7 +1979,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="68"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
@@ -1980,7 +1994,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="82"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>אל תשכח לרשום את המשפט הסודי. ניתן לצפות במשפט הסודי ולשנות הגדרות בדף ההגדרות</translation>
+        <translation>אל תשכח לרשום את המשפט הסודי. ניתן לצפות במשפט הסודי ולשנות הגדרות בדף ההגדרות.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="128"/>
@@ -2013,7 +2027,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMain.qml" line="402"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>הצלחה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="403"/>
@@ -2053,7 +2067,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
         <source>From QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>מתוך קוד QR</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
@@ -2096,12 +2110,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="64"/>
         <source>Seed copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>הגרעין (seed) הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="92"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>חשוב &lt;b&gt;מאוד&lt;/b&gt; לכתוב ולשמור את המשפט הסודי. זה כל שתצטרך כדי לגבות ולשחזר את הארנק שלך</translation>
+        <translation>חשוב &lt;b&gt;מאוד&lt;/b&gt; לכתוב ולשמור את המשפט הסודי. זה כל שתצטרך כדי לגבות ולשחזר את הארנק שלך.</translation>
     </message>
 </context>
 <context>
@@ -2134,7 +2148,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="245"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testnet</translation>
     </message>
 </context>
 <context>
@@ -2149,7 +2163,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>&lt;br&gt;שים לב: לא ניתן לשחזר סיסמה זו. אם תשכח אותה תצטרך לשחזר את הארנק בעזרת המשפט הסודי בעל 25 המילים.&lt;br&gt;&lt;br&gt;&lt;br&gt;הכנס סיסמה חזקה&lt;br&gt;(אותיות, מספרים ו/או סמלים)</translation>
+        <translation>&lt;br&gt;שים לב: לא ניתן לשחזר סיסמה זו. אם תשכח אותה תצטרך לשחזר את הארנק בעזרת המשפט הסודי בעל 25 המילים.&lt;br&gt;&lt;br&gt;&lt;br&gt;הכנס סיסמה חזקה&lt;br&gt;(אותיות, מספרים ו/או סמלים):</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2241,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="435"/>
         <source>Remaining blocks (local node):</source>
-        <translation type="unfinished"></translation>
+        <translation>בלוקים שנותרו (צומת מקומית):</translation>
     </message>
     <message>
         <location filename="../main.qml" line="475"/>
@@ -2314,25 +2328,25 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="778"/>
         <source>Payment proof</source>
-        <translation type="unfinished"></translation>
+        <translation>הוכחת תשלום</translation>
     </message>
     <message>
         <location filename="../main.qml" line="781"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>לא ניתן ליצור הוכחה בגלל הסיבה הבאה:</translation>
     </message>
     <message>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished"></translation>
+        <translation>בדיקת הוכחת תשלום</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
         <location filename="../main.qml" line="833"/>
         <source>Bad signature</source>
-        <translation type="unfinished">חתימה שגויה</translation>
+        <translation>חתימה שגויה</translation>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
@@ -2342,58 +2356,58 @@ Ringsize: </source>
     <message>
         <location filename="../main.qml" line="833"/>
         <source>Good signature</source>
-        <translation type="unfinished">חתימה נכונה</translation>
+        <translation>חתימה נכונה</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1033"/>
         <location filename="../main.qml" line="1281"/>
         <source>Wrong password</source>
-        <translation type="unfinished">סיסמה שגויה</translation>
+        <translation>סיסמה שגויה</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1108"/>
         <source>Warning</source>
-        <translation type="unfinished">אזהרה</translation>
+        <translation>אזהרה</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1111"/>
         <source>Error: Filesystem is read only</source>
-        <translation type="unfinished">שגיאה: מערכת הקבצים היא לקריאה בלבד</translation>
+        <translation>שגיאה: מערכת הקבצים היא לקריאה בלבד</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1113"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">אזהרה: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע</translation>
+        <translation>אזהרה: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1115"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation type="unfinished">שים לב: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע</translation>
+        <translation>שים לב: נותרו רק %1 GB על ההתקן. בסיס הנתונים דורש ~%2 GB של מידע.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1117"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
-        <translation type="unfinished">שים לב: התיקייה lmdb לא נמצאה(בסיס הנתונים). יוצר תיקייה חדשה.</translation>
+        <translation>שים לב: התיקייה lmdb לא נמצאה(בסיס הנתונים). יוצר תיקייה חדשה.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1121"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>ביטול</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1174"/>
         <source>Password changed successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>הסיסמא הוחלפה בהצלחה</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1178"/>
         <source>Error: </source>
-        <translation type="unfinished">שגיאה: </translation>
+        <translation>שגיאה: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1599"/>
         <source>Tap again to close...</source>
-        <translation type="unfinished"></translation>
+        <translation>לחץ שוב כדי לסגור...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1612"/>
@@ -2419,20 +2433,21 @@ Ringsize: </source>
         <location filename="../main.qml" line="593"/>
         <source>
 Number of transactions: </source>
-        <translation>מספר עסקאות: </translation>
+        <translation>
+מספר עסקאות: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="313"/>
         <location filename="../main.qml" line="314"/>
         <source>HIDDEN</source>
-        <translation type="unfinished"></translation>
+        <translation>מוסתר</translation>
     </message>
     <message>
         <location filename="../main.qml" line="591"/>
         <location filename="../main.qml" line="702"/>
         <source>
 Fee: </source>
-        <translation type="unfinished">
+        <translation>
 עמלה: </translation>
     </message>
     <message>
@@ -2457,7 +2472,7 @@ Description: </source>
     <message>
         <location filename="../main.qml" line="739"/>
         <source>Couldn&apos;t send the money: </source>
-        <translation>שליחת הכסף נכשלה</translation>
+        <translation>שליחת הכסף נכשלה: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="742"/>
