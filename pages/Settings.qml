@@ -407,8 +407,9 @@ Rectangle {
                 RemoteNodeEdit {
                     id: remoteNodeEdit
                     Layout.minimumWidth: 100 * scaleRatio
-                    daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
-                    daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+                    property var rna: persistentSettings.remoteNodeAddress
+                    daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
+                    daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : rna.split(":")[1] : ""
                     onEditingFinished: {
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                         console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
@@ -543,7 +544,7 @@ Rectangle {
             id: restoreHeightText
             Layout.fillWidth: true
             textFormat: Text.RichText
-            property var txt: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C}</style>" + qsTr("Wallet creation height: ") + currentWallet.walletCreationHeight + translationManager.emptyString
+            property var txt: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C}</style>" + qsTr("Wallet creation height: ") + (currentWallet ? currentWallet.walletCreationHeight : "") + translationManager.emptyString
             property var linkTxt: qsTr(" <a href='#'>(Click to change)</a>") + translationManager.emptyString
             text: (typeof currentWallet == "undefined") ? "" : txt + linkTxt
 
@@ -560,7 +561,7 @@ Rectangle {
                 id: restoreHeight
                 Layout.preferredWidth: 80
                 Layout.fillWidth: true
-                text: currentWallet.walletCreationHeight
+                text: currentWallet ? currentWallet.walletCreationHeight : "0"
                 validator: IntValidator {
                     bottom:0
                 }
@@ -612,7 +613,7 @@ Rectangle {
 
         TextBlock {
             Layout.fillWidth: true
-            text:  (typeof currentWallet == "undefined") ? "" : qsTr("Wallet log path: ") + currentWallet.walletLogPath + translationManager.emptyString
+            text:  (!currentWallet) ? "" : qsTr("Wallet log path: ") + currentWallet.walletLogPath + translationManager.emptyString
         }
         TextBlock {
             Layout.fillWidth: true
@@ -620,7 +621,7 @@ Rectangle {
         }
         TextBlock {
             Layout.fillWidth: true
-            text:  (typeof currentWallet == "undefined") ? "" : qsTr("Daemon log path: ") + currentWallet.daemonLogPath + translationManager.emptyString
+            text:  (!currentWallet) ? "" : qsTr("Daemon log path: ") + currentWallet.daemonLogPath + translationManager.emptyString
         }
     }
 
