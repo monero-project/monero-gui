@@ -5,6 +5,8 @@ QT += qml quick widgets
 WALLET_ROOT=$$PWD/monero
 
 CONFIG += c++11
+QMAKE_CXXFLAGS += -fPIC -fstack-protector
+QMAKE_LFLAGS += -fstack-protector
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
