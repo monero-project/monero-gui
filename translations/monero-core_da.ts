@@ -1119,7 +1119,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="523"/>
         <source>Wallet creation height: </source>
-        <translation>Tegnebogs oprettelses højde</translation>
+        <translation>Tegnebogs oprettelses højde: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="524"/>
@@ -1650,7 +1650,7 @@ Fee: </source>
         <location filename="../pages/Transfer.qml" line="552"/>
         <source>
 Ringsize: </source>
-        <translation>Ringstørrelse</translation>
+        <translation>Ringstørrelse: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="566"/>
@@ -1846,7 +1846,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Opret se kun tegnebog?</translation>
+        <translation>Opret se kun tegnebog</translation>
     </message>
 </context>
 <context>
