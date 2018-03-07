@@ -409,7 +409,7 @@ Rectangle {
             // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
-                visible: !isAndroid && !isIOS
+                visible: !isAndroid && !isIOS && !persistentSettings.useRemoteNode
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString

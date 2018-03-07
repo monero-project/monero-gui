@@ -70,14 +70,6 @@ Rectangle {
                 text: qsTr("Solo mining") + translationManager.emptyString
             }
 
-            Label {
-                id: soloLocalDaemonsLabel
-                fontSize: 18
-                color: "#D02020"
-                text: qsTr("(only available for local daemons)")
-                visible: !isDaemonLocal()
-            }
-
             Text {
                 id: soloMainLabel
                 text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
@@ -157,8 +149,6 @@ Rectangle {
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
                             errorPopup.text = qsTr("Couldn't start mining.<br>")
-                            if (!isDaemonLocal())
-                                errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
                             errorPopup.icon = StandardIcon.Critical
                             errorPopup.open()
                         }
