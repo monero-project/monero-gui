@@ -116,7 +116,7 @@ fi
 
 
 echo "cleaning up existing monero build dir, libs and includes"
-#rm -fr $MONERO_DIR/build
+rm -fr $MONERO_DIR/build
 rm -fr $MONERO_DIR/lib
 rm -fr $MONERO_DIR/include
 rm -fr $MONERO_DIR/bin

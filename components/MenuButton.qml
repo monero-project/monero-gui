@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -57,19 +57,19 @@ Rectangle {
 
     color: checked ? "#FFFFFF" : "#1C1C1C"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 64 * scaleRatio  : 52 * scaleRatio ) : 0
+    height: present ? ((appWindow.height >= 800) ? 48 * scaleRatio  : 36 * scaleRatio ) : 0
 
     transform: Scale {
         yScale: button.present ? 1 : 0
 
         Behavior on yScale {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
     }
 
     Behavior on height {
         SequentialAnimation {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
     }
 
@@ -88,13 +88,13 @@ Rectangle {
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: 16 * scaleRatio
+            width: 14 * scaleRatio
             height: width
             radius: height / 2
 
             Rectangle {
                 anchors.centerIn: parent
-                width: 12 * scaleRatio
+                width: 10 * scaleRatio
                 height: width
                 radius: height / 2
                 color: "#1C1C1C"
@@ -135,7 +135,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: parent.getOffset() + 50 * scaleRatio
         font.family: "Arial"
-        font.pixelSize: 18 * scaleRatio
+        font.pixelSize: 16 * scaleRatio
         color: parent.checked ? "#000000" : "#FFFFFF"
     }
 

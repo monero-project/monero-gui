@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -37,6 +37,7 @@ Item {
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
     property int fontSize: 18 * scaleRatio
+    property bool showBorder: true
     property bool error: false
     signal editingFinished()
     signal accepted();
@@ -52,6 +53,7 @@ Item {
     }
 
     Rectangle {
+        visible: showBorder
         anchors.fill: parent
         anchors.bottomMargin: 1 * scaleRatio
         color: "#DBDBDB"
