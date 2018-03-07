@@ -75,7 +75,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Ubuntu and Mint
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libreadline-dev`
 
   - For Gentoo
 
