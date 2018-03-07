@@ -733,6 +733,102 @@ QString Wallet::getWalletLogPath() const
 #endif
 }
 
+bool Wallet::blackballOutput(const QString &pubkey)
+{
+    QList<QString> list;
+    list.push_back(pubkey);
+    return blackballOutputs(list, true);
+}
+
+bool Wallet::blackballOutputs(const QList<QString> &pubkeys, bool add)
+{
+    std::vector<std::string> std_pubkeys;
+    foreach (const QString &pubkey, pubkeys) {
+        std_pubkeys.push_back(pubkey.toStdString());
+    }
+    return m_walletImpl->blackballOutputs(std_pubkeys, add);
+}
+
+bool Wallet::blackballOutputs(const QString &filename, bool add)
+{
+    QFile file(filename);
+
+    try {
+        if (!file.open(QIODevice::ReadOnly))
+            return false;
+        QList<QString> outputs;
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            outputs.push_back(in.readLine());
+        }
+        file.close();
+        return blackballOutputs(outputs, add);
+    }
+    catch (const std::exception &e) {
+        file.close();
+        return false;
+    }
+}
+
+bool Wallet::unblackballOutput(const QString &pubkey)
+{
+    return m_walletImpl->unblackballOutput(pubkey.toStdString());
+}
+
+QString Wallet::getRing(const QString &key_image)
+{
+    std::vector<uint64_t> cring;
+    if (!m_walletImpl->getRing(key_image.toStdString(), cring))
+        return "";
+    QString ring = "";
+    for (uint64_t out: cring)
+    {
+        if (!ring.isEmpty())
+            ring = ring + " ";
+	QString s;
+	s.setNum(out);
+        ring = ring + s;
+    }
+    return ring;
+}
+
+QString Wallet::getRings(const QString &txid)
+{
+    std::vector<std::pair<std::string, std::vector<uint64_t>>> crings;
+    if (!m_walletImpl->getRings(txid.toStdString(), crings))
+        return "";
+    QString ring = "";
+    for (const auto &cring: crings)
+    {
+        if (!ring.isEmpty())
+            ring = ring + "|";
+        ring = ring + QString::fromStdString(cring.first) + " absolute";
+        for (uint64_t out: cring.second)
+        {
+            ring = ring + " ";
+	    QString s;
+	    s.setNum(out);
+            ring = ring + s;
+        }
+    }
+    return ring;
+}
+
+bool Wallet::setRing(const QString &key_image, const QString &ring, bool relative)
+{
+    std::vector<uint64_t> cring;
+    QStringList strOuts = ring.split(" ");
+    foreach(QString str, strOuts)
+    {
+        uint64_t out;
+	bool ok;
+	out = str.toULong(&ok);
+	if (ok)
+            cring.push_back(out);
+    }
+    return m_walletImpl->setRing(key_image.toStdString(), cring, relative);
+}
+
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)

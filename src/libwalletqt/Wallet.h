@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTime>
 #include <QMutex>
+#include <QList>
 #include <QtConcurrent/QtConcurrent>
 
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
@@ -275,6 +276,17 @@ public:
 
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
+
+    // Blackalled outputs
+    Q_INVOKABLE bool blackballOutput(const QString &pubkey);
+    Q_INVOKABLE bool blackballOutputs(const QList<QString> &pubkeys, bool add);
+    Q_INVOKABLE bool blackballOutputs(const QString &filename, bool add);
+    Q_INVOKABLE bool unblackballOutput(const QString &pubkey);
+
+    // Rings
+    Q_INVOKABLE QString getRing(const QString &key_image);
+    Q_INVOKABLE QString getRings(const QString &txid);
+    Q_INVOKABLE bool setRing(const QString &key_image, const QString &ring, bool relative);
 
     // TODO: setListenter() when it implemented in API
 signals:
