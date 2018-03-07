@@ -39,7 +39,7 @@ ListView {
     property int rowSpacing: 12
     property var addressBookModel: null
 
-    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations) {
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings) {
         var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
@@ -50,6 +50,7 @@ ListView {
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
             + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note  + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
+            + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
             + "</table>"
             + translationManager.emptyString;
     }
@@ -103,8 +104,11 @@ ListView {
             onClicked: {
                 var tx_key = currentWallet.getTxKey(hash)
                 var tx_note = currentWallet.getUserNote(hash)
+                var rings = currentWallet.getRings(hash)
+                if (rings)
+                    rings = rings.replace(/\|/g, '\n')
                 informationPopup.title = "Transaction details";
-                informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
+                informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations, rings);
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
             }

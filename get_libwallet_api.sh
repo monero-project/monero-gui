@@ -230,6 +230,9 @@ eval make -C $MONERO_DIR/build/$BUILD_TYPE/contrib/epee all install
 # install easylogging
 eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/easylogging++ all install
 
+# install lmdb
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/db_drivers/liblmdb all install
+
 # Install libunbound
 echo "Installing libunbound..."
 pushd $MONERO_DIR/build/$BUILD_TYPE/external/unbound

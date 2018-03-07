@@ -102,6 +102,7 @@ ios:arm64 {
 !ios:!android {
 LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        -llmdb \
         -lepee \
         -lunbound \
         -leasylogging \
@@ -111,6 +112,7 @@ android {
     message("Host is Android")
     LIBS += -L$$WALLET_ROOT/lib \
         -lwallet_merged \
+        -llmdb \
         -lepee \
         -lunbound \
         -leasylogging
@@ -129,6 +131,7 @@ ios {
     CONFIG += arm64
     LIBS += -L$$WALLET_ROOT/lib-ios \
         -lwallet_merged \
+        -llmdb \
         -lepee \
         -lunbound \
         -leasylogging

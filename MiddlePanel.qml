@@ -54,6 +54,7 @@ Rectangle {
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property TxKey txkeyView: TxKey { }
+    property SharedRingDB sharedringdbView: SharedRingDB { }
     property History historyView: History { }
     property Sign signView: Sign { }
     property Settings settingsView: Settings { }
@@ -116,6 +117,10 @@ Rectangle {
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
+               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+            }, State {
+               name: "SharedRingDB"
+               PropertyChanges { target: root; currentView: sharedringdbView }
                PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
             }, State {
                 name: "AddressBook"

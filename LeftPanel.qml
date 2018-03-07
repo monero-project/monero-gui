@@ -48,6 +48,7 @@ Rectangle {
     signal transferClicked()
     signal receiveClicked()
     signal txkeyClicked()
+    signal sharedringdbClicked()
     signal settingsClicked()
     signal addressBookClicked()
     signal miningClicked()
@@ -63,6 +64,7 @@ Rectangle {
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
+        else if(pos === "SharedRingDB")  menuColumn.previousButton = sharedringdbButton
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
@@ -456,6 +458,30 @@ Rectangle {
                 color: "#505050"
                 height: 1
             }
+            // ------------- Shared RingDB tab ---------------
+            MenuButton {
+                id: sharedringdbButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Shared RingDB") + translationManager.emptyString
+                symbol: qsTr("S") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = sharedringdbButton
+                    panel.sharedringdbClicked()
+                }
+            }
+            Rectangle {
+                visible: sharedringdbButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+
 
             // ------------- Sign/verify tab ---------------
             MenuButton {
