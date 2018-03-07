@@ -307,7 +307,7 @@ macx {
         -lcrypto \
         -ldl
 
-    QMAKE_LFLAGS += -pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack
+    QMAKE_LFLAGS += -pie
 }
 
 
