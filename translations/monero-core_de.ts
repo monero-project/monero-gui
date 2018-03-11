@@ -396,7 +396,7 @@
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation type="unfinished"> </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
@@ -871,7 +871,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="270"/>
         <source>Clear</source>
-        <translation type="unfinished"> Leeren</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="279"/>
@@ -891,7 +891,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>Tracking</source>
-        <translation type="unfinished"> Nachverfolgen</translation>
+        <translation type="unfinished">Nachverfolgung</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="343"/>
@@ -1132,7 +1132,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="523"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellungshöhe des Wallets: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="524"/>
@@ -1298,7 +1298,7 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
     <message>
         <location filename="../pages/Sign.qml" line="387"/>
         <source>Signing address</source>
-        <translation type="unfinished"> </translation>
+        <translation>Signaturadresse</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
