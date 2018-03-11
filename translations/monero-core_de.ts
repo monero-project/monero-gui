@@ -17,7 +17,7 @@
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
         <translatorcomment>Placeholder value</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
@@ -396,7 +396,7 @@
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
@@ -455,7 +455,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
@@ -465,7 +465,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="369"/>
@@ -475,7 +475,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="96"/>
         <source>View Only</source>
-        <translation type="unfinished"></translation>
+        <translation>View-only</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="108"/>
@@ -490,12 +490,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="392"/>
@@ -505,7 +505,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
@@ -515,7 +515,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
@@ -525,7 +525,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
@@ -535,7 +535,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
@@ -545,12 +545,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -891,7 +891,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="341"/>
         <source>Tracking</source>
-        <translation type="unfinished">Nachverfolgung</translation>
+        <translation>Nachverfolgung</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="343"/>
@@ -941,7 +941,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="259"/>
         <source>Generate</source>
-        <translation type="unfinished"> Generieren</translation>
+        <translation>Generieren</translation>
     </message>
 </context>
 <context>
@@ -1087,7 +1087,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="239"/>
         <source>Show advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterte Einstellungen</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="257"/>
@@ -1102,7 +1102,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="333"/>
         <source>Local daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Startparameter des lokalen Daemons</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="351"/>
@@ -1159,13 +1159,14 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"> Bist du sicher, dass du den Wallet-Cache neu erzeugen willst?
+        <translation>Bist du sicher, dass du den Wallet-Cache neu erzeugen willst?
 Folgende Informationen werden gelöscht:
 - Empfängeradressen
 - Tx-Schlüssel
-- Tx-Beschreibungen?
+- Tx-Beschreibungen
 
-Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt werden.</translation>
+Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt werden.
+</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="592"/>
@@ -1780,7 +1781,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="166"/>
         <location filename="../pages/TxKey.qml" line="278"/>
         <source>Optional message against which the signature is signed</source>
-        <translation type="unfinished">Optionale Nachricht, gegen die die Signatur signiert wird</translation>
+        <translation>Optionale Nachricht, gegen die die Signatur signiert wird</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="186"/>
@@ -1966,7 +1967,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
         <source>Backup seed</source>
-        <translation type="unfinished">Mnemonischer Seed</translation>
+        <translation>Mnemonischer Seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
@@ -2442,7 +2443,7 @@ Beschreibung: </translation>
         <location filename="../main.qml" line="811"/>
         <location filename="../main.qml" line="831"/>
         <source>Payment proof check</source>
-        <translation type="unfinished">Zahlungsnachweis </translation>
+        <translation>Zahlungsnachweis überprüfen</translation>
     </message>
     <message>
         <location filename="../main.qml" line="814"/>
