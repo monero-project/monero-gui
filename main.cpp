@@ -67,7 +67,7 @@
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // Send all message types to logger
-    Monero::Wallet::debug(msg.toStdString());
+    Monero::Wallet::debug("qml", msg.toStdString());
 }
 
 int main(int argc, char *argv[])
