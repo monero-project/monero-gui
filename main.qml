@@ -86,7 +86,7 @@ ApplicationWindow {
     }
 
     function sequencePressed(obj, seq) {
-        if(seq === undefined)
+        if(seq === undefined || !leftPanel.enabled)
             return
         if(seq === "Ctrl") {
             ctrlPressed = true
