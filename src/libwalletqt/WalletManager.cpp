@@ -270,6 +270,11 @@ bool WalletManager::localDaemonSynced() const
     return blockchainHeight() > 1 && blockchainHeight() >= blockchainTargetHeight();
 }
 
+bool WalletManager::isDaemonLocal(const QString &daemon_address) const
+{
+    return Monero::Utils::isAddressLocal(daemon_address.toStdString());
+}
+
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
     bool dnssec_valid = false;
