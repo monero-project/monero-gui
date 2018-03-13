@@ -19,7 +19,7 @@ List of available languages for your wallet's seed:
         <!-- <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/> -->
         <!-- <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/> -->
         <language display_name="Deutsch" locale="de_DE" wallet_language="Deutsch" flag="/lang/flags/german.png" qs="none"/>
-        <language display_name="Esperanto" locale="eo" wallet_language="English" flag="/lang/flags/esperanto.png" qs="none"/>
+        <language display_name="Esperanto" locale="eo" wallet_language="Esperanto" flag="/lang/flags/esperanto.png" qs="none"/>
         <language display_name="Español" locale="es_ES" wallet_language="Español" flag="/lang/flags/spain.png" qs="none"/>
         <!-- <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/> -->
         <language display_name="Français" locale="fr_FR" wallet_language="Français" flag="/lang/flags/france.png" qs="none"/>
