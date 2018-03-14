@@ -185,14 +185,6 @@ ColumnLayout {
             return false;
         }
 
-        // Don't allow non ascii characters in path on windows platforms until supported by Wallet2
-        if (isWindows) {
-            if (!isAscii(path)) {
-                walletErrorDialog.text = qsTr("Non-ASCII characters are not allowed in wallet path or account name")  + translationManager.emptyString;
-                walletErrorDialog.open();
-                return false;
-            }
-        }
         return true;
     }
 
