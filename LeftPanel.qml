@@ -39,6 +39,7 @@ Rectangle {
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
+    property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
 
     signal dashboardClicked()
@@ -541,8 +542,20 @@ Rectangle {
             id: progressBar
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.bottom: daemonProgressBar.top
+            height: 35 * scaleRatio
+            syncType: qsTr("Wallet")
+            visible: networkStatus.connected
+        }
+
+        ProgressBar {
+            id: daemonProgressBar
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.bottom: parent.bottom
             height: 35 * scaleRatio
+            syncType: qsTr("Daemon")
+            visible: networkStatus.connected
         }
     } // menuRect
 
