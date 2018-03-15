@@ -165,5 +165,6 @@
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
         <file>images/menu.png</file>
+        <file>images/appicon.ico</file>
     </qresource>
 </RCC>

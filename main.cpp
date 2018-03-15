@@ -30,6 +30,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QStandardPaths>
+#include <QIcon>
 #include <QDebug>
 #include <QObject>
 #include <QDesktopWidget>
@@ -90,6 +91,10 @@ int main(int argc, char *argv[])
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
+
+    #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    app.setWindowIcon(QIcon(":/images/appicon.ico"));
+    #endif
 
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
