@@ -32,7 +32,8 @@ import moneroComponents.Wallet 1.0
 Rectangle {
     id: item
     property int fillLevel: 0
-    visible: false
+    property string syncType // Wallet or Daemon
+    property string syncText: qsTr("%1 blocks remaining: ").arg(syncType)
     color: "#1C1C1C"
 
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
@@ -44,24 +45,19 @@ Rectangle {
         }
 
         if(targetBlock > 0) {
-            var remaining = targetBlock - currentBlock
-            // wallet sync
-            if(blocksToSync > 0)
-                var progressLevel = (100*(blocksToSync - remaining)/blocksToSync).toFixed(0);
-            // Daemon sync
-            else
-                var progressLevel = (100*(currentBlock/targetBlock)).toFixed(0);
+            var remaining = (currentBlock < targetBlock) ? targetBlock - currentBlock : 0
+            var progressLevel = (blocksToSync > 0) ? (100*(blocksToSync - remaining)/blocksToSync).toFixed(0) : 100
             fillLevel = progressLevel
             if(typeof statusTxt != "undefined" && statusTxt != "") {
-                progressText.text = statusTxt + (" %1").arg(remaining.toFixed(0));
+                progressText.text = statusTxt;
             } else {
-                progressText.text = qsTr("Blocks remaining: %1").arg(remaining.toFixed(0));
+                progressText.text = syncText + remaining.toFixed(0);
             }
 
-
-
-            progressBar.visible = currentBlock < targetBlock
         }
+
+        if(remaining == 0 && (typeof statusTxt == "undefined" || statusTxt == ""))
+            progressText.text = qsTr("%1 is synchronized").arg(syncType)
     }
 
     Item {
@@ -106,7 +102,7 @@ Rectangle {
                     font.family: "Arial"
                     font.pixelSize: 12 * scaleRatio
                     color: "#000"
-                    text: qsTr("Synchronizing blocks")
+                    text: qsTr("Synchronizing %1").arg(syncType)
                     height:18 * scaleRatio
                 }
             }

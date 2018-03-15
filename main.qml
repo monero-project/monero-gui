@@ -320,7 +320,6 @@ ApplicationWindow {
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
-        leftPanel.progressBar.visible = (status === Wallet.ConnectionStatus_Connected) && !daemonSynced
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
@@ -414,37 +413,13 @@ ApplicationWindow {
         // targetBlock = currentBlock = 1 before network connection is established.
         daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
         // Update daemon sync progress
-        leftPanel.progressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        leftPanel.progressBar.visible =  !daemonSynced && currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected
+        leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock);
+        if(!daemonSynced)
+            leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
         // Update wallet sync progress
         updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
-
-        // Use remote node while local daemon is syncing
-        if (persistentSettings.useRemoteNode) {
-            var localNodeConnected = walletManager.connected;
-            var localNodeSynced = localNodeConnected && walletManager.localDaemonSynced()
-            if (!currentWallet.connected() || !localNodeSynced) {
-                console.log("Using remote node while local node is syncing")
-                // Connect to remote node if not already connected
-                if(!remoteNodeConnected) {
-                    connectRemoteNode();
-                }
-
-                //update local daemon sync progress bar
-                if(localNodeConnected) {
-                    leftPanel.progressBar.updateProgress(walletManager.blockchainHeight(),walletManager.blockchainTargetHeight(), 0, qsTr("Remaining blocks (local node):"));
-                    leftPanel.progressBar.visible = true
-                } else if (!persistentSettings.useRemoteNode && !startLocalNodeCancelled) {
-                    daemonManagerDialog.open()
-                }
-
-            // local daemon is synced - use it!
-            } else if (localNodeSynced && remoteNodeConnected) {
-                disconnectRemoteNode();
-            }
-        }
 
         // Refresh is succesfull if blockchain height > 1
         if (currentWallet.blockChainHeight() > 1){
