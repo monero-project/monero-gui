@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -41,11 +41,14 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "#F0EEEE"
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
+    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>" +
+                                   qsTr("Start daemon") +
+                                   "</a><font size='2'>)</font>" +
+                                   translationManager.emptyString
     property bool showAdvanced: false
 
     function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [4,5,6,7,8,9,10,11,12,13,14,15,20,25];
+        var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
         if (scaleValue < scaleToMixinCount.length) {
             return scaleToMixinCount[scaleValue];
         } else {
@@ -71,10 +74,10 @@ Rectangle {
     }
 
     function updateMixin() {
-        var fillLevel = privacyLevelItem.fillLevel
+        var fillLevel = (isMobile) ? privacyLevelItemSmall.fillLevel : privacyLevelItem.fillLevel
         var mixin = scaleValueToMixinCount(fillLevel)
-        print ("PrivacyLevel changed:"  + fillLevel)
-        print ("mixin count: "  + mixin)
+        console.log("PrivacyLevel changed:"  + fillLevel)
+        console.log("mixin count: "  + mixin)
         privacyLabel.text = qsTr("Privacy level (ringsize %1)").arg(mixin+1) + translationManager.emptyString
     }
 
@@ -107,264 +110,238 @@ Rectangle {
         }
     }
 
-    Item {
+    ColumnLayout {
       id: pageRoot
       anchors.top: parent.top
       anchors.left: parent.left
       anchors.right: parent.right
-      anchors.topMargin: 20
-      height: 400
+      anchors.margins: 17 * scaleRatio
+      spacing: 0
 
-      Label {
-          id: amountLabel
-          anchors.left: parent.left
-          anchors.top: parent.top
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
-          text: qsTr("Amount") + translationManager.emptyString
-          fontSize: 14
-      }
+      GridLayout {
+          columns: (isMobile)? 1 : 2
+          Layout.fillWidth: true
 
-      Label {
-          id: transactionPriority
-          anchors.top: parent.top
-          anchors.topMargin: 17
-          fontSize: 14
-          x: (parent.width - 17) / 2 + 17
-          text: qsTr("Transaction priority") + translationManager.emptyString
-      }
+          ColumnLayout {
+              Layout.fillWidth: true
+              Label {
+                  id: amountLabel
+                  text: qsTr("Amount") + translationManager.emptyString
+              }
+
+              RowLayout {
+                  Layout.fillWidth: true
+                  id: amountRow
+                  Layout.minimumWidth: 200
+                  Item {
+                      visible: !isMobile
+                      width: 37 * scaleRatio
+                      height: 37 * scaleRatio
+
+                      Image {
+                          anchors.centerIn: parent
+                          source: "../images/moneroIcon.png"
+                      }
+                  }
+                  // Amount input
+                  LineEdit {
+                      Layout.fillWidth: true
+                      id: amountLine
+                      placeholderText: qsTr("") + translationManager.emptyString
+                      width:100
+                      validator: DoubleValidator {
+                          bottom: 0.0
+                          top: 18446744.073709551615
+                          decimals: 12
+                          notation: DoubleValidator.StandardNotation
+                          locale: "C"
+                      }
+                  }
+
+                  StandardButton {
+                      id: amountAllButton
+                      width: 60 * scaleRatio
+                      text: qsTr("All") + translationManager.emptyString
+                      shadowReleasedColor: "#FF4304"
+                      shadowPressedColor: "#B32D00"
+                      releasedColor: "#FF6C3C"
+                      pressedColor: "#FF4304"
+                      enabled : true
+                      onClicked: amountLine.text = "(all)"
+                  }
+              }
 
 
-      Row {
-          id: amountRow
-          anchors.top: amountLabel.bottom
-          anchors.topMargin: 5
-          anchors.left: parent.left
-          anchors.leftMargin: 7
-          width: (parent.width - 17) / 2 + 10
-          Item {
-              width: 37
-              height: 37
+          }
 
-              Image {
-                  anchors.centerIn: parent
-                  source: "../images/moneroIcon.png"
+          ColumnLayout {
+              Layout.fillWidth: true
+              Label {
+                  id: transactionPriority
+                  text: qsTr("Transaction priority") + translationManager.emptyString
+              }
+              // Note: workaround for translations in listElements
+              // ListElement: cannot use script for property value, so
+              // code like this wont work:
+              // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+              // For translations to work, the strings need to be listed in
+              // the file components/StandardDropdown.qml too.
+              
+              // Priorites after v5
+              ListModel {
+                   id: priorityModelV5
+
+                   ListElement { column1: qsTr("Default") ; column2: ""; priority: 0}
+                   ListElement { column1: qsTr("Slow (x0.25 fee)") ; column2: ""; priority: 1}
+                   ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
+                   ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
+                   ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
+
+               }
+
+              StandardDropdown {
+                  Layout.fillWidth: true
+                  id: priorityDropdown
+                  shadowReleasedColor: "#FF4304"
+                  shadowPressedColor: "#B32D00"
+                  releasedColor: "#FF6C3C"
+                  pressedColor: "#FF4304"
               }
           }
-          // Amount input
-          LineEdit {
-              id: amountLine
-              placeholderText: qsTr("") + translationManager.emptyString
-              width: parent.width - 37 - 17 - 60
-              validator: DoubleValidator {
-                  bottom: 0.0
-                  top: 18446744.073709551615
-                  decimals: 12
-                  notation: DoubleValidator.StandardNotation
-                  locale: "C"
+          // Make sure dropdown is on top
+          z: parent.z + 1
+      }
+
+      ColumnLayout {
+          Layout.fillWidth: true
+          Label {
+              id: addressLabel
+              textFormat: Text.RichText
+              text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                    qsTr("Address") +
+                    "<font size='2'> ( " +
+                    qsTr("Paste in or select from <a href='#'>Address book</a>") +
+                    " )</font>" +
+                    translationManager.emptyString
+              onLinkActivated: appWindow.showPageRequest("AddressBook")
+              Layout.fillWidth: true
+          }
+          // recipient address input
+          RowLayout {
+              id: addressLineRow
+              Layout.fillWidth: true
+
+              StandardButton {
+                  id: qrfinderButton
+                  text: qsTr("QR Code") + translationManager.emptyString
+                  shadowReleasedColor: "#FF4304"
+                  shadowPressedColor: "#B32D00"
+                  releasedColor: "#FF6C3C"
+                  pressedColor: "#FF4304"
+                  visible : appWindow.qrScannerEnabled
+                  enabled : visible
+                  width: visible ? 60 * scaleRatio : 0
+                  onClicked: {
+                      cameraUi.state = "Capture"
+                      cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                  }
               }
-          }
-
-          StandardButton {
-              id: amountAllButton
-              //anchors.left: amountLine.right
-              //anchors.top: amountLine.top
-              //anchors.bottom: amountLine.bottom
-              width: 60
-              text: qsTr("All") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              enabled : true
-              onClicked: amountLine.text = "(all)"
-          }
-      }
-
-
-
-      ListModel {
-           id: priorityModel
-           // ListElement: cannot use script for property value, so
-           // code like this wont work:
-           // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
-
-           ListElement { column1: qsTr("Low (x1 fee)") ; column2: ""; priority: PendingTransaction.Priority_Low }
-           ListElement { column1: qsTr("Medium (x20 fee)") ; column2: ""; priority: PendingTransaction.Priority_Medium }
-           ListElement { column1: qsTr("High (x166 fee)")  ; column2: "";  priority: PendingTransaction.Priority_High }
-       }
-
-      // Priorites after v5
-      ListModel {
-           id: priorityModelV5
-
-           ListElement { column1: qsTr("Slow (x0.25 fee)") ; column2: ""; priority: 1}
-           ListElement { column1: qsTr("Default (x1 fee)") ; column2: ""; priority: 2 }
-           ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
-           ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
-
-       }
-
-      StandardDropdown {
-          id: priorityDropdown
-          anchors.top: transactionPriority.bottom
-          anchors.right: parent.right
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
-          anchors.left: transactionPriority.left
-          shadowReleasedColor: "#FF4304"
-          shadowPressedColor: "#B32D00"
-          releasedColor: "#FF6C3C"
-          pressedColor: "#FF4304"
-          z: 1
-      }
-
-      Label {
-          id: addressLabel
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: amountRow.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 30
-          fontSize: 14
-          textFormat: Text.RichText
-          text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>\
-                      Address <font size='2'>  ( Paste in or select from </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                + translationManager.emptyString
-
-          onLinkActivated: appWindow.showPageRequest("AddressBook")
-      }
-      // recipient address input
-      RowLayout {
-          id: addressLineRow
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: addressLabel.bottom
-
-          StandardButton {
-              id: qrfinderButton
-              anchors.left: parent.left
-              anchors.leftMargin: 17
-              anchors.topMargin: 5
-              text: qsTr("QR Code") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              visible : appWindow.qrScannerEnabled
-              enabled : visible
-              width: visible ? 60 : 0
-              onClicked: {
-                  cameraUi.state = "Capture"
-                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              LineEdit {
+                  id: addressLine
+                  Layout.fillWidth: true
+                  anchors.topMargin: 5 * scaleRatio
+                  placeholderText: "4..."
+                  // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
               }
-          }
-          LineEdit {
-              id: addressLine
-              anchors.left: qrfinderButton.right
-              anchors.right: resolveButton.left
-              //anchors.leftMargin: 17
-              anchors.topMargin: 5
-              placeholderText: "4..."
-              // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
-          }
 
-          StandardButton {
-              id: resolveButton
-              anchors.right: parent.right
-              anchors.leftMargin: 17
-              anchors.topMargin: 17
-              anchors.rightMargin: 17
-              width: 60
-              text: qsTr("Resolve") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              enabled : isValidOpenAliasAddress(addressLine.text)
-              onClicked: {
-                  var result = walletManager.resolveOpenAlias(addressLine.text)
-                  if (result) {
-                    var parts = result.split("|")
-                    if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
-                      if (parts[0] === "true") {
-                        if (address_ok) {
-                          addressLine.text = parts[1]
-                          addressLine.cursorPosition = 0
-                        }
-                        else
-                          oa_message(qsTr("No valid address found at this OpenAlias address"))
-                      } else if (parts[0] === "false") {
-                        if (address_ok) {
-                          addressLine.text = parts[1]
-                          addressLine.cursorPosition = 0
-                          oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+              StandardButton {
+                  id: resolveButton
+                  width: 60 * scaleRatio
+                  text: qsTr("Resolve") + translationManager.emptyString
+                  shadowReleasedColor: "#FF4304"
+                  shadowPressedColor: "#B32D00"
+                  releasedColor: "#FF6C3C"
+                  pressedColor: "#FF4304"
+                  enabled : isValidOpenAliasAddress(addressLine.text)
+                  onClicked: {
+                      var result = walletManager.resolveOpenAlias(addressLine.text)
+                      if (result) {
+                        var parts = result.split("|")
+                        if (parts.length == 2) {
+                          var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                          if (parts[0] === "true") {
+                            if (address_ok) {
+                              addressLine.text = parts[1]
+                              addressLine.cursorPosition = 0
+                            }
+                            else
+                              oa_message(qsTr("No valid address found at this OpenAlias address"))
+                          } else if (parts[0] === "false") {
+                            if (address_ok) {
+                              addressLine.text = parts[1]
+                              addressLine.cursorPosition = 0
+                              oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                            } else {
+                              oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                            }
+                          } else {
+                            oa_message(qsTr("Internal error"))
+                          }
                         } else {
-                          oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                          oa_message(qsTr("Internal error"))
                         }
                       } else {
-                        oa_message(qsTr("Internal error"))
+                        oa_message(qsTr("No address found"))
                       }
-                    } else {
-                      oa_message(qsTr("Internal error"))
-                    }
-                  } else {
-                    oa_message(qsTr("No address found"))
                   }
               }
           }
-      }
 
-      Label {
-          id: paymentIdLabel
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: addressLineRow.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
-          fontSize: 14
-          text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
-      }
+          Label {
+              id: paymentIdLabel
+              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+          }
 
-      // payment id input
-      LineEdit {
-          id: paymentIdLine
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: paymentIdLabel.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
-          placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
-          // validator: DoubleValidator { top: 0.0 }
-      }
+          // payment id input
+          LineEdit {
+              id: paymentIdLine
+              placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+              Layout.fillWidth: true
+          }
 
-      Label {
-          id: descriptionLabel
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: paymentIdLine.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 17
-          fontSize: 14
-          text: qsTr("Description <font size='2'>( Optional )</font>")
-                + translationManager.emptyString
-      }
+          Label {
+              text: qsTr("Description <font size='2'>( Optional )</font>")
+                    + translationManager.emptyString
+          }
 
-      LineEdit {
-          id: descriptionLine
-          anchors.left: parent.left
-          anchors.right: parent.right
-          anchors.top: descriptionLabel.bottom
-          anchors.leftMargin: 17
-          anchors.rightMargin: 17
-          anchors.topMargin: 5
-          placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+          LineEdit {
+              id: descriptionLine
+              placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+              Layout.fillWidth: true
+          }
+
+          StandardButton {
+              id: sendButton
+              Layout.bottomMargin: 17 * scaleRatio
+              Layout.topMargin: 17 * scaleRatio
+              text: qsTr("Send") + translationManager.emptyString
+              shadowReleasedColor: "#FF4304"
+              shadowPressedColor: "#B32D00"
+              releasedColor: "#FF6C3C"
+              pressedColor: "#FF4304"
+              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+              onClicked: {
+                  console.log("Transfer: paymentClicked")
+                  var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
+                  console.log("priority: " + priority)
+                  console.log("amount: " + amountLine.text)
+                  addressLine.text = addressLine.text.trim()
+                  paymentIdLine.text = paymentIdLine.text.trim()
+                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
+                                 priority, descriptionLine.text)
+
+              }
+          }
       }
 
       function checkInformation(amount, address, payment_id, testnet) {
@@ -385,36 +362,6 @@ Rectangle {
         return amount_ok && address_ok && payment_id_ok
       }
 
-
-      RowLayout {
-          anchors.left: parent.left
-          anchors.top: descriptionLine.bottom
-          anchors.leftMargin: 17
-          anchors.topMargin: 17
-
-          StandardButton {
-              id: sendButton
-              text: qsTr("Send") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
-              onClicked: {
-                  console.log("Transfer: paymentClicked")
-                  var priority = priorityModel.get(priorityDropdown.currentIndex).priority
-                  console.log("priority: " + priority)
-                  console.log("amount: " + amountLine.text)
-                  addressLine.text = addressLine.text.trim()
-                  paymentIdLine.text = paymentIdLine.text.trim()
-                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                                 priority, descriptionLine.text)
-
-              }
-          }
-      }
-
-
     } // pageRoot
 
     Rectangle {
@@ -429,8 +376,10 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 17
-        spacing:10
+        anchors.leftMargin: 17 * scaleRatio
+        anchors.topMargin: 17 * scaleRatio
+        anchors.bottomMargin: 17 * scaleRatio
+        spacing: 10 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
@@ -451,13 +400,14 @@ Rectangle {
             Layout.fillWidth: true
             height: 1
             color: "#DEDEDE"
-            Layout.bottomMargin: 30
+            Layout.bottomMargin: 30 * scaleRatio
         }
 
         RowLayout {
             visible: persistentSettings.transferShowAdvanced
             anchors.left: parent.left
             anchors.right: parent.right
+            Layout.fillWidth: true
             Label {
                 id: privacyLabel
                 fontSize: 14
@@ -475,17 +425,27 @@ Rectangle {
 
 
         PrivacyLevel {
-            visible: persistentSettings.transferShowAdvanced
+            visible: persistentSettings.transferShowAdvanced && !isMobile
             id: privacyLevelItem
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.rightMargin: 17 * scaleRatio
+            onFillLevelChanged: updateMixin()
+        }
+
+        PrivacyLevelSmall {
+            visible: persistentSettings.transferShowAdvanced && isMobile
+            id: privacyLevelItemSmall
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.rightMargin: 17 * scaleRatio
             onFillLevelChanged: updateMixin()
         }
 
 
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
-            Layout.topMargin: 50
+            Layout.topMargin: 50 * scaleRatio
 
 
             columns: (isMobile) ? 2 : 6
@@ -515,7 +475,7 @@ Rectangle {
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
-                    var priority = priorityModel.get(priorityDropdown.currentIndex).priority
+                    var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                     console.log("priority: " + priority)
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
@@ -552,32 +512,6 @@ Rectangle {
                 onClicked: {
                     console.log("Transfer: submit tx clicked")
                     submitTxDialog.open();
-                }
-            }
-
-            StandardButton {
-                id: rescanSpentButton
-                text: qsTr("Rescan spent") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                enabled: pageRoot.enabled
-                onClicked: {
-                    if (!currentWallet.rescanSpent()) {
-                        console.error("Error: ", currentWallet.errorString);
-                        informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                        informationPopup.text  = qsTr("Error: ") + currentWallet.errorString
-                        informationPopup.icon  = StandardIcon.Critical
-                        informationPopup.onCloseCallback = null
-                        informationPopup.open();
-                    } else {
-                        informationPopup.title = qsTr("Information") + translationManager.emptyString
-                        informationPopup.text  = qsTr("Sucessfully rescanned spent outputs") + translationManager.emptyString
-                        informationPopup.icon  = StandardIcon.Information
-                        informationPopup.onCloseCallback = null
-                        informationPopup.open();
-                    }
                 }
             }
         }
@@ -679,8 +613,8 @@ Rectangle {
     Rectangle {
         x: root.width/2 - width/2
         y: root.height/2 - height/2
-        height:statusText.paintedHeight + 50
-        width:statusText.paintedWidth + 40
+        height:statusText.paintedHeight + 50 * scaleRatio
+        width:statusText.paintedWidth + 40 * scaleRatio
         visible: statusText.text != ""
         opacity: 0.9
 
@@ -708,14 +642,9 @@ Rectangle {
     }
 
     function updatePriorityDropdown() {
-        // Use new fee multipliers after v5 fork
-        if (typeof currentWallet != "undefined" && currentWallet.useForkRules(5)) {
-            priorityDropdown.dataModel = priorityModelV5;
-            priorityDropdown.currentIndex = 1
-        } else {
-            priorityDropdown.dataModel = priorityModel;
-            priorityDropdown.currentIndex = 0
-        }
+        priorityDropdown.dataModel = priorityModelV5;
+        priorityDropdown.currentIndex = 0
+        priorityDropdown.update()
     }
 
     //TODO: Add daemon sync status
@@ -746,6 +675,7 @@ Rectangle {
                 statusText.text = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
+                // Light wallet is always ready
                 pageRoot.enabled = true;
                 statusText.text = "";
             }

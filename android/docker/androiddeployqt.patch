@@ -1,0 +1,62 @@
+diff --git a/src/androiddeployqt/main.cpp b/src/androiddeployqt/main.cpp
+index 8a8e591..71d693e 100644
+--- a/src/androiddeployqt/main.cpp
++++ b/src/androiddeployqt/main.cpp
+@@ -1122,7 +1122,7 @@ bool updateLibsXml(const Options &options)
+ 
+     QString libsPath = QLatin1String("libs/") + options.architecture + QLatin1Char('/');
+ 
+-    QString qtLibs = QLatin1String("<item>gnustl_shared</item>\n");
++    QString qtLibs = QLatin1String("<item>c++_shared</item>\n");
+     QString bundledInLibs;
+     QString bundledInAssets;
+     foreach (Options::BundledFile bundledFile, options.bundledFiles) {
+@@ -2519,6 +2519,39 @@ bool installApk(const Options &options)
+     return true;
+ }
+ 
++bool copyStl(Options *options)
++{
++    if (options->deploymentMechanism == Options::Debug && !options->installApk)
++        return true;
++
++    if (options->verbose)
++        fprintf(stdout, "Copying LIBC++ STL library\n");
++
++    QString filePath = options->ndkPath
++            + QLatin1String("/sources/cxx-stl/llvm-libc++")
++            + QLatin1String("/libs/")
++            + options->architecture
++            + QLatin1String("/libc++_shared.so");
++    if (!QFile::exists(filePath)) {
++        fprintf(stderr, "LIBC STL library does not exist at %s\n", qPrintable(filePath));
++        return false;
++    }
++
++    QString destinationDirectory =
++            options->deploymentMechanism == Options::Debug
++            ? options->temporaryDirectoryName + QLatin1String("/lib")
++            : options->outputDirectory + QLatin1String("/libs/") + options->architecture;
++
++    if (!copyFileIfNewer(filePath, destinationDirectory
++                                   + QLatin1String("/libc++_shared.so"), options->verbose)) {
++        return false;
++    }
++
++    if (options->deploymentMechanism == Options::Debug && !deployToLocalTmp(options, QLatin1String("/lib/libc++_shared.so")))
++        return false;
++
++    return true;
++}
+ bool copyGnuStl(Options *options)
+ {
+     if (options->deploymentMechanism == Options::Debug && !options->installApk)
+@@ -2870,7 +2903,7 @@ int main(int argc, char *argv[])
+     if (Q_UNLIKELY(options.timing))
+         fprintf(stdout, "[TIMING] %d ms: Read dependencies\n", options.timer.elapsed());
+ 
+-    if (options.deploymentMechanism != Options::Ministro && !copyGnuStl(&options))
++    if (options.deploymentMechanism != Options::Ministro && !copyStl(&options))
+         return CannotCopyGnuStl;
+ 
+     if (Q_UNLIKELY(options.timing))

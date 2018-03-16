@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -49,11 +49,10 @@ Item {
             anchors.bottomMargin: 2
             font.family: "Arial"
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: 12 * scaleRatio
             color: "#4A4949"
             text: {
-                if(currentIndex === 0) return qsTr("Normal") + translationManager.emptyString
-                if(currentIndex === 3) return qsTr("Medium") + translationManager.emptyString
+                if(currentIndex === 0) return qsTr("Default") + translationManager.emptyString
                 if(currentIndex === 13) return qsTr("High") + translationManager.emptyString
                 return ""
             }
@@ -65,7 +64,7 @@ Item {
         anchors.topMargin: 14
         width: 1
         color: "#DBDBDB"
-        height: currentIndex === 8 ? 16 : 8
+        height:  8
         visible: !parent.mainTick
     }
 }

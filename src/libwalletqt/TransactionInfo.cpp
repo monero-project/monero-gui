@@ -38,6 +38,8 @@ QString TransactionInfo::displayAmount() const
 
 QString TransactionInfo::fee() const
 {
+    if(m_pimpl->fee() == 0)
+        return "";
     return WalletManager::instance()->displayAmount(m_pimpl->fee());
 }
 
@@ -46,9 +48,32 @@ quint64 TransactionInfo::blockHeight() const
     return m_pimpl->blockHeight();
 }
 
+QSet<quint32> TransactionInfo::subaddrIndex() const
+{
+    QSet<quint32> result;
+    for (uint32_t i : m_pimpl->subaddrIndex())
+        result.insert(i);
+    return result;
+}
+
+quint32 TransactionInfo::subaddrAccount() const
+{
+    return m_pimpl->subaddrAccount();
+}
+
+QString TransactionInfo::label() const
+{
+    return QString::fromStdString(m_pimpl->label());
+}
+
 quint64 TransactionInfo::confirmations() const
 {
     return m_pimpl->confirmations();
+}
+
+quint64 TransactionInfo::unlockTime() const
+{
+    return m_pimpl->unlockTime();
 }
 
 QString TransactionInfo::hash() const

@@ -1,9 +1,10 @@
 #ifndef TRANSACTIONINFO_H
 #define TRANSACTIONINFO_H
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QObject>
 #include <QDateTime>
+#include <QSet>
 
 class Transfer;
 
@@ -18,7 +19,11 @@ class TransactionInfo : public QObject
     Q_PROPERTY(QString displayAmount READ displayAmount)
     Q_PROPERTY(QString fee READ fee)
     Q_PROPERTY(quint64 blockHeight READ blockHeight)
+    Q_PROPERTY(QSet<quint32> subaddrIndex READ subaddrIndex)
+    Q_PROPERTY(quint32 subaddrAccount READ subaddrAccount)
+    Q_PROPERTY(QString label READ label)
     Q_PROPERTY(quint64 confirmations READ confirmations)
+    Q_PROPERTY(quint64 unlockTime READ unlockTime)
     Q_PROPERTY(QString hash READ hash)
     Q_PROPERTY(QDateTime timestamp READ timestamp)
     Q_PROPERTY(QString date READ date)
@@ -43,7 +48,11 @@ public:
     QString displayAmount() const;
     QString fee() const;
     quint64 blockHeight() const;
+    QSet<quint32> subaddrIndex() const;
+    quint32 subaddrAccount() const;
+    QString label() const;
     quint64 confirmations() const;
+    quint64 unlockTime() const;
     //! transaction_id
     QString hash() const;
     QDateTime timestamp() const;

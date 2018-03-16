@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -61,15 +61,23 @@ void QrCodeScanner::processCode(int type, const QString &data)
         emit notifyError(error);
         return;
     }
+    QVariantMap parsed_unknown_parameters;
     if(unknown_parameters.size() > 0)
     {
         qDebug() << "unknown parameters " << unknown_parameters;
+        foreach(const QString &item, unknown_parameters )
+        {
+            QStringList parsed_item = item.split("=");
+            if(parsed_item.size() == 2) {
+                parsed_unknown_parameters.insert(parsed_item[0], parsed_item[1]);
+            }
+        }
         emit notifyError(error, true);
     }
     qDebug() << "Parsed URI : " << address << " " << payment_id << " " << amount << " " << tx_description << " " << recipient_name << " " << error;
     QString s_amount = WalletManager::instance()->displayAmount(amount);
     qDebug() << "Amount passed " << s_amount ;
-    emit decoded(address, payment_id, s_amount, tx_description, recipient_name);
+    emit decoded(address, payment_id, s_amount, tx_description, recipient_name, parsed_unknown_parameters);
 }
 void QrCodeScanner::processFrame(QVideoFrame frame)
 {
@@ -100,5 +108,17 @@ void QrCodeScanner::timerEvent(QTimerEvent *event)
     if( (event->timerId() == m_processTimerId) ){
         m_thread->addFrame(m_curFrame);
     }
+}
+
+QrCodeScanner::~QrCodeScanner()
+{
+    m_thread->stop();
+    m_thread->quit();
+    if(!m_thread->wait(5000))
+    {
+        m_thread->terminate();
+        m_thread->wait();
+    }
+
 }
 

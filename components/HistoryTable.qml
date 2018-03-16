@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -29,7 +29,7 @@
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
 import moneroComponents.AddressBookModel 1.0
-
+import "../components" as MoneroComponents
 
 ListView {
     id: listView
@@ -79,14 +79,6 @@ ListView {
         }
     }
 
-    StandardDialog {
-        id: detailsPopup
-        cancelVisible: false
-        okVisible: true
-        width:850
-    }
-
-
     delegate: Rectangle {
         id: delegate
         height: 144
@@ -111,10 +103,10 @@ ListView {
             onClicked: {
                 var tx_key = currentWallet.getTxKey(hash)
                 var tx_note = currentWallet.getUserNote(hash)
-                detailsPopup.title = "Transaction details";
-                detailsPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
-                detailsPopup.open();
-
+                informationPopup.title = "Transaction details";
+                informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations);
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
             }
         }
 
@@ -168,10 +160,8 @@ ListView {
             }
             */
             // -- address (in case outgoing transaction) - N/A in case of incoming
-            TextEdit {
+            MoneroComponents.TextBlock {
                 id: addressText
-                readOnly: true
-                selectByMouse: true
                 anchors.verticalCenter: dot.verticalCenter
                 width: parent.width - x - 12
                 //elide: Text.ElideRight
@@ -203,9 +193,7 @@ ListView {
                 text: paymentId !== "" ? qsTr("Payment ID:")  + translationManager.emptyString : ""
             }
             // -- "PaymentID" value
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
+            MoneroComponents.TextBlock {
                 id: paymentIdValue
                 width: 136
                 anchors.bottom: parent.bottom
@@ -217,9 +205,7 @@ ListView {
 
             }
             // Address book lookup
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
+            MoneroComponents.TextBlock {
                 id: addressBookLookupValue
                 width: 136
                 anchors.bottom: parent.bottom
@@ -251,26 +237,65 @@ ListView {
                 text:  qsTr("BlockHeight:")  + translationManager.emptyString
             }
             // -- "BlockHeight" value
-            TextEdit {
-                readOnly: true
-                selectByMouse: true
-                width: 85
+            MoneroComponents.TextBlock {
+                width: 200
                 anchors.bottom: parent.bottom
                 //elide: Text.ElideRight
                 font.family: "Arial"
                 font.pixelSize: 13
-                color:  (confirmations < 10)? "#FF6C3C" : "#545454"
+                color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
                 text: {
                     if (!isPending)
-                        if(confirmations < 10)
-                            return blockHeight + " " + qsTr("(%1/10 confirmations)").arg(confirmations)
+                        if(confirmations < confirmationsRequired)
+                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
                         else
                             return blockHeight
                     if (!isOut)
                         return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    if (isFailed)
+                        return qsTr("FAILED") + translationManager.emptyString
                     return qsTr("PENDING") + translationManager.emptyString
 
                 }
+            }
+            Item { //separator
+                width: 100
+                height: 14
+            }
+            // -- "Received by" title
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 12
+                color: "#535353"
+                text: (isOut ? qsTr("Spent from:") : qsTr("Received by:")) + translationManager.emptyString
+            }
+            Item { //separator
+                width: 5
+                height: 14
+            }
+            // -- "Index" value
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 13
+                font.bold: true
+                color: "#545454"
+                text: "#" + subaddrIndex
+            }
+            Item { //separator
+                width: 5
+                height: 14
+            }
+            // -- "Label" value
+            Text {
+                anchors.bottom: parent.bottom
+                font.family: "Arial"
+                font.pixelSize: 13
+                color: "#545454"
+                text: label
+                elide: Text.ElideRight
+                width: detailsButton.x - x - 30
             }
         }
 
@@ -383,7 +408,7 @@ ListView {
             Column {
                 anchors.top: parent.top
                 width: 148
-                visible: isOut
+                visible: isOut && fee != ""
                 Text {
                     anchors.left: parent.left
                     font.family: "Arial"

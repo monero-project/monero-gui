@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 
 class UnsignedTransaction : public QObject
 {
@@ -25,13 +25,6 @@ public:
         Status_Critical    = Monero::UnsignedTransaction::Status_Critical
     };
     Q_ENUM(Status)
-
-    enum Priority {
-        Priority_Low    = Monero::UnsignedTransaction::Priority_Low,
-        Priority_Medium = Monero::UnsignedTransaction::Priority_Medium,
-        Priority_High   = Monero::UnsignedTransaction::Priority_High
-    };
-    Q_ENUM(Priority)
 
     Status status() const;
     QString errorString() const;

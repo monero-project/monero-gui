@@ -1,6 +1,6 @@
 #include "WalletManager.h"
 #include "Wallet.h"
-#include "wallet/wallet2_api.h"
+#include "wallet/api/wallet2_api.h"
 #include "zxcvbn-c/zxcvbn.h"
 #include "QRCodeImageProvider.h"
 #include <QFile>
@@ -49,7 +49,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
            __PRETTY_FUNCTION__, qPrintable(path), testnet);
 
     Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), testnet);
-    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address().c_str(), w->status());
+    qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), w->status());
     m_currentWallet  = new Wallet(w);
 
     // move wallet to the GUI thread. Otherwise it wont be emitting signals
@@ -110,7 +110,7 @@ QString WalletManager::closeWallet()
     QMutexLocker locker(&m_mutex);
     QString result;
     if (m_currentWallet) {
-        result = m_currentWallet->address();
+        result = m_currentWallet->address(0, 0);
         delete m_currentWallet;
     } else {
         qCritical() << "Trying to close non existing wallet " << m_currentWallet;
@@ -216,16 +216,6 @@ QString WalletManager::paymentIdFromAddress(const QString &address, bool testnet
     return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), testnet));
 }
 
-QString WalletManager::checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const
-{
-    uint64_t received = 0, height = 0;
-    std::string error = "";
-    bool ret = m_pimpl->checkPayment(address.toStdString(), txid.toStdString(), txkey.toStdString(), daemon_address.toStdString(), received, height, error);
-    // bypass qml being unable to pass structures without preposterous complexity
-    std::string result = std::string(ret ? "true" : "false") + "|" + QString::number(received).toStdString() + "|" + QString::number(height).toStdString() + "|" + error;
-    return QString::fromStdString(result);
-}
-
 void WalletManager::setDaemonAddress(const QString &address)
 {
     m_pimpl->setDaemonAddress(address.toStdString());
@@ -275,6 +265,16 @@ bool WalletManager::stopMining()
     return m_pimpl->stopMining();
 }
 
+bool WalletManager::localDaemonSynced() const
+{
+    return blockchainHeight() > 1 && blockchainHeight() >= blockchainTargetHeight();
+}
+
+bool WalletManager::isDaemonLocal(const QString &daemon_address) const
+{
+    return Monero::Utils::isAddressLocal(daemon_address.toStdString());
+}
+
 QString WalletManager::resolveOpenAlias(const QString &address) const
 {
     bool dnssec_valid = false;
@@ -309,6 +309,7 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
     return QUrl::fromLocalFile(path);
 }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
 double WalletManager::getPasswordStrength(const QString &password) const
 {
     static const char *local_dict[] = {
@@ -323,6 +324,7 @@ double WalletManager::getPasswordStrength(const QString &password) const
     ZxcvbnUnInit();
     return e;
 }
+#endif
 
 bool WalletManager::saveQrCode(const QString &code, const QString &path) const
 {
@@ -331,8 +333,26 @@ bool WalletManager::saveQrCode(const QString &code, const QString &path) const
     return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
+void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir) const
+{
+    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::checkUpdates,
+                                        software, subdir);
+    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
+    connect(watcher, &QFutureWatcher<Wallet*>::finished,
+            this, [this, watcher]() {
+        QFuture<QString> future = watcher->future();
+        watcher->deleteLater();
+        qDebug() << "Checking for updates - done";
+        emit checkUpdatesComplete(future.result());
+    });
+    watcher->setFuture(future);
+}
+
+
+
 QString WalletManager::checkUpdates(const QString &software, const QString &subdir) const
 {
+  qDebug() << "Checking for updates";
   const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
   if (!std::get<0>(result))
     return QString("");
@@ -355,6 +375,26 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
     }
 
     return walletCache.rename(newFileName);
+}
+
+void WalletManager::debug(const QString &s)
+{
+    Monero::Wallet::debug("qml", s.toStdString());
+}
+
+void WalletManager::info(const QString &s)
+{
+    Monero::Wallet::info("qml", s.toStdString());
+}
+
+void WalletManager::warning(const QString &s)
+{
+    Monero::Wallet::warning("qml", s.toStdString());
+}
+
+void WalletManager::error(const QString &s)
+{
+    Monero::Wallet::error("qml", s.toStdString());
 }
 
 WalletManager::WalletManager(QObject *parent) : QObject(parent)

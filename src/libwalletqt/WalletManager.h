@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QUrl>
-#include <wallet/wallet2_api.h>
+#include <wallet/api/wallet2_api.h>
 #include <QMutex>
 #include <QPointer>
 
@@ -104,14 +104,14 @@ public:
 
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, bool testnet) const;
 
-    Q_INVOKABLE QString checkPayment(const QString &address, const QString &txid, const QString &txkey, const QString &daemon_address) const;
-
     Q_INVOKABLE void setDaemonAddress(const QString &address);
     Q_INVOKABLE bool connected() const;
     Q_INVOKABLE quint64 networkDifficulty() const;
     Q_INVOKABLE quint64 blockchainHeight() const;
     Q_INVOKABLE quint64 blockchainTargetHeight() const;
     Q_INVOKABLE double miningHashRate() const;
+    Q_INVOKABLE bool localDaemonSynced() const;
+    Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
     Q_INVOKABLE bool isMining() const;
     Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
@@ -129,20 +129,29 @@ public:
     Q_INVOKABLE qint64 addi(qint64 x, qint64 y) const { return x + y; }
     Q_INVOKABLE qint64 subi(qint64 x, qint64 y) const { return x - y; }
 
+#ifndef DISABLE_PASS_STRENGTH_METER
     Q_INVOKABLE double getPasswordStrength(const QString &password) const;
+#endif
 
     Q_INVOKABLE QString resolveOpenAlias(const QString &address) const;
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
+    Q_INVOKABLE void checkUpdatesAsync(const QString &software, const QString &subdir) const;
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
+    Q_INVOKABLE void debug(const QString &s);
+    Q_INVOKABLE void info(const QString &s);
+    Q_INVOKABLE void warning(const QString &s);
+    Q_INVOKABLE void error(const QString &s);
+
 signals:
 
     void walletOpened(Wallet * wallet);
     void walletClosed(const QString &walletAddress);
+    void checkUpdatesComplete(const QString &result) const;
 
 public slots:
 private:

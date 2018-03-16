@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -37,22 +37,10 @@ Rectangle {
     color: "#F0EEEE"
     property var currentHashRate: 0
 
-    function isDaemonLocal() {
-        var daemonAddress = appWindow.persistentSettings.daemon_address
-        if (daemonAddress === "")
-            return false
-        var daemonHost = daemonAddress.split(":")[0]
-        if (daemonHost === "127.0.0.1" || daemonHost === "localhost")
-            return true
-        return false
-    }
-
     /* main layout */
     ColumnLayout {
         id: mainLayout
         anchors.margins: 40
-        anchors.bottomMargin: 10
-
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -78,7 +66,7 @@ Rectangle {
                 fontSize: 18
                 color: "#D02020"
                 text: qsTr("(only available for local daemons)")
-                visible: !isDaemonLocal()
+                visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
             }
 
             Text {
@@ -154,13 +142,13 @@ Rectangle {
                     releasedColor: "#FF6C3C"
                     pressedColor: "#FF4304"
                     onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address, soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                         if (success) {
                             update()
                         } else {
                             errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
                             errorPopup.text = qsTr("Couldn't start mining.<br>")
-                            if (!isDaemonLocal())
+                            if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
                                 errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
                             errorPopup.icon = StandardIcon.Critical
                             errorPopup.open()
@@ -188,7 +176,6 @@ Rectangle {
 
         Text {
             id: statusText
-            anchors.topMargin: 17
             text: qsTr("Status: not mining")
             textFormat: Text.RichText
             wrapMode: Text.Wrap
@@ -229,7 +216,7 @@ Rectangle {
         console.log("Mining page loaded");
 
         update()
-        timer.running = isDaemonLocal()
+        timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
 
     }
     function onPageClosed() {

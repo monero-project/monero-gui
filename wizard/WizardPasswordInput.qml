@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -42,7 +42,7 @@ ColumnLayout {
         id : password
         focus:true
         font.family: "Arial"
-        font.pixelSize: (isMobile) ? 25 : 26
+        font.pixelSize: (isMobile) ? 25 * scaleRatio : 26 * scaleRatio
         echoMode: TextInput.Password
         style: TextFieldStyle {
             renderType: Text.NativeRendering

@@ -1,0 +1,61 @@
+diff --git a/android/jni/Android.mk b/android/jni/Android.mk
+index e442b07..158afd5 100644
+--- a/android/jni/Android.mk
++++ b/android/jni/Android.mk
+@@ -12,14 +12,18 @@ LOCAL_PATH := $(ICONV_SRC)
+ 
+ LOCAL_MODULE := libiconv
+ 
++LOCAL_ARM_MODE := arm
++LOCAL_CPP_FEATURES := exceptions rtti features
+ LOCAL_CFLAGS := \
+     -Wno-multichar \
+     -D_ANDROID \
+-    -DLIBDIR="c" \
++    -DLIBDIR="\".\"" \
+     -DBUILDING_LIBICONV \
+     -DBUILDING_LIBCHARSET \
+     -DIN_LIBRARY
+ 
++LOCAL_CFLAGS += -fno-stack-protector
++
+ LOCAL_SRC_FILES := \
+ 	lib/iconv.c \
+ 	libcharset/lib/localcharset.c \
+@@ -30,13 +34,14 @@ LOCAL_C_INCLUDES := \
+ 	$(ICONV_SRC)/libcharset \
+ 	$(ICONV_SRC)/libcharset/include
+ 
+-include $(BUILD_SHARED_LIBRARY)
++include $(BUILD_STATIC_LIBRARY)
+ 
+ LOCAL_LDLIBS := -llog -lcharset
+ 
+ # libzbarjni
+ include $(CLEAR_VARS)
+ 
++
+ LOCAL_PATH := $(MY_LOCAL_PATH)
+ LOCAL_MODULE := zbarjni
+ LOCAL_SRC_FILES := ../../java/zbarjni.c \
+@@ -71,6 +76,17 @@ LOCAL_C_INCLUDES := ../include \
+ 		    ../zbar \
+ 		    $(ICONV_SRC)/include 
+ 
+-LOCAL_SHARED_LIBRARIES := libiconv
++LOCAL_STATIC_LIBRARIES := libiconv
++LOCAL_ARM_MODE := arm
++LOCAL_CPP_FEATURES := exceptions rtti features
++
++LOCAL_CFLAGS := \
++    -Wno-multichar \
++    -D_ANDROID \
++    -DLIBDIR="\".\"" \
++    -DBUILDING_LIBICONV \
++    -DBUILDING_LIBCHARSET \
++    -DIN_LIBRARY
++
+ 
+-include $(BUILD_SHARED_LIBRARY)
+\ No newline at end of file
++include $(BUILD_STATIC_LIBRARY)

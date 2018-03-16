@@ -3,6 +3,7 @@
 #include "TransactionInfo.h"
 
 #include <QDateTime>
+#include <QDebug>
 
 
 TransactionHistoryModel::TransactionHistoryModel(QObject *parent)
@@ -82,8 +83,30 @@ QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
         }
         break;
 
+    case TransactionSubaddrIndexRole:
+        {
+            QString str = QString{""};
+            bool first = true;
+            for (quint32 i : tInfo->subaddrIndex()) {
+                if (!first)
+                    str += QString{","};
+                first = false;
+                str += QString::number(i);
+            }
+            result = str;
+        }
+        break;
+    case TransactionSubaddrAccountRole:
+        result = tInfo->subaddrAccount();
+        break;
+    case TransactionLabelRole:
+        result = tInfo->subaddrIndex().size() == 1 && *tInfo->subaddrIndex().begin() == 0 ? tr("Primary address") : tInfo->label();
+        break;
     case TransactionConfirmationsRole:
         result = tInfo->confirmations();
+        break;
+    case TransactionConfirmationsRequiredRole:
+        result = (tInfo->blockHeight() < tInfo->unlockTime()) ? tInfo->unlockTime() - tInfo->blockHeight() : 10;
         break;
     case TransactionHashRole:
         result = tInfo->hash();
@@ -129,7 +152,11 @@ QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
     roleNames.insert(TransactionAtomicAmountRole, "atomicAmount");
     roleNames.insert(TransactionFeeRole, "fee");
     roleNames.insert(TransactionBlockHeightRole, "blockHeight");
+    roleNames.insert(TransactionSubaddrIndexRole, "subaddrIndex");
+    roleNames.insert(TransactionSubaddrAccountRole, "subaddrAccount");
+    roleNames.insert(TransactionLabelRole, "label");
     roleNames.insert(TransactionConfirmationsRole, "confirmations");
+    roleNames.insert(TransactionConfirmationsRequiredRole, "confirmationsRequired");
     roleNames.insert(TransactionHashRole, "hash");
     roleNames.insert(TransactionTimeStampRole, "timeStamp");
     roleNames.insert(TransactionPaymentIdRole, "paymentId");

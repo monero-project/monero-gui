@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -30,6 +30,7 @@
 import QtQuick 2.0
 
 Item {
+    property alias image : buttonImage
     property alias imageSource : buttonImage.source
 
     signal clicked(var mouse)
@@ -50,23 +51,24 @@ Item {
         z: 100
     }
 
-//    MouseArea {
-//        id: buttonArea
-//        anchors.fill: parent
+    MouseArea {
+        id: buttonArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
+        onPressed: {
+            buttonImage.x = buttonImage.x + 2
+            buttonImage.y = buttonImage.y + 2
+        }
+        onReleased: {
+            buttonImage.x = buttonImage.x - 2
+            buttonImage.y = buttonImage.y - 2
+        }
 
-//        onPressed: {
-//            buttonImage.x = buttonImage.x + 2
-//            buttonImage.y = buttonImage.y + 2
-//        }
-//        onReleased: {
-//            buttonImage.x = buttonImage.x - 2
-//            buttonImage.y = buttonImage.y - 2
-//        }
-
-//        onClicked: {
-//            parent.clicked(mouse)
-//        }
-//    }
+        onClicked: {
+            parent.clicked(mouse)
+        }
+    }
 
 }

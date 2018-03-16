@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
 //
@@ -44,7 +44,7 @@ Rectangle {
     color: "black"
     state: "Stopped"
 
-    signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name)
+    signal qrcode_decoded(string address, string payment_id, string amount, string tx_description, string recipient_name, var extra_parameters)
 
     states: [
         State {
@@ -83,7 +83,7 @@ Rectangle {
         id : finder
         objectName: "QrFinder"
         onDecoded : {
-            root.qrcode_decoded(address, payment_id, amount, tx_description, recipient_name)
+            root.qrcode_decoded(address, payment_id, amount, tx_description, recipient_name, extra_parameters)
             root.state = "Stopped"
 	}
         onNotifyError : {
@@ -126,7 +126,7 @@ Rectangle {
 
     MessageDialog {
         id: messageDialog
-        title: "Scanning QrCode"
+        title: qsTr("QrCode Scanned")  + translationManager.emptyString
         onAccepted: {
             root.state = "Stopped"
         }

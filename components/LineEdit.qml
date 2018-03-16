@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -36,13 +36,14 @@ Item {
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
-    property int fontSize: 18
+    property int fontSize: 18 * scaleRatio
+    property bool showBorder: true
     property bool error: false
     signal editingFinished()
     signal accepted();
     signal textUpdated();
 
-    height: 37
+    height: 37 * scaleRatio
 
     function getColor(error) {
       if (error)
@@ -52,15 +53,16 @@ Item {
     }
 
     Rectangle {
+        visible: showBorder
         anchors.fill: parent
-        anchors.bottomMargin: 1
+        anchors.bottomMargin: 1 * scaleRatio
         color: "#DBDBDB"
         //radius: 4
     }
 
     Rectangle {
         anchors.fill: parent
-        anchors.topMargin: 1
+        anchors.topMargin: 1 * scaleRatio
         color: getColor(error)
         //radius: 4
     }
@@ -68,8 +70,8 @@ Item {
     Input {
         id: input
         anchors.fill: parent
-        anchors.leftMargin: 4
-        anchors.rightMargin: 30
+        anchors.leftMargin: 4 * scaleRatio
+        anchors.rightMargin: 30 * scaleRatio
         font.pixelSize: parent.fontSize
         onEditingFinished: item.editingFinished()
         onAccepted: item.accepted();

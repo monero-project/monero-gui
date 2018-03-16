@@ -4,95 +4,64 @@
 <context>
     <name>AddressBook</name>
     <message>
-        <location filename="../pages/AddressBook.qml" line="52"/>
-        <source>Add new entry</source>
-        <translation>新增付款地址</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="61"/>
+        <location filename="../pages/AddressBook.qml" line="50"/>
         <source>Address</source>
         <translation>地址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="63"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="72"/>
-        <source>QRCODE</source>
+        <location filename="../pages/AddressBook.qml" line="56"/>
+        <source>Qr Code</source>
         <translation>二维码</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="94"/>
+        <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
         <translation>4...</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="103"/>
+        <location filename="../pages/AddressBook.qml" line="80"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>付款ID &lt;font size=&apos;2&apos;&gt;(可选填)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="105"/>
+        <location filename="../pages/AddressBook.qml" line="81"/>
         <source>&lt;b&gt;Payment ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;A unique user name used in&lt;br/&gt;the address book. It is not a&lt;br/&gt;transfer of information sent&lt;br/&gt;during the transfer</source>
-        <translation>&lt;b&gt;付款ID&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;在地址簿里&lt;br/&gt;用以区分的用户名&lt;br/&gt;这不是付款时&lt;br/&gt;传送的信息</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="117"/>
+        <location filename="../pages/AddressBook.qml" line="88"/>
         <source>Paste 64 hexadecimal characters</source>
         <translation>粘贴上16进制字符串的地址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="126"/>
+        <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
         <translation>描述 &lt;font size=&apos;2&apos;&gt;(选填)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="139"/>
+        <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Give this entry a name or description</source>
         <translation>给予这个地址一个名称或描述</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="155"/>
+        <location filename="../pages/AddressBook.qml" line="111"/>
         <source>Add</source>
         <translation>新增</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="160"/>
+        <location filename="../pages/AddressBook.qml" line="116"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="163"/>
+        <location filename="../pages/AddressBook.qml" line="119"/>
         <source>Invalid address</source>
         <translation>无效的地址</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="167"/>
+        <location filename="../pages/AddressBook.qml" line="123"/>
         <source>Can&apos;t create entry</source>
         <translation>无法新增地址</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;(Local database)&lt;/font&gt;</source>
-        <translation type="vanished">描述 &lt;font size=&apos;2&apos;&gt;(本地数据)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="128"/>
-        <source>&lt;b&gt;Tip test test&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;test line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ADD</source>
-        <translation type="vanished">新增</translation>
-    </message>
-    <message>
-        <source>Payment ID</source>
-        <translation type="vanished">付款ID</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="vanished">描述</translation>
     </message>
 </context>
 <context>
@@ -106,6 +75,11 @@
         <location filename="../components/AddressBookTable.qml" line="104"/>
         <source>Payment ID:</source>
         <translation>付款ID:</translation>
+    </message>
+    <message>
+        <location filename="../components/AddressBookTable.qml" line="149"/>
+        <source>Address copied to clipboard</source>
+        <translation>地址已被复制到剪贴板</translation>
     </message>
 </context>
 <context>
@@ -134,12 +108,12 @@
 <context>
     <name>DaemonConsole</name>
     <message>
-        <location filename="../components/DaemonConsole.qml" line="108"/>
+        <location filename="../components/DaemonConsole.qml" line="117"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="../components/DaemonConsole.qml" line="119"/>
+        <location filename="../components/DaemonConsole.qml" line="128"/>
         <source>command + enter (e.g help)</source>
         <translation>输入指令后按下回车键 (例如: help)</translation>
     </message>
@@ -147,30 +121,19 @@
 <context>
     <name>DaemonManagerDialog</name>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="84"/>
-        <source>Starting Monero daemon in %1 seconds</source>
-        <translation>在 %1 秒后启动Monero区块同步程序</translation>
+        <location filename="../components/DaemonManagerDialog.qml" line="93"/>
+        <source>Starting local node in %1 seconds</source>
+        <translation>本地节点将在%1秒后启动</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="106"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="115"/>
         <source>Start daemon (%1)</source>
         <translation>启动区块同步程序(%1)</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="123"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="132"/>
         <source>Use custom settings</source>
         <translation>使用自定义设置</translation>
-    </message>
-</context>
-<context>
-    <name>DaemonProgress</name>
-    <message>
-        <source>Synchronizing blocks %1/%2</source>
-        <translation type="vanished">同步区块中 %1/%2</translation>
-    </message>
-    <message>
-        <source>Synchronizing blocks</source>
-        <translation type="vanished">正在同步区块</translation>
     </message>
 </context>
 <context>
@@ -219,76 +182,46 @@
     <message>
         <location filename="../pages/History.qml" line="70"/>
         <source> selected: </source>
-        <translation> 笔已选择的交易总金额:</translation>
+        <translation> 已选择的交易总金额:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="134"/>
+        <location filename="../pages/History.qml" line="135"/>
         <source>Filter transaction history</source>
-        <translation>交易纪录查询</translation>
+        <translation>交易记录查询</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="145"/>
-        <source>&lt;b&gt;Total amount of selected payments&lt;/b&gt;</source>
-        <translation>&lt;b&gt;已选择的付款总金额&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="182"/>
+        <location filename="../pages/History.qml" line="159"/>
         <source>Type for incremental search...</source>
         <translation>输入查询条件...</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="273"/>
+        <location filename="../pages/History.qml" line="252"/>
         <source>Filter</source>
         <translation>查询</translation>
     </message>
     <message>
-        <source>Incremental search</source>
-        <translation type="vanished">新增查询条件</translation>
-    </message>
-    <message>
-        <source>Search transfers for a given string</source>
-        <translation type="vanished">以关键词查询付款纪录</translation>
-    </message>
-    <message>
-        <source>Type search string</source>
-        <translation type="vanished">输入查询关键词</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="222"/>
+        <location filename="../pages/History.qml" line="199"/>
         <source>Date from</source>
         <translation>日期从</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="224"/>
-        <location filename="../pages/History.qml" line="249"/>
-        <location filename="../pages/History.qml" line="331"/>
-        <location filename="../pages/History.qml" line="366"/>
-        <location filename="../pages/History.qml" line="398"/>
-        <source>&lt;b&gt;Tip tekst test&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="247"/>
-        <location filename="../pages/History.qml" line="396"/>
+        <location filename="../pages/History.qml" line="225"/>
+        <location filename="../pages/History.qml" line="379"/>
         <source>To</source>
         <translation>到</translation>
     </message>
     <message>
-        <source>FILTER</source>
-        <translation type="vanished">查询</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="310"/>
+        <location filename="../pages/History.qml" line="290"/>
         <source>Advanced filtering</source>
         <translation>高级查询</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="329"/>
+        <location filename="../pages/History.qml" line="310"/>
         <source>Type of transaction</source>
         <translation>交易类型</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="364"/>
+        <location filename="../pages/History.qml" line="346"/>
         <source>Amount from</source>
         <translation>金额从</translation>
     </message>
@@ -302,7 +235,7 @@
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="49"/>
-        <location filename="../components/HistoryTable.qml" line="203"/>
+        <location filename="../components/HistoryTable.qml" line="195"/>
         <source>Payment ID:</source>
         <translation>付款ID:</translation>
     </message>
@@ -327,164 +260,294 @@
         <translation>没有更多了</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="110"/>
+        <location filename="../components/HistoryTable.qml" line="102"/>
         <source>Details</source>
         <translation>详情</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="251"/>
+        <location filename="../components/HistoryTable.qml" line="243"/>
         <source>BlockHeight:</source>
         <translation>区块高度:</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="266"/>
-        <source>(%1/10 confirmations)</source>
-        <translation>(%1/10 次确认)</translation>
+        <location filename="../components/HistoryTable.qml" line="258"/>
+        <source>(%1/%2 confirmations)</source>
+        <translation>(%1/%2 次确认)</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="270"/>
+        <location filename="../components/HistoryTable.qml" line="262"/>
         <source>UNCONFIRMED</source>
         <translation>未确认的交易</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="271"/>
+        <location filename="../components/HistoryTable.qml" line="264"/>
+        <source>FAILED</source>
+        <translation>失败了</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTable.qml" line="265"/>
         <source>PENDING</source>
         <translation>待确认的交易</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="300"/>
+        <location filename="../components/HistoryTable.qml" line="294"/>
         <source>Date</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="357"/>
+        <location filename="../components/HistoryTable.qml" line="351"/>
         <source>Amount</source>
         <translation>金额</translation>
     </message>
     <message>
-        <location filename="../components/HistoryTable.qml" line="392"/>
+        <location filename="../components/HistoryTable.qml" line="386"/>
         <source>Fee</source>
         <translation>手续费</translation>
     </message>
 </context>
 <context>
+    <name>HistoryTableMobile</name>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="47"/>
+        <source>Tx ID:</source>
+        <translation>转账ID(Tx ID):</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="48"/>
+        <source>Payment ID:</source>
+        <translation>付款ID:</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="49"/>
+        <source>Tx key:</source>
+        <translation>转账密钥(Tx key):</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="50"/>
+        <source>Tx note:</source>
+        <translation>转账备注:</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="51"/>
+        <source>Destinations:</source>
+        <translation>目标:</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="77"/>
+        <source>No more results</source>
+        <translation>没有更多了</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="150"/>
+        <source>(%1/%2 confirmations)</source>
+        <translation>(%1/%2 次确认)</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="152"/>
+        <source>UNCONFIRMED</source>
+        <translation type="unfinished">未确认的交易</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="154"/>
+        <source>FAILED</source>
+        <translation>已失败</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTableMobile.qml" line="155"/>
+        <source>PENDING</source>
+        <translation type="unfinished">待确认的交易</translation>
+    </message>
+</context>
+<context>
+    <name>Keys</name>
+    <message>
+        <location filename="../pages/Keys.qml" line="62"/>
+        <source>Mnemonic seed</source>
+        <translation>密语种子</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="78"/>
+        <location filename="../pages/Keys.qml" line="112"/>
+        <source>Double tap to copy</source>
+        <translation>双击复制</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="85"/>
+        <source>Seed copied to clipboard</source>
+        <translation>种子已被复制到剪贴板</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="95"/>
+        <source>Keys</source>
+        <translation>密钥</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="119"/>
+        <source>Keys copied to clipboard</source>
+        <translation>密钥已被复制到剪贴板</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="129"/>
+        <source>Export wallet</source>
+        <translation>导出钱包</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="142"/>
+        <location filename="../pages/Keys.qml" line="181"/>
+        <source>Spendable Wallet</source>
+        <translation>可花销的钱包</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="150"/>
+        <location filename="../pages/Keys.qml" line="181"/>
+        <source>View Only Wallet</source>
+        <translation>只读的钱包</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="191"/>
+        <source>Secret view key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="192"/>
+        <source>Public view key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="193"/>
+        <source>Secret spend key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="194"/>
+        <source>Public spend key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="206"/>
+        <source>(View Only Wallet -  No mnemonic seed available)</source>
+        <translation>(只读钱包 - 获取不了密语种子)</translation>
+    </message>
+</context>
+<context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="128"/>
+        <location filename="../LeftPanel.qml" line="147"/>
         <source>Balance</source>
         <translation>余额</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="131"/>
-        <source>Test tip 1&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="172"/>
+        <location filename="../LeftPanel.qml" line="192"/>
         <source>Unlocked balance</source>
         <translation>可用余额</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="175"/>
-        <source>Test tip 2&lt;br/&gt;&lt;br/&gt;line 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="264"/>
+        <location filename="../LeftPanel.qml" line="295"/>
         <source>Send</source>
         <translation>付款</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="314"/>
+        <location filename="../LeftPanel.qml" line="345"/>
         <source>Receive</source>
         <translation>收款</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="315"/>
+        <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <source>Verify payment</source>
-        <translation type="vanished">验证交易</translation>
+        <location filename="../LeftPanel.qml" line="439"/>
+        <source>Prove/check</source>
+        <translation>证明/校验</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="408"/>
+        <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="338"/>
+        <location filename="../LeftPanel.qml" line="369"/>
         <source>History</source>
-        <translation>历史纪录</translation>
+        <translation>历史记录</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="92"/>
+        <location filename="../LeftPanel.qml" line="96"/>
+        <source>View Only</source>
+        <translation>只读</translation>
+    </message>
+    <message>
+        <location filename="../LeftPanel.qml" line="108"/>
         <source>Testnet</source>
         <translation>连接到测试网络</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="289"/>
+        <location filename="../LeftPanel.qml" line="320"/>
         <source>Address book</source>
         <translation>地址簿</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="290"/>
+        <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="339"/>
+        <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="361"/>
+        <location filename="../LeftPanel.qml" line="392"/>
         <source>Advanced</source>
         <translation>高级功能</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="362"/>
+        <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="383"/>
+        <location filename="../LeftPanel.qml" line="415"/>
         <source>Mining</source>
         <translation>挖矿</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="384"/>
+        <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="407"/>
-        <source>Check payment</source>
-        <translation>交易检查</translation>
+        <location filename="../LeftPanel.qml" line="508"/>
+        <source>Seed &amp; Keys</source>
+        <translation>种子和密钥</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="431"/>
+        <location filename="../LeftPanel.qml" line="509"/>
+        <source>Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../LeftPanel.qml" line="463"/>
         <source>Sign/verify</source>
         <translation>签名/验证</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="455"/>
+        <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="265"/>
+        <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="432"/>
+        <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="454"/>
+        <location filename="../LeftPanel.qml" line="486"/>
         <source>Settings</source>
         <translation>钱包设置</translation>
     </message>
@@ -492,20 +555,12 @@
 <context>
     <name>MiddlePanel</name>
     <message>
-        <source>Balance:</source>
-        <translation type="vanished">总余额:</translation>
-    </message>
-    <message>
-        <source>Unlocked Balance:</source>
-        <translation type="vanished">可用余额:</translation>
-    </message>
-    <message>
-        <location filename="../MiddlePanel.qml" line="45"/>
+        <location filename="../MiddlePanel.qml" line="47"/>
         <source>Balance</source>
         <translation>总余额</translation>
     </message>
     <message>
-        <location filename="../MiddlePanel.qml" line="47"/>
+        <location filename="../MiddlePanel.qml" line="49"/>
         <source>Unlocked Balance</source>
         <translation>可用余额</translation>
     </message>
@@ -513,109 +568,97 @@
 <context>
     <name>Mining</name>
     <message>
-        <location filename="../pages/Mining.qml" line="73"/>
+        <location filename="../pages/Mining.qml" line="70"/>
         <source>Solo mining</source>
         <translation>独立挖矿(Solo mining)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="80"/>
+        <location filename="../pages/Mining.qml" line="77"/>
         <source>(only available for local daemons)</source>
         <translation>(仅限于使用本地区块同步程序)</translation>
     </message>
     <message>
-        <source>Mining helps the Monero network build resilience.&lt;br&gt;</source>
-        <translation type="vanished">挖矿可增进Monero网络的安全性&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>The more mining is done, the harder it is to attack the network.&lt;br&gt;</source>
-        <translation type="vanished">只要越多使用者在挖矿，Monero 网络就会越难以被攻击&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Mining also gives you a small chance to earn some Monero.&lt;br&gt;</source>
-        <translation type="vanished">挖矿同时能让您有机会赚取额外的门罗币.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Your computer will search for Monero block solutions.&lt;br&gt;</source>
-        <translation type="vanished">您的计算机将被用来寻找 Monero 区块的解答.&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>If you find a block, you will get the associated reward.&lt;br&gt;</source>
-        <translation type="vanished">每当您找到一个区块的解答，您即可以获得其附带的门罗币奖励&lt;br&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="86"/>
+        <location filename="../pages/Mining.qml" line="83"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation>挖矿可增进 Monero 网络的安全性，只要越多使用者在挖矿，Monero 网络就会越难以被攻击。&lt;br&gt; &lt;br&gt;挖矿同时能让您有机会赚取额外的门罗币，因为在挖矿时，您的计算机将被用来寻找 Monero 区块的解答，每当您找到一个区块的解答，您即可以获得其附带的门罗币奖励，祝您好运！</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="96"/>
+        <location filename="../pages/Mining.qml" line="93"/>
         <source>CPU threads</source>
         <translation>CPU线程数量</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="104"/>
+        <location filename="../pages/Mining.qml" line="101"/>
         <source>(optional)</source>
         <translation>(选填)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="118"/>
+        <location filename="../pages/Mining.qml" line="113"/>
         <source>Background mining (experimental)</source>
         <translation>后台挖矿(实验性功能)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="134"/>
+        <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
         <translation>允许在使用电池时挖矿</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="144"/>
+        <location filename="../pages/Mining.qml" line="139"/>
         <source>Manage miner</source>
         <translation>挖矿管理</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="153"/>
+        <location filename="../pages/Mining.qml" line="148"/>
         <source>Start mining</source>
         <translation>开始挖矿</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="163"/>
+        <location filename="../pages/Mining.qml" line="158"/>
         <source>Error starting mining</source>
         <translation>启动挖矿时发生错误</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="164"/>
+        <location filename="../pages/Mining.qml" line="159"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>无法启动挖矿&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="166"/>
+        <location filename="../pages/Mining.qml" line="161"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>仅能使用本地区块同步程序进行挖矿，请先执行本地区块同步程序&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="178"/>
+        <location filename="../pages/Mining.qml" line="173"/>
         <source>Stop mining</source>
         <translation>停止挖矿</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="194"/>
+        <location filename="../pages/Mining.qml" line="188"/>
         <source>Status: not mining</source>
         <translation>状态: 没有在进行挖矿</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="205"/>
+        <location filename="../pages/Mining.qml" line="199"/>
         <source>Mining at %1 H/s</source>
         <translation>目前挖矿速率为 %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="208"/>
+        <location filename="../pages/Mining.qml" line="202"/>
         <source>Not mining</source>
         <translation>没有在进行挖矿</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="210"/>
+        <location filename="../pages/Mining.qml" line="204"/>
         <source>Status: </source>
         <translation>状态:</translation>
+    </message>
+</context>
+<context>
+    <name>MobileHeader</name>
+    <message>
+        <location filename="../components/MobileHeader.qml" line="92"/>
+        <source>Unlocked Balance:</source>
+        <translation>可用余额:</translation>
     </message>
 </context>
 <context>
@@ -626,68 +669,84 @@
         <translation>同步区块中</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="54"/>
+        <location filename="../components/NetworkStatusItem.qml" line="55"/>
+        <source>Remote node</source>
+        <translation>远程节点</translation>
+    </message>
+    <message>
+        <location filename="../components/NetworkStatusItem.qml" line="56"/>
         <source>Connected</source>
         <translation>已连接</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="57"/>
+        <location filename="../components/NetworkStatusItem.qml" line="59"/>
         <source>Wrong version</source>
         <translation>版本错误</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="59"/>
+        <location filename="../components/NetworkStatusItem.qml" line="61"/>
         <source>Disconnected</source>
         <translation>已断开连接</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="60"/>
+        <location filename="../components/NetworkStatusItem.qml" line="62"/>
         <source>Invalid connection status</source>
         <translation>无效的连接状态</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="85"/>
+        <location filename="../components/NetworkStatusItem.qml" line="91"/>
         <source>Network status</source>
         <translation>网络同步状态</translation>
     </message>
 </context>
 <context>
-    <name>PasswordDialog</name>
+    <name>NewPasswordDialog</name>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="70"/>
-        <source>Please enter wallet password</source>
-        <translation>请输入钱包的密码</translation>
+        <location filename="../components/NewPasswordDialog.qml" line="100"/>
+        <source>Please enter new password</source>
+        <translation>请输入新的密码</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="70"/>
-        <source>Please enter wallet password for:&lt;br&gt;</source>
-        <translation>请输入以下钱包的密码:&lt;br&gt;</translation>
+        <location filename="../components/NewPasswordDialog.qml" line="157"/>
+        <source>Please confirm new password</source>
+        <translation>请确认新的密码</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="147"/>
+        <location filename="../components/NewPasswordDialog.qml" line="231"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="162"/>
-        <source>Ok</source>
-        <translation>确定</translation>
+        <location filename="../components/NewPasswordDialog.qml" line="244"/>
+        <source>Continue</source>
+        <translation>继续</translation>
+    </message>
+</context>
+<context>
+    <name>PasswordDialog</name>
+    <message>
+        <location filename="../components/PasswordDialog.qml" line="88"/>
+        <source>Please enter wallet password</source>
+        <translation>请输入钱包的密码</translation>
+    </message>
+    <message>
+        <location filename="../components/PasswordDialog.qml" line="88"/>
+        <source>Please enter wallet password for:&lt;br&gt;</source>
+        <translation>请输入以下钱包的密码:&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../components/PasswordDialog.qml" line="156"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../components/PasswordDialog.qml" line="169"/>
+        <source>Continue</source>
+        <translation>继续</translation>
     </message>
 </context>
 <context>
     <name>PrivacyLevelSmall</name>
-    <message>
-        <source>LOW</source>
-        <translation type="vanished">低</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">中</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">高</translation>
-    </message>
     <message>
         <location filename="../components/PrivacyLevelSmall.qml" line="100"/>
         <source>Low</source>
@@ -707,19 +766,27 @@
 <context>
     <name>ProgressBar</name>
     <message>
-        <location filename="../components/ProgressBar.qml" line="43"/>
+        <location filename="../components/ProgressBar.qml" line="41"/>
         <source>Establishing connection...</source>
         <translation>建立连接中...</translation>
     </message>
     <message>
-        <location filename="../components/ProgressBar.qml" line="57"/>
+        <location filename="../components/ProgressBar.qml" line="58"/>
         <source>Blocks remaining: %1</source>
         <translation>剩余区块数量: %1</translation>
     </message>
     <message>
-        <location filename="../components/ProgressBar.qml" line="100"/>
+        <location filename="../components/ProgressBar.qml" line="109"/>
         <source>Synchronizing blocks</source>
         <translation>同步区块中</translation>
+    </message>
+</context>
+<context>
+    <name>QRCodeScanner</name>
+    <message>
+        <location filename="../components/QRCodeScanner.qml" line="129"/>
+        <source>QrCode Scanned</source>
+        <translation>二维码已扫描</translation>
     </message>
 </context>
 <context>
@@ -730,160 +797,162 @@
         <translation>无效的付款ID</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="107"/>
+        <location filename="../pages/Receive.qml" line="113"/>
         <source>WARNING: no connection to daemon</source>
         <translation>警告: 没有与区块同步程序(daemon)建立连接</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="129"/>
+        <location filename="../pages/Receive.qml" line="135"/>
         <source>in the txpool: %1</source>
         <translation>在交易池中(txpool): %1</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="136"/>
+        <location filename="../pages/Receive.qml" line="142"/>
         <source>%2 confirmations: %3 (%1)</source>
         <translation>%2 交易确认: %3 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="138"/>
+        <location filename="../pages/Receive.qml" line="144"/>
         <source>1 confirmation: %2 (%1)</source>
         <translation>1 交易确认: %2 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="146"/>
+        <location filename="../pages/Receive.qml" line="152"/>
         <source>No transaction found yet...</source>
         <translation>目前没有交易...</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="150"/>
+        <location filename="../pages/Receive.qml" line="156"/>
         <source>Transaction found</source>
         <translation>已找到交易信息</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="150"/>
+        <location filename="../pages/Receive.qml" line="156"/>
         <source>%1 transactions found</source>
         <translation>已找到 %1 笔交易信息</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="156"/>
+        <location filename="../pages/Receive.qml" line="162"/>
         <source> with more money (%1)</source>
         <translation>尚有金额 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="158"/>
+        <location filename="../pages/Receive.qml" line="164"/>
         <source> with not enough money (%1)</source>
         <translation>金额不足 (%1)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="190"/>
+        <location filename="../pages/Receive.qml" line="195"/>
         <source>Address</source>
         <translation>地址</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="197"/>
+        <location filename="../pages/Receive.qml" line="202"/>
         <source>ReadOnly wallet address displayed here</source>
         <translation>只读钱包的地址会显示在这</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="227"/>
+        <location filename="../pages/Receive.qml" line="214"/>
+        <source>Address copied to clipboard</source>
+        <translation>地址已被复制到粘贴板</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="235"/>
         <source>16 hexadecimal characters</source>
         <translation>16个十六进制字符</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="263"/>
+        <location filename="../pages/Receive.qml" line="247"/>
+        <source>Payment ID copied to clipboard</source>
+        <translation>付款ID已被复制到粘贴板</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="270"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="273"/>
+        <location filename="../pages/Receive.qml" line="279"/>
         <source>Integrated address</source>
         <translation>整合地址</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="314"/>
+        <location filename="../pages/Receive.qml" line="300"/>
+        <source>Integrated address copied to clipboard</source>
+        <translation>合成地址已被复制到粘贴板</translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="320"/>
         <source>Amount to receive</source>
         <translation>欲接收的金额</translation>
     </message>
     <message>
-        <source>ReadOnly wallet integrated address displayed here</source>
-        <translation type="vanished">只读钱包的整合地址会显示在这</translation>
+        <location filename="../pages/Receive.qml" line="341"/>
+        <source>Tracking</source>
+        <translation>正在追踪</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="335"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                           Tracking &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                           追踪中 &lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;help&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <location filename="../pages/Receive.qml" line="343"/>
+        <source>help</source>
+        <translation>帮助</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="340"/>
+        <location filename="../pages/Receive.qml" line="348"/>
         <source>Tracking payments</source>
         <translation>追踪支付款</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="341"/>
+        <location filename="../pages/Receive.qml" line="349"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Click Generate to create a random payment id for a new customer&lt;/p&gt; &lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;这是一个简易的收款追踪功能:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;在每次交易时请点击&quot;产生&quot;一个随机的付款ID&lt;/p&gt; &lt;p&gt;让您的付款对象扫描二维码 (如果对象的软件支持QR扫描的话)&lt;/p&gt;&lt;p&gt;这个页面将会自动寻找您在区块链或交易池里即将收到的款项，如果您有输入金额，本功能亦会进行确认即将收到款项的总金额&lt;/p&gt;您可以自行决定是否要在确认完成前认可此份交易，通常交易在短时间都能完成确认，但有时则否，所以当您在交易比较大金额的款项时最好能等待至少一个或数个确认次数。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="385"/>
+        <location filename="../pages/Receive.qml" line="393"/>
         <source>Save QrCode</source>
         <translation>储存 二维码</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="386"/>
+        <location filename="../pages/Receive.qml" line="394"/>
         <source>Failed to save QrCode to </source>
         <translation>无法储存 二维码至</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="397"/>
+        <location filename="../pages/Receive.qml" line="405"/>
         <source>Save As</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="219"/>
+        <location filename="../pages/Receive.qml" line="227"/>
         <source>Payment ID</source>
         <translation>付款ID</translation>
     </message>
     <message>
-        <source>16 or 64 hexadecimal characters</source>
-        <translation type="vanished">16或64个十六进制字母</translation>
-    </message>
-    <message>
-        <location filename="../pages/Receive.qml" line="251"/>
+        <location filename="../pages/Receive.qml" line="259"/>
         <source>Generate</source>
         <translation>产生</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="282"/>
+        <location filename="../pages/Receive.qml" line="288"/>
         <source>Generate payment ID for integrated address</source>
         <translation>按下产生付款ID以获得整合地址</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="306"/>
+        <location filename="../pages/Receive.qml" line="312"/>
         <source>Amount</source>
         <translation>金额</translation>
     </message>
 </context>
 <context>
-    <name>RightPanel</name>
+    <name>RemoteNodeEdit</name>
     <message>
-        <location filename="../RightPanel.qml" line="61"/>
-        <source>Twitter</source>
-        <translation>推特</translation>
+        <location filename="../components/RemoteNodeEdit.qml" line="49"/>
+        <source>Remote Node Hostname / IP</source>
+        <translation>远程节点主机名/IP</translation>
     </message>
     <message>
-        <location filename="../RightPanel.qml" line="62"/>
-        <source>News</source>
-        <translation>最新消息</translation>
-    </message>
-    <message>
-        <location filename="../RightPanel.qml" line="63"/>
-        <source>Help</source>
-        <translation>帮助</translation>
-    </message>
-    <message>
-        <location filename="../RightPanel.qml" line="64"/>
-        <source>About</source>
-        <translation>关于</translation>
+        <location filename="../components/RemoteNodeEdit.qml" line="57"/>
+        <source>Port</source>
+        <translation>端口</translation>
     </message>
 </context>
 <context>
@@ -902,158 +971,259 @@
 <context>
     <name>Settings</name>
     <message>
-        <source>Click button to show seed</source>
-        <translation type="vanished">点选显示种子码</translation>
-    </message>
-    <message>
-        <source>Mnemonic seed: </source>
-        <translation type="vanished">辅助记忆种子码:</translation>
-    </message>
-    <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation type="vanished">请注意这是唯一需要备份的钱包信息，请一定要抄写下来。</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="102"/>
+        <location filename="../pages/Settings.qml" line="96"/>
         <source>Create view only wallet</source>
         <translation>创建只读钱包(view only wallet)</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="119"/>
-        <source>Show seed</source>
-        <translation>显示种子码</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="132"/>
-        <source>Manage daemon</source>
-        <translation>管理区块同步程序(daemon)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="152"/>
-        <source>Start daemon</source>
-        <translation>启动区块同步程序</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="166"/>
-        <source>Stop daemon</source>
-        <translation>停止区块同步程序</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="179"/>
+        <location filename="../pages/Settings.qml" line="285"/>
         <source>Show status</source>
         <translation>显示状态</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="199"/>
-        <source>Daemon startup flags</source>
-        <translation>区块同步程序启动flags</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="207"/>
+        <location filename="../pages/Settings.qml" line="310"/>
+        <location filename="../pages/Settings.qml" line="340"/>
         <source>(optional)</source>
         <translation>(选填)</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="221"/>
-        <source>Daemon address</source>
-        <translation>区块同步程序位置</translation>
+        <location filename="../pages/Settings.qml" line="145"/>
+        <source>Rescan wallet balance</source>
+        <translation>重新扫描钱包余额</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="230"/>
-        <source>Hostname / IP</source>
-        <translation>主机名/IP地址</translation>
+        <location filename="../pages/Settings.qml" line="154"/>
+        <source>Error: </source>
+        <translation>错误: </translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="239"/>
-        <source>Port</source>
-        <translation>通讯端口</translation>
+        <location filename="../pages/Settings.qml" line="159"/>
+        <source>Information</source>
+        <translation>信息</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="249"/>
-        <source>Login (optional)</source>
-        <translation>登入(选填)</translation>
+        <location filename="../pages/Settings.qml" line="303"/>
+        <source>Blockchain location</source>
+        <translation>区块链路径</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="258"/>
+        <location filename="../pages/Settings.qml" line="363"/>
         <source>Username</source>
         <translation>用户名</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="267"/>
+        <location filename="../pages/Settings.qml" line="372"/>
         <source>Password</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="275"/>
+        <location filename="../pages/Settings.qml" line="397"/>
         <source>Connect</source>
         <translation>连接</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="302"/>
+        <location filename="../pages/Settings.qml" line="421"/>
         <source>Layout settings</source>
         <translation>版面设置</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="319"/>
+        <location filename="../pages/Settings.qml" line="439"/>
         <source>Custom decorations</source>
         <translation>窗口化自定义</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="330"/>
+        <location filename="../pages/Settings.qml" line="450"/>
         <source>Log level</source>
         <translation>日志级别</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="356"/>
+        <location filename="../pages/Settings.qml" line="482"/>
         <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="372"/>
-        <source>Version</source>
-        <translation>版本</translation>
+        <location filename="../pages/Settings.qml" line="160"/>
+        <source>Successfully rescanned spent outputs.</source>
+        <translation>已成功重新扫描spent outputs</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="388"/>
+        <location filename="../pages/Settings.qml" line="170"/>
+        <source>Change password</source>
+        <translation>修改密码</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="201"/>
+        <source>Local Node</source>
+        <translation>本地节点</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="215"/>
+        <source>Remote Node</source>
+        <translation>远程节点</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="233"/>
+        <source>Manage Daemon</source>
+        <translation>管理后台</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="239"/>
+        <source>Show advanced</source>
+        <translation>显示高级选项</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="257"/>
+        <source>Start Local Node</source>
+        <translation>启动本地节点</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="272"/>
+        <source>Stop Local Node</source>
+        <translation>停止本地节点</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="333"/>
+        <source>Local daemon startup flags</source>
+        <translation>本地后台启动参数</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="351"/>
+        <source>Node login (optional)</source>
+        <translation>登录节点(可选)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="382"/>
+        <source>Remote node</source>
+        <translation>远程节点</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="498"/>
+        <source>Debug info</source>
+        <translation>调试信息</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="512"/>
         <source>GUI version: </source>
         <translation>GUI 版本: </translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="395"/>
+        <location filename="../pages/Settings.qml" line="517"/>
         <source>Embedded Monero version: </source>
         <translation>内嵌Monero版本: </translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="405"/>
+        <location filename="../pages/Settings.qml" line="523"/>
+        <source>Wallet creation height: </source>
+        <translation>钱包创建高度: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="524"/>
+        <source> &lt;a href=&apos;#&apos;&gt;(Click to change)&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="550"/>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="563"/>
+        <source>Rescan wallet cache</source>
+        <translation>重新扫描钱包缓存</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="564"/>
+        <source>Are you sure you want to rebuild the wallet cache?
+The following information will be deleted
+- Recipient addresses
+- Tx keys
+- Tx descriptions
+
+The old wallet cache file will be renamed and can be restored later.
+</source>
+        <translation>你确定要重建钱包缓存吗?
+如下的信息将被删除:
+- 收款人地址
+- 交易密钥
+- 交易备注
+
+旧的钱包缓存会被重命名，你可以之后恢复它.
+</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="592"/>
+        <source>Wallet log path: </source>
+        <translation>钱包日志输出的路径: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="596"/>
+        <source>Wallet Name: </source>
+        <translation>钱包名字: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="600"/>
+        <source>Daemon log path: </source>
+        <translation>后台日志输出的路径: </translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="609"/>
         <source>Daemon log</source>
         <translation>区块同步程序日志</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="416"/>
-        <source>Wallet mnemonic seed</source>
-        <translation>钱包辅助记忆种子码</translation>
+        <location filename="../pages/Settings.qml" line="618"/>
+        <source>Please choose a folder</source>
+        <translation>请选择一个文件夹</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="424"/>
+        <location filename="../pages/Settings.qml" line="627"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="630"/>
+        <source>Error: Filesystem is read only</source>
+        <translation>错误: 文件系统只有读取权限</translation>
+  </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="634"/>
+        <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
+        <translation>警告: 目前设备上只有 %1 GB的剩余存储空间可用, 区块链数据需大约 %2 GB的空间.</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="636"/>
+        <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
+        <translation>注意: 目前设备上只有 %1 GB的剩余存储空间可用, 区块链数据需大约 %2 GB的空间.</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="640"/>
+        <source>Note: lmdb folder not found. A new folder will be created.</source>
+        <translation>注意: lmdb 文件夹不存在, 将创建一个新的文件夹.</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="572"/>
+        <location filename="../pages/Settings.qml" line="644"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../pages/Settings.qml" line="153"/>
+        <location filename="../pages/Settings.qml" line="180"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="425"/>
+        <location filename="../pages/Settings.qml" line="181"/>
         <source>Wrong password</source>
         <translation>密码错误</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="72"/>
+        <location filename="../pages/Settings.qml" line="66"/>
         <source>Manage wallet</source>
         <translation>管理钱包</translation>
     </message>
     <message>
-        <source>Close current wallet and open wizard</source>
-        <translation type="vanished">关闭当前的钱包然后启动设置程序</translation>
-    </message>
-    <message>
-        <location filename="../pages/Settings.qml" line="87"/>
+        <location filename="../pages/Settings.qml" line="81"/>
         <source>Close wallet</source>
         <translation>关闭钱包</translation>
     </message>
@@ -1061,167 +1231,186 @@
 <context>
     <name>Sign</name>
     <message>
-        <location filename="../pages/Sign.qml" line="68"/>
+        <location filename="../pages/Sign.qml" line="64"/>
         <source>Good signature</source>
         <translation>签名正确</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="69"/>
+        <location filename="../pages/Sign.qml" line="65"/>
         <source>This is a good signature</source>
         <translation>这份签名正确</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="73"/>
+        <location filename="../pages/Sign.qml" line="69"/>
         <source>Bad signature</source>
         <translation>签名不正确</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="74"/>
+        <location filename="../pages/Sign.qml" line="70"/>
         <source>This signature did not verify</source>
         <translation>这份签名无法通过验证</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="123"/>
+        <location filename="../pages/Sign.qml" line="106"/>
         <source>Sign a message or file contents with your address:</source>
         <translation>用你的地址签名一份信息或文件内容:</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="133"/>
-        <location filename="../pages/Sign.qml" line="319"/>
+        <location filename="../pages/Sign.qml" line="115"/>
+        <location filename="../pages/Sign.qml" line="272"/>
         <source>Either message:</source>
         <translation>签名信息:</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="148"/>
+        <location filename="../pages/Sign.qml" line="128"/>
         <source>Message to sign</source>
         <translation>欲签名的信息</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="167"/>
-        <location filename="../pages/Sign.qml" line="242"/>
+        <location filename="../pages/Sign.qml" line="145"/>
+        <location filename="../pages/Sign.qml" line="215"/>
         <source>Sign</source>
         <translation>签名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="195"/>
+        <location filename="../pages/Sign.qml" line="171"/>
         <source>Please choose a file to sign</source>
         <translation>请选择一个欲签名的文件</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="208"/>
-        <location filename="../pages/Sign.qml" line="393"/>
+        <location filename="../pages/Sign.qml" line="183"/>
+        <location filename="../pages/Sign.qml" line="340"/>
         <source>Select</source>
         <translation>选择文件</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="352"/>
-        <location filename="../pages/Sign.qml" line="426"/>
+        <location filename="../pages/Sign.qml" line="302"/>
+        <location filename="../pages/Sign.qml" line="371"/>
         <source>Verify</source>
         <translation>验证</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="380"/>
+        <location filename="../pages/Sign.qml" line="328"/>
         <source>Please choose a file to verify</source>
         <translation>请选择一个欲验证的文件</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="444"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Paste in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            签名来源之地址&lt;font size=&apos;2&apos;&gt; ( 粘帖上或从&lt;/font&gt; &lt;a href=&apos;#&apos;&gt;地址簿&lt;/a&gt; &lt;font size=&apos;2&apos;&gt; 中选择 )&lt;/font&gt;</translation>
+        <location filename="../pages/Sign.qml" line="387"/>
+        <source>Signing address</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SIGN</source>
-        <translation type="vanished">签名</translation>
+        <location filename="../pages/Sign.qml" line="389"/>
+        <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
+        <translation>粘贴或从&lt;a href=&apos;#&apos;&gt;地址簿&lt;/a&gt;中选择</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="183"/>
-        <location filename="../pages/Sign.qml" line="368"/>
+        <location filename="../pages/Sign.qml" line="160"/>
+        <location filename="../pages/Sign.qml" line="317"/>
         <source>Or file:</source>
         <translation>或文件:</translation>
     </message>
     <message>
-        <source>SELECT</source>
-        <translation type="vanished">选择文件</translation>
-    </message>
-    <message>
-        <location filename="../pages/Sign.qml" line="223"/>
+        <location filename="../pages/Sign.qml" line="197"/>
         <source>Filename with message to sign</source>
         <translation>要签名信息的文件名</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="264"/>
-        <location filename="../pages/Sign.qml" line="273"/>
-        <location filename="../pages/Sign.qml" line="470"/>
-        <location filename="../pages/Sign.qml" line="479"/>
+        <location filename="../pages/Sign.qml" line="234"/>
+        <location filename="../pages/Sign.qml" line="239"/>
+        <location filename="../pages/Sign.qml" line="415"/>
+        <location filename="../pages/Sign.qml" line="420"/>
         <source>Signature</source>
         <translation>签名结果</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="309"/>
+        <location filename="../pages/Sign.qml" line="262"/>
         <source>Verify a message or file signature from an address:</source>
         <translation>验证从某个地址所签名的信息或文件:</translation>
     </message>
     <message>
-        <location filename="../pages/Sign.qml" line="334"/>
+        <location filename="../pages/Sign.qml" line="285"/>
         <source>Message to verify</source>
         <translation>欲验证的信息</translation>
     </message>
     <message>
-        <source>VERIFY</source>
-        <translation type="vanished">验证</translation>
-    </message>
-    <message>
-        <location filename="../pages/Sign.qml" line="408"/>
+        <location filename="../pages/Sign.qml" line="354"/>
         <source>Filename with message to verify</source>
         <translation>附带签名信息的文件名</translation>
-    </message>
-    <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            Signing address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="vanished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                            签名的地址 &lt;font size=&apos;2&apos;&gt;  ( 输入或从簿选择 &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; 簿选择 )&lt;/font&gt;</translation>
     </message>
 </context>
 <context>
     <name>StandardDialog</name>
     <message>
-        <location filename="../components/StandardDialog.qml" line="127"/>
-        <source>Ok</source>
-        <translation>确定</translation>
+        <location filename="../components/StandardDialog.qml" line="122"/>
+        <source>Double tap to copy</source>
+        <translation>双击复制</translation>
     </message>
     <message>
-        <location filename="../components/StandardDialog.qml" line="112"/>
+        <location filename="../components/StandardDialog.qml" line="129"/>
+        <source>Content copied to clipboard</source>
+        <translation>内容已复制到粘贴板</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDialog.qml" line="147"/>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDialog.qml" line="160"/>
+        <source>OK</source>
+        <translation>确定</translation>
     </message>
 </context>
 <context>
     <name>StandardDropdown</name>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="197"/>
+        <location filename="../components/StandardDropdown.qml" line="203"/>
         <source>Low (x1 fee)</source>
         <translation>低 (1倍手续费)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="198"/>
+        <location filename="../components/StandardDropdown.qml" line="204"/>
         <source>Medium (x20 fee)</source>
         <translation>中 (20倍手续费)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="199"/>
+        <location filename="../components/StandardDropdown.qml" line="205"/>
         <source>High (x166 fee)</source>
         <translation>高 (166倍手续费)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="200"/>
+        <location filename="../components/StandardDropdown.qml" line="206"/>
+        <source>Slow (x0.25 fee)</source>
+        <translation>慢 (0.25倍手续费)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="207"/>
+        <source>Default (x1 fee)</source>
+        <translation>默认 (1倍手续费)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="208"/>
+        <source>Fast (x5 fee)</source>
+        <translation>快 (5倍手续费)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="209"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation>最快 (41.5倍手续费)</translation>
+    </message>
+    <message>
+        <location filename="../components/StandardDropdown.qml" line="210"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="201"/>
+        <location filename="../components/StandardDropdown.qml" line="211"/>
         <source>Sent</source>
         <translation>付款</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="202"/>
+        <location filename="../components/StandardDropdown.qml" line="212"/>
         <source>Received</source>
         <translation>收款</translation>
     </message>
@@ -1235,8 +1424,8 @@
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
-        <source>&lt;b&gt;Send to same destination&lt;/b&gt;</source>
-        <translation>&lt;b&gt;付款到这个地址&lt;/b&gt;</translation>
+        <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
+        <translation>&lt;b&gt;发送到这个地址&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1275,29 +1464,12 @@
 <context>
     <name>TickDelegate</name>
     <message>
-        <source>LOW</source>
-        <translation type="vanished">低</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">中</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">高</translation>
-    </message>
-    <message>
         <location filename="../components/TickDelegate.qml" line="55"/>
-        <source>Normal</source>
-        <translation>正常</translation>
+        <source>Default</source>
+        <translation>默认</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="56"/>
-        <source>Medium</source>
-        <translation>中</translation>
-    </message>
-    <message>
-        <location filename="../components/TickDelegate.qml" line="57"/>
         <source>High</source>
         <translation>高</translation>
     </message>
@@ -1305,269 +1477,242 @@
 <context>
     <name>Transfer</name>
     <message>
-        <location filename="../pages/Transfer.qml" line="66"/>
+        <location filename="../pages/Transfer.qml" line="69"/>
         <source>OpenAlias error</source>
         <translation>OpenAlias 错误</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="78"/>
+        <location filename="../pages/Transfer.qml" line="81"/>
         <source>Privacy level (ringsize %1)</source>
         <translation>隐私等级 (环签名大小: %1)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="44"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;启动区块同步程序&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="125"/>
+        <location filename="../pages/Transfer.qml" line="129"/>
         <source>Amount</source>
         <translation>金额</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="135"/>
+        <location filename="../pages/Transfer.qml" line="181"/>
         <source>Transaction priority</source>
         <translation>交易优先级</translation>
     </message>
     <message>
-        <source>all</source>
-        <translation type="vanished">全部</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="193"/>
-        <location filename="../pages/Transfer.qml" line="202"/>
-        <source>Low (x1 fee)</source>
-        <translation>低 (1倍手续费)</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="194"/>
-        <location filename="../pages/Transfer.qml" line="204"/>
-        <source>Medium (x20 fee)</source>
-        <translation>中 (20倍手续费)</translation>
+        <source>Slow (x0.25 fee)</source>
+        <translation>慢 (0.25倍手续费)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
-        <location filename="../pages/Transfer.qml" line="205"/>
-        <source>High (x166 fee)</source>
-        <translation>高 (166倍手续费)</translation>
+        <source>Default (x1 fee)</source>
+        <translation>默认 (1倍手续费)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="233"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      Address &lt;font size=&apos;2&apos;&gt;  ( Paste in or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                      地址&lt;font size=&apos;2&apos;&gt; ( 粘帖上或从&lt;/font&gt; &lt;a href=&apos;#&apos;&gt;地址簿&lt;/a&gt; &lt;font size=&apos;2&apos;&gt; 中选择 )&lt;/font&gt;</translation>
+        <location filename="../pages/Transfer.qml" line="196"/>
+        <source>Fast (x5 fee)</source>
+        <translation>快 (5倍手续费)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="251"/>
+        <location filename="../pages/Transfer.qml" line="197"/>
+        <source>Fastest (x41.5 fee)</source>
+        <translation>最快 (41.5倍手续费)</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="235"/>
         <source>QR Code</source>
         <translation>二维码</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="281"/>
+        <location filename="../pages/Transfer.qml" line="259"/>
         <source>Resolve</source>
         <translation>解析</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="299"/>
+        <location filename="../pages/Transfer.qml" line="277"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>无效的 OpenAlias 地址</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="304"/>
+        <location filename="../pages/Transfer.qml" line="282"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>已找到地址，但无法验证其 DNSSEC 的签名，此地址有可能受到欺骗攻击的风险</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="306"/>
+        <location filename="../pages/Transfer.qml" line="284"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>无法找到有效地址，但无法验证其 DNSSEC 的签名，此地址有可能受到欺骗攻击的风险</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="309"/>
-        <location filename="../pages/Transfer.qml" line="312"/>
+        <location filename="../pages/Transfer.qml" line="287"/>
+        <location filename="../pages/Transfer.qml" line="290"/>
         <source>Internal error</source>
         <translation>内部错误</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="315"/>
+        <location filename="../pages/Transfer.qml" line="293"/>
         <source>No address found</source>
         <translation>没有找到地址</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="355"/>
+        <location filename="../pages/Transfer.qml" line="312"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>描述 &lt;font size=&apos;2&apos;&gt;( 选填 )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="367"/>
+        <location filename="../pages/Transfer.qml" line="318"/>
         <source>Saved to local wallet history</source>
         <translation>储存至本机钱包纪录</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="397"/>
+        <location filename="../pages/Transfer.qml" line="326"/>
         <source>Send</source>
         <translation>付款</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="452"/>
+        <location filename="../pages/Transfer.qml" line="391"/>
         <source>Show advanced options</source>
         <translation>显示高级选项</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="501"/>
+        <location filename="../pages/Transfer.qml" line="454"/>
         <source>Sweep Unmixable</source>
         <translation>去除无法混淆的金额</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="515"/>
-        <source>create tx file</source>
+        <location filename="../pages/Transfer.qml" line="468"/>
+        <source>Create tx file</source>
         <translation>创建交易文件(tx file)</translation>
     </message>
     <message>
-        <source>sign tx file</source>
-        <translation type="vanished">签名交易文件(tx file)</translation>
-    </message>
-    <message>
-        <source>submit tx file</source>
-        <translation type="vanished">提交交易文件(tx file)</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="175"/>
+        <location filename="../pages/Transfer.qml" line="164"/>
         <source>All</source>
         <translation>全部</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="203"/>
-        <source>Default (x4 fee)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="537"/>
+        <location filename="../pages/Transfer.qml" line="490"/>
         <source>Sign tx file</source>
         <translation>签名一个交易文件</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="551"/>
+        <location filename="../pages/Transfer.qml" line="504"/>
         <source>Submit tx file</source>
         <translation>提交交易文件</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="566"/>
-        <source>Rescan spent</source>
-        <translation>重新扫描付款状态</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="575"/>
-        <location filename="../pages/Transfer.qml" line="610"/>
-        <location filename="../pages/Transfer.qml" line="666"/>
+        <location filename="../pages/Transfer.qml" line="537"/>
+        <location filename="../pages/Transfer.qml" line="593"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="576"/>
-        <source>Error: </source>
-        <translation>错误: </translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="581"/>
-        <location filename="../pages/Transfer.qml" line="672"/>
+        <location filename="../pages/Transfer.qml" line="599"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="582"/>
-        <source>Sucessfully rescanned spent outputs</source>
-        <translation>重新扫描付款成功</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="599"/>
-        <location filename="../pages/Transfer.qml" line="660"/>
+        <location filename="../pages/Transfer.qml" line="526"/>
+        <location filename="../pages/Transfer.qml" line="587"/>
         <source>Please choose a file</source>
         <translation>请选择一个文件</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="611"/>
+        <location filename="../pages/Transfer.qml" line="45"/>
+        <source>Start daemon</source>
+        <translation type="unfinished">启动区块同步程序</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="220"/>
+        <source>Address</source>
+        <translation type="unfinished">地址</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="222"/>
+        <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="538"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>无法加载未签名的交易: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="618"/>
+        <location filename="../pages/Transfer.qml" line="545"/>
         <source>
 Number of transactions: </source>
         <translation>
 交易数量: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="620"/>
+        <location filename="../pages/Transfer.qml" line="547"/>
         <source>
 Transaction #%1</source>
         <translation>
 交易 #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="621"/>
+        <location filename="../pages/Transfer.qml" line="548"/>
         <source>
 Recipient: </source>
         <translation>
 接收方: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="622"/>
+        <location filename="../pages/Transfer.qml" line="549"/>
         <source>
 payment ID: </source>
         <translation>
 付款ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="623"/>
+        <location filename="../pages/Transfer.qml" line="550"/>
         <source>
 Amount: </source>
         <translation>
 金额: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="624"/>
+        <location filename="../pages/Transfer.qml" line="551"/>
         <source>
 Fee: </source>
         <translation>
 手续费: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="625"/>
+        <location filename="../pages/Transfer.qml" line="552"/>
         <source>
 Ringsize: </source>
         <translation>
 环签名大小: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="639"/>
+        <location filename="../pages/Transfer.qml" line="566"/>
         <source>Confirmation</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="667"/>
+        <location filename="../pages/Transfer.qml" line="594"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>无法提交交易: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="673"/>
+        <location filename="../pages/Transfer.qml" line="600"/>
         <source>Money sent successfully</source>
         <translation>付款成功</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="733"/>
-        <location filename="../pages/Transfer.qml" line="745"/>
+        <location filename="../pages/Transfer.qml" line="654"/>
+        <location filename="../pages/Transfer.qml" line="666"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>钱包没有与区块同步程序(daemon)建立连接。</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="748"/>
+        <location filename="../pages/Transfer.qml" line="669"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>已连接的区块同步程序与此GUI钱包不兼容
 请升级区块同步程序或是连接至另一个区块同步程序</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="753"/>
+        <location filename="../pages/Transfer.qml" line="674"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>正在等待区块同步程序完成同步</translation>
     </message>
@@ -1577,150 +1722,97 @@ Please upgrade or connect to another daemon</source>
         <translation></translation>
     </message>
     <message>
-        <source>or ALL</source>
-        <translation type="vanished">或发送全部余额</translation>
-    </message>
-    <message>
-        <source>LOW</source>
-        <translation type="vanished">低</translation>
-    </message>
-    <message>
-        <source>MEDIUM</source>
-        <translation type="vanished">中</translation>
-    </message>
-    <message>
-        <source>HIGH</source>
-        <translation type="vanished">高</translation>
-    </message>
-    <message>
-        <source>Privacy level</source>
-        <translation type="vanished">隐私等级</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="480"/>
+        <location filename="../pages/Transfer.qml" line="419"/>
         <source>Transaction cost</source>
         <translation>交易所需的花费</translation>
     </message>
     <message>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    Address &lt;font size=&apos;2&apos;&gt;  ( Type in  or select from &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; book )&lt;/font&gt;</source>
-        <translation type="vanished">&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;                    地址 &lt;font size=&apos;2&apos;&gt;  ( 输入地址或从 &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; 簿选择 )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="330"/>
+        <location filename="../pages/Transfer.qml" line="301"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>付款ID &lt;font size=&apos;2&apos;&gt;(可不填)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="342"/>
+        <location filename="../pages/Transfer.qml" line="307"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16或64个十六进制字符</translation>
-    </message>
-    <message>
-        <source>Description &lt;font size=&apos;2&apos;&gt;( An optional description that will be saved to the local address book if entered )&lt;/font&gt;</source>
-        <translation type="vanished">描述 &lt;font size=&apos;2&apos;&gt;( 选填，将储存在收款地址簿 )&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>SEND</source>
-        <translation type="vanished">付款</translation>
-    </message>
-    <message>
-        <source>SWEEP UNMIXABLE</source>
-        <translation type="vanished">去除无法混淆的金额</translation>
     </message>
 </context>
 <context>
     <name>TxKey</name>
     <message>
-        <source>You can verify that a third party made a payment by supplying:</source>
-        <translation type="vanished">您可以在此验证第三方的支付，需提供:</translation>
-    </message>
-    <message>
-        <source> - the recipient address,</source>
-        <translation type="vanished"> - 接受方的地址,</translation>
-    </message>
-    <message>
-        <source> - the transaction ID,</source>
-        <translation type="vanished"> - 该项交易的交易ID</translation>
-    </message>
-    <message>
-        <source> - the tx secret key supplied by the sender</source>
-        <translation type="vanished"> - 支付方提供的 tx 密钥</translation>
-    </message>
-    <message>
-        <source>If a payment was made up of several transactions, each transaction must be checked, and the results added</source>
-        <translation type="vanished">如果该支付是同时包含数个交易，每一项交易都必须被确认和合并结果</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="90"/>
-        <source>Verify that a third party made a payment by supplying:</source>
-        <translation>提供以下信息来验证第三方支付的款项:</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="94"/>
-        <source> - the recipient address</source>
-        <translation> - 接受方的地址</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="98"/>
-        <source> - the transaction ID</source>
-        <translation> - 交易 ID (transaction ID)</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="102"/>
-        <source> - the secret transaction key supplied by the sender</source>
-        <translation> - 由付款方提供的交易私钥 (secret transaction key)</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="106"/>
+        <location filename="../pages/TxKey.qml" line="349"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
         <translation>如果该付款包含数个交易，则检查结果将会合并在一起。</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="119"/>
+        <location filename="../pages/TxKey.qml" line="133"/>
+        <location filename="../pages/TxKey.qml" line="245"/>
         <source>Address</source>
         <translation>地址</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="126"/>
+        <location filename="../pages/TxKey.qml" line="97"/>
+        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
+For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
+        <translation type="unfinished">为你的一笔收入/支付生成一个证明,该证明由交易ID,收款地址和一个可选的附带信息组成.
+如果是支付，你可以得到一个&apos;支付证明&apos;,它将证明你是这笔交易的发起者. 这种情形下，你不需要提供这笔交易的收款地址.</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="140"/>
+        <location filename="../pages/TxKey.qml" line="252"/>
         <source>Recipient&apos;s wallet address</source>
         <translation>接受方的钱包地址</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="148"/>
+        <location filename="../pages/TxKey.qml" line="159"/>
+        <location filename="../pages/TxKey.qml" line="271"/>
+        <source>Message</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="166"/>
+        <location filename="../pages/TxKey.qml" line="278"/>
+        <source>Optional message against which the signature is signed</source>
+        <translation>可选的信息,该信息将被用来签名</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="186"/>
+        <source>Generate</source>
+        <translation type="unfinished">生成</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="209"/>
+        <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
+For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
+        <translation>验证一笔钱是否被支付到了某个地址, 需要提供交易ID,收款地址,被签名过的信息.
+如果是证明支付,你不需要提供收款地址.</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="297"/>
+        <source>Signature</source>
+        <translation type="unfinished">签名结果</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="305"/>
+        <source>Paste tx proof</source>
+        <translation>粘贴交易证明</translation>
+    </message>
+    <message>
+        <location filename="../pages/TxKey.qml" line="106"/>
+        <location filename="../pages/TxKey.qml" line="218"/>
         <source>Transaction ID</source>
         <translation>交易ID</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="157"/>
+        <location filename="../pages/TxKey.qml" line="113"/>
+        <location filename="../pages/TxKey.qml" line="225"/>
         <source>Paste tx ID</source>
         <translation>粘帖上交易 ID (tx ID)</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="189"/>
-        <source>Paste tx key</source>
-        <translation>粘帖上交易密钥 (tx key)</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="212"/>
+        <location filename="../pages/TxKey.qml" line="326"/>
         <source>Check</source>
         <translation>检查</translation>
-    </message>
-    <message>
-        <source>Transaction ID here</source>
-        <translation type="vanished">输入交易ID</translation>
-    </message>
-    <message>
-        <location filename="../pages/TxKey.qml" line="181"/>
-        <source>Transaction key</source>
-        <translation>交易密钥</translation>
-    </message>
-    <message>
-        <source>Transaction key here</source>
-        <translation type="vanished">输入交易密钥</translation>
-    </message>
-    <message>
-        <source>CHECK</source>
-        <translation type="vanished">检查</translation>
     </message>
 </context>
 <context>
@@ -1734,10 +1826,6 @@ Please upgrade or connect to another daemon</source>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
         <translation>开始同步 Monero 区块链?</translation>
-    </message>
-    <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="vanished">这是唯一需要备份的钱包信息，请一定要抄写下来。你将会在下一个步骤被要求确认这份种子码以确保你有妥善备份它。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="115"/>
@@ -1776,17 +1864,42 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardCreateWallet</name>
     <message>
-        <source>A new wallet has been created for you</source>
-        <translation type="vanished">已为您创建一个新的钱包</translation>
-    </message>
-    <message>
-        <source>This is the 25 word mnemonic for your wallet</source>
-        <translation type="vanished">这是钱包的25个辅助记忆种子码</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet.qml" line="99"/>
+        <location filename="../wizard/WizardCreateWallet.qml" line="100"/>
         <source>Create a new wallet</source>
         <translation>创建一个新的钱包</translation>
+    </message>
+</context>
+<context>
+    <name>WizardDaemonSettings</name>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <translation>为了能跟门罗币网络通讯,你的钱包需要连接上一个门罗币节点. 为了最好的隐私，我们建议你运行一个自己的节点 &lt;br&gt;&lt;br&gt; 如果你无法运行一个自己的节点的话，可以选择连上一个远程的节点. </translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
+        <source>Start a node automatically in background (recommended)</source>
+        <translation>自动在后台启动一个节点(建议)</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="144"/>
+        <source>Blockchain location</source>
+        <translation>区块链路径</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="151"/>
+        <source>(optional)</source>
+        <translation>(选填)</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="170"/>
+        <source>Connect to a remote node until my own node has finished syncing</source>
+        <translation>在我自己的节点同步完成之前,暂时先连上一个远程节点</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="171"/>
+        <source>Connect to a remote node</source>
+        <translation>连接不上远程节点</translation>
     </message>
 </context>
 <context>
@@ -1844,14 +1957,6 @@ Please upgrade or connect to another daemon</source>
         <translation>语言</translation>
     </message>
     <message>
-        <source>Account name</source>
-        <translation type="vanished">账户名称</translation>
-    </message>
-    <message>
-        <source>Seed</source>
-        <translation type="vanished">种子码</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardFinish.qml" line="59"/>
         <source>Wallet name</source>
         <translation>钱包名称</translation>
@@ -1859,7 +1964,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="60"/>
         <source>Backup seed</source>
-        <translation>备份种子码(seed)</translation>
+        <translation>备份种子(seed)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="61"/>
@@ -1896,56 +2001,48 @@ Please upgrade or connect to another daemon</source>
         <source>You’re all set up!</source>
         <translation>您已完成所有设置!</translation>
     </message>
-    <message>
-        <source>An overview of your Monero configuration is below:</source>
-        <translation type="vanished">以下是您的 Monero 钱包设置总览:</translation>
-    </message>
-    <message>
-        <source>You’re all setup!</source>
-        <translation type="vanished">您已完成所有设置!</translation>
-    </message>
 </context>
 <context>
     <name>WizardMain</name>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="168"/>
+        <location filename="../wizard/WizardMain.qml" line="183"/>
         <source>A wallet with same name already exists. Please change wallet name</source>
         <translation>已有重复的钱包名称存在，请更改钱包名称</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="176"/>
+        <location filename="../wizard/WizardMain.qml" line="191"/>
         <source>Non-ASCII characters are not allowed in wallet path or account name</source>
         <translation>钱包的路径与名称只能使用字母，数字和下划线</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="350"/>
+        <location filename="../wizard/WizardMain.qml" line="375"/>
         <source>USE MONERO</source>
         <translation>使用 MONERO</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="367"/>
+        <location filename="../wizard/WizardMain.qml" line="392"/>
         <source>Create wallet</source>
         <translation>创建钱包</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="377"/>
+        <location filename="../wizard/WizardMain.qml" line="402"/>
         <source>Success</source>
         <translation>成功</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="378"/>
+        <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
         <translation>只读钱包已被创建，您可以在关闭此钱包后使用&quot;以文件打开钱包&quot;的选项，并选择以下的文件: 
 %1</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="386"/>
+        <location filename="../wizard/WizardMain.qml" line="411"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMain.qml" line="399"/>
+        <location filename="../wizard/WizardMain.qml" line="424"/>
         <source>Abort</source>
         <translation>中止</translation>
     </message>
@@ -1953,55 +2050,52 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardManageWalletUI</name>
     <message>
-        <source>This is the name of your wallet. You can change it to a different name if you’d like:</source>
-        <translation type="vanished">这是您的钱包名称，您也可以自己更改成想要的名称:</translation>
-    </message>
-    <message>
-        <source>Restore height</source>
-        <translation type="vanished">恢复区块高度</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="133"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="158"/>
         <source>Wallet name</source>
         <translation>钱包名称</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="152"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="178"/>
         <source>Restore from seed</source>
         <translation>从种子码(seed)恢复</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="166"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="192"/>
         <source>Restore from keys</source>
         <translation>从密钥恢复</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="203"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="206"/>
+        <source>From QR Code</source>
+        <translation>从二维码获取</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
         <source>Account address (public)</source>
         <translation>帐户地址 (公开)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="211"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="253"/>
         <source>View key (private)</source>
         <translation>View key (私钥)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="220"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="262"/>
         <source>Spend key (private)</source>
         <translation>Spend key (私钥)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="232"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="274"/>
         <source>Restore height (optional)</source>
         <translation>恢复特定区块高度 (可选)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="245"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="287"/>
         <source>Your wallet is stored in</source>
         <translation>您的钱包被储存在</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardManageWalletUI.qml" line="272"/>
+        <location filename="../wizard/WizardManageWalletUI.qml" line="313"/>
         <source>Please choose a directory</source>
         <translation>请选择一个目录</translation>
     </message>
@@ -2009,16 +2103,17 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardMemoTextInput</name>
     <message>
-        <source>It is very important to write it down as this is the only backup you will need for your wallet. You will be asked to confirm the seed in the next screen to ensure it has copied down correctly.</source>
-        <translation type="vanished">这是您唯一需要备份的钱包信息，请一定要抄写下来。您将会在下一个后被要求确认这份种子码以确保你有妥善备份它。</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="44"/>
         <source>Enter your 25 word mnemonic seed</source>
         <translation>请输入您的 25个种子码(seed)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardMemoTextInput.qml" line="88"/>
+        <location filename="../wizard/WizardMemoTextInput.qml" line="64"/>
+        <source>Seed copied to clipboard</source>
+        <translation>种子已被复制到剪贴板</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardMemoTextInput.qml" line="92"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
         <translation>这种子码是&lt;b&gt;非常重要&lt;/b&gt;必须要抄写下来并妥善保管的信息，这是你恢复钱包时所需要的所有信息。</translation>
     </message>
@@ -2026,53 +2121,32 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardOptions</name>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="87"/>
+        <location filename="../wizard/WizardOptions.qml" line="74"/>
         <source>Welcome to Monero!</source>
         <translation>欢迎使用 Monero！</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="98"/>
+        <location filename="../wizard/WizardOptions.qml" line="85"/>
         <source>Please select one of the following options:</source>
         <translation>请于下面选择您需要的功能:</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="155"/>
+        <location filename="../wizard/WizardOptions.qml" line="141"/>
         <source>Create a new wallet</source>
         <translation>创建一个新的钱包</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="197"/>
+        <location filename="../wizard/WizardOptions.qml" line="182"/>
         <source>Restore wallet from keys or mnemonic seed</source>
         <translation>从密钥或种子码恢复钱包</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="241"/>
+        <location filename="../wizard/WizardOptions.qml" line="225"/>
         <source>Open a wallet from file</source>
         <translation>以文件打开钱包</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardOptions.qml" line="262"/>
-        <source>Custom daemon address (optional)</source>
-        <translation>使用远程区块同步程序的IP或网址 (选填)</translation>
-    </message>
-    <message>
-        <source>This is my first time, I want to create a new account</source>
-        <translation type="vanished">这是我第一次使用，我想要创建一个新的账户</translation>
-    </message>
-    <message>
-        <source>I want to recover my account from my 25 word seed</source>
-        <translation type="vanished">我想要从一组25个种子码恢复我的账户</translation>
-    </message>
-    <message>
-        <source>I want to open a wallet from file</source>
-        <translation type="vanished">我想要从文件打开钱包</translation>
-    </message>
-    <message>
-        <source>Please setup daemon address below.</source>
-        <translation type="vanished">请在下面设置区块链同步程序的位置。</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardOptions.qml" line="295"/>
+        <location filename="../wizard/WizardOptions.qml" line="245"/>
         <source>Testnet</source>
         <translation>连接到测试网络</translation>
     </message>
@@ -2080,56 +2154,28 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardPassword</name>
     <message>
-        <source>Now that your wallet has been created, please set a password for the wallet</source>
-        <translation type="vanished">您的新钱包已被创建，请为它设置密码</translation>
-    </message>
-    <message>
-        <source>Now that your wallet has been restored, please set a password for the wallet</source>
-        <translation type="vanished">您的钱包已被成功恢复，请为它设置密码</translation>
-    </message>
-    <message>
-        <source>Note that this password cannot be recovered, and if forgotten you will need to restore your wallet from the mnemonic seed you were just given&lt;br/&gt;&lt;br/&gt;
-                        Your password will be used to protect your wallet and to confirm actions, so make sure that your password is sufficiently secure.</source>
-        <translation type="vanished">请注意:这个密码无法被恢复，如果忘记了密码，您将需要用刚刚获得的辅助记忆种子码重新恢复您的钱包&lt;br/&gt;&lt;br/&gt;
-                        密码将会用来保护您的钱包或确认重要的动作，所以请确认您的密码强度足够安全。</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="vanished">密码</translation>
-    </message>
-    <message>
-        <source>Confirm password</source>
-        <translation type="vanished">确认密码</translation>
-    </message>
-    <message>
         <location filename="../wizard/WizardPassword.qml" line="57"/>
         <location filename="../wizard/WizardPassword.qml" line="59"/>
         <source>Give your wallet a password</source>
         <translation>为您的钱包设置一个密码</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardPassword.qml" line="127"/>
+        <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
         <translation>注意: 这个密码无法被恢复，如果您忘记了这个密码，则必须使用25个种子码恢复您的钱包。&lt;br/&gt;&lt;br/&gt;
-                        &lt;b&gt;请输入足够强度的密码&lt;/b&gt; (使用字母, 数字或别的符号):</translation>
-    </message>
-    <message>
-        <source>Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
-                        &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation type="vanished">注意: 这个密码无法被恢复，如果您忘记了这个密码，则必须使用25个种子码恢复您的钱包。&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;请输入足够强度的密码&lt;/b&gt; (使用字母, 数字或别的符号):</translation>
     </message>
 </context>
 <context>
     <name>WizardPasswordUI</name>
     <message>
-        <location filename="../wizard/WizardPasswordUI.qml" line="70"/>
+        <location filename="../wizard/WizardPasswordUI.qml" line="73"/>
         <source>Password</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardPasswordUI.qml" line="82"/>
+        <location filename="../wizard/WizardPasswordUI.qml" line="85"/>
         <source>Confirm password</source>
         <translation>确认密码</translation>
     </message>
@@ -2137,15 +2183,7 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardRecoveryWallet</name>
     <message>
-        <source>We&apos;re ready to recover your account</source>
-        <translation type="vanished">已准备好恢复您的钱包</translation>
-    </message>
-    <message>
-        <source>Please enter your 25 word private key</source>
-        <translation type="vanished">请输入您的 25个种子码</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardRecoveryWallet.qml" line="112"/>
+        <location filename="../wizard/WizardRecoveryWallet.qml" line="118"/>
         <source>Restore wallet</source>
         <translation>恢复钱包</translation>
     </message>
@@ -2153,16 +2191,12 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>WizardWelcome</name>
     <message>
-        <source>Welcome</source>
-        <translation type="vanished">欢迎</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardWelcome.qml" line="79"/>
+        <location filename="../wizard/WizardWelcome.qml" line="73"/>
         <source>Welcome to Monero!</source>
         <translation>欢迎使用 Monero！</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWelcome.qml" line="89"/>
+        <location filename="../wizard/WizardWelcome.qml" line="83"/>
         <source>Please choose a language and regional format.</source>
         <translation>请选择您的语言和地区格式。</translation>
     </message>
@@ -2170,111 +2204,114 @@ Please upgrade or connect to another daemon</source>
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="317"/>
-        <location filename="../main.qml" line="482"/>
-        <location filename="../main.qml" line="544"/>
-        <location filename="../main.qml" line="556"/>
-        <location filename="../main.qml" line="598"/>
-        <location filename="../main.qml" line="659"/>
-        <location filename="../main.qml" line="697"/>
-        <location filename="../main.qml" line="727"/>
+        <location filename="../main.qml" line="352"/>
+        <location filename="../main.qml" line="561"/>
+        <location filename="../main.qml" line="573"/>
+        <location filename="../main.qml" line="623"/>
+        <location filename="../main.qml" line="635"/>
+        <location filename="../main.qml" line="677"/>
+        <location filename="../main.qml" line="686"/>
+        <location filename="../main.qml" line="738"/>
+        <location filename="../main.qml" line="836"/>
+        <location filename="../main.qml" line="1032"/>
+        <location filename="../main.qml" line="1177"/>
+        <location filename="../main.qml" line="1280"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="318"/>
+        <location filename="../main.qml" line="353"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>无法打开这个钱包:</translation>
     </message>
     <message>
-        <source>Synchronizing blocks %1 / %2</source>
-        <translation type="vanished">同步区块中 %1 / %2</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="349"/>
+        <location filename="../main.qml" line="382"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>可用余额 (等待区块确认中)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="349"/>
+        <location filename="../main.qml" line="382"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>可用余额 (约需 ~%1 分钟确认)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="349"/>
+        <location filename="../main.qml" line="382"/>
         <source>Unlocked balance</source>
         <translation>可用余额</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="401"/>
+        <location filename="../main.qml" line="435"/>
+        <source>Remaining blocks (local node):</source>
+        <translation>剩余区块(本地节点)</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
         <translation>等待区块同步程序启动中...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="407"/>
+        <location filename="../main.qml" line="481"/>
         <source>Waiting for daemon to stop...</source>
         <translation>等待区块同步程序停止中...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="432"/>
+        <location filename="../main.qml" line="506"/>
         <source>Daemon failed to start</source>
         <translation>区块同步程序启动失败</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="433"/>
+        <location filename="../main.qml" line="507"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>请查看您的钱包与区块同步程序日志获得错误信息，您亦可尝试手动重新启动%1。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="484"/>
+        <location filename="../main.qml" line="563"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>无法创建此项交易: 区块同步程序版本错误:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="486"/>
-        <location filename="../main.qml" line="599"/>
+        <location filename="../main.qml" line="565"/>
+        <location filename="../main.qml" line="678"/>
         <source>Can&apos;t create transaction: </source>
         <translation>无法创建此项交易:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="494"/>
-        <location filename="../main.qml" line="495"/>
-        <location filename="../main.qml" line="607"/>
-        <location filename="../main.qml" line="608"/>
+        <location filename="../main.qml" line="574"/>
+        <location filename="../main.qml" line="687"/>
         <source>No unmixable outputs to sweep</source>
         <translation>没有无法混淆的输出需要去除</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="507"/>
-        <location filename="../main.qml" line="620"/>
+        <location filename="../main.qml" line="586"/>
+        <location filename="../main.qml" line="699"/>
         <source>Confirmation</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="508"/>
-        <location filename="../main.qml" line="621"/>
+        <location filename="../main.qml" line="587"/>
+        <location filename="../main.qml" line="700"/>
         <source>Please confirm transaction:
 </source>
         <translation>请确认此项交易:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="509"/>
+        <location filename="../main.qml" line="588"/>
         <source>
 Address: </source>
         <translation>
 地址: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="510"/>
+        <location filename="../main.qml" line="589"/>
         <source>
 Payment ID: </source>
         <translation>
 付款ID: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="511"/>
-        <location filename="../main.qml" line="622"/>
+        <location filename="../main.qml" line="590"/>
+        <location filename="../main.qml" line="701"/>
         <source>
 
 Amount: </source>
@@ -2283,14 +2320,14 @@ Amount: </source>
 金额: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="512"/>
-        <location filename="../main.qml" line="623"/>
+        <location filename="../main.qml" line="591"/>
+        <location filename="../main.qml" line="702"/>
         <source>
 Fee: </source>
         <translation>手续费: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="513"/>
+        <location filename="../main.qml" line="592"/>
         <source>
 
 Ringsize: </source>
@@ -2299,47 +2336,124 @@ Ringsize: </source>
 环签名大小: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="719"/>
+        <location filename="../main.qml" line="778"/>
+        <source>Payment proof</source>
+        <translation>付款证明</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="781"/>
+        <source>Couldn&apos;t generate a proof because of the following reason: 
+</source>
+        <translation>不能生成证明，因为: </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="811"/>
+        <location filename="../main.qml" line="831"/>
+        <source>Payment proof check</source>
+        <translation>校验付款证明</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="814"/>
+        <location filename="../main.qml" line="833"/>
+        <source>Bad signature</source>
+        <translation type="unfinished">签名不正确</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="822"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>这个地址接收了 %1 monero，并通过 %2 次的确认。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1284"/>
+        <location filename="../main.qml" line="833"/>
+        <source>Good signature</source>
+        <translation type="unfinished">签名正确</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1033"/>
+        <location filename="../main.qml" line="1281"/>
+        <source>Wrong password</source>
+        <translation type="unfinished">密码错误</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1108"/>
+        <source>Warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1111"/>
+        <source>Error: Filesystem is read only</source>
+        <translation>错误: 文件系统是只读的</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1113"/>
+        <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
+        <translation>警告: 目前设备上只有 %1 GB的剩余存储空间可用, 区块链数据需大约 %2 GB的空间.</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1115"/>
+        <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
+        <translation>注意: 目前设备上只有 %1 GB的剩余存储空间可用, 区块链数据需大约 %2 GB的空间.</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1117"/>
+        <source>Note: lmdb folder not found. A new folder will be created.</source>
+        <translation>注意: lmdb文件找不到. 将创建一个新的文件.</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1121"/>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1174"/>
+        <source>Password changed successfully</source>
+        <translation>密码已成功修改</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1178"/>
+        <source>Error: </source>
+        <translation type="unfinished">错误: </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1599"/>
+        <source>Tap again to close...</source>
+        <translation>再次点击将关闭</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1612"/>
         <source>Daemon is running</source>
         <translation>区块同步程序正在执行中</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1285"/>
+        <location filename="../main.qml" line="1613"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>区块同步程序将在钱包接口关闭后于后台执行。</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1287"/>
+        <location filename="../main.qml" line="1615"/>
         <source>Stop daemon</source>
         <translation>停止区块同步程序</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1322"/>
+        <location filename="../main.qml" line="1650"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>有可用的新版本 Monero 钱包:  %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <source>
-
-Mixin: </source>
-        <translation type="vanished">
-
-混淆数量: </translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="514"/>
+        <location filename="../main.qml" line="593"/>
         <source>
 Number of transactions: </source>
         <translation>
 交易数量: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="515"/>
+        <location filename="../main.qml" line="313"/>
+        <location filename="../main.qml" line="314"/>
+        <source>HIDDEN</source>
+        <translation>隐藏</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="594"/>
         <source>
 
 Description: </source>
@@ -2348,83 +2462,76 @@ Description: </source>
 描述: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="545"/>
+        <location filename="../main.qml" line="624"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>金额错误: 金额需介于 %1 到 %2 之间</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="557"/>
+        <location filename="../main.qml" line="636"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>资金不足，可用余额仅有: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="660"/>
+        <location filename="../main.qml" line="739"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>无法付款: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="663"/>
+        <location filename="../main.qml" line="742"/>
+        <location filename="../main.qml" line="1173"/>
         <source>Information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="669"/>
+        <location filename="../main.qml" line="748"/>
         <source>Money sent successfully: %1 transaction(s) </source>
         <translation> %1 笔款项已成功发送</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="669"/>
+        <location filename="../main.qml" line="748"/>
         <source>Transaction saved to file: %1</source>
         <translation>已储存 %1 笔交易至文件</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="709"/>
-        <source>Payment check</source>
-        <translation>付款确认</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="714"/>
+        <location filename="../main.qml" line="819"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>这个地址已收到 %1 monero币，但这笔交易尚未被矿工确认</translation>
     </message>
     <message>
-        <source>This address received %1 monero, with %2 confirmations</source>
-        <translation type="vanished">这个地址已收到 %1 monero币，并已经过 %2 次的确认</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="723"/>
+        <location filename="../main.qml" line="826"/>
         <source>This address received nothing</source>
         <translation>这个地址没有收到款项</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="735"/>
+        <location filename="../main.qml" line="845"/>
         <source>Balance (syncing)</source>
         <translation>总余额 (同步中)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="735"/>
+        <location filename="../main.qml" line="845"/>
         <source>Balance</source>
         <translation>总余额</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="953"/>
+        <location filename="../main.qml" line="1203"/>
         <source>Please wait...</source>
         <translation>请稍后...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="977"/>
+        <location filename="../main.qml" line="1227"/>
         <source>Program setup wizard</source>
         <translation>程序设置向导</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="992"/>
+        <location filename="../main.qml" line="1243"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1033"/>
+        <location filename="../main.qml" line="1317"/>
         <source>send to the same destination</source>
         <translation>付款至相同地址</translation>
     </message>
 </context>
 </TS>
+

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -144,8 +144,10 @@ ListView {
             onOptionClicked: {
                 // Ensure tooltip is closed
                 appWindow.toolTip.visible = false;
-                if(option === 0)
+                if(option === 0) {
                     clipboard.setText(address)
+                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
+                }
                 else if(option === 1){
                    console.log("Sending to: ", address +" "+ paymentId);
                    middlePanel.sendTo(address, paymentId, description);

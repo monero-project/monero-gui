@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -39,6 +39,7 @@ Rectangle {
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
+    property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
 
     signal dashboardClicked()
@@ -50,6 +51,7 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
     signal signClicked()
+    signal keysClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -69,6 +71,8 @@ Rectangle {
 
     width: (isMobile)? appWindow.width : 260
     color: "#FFFFFF"
+    anchors.bottom: parent.bottom
+    anchors.top: parent.top
 
     // Item with monero logo
     Item {
@@ -88,13 +92,25 @@ Rectangle {
         }
 
         Text {
+            id: viewOnlyLabel
+            visible: viewOnly
+            text: qsTr("View Only") + translationManager.emptyString
+            anchors.top: logo.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 50
+            font.bold: true
+            color: "blue"
+        }
+
+        Text {
             id: testnetLabel
             visible: persistentSettings.testnet
             text: qsTr("Testnet") + translationManager.emptyString
             anchors.top: logo.bottom
             anchors.topMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 50
+            anchors.left: viewOnly ? viewOnlyLabel.right : parent.left
+            anchors.leftMargin: viewOnly ? 10 : 50
             font.bold: true
             color: "red"
         }
@@ -132,15 +148,14 @@ Rectangle {
             text: qsTr("Balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 1<br/><br/>line 2") + translationManager.emptyString
         }
 
         Row {
             visible: !isMobile
             Item {
                 anchors.verticalCenter: parent.verticalCenter
-                height: 26
-                width: 50
+                height: 26 * scaleRatio
+                width: 50 * scaleRatio
 
                 Image {
                     anchors.centerIn: parent
@@ -178,7 +193,6 @@ Rectangle {
             text: qsTr("Unlocked balance") + translationManager.emptyString
             anchors.left: parent.left
             anchors.leftMargin: 50
-            tipText: qsTr("Test tip 2<br/><br/>line 2") + translationManager.emptyString
         }
 
         Text {
@@ -230,7 +244,8 @@ Rectangle {
 
 
         Flickable {
-            contentHeight: 500
+            id:flicker
+            contentHeight: 500 * scaleRatio
             anchors.fill: parent
             clip: true
 
@@ -241,7 +256,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-
+            clip: true
             property var previousButton: transferButton
 
             // ------------- Dashboard tab ---------------
@@ -395,6 +410,7 @@ Rectangle {
             // ------------- Mining tab ---------------
             MenuButton {
                 id: miningButton
+                visible: !isAndroid && !isIOS
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString
@@ -421,7 +437,7 @@ Rectangle {
                 id: txkeyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Check payment") + translationManager.emptyString
+                text: qsTr("Prove/check") + translationManager.emptyString
                 symbol: qsTr("K") + translationManager.emptyString
                 dotColor: "#FFD781"
                 under: advancedButton
@@ -477,10 +493,41 @@ Rectangle {
                     panel.settingsClicked()
                 }
             }
+            Rectangle {
+                visible: settingsButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
+            // ------------- Sign/verify tab ---------------
+            MenuButton {
+                id: keysButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Seed & Keys") + translationManager.emptyString
+                symbol: qsTr("Y") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: settingsButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = keysButton
+                    panel.keysClicked()
+                }
+            }
+            Rectangle {
+                visible: settingsButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#505050"
+                height: 1
+            }
 
-        }
+        } // Column
 
-        }
+        } // Flickable
 
         NetworkStatusItem {
             id: networkStatus
@@ -488,15 +535,29 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
+            height: 58 * scaleRatio
         }
 
         ProgressBar {
             id: progressBar
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors.bottom: daemonProgressBar.top
+            height: 35 * scaleRatio
+            syncType: qsTr("Wallet")
+            visible: networkStatus.connected
         }
-    }
+
+        ProgressBar {
+            id: daemonProgressBar
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 35 * scaleRatio
+            syncType: qsTr("Daemon")
+            visible: networkStatus.connected
+        }
+    } // menuRect
 
 
 

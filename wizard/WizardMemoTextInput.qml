@@ -25,23 +25,23 @@ Column {
         TextEdit {
             id: memoTextInput
             property alias placeholderText: memoTextPlaceholder.text
-            textMargin: 8
+            textMargin: 8 * scaleRatio
             text: ""
             font.family: "Arial"
-            font.pixelSize: 16
+            font.pixelSize: 16 * scaleRatio
             wrapMode: TextInput.Wrap
             width: parent.width
             selectByMouse: true
-            property int minimumHeight: 100
+            property int minimumHeight: 100 * scaleRatio
             height: contentHeight > minimumHeight ? contentHeight : minimumHeight
 
             Text {
                 id: memoTextPlaceholder
                 anchors.fill:parent
-                font.pixelSize: 16
-                anchors.margins: 8
+                font.pixelSize: 16 * scaleRatio
+                anchors.margins: 8 * scaleRatio
                 font.bold:true
-                text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
+                text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
                 color: "#BABABA"
                 visible: !memoTextInput.text/* && !parent.focus*/
             }
@@ -59,7 +59,11 @@ Column {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: clipboard.setText(memoTextInput.text)
+                onClicked: {
+                    clipboard.setText(memoTextInput.text)
+                    appWindow.showStatusMessage(qsTr("Seed copied to clipboard"),3)
+                }
+
             }
         }
         Rectangle {
@@ -75,14 +79,14 @@ Column {
             Text {
                 id: wordsTipText
                 anchors.fill: parent
-                anchors.topMargin : 16
-                anchors.bottomMargin: 16
-                anchors.leftMargin: 16
-                anchors.rightMargin: 16
+                anchors.topMargin : 16 * scaleRatio
+                anchors.bottomMargin: 16 * scaleRatio
+                anchors.leftMargin: 16 * scaleRatio
+                anchors.rightMargin: 16 * scaleRatio
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.family: "Arial"
-                font.pixelSize: 15
+                font.pixelSize: 15 * scaleRatio
                 color: "#4A4646"
                 wrapMode: Text.Wrap
                 text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.")

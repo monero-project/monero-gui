@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2018, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -33,7 +33,7 @@ import QtQuick 2.2
 TextField {
     font.family: "Arial"
     horizontalAlignment: TextInput.AlignLeft
-
+    selectByMouse: true
     style: TextFieldStyle {
         textColor: "#3F3F3F"
         placeholderTextColor: "#BABABA"
