@@ -988,6 +988,9 @@ ApplicationWindow {
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
         property string bootstrapNodeAddress: ""
+        property bool segregatePreForkOutputs: true
+        property bool keyReuseMitigation2: true
+        property int segregationHeight: 0
     }
 
     // Information dialog

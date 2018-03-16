@@ -355,10 +355,66 @@ Rectangle {
                 }
             }
         }
+
+        CheckBox {
+            id: segregatePreForkOutputs
+            checked: persistentSettings.segregatePreForkOutputs
+            text: qsTr("I intend to spend on key-reusing fork(s)") + translationManager.emptyString
+            checkedIcon: "../images/checkedVioletIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
+            onClicked: {
+                persistentSettings.segregatePreForkOutputs = segregatePreForkOutputs.checked
+                if (appWindow.currentWallet) {
+                    appWindow.currentWallet.segregatePreForkOutputs(segregatePreForkOutputs.checked)
+                }
+            }
+        }
+        CheckBox {
+            id: keyReuseMitigation2
+            checked: persistentSettings.keyReuseMitigation2
+            text: qsTr("I might want to spend on key-reusing fork(s)") + translationManager.emptyString
+            checkedIcon: "../images/checkedVioletIcon.png"
+            uncheckedIcon: "../images/uncheckedIcon.png"
+            onClicked: {
+                persistentSettings.keyReuseMitigation2 = keyReuseMitigation2.checked
+                if (appWindow.currentWallet) {
+                    appWindow.currentWallet.keyReuseMitigation2(keyReuseMitigation2.checked)
+                }
+            }
+        }
+        RowLayout {
+            id: segregationHeightRow
+            anchors.topMargin: 17
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            Label {
+                id: segregationHeightLabel
+                fontSize: 14
+                text: qsTr("Segregation height:") + translationManager.emptyString
+            }
+            LineEdit {
+                id: segregationHeightLine
+                readOnly: false
+                Layout.fillWidth: true
+                validator: IntValidator { bottom: 0 }
+                onEditingFinished: {
+                    persistentSettings.segregationHeight = segregationHeightLine.text
+                    if (appWindow.currentWallet) {
+                        appWindow.currentWallet.segregationHeight(segregationHeightLine.text)
+                    }
+                }
+            }
+        }
+
     }
 
     function onPageCompleted() {
         console.log("RingDB page loaded");
+        appWindow.currentWallet.segregatePreForkOutputs(persistentSettings.segregatePreForkOutputs)
+        appWindow.currentWallet.segregationHeight(persistentSettings.segregationHeight)
+        segregationHeightLine.text = persistentSettings.segregationHeight
+        appWindow.currentWallet.keyReuseMitigation2(persistentSettings.keyReuseMitigation2)
     }
 
 }
