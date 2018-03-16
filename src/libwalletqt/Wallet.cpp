@@ -829,6 +829,21 @@ bool Wallet::setRing(const QString &key_image, const QString &ring, bool relativ
     return m_walletImpl->setRing(key_image.toStdString(), cring, relative);
 }
 
+void Wallet::segregatePreForkOutputs(bool segregate)
+{
+    m_walletImpl->segregatePreForkOutputs(segregate);
+}
+
+void Wallet::segregationHeight(quint64 height)
+{
+    m_walletImpl->segregationHeight(height);
+}
+
+void Wallet::keyReuseMitigation2(bool mitigation)
+{
+    m_walletImpl->keyReuseMitigation2(mitigation);
+}
+
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)

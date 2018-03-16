@@ -288,6 +288,11 @@ public:
     Q_INVOKABLE QString getRings(const QString &txid);
     Q_INVOKABLE bool setRing(const QString &key_image, const QString &ring, bool relative);
 
+    // key reuse mitigation options
+    Q_INVOKABLE void segregatePreForkOutputs(bool segregate);
+    Q_INVOKABLE void segregationHeight(quint64 height);
+    Q_INVOKABLE void keyReuseMitigation2(bool mitigation);
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
