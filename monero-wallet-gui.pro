@@ -350,6 +350,7 @@ TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core_rs.ts \ # Serbian
                 $$PWD/translations/monero-core_cat.ts \ # Catalan
                 $$PWD/translations/monero-core_tr.ts \ # Turkish
+                $$PWD/translations/monero-core_ua.ts \ # Ukrainian
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin

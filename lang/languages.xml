@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <languages>
 
 <!--
@@ -47,4 +47,5 @@ List of available languages for your wallet's seed:
         <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
         <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
         <language display_name="Turkish" locale="tr_TR" wallet_language="Turkish" flag="/lang/flags/tr.png" qs="none"/>
+	<language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
 </languages>
