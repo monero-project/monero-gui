@@ -130,12 +130,6 @@
         <file>lang/flags/uk.png</file>
         <file>lang/flags/usa.png</file>
         <file>lang/flags/srbija.png</file>
-        <file>lang/flags/israel.png</file>
-        <file>lang/flags/south_korea.png</file>
-        <file>lang/flags/romania.png</file>
-        <file>lang/flags/czech.png</file>
-        <file>lang/flags/slovakia.png</file>
-        <file>lang/flags/egypt.png</file>
         <file>lang/flags/catalonia.png</file>
         <file>lang/flags/tr.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
