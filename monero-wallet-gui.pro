@@ -104,6 +104,7 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lepee \
         -lunbound \
         -leasylogging \
+        -llmdb \
 }
 
 android {
