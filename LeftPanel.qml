@@ -595,8 +595,6 @@ Rectangle {
             anchors.bottom: parent.bottom
             syncType: qsTr("Daemon")
             visible: networkStatus.connected
-            anchors.leftMargin: 4 * scaleRatio
-            anchors.rightMargin: 4 * scaleRatio
             height: 62 * scaleRatio
         }
     } // menuRect
