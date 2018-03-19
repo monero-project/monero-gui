@@ -135,6 +135,7 @@ Rectangle {
                     //enabled: !walletManager.isMining()
                     id: startSoloMinerButton
                     width: 110
+                    small: true
                     text: qsTr("Start mining") + translationManager.emptyString
                     onClicked: {
                         var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
@@ -156,6 +157,7 @@ Rectangle {
                     //enabled:  walletManager.isMining()
                     id: stopSoloMinerButton
                     width: 110
+                    small: true
                     text: qsTr("Stop mining") + translationManager.emptyString
                     onClicked: {
                         walletManager.stopMining()
