@@ -588,11 +588,7 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
-
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n");
-            for (var i = 0; i < transaction.subaddrIndices.length; ++i)
-                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i]
+            transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
             transactionConfirmationPopup.text +=
                           (address === "" ? "" : (qsTr("\n\nAddress: ") + address))
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
@@ -601,7 +597,12 @@ ApplicationWindow {
                         + qsTr("\n\nRingsize: ") + (mixinCount + 1)
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
                         + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
-                        + translationManager.emptyString
+
+            for (var i = 0; i < transaction.subaddrIndices.length; ++i){
+                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
+            }
+
+            transactionConfirmationPopup.text += translationManager.emptyString;
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
         }

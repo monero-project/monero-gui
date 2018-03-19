@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
@@ -76,7 +76,7 @@ Rectangle {
         // Center
         if(!isMobile) {
             root.x = parent.width/2 - root.width/2
-            root.y = screenHeight/2 - root.height/2
+            root.y = 100
         }
         show()
         root.z = 11
@@ -89,13 +89,13 @@ Rectangle {
     }
 
     // TODO: implement without hardcoding sizes
-    width: isMobile ? screenWidth : 480
-    height: isMobile ? screenHeight : 280
+    width: isMobile ? screenWidth : 520
+    height: isMobile ? screenHeight : 380
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 }
+        anchors { fill: parent; margins: 15 }
 
         RowLayout {
             id: column
@@ -117,16 +117,14 @@ Rectangle {
                 id : dialogContent
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                font.family: "Arial"
+                renderType: Text.QtRendering
+                font.family: Style.fontLight
                 textFormat: TextEdit.AutoText
                 readOnly: true
                 font.pixelSize: 14 * scaleRatio
                 selectByMouse: false
                 wrapMode: TextEdit.Wrap
-                textColor: Style.defaultFontColor
-                style: TextAreaStyle {
-                    backgroundColor: "black"
-                }
+                color: Style.defaultFontColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -172,6 +170,38 @@ Rectangle {
         }
     }
 
+    // window borders
+    Rectangle{
+        width: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        width: 1
+        color: Style.grey
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        height: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
+
+    Rectangle{
+        height: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
 }
 
 
