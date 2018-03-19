@@ -28,40 +28,57 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import "." 1.0
 
 ListView {
     id: listView
     clip: true
     boundsBehavior: ListView.StopAtBounds
     highlightMoveDuration: 0
+    highlightFollowsCurrentItem: true
+    anchors.topMargin: 0
+    spacing: 0
 
     delegate: Rectangle {
         id: delegate
-        height: 64
+        height: 74
+        color: 'transparent';
+        anchors.topMargin: 0
         width: listView.width
 
-        LineEdit {
+        LineEditMulti {
             id: addressLine
+            //borderDisabled: true
             fontSize: 12
             readOnly: true
             width: parent.width
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 5
+            anchors.leftMargin: 5
+            anchors.topMargin: 12
+            anchors.rightMargin: 40
+            anchors.bottomMargin: 0
             onTextChanged: cursorPosition = 0
             text: address
-            showBorder: false
 
-            IconButton {
-                id: clipboardButton
-                imageSource: "../images/copyToClipboard.png"
-                onClicked: {
-                    console.log(addressLine.text + " copied to clipboard");
-                    clipboard.setText(addressLine.text);
-                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
-                }
+            showingHeader: false
+            showBorder: false
+        }
+
+        IconButton {
+            id: clipboardButton
+            imageSource: "../images/copyToClipboard.png"
+
+            onClicked: {
+                console.log(addressLine.text + " copied to clipboard");
+                clipboard.setText(addressLine.text);
+                appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
             }
+
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.verticalCenter: parent.verticalCenter
         }
 
         Text {
@@ -85,7 +102,7 @@ ListView {
             font.family: "Arial"
             font.bold: true
             font.pixelSize: 12
-            color: "#444444"
+            color: Style.greyFontColor
             text: label
         }
 
@@ -96,14 +113,46 @@ ListView {
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.rightMargin: clipboardButton.width
-            onClicked: listView.currentIndex = index
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                listView.currentIndex = index;
+            }
         }
-    }
 
-    highlight: Rectangle {
-        height: 64
-        color: '#FF4304'
-        opacity: 0.2
-        z: 2
+        Rectangle {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 1
+            color: Style.grey
+            z: 6
+        }
+
+        Rectangle {
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: 1
+            color: Style.grey
+            z: 6
+        }
+
+        Rectangle {
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            color: Style.grey
+            height: 1
+            z: 6
+        }
+
+        Rectangle {
+            width: 3
+            color: 'white'
+            visible: listView.currentIndex == index
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+        }
     }
 }

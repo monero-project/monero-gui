@@ -36,13 +36,15 @@ TextArea {
     property bool error: false
     property bool addressValidation: false
     property bool wrapAnywhere: true
+    property int fontSize: 18 * scaleRatio
     id: textArea
-    font.family: Style.fontRegular.name
-    font.pixelSize: 18 * scaleRatio
+    font.family: Style.fontRegular
+    font.pixelSize: fontSize
     font.bold: false
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: Style.defaultFontColor
+
     wrapMode: {
         if(wrapAnywhere){
             return Text.WrapAnywhere;
