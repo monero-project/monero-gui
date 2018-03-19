@@ -384,23 +384,6 @@ ApplicationWindow {
     function onWalletUpdate() {
         console.log(">>> wallet updated")
         updateBalance();
-        var unlockedBalance = walletManager.displayAmount(currentWallet.unlockedBalance);
-        var unlockedBalanceFloat = parseFloat(unlockedBalance);
-
-        if(unlockedBalanceFloat === 0){
-            // no available funds; hide the 'unlocked balance' label
-            leftPanel.unlockedBalanceVisible = false
-            leftPanel.unlockedBalanceLabelVisible = false
-        } else {
-            leftPanel.unlockedBalanceVisible = true
-            leftPanel.unlockedBalanceLabelVisible = true
-            leftPanel.unlockedBalanceText.text = unlockedBalance
-        }
-
-        // showing middlePanel unlockedBalance regardless
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText = unlockedBalance;
-        middlePanel.balanceText = leftPanel.balanceText = walletManager.displayAmount(currentWallet.balance);
-
         // Update history if new block found since last update
         if(foundNewBlock) {
             foundNewBlock = false;
