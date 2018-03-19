@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -44,9 +44,6 @@ import moneroComponents.SubaddressModel 1.0
 Rectangle {
     id: pageReceive
     color: "transparent"
-    property alias addressText : addressLine.text
-    property alias paymentIdText : paymentIdLine.text
-    property alias integratedAddressText : integratedAddressLine.text
     property var model
     property var current_address
     property alias addressText : pageReceive.current_address
@@ -156,15 +153,16 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 26 * scaleRatio
+        spacing: 20 * scaleRatio
         property int labelWidth: 120 * scaleRatio
         property int editWidth: 400 * scaleRatio
         property int lineEditFontSize: 12 * scaleRatio
         property int qrCodeSize: 240 * scaleRatio
 
+
         ColumnLayout {
-<<<<<<< HEAD
             id: addressRow
+            spacing: 0
             Label {
                 id: addressLabel
                 text: qsTr("Addresses") + translationManager.emptyString
@@ -172,10 +170,52 @@ Rectangle {
             }
 
             Rectangle {
+                id: header
+                Layout.fillWidth: true
+                Layout.topMargin: 10
+
+                height: 10
+                color: "#CC000000"
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    anchors.leftMargin: 10
+
+                    height: 1
+                    color: "#404040"
+                }
+
+                Image {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+
+                    width: 10
+                    height: 10
+
+                    source: "../images/historyBorderRadius.png"
+                }
+
+                Image {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+
+                    width: 10
+                    height: 10
+
+                    source: "../images/historyBorderRadius.png"
+                    rotation: 90
+                }
+            }
+
+            Rectangle {
                 id: tableRect
                 Layout.fillWidth: true
-                Layout.preferredHeight: 200
-                color: "#FFFFFF"
+                Layout.preferredHeight: 240
+                color: "transparent"
+
                 Scroll {
                     id: flickableScroll
                     anchors.right: table.right
@@ -183,6 +223,7 @@ Rectangle {
                     anchors.bottom: table.bottom
                     flickable: table
                 }
+
                 SubaddressTable {
                     id: table
                     anchors.fill: parent
@@ -195,11 +236,10 @@ Rectangle {
 
             RowLayout {
                 spacing: 20
+                Layout.topMargin: 20
+
                 StandardButton {
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
+                    small: true
                     text: qsTr("Create new address") + translationManager.emptyString;
                     onClicked: {
                         inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
@@ -213,10 +253,7 @@ Rectangle {
                     }
                 }
                 StandardButton {
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
+                    small: true
                     enabled: table.currentIndex > 0
                     text: qsTr("Rename") + translationManager.emptyString;
                     onClicked: {
@@ -224,123 +261,42 @@ Rectangle {
                         inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex)
                         inputDialog.onAcceptedCallback = function() {
                             appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex, inputDialog.inputText)
-=======
-            id: addressLineRow
-
-            LineEditMulti {
-                id: addressLine
-                inputLabelText: qsTr("Address") + translationManager.emptyString
-                placeholderText: qsTr("ReadOnly wallet address displayed here") + translationManager.emptyString;
-                readOnly: true
-                Layout.fillWidth: true
-                copyButton: true
-            }
-        }
-
-        GridLayout {
-            id: paymentIdRow
-            columns:2
-
-            // @TODO: copy button copies the wrong input box
-            LineEdit {
-                id: paymentIdLine
-                placeholderText: qsTr("16 hexadecimal characters") + translationManager.emptyString;
-                readOnly: false
-                onTextChanged: updatePaymentId(paymentIdLine.text)
-                inlineButtonText: "Generate"
-                inlineButton.onClicked: updatePaymentId()
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-                copyButton: true
-                labelText: qsTr("Payment ID") + qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                    <font size='2'> ( </font><a href='#'>help</a><font size='2'> )</font> ")
-                    + translationManager.emptyString
-                onLabelLinkActivated: {
-                    trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
-                    trackingHowToUseDialog.text = qsTr(
-                        "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
-                        "<p>Click Generate to create a random payment id for a new customer</p> " +
-                        "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
-                        "supports QR code scanning).</p>" +
-                        "<p>This page will automatically scan the blockchain and the tx pool " +
-                        "for incoming transactions using this QR code. If you input an amount, it will also check " +
-                        "that incoming transactions total up to that amount.</p>" +
-                        "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
-                        "confirmed in short order, but there is still a possibility they might not, so for larger " +
-                        "values you may want to wait for one or more confirmation(s).</p>"
-                    )
-                    trackingHowToUseDialog.icon = StandardIcon.Information
-                    trackingHowToUseDialog.open()
-                }
-            }
-
-            // @TODO: CLEAR BUTTON should be present as labelButton
-//            StandardButton {
-//                id: clearPaymentId
-//                enabled: !!paymentIdLine.text
-//                shadowReleasedColor: "#FF4304"
-//                shadowPressedColor: "#B32D00"
-//                releasedColor: "#FF6C3C"
-//                pressedColor: "#FF4304"
-//                text: qsTr("Clear") + translationManager.emptyString;
-//                onClicked: updatePaymentId("")
-//            }
-        }
-
-        ColumnLayout {
-            id: integratedAddressRow
-
-            LineEditMulti {
-                id: integratedAddressLine
-                inputLabelText: qsTr("Integrated address") + translationManager.emptyString
-                placeholderText: qsTr("Generate payment ID for integrated address") + translationManager.emptyString
-                readOnly: true
-                Layout.fillWidth: true
-                copyButton: true
-            }
-        }
-
-        GridLayout {
-            columns: (isMobile)? 1 : 2
-            Layout.fillWidth: true
-            columnSpacing: 32
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.minimumWidth: 200
-                    LineEdit {
-                        id: amountLine
-                        placeholderText: qsTr("Amount to receive") + translationManager.emptyString
-                        readOnly: false
-                        inlineIcon: true
-                        labelText: qsTr("Amount")
-                        Layout.fillWidth: true
-                        validator: DoubleValidator {
-                            bottom: 0.0
-                            top: 18446744.073709551615
-                            decimals: 12
-                            notation: DoubleValidator.StandardNotation
-                            locale: "C"
->>>>>>> Receive page development
                         }
                         inputDialog.onRejectedCallback = null;
                         inputDialog.open()
                     }
                 }
             }
-            ColumnLayout {
+        }
+
+        ColumnLayout {
+            id: amountRow
+            Label {
+                id: amountLabel
+                text: qsTr("Amount") + translationManager.emptyString
+                width: mainLayout.labelWidth
+            }
+
+
+            LineEdit {
+                id: amountLine
+                placeholderText: qsTr("Amount to receive") + translationManager.emptyString
+                readOnly: false
+                width: mainLayout.editWidth
                 Layout.fillWidth: true
+                validator: DoubleValidator {
+                    bottom: 0.0
+                    top: 18446744.073709551615
+                    decimals: 12
+                    notation: DoubleValidator.StandardNotation
+                    locale: "C"
+                }
             }
         }
 
-        RowLayout {
+        ColumnLayout {
             id: trackingRow
-            Layout.fillWidth: true
             visible: !isAndroid && !isIOS
-<<<<<<< HEAD
             Label {
                 id: trackingLabel
                 textFormat: Text.RichText
@@ -368,41 +324,17 @@ Rectangle {
                     trackingHowToUseDialog.open()
                 }
             }
-=======
->>>>>>> Receive page development
 
             TextEdit {
                 id: trackingLine
-                anchors.top: trackingRow.top
-                horizontalAlignment: TextInput.AlignLeft
+                readOnly: true
+                width: mainLayout.editWidth
                 Layout.fillWidth: true
                 textFormat: Text.RichText
                 text: ""
-                readOnly: true
                 selectByMouse: true
-                color: Style.defaultFontColor
-                font.family: Style.fontRegular.name
-                font.pixelSize: 16 * scaleRatio
-                leftPadding: 12 * scaleRatio
-                rightPadding: 12 * scaleRatio
-                topPadding: 8 * scaleRatio
-                bottomPadding: 8 * scaleRatio
-
-                Rectangle {
-                    color: "transparent"
-                    border.width: 1
-                    border.color: {
-                        if(trackingLine.activeFocus){
-                            return Qt.rgba(255, 255, 255, 0.35);
-                        } else {
-                            return Qt.rgba(255, 255, 255, 0.25);
-                        }
-                    }
-                    radius: 4
-                    anchors.fill: parent
-                }
+                color: 'white'
             }
-
         }
 
         MessageDialog {

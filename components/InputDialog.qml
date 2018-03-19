@@ -150,10 +150,6 @@ Item {
                 id: cancelButton
                 width: 120
                 fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 text: qsTr("Cancel") + translationManager.emptyString
                 KeyNavigation.tab: input
                 onClicked: {
@@ -165,10 +161,6 @@ Item {
                 id: okButton
                 width: 120
                 fontSize: 14
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 text: qsTr("Ok")
                 KeyNavigation.tab: cancelButton
                 onClicked: {

@@ -131,7 +131,7 @@ Item {
         id: inputItem
         height: inputHeight * scaleRatio
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
-        anchors.topMargin: showingHeader ? 12 * scaleRatio : 2
+        anchors.topMargin: showingHeader ? 12 * scaleRatio : 2 * scaleRatio
         width: parent.width
 
         Text {

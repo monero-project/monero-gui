@@ -572,17 +572,20 @@ Rectangle {
 
         TextBlock {
             Layout.topMargin: 8
+            font.pixelSize: 14
             Layout.fillWidth: true
             text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
         }
         TextBlock {
             id: guiMoneroVersion
             Layout.fillWidth: true
+            font.pixelSize: 14
             text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
         }
         TextBlock {
             id: restoreHeightText
             Layout.fillWidth: true
+            font.pixelSize: 14
             textFormat: Text.RichText
             property var txt: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C}</style>" + qsTr("Wallet creation height: ") + (currentWallet ? currentWallet.walletCreationHeight : "") + translationManager.emptyString
             property var linkTxt: qsTr(" <a href='#'>(Click to change)</a>") + translationManager.emptyString
@@ -650,14 +653,17 @@ Rectangle {
 
         TextBlock {
             Layout.fillWidth: true
+            font.pixelSize: 14
             text:  (!currentWallet) ? "" : qsTr("Wallet log path: ") + currentWallet.walletLogPath + translationManager.emptyString
         }
         TextBlock {
             Layout.fillWidth: true
+            font.pixelSize: 14
             text: qsTr("Wallet Name: ") + walletName + translationManager.emptyString
         }
         TextBlock {
             Layout.fillWidth: true
+            font.pixelSize: 14
             text:  (!currentWallet) ? "" : qsTr("Daemon log path: ") + currentWallet.daemonLogPath + translationManager.emptyString
         }
     }

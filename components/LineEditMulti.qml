@@ -32,6 +32,7 @@ import "." 1.0
 
 
 ColumnLayout {
+    id: lineditmulti
     property alias text: multiLine.text
     property alias placeholderText: placeholderLabel.text
     property alias inputLabelText: inputLabel.text
@@ -43,6 +44,10 @@ ColumnLayout {
     property bool labelButtonVisible: false
     property bool copyButton: false
     property bool wrapAnywhere: true
+    property bool showingHeader: true
+    property bool showBorder: true
+    property int fontSize: 18 * scaleRatio
+
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
 
@@ -52,6 +57,7 @@ ColumnLayout {
         color: "transparent"
         Layout.fillWidth: true
         height: (inputLabel.height + 10) * scaleRatio
+        visible: showingHeader ? true : false
 
         Text {
             id: inputLabel
@@ -91,11 +97,12 @@ ColumnLayout {
         id: multiLine
         readOnly: false
         addressValidation: true
-        anchors.top: inputLabelRect.bottom
+        anchors.top: parent.showingHeader ? inputLabelRect.bottom : parent.top
         Layout.fillWidth: true
-        topPadding: 10 * scaleRatio
+        topPadding: parent.showingHeader ? 10 * scaleRatio : 0
         bottomPadding: 10 * scaleRatio
         wrapAnywhere: parent.wrapAnywhere
+        fontSize: parent.fontSize
 
         Text {
             id: placeholderLabel
@@ -125,6 +132,7 @@ ColumnLayout {
             }
             radius: 4
             anchors.fill: parent
+            visible: lineditmulti.showBorder
         }
     }
 }
