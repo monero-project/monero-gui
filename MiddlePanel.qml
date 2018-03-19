@@ -124,7 +124,7 @@ Rectangle {
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
             }, State {
                name: "SharedRingDB"
                PropertyChanges { target: root; currentView: sharedringdbView }
