@@ -175,6 +175,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 20 * scaleRatio
                 fontSize: 14 * scaleRatio
+                color: 'black'
                 text: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
             }
             RemoteNodeEdit {
