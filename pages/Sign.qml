@@ -39,7 +39,7 @@ import moneroComponents.WalletManager 1.0
 Rectangle {
     id: mainLayout
 
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
 
@@ -105,8 +105,10 @@ Rectangle {
                 Text {
                     text: qsTr("Sign a message or file contents with your address:") + translationManager.emptyString
                     wrapMode: Text.Wrap
-                    font.pixelSize: 14 * scaleRatio
                     Layout.fillWidth: true
+                    font.family: Style.fontRegular
+                    font.pixelSize: 16 * scaleRatio
+                    color: Style.defaultFontColor
                 }
             }
 
@@ -160,7 +162,7 @@ Rectangle {
                 id: signFileRow
                 anchors.topMargin: 17
                 anchors.left: parent.left
-		anchors.right: parent.right
+                anchors.right: parent.right
 
                 FileDialog {
                     id: signFileDialog
@@ -249,8 +251,10 @@ Rectangle {
                 Text {
                     text: qsTr("Verify a message or file signature from an address:") + translationManager.emptyString
                     wrapMode: Text.Wrap
-                    font.pixelSize: 14 * scaleRatio
                     Layout.fillWidth: true
+                    font.family: Style.fontRegular
+                    font.pixelSize: 16 * scaleRatio
+                    color: Style.defaultFontColor
                 }
 
             }
@@ -359,14 +363,14 @@ Rectangle {
 
             Text {
                 id: verifyAddressLabel
-                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: " + (14 * scaleRatio) + "px;}</style>" +
+                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: " + (16 * scaleRatio) + "px;}</style>" +
                       qsTr("Signing address") +
                       "<font size='" + (2 * scaleRatio) + "'>  ( " +
                       qsTr("Paste in or select from <a href='#'>Address book</a>") +
                       " )</font>" +
                       translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 16 * scaleRatio
                 Layout.fillWidth: true
                 textFormat: Text.RichText
                 onLinkActivated: appWindow.showPageRequest("AddressBook")

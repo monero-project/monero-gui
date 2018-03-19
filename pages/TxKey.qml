@@ -36,7 +36,7 @@ import moneroComponents.Clipboard 1.0
 
 Rectangle {
 
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
 
@@ -87,260 +87,190 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-
+        anchors.bottom: parent.bottom
         spacing: 20
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 12
 
-        Text {
-            text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
-                       "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true;
-        }
-
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Transaction ID") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-            LineEdit {
-                id: getProofTxIdLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
-                readOnly: false
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (getProofTxIdLine.text.length > 0) {
-                            clipboard.setText(getProofTxIdLine.text)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Address") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-            LineEdit {
-                id: getProofAddressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
-                readOnly: false
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (getProofAddressLine.text.length > 0) {
-                            clipboard.setText(getProofAddressLine.text)
-                        }
-                    }
-                }
-            }
-        }
-
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Message") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-            LineEdit {
-                id: getProofMessageLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
-                readOnly: false
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (getProofMessageLine.text.length > 0) {
-                            clipboard.setText(getProofMessageLine.text)
-                        }
-                    }
-                }
-            }
-        }
-
-        StandardButton {
+        // solo
+        ColumnLayout {
+            id: soloBox
             anchors.left: parent.left
-            anchors.topMargin: 17
-            width: 60
-            text: qsTr("Generate") + translationManager.emptyString
-            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
-            onClicked: {
-                console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
-                root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
-            }
-        }
+            anchors.right: parent.right
+            anchors.top: parent.top
+            spacing: 20
 
-        // underline
-        Rectangle {
-            height: 1
-            color: "#DBDBDB"
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            anchors.bottomMargin: 3
-
-        }
-
-        Text {
-            text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
-                       "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true;
-        }
-
-        RowLayout {
             Label {
-                fontSize: 14
-                text: qsTr("Transaction ID") + translationManager.emptyString
-                width: mainLayout.labelWidth
+                id: soloTitleLabel
+                fontSize: 24
+                text: qsTr("Prove Transaction") + translationManager.emptyString
             }
 
-            LineEdit {
-                id: checkProofTxIdLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
-                readOnly: false
-                width: mainLayout.editWidth
+            Text {
+                text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
+                           "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
+                wrapMode: Text.Wrap
                 Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (checkProofTxIdLine.text.length > 0) {
-                            clipboard.setText(checkProofTxIdLine.text)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Address") + translationManager.emptyString
-                width: mainLayout.labelWidth
+                font.family: Style.fontRegular
+                font.pixelSize: 14 * scaleRatio
+                color: Style.defaultFontColor
             }
 
-            LineEdit {
-                id: checkProofAddressLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
-                readOnly: false
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (checkProofAddressLine.text.length > 0) {
-                            clipboard.setText(checkProofAddressLine.text)
-                        }
-                    }
+            RowLayout {
+                LineEdit {
+                    labelText: qsTr("Transaction ID") + translationManager.emptyString
+                    id: getProofTxIdLine
+                    fontSize: 16 * scaleRatio
+                    placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
+                    readOnly: false
+                    Layout.fillWidth: true
+                    copyButton: true
                 }
             }
-        }
 
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Message") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-            LineEdit {
-                id: checkProofMessageLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
-                readOnly: false
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (checkProofMessageLine.text.length > 0) {
-                            clipboard.setText(checkProofMessageLine.text)
-                        }
-                    }
+            RowLayout {
+                LineEdit {
+                    id: getProofAddressLine
+                    labelText: qsTr("Address") + translationManager.emptyString
+                    fontSize: 16 * scaleRatio
+                    placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
+                    readOnly: false
+                    Layout.fillWidth: true
+                    copyButton: true
                 }
             }
-        }
 
-        RowLayout {
-            Label {
-                fontSize: 14
-                text: qsTr("Signature") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
-
-
-            LineEdit {
-                id: checkProofSignatureLine
-                fontSize: mainLayout.lineEditFontSize
-                placeholderText: qsTr("Paste tx proof") + translationManager.emptyString;
-                readOnly: false
-
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-
-                IconButton {
-                    imageSource: "../images/copyToClipboard.png"
-                    onClicked: {
-                        if (checkProofSignatureLine.text.length > 0) {
-                            clipboard.setText(checkProofSignatureLine.text)
-                        }
-                    }
+            RowLayout {
+                LineEdit {
+                    id: getProofMessageLine
+                    fontSize: 16 * scaleRatio
+                    labelText: qsTr("Message") + translationManager.emptyString
+                    placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                    readOnly: false
+                    width: mainLayout.editWidth
+                    Layout.fillWidth: true
+                    copyButton: true
                 }
             }
-        }
 
-        StandardButton {
-            anchors.left: parent.left
-            anchors.topMargin: 17
-            width: 60
-            text: qsTr("Check") + translationManager.emptyString
-            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
-            onClicked: {
-                console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
-                root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
+            StandardButton {
+                anchors.left: parent.left
+                anchors.topMargin: 17
+                width: 60
+                text: qsTr("Generate") + translationManager.emptyString
+                enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
+                onClicked: {
+                    console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
+                    root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
+                }
             }
-        }
 
-        // underline
-        Rectangle {
-            height: 1
-            color: "#DBDBDB"
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            anchors.bottomMargin: 3
+            // underline
+            Rectangle {
+                height: 1
+                color: "#404040"
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                anchors.bottomMargin: 3
 
-        }
+            }
 
-        Text {
-            text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true;
+            Label {
+                id: soloTitleLabel2
+                fontSize: 24
+                text: qsTr("Check Transaction") + translationManager.emptyString
+            }
+
+            Text {
+                text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
+                           "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.family: Style.fontRegular
+                font.pixelSize: 14 * scaleRatio
+                color: Style.defaultFontColor
+            }
+
+            RowLayout {
+                LineEdit {
+                    id: checkProofTxIdLine
+                    labelText: qsTr("Transaction ID") + translationManager.emptyString
+                    fontSize: 16 * scaleRatio
+                    placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
+                    readOnly: false
+                    width: mainLayout.editWidth
+                    Layout.fillWidth: true
+                    copyButton: true
+                }
+            }
+
+            RowLayout {
+                LineEdit {
+                    id: checkProofAddressLine
+                    labelText: qsTr("Address") + translationManager.emptyString
+                    fontSize: 16 * scaleRatio
+                    placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
+                    readOnly: false
+                    width: mainLayout.editWidth
+                    Layout.fillWidth: true
+                    copyButton: true
+                }
+            }
+
+            RowLayout {
+                LineEdit {
+                    id: checkProofMessageLine
+                    fontSize: 16 * scaleRatio
+                    labelText: qsTr("Message") + translationManager.emptyString
+                    placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
+                    readOnly: false
+                    width: mainLayout.editWidth
+                    Layout.fillWidth: true
+                    copyButton: true
+                }
+            }
+
+            RowLayout {
+                LineEdit {
+                    id: checkProofSignatureLine
+                    fontSize: 16 * scaleRatio
+                    labelText: qsTr("Signature") + translationManager.emptyString
+                    placeholderText: qsTr("Paste tx proof") + translationManager.emptyString;
+                    readOnly: false
+                    width: mainLayout.editWidth
+                    Layout.fillWidth: true
+                    copyButton: true
+                }
+            }
+
+            StandardButton {
+                anchors.left: parent.left
+                anchors.topMargin: 17
+                width: 60
+                text: qsTr("Check") + translationManager.emptyString
+                enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
+                onClicked: {
+                    console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
+                    root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
+                }
+            }
+
+            // underline
+            Rectangle {
+                height: 1
+                color: "#404040"
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                anchors.bottomMargin: 3
+
+            }
+
+            Text {
+                text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.family: Style.fontRegular
+                font.pixelSize: 14 * scaleRatio
+                color: Style.defaultFontColor
+            }
         }
     }
 
