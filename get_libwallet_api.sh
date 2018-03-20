@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 MONERO_URL=https://github.com/monero-project/monero.git
 MONERO_BRANCH=master
 
@@ -13,9 +13,9 @@ BUILD_LIBWALLET=false
 
 # init and update monero submodule
 if [ ! -d $MONERO_DIR/src ]; then
-    git submodule init monero
+    git submodule update --init --recursive monero
 fi
-git submodule update --remote
+git submodule foreach git submodule update --remote --recursive
 # git -C $MONERO_DIR fetch
 # git -C $MONERO_DIR checkout release-v0.11.0.0
 
