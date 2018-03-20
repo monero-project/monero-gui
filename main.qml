@@ -57,6 +57,7 @@ ApplicationWindow {
     property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
+    property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
     property bool daemonRunning: false
     property alias toolTip: toolTip
@@ -405,6 +406,9 @@ ApplicationWindow {
         // Daemon connected
         leftPanel.networkStatus.connected = currentWallet.connected()
 
+        // Wallet height
+        var bcHeight = currentWallet.blockChainHeight();
+
         // Check daemon status
         var dCurrentBlock = currentWallet.daemonBlockChainHeight();
         var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
@@ -412,18 +416,25 @@ ApplicationWindow {
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
         daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
-        // Update daemon sync progress
-        leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock);
-        if(!daemonSynced)
+        walletSynced = bcHeight >= dTargetBlock
+
+        // Update progress bars
+        if(!daemonSynced) {
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-dCurrentBlock);
             leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
+        } else {
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Daemon is synchronized (%1)").arg(dCurrentBlock.toFixed(0)));
+            if(walletSynced)
+                leftPanel.progressBar.updateProgress(bcHeight,dTargetBlock,dTargetBlock-bcHeight, qsTr("Wallet is synchronized"))
+        }
+
         // Update wallet sync progress
         updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
         // Update transfer page status
         middlePanel.updateStatus();
 
         // Refresh is succesfull if blockchain height > 1
-        if (currentWallet.blockChainHeight() > 1){
-
+        if (bcHeight > 1){
             // Save new wallet after first refresh
             // Wallet is nomrmally saved to disk on app exit. This prevents rescan from block 0 after app crash
             if(isNewWallet){
@@ -498,6 +509,10 @@ ApplicationWindow {
         }
 
         leftPanel.progressBar.updateProgress(blockHeight,targetHeight, blocksToSync);
+
+        // If wallet is syncing, daemon is already synced
+        leftPanel.daemonProgressBar.updateProgress(1,1,0,qsTr("Daemon is synchronized"));
+
         foundNewBlock = true;
     }
 

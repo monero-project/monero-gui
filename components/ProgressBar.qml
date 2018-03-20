@@ -37,27 +37,16 @@ Rectangle {
     color: "#1C1C1C"
 
     function updateProgress(currentBlock,targetBlock, blocksToSync, statusTxt){
-        if(targetBlock == 1) {
-            fillLevel = 0
-            progressText.text = qsTr("Establishing connection...");
-            progressBar.visible = true
-            return
-        }
-
         if(targetBlock > 0) {
             var remaining = (currentBlock < targetBlock) ? targetBlock - currentBlock : 0
-            var progressLevel = (blocksToSync > 0) ? (100*(blocksToSync - remaining)/blocksToSync).toFixed(0) : 100
+            var progressLevel = (blocksToSync > 0 && blocksToSync != remaining) ? (100*(blocksToSync - remaining)/blocksToSync).toFixed(0) : 100*(currentBlock / targetBlock).toFixed(0)
             fillLevel = progressLevel
             if(typeof statusTxt != "undefined" && statusTxt != "") {
                 progressText.text = statusTxt;
             } else {
                 progressText.text = syncText + remaining.toFixed(0);
             }
-
         }
-
-        if(remaining == 0 && (typeof statusTxt == "undefined" || statusTxt == ""))
-            progressText.text = qsTr("%1 is synchronized").arg(syncType)
     }
 
     Item {
