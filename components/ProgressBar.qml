@@ -65,8 +65,8 @@ Rectangle {
             font.pixelSize: 13 * scaleRatio
             font.bold: true
             color: "white"
-            text: qsTr("Synchronizing blocks")
-            height:18 * scaleRatio
+            text: qsTr("Synchronizing %1").arg(syncType)
+            height: 18 * scaleRatio
         }
 
         Text {
@@ -98,7 +98,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 height: bar.height
-                property int maxWidth: parent.width - 4 * scaleRatio
+                property int maxWidth: bar.width - 4 * scaleRatio
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
                 // could change color based on progressbar status; if(item.fillLevel < 99 )
@@ -110,16 +110,6 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.leftMargin: 8 * scaleRatio
-
-                Text {
-                    id:progressText
-                    anchors.bottom: parent.bottom
-                    font.family: "Arial"
-                    font.pixelSize: 12 * scaleRatio
-                    color: "#000"
-                    text: qsTr("Synchronizing %1").arg(syncType)
-                    height:18 * scaleRatio
-                }
             }
         }
 
