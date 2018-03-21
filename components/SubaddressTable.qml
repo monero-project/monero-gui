@@ -28,6 +28,7 @@
 
 import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
+import "../components"
 import "." 1.0
 
 ListView {
@@ -42,7 +43,7 @@ ListView {
     delegate: Rectangle {
         id: delegate
         height: 74
-        color: 'black';
+        color: 'transparent';
         anchors.topMargin: 0
         width: listView.width
 
@@ -57,9 +58,8 @@ ListView {
             anchors.right: parent.right
             anchors.leftMargin: 5
             anchors.topMargin: 12
-            anchors.rightMargin: 40
+            anchors.rightMargin: 44
             anchors.bottomMargin: 0
-            onTextChanged: cursorPosition = 0
             text: address
 
             showingHeader: false

@@ -171,6 +171,7 @@ Rectangle {
                 id: header
                 Layout.fillWidth: true
                 Layout.topMargin: 10
+                visible: table.count > 0
 
                 height: 10
                 color: "transparent"
@@ -210,8 +211,9 @@ Rectangle {
 
             Rectangle {
                 id: tableRect
+                property int table_max_height: 240
                 Layout.fillWidth: true
-                Layout.preferredHeight: 240
+                Layout.preferredHeight: table.contentHeight < table_max_height ? table.contentHeight : table_max_height
                 color: "transparent"
 
                 Scroll {
