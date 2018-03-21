@@ -132,7 +132,6 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 anchors.bottomMargin: 3 * scaleRatio
-
             }
 
             Label {

@@ -29,6 +29,7 @@
 import QtQuick.Controls 2.2
 
 import QtQuick 2.10
+import "../js/TxUtils.js" as TxUtils
 import "." 1.0
 
 
@@ -37,6 +38,7 @@ TextArea {
     property bool addressValidation: false
     property bool wrapAnywhere: true
     property int fontSize: 18 * scaleRatio
+
     id: textArea
     font.family: Style.fontRegular
     font.pixelSize: fontSize
@@ -56,6 +58,9 @@ TextArea {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
             textArea.text = textArea.text.replace(/[^a-z0-9]/gi,'');
+            var address_ok = TxUtils.checkAddress(textArea.text, appWindow.persistentSettings.testnet);
+            if(!address_ok) error = true;
+            else error = false;
             TextArea.cursorPosition = textArea.text.length;
         }
     }
