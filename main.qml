@@ -266,6 +266,29 @@ ApplicationWindow {
 
     function connectWallet(wallet) {
         currentWallet = wallet
+
+        // TODO:
+        // When the wallet variable is undefined, it yields a zero balance.
+        // This can scare users, restart the GUI (as a quick fix).
+        //
+        // To reproduce, follow these steps:
+        // 1) Open the GUI, load up a wallet that has a balance
+        // 2) Settings -> close wallet
+        // 3) Create a new wallet
+        // 4) Settings -> close wallet
+        // 5) Open the wallet from step 1
+
+        if(!wallet || wallet === undefined || wallet.path === undefined){
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Couldn't open wallet: ") + 'please restart GUI.';
+            informationPopup.icon = StandardIcon.Critical
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                appWindow.close();
+            }
+            return;
+        }
+
         walletName = usefulName(wallet.path)
         updateSyncing(false)
 
