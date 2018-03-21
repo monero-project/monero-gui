@@ -65,6 +65,7 @@ ListView {
 
             showingHeader: false
             showBorder: false
+            addressValidation: false
         }
 
         IconButton {

@@ -35,7 +35,7 @@ ColumnLayout {
     id: lineditmulti
     property alias text: multiLine.text
     property alias placeholderText: placeholderLabel.text
-    property alias inputLabelText: inputLabel.text
+    property alias labelText: inputLabel.text
     property alias error: multiLine.error
     property alias readOnly: multiLine.readOnly
     property alias addressValidation: multiLine.addressValidation

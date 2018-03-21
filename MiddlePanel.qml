@@ -136,7 +136,7 @@ Rectangle {
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
