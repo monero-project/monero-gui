@@ -46,7 +46,7 @@ ColumnLayout {
     property bool wrapAnywhere: true
     property bool showingHeader: true
     property bool showBorder: true
-    property int fontSize: 18 * scaleRatio
+    property int fontSize: 16 * scaleRatio
 
     signal labelButtonClicked();
     signal inputLabelLinkActivated();

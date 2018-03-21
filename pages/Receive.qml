@@ -142,7 +142,6 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-
     /* main layout */
     ColumnLayout {
         id: mainLayout
@@ -159,7 +158,6 @@ Rectangle {
         property int lineEditFontSize: 12 * scaleRatio
         property int qrCodeSize: 240 * scaleRatio
 
-
         ColumnLayout {
             id: addressRow
             spacing: 0
@@ -175,7 +173,7 @@ Rectangle {
                 Layout.topMargin: 10
 
                 height: 10
-                color: "#CC000000"
+                color: "transparent"
 
                 Rectangle {
                     anchors.top: parent.top

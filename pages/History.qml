@@ -276,7 +276,7 @@ Rectangle {
                     Layout.fillWidth: true
 
                     height: 10
-                    color: "#CC000000"
+                    color: "transparent"
 
                     Rectangle {
                         anchors.top: parent.top
