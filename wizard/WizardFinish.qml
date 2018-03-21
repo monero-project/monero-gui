@@ -58,7 +58,9 @@ ColumnLayout {
         return "<table>"
             + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
             + trStart + qsTr("Wallet name") + trMiddle + wizard.settings["account_name"] + trEnd
-            + trStart + qsTr("Backup seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            // TODO: wizard.settings['wallet'].seed doesnt work anymore; yields undefined.
+//            + trStart + qsTr("Backup seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            + trStart + qsTr("Backup seed") + trMiddle + '****' + trEnd
             + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
             // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
             // + (autoDonationEnabled
