@@ -286,7 +286,6 @@ ApplicationWindow {
             informationPopup.onCloseCallback = function() {
                 appWindow.close();
             }
-            return;
         }
 
         walletName = usefulName(wallet.path)

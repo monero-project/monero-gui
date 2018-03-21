@@ -133,15 +133,24 @@ Rectangle {
         spacing: 0
 
         GridLayout {
-            columns: (isMobile)? 1 : 2
+            property int column_width: {
+                if(!isMobile){
+                    return (parent.width / 2) - 20;
+                } else {
+                    return parent.width - 20;
+                }
+            }
+
+            columns: 2
             Layout.fillWidth: true
-            columnSpacing: 26 * scaleRatio
 
             RowLayout {
                 visible: !isMobile
+                Layout.preferredWidth: parent.column_width
             }
 
             RowLayout {
+                Layout.preferredWidth: parent.column_width
                 LineEdit {
                     id: searchLine
                     fontSize: 14 * scaleRatio

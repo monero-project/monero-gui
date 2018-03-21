@@ -187,6 +187,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.bold: true
                 font.pixelSize: 16 * scaleRatio
+                color: Style.defaultFontColor
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }
