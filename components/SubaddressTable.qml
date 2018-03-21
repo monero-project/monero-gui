@@ -46,11 +46,12 @@ ListView {
         color: 'transparent';
         anchors.topMargin: 0
         width: listView.width
+        clip: true
 
         LineEditMulti {
             id: addressLine
-            //borderDisabled: true
-            fontSize: 12
+
+            fontSize: 14
             readOnly: true
             width: parent.width
             anchors.top: parent.top
@@ -58,7 +59,7 @@ ListView {
             anchors.right: parent.right
             anchors.leftMargin: 5
             anchors.topMargin: 12
-            anchors.rightMargin: 44
+            anchors.rightMargin: 54
             anchors.bottomMargin: 0
             text: address
 
