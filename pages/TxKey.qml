@@ -34,51 +34,13 @@ import QtQuick.Layouts 1.1
 import "../components"
 import moneroComponents.Clipboard 1.0
 
+import "../js/TxUtils.js" as TxUtils
+
 Rectangle {
 
     color: "transparent"
 
     Clipboard { id: clipboard }
-
-    function checkAddress(address, nettype) {
-      return walletManager.addressValid(address, nettype)
-    }
-
-    function check256(str, length) {
-        if (str.length != length)
-            return false;
-        for (var i = 0; i < length; ++i) {
-            if (str[i] >= '0' && str[i] <= '9')
-                continue;
-            if (str[i] >= 'a' && str[i] <= 'z')
-                continue;
-            if (str[i] >= 'A' && str[i] <= 'Z')
-                continue;
-            return false;
-        }
-        return true;
-    }
-
-    function checkTxID(txid) {
-        return check256(txid, 64)
-    }
-
-    function checkSignature(signature) {
-        if (signature.indexOf("OutProofV") === 0) {
-            if ((signature.length - 10) % 132 != 0)
-                return false;
-            return check256(signature, signature.length);
-        } else if (signature.indexOf("InProofV") === 0) {
-            if ((signature.length - 9) % 132 != 0)
-                return false;
-            return check256(signature, signature.length);
-        } else if (signature.indexOf("SpendProofV") === 0) {
-            if ((signature.length - 12) % 88 != 0)
-                return false;
-            return check256(signature, signature.length);
-        }
-        return false;
-    }
 
     /* main layout */
     ColumnLayout {
@@ -156,7 +118,7 @@ Rectangle {
                 anchors.topMargin: 17
                 width: 60
                 text: qsTr("Generate") + translationManager.emptyString
-                enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
+                enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
                 onClicked: {
                     console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
                     root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
@@ -246,7 +208,7 @@ Rectangle {
                 anchors.topMargin: 17
                 width: 60
                 text: qsTr("Check") + translationManager.emptyString
-                enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
+                enabled: TxUtils.checkTxID(checkProofTxIdLine.text) && TxUtils.checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
                 onClicked: {
                     console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
                     root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
@@ -278,5 +240,4 @@ Rectangle {
         console.log("TxKey page loaded");
 
     }
-
 }

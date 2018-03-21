@@ -202,5 +202,6 @@
         <file>images/historyBorderRadius.png</file>
         <file>components/HistoryTableInnerColumn.qml</file>
         <file>components/CheckBox2.qml</file>
+        <file>js/TxUtils.js</file>
     </qresource>
 </RCC>

@@ -30,6 +30,7 @@ import QtQuick 2.0
 import moneroComponents.Clipboard 1.0
 import moneroComponents.AddressBookModel 1.0
 import "../components" as MoneroComponents
+import "../js/TxUtils.js" as TxUtils
 import "." 1.0
 
 ListView {
@@ -196,19 +197,17 @@ ListView {
                 font.pixelSize: 18 * scaleRatio
                 font.bold: true
                 text: {
-                    // hack, removes trailing zeros
-                    var amount = (displayAmount * 1);
+                    var amount = (displayAmount * 1);  // * 1 removes trailing zeros
 
                     // sometimes, displayAmount is 0 - no idea why.
                     // in that case, we try to get the amount from
                     // the `destinations` string.
                     if(amount === 0){
-                        amount = destinations.split(" ")[0].split(":")[0];
+                        amount = TxUtils.destinationsToAmount(destinations);
                         amount = (amount *1);
                     }
 
-                    // sometimes this destinations string also shows 0,
-                    // at which point we run out of options.
+                    // sometimes this destinations string also shows 0 at which point we run out of options.
                     return amount + " XMR";
                 }
                 color: isOut ? "white" : "#2eb358"
@@ -251,18 +250,15 @@ ListView {
                     font.pixelSize: 16 * scaleRatio
                     text: {
                         if(isOut){
-                            var _address = destinations.split(" ")[1];
-                            if(_address === undefined) return ""
-
-                            if(_address){
-                                address = _address;
-                                var address_truncated = address.substring(0, 6) + "..." + address.substring(address.length-6);
-                                return "To " + address_truncated;
+                            address = TxUtils.destinationsToAddress(destinations);
+                            if(address){
+                                var truncated = TxUtils.addressTruncate(address);
+                                return "To " + truncated;
                             } else {
                                 return "Unknown recipient";
                             }
                         }
-                        return ""
+                        return "";
                     }
 
                     MouseArea{
@@ -411,6 +407,56 @@ ListView {
                 }
                 copyValue: {
                     return currentWallet.getUserNote(hash);
+                }
+            }
+
+            Rectangle {
+                id: proofButton
+                visible: isOut
+                color: "#404040"
+                height: 24 * scaleRatio
+                width: 24 * scaleRatio
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 36
+                radius: 20 * scaleRatio
+
+                MouseArea {
+                    id: proofButtonMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        var address = TxUtils.destinationsToAddress(destinations);
+                        if(address === undefined){
+                            console.log('getProof: Error fetching address')
+                            return;
+                        }
+
+                        var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.testnet));
+                        if(!checked){
+                            console.log('getProof: Error checking TxId and/or address');
+                        }
+
+                        console.log("getProof: Generate clicked: txid " + hash + ", address " + address);
+                        root.getProofClicked(hash, address, '');
+                    }
+
+                    onEntered: {
+                        proofButton.color = "#656565";
+                    }
+
+                    onExited: {
+                        proofButton.color = "#404040";
+                    }
+                }
+
+                Text {
+                    color: Style.defaultFontColor
+                    text: "P"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 14 * scaleRatio
                 }
             }
 
