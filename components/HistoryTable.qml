@@ -94,7 +94,7 @@ ListView {
         property bool collapsed: index ? false : true
         height: collapsed ? 180 * scaleRatio : 70 * scaleRatio
         width: listView.width
-        color: "#CC000000"
+        color: "transparent"
 
         function collapse(){
             delegate.height = 180 * scaleRatio;
