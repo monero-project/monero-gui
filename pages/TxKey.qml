@@ -45,12 +45,12 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
+        anchors.margins: 40 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        spacing: 20
+        spacing: 20 * scaleRatio
 
         // solo
         ColumnLayout {
@@ -58,11 +58,11 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            spacing: 20
+            spacing: 20 * scaleRatio
 
             Label {
                 id: soloTitleLabel
-                fontSize: 24
+                fontSize: 24 * scaleRatio
                 text: qsTr("Prove Transaction") + translationManager.emptyString
             }
 
@@ -115,8 +115,8 @@ Rectangle {
 
             StandardButton {
                 anchors.left: parent.left
-                anchors.topMargin: 17
-                width: 60
+                anchors.topMargin: 17 * scaleRatio
+                width: 60 * scaleRatio
                 text: qsTr("Generate") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
                 onClicked: {
@@ -131,13 +131,13 @@ Rectangle {
                 color: "#404040"
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3
+                anchors.bottomMargin: 3 * scaleRatio
 
             }
 
             Label {
                 id: soloTitleLabel2
-                fontSize: 24
+                fontSize: 24 * scaleRatio
                 text: qsTr("Check Transaction") + translationManager.emptyString
             }
 
@@ -205,7 +205,7 @@ Rectangle {
 
             StandardButton {
                 anchors.left: parent.left
-                anchors.topMargin: 17
+                anchors.topMargin: 17 * scaleRatio
                 width: 60
                 text: qsTr("Check") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(checkProofTxIdLine.text) && TxUtils.checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
@@ -221,7 +221,7 @@ Rectangle {
                 color: "#404040"
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3
+                anchors.bottomMargin: 3 * scaleRatio
 
             }
 

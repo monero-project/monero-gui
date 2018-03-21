@@ -202,7 +202,7 @@ Rectangle {
           id: addressLineRow
           Layout.fillWidth: true
 
-          LineEditMulti{
+          LineEditMulti {
               id: addressLine
               spacing: 0
               inputLabelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\

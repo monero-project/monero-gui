@@ -260,6 +260,16 @@ Rectangle {
         }
 
         GridLayout {
+            Layout.topMargin: 20
+            visible: table.count === 0
+
+            Label {
+                fontSize: 16 * scaleRatio
+                text: qsTr("No history yet...") + translationManager.emptyString
+            }
+        }
+
+        GridLayout {
             id: tableHeader
             columns: 1
             columnSpacing: 0
@@ -274,6 +284,7 @@ Rectangle {
                 Rectangle {
                     id: header
                     Layout.fillWidth: true
+                    visible: table.count > 0
 
                     height: 10
                     color: "transparent"
