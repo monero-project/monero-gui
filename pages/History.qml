@@ -38,7 +38,7 @@ import moneroComponents.TransactionHistoryModel 1.0
 import "../components"
 
 Rectangle {
-    id: root
+    id: mainLayout
     property var model
     property int tableHeight: !isMobile ? table.contentHeight : tableMobile.contentHeight
 
@@ -321,7 +321,7 @@ Rectangle {
                     id: table
                     visible: !isMobile
                     onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: !isMobile ? root.model : null
+                    model: !isMobile ? mainLayout.model : null
                     addressBookModel: null
 
                     Layout.fillWidth: true
@@ -332,7 +332,7 @@ Rectangle {
                     id: tableMobile
                     visible: isMobile
                     onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: isMobile ? root.model : null
+                    model: isMobile ? mainLayout.model : null
                     addressBookModel: null
 
                     Layout.fillWidth: true
