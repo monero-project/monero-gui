@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick.Controls 2.2
-import QtQuick 2.10
+import QtQuick 2.7
 import "." 1.0
 
 

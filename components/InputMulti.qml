@@ -28,7 +28,7 @@
 
 import QtQuick.Controls 2.2
 
-import QtQuick 2.10
+import QtQuick 2.7
 import "../js/TxUtils.js" as TxUtils
 import "." 1.0
 
