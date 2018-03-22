@@ -274,7 +274,7 @@ Rectangle {
 
             Label {
                 fontSize: 16 * scaleRatio
-                text: qsTr("No history yet...") + translationManager.emptyString
+                text: qsTr("No history...") + translationManager.emptyString
             }
         }
 

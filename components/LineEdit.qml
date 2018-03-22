@@ -78,9 +78,9 @@ Item {
     onTextUpdated: {
         // check to remove placeholder text when there is content
         if(item.isEmpty()){
-            placeholderLabel.visible = true
+            placeholderLabel.visible = true;
         } else {
-            placeholderLabel.visible = false
+            placeholderLabel.visible = false;
         }
     }
 
