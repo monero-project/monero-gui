@@ -203,5 +203,6 @@
         <file>components/HistoryTableInnerColumn.qml</file>
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
+        <file>images/warning.png</file>
     </qresource>
 </RCC>

@@ -122,6 +122,51 @@ Rectangle {
 
       spacing: 30 * scaleRatio
 
+      RowLayout{
+          visible: warningText.text !== ""
+
+          Rectangle {
+              id: statusRect
+              Layout.preferredHeight: warningText.height + 40
+              Layout.fillWidth: true
+
+              radius: 2
+              border.color: Qt.rgba(255, 255, 255, 0.25)
+              border.width: 1
+              color: "transparent"
+
+              GridLayout{
+                  Layout.fillWidth: true
+                  Layout.preferredHeight: warningText.height + 40
+
+                  Image {
+                      anchors.verticalCenter: statusRect.verticalCenter
+                      Layout.preferredHeight: 33
+                      Layout.preferredWidth: 33
+                      Layout.leftMargin: 10
+                      Layout.topMargin: 10
+                      source: "../images/warning.png"
+                  }
+
+                  Text {
+                      id: warningText
+                      Layout.topMargin: 12 * scaleRatio
+                      Layout.preferredWidth: statusRect.width - 80
+                      Layout.leftMargin: 6
+                      text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
+                      wrapMode: Text.Wrap
+                      font.family: Style.fontRegular
+                      font.pixelSize: 14 * scaleRatio
+                      color: Style.defaultFontColor
+                      textFormat: Text.RichText
+                      onLinkActivated: {
+                          appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
+                      }
+                  }
+              }
+          }
+      }
+
       GridLayout {
           columns: (isMobile)? 1 : 2
           Layout.fillWidth: true
@@ -131,8 +176,9 @@ Rectangle {
               Layout.fillWidth: true
 
               RowLayout {
-                  Layout.fillWidth: true
                   id: amountRow
+
+                  Layout.fillWidth: true
                   Layout.minimumWidth: 200
 
                   // Amount input
@@ -145,6 +191,7 @@ Rectangle {
                       width: 100
                       inlineButtonText: qsTr("All") + translationManager.emptyString
                       inlineButton.onClicked: amountLine.text = "(all)"
+
                       validator: DoubleValidator {
                           bottom: 0.0
                           top: 18446744.073709551615
@@ -542,23 +589,7 @@ Rectangle {
 
     }
 
-    Rectangle {
-        x: root.width/2 - width/2
-        y: root.height/2 - height/2
-        height:statusText.paintedHeight + 50 * scaleRatio
-        width:statusText.paintedWidth + 40 * scaleRatio
-        visible: statusText.text != ""
-        opacity: 0.9
 
-        Text {
-            id: statusText
-            anchors.fill:parent
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            textFormat: Text.RichText
-            onLinkActivated: { appWindow.startDaemon(appWindow.persistentSettings.daemonFlags); }
-        }
-    }
 
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus
@@ -583,35 +614,35 @@ Rectangle {
     //TODO: enable send page when we're connected and daemon is synced
 
     function updateStatus() {
+        pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
-            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
+            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             return;
         }
 
         if (currentWallet.viewOnly) {
-           // statusText.text = qsTr("Wallet is view only.")
+           // warningText.text = qsTr("Wallet is view only.")
            //return;
         }
-        pageRoot.enabled = false;
+        //pageRoot.enabled = false;
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Disconnected:
-            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
+            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             break
         case Wallet.ConnectionStatus_WrongVersion:
-            statusText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
+            warningText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
                                    "Please upgrade or connect to another daemon")
             break
         default:
             if(!appWindow.daemonSynced){
-                statusText.text = qsTr("Waiting on daemon synchronization to finish")
+                warningText.text = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready
                 pageRoot.enabled = true;
-                statusText.text = "";
+                warningText.text = "";
             }
-
         }
     }
 
