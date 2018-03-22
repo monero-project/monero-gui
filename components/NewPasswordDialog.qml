@@ -42,8 +42,8 @@ Item {
         id: bg
         z: parent.z + 1
         anchors.fill: parent
-        color: "white"
-        opacity: 0.9
+        color: "black"
+        opacity: 0.8
     }
 
     property alias password: passwordInput1.text
@@ -103,8 +103,8 @@ Item {
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 18 * scaleRatio
-                font.family: "Arial"
-                color: "#555555"
+                font.family: Style.fontLight
+                color: Style.defaultFontColor
             }
 
             TextField {
@@ -121,7 +121,7 @@ Item {
 
                 style: TextFieldStyle {
                     renderType: Text.NativeRendering
-                    textColor: "#35B05A"
+                    textColor: "black"
                     passwordCharacter: "•"
                     // no background
                     background: Rectangle {
@@ -135,15 +135,6 @@ Item {
                 }
             }
 
-            // underline
-            Rectangle {
-                height: 1
-                color: "#DBDBDB"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3
-                Layout.maximumWidth: passwordInput1.width
-            }
             // padding
             Rectangle {
                 Layout.fillWidth: true
@@ -160,8 +151,8 @@ Item {
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 18 * scaleRatio
-                font.family: "Arial"
-                color: "#555555"
+                font.family: Style.fontLight
+                color: Style.defaultFontColor
             }
 
             TextField {
@@ -178,7 +169,7 @@ Item {
 
                 style: TextFieldStyle {
                     renderType: Text.NativeRendering
-                    textColor: "#35B05A"
+                    textColor: "black"
                     passwordCharacter: "•"
                     // no background
                     background: Rectangle {
@@ -198,15 +189,6 @@ Item {
                 }
             }
 
-            // underline
-            Rectangle {
-                height: 1
-                color: "#DBDBDB"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3
-                Layout.maximumWidth: passwordInput1.width
-            }
             // padding
             Rectangle {
                 Layout.fillWidth: true
@@ -215,30 +197,31 @@ Item {
                 opacity: 0
                 color: "black"
             }
-        }
-        // Ok/Cancel buttons
-        RowLayout {
-            id: buttons
-            spacing: 60 * scaleRatio
-            Layout.alignment: Qt.AlignHCenter
-            
-            MoneroComponents.StandardButton {
-                id: cancelButton
-                text: qsTr("Cancel") + translationManager.emptyString
-                KeyNavigation.tab: passwordInput1
-                onClicked: {
-                    root.close()
-                    root.rejected()
+
+            // Ok/Cancel buttons
+            RowLayout {
+                id: buttons
+                spacing: 60 * scaleRatio
+                Layout.alignment: Qt.AlignHCenter
+
+                MoneroComponents.StandardButton {
+                    id: cancelButton
+                    text: qsTr("Cancel") + translationManager.emptyString
+                    KeyNavigation.tab: passwordInput1
+                    onClicked: {
+                        root.close()
+                        root.rejected()
+                    }
                 }
-            }
-            MoneroComponents.StandardButton {
-                id: okButton
-                text: qsTr("Continue")
-                KeyNavigation.tab: cancelButton
-                enabled: passwordInput1.text === passwordInput2.text
-                onClicked: {
-                    root.close()
-                    root.accepted()
+                MoneroComponents.StandardButton {
+                    id: okButton
+                    text: qsTr("Continue")
+                    KeyNavigation.tab: cancelButton
+                    enabled: passwordInput1.text === passwordInput2.text
+                    onClicked: {
+                        root.close()
+                        root.accepted()
+                    }
                 }
             }
         }
