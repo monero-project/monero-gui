@@ -92,7 +92,7 @@ Item {
 
             TextField {
                 id : passwordInput
-                Layout.topMargin: 8
+                Layout.topMargin: 6
                 Layout.fillWidth: true
                 anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
