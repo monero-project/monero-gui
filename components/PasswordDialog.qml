@@ -74,7 +74,7 @@ Item {
 
         ColumnLayout {
             id: column
-            //anchors {fill: parent; margins: 16 }
+
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
             Layout.maximumWidth: 400 * scaleRatio
@@ -104,7 +104,8 @@ Item {
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: "white"
+                color: Style.defaultFontColor
+
                 background: Rectangle {
                     radius: 2
                     border.color: Qt.rgba(255, 255, 255, 0.35)

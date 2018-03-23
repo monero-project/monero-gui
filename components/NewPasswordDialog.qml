@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick 2.7
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
@@ -93,42 +93,54 @@ Item {
 
         ColumnLayout {
             id: column
-            //anchors {fill: parent; margins: 16 }
+
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
+            Layout.maximumWidth: 400 * scaleRatio
 
             Label {
                 text: qsTr("Please enter new password")
-                Layout.alignment: Qt.AlignHCenter
-                Layout.columnSpan: 2
+                anchors.left: parent.left
                 Layout.fillWidth: true
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18 * scaleRatio
+
+                font.pixelSize: 16 * scaleRatio
                 font.family: Style.fontLight
+
                 color: Style.defaultFontColor
             }
 
             TextField {
                 id : passwordInput1
+                Layout.topMargin: 6
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: 400 * scaleRatio
-                horizontalAlignment: TextInput.AlignHCenter
+                anchors.left: parent.left
+                horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: "Arial"
-                font.pixelSize: 32 * scaleRatio
+                font.family: Style.fontLight
+                font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
+                bottomPadding: 10
+                leftPadding: 10
+                topPadding: 10
+                color: Style.defaultFontColor
                 KeyNavigation.tab: passwordInput2
 
-                style: TextFieldStyle {
-                    renderType: Text.NativeRendering
-                    textColor: "black"
-                    passwordCharacter: "•"
-                    // no background
-                    background: Rectangle {
-                        radius: 0
-                        border.width: 0
+                background: Rectangle {
+                    radius: 2
+                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.width: 1
+                    color: "black"
+
+                    Image {
+                        width: 12
+                        height: 16
+                        source: "../images/lockIcon.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: 20
                     }
                 }
+
                 Keys.onEscapePressed: {
                     root.close()
                     root.rejected()
@@ -146,37 +158,47 @@ Item {
 
             Label {
                 text: qsTr("Please confirm new password")
-                Layout.alignment: Qt.AlignHCenter
-                Layout.columnSpan: 2
+                anchors.left: parent.left
                 Layout.fillWidth: true
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18 * scaleRatio
+
+                font.pixelSize: 16 * scaleRatio
                 font.family: Style.fontLight
+
                 color: Style.defaultFontColor
             }
 
             TextField {
                 id : passwordInput2
+                Layout.topMargin: 6
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: 400 * scaleRatio
-                horizontalAlignment: TextInput.AlignHCenter
+                anchors.left: parent.left
+                horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: "Arial"
-                font.pixelSize: 32 * scaleRatio
+                font.family: Style.fontLight
+                font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
+                bottomPadding: 10
+                leftPadding: 10
+                topPadding: 10
+                color: Style.defaultFontColor
 
-                style: TextFieldStyle {
-                    renderType: Text.NativeRendering
-                    textColor: "black"
-                    passwordCharacter: "•"
-                    // no background
-                    background: Rectangle {
-                        radius: 0
-                        border.width: 0
+                background: Rectangle {
+                    radius: 2
+                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.width: 1
+                    color: "black"
+
+                    Image {
+                        width: 12
+                        height: 16
+                        source: "../images/lockIcon.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: 20
                     }
                 }
+
                 Keys.onReturnPressed: {
                     if (passwordInput1.text === passwordInput2.text) {
                         root.close()
@@ -201,8 +223,9 @@ Item {
             // Ok/Cancel buttons
             RowLayout {
                 id: buttons
-                spacing: 60 * scaleRatio
-                Layout.alignment: Qt.AlignHCenter
+                spacing: 16 * scaleRatio
+                Layout.topMargin: 16
+                Layout.alignment: Qt.AlignRight
 
                 MoneroComponents.StandardButton {
                     id: cancelButton
