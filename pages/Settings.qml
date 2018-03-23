@@ -228,6 +228,42 @@ Rectangle {
         }
 
         RowLayout {
+            visible: !isMobile && !persistentSettings.useRemoteNode
+            Layout.fillWidth: true
+
+            LabelSubheader {
+                text:  qsTr("Bootstrap node") + translationManager.emptyString
+            }
+        }
+
+        RowLayout {
+            visible: !isMobile && !persistentSettings.useRemoteNode
+
+            ColumnLayout {
+                Layout.fillWidth: true
+
+                RemoteNodeEdit {
+                    id: bootstrapNodeEdit
+                    Layout.minimumWidth: 100 * scaleRatio
+                    Layout.bottomMargin: 20 * scaleRatio
+
+                    lineEditBackgroundColor: "transparent"
+                    lineEditFontColor: "white"
+                    lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
+
+                    daemonAddrLabelText: qsTr("Address")
+                    daemonPortLabelText: qsTr("Port")
+                    daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
+                    daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
+                    onEditingFinished: {
+                        persistentSettings.bootstrapNodeAddress = daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+                        console.log("setting bootstrap node to " + persistentSettings.bootstrapNodeAddress)
+                    }
+                }
+            }
+        }
+
+        RowLayout {
             visible: persistentSettings.useRemoteNode
             ColumnLayout {
                 Layout.fillWidth: true
@@ -235,13 +271,17 @@ Rectangle {
                 RemoteNodeEdit {
                     id: remoteNodeEdit
                     Layout.minimumWidth: 100 * scaleRatio
-                    daemonAddrLabelText: qsTr("Address")
-                    daemonPortLabelText: qsTr("Port")
+
                     lineEditBackgroundColor: "transparent"
                     lineEditFontColor: "white"
                     lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
-                    daemonAddrText: persistentSettings.remoteNodeAddress.split(":")[0].trim()
-                    daemonPortText: (persistentSettings.remoteNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1]
+
+                    daemonAddrLabelText: qsTr("Address")
+                    daemonPortLabelText: qsTr("Port")
+
+                    property var rna: persistentSettings.remoteNodeAddress
+                    daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
+                    daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : rna.split(":")[1] : ""
                     onEditingFinished: {
                         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                         console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
@@ -308,8 +348,8 @@ Rectangle {
                     persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
 
                     // Set current daemon address to local
-                    appWindow.currentDaemonAddress = appWindow.localDaemonAddress
-                    appWindow.startDaemon(daemonFlags.text)
+                    appWindow.currentDaemonAddress = appWindow.localDaemonAddress;
+                    appWindow.startDaemon(daemonFlags.text);
                 }
             }
 
