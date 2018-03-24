@@ -107,7 +107,7 @@ Rectangle {
                 text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular
+                font.family: Style.fontRegular.name
                 font.pixelSize: 14 * scaleRatio
                 color: Style.defaultFontColor
             }

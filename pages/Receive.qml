@@ -211,7 +211,7 @@ Rectangle {
 
             Rectangle {
                 id: tableRect
-                property int table_max_height: 240
+                property int table_max_height: 260
                 Layout.fillWidth: true
                 Layout.preferredHeight: table.contentHeight < table_max_height ? table.contentHeight : table_max_height
                 color: "transparent"

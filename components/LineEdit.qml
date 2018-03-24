@@ -61,7 +61,7 @@ Item {
     property alias labelTextFormat: inputLabel.textFormat
     property string backgroundColor: "transparent"
     property string tipText: ""
-    property int labelFontSize: 14 * scaleRatio
+    property int labelFontSize: 16 * scaleRatio
     property bool labelFontBold: false
     property alias labelWrapMode: inputLabel.wrapMode
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
@@ -99,7 +99,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 2 * scaleRatio
-        font.family: Style.fontLight
+        font.family: Style.fontLight.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText

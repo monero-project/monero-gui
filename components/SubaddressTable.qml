@@ -42,7 +42,7 @@ ListView {
 
     delegate: Rectangle {
         id: delegate
-        height: 74
+        height: 80
         color: 'transparent';
         anchors.topMargin: 0
         width: listView.width
@@ -57,7 +57,7 @@ ListView {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 5
+            anchors.leftMargin: 10
             anchors.topMargin: 12
             anchors.rightMargin: 54
             anchors.bottomMargin: 0

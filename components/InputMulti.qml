@@ -40,7 +40,7 @@ TextArea {
     property int fontSize: 18 * scaleRatio
 
     id: textArea
-    font.family: Style.fontRegular
+    font.family: Style.fontRegular.name
     font.pixelSize: fontSize
     font.bold: false
     horizontalAlignment: TextInput.AlignLeft

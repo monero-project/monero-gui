@@ -140,7 +140,7 @@ Rectangle {
                   Layout.preferredHeight: warningText.height + 40
 
                   Image {
-                      anchors.verticalCenter: statusRect.verticalCenter
+                      Layout.alignment: Qt.AlignVCenter
                       Layout.preferredHeight: 33
                       Layout.preferredWidth: 33
                       Layout.leftMargin: 10
@@ -155,7 +155,7 @@ Rectangle {
                       Layout.leftMargin: 6
                       text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
                       wrapMode: Text.Wrap
-                      font.family: Style.fontRegular
+                      font.family: Style.fontRegular.name
                       font.pixelSize: 14 * scaleRatio
                       color: Style.defaultFontColor
                       textFormat: Text.RichText
@@ -210,7 +210,7 @@ Rectangle {
                   Layout.topMargin: 14
                   text: qsTr("Transaction priority") + translationManager.emptyString
                   fontBold: false
-                  fontSize: 14
+                  fontSize: 16
               }
               // Note: workaround for translations in listElements
               // ListElement: cannot use script for property value, so
@@ -408,7 +408,7 @@ Rectangle {
             Layout.fillWidth: true
             Label {
                 id: privacyLabel
-                fontSize: 14
+                fontSize: 15
                 text: ""
             }
 

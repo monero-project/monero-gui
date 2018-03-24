@@ -34,6 +34,8 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
+import "." 1.0
+
 
 Rectangle {
     id: root
@@ -105,8 +107,8 @@ Rectangle {
             Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18 * scaleRatio
-                font.family: "Arial"
+                fontSize: 18 * scaleRatio
+                fontFamily: "Arial"
                 color: Style.defaultFontColor
             }
 
@@ -118,7 +120,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 renderType: Text.QtRendering
-                font.family: Style.fontLight
+                font.family: Style.fontLight.name
                 textFormat: TextEdit.AutoText
                 readOnly: true
                 font.pixelSize: 14 * scaleRatio

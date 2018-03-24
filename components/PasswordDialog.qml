@@ -85,7 +85,7 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
-                font.family: Style.fontLight
+                font.family: Style.fontLight.name
 
                 color: Style.defaultFontColor
             }
@@ -97,7 +97,7 @@ Item {
                 anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: Style.fontLight
+                font.family: Style.fontLight.name
                 font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton

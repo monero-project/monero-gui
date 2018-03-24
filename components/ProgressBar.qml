@@ -53,6 +53,7 @@ Rectangle {
     }
 
     Item {
+        anchors.top: item.top
         anchors.topMargin: 10 * scaleRatio
         anchors.leftMargin: 15 * scaleRatio
         anchors.rightMargin: 15 * scaleRatio
@@ -60,7 +61,7 @@ Rectangle {
 
         Text {
             id: progressText
-            anchors.top: item.top
+            anchors.top: parent.top
             anchors.topMargin: 6
             font.family: Style.fontMedium.name
             font.pixelSize: 13 * scaleRatio
@@ -72,7 +73,7 @@ Rectangle {
 
         Text {
             id: progressTextValue
-            anchors.top: item.top
+            anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
             font.family: Style.fontMedium.name
