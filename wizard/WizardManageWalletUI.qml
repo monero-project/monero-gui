@@ -154,7 +154,7 @@ ColumnLayout {
 
         Label {
             Layout.topMargin: 20 * scaleRatio
-            fontFamily: "Ariel"
+            fontFamily: "Arial"
             fontColor: "#555555"
             fontSize: 14 * scaleRatio
             text:  qsTr("Wallet name")
