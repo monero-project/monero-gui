@@ -38,11 +38,12 @@ TextArea {
     property bool addressValidation: false
     property bool wrapAnywhere: true
     property int fontSize: 18 * scaleRatio
+    property bool fontBold: false
 
     id: textArea
     font.family: Style.fontRegular.name
     font.pixelSize: fontSize
-    font.bold: false
+    font.bold: fontBold
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: Style.defaultFontColor

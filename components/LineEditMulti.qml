@@ -46,6 +46,7 @@ ColumnLayout {
     property bool wrapAnywhere: true
     property bool showingHeader: true
     property bool showBorder: true
+    property bool fontBold: false
     property int fontSize: 16 * scaleRatio
 
     signal labelButtonClicked();
@@ -103,6 +104,7 @@ ColumnLayout {
         bottomPadding: 10 * scaleRatio
         wrapAnywhere: parent.wrapAnywhere
         fontSize: parent.fontSize
+        fontBold: parent.fontBold
 
         Text {
             id: placeholderLabel

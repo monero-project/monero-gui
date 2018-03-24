@@ -189,6 +189,7 @@ Rectangle {
                       labelText: qsTr("Amount") + translationManager.emptyString
                       placeholderText: qsTr("") + translationManager.emptyString
                       width: 100
+                      fontBold: true
                       inlineButtonText: qsTr("All") + translationManager.emptyString
                       inlineButton.onClicked: amountLine.text = "(all)"
 
@@ -252,6 +253,7 @@ Rectangle {
           LineEditMulti {
               id: addressLine
               spacing: 0
+              fontBold: true
               labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
@@ -308,6 +310,7 @@ Rectangle {
           // payment id input
           LineEdit {
               id: paymentIdLine
+              fontBold: true
               labelText: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
               Layout.fillWidth: true
