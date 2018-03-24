@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
@@ -101,7 +102,7 @@ Rectangle {
         // @TODO: customDecorations?
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
-        Row {
+        RowLayout {
             visible: true
             Item {
                 anchors.left: parent.left

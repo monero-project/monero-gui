@@ -63,8 +63,8 @@ ColumnLayout {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: Style.fontLight
-            font.pixelSize: 14 * scaleRatio
+            font.family: Style.fontRegular.name
+            font.pixelSize: 16 * scaleRatio
             font.bold: labelFontBold
             textFormat: Text.RichText
             color: Style.defaultFontColor

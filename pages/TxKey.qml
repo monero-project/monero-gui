@@ -71,7 +71,7 @@ Rectangle {
                            "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular
+                font.family: Style.fontRegular.name
                 font.pixelSize: 14 * scaleRatio
                 color: Style.defaultFontColor
             }
@@ -145,7 +145,7 @@ Rectangle {
                            "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular
+                font.family: Style.fontRegular.name
                 font.pixelSize: 14 * scaleRatio
                 color: Style.defaultFontColor
             }
@@ -228,7 +228,7 @@ Rectangle {
                 text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-                font.family: Style.fontRegular
+                font.family: Style.fontRegular.name
                 font.pixelSize: 14 * scaleRatio
                 color: Style.defaultFontColor
             }

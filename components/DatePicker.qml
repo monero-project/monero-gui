@@ -73,7 +73,7 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 2
             anchors.left: parent.left
-            font.family: Style.fontLight
+            font.family: Style.fontLight.name
             font.pixelSize: 14
             font.bold: false
             textFormat: Text.RichText

@@ -59,7 +59,7 @@ RowLayout {
 
             Text {
                 id: label
-                font.family: Style.fontLight
+                font.family: Style.fontLight.name
                 font.pixelSize: checkBox.fontSize
                 color: Style.defaultFontColor
                 wrapMode: Text.Wrap

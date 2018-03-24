@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import moneroComponents.Wallet 1.0
 import "." 1.0
 
@@ -50,8 +51,8 @@ Rectangle {
         return qsTr("Invalid connection status")
     }
 
-    Row {
-        height: 40 * scaleRatio
+    RowLayout {
+        Layout.preferredHeight: 40 * scaleRatio
 
         Item {
             id: iconItem

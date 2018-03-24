@@ -57,7 +57,7 @@ Item {
             if(fontFamily){
                 return fontFamily;
             } else {
-                return Style.fontLight;
+                return Style.fontRegular.name;
             }
         }
         font.pixelSize: fontSize
