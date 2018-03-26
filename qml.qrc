@@ -132,6 +132,7 @@
         <file>lang/flags/srbija.png</file>
         <file>lang/flags/catalonia.png</file>
         <file>lang/flags/tr.png</file>
+        <file>lang/flags/ukraine.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
