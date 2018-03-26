@@ -1,4 +1,4 @@
-; Monero Helium Hydra GUI Wallet Installer for Windows
+; Monero Lithium Luna GUI Wallet Installer for Windows
 ; Copyright (c) 2014-2018, The Monero Project
 ; See LICENSE
 
@@ -8,7 +8,7 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.11.1.0
+AppVersion=0.12.0.0
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -39,7 +39,7 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; .exe/.dll file possibly with version info).
 ;
 ; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
-; As of version 0.11.1.0, the Monero .exe files do not carry version info anyway in their .exe headers.
+; As of version 0.12.0.0, the Monero .exe files do not carry version info anyway in their .exe headers.
 ; The only small drawback seems to be somewhat longer update times because each and every file is
 ; copied again, even if already present with correct file date and identical content.
 ;
@@ -74,23 +74,16 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; was present in 0.10.3.1, not present anymore in 0.11.1.0
+; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
 ; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Various .qm files for translating the wallet UI "on the fly" into all supported languages
 Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs ignoreversion
 
 ; Core Qt runtime
-Source: "bin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Multimedia.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5MultimediaQuick_p.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Qml.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Quick.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Qt5XmlPatterns.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Use wildcards to deal with differences in those files between Qt version, like
+;  "Qt5MultimediaQuick_p.dll" versus "Qt5MultimediaQuick.dll" and "Qt5RemoteObjects.dll" as new file
+Source: "bin\Qt5*.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt QML elements like the local files selector "FolderListModel" and "Settings"
 Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs ignoreversion
@@ -101,8 +94,10 @@ Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs ignoreversi
 ; Qt bearer / network connection management
 Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignoreversion
 
-; Qt Windows platform plugin	
-Source: "bin\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
+; Qt Windows platform plugins	
+Source: "bin\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs ignoreversion
+Source: "bin\platforminputcontexts\*"; DestDir: "{app}\platforminputcontexts"; Flags: recursesubdirs ignoreversion
+Source: "bin\styles\*"; DestDir: "{app}\styles"; Flags: recursesubdirs ignoreversion
 
 ; Qt support for SVG icons	
 Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
@@ -121,9 +116,7 @@ Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recurs
 ; Qt graphical effects as part of the core runtime, effects like blurring and blending
 Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
 
-; Some more Qt graphical effects
-; "private" as a name for this directory looks a little strange. Historical reasons?	
-Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
+; No more Qt "private" directory in 0.12.0.0
 
 ; Qt QML files
 Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
@@ -172,16 +165,20 @@ Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; LibIconv, conversions between character encodings
 Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-; Part of cygwin? Needed by Qt somehow?
-Source: "bin\libicudt57.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuin57.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuuc57.dll"; DestDir: "{app}"; Flags: ignoreversion
+; ICU, International Components for Unicode
+; After changes for supporting UTF-8 path and file names by using Boost Locale, all those 5
+; ICU libraries are needed in 0.12.0.0
+Source: "bin\libicudt58.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuin58.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuio58.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicutu58.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuuc58.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Library for native language support, part of GNU gettext
 Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; JasPer, support for JPEG-2000
-; was present in 0.10.3.1, not present anymore in 0.11.1.0
+; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
 ; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libjpeg, C library for reading and writing JPEG image files
@@ -197,8 +194,10 @@ Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; PCRE, Perl Compatible Regular Expressions
+; "libpcre2-16-0.dll" is new for 0.12.0.0; unclear whether "libpcre16-0.dll" is still needed
 Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libpcre2-16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; libpng, the official PNG reference library
 Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -214,6 +213,10 @@ Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; zlib compression library
 Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
+
+; Stack protection
+; New for 0.12.0.0
+Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 
 [Tasks]
@@ -249,7 +252,7 @@ begin
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitmonero');
   s := 'The default folder to store the Monero blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need more than 30 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need more than 50 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
