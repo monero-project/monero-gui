@@ -102,9 +102,9 @@ Wallet::Status Wallet::status() const
     return static_cast<Status>(m_walletImpl->status());
 }
 
-bool Wallet::testnet() const
+NetworkType::Type Wallet::nettype() const
 {
-    return m_walletImpl->testnet();
+    return static_cast<NetworkType::Type>(m_walletImpl->nettype());
 }
 
 

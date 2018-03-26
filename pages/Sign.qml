@@ -43,8 +43,8 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-    function checkAddress(address, testnet) {
-      return walletManager.addressValid(address, testnet)
+    function checkAddress(address, nettype) {
+      return walletManager.addressValid(address, nettype)
     }
 
     MessageDialog {

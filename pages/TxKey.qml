@@ -40,8 +40,8 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-    function checkAddress(address, testnet) {
-      return walletManager.addressValid(address, testnet)
+    function checkAddress(address, nettype) {
+      return walletManager.addressValid(address, nettype)
     }
 
     function check256(str, length) {
@@ -188,7 +188,7 @@ Rectangle {
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
-            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.testnet))
+            enabled: checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype))
             onClicked: {
                 console.log("getProof: Generate clicked: txid " + getProofTxIdLine.text + ", address " + getProofAddressLine.text + ", message: " + getProofMessageLine.text);
                 root.getProofClicked(getProofTxIdLine.text, getProofAddressLine.text, getProofMessageLine.text)
@@ -328,7 +328,7 @@ Rectangle {
             shadowPressedColor: "#B32D00"
             releasedColor: "#FF6C3C"
             pressedColor: "#FF4304"
-            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.testnet)))
+            enabled: checkTxID(checkProofTxIdLine.text) && checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype)))
             onClicked: {
                 console.log("checkProof: Check clicked: txid " + checkProofTxIdLine.text + ", address " + checkProofAddressLine.text + ", message " + checkProofMessageLine.text + ", signature " + checkProofSignatureLine.text);
                 root.checkProofClicked(checkProofTxIdLine.text, checkProofAddressLine.text, checkProofMessageLine.text, checkProofSignatureLine.text)
