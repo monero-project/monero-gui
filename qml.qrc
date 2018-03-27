@@ -204,5 +204,6 @@
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
+        <file>images/checkedBlackIcon.png</file>
     </qresource>
 </RCC>

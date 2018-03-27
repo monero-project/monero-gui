@@ -124,7 +124,7 @@ ColumnLayout {
             CheckBox {
                 id: localNode
                 text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
+                checkedIcon: "../images/checkedBlackIcon.png"
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
