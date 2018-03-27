@@ -332,7 +332,13 @@ Rectangle {
               rightIcon: "../images/rightIcon.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+              enabled : {
+                  // Send button is enabled when:
+                  // 1) Currently opened wallet is not view-only
+                  // 2) There is no warning box displayed
+                  // 3) The transactional information is correct
+                  return !appWindow.viewOnly && warningText.text === '' && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype);
+              }
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority

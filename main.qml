@@ -611,6 +611,7 @@ ApplicationWindow {
 
             // here we show confirmation popup;
             transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
+            transactionConfirmationPopup.text = "";
             transactionConfirmationPopup.text +=
                           (address === "" ? "" : (qsTr("\n\nAddress: ") + address))
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
