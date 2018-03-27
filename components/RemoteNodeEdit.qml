@@ -40,6 +40,14 @@ GridLayout {
     property alias daemonAddrLabelText: daemonAddr.labelText
     property alias daemonPortLabelText: daemonPort.labelText
 
+    // TODO: LEGACY; remove these placeHolder variables when
+    // the wizards get redesigned to the black-theme
+    property string placeholderFontFamily: Style.fontRegular.name
+    property bool placeholderFontBold: false
+    property int placeholderFontSize: 18 * scaleRatio
+    property string placeholderColor: Style.defaultFontColor
+    property real placeholderOpacity: 0.25
+
     property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
     property string lineEditBackgroundColor: "white"
     property string lineEditFontColor: "black"
@@ -55,6 +63,11 @@ GridLayout {
         id: daemonAddr
         Layout.fillWidth: true
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
+        placeholderFontFamily: root.placeholderFontFamily
+        placeholderFontBold: root.placeholderFontBold
+        placeholderFontSize: root.placeholderFontSize
+        placeholderColor: root.placeholderColor
+        placeholderOpacity: root.placeholderOpacity
         onEditingFinished: root.editingFinished()
         borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
@@ -66,8 +79,13 @@ GridLayout {
         id: daemonPort
         Layout.fillWidth: true
         placeholderText: qsTr("Port") + translationManager.emptyString
+        placeholderFontFamily: root.placeholderFontFamily
+        placeholderFontBold: root.placeholderFontBold
+        placeholderFontSize: root.placeholderFontSize
+        placeholderColor: root.placeholderColor
+        placeholderOpacity: root.placeholderOpacity
         onEditingFinished: root.editingFinished()
-
+        legacyWizardStyle: true
         borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor

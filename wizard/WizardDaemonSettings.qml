@@ -152,6 +152,10 @@ ColumnLayout {
                 Layout.preferredWidth:  200 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.blockchainDataDir
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
 
                 borderColor: Qt.rgba(0, 0, 0, 0.15)
@@ -182,6 +186,12 @@ ColumnLayout {
                 Layout.minimumWidth: 300 * scaleRatio
                 opacity: localNode.checked
                 id: bootstrapNodeEdit
+
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
+
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
                 daemonPortText: {
                     var node_split = persistentSettings.bootstrapNodeAddress.split(":");
@@ -198,6 +208,7 @@ ColumnLayout {
             CheckBox {
                 id: remoteNode
                 text: qsTr("Connect to a remote node") + translationManager.emptyString
+                checkedIcon: "../images/checkedBlackIcon.png"
                 Layout.topMargin: 20 * scaleRatio
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
@@ -218,6 +229,12 @@ ColumnLayout {
                 property var rna: persistentSettings.remoteNodeAddress
                 daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
                 daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
+
                 lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
                 lineEditBackgroundColor: "white"
                 lineEditFontColor: "black"
