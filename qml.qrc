@@ -140,6 +140,7 @@
         <file>wizard/utils.js</file>
         <file>pages/Receive.qml</file>
         <file>pages/TxKey.qml</file>
+        <file>pages/SharedRingDB.qml</file>
         <file>components/IconButton.qml</file>
         <file>components/PasswordDialog.qml</file>
         <file>components/NewPasswordDialog.qml</file>
