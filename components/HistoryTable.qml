@@ -163,30 +163,6 @@ ListView {
                 color: "#808080"
             }
 
-//            // -- "BlockHeight" value
-//            TextEdit {
-//                readOnly: true
-//                selectByMouse: true
-//                width: 85
-//                anchors.bottom: parent.bottom
-//                //elide: Text.ElideRight
-//                font.family: "Arial"
-//                font.pixelSize: 13
-//                color:  (confirmations < confirmationsRequired)? "#FF6C3C" : "#545454"
-//                text: {
-//                    if (!isPending)
-//                        if(confirmations < confirmationsRequired)
-//                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired)
-//                        else
-//                            return blockHeight
-//                    if (!isOut)
-//                        return qsTr("UNCONFIRMED") + translationManager.emptyString
-//                    if (isFailed)
-//                        return qsTr("FAILED") + translationManager.emptyString
-//                    return qsTr("PENDING") + translationManager.emptyString
-//                }
-//            }
-
             Text {
                 id: amountLabel
                 anchors.left: arrowImage.right
@@ -375,12 +351,20 @@ ListView {
             HistoryTableInnerColumn{
                 anchors.left: parent.left
                 anchors.leftMargin: 30 * scaleRatio
-                labelHeader: qsTr("Payment ID")
-                labelValue: paymentId !== "" && !paymentId.startsWith("00000000") ? paymentId.substring(0, 32) + "..." : "-"
-                copyValue: {
-                    if(paymentId !== "") { return paymentId }
-                    else { return undefined }
+                labelHeader: qsTr("Blockheight")
+                labelValue: {
+                    if (!isPending)
+                        if(confirmations < confirmationsRequired)
+                            return blockHeight + " " + qsTr("(%1/%2 confirmations)").arg(confirmations).arg(confirmationsRequired);
+                        else
+                            return blockHeight;
+                    if (!isOut)
+                        return qsTr("UNCONFIRMED") + translationManager.emptyString
+                    if (isFailed)
+                        return qsTr("FAILED") + translationManager.emptyString
+                    return qsTr("PENDING") + translationManager.emptyString
                 }
+                copyValue: labelValue
             }
 
             // right column
@@ -433,7 +417,7 @@ ListView {
                             return;
                         }
 
-                        var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.testnet));
+                        var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.nettype));
                         if(!checked){
                             console.log('getProof: Error checking TxId and/or address');
                         }

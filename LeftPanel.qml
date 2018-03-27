@@ -121,7 +121,7 @@ Rectangle {
 
                 Text {
                     id: testnetLabel
-                    visible: persistentSettings.testnet
+                    visible: persistentSettings.nettype
                     text: qsTr("Testnet") + translationManager.emptyString
                     anchors.top: parent.top
                     anchors.topMargin: 8

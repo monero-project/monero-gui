@@ -784,16 +784,6 @@ Rectangle {
 
     }
 
-    // fires on every page load
-    function onPageCompleted() {
-        console.log("Settings page loaded");
-        initSettings();
-
-
-        if(typeof daemonManager != "undefined")
-            appWindow.daemonRunning =  daemonManager.running(persistentSettings.nettype)
-    }
-
     // fires only once
     Component.onCompleted: {
         if(typeof daemonManager != "undefined")

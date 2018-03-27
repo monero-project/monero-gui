@@ -276,6 +276,7 @@ linux {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+        -llmdb \
         -lcrypto
 
     if(!android) {

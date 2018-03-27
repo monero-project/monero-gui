@@ -265,7 +265,7 @@ Rectangle {
                   if (result) {
                     var parts = result.split("|")
                     if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
                       if (parts[0] === "true") {
                         if (address_ok) {
                           addressLine.text = parts[1]
@@ -332,7 +332,7 @@ Rectangle {
               rightIcon: "../images/rightIcon.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.testnet)
+              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
