@@ -86,7 +86,7 @@ ColumnLayout {
             anchors.rightMargin: labelButton.visible? 4 : 0
             onClicked: {
                 if (multiLine.text.length > 0) {
-                    console.log(multiLine.text + " copied to clipboard");
+                    console.log("Copied to clipboard");
                     clipboard.setText(multiLine.text);
                     appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
                 }

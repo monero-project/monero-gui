@@ -82,7 +82,7 @@ Rectangle{
         }
         onClicked: {
             if(copyValue){
-                console.log(copyValue + " copied to clipboard");
+                console.log("Copied to clipboard");
                 clipboard.setText(copyValue);
                 appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
             }

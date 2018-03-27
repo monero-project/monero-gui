@@ -119,9 +119,9 @@ Item {
         anchors.right: parent.right
         onClicked: {
             if (input.text.length > 0) {
-                console.log(input.text + " copied to clipboard")
-                clipboard.setText(input.text)
-                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                console.log("Copied to clipboard");
+                clipboard.setText(input.text);
+                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
             }
         }
         visible: copyButton && input.text !== ""
