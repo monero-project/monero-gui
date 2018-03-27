@@ -242,7 +242,7 @@ ListView {
                         }
                         onClicked: {
                             if(parent.address){
-                                console.log(parent.address + " copied to clipboard");
+                                console.log("Address copied to clipboard");
                                 clipboard.setText(parent.address);
                                 appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3)
                             }
