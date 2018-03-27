@@ -24,6 +24,9 @@ get_tag
 # create local monero branch
 git -C $MONERO_DIR checkout -B $VERSIONTAG
 
+git -C $MONERO_DIR submodule init
+git -C $MONERO_DIR submodule update
+
 # Merge monero PR dependencies
 
 # Workaround for git username requirements
