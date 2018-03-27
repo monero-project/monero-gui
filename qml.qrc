@@ -118,7 +118,7 @@
         <file>lang/flags/netherlands.png</file>
         <file>lang/flags/palestine.png</file>
         <file>lang/flags/poland.png</file>
-        <file>lang/flags/portugal.png</file> 
+        <file>lang/flags/portugal.png</file>
         <file>lang/flags/romania.png</file>
         <file>lang/flags/rpa.png</file>
         <file>lang/flags/russia.png</file>
@@ -204,5 +204,6 @@
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
+        <file>images/checkedBlackIcon.png</file>
     </qresource>
 </RCC>

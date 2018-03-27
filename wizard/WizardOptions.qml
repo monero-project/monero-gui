@@ -248,7 +248,7 @@ ColumnLayout {
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
+                checkedIcon: "../images/checkedBlackIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
                 onClicked: {
@@ -267,7 +267,7 @@ ColumnLayout {
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
+                checkedIcon: "../images/checkedBlackIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
                 onClicked: {
