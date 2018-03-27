@@ -81,14 +81,6 @@ ListView {
         }
     }
 
-    function get_color(i){
-        if (i === 0){
-            return "green";
-        } else {
-            return "red";
-        }
-    }
-
     delegate: Rectangle {
         id: delegate
         property bool collapsed: index ? false : true
