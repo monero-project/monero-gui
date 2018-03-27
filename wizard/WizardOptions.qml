@@ -250,11 +250,11 @@ ColumnLayout {
                 fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.nettype === NetworkType.TESTNET;
+                checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
                 onClicked: {
                     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
                     stageNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype === NetworkType.TESTNET ? "Testnet" : "Mainnet")
+                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
                 }
             }
         }
@@ -269,11 +269,11 @@ ColumnLayout {
                 fontSize: 16 * scaleRatio
                 checkedIcon: "../images/checkedVioletIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
-                checked: appWindow.persistentSettings.nettype === NetworkType.STAGENET;
+                checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
                 onClicked: {
                     persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
                     testNet.checked = false;
-                    console.log("Network type set to ", persistentSettings.nettype === NetworkType.STAGENET ? "Stagenet" : "Mainnet")
+                    console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
                 }
             }
         }

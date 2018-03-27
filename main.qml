@@ -73,7 +73,7 @@ ApplicationWindow {
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     // Default daemon addresses
-    readonly property string localDaemonAddress : persistentSettings.nettype === NetworkType.MAINNET ? "localhost:18081" : persistentSettings.nettype === NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:18081" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
     property string currentDaemonAddress;
     property bool startLocalNodeCancelled: false
 
@@ -232,7 +232,7 @@ ApplicationWindow {
             if(isIOS)
                 wallet_path = moneroAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
-            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype === NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype === NetworkType.TESTNET ? "testnet" : "stagenet");
+            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
             walletManager.openWalletAsync(wallet_path, walletPassword,
                                               persistentSettings.nettype);
         }
