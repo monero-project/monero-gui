@@ -80,7 +80,6 @@ RowLayout {
                     anchors.centerIn: parent
                     source: "../images/whiteDropIndicator.png"
                     rotation: checkBox.checked ? 180  * scaleRatio : 0
-                    verticalAlignment: parent.verticalCenter
                 }
             }
 

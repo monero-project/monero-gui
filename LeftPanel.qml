@@ -99,7 +99,6 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        // @TODO: customDecorations?
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
         RowLayout {
@@ -122,8 +121,8 @@ Rectangle {
 
                 Text {
                     id: testnetLabel
-                    visible: persistentSettings.nettype
-                    text: qsTr("Testnet") + translationManager.emptyString
+                    visible: persistentSettings.nettype != NetworkType.MAINNET
+                    text: (persistentSettings.nettype == NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
                     anchors.top: parent.top
                     anchors.topMargin: 8
                     anchors.left: parent.left
