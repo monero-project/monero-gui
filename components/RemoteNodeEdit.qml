@@ -85,7 +85,6 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         onEditingFinished: root.editingFinished()
-        legacyWizardStyle: true
         borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
