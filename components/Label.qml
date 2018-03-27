@@ -65,34 +65,4 @@ Item {
         color: fontColor
         onLinkActivated: item.linkActivated()
     }
-
-// @TODO: figure out significance of whatIsIcon.png, remove for now
-//    Image {
-//        id: icon
-//        anchors.verticalCenter: parent.verticalCenter
-//        anchors.left: label.right
-//        anchors.leftMargin: 5 * scaleRatio
-//        source: "../images/whatIsIcon.png"
-//        visible: appWindow.whatIsEnable
-//    }
-
-//    MouseArea {
-//        anchors.fill: icon
-//        enabled: appWindow.whatIsEnable
-//        hoverEnabled: true
-//        onEntered: {
-//            icon.visible = false
-//            var pos = appWindow.mapFromItem(icon, 0, -15)
-//            tipItem.text = item.tipText
-//            tipItem.x = pos.x
-//            if(tipItem.height > 30)
-//                pos.y -= tipItem.height - 28
-//            tipItem.y = pos.y
-//            tipItem.visible = true
-//        }
-//        onExited: {
-//            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
-//            tipItem.visible = false
-//        }
-//    }
 }
