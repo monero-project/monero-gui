@@ -32,9 +32,15 @@ import "." 1.0
 Item {
     id: item
     property alias text: input.text
+
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
+    property string placeholderFontFamily: Style.fontRegular.name
+    property bool placeholderFontBold: false
     property int placeholderFontSize: 18 * scaleRatio
+    property string placeholderColor: Style.defaultFontColor
+    property real placeholderOpacity: 0.25
+
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
@@ -148,10 +154,11 @@ Item {
                 else { return 10 * scaleRatio; }
             }
 
-            opacity: 0.25
-            color: Style.defaultFontColor
-            font.family: Style.fontRegular.name
+            opacity: item.placeholderOpacity
+            color: item.placeholderColor
+            font.family: item.placeholderFontFamily
             font.pixelSize: placeholderFontSize * scaleRatio
+            font.bold: item.placeholderFontBold
             text: ""
             z: 3
         }

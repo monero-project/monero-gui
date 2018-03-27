@@ -236,7 +236,11 @@ ColumnLayout {
             id: addressLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
             borderColor: Qt.rgba(0, 0, 0, 0.15)
             backgroundColor: "white"
@@ -248,7 +252,11 @@ ColumnLayout {
             id: viewKeyLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
             borderColor: Qt.rgba(0, 0, 0, 0.15)
             backgroundColor: "white"
@@ -261,7 +269,11 @@ ColumnLayout {
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             id: spendKeyLine
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
             borderColor: Qt.rgba(0, 0, 0, 0.15)
             backgroundColor: "white"
@@ -277,7 +289,11 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             validator: IntValidator {
                 bottom:0
             }
@@ -294,7 +310,7 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: 20 * scaleRatio
             fontSize: 14
-            fontFamily: "Ariel"
+            fontFamily: "Arial"
             fontColor: "#555555"
             text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
