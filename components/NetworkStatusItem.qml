@@ -79,7 +79,6 @@ Rectangle {
                         return "../images/lightning-white.png"
                     }
                 }
-                //getConnectionStatusImage(item.connected)
             }
         }
 

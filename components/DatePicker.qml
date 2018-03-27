@@ -288,7 +288,7 @@ Item {
                 gridVisible: false
                 background: Rectangle { color: "transparent" }
                 dayDelegate: Item {
-                    z: 8
+                    z: parent.z + 1
                     implicitHeight: implicitWidth
                     implicitWidth: calendar.width / 7
 
