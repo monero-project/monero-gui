@@ -183,7 +183,14 @@ ColumnLayout {
                 opacity: localNode.checked
                 id: bootstrapNodeEdit
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
+                daemonPortText: {
+                    var node_split = persistentSettings.bootstrapNodeAddress.split(":");
+                    if(node_split.length == 2){
+                        (node_split[1].trim() == "") ? "18081" : node_split[1];
+                    } else {
+                        return ""
+                    }
+                }
             }
         }
 
