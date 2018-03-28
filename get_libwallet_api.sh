@@ -244,5 +244,4 @@ pushd $MONERO_DIR/build/$BUILD_TYPE/external/unbound
 $make_exec install -j$CPU_CORE_COUNT
 popd
 
-
 popd
