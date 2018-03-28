@@ -466,7 +466,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Shared RingDB tab ---------------
