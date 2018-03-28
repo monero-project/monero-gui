@@ -163,5 +163,9 @@
         <file>pages/Keys.qml</file>
         <file>images/menu.png</file>
         <file>images/appicon.ico</file>
+        <file>fonts/DejaVuSans-Bold.ttf</file>
+        <file>fonts/DejaVuSans-BoldOblique.ttf</file>
+        <file>fonts/DejaVuSans-Oblique.ttf</file>
+        <file>fonts/DejaVuSans.ttf</file>
     </qresource>
 </RCC>
