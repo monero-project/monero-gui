@@ -37,7 +37,7 @@ import moneroComponents.Clipboard 1.0
 
 Rectangle {
 
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
 
@@ -90,6 +90,7 @@ Rectangle {
                        "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
+            color: Style.defaultFontColor
         }
 
         Text {
@@ -117,6 +118,7 @@ Rectangle {
                 sharedRingDBDialog.icon = StandardIcon.Information
                 sharedRingDBDialog.open()
             }
+            color: Style.defaultFontColor
         }
 
         RowLayout {
@@ -140,11 +142,8 @@ Rectangle {
                 id: selectBlackballFileButton
                 anchors.rightMargin: 17 * scaleRatio
                 text: qsTr("Select") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 enabled: true
+                small: true
                 onClicked: {
                   loadBlackballFileDialog.open()
                 }
@@ -172,10 +171,7 @@ Rectangle {
                 id: loadBlackballFileButton
                 anchors.right: parent.right
                 text: qsTr("Load") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 enabled: !!appWindow.currentWallet
                 onClicked: appWindow.currentWallet.blackballOutputs(walletManager.urlToLocalPath(loadBlackballFileDialog.fileUrl), true)
             }
@@ -209,10 +205,7 @@ Rectangle {
             StandardButton {
                 id: blackballButton
                 text: qsTr("Blackball") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
                 onClicked: appWindow.currentWallet.blackballOutput(blackballOutputLine.text)
             }
@@ -221,10 +214,7 @@ Rectangle {
                 id: unblackballButton
                 anchors.right: parent.right
                 text: qsTr("Unblackball") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
                 onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputLine.text)
             }
@@ -255,6 +245,7 @@ Rectangle {
                 sharedRingDBDialog.icon = StandardIcon.Information
                 sharedRingDBDialog.open()
             }
+            color: Style.defaultFontColor
         }
 
         RowLayout {
@@ -281,10 +272,7 @@ Rectangle {
             StandardButton {
                 id: getRingButton
                 text: qsTr("Get Ring") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text)
                 onClicked: {
                     var ring = appWindow.currentWallet.getRing(keyImageLine.text)
@@ -322,7 +310,7 @@ Rectangle {
                 id: setRingRelative
                 checked: true
                 text: qsTr("Relative") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
+                checkedIcon: "../images/checkedBlackIcon.png"
                 uncheckedIcon: "../images/uncheckedIcon.png"
             }
             LineEdit {
@@ -344,10 +332,6 @@ Rectangle {
             StandardButton {
                 id: setRingButton
                 text: qsTr("Set Ring") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text) && validRing(setRingLine.text.trim(), setRingRelative.checked)
                 onClicked: {
                     var outs = setRingLine.text.trim()
@@ -360,7 +344,7 @@ Rectangle {
             id: segregatePreForkOutputs
             checked: persistentSettings.segregatePreForkOutputs
             text: qsTr("I intend to spend on key-reusing fork(s)") + translationManager.emptyString
-            checkedIcon: "../images/checkedVioletIcon.png"
+            checkedIcon: "../images/checkedBlackIcon.png"
             uncheckedIcon: "../images/uncheckedIcon.png"
             onClicked: {
                 persistentSettings.segregatePreForkOutputs = segregatePreForkOutputs.checked
@@ -373,7 +357,7 @@ Rectangle {
             id: keyReuseMitigation2
             checked: persistentSettings.keyReuseMitigation2
             text: qsTr("I might want to spend on key-reusing fork(s)") + translationManager.emptyString
-            checkedIcon: "../images/checkedVioletIcon.png"
+            checkedIcon: "../images/checkedBlackIcon.png"
             uncheckedIcon: "../images/uncheckedIcon.png"
             onClicked: {
                 persistentSettings.keyReuseMitigation2 = keyReuseMitigation2.checked
