@@ -35,6 +35,7 @@
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
+#include <QFontDatabase>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -260,6 +261,12 @@ int main(int argc, char *argv[])
     builtWithScanner = true;
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
+
+    QFontDatabase::addApplicationFont(":fonts/DejaVuSans-Bold.ttf");
+    QFontDatabase::addApplicationFont(":fonts/DejaVuSans-BoldOblique.ttf");
+    QFontDatabase::addApplicationFont(":fonts/DejaVuSans-Oblique.ttf");
+    QFontDatabase::addApplicationFont(":fonts/DejaVuSans.ttf");
+    app.setFont(QFont("DejaVu Sans"));
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
