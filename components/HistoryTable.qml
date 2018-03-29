@@ -165,18 +165,15 @@ ListView {
                 font.pixelSize: 18 * scaleRatio
                 font.bold: true
                 text: {
-                    var amount = (displayAmount * 1);  // * 1 removes trailing zeros
-
-                    // sometimes, displayAmount is 0 - no idea why.
-                    // in that case, we try to get the amount from
-                    // the `destinations` string.
-                    if(amount === 0){
-                        amount = TxUtils.destinationsToAmount(destinations);
-                        amount = (amount *1);
+                    var _amount = amount;
+                    if(_amount === 0){
+                        // *sometimes* amount is 0, while the 'destinations string' 
+                        // has the correct amount, so we try to fetch it from that instead.
+                        _amount = TxUtils.destinationsToAmount(destinations);
+                        _amount = (_amount *1);
                     }
 
-                    // sometimes this destinations string also shows 0 at which point we run out of options.
-                    return amount + " XMR";
+                    return _amount + " XMR";
                 }
                 color: isOut ? "white" : "#2eb358"
             }
