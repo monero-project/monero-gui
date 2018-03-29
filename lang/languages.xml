@@ -44,7 +44,7 @@ List of available languages for your wallet's seed:
         <language display_name="Dansk" locale="da_DK" wallet-language="English" flag="/lang/flags/denmark.png" qs="none"/>
         <language display_name="Česky" locale="cs_CZ" wallet_language="English" flag="/lang/flags/czech.png" qs="none"/>
         <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/slovakia.png" qs="none"/>
-        <language display_name="Arabic" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
+        <language display_name="العربية" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
         <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/slovenia.png" qs="none"/>
         <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
         <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
