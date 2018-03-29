@@ -217,15 +217,15 @@ win32 {
     
     LIBS+= \
         -Wl,-Bstatic \
-        -lboost_serialization-mt-s \
-        -lboost_thread-mt-s \
-        -lboost_system-mt-s \
-        -lboost_date_time-mt-s \
-        -lboost_filesystem-mt-s \
-        -lboost_regex-mt-s \
-        -lboost_chrono-mt-s \
-        -lboost_program_options-mt-s \
-        -lboost_locale-mt-s \
+        -lboost_serialization-mt \
+        -lboost_thread-mt \
+        -lboost_system-mt \
+        -lboost_date_time-mt \
+        -lboost_filesystem-mt \
+        -lboost_regex-mt \
+        -lboost_chrono-mt \
+        -lboost_program_options-mt \
+        -lboost_locale-mt \
         -licuio \
         -licuin \
         -licuuc \
