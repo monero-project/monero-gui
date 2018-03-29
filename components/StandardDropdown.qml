@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import "." 1.0
 
 Item {
     id: dropdown
@@ -38,10 +39,16 @@ Item {
     property string textColor: "#FFFFFF"
     property alias currentIndex: column.currentIndex
     property bool expanded: false
+    property int dropdownHeight: 42
+    property int fontHeaderSize: 16 * scaleRatio
+    property int fontItemSize: 14 * scaleRatio
+    property string colorHeaderBackground: "transparent"
+    property bool headerBorder: true
+    property bool headerFontBold: false
+
+    height: dropdownHeight
 
     signal changed();
-
-    height: 37 * scaleRatio
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
     function hide() { dropdown.expanded = false }
@@ -60,7 +67,6 @@ Item {
     // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
     function update() {
         firstColText.text = column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column1) + translationManager.emptyString : ""
-        secondColText.text =  column.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(column.currentIndex).column2) + translationManager.emptyString : ""
     }
 
     Item {
@@ -68,42 +74,14 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: 37 * scaleRatio
+        height: dropdown.dropdownHeight
 
         Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 0 : 1
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.shadowPressedColor : dropdown.shadowReleasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height - 1
-            y: dropdown.expanded || droplist.height > 0 ? 1 : 0
-            color: dropdown.expanded || droplist.height > 0 ? dropdown.pressedColor : dropdown.releasedColor
-            //radius: 4
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            height: 3 * scaleRatio
-            width: 3 * scaleRatio
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
-        }
-
-        Rectangle {
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: 3 * scaleRatio
-            width: 3 * scaleRatio
-            color: dropdown.pressedColor
-            visible: dropdown.expanded || droplist.height > 0
+            color: dropdown.colorHeaderBackground
+            border.width: dropdown.headerBorder ? 1 : 0
+            border.color: Qt.rgba(1, 1, 1, 0.25)
+            radius: 4
+            anchors.fill: parent
         }
 
         Text {
@@ -112,31 +90,9 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
             elide: Text.ElideRight
-            font.family: "Arial"
-            font.bold: true
-            font.pixelSize: 12 * scaleRatio
-            color: "#FFFFFF"
-        }
-
-        Text {
-            id: secondColText
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: separator.left
-            anchors.rightMargin: 12 * scaleRatio
-            width: dropdown.expanded ? w : (separator.x - 12) - (firstColText.x + firstColText.width + 5)
-            font.family: "Arial"
-            font.pixelSize: 12 * scaleRatio
-            color: "#FFFFFF"
-            property int w: 0
-            Component.onCompleted: w = implicitWidth
-        }
-
-        Rectangle {
-            id: separator
-            anchors.right: dropIndicator.left
-            anchors.verticalCenter: parent.verticalCenter
-            height: 18 * scaleRatio
-            width: 1
+            font.family: Style.fontRegular.name
+            font.bold: dropdown.headerFontBold
+            font.pixelSize: dropdown.fontHeaderSize
             color: "#FFFFFF"
         }
 
@@ -158,6 +114,8 @@ Item {
             id: dropArea
             anchors.fill: parent
             onClicked: dropdown.expanded = !dropdown.expanded
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
         }
     }
 
@@ -211,24 +169,24 @@ Item {
                 property string stringSent:  qsTr("Sent") + translationManager.emptyString
                 property string stringReceived:  qsTr("Received") + translationManager.emptyString
 
-
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 30 * scaleRatio
+                    height: (dropdown.dropdownHeight * 0.75) * scaleRatio
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
                     Text {
+                        id: col1Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: col2Text.left
                         anchors.leftMargin: 12 * scaleRatio
-                        anchors.rightMargin: column2.length > 0 ? 12  * scaleRatio: 0
-                        font.family: "Arial"
+                        anchors.rightMargin: 0
+                        font.family: Style.fontRegular.name
                         font.bold: true
-                        font.pixelSize: 12 * scaleRatio
-                        color: "#FFFFFF"
+                        font.pixelSize: fontItemSize
+                        color: itemArea.containsMouse || index === column.currentIndex || itemArea.containsMouse ? "#FA6800" : "#FFFFFF"
                         text: qsTr(column1) + translationManager.emptyString
                     }
 
@@ -237,10 +195,10 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 45 * scaleRatio
-                        font.family: "Arial"
-                        font.pixelSize: 12 * scaleRatio
+                        font.family: Style.fontRegular.name
+                        font.pixelSize: 14 * scaleRatio
                         color: "#FFFFFF"
-                        text: column2
+                        text: ""
                     }
 
                     Rectangle {
@@ -261,6 +219,8 @@ Item {
                         id: itemArea
                         anchors.fill: parent
                         hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
                         onClicked: {
                             dropdown.expanded = false
                             column.currentIndex = index

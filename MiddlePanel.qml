@@ -49,6 +49,7 @@ Rectangle {
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
     property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
+    property alias contentHeight: mainFlickable.contentHeight
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
@@ -69,7 +70,13 @@ Rectangle {
     signal getProofClicked(string txid, string address, string message);
     signal checkProofClicked(string txid, string address, string message, string signature);
 
-    color: "#F0EEEE"
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        source: "../images/middlePanelBg.jpg"
+    }
 
     onCurrentViewChanged: {
         if (previousView) {
@@ -105,7 +112,7 @@ Rectangle {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
                 PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.tableHeight + 220 * scaleRatio }
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
@@ -117,7 +124,7 @@ Rectangle {
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
             }, State {
                name: "SharedRingDB"
                PropertyChanges { target: root; currentView: sharedringdbView }
@@ -129,11 +136,11 @@ Rectangle {
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio }
+               PropertyChanges { target: mainFlickable; contentHeight: 1400 * scaleRatio }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
@@ -163,8 +170,8 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 2
-        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 30 : 0
+        anchors.margins: 18
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
         spacing: 0
 
         Flickable {
@@ -212,30 +219,14 @@ Rectangle {
 
         }// flickable
     }
+
     // border
     Rectangle {
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.top: styledRow.bottom
-        anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: 1
-        color: "#DBDBDB"
-
+        color: "#313131"
     }
 
     /* connect "payment" click */

@@ -26,8 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick 2.7
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
@@ -38,13 +38,6 @@ import "../components" as MoneroComponents
 Item {
     id: root
     visible: false
-    Rectangle {
-        id: bg
-        z: parent.z + 1
-        anchors.fill: parent
-        color: "white"
-        opacity: 0.9
-    }
 
     property alias password: passwordInput.text
     property string walletName
@@ -61,7 +54,7 @@ Item {
         titleBar.enabled = false
         show()
         root.visible = true;
-        passwordInput.focus = true
+        passwordInput.forceActiveFocus();
         passwordInput.text = ""
     }
 
@@ -81,42 +74,54 @@ Item {
 
         ColumnLayout {
             id: column
-            //anchors {fill: parent; margins: 16 }
+
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
+            Layout.maximumWidth: 400 * scaleRatio
 
             Label {
-                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for:<br>") + root.walletName : qsTr("Please enter wallet password")
-                Layout.alignment: Qt.AlignHCenter
-                Layout.columnSpan: 2
+                text: qsTr("Please enter wallet password")
+                anchors.left: parent.left
                 Layout.fillWidth: true
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18 * scaleRatio
-                font.family: "Arial"
-                color: "#555555"
+
+                font.pixelSize: 16 * scaleRatio
+                font.family: Style.fontLight.name
+
+                color: Style.defaultFontColor
             }
 
             TextField {
                 id : passwordInput
+                Layout.topMargin: 6
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: 400 * scaleRatio
-                horizontalAlignment: TextInput.AlignHCenter
+                anchors.left: parent.left
+                horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: "Arial"
-                font.pixelSize: 32 * scaleRatio
+                font.family: Style.fontLight.name
+                font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
+                bottomPadding: 10
+                leftPadding: 10
+                topPadding: 10
+                color: Style.defaultFontColor
 
-                style: TextFieldStyle {
-                    renderType: Text.NativeRendering
-                    textColor: "#35B05A"
-                    passwordCharacter: "•"
-                    // no background
-                    background: Rectangle {
-                        radius: 0
-                        border.width: 0
+                background: Rectangle {
+                    radius: 2
+                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.width: 1
+                    color: "black"
+
+                    Image {
+                        width: 12
+                        height: 16
+                        source: "../images/lockIcon.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: 20
                     }
                 }
+
                 Keys.onReturnPressed: {
                     root.close()
                     root.accepted()
@@ -127,52 +132,45 @@ Item {
                     root.rejected()
 
                 }
-
-
             }
-            // underline
-            Rectangle {
-                height: 1
-                color: "#DBDBDB"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3
-                Layout.maximumWidth: passwordInput.width
 
-            }
-        }
-        // Ok/Cancel buttons
-        RowLayout {
-            id: buttons
-            spacing: 60 * scaleRatio
-            Layout.alignment: Qt.AlignHCenter
-            
-            MoneroComponents.StandardButton {
-                id: cancelButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Cancel") + translationManager.emptyString
-                KeyNavigation.tab: passwordInput
-                onClicked: {
-                    root.close()
-                    root.rejected()
+            // Ok/Cancel buttons
+            RowLayout {
+                id: buttons
+                spacing: 16 * scaleRatio
+                Layout.topMargin: 16
+                Layout.alignment: Qt.AlignRight
+
+                MoneroComponents.StandardButton {
+                    id: cancelButton
+                    small: true
+                    text: qsTr("Cancel") + translationManager.emptyString
+                    KeyNavigation.tab: passwordInput
+                    onClicked: {
+                        root.close()
+                        root.rejected()
+                    }
+                }
+
+                MoneroComponents.StandardButton {
+                    id: okButton
+                    small: true
+                    text: qsTr("Continue")
+                    KeyNavigation.tab: cancelButton
+                    onClicked: {
+                        root.close()
+                        root.accepted()
+                    }
                 }
             }
-            MoneroComponents.StandardButton {
-                id: okButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
-                text: qsTr("Continue")
-                KeyNavigation.tab: cancelButton
-                onClicked: {
-                    root.close()
-                    root.accepted()
-                }
-            }
+
         }
+    }
+    Rectangle {
+        id: bg
+
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.8
     }
 }

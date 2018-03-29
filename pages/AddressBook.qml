@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2018, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -34,30 +34,21 @@ import moneroComponents.AddressBookModel 1.0
 
 Rectangle {
     id: root
-    color: "#F0EEEE"
+    color: "transparent"
     property var model
 
     ColumnLayout {
-        anchors.margins: 17 * scaleRatio
+        id: columnLayout
+        anchors.margins: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 10 * scaleRatio
-
-        Label {
-            id: addressLabel
-            anchors.left: parent.left
-            text: qsTr("Address") + translationManager.emptyString
-        }
+        spacing: 26 * scaleRatio
 
         RowLayout {
             StandardButton {
                 id: qrfinderButton
                 text: qsTr("Qr Code") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible : appWindow.qrScannerEnabled
                 enabled : visible
                 width: visible ? 60 * scaleRatio : 0
@@ -70,32 +61,25 @@ Rectangle {
             LineEdit {
                 Layout.fillWidth: true;
                 id: addressLine
+                labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
                 placeholderText: qsTr("4...") + translationManager.emptyString
             }
         }
 
-        Label {
-            id: paymentIdLabel
-            text: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
-            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
-                    + translationManager.emptyString
-        }
-
         LineEdit {
             id: paymentIdLine
             Layout.fillWidth: true;
+            labelText: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
-        }
-
-        Label {
-            id: descriptionLabel
-            text: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
+//            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
+//                    + translationManager.emptyString
         }
 
         LineEdit {
             id: descriptionLine
             Layout.fillWidth: true;
+            labelText: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
         }
 
@@ -104,10 +88,6 @@ Rectangle {
             id: addButton
             Layout.bottomMargin: 17 * scaleRatio
             StandardButton {
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 text: qsTr("Add") + translationManager.emptyString
                 enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
 
@@ -132,27 +112,21 @@ Rectangle {
                 }
             }
         }
-
     }
 
     Rectangle {
         id: tableRect
+        anchors.top: columnLayout.bottom
+        anchors.leftMargin: (isMobile)? 17 : 40
+        anchors.rightMargin: (isMobile)? 17 : 40
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height - addButton.y - addButton.height - 36 * scaleRatio
-        color: "#FFFFFF"
+        color: "transparent"
 
         Behavior on height {
             NumberAnimation { duration: 200; easing.type: Easing.InQuad }
-        }
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: 1
-            color: "#DBDBDB"
         }
 
         Scroll {
@@ -170,8 +144,6 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.leftMargin: 14
-            anchors.rightMargin: 14
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
         }

@@ -29,9 +29,11 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
-import "../components"
 import moneroComponents.Wallet 1.0
+import "../components"
+import "." 1.0
 
 
 Rectangle {
@@ -40,12 +42,11 @@ Rectangle {
                           int priority, string description)
     signal sweepUnmixableClicked()
 
-    color: "#F0EEEE"
-    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>" +
-                                   qsTr("Start daemon") +
-                                   "</a><font size='2'>)</font>" +
-                                   translationManager.emptyString
+    color: "transparent"
+    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
+
+    Clipboard { id: clipboard }
 
     function scaleValueToMixinCount(scaleValue) {
         var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
@@ -112,43 +113,86 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.top: parent.top
+      anchors.margins: (isMobile)? 17 : 20
+      anchors.topMargin: 40 * scaleRatio
+
       anchors.left: parent.left
+      anchors.top: parent.top
       anchors.right: parent.right
-      anchors.margins: 17 * scaleRatio
-      spacing: 0
+
+      spacing: 30 * scaleRatio
+
+      RowLayout{
+          visible: warningText.text !== ""
+
+          Rectangle {
+              id: statusRect
+              Layout.preferredHeight: warningText.height + 40
+              Layout.fillWidth: true
+
+              radius: 2
+              border.color: Qt.rgba(255, 255, 255, 0.25)
+              border.width: 1
+              color: "transparent"
+
+              GridLayout{
+                  Layout.fillWidth: true
+                  Layout.preferredHeight: warningText.height + 40
+
+                  Image {
+                      Layout.alignment: Qt.AlignVCenter
+                      Layout.preferredHeight: 33
+                      Layout.preferredWidth: 33
+                      Layout.leftMargin: 10
+                      Layout.topMargin: 10
+                      source: "../images/warning.png"
+                  }
+
+                  Text {
+                      id: warningText
+                      Layout.topMargin: 12 * scaleRatio
+                      Layout.preferredWidth: statusRect.width - 80
+                      Layout.leftMargin: 6
+                      text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
+                      wrapMode: Text.Wrap
+                      font.family: Style.fontRegular.name
+                      font.pixelSize: 14 * scaleRatio
+                      color: Style.defaultFontColor
+                      textFormat: Text.RichText
+                      onLinkActivated: {
+                          appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
+                      }
+                  }
+              }
+          }
+      }
 
       GridLayout {
           columns: (isMobile)? 1 : 2
           Layout.fillWidth: true
+          columnSpacing: 32
 
           ColumnLayout {
               Layout.fillWidth: true
-              Label {
-                  id: amountLabel
-                  text: qsTr("Amount") + translationManager.emptyString
-              }
 
               RowLayout {
-                  Layout.fillWidth: true
                   id: amountRow
-                  Layout.minimumWidth: 200
-                  Item {
-                      visible: !isMobile
-                      width: 37 * scaleRatio
-                      height: 37 * scaleRatio
 
-                      Image {
-                          anchors.centerIn: parent
-                          source: "../images/moneroIcon.png"
-                      }
-                  }
+                  Layout.fillWidth: true
+                  Layout.minimumWidth: 200
+
                   // Amount input
                   LineEdit {
-                      Layout.fillWidth: true
                       id: amountLine
+                      Layout.fillWidth: true
+                      inlineIcon: true
+                      labelText: qsTr("Amount") + translationManager.emptyString
                       placeholderText: qsTr("") + translationManager.emptyString
-                      width:100
+                      width: 100
+                      fontBold: true
+                      inlineButtonText: qsTr("All") + translationManager.emptyString
+                      inlineButton.onClicked: amountLine.text = "(all)"
+
                       validator: DoubleValidator {
                           bottom: 0.0
                           top: 18446744.073709551615
@@ -157,28 +201,17 @@ Rectangle {
                           locale: "C"
                       }
                   }
-
-                  StandardButton {
-                      id: amountAllButton
-                      width: 60 * scaleRatio
-                      text: qsTr("All") + translationManager.emptyString
-                      shadowReleasedColor: "#FF4304"
-                      shadowPressedColor: "#B32D00"
-                      releasedColor: "#FF6C3C"
-                      pressedColor: "#FF4304"
-                      enabled : true
-                      onClicked: amountLine.text = "(all)"
-                  }
               }
-
-
           }
 
           ColumnLayout {
               Layout.fillWidth: true
               Label {
                   id: transactionPriority
+                  Layout.topMargin: 14
                   text: qsTr("Transaction priority") + translationManager.emptyString
+                  fontBold: false
+                  fontSize: 16
               }
               // Note: workaround for translations in listElements
               // ListElement: cannot use script for property value, so
@@ -186,7 +219,7 @@ Rectangle {
               // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
               // For translations to work, the strings need to be listed in
               // the file components/StandardDropdown.qml too.
-              
+
               // Priorites after v5
               ListModel {
                    id: priorityModelV5
@@ -196,140 +229,116 @@ Rectangle {
                    ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
                    ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
                    ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
-
                }
 
               StandardDropdown {
                   Layout.fillWidth: true
                   id: priorityDropdown
+                  Layout.topMargin: 6
                   shadowReleasedColor: "#FF4304"
                   shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
+                  releasedColor: "#363636"
+                  pressedColor: "#202020"
               }
           }
           // Make sure dropdown is on top
           z: parent.z + 1
       }
 
-      ColumnLayout {
+      // recipient address input
+      RowLayout {
+          id: addressLineRow
           Layout.fillWidth: true
-          Label {
-              id: addressLabel
-              textFormat: Text.RichText
-              text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                    qsTr("Address") +
-                    "<font size='2'> ( " +
-                    qsTr("Paste in or select from <a href='#'>Address book</a>") +
-                    " )</font>" +
-                    translationManager.emptyString
-              onLinkActivated: appWindow.showPageRequest("AddressBook")
-              Layout.fillWidth: true
-          }
-          // recipient address input
-          RowLayout {
-              id: addressLineRow
-              Layout.fillWidth: true
 
-              StandardButton {
-                  id: qrfinderButton
-                  text: qsTr("QR Code") + translationManager.emptyString
-                  shadowReleasedColor: "#FF4304"
-                  shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
-                  visible : appWindow.qrScannerEnabled
-                  enabled : visible
-                  width: visible ? 60 * scaleRatio : 0
-                  onClicked: {
-                      cameraUi.state = "Capture"
-                      cameraUi.qrcode_decoded.connect(updateFromQrCode)
-                  }
-              }
-              LineEdit {
-                  id: addressLine
-                  Layout.fillWidth: true
-                  anchors.topMargin: 5 * scaleRatio
-                  placeholderText: "4..."
-                  // validator: RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }
-              }
-
-              StandardButton {
-                  id: resolveButton
-                  width: 60 * scaleRatio
-                  text: qsTr("Resolve") + translationManager.emptyString
-                  shadowReleasedColor: "#FF4304"
-                  shadowPressedColor: "#B32D00"
-                  releasedColor: "#FF6C3C"
-                  pressedColor: "#FF4304"
-                  enabled : isValidOpenAliasAddress(addressLine.text)
-                  onClicked: {
-                      var result = walletManager.resolveOpenAlias(addressLine.text)
-                      if (result) {
-                        var parts = result.split("|")
-                        if (parts.length == 2) {
-                          var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                          if (parts[0] === "true") {
-                            if (address_ok) {
-                              addressLine.text = parts[1]
-                              addressLine.cursorPosition = 0
-                            }
-                            else
-                              oa_message(qsTr("No valid address found at this OpenAlias address"))
-                          } else if (parts[0] === "false") {
-                            if (address_ok) {
-                              addressLine.text = parts[1]
-                              addressLine.cursorPosition = 0
-                              oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                            } else {
-                              oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                            }
-                          } else {
-                            oa_message(qsTr("Internal error"))
-                          }
+          LineEditMulti {
+              id: addressLine
+              spacing: 0
+              fontBold: true
+              labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                + translationManager.emptyString
+              labelButtonText: qsTr("Resolve") + translationManager.emptyString
+              placeholderText: "4.."
+              onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
+              onLabelButtonClicked: {
+                  var result = walletManager.resolveOpenAlias(addressLine.text)
+                  if (result) {
+                    var parts = result.split("|")
+                    if (parts.length == 2) {
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
+                      if (parts[0] === "true") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
+                        }
+                        else
+                          oa_message(qsTr("No valid address found at this OpenAlias address"))
+                      } else if (parts[0] === "false") {
+                        if (address_ok) {
+                          addressLine.text = parts[1]
+                          addressLine.cursorPosition = 0
+                          oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
                         } else {
-                          oa_message(qsTr("Internal error"))
+                          oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
                         }
                       } else {
-                        oa_message(qsTr("No address found"))
+                        oa_message(qsTr("Internal error"))
                       }
+                    } else {
+                      oa_message(qsTr("Internal error"))
+                    }
+                  } else {
+                    oa_message(qsTr("No address found"))
                   }
               }
-          }
-
-          Label {
-              id: paymentIdLabel
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
-          }
-
-          // payment id input
-          LineEdit {
-              id: paymentIdLine
-              placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
-              Layout.fillWidth: true
-          }
-
-          Label {
-              text: qsTr("Description <font size='2'>( Optional )</font>")
-                    + translationManager.emptyString
-          }
-
-          LineEdit {
-              id: descriptionLine
-              placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
-              Layout.fillWidth: true
           }
 
           StandardButton {
+              id: qrfinderButton
+              text: qsTr("QR Code") + translationManager.emptyString
+              visible : appWindow.qrScannerEnabled
+              enabled : visible
+              width: visible ? 60 * scaleRatio : 0
+              onClicked: {
+                  cameraUi.state = "Capture"
+                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
+          }
+      }
+
+      RowLayout {
+          // payment id input
+          LineEdit {
+              id: paymentIdLine
+              fontBold: true
+              labelText: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+              placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+              Layout.fillWidth: true
+          }
+      }
+
+      RowLayout {
+          LineEdit {
+              id: descriptionLine
+              labelText: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
+              placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+              Layout.fillWidth: true
+          }
+      }
+
+      RowLayout {
+          StandardButton {
               id: sendButton
-              Layout.bottomMargin: 17 * scaleRatio
-              Layout.topMargin: 17 * scaleRatio
+              rightIcon: "../images/rightIcon.png"
+              Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
-              shadowReleasedColor: "#FF4304"
-              shadowPressedColor: "#B32D00"
-              releasedColor: "#FF6C3C"
-              pressedColor: "#FF4304"
-              enabled : !appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+              enabled : {
+                  // Send button is enabled when:
+                  // 1) Currently opened wallet is not view-only
+                  // 2) There is no warning box displayed
+                  // 3) The transactional information is correct
+                  return !appWindow.viewOnly && warningText.text === '' && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype);
+              }
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -365,7 +374,7 @@ Rectangle {
     } // pageRoot
 
     Rectangle {
-        id:desaturate
+        id: desaturate
         color:"black"
         anchors.fill: parent
         opacity: 0.1
@@ -376,22 +385,19 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: 17 * scaleRatio
-        anchors.topMargin: 17 * scaleRatio
-        anchors.bottomMargin: 17 * scaleRatio
-        spacing: 10 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 32 * scaleRatio
+        spacing: 26 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
-            CheckBox {
+            CheckBox2 {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
                 onClicked: {
                     persistentSettings.transferShowAdvanced = !persistentSettings.transferShowAdvanced
                 }
-                text: qsTr("Show advanced options") + translationManager.emptyString
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
+                text: qsTr("Advanced options") + translationManager.emptyString
             }
         }
 
@@ -399,7 +405,8 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced
             Layout.fillWidth: true
             height: 1
-            color: "#DEDEDE"
+            color: Style.dividerColor
+            opacity: Style.dividerOpacity
             Layout.bottomMargin: 30 * scaleRatio
         }
 
@@ -410,7 +417,7 @@ Rectangle {
             Layout.fillWidth: true
             Label {
                 id: privacyLabel
-                fontSize: 14
+                fontSize: 15
                 text: ""
             }
 
@@ -421,8 +428,6 @@ Rectangle {
                 anchors.right: parent.right
             }
         }
-
-
 
         PrivacyLevel {
             visible: persistentSettings.transferShowAdvanced && !isMobile
@@ -442,7 +447,6 @@ Rectangle {
             onFillLevelChanged: updateMixin()
         }
 
-
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
             Layout.topMargin: 50 * scaleRatio
@@ -453,11 +457,8 @@ Rectangle {
             StandardButton {
                 id: sweepUnmixableButton
                 text: qsTr("Sweep Unmixable") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 enabled : pageRoot.enabled
+                small: true
                 onClicked: {
                     console.log("Transfer: sweepUnmixableClicked")
                     root.sweepUnmixableClicked()
@@ -467,12 +468,9 @@ Rectangle {
             StandardButton {
                 id: saveTxButton
                 text: qsTr("Create tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 visible: appWindow.viewOnly
                 enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+                small: true
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
                     var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -489,10 +487,7 @@ Rectangle {
             StandardButton {
                 id: signTxButton
                 text: qsTr("Sign tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 visible: !appWindow.viewOnly
                 onClicked: {
                     console.log("Transfer: sign tx clicked")
@@ -503,10 +498,7 @@ Rectangle {
             StandardButton {
                 id: submitTxButton
                 text: qsTr("Submit tx file") + translationManager.emptyString
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
+                small: true
                 visible: appWindow.viewOnly
                 enabled: pageRoot.enabled
                 onClicked: {
@@ -515,11 +507,7 @@ Rectangle {
                 }
             }
         }
-
-
     }
-
-
 
     //SignTxDialog
     FileDialog {
@@ -598,7 +586,7 @@ Rectangle {
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
-                informationPopup.text  = qsTr("Money sent successfully") + translationManager.emptyString
+                informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
                 informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();
@@ -610,23 +598,7 @@ Rectangle {
 
     }
 
-    Rectangle {
-        x: root.width/2 - width/2
-        y: root.height/2 - height/2
-        height:statusText.paintedHeight + 50 * scaleRatio
-        width:statusText.paintedWidth + 40 * scaleRatio
-        visible: statusText.text != ""
-        opacity: 0.9
 
-        Text {
-            id: statusText
-            anchors.fill:parent
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            textFormat: Text.RichText
-            onLinkActivated: { appWindow.startDaemon(appWindow.persistentSettings.daemonFlags); }
-        }
-    }
 
     Component.onCompleted: {
         //Disable password page until enabled by updateStatus
@@ -651,35 +623,35 @@ Rectangle {
     //TODO: enable send page when we're connected and daemon is synced
 
     function updateStatus() {
+        pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
-            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
+            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             return;
         }
 
         if (currentWallet.viewOnly) {
-           // statusText.text = qsTr("Wallet is view only.")
+           // warningText.text = qsTr("Wallet is view only.")
            //return;
         }
-        pageRoot.enabled = false;
+        //pageRoot.enabled = false;
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Disconnected:
-            statusText.text = qsTr("Wallet is not connected to daemon.") + "<br>" + root.startLinkText
+            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             break
         case Wallet.ConnectionStatus_WrongVersion:
-            statusText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
+            warningText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
                                    "Please upgrade or connect to another daemon")
             break
         default:
             if(!appWindow.daemonSynced){
-                statusText.text = qsTr("Waiting on daemon synchronization to finish")
+                warningText.text = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready
                 pageRoot.enabled = true;
-                statusText.text = "";
+                warningText.text = "";
             }
-
         }
     }
 

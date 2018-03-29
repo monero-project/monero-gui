@@ -32,50 +32,78 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id: titleBar
-    color: "#000000"
+
     property int mouseX: 0
     property bool containsMouse: false
     property alias basicButtonVisible: goToBasicVersionButton.visible
     property bool customDecorations: true
     signal goToBasicVersion(bool yes)
-    height: customDecorations && !isMobile ? 30 : 0
+    height: customDecorations && !isMobile ? 50 : 0
     y: -height
     property string title
     property alias maximizeButtonVisible: maximizeButton.visible
     z: 1
 
-    Text {
-        anchors.centerIn: parent
-        font.family: "Arial"
-        font.pixelSize: 15
-        color: "#FFFFFF"
-        text: titleBar.title
-        visible: customDecorations
+    Item {
+        id: test
+        width: parent.width
+        height: 50
+        z: 1
+
+        // use jpg for gradiency
+        Image {
+           anchors.fill: parent
+           height: parent.height
+           width: parent.width
+           source: "../images/titlebarGradient.jpg"
+        }
     }
 
-    Rectangle {
+    Item{
+        id: titlebarlogo
+        width: 125
+        height: 50
+        anchors.centerIn: parent
+        visible: customDecorations
+        z: 1
 
+        Image {
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 11
+            width: 125
+            height: 28
+            source: "../images/titlebarLogo.png"
+        }
+    }
+
+    // collapse left panel
+    Rectangle {
         id: goToBasicVersionButton
         property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
         property bool checked: false
         anchors.top: parent.top
         anchors.left: parent.left
-        color:  "#FFE00A"
-        height: 30 * scaleRatio
+        color:  "transparent"
+        height: 50 * scaleRatio
         width: height
         visible: isMobile
+        z: 2
 
         Image {
-            width: parent.width * 2/3;
-            height: width;
+            width: 14
+            height: 14
             anchors.centerIn: parent
-            source: "../images/menu.png"
+            source: "../images/expand.png"
         }
 
         MouseArea {
             id: basicMouseArea
             hoverEnabled: true
             anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onEntered: goToBasicVersionButton.color = "#262626";
+            onExited: goToBasicVersionButton.color = "transparent";
             onClicked: {
                 releaseFocus()
                 parent.checked = !parent.checked
@@ -90,22 +118,28 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         visible: parent.customDecorations
+        z: 2
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: whatIsAreaButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#6B0072" : "#000000"
+            width: 42
+            color: containsMouse ? "#6B0072" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/helpIcon.png"
+                width: 9
+                height: 16
+                source: "../images/question.png"
             }
 
             MouseArea {
                 id: whatIsArea
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onEntered: whatIsAreaButton.color = "#262626";
+                onExited: whatIsAreaButton.color = "transparent";
                 onClicked: {
 
                 }
@@ -113,20 +147,24 @@ Rectangle {
         }
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: minimizeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#3665B3" : "#000000"
+            width: 42
+            color: "transparent"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/minimizeIcon.png"
+                source: "../images/minimize.png"
             }
 
             MouseArea {
                 id: minimizeArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: minimizeButton.color = "#262626";
+                onExited: minimizeButton.color = "transparent";
                 onClicked: {
                     appWindow.visibility = Window.Minimized
                 }
@@ -135,22 +173,26 @@ Rectangle {
 
         Rectangle {
             id: maximizeButton
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#FF6C3C" : "#000000"
+            width: 42
+            color: "transparent";
 
             Image {
                 anchors.centerIn: parent
+                height: 16
+                width: 16
                 source: appWindow.visibility === Window.FullScreen ?  "../images/backToWindowIcon.png" :
-                                                                      "../images/maximizeIcon.png"
-
+                                                                      "../images/fullscreen.png"
             }
 
             MouseArea {
                 id: maximizeArea
                 anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: maximizeButton.color = "#262626";
+                onExited: maximizeButton.color = "transparent";
                 onClicked: {
                     appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
                                                                                         Window.Windowed
@@ -159,20 +201,26 @@ Rectangle {
         }
 
         Rectangle {
-            property bool containsMouse: titleBar.mouseX >= x + row.x && titleBar.mouseX <= x + row.x + width && titleBar.containsMouse
+            id: closeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            width: height
-            color: containsMouse ? "#E04343" : "#000000"
+            width: 42
+            color: containsMouse ? "#E04343" : "#00000000"
 
             Image {
                 anchors.centerIn: parent
-                source: "../images/closeIcon.png"
+                width: 16
+                height: 16
+                source: "../images/close.png"
             }
 
             MouseArea {
                 anchors.fill: parent
                 onClicked: appWindow.close();
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: closeButton.color = "#262626";
+                onExited: closeButton.color = "transparent";
             }
         }
     }

@@ -15,7 +15,7 @@
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.2
+import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
@@ -36,12 +37,15 @@ Rectangle {
     id: panel
 
     property alias unlockedBalanceText: unlockedBalanceText.text
+    property alias unlockedBalanceVisible: unlockedBalanceText.visible
+    property alias unlockedBalanceLabelVisible: unlockedBalanceLabel.visible
     property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
+    property int titleBarHeight: 50
 
     signal dashboardClicked()
     signal historyClicked()
@@ -72,186 +76,185 @@ Rectangle {
         menuColumn.previousButton.checked = true
     }
 
-    width: (isMobile)? appWindow.width : 260
-    color: "#FFFFFF"
+    width: (isMobile)? appWindow.width : 300
+    color: "transparent"
     anchors.bottom: parent.bottom
     anchors.top: parent.top
 
-    // Item with monero logo
-    Item {
-        visible: !isMobile
-        id: logoItem
+    Image {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.topMargin: (persistentSettings.customDecorations)? 66 : 36
-        height: logo.implicitHeight
-
-        Image {
-            id: logo
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            source: "images/moneroLogo.png"
-        }
-
-        Text {
-            id: viewOnlyLabel
-            visible: viewOnly
-            text: qsTr("View Only") + translationManager.emptyString
-            anchors.top: logo.bottom
-            anchors.topMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            font.bold: true
-            color: "blue"
-        }
-
-        Text {
-            id: testnetLabel
-            visible: persistentSettings.nettype !== NetworkType.MAINNET
-            text: (persistentSettings.nettype === NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
-            anchors.top: logo.bottom
-            anchors.topMargin: 5
-            anchors.left: viewOnly ? viewOnlyLabel.right : parent.left
-            anchors.leftMargin: viewOnly ? 10 : 50
-            font.bold: true
-            color: "red"
-        }
-
-      /* Disable twitter/news panel
-        Image {
-            anchors.left: parent.left
-            anchors.verticalCenter: logo.verticalCenter
-            anchors.leftMargin: 19
-            source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
-                                                   "images/collapseRightPanel.png"
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
-        }
-      */
+        height: panel.height
+        source: "images/leftPanelBg.jpg"
+        z: 1
     }
 
-
-
+    // card with monero logo
     Column {
-        visible: !isMobile
+        visible: true
+        z: 2
         id: column1
+        height: 200
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: logoItem.bottom
-        anchors.topMargin: 26
-        spacing: 5
+        anchors.top: parent.top
+        anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
-        Label {
-            visible: !isMobile
-            id: balanceLabel
-            text: qsTr("Balance") + translationManager.emptyString
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-        }
+        RowLayout {
+            visible: true
 
-        Row {
-            visible: !isMobile
             Item {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                height: 26 * scaleRatio
-                width: 50 * scaleRatio
+                height: 490 * scaleRatio
+                width: 259 * scaleRatio
 
                 Image {
-                    anchors.centerIn: parent
-                    source: "images/lockIcon.png"
+                    width: 259; height: 170
+                    fillMode: Image.PreserveAspectFit
+                    source: "images/card-background.png"
+                }
+
+                Text {
+                    id: testnetLabel
+                    visible: persistentSettings.nettype != NetworkType.MAINNET
+                    text: (persistentSettings.nettype == NetworkType.TESTNET ? qsTr("Testnet") : qsTr("Stagenet")) + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 8
+                    anchors.left: parent.left
+                    anchors.leftMargin: 192
+                    font.bold: true
+                    font.pixelSize: 12
+                    color: "#f33434"
+                }
+
+                Text {
+                    id: viewOnlyLabel
+                    visible: viewOnly
+                    text: qsTr("View Only") + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 8
+                    anchors.right: testnetLabel.visible ? testnetLabel.left : parent.right
+                    anchors.rightMargin: 8
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#ff9323"
                 }
             }
 
-            Text {
-                visible: !isMobile
-                id: balanceText
+            Item {
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.topMargin: 20
+                anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                font.family: "Arial"
-                color: "#000000"
-                text: "N/A"
-                // dynamically adjust text size
-                font.pixelSize: {
-                    var digits = text.split('.')[0].length
-                    var defaultSize = 25;
-                    if(digits > 2) {
-                        return defaultSize - 1.1*digits
+                height: 490 * scaleRatio
+                width: 50 * scaleRatio
+
+                Text {
+                    visible: !isMobile
+                    id: balanceText
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 76
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    // dynamically adjust text size
+                    font.pixelSize: {
+                        var digits = text.split('.')[0].length
+                        var defaultSize = 22;
+                        if(digits > 2) {
+                            return defaultSize - 1.1*digits
+                        }
+                        return defaultSize;
                     }
-                    return defaultSize;
                 }
+
+                Text {
+                    id: unlockedBalanceText
+                    visible: false
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 126
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    // dynamically adjust text size
+                    font.pixelSize: {
+                        var digits = text.split('.')[0].length
+                        var defaultSize = 20;
+                        if(digits > 3) {
+                            return defaultSize - 0.6*digits
+                        }
+                        return defaultSize;
+                    }
+                }
+
+                Label {
+                    id: unlockedBalanceLabel
+                    visible: false
+                    text: qsTr("Unlocked balance") + translationManager.emptyString
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 110
+                }
+
+                Label {
+                    visible: !isMobile
+                    id: balanceLabel
+                    text: qsTr("Balance") + translationManager.emptyString
+                    fontSize: 14
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 60
+                }
+                Item { //separator
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 1
+                }
+              /* Disable twitter/news panel
+                Image {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: logo.verticalCenter
+                    anchors.leftMargin: 19
+                    source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
+                                                           "images/collapseRightPanel.png"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
+                }
+              */
             }
         }
-
-        Item { //separator
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: 1
-        }
-
-        Label {
-            id: unlockedBalanceLabel
-            text: qsTr("Unlocked balance") + translationManager.emptyString
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-        }
-
-        Text {
-            id: unlockedBalanceText
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            font.family: "Arial"
-            color: "#000000"
-            text: "N/A"
-            // dynamically adjust text size
-            font.pixelSize: {
-                var digits = text.split('.')[0].length
-                var defaultSize = 18;
-                if(digits > 3) {
-                    return defaultSize - 0.6*digits
-                }
-                return defaultSize;
-            }
-        }
     }
-
-
-    Rectangle {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: menuRect.top
-        width: 1
-        color: "#DBDBDB"
-    }
-
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: 1
-        color: "#DBDBDB"
-    }
-
-
 
     Rectangle {
         id: menuRect
+        z: 2
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: (isMobile)? parent.top : column1.bottom
-        anchors.topMargin: (isMobile)? 0 : 25
-        color: "#1C1C1C"
-
+        anchors.topMargin: (isMobile)? 0 : 32
+        color: "transparent"
 
         Flickable {
             id:flicker
             contentHeight: 500 * scaleRatio
             anchors.fill: parent
             clip: true
-
 
         Column {
 
@@ -285,11 +288,19 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#505050"
+                color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#313131"
                 height: 1
             }
             */
 
+            // top border
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#313131"
+                height: 1
+            }
 
             // ------------- Transfer tab ---------------
             MenuButton {
@@ -311,7 +322,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -337,7 +348,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -360,7 +371,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -384,7 +395,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -406,7 +417,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -432,7 +443,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#505050"
+                color: miningButton.checked || settingsButton.checked ? "#1C1C1C" : "#313131"
                 height: 1
             }
             // ------------- TxKey tab ---------------
@@ -455,7 +466,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Shared RingDB tab ---------------
@@ -478,7 +489,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -503,7 +514,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Settings tab ---------------
@@ -525,7 +536,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
             // ------------- Sign/verify tab ---------------
@@ -548,7 +559,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16
-                color: "#505050"
+                color: "#313131"
                 height: 1
             }
 
@@ -560,6 +571,8 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.leftMargin: 4
+            anchors.rightMargin: 4
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
             height: 58 * scaleRatio
@@ -580,13 +593,11 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: 35 * scaleRatio
             syncType: qsTr("Daemon")
             visible: networkStatus.connected
+            height: 62 * scaleRatio
         }
     } // menuRect
-
-
 
     // indicate disabled state
 //    Desaturate {

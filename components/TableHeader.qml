@@ -36,26 +36,40 @@ Rectangle {
     property int offset: 0
 
     height: 31
-    color: "#FFFFFF"
+    color: "transparent"
+
+    Rectangle{
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 1
+        color: "#808080"
+    }
+
+    Rectangle{
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 1
+        color: "#808080"
+    }
 
     Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 1
-        color: "#DBDBDB"
+        color: "#808080"
     }
 
     Row {
         id: row
-        anchors.horizontalCenter: header.offset !== 0 ? undefined: parent.horizontalCenter
-        anchors.left: header.offset !== 0 ? parent.left : undefined
-        anchors.leftMargin: header.offset
+        anchors.horizontalCenter: parent.horizontalCenter
 
         Rectangle {
             height: 31
             width: 1
-            color: "#DBDBDB"
+            color: "#808080"
         }
 
         Repeater {
@@ -70,6 +84,7 @@ Rectangle {
             delegate: Rectangle {
                 id: delegate
                 property bool desc: false
+                color: "transparent"
                 height: 31
                 width: columnWidth
 
@@ -86,7 +101,7 @@ Rectangle {
                     color: {
                         if(delegateArea.pressed)
                             return "#FF4304"
-                        return index === header.activeSortColumn || delegateArea.containsMouse ? "#FF6C3C" : "#4A4949"
+                        return index === header.activeSortColumn || delegateArea.containsMouse ? "white" : "#808080"
                     }
                     text: qsTr(columnName) + translationManager.emptyString
                 }
@@ -95,6 +110,7 @@ Rectangle {
                     id: delegateArea
                     hoverEnabled: true
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         delegate.desc = !delegate.desc
                         header.activeSortColumn = index
@@ -170,7 +186,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
                     height: 1
-                    color: index === header.activeSortColumn ? "#FFFFFF" : "#DBDBDB"
+                    color: "transparent"
                 }
 
                 Rectangle {
@@ -178,7 +194,7 @@ Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
                     width: 1
-                    color: "#DBDBDB"
+                    color: "#808080"
                 }
             }
         }

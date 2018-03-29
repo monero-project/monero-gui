@@ -28,22 +28,25 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import "." 1.0
 
 Item {
     id: button
-    height: 37 * scaleRatio
-    property string shadowPressedColor: "#B32D00"
-    property string shadowReleasedColor: "#FF4304"
-    property string pressedColor: "#FF4304"
-    property string releasedColor: "#FF6C3C"
+    property string rightIcon: ""
     property string icon: ""
-    property string textColor: "#FFFFFF"
-    property int fontSize: 12 * scaleRatio
+    property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
+    property bool small: false
     property alias text: label.text
+    property int fontSize: {
+        if(small) return 14 * scaleRatio;
+        else return 16 * scaleRatio;
+    }
     signal clicked()
 
-    // Dynamic label width
-    Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 10 : 60
+    // Dynamic height/width
+    Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 22 : 60
+    height: small ?  30 * scaleRatio : 36 * scaleRatio
+
 
     function doClick() {
         // Android workaround
@@ -55,30 +58,27 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: parent.height - 1
-        y: buttonArea.pressed ? 0 : 1
-        //radius: 4
-        color: {
-            parent.enabled ? (buttonArea.pressed ? parent.shadowPressedColor : parent.shadowReleasedColor)
-                           : Qt.lighter(parent.shadowReleasedColor)
-        }
-        border.color: Qt.darker(parent.releasedColor)
+        radius: 3
+        color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
-    }
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
 
-    Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height - 1
-        y: buttonArea.pressed ? 1 : 0
-        color: {
-            parent.enabled ? (buttonArea.pressed ? parent.pressedColor : parent.releasedColor)
-                           : Qt.lighter(parent.releasedColor)
+            propagateComposedEvents: true
 
+            // possibly do some hover effects here
+            onEntered: {
+//                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
+//                else parent.color = Style.buttonBackgroundColorDisabledHover;
+            }
+            onExited: {
+//                if(button.enabled) parent.color = Style.buttonBackgroundColor;
+//                else parent.color = Style.buttonBackgroundColorDisabled;
+            }
         }
-        //radius: 4
-
-
     }
 
     Text {
@@ -87,12 +87,11 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         horizontalAlignment: Text.AlignHCenter
-        font.family: "Arial"
+        font.family: Style.fontBold.name
         font.bold: true
-        font.pixelSize: button.fontSize
+        font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
         color: parent.textColor
         visible: parent.icon === ""
-//        font.capitalization : Font.Capitalize
     }
 
     Image {
@@ -105,6 +104,7 @@ Item {
         id: buttonArea
         anchors.fill: parent
         onClicked: doClick()
+        cursorShape: Qt.PointingHandCursor
     }
 
     Keys.onSpacePressed: doClick()

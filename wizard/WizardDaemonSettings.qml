@@ -124,11 +124,10 @@ ColumnLayout {
             CheckBox {
                 id: localNode
                 text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
+                checkedIcon: "../images/checkedBlackIcon.png"
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
                 visible: !isAndroid && !isIOS
                 onClicked: {
@@ -145,6 +144,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 20 * scaleRatio
                 fontSize: 14 * scaleRatio
+                fontColor: "black"
                 text: qsTr("Blockchain location") + translationManager.emptyString
             }
             LineEdit {
@@ -152,7 +152,16 @@ ColumnLayout {
                 Layout.preferredWidth:  200 * scaleRatio
                 Layout.fillWidth: true
                 text: persistentSettings.blockchainDataDir
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
                 placeholderText: qsTr("(optional)") + translationManager.emptyString
+
+                borderColor: Qt.rgba(0, 0, 0, 0.15)
+                backgroundColor: "white"
+                fontColor: "black"
+                fontBold: false
 
                 MouseArea {
                     anchors.fill: parent
@@ -170,14 +179,28 @@ ColumnLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 20 * scaleRatio
                 fontSize: 14 * scaleRatio
+                color: 'black'
                 text: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
             }
             RemoteNodeEdit {
                 Layout.minimumWidth: 300 * scaleRatio
                 opacity: localNode.checked
                 id: bootstrapNodeEdit
+
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
+
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                daemonPortText: (persistentSettings.bootstrapNodeAddress.split(":")[1].trim() == "") ? "18081" : persistentSettings.bootstrapNodeAddress.split(":")[1]
+                daemonPortText: {
+                    var node_split = persistentSettings.bootstrapNodeAddress.split(":");
+                    if(node_split.length == 2){
+                        (node_split[1].trim() == "") ? "18081" : node_split[1];
+                    } else {
+                        return ""
+                    }
+                }
             }
         }
 
@@ -185,19 +208,17 @@ ColumnLayout {
             CheckBox {
                 id: remoteNode
                 text: qsTr("Connect to a remote node") + translationManager.emptyString
+                checkedIcon: "../images/checkedBlackIcon.png"
                 Layout.topMargin: 20 * scaleRatio
                 background: "#FFFFFF"
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedVioletIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.useRemoteNode
                 onClicked: {
                     checked = true
                     localNode.checked = false
                 }
             }
-
         }
 
         RowLayout {
@@ -208,6 +229,16 @@ ColumnLayout {
                 property var rna: persistentSettings.remoteNodeAddress
                 daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
                 daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+
+                placeholderFontBold: true
+                placeholderFontFamily: "Arial"
+                placeholderColor: Style.legacy_placeholderFontColor
+                placeholderOpacity: 1.0
+
+                lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
+                lineEditBackgroundColor: "white"
+                lineEditFontColor: "black"
+                lineEditFontBold: false
             }
         }
     }

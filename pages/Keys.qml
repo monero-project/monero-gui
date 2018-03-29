@@ -31,73 +31,76 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../version.js" as Version
-
-
-import "../components"
 import moneroComponents.Clipboard 1.0
+import "../version.js" as Version
+import "../components"
+import "." 1.0
+
 
 Rectangle {
     property bool viewOnly: false
     id: page
 
-    color: "#F0EEEE"
+    color: "transparent"
 
     Clipboard { id: clipboard }
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 17 * scaleRatio
+
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 20 * scaleRatio
+
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40 * scaleRatio
+
+        spacing: 30 * scaleRatio
         Layout.fillWidth: true
 
         //! Manage wallet
         ColumnLayout {
             Layout.fillWidth: true
+
             Label {
                 Layout.fillWidth: true
+                fontSize: 22 * scaleRatio
+                Layout.topMargin: 10 * scaleRatio
                 text: qsTr("Mnemonic seed") + translationManager.emptyString
             }
             Rectangle {
                 Layout.fillWidth: true
-                height: 1
-                color: "#DEDEDE"
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                Layout.bottomMargin: 10 * scaleRatio
             }
-            TextEdit {
+
+            LineEditMulti{
                 id: seedText
-                wrapMode: TextEdit.Wrap
-                Layout.fillWidth: true;
-                font.pixelSize: 14 * scaleRatio
+                spacing: 0
+                copyButton: true
+                addressValidation: false
                 readOnly: true
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        appWindow.showStatusMessage(qsTr("Double tap to copy"),3)
-                    }
-                    onDoubleClicked: {
-                        parent.selectAll()
-                        parent.copy()
-                        parent.deselect()
-                        console.log("copied to clipboard");
-                        appWindow.showStatusMessage(qsTr("Seed copied to clipboard"),3)
-                    }
-                }
+                wrapAnywhere: false
             }
         }
 
         ColumnLayout {
             Layout.fillWidth: true
+
             Label {
                 Layout.fillWidth: true
+                fontSize: 22 * scaleRatio
+                Layout.topMargin: 10 * scaleRatio
                 text: qsTr("Keys") + translationManager.emptyString
             }
             Rectangle {
                 Layout.fillWidth: true
-                height: 1
-                color: "#DEDEDE"
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                Layout.bottomMargin: 10 * scaleRatio
             }
             TextEdit {
                 id: keysText
@@ -106,6 +109,7 @@ Rectangle {
                 font.pixelSize: 14 * scaleRatio
                 textFormat: TextEdit.RichText
                 readOnly: true
+                color: Style.defaultFontColor
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -124,21 +128,26 @@ Rectangle {
 
         ColumnLayout {
             Layout.fillWidth: true
+
             Label {
                 Layout.fillWidth: true
+                fontSize: 22 * scaleRatio
+                Layout.topMargin: 10 * scaleRatio
                 text: qsTr("Export wallet") + translationManager.emptyString
             }
             Rectangle {
                 Layout.fillWidth: true
-                height: 1
-                color: "#DEDEDE"
+                height: 2
+                color: Style.dividerColor
+                opacity: Style.dividerOpacity
+                Layout.bottomMargin: 10 * scaleRatio
             }
-
 
             RowLayout {
                 StandardButton {
                     enabled: !fullWalletQRCode.visible
                     id: showFullQr
+                    small: true
                     text: qsTr("Spendable Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = false
@@ -147,6 +156,7 @@ Rectangle {
                 StandardButton {
                     enabled: fullWalletQRCode.visible
                     id: showViewOnlyQr
+                    small: true
                     text: qsTr("View Only Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = true
@@ -154,7 +164,6 @@ Rectangle {
                 }
                 Layout.bottomMargin: 30 * scaleRatio
             }
-
 
             Image {
                 visible: !viewOnlyQRCode.visible
@@ -178,6 +187,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.bold: true
                 font.pixelSize: 16 * scaleRatio
+                color: Style.defaultFontColor
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }

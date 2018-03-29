@@ -27,17 +27,19 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
+import "." 1.0
+
 
 Rectangle {
     id: root
-    color: "white"
+    color: "transparent"
     visible: false
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
@@ -55,6 +57,14 @@ Rectangle {
     signal rejected()
     signal closeCallback();
 
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        source: "../images/middlePanelBg.jpg"
+    }
+
     // Make window draggable
     MouseArea {
         anchors.fill: parent
@@ -68,7 +78,7 @@ Rectangle {
         // Center
         if(!isMobile) {
             root.x = parent.width/2 - root.width/2
-            root.y = screenHeight/2 - root.height/2
+            root.y = 100
         }
         show()
         root.z = 11
@@ -81,13 +91,13 @@ Rectangle {
     }
 
     // TODO: implement without hardcoding sizes
-    width: isMobile ? screenWidth : 480
-    height: isMobile ? screenHeight : 280
+    width: isMobile ? screenWidth : 520
+    height: isMobile ? screenHeight : 380
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 }
+        anchors { fill: parent; margins: 15 }
 
         RowLayout {
             id: column
@@ -97,9 +107,9 @@ Rectangle {
             Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 18 * scaleRatio
-                font.family: "Arial"
-                color: "#555555"
+                fontSize: 18 * scaleRatio
+                fontFamily: "Arial"
+                color: Style.defaultFontColor
             }
 
         }
@@ -109,12 +119,14 @@ Rectangle {
                 id : dialogContent
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                font.family: "Arial"
+                renderType: Text.QtRendering
+                font.family: Style.fontLight.name
                 textFormat: TextEdit.AutoText
                 readOnly: true
-                font.pixelSize: 12 * scaleRatio
+                font.pixelSize: 14 * scaleRatio
                 selectByMouse: false
                 wrapMode: TextEdit.Wrap
+                color: Style.defaultFontColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -140,10 +152,6 @@ Rectangle {
 
             MoneroComponents.StandardButton {
                 id: cancelButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 text: qsTr("Cancel") + translationManager.emptyString
                 onClicked: {
                     root.close()
@@ -153,10 +161,6 @@ Rectangle {
 
             MoneroComponents.StandardButton {
                 id: okButton
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#FF6C3C"
-                pressedColor: "#FF4304"
                 text: qsTr("OK")
                 KeyNavigation.tab: cancelButton
                 onClicked: {
@@ -168,6 +172,38 @@ Rectangle {
         }
     }
 
+    // window borders
+    Rectangle{
+        width: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        width: 1
+        color: Style.grey
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+    }
+
+    Rectangle{
+        height: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
+
+    Rectangle{
+        height: 1
+        color: Style.grey
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
 }
 
 
