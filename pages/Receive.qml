@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
@@ -43,7 +43,7 @@ import moneroComponents.SubaddressModel 1.0
 
 Rectangle {
     id: pageReceive
-    color: "#F0EEEE"
+    color: "transparent"
     property var model
     property var current_address
     property alias addressText : pageReceive.current_address
@@ -142,7 +142,6 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-
     /* main layout */
     ColumnLayout {
         id: mainLayout
@@ -159,9 +158,9 @@ Rectangle {
         property int lineEditFontSize: 12 * scaleRatio
         property int qrCodeSize: 240 * scaleRatio
 
-
         ColumnLayout {
             id: addressRow
+            spacing: 0
             Label {
                 id: addressLabel
                 text: qsTr("Addresses") + translationManager.emptyString
@@ -169,10 +168,54 @@ Rectangle {
             }
 
             Rectangle {
-                id: tableRect
+                id: header
                 Layout.fillWidth: true
-                Layout.preferredHeight: 200
-                color: "#FFFFFF"
+                Layout.topMargin: 10
+                visible: table.count > 0
+
+                height: 10
+                color: "transparent"
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    anchors.leftMargin: 10
+
+                    height: 1
+                    color: "#404040"
+                }
+
+                Image {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+
+                    width: 10
+                    height: 10
+
+                    source: "../images/historyBorderRadius.png"
+                }
+
+                Image {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+
+                    width: 10
+                    height: 10
+
+                    source: "../images/historyBorderRadius.png"
+                    rotation: 90
+                }
+            }
+
+            Rectangle {
+                id: tableRect
+                property int table_max_height: 260
+                Layout.fillWidth: true
+                Layout.preferredHeight: table.contentHeight < table_max_height ? table.contentHeight : table_max_height
+                color: "transparent"
+
                 Scroll {
                     id: flickableScroll
                     anchors.right: table.right
@@ -180,6 +223,7 @@ Rectangle {
                     anchors.bottom: table.bottom
                     flickable: table
                 }
+
                 SubaddressTable {
                     id: table
                     anchors.fill: parent
@@ -192,11 +236,10 @@ Rectangle {
 
             RowLayout {
                 spacing: 20
+                Layout.topMargin: 20
+
                 StandardButton {
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
+                    small: true
                     text: qsTr("Create new address") + translationManager.emptyString;
                     onClicked: {
                         inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
@@ -210,10 +253,7 @@ Rectangle {
                     }
                 }
                 StandardButton {
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
+                    small: true
                     enabled: table.currentIndex > 0
                     text: qsTr("Rename") + translationManager.emptyString;
                     onClicked: {
@@ -240,7 +280,6 @@ Rectangle {
 
             LineEdit {
                 id: amountLine
-                fontSize: mainLayout.lineEditFontSize
                 placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                 readOnly: false
                 width: mainLayout.editWidth
@@ -255,7 +294,7 @@ Rectangle {
             }
         }
 
-        RowLayout {
+        ColumnLayout {
             id: trackingRow
             visible: !isAndroid && !isIOS
             Label {
@@ -288,15 +327,14 @@ Rectangle {
 
             TextEdit {
                 id: trackingLine
-                anchors.top: trackingRow.top
-                textFormat: Text.RichText
-                text: ""
                 readOnly: true
                 width: mainLayout.editWidth
                 Layout.fillWidth: true
+                textFormat: Text.RichText
+                text: ""
                 selectByMouse: true
+                color: 'white'
             }
-
         }
 
         MessageDialog {

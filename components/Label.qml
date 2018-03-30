@@ -29,6 +29,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "." 1.0
+
 Item {
     id: item
     property alias text: label.text
@@ -36,11 +38,14 @@ Item {
     property alias textFormat: label.textFormat
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
+    property bool fontBold: false
+    property string fontColor: Style.defaultFontColor
+    property string fontFamily: ""
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     signal linkActivated()
-    width: icon.x + icon.width * scaleRatio
-    height: icon.height * scaleRatio
+    height: label.height * scaleRatio
+    width: label.width * scaleRatio
     Layout.topMargin: 10 * scaleRatio
 
     Text {
@@ -48,38 +53,16 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * scaleRatio
         anchors.left: parent.left
-        font.family: "Arial"
+        font.family: {
+            if(fontFamily){
+                return fontFamily;
+            } else {
+                return Style.fontRegular.name;
+            }
+        }
         font.pixelSize: fontSize
-        color: "#555555"
+        font.bold: fontBold
+        color: fontColor
         onLinkActivated: item.linkActivated()
     }
-
-    Image {
-        id: icon
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: label.right
-        anchors.leftMargin: 5 * scaleRatio
-        source: "../images/whatIsIcon.png"
-        visible: appWindow.whatIsEnable
-    }
-
-//    MouseArea {
-//        anchors.fill: icon
-//        enabled: appWindow.whatIsEnable
-//        hoverEnabled: true
-//        onEntered: {
-//            icon.visible = false
-//            var pos = appWindow.mapFromItem(icon, 0, -15)
-//            tipItem.text = item.tipText
-//            tipItem.x = pos.x
-//            if(tipItem.height > 30)
-//                pos.y -= tipItem.height - 28
-//            tipItem.y = pos.y
-//            tipItem.visible = true
-//        }
-//        onExited: {
-//            icon.visible = Qt.binding(function(){ return appWindow.whatIsEnable; })
-//            tipItem.visible = false
-//        }
-//    }
 }

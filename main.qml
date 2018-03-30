@@ -73,7 +73,7 @@ ApplicationWindow {
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     // Default daemon addresses
-    readonly property string localDaemonAddress : persistentSettings.nettype === NetworkType.MAINNET ? "localhost:18081" : persistentSettings.nettype === NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
+    readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:18081" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:28081" : "localhost:38081"
     property string currentDaemonAddress;
     property bool startLocalNodeCancelled: false
 
@@ -232,12 +232,15 @@ ApplicationWindow {
             if(isIOS)
                 wallet_path = moneroAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
-            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype === NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype === NetworkType.TESTNET ? "testnet" : "stagenet");
+            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
             walletManager.openWalletAsync(wallet_path, walletPassword,
                                               persistentSettings.nettype);
         }
 
+        // Hide titlebar based on persistentSettings.customDecorations
+        titleBar.visible = persistentSettings.customDecorations;
     }
+
     function closeWallet() {
 
         // Disconnect all listeners
@@ -263,6 +266,28 @@ ApplicationWindow {
 
     function connectWallet(wallet) {
         currentWallet = wallet
+
+        // TODO:
+        // When the wallet variable is undefined, it yields a zero balance.
+        // This can scare users, restart the GUI (as a quick fix).
+        //
+        // To reproduce, follow these steps:
+        // 1) Open the GUI, load up a wallet that has a balance
+        // 2) Settings -> close wallet
+        // 3) Create a new wallet
+        // 4) Settings -> close wallet
+        // 5) Open the wallet from step 1
+
+        if(!wallet || wallet === undefined || wallet.path === undefined){
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Couldn't open wallet: ") + 'please restart GUI.';
+            informationPopup.icon = StandardIcon.Critical
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                appWindow.close();
+            }
+        }
+
         walletName = usefulName(wallet.path)
         updateSyncing(false)
 
@@ -539,7 +564,7 @@ ApplicationWindow {
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
-        console.log("money sent found")
+        console.log("monero sent found")
         currentWallet.refresh()
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
     }
@@ -585,11 +610,8 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
-
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n");
-            for (var i = 0; i < transaction.subaddrIndices.length; ++i)
-                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i]
+            transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
+            transactionConfirmationPopup.text = "";
             transactionConfirmationPopup.text +=
                           (address === "" ? "" : (qsTr("\n\nAddress: ") + address))
                         + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
@@ -598,7 +620,12 @@ ApplicationWindow {
                         + qsTr("\n\nRingsize: ") + (mixinCount + 1)
                         + qsTr("\n\Number of transactions: ") + transaction.txCount
                         + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
-                        + translationManager.emptyString
+
+            for (var i = 0; i < transaction.subaddrIndices.length; ++i){
+                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
+            }
+
+            transactionConfirmationPopup.text += translationManager.emptyString;
             transactionConfirmationPopup.icon = StandardIcon.Question
             transactionConfirmationPopup.open()
         }
@@ -751,7 +778,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Money sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -911,11 +938,14 @@ ApplicationWindow {
         x = 0
       if (y < 0)
         y = 0
-      persistentSettings.customDecorations = custom
+      persistentSettings.customDecorations = custom;
+      titleBar.visible = custom; // hides custom titlebar based on customDecorations
+
       if (custom)
-        appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint
+          appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint;
       else
-        appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint
+          appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint;
+
       appWindow.hide()
       appWindow.x = x
       appWindow.y = y
@@ -988,7 +1018,7 @@ ApplicationWindow {
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string daemon_address: nettype === NetworkType.TESTNET ? "localhost:28081" : nettype === NetworkType.STAGENET ? "localhost:38081" : "localhost:18081"
+        property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:28081" : nettype == NetworkType.STAGENET ? "localhost:38081" : "localhost:18081"
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
@@ -1532,6 +1562,15 @@ ApplicationWindow {
                         previousPosition = pos
                     }
                 }
+            }
+
+            Rectangle {
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                anchors.left: parent.left
+                height:1
+                color: "#2F2F2F"
+                z: 2
             }
         }
 

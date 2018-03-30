@@ -28,11 +28,12 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import "." 1.0
 
 RowLayout {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon
+    property string checkedIcon: "../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
@@ -52,9 +53,10 @@ RowLayout {
             anchors.left: parent.left
             width: 25 * scaleRatio
             height: checkBox.height - 1
-            //radius: 4
+            radius: 3
             y: 0
-            color: "#DBDBDB"
+            color: "transparent"
+            border.color: checkBox.checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
         }
 
         Rectangle {
@@ -64,16 +66,17 @@ RowLayout {
             height: checkBox.height - 1
             //radius: 4
             y: 1
-            color: "#FFFFFF"
+            color: "transparent"
 
             Image {
                 anchors.centerIn: parent
-                source: checkBox.checked ? checkBox.checkedIcon :
-                                           checkBox.uncheckedIcon
+                source: checkBox.checkedIcon
+                visible: checkBox.checked
             }
 
             MouseArea {
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     toggle()
                 }
@@ -82,13 +85,16 @@ RowLayout {
 
         Text {
             id: label
-            font.family: "Arial"
+            font.family: Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: "#525252"
+            color: Style.defaultFontColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            anchors.left: backgroundRect.right
+            anchors.leftMargin: !isMobile ? 10 : 8
             MouseArea {
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     toggle()
                 }

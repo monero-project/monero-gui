@@ -34,7 +34,7 @@ import moneroComponents.Wallet 1.0
 
 Rectangle {
     id: root
-    color: "#F0EEEE"
+    color: "transparent"
     property var currentHashRate: 0
 
     /* main layout */
@@ -74,13 +74,16 @@ Rectangle {
                 text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
+                font.family: Style.fontRegular.name
+                font.pixelSize: 14 * scaleRatio
+                color: Style.defaultFontColor
             }
 
             RowLayout {
                 id: soloMinerThreadsRow
                 Label {
                     id: soloMinerThreadsLabel
-                    color: "#4A4949"
+                    color: Style.defaultFontColor
                     text: qsTr("CPU threads") + translationManager.emptyString
                     fontSize: 16
                     Layout.preferredWidth: 120
@@ -102,8 +105,6 @@ Rectangle {
                     checked: persistentSettings.allow_background_mining
                     onClicked: {persistentSettings.allow_background_mining = checked}
                     text: qsTr("Background mining (experimental)") + translationManager.emptyString
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
                 }
 
             }
@@ -118,15 +119,13 @@ Rectangle {
                     checked: !persistentSettings.miningIgnoreBattery
                     onClicked: {persistentSettings.miningIgnoreBattery = !checked}
                     text: qsTr("Enable mining when running on battery") + translationManager.emptyString
-                    checkedIcon: "../images/checkedVioletIcon.png"
-                    uncheckedIcon: "../images/uncheckedIcon.png"
                 }
             }
 
             RowLayout {
                 Label {
                     id: manageSoloMinerLabel
-                    color: "#4A4949"
+                    color: Style.defaultFontColor
                     text: qsTr("Manage miner") + translationManager.emptyString
                     fontSize: 16
                 }
@@ -136,11 +135,8 @@ Rectangle {
                     //enabled: !walletManager.isMining()
                     id: startSoloMinerButton
                     width: 110
+                    small: true
                     text: qsTr("Start mining") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     onClicked: {
                         var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
                         if (success) {
@@ -161,11 +157,8 @@ Rectangle {
                     //enabled:  walletManager.isMining()
                     id: stopSoloMinerButton
                     width: 110
+                    small: true
                     text: qsTr("Stop mining") + translationManager.emptyString
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#FF6C3C"
-                    pressedColor: "#FF4304"
                     onClicked: {
                         walletManager.stopMining()
                         update()
@@ -177,6 +170,7 @@ Rectangle {
         Text {
             id: statusText
             text: qsTr("Status: not mining")
+            color: Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.Wrap
         }

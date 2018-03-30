@@ -41,6 +41,7 @@ Column {
                 font.pixelSize: 16 * scaleRatio
                 anchors.margins: 8 * scaleRatio
                 font.bold:true
+                font.family: "Arial"
                 text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
                 color: "#BABABA"
                 visible: !memoTextInput.text/* && !parent.focus*/

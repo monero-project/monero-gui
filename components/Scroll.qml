@@ -51,7 +51,7 @@ Item {
     Rectangle {
         id: scroll
 
-        width: 15
+        width: 4
         height: {
             var t = (flickable.height * flickable.height) / flickable.contentHeight
             return t < 20 ? 20 : t
@@ -62,7 +62,7 @@ Item {
         visible: flickable.contentHeight > flickable.height
 
         Behavior on opacity {
-            NumberAnimation { duration: 100; easing.type: Easing.InQuad }
+            NumberAnimation { duration: 200; easing.type: Easing.InQuad }
         }
 
         MouseArea {

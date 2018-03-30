@@ -52,13 +52,15 @@ ColumnLayout {
             backgroundMiningEnabled = wizard.settings["allow_background_mining"] === true,
             backgroundMiningText = backgroundMiningEnabled ? qsTr("Enabled") : qsTr("Disabled"),
             nettype = appWindow.persistentSettings.nettype,
-            networkText = nettype === NetworkType.TESTNET ? qsTr("Testnet") : nettype === NetworkType.STAGENET ? qsTr("Stagenet") : qsTr("Mainnet"),
+            networkText = nettype == NetworkType.TESTNET ? qsTr("Testnet") : nettype == NetworkType.STAGENET ? qsTr("Stagenet") : qsTr("Mainnet"),
             restoreHeightEnabled = wizard.settings['restore_height'] !== undefined;
 
         return "<table>"
             + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
             + trStart + qsTr("Wallet name") + trMiddle + wizard.settings["account_name"] + trEnd
-            + trStart + qsTr("Backup seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            // TODO: wizard.settings['wallet'].seed doesnt work anymore; yields undefined.
+//            + trStart + qsTr("Backup seed") + trMiddle + wizard.settings["wallet"].seed + trEnd
+            + trStart + qsTr("Backup seed") + trMiddle + '****' + trEnd
             + trStart + qsTr("Wallet path") + trMiddle + wizard.settings["wallet_path"] + trEnd
             // + trStart + qsTr("Auto donations") + trMiddle + autoDonationText + trEnd
             // + (autoDonationEnabled

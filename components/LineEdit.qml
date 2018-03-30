@@ -27,54 +27,187 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
+import "." 1.0
 
 Item {
     id: item
-    property alias placeholderText: input.placeholderText
     property alias text: input.text
+
+    property alias placeholderText: placeholderLabel.text
+    property bool placeholderCenter: false
+    property string placeholderFontFamily: Style.fontRegular.name
+    property bool placeholderFontBold: false
+    property int placeholderFontSize: 18 * scaleRatio
+    property string placeholderColor: Style.defaultFontColor
+    property real placeholderOpacity: 0.25
+
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
     property alias echoMode: input.echoMode
+    property alias inlineButton: inlineButtonId
+    property alias inlineButtonText: inlineButtonId.text
+    property alias inlineIcon: inlineIcon.visible
+    property bool copyButton: false
+    property string borderColor: {
+        if(input.activeFocus){
+            return Qt.rgba(255, 255, 255, 0.35);
+        } else {
+            return Qt.rgba(255, 255, 255, 0.25);
+        }
+    }
+    property bool borderDisabled: false
     property int fontSize: 18 * scaleRatio
     property bool showBorder: true
+    property bool fontBold: false
+    property alias fontColor: input.color
     property bool error: false
-    signal editingFinished()
+    property alias labelText: inputLabel.text
+    property alias labelColor: inputLabel.color
+    property alias labelTextFormat: inputLabel.textFormat
+    property string backgroundColor: "transparent"
+    property string tipText: ""
+    property int labelFontSize: 16 * scaleRatio
+    property bool labelFontBold: false
+    property alias labelWrapMode: inputLabel.wrapMode
+    property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
+    property bool showingHeader: inputLabel.text !== "" || copyButton
+    property int inputHeight: 42 * scaleRatio
+
+    signal labelLinkActivated(); // input label, rich text <a> signal
+    signal editingFinished();
     signal accepted();
     signal textUpdated();
 
-    height: 37 * scaleRatio
+    height: showingHeader ? (inputLabel.height + inputItem.height + 2) * scaleRatio : 42 * scaleRatio
 
-    function getColor(error) {
-      if (error)
-        return "#FFDDDD"
-      else
-        return "#FFFFFF"
+    onTextUpdated: {
+        // check to remove placeholder text when there is content
+        if(item.isEmpty()){
+            placeholderLabel.visible = true;
+        } else {
+            placeholderLabel.visible = false;
+        }
     }
 
-    Rectangle {
-        visible: showBorder
-        anchors.fill: parent
-        anchors.bottomMargin: 1 * scaleRatio
-        color: "#DBDBDB"
-        //radius: 4
+    function isEmpty(){
+        var val = input.text;
+        if(val === "") {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.topMargin: 1 * scaleRatio
-        color: getColor(error)
-        //radius: 4
+    Text {
+        id: inputLabel
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: 2 * scaleRatio
+        font.family: Style.fontLight.name
+        font.pixelSize: labelFontSize
+        font.bold: labelFontBold
+        textFormat: Text.RichText
+        color: Style.defaultFontColor
+        onLinkActivated: item.labelLinkActivated()
+
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
     }
 
-    Input {
-        id: input
-        anchors.fill: parent
-        anchors.leftMargin: 4 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
-        font.pixelSize: parent.fontSize
-        onEditingFinished: item.editingFinished()
-        onAccepted: item.accepted();
-        onTextChanged: item.textUpdated()
+    LabelButton {
+        id: copyButtonId
+        text: qsTr("Copy")
+        anchors.right: parent.right
+        onClicked: {
+            if (input.text.length > 0) {
+                console.log("Copied to clipboard");
+                clipboard.setText(input.text);
+                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+            }
+        }
+        visible: copyButton && input.text !== ""
+    }
+
+    Item{
+        id: inputItem
+        height: inputHeight * scaleRatio
+        anchors.top: showingHeader ? inputLabel.bottom : parent.top
+        anchors.topMargin: showingHeader ? 12 * scaleRatio : 2 * scaleRatio
+        width: parent.width
+
+        Text {
+            id: placeholderLabel
+            visible: input.text ? false : true
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: placeholderCenter ? parent.horizontalCenter : undefined
+            anchors.left: placeholderCenter ? undefined : parent.left
+            anchors.leftMargin: {
+                if(placeholderCenter){
+                    return undefined;
+                }
+                else if(inlineIcon.visible){ return 50 * scaleRatio; }
+                else { return 10 * scaleRatio; }
+            }
+
+            opacity: item.placeholderOpacity
+            color: item.placeholderColor
+            font.family: item.placeholderFontFamily
+            font.pixelSize: placeholderFontSize * scaleRatio
+            font.bold: item.placeholderFontBold
+            text: ""
+            z: 3
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            anchors.topMargin: 1 * scaleRatio
+            color: "transparent"
+        }
+
+        Rectangle {
+            id: inputFill
+            color: backgroundColor
+            anchors.fill: parent
+            border.width: borderDisabled ? 0 : 1
+            border.color: borderColor
+            radius: 4
+        }
+
+        Image {
+            id: inlineIcon
+            width: 26 * scaleRatio
+            height: 26 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: 8 * scaleRatio
+            anchors.left: parent.left
+            anchors.leftMargin: 12 * scaleRatio
+            source: "../images/moneroIcon-28x28.png"
+            visible: false
+        }
+
+        Input {
+            id: input
+            anchors.fill: parent
+            anchors.leftMargin: inlineIcon.visible ? 38 : 0
+            font.pixelSize: item.fontSize
+            font.bold: item.fontBold
+            onEditingFinished: item.editingFinished()
+            onAccepted: item.accepted();
+            onTextChanged: item.textUpdated()
+        }
+
+        InlineButton {
+            id: inlineButtonId
+            visible: item.inlineButtonText ? true : false
+            anchors.right: parent.right
+            anchors.rightMargin: 8 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: 6 * scaleRatio
+        }
     }
 }

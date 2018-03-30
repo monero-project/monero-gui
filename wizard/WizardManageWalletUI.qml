@@ -154,6 +154,8 @@ ColumnLayout {
 
         Label {
             Layout.topMargin: 20 * scaleRatio
+            fontFamily: "Arial"
+            fontColor: "#555555"
             fontSize: 14 * scaleRatio
             text:  qsTr("Wallet name")
                    + translationManager.emptyString
@@ -166,6 +168,10 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             text: defaultAccountName
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
 
@@ -176,10 +182,6 @@ ColumnLayout {
         StandardButton {
             id: recoverFromSeedButton
             text: qsTr("Restore from seed") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
             enabled: recoverFromKeys.visible
             onClicked: {
                 recoverFromSeedMode = true;
@@ -190,10 +192,6 @@ ColumnLayout {
         StandardButton {
             id: recoverFromKeysButton
             text: qsTr("Restore from keys") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
             enabled: recoverFromSeed.visible
             onClicked: {
                 recoverFromSeedMode = false;
@@ -204,10 +202,6 @@ ColumnLayout {
         StandardButton {
             id: qrfinderButton
             text: qsTr("From QR Code") + translationManager.emptyString
-            shadowReleasedColor: "#FF4304"
-            shadowPressedColor: "#B32D00"
-            releasedColor: "#FF6C3C"
-            pressedColor: "#FF4304"
             visible : true //appWindow.qrScannerEnabled
             enabled : visible
             onClicked: {
@@ -242,16 +236,32 @@ ColumnLayout {
             id: addressLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
         LineEdit {
             Layout.fillWidth: true
             id: viewKeyLine
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
 
         }
         LineEdit {
@@ -259,8 +269,16 @@ ColumnLayout {
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
             id: spendKeyLine
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
     
@@ -271,10 +289,18 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: 600 * scaleRatio
             Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
+            placeholderOpacity: 1.0
             validator: IntValidator {
                 bottom:0
             }
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
     }
 
@@ -284,6 +310,8 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.topMargin: 20 * scaleRatio
             fontSize: 14
+            fontFamily: "Arial"
+            fontColor: "#555555"
             text: qsTr("Your wallet is stored in") + ": " + fileUrlInput.text;
         }
 
@@ -304,6 +332,10 @@ ColumnLayout {
                     fileUrlInput.focus = true
                 }
             }
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
         }
 
         FileDialog {
