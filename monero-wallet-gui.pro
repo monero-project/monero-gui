@@ -4,7 +4,10 @@ QT += qml quick widgets
 
 WALLET_ROOT=$$PWD/monero
 
-CONFIG += c++11
+CONFIG += c++11 link_pkgconfig
+packagesExist(libpcsclite) {
+    PKGCONFIG += libpcsclite
+}
 QMAKE_CXXFLAGS += -fPIC -fstack-protector
 QMAKE_LFLAGS += -fstack-protector
 
