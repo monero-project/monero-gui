@@ -80,7 +80,7 @@ Item {
             Layout.maximumWidth: 400 * scaleRatio
 
             Label {
-                text: qsTr("Please enter wallet password")
+                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for: ") + root.walletName : qsTr("Please enter wallet password")
                 anchors.left: parent.left
                 Layout.fillWidth: true
 
