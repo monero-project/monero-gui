@@ -266,6 +266,11 @@ linux {
       LIBS+= -ldl
     }
 
+    if($$(PCSC_FOUND)) {
+        LIBS+= \
+            -lpcsclite
+    }
+
     LIBS+= \
         -lboost_serialization \
         -lboost_thread \
