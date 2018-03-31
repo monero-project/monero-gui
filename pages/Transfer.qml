@@ -350,7 +350,7 @@ Rectangle {
                   }
                   
                   // There are sufficient unlocked funds available
-                  if(parseInt(amountLine.text) > parseInt(unlockedBalanceText)){
+                  if(parseFloat(amountLine.text) > parseFloat(unlockedBalanceText)){
                       return false;
                   }
                   
