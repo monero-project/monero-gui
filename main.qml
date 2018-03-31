@@ -612,15 +612,16 @@ ApplicationWindow {
             // here we show confirmation popup;
             transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
             transactionConfirmationPopup.text = "";
-            transactionConfirmationPopup.text +=
-                          (address === "" ? "" : (qsTr("\n\nAddress: ") + address))
-                        + (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId))
-                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
-                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + qsTr("\n\nRingsize: ") + (mixinCount + 1)
-                        + qsTr("\n\Number of transactions: ") + transaction.txCount
-                        + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
-
+            transactionConfirmationPopup.text += (address === "" ? "" : (qsTr("Address: ") + address));
+            transactionConfirmationPopup.text += (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId));
+            transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
+            transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
+            transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
+            if(mixinCount !== 6){
+                transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
+            }
+            transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
+            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("Description: ") + transactionDescription))
             for (var i = 0; i < transaction.subaddrIndices.length; ++i){
                 transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
             }
