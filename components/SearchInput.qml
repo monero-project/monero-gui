@@ -28,6 +28,8 @@
 
 import QtQuick 2.0
 
+import "../components" as MoneroComponents
+
 Item {
     id: item
     signal searchClicked(string text, int option)
@@ -213,18 +215,13 @@ Item {
             }
         }
 
-        StandardButton {
+        MoneroComponents.StandardButton {
             id: button
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.margins: 6
             width: 80
-
-            shadowReleasedColor: "#C60F00"
-            shadowPressedColor: "#8C0B00"
-            pressedColor: "#C60F00"
-            releasedColor: "#FF4F41"
             text: qsTr("SEARCH")
             onClicked: item.searchClicked(input.text, droplist.currentOption)
         }

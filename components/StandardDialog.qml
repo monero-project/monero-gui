@@ -34,8 +34,6 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
-import "." 1.0
-
 
 Rectangle {
     id: root
@@ -104,12 +102,12 @@ Rectangle {
             //anchors {fill: parent; margins: 16 }
             Layout.alignment: Qt.AlignHCenter
 
-            Label {
+            MoneroComponents.Label {
                 id: dialogTitle
                 horizontalAlignment: Text.AlignHCenter
                 fontSize: 18 * scaleRatio
                 fontFamily: "Arial"
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
         }
@@ -120,13 +118,13 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 renderType: Text.QtRendering
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 textFormat: TextEdit.AutoText
                 readOnly: true
                 font.pixelSize: 14 * scaleRatio
                 selectByMouse: false
                 wrapMode: TextEdit.Wrap
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -175,7 +173,7 @@ Rectangle {
     // window borders
     Rectangle{
         width: 1
-        color: Style.grey
+        color: MoneroComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -183,7 +181,7 @@ Rectangle {
 
     Rectangle{
         width: 1
-        color: Style.grey
+        color: MoneroComponents.Style.grey
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -191,7 +189,7 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: Style.grey
+        color: MoneroComponents.Style.grey
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
@@ -199,12 +197,9 @@ Rectangle {
 
     Rectangle{
         height: 1
-        color: Style.grey
+        color: MoneroComponents.Style.grey
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }
 }
-
-
-

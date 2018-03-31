@@ -28,16 +28,16 @@
 
 import QtQuick.Controls 2.2
 import QtQuick 2.7
-import "." 1.0
 
+import "../components" as MoneroComponents
 
 TextField {
-    font.family: Style.fontRegular.name
+    font.family: MoneroComponents.Style.fontRegular.name
     font.pixelSize: 18 * scaleRatio
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: Style.defaultFontColor
+    color: MoneroComponents.Style.defaultFontColor
 
     background: Rectangle {
         color: "transparent"

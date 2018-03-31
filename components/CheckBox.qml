@@ -28,7 +28,8 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 RowLayout {
     id: checkBox
@@ -64,7 +65,6 @@ RowLayout {
             anchors.left: parent.left
             width: 25 * scaleRatio
             height: checkBox.height - 1
-            //radius: 4
             y: 1
             color: "transparent"
 
@@ -85,9 +85,9 @@ RowLayout {
 
         Text {
             id: label
-            font.family: Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
-            color: Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             anchors.left: backgroundRect.right

@@ -104,9 +104,9 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
             TextField {
@@ -116,13 +116,13 @@ Item {
                 anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 KeyNavigation.tab: passwordInput2
 
                 background: Rectangle {
@@ -162,9 +162,9 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
 
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
             }
 
             TextField {
@@ -174,14 +174,14 @@ Item {
                 anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 24 * scaleRatio
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
 
                 background: Rectangle {
                     radius: 2

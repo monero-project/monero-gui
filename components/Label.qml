@@ -29,7 +29,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import "." 1.0
+import "../components" as MoneroComponents
 
 Item {
     id: item
@@ -39,7 +39,7 @@ Item {
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
     property bool fontBold: false
-    property string fontColor: Style.defaultFontColor
+    property string fontColor: MoneroComponents.Style.defaultFontColor
     property string fontFamily: ""
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
@@ -57,7 +57,7 @@ Item {
             if(fontFamily){
                 return fontFamily;
             } else {
-                return Style.fontRegular.name;
+                return MoneroComponents.Style.fontRegular.name;
             }
         }
         font.pixelSize: fontSize

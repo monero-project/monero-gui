@@ -27,7 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.5
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 Rectangle {
     id: button
@@ -103,7 +104,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: 8 * scaleRatio
-            font.family: Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
             color: "#FFFFFF"
