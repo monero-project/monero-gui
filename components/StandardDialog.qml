@@ -100,6 +100,7 @@ Rectangle {
         RowLayout {
             id: column
             //anchors {fill: parent; margins: 16 }
+            Layout.topMargin: 14 * scaleRatio
             Layout.alignment: Qt.AlignHCenter
 
             MoneroComponents.Label {
