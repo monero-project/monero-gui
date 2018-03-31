@@ -28,7 +28,8 @@
 
 import QtQuick 2.0
 import moneroComponents.Wallet 1.0
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 Rectangle {
     id: item
@@ -62,7 +63,7 @@ Rectangle {
             id: progressText
             anchors.top: parent.top
             anchors.topMargin: 6
-            font.family: Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13 * scaleRatio
             font.bold: true
             color: "white"
@@ -75,7 +76,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
-            font.family: Style.fontMedium.name
+            font.family: MoneroComponents.Style.fontMedium.name
             font.pixelSize: 13 * scaleRatio
             font.bold: true
             color: "white"

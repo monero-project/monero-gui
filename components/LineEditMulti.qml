@@ -28,8 +28,8 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import "." 1.0
 
+import "../components" as MoneroComponents
 
 ColumnLayout {
     id: lineditmulti
@@ -64,21 +64,21 @@ ColumnLayout {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
-            font.family: Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 16 * scaleRatio
             font.bold: labelFontBold
             textFormat: Text.RichText
-            color: Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
             onLinkActivated: inputLabelLinkActivated()
         }
 
-        LabelButton {
+        MoneroComponents.LabelButton {
             id: labelButton
             onClicked: labelButtonClicked()
             visible: labelButtonVisible
         }
 
-        LabelButton {
+        MoneroComponents.LabelButton {
             id: copyButtonId
             visible: copyButton && multiLine.text !== ""
             text: qsTr("Copy")
@@ -94,7 +94,7 @@ ColumnLayout {
         }
     }
 
-    InputMulti {
+    MoneroComponents.InputMulti {
         id: multiLine
         readOnly: false
         addressValidation: true
@@ -113,8 +113,8 @@ ColumnLayout {
             anchors.left: parent.left
             anchors.leftMargin: 10 * scaleRatio
             opacity: 0.25
-            color: Style.defaultFontColor
-            font.family: Style.fontRegular.name
+            color: MoneroComponents.Style.defaultFontColor
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 18 * scaleRatio
             text: ""
             z: 3

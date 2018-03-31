@@ -32,8 +32,8 @@ import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
-import "../components"
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 
 Rectangle{
@@ -50,20 +50,20 @@ Rectangle{
     Text {
         id: label1
         anchors.left: parent.left
-        font.family: Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: 14 * scaleRatio
         text: labelHeader
-        color: Style.greyFontColor
+        color: MoneroComponents.Style.greyFontColor
     }
 
     Text {
         id: label2
         anchors.left: parent.left
         anchors.top: label1.bottom
-        font.family: Style.fontRegular.name
+        font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: 14 * scaleRatio
         text: labelValue
-        color: Style.dimmedFontColor
+        color: MoneroComponents.Style.dimmedFontColor
     }
 
     // hover effect / copy value
@@ -73,12 +73,12 @@ Rectangle{
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onEntered: {
-            label1.color = Style.defaultFontColor;
-            label2.color = Style.defaultFontColor;
+            label1.color = MoneroComponents.Style.defaultFontColor;
+            label2.color = MoneroComponents.Style.defaultFontColor;
         }
         onExited: {
-            label1.color = Style.greyFontColor;
-            label2.color = Style.dimmedFontColor;
+            label1.color = MoneroComponents.Style.greyFontColor;
+            label2.color = MoneroComponents.Style.dimmedFontColor;
         }
         onClicked: {
             if(copyValue){

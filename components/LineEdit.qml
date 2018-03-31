@@ -27,7 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 Item {
     id: item
@@ -35,10 +36,10 @@ Item {
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
-    property string placeholderFontFamily: Style.fontRegular.name
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18 * scaleRatio
-    property string placeholderColor: Style.defaultFontColor
+    property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.25
 
     property alias validator: input.validator
@@ -105,11 +106,11 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: 2 * scaleRatio
-        font.family: Style.fontLight.name
+        font.family: MoneroComponents.Style.fontLight.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
-        color: Style.defaultFontColor
+        color: MoneroComponents.Style.defaultFontColor
         onLinkActivated: item.labelLinkActivated()
 
         MouseArea {
@@ -119,7 +120,7 @@ Item {
         }
     }
 
-    LabelButton {
+    MoneroComponents.LabelButton {
         id: copyButtonId
         text: qsTr("Copy")
         anchors.right: parent.right
@@ -190,7 +191,7 @@ Item {
             visible: false
         }
 
-        Input {
+        MoneroComponents.Input {
             id: input
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 38 : 0
@@ -201,7 +202,7 @@ Item {
             onTextChanged: item.textUpdated()
         }
 
-        InlineButton {
+        MoneroComponents.InlineButton {
             id: inlineButtonId
             visible: item.inlineButtonText ? true : false
             anchors.right: parent.right

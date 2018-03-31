@@ -28,13 +28,14 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import "." 1.0
+
+import "../components" as MoneroComponents
 
 Item {
     id: button
     property string rightIcon: ""
     property string icon: ""
-    property string textColor: button.enabled? Style.buttonTextColor: Style.buttonTextColorDisabled
+    property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
     property bool small: false
     property alias text: label.text
     property int fontSize: {
@@ -59,7 +60,7 @@ Item {
         anchors.right: parent.right
         height: parent.height - 1
         radius: 3
-        color: parent.enabled ? Style.buttonBackgroundColor : Style.buttonBackgroundColorDisabled
+        color: parent.enabled ? MoneroComponents.Style.buttonBackgroundColor : MoneroComponents.Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
         MouseArea {
@@ -87,7 +88,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         horizontalAlignment: Text.AlignHCenter
-        font.family: Style.fontBold.name
+        font.family: MoneroComponents.Style.fontBold.name
         font.bold: true
         font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
         color: parent.textColor
