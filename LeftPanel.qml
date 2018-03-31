@@ -177,7 +177,7 @@ Rectangle {
 
                 Text {
                     id: unlockedBalanceText
-                    visible: false
+                    visible: true
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.top: parent.top
@@ -198,7 +198,7 @@ Rectangle {
 
                 Label {
                     id: unlockedBalanceLabel
-                    visible: false
+                    visible: true
                     text: qsTr("Unlocked balance") + translationManager.emptyString
                     anchors.left: parent.left
                     anchors.leftMargin: 20
