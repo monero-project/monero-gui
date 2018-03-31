@@ -332,12 +332,29 @@ Rectangle {
               rightIcon: "../images/rightIcon.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
+              // Send button is enabled when:
               enabled : {
-                  // Send button is enabled when:
-                  // 1) Currently opened wallet is not view-only
-                  // 2) There is no warning box displayed
-                  // 3) The transactional information is correct
-                  return !appWindow.viewOnly && warningText.text === '' && pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype);
+                  // Currently opened wallet is not view-only
+                  if(appWindow.viewOnly){
+                      return false;
+                  }
+                  
+                  // There is no warning box displayed
+                  if(warningText.text !== ''){
+                      return false;
+                  }
+                  
+                  // The transactional information is correct
+                  if(!pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)){
+                      return false;
+                  }
+                  
+                  // There are sufficient unlocked funds available
+                  if(parseInt(amountLine.text) > parseInt(unlockedBalanceText)){
+                      return false;
+                  }
+                  
+                  return true;
               }
               onClicked: {
                   console.log("Transfer: paymentClicked")
