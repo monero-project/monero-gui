@@ -623,7 +623,7 @@ Rectangle {
             Layout.topMargin: 8
             font.pixelSize: 14
             Layout.fillWidth: true
-            text: qsTr("GUI version: ") + Version.GUI_VERSION + translationManager.emptyString
+            text: qsTr("GUI version: ") + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
         }
         TextBlock {
             id: guiMoneroVersion

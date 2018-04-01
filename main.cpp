@@ -173,6 +173,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("mainApp", &app);
 
+    engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
