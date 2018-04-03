@@ -621,7 +621,7 @@ ApplicationWindow {
                 transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
             }
             transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
-            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("Description: ") + transactionDescription))
+            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
             for (var i = 0; i < transaction.subaddrIndices.length; ++i){
                 transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
             }
