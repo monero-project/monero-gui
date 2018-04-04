@@ -863,7 +863,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
     m_subaddress = new Subaddress(m_walletImpl->subaddress(), this);
-    m_walletImpl->setListener(new WalletListenerImpl(this));
+    m_walletListener = new WalletListenerImpl(this);
+    m_walletImpl->setListener(m_walletListener);
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
     // start cache timers
     m_connectionStatusTime.restart();
@@ -896,5 +897,7 @@ Wallet::~Wallet()
         qDebug("Error storing wallet cache");
     delete m_walletImpl;
     m_walletImpl = NULL;
+    delete m_walletListener;
+    m_walletListener = NULL;
     qDebug("m_walletImpl deleted");
 }
