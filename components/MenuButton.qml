@@ -123,8 +123,10 @@ Rectangle {
 
     Text {
         id: symbolText
-        anchors.centerIn: parent
-        font.pixelSize: 11 * scaleRatio
+        anchors.right: parent.right
+        anchors.rightMargin: 44 * scaleRatio
+        anchors.verticalCenter: parent.verticalCenter
+        font.pixelSize: 12 * scaleRatio
         font.bold: true
         color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
         visible: appWindow.ctrlPressed
