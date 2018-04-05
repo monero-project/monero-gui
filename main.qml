@@ -1317,6 +1317,7 @@ ApplicationWindow {
             anchors.bottom: parent.bottom
             onDashboardClicked: {
                 middlePanel.state = "Dashboard";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1325,6 +1326,8 @@ ApplicationWindow {
 
             onTransferClicked: {
                 middlePanel.state = "Transfer";
+                middlePanel.flickable.contentY = 0;
+                mainFlickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1333,6 +1336,7 @@ ApplicationWindow {
 
             onReceiveClicked: {
                 middlePanel.state = "Receive";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1341,6 +1345,7 @@ ApplicationWindow {
 
             onTxkeyClicked: {
                 middlePanel.state = "TxKey";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1349,6 +1354,7 @@ ApplicationWindow {
 
             onSharedringdbClicked: {
                 middlePanel.state = "SharedRingDB";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1357,6 +1363,7 @@ ApplicationWindow {
 
             onHistoryClicked: {
                 middlePanel.state = "History";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1365,6 +1372,7 @@ ApplicationWindow {
 
             onAddressBookClicked: {
                 middlePanel.state = "AddressBook";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1373,6 +1381,7 @@ ApplicationWindow {
 
             onMiningClicked: {
                 middlePanel.state = "Mining";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1381,6 +1390,7 @@ ApplicationWindow {
 
             onSignClicked: {
                 middlePanel.state = "Sign";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1389,11 +1399,12 @@ ApplicationWindow {
 
             onSettingsClicked: {
                 middlePanel.state = "Settings";
+                middlePanel.flickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
                 updateBalance();
-            }    
+            }
 
             onKeysClicked: {
                 passwordDialog.onAcceptedCallback = function() {

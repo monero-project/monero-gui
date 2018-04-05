@@ -50,6 +50,7 @@ Rectangle {
     property string unlockedBalanceText
     property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
     property alias contentHeight: mainFlickable.contentHeight
+    property alias flickable: mainFlickable
 //    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
