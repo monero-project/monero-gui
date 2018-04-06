@@ -206,5 +206,6 @@
         <file>images/warning.png</file>
         <file>images/checkedBlackIcon.png</file>
         <file>images/rightArrowInactive.png</file>
+        <file>js/Windows.js</file>
     </qresource>
 </RCC>
