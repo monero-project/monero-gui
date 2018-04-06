@@ -32,25 +32,32 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id: titleBar
-
+    
+    height: customDecorations && !isMobile ? 50 : 0
+    y: -height
+    z: 1
+    
+    property string title
     property int mouseX: 0
     property bool containsMouse: false
     property alias basicButtonVisible: goToBasicVersionButton.visible
     property bool customDecorations: true
+    property bool showWhatIsButton: true
+    property bool showMinimizeButton: false
+    property bool showMaximizeButton: false
+    property bool showCloseButton: true
+    
+    signal closeClicked
+    signal maximizeClicked
+    signal minimizeClicked
     signal goToBasicVersion(bool yes)
-    height: customDecorations && !isMobile ? 50 : 0
-    y: -height
-    property string title
-    property alias maximizeButtonVisible: maximizeButton.visible
-    z: 1
 
     Item {
-        id: test
+        // Background gradient
         width: parent.width
         height: 50
-        z: 1
+        z: parent.z + 1
 
-        // use jpg for gradiency
         Image {
            anchors.fill: parent
            height: parent.height
@@ -65,7 +72,7 @@ Rectangle {
         height: 50
         anchors.centerIn: parent
         visible: customDecorations
-        z: 1
+        z: parent.z + 1
 
         Image {
             anchors.left: parent.left
@@ -88,7 +95,7 @@ Rectangle {
         height: 50 * scaleRatio
         width: height
         visible: isMobile
-        z: 2
+        z: parent.z + 2
 
         Image {
             width: 14
@@ -118,10 +125,11 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         visible: parent.customDecorations
-        z: 2
+        z: parent.z + 2
 
         Rectangle {
             id: whatIsAreaButton
+            visible: showWhatIsButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -148,6 +156,7 @@ Rectangle {
 
         Rectangle {
             id: minimizeButton
+            visible: showMinimizeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -165,14 +174,13 @@ Rectangle {
                 cursorShape: Qt.PointingHandCursor
                 onEntered: minimizeButton.color = "#262626";
                 onExited: minimizeButton.color = "transparent";
-                onClicked: {
-                    appWindow.visibility = Window.Minimized
-                }
+                onClicked: minimizeClicked();
             }
         }
 
         Rectangle {
             id: maximizeButton
+            visible: showMaximizeButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -193,15 +201,13 @@ Rectangle {
                 cursorShape: Qt.PointingHandCursor
                 onEntered: maximizeButton.color = "#262626";
                 onExited: maximizeButton.color = "transparent";
-                onClicked: {
-                    appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
-                                                                                        Window.Windowed
-                }
+                onClicked: maximizeClicked();
             }
         }
 
         Rectangle {
             id: closeButton
+            visible: showCloseButton
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             width: 42
@@ -216,7 +222,7 @@ Rectangle {
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: appWindow.close();
+                onClicked: closeClicked();
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onEntered: closeButton.color = "#262626";
@@ -225,4 +231,12 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height:1
+        color: "#2F2F2F"
+        z: 2
+    }
 }
