@@ -17,7 +17,7 @@
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
         <translatorcomment>Placeholder value</translatorcomment>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="80"/>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="110"/>
         <source>78.9239845</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../BasicPanel.qml" line="133"/>
@@ -103,7 +103,7 @@
     <message>
         <location filename="../BasicPanel.qml" line="146"/>
         <source>2324.9239845</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
 </context>
 <context>
@@ -396,7 +396,7 @@
         <location filename="../pages/Keys.qml" line="142"/>
         <location filename="../pages/Keys.qml" line="181"/>
         <source>Spendable Wallet</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="150"/>
@@ -455,7 +455,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="346"/>
         <source>R</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
@@ -465,7 +465,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="440"/>
         <source>K</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="369"/>
@@ -490,12 +490,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="321"/>
         <source>B</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="370"/>
         <source>H</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="392"/>
@@ -505,7 +505,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="393"/>
         <source>D</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
@@ -515,7 +515,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="416"/>
         <source>M</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
@@ -525,7 +525,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>Y</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="463"/>
@@ -535,7 +535,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="464"/>
         <source>I</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
@@ -545,12 +545,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="487"/>
         <source>E</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="296"/>
         <source>S</source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
 </context>
 <context>
@@ -1491,7 +1491,7 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
         <source></source>
-        <translation></translation>
+        <translation>type="unfinished"</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="69"/>
