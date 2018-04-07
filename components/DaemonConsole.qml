@@ -31,7 +31,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 
 import "../components" as MoneroComponents
 
@@ -51,15 +51,13 @@ Window {
     signal accepted()
     signal rejected()
 
+    onClosing: {
+        inactiveOverlay.visible = false;
+    }
+
     function open() {
         inactiveOverlay.visible = true;
         show();
-    }
-
-    function closeWindow() {
-        inactiveOverlay.visible = false;
-        root.close();
-        root.accepted();
     }
 
     // TODO: implement without hardcoding sizes
@@ -94,7 +92,7 @@ Window {
         showMinimizeButton: false
         showMaximizeButton: false
         showWhatIsButton: false
-        onCloseClicked: closeWindow();
+        onCloseClicked: root.close();
         title: root.title
         visible: persistentSettings.customDecorations ? true : false
 
