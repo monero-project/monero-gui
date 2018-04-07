@@ -41,11 +41,12 @@ Rectangle {
     property int mouseX: 0
     property bool containsMouse: false
     property alias basicButtonVisible: goToBasicVersionButton.visible
-    property bool customDecorations: true
+    property bool customDecorations: persistentSettings.customDecorations
     property bool showWhatIsButton: true
     property bool showMinimizeButton: false
     property bool showMaximizeButton: false
     property bool showCloseButton: true
+    property bool showMoneroLogo: false
     
     signal closeClicked
     signal maximizeClicked
@@ -66,12 +67,12 @@ Rectangle {
         }
     }
 
-    Item{
+    Item {
         id: titlebarlogo
         width: 125
         height: 50
         anchors.centerIn: parent
-        visible: customDecorations
+        visible: customDecorations && showMoneroLogo
         z: parent.z + 1
 
         Image {
@@ -82,6 +83,15 @@ Rectangle {
             height: 28
             source: "../images/titlebarLogo.png"
         }
+    }
+
+    Label {
+        id: titleLabel
+        visible: !showMoneroLogo && customDecorations && titleBar.title !== ''
+        anchors.centerIn: parent
+        fontSize: 24
+        text: titleBar.title
+        z: parent.z + 1
     }
 
     // collapse left panel
