@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
@@ -38,21 +38,26 @@ import "../components" as MoneroComponents
 Window {
     id: root
     modality: Qt.ApplicationModal
-    flags: Qt.Window | Qt.FramelessWindowHint
-    property alias title: dialogTitle.text
+    color: "black"
+    flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
+    property string title
     property alias text: dialogContent.text
     property alias content: root.text
-    property alias okVisible: okButton.visible
     property alias textArea: dialogContent
+    property alias titleBar: titleBar
     property var icon
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
 
-
     function open() {
-        show()
+        show();
+    }
+
+    function closeWindow() {
+        root.close();
+        root.accepted();
     }
 
     // TODO: implement without hardcoding sizes
@@ -68,81 +73,152 @@ Window {
         onMouseYChanged: root.y += (mouseY - lastMousePos.y)
     }
 
-    ColumnLayout {
-        id: mainLayout
-        spacing: 10
-        anchors { fill: parent; margins: 35 }
+    TitleBar {
+        id: titleBar
+        anchors.left: parent.left
+        anchors.right: parent.right
+        x: 0
+        y: 0
+        showMinimizeButton: false
+        showMaximizeButton: false
+        showWhatIsButton: false
+        onCloseClicked: closeWindow();
+        title: root.title
+        visible: persistentSettings.customDecorations ? true : false
 
-        RowLayout {
-            id: column
-            //anchors {fill: parent; margins: 16 }
-            Layout.alignment: Qt.AlignHCenter
+        MouseArea {
+            enabled: persistentSettings.customDecorations
+            property var previousPosition
+            anchors.fill: parent
+            propagateComposedEvents: true
+            onPressed: previousPosition = globalCursor.getPosition()
+            onPositionChanged: {
+                if (pressedButtons == Qt.LeftButton) {
+                    var pos = globalCursor.getPosition()
+                    var dx = pos.x - previousPosition.x
+                    var dy = pos.y - previousPosition.y
 
-            Label {
-                id: dialogTitle
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: 32
-                font.family: "Arial"
-                color: "#555555"
-            }
-
-        }
-
-        RowLayout {
-            TextArea {
-                id : dialogContent
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                font.family: "Arial"
-                textFormat: TextEdit.AutoText
-                readOnly: true
-                font.pixelSize: 12
-            }
-        }
-
-        // Ok/Cancel buttons
-        RowLayout {
-            id: buttons
-            spacing: 60
-            Layout.alignment: Qt.AlignHCenter
-
-            MoneroComponents.StandardButton {
-                id: okButton
-                width: 120
-                fontSize: 14
-                text: qsTr("Close") + translationManager.emptyString
-                onClicked: {
-                    root.close()
-                    root.accepted()
-
+                    root.x += dx
+                    root.y += dy
+                    previousPosition = pos
                 }
             }
-
-            MoneroComponents.LineEdit {
-                id: sendCommandText
-                width: 300
-                placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
-                onAccepted: {
-                    if(text.length > 0)
-                        daemonManager.sendCommand(text,currentWallet.nettype);
-                    text = ""
-                }
-            }
-
-            // Status button
-//            MoneroComponents.StandardButton {
-//                id: sendCommandButton
-//                enabled: sendCommandText.text.length > 0
-//                fontSize: 14
-//                text: qsTr("Send command")
-//                onClicked: {
-//                    daemonManager.sendCommand(sendCommandText.text,currentWallet.testnet);
-//                }
-//            }
         }
     }
 
+    ColumnLayout {
+        id: mainLayout
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.topMargin: titleBar.visible ? 80 : 20
+
+        anchors.margins: 35 * scaleRatio
+        spacing: 30 * scaleRatio
+
+        RowLayout {
+            visible: !persistentSettings.customDecorations
+            Layout.fillWidth: true
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            MoneroComponents.Label {
+                id: titleLabel
+                anchors.horizontalCenter: parent.horizontalCenter
+                fontSize: 24
+                text: title
+                z: parent.z + 1
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Flickable {
+                id: flickable
+                anchors.fill: parent
+
+                TextArea.flickable: TextArea {
+                    id : dialogContent
+                    selectByMouse: true
+                    selectByKeyboard: true
+                    anchors.fill: parent
+                    font.family: "Ariel"
+                    font.pixelSize: 14
+                    color: MoneroComponents.Style.defaultFontColor
+                    selectionColor: MoneroComponents.Style.dimmedFontColor
+                    textFormat: TextEdit.AutoText
+                    wrapMode: TextEdit.Wrap
+                    background: Rectangle {
+                        color: "black"
+                        anchors.fill: parent
+                        border.color: Qt.rgba(255, 255, 255, 0.25);
+                        border.width: 1
+                        radius: 4
+                    }
+                    readOnly: true
+                }
+
+                ScrollBar.vertical: ScrollBar {
+
+                    anchors.top: flickable.top
+                    anchors.left: flickable.right
+                    anchors.bottom: flickable.bottom
+                }
+            }
+        }
+
+        GridLayout {
+            columns: (isMobile)? 1 : 2
+            Layout.fillWidth: true
+            columnSpacing: 32
+
+            ColumnLayout {}
+
+            ColumnLayout {
+                Layout.fillWidth: true
+
+                MoneroComponents.LineEdit {
+                    id: sendCommandText
+                    Layout.fillWidth: true
+                    placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
+                    onAccepted: {
+                        if(text.length > 0)
+                            daemonManager.sendCommand(text, currentWallet.nettype);
+                        text = ""
+                    }
+                }
+            }
+        }
+    }
+
+    // window borders
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.left: parent.left
+        width:1
+        color: "#2F2F2F"
+        z: 2
+    }
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.right: parent.right
+        width:1
+        color: "#2F2F2F"
+        z: 2
+    }
+
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height:1
+        color: "#2F2F2F"
+        z: 2
+    }
 }
-
-
-
