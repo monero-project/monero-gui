@@ -32,11 +32,18 @@ import QtQuick.Layouts 1.1
 
 Rectangle {
     id: titleBar
-    
-    height: customDecorations && !isMobile ? 50 : 0
+
+    height: {
+        if(!customDecorations || isMobile){
+            return 0;
+        }
+
+        if(small) return 38 * scaleRatio;
+        else return 50 * scaleRatio;
+    }
     y: -height
     z: 1
-    
+
     property string title
     property int mouseX: 0
     property bool containsMouse: false
@@ -47,7 +54,8 @@ Rectangle {
     property bool showMaximizeButton: false
     property bool showCloseButton: true
     property bool showMoneroLogo: false
-    
+    property bool small: false
+
     signal closeClicked
     signal maximizeClicked
     signal minimizeClicked
@@ -56,13 +64,13 @@ Rectangle {
     Item {
         // Background gradient
         width: parent.width
-        height: 50
+        height: s
         z: parent.z + 1
 
         Image {
-           anchors.fill: parent
-           height: parent.height
-           width: parent.width
+           anchors.fill: titleBar
+           height: titleBar.height
+           width: titleBar.width
            source: "../images/titlebarGradient.jpg"
         }
     }
@@ -70,7 +78,7 @@ Rectangle {
     Item {
         id: titlebarlogo
         width: 125
-        height: 50
+        height: parent.height
         anchors.centerIn: parent
         visible: customDecorations && showMoneroLogo
         z: parent.z + 1
@@ -89,7 +97,7 @@ Rectangle {
         id: titleLabel
         visible: !showMoneroLogo && customDecorations && titleBar.title !== ''
         anchors.centerIn: parent
-        fontSize: 24
+        fontSize: 18
         text: titleBar.title
         z: parent.z + 1
     }
@@ -102,7 +110,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         color:  "transparent"
-        height: 50 * scaleRatio
+        height: titleBar.height
         width: height
         visible: isMobile
         z: parent.z + 2
@@ -241,12 +249,23 @@ Rectangle {
         }
     }
 
+    // window borders
     Rectangle {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
-        height:1
+        height: 1
         color: "#2F2F2F"
-        z: 2
+        z: parent.z + 1
+    }
+
+    Rectangle {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+        visible: titleBar.small
+        height: 1
+        color: "#2F2F2F"
+        z: parent.z + 1
     }
 }
