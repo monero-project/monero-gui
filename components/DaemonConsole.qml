@@ -174,9 +174,14 @@ Window {
                 }
 
                 ScrollBar.vertical: ScrollBar {
-
+                    // TODO
+                    // scrollbar always visible is somewhat buggy
+                    // QT 5.7 introduces `policy: ScrollBar.AlwaysOn`
+                    // but we can't use it yet.
+                    contentItem.opacity: 1
                     anchors.top: flickable.top
                     anchors.left: flickable.right
+                    anchors.leftMargin: 10
                     anchors.bottom: flickable.bottom
                 }
             }
