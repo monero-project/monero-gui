@@ -1811,4 +1811,13 @@ ApplicationWindow {
             close();
         }
     }
+
+    // background gradient
+    Rectangle {
+        id: inactiveOverlay
+        visible: false
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.8
+    }
 }
