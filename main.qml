@@ -419,7 +419,9 @@ ApplicationWindow {
     function connectRemoteNode() {
         console.log("connecting remote node");
         persistentSettings.useRemoteNode = true;
-        currentWallet.initAsync(persistentSettings.remoteNodeAddress);
+        currentDaemonAddress = persistentSettings.remoteNodeAddress;
+        currentWallet.initAsync(currentDaemonAddress);
+        walletManager.setDaemonAddress(currentDaemonAddress);
         remoteNodeConnected = true;
     }
 
@@ -428,6 +430,7 @@ ApplicationWindow {
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.initAsync(currentDaemonAddress);
+        walletManager.setDaemonAddress(currentDaemonAddress);
         remoteNodeConnected = false;
     }
 
