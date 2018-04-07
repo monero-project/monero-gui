@@ -52,10 +52,12 @@ Window {
     signal rejected()
 
     function open() {
+        inactiveOverlay.visible = true;
         show();
     }
 
     function closeWindow() {
+        inactiveOverlay.visible = false;
         root.close();
         root.accepted();
     }
@@ -63,6 +65,15 @@ Window {
     // TODO: implement without hardcoding sizes
     width:  480
     height: 280
+
+    // background gradient
+    Image {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        source: "../images/middlePanelBg.jpg"
+    }
 
     // Make window draggable
     MouseArea {
@@ -75,6 +86,7 @@ Window {
 
     TitleBar {
         id: titleBar
+        small: true
         anchors.left: parent.left
         anchors.right: parent.right
         x: 0
@@ -116,7 +128,7 @@ Window {
         anchors.topMargin: titleBar.visible ? 80 : 20
 
         anchors.margins: 35 * scaleRatio
-        spacing: 30 * scaleRatio
+        spacing: 20 * scaleRatio
 
         RowLayout {
             visible: !persistentSettings.customDecorations
@@ -152,7 +164,7 @@ Window {
                     textFormat: TextEdit.AutoText
                     wrapMode: TextEdit.Wrap
                     background: Rectangle {
-                        color: "black"
+                        color: "transparent"
                         anchors.fill: parent
                         border.color: Qt.rgba(255, 255, 255, 0.25);
                         border.width: 1
@@ -170,25 +182,17 @@ Window {
             }
         }
 
-        GridLayout {
-            columns: (isMobile)? 1 : 2
+        RowLayout {
             Layout.fillWidth: true
-            columnSpacing: 32
 
-            ColumnLayout {}
-
-            ColumnLayout {
+            MoneroComponents.LineEdit {
+                id: sendCommandText
                 Layout.fillWidth: true
-
-                MoneroComponents.LineEdit {
-                    id: sendCommandText
-                    Layout.fillWidth: true
-                    placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
-                    onAccepted: {
-                        if(text.length > 0)
-                            daemonManager.sendCommand(text, currentWallet.nettype);
-                        text = ""
-                    }
+                placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
+                onAccepted: {
+                    if(text.length > 0)
+                        daemonManager.sendCommand(text, currentWallet.nettype);
+                    text = ""
                 }
             }
         }
