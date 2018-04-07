@@ -1,3 +1,6 @@
+var flagsCustomDecorations = (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint);
+var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint);
+
 function setCustomWindowDecorations(custom) {
     var x = appWindow.x
     var y = appWindow.y
@@ -12,11 +15,11 @@ function setCustomWindowDecorations(custom) {
     daemonConsolePopup.titleBar.visible = custom;
 
     if (custom) {
-        appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint;
-        daemonConsolePopup.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint;
+        appWindow.flags = flagsCustomDecorations;
+        daemonConsolePopup.flags = flagsCustomDecorations;
     } else {
-        appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint;
-        daemonConsolePopup.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint;
+        appWindow.flags = flags;
+        daemonConsolePopup.flags = flags;
     }
 
     appWindow.hide()

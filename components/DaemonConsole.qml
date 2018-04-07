@@ -34,12 +34,13 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 
 import "../components" as MoneroComponents
+import "../js/Windows.js" as Windows
 
 Window {
     id: root
     modality: Qt.ApplicationModal
     color: "black"
-    flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
+    flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     property string title
     property alias text: dialogContent.text
     property alias content: root.text
