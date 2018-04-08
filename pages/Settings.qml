@@ -567,7 +567,6 @@ Rectangle {
                     pressedColor: "#202020"
                 }
                 // Make sure dropdown is on top
-                z: parent.z + 30
             }
 
             ColumnLayout {
@@ -577,6 +576,8 @@ Rectangle {
             ColumnLayout {
                 Layout.fillWidth: true
             }
+
+            z: parent.z + 1
         }
 
         ColumnLayout {
