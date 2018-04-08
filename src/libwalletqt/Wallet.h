@@ -349,6 +349,7 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
+    Monero::WalletListener *m_walletListener;
 };
 
 
