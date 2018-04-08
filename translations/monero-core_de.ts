@@ -16,7 +16,6 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>4...</source>
-        <translatorcomment>Placeholder value</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
