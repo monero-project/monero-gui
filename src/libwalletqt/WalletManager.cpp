@@ -272,6 +272,8 @@ bool WalletManager::localDaemonSynced() const
 
 bool WalletManager::isDaemonLocal(const QString &daemon_address) const
 {
+    if (daemon_address.isEmpty())
+        return false;
     return Monero::Utils::isAddressLocal(daemon_address.toStdString());
 }
 
