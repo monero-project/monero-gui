@@ -2035,7 +2035,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardMain.qml" line="403"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Das view-only Wallet wurde erstellt. Du kannst es öffnen in dem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
+        <translation>Das view-only Wallet wurde erstellt. Du kannst es öffnen, indem du das aktuelle Wallet schließt, auf &quot;Wallet von Datei öffnen&quot; klickst und das view-only Wallet in %1 auswählst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="411"/>
