@@ -1316,16 +1316,97 @@ ApplicationWindow {
             anchors.top: mobileHeader.bottom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            onDashboardClicked: { middlePanel.state = "Dashboard"; if(isMobile) hideMenu(); updateBalance(); }
-            onTransferClicked: { middlePanel.state = "Transfer"; if(isMobile) hideMenu(); updateBalance(); }
-            onReceiveClicked: { middlePanel.state = "Receive"; if(isMobile) hideMenu(); updateBalance(); }
-            onTxkeyClicked: { middlePanel.state = "TxKey"; if(isMobile) hideMenu(); updateBalance(); }
-            onSharedringdbClicked: { middlePanel.state = "SharedRingDB"; if(isMobile) hideMenu(); updateBalance(); }
-            onHistoryClicked: { middlePanel.state = "History"; if(isMobile) hideMenu(); updateBalance(); }
-            onAddressBookClicked: { middlePanel.state = "AddressBook"; if(isMobile) hideMenu(); updateBalance(); }
-            onMiningClicked: { middlePanel.state = "Mining"; if(isMobile) hideMenu(); updateBalance(); }
-            onSignClicked: { middlePanel.state = "Sign"; if(isMobile) hideMenu(); updateBalance(); }
-            onSettingsClicked: { middlePanel.state = "Settings"; if(isMobile) hideMenu(); updateBalance(); }
+            onDashboardClicked: {
+                middlePanel.state = "Dashboard";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onTransferClicked: {
+                middlePanel.state = "Transfer";
+                middlePanel.flickable.contentY = 0;
+                mainFlickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onReceiveClicked: {
+                middlePanel.state = "Receive";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onTxkeyClicked: {
+                middlePanel.state = "TxKey";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSharedringdbClicked: {
+                middlePanel.state = "SharedRingDB";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onHistoryClicked: {
+                middlePanel.state = "History";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onAddressBookClicked: {
+                middlePanel.state = "AddressBook";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onMiningClicked: {
+                middlePanel.state = "Mining";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSignClicked: {
+                middlePanel.state = "Sign";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
+            onSettingsClicked: {
+                middlePanel.state = "Settings";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
             onKeysClicked: {
                 passwordDialog.onAcceptedCallback = function() {
                     if(walletPassword === passwordDialog.password){
