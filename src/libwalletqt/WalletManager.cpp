@@ -272,6 +272,7 @@ bool WalletManager::localDaemonSynced() const
 
 bool WalletManager::isDaemonLocal(const QString &daemon_address) const
 {
+    // dummy change to trigger buildbot build
     return Monero::Utils::isAddressLocal(daemon_address.toStdString());
 }
 
