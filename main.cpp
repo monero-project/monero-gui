@@ -73,6 +73,8 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    std::locale l;
+    std::use_facet<std::collate<char> >(l);
     Monero::Utils::onStartup();
 //    // Enable high DPI scaling on windows & linux
 //#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
