@@ -26,6 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#define BOOST_REGEX_USE_C_LOCALE
+
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
@@ -73,6 +75,8 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    std::locale l;
+    std::use_facet<std::collate<char> >(l);
     Monero::Utils::onStartup();
 //    // Enable high DPI scaling on windows & linux
 //#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
