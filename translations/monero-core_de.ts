@@ -197,7 +197,7 @@
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Type for incremental search...</source>
-        <translation>Für Suchvervollständigung tippen …</translation>
+        <translation>Für Suchvervollständigung eingeben…</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="199"/>
@@ -369,7 +369,7 @@
         <location filename="../pages/Keys.qml" line="78"/>
         <location filename="../pages/Keys.qml" line="112"/>
         <source>Double tap to copy</source>
-        <translation>Zum Kopieren doppelt tappen</translation>
+        <translation>Zum Kopieren doppelt tippen</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="41"/>
         <source>Establishing connection...</source>
-        <translation>Stelle Verbindung her …</translation>
+        <translation>Stelle Verbindung her…</translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="58"/>
@@ -819,7 +819,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="152"/>
         <source>No transaction found yet...</source>
-        <translation>Noch keine Transaktion gefunden …</translation>
+        <translation>Noch keine Transaktion gefunden…</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="156"/>
@@ -840,7 +840,7 @@
         <location filename="../pages/Receive.qml" line="164"/>
         <source> with not enough money (%1)</source>
         <translatorcomment>Abweichung</translatorcomment>
-        <translation>mit ungenügendem Guthaben (%1)</translation>
+        <translation> mit ungenügendem Guthaben (%1)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="195"/>
@@ -961,7 +961,7 @@
     <message>
         <location filename="../components/SearchInput.qml" line="69"/>
         <source>Search by...</source>
-        <translation>Suche nach …</translation>
+        <translation>Suche nach…</translation>
     </message>
     <message>
         <location filename="../components/SearchInput.qml" line="228"/>
@@ -1303,7 +1303,7 @@ Die bisherige Wallet-Cache-Datei wird umbenannt und kann später wiederhergestel
     <message>
         <location filename="../pages/Sign.qml" line="389"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation>Einfügen oder von  &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
+        <translation>Einfügen oder von &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="160"/>
@@ -1655,7 +1655,7 @@ Bitte aktualisiere das Programm oder verbinde dich mit einem anderen Daemon</tra
     <message>
         <location filename="../pages/Transfer.qml" line="222"/>
         <source>Paste in or select from &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;</source>
-        <translation>Einfügen oder von  &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
+        <translation>Einfügen oder von &lt;a href=&apos;#&apos;&gt;Adressbuch&lt;/a&gt; auswählen</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="490"/>
@@ -1762,7 +1762,7 @@ Ringgröße: </translation>
         <location filename="../pages/TxKey.qml" line="97"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation>Erstelle einen Nachweis deiner Eingangs- und Ausgangszahlungen, indem du die Transaktions-ID, die Empfängeradresse und eine optionale Nachricht angibst. Für den Fall von Ausgangszahlungen kann du einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall musst du die Empfängeradresse nicht angeben.</translation>
+        <translation>Erstelle einen Nachweis deiner Eingangs- und Ausgangszahlungen, indem du die Transaktions-ID, die Empfängeradresse und eine optionale Nachricht angibst. Für den Fall von Ausgangszahlungen, kannst du einen Sendenachweis erstellen, der die Urheberschaft einer Transaktion nachweist. In diesem Fall musst du die Empfängeradresse nicht angeben.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="113"/>
@@ -1842,7 +1842,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="144"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz, aber dieselbe Menge an Bandbreite. Die Speicherung der gesamten Blockchain ist jedoch vorteilhaft für die Sicherheit des Monero-Netzwerks. Wenn du dich an einem Gerät mit begrenztem Speicherplat befindest, ist diese Option für dich geeignet.</translation>
+        <translation>Der Sparmodus verwendet deutlich weniger Festplattenspeicherplatz, aber dieselbe Menge an Bandbreite. Die Speicherung der gesamten Blockchain ist jedoch vorteilhaft für die Sicherheit des Monero-Netzwerks. Wenn du dich an einem Gerät mit begrenztem Speicherplatz befindest, ist diese Option für dich geeignet.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="157"/>
@@ -2317,7 +2317,7 @@ Für den Fall mit Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../main.qml" line="475"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Warte bis der daeom gestartet wurde…</translation>
+        <translation>Warte bis der Daemon gestartet wurde…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="481"/>
@@ -2519,7 +2519,7 @@ Beschreibung: </translation>
     <message>
         <location filename="../main.qml" line="1203"/>
         <source>Please wait...</source>
-        <translation>Bitte warten …</translation>
+        <translation>Bitte warten…</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1227"/>
