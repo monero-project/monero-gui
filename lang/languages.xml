@@ -2,18 +2,20 @@
 <languages>
 
 <!--
-List of available languages for your wallet's seed:
-0 : Deutsch         (German)
-1 : English
-2 : Español         (Spanish)
-3 : Français        (French)
-4 : Italiano        (Italian)
-5 : Nederlands      (Dutch)
-6 : Português       (Portuguese)
-7 : русский язык    (Russian)
-8 : 日本語          (Japanese)
-9 : 简体中文 (中国) (Simplified Chinese (Mainland))
-11 : Turkey         (Turkish)
+Note that wallet_language is not the wallet language but the mnemonic seed language!
+List of languages for which a mnemonic seed word list is available:
+English
+Nederlands	(Dutch)
+Français	(French)
+Español		(Spanish)
+Português	(Portuguese)
+日本語          (Japanese)
+Italiano	(Italian)
+Deutsch		(German)
+русский язык	(Russian)
+简体中文 (中国)  (Chinese (Simplified)
+Esperanto
+Lojban
 -->
         <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
         <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/> -->
@@ -46,8 +48,8 @@ List of available languages for your wallet's seed:
         <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/slovakia.png" qs="none"/>
         <language display_name="العربية" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
         <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/slovenia.png" qs="none"/>
-        <language display_name="Srpski" locale="sr_SR" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
-        <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
-        <language display_name="Turkish" locale="tr_TR" wallet_language="Turkish" flag="/lang/flags/tr.png" qs="none"/>
+        <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
+        <language display_name="Català" locale="cat_ES" wallet_language="English" flag="/lang/flags/catalonia.png" qs="none"/>
+        <language display_name="Türkçe" locale="tr_TR" wallet_language="English" flag="/lang/flags/tr.png" qs="none"/>
         <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
 </languages>
