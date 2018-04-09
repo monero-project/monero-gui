@@ -681,7 +681,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="55"/>
         <source>Remote node</source>
-        <translation>Entfernter Node</translation>
+        <translation>remote-Node</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="59"/>
@@ -948,7 +948,7 @@
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="49"/>
         <source>Remote Node Hostname / IP</source>
-        <translation>Hostname/IP des entfernten Nodes</translation>
+        <translation>Hostname/IP des remote-Nodes</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="57"/>
@@ -1076,7 +1076,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="215"/>
         <source>Remote Node</source>
-        <translation>Entfernter Node</translation>
+        <translation>remote-Node</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="233"/>
@@ -1111,7 +1111,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="382"/>
         <source>Remote node</source>
-        <translation>Entfernter Node</translation>
+        <translation>remote-Node</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="498"/>
