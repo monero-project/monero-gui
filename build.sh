@@ -63,8 +63,8 @@ fi
 source ./utils.sh
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-MONERO_DIR=wownero
-MONEROD_EXEC=wownerod
+WOWNERO_DIR=wownero
+WOWNERO_EXEC=wownerod
 
 MAKE='make'
 if [[ $platform == *bsd* ]]; then
@@ -93,16 +93,16 @@ fi
 if [ "$platform" == "darwin" ]; then
     BIN_PATH=$BIN_PATH/wownero-wallet-gui.app/Contents/MacOS/
 elif [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
-    MONEROD_EXEC=wownerod.exe
+    WOWNERO_EXEC=wownerod.exe
 fi
 
 # force version update
 get_tag
 echo "var GUI_VERSION = \"$TAGNAME\"" > version.js
-pushd "$MONERO_DIR"
+pushd "$WOWNERO_DIR"
 get_tag
 popd
-echo "var GUI_MONERO_VERSION = \"$TAGNAME\"" >> version.js
+echo "var GUI_WOWNERO_VERSION = \"$TAGNAME\"" >> version.js
 
 cd build
 if ! QMAKE=$(find_command qmake qmake-qt5); then
@@ -112,9 +112,9 @@ fi
 $QMAKE ../wownero-wallet-gui.pro "$CONFIG" || exit
 $MAKE || exit 
 
-# Copy monerod to bin folder
+# Copy wownerod to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
-cp ../$MONERO_DIR/bin/$MONEROD_EXEC $BIN_PATH
+cp ../$WOWNERO_DIR/bin/$WOWNERO_EXEC $BIN_PATH
 fi
 
 # make deploy

@@ -34,7 +34,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
 
 bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress)
 {
-    // prepare command line arguments and pass to monerod
+    // prepare command line arguments and pass to wownerod
     QStringList arguments;
 
     // Start daemon with --detach flag on non-windows platforms
@@ -84,7 +84,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
     connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
-    // Start monerod
+    // Start wownerod
     bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
