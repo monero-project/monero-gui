@@ -329,7 +329,8 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
-              rightIcon: "../images/rightIcon.png"
+              rightIcon: "../images/rightArrow.png"
+              rightIconInactive: "../images/rightArrowInactive.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
               // Send button is enabled when:
