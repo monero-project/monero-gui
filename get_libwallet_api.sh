@@ -1,5 +1,5 @@
 #!/bin/bash
-MONERO_URL=https://github.com/monero-project/monero.git
+MONERO_URL=https://github.com/jwinterm/wownero
 MONERO_BRANCH=master
 
 pushd $(pwd)
@@ -8,16 +8,16 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $ROOT_DIR/utils.sh
 
 INSTALL_DIR=$ROOT_DIR/wallet
-MONERO_DIR=$ROOT_DIR/monero
+MONERO_DIR=$ROOT_DIR/wownero
 BUILD_LIBWALLET=false
 
 # init and update monero submodule
 if [ ! -d $MONERO_DIR/src ]; then
-    git submodule init monero
+    git submodule init wownero
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout release-v0.12
+git -C $MONERO_DIR checkout v0.12.0.0
 
 # get monero core tag
 get_tag
@@ -33,8 +33,8 @@ git -C $MONERO_DIR submodule update
 # Save current user settings and revert back when we are done with merging PR's
 OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
 OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
-git -C $MONERO_DIR config user.name "Monero GUI"
-git -C $MONERO_DIR config user.email "gui@monero.local"
+git -C $MONERO_DIR config user.name "Wownero GUI"
+git -C $MONERO_DIR config user.email "gui@wownero.local"
 # check for PR requirements in most recent commit message (i.e requires #xxxx)
 for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
     echo "Merging monero push request #$PR"

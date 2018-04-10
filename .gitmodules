@@ -1,4 +1,3 @@
-[submodule "monero"]
-	path = monero
-	url = https://github.com/monero-project/monero
-	ignore = all
+[submodule "wownero"]
+	path = wownero
+	url = https://github.com/jwinterm/wownero

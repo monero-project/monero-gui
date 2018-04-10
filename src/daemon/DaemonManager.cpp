@@ -74,7 +74,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
 
 
-    qDebug() << "starting monerod " + m_monerod;
+    qDebug() << "starting wownerod " + m_monerod;
     qDebug() << "With command line arguments " << arguments;
 
     m_daemon = new QProcess();
@@ -166,9 +166,9 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype) const
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill /F /IM monerod.exe");
+                QProcess::execute("taskkill /F /IM wownerod.exe");
 #else
-                QProcess::execute("pkill monerod");
+                QProcess::execute("pkill wownerod");
 #endif
             }
 
@@ -214,7 +214,7 @@ bool DaemonManager::running(NetworkType::Type nettype) const
     QString status;
     sendCommand("status", nettype, status);
     qDebug() << status;
-    // `./monerod status` returns BUSY when syncing.
+    // `./wownerod status` returns BUSY when syncing.
     // Treat busy as connected, until fixed upstream.
     if (status.contains("Height:") || status.contains("BUSY") ) {
         return true;
@@ -300,9 +300,9 @@ DaemonManager::DaemonManager(QObject *parent)
 
     // Platform depetent path to monerod
 #ifdef Q_OS_WIN
-    m_monerod = QApplication::applicationDirPath() + "/monerod.exe";
+    m_monerod = QApplication::applicationDirPath() + "/wownerod.exe";
 #elif defined(Q_OS_UNIX)
-    m_monerod = QApplication::applicationDirPath() + "/monerod";
+    m_monerod = QApplication::applicationDirPath() + "/wownerod";
 #endif
 
     if (m_monerod.length() == 0) {

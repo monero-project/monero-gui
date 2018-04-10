@@ -719,12 +719,12 @@ void Wallet::setWalletCreationHeight(quint64 height)
 
 QString Wallet::getDaemonLogPath() const
 {
-    return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
+    return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/wownerod.log";
 }
 
 QString Wallet::getWalletLogPath() const
 {
-    const QString filename("monero-wallet-gui.log");
+    const QString filename("wownero-wallet-gui.log");
 
 #ifdef Q_OS_MACOS
     return QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs/" + filename;

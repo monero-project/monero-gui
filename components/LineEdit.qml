@@ -187,7 +187,7 @@ Item {
             anchors.topMargin: 8 * scaleRatio
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
-            source: "../images/moneroIcon-28x28.png"
+            source: "../images/wowneroIcon-28x28.png"
             visible: false
         }
 

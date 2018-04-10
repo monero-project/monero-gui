@@ -2,7 +2,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/wownero
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
@@ -329,36 +329,9 @@ macx {
 # translation stuff
 TRANSLATIONS =  \ # English is default language, no explicit translation file
                 $$PWD/translations/monero-core.ts \ # translation source (copy this file when creating a new translation)
-                $$PWD/translations/monero-core_ar.ts \ # Arabic
-                $$PWD/translations/monero-core_pt-br.ts \ # Portuguese (Brazil)
-                $$PWD/translations/monero-core_de.ts \ # German
-                $$PWD/translations/monero-core_eo.ts \ # Esperanto
-                $$PWD/translations/monero-core_es.ts \ # Spanish
-                $$PWD/translations/monero-core_fi.ts \ # Finnish
                 $$PWD/translations/monero-core_fr.ts \ # French
-                $$PWD/translations/monero-core_hr.ts \ # Croatian
-                $$PWD/translations/monero-core_id.ts \ # Indonesian
-                $$PWD/translations/monero-core_hi.ts \ # Hindi
                 $$PWD/translations/monero-core_it.ts \ # Italian
-                $$PWD/translations/monero-core_ja.ts \ # Japanese
-                $$PWD/translations/monero-core_nl.ts \ # Dutch
-                $$PWD/translations/monero-core_pl.ts \ # Polish
-                $$PWD/translations/monero-core_ru.ts \ # Russian
                 $$PWD/translations/monero-core_sv.ts \ # Swedish
-                $$PWD/translations/monero-core_zh-cn.ts \ # Chinese (Simplified-China)
-                $$PWD/translations/monero-core_zh-tw.ts \ # Chinese (Traditional-Taiwan)
-                $$PWD/translations/monero-core_he.ts \ # Hebrew
-                $$PWD/translations/monero-core_ko.ts \ # Korean
-                $$PWD/translations/monero-core_ro.ts \ # Romanian
-                $$PWD/translations/monero-core_da.ts \ # Danish
-                $$PWD/translations/monero-core_cs.ts \ # Czech
-                $$PWD/translations/monero-core_sk.ts \ # Slovak
-                $$PWD/translations/monero-core_sl.ts \ # Slovenian
-                $$PWD/translations/monero-core_rs.ts \ # Serbian
-                $$PWD/translations/monero-core_cat.ts \ # Catalan
-                $$PWD/translations/monero-core_tr.ts \ # Turkish
-                $$PWD/translations/monero-core_ua.ts \ # Ukrainian
-                $$PWD/translations/monero-core_pt-pt.ts \ # Portuguese (Portugal)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
@@ -444,7 +417,7 @@ linux:!android {
 }
 
 android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libwownero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
 
@@ -454,12 +427,12 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    monero/src/wallet/CMakeLists.txt \
+    wownero/src/wallet/CMakeLists.txt \
     components/MobileHeader.qml
 
 
 # windows application icon
-RC_FILE = monero-core.rc
+RC_FILE = wownero-core.rc
 
 # mac application icon
 ICON = $$PWD/images/appicon.icns
