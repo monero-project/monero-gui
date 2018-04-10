@@ -40,12 +40,10 @@ Window {
     id: root
     modality: Qt.ApplicationModal
     color: "black"
-    flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
-    property string title
+    flags: Windows.flags
     property alias text: dialogContent.text
     property alias content: root.text
     property alias textArea: dialogContent
-    property alias titleBar: titleBar
     property var icon
 
     // same signals as Dialog has
@@ -83,40 +81,6 @@ Window {
         onMouseYChanged: root.y += (mouseY - lastMousePos.y)
     }
 
-    TitleBar {
-        id: titleBar
-        small: true
-        anchors.left: parent.left
-        anchors.right: parent.right
-        x: 0
-        y: 0
-        showMinimizeButton: false
-        showMaximizeButton: false
-        showWhatIsButton: false
-        onCloseClicked: root.close();
-        title: root.title
-        visible: persistentSettings.customDecorations ? true : false
-
-        MouseArea {
-            enabled: persistentSettings.customDecorations
-            property var previousPosition
-            anchors.fill: parent
-            propagateComposedEvents: true
-            onPressed: previousPosition = globalCursor.getPosition()
-            onPositionChanged: {
-                if (pressedButtons == Qt.LeftButton) {
-                    var pos = globalCursor.getPosition()
-                    var dx = pos.x - previousPosition.x
-                    var dy = pos.y - previousPosition.y
-
-                    root.x += dx
-                    root.y += dy
-                    previousPosition = pos
-                }
-            }
-        }
-    }
-
     ColumnLayout {
         id: mainLayout
 
@@ -124,24 +88,10 @@ Window {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.topMargin: titleBar.visible ? 80 : 20
+        anchors.topMargin: 20
 
         anchors.margins: 35 * scaleRatio
         spacing: 20 * scaleRatio
-
-        RowLayout {
-            visible: !persistentSettings.customDecorations
-            Layout.fillWidth: true
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            MoneroComponents.Label {
-                id: titleLabel
-                anchors.horizontalCenter: parent.horizontalCenter
-                fontSize: 24
-                text: title
-                z: parent.z + 1
-            }
-        }
 
         RowLayout {
             Layout.fillWidth: true
