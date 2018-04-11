@@ -258,7 +258,7 @@ Rectangle {
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: "4.."
+              placeholderText: "Wo..."
               onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
               onLabelButtonClicked: {
                   var result = walletManager.resolveOpenAlias(addressLine.text)
