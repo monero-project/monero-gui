@@ -1,5 +1,5 @@
 #!/bin/bash
-WOWNERO_URL=https://github.com/jwinterm/wownero
+WOWNERO_URL=https://github.com/wownero/wownero
 WOWNERO_BRANCH=master
 
 pushd $(pwd)
@@ -17,7 +17,7 @@ if [ ! -d $WOWNERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $WOWNERO_DIR fetch
-git -C $WOWNERO_DIR checkout v0.12.0.0
+git -C $WOWNERO_DIR checkout release
 
 # get wownero core tag
 get_tag

@@ -49,7 +49,7 @@ Rectangle {
     Clipboard { id: clipboard }
 
     function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
+        var scaleToMixinCount = [7,8,9,10,11,12,13,14,16,18,20,22,25];
         if (scaleValue < scaleToMixinCount.length) {
             return scaleToMixinCount[scaleValue];
         } else {
