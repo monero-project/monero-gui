@@ -196,7 +196,7 @@ Rectangle {
                       validator: DoubleValidator {
                           bottom: 0.0
                           top: 18446744.073709551615
-                          decimals: 12
+                          decimals: 11
                           notation: DoubleValidator.StandardNotation
                           locale: "C"
                       }
@@ -209,7 +209,7 @@ Rectangle {
               Label {
                   id: transactionPriority
                   Layout.topMargin: 14
-                  text: qsTr("Transaction priority") + translationManager.emptyString
+                  text: qsTr("Transaction fee") + translationManager.emptyString
                   fontBold: false
                   fontSize: 16
               }
@@ -225,9 +225,9 @@ Rectangle {
                    id: priorityModelV5
 
                    ListElement { column1: qsTr("Default") ; column2: ""; priority: 0}
-                   ListElement { column1: qsTr("Slow (x0.25 fee)") ; column2: ""; priority: 1}
-                   ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
-                   ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
+                   ListElement { column1: qsTr("Economic") ; column2: ""; priority: 1}
+                   ListElement { column1: qsTr("Normal") ; column2: ""; priority: 2 }
+                   ListElement { column1: qsTr("High priority") ; column2: ""; priority: 3 }
                    ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
                }
 
