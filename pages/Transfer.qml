@@ -632,7 +632,7 @@ Rectangle {
 
     function updatePriorityDropdown() {
         priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 0
+        priorityDropdown.currentIndex = 1
         priorityDropdown.update()
     }
 
