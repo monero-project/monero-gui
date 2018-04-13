@@ -67,8 +67,14 @@
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    // Send all message types to logger
-    Monero::Wallet::debug("qml", msg.toStdString());
+    switch (type)
+    {
+        case QtDebugMsg:    Monero::Wallet::debug("frontend", msg.toStdString()); break;
+        case QtInfoMsg:     Monero::Wallet::info("frontend", msg.toStdString()); break;
+        case QtWarningMsg:  Monero::Wallet::warning("frontend", msg.toStdString()); break;
+        case QtCriticalMsg: Monero::Wallet::error("frontend", msg.toStdString()); break;
+        case QtFatalMsg:    Monero::Wallet::error("frontend", msg.toStdString()); break;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -82,10 +88,11 @@ int main(int argc, char *argv[])
 
     // Log settings
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
-//    qInstallMessageHandler(messageHandler);
 
     MainApp app(argc, argv);
 
+    // log qt/qml stuff to default logger:
+    qInstallMessageHandler(messageHandler);
     qDebug() << "app startd";
 
     app.setApplicationName("monero-core");
