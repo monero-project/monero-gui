@@ -401,6 +401,7 @@ Rectangle {
             }
 
             // ------------- Advanced tab ---------------
+            /*
             MenuButton {
                 id: advancedButton
                 anchors.left: parent.left
@@ -518,6 +519,7 @@ Rectangle {
                 color: "#313131"
                 height: 1
             }
+            */
             // ------------- Settings tab ---------------
             MenuButton {
                 id: settingsButton

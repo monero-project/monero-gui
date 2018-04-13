@@ -630,7 +630,7 @@ Rectangle {
             id: guiMoneroVersion
             Layout.fillWidth: true
             font.pixelSize: 14
-            text: qsTr("Embedded Monero version: ") + Version.GUI_WOWNERO_VERSION + translationManager.emptyString
+            text: qsTr("Embedded Wownero version: ") + Version.GUI_WOWNERO_VERSION + translationManager.emptyString
         }
         TextBlock {
             id: restoreHeightText

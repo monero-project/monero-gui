@@ -16,23 +16,23 @@ List of available languages for your wallet's seed:
 11 : Turkey         (Turkish)
 -->
         <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
-        <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/> -->
-        <!-- <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/> -->
-        <!-- <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/> -->
+        <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/>
+        <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/>
+        <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/>
         <language display_name="Deutsch" locale="de_DE" wallet_language="Deutsch" flag="/lang/flags/german.png" qs="none"/>
         <language display_name="Esperanto" locale="eo" wallet_language="Esperanto" flag="/lang/flags/esperanto.png" qs="none"/>
         <language display_name="Español" locale="es_ES" wallet_language="Español" flag="/lang/flags/spain.png" qs="none"/>
-        <!-- <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/> -->
+        <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/>
         <language display_name="Français" locale="fr_FR" wallet_language="Français" flag="/lang/flags/france.png" qs="none"/>
         <language display_name="Svenska" locale="sv_SE" wallet_language="English" flag="/lang/flags/sweden.png" qs="none"/>
         <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/croatia.png" qs="none"/>
-        <!-- <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/> -->
+        <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/>
         <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/indonesia.png" qs="none"/>
         <language display_name="Italiano" locale="it_IT" wallet_language="Italiano" flag="/lang/flags/italy.png" qs="none"/>
         <language display_name="日本語" locale="ja_JP" wallet_language="日本語" flag="/lang/flags/japan.png" qs="none"/>
         <language display_name="Nederlands" locale="nl_NL" wallet_language="Nederlands" flag="/lang/flags/netherlands.png" qs="none"/>
         <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/>
-        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/> -->
+        <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/>
         <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/portugal.png" qs="none"/>
         <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/brazil.png" qs="none"/>
         <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/russia.png" qs="none"/>
@@ -49,5 +49,5 @@ List of available languages for your wallet's seed:
         <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
         <language display_name="Català" locale="cat_ES" wallet_language="Catalan" flag="/lang/flags/catalonia.png" qs="none"/>
         <language display_name="Turkish" locale="tr_TR" wallet_language="Turkish" flag="/lang/flags/tr.png" qs="none"/>
-        <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
+        <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/> -->
 </languages>
