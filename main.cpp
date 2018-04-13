@@ -84,6 +84,25 @@ int main(int argc, char *argv[])
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
 //    qInstallMessageHandler(messageHandler);
 
+    // set qt environmental variables before starting the app
+    // TODO: get rid of those, by:
+    //       1. bundle qt w/ support for wayland in linux
+    //       2. add support for styles in qt/qml ?
+
+    #if defined (Q_OS_LINUX)
+    // force -platform xcb
+    putenv("QT_QPA_PLATFORM=xcb");
+    #endif
+
+    #if ! defined(Q_OS_ANDROID) && ! defined(Q_OS_IOS)
+    // on desktop disable "QApplication: invalid style override passed" warning
+    putenv("QT_STYLE_OVERRIDE=fusion");
+    #else
+    // don't use environment variables in mobile platforms
+    qunsetenv();
+    #endif
+
+
     MainApp app(argc, argv);
 
     qDebug() << "app startd";
