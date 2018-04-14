@@ -132,7 +132,7 @@ ColumnLayout {
                 visible: !isAndroid && !isIOS
                 onClicked: {
                     checked = true;
-                    remoteNode.checked = true;
+                    remoteNode.checked = false;
                 }
             }
         }
