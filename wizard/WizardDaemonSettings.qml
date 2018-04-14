@@ -226,9 +226,8 @@ ColumnLayout {
                 Layout.minimumWidth: 300 * scaleRatio
                 opacity: remoteNode.checked
                 id: remoteNodeEdit
-                property var rna: persistentSettings.remoteNodeAddress
-                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "34568" : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+                daemonAddrText: "wownero.mooo.com"
+                daemonPortText: "34568"
 
                 placeholderFontBold: true
                 placeholderFontFamily: "Arial"
