@@ -67,7 +67,8 @@ ColumnLayout {
                 // ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
                 // : "")
             // + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
-            + trStart + qsTr("Daemon address") + trMiddle + persistentSettings.daemon_address + trEnd
+            // TODO: does not display remote daemon address when selected
+            // + trStart + qsTr("Daemon address") + trMiddle + persistentSettings.daemon_address + trEnd
             + trStart + qsTr("Network Type") + trMiddle + networkText + trEnd
             + (restoreHeightEnabled
                 ? trStart + qsTr("Restore height") + trMiddle + wizard.settings['restore_height'] + trEnd

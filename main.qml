@@ -1034,7 +1034,7 @@ ApplicationWindow {
         property string blockchainDataDir: ""
         property bool useRemoteNode: true
         property string remoteNodeAddress: "http://wownero.mooo.com:34568"
-        property string bootstrapNodeAddress: ""
+        property string bootstrapNodeAddress: "http://wownero.mooo.com:34568"
         property bool segregatePreForkOutputs: false
         property bool keyReuseMitigation2: false
         property int segregationHeight: 0
