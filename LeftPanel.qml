@@ -82,10 +82,7 @@ Rectangle {
     anchors.top: parent.top
 
     Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        height: panel.height
+        fillMode: Image.PreserveAspectFit
         source: "images/leftPanelBg.jpg"
         z: 1
     }

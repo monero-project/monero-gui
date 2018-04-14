@@ -10,7 +10,7 @@ QtObject {
 
     property string grey: "#404040"
 
-    property string defaultFontColor: "#FF5608"
+    property string defaultFontColor: "#FFFFFF"
     property string greyFontColor: "#808080"
     property string dimmedFontColor: "#BBBBBB"
     property string inputBoxBackground: "#DDDDDD"
@@ -18,12 +18,12 @@ QtObject {
     property string inputBoxColor: "white"
     property string legacy_placeholderFontColor: "#BABABA"
 
-    property string buttonBackgroundColor: "#EB12FF"
+    property string buttonBackgroundColor: "#FF5608"
     property string buttonBackgroundColorHover: "#8D0E9B"
-    property string buttonBackgroundColorDisabled: "#430548"
+    property string buttonBackgroundColorDisabled: "#FF5608"
     property string buttonBackgroundColorDisabledHover: "#29032C"
     property string buttonTextColor: "white"
-    property string buttonTextColorDisabled: "black"
+    property string buttonTextColorDisabled: "white"
     property string dividerColor: "white"
     property real dividerOpacity: 0.25
 }

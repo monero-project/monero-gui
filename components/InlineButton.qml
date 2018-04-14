@@ -53,7 +53,7 @@ Item {
     Rectangle{
         id: rect
         color: MoneroComponents.Style.buttonBackgroundColorDisabled
-        border.color: "black"
+        border.color: "transparent"
         height: 28 * scaleRatio
         width: inlineText.width + 22 * scaleRatio
         radius: 4
@@ -66,7 +66,7 @@ Item {
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: 16 * scaleRatio
-            color: "black"
+            color: "white"
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
         }

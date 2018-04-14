@@ -72,10 +72,7 @@ Rectangle {
     signal checkProofClicked(string txid, string address, string message, string signature);
 
     Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        fillMode: Image.PreserveAspectFit
         source: "../images/middlePanelBg.jpg"
     }
 
