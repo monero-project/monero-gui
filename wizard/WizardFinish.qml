@@ -55,6 +55,12 @@ ColumnLayout {
             networkText = nettype == NetworkType.TESTNET ? qsTr("Testnet") : nettype == NetworkType.STAGENET ? qsTr("Stagenet") : qsTr("Mainnet"),
             restoreHeightEnabled = wizard.settings['restore_height'] !== undefined;
 
+        var daemonAddress = persistentSettings.daemon_address;
+        if(persistentSettings.useRemoteNode)
+        {
+           daemonAddress = persistentSettings.remoteNodeAddress;
+        }
+
         return "<table>"
             + trStart + qsTr("Language") + trMiddle + wizard.settings["language"] + trEnd
             + trStart + qsTr("Wallet name") + trMiddle + wizard.settings["account_name"] + trEnd
@@ -67,7 +73,7 @@ ColumnLayout {
                 // ? trStart + qsTr("Donation amount") + trMiddle + autoDonationAmount + trEnd
                 // : "")
             // + trStart + qsTr("Background mining") + trMiddle + backgroundMiningText + trEnd
-            + trStart + qsTr("Daemon address") + trMiddle + persistentSettings.daemon_address + trEnd
+            + trStart + qsTr("Daemon address") + trMiddle + daemonAddress + trEnd
             + trStart + qsTr("Network Type") + trMiddle + networkText + trEnd
             + (restoreHeightEnabled
                 ? trStart + qsTr("Restore height") + trMiddle + wizard.settings['restore_height'] + trEnd
