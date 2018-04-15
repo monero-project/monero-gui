@@ -155,9 +155,9 @@ Rectangle {
                     id: searchLine
                     fontSize: 14 * scaleRatio
                     inputHeight: 28 * scaleRatio
-                    borderDisabled: true
+                    borderDisabled: false
                     Layout.fillWidth: true
-                    backgroundColor: "#404040"
+                    backgroundColor: "transparent"
                     placeholderText: qsTr("Search") + translationManager.emptyString
                     placeholderCenter: true
                     onTextChanged:  {
@@ -244,11 +244,11 @@ Rectangle {
                     dropdownHeight: 28 * scaleRatio
 
                     Layout.fillWidth: true
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#404040"
-                    pressedColor: "#202020"
-                    colorHeaderBackground: "#404040"
+                    shadowReleasedColor: "transparent"
+                    shadowPressedColor: "transparent"
+                    releasedColor: "transparent"
+                    pressedColor: "transparent"
+                    colorHeaderBackground: "transparent"
 
                     onChanged: {
                         switch(priorityDropdown.currentIndex){
@@ -296,7 +296,7 @@ Rectangle {
                     visible: table.count > 0
 
                     height: 10
-                    color: "transparent"
+                    color: "#504C4B"
 
                     Rectangle {
                         anchors.top: parent.top
@@ -306,7 +306,7 @@ Rectangle {
                         anchors.leftMargin: 10
 
                         height: 1
-                        color: "#404040"
+                        color: "#504C4B"
                     }
 
                     Image {
