@@ -1873,7 +1873,7 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
         <translation>Para se comunicar com a rede Monero, sua carteira precisa estar conectada com um nó Monero. Para uma maior privacidade, é recomendado que você rode seu próprio nó.                         &lt;br&gt;&lt;br&gt;                         Se você não tem a opção de rodar seu próprio nó, existe a opção de conectar-se a um nó remoto.</translation>
     </message>
     <message>

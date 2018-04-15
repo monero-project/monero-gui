@@ -1873,7 +1873,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
         <translation>モネロネットワークと通信するためにウォレットはモネロノードに接続されている必要があります。プライバシーを最大限に保護するため自分自身のノードを走らせることが推奨されています。
 &lt;br&gt;&lt;br&gt;                         自分自身のノードを走らせることができない場合はリモートノードに接続することも可能です。</translation>
     </message>

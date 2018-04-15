@@ -1873,7 +1873,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
         <translation>Plånboken måste vara ansluten till en Monero-nod för att för att kunna kommunicera med Moneros nätverk. För högsta sekretess rekommenderas att du kör din egen nod.                         &lt;br&gt;&lt;br&gt;                         Om du inte har möjlighet att köra din egen nod finns alternativet att ansluta till en fjärrnod.</translation>
     </message>
     <message>

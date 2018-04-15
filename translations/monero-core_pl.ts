@@ -1873,7 +1873,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
         <translation>Aby móc komunikować się z siecią Monero twój portfel musi być połączony z węzłem Monero. Dla największej prywatności poleca się uruchomić swój własny węzeł.                         &lt;br&gt;&lt;br&gt;                         Jeśli nie masz możliwości by uruchomić własny węzeł, możesz połączyć się ze zdalnym węzłem.</translation>
     </message>
     <message>
