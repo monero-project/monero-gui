@@ -8,7 +8,7 @@ QtObject {
     property QtObject fontLight: FontLoader { id: _fontLight; source: "qrc:/fonts/SFUIDisplay-Light.otf"; }
     property QtObject fontRegular: FontLoader { id: _fontRegular; source: "qrc:/fonts/SFUIDisplay-Regular.otf"; }
 
-    property string grey: "#404040"
+    property string grey: "#504C4B"
 
     property string defaultFontColor: "#FFFFFF"
     property string greyFontColor: "#808080"
@@ -18,10 +18,10 @@ QtObject {
     property string inputBoxColor: "white"
     property string legacy_placeholderFontColor: "#BABABA"
 
-    property string buttonBackgroundColor: "#FF5608"
-    property string buttonBackgroundColorHover: "#8D0E9B"
-    property string buttonBackgroundColorDisabled: "#FF5608"
-    property string buttonBackgroundColorDisabledHover: "#29032C"
+    property string buttonBackgroundColor: "#EB12FF"
+    property string buttonBackgroundColorHover: "#504C4B"
+    property string buttonBackgroundColorDisabled: "#504C4B"
+    property string buttonBackgroundColorDisabledHover: "#EB12FF"
     property string buttonTextColor: "white"
     property string buttonTextColorDisabled: "white"
     property string dividerColor: "white"

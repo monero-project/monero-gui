@@ -64,7 +64,7 @@ GridLayout {
     LineEdit {
         id: daemonAddr
         Layout.fillWidth: true
-        placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
+        placeholderText: qsTr("Hostname / IP") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
         placeholderFontSize: root.placeholderFontSize

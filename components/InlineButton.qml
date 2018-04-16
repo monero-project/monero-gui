@@ -35,8 +35,8 @@ Item {
     id: inlineButton
     height: rect.height * scaleRatio
     property string shadowPressedColor: "#B32D00"
-    property string shadowReleasedColor: "#FF4304"
-    property string pressedColor: "#FF4304"
+    property string shadowReleasedColor: "#504C4B"
+    property string pressedColor: "#504C4B"
     property string releasedColor: "#FF6C3C"
     property string icon: ""
     property string textColor: "#FFFFFF"
@@ -78,12 +78,12 @@ Item {
             anchors.fill: parent
             onClicked: doClick()
             onEntered: {
-                rect.color = "#707070";
+                rect.color = "#EB12FF";
                 rect.opacity = 0.8;
             }
             onExited: {
                 rect.opacity = 1.0;
-                rect.color = "#808080";
+                rect.color = "#504C4B";
             }
         }
     }
