@@ -447,6 +447,8 @@ android{
     deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
+# add version from git tags
+include(version.pri)
 
 OTHER_FILES += \
     .gitignore \
@@ -458,8 +460,12 @@ DISTFILES += \
     components/MobileHeader.qml
 
 
-# windows application icon
-RC_FILE = monero-core.rc
+win32 {
+    # windows application icon
+    RC_ICONS = images/appicon.ico
+}
 
-# mac application icon
-ICON = $$PWD/images/appicon.icns
+macx {
+    # mac application icon
+    ICON = $$PWD/images/appicon.icns
+}

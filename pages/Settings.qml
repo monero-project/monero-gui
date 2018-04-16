@@ -31,7 +31,6 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../version.js" as Version
 
 
 import "../components"
@@ -624,13 +623,13 @@ Rectangle {
             Layout.topMargin: 8
             font.pixelSize: 14
             Layout.fillWidth: true
-            text: qsTr("GUI version: ") + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
+            text: qsTr("GUI version: ") + guiVersion + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
         }
         TextBlock {
             id: guiMoneroVersion
             Layout.fillWidth: true
             font.pixelSize: 14
-            text: qsTr("Embedded Monero version: ") + Version.GUI_MONERO_VERSION + translationManager.emptyString
+            text: qsTr("Embedded Monero version: ") + coreVersion + translationManager.emptyString
         }
         TextBlock {
             id: restoreHeightText

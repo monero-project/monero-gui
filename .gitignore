@@ -2,7 +2,6 @@
 *.user.*
 translations/*.qm
 build
-version.js
 # IOS stuff below
 moc_*
 *.o

@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    qDebug() << "app startd";
+    qWarning().nospace() << "starting monero-gui " << VERSION_GUI;
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
@@ -174,6 +174,10 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mainApp", &app);
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
+
+    engine.rootContext()->setContextProperty("guiVersion", VERSION_GUI);
+
+    engine.rootContext()->setContextProperty("coreVersion", VERSION_CORE);
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
