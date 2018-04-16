@@ -70,7 +70,7 @@ ApplicationWindow {
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property var cameraUi
-    property bool remoteNodeConnected: true
+    property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     // Default daemon addresses
     readonly property string localDaemonAddress : persistentSettings.nettype == NetworkType.MAINNET ? "localhost:34568" : persistentSettings.nettype == NetworkType.TESTNET ? "localhost:11181" : "localhost:38081"
@@ -426,7 +426,7 @@ ApplicationWindow {
 
     function disconnectRemoteNode() {
         console.log("disconnecting remote node");
-        persistentSettings.useRemoteNode = true;
+        persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.initAsync(currentDaemonAddress);
         remoteNodeConnected = false;
@@ -1032,9 +1032,9 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property string blockchainDataDir: ""
-        property bool useRemoteNode: true
-        property string remoteNodeAddress: "http://wownero.mooo.com:34568"
-        property string bootstrapNodeAddress: "http://wownero.mooo.com:34568"
+        property bool useRemoteNode: false
+        property string remoteNodeAddress: ""
+        property string bootstrapNodeAddress: ""
         property bool segregatePreForkOutputs: false
         property bool keyReuseMitigation2: false
         property int segregationHeight: 0
