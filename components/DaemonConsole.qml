@@ -35,6 +35,7 @@ import QtQuick.Window 2.2
 
 import "../components" as MoneroComponents
 import "../js/Windows.js" as Windows
+import "../js/Utils.js" as Utils
 
 Window {
     id: root
@@ -94,6 +95,7 @@ Window {
         spacing: 20 * scaleRatio
 
         RowLayout {
+            id: content
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -103,6 +105,7 @@ Window {
 
                 TextArea.flickable: TextArea {
                     id : dialogContent
+                    textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
                     anchors.fill: parent
@@ -110,8 +113,8 @@ Window {
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     selectionColor: MoneroComponents.Style.dimmedFontColor
-                    textFormat: TextEdit.AutoText
                     wrapMode: TextEdit.Wrap
+                    readOnly: true
                     background: Rectangle {
                         color: "transparent"
                         anchors.fill: parent
@@ -119,7 +122,45 @@ Window {
                         border.width: 1
                         radius: 4
                     }
-                    readOnly: true
+                    function logCommand(msg){
+                        msg = log_color(msg, "lime");
+                        textArea.append(msg);
+                    }
+                    function logMessage(msg){
+                        msg = msg.trim();
+                        var color = "white";
+                        if(msg.toLowerCase().indexOf('error') >= 0){
+                            color = "red";
+                        } else if (msg.toLowerCase().indexOf('warning') >= 0){
+                            color = "yellow";
+                        }
+
+                        // format multi-lines
+                        if(msg.split("\n").length >= 2){
+                            msg = msg.split("\n").join('<br>');
+                        }
+
+                        log(msg, color);
+                    }
+                    function log_color(msg, color){
+                        return "<span style='color: " + color +  ";' >" + msg + "</span>";
+                    }
+                    function log(msg, color){
+                        var timestamp = Utils.formatDate(new Date(), {
+                            weekday: undefined,
+                            month: "numeric",
+                            timeZoneName: undefined
+                        });
+
+                        var _timestamp = log_color("[" + timestamp + "]", "#FFFFFF");
+                        var _msg = log_color(msg, color);
+                        textArea.append(_timestamp + " " + _msg);
+
+                        // scroll to bottom
+                        if(flickable.contentHeight > content.height){
+                            flickable.contentY = flickable.contentHeight + 20;
+                        }
+                    }
                 }
 
                 ScrollBar.vertical: ScrollBar {
@@ -144,8 +185,10 @@ Window {
                 Layout.fillWidth: true
                 placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
                 onAccepted: {
-                    if(text.length > 0)
+                    if(text.length > 0) {
+                        textArea.logCommand(">>> " + text)
                         daemonManager.sendCommand(text, currentWallet.nettype);
+                    }
                     text = ""
                 }
             }

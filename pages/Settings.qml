@@ -34,6 +34,7 @@ import QtQuick.Dialogs 1.2
 
 import "../version.js" as Version
 import "../js/Windows.js" as Windows
+import "../js/Utils.js" as Utils
 import "../components"
 import moneroComponents.Clipboard 1.0
 
@@ -782,7 +783,7 @@ Rectangle {
 
     function onDaemonConsoleUpdated(message){
         // Update daemon console
-        daemonConsolePopup.textArea.append(message)
+        daemonConsolePopup.textArea.logMessage(message)
     }
 
 
