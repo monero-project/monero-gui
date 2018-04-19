@@ -229,15 +229,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("scaleRatio", 1);
 #endif
 
-    qDebug() << "available width: " << geo.width();
-    qDebug() << "available height: " << geo.height();
-    qDebug() << "devicePixelRatio: " << app.devicePixelRatio();
-    qDebug() << "screen height: " << height;
-    qDebug() << "screen width: " << width;
-    qDebug() << "screen logical dpi: " << dpi;
-    qDebug() << "screen Physical dpi: " << physicalDpi;
-    qDebug() << "screen calculated ratio: " << calculated_ratio;
-
+    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << width
+                         << "x" << height << " - dpi: " << dpi << " - ratio:"
+                         << calculated_ratio;
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
