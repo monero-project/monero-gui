@@ -201,29 +201,29 @@ Rectangle {
             Layout.fillWidth: true
 
             LabelSubheader {
-                text: qsTr("Wallet mode") + translationManager.emptyString
+                text: qsTr("Daemon mode") + translationManager.emptyString
             }
         }
 
-        RowLayout {
-            StandardButton {
+        ColumnLayout {
+            CheckBox {
                 id: remoteDisconnect
-                small: true
-                enabled: persistentSettings.useRemoteNode
-                Layout.fillWidth: false
+                checked: !persistentSettings.useRemoteNode
                 text: qsTr("Local Node") + translationManager.emptyString
                 onClicked: {
+                    persistentSettings.useRemoteNode = false;
+                    remoteConnect.checked = false;
                     appWindow.disconnectRemoteNode();
                 }
             }
 
-            StandardButton {
+            CheckBox {
                 id: remoteConnect
-                small: true
-                enabled: !persistentSettings.useRemoteNode
-                Layout.fillWidth: false
+                checked: persistentSettings.useRemoteNode
                 text: qsTr("Remote Node") + translationManager.emptyString
                 onClicked: {
+                    persistentSettings.useRemoteNode = true;
+                    remoteDisconnect.checked = false;
                     appWindow.connectRemoteNode();
                 }
             }
