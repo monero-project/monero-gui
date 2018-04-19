@@ -311,6 +311,7 @@ macx {
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
         -lboost_thread-mt \
+        -lboost_system-mt \
         -lboost_system \
         -lboost_date_time \
         -lboost_filesystem \
