@@ -1829,7 +1829,7 @@ Molimo nadogradite softver na najnoviju verziju ili se povežite sa drugim daemo
     <name>WizardDaemonSettings</name>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run an own node there&apos;s an option to connect to a remote node.</source>
+        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
         <translation>Vaš novčanik mora biti povezan sa Monero node-om kako bi komunikacija sa Monero mrežom bila moguća. Za najstrožu privatnost povežite se na svoj lokalni Monero node sa punim blokčejnom.                         &lt;br&gt;&lt;br&gt;                         Ukoliko niste u mogućnosti da pokrenete i koristite sopstveni, lokalni Monero node, uvek se možete povezati na udaljeni node.</translation>
     </message>
     <message>
