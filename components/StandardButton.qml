@@ -34,8 +34,10 @@ import "../components" as MoneroComponents
 Item {
     id: button
     property string rightIcon: ""
+    property string rightIconInactive: ""
     property string icon: ""
     property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
+    property string textAlign: rightIcon !== "" ? "left" : "center"
     property bool small: false
     property alias text: label.text
     property int fontSize: {
@@ -45,9 +47,21 @@ Item {
     signal clicked()
 
     // Dynamic height/width
-    Layout.minimumWidth: (label.contentWidth > 50)? label.contentWidth + 22 : 60
-    height: small ?  30 * scaleRatio : 36 * scaleRatio
+    Layout.minimumWidth: {
+        var _padding = 22;
+        if(button.rightIcon !== ""){
+            _padding += 60;
+        }
 
+        var _width = label.contentWidth + _padding;
+        if(_width <= 50) {
+            return 60;
+        }
+
+        return _width;
+    }
+
+    height: small ?  30 * scaleRatio : 36 * scaleRatio
 
     function doClick() {
         // Android workaround
@@ -87,7 +101,8 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
+        anchors.leftMargin: textAlign === "center" ? 0 : 11
         font.family: MoneroComponents.Style.fontBold.name
         font.bold: true
         font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
@@ -99,6 +114,21 @@ Item {
         anchors.centerIn: parent
         visible: parent.icon !== ""
         source: parent.icon
+    }
+
+    Image {
+        visible: parent.rightIcon !== ""
+        anchors.right: parent.right
+        anchors.rightMargin: 11 * scaleRatio
+        anchors.verticalCenter: parent.verticalCenter
+        width: parent.small ? 16 * scaleRatio : 20 * scaleRatio
+        height: parent.small ? 16 * scaleRatio : 20 * scaleRatio
+        source: {
+            if(parent.rightIconInactive !== "" && !parent.enabled){
+                return parent.rightIconInactive;
+            }
+            return parent.rightIcon;
+        }
     }
 
     MouseArea {

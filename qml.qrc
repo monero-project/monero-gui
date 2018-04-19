@@ -205,5 +205,6 @@
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
         <file>images/checkedBlackIcon.png</file>
+        <file>images/rightArrowInactive.png</file>
     </qresource>
 </RCC>
