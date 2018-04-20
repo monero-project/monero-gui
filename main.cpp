@@ -67,13 +67,16 @@
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    switch (type)
+    (void) context;
+    static const std::string cat = "frontend";
+    const std::string message = msg.toStdString();
+    switch(type)
     {
-        case QtDebugMsg:    Monero::Wallet::debug("frontend", msg.toStdString()); break;
-        case QtInfoMsg:     Monero::Wallet::info("frontend", msg.toStdString()); break;
-        case QtWarningMsg:  Monero::Wallet::warning("frontend", msg.toStdString()); break;
-        case QtCriticalMsg: Monero::Wallet::error("frontend", msg.toStdString()); break;
-        case QtFatalMsg:    Monero::Wallet::error("frontend", msg.toStdString()); break;
+        case QtDebugMsg:    Monero::Wallet::debug(cat, message);   break;
+        case QtInfoMsg:     Monero::Wallet::info(cat, message);    break;
+        case QtWarningMsg:  Monero::Wallet::warning(cat, message); break;
+        case QtCriticalMsg: Monero::Wallet::error(cat, message);   break;
+        case QtFatalMsg:    Monero::Wallet::error(cat, message);   break;
     }
 }
 
