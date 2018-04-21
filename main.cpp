@@ -84,9 +84,10 @@ int main(int argc, char *argv[])
     Monero::Wallet::init(argv[0], "monero-wallet-gui");
 //    qInstallMessageHandler(messageHandler);
 
-    MainApp app(argc, argv);
+    // disable "QApplication: invalid style override passed" warning
+    putenv((char*)"QT_STYLE_OVERRIDE=fusion");
 
-    qDebug() << "app startd";
+    MainApp app(argc, argv);
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
@@ -99,6 +100,12 @@ int main(int argc, char *argv[])
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
 
+    // command line parser
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.process(app);
+
+    qDebug() << "app startd";
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
 
