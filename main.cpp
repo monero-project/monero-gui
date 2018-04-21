@@ -82,13 +82,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
-
-//    // Enable high DPI scaling on windows & linux
-//#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
-//    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//    qDebug() << "High DPI auto scaling - enabled";
-//#endif
-
     // disable "QApplication: invalid style override passed" warning
     putenv((char*)"QT_STYLE_OVERRIDE=fusion");
 
@@ -131,6 +124,21 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     qWarning() << "app startd";
+
+    // screen settings. Mobile is designed on 128 dpi.
+    // TODO: add support for HiDPI scaling
+    qreal ref_dpi = 128;
+    QRect geo = QApplication::desktop()->availableGeometry();
+    QRect rect = QGuiApplication::primaryScreen()->geometry();
+    qreal height = qMax(rect.width(), rect.height());
+    qreal width = qMin(rect.width(), rect.height());
+    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+    qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
+    qreal calculated_ratio = physicalDpi/ref_dpi;
+
+    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << width
+                         << "x" << height << " - dpi: " << dpi << " - ratio:"
+                         << calculated_ratio;
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
@@ -241,17 +249,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
 
-    // screen settings
-    // Mobile is designed on 128dpi
-    qreal ref_dpi = 128;
-    QRect geo = QApplication::desktop()->availableGeometry();
-    QRect rect = QGuiApplication::primaryScreen()->geometry();
-    qreal height = qMax(rect.width(), rect.height());
-    qreal width = qMin(rect.width(), rect.height());
-    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
-    qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
-    qreal calculated_ratio = physicalDpi/ref_dpi;
-
     engine.rootContext()->setContextProperty("screenWidth", geo.width());
     engine.rootContext()->setContextProperty("screenHeight", geo.height());
 #ifdef Q_OS_ANDROID
@@ -259,10 +256,6 @@ int main(int argc, char *argv[])
 #else
     engine.rootContext()->setContextProperty("scaleRatio", 1);
 #endif
-
-    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << width
-                         << "x" << height << " - dpi: " << dpi << " - ratio:"
-                         << calculated_ratio;
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
