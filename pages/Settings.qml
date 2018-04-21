@@ -32,6 +32,8 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../version.js" as Version
+import "../js/Windows.js" as Windows
+import "../js/Utils.js" as Utils
 
 
 import "../components"
@@ -501,7 +503,7 @@ Rectangle {
                 visible: !isMobile
                 id: customDecorationsCheckBox
                 checked: persistentSettings.customDecorations
-                onClicked: appWindow.setCustomWindowDecorations(checked)
+                onClicked: Windows.setCustomWindowDecorations(checked)
                 text: qsTr("Custom decorations") + translationManager.emptyString
             }
         }
@@ -719,17 +721,6 @@ Rectangle {
         }
     }
 
-    // Daemon console
-    DaemonConsole {
-        id: daemonConsolePopup
-        height:500
-        width:800
-        title: qsTr("Daemon log") + translationManager.emptyString
-        onAccepted: {
-            close();
-        }
-    }
-
     // Choose blockchain folder
     FileDialog {
         id: blockchainFileDialog
@@ -794,7 +785,7 @@ Rectangle {
 
     function onDaemonConsoleUpdated(message){
         // Update daemon console
-        daemonConsolePopup.textArea.append(message)
+        daemonConsolePopup.textArea.logMessage(message)
     }
 
 
