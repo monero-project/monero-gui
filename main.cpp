@@ -65,6 +65,11 @@
 #include "QrCodeScanner.h"
 #endif
 
+bool isWindows = false;
+bool isIOS = false;
+bool isAndroid = false;
+bool isDesktop = false;
+
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     (void) context;
@@ -82,18 +87,30 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    // platform dependent settings
+#if ! defined(Q_OS_ANDROID) && ! defined(Q_OS_IOS)
+    bool isDesktop = true;
+#elif defined(Q_OS_ANDROID)
+    bool isAndroid = true;
+#elif defined(Q_OS_IOS)
+    bool isIOS = true;
+#endif
+
+#ifdef Q_OS_WIN
+    bool isWindows = true;
+#endif
+
     // disable "QApplication: invalid style override passed" warning
-    putenv((char*)"QT_STYLE_OVERRIDE=fusion");
+    if(isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
 
     MainApp app(argc, argv);
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
-
-    #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
-    app.setWindowIcon(QIcon(":/images/appicon.ico"));
-    #endif
+#ifdef Q_OS_LINUX
+    if(isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
+#endif
 
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
@@ -210,7 +227,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
-    const QStringList arguments = QCoreApplication::arguments();
 
     engine.rootContext()->setContextProperty("mainApp", &app);
 
@@ -220,6 +236,7 @@ int main(int argc, char *argv[])
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
+    const QStringList arguments = QCoreApplication::arguments();
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
@@ -229,20 +246,11 @@ int main(int argc, char *argv[])
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
 //  Windows, ~/Monero Accounts/ on nix / osx
-    bool isWindows = false;
-    bool isIOS = false;
-    bool isAndroid = false;
-#ifdef Q_OS_WIN
-    isWindows = true;
+
+#if defined(Q_OS_WIN) || defined(Q_OS_IOS)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
-#elif defined(Q_OS_IOS)
-    isIOS = true;
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
-#elif defined(Q_OS_UNIX)
+#else
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-#endif
-#ifdef Q_OS_ANDROID
-    isAndroid = true;
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
