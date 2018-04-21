@@ -66,10 +66,7 @@ Window {
 
     // background gradient
     Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
         source: "../images/middlePanelBg.jpg"
     }
 
@@ -85,12 +82,8 @@ Window {
     ColumnLayout {
         id: mainLayout
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.topMargin: 20
-
+        anchors.fill: parent
+        anchors.topMargin: 20 * scaleRatio
         anchors.margins: 35 * scaleRatio
         spacing: 20 * scaleRatio
 
@@ -110,7 +103,7 @@ Window {
                     selectByKeyboard: true
                     anchors.fill: parent
                     font.family: "Ariel"
-                    font.pixelSize: 14
+                    font.pixelSize: 14 * scaleRatio
                     color: MoneroComponents.Style.defaultFontColor
                     selectionColor: MoneroComponents.Style.dimmedFontColor
                     wrapMode: TextEdit.Wrap
@@ -164,14 +157,12 @@ Window {
                 }
 
                 ScrollBar.vertical: ScrollBar {
-                    // TODO
-                    // scrollbar always visible is somewhat buggy
-                    // QT 5.7 introduces `policy: ScrollBar.AlwaysOn`
-                    // but we can't use it yet.
+                    // TODO: scrollbar always visible is buggy.
+                    // QT 5.9 introduces `policy: ScrollBar.AlwaysOn`
                     contentItem.opacity: 1
                     anchors.top: flickable.top
                     anchors.left: flickable.right
-                    anchors.leftMargin: 10
+                    anchors.leftMargin: 10 * scaleRatio
                     anchors.bottom: flickable.bottom
                 }
             }
