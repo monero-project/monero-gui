@@ -746,18 +746,6 @@ Rectangle {
                 font.pixelSize: 14
                 text: currentWallet.walletLogPath + translationManager.emptyString
             }
-
-            TextBlock {
-                Layout.fillWidth: true
-                font.pixelSize: 14
-                text:  (!currentWallet) ? "" : qsTr("Daemon log path: ") + translationManager.emptyString
-            }
-
-            TextBlock {
-                Layout.fillWidth: true
-                font.pixelSize: 14
-                text:  (!currentWallet) ? "" : currentWallet.daemonLogPath + translationManager.emptyString
-            }
         }
     }
 
