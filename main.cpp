@@ -98,13 +98,27 @@ int main(int argc, char *argv[])
 
     // command line parser
     QCommandLineParser parser;
+    QCommandLineOption logPathOption(QStringList() << "l" << "log",
+        QCoreApplication::translate("main", "Log to specified folder"),
+        QCoreApplication::translate("main", "folder"));
+    parser.addOption(logPathOption);
     parser.addHelpOption();
     parser.process(app);
 
     Monero::Utils::onStartup();
 
-    // Log settings
-    Monero::Wallet::init(argv[0], "monero-wallet-gui");
+    // Log to easylogger
+    QString logPath = parser.value(logPathOption);
+    if(logPath.isEmpty())
+#ifdef Q_OS_MAC
+        logPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs/";
+#elif defined(Q_OS_LINUX)
+        logPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/";
+#else
+        logPath = QCoreApplication::applicationDirPath() + "/";
+#endif
+    static const char * logName = (char *) "monero-wallet-gui.log";
+    Monero::Wallet::init(logPath.toStdString().c_str(), logName);
 //    qInstallMessageHandler(messageHandler);
 
     qDebug() << "app startd";
@@ -184,6 +198,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mainApp", &app);
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
+
+    engine.rootContext()->setContextProperty("walletLogPath", logPath + (QString) logName);
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
