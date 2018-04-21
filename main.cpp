@@ -67,8 +67,17 @@
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    // Send all message types to logger
-    Monero::Wallet::debug("qml", msg.toStdString());
+    (void) context;
+    static const std::string cat = "frontend";
+    const std::string message = msg.toStdString();
+    switch(type)
+    {
+        case QtDebugMsg: Monero::Wallet::debug(cat, message); break;
+        case QtInfoMsg: Monero::Wallet::info(cat, message); break;
+        case QtWarningMsg: Monero::Wallet::warning(cat, message); break;
+        case QtCriticalMsg: Monero::Wallet::error(cat, message); break;
+        case QtFatalMsg: Monero::Wallet::error(cat, message); break;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -119,9 +128,9 @@ int main(int argc, char *argv[])
 #endif
     static const char * logName = (char *) "monero-wallet-gui.log";
     Monero::Wallet::init(logPath.toStdString().c_str(), logName);
-//    qInstallMessageHandler(messageHandler);
+    qInstallMessageHandler(messageHandler);
 
-    qDebug() << "app startd";
+    qWarning() << "app startd";
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
