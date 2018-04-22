@@ -257,40 +257,8 @@ Rectangle {
               labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
-              labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: "4.."
               onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
-              onLabelButtonClicked: {
-                  var result = walletManager.resolveOpenAlias(addressLine.text)
-                  if (result) {
-                    var parts = result.split("|")
-                    if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                      if (parts[0] === "true") {
-                        if (address_ok) {
-                          addressLine.text = parts[1]
-                          addressLine.cursorPosition = 0
-                        }
-                        else
-                          oa_message(qsTr("No valid address found at this OpenAlias address"))
-                      } else if (parts[0] === "false") {
-                        if (address_ok) {
-                          addressLine.text = parts[1]
-                          addressLine.cursorPosition = 0
-                          oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                        } else {
-                          oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                        }
-                      } else {
-                        oa_message(qsTr("Internal error"))
-                      }
-                    } else {
-                      oa_message(qsTr("Internal error"))
-                    }
-                  } else {
-                    oa_message(qsTr("No address found"))
-                  }
-              }
           }
 
           StandardButton {
@@ -302,6 +270,52 @@ Rectangle {
               onClicked: {
                   cameraUi.state = "Capture"
                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
+          }
+      }
+
+      StandardButton {
+          id: resolveButton
+          anchors.left: parent.left
+          width: 80
+          text: qsTr("Resolve") + translationManager.emptyString
+          visible: isValidOpenAliasAddress(addressLine.text)
+          enabled : isValidOpenAliasAddress(addressLine.text)
+          onClicked: {
+              var result = walletManager.resolveOpenAlias(addressLine.text)
+              if (result) {
+                  var parts = result.split("|")
+                  if (parts.length == 2) {
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                      if (parts[0] === "true") {
+                          if (address_ok) {
+                              addressLine.text = parts[1]
+                              addressLine.cursorPosition = 0
+                          }
+                          else
+                              oa_message(qsTr("No valid address found at this OpenAlias address"))
+                      }
+                      else if (parts[0] === "false") {
+                            if (address_ok) {
+                                addressLine.text = parts[1]
+                                addressLine.cursorPosition = 0
+                                oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                            }
+                            else
+                            {
+                                oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                            }
+                      }
+                      else {
+                          oa_message(qsTr("Internal error"))
+                      }
+                  }
+                  else {
+                      oa_message(qsTr("Internal error"))
+                  }
+              }
+              else {
+                  oa_message(qsTr("No address found"))
               }
           }
       }
