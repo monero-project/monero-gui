@@ -129,7 +129,7 @@ Rectangle {
             }, State {
                name: "SharedRingDB"
                PropertyChanges { target: root; currentView: sharedringdbView }
-               PropertyChanges { target: mainFlickable; contentHeight: minHeight  }
+               PropertyChanges { target: mainFlickable; contentHeight: sharedringdbView.panelHeight + 100  }
             }, State {
                 name: "AddressBook"
                 PropertyChanges {  target: root; currentView: addressBookView  }

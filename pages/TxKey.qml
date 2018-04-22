@@ -117,6 +117,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.topMargin: 17 * scaleRatio
                 width: 60 * scaleRatio
+                small: true
                 text: qsTr("Generate") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(getProofTxIdLine.text) && (getProofAddressLine.text.length == 0 || TxUtils.checkAddress(getProofAddressLine.text, appWindow.persistentSettings.nettype))
                 onClicked: {
@@ -206,6 +207,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.topMargin: 17 * scaleRatio
                 width: 60
+                small: true
                 text: qsTr("Check") + translationManager.emptyString
                 enabled: TxUtils.checkTxID(checkProofTxIdLine.text) && TxUtils.checkSignature(checkProofSignatureLine.text) && ((checkProofSignatureLine.text.indexOf("SpendProofV") === 0 && checkProofAddressLine.text.length == 0) || (checkProofSignatureLine.text.indexOf("SpendProofV") !== 0 && TxUtils.checkAddress(checkProofAddressLine.text, appWindow.persistentSettings.nettype)))
                 onClicked: {
