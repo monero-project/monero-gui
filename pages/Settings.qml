@@ -209,7 +209,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            CheckBox {
+            RadioButton {
                 id: remoteDisconnect
                 checked: !persistentSettings.useRemoteNode
                 text: qsTr("Local Node") + translationManager.emptyString
@@ -220,7 +220,7 @@ Rectangle {
                 }
             }
 
-            CheckBox {
+            RadioButton {
                 id: remoteConnect
                 checked: persistentSettings.useRemoteNode
                 text: qsTr("Remote Node") + translationManager.emptyString
