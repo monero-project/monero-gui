@@ -290,7 +290,7 @@ Rectangle {
                         labelText: qsTr("Address")
                         addressValidation: true
                         anchors.topMargin: 5 * scaleRatio
-                        placeholderText: "4..."
+                        placeholderText: "4.. / 8.."
                     }
                 }
             }
