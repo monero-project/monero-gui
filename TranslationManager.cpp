@@ -25,18 +25,11 @@ bool TranslationManager::setLanguage(const QString &language)
         return true;
     }
 
-    // translations are compiled into app binary
-#ifdef Q_OS_MACX
-    QString dir = qApp->applicationDirPath() + "/../Resources/translations";
-#else
     QString dir = qApp->applicationDirPath() + "/translations";
-#endif
-
     QString filename = "monero-core_" + language;
 
-    qDebug("%s: loading translation file '%s' from '%s",
+    qDebug("%s: loading translation file '%s' from '%s'",
            __FUNCTION__, qPrintable(filename), qPrintable(dir));
-
 
     if (m_translator->load(filename, dir)) {
         qDebug("%s: translation for language '%s' loaded successfully",
@@ -45,11 +38,24 @@ bool TranslationManager::setLanguage(const QString &language)
         qApp->installTranslator(m_translator);
         emit languageChanged();
         return true;
-    } else {
-        qCritical("%s: error loading translation for language '%s'",
-                  __FUNCTION__, qPrintable(language));
-        return false;
     }
+
+    qDebug("%s: couldn't load translation file '%s' from '%s'",
+           __FUNCTION__, qPrintable(filename), qPrintable(dir));
+    qDebug("%s: loading embedded translation file '%s'",
+           __FUNCTION__, qPrintable(filename));
+
+    if (m_translator->load(filename, ":")) {
+        qDebug("%s: embedded translation for language '%s' loaded successfully",
+               __FUNCTION__, qPrintable(language));
+        qApp->installTranslator(m_translator);
+        emit languageChanged();
+        return true;
+    }
+
+    qCritical("%s: error loading translation for language '%s'",
+              __FUNCTION__, qPrintable(language));
+    return false;
 }
 
 TranslationManager *TranslationManager::instance()
