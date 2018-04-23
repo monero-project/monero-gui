@@ -151,8 +151,6 @@ Rectangle {
 
             LineEdit {
                 id: loadBlackballFileLine
-                anchors.left: selectBlackballFileButton.right
-                anchors.right: loadBlackballFileButton.left
                 placeholderText: qsTr("Filename with outputs to blackball") + translationManager.emptyString;
                 readOnly: false
                 Layout.fillWidth: true
@@ -169,7 +167,6 @@ Rectangle {
 
             StandardButton {
                 id: loadBlackballFileButton
-                anchors.right: parent.right
                 text: qsTr("Load") + translationManager.emptyString
                 small: true
                 enabled: !!appWindow.currentWallet
