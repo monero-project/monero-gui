@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 
     qDebug() << "app startd";
 
-    app.setApplicationName("monero-core");
+    app.setApplicationName("monero-gui");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
 
