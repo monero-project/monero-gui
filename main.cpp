@@ -55,6 +55,7 @@
 #include "model/SubaddressModel.h"
 #include "wallet/api/wallet2_api.h"
 #include "MainApp.h"
+#include "Logger.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -69,21 +70,6 @@ bool isWindows = false;
 bool isIOS = false;
 bool isAndroid = false;
 bool isDesktop = false;
-
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    (void) context;
-    static const std::string cat = "frontend";
-    const std::string message = msg.toStdString();
-    switch(type)
-    {
-        case QtDebugMsg: Monero::Wallet::debug(cat, message); break;
-        case QtInfoMsg: Monero::Wallet::info(cat, message); break;
-        case QtWarningMsg: Monero::Wallet::warning(cat, message); break;
-        case QtCriticalMsg: Monero::Wallet::error(cat, message); break;
-        case QtFatalMsg: Monero::Wallet::error(cat, message); break;
-    }
-}
 
 int main(int argc, char *argv[])
 {
@@ -121,33 +107,35 @@ int main(int argc, char *argv[])
 
     // command line parser
     QCommandLineParser parser;
+    QCommandLineOption disableLog("no-log",
+        QCoreApplication::translate("main", "Disable logging"));
     QCommandLineOption logPathOption(QStringList() << "l" << "log",
         QCoreApplication::translate("main", "Log to specified folder"),
         QCoreApplication::translate("main", "folder"));
+    parser.addOption(disableLog);
     parser.addOption(logPathOption);
     parser.addHelpOption();
     parser.process(app);
 
     Monero::Utils::onStartup();
 
-    // Log to easylogger
-    static const QString logName = "monero-wallet-gui.log";
-    QString logPath = parser.value(logPathOption);
-    QFileInfo fi(logPath);
-    QDir logdir(logPath);
-    if(!logPath.isEmpty() && fi.isDir() && fi.isWritable())
-        logPath = logdir.canonicalPath() + "/" + logName;
+    // Log settings
+    QString logPath;
+    if(parser.isSet(disableLog))
+        // don't save a logfile. Messages are still sent to the console
+        logPath = "none";
     else
-#ifdef Q_OS_MAC
-        logPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs/" + logName;
-#elif defined(Q_OS_LINUX)
-        logPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/" + logName;
-#else
-        logPath = QCoreApplication::applicationDirPath() + "/" + logName;
-#endif
-    Monero::Wallet::init(logPath.toStdString().c_str(), "");
-    qInstallMessageHandler(messageHandler);
+    {
+        // save a logfile in defined logPath.
+        logPath = getLogPath(parser.value(logPathOption));
+        Monero::Wallet::init(logPath.toStdString().c_str(), "");
+    }
 
+    // add qt debug messages to the logger
+    qInstallMessageHandler(qtMessageHandler);
+
+    // log levels are configured in "main.qml". Anything lower than
+    // qWarning is not shown here (e.g: qDebug, qInfo)
     qWarning() << "app startd";
 
     // screen settings. Mobile is designed on 128 dpi.
@@ -312,12 +300,12 @@ int main(int argc, char *argv[])
 #ifdef WITH_SCANNER
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
     if( qmlCamera ){
-        qDebug() << "QrCodeScanner : object found";
+        qWarning() << "QrCodeScanner : object found";
         QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
         QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
         qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
     } else {
-        qDebug() << "QrCodeScanner : something went wrong !";
+        qCritical() << "QrCodeScanner : something went wrong !";
     }
 #endif
 
