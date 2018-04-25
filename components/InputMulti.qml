@@ -47,6 +47,8 @@ TextArea {
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: MoneroComponents.Style.defaultFontColor
+    selectionColor: MoneroComponents.Style.dimmedFontColor
+    selectedTextColor: MoneroComponents.Style.defaultFontColor
 
     wrapMode: {
         if(wrapAnywhere){
