@@ -107,7 +107,7 @@ Rectangle {
             Layout.fillWidth: true
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                  qsTr("Blackballed outputs") + " (<a href='#'>" + qsTr("help") + "</a>)" + translationManager.emptyString
+                  qsTr("Blackballed outputs") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Blackballed outputs") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
@@ -239,7 +239,7 @@ Rectangle {
             Layout.topMargin: 24 * scaleRatio
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                  qsTr("Rings") + " (<a href='#'>" + qsTr("help") + "</a>)" + translationManager.emptyString
+                  qsTr("Rings") + " <a href='#'>" + qsTr("Help") + "</a>" + translationManager.emptyString
             onLinkActivated: {
                 sharedRingDBDialog.title  = qsTr("Rings") + translationManager.emptyString;
                 sharedRingDBDialog.text = qsTr(
