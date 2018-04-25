@@ -76,7 +76,6 @@
         <file>components/HistoryTableMobile.qml</file>
         <file>images/gotoBasicVersion.png</file>
         <file>images/goToBasicVersionHovered.png</file>
-        <file>BasicPanel.qml</file>
         <file>images/moneroLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/checkedVioletIcon.png</file>
