@@ -73,7 +73,7 @@ Rectangle {
 
     function update() {
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
-            setTrackingLineText("-")
+            setTrackingLineText("")
             return
         }
         if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
@@ -156,7 +156,7 @@ Rectangle {
         property int labelWidth: 120 * scaleRatio
         property int editWidth: 400 * scaleRatio
         property int lineEditFontSize: 12 * scaleRatio
-        property int qrCodeSize: 240 * scaleRatio
+        property int qrCodeSize: 220 * scaleRatio
 
         ColumnLayout {
             id: addressRow
@@ -252,6 +252,7 @@ Rectangle {
                         inputDialog.open()
                     }
                 }
+
                 StandardButton {
                     small: true
                     enabled: table.currentIndex > 0
@@ -269,76 +270,155 @@ Rectangle {
             }
         }
 
-        ColumnLayout {
-            id: amountRow
-            Label {
-                id: amountLabel
-                text: qsTr("Amount") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
+        GridLayout {
+            columns: (isMobile)? 1 : 2
+            Layout.fillWidth: true
+            columnSpacing: 32 * scaleRatio
 
-
-            LineEdit {
-                id: amountLine
-                placeholderText: qsTr("Amount to receive") + translationManager.emptyString
-                readOnly: false
-                width: mainLayout.editWidth
+            ColumnLayout {
+                Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                validator: DoubleValidator {
-                    bottom: 0.0
-                    top: 18446744.073709551615
-                    decimals: 12
-                    notation: DoubleValidator.StandardNotation
-                    locale: "C"
+                spacing: 20 * scaleRatio
+
+                LabelSubheader {
+                    Layout.fillWidth: true
+                    textFormat: Text.RichText
+                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                          qsTr("QR Code") +
+                          "<font size='2'> </font><a href='#'>" +
+                          qsTr("Help") + "</a>" +
+                          translationManager.emptyString
+                    onLinkActivated: {
+                        trackingHowToUseDialog.title  = qsTr("QR Code") + translationManager.emptyString;
+                        trackingHowToUseDialog.text = qsTr(
+                            "<p>This QR code includes the address you selected above and" +
+                            "the amount you entered below. Share it with others (right-click->Save) " +
+                            "so they can more easily send you exact amounts.</p>"
+                        )
+                        trackingHowToUseDialog.icon = StandardIcon.Information
+                        trackingHowToUseDialog.open()
+                    }
+                }
+
+                ColumnLayout {
+                    id: amountRow
+
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: 200
+
+                    LineEdit {
+                        id: amountLine
+                        Layout.fillWidth: true
+                        labelText: qsTr("Amount") + translationManager.emptyString
+                        placeholderText: qsTr("Amount to receive") + translationManager.emptyString
+                        fontBold: true
+                        inlineIcon: true
+                        validator: DoubleValidator {
+                            bottom: 0.0
+                            top: 18446744.073709551615
+                            decimals: 12
+                            notation: DoubleValidator.StandardNotation
+                            locale: "C"
+                        }
+                    }
+                }
+
+                Rectangle {
+                    color: "white"
+                    Layout.topMargin: parent.spacing
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: mainLayout.qrCodeSize
+                    Layout.preferredHeight: width
+                    radius: 4
+
+                    Image {
+                        id: qrCode
+                        anchors.fill: parent
+                        anchors.margins: 6
+
+                        smooth: false
+                        fillMode: Image.PreserveAspectFit
+                        source: "image://qrcode/" + makeQRCodeString()
+                        MouseArea {
+                            anchors.fill: parent
+                            acceptedButtons: Qt.RightButton
+                            onClicked: {
+                                if (mouse.button == Qt.RightButton)
+                                    qrMenu.open()
+                            }
+                            onPressAndHold: qrFileDialog.open()
+                        }
+                    }
+
+                    Menu {
+                        id: qrMenu
+                        title: "QrCode"
+                        y: parent.height / 2
+
+                        MenuItem {
+                           text: qsTr("Save As") + translationManager.emptyString;
+                           onTriggered: qrFileDialog.open()
+                        }
+                    }
                 }
             }
-        }
 
-        ColumnLayout {
-            id: trackingRow
-            visible: !isAndroid && !isIOS
-            Label {
-                id: trackingLabel
-                textFormat: Text.RichText
-                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
-                      qsTr("Tracking") +
-                      "<font size='2'> (</font><a href='#'>" +
-                      qsTr("help") +
-                      "</a><font size='2'>)</font>" +
-                      translationManager.emptyString
-                width: mainLayout.labelWidth
-                onLinkActivated: {
-                    trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
-                    trackingHowToUseDialog.text = qsTr(
-                        "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
-                        "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
-                        "supports QR code scanning).</p>" +
-                        "<p>This page will automatically scan the blockchain and the tx pool " +
-                        "for incoming transactions using this QR code. If you input an amount, it will also check " +
-                        "that incoming transactions total up to that amount.</p>" +
-                        "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
-                        "confirmed in short order, but there is still a possibility they might not, so for larger " +
-                        "values you may want to wait for one or more confirmation(s).</p>"
-                    )
-                    trackingHowToUseDialog.icon = StandardIcon.Information
-                    trackingHowToUseDialog.open()
-                }
-            }
-
-            CheckBox {
-                id: trackingEnabled
-                text: qsTr("Enable") + translationManager.emptyString
-            }
-
-            TextEdit {
-                id: trackingLine
-                readOnly: true
-                width: mainLayout.editWidth
+            ColumnLayout {
+                id: trackingRow
+                Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                textFormat: Text.RichText
-                text: ""
-                selectByMouse: true
-                color: 'white'
+                spacing: 32 * scaleRatio
+
+                LabelSubheader {
+                    Layout.fillWidth: true
+                    textFormat: Text.RichText
+                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                          qsTr("Tracking") +
+                          "<font size='2'> </font><a href='#'>" +
+                          qsTr("Help") + "</a>" +
+                          translationManager.emptyString
+                    onLinkActivated: {
+                        trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
+                        trackingHowToUseDialog.text = qsTr(
+                            "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
+                            "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
+                            "supports QR code scanning).</p>" +
+                            "<p>This page will automatically scan the blockchain and the tx pool " +
+                            "for incoming transactions using this QR code. If you input an amount, it will also check " +
+                            "that incoming transactions total up to that amount.</p>" +
+                            "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
+                            "confirmed in short order, but there is still a possibility they might not, so for larger " +
+                            "values you may want to wait for one or more confirmation(s).</p>"
+                        )
+                        trackingHowToUseDialog.icon = StandardIcon.Information
+                        trackingHowToUseDialog.open()
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: 200
+
+                    CheckBox {
+                        id: trackingEnabled
+                        text: qsTr("Enable") + translationManager.emptyString
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: 200
+
+                    TextEdit {
+                        id: trackingLine
+                        readOnly: true
+                        Layout.fillWidth: true
+                        textFormat: Text.RichText
+                        text: ""
+                        selectByMouse: true
+                        color: 'white'
+                    }
+                }
             }
         }
 
@@ -352,43 +432,14 @@ Rectangle {
             title: "Please choose a name"
             folder: shortcuts.pictures
             selectExisting: false
-            nameFilters: [ "Image (*.png)"]
+            nameFilters: ["Image (*.png)"]
             onAccepted: {
-                if( ! walletManager.saveQrCode(makeQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
+                if(!walletManager.saveQrCode(makeQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
                     console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
-                    trackingHowToUseDialog.title  = qsTr("Save QrCode") + translationManager.emptyString;
+                    trackingHowToUseDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
                     trackingHowToUseDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
                     trackingHowToUseDialog.icon = StandardIcon.Error
                     trackingHowToUseDialog.open()
-                }
-            }
-        }
-        ColumnLayout {
-            Menu {
-                id: qrMenu
-                title: "QrCode"
-                MenuItem {
-                   text: qsTr("Save As") + translationManager.emptyString;
-                   onTriggered: qrFileDialog.open()
-                }
-            }
-
-            Image {
-                id: qrCode
-                anchors.margins: 50 * scaleRatio
-                Layout.fillWidth: true
-                Layout.minimumHeight: mainLayout.qrCodeSize
-                smooth: false
-                fillMode: Image.PreserveAspectFit
-                source: "image://qrcode/" + makeQRCodeString()
-                MouseArea {
-                    anchors.fill: parent
-                    acceptedButtons: Qt.RightButton
-                    onClicked: {
-                        if (mouse.button == Qt.RightButton)
-                            qrMenu.popup()
-                    }
-                    onPressAndHold: qrFileDialog.open()
                 }
             }
         }
