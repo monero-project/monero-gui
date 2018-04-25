@@ -45,6 +45,7 @@ HEADERS += \
     src/libwalletqt/Subaddress.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
+    Logger.h \
     MainApp.h
 
 SOURCES += main.cpp \
@@ -70,6 +71,7 @@ SOURCES += main.cpp \
     src/libwalletqt/Subaddress.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
+    Logger.cpp \
     MainApp.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
@@ -437,7 +439,7 @@ DISTFILES += \
 
 
 # windows application icon
-RC_FILE = monero-core.rc
+RC_ICONS = images/appicon.ico
 
 # mac application icon
 ICON = $$PWD/images/appicon.icns

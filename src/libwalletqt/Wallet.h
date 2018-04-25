@@ -49,8 +49,6 @@ class Wallet : public QObject
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
-    Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
-    Q_PROPERTY(QString walletLogPath READ getWalletLogPath CONSTANT)
     Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
 
 public:
@@ -273,9 +271,6 @@ public:
 
     quint64 getWalletCreationHeight() const {return m_walletImpl->getRefreshFromBlockHeight();}
     void setWalletCreationHeight(quint64 height);
-
-    QString getDaemonLogPath() const;
-    QString getWalletLogPath() const;
 
     // Blackalled outputs
     Q_INVOKABLE bool blackballOutput(const QString &pubkey);

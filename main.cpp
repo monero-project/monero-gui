@@ -55,6 +55,7 @@
 #include "model/SubaddressModel.h"
 #include "wallet/api/wallet2_api.h"
 #include "MainApp.h"
+#include "Logger.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -65,39 +66,90 @@
 #include "QrCodeScanner.h"
 #endif
 
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    // Send all message types to logger
-    Monero::Wallet::debug("qml", msg.toStdString());
-}
+bool isWindows = false;
+bool isIOS = false;
+bool isAndroid = false;
+bool isDesktop = false;
 
 int main(int argc, char *argv[])
 {
-    Monero::Utils::onStartup();
-//    // Enable high DPI scaling on windows & linux
-//#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
-//    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//    qDebug() << "High DPI auto scaling - enabled";
-//#endif
+    // platform dependent settings
+#if ! defined(Q_OS_ANDROID) && ! defined(Q_OS_IOS)
+    bool isDesktop = true;
+#elif defined(Q_OS_ANDROID)
+    bool isAndroid = true;
+#elif defined(Q_OS_IOS)
+    bool isIOS = true;
+#endif
 
-    // Log settings
-    Monero::Wallet::init(argv[0], "monero-wallet-gui");
-//    qInstallMessageHandler(messageHandler);
+#ifdef Q_OS_WIN
+    bool isWindows = true;
+#endif
+
+    // disable "QApplication: invalid style override passed" warning
+    if(isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
+#ifdef Q_OS_LINUX
+    // force platform xcb
+    if(isDesktop) putenv((char*)"QT_QPA_PLATFORM=xcb");
+#endif
 
     MainApp app(argc, argv);
-
-    qDebug() << "app startd";
 
     app.setApplicationName("monero-gui");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
-
-    #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
-    app.setWindowIcon(QIcon(":/images/appicon.ico"));
-    #endif
+#ifdef Q_OS_LINUX
+    if(isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
+#endif
 
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
+
+    // command line parser
+    QCommandLineParser parser;
+    QCommandLineOption disableLog("no-log",
+        QCoreApplication::translate("main", "Disable logging"));
+    QCommandLineOption logPathOption(QStringList() << "l" << "log",
+        QCoreApplication::translate("main", "Log to specified folder"),
+        QCoreApplication::translate("main", "folder"));
+    parser.addOption(disableLog);
+    parser.addOption(logPathOption);
+    parser.addHelpOption();
+    parser.process(app);
+
+    Monero::Utils::onStartup();
+
+    // Log settings
+    QString logPath;
+    if(parser.isSet(disableLog))
+        // don't save a logfile. Messages are still sent to the console
+        logPath = "none";
+    else
+    {
+        // save a logfile in defined logPath.
+        logPath = getLogPath(parser.value(logPathOption));
+        Monero::Wallet::init(logPath.toStdString().c_str(), "");
+    }
+
+    // add qt debug messages to the logger
+    qInstallMessageHandler(qtMessageHandler);
+
+    // log levels are configured in "main.qml". Anything lower than
+    // qWarning is not shown here (e.g: qDebug, qInfo)
+    qWarning() << "app startd";
+
+    // screen settings. Mobile is designed on 128 dpi.
+    // TODO: add support for HiDPI scaling
+    qreal ref_dpi = 128;
+    QRect geo = QApplication::desktop()->availableGeometry();
+    QRect rect = QGuiApplication::primaryScreen()->geometry();
+    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+    qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
+    qreal calculated_ratio = physicalDpi/ref_dpi;
+
+    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << rect.width()
+                         << "x" << rect.height() << " - dpi: " << dpi << " - ratio:"
+                         << calculated_ratio;
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
@@ -169,14 +221,16 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
-    const QStringList arguments = QCoreApplication::arguments();
 
     engine.rootContext()->setContextProperty("mainApp", &app);
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
 
+    engine.rootContext()->setContextProperty("walletLogPath", logPath);
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
+    const QStringList arguments = QCoreApplication::arguments();
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
@@ -186,40 +240,16 @@ int main(int argc, char *argv[])
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
 //  Windows, ~/Monero Accounts/ on nix / osx
-    bool isWindows = false;
-    bool isIOS = false;
-    bool isMac = false;
-    bool isAndroid = false;
-#ifdef Q_OS_WIN
-    isWindows = true;
+
+#if defined(Q_OS_WIN) || defined(Q_OS_IOS)
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
-#elif defined(Q_OS_IOS)
-    isIOS = true;
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
-#elif defined(Q_OS_UNIX)
+#else
     QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-#endif
-#ifdef Q_OS_MAC
-    isMac = true;
-#endif
-#ifdef Q_OS_ANDROID
-    isAndroid = true;
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
-
-    // screen settings
-    // Mobile is designed on 128dpi
-    qreal ref_dpi = 128;
-    QRect geo = QApplication::desktop()->availableGeometry();
-    QRect rect = QGuiApplication::primaryScreen()->geometry();
-    qreal height = qMax(rect.width(), rect.height());
-    qreal width = qMin(rect.width(), rect.height());
-    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
-    qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
-    qreal calculated_ratio = physicalDpi/ref_dpi;
 
     engine.rootContext()->setContextProperty("screenWidth", geo.width());
     engine.rootContext()->setContextProperty("screenHeight", geo.height());
@@ -228,10 +258,6 @@ int main(int argc, char *argv[])
 #else
     engine.rootContext()->setContextProperty("scaleRatio", 1);
 #endif
-
-    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << width
-                         << "x" << height << " - dpi: " << dpi << " - ratio:"
-                         << calculated_ratio;
 
     if (!moneroAccountsRootDir.empty()) {
         QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
@@ -274,12 +300,12 @@ int main(int argc, char *argv[])
 #ifdef WITH_SCANNER
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
     if( qmlCamera ){
-        qDebug() << "QrCodeScanner : object found";
+        qWarning() << "QrCodeScanner : object found";
         QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
         QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
         qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
     } else {
-        qDebug() << "QrCodeScanner : something went wrong !";
+        qCritical() << "QrCodeScanner : something went wrong !";
     }
 #endif
 
