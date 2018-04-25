@@ -90,6 +90,8 @@ int main(int argc, char *argv[])
     bool isWindows = true;
 #endif
 
+    // disable "QApplication: invalid style override passed" warning
+    if (isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
 
     Monero::Utils::onStartup();
 //    // Enable high DPI scaling on windows & linux
@@ -104,8 +106,6 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    qDebug() << "app startd";
-
     app.setApplicationName("monero-gui");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
@@ -116,6 +116,12 @@ int main(int argc, char *argv[])
 
     filter *eventFilter = new filter;
     app.installEventFilter(eventFilter);
+
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.process(app);
+
+    qDebug() << "app startd";
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
