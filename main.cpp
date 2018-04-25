@@ -92,6 +92,10 @@ int main(int argc, char *argv[])
 
     // disable "QApplication: invalid style override passed" warning
     if (isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
+#ifdef Q_OS_LINUX
+    // force platform xcb
+    if (isDesktop) putenv((char*)"QT_QPA_PLATFORM=xcb");
+#endif
 
 //    // Enable high DPI scaling on windows & linux
 //#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
