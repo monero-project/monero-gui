@@ -437,7 +437,7 @@ DISTFILES += \
 
 
 # windows application icon
-RC_FILE = monero-core.rc
+RC_ICONS = images/appicon.ico
 
 # mac application icon
 ICON = $$PWD/images/appicon.icns
