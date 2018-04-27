@@ -40,6 +40,7 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "wizard"
+import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
@@ -933,29 +934,8 @@ ApplicationWindow {
 //    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
 //    height: 900 //300//maxWindowHeight;
     color: "#FFFFFF"
-    flags: persistentSettings.customDecorations ? (Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint) : (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint)
+    flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
-
-    function setCustomWindowDecorations(custom) {
-      var x = appWindow.x
-      var y = appWindow.y
-      if (x < 0)
-        x = 0
-      if (y < 0)
-        y = 0
-      persistentSettings.customDecorations = custom;
-      titleBar.visible = custom; // hides custom titlebar based on customDecorations
-
-      if (custom)
-          appWindow.flags = Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint;
-      else
-          appWindow.flags = Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint;
-
-      appWindow.hide()
-      appWindow.x = x
-      appWindow.y = y
-      appWindow.show()
-    }
 
     Component.onCompleted: {
         x = (Screen.width - width) / 2
@@ -1281,7 +1261,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: false }
+                PropertyChanges { target: titleBar; showMaximizeButton: false }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: false }
                 PropertyChanges { target: titleBar; y: 0 }
@@ -1297,7 +1277,7 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; maximizeButtonVisible: true }
+                PropertyChanges { target: titleBar; showMaximizeButton: true }
 //                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: titleBar; visible: true }
 //                PropertyChanges { target: titleBar; y: 0 }
@@ -1616,11 +1596,20 @@ ApplicationWindow {
 
         TitleBar {
             id: titleBar
-            anchors.left: parent.left
-            anchors.right: parent.right
             x: 0
             y: 0
-            customDecorations: persistentSettings.customDecorations
+            anchors.left: parent.left
+            anchors.right: parent.right
+            showMinimizeButton: true
+            showMaximizeButton: true
+            showWhatIsButton: false
+            showMoneroLogo: true
+            onCloseClicked: appWindow.close();
+            onMaximizeClicked: {
+                appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
+                                                                                    Window.Windowed
+            }
+            onMinimizeClicked: appWindow.visibility = Window.Minimized
             onGoToBasicVersion: {
                 if (yes) {
                     // basicPanel.currentView = middlePanel.currentView
@@ -1648,15 +1637,6 @@ ApplicationWindow {
                         previousPosition = pos
                     }
                 }
-            }
-
-            Rectangle {
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
-                anchors.left: parent.left
-                height:1
-                color: "#2F2F2F"
-                z: 2
             }
         }
 
@@ -1824,7 +1804,25 @@ ApplicationWindow {
             middlePanel.focus = true
             middlePanel.focus = false
         }
+    }
 
+    // Daemon console
+    DaemonConsole {
+        id: daemonConsolePopup
+        height:500
+        width:800
+        title: qsTr("Daemon log") + translationManager.emptyString
+        onAccepted: {
+            close();
+        }
+    }
 
+    // background gradient
+    Rectangle {
+        id: inactiveOverlay
+        visible: false
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.8
     }
 }
