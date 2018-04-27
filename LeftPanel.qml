@@ -252,7 +252,9 @@ Rectangle {
 
         Flickable {
             id:flicker
-            contentHeight: 500 * scaleRatio
+            contentHeight: (progressBar.visible)? menuColumn.height + separator.height + 
+                networkStatus.height + progressBar.height + daemonProgressBar.height : 
+                menuColumn.height + separator.height + networkStatus.height
             anchors.fill: parent
             clip: true
 
@@ -568,15 +570,26 @@ Rectangle {
 
         } // Flickable
 
+        Rectangle {
+            id: separator
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 0
+            anchors.rightMargin: 0
+            anchors.bottom: networkStatus.top;
+            height: 10 * scaleRatio
+            color: "black"
+        }
+
         NetworkStatusItem {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 4
-            anchors.rightMargin: 4
+            anchors.leftMargin: 0
+            anchors.rightMargin: 0
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
-            height: 58 * scaleRatio
+            height: 48 * scaleRatio
         }
 
         ProgressBar {
@@ -584,7 +597,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: daemonProgressBar.top
-            height: 35 * scaleRatio
+            height: 48 * scaleRatio
             syncType: qsTr("Wallet")
             visible: networkStatus.connected
         }
