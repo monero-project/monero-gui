@@ -47,7 +47,7 @@ Rectangle {
     color: "transparent"
     property var model
     property var current_address
-    property var current_subaddress_table_index: 0
+    property int current_subaddress_table_index: 0
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
@@ -158,6 +158,16 @@ Rectangle {
         //setTrackingLineText(text + "<br>" + list.join("<br>"))
     }
 
+    function renameSubaddressLabel(_index){
+        inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
+        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index);
+        inputDialog.onAcceptedCallback = function() {
+            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, _index, inputDialog.inputText);
+        }
+        inputDialog.onRejectedCallback = null;
+        inputDialog.open()
+    }
+
     Clipboard { id: clipboard }
 
     /* main layout */
@@ -189,24 +199,25 @@ Rectangle {
                       qsTr("Help") + "</a>" +
                       translationManager.emptyString
                 onLinkActivated: {
-                    trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
-                    trackingHowToUseDialog.text = qsTr(
+                    receivePageDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
+                    receivePageDialog.text = qsTr(
                         "<p>This QR code includes the address you selected above and" +
                         "the amount you entered below. Share it with others (right-click->Save) " +
                         "so they can more easily send you exact amounts.</p>"
                     )
-                    trackingHowToUseDialog.icon = StandardIcon.Information
-                    trackingHowToUseDialog.open()
+                    receivePageDialog.icon = StandardIcon.Information
+                    receivePageDialog.open()
                 }
             }
 
             ColumnLayout {
-                id: trackingTableRow2
-                visible: subaddressListView.count >= 1
+                id: subaddressListRow
+                property int subaddressListItemHeight: 32 * scaleRatio
                 Layout.topMargin: 22 * scaleRatio
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
-                Layout.preferredHeight: 32 * subaddressListView.count
+                Layout.preferredHeight: subaddressListItemHeight * subaddressListView.count
+                visible: subaddressListView.count >= 1
 
                 ListView {
                     id: subaddressListView
@@ -216,7 +227,7 @@ Rectangle {
                     boundsBehavior: ListView.StopAtBounds
                     delegate: Rectangle {
                         id: tableItem2
-                        height: 32
+                        height: subaddressListRow.subaddressListItemHeight
                         width: parent.width
                         Layout.fillWidth: true
                         color: "transparent"
@@ -282,6 +293,34 @@ Rectangle {
                                 }
                             }
                         }
+
+                        IconButton {
+                            id: renameButton
+                            imageSource: "../images/editIcon.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: index !== 0 ? copyButton.left : parent.right
+                            anchors.rightMargin: index !== 0 ? 0 : 6
+                            anchors.top: undefined
+                            visible: index !== 0
+
+                            onClicked: {
+                                renameSubaddressLabel(index);
+                            }
+                        }
+
+                        IconButton {
+                            id: copyButton
+                            imageSource: "../images/copyToClipboard.png"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.top: undefined
+                            anchors.right: parent.right
+
+                            onClicked: {
+                                console.log("Address copied to clipboard");
+                                clipboard.setText(address);
+                                appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
+                            }
+                        }
                     }
                     onCurrentItemChanged: {
                         // reset global vars
@@ -297,37 +336,55 @@ Rectangle {
                 }
             }
 
-            RowLayout {
-                spacing: 20
-                Layout.topMargin: 20
+            // 'fake' row for 'create new address'
+            ColumnLayout{
+                id: createAddressRow
+                Layout.fillWidth: true
+                spacing: 0
 
-                StandardButton {
-                    small: true
-                    text: qsTr("Create new address") + translationManager.emptyString;
-                    onClicked: {
-                        inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
-                        inputDialog.inputText = qsTr("(Untitled)")
-                        inputDialog.onAcceptedCallback = function() {
-                            appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
-                            current_subaddress_table_index = appWindow.currentWallet.numSubaddresses() - 1
-                        }
-                        inputDialog.onRejectedCallback = null;
-                        inputDialog.open()
-                    }
+                Rectangle {
+                    color: "#404040"
+                    Layout.fillWidth: true
+                    height: 1
                 }
 
-                StandardButton {
-                    small: true
-                    enabled: current_subaddress_table_index > 0
-                    text: qsTr("Rename") + translationManager.emptyString;
-                    onClicked: {
-                        inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString
-                        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, current_subaddress_table_index)
-                        inputDialog.onAcceptedCallback = function() {
-                            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, current_subaddress_table_index, inputDialog.inputText)
+                Rectangle{
+                    id: createAddressRect
+                    Layout.preferredHeight: subaddressListRow.subaddressListItemHeight
+                    color: "transparent"
+                    Layout.fillWidth: true
+
+                    Label {
+                        color: "#757575"
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 6
+                        fontSize: 14 * scaleRatio
+                        fontBold: true
+                        text: "+ " + qsTr("Create new address") + translationManager.emptyString;
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onEntered: {
+                            createAddressRect.color = "#26FFFFFF"
                         }
-                        inputDialog.onRejectedCallback = null;
-                        inputDialog.open()
+                        onExited: {
+                            createAddressRect.color = "transparent"
+                        }
+                        onClicked: {
+                            inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
+                            inputDialog.inputText = qsTr("(Untitled)")
+                            inputDialog.onAcceptedCallback = function() {
+                                appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
+                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses() - 1
+                            }
+                            inputDialog.onRejectedCallback = null;
+                            inputDialog.open()
+                        }
                     }
                 }
             }
@@ -352,14 +409,14 @@ Rectangle {
                           qsTr("Help") + "</a>" +
                           translationManager.emptyString
                     onLinkActivated: {
-                        trackingHowToUseDialog.title  = qsTr("QR Code") + translationManager.emptyString;
-                        trackingHowToUseDialog.text = qsTr(
+                        receivePageDialog.title  = qsTr("QR Code") + translationManager.emptyString;
+                        receivePageDialog.text = qsTr(
                             "<p>This QR code includes the address you selected above and" +
                             "the amount you entered below. Share it with others (right-click->Save) " +
                             "so they can more easily send you exact amounts.</p>"
                         )
-                        trackingHowToUseDialog.icon = StandardIcon.Information
-                        trackingHowToUseDialog.open()
+                        receivePageDialog.icon = StandardIcon.Information
+                        receivePageDialog.open()
                     }
                 }
 
@@ -442,8 +499,8 @@ Rectangle {
                           qsTr("Help") + "</a>" +
                           translationManager.emptyString
                     onLinkActivated: {
-                        trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
-                        trackingHowToUseDialog.text = qsTr(
+                        receivePageDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
+                        receivePageDialog.text = qsTr(
                             "<p><font size='+2'>This is a simple sales tracker:</font></p>" +
                             "<p>Let your customer scan that QR code to make a payment (if that customer has software which " +
                             "supports QR code scanning).</p>" +
@@ -454,8 +511,8 @@ Rectangle {
                             "confirmed in short order, but there is still a possibility they might not, so for larger " +
                             "values you may want to wait for one or more confirmation(s).</p>"
                         )
-                        trackingHowToUseDialog.icon = StandardIcon.Information
-                        trackingHowToUseDialog.open()
+                        receivePageDialog.icon = StandardIcon.Information
+                        receivePageDialog.open()
                     }
                 }
 
@@ -513,7 +570,7 @@ Rectangle {
                                 width: 12 * scaleRatio
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.leftMargin: 12
+                                anchors.leftMargin: 8
                             }
 
                             Label {
@@ -564,6 +621,7 @@ Rectangle {
 
                                 anchors.right: parent.right
                                 anchors.rightMargin: 4
+                                anchors.top: undefined
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -584,7 +642,7 @@ Rectangle {
         }
 
         MessageDialog {
-            id: trackingHowToUseDialog
+            id: receivePageDialog
             standardButtons: StandardButton.Ok
         }
 
@@ -597,10 +655,10 @@ Rectangle {
             onAccepted: {
                 if(!walletManager.saveQrCode(makeQRCodeString(), walletManager.urlToLocalPath(fileUrl))) {
                     console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
-                    trackingHowToUseDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    trackingHowToUseDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                    trackingHowToUseDialog.icon = StandardIcon.Error
-                    trackingHowToUseDialog.open()
+                    receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
+                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
+                    receivePageDialog.icon = StandardIcon.Error
+                    receivePageDialog.open()
                 }
             }
         }

@@ -208,5 +208,6 @@
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
+        <file>images/editIcon.png</file>
     </qresource>
 </RCC>
