@@ -32,7 +32,7 @@ import "../components" as MoneroComponents
 
 Label {
     id: item
-    fontSize: 17 * scaleRatio
+    fontSize: 18 * scaleRatio
 
     Rectangle {
         anchors.top: item.bottom
