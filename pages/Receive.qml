@@ -40,12 +40,14 @@ import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import moneroComponents.Subaddress 1.0
 import moneroComponents.SubaddressModel 1.0
+import "../js/TxUtils.js" as TxUtils
 
 Rectangle {
     id: pageReceive
     color: "transparent"
     property var model
     property var current_address
+    property var current_subaddress_table_index: 0
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
@@ -82,7 +84,7 @@ Rectangle {
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
-            if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == table.currentIndex) {
+            if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == current_subaddress_table_index) {
                 var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
                 totalAmount = walletManager.addi(totalAmount, amount)
                 nTransactions += 1
@@ -177,75 +179,120 @@ Rectangle {
         ColumnLayout {
             id: addressRow
             spacing: 0
-            Label {
-                id: addressLabel
-                text: qsTr("Addresses") + translationManager.emptyString
-                width: mainLayout.labelWidth
-            }
 
-            Rectangle {
-                id: header
+            LabelSubheader {
                 Layout.fillWidth: true
-                Layout.topMargin: 10
-                visible: table.count > 0
-
-                height: 10
-                color: "transparent"
-
-                Rectangle {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10
-                    anchors.leftMargin: 10
-
-                    height: 1
-                    color: "#404040"
-                }
-
-                Image {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-
-                    width: 10
-                    height: 10
-
-                    source: "../images/historyBorderRadius.png"
-                }
-
-                Image {
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-
-                    width: 10
-                    height: 10
-
-                    source: "../images/historyBorderRadius.png"
-                    rotation: 90
+                textFormat: Text.RichText
+                text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
+                      qsTr("Addresses") +
+                      "<font size='2'> </font><a href='#'>" +
+                      qsTr("Help") + "</a>" +
+                      translationManager.emptyString
+                onLinkActivated: {
+                    trackingHowToUseDialog.title  = qsTr("Tracking payments") + translationManager.emptyString;
+                    trackingHowToUseDialog.text = qsTr(
+                        "<p>This QR code includes the address you selected above and" +
+                        "the amount you entered below. Share it with others (right-click->Save) " +
+                        "so they can more easily send you exact amounts.</p>"
+                    )
+                    trackingHowToUseDialog.icon = StandardIcon.Information
+                    trackingHowToUseDialog.open()
                 }
             }
 
-            Rectangle {
-                id: tableRect
-                property int table_max_height: 260
+            ColumnLayout {
+                id: trackingTableRow2
+                visible: subaddressListView.count >= 1
+                Layout.topMargin: 22 * scaleRatio
                 Layout.fillWidth: true
-                Layout.preferredHeight: table.contentHeight < table_max_height ? table.contentHeight : table_max_height
-                color: "transparent"
+                Layout.minimumWidth: 240
+                Layout.preferredHeight: 32 * subaddressListView.count
 
-                Scroll {
-                    id: flickableScroll
-                    anchors.right: table.right
-                    anchors.top: table.top
-                    anchors.bottom: table.bottom
-                    flickable: table
-                }
-
-                SubaddressTable {
-                    id: table
+                ListView {
+                    id: subaddressListView
+                    Layout.fillWidth: true
                     anchors.fill: parent
-                    onContentYChanged: flickableScroll.flickableContentYChanged()
+                    clip: true
+                    boundsBehavior: ListView.StopAtBounds
+                    delegate: Rectangle {
+                        id: tableItem2
+                        height: 32
+                        width: parent.width
+                        Layout.fillWidth: true
+                        color: "transparent"
+
+                        Rectangle{
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            height: 1
+                            color: "#404040"
+                            visible: index !== 0
+                        }
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.rightMargin: 80
+                            color: "transparent"
+
+                            Label {
+                                id: idLabel
+                                color: index === current_subaddress_table_index ? "white" : "#757575"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 6
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: "#" + index
+                            }
+
+                            Label {
+                                id: nameLabel
+                                color: "#a5a5a5"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: idLabel.right
+                                anchors.leftMargin: 6
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: label
+                            }
+
+                            Label {
+                                color: "white"
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: nameLabel.right
+                                anchors.leftMargin: 6
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: TxUtils.addressTruncate(address)
+                            }
+
+                            MouseArea{
+                                cursorShape: Qt.PointingHandCursor
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: {
+                                    tableItem2.color = "#26FFFFFF"
+                                }
+                                onExited: {
+                                    tableItem2.color = "transparent"
+                                }
+                                onClicked: {
+                                    subaddressListView.currentIndex = index;
+                                }
+                            }
+                        }
+                    }
                     onCurrentItemChanged: {
-                        current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex);
+                        // reset global vars
+                        current_subaddress_table_index = subaddressListView.currentIndex;
+                        current_address = appWindow.currentWallet.address(
+                            appWindow.currentWallet.currentSubaddressAccount,
+                            subaddressListView.currentIndex
+                        );
+
+                        // reset tracking table
+                        trackingModel.clear();
                     }
                 }
             }
@@ -262,7 +309,7 @@ Rectangle {
                         inputDialog.inputText = qsTr("(Untitled)")
                         inputDialog.onAcceptedCallback = function() {
                             appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
-                            table.currentIndex = appWindow.currentWallet.numSubaddresses() - 1
+                            current_subaddress_table_index = appWindow.currentWallet.numSubaddresses() - 1
                         }
                         inputDialog.onRejectedCallback = null;
                         inputDialog.open()
@@ -271,13 +318,13 @@ Rectangle {
 
                 StandardButton {
                     small: true
-                    enabled: table.currentIndex > 0
+                    enabled: current_subaddress_table_index > 0
                     text: qsTr("Rename") + translationManager.emptyString;
                     onClicked: {
                         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString
-                        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex)
+                        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, current_subaddress_table_index)
                         inputDialog.onAcceptedCallback = function() {
-                            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, table.currentIndex, inputDialog.inputText)
+                            appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, current_subaddress_table_index, inputDialog.inputText)
                         }
                         inputDialog.onRejectedCallback = null;
                         inputDialog.open()
@@ -432,13 +479,13 @@ Rectangle {
 
                 ColumnLayout {
                     id: trackingTableRow
-                    visible: vv.count >= 1
+                    visible: trackingListView.count >= 1
                     Layout.fillWidth: true
                     Layout.minimumWidth: 240
-                    Layout.preferredHeight: 46 * vv.count
+                    Layout.preferredHeight: 46 * trackingListView.count
 
                     ListView {
-                        id: vv
+                        id: trackingListView
                         Layout.fillWidth: true
                         anchors.fill: parent
                         clip: true
@@ -567,12 +614,13 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("Receive page loaded");
-        table.model = currentWallet.subaddressModel;
+        subaddressListView.model = appWindow.currentWallet.subaddressModel;
 
         if (appWindow.currentWallet) {
             current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
             appWindow.currentWallet.subaddress.refresh(appWindow.currentWallet.currentSubaddressAccount)
-            table.currentIndex = 0
+            current_subaddress_table_index = 0;
+            subaddressListView.currentIndex = 0;
         }
 
         update()
