@@ -47,7 +47,6 @@ Rectangle {
     property var model
     property var current_address
     property alias addressText : pageReceive.current_address
-    property string trackingLineText: ""
 
     function makeQRCodeString() {
         var s = "monero:"
@@ -61,23 +60,13 @@ Rectangle {
         return s
     }
 
-    function setTrackingLineText(text) {
-        // don't replace with same text, it wrecks selection while the user is selecting
-        // also keep track of text, because when we read back the text from the widget,
-        // we do not get what we put it, but some extra HTML stuff on top
-        if (text != trackingLineText) {
-            trackingLine.text = text
-            trackingLineText = text
-        }
-    }
-
     function update() {
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
-            setTrackingLineText("")
+            trackingLineText.text = "";
             return
         }
         if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
-            setTrackingLineText(qsTr("WARNING: no connection to daemon"))
+            trackingLineText.text = qsTr("WARNING: no connection to daemon");
             return
         }
 
@@ -85,8 +74,9 @@ Rectangle {
         var count = model.rowCount()
         var totalAmount = 0
         var nTransactions = 0
-        var list = []
         var blockchainHeight = 0
+        var txs = []
+
         for (var i = 0; i < count; ++i) {
             var idx = model.index(i, 0)
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
@@ -99,45 +89,71 @@ Rectangle {
 
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
                 var blockHeight = model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+
+                var in_txpool = false;
+                var confirmations = 0;
+                var displayAmount = 0;
+
                 if (blockHeight == 0) {
-                    list.push(qsTr("in the txpool: %1").arg(txid) + translationManager.emptyString)
+                    in_txpool = true;
                 } else {
                     if (blockchainHeight == 0)
                         blockchainHeight = walletManager.blockchainHeight()
-                    var confirmations = blockchainHeight - blockHeight - 1
-                    var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
-                    if (confirmations > 1) {
-                        list.push(qsTr("%2 confirmations: %3 (%1)").arg(txid).arg(confirmations).arg(displayAmount) + translationManager.emptyString)
-                    } else {
-                        list.push(qsTr("1 confirmation: %2 (%1)").arg(txid).arg(displayAmount) + translationManager.emptyString)
-                    }
+                    confirmations = blockchainHeight - blockHeight - 1
+                    displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                 }
+
+                txs.push({
+                    "amount": displayAmount,
+                    "confirmations": confirmations,
+                    "blockheight": blockHeight,
+                    "in_txpool": in_txpool,
+                    "txid": txid
+                })
             }
         }
-        // if there are too many txes, only show the first 3
-        if (list.length > 3) {
-            list.length = 3;
-            list.push("...");
-        }
 
+        // Update tracking status label
         if (nTransactions == 0) {
-            setTrackingLineText(qsTr("No transaction found yet...") + translationManager.emptyString)
+            trackingLineText.text = qsTr("No transaction found yet...") + translationManager.emptyString
             return
         }
+        else if(nTransactions === 1){
+            trackingLineText.text = qsTr("Transaction found") + translationManager.emptyString;
+        } else {
+            trackingLineText.text = qsTr("%1 transactions found").arg(nTransactions) + translationManager.emptyString
+        }
 
-        var text = ((nTransactions == 1) ? qsTr("Transaction found") : qsTr("%1 transactions found").arg(nTransactions)) + translationManager.emptyString
+        var max_tracking = 3;
 
         var expectedAmount = walletManager.amountFromString(amountLine.text)
         if (expectedAmount && expectedAmount != amount) {
             var displayTotalAmount = walletManager.displayAmount(totalAmount)
             if (amount > expectedAmount) {
+
                 text += qsTr(" with more money (%1)").arg(displayTotalAmount) + translationManager.emptyString
             } else if (amount < expectedAmount) {
                 text += qsTr(" with not enough money (%1)").arg(displayTotalAmount) + translationManager.emptyString
             }
         }
 
-        setTrackingLineText(text + "<br>" + list.join("<br>"))
+        trackingModel.clear();
+
+        if (txs.length > 3) {
+            txs.length = 3;
+        }
+
+        txs.forEach(function(tx){
+            trackingModel.append({
+                "amount": tx.amount,
+                "confirmations": tx.confirmations,
+                "blockheight": tx.blockHeight,
+                "in_txpool": tx.in_txpool,
+                "txid": tx.txid
+            });
+        });
+
+        //setTrackingLineText(text + "<br>" + list.join("<br>"))
     }
 
     Clipboard { id: clipboard }
@@ -305,6 +321,7 @@ Rectangle {
 
                     Layout.fillWidth: true
                     Layout.minimumWidth: 200
+                    Layout.maximumWidth: mainLayout.qrCodeSize
 
                     LineEdit {
                         id: amountLine
@@ -325,7 +342,7 @@ Rectangle {
 
                 Rectangle {
                     color: "white"
-                    Layout.topMargin: parent.spacing
+                    Layout.topMargin: parent.spacing - 4
                     Layout.fillWidth: true
                     Layout.maximumWidth: mainLayout.qrCodeSize
                     Layout.preferredHeight: width
@@ -367,7 +384,7 @@ Rectangle {
                 id: trackingRow
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                spacing: 32 * scaleRatio
+                spacing: 0 * scaleRatio
 
                 LabelSubheader {
                     Layout.fillWidth: true
@@ -395,28 +412,125 @@ Rectangle {
                     }
                 }
 
+                ListModel {
+                    id: trackingModel
+                }
+
+                RowLayout{
+                    Layout.topMargin: 14
+                    Layout.bottomMargin: 10
+                    visible: trackingTableRow.visible
+
+                    Label {
+                        id: trackingLineText
+                        color: "white"
+                        fontFamily: Style.fontLight.name
+                        fontSize: 16 * scaleRatio
+                        text: ""
+                    }
+                }
+
+                ColumnLayout {
+                    id: trackingTableRow
+                    visible: vv.count >= 1
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: 240
+                    Layout.preferredHeight: 46 * vv.count
+
+                    ListView {
+                        id: vv
+                        Layout.fillWidth: true
+                        anchors.fill: parent
+                        clip: true
+                        boundsBehavior: ListView.StopAtBounds
+                        model: trackingModel
+                        delegate: Item {
+                            id: trackingTableItem
+                            height: 46
+                            width: parent.width
+                            Layout.fillWidth: true
+
+                            Rectangle{
+                                anchors.right: parent.right
+                                anchors.left: parent.left
+                                anchors.top: parent.top
+                                height: 1
+                                color: "#404040"
+                                visible: index !== 0
+                            }
+
+                            Image {
+                                id: arrowImage
+                                source: "../images/upArrow-green.png"
+                                height: 18 * scaleRatio
+                                width: 12 * scaleRatio
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 12
+                            }
+
+                            Label {
+                                id: trackingConfirmationLine
+                                color: "white"
+                                anchors.top: parent.top
+                                anchors.topMargin: 6
+                                anchors.left: arrowImage.right
+                                anchors.leftMargin: 10
+                                fontSize: 14 * scaleRatio
+                                text: {
+                                    if(in_txpool){
+                                        return "Awaiting in txpool"
+                                    } else {
+                                        if(confirmations > 1){
+                                            if(confirmations > 100){
+                                                return "100+ " + qsTr("confirmations") + translationManager.emptyString;
+                                            } else {
+                                                return confirmations + " " + qsTr("confirmations") + translationManager.emptyString;
+                                            }
+                                        } else {
+                                            return "1 " + qsTr("confirmation") + translationManager.emptyString;
+                                        }
+                                    }
+                                }
+                            }
+
+                            Label {
+                                id: trackingAmountLine
+                                color: "#2eb358"
+                                anchors.top: trackingConfirmationLine.bottom
+                                anchors.left: arrowImage.right
+                                anchors.leftMargin: 10
+                                fontSize: 14 * scaleRatio
+                                fontBold: true
+                                text: amount
+                            }
+
+                            IconButton {
+                                id: clipboardButton
+                                imageSource: "../images/copyToClipboard.png"
+
+                                onClicked: {
+                                    console.log("tx_id copied to clipboard");
+                                    clipboard.setText(txid);
+                                    appWindow.showStatusMessage(qsTr("Transaction ID copied to clipboard"),3);
+                                }
+
+                                anchors.right: parent.right
+                                anchors.rightMargin: 4
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                }
+
                 RowLayout {
+                    Layout.topMargin: 32 * scaleRatio
                     Layout.fillWidth: true
                     Layout.minimumWidth: 200
 
                     CheckBox {
                         id: trackingEnabled
                         text: qsTr("Enable") + translationManager.emptyString
-                    }
-                }
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.minimumWidth: 200
-
-                    TextEdit {
-                        id: trackingLine
-                        readOnly: true
-                        Layout.fillWidth: true
-                        textFormat: Text.RichText
-                        text: ""
-                        selectByMouse: true
-                        color: 'white'
                     }
                 }
             }
