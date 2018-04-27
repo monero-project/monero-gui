@@ -275,7 +275,13 @@ Rectangle {
                                 anchors.leftMargin: 6
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
-                                text: TxUtils.addressTruncate(address)
+                                text: {
+                                    if(isMobile){
+                                        TxUtils.addressTruncate(address, 6);
+                                    } else {
+                                        return TxUtils.addressTruncate(address, 10);
+                                    }
+                                }
                             }
 
                             MouseArea{
