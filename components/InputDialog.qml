@@ -153,12 +153,4 @@ Item {
             }
         }
     }
-
-    Rectangle {
-        id: bg
-        z: parent.z + 1
-        anchors.fill: parent
-        color: "black"
-        opacity: 0.8
-    }
 }
