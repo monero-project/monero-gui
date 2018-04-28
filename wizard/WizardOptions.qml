@@ -227,9 +227,6 @@ ColumnLayout {
                 wrapMode: Text.WordWrap
             }
         }
-
-
-
     }
 
     ColumnLayout {
@@ -238,18 +235,17 @@ ColumnLayout {
         Layout.topMargin: 30 * scaleRatio
         Layout.alignment: Qt.AlignCenter
         Layout.fillWidth: true
-        spacing: 50 * scaleRatio
+        spacing: 38 * scaleRatio
 
         Rectangle {
             width: 100 * scaleRatio
-            CheckBox {
+            RadioButton {
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
-                background: "#FFFFFF"
+                checkedColor: Qt.rgba(0, 0, 0, 0.75)
+                borderColor: Qt.rgba(0, 0, 0, 0.45)
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedBlackIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
                 onClicked: {
                     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
@@ -261,14 +257,13 @@ ColumnLayout {
 
         Rectangle {
             width: 100 * scaleRatio
-            CheckBox {
+            RadioButton {
                 id: stageNet
                 text: qsTr("Stagenet") + translationManager.emptyString
-                background: "#FFFFFF"
+                checkedColor: Qt.rgba(0, 0, 0, 0.75)
+                borderColor: Qt.rgba(0, 0, 0, 0.45)
                 fontColor: "#4A4646"
                 fontSize: 16 * scaleRatio
-                checkedIcon: "../images/checkedBlackIcon.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
                 onClicked: {
                     persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET

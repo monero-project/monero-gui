@@ -39,6 +39,9 @@ RowLayout {
     property alias fontColor: label.color
     signal clicked()
     height: 26 * scaleRatio
+    // legacy properties
+    property var checkedColor: "white"
+    property var borderColor: checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
 
     function toggle(){
         radioButton.checked = !radioButton.checked
@@ -52,7 +55,7 @@ RowLayout {
             anchors.left: parent.left
             y: 0
             color: "transparent"
-            border.color: radioButton.checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
+            border.color: borderColor
             width: radioButton.height
             height: radioButton.height
             radius: radioButton.height
@@ -61,7 +64,7 @@ RowLayout {
                 visible: radioButton.checked
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                color: "white"
+                color: checkedColor
                 width: 10 * scaleRatio
                 height: 10 * scaleRatio
                 radius: 10
