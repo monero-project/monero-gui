@@ -48,6 +48,7 @@ Rectangle {
     property var model
     property var current_address
     property int current_subaddress_table_index: 0
+    property bool advancedRowVisible: false
     property alias receiveHeight: mainLayout.height
     property alias addressText : pageReceive.current_address
 
@@ -398,10 +399,23 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            CheckBox2 {
+                id: showAdvancedCheckbox
+                checked: false
+                onClicked: {
+                    advancedRowVisible = !advancedRowVisible;
+                }
+                text: qsTr("Advanced options") + translationManager.emptyString
+            }
+        }
+        
         GridLayout {
+            id: advancedRow
             columns: (isMobile)? 1 : 2
             Layout.fillWidth: true
             columnSpacing: 32 * scaleRatio
+            visible: advancedRowVisible
 
             ColumnLayout {
                 Layout.alignment: Qt.AlignTop
