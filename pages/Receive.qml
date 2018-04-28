@@ -48,13 +48,14 @@ Rectangle {
     property var model
     property var current_address
     property int current_subaddress_table_index: 0
+    property alias receiveHeight: mainLayout.height
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
         var s = "monero:"
         var nfields = 0
         s += current_address;
-        var amount = amountLine.text.trim()
+        var amount = amountToReceiveLine.text.trim()
         if (amount !== "") {
           s += (nfields++ ? "&" : "?")
           s += "tx_amount=" + amount
@@ -65,10 +66,12 @@ Rectangle {
     function update() {
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
             trackingLineText.text = "";
+            trackingModel.clear();
             return
         }
         if (appWindow.currentWallet.connected() == Wallet.ConnectionStatus_Disconnected) {
             trackingLineText.text = qsTr("WARNING: no connection to daemon");
+            trackingModel.clear();
             return
         }
 
@@ -121,22 +124,21 @@ Rectangle {
             return
         }
         else if(nTransactions === 1){
-            trackingLineText.text = qsTr("Transaction found") + translationManager.emptyString;
+            trackingLineText.text = qsTr("Transaction found") + ":" + translationManager.emptyString;
         } else {
-            trackingLineText.text = qsTr("%1 transactions found").arg(nTransactions) + translationManager.emptyString
+            trackingLineText.text = qsTr("%1 transactions found").arg(nTransactions) + ":" + translationManager.emptyString
         }
 
         var max_tracking = 3;
-
-        var expectedAmount = walletManager.amountFromString(amountLine.text)
+        toReceiveSatisfiedLine.text = "";
+        var expectedAmount = walletManager.amountFromString(amountToReceiveLine.text)
         if (expectedAmount && expectedAmount != amount) {
             var displayTotalAmount = walletManager.displayAmount(totalAmount)
-            if (amount > expectedAmount) {
-
-                text += qsTr(" with more money (%1)").arg(displayTotalAmount) + translationManager.emptyString
-            } else if (amount < expectedAmount) {
-                text += qsTr(" with not enough money (%1)").arg(displayTotalAmount) + translationManager.emptyString
-            }
+            if (amount > expectedAmount) toReceiveSatisfiedLine.text += qsTr("With more Monero");
+            else if (amount < expectedAmount) toReceiveSatisfiedLine.text = qsTr("With not enough Monero")
+            toReceiveSatisfiedLine.text += ": " + "<br>" +
+                    qsTr("Expected") + ": " + amountToReceiveLine.text + "<br>" +
+                    qsTr("Total received") + ": " + displayTotalAmount + translationManager.emptyString;
         }
 
         trackingModel.clear();
@@ -434,7 +436,7 @@ Rectangle {
                     Layout.maximumWidth: mainLayout.qrCodeSize
 
                     LineEdit {
-                        id: amountLine
+                        id: amountToReceiveLine
                         Layout.fillWidth: true
                         labelText: qsTr("Amount") + translationManager.emptyString
                         placeholderText: qsTr("Amount to receive") + translationManager.emptyString
@@ -626,7 +628,6 @@ Rectangle {
                                 }
 
                                 anchors.right: parent.right
-                                anchors.rightMargin: 4
                                 anchors.top: undefined
                                 anchors.verticalCenter: parent.verticalCenter
                             }
@@ -635,9 +636,26 @@ Rectangle {
                 }
 
                 RowLayout {
-                    Layout.topMargin: 32 * scaleRatio
+                    visible: trackingTableRow.visible && x.text !== "" && amountToReceiveLine.text !== ""
+                    Layout.topMargin: 14 * scaleRatio
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40 * scaleRatio
+
+                    Label {
+                        id: toReceiveSatisfiedLine
+                        color: "white"
+                        fontFamily: Style.fontLight.name
+                        fontSize: 14 * scaleRatio
+                        textFormat: Text.RichText
+                        text: ""
+                        height: 40 * scaleRatio
+                    }
+                }
+
+                RowLayout {
                     Layout.fillWidth: true
                     Layout.minimumWidth: 200
+                    Layout.topMargin: trackingTableRow.visible ? 20 * scaleRatio : 32 * scaleRatio
 
                     CheckBox {
                         id: trackingEnabled
@@ -695,5 +713,7 @@ Rectangle {
 
     function onPageClosed() {
         timer.running = false
+        trackingEnabled.checked = false
+        trackingModel.clear()
     }
 }
