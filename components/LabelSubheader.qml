@@ -43,4 +43,10 @@ Label {
         color: MoneroComponents.Style.dividerColor
         opacity: MoneroComponents.Style.dividerOpacity
     }
+
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+    }
 }
