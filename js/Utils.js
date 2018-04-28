@@ -23,3 +23,7 @@ function formatDate( date, params ) {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
     return new Date( date ).toLocaleString( 'en-US', options );
 }
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}

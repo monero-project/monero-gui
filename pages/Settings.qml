@@ -679,59 +679,45 @@ Rectangle {
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
                 text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (Click to change)</a>") + translationManager.emptyString
                 onLinkActivated: {
-                    restoreHeightRow.visible = true;
-                }
-            }
+                    inputDialog.labelText = qsTr("Set a new restore height:") + translationManager.emptyString;
+                    inputDialog.inputText = currentWallet ? currentWallet.walletCreationHeight : "0";
+                    inputDialog.onAcceptedCallback = function() {
+                        var _restoreHeight = inputDialog.inputText;
+                        if(Utils.isNumeric(_restoreHeight)){
+                            _restoreHeight = parseInt(_restoreHeight);
+                            if(_restoreHeight >= 0) {
+                                currentWallet.walletCreationHeight = restoreHeightEdit.text
+                                // Restore height is saved in .keys file. Set password to trigger rewrite.
+                                currentWallet.setPassword(appWindow.walletPassword)
 
-            RowLayout {
-                id: restoreHeightRow
-                visible: false
-                Layout.preferredWidth: parent.width
+                                // Show confirmation dialog
+                                confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
+                                confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
+                                                                + "The following information will be deleted\n"
+                                                                + "- Recipient addresses\n"
+                                                                + "- Tx keys\n"
+                                                                + "- Tx descriptions\n\n"
+                                                                + "The old wallet cache file will be renamed and can be restored later.\n"
+                                                                );
+                                confirmationDialog.icon = StandardIcon.Question
+                                confirmationDialog.cancelText = qsTr("Cancel")
+                                confirmationDialog.onAcceptedCallback = function() {
+                                    walletManager.closeWallet();
+                                    walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                    walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
+                                                                      persistentSettings.nettype);
+                                }
 
-                LineEdit {
-                    id: restoreHeightEdit
-                    Layout.preferredWidth: 80
-                    Layout.fillWidth: true
-                    text: currentWallet ? currentWallet.walletCreationHeight : "0"
-                    validator: IntValidator {
-                        bottom:0
-                    }
-                }
-
-                StandardButton {
-                    id: restoreHeightSave
-                    small: true
-                    Layout.fillWidth: false
-                    Layout.leftMargin: 30
-                    text: qsTr("Save") + translationManager.emptyString
-
-                    onClicked: {
-                        currentWallet.walletCreationHeight = restoreHeightEdit.text
-                        // Restore height is saved in .keys file. Set password to trigger rewrite.
-                        currentWallet.setPassword(appWindow.walletPassword)
-                        restoreHeightRow.visible = false
-
-                        // Show confirmation dialog
-                        confirmationDialog.title = qsTr("Rescan wallet cache") + translationManager.emptyString;
-                        confirmationDialog.text  = qsTr("Are you sure you want to rebuild the wallet cache?\n"
-                                                        + "The following information will be deleted\n"
-                                                        + "- Recipient addresses\n"
-                                                        + "- Tx keys\n"
-                                                        + "- Tx descriptions\n\n"
-                                                        + "The old wallet cache file will be renamed and can be restored later.\n"
-                                                        );
-                        confirmationDialog.icon = StandardIcon.Question
-                        confirmationDialog.cancelText = qsTr("Cancel")
-                        confirmationDialog.onAcceptedCallback = function() {
-                            walletManager.closeWallet();
-                            walletManager.clearWalletCache(persistentSettings.wallet_path);
-                            walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                              persistentSettings.nettype);
+                                confirmationDialog.onRejectedCallback = null;
+                                confirmationDialog.open()
+                                return;
+                            }
                         }
 
-                        confirmationDialog.onRejectedCallback = null;
-                        confirmationDialog.open()
+                        appWindow.showStatusMessage(qsTr("Invalid restore height specified. Must be a number."),3);
                     }
+                    inputDialog.onRejectedCallback = null;
+                    inputDialog.open()
                 }
             }
 
