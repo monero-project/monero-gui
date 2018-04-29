@@ -365,7 +365,7 @@ TRANSLATION_TARGET_DIR = $$OUT_PWD/translations
         $$LANGREL $$LANGREL_OPTIONS ${QMAKE_FILE_IN} -qm $$TRANSLATION_TARGET_DIR/${QMAKE_FILE_BASE}.qm
     langrel.CONFIG += no_link
 
-    QMAKE_EXTRA_TARGETS += langupd deploy deploy_win
+    QMAKE_EXTRA_TARGETS += langupd
     QMAKE_EXTRA_COMPILERS += langrel
 
     # Compile an initial version of translation files when running qmake
@@ -404,27 +404,40 @@ CONFIG += qtquickcompiler
 QML_IMPORT_PATH =
 
 # Default rules for deployment.
-include(deployment.pri)
+#include(deployment.pri)
+
+CONFIG(release, debug|release) {
+    DESTDIR = release/bin
+} else {
+    DESTDIR = debug/bin
+}
+
 macx {
-    deploy.commands += macdeployqt $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET) -qmldir=$$PWD
+    QMAKE_POST_LINK = macdeployqt $$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET) \
+        -qmldir=$$PWD
 }
 
 win32 {
-    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -release -no-translations -qmldir=$$PWD
+    QMAKE_POST_LINK = windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) \
+        -release -no-translations -qmldir=$$PWD
+
     # Win64 msys2 deploy settings
     contains(QMAKE_HOST.arch, x86_64) {
-        deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
+        QMAKE_POST_LINK = $$PWD/windeploy_helper.sh $$DESTDIR
     }
 }
 
 linux:!android {
-    deploy.commands += $$escape_expand(\n\t) $$PWD/linuxdeploy_helper.sh $$DESTDIR $$TARGET
+    TARGET = monero-wallet-gui
+    QMAKE_POST_LINK = $$PWD/linuxdeploy_helper.sh $$sprintf("%1/%2 %3", $$OUT_PWD, $$DESTDIR, $$TARGET)
 }
 
-android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+android {
+    QMAKE_POST_LINK = make install INSTALL_ROOT=$$DESTDIR && androiddeployqt \
+        --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR \
+        --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 \
+        -qmldir=$$PWD
 }
-
 
 OTHER_FILES += \
     .gitignore \
