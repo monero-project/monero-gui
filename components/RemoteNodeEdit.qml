@@ -48,7 +48,7 @@ GridLayout {
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18 * scaleRatio
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
-    property real placeholderOpacity: 0.25
+    property real placeholderOpacity: 0.35
 
     property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
     property string lineEditBackgroundColor: "white"

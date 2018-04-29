@@ -112,7 +112,7 @@ ColumnLayout {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10 * scaleRatio
-            opacity: 0.25
+            opacity: 0.35
             color: MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 18 * scaleRatio
@@ -125,11 +125,11 @@ ColumnLayout {
             border.width: 1
             border.color: {
               if(multiLine.error && multiLine.text !== ""){
-                  return Qt.rgba(255, 0, 0, 0.45);
+                  return MoneroComponents.Style.inputBorderColorInvalid;
               } else if(multiLine.activeFocus){
-                  return Qt.rgba(255, 255, 255, 0.35);
+                  return MoneroComponents.Style.inputBorderColorActive;
               } else {
-                  return Qt.rgba(255, 255, 255, 0.25);
+                  return MoneroComponents.Style.inputBorderColorInActive;
               }
             }
             radius: 4

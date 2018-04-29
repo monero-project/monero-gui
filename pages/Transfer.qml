@@ -131,7 +131,7 @@ Rectangle {
               Layout.fillWidth: true
 
               radius: 2
-              border.color: Qt.rgba(255, 255, 255, 0.25)
+              border.color: Style.inputBorderColorInActive
               border.width: 1
               color: "transparent"
 

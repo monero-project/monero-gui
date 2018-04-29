@@ -57,7 +57,12 @@ RowLayout {
             radius: 3
             y: 0
             color: "transparent"
-            border.color: checkBox.checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
+            border.color:
+                if(checkBox.checked){
+                    return MoneroComponents.Style.inputBorderColorActive;
+                } else {
+                    return MoneroComponents.Style.inputBorderColorInActive;
+                }
         }
 
         Rectangle {

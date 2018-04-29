@@ -248,6 +248,7 @@ Rectangle {
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#404040"
                     pressedColor: "#202020"
+                    colorBorder: "#404040"
                     colorHeaderBackground: "#404040"
 
                     onChanged: {
