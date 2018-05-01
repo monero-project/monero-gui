@@ -5,6 +5,7 @@ import "../components" as MoneroComponents
 TextEdit {
     color: MoneroComponents.Style.defaultFontColor
     font.family: MoneroComponents.Style.fontRegular.name
+    selectionColor: MoneroComponents.Style.dimmedFontColor
     wrapMode: Text.Wrap
     readOnly: true
     selectByMouse: true
