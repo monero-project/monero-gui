@@ -121,7 +121,7 @@ Rectangle {
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
+               PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 100 }
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }

@@ -43,7 +43,6 @@ Rectangle {
     width: labelButtonText.width + 14
     anchors.right: copyButton.left
     anchors.rightMargin: 6
-    visible: isValidOpenAliasAddress(addressLine.text)
 
     Text {
         id: labelButtonText

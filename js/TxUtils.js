@@ -11,8 +11,9 @@ function destinationsToAddress(destinations){
     return address;
 }
 
-function addressTruncate(address){
-    return address.substring(0, 6) + "..." + address.substring(address.length-6);
+function addressTruncate(address, range){
+    if(typeof(range) === "undefined") range = 8;
+    return address.substring(0, range) + "..." + address.substring(address.length-range);
 }
 
 function check256(str, length) {

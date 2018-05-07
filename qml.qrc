@@ -51,7 +51,6 @@
         <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
-        <file>components/SubaddressTable.qml</file>
         <file>images/deleteIcon.png</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
@@ -208,5 +207,6 @@
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
+        <file>images/editIcon.png</file>
     </qresource>
 </RCC>

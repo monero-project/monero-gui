@@ -48,6 +48,7 @@ Item {
     signal closeCallback()
 
     function open() {
+        inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.enabled = false
@@ -59,6 +60,7 @@ Item {
     }
 
     function close() {
+        inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
         titleBar.enabled = true
@@ -80,7 +82,7 @@ Item {
     }
 
     ColumnLayout {
-        z: bg.z + 1
+        z: inactiveOverlay.z + 1
         id: mainLayout
         spacing: 10
         anchors { fill: parent; margins: 35 * scaleRatio }
