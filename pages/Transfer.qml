@@ -287,7 +287,7 @@ Rectangle {
               if (result) {
                   var parts = result.split("|")
                   if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.testnet)
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
                       if (parts[0] === "true") {
                           if (address_ok) {
                               addressLine.text = parts[1]
