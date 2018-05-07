@@ -34,7 +34,7 @@ import "../components" as MoneroComponents
 
 Rectangle {
     id: item
-    color: "black"
+    color: "transparent"
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {

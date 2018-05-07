@@ -40,7 +40,7 @@ Item {
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18 * scaleRatio
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
-    property real placeholderOpacity: 0.25
+    property real placeholderOpacity: 0.35
 
     property alias validator: input.validator
     property alias readOnly : input.readOnly
@@ -52,9 +52,9 @@ Item {
     property bool copyButton: false
     property string borderColor: {
         if(input.activeFocus){
-            return Qt.rgba(255, 255, 255, 0.35);
+            return MoneroComponents.Style.inputBorderColorActive;
         } else {
-            return Qt.rgba(255, 255, 255, 0.25);
+            return MoneroComponents.Style.inputBorderColorInActive;
         }
     }
     property bool borderDisabled: false
