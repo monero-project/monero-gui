@@ -439,5 +439,6 @@ DISTFILES += \
 # windows application icon
 RC_ICONS = images/appicon.ico
 
-# mac application icon
+# mac Info.plist & application icon
+QMAKE_INFO_PLIST = $$PWD/share/Info.plist
 ICON = $$PWD/images/appicon.icns
