@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
-    const QStringList arguments = QCoreApplication::arguments();
+    const QStringList arguments = (QStringList) QCoreApplication::arguments().at(0);
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
