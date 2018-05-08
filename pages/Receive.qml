@@ -433,7 +433,7 @@ Rectangle {
                     onLinkActivated: {
                         receivePageDialog.title  = qsTr("QR Code") + translationManager.emptyString;
                         receivePageDialog.text = qsTr(
-                            "<p>This QR code includes the address you selected above and" +
+                            "<p>This QR code includes the address you selected above and " +
                             "the amount you entered below. Share it with others (right-click->Save) " +
                             "so they can more easily send you exact amounts.</p>"
                         )

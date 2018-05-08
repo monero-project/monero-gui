@@ -245,7 +245,7 @@ Rectangle {
                 sharedRingDBDialog.text = qsTr(
                     "In order to avoid nullifying the protection afforded by Monero's ring signatures, an output should not " +
                     "be spent with different rings on different blockchains. While this is normally not a concern, it can become one " +
-                    "when a key-reusing Monero clone allows you do spend existing outputs. In this case, you need to ensure this " +
+                    "when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this " +
                     "existing outputs uses the same ring on both chains.<br>" +
                     "This will be done automatically by Monero and any key-reusing software which is not trying to actively strip " +
                     "you of your privacy.<br>" +
