@@ -377,26 +377,6 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
     return walletCache.rename(newFileName);
 }
 
-void WalletManager::debug(const QString &s)
-{
-    Monero::Wallet::debug("qml", s.toStdString());
-}
-
-void WalletManager::info(const QString &s)
-{
-    Monero::Wallet::info("qml", s.toStdString());
-}
-
-void WalletManager::warning(const QString &s)
-{
-    Monero::Wallet::warning("qml", s.toStdString());
-}
-
-void WalletManager::error(const QString &s)
-{
-    Monero::Wallet::error("qml", s.toStdString());
-}
-
 WalletManager::WalletManager(QObject *parent) : QObject(parent)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
