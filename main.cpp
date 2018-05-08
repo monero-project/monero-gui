@@ -294,13 +294,13 @@ int main(int argc, char *argv[])
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
     if (qmlCamera)
     {
-        qDebug() << "QrCodeScanner : object found";
+        qWarning() << "QrCodeScanner : object found";
         QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
         QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
         qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
     }
     else
-        qDebug() << "QrCodeScanner : something went wrong !";
+        qCritical() << "QrCodeScanner : something went wrong !";
 #endif
 
     QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant,QVariant)), rootObject, SLOT(sequencePressed(QVariant,QVariant)));
