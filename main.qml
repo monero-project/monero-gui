@@ -124,12 +124,13 @@ ApplicationWindow {
             else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
-            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "Sign"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
