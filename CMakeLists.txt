@@ -1,105 +1,109 @@
 cmake_minimum_required(VERSION 3.10)
-project(monero-gui C CXX)
+project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
-set(STATIC OFF)
+set(LINUX ON)
 set(DEBUG ON)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
-# GUI
 set(VERSION_MAJOR "14")
 set(VERSION_MINOR "0")
 set(VERSION_REVISION "3")
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
-set(USE_DEVICE_TREZOR OFF)
-option(USE_DEVICE_TREZOR "Disable zxcvbn" OFF)
-option(DISABLE_PASS_STRENGTH_METER "Disable zxcvbn" ON)
-#option(WITH_SCANNER "Enable webcam QR scanner" OFF)
+# libwallet requires a static build, so we only allow static compilation
+set(STATIC ON)
+
+option(USE_DEVICE_TREZOR ON)
+option(ENABLE_PASS_STRENGTH_METER "Disable zxcvbn" OFF)
+option(WITH_SCANNER "Enable webcam QR scanner" OFF)
+option(DEV_MODE "Checkout latest monero master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
-set(CMAKE_CXX_FLAGS "-fPIC")
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 if(DEBUG)
 	set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
-set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt5.9/5.9.7/gcc_64)
+
+set(BUILD_GUI_DEPS ON)
+set(ARCH "x86-64")
+set(BUILD_64 ON)
+set(INSTALL_VENDORED_LIBUNBOUND=ON)
+
+find_package(Git)
+if(GIT_FOUND)
+  if(NOT DEV_MODE)
+    find_package(Git)
+    function (check_submodule relative_path)
+      execute_process(COMMAND git rev-parse "HEAD" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${relative_path} OUTPUT_VARIABLE localHead)
+      execute_process(COMMAND git rev-parse "HEAD:${relative_path}" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} OUTPUT_VARIABLE checkedHead)
+      string(COMPARE EQUAL "${localHead}" "${checkedHead}" upToDate)
+      if (upToDate)
+        message(STATUS "Submodule '${relative_path}' is up-to-date")
+      else()
+        message(FATAL_ERROR "Submodule '${relative_path}' is not using the checked head. Please update all submodules with\ngit submodule update --init --force\nor run cmake with -DMANUAL_SUBMODULES=1,\n or if you want to build from latest master run cmake with -DEV_MODE,\n or run make devmode")
+      endif()
+    endfunction ()
+    message(STATUS "Checking submodules")
+    check_submodule(monero)
+  else()
+    execute_process(COMMAND cd monero && git checkout origin/master)
+  endif()
+endif()
+
+add_subdirectory(monero)
+set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 
 if(STATIC)
 	message(STATUS "Initiating static build")
 	set(Boost_USE_STATIC_LIBS ON)
-	set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ".so")
+	set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
 endif()
 
-# Compile source files (.h/.cpp)
-file(GLOB SOURCE_FILES
-		"*.h"
-		"*.cpp"
-		"src/*.h"
-        "src/libwalletqt/WalletManager.cpp"
-        "src/libwalletqt/Wallet.cpp"
-        "src/libwalletqt/PendingTransaction.cpp"
-        "src/libwalletqt/TransactionHistory.cpp"
-        "src/libwalletqt/TransactionInfo.cpp"
-        "src/libwalletqt/QRCodeImageProvider.cpp" QR
-        "src/QR-Code-generator/BitBuffer.cpp"
-        "src/QR-Code-generator/QrCode.cpp"
-        "src/QR-Code-generator/QrSegment.cpp"
-        "src/libwalletqt/AddressBook.cpp"
-        "src/libwalletqt/Subaddress.cpp"
-        "src/libwalletqt/SubaddressAccount.cpp"
-        "src/libwalletqt/UnsignedTransaction.cpp"
-        "src/libwalletqt/WalletManager.h"
-        "src/libwalletqt/Wallet.h"
-        "src/libwalletqt/PendingTransaction.h"
-        "src/libwalletqt/TransactionHistory.h"
-        "src/libwalletqt/TransactionInfo.h"
-        "src/libwalletqt/QRCodeImageProvider.h"
-        "src/QR-Code-generator/BitBuffer.h"
-        "src/QR-Code-generator/QrCode.h"
-        "src/QR-Code-generator/QrSegment.h"
-        "src/libwalletqt/Transfer.h"
-        "src/libwalletqt/AddressBook.h"
-        "src/libwalletqt/Subaddress.h"
-        "src/libwalletqt/SubaddressAccount.h"
-        "src/libwalletqt/UnsignedTransaction.h"
-
-		"src/daemon/*.h"
-		"src/daemon/*.cpp"
-		"src/model/*.h"
-		"src/model/*.cpp"
-#		"src/QR-Code-generator/*.h"
-#		"src/QR-Code-generator/*.cpp"
-#		"src/QR-Code-scanner/*.h"
-#		"src/QR-Code-scanner/*.cpp"
-        "src/qt/*.h"
-        "src/qt/*.cpp"
-		)
-
 # Include password strength library
-add_definitions(-DDISABLE_PASS_STRENGTH_METER)
-#if(DISABLE_PASS_STRENGTH_METER)
-#    add_definitions(-DDISABLE_PASS_STRENGTH_METER)
-#else()
-#    message(STATUS "1111")
-#    list(APPEND SOURCE_FILES
-#        "src/zxcvbn-c/*.h"
-#        "src/zxcvbn-c/*.cpp"
-#        )
-#endif()
+if(ENABLE_PASS_STRENGTH_METER)
+    find_library(ZXCVBN_LIBRARY zxcvbn)
+    message(STATUS "Found zxcvbn library: ${ZXCVBN_LIBRARY}")
+else()
+    add_definitions(-DDISABLE_PASS_STRENGTH_METER)
+endif()
 
 include(CheckTrezor)  # Trezor support check
 include(CMakePackageConfigHelpers)
 
-# QT5
-#set(RESOURCES
-#    "resources/images.qrc"
-#    )
+# force version update
+function (monero_gui_add_library_with_deps)
+  cmake_parse_arguments(MONERO_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
+  source_group("${MONERO_ADD_LIBRARY_NAME}" FILES ${MONERO_ADD_LIBRARY_SOURCES})
+
+  # Define a ("virtual") object library and an actual library that links those
+  # objects together. The virtual libraries can be arbitrarily combined to link
+  # any subset of objects into one library archive. This is used for releasing
+  # libwallet, which combines multiple components.
+  set(objlib obj_${MONERO_ADD_LIBRARY_NAME})
+  add_library(${objlib} OBJECT ${MONERO_ADD_LIBRARY_SOURCES})
+  add_library("${MONERO_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
+  if (MONERO_ADD_LIBRARY_DEPENDS)
+    add_dependencies(${objlib} ${MONERO_ADD_LIBRARY_DEPENDS})
+  endif()
+  set_property(TARGET "${MONERO_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
+  target_compile_definitions(${objlib}
+    PRIVATE $<TARGET_PROPERTY:${MONERO_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
+endfunction ()
+
+function (monero_gui_add_library name)
+    monero_gui_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
+endfunction()
+
+include_directories(${EASYLOGGING_INCLUDE})
+link_directories(${EASYLOGGING_LIBRARY_DIRS})
+
+
+include(VersionGui)
+monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Quick REQUIRED)
@@ -107,77 +111,46 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Qml REQUIRED)
+message(STATUS "${CMAKE_MODULE_PATH}")
 find_package(Qt5Multimedia REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(Qt5XmlPatterns REQUIRED)
 find_package(Qt5Svg REQUIRED)
 
-set(RESOURCES qml.qrc)
-qt5_add_resources(QML_QRC ${RESOURCES})
-
-add_executable(monero-gui main.cpp
-        ${SOURCE_FILES}
-        ${QML_QRC}
-        )
-
-target_include_directories(monero-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
-
-# OpenGL
-set(OpenGL_GL_PREFERENCE GLVND)
-find_package(OpenGL REQUIRED)
-target_include_directories(monero-gui PUBLIC ${OPENGL_INCLUDE_DIR})
-message(STATUS "OpenGL: include dir at ${OPENGL_INCLUDE_DIR}")
-message(STATUS "OpenGL: libraries at ${OPENGL_LIBRARIES}")
+find_package(X11 REQUIRED)
 
 # OpenSSL
 find_package(OpenSSL REQUIRED)
-target_include_directories(monero-gui PUBLIC ${OPENSSL_INCLUDE_DIR})
 message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
 message(STATUS "OpenSSL: include dir at ${OPENSSL_INCLUDE_DIR}")
 message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARIES}")
 
 # Zbar (for QR scanner)
-#find_package(ZBar0)
-#target_include_directories(monero-gui PUBLIC ${ZBAR_INCLUDE_DIR})
-#message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
-#message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
-
-# Unwind
-find_package(Libunwind)
-target_include_directories(monero-gui PUBLIC ${LIBUNWIND_INCLUDE_DIR})
-message(STATUS "libunwind: include dir at ${LIBUNWIND_INCLUDE_DIR}")
-message(STATUS "libunwind: libraries at ${LIBUNWIND_LIBRARIES}")
+if(WITH_SCANNER)
+    add_definitions(-DWITH_SCANNER)
+    find_package(ZBar0)
+    message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
+    message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
+endif()
 
 # Sodium
-if(STATIC)
-	set(sodium_USE_STATIC_LIBS ON)
-endif()
-find_package(Sodium REQUIRED)
-target_include_directories(monero-gui PUBLIC ${sodium_INCLUDE_DIR})
-message(STATUS "libsodium: include dir at ${sodium_INCLUDE_DIR}")
-message(STATUS "libsodium: libraries at ${sodium_LIBRARY_DEBUG}")
-if(sodium_VERSION)
-	message(STATUS "libsodium: Version ${sodium_VERSION}")
-endif()
+find_library(SODIUM_LIBRARY sodium)
+message(STATUS "libsodium: libraries at ${SODIUM_LIBRARY}")
 
 # LibUSB
 find_package(LibUSB)
-target_include_directories(monero-gui PUBLIC ${LibUSB_INCLUDE_DIRS})
 message(STATUS "libusb: include dir at ${LibUSB_INCLUDE_DIRS}")
 message(STATUS "libusb: libraries at ${LibUSB_LIBRARIES}")
 
 # HIDApi
 find_package(HIDAPI REQUIRED)
-target_include_directories(monero-gui PUBLIC ${HIDAPI_INCLUDE_DIRS})
 message(STATUS "libhidapi: include dir at ${HIDAPI_INCLUDE_DIRS}")
 message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
 
 # Boost
-#if(DEBUG)
-#    set(Boost_DEBUG ON)
-#endif()
+if(DEBUG)
+    set(Boost_DEBUG ON)
+endif()
 find_package(Boost 1.62 REQUIRED COMPONENTS
 		system
 		filesystem
@@ -189,60 +162,24 @@ find_package(Boost 1.62 REQUIRED COMPONENTS
 		program_options
 		locale)
 
-target_include_directories(monero-gui PUBLIC ${Boost_INCLUDE_DIRS})
+if(LINUX)
+    find_package(X11 REQUIRED)
+    message(STATUS "X11_FOUND = ${X11_FOUND}")
+    message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
+    message(STATUS "X11_LIBRARIES = ${X11_LIBRARIES}")
+    include_directories(${X11_INCLUDE_DIR})
+    link_directories(${X11_LIBRARIES})
+    if(STATIC)
+        find_library(XCB_LIBRARY xcb)
+        message(STATUS "Found xcb library: ${XCB_LIBRARY}")
+    endif()
+endif()
+
 message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
 message(STATUS "Using Boost libraries at ${Boost_LIBRARIES}")
 
-target_include_directories(monero-gui PUBLIC
-		${CMAKE_CURRENT_SOURCE_DIR}/monero/include
-		${CMAKE_CURRENT_SOURCE_DIR}/monero/src
-		${CMAKE_CURRENT_SOURCE_DIR}/src
-		${CMAKE_CURRENT_SOURCE_DIR}/src/daemon
-		${CMAKE_CURRENT_SOURCE_DIR}/src/libwalletqt
-		${CMAKE_CURRENT_SOURCE_DIR}/src/model
-		${CMAKE_CURRENT_SOURCE_DIR}/src/QR-Code-generator
-		#${CMAKE_CURRENT_SOURCE_DIR}/src/QR-Code-scanner
-		${CMAKE_CURRENT_SOURCE_DIR}/src/daemon/zxcvbn-c
-        "/usr/include/libusb-1.0/"  # REMOVEME
-		)
+add_subdirectory(src)
 
-target_compile_definitions(monero-gui
-		PUBLIC
-		${Qt5Widgets_DEFINITIONS}
-		${Qt5Qml_DEFINITIONS}
-		)
+# Required to make wallet_merged build before the gui
+add_dependencies(monero-gui wallet_merged)
 
-set(CMAKE_CXX_FLAGS "${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
-set(CMAKE_CXX_FLAGS "-std=c++0x")
-
-target_link_libraries(monero-gui
-		${CMAKE_SOURCE_DIR}/monero/lib/libwallet_merged.a
-		#${ZBAR_LIBRARIES}  QR
-		${CMAKE_SOURCE_DIR}/monero/lib/libunbound.a
-		${sodium_LIBRARY_RELEASE}
-		${CMAKE_SOURCE_DIR}/monero/lib/liblmdb.a
-		${CMAKE_SOURCE_DIR}/monero/lib/libepee.a
-		${CMAKE_SOURCE_DIR}/monero/lib/libepee_readline.a
-		${CMAKE_SOURCE_DIR}/monero/lib/libeasylogging.a
-		${CMAKE_DL_LIBS}
-		${Boost_LIBRARIES}
-		${OPENSSL_LIBRARIES}
-		${OPENSSL_SSL_LIBRARIES}
-        ${LibUSB_LIBRARIES}
-		${HIDAPI_LIBRARIES}
-		pthread
-		Qt5::Core
-		Qt5::Quick
-		Qt5::Widgets
-		Qt5::Gui
-		Qt5::Network
-		Qt5::Qml
-		Qt5::Multimedia
-		Qt5::Xml
-		Qt5::XmlPatterns
-		Qt5::Svg
-		)
-
-install(TARGETS monero-gui
-		DESTINATION ${CMAKE_INSTALL_PREFIX}
-		)
