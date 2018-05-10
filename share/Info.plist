@@ -19,6 +19,9 @@
 
   <key>CFBundleExecutable</key>
   <string>monero-wallet-gui</string>
+  
+  <key>CFBundleName</key>
+  <string>Monero GUI</string>
 
   <key>CFBundleIdentifier</key>
   <string>org.monero-project.monero-wallet-gui</string>
