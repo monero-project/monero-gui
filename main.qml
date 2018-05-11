@@ -146,12 +146,13 @@ ApplicationWindow {
             else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
-            else if(middlePanel.state === "Sign") middlePanel.state = "AddressBook"
-            else if(middlePanel.state === "AddressBook") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
-            else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "Mining"
+            else if(middlePanel.state === "Mining") middlePanel.state = "History"
+            else if(middlePanel.state === "History") middlePanel.state = "Receive"
+            else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
+            else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
         }
 

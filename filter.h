@@ -36,7 +36,7 @@ class filter : public QObject
     Q_OBJECT
 private:
     bool m_tabPressed;
-
+    bool m_backtabPressed;
 public:
     explicit filter(QObject *parent = 0);
 
