@@ -68,6 +68,14 @@ Rectangle {
                 text: qsTr("(only available for local daemons)")
                 visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
             }
+            
+            Label {
+                id: soloSyncedLabel
+                fontSize: 18
+                color: "#D02020"
+                text: qsTr("Your daemon must be synchronized before you can start mining")
+                visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
+            }
 
             Text {
                 id: soloMainLabel
