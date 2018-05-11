@@ -722,17 +722,6 @@ QString Wallet::getDaemonLogPath() const
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
 }
 
-QString Wallet::getWalletLogPath() const
-{
-    const QString filename("monero-wallet-gui.log");
-
-#ifdef Q_OS_MACOS
-    return QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs/" + filename;
-#else
-    return QCoreApplication::applicationDirPath() + "/" + filename;
-#endif
-}
-
 bool Wallet::blackballOutput(const QString &pubkey)
 {
     QList<QString> list;

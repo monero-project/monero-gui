@@ -143,11 +143,6 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
-    Q_INVOKABLE void debug(const QString &s);
-    Q_INVOKABLE void info(const QString &s);
-    Q_INVOKABLE void warning(const QString &s);
-    Q_INVOKABLE void error(const QString &s);
-
 signals:
 
     void walletOpened(Wallet * wallet);

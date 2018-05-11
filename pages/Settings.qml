@@ -730,13 +730,13 @@ Rectangle {
             TextBlock {
                 Layout.fillWidth: true
                 font.pixelSize: 14
-                text:  (!currentWallet) ? "" : qsTr("Wallet log path: ") + translationManager.emptyString
+                text: qsTr("Wallet log path: ") + translationManager.emptyString
             }
 
             TextBlock {
                 Layout.fillWidth: true
                 font.pixelSize: 14
-                text: currentWallet.walletLogPath + translationManager.emptyString
+                text: walletLogPath
             }
         }
     }

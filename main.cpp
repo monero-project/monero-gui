@@ -54,6 +54,7 @@
 #include "Subaddress.h"
 #include "model/SubaddressModel.h"
 #include "wallet/api/wallet2_api.h"
+#include "Logger.h"
 #include "MainApp.h"
 
 // IOS exclusions
@@ -69,12 +70,6 @@ bool isIOS = false;
 bool isAndroid = false;
 bool isWindows = false;
 bool isDesktop = false;
-
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    // Send all message types to logger
-    Monero::Wallet::debug("qml", msg.toStdString());
-}
 
 int main(int argc, char *argv[])
 {
@@ -117,16 +112,24 @@ int main(int argc, char *argv[])
     app.installEventFilter(eventFilter);
 
     QCommandLineParser parser;
+    QCommandLineOption logPathOption(QStringList() << "l" << "log-file",
+        QCoreApplication::translate("main", "Log to specified file"),
+        QCoreApplication::translate("main", "file"));
+    parser.addOption(logPathOption);
     parser.addHelpOption();
     parser.process(app);
 
     Monero::Utils::onStartup();
 
     // Log settings
-    Monero::Wallet::init(argv[0], "monero-wallet-gui");
-//    qInstallMessageHandler(messageHandler);
+    const QString logPath = getLogPath(parser.value(logPathOption));
+    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
+    qInstallMessageHandler(messageHandler);
 
-    qDebug() << "app startd";
+
+    // loglevel is configured in main.qml. Anything lower than
+    // qWarning is not shown here.
+    qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
 
     // screen settings
     // Mobile is designed on 128dpi
@@ -217,9 +220,11 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
 
+    engine.rootContext()->setContextProperty("walletLogPath", logPath);
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
-    const QStringList arguments = QCoreApplication::arguments();
+    const QStringList arguments = (QStringList) QCoreApplication::arguments().at(0);
     DaemonManager * daemonManager = DaemonManager::instance(&arguments);
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
@@ -289,13 +294,13 @@ int main(int argc, char *argv[])
     QObject *qmlCamera = rootObject->findChild<QObject*>("qrCameraQML");
     if (qmlCamera)
     {
-        qDebug() << "QrCodeScanner : object found";
+        qWarning() << "QrCodeScanner : object found";
         QCamera *camera_ = qvariant_cast<QCamera*>(qmlCamera->property("mediaObject"));
         QObject *qmlFinder = rootObject->findChild<QObject*>("QrFinder");
         qobject_cast<QrCodeScanner*>(qmlFinder)->setSource(camera_);
     }
     else
-        qDebug() << "QrCodeScanner : something went wrong !";
+        qCritical() << "QrCodeScanner : something went wrong !";
 #endif
 
     QObject::connect(eventFilter, SIGNAL(sequencePressed(QVariant,QVariant)), rootObject, SLOT(sequencePressed(QVariant,QVariant)));
