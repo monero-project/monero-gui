@@ -193,12 +193,8 @@ Rectangle {
                       inlineButtonText: qsTr("All") + translationManager.emptyString
                       inlineButton.onClicked: amountLine.text = "(all)"
 
-                      validator: DoubleValidator {
-                          bottom: 0.0
-                          top: 18446744.073709551615
-                          decimals: 12
-                          notation: DoubleValidator.StandardNotation
-                          locale: "C"
+                      validator: RegExpValidator {
+                          regExp: /(\d{1,8})([.]\d{1,12})?$/
                       }
                   }
               }

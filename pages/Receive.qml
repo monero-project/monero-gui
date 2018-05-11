@@ -57,7 +57,7 @@ Rectangle {
         var nfields = 0
         s += current_address;
         var amount = amountToReceiveLine.text.trim()
-        if (amount !== "") {
+        if (amount !== "" && amount.slice(-1) !== ".") {
           s += (nfields++ ? "&" : "?")
           s += "tx_amount=" + amount
         }
@@ -456,12 +456,8 @@ Rectangle {
                         placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                         fontBold: true
                         inlineIcon: true
-                        validator: DoubleValidator {
-                            bottom: 0.0
-                            top: 18446744.073709551615
-                            decimals: 12
-                            notation: DoubleValidator.StandardNotation
-                            locale: "C"
+                        validator: RegExpValidator {
+                            regExp: /(\d{1,8})([.]\d{1,12})?$/
                         }
                     }
                 }
