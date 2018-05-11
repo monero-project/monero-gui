@@ -1283,7 +1283,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Or manually blackball/unblackball a single output:</source>
-        <translation>手動でアウトプットを排除/元に戻す</translation>
+        <translation>手動でアウトプットを排除/元に戻す:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="206"/>
