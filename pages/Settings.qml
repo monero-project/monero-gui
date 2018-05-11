@@ -589,7 +589,7 @@ Rectangle {
                 Layout.fillWidth: true
                 text: appWindow.persistentSettings.logCategories
                 labelText: "Log Categories"
-                placeholderText: qsTr("(e.g. *:WARNING,net.p2p:DEBUG)") + translationManager.emptyString
+                placeholderText: "(e.g. *:WARNING,net.p2p:DEBUG)"
                 enabled: logLevelDropdown.currentIndex === 5
                 onEditingFinished: {
                     if(enabled) {
