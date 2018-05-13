@@ -529,7 +529,7 @@ Rectangle {
                             "<p>This page will automatically scan the blockchain and the tx pool " +
                             "for incoming transactions using this QR code. If you input an amount, it will also check " +
                             "that incoming transactions total up to that amount.</p>" +
-                            "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
+                            "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
                             "confirmed in short order, but there is still a possibility they might not, so for larger " +
                             "values you may want to wait for one or more confirmation(s).</p>"
                         )
