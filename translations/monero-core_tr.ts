@@ -832,7 +832,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="388"/>
         <source>Set the label of the new address:</source>
-        <translation>Yeni adresin etiketini belirleyin</translation>
+        <translation>Yeni adresin etiketini belirleyin:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="389"/>
@@ -879,7 +879,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="697"/>
         <source>Failed to save QrCode to </source>
-        <translation>QrKodu kaydetme başarısız oldu.</translation>
+        <translation>QrKodunu kaydetme başarısız oldu. İlgi </translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="330"/>
@@ -1283,7 +1283,7 @@ Eski cüzdan önbellek dosyası yeniden adlandırılacak ve daha sonra geri yük
     <message>
         <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Or manually blackball/unblackball a single output:</source>
-        <translation>Veya bir çıktıyı manuel olarak oybirliği ile atın veya alın</translation>
+        <translation>Veya bir çıktıyı manuel olarak oybirliği ile atın veya alın:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="206"/>
@@ -1369,7 +1369,7 @@ Eski cüzdan önbellek dosyası yeniden adlandırılacak ve daha sonra geri yük
     <message>
         <location filename="../pages/SharedRingDB.qml" line="408"/>
         <source>Segregation height:</source>
-        <translation>Ayrım yüksekliği</translation>
+        <translation>Ayrım yüksekliği:</translation>
     </message>
 </context>
 <context>
@@ -1768,7 +1768,8 @@ Eski cüzdan önbellek dosyası yeniden adlandırılacak ve daha sonra geri yük
         <location filename="../pages/Transfer.qml" line="567"/>
         <source>
 Number of transactions: </source>
-        <translation>İşlem sayısı</translation>
+        <translation>
+İşlem sayısı: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="569"/>
@@ -1792,13 +1793,13 @@ payment ID: </source>
         <location filename="../pages/Transfer.qml" line="572"/>
         <source>
 Amount: </source>
-        <translation>Miktar</translation>
+        <translation>Miktar: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>
 Fee: </source>
-        <translation>Ücret</translation>
+        <translation>Ücret: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="574"/>
@@ -2094,7 +2095,7 @@ Harcama Kanıtı ile ilgili davada, alıcı adresini belirtmeniz gerekmez. </tra
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Her işlem için küçük bir işlem ücreti alınır. Bu seçenek, Monero&apos;nun geliştirilmesini desteklemek için işleminize, bu ücretin bir yüzdesi olarak ek bir miktar eklemenize izin verir. Örneğin %50 otomatik bağış, 0.005 XMR işlem ücreti alır ve Monero gelişimini desteklemek için 0.0025 XMR ekler.</translation>
+        <translation>Her işlem için küçük bir işlem ücreti alınır. Bu seçenek, Monero&apos;nun geliştirilmesini desteklemek için işleminize, bu ücretin bir yüzdesi olarak ek bir miktar eklemenize izin verir. Örneğin 50% otomatik bağış, 0.005 XMR işlem ücreti alır ve Monero gelişimini desteklemek için 0.0025 XMR ekler.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
