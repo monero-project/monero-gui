@@ -13,7 +13,7 @@ class DaemonManager : public QObject
 
 public:
 
-    static DaemonManager * instance(const QStringList *args);
+    static DaemonManager * instance();
 
     Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "");
     Q_INVOKABLE bool stop(NetworkType::Type nettype);
@@ -44,7 +44,6 @@ public slots:
 private:
     explicit DaemonManager(QObject *parent = 0);
     static DaemonManager * m_instance;
-    static QStringList m_clArgs;
     QProcess *m_daemon;
     bool initialized = false;
     QString m_monerod;

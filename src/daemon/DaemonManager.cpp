@@ -18,15 +18,11 @@ namespace {
 }
 
 DaemonManager * DaemonManager::m_instance = nullptr;
-QStringList DaemonManager::m_clArgs;
 
-DaemonManager *DaemonManager::instance(const QStringList *args)
+DaemonManager *DaemonManager::instance()
 {
     if (!m_instance) {
         m_instance = new DaemonManager;
-        // store command line arguments for later use
-        m_clArgs = *args;
-        m_clArgs.removeFirst();
     }
 
     return m_instance;
@@ -46,12 +42,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--testnet";
     else if (nettype == NetworkType::STAGENET)
         arguments << "--stagenet";
-
-    foreach (const QString &str, m_clArgs) {
-          qDebug() << QString(" [%1] ").arg(str);
-          if (!str.isEmpty())
-            arguments << str;
-    }
 
     // Custom startup flags for daemon
     foreach (const QString &str, flags.split(" ")) {
