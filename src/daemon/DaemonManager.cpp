@@ -288,12 +288,18 @@ DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
 {
 
-    // path to monerod
-    m_monerod = QStandardPaths::findExecutable("monerod",
-        (QStringList) QApplication::applicationDirPath());
+    // Try to use monerod from system path if available
+    m_monerod = QStandardPaths::findExecutable("monerod");
+
+    // Fallback to monerod bundled with the application
+    if (m_monerod.length() == 0)
+        m_monerod = QStandardPaths::findExecutable("monerod",
+            (QStringList) QApplication::applicationDirPath());
 
     if (m_monerod.length() == 0) {
         qCritical() << "no daemon binary defined for current platform";
         m_has_daemon = false;
+    } else {
+        qWarning().noquote() << "Daemon: " + m_monerod;
     }
 }
