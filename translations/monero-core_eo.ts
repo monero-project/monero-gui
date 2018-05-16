@@ -743,7 +743,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="38"/>
         <source>%1 blocks remaining: </source>
-        <translation>Restas %1 blokoj</translation>
+        <translation>Restas %1 blokoj: </translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="70"/>
@@ -822,7 +822,7 @@
         <location filename="../pages/Receive.qml" line="206"/>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Tiu QR-kodo inkluzivas la adreson kiun vi elektis ĉi-supre, kaj la kvanton kiun vi entajpis sube. Donu ĝin al aliuloj (dekstroklako-&g;konservi) tiel ke ili pli facile povu sendi al vi ekzaktajn kvantojn.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Tiu QR-kodo inkluzivas la adreson kiun vi elektis ĉi-supre, kaj la kvanton kiun vi entajpis sube. Donu ĝin al aliuloj (dekstra klako-&gt;konservi) tiel ke ili pli facile povu sendi al vi ekzaktajn kvantojn.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
@@ -1053,7 +1053,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="682"/>
         <source>Set a new restore height:</source>
-        <translation>Agordi novan restarig-altecon</translation>
+        <translation>Agordi novan restarig-altecon:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="312"/>
@@ -1073,7 +1073,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="671"/>
         <source>Wallet creation height: </source>
-        <translation>Alteco dum la monujkreado</translation>
+        <translation>Alteco dum la monujkreado: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="694"/>
@@ -1107,7 +1107,7 @@ La malnova monujkaŝmemoro renomiĝos, vin povas restarigi gîn poste.
     <message>
         <location filename="../pages/Settings.qml" line="733"/>
         <source>Wallet log path: </source>
-        <translation>Vojo al monujhistorio</translation>
+        <translation>Vojo al monujhistorio: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="747"/>
@@ -1263,7 +1263,7 @@ Alternative, vi povas mem skani la blokĉenon (kaj la blokĉenon de ŝlosilreuza
     <message>
         <location filename="../pages/SharedRingDB.qml" line="147"/>
         <source>Please choose a file to load blackballed outputs from</source>
-        <translation>Bonvolu elekti dosieron el kie ŝargiĝos la malakceptitaj eligoj.</translation>
+        <translation>Bonvolu elekti dosieron el kie ŝargiĝos la malakceptitaj eligoj</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="163"/>
@@ -1381,7 +1381,7 @@ Se vi ne uzas ŝlosilreuzantan Monero-klonon, kiu ne enhavas tiujn sekuraĵojn, 
     <message>
         <location filename="../pages/SharedRingDB.qml" line="408"/>
         <source>Segregation height:</source>
-        <translation>Blokalteco de la disforkiĝo</translation>
+        <translation>Blokalteco de la disforkiĝo:</translation>
     </message>
 </context>
 <context>
@@ -2667,7 +2667,7 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     <message>
         <location filename="../main.qml" line="632"/>
         <source>Spending address index: </source>
-        <translation>Indekso de elspezanta adreso</translation>
+        <translation>Indekso de elspezanta adreso: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="779"/>
