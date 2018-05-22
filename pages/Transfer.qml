@@ -567,7 +567,7 @@ Rectangle {
                     + (transaction.paymentId[i] == "" ? "" : qsTr("\n\payment ID: ") + transaction.paymentId[i])
                     + qsTr("\nAmount: ") + walletManager.displayAmount(transaction.amount(i))
                     + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee(i))
-                    + qsTr("\nRingsize: ") + transaction.mixin(i+1)
+                    + qsTr("\nRingsize: ") + (transaction.mixin(i)+1)
 
                     // TODO: add descriptions to unsigned_tx_set?
     //              + (transactionDescription === "" ? "" : (qsTr("\n\nDescription: ") + transactionDescription))
