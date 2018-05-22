@@ -1,3 +1,8 @@
+# qml components require at least QT 5.7.0
+lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
+  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.7.0")
+}
+
 TEMPLATE = app
 
 QT += qml quick widgets
