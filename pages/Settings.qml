@@ -686,7 +686,7 @@ Rectangle {
                         if(Utils.isNumeric(_restoreHeight)){
                             _restoreHeight = parseInt(_restoreHeight);
                             if(_restoreHeight >= 0) {
-                                currentWallet.walletCreationHeight = restoreHeightEdit.text
+                                currentWallet.walletCreationHeight = _restoreHeight
                                 // Restore height is saved in .keys file. Set password to trigger rewrite.
                                 currentWallet.setPassword(appWindow.walletPassword)
 
