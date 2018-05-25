@@ -69,11 +69,11 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ### On Linux:
 
-(Tested on Ubuntu 16.04 x86, 16.10 x64, Gentoo x64 and Linux Mint 18 "Sarah" - Cinnamon x64)
+(Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
 
 1. Install Monero dependencies
 
-  - For Ubuntu and Mint
+  - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
 	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev`
 
@@ -81,27 +81,13 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind`
 
-2. Grab an up-to-date copy of the monero-gui repository
+2. Install Qt:
 
-	`git clone https://github.com/monero-project/monero-gui.git`
+  *Note*: Qt 5.7 is the minimum version required to build the GUI. This makes **some** distributions (mostly based on debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete. You can still build the GUI if you install an [official Qt release](https://wiki.qt.io/Install_Qt_5_on_Ubuntu), but this is not officially supported.
 
-3. Go into the repository
+  - For Ubuntu 17.10+
 
-	`cd monero-gui`
-
-4. Install the GUI dependencies
-
-  - For Ubuntu 16.04 x86
-
-	`sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qt-labs-folderlistmodel qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs`
-
-  - For Ubuntu 16.04+ x64
-
-    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-xmllistmodel qttools5-dev-tools qml-module-qtquick-dialogs qml-module-qt-labs-settings libqt5qml-graphicaleffects`
-
-  - For Linux Mint 18 "Sarah" - Cinnamon x64
-
-    `sudo apt install qml-module-qt-labs-settings qml-module-qtgraphicaleffects`
+    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools`
 
   - For Gentoo
 
@@ -109,7 +95,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - Optional : To build the flag `WITH_SCANNER`
 
-    - For Ubuntu and Mint
+    - For Ubuntu
 
       `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia libzbar-dev`
 
@@ -119,15 +105,17 @@ Packaging for your favorite distribution would be a welcome contribution!
 
       `emerge dev-qt/qtmultimedia:5 media-gfx/zbar`
 
-5. Build the GUI
 
-  - For Ubuntu and Mint
+3. Clone repository
 
-	`./build.sh`
+    `git clone https://github.com/monero-project/monero-gui.git`
 
-  - For Gentoo
+4. Build
 
-    `QT_SELECT=5 ./build.sh`
+    ```
+    cd monero-gui
+    ./build.sh
+    ```
 
 The executable can be found in the build/release/bin folder.
 
