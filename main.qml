@@ -107,7 +107,6 @@ ApplicationWindow {
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
-        else if(seq === "Ctrl+A") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
