@@ -2696,7 +2696,7 @@ Spending address index: </source>
         <location filename="../main.qml" line="782"/>
         <location filename="../main.qml" line="1198"/>
         <source>Information</source>
-        <translation>信息</translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../main.qml" line="788"/>
