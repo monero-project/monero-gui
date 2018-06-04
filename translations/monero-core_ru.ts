@@ -1128,7 +1128,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="645"/>
         <source>Embedded Monero version: </source>
-        <translation>Встроенная версия Monero</translation>
+        <translation>Встроенная версия Monero: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="657"/>
