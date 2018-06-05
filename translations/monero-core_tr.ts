@@ -363,7 +363,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="262"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation>(Sadece Cüzdan Göster - mnemonic seed kullanılabilir değil)</translation>
+        <translation>(Sadece Cüzdan Göster - Mnemonic seed kullanılabilir değil)</translation>
     </message>
 </context>
 <context>
