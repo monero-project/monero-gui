@@ -189,23 +189,25 @@ Rectangle {
                 Layout.bottomMargin: 10 * scaleRatio
             }
 
-            RowLayout {
-                StandardButton {
-                    enabled: !fullWalletQRCode.visible
+            ColumnLayout {
+                RadioButton {
                     id: showFullQr
-                    small: true
+                    enabled: !this.checked
+                    checked: fullWalletQRCode.visible
                     text: qsTr("Spendable Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = false
+                        showViewOnlyQr.checked = false
                     }
                 }
-                StandardButton {
-                    enabled: fullWalletQRCode.visible
+                RadioButton {
+                    enabled: !this.checked
                     id: showViewOnlyQr
-                    small: true
+                    checked: viewOnlyQRCode.visible
                     text: qsTr("View Only Wallet") + translationManager.emptyString
                     onClicked: {
                         viewOnlyQRCode.visible = true
+                        showFullQr.checked = false
                     }
                 }
                 Layout.bottomMargin: 30 * scaleRatio
