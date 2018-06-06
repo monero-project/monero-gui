@@ -56,8 +56,8 @@ ColumnLayout {
     property int rowSpacing: 10
 
     function checkFields(){
-        var addressOK = walletManager.addressValid(addressLine.text, persistentSettings.nettype)
-        var viewKeyOK = walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype)
+        var addressOK = (viewKeyLine.text.length > 0 || spendKeyLine.text.length > 0)? walletManager.addressValid(addressLine.text, persistentSettings.nettype) : false
+        var viewKeyOK = (viewKeyLine.text.length > 0)? walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype) : true
         // Spendkey is optional
         var spendKeyOK = (spendKeyLine.text.length > 0)? walletManager.keyValid(spendKeyLine.text, addressLine.text, false, persistentSettings.nettype) : true
 
