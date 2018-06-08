@@ -123,7 +123,7 @@ namespace
   std::string get_default_ringdb_path()
   {
     boost::filesystem::path dir = tools::get_default_data_dir();
-    // remove .bitmonero, replace with .shared-ringdb
+    // remove .bitlorentz, replace with .shared-ringdb
     dir = dir.remove_filename();
     dir /= ".shared-ringdb";
     return dir.string();
@@ -2199,7 +2199,7 @@ void wallet2::refresh(uint64_t start_height, uint64_t & blocks_fetched, bool& re
   if(m_light_wallet) {
 
     // MyLorentz get_address_info needs to be called occasionally to trigger wallet sync.
-    // This call is not really needed for other purposes and can be removed if mymonero changes their backend.
+    // This call is not really needed for other purposes and can be removed if mylorentz changes their backend.
     cryptonote::COMMAND_RPC_GET_ADDRESS_INFO::response res;
 
     // Get basic info
@@ -7058,7 +7058,7 @@ void wallet2::light_wallet_get_address_txs()
   bool r = epee::net_utils::invoke_http_json("/get_address_txs", ireq, ires, m_http_client, rpc_timeout, "POST");
   m_daemon_rpc_mutex.unlock();
   THROW_WALLET_EXCEPTION_IF(!r, error::no_connection_to_daemon, "get_address_txs");
-  //OpenLorentz sends status=success, Mymonero doesn't. 
+  //OpenLorentz sends status=success, Mylorentz doesn't. 
   THROW_WALLET_EXCEPTION_IF((!ires.status.empty() && ires.status != "success"), error::no_connection_to_daemon, "get_address_txs");
 
   
@@ -7275,7 +7275,7 @@ bool wallet2::light_wallet_key_image_is_ours(const crypto::key_image& key_image,
   crypto::key_image calculated_key_image;
   cryptonote::keypair in_ephemeral;
   
-  // Subaddresses aren't supported in mymonero/openmonero yet. Roll out the original scheme:
+  // Subaddresses aren't supported in mylorentz/openlorentz yet. Roll out the original scheme:
   //   compute D = a*R
   //   compute P = Hs(D || i)*G + B
   //   compute x = Hs(D || i) + b      (and check if P==x*G)
@@ -10154,7 +10154,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
     }
   }
 
-  std::string uri = "monero:" + address;
+  std::string uri = "lorentz:" + address;
   unsigned int n_fields = 0;
 
   if (!payment_id.empty())
@@ -10183,9 +10183,9 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  if (uri.substr(0, 7) != "monero:")
+  if (uri.substr(0, 7) != "lorentz:")
   {
-    error = std::string("URI has wrong scheme (expected \"monero:\"): ") + uri;
+    error = std::string("URI has wrong scheme (expected \"lorentz:\"): ") + uri;
     return false;
   }
 

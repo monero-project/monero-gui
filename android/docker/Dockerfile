@@ -1,4 +1,4 @@
-FROM monero-android
+FROM lorentz-android
 
 #INSTALL JAVA
 RUN echo "deb http://ftp.fr.debian.org/debian/ jessie-backports main contrib non-free" >> /etc/apt/sources.list
@@ -92,8 +92,8 @@ RUN cp openssl/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/li
 RUN cp boost_${BOOST_VERSION}/android32/lib/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/lib
 RUN cp ZBar/android/obj/local/armeabi-v7a/lib* ${ANDROID_NDK_ROOT}/platforms/${ANDROID_API}/arch-arm/usr/lib
 
-RUN git clone https://github.com/monero-project/monero-gui.git \
-    && cd monero-gui \
+RUN git clone https://github.com/lorentz-project/lorentz-gui.git \
+    && cd lorentz-gui \
     && git submodule update \
     && CC=arm-linux-androideabi-clang CXX=arm-linux-androideabi-clang++ BOOST_ROOT=/opt/android/boost_1_62_0 \
          BOOST_LIBRARYDIR=${WORKDIR}/boost_${BOOST_VERSION}/android32/lib/ \

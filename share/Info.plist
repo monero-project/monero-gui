@@ -18,13 +18,13 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>monero-wallet-gui</string>
+  <string>lorentz-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Monero GUI</string>
+  <string>Lorentz GUI</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.monero-project.monero-wallet-gui</string>
+  <string>org.lorentz-project.lorentz-wallet-gui</string>
 
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>

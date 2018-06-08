@@ -100,9 +100,9 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    app.setApplicationName("monero-gui");
-    app.setOrganizationDomain("getmonero.org");
-    app.setOrganizationName("monero-project");
+    app.setApplicationName("lorentz-gui");
+    app.setOrganizationDomain("getlorentz.org");
+    app.setOrganizationName("lorentz-project");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 
     // Log settings
     const QString logPath = getLogPath(parser.value(logPathOption));
-    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
+    Monero::Wallet::init(argv[0], "lorentz-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
 
@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
 
-//  export to QML monero accounts root directory
+//  export to QML lorentz accounts root directory
 //  wizard is talking about where
 //  to save the wallet file (.keys, .bin), they have to be user-accessible for
 //  backups - I reckon we save that in My Documents\Monero Accounts\ on
@@ -255,7 +255,7 @@ int main(int argc, char *argv[])
 
     if (!moneroAccountsRootDir.empty())
     {
-        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
+        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Lorentz/wallets";
         engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
     }
 
@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
     if (accountName.isEmpty())
         accountName = qgetenv("USERNAME"); // Windows
     if (accountName.isEmpty())
-        accountName = "My monero Account";
+        accountName = "My Lorentz Account";
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
