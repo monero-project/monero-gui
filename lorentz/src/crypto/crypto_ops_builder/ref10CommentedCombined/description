@@ -1,0 +1,7 @@
+shen_ed25519_ref10
+MakeCryptoOps.py makes crypto-ops.c in the Lorentz source from the ref10 implementation
+
+EdDSA signatures using Curve25519
+from http://hyperelliptic.org/ebats/supercop-20141124.tar.bz2
+
+Commented / combined by Shen Noether, Lorentz Research Lab

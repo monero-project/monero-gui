@@ -1,0 +1,43 @@
+.TH "minissdpd" 1
+.SH NAME
+minissdpd \- daemon keeping track of UPnP devices up
+.SH SYNOPSIS
+.B minissdpd
+.RB [ -d "] [" -6 "] [" "-s \fIsocket" "] [" "-p \fIpidfile" "] [" "-t \fITTL" "] [" "-f \fIdevice" ] " -i \fR<\fIinterface\fR> " [ "-i \fR<\fIinterface2\fR>" "] ..."
+.SH DESCRIPTION
+minissdpd listen for SSDP traffic and keeps track
+of what are the UPnP devices up on the network.
+The list of the UPnP devices is accessed by programs
+looking for devices, skipping the UPnP discovery process.
+.SH OPTIONS
+.TP
+.B \-d
+debug : do not go to background, output messages to console
+and do not filter out low priority messages.
+.TP
+.B \-6
+IPv6 : Enable IPv6 in addition to IPv4.
+.TP
+.BI \-s " socket"
+path of the unix socket open for communicating with other processes.
+By default /var/run/minissdpd.sock is used.
+.TP
+.BI \-p " pidfile"
+path of the file where pid is written at startup.
+By default /var/run/minissdpd.pid is used.
+.TP
+.BI \-t " TTL"
+TTL of the package.
+By default 2 is used according to UDA.
+.TP
+.BI \-f " device"
+search/filter a specific device type.
+.TP
+.BI \-i " interface"
+name or IP address of the interface used to listen to SSDP packets
+coming on port 1900, multicast address 239.255.255.250.
+.SH "SEE ALSO"
+miniupnpd(1) miniupnpc(3)
+.SH BUGS
+No known bugs.
+

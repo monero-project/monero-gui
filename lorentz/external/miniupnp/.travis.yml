@@ -1,0 +1,49 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+addons:
+  apt:
+    packages:
+    # packages list: https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+    - iptables-dev
+    - libevent-dev
+    - libnfnetlink-dev
+    - uuid-dev
+
+# container-based builds
+sudo: false
+
+env:
+  - 'PROJECT=minissdpd'
+  - 'PROJECT=miniupnpc'
+  - 'PROJECT=miniupnpc-async'
+  - 'PROJECT=miniupnpc-libevent'
+  - 'PROJECT=miniupnpd'
+
+matrix:
+  exclude:
+    - os: osx
+      env: PROJECT=miniupnpd
+    - os: osx
+      compiler: gcc
+
+compiler:
+  - gcc
+  - clang
+
+before_install:
+  - 'if [ "$TRAVIS_OS_NAME" = "osx" ] && [ "$CC" == "gcc" ] ; then CC=gcc-4.9; fi'
+
+script:
+  - 'cd $TRAVIS_BUILD_DIR && cd $PROJECT'
+  - 'MAKEFILE=Makefile && if [ -f Makefile.linux -a "$TRAVIS_OS_NAME" = "linux" ]; then MAKEFILE=Makefile.linux; elif [ -f Makefile.macosx -a "$TRAVIS_OS_NAME" = "osx" ]; then MAKEFILE=Makefile.macosx; fi'
+  - 'if [ "$MAKEFILE" = "Makefile.macosx" ]; then make -f $MAKEFILE depend; fi'
+  - 'CONFIG_OPTIONS="--ipv6 --igd2" make -f $MAKEFILE -j3'
+  - 'if [ "$PROJECT" = "miniupnpc" -o "$PROJECT" = "minissdpd" -o "$PROJECT" = "miniupnpd" ]; then make -f $MAKEFILE check; fi'
+  - 'if [ "$PROJECT" = "miniupnpc" ]; then INSTALLPREFIX="$HOME/_pythonmodule" make -f $MAKEFILE pythonmodule; fi'
+
+after_success:
+  - 'INSTALLPREFIX="$HOME/$PROJECT" make -f $MAKEFILE install'

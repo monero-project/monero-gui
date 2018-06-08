@@ -1,0 +1,61 @@
+ -= MiniUPnP project =-
+
+Main author : Thomas BERNARD
+Web site : http://miniupnp.free.fr/ or https://miniupnp.tuxfamily.org/
+Github : https://github.com/miniupnp/miniupnp/
+Travis CI : https://travis-ci.org/miniupnp/miniupnp
+Appveyor : https://ci.appveyor.com/project/miniupnp/miniupnp
+
+miniupnpc/ : MiniUPnP client - an UPnP IGD control point
+miniupnpd/ : MiniUPnP daemon - an implementation of a UPnP IGD
+                               + NAT-PMP / PCP gateway
+minissdpd/ : SSDP managing daemon. Designed to work with miniupnpc,
+             miniupnpd, ReadyMedia (formerly MiniDLNA), etc.
+miniupnpc-async/    : Proof of concept for a UPnP IGD control point using
+                      asynchronous (non blocking) sockets.
+miniupnpc-libevent/ : UPnP IGD control point using libevent2
+                      http://libevent.org/
+
+Thanks to :
+    * Ryan Wagoner
+    * João Paulo Barraca
+    * Craig Kadziolka
+    * Seth Mos
+    * Rick Richard
+    * Michael van Tellingen
+    * Julien Wajsberg
+    * Jeremy Collake
+    * Matthew Sporleder
+    * Greg Hazel
+    * Rico Huber
+    * Jelle Huitema
+    * Xavier Martin
+    * Thomas Goirand
+    * Darren Reed
+    * Robbie Hanson
+    * Nikos Mavrogiannopoulos
+    * Elsö András
+    * Justin Maggard
+    * David Wu
+    * Michael Trebilcock
+    * Soren Dreijer
+    * Colin McFarlane
+    * Daniel Dickinson
+    * Guillaume Habault
+    * Alexey Osipov
+    * Alexey Kuznetsov
+    * Chiaki Ishikawa
+    * David Kerr
+    * Jardel Weyrich
+    * Leah X. Schmidt
+    * Peter Tatrai
+    * Leo Moll
+    * Daniel Becker
+    * Yonetani Tomokazu
+    * Markus Stenberg
+    * Tomofumi Hayashi
+    * Konstantin Tokarev
+    * Mike Tzou
+    * Nevo Hed
+    * Salva Peiró
+    * Stephan Zeisberg

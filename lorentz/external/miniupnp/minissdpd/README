@@ -1,0 +1,70 @@
+ * MiniSSDPd - SSDP daemon
+
+(c) Thomas Bernard
+http://miniupnp.free.fr/ or https://miniupnp.tuxfamily.org/
+https://github.com/miniupnp/miniupnp/
+
+MiniSSDPd is a daemon that :
+1 - keeps track of all UPnP devices announcing themselves on the network.
+its database can be queried by local processes using a protocol based on
+a unix socket. That enables local processes to quickly discover UPnP devices
+without broadcasting SSDP message and waiting several seconds for a response.
+2 - keeps a database of local UPnP devices hosted on the machine and
+answering SSDP searchs on their behalf. It enables to run several UPnP devices,
+like an IGD and a MediaServer, on the same machine.
+
+to build, use GNU Make.
+
+
+* protocol :
+
+Connect to the unix socket.
+Sent request, get response.
+close unix socket connection.
+
+* Request format :
+1st byte : request type
+           0 - version
+           1 - type
+           2 - USN (unique id)
+           3 - everything
+           4 - submit service (see below)
+           5 - switch connection to notification mode
+n bytes : string length : 1 byte if < 128 else the upper bit indicate that
+one additional byte should be read, etc. (see codelength.h)
+n bytes = string
+
+Response format :
+
+request type 0 (version) :
+n bytes string length
+n bytes = version string
+
+request type 1 / 2 / 3 / 5 :
+1st byte : number of services/devices, from 0 to 254.
+           255 is a special value, see below
+For each service/device :
+URL :
+  n bytes string length
+  n bytes = Location string
+ST:
+  n bytes string length
+  n bytes = type string
+USN:
+  n bytes string length
+  n bytes = identifier string
+
+if the 1st byte is 255, the format is as follows :
+1st byte = 255
+2nd byte = notification type (1=NEW, 2=UPDATE, 3=REMOVE)
+3rd byte = number of services/devices, from 0 to 255.
+
+
+request type 4 = submit service
+1st byte  = 4
+(k,n) bytes : length and string "ST" (service type)
+(k,n) bytes : length and string "USN"
+(k,n) bytes : length and string "Server"
+(k,n) bytes : length and string "Location"
+No answer
+

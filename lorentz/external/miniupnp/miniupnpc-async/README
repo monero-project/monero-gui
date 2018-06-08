@@ -1,0 +1,10 @@
+(c) 2014 Thomas BERNARD
+http://miniupnp.free.fr/
+https://github.com/miniupnp/miniupnp
+
+miniupnpc-async :
+  proof of concept of a UPnP IGD client using asynchronous socket calls
+  (ie non blocking sockets)
+
+  To be reimplemented using libevent2 (http://libevent.org/)
+

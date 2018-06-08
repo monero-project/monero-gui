@@ -1,0 +1,78 @@
+name: monero
+version: 0.11.1.0-1
+summary: "Monero: the secure, private, untraceable cryptocurrency https://getlorentz.org"
+description: |
+    Monero is a private, secure, untraceable, decentralised digital currency.
+    You are your bank, you control your funds, and nobody can trace your transfers
+    unless you allow them to do so.
+grade: devel
+confinement: strict
+
+apps:
+    lorentzd:
+        daemon: forking
+        command: |
+          lorentzd-wrapper --detach --data-dir ${SNAP_COMMON} --config-file ${SNAP_USER_DATA}/etc/lorentzd.conf
+        plugs:
+            - network
+            - network-bind
+    lorentz-wallet-rpc:
+        command: |
+          lorentz-wallet-rpc --log-file ${SNAP_USER_DATA}
+        plugs:
+            - home
+            - network
+            - network-bind
+    lorentz-wallet-cli:
+        command: |
+          lorentz-wallet-cli --log-file ${SNAP_USER_DATA}
+        plugs:
+            - home
+            - network
+
+parts:
+    cmake-build:
+        plugin: cmake
+        configflags:
+            - -DBDB_STATIC=1
+            - -DBoost_USE_STATIC_LIBS=1
+            - -DBoost_USE_STATIC_RUNTIME=1
+            - -DARCH=default
+        source: .
+        build-packages:
+            - gcc
+            - pkg-config
+            - libunbound-dev
+            - libevent-dev
+            - libboost-all-dev
+            - libzmqpp-dev
+            - libzmq3-dev
+            - libsodium-dev
+            - libdb-dev
+            - libunwind-dev
+            - libminiupnpc-dev
+            - libldns-dev
+            - libexpat1-dev
+            - libreadline6-dev
+            - bison
+            - doxygen
+            - graphviz
+        stage-packages:
+            - libminiupnpc10
+            - libunbound2
+            - libunwind8
+        prime:
+            - bin
+            - usr/lib/
+            - -usr/lib/gcc
+            - -usr/share
+
+    dist-files:
+        plugin: dump
+        source: .
+        organize:
+            contrib/snap/lorentzd.conf: etc/lorentzd.conf
+            contrib/snap/lorentzd-wrapper: bin/lorentzd-wrapper
+        prime:
+            - etc
+            - bin

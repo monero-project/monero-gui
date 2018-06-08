@@ -1,0 +1,19 @@
+{
+   libunwind causes spurious report
+   Memcheck:Param
+   msync(start)
+   ...
+   obj:/usr/lib64/libunwind.so.*
+   ...
+   fun:_ULx86_64_step
+   ...
+}
+
+{
+   boost unlocks before signalling cond var
+   Helgrind:Misc
+   ...
+   fun:pthread_cond_signal@*
+   fun:maybe_unlock_and_signal_one<boost::asio::detail::scoped_lock<boost::asio::detail::posix_mutex> >
+   ...
+}
