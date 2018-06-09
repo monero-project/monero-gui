@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [ ! -d "$SNAP_USER_DATA/etc" ]; then
-  mkdir $SNAP_USER_DATA/etc/
-  cp -R $SNAP/etc/lorentzd.conf $SNAP_USER_DATA/etc/lorentzd.conf
-fi
-
-exec "$SNAP/bin/lorentzd" "$@"

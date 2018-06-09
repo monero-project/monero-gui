@@ -1,9 +1,0 @@
-*.o
-minissdpd
-testcodelength
-testminissdpd
-listifaces
-Makefile.bak
-validateminissdpd
-validatecodelength
-showminissdpdnotif
