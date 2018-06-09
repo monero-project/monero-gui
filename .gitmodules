@@ -1,4 +1,3 @@
 [submodule "lorentz"]
 	path = lorentz
 	url = https://github.com/lorentz-project/lorentz
-	ignore = all
