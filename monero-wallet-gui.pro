@@ -242,6 +242,7 @@ win32 {
         -licudt \
         -licutu \
         -liconv \
+        -lwinscard \
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
