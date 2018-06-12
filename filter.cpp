@@ -114,6 +114,12 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
         QMouseEvent *me = static_cast<QMouseEvent*>(ev);
         emit mouseReleased(QVariant::fromValue<QObject*>(obj), me->x(), me->y());
     } break;
+    case QEvent::WindowBlocked: {
+        emit windowBlocked(true);
+    } break;
+    case QEvent::WindowUnblocked: {
+        emit windowBlocked(false);
+    } break;
     default: break;
     }
 

@@ -51,7 +51,8 @@ HEADERS += \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
     Logger.h \
-    MainApp.h
+    MainApp.h \
+    systemtray.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -77,7 +78,8 @@ SOURCES += main.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
     Logger.cpp \
-    MainApp.cpp
+    MainApp.cpp \
+    systemtray.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
     HEADERS -= src/zxcvbn-c/zxcvbn.h

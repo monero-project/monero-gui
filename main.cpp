@@ -56,6 +56,7 @@
 #include "wallet/api/wallet2_api.h"
 #include "Logger.h"
 #include "MainApp.h"
+#include "systemtray.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -145,6 +146,9 @@ int main(int argc, char *argv[])
                          << calculated_ratio;
 
 
+    // add a system tray
+    SystemTray *systray = new SystemTray();
+
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
 
@@ -221,6 +225,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
 
     engine.rootContext()->setContextProperty("walletLogPath", logPath);
+
+    engine.rootContext()->setContextProperty("systray", systray);
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
@@ -307,6 +313,9 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(sequenceReleased(QVariant,QVariant)), rootObject, SLOT(sequenceReleased(QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
+    QObject::connect(eventFilter, SIGNAL(windowBlocked(bool)), systray, SLOT(disableActionHide(bool)));
 
-    return app.exec();
+    bool status = app.exec();
+    delete systray;
+    return status;
 }

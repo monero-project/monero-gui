@@ -506,6 +506,17 @@ Rectangle {
                 onClicked: Windows.setCustomWindowDecorations(checked)
                 text: qsTr("Custom decorations") + translationManager.emptyString
             }
+
+            CheckBox {
+                visible: !isMobile
+                id: systemTrayCheckBox
+                checked: persistentSettings.hasSystray
+                onClicked: {
+                    systray.toggleIcon(checked);
+                    persistentSettings.hasSystray = true;
+                }
+                text: qsTr("Enable System Tray") + translationManager.emptyString
+            }
         }
 
         // Log level

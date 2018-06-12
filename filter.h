@@ -48,6 +48,7 @@ signals:
     void sequenceReleased(const QVariant &o, const QVariant &seq);
     void mousePressed(const QVariant &o, const QVariant &x, const QVariant &y);
     void mouseReleased(const QVariant &o, const QVariant &x, const QVariant &y);
+    void windowBlocked(const bool blocked);
 };
 
 #endif // FILTER_H

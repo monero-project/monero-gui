@@ -82,6 +82,42 @@ ApplicationWindow {
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
+
+    /* System Tray connections */
+
+    Connections {
+        target: systray
+
+        /* switch page from systray
+         * TODO: enable only if wallet is opened !!! */
+
+        onSignalPageRequested: {
+            console.log("System tray: requested page " + page)
+            showPageRequest(page)
+
+            if (appWindow.visibility === Window.Hidden)
+                appWindow.show()
+                systray.showActionHide(false)
+
+            // bring appWindow to front
+            appWindow.raise()
+        }
+
+        onSignalToggle:  {
+            if (appWindow.visibility === Window.Hidden)
+                appWindow.show()
+            else
+                appWindow.hide()
+        }
+
+        onSignalClose: {
+            appWindow.close()
+        }
+    }
+
+
+
+
     function altKeyReleased() { ctrlPressed = false; }
 
     function showPageRequest(page) {
@@ -210,7 +246,6 @@ ApplicationWindow {
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
             leftPanel.selectItem(middlePanel.state)
-
         }
 
 
@@ -244,6 +279,10 @@ ApplicationWindow {
 
         // Hide titlebar based on persistentSettings.customDecorations
         titleBar.visible = persistentSettings.customDecorations;
+
+        // Enable system tray based on persistentSettings.hasSystray
+        if (persistentSettings.hasSystray)
+            systray.toggleIcon(true)
     }
 
     function closeWallet() {
