@@ -120,10 +120,10 @@ fi
 
 
 echo "cleaning up existing lorentz build dir, libs and includes"
-#rm -fr $MONERO_DIR/build
-#rm -fr $MONERO_DIR/lib
-#rm -fr $MONERO_DIR/include
-#rm -fr $MONERO_DIR/bin
+rm -fr $MONERO_DIR/build
+rm -fr $MONERO_DIR/lib
+rm -fr $MONERO_DIR/include
+rm -fr $MONERO_DIR/bin
 
 
 mkdir -p $MONERO_DIR/build/$BUILD_TYPE
