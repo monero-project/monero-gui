@@ -39,3 +39,4 @@ for f in "${ICU_FILES[@]}"; do cp $MSYSTEM_PREFIX/bin/$f $TARGET || exit 1; done
 
 for f in "${PLATFORM_FILES[@]}"; do cp $MSYSTEM_PREFIX/bin/$f $TARGET || exit 1; done
 
+cp $ROOT_DIR/start-low-graphics-mode.bat $TARGET
