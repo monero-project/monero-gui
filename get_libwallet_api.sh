@@ -17,13 +17,12 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout master
+git -C $MONERO_DIR checkout release-v1.0.0
 
 # get lorentz core tag
 get_tag
 # create local lorentz branch
-#git -C $MONERO_DIR checkout -B $VERSIONTAG
-git -C $MONERO_DIR checkout -B master
+git -C $MONERO_DIR checkout -B $VERSIONTAG
 
 git -C $MONERO_DIR submodule init
 git -C $MONERO_DIR submodule update
