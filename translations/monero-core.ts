@@ -2334,7 +2334,7 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../main.qml" line="822"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
+        <source>This address received %1 lorentz, with %2 confirmation(s).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2410,7 +2410,7 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1650"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <source>New version of lorentz-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2465,7 +2465,7 @@ Description: </source>
     </message>
     <message>
         <location filename="../main.qml" line="819"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 lorentz, but the transaction is not yet mined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

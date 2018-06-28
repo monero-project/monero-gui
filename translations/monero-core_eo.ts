@@ -1243,10 +1243,10 @@ La malnova monujkaŝmemoro renomiĝos, vin povas restarigi gîn poste.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;
-To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;
-Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getlorentz.org website, and you can import this list here.&lt;br&gt;
+Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the lorentz-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation>Ĉar ni celas kaŝi kiujn enigojn de Monera transakcio elspeziĝas, neniu tria persono devas kapabli kompreni kiuj enigoj en ringo laŭscie jam elspeziĝis. Tiu kapablo malfortigus la ŝirmefikon de ringsubskriboj. Se iu ekscias ke ĉiuj enigoj, escepte de unu, jam elspeziĝis, tiam la enigo kiu fakte elspeziĝas aperas tuj. Tio nuligus la efekton de ringsubskriboj, unu el la tri plej gravaj privatecŝirmiloj uzitaj en Monero. &lt;br&gt;
-Ekzistas listo de laŭscie elspezitaj enigoj, kiu permesas malhelpi ilian uzadon en transakcioj. Tiun liston bontenas la Monero-projekto, kaj disponeblas ĉe la retejo getmonero.org, vi povas importi ĝin ĉi tien.&lt;br&gt;
+Ekzistas listo de laŭscie elspezitaj enigoj, kiu permesas malhelpi ilian uzadon en transakcioj. Tiun liston bontenas la Monero-projekto, kaj disponeblas ĉe la retejo getlorentz.org, vi povas importi ĝin ĉi tien.&lt;br&gt;
 Alternative, vi povas mem skani la blokĉenon (kaj la blokĉenon de ŝlosilreuzanta Monero-klonoj) uzante la Monerblokĉen-malakceptilon por krei liston de laŭscie elspezitaj eligoj. &lt;br&gt;
 </translation>
     </message>
@@ -2433,8 +2433,8 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="859"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Tiu ĉi adreso ricevis %1 moneron; sed la transakcio ankoraŭ ne estas minata</translation>
+        <source>This address received %1 lorentz, but the transaction is not yet mined</source>
+        <translation>Tiu ĉi adreso ricevis %1 lorentzn; sed la transakcio ankoraŭ ne estas minata</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>
@@ -2611,8 +2611,8 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1783"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Nova versio de monero-wallet-gui disponeblas:  %1&lt;br&gt;%2</translation>
+        <source>New version of lorentz-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Nova versio de lorentz-wallet-gui disponeblas:  %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="676"/>
@@ -2692,8 +2692,8 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="862"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Tiu adreso ricevis %1 monerojn, kun %2 konfirmo(j)</translation>
+        <source>This address received %1 lorentz, with %2 confirmation(s).</source>
+        <translation>Tiu adreso ricevis %1 lorentzjn, kun %2 konfirmo(j)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="885"/>

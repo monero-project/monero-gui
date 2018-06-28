@@ -53,7 +53,7 @@ Rectangle {
     property alias addressText : pageReceive.current_address
 
     function makeQRCodeString() {
-        var s = "monero:"
+        var s = "lorentz:"
         var nfields = 0
         s += current_address;
         var amount = amountToReceiveLine.text.trim()
