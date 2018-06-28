@@ -33,7 +33,7 @@ git -C $MONERO_DIR submodule update
 # Save current user settings and revert back when we are done with merging PR's
 OLD_GIT_USER=$(git -C $MONERO_DIR config --local user.name)
 OLD_GIT_EMAIL=$(git -C $MONERO_DIR config --local user.email)
-git -C $MONERO_DIR config user.name "Monero GUI"
+git -C $MONERO_DIR config user.name "Lorentz GUI"
 git -C $MONERO_DIR config user.email "gui@lorentz.local"
 # check for PR requirements in most recent commit message (i.e requires #xxxx)
 for PR in $(git log --format=%B -n 1 | grep -io "requires #[0-9]*" | sed 's/[^0-9]*//g'); do
