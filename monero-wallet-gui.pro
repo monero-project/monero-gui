@@ -248,7 +248,8 @@ win32 {
         -lws2_32 \
         -lwsock32 \
         -lIphlpapi \
-        -lgdi32
+        -lgdi32 \
+        -lwinscard
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
