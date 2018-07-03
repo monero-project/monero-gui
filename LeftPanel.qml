@@ -478,7 +478,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Shared RingDB") + translationManager.emptyString
-                symbol: qsTr("A") + translationManager.emptyString
+                symbol: qsTr("G") + translationManager.emptyString
                 dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
