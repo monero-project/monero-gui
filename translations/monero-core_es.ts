@@ -1248,8 +1248,8 @@ La caché del monedero antiguo será renombrada y podrá ser restaurada más tar
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Para poder ofuscar qué entradas han sido gastadas en las transacciones de Monero, un tercero no debería poder determinar de las firmas circulares cuales han sido gastadas en esas entradas. Hacerlo debilitaría la protección que proporcionan las firmas. Si solo una de las entradas pudiera ser determinada en el gasto, entonces esa entrada se vuelve evidente, anulando el efecto de las firmas. Las firmas circulares son una de las capas principales que usa Monero para proteger la privacidad.&lt;br&gt;Para evitar que las transacciones usen estas entradas, puede ser usada una lista de entradas gastadas para evitar usarlas en nuevas transacciones. Esa lista es mantenida por el proyecto Monero y está disponible en la página web getmonero.org y la puedes importar desde aquí.&lt;br&gt;De lo contrario, puede escanear la cadena de bloques (y las cadenas de bloques de los clones de Monero que reusan las claves) usted mismo usando la herramienta de Monero de salidas excluidas para crear una lista conocida de las salidas gastadas.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getlorentz.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the lorentz-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Para poder ofuscar qué entradas han sido gastadas en las transacciones de Monero, un tercero no debería poder determinar de las firmas circulares cuales han sido gastadas en esas entradas. Hacerlo debilitaría la protección que proporcionan las firmas. Si solo una de las entradas pudiera ser determinada en el gasto, entonces esa entrada se vuelve evidente, anulando el efecto de las firmas. Las firmas circulares son una de las capas principales que usa Monero para proteger la privacidad.&lt;br&gt;Para evitar que las transacciones usen estas entradas, puede ser usada una lista de entradas gastadas para evitar usarlas en nuevas transacciones. Esa lista es mantenida por el proyecto Monero y está disponible en la página web getlorentz.org y la puedes importar desde aquí.&lt;br&gt;De lo contrario, puede escanear la cadena de bloques (y las cadenas de bloques de los clones de Monero que reusan las claves) usted mismo usando la herramienta de Monero de salidas excluidas para crear una lista conocida de las salidas gastadas.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -2571,8 +2571,8 @@ Comisión: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="862"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Esta dirección recibió %1 monero, con %2 confirmacion(es).</translation>
+        <source>This address received %1 lorentz, with %2 confirmation(s).</source>
+        <translation>Esta dirección recibió %1 lorentz, con %2 confirmacion(es).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="350"/>
@@ -2650,8 +2650,8 @@ Comisión: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="859"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Esta dirección recibió %1 monero, pero la transacción no ha sido minada todavía</translation>
+        <source>This address received %1 lorentz, but the transaction is not yet mined</source>
+        <translation>Esta dirección recibió %1 lorentz, pero la transacción no ha sido minada todavía</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>
@@ -2761,8 +2761,8 @@ Comisión: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1783"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
-        <translation>Nueva versión de monero-wallet-gui disponible: %1&lt;br&gt;%2</translation>
+        <source>New version of lorentz-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <translation>Nueva versión de lorentz-wallet-gui disponible: %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1815"/>

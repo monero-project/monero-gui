@@ -90,7 +90,7 @@ Rectangle {
         z: 1
     }
 
-    // card with monero logo
+    // card with lorentz logo
     Column {
         visible: true
         z: 2

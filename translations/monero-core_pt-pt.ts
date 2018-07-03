@@ -1242,8 +1242,8 @@ O ficheiro cache antigo da carteira será renomeado e poderá ser reposto depois
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>De forma a esconder qual é a verdadeira transacção que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transacção, uma terceira pessoa não deve conseguir distinguir qual é a transacção verdadeira das falsas. Caso o consiga fazer irá emfraqiecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por ja terem sido gastas, então torna-se evidente qual é a transacção que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transacção. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getmonero.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternatica, pode utilizar a ferramenta monero-blockchain-blackball e criar essa mesma lista de transacções conhecidas como gastas.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getlorentz.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the lorentz-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>De forma a esconder qual é a verdadeira transacção que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transacção, uma terceira pessoa não deve conseguir distinguir qual é a transacção verdadeira das falsas. Caso o consiga fazer irá emfraqiecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por ja terem sido gastas, então torna-se evidente qual é a transacção que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transacção. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getlorentz.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternatica, pode utilizar a ferramenta lorentz-blockchain-blackball e criar essa mesma lista de transacções conhecidas como gastas.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -1309,7 +1309,7 @@ O ficheiro cache antigo da carteira será renomeado e poderá ser reposto depois
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you do spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>De forma a evitar a perca de protecção dada pelas ring signtarues, uma transacção não deve ser utilizada com assinaturas diferentes em diferentes blockchains. Por norma isto não é uma preocupação, mas pode-se tornar numa quando um clone de Monero reutiliza as mesmas chaves e lhe permite gastar as mesmas transacções. Neste caso, necessita de se certificar que as mesmas transacções utilizam as mesmas ring signatures em ambos os blockchains&lt;br&gt;Isto irá ser feito automaticamente em Monero e em qualquer blockchain que não esteja a tentar debilitar a sua privacidade.&lt;br&gt;Caso esteja a usar um destes clones e esse clone não providencie esta funcionalidade, poderá proteger a sua transacção, fazendo a mesma primeiro no clone, e depois manualmente adicionar as assinaturas através desta secção, o que lhe permitirá utilizar o seu Monero em segurança.&lt;br&gt;Se não usar nenhum clone de monero que utilize as mesmas chaves então está safo sem necessitar destas ferramentas de segurança, tudo já é feito automaticamente.&lt;br&gt;</translation>
+        <translation>De forma a evitar a perca de protecção dada pelas ring signtarues, uma transacção não deve ser utilizada com assinaturas diferentes em diferentes blockchains. Por norma isto não é uma preocupação, mas pode-se tornar numa quando um clone de Monero reutiliza as mesmas chaves e lhe permite gastar as mesmas transacções. Neste caso, necessita de se certificar que as mesmas transacções utilizam as mesmas ring signatures em ambos os blockchains&lt;br&gt;Isto irá ser feito automaticamente em Monero e em qualquer blockchain que não esteja a tentar debilitar a sua privacidade.&lt;br&gt;Caso esteja a usar um destes clones e esse clone não providencie esta funcionalidade, poderá proteger a sua transacção, fazendo a mesma primeiro no clone, e depois manualmente adicionar as assinaturas através desta secção, o que lhe permitirá utilizar o seu Monero em segurança.&lt;br&gt;Se não usar nenhum clone de lorentz que utilize as mesmas chaves então está safo sem necessitar destas ferramentas de segurança, tudo já é feito automaticamente.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
@@ -2601,8 +2601,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="862"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Este endereço recebeu %1 monero, com %2 confirmação(ões)</translation>
+        <source>This address received %1 lorentz, with %2 confirmation(s).</source>
+        <translation>Este endereço recebeu %1 lorentz, com %2 confirmação(ões)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="873"/>
@@ -2677,7 +2677,7 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1783"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <source>New version of lorentz-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nova versão da GUI do Monero disponível: %1&lt;br&gt;%2</translation>
     </message>
     <message>
@@ -2719,8 +2719,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="859"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Este endereço recebeu %1 monero, porém a transação ainda não foi minerada</translation>
+        <source>This address received %1 lorentz, but the transaction is not yet mined</source>
+        <translation>Este endereço recebeu %1 lorentz, porém a transação ainda não foi minerada</translation>
     </message>
     <message>
         <location filename="../main.qml" line="866"/>

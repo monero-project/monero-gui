@@ -7,7 +7,7 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/lorentz
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
@@ -16,7 +16,7 @@ packagesExist(libpcsclite) {
 QMAKE_CXXFLAGS += -fPIC -fstack-protector
 QMAKE_LFLAGS += -fstack-protector
 
-# cleaning "auto-generated" bitmonero directory on "make distclean"
+# cleaning "auto-generated" bitlorentz directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \
@@ -245,6 +245,7 @@ win32 {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
+        -lwinscard \
         -lws2_32 \
         -lwsock32 \
         -lIphlpapi \
@@ -294,7 +295,7 @@ linux {
             -Wl,-Bdynamic \
             -lGL
     }
-    # currently monero has an issue with "static" build and linunwind-dev,
+    # currently lorentz has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
         message(Building without libunwind)
@@ -429,7 +430,7 @@ linux:!android {
 }
 
 android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-liblorentz-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
 
@@ -439,7 +440,7 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    monero/src/wallet/CMakeLists.txt \
+    lorentz/src/wallet/CMakeLists.txt \
     components/MobileHeader.qml
 
 

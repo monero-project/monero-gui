@@ -7,7 +7,7 @@
 #include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
-static const QString default_name = "monero-wallet-gui.log";
+static const QString default_name = "lorentz-wallet-gui.log";
 #if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
 #elif defined(Q_OS_WIN)

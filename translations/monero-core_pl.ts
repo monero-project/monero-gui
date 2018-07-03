@@ -1243,8 +1243,8 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>W celu ukrycia, które wejścia w transakcji Monero są wydawane, osoba postronna nie powinna być w stanie stwierdzić, które wejścia w pierścieniu już zostały wydane. Gdyby była w stanie to zrobić, osłabiłoby to ochronę zapewnioną przez podpisy pierścieniowe. Jeśli wiadomo, że wszystkie wejścia poza jednym zostały wydane, to staje się oczywiste, które wejście faktycznie jest wydawane, a to niweczy efekt podpisów pierścieniowych - jednych z trzech głównych warstw ochrony prywatności używanych przez Monero.&lt;br&gt;Aby pomóc transakcjom unikać tych wejść, lista już wydanych wejść może być użyta do pominięcia ich w nowych transakcjach. Takowa lista jest zarządzana przez projekt Monero i jest dostępna na stronie getmonero.org, skąd można ją tutaj pobrać.&lt;br&gt;Ewentualnie, możesz przeskanować blockchain (oraz blockchain klona Monero, który wykorzystuje ponownie klucze) samemu używając narzędzia monero-blockchain-blackball do utworzenia listy wydanych wyjść.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getlorentz.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the lorentz-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>W celu ukrycia, które wejścia w transakcji Monero są wydawane, osoba postronna nie powinna być w stanie stwierdzić, które wejścia w pierścieniu już zostały wydane. Gdyby była w stanie to zrobić, osłabiłoby to ochronę zapewnioną przez podpisy pierścieniowe. Jeśli wiadomo, że wszystkie wejścia poza jednym zostały wydane, to staje się oczywiste, które wejście faktycznie jest wydawane, a to niweczy efekt podpisów pierścieniowych - jednych z trzech głównych warstw ochrony prywatności używanych przez Monero.&lt;br&gt;Aby pomóc transakcjom unikać tych wejść, lista już wydanych wejść może być użyta do pominięcia ich w nowych transakcjach. Takowa lista jest zarządzana przez projekt Monero i jest dostępna na stronie getlorentz.org, skąd można ją tutaj pobrać.&lt;br&gt;Ewentualnie, możesz przeskanować blockchain (oraz blockchain klona Monero, który wykorzystuje ponownie klucze) samemu używając narzędzia lorentz-blockchain-blackball do utworzenia listy wydanych wyjść.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
@@ -2659,7 +2659,7 @@ Indeks adresu do wydawania: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1783"/>
-        <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
+        <source>New version of lorentz-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nowa wersja GUI portfela Monero jest dostępna: %1&lt;br&gt;%2</translation>
     </message>
     <message>
@@ -2715,8 +2715,8 @@ Indeks adresu do wydawania: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="862"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Ten adres otrzymał %1 monero z %2 potwierdzeniem/ami.</translation>
+        <source>This address received %1 lorentz, with %2 confirmation(s).</source>
+        <translation>Ten adres otrzymał %1 lorentz z %2 potwierdzeniem/ami.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="885"/>
@@ -2735,7 +2735,7 @@ Indeks adresu do wydawania: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="859"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 lorentz, but the transaction is not yet mined</source>
         <translation>Ten adres otrzymał %1 Monero, ale transakcja nie została jeszcze wykopana</translation>
     </message>
     <message>
