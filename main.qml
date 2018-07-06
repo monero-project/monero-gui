@@ -243,7 +243,7 @@ ApplicationWindow {
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
             walletManager.openWalletAsync(wallet_path, walletPassword,
-                                              persistentSettings.nettype);
+                                              persistentSettings.nettype, persistentSettings.kdfRounds);
         }
 
         // Hide titlebar based on persistentSettings.customDecorations
@@ -1026,6 +1026,7 @@ ApplicationWindow {
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
+        property int kdfRounds: 1
     }
 
     // Information dialog
