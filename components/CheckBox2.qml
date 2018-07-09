@@ -28,6 +28,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 import "." 1.0
 
 RowLayout {
@@ -40,6 +41,7 @@ RowLayout {
     property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
     property int textMargin: 8 * scaleRatio
+    property bool darkDropIndicator: false
     signal clicked()
     height: 25 * scaleRatio
 
@@ -74,12 +76,19 @@ RowLayout {
                 anchors.left: label.right
                 anchors.leftMargin: textMargin
                 color: "transparent"
+                rotation: checkBox.checked ? 180  * scaleRatio : 0
 
                 Image {
                     id: indicatorImage
                     anchors.centerIn: parent
                     source: "../images/whiteDropIndicator.png"
-                    rotation: checkBox.checked ? 180  * scaleRatio : 0
+                    visible: !darkDropIndicator
+                }
+                ColorOverlay {
+                    anchors.fill: indicatorImage
+                    source: indicatorImage
+                    color: "#FF000000"
+                    visible: darkDropIndicator
                 }
             }
 
