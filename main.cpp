@@ -33,6 +33,7 @@
 #include <QIcon>
 #include <QDebug>
 #include <QObject>
+#include <QSettings>
 #include <QDesktopWidget>
 #include <QScreen>
 #include "clipboardAdapter.h"
@@ -103,6 +104,20 @@ int main(int argc, char *argv[])
     app.setApplicationName("monero-gui");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
+
+    // support for older configuration files/registry keys (monero-core.conf)
+    // @TODO: Legacy. Remove in 2019.
+    QString configPath;
+    QSettings *settingsLegacy = new QSettings(QSettings::NativeFormat, QSettings::UserScope, "monero-project", "monero-core");
+    if(!settingsLegacy->value("customDecorations").isNull()) {
+        configPath = settingsLegacy->fileName();
+        app.setApplicationName("monero-core");
+    } else {
+        QSettings *settings = new QSettings(QSettings::NativeFormat, QSettings::UserScope, "monero-project", "monero-gui");
+        configPath = settings->fileName();
+        delete settings;
+    }
+    delete settingsLegacy;
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
@@ -269,6 +284,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("configPath", configPath);
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER

@@ -738,6 +738,21 @@ Rectangle {
                 font.pixelSize: 14
                 text: walletLogPath
             }
+
+            TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14
+                text: qsTr("Config path: ") + translationManager.emptyString
+            }
+
+            TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14
+                text: {
+                    configPath
+                }
+                
+            }
         }
     }
 
