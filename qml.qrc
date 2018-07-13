@@ -241,5 +241,6 @@
         <file>images/merchant/arrow_right.png</file>
         <file>images/merchant/bg.png</file>
         <file>images/merchant/input_box.png</file>
+        <file>pages/ReserveProof.qml</file>
     </qresource>
 </RCC>

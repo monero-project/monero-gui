@@ -110,6 +110,8 @@ ApplicationWindow {
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
         else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
+        else if(seq === "Ctrl+W") middlePanel.state = "ReserveProof"
+        else if(seq === "Ctrl+S") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
@@ -1385,6 +1387,14 @@ ApplicationWindow {
                     hideMenu();
                 }
                 updateBalance();
+            }
+            
+            onReserveClicked: { 
+                middlePanel.state = "ReserveProof";
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance(); 
             }
 
             onSharedringdbClicked: {
