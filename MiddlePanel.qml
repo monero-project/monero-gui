@@ -56,6 +56,7 @@ Rectangle {
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
     property TxKey txkeyView: TxKey { }
+    property ReserveProof reserveView: ReserveProof { }
     property SharedRingDB sharedringdbView: SharedRingDB { }
     property History historyView: History { }
     property Sign signView: Sign { }
@@ -125,6 +126,10 @@ Rectangle {
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
+            }, State {
+               name: "ReserveProof"
+               PropertyChanges { target: root; currentView: reserveView }
                PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
             }, State {
                name: "SharedRingDB"

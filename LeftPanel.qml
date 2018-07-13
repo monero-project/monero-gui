@@ -52,6 +52,7 @@ Rectangle {
     signal transferClicked()
     signal receiveClicked()
     signal txkeyClicked()
+    signal reserveClicked()
     signal sharedringdbClicked()
     signal settingsClicked()
     signal addressBookClicked()
@@ -68,6 +69,7 @@ Rectangle {
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
+        else if(pos === "ReserveProofs")  menuColumn.previousButton = reserveButton
         else if(pos === "SharedRingDB")  menuColumn.previousButton = sharedringdbButton
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
@@ -466,6 +468,29 @@ Rectangle {
             }
             Rectangle {
                 visible: txkeyButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#313131"
+                height: 1
+            }
+            // ----------- Reserve Proofs tab -------------
+            MenuButton {
+                id: reserveButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Reserve Proofs") + translationManager.emptyString
+                symbol: qsTr("K") + translationManager.emptyString
+                dotColor: "#FFD781"
+                under: advancedButton
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = reserveButton
+                    panel.reserveClicked()
+                }
+            }
+            Rectangle {
+                visible: reserveButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16

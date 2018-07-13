@@ -208,5 +208,6 @@
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
         <file>images/editIcon.png</file>
+        <file>pages/ReserveProof.qml</file>
     </qresource>
 </RCC>

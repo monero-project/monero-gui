@@ -258,6 +258,8 @@ public:
     Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
     Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
     Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
+    Q_INVOKABLE QString getReserveProof(quint64 amount, const QString &message);
+    Q_INVOKABLE bool checkReserveProof(const QString &address, const QString &message, const QString &signature);
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
 
