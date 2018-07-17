@@ -104,6 +104,11 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
 
+    QString configPath;
+    QSettings *settings = new QSettings(QSettings::NativeFormat, QSettings::UserScope, app->organizationName, app->applicationName);
+    configPath = settings->fileName();
+    delete settings;
+
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
 #endif
@@ -269,6 +274,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("configPath", configPath);
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
