@@ -336,6 +336,16 @@ quint64 Wallet::daemonBlockChainTargetHeight() const
     return m_daemonBlockChainTargetHeight;
 }
 
+bool Wallet::exportKeyImages(const QString& path)
+{
+    return m_walletImpl->exportKeyImages(path.toStdString());
+}
+
+bool Wallet::importKeyImages(const QString& path)
+{
+    return m_walletImpl->importKeyImages(path.toStdString());
+}
+
 bool Wallet::refresh()
 {
     bool result = m_walletImpl->refresh();

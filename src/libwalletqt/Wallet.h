@@ -159,6 +159,10 @@ public:
     //! returns daemon's blockchain target height
     Q_INVOKABLE quint64 daemonBlockChainTargetHeight() const;
 
+    //! export/import key images
+    Q_INVOKABLE bool exportKeyImages(const QString& path);
+    Q_INVOKABLE bool importKeyImages(const QString& path);
+
     //! refreshes the wallet
     Q_INVOKABLE bool refresh();
 
