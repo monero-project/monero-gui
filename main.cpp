@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    app.setApplicationName("monero-gui");
+    app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
 
