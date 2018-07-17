@@ -256,8 +256,8 @@ Rectangle {
                     lineEditFontColor: "white"
                     lineEditBorderColor: Style.inputBorderColorActive
 
-                    daemonAddrLabelText: qsTr("Address")
-                    daemonPortLabelText: qsTr("Port")
+                    daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
+                    daemonPortLabelText: qsTr("Port") + translationManager.emptyString
                     daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
                     daemonPortText: {
                         var node_split = persistentSettings.bootstrapNodeAddress.split(":");

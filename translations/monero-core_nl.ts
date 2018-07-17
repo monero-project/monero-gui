@@ -145,6 +145,49 @@
     </message>
 </context>
 <context>
+    <name>History</name>
+    <message>
+        <location filename="../pages/History.qml" line="72"/>
+        <source> selected: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="161"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="191"/>
+        <source>Date from</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="214"/>
+        <source>Date to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="229"/>
+        <source>Sort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="236"/>
+        <source>Block height</source>
+        <translation type="unfinished">Blokhoogte</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="237"/>
+        <source>Date</source>
+        <translation type="unfinished">Datum</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="278"/>
+        <source>No history...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HistoryTable</name>
     <message>
         <location filename="../components/HistoryTable.qml" line="80"/>
@@ -317,6 +360,11 @@
         <location filename="../pages/Keys.qml" line="142"/>
         <source>Keys</source>
         <translation>Sleutels</translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="93"/>
+        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="169"/>
@@ -525,6 +573,19 @@
     </message>
 </context>
 <context>
+    <name>LineEdit</name>
+    <message>
+        <location filename="../components/LineEdit.qml" line="125"/>
+        <source>Copy</source>
+        <translation type="unfinished">Kopiëren</translation>
+    </message>
+    <message>
+        <location filename="../components/LineEdit.qml" line="131"/>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished">Gekopieerd naar klembord</translation>
+    </message>
+</context>
+<context>
     <name>LineEditMulti</name>
     <message>
         <location filename="../components/LineEditMulti.qml" line="84"/>
@@ -563,77 +624,82 @@
         <translation>(alleen beschikbaar voor lokale nodes)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="74"/>
+        <location filename="../pages/Mining.qml" line="76"/>
+        <source>Your daemon must be synchronized before you can start mining</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="82"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
         <translation>Minen met uw computer helpt het Monero-netwerk sterker te worden. Hoe meer individuen er minen, des te moeilijker het is om het Monero-netwerk aan te vallen. Ieder beetje helpt dus.&lt;br&gt; &lt;br&gt; Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal namelijk specifieke tekenreeksen berekenen en zodoende op zoek gaan naar Monero blok-oplossingen. Als u een blok vindt, ontvangt u de bijbehorende beloning. Veel success!</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="87"/>
+        <location filename="../pages/Mining.qml" line="95"/>
         <source>CPU threads</source>
         <translation>CPU threads</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="95"/>
+        <location filename="../pages/Mining.qml" line="103"/>
         <source>(optional)</source>
         <translation>(optioneel)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="107"/>
+        <location filename="../pages/Mining.qml" line="115"/>
         <source>Background mining (experimental)</source>
         <translation>Minen op de achtergrond (experimenteel)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="121"/>
+        <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
         <translation>Start het minen ook indien de accu gebruikt wordt</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="129"/>
+        <location filename="../pages/Mining.qml" line="137"/>
         <source>Manage miner</source>
         <translation>Beheer de miner</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="139"/>
+        <location filename="../pages/Mining.qml" line="147"/>
         <source>Start mining</source>
         <translation>Start het minen</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="145"/>
+        <location filename="../pages/Mining.qml" line="153"/>
         <source>Error starting mining</source>
         <translation>Fout opgetreden bij het starten van de miner</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="146"/>
+        <location filename="../pages/Mining.qml" line="154"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Kon niet starten met minen.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="148"/>
+        <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Minen is alleen beschikbaar voor lokale nodes. Start een lokale node om te kunnen minen.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="161"/>
+        <location filename="../pages/Mining.qml" line="169"/>
         <source>Stop mining</source>
         <translation>Stop het minen</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="172"/>
+        <location filename="../pages/Mining.qml" line="180"/>
         <source>Status: not mining</source>
         <translation>Status: er wordt niet gemined</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="184"/>
+        <location filename="../pages/Mining.qml" line="192"/>
         <source>Mining at %1 H/s</source>
         <translation>Er wordt gemined met %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="187"/>
+        <location filename="../pages/Mining.qml" line="195"/>
         <source>Not mining</source>
         <translation>Er wordt niet gemined</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="189"/>
+        <location filename="../pages/Mining.qml" line="197"/>
         <source>Status: </source>
         <translation>Status: </translation>
     </message>
@@ -824,13 +890,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="202"/>
         <location filename="../pages/Receive.qml" line="431"/>
-        <location filename="../pages/Receive.qml" line="521"/>
+        <location filename="../pages/Receive.qml" line="517"/>
         <source>Help</source>
         <translation>Help</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
-        <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Deze QR-code bevat het hierboven geselecteerde adres en het hieronder ingevoerde bedrag. U kunt de code aan anderen laten zien (rechtermuisknop -&gt; Opslaan), zodat ze eenvoudig een exact bedrag kunnen betalen.&lt;/p&gt;</translation>
     </message>
@@ -861,28 +926,27 @@
         <translation>QR-code</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="525"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dit is een eenvoudige verkooptracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Laat uw klant deze QR-code scannen om een betaling uit te voeren (als de klant een app voor het scannen van QR-codes heeft).&lt;/p&gt;&lt;p&gt;Deze pagina zoekt automatisch in de blockchain en de transactiepool naar binnenkomende transacties met deze QR-code. Als u een bedrag invult, wordt ook gecontroleerd of dat bedrag wordt betaald door binnenkomende transacties.&lt;/p&gt;Het is uw keuze of u onbevestigde transacties wilt accepteren. Waarschijnlijk worden ze snel bevestigd, maar dat is niet gegarandeerd, dus voor grotere bedragen kunt u beter wachten op een of meer bevestigingen.&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Dit is een eenvoudige verkooptracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Laat uw klant deze QR-code scannen om een betaling uit te voeren (als de klant een app voor het scannen van QR-codes heeft).&lt;/p&gt;&lt;p&gt;Deze pagina zoekt automatisch in de blockchain en de transactiepool naar binnenkomende transacties met deze QR-code. Als u een bedrag invult, wordt ook gecontroleerd of dat bedrag wordt betaald door binnenkomende transacties.&lt;/p&gt;Het is uw keuze of u onbevestigde transacties wilt accepteren. Waarschijnlijk worden ze snel bevestigd, maar dat is niet gegarandeerd, dus voor grotere bedragen kunt u beter wachten op een of meer bevestigingen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="612"/>
-        <location filename="../pages/Receive.qml" line="614"/>
+        <location filename="../pages/Receive.qml" line="608"/>
+        <location filename="../pages/Receive.qml" line="610"/>
         <source>confirmations</source>
         <translation>bevestigingen</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="617"/>
+        <location filename="../pages/Receive.qml" line="613"/>
         <source>confirmation</source>
         <translation>bevestiging</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="641"/>
+        <location filename="../pages/Receive.qml" line="637"/>
         <source>Transaction ID copied to clipboard</source>
         <translation>Transactie-ID gekopieerd naar klembord</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="676"/>
+        <location filename="../pages/Receive.qml" line="672"/>
         <source>Enable</source>
         <translation>Inschakelen</translation>
     </message>
@@ -892,22 +956,32 @@
         <translation>Adres gekopieerd naar klembord</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="519"/>
+        <location filename="../pages/Receive.qml" line="435"/>
+        <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="515"/>
         <source>Tracking</source>
         <translation>Traceren</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="696"/>
+        <location filename="../pages/Receive.qml" line="521"/>
+        <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Receive.qml" line="692"/>
         <source>Save QrCode</source>
         <translation>QR-code opslaan</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="697"/>
+        <location filename="../pages/Receive.qml" line="693"/>
         <source>Failed to save QrCode to </source>
         <translation>QR-code niet opgeslagen in </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="502"/>
+        <location filename="../pages/Receive.qml" line="498"/>
         <source>Save As</source>
         <translation>Opslaan als</translation>
     </message>
@@ -923,7 +997,7 @@
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="205"/>
-        <location filename="../pages/Receive.qml" line="524"/>
+        <location filename="../pages/Receive.qml" line="520"/>
         <source>Tracking payments</source>
         <translation>Betalingen traceren</translation>
     </message>
@@ -1211,9 +1285,8 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
         <translation>Logniveau</translation>
     </message>
     <message>
-        <location filename="../pages/Settings.qml" line="592"/>
         <source>(e.g. *:WARNING,net.p2p:DEBUG)</source>
-        <translation>(b.v. *:WARNING,net.p2p:DEBUG)</translation>
+        <translation type="vanished">(b.v. *:WARNING,net.p2p:DEBUG)</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="633"/>
@@ -1319,8 +1392,12 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
+        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you do spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Om de bescherming door ring-handtekeningen van Monero in stand te houden, mag een output niet met andere ringen worden uitgegeven op andere blockchains. Dit wordt een probleem als u bestaande outputs uitgeeft op een Monero-kloon met hergebruik van sleutels. In dat geval moet u erop letten dat dezelfde ring op beide blockchains wordt gebruikt voor deze outputs.&lt;br&gt;Dit wordt automatisch gedaan door Monero en software die sleutels hergebruikt maar niet actief probeert uw privacy te verminderen.&lt;br&gt;Als u een Monero-kloon zonder deze bescherming gebruikt, kunt u toch uw transacties beschermen door eerst op de kloon te betalen, en vervolgens de ring op deze pagina in te voeren, zodat u uw Monero veilig kunt uitgeven.&lt;br&gt;Als u geen gebruik maakt van een Monero-kloon met hergebruik van sleutels maar zonder deze beveiliging, hoeft u niets te doen, want alles gaat automatisch.&lt;br&gt;</translation>
+        <translation type="vanished">Om de bescherming door ring-handtekeningen van Monero in stand te houden, mag een output niet met andere ringen worden uitgegeven op andere blockchains. Dit wordt een probleem als u bestaande outputs uitgeeft op een Monero-kloon met hergebruik van sleutels. In dat geval moet u erop letten dat dezelfde ring op beide blockchains wordt gebruikt voor deze outputs.&lt;br&gt;Dit wordt automatisch gedaan door Monero en software die sleutels hergebruikt maar niet actief probeert uw privacy te verminderen.&lt;br&gt;Als u een Monero-kloon zonder deze bescherming gebruikt, kunt u toch uw transacties beschermen door eerst op de kloon te betalen, en vervolgens de ring op deze pagina in te voeren, zodat u uw Monero veilig kunt uitgeven.&lt;br&gt;Als u geen gebruik maakt van een Monero-kloon met hergebruik van sleutels maar zonder deze beveiliging, hoeft u niets te doen, want alles gaat automatisch.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
@@ -1568,9 +1645,8 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
 <context>
     <name>SubaddressModel</name>
     <message>
-        <location filename="../src/model/SubaddressModel.cpp" line="73"/>
         <source>Primary address</source>
-        <translation>Primair adres</translation>
+        <translation type="vanished">Primair adres</translation>
     </message>
 </context>
 <context>
@@ -1635,9 +1711,8 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
 <context>
     <name>TransactionHistoryModel</name>
     <message>
-        <location filename="../src/model/TransactionHistoryModel.cpp" line="103"/>
         <source>Primary address</source>
-        <translation>Primair adres</translation>
+        <translation type="vanished">Primair adres</translation>
     </message>
 </context>
 <context>
@@ -1648,7 +1723,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
         <translation>Bedrag</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="212"/>
+        <location filename="../pages/Transfer.qml" line="208"/>
         <source>Transaction priority</source>
         <translation>Prioriteit transactie</translation>
     </message>
@@ -1658,7 +1733,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="460"/>
+        <location filename="../pages/Transfer.qml" line="456"/>
         <source>Transaction cost</source>
         <translation>Transactiekosten</translation>
     </message>
@@ -1668,28 +1743,28 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
         <translation>Fout in OpenAlias</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="228"/>
+        <location filename="../pages/Transfer.qml" line="224"/>
         <source>Slow (x0.25 fee)</source>
         <translation>Langzaam (vergoeding × 0,25)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="230"/>
+        <location filename="../pages/Transfer.qml" line="226"/>
         <source>Fast (x5 fee)</source>
         <translation>Snel (vergoeding × 5)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="231"/>
+        <location filename="../pages/Transfer.qml" line="227"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Razendsnel (vergoeding × 41,5)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="267"/>
+        <location filename="../pages/Transfer.qml" line="263"/>
         <source>QR Code</source>
         <translation>QR-code</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="260"/>
-        <location filename="../pages/Transfer.qml" line="282"/>
+        <location filename="../pages/Transfer.qml" line="256"/>
+        <location filename="../pages/Transfer.qml" line="278"/>
         <source>Resolve</source>
         <translation>Oplossen</translation>
     </message>
@@ -1709,80 +1784,80 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
         <translation>Op deze pagina kunt u een bericht (of de inhoud van een bestand) ondertekenen/verifiëren met uw adres.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="227"/>
+        <location filename="../pages/Transfer.qml" line="223"/>
         <source>Default</source>
         <translation>Normaal</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="229"/>
+        <location filename="../pages/Transfer.qml" line="225"/>
         <source>Normal (x1 fee)</source>
         <translation>Normaal (vergoeding × 1)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="257"/>
+        <location filename="../pages/Transfer.qml" line="253"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Adres &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresboek&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="297"/>
+        <location filename="../pages/Transfer.qml" line="293"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Geen geldig adres gevonden voor dit OpenAlias-adres</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="303"/>
+        <location filename="../pages/Transfer.qml" line="299"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Adres gevonden, maar de DNSSEC-handtekeningen kunnen niet geverifiëerd worden, dus het adres kan gespoofed en dus ongeldig zijn</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="307"/>
+        <location filename="../pages/Transfer.qml" line="303"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Geen geldig adres gevonden onder het opgegeven OpenAlias-adres, en de DNSSEC-handtekeningen kunnen niet geverifiëerd worden, dus het adres kan gespoofed en dus ongeldig zijn</translation>
     </message>
     <message>
+        <location filename="../pages/Transfer.qml" line="307"/>
         <location filename="../pages/Transfer.qml" line="311"/>
-        <location filename="../pages/Transfer.qml" line="315"/>
         <source>Internal error</source>
         <translation>Interne fout</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="319"/>
+        <location filename="../pages/Transfer.qml" line="315"/>
         <source>No address found</source>
         <translation>Geen adres gevonden</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="338"/>
+        <location filename="../pages/Transfer.qml" line="334"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Omschrijving &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="339"/>
+        <location filename="../pages/Transfer.qml" line="335"/>
         <source>Saved to local wallet history</source>
         <translation>Wordt opgeslagen in de lokale portemonnee-geschiedenis</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="350"/>
+        <location filename="../pages/Transfer.qml" line="346"/>
         <source>Send</source>
         <translation>Verzenden</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="622"/>
+        <location filename="../pages/Transfer.qml" line="618"/>
         <source>Monero sent successfully</source>
         <translation>Monero is verzonden</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="676"/>
+        <location filename="../pages/Transfer.qml" line="672"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Verbonden node is niet compatibel met de GUI.
 Upgrade of maak verbinding met een andere node</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="492"/>
+        <location filename="../pages/Transfer.qml" line="488"/>
         <source>Sweep Unmixable</source>
         <translation>Onmengbare bedragen samenvoegen</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="503"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>Create tx file</source>
         <translation>Maak TX-bestand</translation>
     </message>
@@ -1792,119 +1867,119 @@ Upgrade of maak verbinding met een andere node</translation>
         <translation>Alles</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="433"/>
+        <location filename="../pages/Transfer.qml" line="429"/>
         <source>Advanced options</source>
         <translation>Geavanceerde opties</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="522"/>
+        <location filename="../pages/Transfer.qml" line="518"/>
         <source>Sign tx file</source>
         <translation>Onderteken TX-bestand</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="533"/>
+        <location filename="../pages/Transfer.qml" line="529"/>
         <source>Submit tx file</source>
         <translation>Verzend TX-bestand</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="559"/>
-        <location filename="../pages/Transfer.qml" line="615"/>
+        <location filename="../pages/Transfer.qml" line="555"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="621"/>
+        <location filename="../pages/Transfer.qml" line="617"/>
         <source>Information</source>
         <translation>Informatie</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="548"/>
-        <location filename="../pages/Transfer.qml" line="609"/>
+        <location filename="../pages/Transfer.qml" line="544"/>
+        <location filename="../pages/Transfer.qml" line="605"/>
         <source>Please choose a file</source>
         <translation>Kies een bestand</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="560"/>
+        <location filename="../pages/Transfer.qml" line="556"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Het laden van de niet-ondertekende transactie is mislukt: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
+        <location filename="../pages/Transfer.qml" line="563"/>
         <source>
 Number of transactions: </source>
         <translation>
 Aantal transacties: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="569"/>
+        <location filename="../pages/Transfer.qml" line="565"/>
         <source>
 Transaction #%1</source>
         <translation>
 Transactie #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="570"/>
+        <location filename="../pages/Transfer.qml" line="566"/>
         <source>
 Recipient: </source>
         <translation>
 Ontvanger: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="571"/>
+        <location filename="../pages/Transfer.qml" line="567"/>
         <source>
 payment ID: </source>
         <translation>
 betalings-ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="572"/>
+        <location filename="../pages/Transfer.qml" line="568"/>
         <source>
 Amount: </source>
         <translation>
 Bedrag: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="573"/>
+        <location filename="../pages/Transfer.qml" line="569"/>
         <source>
 Fee: </source>
         <translation>
 Vergoeding: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="574"/>
+        <location filename="../pages/Transfer.qml" line="570"/>
         <source>
 Ringsize: </source>
         <translation>
 Ringgrootte: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="588"/>
+        <location filename="../pages/Transfer.qml" line="584"/>
         <source>Confirmation</source>
         <translation>Bevestiging</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="616"/>
+        <location filename="../pages/Transfer.qml" line="612"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Kan transactie niet insturen: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="661"/>
-        <location filename="../pages/Transfer.qml" line="673"/>
+        <location filename="../pages/Transfer.qml" line="657"/>
+        <location filename="../pages/Transfer.qml" line="669"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Portemonnee is niet verbonden met de node.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="681"/>
+        <location filename="../pages/Transfer.qml" line="677"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>Wachten totdat de synchronisatie met de node compleet is</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="329"/>
+        <location filename="../pages/Transfer.qml" line="325"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Betalings-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="330"/>
+        <location filename="../pages/Transfer.qml" line="326"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16 of 64 hexadecimale tekens</translation>
     </message>
@@ -2000,9 +2075,8 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
 <context>
     <name>WalletManager</name>
     <message>
-        <location filename="../src/libwalletqt/WalletManager.cpp" line="153"/>
         <source>Unknown error</source>
-        <translation>Onbekende fout</translation>
+        <translation type="vanished">Onbekende fout</translation>
     </message>
 </context>
 <context>
@@ -2409,75 +2483,75 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="285"/>
-        <location filename="../main.qml" line="388"/>
-        <location filename="../main.qml" line="595"/>
-        <location filename="../main.qml" line="607"/>
-        <location filename="../main.qml" line="663"/>
-        <location filename="../main.qml" line="675"/>
-        <location filename="../main.qml" line="717"/>
-        <location filename="../main.qml" line="726"/>
-        <location filename="../main.qml" line="778"/>
-        <location filename="../main.qml" line="876"/>
-        <location filename="../main.qml" line="1057"/>
-        <location filename="../main.qml" line="1202"/>
-        <location filename="../main.qml" line="1404"/>
+        <location filename="../main.qml" line="287"/>
+        <location filename="../main.qml" line="390"/>
+        <location filename="../main.qml" line="597"/>
+        <location filename="../main.qml" line="609"/>
+        <location filename="../main.qml" line="665"/>
+        <location filename="../main.qml" line="677"/>
+        <location filename="../main.qml" line="719"/>
+        <location filename="../main.qml" line="728"/>
+        <location filename="../main.qml" line="780"/>
+        <location filename="../main.qml" line="878"/>
+        <location filename="../main.qml" line="1059"/>
+        <location filename="../main.qml" line="1204"/>
+        <location filename="../main.qml" line="1406"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="286"/>
-        <location filename="../main.qml" line="389"/>
+        <location filename="../main.qml" line="288"/>
+        <location filename="../main.qml" line="391"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Portemonnee kan niet geopend worden: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="461"/>
+        <location filename="../main.qml" line="463"/>
         <source>Waiting for daemon to sync</source>
         <translation>Wachten tot node is gesynchroniseerd</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="463"/>
+        <location filename="../main.qml" line="465"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Node is gesynchroniseerd (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="465"/>
+        <location filename="../main.qml" line="467"/>
         <source>Wallet is synchronized</source>
         <translation>Portemonnee is gesynchroniseerd</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="551"/>
+        <location filename="../main.qml" line="553"/>
         <source>Daemon is synchronized</source>
         <translation>Node is gesynchroniseerd</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="597"/>
+        <location filename="../main.qml" line="599"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Transactie kan niet worden aangemaakt: Verkeerde node-versie: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="608"/>
-        <location filename="../main.qml" line="727"/>
+        <location filename="../main.qml" line="610"/>
+        <location filename="../main.qml" line="729"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Geen onmengbare bedragen gevonden om samen te voegen</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="619"/>
-        <location filename="../main.qml" line="740"/>
+        <location filename="../main.qml" line="621"/>
+        <location filename="../main.qml" line="742"/>
         <source>Please confirm transaction:
 </source>
         <translation>Bevestig de transactie:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="621"/>
+        <location filename="../main.qml" line="623"/>
         <source>Address: </source>
         <translation>Adres: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="623"/>
-        <location filename="../main.qml" line="741"/>
+        <location filename="../main.qml" line="625"/>
+        <location filename="../main.qml" line="743"/>
         <source>
 
 Amount: </source>
@@ -2486,76 +2560,76 @@ Amount: </source>
 Bedrag: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="664"/>
+        <location filename="../main.qml" line="666"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Verkeerd bedrag: bedrag tussen %1 en %2 verwacht</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="859"/>
+        <location filename="../main.qml" line="861"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Dit adres heeft %1 monero ontvangen, maar de transactie is nog niet verwerkt</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
+        <location filename="../main.qml" line="868"/>
         <source>This address received nothing</source>
         <translation>Dit adres heeft niets ontvangen</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="599"/>
-        <location filename="../main.qml" line="718"/>
+        <location filename="../main.qml" line="601"/>
+        <location filename="../main.qml" line="720"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Transactie kan niet worden aangemaakt: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="350"/>
-        <location filename="../main.qml" line="351"/>
+        <location filename="../main.qml" line="352"/>
+        <location filename="../main.qml" line="353"/>
         <source>HIDDEN</source>
         <translation>VERBORGEN</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="418"/>
+        <location filename="../main.qml" line="420"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>Beschikbaar saldo (wachten op blok)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="418"/>
+        <location filename="../main.qml" line="420"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>Beschikbaar saldo (~%1 min)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="418"/>
+        <location filename="../main.qml" line="420"/>
         <source>Unlocked balance</source>
         <translation>Beschikbaar saldo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="503"/>
+        <location filename="../main.qml" line="505"/>
         <source>Waiting for daemon to start...</source>
         <translation>Wachten tot de node gestart is...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="509"/>
+        <location filename="../main.qml" line="511"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Wachten tot de node gestopt is...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="534"/>
+        <location filename="../main.qml" line="536"/>
         <source>Daemon failed to start</source>
         <translation>Het starten van de node is mislukt</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="535"/>
+        <location filename="../main.qml" line="537"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Controleer de logs van uw portemonnee en node op fouten. Of probeer %1 handmatig te starten.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="625"/>
+        <location filename="../main.qml" line="627"/>
         <source>
 Ringsize: </source>
         <translation>
 Ringgrootte: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="627"/>
+        <location filename="../main.qml" line="629"/>
         <source>
 
 WARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.</source>
@@ -2564,7 +2638,7 @@ WARNING: non default ring size, which may harm your privacy. Default of 7 is rec
 WAARSCHUWING: ringgroote is niet standaard. Dit kan schadelijk zijn voor uw privacy. De standaardwaarde 7 wordt aangeraden.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="629"/>
+        <location filename="../main.qml" line="631"/>
         <source>
 
 Number of transactions: </source>
@@ -2573,202 +2647,202 @@ Number of transactions: </source>
 Aantal transacties: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="630"/>
+        <location filename="../main.qml" line="632"/>
         <source>
 Description: </source>
         <translation>
 Omschrijving: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="632"/>
+        <location filename="../main.qml" line="634"/>
         <source>
 Spending address index: </source>
         <translation>
 Index van betalend adres: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="739"/>
+        <location filename="../main.qml" line="741"/>
         <source>Confirmation</source>
         <translation>Bevestiging</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="622"/>
+        <location filename="../main.qml" line="624"/>
         <source>
 Payment ID: </source>
         <translation>
 Betalings-ID: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="624"/>
-        <location filename="../main.qml" line="742"/>
+        <location filename="../main.qml" line="626"/>
+        <location filename="../main.qml" line="744"/>
         <source>
 Fee: </source>
         <translation>
 Vergoeding: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="676"/>
+        <location filename="../main.qml" line="678"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Onvoldoende geld. Beschikbaar saldo: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="779"/>
+        <location filename="../main.qml" line="781"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Het geld kan niet worden verstuurd: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="782"/>
-        <location filename="../main.qml" line="1198"/>
+        <location filename="../main.qml" line="784"/>
+        <location filename="../main.qml" line="1200"/>
         <source>Information</source>
         <translation>Informatie</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="788"/>
+        <location filename="../main.qml" line="790"/>
         <source>Transaction saved to file: %1</source>
         <translation>Transactie opgeslagen in bestand: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="788"/>
+        <location filename="../main.qml" line="790"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Monero is verzonden: %1 transactie(s) </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="818"/>
+        <location filename="../main.qml" line="820"/>
         <source>Payment proof</source>
         <translation>Betalingsbewijs</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="821"/>
+        <location filename="../main.qml" line="823"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Bewijs kan niet worden gegenereerd om de volgende reden: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="851"/>
-        <location filename="../main.qml" line="871"/>
+        <location filename="../main.qml" line="853"/>
+        <location filename="../main.qml" line="873"/>
         <source>Payment proof check</source>
         <translation>Controle betalingsbewijs</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="854"/>
-        <location filename="../main.qml" line="873"/>
+        <location filename="../main.qml" line="856"/>
+        <location filename="../main.qml" line="875"/>
         <source>Bad signature</source>
         <translation>Ongeldige handtekening</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="862"/>
+        <location filename="../main.qml" line="864"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Dit adres heeft %1 monero ontvangen, met %2 bevestiging(en).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="873"/>
+        <location filename="../main.qml" line="875"/>
         <source>Good signature</source>
         <translation>Geldige handtekening</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="885"/>
+        <location filename="../main.qml" line="887"/>
         <source>Balance (syncing)</source>
         <translation>Saldo (synchroniseren)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="885"/>
+        <location filename="../main.qml" line="887"/>
         <source>Balance</source>
         <translation>Saldo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1058"/>
-        <location filename="../main.qml" line="1405"/>
+        <location filename="../main.qml" line="1060"/>
+        <location filename="../main.qml" line="1407"/>
         <source>Wrong password</source>
         <translation>Verkeerd wachtwoord</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1133"/>
+        <location filename="../main.qml" line="1135"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1136"/>
+        <location filename="../main.qml" line="1138"/>
         <source>Error: Filesystem is read only</source>
         <translation>Fout: bestandssysteem is alleen-lezen</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1138"/>
+        <location filename="../main.qml" line="1140"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Waarschuwing: er is slechts %1 GB beschikbaar op dit apparaat. Voor de blockchain is ~%2 GB opslagruimte nodig.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1140"/>
+        <location filename="../main.qml" line="1142"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Let op: er is slechts %1 GB beschikbaar op dit apparaat. Voor de blockchain is ~%2 GB opslagruimte nodig.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1142"/>
+        <location filename="../main.qml" line="1144"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>LMDB-map niet gevonden. Er wordt een nieuwe map gemaakt.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1146"/>
+        <location filename="../main.qml" line="1148"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1199"/>
+        <location filename="../main.qml" line="1201"/>
         <source>Password changed successfully</source>
         <translation>Wachtwoord is gewijzigd</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1203"/>
+        <location filename="../main.qml" line="1205"/>
         <source>Error: </source>
         <translation>Fout: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1245"/>
+        <location filename="../main.qml" line="1247"/>
         <source>Please wait...</source>
         <translation>Even geduld alstublieft...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1269"/>
+        <location filename="../main.qml" line="1271"/>
         <source>Program setup wizard</source>
         <translation>Installatie-assistent</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1285"/>
+        <location filename="../main.qml" line="1287"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1441"/>
+        <location filename="../main.qml" line="1443"/>
         <source>send to the same destination</source>
         <translation>naar hetzelfde adres verzenden</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1732"/>
+        <location filename="../main.qml" line="1734"/>
         <source>Tap again to close...</source>
         <translation>Tik nogmaals om te sluiten...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1745"/>
+        <location filename="../main.qml" line="1747"/>
         <source>Daemon is running</source>
         <translation>Node is gestart</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1746"/>
+        <location filename="../main.qml" line="1748"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>Node wordt nog steeds op de achtergrond uitgevoerd nadat de GUI gesloten wordt.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1748"/>
+        <location filename="../main.qml" line="1750"/>
         <source>Stop daemon</source>
         <translation>Stop node</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1783"/>
+        <location filename="../main.qml" line="1785"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nieuwe versie van monero-wallet-gui is beschikbaar: %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1815"/>
+        <location filename="../main.qml" line="1817"/>
         <source>Daemon log</source>
         <translation>Node-log</translation>
     </message>
