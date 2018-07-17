@@ -237,9 +237,41 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: 38 * scaleRatio
 
+        RowLayout {
+            CheckBox2 {
+                id: showAdvancedCheckbox
+                darkDropIndicator: true
+                text: qsTr("Advanced options") + translationManager.emptyString
+                fontColor: "#4A4646"
+            }
+        }
+
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
+                id: mainNet
+                text: qsTr("Mainnet") + translationManager.emptyString
+                checkedColor: Qt.rgba(0, 0, 0, 0.75)
+                borderColor: Qt.rgba(0, 0, 0, 0.45)
+                fontColor: "#4A4646"
+                fontSize: 16 * scaleRatio
+                checked: appWindow.persistentSettings.nettype == NetworkType.MAINNET;
+                onClicked: {
+                    persistentSettings.nettype = NetworkType.MAINNET
+                    testNet.checked = false;
+                    stageNet.checked = false;
+                    console.log("Network type set to MainNet")
+                }
+            }
+        }
+
+        Rectangle {
+            width: 100 * scaleRatio
+            RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
                 id: testNet
                 text: qsTr("Testnet") + translationManager.emptyString
                 checkedColor: Qt.rgba(0, 0, 0, 0.75)
@@ -249,6 +281,7 @@ ColumnLayout {
                 checked: appWindow.persistentSettings.nettype == NetworkType.TESTNET;
                 onClicked: {
                     persistentSettings.nettype = testNet.checked ? NetworkType.TESTNET : NetworkType.MAINNET
+                    mainNet.checked = false;
                     stageNet.checked = false;
                     console.log("Network type set to ", persistentSettings.nettype == NetworkType.TESTNET ? "Testnet" : "Mainnet")
                 }
@@ -258,6 +291,8 @@ ColumnLayout {
         Rectangle {
             width: 100 * scaleRatio
             RadioButton {
+                visible: showAdvancedCheckbox.checked
+                enabled: !this.checked
                 id: stageNet
                 text: qsTr("Stagenet") + translationManager.emptyString
                 checkedColor: Qt.rgba(0, 0, 0, 0.75)
@@ -267,6 +302,7 @@ ColumnLayout {
                 checked: appWindow.persistentSettings.nettype == NetworkType.STAGENET;
                 onClicked: {
                     persistentSettings.nettype = stageNet.checked ? NetworkType.STAGENET : NetworkType.MAINNET
+                    mainNet.checked = false;
                     testNet.checked = false;
                     console.log("Network type set to ", persistentSettings.nettype == NetworkType.STAGENET ? "Stagenet" : "Mainnet")
                 }
