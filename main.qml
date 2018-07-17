@@ -357,6 +357,10 @@ ApplicationWindow {
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
 
+        // update local daemon status.
+        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address))
+            daemonRunning = status;
+
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
