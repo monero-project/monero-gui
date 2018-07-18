@@ -11,7 +11,7 @@ Rectangle {
     color: "transparent"
     height: 1400
     Layout.fillWidth: true
-    
+
     ColumnLayout {
         id: settingsLog
         property int itemHeight: 60 * scaleRatio
@@ -31,7 +31,7 @@ Rectangle {
 //            color: MoneroComponents.Style.dividerColor
 //            opacity: MoneroComponents.Style.dividerOpacity
 //        }
-        
+
         Text {
             Layout.bottomMargin: 2 * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
@@ -191,7 +191,6 @@ Rectangle {
             id: sendCommandText
             Layout.fillWidth: true
             fontBold: false
-            fontFamily: MoneroComponents.Style.fontRegular.name
             placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
             placeholderFontSize: 16 * scaleRatio
             onAccepted: {
@@ -207,7 +206,7 @@ Rectangle {
     Component.onCompleted: {
         logLevelDropdown.currentIndex = persistentSettings.logLevel;
         logLevelDropdown.update();
-        
+
         if(typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
     }
