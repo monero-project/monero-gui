@@ -32,25 +32,56 @@ import QtQuick.Layouts 1.1
 import "../components" as MoneroComponents
 
 ColumnLayout {
-    id: lineditmulti
-    property alias text: multiLine.text
-    property alias placeholderText: placeholderLabel.text
+    id: item
+
+    Layout.fillWidth: true
+    Layout.preferredHeight: childrenRect.height
+
+    property alias text: input.text
     property alias labelText: inputLabel.text
-    property alias error: multiLine.error
-    property alias readOnly: multiLine.readOnly
-    property alias addressValidation: multiLine.addressValidation
     property alias labelButtonText: labelButton.text
+    property alias placeholderText: placeholderLabel.text
+
+    property bool placeholderCenter: false
+    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property bool placeholderFontBold: false
+    property int placeholderFontSize: 18 * scaleRatio
+    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property real placeholderOpacity: 0.35
+
+    property bool borderDisabled: false
+    property string borderColor: {
+        if(input.error && input.text !== ""){
+            return MoneroComponents.Style.inputBorderColorInvalid;
+        } else if(input.activeFocus){
+            return MoneroComponents.Style.inputBorderColorActive;
+        } else {
+            return MoneroComponents.Style.inputBorderColorInActive;
+        }
+    }
+
+    property bool error: false
+
+    property string labelFontColor: MoneroComponents.Style.defaultFontColor
     property bool labelFontBold: false
+    property int labelFontSize: 16 * scaleRatio
     property bool labelButtonVisible: false
-    property bool copyButton: false
-    property bool wrapAnywhere: true
-    property bool showingHeader: true
-    property bool showBorder: true
+
+    property string fontColor: "white"
     property bool fontBold: false
     property int fontSize: 16 * scaleRatio
 
+    property bool mouseSelection: true
+    property alias readOnly: input.readOnly
+    property bool copyButton: false
+    property bool showingHeader: true
+    property var wrapMode: Text.NoWrap
+    property alias addressValidation: input.addressValidation
+    property string backgroundColor: "" // mock
+
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
+    signal editingFinished();
 
     spacing: 0
     Rectangle {
@@ -65,11 +96,17 @@ ColumnLayout {
             anchors.top: parent.top
             anchors.left: parent.left
             font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 16 * scaleRatio
+            font.pixelSize: item.labelFontSize
             font.bold: labelFontBold
             textFormat: Text.RichText
-            color: MoneroComponents.Style.defaultFontColor
+            color: item.labelFontColor
             onLinkActivated: inputLabelLinkActivated()
+
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.NoButton
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            }
         }
 
         MoneroComponents.LabelButton {
@@ -80,14 +117,14 @@ ColumnLayout {
 
         MoneroComponents.LabelButton {
             id: copyButtonId
-            visible: copyButton && multiLine.text !== ""
+            visible: copyButton && input.text !== ""
             text: qsTr("Copy")
             anchors.right: labelButton.visible ? inputLabel.right : parent.right
             anchors.rightMargin: labelButton.visible? 4 : 0
             onClicked: {
-                if (multiLine.text.length > 0) {
+                if (input.text.length > 0) {
                     console.log("Copied to clipboard");
-                    clipboard.setText(multiLine.text);
+                    clipboard.setText(input.text);
                     appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
                 }
             }
@@ -95,27 +132,32 @@ ColumnLayout {
     }
 
     MoneroComponents.InputMulti {
-        id: multiLine
+        id: input
         readOnly: false
-        addressValidation: true
-        anchors.top: parent.showingHeader ? inputLabelRect.bottom : parent.top
+        addressValidation: false
+        anchors.top: item.showingHeader ? inputLabelRect.bottom : item.top
         Layout.fillWidth: true
-        topPadding: parent.showingHeader ? 10 * scaleRatio : 0
+        topPadding: item.showingHeader ? 10 * scaleRatio : 0
         bottomPadding: 10 * scaleRatio
-        wrapAnywhere: parent.wrapAnywhere
-        fontSize: parent.fontSize
-        fontBold: parent.fontBold
+        wrapMode: item.wrapMode
+        fontSize: item.fontSize
+        fontBold: item.fontBold
+        fontColor: item.fontColor
+        mouseSelection: item.mouseSelection
+        onEditingFinished: item.editingFinished()
+        error: item.error
 
         Text {
             id: placeholderLabel
-            visible: multiLine.text ? false : true
+            visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 10 * scaleRatio
-            opacity: 0.35
-            color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 18 * scaleRatio
+            opacity: item.placeholderOpacity
+            color: item.placeholderColor
+            font.family: item.placeholderFontFamily
+            font.bold: item.placeholderFontBold
+            font.pixelSize: item.placeholderFontSize
             text: ""
             z: 3
         }
@@ -123,18 +165,10 @@ ColumnLayout {
         Rectangle {
             color: "transparent"
             border.width: 1
-            border.color: {
-              if(multiLine.error && multiLine.text !== ""){
-                  return MoneroComponents.Style.inputBorderColorInvalid;
-              } else if(multiLine.activeFocus){
-                  return MoneroComponents.Style.inputBorderColorActive;
-              } else {
-                  return MoneroComponents.Style.inputBorderColorInActive;
-              }
-            }
+            border.color: item.borderColor
             radius: 4
             anchors.fill: parent
-            visible: lineditmulti.showBorder
+            visible: !item.borderDisabled
         }
     }
 }
