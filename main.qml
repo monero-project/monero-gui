@@ -40,6 +40,7 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "wizard"
+import "../js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 
 ApplicationWindow {
@@ -1398,31 +1399,7 @@ ApplicationWindow {
                 updateBalance();
             }
 
-            onKeysClicked: {
-                passwordDialog.onAcceptedCallback = function() {
-                    if(walletPassword === passwordDialog.password){
-                        if(currentWallet.seedLanguage == "") {
-                            console.log("No seed language set. Using English as default");
-                            currentWallet.setSeedLanguage("English");
-                        }
-                        // Load keys page
-                        middlePanel.state = "Keys"
-                    } else {
-                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                        informationPopup.text = qsTr("Wrong password");
-                        informationPopup.open()
-                        informationPopup.onCloseCallback = function() {
-                            passwordDialog.open()
-                        }
-                    }
-                }
-                passwordDialog.onRejectedCallback = function() {
-                    appWindow.showPageRequest("Settings");
-                }
-                passwordDialog.open();
-                if(isMobile) hideMenu();
-                updateBalance();
-            }
+            onKeysClicked: Utils.showSeedPage();
         }
 
         RightPanel {

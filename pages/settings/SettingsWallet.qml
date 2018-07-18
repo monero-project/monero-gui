@@ -286,9 +286,7 @@ Rectangle {
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
                         anchors.fill: parent
-                        onClicked: {
-                            Utils.showSeedPage();
-                        }
+                        onClicked: Utils.showSeedPage();
                     }
                 }
             }
