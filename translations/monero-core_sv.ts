@@ -606,7 +606,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="61"/>
         <source>Solo mining</source>
-        <translation>Enskild utvinning</translation>
+        <translation>Individuell utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
