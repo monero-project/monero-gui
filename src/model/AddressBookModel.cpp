@@ -60,7 +60,7 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
 
 bool AddressBookModel::deleteRow(int row)
 {
-    m_addressBook->deleteRow(row);
+    return m_addressBook->deleteRow(row);
 }
 
 int AddressBookModel::lookupPaymentID(const QString &payment_id) const
