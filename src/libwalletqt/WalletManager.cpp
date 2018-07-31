@@ -105,7 +105,7 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
 }
 
 Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString &password, NetworkType::Type nettype,
-                                              const QString &deviceName, uint64_t restoreHeight, const QString &subaddressLookahead)
+                                              const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead)
 {
     QMutexLocker locker(&m_mutex);
     if (m_currentWallet) {
