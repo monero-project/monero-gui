@@ -66,7 +66,7 @@ public:
                                                 const QString &password,
                                                 NetworkType::Type nettype,
                                                 const QString &deviceName,
-                                                uint64_t restoreHeight = 0,
+                                                quint64 restoreHeight = 0,
                                                 const QString &subaddressLookahead = "");
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
