@@ -8,7 +8,7 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.12.0.0
+AppVersion=0.12.3.0
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -19,6 +19,8 @@ WizardSmallImageFile=WizardSmallImage.bmp
 WizardImageFile=WelcomeImage.bmp
 DisableWelcomePage=no
 LicenseFile=LICENSE
+AppPublisher=The Monero Developer Community
+AppPublisherURL=https://getmonero.org
 
 
 [Languages]
@@ -39,7 +41,7 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; .exe/.dll file possibly with version info).
 ;
 ; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
-; As of version 0.12.0.0, the Monero .exe files do not carry version info anyway in their .exe headers.
+; As of version 0.12.3.0, the Monero .exe files do not carry version info anyway in their .exe headers.
 ; The only small drawback seems to be somewhat longer update times because each and every file is
 ; copied again, even if already present with correct file date and identical content.
 ;
@@ -60,6 +62,7 @@ Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Per
 
 ; Monero CLI wallet
 Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero wallet RPC interface implementation
 Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -72,6 +75,9 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
 ; Monero blockchain utilities
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
@@ -97,7 +103,7 @@ Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignorever
 ; Qt Windows platform plugins	
 Source: "bin\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs ignoreversion
 Source: "bin\platforminputcontexts\*"; DestDir: "{app}\platforminputcontexts"; Flags: recursesubdirs ignoreversion
-Source: "bin\styles\*"; DestDir: "{app}\styles"; Flags: recursesubdirs ignoreversion
+; No more "styles" subdirectory in 0.12.3.0
 
 ; Qt support for SVG icons	
 Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
@@ -116,7 +122,8 @@ Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recurs
 ; Qt graphical effects as part of the core runtime, effects like blurring and blending
 Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
 
-; No more Qt "private" directory in 0.12.0.0
+; Qt "private" directory with "effects"
+Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
 
 ; Qt QML files
 Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
@@ -124,6 +131,10 @@ Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversi
 ; Qt Quick files
 Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs ignoreversion
 Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs ignoreversion
+
+; Qt Quick Controls 2 modules of the Qt Toolkit
+Source: "bin\Material\*"; DestDir: "{app}\Material"; Flags: recursesubdirs ignoreversion
+Source: "bin\Universal\*"; DestDir: "{app}\Universal"; Flags: recursesubdirs ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs ignoreversion
@@ -167,12 +178,13 @@ Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; ICU, International Components for Unicode
 ; After changes for supporting UTF-8 path and file names by using Boost Locale, all those 5
-; ICU libraries are needed in 0.12.0.0
-Source: "bin\libicudt58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuin58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuio58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicutu58.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuuc58.dll"; DestDir: "{app}"; Flags: ignoreversion
+; ICU libraries are needed starting from 0.12.0.0
+; Use wildcards instead of specific version number like 61 because that seems to change frequently
+Source: "bin\libicudt??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuin??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuio??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicutu??.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\libicuuc??.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Library for native language support, part of GNU gettext
 Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -194,7 +206,8 @@ Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; PCRE, Perl Compatible Regular Expressions
-; "libpcre2-16-0.dll" is new for 0.12.0.0; unclear whether "libpcre16-0.dll" is still needed
+; "libpcre2-16-0.dll" is new for 0.12.0.0
+; Uclear whether "libpcre16-0.dll" is still needed; some versions of "Qt5Core.dll" seem to reference it, some not
 Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\libpcre2-16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -215,7 +228,6 @@ Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Stack protection
-; New for 0.12.0.0
 Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 
@@ -238,6 +250,7 @@ var
 procedure InitializeWizard;
 var s: String;
     width: Integer;
+    blockChainDir: String;
 begin
   // Large image for the "Welcome" page, with page reconfigured
   WizardForm.WelcomeLabel1.Visible := false;
@@ -252,7 +265,7 @@ begin
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitmonero');
   s := 'The default folder to store the Monero blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need more than 50 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need more than 60 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
@@ -261,11 +274,17 @@ begin
     False, '');
   BlockChainDirPage.Add('');
 
-  BlockChainDirPage.Values[0] := GetPreviousData('BlockChainDir', '');
-  if BlockChainDirPage.Values[0] = '' then begin
-    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field
-    BlockChainDirPage.Values[0] := blockChainDefaultDir;
+  // Evaluate proposal for the blockchain location
+  // In case of an update take the blockchain location from the actual setting in the registry
+  RegQueryStringValue(HKEY_CURRENT_USER, 'Software\monero-project\monero-core', 'blockchainDataDir', blockChainDir);
+  if blockChainDir = '' then begin
+    blockChainDir := GetPreviousData('BlockChainDir', '');
   end;
+  if blockChainDir = '' then begin
+    // Unfortunately 'TInputDirWizardDirPage' does not allow empty field, so "propose" Monero default location
+    blockChainDir := blockChainDefaultDir;
+  end;
+  BlockChainDirPage.Values[0] := blockChainDir;
 end;
 
 procedure RegisterPreviousData(PreviousDataKey: Integer);
@@ -281,6 +300,17 @@ begin
   s := BlockChainDirPage.Values[0];
   Result := s;
   // No quotes for folder name with blanks as this is never used as part of a command line
+end;
+
+function BlockChainDirOrEmpty(Param: String) : String;
+VAR s: String;
+begin
+  s := BlockChainDir('');
+  if s = blockChainDefaultDir then begin
+    // No need to add the default dir as setting
+    s := '';
+  end;
+  Result := s;
 end;
 
 function UpdateReadyMemo(Space, NewLine, MemoUserInfoInfo, MemoDirInfo, MemoTypeInfo,
@@ -384,5 +414,5 @@ Name: "{userdesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Tasks
 ; Side effect, mostly positive: The uninstaller will clean the registry
 Root: HKCU; Subkey: "Software\monero-project"; Flags: uninsdeletekeyifempty
 Root: HKCU; Subkey: "Software\monero-project\monero-core"; Flags: uninsdeletekey
-Root: HKCU; Subkey: "Software\monero-project\monero-core"; ValueType: string; ValueName: "daemonFlags"; ValueData: {code:DaemonFlags};
+Root: HKCU; Subkey: "Software\monero-project\monero-core"; ValueType: string; ValueName: "blockchainDataDir"; ValueData: {code:BlockChainDirOrEmpty};
 
