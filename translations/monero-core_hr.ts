@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
         <source>4.. / 8..</source>
-        <translation type="unfinished"></translation>
+        <translation>4.. / 8..</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -217,7 +217,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="55"/>
         <source>Rings:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstenovi:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="80"/>
@@ -227,17 +227,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished">Adresa je kopirana u međuspremnik</translation>
+        <translation>Adresa je kopirana u međuspremnik</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="343"/>
         <source>Blockheight</source>
-        <translation type="unfinished"></translation>
+        <translation>Visina bloka</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="368"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="347"/>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="87"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopirano u međuspremnik</translation>
     </message>
 </context>
 <context>
@@ -303,7 +303,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="54"/>
         <source>Rings:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstenovi:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="80"/>
@@ -336,12 +336,12 @@
     <message>
         <location filename="../components/InputDialog.qml" line="136"/>
         <source>Cancel</source>
-        <translation type="unfinished">Otkaži</translation>
+        <translation>Otkaži</translation>
     </message>
     <message>
         <location filename="../components/InputDialog.qml" line="148"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>U redu</translation>
     </message>
 </context>
 <context>
@@ -469,7 +469,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fazna mreža</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="338"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="480"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished"></translation>
+        <translation>Zajednička baza podataka prstenova</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="550"/>
@@ -529,12 +529,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="601"/>
         <source>Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Novčanik</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="610"/>
         <source>Daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="505"/>
@@ -580,12 +580,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="84"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="91"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopirano u međuspremnik</translation>
     </message>
 </context>
 <context>
@@ -773,7 +773,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
         <source>Please enter wallet password for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Unesite zaporku novčanika za:</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="150"/>
@@ -809,12 +809,12 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="38"/>
         <source>%1 blocks remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 blokova preostalo: </translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="70"/>
         <source>Synchronizing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinkronizirano %1</translation>
     </message>
 </context>
 <context>
@@ -850,91 +850,91 @@
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
         <source>With more Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>S više Monera</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="139"/>
         <source>With not enough Monero</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez dovoljno Monera</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="141"/>
         <source>Expected</source>
-        <translation type="unfinished"></translation>
+        <translation>Očekivan iznos</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="142"/>
         <source>Total received</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukupno primljeno</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="165"/>
         <source>Set the label of the selected address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavi oznaku označene adrese:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="200"/>
         <source>Addresses</source>
-        <translation type="unfinished"></translation>
+        <translation>Adrese</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="202"/>
         <location filename="../pages/Receive.qml" line="431"/>
         <location filename="../pages/Receive.qml" line="517"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoć</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ovaj QR kod sadržava gore označenu adresu i donje naveden iznos. Podijeli ga sa drugima (desni-klik-&gt;Pohrani) da vam lakše pošalju točan iznos.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>Napravi novu adresu</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="388"/>
         <source>Set the label of the new address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavi oznaku nove adrese:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="389"/>
         <source>(Untitled)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Neimenovano)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="409"/>
         <source>Advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Napredne postavke</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="429"/>
         <location filename="../pages/Receive.qml" line="434"/>
         <source>QR Code</source>
-        <translation type="unfinished">QR kod</translation>
+        <translation>QR kod</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="608"/>
         <location filename="../pages/Receive.qml" line="610"/>
         <source>confirmations</source>
-        <translation type="unfinished"></translation>
+        <translation>potvrda</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="613"/>
         <source>confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>potvrda</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="637"/>
         <source>Transaction ID copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifikacija transakcije je kopirana u međuspremnik</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="672"/>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Omogući</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="330"/>
@@ -1050,24 +1050,24 @@
     <message>
         <location filename="../pages/Settings.qml" line="207"/>
         <source>Daemon mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon mod</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="240"/>
         <source>Bootstrap node</source>
-        <translation type="unfinished"></translation>
+        <translation>Čvor za podizanje sustava</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="259"/>
         <location filename="../pages/Settings.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">Adresa</translation>
+        <translation>Adresa</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="260"/>
         <location filename="../pages/Settings.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="399"/>
@@ -1077,7 +1077,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="423"/>
         <source>Change location</source>
-        <translation type="unfinished"></translation>
+        <translation>Promijeni lokaciju</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="467"/>
@@ -1092,12 +1092,12 @@
     <message>
         <location filename="../pages/Settings.qml" line="680"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (Klikni za promjenu)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="682"/>
         <source>Set a new restore height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Postavi visinu za povrat od bloka:</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="312"/>
@@ -1186,7 +1186,7 @@
     <message>
         <location filename="../pages/Settings.qml" line="657"/>
         <source>Wallet name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv novčanika: </translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="671"/>
@@ -1219,7 +1219,7 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     <message>
         <location filename="../pages/Settings.qml" line="717"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Netočno postavljen povrat od bloka. Unos mora biti broj.</translation>
     </message>
     <message>
         <location filename="../pages/Settings.qml" line="733"/>
@@ -1289,155 +1289,155 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     <message>
         <location filename="../pages/SharedRingDB.qml" line="93"/>
         <source>Shared RingDB</source>
-        <translation type="unfinished"></translation>
+        <translation>Zajednička baza podataka o prstenovima</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ova stranica omogućuje pristup zajedničkoj bazi podataka o prstenovima. Ova baza podataka namijenjena je Monero novčanicima, kao i novčanicima iz Monero klonova koji ponovno koriste Monero ključeve.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
         <location filename="../pages/SharedRingDB.qml" line="112"/>
         <source>Blackballed outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Blackball izlazi</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
         <location filename="../pages/SharedRingDB.qml" line="242"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoć</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kako bi se zamaskirali ulazi koji se koriste u Monero transakciji, vanjski promatrač nebi smio odgonetnuti koji ulazi su iskorišteni u prstenu. U protivnom bi zaštita, koju nude potpisi prstenja, bila ugrožena. Ako su svi osim jednog ulaza vec bili iskorišteni otprije moguće je doznati koji je ulaz pravi, a to poništava zaštitu potpisa prstenja, odnosno jednu od tri glavne razine Monero zaštite privatnosti.&lt;br&gt;Kako bi pomogli transakcijama zaobići takve ulaze, može se korisiti popis poznatih potrošenih ulaza. Takav popis vodi Monero projekt i može se nabaviti na getmonero.org web stranici, te ga onda uvesti ovdje.&lt;br&gt;U protivnom, može se očitati lanac blokova (te lanac blokova drugih Monero klonova koji koriste iste Monero ključeve) i napraviti popis poznatih potrošenih izlaza koristeći monero-blockchain-blackball alat.></translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation type="unfinished"></translation>
+        <translation>Ovdje se unosi popis poznatih potrošenih izlaza kako se nebi ponovo koristili u potpisima prstenova.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="135"/>
         <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Trebali biste učitati datoteku samo kada želite osvježiti popis. Ručno dodavanje/uklanjanje je moguće po potrebi.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="147"/>
         <source>Please choose a file to load blackballed outputs from</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite datoteku za učitavanje Blackball izlaza od</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="163"/>
         <source>Path to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Put do datoteke</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="165"/>
         <source>Filename with outputs to blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv datoteke sa blackball izlazima</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="178"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretraži</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="189"/>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Učitaj</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Or manually blackball/unblackball a single output:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ili ručno primjeni/ukloni blackball sa jednog izlaza:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="206"/>
         <source>Paste output public key</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalijepi izlazni javni ključ</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="220"/>
         <source>Blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Primjeni Blackball</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="229"/>
         <source>Unblackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukloni Blackball</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="242"/>
         <location filename="../pages/SharedRingDB.qml" line="244"/>
         <source>Rings</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstenovi</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kako bi ostvarili zaštitu Monerovih potpisa prstenova, izlaz nebi smio biti korišten više puta na drugim prstenovima na drugim lancima blokova. Uobičajeno, to nije razlog za brigu, ali može postati ako Monero klon koji ponovno koristi iste ključeve vam omogućuje korištenje postojećih izlaza. U tom slučaju morate osigurati da ti postojeći izlazi koriste isti prsten na oba lanca.&lt;br&gt;To će učiniti automatski Monero ili bilo koji softver za ponovnu upotrebu ključeva koji ne pokušava aktivno ugroziti vašu privatnost.&lt;br&gt;Ako koristite Monero klon koji ponovno upotrebljava ključeve, a ne uključuje tu zaštitu, uvijek možete osigurati da su vaše transakcije zaštićene tako da platite preko klona prvo, a zatim ručno dodate prsten na ovoj stranici, što vam omogućuje da možete provest Monero uplatu sigurno.&lt;br&gt;Ako ne koristite Monero klon koji ponovno koristi ključeve bez ovih sigurnosnih značajki, ne morate ništa učiniti jer je sve automatizirano.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovdje se zapisuju prstenovi korišteni u izazima na Monero lancima koji ponovno koristi iste ključeve, tako da se isti prsten može ponovo upotrijebiti i pritom izbjegnu problemi sa privatnošću.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
         <source>Key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ključna slika</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>Paste key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalijepi ključnu sliku</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="299"/>
         <source>Get ring</source>
-        <translation type="unfinished"></translation>
+        <translation>Dohvati prsten</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="311"/>
         <source>Get Ring</source>
-        <translation type="unfinished"></translation>
+        <translation>Dohvati Prsten</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="317"/>
         <source>No ring found</source>
-        <translation type="unfinished"></translation>
+        <translation>Prsten nije pronađen</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="334"/>
         <source>Set ring</source>
-        <translation type="unfinished"></translation>
+        <translation>Postavi prsten</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="346"/>
         <source>Set Ring</source>
-        <translation type="unfinished"></translation>
+        <translation>Postavi Prsten</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="364"/>
         <source>I intend to spend on key-reusing fork(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Namjeravam potrošiti na klonove koji ponovo koriste ključeve</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="378"/>
         <source>I might want to spend on key-reusing fork(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Možda bih želio potrošiti na klonove koji ponovo koriste ključeve</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="392"/>
         <source>Relative</source>
-        <translation type="unfinished"></translation>
+        <translation>Relativno</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="408"/>
         <source>Segregation height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Segregacija na bloku:</translation>
     </message>
 </context>
 <context>
@@ -1477,38 +1477,38 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     <message>
         <location filename="../pages/Sign.qml" line="107"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovdje možete potpisati/provjeriti poruku (ili podatkovni sadržaj) sa vašom adresom.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="125"/>
         <source>Message</source>
-        <translation type="unfinished">Poruka</translation>
+        <translation>Poruka</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
         <source>Path to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Put do datoteke</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="169"/>
         <location filename="../pages/Sign.qml" line="262"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretraži</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="221"/>
         <source>Verify message</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovjeri poruku</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="248"/>
         <source>Verify file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovjeri datoteku</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
         <source>Address</source>
-        <translation type="unfinished">Adresa</translation>
+        <translation>Adresa</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="319"/>
@@ -1623,6 +1623,14 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     </message>
 </context>
 <context>
+    <name>SubaddressModel</name>
+    <message>
+        <location filename="../src/model/SubaddressModel.cpp" line="73"/>
+        <source>Primary address</source>
+        <translation>Primarna adresa</translation>
+    </message>
+</context>
+<context>
     <name>TableDropdown</name>
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
@@ -1679,6 +1687,14 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
         <location filename="../components/TickDelegate.qml" line="58"/>
         <source>High</source>
         <translation>Visoko</translation>
+    </message>
+</context>
+<context>
+    <name>TransactionHistoryModel</name>
+    <message>
+        <location filename="../src/model/TransactionHistoryModel.cpp" line="103"/>
+        <source>Primary address</source>
+        <translation>Primarna adresa</translation>
     </message>
 </context>
 <context>
@@ -1784,27 +1800,27 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     <message>
         <location filename="../pages/Transfer.qml" line="46"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Pokreni daemona&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="82"/>
         <source>Ring size: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Broj prstenova: %1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="156"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovdje možete potpisati/provjeriti poruku (ili podatkovni sadržaj) sa vašom adresom.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="223"/>
         <source>Default</source>
-        <translation type="unfinished">Standardno</translation>
+        <translation>Standardno</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="225"/>
         <source>Normal (x1 fee)</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalno (x1 provizija)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="253"/>
@@ -1814,7 +1830,7 @@ Datoteka sa starom predmemorijom novčanika biti će preimenovana i može se nak
     <message>
         <location filename="../pages/Transfer.qml" line="429"/>
         <source>Advanced options</source>
-        <translation type="unfinished"></translation>
+        <translation>Napredne postavke</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
@@ -1883,7 +1899,7 @@ Ringsize: </translation>
     <message>
         <location filename="../pages/Transfer.qml" line="618"/>
         <source>Monero sent successfully</source>
-        <translation type="unfinished"></translation>
+        <translation>Monero je uspješno poslan</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="657"/>
@@ -1966,7 +1982,7 @@ Nadogradite ga ili se spojite na drugi daemon.</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="66"/>
         <source>Prove Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokaži transakciju</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="70"/>
@@ -2001,7 +2017,7 @@ U slučaju odlaznih uplata, možete dobiti &quot;dokaz potrošnje&quot; koji dok
     <message>
         <location filename="../pages/TxKey.qml" line="141"/>
         <source>Check Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Provjeri transakciju</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="145"/>
@@ -2036,6 +2052,14 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
         <location filename="../pages/TxKey.qml" line="211"/>
         <source>Check</source>
         <translation>Provjeri</translation>
+    </message>
+</context>
+<context>
+    <name>WalletManager</name>
+    <message>
+        <location filename="../src/libwalletqt/WalletManager.cpp" line="153"/>
+        <source>Unknown error</source>
+        <translation>Nepoznata pogreška</translation>
     </message>
 </context>
 <context>
@@ -2117,7 +2141,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="183"/>
         <source>Bootstrap node (leave blank if not wanted)</source>
-        <translation type="unfinished"></translation>
+        <translation>Čvor za podizanje sustava (ostavite prazno ako ne želite)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="210"/>
@@ -2175,12 +2199,12 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fazna mreža</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Mainnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Glavna mreža</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="65"/>
@@ -2215,7 +2239,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="77"/>
         <source>Network Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrsta mreže</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="79"/>
@@ -2335,7 +2359,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unesite vaše mnemoničko sjeme od 25 (ili 24) riječi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2358,7 +2382,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardOptions.qml" line="86"/>
         <source>Please select one of the following options:</source>
-        <translation>Odaberite jednu od slijedećih opcija:</translation>
+        <translation>Odaberite jednu od slijedećih postavki:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="142"/>
@@ -2383,7 +2407,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../wizard/WizardOptions.qml" line="262"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fazna mreža</translation>
     </message>
 </context>
 <context>
@@ -2484,7 +2508,7 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../main.qml" line="553"/>
         <source>Daemon is synchronized</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon je sinkroniziran</translation>
     </message>
     <message>
         <location filename="../main.qml" line="599"/>
@@ -2506,40 +2530,46 @@ U slučaju &quot;dokaza potrošnje&quot;, adresa primatelja ne mora se navesti.<
     <message>
         <location filename="../main.qml" line="623"/>
         <source>Address: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adresa: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="627"/>
         <source>
 Ringsize: </source>
-        <translation type="unfinished">
-Ringsize: </translation>
+        <translation>
+Broj prstenova: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="629"/>
         <source>
 
 WARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+UPOZORENJE: broj prstenova nije standardan, što može ugroziti vašu privatnost. Preporučen broj je 7.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="631"/>
         <source>
 
 Number of transactions: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Broj transakcija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="632"/>
         <source>
 Description: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Opis: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="634"/>
         <source>
 Spending address index: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Indeks adrese platitelja: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="741"/>
@@ -2622,17 +2652,17 @@ Provizija: </translation>
     <message>
         <location filename="../main.qml" line="463"/>
         <source>Waiting for daemon to sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Čekanje da se daemon sinkronizira</translation>
     </message>
     <message>
         <location filename="../main.qml" line="465"/>
         <source>Daemon is synchronized (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon je sinkroniziran (%1)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="467"/>
         <source>Wallet is synchronized</source>
-        <translation type="unfinished"></translation>
+        <translation>Novčanik je sinkroniziran</translation>
     </message>
     <message>
         <location filename="../main.qml" line="536"/>
@@ -2673,7 +2703,7 @@ Provizija: </translation>
     <message>
         <location filename="../main.qml" line="790"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation type="unfinished"></translation>
+        <translation>Monero poslan uspješno: %1 transakcija </translation>
     </message>
     <message>
         <location filename="../main.qml" line="861"/>
@@ -2794,7 +2824,7 @@ Provizija: </translation>
     <message>
         <location filename="../main.qml" line="1817"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Dnevnik daemona</translation>
+        <translation>Dnevnik daemona</translation>
     </message>
 </context>
 </TS>
