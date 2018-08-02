@@ -114,7 +114,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
     ```
     cd monero-gui
-    ./build.sh
+    QT_SELECT=5 ./build.sh
     ```
 
 The executable can be found in the build/release/bin folder.
