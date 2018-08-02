@@ -75,8 +75,7 @@ else
 fi
 
 if [ "$BUILD_LIBWALLET" != true ]; then
-    # exit this script
-    return
+    exit 0
 fi
 
 echo "GUI_MONERO_VERSION=\"$VERSIONTAG\"" > $MONERO_DIR/version.sh
