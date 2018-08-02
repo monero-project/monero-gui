@@ -78,6 +78,9 @@ public:
 
     //! returns list with wallet's filenames, if found by given path
     Q_INVOKABLE QStringList findWallets(const QString &path);
+    
+    //! checks a combination of wallet_path, password and nettype
+    Q_INVOKABLE bool checkPassword(const QString &path, const QString &password, NetworkType::Type nettype = NetworkType::MAINNET);
 
     //! returns error description in human language
     Q_INVOKABLE QString errorString() const;

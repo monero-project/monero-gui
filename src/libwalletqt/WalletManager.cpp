@@ -75,6 +75,17 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
     watcher->setFuture(future);
 }
 
+bool WalletManager::checkPassword(const QString &path, const QString &password, NetworkType::Type nettype){
+    Monero::Wallet * w = m_pimpl->openWallet(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype));
+    int status = w->status();
+    qDebug("%s: check password: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), status);
+    delete w;
+
+    if (status == Monero::Wallet::Status_Ok) {
+        return true;
+    }
+    return false;
+}
 
 Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, NetworkType::Type nettype, quint64 restoreHeight)
 {
