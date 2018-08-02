@@ -902,7 +902,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="389"/>
         <source>(Untitled)</source>
-        <translation>(未标题)</translation>
+        <translation>(未命名)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="409"/>
@@ -2791,7 +2791,7 @@ Spending address index: </source>
         <location filename="../main.qml" line="784"/>
         <location filename="../main.qml" line="1200"/>
         <source>Information</source>
-        <translation>信息</translation>
+        <translation>消息</translation>
     </message>
     <message>
         <location filename="../main.qml" line="790"/>
