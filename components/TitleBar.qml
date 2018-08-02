@@ -68,7 +68,7 @@ Rectangle {
         z: parent.z + 1
 
         Image {
-           anchors.fill: titleBar
+           anchors.fill: parent
            height: titleBar.height
            width: titleBar.width
            source: "../images/titlebarGradient.jpg"
