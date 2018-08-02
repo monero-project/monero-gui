@@ -1630,7 +1630,7 @@ ApplicationWindow {
             showMoneroLogo: true
             onCloseClicked: appWindow.close();
             onMaximizeClicked: {
-                appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
+                appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized :
                                                                                     Window.Windowed
             }
             onMinimizeClicked: appWindow.visibility = Window.Minimized
