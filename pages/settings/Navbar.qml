@@ -60,11 +60,10 @@ Rectangle {
             property string borderColor: "#808080"
             property int textMargin: {
                 // left-right margins for a given cell
-                console.log(appWindow.width);
                 if(isMobile){
-                    return 18;
+                    return 10;
                 } else if(appWindow.width < 890){
-                    return 40;
+                    return 32;
                 } else {
                     return 64;
                 }
@@ -109,20 +108,20 @@ Rectangle {
                         text: qsTr("Wallet") + translationManager.emptyString
                         color: grid.fontColor
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: { settingsStateView.state = "Wallet" }
+                    }
                 }
 
                 Rectangle { 
                     color: grid.borderColor
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: { settingsStateView.state = "Wallet" }
                 }
             }
             Rectangle{
@@ -159,20 +158,20 @@ Rectangle {
                         text: qsTr("Layout") + translationManager.emptyString
                         color: grid.fontColor
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: { settingsStateView.state = "UI" }
+                    }
                 }
 
                 Rectangle { 
                     color: grid.borderColor
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: { settingsStateView.state = "UI" }
                 }
             }
             Rectangle{
@@ -209,20 +208,20 @@ Rectangle {
                         text: qsTr("Node") + translationManager.emptyString
                         color: grid.fontColor
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: { settingsStateView.state = "Node" }
+                    }
                 }
 
                 Rectangle { 
                     color: grid.borderColor
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: { settingsStateView.state = "Node" }
                 }
             }
             Rectangle{
@@ -259,20 +258,20 @@ Rectangle {
                         text: qsTr("Log") + translationManager.emptyString
                         color: grid.fontColor
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: { settingsStateView.state = "Log" }
+                    }
                 }
 
                 Rectangle { 
                     color: grid.borderColor
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: { settingsStateView.state = "Log" }
                 }
             }
             Rectangle{
@@ -309,20 +308,20 @@ Rectangle {
                         text: qsTr("Info") + translationManager.emptyString
                         color: grid.fontColor
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: { settingsStateView.state = "Info" }
+                    }
                 }
 
                 Rectangle { 
                     color: grid.borderColor
                     Layout.preferredHeight: 1
                     Layout.fillWidth: true
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: { settingsStateView.state = "Info" }
                 }
             }
             Image {
