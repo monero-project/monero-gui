@@ -33,6 +33,7 @@ import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
 import "../components"
+import "../components" as MoneroComponents
 import "." 1.0
 
 
@@ -43,6 +44,7 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "transparent"
+    property string warningContent: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
@@ -122,47 +124,13 @@ Rectangle {
 
       spacing: 30 * scaleRatio
 
-      RowLayout{
-          visible: warningText.text !== ""
+      RowLayout {
+          visible: root.warningContent !== ""
 
-          Rectangle {
-              id: statusRect
-              Layout.preferredHeight: warningText.height + 40
-              Layout.fillWidth: true
-
-              radius: 2
-              border.color: Style.inputBorderColorInActive
-              border.width: 1
-              color: "transparent"
-
-              GridLayout{
-                  Layout.fillWidth: true
-                  Layout.preferredHeight: warningText.height + 40
-
-                  Image {
-                      Layout.alignment: Qt.AlignVCenter
-                      Layout.preferredHeight: 33
-                      Layout.preferredWidth: 33
-                      Layout.leftMargin: 10
-                      Layout.topMargin: 10
-                      source: "../images/warning.png"
-                  }
-
-                  Text {
-                      id: warningText
-                      Layout.topMargin: 12 * scaleRatio
-                      Layout.preferredWidth: statusRect.width - 80
-                      Layout.leftMargin: 6
-                      text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
-                      wrapMode: Text.Wrap
-                      font.family: Style.fontRegular.name
-                      font.pixelSize: 14 * scaleRatio
-                      color: Style.defaultFontColor
-                      textFormat: Text.RichText
-                      onLinkActivated: {
-                          appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
-                      }
-                  }
+          MoneroComponents.WarningBox {
+              text: warningContent
+              onLinkActivated: {
+                  appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
               }
           }
       }
@@ -356,7 +324,7 @@ Rectangle {
                   }
                   
                   // There is no warning box displayed
-                  if(warningText.text !== ''){
+                  if(root.warningContent !== ''){
                       return false;
                   }
                   
@@ -658,7 +626,7 @@ Rectangle {
     function updateStatus() {
         pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
-            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
+            root.warningContent = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             return;
         }
 
@@ -670,20 +638,20 @@ Rectangle {
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Disconnected:
-            warningText.text = qsTr("Wallet is not connected to daemon.") + root.startLinkText
+            root.warningContent = qsTr("Wallet is not connected to daemon.") + root.startLinkText
             break
         case Wallet.ConnectionStatus_WrongVersion:
-            warningText.text = qsTr("Connected daemon is not compatible with GUI. \n" +
+            root.warningContent = qsTr("Connected daemon is not compatible with GUI. \n" +
                                    "Please upgrade or connect to another daemon")
             break
         default:
             if(!appWindow.daemonSynced){
-                warningText.text = qsTr("Waiting on daemon synchronization to finish")
+                root.warningContent = qsTr("Waiting on daemon synchronization to finish")
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready
                 pageRoot.enabled = true;
-                warningText.text = "";
+                root.warningContent = "";
             }
         }
     }
