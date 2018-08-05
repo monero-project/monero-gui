@@ -110,14 +110,14 @@ Rectangle{
                     color: "white"
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 18 * scaleRatio
+                    font.pixelSize: 16 * scaleRatio
                     text: qsTr("Local node") + translationManager.emptyString
                 }
 
                 TextArea {
                     id: localNodeArea
                     anchors.top: localNodeHeader.bottom
-                    anchors.topMargin: 2 * scaleRatio
+                    anchors.topMargin: 4 * scaleRatio
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     color: MoneroComponents.Style.dimmedFontColor
@@ -209,14 +209,14 @@ Rectangle{
                     color: "white"
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 18 * scaleRatio
+                    font.pixelSize: 16 * scaleRatio
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
 
                 TextArea {
                     id: remoteNodeArea
                     anchors.top: remoteNodeHeader.bottom
-                    anchors.topMargin: 2 * scaleRatio
+                    anchors.topMargin: 4 * scaleRatio
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     color: MoneroComponents.Style.dimmedFontColor
