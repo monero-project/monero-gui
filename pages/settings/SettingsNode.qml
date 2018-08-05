@@ -271,26 +271,10 @@ Rectangle{
             Layout.topMargin: 20
             visible: !isMobile && persistentSettings.useRemoteNode
 
-            TextArea {
-                color: MoneroComponents.Style.dimmedFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 15 * scaleRatio
-                horizontalAlignment: TextInput.AlignLeft
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third party. For more details, view this tutorial.") + translationManager.emptyString
-                width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
-                activeFocusOnPress: false
-                selectByMouse: false
-                wrapMode: Text.WordWrap
-                textMargin: 0
-                leftPadding: 0
-                topPadding: 0
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: false
-                }
+            MoneroComponents.WarningBox {
+                Layout.topMargin: 26 * scaleRatio
+                Layout.bottomMargin: 6 * scaleRatio
+                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             }
 
             MoneroComponents.RemoteNodeEdit {
