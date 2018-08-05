@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
 import "../../js/Utils.js" as Utils
+import "../../version.js" as Version
 import "../../components" as MoneroComponents
 
 
