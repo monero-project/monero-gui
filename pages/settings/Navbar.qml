@@ -58,7 +58,17 @@ Rectangle {
             property bool fontBold: true
             property var fontFamily: MoneroComponents.Style.fontRegular.name
             property string borderColor: "#808080"
-            property int textMargin: 28  // left-right margins in a given cell
+            property int textMargin: {
+                // left-right margins for a given cell
+                console.log(appWindow.width);
+                if(isMobile){
+                    return 18;
+                } else if(appWindow.width < 890){
+                    return 40;
+                } else {
+                    return 64;
+                }
+            }
             Image {
                 Layout.preferredWidth: 2
                 Layout.preferredHeight: 32
