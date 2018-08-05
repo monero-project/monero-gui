@@ -41,6 +41,7 @@ Rectangle {
         }
 
         GridLayout {
+            id: logGrid
             columns: appWindow.persistentSettings.logLevel === 5 ? 2 : 1
             Layout.fillWidth: true
             columnSpacing: 32 * scaleRatio
@@ -77,6 +78,7 @@ Rectangle {
                         appWindow.persistentSettings.logLevel = currentIndex;
                     }
                     Layout.fillWidth: true
+                    Layout.maximumWidth: logGrid.width / 2
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#363636"
@@ -88,9 +90,11 @@ Rectangle {
                 id: logCategories
                 visible: persistentSettings.logLevel === 5
                 Layout.fillWidth: true
+                Layout.maximumWidth: logGrid.width / 2
                 text: appWindow.persistentSettings.logCategories
                 placeholderText: "(e.g. *:WARNING,net.p2p:DEBUG)"
                 placeholderFontSize: 14 * scaleRatio
+                fontSize: 14 * scaleRatio
                 enabled: logLevelDropdown.currentIndex === 5
                 onEditingFinished: {
                     if(enabled) {
@@ -191,7 +195,7 @@ Rectangle {
             id: sendCommandText
             Layout.fillWidth: true
             fontBold: false
-            placeholderText: qsTr("command + enter (e.g help)") + translationManager.emptyString
+            placeholderText: qsTr("command + enter (e.g 'help' or 'status')") + translationManager.emptyString
             placeholderFontSize: 16 * scaleRatio
             onAccepted: {
                 if(text.length > 0) {
