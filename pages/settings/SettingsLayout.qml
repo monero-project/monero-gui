@@ -30,6 +30,14 @@ Rectangle {
             onClicked: Windows.setCustomWindowDecorations(checked)
             text: qsTr("Custom decorations") + translationManager.emptyString
         }
+
+        MoneroComponents.TextBlock {
+            visible: isMobile
+            font.pixelSize: 14
+            textFormat: Text.RichText
+            Layout.fillWidth: true
+            text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
+        }
     }
 
     Component.onCompleted: {
