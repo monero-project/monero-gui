@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
+import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
 import "../../version.js" as Version
@@ -122,10 +123,12 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 id: restoreHeightText
+                Layout.fillWidth: true
                 textFormat: Text.RichText
                 font.pixelSize: 14
+                font.bold: true
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
-                text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (change)</a>") + translationManager.emptyString
+                text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (Click to change)</a>") + translationManager.emptyString
                 onLinkActivated: {
                     inputDialog.labelText = qsTr("Set a new restore height:") + translationManager.emptyString;
                     inputDialog.inputText = currentWallet ? currentWallet.walletCreationHeight : "0";
