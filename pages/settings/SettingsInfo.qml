@@ -87,13 +87,19 @@ Rectangle {
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 font.pixelSize: 14
-                text: qsTr("Wallet name: ") + translationManager.emptyString
+                text: qsTr("Wallet path: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
+                Layout.maximumWidth: 320
                 font.pixelSize: 14
-                text: walletName + translationManager.emptyString
+                text: {
+                    var wallet_path = walletPath();
+                    if(isIOS)
+                        wallet_path = moneroAccountsDir + wallet_path;
+                    return wallet_path;
+                }
             }
 
             Rectangle {
