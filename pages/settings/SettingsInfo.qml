@@ -21,7 +21,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: (isMobile)? 17 : 20
         anchors.topMargin: 0
-        spacing: 0
+        spacing: 30
 
         GridLayout {
             columns: 2
@@ -92,7 +92,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                Layout.maximumWidth: 320
+                Layout.maximumWidth: 360
                 font.pixelSize: 14
                 text: {
                     var wallet_path = walletPath();
@@ -212,6 +212,58 @@ Rectangle {
                 Layout.fillWidth: true
                 font.pixelSize: 14
                 text: walletLogPath
+            }
+        }
+
+        // Copy info to clipboard
+        Rectangle {
+            color: "transparent"
+            Layout.preferredHeight: 24 * scaleRatio
+            Layout.fillWidth: true
+
+            Rectangle {
+                id: rectCopy
+                color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                width: btnCopy.width + 40
+                height: 24
+                radius: 2
+
+                Text {
+                    id: btnCopy
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 14 * scaleRatio
+                    font.bold: true
+                    text: qsTr("Copy to clipboard") + translationManager.emptyString
+                }
+
+                MouseArea {
+                    cursorShape: Qt.PointingHandCursor
+                    anchors.fill: parent
+                    onClicked: {
+                        var data = "";
+                        data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
+                        data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
+                        data += "\nWallet path: ";
+
+                        var wallet_path = walletPath();
+                        if(isIOS)
+                            wallet_path = moneroAccountsDir + wallet_path;
+                        data += wallet_path;
+
+                        data += "\nWallet creation height: ";
+                        if(currentWallet)
+                            data += currentWallet.walletCreationHeight;
+
+                        data += "\nWallet log path: " + walletLogPath;
+
+                        console.log("Copied to clipboard");
+                        clipboard.setText(data);
+                        appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                    }
+                }
             }
         }
     }
