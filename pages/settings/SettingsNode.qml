@@ -92,7 +92,7 @@ Rectangle{
                     anchors.topMargin: 2 * scaleRatio
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -191,7 +191,7 @@ Rectangle{
                     anchors.topMargin: 2 * scaleRatio
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     activeFocusOnPress: false
@@ -244,7 +244,7 @@ Rectangle{
             visible: !isMobile && persistentSettings.useRemoteNode
 
             TextArea {
-                color: MoneroComponents.Style.greyFontColor
+                color: MoneroComponents.Style.dimmedFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 15 * scaleRatio
                 horizontalAlignment: TextInput.AlignLeft

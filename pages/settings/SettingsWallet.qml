@@ -54,7 +54,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -145,7 +145,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -236,7 +236,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
@@ -325,7 +325,7 @@ Rectangle {
 
                 TextArea {
                     Layout.fillWidth: true
-                    color: MoneroComponents.Style.greyFontColor
+                    color: MoneroComponents.Style.dimmedFontColor
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14 * scaleRatio
                     horizontalAlignment: TextInput.AlignLeft
