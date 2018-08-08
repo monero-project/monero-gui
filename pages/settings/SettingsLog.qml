@@ -106,7 +106,7 @@ Rectangle {
                         appWindow.persistentSettings.logLevel = currentIndex;
                     }
                     Layout.fillWidth: true
-                    Layout.maximumWidth: logGrid.width / 2
+                    Layout.preferredWidth: logGrid.width / 2
                     shadowReleasedColor: "#FF4304"
                     shadowPressedColor: "#B32D00"
                     releasedColor: "#363636"
@@ -118,7 +118,7 @@ Rectangle {
                 id: logCategories
                 visible: persistentSettings.logLevel === 5
                 Layout.fillWidth: true
-                Layout.maximumWidth: logGrid.width / 2
+                Layout.preferredWidth: logGrid.width / 2
                 text: appWindow.persistentSettings.logCategories
                 placeholderText: "(e.g. *:WARNING,net.p2p:DEBUG)"
                 placeholderFontSize: 14 * scaleRatio
