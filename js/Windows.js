@@ -11,12 +11,11 @@ function setCustomWindowDecorations(custom) {
     var y = appWindow.y
     if (x < 0) x = 0
     if (y < 0) y = 0
-    
+
     // Update persistentSettings
     persistentSettings.customDecorations = custom;
 
     titleBar.visible = custom;
-    daemonConsolePopup.titleBar.visible = custom;
 
     if (custom) {
         appWindow.flags = flagsCustomDecorations;
@@ -25,7 +24,7 @@ function setCustomWindowDecorations(custom) {
         appWindow.flags = flags;
         daemonConsolePopup.flags = flags;
     }
-    
+
     // Reset window
     appWindow.hide()
     appWindow.x = x
