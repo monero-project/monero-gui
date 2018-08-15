@@ -133,6 +133,7 @@
         <file>lang/flags/ukraine.png</file>
         <file>lang/flags/lt.png</file>
         <file>lang/flags/hungary.png</file>
+        <file>lang/flags/finland.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
