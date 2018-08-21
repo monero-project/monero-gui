@@ -503,7 +503,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="433"/>
         <source>Mining</source>
-        <translation>Minado</translation>
+        <translation>Minería</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="434"/>
@@ -610,7 +610,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="61"/>
         <source>Solo mining</source>
-        <translation>Minado en solitario</translation>
+        <translation>Minería en solitario</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
@@ -640,12 +640,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="115"/>
         <source>Background mining (experimental)</source>
-        <translation>Minado en segundo plano (experimental)</translation>
+        <translation>Minería en segundo plano (experimental)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
-        <translation>Habilitar minado mientras la batería está en uso o se está usando</translation>
+        <translation>Habilitar minería mientras la batería está en uso o se está usando</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="137"/>
@@ -660,22 +660,22 @@
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
         <source>Error starting mining</source>
-        <translation>Error arrancando el proceso de minera</translation>
+        <translation>Error arrancando el proceso de minería</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="154"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>No se pudo empezar el proceso de minado.&lt;br&gt;</translation>
+        <translation>No se pudo empezar el proceso de minería.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>El minado solo está disponible en nodos locales. Arranque un daemon local para poder minar.&lt;br&gt;</translation>
+        <translation>La minería solo está disponible en nodos locales. Arranque un daemon local para poder minar.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
         <source>Stop mining</source>
-        <translation>Parar proceso de minado</translation>
+        <translation>Parar proceso de minería</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="180"/>
@@ -2108,12 +2108,12 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
         <source>Allow background mining?</source>
-        <translation>¿Permitir minado en segundo plano?</translation>
+        <translation>¿Permitir minería en segundo plano?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>La minería asegura la red de Monero y además paga una pequeña recompensa por el trabajo realizado. Esta opción permite que Monero mine mientras su computadora está ociosa. El minado se detendrá cuando continúe trabajando con ella.</translation>
+        <translation>La minería asegura la red de Monero y además paga una pequeña recompensa por el trabajo realizado. Esta opción permite que Monero mine mientras su computadora está ociosa. La Minería se detendrá cuando continúe trabajando con ella.</translation>
     </message>
 </context>
 <context>
@@ -2190,12 +2190,12 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
         <source>Allow background mining?</source>
-        <translation>¿Permitir minado en segundo plano?</translation>
+        <translation>¿Permitir minería en segundo plano?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>La minería asegura la red de Monero y además paga una pequeña recompensa por el trabajo realizado. Esta opción permite que Monero mine mientras su computadora está ociosa. El minado se detendrá cuando continúe trabajando con ella.</translation>
+        <translation>La minería asegura la red de Monero y además paga una pequeña recompensa por el trabajo realizado. Esta opción permite que Monero mine mientras su computadora está ociosa. La minería se detendrá cuando continúe trabajando con ella.</translation>
     </message>
 </context>
 <context>
