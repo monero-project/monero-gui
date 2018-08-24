@@ -149,42 +149,43 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> seleccionado: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Desde la fecha</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasta la fecha</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Or you could also use, &quot;clasificar&quot;.</translatorcomment>
+        <translation>Ordenar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Altura del bloque</translation>
+        <translation>Altura del bloque</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Fecha</translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin historial...</translation>
     </message>
 </context>
 <context>
@@ -352,7 +353,8 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>Semilla mnemotécnica</translation>
+        <translatorcomment>The translator @BlackLotus64 addressed the correct way of translating the word. Source http://dle.rae.es/?id=PRbUjYS</translatorcomment>
+        <translation>Semilla mnemónica</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="162"/>
@@ -367,7 +369,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTENCIA: No reuses tus llaves en otra bifurcación the Monero, A NO SER que esta bifurcación tenga incorporado las mitigaciones para el reuso de las llaves. Hacerlo perjudicará tu privacidad.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="169"/>
@@ -414,7 +416,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="262"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation>(Monedero de solo lectura -  No existe semilla mnemotécnica asociada)</translation>
+        <translation>(Monedero de solo lectura -  No existe semilla mnemónica asociada)</translation>
     </message>
 </context>
 <context>
@@ -571,12 +573,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="125"/>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="131"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copiado al portapapeles</translation>
+        <translation>Copiado al portapapeles</translation>
     </message>
 </context>
 <context>
@@ -620,7 +622,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>El daemon debe estar sincronizado antes de iniciar la minería</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
@@ -952,7 +954,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Este código QR incluye la dirección que seleccionaste anteriormente y la cantidad que ingresaste. Compártelo con otros (clic derecho-&gt;Guardar) para que puedan enviarte de manera fácil cantidades exactas.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="456"/>
@@ -973,7 +975,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Este es un simple rastreador de ventas:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Haz que tu cliente escanee el código QR (si tu cliente tiene la aplicación que soporte el escaneo de códigos QR) para realizar el pago.&lt;/p&gt;&lt;p&gt;Esta página escaneará automáticamente la blockchain y la transacción en la pool, por transacciónes recibidas utilizando este código QR. Si ingresas una cantidad, también validará la cantidad de transacciones que sumen esa cantidad.&lt;/p&gt;&lt;p&gt;Esta a tu disposición aceptar transacciones sin confirmar. Seguramente se confirmarán en ordenes cortas, pero existe una posibilidad que no, entonces para valores grandes es mejor esperar para una o dos confirmaciones.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="692"/>
@@ -1390,7 +1392,7 @@ La caché del monedero antiguo será renombrada y podrá ser restaurada más tar
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Para evitar anular la protección que brindan las firmas de circulo que ofrece Monero, un output no debe gastarse en diferentes blockchains con diferentes firmas. Aunque esto normalmente no es una preocupación, puede convertirse en una cuando un clon de Monero, que reusa las llaves, permite gastar ese output nuevamente. Si este es el caso, debes asegurar ese output use las mismas firmas de circulo en ambas cadenas.&lt;br&gt;Esto será realizado por Monero y cualquier aplicación de reuso de llaves que no este activamente tratando de estropear tu privacidad.&lt;br&gt;Si estas usando un clon de Monero que reuse las llaves y este clon no incluya esta protección, puedes asegurar la protección de las transacciones si gastas primero en el clon. Luego agrega manualmente la firma de anillo en esta página, que te permitirá gastar tus Monero de manera segura.&lt;br&gt;Si no utilizas un clon de Monero con estas características, entonces no debes hacer nada, ya que esto se hará de manera automática.&lt;br&gt;</translation>
     </message>
     <message>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you do spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
@@ -2328,7 +2330,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="184"/>
         <source>Restore from seed</source>
-        <translation>Restaurar desde semilla</translation>
+        <translation>Restaurar por semilla</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="194"/>
@@ -2376,7 +2378,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Escribir las 25 (o 24) palabras de la semilla mnemotécnica</translation>
+        <translation>Ingresa tu semilla mnemónica de 25 (o 24) palabras</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2409,7 +2411,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
     <message>
         <location filename="../wizard/WizardOptions.qml" line="183"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Restaurar monedero desde una llave o semilla mnemotécnica</translation>
+        <translation>Restaurar monedero desde una llave o semilla mnemónica</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="226"/>
@@ -2439,7 +2441,7 @@ Para el caso de pagos salientes, puedes obtener una &quot;Prueba de pago&quot; q
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation>Nota: Esta contraseña no puede ser recuperada. Si la olvida el monedero deberá ser restaurado con la semilla mnemotécnica de 25 palabras.&lt;br/&gt;&lt;br/&gt;
+        <translation>Nota: Esta contraseña no puede ser recuperada. Si la olvida el monedero deberá ser restaurado con la semilla mnemónica de 25 palabras.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Escriba una contraseña fuerte&lt;/b&gt; (usando letras, números y/o símbolos):</translation>
     </message>
 </context>
