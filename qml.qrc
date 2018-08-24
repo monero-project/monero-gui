@@ -96,44 +96,43 @@
         <file>wizard/WizardFinish.qml</file>
         <file>wizard/WizardPasswordInput.qml</file>
         <file>lang/languages.xml</file>
-        <file>lang/flags/bangladesh.png</file>
-        <file>lang/flags/brazil.png</file>
-        <file>lang/flags/china.png</file>
-        <file>lang/flags/croatia.png</file>
-        <file>lang/flags/czech.png</file>
-        <file>lang/flags/denmark.png</file>
-        <file>lang/flags/egypt.png</file>
-        <file>lang/flags/esperanto.png</file>
-        <file>lang/flags/finland.png</file>
-        <file>lang/flags/france.png</file>
-        <file>lang/flags/german.png</file>
-        <file>lang/flags/india.png</file>
-        <file>lang/flags/indonesia.png</file>
-        <file>lang/flags/israel.png</file>
-        <file>lang/flags/italy.png</file>
-        <file>lang/flags/japan.png</file>
-        <file>lang/flags/netherlands.png</file>
-        <file>lang/flags/palestine.png</file>
-        <file>lang/flags/poland.png</file>
-        <file>lang/flags/portugal.png</file> 
-        <file>lang/flags/romania.png</file>
-        <file>lang/flags/rpa.png</file>
-        <file>lang/flags/russia.png</file>
-        <file>lang/flags/slovakia.png</file>
-        <file>lang/flags/slovenia.png</file>
-        <file>lang/flags/south_korea.png</file>
-        <file>lang/flags/spain.png</file>
-        <file>lang/flags/sweden.png</file>
-        <file>lang/flags/taiwan.png</file>
-        <file>lang/flags/uk.png</file>
-        <file>lang/flags/usa.png</file>
-        <file>lang/flags/srbija.png</file>
+        <file>lang/flags/bd.png</file>
+        <file>lang/flags/br.png</file>
         <file>lang/flags/catalonia.png</file>
-        <file>lang/flags/tr.png</file>
-        <file>lang/flags/ukraine.png</file>
+        <file>lang/flags/cn.png</file>
+        <file>lang/flags/hr.png</file>
+        <file>lang/flags/hu.png</file>
+        <file>lang/flags/cz.png</file>
+        <file>lang/flags/dk.png</file>
+        <file>lang/flags/eg.png</file>
+        <file>lang/flags/esperanto.png</file>
+        <file>lang/flags/fi.png</file>
+        <file>lang/flags/fr.png</file>
+        <file>lang/flags/de.png</file>
+        <file>lang/flags/in.png</file>
+        <file>lang/flags/id.png</file>
+        <file>lang/flags/il.png</file>
+        <file>lang/flags/it.png</file>
+        <file>lang/flags/jp.png</file>
         <file>lang/flags/lt.png</file>
-        <file>lang/flags/hungary.png</file>
-        <file>lang/flags/finland.png</file>
+        <file>lang/flags/nl.png</file>
+        <file>lang/flags/ps.png</file>
+        <file>lang/flags/pl.png</file>
+        <file>lang/flags/pt.png</file>
+        <file>lang/flags/ro.png</file>
+        <file>lang/flags/ru.png</file>
+        <file>lang/flags/rs.png</file>
+        <file>lang/flags/sk.png</file>
+        <file>lang/flags/si.png</file>
+        <file>lang/flags/za.png</file>
+        <file>lang/flags/kr.png</file>
+        <file>lang/flags/es.png</file>
+        <file>lang/flags/se.png</file>
+        <file>lang/flags/tw.png</file>
+        <file>lang/flags/tr.png</file>
+        <file>lang/flags/ua.png</file>
+        <file>lang/flags/gb.png</file>
+        <file>lang/flags/us.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
