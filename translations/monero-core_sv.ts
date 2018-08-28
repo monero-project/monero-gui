@@ -499,7 +499,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="433"/>
         <source>Mining</source>
-        <translation>Brytning</translation>
+        <translation>Utvinning</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="434"/>
@@ -606,7 +606,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="61"/>
         <source>Solo mining</source>
-        <translation>Solo-brytning</translation>
+        <translation>Individuell utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
@@ -621,7 +621,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Brytning med din dator hjälper till att stärka Moneros nätverk. Ju fler som bryter desto svårare blir det att angripa nätverket, och varje litet bidrag hjälper till.&lt;br&gt; &lt;br&gt;Brytningen ger dig även möjlighet att tjäna lite Monero. Din dator letar då efter lösningar för block genom att skapa hashar. Om du hittar ett block får du motsvarande blockersättning. Lycka till!</translation>
+        <translation>Utvinning med din dator hjälper till att stärka Moneros nätverk. Ju fler som utvinner desto svårare blir det att angripa nätverket, och varje litet bidrag hjälper till.&lt;br&gt; &lt;br&gt;Utvinningen ger dig även möjlighet att tjäna lite Monero. Din dator letar då efter lösningar för block genom att skapa hashar. Om du hittar ett block får du motsvarande blockersättning. Lycka till!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -636,57 +636,57 @@
     <message>
         <location filename="../pages/Mining.qml" line="115"/>
         <source>Background mining (experimental)</source>
-        <translation>Bakgrundsbrytning (experimentell)</translation>
+        <translation>Bakgrundsutvinning (experimentell)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
-        <translation>Aktivera brytning vid batteridrift</translation>
+        <translation>Aktivera utvinning vid batteridrift</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="137"/>
         <source>Manage miner</source>
-        <translation>Hantera brytare</translation>
+        <translation>Hantera utvinnare</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="147"/>
         <source>Start mining</source>
-        <translation>Starta brytning</translation>
+        <translation>Starta utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
         <source>Error starting mining</source>
-        <translation>Ett fel uppstod vid start av brytning</translation>
+        <translation>Ett fel uppstod vid start av utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="154"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
-        <translation>Det gick inte att starta brytning.&lt;br&gt;</translation>
+        <translation>Det gick inte att starta utvinning.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Brytning är endast tillgänglig för lokala daemoner. Kör en lokal daemon för att kunna bryta.&lt;br&gt;</translation>
+        <translation>Utvinning är endast tillgänglig för lokala daemoner. Kör en lokal daemon för att kunna utvinna.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
         <source>Stop mining</source>
-        <translation>Stoppa brytning</translation>
+        <translation>Stoppa utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="180"/>
         <source>Status: not mining</source>
-        <translation>Status: ingen brytning</translation>
+        <translation>Status: ingen utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="192"/>
         <source>Mining at %1 H/s</source>
-        <translation>Bryter med %1 H/s</translation>
+        <translation>Utvinner med %1 H/s</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="195"/>
         <source>Not mining</source>
-        <translation>Ingen brytning</translation>
+        <translation>Ingen utvinning</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="197"/>
@@ -2098,12 +2098,12 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
         <source>Allow background mining?</source>
-        <translation>Tillåt bakgrundsbrytning?</translation>
+        <translation>Tillåt bakgrundsutvinning?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Brytningen säkrar Moneros nätverk, och betalar även en liten ersättning för det arbete som utförs. Detta alternativ låter Monero bryta när din dator är nätansluten men inaktiv. Brytningen stoppas när du fortsätter att arbeta igen.</translation>
+        <translation>Utvinningen säkrar Moneros nätverk, och betalar även en liten ersättning för det arbete som utförs. Detta alternativ låter Monero utvinna när din dator är nätansluten men inaktiv. Utvinningen stoppas när du fortsätter att arbeta igen.</translation>
     </message>
 </context>
 <context>
@@ -2180,12 +2180,12 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
         <source>Allow background mining?</source>
-        <translation>Tillåt bakgrundsbrytning?</translation>
+        <translation>Tillåt bakgrundsutvinning?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="190"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Brytningen säkrar Moneros nätverk, och betalar även en liten ersättning för det arbete som utförs. Detta alternativ låter Monero bryta när din dator är nätansluten men inaktiv. Brytningen stoppas när du fortsätter att arbeta igen.</translation>
+        <translation>Utvinningen säkrar Moneros nätverk, och betalar även en liten ersättning för det arbete som utförs. Detta alternativ låter Monero utvinna när din dator är nätansluten men inaktiv. Utvinningen stoppas när du fortsätter att arbeta igen.</translation>
     </message>
 </context>
 <context>
@@ -2678,7 +2678,7 @@ Index för spenderingsadress: </translation>
     <message>
         <location filename="../main.qml" line="864"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Denna adress tog emot %1 monero, med %2 bekräftelser.</translation>
+        <translation>Denna adress tog emot %1 Monero, med %2 bekräftelser.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="875"/>
@@ -2801,7 +2801,7 @@ Index för spenderingsadress: </translation>
     <message>
         <location filename="../main.qml" line="868"/>
         <source>This address received nothing</source>
-        <translation>Denna adress tog emot ingenting</translation>
+        <translation>Denna adress mottog ingenting</translation>
     </message>
     <message>
         <location filename="../main.qml" line="887"/>
