@@ -13,8 +13,10 @@ CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
     PKGCONFIG += libpcsclite
 }
-QMAKE_CXXFLAGS += -fPIC -fstack-protector
-QMAKE_LFLAGS += -fstack-protector
+!win32 {
+    QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
+    QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+}
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
@@ -130,8 +132,8 @@ android {
 
 
 
-QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
-QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
