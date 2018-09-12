@@ -162,7 +162,7 @@ Rectangle {
                       inlineButton.onClicked: amountLine.text = "(all)"
 
                       validator: RegExpValidator {
-                          regExp: /(\d{1,8})([.]\d{1,12})?$/
+                          regExp: /(.|)(\d{1,8})([.]\d{1,12})?$/
                       }
                   }
               }
@@ -337,7 +337,12 @@ Rectangle {
                   if(parseFloat(amountLine.text) > parseFloat(unlockedBalanceText)){
                       return false;
                   }
-                  
+
+                  // The amount does not start with a period (example: `.4`)
+                  if(amountLine.text.startsWith('.')){
+                      return false;
+                  }
+
                   return true;
               }
               onClicked: {
