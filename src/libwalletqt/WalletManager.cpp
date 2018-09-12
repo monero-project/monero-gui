@@ -104,6 +104,20 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
     return m_currentWallet;
 }
 
+Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString &password, NetworkType::Type nettype,
+                                              const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead)
+{
+    QMutexLocker locker(&m_mutex);
+    if (m_currentWallet) {
+        qDebug() << "Closing open m_currentWallet" << m_currentWallet;
+        delete m_currentWallet;
+        m_currentWallet = NULL;
+    }
+    Monero::Wallet * w = m_pimpl->createWalletFromDevice(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype),
+                                                         deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString());
+    m_currentWallet = new Wallet(w);
+    return m_currentWallet;
+}
 
 QString WalletManager::closeWallet()
 {

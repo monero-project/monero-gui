@@ -172,12 +172,18 @@ bool Wallet::store(const QString &path)
     return m_walletImpl->store(path.toStdString());
 }
 
-bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
+bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
 {
     qDebug() << "init non async";
     if (isRecovering){
         qDebug() << "RESTORING";
         m_walletImpl->setRecoveringFromSeed(true);
+    }
+    if (isRecoveringFromDevice){
+        qDebug() << "RESTORING FROM DEVICE";
+        m_walletImpl->setRecoveringFromDevice(true);
+    }
+    if (isRecovering || isRecoveringFromDevice) {
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
     m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
@@ -191,7 +197,7 @@ void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemon
     m_daemonPassword = daemonPassword;
 }
 
-void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, quint64 restoreHeight)
+void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
 {
     qDebug() << "initAsync: " + daemonAddress;
     // Change status to disconnected if connected
@@ -201,7 +207,7 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
     }
 
     QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
-                                  daemonAddress, upperTransactionLimit, isRecovering, restoreHeight);
+                                  daemonAddress, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
     QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
 
     connect(watcher, &QFutureWatcher<bool>::finished,

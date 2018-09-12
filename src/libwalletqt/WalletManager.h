@@ -62,6 +62,12 @@ public:
                                               const QString &spendkey = "",
                                               quint64 restoreHeight = 0);
 
+    Q_INVOKABLE Wallet * createWalletFromDevice(const QString &path,
+                                                const QString &password,
+                                                NetworkType::Type nettype,
+                                                const QString &deviceName,
+                                                quint64 restoreHeight = 0,
+                                                const QString &subaddressLookahead = "");
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address

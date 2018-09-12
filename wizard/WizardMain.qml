@@ -54,6 +54,7 @@ ColumnLayout {
         "create_wallet" : [welcomePage, optionsPage, createWalletPage, passwordPage, daemonSettingsPage, finishPage ],
         "recovery_wallet" : [welcomePage, optionsPage, recoveryWalletPage, passwordPage, daemonSettingsPage, finishPage ],
         "create_view_only_wallet" : [ createViewOnlyWalletPage, passwordPage ],
+        "create_wallet_from_device" : [welcomePage, optionsPage, createWalletFromDevicePage, passwordPage, daemonSettingsPage, finishPage ],
 
     }
     property string currentPath: "create_wallet"
@@ -162,6 +163,16 @@ ColumnLayout {
         rootItem.state = "wizard";
     }
 
+    function openCreateWalletFromDevicePage() {
+        wizardRestarted();
+        print ("show create wallet from device page");
+        currentPath = "create_wallet_from_device"
+        pages = paths[currentPath]
+        wizard.nextButton.visible = true
+        // goto next page
+        switchPage(true);
+    }
+
     function createWalletPath(folder_path,account_name){
 
         // Remove trailing slash - (default on windows and mac)
@@ -233,6 +244,7 @@ ColumnLayout {
         appWindow.persistentSettings.auto_donations_amount = false //settings.auto_donations_amount
         appWindow.persistentSettings.restore_height = (isNaN(settings.restore_height))? 0 : settings.restore_height
         appWindow.persistentSettings.is_recovering = (settings.is_recovering === undefined)? false : settings.is_recovering
+        appWindow.persistentSettings.is_recovering_from_device = (settings.is_recovering_from_device === undefined)? false : settings.is_recovering_from_device
     }
 
     // reading settings from persistent storage
@@ -263,6 +275,7 @@ ColumnLayout {
         onCreateWalletClicked: wizard.openCreateWalletPage()
         onRecoveryWalletClicked: wizard.openRecoveryWalletPage()
         onOpenWalletClicked: wizard.openOpenWalletPage();
+        onCreateWalletFromDeviceClicked: wizard.openCreateWalletFromDevicePage()
     }
 
     WizardCreateWallet {
@@ -279,6 +292,12 @@ ColumnLayout {
 
     WizardRecoveryWallet {
         id: recoveryWalletPage
+        Layout.bottomMargin: wizardBottomMargin
+        Layout.topMargin: wizardTopMargin
+    }
+
+    WizardCreateWalletFromDevice {
+        id: createWalletFromDevicePage
         Layout.bottomMargin: wizardBottomMargin
         Layout.topMargin: wizardTopMargin
     }
