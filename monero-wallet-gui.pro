@@ -118,6 +118,7 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lepee \
         -lunbound \
         -leasylogging \
+        -lsodium \
 }
 
 android {
@@ -162,6 +163,7 @@ ios {
         -lssl \
         -lcrypto \
         -ldl
+        -lsodium
 }
 
 CONFIG(WITH_SCANNER) {
@@ -290,7 +292,8 @@ linux {
         -lboost_program_options \
         -lssl \
         -llmdb \
-        -lcrypto
+        -lcrypto \
+        -lsodium
 
     if(!android) {
         LIBS+= \
@@ -329,7 +332,8 @@ macx {
         -lboost_program_options \
         -lssl \
         -lcrypto \
-        -ldl
+        -ldl \
+        -lsodium
     LIBS+= -framework PCSC
 
     QMAKE_LFLAGS += -pie
