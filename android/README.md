@@ -5,20 +5,18 @@ Copyright (c) 2014-2018, The Monero Project
 
  - Minimum Android 5.0 (api level 21)
  - Modal dialogs can appear in background giving the feeling that the application is frozen (Work around : turn screen off/on or switch to another app and back)
+ - Can't access menu
 
 ## Build using Docker
 
 # Base environnement
 
-        cd monero/utils/build_scripts
-        docker build -f android32.Dockerfile -t monero-android .
-        cd ..
+        docker build -f utils/build_scripts/android32.Dockerfile -t monero:android monero
 
 # Build GUI
 
-        cd android/docker
-        docker build -t monero-gui-android .
-        docker create -it --name monero-gui-android monero-gui-android bash
+        docker build -t monero:gui-android -f android/docker/Dockerfile --build-arg IMAGE_FROM=monero:android .
+        docker create -it --name monero-gui-android monero:gui-android bash
 
 # Get the apk
 
