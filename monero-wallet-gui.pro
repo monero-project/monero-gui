@@ -96,6 +96,7 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
+          pages/settings/*.qml \
           wizard/*.qml \
           wizard/*js
 }
