@@ -19,7 +19,6 @@
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
         <file>pages/Mining.qml</file>
-        <file>pages/Settings.qml</file>
         <file>components/NetworkStatusItem.qml</file>
         <file>images/statusConnected.png</file>
         <file>images/statusDisconnected.png</file>
@@ -86,9 +85,11 @@
         <file>images/prevPage.png</file>
         <file>wizard/WizardOptions.qml</file>
         <file>images/createWallet.png</file>
+        <file>images/createWalletFromDevice.png</file>
         <file>images/openAccount.png</file>
         <file>images/recoverWallet.png</file>
         <file>wizard/WizardCreateWallet.qml</file>
+        <file>wizard/WizardCreateWalletFromDevice.qml</file>
         <file>images/greyTriangle.png</file>
         <file>images/copyToClipboard.png</file>
         <file>wizard/WizardPassword.qml</file>
@@ -97,41 +98,43 @@
         <file>wizard/WizardFinish.qml</file>
         <file>wizard/WizardPasswordInput.qml</file>
         <file>lang/languages.xml</file>
-        <file>lang/flags/bangladesh.png</file>
-        <file>lang/flags/brazil.png</file>
-        <file>lang/flags/china.png</file>
-        <file>lang/flags/croatia.png</file>
-        <file>lang/flags/czech.png</file>
-        <file>lang/flags/denmark.png</file>
-        <file>lang/flags/egypt.png</file>
-        <file>lang/flags/esperanto.png</file>
-        <file>lang/flags/finland.png</file>
-        <file>lang/flags/france.png</file>
-        <file>lang/flags/german.png</file>
-        <file>lang/flags/india.png</file>
-        <file>lang/flags/indonesia.png</file>
-        <file>lang/flags/israel.png</file>
-        <file>lang/flags/italy.png</file>
-        <file>lang/flags/japan.png</file>
-        <file>lang/flags/netherlands.png</file>
-        <file>lang/flags/palestine.png</file>
-        <file>lang/flags/poland.png</file>
-        <file>lang/flags/portugal.png</file> 
-        <file>lang/flags/romania.png</file>
-        <file>lang/flags/rpa.png</file>
-        <file>lang/flags/russia.png</file>
-        <file>lang/flags/slovakia.png</file>
-        <file>lang/flags/slovenia.png</file>
-        <file>lang/flags/south_korea.png</file>
-        <file>lang/flags/spain.png</file>
-        <file>lang/flags/sweden.png</file>
-        <file>lang/flags/taiwan.png</file>
-        <file>lang/flags/uk.png</file>
-        <file>lang/flags/usa.png</file>
-        <file>lang/flags/srbija.png</file>
+        <file>lang/flags/bd.png</file>
+        <file>lang/flags/br.png</file>
         <file>lang/flags/catalonia.png</file>
+        <file>lang/flags/cn.png</file>
+        <file>lang/flags/hr.png</file>
+        <file>lang/flags/hu.png</file>
+        <file>lang/flags/cz.png</file>
+        <file>lang/flags/dk.png</file>
+        <file>lang/flags/eg.png</file>
+        <file>lang/flags/esperanto.png</file>
+        <file>lang/flags/fi.png</file>
+        <file>lang/flags/fr.png</file>
+        <file>lang/flags/de.png</file>
+        <file>lang/flags/in.png</file>
+        <file>lang/flags/id.png</file>
+        <file>lang/flags/il.png</file>
+        <file>lang/flags/it.png</file>
+        <file>lang/flags/jp.png</file>
+        <file>lang/flags/lt.png</file>
+        <file>lang/flags/nl.png</file>
+        <file>lang/flags/ps.png</file>
+        <file>lang/flags/pl.png</file>
+        <file>lang/flags/pt.png</file>
+        <file>lang/flags/ro.png</file>
+        <file>lang/flags/ru.png</file>
+        <file>lang/flags/rs.png</file>
+        <file>lang/flags/sk.png</file>
+        <file>lang/flags/si.png</file>
+        <file>lang/flags/za.png</file>
+        <file>lang/flags/kr.png</file>
+        <file>lang/flags/es.png</file>
+        <file>lang/flags/se.png</file>
+        <file>lang/flags/tw.png</file>
         <file>lang/flags/tr.png</file>
-        <file>lang/flags/ukraine.png</file>
+        <file>lang/flags/ua.png</file>
+        <file>lang/flags/gb.png</file>
+        <file>lang/flags/us.png</file>
         <file>wizard/WizardManageWalletUI.qml</file>
         <file>wizard/WizardRecoveryWallet.qml</file>
         <file>wizard/WizardMemoTextInput.qml</file>
@@ -176,10 +179,10 @@
         <file>images/titlebarLogo.png</file>
         <file>images/menuArrow.png</file>
         <file>images/menuButtonGradient.png</file>
-        <file>fonts/SFUIDisplay-Medium.otf</file>
-        <file>fonts/SFUIDisplay-Regular.otf</file>
-        <file>fonts/SFUIDisplay-Light.otf</file>
-        <file>fonts/SFUIDisplay-Bold.otf</file>
+        <file>fonts/Roboto-Medium.ttf</file>
+        <file>fonts/Roboto-Regular.ttf</file>
+        <file>fonts/Roboto-Light.ttf</file>
+        <file>fonts/Roboto-Bold.ttf</file>
         <file>components/Style.qml</file>
         <file>components/qmldir</file>
         <file>components/InlineButton.qml</file>
@@ -208,5 +211,17 @@
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
         <file>images/editIcon.png</file>
+        <file>pages/settings/Settings.qml</file>
+        <file>pages/settings/SettingsWallet.qml</file>
+        <file>pages/settings/SettingsNode.qml</file>
+        <file>pages/settings/SettingsLog.qml</file>
+        <file>pages/settings/SettingsLayout.qml</file>
+        <file>pages/settings/SettingsInfo.qml</file>
+        <file>pages/settings/Navbar.qml</file>
+        <file>images/settings_remote.png</file>
+        <file>images/settings_navbar_side.png</file>
+        <file>images/settings_navbar_side_active.png</file>
+        <file>images/settings_local.png</file>
+        <file>components/WarningBox.qml</file>
     </qresource>
 </RCC>

@@ -57,7 +57,7 @@ Rectangle {
         var nfields = 0
         s += current_address;
         var amount = amountToReceiveLine.text.trim()
-        if (amount !== "") {
+        if (amount !== "" && amount.slice(-1) !== ".") {
           s += (nfields++ ? "&" : "?")
           s += "tx_amount=" + amount
         }
@@ -433,7 +433,7 @@ Rectangle {
                     onLinkActivated: {
                         receivePageDialog.title  = qsTr("QR Code") + translationManager.emptyString;
                         receivePageDialog.text = qsTr(
-                            "<p>This QR code includes the address you selected above and" +
+                            "<p>This QR code includes the address you selected above and " +
                             "the amount you entered below. Share it with others (right-click->Save) " +
                             "so they can more easily send you exact amounts.</p>"
                         )
@@ -456,12 +456,8 @@ Rectangle {
                         placeholderText: qsTr("Amount to receive") + translationManager.emptyString
                         fontBold: true
                         inlineIcon: true
-                        validator: DoubleValidator {
-                            bottom: 0.0
-                            top: 18446744.073709551615
-                            decimals: 12
-                            notation: DoubleValidator.StandardNotation
-                            locale: "C"
+                        validator: RegExpValidator {
+                            regExp: /(\d{1,8})([.]\d{1,12})?$/
                         }
                     }
                 }
@@ -529,7 +525,7 @@ Rectangle {
                             "<p>This page will automatically scan the blockchain and the tx pool " +
                             "for incoming transactions using this QR code. If you input an amount, it will also check " +
                             "that incoming transactions total up to that amount.</p>" +
-                            "It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
+                            "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
                             "confirmed in short order, but there is still a possibility they might not, so for larger " +
                             "values you may want to wait for one or more confirmation(s).</p>"
                         )

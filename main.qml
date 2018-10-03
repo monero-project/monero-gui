@@ -40,6 +40,7 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "wizard"
+import "../js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 
 ApplicationWindow {
@@ -102,13 +103,13 @@ ApplicationWindow {
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
         else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
-        else if(seq === "Ctrl+S") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
         else if(seq === "Ctrl+M") middlePanel.state = "Mining"
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
-        else if(seq === "Ctrl+A") middlePanel.state = "SharedRingDB"
+        else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+Y") leftPanel.keysClicked()
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
@@ -222,6 +223,9 @@ ApplicationWindow {
         if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
+            if (persistentSettings.restore_height == 0 && persistentSettings.is_recovering_from_device && walletManager.localDaemonSynced()) {
+                persistentSettings.restore_height = walletManager.blockchainHeight() - 1;
+            }
             if(persistentSettings.restore_height > 0){
                 // We store restore height in own variable for performance reasons.
                 restoreHeight = persistentSettings.restore_height
@@ -331,7 +335,9 @@ ApplicationWindow {
             currentDaemonAddress = localDaemonAddress
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
-        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.is_recovering_from_device, persistentSettings.restore_height);
+        // save wallet keys in case wallet settings have been changed in the init
+        currentWallet.setPassword(walletPassword);
     }
 
     function walletPath() {
@@ -357,6 +363,10 @@ ApplicationWindow {
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
+
+        // update local daemon status.
+        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address))
+            daemonRunning = status;
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
@@ -1010,6 +1020,7 @@ ApplicationWindow {
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
+        property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
@@ -1295,6 +1306,25 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             height: visible? 65 * scaleRatio : 0
+
+            MouseArea {
+                enabled: persistentSettings.customDecorations
+                property var previousPosition
+                anchors.fill: parent
+                propagateComposedEvents: true
+                onPressed: previousPosition = globalCursor.getPosition()
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var pos = globalCursor.getPosition()
+                        var dx = pos.x - previousPosition.x
+                        var dy = pos.y - previousPosition.y
+
+                        appWindow.x += dx
+                        appWindow.y += dy
+                        previousPosition = pos
+                    }
+                }
+            }
         }
 
         LeftPanel {
@@ -1314,7 +1344,6 @@ ApplicationWindow {
             onTransferClicked: {
                 middlePanel.state = "Transfer";
                 middlePanel.flickable.contentY = 0;
-                mainFlickable.contentY = 0;
                 if(isMobile) {
                     hideMenu();
                 }
@@ -1393,31 +1422,7 @@ ApplicationWindow {
                 updateBalance();
             }
 
-            onKeysClicked: {
-                passwordDialog.onAcceptedCallback = function() {
-                    if(walletPassword === passwordDialog.password){
-                        if(currentWallet.seedLanguage == "") {
-                            console.log("No seed language set. Using English as default");
-                            currentWallet.setSeedLanguage("English");
-                        }
-                        // Load keys page
-                        middlePanel.state = "Keys"
-                    } else {
-                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                        informationPopup.text = qsTr("Wrong password");
-                        informationPopup.open()
-                        informationPopup.onCloseCallback = function() {
-                            passwordDialog.open()
-                        }
-                    }
-                }
-                passwordDialog.onRejectedCallback = function() {
-                    appWindow.showPageRequest("Settings");
-                }
-                passwordDialog.open();
-                if(isMobile) hideMenu();
-                updateBalance();
-            }
+            onKeysClicked: Utils.showSeedPage();
         }
 
         RightPanel {
@@ -1609,7 +1614,7 @@ ApplicationWindow {
             showMoneroLogo: true
             onCloseClicked: appWindow.close();
             onMaximizeClicked: {
-                appWindow.visibility = appWindow.visibility !== Window.FullScreen ? Window.FullScreen :
+                appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized :
                                                                                     Window.Windowed
             }
             onMinimizeClicked: appWindow.visibility = Window.Minimized

@@ -44,6 +44,7 @@ ColumnLayout {
     property alias wordsTextItem : memoTextItem
     property alias restoreHeight : restoreHeightItem.text
     property alias restoreHeightVisible: restoreHeightItem.visible
+    property alias subaddressLookahead : subaddressLookaheadItem.text
     property alias walletName : accountName.text
     property alias progressDotsModel : progressDots.model
     property alias recoverFromKeysAddress: addressLine.text;
@@ -53,11 +54,15 @@ ColumnLayout {
     property bool recoverMode: false
     // Recover form seed or keys
     property bool recoverFromSeedMode: true
+    // Recover form hardware device
+    property bool recoverFromDevice: false
+    property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
+    property alias deviceNameDropdown: deviceNameDropdown
     property int rowSpacing: 10
 
     function checkFields(){
-        var addressOK = walletManager.addressValid(addressLine.text, persistentSettings.nettype)
-        var viewKeyOK = walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype)
+        var addressOK = (viewKeyLine.text.length > 0 || spendKeyLine.text.length > 0)? walletManager.addressValid(addressLine.text, persistentSettings.nettype) : false
+        var viewKeyOK = (viewKeyLine.text.length > 0)? walletManager.keyValid(viewKeyLine.text, addressLine.text, true, persistentSettings.nettype) : true
         // Spendkey is optional
         var spendKeyOK = (spendKeyLine.text.length > 0)? walletManager.keyValid(spendKeyLine.text, addressLine.text, false, persistentSettings.nettype) : true
 
@@ -215,7 +220,7 @@ ColumnLayout {
     // Recover from seed
     RowLayout {
         id: recoverFromSeed
-        visible: !recoverMode || ( recoverMode && recoverFromSeedMode)
+        visible: !recoverFromDevice && (!recoverMode || ( recoverMode && recoverFromSeedMode))
         WizardMemoTextInput {
             id : memoTextItem
             Layout.fillWidth: true
@@ -303,9 +308,56 @@ ColumnLayout {
             fontBold: false
         }
     }
+    
+    // Subaddress lookahead
+    RowLayout {
+        visible: recoverFromDevice
+        LineEdit {
+            id: subaddressLookaheadItem
+            Layout.fillWidth: true
+            Layout.maximumWidth: 600 * scaleRatio
+            Layout.minimumWidth: 200 * scaleRatio
+            placeholderFontBold: true
+            placeholderFontFamily: "Arial"
+            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderText: qsTr("Subaddress lookahead (optional): <major>:<minor>") + translationManager.emptyString
+            placeholderOpacity: 1.0
+            borderColor: Qt.rgba(0, 0, 0, 0.15)
+            backgroundColor: "white"
+            fontColor: "black"
+            fontBold: false
+        }
+    }
+
+    // Device name
+    ColumnLayout {
+        visible: recoverFromDevice
+        Label {
+            Layout.topMargin: 20 * scaleRatio
+            fontFamily: "Arial"
+            fontColor: "#555555"
+            fontSize: 14 * scaleRatio
+            text:  qsTr("Device name") + translationManager.emptyString
+        }
+        ListModel {
+            id: deviceNameModel
+            ListElement { column1: qsTr("Ledger") ; column2: "Ledger"; }
+//            ListElement { column1: qsTr("Trezor") ; column2: "Trezor"; }
+        }
+        StandardDropdown {
+            id: deviceNameDropdown
+            dataModel: deviceNameModel
+            Layout.fillWidth: true
+            Layout.topMargin: 6
+            colorHeaderBackground: "black"
+            releasedColor: "#363636"
+            pressedColor: "#202020"
+        }
+    }
 
     // Wallet store location
     ColumnLayout {
+        z: deviceNameDropdown.z - 1
         Label {
             Layout.fillWidth: true
             Layout.topMargin: 20 * scaleRatio

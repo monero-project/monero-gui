@@ -150,9 +150,9 @@ Window {
                         textArea.append(_timestamp + " " + _msg);
 
                         // scroll to bottom
-                        if(flickable.contentHeight > content.height){
-                            flickable.contentY = flickable.contentHeight + 20;
-                        }
+                        //if(flickable.contentHeight > content.height){
+                        //    flickable.contentY = flickable.contentHeight + 20;
+                        //}
                     }
                 }
 

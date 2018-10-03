@@ -32,31 +32,25 @@ import QtQuick 2.7
 import "../js/TxUtils.js" as TxUtils
 import "../components" as MoneroComponents
 
-
 TextArea {
-    property bool error: false
-    property bool addressValidation: false
-    property bool wrapAnywhere: true
     property int fontSize: 18 * scaleRatio
     property bool fontBold: false
+    property string fontColor: MoneroComponents.Style.defaultFontColor
+
+    property bool mouseSelection: true
+    property bool error: false
+    property bool addressValidation: false
 
     id: textArea
     font.family: MoneroComponents.Style.fontRegular.name
+    color: fontColor
     font.pixelSize: fontSize
     font.bold: fontBold
     horizontalAlignment: TextInput.AlignLeft
-    selectByMouse: true
-    color: MoneroComponents.Style.defaultFontColor
+    selectByMouse: mouseSelection
     selectionColor: MoneroComponents.Style.dimmedFontColor
     selectedTextColor: MoneroComponents.Style.defaultFontColor
 
-    wrapMode: {
-        if(wrapAnywhere){
-            return Text.WrapAnywhere;
-        } else {
-            return Text.WordWrap;
-        }
-    }
     onTextChanged: {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`

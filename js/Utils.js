@@ -27,3 +27,30 @@ function formatDate( date, params ) {
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+function showSeedPage() {
+    // Shows `Settings->Seed & keys`. Prompts a password dialog.
+    passwordDialog.onAcceptedCallback = function() {
+        if(walletPassword === passwordDialog.password){
+            if(currentWallet.seedLanguage == "") {
+                console.log("No seed language set. Using English as default");
+                currentWallet.setSeedLanguage("English");
+            }
+            // Load keys page
+            appWindow.showPageRequest("Keys");
+        } else {
+            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text = qsTr("Wrong password");
+            informationPopup.open()
+            informationPopup.onCloseCallback = function() {
+                passwordDialog.open()
+            }
+        }
+    }
+    passwordDialog.onRejectedCallback = function() {
+        leftPanel.selectItem(middlePanel.state);
+    }
+    passwordDialog.open();
+    if(isMobile) hideMenu();
+    updateBalance();
+}

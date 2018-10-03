@@ -17,39 +17,42 @@ Deutsch		(German)
 Esperanto
 Lojban
 -->
-        <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/usa.png" qs="none"/>
-        <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/uk.png" qs="none"/> -->
-        <!-- <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/rpa.png" qs="none"/> -->
-        <!-- <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/palestine.png" qs="none"/> -->
-        <language display_name="Deutsch" locale="de_DE" wallet_language="Deutsch" flag="/lang/flags/german.png" qs="none"/>
+        <language display_name="English (US)" locale="en_US" wallet_language="English" flag="/lang/flags/us.png" qs="none"/>
+        <!-- <language display_name="English (GB)" locale="en_GB" wallet_language="English" flag="/lang/flags/gb.png" qs="none"/> -->
+        <!-- <language display_name="English (ZA)" locale="en_SA" wallet_language="English" flag="/lang/flags/za.png" qs="none"/> -->
+        <!-- <language display_name="العربية (PS)" locale="ar_PS" wallet_language="English" flag="/lang/flags/ps.png" qs="none"/> -->
+        <language display_name="Deutsch" locale="de_DE" wallet_language="Deutsch" flag="/lang/flags/de.png" qs="none"/>
         <language display_name="Esperanto" locale="eo" wallet_language="Esperanto" flag="/lang/flags/esperanto.png" qs="none"/>
-        <language display_name="Español" locale="es_ES" wallet_language="Español" flag="/lang/flags/spain.png" qs="none"/>
-        <!-- <language display_name="Suomen kieli" locale="fi" wallet_language="English" flag="/lang/flags/finland.png" qs="none"/> -->
-        <language display_name="Français" locale="fr_FR" wallet_language="Français" flag="/lang/flags/france.png" qs="none"/>
-        <language display_name="Svenska" locale="sv_SE" wallet_language="English" flag="/lang/flags/sweden.png" qs="none"/>
-        <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/croatia.png" qs="none"/>
-        <!-- <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/india.png" qs="none"/> -->
-        <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/indonesia.png" qs="none"/>
-        <language display_name="Italiano" locale="it_IT" wallet_language="Italiano" flag="/lang/flags/italy.png" qs="none"/>
-        <language display_name="日本語" locale="ja_JP" wallet_language="日本語" flag="/lang/flags/japan.png" qs="none"/>
-        <language display_name="Nederlands" locale="nl_NL" wallet_language="Nederlands" flag="/lang/flags/netherlands.png" qs="none"/>
-        <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/>
-        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/poland.png" qs="none"/> -->
-        <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/portugal.png" qs="none"/>
-        <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/brazil.png" qs="none"/>
-        <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/russia.png" qs="none"/>
-        <language display_name="简体中文 (中国)" locale="zh-cn_CN" wallet_language="简体中文 (中国)" flag="/lang/flags/china.png" qs="none"/>
-        <language display_name="繁體中文 (台灣)" locale="zh-tw_CN" wallet_language="English" flag="/lang/flags/taiwan.png" qs="none"/>
-        <language display_name="עברית" locale="he_HE" wallet_language="English" flag="/lang/flags/israel.png" qs="none"/>
-        <language display_name="한국어" locale="ko_KO" wallet_language="English" flag="/lang/flags/south_korea.png" qs="none"/>
-        <language display_name="Română" locale="ro_RO" wallet_language="English" flag="/lang/flags/romania.png" qs="none"/>
-        <language display_name="Dansk" locale="da_DK" wallet-language="English" flag="/lang/flags/denmark.png" qs="none"/>
-        <language display_name="Česky" locale="cs_CZ" wallet_language="English" flag="/lang/flags/czech.png" qs="none"/>
-        <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/slovakia.png" qs="none"/>
-        <language display_name="العربية" locale="ar_AR" wallet_language="English" flag="/lang/flags/egypt.png" qs="none"/>
-        <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/slovenia.png" qs="none"/>
-        <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/srbija.png" qs="none"/>
+        <language display_name="Español" locale="es_ES" wallet_language="Español" flag="/lang/flags/es.png" qs="none"/>
+        <language display_name="Français" locale="fr_FR" wallet_language="Français" flag="/lang/flags/fr.png" qs="none"/>
+        <language display_name="Svenska" locale="sv_SE" wallet_language="English" flag="/lang/flags/se.png" qs="none"/>
+        <language display_name="Hrvatski" locale="hr_HR" wallet_language="English" flag="/lang/flags/hr.png" qs="none"/>
+        <language display_name="Magyar" locale="hu_HU" wallet_language="Hungarian" flag="/lang/flags/hu.png" qs="none"/>
+        <!-- <language display_name="हिन्दी" locale="hi_IN" wallet_language="English" flag="/lang/flags/in.png" qs="none"/> -->
+        <language display_name="Bahasa Indonesia" locale="id_ID" wallet_language="English" flag="/lang/flags/id.png" qs="none"/>
+        <language display_name="Italiano" locale="it_IT" wallet_language="Italiano" flag="/lang/flags/it.png" qs="none"/>
+        <language display_name="日本語" locale="ja_JP" wallet_language="日本語" flag="/lang/flags/jp.png" qs="none"/>
+        <language display_name="Nederlands" locale="nl_NL" wallet_language="Nederlands" flag="/lang/flags/nl.png" qs="none"/>
+        <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/pl.png" qs="none"/>
+        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/pl.png" qs="none"/> -->
+        <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/pt.png" qs="none"/>
+        <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/br.png" qs="none"/>
+        <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/ru.png" qs="none"/>
+        <language display_name="简体中文 (中国)" locale="zh-cn_CN" wallet_language="简体中文 (中国)" flag="/lang/flags/cn.png" qs="none"/>
+        <language display_name="繁體中文 (台灣)" locale="zh-tw_CN" wallet_language="English" flag="/lang/flags/tw.png" qs="none"/>
+        <language display_name="עברית" locale="he_HE" wallet_language="English" flag="/lang/flags/il.png" qs="none"/>
+        <language display_name="한국어" locale="ko_KO" wallet_language="English" flag="/lang/flags/kr.png" qs="none"/>
+        <language display_name="Română" locale="ro_RO" wallet_language="English" flag="/lang/flags/ro.png" qs="none"/>
+        <language display_name="Dansk" locale="da_DK" wallet-language="English" flag="/lang/flags/dk.png" qs="none"/>
+        <language display_name="Česky" locale="cs_CZ" wallet_language="English" flag="/lang/flags/cz.png" qs="none"/>
+        <language display_name="Slovensky" locale="sk_SK" wallet_language="English" flag="/lang/flags/sk.png" qs="none"/>
+        <language display_name="العربية" locale="ar_AR" wallet_language="English" flag="/lang/flags/eg.png" qs="none"/>
+        <language display_name="Slovenski" locale="sl_SI" wallet_language="English" flag="/lang/flags/si.png" qs="none"/>
+        <language display_name="Srpski" locale="rs_RS" wallet_language="English" flag="/lang/flags/rs.png" qs="none"/>
         <language display_name="Català" locale="cat_ES" wallet_language="English" flag="/lang/flags/catalonia.png" qs="none"/>
         <language display_name="Türkçe" locale="tr_TR" wallet_language="English" flag="/lang/flags/tr.png" qs="none"/>
-        <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ukraine.png" qs="none"/>
+        <language display_name="Українська" locale="uk_UA" wallet_language="English" flag="/lang/flags/ua.png" qs="none"/>
+        <language display_name="Lietuvių" locale="lt_LT" wallet_language="English" flag="/lang/flags/lt.png" qs="none"/>
+        <language display_name="Suomi" locale="fi_FI" wallet_language="English" flag="/lang/flags/fi.png" qs="none"/>
+        <language display_name="Pirate" locale="prt" wallet_language="English" flag="/lang/flags/pirate.png" qs="none"/>
 </languages>

@@ -1,3 +1,8 @@
+# qml components require at least QT 5.7.0
+lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
+  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.7.0")
+}
+
 TEMPLATE = app
 
 QT += qml quick widgets
@@ -8,8 +13,10 @@ CONFIG += c++11 link_pkgconfig
 packagesExist(libpcsclite) {
     PKGCONFIG += libpcsclite
 }
-QMAKE_CXXFLAGS += -fPIC -fstack-protector
-QMAKE_LFLAGS += -fstack-protector
+!win32 {
+    QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
+    QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+}
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
@@ -89,6 +96,7 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
+          pages/settings/*.qml \
           wizard/*.qml \
           wizard/*js
 }
@@ -125,8 +133,8 @@ android {
 
 
 
-QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
-QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
@@ -240,6 +248,7 @@ win32 {
         -lssl \
         -lcrypto \
         -Wl,-Bdynamic \
+        -lwinscard \
         -lws2_32 \
         -lwsock32 \
         -lIphlpapi \

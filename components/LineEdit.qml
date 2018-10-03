@@ -50,6 +50,8 @@ Item {
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
+
+    property bool borderDisabled: false
     property string borderColor: {
         if(input.activeFocus){
             return MoneroComponents.Style.inputBorderColorActive;
@@ -57,9 +59,8 @@ Item {
             return MoneroComponents.Style.inputBorderColorInActive;
         }
     }
-    property bool borderDisabled: false
+
     property int fontSize: 18 * scaleRatio
-    property bool showBorder: true
     property bool fontBold: false
     property alias fontColor: input.color
     property bool error: false
@@ -140,6 +141,7 @@ Item {
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
         anchors.topMargin: showingHeader ? 12 * scaleRatio : 2 * scaleRatio
         width: parent.width
+        clip: true
 
         Text {
             id: placeholderLabel
@@ -194,12 +196,14 @@ Item {
         MoneroComponents.Input {
             id: input
             anchors.fill: parent
-            anchors.leftMargin: inlineIcon.visible ? 38 : 0
+            anchors.leftMargin: inlineIcon.visible ? 44 * scaleRatio : 0
             font.pixelSize: item.fontSize
             font.bold: item.fontBold
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()
+            topPadding: 10 * scaleRatio
+            bottomPadding: 10 * scaleRatio
         }
 
         MoneroComponents.InlineButton {

@@ -72,6 +72,7 @@ Rectangle {
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
+        else if(pos === "Keys") menuColumn.previousButton = keysButton
 
         menuColumn.previousButton.checked = true
     }
@@ -478,7 +479,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Shared RingDB") + translationManager.emptyString
-                symbol: qsTr("A") + translationManager.emptyString
+                symbol: qsTr("G") + translationManager.emptyString
                 dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {

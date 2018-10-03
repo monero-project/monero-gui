@@ -50,6 +50,15 @@ Rectangle {
         return true
     }
 
+    function validUnsigned(s) {
+        if (s.length == 0)
+            return false
+        for (var i = 0; i < s.length; ++i)
+            if ("0123456789".indexOf(s[i]) == -1)
+                return false
+        return true
+    }
+
     function validRing(str, relative) {
         var outs = str.split(" ");
         if (outs.length == 0)
@@ -199,15 +208,24 @@ Rectangle {
 
             RowLayout {
                 LineEdit {
-                    id: blackballOutputLine
+                    id: blackballOutputAmountLine
                     fontSize: mainLayout.lineEditFontSize
                     labelFontSize: 14 * scaleRatio
                     labelText: qsTr("Or manually blackball/unblackball a single output:") + translationManager.emptyString
-                    placeholderText: qsTr("Paste output public key") + "..." + translationManager.emptyString
+                    placeholderText: qsTr("Paste output amount") + "..." + translationManager.emptyString
                     readOnly: false
-                    copyButton: true
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
+                    width: mainLayout.editWidth / 2
+                    validator: IntValidator { bottom: 0 }
+                }
+                LineEdit {
+                    id: blackballOutputOffsetLine
+                    fontSize: mainLayout.lineEditFontSize
+                    labelFontSize: 14 * scaleRatio
+                    labelText: " "
+                    placeholderText: qsTr("Paste output offset") + "..." + translationManager.emptyString
+                    readOnly: false
+                    width: mainLayout.editWidth / 2
+                    validator: IntValidator { bottom: 0 }
                 }
             }
 
@@ -219,8 +237,8 @@ Rectangle {
                     id: blackballButton
                     text: qsTr("Blackball") + translationManager.emptyString
                     small: true
-                    enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
-                    onClicked: appWindow.currentWallet.blackballOutput(blackballOutputLine.text)
+                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                    onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
                 }
 
                 StandardButton {
@@ -228,8 +246,8 @@ Rectangle {
                     anchors.right: parent.right
                     text: qsTr("Unblackball") + translationManager.emptyString
                     small: true
-                    enabled: !!appWindow.currentWallet && validHex32(blackballOutputLine.text)
-                    onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputLine.text)
+                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                    onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
                 }
             }
         }
@@ -245,7 +263,7 @@ Rectangle {
                 sharedRingDBDialog.text = qsTr(
                     "In order to avoid nullifying the protection afforded by Monero's ring signatures, an output should not " +
                     "be spent with different rings on different blockchains. While this is normally not a concern, it can become one " +
-                    "when a key-reusing Monero clone allows you do spend existing outputs. In this case, you need to ensure this " +
+                    "when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this " +
                     "existing outputs uses the same ring on both chains.<br>" +
                     "This will be done automatically by Monero and any key-reusing software which is not trying to actively strip " +
                     "you of your privacy.<br>" +

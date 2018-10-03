@@ -53,7 +53,7 @@ Rectangle{
         font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: 14 * scaleRatio
         text: labelHeader
-        color: MoneroComponents.Style.greyFontColor
+        color: MoneroComponents.Style.dimmedFontColor
     }
 
     Text {
@@ -77,7 +77,7 @@ Rectangle{
             label2.color = MoneroComponents.Style.defaultFontColor;
         }
         onExited: {
-            label1.color = MoneroComponents.Style.greyFontColor;
+            label1.color = MoneroComponents.Style.dimmedFontColor
             label2.color = MoneroComponents.Style.dimmedFontColor;
         }
         onClicked: {

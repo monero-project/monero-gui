@@ -108,6 +108,8 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.dimmedFontColor
+                selectedTextColor: MoneroComponents.Style.defaultFontColor
 
                 background: Rectangle {
                     radius: 2
@@ -125,6 +127,7 @@ Item {
                     }
                 }
 
+                Keys.enabled: root.visible
                 Keys.onReturnPressed: {
                     root.close()
                     root.accepted()
