@@ -72,6 +72,7 @@ Rectangle {
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
+        else if(pos === "Keys") menuColumn.previousButton = keysButton
 
         menuColumn.previousButton.checked = true
     }
