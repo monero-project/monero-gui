@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> 已选择：</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>起始日期</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>截止日期</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>排序</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">区块高度</translation>
+        <translation>区块高度</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">日期</translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>无历史记录…</translation>
     </message>
 </context>
 <context>
@@ -359,7 +359,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>警告：请勿在别的分叉上重用你的 Monero 私钥，除非这个分叉内置了重用保护，否则隐私会受到侵害。</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -539,7 +539,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="506"/>
@@ -557,12 +557,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="126"/>
         <source>Copy</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="132"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>复制到剪贴板</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>在开始挖矿之前节点必须完成同步</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">钱包</translation>
+        <translation>钱包</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>界面</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>节点</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>日志</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
 </context>
 <context>
@@ -832,7 +832,7 @@
     <message>
         <location filename="../components/ProgressBar.qml" line="70"/>
         <source>Synchronizing %1</source>
-        <translation>同步区块中 1%</translation>
+        <translation>同步区块中 %1</translation>
     </message>
 </context>
 <context>
@@ -962,7 +962,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;该二维码包含了上方选择的地址以及下方你输入的金额。分享给其他人（右键-&gt;保存），这样他们就可以更容易地发送给你准确的金额。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="456"/>
@@ -983,12 +983,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>这是一个简单的营销跟踪器。让你的顾客扫描该二维码来支付（如果他使用的软件支持扫描二维码）。本页会自动从区块链与交易池中扫描进账交易。如果你输入了某个金额，那么它也会检查进账交易总额是否达到了那个金额。由你自己决定是否接受尚未被确认的交易。它们被确认的速度可能会快，也可能不会，所以对于大额交易你应该等待一次或更多次确认。</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="692"/>
         <source>Save QrCode</source>
-        <translation>保存 二维码</translation>
+        <translation>保存二维码</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="693"/>
@@ -1037,37 +1037,37 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>GUI 版本：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>内置 Monero 版本：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation type="unfinished"></translation>
+        <translation>钱包路径：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>钱包创建高度：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (点击修改)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
         <source>Set a new restore height:</source>
-        <translation type="unfinished"></translation>
+        <translation>设置新的恢复高度：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>重新扫描钱包缓存</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1079,32 +1079,39 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>你确定要重建钱包缓存吗？
+以下信息将被删除
+- 收款人地址
+- 交易密钥
+- 交易说明
+
+旧的钱包缓存文件将被重命名，可在后续用于恢复。
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>无效的恢复高度。必须是数字。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>钱包日志路径：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>复制到剪贴板</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>已复制到剪贴板</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1119,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>自定义外观</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>移动版尚不支持界面设定。</translation>
     </message>
 </context>
 <context>
@@ -1125,17 +1132,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>日志级别</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation type="unfinished">后台进程日志</translation>
+        <translation>后台进程日志</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>输入命令后按 Enter 发送 (如&apos;help&apos; 或 &apos;status&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1143,88 +1150,88 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="114"/>
         <source>Local node</source>
-        <translation type="unfinished"></translation>
+        <translation>本地节点</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>将区块链下载到你的电脑。这会带来更高的安全性，但也需要更多的存储空间。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
         <source>Remote node</source>
-        <translation type="unfinished">远程节点</translation>
+        <translation>远程节点</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用一个第三方的服务器连接到 Monero 网络。安全性较低，但更加轻便。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>可以在搜索引擎中查找“Monero 远程节点”。请注意确保节点由一个可信任的第三方维护。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">地址</translation>
+        <translation>地址</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">端口</translation>
+        <translation>端口</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="312"/>
         <location filename="../pages/settings/SettingsNode.qml" line="450"/>
         <source>(optional)</source>
-        <translation type="unfinished">(选填)</translation>
+        <translation>(选填)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="323"/>
         <source>Password</source>
-        <translation type="unfinished">密码</translation>
+        <translation>密码</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="347"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>连接</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="399"/>
         <source>Stop local node</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭本地节点</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">区块链文件路径</translation>
+        <translation>区块链文件路径</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (更改)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>(default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(默认)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>节点启动参数</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>引导节点地址</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>引导节点端口</translation>
     </message>
 </context>
 <context>
@@ -1232,82 +1239,82 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭本钱包</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>登出本钱包。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
         <source>Close wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭钱包</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>创建一个只读钱包</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>创建一个新钱包，该钱包只能用来查看交易而不能发起交易。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
         <source>Create wallet</source>
-        <translation type="unfinished">创建钱包</translation>
+        <translation>创建钱包</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>显示种子与私钥</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>请将这些信息安全地保存好，将来可用于恢复你的钱包。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation type="unfinished"></translation>
+        <translation>显示种子</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>重新扫描钱包余额</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation type="unfinished"></translation>
+        <translation>在你认为显示的余额不准确时使用此功能。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>重新扫描</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="410"/>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">错误: </translation>
+        <translation>错误: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="417"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>成功扫描已花费的输出。</translation>
     </message>
 </context>
 <context>
@@ -1403,7 +1410,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>为避免 Monero 环签名所提供的保护被破坏，某个输出不应在别的链上与别的成员结成一个新环而被再次花费掉（这样会导致产生相同的 key image）。尽管这看上去不是什么问题，但当一个重用密钥的 Monero 拷贝可以让你重新消费已被消费的输出时，这是个大问题。这里，你必须保证这个已存在的输出在两条链上使用了相同的环。&lt;br&gt;Monero 和其他一些无意伤害你的隐私的重用 Monero 私钥的软件会自动处理这些。&lt;br&gt;如果你也在使用一个重用私钥的 Monero 拷贝，而且这个拷贝没有包含这样的保护，你的交易仍然可以在那个拷贝上得到保护，但你需要手动将环输入到此页中，以便你能在后续安全地花费你的 Monero。&lt;br&gt;如果你没有使用一个不附带此安全特性的重用私钥的 Monero 拷贝的话，那么你什么都不用做，一切都是自动的。&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
@@ -1727,7 +1734,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="191"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>自动</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="192"/>
@@ -1819,36 +1826,36 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="518"/>
         <source>Export key images</source>
-        <translation type="unfinished"></translation>
+        <translation>导出密钥镜像</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="530"/>
         <source>Import key images</source>
-        <translation type="unfinished"></translation>
+        <translation>导入密钥镜像</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="568"/>
         <source>
 payment ID: </source>
-        <translation type="unfinished"></translation>
+        <translation>付款 ID：</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="569"/>
         <source>
 Amount: </source>
-        <translation type="unfinished"></translation>
+        <translation>金额：</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="570"/>
         <source>
 Fee: </source>
-        <translation type="unfinished">手续费: </translation>
+        <translation>手续费: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="571"/>
         <source>
 Ringsize: </source>
-        <translation type="unfinished">
+        <translation>
 环签名大小: </translation>
     </message>
     <message>
@@ -2126,7 +2133,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>从硬件设备创建新钱包</translation>
     </message>
 </context>
 <context>
@@ -2360,17 +2367,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>子地址扫描提前量（选填）：&lt;major&gt;:&lt;minor&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation type="unfinished"></translation>
+        <translation>设备名称</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Ledger</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
@@ -2431,17 +2438,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>从硬件设备创建钱包</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>
         <source>Advanced options</source>
-        <translation type="unfinished">高级选项</translation>
+        <translation>高级选项</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished">主网</translation>
+        <translation>主网</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
