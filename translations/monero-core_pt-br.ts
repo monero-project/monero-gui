@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> selecionado: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Desde a data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Até a data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Altura de bloco</translation>
+        <translation>Altura do bloco</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem histórico...</translation>
     </message>
 </context>
 <context>
@@ -359,7 +359,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>AVISO: Não reutilize suas chaves Monero em outro fork, A NÃO SER QUE este fork tenha mitigações de reutilização embutidas. Fazer isso prejudicará sua privacidade.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -539,7 +539,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="506"/>
@@ -557,12 +557,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="126"/>
         <source>Copy</source>
-        <translation type="unfinished">Copiar</translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="132"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copiado para a área de transferência</translation>
+        <translation>Copiado para a área de transferência</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Seu daemon deve estar sincronizado antes que você possa começar a minerar</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Carteira</translation>
+        <translation>Carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nó</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informações</translation>
     </message>
 </context>
 <context>
@@ -905,7 +905,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Esse código QR inclui o endereço que você selecionou acima e o valor inserido abaixo. Compartilhe-o (botão-direito-&gt;Salvar) para que fique mais fácil te enviar valores exatos.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
@@ -983,7 +983,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Este é um rastreador de vendas simples:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Deixe seu cliente digitalizar esse código QR para fazer um pagamento (se esse cliente tiver um software que suporte a verificação de código QR).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="692"/>
@@ -1037,37 +1037,37 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versão da Interface: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Versão do Monero embutida: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta da carteira: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Altura da criação da carteira: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (Clique para alterar)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
         <source>Set a new restore height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir uma nova altura de restauração:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Reescanear cache da carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1079,32 +1079,39 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tem certeza de que deseja reconstruir o cache da carteira?
+As seguintes informações serão apagadas
+- Endereços de destinatário
+- Chaves das transações
+- Descrições das transações
+
+O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado posteriormente.
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Altura de restauração especificada inválida. Deve ser um número.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta do log da carteira: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar para a área de transferência</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copiado para a área de transferência</translation>
+        <translation>Copiado para a área de transferência</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1119,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>Decorações personalizadas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ainda não existem opções de layout para dispositivos móveis.</translation>
     </message>
 </context>
 <context>
@@ -1125,17 +1132,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nível de log</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Log do daemon</translation>
+        <translation>Log do daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>command + enter (p. ex. &apos;ajuda&apos; ou &apos;estado&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1143,88 +1150,88 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="114"/>
         <source>Local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nó local</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>O blockchain é baixado para o seu computador. Fornece maior segurança e requer mais armazenamento local.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
         <source>Remote node</source>
-        <translation type="unfinished">Nó remoto</translation>
+        <translation>Nó remoto</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa um servidor de terceiro para se conectar com a rede Monero. Menos seguro, mas mais leve para seu computador.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para encontrar um nó remoto, digite &apos;nó remoto do Monero&apos; em seu mecanismo de busca favorito. Certifique-se de que o nó seja executado por um terceiro confiável.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">Endereço</translation>
+        <translation>Endereço</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">Porta</translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="312"/>
         <location filename="../pages/settings/SettingsNode.qml" line="450"/>
         <source>(optional)</source>
-        <translation type="unfinished">(opcional)</translation>
+        <translation>(opcional)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="323"/>
         <source>Password</source>
-        <translation type="unfinished">Senha</translation>
+        <translation>Senha</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="347"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="399"/>
         <source>Stop local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar nó local</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Localização do blockchain</translation>
+        <translation>Localização do blockchain</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (alterar)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>(default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(padrão)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Flags de inicialização do daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço de inicialização</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Porta de inicialização</translation>
     </message>
 </context>
 <context>
@@ -1232,82 +1239,82 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar essa carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sai dessa carteira.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
         <source>Close wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar carteira somente visualização</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cria uma nova carteira que só pode exibir mas não pode inicializar transações.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Criar carteira</translation>
+        <translation>Criar carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar semente &amp; chaves</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>Armazena essas informações com segurança para recuperar sua carteira no futuro.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar sementes</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Reescanear saldo da carteira</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Use esse recurso se você achar que o saldo mostrado não está correto.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Reescanear</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="410"/>
         <source>Error</source>
-        <translation type="unfinished">Erros</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">Erro: </translation>
+        <translation>Erro: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
         <source>Information</source>
-        <translation type="unfinished">Informação</translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="417"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saídas já gastas escaneadas com sucesso.</translation>
     </message>
 </context>
 <context>
@@ -1403,7 +1410,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Para evitar anular a proteção oferecida pelas assinaturas de anel do Monero, uma saída não deve ser gasta com anéis diferentes em blockchains diferentes. Embora isso normalmente não seja uma preocupação, ela pode se tornar uma quando um clone do Monero que reutiliza chaves permita que você gaste as saídas existentes. Nesse caso, você precisa garantir que essas saídas existentes usem o mesmo anel em ambos blockchains.&lt;br&gt;Isso será feito automaticamente pelo Monero e qualquer software de reutilização de chaves que não esteja tentando privá-lo ativamente de sua privacidade.&lt;br&gt;Se você estiver usando um clone do Monero que também reutiliza chaves, e esse clone não incluir essa proteção, você ainda poderá garantir que suas transações sejam protegidas ao gastar primeiramente no clone e, em seguida, adicionar manualmente o anel nesta página, o que lhe permitirá gastar seu Monero com segurança.&lt;br&gt;Se você não usar um clone do Monero que reutiliza chaves sem esses recursos de segurança, não será necessário fazer nada, pois tudo é automatizado.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
@@ -1818,9 +1825,9 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="702"/>
-        <source>Connected daemon is not compatible with GUI. 
+        <source>Connected daemon is not compatible with GUI.
 Please upgrade or connect to another daemon</source>
-        <translation>O daemon conectado não é compatível com a GUI. 
+        <translation>O daemon conectado não é compatível com a GUI.
 Por favor, atualize-o ou conecte em outro daemon</translation>
     </message>
     <message>
@@ -1874,17 +1881,17 @@ Por favor, atualize-o ou conecte em outro daemon</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="191"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automático</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="518"/>
         <source>Export key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar imagens das chaves</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="530"/>
         <source>Import key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar imagens das chaves</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="557"/>
@@ -2053,7 +2060,7 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="70"/>
-        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
+        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message.
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
         <translation>Crie uma prova do recebimento ou envio de um pagamento fornecendo o ID da transação, o endereço do destinatário e uma mensagem opcional.
 Para pagamentos que você realizou, é possível pegar uma prova de pagamento que confirma a autoria da transação. Nesse caso não é preciso especificar o endereço do destinatário.</translation>
@@ -2129,7 +2136,7 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Crie uma nova carteira a partir do dispositivo de hardware</translation>
     </message>
 </context>
 <context>
@@ -2302,7 +2309,7 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="406"/>
-        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
+        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in:
 %1</source>
         <translation>A carteira &quot;somente leitura&quot; foi criada. Você pode usá-la fechando a carteira atual, clicando em &quot;Abrir carteira de um arquivo&quot;, e selecionando a carteira somente leitura em:
 %1</translation>
@@ -2363,17 +2370,17 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Lookahead de sub-endereço  (opcional): &lt;maior&gt;:&lt;menor&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome do dispositivo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Ledger</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
@@ -2434,17 +2441,17 @@ Para pagamentos que você realizou, é possível pegar uma prova de pagamento qu
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Crie uma nova carteira a partir do dispositivo de hardware</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Opções avançadas</translation>
+        <translation>Opções avançadas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished">Mainnet</translation>
+        <translation>Mainnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
@@ -2697,9 +2704,9 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="832"/>
-        <source>Couldn&apos;t generate a proof because of the following reason: 
+        <source>Couldn&apos;t generate a proof because of the following reason:
 </source>
-        <translation>Não foi possível criar uma prova pelo seguinte motivo: 
+        <translation>Não foi possível criar uma prova pelo seguinte motivo:
 </translation>
     </message>
     <message>
