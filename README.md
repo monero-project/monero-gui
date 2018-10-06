@@ -106,14 +106,13 @@ Packaging for your favorite distribution would be a welcome contribution!
       `emerge dev-qt/qtmultimedia:5 media-gfx/zbar`
 
 
-3. Clone repository
+3. Clone repository (including the guide)
 
-    `git clone https://github.com/monero-project/monero-gui.git`
+    `git clone https://github.com/monero-project/monero-gui.git && cd monero-gui && git submodule init monero-GUI-guide && git submodule update`
 
 4. Build
 
     ```
-    cd monero-gui
     QT_SELECT=5 ./build.sh
     ```
 
@@ -153,15 +152,11 @@ The executable can be found in the build/release/bin folder.
 
     This is the directory where Qt 5.x is installed on **your** system
 
-6. Grab an up-to-date copy of the monero-gui repository
+6. Grab an up-to-date copy of the monero-gui repository (including the guide)
 
-  `git clone https://github.com/monero-project/monero-gui.git`
+  `git clone https://github.com/monero-project/monero-gui.git && cd monero-gui && git submodule init monero-GUI-guide && git submodule update`
 
-7. Go into the repository
-
-  `cd monero-gui`
-
-8. Start the build
+7. Start the build
 
   `./build.sh`
 
@@ -210,16 +205,15 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
     pacman -S git
     ```
 
-6. Clone repository
+6. Clone repository (including the guide)
 
     ```
-    git clone https://github.com/monero-project/monero-gui.git
+    git clone https://github.com/monero-project/monero-gui.git && cd monero-gui && git submodule init monero-GUI-guide && git submodule update
     ```
 
 7. Build
 
     ```
-    cd monero-gui
     ./build.sh
     cd build
     make deploy

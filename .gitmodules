@@ -2,3 +2,6 @@
 	path = monero
 	url = https://github.com/monero-project/monero
 	ignore = all
+[submodule "monero-GUI-guide"]
+	path = monero-GUI-guide
+	url = https://github.com/monero-ecosystem/monero-GUI-guide.git
