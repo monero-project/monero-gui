@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> vald: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum från</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum till</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortera</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Blockhöjd</translation>
+        <translation>Blockhöjd</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen historik</translation>
     </message>
 </context>
 <context>
@@ -359,7 +359,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>VARNING: Återanvänd inte din Monero nyckel på en annan fork, SÅVIDA INTE denna fork har återanvändnings begränsningar inbyggda. Görs detta så kan din integritet skadas.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -539,7 +539,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="506"/>
@@ -557,12 +557,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="126"/>
         <source>Copy</source>
-        <translation type="unfinished">Kopiera</translation>
+        <translation>Kopiera</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="132"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopierades till Urklipp</translation>
+        <translation>Kopierades till Urklipp</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation type="unfinished"></translation>
+        <translation>Din daemon måste vara synkroniserad före du kan börja mina</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Plånbok</translation>
+        <translation>Plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nod</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Logg</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>
@@ -962,7 +962,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Denna QR koden inkluderar den adress du har valt ovan och den summa du fyllde i nedan. Dela den med andra (högerklicka -&gt;Spara) så att de kan enklare skicka exakta summor till dig.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="456"/>
@@ -983,7 +983,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en simpel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Låt din kund scanna den QR koden för att genomföra en betalning (om den kunden har ett program som stödjer QR kod scanning).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt att scanna blockkedjan och tx poolen för inkommande transaktioner som använder denna QR koden. Om du fyller i en summa, så kommer den även kolla att inkommande transaktioner motsvarar den totala summan.&lt;/p&gt;&lt;p&gt; Det är upp till dig om du vill acceptera obekräftade transaktioner eller inte. Det är troligt att det kommer bli bekräftat i en kort order, men det finns fortfarande en chans att det inte kommer blir det, därför så kan du behöva vänta för en eller flera bekräftelser vid större summor.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="692"/>
@@ -1037,37 +1037,37 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>GUI version:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Inbäddad Monero version: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Plånbok destination: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Plånbok skapelsehöjd</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (Klicka för att ändra)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
         <source>Set a new restore height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sätt en ny återställningshöjd:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Scanna plånbokscache</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1079,32 +1079,38 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Är du säker på att du vill återställa plånbokens cache?
+Följande information kommer att raderas
+- Mottagare adresser
+- Tx nycklar
+- Tx beskrivning
+
+Den gamla plånbokens cache fil kommer att ändra namn och kan återställas senare.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogiltig återställningshöjd specificerad. Måste vara ett nummer.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Plånbok loggdestination: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiera till urklipp</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopierades till Urklipp</translation>
+        <translation>Kopierades till Urklipp</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1118,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassade dekorationer</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga Layout alternativ existerar än i mobilversionen.</translation>
     </message>
 </context>
 <context>
@@ -1125,17 +1131,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>Loggnivå</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Daemonens loggfil</translation>
+        <translation>Daemonens loggfil</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>command + enter (ex. &apos;hjälp&apos; eller &apos;status&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1143,88 +1149,88 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="114"/>
         <source>Local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal nod</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blockkedjan är nedladdad på din dator. Ger mer säkerhet och kräver mer lokalt utrymme.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
         <source>Remote node</source>
-        <translation type="unfinished">Fjärrnod</translation>
+        <translation>Fjärrnod</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Använder en tredje-part server som ansluter till Monero nätverket. Mindre säkert, men mindre krävande för din dator.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>För att hitta en avlägsen nod, skriv: "Monero remote node" i din favorit sökmotor. Vänligen försäkra dig om att Noden drivs av en betrodd tredje-part.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">Adress</translation>
+        <translation>Adress</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="312"/>
         <location filename="../pages/settings/SettingsNode.qml" line="450"/>
         <source>(optional)</source>
-        <translation type="unfinished">(valfritt)</translation>
+        <translation>(valfritt)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="323"/>
         <source>Password</source>
-        <translation type="unfinished">Lösenord</translation>
+        <translation>Lösenord</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="347"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Anslut</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="399"/>
         <source>Stop local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa lokal nod</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Blockkedjans plats</translation>
+        <translation>Blockkedjans plats</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (ändra)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>(default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(standard)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon uppstart flagga</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootstrap Adress</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootstrap Port</translation>
     </message>
 </context>
 <context>
@@ -1232,82 +1238,82 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Stäng denna plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Logga ut från denna plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
         <source>Close wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Stäng plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa en skrivskyddad plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapar en ny plånbok som endast kan se transaktioner, kan inte initialisera transaktioner.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Skapa plånbok</translation>
+        <translation>Skapa plånbok</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa seed &amp; keys</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spara den information säkert för att återställa din plånbok i framtiden.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa seed</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Scanna plånbokssaldo</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd denna funktion om du tycker att visad balans inte är korrekt.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Scanna</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="410"/>
         <source>Error</source>
-        <translation type="unfinished">Fel</translation>
+        <translation>Fel</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">Fel: </translation>
+        <translation>Fel: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="417"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Skannade oanvända utgångar framgångsrikt.</translation>
     </message>
 </context>
 <context>
@@ -1403,7 +1409,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="245"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>För att undvika att skyddet annulleras som erbjuds av Monero&apos;s ring signaturer, så bör inte en utgång spenderas med olika ringar på olika blockkedjor. Detta är normalt inte ett problem, men det kan bli ett problem om en nyckelåteranvändnings Monero klon tillåter dig att spendera existerande utgångar. Om detta är fallet, måste du säkerställa att dessa existerande utgångar använder samma ringar på båda kedjorna.&lt;br&gt;Detta kommer att göras automatiskt av Monero och något nyckelåteranvändningsprogram som inte aktivt försöker ta bort din integritet.&lt;br&gt;Om du använder en nyckelåteranvändnings Monero klon, och denna klonen inte inkluderar något skydd, så kan du fortfarande säkerställa att dina transaktioner är skyddade från att spenderas på klonen först, sedan att du manuellt lägger till ringen på denna sidan, som tillåter dig att spendera dina Monero säkert.&lt;br&gt;Om du inte använder en nyckelåteranvändnings Monero klon utan dessa säkerhetsalternativ, så behöver du inte göra någonting då allt görs automatiskt.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
@@ -1743,7 +1749,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="191"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatiskt</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="263"/>
@@ -1852,12 +1858,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="518"/>
         <source>Export key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera nyckelbilder</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="530"/>
         <source>Import key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Importera nyckelbilder</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="557"/>
@@ -2129,7 +2135,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa en ny plånbok från hårddiskenhet</translation>
     </message>
 </context>
 <context>
@@ -2185,7 +2191,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>För varje transaktion tas en liten transaktionsavgift ut. Detta alternativ låter dig lägga till ett ytterligare belopp till din transaktion, angivet som en procent av transaktionsavgiften, för att stödja utvecklingen av Monero. Till exempel, en 50 % automatisk donation tar en transaktionsavgift på 0,005 XMR och lägger på 0,0025 XMR för att stödja utvecklingen av Monero.</translation>
+        <translation>För varje transaktion tas en liten transaktionsavgift ut. Detta alternativ låter dig lägga till ett ytterligare belopp till din transaktion, angivet som en procent av transaktionsavgiften, för att stödja utvecklingen av Monero. Till exempel, en 50 % automatisk donation tar en transaktionsavgift på 0,005 XMR och lägger på 0,0025 XMR för att stödja utvecklingen av Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2363,17 +2369,17 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Subaddress lookahead (valfritt): &lt;stort&gt;:&lt;litet&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Maskin namn</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Ledger</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
@@ -2434,17 +2440,17 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Skapa en ny plånbok från hårddiskenhet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Avancerade alternativ</translation>
+        <translation>Avancerade alternativ</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished">Mainnet</translation>
+        <translation>Mainnet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
