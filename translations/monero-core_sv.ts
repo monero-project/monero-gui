@@ -359,7 +359,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>VARNING: Återanvänd inte din Monero nyckel på en annan derivat, SÅVIDA INTE denna derivat har återanvändnings begränsningar inbyggda. Görs detta så kan din integritet skadas.</translation>
+        <translation>VARNING: Återanvänd inte din Monero nyckel på en annan förgrening, SÅVIDA INTE denna förgrening har återanvändnings begränsningar inbyggda. Görs detta så kan din integritet skadas.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
