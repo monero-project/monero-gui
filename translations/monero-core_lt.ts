@@ -2142,7 +2142,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Pradėti mazg1 automatiškai fone (rekomenduojama)</translation>
+        <translation>Pradėti mazgą automatiškai fone (rekomenduojama)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="148"/>
