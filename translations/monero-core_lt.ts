@@ -16,27 +16,27 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="73"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Mokėjimo ID &lt;font size=&apos;2&apos;&gt;(pasirinktinai)&lt;/font&gt;</translation>
+        <translation>Mokėjimo ID &lt;font size=&apos;2&apos;&gt;(neprivaloma)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
         <source>4.. / 8..</source>
-        <translation type="unfinished"></translation>
+        <translation>4.. / 8..</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation>Įveskite 64 šešioliktainės simbolius</translation>
+        <translation>Įveskite 64 šešioliktainės koduotės simbolius</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="82"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Aprašymas &lt;font size=&apos;2&apos;&gt;(pasirinktinai)&lt;/font&gt;</translation>
+        <translation>Aprašymas &lt;font size=&apos;2&apos;&gt;(neprivaloma)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="83"/>
         <source>Give this entry a name or description</source>
-        <translation>Įveskite pavadinimą arba aprašymą</translation>
+        <translation>Pavadinkite arba aprašykite šį įrašą</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="91"/>
@@ -90,17 +90,17 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>Jungtis bus paleista už %1 sekundžių</translation>
+        <translation>Vietinis mazgas bus paleistas už %1 sekundžių</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="111"/>
         <source>Start daemon (%1)</source>
-        <translation>Paleisti jungtį (%1)</translation>
+        <translation>Paleisti daemoną (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="124"/>
         <source>Use custom settings</source>
-        <translation>Naudoti kitus nustatymus</translation>
+        <translation>Naudoti personalizuotus nustatymus</translation>
     </message>
 </context>
 <context>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../components/DashboardTable.qml" line="170"/>
         <source>Balance</source>
-        <translation>Balansinis likutis</translation>
+        <translation>Balansas</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="190"/>
@@ -159,12 +159,12 @@
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Data nuo</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Data iki</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trans. ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
@@ -202,12 +202,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
         <source>Tx key:</source>
-        <translation>Tx raktas:</translation>
+        <translation>Trans. raktas:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="53"/>
         <source>Tx note:</source>
-        <translation>Tx žinutė:</translation>
+        <translation>Trans. pastaba:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="54"/>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="309"/>
         <source>Fee</source>
-        <translation>Rinkliava</translation>
+        <translation>Mokestis</translation>
     </message>
 </context>
 <context>
@@ -278,7 +278,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trans. ID</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
@@ -288,12 +288,12 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
         <source>Tx key:</source>
-        <translation>Tx raktas:</translation>
+        <translation>Trans. raktas:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="52"/>
         <source>Tx note:</source>
-        <translation>Tx žinutė:</translation>
+        <translation>Trans. pastaba:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="53"/>
@@ -365,7 +365,7 @@
         <location filename="../pages/Keys.qml" line="211"/>
         <location filename="../pages/Keys.qml" line="253"/>
         <source>Spendable Wallet</source>
-        <translation>Išleidimo piniginė</translation>
+        <translation>Piniginė</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="221"/>
@@ -381,7 +381,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: Nenaudokite tų pačių Monero raktų kitoje šios kriptovaliutos atšakoje, NEBENT ši atšaka turi pakartotinio naudojimo mitigacijos funkciją. Nesilaikant šio patarimo jūsų privatumas gali būti kompromizuotas</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="166"/>
@@ -401,7 +401,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="278"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation>(Tik stebėjimo piniginė. - Paslaptis neleidžiama)</translation>
+        <translation>(Stebėjimo piniginė. - Paslaptis neleidžiama)</translation>
     </message>
 </context>
 <context>
@@ -409,7 +409,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="212"/>
         <source>Balance</source>
-        <translation>Balansinis likutis</translation>
+        <translation>Balansas</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="202"/>
@@ -429,17 +429,17 @@
     <message>
         <location filename="../LeftPanel.qml" line="364"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
         <source>Prove/check</source>
-        <translation>Patvirtinti/patikrinti</translation>
+        <translation>Patvirtinti/Patikrinti</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="458"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="387"/>
@@ -454,12 +454,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testnet</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="338"/>
@@ -469,12 +469,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="339"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="388"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="410"/>
@@ -484,7 +484,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="411"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="433"/>
@@ -494,12 +494,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="434"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="480"/>
         <source>Shared RingDB</source>
-        <translation>Bendrinama RingDB</translation>
+        <translation>Bendrinta RingDB</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="550"/>
@@ -509,7 +509,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="551"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="601"/>
@@ -519,32 +519,32 @@
     <message>
         <location filename="../LeftPanel.qml" line="610"/>
         <source>Daemon</source>
-        <translation>Jungtis</translation>
+        <translation>Daemonas</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="505"/>
         <source>Sign/verify</source>
-        <translation>Pasirašyti/tikrinti</translation>
+        <translation>Pasirašyti/Patvirtinti</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="529"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="314"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="506"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="528"/>
@@ -583,7 +583,7 @@
     <message>
         <location filename="../MiddlePanel.qml" line="48"/>
         <source>Balance</source>
-        <translation>Balansinis likutis</translation>
+        <translation>Balansas</translation>
     </message>
     <message>
         <location filename="../MiddlePanel.qml" line="50"/>
@@ -601,17 +601,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
         <source>(only available for local daemons)</source>
-        <translation>(leidžiama tik nuosavoje jungtyje)</translation>
+        <translation>(tik vietiniams daemonams)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>Jūsų jungtis turi būti sinchronizuota, kad galėtumėte pradėti kasimą</translation>
+        <translation>Norint pradėti kasimą jūsų daemonas turi būti sinchronizuotas</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
         <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Kasimas jūsų kompiuteriu padeda sustiprinti Monero tinklą. Kuo daugiau žmonių kasa - tuo sunkiau atakuoti tinklą.&lt;br&gt; &lt;br&gt; Kasimas suteikia Jums mažą galimybę gauti šiek tiek Monero. Jūsų kompiuteris kurs &apos;hašus&apos; ir taip bandys atrasti blokų sprendimus. Jeigu rasite bloką, gausite atitinkamą atlygį. Sėkmės!</translation>
+        <translation>Prisidėdami prie kasimo savo kompiuteriu padedate sustiprinti Monero tinklą. Kuo daugiau žmonių kasa - tuo sunkiau atakuoti tinklą.&lt;br&gt; &lt;br&gt; Kasdami taip pat turite šansą uždirbti nedidelį kiekį Monero. Jūsų kompiuteris spres maišos funkcijas ir bandys atrasti teisingą variantą blokų sprendimui. Jeigu rasite bloką, gausite atitinkamą atlygį. Sėkmės!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="95"/>
@@ -621,17 +621,17 @@
     <message>
         <location filename="../pages/Mining.qml" line="103"/>
         <source>(optional)</source>
-        <translation>(pasirinktinai)</translation>
+        <translation>(neprivaloma)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="115"/>
         <source>Background mining (experimental)</source>
-        <translation>Kasti fone (eksperimentinis)</translation>
+        <translation>Kasti fone (eksperimentinė funkcija)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="129"/>
         <source>Enable mining when running on battery</source>
-        <translation>Leisti kasti, kai kompiuteris veikia iš baterijos</translation>
+        <translation>Leisti kasti, kai kompiuteris veikia naudojant bateriją</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="137"/>
@@ -656,7 +656,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Kasimas leidžiamas tik nuosavoje jungtyje. Paleiskite vietinę jungtį norėdami kasti.&lt;br&gt;</translation>
+        <translation>Kasimas leidžiamas tik nuosavame daemone. Paleiskite vietinę daemoną norėdami kasti.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Piniginė</translation>
+        <translation>Piniginė</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Išdėstymas</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Išrašas</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -730,7 +730,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Remote node</source>
-        <translation>Nutolusi jungtis</translation>
+        <translation>Nuotolinis mazgas</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
@@ -791,7 +791,7 @@
     <message>
         <location filename="../components/PasswordDialog.qml" line="86"/>
         <source>Please enter wallet password for: </source>
-        <translation>Įveskite slaptažodį kad atrakinti: </translation>
+        <translation>Įveskite piniginės slaptažodį: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="153"/>
@@ -840,7 +840,7 @@
     <message>
         <location filename="../components/QRCodeScanner.qml" line="129"/>
         <source>QrCode Scanned</source>
-        <translation>Qr kodas nuskenuotas</translation>
+        <translation>QR kodas nuskenuotas</translation>
     </message>
 </context>
 <context>
@@ -848,12 +848,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="74"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>ĮSPĖJIMAS: nėra susijungimo su jungtimi</translation>
+        <translation>ĮSPĖJIMAS: Nėra susijungimo su jungtimi</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="124"/>
         <source>No transaction found yet...</source>
-        <translation>Jokių pavedimų nerasta...</translation>
+        <translation>Kolkas pavedimas nerastas...</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="128"/>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="130"/>
         <source>%1 transactions found</source>
-        <translation>%1 pervedimų rasta</translation>
+        <translation>%1 pavedimų rasta</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="138"/>
@@ -905,7 +905,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="206"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt; Šis QR kodas apima anksčiau pasirinktą adresą ir žemiau pateiktą sumą. Pasidalykite ja su kitais (dešiniuoju pelės klavišu spustelėkite-&gt;Išsaugoti), kad jie galėtų lengviau atsiųsti konkrečias sumas.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt; Šis QR kodas apima anksčiau pasirinktą adresą ir žemiau pateiktą sumą. Pasidalykite juo su kitais (dešiniuoju pelės klavišu spustelėkite-&gt;Išsaugoti), kad jie galėtų lengviau atsiųsti konkrečias sumas.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="373"/>
@@ -936,18 +936,18 @@
     <message>
         <location filename="../pages/Receive.qml" line="435"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt; Šis QR kodas apima anksčiau pasirinktą adresą ir žemiau pateiktą sumą. Pasidalykite ja su kitais (dešiniuoju pelės klavišu spustelėkite-&gt;Išsaugoti), kad jie galėtų lengviau atsiųsti konkrečias sumas.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt; Šis QR kodas apima anksčiau pasirinktą adresą ir žemiau pateiktą sumą. Pasidalykite juo su kitais (dešiniuoju pelės klavišu spustelėkite-&gt;Išsaugoti), kad jie galėtų lengviau atsiųsti konkrečias sumas.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt; Tai paprastas pardavimų stebėjimas:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Pateikite jūsų klientui nuskaityti QR kodą mokėjimui atlikti (jei klientas turi programinę įrangą, kuri palaiko QR kodo nuskaitymas).&lt;/p&gt;&lt;p&gt;Šiame puslapyje automatiškai bus skenuojama blokų grandinė, laukiant šio mokėjimo. Jei įvedėte sumą, taip pat bus tikrinama, ar įeinančių pavedimų suma atitinka mokėjimą.&lt;/p&gt;&lt;p&gt;Jūsų valia, ar priimti nepatvirtintus pavedimus ar ne. Tikėtina, kad jie bus patvirtinti artimiausiu metu, tačiau vis tiek yra galimybė, kad jie gali būti nepatvirtinti, todėl didesnių verčių atveju galite palaukti vieno ar kelių patvirtinimų.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt; Tai paprasta pardavimų stebėjimo programa:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Leiskite savo klientui nuskaityti QR kodą atlikti mokėjimui (jei klientas turi programinę įrangą kuri gali nuskaityti QR kodus).&lt;/p&gt;&lt;p&gt;Laukiant šio mokėjimo šiame puslapyje automatiškai bus skenuojama blokų grandinė. Jei įvedėte sumą, taip pat bus tikrinama, ar įeinančių pavedimų suma atitinka mokėjimą.&lt;/p&gt;&lt;p&gt;Savo nuožiūra galite priimti nepatvirtintus pavedimus arba ne. Tikėtina, kad jie bus patvirtinti artimiausiu metu, tačiau vis tiek yra galimybė, kad jie gali būti nepatvirtinti, todėl didesnių sumų atveju galite palaukti vieno ar kelių patvirtinimų.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="608"/>
         <location filename="../pages/Receive.qml" line="610"/>
         <source>confirmations</source>
-        <translation>patvirtinimų</translation>
+        <translation>patvirtinimai</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="613"/>
@@ -957,7 +957,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="637"/>
         <source>Transaction ID copied to clipboard</source>
-        <translation>Pavedimo ID nukopijuotas</translation>
+        <translation>Transakcijos ID nukopijuotas</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="672"/>
@@ -1011,7 +1011,7 @@
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="69"/>
         <source>Remote Node Hostname / IP</source>
-        <translation>Nutolusios jungties IP</translation>
+        <translation>Nuotolinio mazgo pavadinimas/IP</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="87"/>
@@ -1037,27 +1037,27 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vaizdinės sąsajos versija</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Monero versija</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės vieta: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės sukurimo aukštis</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>(Spauskite pakeisti)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
@@ -1067,7 +1067,7 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Perskanuoti piniginės podelį</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1079,32 +1079,32 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ar esate tikras, kad norite perstatyti piniginės podelį?</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Cancel</source>
-        <translation type="unfinished">Atšaukti</translation>
+        <translation>Atšaukti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neteisingas atkurimo aukštis. Turi būti numeris</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės išrašo vieta: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Nukopijuoti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Nukopijuota</translation>
+        <translation>Nukopijuota</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1112,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalios dekoracijos</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolkas mobilioje versijoje nėra išdėstymo pasirinkimų</translation>
     </message>
 </context>
 <context>
@@ -1125,17 +1125,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>Išrašų lygis</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Jungties istorija</translation>
+        <translation>Daemono išrašas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>komanda + enter (pvz. &apos;Pagalba&apos; arba &apos;Statusas&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1143,88 +1143,88 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="114"/>
         <source>Local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietinis mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokų grandinė atsiųsta į jūsu komppiuterį. Tai padidina saugumą tačiau reikalauja daugiau vietos kompiuteryje</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
         <source>Remote node</source>
-        <translation type="unfinished">Nutolusi jungtis</translation>
+        <translation>Nuotolinis mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoja neoficialų serverį prisijungti prie Monero tinklo. Mažiau saugu, tačiau taip pat reikalauja mažiau kompiuterio resursų</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rasti nuotolinį mazgą, ieškokite frazės &apos;Monero remote node&apos; savo mėgstamiausioje naršyklėje.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">Adresas</translation>
+        <translation>Adresas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">Prievadas</translation>
+        <translation>Prievadas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="312"/>
         <location filename="../pages/settings/SettingsNode.qml" line="450"/>
         <source>(optional)</source>
-        <translation type="unfinished">(pasirinktinai)</translation>
+        <translation>(neprivaloma)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="323"/>
         <source>Password</source>
-        <translation type="unfinished">Slaptažodis</translation>
+        <translation>Slaptažodis</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="347"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Prisijungti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="399"/>
         <source>Stop local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Sustabdyti vietinį mazgą</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Blokų grandinės vieta</translation>
+        <translation>Blokų grandinės vieta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (pakeisti)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>(default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(numatyta)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemono starto žymė</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootstrap adresas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Bootstrap prievadas</translation>
     </message>
 </context>
 <context>
@@ -1232,82 +1232,82 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti šią piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės išrašai</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
         <source>Close wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti peržiūros piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukuria piniginę kuri gali tik stebėti pavedimus, tačiau negali jų sukurti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Sukurti piniginę</translation>
+        <translation>Sukurti piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti prieigos atkurimo raktą ir piniginės raktus</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>Laikykite šią informaciją įpatingai saugiai, kad galėtumėte ateityje atkurti piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti prieigos atkurimo raktą</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Perskanuoti piniginės balansą</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudokite šią funkciją jei manote, kad parodytas balansas nėra teisingas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Perskanuoti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="410"/>
         <source>Error</source>
-        <translation type="unfinished">Klaida</translation>
+        <translation>Klaida</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">Klaida: </translation>
+        <translation>Klaida: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
         <source>Information</source>
-        <translation type="unfinished">Informacija</translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="417"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sėkmingai perskanuotos išleistos išeigos</translation>
     </message>
 </context>
 <context>
@@ -1320,13 +1320,13 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="97"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Šis puslapis leidžia sąveikauti su bendrai naudojama žiedų duomenų baze. Ši duomenų bazė yra skirta naudoti Monero piniginėse, taip pat Monero klonų piniginėse, kurios pakartotinai naudoja Monero raktus.</translation>
+        <translation>Šis puslapis leidžia sąveikauti su bendrai naudojamų žiedų duomenų baze. Monero piniginės ir klonuotos Monero piniginės (kurios pakartotinai naudoja orginalius Monero raktus) naudoja šią duomenų bazę</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
         <location filename="../pages/SharedRingDB.qml" line="112"/>
         <source>Blackballed outputs</source>
-        <translation>Atmestos išvestys</translation>
+        <translation>Atmestos išeigos</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="110"/>
@@ -1337,32 +1337,32 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="113"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tam, kad būtų galima paslėpti Monero transakcijų išvadas, trečiosios šalys neturėtu turėti galimybės atskirti išvadas žiede kurios jau yra žinomos kaip išleistos</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="134"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation type="unfinished"></translation>
+        <translation>Tai nustato kurios išeigos yra išleistos ir jų privatumo žymės negali būti naudojamos žiedų parašuose</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="135"/>
         <source>You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas turėtu būti įkeltas tik kai norite atnaujinti sąrašą. Jei reikia įmanomas savarankiškas pridėjimas/išėmimas</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="147"/>
         <source>Please choose a file to load blackballed outputs from</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasirinkite failą iš kurio įkelti atmestamas išeigas</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="163"/>
         <source>Path to file</source>
-        <translation>Kelias iki bylos</translation>
+        <translation>Kelias iki failo</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="165"/>
         <source>Filename with outputs to blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Failas su išeigom kurias norite atmesti</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="178"/>
@@ -1377,22 +1377,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="205"/>
         <source>Or manually blackball/unblackball a single output:</source>
-        <translation type="unfinished"></translation>
+        <translation>Savarankiškai atmesti tam tikrą išeigą:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="206"/>
         <source>Paste output public key</source>
-        <translation type="unfinished"></translation>
+        <translation>Įklijuoti viešąjį išeigos raktą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="220"/>
         <source>Blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Atmesti</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="229"/>
         <source>Unblackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Priimti atmestą išeigą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="242"/>
@@ -1408,17 +1408,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="267"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tai įrašo žiedus naudojamus išeigų išleistų Monero tinkle kuris pakartotinai naudoja raktus. Taip tas pats raktas gali būti naudojams dar kartą padedant palaikyti saugumą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
         <source>Key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Rakto atvaizdas</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>Paste key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Įklijuoti rakto atvaizdą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="299"/>
@@ -1433,7 +1433,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="317"/>
         <source>No ring found</source>
-        <translation>Žiedas nerasta</translation>
+        <translation>Žiedas nerastas</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="334"/>
@@ -1443,7 +1443,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="346"/>
         <source>Set Ring</source>
-        <translation>Nustatyti žiedą</translation>
+        <translation>Nustatyti Žiedą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="364"/>
@@ -1463,7 +1463,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="408"/>
         <source>Segregation height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atskirties aukštis</translation>
     </message>
 </context>
 <context>
@@ -1476,7 +1476,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="61"/>
         <source>This is a good signature</source>
-        <translation>Tai geras parašas</translation>
+        <translation>Tai yra geras parašas</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="65"/>
@@ -1486,12 +1486,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="66"/>
         <source>This signature did not verify</source>
-        <translation>Šis parašas nepasitvirtina</translation>
+        <translation>Šis parašas nebuvo pasitvirtinas</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="124"/>
         <source>Message to sign</source>
-        <translation>Pasirašoma žinutė</translation>
+        <translation>Žinutė pasirašyti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="103"/>
@@ -1503,7 +1503,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="107"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
-        <translation>Šiame puslapyje galite pasirašyti / patvirtinti žinutę (arba bylos turinį) savo adresu.</translation>
+        <translation>Šiame puslapyje galite pasirašyti / patvirtinti žinutę (arba failo turinį) savo adresu.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="125"/>
@@ -1513,7 +1513,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
         <source>Path to file</source>
-        <translation>Kelias iki bylos</translation>
+        <translation>Kelias iki failo</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="169"/>
@@ -1524,12 +1524,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="221"/>
         <source>Verify message</source>
-        <translation>Patikrinti žinutę</translation>
+        <translation>Patvirtinti žinutę</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="248"/>
         <source>Verify file</source>
-        <translation>Patikrinti bylą</translation>
+        <translation>Patvirtinti failą</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
@@ -1539,19 +1539,19 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="319"/>
         <source>Please choose a file to sign</source>
-        <translation>Pasirinkite bylą, kurią norite pasirašyti</translation>
+        <translation>Pasirinkite failą kurį norite pasirašyti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="211"/>
         <location filename="../pages/Sign.qml" line="234"/>
         <location filename="../pages/Sign.qml" line="274"/>
         <source>Verify</source>
-        <translation>Patikrinti</translation>
+        <translation>Patvirtinti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="330"/>
         <source>Please choose a file to verify</source>
-        <translation>Pasirinkite bylą, kurią norite patikrinti</translation>
+        <translation>Pasirinkite failą, kurį norite patvirtinti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="198"/>
@@ -1564,12 +1564,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="222"/>
         <source>Message to verify</source>
-        <translation>Žinutė patikrinimui</translation>
+        <translation>Žinutė patvirtinimui</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="249"/>
         <source>Filename with message to verify</source>
-        <translation>Bylos pavadinimas su žinute, kuriuos reikia patikrinti</translation>
+        <translation>Failo pavadinimas su žinute kurią reikia patvirtinti</translation>
     </message>
 </context>
 <context>
@@ -1577,7 +1577,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="133"/>
         <source>Double tap to copy</source>
-        <translation>Spauskite du kartus, kad nukopijuoti</translation>
+        <translation>Spustelkite du kartus nukopijuoti</translation>
     </message>
     <message>
         <location filename="../components/StandardDialog.qml" line="140"/>
@@ -1592,7 +1592,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDialog.qml" line="163"/>
         <source>OK</source>
-        <translation>GERAI</translation>
+        <translation>Gerai</translation>
     </message>
 </context>
 <context>
@@ -1615,22 +1615,22 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/StandardDropdown.qml" line="168"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Lėtai (x0.25 rinkliavos)</translation>
+        <translation>Lėtas (x0.25 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="169"/>
         <source>Default (x1 fee)</source>
-        <translation>Numatyta (x1 rinkliavos)</translation>
+        <translation>Numatytas (x1 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="170"/>
         <source>Fast (x5 fee)</source>
-        <translation>Greitai (x5 rinkliavos)</translation>
+        <translation>Greitas (x5 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="171"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Greičiausiai (x41.5 rinkliavos)</translation>
+        <translation>Greičiausias (x41.5 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="172"/>
@@ -1699,7 +1699,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TickDelegate.qml" line="57"/>
         <source>Default</source>
-        <translation>Numatyta</translation>
+        <translation>Numatytas</translation>
     </message>
     <message>
         <location filename="../components/TickDelegate.qml" line="58"/>
@@ -1743,7 +1743,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="191"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatinis</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="263"/>
@@ -1758,7 +1758,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="273"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Šiame &quot;OpenAlias&quot; nerasta galiojančio adreso, tačiau negalima patikrinti DNSSEC parašo, šis adresas gali būti suklastotas</translation>
+        <translation>Šiame &quot;OpenAlias&quot; nera galiojančio adreso, tačiau negalima patikrinti DNSSEC parašo, taigi šis adresas gali būti suklastotas</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="277"/>
@@ -1774,12 +1774,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="306"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Aprašymas &lt;font size=&apos;2&apos;&gt;( pasirinktinai )&lt;/font&gt;</translation>
+        <translation>Aprašymas &lt;font size=&apos;2&apos;&gt;( neprivaloma )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="307"/>
         <source>Saved to local wallet history</source>
-        <translation>Išsaugoma į vietinės piniginės istoriją</translation>
+        <translation>Išsaugota į vietinės piniginės istoriją</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="318"/>
@@ -1794,27 +1794,27 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="476"/>
         <source>Create tx file</source>
-        <translation>Sukurti tx bylą</translation>
+        <translation>Sukurti trans. failą</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="495"/>
         <source>Sign tx file</source>
-        <translation>Pasirašyti tx bylą</translation>
+        <translation>Pasirašyti trans. failą</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="506"/>
         <source>Submit tx file</source>
-        <translation>Siųsti tx bylą</translation>
+        <translation>Siųsti trans. failą</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="518"/>
         <source>Export key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Iškelti raktų atvaizdus</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="530"/>
         <source>Import key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Įkelti rakto atvaizdus</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
@@ -1832,17 +1832,17 @@ The old wallet cache file will be renamed and can be restored later.
         <location filename="../pages/Transfer.qml" line="606"/>
         <location filename="../pages/Transfer.qml" line="650"/>
         <source>Please choose a file</source>
-        <translation>Pasirinkite bylą</translation>
+        <translation>Pasirinkite failą</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="48"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Paleisti jungtį&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Paleisti daemoną&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="84"/>
         <source>Ring size: %1</source>
-        <translation>Žiedų kiekis: %1</translation>
+        <translation>Žiedo dydis: %1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="193"/>
@@ -1852,7 +1852,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="221"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresų knyga&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Adresas &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresų knyga&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="406"/>
@@ -1862,7 +1862,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="557"/>
         <source>Can&apos;t load unsigned transaction: </source>
-        <translation>Nepavyko įkelti nepasirašyto pavedimo: </translation>
+        <translation>Nepavyko užkrauti nepasirašyto pavedimo: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="564"/>
@@ -1911,7 +1911,7 @@ Rinkliava: </translation>
         <source>
 Ringsize: </source>
         <translation>
-Žiedų kiekis: </translation>
+Žiedo dydis: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="585"/>
@@ -1932,19 +1932,19 @@ Ringsize: </source>
         <location filename="../pages/Transfer.qml" line="702"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Susieta jungtis nesuderinamas su GVS.
-Prašome atnaujinti arba prisijungti prie kitos jungties</translation>
+        <translation>Susietas daemonas nesuderinamas su Vaizdo sąsaja.
+Prašome atnaujinti arba prisijungti prie kito daemono</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="687"/>
         <location filename="../pages/Transfer.qml" line="699"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Piniginė neprijungta prie jungties.</translation>
+        <translation>Piniginė neprijungta prie daemono.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="707"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Laukiama kol jungtis baigs sinchronizavimą</translation>
+        <translation>Laukiama kol daemonas baigs sinchronizavimą</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -1954,32 +1954,32 @@ Prašome atnaujinti arba prisijungti prie kitos jungties</translation>
     <message>
         <location filename="../pages/Transfer.qml" line="433"/>
         <source>Transaction cost</source>
-        <translation>Pavedimo kaina</translation>
+        <translation>Transakcijos kaina</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="295"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Mokėjimo ID &lt;font size=&apos;2&apos;&gt;( pasirinkinai )&lt;/font&gt;</translation>
+        <translation>Mokėjimo ID &lt;font size=&apos;2&apos;&gt;( neprivaloma )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="192"/>
         <source>Slow (x0.25 fee)</source>
-        <translation>Lėtai (x0.25 rinkliavos)</translation>
+        <translation>Lėtas (x0.25 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="194"/>
         <source>Fast (x5 fee)</source>
-        <translation>Greitai (x5 rinkliavos)</translation>
+        <translation>Greitas (x5 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="195"/>
         <source>Fastest (x41.5 fee)</source>
-        <translation>Greičiausiai (x41.5 rinkliavos)</translation>
+        <translation>Greičiausias (x41.5 rinkliavos)</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="296"/>
         <source>16 or 64 hexadecimal characters</source>
-        <translation>16 arba 64 šešioliktainės simbolių</translation>
+        <translation>16 arba 64 šešioliktainės sistemos simbolių</translation>
     </message>
 </context>
 <context>
@@ -1998,14 +1998,14 @@ Prašome atnaujinti arba prisijungti prie kitos jungties</translation>
     <message>
         <location filename="../pages/TxKey.qml" line="66"/>
         <source>Prove Transaction</source>
-        <translation>Patvirtinti pavedimą</translation>
+        <translation>Patvirtinti transakciją</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="70"/>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
         <translation>Gaukite savo gaunamo / siunčiamo mokėjimo įrodymą pateikdami sandorio ID, gavėjo adresą ir neprivalomą žinutę.
-Išeinančių mokėjimų atveju galite gauti &quot;Išleidimo įrodymas&quot;, kuris patvirtina sandorio autorių. Tokiu atveju jums nereikia nurodyti gavėjo adreso.</translation>
+Išeinančių mokėjimų atveju galite gauti &quot;Išleidimo įrodymą&quot;, kuris patvirtina sandorio autorių. Tokiu atveju jums nereikia nurodyti gavėjo adreso.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="96"/>
@@ -2023,7 +2023,7 @@ Išeinančių mokėjimų atveju galite gauti &quot;Išleidimo įrodymas&quot;, k
         <location filename="../pages/TxKey.qml" line="108"/>
         <location filename="../pages/TxKey.qml" line="185"/>
         <source>Optional message against which the signature is signed</source>
-        <translation>Neprivaloma žinutė</translation>
+        <translation>Neprivaloma žinutė kuria bus pariamtas naudojamas parašas</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="121"/>
@@ -2033,7 +2033,7 @@ Išeinančių mokėjimų atveju galite gauti &quot;Išleidimo įrodymas&quot;, k
     <message>
         <location filename="../pages/TxKey.qml" line="141"/>
         <source>Check Transaction</source>
-        <translation>Patikrinti pavedimą</translation>
+        <translation>Patikrinti transakciją</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="197"/>
@@ -2043,25 +2043,25 @@ Išeinančių mokėjimų atveju galite gauti &quot;Išleidimo įrodymas&quot;, k
     <message>
         <location filename="../pages/TxKey.qml" line="198"/>
         <source>Paste tx proof</source>
-        <translation>Įterpti tx patvirtinimą</translation>
+        <translation>Įterpti trans. patvirtinimą</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="81"/>
         <location filename="../pages/TxKey.qml" line="157"/>
         <source>Transaction ID</source>
-        <translation>Pavedimo ID</translation>
+        <translation>Transakcijos ID</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="84"/>
         <location filename="../pages/TxKey.qml" line="159"/>
         <source>Paste tx ID</source>
-        <translation>Įterpti tx ID</translation>
+        <translation>Įterpti trans. ID</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="145"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation>Patikrinkite, ar lėšos buvo sumokėtos adresu, pateikdami sandorio ID, gavėjo adresą, pasirašymui naudojamą žinutę ir parašą.
+        <translation>Patikrinkite, ar lėšos buvo sumokėtos teisingam adresui, pateikdami sandorio ID, gavėjo adresą, pasirašymui naudojamą žinutę ir parašą.
 Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo adreso.</translation>
     </message>
     <message>
@@ -2075,27 +2075,27 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
         <source>We’re almost there - let’s just configure some Monero preferences</source>
-        <translation>Mes jau beveik baigėme.- liko tik keli Monero nustatymai</translation>
+        <translation>Mes jau beveik baigėme - liko tik keli Monero nustatymai</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradėkime Monero blokų grandinę?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Šią paslaptį yra labai svarbu kažkur užsirašyti ir laikyti saugiai. Tai yra viskas ko jums prireiks, norint atkurti šią piniginę.</translation>
+        <translation>Šią paslaptį yra labai svarbu užsirašyti ir laikyti saugiai. Tai yra viskas ko jums prireiks, norint atkurti šią piniginę.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="124"/>
         <source>Enable disk conservation mode?</source>
-        <translation>Įjungti disko konservavimo režimą?</translation>
+        <translation>Įjungti diską saugantį režimą?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Disko konservavimo režimas naudoja žymiai mažiau disko vietos, tačiau tokio paties pralaidumo kaip normalus &quot;Monero&quot;. Tačiau saugoti visą blokų grandinę naudinga &quot;Monero&quot; tinklo saugumui. Jei esate įrenginyje, kuriame yra ribota disko vieta, ši parinktis jums tinkamiausia.</translation>
+        <translation>Diską saugantis režimas naudoja žymiai mažiau disko vietos, tačiau tokio paties pralaidumo kaip standartinė Monero instancija. Tačiau išsaugoti lokaliai visą blokų grandinę naudinga Monero tinklo saugumui. Jei naudojate įrenginį, kuriame yra ribota disko vieta, ši parinktis jums tinkamiausia.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2105,7 +2105,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Kasimas apsaugo &quot;Monero&quot; tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Monero, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, jis nustos kasti.</translation>
+        <translation>Kasimas apsaugo Monero tinklą, taip pat moka nedidelį atlygį už atliktą darbą. Ši parinktis leis kasti Monero, kai jūsų kompiuteris yra prijungtas prie maitinimo tinklo ir yra nenaudojamas. Jei tęsite darbą, kasimas sustos.</translation>
     </message>
 </context>
 <context>
@@ -2113,7 +2113,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardCreateViewOnlyWallet.qml" line="68"/>
         <source>Create view only wallet</source>
-        <translation>Sukurti piniginę peržiūrai</translation>
+        <translation>Sukurti peržiūros piniginę</translation>
     </message>
 </context>
 <context>
@@ -2129,7 +2129,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti naują piniginę iš fizinio įrenginio</translation>
     </message>
 </context>
 <context>
@@ -2137,12 +2137,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Tam, kad galėtumet komunikuoti Monero tinkle jums reikia piniginę prijungi prie jungties. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą jungtį.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavos jungties, galite jungti prie nutolusios jungties.</translation>
+        <translation>Tam, kad galėtumete komunikuoti Monero tinkle jums reikia prijungi piniginę prie Monero mazgo. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą mazgą.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavos mazgo, galite jungti prie nuotolinio mazgo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Pradėti jungtį automatiškai fone (rekomenduojama)</translation>
+        <translation>Pradėti mazg1 automatiškai fone (rekomenduojama)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="148"/>
@@ -2152,17 +2152,17 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="159"/>
         <source>(optional)</source>
-        <translation>(pasirinktinai)</translation>
+        <translation>(neprivaloma)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="183"/>
         <source>Bootstrap node (leave blank if not wanted)</source>
-        <translation>Paleidimo režimas (palikite tuščią jei nepageidaujamas)</translation>
+        <translation>&quot;Bootstrap&quot; mazgas (palikite tuščią jei nepageidaujamas)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="210"/>
         <source>Connect to a remote node</source>
-        <translation>Prisijungti prie nuotolinės jungties</translation>
+        <translation>Prisijungti prie nuotolinio mazgo</translation>
     </message>
 </context>
 <context>
@@ -2215,12 +2215,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Mainnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagrindinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="65"/>
@@ -2240,17 +2240,17 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
         <source>Wallet path</source>
-        <translation>Piniginės kelias</translation>
+        <translation>Piniginės vieta</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="76"/>
         <source>Daemon address</source>
-        <translation>Jungties adresas</translation>
+        <translation>Daemono adresas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="77"/>
@@ -2304,7 +2304,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
         <location filename="../wizard/WizardMain.qml" line="406"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Peržiūros piniginė buvo sukurta. Ją atidaryti galite uždarydami dabartinę piniginę, spauskite atidaryti iš bylos ir pasirinkite aplanke: %1</translation>
+        <translation>Peržiūros piniginė buvo sukurta. Ją atidaryti galite uždarydami dabartinę piniginę, spauskite &quot;Atidaryti piniginę iš failo&quot; ir pasirinkite piniginę aplanke: %1</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="414"/>
@@ -2327,17 +2327,17 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="189"/>
         <source>Restore from seed</source>
-        <translation>Atstatyti iš paslapties</translation>
+        <translation>Atkurti iš paslapties</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="199"/>
         <source>Restore from keys</source>
-        <translation>Atstatyti pagal raktus</translation>
+        <translation>Atkurti naudojant raktus</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="209"/>
         <source>From QR Code</source>
-        <translation>Pagal QR kodą</translation>
+        <translation>Iš QR kodo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="247"/>
@@ -2357,7 +2357,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="300"/>
         <source>Restore height (optional)</source>
-        <translation>Grandinės aukštis (neprivaloma)</translation>
+        <translation>Atstatyti aukštį (neprivaloma)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
@@ -2367,12 +2367,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrenginio pavadinimas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcijų sąrašas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
@@ -2390,7 +2390,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Įveskite savo 25 (or 24) žodžių paslaptį</translation>
+        <translation>Įveskite savo 25 (arba 24) žodžių paslaptį</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2400,7 +2400,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="93"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Šią paslaptį yra &lt;b&gt;labai&lt;/b&gt; svarbu kažkur užsirašyti ir laikyti saugiai. Tai yra viskas ko jums prireiks, norint atkurti šią piniginę.</translation>
+        <translation>Šią paslaptį yra &lt;b&gt;labai&lt;/b&gt; svarbu užsirašyti ir laikyti saugiai. Tai yra viskas ko jums prireiks norint atkurti šią piniginę.</translation>
     </message>
 </context>
 <context>
@@ -2413,7 +2413,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardOptions.qml" line="87"/>
         <source>Please select one of the following options:</source>
-        <translation>Prašome pasirinkti būdą piniginės atidarymui:</translation>
+        <translation>Pasirinkite vieną iš variantų:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="143"/>
@@ -2428,32 +2428,32 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardOptions.qml" line="227"/>
         <source>Open a wallet from file</source>
-        <translation>Atidaryti piniginės bylą</translation>
+        <translation>Atidaryti piniginę iš failo</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti naują piniginę iš fizinio įrenginio</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Išplėstinės nuostatos</translation>
+        <translation>Išplėstinės nuostatos</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagridinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="343"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
 </context>
 <context>
@@ -2468,8 +2468,8 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt;Pastaba: šis slaptažodis negali būti atkurtas. Jeigu pamiršote tuomet piniginę turėsite atkurti pagal 25 žodžių paslaptį.&lt;br/&gt;&lt;br/&gt;
-                        &lt;b&gt;Įveskite sudėtingą slaptažodį&lt;/b&gt; (naudodami raides, skaičius, ir/arba simbolius):</translation>
+        <translation> &lt;br&gt;Pastaba: šis slaptažodis negali būti atkurtas. Jei jį pamiršote tuomet piniginę turėsite atkurti pagal 25 žodžių paslaptį.&lt;br/&gt;&lt;br/&gt;
+                        &lt;b&gt;Įveskite sudėtingą slaptažodį&lt;/b&gt; (naudodami raides, skaičius ir/arba simbolius):</translation>
     </message>
 </context>
 <context>
@@ -2538,7 +2538,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../main.qml" line="429"/>
         <source>Unlocked balance (~%1 min)</source>
-        <translation>Disponuojama ( už ~%1 min)</translation>
+        <translation>Disponuojama ( už ~%1 min.)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="429"/>
@@ -2548,39 +2548,39 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../main.qml" line="514"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Laukiama, kol pasileis jungtis...</translation>
+        <translation>Laukiama, kol pasileis daemonas...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="520"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Laukiama, kol jungtis bus sustabdyta...</translation>
+        <translation>Laukiama, kol daemonas bus sustabdytas...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="545"/>
         <source>Daemon failed to start</source>
-        <translation>Jungties paleisti nepavyko</translation>
+        <translation>Daemono paleisti nepavyko</translation>
     </message>
     <message>
         <location filename="../main.qml" line="546"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Prašome patikrinti piniginės ir jungties klaidų istoriją. Galite bandyti paleisti %1 rankiniu būdu.</translation>
+        <translation>Prašome patikrinti piniginės ir daemono išrašus. Taip pat galite bandyti paleisti %1 savarankiškai.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="608"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Negalima sukurti pavedimo: Bloga jungties versija: </translation>
+        <translation>Negalima sukurti transakcijos: Bloga daemono versija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="610"/>
         <location filename="../main.qml" line="729"/>
         <source>Can&apos;t create transaction: </source>
-        <translation>Negalima sukurti pavedimo: </translation>
+        <translation>Negalima sukurti transakcijos: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="619"/>
         <location filename="../main.qml" line="738"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Nera nesumaišomos išvesties ištrinimui</translation>
+        <translation>Nėra nesumaišomų išeigų ištrinimui</translation>
     </message>
     <message>
         <location filename="../main.qml" line="750"/>
@@ -2592,7 +2592,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
         <location filename="../main.qml" line="751"/>
         <source>Please confirm transaction:
 </source>
-        <translation>Prašome patvirtinti pavedimą:
+        <translation>Prašome patvirtinti transakciją:
 </translation>
     </message>
     <message>
@@ -2623,17 +2623,17 @@ Rinkliava: </translation>
     <message>
         <location filename="../main.qml" line="829"/>
         <source>Payment proof</source>
-        <translation>Pavedimo patvirtinimas</translation>
+        <translation>Mokėjimo patvirtinimas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="472"/>
         <source>Waiting for daemon to sync</source>
-        <translation>jaukiama jungties sinchronizacijos</translation>
+        <translation>Laukiama daemono sinchronizacijos</translation>
     </message>
     <message>
         <location filename="../main.qml" line="474"/>
         <source>Daemon is synchronized (%1)</source>
-        <translation>Jungtis sinchronizuota (%1)</translation>
+        <translation>Daemonas sinchronizuotas (%1)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="476"/>
@@ -2643,7 +2643,7 @@ Rinkliava: </translation>
     <message>
         <location filename="../main.qml" line="562"/>
         <source>Daemon is synchronized</source>
-        <translation>Jungtis sinchronizuota</translation>
+        <translation>Daemonas sinchronizuotas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="632"/>
@@ -2664,7 +2664,7 @@ Ringsize: </source>
 WARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.</source>
         <translation>
 
-ĮSPĖJIMAS: netipinis žedų kiekis, tai gali pakenkti jūsų privatumui. Numatytas 7 yra rekomenduojamas.</translation>
+ĮSPĖJIMAS: netipinis žiedų kiekis, tai gali pakenkti jūsų privatumui. Rekomenduojamas skaičius yra 7.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="640"/>
@@ -2692,7 +2692,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero sėkmingai išsiųsti: %1 operacija (-os) </translation>
+        <translation>Monero sėkmingai išsiųsti: %1 operacija(-os) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="832"/>
@@ -2716,7 +2716,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="873"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Šis adresas gavo%1 Monero, su%2 patvirtinimu (-ais).</translation>
+        <translation>Šis adresas gavo %1 Monero, su %2 patvirtinimų(-ais).</translation>
     </message>
     <message>
         <location filename="../main.qml" line="884"/>
@@ -2741,12 +2741,12 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1150"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Įspėjimas: Tik %1 GB liko įrenginyje. Blokų grandinė reikalauja ~%2 GB laisvos vietos.</translation>
+        <translation>Įspėjimas: Įrenginyje liko tik %1 GB. Blokų grandinės tinklas reikalauja ~%2 GB laisvos vietos.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1152"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Pastaba: Tik %1 GB liko įrenginyje. Blokai reikalauja ~%2 GB laisvos vietos.</translation>
+        <translation>Pastaba: Įrenginyje liko %1 GB. Blokų grandinės tinklas reikalauja ~%2 GB laisvos vietos.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1154"/>
@@ -2771,22 +2771,22 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1738"/>
         <source>Tap again to close...</source>
-        <translation>Spauskite dar kartą, kad išjungti...</translation>
+        <translation>Spustelkite dar kartą, kad išjungti...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1751"/>
         <source>Daemon is running</source>
-        <translation>Jungtis paleista</translation>
+        <translation>Daemonas paleista</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1752"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Jungtis liks paleista fone, jeigu išjungsite piniginę.</translation>
+        <translation>Jei išjungsite vaizdinę sąsają daemonas vis dar liks fone</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1754"/>
         <source>Stop daemon</source>
-        <translation>Sustabdyti jungtį</translation>
+        <translation>Sustabdyti daemoną</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1789"/>
@@ -2796,7 +2796,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1821"/>
         <source>Daemon log</source>
-        <translation>Jungties istorija</translation>
+        <translation>Daemono išrašas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="357"/>
@@ -2807,12 +2807,12 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="675"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
-        <translation>Suma yra bloga: galimos reikšmės nuo %1 iki %2</translation>
+        <translation>Suma yra neteisinga: galimos reikšmės nuo %1 iki %2</translation>
     </message>
     <message>
         <location filename="../main.qml" line="687"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
-        <translation>Nepakanka lėšų. Leidžiama: %1</translation>
+        <translation>Nepakanka lėšų. Prieinams likutis: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="790"/>
@@ -2828,12 +2828,12 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Transaction saved to file: %1</source>
-        <translation>Pavedimas išsaugotas į bylą: %1</translation>
+        <translation>Tranakcija išsaugota į failą: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Šis adresas gavo%1 Monero, tačiau pavedimas dar nėra iškastas</translation>
+        <translation>Šis adresas gavo %1 Monero, tačiau transakcija dar nėra iškastas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="877"/>
@@ -2843,12 +2843,12 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="896"/>
         <source>Balance (syncing)</source>
-        <translation>Balansinis likutis (sinchronizuojama)</translation>
+        <translation>Balansas (sinchronizuojama)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="896"/>
         <source>Balance</source>
-        <translation>Balansinis likutis</translation>
+        <translation>Balansas</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1257"/>
@@ -2858,12 +2858,12 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1281"/>
         <source>Program setup wizard</source>
-        <translation>Programos nustatymai</translation>
+        <translation>Programos nustatymų sąsaja</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1297"/>
         <source>Monero</source>
-        <translation>Bitlitas</translation>
+        <translation>Monero</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>
