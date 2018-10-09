@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
         <source>4.. / 8..</source>
-        <translation type="unfinished"></translation>
+        <translation>4.. / 8..</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation>Jungtis bus paleista už %1 sekundžių</translation>
+        <translation>Vietinis mazgas bus paleista už %1 sekundžių</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="111"/>
@@ -159,12 +159,12 @@
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Data nuo</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Data iki</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tx ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
@@ -278,7 +278,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tx ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
@@ -381,7 +381,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: Pakartotinai nenaudokite savo Monero raktų kitoje atšakoje, NEBENT ši atšaka turi pakartotinio naudojimo švelninimo priemones. Panaudojus jūsų privatumas gali būti pažeistas.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="166"/>
@@ -429,7 +429,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="364"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
@@ -439,7 +439,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="458"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="387"/>
@@ -454,12 +454,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testavimo tinklas</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="124"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="338"/>
@@ -469,12 +469,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="339"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="388"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="410"/>
@@ -484,7 +484,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="411"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="433"/>
@@ -494,7 +494,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="434"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="480"/>
@@ -509,7 +509,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="551"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="601"/>
@@ -529,22 +529,22 @@
     <message>
         <location filename="../LeftPanel.qml" line="529"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="314"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="481"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="506"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="528"/>
@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Piniginė</translation>
+        <translation>Piniginė</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Išdėstymas</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Registras</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacija</translation>
     </message>
 </context>
 <context>
@@ -730,7 +730,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Remote node</source>
-        <translation>Nutolusi jungtis</translation>
+        <translation>Nutolęs mazgas</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
@@ -1011,7 +1011,7 @@
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="69"/>
         <source>Remote Node Hostname / IP</source>
-        <translation>Nutolusios jungties IP</translation>
+        <translation>Nutolusio mazgo IP</translation>
     </message>
     <message>
         <location filename="../components/RemoteNodeEdit.qml" line="87"/>
@@ -1037,37 +1037,37 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
         <source>GUI version: </source>
-        <translation type="unfinished"></translation>
+        <translation>GVS versija: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Integruota Monero versija: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės kelias: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės kūrimo aukštis: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (Paspauskite, kad pakeisti)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
         <source>Set a new restore height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nustatyti naują atkūrimo aukštį:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
         <source>Rescan wallet cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Skenuoti piniginės talpyklą</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1079,32 +1079,39 @@ The following information will be deleted
 
 The old wallet cache file will be renamed and can be restored later.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ar tikrai norite atkurti piniginės talpyklą?
+Ši informacija bus ištrinta:
+- Gavėjų adresai
+- Tx raktai
+- Tx aprašymai
+
+Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstatyta.
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
         <source>Cancel</source>
-        <translation type="unfinished">Atšaukti</translation>
+        <translation>Atšaukti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
         <source>Invalid restore height specified. Must be a number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nurodytas netinkamas atkūrimo aukštis. Turi būti numeris.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation type="unfinished"></translation>
+        <translation>Piniginės istorijos kelias: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopijuoti į iškarpinę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Nukopijuota</translation>
+        <translation>Nukopijuota į iškarpinę</translation>
     </message>
 </context>
 <context>
@@ -1112,12 +1119,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation type="unfinished"></translation>
+        <translation>Individualios dekoracijos</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kol kas mobiliojo ryšio režimu nėra išdėstymo parinkčių.</translation>
     </message>
 </context>
 <context>
@@ -1125,17 +1132,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation type="unfinished"></translation>
+        <translation>Žurnalo lygis</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation type="unfinished">Jungties istorija</translation>
+        <translation>Jungties istorija</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>komanda + enter (pvz.: &apos;help&apos; ar &apos;status&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1143,88 +1150,88 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="114"/>
         <source>Local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietinis mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokų grandinė atsisiunčiama į jūsų kompiuterį. Užtikrina didesnį saugumą, bet reikalauja daugiau vietos diske.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
         <source>Remote node</source>
-        <translation type="unfinished">Nutolusi jungtis</translation>
+        <translation>Nutolęs mazgas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudoja trečiosios šalies serverį prisijungti prie &quot;Monero&quot; tinklo. Mažiau saugus, bet reikalauja mažiau vietos diske.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation type="unfinished"></translation>
+        <translation>Norėdami rasti nuotolinį mazgą, įveskite &quot;Monero remote node&quot; savo mėgstamoje paieškos sistemoje. Įsitikinkite, kad mazgas yra patikimo tiekėjo.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation type="unfinished">Adresas</translation>
+        <translation>Adresas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
         <source>Port</source>
-        <translation type="unfinished">Prievadas</translation>
+        <translation>Prievadas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="312"/>
         <location filename="../pages/settings/SettingsNode.qml" line="450"/>
         <source>(optional)</source>
-        <translation type="unfinished">(pasirinktinai)</translation>
+        <translation>(pasirinktinai)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="323"/>
         <source>Password</source>
-        <translation type="unfinished">Slaptažodis</translation>
+        <translation>Slaptažodis</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="347"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Prisijungti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="399"/>
         <source>Stop local node</source>
-        <translation type="unfinished"></translation>
+        <translation>Sustabdyti vietinį mazgą</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source>Blockchain location</source>
-        <translation type="unfinished">Blokų grandinės vieta</translation>
+        <translation>Blokų grandinės vieta</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="420"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (pakeisti)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="421"/>
         <source>(default)</source>
-        <translation type="unfinished"></translation>
+        <translation>(numatyta)</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Jungties paleidimo žymės</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleisties adresas</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleisties prievadas</translation>
     </message>
 </context>
 <context>
@@ -1232,82 +1239,82 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti šią piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atsijungi iš šitos piniginės.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
         <source>Close wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uždaryti piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="171"/>
         <source>Create a view-only wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti piniginę peržiūrai</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukuria naują piniginę, kuri gali tik peržiūrėti sandorius, bet negali inicijuoti operacijų.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Sukurti piniginę</translation>
+        <translation>Sukurti piniginę</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti paslaptį ir raktus</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saugokite šią informaciją, kad ateityje galėtumėte atkurti savo piniginę.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti paslaptį</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
         <source>Rescan wallet balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš naujo nuskaityti piniginės likutį</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naudokite šią funkciją, jei manote, kad rodomas balansas yra netikslus.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš naujo nuskaityti</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="410"/>
         <source>Error</source>
-        <translation type="unfinished">Klaida</translation>
+        <translation>Klaida</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">Klaida: </translation>
+        <translation>Klaida: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
         <source>Information</source>
-        <translation type="unfinished">Informacija</translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="417"/>
         <source>Successfully rescanned spent outputs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sėkmingai nuskaitytos panaudotos išvestys.</translation>
     </message>
 </context>
 <context>
@@ -1357,12 +1364,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="163"/>
         <source>Path to file</source>
-        <translation>Kelias iki bylos</translation>
+        <translation>Kelias iki rinkmenos</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="165"/>
         <source>Filename with outputs to blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Rinkmena su išvestimis kurias norite atmesti</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="178"/>
@@ -1382,17 +1389,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="206"/>
         <source>Paste output public key</source>
-        <translation type="unfinished"></translation>
+        <translation>Įterpti viešąjį išvesties raktą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="220"/>
         <source>Blackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Atmesti</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="229"/>
         <source>Unblackball</source>
-        <translation type="unfinished"></translation>
+        <translation>Atšaukti atmetimą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="242"/>
@@ -1413,12 +1420,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="278"/>
         <source>Key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Rakto atvaizdas</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>Paste key image</source>
-        <translation type="unfinished"></translation>
+        <translation>Įterpti rakto atvaizdą</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="299"/>
@@ -1503,7 +1510,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="107"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
-        <translation>Šiame puslapyje galite pasirašyti / patvirtinti žinutę (arba bylos turinį) savo adresu.</translation>
+        <translation>Šiame puslapyje galite pasirašyti / patvirtinti žinutę (arba rinkmenos turinį) savo adresu.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="125"/>
@@ -1513,7 +1520,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
         <source>Path to file</source>
-        <translation>Kelias iki bylos</translation>
+        <translation>Kelias iki rinkmenos</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="169"/>
@@ -1529,7 +1536,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="248"/>
         <source>Verify file</source>
-        <translation>Patikrinti bylą</translation>
+        <translation>Patikrinti rinkmeną</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
@@ -1539,7 +1546,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="319"/>
         <source>Please choose a file to sign</source>
-        <translation>Pasirinkite bylą, kurią norite pasirašyti</translation>
+        <translation>Pasirinkite rinkmeną, kurią norite pasirašyti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="211"/>
@@ -1551,7 +1558,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="330"/>
         <source>Please choose a file to verify</source>
-        <translation>Pasirinkite bylą, kurią norite patikrinti</translation>
+        <translation>Pasirinkite rinkmeną, kurią norite patikrinti</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="198"/>
@@ -1569,7 +1576,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="249"/>
         <source>Filename with message to verify</source>
-        <translation>Bylos pavadinimas su žinute, kuriuos reikia patikrinti</translation>
+        <translation>Rinkmenos pavadinimas su žinute, kuriuos reikia patikrinti</translation>
     </message>
 </context>
 <context>
@@ -1743,7 +1750,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="191"/>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatinis</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="263"/>
@@ -1794,27 +1801,27 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="476"/>
         <source>Create tx file</source>
-        <translation>Sukurti tx bylą</translation>
+        <translation>Sukurti tx rinkmeną</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="495"/>
         <source>Sign tx file</source>
-        <translation>Pasirašyti tx bylą</translation>
+        <translation>Pasirašyti tx rinkmeną</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="506"/>
         <source>Submit tx file</source>
-        <translation>Siųsti tx bylą</translation>
+        <translation>Siųsti tx rinkmeną</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="518"/>
         <source>Export key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti rakto atvaizdus</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="530"/>
         <source>Import key images</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti rakto atvaizdus</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="556"/>
@@ -1832,7 +1839,7 @@ The old wallet cache file will be renamed and can be restored later.
         <location filename="../pages/Transfer.qml" line="606"/>
         <location filename="../pages/Transfer.qml" line="650"/>
         <source>Please choose a file</source>
-        <translation>Pasirinkite bylą</translation>
+        <translation>Pasirinkite rinkmeną</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="48"/>
@@ -2080,7 +2087,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradėti Monero blokų grandinę?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
@@ -2129,7 +2136,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti naują piniginę iš įrenginio</translation>
     </message>
 </context>
 <context>
@@ -2137,12 +2144,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Tam, kad galėtumet komunikuoti Monero tinkle jums reikia piniginę prijungi prie jungties. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą jungtį.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavos jungties, galite jungti prie nutolusios jungties.</translation>
+        <translation>Tam, kad galėtumet komunikuoti Monero tinkle jums reikia piniginę prijungi prie Monero mazgo. Tam, kad užtikrinti geriausią privatumą rekomenduojame paleisti nuosavą mazgą.                          &lt;br&gt;&lt;br&gt;                        Jeigu neturite galimybės paleisti nuosavo mazgo, galite jungti prie nutolusio mazgo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Pradėti jungtį automatiškai fone (rekomenduojama)</translation>
+        <translation>Pradėti mazgą automatiškai fone (rekomenduojama)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="148"/>
@@ -2157,12 +2164,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="183"/>
         <source>Bootstrap node (leave blank if not wanted)</source>
-        <translation>Paleidimo režimas (palikite tuščią jei nepageidaujamas)</translation>
+        <translation>Paleisties mazgas (palikite tuščią jei nepageidaujamas)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="210"/>
         <source>Connect to a remote node</source>
-        <translation>Prisijungti prie nuotolinės jungties</translation>
+        <translation>Prisijungti prie nutolusio mazgo</translation>
     </message>
 </context>
 <context>
@@ -2215,12 +2222,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Mainnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagrindinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="65"/>
@@ -2250,7 +2257,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testavimo tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="77"/>
@@ -2304,7 +2311,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
         <location filename="../wizard/WizardMain.qml" line="406"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Peržiūros piniginė buvo sukurta. Ją atidaryti galite uždarydami dabartinę piniginę, spauskite atidaryti iš bylos ir pasirinkite aplanke: %1</translation>
+        <translation>Peržiūros piniginė buvo sukurta. Ją atidaryti galite uždarydami dabartinę piniginę, spauskite atidaryti iš rinkmenos ir pasirinkite aplanke: %1</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="414"/>
@@ -2367,12 +2374,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Įrenginio vardas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Vadovėlis</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
@@ -2428,32 +2435,32 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../wizard/WizardOptions.qml" line="227"/>
         <source>Open a wallet from file</source>
-        <translation>Atidaryti piniginės bylą</translation>
+        <translation>Atidaryti piniginės rinkmeną</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished"></translation>
+        <translation>Sukurti naują piniginę iš įrenginio</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Išplėstinės nuostatos</translation>
+        <translation>Išplėstinės nuostatos</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagrindinis tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
         <source>Testnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Testavimo tinklas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="343"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarpinis tinklas</translation>
     </message>
 </context>
 <context>
@@ -2736,7 +2743,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1148"/>
         <source>Error: Filesystem is read only</source>
-        <translation>Klaida: Failų sistema leidžia tik skaitymą</translation>
+        <translation>Klaida: Rinkmenų sistema leidžia tik skaitymą</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1150"/>
@@ -2828,7 +2835,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="799"/>
         <source>Transaction saved to file: %1</source>
-        <translation>Pavedimas išsaugotas į bylą: %1</translation>
+        <translation>Pavedimas išsaugotas į rinkmeną: %1</translation>
     </message>
     <message>
         <location filename="../main.qml" line="870"/>
@@ -2863,7 +2870,7 @@ Išlaidų adreso rodyklė: </translation>
     <message>
         <location filename="../main.qml" line="1297"/>
         <source>Monero</source>
-        <translation>Bitlitas</translation>
+        <translation>Monero</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1447"/>
