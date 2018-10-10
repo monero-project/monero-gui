@@ -339,6 +339,9 @@ macx {
 
 # translation stuff
 TRANSLATIONS = $$files($$PWD/translations/monero-core_*.ts)
+               $$PWD/translations/monero-core_bg.ts \ # Bulgarian
+
+
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
