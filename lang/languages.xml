@@ -55,4 +55,5 @@ Lojban
         <language display_name="Lietuvių" locale="lt_LT" wallet_language="English" flag="/lang/flags/lt.png" qs="none"/>
         <language display_name="Suomi" locale="fi_FI" wallet_language="English" flag="/lang/flags/fi.png" qs="none"/>
         <language display_name="Pirate" locale="prt" wallet_language="English" flag="/lang/flags/pirate.png" qs="none"/>
+        <language display_name="Български" locale="bg_BG" wallet_language="English" flag="/lang/flags/bg.png" qs="none"/>
 </languages>
