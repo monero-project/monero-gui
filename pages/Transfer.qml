@@ -339,7 +339,8 @@ Rectangle {
                   }
 
                   // The amount does not start with a period (example: `.4`)
-                  if(amountLine.text.startsWith('.')){
+                  // @TODO: replace with .startsWith() after Qt >=5.8
+                  if(amountLine.text.indexOf('.') === 0){
                       return false;
                   }
 
