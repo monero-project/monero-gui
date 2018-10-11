@@ -11,12 +11,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="51"/>
         <source>Qr Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kode QR</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="73"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Menandai Pembayaran&lt;font size=&apos;2&apos;&gt;(opsional)&lt;/font&gt;</translation>
+        <translation>ID Pembayaran&lt;font size=&apos;2&apos;&gt;(opsional)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="66"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
         <source>Paste 64 hexadecimal characters</source>
-        <translation>Merekatkan 64 simbol heksadesimal</translation>
+        <translation>Tempel 64 simbol heksadesimal</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="82"/>
@@ -36,7 +36,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="83"/>
         <source>Give this entry a name or description</source>
-        <translation>Pililah nama atau menuliskan catatan untuk alamat ini</translation>
+        <translation>Beri nama atau catatan untuk alamat ini</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="91"/>
@@ -51,12 +51,12 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Invalid address</source>
-        <translation>Macam alamat salah</translation>
+        <translation>Alamat tidak diketahui</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="103"/>
         <source>Can&apos;t create entry</source>
-        <translation>Tidak dapat membuat catatan</translation>
+        <translation>Item tidak dapat dibuat</translation>
     </message>
 </context>
 <context>
@@ -64,17 +64,17 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Hasil selesai</translation>
+        <translation>Tidak ada hasil lainnya</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="105"/>
         <source>Payment ID:</source>
-        <translation>Menandai pembayaran:</translation>
+        <translation>ID Pembayaran:</translation>
     </message>
     <message>
         <location filename="../components/AddressBookTable.qml" line="150"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Alamat berhasil disalin</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="../components/DaemonConsole.qml" line="177"/>
         <source>command + enter (e.g help)</source>
-        <translation>command + enter (contoh: membantu)</translation>
+        <translation>command + enter (contoh: help)</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="93"/>
         <source>Starting local node in %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> Memulai node lokal dalam %1 detik</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="111"/>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="124"/>
         <source>Use custom settings</source>
-        <translation>Menggunakan pengaturan yang dipilih oleh Anda</translation>
+        <translation>Gunakan pengaturan yang dipilih oleh Anda</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     <message>
         <location filename="../components/DashboardTable.qml" line="47"/>
         <source>No more results</source>
-        <translation>Hasil selesai</translation>
+        <translation>Tidak ada hasil lainnya</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="137"/>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../components/DashboardTable.qml" line="170"/>
         <source>Balance</source>
-        <translation>Saldo Rekening</translation>
+        <translation>Saldo</translation>
     </message>
     <message>
         <location filename="../components/DashboardTable.qml" line="190"/>
@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> dipilih: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Cari</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation> Tanggal mulai</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation> Tanggal selesai</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Urutkan</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Ketinggian blok</translation>
+        <translation>Ketinggian blok</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Tanggal</translation>
+        <translation>Tanggal</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak ada sejarah...</translation>
     </message>
 </context>
 <context>
@@ -192,12 +192,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx ID:</source>
-        <translation>Menandai transaksi:</translation>
+        <translation>ID transaksi:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
         <source>Payment ID:</source>
-        <translation>Menandai pembayaran:</translation>
+        <translation>ID pembayaran:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="52"/>
@@ -212,7 +212,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="54"/>
         <source>Destinations:</source>
-        <translation>Tujuan-tujuan:</translation>
+        <translation>Tujuan:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="55"/>
@@ -222,12 +222,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="80"/>
         <source>No more results</source>
-        <translation>Hasil selesai</translation>
+        <translation>Tidak ada hasil lainnya</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Alamat berhasil disalin</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="343"/>
@@ -237,12 +237,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="368"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Deskripsi</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="347"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2 konfirmasi)</translation>
+        <translation>(%1/%2 konfirmasi)</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="351"/>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="353"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation>GAGAL</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="354"/>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="87"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Berhasil disalin</translation>
     </message>
 </context>
 <context>
@@ -278,12 +278,12 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx ID:</source>
-        <translation type="unfinished">Menandai transaksi:</translation>
+        <translation>ID transaksi:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
         <source>Payment ID:</source>
-        <translation type="unfinished">Menandai pembayaran:</translation>
+        <translation>ID pembayaran:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="51"/>
@@ -298,7 +298,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="53"/>
         <source>Destinations:</source>
-        <translation type="unfinished">Tujuan-tujuan:</translation>
+        <translation type="unfinished">Tujuan:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="54"/>
@@ -308,7 +308,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="80"/>
         <source>No more results</source>
-        <translation type="unfinished">Hasil selesai</translation>
+        <translation>Tidak ada hasil lainnya</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="180"/>
@@ -323,7 +323,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="184"/>
         <source>FAILED</source>
-        <translation type="unfinished"></translation>
+        <translation>GAGAL</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="185"/>
@@ -1681,7 +1681,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="79"/>
         <source>Payment ID</source>
-        <translation>Menandai pembayaran:</translation>
+        <translation>ID pembayaran:</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="80"/>
@@ -1911,7 +1911,7 @@ Recipient: </source>
         <location filename="../pages/Transfer.qml" line="568"/>
         <source>
 payment ID: </source>
-        <translation>Menandai Pembayaran: </translation>
+        <translation>ID Pembayaran: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="569"/>
@@ -1971,7 +1971,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="295"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
-        <translation>Menandai pembayaran &lt;font size=&apos;2&apos;&gt;( Ikhtiari )&lt;/font&gt;</translation>
+        <translation>ID pembayaran &lt;font size=&apos;2&apos;&gt;( Ikhtiari )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="296"/>
@@ -2051,13 +2051,13 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../pages/TxKey.qml" line="81"/>
         <location filename="../pages/TxKey.qml" line="157"/>
         <source>Transaction ID</source>
-        <translation>Menandai transaksi</translation>
+        <translation>ID transaksi</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="84"/>
         <location filename="../pages/TxKey.qml" line="159"/>
         <source>Paste tx ID</source>
-        <translation>Merekatkan menandai transaksi</translation>
+        <translation>Merekatkan ID transaksi</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="211"/>
@@ -2599,7 +2599,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../main.qml" line="634"/>
         <source>
 Payment ID: </source>
-        <translation>Menandai pembayaran: </translation>
+        <translation>ID pembayaran: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="635"/>
