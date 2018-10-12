@@ -99,6 +99,7 @@
         <file>wizard/WizardPasswordInput.qml</file>
         <file>lang/languages.xml</file>
         <file>lang/flags/bd.png</file>
+        <file>lang/flags/bg.png</file>
         <file>lang/flags/br.png</file>
         <file>lang/flags/catalonia.png</file>
         <file>lang/flags/cn.png</file>
