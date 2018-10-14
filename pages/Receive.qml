@@ -473,7 +473,7 @@ Rectangle {
                     Image {
                         id: qrCode
                         anchors.fill: parent
-                        anchors.margins: 6
+                        anchors.margins: 1
 
                         smooth: false
                         fillMode: Image.PreserveAspectFit
