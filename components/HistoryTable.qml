@@ -151,7 +151,7 @@ ListView {
                 anchors.leftMargin: 18 * scaleRatio
                 font.family: MoneroComponents.Style.fontLight.name
                 font.pixelSize: 14 * scaleRatio
-                text: isOut ? "Sent" : "Received"
+                text: isOut ? qsTr("Sent") + translationManager.emptyString : qsTr("Received") + translationManager.emptyString
                 color: "#808080"
             }
 
@@ -218,7 +218,7 @@ ListView {
                             address = TxUtils.destinationsToAddress(destinations);
                             if(address){
                                 var truncated = TxUtils.addressTruncate(address);
-                                return "To " + truncated;
+                                return qsTr("To ") + translationManager.emptyString + truncated;
                             } else {
                                 return "Unknown recipient";
                             }
@@ -293,7 +293,7 @@ ListView {
                 anchors.left: parent.left
                 anchors.leftMargin: 30 * scaleRatio
 
-                labelHeader: "Transaction ID"
+                labelHeader: QsTr("Transaction ID") + translationManager.emptyString
                 labelValue: hash.substring(0, 18) + "..."
                 copyValue: hash
             }
