@@ -65,6 +65,8 @@ Rectangle {
     }
 
     function update() {
+        const max_tracking = 3;
+
         if (!appWindow.currentWallet || !trackingEnabled.checked) {
             trackingLineText.text = "";
             trackingModel.clear();
@@ -83,7 +85,7 @@ Rectangle {
         var blockchainHeight = null
         var txs = []
 
-        for (var i = 0; i < count; ++i) {
+        for (var i = 0; i < count && txs.length < max_tracking; ++i) {
             var idx = model.index(i, 0)
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
@@ -130,7 +132,6 @@ Rectangle {
             trackingLineText.text = qsTr("%1 transactions found").arg(nTransactions) + ":" + translationManager.emptyString
         }
 
-        var max_tracking = 3;
         toReceiveSatisfiedLine.text = "";
         var expectedAmount = walletManager.amountFromString(amountToReceiveLine.text)
         if (expectedAmount && expectedAmount != amount) {
@@ -143,11 +144,6 @@ Rectangle {
         }
 
         trackingModel.clear();
-
-        if (txs.length > 3) {
-            txs.length = 3;
-        }
-
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
