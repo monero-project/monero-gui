@@ -80,7 +80,7 @@ Rectangle {
         var count = model.rowCount()
         var totalAmount = 0
         var nTransactions = 0
-        var blockchainHeight = 0
+        var blockchainHeight = null
         var txs = []
 
         for (var i = 0; i < count; ++i) {
@@ -103,8 +103,8 @@ Rectangle {
                 if (blockHeight == 0) {
                     in_txpool = true;
                 } else {
-                    if (blockchainHeight == 0)
-                        blockchainHeight = walletManager.blockchainHeight()
+                    if (blockchainHeight == null)
+                        blockchainHeight = appWindow.currentWallet.blockChainHeight()
                     confirmations = blockchainHeight - blockHeight - 1
                     displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                 }
