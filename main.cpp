@@ -35,6 +35,7 @@
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
+#include <QRegExp>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -140,10 +141,24 @@ int main(int argc, char *argv[])
     qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
     qreal calculated_ratio = physicalDpi/ref_dpi;
 
-    qWarning().nospace() << "Qt:" << QT_VERSION_STR << " | screen: " << rect.width()
-                         << "x" << rect.height() << " - dpi: " << dpi << " - ratio:"
-                         << calculated_ratio;
+    QString GUI_VERSION = "-";
+    QFile f(":/version.js");
+    if(!f.open(QFile::ReadOnly)) {
+        qWarning() << "Could not read qrc:///version.js";
+    } else {
+        QByteArray contents = f.readAll();
+        f.close();
 
+        QRegularExpression re("var GUI_VERSION = \"(.*)\"");
+        QRegularExpressionMatch version_match = re.match(contents);
+        if (version_match.hasMatch()) {
+            GUI_VERSION = version_match.captured(1);  // "v0.13.0.3"
+        }
+    }
+
+    qWarning().nospace().noquote() << "Qt:" << QT_VERSION_STR << " GUI:" << GUI_VERSION
+                                   << " | screen: " << rect.width() << "x" << rect.height()
+                                   << " - dpi: " << dpi << " - ratio:" << calculated_ratio;
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
