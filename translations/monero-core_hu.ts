@@ -1331,7 +1331,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <location filename="../pages/SharedRingDB.qml" line="121"/>
-        <source>Blackballed outputs</source>
+        <source>Outputs marked as spent</source>
         <translation>Kizárt tranzakció bemenetek</translation>
     </message>
     <message>
@@ -1342,8 +1342,8 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="122"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Monero-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Monero anonimitásának háromszintű vedelmét. Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a getmonero.org fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni. Másik lehetőséged a blokklánc átvizsgálása a monero-blockchain-blackball programmal és egy lista készítése.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Ahhoz, hogy a gyűrű aláírások anonimak maradjanak, ki kell zárni az olyan tranzakció bemeneteket amiket egy másik (Monero-klón) blokkláncon már felhasználtak. Ha ez nem történik meg, esetleg egy rosszindulatú harmadik fél nagyobb eséllyel megtippelheti, hogy melyik a valódi tranzakció bemenet. Ez gyengítheti a Monero anonimitásának háromszintű vedelmét. Ahhoz, hogy ezeket a bemeneteket kizárd a tranzakcióidból, a getmonero.org fenntart egy folyamatosan frissített listát róluk, amit letöltés után itt tudsz importálni. Másik lehetőséged a blokklánc átvizsgálása a monero-blockchain-mark-spent-outputs programmal és egy lista készítése.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
@@ -1357,7 +1357,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="156"/>
-        <source>Please choose a file to load blackballed outputs from</source>
+        <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>Válaszd ki a fájlt amelyik a listát tartalmazza</translation>
     </message>
     <message>
@@ -1367,7 +1367,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Filename with outputs to blackball</source>
+        <source>Filename with outputs to mark as spent</source>
         <translation>Fájl neve ami a kizárt bemeneteket tartalmazza</translation>
     </message>
     <message>
@@ -1382,7 +1382,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-        <source>Or manually blackball/unblackball a single output:</source>
+	<source>Or manually mark a single output as spent/unspent:</source>
         <translation>Bemenet hozzáadása/eltávolítása sajátkezűleg:</translation>
     </message>
     <message>
@@ -1397,12 +1397,12 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
-        <source>Blackball</source>
+        <source>Mark as spent</source>
         <translation>Kizárás</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="247"/>
-        <source>Unblackball</source>
+        <source>Mark as unspent</source>
         <translation>Engedélyezés</translation>
     </message>
     <message>

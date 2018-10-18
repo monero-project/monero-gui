@@ -1322,7 +1322,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <location filename="../pages/SharedRingDB.qml" line="121"/>
-        <source>Blackballed outputs</source>
+        <source>Outputs marked as spent</source>
         <translation>Blackball výstupy</translation>
     </message>
     <message>
@@ -1332,17 +1332,17 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="122"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Abychom skryli, který konkrétní vstup bude v Monero transakci utracen, neměla by třetí strana být schopna říci, které z vstupů do kruhového podpisu jsou již známy jako utracené. Pokud by toto možné bylo, oslabilo by to ochranu poskytovanou tzv. kruhovým podpisem. Je-li známo, že všechny vstupy kromě jednoho jsou již utracené, pak pozbývá smyslu s takovými vstupy vytvářet kruhový podpis, což je jedna z tří hlavních vrstev ochrany soukromí, které Monero používá.&lt;br&gt;Vyhnout se použití těchto soukromí oslabujících vstupů při vytváření transakce lze poskytnutím seznamu vstupů jejichž plná privátnost není zaručena. Tento seznam udržuje projekt Monero a je dostupný na webových stránkách getmonero.org a můžete jej importovat zde. &lt;br&gt; Alternativně můžete sami skenovat blockchain pomocí nástroje monero-blockchain-blackball pro vytvoření seznamu známých vyčerpaných výstupů.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Abychom skryli, který konkrétní vstup bude v Monero transakci utracen, neměla by třetí strana být schopna říci, které z vstupů do kruhového podpisu jsou již známy jako utracené. Pokud by toto možné bylo, oslabilo by to ochranu poskytovanou tzv. kruhovým podpisem. Je-li známo, že všechny vstupy kromě jednoho jsou již utracené, pak pozbývá smyslu s takovými vstupy vytvářet kruhový podpis, což je jedna z tří hlavních vrstev ochrany soukromí, které Monero používá.&lt;br&gt;Vyhnout se použití těchto soukromí oslabujících vstupů při vytváření transakce lze poskytnutím seznamu vstupů jejichž plná privátnost není zaručena. Tento seznam udržuje projekt Monero a je dostupný na webových stránkách getmonero.org a můžete jej importovat zde. &lt;br&gt; Alternativně můžete sami skenovat blockchain pomocí nástroje monero-blockchain-mark-spent-outputs pro vytvoření seznamu známých vyčerpaných výstupů.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="156"/>
-        <source>Please choose a file to load blackballed outputs from</source>
+        <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>Prosím, vyberte soubor se seznamem tzv. &quot;blackball&quot; výstupů</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Filename with outputs to blackball</source>
+        <source>Filename with outputs to mark as spent</source>
         <translation>Název souboru s blackball výstupy</translation>
     </message>
     <message>
@@ -1352,12 +1352,12 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
-        <source>Blackball</source>
+        <source>Mark as spent</source>
         <translation>Přidat do blackball</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="247"/>
-        <source>Unblackball</source>
+        <source>Mark as unspent</source>
         <translation>Odebrat z blackball</translation>
     </message>
     <message>
@@ -1405,7 +1405,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-        <source>Or manually blackball/unblackball a single output:</source>
+	<source>Or manually mark a single output as spent/unspent:</source>
         <translation>Nebo manuálně zařaďte nebo odeberte konkrétní vstup, či výstup z blackball seznamu:</translation>
     </message>
     <message>

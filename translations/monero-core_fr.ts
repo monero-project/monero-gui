@@ -1332,7 +1332,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <location filename="../pages/SharedRingDB.qml" line="121"/>
-        <source>Blackballed outputs</source>
+        <source>Outputs marked as spent</source>
         <translation>Sorties Blackboulées</translation>
     </message>
     <message>
@@ -1343,8 +1343,8 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="122"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Afin de masquer quelles entrées d&apos;une transaction monero sont dépensées, un tiers ne doit pas pouvoir dire quelles entrées d&apos;un cercle ont déjà été dépensées. En être capable affaiblirait la protection apportée par les signatures de cercle. Si toutes les entrées sauf une sont des dépenses connues, alors l&apos;entrée en cours de dépense devient visible, annulant ainsi les effets des signatures de cercle, l&apos;un des trois piliers de la protection de la confidentialité utilisés pas Monero.&lt;br&gt;Pour permettre aux transactions d&apos;éviter ces entrées, une liste de celles qui sont connues peut être utilisée afin d&apos;éviter de les employer dans de nouvelles transactions. Une telle liste est maintenue par le projet Monero et est disponible sur le site getmonero.org. Vous pouvez importer cette liste ici.&lt;br&gt;Sinon, vous pouvez scanner la chaîne de blocs (et la chaîne de blocs des clones de Monero réutilisant les clefs) vous même en utilisant l&apos;outil monero-blockchain-blackball pour créer une liste de sorties dépensées connue.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Afin de masquer quelles entrées d&apos;une transaction monero sont dépensées, un tiers ne doit pas pouvoir dire quelles entrées d&apos;un cercle ont déjà été dépensées. En être capable affaiblirait la protection apportée par les signatures de cercle. Si toutes les entrées sauf une sont des dépenses connues, alors l&apos;entrée en cours de dépense devient visible, annulant ainsi les effets des signatures de cercle, l&apos;un des trois piliers de la protection de la confidentialité utilisés pas Monero.&lt;br&gt;Pour permettre aux transactions d&apos;éviter ces entrées, une liste de celles qui sont connues peut être utilisée afin d&apos;éviter de les employer dans de nouvelles transactions. Une telle liste est maintenue par le projet Monero et est disponible sur le site getmonero.org. Vous pouvez importer cette liste ici.&lt;br&gt;Sinon, vous pouvez scanner la chaîne de blocs (et la chaîne de blocs des clones de Monero réutilisant les clefs) vous même en utilisant l&apos;outil monero-blockchain-mark-spent-outputs pour créer une liste de sorties dépensées connue.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
@@ -1359,7 +1359,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="156"/>
-        <source>Please choose a file to load blackballed outputs from</source>
+        <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>Choissisez un fichier pour charger les sorties blackboulées</translation>
     </message>
     <message>
@@ -1369,7 +1369,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Filename with outputs to blackball</source>
+        <source>Filename with outputs to mark as spent</source>
         <translation>Nom du fichier avec les sorties à blackbouler</translation>
     </message>
     <message>
@@ -1384,7 +1384,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-        <source>Or manually blackball/unblackball a single output:</source>
+	<source>Or manually mark a single output as spent/unspent:</source>
         <translation>Ou blackbouler/déblackbouler une seule sortie manuellement: </translation>
     </message>
     <message>
@@ -1399,12 +1399,12 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
-        <source>Blackball</source>
+        <source>Mark as spent</source>
         <translation>Blackbouler</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="247"/>
-        <source>Unblackball</source>
+        <source>Mark as unspent</source>
         <translation>déblackbouler</translation>
     </message>
     <message>

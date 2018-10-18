@@ -1332,7 +1332,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <location filename="../pages/SharedRingDB.qml" line="121"/>
-        <source>Blackballed outputs</source>
+        <source>Outputs marked as spent</source>
         <translation>Transações em lista negra</translation>
     </message>
     <message>
@@ -1343,8 +1343,8 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="122"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getmonero.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta monero-blockchain-blackball e criar essa mesma lista de transacções conhecidas como gastas.</translation>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>De forma a esconder qual é a verdadeira transação que está a ser gasta, Monero utiliza varias transacções selecionadas automaticamente na mesma transação, uma terceira pessoa não deve conseguir distinguir qual é a transação verdadeira das falsas. Caso o consiga fazer irá enfraquecer a a protecção dada pelas ring signatures. Se todas as transacções excepto uma forem conhecidas por já terem sido gastas, então torna-se evidente qual é a transação que está a ser gasta e a utilização de ring signatures fica sem efeito, sendo as ring signatures uma das 3 camadas que permite a protecção de privacidade em Monero.&lt;br&gt;Para ajudar a evitar essas transacções, é-lhe fornecida uma lista com transacções já conhecidas como gastas e assim pode evitar usa-las numa nova transação. Esta lista é mantida pelo Monero Project e está disponivel no site oficinal getmonero.org, e pode importar essa lista para aqui.&lt;br&gt;Em alternativa, pode utilizar a ferramenta monero-blockchain-mark-spent-outputs e criar essa mesma lista de transacções conhecidas como gastas.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
@@ -1358,7 +1358,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="156"/>
-        <source>Please choose a file to load blackballed outputs from</source>
+        <source>Please choose a file from which to load outputs to mark as spent</source>
         <translation>Por favor escolha um ficheiro para carregar uma lista negra de endereços</translation>
     </message>
     <message>
@@ -1368,7 +1368,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Filename with outputs to blackball</source>
+        <source>Filename with outputs to mark as spent</source>
         <translation>Nome do ficheiro com lista negra de endereços</translation>
     </message>
     <message>
@@ -1383,7 +1383,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-        <source>Or manually blackball/unblackball a single output:</source>
+	<source>Or manually mark a single output as spent/unspent:</source>
         <translation>Ou manualmente adicionar/remover da lista negra um único endereço:</translation>
     </message>
     <message>
@@ -1398,12 +1398,12 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
-        <source>Blackball</source>
+        <source>Mark as spent</source>
         <translation>Adicionar Blackball</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="247"/>
-        <source>Unblackball</source>
+        <source>Mark as unspent</source>
         <translation>Remover Blackball</translation>
     </message>
     <message>

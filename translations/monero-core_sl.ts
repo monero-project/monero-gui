@@ -1331,7 +1331,7 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <location filename="../pages/SharedRingDB.qml" line="121"/>
-        <source>Blackballed outputs</source>
+        <source>Outputs marked as spent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1342,9 +1342,9 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="122"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-blackball tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
         <translation>Da lahko v Monero transakciji zakrijete kateri inputi so plačani, tretja oseba ne sme vedeti, kateri inputi v obroču so že plačani. To bi zmanjšalo varnost, ki jo zagotavljajo obročni podpisi. Če je znano, da so vsi inputi razen enega izplačani, potem je zadnji input, ki se ga izplačuje očiten. S tem so obročni podpisi, eden izmed treh stebrov varne zasebnosti Monera, neefektivni.
-        Da se transakcije izognejo takšnim inputom, se uporablja lista znano že zapravljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja Monero projekt in je dobavljiva na getmonero.org. To listo lahko uvoziš tukaj.&lt;br&gt; Alternativno lahko sam preiščeš blockchain (vključno z Monero kloni, ki si delijo ključe) z uporabo orodja monero-blockchain-blackball, ki ustvari listo znanih, že zapravljenih outputov.&lt;br&gt;</translation>
+        Da se transakcije izognejo takšnim inputom, se uporablja lista znano že zapravljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja Monero projekt in je dobavljiva na getmonero.org. To listo lahko uvoziš tukaj.&lt;br&gt; Alternativno lahko sam preiščeš blockchain (vključno z Monero kloni, ki si delijo ključe) z uporabo orodja monero-blockchain-mark-spent-outputs, ki ustvari listo znanih, že zapravljenih outputov.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
@@ -1358,7 +1358,7 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="156"/>
-        <source>Please choose a file to load blackballed outputs from</source>
+	<source>Please choose a file from which to load outputs mark as spent/unspent</source>
         <translation>Izberi datoteko z blackball outputi iz</translation>
     </message>
     <message>
@@ -1368,7 +1368,7 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
-        <source>Filename with outputs to blackball</source>
+        <source>Filename with outputs to mark as spent</source>
         <translation>Datoteka z blackball outputi</translation>
     </message>
     <message>
@@ -1383,7 +1383,7 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-        <source>Or manually blackball/unblackball a single output:</source>
+	<source>Or manually mark a single output as spent/unspent:</source>
         <translation type="unfinished">Ali pa ročno določite posamezen output kot blackball:</translation>
     </message>
     <message>
@@ -1403,12 +1403,12 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
-        <source>Blackball</source>
+        <source>Mark as spent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="247"/>
-        <source>Unblackball</source>
+        <source>Mark as unspent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
