@@ -76,7 +76,7 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 ; Monero blockchain utilities
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 
