@@ -697,27 +697,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartera</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Node</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Registre</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -730,7 +730,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Remote node</source>
-        <translation type="unfinished"></translation>
+        <translation>Node Remot</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
@@ -763,22 +763,22 @@
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="98"/>
         <source>Please enter new password</source>
-        <translation type="unfinished"></translation>
+        <translation>Si us plau, introduïu una nova contrasenya</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="156"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished"></translation>
+        <translation>Si us plau, confirma la contrasenya nova</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="228"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancel·lar</translation>
+        <translation>Cancel·lar</translation>
     </message>
     <message>
         <location filename="../components/NewPasswordDialog.qml" line="237"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuar</translation>
     </message>
 </context>
 <context>
