@@ -63,7 +63,7 @@ GridLayout {
         return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
     }
 
-    LineEditMulti {
+    LineEdit {
         id: daemonAddr
         Layout.fillWidth: true
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
@@ -81,7 +81,7 @@ GridLayout {
         onEditingFinished: root.editingFinished()
     }
 
-    LineEditMulti {
+    LineEdit {
         id: daemonPort
         Layout.fillWidth: true
         placeholderText: qsTr("Port") + translationManager.emptyString
