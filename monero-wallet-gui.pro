@@ -320,10 +320,10 @@ linux {
 
 macx {
     # mixing static and shared libs are not supported on mac
-    # CONFIG(static) {
-    #     message("using static libraries")
-    #     LIBS+= -Wl,-Bstatic
-    # }
+    CONFIG(static) {
+        message("using static libraries")
+        LIBS+= -Wl,-Bstatic
+    }
     LIBS+= \
         -L/usr/local/lib \
         -L/usr/local/opt/openssl/lib \
