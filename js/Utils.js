@@ -39,12 +39,7 @@ function showSeedPage() {
             // Load keys page
             appWindow.showPageRequest("Keys");
         } else {
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = qsTr("Wrong password");
-            informationPopup.open()
-            informationPopup.onCloseCallback = function() {
-                passwordDialog.open()
-            }
+            passwordDialog.showError(qsTr("Wrong password"));
         }
     }
     passwordDialog.onRejectedCallback = function() {
