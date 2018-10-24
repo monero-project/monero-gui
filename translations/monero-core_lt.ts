@@ -1258,8 +1258,8 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Sukuria naują piniginę, kuri gali tik peržiūrėti sandorius, bet negali inicijuoti operacijų.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Sukuria naują piniginę, kuri gali tik peržiūrėti sandorius, bet negali inicijuoti operacijų.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

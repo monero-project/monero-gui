@@ -1265,8 +1265,8 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Crea un nuevo monedero que sólo puede ver transacciones, no puede inicializar transacciones.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Crea un nuevo monedero que sólo puede ver transacciones, no puede inicializar transacciones.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

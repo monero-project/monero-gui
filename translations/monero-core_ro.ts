@@ -1258,8 +1258,8 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Crează un portofel nou care poate doar să vadă tranzacțiile, dar nu poate să inițializeze tranzacții.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Crează un portofel nou care poate doar să vadă tranzacțiile, dar nu poate să inițializeze tranzacții.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

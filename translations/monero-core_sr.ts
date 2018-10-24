@@ -1257,8 +1257,8 @@ Stari fajl keša novčanika će biti preimenovan i može se povratiti kasnije.</
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Pravi novčanik koji može samo da posmatra transakcije, ne može ih inicijalizirati.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Pravi novčanik koji može samo da posmatra transakcije, ne može ih inicijalizirati.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

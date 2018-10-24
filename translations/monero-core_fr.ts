@@ -1258,8 +1258,8 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Crée un nouveau portefeuille pouvant seulement voir les transactions, pas en initier</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Crée un nouveau portefeuille pouvant seulement voir les transactions, pas en initier</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
