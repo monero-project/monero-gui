@@ -20,7 +20,9 @@ git -C $MONERO_DIR fetch
 git -C $MONERO_DIR checkout master
 
 # get monero core tag
+pushd $MONERO_DIR
 get_tag
+popd
 # create local monero branch
 git -C $MONERO_DIR checkout -B $VERSIONTAG
 
