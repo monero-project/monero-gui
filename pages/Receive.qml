@@ -495,6 +495,16 @@ Rectangle {
                             }
                         }
                     }
+
+                    LineEdit {
+                        id: paymentUrl
+                        Layout.fillWidth: true
+                        labelText: qsTr("Payment URL") + translationManager.emptyString
+                        text: makeQRCodeString()
+                        onTextUpdated: function() { paymentUrl.cursorPosition = 0; }
+                        readOnly: true
+                        copyButton: true
+                    }
                 }
             }
 
