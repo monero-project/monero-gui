@@ -75,11 +75,11 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev`
 
   - For Gentoo
 
-	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind`
+	`sudo emerge app-arch/xz-utils app-doc/doxygen dev-cpp/gtest dev-libs/boost dev-libs/expat dev-libs/openssl dev-util/cmake media-gfx/graphviz net-dns/unbound net-libs/ldns net-libs/miniupnpc net-libs/zeromq sys-libs/libunwind dev-libs/libsodium dev-libs/hidapi`
 
 2. Install Qt:
 
@@ -191,7 +191,7 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 3. Install MSYS2 packages for Monero dependencies; the needed 64-bit packages have `x86_64` in their names
 
     ```
-    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium
+    pacman -S mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi
     ```
 
     You find more details about those dependencies in the [Monero documentation](https://github.com/monero-project/monero). Note that that there is no more need to compile Boost from source; like everything else, you can install it now with a MSYS2 package.
@@ -203,6 +203,12 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
     ```
 
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.
+
+    **Note:** There is a known issue that GUI won't lauch properly when building tag v0.13.0.3 with Qt 5.11.2.
+    
+    If your encounter issue with that, please remove current Qt by: `pacman -R mingw-w64-x86_64-qt5`
+    
+    And install 5.11.1 instead by: `pacman -U http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-qt5-5.11.1-3-any.pkg.tar.xz`
 
 5. Install git
 

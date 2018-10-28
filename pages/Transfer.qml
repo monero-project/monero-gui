@@ -44,20 +44,12 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "transparent"
+    property int mixin: 10  // (ring size 11)
     property string warningContent: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
     Clipboard { id: clipboard }
-
-    function scaleValueToMixinCount(scaleValue) {
-        var scaleToMixinCount = [6,7,8,9,10,11,12,13,14,16,18,20,22,25];
-        if (scaleValue < scaleToMixinCount.length) {
-            return scaleToMixinCount[scaleValue];
-        } else {
-            return 0;
-        }
-    }
 
     function isValidOpenAliasAddress(address) {
       address = address.trim()
@@ -74,14 +66,6 @@ Rectangle {
       oaPopup.icon = StandardIcon.Information
       oaPopup.onCloseCallback = null
       oaPopup.open()
-    }
-
-    function updateMixin() {
-        var fillLevel = (isMobile) ? privacyLevelItemSmall.fillLevel : privacyLevelItem.fillLevel
-        var mixin = scaleValueToMixinCount(fillLevel)
-        console.log("PrivacyLevel changed:"  + fillLevel)
-        console.log("mixin count: "  + mixin)
-        privacyLabel.text = qsTr("Ring size: %1").arg(mixin+1) + translationManager.emptyString
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
@@ -162,7 +146,7 @@ Rectangle {
                       inlineButton.onClicked: amountLine.text = "(all)"
 
                       validator: RegExpValidator {
-                          regExp: /(\d{1,8})([.]\d{1,12})?$/
+                          regExp: /(.|)(\d{1,8})([.]\d{1,12})?$/
                       }
                   }
               }
@@ -337,7 +321,13 @@ Rectangle {
                   if(parseFloat(amountLine.text) > parseFloat(unlockedBalanceText)){
                       return false;
                   }
-                  
+
+                  // The amount does not start with a period (example: `.4`)
+                  // @TODO: replace with .startsWith() after Qt >=5.8
+                  if(amountLine.text.indexOf('.') === 0){
+                      return false;
+                  }
+
                   return true;
               }
               onClicked: {
@@ -347,9 +337,7 @@ Rectangle {
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
                   paymentIdLine.text = paymentIdLine.text.trim()
-                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                                 priority, descriptionLine.text)
-
+                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
       }
@@ -402,57 +390,8 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            visible: persistentSettings.transferShowAdvanced
-            Layout.fillWidth: true
-            height: 1
-            color: Style.dividerColor
-            opacity: Style.dividerOpacity
-            Layout.bottomMargin: 30 * scaleRatio
-        }
-
-        RowLayout {
-            visible: persistentSettings.transferShowAdvanced
-            anchors.left: parent.left
-            anchors.right: parent.right
-            Layout.fillWidth: true
-            Label {
-                id: privacyLabel
-                fontSize: 15
-                text: ""
-            }
-
-            Label {
-                id: costLabel
-                fontSize: 14
-                text: qsTr("Transaction cost") + translationManager.emptyString
-                anchors.right: parent.right
-            }
-        }
-
-        PrivacyLevel {
-            visible: persistentSettings.transferShowAdvanced && !isMobile
-            id: privacyLevelItem
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.rightMargin: 17 * scaleRatio
-            onFillLevelChanged: updateMixin()
-        }
-
-        PrivacyLevelSmall {
-            visible: persistentSettings.transferShowAdvanced && isMobile
-            id: privacyLevelItemSmall
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.rightMargin: 17 * scaleRatio
-            onFillLevelChanged: updateMixin()
-        }
-
         GridLayout {
             visible: persistentSettings.transferShowAdvanced
-            Layout.topMargin: 50 * scaleRatio
-
-
             columns: (isMobile) ? 2 : 6
 
             StandardButton {
@@ -479,8 +418,7 @@ Rectangle {
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
                     paymentIdLine.text = paymentIdLine.text.trim()
-                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, scaleValueToMixinCount(privacyLevelItem.fillLevel),
-                                   priority, descriptionLine.text)
+                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
 
                 }
             }
@@ -663,7 +601,6 @@ Rectangle {
     function onPageCompleted() {
         console.log("transfer page loaded")
         updateStatus();
-        updateMixin();
         updatePriorityDropdown()
     }
 

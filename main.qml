@@ -109,6 +109,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
+        else if(seq === "Ctrl+Y") leftPanel.keysClicked()
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
@@ -222,6 +223,9 @@ ApplicationWindow {
         if (typeof wizard.m_wallet !== 'undefined') {
             console.log("using wizard wallet")
             //Set restoreHeight
+            if (persistentSettings.restore_height == 0 && persistentSettings.is_recovering_from_device && walletManager.localDaemonSynced()) {
+                persistentSettings.restore_height = walletManager.blockchainHeight() - 1;
+            }
             if(persistentSettings.restore_height > 0){
                 // We store restore height in own variable for performance reasons.
                 restoreHeight = persistentSettings.restore_height
@@ -331,7 +335,9 @@ ApplicationWindow {
             currentDaemonAddress = localDaemonAddress
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
-        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.restore_height);
+        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.is_recovering_from_device, persistentSettings.restore_height);
+        // save wallet keys in case wallet settings have been changed in the init
+        currentWallet.setPassword(walletPassword);
     }
 
     function walletPath() {
@@ -629,9 +635,6 @@ ApplicationWindow {
             transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
             transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
             transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            if(mixinCount !== 6){
-                transactionConfirmationPopup.text +=  qsTr("\n\nWARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.");
-            }
             transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
             transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
             for (var i = 0; i < transaction.subaddrIndices.length; ++i){
@@ -1014,6 +1017,7 @@ ApplicationWindow {
         property string payment_id
         property int    restore_height : 0
         property bool   is_recovering : false
+        property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0

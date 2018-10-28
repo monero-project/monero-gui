@@ -10,11 +10,13 @@ QT += qml quick widgets
 WALLET_ROOT=$$PWD/monero
 
 CONFIG += c++11 link_pkgconfig
-packagesExist(libpcsclite) {
-    PKGCONFIG += libpcsclite
+packagesExist(hidapi-libusb) {
+    PKGCONFIG += hidapi-libusb
 }
-QMAKE_CXXFLAGS += -fPIC -fstack-protector
-QMAKE_LFLAGS += -fstack-protector
+!win32 {
+    QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
+    QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+}
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
@@ -94,6 +96,7 @@ lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
+          pages/settings/*.qml \
           wizard/*.qml \
           wizard/*js
 }
@@ -115,7 +118,8 @@ LIBS += -L$$WALLET_ROOT/lib \
         -llmdb \
         -lepee \
         -lunbound \
-        -leasylogging \
+        -lsodium \
+        -leasylogging
 }
 
 android {
@@ -125,13 +129,14 @@ android {
         -llmdb \
         -lepee \
         -lunbound \
+        -lsodium \
         -leasylogging
 }
 
 
 
-QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
-QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security -fstack-protector -fstack-protector-strong
+QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
+QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
@@ -144,6 +149,7 @@ ios {
         -llmdb \
         -lepee \
         -lunbound \
+        -lsodium \
         -leasylogging
 
     LIBS+= \
@@ -243,12 +249,15 @@ win32 {
         -licutu \
         -liconv \
         -lssl \
+        -lsodium \
         -lcrypto \
         -Wl,-Bdynamic \
         -lwinscard \
         -lws2_32 \
         -lwsock32 \
         -lIphlpapi \
+        -lcrypt32 \
+        -lhidapi \
         -lgdi32
     
     !contains(QMAKE_TARGET.arch, x86_64) {
@@ -288,6 +297,8 @@ linux {
         -lboost_program_options \
         -lssl \
         -llmdb \
+        -lsodium \
+        -lhidapi-libusb \
         -lcrypto
 
     if(!android) {
@@ -318,6 +329,7 @@ macx {
         -L/usr/local/opt/openssl/lib \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
+        -lhidapi \
         -lboost_thread-mt \
         -lboost_system \
         -lboost_date_time \
@@ -326,6 +338,7 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -lssl \
+        -lsodium \
         -lcrypto \
         -ldl
     LIBS+= -framework PCSC
