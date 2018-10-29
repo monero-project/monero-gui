@@ -31,7 +31,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
-import "../../js/Utils.js" as Utils
 import "../../version.js" as Version
 import "../../components" as MoneroComponents
 
@@ -167,9 +166,8 @@ Rectangle {
                     inputDialog.labelText = qsTr("Set a new restore height:") + translationManager.emptyString;
                     inputDialog.inputText = currentWallet ? currentWallet.walletCreationHeight : "0";
                     inputDialog.onAcceptedCallback = function() {
-                        var _restoreHeight = inputDialog.inputText;
-                        if(Utils.isNumeric(_restoreHeight)){
-                            _restoreHeight = parseInt(_restoreHeight);
+                        var _restoreHeight = parseInt(inputDialog.inputText);
+                        if (!isNaN(_restoreHeight)) {
                             if(_restoreHeight >= 0) {
                                 currentWallet.walletCreationHeight = _restoreHeight
                                 // Restore height is saved in .keys file. Set password to trigger rewrite.
