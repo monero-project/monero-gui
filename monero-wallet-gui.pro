@@ -198,6 +198,26 @@ CONFIG(WITH_SCANNER) {
     }
 }
 
+CONFIG(WITH_PRICES) {
+    message("building with prices")
+    DEFINES += "WITH_PRICES"
+    HEADERS += \
+        src/prices/Currency.h \
+        src/prices/Price.h \
+        src/prices/PriceSource.h \
+        src/prices/CurrencySelectorModel.h \
+        src/prices/PriceSourceSelectorModel.h \
+        src/prices/PriceManager.h \
+        src/prices/qtjsonpath.h
+    SOURCES += \
+        src/prices/Currency.cpp \
+        src/prices/Price.cpp \
+        src/prices/PriceSource.cpp \
+        src/prices/CurrencySelectorModel.cpp \
+        src/prices/PriceSourceSelectorModel.cpp \
+        src/prices/PriceManager.cpp
+}
+
 
 # currently we only support x86 build as qt.io only provides prebuilt qt for x86 mingw
 

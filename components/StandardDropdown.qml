@@ -34,6 +34,7 @@ Item {
     id: dropdown
     property int itemTopMargin: 0
     property alias dataModel: repeater.model
+    property alias colText: firstColText.text
     property string shadowPressedColor
     property string shadowReleasedColor
     property string pressedColor
