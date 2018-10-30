@@ -192,6 +192,85 @@ Rectangle {
             Layout.fillWidth: true
             text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
         }
+        //! Manage pricing
+
+        RowLayout {
+            MoneroComponents.CheckBox {
+                visible: builtWithPrices
+                id: enableConvertCurrency
+                text: qsTr("Enable displaying balance in other currencies") + translationManager.emptyString
+                checked: persistentSettings.enableCurrencyConversion
+                onCheckedChanged: {
+                    persistentSettings.enableCurrencyConversion = checked;
+                    appWindow.setPriceManager(checked);
+                }
+            }
+        }
+
+        GridLayout {
+            visible: builtWithPrices && enableConvertCurrency.checked
+            columns: (isMobile)? 1 : 2
+            Layout.fillWidth: true
+            columnSpacing: 32
+
+            ColumnLayout {
+                spacing: 0
+                Layout.fillWidth: true
+
+                MoneroComponents.StandardDropdown {
+                    id: priceSourceDropDown
+                    dataModel: priceManager.priceSourcesAvailableModel
+                    currentIndex: appWindow.persistentSettings.currencyConversionSourceIndex
+                    onChanged: {
+                        var idx = dataModel.index(currentIndex, 0);
+                        priceManager.setPriceSource(idx);
+                        appWindow.persistentSettings.currencyConversionSourceIndex = currentIndex;
+                    }
+                    Layout.fillWidth: true
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#363636"
+                    pressedColor: "#202020"
+
+                    function update() {
+                        colText = dataModel.getLabelAt(currentIndex);
+                    }
+                }
+            }
+
+            ColumnLayout {
+                spacing: 0
+                Layout.fillWidth: true
+
+                MoneroComponents.StandardDropdown {
+                    id: currencyDropDown
+                    dataModel: priceManager.currenciesAvailableModel
+                    currentIndex: appWindow.persistentSettings.currencyConversionCurrencyIndex
+                    onChanged: {
+                        var idx = dataModel.index(currentIndex, 0);
+                        priceManager.setCurrency(idx);
+                        appWindow.persistentSettings.currencyConversionCurrencyIndex = currentIndex;
+                    }
+                    Layout.fillWidth: true
+                    shadowReleasedColor: "#FF4304"
+                    shadowPressedColor: "#B32D00"
+                    releasedColor: "#363636"
+                    pressedColor: "#202020"
+
+                    function update() {
+                        colText = dataModel.getLabelAt(currentIndex);
+                    }
+                }
+
+                // Make sure dropdown is on top
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+            }
+
+            z: parent.z + 1
+        }
     }
 
     Component.onCompleted: {

@@ -242,6 +242,10 @@ ApplicationWindow {
         // enable timers
         userInActivityTimer.running = true;
         simpleModeConnectionTimer.running = true;
+        // Start the price manager if applicable
+        if (builtWithPrices && persistentSettings.enableCurrencyConversion) {
+            startPriceManager();
+        }
 
         // wallet already opened with wizard, we just need to initialize it
         if (typeof wizard.m_wallet !== 'undefined') {
@@ -388,6 +392,17 @@ ApplicationWindow {
         if(!hideBalanceForced && !persistentSettings.hideBalance){
             balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
             balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+        }
+
+        if (builtWithPrices && persistentSettings.enableCurrencyConversion) {
+            var balance_unlocked_fiat = qsTr("HIDDEN");
+            var balance_fiat = qsTr("HIDDEN");
+            if(!hideBalanceForced && !persistentSettings.hideBalance){
+                balance_unlocked_fiat = priceManager.convert(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+                balance_fiat = priceManager.convert(currentWallet.balance(currentWallet.currentSubaddressAccount));
+            }
+            leftPanel.unlockedBalanceTextFiat = balance_unlocked_fiat;
+            leftPanel.balanceTextFiat = balance_fiat;
         }
 
         middlePanel.unlockedBalanceText = balance_unlocked;
@@ -1067,6 +1082,29 @@ ApplicationWindow {
         console.log(appWindow.width)
     }
 
+    function startPriceManager() {
+        console.log("Starting PriceManager");
+        var sourceIdx = priceManager.priceSourcesAvailableModel.index(persistentSettings.currencyConversionSourceIndex, 0);
+        priceManager.setPriceSource(sourceIdx);
+        var currencyIdx = priceManager.currenciesAvailableModel.index(persistentSettings.currencyConversionCurrencyIndex, 0);
+        priceManager.setCurrency(currencyIdx);
+        priceManager.priceRefreshed.connect(updateBalance);
+        priceManager.start();
+    }
+
+    function stopPriceManager() {
+        console.log("Stopping PriceManager");
+        priceManager.priceRefreshed.disconnect(updateBalance);
+        priceManager.stop();
+    }
+
+    function setPriceManager(bool) {
+        if (bool && !priceManager.running)
+            startPriceManager();
+        if (!bool && priceManager.running)
+            stopPriceManager();
+    }
+
 
     objectName: "appWindow"
     visible: true
@@ -1177,8 +1215,10 @@ ApplicationWindow {
         property string remoteNodeService: ""
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool showPid: false
+        property bool enableCurrencyConversion: false
+        property int currencyConversionSourceIndex: 0
+        property int currencyConversionCurrencyIndex: 0
         property bool blackTheme: false
-
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }

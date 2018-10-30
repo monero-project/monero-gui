@@ -27,7 +27,7 @@ find_command() {
 
 if [ "$BUILD_TYPE" == "release" ]; then
     echo "Building release"
-    CONFIG="CONFIG+=release";
+    CONFIG="CONFIG+=release WITH_PRICES";
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
@@ -53,7 +53,7 @@ elif [ "$BUILD_TYPE" == "debug-android" ]; then
     DISABLE_PASS_STRENGTH_METER=true
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building debug"
-	CONFIG="CONFIG+=debug"
+	CONFIG="CONFIG+=debug WITH_PRICES"
     BIN_PATH=debug/bin
 else
     echo "Valid build types are release, release-static, release-android, debug-android and debug"

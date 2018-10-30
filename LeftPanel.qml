@@ -44,6 +44,8 @@ Rectangle {
     property alias unlockedBalanceLabelVisible: unlockedBalanceLabel.visible
     property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
+    property alias balanceTextFiat: balanceTextFiat.text
+    property alias unlockedBalanceTextFiat: unlockedBalanceTextFiat.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
@@ -112,6 +114,12 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
+
+        MouseArea {
+            id: balanceArea
+            anchors.fill: parent
+            hoverEnabled: true
+        }
 
         RowLayout {
             Item {
@@ -214,7 +222,10 @@ Rectangle {
                 width: 50 * scaleRatio
 
                 MoneroComponents.TextPlain {
-                    visible: !isMobile
+                    visible: !isMobile && !(balanceArea.containsMouse
+                                            && builtWithPrices
+                                            && persistentSettings.enableCurrencyConversion
+                                            && priceManager.priceReady)
                     id: balanceText
                     themeTransition: false
                     anchors.left: parent.left
@@ -253,9 +264,26 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
-                    id: unlockedBalanceText
-                    visible: true
+                    visible: !isMobile && !balanceText.visible
+                    id: balanceTextFiat
                     themeTransition: false
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 76
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    font.pixelSize: balanceText.font.pixelSize
+                }
+
+                MoneroComponents.TextPlain {
+                    id: unlockedBalanceText
+                    themeTransition: false
+                    visible: !(balanceArea.containsMouse
+                               && builtWithPrices
+                               && persistentSettings.enableCurrencyConversion
+                               && priceManager.priceReady)
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.top: parent.top
@@ -289,6 +317,21 @@ Rectangle {
                                 appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
                         }
                     }
+                }
+
+
+                Text {
+                    id: unlockedBalanceTextFiat
+                    visible: !unlockedBalanceText.visible
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 126
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    // dynamically adjust text size
+                    font.pixelSize: unlockedBalanceText.font.pixelSize
                 }
 
                 MoneroComponents.Label {
