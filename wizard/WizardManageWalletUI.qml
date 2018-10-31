@@ -207,7 +207,7 @@ ColumnLayout {
         StandardButton {
             id: qrfinderButton
             text: qsTr("From QR Code") + translationManager.emptyString
-            visible : true //appWindow.qrScannerEnabled
+            visible : appWindow.qrScannerEnabled
             enabled : visible
             onClicked: {
                 cameraUi.state = "Capture"
