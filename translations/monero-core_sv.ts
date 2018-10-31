@@ -359,7 +359,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>VARNING: Återanvänd inte din Monero nyckel på en annan förgrening, SÅVIDA INTE denna förgrening har återanvändnings begränsningar inbyggda. Görs detta så kan din integritet skadas.</translation>
+        <translation>VARNING: Återanvänd inte din Monero-nyckel på en annan förgrening, SÅVIDA INTE denna förgrening har inbyggda begränsningar för återanvändning. Görs detta så kan din integritet skadas.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -702,7 +702,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation>Layout</translation>
+        <translation>Utseende</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
@@ -983,7 +983,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="521"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Låt din kund skanna denna QR-kod för att genomföra en betalning (om den kunden har ett program som stödjer QR-kod skanning).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt att skanna blockkedjan och tx poolen för inkommande transaktioner som använder denna QR-kod. Om du fyller i ett belopp, så kommer den även kolla att inkommande transaktioner motsvarar det totala beloppet.&lt;/p&gt;&lt;p&gt; Det är upp till dig om du vill acceptera obekräftade transaktioner eller inte. Det är troligt att det kommer bli bekräftat i en kort order, men det finns fortfarande en chans att det inte kommer blir det, därför så kan du behöva vänta för en eller flera bekräftelser vid större summor.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Detta är en enkel försäljningsspårare:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Låt din kund skanna denna QR-kod för att genomföra en betalning (om den kunden har ett program som stödjer skanning av QR-koder).&lt;/p&gt;&lt;p&gt;Denna sida kommer automatiskt att skanna blockkedjan och tx-poolen för inkommande transaktioner som använder denna QR-kod. Om du fyller i ett belopp, så kommer den även kolla att inkommande transaktioner motsvarar det totala beloppet.&lt;/p&gt;&lt;p&gt; Det är upp till dig om du vill acceptera obekräftade transaktioner eller inte. Det är troligt att det kommer bli bekräftat i en kort order, men det finns fortfarande en chans att det inte kommer bli det, därför så kan du behöva vänta för en eller flera bekräftelser vid större summor.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="692"/>
@@ -1052,7 +1052,7 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation>Plånbok skapelsehöjd: </translation>
+        <translation>Plånbokens skapelsehöjd: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
@@ -1123,7 +1123,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
         <source>No Layout options exist yet in mobile mode.</source>
-        <translation>Inga Layout alternativ existerar än i mobilversionen.</translation>
+        <translation>Inga alternativ för utseendet existerar i mobilversionen ännu.</translation>
     </message>
 </context>
 <context>
@@ -1164,12 +1164,12 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Använder en tredje-part server som ansluter till Monero nätverket. Mindre säkert, men mindre krävande för din dator.</translation>
+        <translation>Använder en tredje-part server som ansluter till Monero-nätverket. Mindre säkert, men mindre krävande för din dator.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>För att hitta en fjärrnod, skriv &apos;Monero remote node&apos; i din favorit sökmotor. Vänligen försäkra dig om att Noden drivs av en betrodd tredje-part.</translation>
+        <translation>För att hitta en fjärrnod, skriv &apos;Monero remote node&apos; i din favoritsökmotor. Vänligen försäkra dig om att Noden drivs av en betrodd tredje-part.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
@@ -1273,7 +1273,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Spara den information säkert för att återskapa din plånbok i framtiden.</translation>
+        <translation>Spara denna information säkert för att återskapa din plånbok i framtiden.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
@@ -1800,7 +1800,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/Transfer.qml" line="465"/>
         <source>Sweep Unmixable</source>
-        <translation>Svep upp omixbara</translation>
+        <translation>Städa upp omixbara</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="476"/>
@@ -2592,7 +2592,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
         <location filename="../main.qml" line="620"/>
         <location filename="../main.qml" line="739"/>
         <source>No unmixable outputs to sweep</source>
-        <translation>Inga omixbara utgångar att svepa upp</translation>
+        <translation>Inga omixbara utgångar att städa upp</translation>
     </message>
     <message>
         <location filename="../main.qml" line="751"/>
