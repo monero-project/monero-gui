@@ -1269,8 +1269,8 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Er wordt een nieuwe portemonnee gemaakt die alleen transacties kan weergeven maar geen transacties kan uitvoeren.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Er wordt een nieuwe portemonnee gemaakt die alleen transacties kan weergeven maar geen transacties kan uitvoeren.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

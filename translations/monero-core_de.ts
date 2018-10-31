@@ -1257,8 +1257,8 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Erstellt eine Wallet, die nur Transaktionen ansehen aber keine Transaktionen initialisieren kann.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation>Erstellt eine Wallet, die nur Transaktionen ansehen und initiieren kann, jedoch eine vollwertige Wallet benötigt, um Transaktionen vor dem Absenden zu signieren.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>

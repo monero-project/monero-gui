@@ -182,7 +182,7 @@ Rectangle {
                     textMargin: 0
                     leftPadding: 0
                     topPadding: 0
-                    text: qsTr("Creates a new wallet that can only view transactions, cannot initialize transactions.") + translationManager.emptyString
+                    text: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
                     width: parent.width
                     readOnly: true
 

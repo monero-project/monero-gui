@@ -1258,8 +1258,8 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
-        <source>Creates a new wallet that can only view transactions, cannot initialize transactions.</source>
-        <translation>Vytvorí novú peňaženku, cez ktorú môžte len nahliadať na transakcie a nie je možné uskutočniť transakciu.</translation>
+        <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
+        <translation type="unfinished">Vytvorí novú peňaženku, cez ktorú môžte len nahliadať na transakcie a nie je možné uskutočniť transakciu.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
