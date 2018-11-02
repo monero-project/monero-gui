@@ -92,7 +92,7 @@ Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 ; Monero blockchain utilities
 Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-blackball.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -373,6 +373,21 @@ begin
   Result := s;
 end;
 
+function WalletFlags(Param: String): String;
+// Flags to add to the shortcut to the GUI wallet
+// Use "--log-file" to force log file alongside the installed GUI exe which would not get
+// created there because of an unsolved issue in the 0.13.0.4 wallet code
+var s: String;
+begin
+  s := ExpandConstant('{app}\monero-wallet-gui.log');
+  if Pos(' ', s) > 0 then begin
+    // Quotes needed for filename with blanks
+    s := '"' + s + '"';
+  end;
+  s := '--log-file ' + s;
+  Result := s;
+end;
+
 procedure CurStepChanged(CurStep: TSetupStep);
 var s: TArrayOfString;
 begin
@@ -400,7 +415,7 @@ end;
 [Icons]
 ; Icons in the "Monero GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
-Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"
+Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Parameters: {code:WalletFlags}
 Name: "{group}\GUI Wallet Guide"; Filename: "{app}\monero-GUI-guide.pdf"; IconFilename: "{app}\monero-wallet-gui.exe"
 Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 
@@ -426,7 +441,7 @@ Name: "{group}\Utilities\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}
 Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM monerod.exe /T /F"
 
 ; Desktop icons, optional with the help of the "Task" section
-Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Tasks: desktopicon
+Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Parameters: {code:WalletFlags}; Tasks: desktopicon
 
 
 [Registry]
