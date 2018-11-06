@@ -225,6 +225,21 @@
         <translation>Žádné další výsledky</translation>
     </message>
     <message>
+        <location filename="../components/HistoryTable.qml" line="154"/>
+        <source>Sent</source>
+        <translation type="unfinished">Poslat</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTable.qml" line="154"/>
+        <source>Received</source>
+        <translation type="unfinished">Přijaté</translation>
+    </message>
+    <message>
+        <location filename="../components/HistoryTable.qml" line="221"/>
+        <source>To </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
         <translation>Adresa zkopírována do schránky</translation>
@@ -417,32 +432,32 @@
         <translation>Neblokovaný zůstatek</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="314"/>
+        <location filename="../LeftPanel.qml" line="312"/>
         <source>Send</source>
         <translation>Odeslat</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="364"/>
+        <location filename="../LeftPanel.qml" line="362"/>
         <source>Receive</source>
         <translation>Přijmout</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="365"/>
+        <location filename="../LeftPanel.qml" line="363"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="458"/>
+        <location filename="../LeftPanel.qml" line="456"/>
         <source>Prove/check</source>
         <translation>Prokázat/zkontrolovat</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="459"/>
+        <location filename="../LeftPanel.qml" line="457"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="388"/>
+        <location filename="../LeftPanel.qml" line="386"/>
         <source>History</source>
         <translation>Historie</translation>
     </message>
@@ -462,92 +477,92 @@
         <translation>Pouze k prohlížení</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="339"/>
+        <location filename="../LeftPanel.qml" line="337"/>
         <source>Address book</source>
         <translation>Adresář</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="340"/>
+        <location filename="../LeftPanel.qml" line="338"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="389"/>
+        <location filename="../LeftPanel.qml" line="387"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="411"/>
+        <location filename="../LeftPanel.qml" line="409"/>
         <source>Advanced</source>
         <translation>Pokročilé</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="412"/>
+        <location filename="../LeftPanel.qml" line="410"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="434"/>
+        <location filename="../LeftPanel.qml" line="432"/>
         <source>Mining</source>
         <translation>Těžení</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="435"/>
+        <location filename="../LeftPanel.qml" line="433"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="481"/>
+        <location filename="../LeftPanel.qml" line="479"/>
         <source>Shared RingDB</source>
         <translation>Databáze sdílených kruhů</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="551"/>
+        <location filename="../LeftPanel.qml" line="549"/>
         <source>Seed &amp; Keys</source>
         <translation>Seed &amp; klíče</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="552"/>
+        <location filename="../LeftPanel.qml" line="550"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="602"/>
+        <location filename="../LeftPanel.qml" line="600"/>
         <source>Wallet</source>
         <translation>Peněženka</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="611"/>
+        <location filename="../LeftPanel.qml" line="609"/>
         <source>Daemon</source>
         <translation>Démon</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="506"/>
+        <location filename="../LeftPanel.qml" line="504"/>
         <source>Sign/verify</source>
         <translation>Podepsat/Ověřit</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="530"/>
+        <location filename="../LeftPanel.qml" line="528"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="315"/>
+        <location filename="../LeftPanel.qml" line="313"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="482"/>
+        <location filename="../LeftPanel.qml" line="480"/>
         <source>G</source>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="507"/>
+        <location filename="../LeftPanel.qml" line="505"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="529"/>
+        <location filename="../LeftPanel.qml" line="527"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
@@ -807,17 +822,17 @@
 <context>
     <name>PrivacyLevelSmall</name>
     <message>
-        <location filename="../components/PrivacyLevelSmall.qml" line="96"/>
+        <location filename="../components/PrivacyLevelSmall.qml" line="98"/>
         <source>Low</source>
         <translation>Nízká</translation>
     </message>
     <message>
-        <location filename="../components/PrivacyLevelSmall.qml" line="105"/>
+        <location filename="../components/PrivacyLevelSmall.qml" line="107"/>
         <source>Medium</source>
         <translation>Střední</translation>
     </message>
     <message>
-        <location filename="../components/PrivacyLevelSmall.qml" line="114"/>
+        <location filename="../components/PrivacyLevelSmall.qml" line="116"/>
         <source>High</source>
         <translation>Vysoká</translation>
     </message>
@@ -846,162 +861,162 @@
 <context>
     <name>Receive</name>
     <message>
-        <location filename="../pages/Receive.qml" line="74"/>
+        <location filename="../pages/Receive.qml" line="76"/>
         <source>WARNING: no connection to daemon</source>
         <translation>VAROVÁNÍ: žádné spojení s démonem</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="124"/>
+        <location filename="../pages/Receive.qml" line="126"/>
         <source>No transaction found yet...</source>
         <translation>Zatím žádná nalezená transakce...</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="128"/>
+        <location filename="../pages/Receive.qml" line="130"/>
         <source>Transaction found</source>
         <translation>Transakce nalezena</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="130"/>
+        <location filename="../pages/Receive.qml" line="132"/>
         <source>%1 transactions found</source>
         <translation>%1 nalezených transakcí</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="200"/>
+        <location filename="../pages/Receive.qml" line="196"/>
         <source>Addresses</source>
         <translation>Adresy</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="373"/>
+        <location filename="../pages/Receive.qml" line="369"/>
         <source>Create new address</source>
         <translation>Vytvořit novou adresu</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="388"/>
+        <location filename="../pages/Receive.qml" line="384"/>
         <source>Set the label of the new address:</source>
         <translation>Nastavit štítek pro novou adresu:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="389"/>
+        <location filename="../pages/Receive.qml" line="385"/>
         <source>(Untitled)</source>
         <translation>(Nepojmenované)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="165"/>
+        <location filename="../pages/Receive.qml" line="161"/>
         <source>Set the label of the selected address:</source>
         <translation>Nastavit štítek pro vybranou adresu:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="515"/>
+        <location filename="../pages/Receive.qml" line="511"/>
         <source>Tracking</source>
         <translation>Sledování</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="456"/>
+        <location filename="../pages/Receive.qml" line="452"/>
         <source>Amount to receive</source>
         <translation>Částka k přijetí</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="138"/>
+        <location filename="../pages/Receive.qml" line="139"/>
         <source>With more Monero</source>
         <translation>s více Monero</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="139"/>
+        <location filename="../pages/Receive.qml" line="140"/>
         <source>With not enough Monero</source>
         <translation>Nedostatek Monero mincí</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="141"/>
+        <location filename="../pages/Receive.qml" line="142"/>
         <source>Expected</source>
         <translation>Předpokládané</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="142"/>
+        <location filename="../pages/Receive.qml" line="143"/>
         <source>Total received</source>
         <translation>celkem přijato</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="202"/>
-        <location filename="../pages/Receive.qml" line="431"/>
-        <location filename="../pages/Receive.qml" line="517"/>
+        <location filename="../pages/Receive.qml" line="198"/>
+        <location filename="../pages/Receive.qml" line="427"/>
+        <location filename="../pages/Receive.qml" line="513"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="205"/>
-        <location filename="../pages/Receive.qml" line="520"/>
+        <location filename="../pages/Receive.qml" line="201"/>
+        <location filename="../pages/Receive.qml" line="516"/>
         <source>Tracking payments</source>
         <translation>Sledování plateb</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="206"/>
+        <location filename="../pages/Receive.qml" line="202"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Tento QR kód obsahuje výše zvolenou adresu a níže vybranou částku. Sdílejte s ostatními (klikněte pravým tlačítkem myši na Uložit), abyste mohli snadněji posílat přesné částky.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="330"/>
+        <location filename="../pages/Receive.qml" line="326"/>
         <source>Address copied to clipboard</source>
         <translation>Adresa zkopírována do schránky</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="409"/>
+        <location filename="../pages/Receive.qml" line="405"/>
         <source>Advanced options</source>
         <translation>Pokročilé možnosti</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="429"/>
-        <location filename="../pages/Receive.qml" line="434"/>
+        <location filename="../pages/Receive.qml" line="425"/>
+        <location filename="../pages/Receive.qml" line="430"/>
         <source>QR Code</source>
         <translation>QR kód</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="435"/>
+        <location filename="../pages/Receive.qml" line="431"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
         <translation>Tento QR kód obsahuje adresu, kterou jste vybrali výše a částku zadanou níže. Sdílejte jej s ostatními (pravý_klik-&gt;Uložit) aby vám mohli jednoduše zaslat přesnou částku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="521"/>
+        <location filename="../pages/Receive.qml" line="517"/>
         <source>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;This is a simple sales tracker:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Let your customer scan that QR code to make a payment (if that customer has software which supports QR code scanning).&lt;/p&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using this QR code. If you input an amount, it will also check that incoming transactions total up to that amount.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;font size=&apos;+2&apos;&gt;Toto je jednoduchý přehled prodejů:&lt;/font&gt;&lt;/p&gt;&lt;p&gt;Nechte zákazníkovi naskenovat QR kód za účelem provedení platby. (pokud zákazník má software který skenování QR kódů podporuje).&lt;/p&gt;&lt;p&gt;Tato stránka automaticky sleduje v blockchainu zaslané příchozí transakce dle poskytnutého QR kódu. Pokud jste zadali částku, bude také hledat příchozí transakce až do této výše.&lt;/p&gt;&lt;p&gt;Je na vašem zvážení zda akceptujete nepotrzené transakce nebo ne. K potvrzení obvykle dochází v poměrně krátkém čase, především u větších částek byste měli určitě počkat na alespoň jedno nebo více potvzení.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="608"/>
-        <location filename="../pages/Receive.qml" line="610"/>
+        <location filename="../pages/Receive.qml" line="604"/>
+        <location filename="../pages/Receive.qml" line="606"/>
         <source>confirmations</source>
         <translation>potvrzení</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="613"/>
+        <location filename="../pages/Receive.qml" line="609"/>
         <source>confirmation</source>
         <translation>potvrzení</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="637"/>
+        <location filename="../pages/Receive.qml" line="633"/>
         <source>Transaction ID copied to clipboard</source>
         <translation>ID platby zkopírované do schránky</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="672"/>
+        <location filename="../pages/Receive.qml" line="668"/>
         <source>Enable</source>
         <translation>Povolit</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="692"/>
+        <location filename="../pages/Receive.qml" line="688"/>
         <source>Save QrCode</source>
         <translation>Uložit QR kód</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="693"/>
+        <location filename="../pages/Receive.qml" line="689"/>
         <source>Failed to save QrCode to </source>
         <translation>Chyba uložení QR kódu do </translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="498"/>
+        <location filename="../pages/Receive.qml" line="494"/>
         <source>Save As</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="455"/>
+        <location filename="../pages/Receive.qml" line="451"/>
         <source>Amount</source>
         <translation>Částka</translation>
     </message>
@@ -1405,7 +1420,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
-	<source>Or manually mark a single output as spent/unspent:</source>
+        <source>Or manually mark a single output as spent/unspent:</source>
         <translation>Nebo manuálně zařaďte nebo odeberte konkrétní vstup, či výstup z blackball seznamu:</translation>
     </message>
     <message>
@@ -1527,6 +1542,11 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
         <location filename="../pages/Sign.qml" line="125"/>
         <source>Message</source>
         <translation>Zpráva</translation>
+    </message>
+    <message>
+        <location filename="../pages/Sign.qml" line="154"/>
+        <source>Message from file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
@@ -1728,239 +1748,234 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
 <context>
     <name>Transfer</name>
     <message>
-        <location filename="../pages/Transfer.qml" line="48"/>
+        <location filename="../pages/Transfer.qml" line="49"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start démona&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="72"/>
+        <location filename="../pages/Transfer.qml" line="64"/>
         <source>OpenAlias error</source>
         <translation>Chyba OpenAlias</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="157"/>
+        <location filename="../pages/Transfer.qml" line="141"/>
         <source>Amount</source>
         <translation>Částka</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="176"/>
+        <location filename="../pages/Transfer.qml" line="160"/>
         <source>Transaction priority</source>
         <translation>Priorita transakce</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="161"/>
+        <location filename="../pages/Transfer.qml" line="145"/>
         <source>All</source>
         <translation>Vše</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="233"/>
+        <location filename="../pages/Transfer.qml" line="217"/>
         <source>QR Code</source>
         <translation>QR kód</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="224"/>
-        <location filename="../pages/Transfer.qml" line="248"/>
+        <location filename="../pages/Transfer.qml" line="208"/>
+        <location filename="../pages/Transfer.qml" line="232"/>
         <source>Resolve</source>
         <translation>Vyřešit</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="84"/>
-        <source>Ring size: %1</source>
-        <translation>Velikost kruhu: %1</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="193"/>
+        <location filename="../pages/Transfer.qml" line="177"/>
         <source>Normal (x1 fee)</source>
         <translation>Normální (x1 poplatek)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="221"/>
+        <location filename="../pages/Transfer.qml" line="205"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Adresa &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresář&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="263"/>
+        <location filename="../pages/Transfer.qml" line="247"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Nenalezena validní adresa na odpovídající OpenAlias adrese</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="269"/>
+        <location filename="../pages/Transfer.qml" line="253"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Adresa nalezena, avšak DNSSEC podpis nesouhlasí, což může znamenat, že adresa je povržená</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="273"/>
+        <location filename="../pages/Transfer.qml" line="257"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Nenalezena validní adresa na odpovídající OpenAlias adrese, ani nebyl ověřen DNSSEC podpis, což může znamenat, že adresa je povržená</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="277"/>
-        <location filename="../pages/Transfer.qml" line="281"/>
+        <location filename="../pages/Transfer.qml" line="261"/>
+        <location filename="../pages/Transfer.qml" line="265"/>
         <source>Internal error</source>
         <translation>Interní chyba</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="285"/>
+        <location filename="../pages/Transfer.qml" line="269"/>
         <source>No address found</source>
         <translation>Adresa nenalezena</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="306"/>
+        <location filename="../pages/Transfer.qml" line="290"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Popis &lt;font size=&apos;2&apos;&gt;( nepovinné )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="307"/>
+        <location filename="../pages/Transfer.qml" line="291"/>
         <source>Saved to local wallet history</source>
         <translation>Uloženo v historii lokální peněženky</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="318"/>
+        <location filename="../pages/Transfer.qml" line="302"/>
         <source>Send</source>
         <translation>Odeslat</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="406"/>
+        <location filename="../pages/Transfer.qml" line="389"/>
         <source>Advanced options</source>
         <translation>Pokročilé možnosti</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="619"/>
+        <location filename="../pages/Transfer.qml" line="552"/>
         <source>Monero sent successfully</source>
         <translation>Monero úspěšně odesláno</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="465"/>
+        <location filename="../pages/Transfer.qml" line="399"/>
         <source>Sweep Unmixable</source>
         <translation>Nemixovatelné výstupy</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="476"/>
+        <location filename="../pages/Transfer.qml" line="410"/>
         <source>Create tx file</source>
         <translation>Vytvořit tx soubor</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="495"/>
+        <location filename="../pages/Transfer.qml" line="428"/>
         <source>Sign tx file</source>
         <translation>Podepsat tx soubor</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="506"/>
+        <location filename="../pages/Transfer.qml" line="439"/>
         <source>Submit tx file</source>
         <translation>Odeslat tx soubor</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="556"/>
-        <location filename="../pages/Transfer.qml" line="612"/>
+        <location filename="../pages/Transfer.qml" line="489"/>
+        <location filename="../pages/Transfer.qml" line="545"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="618"/>
+        <location filename="../pages/Transfer.qml" line="551"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="545"/>
-        <location filename="../pages/Transfer.qml" line="606"/>
-        <location filename="../pages/Transfer.qml" line="650"/>
+        <location filename="../pages/Transfer.qml" line="478"/>
+        <location filename="../pages/Transfer.qml" line="539"/>
+        <location filename="../pages/Transfer.qml" line="583"/>
         <source>Please choose a file</source>
         <translation>Prosím vyberte soubor</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="191"/>
+        <location filename="../pages/Transfer.qml" line="175"/>
         <source>Automatic</source>
         <translation>Automaticky</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="518"/>
+        <location filename="../pages/Transfer.qml" line="451"/>
         <source>Export key images</source>
         <translation>Exportovat key image</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="530"/>
+        <location filename="../pages/Transfer.qml" line="463"/>
         <source>Import key images</source>
         <translation>Importovat key image</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="557"/>
+        <location filename="../pages/Transfer.qml" line="490"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Nelze nahrát nepodepsanou transakci: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="564"/>
+        <location filename="../pages/Transfer.qml" line="497"/>
         <source>
 Number of transactions: </source>
         <translation>
 Počet transakcí: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="566"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>
 Transaction #%1</source>
         <translation>
 Transakce #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
+        <location filename="../pages/Transfer.qml" line="500"/>
         <source>
 Recipient: </source>
         <translation>
 Adresát: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="568"/>
+        <location filename="../pages/Transfer.qml" line="501"/>
         <source>
 payment ID: </source>
         <translation>
 ID platby: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="569"/>
+        <location filename="../pages/Transfer.qml" line="502"/>
         <source>
 Amount: </source>
         <translation>
 Částka: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="570"/>
+        <location filename="../pages/Transfer.qml" line="503"/>
         <source>
 Fee: </source>
         <translation>
 Poplatek: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="571"/>
+        <location filename="../pages/Transfer.qml" line="504"/>
         <source>
 Ringsize: </source>
         <translation>
 Počet podpisovatelů: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="585"/>
+        <location filename="../pages/Transfer.qml" line="518"/>
         <source>Confirmation</source>
         <translation>Potvrzení</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="613"/>
+        <location filename="../pages/Transfer.qml" line="546"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Nelze odeslat transakci: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="687"/>
-        <location filename="../pages/Transfer.qml" line="699"/>
+        <location filename="../pages/Transfer.qml" line="619"/>
+        <location filename="../pages/Transfer.qml" line="631"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Peněženka není připojená k démonovi.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="702"/>
+        <location filename="../pages/Transfer.qml" line="634"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Démon, ke kterému jsme připojeni, není kompatibilní s grafickým rozhraním.
 Prosím, aktualizujte jej nebo se připojte k jinému démonovi</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="707"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Waiting on daemon synchronization to finish</source>
         <translation>Čekám na dokončení synchronizace démona</translation>
     </message>
@@ -1970,32 +1985,27 @@ Prosím, aktualizujte jej nebo se připojte k jinému démonovi</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="433"/>
-        <source>Transaction cost</source>
-        <translation>Náklady transakce</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="295"/>
+        <location filename="../pages/Transfer.qml" line="279"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>ID platby &lt;font size=&apos;2&apos;&gt;( nepovinné )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="192"/>
+        <location filename="../pages/Transfer.qml" line="176"/>
         <source>Slow (x0.25 fee)</source>
         <translation>Pomalý (x0.25 poplatek)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="194"/>
+        <location filename="../pages/Transfer.qml" line="178"/>
         <source>Fast (x5 fee)</source>
         <translation>Rychlý (x5 poplatek)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="195"/>
+        <location filename="../pages/Transfer.qml" line="179"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Nejrychlejší (x41.5 poplatek)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="296"/>
+        <location filename="../pages/Transfer.qml" line="280"/>
         <source>16 or 64 hexadecimal characters</source>
         <translation>16 nebo 64 hexadecimálních znaků</translation>
     </message>
@@ -2532,14 +2542,14 @@ V případě odchozích plateb můžete získat doklad o výdajích, který dokl
         <location filename="../main.qml" line="400"/>
         <location filename="../main.qml" line="607"/>
         <location filename="../main.qml" line="619"/>
-        <location filename="../main.qml" line="675"/>
-        <location filename="../main.qml" line="687"/>
-        <location filename="../main.qml" line="729"/>
-        <location filename="../main.qml" line="738"/>
-        <location filename="../main.qml" line="790"/>
-        <location filename="../main.qml" line="888"/>
-        <location filename="../main.qml" line="1070"/>
-        <location filename="../main.qml" line="1215"/>
+        <location filename="../main.qml" line="672"/>
+        <location filename="../main.qml" line="684"/>
+        <location filename="../main.qml" line="726"/>
+        <location filename="../main.qml" line="735"/>
+        <location filename="../main.qml" line="787"/>
+        <location filename="../main.qml" line="885"/>
+        <location filename="../main.qml" line="1067"/>
+        <location filename="../main.qml" line="1212"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -2597,31 +2607,31 @@ V případě odchozích plateb můžete získat doklad o výdajích, který dokl
     </message>
     <message>
         <location filename="../main.qml" line="611"/>
-        <location filename="../main.qml" line="730"/>
+        <location filename="../main.qml" line="727"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Nelze vytvořit transakci: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="620"/>
-        <location filename="../main.qml" line="739"/>
+        <location filename="../main.qml" line="736"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Nemixovatelné výstupy ve sweep</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="642"/>
+        <location filename="../main.qml" line="639"/>
         <source>
 Description: </source>
         <translation>
 Popisek: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="751"/>
+        <location filename="../main.qml" line="748"/>
         <source>Confirmation</source>
         <translation>Potvrzení</translation>
     </message>
     <message>
         <location filename="../main.qml" line="631"/>
-        <location filename="../main.qml" line="752"/>
+        <location filename="../main.qml" line="749"/>
         <source>Please confirm transaction:
 </source>
         <translation>Prosím, potvrďte transakci:
@@ -2636,7 +2646,7 @@ ID platby: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="635"/>
-        <location filename="../main.qml" line="753"/>
+        <location filename="../main.qml" line="750"/>
         <source>
 
 Amount: </source>
@@ -2646,7 +2656,7 @@ Amount: </source>
     </message>
     <message>
         <location filename="../main.qml" line="636"/>
-        <location filename="../main.qml" line="754"/>
+        <location filename="../main.qml" line="751"/>
         <source>
 Fee: </source>
         <translation>
@@ -2685,16 +2695,7 @@ Ringsize: </source>
 Počet podpisovatelů: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="639"/>
-        <source>
-
-WARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.</source>
-        <translation>
-
-VAROVÁNÍ: použití nestandartní velikosti podpisového kruhu může ohrozit vaše soukromí. Doporučujeme výchozí hodnotu 7.</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="641"/>
+        <location filename="../main.qml" line="638"/>
         <source>
 
 Number of transactions: </source>
@@ -2703,189 +2704,189 @@ Number of transactions: </source>
 Počet transakcí: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="644"/>
+        <location filename="../main.qml" line="641"/>
         <source>
 Spending address index: </source>
         <translation>
 Index výdajů: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="800"/>
+        <location filename="../main.qml" line="797"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Monero úspěšně odesláno: %1 transakce </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="830"/>
+        <location filename="../main.qml" line="827"/>
         <source>Payment proof</source>
         <translation>Důkaz platby</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="833"/>
+        <location filename="../main.qml" line="830"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Nemohu vygenerovat důkaz z následujícího důvodu: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="863"/>
-        <location filename="../main.qml" line="883"/>
+        <location filename="../main.qml" line="860"/>
+        <location filename="../main.qml" line="880"/>
         <source>Payment proof check</source>
         <translation>Zkontrolovat důkaz platby</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="866"/>
-        <location filename="../main.qml" line="885"/>
+        <location filename="../main.qml" line="863"/>
+        <location filename="../main.qml" line="882"/>
         <source>Bad signature</source>
         <translation>Špatný podpis</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="874"/>
+        <location filename="../main.qml" line="871"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Tato adresa obdržela %1 monero a %2 potvrzení.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="885"/>
+        <location filename="../main.qml" line="882"/>
         <source>Good signature</source>
         <translation>Správný podpis</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1071"/>
+        <location filename="../main.qml" line="1068"/>
         <source>Wrong password</source>
         <translation>Špatné heslo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1146"/>
+        <location filename="../main.qml" line="1143"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1149"/>
+        <location filename="../main.qml" line="1146"/>
         <source>Error: Filesystem is read only</source>
         <translation>Chyba: Souborový systém je v módu pouze pro čtení</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1151"/>
+        <location filename="../main.qml" line="1148"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Varování: na diskovém oddílu zbývá pouze %1 GB místa. Blockchain potřebuje ~%2 GB místa.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1153"/>
+        <location filename="../main.qml" line="1150"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Poznámka: na diskovém oddílu zbývá pouze %1 GB místa. Blockchain potřebuje ~%2 GB místa.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1155"/>
+        <location filename="../main.qml" line="1152"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Poznánka: lmdb adresář nenalezen. Vytvořím nový.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1159"/>
+        <location filename="../main.qml" line="1156"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1212"/>
+        <location filename="../main.qml" line="1209"/>
         <source>Password changed successfully</source>
         <translation>Heslo úspěšně změněno</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1216"/>
+        <location filename="../main.qml" line="1213"/>
         <source>Error: </source>
         <translation>Chyba: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1739"/>
+        <location filename="../main.qml" line="1736"/>
         <source>Tap again to close...</source>
         <translation>Klepnutím znovu zavřete...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1752"/>
+        <location filename="../main.qml" line="1749"/>
         <source>Daemon is running</source>
         <translation>Démon běží</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1753"/>
+        <location filename="../main.qml" line="1750"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>Démon zůstane běžet v pozadí i po zavření grafického rozhraní.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1755"/>
+        <location filename="../main.qml" line="1752"/>
         <source>Stop daemon</source>
         <translation>Zastavit démona</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1790"/>
+        <location filename="../main.qml" line="1787"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Je dostupná nová verze grafického klienta: %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1822"/>
+        <location filename="../main.qml" line="1819"/>
         <source>Daemon log</source>
         <translation>Log démona</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="676"/>
+        <location filename="../main.qml" line="673"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Částka není správně: předpokládaná částka má být mezi %1 až %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="688"/>
+        <location filename="../main.qml" line="685"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Nedostatečné finanční prostředky. Neblokovaný zůstatek: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="791"/>
+        <location filename="../main.qml" line="788"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Částku nelze odeslat: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="794"/>
-        <location filename="../main.qml" line="1211"/>
+        <location filename="../main.qml" line="791"/>
+        <location filename="../main.qml" line="1208"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="800"/>
+        <location filename="../main.qml" line="797"/>
         <source>Transaction saved to file: %1</source>
         <translation>Transakce uložena do souboru: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="871"/>
+        <location filename="../main.qml" line="868"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Tato adresa obdžela %1 monero, ale transakce jestě není potvrzená vytěžením</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="878"/>
+        <location filename="../main.qml" line="875"/>
         <source>This address received nothing</source>
         <translation>Tato adresa zatím nic neobdržela</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="897"/>
+        <location filename="../main.qml" line="894"/>
         <source>Balance (syncing)</source>
         <translation>Zůstatek (synchronizuji)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="897"/>
+        <location filename="../main.qml" line="894"/>
         <source>Balance</source>
         <translation>Zůstatek</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1258"/>
+        <location filename="../main.qml" line="1255"/>
         <source>Please wait...</source>
         <translation>Prosím čekejte...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1282"/>
+        <location filename="../main.qml" line="1279"/>
         <source>Program setup wizard</source>
         <translation>Průvodce nastavením programu</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1298"/>
+        <location filename="../main.qml" line="1295"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1448"/>
+        <location filename="../main.qml" line="1445"/>
         <source>send to the same destination</source>
         <translation>Odeslat na stejnou adresu</translation>
     </message>
