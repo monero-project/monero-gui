@@ -383,7 +383,7 @@ Rectangle{
 
                 Rectangle {
                     id: rectStopNode
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                    color: MoneroComponents.Style.buttonBackgroundColor
                     width: btnStopNode.width + 40
                     height: 24
                     radius: 2
@@ -396,14 +396,18 @@ Rectangle{
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 14 * scaleRatio
                         font.bold: true
-                        text: qsTr("Stop local node") + translationManager.emptyString
+                        text: (appWindow.daemonRunning ? qsTr("Stop local node") : qsTr("Start daemon")) + translationManager.emptyString
                     }
 
                     MouseArea {
                         cursorShape: Qt.PointingHandCursor
                         anchors.fill: parent
                         onClicked: {
-                            appWindow.stopDaemon();
+                            if (appWindow.daemonRunning) {
+                                appWindow.stopDaemon();
+                            } else {
+                                appWindow.startDaemon(persistentSettings.daemonFlags);
+                            }
                         }
                     }
                 }
