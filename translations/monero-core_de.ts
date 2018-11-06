@@ -2743,7 +2743,8 @@ Beschreibung: </translation>
         <location filename="../main.qml" line="641"/>
         <source>
 Spending address index: </source>
-        <translation>Indizes der beteiligten Adressen: </translation>
+        <translation>
+Indizes der beteiligten Adressen: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="685"/>
