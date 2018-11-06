@@ -184,7 +184,7 @@
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation>Nessuna cronologia..</translation>
+        <translation>Nessuna cronologia...</translation>
     </message>
 </context>
 <context>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>Seed mnmemonico</translation>
+        <translation>Seed mnemonico</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="143"/>
@@ -1057,17 +1057,17 @@
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
         <source>Embedded Monero version: </source>
-        <translation>Versione Monero inclusa: </translation>
+        <translation>Versione Monero incorporata: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
         <source>Wallet path: </source>
-        <translation>Destinazione Wallet: </translation>
+        <translation>Percorso portafoglio: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
         <source>Wallet creation height: </source>
-        <translation>Altezza creazione del Wallet: </translation>
+        <translation>Altezza creazione portafoglio: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
@@ -1098,7 +1098,7 @@ The old wallet cache file will be renamed and can be restored later.
 	    Le seguenti informazioni verranno cancellate
 		- Indirizzo di recezione
 		- Chiavi Tx
-		- Descrizione Tx
+		- Descrizioni Tx
 		
 		La vecchia cache del wallet verrà rinominata e potrà essere ripristinata successivamente.
 	    </translation>
@@ -1116,7 +1116,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation>Percorso log Wallet: </translation>
+        <translation>Percorso log portafoglio: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
@@ -1290,7 +1290,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Conservare queste informazioni in modo sicuro per recuperare il portafoglio in futuro.
+        <translation>Conserva queste informazioni in modo sicuro per recuperare il portafoglio in futuro.
 </translation>
     </message>
     <message>
@@ -1306,7 +1306,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation>Utilizza questa feature se pensi che il bilancio mostrato non è accurato.</translation>
+        <translation>Utilizza questa funzionalità se ritieni che il bilancio mostrato non sia accurato.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
@@ -1366,7 +1366,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Questo imposta quali output di cui è nota l&apos;avvenuta spesa e che non devono essere usati nelle firme ad anello. </translation>
+        <translation>Questo imposta gli output di cui è nota l&apos;avvenuta spesa e che non devono essere usati nelle firme ad anello. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="144"/>
@@ -2379,7 +2379,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation>Subaddress lookahead (opzionale): &lt;major&gt;:&lt;minor&gt;</translation>
+        <translation>Lookahead sottoindirizzo (opzionale): &lt;major&gt;:&lt;minor&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
