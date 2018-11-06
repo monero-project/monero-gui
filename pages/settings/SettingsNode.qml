@@ -382,14 +382,14 @@ Rectangle{
                 Layout.preferredWidth: parent.width
 
                 Rectangle {
-                    id: rectStopNode
+                    id: rectStartStopNode
                     color: MoneroComponents.Style.buttonBackgroundColor
-                    width: btnStopNode.width + 40
+                    width: btnStartStopNode.width + 40
                     height: 24
                     radius: 2
 
                     Text {
-                        id: btnStopNode
+                        id: btnStartStopNode
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
                         color: MoneroComponents.Style.defaultFontColor
