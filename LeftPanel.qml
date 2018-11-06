@@ -201,6 +201,7 @@ Rectangle {
                     id: unlockedBalanceLabel
                     visible: true
                     text: qsTr("Unlocked balance") + translationManager.emptyString
+                    fontSize: 14
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     anchors.top: parent.top
