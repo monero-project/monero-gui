@@ -227,17 +227,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">Отправленные</translation>
+        <translation>Отправленные</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">Полученные</translation>
+        <translation>Полученные</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
         <source>To </source>
-        <translation type="unfinished"></translation>
+        <translation>До </translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="115"/>
         <source>Mnemonic seed</source>
-        <translation>Мнемоническая seed-фраза</translation>
+        <translation>Мнемоническая фраза</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="143"/>
@@ -416,7 +416,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="278"/>
         <source>(View Only Wallet -  No mnemonic seed available)</source>
-        <translation>(Кошелек только для просмотра - Мнемоническая seed-фраза не доступна)</translation>
+        <translation>(Кошелек только для просмотра - Мнемоническая фраза не доступна)</translation>
     </message>
 </context>
 <context>
@@ -449,7 +449,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="456"/>
         <source>Prove/check</source>
-        <translation>Подтвердить/проверить</translation>
+        <translation>Доказать платеж</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
@@ -469,12 +469,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="125"/>
         <source>Testnet</source>
-        <translation>Тестовая сеть (testnet)</translation>
+        <translation>Тестовая сеть (Testnet)</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="125"/>
         <source>Stagenet</source>
-        <translation>Тестовая сеть (stagenet)</translation>
+        <translation>Симуляция (Stagenet)</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="337"/>
@@ -519,7 +519,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="549"/>
         <source>Seed &amp; Keys</source>
-        <translation>Seed-фраза &amp; Ключи</translation>
+        <translation>Мнемоника &amp; Ключи</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="550"/>
@@ -539,7 +539,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="504"/>
         <source>Sign/verify</source>
-        <translation>Подписать/проверить</translation>
+        <translation>Подпись сообщений</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="480"/>
@@ -651,12 +651,12 @@
     <message>
         <location filename="../pages/Mining.qml" line="137"/>
         <source>Manage miner</source>
-        <translation>Управление майнером</translation>
+        <translation>Майнер</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="147"/>
         <source>Start mining</source>
-        <translation>Запустить майнинг</translation>
+        <translation>Запустить</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="153"/>
@@ -676,7 +676,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
         <source>Stop mining</source>
-        <translation>Остановить майнинг</translation>
+        <translation>Остановить</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="180"/>
@@ -1116,7 +1116,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
         <source>Wallet log path: </source>
-        <translation>Путь для журнала кошелька: </translation>
+        <translation>Путь к журналу кошелька: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
@@ -1134,7 +1134,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
-        <translation>Пользовательские украшения</translation>
+        <translation>Заголовок окна</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
@@ -1147,7 +1147,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="68"/>
         <source>Log level</source>
-        <translation>Настройка уровня журнала</translation>
+        <translation>Уровень детализации журнала</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
@@ -1157,7 +1157,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите команду и нажмите ENTER (например &apos;help&apos; или &apos;status&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1170,7 +1170,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>Блокчейн скачан на ваш компьютер. Это обеспечит лучшую конфиденциальность, но потребует больше свободного места.</translation>
+        <translation>Блокчейн будет загружен на ваш компьютер. Лучшая конфиденциальность, но потребуется больше свободного места.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="213"/>
@@ -1180,7 +1180,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="232"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Использовать сторонний узел для подключения к сети Monero. Менее безопасно, но более удобно.</translation>
+        <translation>Использовать сторонний узел для подключения к сети Monero. Менее безопасно, но более быстро и удобно.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="277"/>
@@ -1236,17 +1236,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Daemon startup flags</source>
-        <translation>Флаги запуска демона</translation>
+        <translation>Параметры запуска демона</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="476"/>
         <source>Bootstrap Address</source>
-        <translation>Адрес начальной загрузки</translation>
+        <translation>Адрес Bootstrap-ноды</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="477"/>
         <source>Bootstrap Port</source>
-        <translation>Порт начальной загрузки</translation>
+        <translation>Порт Bootstrap-ноды</translation>
     </message>
 </context>
 <context>
@@ -1254,12 +1254,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="80"/>
         <source>Close this wallet</source>
-        <translation>Закрыть этот кошелек</translation>
+        <translation>Закрыть текущий кошелек</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
         <source>Logs out of this wallet.</source>
-        <translation>Выйти из этого кошелька</translation>
+        <translation>Выйти из текущего кошелька</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="129"/>
@@ -1274,7 +1274,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished">Создает новый кошелек, в котором можно только просматривать транзакции, но не отправлять их.</translation>
+        <translation>Создает новый кошелек, в котором можно только просматривать транзакции, но не отправлять их.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
@@ -1284,7 +1284,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="262"/>
         <source>Show seed &amp; keys</source>
-        <translation>Показать seed-фразу &amp; ключи</translation>
+        <translation>Показать мнемонику &amp; ключи</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
@@ -1294,7 +1294,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="311"/>
         <source>Show seed</source>
-        <translation>Показать seed-фразу</translation>
+        <translation>Показать мнемонику</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="351"/>
@@ -1304,7 +1304,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="365"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
-        <translation>Используйте эту функцию, если считаете, что показанный баланс не является точным.</translation>
+        <translation>Используйте эту функцию, если считаете, что показанный баланс не является верным.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="401"/>
@@ -1342,7 +1342,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="106"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>На этой странице можно взаимодействовать с общей базой данных RingDB. Эта база данных предназначается для использования кошельками Monero или их клонов, которые смогут повторно использовать ключи Monero.</translation>
+        <translation>На этой странице можно взаимодействовать с общей базой данных RingDB. Эта база данных предназначается для использования кошельками Monero или их клонами, которые смогут повторно использовать ключи Monero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
@@ -1364,7 +1364,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Здесь устанавливается, какие из выходов известны как израссходованные, и следовательно, их нельзя использовать в качестве секретных заполнителей в кольцевых подписях.</translation>
+        <translation>Здесь устанавливается, какие из выходов будут помечены как израссходованные, а следовательно, их нельзя будет использовать в качестве секретных заполнителей в кольцевых подписях.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="144"/>
@@ -1399,17 +1399,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="214"/>
         <source>Or manually mark a single output as spent/unspent:</source>
-        <translation type="unfinished"></translation>
+        <translation>Или вручную отметьте выход как потраченный/непотраченный:</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="215"/>
         <source>Paste output amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставьте сумму выхода</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="225"/>
         <source>Paste output offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставьте смещение выхода</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
@@ -1425,7 +1425,7 @@ The old wallet cache file will be renamed and can be restored later.
         <location filename="../pages/SharedRingDB.qml" line="260"/>
         <location filename="../pages/SharedRingDB.qml" line="262"/>
         <source>Rings</source>
-        <translation>Размер кольца</translation>
+        <translation>Кольца</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="263"/>
@@ -1485,7 +1485,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="410"/>
         <source>Relative</source>
-        <translation>Связанные</translation>
+        <translation>Связанные выходы</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="426"/>
@@ -1540,7 +1540,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="154"/>
         <source>Message from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение из файла</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
@@ -1894,7 +1894,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="399"/>
         <source>Sweep Unmixable</source>
-        <translation>Убрать несмешиваемые</translation>
+        <translation>Убрать пылевые выходы</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="410"/>
@@ -2152,7 +2152,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWalletFromDevice.qml" line="112"/>
         <source>Create a new wallet from hardware device</source>
-        <translation>Создать новый кошелек с помощью аппаратного устройства</translation>
+        <translation>Подключить аппаратный кошелек</translation>
     </message>
 </context>
 <context>
@@ -2238,7 +2238,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Stagenet</source>
-        <translation>Тестовая сеть (Stagenet)</translation>
+        <translation>Симуляция (Stagenet)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
@@ -2258,7 +2258,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="69"/>
         <source>Backup seed</source>
-        <translation>Резервная копия seed-фразы</translation>
+        <translation>Бэкап мнемоники</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
@@ -2273,7 +2273,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Testnet</source>
-        <translation>Тестовая сеть (testnet)</translation>
+        <translation>Тестовая сеть (Testnet)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="77"/>
@@ -2293,7 +2293,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="91"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>Не забудьте записать свою seed-фразу. Вы можете просмотреть свою seed-фразу и изменить свою конфигурацию на странице настроек.</translation>
+        <translation>Не забудьте записать свою мнемоническую фразу. Вы можете просмотреть свою мнемоническую фразу и изменить свою конфигурацию на странице настроек.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="137"/>
@@ -2311,7 +2311,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
         <source>USE MONERO</source>
-        <translation>ИСПОЛЬЗОВАТЬ MONERO</translation>
+        <translation>В КОШЕЛЕК MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="399"/>
@@ -2327,7 +2327,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardMain.qml" line="406"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation type="unfinished">Создан кошелек только для просмотра. Вы можете открыть его, закрыв текущий кошелек, кликнув на &quot;Открыть кошелек из файла&quot;, и выбрав кошелек только для просмотра в: 
+        <translation>Создан кошелек только для просмотра. Вы можете открыть его, закрыв текущий кошелек, кликнув на &quot;Открыть кошелек из файла&quot;, и выбрав кошелек только для просмотра в: 
 %1</translation>
     </message>
     <message>
@@ -2351,12 +2351,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="189"/>
         <source>Restore from seed</source>
-        <translation>Восстановить с помощью seed-фразы</translation>
+        <translation>Из мнемоники</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="199"/>
         <source>Restore from keys</source>
-        <translation>Восстановить с помощью ключей</translation>
+        <translation>Из ключей</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="209"/>
@@ -2386,12 +2386,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation>Зарезервировано для субадреса (необязательно): &lt;major&gt;:&lt;minor&gt;</translation>
+        <translation>Субадреса (необязательно): &lt;major&gt;:&lt;minor&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
         <source>Device name</source>
-        <translation>Имя устройства</translation>
+        <translation>Тип устройства</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="344"/>
@@ -2401,7 +2401,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="367"/>
         <source>Your wallet is stored in</source>
-        <translation>Ваш кошелек сохранен в</translation>
+        <translation>Путь к кошельку</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="397"/>
@@ -2414,17 +2414,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Введите свою мнемоническую seed-фразу из 25 (или 24) слов</translation>
+        <translation>Введите свою мнемоническую фразу из 25 (или 24) слов</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
         <source>Seed copied to clipboard</source>
-        <translation>Seed-фраза скопирована в буфер обмена</translation>
+        <translation>Мнемоника скопирована в буфер обмена</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="93"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>Эту seed-фразу &lt;b&gt;очень важно записать и хранить в тайне&lt;/b&gt;. Это все что нужно для резервной копии и восстановления вашего кошелька.</translation>
+        <translation>Эту мнемоническую фразу &lt;b&gt;очень важно записать и хранить в тайне&lt;/b&gt;. Это все что нужно для резервной копии и восстановления вашего кошелька.</translation>
     </message>
 </context>
 <context>
@@ -2447,7 +2447,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="184"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation>Восстановить кошелек из ключей или мнемонической seed-фразы</translation>
+        <translation>Восстановиться из ключей или мнемонической фразы</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="227"/>
@@ -2472,12 +2472,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>
         <source>Testnet</source>
-        <translation>Тестовая сеть (testnet)</translation>
+        <translation>Тестовая сеть (Testnet)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="343"/>
         <source>Stagenet</source>
-        <translation>Тестовая сеть (Stagenet)</translation>
+        <translation>Симуляция (Stagenet)</translation>
     </message>
 </context>
 <context>
@@ -2492,7 +2492,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardPassword.qml" line="126"/>
         <source> &lt;br&gt;Note: this password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.&lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt;Enter a strong password&lt;/b&gt; (using letters, numbers, and/or symbols):</source>
-        <translation> &lt;br&gt; Примечание: этот пароль нельзя восстановить. Если вы его забудете, то кошелек нужно будет восстанавливать из мнемонической seed-фразы. &lt;br/&gt;&lt;br/&gt;
+        <translation> &lt;br&gt; Примечание: этот пароль нельзя восстановить. Если вы его забудете, то кошелек нужно будет восстанавливать из мнемонической фразы. &lt;br/&gt;&lt;br/&gt;
                         &lt;b&gt; Введите надежный пароль&lt;/b&gt; (используйте буквы, цифры и/или специальные символы):</translation>
     </message>
 </context>
@@ -2857,7 +2857,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1819"/>
         <source>Daemon log</source>
-        <translation>Логи демона</translation>
+        <translation>Журнал демона</translation>
     </message>
     <message>
         <location filename="../main.qml" line="868"/>
