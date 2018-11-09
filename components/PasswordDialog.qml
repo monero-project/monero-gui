@@ -42,15 +42,17 @@ Item {
 
     property alias password: passwordInput.text
     property string walletName
+    property string errorText
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
     signal closeCallback()
 
-    function open(walletName) {
+    function open(walletName, errorText) {
         inactiveOverlay.visible = true // draw appwindow inactive
         root.walletName = walletName ? walletName : ""
+        root.errorText = errorText ? errorText : "";
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.enabled = false
@@ -58,6 +60,10 @@ Item {
         root.visible = true;
         passwordInput.forceActiveFocus();
         passwordInput.text = ""
+    }
+
+    function showError(errorText) {
+        open(root.walletName, errorText);
     }
 
     function close() {
@@ -91,6 +97,18 @@ Item {
                 font.family: MoneroComponents.Style.fontLight.name
 
                 color: MoneroComponents.Style.defaultFontColor
+            }
+
+            Label {
+                text: root.errorText
+                visible: root.errorText
+
+                anchors.left: parent.left
+                color: MoneroComponents.Style.errorColor
+                font.pixelSize: 16 * scaleRatio
+                font.family: MoneroComponents.Style.fontLight.name                
+                Layout.fillWidth: true
+                wrapMode: Text.Wrap
             }
 
             TextField {

@@ -397,15 +397,9 @@ ApplicationWindow {
             }
             // opening with password but password doesn't match
             console.error("Error opening wallet with password: ", wallet.errorString);
-            informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text = qsTr("Couldn't open wallet: ") + wallet.errorString;
-            informationPopup.icon = StandardIcon.Critical
+            passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
             console.log("closing wallet async : " + wallet.address)
             closeWallet();
-            informationPopup.open()
-            informationPopup.onCloseCallback = function() {
-                passwordDialog.open(walletName)
-            }
             return;
         }
 
@@ -1064,12 +1058,7 @@ ApplicationWindow {
                         handleTransactionConfirmed()
                     }
                 } else {
-                    informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                    informationPopup.text = qsTr("Wrong password");
-                    informationPopup.open()
-                    informationPopup.onCloseCallback = function() {
-                        passwordDialog.open()
-                    }
+                    passwordDialog.showError(qsTr("Wrong password"));
                 }
             }
             passwordDialog.onRejectedCallback = null;
