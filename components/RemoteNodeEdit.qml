@@ -58,6 +58,11 @@ GridLayout {
     property bool lineEditFontBold: true
 
     signal editingFinished()
+    signal textChanged()
+
+    function isValid() {
+        return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
+    }
 
     function getAddress() {
         return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
@@ -79,6 +84,7 @@ GridLayout {
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
         onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 
     LineEdit {
@@ -99,5 +105,6 @@ GridLayout {
         validator: IntValidator{bottom: 1; top: 65535;}
 
         onEditingFinished: root.editingFinished()
+        onTextChanged: root.textChanged()
     }
 }
