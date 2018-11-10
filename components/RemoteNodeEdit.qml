@@ -96,6 +96,7 @@ GridLayout {
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
+        validator: IntValidator{bottom: 1; top: 65535;}
 
         onEditingFinished: root.editingFinished()
     }
