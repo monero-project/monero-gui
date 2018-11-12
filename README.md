@@ -163,7 +163,11 @@ The executable can be found in the build/release/bin folder.
 
 8. Start the build
 
-  `./build.sh`
+  ```
+  ./build.sh
+  cd build
+  make deloy
+  ```
 
 The executable can be found in the `build/release/bin` folder.
 
