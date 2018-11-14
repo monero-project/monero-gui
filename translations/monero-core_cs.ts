@@ -21,7 +21,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="73"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>ID platby&lt;font size=&apos;2&apos;&gt;(nepovinné)&lt;/font&gt;</translation>
+        <translation>ID platby &lt;font size=&apos;2&apos;&gt;(nepovinné)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="74"/>
@@ -227,12 +227,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">Poslat</translation>
+        <translation>Odeslané</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">Přijaté</translation>
+        <translation>Přijaté</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
@@ -933,7 +933,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="143"/>
         <source>Total received</source>
-        <translation>celkem přijato</translation>
+        <translation>Celkem přijato</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="198"/>
@@ -1426,12 +1426,12 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../pages/SharedRingDB.qml" line="215"/>
         <source>Paste output amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložte výstupní částku</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="225"/>
         <source>Paste output offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložte výstupní offset</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="263"/>
@@ -1546,7 +1546,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../pages/Sign.qml" line="154"/>
         <source>Message from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpráva ze souboru</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
