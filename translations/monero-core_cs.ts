@@ -1426,12 +1426,12 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../pages/SharedRingDB.qml" line="215"/>
         <source>Paste output amount</source>
-        <translation>Vložte výstupní částku</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="225"/>
         <source>Paste output offset</source>
-        <translation>Vložte výstupní offset</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="263"/>
@@ -1678,7 +1678,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../components/StandardDropdown.qml" line="173"/>
         <source>Sent</source>
-        <translation>Poslat</translation>
+        <translation>Odeslané</translation>
     </message>
     <message>
         <location filename="../components/StandardDropdown.qml" line="174"/>
