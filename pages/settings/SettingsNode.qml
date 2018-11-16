@@ -298,6 +298,9 @@ Rectangle{
                     persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                     console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
                 }
+                onTextChanged: {
+                    rectConnectRemote.enabled = remoteNodeEdit.isValid();
+                }
             }
 
             GridLayout {
@@ -331,7 +334,8 @@ Rectangle{
             Rectangle {
                 id: rectConnectRemote
                 Layout.topMargin: 12 * scaleRatio
-                color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                enabled: remoteNodeEdit.isValid()
+                color: enabled ? MoneroComponents.Style.buttonBackgroundColor : MoneroComponents.Style.buttonBackgroundColorDisabled
                 width: btnConnectRemote.width + 40
                 height: 26
                 radius: 2
@@ -349,6 +353,7 @@ Rectangle{
 
                 MouseArea {
                     cursorShape: Qt.PointingHandCursor
+                    visible: rectConnectRemote.enabled
                     anchors.fill: parent
                     onClicked: {
                         // Update daemon login

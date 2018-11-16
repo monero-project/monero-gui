@@ -42,6 +42,7 @@ Item {
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
+    property alias acceptableInput: input.acceptableInput
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
