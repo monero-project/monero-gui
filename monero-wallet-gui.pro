@@ -119,7 +119,8 @@ LIBS += -L$$WALLET_ROOT/lib \
         -lepee \
         -lunbound \
         -lsodium \
-        -leasylogging
+        -leasylogging \
+        -lprotobuf
 }
 
 android {
