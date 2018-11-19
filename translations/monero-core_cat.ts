@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="cat">
 <context>
     <name>AddressBook</name>
     <message>
@@ -227,12 +227,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">Enviades</translation>
+        <translation>Enviades</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">Rebudes</translation>
+        <translation>Rebudes</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
@@ -423,42 +423,42 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="213"/>
+        <location filename="../LeftPanel.qml" line="242"/>
         <source>Balance</source>
         <translation>Balanç</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="203"/>
+        <location filename="../LeftPanel.qml" line="231"/>
         <source>Unlocked balance</source>
         <translation>Balanç desbloquejat</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="312"/>
+        <location filename="../LeftPanel.qml" line="341"/>
         <source>Send</source>
         <translation>Envia</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="362"/>
+        <location filename="../LeftPanel.qml" line="391"/>
         <source>Receive</source>
         <translation>Rep</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="363"/>
+        <location filename="../LeftPanel.qml" line="392"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="456"/>
+        <location filename="../LeftPanel.qml" line="485"/>
         <source>Prove/check</source>
         <translation>Provar/verificar</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="457"/>
+        <location filename="../LeftPanel.qml" line="486"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="386"/>
+        <location filename="../LeftPanel.qml" line="415"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
@@ -478,92 +478,92 @@
         <translation>Xarxa de fase</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="337"/>
+        <location filename="../LeftPanel.qml" line="366"/>
         <source>Address book</source>
         <translation>Llibreta d&apos;adreces</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="338"/>
+        <location filename="../LeftPanel.qml" line="367"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="387"/>
+        <location filename="../LeftPanel.qml" line="416"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="409"/>
+        <location filename="../LeftPanel.qml" line="438"/>
         <source>Advanced</source>
         <translation>Avançat</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="410"/>
+        <location filename="../LeftPanel.qml" line="439"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="432"/>
+        <location filename="../LeftPanel.qml" line="461"/>
         <source>Mining</source>
         <translation>Mineria</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="433"/>
+        <location filename="../LeftPanel.qml" line="462"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="479"/>
+        <location filename="../LeftPanel.qml" line="508"/>
         <source>Shared RingDB</source>
         <translation>RingDB compartida</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="549"/>
+        <location filename="../LeftPanel.qml" line="578"/>
         <source>Seed &amp; Keys</source>
         <translation>Llavor i Claus</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="550"/>
+        <location filename="../LeftPanel.qml" line="579"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="600"/>
+        <location filename="../LeftPanel.qml" line="629"/>
         <source>Wallet</source>
         <translation>Moneder</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="609"/>
+        <location filename="../LeftPanel.qml" line="638"/>
         <source>Daemon</source>
         <translation>Dimoni</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="504"/>
+        <location filename="../LeftPanel.qml" line="533"/>
         <source>Sign/verify</source>
         <translation>Signa/Verifica</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="528"/>
+        <location filename="../LeftPanel.qml" line="557"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="313"/>
+        <location filename="../LeftPanel.qml" line="342"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="480"/>
+        <location filename="../LeftPanel.qml" line="509"/>
         <source>G</source>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="505"/>
+        <location filename="../LeftPanel.qml" line="534"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="527"/>
+        <location filename="../LeftPanel.qml" line="556"/>
         <source>Settings</source>
         <translation>Opcions</translation>
     </message>
@@ -571,12 +571,12 @@
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="126"/>
+        <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
         <translation>Còpia</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="132"/>
+        <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
         <translation>Copiat al porta-retalls</translation>
     </message>
@@ -800,22 +800,22 @@
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="86"/>
+        <location filename="../components/PasswordDialog.qml" line="92"/>
         <source>Please enter wallet password</source>
         <translation>Introdueix la contrasenya del moneder</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="86"/>
+        <location filename="../components/PasswordDialog.qml" line="92"/>
         <source>Please enter wallet password for: </source>
         <translation>Introdueix la contrasenya del moneder per:</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="153"/>
+        <location filename="../components/PasswordDialog.qml" line="171"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="164"/>
+        <location filename="../components/PasswordDialog.qml" line="182"/>
         <source>Continue</source>
         <translation>Continua</translation>
     </message>
@@ -1025,12 +1025,12 @@
 <context>
     <name>RemoteNodeEdit</name>
     <message>
-        <location filename="../components/RemoteNodeEdit.qml" line="69"/>
+        <location filename="../components/RemoteNodeEdit.qml" line="74"/>
         <source>Remote Node Hostname / IP</source>
         <translation>Nom del Node Remot / IP</translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeEdit.qml" line="87"/>
+        <location filename="../components/RemoteNodeEdit.qml" line="93"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
@@ -1051,42 +1051,42 @@
 <context>
     <name>SettingsInfo</name>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="59"/>
         <source>GUI version: </source>
         <translation>Versió de la GUI: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="88"/>
         <source>Embedded Monero version: </source>
         <translation>Versió integrada de Monero: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="117"/>
         <source>Wallet path: </source>
         <translation>Ruta del moneder: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="154"/>
         <source>Wallet creation height: </source>
         <translation>Alçada de creació de la cartera: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="164"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
         <translation> &lt;a href=&apos;#&apos;&gt; (Fes clic per canviar)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="166"/>
         <source>Set a new restore height:</source>
         <translation>Estableix una nova alçada de restauració: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="177"/>
         <source>Rescan wallet cache</source>
         <translation>Reescaneja la memòria cau del moneder</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
         <source>Are you sure you want to rebuild the wallet cache?
 The following information will be deleted
 - Recipient addresses
@@ -1104,27 +1104,27 @@ Aquesta informació serà esborrada
 El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recuperar després.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="200"/>
         <source>Invalid restore height specified. Must be a number.</source>
         <translation>S&apos;ha especificat una alçada de restauració no vàlida. Ha de ser un número.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="234"/>
         <source>Wallet log path: </source>
         <translation>Ruta del registre del moneder: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="265"/>
         <source>Copy to clipboard</source>
         <translation>Copia al porta-retalls</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="290"/>
         <source>Copied to clipboard</source>
         <translation>Copiat al porta-retalls</translation>
     </message>
@@ -1198,53 +1198,58 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="312"/>
-        <location filename="../pages/settings/SettingsNode.qml" line="450"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="315"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="459"/>
         <source>(optional)</source>
         <translation>(opcional)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="323"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="326"/>
         <source>Password</source>
         <translation>Contrasenya</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="347"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="351"/>
         <source>Connect</source>
         <translation>Connecta</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="399"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Stop local node</source>
         <translation>Aturar node local</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="404"/>
+        <source>Start daemon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsNode.qml" line="429"/>
         <source>Blockchain location</source>
         <translation>Localització Cadena de blocs</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="429"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
         <translation> &lt;a href=&apos;#&apos;&gt; (canvia)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="421"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="430"/>
         <source>(default)</source>
         <translation>(per defecte)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="449"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="458"/>
         <source>Daemon startup flags</source>
         <translation>Marques d&apos;inici del dimoni</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="476"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="485"/>
         <source>Bootstrap Address</source>
         <translation>Adreça d&apos;arrencada</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="477"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="486"/>
         <source>Bootstrap Port</source>
         <translation>Port d&apos;arrencada</translation>
     </message>
@@ -1274,7 +1279,7 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished">Crea un nou moneder que només pot veure i iniciar transaccions, però cal un moneder de despeses per signar la transacció abans d'enviar-la.</translation>
+        <translation type="unfinished">Crea un nou moneder que només pot veure i iniciar transaccions, però cal un moneder de despeses per signar la transacció abans d&apos;enviar-la.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
@@ -1364,7 +1369,7 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
     <message>
         <location filename="../pages/SharedRingDB.qml" line="143"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Això estableix quines sortides se sap que s'han gastat, i per tant no utilitzar-les com marcadors de privacitat en les signatures d'&apos;anell. </translation>
+        <translation>Això estableix quines sortides se sap que s&apos;han gastat, i per tant no utilitzar-les com marcadors de privacitat en les signatures d&apos;&apos;anell. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="144"/>
@@ -1851,11 +1856,6 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Inicia dimoni&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="84"/>
-        <source>Ring size: %1</source>
-        <translation>Mida d&apos;anell: %1</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="177"/>
         <source>Normal (x1 fee)</source>
         <translation>Normal (comissió x1)</translation>
@@ -1863,7 +1863,7 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
     <message>
         <location filename="../pages/Transfer.qml" line="205"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Adreça &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Llibreta d&apos;adreces&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
+        <translation>&gt;&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Adreça &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Llibreta d&apos;adreces&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="389"/>
@@ -2028,13 +2028,6 @@ Actualitza o connectat a un altre dimoni</translation>
         <translation>Demostra transacció</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="70"/>
-        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message.
-For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
-        <translation>Genereu una prova del pagament entrant/sortint subministrant l&apos;identificador de la transacció, l&apos;adreça del destinatari i un missatge opcional.
-En el cas dels pagaments sortints, podeu obtenir una &apos;Prova de pagament&apos; que demostra l&apos;autoria d&apos;una transacció. En aquest cas, no heu d&apos;especificar l&apos;adreça del destinatari.</translation>
-    </message>
-    <message>
         <location filename="../pages/TxKey.qml" line="96"/>
         <location filename="../pages/TxKey.qml" line="172"/>
         <source>Recipient&apos;s wallet address</source>
@@ -2086,6 +2079,12 @@ En el cas de Prova de Pagament, no heu d&apos;especificar l&apos;adreça del des
         <translation>ID de pagament</translation>
     </message>
     <message>
+        <location filename="../pages/TxKey.qml" line="70"/>
+        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
+For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../pages/TxKey.qml" line="84"/>
         <location filename="../pages/TxKey.qml" line="159"/>
         <source>Paste tx ID</source>
@@ -2095,6 +2094,14 @@ En el cas de Prova de Pagament, no heu d&apos;especificar l&apos;adreça del des
         <location filename="../pages/TxKey.qml" line="211"/>
         <source>Check</source>
         <translation>Verifica</translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation type="unfinished">Contraseña incorrecta</translation>
     </message>
 </context>
 <context>
@@ -2112,7 +2119,7 @@ En el cas de Prova de Pagament, no heu d&apos;especificar l&apos;adreça del des
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>És molt important escriure-ho en paper ja que és l'únic suport que necessites per recuperar el teu moneder.</translation>
+        <translation>És molt important escriure-ho en paper ja que és l&apos;únic suport que necessites per recuperar el teu moneder.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="124"/>
@@ -2329,10 +2336,9 @@ En el cas de Prova de Pagament, no heu d&apos;especificar l&apos;adreça del des
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="406"/>
-        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in:
+        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>El moneder de només lectura ha estat creat. El pots obrir tancant el moneder actual, clicant a &quot;Obrir moneder des del fitxer&quot; i sel·leccionant el moneder de només lectura a:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="414"/>
@@ -2538,107 +2544,95 @@ En el cas de Prova de Pagament, no heu d&apos;especificar l&apos;adreça del des
     <name>main</name>
     <message>
         <location filename="../main.qml" line="291"/>
-        <location filename="../main.qml" line="400"/>
-        <location filename="../main.qml" line="607"/>
-        <location filename="../main.qml" line="619"/>
-        <location filename="../main.qml" line="672"/>
-        <location filename="../main.qml" line="684"/>
-        <location filename="../main.qml" line="726"/>
-        <location filename="../main.qml" line="735"/>
-        <location filename="../main.qml" line="787"/>
-        <location filename="../main.qml" line="885"/>
-        <location filename="../main.qml" line="1067"/>
-        <location filename="../main.qml" line="1212"/>
+        <location filename="../main.qml" line="601"/>
+        <location filename="../main.qml" line="613"/>
+        <location filename="../main.qml" line="666"/>
+        <location filename="../main.qml" line="678"/>
+        <location filename="../main.qml" line="720"/>
+        <location filename="../main.qml" line="729"/>
+        <location filename="../main.qml" line="781"/>
+        <location filename="../main.qml" line="879"/>
+        <location filename="../main.qml" line="1201"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
         <location filename="../main.qml" line="292"/>
-        <location filename="../main.qml" line="401"/>
+        <location filename="../main.qml" line="400"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>No s&apos;ha pogut obrir el moneder:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>Balanç desbloquejat (~%1 min)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance</source>
         <translation>Balanç desbloquejat</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="473"/>
+        <location filename="../main.qml" line="467"/>
         <source>Waiting for daemon to sync</source>
         <translation>Esperant a la sincronització del dimoni</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="475"/>
+        <location filename="../main.qml" line="469"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Dimoni sincronitzat (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="477"/>
+        <location filename="../main.qml" line="471"/>
         <source>Wallet is synchronized</source>
         <translation>Moneder sincronitzat</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="515"/>
+        <location filename="../main.qml" line="509"/>
         <source>Waiting for daemon to start...</source>
         <translation>Esperant al dimoni iniciar-se...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="521"/>
+        <location filename="../main.qml" line="515"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Esperant a que el dimoni s&apos;aturi...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="563"/>
+        <location filename="../main.qml" line="557"/>
         <source>Daemon is synchronized</source>
         <translation>Dimoni sincronitzat</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="609"/>
+        <location filename="../main.qml" line="603"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>No s&apos;ha pogut crear la transacció: Versió de dimoni incorrecta:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="611"/>
-        <location filename="../main.qml" line="727"/>
+        <location filename="../main.qml" line="605"/>
+        <location filename="../main.qml" line="721"/>
         <source>Can&apos;t create transaction: </source>
         <translation>No es pot crear la transacció:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="620"/>
-        <location filename="../main.qml" line="736"/>
+        <location filename="../main.qml" line="614"/>
+        <location filename="../main.qml" line="730"/>
         <source>No unmixable outputs to sweep</source>
         <translation>No hi ha sortides no-mesclables per escombrar</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="633"/>
+        <location filename="../main.qml" line="627"/>
         <source>Address: </source>
         <translation>Adreça: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="637"/>
+        <location filename="../main.qml" line="631"/>
         <source>
 Ringsize: </source>
         <translation>
 Tamany d&apos;anell: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="639"/>
-        <source>
-
-WARNING: non default ring size, which may harm your privacy. Default of 7 is recommended.</source>
-        <translation>
-
- Avís: mida de l&apos;anell no predeterminada, la qual pot empitjorar la teva privacitat. Es recomana la configuració predeterminada de 7.
-        </translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="638"/>
+        <location filename="../main.qml" line="632"/>
         <source>
 
 Number of transactions: </source>
@@ -2647,34 +2641,34 @@ Number of transactions: </source>
 Número de transaccions: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="639"/>
+        <location filename="../main.qml" line="633"/>
         <source>
 Description: </source>
         <translation>
 Descripció: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="748"/>
+        <location filename="../main.qml" line="742"/>
         <source>Confirmation</source>
         <translation>Confirmació</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="631"/>
-        <location filename="../main.qml" line="749"/>
+        <location filename="../main.qml" line="625"/>
+        <location filename="../main.qml" line="743"/>
         <source>Please confirm transaction:
 </source>
         <translation>Confirma transacció:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="634"/>
+        <location filename="../main.qml" line="628"/>
         <source>
 Payment ID: </source>
         <translation>ID de pagament:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="635"/>
-        <location filename="../main.qml" line="750"/>
+        <location filename="../main.qml" line="629"/>
+        <location filename="../main.qml" line="744"/>
         <source>
 
 Amount: </source>
@@ -2683,39 +2677,39 @@ Amount: </source>
 Quantitat:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="636"/>
-        <location filename="../main.qml" line="751"/>
+        <location filename="../main.qml" line="630"/>
+        <location filename="../main.qml" line="745"/>
         <source>
 Fee: </source>
         <translation>
 Comissió:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="827"/>
+        <location filename="../main.qml" line="821"/>
         <source>Payment proof</source>
         <translation>Comprovant de pagament</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="830"/>
+        <location filename="../main.qml" line="824"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>No s&apos;ha pogut generar un comprovant per la següent raó:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="860"/>
-        <location filename="../main.qml" line="880"/>
+        <location filename="../main.qml" line="854"/>
+        <location filename="../main.qml" line="874"/>
         <source>Payment proof check</source>
         <translation>Revisa comprovant de pagament</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="863"/>
-        <location filename="../main.qml" line="882"/>
+        <location filename="../main.qml" line="857"/>
+        <location filename="../main.qml" line="876"/>
         <source>Bad signature</source>
         <translation>Signatura incorrecta</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="871"/>
+        <location filename="../main.qml" line="865"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Aquesta adreça ha rebut %1 monero, amb %2 confirmacion(s).</translation>
     </message>
@@ -2726,175 +2720,175 @@ Comissió:</translation>
         <translation>AMAGAT</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>Balanç desbloquejat (esperant bloc)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="546"/>
+        <location filename="../main.qml" line="540"/>
         <source>Daemon failed to start</source>
         <translation>El dimoni ha fallat al arrancar</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="547"/>
+        <location filename="../main.qml" line="541"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Comproba si hi ha errors als registres del seu moneder i dimoni. També pots probar d&apos;iniciar %1 manualment.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="641"/>
+        <location filename="../main.qml" line="635"/>
         <source>
 Spending address index: </source>
         <translation>
 Índex d&apos;adreça de despeses: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="673"/>
+        <location filename="../main.qml" line="667"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Quantitat errònea: s&apos;espera un número de %1 a %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="685"/>
+        <location filename="../main.qml" line="679"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Fondos insuficients. Balanç desbloquejat %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="788"/>
+        <location filename="../main.qml" line="782"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>No s&apos;han pogut enviar els diners:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="791"/>
-        <location filename="../main.qml" line="1208"/>
+        <location filename="../main.qml" line="785"/>
+        <location filename="../main.qml" line="1197"/>
         <source>Information</source>
         <translation>Informació</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="797"/>
+        <location filename="../main.qml" line="791"/>
         <source>Transaction saved to file: %1</source>
         <translation>Transacció guardada al fitxer: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="797"/>
+        <location filename="../main.qml" line="791"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Monero ha enviat amb èxit: %1 transaccions</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="868"/>
+        <location filename="../main.qml" line="862"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Aquesta adreça ha rebut %1 monero, però la transacció encara no ha estat minada</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="875"/>
+        <location filename="../main.qml" line="869"/>
         <source>This address received nothing</source>
         <translation>Aquesta adreça no ha rebut res</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="882"/>
+        <location filename="../main.qml" line="876"/>
         <source>Good signature</source>
         <translation>Signatura correcta</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="894"/>
+        <location filename="../main.qml" line="888"/>
         <source>Balance (syncing)</source>
         <translation>Balanç (sincronitzant)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="894"/>
+        <location filename="../main.qml" line="888"/>
         <source>Balance</source>
         <translation>Balanç</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1068"/>
+        <location filename="../main.qml" line="1061"/>
         <source>Wrong password</source>
         <translation>Contrasenya incorrecta</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1143"/>
+        <location filename="../main.qml" line="1132"/>
         <source>Warning</source>
         <translation>Atenció</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1146"/>
+        <location filename="../main.qml" line="1135"/>
         <source>Error: Filesystem is read only</source>
         <translation>Error: El sistema de fitxers és de només lectura</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1148"/>
+        <location filename="../main.qml" line="1137"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Atenció: Hi ha només %1 GB disponible al dispositiu. La Cadena de blocs requereix ~%2 GB de dades</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1150"/>
+        <location filename="../main.qml" line="1139"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Nota: Hi ha %1 GB disponible al dispositiu. La Cadena de blocs requereix ~%2 GB de dades</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1152"/>
+        <location filename="../main.qml" line="1141"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Nota: carpeta lmdb no trobada. Una nova carpeta serà creada.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1156"/>
+        <location filename="../main.qml" line="1145"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1209"/>
+        <location filename="../main.qml" line="1198"/>
         <source>Password changed successfully</source>
         <translation>Contrasenya canviada amb èxit</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1213"/>
+        <location filename="../main.qml" line="1202"/>
         <source>Error: </source>
         <translation>Error: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1255"/>
+        <location filename="../main.qml" line="1244"/>
         <source>Please wait...</source>
         <translation>Espera...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1279"/>
+        <location filename="../main.qml" line="1268"/>
         <source>Program setup wizard</source>
         <translation>Assistent de configuració</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1295"/>
+        <location filename="../main.qml" line="1284"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1445"/>
+        <location filename="../main.qml" line="1434"/>
         <source>send to the same destination</source>
         <translation>envia al mateix destinatari</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1736"/>
+        <location filename="../main.qml" line="1725"/>
         <source>Tap again to close...</source>
         <translation>Torna a tocar per tancar</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1749"/>
+        <location filename="../main.qml" line="1738"/>
         <source>Daemon is running</source>
         <translation>Dimoni executant-se</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1750"/>
+        <location filename="../main.qml" line="1739"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>El dimoni seguirà corrent en segon pla quan la GUI es tanqui.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1752"/>
+        <location filename="../main.qml" line="1741"/>
         <source>Stop daemon</source>
         <translation>Atura dimoni</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1787"/>
+        <location filename="../main.qml" line="1776"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Nova versió de monero-wallet-gui disponible: %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1819"/>
+        <location filename="../main.qml" line="1808"/>
         <source>Daemon log</source>
         <translation>Registre del dimoni</translation>
     </message>

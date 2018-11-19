@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="tr">
 <context>
     <name>AddressBook</name>
     <message>
@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation> seçilen: </translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation>Ara</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation>Başlangıç tarihi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation>Bitiş tarihi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation>Sırala</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation>Blok Yüksekliği</translation>
+        <translation type="unfinished">Blok Yüksekliği</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation>Tarih</translation>
+        <translation type="unfinished">Tarih</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation>Geçmiş yok..</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -227,12 +227,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">Gönderilen</translation>
+        <translation>Gönderilen</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">Alınan</translation>
+        <translation>Alınan</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
@@ -422,42 +422,42 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="213"/>
+        <location filename="../LeftPanel.qml" line="242"/>
         <source>Balance</source>
         <translation>Bakiye</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="203"/>
+        <location filename="../LeftPanel.qml" line="231"/>
         <source>Unlocked balance</source>
         <translation>Kilitlenmemiş bakiye</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="312"/>
+        <location filename="../LeftPanel.qml" line="341"/>
         <source>Send</source>
         <translation>Gönder</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="362"/>
+        <location filename="../LeftPanel.qml" line="391"/>
         <source>Receive</source>
         <translation>Al</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="363"/>
+        <location filename="../LeftPanel.qml" line="392"/>
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="456"/>
+        <location filename="../LeftPanel.qml" line="485"/>
         <source>Prove/check</source>
         <translation>Kanıt/Kontrol</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="457"/>
+        <location filename="../LeftPanel.qml" line="486"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="386"/>
+        <location filename="../LeftPanel.qml" line="415"/>
         <source>History</source>
         <translation>Geçmiş</translation>
     </message>
@@ -477,92 +477,92 @@
         <translation>Prova ağı (Stagenet)</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="337"/>
+        <location filename="../LeftPanel.qml" line="366"/>
         <source>Address book</source>
         <translation>Adres defteri</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="338"/>
+        <location filename="../LeftPanel.qml" line="367"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="387"/>
+        <location filename="../LeftPanel.qml" line="416"/>
         <source>H</source>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="409"/>
+        <location filename="../LeftPanel.qml" line="438"/>
         <source>Advanced</source>
         <translation>Gelişmiş</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="410"/>
+        <location filename="../LeftPanel.qml" line="439"/>
         <source>D</source>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="432"/>
+        <location filename="../LeftPanel.qml" line="461"/>
         <source>Mining</source>
         <translation>Madencilik</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="433"/>
+        <location filename="../LeftPanel.qml" line="462"/>
         <source>M</source>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="479"/>
+        <location filename="../LeftPanel.qml" line="508"/>
         <source>Shared RingDB</source>
         <translation>Paylaşılan HalkaVT(RingDB)</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="549"/>
+        <location filename="../LeftPanel.qml" line="578"/>
         <source>Seed &amp; Keys</source>
         <translation>Seed &amp; Anahtarlar</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="550"/>
+        <location filename="../LeftPanel.qml" line="579"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="600"/>
+        <location filename="../LeftPanel.qml" line="629"/>
         <source>Wallet</source>
         <translation>Cüzdan</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="609"/>
+        <location filename="../LeftPanel.qml" line="638"/>
         <source>Daemon</source>
         <translation>Arkaplan hizmeti (daemon)</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="504"/>
+        <location filename="../LeftPanel.qml" line="533"/>
         <source>Sign/verify</source>
         <translation>İmzalan/doğrula</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="528"/>
+        <location filename="../LeftPanel.qml" line="557"/>
         <source>E</source>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="313"/>
+        <location filename="../LeftPanel.qml" line="342"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="480"/>
+        <location filename="../LeftPanel.qml" line="509"/>
         <source>G</source>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="505"/>
+        <location filename="../LeftPanel.qml" line="534"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="527"/>
+        <location filename="../LeftPanel.qml" line="556"/>
         <source>Settings</source>
         <translation>Ayarlar</translation>
     </message>
@@ -570,14 +570,14 @@
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="126"/>
+        <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation>Kopyala</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="132"/>
+        <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation>Panoya kopyalandı</translation>
+        <translation type="unfinished">Panoya kopyalandı</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation>Kopyala</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation>Panoya kopyalandı</translation>
+        <translation type="unfinished">Panoya kopyalandı</translation>
     </message>
 </context>
 <context>
@@ -712,27 +712,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation>Cüzdan</translation>
+        <translation type="unfinished">Cüzdan</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation>Düzen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation>Düğüm (node)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation>Kütük (log)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation>Bilgi</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -799,22 +799,22 @@
 <context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="86"/>
+        <location filename="../components/PasswordDialog.qml" line="92"/>
         <source>Please enter wallet password</source>
         <translation>Lütfen cüzdan şifresini girin</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="86"/>
+        <location filename="../components/PasswordDialog.qml" line="92"/>
         <source>Please enter wallet password for: </source>
         <translation>Lütfen şunun için cüzdan şifrenizi giriniz :</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="153"/>
+        <location filename="../components/PasswordDialog.qml" line="171"/>
         <source>Cancel</source>
         <translation>İptal et</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="164"/>
+        <location filename="../components/PasswordDialog.qml" line="182"/>
         <source>Continue</source>
         <translation>Devam et</translation>
     </message>
@@ -1024,12 +1024,12 @@
 <context>
     <name>RemoteNodeEdit</name>
     <message>
-        <location filename="../components/RemoteNodeEdit.qml" line="69"/>
+        <location filename="../components/RemoteNodeEdit.qml" line="74"/>
         <source>Remote Node Hostname / IP</source>
         <translation>Uzak Düğüm Ana Bilgisayar Adı / IP</translation>
     </message>
     <message>
-        <location filename="../components/RemoteNodeEdit.qml" line="87"/>
+        <location filename="../components/RemoteNodeEdit.qml" line="93"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
@@ -1050,42 +1050,42 @@
 <context>
     <name>SettingsInfo</name>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="60"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="59"/>
         <source>GUI version: </source>
         <translation>GUI sürümü: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="89"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="88"/>
         <source>Embedded Monero version: </source>
         <translation>Gömülü Monero sürümü: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="118"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="117"/>
         <source>Wallet path: </source>
         <translation>Cüzdan yolu: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="155"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="154"/>
         <source>Wallet creation height: </source>
         <translation>Cüzdan oluşturma yüksekliği: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="165"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="164"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
         <translation> &lt;a href=&apos;#&apos;&gt; (Değiştirmek için tıklayın)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="166"/>
         <source>Set a new restore height:</source>
         <translation>Yeni onarım yüksekliği belirleyin:</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="177"/>
         <source>Rescan wallet cache</source>
         <translation>Cüzdan önbelleğini tekrar tarayın</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
         <source>Are you sure you want to rebuild the wallet cache?
 The following information will be deleted
 - Recipient addresses
@@ -1104,27 +1104,27 @@ Aşağıdaki bilgiler silinecek
 </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="188"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
         <source>Cancel</source>
         <translation>Vazgeç</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="202"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="200"/>
         <source>Invalid restore height specified. Must be a number.</source>
         <translation>Geçersiz onarım yüksekliği. Bir sayı olmalı.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="236"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="234"/>
         <source>Wallet log path: </source>
         <translation>Cüzdan kütük yolu: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="267"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="265"/>
         <source>Copy to clipboard</source>
         <translation>Panoya kopyala</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="292"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="290"/>
         <source>Copied to clipboard</source>
         <translation>Panoya kopyalandı</translation>
     </message>
@@ -1198,53 +1198,58 @@ Aşağıdaki bilgiler silinecek
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="312"/>
-        <location filename="../pages/settings/SettingsNode.qml" line="450"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="315"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="459"/>
         <source>(optional)</source>
         <translation>(isteğe bağlı)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="323"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="326"/>
         <source>Password</source>
         <translation>Parola</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="347"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="351"/>
         <source>Connect</source>
         <translation>Bağlan</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="399"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Stop local node</source>
         <translation>Yerel düğümü durdur</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="404"/>
+        <source>Start daemon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsNode.qml" line="429"/>
         <source>Blockchain location</source>
         <translation>Blok zincirinin konumu</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="429"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
         <translation> &lt;a href=&apos;#&apos;&gt; (değiştir)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="421"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="430"/>
         <source>(default)</source>
         <translation>(varsayılan)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="449"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="458"/>
         <source>Daemon startup flags</source>
         <translation>Daemon başlangıç bayrakları</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="476"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="485"/>
         <source>Bootstrap Address</source>
         <translation>Bootstrap adresleri</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="477"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="486"/>
         <source>Bootstrap Port</source>
         <translation>Bootstrap Port</translation>
     </message>
@@ -1274,7 +1279,7 @@ Aşağıdaki bilgiler silinecek
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished">İşlem yapamayan, yalnızca yapılan işlemleri görüntüleyen yeni bir cüzdan oluşturur.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
@@ -2087,6 +2092,14 @@ Harcama Kanıtı ile ilgili davada, alıcı adresini belirtmeniz gerekmez. </tra
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation type="unfinished">Yanlış parola</translation>
+    </message>
+</context>
+<context>
     <name>WizardConfigure</name>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="79"/>
@@ -2527,271 +2540,269 @@ Harcama Kanıtı ile ilgili davada, alıcı adresini belirtmeniz gerekmez. </tra
     <name>main</name>
     <message>
         <location filename="../main.qml" line="291"/>
-        <location filename="../main.qml" line="400"/>
-        <location filename="../main.qml" line="607"/>
-        <location filename="../main.qml" line="619"/>
-        <location filename="../main.qml" line="672"/>
-        <location filename="../main.qml" line="684"/>
-        <location filename="../main.qml" line="726"/>
-        <location filename="../main.qml" line="735"/>
-        <location filename="../main.qml" line="787"/>
-        <location filename="../main.qml" line="885"/>
-        <location filename="../main.qml" line="1067"/>
-        <location filename="../main.qml" line="1212"/>
+        <location filename="../main.qml" line="601"/>
+        <location filename="../main.qml" line="613"/>
+        <location filename="../main.qml" line="666"/>
+        <location filename="../main.qml" line="678"/>
+        <location filename="../main.qml" line="720"/>
+        <location filename="../main.qml" line="729"/>
+        <location filename="../main.qml" line="781"/>
+        <location filename="../main.qml" line="879"/>
+        <location filename="../main.qml" line="1201"/>
         <source>Error</source>
         <translation>Hata</translation>
     </message>
     <message>
         <location filename="../main.qml" line="292"/>
-        <location filename="../main.qml" line="401"/>
+        <location filename="../main.qml" line="400"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Cüzdan açılamadı: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>Kilitlenmemiş bakiye (Blok için bekleniyor)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>Bakiye kilidi kaldırıldı (~%1 dakika)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="430"/>
+        <location filename="../main.qml" line="424"/>
         <source>Unlocked balance</source>
         <translation>Kilitlenmemiş bakiye</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="515"/>
+        <location filename="../main.qml" line="509"/>
         <source>Waiting for daemon to start...</source>
         <translation>Daemon&apos;un başlaması bekleniyor ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="521"/>
+        <location filename="../main.qml" line="515"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Daemon&apos;un durmasını bekliyor ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="547"/>
+        <location filename="../main.qml" line="541"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Lütfen hatalar için cüzdan ve servis günlüğünü kontrol edin. Ayrıca manuel olarak %1&apos;i başlatmayı deneyebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="609"/>
+        <location filename="../main.qml" line="603"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>İşlem oluşturulamıyor: Daemon sürümü yanlış: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="611"/>
-        <location filename="../main.qml" line="727"/>
+        <location filename="../main.qml" line="605"/>
+        <location filename="../main.qml" line="721"/>
         <source>Can&apos;t create transaction: </source>
         <translation>İşlem oluşturulamıyor: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="620"/>
-        <location filename="../main.qml" line="736"/>
+        <location filename="../main.qml" line="614"/>
+        <location filename="../main.qml" line="730"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Taram karıştırılamaz çıktı yok</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="748"/>
+        <location filename="../main.qml" line="742"/>
         <source>Confirmation</source>
         <translation>Onayla</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="631"/>
-        <location filename="../main.qml" line="749"/>
+        <location filename="../main.qml" line="625"/>
+        <location filename="../main.qml" line="743"/>
         <source>Please confirm transaction:
 </source>
         <translation>Lütfen işlemi onaylayın: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="473"/>
+        <location filename="../main.qml" line="467"/>
         <source>Waiting for daemon to sync</source>
         <translation>Arka plan hizmetinin (daemon) eşzamanlaması bekleniyor</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="475"/>
+        <location filename="../main.qml" line="469"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Arka plan hizmeti (daemon) eşzamanlandı (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="477"/>
+        <location filename="../main.qml" line="471"/>
         <source>Wallet is synchronized</source>
         <translation>Cüzdan senkronize edildi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="546"/>
+        <location filename="../main.qml" line="540"/>
         <source>Daemon failed to start</source>
         <translation>Arka plan hizmetinin (daemon) başlaması başarısız oldu</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="563"/>
+        <location filename="../main.qml" line="557"/>
         <source>Daemon is synchronized</source>
         <translation>Arka plan hizmeti (daemon) eşzamanlandı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="633"/>
+        <location filename="../main.qml" line="627"/>
         <source>Address: </source>
         <translation>Adres: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="634"/>
+        <location filename="../main.qml" line="628"/>
         <source>
 Payment ID: </source>
         <translation>Ödeme No (Payment ID): </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="635"/>
-        <location filename="../main.qml" line="750"/>
+        <location filename="../main.qml" line="629"/>
+        <location filename="../main.qml" line="744"/>
         <source>
 
 Amount: </source>
         <translation>Miktar: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="636"/>
-        <location filename="../main.qml" line="751"/>
+        <location filename="../main.qml" line="630"/>
+        <location filename="../main.qml" line="745"/>
         <source>
 Fee: </source>
         <translation>Ücret: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="637"/>
+        <location filename="../main.qml" line="631"/>
         <source>
 Ringsize: </source>
         <translation>Halka büyüklüğü: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="638"/>
+        <location filename="../main.qml" line="632"/>
         <source>
 
 Number of transactions: </source>
         <translation>İşlem sayısı: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="639"/>
+        <location filename="../main.qml" line="633"/>
         <source>
 Description: </source>
         <translation>Tanım:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="641"/>
+        <location filename="../main.qml" line="635"/>
         <source>
 Spending address index: </source>
         <translation>Harcama adresi indeksi: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="797"/>
+        <location filename="../main.qml" line="791"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Monero başarı ile gönderildi: %1 işlem</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="827"/>
+        <location filename="../main.qml" line="821"/>
         <source>Payment proof</source>
         <translation>Ödeme kanıtı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="830"/>
+        <location filename="../main.qml" line="824"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Aşağıdaki nedenlerden dolayı bir kanıt oluşturulamadı: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="860"/>
-        <location filename="../main.qml" line="880"/>
+        <location filename="../main.qml" line="854"/>
+        <location filename="../main.qml" line="874"/>
         <source>Payment proof check</source>
         <translation>Ödemeye dayanıklı kontrol</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="863"/>
-        <location filename="../main.qml" line="882"/>
+        <location filename="../main.qml" line="857"/>
+        <location filename="../main.qml" line="876"/>
         <source>Bad signature</source>
         <translation>Kötü imza</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="871"/>
+        <location filename="../main.qml" line="865"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Bu adres, %2 onay (lar) ile %1 monero aldı.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="882"/>
+        <location filename="../main.qml" line="876"/>
         <source>Good signature</source>
         <translation>İyi imza</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1068"/>
+        <location filename="../main.qml" line="1061"/>
         <source>Wrong password</source>
         <translation>Yanlış parola</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1143"/>
+        <location filename="../main.qml" line="1132"/>
         <source>Warning</source>
         <translation>Uyarı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1146"/>
+        <location filename="../main.qml" line="1135"/>
         <source>Error: Filesystem is read only</source>
         <translation>Hata: Dosya sistemi salt okunur</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1148"/>
+        <location filename="../main.qml" line="1137"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Uyarı: Cihazda sadece %1 GB kullanılabilir. Blok zinciri ~%2 GB veri gerektirir.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1150"/>
+        <location filename="../main.qml" line="1139"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Not: Cihazda %1 GB mevcut. Blok zinciri ~%2 GB veri gerektirir.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1152"/>
+        <location filename="../main.qml" line="1141"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Not: lmdb klasörü bulunamadı. Yeni bir klasör oluşturulur.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1156"/>
+        <location filename="../main.qml" line="1145"/>
         <source>Cancel</source>
         <translation>İptal et</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1209"/>
+        <location filename="../main.qml" line="1198"/>
         <source>Password changed successfully</source>
         <translation>Parola başarıyla değiştirildi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1213"/>
+        <location filename="../main.qml" line="1202"/>
         <source>Error: </source>
         <translation>Hata: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1736"/>
+        <location filename="../main.qml" line="1725"/>
         <source>Tap again to close...</source>
         <translation>Kapatmak için tekrar dokunun ...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1749"/>
+        <location filename="../main.qml" line="1738"/>
         <source>Daemon is running</source>
         <translation>Daemon çalışıyor</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1750"/>
+        <location filename="../main.qml" line="1739"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>GUI kapatıldığında Daemon arka planda çalışmaya devam edecektir.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1752"/>
+        <location filename="../main.qml" line="1741"/>
         <source>Stop daemon</source>
         <translation>Daemon&apos;u durdur</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1787"/>
+        <location filename="../main.qml" line="1776"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Monero-wallet-gui&apos;nin yeni sürümü mevcut: %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1819"/>
+        <location filename="../main.qml" line="1808"/>
         <source>Daemon log</source>
         <translation>Daemon log</translation>
     </message>
@@ -2802,68 +2813,68 @@ Spending address index: </source>
         <translation>GİZLİ</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="673"/>
+        <location filename="../main.qml" line="667"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Miktar yanlış: beklenen sayı %1 &apos;den %2 &apos;ye</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="685"/>
+        <location filename="../main.qml" line="679"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Yetersiz bakiye. Kilitlenmemiş bakiye: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="788"/>
+        <location filename="../main.qml" line="782"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Para gönderemezsiniz: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="791"/>
-        <location filename="../main.qml" line="1208"/>
+        <location filename="../main.qml" line="785"/>
+        <location filename="../main.qml" line="1197"/>
         <source>Information</source>
         <translation>Bilgi</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="797"/>
+        <location filename="../main.qml" line="791"/>
         <source>Transaction saved to file: %1</source>
         <translation>İşlem dosyaya kaydedildi: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="868"/>
+        <location filename="../main.qml" line="862"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Bu adres %1 monero aldı, ancak işlem henüz çıkarılmadı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="875"/>
+        <location filename="../main.qml" line="869"/>
         <source>This address received nothing</source>
         <translation>Bu adres hiçbir şey alınmadı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="894"/>
+        <location filename="../main.qml" line="888"/>
         <source>Balance (syncing)</source>
         <translation>Bakiye (senkronizasyon)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="894"/>
+        <location filename="../main.qml" line="888"/>
         <source>Balance</source>
         <translation>Bakiye</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1255"/>
+        <location filename="../main.qml" line="1244"/>
         <source>Please wait...</source>
         <translation>Lütfen bekle...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1279"/>
+        <location filename="../main.qml" line="1268"/>
         <source>Program setup wizard</source>
         <translation>Program kurulum sihirbazı</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1295"/>
+        <location filename="../main.qml" line="1284"/>
         <source>Monero</source>
         <translation>Monero</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1445"/>
+        <location filename="../main.qml" line="1434"/>
         <source>send to the same destination</source>
         <translation>Aynı varış yerine gönderme</translation>
     </message>
