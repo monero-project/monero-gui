@@ -279,7 +279,10 @@ linux {
         LIBS+= -Wl,-Bstatic    
         QMAKE_LFLAGS += -static-libgcc -static-libstdc++
    #     contains(QT_ARCH, x86_64) {
-            LIBS+= -lunbound
+            LIBS+= -lunbound \
+                   -lusb-1.0 \
+                   -lhidapi-hidraw \
+                   -ludev
    #     }
     } else {
       # On some distro's we need to add dynload
