@@ -443,7 +443,7 @@ Rectangle {
 
                     Layout.fillWidth: true
                     Layout.minimumWidth: 200
-                    Layout.maximumWidth: mainLayout.qrCodeSize
+                    spacing: parent.spacing
 
                     LineEdit {
                         id: amountToReceiveLine
@@ -456,44 +456,54 @@ Rectangle {
                             regExp: /(\d{1,8})([.]\d{1,12})?$/
                         }
                     }
-                }
 
-                Rectangle {
-                    color: "white"
-                    Layout.topMargin: parent.spacing - 4
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: mainLayout.qrCodeSize
-                    Layout.preferredHeight: width
-                    radius: 4
+                    Rectangle {
+                        color: "white"
 
-                    Image {
-                        id: qrCode
-                        anchors.fill: parent
-                        anchors.margins: 1
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: mainLayout.qrCodeSize
+                        Layout.preferredHeight: width
+                        radius: 4
 
-                        smooth: false
-                        fillMode: Image.PreserveAspectFit
-                        source: "image://qrcode/" + makeQRCodeString()
-                        MouseArea {
+                        Image {
+                            id: qrCode
                             anchors.fill: parent
-                            acceptedButtons: Qt.RightButton
-                            onClicked: {
-                                if (mouse.button == Qt.RightButton)
-                                    qrMenu.open()
+                            anchors.margins: 1
+
+                            smooth: false
+                            fillMode: Image.PreserveAspectFit
+                            source: "image://qrcode/" + makeQRCodeString()
+                            MouseArea {
+                                anchors.fill: parent
+                                acceptedButtons: Qt.RightButton
+                                onClicked: {
+                                    if (mouse.button == Qt.RightButton)
+                                        qrMenu.open()
+                                }
+                                onPressAndHold: qrFileDialog.open()
                             }
-                            onPressAndHold: qrFileDialog.open()
+                        }
+
+                        Menu {
+                            id: qrMenu
+                            title: "QrCode"
+                            y: parent.height / 2
+
+                            MenuItem {
+                                text: qsTr("Save As") + translationManager.emptyString;
+                                onTriggered: qrFileDialog.open()
+                            }
                         }
                     }
 
-                    Menu {
-                        id: qrMenu
-                        title: "QrCode"
-                        y: parent.height / 2
-
-                        MenuItem {
-                           text: qsTr("Save As") + translationManager.emptyString;
-                           onTriggered: qrFileDialog.open()
-                        }
+                    LineEdit {
+                        id: paymentUrl
+                        Layout.fillWidth: true
+                        labelText: qsTr("Payment URL") + translationManager.emptyString
+                        text: makeQRCodeString()
+                        onTextUpdated: function() { paymentUrl.cursorPosition = 0; }
+                        readOnly: true
+                        copyButton: true
                     }
                 }
             }
