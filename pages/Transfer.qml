@@ -151,7 +151,7 @@ Rectangle {
                       }
 
                       validator: RegExpValidator {
-                          regExp: /(.|)(\d{1,8})([.]\d{1,12})?$/
+                          regExp: /^(\d{1,8})?([\.]\d{1,12})?$/
                       }
                   }
               }
