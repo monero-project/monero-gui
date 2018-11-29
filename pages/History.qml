@@ -154,7 +154,7 @@ Rectangle {
                 LineEdit {
                     id: searchLine
                     fontSize: 14 * scaleRatio
-                    inputHeight: 28 * scaleRatio
+                    inputHeight: 36 * scaleRatio
                     borderDisabled: true
                     Layout.fillWidth: true
                     backgroundColor: "#404040"
