@@ -215,6 +215,18 @@ Rectangle {
               wrapMode: Text.WrapAnywhere
               addressValidation: true
               onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
+              pasteButton: true
+              onPaste: function(clipboardText) {
+                  const parsed = walletManager.parse_uri_to_object(clipboardText);
+                  if (!parsed.error) {
+                    addressLine.text = parsed.address;
+                    paymentIdLine.text = parsed.payment_id;
+                    amountLine.text = parsed.amount;
+                    descriptionLine.text = parsed.tx_description;
+                  } else {
+                     addressLine.text = clipboardText; 
+                  }
+              }
           }
 
           StandardButton {
