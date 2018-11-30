@@ -131,6 +131,7 @@ Rectangle{
                     topPadding: 0
                     text: qsTr("The blockchain is downloaded to your computer. Provides higher security and requires more local storage.") + translationManager.emptyString
                     width: parent.width - (localNodeIcon.width + localNodeIcon.anchors.leftMargin + anchors.leftMargin)
+                    readOnly: true
 
                     // @TODO: Legacy. Remove after Qt 5.8.
                     // https://stackoverflow.com/questions/41990013
@@ -231,6 +232,7 @@ Rectangle{
                     topPadding: 0
                     text: qsTr("Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.") + translationManager.emptyString
                     width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
+                    readOnly: true
 
                     // @TODO: Legacy. Remove after Qt 5.8.
                     // https://stackoverflow.com/questions/41990013
