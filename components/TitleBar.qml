@@ -84,6 +84,7 @@ Rectangle {
         z: parent.z + 1
 
         Image {
+            visible: !isMobile
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 11
