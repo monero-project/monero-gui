@@ -385,7 +385,7 @@ Rectangle {
                             inputDialog.inputText = qsTr("(Untitled)")
                             inputDialog.onAcceptedCallback = function() {
                                 appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
-                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses() - 1
+                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
                             }
                             inputDialog.onRejectedCallback = null;
                             inputDialog.open()
