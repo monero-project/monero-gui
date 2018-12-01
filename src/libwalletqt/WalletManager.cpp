@@ -296,11 +296,35 @@ QString WalletManager::resolveOpenAlias(const QString &address) const
     res = std::string(dnssec_valid ? "true" : "false") + "|" + res;
     return QString::fromStdString(res);
 }
-bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error)
+bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const
 {
     if (m_currentWallet)
         return m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
     return false;
+}
+
+QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
+{
+    QString address;
+    QString payment_id;
+    uint64_t amount;
+    QString tx_description;
+    QString recipient_name;
+    QVector<QString> unknown_parameters;
+    QString error;
+
+    QVariantMap result;
+    if (this->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error)) {
+        result.insert("address", address);
+        result.insert("payment_id", payment_id);
+        result.insert("amount", this->displayAmount(amount));
+        result.insert("tx_description", tx_description);
+        result.insert("recipient_name", recipient_name);
+    } else {
+        result.insert("error", error);
+    }
+    
+    return result;
 }
 
 void WalletManager::setLogLevel(int logLevel)

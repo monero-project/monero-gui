@@ -39,6 +39,7 @@ class clipboardAdapter : public QObject
 public:
     explicit clipboardAdapter(QObject *parent = 0);
     Q_INVOKABLE void setText(const QString &text);
+    Q_INVOKABLE QString text() const;
 
 private:
     QClipboard *m_pClipboard;

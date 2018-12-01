@@ -38,3 +38,7 @@ void clipboardAdapter::setText(const QString &text) {
     m_pClipboard->setText(text, QClipboard::Clipboard);
     m_pClipboard->setText(text, QClipboard::Selection);
 }
+
+QString clipboardAdapter::text() const {
+    return m_pClipboard->text();
+}
