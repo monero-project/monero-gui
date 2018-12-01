@@ -40,6 +40,7 @@ import "." 1.0
 Rectangle {
     property bool viewOnly: false
     id: page
+    property int keysHeight: mainLayout.height + 100 * scaleRatio // Ensure sufficient height for QR code, even in minimum width window case.
 
     color: "transparent"
 
