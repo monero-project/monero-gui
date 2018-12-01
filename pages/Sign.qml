@@ -297,15 +297,10 @@ Rectangle {
 
             ColumnLayout {
                 id: verifySignatureRow
-                anchors.topMargin: 17 * scaleRatio
-
-                Label {
-                    id: verifySignatureLabel
-                    text: qsTr("Signature") + translationManager.emptyString
-                }
 
                 LineEdit {
                     id: verifySignatureLine
+                    labelText: qsTr("Signature") + translationManager.emptyString;
                     placeholderText: qsTr("Signature") + translationManager.emptyString;
                     Layout.fillWidth: true
                     copyButton: true
