@@ -127,6 +127,7 @@ ColumnLayout {
                 MouseArea {
                     id: createWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.createWalletClicked()
@@ -169,6 +170,7 @@ ColumnLayout {
                 MouseArea {
                     id: recoverWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.recoveryWalletClicked()
@@ -212,6 +214,7 @@ ColumnLayout {
                 MouseArea {
                     id: openWalletArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.openWalletClicked()
@@ -257,6 +260,7 @@ ColumnLayout {
                 MouseArea {
                     id: createWalletFromDeviceArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
                     onClicked: {
                         page.createWalletFromDeviceClicked()
