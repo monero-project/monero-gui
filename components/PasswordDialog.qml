@@ -40,6 +40,7 @@ Item {
     visible: false
     z: parent.z + 2
 
+    property bool isHidden: true
     property alias password: passwordInput.text
     property string walletName
     property string errorText
@@ -136,12 +137,33 @@ Item {
                     color: "black"
 
                     Image {
-                        width: 12
-                        height: 16
-                        source: "../images/lockIcon.png"
+                        width: 26 * scaleRatio
+                        height: 26 * scaleRatio
+                        opacity: 0.7
+                        fillMode: Image.PreserveAspectFit
+                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 20
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            hoverEnabled: true
+                            onClicked: {
+                                passwordInput.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
+                                isHidden = !isHidden;
+                            }
+                            onEntered: {
+                                parent.opacity = 0.9
+                                parent.width = 28 * scaleRatio
+                                parent.height = 28 * scaleRatio
+                            }
+                            onExited: {
+                                parent.opacity = 0.7
+                                parent.width = 26 * scaleRatio
+                                parent.height = 26 * scaleRatio
+                            }
+                        }
                     }
                 }
 
