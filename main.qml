@@ -40,7 +40,7 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "wizard"
-import "../js/Utils.js" as Utils
+import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 
 ApplicationWindow {
