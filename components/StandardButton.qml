@@ -57,27 +57,41 @@ Item {
     }
 
     Rectangle {
+        id: buttonRect
         anchors.fill: parent
         radius: 3
-        color: parent.enabled ? MoneroComponents.Style.buttonBackgroundColor : MoneroComponents.Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-
-            propagateComposedEvents: true
-
-            // possibly do some hover effects here
-            onEntered: {
-//                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
-//                else parent.color = Style.buttonBackgroundColorDisabledHover;
+        state: button.enabled ? "active" : "disabled"
+        Component.onCompleted: state = state
+        states: [
+            State {
+                name: "hover"
+                when: buttonArea.containsMouse || button.focus
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColorHover
+                }
+            },
+            State {
+                name: "active"
+                when: button.enabled
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColor
+                }
+            },
+            State {
+                name: "disabled"
+                when: !button.enabled
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                }
             }
-            onExited: {
-//                if(button.enabled) parent.color = Style.buttonBackgroundColor;
-//                else parent.color = Style.buttonBackgroundColorDisabled;
-            }
+        ]
+        transitions: Transition {
+            ColorAnimation { duration: 100 }
         }
     }
 
@@ -122,6 +136,7 @@ Item {
     MouseArea {
         id: buttonArea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: doClick()
         cursorShape: Qt.PointingHandCursor
     }
