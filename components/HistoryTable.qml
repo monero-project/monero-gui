@@ -175,7 +175,23 @@ ListView {
 
                     return _amount + " XMR";
                 }
-                color: isOut ? "white" : "#2eb358"
+                color: isOut ? MoneroComponents.Style.white : MoneroComponents.Style.green
+
+                MouseArea {
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: {
+                            parent.color = MoneroComponents.Style.orange
+                        }
+                        onExited: {
+                            parent.color = isOut ? MoneroComponents.Style.white : MoneroComponents.Style.green                        }
+                        onClicked: {
+                                console.log("Copied to clipboard");
+                                clipboard.setText(parent.text.split(" ")[0]);
+                                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                        }
+                    }
             }
 
             Rectangle {
