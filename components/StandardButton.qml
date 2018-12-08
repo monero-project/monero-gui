@@ -46,22 +46,9 @@ Item {
     }
     signal clicked()
 
-    // Dynamic height/width
-    Layout.minimumWidth: {
-        var _padding = 22;
-        if(button.rightIcon !== ""){
-            _padding += 60;
-        }
-
-        var _width = label.contentWidth + _padding;
-        if(_width <= 50) {
-            return 60;
-        }
-
-        return _width;
-    }
-
     height: small ?  30 * scaleRatio : 36 * scaleRatio
+    width: buttonLayout.width + 22 * scaleRatio
+    Component.onCompleted: width = width
 
     function doClick() {
         // Android workaround
@@ -70,9 +57,7 @@ Item {
     }
 
     Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height - 1
+        anchors.fill: parent
         radius: 3
         color: parent.enabled ? MoneroComponents.Style.buttonBackgroundColor : MoneroComponents.Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
@@ -96,38 +81,41 @@ Item {
         }
     }
 
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.right: parent.right
-        horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
-        anchors.leftMargin: textAlign === "center" ? 0 : 11
-        font.family: MoneroComponents.Style.fontBold.name
-        font.bold: true
-        font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
-        color: parent.textColor
-        visible: parent.icon === ""
-    }
-
-    Image {
+    RowLayout {
+        id: buttonLayout
+        height: button.height
+        spacing: 11 * scaleRatio
         anchors.centerIn: parent
-        visible: parent.icon !== ""
-        source: parent.icon
-    }
 
-    Image {
-        visible: parent.rightIcon !== ""
-        anchors.right: parent.right
-        anchors.rightMargin: 11 * scaleRatio
-        anchors.verticalCenter: parent.verticalCenter
-        width: parent.small ? 16 * scaleRatio : 20 * scaleRatio
-        height: parent.small ? 16 * scaleRatio : 20 * scaleRatio
-        source: {
-            if(parent.rightIconInactive !== "" && !parent.enabled){
-                return parent.rightIconInactive;
+        Text {
+            id: label
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
+            font.family: MoneroComponents.Style.fontBold.name
+            font.bold: true
+            font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
+            color: button.textColor
+            visible: button.icon === ""
+        }
+        
+        Image {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            visible: button.icon !== ""
+            source: button.icon
+        }
+
+
+        Image {
+            visible: button.rightIcon !== ""
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            width: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            height: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            source: {
+                if(button.rightIconInactive !== "" && !button.enabled) {
+                    return button.rightIconInactive;
+                }
+                return button.rightIcon;
             }
-            return parent.rightIcon;
         }
     }
 
