@@ -58,29 +58,33 @@ Rectangle {
                 }
             }
 
-            LineEdit {
+            LineEditMulti {
                 Layout.fillWidth: true;
                 id: addressLine
                 labelText: qsTr("Address") + translationManager.emptyString
                 error: true;
                 placeholderText: qsTr("4.. / 8..") + translationManager.emptyString
+                wrapMode: Text.WrapAnywhere
+                addressValidation: true
             }
         }
 
-        LineEdit {
+        LineEditMulti {
             id: paymentIdLine
             Layout.fillWidth: true;
             labelText: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
+            wrapMode: Text.WrapAnywhere
 //            tipText: qsTr("<b>Payment ID</b><br/><br/>A unique user name used in<br/>the address book. It is not a<br/>transfer of information sent<br/>during the transfer")
 //                    + translationManager.emptyString
         }
 
-        LineEdit {
+        LineEditMulti {
             id: descriptionLine
             Layout.fillWidth: true;
             labelText: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
+            wrapMode: Text.WrapAnywhere
         }
 
 
