@@ -31,7 +31,7 @@ import QtQuick.XmlListModel 2.0
 import QtQuick.Layouts 1.1
 import QtQml 2.2
 
-
+import "../components" as MoneroComponents
 
 ColumnLayout {
 //    anchors.fill:parent
@@ -128,38 +128,50 @@ ColumnLayout {
 
             clip: true
 
-            delegate: ColumnLayout {
+            delegate: Item {
                 id: flagDelegate
+                height: gridView.cellHeight
                 width: gridView.cellWidth
-//                height: gridView.cellHeight
-//                Layout.alignment: Qt.AlignHCenter
-                Rectangle {
-                    id: flagRect
-                    width: 60 * scaleRatio; height: 60 * scaleRatio
-//                    anchors.centerIn: parent
-                    radius: 30 * scaleRatio
-                    Layout.alignment: Qt.AlignHCenter
-                    color: gridView.currentIndex === index ? "#DBDBDB" : "#FFFFFF"
-                    Image {
-                        anchors.fill: parent
-                        source: flag
+
+                ColumnLayout {
+                    width: gridView.cellWidth
+                    Rectangle {
+                        id: flagRect
+                        height: 60 * scaleRatio
+                        width: 60 * scaleRatio
+                        radius: 30 * scaleRatio
+                        Layout.alignment: Qt.AlignHCenter
+                        color: {
+                            if (gridView.currentIndex === index) {
+                                return MoneroComponents.Style.buttonBackgroundColor;
+                            } else if (delegateArea.containsMouse) {
+                                return MoneroComponents.Style.dimmedFontColor;
+                            } else {
+                                return MoneroComponents.Style.buttonTextColor;
+                            }
+                        }
+
+                        Image {
+                            anchors.fill: parent
+                            source: flag
+                        }
+                    }
+
+                    Text {
+                        font.family: "Arial"
+                        font.pixelSize: 18 * scaleRatio
+                        font.bold: gridView.currentIndex === index
+                        color: "#3F3F3F"
+                        text: display_name
+                        Layout.alignment: Qt.AlignHCenter
                     }
                 }
 
-                Text {
-                    font.family: "Arial"
-                    font.pixelSize: 18 * scaleRatio
-//                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.bold: gridView.currentIndex === index
-//                    elide: Text.ElideRight
-                    color: "#3F3F3F"
-                    text: display_name
-//                    horizontalAlignment: Text.AlignHCenter
-                    Layout.alignment: Qt.AlignHCenter
-                }
                 MouseArea {
                     id: delegateArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
                     onClicked:  {
                         gridView.currentIndex = index
                         var data = languagesModel.get(gridView.currentIndex);
