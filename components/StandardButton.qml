@@ -35,7 +35,6 @@ Item {
     id: button
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property string icon: ""
     property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
     property string textAlign: rightIcon !== "" ? "left" : "center"
     property bool small: false
@@ -109,15 +108,8 @@ Item {
             font.bold: true
             font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
             color: button.textColor
-            visible: button.icon === ""
+            visible: text !== ""
         }
-        
-        Image {
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            visible: button.icon !== ""
-            source: button.icon
-        }
-
 
         Image {
             visible: button.rightIcon !== ""
