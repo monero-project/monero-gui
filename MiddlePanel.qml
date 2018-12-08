@@ -38,6 +38,8 @@ import moneroComponents.Wallet 1.0
 import "components" as MoneroComponents
 import "./pages"
 import "./pages/settings"
+import "./pages/merchant"
+import "components" as MoneroComponents
 
 Rectangle {
     id: root
@@ -56,6 +58,7 @@ Rectangle {
 
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
+    property Merchant merchantView: Merchant { }
     property TxKey txkeyView: TxKey { }
     property SharedRingDB sharedringdbView: SharedRingDB { }
     property History historyView: History { }
@@ -72,11 +75,16 @@ Rectangle {
     signal getProofClicked(string txid, string address, string message);
     signal checkProofClicked(string txid, string address, string message, string signature);
 
+    Rectangle {
+        // grey background on merchantView
+        visible: currentView === merchantView
+        color: MoneroComponents.Style.moneroGrey
+        anchors.fill: parent
+    }
+
     Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
+        visible: currentView !== merchantView
         source: "../images/middlePanelBg.jpg"
     }
 
@@ -123,6 +131,10 @@ Rectangle {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
                PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 100 }
+            }, State {
+                name: "Merchant"
+                PropertyChanges { target: root; currentView: merchantView }
+                PropertyChanges { target: mainFlickable; contentHeight: merchantView.merchantHeight + 100 }
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
@@ -172,8 +184,8 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 18
-        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
+        anchors.margins: currentView !== merchantView ? 20 * scaleRatio : 0
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 * scaleRatio : 0
         spacing: 0
 
         Flickable {

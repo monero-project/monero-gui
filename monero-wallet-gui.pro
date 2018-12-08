@@ -97,6 +97,7 @@ SOURCES = *.qml \
           components/*.qml \
           pages/*.qml \
           pages/settings/*.qml \
+          pages/merchant/*.qml \
           wizard/*.qml \
           wizard/*js
 }
@@ -458,7 +459,9 @@ OTHER_FILES += \
 DISTFILES += \
     notes.txt \
     monero/src/wallet/CMakeLists.txt \
-    components/MobileHeader.qml
+    components/MobileHeader.qml \
+    pages/merchant/Merchant.qml \
+    pages/merchant/MerchantCheckbox.qml
 
 
 # windows application icon
