@@ -453,7 +453,7 @@ Rectangle {
                         fontBold: true
                         inlineIcon: true
                         onTextChanged: {
-                            if (amountToReceiveLine.text.startsWith('.')) {
+                            if(amountToReceiveLine.text.indexOf('.') === 0){
                                 amountToReceiveLine.text = '0' + amountToReceiveLine.text;
                             }
                         }
