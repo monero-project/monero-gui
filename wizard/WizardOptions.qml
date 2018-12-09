@@ -381,7 +381,7 @@ ColumnLayout {
             color: "#4A4949"
             text: persistentSettings.kdfRounds
             validator: IntValidator { bottom: 1 }
-            onTextEdited: {
+            onEditingFinished: {
                 kdfRoundsText.text = persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
             }
         }
