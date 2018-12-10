@@ -534,7 +534,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="638"/>
         <source>Daemon</source>
-        <translation>daemon</translation>
+        <translation>Daemon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="533"/>
@@ -616,7 +616,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
         <source>(only available for local daemons)</source>
-        <translation>(k dispozícii iba pre lokálnych daemonov)</translation>
+        <translation>(k dispozícii iba pre lokálne daemony)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -671,7 +671,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Ťažba k dispozícii iba pre lokálnych daemonov. Spustite lokálneho daemon, aby ste mohli ťažiť.&lt;br&gt;</translation>
+        <translation>Ťažba k dispozícii iba pre lokálne daemony. Spustite lokálny daemon, aby ste mohli ťažiť.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="76"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>VAROVANIE: žiadne pripojenie k daemonovi</translation>
+        <translation>VAROVANIE: žiadne pripojenie k daemonu</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="126"/>
@@ -1964,14 +1964,14 @@ Ringsize: </translation>
         <location filename="../pages/Transfer.qml" line="619"/>
         <location filename="../pages/Transfer.qml" line="631"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Peňaženka nie je pripojená k daemonovi.</translation>
+        <translation>Peňaženka nie je pripojená k daemonu.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Pripojený daemon nie je kompatibilný s GUI. 
-Prosím aktualizujte, alebo pripojte k inému daemonovi</translation>
+Prosím aktualizujte, alebo pripojte k inému daemonu</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="639"/>
@@ -2281,7 +2281,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="76"/>
         <source>Daemon address</source>
-        <translation>Adresa daemon</translation>
+        <translation>Daemon adresa</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
@@ -2593,7 +2593,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../main.qml" line="540"/>
         <source>Daemon failed to start</source>
-        <translation>daemon sa nepodarilo spustiť</translation>
+        <translation>Daemon sa nepodarilo spustiť</translation>
     </message>
     <message>
         <location filename="../main.qml" line="541"/>
@@ -2801,17 +2801,17 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1738"/>
         <source>Daemon is running</source>
-        <translation>daemon beží</translation>
+        <translation>Daemon beží</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1739"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>daemon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
+        <translation>Daemon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1741"/>
         <source>Stop daemon</source>
-        <translation>Zastavenie daemon</translation>
+        <translation>Zastaviť daemon</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1776"/>
@@ -2821,7 +2821,7 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1808"/>
         <source>Daemon log</source>
-        <translation>Logy daemon</translation>
+        <translation>Daemon logy</translation>
     </message>
     <message>
         <location filename="../main.qml" line="358"/>
