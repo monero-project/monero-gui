@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> zvolené: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hľadať</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Od dátumu</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Do dátumu</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Usporiadať</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Výška bloku</translation>
+        <translation>Výška bloku</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Dátum</translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna história</translation>
     </message>
 </context>
 <context>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
         <source>To </source>
-        <translation type="unfinished"></translation>
+        <translation>Do </translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
@@ -391,7 +391,7 @@
         <location filename="../pages/Keys.qml" line="221"/>
         <location filename="../pages/Keys.qml" line="253"/>
         <source>View Only Wallet</source>
-        <translation>Prezeracia peňaženka</translation>
+        <translation>Peňaženka len na prezeranie</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="157"/>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopírované do schránky</translation>
+        <translation>Skopírované do schránky</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopírované do schránky</translation>
+        <translation>Skopírované do schránky</translation>
     </message>
 </context>
 <context>
@@ -621,7 +621,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>Daemon musí byť zosynchronizovaný pred tým ako začneš ťažiť</translation>
+        <translation>Daemon musí byť zosynchronizovaný pred začatím ťažby</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="82"/>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Peňaženka</translation>
+        <translation>Peňaženka</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -722,17 +722,17 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzol</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Záznam</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -1152,7 +1152,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="143"/>
         <source>Daemon log</source>
-        <translation>Logy daemona</translation>
+        <translation>Logy daemonu</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
@@ -2712,12 +2712,12 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="791"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>úspešne odoslaných: %1 transakcií</translation>
+        <translation>Úspešne odoslaných: %1 transakcií</translation>
     </message>
     <message>
         <location filename="../main.qml" line="821"/>
         <source>Payment proof</source>
-        <translation>Doklad o zaplatení</translation>
+        <translation>Dôkaz o zaplatení</translation>
     </message>
     <message>
         <location filename="../main.qml" line="824"/>
