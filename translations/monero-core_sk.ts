@@ -95,7 +95,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="111"/>
         <source>Start daemon (%1)</source>
-        <translation>Spustenie démona (%1)</translation>
+        <translation>Spustenie daemon (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="124"/>
@@ -534,7 +534,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="638"/>
         <source>Daemon</source>
-        <translation>Démon</translation>
+        <translation>daemon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="533"/>
@@ -616,7 +616,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
         <source>(only available for local daemons)</source>
-        <translation>(k dispozícii iba pre lokálnych démonov)</translation>
+        <translation>(k dispozícii iba pre lokálnych daemonov)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -671,7 +671,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Ťažba k dispozícii iba pre lokálnych démonov. Spustite lokálneho démona, aby ste mohli ťažiť.&lt;br&gt;</translation>
+        <translation>Ťažba k dispozícii iba pre lokálnych daemonov. Spustite lokálneho daemon, aby ste mohli ťažiť.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="76"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>VAROVANIE: žiadne pripojenie k démonovi</translation>
+        <translation>VAROVANIE: žiadne pripojenie k daemonovi</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="126"/>
@@ -1764,7 +1764,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/Transfer.qml" line="145"/>
         <source>All</source>
-        <translation>Všteko</translation>
+        <translation>Všetko</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="217"/>
@@ -1780,7 +1780,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/Transfer.qml" line="49"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Spustiť démona&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Spustiť daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="177"/>
@@ -1964,19 +1964,19 @@ Ringsize: </translation>
         <location filename="../pages/Transfer.qml" line="619"/>
         <location filename="../pages/Transfer.qml" line="631"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Peňaženka nie je pripojená k démonovi.</translation>
+        <translation>Peňaženka nie je pripojená k daemonovi.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Pripojený démon nie je kompatibilný s GUI. 
-Prosím aktualizujte, alebo pripojte k inému démonovi</translation>
+        <translation>Pripojený daemon nie je kompatibilný s GUI. 
+Prosím aktualizujte, alebo pripojte k inému daemonovi</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="639"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Čakanie na dokončenie synchronizácie démona</translation>
+        <translation>Čakanie na dokončenie synchronizácie daemon</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -2281,7 +2281,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="76"/>
         <source>Daemon address</source>
-        <translation>Adresa démona</translation>
+        <translation>Adresa daemon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
@@ -2583,27 +2583,27 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../main.qml" line="509"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Čakanie na spustenie démona...</translation>
+        <translation>Čakanie na spustenie daemon...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="515"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Čaká sa na zastavenie démona...</translation>
+        <translation>Čaká sa na zastavenie daemon...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="540"/>
         <source>Daemon failed to start</source>
-        <translation>Démon sa nepodarilo spustiť</translation>
+        <translation>daemon sa nepodarilo spustiť</translation>
     </message>
     <message>
         <location filename="../main.qml" line="541"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Prosím, skontrolujte chyby v log-och peňaženky a démona. Môžete sa tiež pokúsiť spustiť %1 ručne.</translation>
+        <translation>Prosím, skontrolujte chyby v log-och peňaženky a daemon. Môžete sa tiež pokúsiť spustiť %1 ručne.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="603"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Nemožno vytvoriť transakciu: Chybná verzia démona: </translation>
+        <translation>Nemožno vytvoriť transakciu: Chybná verzia daemon: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="605"/>
@@ -2801,17 +2801,17 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1738"/>
         <source>Daemon is running</source>
-        <translation>Démon beží</translation>
+        <translation>daemon beží</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1739"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Démon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
+        <translation>daemon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1741"/>
         <source>Stop daemon</source>
-        <translation>Zastavenie démona</translation>
+        <translation>Zastavenie daemon</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1776"/>
@@ -2821,7 +2821,7 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1808"/>
         <source>Daemon log</source>
-        <translation>Logy démona</translation>
+        <translation>Logy daemon</translation>
     </message>
     <message>
         <location filename="../main.qml" line="358"/>
