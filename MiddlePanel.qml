@@ -29,13 +29,12 @@
 
 import QtQml 2.0
 import QtQuick 2.2
-// QtQuick.Controls 2.0 isn't stable enough yet. Needs more testing.
-//import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 
+import "components" as MoneroComponents
 import "./pages"
 import "./pages/settings"
 
@@ -184,12 +183,19 @@ Rectangle {
 
             onFlickingChanged: {
                 releaseFocus();
+                flickableScroll.flickableContentYChanged();
             }
 
-            // Disabled scrollbars, gives crash on startup on windows
-//            ScrollIndicator.vertical: ScrollIndicator { }
-//            ScrollBar.vertical: ScrollBar { }       // uncomment to test
-
+            MoneroComponents.Scroll {
+                id: flickableScroll
+                parent: mainFlickable.parent
+                anchors.left: parent.right
+                anchors.leftMargin: 3
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                flickable: mainFlickable
+                scrollWidth: 6
+            }
             // Views container
             StackView {
                 id: stackView
