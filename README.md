@@ -210,12 +210,6 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 
     There is no more need to download some special installer from the Qt website, the standard MSYS2 package for Qt will do in almost all circumstances.
 
-    **Note:** There is a known issue that GUI won't lauch properly when building tag v0.13.0.3 with Qt 5.11.2.
-    
-    If your encounter issue with that, please remove current Qt by: `pacman -R mingw-w64-x86_64-qt5`
-    
-    And install 5.11.1 instead by: `pacman -U http://repo.msys2.org/mingw/x86_64/mingw-w64-x86_64-qt5-5.11.1-3-any.pkg.tar.xz`
-
 5. Install git
 
     ```
@@ -232,9 +226,11 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 
     ```
     cd monero-gui
-    ./build.sh
+    source ./build.sh release-static
     cd build
     make deploy
     ```
+
+    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/monero-project/monero-gui/issues/1559 for more info.
 
 The executable can be found in the `.\release\bin` directory.
