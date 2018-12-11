@@ -2,32 +2,51 @@
 #include <QStandardPaths>
 #include <QFileInfo>
 #include <QString>
+#include <QDir>
+#include <QDebug>
 
 #include "Logger.h"
 #include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
-static const QString default_name = "monero-wallet-gui.log";
-#if defined(Q_OS_ANDROID) || defined(Q_OS_IOS)
+static const QString defaultLogName = "monero-wallet-gui.log";
+#if defined(Q_OS_IOS)
+    //AppDataLocation = "<APPROOT>/Library/Application Support"
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
+    static const QString appFolder = "monero-wallet-gui";
 #elif defined(Q_OS_WIN)
-    static const QString osPath = QCoreApplication::applicationDirPath();
+    //AppDataLocation = "C:/Users/<USER>/AppData/Roaming/<APPNAME>"
+    static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(0);
+    static const QString appFolder = "monero-wallet-gui";
+#elif defined(Q_OS_ANDROID)
+    //AppDataLocation = "<USER>/<APPNAME>/files"
+    static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(1);
+    static const QString appFolder = "";
 #elif defined(Q_OS_MAC)
-    static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0) + "/Library/Logs";
-#else // linux + bsd
+    //HomeLocation = "~"
     static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0);
+    static const QString appFolder = "Library/Logs";
+#else // linux + bsd
+    //HomeLocation = "~"
+    static const QString osPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).at(0);
+    static const QString appFolder = ".bitmonero";
 #endif
 
 
-// return the absolute path of the logfile
+// return the absolute path of the logfile and ensure path folder exists
 const QString getLogPath(const QString logPath)
 {
     const QFileInfo fi(logPath);
 
     if(!logPath.isEmpty() && !fi.isDir())
         return fi.absoluteFilePath();
-    else
-        return osPath + "/" + default_name;
+    else {
+        QDir appDir(osPath + "/" + appFolder);
+        if(!appDir.exists())
+            if(!appDir.mkpath("."))
+                qWarning() << "Logger: Cannot create log directory " + appDir.path();
+        return appDir.path() + "/" + defaultLogName;
+    }
 }
 
 
