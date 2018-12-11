@@ -35,7 +35,6 @@ Item {
     id: button
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property string icon: ""
     property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
     property string textAlign: rightIcon !== "" ? "left" : "center"
     property bool small: false
@@ -46,22 +45,9 @@ Item {
     }
     signal clicked()
 
-    // Dynamic height/width
-    Layout.minimumWidth: {
-        var _padding = 22;
-        if(button.rightIcon !== ""){
-            _padding += 60;
-        }
-
-        var _width = label.contentWidth + _padding;
-        if(_width <= 50) {
-            return 60;
-        }
-
-        return _width;
-    }
-
     height: small ?  30 * scaleRatio : 36 * scaleRatio
+    width: buttonLayout.width + 22 * scaleRatio
+    Component.onCompleted: width = width
 
     function doClick() {
         // Android workaround
@@ -70,70 +56,79 @@ Item {
     }
 
     Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height - 1
+        id: buttonRect
+        anchors.fill: parent
         radius: 3
-        color: parent.enabled ? MoneroComponents.Style.buttonBackgroundColor : MoneroComponents.Style.buttonBackgroundColorDisabled
         border.width: parent.focus ? 1 : 0
 
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            hoverEnabled: true
-
-            propagateComposedEvents: true
-
-            // possibly do some hover effects here
-            onEntered: {
-//                if(button.enabled) parent.color = Style.buttonBackgroundColorHover;
-//                else parent.color = Style.buttonBackgroundColorDisabledHover;
+        state: button.enabled ? "active" : "disabled"
+        Component.onCompleted: state = state
+        states: [
+            State {
+                name: "hover"
+                when: buttonArea.containsMouse || button.focus
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColorHover
+                }
+            },
+            State {
+                name: "active"
+                when: button.enabled
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColor
+                }
+            },
+            State {
+                name: "disabled"
+                when: !button.enabled
+                PropertyChanges {
+                    target: buttonRect
+                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                }
             }
-            onExited: {
-//                if(button.enabled) parent.color = Style.buttonBackgroundColor;
-//                else parent.color = Style.buttonBackgroundColorDisabled;
-            }
+        ]
+        transitions: Transition {
+            ColorAnimation { duration: 100 }
         }
     }
 
-    Text {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.right: parent.right
-        horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
-        anchors.leftMargin: textAlign === "center" ? 0 : 11
-        font.family: MoneroComponents.Style.fontBold.name
-        font.bold: true
-        font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
-        color: parent.textColor
-        visible: parent.icon === ""
-    }
-
-    Image {
+    RowLayout {
+        id: buttonLayout
+        height: button.height
+        spacing: 11 * scaleRatio
         anchors.centerIn: parent
-        visible: parent.icon !== ""
-        source: parent.icon
-    }
 
-    Image {
-        visible: parent.rightIcon !== ""
-        anchors.right: parent.right
-        anchors.rightMargin: 11 * scaleRatio
-        anchors.verticalCenter: parent.verticalCenter
-        width: parent.small ? 16 * scaleRatio : 20 * scaleRatio
-        height: parent.small ? 16 * scaleRatio : 20 * scaleRatio
-        source: {
-            if(parent.rightIconInactive !== "" && !parent.enabled){
-                return parent.rightIconInactive;
+        Text {
+            id: label
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
+            font.family: MoneroComponents.Style.fontBold.name
+            font.bold: true
+            font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
+            color: button.textColor
+            visible: text !== ""
+        }
+
+        Image {
+            visible: button.rightIcon !== ""
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            width: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            height: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            source: {
+                if(button.rightIconInactive !== "" && !button.enabled) {
+                    return button.rightIconInactive;
+                }
+                return button.rightIcon;
             }
-            return parent.rightIcon;
         }
     }
 
     MouseArea {
         id: buttonArea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: doClick()
         cursorShape: Qt.PointingHandCursor
     }
