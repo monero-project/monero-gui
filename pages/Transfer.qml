@@ -145,7 +145,7 @@ Rectangle {
                       inlineButtonText: qsTr("All") + translationManager.emptyString
                       inlineButton.onClicked: amountLine.text = "(all)"
                       onTextChanged: {
-                          if (amountLine.text.startsWith('.')) {
+                          if(amountLine.text.indexOf('.') === 0){
                               amountLine.text = '0' + amountLine.text;
                           }
                       }
