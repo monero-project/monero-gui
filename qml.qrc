@@ -226,5 +226,7 @@
         <file>images/settings_navbar_side_active.png</file>
         <file>images/settings_local.png</file>
         <file>components/WarningBox.qml</file>
+        <file>images/eyeHide.png</file>
+        <file>images/eyeShow.png</file>
     </qresource>
 </RCC>
