@@ -42,6 +42,7 @@ Item {
     property string textColor: "#FFFFFF"
     property int fontSize: 12 * scaleRatio
     property alias text: inlineText.text
+    property alias buttonColor: rect.color
     signal clicked()
 
     function doClick() {
@@ -55,7 +56,7 @@ Item {
         color: MoneroComponents.Style.buttonBackgroundColorDisabled
         border.color: "black"
         height: 28 * scaleRatio
-        width: inlineText.width + 22 * scaleRatio
+        width: inlineText.text ? (inlineText.width + 22) * scaleRatio : inlineButton.icon ? (inlineImage.width + 16) * scaleRatio : rect.height
         radius: 4
 
         anchors.top: parent.top
@@ -71,6 +72,13 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
+        Image {
+            id: inlineImage
+            visible: inlineButton.icon !== ""
+            anchors.centerIn: parent
+            source: inlineButton.icon
+        }
+
         MouseArea {
             id: buttonArea
             cursorShape: rect.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
@@ -78,12 +86,12 @@ Item {
             anchors.fill: parent
             onClicked: doClick()
             onEntered: {
-                rect.color = "#707070";
+                rect.color = buttonColor ? buttonColor : "#707070";
                 rect.opacity = 0.8;
             }
             onExited: {
                 rect.opacity = 1.0;
-                rect.color = "#808080";
+                rect.color = buttonColor ? buttonColor : "#808080";
             }
         }
     }

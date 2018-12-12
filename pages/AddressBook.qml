@@ -28,14 +28,16 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
+import moneroComponents.Clipboard 1.0
 
 ColumnLayout {
     id: root
     property var model
     property bool selectAndSend: false
+    Clipboard { id: clipboard }
 
     ColumnLayout {
         Layout.margins: (isMobile ? 17 : 20) * scaleRatio
@@ -44,34 +46,27 @@ ColumnLayout {
         spacing: 26 * scaleRatio
         visible: !root.selectAndSend
 
-        RowLayout {
-            StandardButton {
-                id: qrfinderButton
-                text: qsTr("Qr Code") + translationManager.emptyString
-                visible : appWindow.qrScannerEnabled
-                enabled : visible
-                width: visible ? 60 * scaleRatio : 0
-                onClicked: {
-                    cameraUi.state = "Capture"
-                    cameraUi.qrcode_decoded.connect(updateFromQrCode)
-                }
+        MoneroComponents.LineEditMulti {
+            id: addressLine
+            Layout.fillWidth: true
+            fontBold: true
+            labelText: qsTr("Address") + translationManager.emptyString
+            placeholderText: qsTr("4.. / 8..") + translationManager.emptyString
+            wrapMode: Text.WrapAnywhere
+            addressValidation: true
+            inlineButton.icon: "../images/qr.png"
+            inlineButton.buttonColor: MoneroComponents.Style.orange
+            inlineButton.onClicked: {
+                cameraUi.state = "Capture"
+                cameraUi.qrcode_decoded.connect(updateFromQrCode)
             }
-
-            LineEditMulti {
-                Layout.fillWidth: true;
-                id: addressLine
-                labelText: qsTr("Address") + translationManager.emptyString
-                error: true;
-                placeholderText: qsTr("4.. / 8..") + translationManager.emptyString
-                wrapMode: Text.WrapAnywhere
-                addressValidation: true
-            }
+            inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
         }
 
-        LineEditMulti {
+        MoneroComponents.LineEditMulti {
             id: paymentIdLine
             visible: appWindow.persistentSettings.showPid
-            Layout.fillWidth: true;
+            Layout.fillWidth: true
             labelText: qsTr("Payment ID <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Paste 64 hexadecimal characters") + translationManager.emptyString
             wrapMode: Text.WrapAnywhere
@@ -79,9 +74,9 @@ ColumnLayout {
 //                    + translationManager.emptyString
         }
 
-        LineEditMulti {
+        MoneroComponents.LineEditMulti {
             id: descriptionLine
-            Layout.fillWidth: true;
+            Layout.fillWidth: true
             labelText: qsTr("Description <font size='2'>(Optional)</font>") + translationManager.emptyString
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
             wrapMode: Text.WrapAnywhere
@@ -91,7 +86,7 @@ ColumnLayout {
         RowLayout {
             id: addButton
             Layout.bottomMargin: 17 * scaleRatio
-            StandardButton {
+            MoneroComponents.StandardButton {
                 text: qsTr("Add") + translationManager.emptyString
                 enabled: checkInformation(addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
 
@@ -129,16 +124,16 @@ ColumnLayout {
             NumberAnimation { duration: 200; easing.type: Easing.InQuad }
         }
 
-        Scroll {
+        MoneroComponents.Scroll {
             id: flickableScroll
             anchors.right: table.right
-            anchors.rightMargin: -14
+            anchors.rightMargin: -14 * scaleRatio
             anchors.top: table.top
             anchors.bottom: table.bottom
             flickable: table
         }
 
-        AddressBookTable {
+        MoneroComponents.AddressBookTable {
             id: table
             anchors.left: parent.left
             anchors.right: parent.right
@@ -179,7 +174,6 @@ ColumnLayout {
         console.log("updateFromQrCode")
         addressLine.text = address
         paymentIdLine.text = payment_id
-        //amountLine.text = amount
         descriptionLine.text = recipient_name + " " + tx_description
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }

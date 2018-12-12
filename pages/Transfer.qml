@@ -168,7 +168,7 @@ Rectangle {
                   Layout.topMargin: 12 * scaleRatio
                   text: qsTr("Transaction priority") + translationManager.emptyString
                   fontBold: false
-                  fontSize: 16
+                  fontSize: 16 * scaleRatio
               }
               // Note: workaround for translations in listElements
               // ListElement: cannot use script for property value, so
@@ -235,24 +235,19 @@ Rectangle {
                      addressLine.text = clipboardText; 
                   }
               }
-          }
-
-          StandardButton {
-              id: qrfinderButton
-              text: qsTr("QR Code") + translationManager.emptyString
-              visible : appWindow.qrScannerEnabled
-              enabled : visible
-              width: visible ? 60 * scaleRatio : 0
-              onClicked: {
+              inlineButton.icon: "../images/qr.png"
+              inlineButton.buttonColor: MoneroComponents.Style.orange
+              inlineButton.onClicked: {
                   cameraUi.state = "Capture"
                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
               }
+              inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
           }
       }
 
       StandardButton {
           id: resolveButton
-          width: 80
+          width: 80 * scaleRatio
           text: qsTr("Resolve") + translationManager.emptyString
           visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
           enabled : visible

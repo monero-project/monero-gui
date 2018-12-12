@@ -83,6 +83,9 @@ ColumnLayout {
     property alias addressValidation: input.addressValidation
     property string backgroundColor: "" // mock
 
+    property alias inlineButton: inlineButtonId
+    property bool inlineButtonVisible: false
+
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
     signal editingFinished();
@@ -182,6 +185,15 @@ ColumnLayout {
             radius: 4
             anchors.fill: parent
             visible: !item.borderDisabled
+        }
+
+        MoneroComponents.InlineButton {
+            id: inlineButtonId
+            visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
+            anchors.right: parent.right
+            anchors.rightMargin: 8 * scaleRatio
+            anchors.top: parent.top
+            anchors.topMargin: 4 * scaleRatio
         }
     }
 }
