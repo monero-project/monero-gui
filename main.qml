@@ -355,8 +355,18 @@ ApplicationWindow {
     function updateBalance() {
         if (!currentWallet)
             return;
-        middlePanel.unlockedBalanceText = leftPanel.unlockedBalanceText =  middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
-        middlePanel.balanceText = leftPanel.balanceText = middlePanel.state === "Receive" ? qsTr("HIDDEN") : walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+
+        var balance_unlocked = qsTr("HIDDEN");
+        var balance = qsTr("HIDDEN");
+        if(!persistentSettings.hideBalance){
+            balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+            balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+        }
+
+        middlePanel.unlockedBalanceText = balance_unlocked;
+        leftPanel.unlockedBalanceText = balance_unlocked;
+        middlePanel.balanceText = balance;
+        leftPanel.balanceText = balance;
     }
 
     function onWalletConnectionStatusChanged(status){
@@ -1028,6 +1038,7 @@ ApplicationWindow {
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
         property int kdfRounds: 1
+        property bool hideBalance: false
     }
 
     // Information dialog
