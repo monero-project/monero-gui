@@ -35,7 +35,7 @@ Item {
     id: item
     property alias text: label.text
     property alias color: label.color
-    property alias textFormat: label.textFormat
+    property int textFormat: Text.PlainText
     property string tipText: ""
     property int fontSize: 16 * scaleRatio
     property bool fontBold: false
@@ -65,5 +65,6 @@ Item {
         font.bold: fontBold
         color: fontColor
         onLinkActivated: item.linkActivated()
+        textFormat: parent.textFormat
     }
 }
