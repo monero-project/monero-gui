@@ -29,6 +29,7 @@
 
 import QtQml 2.0
 import QtQuick 2.2
+import QtQuick.Controls 2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
@@ -181,21 +182,18 @@ Rectangle {
             Layout.fillHeight: true
             clip: true
 
-            onFlickingChanged: {
-                releaseFocus();
-                flickableScroll.flickableContentYChanged();
-            }
-
-            MoneroComponents.Scroll {
-                id: flickableScroll
+            ScrollBar.vertical: ScrollBar {
                 parent: mainFlickable.parent
                 anchors.left: parent.right
                 anchors.leftMargin: 3
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                flickable: mainFlickable
-                scrollWidth: 6
             }
+
+            onFlickingChanged: {
+                releaseFocus();
+            }
+
             // Views container
             StackView {
                 id: stackView
