@@ -75,43 +75,38 @@ Rectangle {
             columnSpacing: 32 * scaleRatio
             z: parent.z + 1
 
-            ColumnLayout {
-                spacing: 0
-                Layout.fillWidth: true
+            ListModel {
+                 id: logLevel
+                 ListElement { column1: "0"; name: "none"; }
+                 ListElement { column1: "1"; }
+                 ListElement { column1: "2"; }
+                 ListElement { column1: "3"; }
+                 ListElement { column1: "4"; }
+                 ListElement { column1: "custom"; }
+            }
 
-                ListModel {
-                     id: logLevel
-                     ListElement { column1: "0"; name: "none"; }
-                     ListElement { column1: "1"; }
-                     ListElement { column1: "2"; }
-                     ListElement { column1: "3"; }
-                     ListElement { column1: "4"; }
-                     ListElement { column1: "custom"; }
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: logLevelDropdown
-                    dataModel: logLevel
-                    itemTopMargin: 2 * scaleRatio
-                    currentIndex: appWindow.persistentSettings.logLevel;
-                    onChanged: {
-                        if (currentIndex == 5) {
-                            console.log("log categories changed: ", logCategories.text);
-                            walletManager.setLogCategories(logCategories.text);
-                        }
-                        else {
-                            console.log("log level changed: ",currentIndex);
-                            walletManager.setLogLevel(currentIndex);
-                        }
-                        appWindow.persistentSettings.logLevel = currentIndex;
+            MoneroComponents.StandardDropdown {
+                id: logLevelDropdown
+                dataModel: logLevel
+                itemTopMargin: 2 * scaleRatio
+                currentIndex: appWindow.persistentSettings.logLevel;
+                onChanged: {
+                    if (currentIndex == 5) {
+                        console.log("log categories changed: ", logCategories.text);
+                        walletManager.setLogCategories(logCategories.text);
                     }
-                    Layout.fillWidth: true
-                    Layout.preferredWidth: logGrid.width / 2
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#363636"
-                    pressedColor: "#202020"
+                    else {
+                        console.log("log level changed: ",currentIndex);
+                        walletManager.setLogLevel(currentIndex);
+                    }
+                    appWindow.persistentSettings.logLevel = currentIndex;
                 }
+                Layout.fillWidth: true
+                Layout.preferredWidth: logGrid.width / 2
+                shadowReleasedColor: "#FF4304"
+                shadowPressedColor: "#B32D00"
+                releasedColor: "#363636"
+                pressedColor: "#202020"
             }
 
             MoneroComponents.LineEdit {
