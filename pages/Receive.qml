@@ -430,7 +430,9 @@ Rectangle {
                         receivePageDialog.text = qsTr(
                             "<p>This QR code includes the address you selected above and " +
                             "the amount you entered below. Share it with others (right-click->Save) " +
-                            "so they can more easily send you exact amounts.</p>"
+                            "so they can more easily send you exact amounts.</p>" +
+                            "<p>Alternatively you can share your payment URL " +
+                            "(right-click->Copy payment URL) with others.</p>"
                         )
                         receivePageDialog.icon = StandardIcon.Information
                         receivePageDialog.open()
@@ -497,17 +499,15 @@ Rectangle {
                                 text: qsTr("Save As") + translationManager.emptyString;
                                 onTriggered: qrFileDialog.open()
                             }
+                            MenuItem {
+                                text: qsTr("Copy payment URL") + translationManager.emptyString;
+                                onTriggered: {
+                                    console.log("Payment URL copied to clipboard");
+                                    clipboard.setText(makeQRCodeString());
+                                    appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                                }
+                            }
                         }
-                    }
-
-                    LineEditMulti {
-                        id: paymentUrl
-                        Layout.fillWidth: true
-                        labelText: qsTr("Payment URL") + translationManager.emptyString
-                        text: makeQRCodeString()                        
-                        readOnly: true
-                        copyButton: true
-                        wrapMode: Text.WrapAnywhere
                     }
                 }
             }
