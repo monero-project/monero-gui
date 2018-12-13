@@ -353,12 +353,9 @@ ApplicationWindow {
     }
 
     function updateBalance() {
-        if (!currentWallet)
-            return;
-
         var balance_unlocked = qsTr("HIDDEN");
         var balance = qsTr("HIDDEN");
-        if(!persistentSettings.hideBalance){
+        if(!persistentSettings.hideBalance && currentWallet){
             balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
             balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
         }

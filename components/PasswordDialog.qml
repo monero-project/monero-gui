@@ -44,6 +44,7 @@ Item {
     property alias password: passwordInput.text
     property string walletName
     property string errorText
+    property bool tempHideBalanceFlag
 
     // same signals as Dialog has
     signal accepted()
@@ -61,6 +62,9 @@ Item {
         root.visible = true;
         passwordInput.forceActiveFocus();
         passwordInput.text = ""
+        tempHideBalanceFlag = persistentSettings.hideBalance;
+        persistentSettings.hideBalance = true;
+        appWindow.updateBalance()
     }
 
     function showError(errorText) {
@@ -73,6 +77,8 @@ Item {
         middlePanel.enabled = true
         titleBar.enabled = true
         root.visible = false;
+        persistentSettings.hideBalance = tempHideBalanceFlag;
+        appWindow.updateBalance()
         closeCallback();
     }
 
