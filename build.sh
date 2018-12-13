@@ -27,16 +27,16 @@ find_command() {
 
 if [ "$BUILD_TYPE" == "release" ]; then
     echo "Building release"
-    CONFIG="CONFIG+=release";
+    CONFIG="CONFIG+=release WITH_SCANNER";
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
     if [ "$platform" != "darwin" ]; then
-	    CONFIG="CONFIG+=release static";
+	    CONFIG="CONFIG+=release static WITH_SCANNER";
     else
         # OS X: build static libwallet but dynamic Qt. 
         echo "OS X: Building Qt project without static flag"
-        CONFIG="CONFIG+=release";
+        CONFIG="CONFIG+=release WITH_SCANNER";
     fi    
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then
@@ -53,7 +53,7 @@ elif [ "$BUILD_TYPE" == "debug-android" ]; then
     DISABLE_PASS_STRENGTH_METER=true
 elif [ "$BUILD_TYPE" == "debug" ]; then
     echo "Building debug"
-	CONFIG="CONFIG+=debug"
+	CONFIG="CONFIG+=debug WITH_SCANNER"
     BIN_PATH=debug/bin
 else
     echo "Valid build types are release, release-static, release-android, debug-android and debug"

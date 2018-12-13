@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -27,19 +27,20 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtMultimedia 5.4
+import QtMultimedia 5.8
+import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import FontAwesome 1.0
 import moneroComponents.QRCodeScanner 1.0
+import "." as MoneroComponents
 
 Rectangle {
     id : root
-
     x: 0
     y: 0
     z: parent.z+1
     width: parent.width
     height: parent.height
-
     visible: false
     color: "black"
     state: "Stopped"
@@ -51,8 +52,9 @@ Rectangle {
             name: "Capture"
             StateChangeScript {
                 script: {
-		    root.visible = true
+                    root.visible = true
                     camera.captureMode = Camera.CaptureStillImage
+                    camera.cameraState = Camera.ActiveState
                     camera.start()
                     finder.enabled = true
                 }
@@ -63,8 +65,9 @@ Rectangle {
             StateChangeScript {
                 script: {
                     camera.stop()
-		    root.visible = false
+                    root.visible = false
                     finder.enabled = false
+                    camera.cameraState = Camera.UnloadedState
                 }
             }
         }
@@ -74,18 +77,19 @@ Rectangle {
         id: camera
         objectName: "qrCameraQML"
         captureMode: Camera.CaptureStillImage
-
+        cameraState: Camera.UnloadedState
         focus {
             focusMode: Camera.FocusContinuous
         }
     }
+
     QRCodeScanner {
         id : finder
         objectName: "QrFinder"
         onDecoded : {
             root.qrcode_decoded(address, payment_id, amount, tx_description, recipient_name, extra_parameters)
             root.state = "Stopped"
-	}
+        }
         onNotifyError : {
             if( warning )
                 messageDialog.icon = StandardIcon.Critical
@@ -119,6 +123,26 @@ Rectangle {
                 camera.searchAndLock()
             }
             onDoubleClicked: {
+                root.state = "Stopped"
+            }
+        }
+    }
+
+    Rectangle {
+        id: closeButton
+        anchors.top: root.top
+        anchors.right: root.right
+        anchors.topMargin: 64
+        anchors.rightMargin: 64
+        color: "transparent"
+        z: parent.z + 1
+
+        MoneroComponents.StandardButton {
+            id: btnDetails
+            text: FontAwesome.windowClose
+            label.font.family: FontAwesome.fontFamily
+            fontSize: 30
+            onClicked: {
                 root.state = "Stopped"
             }
         }
