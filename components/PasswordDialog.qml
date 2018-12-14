@@ -34,6 +34,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
+import "../js/Utils.js" as Utils
 
 Item {
     id: root
@@ -44,6 +45,9 @@ Item {
     property alias password: passwordInput.text
     property string walletName
     property string errorText
+    property bool shiftIsPressed: false
+    property bool isCapsLocksActive: false
+    property bool backspaceIsPressed: false
 
     // same signals as Dialog has
     signal accepted()
@@ -51,9 +55,11 @@ Item {
     signal closeCallback()
 
     function open(walletName, errorText) {
+        passwordInput.text = ""
+        passwordInput.forceActiveFocus();
         inactiveOverlay.visible = true // draw appwindow inactive
         root.walletName = walletName ? walletName : ""
-        root.errorText = errorText ? errorText : "";
+        errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.enabled = false
@@ -104,8 +110,8 @@ Item {
             }
 
             Label {
-                text: root.errorText
-                visible: root.errorText
+                id: errorTextLabel
+                visible: root.errorText || text !== ""
 
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16 * scaleRatio
@@ -130,6 +136,17 @@ Item {
                 color: MoneroComponents.Style.defaultFontColor
                 selectionColor: MoneroComponents.Style.dimmedFontColor
                 selectedTextColor: MoneroComponents.Style.defaultFontColor
+
+                onTextChanged: {
+                    var letter = text[passwordInput.text.length - 1];
+                    isCapsLocksActive = Utils.isUpperLock(shiftIsPressed, letter);
+                    if(isCapsLocksActive && !backspaceIsPressed){
+                        errorTextLabel.text = qsTr("CAPSLOCKS IS ON.") + translationManager.emptyString;
+                    }
+                    else{
+                        errorTextLabel.text = "";
+                    }
+                }
 
                 background: Rectangle {
                     radius: 2
@@ -172,12 +189,26 @@ Item {
                 Keys.onReturnPressed: {
                     root.close()
                     root.accepted()
-
                 }
                 Keys.onEscapePressed: {
                     root.close()
                     root.rejected()
-
+                }
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Shift){
+                        shiftIsPressed = true;
+                    }
+                    if(event.key === Qt.Key_Backspace){
+                        backspaceIsPressed = true;
+                    }
+                }
+                Keys.onReleased: {
+                    if(event.key === Qt.Key_Shift){
+                        shiftIsPressed = false;
+                    }
+                    if(event.key === Qt.Key_Backspace){
+                        backspaceIsPressed =false;
+                    }
                 }
             }
 
