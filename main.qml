@@ -48,6 +48,7 @@ ApplicationWindow {
     title: "Monero"
 
     property var currentItem
+    property bool hideBalanceForced: false
     property bool whatIsEnable: false
     property bool ctrlPressed: false
     property bool rightPanelExpanded: false
@@ -358,7 +359,7 @@ ApplicationWindow {
 
         var balance_unlocked = qsTr("HIDDEN");
         var balance = qsTr("HIDDEN");
-        if(!persistentSettings.hideBalance){
+        if(!hideBalanceForced && !persistentSettings.hideBalance){
             balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
             balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
         }
