@@ -80,9 +80,13 @@ ColumnLayout {
             console.log("checking key fields")
             wizard.nextButton.enabled = checkFields();
         } else if (recoverMode && recoverFromSeedMode) {
-            wizard.nextButton.enabled = checkSeed()
+            wizard.nextButton.enabled = checkSeed() && checkRestoreHeight()
         } else
             wizard.nextButton.enabled = true;
+    }
+
+    function checkRestoreHeight() {
+        return (parseInt(restoreHeight) >= 0 || restoreHeight === "") && restoreHeight.indexOf("-") === -1;
     }
 
     function checkSeed() {
@@ -297,18 +301,31 @@ ColumnLayout {
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
             placeholderColor: Style.legacy_placeholderFontColor
-            placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
+            placeholderText: qsTr("Wallet creation date in YYYY-MM-DD or Restore height (optional)") + translationManager.emptyString
             placeholderOpacity: 1.0
-            validator: IntValidator {
-                bottom:0
-            }
             borderColor: Qt.rgba(0, 0, 0, 0.15)
             backgroundColor: "white"
             fontColor: "black"
             fontBold: false
+            validator: RegExpValidator {
+                regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+            }
+            onTextUpdated: checkNextButton()
         }
     }
-    
+
+    StandardButton {
+        id: getBlockHeightButton
+        text: qsTr("Convert date to restore height") + translationManager.emptyString
+        visible : recoverMode && recoverFromSeedMode
+        enabled : restoreHeight.indexOf('-') === 4 && restoreHeight.length === 10
+        onClicked: {
+            //parse date in YYYY-MM-DD format or return 0 as blockheight
+            restoreHeight = Utils.getApproximateBlockchainHeight(restoreHeight);
+            checkNextButton();
+        }
+    }
+
     // Subaddress lookahead
     RowLayout {
         visible: recoverFromDevice
