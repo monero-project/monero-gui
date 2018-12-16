@@ -72,6 +72,7 @@ ApplicationWindow {
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
+    property bool isMining: false
     property var cameraUi
     property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
