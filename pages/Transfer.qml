@@ -244,7 +244,6 @@ Rectangle {
 
       StandardButton {
           id: resolveButton
-          anchors.left: parent.left
           width: 80
           text: qsTr("Resolve") + translationManager.emptyString
           visible: isValidOpenAliasAddress(addressLine.text)

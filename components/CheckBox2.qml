@@ -57,7 +57,6 @@ RowLayout {
             height: label.height
             width: (label.width + indicatorRect.width + checkBox.textMargin)
             color: "transparent"
-            anchors.left: parent.left
 
             Text {
                 id: label

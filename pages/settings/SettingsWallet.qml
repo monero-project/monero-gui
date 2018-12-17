@@ -66,7 +66,7 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
                 Text {
@@ -157,7 +157,7 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
                 Text {
@@ -248,7 +248,7 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
                 Text {
@@ -337,7 +337,7 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
                 Text {

@@ -328,10 +328,9 @@ ColumnLayout {
 
     Rectangle {
         id: prevButton
-        anchors.verticalCenter: wizard.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: isMobile ?  20 :  50
-        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+        Layout.leftMargin: isMobile ?  20 :  50
+        Layout.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: parent.currentPage > 0
 
         width: 50 * scaleRatio; height: 50 * scaleRatio
@@ -354,10 +353,9 @@ ColumnLayout {
 
     Rectangle {
         id: nextButton
-        anchors.verticalCenter: wizard.verticalCenter
-        anchors.right: parent.right
-        anchors.rightMargin: isMobile ?  20 * scaleRatio :  50
-        anchors.bottomMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+        Layout.rightMargin: isMobile ?  20 * scaleRatio :  50
+        Layout.bottomMargin: isMobile ?  20 * scaleRatio :  50
         visible: currentPage > 1 && currentPage < pages.length - 1
         width: 50 * scaleRatio; height: 50 * scaleRatio
         radius: 25
@@ -380,9 +378,8 @@ ColumnLayout {
 
     StandardButton {
         id: sendButton
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
+        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+        Layout.margins:  (isMobile) ? 20 * scaleRatio : 50 * scaleRatio
         text: qsTr("USE MONERO") + translationManager.emptyString
         visible: parent.paths[currentPath][currentPage] === finishPage
         onClicked: {
@@ -393,9 +390,8 @@ ColumnLayout {
 
     StandardButton {
        id: createViewOnlyWalletButton
-       anchors.right: parent.right
-       anchors.bottom: parent.bottom
-       anchors.margins: (isMobile) ? 20 * scaleRatio : 50
+       Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+       Layout.margins: (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Create wallet") + translationManager.emptyString
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        enabled: passwordPage.passwordsMatch
@@ -421,9 +417,8 @@ ColumnLayout {
 
    StandardButton {
        id: abortViewOnlyButton
-       anchors.right: createViewOnlyWalletButton.left
-       anchors.bottom: parent.bottom
-       anchors.margins:  (isMobile) ? 20 * scaleRatio : 50
+       Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+       Layout.margins:  (isMobile) ? 20 * scaleRatio : 50
        text: qsTr("Abort") + translationManager.emptyString
        visible: currentPath === "create_view_only_wallet" &&  parent.paths[currentPath][currentPage] === passwordPage
        onClicked: {

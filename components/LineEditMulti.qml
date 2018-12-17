@@ -149,7 +149,6 @@ ColumnLayout {
         id: input
         readOnly: false
         addressValidation: false
-        anchors.top: item.showingHeader ? inputLabelRect.bottom : item.top
         Layout.fillWidth: true
         topPadding: item.showingHeader ? 10 * scaleRatio : 0
         bottomPadding: 10 * scaleRatio
