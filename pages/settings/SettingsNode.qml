@@ -276,7 +276,7 @@ Rectangle{
             MoneroComponents.WarningBox {
                 Layout.topMargin: 26 * scaleRatio
                 Layout.bottomMargin: 6 * scaleRatio
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
+                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + "\<br><br>" + qsTr("WARNING: Using a remote node means you are trusting someone elses copy of the blockchain. To have a fully trustless interaction with the Monero network, you must synchronize your own node. It is highly recommended to run your own node.") + translationManager.emptyString
             }
 
             MoneroComponents.RemoteNodeEdit {
