@@ -212,6 +212,7 @@ ApplicationWindow {
             middlePanel.state = "Transfer";
             leftPanel.selectItem(middlePanel.state)
 
+            rootItem.state = "normal"
         }
 
 
@@ -1551,7 +1552,7 @@ ApplicationWindow {
                 appWindow.initialize();
             }
             onOpenWalletFromFileClicked: {
-                rootItem.state = "normal" // TODO: listen for this state change in appWindow;
+                rootItem.state = "wizard" // TODO: listen for this state change in appWindow;
                 appWindow.openWalletFromFile();
             }
         }
