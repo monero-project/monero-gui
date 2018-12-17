@@ -101,6 +101,8 @@ SOURCES = *.qml \
           wizard/*js
 }
 
+# Linker flags required by Trezor
+TREZOR_LINKER = $$cat($$WALLET_ROOT/lib/trezor_link_flags.txt)
 
 ios:armv7 {
     message("target is armv7")
@@ -258,7 +260,7 @@ win32 {
         -lIphlpapi \
         -lcrypt32 \
         -lhidapi \
-        -lgdi32
+        -lgdi32 $$TREZOR_LINKER
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
@@ -302,7 +304,7 @@ linux {
         -llmdb \
         -lsodium \
         -lhidapi-libusb \
-        -lcrypto
+        -lcrypto $$TREZOR_LINKER
 
     if(!android) {
         LIBS+= \
@@ -343,7 +345,7 @@ macx {
         -lssl \
         -lsodium \
         -lcrypto \
-        -ldl
+        -ldl $$TREZOR_LINKER
 
     QMAKE_LFLAGS += -pie
 }
