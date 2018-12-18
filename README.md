@@ -9,6 +9,7 @@ Copyright (c) 2014-2018, The Monero Project
 - Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
 - Github: [https://github.com/monero-project/monero-gui](https://github.com/monero-project/monero-gui)
 - IRC: [#monero-dev on Freenode](irc://chat.freenode.net/#monero-dev)
+- Translation platform (Pootle): [translate.getmonero.org](https://translate.getmonero.org)
 
 ## Vulnerability response
 
@@ -54,6 +55,13 @@ There are also several mining pools that kindly donate a portion of their fees, 
 ## License
 
 See [LICENSE](LICENSE).
+
+## Translations
+
+Do you speak a second language and would like to help translate the Monero GUI? Sign up at [translate.getmonero.org](https://translate.getmonero.org), our localization platform. Navigate to the 'monero-gui' project and find the language you can help with. Suggest changes or add new translated text.
+&nbsp;
+
+If you need help/support or any info you can contact the localization workgroup on the IRC channel #monero-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getmonero[dot]org. For more info about the Localization workgroup: [github.com/monero-ecosystem/monero-translations](https://github.com/monero-ecosystem/monero-translations)
 
 ## Installing the Monero GUI from a package
 
