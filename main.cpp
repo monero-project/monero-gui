@@ -36,6 +36,7 @@
 #include <QDesktopWidget>
 #include <QScreen>
 #include <QRegExp>
+#include <QThread>
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -284,6 +285,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
+    engine.rootContext()->setContextProperty("numberMiningThreadsAvailable", QThread::idealThreadCount());
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER

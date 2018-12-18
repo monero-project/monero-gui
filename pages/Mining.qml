@@ -29,172 +29,212 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.Wallet 1.0
 
 Rectangle {
     id: root
     color: "transparent"
-    property var currentHashRate: 0
+    property double currentHashRate: 0
 
-    /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        spacing: 20
+        anchors.margins: 40 * scaleRatio
+        spacing: 20 * scaleRatio
+        Layout.fillWidth: true
 
-        // solo
-        ColumnLayout {
-            id: soloBox
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            spacing: 20
+        MoneroComponents.Label {
+            id: soloTitleLabel
+            fontSize: 24 * scaleRatio
+            text: qsTr("Solo mining") + translationManager.emptyString
+        }
 
-            Label {
-                id: soloTitleLabel
-                fontSize: 24
-                text: qsTr("Solo mining") + translationManager.emptyString
+        MoneroComponents.Label {
+            id: soloLocalDaemonsLabel
+            fontSize: 18 * scaleRatio
+            color: "#D02020"
+            text: qsTr("(only available for local daemons)") + translationManager.emptyString
+            visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+        }
+
+        MoneroComponents.Label {
+            id: soloSyncedLabel
+            fontSize: 18 * scaleRatio
+            color: "#D02020"
+            text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
+            visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
+        }
+
+        Text {
+            id: soloMainLabel
+            text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+            color: MoneroComponents.Style.defaultFontColor
+        }
+
+        MoneroComponents.WarningBox {
+            id: warningLabel
+            Layout.topMargin: 8 * scaleRatio
+            Layout.bottomMargin: 8 * scaleRatio
+            text: qsTr("Mining may reduce the performance of other running applications and processes.") + translationManager.emptyString
+        }
+
+        RowLayout {
+            id: soloMinerThreadsRow
+
+            MoneroComponents.Label {
+                id: soloMinerThreadsLabel
+                color: MoneroComponents.Style.defaultFontColor
+                text: qsTr("CPU threads") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+                Layout.preferredWidth: 120 * scaleRatio
             }
 
-            Label {
-                id: soloLocalDaemonsLabel
-                fontSize: 18
-                color: "#D02020"
-                text: qsTr("(only available for local daemons)") + translationManager.emptyString
-                visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
-            }
-            
-            Label {
-                id: soloSyncedLabel
-                fontSize: 18
-                color: "#D02020"
-                text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
-                visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
-            }
-
-            Text {
-                id: soloMainLabel
-                text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
-            }
-
-            RowLayout {
-                id: soloMinerThreadsRow
-                Label {
-                    id: soloMinerThreadsLabel
-                    color: Style.defaultFontColor
-                    text: qsTr("CPU threads") + translationManager.emptyString
-                    fontSize: 16
-                    Layout.preferredWidth: 120
-                }
-                LineEdit {
-                    id: soloMinerThreadsLine
-                    Layout.preferredWidth:  200
-                    text: "1"
-                    placeholderText: qsTr("(optional)") + translationManager.emptyString
-                    validator: IntValidator { bottom: 1 }
-                }
-            }
-
-            RowLayout {
-                Layout.leftMargin: 125
-                CheckBox {
-                    id: backgroundMining
-                    enabled: startSoloMinerButton.enabled
-                    checked: persistentSettings.allow_background_mining
-                    onClicked: {persistentSettings.allow_background_mining = checked}
-                    text: qsTr("Background mining (experimental)") + translationManager.emptyString
-                }
-
-            }
-
-            RowLayout {
-                // Disable this option until stable
-                visible: false
-                Layout.leftMargin: 125
-                CheckBox {
-                    id: ignoreBattery
-                    enabled: startSoloMinerButton.enabled
-                    checked: !persistentSettings.miningIgnoreBattery
-                    onClicked: {persistentSettings.miningIgnoreBattery = !checked}
-                    text: qsTr("Enable mining when running on battery") + translationManager.emptyString
-                }
-            }
-
-            RowLayout {
-                Label {
-                    id: manageSoloMinerLabel
-                    color: Style.defaultFontColor
-                    text: qsTr("Manage miner") + translationManager.emptyString
-                    fontSize: 16
-                }
-
-                StandardButton {
-                    visible: true
-                    //enabled: !walletManager.isMining()
-                    id: startSoloMinerButton
-                    width: 110
-                    small: true
-                    text: qsTr("Start mining") + translationManager.emptyString
-                    onClicked: {
-                        var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
-                        if (success) {
-                            update()
-                        } else {
-                            errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-                            errorPopup.text = qsTr("Couldn't start mining.<br>")
-                            if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
-                                errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
-                            errorPopup.icon = StandardIcon.Critical
-                            errorPopup.open()
-                        }
-                    }
-                }
-
-                StandardButton {
-                    visible: true
-                    //enabled:  walletManager.isMining()
-                    id: stopSoloMinerButton
-                    width: 110
-                    small: true
-                    text: qsTr("Stop mining") + translationManager.emptyString
-                    onClicked: {
-                        walletManager.stopMining()
-                        update()
-                    }
-                }
+            MoneroComponents.LineEdit {
+                id: soloMinerThreadsLine
+                Layout.preferredWidth:  200 * scaleRatio
+                text: "1"
+                validator: IntValidator { bottom: 1; top: numberMiningThreadsAvailable }
             }
         }
 
         Text {
-            id: statusText
-            text: qsTr("Status: not mining")
-            color: Style.defaultFontColor
-            textFormat: Text.RichText
-            wrapMode: Text.Wrap
+            id: numAvailableThreadsText
+            text: qsTr("Max # of CPU threads available for mining: ") + numberMiningThreadsAvailable + translationManager.emptyString
+            wrapMode: Text.wrapMode
+            Layout.leftMargin: 125 * scaleRatio
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+            color: MoneroComponents.Style.defaultFontColor
+        }
+
+        RowLayout {
+            Layout.leftMargin: 125 * scaleRatio
+
+            MoneroComponents.StandardButton {
+                id: autoRecommendedThreadsButton
+                small: true
+                text: qsTr("Use recommended # of threads") + translationManager.emptyString
+                enabled: startSoloMinerButton.enabled
+                onClicked: {
+                        soloMinerThreadsLine.text = Math.floor(numberMiningThreadsAvailable / 2);
+                        appWindow.showStatusMessage(qsTr("Set to use recommended # of threads"),3)
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                id: autoSetMaxThreadsButton
+                small: true
+                text: qsTr("Use all threads") + translationManager.emptyString
+                enabled: startSoloMinerButton.enabled
+                onClicked: {
+                    soloMinerThreadsLine.text = numberMiningThreadsAvailable
+                    appWindow.showStatusMessage(qsTr("Set to use all threads"),3)
+                }
+            }
+        }
+
+        RowLayout {
+            Layout.leftMargin: 125 * scaleRatio
+            MoneroComponents.CheckBox {
+                id: backgroundMining
+                enabled: startSoloMinerButton.enabled
+                checked: persistentSettings.allow_background_mining
+                onClicked: {persistentSettings.allow_background_mining = checked}
+                text: qsTr("Background mining (experimental)") + translationManager.emptyString
+            }
+        }
+
+        RowLayout {
+            // Disable this option until stable
+            visible: false
+            Layout.leftMargin: 125 * scaleRatio
+            MoneroComponents.CheckBox {
+                id: ignoreBattery
+                enabled: startSoloMinerButton.enabled
+                checked: !persistentSettings.miningIgnoreBattery
+                onClicked: {persistentSettings.miningIgnoreBattery = !checked}
+                text: qsTr("Enable mining when running on battery") + translationManager.emptyString
+            }
+        }
+
+        RowLayout {
+            MoneroComponents.Label {
+                id: manageSoloMinerLabel
+                color: MoneroComponents.Style.defaultFontColor
+                text: qsTr("Manage miner") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+                Layout.preferredWidth: 120 * scaleRatio
+            }
+
+            MoneroComponents.StandardButton {
+                visible: true
+                id: startSoloMinerButton
+                width: 110 * scaleRatio
+                small: true
+                text: qsTr("Start mining") + translationManager.emptyString
+                onClicked: {
+                    var success = walletManager.startMining(appWindow.currentWallet.address(0, 0), soloMinerThreadsLine.text, persistentSettings.allow_background_mining, persistentSettings.miningIgnoreBattery)
+                    if (success) {
+                        update()
+                    } else {
+                        errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
+                        errorPopup.text = qsTr("Couldn't start mining.<br>")
+                        if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
+                            errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
+                        errorPopup.icon = StandardIcon.Critical
+                        errorPopup.open()
+                    }
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                visible: true
+                id: stopSoloMinerButton
+                width: 110 * scaleRatio
+                small: true
+                text: qsTr("Stop mining") + translationManager.emptyString
+                onClicked: {
+                    walletManager.stopMining()
+                    update()
+                }
+            }
+        }
+
+        RowLayout {
+            id: statusRow
+
+            MoneroComponents.Label {
+                id: statusLabel
+                color: MoneroComponents.Style.defaultFontColor
+                text: qsTr("Status") + translationManager.emptyString
+                fontSize: 16 * scaleRatio
+                Layout.preferredWidth: 120 * scaleRatio
+            }
+
+            MoneroComponents.LineEdit {
+                id: statusText
+                Layout.preferredWidth:  200 * scaleRatio
+                text: qsTr("Not mining") + translationManager.emptyString
+                borderDisabled: true
+                readOnly: true
+            }
         }
     }
 
     function updateStatusText() {
-        var text = ""
         if (walletManager.isMining()) {
-            if (text !== "")
-                text += "<br>";
-            text += qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate())
+            statusText.text = qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate()) + translationManager.emptyString;
         }
-        if (text === "") {
-            text += qsTr("Not mining") + translationManager.emptyString;
+        else {
+            statusText.text = qsTr("Not mining") + translationManager.emptyString;
         }
-        statusText.text = qsTr("Status: ") + text
     }
 
     function update() {
@@ -203,7 +243,7 @@ Rectangle {
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
     }
 
-    StandardDialog {
+    MoneroComponents.StandardDialog {
         id: errorPopup
         cancelVisible: false
     }
@@ -216,11 +256,10 @@ Rectangle {
 
     function onPageCompleted() {
         console.log("Mining page loaded");
-
         update()
         timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
-
     }
+
     function onPageClosed() {
         timer.running = false
     }
