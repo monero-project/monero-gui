@@ -82,6 +82,8 @@ Rectangle {
         paymentIdLine.text = ""
         amountLine.text = ""
         descriptionLine.text = ""
+        priorityDropdown.currentIndex = 0
+        updatePriorityDropdown()
     }
 
     // Information dialog
@@ -192,6 +194,7 @@ Rectangle {
                   shadowPressedColor: "#B32D00"
                   releasedColor: "#363636"
                   pressedColor: "#202020"
+                  currentIndex: 0
               }
           }
           // Make sure dropdown is on top
@@ -623,7 +626,6 @@ Rectangle {
 
     function updatePriorityDropdown() {
         priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 0
         priorityDropdown.update()
     }
 
