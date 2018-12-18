@@ -118,7 +118,7 @@ Rectangle {
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio }
+                PropertyChanges { target: mainFlickable; contentHeight: 700 * scaleRatio }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
