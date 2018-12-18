@@ -924,6 +924,7 @@ ApplicationWindow {
 
     // close wallet and show wizard
     function showWizard(){
+        clearMoneroCardLabelText();
         walletInitialized = false;
         closeWallet();
         currentWallet = undefined;
@@ -1814,6 +1815,12 @@ ApplicationWindow {
             middlePanel.focus = true
             middlePanel.focus = false
         }
+    }
+
+    // reset label text. othewise potential privacy leak showing unlock time when switching wallets
+    function clearMoneroCardLabelText(){
+        leftPanel.minutesToUnlockTxt = qsTr("Unlocked balance")
+        leftPanel.balanceLabelText = qsTr("Balance")
     }
 
     // Daemon console
