@@ -731,6 +731,10 @@ Rectangle {
         trackingEnabled.checked = false
     }
 
+    function clearFields() {
+        amountToReceiveLine.text = "";
+    }
+
     function onPageClosed() {
         timer.running = false
         trackingEnabled.checked = false

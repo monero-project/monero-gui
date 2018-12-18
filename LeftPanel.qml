@@ -171,6 +171,9 @@ Rectangle {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
+                            middlePanel.addressBookView.clearFields();
+                            middlePanel.transferView.clearFields();
+                            middlePanel.receiveView.clearFields();
                             appWindow.showWizard();
                         }
                     }

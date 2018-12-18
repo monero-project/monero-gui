@@ -109,9 +109,7 @@ Rectangle {
                         informationPopup.onCloseCallback = null
                         informationPopup.open();
                     } else {
-                        addressLine.text = "";
-                        paymentIdLine.text = "";
-                        descriptionLine.text = "";
+                        clearFields();
                     }
                 }
             }
@@ -183,4 +181,9 @@ Rectangle {
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
+    function clearFields() {
+        addressLine.text = "";
+        paymentIdLine.text = "";
+        descriptionLine.text = "";
+    }
 }
