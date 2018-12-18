@@ -61,6 +61,8 @@ Item {
         root.visible = true;
         passwordInput.forceActiveFocus();
         passwordInput.text = ""
+        appWindow.hideBalanceForced = true;
+        appWindow.updateBalance();
     }
 
     function showError(errorText) {
@@ -73,6 +75,8 @@ Item {
         middlePanel.enabled = true
         titleBar.enabled = true
         root.visible = false;
+        appWindow.hideBalanceForced = false;
+        appWindow.updateBalance();
         closeCallback();
     }
 
