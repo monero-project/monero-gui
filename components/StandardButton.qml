@@ -47,7 +47,8 @@ Item {
 
     height: small ?  30 * scaleRatio : 36 * scaleRatio
     width: buttonLayout.width + 22 * scaleRatio
-    Component.onCompleted: width = width
+    implicitHeight: height
+    implicitWidth: width
 
     function doClick() {
         // Android workaround
@@ -106,9 +107,21 @@ Item {
             horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
-            font.pixelSize: buttonArea.pressed ? button.fontSize - 1 : button.fontSize
-            color: button.textColor
+            font.pixelSize: button.fontSize
+            color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
+
+            Text {
+                anchors.fill: parent
+                color: button.textColor
+                font.bold: label.font.bold
+                font.family: label.font.family
+                font.pixelSize: label.font.pixelSize - 1
+                horizontalAlignment: label.horizontalAlignment
+                Layout.alignment: label.Layout.alignment
+                text: label.text
+                visible: buttonArea.pressed
+            }
         }
 
         Image {
