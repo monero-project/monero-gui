@@ -1275,11 +1275,13 @@ ApplicationWindow {
                 PropertyChanges { target: appWindow; width: (screenWidth < 930 || isAndroid || isIOS)? screenWidth : 930; }
                 PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; showMaximizeButton: false }
+                PropertyChanges { target: titleBar; showMaximizeButton: true }
 //                PropertyChanges { target: frameArea; blocked: true }
-                PropertyChanges { target: titleBar; visible: false }
+                PropertyChanges { target: titleBar; visible: true }
                 PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Program setup wizard") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; showMoneroLogo: false }
+                PropertyChanges { target: titleBar; titleBarGradientImageOpacity: 0.2 }
+                PropertyChanges { target: titleBar; small: true }
                 PropertyChanges { target: mobileHeader; visible: false }
             }, State {
                 name: "normal"

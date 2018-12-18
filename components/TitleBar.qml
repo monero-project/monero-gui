@@ -55,6 +55,7 @@ Rectangle {
     property bool showCloseButton: true
     property bool showMoneroLogo: false
     property bool small: false
+    property alias titleBarGradientImageOpacity: titleBarGradientImage.opacity
 
     signal closeClicked
     signal maximizeClicked
@@ -68,6 +69,7 @@ Rectangle {
         z: parent.z + 1
 
         Image {
+           id: titleBarGradientImage
            anchors.fill: parent
            height: titleBar.height
            width: titleBar.width
