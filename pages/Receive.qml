@@ -241,6 +241,7 @@ Rectangle {
 
                         Rectangle {
                             anchors.fill: parent
+                            anchors.topMargin: 5
                             anchors.rightMargin: 80
                             color: "transparent"
 
