@@ -35,6 +35,7 @@ import moneroComponents.Wallet 1.0
 import "../components"
 import "../components" as MoneroComponents
 import "." 1.0
+import "../js/TxUtils.js" as TxUtils
 
 
 Rectangle {
@@ -50,15 +51,6 @@ Rectangle {
     property bool showAdvanced: false
 
     Clipboard { id: clipboard }
-
-    function isValidOpenAliasAddress(address) {
-      address = address.trim()
-      var dot = address.indexOf('.')
-      if (dot < 0)
-        return false
-      // we can get an awful lot of valid domains, including non ASCII chars... accept anything
-      return true
-    }
 
     function oa_message(text) {
       oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
@@ -249,8 +241,8 @@ Rectangle {
           id: resolveButton
           width: 80
           text: qsTr("Resolve") + translationManager.emptyString
-          visible: isValidOpenAliasAddress(addressLine.text)
-          enabled : isValidOpenAliasAddress(addressLine.text)
+          visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
+          enabled : visible
           onClicked: {
               var result = walletManager.resolveOpenAlias(addressLine.text)
               if (result) {
