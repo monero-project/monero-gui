@@ -167,18 +167,26 @@
         <file>images/menu.png</file>
         <file>images/appicon.ico</file>
         <file>images/right.png</file>
+        <file>images/right@2x.png</file>
         <file>images/card-background.png</file>
+        <file>images/card-background@2x.png</file>
         <file>images/minimize.png</file>
+        <file>images/minimize@2x.png</file>
         <file>images/fullscreen.png</file>
+        <file>images/fullscreen@2x.png</file>
         <file>images/close.png</file>
+        <file>images/close@2x.png</file>
         <file>images/moneroLogo_white.png</file>
         <file>images/moneroIcon-trans28x28.png</file>
         <file>images/moneroIcon-trans84x84.png</file>
         <file>images/moneroIcon-trans56x56.png</file>
         <file>images/question.png</file>
+        <file>images/question@2x.png</file>
         <file>images/expand.png</file>
+        <file>images/expand@2x.png</file>
         <file>images/titlebarGradient.jpg</file>
         <file>images/titlebarLogo.png</file>
+        <file>images/titlebarLogo@2x.png</file>
         <file>images/menuArrow.png</file>
         <file>images/menuButtonGradient.png</file>
         <file>fonts/Roboto-Medium.ttf</file>
@@ -189,8 +197,10 @@
         <file>components/qmldir</file>
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
+        <file>images/lightning@2x.png</file>
         <file>images/leftPanelBg.jpg</file>
         <file>images/logout.png</file>
+        <file>images/logout@2x.png</file>
         <file>images/moneroIcon-28x28.png</file>
         <file>images/lightning-white.png</file>
         <file>images/middlePanelBg.jpg</file>
@@ -200,6 +210,7 @@
         <file>components/LabelButton.qml</file>
         <file>components/LabelSubheader.qml</file>
         <file>images/arrow-right-medium-white.png</file>
+        <file>images/arrow-right-medium-white@2x.png</file>
         <file>images/rightArrow.png</file>
         <file>images/upArrow-green.png</file>
         <file>images/downArrow.png</file>
@@ -222,9 +233,11 @@
         <file>pages/settings/SettingsInfo.qml</file>
         <file>pages/settings/Navbar.qml</file>
         <file>images/settings_remote.png</file>
+        <file>images/settings_remote@2x.png</file>
         <file>images/settings_navbar_side.png</file>
         <file>images/settings_navbar_side_active.png</file>
         <file>images/settings_local.png</file>
+        <file>images/settings_local@2x.png</file>
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
