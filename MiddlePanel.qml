@@ -187,7 +187,9 @@ Rectangle {
                 anchors.left: parent.right
                 anchors.leftMargin: 3
                 anchors.top: parent.top
+                anchors.topMargin: 4
                 anchors.bottom: parent.bottom
+                anchors.bottomMargin: persistentSettings.customDecorations ? 4 : 0 
             }
 
             onFlickingChanged: {
