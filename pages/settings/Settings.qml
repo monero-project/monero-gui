@@ -46,6 +46,7 @@ ColumnLayout {
     Clipboard { id: clipboard }
     property bool viewOnly: false
     property int settingsHeight: 900
+    property alias settingsStateViewState: settingsStateView.state
 
     Navbar{}
 

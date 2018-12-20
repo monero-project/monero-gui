@@ -241,6 +241,7 @@ Rectangle {
         updateStatusText()
         startSoloMinerButton.enabled = !walletManager.isMining()
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
+        appWindow.isMining = walletManager.isMining()
     }
 
     MoneroComponents.StandardDialog {

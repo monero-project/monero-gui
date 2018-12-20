@@ -653,7 +653,7 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 0
+            anchors.leftMargin: 5 * scaleRatio
             anchors.rightMargin: 0
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
