@@ -108,6 +108,9 @@ Rectangle {
                 small: true
                 text: qsTr("Close wallet") + translationManager.emptyString
                 onClicked: {
+                    middlePanel.addressBookView.clearFields();
+                    middlePanel.transferView.clearFields();
+                    middlePanel.receiveView.clearFields();
                     appWindow.showWizard();
                 }
                 width: 135 * scaleRatio
