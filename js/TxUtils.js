@@ -56,3 +56,11 @@ function checkSignature(signature) {
     return false;
 }
 
+function isValidOpenAliasAddress(address) {
+    address = address.trim()
+    var dot = address.indexOf('.')
+    if (dot < 0)
+        return false
+    // we can get an awful lot of valid domains, including non ASCII chars... accept anything
+    return true
+}
