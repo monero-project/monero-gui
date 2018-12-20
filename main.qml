@@ -1572,6 +1572,7 @@ ApplicationWindow {
         property int minHeight: 400
         MouseArea {
             id: resizeArea
+            enabled: persistentSettings.customDecorations
             hoverEnabled: true
             anchors.right: parent.right
             anchors.bottom: parent.bottom
@@ -1585,6 +1586,7 @@ ApplicationWindow {
 
             Image {
                 anchors.centerIn: parent
+                visible: persistentSettings.customDecorations
                 source: parent.containsMouse || parent.pressed ? "images/resizeHovered.png" :
                                                                  "images/resize.png"
             }
