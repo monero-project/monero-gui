@@ -276,7 +276,8 @@ Rectangle {
                 viewOnlyQRCode.visible = true
                 showFullQr.visible = false
                 showViewOnlyQr.visible = false
-                seedText.text = qsTr("(View Only Wallet -  No mnemonic seed available)") + translationManager.emptyString
+                seedText.text = qsTr("(View Only Wallet - No mnemonic seed available)") + translationManager.emptyString
+                secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString
             }
         }
     }
