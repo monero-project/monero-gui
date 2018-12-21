@@ -71,17 +71,27 @@ Rectangle {
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
         console.log("updateFromQrCode")
         addressLine.text = address
-        paymentIdLine.text = payment_id
+        setPaymentId(payment_id);
         amountLine.text = amount
-        descriptionLine.text = recipient_name + " " + tx_description
+        setDescription(recipient_name + " " + tx_description);
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+    }
+
+    function setDescription(value) {
+        descriptionLine.text = value;
+        descriptionCheckbox.checked = descriptionLine.text != "";
+    }
+
+    function setPaymentId(value) {
+        paymentIdLine.text = value;
+        paymentIdCheckbox.checked = paymentIdLine.text != "";
     }
 
     function clearFields() {
         addressLine.text = ""
-        paymentIdLine.text = ""
+        setPaymentId("");
         amountLine.text = ""
-        descriptionLine.text = ""
+        setDescription("");
         priorityDropdown.currentIndex = 0
         updatePriorityDropdown()
     }
@@ -223,9 +233,9 @@ Rectangle {
                   const parsed = walletManager.parse_uri_to_object(clipboardText);
                   if (!parsed.error) {
                     addressLine.text = parsed.address;
-                    paymentIdLine.text = parsed.payment_id;
+                    setPaymentId(parsed.payment_id);
                     amountLine.text = parsed.amount;
-                    descriptionLine.text = parsed.tx_description;
+                    setDescription(parsed.tx_description);
                   } else {
                      addressLine.text = clipboardText; 
                   }
@@ -290,25 +300,57 @@ Rectangle {
           }
       }
 
-      RowLayout {
+      ColumnLayout {
+          CheckBox {
+              id: paymentIdCheckbox
+              border: false
+              checkedIcon: "qrc:///images/minus-white.png"
+              uncheckedIcon: "qrc:///images/plus-white.png"
+              fontSize: paymentIdLine.labelFontSize
+              iconOnTheLeft: false
+              Layout.fillWidth: true
+              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+              onClicked: {
+                  if (!paymentIdCheckbox.checked) {
+                    paymentIdLine.text = "";
+                  }
+              }
+          }
+
           // payment id input
           LineEditMulti {
               id: paymentIdLine
               fontBold: true
-              labelText: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
               Layout.fillWidth: true
               wrapMode: Text.WrapAnywhere
               addressValidation: false
+              visible: paymentIdCheckbox.checked
           }
       }
 
-      RowLayout {
+      ColumnLayout {
+        CheckBox {
+              id: descriptionCheckbox
+              border: false
+              checkedIcon: "qrc:///images/minus-white.png"
+              uncheckedIcon: "qrc:///images/plus-white.png"
+              fontSize: descriptionLine.labelFontSize
+              iconOnTheLeft: false
+              Layout.fillWidth: true
+              text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
+              onClicked: {
+                  if (!descriptionCheckbox.checked) {
+                    descriptionLine.text = "";
+                  }
+              }
+          }
+
           LineEditMulti {
               id: descriptionLine
-              labelText: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
               placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
               Layout.fillWidth: true
+              visible: descriptionCheckbox.checked
           }
       }
 
@@ -355,7 +397,7 @@ Rectangle {
                   console.log("priority: " + priority)
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
-                  paymentIdLine.text = paymentIdLine.text.trim()
+                  setPaymentId(paymentIdLine.text.trim());
                   root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
@@ -436,7 +478,7 @@ Rectangle {
                     console.log("priority: " + priority)
                     console.log("amount: " + amountLine.text)
                     addressLine.text = addressLine.text.trim()
-                    paymentIdLine.text = paymentIdLine.text.trim()
+                    setPaymentId(paymentIdLine.text.trim());
                     root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
 
                 }
@@ -667,7 +709,7 @@ Rectangle {
     // Popuplate fields from addressbook.
     function sendTo(address, paymentId, description){
         addressLine.text = address
-        paymentIdLine.text = paymentId
-        descriptionLine.text = description
+        setPaymentId(paymentId);
+        setDescription(description);
     }
 }
