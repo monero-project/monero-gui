@@ -38,8 +38,10 @@ Item {
     property string uncheckedIcon
     property bool checked: false
     property alias background: backgroundRect.color
+    property bool border: true
     property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
+    property bool iconOnTheLeft: true
     signal clicked()
     height: 25 * scaleRatio
     width: checkBoxLayout.width
@@ -51,6 +53,8 @@ Item {
 
     RowLayout {
         id: checkBoxLayout
+        layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
+        spacing: (!isMobile ? 10 : 8) * scaleRatio
 
         Item {
             id: checkMark
@@ -68,12 +72,18 @@ Item {
                     } else {
                         return MoneroComponents.Style.inputBorderColorInActive;
                     }
+                visible: checkBox.border
             }
 
             Image {
                 anchors.centerIn: parent
-                source: checkBox.checkedIcon
-                visible: checkBox.checked
+                source: {
+                    if (checkBox.checked || checkBox.uncheckedIcon == "") {
+                        return checkBox.checkedIcon;
+                    }
+                    return checkBox.uncheckedIcon;
+                }
+                visible: checkBox.checked || checkBox.uncheckedIcon != ""
             }
         }
 
@@ -82,8 +92,8 @@ Item {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: checkBox.fontSize
             color: MoneroComponents.Style.defaultFontColor
+            textFormat: Text.RichText
             wrapMode: Text.Wrap
-            Layout.leftMargin: !isMobile ? 10 : 8
         }
     }
 
