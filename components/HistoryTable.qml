@@ -374,14 +374,15 @@ ListView {
 
             // right column
             MoneroComponents.HistoryTableInnerColumn {
-                visible: currentWallet.getUserNote(hash)
                 anchors.right: parent.right
                 anchors.rightMargin: 80 * scaleRatio
                 width: 220 * scaleRatio
                 height: parent.height
                 color: "transparent"
+                hashValue: hash
+                labelHeader: qsTr("Description") + translationManager.emptyString
+                labelHeaderIconImageSource: "../images/editIcon.png"
 
-                labelHeader: qsTr("Description")
                 labelValue: {
                     var note = currentWallet.getUserNote(hash);
                     if(note){
@@ -391,9 +392,10 @@ ListView {
                             return note;
                         }
                     } else {
-                        return "";
+                        return qsTr("None") + translationManager.emptyString;
                     }
                 }
+
                 copyValue: {
                     return currentWallet.getUserNote(hash);
                 }
