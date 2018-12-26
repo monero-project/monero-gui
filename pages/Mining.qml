@@ -107,7 +107,7 @@ Rectangle {
         Text {
             id: numAvailableThreadsText
             text: qsTr("Max # of CPU threads available for mining: ") + numberMiningThreadsAvailable + translationManager.emptyString
-            wrapMode: Text.wrapMode
+            wrapMode: Text.WordWrap
             Layout.leftMargin: 125 * scaleRatio
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
