@@ -238,6 +238,9 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
     data = sourceModel()->data(index, TransactionHistoryModel::TransactionTimeRole);
     if (data.toString().contains(m_searchString))
         return true;
+    data = sourceModel()->data(index, TransactionHistoryModel::TransactionDestinationsRole);
+    if (data.toString().contains(m_searchString))
+        return true;
 
     return false;
 }
