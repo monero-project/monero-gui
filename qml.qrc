@@ -8,7 +8,11 @@
         <file>images/helpIcon.png</file>
         <file>images/maximizeIcon.png</file>
         <file>images/minimizeIcon.png</file>
+        <file>images/minus-white.png</file>
+        <file>images/minus-white@2x.png</file>
         <file>images/moneroLogo.png</file>
+        <file>images/plus-white.png</file>
+        <file>images/plus-white@2x.png</file>
         <file>components/Label.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/lockIcon.png</file>
