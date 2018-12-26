@@ -41,7 +41,7 @@ Item {
     onFillLevelChanged: {
         if (!interactive) {
             //print("fillLevel: " + fillLevel)
-            fillRect.width = row.positions[fillLevel].currentX + row.x
+            fillRect.width = ruler.positions[fillLevel].currentX + ruler.x
         }
     }
 
@@ -71,7 +71,7 @@ Item {
             anchors.left: parent.left
             anchors.margins: 4
             //radius: 2
-            width: row.x
+            width: ruler.x
 
             color: "#FF6C3C"
 
@@ -94,7 +94,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 15
             color: "#000000"
-            x: row.x + (row.positions[0] !== undefined ? row.positions[0].currentX - 3 : 0) - width
+            x: ruler.x + (ruler.positions[0] !== undefined ? ruler.positions[0].currentX - 3 : 0) - width
             text: qsTr("Low") + translationManager.emptyString
         }
 
@@ -103,7 +103,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 15
             color: "#000000"
-            x: row.x + (row.positions[4] !== undefined ? row.positions[4].currentX - 3 : 0) - width
+            x: ruler.x + (ruler.positions[4] !== undefined ? ruler.positions[4].currentX - 3 : 0) - width
             text: qsTr("Medium") + translationManager.emptyString
         }
 
@@ -112,7 +112,7 @@ Item {
             font.family: "Arial"
             font.pixelSize: 15
             color: "#000000"
-            x: row.x + (row.positions[13] !== undefined ? row.positions[13].currentX - 3 : 0) - width
+            x: ruler.x + (ruler.positions[13] !== undefined ? ruler.positions[13].currentX - 3 : 0) - width
             text: qsTr("High") + translationManager.emptyString
         }
 
@@ -123,7 +123,7 @@ Item {
                 var xDiff = 999999
                 var index = -1
                 for(var i = 0; i < 14; ++i) {
-                    var tmp = Math.abs(row.positions[i].currentX + row.x - mouseX)
+                    var tmp = Math.abs(ruler.positions[i].currentX + ruler.x - mouseX)
                     if(tmp < xDiff) {
                         xDiff = tmp
                         index = i
@@ -131,7 +131,7 @@ Item {
                 }
 
                 if(index !== -1) {
-                    fillRect.width = Qt.binding(function(){ return row.positions[index].currentX + row.x })
+                    fillRect.width = Qt.binding(function(){ return ruler.positions[index].currentX + ruler.x })
                     item.fillLevel = index
                     print ("fillLevel: " + item.fillLevel)
                 }
@@ -143,7 +143,7 @@ Item {
     }
 
     Row {
-        id: row
+        id: ruler
         anchors.right: bar.right
         anchors.rightMargin: 8
         anchors.top: bar.bottom
@@ -164,7 +164,7 @@ Item {
                     width: 1
                     color: "#DBDBDB"
                     Component.onCompleted: {
-                        row.positions[index] = delegateItem2
+                        ruler.positions[index] = delegateItem2
                     }
                 }
             }
@@ -184,7 +184,7 @@ Item {
                     width: 1
                     color: "#DBDBDB"
                     Component.onCompleted: {
-                        row.positions[index + 4] = delegateItem1
+                        ruler.positions[index + 4] = delegateItem1
                     }
                 }
             }
