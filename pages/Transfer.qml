@@ -293,6 +293,8 @@ Rectangle {
       }
 
       ColumnLayout {
+          visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked 
+
           CheckBox {
               id: paymentIdCheckbox
               border: false
