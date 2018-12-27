@@ -313,7 +313,7 @@ Rectangle {
           LineEditMulti {
               id: paymentIdLine
               fontBold: true
-              placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+              placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
               Layout.fillWidth: true
               wrapMode: Text.WrapAnywhere
               addressValidation: false
@@ -401,7 +401,7 @@ Rectangle {
 
         var amount_ok = amount.length > 0
         var address_ok = walletManager.addressValid(address, nettype)
-        var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+        var payment_id_ok = payment_id.length == 0 || (payment_id.length == 64 && walletManager.paymentIdValid(payment_id))
         var ipid = walletManager.paymentIdFromAddress(address, nettype)
         if (ipid.length > 0 && payment_id.length > 0)
            payment_id_ok = false
