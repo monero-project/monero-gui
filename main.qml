@@ -394,6 +394,9 @@ ApplicationWindow {
         if (!walletInitialized) {
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             walletInitialized = true
+
+            // check if daemon was already mining and add mining logo if true
+            middlePanel.miningView.update();
         }
      }
 
