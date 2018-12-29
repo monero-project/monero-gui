@@ -124,7 +124,7 @@ Rectangle {
                     text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.fillWidth: true
-                    font.family: Style.fontRegular.name
+                    font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     textFormat: Text.RichText
                     color: MoneroComponents.Style.defaultFontColor
@@ -143,7 +143,7 @@ Rectangle {
                 Layout.preferredWidth: (instructionsRect.width - 80) * scaleRatio
                 text: qsTr("Mode") + translationManager.emptyString
                 wrapMode: Text.Wrap
-                font.family: Style.fontRegular.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 20 * scaleRatio
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.defaultFontColor
