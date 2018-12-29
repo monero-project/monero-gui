@@ -293,56 +293,66 @@ Rectangle {
       }
 
       ColumnLayout {
-          CheckBox {
-              id: paymentIdCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
-              fontSize: paymentIdLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
-              onClicked: {
-                  if (!paymentIdCheckbox.checked) {
-                    paymentIdLine.text = "";
-                  }
+          spacing: {
+              if(paymentIdCheckbox.checked || descriptionCheckbox.checked){
+                  return parent.spacing;
+              } else {
+                  return 6 * scaleRatio;
               }
           }
 
-          // payment id input
-          LineEditMulti {
-              id: paymentIdLine
-              fontBold: true
-              placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
-              Layout.fillWidth: true
-              wrapMode: Text.WrapAnywhere
-              addressValidation: false
-              visible: paymentIdCheckbox.checked
-          }
-      }
-
-      ColumnLayout {
-        CheckBox {
-              id: descriptionCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
-              fontSize: descriptionLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
-              onClicked: {
-                  if (!descriptionCheckbox.checked) {
-                    descriptionLine.text = "";
+          ColumnLayout {
+              CheckBox {
+                  id: paymentIdCheckbox
+                  border: false
+                  checkedIcon: "qrc:///images/minus-white.png"
+                  uncheckedIcon: "qrc:///images/plus-white.png"
+                  fontSize: paymentIdLine.labelFontSize
+                  iconOnTheLeft: false
+                  Layout.fillWidth: true
+                  text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+                  onClicked: {
+                      if (!paymentIdCheckbox.checked) {
+                        paymentIdLine.text = "";
+                      }
                   }
+              }
+
+              // payment id input
+              LineEditMulti {
+                  id: paymentIdLine
+                  fontBold: true
+                  placeholderText: qsTr("16 or 64 hexadecimal characters") + translationManager.emptyString
+                  Layout.fillWidth: true
+                  wrapMode: Text.WrapAnywhere
+                  addressValidation: false
+                  visible: paymentIdCheckbox.checked
               }
           }
 
-          LineEditMulti {
-              id: descriptionLine
-              placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
-              Layout.fillWidth: true
-              visible: descriptionCheckbox.checked
+          ColumnLayout {
+            CheckBox {
+                  id: descriptionCheckbox
+                  border: false
+                  checkedIcon: "qrc:///images/minus-white.png"
+                  uncheckedIcon: "qrc:///images/plus-white.png"
+                  fontSize: descriptionLine.labelFontSize
+                  iconOnTheLeft: false
+                  Layout.fillWidth: true
+                  text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
+                  onClicked: {
+                      if (!descriptionCheckbox.checked) {
+                        descriptionLine.text = "";
+                      }
+                  }
+              }
+
+              LineEditMulti {
+                  id: descriptionLine
+                  placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+                  Layout.fillWidth: true
+                  visible: descriptionCheckbox.checked
+              }
           }
       }
 
