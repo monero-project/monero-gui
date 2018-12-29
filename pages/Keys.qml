@@ -33,19 +33,18 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
 import "../version.js" as Version
-import "../components"
+import "../components" as MoneroComponents
 import "." 1.0
 
 
 Rectangle {
-    property bool viewOnly: false
     id: page
+    property bool viewOnly: false
     property int keysHeight: mainLayout.height + 100 * scaleRatio // Ensure sufficient height for QR code, even in minimum width window case.
 
     color: "transparent"
 
     Clipboard { id: clipboard }
-
     ColumnLayout {
         id: mainLayout
 
@@ -59,57 +58,15 @@ Rectangle {
         spacing: 30 * scaleRatio
         Layout.fillWidth: true
 
-        RowLayout{
-            // TODO: Move the warning box to its own component, so it can be used in multiple places
-            visible: warningText.text !== ""
-  
-            Rectangle {
-                id: statusRect
-                Layout.preferredHeight: warningText.height + 26
-                Layout.fillWidth: true
-  
-                radius: 2
-                border.color: Qt.rgba(255, 255, 255, 0.25)
-                border.width: 1
-                color: "transparent"
-  
-                GridLayout{
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: warningText.height + 40
-  
-                    Image {
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredHeight: 33
-                        Layout.preferredWidth: 33
-                        Layout.leftMargin: 10
-                        Layout.topMargin: 10
-                        source: "../images/warning.png"
-                    }
-  
-                    Text {
-                        id: warningText
-                        Layout.topMargin: 12 * scaleRatio
-                        Layout.preferredWidth: statusRect.width - 80
-                        Layout.leftMargin: 6
-                        text: qsTr("WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString
-                        wrapMode: Text.Wrap
-                        font.family: Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
-                        color: Style.defaultFontColor
-                        textFormat: Text.RichText
-                        onLinkActivated: {
-                            appWindow.startDaemon(appWindow.persistentSettings.daemonFlags);
-                        }
-                    }
-                }
-            }
+        MoneroComponents.WarningBox {
+            text: qsTr("WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.") + translationManager.emptyString;
         }
-        
+
         //! Manage wallet
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
@@ -119,50 +76,16 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2 * scaleRatio
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
 
-            Rectangle {
-                id: warningTextRec
-                Layout.preferredHeight: warningTextSeed.height + 26 * scaleRatio
-                Layout.fillWidth: true
-
-                radius: 2 * scaleRatio
-                border.color: Qt.rgba(255, 255, 255, 0.25)
-                border.width: 1 * scaleRatio
-                color: "transparent"
-
-                GridLayout{
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: warningTextSeed.height + 40 * scaleRatio
-
-                    Image {
-                        Layout.alignment: Qt.AlignVCenter
-                        Layout.preferredHeight: 33 * scaleRatio
-                        Layout.preferredWidth: 33 * scaleRatio
-                        Layout.leftMargin: 10 * scaleRatio
-                        Layout.topMargin: 10 * scaleRatio
-                        source: "../images/warning.png"
-                    }
-
-                    Text {
-                        id: warningTextSeed
-                        Layout.topMargin: 12 * scaleRatio
-                        Layout.preferredWidth: statusRect.width - 80 * scaleRatio
-                        Layout.leftMargin: 6 * scaleRatio
-                        text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
-                        wrapMode: Text.Wrap
-                        font.family: Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
-                        color: Style.defaultFontColor
-                        textFormat: Text.RichText
-                    }
-                }
+            MoneroComponents.WarningBox {
+                text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
             }
 
-            LineEditMulti{
+            MoneroComponents.LineEditMulti {
                 id: seedText
                 spacing: 0
                 copyButton: true
@@ -176,7 +99,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
@@ -185,11 +108,11 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
-            LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 id: secretViewKey
                 readOnly: true
@@ -197,7 +120,7 @@ Rectangle {
                 labelText: qsTr("Secret view key") + translationManager.emptyString
                 fontSize: 16 * scaleRatio
             }
-            LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25 * scaleRatio
                 id: publicViewKey
@@ -206,7 +129,7 @@ Rectangle {
                 labelText: qsTr("Public view key") + translationManager.emptyString
                 fontSize: 16 * scaleRatio
             }
-            LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25 * scaleRatio
                 id: secretSpendKey
@@ -215,7 +138,7 @@ Rectangle {
                 labelText: qsTr("Secret spend key") + translationManager.emptyString
                 fontSize: 16 * scaleRatio
             }
-            LineEdit {
+            MoneroComponents.LineEdit {
                 Layout.fillWidth: true
                 Layout.topMargin: 25 * scaleRatio
                 id: publicSpendKey
@@ -229,7 +152,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
 
-            Label {
+            MoneroComponents.Label {
                 Layout.fillWidth: true
                 fontSize: 22 * scaleRatio
                 Layout.topMargin: 10 * scaleRatio
@@ -238,13 +161,13 @@ Rectangle {
             Rectangle {
                 Layout.fillWidth: true
                 height: 2
-                color: Style.dividerColor
-                opacity: Style.dividerOpacity
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
             }
 
             ColumnLayout {
-                RadioButton {
+                MoneroComponents.RadioButton {
                     id: showFullQr
                     enabled: !this.checked
                     checked: fullWalletQRCode.visible
@@ -254,7 +177,7 @@ Rectangle {
                         showViewOnlyQr.checked = false
                     }
                 }
-                RadioButton {
+                MoneroComponents.RadioButton {
                     enabled: !this.checked
                     id: showViewOnlyQr
                     checked: viewOnlyQRCode.visible
@@ -289,7 +212,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.bold: true
                 font.pixelSize: 16 * scaleRatio
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }

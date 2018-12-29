@@ -17,9 +17,9 @@ Rectangle {
     radius: 4
     border.color: MoneroComponents.Style.inputBorderColorInActive
     border.width: 1
-    
+
     signal linkActivated;
-    
+
     RowLayout {
         id: warningLayout
         spacing: 0
@@ -44,13 +44,14 @@ Rectangle {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: root.fontSize
             horizontalAlignment: TextInput.AlignLeft
-            selectByMouse: false
+            selectionColor: MoneroComponents.Style.dimmedFontColor
+            selectByMouse: true
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             textMargin: 0
             leftPadding: 0
             topPadding: 6
-            readOnly: true
+            readOnly: false
             onLinkActivated: root.linkActivated();
 
             // @TODO: Legacy. Remove after Qt 5.8.
