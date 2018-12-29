@@ -115,12 +115,51 @@ Rectangle {
                 Layout.topMargin: 10 * scaleRatio
                 text: qsTr("Mnemonic seed") + translationManager.emptyString
             }
+
             Rectangle {
                 Layout.fillWidth: true
-                height: 2
+                height: 2 * scaleRatio
                 color: Style.dividerColor
                 opacity: Style.dividerOpacity
                 Layout.bottomMargin: 10 * scaleRatio
+            }
+
+            Rectangle {
+                id: warningTextRec
+                Layout.preferredHeight: warningTextSeed.height + 26 * scaleRatio
+                Layout.fillWidth: true
+
+                radius: 2 * scaleRatio
+                border.color: Qt.rgba(255, 255, 255, 0.25)
+                border.width: 1 * scaleRatio
+                color: "transparent"
+
+                GridLayout{
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: warningTextSeed.height + 40 * scaleRatio
+
+                    Image {
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.preferredHeight: 33 * scaleRatio
+                        Layout.preferredWidth: 33 * scaleRatio
+                        Layout.leftMargin: 10 * scaleRatio
+                        Layout.topMargin: 10 * scaleRatio
+                        source: "../images/warning.png"
+                    }
+
+                    Text {
+                        id: warningTextSeed
+                        Layout.topMargin: 12 * scaleRatio
+                        Layout.preferredWidth: statusRect.width - 80 * scaleRatio
+                        Layout.leftMargin: 6 * scaleRatio
+                        text: qsTr("WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.") + translationManager.emptyString
+                        wrapMode: Text.Wrap
+                        font.family: Style.fontRegular.name
+                        font.pixelSize: 15 * scaleRatio
+                        color: Style.defaultFontColor
+                        textFormat: Text.RichText
+                    }
+                }
             }
 
             LineEditMulti{
