@@ -96,6 +96,7 @@ ColumnLayout {
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             m_wallet = wallet;
+            settingsObject['restore_height'] = m_wallet.walletCreationHeight;
             settingsObject['is_recovering_from_device'] = true;
             settingsObject['tmp_wallet_filename'] = tmp_wallet_filename
         } else {
