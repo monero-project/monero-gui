@@ -15,6 +15,7 @@
         <file>images/plus-white@2x.png</file>
         <file>components/Label.qml</file>
         <file>images/whatIsIcon.png</file>
+        <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
         <file>images/menuIndicator.png</file>
@@ -44,6 +45,7 @@
         <file>components/DashboardTable.qml</file>
         <file>components/TableDropdown.qml</file>
         <file>images/tableOptions.png</file>
+        <file>images/tableOptions@2x.png</file>
         <file>images/dropdownAdd.png</file>
         <file>images/dropdownSearch.png</file>
         <file>images/dropdownSend.png</file>
@@ -58,11 +60,13 @@
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
+        <file>images/whiteDropIndicator@2x.png</file>
         <file>components/PrivacyLevel.qml</file>
         <file>images/privacyTick.png</file>
         <file>components/CheckBox.qml</file>
         <file>images/checkedOrangeIcon.png</file>
         <file>images/uncheckedIcon.png</file>
+        <file>images/uncheckedIcon@2x.png</file>
         <file>components/DatePicker.qml</file>
         <file>images/datePicker.png</file>
         <file>images/prevMonth.png</file>
@@ -72,6 +76,7 @@
         <file>images/collapseRightPanel.png</file>
         <file>images/expandRightPanel.png</file>
         <file>images/dropdownCopy.png</file>
+        <file>images/dropdownCopy@2x.png</file>
         <file>images/expandTable.png</file>
         <file>images/dropdownDel.png</file>
         <file>components/HistoryTable.qml</file>
@@ -82,7 +87,9 @@
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/checkedVioletIcon.png</file>
         <file>images/resize.png</file>
+        <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>
+        <file>images/resizeHovered@2x.png</file>
         <file>wizard/WizardWelcome.qml</file>
         <file>wizard/WizardMain.qml</file>
         <file>images/nextPage.png</file>
@@ -209,7 +216,9 @@
         <file>images/logout.png</file>
         <file>images/logout@2x.png</file>
         <file>images/moneroIcon-28x28.png</file>
+        <file>images/moneroIcon-28x28@2x.png</file>
         <file>images/lightning-white.png</file>
+        <file>images/lightning-white@2x.png</file>
         <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>
         <file>images/checkedIcon-black.png</file>
@@ -219,19 +228,25 @@
         <file>images/arrow-right-medium-white.png</file>
         <file>images/arrow-right-medium-white@2x.png</file>
         <file>images/rightArrow.png</file>
+        <file>images/rightArrow@2x.png</file>
         <file>images/upArrow-green.png</file>
+        <file>images/upArrow-green@2x.png</file>
         <file>images/downArrow.png</file>
+        <file>images/downArrow@2x.png</file>
         <file>images/historyBorderRadius.png</file>
         <file>components/HistoryTableInnerColumn.qml</file>
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
+        <file>images/warning@2x.png</file>
         <file>images/checkedBlackIcon.png</file>
         <file>images/rightArrowInactive.png</file>
+        <file>images/rightArrowInactive@2x.png</file>
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
         <file>images/editIcon.png</file>
+        <file>images/editIcon@2x.png</file>
         <file>pages/settings/Settings.qml</file>
         <file>pages/settings/SettingsWallet.qml</file>
         <file>pages/settings/SettingsNode.qml</file>
@@ -249,7 +264,9 @@
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
         <file>images/eyeHide.png</file>
+        <file>images/eyeHide@2x.png</file>
         <file>images/eyeShow.png</file>
+        <file>images/eyeShow@2x.png</file>
         <file>pages/merchant/Merchant.qml</file>
         <file>pages/merchant/MerchantCheckbox.qml</file>
         <file>pages/merchant/MerchantTrackingList.qml</file>
