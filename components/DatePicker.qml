@@ -384,7 +384,9 @@ Item {
 
                         Image {
                             anchors.centerIn: parent
-                            source: "../images/nextMonth.png"
+                            source: "../images/prevMonth.png"
+                            transformOrigin: Item.Center
+                            rotation: 180
                         }
 
                         MouseArea {
