@@ -86,7 +86,7 @@
         <file>wizard/WizardWelcome.qml</file>
         <file>wizard/WizardMain.qml</file>
         <file>images/nextPage.png</file>
-        <file>images/prevPage.png</file>
+        <file>images/nextPage@2x.png</file>
         <file>wizard/WizardOptions.qml</file>
         <file>images/createWallet.png</file>
         <file>images/createWalletFromDevice.png</file>
