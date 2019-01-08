@@ -324,6 +324,83 @@ Rectangle {
                 width: 135 * scaleRatio
             }
         }
+        Rectangle {
+            // divider
+            Layout.preferredHeight: 1 * scaleRatio
+            Layout.fillWidth: true
+            Layout.topMargin: 8 * scaleRatio
+            Layout.bottomMargin: 8 * scaleRatio
+            color: MoneroComponents.Style.dividerColor
+            opacity: MoneroComponents.Style.dividerOpacity
+        }
+
+        GridLayout {
+            Layout.fillWidth: true
+            Layout.preferredHeight: settingsWallet.itemHeight
+            columnSpacing: 0
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+                spacing: 0
+
+                Text {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 20 * scaleRatio
+                    Layout.topMargin: 8 * scaleRatio
+                    color: "white"
+                    font.bold: true
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 16 * scaleRatio
+                    text: qsTr("Change wallet password") + translationManager.emptyString
+                }
+
+                TextArea {
+                    Layout.fillWidth: true
+                    color: MoneroComponents.Style.dimmedFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 14 * scaleRatio
+                    horizontalAlignment: TextInput.AlignLeft
+                    selectByMouse: false
+                    wrapMode: Text.WordWrap;
+                    textMargin: 0
+                    leftPadding: 0
+                    topPadding: 0
+                    text: qsTr("Change the password of your wallet.") + translationManager.emptyString
+                    width: parent.width
+                    readOnly: true
+
+                    // @TODO: Legacy. Remove after Qt 5.8.
+                    // https://stackoverflow.com/questions/41990013
+                    MouseArea {
+                        anchors.fill: parent
+                        enabled: false
+                    }
+                } 
+            }
+
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Change password") + translationManager.emptyString
+                onClicked: {
+                    passwordDialog.onAcceptedCallback = function() {
+	                    if(appWindow.walletPassword === passwordDialog.password){
+	                        newPasswordDialog.open()
+	                    } else {
+	                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+	                        informationPopup.text = qsTr("Wrong password");
+	                        informationPopup.open()
+	                        informationPopup.onCloseCallback = function() {
+	                            passwordDialog.open()
+	                        }
+	                    }
+	                }
+                    passwordDialog.onRejectedCallback = null;
+                    passwordDialog.open()
+                }
+                width: 135 * scaleRatio
+            }
+        }
     }
 
     Component.onCompleted: {
