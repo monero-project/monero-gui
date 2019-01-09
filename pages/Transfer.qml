@@ -688,8 +688,6 @@ Rectangle {
                 // Light wallet is always ready
                 pageRoot.enabled = true;
                 root.warningContent = "";
-                // check if daemon was already mining and add mining logo if true
-                middlePanel.miningView.update();
             }
         }
     }

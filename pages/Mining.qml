@@ -229,7 +229,7 @@ Rectangle {
     }
 
     function updateStatusText() {
-        if (walletManager.isMining()) {
+        if (appWindow.isMining) {
             statusText.text = qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate()) + translationManager.emptyString;
         }
         else {
@@ -238,10 +238,10 @@ Rectangle {
     }
 
     function update() {
-        updateStatusText()
-        startSoloMinerButton.enabled = !walletManager.isMining()
-        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
         appWindow.isMining = walletManager.isMining()
+        updateStatusText()
+        startSoloMinerButton.enabled = !appWindow.isMining
+        stopSoloMinerButton.enabled = !startSoloMinerButton.enabled
     }
 
     MoneroComponents.StandardDialog {
