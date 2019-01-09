@@ -34,7 +34,6 @@ Lojban
         <language display_name="日本語" locale="ja_JP" wallet_language="日本語" flag="/lang/flags/jp.png" qs="none"/>
         <language display_name="Nederlands" locale="nl_NL" wallet_language="Nederlands" flag="/lang/flags/nl.png" qs="none"/>
         <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/pl.png" qs="none"/>
-        <!-- <language display_name="Polski" locale="pl_PL" wallet_language="English" flag="/lang/flags/pl.png" qs="none"/> -->
         <language display_name="Português (PT)" locale="pt-pt_PT" wallet_language="Português" flag="/lang/flags/pt.png" qs="none"/>
         <language display_name="Português (BR)" locale="pt-br_BR" wallet_language="Português" flag="/lang/flags/br.png" qs="none"/>
         <language display_name="Русский язык" locale="ru_RU" wallet_language="русский язык" flag="/lang/flags/ru.png" qs="none"/>
@@ -56,4 +55,10 @@ Lojban
         <language display_name="Suomi" locale="fi_FI" wallet_language="English" flag="/lang/flags/fi.png" qs="none"/>
         <language display_name="Pirate" locale="prt" wallet_language="English" flag="/lang/flags/pirate.png" qs="none"/>
         <language display_name="Български" locale="bg_BG" wallet_language="English" flag="/lang/flags/bg.png" qs="none"/>
+        <!-- <language display_name="اُردُو" locale="ur_UR" wallet_language="English" flag="/lang/flags/pk.png" qs="none"/> -->
+        <!-- <language display_name="فارسی" locale="fa_FA" wallet_language="English" flag="/lang/flags/ir.png" qs="none"/> -->
+        <!-- <language display_name="Zulu" locale="zu_ZU" wallet_language="English" flag="/lang/flags/za.png" qs="none"/> -->
+        <!-- <language display_name="کورمانجی" locale="kmr_KMR" wallet_language="English" flag="/lang/flags/ku.png" qs="none"/> -->
+        <!-- <language display_name="বাংলা" locale="bn_BN" wallet_language="English" flag="/lang/flags/bd.png" qs="none"/> -->
+        <!-- <language display_name="Gaeilge" locale="ga_GA" wallet_language="English" flag="/lang/flags/irl.png" qs="none"/> -->
 </languages>
