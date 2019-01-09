@@ -50,12 +50,10 @@ Column {
         Image {
             id : clipboardButton
             anchors.right: parent.right
+            anchors.rightMargin: 5 * scaleRatio
             anchors.bottom: tipRect.top
-            source: "qrc:///images/greyTriangle.png"
-            Image {
-                anchors.centerIn: parent
-                source: "qrc:///images/copyToClipboard.png"
-            }
+            anchors.bottomMargin: 5 * scaleRatio
+            source: "qrc:///images/copyToClipboard.png"
             Clipboard { id: clipboard }
             MouseArea {
                 anchors.fill: parent

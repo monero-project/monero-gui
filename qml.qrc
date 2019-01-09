@@ -94,7 +94,6 @@
         <file>images/recoverWallet.png</file>
         <file>wizard/WizardCreateWallet.qml</file>
         <file>wizard/WizardCreateWalletFromDevice.qml</file>
-        <file>images/greyTriangle.png</file>
         <file>images/copyToClipboard.png</file>
         <file>wizard/WizardPassword.qml</file>
         <file>wizard/WizardConfigure.qml</file>
