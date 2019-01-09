@@ -340,7 +340,9 @@ ColumnLayout {
         Image {
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: -3
-            source: "qrc:///images/prevPage.png"
+            source: "qrc:///images/nextPage.png"
+            transformOrigin: Item.Center
+            rotation: 180
         }
 
         MouseArea {
