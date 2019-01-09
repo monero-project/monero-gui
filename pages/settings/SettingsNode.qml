@@ -39,7 +39,7 @@ Rectangle{
     /* main layout */
     ColumnLayout {
         id: root
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 0
 
         anchors.left: parent.left

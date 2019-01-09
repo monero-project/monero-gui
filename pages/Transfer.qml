@@ -103,7 +103,7 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.margins: (isMobile)? 17 : 20
+      anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
       anchors.topMargin: 40 * scaleRatio
 
       anchors.left: parent.left
@@ -421,7 +421,7 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 32 * scaleRatio
         spacing: 26 * scaleRatio
         enabled: !viewOnly || pageRoot.enabled

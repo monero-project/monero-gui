@@ -247,5 +247,11 @@
         <file>images/miningxmr@2x.png</file>
         <file>images/eyeHide.png</file>
         <file>images/eyeShow.png</file>
+        <file>pages/merchant/Merchant.qml</file>
+        <file>pages/merchant/MerchantCheckbox.qml</file>
+        <file>pages/merchant/MerchantTrackingList.qml</file>
+        <file>images/merchant/arrow_right.png</file>
+        <file>images/merchant/bg.png</file>
+        <file>images/merchant/input_box.png</file>
     </qresource>
 </RCC>

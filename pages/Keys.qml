@@ -53,7 +53,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 40 * scaleRatio
 
         spacing: 30 * scaleRatio

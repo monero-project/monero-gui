@@ -47,7 +47,7 @@ Rectangle {
     property string title
     property int mouseX: 0
     property bool containsMouse: false
-    property alias basicButtonVisible: goToBasicVersionButton.visible
+    property bool basicButtonVisible: false
     property bool customDecorations: persistentSettings.customDecorations
     property bool showWhatIsButton: true
     property bool showMinimizeButton: false
@@ -56,6 +56,9 @@ Rectangle {
     property bool showMoneroLogo: false
     property bool small: false
     property alias titleBarGradientImageOpacity: titleBarGradientImage.opacity
+    property bool orange: false
+    property string buttonHoverColor: "#262626"
+    property string buttonHoverColorOrange: "#44FFFFFF"
 
     signal closeClicked
     signal maximizeClicked
@@ -70,10 +73,18 @@ Rectangle {
 
         Image {
            id: titleBarGradientImage
+           visible: !titleBar.orange
            anchors.fill: parent
            height: titleBar.height
            width: titleBar.width
            source: "../images/titlebarGradient.jpg"
+        }
+
+        Rectangle {
+            visible: titleBar.orange
+            width: parent.width
+            height: parent.height
+            color: "#ff6600"
         }
     }
 
@@ -82,17 +93,27 @@ Rectangle {
         width: 125
         height: parent.height
         anchors.centerIn: parent
-        visible: customDecorations && showMoneroLogo
+        visible: customDecorations
         z: parent.z + 1
 
         Image {
-            visible: !isMobile
+            visible: !isMobile && showMoneroLogo && !titleBar.orange
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.topMargin: 11
             width: 125
             height: 28
             source: "../images/titlebarLogo.png"
+        }
+
+        Image {
+            visible: !isMobile && showMoneroLogo && titleBar.orange
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.topMargin: 11
+            width: 132
+            height: 22
+            source: "../images/moneroLogo_white.png"
         }
     }
 
@@ -115,7 +136,7 @@ Rectangle {
         color:  "transparent"
         height: titleBar.height
         width: height
-        visible: isMobile
+        visible: !titleBar.orange && titleBar.basicButtonVisible
         z: parent.z + 2
 
         Image {
@@ -130,7 +151,7 @@ Rectangle {
             hoverEnabled: true
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
-            onEntered: goToBasicVersionButton.color = "#262626";
+            onEntered: { goToBasicVersionButton.color = titleBar.orange ? titleBar.buttonHoverColorOrange : titleBar.buttonHoverColor }
             onExited: goToBasicVersionButton.color = "transparent";
             onClicked: {
                 releaseFocus()
@@ -166,7 +187,13 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: minimizeButton.color = "#262626";
+                onEntered: {
+                    if(titleBar.orange){
+                        minimizeButton.color = titleBar.buttonHoverColorOrange;
+                    } else {
+                        minimizeButton.color = titleBar.buttonHoverColor;
+                    }
+                }
                 onExited: minimizeButton.color = "transparent";
                 onClicked: minimizeClicked();
             }
@@ -193,7 +220,13 @@ Rectangle {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: maximizeButton.color = "#262626";
+                onEntered: {
+                    if(titleBar.orange){
+                        maximizeButton.color = titleBar.buttonHoverColorOrange;
+                    } else {
+                        maximizeButton.color = titleBar.buttonHoverColor;
+                    }
+                }
                 onExited: maximizeButton.color = "transparent";
                 onClicked: maximizeClicked();
             }
@@ -219,7 +252,13 @@ Rectangle {
                 onClicked: closeClicked();
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: closeButton.color = "#262626";
+                onEntered: {
+                    if(titleBar.orange){
+                        closeButton.color = titleBar.buttonHoverColorOrange;
+                    } else {
+                        closeButton.color = titleBar.buttonHoverColor;
+                    }
+                }
                 onExited: closeButton.color = "transparent";
             }
         }
@@ -227,6 +266,7 @@ Rectangle {
 
     // window borders
     Rectangle {
+        visible: !titleBar.orange
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
@@ -236,10 +276,10 @@ Rectangle {
     }
 
     Rectangle {
+        visible: titleBar.small && !titleBar.orange
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left
-        visible: titleBar.small
         height: 1
         color: "#2F2F2F"
         z: parent.z + 1

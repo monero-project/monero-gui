@@ -86,6 +86,11 @@ ApplicationWindow {
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
+    // Current selected address / subaddress (Receive page)
+    property var current_address
+    property var current_address_label: "Primary"
+    property int current_subaddress_table_index: 0
+
     function altKeyReleased() { ctrlPressed = false; }
 
     function showPageRequest(page) {
@@ -1371,6 +1376,15 @@ ApplicationWindow {
                 updateBalance();
             }
 
+            onMerchantClicked: {
+                middlePanel.state = "Merchant";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
+
             onTxkeyClicked: {
                 middlePanel.state = "TxKey";
                 middlePanel.flickable.contentY = 0;
@@ -1823,6 +1837,15 @@ ApplicationWindow {
         id: updatesTimer
         interval: 3600*1000; running: true; repeat: true
         onTriggered: checkUpdates()
+    }
+
+    function titlebarToggleOrange(flag){
+        // toggle titlebar orange style
+        if(flag !== undefined){
+            titleBar.orange = flag;
+        } else {
+            titleBar.orange = !titleBar.orange;
+        }
     }
 
     function releaseFocus() {

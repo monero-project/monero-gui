@@ -39,10 +39,10 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: 40 * scaleRatio
         spacing: 20 * scaleRatio
         Layout.fillWidth: true
 
