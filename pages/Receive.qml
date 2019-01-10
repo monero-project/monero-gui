@@ -386,7 +386,6 @@ Rectangle {
     }
 
     function clearFields() {
-        amountToReceiveLine.text = "";
     }
 
     function onPageClosed() {
