@@ -18,7 +18,6 @@
         <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
         <file>images/menuIndicator.png</file>
-        <file>pages/Dashboard.qml</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
@@ -27,21 +26,10 @@
         <file>images/statusConnected.png</file>
         <file>images/statusDisconnected.png</file>
         <file>components/Input.qml</file>
-        <file>components/SearchInput.qml</file>
-        <file>images/magnifier.png</file>
         <file>components/StandardButton.qml</file>
         <file>images/dropIndicator.png</file>
-        <file>images/hseparator.png</file>
         <file>components/LineEdit.qml</file>
-        <file>components/TableHeader.qml</file>
-        <file>images/ascSortIndicator.png</file>
-        <file>images/ascSortIndicatorActived.png</file>
-        <file>images/ascSortIndicatorPressed.png</file>
-        <file>images/descSortIndicator.png</file>
-        <file>images/descSortIndicatorActived.png</file>
-        <file>images/descSortIndicatorPressed.png</file>
         <file>images/backToWindowIcon.png</file>
-        <file>components/DashboardTable.qml</file>
         <file>components/TableDropdown.qml</file>
         <file>images/tableOptions.png</file>
         <file>images/dropdownAdd.png</file>
