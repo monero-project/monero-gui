@@ -169,6 +169,7 @@ Rectangle {
     // color stripe at the top
     Row {
         id: styledRow
+        visible: currentView !== merchantView
         height: 4
         anchors.top: parent.top
         anchors.left: parent.left
