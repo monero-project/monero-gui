@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Thee Block Heig&apos;t!</translation>
+        <translation>Thee Block Heig&apos;t!</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Thee date o&apos; moons</translation>
+        <translation>Thee date o&apos; moons</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
 </context>
 <context>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Wall&apos;t!</translation>
+        <translation>Wall&apos;t!</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -1119,7 +1119,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="290"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
 </context>
 <context>
@@ -1317,7 +1317,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="411"/>
         <source>Error: </source>
-        <translation type="unfinished">Blunder!</translation>
+        <translation>Blunder!</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="416"/>
@@ -1711,7 +1711,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="80"/>
         <source>Date</source>
-        <translation type="unfinished">Thee date o&apos; moons</translation>
+        <translation>Thee date o&apos; moons</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="81"/>
@@ -2088,7 +2088,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Wrong passw&apos;rd ye mindless kidney-wipe!</translation>
+        <translation>Wrong passw&apos;rd ye mindless kidney-wipe!</translation>
     </message>
 </context>
 <context>

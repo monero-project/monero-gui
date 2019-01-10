@@ -1279,7 +1279,7 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished">Crea un nou moneder que només pot veure i iniciar transaccions, però cal un moneder de despeses per signar la transacció abans d&apos;enviar-la.</translation>
+        <translation>Crea un nou moneder que només pot veure i iniciar transaccions, però cal un moneder de despeses per signar la transacció abans d&apos;enviar-la.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
@@ -1389,7 +1389,7 @@ El fitxer antic de la memòria cau del moneder serà renombrat i es podrà recup
     <message>
         <location filename="../pages/SharedRingDB.qml" line="174"/>
         <source>Filename with outputs to mark as spent</source>
-        <translation type="unfinished">Fitxer amb sortides per marcar com a gastat</translation>
+        <translation>Fitxer amb sortides per marcar com a gastat</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="187"/>
@@ -2101,7 +2101,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Contraseña incorrecta</translation>
+        <translation>Contraseña incorrecta</translation>
     </message>
 </context>
 <context>

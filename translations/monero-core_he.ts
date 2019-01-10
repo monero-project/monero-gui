@@ -174,7 +174,7 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">    גובה בלוק</translation>
+        <translation>    גובה בלוק</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
 </context>
 <context>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">ארנק</translation>
+        <translation>ארנק</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2098,7 +2098,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">סיסמה שגויה</translation>
+        <translation>סיסמה שגויה</translation>
     </message>
 </context>
 <context>

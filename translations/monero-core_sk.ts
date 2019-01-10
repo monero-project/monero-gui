@@ -95,7 +95,7 @@
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="111"/>
         <source>Start daemon (%1)</source>
-        <translation>Spustenie démona (%1)</translation>
+        <translation>Spustenie daemonu (%1)</translation>
     </message>
     <message>
         <location filename="../components/DaemonManagerDialog.qml" line="124"/>
@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> zvolené: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hľadať</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Dátum od</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Dátum do</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Zotriediť</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Výška bloku</translation>
+        <translation>Výška bloku</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Dátum</translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna história...</translation>
     </message>
 </context>
 <context>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
         <source>To </source>
-        <translation type="unfinished"></translation>
+        <translation>Na</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
@@ -534,7 +534,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="638"/>
         <source>Daemon</source>
-        <translation>Démon</translation>
+        <translation>Daemon</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="533"/>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopírované do schránky</translation>
+        <translation>Skopírované do schránky</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopírované do schránky</translation>
+        <translation>Skopírované do schránky</translation>
     </message>
 </context>
 <context>
@@ -616,7 +616,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="68"/>
         <source>(only available for local daemons)</source>
-        <translation>(k dispozícii iba pre lokálnych démonov)</translation>
+        <translation>(k dispozícii iba pre lokálne daemony)</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="76"/>
@@ -671,7 +671,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="156"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
-        <translation>Ťažba k dispozícii iba pre lokálnych démonov. Spustite lokálneho démona, aby ste mohli ťažiť.&lt;br&gt;</translation>
+        <translation>Ťažba k dispozícii iba pre lokálne daemony. Spustite lokálny daemon, aby ste mohli ťažiť.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="169"/>
@@ -712,27 +712,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Peňaženka</translation>
+        <translation>Peňaženka</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Schéma</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzol</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Záznam</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -863,7 +863,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="76"/>
         <source>WARNING: no connection to daemon</source>
-        <translation>VAROVANIE: žiadne pripojenie k démonovi</translation>
+        <translation>VAROVANIE: žiadne pripojenie k daemonu</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="126"/>
@@ -1221,7 +1221,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustiť daemona</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="429"/>
@@ -1279,7 +1279,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="185"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvorí novú peňaženku, ktorá môže len zobrazovať a iniciovať transakcie. Vyžaduje hlavnú peňaženku na podpísanie transakcie pred odoslaním.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="220"/>
@@ -1409,12 +1409,12 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/SharedRingDB.qml" line="215"/>
         <source>Paste output amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť počet výstupov</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="225"/>
         <source>Paste output offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť output offset</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="238"/>
@@ -1545,7 +1545,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/Sign.qml" line="154"/>
         <source>Message from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Správa zo súboru</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="155"/>
@@ -1780,7 +1780,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/Transfer.qml" line="49"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Spustiť démona&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Spustiť daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="177"/>
@@ -1964,19 +1964,19 @@ Ringsize: </translation>
         <location filename="../pages/Transfer.qml" line="619"/>
         <location filename="../pages/Transfer.qml" line="631"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Peňaženka nie je pripojená k démonovi.</translation>
+        <translation>Peňaženka nie je pripojená k daemonu.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
-        <translation>Pripojený démon nie je kompatibilný s GUI. 
-Prosím aktualizujte, alebo pripojte k inému démonovi</translation>
+        <translation>Pripojený daemon nie je kompatibilný s GUI. 
+Prosím aktualizujte ho, alebo pripojte k inému daemonu</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="639"/>
         <source>Waiting on daemon synchronization to finish</source>
-        <translation>Čakanie na dokončenie synchronizácie démona</translation>
+        <translation>Čakanie na dokončenie synchronizácie daemonu</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -2102,7 +2102,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Zlé heslo</translation>
+        <translation>Nesprávne heslo</translation>
     </message>
 </context>
 <context>
@@ -2115,22 +2115,22 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="97"/>
         <source>Kickstart the Monero blockchain?</source>
-        <translation>Nakopnúť Monero blockchain?</translation>
+        <translation>Naštartovať Monero blockchain?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="113"/>
         <source>It is very important to write it down as this is the only backup you will need for your wallet.</source>
-        <translation>Je veľmi dôležité, aby ste si to zapísali, pretože je to jediná záloha, ktorú budete potrebovať pre Vašu peňaženku.</translation>
+        <translation>Je veľmi dôležité, si to zapísať, pretože je to jediná záloha, ktorú budete potrebovať pre Vašu peňaženku.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="124"/>
         <source>Enable disk conservation mode?</source>
-        <translation>Povoliť režim konzervácie disku?</translation>
+        <translation>Povoliť režim šetrenia miesta na disku?</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="140"/>
         <source>Disk conservation mode uses substantially less disk-space, but the same amount of bandwidth as a regular Monero instance. However, storing the full blockchain is beneficial to the security of the Monero network. If you are on a device with limited disk space, then this option is appropriate for you.</source>
-        <translation>Režim konzervácie disku používa podstatne menej diskového priestoru, ale rovnakú rýchlosť pripojenia do internetu ako bežná inštancia Monero. Avšak uloženie celého blockchain-u je prínosom pre bezpečnosť siete Monero. Ak používate zariadenie s obmedzeným priestorom na disku, táto možnosť je vhodná pre Vás.</translation>
+        <translation>Režim režim šetrenia miesta na disku používa podstatne menej diskového priestoru, ale rovnakú rýchlosť pripojenia do internetu ako bežná inštancia Monero. Avšak uloženie celej blockchain je istým prínosom pre bezpečnosť Monero siete. Ak používate zariadenie s obmedzeným priestorom na disku, táto možnosť je vhodná pre Vás.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="153"/>
@@ -2140,7 +2140,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardConfigure.qml" line="169"/>
         <source>Mining secures the Monero network, and also pays a small reward for the work done. This option will let Monero mine when your computer is on mains power and is idle. It will stop mining when you continue working.</source>
-        <translation>Ťažba zabezpečuje sieť Monero, a taktiež vypláca malú odmenu za vykonanú prácu. Toto Vám umožní ťažiť Monero keď je Váš počítač napájaný zo siete a je nečinný. Keď budete pokračovať v práci, ťažba sa zastaví.</translation>
+        <translation>Ťažba zabezpečuje sieť Monero a vypláca tiež malú odmenu za vykonanú prácu. Toto Vám umožní ťažiť Monero keď je Váš počítač napájaný zo siete a je nečinný. Keď budete pokračovať v práci, ťažba sa zastaví.</translation>
     </message>
 </context>
 <context>
@@ -2172,13 +2172,12 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="114"/>
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.                         &lt;br&gt;&lt;br&gt;                         If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Na komunikáciu so sieťou Monero, bude potrebné aby peňaženka bola v spojení s uzlom Monero. Pre dosiahnutie maximálneho súkromia, doporučujeme spustiť svoj vlastný uzol. &lt;br&gt;&lt;br&gt;
-		Ak nie je možné spustiť svoj vlastný uzol, pripoj sa na vzdialený uzol.</translation>
+        <translation>Na komunikáciu so sieťou Monero bude potrebné, aby peňaženka bola v spojení s uzlom Monero siete. Pre dosiahnutie maximálneho súkromia, doporučujeme spustiť svoj vlastný uzol. &lt;br&gt;&lt;br&gt;Ak nie je možné spustiť svoj vlastný uzol, pripoj sa na vzdialený uzol.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="126"/>
         <source>Start a node automatically in background (recommended)</source>
-        <translation>Naštartuj uzol automaticky na pozadí (doporučené)</translation>
+        <translation>Naštartovať uzol automaticky na pozadí (doporučené)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="148"/>
@@ -2206,7 +2205,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardDonation.qml" line="93"/>
         <source>Monero development is solely supported by donations</source>
-        <translation>Vývoj softvéru Monero je podporovaný výhradne darmi</translation>
+        <translation>Vývoj Monero je podporovaný výhradne z dobrovoľných príspevkov</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="113"/>
@@ -2221,7 +2220,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardDonation.qml" line="162"/>
         <source>For every transaction, a small transaction fee is charged. This option lets you add an additional amount, as a percentage of that fee, to your transaction to support Monero development. For instance, a 50% autodonation take a transaction fee of 0.005 XMR and add a 0.0025 XMR to support Monero development.</source>
-        <translation>Pre každú transakciu sa účtuje malý poplatok za transakciu. Táto možnosť Vám umožní pridať ďalšiu sumu, ktorá predstavuje percento z tohto poplatku, k Vašej transakcii na podporu vývoja softvéru Monero. Napríklad 50% auto-donácia vezme transakčný poplatok 0,005 XMR a pridá 0,0025 XMR na podporu vývoja softvéru Monero.</translation>
+        <translation>Pre každú transakciu sa účtuje malý transakčný poplatok. Táto voľba Vám umožní pridať ďalšiu sumu, ktorá predstavuje percento z tohto poplatku k Vašej transakcii na podporu vývoja softvéru Monero. Napríklad 50% auto-donácia vezme transakčný poplatok 0,005 XMR a pridá 0,0025 XMR na podporu vývoja softvéru Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDonation.qml" line="174"/>
@@ -2256,7 +2255,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
         <source>Mainnet</source>
-        <translation>Mainnet</translation>
+        <translation>Hlavná sieť</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="65"/>
@@ -2276,12 +2275,12 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="70"/>
         <source>Wallet path</source>
-        <translation>Cesta peňaženky</translation>
+        <translation>Cesta k peňaženke</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="76"/>
         <source>Daemon address</source>
-        <translation>Adresa démona</translation>
+        <translation>Adresa daemonu</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
@@ -2301,12 +2300,12 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardFinish.qml" line="87"/>
         <source>New wallet details:</source>
-        <translation>Údaje o novej peňaženke:</translation>
+        <translation>Detaily novej peňaženky:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="91"/>
         <source>Don&apos;t forget to write down your seed. You can view your seed and change your settings on settings page.</source>
-        <translation>Nezabudnite si zapísať svoj seed. Svoj seed môžete zobraziť a zmeniť nastavenia na stránke nastavení.</translation>
+        <translation>Nezabudnite si bezpečne zapísať svoj seed. Ten si môžte zobraziť na stránke nastavení.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="137"/>
@@ -2324,7 +2323,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardMain.qml" line="386"/>
         <source>USE MONERO</source>
-        <translation>POUŽIŤ MONERO</translation>
+        <translation>POUŽÍVAŤ MONERO</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="399"/>
@@ -2340,7 +2339,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
         <location filename="../wizard/WizardMain.qml" line="406"/>
         <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1</source>
-        <translation>Peňaženka len na zobrazenie bola vytvorená. Otvoriť ju môžete zatvorením aktuálnej peňaženky, kliknutím na možnosť &quot;Otvoriť peňaženku zo súboru&quot;, a vybratím peňaženky len na zobrazenie v: 
+        <translation>Peňaženka len na zobrazenie (prezeracia peňaženka) bola vytvorená. Otvoriť ju môžete zatvorením aktuálnej peňaženky, kliknutím na možnosť &quot;Otvoriť peňaženku zo súboru&quot;, a vybratím peňaženky len na zobrazenie v: 
 %1</translation>
     </message>
     <message>
@@ -2427,7 +2426,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="45"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation>Vlož svoj 25 (alebo  24) slovný mnemotechnický SEED</translation>
+        <translation>Vlož svoj 25 (alebo 24) slovný mnemotechnický SEED</translation>
     </message>
     <message>
         <location filename="../wizard/WizardMemoTextInput.qml" line="65"/>
@@ -2583,27 +2582,27 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../main.qml" line="509"/>
         <source>Waiting for daemon to start...</source>
-        <translation>Čakanie na spustenie démona...</translation>
+        <translation>Čakanie na spustenie daemonu...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="515"/>
         <source>Waiting for daemon to stop...</source>
-        <translation>Čaká sa na zastavenie démona...</translation>
+        <translation>Čaká sa na zastavenie daemonu...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="540"/>
         <source>Daemon failed to start</source>
-        <translation>Démon sa nepodarilo spustiť</translation>
+        <translation>Nepodarilo sa spustiť daemon</translation>
     </message>
     <message>
         <location filename="../main.qml" line="541"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
-        <translation>Prosím, skontrolujte chyby v log-och peňaženky a démona. Môžete sa tiež pokúsiť spustiť %1 ručne.</translation>
+        <translation>Prosím, skontrolujte chyby v log-och peňaženky a daemonu. Môžete sa tiež pokúsiť spustiť %1 ručne.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="603"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Nemožno vytvoriť transakciu: Chybná verzia démona: </translation>
+        <translation>Nemožno vytvoriť transakciu: Chybná verzia daemonu: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="605"/>
@@ -2717,7 +2716,7 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="821"/>
         <source>Payment proof</source>
-        <translation>Doklad o zaplatení</translation>
+        <translation>Dôkaz o zaplatení</translation>
     </message>
     <message>
         <location filename="../main.qml" line="824"/>
@@ -2801,17 +2800,17 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1738"/>
         <source>Daemon is running</source>
-        <translation>Démon beží</translation>
+        <translation>Daemon beží</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1739"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Démon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
+        <translation>Daemon bude stále bežať na pozadí, keď sa GUI zavrie.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1741"/>
         <source>Stop daemon</source>
-        <translation>Zastavenie démona</translation>
+        <translation>Zastavenie daemonu</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1776"/>
@@ -2821,7 +2820,7 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1808"/>
         <source>Daemon log</source>
-        <translation>Logy démona</translation>
+        <translation>Daemon logy</translation>
     </message>
     <message>
         <location filename="../main.qml" line="358"/>

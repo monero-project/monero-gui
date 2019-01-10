@@ -174,7 +174,7 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">طول الكتل</translation>
+        <translation>طول الكتل</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
@@ -714,7 +714,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">المحفظه</translation>
+        <translation>المحفظه</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2109,7 +2109,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">كلمه السر خاطئه</translation>
+        <translation>كلمه السر خاطئه</translation>
     </message>
 </context>
 <context>

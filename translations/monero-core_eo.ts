@@ -154,7 +154,7 @@
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Serĉi</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Blokalteco</translation>
+        <translation>Blokalteco</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Dato</translation>
+        <translation>Dato</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopii</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopiiĝis en la poŝon</translation>
+        <translation>Kopiiĝis en la poŝon</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopii</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopiiĝis en la poŝon</translation>
+        <translation>Kopiiĝis en la poŝon</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Monujo</translation>
+        <translation>Monujo</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -1099,7 +1099,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
         <source>Cancel</source>
-        <translation type="unfinished">Nuligi</translation>
+        <translation>Nuligi</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="200"/>
@@ -2088,7 +2088,7 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Malĝusta pasvorto</translation>
+        <translation>Malĝusta pasvorto</translation>
     </message>
 </context>
 <context>
@@ -2465,7 +2465,7 @@ Kaze de Elspezpruvo, vi ne bezonas precizi la ricevantan adreson.</translation>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="301"/>
         <source>Mainnet</source>
-        <translation type="unfinished">Ĉefa reto</translation>
+        <translation>Ĉefa reto</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="322"/>

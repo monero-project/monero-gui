@@ -174,7 +174,7 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Înălțimea blocului</translation>
+        <translation>Înălțimea blocului</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Portofel</translation>
+        <translation>Portofel</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2102,7 +2102,7 @@ Pentru cazurile cu Dovadă de plată, nu e necesară adresa destinatarului.</tra
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Parolă incorectă</translation>
+        <translation>Parolă incorectă</translation>
     </message>
 </context>
 <context>
