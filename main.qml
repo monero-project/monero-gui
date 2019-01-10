@@ -933,6 +933,7 @@ ApplicationWindow {
         closeWallet();
         currentWallet = undefined;
         wizard.restart();
+        wizard.switchPage(true); //skips select language page
         rootItem.state = "wizard"
         // reset balance
         leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
@@ -999,6 +1000,7 @@ ApplicationWindow {
                 initialize(persistentSettings);
             }
             passwordDialog.onRejectedCallback = function() {
+                wizard.switchPage(true); //skips select language page
                 rootItem.state = "wizard"
             }
             passwordDialog.open(usefulName(walletPath()))
