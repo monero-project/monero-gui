@@ -507,6 +507,8 @@ TransactionHistorySortFilterModel *Wallet::historyModel() const
         m_historyModel->setTransactionHistory(this->history());
         m_historySortFilterModel = new TransactionHistorySortFilterModel(w);
         m_historySortFilterModel->setSourceModel(m_historyModel);
+        m_historySortFilterModel->setSortRole(TransactionHistoryModel::TransactionBlockHeightRole);
+        m_historySortFilterModel->sort(0, Qt::DescendingOrder);
     }
 
     return m_historySortFilterModel;
