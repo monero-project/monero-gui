@@ -6,7 +6,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="64"/>
         <source>Address</source>
-        <translation>Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="51"/>
@@ -51,7 +51,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="99"/>
         <source>Invalid address</source>
-        <translation>Невірний адрес</translation>
+        <translation>Невірна адреса</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="103"/>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../components/AddressBookTable.qml" line="150"/>
         <source>Address copied to clipboard</source>
-        <translation>Адрес скопійовано в буфер обміну</translation>
+        <translation>Адресу скопійовано в буфер обміну</translation>
     </message>
 </context>
 <context>
@@ -242,7 +242,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
         <source>Address copied to clipboard</source>
-        <translation>Адрес скопійовано в буфер обміну</translation>
+        <translation>Адресу скопійовано в буфер обміну</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="343"/>
@@ -903,7 +903,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="161"/>
         <source>Set the label of the selected address:</source>
-        <translation>Встановити мітку вибраного адресу:</translation>
+        <translation>Встановити мітку вибраної адреси:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="196"/>
@@ -920,17 +920,17 @@
     <message>
         <location filename="../pages/Receive.qml" line="202"/>
         <source>&lt;p&gt;This QR code includes the address you selected above andthe amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Цей QR-код включає в себе вибраний вами адрес, і суму, введену нижче. Поділіться цим кодом з іншими (ПКМ-&gt;Зберегти), так їм буде простіше відправити вам точну кількість монет.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Цей QR-код включає в себе вибрану вами адресу, і суму, введену нижче. Поділіться цим кодом з іншими (ПКМ-&gt;Зберегти), так їм буде простіше відправити вам точну кількість монет.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="369"/>
         <source>Create new address</source>
-        <translation>Створити новий адрес</translation>
+        <translation>Створити нову адресу</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="384"/>
         <source>Set the label of the new address:</source>
-        <translation>Добавити мітку для нового адреса:</translation>
+        <translation>Добавити мітку для нової адреси:</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="385"/>
@@ -972,12 +972,12 @@
     <message>
         <location filename="../pages/Receive.qml" line="326"/>
         <source>Address copied to clipboard</source>
-        <translation>Адрес скопійовано в буфер обміну</translation>
+        <translation>Адресу скопійовано в буфер обміну</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="431"/>
         <source>&lt;p&gt;This QR code includes the address you selected above and the amount you entered below. Share it with others (right-click-&gt;Save) so they can more easily send you exact amounts.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Цей QR-код включає обраний вами раніше адрес і введену нижче суму. Поділіться ним з іншими (ПКМ-&gt;Зберегти) так вони зможуть легше відправити вам точну суму.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Цей QR-код включає обрану вами раніше адресу і введену нижче суму. Поділіться ним з іншими (ПКМ-&gt;Зберегти) так вони зможуть легше відправити вам точну суму.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="511"/>
@@ -1189,7 +1189,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="291"/>
         <source>Address</source>
-        <translation>Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="292"/>
@@ -1245,7 +1245,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="485"/>
         <source>Bootstrap Address</source>
-        <translation>Адрес початкового завантаження</translation>
+        <translation>Адреса початкового завантаження</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="486"/>
@@ -1534,7 +1534,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="107"/>
         <source>This page lets you sign/verify a message (or file contents) with your address.</source>
-        <translation>На цій сторінці можна підписати/перевірити повідомлення (або файл) вашим адресом.</translation>
+        <translation>На цій сторінці можна підписати/перевірити повідомлення (або файл) вашою адресою.</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="125"/>
@@ -1570,7 +1570,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Sign.qml" line="290"/>
         <source>Address</source>
-        <translation>Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="319"/>
@@ -1689,12 +1689,12 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableDropdown.qml" line="182"/>
         <source>&lt;b&gt;Copy address to clipboard&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Скопіювати адрес в буфер обміну&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Скопіювати адресу в буфер обміну&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="183"/>
         <source>&lt;b&gt;Send to this address&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Відправити на цей адрес&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Відправити на цю адресу&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../components/TableDropdown.qml" line="184"/>
@@ -1819,17 +1819,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="247"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation>Не знайдено дійсного адресу на цьому OpenAlias</translation>
+        <translation>Не знайдено дійсної адреси на цьому OpenAlias</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="253"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Адрес знайдений, але підписи DNSSEC не можуть бути перевірені, тому цей адрес може бути підробленим</translation>
+        <translation>Адреса знайдена, але підписи DNSSEC не можуть бути перевірені, тому ця адреса може бути підміненою</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="257"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>На цьому OpenAlias не знайдено дійсного адресу, підписи DNSSEC не можуть бути перевірені, тому цей адрес може бути підробленим</translation>
+        <translation>На цьому OpenAlias не знайдено дійсної адреси, підписи DNSSEC не можуть бути перевірені, тому ця адреса може бути підміненою</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="261"/>
@@ -1840,7 +1840,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/Transfer.qml" line="269"/>
         <source>No address found</source>
-        <translation>Адрес не знайдено</translation>
+        <translation>Адреси не знайдено</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="280"/>
@@ -1874,7 +1874,7 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="634"/>
-        <source>Connected daemon is not compatible with GUI. 
+        <source>Connected daemon is not compatible with GUI.
 Please upgrade or connect to another daemon</source>
         <translation>Підключений демон не сумісний з GUI.
 Будь ласка, оновіться або підключіться до іншого демона</translation>
@@ -1936,7 +1936,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="205"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Адрес &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Адресна книга&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Адреса &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Адресна книга&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="389"/>
@@ -2014,13 +2014,13 @@ Ringsize: </source>
         <location filename="../pages/TxKey.qml" line="94"/>
         <location filename="../pages/TxKey.qml" line="170"/>
         <source>Address</source>
-        <translation>Адрес</translation>
+        <translation>Адреса</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="96"/>
         <location filename="../pages/TxKey.qml" line="172"/>
         <source>Recipient&apos;s wallet address</source>
-        <translation>Адрес гаманця отримувача</translation>
+        <translation>Адреса гаманця отримувача</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="81"/>
@@ -2035,7 +2035,7 @@ Ringsize: </source>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="70"/>
-        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
+        <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message.
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2071,8 +2071,8 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../pages/TxKey.qml" line="145"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
-        <translation>Переконайтеся у відправці коштів на адрес, вказавши ID транзакції, адрес отримувача, повідомлення, яке використовується для підпису, і сам підпис.
-У випадку з Spend Proof (доказом надсилання) вам не потрібно вказувати адрес отримувача.</translation>
+        <translation>Переконайтеся у відправці коштів на адресу, вказавши ID транзакції, адресу отримувача, повідомлення, яке використовується для підпису, і сам підпис.
+У випадку з Spend Proof (доказом надсилання) вам не потрібно вказувати адресу отримувача.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="197"/>
@@ -2278,7 +2278,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardFinish.qml" line="76"/>
         <source>Daemon address</source>
-        <translation>Адрес демона</translation>
+        <translation>Адреса демона</translation>
     </message>
     <message>
         <location filename="../wizard/WizardFinish.qml" line="55"/>
@@ -2335,7 +2335,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
     <message>
         <location filename="../wizard/WizardMain.qml" line="406"/>
-        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
+        <source>The view only wallet has been created. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2375,7 +2375,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="247"/>
         <source>Account address (public)</source>
-        <translation>Адрес гаманця (публічний)</translation>
+        <translation>Адреса гаманця (публічний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="263"/>
@@ -2395,7 +2395,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="323"/>
         <source>Subaddress lookahead (optional): &lt;major&gt;:&lt;minor&gt;</source>
-        <translation>Зарезервовано для субадреса (опційно): &lt;major&gt;:&lt;minor&gt;</translation>
+        <translation>Зарезервовано для субадреси (опційно): &lt;major&gt;:&lt;minor&gt;</translation>
     </message>
     <message>
         <location filename="../wizard/WizardManageWalletUI.qml" line="340"/>
@@ -2613,7 +2613,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../main.qml" line="627"/>
         <source>Address: </source>
-        <translation>Адрес: </translation>
+        <translation>Адреса: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="629"/>
@@ -2740,7 +2740,7 @@ Description: </source>
         <source>
 Spending address index: </source>
         <translation>
-Індекс адреса витрати: </translation>
+Індекс адреси витрати: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="679"/>
@@ -2775,7 +2775,7 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="824"/>
-        <source>Couldn&apos;t generate a proof because of the following reason: 
+        <source>Couldn&apos;t generate a proof because of the following reason:
 </source>
         <translation>Неможливо згенерувати доказ з наступних причин:</translation>
     </message>
@@ -2794,7 +2794,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="865"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Цей адрес отримав %1 XMR, із %2 підтвердженнями(и)</translation>
+        <translation>Ця адреса отримала %1 XMR, із %2 підтвердженнями(и)</translation>
     </message>
     <message>
         <location filename="../main.qml" line="876"/>
@@ -2869,12 +2869,12 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>Цей адрес отримав %1 XMR, але транзакція ще не була підтверджена майнерами</translation>
+        <translation>Ця адреса отримала %1 XMR, але транзакція ще не була підтверджена майнерами</translation>
     </message>
     <message>
         <location filename="../main.qml" line="869"/>
         <source>This address received nothing</source>
-        <translation>Цей адрес ще нічого не отримав</translation>
+        <translation>Ця адреса ще нічого не отримала</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1268"/>
