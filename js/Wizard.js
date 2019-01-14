@@ -1,0 +1,179 @@
+.pragma library
+
+function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
+    // Switch to recover from keys
+    recoverFromSeedMode = false
+    spendkey.text = ""
+    viewKeyLine.text = ""
+    restoreHeightItem.text = ""
+
+    if(typeof extra_parameters.secret_view_key != "undefined") {
+        viewKeyLine.text = extra_parameters.secret_view_key
+    }
+    if(typeof extra_parameters.secret_spend_key != "undefined") {
+        spendkey.text = extra_parameters.secret_spend_key
+    }
+    if(typeof extra_parameters.restore_height != "undefined") {
+        restoreHeightItem.text = extra_parameters.restore_height
+    }
+    addressLine.text = address
+
+    cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
+
+    // Check if keys are correct
+    checkNextButton();
+}
+
+function restart(){
+    wizard.currentPage = 0;
+    wizard.settings = ({})
+    wizard.currentPath = "create_wallet"
+    wizard.pages = paths[currentPath]
+    wizardRestarted();
+
+    //hide all pages except first
+    for (var i = 1; i < wizard.pages.length; i++){
+        wizard.pages[i].opacity = 0;
+    }
+    //Show first pages
+    wizard.pages[0].opacity = 1;
+
+}
+
+function switchPage(next) {
+    // Android focus workaround
+    releaseFocus();
+
+    // save settings for current page;
+    if (next && typeof pages[currentPage].onPageClosed !== 'undefined') {
+        if (pages[currentPage].onPageClosed(settings) !== true) {
+            print ("Can't go to the next page");
+            return;
+        };
+
+    }
+    console.log("switchpage: currentPage: ", currentPage);
+
+    // Update prev/next button positions for mobile/desktop
+    prevButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+    prevButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+    nextButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
+    nextButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+
+    if (currentPage > 0 || currentPage < pages.length - 1) {
+        pages[currentPage].opacity = 0
+        var step_value = next ? 1 : -1
+        currentPage += step_value
+        pages[currentPage].opacity = 1;
+
+        var nextButtonVisible = currentPage > 1 && currentPage < pages.length - 1
+        nextButton.visible = nextButtonVisible
+
+        if (typeof pages[currentPage].onPageOpened !== 'undefined') {
+            pages[currentPage].onPageOpened(settings,next)
+        }
+    }
+}
+
+function openRecoveryWalletPage() {
+    wizardRestarted();
+    print ("show recovery wallet page");
+    currentPath = "recovery_wallet"
+    pages = paths[currentPath]
+    // Create temporary wallet
+    createWalletPage.createWallet(settings)
+    wizard.nextButton.visible = true
+    // goto next page
+    switchPage(true);
+}
+
+function openCreateViewOnlyWalletPage(){
+    pages[currentPage].opacity = 0
+    currentPath = "create_view_only_wallet"
+    pages = paths[currentPath]
+    currentPage = pages.indexOf(createViewOnlyWalletPage)
+    createViewOnlyWalletPage.opacity = 1
+    nextButton.visible = true
+    rootItem.state = "wizard";
+}
+
+function openCreateWalletFromDevicePage() {
+    wizardRestarted();
+    print ("show create wallet from device page");
+    currentPath = "create_wallet_from_device"
+    pages = paths[currentPath]
+    wizard.nextButton.visible = true
+    // goto next page
+    switchPage(true);
+}
+
+function createWalletPath(isIOS, folder_path,account_name){
+    // Remove trailing slash - (default on windows and mac)
+    if (folder_path.substring(folder_path.length -1) === "/"){
+        folder_path = folder_path.substring(0,folder_path.length -1)
+    }
+
+    // Store releative path on ios.
+    if(isIOS)
+        folder_path = "";
+
+    return folder_path + "/" + account_name + "/" + account_name
+}
+
+function walletPathExists(directory, filename, isIOS, walletManager) {
+    if(!filename || filename === "") return false;
+    if(!directory || directory === "") return false;
+
+    // make sure directory endswith path seperator
+    // @TODO: use .endswith() after Qt 5.8
+    var trailing_path_sep = directory[directory.length-1];
+    if(trailing_path_sep !== "/" && trailing_path_sep !== "\\")
+        directory += "/"
+
+    if(isIOS)
+        var path = moneroAccountsDir + filename;
+    else
+        var path = directory + filename + "/" + filename;
+
+    if (walletManager.walletExists(path))
+        return true;
+    return false;
+}
+
+function isAscii(str){
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 127)
+            return false;
+    }
+    return true;
+}
+
+function tr(text) {
+    return qsTr(text) + translationManager.emptyString
+}
+
+function lineBreaksToSpaces(text) {
+    return text.trim().replace(/(\r\n|\n|\r)/gm, " ");
+}
+
+function usefulName(path) {
+    // arbitrary "short enough" limit
+    if (path.length < 32)
+        return path
+    return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
+}
+
+function checkSeed(seed) {
+    console.log("Checking seed")
+    var wordsArray = lineBreaksToSpaces(seed).split(" ");
+    return wordsArray.length === 25 || wordsArray.length === 24
+}
+
+function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline){
+    var addressOK = (viewkey.length > 0 || spendkey.length > 0) ? walletmanager.addressValid(addressline, nettype) : false
+    var viewKeyOK = (viewkey.length > 0) ? walletmanager.keyValid(viewkey, addressline, true, nettype) : true
+    // Spendkey is optional
+    var spendKeyOK = (spendkey.length > 0) ? walletmanager.keyValid(spendkey, addressline, false, nettype) : true
+
+    return addressOK && viewKeyOK && spendKeyOK
+}

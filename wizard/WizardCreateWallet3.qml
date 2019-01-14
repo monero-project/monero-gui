@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2018, The Monero Project
-//
+// Copyright (c) 2014-2019, The Monero Project
+// 
 // All rights reserved.
-//
+// 
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-//
+// 
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-//
+// 
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-//
+// 
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-//
+// 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,43 +26,53 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.1
+import QtQuick 2.7
+import QtQuick.Layouts 1.2
+import QtQuick.Controls 2.0
 
-ColumnLayout {
-    property alias password: password.text
-    property alias placeholderText: password.placeholderText
-    signal changed(string password)
+import "../components" as MoneroComponents
 
+Rectangle {
+    id: wizardCreateWallet3
 
-    TextField {
+    color: "transparent"
+    property string viewName: "wizardCreateWallet3"
+
+    ColumnLayout {
+        Layout.alignment: Qt.AlignHCenter;
+        width: parent.width - 100
         Layout.fillWidth: true
-        id : password
-        focus:true
-        font.family: "Arial"
-        font.pixelSize: (isMobile) ? 25 * scaleRatio : 26 * scaleRatio
-        echoMode: TextInput.Password
-        style: TextFieldStyle {
-            renderType: Text.NativeRendering
-            textColor: "#35B05A"
-            passwordCharacter: "•"
-            background: Rectangle {
-                radius: 0
-                border.width: 0
+        anchors.horizontalCenter: parent.horizontalCenter;
+
+        spacing: 0
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: wizardController.wizardSubViewTopMargin
+            Layout.maximumWidth: wizardController.wizardSubViewWidth
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 20 * scaleRatio
+
+            WizardHeader {
+                title: qsTr("Daemon settings") + translationManager.emptyString
+                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
+            }
+
+            WizardDaemonSettings {
+                id: daemonSettings
+            }
+
+            WizardNav {
+                progressSteps: 4
+                progress: 3
+                onPrevClicked: {
+                    wizardStateView.state = "wizardCreateWallet2";
+                }
+                onNextClicked: {
+                    daemonSettings.save();
+                    wizardStateView.state = "wizardCreateWallet4";
+                }
             }
         }
-        onTextChanged: changed(text)
-
-        Keys.onReleased: {
-            changed(text)
-        }
-    }
-
-    Rectangle {
-        Layout.fillWidth:true
-        height: 1
-        color: "#DBDBDB"
     }
 }

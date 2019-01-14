@@ -47,8 +47,13 @@ Rectangle {
         }
         if (status == Wallet.ConnectionStatus_WrongVersion)
             return qsTr("Wrong version")
-        if (status == Wallet.ConnectionStatus_Disconnected)
+        if (status == Wallet.ConnectionStatus_Disconnected){
+            if(appWindow.walletMode <= 1){
+                return qsTr("Searching node") + translationManager.emptyString;
+            }
             return qsTr("Disconnected")
+        }
+
         return qsTr("Invalid connection status")
     }
 

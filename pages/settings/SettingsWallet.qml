@@ -258,6 +258,7 @@ Rectangle {
         }
 
         GridLayout {
+            visible: appWindow.walletMode >= 2
             Layout.fillWidth: true
             Layout.preferredHeight: settingsWallet.itemHeight
             columnSpacing: 0
@@ -326,6 +327,7 @@ Rectangle {
         }
         Rectangle {
             // divider
+            visible: appWindow.walletMode >= 2
             Layout.preferredHeight: 1 * scaleRatio
             Layout.fillWidth: true
             Layout.topMargin: 8 * scaleRatio

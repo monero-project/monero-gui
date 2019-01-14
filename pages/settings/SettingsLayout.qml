@@ -164,6 +164,17 @@ Rectangle {
             }
         }
 
+        MoneroComponents.StandardButton {
+            visible: !persistentSettings.customDecorations
+            Layout.topMargin: 10 * scaleRatio
+            small: true
+            text: "Change language"
+
+            onClicked: {
+                languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
+            }
+        }
+
         MoneroComponents.TextBlock {
             visible: isMobile
             font.pixelSize: 14

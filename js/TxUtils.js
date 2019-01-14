@@ -12,6 +12,7 @@ function destinationsToAddress(destinations){
 }
 
 function addressTruncate(address, range){
+    if(typeof(address) === "undefined") return;
     if(typeof(range) === "undefined") range = 8;
     return address.substring(0, range) + "..." + address.substring(address.length-range);
 }

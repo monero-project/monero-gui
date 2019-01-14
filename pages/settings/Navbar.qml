@@ -182,6 +182,7 @@ Rectangle {
             ColumnLayout {
                 // NODE
                 id: navNode
+                visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navNodeText.width + grid.textMargin
                 Layout.preferredHeight: 32
                 Layout.minimumWidth: 72 * scaleRatio
@@ -225,6 +226,7 @@ Rectangle {
                 }
             }
             Rectangle{
+                visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: 1
                 Layout.preferredHeight: 32
                 color: grid.borderColor
@@ -232,6 +234,7 @@ Rectangle {
             ColumnLayout {
                 // LOG
                 id: navLog
+                visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navLogText.width + grid.textMargin
                 Layout.preferredHeight: 32
                 Layout.minimumWidth: 72 * scaleRatio
@@ -275,6 +278,7 @@ Rectangle {
                 }
             }
             Rectangle{
+                visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: 1
                 Layout.preferredHeight: 32
                 color: grid.borderColor
