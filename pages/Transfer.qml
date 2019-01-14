@@ -137,7 +137,13 @@ Rectangle {
                   id: amountLine
                   Layout.fillWidth: true
                   inlineIcon: true
-                  labelText: qsTr("Amount") + translationManager.emptyString
+                  labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                                   Amount <font size='2'>  ( </font> <a href='#'>Change account</a><font size='2'> )</font>")
+                             + translationManager.emptyString
+                  onLabelLinkActivated: {
+                      middlePanel.accountView.selectAndSend = true;
+                      appWindow.showPageRequest("Account")
+                  }
                   placeholderText: qsTr("") + translationManager.emptyString
                   width: 100 * scaleRatio
                   fontBold: true

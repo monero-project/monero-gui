@@ -24,6 +24,8 @@ class AddressBook;
 class AddressBookModel;
 class Subaddress;
 class SubaddressModel;
+class SubaddressAccount;
+class SubaddressAccountModel;
 
 class Wallet : public QObject
 {
@@ -44,6 +46,8 @@ class Wallet : public QObject
     Q_PROPERTY(AddressBook * addressBook READ addressBook)
     Q_PROPERTY(SubaddressModel * subaddressModel READ subaddressModel)
     Q_PROPERTY(Subaddress * subaddress READ subaddress)
+    Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
+    Q_PROPERTY(SubaddressAccount * subaddressAccount READ subaddressAccount)
     Q_PROPERTY(bool viewOnly READ viewOnly)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
@@ -234,6 +238,12 @@ public:
     //! returns subadress model
     SubaddressModel *subaddressModel();
 
+    //! returns subaddress account
+    SubaddressAccount *subaddressAccount() const;
+
+    //! returns subadress account model
+    SubaddressAccountModel *subaddressAccountModel() const;
+
     //! generate payment id
     Q_INVOKABLE QString generatePaymentId() const;
 
@@ -348,6 +358,8 @@ private:
     mutable AddressBookModel * m_addressBookModel;
     Subaddress * m_subaddress;
     mutable SubaddressModel * m_subaddressModel;
+    SubaddressAccount * m_subaddressAccount;
+    mutable SubaddressAccountModel * m_subaddressAccountModel;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
     QString m_daemonUsername;

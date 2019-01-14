@@ -4,10 +4,12 @@
 #include "TransactionHistory.h"
 #include "AddressBook.h"
 #include "Subaddress.h"
+#include "SubaddressAccount.h"
 #include "model/TransactionHistoryModel.h"
 #include "model/TransactionHistorySortFilterModel.h"
 #include "model/AddressBookModel.h"
 #include "model/SubaddressModel.h"
+#include "model/SubaddressAccountModel.h"
 #include "wallet/api/wallet2_api.h"
 
 #include <QFile>
@@ -357,6 +359,7 @@ bool Wallet::refresh()
     bool result = m_walletImpl->refresh();
     m_history->refresh(currentSubaddressAccount());
     m_subaddress->refresh(currentSubaddressAccount());
+    m_subaddressAccount->getAll(true);
     if (result)
         emit updated();
     return result;
@@ -541,6 +544,20 @@ SubaddressModel *Wallet::subaddressModel()
         m_subaddressModel = new SubaddressModel(this, m_subaddress);
     }
     return m_subaddressModel;
+}
+
+SubaddressAccount *Wallet::subaddressAccount() const
+{
+    return m_subaddressAccount;
+}
+
+SubaddressAccountModel *Wallet::subaddressAccountModel() const
+{
+    if (!m_subaddressAccountModel) {
+        Wallet * w = const_cast<Wallet*>(this);
+        m_subaddressAccountModel = new SubaddressAccountModel(w,m_subaddressAccount);
+    }
+    return m_subaddressAccountModel;
 }
 
 QString Wallet::generatePaymentId() const
@@ -858,6 +875,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_addressBookModel(nullptr)
     , m_subaddress(nullptr)
     , m_subaddressModel(nullptr)
+    , m_subaddressAccount(nullptr)
+    , m_subaddressAccountModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
@@ -868,6 +887,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_history = new TransactionHistory(m_walletImpl->history(), this);
     m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
     m_subaddress = new Subaddress(m_walletImpl->subaddress(), this);
+    m_subaddressAccount = new SubaddressAccount(m_walletImpl->subaddressAccount(), this);
     m_walletListener = new WalletListenerImpl(this);
     m_walletImpl->setListener(m_walletListener);
     m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
@@ -893,6 +913,8 @@ Wallet::~Wallet()
     m_addressBook = NULL;
     delete m_subaddress;
     m_subaddress = NULL;
+    delete m_subaddressAccount;
+    m_subaddressAccount = NULL;
     //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
     if(status() == Status_Critical)
         qDebug("Not storing wallet cache");
