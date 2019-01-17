@@ -49,9 +49,6 @@
         <file>images/dropdownSend.png</file>
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
-        <file>tabs/Twitter.qml</file>
-        <file>tabs/tweetSearch.js</file>
-        <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
         <file>images/deleteIcon.png</file>
