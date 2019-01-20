@@ -130,7 +130,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 0
+        spacing: 10 * scaleRatio
 
         GridLayout {
             property int column_width: {
@@ -147,6 +147,15 @@ Rectangle {
             RowLayout {
                 visible: !isMobile
                 Layout.preferredWidth: parent.column_width
+
+                StandardButton {
+                    visible: !isIOS
+                    small: true
+                    text: qsTr("Export") + translationManager.emptyString
+                    onClicked: {
+                        writeCSVFileDialog.open();
+                    }
+                }
             }
 
             RowLayout {
@@ -359,6 +368,42 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
+            }
+        }
+    }
+
+    FileDialog {
+        id: writeCSVFileDialog
+        title: "Please choose a folder"
+        selectFolder: true
+        onRejected: {
+            console.log("csv write canceled")
+        }
+        onAccepted: {
+            var dataDir = walletManager.urlToLocalPath(writeCSVFileDialog.fileUrl);
+            var written = currentWallet.history.writeCSV(currentWallet.currentSubaddressAccount, dataDir);
+
+            if(written !== ""){
+                confirmationDialog.title = qsTr("Success") + translationManager.emptyString;
+                var text = qsTr("CSV file written to: %1").arg(written) + "\n\n"
+                text += qsTr("Tip: Use your favorite spreadsheet software to sort on blockheight.") + "\n\n" + translationManager.emptyString;
+                confirmationDialog.text = text;
+                confirmationDialog.icon = StandardIcon.Information;
+            } else {
+                confirmationDialog.title = qsTr("Error") + translationManager.emptyString;
+                confirmationDialog.text = qsTr("Error exporting transaction data.") + "\n\n" + translationManager.emptyString;
+                confirmationDialog.icon = StandardIcon.Critical;
+            }
+            confirmationDialog.open()
+        }
+        Component.onCompleted: {
+            var _folder = 'file://' + moneroAccountsDir;
+            try {
+                _folder = 'file://' + desktopFolder;
+            }
+            catch(err) {}
+            finally {
+                writeCSVFileDialog.folder = _folder;
             }
         }
     }
