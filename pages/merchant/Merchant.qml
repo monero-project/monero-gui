@@ -603,7 +603,7 @@ Item {
             var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var timeDate = model.data(idx, TransactionHistoryModel.TransactionDateRole);
             var timeHour = model.data(idx, TransactionHistoryModel.TransactionTimeRole);
-            var timeEpoch = new Date(timeDate + "T" + timeHour + "Z") .getTime() / 1000;
+            var timeEpoch = new Date(timeDate + "T" + timeHour) .getTime() / 1000;
             var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
 

@@ -57,7 +57,11 @@ function ago(epoch) {
     var delta = now - epoch;
 
     if(delta < 60) {
-        return delta + " " + qsTr("seconds ago")
+        if (delta <= 1) {
+            return 1 + " " + qsTr("second ago")
+        } else {
+            return Math.floor(delta) + " " + qsTr("seconds ago")
+        }
     } else if (delta >= 60 && delta <= 3600) {
         if(delta >= 60 && delta < 120){
             return 1 + " " + qsTr("minute ago")
