@@ -268,6 +268,11 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("scaleRatio", 1);
 #endif
 
+#ifndef Q_OS_IOS
+    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    if (!desktopFolder.isEmpty())
+        engine.rootContext()->setContextProperty("desktopFolder", desktopFolder);
+#endif
 
     if (!moneroAccountsRootDir.empty())
     {
