@@ -4,17 +4,12 @@
         <file>LeftPanel.qml</file>
         <file>RightPanel.qml</file>
         <file>MiddlePanel.qml</file>
-        <file>images/closeIcon.png</file>
         <file>images/download-white.png</file>
         <file>images/download-white@2x.png</file>
         <file>images/external-link-white.png</file>
         <file>images/external-link-white@2x.png</file>
-        <file>images/helpIcon.png</file>
-        <file>images/maximizeIcon.png</file>
-        <file>images/minimizeIcon.png</file>
         <file>images/minus-white.png</file>
         <file>images/minus-white@2x.png</file>
-        <file>images/moneroLogo.png</file>
         <file>images/plus-white.png</file>
         <file>images/plus-white@2x.png</file>
         <file>components/Label.qml</file>
@@ -22,14 +17,11 @@
         <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
-        <file>images/menuIndicator.png</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
         <file>pages/Mining.qml</file>
         <file>components/NetworkStatusItem.qml</file>
-        <file>images/statusConnected.png</file>
-        <file>images/statusDisconnected.png</file>
         <file>components/Input.qml</file>
         <file>components/StandardButton.qml</file>
         <file>images/dropIndicator.png</file>
@@ -48,7 +40,6 @@
         <file>tabs/TweetsModel.qml</file>
         <file>components/Scroll.qml</file>
         <file>components/AddressBookTable.qml</file>
-        <file>images/deleteIcon.png</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
@@ -56,11 +47,9 @@
         <file>components/PrivacyLevel.qml</file>
         <file>images/privacyTick.png</file>
         <file>components/CheckBox.qml</file>
-        <file>images/checkedOrangeIcon.png</file>
         <file>images/uncheckedIcon.png</file>
         <file>images/uncheckedIcon@2x.png</file>
         <file>components/DatePicker.qml</file>
-        <file>images/datePicker.png</file>
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TickDelegate.qml</file>
@@ -69,15 +58,11 @@
         <file>images/expandRightPanel.png</file>
         <file>images/dropdownCopy.png</file>
         <file>images/dropdownCopy@2x.png</file>
-        <file>images/expandTable.png</file>
         <file>images/dropdownDel.png</file>
         <file>components/HistoryTable.qml</file>
         <file>components/HistoryTableMobile.qml</file>
-        <file>images/gotoBasicVersion.png</file>
-        <file>images/goToBasicVersionHovered.png</file>
         <file>images/moneroLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
-        <file>images/checkedVioletIcon.png</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>
@@ -170,7 +155,6 @@
         <file>wizard/WizardDaemonSettings.qml</file>
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
-        <file>images/menu.png</file>
         <file>images/appicon.ico</file>
         <file>images/right.png</file>
         <file>images/right@2x.png</file>
@@ -183,9 +167,6 @@
         <file>images/close.png</file>
         <file>images/close@2x.png</file>
         <file>images/moneroLogo_white.png</file>
-        <file>images/moneroIcon-trans28x28.png</file>
-        <file>images/moneroIcon-trans84x84.png</file>
-        <file>images/moneroIcon-trans56x56.png</file>
         <file>images/question.png</file>
         <file>images/question@2x.png</file>
         <file>images/expand.png</file>
@@ -193,7 +174,6 @@
         <file>images/titlebarGradient.jpg</file>
         <file>images/titlebarLogo.png</file>
         <file>images/titlebarLogo@2x.png</file>
-        <file>images/menuArrow.png</file>
         <file>images/menuButtonGradient.png</file>
         <file>fonts/Roboto-Medium.ttf</file>
         <file>fonts/Roboto-Regular.ttf</file>
@@ -231,7 +211,6 @@
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
         <file>images/warning@2x.png</file>
-        <file>images/checkedBlackIcon.png</file>
         <file>images/rightArrowInactive.png</file>
         <file>images/rightArrowInactive@2x.png</file>
         <file>js/Windows.js</file>
