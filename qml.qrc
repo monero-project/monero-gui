@@ -44,15 +44,12 @@
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
         <file>images/whiteDropIndicator@2x.png</file>
-        <file>components/PrivacyLevel.qml</file>
-        <file>images/privacyTick.png</file>
         <file>components/CheckBox.qml</file>
         <file>images/uncheckedIcon.png</file>
         <file>images/uncheckedIcon@2x.png</file>
         <file>components/DatePicker.qml</file>
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
-        <file>components/TickDelegate.qml</file>
         <file>components/TitleBar.qml</file>
         <file>images/collapseRightPanel.png</file>
         <file>images/expandRightPanel.png</file>
