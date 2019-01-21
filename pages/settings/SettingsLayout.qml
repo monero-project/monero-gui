@@ -80,6 +80,16 @@ Rectangle {
 
         MoneroComponents.CheckBox {
             visible: !isMobile
+            id: showPidCheckBox
+            checked: persistentSettings.showPid
+            onClicked: {
+                persistentSettings.showPid = !persistentSettings.showPid
+            }
+            text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
+            visible: !isMobile
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
