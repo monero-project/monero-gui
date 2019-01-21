@@ -41,16 +41,18 @@ ListView {
     property int rowSpacing: 12
     property var addressBookModel: null
 
-    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings) {
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label) {
         var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
 
         return '<table border="0">'
             + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
-            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId  + trEnd : "")
+            + (address_label ? trStart + qsTr("Address label:") + trMiddle + address_label + trEnd : "")
+            + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
+            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
-            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note  + trEnd : "")
+            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
             + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
             + "</table>"
@@ -468,10 +470,12 @@ ListView {
                         var tx_key = currentWallet.getTxKey(hash)
                         var tx_note = currentWallet.getUserNote(hash)
                         var rings = currentWallet.getRings(hash)
+                        var address_label = subaddrIndex == 0 ? qsTr("Primary address") : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
+                        var address = currentWallet.address(subaddrAccount, subaddrIndex)
                         if (rings)
                             rings = rings.replace(/\|/g, '\n')
                         informationPopup.title = "Transaction details";
-                        informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations, rings);
+                        informationPopup.content = buildTxDetailsString(hash,paymentId,tx_key,tx_note,destinations, rings, address, address_label);
                         informationPopup.onCloseCallback = null
                         informationPopup.open();
                     }
