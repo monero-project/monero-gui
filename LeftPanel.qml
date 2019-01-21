@@ -291,20 +291,6 @@ Rectangle {
                     anchors.right: parent.right
                     height: 1
                 }
-              /* Disable twitter/news panel
-                Image {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: logo.verticalCenter
-                    anchors.leftMargin: 19
-                    source: appWindow.rightPanelExpanded ? "images/expandRightPanel.png" :
-                                                           "images/collapseRightPanel.png"
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: appWindow.rightPanelExpanded = !appWindow.rightPanelExpanded
-                }
-              */
             }
         }
     }
