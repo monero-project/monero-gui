@@ -270,83 +270,49 @@ Rectangle {
             }
         }
 
-        RowLayout {
-            Layout.topMargin: 22 * scaleRatio
-            MoneroComponents.CheckBox2 {
-                id: showAdvancedCheckbox
-                checked: persistentSettings.receiveShowAdvanced
-                onClicked: {
-                    persistentSettings.receiveShowAdvanced = !persistentSettings.receiveShowAdvanced
-                }
-                text: qsTr("Advanced options") + translationManager.emptyString
-            }
-        }
+        ColumnLayout {
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 11 * scaleRatio
+            property int qrSize: 220 * scaleRatio
 
-        RowLayout {
-            Layout.topMargin: 6 * scaleRatio
-            visible: persistentSettings.receiveShowAdvanced
-            Layout.fillWidth: true
-
-            MoneroComponents.LineEditMulti {
-                id: paymentUrl
+            Rectangle {
+                id: qrContainer
+                color: "white"
                 Layout.fillWidth: true
+                Layout.maximumWidth: parent.qrSize
+                Layout.preferredHeight: width
+                radius: 4 * scaleRatio
 
-                labelText: qsTr("Payment URL") + translationManager.emptyString
-                text: TxUtils.makeQRCodeString(appWindow.current_address)
-                readOnly: true
-                copyButton: true
-                wrapMode: Text.WrapAnywhere
+                Image {
+                    id: qrCode
+                    anchors.fill: parent
+                    anchors.margins: 1 * scaleRatio
+
+                    smooth: false
+                    fillMode: Image.PreserveAspectFit
+                    source: "image://qrcode/" + TxUtils.makeQRCodeString(appWindow.current_address)
+
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.RightButton
+                        onPressAndHold: qrFileDialog.open()
+                    }
+                }
             }
-        }
-
-        GridLayout{
-            visible: persistentSettings.receiveShowAdvanced
-            Layout.topMargin: 10 * scaleRatio
-            columns: 2
-            columnSpacing: 30 * scaleRatio
 
             RowLayout {
-                property int qrSize: 220 * scaleRatio
-                Layout.fillWidth: true
+                spacing: parent.spacing
 
-                Rectangle {
-                    id: qrContainer
-                    radius: 4 * scaleRatio
-                    color: "white"
-                    Layout.preferredWidth: parent.qrSize
-                    Layout.preferredHeight: parent.qrSize
+                MoneroComponents.StandardButton {
+                    rightIcon: "../images/download-white.png"
+                    onClicked: qrFileDialog.open()
+                }
 
-                    Image {
-                        id: qrCode
-                        anchors.fill: parent
-                        anchors.margins: 1 * scaleRatio
-
-                        smooth: false
-                        fillMode: Image.PreserveAspectFit
-                        source: "image://qrcode/" + TxUtils.makeQRCodeString(appWindow.current_address)
-
-                        MouseArea {
-                            anchors.fill: parent
-                            acceptedButtons: Qt.RightButton
-                            onClicked: {
-                                if (mouse.button == Qt.RightButton){
-                                    qrMenu.x = this.mouseX;
-                                    qrMenu.y = this.mouseY;
-                                    qrMenu.open()
-                                }
-                            }
-                            onPressAndHold: qrFileDialog.open()
-                        }
-                    }
-
-                    Menu {
-                        id: qrMenu
-                        title: "QrCode"
-
-                        MenuItem {
-                            text: qsTr("Save As") + translationManager.emptyString;
-                            onTriggered: qrFileDialog.open()
-                        }
+                MoneroComponents.StandardButton {
+                    rightIcon: "../images/external-link-white.png"
+                    onClicked: {
+                        clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
+                        appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
                     }
                 }
             }
