@@ -106,8 +106,6 @@ ApplicationWindow {
             return
         }
 
-        // Dashboard is not implemented
-        // if(seq === "Ctrl+") middlePanel.state = "Dashboard"
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
         else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
@@ -121,8 +119,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
-            if(middlePanel.state === "Dashboard") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
+            if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "History"
@@ -130,7 +127,6 @@ ApplicationWindow {
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
-            else if(middlePanel.state === "Settings") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
@@ -143,7 +139,6 @@ ApplicationWindow {
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
-            if(middlePanel.state === "Dashboard") middlePanel.state = "Settings"
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "AddressBook"
@@ -152,7 +147,6 @@ ApplicationWindow {
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Dashboard"
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
@@ -1349,14 +1343,6 @@ ApplicationWindow {
             anchors.top: mobileHeader.bottom
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            onDashboardClicked: {
-                middlePanel.state = "Dashboard";
-                middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
-                updateBalance();
-            }
 
             onTransferClicked: {
                 middlePanel.state = "Transfer";

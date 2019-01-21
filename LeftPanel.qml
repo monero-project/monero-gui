@@ -50,7 +50,6 @@ Rectangle {
     property string copyValue: ""
     Clipboard { id: clipboard }
 
-    signal dashboardClicked()
     signal historyClicked()
     signal transferClicked()
     signal receiveClicked()
@@ -65,8 +64,7 @@ Rectangle {
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
-        if(pos === "Dashboard") menuColumn.previousButton = dashboardButton
-        else if(pos === "History") menuColumn.previousButton = historyButton
+        if(pos === "History") menuColumn.previousButton = historyButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
         else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "Merchant")  menuColumn.previousButton = merchantButton
@@ -337,34 +335,6 @@ Rectangle {
             anchors.top: parent.top
             clip: true
             property var previousButton: transferButton
-
-            // ------------- Dashboard tab ---------------
-
-            /*
-            MenuButton {
-                id: dashboardButton
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Dashboard") + translationManager.emptyString
-                symbol: qsTr("D") + translationManager.emptyString
-                dotColor: "#FFE00A"
-                checked: true
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = dashboardButton
-                    panel.dashboardClicked()
-                }
-            }
-
-
-            Rectangle {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 16
-                color: dashboardButton.checked || transferButton.checked ? "#1C1C1C" : "#313131"
-                height: 1
-            }
-            */
 
             // top border
             Rectangle {

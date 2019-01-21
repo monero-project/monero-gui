@@ -116,9 +116,6 @@ Rectangle {
 
         states: [
             State {
-                name: "Dashboard"
-                PropertyChanges {  }
-            }, State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
                 PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
