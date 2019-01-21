@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Blokkmagasság</translation>
+        <translation>Blokkmagasság</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Dátum</translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Vágólapra másolva</translation>
+        <translation>Vágólapra másolva</translation>
     </message>
 </context>
 <context>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Vágólapra másolva</translation>
+        <translation>Vágólapra másolva</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Tárca</translation>
+        <translation>Tárca</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2092,7 +2092,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Hibás jelszó</translation>
+        <translation>Hibás jelszó</translation>
     </message>
 </context>
 <context>

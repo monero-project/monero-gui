@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Bloko aukštis</translation>
+        <translation>Bloko aukštis</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Piniginė</translation>
+        <translation>Piniginė</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2102,7 +2102,7 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Neteisingas slaptažodis</translation>
+        <translation>Neteisingas slaptažodis</translation>
     </message>
 </context>
 <context>

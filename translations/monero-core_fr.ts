@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> sélectionné: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Depuis</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Jusqu&apos;au</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Hauteur bloc</translation>
+        <translation>Hauteur de bloc</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Date</translation>
+        <translation>Date</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;historique...</translation>
     </message>
 </context>
 <context>
@@ -356,7 +356,7 @@
     <message>
         <location filename="../components/InputDialog.qml" line="150"/>
         <source>Ok</source>
-        <translation>OK</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copié dans le presse-papier</translation>
+        <translation>Copié dans le presse-papier</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copié dans le presse-papier</translation>
+        <translation>Copié dans le presse-papier</translation>
     </message>
 </context>
 <context>
@@ -712,27 +712,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Portefeuille</translation>
+        <translation>Portefeuille</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Agencement</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nœud</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -1221,7 +1221,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer le démon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="429"/>
@@ -2104,7 +2104,7 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Mot de passe incorrect</translation>
+        <translation>Mot de passe incorrect</translation>
     </message>
 </context>
 <context>

@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Wysokość bloku</translation>
+        <translation>Wysokość bloku</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopiowano do schowka</translation>
+        <translation>Skopiowano do schowka</translation>
     </message>
 </context>
 <context>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Skopiowano do schowka</translation>
+        <translation>Skopiowano do schowka</translation>
     </message>
 </context>
 <context>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Portfel</translation>
+        <translation>Portfel</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
@@ -2102,7 +2102,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Błędne hasło</translation>
+        <translation>Błędne hasło</translation>
     </message>
 </context>
 <context>

@@ -149,42 +149,42 @@
     <message>
         <location filename="../pages/History.qml" line="72"/>
         <source> selected: </source>
-        <translation type="unfinished"></translation>
+        <translation> selezionato: </translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>Data da</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>Data a</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Altezza blocco</translation>
+        <translation>Altezza blocco</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna cronologia...</translation>
     </message>
 </context>
 <context>
@@ -227,17 +227,17 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">Inviato</translation>
+        <translation>Inviato</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">Ricevuto</translation>
+        <translation>Ricevuto</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
         <source>To </source>
-        <translation type="unfinished"></translation>
+        <translation>A </translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
@@ -374,7 +374,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="93"/>
         <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENZIONE: Non riusare le tue chiavi Monero su un altro fork, A MENO CHE questo fork abbia incorporate delle tecniche di mitigazione per il riuso delle chiavi. Facendo questo potrebbe ledere la tua privacy.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="196"/>
@@ -544,7 +544,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="509"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="534"/>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copiato negli appunti</translation>
+        <translation>Copiato negli appunti</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copiato negli appunti</translation>
+        <translation>Copiato negli appunti</translation>
     </message>
 </context>
 <context>
@@ -712,27 +712,27 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Portafoglio</translation>
+        <translation>Portafoglio</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Layout</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Nodo</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="308"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -1222,7 +1222,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvia daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="429"/>
@@ -2096,7 +2096,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Password errata</translation>
+        <translation>Password errata</translation>
     </message>
 </context>
 <context>

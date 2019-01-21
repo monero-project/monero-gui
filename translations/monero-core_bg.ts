@@ -154,37 +154,37 @@
     <message>
         <location filename="../pages/History.qml" line="161"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Търси</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="191"/>
         <source>Date from</source>
-        <translation type="unfinished"></translation>
+        <translation>От дата</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="214"/>
         <source>Date to</source>
-        <translation type="unfinished"></translation>
+        <translation>До Дата</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="229"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортиране</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">Височина на блока</translation>
+        <translation>Височина на блока</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">Дата</translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
         <source>No history...</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма записи...</translation>
     </message>
 </context>
 <context>
@@ -192,7 +192,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="50"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tx ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="51"/>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
         <source>To </source>
-        <translation type="unfinished"></translation>
+        <translation>До:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="244"/>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tx ID:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
@@ -454,7 +454,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="486"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="415"/>
@@ -474,7 +474,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="125"/>
         <source>Stagenet</source>
-        <translation type="unfinished"></translation>
+        <translation>Стейджнет</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="366"/>
@@ -499,7 +499,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="439"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>Д</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="461"/>
@@ -509,7 +509,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="462"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>М</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="508"/>
@@ -572,12 +572,12 @@
     <message>
         <location filename="../components/LineEdit.qml" line="127"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копиране</translation>
     </message>
     <message>
         <location filename="../components/LineEdit.qml" line="133"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирано в клипборда</translation>
     </message>
 </context>
 <context>
@@ -585,12 +585,12 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="121"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="128"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирано в клипборда</translation>
     </message>
 </context>
 <context>
@@ -712,17 +712,17 @@
     <message>
         <location filename="../pages/settings/Navbar.qml" line="108"/>
         <source>Wallet</source>
-        <translation type="unfinished">Портфейл</translation>
+        <translation>Портфейл</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="158"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Оформление</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="208"/>
         <source>Node</source>
-        <translation type="unfinished"></translation>
+        <translation>Възел</translation>
     </message>
     <message>
         <location filename="../pages/settings/Navbar.qml" line="258"/>
@@ -1156,7 +1156,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="226"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>Команда + ентер (пр.: &apos;help&apos; или &apos;status&apos;</translation>
     </message>
 </context>
 <context>
@@ -1220,7 +1220,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>Start daemon</source>
-        <translation type="unfinished"></translation>
+        <translation>Стартирай клиента</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="429"/>
@@ -2093,7 +2093,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Грешна парола</translation>
+        <translation>Грешна парола</translation>
     </message>
 </context>
 <context>
@@ -2460,7 +2460,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOptions.qml" line="273"/>
         <source>Create a new wallet from hardware device</source>
-        <translation type="unfinished">Създай нов портфекл от хардуерно устройство</translation>
+        <translation>Създай нов портфекл от хардуерно устройство</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOptions.qml" line="290"/>

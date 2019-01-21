@@ -179,7 +179,7 @@
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">तिथि</translation>
+        <translation>तिथि</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -982,7 +982,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="451"/>
         <source>Amount</source>
-        <translation type="unfinished">राशि</translation>
+        <translation>राशि</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="452"/>
@@ -1711,7 +1711,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../components/TableHeader.qml" line="80"/>
         <source>Date</source>
-        <translation type="unfinished">तिथि</translation>
+        <translation>तिथि</translation>
     </message>
     <message>
         <location filename="../components/TableHeader.qml" line="81"/>

@@ -174,12 +174,12 @@
     <message>
         <location filename="../pages/History.qml" line="236"/>
         <source>Block height</source>
-        <translation type="unfinished">블록 높이</translation>
+        <translation>블록 높이</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="237"/>
         <source>Date</source>
-        <translation type="unfinished">날짜</translation>
+        <translation>날짜</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="278"/>
@@ -227,12 +227,12 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Sent</source>
-        <translation type="unfinished">전송됨</translation>
+        <translation>전송됨</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="154"/>
         <source>Received</source>
-        <translation type="unfinished">받음</translation>
+        <translation>받음</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="221"/>
@@ -257,7 +257,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="347"/>
         <source>(%1/%2 confirmations)</source>
-        <translation type="unfinished">(%1/%2의 컨퍼메이션}</translation>
+        <translation>(%1/%2의 컨퍼메이션}</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="351"/>
@@ -293,7 +293,7 @@
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="49"/>
         <source>Tx ID:</source>
-        <translation type="unfinished">거래 아이디:</translation>
+        <translation>거래 아이디:</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableMobile.qml" line="50"/>
@@ -2085,7 +2085,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../js/Utils.js" line="42"/>
         <source>Wrong password</source>
-        <translation type="unfinished">잘못된 암호</translation>
+        <translation>잘못된 암호</translation>
     </message>
 </context>
 <context>
@@ -2628,7 +2628,8 @@ Payment ID: </source>
         <location filename="../main.qml" line="745"/>
         <source>
 Fee: </source>
-        <translation type="unfinished">수수료:</translation>
+        <translation>
+수수료:</translation>
     </message>
     <message>
         <location filename="../main.qml" line="821"/>
@@ -2690,7 +2691,8 @@ Amount: </source>
         <location filename="../main.qml" line="631"/>
         <source>
 Ringsize: </source>
-        <translation type="unfinished">반지 사이즈:</translation>
+        <translation>
+반지 사이즈:</translation>
     </message>
     <message>
         <location filename="../main.qml" line="632"/>
