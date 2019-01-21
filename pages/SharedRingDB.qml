@@ -194,7 +194,6 @@ Rectangle {
 
                 StandardButton {
                     id: loadBlackballFileButton
-                    anchors.right: parent.right
                     text: qsTr("Load") + translationManager.emptyString
                     small: true
                     enabled: !!appWindow.currentWallet && loadBlackballFileLine.text !== ""
@@ -243,7 +242,6 @@ Rectangle {
 
                 StandardButton {
                     id: unblackballButton
-                    anchors.right: parent.right
                     text: qsTr("Mark as unspent") + translationManager.emptyString
                     small: true
                     enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
@@ -415,9 +413,8 @@ Rectangle {
 
         RowLayout {
             id: segregationHeightRow
-            anchors.topMargin: 17
-            anchors.left: parent.left
-            anchors.right: parent.right
+            Layout.topMargin: 17 * scaleRatio
+            Layout.fillWidth: true
 
             LineEdit {
                 id: segregationHeightLine

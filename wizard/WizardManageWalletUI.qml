@@ -250,7 +250,7 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Account address (public)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -266,7 +266,7 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("View key (private)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -283,7 +283,7 @@ ColumnLayout {
             id: spendKeyLine
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
             placeholderOpacity: 1.0
             onTextUpdated: checkNextButton()
@@ -303,7 +303,7 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Restore height (optional)") + translationManager.emptyString
             placeholderOpacity: 1.0
             validator: IntValidator {
@@ -326,7 +326,7 @@ ColumnLayout {
             Layout.minimumWidth: 200 * scaleRatio
             placeholderFontBold: true
             placeholderFontFamily: "Arial"
-            placeholderColor: Style.legacy_placeholderFontColor
+            placeholderColor: MoneroComponents.Style.legacy_placeholderFontColor
             placeholderText: qsTr("Subaddress lookahead (optional): <major>:<minor>") + translationManager.emptyString
             placeholderOpacity: 1.0
             borderColor: Qt.rgba(0, 0, 0, 0.15)

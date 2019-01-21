@@ -79,7 +79,6 @@ Item {
 
             Label {
                 id: label
-                anchors.left: parent.left
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -93,7 +92,6 @@ Item {
                 focus: true
                 Layout.topMargin: 6
                 Layout.fillWidth: true
-                anchors.left: parent.left
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: MoneroComponents.Style.fontLight.name

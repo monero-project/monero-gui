@@ -97,8 +97,8 @@ Rectangle {
 
                 ListView {
                     id: subaddressListView
+                    Layout.fillHeight: true
                     Layout.fillWidth: true
-                    anchors.fill: parent
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     delegate: Rectangle {
