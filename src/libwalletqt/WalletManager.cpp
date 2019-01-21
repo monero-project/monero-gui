@@ -307,7 +307,7 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
 {
     QString address;
     QString payment_id;
-    uint64_t amount;
+    uint64_t amount = 0;
     QString tx_description;
     QString recipient_name;
     QVector<QString> unknown_parameters;
@@ -317,7 +317,7 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
     if (this->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error)) {
         result.insert("address", address);
         result.insert("payment_id", payment_id);
-        result.insert("amount", this->displayAmount(amount));
+        result.insert("amount", amount > 0 ? this->displayAmount(amount) : "");
         result.insert("tx_description", tx_description);
         result.insert("recipient_name", recipient_name);
     } else {
