@@ -32,18 +32,17 @@ import "../components"
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 
-Rectangle {
+ColumnLayout {
     id: root
-    color: "transparent"
     property var model
+    property bool selectAndSend: false
 
     ColumnLayout {
-        id: columnLayout
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
+        Layout.margins: (isMobile ? 17 : 20) * scaleRatio
+        Layout.topMargin: 40 * scaleRatio
+        Layout.fillWidth: true
         spacing: 26 * scaleRatio
+        visible: !root.selectAndSend
 
         RowLayout {
             StandardButton {
@@ -119,13 +118,11 @@ Rectangle {
 
     Rectangle {
         id: tableRect
-        anchors.top: columnLayout.bottom
-        anchors.leftMargin: (isMobile)? 17 : 40
-        anchors.rightMargin: (isMobile)? 17 : 40
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: parent.height - addButton.y - addButton.height - 36 * scaleRatio
+        Layout.leftMargin: (isMobile ? 17 : 40) * scaleRatio
+        Layout.rightMargin: (isMobile ? 17 : 40) * scaleRatio
+        Layout.topMargin: (root.selectAndSend ? 40 : 0) * scaleRatio
+        Layout.fillHeight: true
+        Layout.fillWidth: true
         color: "transparent"
 
         Behavior on height {
@@ -149,6 +146,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             onContentYChanged: flickableScroll.flickableContentYChanged()
             model: root.model
+            selectAndSend: root.selectAndSend
         }
     }
 
@@ -166,6 +164,10 @@ Rectangle {
       paymentIdLine.error = !payment_id_ok
 
       return address_ok && payment_id_ok
+    }
+
+    function onPageClosed() {
+        root.selectAndSend = false;
     }
 
     function onPageCompleted() {

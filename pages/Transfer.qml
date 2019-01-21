@@ -213,7 +213,10 @@ Rectangle {
               placeholderText: "4.. / 8.."
               wrapMode: Text.WrapAnywhere
               addressValidation: true
-              onInputLabelLinkActivated: { appWindow.showPageRequest("AddressBook") }
+              onInputLabelLinkActivated: {
+                  middlePanel.addressBookView.selectAndSend = true;
+                  appWindow.showPageRequest("AddressBook");
+              }
               pasteButton: true
               onPaste: function(clipboardText) {
                   const parsed = walletManager.parse_uri_to_object(clipboardText);
