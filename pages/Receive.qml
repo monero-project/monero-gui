@@ -88,8 +88,8 @@ Rectangle {
 
             ColumnLayout {
                 id: subaddressListRow
-                property int subaddressListItemHeight: 32 * scaleRatio
-                Layout.topMargin: 22 * scaleRatio
+                property int subaddressListItemHeight: 50 * scaleRatio
+                Layout.topMargin: 6 * scaleRatio
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
                 Layout.preferredHeight: subaddressListItemHeight * subaddressListView.count
@@ -97,8 +97,8 @@ Rectangle {
 
                 ListView {
                     id: subaddressListView
-                    Layout.fillHeight: true
                     Layout.fillWidth: true
+                    anchors.fill: parent
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     delegate: Rectangle {
@@ -128,7 +128,7 @@ Rectangle {
                                 color: index === appWindow.current_subaddress_table_index ? "white" : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.leftMargin: 6
+                                anchors.leftMargin: 6 * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
                                 text: "#" + index
@@ -139,29 +139,26 @@ Rectangle {
                                 color: "#a5a5a5"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
-                                anchors.leftMargin: 6
+                                anchors.leftMargin: 6 * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
                                 text: label
+                                elide: Text.ElideRight
+                                textWidth: addressLabel.x - nameLabel.x - 1
                             }
 
                             MoneroComponents.Label {
+                                id: addressLabel
                                 color: "white"
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: nameLabel.right
-                                anchors.leftMargin: 6
+                                anchors.left: parent.right
+                                anchors.leftMargin: (mainLayout.width < 510 ? -130 : -190) * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
-                                text: {
-                                    if(isMobile){
-                                        TxUtils.addressTruncate(address, 6);
-                                    } else {
-                                        return TxUtils.addressTruncate(address, 10);
-                                    }
-                                }
+                                text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 6 : 10)
                             }
 
-                            MouseArea{
+                            MouseArea {
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
@@ -181,9 +178,9 @@ Rectangle {
                             id: renameButton
                             imageSource: "../images/editIcon.png"
                             anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: index !== 0 ? copyButton.left : parent.right
-                            anchors.rightMargin: index !== 0 ? 0 : 6
-                            anchors.top: undefined
+                            anchors.right: parent.right
+                            anchors.rightMargin: 30 * scaleRatio
+                            anchors.topMargin: 1 * scaleRatio
                             visible: index !== 0
 
                             onClicked: {
@@ -193,7 +190,7 @@ Rectangle {
 
                         MoneroComponents.IconButton {
                             id: copyButton
-                            imageSource: "../images/copyToClipboard.png"
+                            imageSource: "../images/dropdownCopy.png"
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.top: undefined
                             anchors.right: parent.right
@@ -216,56 +213,32 @@ Rectangle {
                 }
             }
 
-            // 'fake' row for 'create new address'
-            ColumnLayout {
-                id: createAddressRow
+            Rectangle {
+                color: "#404040"
                 Layout.fillWidth: true
-                spacing: 0
+                height: 1
+            }
 
-                Rectangle {
-                    color: "#404040"
-                    Layout.fillWidth: true
-                    height: 1
-                }
-
-                Rectangle {
-                    id: createAddressRect
-                    Layout.preferredHeight: subaddressListRow.subaddressListItemHeight
-                    color: "transparent"
-                    Layout.fillWidth: true
-
-                    MoneroComponents.Label {
-                        color: "#757575"
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: 6
-                        fontSize: 14 * scaleRatio
-                        fontBold: true
-                        text: "+ " + qsTr("Create new address") + translationManager.emptyString;
+            MoneroComponents.CheckBox { 
+                id: addNewAccountCheckbox 
+                visible: !selectAndSend
+                border: false
+                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
+                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
+                fontSize: 14 * scaleRatio 
+                iconOnTheLeft: true
+                Layout.fillWidth: true
+                Layout.topMargin: 10 * scaleRatio
+                text: qsTr("Create new account") + translationManager.emptyString; 
+                onClicked: { 
+                    inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
+                    inputDialog.inputText = qsTr("(Untitled)")
+                    inputDialog.onAcceptedCallback = function() {
+                        appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
+                        current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
                     }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-
-                        onEntered: {
-                            createAddressRect.color = "#26FFFFFF"
-                        }
-                        onExited: {
-                            createAddressRect.color = "transparent"
-                        }
-                        onClicked: {
-                            inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
-                            inputDialog.inputText = qsTr("(Untitled)")
-                            inputDialog.onAcceptedCallback = function() {
-                                appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
-                                current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
-                            }
-                            inputDialog.onRejectedCallback = null;
-                            inputDialog.open()
-                        }
-                    }
+                    inputDialog.onRejectedCallback = null;
+                    inputDialog.open()
                 }
             }
         }
