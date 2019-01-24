@@ -300,7 +300,7 @@ Rectangle {
               fontSize: paymentIdLine.labelFontSize
               iconOnTheLeft: false
               Layout.fillWidth: true
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
+              text: qsTr("Payment ID <font size='2'>( Optional, deprecated )</font>") + translationManager.emptyString
               onClicked: {
                   if (!paymentIdCheckbox.checked) {
                     paymentIdLine.text = "";
