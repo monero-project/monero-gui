@@ -100,13 +100,13 @@ Rectangle {
                 id: soloMinerThreadsLine
                 Layout.preferredWidth:  200 * scaleRatio
                 text: "1"
-                validator: IntValidator { bottom: 1; top: numberMiningThreadsAvailable }
+                validator: IntValidator { bottom: 1; top: idealThreadCount }
             }
         }
 
         Text {
             id: numAvailableThreadsText
-            text: qsTr("Max # of CPU threads available for mining: ") + numberMiningThreadsAvailable + translationManager.emptyString
+            text: qsTr("Max # of CPU threads available for mining: ") + idealThreadCount + translationManager.emptyString
             wrapMode: Text.WordWrap
             Layout.leftMargin: 125 * scaleRatio
             font.family: MoneroComponents.Style.fontRegular.name
@@ -123,7 +123,7 @@ Rectangle {
                 text: qsTr("Use recommended # of threads") + translationManager.emptyString
                 enabled: startSoloMinerButton.enabled
                 onClicked: {
-                        soloMinerThreadsLine.text = Math.floor(numberMiningThreadsAvailable / 2);
+                        soloMinerThreadsLine.text = Math.floor(idealThreadCount / 2);
                         appWindow.showStatusMessage(qsTr("Set to use recommended # of threads"),3)
                 }
             }
@@ -134,7 +134,7 @@ Rectangle {
                 text: qsTr("Use all threads") + translationManager.emptyString
                 enabled: startSoloMinerButton.enabled
                 onClicked: {
-                    soloMinerThreadsLine.text = numberMiningThreadsAvailable
+                    soloMinerThreadsLine.text = idealThreadCount
                     appWindow.showStatusMessage(qsTr("Set to use all threads"),3)
                 }
             }
