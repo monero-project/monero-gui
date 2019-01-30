@@ -362,6 +362,7 @@ Rectangle{
                     if (appWindow.daemonRunning) {
                         appWindow.stopDaemon();
                     } else {
+                        persistentSettings.daemonFlags = daemonFlags.text;
                         appWindow.startDaemon(persistentSettings.daemonFlags);
                     }
                 }
@@ -407,8 +408,9 @@ Rectangle{
                     labelText: qsTr("Daemon startup flags") + translationManager.emptyString
                     placeholderText: qsTr("(optional)") + translationManager.emptyString
                     placeholderFontSize: 15 * scaleRatio
-                    text: appWindow.persistentSettings.daemonFlags
+                    text: persistentSettings.daemonFlags
                     addressValidation: false
+                    onEditingFinished: persistentSettings.daemonFlags = daemonFlags.text;
                 }
             }
 
