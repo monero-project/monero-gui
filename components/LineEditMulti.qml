@@ -38,6 +38,7 @@ ColumnLayout {
     Layout.preferredHeight: childrenRect.height
 
     property alias text: input.text
+    property alias textHorizontalAlignment: input.horizontalAlignment
     property alias labelText: inputLabel.text
     property alias labelButtonText: labelButton.text
     property alias placeholderText: placeholderLabel.text

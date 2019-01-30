@@ -39,6 +39,7 @@ Item {
     property string textAlign: rightIcon !== "" ? "left" : "center"
     property bool small: false
     property alias text: label.text
+    property alias buttonRectState: buttonRect.state
     property int fontSize: {
         if(small) return 14 * scaleRatio;
         else return 16 * scaleRatio;

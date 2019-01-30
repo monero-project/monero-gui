@@ -125,7 +125,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === appWindow.current_subaddress_table_index ? "white" : "#757575"
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.orange : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -146,7 +146,7 @@ Rectangle {
                             }
 
                             MoneroComponents.Label {
-                                color: "white"
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.orange : "white"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: nameLabel.right
                                 anchors.leftMargin: 6
@@ -272,11 +272,12 @@ Rectangle {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignHCenter
-            spacing: 11 * scaleRatio
-            property int qrSize: 220 * scaleRatio
+            spacing: 8 * scaleRatio
+            property int qrSize: 180 * scaleRatio
 
             Rectangle {
                 id: qrContainer
+                Layout.alignment: Qt.AlignHCenter
                 color: "white"
                 Layout.fillWidth: true
                 Layout.maximumWidth: parent.qrSize
@@ -300,15 +301,39 @@ Rectangle {
                 }
             }
 
+            MoneroComponents.LineEditMulti {
+                id: descriptionLine
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                fontColor: "#a5a5a5"
+                fontSize: 18 * scaleRatio
+                text: saveToQRImageButton.buttonRectState == "hover" ? qsTr("SAVE QR IMAGE") : copyToClipboardButton.buttonRectState == "hover" ? qsTr("COPY ADDRESS") : qsTr("YOUR MONERO ADDRESS")
+                textHorizontalAlignment: TextInput.AlignHCenter
+                readOnly: true
+                borderDisabled: true
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: addressLine
+                fontBold: true
+                text: appWindow.current_address
+                wrapMode: Text.WrapAnywhere
+                fontColor: MoneroComponents.Style.orange
+                readOnly: true
+            }
+
             RowLayout {
                 spacing: parent.spacing
+                Layout.alignment: Qt.AlignHCenter
 
                 MoneroComponents.StandardButton {
+                    id: saveToQRImageButton
                     rightIcon: "../images/download-white.png"
                     onClicked: qrFileDialog.open()
                 }
 
                 MoneroComponents.StandardButton {
+                    id: copyToClipboardButton
                     rightIcon: "../images/external-link-white.png"
                     onClicked: {
                         clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
@@ -325,7 +350,7 @@ Rectangle {
 
         FileDialog {
             id: qrFileDialog
-            title: qsTr("Please choose a name")
+            title: qsTr("SAVE QR IMAGE")
             folder: shortcuts.pictures
             selectExisting: false
             nameFilters: ["Image (*.png)"]
