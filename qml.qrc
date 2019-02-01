@@ -17,6 +17,7 @@
         <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
+        <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
@@ -232,6 +233,8 @@
         <file>images/eyeHide@2x.png</file>
         <file>images/eyeShow.png</file>
         <file>images/eyeShow@2x.png</file>
+        <file>images/plus-in-circle-medium-white.png</file>
+        <file>images/plus-in-circle-medium-white@2x.png</file>
         <file>pages/merchant/Merchant.qml</file>
         <file>pages/merchant/MerchantCheckbox.qml</file>
         <file>pages/merchant/MerchantTrackingList.qml</file>

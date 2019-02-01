@@ -67,7 +67,7 @@ Rectangle {
     property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
     property Keys keysView: Keys { }
-
+    property Account accountView: Account { }
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
@@ -160,7 +160,11 @@ Rectangle {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
                 PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight }
-            }
+            }, State {
+	           name: "Account"
+	           PropertyChanges { target: root; currentView: accountView }
+	           PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+            }	
         ]
 
     // color stripe at the top

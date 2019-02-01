@@ -44,6 +44,8 @@ Item {
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
     property alias hoveredLink: label.hoveredLink
+    property alias elide: label.elide
+    property alias textWidth: label.width
     signal linkActivated()
     height: label.height * scaleRatio
     width: label.width * scaleRatio

@@ -61,6 +61,7 @@ Rectangle {
     signal signClicked()
     signal keysClicked()
     signal merchantClicked()
+    signal accountClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -76,7 +77,7 @@ Rectangle {
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
         else if(pos === "Keys") menuColumn.previousButton = keysButton
-
+        else if(pos === "Account") menuColumn.previousButton = accountButton
         menuColumn.previousButton.checked = true
     }
 
@@ -285,6 +286,8 @@ Rectangle {
                     anchors.leftMargin: 20
                     anchors.top: parent.top
                     anchors.topMargin: 60
+                    elide: Text.ElideRight
+                    textWidth: 238
                 }
                 Item { //separator
                     anchors.left: parent.left
@@ -324,6 +327,30 @@ Rectangle {
 
             // top border
             Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 16
+                color: "#313131"
+                height: 1
+            }
+
+            // ------------- Account tab ---------------
+            MoneroComponents.MenuButton {
+                id: accountButton
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Account") + translationManager.emptyString
+                symbol: qsTr("T") + translationManager.emptyString
+                dotColor: "#44AAFF"
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = accountButton
+                    panel.accountClicked()
+                }
+            }
+
+            Rectangle {
+                visible: accountButton.present
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16

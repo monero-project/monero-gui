@@ -86,10 +86,11 @@ ApplicationWindow {
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
-    // Current selected address / subaddress (Receive page)
+    // Current selected address / subaddress / (Receive/Account page)
     property var current_address
     property var current_address_label: "Primary"
     property int current_subaddress_table_index: 0
+    property int current_subaddress_account_table_index: 0
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -117,6 +118,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+Y") leftPanel.keysClicked()
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
+        else if(seq === "Ctrl+T") middlePanel.state = "Account"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
@@ -128,7 +130,8 @@ ApplicationWindow {
             else if(middlePanel.state === "Mining") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Transfer"
+            if(middlePanel.state === "Settings") middlePanel.state = "Account"
+            else if(middlePanel.state === "Account") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "History"
@@ -156,7 +159,8 @@ ApplicationWindow {
             else if(middlePanel.state === "History") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
-            else if(middlePanel.state === "Transfer") middlePanel.state = "Settings"
+            else if(middlePanel.state === "Transfer") middlePanel.state = "Account"
+            else if(middlePanel.state === "Account") middlePanel.state = "Settings"
         }
 
         if (middlePanel.state !== "Advanced") updateBalance();
@@ -368,6 +372,9 @@ ApplicationWindow {
         leftPanel.unlockedBalanceText = balance_unlocked;
         middlePanel.balanceText = balance;
         leftPanel.balanceText = balance;
+
+        var accountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+        leftPanel.balanceLabelText = qsTr("Balance (#%1%2)").arg(currentWallet.currentSubaddressAccount).arg(accountLabel === "" ? "" : (" – " + accountLabel));
     }
 
     function onWalletConnectionStatusChanged(status){
@@ -1435,6 +1442,15 @@ ApplicationWindow {
             }
 
             onKeysClicked: Utils.showSeedPage();
+            
+            onAccountClicked: {
+                middlePanel.state = "Account";
+                middlePanel.flickable.contentY = 0;
+                if(isMobile) {
+                    hideMenu();
+                }
+                updateBalance();
+            }
         }
 
         RightPanel {
