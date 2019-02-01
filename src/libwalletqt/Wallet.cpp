@@ -640,19 +640,27 @@ Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &
     return QString::fromStdString(result);
 }
 
-QString Wallet::getReserveProof(quint64 amount, const QString &message)
+QString Wallet::getReserveProof(bool all, quint64 amount, const QString &message)
 {
-    std::string proof = m_walletImpl->getReserveProof(false, 0, amount, message.toStdString());
+    std::string proof = m_walletImpl->getReserveProof(all, 0, amount, message.toStdString());
     return QString::fromStdString(proof);
 }
 
-bool Wallet::checkReserveProof(const QString &address, const QString &message, const QString &signature)
+QString Wallet::checkReserveProof(const QString &address, const QString &message, const QString &signature)
 {
     bool good;
     uint64_t total;
     uint64_t spent;
-    m_walletImpl->checkReserveProof(address.toStdString(), message.toStdString(), signature.toStdString(), good, total, spent);
-    return good;
+    bool success = m_walletImpl->checkReserveProof(address.toStdString(), message.toStdString(), signature.toStdString(), good, total, spent);
+    std::string result = std::string(success ? "true" : "false") + "|";
+    if (success) {
+        result += good ? "true" : "false";
+        if (good)
+            result += "|" + std::to_string(total) + "|" + std::to_string(spent);
+    } else {
+        result += m_walletImpl->errorString();
+    }
+    return QString::fromStdString(result);
 }
 
 QString Wallet::signMessage(const QString &message, bool filename) const

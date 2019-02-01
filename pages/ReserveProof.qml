@@ -74,6 +74,9 @@ Rectangle {
             labelText: qsTr("Amount") + translationManager.emptyString
             placeholderText: qsTr("Amount to prove") + translationManager.emptyString
             placeholderFontSize: 16 * scaleRatio
+            inlineButtonText: qsTr("All") + translationManager.emptyString
+            inlineButton.onClicked: amountLine.text = "(all)"
+            enabled: amountLine.text === "(all)" || amountLine.text > 0
             fontSize: 16 * scaleRatio
             readOnly: false
 
@@ -106,11 +109,12 @@ Rectangle {
             text: qsTr("Generate") + translationManager.emptyString
             enabled: amountLine.text > 0
             onClicked: {
-              informationPopup.title  = qsTr("Reserve proof") + translationManager.emptyString;
-              console.log("message: " + getMessageLine.text);
-              informationPopup.text  = appWindow.currentWallet.getReserveProof(amountLine.text, getMessageLine.text);
-              informationPopup.onCloseCallback = null
-              informationPopup.open()
+                informationPopup.title  = qsTr("Reserve proof") + translationManager.emptyString;
+                console.log("message: " + getMessageLine.text);
+                var all = amountLine.text === "(all)";
+                informationPopup.text  = appWindow.currentWallet.getReserveProof(all, all ? 0 : walletManager.amountFromString(amountLine.text), getMessageLine.text);
+                informationPopup.onCloseCallback = null
+                informationPopup.open()
             }
         }
 
@@ -181,15 +185,22 @@ Rectangle {
             text: qsTr("Verify") + translationManager.emptyString
             enabled: TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)
             onClicked: {
-              informationPopup.title  = qsTr("Proof Result") + translationManager.emptyString;
-              var result;
-              if(appWindow.currentWallet.checkReserveProof(addressLine.text, proveMessageLine.text, signatureLine.text))
-                  result = "True Proof";
-              else
-                  result = "False Proof";
-              informationPopup.text  = result
-              informationPopup.onCloseCallback = null
-              informationPopup.open();
+                informationPopup.title  = qsTr("Proof Result") + translationManager.emptyString;
+
+                var result = appWindow.currentWallet.checkReserveProof(addressLine.text, proveMessageLine.text, signatureLine.text);
+                var results = result.split("|");
+                if (results[0] === "true") {
+                    if (results[1] === "true") {
+                        informationPopup.text = "Good signature: total " + walletManager.displayAmount(results[2]) + ", spent " + walletManager.displayAmount(results[3]);
+                    } else {
+                    informationPopup.text = "Bad signature";
+                    }
+                } else {
+                    informationPopup.text = "Error: " + results[1];
+                }
+
+                informationPopup.onCloseCallback = null
+                informationPopup.open();
             }
         }
     }
