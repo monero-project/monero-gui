@@ -32,7 +32,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
-import "../components"
+import "../components" as MoneroComponents
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
@@ -79,6 +79,7 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
+        Layout.fillWidth: true
         anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 40 * scaleRatio
   
@@ -87,16 +88,13 @@ Rectangle {
         anchors.right: parent.right
 
         spacing: 20 * scaleRatio
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 14 * scaleRatio
 
         MessageDialog {
             id: sharedRingDBDialog
             standardButtons: StandardButton.Ok
         }
 
-        Label {
+        MoneroComponents.Label {
             id: signTitleLabel
             fontSize: 24 * scaleRatio
             text: qsTr("Shared RingDB") + translationManager.emptyString
@@ -107,12 +105,12 @@ Rectangle {
                        "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-            font.family: Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
-            color: Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
-        LabelSubheader {
+        MoneroComponents.LabelSubheader {
             Layout.fillWidth: true
             textFormat: Text.RichText
             text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style>" +
@@ -138,13 +136,13 @@ Rectangle {
 
         Text {
             textFormat: Text.RichText
-            font.family: Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
             text: qsTr("This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. ") +
                   qsTr("You should only have to load a file when you want to refresh the list. Manual adding/removing is possible if needed.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
-            color: Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
         ColumnLayout {
@@ -155,35 +153,31 @@ Rectangle {
                 id: loadBlackballFileDialog
                 title: qsTr("Please choose a file from which to load outputs to mark as spent") + translationManager.emptyString;
                 folder: "file://"
-                nameFilters: [ "*"]
+                nameFilters: ["*"]
 
                 onAccepted: {
                     loadBlackballFileLine.text = walletManager.urlToLocalPath(loadBlackballFileDialog.fileUrl)
                 }
             }
 
-            RowLayout {
+            MoneroComponents.LineEdit {
+                id: loadBlackballFileLine
                 Layout.fillWidth: true
-
-                LineEdit {
-                    id: loadBlackballFileLine
-                    Layout.fillWidth: true
-                    fontSize: mainLayout.lineEditFontSize
-                    placeholderText: qsTr("Path to file") + "..." + translationManager.emptyString
-                    labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Filename with outputs to mark as spent") + ":" + translationManager.emptyString
-                    copyButton: true
-                    readOnly: false
-                }
+                fontSize: 16 * scaleRatio
+                placeholderFontSize: 16 * scaleRatio
+                placeholderText: qsTr("Path to file") + "..." + translationManager.emptyString
+                labelFontSize: 14 * scaleRatio
+                labelText: qsTr("Filename with outputs to mark as spent") + ":" + translationManager.emptyString
+                copyButton: true
+                readOnly: false
             }
 
             RowLayout {
                 Layout.fillWidth: true
                 Layout.topMargin: 18
 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: selectBlackballFileButton
-                    anchors.rightMargin: 17 * scaleRatio
                     text: qsTr("Browse") + translationManager.emptyString
                     enabled: true
                     small: true
@@ -192,7 +186,7 @@ Rectangle {
                     }
                 }
 
-                StandardButton {
+                MoneroComponents.StandardButton {
                     id: loadBlackballFileButton
                     text: qsTr("Load") + translationManager.emptyString
                     small: true
@@ -202,55 +196,57 @@ Rectangle {
             }
         }
 
-        ColumnLayout {
-            Layout.topMargin: 12
+        GridLayout {
+            Layout.fillWidth: true
+            columnSpacing: 20 * scaleRatio
 
-            RowLayout {
-                LineEdit {
-                    id: blackballOutputAmountLine
-                    fontSize: mainLayout.lineEditFontSize
-                    labelFontSize: 14 * scaleRatio
-                    labelText: qsTr("Or manually mark a single output as spent/unspent:") + translationManager.emptyString
-                    placeholderText: qsTr("Paste output amount") + "..." + translationManager.emptyString
-                    readOnly: false
-                    width: mainLayout.editWidth / 2
-                    validator: IntValidator { bottom: 0 }
-                }
-                LineEdit {
-                    id: blackballOutputOffsetLine
-                    fontSize: mainLayout.lineEditFontSize
-                    labelFontSize: 14 * scaleRatio
-                    labelText: " "
-                    placeholderText: qsTr("Paste output offset") + "..." + translationManager.emptyString
-                    readOnly: false
-                    width: mainLayout.editWidth / 2
-                    validator: IntValidator { bottom: 0 }
-                }
+            MoneroComponents.LineEdit {
+                id: blackballOutputAmountLine
+                Layout.fillWidth: true
+                fontSize: 16 * scaleRatio
+                labelFontSize: 14 * scaleRatio
+                labelText: qsTr("Or manually mark a single output as spent/unspent:") + translationManager.emptyString
+                placeholderFontSize: 16 * scaleRatio
+                placeholderText: qsTr("Paste output amount") + "..." + translationManager.emptyString
+                readOnly: false
+                validator: IntValidator { bottom: 0 }
             }
 
-            RowLayout {
+            MoneroComponents.LineEdit {
+                id: blackballOutputOffsetLine
                 Layout.fillWidth: true
-                Layout.topMargin: 18
-
-                StandardButton {
-                    id: blackballButton
-                    text: qsTr("Mark as spent") + translationManager.emptyString
-                    small: true
-                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
-                    onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
-                }
-
-                StandardButton {
-                    id: unblackballButton
-                    text: qsTr("Mark as unspent") + translationManager.emptyString
-                    small: true
-                    enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
-                    onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
-                }
+                fontSize: 16 * scaleRatio
+                labelFontSize: 14 * scaleRatio
+                labelText: " "
+                placeholderFontSize: 16 * scaleRatio
+                placeholderText: qsTr("Paste output offset") + "..." + translationManager.emptyString
+                readOnly: false
+                validator: IntValidator { bottom: 0 }
             }
         }
 
-        LabelSubheader {
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.topMargin: 18
+
+            MoneroComponents.StandardButton {
+                id: blackballButton
+                text: qsTr("Mark as spent") + translationManager.emptyString
+                small: true
+                enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                onClicked: appWindow.currentWallet.blackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
+            }
+
+            MoneroComponents.StandardButton {
+                id: unblackballButton
+                text: qsTr("Mark as unspent") + translationManager.emptyString
+                small: true
+                enabled: !!appWindow.currentWallet && validUnsigned(blackballOutputAmountLine.text) && validUnsigned(blackballOutputOffsetLine.text)
+                onClicked: appWindow.currentWallet.unblackballOutput(blackballOutputAmountLine.text, blackballOutputOffsetLine.text)
+            }
+        }
+
+        MoneroComponents.LabelSubheader {
             Layout.fillWidth: true
             Layout.topMargin: 24 * scaleRatio
             textFormat: Text.RichText
@@ -278,26 +274,24 @@ Rectangle {
 
         Text {
             textFormat: Text.RichText
-            font.family: Style.fontRegular.name
+            font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
             text: qsTr("This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true;
-            color: Style.defaultFontColor
+            color: MoneroComponents.Style.defaultFontColor
         }
 
-        RowLayout {
-            LineEdit {
-                id: keyImageLine
-                fontSize: mainLayout.lineEditFontSize
-                labelFontSize: 14 * scaleRatio
-                labelText: qsTr("Key image") + ":" + translationManager.emptyString
-                placeholderText: qsTr("Paste key image") + "..." + translationManager.emptyString
-                readOnly: false
-                copyButton: true
-                width: mainLayout.editWidth
-                Layout.fillWidth: true
-            }
+        MoneroComponents.LineEdit {
+            id: keyImageLine
+            Layout.fillWidth: true
+            fontSize: 16 * scaleRatio
+            labelFontSize: 14 * scaleRatio
+            labelText: qsTr("Key image") + ":" + translationManager.emptyString
+            placeholderFontSize: 16 * scaleRatio
+            placeholderText: qsTr("Paste key image") + "..." + translationManager.emptyString
+            readOnly: false
+            copyButton: true
         }
 
         GridLayout{
@@ -307,10 +301,10 @@ Rectangle {
 
             ColumnLayout {
                 RowLayout {
-                    LineEdit {
+                    MoneroComponents.LineEdit {
                         id: getRingLine
                         Layout.fillWidth: true
-                        fontSize: mainLayout.lineEditFontSize
+                        fontSize: 16 * scaleRatio
                         labelFontSize: 14 * scaleRatio
                         labelText: qsTr("Get ring") + ":" + translationManager.emptyString
                         readOnly: true
@@ -322,7 +316,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.topMargin: 18
 
-                    StandardButton {
+                    MoneroComponents.StandardButton {
                         id: getRingButton
                         text: qsTr("Get Ring") + translationManager.emptyString
                         small: true
@@ -342,11 +336,12 @@ Rectangle {
 
             ColumnLayout {
                 RowLayout {
-                    LineEdit {
+                    MoneroComponents.LineEdit {
                         id: setRingLine
                         Layout.fillWidth: true
-                        fontSize: mainLayout.lineEditFontSize
+                        fontSize: 16 * scaleRatio
                         labelFontSize: 14 * scaleRatio
+                        placeholderFontSize: 16 * scaleRatio
                         labelText: qsTr("Set ring") + ":" + translationManager.emptyString
                         readOnly: false
                         copyButton: true
@@ -357,7 +352,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.topMargin: 18
 
-                    StandardButton {
+                    MoneroComponents.StandardButton {
                         id: setRingButton
                         text: qsTr("Set Ring") + translationManager.emptyString
                         small: true
@@ -372,9 +367,10 @@ Rectangle {
         }
 
         GridLayout {
+            columnSpacing: 20 * scaleRatio
             columns: (isMobile) ?  1 : 2
 
-            CheckBox {
+            MoneroComponents.CheckBox {
                 id: segregatePreForkOutputs
                 checked: persistentSettings.segregatePreForkOutputs
                 text: qsTr("I intend to spend on key-reusing fork(s)") + translationManager.emptyString
@@ -388,7 +384,7 @@ Rectangle {
                 }
             }
 
-            CheckBox {
+            MoneroComponents.CheckBox {
                 id: keyReuseMitigation2
                 checked: persistentSettings.keyReuseMitigation2
                 text: qsTr("I might want to spend on key-reusing fork(s)") + translationManager.emptyString
@@ -402,7 +398,7 @@ Rectangle {
                 }
             }
 
-            CheckBox {
+            MoneroComponents.CheckBox {
                 id: setRingRelative
                 checked: true
                 text: qsTr("Relative") + translationManager.emptyString
@@ -416,13 +412,15 @@ Rectangle {
             Layout.topMargin: 17 * scaleRatio
             Layout.fillWidth: true
 
-            LineEdit {
+            MoneroComponents.LineEdit {
                 id: segregationHeightLine
-                readOnly: false
+                Layout.fillWidth: true
+
+                placeholderFontSize: 16 * scaleRatio
                 labelFontSize: 14 * scaleRatio
                 labelText: qsTr("Segregation height:") + translationManager.emptyString
-                Layout.fillWidth: true
                 validator: IntValidator { bottom: 0 }
+                readOnly: false
                 onEditingFinished: {
                     persistentSettings.segregationHeight = segregationHeightLine.text
                     if (appWindow.currentWallet) {
