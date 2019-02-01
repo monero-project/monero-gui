@@ -21,12 +21,8 @@ RowLayout {
         Image {
             id: imageChecked
             visible: root.checked
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            source: "../../images/checkedBlackIcon.png"
-            opacity: 0.6
-            width: 12 * scaleRatio
-            height: 8 * scaleRatio
+            anchors.centerIn: parent
+            source: "../../images/uncheckedIcon.png"
         }
     }
 
