@@ -216,7 +216,7 @@ Rectangle {
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: "4.. / 8.."
+              placeholderText: "4.. / 8.. / OpenAlias"
               wrapMode: Text.WrapAnywhere
               addressValidation: true
               onInputLabelLinkActivated: {
@@ -259,6 +259,9 @@ Rectangle {
                       var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
                       if (parts[0] === "true") {
                           if (address_ok) {
+                              // prepend openalias to description
+                              descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
+                              descriptionCheckbox.checked = true
                               addressLine.text = parts[1]
                           }
                           else
