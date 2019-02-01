@@ -139,7 +139,8 @@ ApplicationWindow {
             else if(middlePanel.state === "Receive") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
+            else if(middlePanel.state === "TxKey") middlePanel.state = "ReserveProof"
+            else if(middlePanel.state === "ReserveProof") middlePanel.state = "SharedRingDB"
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
@@ -155,7 +156,8 @@ ApplicationWindow {
             */
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
-            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
+            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "ReserveProof"
+            else if(middlePanel.state === "ReserveProof") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "Receive"
@@ -1388,8 +1390,8 @@ ApplicationWindow {
                 }
                 updateBalance();
             }
-            
-            onReserveClicked: { 
+
+            onReserveClicked: {
                 middlePanel.state = "ReserveProof";
                 if(isMobile) {
                     hideMenu();

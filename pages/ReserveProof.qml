@@ -31,176 +31,165 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 
-import "../components"
+import "../components" as MoneroComponents
+import "../js/TxUtils.js" as TxUtils
 import moneroComponents.Clipboard 1.0
 
-import "../js/TxUtils.js" as TxUtils
 
 Rectangle {
-
     color: "transparent"
 
     Clipboard { id: clipboard }
 
-    /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.topMargin: 40 * scaleRatio
+
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+
         spacing: 20 * scaleRatio
 
-        // solo
-        ColumnLayout {
-            id: soloBox
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            spacing: 20 * scaleRatio
+        MoneroComponents.Label {
+            fontSize: 24 * scaleRatio
+            text: qsTr("Get Reserve Proof") + translationManager.emptyString
+        }
 
-            Label {
-                fontSize: 24 * scaleRatio
-                text: qsTr("Get Reserve Proof") + translationManager.emptyString
+        Text {
+            text: qsTr("This page allows you to interact with the shared ring database. " +
+                       "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+            color: MoneroComponents.Style.defaultFontColor
+        }
+
+        MoneroComponents.LineEdit {
+            id: amountLine
+            Layout.fillWidth: true
+
+            labelText: qsTr("Amount") + translationManager.emptyString
+            placeholderText: qsTr("Amount to prove") + translationManager.emptyString
+            placeholderFontSize: 16 * scaleRatio
+            fontSize: 16 * scaleRatio
+            readOnly: false
+
+            validator: DoubleValidator {
+                bottom: 0.0
+                top: 18446744.073709551615
+                decimals: 12
+                notation: DoubleValidator.StandardNotation
+                locale: "C"
             }
+        }
 
-            Text {
-                text: qsTr("Generate a verifiable cryptographic proof that your own at least a certain amount of Monero") + translationManager.emptyString
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
+        MoneroComponents.LineEdit {
+            id: getMessageLine
+            Layout.fillWidth: true
+
+            labelText: qsTr("Message") + translationManager.emptyString
+            placeholderFontSize: 16 * scaleRatio
+            fontSize: 16 * scaleRatio
+            placeholderText: qsTr("Message") + translationManager.emptyString;
+            readOnly: false
+            copyButton: true
+        }
+
+        MoneroComponents.StandardButton {
+            Layout.alignment: Qt.AlignLeft
+            Layout.topMargin: 16 * scaleRatio
+
+            small: true
+            text: qsTr("Generate") + translationManager.emptyString
+            enabled: amountLine.text > 0
+            onClicked: {
+              informationPopup.title  = qsTr("Reserve proof") + translationManager.emptyString;
+              console.log("message: " + getMessageLine.text);
+              informationPopup.text  = appWindow.currentWallet.getReserveProof(amountLine.text, getMessageLine.text);
+              informationPopup.onCloseCallback = null
+              informationPopup.open()
             }
+        }
 
-            ColumnLayout {
-                id: amountColumn
-                Label {
-                    id: amountLabel
-                    text: qsTr("Amount") + translationManager.emptyString
-                    width: mainLayout.labelWidth
-                }
+        // underline
+        Rectangle {
+            height: 1
+            color: "#404040"
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            anchors.bottomMargin: 3 * scaleRatio
+        }
 
-                LineEdit {
-                    id: amountLine
-                    placeholderText: qsTr("Amount to prove") + translationManager.emptyString
-                    readOnly: false
-                    width: mainLayout.editWidth
-                    Layout.fillWidth: true
-                    validator: DoubleValidator {
-                        bottom: 0.0
-                        top: 18446744.073709551615
-                        decimals: 12
-                        notation: DoubleValidator.StandardNotation
-                        locale: "C"
-                    }
-                }
-            }
+        MoneroComponents.Label {
+            fontSize: 24 * scaleRatio
+            text: qsTr("Check Reserve Proof") + translationManager.emptyString
+        }
 
-            RowLayout {
-                LineEdit {
-                    id: getMessageLine
-                    labelText: qsTr("Message") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Message") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
-            }
+        Text {
+            text: qsTr("Verify the validity of a reserve proof") + translationManager.emptyString
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 14 * scaleRatio
+            color: MoneroComponents.Style.defaultFontColor
+        }
 
-            StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
-                width: 60 * scaleRatio
-                text: qsTr("Generate") + translationManager.emptyString
-                enabled: amountLine.text > 0
-                onClicked: {
-                  informationPopup.title  = qsTr("Reserve proof") + translationManager.emptyString;
-                  console.log("message: " + getMessageLine.text);
-                  informationPopup.text  = appWindow.currentWallet.getReserveProof(amountLine.text, getMessageLine.text);
-                  informationPopup.onCloseCallback = null
-                  informationPopup.open()
-                }
-            }
+        MoneroComponents.LineEdit {
+            id: addressLine
+            Layout.fillWidth: true
 
-            // underline
-            Rectangle {
-                height: 1
-                color: "#404040"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                anchors.bottomMargin: 3 * scaleRatio
-            }
+            labelText: qsTr("Address") + translationManager.emptyString
+            placeholderFontSize: 16 * scaleRatio
+            fontSize: 16 * scaleRatio
+            placeholderText: qsTr("Address") + translationManager.emptyString;
+            readOnly: false
+            copyButton: true
+        }
 
-            Label {
-                fontSize: 24 * scaleRatio
-                text: qsTr("Check Reserve Proof") + translationManager.emptyString
-            }
+        MoneroComponents.LineEdit {
+            id: signatureLine
+            Layout.fillWidth: true
 
-            Text {
-                text: qsTr("Verify the validity of a reserve proof") + translationManager.emptyString
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                font.family: Style.fontRegular.name
-                font.pixelSize: 14 * scaleRatio
-                color: Style.defaultFontColor
-            }
+            labelText: qsTr("Signature") + translationManager.emptyString
+            placeholderText: qsTr("Proof to verify") + translationManager.emptyString;
+            placeholderFontSize: 16 * scaleRatio
+            fontSize: 16 * scaleRatio
+            readOnly: false
+            copyButton: true
+        }
 
-            RowLayout {
-                LineEdit {
-                    id: addressLine
-                    labelText: qsTr("Address") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Address") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
-            }
+        MoneroComponents.LineEdit {
+            id: proveMessageLine
+            Layout.fillWidth: true
 
-            RowLayout {
-                LineEdit {
-                    id: signatureLine
-                    labelText: qsTr("Siganture") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Proof to verify") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
-            }
+            labelText: qsTr("Message") + translationManager.emptyString
+            placeholderFontSize: 16 * scaleRatio
+            fontSize: 16 * scaleRatio
+            placeholderText: qsTr("Optional message") + translationManager.emptyString;
+            readOnly: false
+            copyButton: true
+        }
 
-            RowLayout {
-                LineEdit {
-                    id: proveMessageLine
-                    labelText: qsTr("Message") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
-                    placeholderText: qsTr("Optional message") + translationManager.emptyString;
-                    readOnly: false
-                    Layout.fillWidth: true
-                    copyButton: true
-                }
-            }
+        MoneroComponents.StandardButton {
+            Layout.alignment: Qt.AlignLeft
+            Layout.topMargin: 16 * scaleRatio
 
-            StandardButton {
-                anchors.left: parent.left
-                anchors.topMargin: 17 * scaleRatio
-                width: 60 * scaleRatio
-                text: qsTr("Verify") + translationManager.emptyString
-                enabled: TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)
-                onClicked: {
-                  informationPopup.title  = qsTr("Proof Result") + translationManager.emptyString;
-                  var result;
-                  if(appWindow.currentWallet.checkReserveProof(addressLine.text, proveMessageLine.text, signatureLine.text))
-                      result = "True Proof";
-                  else
-                      result = "False Proof";
-                  informationPopup.text  = result
-                  informationPopup.onCloseCallback = null
-                  informationPopup.open();
-                }
+            small: true
+            text: qsTr("Verify") + translationManager.emptyString
+            enabled: TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)
+            onClicked: {
+              informationPopup.title  = qsTr("Proof Result") + translationManager.emptyString;
+              var result;
+              if(appWindow.currentWallet.checkReserveProof(addressLine.text, proveMessageLine.text, signatureLine.text))
+                  result = "True Proof";
+              else
+                  result = "False Proof";
+              informationPopup.text  = result
+              informationPopup.onCloseCallback = null
+              informationPopup.open();
             }
         }
     }

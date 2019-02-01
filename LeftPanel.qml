@@ -73,7 +73,7 @@ Rectangle {
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
-        else if(pos === "ReserveProofs")  menuColumn.previousButton = reserveButton
+        else if(pos === "ReserveProof")  menuColumn.previousButton = reserveButton
         else if(pos === "SharedRingDB")  menuColumn.previousButton = sharedringdbButton
         else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
@@ -554,12 +554,12 @@ Rectangle {
                 height: 1
             }
             // ----------- Reserve Proofs tab -------------
-            MenuButton {
+            MoneroComponents.MenuButton {
                 id: reserveButton
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Reserve Proofs") + translationManager.emptyString
-                symbol: qsTr("K") + translationManager.emptyString
+                symbol: qsTr("W") + translationManager.emptyString
                 dotColor: "#FFD781"
                 under: advancedButton
                 onClicked: {
