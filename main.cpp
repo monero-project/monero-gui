@@ -298,7 +298,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
-    engine.rootContext()->setContextProperty("numberMiningThreadsAvailable", QThread::idealThreadCount());
+    engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
