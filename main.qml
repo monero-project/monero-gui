@@ -1054,7 +1054,7 @@ ApplicationWindow {
         property bool hideBalance: false
         property bool lockOnUserInActivity: true
         property int lockOnUserInActivityInterval: 10  // minutes
-        property bool showPid: false
+        property bool showPid: true
     }
 
     // Information dialog
