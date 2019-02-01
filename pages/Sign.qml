@@ -88,6 +88,7 @@ Rectangle {
     ColumnLayout {
         anchors.top: parent.top
         anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.topMargin: 40 * scaleRatio
         anchors.left: parent.left
         anchors.right: parent.right
 
