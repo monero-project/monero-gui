@@ -241,5 +241,9 @@
         <file>images/merchant/arrow_right.png</file>
         <file>images/merchant/bg.png</file>
         <file>images/merchant/input_box.png</file>
+        <file>fonts/FontAwesome/fontawesome-webfont.ttf</file>
+        <file>fonts/FontAwesome/FontAwesome.qml</file>
+        <file>fonts/FontAwesome/Object.qml</file>
+        <file>fonts/FontAwesome/qmldir</file>
     </qresource>
 </RCC>
