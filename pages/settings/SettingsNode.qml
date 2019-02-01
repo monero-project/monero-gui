@@ -362,6 +362,7 @@ Rectangle{
                     if (appWindow.daemonRunning) {
                         appWindow.stopDaemon();
                     } else {
+                        persistentSettings.daemonFlags = daemonFlags.text;
                         appWindow.startDaemon(persistentSettings.daemonFlags);
                     }
                 }
@@ -395,21 +396,18 @@ Rectangle{
                 }
             }
 
-            RowLayout {
-                id: daemonFlagsRow
-
-                MoneroComponents.LineEditMulti {
-                    id: daemonFlags
-                    Layout.preferredWidth:  200
-                    Layout.fillWidth: true
-                    labelFontSize: 14 * scaleRatio
-                    fontSize: 15 * scaleRatio
-                    labelText: qsTr("Daemon startup flags") + translationManager.emptyString
-                    placeholderText: qsTr("(optional)") + translationManager.emptyString
-                    placeholderFontSize: 15 * scaleRatio
-                    text: appWindow.persistentSettings.daemonFlags
-                    addressValidation: false
-                }
+            MoneroComponents.LineEditMulti {
+                id: daemonFlags
+                Layout.fillWidth: true
+                labelFontSize: 14 * scaleRatio
+                fontSize: 15 * scaleRatio
+                wrapMode: Text.WrapAnywhere
+                labelText: qsTr("Daemon startup flags") + translationManager.emptyString
+                placeholderText: qsTr("(optional)") + translationManager.emptyString
+                placeholderFontSize: 15 * scaleRatio
+                text: persistentSettings.daemonFlags
+                addressValidation: false
+                onEditingFinished: persistentSettings.daemonFlags = daemonFlags.text;
             }
 
             RowLayout {
