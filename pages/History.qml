@@ -419,4 +419,8 @@ Rectangle {
         priorityDropdown.currentIndex = 0;
         priorityDropdown.update();
     }
+
+    function update() {
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+    }
 }
