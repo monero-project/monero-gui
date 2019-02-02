@@ -265,7 +265,6 @@ Rectangle {
                       if (parts[0] === "true") {
                           if (address_ok) {
                               addressLine.text = parts[1]
-                              addressLine.cursorPosition = 0
                           }
                           else
                               oa_message(qsTr("No valid address found at this OpenAlias address"))
@@ -273,7 +272,6 @@ Rectangle {
                       else if (parts[0] === "false") {
                             if (address_ok) {
                                 addressLine.text = parts[1]
-                                addressLine.cursorPosition = 0
                                 oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
                             }
                             else
