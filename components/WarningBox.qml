@@ -51,7 +51,7 @@ Rectangle {
             textMargin: 0
             leftPadding: 0
             topPadding: 6
-            readOnly: false
+            readOnly: true
             onLinkActivated: root.linkActivated();
 
             // @TODO: Legacy. Remove after Qt 5.8.
