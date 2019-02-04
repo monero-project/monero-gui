@@ -216,7 +216,7 @@ ListView {
                     anchors.left: dateLabel.right
                     anchors.leftMargin: 7 * scaleRatio
                     anchors.top: parent.top
-                    anchors.topMargin: 3 * scaleRatio
+                    anchors.topMargin: 1 * scaleRatio
                     font.pixelSize: 12 * scaleRatio
                     text: time
                     color: "#808080"
