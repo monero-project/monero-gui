@@ -213,6 +213,8 @@
         <file>components/RadioButton.qml</file>
         <file>images/editIcon.png</file>
         <file>images/editIcon@2x.png</file>
+        <file>images/qr.png</file>
+        <file>images/qr@2x.png</file>
         <file>pages/settings/Settings.qml</file>
         <file>pages/settings/SettingsWallet.qml</file>
         <file>pages/settings/SettingsNode.qml</file>
