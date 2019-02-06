@@ -39,13 +39,13 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
+        Layout.fillWidth: true
         anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
         anchors.topMargin: 40 * scaleRatio
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
         spacing: 20 * scaleRatio
-        Layout.fillWidth: true
 
         MoneroComponents.Label {
             id: soloTitleLabel
@@ -53,11 +53,9 @@ Rectangle {
             text: qsTr("Solo mining") + translationManager.emptyString
         }
 
-        MoneroComponents.Label {
-            id: soloLocalDaemonsLabel
-            fontSize: 18 * scaleRatio
-            color: "#D02020"
-            text: qsTr("(only available for local daemons)") + translationManager.emptyString
+        MoneroComponents.WarningBox {
+            Layout.bottomMargin: 8 * scaleRatio
+            text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
             visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
         }
 
