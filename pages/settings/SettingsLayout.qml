@@ -84,7 +84,6 @@ Rectangle {
             checked: persistentSettings.showPid
             onClicked: {
                 persistentSettings.showPid = !persistentSettings.showPid
-                middlePanel.transferView.clearFields();
             }
             text: qsTr("Enable transfer with payment ID (OBSOLETE)") + translationManager.emptyString
         }
