@@ -28,7 +28,9 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Dialogs 1.2
 import "../components" as MoneroComponents
+import "../js/TxUtils.js" as TxUtils
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 import moneroComponents.Clipboard 1.0
@@ -51,9 +53,20 @@ ColumnLayout {
             Layout.fillWidth: true
             fontBold: true
             labelText: qsTr("Address") + translationManager.emptyString
-            placeholderText: qsTr("4.. / 8..") + translationManager.emptyString
+            placeholderText: qsTr("4.. / 8.. / OpenAlias") + translationManager.emptyString
             wrapMode: Text.WrapAnywhere
             addressValidation: true
+            pasteButton: true
+            onPaste: function(clipboardText) {
+                const parsed = walletManager.parse_uri_to_object(clipboardText);
+                if (!parsed.error) {
+                    addressLine.text = parsed.address;
+                    setPaymentId(parsed.payment_id);
+                    setDescription(parsed.tx_description);
+                } else {
+                    addressLine.text = clipboardText;
+                }
+            }
             inlineButton.icon: "../images/qr.png"
             inlineButton.buttonColor: MoneroComponents.Style.orange
             inlineButton.onClicked: {
@@ -61,6 +74,50 @@ ColumnLayout {
                 cameraUi.qrcode_decoded.connect(updateFromQrCode)
             }
             inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
+        }
+
+        MoneroComponents.StandardButton {
+            id: resolveButton
+            text: qsTr("Resolve") + translationManager.emptyString
+            visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
+            enabled : visible
+            onClicked: {
+                var result = walletManager.resolveOpenAlias(addressLine.text)
+                if (result) {
+                    var parts = result.split("|")
+                    if (parts.length === 2) {
+                        var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
+                        if (parts[0] === "true") {
+                            if (address_ok) {
+                                // prepend openalias to description
+                                descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
+                                addressLine.text = parts[1]
+                            }
+                            else
+                                oa_message(qsTr("No valid address found at this OpenAlias address"))
+                        }
+                        else if (parts[0] === "false") {
+                              if (address_ok) {
+                                  addressLine.text = parts[1]
+                                  oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                              }
+                              else
+                              {
+                                  oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                              }
+                        }
+                        else {
+                            oa_message(qsTr("Internal error"))
+                        }
+                    }
+                    else {
+                        oa_message(qsTr("Internal error"))
+                    }
+                }
+                else {
+                    oa_message(qsTr("No address found"))
+                }
+            }
         }
 
         MoneroComponents.LineEditMulti {
@@ -81,7 +138,6 @@ ColumnLayout {
             placeholderText: qsTr("Give this entry a name or description") + translationManager.emptyString
             wrapMode: Text.WrapAnywhere
         }
-
 
         RowLayout {
             id: addButton
@@ -150,7 +206,7 @@ ColumnLayout {
       payment_id = payment_id.trim()
 
       var address_ok = walletManager.addressValid(address, nettype)
-      var payment_id_ok = payment_id.length == 0 || walletManager.paymentIdValid(payment_id)
+      var payment_id_ok = payment_id.length === 0 || walletManager.paymentIdValid(payment_id)
       var ipid = walletManager.paymentIdFromAddress(address, nettype)
       if (ipid.length > 0 && payment_id.length > 0)
          payment_id_ok = false
@@ -178,9 +234,37 @@ ColumnLayout {
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
+    function setDescription(value) {
+        descriptionLine.text = value;
+    }
+
+    function setPaymentId(value) {
+        paymentIdLine.text = value;
+    }
+
     function clearFields() {
         addressLine.text = "";
         paymentIdLine.text = "";
         descriptionLine.text = "";
+    }
+
+    function oa_message(text) {
+      oaPopup.title = qsTr("OpenAlias error") + translationManager.emptyString
+      oaPopup.text = text
+      oaPopup.icon = StandardIcon.Information
+      oaPopup.onCloseCallback = null
+      oaPopup.open()
+    }
+
+    MoneroComponents.StandardDialog {
+        // dynamically change onclose handler
+        property var onCloseCallback
+        id: oaPopup
+        cancelVisible: false
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
+            }
+        }
     }
 }
