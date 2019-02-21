@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
+import moneroComponents.NetworkType 1.0
 import "../components"
 import "../components" as MoneroComponents
 import "." 1.0
@@ -216,7 +217,15 @@ Rectangle {
                 Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: "4.. / 8.. / OpenAlias"
+              placeholderText: {
+                  if(persistentSettings.nettype == NetworkType.MAINNET){
+                      return "4.. / 8.. / OpenAlias";
+                  } else if (persistentSettings.nettype == NetworkType.STAGENET){
+                      return "5.. / 7..";
+                  } else if(persistentSettings.nettype == NetworkType.TESTNET){
+                      return "9.. / B..";
+                  }
+              }
               wrapMode: Text.WrapAnywhere
               addressValidation: true
               onInputLabelLinkActivated: {
