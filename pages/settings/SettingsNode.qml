@@ -298,7 +298,12 @@ Rectangle{
                 daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? "18081" : rna.split(":")[1] : ""
                 onEditingFinished: {
                     persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                    console.log("setting remote node to " + persistentSettings.remoteNodeAddress)
+                    console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
+                    if (persistentSettings.is_trusted_daemon) {
+                        persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
+                        setTrustedDaemonCheckBox.checked = !setTrustedDaemonCheckBox.checked
+                        appWindow.showStatusMessage(qsTr("Remote node updated. Trusted daemon has been reset. Mark again, if desired."), 8);
+                    }
                 }
             }
 
@@ -328,6 +333,16 @@ Rectangle{
                     labelFontSize: 14 * scaleRatio
                     fontSize: 15 * scaleRatio
                 }
+            }
+
+            MoneroComponents.CheckBox {
+                id: setTrustedDaemonCheckBox
+                checked: persistentSettings.is_trusted_daemon
+                onClicked: {
+                    persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
+                    currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
+                }
+                text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
             }
 
             MoneroComponents.StandardButton {

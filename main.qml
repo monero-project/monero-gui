@@ -1033,6 +1033,7 @@ ApplicationWindow {
         property string daemon_address: nettype == NetworkType.TESTNET ? "localhost:28081" : nettype == NetworkType.STAGENET ? "localhost:38081" : "localhost:18081"
         property string payment_id
         property int    restore_height : 0
+        property bool   is_trusted_daemon : false
         property bool   is_recovering : false
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
