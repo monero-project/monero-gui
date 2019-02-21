@@ -234,6 +234,8 @@ int main(int argc, char *argv[])
     OSHelper osHelper;
     engine.rootContext()->setContextProperty("oshelper", &osHelper);
 
+    engine.addImportPath(":/fonts");
+
     engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
