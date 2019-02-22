@@ -126,37 +126,88 @@ Rectangle {
         z: parent.z + 1
     }
 
-    // collapse left panel
-    Rectangle {
-        id: goToBasicVersionButton
-        property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
-        property bool checked: false
-        anchors.top: parent.top
+    RowLayout {
         anchors.left: parent.left
-        color:  "transparent"
-        height: titleBar.height
-        width: height
-        visible: !titleBar.orange && titleBar.basicButtonVisible
+        anchors.top: parent.top
+        width: 40
+        height: parent.height
+        spacing: 0
         z: parent.z + 2
 
-        Image {
-            width: 14
-            height: 14
-            anchors.centerIn: parent
-            source: "../images/expand.png"
+        Rectangle {
+            Layout.preferredHeight: parent.height
+            Layout.preferredWidth: Layout.preferredHeight
+
+            id: goToBasicVersionButton
+            property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
+            property bool checked: false
+            color:  "transparent"
+            height: titleBar.height
+            width: height
+            visible: !titleBar.orange && titleBar.basicButtonVisible
+
+            Image {
+                width: 14
+                height: 14
+                anchors.centerIn: parent
+                source: "../images/expand.png"
+            }
+
+            MouseArea {
+                id: basicMouseArea
+                hoverEnabled: true
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onEntered: { goToBasicVersionButton.color = titleBar.orange ? titleBar.buttonHoverColorOrange : titleBar.buttonHoverColor }
+                onExited: goToBasicVersionButton.color = "transparent";
+                onClicked: {
+                    releaseFocus()
+                    parent.checked = !parent.checked
+                    titleBar.goToBasicVersion(leftPanel.visible)
+                }
+            }
         }
 
-        MouseArea {
-            id: basicMouseArea
-            hoverEnabled: true
-            anchors.fill: parent
-            cursorShape: Qt.PointingHandCursor
-            onEntered: { goToBasicVersionButton.color = titleBar.orange ? titleBar.buttonHoverColorOrange : titleBar.buttonHoverColor }
-            onExited: goToBasicVersionButton.color = "transparent";
-            onClicked: {
-                releaseFocus()
-                parent.checked = !parent.checked
-                titleBar.goToBasicVersion(leftPanel.visible)
+        // language selection
+        Rectangle {
+            Layout.preferredHeight: parent.height
+            Layout.preferredWidth: Layout.preferredHeight
+            visible: !titleBar.orange && persistentSettings.customDecorations
+
+            id: languageSelection
+            property bool containsMouse: titleBar.mouseX >= x && titleBar.mouseX <= x + width
+            property bool checked: false
+            color:  "transparent"
+            height: titleBar.height
+            width: height
+            z: parent.z + 2
+
+            Image {
+                width: 14
+                height: 14
+                anchors.centerIn: parent
+                source: "../images/langFlagGrey.png"
+            }
+
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onEntered: parent.color = "#262626";
+                onExited: parent.color = "transparent";
+                onClicked: {
+                    releaseFocus();
+
+                    // Show welcome screen if on home
+                    if(wizard.wizardState === "wizardHome" || wizard.wizardState === "wizardModeSelection"){
+                        wizard.skipModeSelection = true;
+                        wizard.wizardState = 'wizardLanguage';
+                        return;
+                    }
+
+                    languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
+                    console.log('change language');
+                }
             }
         }
     }

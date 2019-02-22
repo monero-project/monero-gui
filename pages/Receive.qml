@@ -325,6 +325,7 @@ Rectangle {
     }
 
     function clearFields() {
+        // @TODO: add fields
     }
 
     function onPageClosed() {

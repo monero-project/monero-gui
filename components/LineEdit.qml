@@ -54,7 +54,9 @@ Item {
 
     property bool borderDisabled: false
     property string borderColor: {
-        if(input.activeFocus){
+        if(error && input.text !== ""){
+            return MoneroComponents.Style.inputBorderColorInvalid;
+        } else if(input.activeFocus){
             return MoneroComponents.Style.inputBorderColorActive;
         } else {
             return MoneroComponents.Style.inputBorderColorInActive;
@@ -211,8 +213,6 @@ Item {
             visible: item.inlineButtonText ? true : false
             anchors.right: parent.right
             anchors.rightMargin: 8 * scaleRatio
-            anchors.top: parent.top
-            anchors.topMargin: 6 * scaleRatio
         }
     }
 }

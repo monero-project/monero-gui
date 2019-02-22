@@ -33,14 +33,20 @@ import "../components" as MoneroComponents
 
 Item {
     id: inlineButton
-    height: rect.height * scaleRatio
+    height: parent.height
+    anchors.top: parent.top
+    anchors.bottom: parent.bottom
+
+    property bool small: false
     property string shadowPressedColor: "#B32D00"
     property string shadowReleasedColor: "#FF4304"
     property string pressedColor: "#FF4304"
     property string releasedColor: "#FF6C3C"
     property string icon: ""
     property string textColor: "#FFFFFF"
-    property int fontSize: 12 * scaleRatio
+    property int fontSize: small ? 14 * scaleRatio : 16 * scaleRatio
+    property int rectHeight: small ? 24 * scaleRatio : 28 * scaleRatio
+    property int rectHMargin: small ? 16 * scaleRatio : 22 * scaleRatio
     property alias text: inlineText.text
     property alias buttonColor: rect.color
     signal clicked()
@@ -59,14 +65,14 @@ Item {
         width: inlineText.text ? (inlineText.width + 22) * scaleRatio : inlineButton.icon ? (inlineImage.width + 16) * scaleRatio : rect.height
         radius: 4
 
-        anchors.top: parent.top
+        anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
 
         Text {
             id: inlineText
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
-            font.pixelSize: 16 * scaleRatio
+            font.pixelSize: inlineButton.fontSize
             color: "black"
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter

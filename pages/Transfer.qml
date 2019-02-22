@@ -443,6 +443,7 @@ Rectangle {
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
+            visible: appWindow.walletMode >= 2
             CheckBox2 {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
@@ -454,7 +455,7 @@ Rectangle {
         }
 
         GridLayout {
-            visible: persistentSettings.transferShowAdvanced
+            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             columns: (isMobile) ? 2 : 6
 
             StandardButton {
@@ -676,9 +677,11 @@ Rectangle {
     //TODO: enable send page when we're connected and daemon is synced
 
     function updateStatus() {
+        var messageNotConnected = qsTr("Wallet is not connected to daemon.");
+        if(appWindow.walletMode >= 2) messageNotConnected += root.startLinkText;
         pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
-            root.warningContent = qsTr("Wallet is not connected to daemon.") + root.startLinkText
+            root.warningContent = messageNotConnected;
             return;
         }
 
@@ -690,7 +693,7 @@ Rectangle {
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Disconnected:
-            root.warningContent = qsTr("Wallet is not connected to daemon.") + root.startLinkText
+            root.warningContent = messageNotConnected;
             break
         case Wallet.ConnectionStatus_WrongVersion:
             root.warningContent = qsTr("Connected daemon is not compatible with GUI. \n" +
@@ -698,7 +701,7 @@ Rectangle {
             break
         default:
             if(!appWindow.daemonSynced){
-                root.warningContent = qsTr("Waiting on daemon synchronization to finish")
+                root.warningContent = qsTr("Waiting on daemon synchronization to finish.")
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready

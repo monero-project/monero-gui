@@ -31,6 +31,7 @@ import QtQuick.Controls.Styles 1.2
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
+import "../js/Utils.js" as Utils
 import "../components" as MoneroComponents
 
 GridLayout {
@@ -65,7 +66,14 @@ GridLayout {
     }
 
     function getAddress() {
-        return daemonAddr.text.trim() + ":" + daemonPort.text.trim()
+        var addr = daemonAddr.text.trim();
+        var port = daemonPort.text.trim();
+
+        // validation
+        if(addr === "" || addr.length < 2) return "";
+        if(!Utils.isNumeric(port)) return "";
+
+        return addr + ":" + port;
     }
 
     LineEdit {

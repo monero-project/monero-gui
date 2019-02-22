@@ -39,6 +39,15 @@ Rectangle {
     color: "transparent"
     height: 1400 * scaleRatio
     Layout.fillWidth: true
+    property string walletModeString: {
+        if(appWindow.walletMode === 0){
+          return qsTr("Simple mode") + translationManager.emptyString;
+        } else if(appWindow.walletMode === 1){
+          return qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
+        } else if(appWindow.walletMode === 2){
+          return qsTr("Advanced mode") + translationManager.emptyString;
+        }
+    }
 
     ColumnLayout {
         id: infoLayout
@@ -239,6 +248,36 @@ Rectangle {
                 font.pixelSize: 14 * scaleRatio
                 text: walletLogPath
             }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2 * scaleRatio
+                Layout.bottomMargin: 2 * scaleRatio
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2 * scaleRatio
+                Layout.bottomMargin: 2 * scaleRatio
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14 * scaleRatio
+                text: qsTr("Wallet mode: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14 * scaleRatio
+                text: walletModeString
+            }
         }
 
         // Copy info to clipboard
@@ -261,6 +300,7 @@ Rectangle {
                     data += currentWallet.walletCreationHeight;
 
                 data += "\nWallet log path: " + walletLogPath;
+                data += "\nWallet mode: " + walletModeString;
 
                 console.log("Copied to clipboard");
                 clipboard.setText(data);
