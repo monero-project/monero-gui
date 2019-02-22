@@ -48,7 +48,7 @@ $(git -C $MONERO_DIR config user.name "$OLD_GIT_USER")
 $(git -C $MONERO_DIR config user.email "$OLD_GIT_EMAIL")
 
 git -C $MONERO_DIR submodule init
-git -C $MONERO_DIR submodule update
+git -C $MONERO_DIR submodule update --recursive
 
 # Build libwallet if it doesnt exist
 if [ ! -f $MONERO_DIR/lib/libwallet_merged.a ]; then 
