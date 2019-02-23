@@ -79,9 +79,24 @@ Drawer {
                 width: sideBar.width
                 height: 32 * scaleRatio
 
+                Rectangle {
+                    id: flagRect
+                    height: 24 * scaleRatio
+                    width: 24 * scaleRatio
+                    anchors.left: parent.left
+                    anchors.leftMargin: 4 * scaleRatio
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "transparent"
+
+                    Image {
+                        anchors.fill: parent
+                        source: flag
+                    }
+                }
+
                 Text {
                     anchors.left: parent.left
-                    anchors.leftMargin: 16 * scaleRatio
+                    anchors.leftMargin: 30 * scaleRatio
                     font.bold: true
                     font.pixelSize: 14 * scaleRatio
                     color: MoneroComponents.Style.defaultFontColor
