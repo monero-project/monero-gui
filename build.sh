@@ -74,7 +74,7 @@ fi
 
 # build libwallet
 export BUILD_TREZOR
-./get_libwallet_api.sh $BUILD_TYPE
+#./get_libwallet_api.sh $BUILD_TYPE
  
 # build zxcvbn
 if [ "$DISABLE_PASS_STRENGTH_METER" != true ]; then
