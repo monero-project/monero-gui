@@ -197,16 +197,7 @@ Rectangle {
                 onExited: parent.color = "transparent";
                 onClicked: {
                     releaseFocus();
-
-                    // Show welcome screen if on home
-                    if(wizard.wizardState === "wizardHome" || wizard.wizardState === "wizardModeSelection"){
-                        wizard.skipModeSelection = true;
-                        wizard.wizardState = 'wizardLanguage';
-                        return;
-                    }
-
-                    languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
-                    console.log('change language');
+                    appWindow.toggleLanguageView();
                 }
             }
         }

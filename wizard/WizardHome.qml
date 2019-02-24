@@ -152,9 +152,7 @@ Rectangle {
                     text: qsTr("Change language") + translationManager.emptyString
 
                     onClicked: {
-                        wizardController.skipModeSelection = true;
-                        wizardController.wizardState = 'wizardLanguage';
-                        languageSidebar.open();
+                        appWindow.toggleLanguageView();
                     }
                 }
             }

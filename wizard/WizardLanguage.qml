@@ -164,7 +164,7 @@ Rectangle {
                 text: "Language"
 
                 onClicked: {
-                    languageSidebar.open();
+                    appWindow.toggleLanguageView();
                 }
             }
 

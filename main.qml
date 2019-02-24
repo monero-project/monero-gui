@@ -1604,6 +1604,12 @@ ApplicationWindow {
             }
         }
 
+        WizardLang {
+            id: languageView
+            visible: false
+            anchors.fill: parent
+        }
+
         property int minWidth: 326
         property int minHeight: 400
         MouseArea {
@@ -1730,6 +1736,11 @@ ApplicationWindow {
             visible:false
             id: notifier
         }
+    }
+
+    function toggleLanguageView(){
+        middlePanel.visible = !middlePanel.visible;
+        languageView.visible = !languageView.visible
     }
 
     // TODO: Make the callback dynamic
@@ -1994,7 +2005,8 @@ ApplicationWindow {
         opacity: 0.8
     }
 
-    MoneroComponents.LanguageSidebar {
-        id: languageSidebar
-    }
+// @TODO: QML type 'Drawer' has issues with buildbot; debug after Qt 5.9 migration
+//    MoneroComponents.LanguageSidebar {
+//        id: languageSidebar
+//    }
 }
