@@ -67,6 +67,7 @@ ColumnLayout {
         Layout.fillWidth: true
         header: qsTr("Restore height") + translationManager.emptyString
         value: wizardController.walletOptionsRestoreHeight
+        visible: wizardStateView.state != "wizardCreateWallet4"
     }
 
     WizardSummaryItem {
