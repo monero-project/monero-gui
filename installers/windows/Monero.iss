@@ -1,5 +1,5 @@
-; Monero Beryllium Bullet GUI Wallet Installer for Windows
-; Copyright (c) 2014-2018, The Monero Project
+; Monero Boron Butterfly GUI Wallet Installer for Windows
+; Copyright (c) 2017-2019, The Monero Project
 ; See LICENSE
 
 [Setup]
@@ -8,7 +8,7 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.13.0.4
+AppVersion=0.14.0.0
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -56,7 +56,7 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; .exe/.dll file possibly with version info).
 ;
 ; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
-; As of version 0.13.0.4, the Monero .exe files do not carry version info anyway in their .exe headers.
+; As of version 0.14.0.0, the Monero .exe files do not carry version info anyway in their .exe headers.
 ; The only small drawback seems to be somewhat longer update times because each and every file is
 ; copied again, even if already present with correct file date and identical content.
 ;
