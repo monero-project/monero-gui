@@ -36,7 +36,6 @@ Item {
     property string rightIcon: ""
     property string rightIconInactive: ""
     property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
-    property string textAlign: rightIcon !== "" ? "left" : "center"
     property bool small: false
     property alias text: label.text
     property int fontSize: {
@@ -103,8 +102,6 @@ Item {
 
         Text {
             id: label
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            horizontalAlignment: textAlign === "center" ? Text.AlignHCenter : Text.AlignLeft
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: button.fontSize
@@ -112,15 +109,13 @@ Item {
             visible: text !== ""
 
             Text {
-                anchors.fill: parent
+                anchors.centerIn: parent
                 color: button.textColor
                 font.bold: label.font.bold
                 font.family: label.font.family
                 font.pixelSize: label.font.pixelSize - 1
-                horizontalAlignment: label.horizontalAlignment
-                Layout.alignment: label.Layout.alignment
                 text: label.text
-                visible: buttonArea.pressed
+                opacity: buttonArea.pressed ? 1 : 0
             }
         }
 
