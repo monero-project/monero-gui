@@ -181,10 +181,6 @@ ColumnLayout {
         MoneroComponents.RadioButton {
             id: remoteNode
             text: qsTr("Connect to a remote node") + translationManager.emptyString
-            checkedColor: Qt.rgba(0, 0, 0, 0.75)
-            borderColor: Qt.rgba(0, 0, 0, 0.45)
-            Layout.topMargin: 20 * scaleRatio
-            fontColor: "#4A4646"
             fontSize: 16 * scaleRatio
             checked: appWindow.persistentSettings.useRemoteNode
             onClicked: {
