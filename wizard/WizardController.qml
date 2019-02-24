@@ -76,6 +76,9 @@ Rectangle {
     property string walletOptionsLocation: ''
     property string walletOptionsPassword: ''
     property string walletOptionsSeed: ''
+    property string walletOptionsRecoverAddress: ''
+    property string walletOptionsRecoverViewkey: ''
+    property string walletOptionsRecoverSpendkey: ''
     property string walletOptionsBackup: ''
     property int    walletOptionsRestoreHeight: 0
     property string walletOptionsBootstrapAddress: persistentSettings.bootstrapNodeAddress
@@ -307,7 +310,7 @@ Rectangle {
         oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
 
         // protecting wallet with password
-        m_wallet.setPassword(walletOptionsPassword);
+        wizardController.m_wallet.setPassword(walletOptionsPassword);
 
         // Store password in session to be able to use password protected functions (e.g show seed)
         appWindow.walletPassword = walletOptionsPassword
@@ -323,6 +326,40 @@ Rectangle {
         persistentSettings.allow_background_mining = false
         persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
         persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
+    }
+
+    function recoveryWallet() {
+        var nettype = persistentSettings.nettype;
+        var kdfRounds = persistentSettings.kdfRounds;
+        var restoreHeight = wizardController.walletOptionsRestoreHeight;
+        var tmp_wallet_filename = oshelper.temporaryFilename()
+        console.log("Creating temporary wallet", tmp_wallet_filename)
+
+        // delete the temporary wallet object before creating new
+        if (typeof wizardController.m_wallet !== 'undefined') {
+            walletManager.closeWallet()
+            console.log("deleting temporary wallet")
+        }
+        var wallet = ''
+        // From seed or keys
+        if(wizardController.walletRestoreMode === 'seed')
+            wallet = walletManager.recoveryWallet(tmp_wallet_filename, wizardController.walletOptionsSeed, nettype, restoreHeight, kdfRounds)
+        else
+            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, wizardController.language_wallet, nettype,
+                                                            wizardController.walletOptionsRecoverAddress, wizardController.walletOptionsRecoverViewkey,
+                                                            wizardController.walletOptionsRecoverSpendkey, restoreHeight, kdfRounds)
+
+        var success = wallet.status === Wallet.Status_Ok;
+        if (success) {
+            wizardController.m_wallet = wallet;
+            wizardController.walletOptionsIsRecovering = true;
+            wizardController.tmpWalletFilename = tmp_wallet_filename
+        } else {
+            console.log(wallet.errorString)
+            appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
+            walletManager.closeWallet();
+        }
+        return success;
     }
 
     function createWalletFromDevice() {

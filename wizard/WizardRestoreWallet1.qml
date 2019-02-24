@@ -75,8 +75,7 @@ Rectangle {
         viewKeyLine.error = !result[1] && viewKeyLineLength != 0
         spendKeyLine.error = !result[2] && spendKeyLineLength != 0
 
-        return (!addressLine.error && !viewKeyLine.error && !spendKeyLine.error && 
-            addressLineLength != 0 && viewKeyLineLength != 0 && spendKeyLineLength != 0)
+        return (result[0] && result[1] && result[2])
     }
 
     function checkRestoreHeight() {
@@ -273,7 +272,17 @@ Rectangle {
                 onNextClicked: {
                     wizardController.walletOptionsName = wizardWalletInput.walletName.text;
                     wizardController.walletOptionsLocation = wizardWalletInput.walletLocation.text;
-                    wizardController.walletOptionsSeed = seedInput.text;
+
+                    switch (wizardController.walletRestoreMode) {
+                        case 'seed':
+                            wizardController.walletOptionsSeed = seedInput.text;
+                            break;
+                        default: // walletRestoreMode = keys or qr
+                            wizardController.walletOptionsRecoverAddress = addressLine.text;
+                            wizardController.walletOptionsRecoverViewkey = viewKeyLine.text
+                            wizardController.walletOptionsRecoverSpendkey = spendKeyLine.text;
+                            break;
+                    }
 
                     var _restoreHeight = 0;
                     if(restoreHeight.text){
@@ -299,6 +308,7 @@ Rectangle {
             seedInput.text = "";
             addressLine.text = "";
             spendKeyLine.text = "";
+            viewKeyLine.text = "";
             restoreHeight.text = "";
         }
     }

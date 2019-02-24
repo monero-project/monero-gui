@@ -128,7 +128,6 @@ Rectangle {
 
                 onMenuClicked: {
                     wizardController.restart();
-                    wizardController.createWallet();
                     wizardStateView.state = "wizardRestoreWallet1"
                 }
             }

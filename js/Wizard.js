@@ -3,18 +3,18 @@
 function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name, extra_parameters) {
     // Switch to recover from keys
     recoverFromSeedMode = false
-    spendkey.text = ""
+    spendKeyLine.text = ""
     viewKeyLine.text = ""
-    restoreHeightItem.text = ""
+    restoreHeight.text = ""
 
     if(typeof extra_parameters.secret_view_key != "undefined") {
         viewKeyLine.text = extra_parameters.secret_view_key
     }
     if(typeof extra_parameters.secret_spend_key != "undefined") {
-        spendkey.text = extra_parameters.secret_spend_key
+        spendKeyLine.text = extra_parameters.secret_spend_key
     }
     if(typeof extra_parameters.restore_height != "undefined") {
-        restoreHeightItem.text = extra_parameters.restore_height
+        restoreHeight.text = extra_parameters.restore_height
     }
     addressLine.text = address
 
@@ -170,12 +170,14 @@ function checkSeed(seed) {
 }
 
 function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spendkey, addressline){
-    var addressOK = (viewkey.length > 0 || spendkey.length > 0) ? walletmanager.addressValid(addressline, nettype) : false
-    var viewKeyOK = (viewkey.length > 0) ? walletmanager.keyValid(viewkey, addressline, true, nettype) : true
-    // Spendkey is optional
-    var spendKeyOK = (spendkey.length > 0) ? walletmanager.keyValid(spendkey, addressline, false, nettype) : true
-
-    return addressOK && viewKeyOK && spendKeyOK
+    var results = [];
+    // addressOK
+    results[0] = walletmanager.addressValid(addressline, nettype);
+    // viewKeyOK
+    results[1] = walletmanager.keyValid(viewkey, addressline, true, nettype);
+    // spendKeyOK, Spendkey is optional
+    results[2] = walletmanager.keyValid(spendkey, addressline, false, nettype);
+    return results;
 }
 
 //usage: getApproximateBlockchainHeight("March 18 2016") or getApproximateBlockchainHeight("2016-11-11")

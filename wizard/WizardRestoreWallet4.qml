@@ -75,6 +75,7 @@ Rectangle {
                     }
                 }
                 onNextClicked: {
+                    wizardController.recoveryWallet();
                     wizardController.writeWallet();
                     wizardController.useMoneroClicked();
                 }
