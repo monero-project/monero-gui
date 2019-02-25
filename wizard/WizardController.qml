@@ -51,6 +51,9 @@ Rectangle {
         wizardController.walletOptionsLocation = '';
         wizardController.walletOptionsPassword = '';
         wizardController.walletOptionsSeed = '';
+        wizardController.walletOptionsRecoverAddress = ''
+        wizardController.walletOptionsRecoverViewkey = ''
+        wizardController.walletOptionsRecoverSpendkey = ''
         wizardController.walletOptionsBackup = '';
         wizardController.walletRestoreMode = 'seed';
         wizardController.walletOptionsRestoreHeight = 0;
@@ -59,9 +62,8 @@ Rectangle {
         wizardController.walletOptionsDeviceName = '';
         wizardController.tmpWalletFilename = '';
         wizardController.walletRestoreMode = 'seed'
-        wizardController.walletOptionsSubaddressLookahead = "";
+        wizardController.walletOptionsSubaddressLookahead = '';
         wizardController.remoteNodes = {};
-        wizardController.walletOptionsIsRecoveringFromDevice = false;
     }
 
     property var m_wallet;
