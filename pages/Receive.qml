@@ -221,7 +221,6 @@ Rectangle {
 
             MoneroComponents.CheckBox { 
                 id: addNewAccountCheckbox 
-                visible: !selectAndSend
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
