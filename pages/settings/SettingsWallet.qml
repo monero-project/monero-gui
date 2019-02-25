@@ -131,6 +131,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: settingsWallet.itemHeight
             columnSpacing: 0
+            visible: !appWindow.viewOnly
 
             ColumnLayout {
                 Layout.fillWidth: true
@@ -184,6 +185,7 @@ Rectangle {
 
         Rectangle {
             // divider
+            visible: !appWindow.viewOnly
             Layout.preferredHeight: 1 * scaleRatio
             Layout.fillWidth: true
             Layout.topMargin: 8 * scaleRatio
