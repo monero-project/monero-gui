@@ -35,7 +35,6 @@ ColumnLayout {
     id: item
 
     Layout.fillWidth: true
-    Layout.preferredHeight: childrenRect.height
 
     property alias text: input.text
     property alias labelText: inputLabel.text
