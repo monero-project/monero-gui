@@ -73,7 +73,7 @@ Rectangle {
                         wizardController.fetchRemoteNodes(function(){
                             wizardStateView.state = "wizardCreateWallet4";
                         }, function(){
-                            appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), 5);
+                            console.log("Failed to fetch remote nodes from third-party server.");
                             wizardStateView.state = "wizardCreateWallet4";
                         });
                     } else {
