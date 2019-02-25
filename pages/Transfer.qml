@@ -145,7 +145,7 @@ Rectangle {
                       middlePanel.accountView.selectAndSend = true;
                       appWindow.showPageRequest("Account")
                   }
-                  placeholderText: qsTr("") + translationManager.emptyString
+                  placeholderText: "0.00"
                   width: 100 * scaleRatio
                   fontBold: true
                   inlineButtonText: qsTr("All") + translationManager.emptyString
