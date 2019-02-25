@@ -118,7 +118,6 @@ Rectangle {
                 id: modeText
                 Layout.fillWidth: true
                 Layout.topMargin: 12 * scaleRatio
-                Layout.preferredWidth: (instructionsRect.width - 80) * scaleRatio
                 text: qsTr("Mode") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 font.family: MoneroComponents.Style.fontRegular.name
