@@ -1741,6 +1741,11 @@ ApplicationWindow {
     function toggleLanguageView(){
         middlePanel.visible = !middlePanel.visible;
         languageView.visible = !languageView.visible
+        // update after changing language from settings page
+        if (persistentSettings.language != wizard.language_language) {
+            persistentSettings.language = wizard.language_language
+            persistentSettings.locale   = wizard.language_locale
+        }
     }
 
     // TODO: Make the callback dynamic
