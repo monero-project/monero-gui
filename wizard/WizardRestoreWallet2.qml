@@ -68,6 +68,8 @@ Rectangle {
                     wizardStateView.state = "wizardRestoreWallet1";
                 }
                 onNextClicked: {
+                    wizardController.walletOptionsPassword = passwordFields.password;
+
                     if(appWindow.walletMode === 0 || appWindow.walletMode === 1){
                         wizardController.fetchRemoteNodes(function(){
                             wizardStateView.state = "wizardRestoreWallet4";

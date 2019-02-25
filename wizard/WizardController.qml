@@ -310,7 +310,7 @@ Rectangle {
         oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
 
         // protecting wallet with password
-        wizardController.m_wallet.setPassword(walletOptionsPassword);
+        wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
 
         // Store password in session to be able to use password protected functions (e.g show seed)
         appWindow.walletPassword = walletOptionsPassword
