@@ -34,6 +34,7 @@ import "../js/TxUtils.js" as TxUtils
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
 import moneroComponents.Clipboard 1.0
+import moneroComponents.NetworkType 1.0
 
 ColumnLayout {
     id: root
@@ -53,7 +54,18 @@ ColumnLayout {
             Layout.fillWidth: true
             fontBold: true
             labelText: qsTr("Address") + translationManager.emptyString
-            placeholderText: qsTr("4.. / 8.. / OpenAlias") + translationManager.emptyString
+            placeholderText: {
+                switch (persistentSettings.nettype) {
+                    case NetworkType.MAINNET:
+                        return "4.. / 8.. / OpenAlias";
+                    case NetworkType.STAGENET:
+                        return "5.. / 7..";
+                    case NetworkType.TESTNET:
+                        return "9.. / B..";
+                    default:
+                        break;
+                }
+            }
             wrapMode: Text.WrapAnywhere
             addressValidation: true
             pasteButton: true
