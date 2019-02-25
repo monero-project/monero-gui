@@ -198,7 +198,7 @@ Rectangle {
                                     wizardController.fetchRemoteNodes(function(){
                                         wizardController.openWalletFile(moneroAccountsDir + "/" + fileName + "/" + fileName + ".keys");
                                     }, function(){
-                                        appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), 5);
+                                        console.log("Failed to fetch remote nodes from third-party server.");
                                         wizardController.openWalletFile(moneroAccountsDir + "/" + fileName + "/" + fileName + ".keys");
                                     });
                                 } else {
