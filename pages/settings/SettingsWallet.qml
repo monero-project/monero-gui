@@ -177,7 +177,18 @@ Rectangle {
                 small: true
                 text: qsTr("Create wallet") + translationManager.emptyString
                 onClicked: {
-                    wizard.openCreateViewOnlyWalletPage();
+                    var newPath = currentWallet.path + "_viewonly";
+                    if (currentWallet.createViewOnly(newPath, appWindow.walletPassword)) {
+                        console.log("view only wallet created in " + newPath);
+                        informationPopup.title  = qsTr("Success") + translationManager.emptyString;
+                        informationPopup.text = qsTr('The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the "Open wallet from file" option, and selecting the view wallet in: \n%1\nYou can change the password in the wallet settings.').arg(newPath);
+                        informationPopup.open()
+                        informationPopup.onCloseCallback = null
+                    } else {
+                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text = currentWallet.errorString;
+                        informationPopup.open()
+                    }
                 }
                 width: 135 * scaleRatio
             }

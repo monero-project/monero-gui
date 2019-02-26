@@ -24,22 +24,6 @@ function updateFromQrCode(address, payment_id, amount, tx_description, recipient
     checkNextButton();
 }
 
-function restart(){
-    wizard.currentPage = 0;
-    wizard.settings = ({})
-    wizard.currentPath = "create_wallet"
-    wizard.pages = paths[currentPath]
-    wizardRestarted();
-
-    //hide all pages except first
-    for (var i = 1; i < wizard.pages.length; i++){
-        wizard.pages[i].opacity = 0;
-    }
-    //Show first pages
-    wizard.pages[0].opacity = 1;
-
-}
-
 function switchPage(next) {
     // Android focus workaround
     releaseFocus();
@@ -73,38 +57,6 @@ function switchPage(next) {
             pages[currentPage].onPageOpened(settings,next)
         }
     }
-}
-
-function openRecoveryWalletPage() {
-    wizardRestarted();
-    print ("show recovery wallet page");
-    currentPath = "recovery_wallet"
-    pages = paths[currentPath]
-    // Create temporary wallet
-    createWalletPage.createWallet(settings)
-    wizard.nextButton.visible = true
-    // goto next page
-    switchPage(true);
-}
-
-function openCreateViewOnlyWalletPage(){
-    pages[currentPage].opacity = 0
-    currentPath = "create_view_only_wallet"
-    pages = paths[currentPath]
-    currentPage = pages.indexOf(createViewOnlyWalletPage)
-    createViewOnlyWalletPage.opacity = 1
-    nextButton.visible = true
-    rootItem.state = "wizard";
-}
-
-function openCreateWalletFromDevicePage() {
-    wizardRestarted();
-    print ("show create wallet from device page");
-    currentPath = "create_wallet_from_device"
-    pages = paths[currentPath]
-    wizard.nextButton.visible = true
-    // goto next page
-    switchPage(true);
 }
 
 function createWalletPath(isIOS, folder_path,account_name){
