@@ -168,7 +168,7 @@ Rectangle {
             visible: !persistentSettings.customDecorations
             Layout.topMargin: 10 * scaleRatio
             small: true
-            text: "Change language"
+            text: qsTr("Change language") + translationManager.emptyString
 
             onClicked: {
                 appWindow.toggleLanguageView();
