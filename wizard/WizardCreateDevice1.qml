@@ -89,12 +89,14 @@ Rectangle {
                 MoneroComponents.LineEdit {
                     id: restoreHeight
                     Layout.fillWidth: true
-
-                    labelText: qsTr("Restore height (optional)") + translationManager.emptyString
+                    labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
                     labelFontSize: 14 * scaleRatio
                     placeholderFontSize: 16 * scaleRatio
-                    placeholderText: "0"
-                    validator: RegExpValidator { regExp: /(\d+)?$/ }
+                    placeholderText: qsTr("Restore height") + translationManager.emptyString
+                    validator: RegExpValidator {
+                        regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
+                    }
+                    text: "0"
                 }
 
                 MoneroComponents.LineEdit {
@@ -161,12 +163,18 @@ Rectangle {
                     wizardController.walletOptionsName = walletInput.walletName.text;
                     wizardController.walletOptionsLocation = walletInput.walletLocation.text;
                     wizardController.walletOptionsDeviceName = wizardCreateDevice1.deviceName;
-
-                    if(restoreHeight.text)
-                        wizardController.walletOptionsRestoreHeight = parseInt(restoreHeight.text);
                     if(lookahead.text)
                         wizardController.walletOptionsSubaddressLookahead = lookahead.text;
-
+                    var _restoreHeight = 0;
+                    if(restoreHeight.text){
+                        // Parse date string or restore height as integer
+                        if(restoreHeight.text.indexOf('-') === 4 && restoreHeight.text.length === 10){
+                            _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeight.text);
+                        } else {
+                            _restoreHeight = parseInt(restoreHeight.text)
+                        }
+                        wizardController.walletOptionsRestoreHeight = _restoreHeight;
+                    }
                     var written = wizardController.createWalletFromDevice();
                     if(written){
                         wizardController.walletOptionsIsRecoveringFromDevice = true;
