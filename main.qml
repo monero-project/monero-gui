@@ -95,7 +95,11 @@ ApplicationWindow {
             return service;
         }
 
-        return "https://autonode.xmr.pm/";  // monero-gui workgroup
+        // monero-gui workgroup maintained
+        if(isWindows)
+            return "http://autonode.xmr.pm/";
+        else
+            return "https://autonode.xmr.pm/"
     }
 
     // true if wallet ever synchronized
