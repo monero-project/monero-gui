@@ -60,6 +60,7 @@ Rectangle {
         wizardController.walletOptionsIsRecovering = false;
         wizardController.walletOptionsIsRecoveringFromDevice = false;
         wizardController.walletOptionsDeviceName = '';
+        wizardController.walletOptionsDeviceIsRestore = false;
         wizardController.tmpWalletFilename = '';
         wizardController.walletRestoreMode = 'seed'
         wizardController.walletOptionsSubaddressLookahead = '';
@@ -89,6 +90,7 @@ Rectangle {
     property bool   walletOptionsIsRecoveringFromDevice: false
     property string walletOptionsSubaddressLookahead: ''
     property string walletOptionsDeviceName: ''
+    property bool   walletOptionsDeviceIsRestore: false
     property string tmpWalletFilename: ''
     property var remoteNodes: ''
 
@@ -388,7 +390,10 @@ Rectangle {
             wizardController.m_wallet = wallet;
             wizardController.walletOptionsIsRecoveringFromDevice = true;
             wizardController.tmpWalletFilename = tmp_wallet_filename;
-            wizardController.walletOptionsRestoreHeight = wizardController.m_wallet.walletCreationHeight;
+            if (!wizardController.walletOptionsDeviceIsRestore) {
+                // User creates a hardware wallet for the first time. Use a recent block height from API.
+                wizardController.walletOptionsRestoreHeight = wizardController.m_wallet.walletCreationHeight;
+            }
         } else {
             console.log(wallet.errorString)
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);

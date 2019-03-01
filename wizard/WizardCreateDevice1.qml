@@ -79,6 +79,38 @@ Rectangle {
                 id: walletInput
             }
 
+            ColumnLayout {
+                spacing: 0
+
+                Layout.topMargin: 10 * scaleRatio
+                Layout.fillWidth: true
+
+                MoneroComponents.RadioButton {
+                    id: newDeviceWallet
+                    text: qsTr("Create a new wallet from device.") + translationManager.emptyString
+                    fontSize: 16 * scaleRatio
+                    checked: true
+                    onClicked: {
+                        checked = true;
+                        restoreDeviceWallet.checked = false;
+                        wizardController.walletOptionsDeviceIsRestore = false;
+                    }
+                }
+
+                MoneroComponents.RadioButton {
+                    id: restoreDeviceWallet
+                    Layout.topMargin: 10 * scaleRatio
+                    text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
+                    fontSize: 16 * scaleRatio
+                    checked: false
+                    onClicked: {
+                        checked = true;
+                        newDeviceWallet.checked = false;
+                        wizardController.walletOptionsDeviceIsRestore = true;
+                    }
+                }
+            }
+
             GridLayout {
                 Layout.topMargin: 10 * scaleRatio
                 Layout.fillWidth: true
@@ -88,6 +120,7 @@ Rectangle {
 
                 MoneroComponents.LineEdit {
                     id: restoreHeight
+                    visible: !newDeviceWallet.checked
                     Layout.fillWidth: true
                     labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
                     labelFontSize: 14 * scaleRatio
