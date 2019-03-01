@@ -1800,7 +1800,7 @@ ApplicationWindow {
                 appWindow.disconnectedEpoch = 0;
                 return;
             }, function(){
-                console.log("Failed to fetch remote nodes from third-party server.");
+                appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), simpleModeConnectionTimer.interval / 1000);
             });
         }
     }
