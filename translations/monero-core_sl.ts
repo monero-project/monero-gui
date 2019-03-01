@@ -1354,6 +1354,11 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
         <translation>Čez </translation>
     </message>
     <message>
+        <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
+        <source>Change language</source>
+        <translation type="unfinished">Zamenjaj jezik</translation>
+    </message>
+    <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
         <source>No Layout options exist yet in mobile mode.</source>
         <translation>V mobilnem načinu še ni možnosti postavitve.</translation>
@@ -2367,70 +2372,6 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
 </context>
 <context>
-    <name>Utils</name>
-    <message>
-        <location filename="../js/Utils.js" line="42"/>
-        <source>Wrong password</source>
-        <translation>Napačno geslo</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="61"/>
-        <source>second ago</source>
-        <translation>sekundo nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="63"/>
-        <source>seconds ago</source>
-        <translation>sekund nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="67"/>
-        <source>minute ago</source>
-        <translation>minuto nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="69"/>
-        <source>minutes ago</source>
-        <translation>minut nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="73"/>
-        <source>hour ago</source>
-        <translation>uro nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="75"/>
-        <source>hours ago</source>
-        <translation>ur nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="79"/>
-        <location filename="../js/Utils.js" line="83"/>
-        <source>day ago</source>
-        <translation>dan nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="85"/>
-        <source>days ago</source>
-        <translation>dni nazaj</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Testnet</source>
-        <translation>Testnet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Stagenet</source>
-        <translation>Stagenet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Mainnet</source>
-        <translation>Mainnet</translation>
-    </message>
-</context>
-<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2482,7 +2423,7 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="258"/>
+        <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
         <translation>Izberi datoteko</translation>
     </message>
@@ -2505,33 +2446,43 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
         <translation>Uporaba hardverske denarnice.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="92"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
+        <source>Create a new wallet from device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
+        <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation type="unfinished">Datum ustvaritve denarnice v obliki `YYYY-MM-DD` ali obnovitvena višina</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="95"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
         <translation type="unfinished">Višina obnovitve</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="106"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
         <source>Subaddress lookahead (optional)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="183"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="167"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Napaka pri kreiranju denarnice iz hardvare naprave. Preveri poročilo v aplikaciji.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="157"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="190"/>
         <source>Back to menu</source>
         <translation>Nazaj na meni</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="158"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
         <translation>Ustvari denarnico</translation>
     </message>
@@ -2567,6 +2518,14 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>Back to menu</source>
         <translation>Nazaj na meni</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet2</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2875,6 +2834,11 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
         <translation>Zadnje denarnice</translation>
     </message>
     <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
         <source>Back to menu</source>
         <translation>Nazaj na meni</translation>
@@ -2944,6 +2908,14 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
 </context>
 <context>
+    <name>WizardRestoreWallet2</name>
+    <message>
+        <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardRestoreWallet3</name>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="65"/>
@@ -2997,17 +2969,17 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <translation>Višina obnovitve</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="76"/>
+        <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
         <translation>Naslov prikritega procesa</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="83"/>
+        <location filename="../wizard/WizardSummary.qml" line="89"/>
         <source>Bootstrap address</source>
         <translation>Bootstrap naslov</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="89"/>
+        <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
         <translation>Tip omrežja</translation>
     </message>
@@ -3015,22 +2987,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="66"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
         <translation>Ime denarnice</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="85"/>
         <source>Wallet location</source>
         <translation>Lokacija denarnice</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="86"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
         <translation>Brskaj</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="101"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
         <translation>Izberite mapo</translation>
     </message>
@@ -3253,6 +3225,11 @@ Spending address index: </source>
         <location filename="../main.qml" line="1261"/>
         <source>Error: </source>
         <translation>Napaka: </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1803"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

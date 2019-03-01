@@ -1354,6 +1354,11 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
         <translation>nach</translation>
     </message>
     <message>
+        <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
+        <source>Change language</source>
+        <translation type="unfinished">Sprache ändern</translation>
+    </message>
+    <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
         <source>No Layout options exist yet in mobile mode.</source>
         <translation>Im mobilen Modus gibt es noch keine Layout-Optionen.</translation>
@@ -2368,70 +2373,6 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     </message>
 </context>
 <context>
-    <name>Utils</name>
-    <message>
-        <location filename="../js/Utils.js" line="42"/>
-        <source>Wrong password</source>
-        <translation>Falsches Passwort</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="61"/>
-        <source>second ago</source>
-        <translation>Sekunde her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="63"/>
-        <source>seconds ago</source>
-        <translation>Sekunden her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="67"/>
-        <source>minute ago</source>
-        <translation>Minute her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="69"/>
-        <source>minutes ago</source>
-        <translation>Minuten her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="73"/>
-        <source>hour ago</source>
-        <translation>Stunde her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="75"/>
-        <source>hours ago</source>
-        <translation>Stunden her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="79"/>
-        <location filename="../js/Utils.js" line="83"/>
-        <source>day ago</source>
-        <translation>Tag her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="85"/>
-        <source>days ago</source>
-        <translation>Tage her</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Testnet</source>
-        <translation>Testnet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Stagenet</source>
-        <translation>Stagenet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Mainnet</source>
-        <translation>Mainnet</translation>
-    </message>
-</context>
-<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2483,7 +2424,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="258"/>
+        <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
         <translation>Bitte wähle eine Datei aus</translation>
     </message>
@@ -2506,33 +2447,43 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <translation>Eine Hardware-Wallet nutzen.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="92"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
+        <source>Create a new wallet from device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
+        <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation type="unfinished">Erstellungsdatum der Wallet als `JJJJ-MM-TT` oder Wiederherstellungshöhe</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="95"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
         <translation type="unfinished">Wiederherstellungshöhe</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="106"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Subadressenvorschau (optional)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="183"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="167"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Fehler bei Erstellung der Wallet vom Gerät. Bitte prüfe die Logs der Anwendung.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="157"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="190"/>
         <source>Back to menu</source>
         <translation>Zurück zum Menü</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="158"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
         <translation>Erstelle Wallet</translation>
     </message>
@@ -2568,6 +2519,14 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>Back to menu</source>
         <translation>Zurück zum Menü</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet2</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2876,6 +2835,11 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
         <translation>Kürzlich verwendete Wallets</translation>
     </message>
     <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
         <source>Back to menu</source>
         <translation>Zurück zum Menü</translation>
@@ -2945,6 +2909,14 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     </message>
 </context>
 <context>
+    <name>WizardRestoreWallet2</name>
+    <message>
+        <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardRestoreWallet3</name>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="65"/>
@@ -2998,17 +2970,17 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
         <translation>Wiederherstellungshöhe</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="76"/>
+        <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
         <translation>Hintergrunddienst-Adresse</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="83"/>
+        <location filename="../wizard/WizardSummary.qml" line="89"/>
         <source>Bootstrap address</source>
         <translation>Bootstrap-Adresse</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="89"/>
+        <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
         <translation>Netzwerktyp</translation>
     </message>
@@ -3016,22 +2988,22 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="66"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
         <translation>Walletname</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="85"/>
         <source>Wallet location</source>
         <translation>Speicherort der Wallet</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="86"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
         <translation>Durchsuchen</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="101"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
         <translation>Bitte wähle ein Verzeichnis</translation>
     </message>
@@ -3391,6 +3363,11 @@ Indizes der beteiligten Adressen: </translation>
         <location filename="../main.qml" line="1503"/>
         <source>send to the same destination</source>
         <translation>an den selben Empfänger senden</translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1803"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="2002"/>

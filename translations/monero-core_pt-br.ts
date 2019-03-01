@@ -1356,6 +1356,11 @@ O arquivo de cache da carteira antiga será renomeado e poderá ser restaurado p
         <translation>Após </translation>
     </message>
     <message>
+        <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
+        <source>Change language</source>
+        <translation type="unfinished">Mudar idioma</translation>
+    </message>
+    <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
         <source>No Layout options exist yet in mobile mode.</source>
         <translation>Ainda não existem opções de layout para dispositivos móveis.</translation>
@@ -2369,70 +2374,6 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
     </message>
 </context>
 <context>
-    <name>Utils</name>
-    <message>
-        <location filename="../js/Utils.js" line="42"/>
-        <source>Wrong password</source>
-        <translation>Senha incorreta</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="61"/>
-        <source>second ago</source>
-        <translation>segundo</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="63"/>
-        <source>seconds ago</source>
-        <translation>segundos</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="67"/>
-        <source>minute ago</source>
-        <translation>minuto</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="69"/>
-        <source>minutes ago</source>
-        <translation>minutos</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="73"/>
-        <source>hour ago</source>
-        <translation>hora</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="75"/>
-        <source>hours ago</source>
-        <translation>horas</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="79"/>
-        <location filename="../js/Utils.js" line="83"/>
-        <source>day ago</source>
-        <translation>dia</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="85"/>
-        <source>days ago</source>
-        <translation>dias</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Testnet</source>
-        <translation>Testnet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Stagenet</source>
-        <translation>Stagenet</translation>
-    </message>
-    <message>
-        <location filename="../js/Utils.js" line="94"/>
-        <source>Mainnet</source>
-        <translation>Mainnet</translation>
-    </message>
-</context>
-<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2484,7 +2425,7 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="258"/>
+        <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
         <translation>Por favor escolha um arquivo</translation>
     </message>
@@ -2507,33 +2448,43 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
         <translation>Usando um dispositivo físico (hardware wallet). </translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="92"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
+        <source>Create a new wallet from device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
+        <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation type="unfinished">Data da criação da carteira no formato `AAAA-MM-DD` ou altura do bloco</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="95"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
         <translation type="unfinished">Restaurar da altura</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="106"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Busca avançada de subendereços (opcional)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="134"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="183"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="167"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Erro ao criar carteira via dispositivo físico. Verifique os logs da aplicação.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="157"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="190"/>
         <source>Back to menu</source>
         <translation>Voltar ao menu</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="158"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
         <translation>Criar carteira</translation>
     </message>
@@ -2569,6 +2520,14 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>Back to menu</source>
         <translation>Voltar ao menu</translation>
+    </message>
+</context>
+<context>
+    <name>WizardCreateWallet2</name>
+    <message>
+        <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2877,6 +2836,11 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
         <translation>Carteiras recentes</translation>
     </message>
     <message>
+        <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
         <source>Back to menu</source>
         <translation>Voltar ao menu</translation>
@@ -2946,6 +2910,14 @@ Para o caso com Spend Proof, você não precisa especificar o endereço do desti
     </message>
 </context>
 <context>
+    <name>WizardRestoreWallet2</name>
+    <message>
+        <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>WizardRestoreWallet3</name>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="65"/>
@@ -2999,17 +2971,17 @@ Se você não tiver a opção de executar seu próprio nó, você pode conectar 
         <translation>Restaurar da altura</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="76"/>
+        <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
         <translation>Endereço do daemon</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="83"/>
+        <location filename="../wizard/WizardSummary.qml" line="89"/>
         <source>Bootstrap address</source>
         <translation>Endereço bootstrap</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardSummary.qml" line="89"/>
+        <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
         <translation>Tipo da rede</translation>
     </message>
@@ -3017,22 +2989,22 @@ Se você não tiver a opção de executar seu próprio nó, você pode conectar 
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="66"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
         <translation>Nome da carteira</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="80"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="85"/>
         <source>Wallet location</source>
         <translation>Diretório da carteira</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="86"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
         <translation>Navegar</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="101"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
         <translation>Por favor escolha um diretório</translation>
     </message>
@@ -3292,6 +3264,11 @@ Spending address index: </source>
         <location filename="../main.qml" line="1261"/>
         <source>Error: </source>
         <translation>Erro: </translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1803"/>
+        <source>Failed to fetch remote nodes from third-party server.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>
