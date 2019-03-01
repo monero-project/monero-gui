@@ -305,6 +305,7 @@ Rectangle {
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
             // cleanup
+            walletInput.reset();
             seedInput.text = "";
             addressLine.text = "";
             spendKeyLine.text = "";

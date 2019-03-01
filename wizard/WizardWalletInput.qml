@@ -52,6 +52,11 @@ GridLayout {
         return false;
     }
 
+    function reset() {
+        walletName.error = !walletName.verify();
+        walletLocation.error = walletLocation.text === "";
+    }
+
     MoneroComponents.LineEdit {
         id: walletName
         Layout.fillWidth: true
