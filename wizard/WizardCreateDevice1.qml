@@ -184,4 +184,10 @@ Rectangle {
         wizardCreateDevice1.update();
         console.log()
     }
+
+    function onPageCompleted(previousView){
+        if(previousView.viewName == "wizardHome"){
+            walletInput.reset();
+        }
+    }
 }
