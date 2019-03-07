@@ -43,7 +43,7 @@ Rectangle {
         if(appWindow.walletMode === 0){
           return qsTr("Simple mode") + translationManager.emptyString;
         } else if(appWindow.walletMode === 1){
-          return qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
+          return qsTr("Simple mode (bootstrap)") + translationManager.emptyString;
         } else if(appWindow.walletMode === 2){
           return qsTr("Advanced mode") + translationManager.emptyString;
         }

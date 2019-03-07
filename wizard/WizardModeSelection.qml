@@ -93,7 +93,7 @@ Rectangle {
 
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
+                headerText: qsTr("Simple mode (bootstrap)") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
                         return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
