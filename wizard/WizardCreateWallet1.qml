@@ -91,7 +91,7 @@ Rectangle {
                     copyButton: false
                     readOnly: true
 
-                    placeholderText: qsTr("-") + translationManager.emptyString
+                    placeholderText: "-"
                     text: wizardController.walletOptionsSeed
                 }
 
