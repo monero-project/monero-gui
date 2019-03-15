@@ -47,7 +47,7 @@ Rectangle {
     ListModel {
         id: deviceNameModel
         ListElement { column1: qsTr("Ledger") ; column2: "Ledger"; }
-//        ListElement { column1: qsTr("Trezor") ; column2: "Trezor"; }
+        ListElement { column1: qsTr("Trezor") ; column2: "Trezor"; }
     }
 
     function update(){
