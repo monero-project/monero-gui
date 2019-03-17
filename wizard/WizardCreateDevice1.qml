@@ -111,12 +111,11 @@ Rectangle {
                 }
             }
 
-            GridLayout {
+            ColumnLayout {
                 Layout.topMargin: 10 * scaleRatio
                 Layout.fillWidth: true
 
-                columnSpacing: 20 * scaleRatio
-                columns: 2
+                spacing: 20 * scaleRatio
 
                 MoneroComponents.LineEdit {
                     id: restoreHeight
