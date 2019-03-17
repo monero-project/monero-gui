@@ -125,4 +125,31 @@ function isUpperLock(shift, letter){
         else
             return true;
     }
+
+function qmlEach(item, properties, ignoredObjectNames, arr){
+    // Traverse QML object tree and return components that match
+    // via property names. Similar to jQuery("myclass").each(...
+    // item: root QML object
+    // properties: list of strings
+    // ignoredObjectNames: list of strings
+    if(typeof(arr) == 'undefined') arr = [];
+    if(item.hasOwnProperty('data') && item['data'].length > 0){
+        for(var i = 0; i < item['data'].length; i += 1){
+            arr = qmlEach(item['data'][i], properties, ignoredObjectNames, arr);
+        }
+    }
+
+    // ignore QML objects on .objectName
+    for(var a = 0; a < ignoredObjectNames.length; a += 1){
+        if(item.objectName === ignoredObjectNames[a]){
+            return arr;
+        }
+    }
+
+    for(var u = 0; u < properties.length; u += 1){
+        if(item.hasOwnProperty(properties[u])) arr.push(item);
+        else break;
+    }
+
+    return arr;
 }

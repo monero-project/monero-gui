@@ -528,6 +528,9 @@ ApplicationWindow {
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
             timeToUnlock = currentWallet.history.minutesToUnlock
             leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
+
+            if(middlePanel.state == "History")
+                middlePanel.historyView.update();
         }
     }
 
@@ -677,19 +680,28 @@ ApplicationWindow {
         // history refresh is handled by walletUpdated
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
         currentWallet.subaddress.refresh(currentWallet.currentSubaddressAccount)
+
+        if(middlePanel.state == "History")
+            middlePanel.historyView.update();
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
         // refresh history
         console.log("unconfirmed money found")
-        currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+
+        if(middlePanel.state == "History")
+            middlePanel.historyView.update();
     }
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
         console.log("monero sent found")
         currentWallet.refresh()
-        currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
+
+        if(middlePanel.state == "History")
+            middlePanel.historyView.update();
     }
 
     function walletsFound() {
@@ -1140,6 +1152,8 @@ ApplicationWindow {
         property string daemonPassword: ""
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
+        property bool historyShowAdvanced: false
+        property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""

@@ -32,6 +32,7 @@ import "../components" as MoneroComponents
 
 Item {
     id: item
+    property alias input: input
     property alias text: input.text
 
     property alias placeholderText: placeholderLabel.text

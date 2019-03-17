@@ -464,7 +464,7 @@ Rectangle {
                 id: historyButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("History") + translationManager.emptyString
+                text: qsTr("Transactions") + translationManager.emptyString
                 symbol: qsTr("H") + translationManager.emptyString
                 dotColor: "#6B0072"
                 onClicked: {

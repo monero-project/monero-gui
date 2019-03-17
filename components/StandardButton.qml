@@ -42,6 +42,7 @@ Item {
         if(small) return 14 * scaleRatio;
         else return 16 * scaleRatio;
     }
+    property alias label: label
     signal clicked()
 
     height: small ?  30 * scaleRatio : 36 * scaleRatio

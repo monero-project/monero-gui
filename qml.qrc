@@ -52,8 +52,7 @@
         <file>images/expandRightPanel.png</file>
         <file>images/dropdownCopy.png</file>
         <file>images/dropdownCopy@2x.png</file>
-        <file>components/HistoryTable.qml</file>
-        <file>components/HistoryTableMobile.qml</file>
+        <file>images/dropdownDel.png</file>
         <file>images/moneroLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/resize.png</file>
@@ -187,7 +186,6 @@
         <file>images/downArrow.png</file>
         <file>images/downArrow@2x.png</file>
         <file>images/historyBorderRadius.png</file>
-        <file>components/HistoryTableInnerColumn.qml</file>
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
