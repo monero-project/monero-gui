@@ -37,7 +37,7 @@
     <message>
         <location filename="../pages/Account.qml" line="241"/>
         <source>Balance: </source>
-        <translation>Saldo: </translation>
+        <translation>Guthaben: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="285"/>
@@ -510,7 +510,7 @@
         <location filename="../pages/Keys.qml" line="184"/>
         <location filename="../pages/Keys.qml" line="216"/>
         <source>View Only Wallet</source>
-        <translation>View-only Wallet (ohne Berechtigung)</translation>
+        <translation>View-Only-Wallet (ohne Berechtigung)</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="241"/>
@@ -588,7 +588,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="142"/>
         <source>View Only</source>
-        <translation>View-only</translation>
+        <translation>View-Only</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="129"/>
@@ -764,7 +764,7 @@
         <location filename="../pages/merchant/Merchant.qml" line="172"/>
         <location filename="../pages/merchant/Merchant.qml" line="646"/>
         <source>Currently monitoring incoming transactions, none found yet.</source>
-        <translation>Überwache eingehende Transaktionen. Bisher keine gefunden.</translation>
+        <translation>Überwache eingehende Transaktionen – bisher keine gefunden.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
@@ -890,7 +890,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="58"/>
         <source>Mining is only available on local daemons.</source>
-        <translation>Mining ist nur mit einem lokalen Hintergrund-Dienst möglich.</translation>
+        <translation>Mining ist nur mit einem lokalen Hintergrunddienst möglich.</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="84"/>
@@ -915,7 +915,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="133"/>
         <source>Use all threads</source>
-        <translation>Benutze alle threads</translation>
+        <translation>Benutze alle Threads</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="137"/>
@@ -1183,7 +1183,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="234"/>
         <source>(Untitled)</source>
-        <translation>(Unbetitelt)</translation>
+        <translation>(Unbenannt)</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="201"/>
@@ -1193,7 +1193,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="231"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Adresse generieren</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="307"/>
@@ -1280,10 +1280,11 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>Bist du sicher, dass du den Wallet-Cache neu erstellen möchtest?
 Die folgenden Informationen werden gelöscht
 - Empfängeradressen
-- Tx-Schlüssel
-- Tx-Beschreibungen
+- Transaktionsschlüssel
+- Transaktionsbeschreibungen
 
-Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt werden.</translation>
+Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt werden.
+</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="195"/>
@@ -1303,7 +1304,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="273"/>
         <source>Wallet mode: </source>
-        <translation>Wallet Modus: </translation>
+        <translation>Wallet-Modus: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="286"/>
@@ -1356,7 +1357,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Sprache ändern</translation>
+        <translation>Sprache ändern</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1392,7 +1393,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="132"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>Die Blockchain wurde auf Deinen Computer heruntergeladen. Dies bietet eine höhere Sicherheit, benötigt aber mehr lokalen Speicherplatz.</translation>
+        <translation>Die Blockchain wird auf deinen Computer heruntergeladen. Dies bietet eine höhere Sicherheit, benötigt aber mehr lokalen Speicherplatz.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="214"/>
@@ -1402,12 +1403,12 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="233"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Verwendet einen Server eines Drittanbieters, um eine Verbindung mit dem Monero-Netzwerk herzustellen. Weniger sicher, aber einfacher auf Deinem Computer.</translation>
+        <translation>Verwendet einen Server eines Drittanbieters, um eine Verbindung mit dem Monero-Netzwerk herzustellen. Das ist weniger sicher, aber auch weniger fordernd für deinen Computer.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="279"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Tippe in Deine bevorzugte Suchmaschine &apos;Monero remote node&apos; ein, um einen Drittanbieter-Node zu finden. Stelle sicher, dass der Node von einem vertrauenswürdigen Drittanbieter ausgeführt wird.</translation>
+        <translation>Tippe in deine bevorzugte Suchmaschine &apos;Monero remote node&apos; ein, um einen Drittanbieter-Node zu finden. Stelle sicher, dass der Node von einem vertrauenswürdigen Drittanbieter ausgeführt wird.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
@@ -1422,7 +1423,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="305"/>
         <source>Remote node updated. Trusted daemon has been reset. Mark again, if desired.</source>
-        <translation>Der Drittanbieter-Node wurde aktualisiert und das Vertrauen in den Hintergrund-Dienst wurde zurückgesetzt. Wählen Sie ihn bei Bedarf erneut aus.</translation>
+        <translation>Der Drittanbieter-Node wurde aktualisiert und das Vertrauen in den Hintergrund-Dienst wurde zurückgesetzt. Wähle ihn bei Bedarf erneut aus.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1438,7 +1439,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="345"/>
         <source>Mark as Trusted Daemon</source>
-        <translation>Markiere als vertraulichen Daemon</translation>
+        <translation>Als vertrautem Hintergrunddienst markieren</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="352"/>
@@ -1506,7 +1507,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="149"/>
         <source>Create a view-only wallet</source>
-        <translation>View-Only Wallet erstellen</translation>
+        <translation>View-Only-Wallet erstellen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="163"/>
@@ -1521,14 +1522,16 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Erfolg</translation>
-    </message>
+        <translation>Erfolg</translation>
+    <translatorcomment>seems good</translatorcomment></message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die View-Only-Wallet wurde mit dem selben Passwort erstellt, welches die aktuelle Wallet benutzt. Du kannst die View-Only-Wallet öffnen, indem du zunächst diese Wallet schließt, &quot;Öffne Wallet aus Datei&quot; anklickst und die View-Only-Wallet in: 
+%1
+auswählst. Du kannst das Passwort dann in den Wallet-Einstellungen ändern.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="226"/>
@@ -1590,7 +1593,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="384"/>
         <source>Change the password of your wallet.</source>
-        <translation>Ändern Sie das Passwort für Ihr Wallet.</translation>
+        <translation>Ändere das Passwort für deine Wallet.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="399"/>
@@ -1613,13 +1616,13 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Diese Seite erlaubt es dir mit der geteilten Ringdatenbank zu interagieren. Diese Datenbank kann sowohl mit Monero Wallets benutzt zu werden, als auch Wallets von Monero Klonen, welche Monero Keys wiederbenutzen.</translation>
+        <translation>Diese Seite erlaubt es dir mit der geteilten Ringdatenbank zu interagieren. Diese Datenbank kann sowohl von Monero-Wallets als auch Wallets von Monero-Klonen, welche Monero-Keys wiederbenutzen, verwendet werden.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
         <location filename="../pages/SharedRingDB.qml" line="119"/>
         <source>Outputs marked as spent</source>
-        <translation>Unzulässige Verschleierungspartner</translation>
+        <translation>Ausgaben als ausgegeben markiert</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1630,7 +1633,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Um zu verschleiern, welche Inputs in einer Monero-Transaktion ausgegeben werden, sollte ein Dritter nicht erkennen können, welche Inputs in einem Ring bereits bekannt sind. Dies würde den Schutz durch Ringsignaturen schwächen. Wenn alle bis auf einen der Inputs bereits ausgegeben sind, wird der tatsächlich ausgegebene Input sichtbar, wodurch die Wirkung von Ringsignaturen - eine der drei Hauptebenen der Privatsphäre, die Monero verwendet - zunichte gemacht wird. Um diese Inputs zu vermeiden, kann eine Liste bekannter Ausgaben verwendet werden, um die Verwendung in neuen Transaktionen zu vermeiden. Eine solche Liste wird vom Monero-Projekt verwaltet und ist auf der Website getmonero.org verfügbar, und Sie können diese Liste hier importieren.&lt;br&gt;Alternativ kannst du die Blockchain (und die Blockchain der Monero-Klone) selbst mit dem Monero-Blockchain-mark-spent-outputs-Tool scannen, um eine Liste der bekannten Outputs zu erstellen.&lt;br&gt;</translation>
+        <translation>Um zu verschleiern, welche Inputs in einer Monero-Transaktion ausgegeben werden, sollte ein Dritter nicht erkennen können, welche Inputs in einem Ring bereits bekannt sind. Dies würde den Schutz durch Ringsignaturen schwächen. Wenn alle bis auf einen der Inputs bereits ausgegeben sind, wird der tatsächlich ausgegebene Input sichtbar, wodurch die Wirkung von Ringsignaturen – eine der drei Hauptebenen der Privatsphäre, die Monero verwendet – zunichte gemacht wird. Um diese Inputs zu vermeiden, kann eine Liste bekannter Ausgaben verwendet werden, um die Verwendung in neuen Transaktionen zu vermeiden. Eine solche Liste wird vom Monero-Projekt verwaltet und ist auf der Website getmonero.org verfügbar. Du kannst diese Liste hier importieren.&lt;br&gt;Alternativ kannst du die Blockchain (und die Blockchain der Monero-Klone) selbst mit dem „Monero Blockchain mark spent outputs“-Tool scannen, um eine Liste der bekannten Outputs zu erstellen.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1701,12 +1704,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
         <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Um zu vermeiden, die durch Ringsignaturen gewährte Privatsspähre zu verletzen, sollte eine Transaktion nicht mit verschiedenen Verschleierungspartnern(Ringe) auf mehreren Blockchains ausgegeben werden. Normalerweise ist das kein Problem; erlaubt ein Moneroklon allerdings die Wiederbenutzung von Transaktionsschlüsselbildern, kann es jedoch eines werden. In diesem Fall musst du sicherstellen, dass die gleichen Verschleierungspartner auf beiden Blockchains verwendet werden.&lt;br&gt; Monero tut dies automatisch und jede andere Software auch, die dich nicht aktiv um deine Privatssphäre bringen möchte.&lt;br&gt;Solltest du neben Monero noch einen Klon benutzen und sollte dieser nicht sicherstellen, dass deine Privatsphäre geschützt wird, kannst du dies immernoch manuell tun, indem du zuerst eine Transaktion im Klon durchführst und anschließend die beteiligten Partner hier einfügst.&lt;br&gt;Wenn du keine Moneroklone benutzt, brauchst du nichts zu tun. Monero macht das für dich.&lt;br&gt;</translation>
+        <translation>Um zu vermeiden, die durch Ringsignaturen gewährte Privatsphäre zu verletzen, sollte eine Transaktion nicht mit verschiedenen Verschleierungspartnern(Ringe) auf mehreren Blockchains ausgegeben werden. Normalerweise ist das kein Problem; erlaubt ein Monero-Klon allerdings die Wiederbenutzung von Transaktionsschlüsselbildern, kann es jedoch eines werden. In diesem Fall musst du sicherstellen, dass die gleichen Verschleierungspartner auf beiden Blockchains verwendet werden.&lt;br&gt; Monero tut dies automatisch und jede andere Software auch, die dich nicht aktiv um deine Privatsphäre bringen möchte.&lt;br&gt;Solltest du neben Monero noch einen Klon benutzen und sollte dieser nicht sicherstellen, dass deine Privatsphäre geschützt wird, kannst du dies immernoch manuell tun, indem du zuerst eine Transaktion im Klon durchführst und anschließend die beteiligten Partner hier einfügst.&lt;br&gt;Wenn du keine Monero-Klone benutzt, brauchst du nichts zu tun. Monero macht das für dich.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Hier werden Verschleierungspartner(Ringe) aufgezeichnet, die von Transaktionen verwendet wurden, die bei einem Moneroklon ausgegeben wurden, sodass derselbe Ring wiederverwendet werden kann, um Privatsphäreprobleme zu vermeiden.</translation>
+        <translation>Hier werden Verschleierungspartner(Ringe) aufgezeichnet, die von Transaktionen verwendet wurden, die bei einem Monero-Klon ausgegeben wurden, sodass derselbe Ring wiederverwendet werden kann, um Privatsphäreprobleme zu vermeiden.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -1751,7 +1754,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="390"/>
         <source>I might want to spend on key-reusing fork(s)</source>
-        <translation>Ich möchte vielleicht mit einem Monero-Klon, der Transaktionsschlüsselbilder wiederverwendendet, Ausgaben tätigen</translation>
+        <translation>Ich möchte vielleicht mit einem Monero-Klon, der Transaktionsschlüsselbilder wiederverwendet, Ausgaben tätigen</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="404"/>
@@ -2034,7 +2037,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
         <source></source>
-        <translation></translation>
+        <translation> </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="57"/>
@@ -2095,12 +2098,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="282"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>Die Adresse wurde zwar gefunden, jedoch konnten die DNSSEC-Signaturen nicht verifiziert werden. Möglicherweise wurde diese Adresse manipuliert</translation>
+        <translation>Die Adresse wurde zwar gefunden, doch die DNSSEC-Signaturen konnten nicht verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="286"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>Unter dieser OpenAlias-Adresse konnte weder eine gültige Adresse gefunden werden, noch konnten die DNSSEC-Signaturen verifiziert werden. Möglicherweise wurde diese Adresse manipuliert</translation>
+        <translation>Unter dieser OpenAlias-Adresse konnte weder eine gültige Adresse gefunden noch die DNSSEC-Signaturen verifiziert werden. Möglicherweise wurde diese Adresse manipuliert.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="290"/>
@@ -2157,7 +2160,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="704"/>
         <source>Waiting on daemon synchronization to finish.</source>
-        <translation>Wartet auf Synchronisierung des Hintergrund-Dienstes</translation>
+        <translation>Wartet auf Synchronisierung des Hintergrunddienstes</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="542"/>
@@ -2373,6 +2376,70 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Falsches Passwort</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>Sekunde her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>Sekunden her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>Minute her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>Minuten her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>Stunde her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>Stunden her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>Tag her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>Tage her</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2403,7 +2470,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.</source>
-        <translation>Dieses Passwort kann nicht wiederhergestellt werden. Wenn du es vergisst, muss die Wallet mit Ihrem, aus 25 Wörtern bestehenden, mnemonischen Seed wiederhergestellt werden.</translation>
+        <translation>Dieses Passwort kann nicht wiederhergestellt werden. Wenn du es vergisst, muss die Wallet mit ihrem, aus 25 Wörtern bestehenden, mnemonischen Seed wiederhergestellt werden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="89"/>
@@ -2449,23 +2516,23 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
         <source>Create a new wallet from device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Wallet von Hardwaregerät erstellen.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelle eine Wallet von einem Hardwaregerät wieder her. Nutze diese Option, wenn du deine Hardwarewallet bereits vorher benutzt hast.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Erstellungsdatum der Wallet als `JJJJ-MM-TT` oder Wiederherstellungshöhe</translation>
-    </message>
+        <translation>Erstellungsdatum der Wallet als `JJJJ-MM-TT` oder Wiederherstellungshöhe</translation>
+    <translatorcomment>seems good</translatorcomment></message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
         <translation type="unfinished">Wiederherstellungshöhe</translation>
-    </message>
+    <translatorcomment>seems good</translatorcomment></message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
         <source>Subaddress lookahead (optional)</source>
@@ -2526,7 +2593,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittanbieter-Nodes konnten nicht vom externen Server geladen werden.</translation>
     </message>
 </context>
 <context>
@@ -2534,7 +2601,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="57"/>
         <source>Daemon settings</source>
-        <translation>Hintergrund-Dienst-Einstellungen</translation>
+        <translation>Hintergrunddienst-Einstellungen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="58"/>
@@ -2671,22 +2738,22 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardLang.qml" line="64"/>
         <source>Language settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Spracheinstellungen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="93"/>
         <source>Change the language of the Monero GUI.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ändere die Sprache der Benutzeroberfläche von Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="188"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache geändert.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="210"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2904,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittanbieter-Nodes konnten nicht vom externen Server geladen werden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2913,7 +2980,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittanbieter-Nodes konnten nicht vom externen Server geladen werden.</translation>
     </message>
 </context>
 <context>
@@ -2921,7 +2988,7 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="65"/>
         <source>Daemon settings</source>
-        <translation>Hintergrund-Dienst-Einstellungen</translation>
+        <translation>Hintergrunddienst-Einstellungen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="66"/>
@@ -3367,7 +3434,7 @@ Indizes der beteiligten Adressen: </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drittanbieter-Nodes konnten nicht vom externen Server geladen werden.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2002"/>

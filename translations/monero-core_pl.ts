@@ -1523,7 +1523,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Sukces</translation>
+        <translation>Sukces</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2284,7 +2284,8 @@ Rozmiar pierścienia: </translation>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2374,6 +2375,70 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Błędne hasło</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Sieć testowa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Sieć stopniowa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Sieć główna</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2460,12 +2525,12 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Data stworzenia portfela w formacie `YYYY-MM-DD` lub wysokość odzyskiwania portfela</translation>
+        <translation>Data stworzenia portfela w formacie `YYYY-MM-DD` lub wysokość odzyskiwania portfela</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Wysokość odzyskiwania portfela</translation>
+        <translation>Wysokość odzyskiwania portfela</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2481,7 +2546,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="190"/>
         <source>Back to menu</source>
-        <translation type="unfinished">Wróć do menu</translation>
+        <translation>Wróć do menu</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
@@ -2519,7 +2584,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
         <source>Back to menu</source>
-        <translation type="unfinished">Wróć do menu</translation>
+        <translation>Wróć do menu</translation>
     </message>
 </context>
 <context>
@@ -2535,7 +2600,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="57"/>
         <source>Daemon settings</source>
-        <translation type="unfinished">Ustawienia demona</translation>
+        <translation>Ustawienia demona</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="58"/>
@@ -2634,7 +2699,7 @@ W przypadku &apos;Dowodu wydania&apos; nie musisz podawać adresu odbiorcy.</tra
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
         <source>Import an existing .keys wallet file from your computer.</source>
-        <translation type="unfinished">Zaimportuj istniejący plik .keys z twojego komputera.</translation>
+        <translation>Zaimportuj istniejący plik .keys z twojego komputera.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>

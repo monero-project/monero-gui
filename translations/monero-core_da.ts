@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="112"/>
         <location filename="../pages/Account.qml" line="145"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopieret til udklipsholderen</translation>
+        <translation>Kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../pages/Account.qml" line="285"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished">Adresse kopieret til udklipsholderen</translation>
+        <translation>Adresse kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../pages/Account.qml" line="323"/>
         <source>(Untitled)</source>
-        <translation type="unfinished">(Ikke-navngivet)</translation>
+        <translation>(Ikke-navngivet)</translation>
     </message>
 </context>
 <context>
@@ -75,33 +75,33 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Resolve</source>
-        <translation type="unfinished">Bestem</translation>
+        <translation>Bestem</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="109"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished">Ingen gyldig adresse fundet på denne OpenAlias adresse</translation>
+        <translation>Ingen gyldig adresse fundet på denne OpenAlias adresse</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished">Adresse fundet, men DNSSEC signaturen kunne ikke blive verificeret, så denne adresse kan være misvisende</translation>
+        <translation>Adresse fundet, men DNSSEC signaturen kunne ikke blive verificeret, så denne adresse kan være misvisende</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="118"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">ingen gyldig adresse fundet på denne OpenAlias adresse, men DNSSEC signaturen kunne ikke blive verificeret, så denne adresse kan være misvisende</translation>
+        <translation>ingen gyldig adresse fundet på denne OpenAlias adresse, men DNSSEC signaturen kunne ikke blive verificeret, så denne adresse kan være misvisende</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="122"/>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Internal error</source>
-        <translation type="unfinished">Indre fejl</translation>
+        <translation>Indre fejl</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="130"/>
         <source>No address found</source>
-        <translation type="unfinished">Ingen adresse fundet</translation>
+        <translation>Ingen adresse fundet</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="140"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="264"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished">OpenAlias fejl</translation>
+        <translation>OpenAlias fejl</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../pages/History.qml" line="387"/>
         <source>Success</source>
-        <translation type="unfinished">Succes</translation>
+        <translation>Succes</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="388"/>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../pages/History.qml" line="393"/>
         <source>Error</source>
-        <translation type="unfinished">Fejl</translation>
+        <translation>Fejl</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="394"/>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="194"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopieret til udklipsholderen</translation>
+        <translation>Kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="239"/>
@@ -336,7 +336,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="314"/>
         <source>Transaction ID</source>
-        <translation type="unfinished">Transaktion ID</translation>
+        <translation>Transaktion ID</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="361"/>
@@ -604,7 +604,7 @@
         <location filename="../LeftPanel.qml" line="226"/>
         <location filename="../LeftPanel.qml" line="264"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopieret til udklipsholderen</translation>
+        <translation>Kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="342"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
         <source>Save As</source>
-        <translation type="unfinished">Gem som</translation>
+        <translation>Gem som</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="300"/>
@@ -784,13 +784,13 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="420"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopieret til udklipsholderen</translation>
+        <translation>Kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="453"/>
         <location filename="../pages/merchant/Merchant.qml" line="504"/>
         <source>Amount to receive</source>
-        <translation type="unfinished">Beløb at modtage</translation>
+        <translation>Beløb at modtage</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="586"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">ADVARSEL: ingen forbindelse til daemon</translation>
+        <translation>ADVARSEL: ingen forbindelse til daemon</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Save QrCode</source>
-        <translation type="unfinished">Gem QrKode</translation>
+        <translation>Gem QrKode</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="691"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished">Fejl ved gemning af QrKode til</translation>
+        <translation>Fejl ved gemning af QrKode til</translation>
     </message>
 </context>
 <context>
@@ -844,12 +844,12 @@
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="167"/>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="169"/>
         <source>confirmations</source>
-        <translation type="unfinished">bekræftelser</translation>
+        <translation>bekræftelser</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="172"/>
         <source>confirmation</source>
-        <translation type="unfinished">Bekræftelse</translation>
+        <translation>Bekræftelse</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1035,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
         <source>Mining</source>
-        <translation type="unfinished">Miner</translation>
+        <translation>Miner</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -1168,7 +1168,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="287"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Kopieret til udklipsholderen</translation>
+        <translation>Kopieret til udklipsholderen</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -1521,7 +1521,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Succes</translation>
+        <translation>Succes</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -1600,7 +1600,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Forkert kodeord</translation>
+        <translation>Forkert kodeord</translation>
     </message>
 </context>
 <context>
@@ -1801,7 +1801,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Signer/verificer</translation>
+        <translation>Signer/verificer</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="121"/>
@@ -2275,7 +2275,8 @@ Please upgrade or connect to another daemon</source>
         <source>Fastest (x41.5 fee)</source>
         <translation>Hurtigste (x41,5 fee)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2365,6 +2366,70 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Forkert kodeord</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2375,22 +2440,22 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
         <location filename="../wizard/WizardAskPassword.qml" line="52"/>
         <location filename="../wizard/WizardAskPassword.qml" line="71"/>
         <source>Low</source>
-        <translation type="unfinished">Lav</translation>
+        <translation>Lav</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Medium</source>
-        <translation type="unfinished">Medium</translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="75"/>
         <source>High</source>
-        <translation type="unfinished">Høj</translation>
+        <translation>Høj</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="84"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">Giv din tegnebog et kodeord</translation>
+        <translation>Giv din tegnebog et kodeord</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
@@ -2405,7 +2470,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
         <source>Password</source>
-        <translation type="unfinished">Kodeord</translation>
+        <translation>Kodeord</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="210"/>
@@ -2418,7 +2483,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Vælg venligst en fil</translation>
+        <translation>Vælg venligst en fil</translation>
     </message>
 </context>
 <context>
@@ -2426,7 +2491,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="49"/>
         <source>Ledger</source>
-        <translation type="unfinished">Ledger</translation>
+        <translation>Ledger</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
@@ -2456,7 +2521,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Genopret højde</translation>
+        <translation>Genopret højde</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2477,9 +2542,10 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Opret tegnebog</translation>
+        <translation>Opret tegnebog</translation>
     </message>
-</context>
+<message><source>Restore height (optional)</source><translation>Genopret højde (valgfri)</translation>
+    <location filename="../wizard/WizardCreateDevice1.qml" line="93"/></message></context>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
@@ -2495,7 +2561,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="89"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished">Mnemonic seed</translation>
+        <translation>Mnemonic seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
@@ -2505,7 +2571,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished">Dette seed er &lt;b&gt;meget&lt;/b&gt; vigtigt at skrive ned og holde hemmeligt. Det er alt du har brug for at backuppe og genoprette din tegnebog.</translation>
+        <translation>Dette seed er &lt;b&gt;meget&lt;/b&gt; vigtigt at skrive ned og holde hemmeligt. Det er alt du har brug for at backuppe og genoprette din tegnebog.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2544,7 +2610,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">Ny tegnebogs detaljer:</translation>
+        <translation>Ny tegnebogs detaljer:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="66"/>
@@ -2567,12 +2633,12 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="76"/>
         <source>Default</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="80"/>
         <source>Browse</source>
-        <translation type="unfinished">Gennemse</translation>
+        <translation>Gennemse</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="94"/>
@@ -2620,7 +2686,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">Åben en tegnebog fra fil</translation>
+        <translation>Åben en tegnebog fra fil</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2630,7 +2696,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished">Genopret tegnebog fra nøgler og mnemonic seed</translation>
+        <translation>Genopret tegnebog fra nøgler og mnemonic seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2650,7 +2716,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardHome.qml" line="166"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Avancerede indstillinger</translation>
+        <translation>Avancerede indstillinger</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
@@ -2809,7 +2875,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">Åben en tegnebog fra fil</translation>
+        <translation>Åben en tegnebog fra fil</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="74"/>
@@ -2842,7 +2908,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Genopret tegnebog</translation>
+        <translation>Genopret tegnebog</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2852,37 +2918,37 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">Genopret fra seed</translation>
+        <translation>Genopret fra seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">Genopret fra nøgler</translation>
+        <translation>Genopret fra nøgler</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
         <source>From QR Code</source>
-        <translation type="unfinished">Fra QR Kode</translation>
+        <translation>Fra QR Kode</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished">Indtast din 25 (eller 24) ords mnemonic seed</translation>
+        <translation>Indtast din 25 (eller 24) ords mnemonic seed</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">Konto andresse (offentlig)</translation>
+        <translation>Konto andresse (offentlig)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">Se-nøgle (Privat)</translation>
+        <translation>Se-nøgle (Privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">Brugsnøgle (privat)</translation>
+        <translation>Brugsnøgle (privat)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2892,7 +2958,7 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
         <source>Restore height</source>
-        <translation type="unfinished">Genopret højde</translation>
+        <translation>Genopret højde</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
@@ -2933,7 +2999,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">Ny tegnebogs detaljer:</translation>
+        <translation>Ny tegnebogs detaljer:</translation>
     </message>
 </context>
 <context>
@@ -2947,22 +3013,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">Tegnebogs sti</translation>
+        <translation>Tegnebogs sti</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Language</source>
-        <translation type="unfinished">Sprog</translation>
+        <translation>Sprog</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="68"/>
         <source>Restore height</source>
-        <translation type="unfinished">Genopret højde</translation>
+        <translation>Genopret højde</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
-        <translation type="unfinished">Daemon adresse</translation>
+        <translation>Daemon adresse</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="89"/>
@@ -2972,7 +3038,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
-        <translation type="unfinished">Netværkstype</translation>
+        <translation>Netværkstype</translation>
     </message>
 </context>
 <context>
@@ -2990,12 +3056,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
-        <translation type="unfinished">Gennemse</translation>
+        <translation>Gennemse</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">Vælg venligst en destination</translation>
+        <translation>Vælg venligst en destination</translation>
     </message>
 </context>
 <context>
@@ -3208,7 +3274,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Vælg venligst en fil</translation>
+        <translation>Vælg venligst en fil</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>

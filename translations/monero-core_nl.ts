@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="161"/>
         <source>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;Deze pagina zal automatisch de blockchain en tx pool scannen voor blockchain voor inkomende transacties, gebruik makend van de QR code.&lt;/p&gt;&lt;p&gt;Het is aan u of u niet bevestigde transacties wilt accepteren. Het is waarschijnlijk dat deze bevestigd worden op korte termijn, maar er is een mogelijkheid dat het niet gebeurt, dus voor grotere bedragen zou het voor u wenselijk kunnen zijn om te wachten op een of meerdere bevestigingen.&lt;/p&gt;</translation>
+        <translation>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;Deze pagina zal automatisch de blockchain en tx pool scannen voor inkomende transacties, gebruik makend van de QR code.&lt;/p&gt;&lt;p&gt;Het is aan u of u niet bevestigde transacties wilt accepteren. Het is waarschijnlijk dat deze bevestigd worden op korte termijn, maar er is een mogelijkheid dat het niet gebeurt, dus voor grotere bedragen zou het voor u wenselijk kunnen zijn om te wachten op een of meerdere bevestigingen.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="172"/>
@@ -1368,7 +1368,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Verander taal</translation>
+        <translation>Verander taal</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1533,7 +1533,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Geslaagd</translation>
+        <translation>Geslaagd</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2295,7 +2295,8 @@ Ringgrootte: </translation>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Betalings-ID &lt;font size=&apos;2&apos;&gt;(Optioneel)&lt;/font&gt;</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2385,6 +2386,70 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Verkeerd wachtwoord</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>seconde geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>seconden geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>minuut geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>minuten geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>uur geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>uren geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>dag geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>dagen geleden</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Hoofdnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2471,12 +2536,12 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Aanmaakdatum van portemonnee als &apos;JJJJ-MM-DD&apos; of herstelhoogte</translation>
+        <translation>Aanmaakdatum van portemonnee als &apos;JJJJ-MM-DD&apos; of herstelhoogte</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Herstelpunt (blokhoogte)</translation>
+        <translation>Herstelpunt (blokhoogte)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2538,7 +2603,7 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ophalen van nodes op afstand van de third-party server is mislukt.</translation>
     </message>
 </context>
 <context>
@@ -2849,7 +2914,7 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ophalen van de externe nodes van de third-party server is mislukt.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2925,7 +2990,7 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ophalen van de externe nodes van de third-party server is mislukt.</translation>
     </message>
 </context>
 <context>
@@ -3355,7 +3420,7 @@ Vergoeding: </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ophalen van de externe nodes van de third-party server is mislukt.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

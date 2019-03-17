@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="112"/>
         <location filename="../pages/Account.qml" line="145"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Berhasil disalin</translation>
+        <translation>Berhasil disalin</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../pages/Account.qml" line="285"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished">Alamat berhasil disalin</translation>
+        <translation>Alamat berhasil disalin</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../pages/Account.qml" line="323"/>
         <source>(Untitled)</source>
-        <translation type="unfinished">(Tanpa judul)</translation>
+        <translation>(Tanpa judul)</translation>
     </message>
 </context>
 <context>
@@ -75,33 +75,33 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Resolve</source>
-        <translation type="unfinished">Menyelesaikan</translation>
+        <translation>Menyelesaikan</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="109"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished">Tidak menemukan alamat yang sah dari alamat OpenAddress ini</translation>
+        <translation>Tidak menemukan alamat yang sah dari alamat OpenAddress ini</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished">Alamat ditemukan, tetapi tanda tangan DNSSEC tidak dapat disahkan, jadi adalah kemungkinan alamat ini telah dipalsukan</translation>
+        <translation>Alamat ditemukan, tetapi tanda tangan DNSSEC tidak dapat disahkan, jadi adalah kemungkinan alamat ini telah dipalsukan</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="118"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">Tidak menerima alamat yang sah dari alamat OpenAddress ini, dan juga tanda tangan DNSSEC tidak dapat disahkan, jadi adalah kemungkinan ini telah dipalsukan</translation>
+        <translation>Tidak menerima alamat yang sah dari alamat OpenAddress ini, dan juga tanda tangan DNSSEC tidak dapat disahkan, jadi adalah kemungkinan ini telah dipalsukan</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="122"/>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Internal error</source>
-        <translation type="unfinished">Kesalahan internal</translation>
+        <translation>Kesalahan internal</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="130"/>
         <source>No address found</source>
-        <translation type="unfinished">Tidak dapat menemukan alamat</translation>
+        <translation>Tidak dapat menemukan alamat</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="140"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="264"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished">Kesalahan dengan OpenAlias</translation>
+        <translation>Kesalahan dengan OpenAlias</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../pages/History.qml" line="387"/>
         <source>Success</source>
-        <translation type="unfinished">Sukses</translation>
+        <translation>Sukses</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="388"/>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../pages/History.qml" line="393"/>
         <source>Error</source>
-        <translation type="unfinished">Kesalahan</translation>
+        <translation>Kesalahan</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="394"/>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="194"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Berhasil disalin</translation>
+        <translation>Berhasil disalin</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="239"/>
@@ -336,7 +336,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="314"/>
         <source>Transaction ID</source>
-        <translation type="unfinished">ID transaksi</translation>
+        <translation>ID transaksi</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="361"/>
@@ -604,7 +604,7 @@
         <location filename="../LeftPanel.qml" line="226"/>
         <location filename="../LeftPanel.qml" line="264"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Berhasil disalin</translation>
+        <translation>Berhasil disalin</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="342"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
         <source>Save As</source>
-        <translation type="unfinished">Menyimpan dengan nama</translation>
+        <translation>Menyimpan dengan nama</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="300"/>
@@ -784,13 +784,13 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="420"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Berhasil disalin</translation>
+        <translation>Berhasil disalin</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="453"/>
         <location filename="../pages/merchant/Merchant.qml" line="504"/>
         <source>Amount to receive</source>
-        <translation type="unfinished">Jumlah yang diterima</translation>
+        <translation>Jumlah yang diterima</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="586"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">PERINGATAN: tidak terhubung ke jurik</translation>
+        <translation>PERINGATAN: tidak terhubung ke jurik</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Save QrCode</source>
-        <translation type="unfinished">Menyimpan Kode QR</translation>
+        <translation>Menyimpan Kode QR</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="691"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished">Tidak dapat menyimpan Kode QR di </translation>
+        <translation>Tidak dapat menyimpan Kode QR di </translation>
     </message>
 </context>
 <context>
@@ -844,12 +844,12 @@
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="167"/>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="169"/>
         <source>confirmations</source>
-        <translation type="unfinished">konfirmasi</translation>
+        <translation>konfirmasi</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="172"/>
         <source>confirmation</source>
-        <translation type="unfinished">konfirmasi</translation>
+        <translation>konfirmasi</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1035,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
         <source>Mining</source>
-        <translation type="unfinished">Pertambangan</translation>
+        <translation>Pertambangan</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -1168,7 +1168,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="287"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Berhasil disalin</translation>
+        <translation>Berhasil disalin</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -1521,7 +1521,7 @@ File cache dompet lama akan diganti namanya dan dapat dikembalikan nanti.</trans
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Sukses</translation>
+        <translation>Sukses</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -1600,7 +1600,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Kata sandi salah</translation>
+        <translation>Kata sandi salah</translation>
     </message>
 </context>
 <context>
@@ -1801,7 +1801,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Menandatangani/mengesahkan</translation>
+        <translation>Menandatangani/mengesahkan</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="121"/>
@@ -2274,7 +2274,8 @@ Please upgrade or connect to another daemon</source>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>ID pembayaran &lt;font size=&apos;2&apos;&gt;( Ikhtiari )&lt;/font&gt;</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2362,6 +2363,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Kata sandi salah</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet (jaringan uji)</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2372,22 +2437,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardAskPassword.qml" line="52"/>
         <location filename="../wizard/WizardAskPassword.qml" line="71"/>
         <source>Low</source>
-        <translation type="unfinished">Rendah</translation>
+        <translation>Rendah</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Medium</source>
-        <translation type="unfinished">Sedang</translation>
+        <translation>Sedang</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="75"/>
         <source>High</source>
-        <translation type="unfinished">Tinggi</translation>
+        <translation>Tinggi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="84"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">Memilih kata sandi untuk dompet Anda</translation>
+        <translation>Memilih kata sandi untuk dompet Anda</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
@@ -2402,7 +2467,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
         <source>Password</source>
-        <translation type="unfinished">Kata sandi</translation>
+        <translation>Kata sandi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="210"/>
@@ -2415,7 +2480,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">&gt;Mohon memilih arsip</translation>
+        <translation>Mohon memilih arsip</translation>
     </message>
 </context>
 <context>
@@ -2423,12 +2488,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="49"/>
         <source>Ledger</source>
-        <translation type="unfinished">Buku kas</translation>
+        <translation>Buku kas</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">Membuat dompet baru</translation>
+        <translation>Membuat dompet baru</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="75"/>
@@ -2453,7 +2518,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Mengembalikan tinggi ke nilai asal</translation>
+        <translation>Mengembalikan tinggi ke nilai asal</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2474,15 +2539,16 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Membuat dompet</translation>
+        <translation>Membuat dompet</translation>
     </message>
-</context>
+<message><source>Restore height (optional)</source><translation>Mengembalikan tinggi ke nilai awal (opsional)</translation>
+    <location filename="../wizard/WizardCreateDevice1.qml" line="93"/></message></context>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="60"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">Membuat dompet baru</translation>
+        <translation>Membuat dompet baru</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="61"/>
@@ -2492,7 +2558,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="89"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished">Sumber mnemonic</translation>
+        <translation>Sumber mnemonic</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
@@ -2502,7 +2568,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished">&lt;b&gt;Sangat&lt;/b&gt; penting kata-kata biji acak ini dicatat karena cuma oleh sebagai ini dompet Anda dapat dipulihkan</translation>
+        <translation>&lt;b&gt;Sangat&lt;/b&gt; penting kata-kata biji acak ini dicatat karena cuma oleh sebagai ini dompet Anda dapat dipulihkan</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2541,7 +2607,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">Rincian dompet baru:</translation>
+        <translation>Rincian dompet baru:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="66"/>
@@ -2564,12 +2630,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="76"/>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>Default</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="80"/>
         <source>Browse</source>
-        <translation type="unfinished">Jelajahi</translation>
+        <translation>Jelajahi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="94"/>
@@ -2597,7 +2663,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="65"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">Membuat dompet baru</translation>
+        <translation>Membuat dompet baru</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
@@ -2617,7 +2683,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">Membuka dompet dari arsip</translation>
+        <translation>Membuka dompet dari arsip</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2627,7 +2693,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished">Mengembalikan dompet dari kunci atau kata-kata biji acak</translation>
+        <translation>Mengembalikan dompet dari kunci atau kata-kata biji acak</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2647,7 +2713,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="166"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Opsi lanjutan</translation>
+        <translation>Opsi lanjutan</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
@@ -2806,7 +2872,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">Membuka dompet dari arsip</translation>
+        <translation>Membuka dompet dari arsip</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="74"/>
@@ -2839,7 +2905,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Mengembalikan dompet</translation>
+        <translation>Mengembalikan dompet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2849,37 +2915,37 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">Mengembalikan dari sumber</translation>
+        <translation>Mengembalikan dari sumber</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">Mengembalikan dari kunci</translation>
+        <translation>Mengembalikan dari kunci</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
         <source>From QR Code</source>
-        <translation type="unfinished">Dari kode QR</translation>
+        <translation>Dari kode QR</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished">Masukkan 25 (atau 24) kata sumber mnemonik Anda </translation>
+        <translation>Masukkan 25 (atau 24) kata sumber mnemonik Anda </translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">Alamat rekening</translation>
+        <translation>Alamat rekening</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">Kunci tampilan (pribadi)</translation>
+        <translation>Kunci tampilan (pribadi)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">Kunci pembayaran (pribadi)</translation>
+        <translation>Kunci pembayaran (pribadi)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2889,7 +2955,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
         <source>Restore height</source>
-        <translation type="unfinished">Mengembalikan tinggi ke nilai asal</translation>
+        <translation>Mengembalikan tinggi ke nilai asal</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
@@ -2930,7 +2996,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">Rincian dompet baru:</translation>
+        <translation>Rincian dompet baru:</translation>
     </message>
 </context>
 <context>
@@ -2939,27 +3005,27 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../wizard/WizardSummary.qml" line="44"/>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
         <source>Wallet name</source>
-        <translation type="unfinished">Nama dompet</translation>
+        <translation>Nama dompet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">Path untuk dompet</translation>
+        <translation>Path untuk dompet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Language</source>
-        <translation type="unfinished">Bahasa</translation>
+        <translation>Bahasa</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="68"/>
         <source>Restore height</source>
-        <translation type="unfinished">Mengembalikan tinggi ke nilai asal</translation>
+        <translation>Mengembalikan tinggi ke nilai asal</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
-        <translation type="unfinished">Alamat jurik</translation>
+        <translation>Alamat jurik</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="89"/>
@@ -2969,7 +3035,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
-        <translation type="unfinished">Tipe Jaringan</translation>
+        <translation>Tipe Jaringan</translation>
     </message>
 </context>
 <context>
@@ -2977,7 +3043,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
-        <translation type="unfinished">Nama dompet</translation>
+        <translation>Nama dompet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="85"/>
@@ -2987,12 +3053,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
-        <translation type="unfinished">Jelajahi</translation>
+        <translation>Jelajahi</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">Silahkan pilih direktori</translation>
+        <translation>Silahkan pilih direktori</translation>
     </message>
 </context>
 <context>
@@ -3283,7 +3349,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">&gt;Mohon memilih arsip</translation>
+        <translation>Mohon memilih arsip</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>

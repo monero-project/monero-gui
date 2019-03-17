@@ -1359,7 +1359,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Alterar idioma</translation>
+        <translation>Alterar idioma</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1524,7 +1524,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Sucesso</translation>
+        <translation>Sucesso</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2285,7 +2285,8 @@ Por favor atualize ou execute outra versão do daemon</translation>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>ID do Pagamento &lt;font size=&apos;2&apos;&gt;( Opcional )&lt;/font&gt;</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2371,6 +2372,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../pages/TxKey.qml" line="199"/>
         <source>Check</source>
         <translation>Verificar</translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Palavra-chave incorreta</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>segundo atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>segundos atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>minuto atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>minutos atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>hora atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>horas atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>dia atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>dias atrás</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
     </message>
 </context>
 <context>
@@ -2460,12 +2525,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Data de criação da carteira como `AAAA-MM-DD` ou restaurar a partir de número de bloco</translation>
+        <translation>Data de criação da carteira como `AAAA-MM-DD` ou restaurar a partir de número de bloco</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Restaurar a partir de número de bloco</translation>
+        <translation>Restaurar a partir de número de bloco</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2527,7 +2592,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro a obter nodes remotos a partir de servidor.</translation>
     </message>
 </context>
 <context>
@@ -2743,17 +2808,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="94"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation type="unfinished">Fique ciente dessas limitações. &lt;b&gt;Os usuários que priorizam a privacidade e a descentralização devem usar um nó completo&lt;/b&gt;.</translation>
+        <translation>Fique ciente dessas limitações. &lt;b&gt;Os usuários que priorizam a privacidade e a descentralização devem usar um nó completo&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="98"/>
         <source>For enhanced node performance you may specify your region:</source>
-        <translation type="unfinished">Para melhorar o desempenho do nó, você pode especificar sua região:</translation>
+        <translation>Para melhorar o desempenho do nó, você pode especificar sua região:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="148"/>
         <source>I understand the privacy implications of using a third-party server.</source>
-        <translation type="unfinished">Eu entendo as implicações de privacidade de usar um servidor de terceiros.</translation>
+        <translation>Eu entendo as implicações de privacidade de usar um servidor de terceiros.</translation>
     </message>
 </context>
 <context>
@@ -2772,7 +2837,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardModeSelection.qml" line="66"/>
         <location filename="../wizard/WizardModeSelection.qml" line="96"/>
         <source>Simple mode</source>
-        <translation type="unfinished">Modo simples</translation>
+        <translation>Modo simples</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="69"/>
@@ -2787,7 +2852,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="124"/>
         <source>Advanced mode</source>
-        <translation type="unfinished">Modo avançado</translation>
+        <translation>Modo avançado</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="125"/>
@@ -2797,7 +2862,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="136"/>
         <source>Change language</source>
-        <translation type="unfinished">Alterar idioma</translation>
+        <translation>Alterar idioma</translation>
     </message>
 </context>
 <context>
@@ -2838,7 +2903,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro a obter nodes remotos através do servidor terceiro.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2914,7 +2979,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro a obter nodes remotos através do servidor terceiro.</translation>
     </message>
 </context>
 <context>
@@ -3275,7 +3340,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro a obter nodes remotos através do servidor terceiro.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

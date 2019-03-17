@@ -1521,7 +1521,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Успішно</translation>
+        <translation>Успішно</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2282,7 +2282,8 @@ Ringsize: </source>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2368,6 +2369,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../pages/TxKey.qml" line="218"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
         <translation>Якщо у платежі було кілька транзакцій, кожна з них повинна бути перевірена, а результати об&apos;єднані.</translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Невірний пароль</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Тестова мережа (testnet)</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Тестова мережа (stagenet)</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Основна мережа (Mainnet)</translation>
     </message>
 </context>
 <context>
@@ -2462,7 +2527,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Висота блока відновлення</translation>
+        <translation>Висота блока відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2657,7 +2722,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="166"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Додаткові налаштування</translation>
+        <translation>Додаткові налаштування</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
@@ -2816,7 +2881,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">Відкрити гаманець із файлу</translation>
+        <translation>Відкрити гаманець із файлу</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="74"/>
@@ -2849,7 +2914,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Відновити гаманець</translation>
+        <translation>Відновити гаманець</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2859,37 +2924,37 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">Відновити за допомогою seed-фрази</translation>
+        <translation>Відновити за допомогою seed-фрази</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">Відновити за допомогою ключів</translation>
+        <translation>Відновити за допомогою ключів</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
         <source>From QR Code</source>
-        <translation type="unfinished">Із QR-коду</translation>
+        <translation>Із QR-коду</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished">Введіть свою мнемонічну seed-фразу із 25 (або 24) слів</translation>
+        <translation>Введіть свою мнемонічну seed-фразу із 25 (або 24) слів</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">Адрес гаманця (публічний)</translation>
+        <translation>Адрес гаманця (публічний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">Ключ для перегляду (приватний)</translation>
+        <translation>Ключ для перегляду (приватний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">Ключ для витрати (приватний)</translation>
+        <translation>Ключ для витрати (приватний)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2899,7 +2964,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
         <source>Restore height</source>
-        <translation type="unfinished">Висота блока відновлення</translation>
+        <translation>Висота блока відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
@@ -2940,7 +3005,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">Дані нового гаманця:</translation>
+        <translation>Дані нового гаманця:</translation>
     </message>
 </context>
 <context>
@@ -2954,22 +3019,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">Шлях до гаманця</translation>
+        <translation>Шлях до гаманця</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Language</source>
-        <translation type="unfinished">Мова</translation>
+        <translation>Мова</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="68"/>
         <source>Restore height</source>
-        <translation type="unfinished">Висота блока відновлення</translation>
+        <translation>Висота блока відновлення</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
-        <translation type="unfinished">Адрес демона</translation>
+        <translation>Адрес демона</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="89"/>
@@ -2979,7 +3044,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
-        <translation type="unfinished">Тип Мережі</translation>
+        <translation>Тип Мережі</translation>
     </message>
 </context>
 <context>
@@ -2997,12 +3062,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
-        <translation type="unfinished">Огляд</translation>
+        <translation>Огляд</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">Будь ласка, виберіть папку</translation>
+        <translation>Будь ласка, виберіть папку</translation>
     </message>
 </context>
 <context>
@@ -3293,7 +3358,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Будь ласка, виберіть файл</translation>
+        <translation>Будь ласка, виберіть файл</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>

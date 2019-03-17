@@ -75,33 +75,33 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Resolve</source>
-        <translation type="unfinished">문제해결</translation>
+        <translation>문제해결</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="109"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished">이 Open Alias 주소에 유효한 주소가 없습니다</translation>
+        <translation>이 Open Alias 주소에 유효한 주소가 없습니다</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished">주소가 발견되었으나 DNSSEC 서명이 확인되지 않습니다. 이 주소는 스푸핑(spoof)되었을 수 있습니다</translation>
+        <translation>주소가 발견되었으나 DNSSEC 서명이 확인되지 않습니다. 이 주소는 스푸핑(spoof)되었을 수 있습니다</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="118"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">이 Open Alias 주소에서 유효한 주소 또는 DNSSEC 서명을 확인할 수 없습니다. 이 주소는 스푸핑(spoof)되었을 수 있습니다</translation>
+        <translation>이 Open Alias 주소에서 유효한 주소 또는 DNSSEC 서명을 확인할 수 없습니다. 이 주소는 스푸핑(spoof)되었을 수 있습니다</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="122"/>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Internal error</source>
-        <translation type="unfinished">내부 오류</translation>
+        <translation>내부 오류</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="130"/>
         <source>No address found</source>
-        <translation type="unfinished">주소를 찾을 수 없음</translation>
+        <translation>주소를 찾을 수 없음</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="140"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="264"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished">Open Alias 오류</translation>
+        <translation>Open Alias 오류</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../pages/History.qml" line="387"/>
         <source>Success</source>
-        <translation type="unfinished">성공</translation>
+        <translation>성공</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="388"/>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../pages/History.qml" line="393"/>
         <source>Error</source>
-        <translation type="unfinished">오류</translation>
+        <translation>오류</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="394"/>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="194"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="239"/>
@@ -336,7 +336,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="314"/>
         <source>Transaction ID</source>
-        <translation type="unfinished">거래 아이디</translation>
+        <translation>거래 아이디</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="361"/>
@@ -389,7 +389,7 @@
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="107"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../components/HistoryTableInnerColumn.qml" line="115"/>
@@ -589,7 +589,7 @@
         <location filename="../LeftPanel.qml" line="226"/>
         <location filename="../LeftPanel.qml" line="264"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="342"/>
@@ -727,7 +727,7 @@
     <message>
         <location filename="../components/LineEdit.qml" line="134"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
 </context>
 <context>
@@ -740,7 +740,7 @@
     <message>
         <location filename="../components/LineEditMulti.qml" line="142"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../components/LineEditMulti.qml" line="150"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
         <source>Save As</source>
-        <translation type="unfinished">다른 이름으로 저장</translation>
+        <translation>다른 이름으로 저장</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="300"/>
@@ -784,13 +784,13 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="420"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="453"/>
         <location filename="../pages/merchant/Merchant.qml" line="504"/>
         <source>Amount to receive</source>
-        <translation type="unfinished">받을 금액</translation>
+        <translation>받을 금액</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="586"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">경고: 데몬에 연결되지 않았습니다.</translation>
+        <translation>경고: 데몬에 연결되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Save QrCode</source>
-        <translation type="unfinished">Qr코드 저장</translation>
+        <translation>Qr코드 저장</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="691"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished">Qr코드를 저장하지 못했습니다 </translation>
+        <translation>Qr코드를 저장하지 못했습니다 </translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1035,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
         <source>Mining</source>
-        <translation type="unfinished">마이닝</translation>
+        <translation>마이닝</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -1168,7 +1168,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="287"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -1307,7 +1307,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">클립보드에 복사되었습니다</translation>
+        <translation>클립보드에 복사되었습니다</translation>
     </message>
 </context>
 <context>
@@ -1515,7 +1515,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">성공</translation>
+        <translation>성공</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -1594,7 +1594,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
         <source>Wrong password</source>
-        <translation type="unfinished">잘못된 암호</translation>
+        <translation>잘못된 암호</translation>
     </message>
 </context>
 <context>
@@ -1795,7 +1795,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">서명/확인</translation>
+        <translation>서명/확인</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="121"/>
@@ -2268,7 +2268,8 @@ Please upgrade or connect to another daemon</source>
         <source>Fastest (x41.5 fee)</source>
         <translation>가장 빠른 (x41.5 수수료)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2356,6 +2357,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>잘못된 암호</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>테스트넷</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2366,22 +2431,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardAskPassword.qml" line="52"/>
         <location filename="../wizard/WizardAskPassword.qml" line="71"/>
         <source>Low</source>
-        <translation type="unfinished">낮음</translation>
+        <translation>낮음</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Medium</source>
-        <translation type="unfinished">중간</translation>
+        <translation>중간</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="75"/>
         <source>High</source>
-        <translation type="unfinished">높음</translation>
+        <translation>높음</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="84"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">지갑의 비밀번호를 설정하세요</translation>
+        <translation>지갑의 비밀번호를 설정하세요</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
@@ -2396,7 +2461,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
         <source>Password</source>
-        <translation type="unfinished">비밀번호</translation>
+        <translation>비밀번호</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="210"/>
@@ -2409,7 +2474,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">파일을 선택하세요</translation>
+        <translation>파일을 선택하세요</translation>
     </message>
 </context>
 <context>
@@ -2422,7 +2487,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">새 지갑 만들기</translation>
+        <translation>새 지갑 만들기</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="75"/>
@@ -2447,7 +2512,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">높이 복원</translation>
+        <translation>높이 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2468,15 +2533,16 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
-        <translation type="unfinished">지갑 만들기</translation>
+        <translation>지갑 만들기</translation>
     </message>
-</context>
+<message><source>Restore height (optional)</source><translation>블록 높이 복원 (선택 항목)</translation>
+    <location filename="../wizard/WizardCreateDevice1.qml" line="93"/></message></context>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="60"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">새 지갑 만들기</translation>
+        <translation>새 지갑 만들기</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="61"/>
@@ -2496,7 +2562,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished"> 지갑의 백업 및 복원에 필요한 유일한 정보인 이 시드를 받아 적어, 보안이 되는 안전한 장소에 보관 하는것은 &lt;b&gt;매우 &lt;/b&gt; 중요합니다.</translation>
+        <translation> 지갑의 백업 및 복원에 필요한 유일한 정보인 이 시드를 받아 적어, 보안이 되는 안전한 장소에 보관 하는것은 &lt;b&gt;매우 &lt;/b&gt; 중요합니다.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2535,7 +2601,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">새 지갑 세부정보:</translation>
+        <translation>새 지갑 세부정보:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="66"/>
@@ -2591,7 +2657,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="65"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">새 지갑 만들기</translation>
+        <translation>새 지갑 만들기</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
@@ -2611,7 +2677,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">파일에서 지갑 열기</translation>
+        <translation>파일에서 지갑 열기</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2621,7 +2687,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished">니모닉 시드 또는 개인 키에서 지갑을 복원</translation>
+        <translation>니모닉 시드 또는 개인 키에서 지갑을 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2800,7 +2866,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">파일에서 지갑 열기</translation>
+        <translation>파일에서 지갑 열기</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="74"/>
@@ -2833,7 +2899,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">지갑 복원</translation>
+        <translation>지갑 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2843,12 +2909,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">시드(seed)에서 복원</translation>
+        <translation>시드(seed)에서 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">키에서 복원</translation>
+        <translation>키에서 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
@@ -2863,17 +2929,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">계정 주소 (공개)</translation>
+        <translation>계정 주소 (공개)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">보기 키 (비공개)</translation>
+        <translation>보기 키 (비공개)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">결제 키 (비공개)</translation>
+        <translation>결제 키 (비공개)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2883,7 +2949,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
         <source>Restore height</source>
-        <translation type="unfinished">높이 복원</translation>
+        <translation>높이 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
@@ -2924,7 +2990,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">새 지갑 세부정보:</translation>
+        <translation>새 지갑 세부정보:</translation>
     </message>
 </context>
 <context>
@@ -2933,27 +2999,27 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../wizard/WizardSummary.qml" line="44"/>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
         <source>Wallet name</source>
-        <translation type="unfinished">지갑 이름</translation>
+        <translation>지갑 이름</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">지갑 경로</translation>
+        <translation>지갑 경로</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Language</source>
-        <translation type="unfinished">언어</translation>
+        <translation>언어</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="68"/>
         <source>Restore height</source>
-        <translation type="unfinished">높이 복원</translation>
+        <translation>높이 복원</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
-        <translation type="unfinished">데몬 주소</translation>
+        <translation>데몬 주소</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="89"/>
@@ -2971,7 +3037,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
-        <translation type="unfinished">지갑 이름</translation>
+        <translation>지갑 이름</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="85"/>
@@ -2986,7 +3052,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">디렉토리를 선택하세요</translation>
+        <translation>디렉토리를 선택하세요</translation>
     </message>
 </context>
 <context>
@@ -3279,7 +3345,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">파일을 선택하세요</translation>
+        <translation>파일을 선택하세요</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>

@@ -614,7 +614,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="343"/>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="391"/>
@@ -634,7 +634,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="442"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="468"/>
@@ -1193,7 +1193,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="231"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>创建新地址</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="307"/>
@@ -1357,7 +1357,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">切换语言</translation>
+        <translation>切换语言</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1522,14 +1522,16 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">成功</translation>
+        <translation>成功</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>仅可查看钱包已经创建，密码与当前钱包相同。你可以关闭当前钱包并打开该仅可查看钱包，点击“从文件打开钱包”选项，然后从这里选择对应的仅可查看钱包： 
+%1
+你可以在钱包设置中修改密码。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="226"/>
@@ -2280,7 +2282,8 @@ Please upgrade or connect to another daemon</source>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>付款ID &lt;font size=&apos;2&apos;&gt;( 选填 )&lt;/font&gt;</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2370,6 +2373,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>密码错误</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>分钟前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>分钟前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>小时前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>小时前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>天前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>天前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>测试网</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>专用网</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>主网</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2446,22 +2513,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
         <source>Create a new wallet from device.</source>
-        <translation type="unfinished"></translation>
+        <translation>通过硬件设备创建一个新钱包。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation type="unfinished"></translation>
+        <translation>通过硬件设备还原钱包。如果你之前使用的是硬件钱包，使用该选项。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">钱包创建日期格式为“年-月-日”或还原的区块高度</translation>
+        <translation>钱包创建日期格式为“年-月-日”或还原的区块高度</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">恢复特定区块高度</translation>
+        <translation>恢复特定区块高度</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2505,7 +2572,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>——</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
@@ -2523,7 +2590,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>从第三方服务器抓取远程节点失败。</translation>
     </message>
 </context>
 <context>
@@ -2660,7 +2727,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
         <source>Number of KDF rounds:</source>
-        <translation type="unfinished"></translation>
+        <translation>KDF回合数：</translation>
     </message>
 </context>
 <context>
@@ -2668,22 +2735,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardLang.qml" line="64"/>
         <source>Language settings</source>
-        <translation type="unfinished"></translation>
+        <translation>语言设置</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="93"/>
         <source>Change the language of the Monero GUI.</source>
-        <translation type="unfinished"></translation>
+        <translation>修改门罗币GUI钱包的语言。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="188"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>语言修改成功。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="210"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -2834,7 +2901,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>从第三方服务器抓取远程节点失败。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2910,7 +2977,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>从第三方服务器获取远程节点失败。</translation>
     </message>
 </context>
 <context>
@@ -2925,7 +2992,9 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation type="unfinished"></translation>
+        <translation>你的钱包需要与门罗币节点连接后，才能和门罗币网络发生通讯。处于最佳隐私考虑，推荐你使用自己运行的节点。
+
+如果你没有亲自运行节点的选项，也可以与一个远程节点相连。</translation>
     </message>
 </context>
 <context>
@@ -3263,7 +3332,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>从第三方服务器获取远程节点失败。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

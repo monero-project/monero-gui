@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="112"/>
         <location filename="../pages/Account.qml" line="145"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -42,7 +42,7 @@
     <message>
         <location filename="../pages/Account.qml" line="285"/>
         <source>Address copied to clipboard</source>
-        <translation type="unfinished">הכתובת הועתקה ללוח</translation>
+        <translation>הכתובת הועתקה ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="320"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../pages/Account.qml" line="323"/>
         <source>(Untitled)</source>
-        <translation type="unfinished">(ללא כותרת)</translation>
+        <translation>(ללא כותרת)</translation>
     </message>
 </context>
 <context>
@@ -75,33 +75,33 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Resolve</source>
-        <translation type="unfinished">לפתור</translation>
+        <translation>לפתור</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="109"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished">לא נמצאה כתובת חוקית עבור שם זה</translation>
+        <translation>לא נמצאה כתובת חוקית עבור שם זה</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished">כתובת נמצאה, אך לא ניתן לוודא את החתימה. ייתכן שכתובת זו אינה נכונה/זדונית</translation>
+        <translation>כתובת נמצאה, אך לא ניתן לוודא את החתימה. ייתכן שכתובת זו אינה נכונה/זדונית</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="118"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">לא נמצאה כתובת חוקית עבור שם זה</translation>
+        <translation>לא נמצאה כתובת חוקית עבור שם זה</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="122"/>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Internal error</source>
-        <translation type="unfinished">שגיאה פנימית</translation>
+        <translation>שגיאה פנימית</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="130"/>
         <source>No address found</source>
-        <translation type="unfinished">לא נמצאה כתובת</translation>
+        <translation>לא נמצאה כתובת</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="140"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="264"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished">שגיאה בתרגום שם</translation>
+        <translation>שגיאה בתרגום שם</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../pages/History.qml" line="387"/>
         <source>Success</source>
-        <translation type="unfinished">הצלחה</translation>
+        <translation>הצלחה</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="388"/>
@@ -253,7 +253,7 @@
     <message>
         <location filename="../pages/History.qml" line="393"/>
         <source>Error</source>
-        <translation type="unfinished">שגיאה</translation>
+        <translation>שגיאה</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="394"/>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="194"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="239"/>
@@ -336,7 +336,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="314"/>
         <source>Transaction ID</source>
-        <translation type="unfinished">מזהה העברה</translation>
+        <translation>מזהה העברה</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="361"/>
@@ -604,7 +604,7 @@
         <location filename="../LeftPanel.qml" line="226"/>
         <location filename="../LeftPanel.qml" line="264"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="342"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
         <source>Save As</source>
-        <translation type="unfinished">שמור בשם</translation>
+        <translation>שמור בשם</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="300"/>
@@ -784,13 +784,13 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="420"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="453"/>
         <location filename="../pages/merchant/Merchant.qml" line="504"/>
         <source>Amount to receive</source>
-        <translation type="unfinished">סכום לקבלה</translation>
+        <translation>סכום לקבלה</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="586"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">אזהרה: אין חיבור לדימון</translation>
+        <translation>אזהרה: אין חיבור לדימון</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Save QrCode</source>
-        <translation type="unfinished">QRשמור קוד</translation>
+        <translation>QRשמור קוד</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="691"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished">QRנכשל בשמירת קוד</translation>
+        <translation>QRנכשל בשמירת קוד</translation>
     </message>
 </context>
 <context>
@@ -844,12 +844,12 @@
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="167"/>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="169"/>
         <source>confirmations</source>
-        <translation type="unfinished">אישורים</translation>
+        <translation>אישורים</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="172"/>
         <source>confirmation</source>
-        <translation type="unfinished">אישור</translation>
+        <translation>אישור</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1035,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
         <source>Mining</source>
-        <translation type="unfinished">כרייה</translation>
+        <translation>כרייה</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -1168,7 +1168,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="287"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">הועתק ללוח</translation>
+        <translation>הועתק ללוח</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -1521,7 +1521,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">הצלחה</translation>
+        <translation>הצלחה</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -1600,7 +1600,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
         <source>Wrong password</source>
-        <translation type="unfinished">סיסמה שגויה</translation>
+        <translation>סיסמה שגויה</translation>
     </message>
 </context>
 <context>
@@ -1801,7 +1801,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">חתום/וודא</translation>
+        <translation>חתום/וודא</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="121"/>
@@ -2281,7 +2281,8 @@ Please upgrade or connect to another daemon</source>
         <source>Fastest (x41.5 fee)</source>
         <translation>הכי מהיר (עמלה x41.5)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2369,6 +2370,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>סיסמה שגויה</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2379,22 +2444,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardAskPassword.qml" line="52"/>
         <location filename="../wizard/WizardAskPassword.qml" line="71"/>
         <source>Low</source>
-        <translation type="unfinished">נמוך</translation>
+        <translation>נמוך</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Medium</source>
-        <translation type="unfinished">בינוני</translation>
+        <translation>בינוני</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="75"/>
         <source>High</source>
-        <translation type="unfinished">גבוה</translation>
+        <translation>גבוה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="84"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">הגדר סיסמה לארנק</translation>
+        <translation>הגדר סיסמה לארנק</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
@@ -2409,7 +2474,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
         <source>Password</source>
-        <translation type="unfinished">סיסמה</translation>
+        <translation>סיסמה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="210"/>
@@ -2422,7 +2487,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">אנא בחר קובץ</translation>
+        <translation>אנא בחר קובץ</translation>
     </message>
 </context>
 <context>
@@ -2435,7 +2500,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">צור ארנק חדש</translation>
+        <translation>צור ארנק חדש</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="75"/>
@@ -2460,7 +2525,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">שחזר גובה</translation>
+        <translation>שחזר גובה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2481,15 +2546,16 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
-        <translation type="unfinished">צור ארנק</translation>
+        <translation>צור ארנק</translation>
     </message>
-</context>
+<message><source>Restore height (optional)</source><translation>שחזר גובה (אופציונלי)</translation>
+    <location filename="../wizard/WizardCreateDevice1.qml" line="93"/></message></context>
 <context>
     <name>WizardCreateWallet1</name>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="60"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">צור ארנק חדש</translation>
+        <translation>צור ארנק חדש</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="61"/>
@@ -2499,7 +2565,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="89"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished">גרעין מנמוני (mnemonic seed)</translation>
+        <translation>גרעין מנמוני (mnemonic seed)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
@@ -2509,7 +2575,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished">חשוב &lt;b&gt;מאוד&lt;/b&gt; לכתוב ולשמור בסוד את הגרעין המנמוני. זה כל שתצטרך כדי לגבות ולשחזר את הארנק שלך.</translation>
+        <translation>חשוב &lt;b&gt;מאוד&lt;/b&gt; לכתוב ולשמור בסוד את הגרעין המנמוני. זה כל שתצטרך כדי לגבות ולשחזר את הארנק שלך.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2548,7 +2614,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">פרטי ארנק חדש:</translation>
+        <translation>פרטי ארנק חדש:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="66"/>
@@ -2571,12 +2637,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="76"/>
         <source>Default</source>
-        <translation type="unfinished">ברירת מחדל</translation>
+        <translation>ברירת מחדל</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="80"/>
         <source>Browse</source>
-        <translation type="unfinished">דפדף</translation>
+        <translation>דפדף</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="94"/>
@@ -2604,7 +2670,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="65"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">צור ארנק חדש</translation>
+        <translation>צור ארנק חדש</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
@@ -2624,7 +2690,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">פתח ארנק מקובץ</translation>
+        <translation>פתח ארנק מקובץ</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2634,7 +2700,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished">שחזר ארנק ממפתחות או מגרעין מנמוני</translation>
+        <translation>שחזר ארנק ממפתחות או מגרעין מנמוני</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2654,7 +2720,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardHome.qml" line="166"/>
         <source>Advanced options</source>
-        <translation type="unfinished">אפשרויות מתקדמות</translation>
+        <translation>אפשרויות מתקדמות</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
@@ -2813,7 +2879,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="73"/>
         <source>Open a wallet from file</source>
-        <translation type="unfinished">פתח ארנק מקובץ</translation>
+        <translation>פתח ארנק מקובץ</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="74"/>
@@ -2846,7 +2912,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">שחזר ארנק</translation>
+        <translation>שחזר ארנק</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2856,37 +2922,37 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">שחזר מגרעין מנמוני</translation>
+        <translation>שחזר מגרעין מנמוני</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">שחזר ממפתחות</translation>
+        <translation>שחזר ממפתחות</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
         <source>From QR Code</source>
-        <translation type="unfinished">QR מקוד</translation>
+        <translation>QR מקוד</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished">הכנס את 25 (או 24) המילים שמרכיבות את הגרעין המנמוני שלך</translation>
+        <translation>הכנס את 25 (או 24) המילים שמרכיבות את הגרעין המנמוני שלך</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">כתובת חשבון (ציבורי)</translation>
+        <translation>כתובת חשבון (ציבורי)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">מפתח צפייה (פרטי)</translation>
+        <translation>מפתח צפייה (פרטי)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">מפתח הוצאה (פרטי)</translation>
+        <translation>מפתח הוצאה (פרטי)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2896,7 +2962,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
         <source>Restore height</source>
-        <translation type="unfinished">שחזר גובה</translation>
+        <translation>שחזר גובה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
@@ -2937,7 +3003,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">פרטי ארנק חדש:</translation>
+        <translation>פרטי ארנק חדש:</translation>
     </message>
 </context>
 <context>
@@ -2946,27 +3012,27 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../wizard/WizardSummary.qml" line="44"/>
         <location filename="../wizard/WizardSummary.qml" line="62"/>
         <source>Wallet name</source>
-        <translation type="unfinished">שם ארנק</translation>
+        <translation>שם ארנק</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">מיקום ארנק</translation>
+        <translation>מיקום ארנק</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
         <source>Language</source>
-        <translation type="unfinished">שפה</translation>
+        <translation>שפה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="68"/>
         <source>Restore height</source>
-        <translation type="unfinished">שחזר גובה</translation>
+        <translation>שחזר גובה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="82"/>
         <source>Daemon address</source>
-        <translation type="unfinished">כתובת הדימון</translation>
+        <translation>כתובת הדימון</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="89"/>
@@ -2976,7 +3042,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="95"/>
         <source>Network Type</source>
-        <translation type="unfinished">סוג רשת</translation>
+        <translation>סוג רשת</translation>
     </message>
 </context>
 <context>
@@ -2984,7 +3050,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="71"/>
         <source>Wallet name</source>
-        <translation type="unfinished">שם ארנק</translation>
+        <translation>שם ארנק</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="85"/>
@@ -2994,12 +3060,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="91"/>
         <source>Browse</source>
-        <translation type="unfinished">דפדף</translation>
+        <translation>דפדף</translation>
     </message>
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">אנא בחר תיקייה</translation>
+        <translation>אנא בחר תיקייה</translation>
     </message>
 </context>
 <context>
@@ -3194,7 +3260,7 @@ Amount: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">אנא בחר קובץ</translation>
+        <translation>אנא בחר קובץ</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>

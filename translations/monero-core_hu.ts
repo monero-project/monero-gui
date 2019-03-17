@@ -11,12 +11,12 @@
     <message>
         <location filename="../pages/Account.qml" line="82"/>
         <source>Balance All</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiókok összesített egyenlege</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="88"/>
         <source>Total balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>Egyenleg összesen: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="112"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../pages/Account.qml" line="121"/>
         <source>Total unlocked balance: </source>
-        <translation type="unfinished"></translation>
+        <translation>Elérhető egyenleg: </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="159"/>
@@ -1356,7 +1356,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Nyelv választása</translation>
+        <translation>Nyelv választása</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1379,7 +1379,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsLog.qml" line="218"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
-        <translation>parancs + enter (pl.: &apos;segítség&apos; vagy &apos;állapot&apos;)</translation>
+        <translation>parancs + enter (pl.: &apos;help&apos; vagy &apos;status&apos;)</translation>
     </message>
 </context>
 <context>
@@ -1521,7 +1521,7 @@ A régi gyorsítótár fájlja át lesz nevezve és bármikor visszaállítható
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Kész</translation>
+        <translation>Kész</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2275,7 +2275,8 @@ Frissítsd a daemont vagy csatlakozz egy másikhoz</translation>
         <source>Fastest (x41.5 fee)</source>
         <translation>Leggyorsabb (x41,5 díj)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2365,6 +2366,70 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Hibás jelszó</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>másodperce</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>másodperce</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>perce</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>perce</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>órája</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>órája</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>napja</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>napja</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2451,7 +2516,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Tárca létrehozásának dátuma &quot;ÉÉÉÉ-HH-NN&quot; formátumban, vagy helyreállítási magasság megadása</translation>
+        <translation>Tárca létrehozásának dátuma &quot;ÉÉÉÉ-HH-NN&quot; formátumban, vagy helyreállítási magasság megadása</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
@@ -2505,7 +2570,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>A magot &lt;b&gt;NAGYON&lt;/b&gt; leírni és titokban tartani. Ez szükséges a tárca mentéséhez és későbbi helyreállításához.</translation>
+        <translation>A magot &lt;b&gt;NAGYON FONTOS&lt;/b&gt; leírni és titokban tartani. Ez szükséges a tárca mentéséhez és későbbi helyreállításához.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2518,7 +2583,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a csomópontlista lekérésekor.</translation>
     </message>
 </context>
 <context>
@@ -2829,7 +2894,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a csomópontlista lekérésekor.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2905,7 +2970,7 @@ Egyszerű költési bizonylat esetén nem kell megadni a kedvezményezett címé
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a csomópontlista lekérésekor.</translation>
     </message>
 </context>
 <context>
@@ -3250,7 +3315,7 @@ Költő cím indexe: </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a csomópontlista lekérésekor.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>
