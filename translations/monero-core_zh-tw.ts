@@ -1357,7 +1357,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">切換語言</translation>
+        <translation>切換語言</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1522,7 +1522,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">成功</translation>
+        <translation>成功</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2276,7 +2276,7 @@ Please upgrade or connect to another daemon</source>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
         <source></source>
-        <translation></translation>
+        <translation> </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="314"/>
@@ -2373,6 +2373,70 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>密碼錯誤</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>分鐘前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>分鐘前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>小時前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>小時前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>天前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>天前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet 網路</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet 網路</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>主網路</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2459,12 +2523,12 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">錢包建立的時間 &apos;YYYY-MM-DD&apos; 或是指定一個區塊高度</translation>
+        <translation>錢包建立的時間 &apos;YYYY-MM-DD&apos; 或是指定一個區塊高度</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">回復區塊高度</translation>
+        <translation>回復區塊高度</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2526,7 +2590,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法從第三方伺服器取得遠端節點。</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2901,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法從第三方伺服器取得遠端節點。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2913,7 +2977,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法從第三方伺服器取得遠端節點。</translation>
     </message>
 </context>
 <context>
@@ -3273,7 +3337,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法從第三方伺服器取得遠端節點。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

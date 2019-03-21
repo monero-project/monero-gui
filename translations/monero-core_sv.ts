@@ -758,7 +758,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="161"/>
         <source>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;Denna sida kommer automatiskt att skanna blockkjedjan och tx-poolen efter inkommande transaktioner baserat på QR-koden.&lt;/p&gt;&lt;p&gt;Det är upp till dig huruvida du accepterar obekräftade transaktioner eller inte. Det är troligt att de kommer att bekräftas inom kort, men det finns en möjlighet att så inte sker, så för större belopp kan du vilja invänta en eller flera bekräftelser.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="172"/>
@@ -795,7 +795,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
         <source>Enable sales tracker</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera försäljningsspårare</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="543"/>
@@ -1357,7 +1357,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Ändra språk</translation>
+        <translation>Ändra språk</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1522,7 +1522,7 @@ Den gamla plånbokens cache-fil kommer att ändra namn och kan återställas sen
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Lyckades</translation>
+        <translation>Lyckades</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2140,7 +2140,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="141"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                   Amount &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Change account&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                   Belopp &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Växla konto&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="187"/>
@@ -2283,7 +2283,8 @@ Uppgradera eller anslut till en annan daemon</translation>
         <source>Fastest (x41.5 fee)</source>
         <translation>Snabbast (x41.5 avgift)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2373,6 +2374,70 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Fel lösenord</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>sekund sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>sekunder sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>minut sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>minuter sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>timme sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>timmar sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>dag sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>dagar sedan</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2408,7 +2473,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="89"/>
         <source>&lt;b&gt;Enter a strong password&lt;/b&gt; (Using letters, numbers, and/or symbols).</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ange ett säkert lösenord&lt;/b&gt; (Användandes bokstäver, nummer och/eller symboler).</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
@@ -2444,7 +2509,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="75"/>
         <source>Using a hardware device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Använder en hårdvaruenhet.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
@@ -2464,7 +2529,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Återställningshöjd</translation>
+        <translation>Återställningshöjd</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2526,7 +2591,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades med att hämta fjärrnod från tredje-part server.</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2902,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades med att hämta fjärrnod från tredje-part server.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2913,7 +2978,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades med att hämta fjärrnod från tredje-part server.</translation>
     </message>
 </context>
 <context>
@@ -2921,7 +2986,7 @@ I fallet med spenderbevis behöver du inte ange mottagaradressen.</translation>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="65"/>
         <source>Daemon settings</source>
-        <translation type="unfinished">Inställningar för daemon</translation>
+        <translation>Inställningar för daemon</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="66"/>
@@ -3272,7 +3337,7 @@ Index för spenderingsadress: </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misslyckades med att hämta fjärrnod från tredje-part server.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

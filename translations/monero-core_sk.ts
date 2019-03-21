@@ -1357,7 +1357,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Zmena jazyka</translation>
+        <translation>Zmena jazyka</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1522,7 +1522,7 @@ Súbor starej cache bude premenovaný a môže byť obnovený neskôr.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Úspešné</translation>
+        <translation>Úspešné</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2283,7 +2283,8 @@ Prosím aktualizujte ho, alebo pripojte k inému daemonu</translation>
         <source>Fastest (x41.5 fee)</source>
         <translation>Najrýchlejší (x41.5 poplatok)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2307,7 +2308,7 @@ Prosím aktualizujte ho, alebo pripojte k inému daemonu</translation>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
         <translation>Vytvorte doklad o Vašej prichádzajúcej/odchádzajúcej platbe uvedením ID transakcie, adresy príjemcu a voliteľnej správy.
-V prípade odchádzajúcich platieb môžete získať  &apos;Dôkaz Vynaloženia&apos;, čo dokazuje autorstvo transakcie. V tomto prípade nepotrebujete určiť adresu príjemcu.</translation>
+V prípade odchádzajúcich platieb môžete získať &apos;Dôkaz Vynaloženia&apos;, čo dokazuje autorstvo transakcie. V tomto prípade nepotrebujete určiť adresu príjemcu.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="95"/>
@@ -2370,6 +2371,70 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
         <location filename="../pages/TxKey.qml" line="199"/>
         <source>Check</source>
         <translation>Skontrolovať</translation>
+    </message>
+</context>
+<context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Nesprávne heslo</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>pred sekundou</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>pred sekundami</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>pred minútou</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>pred minútami</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>pred hodinou</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>pred hodinami</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>pred dňom</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>pred dňami</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Hlavná sieť</translation>
     </message>
 </context>
 <context>
@@ -2459,12 +2524,12 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Dátum vytvorenia peňaženky v tvare `YYYY-MM-DD` alebo obnoviť výšku bloku</translation>
+        <translation>Dátum vytvorenia peňaženky v tvare `YYYY-MM-DD` alebo obnoviť výšku bloku</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Obnoviť výšku</translation>
+        <translation>Obnoviť výšku</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2526,7 +2591,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba počas načítania vzdialených uzlov tretích strán.</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2902,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa načítať vzdialené uzly zo servera tretej strany.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2913,7 +2978,7 @@ V prípade Spend Proof, nie je potrebné špecifikovať prijímateľovu adresu.<
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa načítať vzdialené uzly zo servera tretej strany.</translation>
     </message>
 </context>
 <context>
@@ -3273,7 +3338,7 @@ Index míňacej adresy (spending): </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba načítania vzdialených uzlov zo serverov tretích strán.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>

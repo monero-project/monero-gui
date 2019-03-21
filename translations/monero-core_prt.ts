@@ -22,7 +22,7 @@
         <location filename="../pages/Account.qml" line="112"/>
         <location filename="../pages/Account.qml" line="145"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="121"/>
@@ -57,7 +57,7 @@
     <message>
         <location filename="../pages/Account.qml" line="323"/>
         <source>(Untitled)</source>
-        <translation type="unfinished">(Untitl&apos;d)</translation>
+        <translation>(Untitl&apos;d)</translation>
     </message>
 </context>
 <context>
@@ -75,33 +75,33 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="93"/>
         <source>Resolve</source>
-        <translation type="unfinished">Resolv&apos;</translation>
+        <translation>Resolv&apos;</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="109"/>
         <source>No valid address found at this OpenAlias address</source>
-        <translation type="unfinished">Thar be no valid addr&apos;ss be found at t&apos;is OpenAlias addr&apos;ss ye bilge rat</translation>
+        <translation>Thar be no valid addr&apos;ss be found at t&apos;is OpenAlias addr&apos;ss ye bilge rat</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="114"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation type="unfinished">Thee Addr&apos;ss be found, but thee DNSSEC signat&apos;res nay can be verifi&apos;d, so thee addr&apos;ss may be spoof&apos;d o&apos; sunken</translation>
+        <translation>Thee Addr&apos;ss be found, but thee DNSSEC signat&apos;res nay can be verifi&apos;d, so thee addr&apos;ss may be spoof&apos;d o&apos; sunken</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="118"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation type="unfinished">Thar be No valid addr&apos;ss be found at t&apos;is OpenAlias addr&apos;ss, but thee DNSSEC signat&apos;res nay be verifi&apos;d, so thee addr&apos;ss may be spoof&apos;d o&apos; sunken</translation>
+        <translation>Thar be No valid addr&apos;ss be found at t&apos;is OpenAlias addr&apos;ss, but thee DNSSEC signat&apos;res nay be verifi&apos;d, so thee addr&apos;ss may be spoof&apos;d o&apos; sunken</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="122"/>
         <location filename="../pages/AddressBook.qml" line="126"/>
         <source>Internal error</source>
-        <translation type="unfinished">Blund&apos;r below thee decks!</translation>
+        <translation>Blund&apos;r below thee decks!</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="130"/>
         <source>No address found</source>
-        <translation type="unfinished">Thar be No addr&apos;ss found</translation>
+        <translation>Thar be No addr&apos;ss found</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="140"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="264"/>
         <source>OpenAlias error</source>
-        <translation type="unfinished">OpenAlias blund&apos;r!</translation>
+        <translation>OpenAlias blund&apos;r!</translation>
     </message>
 </context>
 <context>
@@ -321,7 +321,7 @@
     <message>
         <location filename="../components/HistoryTable.qml" line="194"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
     <message>
         <location filename="../components/HistoryTable.qml" line="239"/>
@@ -604,7 +604,7 @@
         <location filename="../LeftPanel.qml" line="226"/>
         <location filename="../LeftPanel.qml" line="264"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="342"/>
@@ -769,7 +769,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="242"/>
         <source>Save As</source>
-        <translation type="unfinished">Save As!</translation>
+        <translation>Save As</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="300"/>
@@ -784,13 +784,13 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="420"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="453"/>
         <location filename="../pages/merchant/Merchant.qml" line="504"/>
         <source>Amount to receive</source>
-        <translation type="unfinished">Thee Amount o&apos; XM-ARGHHH to be receivin&apos;</translation>
+        <translation>Thee Amount o&apos; XM-ARGHHH to be receivin&apos;</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="531"/>
@@ -810,17 +810,17 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="586"/>
         <source>WARNING: no connection to daemon</source>
-        <translation type="unfinished">WARNING: thar be no be arghhh conn&apos;ction to thee daemon</translation>
+        <translation>WARNING: thar be no be arghhh conn&apos;ction to thee daemon</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Save QrCode</source>
-        <translation type="unfinished">Save ye QrCode!</translation>
+        <translation>Save ye QrCode!</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="691"/>
         <source>Failed to save QrCode to </source>
-        <translation type="unfinished">Ye Fail&apos;d to be savin&apos; QrCode to </translation>
+        <translation>Ye Fail&apos;d to be savin&apos; QrCode to </translation>
     </message>
 </context>
 <context>
@@ -844,12 +844,12 @@
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="167"/>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="169"/>
         <source>confirmations</source>
-        <translation type="unfinished">confirm&apos;tions!</translation>
+        <translation>confirm&apos;tions!</translation>
     </message>
     <message>
         <location filename="../pages/merchant/MerchantTrackingList.qml" line="172"/>
         <source>confirmation</source>
-        <translation type="unfinished">confirm&apos;tion!</translation>
+        <translation>confirm&apos;tion!</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1035,7 @@
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="46"/>
         <source>Mining</source>
-        <translation type="unfinished">Diggin&apos; up ye booty!</translation>
+        <translation>Diggin&apos; up ye booty!</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="49"/>
@@ -1168,7 +1168,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="287"/>
         <source>Copied to clipboard</source>
-        <translation type="unfinished">Copi&apos;d to ye scroll</translation>
+        <translation>Copi&apos;d to ye scroll</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="300"/>
@@ -1515,7 +1515,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Victory!</translation>
+        <translation>Victory!</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -1594,7 +1594,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
         <source>Wrong password</source>
-        <translation type="unfinished">Wrong passw&apos;rd ye mindless kidney-wipe!</translation>
+        <translation>Wrong passw&apos;rd ye mindless kidney-wipe!</translation>
     </message>
 </context>
 <context>
@@ -1783,7 +1783,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Sign.qml" line="101"/>
         <source>Sign/verify</source>
-        <translation type="unfinished">Sign/ver&apos;fy!</translation>
+        <translation>Sign/ver&apos;fy!</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="145"/>
@@ -2269,7 +2269,8 @@ Upgrad&apos; or conn&apos;ct to anoth&apos;r daemon ye lazy seadog</translation>
         <source>Fastest (x41.5 fee)</source>
         <translation>Breakneck! (x41.5 fee)</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2359,6 +2360,70 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Wrong passw&apos;rd ye mindless kidney-wipe!</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet!</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stag&apos;net</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2369,22 +2434,22 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
         <location filename="../wizard/WizardAskPassword.qml" line="52"/>
         <location filename="../wizard/WizardAskPassword.qml" line="71"/>
         <source>Low</source>
-        <translation type="unfinished">Weak as piss!</translation>
+        <translation>Weak as piss!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="73"/>
         <source>Medium</source>
-        <translation type="unfinished">Run-o-thee-mill!</translation>
+        <translation>Run-o-thee-mill!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="75"/>
         <source>High</source>
-        <translation type="unfinished">Highly Admirabl&apos;!</translation>
+        <translation>Highly Admirabl&apos;!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="84"/>
         <source>Give your wallet a password</source>
-        <translation type="unfinished">Giv&apos; yer wall&apos;t a password ye hasty-witt&apos;d barnacle!</translation>
+        <translation>Giv&apos; yer wall&apos;t a password ye hasty-witt&apos;d barnacle!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="85"/>
@@ -2399,7 +2464,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="155"/>
         <source>Password</source>
-        <translation type="unfinished">Password!</translation>
+        <translation>Password!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="210"/>
@@ -2412,7 +2477,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardController.qml" line="260"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Sel&apos;ct a file ye filthy swine</translation>
+        <translation>Sel&apos;ct a file ye filthy swine</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2536,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
         <source>Create wallet</source>
-        <translation type="unfinished">Create ye wall&apos;t!</translation>
+        <translation>Create ye wall&apos;t!</translation>
     </message>
 </context>
 <context>
@@ -2489,7 +2554,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="89"/>
         <source>Mnemonic seed</source>
-        <translation type="unfinished">Ye Mnemonic seed!</translation>
+        <translation>Ye Mnemonic seed!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
@@ -2499,7 +2564,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation type="unfinished">T&apos;is seed be &lt;b&gt;very&lt;/b&gt; important to scribe down an&apos; be keepin&apos; secret from evil pilllag&apos;rs! Do t&apos;is befor&apos; settin&apos; sail! It be all ye need to backup and restore yer wall&apos;t.</translation>
+        <translation>T&apos;is seed be &lt;b&gt;very&lt;/b&gt; important to scribe down an&apos; be keepin&apos; secret from evil pilllag&apos;rs! Do t&apos;is befor&apos; settin&apos; sail! It be all ye need to backup and restore yer wall&apos;t.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="135"/>
@@ -2538,7 +2603,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">New wall&apos;t details:</translation>
+        <translation>New wall&apos;t details:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="66"/>
@@ -2561,7 +2626,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="76"/>
         <source>Default</source>
-        <translation type="unfinished">Run-o-thee-mill!</translation>
+        <translation>Run-o-thee-mill!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="80"/>
@@ -2624,7 +2689,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardHome.qml" line="125"/>
         <source>Restore wallet from keys or mnemonic seed</source>
-        <translation type="unfinished">Restor&apos; ye wall&apos;t from ye keys o&apos; ye mnemonic seed!</translation>
+        <translation>Restor&apos; ye wall&apos;t from ye keys o&apos; ye mnemonic seed!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2644,7 +2709,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardHome.qml" line="166"/>
         <source>Advanced options</source>
-        <translation type="unfinished">Capt&apos;ns options</translation>
+        <translation>Capt&apos;ns options</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="209"/>
@@ -2836,7 +2901,7 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
         <source>Restore wallet</source>
-        <translation type="unfinished">Restore ye wallet!</translation>
+        <translation>Restore ye wallet!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
@@ -2846,12 +2911,12 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
         <source>Restore from seed</source>
-        <translation type="unfinished">Restor&apos; from ye seed!</translation>
+        <translation>Restor&apos; from ye seed!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
         <source>Restore from keys</source>
-        <translation type="unfinished">Restor&apos; from ye keys!</translation>
+        <translation>Restor&apos; from ye keys!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
@@ -2861,22 +2926,22 @@ Fer the case wit&apos; Spend Proof, you don&apos;t be needin&apos; to specify th
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
-        <translation type="unfinished">Ent&apos;r yer 25 (or 24) word mnemonic seed!</translation>
+        <translation>Ent&apos;r yer 25 (or 24) word mnemonic seed!</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
         <source>Account address (public)</source>
-        <translation type="unfinished">Ye Account addr&apos;ss (public)</translation>
+        <translation>Ye Account addr&apos;ss (public)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
         <source>View key (private)</source>
-        <translation type="unfinished">Ye View key (privat&apos;)</translation>
+        <translation>Ye View key (privat&apos;)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
         <source>Spend key (private)</source>
-        <translation type="unfinished">Ye Spend key (privat&apos;)</translation>
+        <translation>Ye Spend key (privat&apos;)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
@@ -2927,7 +2992,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardRestoreWallet4.qml" line="59"/>
         <source>New wallet details:</source>
-        <translation type="unfinished">New wall&apos;t details:</translation>
+        <translation>New wall&apos;t details:</translation>
     </message>
 </context>
 <context>
@@ -2941,7 +3006,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardSummary.qml" line="50"/>
         <source>Wallet path</source>
-        <translation type="unfinished">Wall&apos;t path</translation>
+        <translation>Wall&apos;t path</translation>
     </message>
     <message>
         <location filename="../wizard/WizardSummary.qml" line="56"/>
@@ -2989,7 +3054,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../wizard/WizardWalletInput.qml" line="106"/>
         <source>Please choose a directory</source>
-        <translation type="unfinished">Choose argh dir&apos;ctory ye bootless boar-pig!</translation>
+        <translation>Choose argh dir&apos;ctory ye bootless boar-pig!</translation>
     </message>
 </context>
 <context>
@@ -3203,7 +3268,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="1153"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Sel&apos;ct a file ye filthy swine</translation>
+        <translation>Sel&apos;ct a file ye filthy swine</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1202"/>
@@ -3331,7 +3396,7 @@ Spending address index: </source>
         <location filename="../main.qml" line="936"/>
         <location filename="../main.qml" line="1948"/>
         <source>Balance</source>
-        <translation type="unfinished">Bal&apos;nce!</translation>
+        <translation>Bal&apos;nce!</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1304"/>

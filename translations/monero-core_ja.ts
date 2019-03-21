@@ -1193,7 +1193,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="231"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいアドレスの作成</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="307"/>
@@ -1357,7 +1357,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished"></translation>
+        <translation>言語の変更</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1522,7 +1522,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">成功</translation>
+        <translation>成功</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2283,7 +2283,8 @@ Ringsize: </source>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>ペイメントID &lt;font size=&apos;2&apos;&gt;( オプショナル )&lt;/font&gt;</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="154"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2373,6 +2374,70 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>パスワードが間違っています</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>秒前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>分前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>分前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>時間前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>時間前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>日前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>日前</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>テストネット</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>ステージネット</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>メインネット</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2459,12 +2524,12 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">`YYYY-MM-DD`の形式でウォレットを作成した日時、または復元を開始するブロック高</translation>
+        <translation>`YYYY-MM-DD`の形式でウォレットを作成した日時、または復元を開始するブロック高</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">復元するブロック高</translation>
+        <translation>復元するブロック高</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2526,7 +2591,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>サードパーティサーバからのリモートノードの取得に失敗しました。</translation>
     </message>
 </context>
 <context>
@@ -2671,7 +2736,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardLang.qml" line="64"/>
         <source>Language settings</source>
-        <translation type="unfinished"></translation>
+        <translation>言語の設定</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="93"/>
@@ -2686,7 +2751,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardLang.qml" line="210"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>閉じる</translation>
     </message>
 </context>
 <context>
@@ -2837,7 +2902,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>サードパーティサーバーからのリモードノードの取得に失敗</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2913,7 +2978,7 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>サードパーティサーバーからのリモートノードの取得に失敗しました。</translation>
     </message>
 </context>
 <context>
@@ -3363,7 +3428,7 @@ Fee: </source>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>サードパーティサーバーからリモートノードを取得するのに失敗しました。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2002"/>

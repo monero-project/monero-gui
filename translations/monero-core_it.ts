@@ -1193,7 +1193,7 @@
     <message>
         <location filename="../pages/Receive.qml" line="231"/>
         <source>Create new address</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea un nuovo indirizzo</translation>
     </message>
     <message>
         <location filename="../pages/Receive.qml" line="307"/>
@@ -1357,7 +1357,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
         <source>Change language</source>
-        <translation type="unfinished">Cambia lingua</translation>
+        <translation>Cambia lingua</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
@@ -1523,7 +1523,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
         <source>Success</source>
-        <translation type="unfinished">Successo</translation>
+        <translation>Successo</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
@@ -2277,7 +2277,8 @@ Ringsize: </source>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation>In attesa della fine della sincronizzazione del daemon.</translation>
     </message>
-</context>
+<message><source></source><translation></translation>
+    <location filename="../pages/Transfer.qml" line="91"/></message></context>
 <context>
     <name>TxKey</name>
     <message>
@@ -2367,6 +2368,70 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     </message>
 </context>
 <context>
+    <name>Utils</name>
+    <message>
+        <location filename="../js/Utils.js" line="42"/>
+        <source>Wrong password</source>
+        <translation>Password errata</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="61"/>
+        <source>second ago</source>
+        <translation>secondo fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="63"/>
+        <source>seconds ago</source>
+        <translation>secondi fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="67"/>
+        <source>minute ago</source>
+        <translation>minuto fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="69"/>
+        <source>minutes ago</source>
+        <translation>minuti fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="73"/>
+        <source>hour ago</source>
+        <translation>ora fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="75"/>
+        <source>hours ago</source>
+        <translation>ore fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="79"/>
+        <location filename="../js/Utils.js" line="83"/>
+        <source>day ago</source>
+        <translation>giorno fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="85"/>
+        <source>days ago</source>
+        <translation>giorni fa</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Testnet</source>
+        <translation>Testnet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Stagenet</source>
+        <translation>Stagenet</translation>
+    </message>
+    <message>
+        <location filename="../js/Utils.js" line="94"/>
+        <source>Mainnet</source>
+        <translation>Mainnet</translation>
+    </message>
+</context>
+<context>
     <name>WizardAskPassword</name>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="41"/>
@@ -2443,22 +2508,22 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="90"/>
         <source>Create a new wallet from device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea un nuovo portafoglio dal dispositivo.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="103"/>
         <source>Restore a wallet from device. Use this if you used your hardware wallet before.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina un portafoglio dal dispositivo. Utilizza questa opzione se in precedenza hai già usato il tuo portafoglio hardware.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
-        <translation type="unfinished">Data creazione del portafoglio `AAAA-MM-GG` o altezza di ripristino</translation>
+        <translation>Data creazione del portafoglio `AAAA-MM-GG` o altezza di ripristino</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
         <source>Restore height</source>
-        <translation type="unfinished">Altezza di ripristino</translation>
+        <translation>Altezza di ripristino</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
@@ -2520,7 +2585,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardCreateWallet2.qml" line="78"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Recupero dei nodi remoti da server di terze parti fallito.</translation>
     </message>
 </context>
 <context>
@@ -2665,22 +2730,22 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardLang.qml" line="64"/>
         <source>Language settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni lingua</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="93"/>
         <source>Change the language of the Monero GUI.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia la lingua della GUI Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="188"/>
         <source>Language changed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La lingua è stata modificata.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="210"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiuso</translation>
     </message>
 </context>
 <context>
@@ -2831,7 +2896,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="201"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile recuperare i nodi remoti dal server di parti terze.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="228"/>
@@ -2907,7 +2972,7 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardRestoreWallet2.qml" line="77"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile recuperare i nodi remoti da server di terze parti.</translation>
     </message>
 </context>
 <context>
@@ -3258,7 +3323,7 @@ Indice indirizzo di spesa: </translation>
     <message>
         <location filename="../main.qml" line="1803"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile recuperare i nodi remoti da server di terze parti.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1858"/>
