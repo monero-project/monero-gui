@@ -475,6 +475,7 @@ Item {
                             color: "#424242"
                             selectionColor: "#3f3fe3"
                             selectedTextColor: "white"
+                            placeholderText: "0.00"
 
                             background: Rectangle {
                                 color: "transparent"
