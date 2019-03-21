@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -301,6 +301,7 @@ Rectangle{
                     console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
                     if (persistentSettings.is_trusted_daemon) {
                         persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
+                        currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
                         setTrustedDaemonCheckBox.checked = !setTrustedDaemonCheckBox.checked
                         appWindow.showStatusMessage(qsTr("Remote node updated. Trusted daemon has been reset. Mark again, if desired."), 8);
                     }
