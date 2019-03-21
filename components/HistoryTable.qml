@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -371,7 +371,7 @@ ListView {
                         return qsTr("FAILED") + translationManager.emptyString
                     return qsTr("PENDING") + translationManager.emptyString
                 }
-                copyValue: labelValue
+                copyValue: labelValue.indexOf(" ") > 0 ? labelValue.slice(0, labelValue.indexOf(" ")) : labelValue
             }
 
             // right column
