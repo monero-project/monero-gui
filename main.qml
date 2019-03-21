@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -1745,6 +1745,7 @@ ApplicationWindow {
     function toggleLanguageView(){
         middlePanel.visible = !middlePanel.visible;
         languageView.visible = !languageView.visible
+        resetLanguageFields()
         // update after changing language from settings page
         if (persistentSettings.language != wizard.language_language) {
             persistentSettings.language = wizard.language_language
@@ -1946,6 +1947,12 @@ ApplicationWindow {
     function clearMoneroCardLabelText(){
         leftPanel.minutesToUnlockTxt = qsTr("Unlocked balance")
         leftPanel.balanceLabelText = qsTr("Balance")
+    }
+
+    // some fields need an extra nudge when changing languages
+    function resetLanguageFields(){
+        clearMoneroCardLabelText()
+        onWalletRefresh()
     }
 
     function userActivity() {
