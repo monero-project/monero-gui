@@ -48,6 +48,7 @@ Rectangle {
     color: "transparent"
     property int mixin: 10  // (ring size 11)
     property string warningContent: ""
+    property string sendButtonWarning: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
 
@@ -84,6 +85,7 @@ Rectangle {
         addressLine.text = ""
         setPaymentId("");
         amountLine.text = ""
+        root.sendButtonWarning = ""
         setDescription("");
         priorityDropdown.currentIndex = 0
         updatePriorityDropdown()
@@ -356,6 +358,12 @@ Rectangle {
           }
       }
 
+      MoneroComponents.WarningBox {
+          id: sendButtonWarningBox
+          text: root.sendButtonWarning
+          visible: root.sendButtonWarning !== ""
+      }
+
       RowLayout {
           StandardButton {
               id: sendButton
@@ -363,35 +371,8 @@ Rectangle {
               rightIconInactive: "../images/rightArrowInactive.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
-              // Send button is enabled when:
-              enabled : {
-                  // Currently opened wallet is not view-only
-                  if(appWindow.viewOnly){
-                      return false;
-                  }
-                  
-                  // There is no warning box displayed
-                  if(root.warningContent !== ''){
-                      return false;
-                  }
-                  
-                  // The transactional information is correct
-                  if(!pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)){
-                      return false;
-                  }
-                  
-                  // There are sufficient unlocked funds available
-                  if(parseFloat(amountLine.text) > parseFloat(unlockedBalanceText)){
-                      return false;
-                  }
-
-                  // The amount does not start with a period (example: `.4`)
-                  // @TODO: replace with .startsWith() after Qt >=5.8
-                  if(amountLine.text.indexOf('.') === 0){
-                      return false;
-                  }
-
-                  return true;
+              enabled: {
+                updateSendButton()
               }
               onClicked: {
                   console.log("Transfer: paymentClicked")
@@ -716,5 +697,35 @@ Rectangle {
         addressLine.text = address
         setPaymentId(paymentId);
         setDescription(description);
+    }
+
+    function updateSendButton(){
+        // reset message
+        root.sendButtonWarning = "";
+
+        // Currently opened wallet is not view-only
+        if(appWindow.viewOnly){
+            root.sendButtonWarning = qsTr("Wallet is view-only and sends are not possible.") + translationManager.emptyString;
+            return false;
+        }
+
+        // There are sufficient unlocked funds available
+        if(parseFloat(amountLine.text) > parseFloat(middlePanel.unlockedBalanceText)){
+            root.sendButtonWarning = qsTr("Amount is more than unlocked balance.") + translationManager.emptyString;
+            return false;
+        }
+
+        // There is no warning box displayed
+        if(root.warningContent !== ""){
+            return false;
+        }
+
+        // The transactional information is correct
+        if(!pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)){
+            if(amountLine.text && addressLine.text)
+                root.sendButtonWarning = qsTr("Transaction information is incorrect.") + translationManager.emptyString;
+            return false;
+        }
+        return true;
     }
 }
