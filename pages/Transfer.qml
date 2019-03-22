@@ -708,10 +708,20 @@ Rectangle {
     }
 
     // Popuplate fields from addressbook.
-    function sendTo(address, paymentId, description){
-        addressLine.text = address
-        setPaymentId(paymentId);
-        setDescription(description);
+    function sendTo(address, paymentId, description, amount){
+        middlePanel.state = 'Transfer';
+
+        if(typeof address !== 'undefined')
+            addressLine.text = address
+
+        if(typeof paymentId !== 'undefined')
+            setPaymentId(paymentId);
+
+        if(typeof description !== 'undefined')
+            setDescription(description);
+
+        if(typeof amount !== 'undefined')
+            amountLine.text = amount;
     }
 
     function updateSendButton(){
