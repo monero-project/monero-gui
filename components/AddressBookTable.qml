@@ -76,6 +76,7 @@ ListView {
             color: "#ffffff"
             elide: Text.ElideRight
             text: description
+            textFormat: Text.PlainText
 
             MouseArea {
                 id: descriptionArea
