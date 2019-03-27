@@ -85,6 +85,8 @@ ApplicationWindow {
     property int disconnectedEpoch: 0
     property int estimatedBlockchainSize: 75 // GB
     property alias viewState: rootItem.state
+    property string prevSplashText;
+    property bool splashDisplayedBeforeButtonRequest;
 
     property string remoteNodeService: {
         // support user-defined remote node aggregators
@@ -266,6 +268,8 @@ ApplicationWindow {
                 wallet_path = moneroAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
+
+            this.onWalletOpening();
             walletManager.openWalletAsync(wallet_path, walletPassword,
                                               persistentSettings.nettype, persistentSettings.kdfRounds);
         }
@@ -286,6 +290,8 @@ ApplicationWindow {
             currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
             currentWallet.transactionCreated.disconnect(onTransactionCreated)
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
+            currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
+            currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
             middlePanel.getProofClicked.disconnect(handleGetProof);
@@ -341,6 +347,8 @@ ApplicationWindow {
         currentWallet.unconfirmedMoneyReceived.connect(onWalletUnconfirmedMoneyReceived)
         currentWallet.transactionCreated.connect(onTransactionCreated)
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
+        currentWallet.deviceButtonRequest.connect(onDeviceButtonRequest);
+        currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.getProofClicked.connect(handleGetProof);
@@ -422,7 +430,26 @@ ApplicationWindow {
         }
     }
 
+    function onDeviceButtonRequest(code){
+        prevSplashText = splash.messageText;
+        splashDisplayedBeforeButtonRequest = splash.visible;
+        appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
+    }
+
+    function onDeviceButtonPressed(){
+        if (splashDisplayedBeforeButtonRequest){
+           appWindow.showProcessingSplash(prevSplashText);
+        } else {
+           hideProcessingSplash();
+        }
+    }
+
+    function onWalletOpening(){
+        appWindow.showProcessingSplash(qsTr("Opening wallet ..."));
+    }
+
     function onWalletOpened(wallet) {
+        hideProcessingSplash();
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
@@ -470,7 +497,25 @@ ApplicationWindow {
     }
 
     function onWalletClosed(walletAddress) {
+        hideProcessingSplash();
         console.log(">>> wallet closed: " + walletAddress)
+    }
+
+    function onWalletPassphraseNeeded(){
+        if(rootItem.state !== "normal") return;
+
+        hideProcessingSplash();
+
+        console.log(">>> wallet passphrase needed: ")
+        passphraseDialog.onAcceptedCallback = function() {
+            walletManager.onPassphraseEntered(passphraseDialog.passphrase);
+            this.onWalletOpening();
+        }
+        passphraseDialog.onRejectedCallback = function() {
+            walletManager.onPassphraseEntered("", true);
+            this.onWalletOpening();
+        }
+        passphraseDialog.open()
     }
 
     function onWalletUpdate() {
@@ -1017,7 +1062,10 @@ ApplicationWindow {
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.walletClosed.connect(onWalletClosed);
+        walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
+        walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
+        walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
 
         if(typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);
@@ -1242,6 +1290,23 @@ ApplicationWindow {
 
             blockchainFileDialog.directory = blockchainFileDialog.fileUrl;
             delete validator;
+        }
+    }
+
+    PassphraseDialog {
+        id: passphraseDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
+        property var onAcceptedCallback
+        property var onRejectedCallback
+        onAccepted: {
+            if (onAcceptedCallback)
+                onAcceptedCallback();
+        }
+        onRejected: {
+            if (onRejectedCallback)
+                onRejectedCallback();
         }
     }
 

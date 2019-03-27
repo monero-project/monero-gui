@@ -322,6 +322,8 @@ signals:
     void newBlock(quint64 height, quint64 targetHeight);
     void historyModelChanged() const;
     void walletCreationHeightChanged();
+    void deviceButtonRequest(quint64 buttonCode);
+    void deviceButtonPressed();
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
