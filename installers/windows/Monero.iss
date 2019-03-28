@@ -70,12 +70,6 @@ Source: "FinishImage.bmp"; Flags: dontcopy
 Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-GUI-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
-; Monero GUI wallet log file
-; The GUI wallet does not have the "--log-file" command-line option of the CLI wallet and insists to put the .log beside the .exe
-; so pre-create the file and give the necessary permissions to the wallet to write into it
-; Flag is "onlyifdoesntexist": We do not want to overwrite an already existing log
-Source: "monero-wallet-gui.log"; DestDir: "{app}"; Flags: onlyifdoesntexist; Permissions: users-modify
-
 ; Monero CLI wallet
 Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -251,6 +245,9 @@ Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; HIDAPI, library for communicating with USB and Bluetooth devices, for hardware wallets
 Source: "bin\libhidapi-0.dll"; DestDir: "{app}"; Flags: ignoreversion
 
+; OpenSSL shared libraries
+Source: "bin\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:";
@@ -373,21 +370,6 @@ begin
   Result := s;
 end;
 
-function WalletFlags(Param: String): String;
-// Flags to add to the shortcut to the GUI wallet
-// Use "--log-file" to force log file alongside the installed GUI exe which would not get
-// created there because of an unsolved issue in the 0.13.0.4 wallet code
-var s: String;
-begin
-  s := ExpandConstant('{app}\monero-wallet-gui.log');
-  if Pos(' ', s) > 0 then begin
-    // Quotes needed for filename with blanks
-    s := '"' + s + '"';
-  end;
-  s := '--log-file ' + s;
-  Result := s;
-end;
-
 procedure CurStepChanged(CurStep: TSetupStep);
 var s: TArrayOfString;
 begin
@@ -415,7 +397,7 @@ end;
 [Icons]
 ; Icons in the "Monero GUI Wallet" program group
 ; Windows will almost always display icons in alphabetical order, per level, so specify the text accordingly
-Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Parameters: {code:WalletFlags}
+Name: "{group}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe";
 Name: "{group}\GUI Wallet Guide"; Filename: "{app}\monero-GUI-guide.pdf"; IconFilename: "{app}\monero-wallet-gui.exe"
 Name: "{group}\Uninstall GUI Wallet"; Filename: "{uninstallexe}"
 
@@ -434,14 +416,14 @@ Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-c
 ; from the others by text, and make them sort at the end by the help of "x" in front 
 Name: "{group}\Utilities\x (Check Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
 Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
-Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: "{userdocs}\Monero\wallets"
-Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: "{app}\monero-wallet-gui.log"
+Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: """{userdocs}\Monero\wallets"""
+Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: """{userappdata}\monero-wallet-gui\monero-wallet-gui.log"""
 Name: "{group}\Utilities\x (Try Daemon, Exit Confirm)"; Filename: "{app}\monero-daemon.bat"
 Name: "{group}\Utilities\x (Try GUI Wallet Low Graphics Mode)"; Filename: "{app}\start-low-graphics-mode.bat"
 Name: "{group}\Utilities\x (Try Kill Daemon)"; Filename: "Taskkill.exe"; Parameters: "/IM monerod.exe /T /F"
 
 ; Desktop icons, optional with the help of the "Task" section
-Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Parameters: {code:WalletFlags}; Tasks: desktopicon
+Name: "{commondesktop}\GUI Wallet"; Filename: "{app}\monero-wallet-gui.exe"; Tasks: desktopicon
 
 
 [Registry]
@@ -452,3 +434,16 @@ Root: HKCU; Subkey: "Software\monero-project"; Flags: uninsdeletekeyifempty
 Root: HKCU; Subkey: "Software\monero-project\monero-core"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\monero-project\monero-core"; ValueType: string; ValueName: "blockchainDataDir"; ValueData: {code:BlockChainDirOrEmpty};
 
+; Configure a custom URI scheme: Links starting with "monero:" will start the GUI wallet exe with the URI as command-line parameter
+; Used to easily start payments; example URI: "monero://<address>?tx_amount=5.0"
+Root: HKCR; Subkey: "monero"; ValueType: "string"; ValueData: "URL:Monero Payment Protocol"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "monero"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
+Root: HKCR; Subkey: "monero\DefaultIcon"; ValueType: "string"; ValueData: "{app}\monero-wallet-gui.exe,0"
+Root: HKCR; Subkey: "monero\shell\open\command"; ValueType: "string"; ValueData: """{app}\monero-wallet-gui.exe"" ""%1"""
+
+; Configure a custom URI scheme: Links starting with "moneroseed:" will start the GUI wallet exe with the URI as command-line parameter
+; Used to easily hand over custom seed node info to the wallet, with an URI of the form "moneroseed://a.b.c.d:port"
+Root: HKCR; Subkey: "moneroseed"; ValueType: "string"; ValueData: "URL:Monero Seed Node Protocol"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "moneroseed"; ValueType: "string"; ValueName: "URL Protocol"; ValueData: ""
+Root: HKCR; Subkey: "moneroseed\DefaultIcon"; ValueType: "string"; ValueData: "{app}\monero-wallet-gui.exe,0"
+Root: HKCR; Subkey: "moneroseed\shell\open\command"; ValueType: "string"; ValueData: """{app}\monero-wallet-gui.exe"" ""%1"""
