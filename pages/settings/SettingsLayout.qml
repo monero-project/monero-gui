@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -174,26 +174,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.StandardButton {
-            visible: !persistentSettings.customDecorations
-            Layout.topMargin: 10 * scaleRatio
-            small: true
-            text: qsTr("Change language") + translationManager.emptyString
-
-            onClicked: {
-                appWindow.toggleLanguageView();
-            }
-        }
-
-        MoneroComponents.TextBlock {
-            visible: isMobile
-            font.pixelSize: 14
-            textFormat: Text.RichText
-            Layout.fillWidth: true
-            text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
-        }
         //! Manage pricing
-
         RowLayout {
             MoneroComponents.CheckBox {
                 visible: builtWithPrices
@@ -216,6 +197,11 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
                 Layout.fillWidth: true
+
+                MoneroComponents.Label {
+                    Layout.fillWidth: true
+                    text: qsTr("Price source") + translationManager.emptyString
+                }
 
                 MoneroComponents.StandardDropdown {
                     id: priceSourceDropDown
@@ -241,6 +227,11 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
                 Layout.fillWidth: true
+
+                MoneroComponents.Label {
+                    Layout.fillWidth: true
+                    text: qsTr("Currency") + translationManager.emptyString
+                }
 
                 MoneroComponents.StandardDropdown {
                     id: currencyDropDown
@@ -271,9 +262,32 @@ Rectangle {
 
             z: parent.z + 1
         }
+
+        MoneroComponents.StandardButton {
+            visible: !persistentSettings.customDecorations
+            Layout.topMargin: 10 * scaleRatio
+            small: true
+            text: qsTr("Change language") + translationManager.emptyString
+
+            onClicked: {
+                appWindow.toggleLanguageView();
+            }
+        }
+
+        MoneroComponents.TextBlock {
+            visible: isMobile
+            font.pixelSize: 14
+            textFormat: Text.RichText
+            Layout.fillWidth: true
+            text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
+        }
     }
 
     Component.onCompleted: {
+        priceSourceDropDown.currentIndex = appWindow.persistentSettings.currencyConversionSourceIndex;
+        priceSourceDropDown.update();
+        currencyDropDown.currentIndex = appWindow.persistentSettings.currencyConversionCurrencyIndex;
+        currencyDropDown.update();
         console.log('SettingsLayout loaded');
     }
 }

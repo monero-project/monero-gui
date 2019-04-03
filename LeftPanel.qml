@@ -320,8 +320,9 @@ Rectangle {
                 }
 
 
-                Text {
+                MoneroComponents.TextPlain {
                     id: unlockedBalanceTextFiat
+                    themeTransition: false
                     visible: !unlockedBalanceText.visible
                     anchors.left: parent.left
                     anchors.leftMargin: 20

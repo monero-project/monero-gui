@@ -32,11 +32,11 @@ if [ "$BUILD_TYPE" == "release" ]; then
 elif [ "$BUILD_TYPE" == "release-static" ]; then
     echo "Building release-static"
     if [ "$platform" != "darwin" ]; then
-	    CONFIG="CONFIG+=release static";
+	    CONFIG="CONFIG+=release static WITH_PRICES";
     else
         # OS X: build static libwallet but dynamic Qt. 
         echo "OS X: Building Qt project without static flag"
-        CONFIG="CONFIG+=release";
+        CONFIG="CONFIG+=release WITH_PRICES";
     fi    
     BIN_PATH=release/bin
 elif [ "$BUILD_TYPE" == "release-android" ]; then

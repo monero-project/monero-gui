@@ -1,4 +1,4 @@
-// Copyright (c) 2018, The Monero Project
+// Copyright (c) 2018-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -91,7 +91,7 @@ int Currency::precision() const
 
 QString Currency::format(qreal amount) const
 {
-    return QLocale().toCurrencyString(amount, m_symbol, m_precision);
+    return QLocale(QLocale().language(), QLocale().country()).toCurrencyString(amount, m_symbol, m_precision);
 }
 
 
