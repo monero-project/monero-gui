@@ -135,7 +135,7 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install boost --c++11`
+  `brew install boost`
 
   `brew install openssl` - to install openssl headers
 
