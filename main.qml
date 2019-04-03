@@ -436,12 +436,30 @@ ApplicationWindow {
                 wizard.wizardState = "wizardHome";
                 rootItem.state = "wizard";
             }
-            // opening with password but password doesn't match
-            console.error("Error opening wallet with password: ", wallet.errorString);
-            passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
-            console.log("closing wallet async : " + wallet.address)
-            closeWallet();
-            return;
+            // try to resolve common wallet cache errors automatically
+            switch (wallet.errorString) {
+                case "basic_string::_M_replace_aux":
+                    walletManager.clearWalletCache(wallet.path);
+                    walletPassword = passwordDialog.password;
+                    appWindow.initialize();
+                    console.error("Repairing wallet cache with error: ", wallet.errorString);
+                    appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
+                    return;
+                case "std::bad_alloc":
+                    walletManager.clearWalletCache(wallet.path);
+                    walletPassword = passwordDialog.password;
+                    appWindow.initialize();
+                    console.error("Repairing wallet cache with error: ", wallet.errorString);
+                    appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
+                    return;
+                default:
+                    // opening with password but password doesn't match
+                    console.error("Error opening wallet with password: ", wallet.errorString);
+                    passwordDialog.showError(qsTr("Couldn't open wallet: ") + wallet.errorString);
+                    console.log("closing wallet async : " + wallet.address)
+                    closeWallet();
+                    return;
+            }
         }
 
         // wallet opened successfully, subscribing for wallet updates
@@ -450,7 +468,6 @@ ApplicationWindow {
         // Force switch normal view
         rootItem.state = "normal";
     }
-
 
     function onWalletClosed(walletAddress) {
         console.log(">>> wallet closed: " + walletAddress)
