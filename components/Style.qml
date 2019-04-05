@@ -8,6 +8,11 @@ QtObject {
     property QtObject fontLight: FontLoader { id: _fontLight; source: "qrc:/fonts/Roboto-Light.ttf"; }
     property QtObject fontRegular: FontLoader { id: _fontRegular; source: "qrc:/fonts/Roboto-Regular.ttf"; }
 
+    property QtObject fontMonoMedium: FontLoader { id: _fontMonoMedium; source: "qrc:/fonts/RobotoMono-Medium.ttf"; }
+    property QtObject fontMonoBold: FontLoader { id: _fontMonoBold; source: "qrc:/fonts/RobotoMono-Bold.ttf"; }
+    property QtObject fontMonoLight: FontLoader { id: _fontMonoLight; source: "qrc:/fonts/RobotoMono-Light.ttf"; }
+    property QtObject fontMonoRegular: FontLoader { id: _fontMonoRegular; source: "qrc:/fonts/RobotoMono-Regular.ttf"; }
+
     property string grey: "#404040"
     property string orange: "#FF6C3C"
     property string white: "#FFFFFF"
@@ -17,6 +22,7 @@ QtObject {
     property string defaultFontColor: "white"
     property string dimmedFontColor: "#BBBBBB"
     property string lightGreyFontColor: "#DFDFDF"
+    property string greyFontColor: "#808080"
     property string warningColor: "#963E00"
     property string errorColor: "#FA6800"
     property string inputBoxBackground: "black"
