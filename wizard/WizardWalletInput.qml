@@ -55,6 +55,8 @@ GridLayout {
     function reset() {
         walletName.error = !walletName.verify();
         walletLocation.error = walletLocation.text === "";
+        walletLocation.text = moneroAccountsDir + "/";
+        walletName.text = defaultAccountName;
     }
 
     MoneroComponents.LineEdit {
