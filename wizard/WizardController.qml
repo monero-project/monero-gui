@@ -26,13 +26,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQml 2.0
 import QtQuick 2.7
+import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Layouts 1.2
+import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
-
+import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
+
 import "../js/Wizard.js" as Wizard
 import "../js/Windows.js" as Windows
 import "../js/Utils.js" as Utils
@@ -103,6 +105,9 @@ Rectangle {
 
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
+
+    // flickable margin
+    property int flickableHeightMargin
 
     property int layoutScale: {
         if(isMobile){
@@ -182,75 +187,109 @@ Rectangle {
             State {
                 name: "wizardLanguage"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardLanguageView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardLanguageView.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardHome"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardHomeView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardHomeView.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardCreateWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardCreateWallet2"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet2View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet2View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardCreateWallet3"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet3View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet3View.height + wizardController.flickableHeightMargin + 400 }
             }, State {
                 name: "wizardCreateWallet4"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet4View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet4View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardRestoreWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardRestoreWallet2"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet2View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet2View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardRestoreWallet3"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet3View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet3View.childrenRect.height + wizardController.flickableHeightMargin + 400 }
             }, State {
                 name: "wizardRestoreWallet4"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet4View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet4View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardCreateDevice1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateDevice1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice1View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardOpenWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardModeSelection"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeSelectionView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeSelectionView.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardModeRemoteNodeWarning"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeRemoteNodeWarningView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeRemoteNodeWarningView.childrenRect.height + wizardController.flickableHeightMargin }
             }, State {
                 name: "wizardModeBootstrap"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.childrenRect.height + wizardController.flickableHeightMargin }
             }
         ]
 
-        StackView {
-            id: stackView
-            initialItem: wizardStateView.wizardLanguageView
+        Flickable {
+            id: wizardFlickable
             anchors.fill: parent
-            clip: false
+            clip: true
 
-            delegate: StackViewDelegate {
-                pushTransition: StackViewTransition {
-                     PropertyAnimation {
-                         target: enterItem
-                         property: "x"
-                         from: target.width
-                         to: 0
-                         duration: 300
-                         easing.type: Easing.OutCubic
-                     }
-                     PropertyAnimation {
-                         target: exitItem
-                         property: "x"
-                         from: 0
-                         to: 0 - target.width
-                         duration: 300
-                         easing.type: Easing.OutCubic
-                     }
+            ScrollBar.vertical: ScrollBar {
+                parent: wizardFlickable.parent
+                anchors.left: parent.right
+                anchors.leftMargin: 3
+                anchors.top: parent.top
+                anchors.topMargin: 4
+                anchors.bottom: parent.bottom
+            }
+
+            onFlickingChanged: {
+                releaseFocus();
+            }
+
+            StackView {
+                id: stackView
+                initialItem: wizardStateView.wizardLanguageView
+                anchors.fill: parent
+                clip: true
+
+                delegate: StackViewDelegate {
+                    pushTransition: StackViewTransition {
+                         PropertyAnimation {
+                             target: enterItem
+                             property: "x"
+                             from: target.width
+                             to: 0
+                             duration: 300
+                             easing.type: Easing.OutCubic
+                         }
+                         PropertyAnimation {
+                             target: exitItem
+                             property: "x"
+                             from: 0
+                             to: 0 - target.width
+                             duration: 300
+                             easing.type: Easing.OutCubic
+                         }
+                    }
                 }
             }
         }
