@@ -37,7 +37,6 @@
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/Scroll.qml</file>
-        <file>components/AddressBookTable.qml</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
@@ -53,7 +52,6 @@
         <file>images/expandRightPanel.png</file>
         <file>images/dropdownCopy.png</file>
         <file>images/dropdownCopy@2x.png</file>
-        <file>images/dropdownDel.png</file>
         <file>components/HistoryTable.qml</file>
         <file>components/HistoryTableMobile.qml</file>
         <file>images/moneroLogo2.png</file>
@@ -158,6 +156,10 @@
         <file>fonts/Roboto-Regular.ttf</file>
         <file>fonts/Roboto-Light.ttf</file>
         <file>fonts/Roboto-Bold.ttf</file>
+        <file>fonts/RobotoMono-Medium.ttf</file>
+        <file>fonts/RobotoMono-Regular.ttf</file>
+        <file>fonts/RobotoMono-Light.ttf</file>
+        <file>fonts/RobotoMono-Bold.ttf</file>
         <file>components/Style.qml</file>
         <file>components/qmldir</file>
         <file>components/InlineButton.qml</file>
@@ -275,5 +277,11 @@
         <file>images/local-node-full@2x.png</file>
         <file>wizard/WizardNavProgressDot.qml</file>
         <file>wizard/WizardOpenWallet1.qml</file>
+        <file>images/arrow-right-in-circle.png</file>
+        <file>images/arrow-right-in-circle@2x.png</file>
+        <file>images/rename.png</file>
+        <file>images/rename@2x.png</file>
+        <file>images/clipboard.png</file>
+        <file>images/clipboard@2x.png</file>
     </qresource>
 </RCC>
