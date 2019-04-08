@@ -7,6 +7,8 @@
 #include <wallet/api/wallet2_api.h>
 #include <QMutex>
 #include <QPointer>
+#include <QWaitCondition>
+#include <QMutex>
 #include "NetworkType.h"
 
 class Wallet;
@@ -65,6 +67,13 @@ public:
                                               quint64 kdfRounds = 1);
 
     Q_INVOKABLE Wallet * createWalletFromDevice(const QString &path,
+                                                const QString &password,
+                                                NetworkType::Type nettype,
+                                                const QString &deviceName,
+                                                quint64 restoreHeight = 0,
+                                                const QString &subaddressLookahead = "");
+
+    Q_INVOKABLE void createWalletFromDeviceAsync(const QString &path,
                                                 const QString &password,
                                                 NetworkType::Type nettype,
                                                 const QString &deviceName,
@@ -152,14 +161,22 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
+    Q_INVOKABLE void onWalletPassphraseNeeded(Monero::Wallet * wallet);
+    Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool entry_abort=false);
+
 signals:
 
     void walletOpened(Wallet * wallet);
+    void walletCreated(Wallet * wallet);
+    void walletPassphraseNeeded();
+    void deviceButtonRequest(quint64 buttonCode);
+    void deviceButtonPressed();
     void walletClosed(const QString &walletAddress);
     void checkUpdatesComplete(const QString &result) const;
 
 public slots:
 private:
+    friend class WalletPassphraseListenerImpl;
 
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
@@ -167,6 +184,10 @@ private:
     QMutex m_mutex;
     QPointer<Wallet> m_currentWallet;
 
+    QWaitCondition m_cond_pass;
+    QMutex m_mutex_pass;
+    QString m_passphrase;
+    bool m_passphrase_abort;
 };
 
 #endif // WALLETMANAGER_H

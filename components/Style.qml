@@ -17,6 +17,7 @@ QtObject {
     property string defaultFontColor: "white"
     property string dimmedFontColor: "#BBBBBB"
     property string lightGreyFontColor: "#DFDFDF"
+    property string warningColor: "#963E00"
     property string errorColor: "#FA6800"
     property string inputBoxBackground: "black"
     property string inputBoxBackgroundError: "#FFDDDD"

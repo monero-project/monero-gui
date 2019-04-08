@@ -75,6 +75,16 @@ public:
         emit m_wallet->refreshed();
     }
 
+    virtual void onDeviceButtonRequest(uint64_t code) override
+    {
+        emit m_wallet->deviceButtonRequest(code);
+    }
+
+    virtual void onDeviceButtonPressed() override
+    {
+        emit m_wallet->deviceButtonPressed();
+    }
+
 private:
     Wallet * m_wallet;
 };

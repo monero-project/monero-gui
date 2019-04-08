@@ -44,6 +44,7 @@ Rectangle {
     anchors.fill: parent
 
     signal useMoneroClicked()
+    signal walletCreatedFromDevice(bool success)
 
     function restart() {
         wizardStateView.state = "wizardHome"
@@ -65,6 +66,7 @@ Rectangle {
         wizardController.walletRestoreMode = 'seed'
         wizardController.walletOptionsSubaddressLookahead = '';
         wizardController.remoteNodes = {};
+        disconnect();
     }
 
     property var m_wallet;
@@ -366,6 +368,28 @@ Rectangle {
         return success;
     }
 
+    function disconnect(){
+        walletManager.walletCreated.disconnect(onWalletCreated);
+        walletManager.walletPassphraseNeeded.disconnect(onWalletPassphraseNeeded);
+        walletManager.deviceButtonRequest.disconnect(onDeviceButtonRequest);
+        walletManager.deviceButtonPressed.disconnect(onDeviceButtonPressed);
+    }
+
+    function connect(){
+        walletManager.walletCreated.connect(onWalletCreated);
+        walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
+        walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
+        walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
+    }
+
+    function deviceAttentionSplash(){
+        appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
+    }
+
+    function creatingWalletDeviceSplash(){
+        appWindow.showProcessingSplash(qsTr("Creating wallet from device..."));
+    }
+
     function createWalletFromDevice() {
         // TODO: create wallet in temporary filename and a) move it to the path specified by user after the final
         // page submitted or b) delete it when program closed before reaching final page
@@ -376,30 +400,61 @@ Rectangle {
             console.log("deleting wallet")
         }
 
-        var tmp_wallet_filename = oshelper.temporaryFilename();
-        console.log("Creating temporary wallet", tmp_wallet_filename)
+        tmpWalletFilename = oshelper.temporaryFilename();
+        console.log("Creating temporary wallet", tmpWalletFilename)
         var nettype = persistentSettings.nettype;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
         var subaddressLookahead = wizardController.walletOptionsSubaddressLookahead;
         var deviceName = wizardController.walletOptionsDeviceName;
 
-        var wallet = walletManager.createWalletFromDevice(tmp_wallet_filename, "", nettype, deviceName, restoreHeight, subaddressLookahead);
+        connect();
+        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, "", nettype, deviceName, restoreHeight, subaddressLookahead);
+        creatingWalletDeviceSplash();
+    }
+
+    function onWalletCreated(wallet) {
+        splash.close()
 
         var success = wallet.status === Wallet.Status_Ok;
         if (success) {
             wizardController.m_wallet = wallet;
             wizardController.walletOptionsIsRecoveringFromDevice = true;
-            wizardController.tmpWalletFilename = tmp_wallet_filename;
             if (!wizardController.walletOptionsDeviceIsRestore) {
                 // User creates a hardware wallet for the first time. Use a recent block height from API.
                 wizardController.walletOptionsRestoreHeight = wizardController.m_wallet.walletCreationHeight;
             }
         } else {
             console.log(wallet.errorString)
+            wizardController.tmpWalletFilename = '';
             appWindow.showStatusMessage(qsTr(wallet.errorString), 5);
             walletManager.closeWallet();
         }
-        return success;
+
+        disconnect();
+        walletCreatedFromDevice(success);
+    }
+
+    function onWalletPassphraseNeeded(){
+        splash.close()
+
+        console.log(">>> wallet passphrase needed: ");
+        passphraseDialog.onAcceptedCallback = function() {
+            walletManager.onPassphraseEntered(passphraseDialog.passphrase);
+            creatingWalletDeviceSplash();
+        }
+        passphraseDialog.onRejectedCallback = function() {
+            walletManager.onPassphraseEntered("", true);
+            creatingWalletDeviceSplash();
+        }
+        passphraseDialog.open()
+    }
+
+    function onDeviceButtonRequest(code){
+        deviceAttentionSplash();
+    }
+
+    function onDeviceButtonPressed(){
+        creatingWalletDeviceSplash();
     }
 
     function openWallet(){

@@ -207,13 +207,9 @@ Rectangle {
                         }
                         wizardController.walletOptionsRestoreHeight = _restoreHeight;
                     }
-                    var written = wizardController.createWalletFromDevice();
-                    if(written){
-                        wizardController.walletOptionsIsRecoveringFromDevice = true;
-                        wizardStateView.state = "wizardCreateWallet2";
-                    } else {
-                        errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
-                    }
+
+                    wizardController.walletCreatedFromDevice.connect(onCreateWalletFromDeviceCompleted);
+                    wizardController.createWalletFromDevice();
                 }
             }
         }
@@ -229,5 +225,14 @@ Rectangle {
         if(previousView.viewName == "wizardHome"){
             walletInput.reset();
         }
+    }
+
+    function onCreateWalletFromDeviceCompleted(written){
+        if(written){
+            wizardStateView.state = "wizardCreateWallet2";
+        } else {
+            errorMsg.text = qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
+        }
+        wizardController.walletCreatedFromDevice.disconnect(onCreateWalletFromDeviceCompleted);
     }
 }
