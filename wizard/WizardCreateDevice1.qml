@@ -148,6 +148,7 @@ Rectangle {
 
                 Layout.topMargin: 10 * scaleRatio
                 Layout.fillWidth: true
+                z: 3
 
                 ColumnLayout{
                     MoneroComponents.StandardDropdown {
