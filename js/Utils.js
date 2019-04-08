@@ -125,6 +125,7 @@ function isUpperLock(shift, letter){
         else
             return true;
     }
+}
 
 function qmlEach(item, properties, ignoredObjectNames, arr){
     // Traverse QML object tree and return components that match
