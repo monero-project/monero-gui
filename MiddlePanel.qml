@@ -118,8 +118,7 @@ Rectangle {
             State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
-                PropertyChanges { target: historyView; model: appWindow.currentWallet ? appWindow.currentWallet.historyModel : null }
-                PropertyChanges { target: mainFlickable; contentHeight: historyView.tableHeight + 220 * scaleRatio }
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 100 * scaleRatio}
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
@@ -186,7 +185,13 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: currentView !== merchantView ? 20 * scaleRatio : 0
+        anchors.margins: {
+            if(currentView === merchantView || currentView === historyView)
+                return 0;
+
+            return 20 * scaleRatio;
+        }
+
         anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 * scaleRatio : 0
         spacing: 0
 

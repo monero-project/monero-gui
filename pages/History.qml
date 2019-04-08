@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2018, The Monero Project
-// 
+// Copyright (c) 2014-2019, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -34,347 +34,1537 @@ import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionInfo 1.0
 import moneroComponents.TransactionHistoryModel 1.0
+import moneroComponents.Clipboard 1.0
+import FontAwesome 1.0
+import "../components" as MoneroComponents
+import "../js/Utils.js" as Utils
+import "../js/TxUtils.js" as TxUtils
 
-import "../components"
 
 Rectangle {
-    id: mainLayout
+    id: root
     property var model
-    property int tableHeight: !isMobile ? table.contentHeight : tableMobile.contentHeight
+    property int sideMargin: 50 * scaleRatio
+    property var initialized: false
+    property int txMax: 5
+    property int txOffset: 0
+    property int txPage: (txOffset / 5) + 1
+    property int txCount: 0
+    property var sortSearchString: null
+    property bool sortDirection: true  // true = desc, false = asc
+    property string sortBy: "blockheight"
+    property var txModelData: []  // representation of transaction data (appWindow.currentWallet.historyModel)
+    property var txData: []  // representation of FILTERED transation data
+    property var txDataCollapsed: []  // keep track of which txs are collapsed
+    property string historyStatusMessage: ""
+    property alias contentHeight: pageRoot.height
 
-    QtObject {
-        id: d
-        property bool initialized: false
-    }
+    Clipboard { id: clipboard }
+    ListModel { id: txListViewModel }
 
     color: "transparent"
 
-    function getSelectedAmount() {
-      if (typeof model === 'undefined' || model == null)
-        return ""
-      var total = 0
-      var count = model.rowCount()
-      for (var i = 0; i < count; ++i) {
-          var idx = model.index(i, 0)
-          var isout = model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
-          var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
-          if (isout)
-              total = walletManager.subi(total, amount)
-          else
-              total = walletManager.addi(total, amount)
-      }
-
-      var sign = ""
-      if (total < 0) {
-        total = -total
-        sign = "-"
-      }
-      return count + qsTr(" selected: ") + sign + walletManager.displayAmount(total);
-    }
-
-    function resetFilter(model) {
-        model.dateFromFilter = "2014-04-18" // genesis block
-        model.dateToFilter = "9999-09-09" // fix before september 9999
-        // negative values disable filters here;
-        model.amountFromFilter = -1;
-        model.amountToFilter = -1;
-        model.directionFilter = TransactionInfo.Direction_Both;
-    }
-
-    onModelChanged: {
-        if (typeof model !== 'undefined' && model != null) {
-            if (!d.initialized) {
-                // setup date filter scope according to real transactions
-                fromDatePicker.currentDate = model.transactionHistory.firstDateTime
-                toDatePicker.currentDate = model.transactionHistory.lastDateTime
-
-                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
-                model.sort(0, Qt.DescendingOrder);
-                d.initialized = true
-            }
-        }
-    }
-
-    function onFilterChanged() {
-        // set datepicker error states
-        var datesValid = fromDatePicker.currentDate <= toDatePicker.currentDate
-        fromDatePicker.error = !datesValid;
-        toDatePicker.error = !datesValid;
-
-        if(datesValid){
-            resetFilter(model)
-
-            if (fromDatePicker.currentDate > toDatePicker.currentDate) {
-                console.error("Invalid date filter set: ", fromDatePicker.currentDate, toDatePicker.currentDate)
-            } else {
-                model.dateFromFilter  = fromDatePicker.currentDate
-                model.dateToFilter    = toDatePicker.currentDate
-            }
-
-            model.searchFilter = searchLine.text;
-            tableHeader.visible = model.rowCount() > 0;
-        }
-    }
-
-    Rectangle{
-        id: rootLayout
-        visible: false
-    }
-
     ColumnLayout {
         id: pageRoot
-        anchors.margins: isMobile ? 17 : 20 * scaleRatio
-        anchors.topMargin: isMobile ? 0 : 40 * scaleRatio
+        anchors.topMargin: 40 * scaleRatio
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 10 * scaleRatio
+        RowLayout {
+            Layout.preferredHeight: 24
+            Layout.preferredWidth: parent.width - root.sideMargin
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            Layout.bottomMargin: 10 * scaleRatio
 
-        GridLayout {
-            property int column_width: {
-                if(!isMobile){
-                    return (parent.width / 2) - 20;
-                } else {
-                    return parent.width - 20;
-                }
+            MoneroComponents.Label {
+                fontSize: 24 * scaleRatio
+                text: qsTr("Transactions") + translationManager.emptyString
             }
 
-            columns: 2
-            Layout.fillWidth: true
+            Item {
+                Layout.fillWidth: true
+            }
 
             RowLayout {
-                visible: !isMobile
-                Layout.preferredWidth: parent.column_width
+                id: sortAndFilter
+                property bool collapsed: false
+                Layout.alignment: Qt.AlignRight | Qt.AlignBottom
+                Layout.preferredWidth: 100
+                Layout.preferredHeight: 15
+                spacing: 8 * scaleRatio
 
-                StandardButton {
-                    visible: !isIOS
-                    small: true
-                    text: qsTr("Export") + translationManager.emptyString
-                    onClicked: {
-                        writeCSVFileDialog.open();
+                Text {
+                    Layout.alignment: Qt.AlignVCenter
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 15 * scaleRatio
+                    text: qsTr("Sort & filter")
+                    color: MoneroComponents.Style.defaultFontColor
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            sortAndFilter.collapsed = !sortAndFilter.collapsed
+                        }
                     }
                 }
-            }
 
-            RowLayout {
-                Layout.preferredWidth: parent.column_width
-                LineEdit {
-                    id: searchLine
-                    fontSize: 14 * scaleRatio
-                    inputHeight: 36 * scaleRatio
-                    borderDisabled: true
-                    Layout.fillWidth: true
-                    backgroundColor: "#404040"
-                    placeholderText: qsTr("Search") + translationManager.emptyString
-                    placeholderCenter: true
-                    onTextChanged:  {
-                        onFilterChanged();
+                Image {
+                    Layout.alignment: Qt.AlignVCenter
+                    height: 8 * scaleRatio
+                    width: 12 * scaleRatio
+                    source: "../images/whiteDropIndicator.png"
+                    rotation: parent.collapsed ? 0 : 180
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: {
+                            sortAndFilter.collapsed = !sortAndFilter.collapsed
+                        }
                     }
                 }
             }
         }
 
-        GridLayout {
-            z: 6
-            columns: (isMobile)? 1 : 3
+        ColumnLayout {
             Layout.fillWidth: true
-            columnSpacing: 22 * scaleRatio
-            visible: !isMobile
+            Layout.topMargin: 8 * scaleRatio
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            visible: sortAndFilter.collapsed
 
-            ColumnLayout {
+            MoneroComponents.LineEdit {
+                id: searchInput
                 Layout.fillWidth: true
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    id: fromDateRow
-                    Layout.minimumWidth: 150 * scaleRatio
-
-                    DatePicker {
-                        visible: !isMobile
-
-                        id: fromDatePicker
-                        Layout.fillWidth: true
-                        width: 100 * scaleRatio
-                        inputLabel.text: qsTr("Date from") + translationManager.emptyString
-
-                        onCurrentDateChanged: {
-                            onFilterChanged()
-                        }
-                    }
-                }
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    id: toDateRow
-                    Layout.minimumWidth: 150 * scaleRatio
-
-                    DatePicker {
-                        visible: !isMobile
-
-                        id: toDatePicker
-                        Layout.fillWidth: true
-                        width: 100 * scaleRatio
-                        inputLabel.text: qsTr("Date to") + translationManager.emptyString
-
-                        onCurrentDateChanged: {
-                            onFilterChanged()
-                        }
-                    }
-                }
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-
-                Label {
-                    id: transactionPriority
-                    Layout.minimumWidth: 120 * scaleRatio
-                    text: qsTr("Sort") + translationManager.emptyString
-                    fontSize: 14
-                }
-
-                ListModel {
-                     id: priorityModelV5
-
-                     ListElement { column1: qsTr("Block height") ; column2: "";}
-                     ListElement { column1: qsTr("Date") ; column2: ""; }
-                 }
-
-                StandardDropdown {
-                    id: priorityDropdown
-                    anchors.topMargin: 2 * scaleRatio
-                    fontHeaderSize: 14 * scaleRatio
-                    dropdownHeight: 28 * scaleRatio
-
-                    Layout.fillWidth: true
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#404040"
-                    pressedColor: "#202020"
-                    colorBorder: "#404040"
-                    colorHeaderBackground: "#404040"
-
-                    onChanged: {
-                        switch(priorityDropdown.currentIndex){
-                            case 0:
-                                // block sort
-                                model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole;
-                                break;
-                            case 1:
-                                // amount sort
-                                model.sortRole = TransactionHistoryModel.TransactionDateRole;
-                                break;
-                        }
-                        model.sort(0, Qt.DescendingOrder);
-                    }
-
-                }
-            }
-        }
-
-        GridLayout {
-            Layout.topMargin: 20
-            visible: table.count === 0
-
-            Label {
+                input.topPadding: 6 * scaleRatio
+                input.bottomPadding: 6 * scaleRatio
                 fontSize: 16 * scaleRatio
-                text: qsTr("No history...") + translationManager.emptyString
+                labelFontSize: 14 * scaleRatio
+                placeholderText: qsTr("Search...") + translationManager.emptyString
+                placeholderFontSize: 16 * scaleRatio
+                inputHeight: 34
+                onTextUpdated: {
+                    if(searchInput.text != null && searchInput.text.length >= 3){
+                        root.sortSearchString = searchInput.text;
+                        root.reset();
+                        root.updateFilter();
+                    } else {
+                        root.sortSearchString = null;
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
             }
         }
 
         GridLayout {
-            id: tableHeader
-            columns: 1
-            columnSpacing: 0
-            rowSpacing: 0
-            Layout.topMargin: 20
+            visible: sortAndFilter.collapsed
             Layout.fillWidth: true
+            Layout.topMargin: 4 * scaleRatio
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            columns: 2
+            columnSpacing: 20 * scaleRatio
+            z: 6
 
-            RowLayout{
-                Layout.preferredHeight: 10
+            MoneroComponents.DatePicker {
+                id: fromDatePicker
                 Layout.fillWidth: true
+                width: 100 * scaleRatio
+                inputLabel.text: qsTr("Date from") + translationManager.emptyString
+                inputLabel.font.pixelSize: 14 * scaleRatio
+                onCurrentDateChanged: {
+                    if(root.initialized){
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
+            }
+
+            MoneroComponents.DatePicker {
+                id: toDatePicker
+                Layout.fillWidth: true
+                width: 100 * scaleRatio
+                inputLabel.text: qsTr("Date to") + translationManager.emptyString
+
+                onCurrentDateChanged: {
+                    if(root.initialized){
+                        root.reset();
+                        root.updateFilter();
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            Layout.topMargin: 20 * scaleRatio
+            Layout.bottomMargin: 20 * scaleRatio
+            Layout.fillWidth: true
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: childrenRect.width + 38 * scaleRatio
+                Layout.preferredHeight: 20
+
+                Text {
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 15 * scaleRatio
+                    text: qsTr("Sort by") + ":"
+                    color: MoneroComponents.Style.defaultFontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                id: sortBlockheight
+                color: "transparent"
+                Layout.preferredWidth: sortBlockheightText.width + 42 * scaleRatio
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    Text {
+                        id: sortBlockheightText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 15 * scaleRatio
+                        text: qsTr("Blockheight")
+                        color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Image {
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        visible: root.sortBy === "blockheight" ? true : false
+                        opacity: root.sortBy === "blockheight" ? 1 : 0.6
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: {
+                            if(root.sortBy === "blockheight"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "blockheight") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "blockheight";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: sortDateText.width + 42 * scaleRatio
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    Text {
+                        id: sortDateText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 15 * scaleRatio
+                        text: qsTr("Date")
+                        color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Image {
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        visible: root.sortBy === "timestamp" ? true : false
+                        opacity: root.sortBy === "timestamp" ? 1 : 0.6
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: {
+                            if(root.sortBy === "timestamp"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "timestamp") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "timestamp";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: sortAmountText.width + 42 * scaleRatio
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    Text {
+                        id: sortAmountText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 15 * scaleRatio
+                        text: qsTr("Amount")
+                        color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Image {
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        visible: root.sortBy === "amount" ? true : false
+                        opacity: root.sortBy === "amount" ? 1 : 0.6
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: {
+                            if(root.sortBy === "amount"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "amount") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "amount";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: !sortAndFilter.collapsed
+                Layout.preferredHeight: 20
+
+                Text {
+                    // status message
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.pixelSize: 15 * scaleRatio
+                    text: root.historyStatusMessage
+
+                    color: MoneroComponents.Style.defaultFontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            RowLayout {
+                id: pagination
+                spacing: 0
+                Layout.alignment: Qt.AlignRight
+                Layout.preferredWidth: childrenRect.width
+                Layout.preferredHeight: 20
 
                 Rectangle {
-                    id: header
-                    Layout.fillWidth: true
-                    visible: table.count > 0
+                    color: "transparent"
+                    Layout.preferredWidth: childrenRect.width + 2 * scaleRatio
+                    Layout.preferredHeight: 20
 
-                    height: 10
+                    Text {
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 15 * scaleRatio
+                        text: qsTr("Page") + ":"
+                        color: MoneroComponents.Style.defaultFontColor
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
+                Rectangle {
+                    color: "transparent"
+                    Layout.preferredWidth: childrenRect.width + 10 * scaleRatio
+                    Layout.leftMargin: 4 * scaleRatio
+                    Layout.preferredHeight: 20 * scaleRatio
+
+                    Text {
+                        id: paginationText
+                        text: root.txPage + "/" + Math.ceil(root.txCount / root.txMax)
+                        color: "white"
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        MouseArea {
+                            // jump to page functionality
+                            property int pages: Math.ceil(root.txCount / root.txMax)
+                            anchors.fill: parent
+                            hoverEnabled: pages > 1
+                            cursorShape: hoverEnabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            onEntered: parent.color = MoneroComponents.Style.orange
+                            onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                            onClicked: {
+                                if(pages === 1)
+                                    return;
+
+                                inputDialog.labelText = qsTr("Jump to page (1-%1)").arg(pages) + translationManager.emptyString;
+                                inputDialog.inputText = "1";
+                                inputDialog.onAcceptedCallback = function() {
+                                    var pageNumber = parseInt(inputDialog.inputText);
+                                    if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= pages) {
+                                        root.paginationJump(parseInt(pageNumber));
+                                        return;
+                                    }
+
+                                    appWindow.showStatusMessage(qsTr("Invalid page. Must be a number within the specified range."), 4);
+                                }
+                                inputDialog.onRejectedCallback = null;
+                                inputDialog.open()
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: paginationPrev
+                    Layout.preferredWidth: 18 * scaleRatio
+                    Layout.preferredHeight: 20 * scaleRatio
+                    color: "transparent"
+                    opacity: enabled ? 1.0 : 0.6
+                    enabled: false
+
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: 90
+                    }
+
+                    MouseArea {
+                        enabled: parent.enabled
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.paginationPrevClicked();
+                        }
+                    }
+                }
+
+                Rectangle {
+                    id: paginationNext
+                    Layout.preferredWidth: 18 * scaleRatio
+                    Layout.preferredHeight: 20 * scaleRatio
+                    color: "transparent"
+                    opacity: enabled ? 1.0 : 0.6
+                    enabled: false
+
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: 270
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            root.paginationNextClicked();
+                        }
+                    }
+                }
+            }
+        }
+
+        ListView {
+            visible: true
+            id: txListview
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight;
+            model: txListViewModel
+            interactive: false
+
+            delegate: Rectangle {
+                id: delegate
+                property bool collapsed: root.txDataCollapsed.indexOf(hash) >= 0 ? true : false
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: {
+                    if(!collapsed) return 60;
+                    if(isout && delegate.address !== "") return 320;
+                    return 220;
+                }
+                color: collapsed ? "#06FFFFFF" : "transparent"
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    width: sideMargin
                     color: "transparent"
 
                     Rectangle {
                         anchors.top: parent.top
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.rightMargin: 10
-                        anchors.leftMargin: 10
-
-                        height: 1
-                        color: "#404040"
+                        anchors.topMargin: 24 * scaleRatio
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: 10 * scaleRatio
+                        height: 10 * scaleRatio
+                        radius: 8 * scaleRatio
+                        color: isout ? "#d85a00" : "#2eb358"
                     }
+                }
+
+                ColumnLayout {
+                    spacing: 0
+                    clip: true
+                    height: parent.height
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: sideMargin
+                    anchors.rightMargin: sideMargin
+
+                    RowLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+                        height: 60
+                        Layout.preferredHeight: 60
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: isout ? qsTr("Sent") : qsTr("Received")
+                                    color: "#C0C0C0"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: _amount + " XMR"
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = MoneroComponents.Style.orange
+                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee")
+                                    color: "#C0C0C0"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: {
+                                        if(!isout && confirmationsRequired === 60) return qsTr("Yes");
+                                        if(fee !== "") return fee + " XMR";
+                                        return "-";
+                                    }
+
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = MoneroComponents.Style.orange
+                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: qsTr("Blockheight")
+                                    color: "#C0C0C0"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 14 * scaleRatio
+                                    text: blockheight > 0 ? blockheight : qsTr('Pending');
+
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = MoneroComponents.Style.orange
+                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: qsTr("Confirmations")
+                                    color: "#C0C0C0"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    property bool confirmed: confirmations < confirmationsRequired ? false : true
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: confirmed ? confirmations : confirmations + "/" + confirmationsRequired
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = MoneroComponents.Style.orange
+                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+                        }
+
+                        ColumnLayout {
+                            spacing: 0
+                            clip: true
+                            Layout.preferredHeight: 120
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: qsTr("Date")
+                                    color: "#C0C0C0"
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 20
+
+                                Text {
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 15 * scaleRatio
+                                    text: persistentSettings.historyHumanDates ? dateHuman : date + "  " + time
+
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    anchors.verticalCenter: parent.verticalCenter
+
+                                    MouseArea {
+                                        state: "copyable"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.color = MoneroComponents.Style.orange
+                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                color: "transparent"
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 10
+                            }
+
+                            Item {
+                                Layout.fillWidth: true
+                                Layout.preferredHeight: 60
+
+                                MoneroComponents.StandardButton {
+                                    id: btnDetails
+                                    text: FontAwesome.info
+                                    small: true
+                                    label.font.family: FontAwesome.fontFamily
+                                    fontSize: 18 * scaleRatio
+                                    width: 28 * scaleRatio
+
+                                    MouseArea {
+                                        state: "details"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        z: parent.z + 1
+                                    }
+                                }
+
+                                Image {
+                                    visible: !isout && confirmationsRequired === 60
+                                    anchors.left: btnDetails.right
+                                    anchors.leftMargin: 16 * scaleRatio
+                                    width: 28
+                                    height: 28
+                                    source: "qrc:///images/miningxmr.png"
+                                }
+
+                                MoneroComponents.StandardButton {
+                                    visible: isout
+                                    anchors.left: btnDetails.right
+                                    anchors.leftMargin: 10 * scaleRatio
+                                    text: FontAwesome.productHunt
+                                    small: true
+                                    label.font.family: FontAwesome.fontFamily
+                                    fontSize: 18 * scaleRatio
+                                    width: 36 * scaleRatio
+
+                                    MouseArea {
+                                        state: "proof"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        z: parent.z + 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    ColumnLayout {
+                        spacing: 0
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 40
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: qsTr("Description")
+                                color: "#C0C0C0"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                id: txNoteText
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: tx_note !== "" ? tx_note : "-"
+                                color: MoneroComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = MoneroComponents.Style.orange
+                                    onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                }
+                            }
+
+                            Image {
+                                anchors.top: parent.top
+                                anchors.left: txNoteText.right
+                                anchors.leftMargin: 12 * scaleRatio
+                                source: "../images/editIcon.png"
+                                opacity: 1
+                                width: 18
+                                height: 18
+
+                                MouseArea {
+                                    id: txNoteArea
+                                    state: "set_tx_note"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: {
+                                        parent.opacity = 0.7;
+                                    }
+                                    onExited: {
+                                        parent.opacity = 1.0;
+                                    }
+                                    cursorShape: Qt.PointingHandCursor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: qsTr("Transaction ID")
+                                color: "#C0C0C0"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: hash
+                                color: MoneroComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = MoneroComponents.Style.orange
+                                    onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: qsTr("Transaction key")
+                                color: "#C0C0C0"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: {
+                                    var txKey = currentWallet.getTxKey(hash)
+                                    if(txKey) return txKey;
+                                    else return "-"
+                                }
+
+                                color: MoneroComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = MoneroComponents.Style.orange
+                                    onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+
+                        Rectangle {
+                            visible: isout
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: qsTr("Address sent to")
+                                color: "#C0C0C0"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        Rectangle {
+                            visible: isout
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+
+                            Text {
+                                font.family: MoneroComponents.Style.fontRegular.name
+                                font.pixelSize: 15 * scaleRatio
+                                text: {
+                                    if(isout && address !== ""){
+                                        return TxUtils.addressTruncate(address, 24);
+                                    }
+
+                                    if(isout && blockheight === 0)
+                                        return qsTr("Waiting for transaction to leave txpool.")
+                                    else
+                                        return qsTr("Unknown recipient");
+                                }
+
+                                color: MoneroComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                MouseArea {
+                                    state: "copyable_address"
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: parent.color = MoneroComponents.Style.orange
+                                    onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 10
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                }
+
+                MouseArea {
+                    id: collapseArea
+                    objectName: "collapseArea"
+                    cursorShape: Qt.PointingHandCursor
+                    anchors.fill: parent
+                    onClicked: {
+                        // detect clicks on text (for copying), otherwise toggle collapse
+                        var doCollapse = true;
+                        var res = Utils.qmlEach(delegate, ['containsMouse', 'preventStealing', 'scrollGestureEnabled'], ['collapseArea'], []);
+                        for(var i = 0; i < res.length; i+=1){
+                            if(res[i].containsMouse === true){
+                                if(res[i].state === 'copyable' && res[i].parent.hasOwnProperty('text')) toClipboard(res[i].parent.text);
+                                if(res[i].state === 'copyable_address') root.toClipboard(address);
+                                if(res[i].state === 'set_tx_note') root.editDescription(hash);
+                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                doCollapse = false;
+                                break;
+                            }
+                        }
+
+                        if(doCollapse){
+                            collapsed = !collapsed;
+
+                            // remember collapsed state
+                            if(collapsed){
+                                root.txDataCollapsed.push(hash);
+                            } else {
+                                root.removeFromCollapsedList(hash);
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    width: sideMargin
+
+                    color: "transparent"
 
                     Image {
                         anchors.top: parent.top
-                        anchors.left: parent.left
+                        anchors.topMargin: 24 * scaleRatio
+                        anchors.horizontalCenter: parent.horizontalCenter
 
-                        width: 10
-                        height: 10
-
-                        source: "../images/historyBorderRadius.png"
+                        height: 8 * scaleRatio
+                        width: 12 * scaleRatio
+                        source: "../images/whiteDropIndicator.png"
+                        rotation: delegate.collapsed ? 180 : 0
                     }
+                }
 
-                    Image {
-                        anchors.top: parent.top
-                        anchors.right: parent.right
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    height: 1
+                    color: "#2b2b2b"
+                }
 
-                        width: 10
-                        height: 10
-
-                        source: "../images/historyBorderRadius.png"
-                        rotation: 90
-                    }
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.bottom
+                    height: 1
+                    color: "#2b2b2b"
                 }
             }
+        }
 
-            RowLayout {
-                Layout.preferredHeight: isMobile ? tableMobile.contentHeight : table.contentHeight
+        Item {
+            visible: sortAndFilter.collapsed
+            Layout.topMargin: 10 * scaleRatio
+            Layout.bottomMargin: 10 * scaleRatio
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+
+            Text {
+                // status message
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignHCenter
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 15 * scaleRatio
+                text: root.historyStatusMessage;
+                color: MoneroComponents.Style.dimmedFontColor
+            }
+        }
 
-                HistoryTable {
-                    id: table
-                    visible: !isMobile
-                    onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: !isMobile ? mainLayout.model : null
-                    addressBookModel: null
+        MoneroComponents.CheckBox2 {
+            id: showAdvancedCheckbox
+            Layout.topMargin: 30 * scaleRatio
+            Layout.bottomMargin: 20 * scaleRatio
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            checked: persistentSettings.historyShowAdvanced
+            onClicked: persistentSettings.historyShowAdvanced = !persistentSettings.historyShowAdvanced
+            text: qsTr("Advanced options") + translationManager.emptyString
+        }
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+        ColumnLayout {
+            visible: persistentSettings.historyShowAdvanced
+            Layout.leftMargin: sideMargin
+            Layout.rightMargin: sideMargin
+            spacing: 20 * scaleRatio
+
+            MoneroComponents.CheckBox {
+                id: humanDatesCheckBox
+                checked: persistentSettings.historyHumanDates
+                onClicked: {
+                    persistentSettings.historyHumanDates = !persistentSettings.historyHumanDates
+                    root.updateDisplay(root.txOffset, root.txMax, false);
                 }
+                text: qsTr("Human readable date format") + translationManager.emptyString
+            }
 
-                HistoryTableMobile {
-                    id: tableMobile
-                    visible: isMobile
-                    onContentYChanged: flickableScroll.flickableContentYChanged()
-                    model: isMobile ? mainLayout.model : null
-                    addressBookModel: null
-
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+            MoneroComponents.StandardButton {
+                visible: !isIOS
+                small: true
+                text: qsTr("Export all history") + translationManager.emptyString
+                onClicked: {
+                    writeCSVFileDialog.open();
                 }
             }
         }
     }
 
+    function refresh(){
+        if(appWindow.currentWallet != null && typeof appWindow.currentWallet.history !== "undefined" ) {
+            currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+        }
+
+        if (typeof root.model !== 'undefined' && root.model != null) {
+            toDatePicker.currentDate = root.model.transactionHistory.lastDateTime
+        }
+
+        // extract from model, create JS array of txs
+        root.updateTransactionsFromModel();
+
+        // fill listview, update UI
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function reset() {
+        root.txOffset = 0;
+        root.txMax = 5;
+
+        if (typeof root.model !== 'undefined' && root.model != null) {
+            root.model.dateFromFilter = "2014-04-18" // genesis block
+            root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            // negative values disable filters here;
+            root.model.amountFromFilter = -1;
+            root.model.amountToFilter = -1;
+            root.model.directionFilter = TransactionInfo.Direction_Both;
+        }
+    }
+
+    function updateFilter(){
+        // applying filters
+        root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
+
+        var fromDate = fromDatePicker.currentDate.getTime() / 1000;
+        var toDate = toDatePicker.currentDate.getTime() / 1000;
+
+        var txs = [];
+        for (var i = 0; i < root.txData.length; i++){
+            var item = root.txData[i];
+            var matched = "";
+
+            // daterange filtering
+            if(item.timestamp < fromDate || item.timestamp > toDate){
+                continue;
+            }
+
+            // search string filtering
+            if(root.sortSearchString == null || root.sortSearchString === ""){
+                txs.push(root.txData[i]);
+                continue;
+            }
+
+            if(root.sortSearchString.length >= 1){
+                if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
+                    txs.push(item);
+                } else if(item.address !== "" && item.address.startsWith(root.sortSearchString)){
+                    txs.push(item);
+                } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                    txs.push(item);
+                } else if (item.hash.startsWith(root.sortSearchString)){
+                    txs.push(item);
+                }
+            }
+        }
+
+        root.txData = txs;
+        root.txCount = root.txData.length;
+
+        root.updateSort();
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function updateSort(){
+        // applying sorts
+        root.txOffset = 0;
+        root.txData.sort(function(a, b) {
+            return a[root.sortBy] - b[root.sortBy];
+        });
+
+        if(root.sortDirection)
+            root.txData.reverse();
+
+        root.updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function updateDisplay(tx_offset, tx_max, auto_collapse) {
+        if(typeof auto_collapse === 'undefined') auto_collapse = false;
+        txListViewModel.clear();
+
+        // limit results as per tx_max (root.txMax)
+        var txs = root.txData.slice(tx_offset, tx_offset + tx_max);
+
+        // make first result on the first page collapsed by default
+        if(auto_collapse && root.txPage === 1 && txs.length > 0 && (root.sortSearchString == null || root.sortSearchString === ""))
+            root.txDataCollapsed.push(txs[0]['hash']);
+
+        // populate listview
+        for (var i = 0; i < txs.length; i++){
+            txListViewModel.append(txs[i]);
+        }
+
+        root.updateHistoryStatusMessage();
+
+        // determine pagination button states
+        var count = txData.length;
+        if(count <= root.txMax) {
+            paginationPrev.enabled = false;
+            paginationNext.enabled = false;
+            return;
+        }
+
+        if(root.txOffset < root.txMax)
+            paginationPrev.enabled = false;
+        else
+            paginationPrev.enabled = true;
+
+        if((root.txOffset + root.txMax) >= count)
+            paginationNext.enabled = false;
+        else
+            paginationNext.enabled = true;
+    }
+
+    function updateTransactionsFromModel() {
+        // This function copies the items of `appWindow.currentWallet.historyModel` to `root.txModelData`, as a list of javascript objects
+        if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+
+        var _model = root.model;
+        var total = 0
+        var count = _model.rowCount()
+        root.txModelData = [];
+
+        for (var i = 0; i < count; ++i) {
+            var idx = _model.index(i, 0);
+            var isout = _model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
+            var amount = _model.data(idx, TransactionHistoryModel.TransactionAmountRole);
+            var hash = _model.data(idx, TransactionHistoryModel.TransactionHashRole);
+            var paymentId = _model.data(idx, TransactionHistoryModel.TransactionPaymentIdRole);
+            var destinations = _model.data(idx, TransactionHistoryModel.TransactionDestinationsRole);
+            var time = _model.data(idx, TransactionHistoryModel.TransactionTimeRole);
+            var date = _model.data(idx, TransactionHistoryModel.TransactionDateRole);
+            var blockheight = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
+            var confirmations = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
+            var confirmationsRequired = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRequiredRole);
+            var fee = _model.data(idx, TransactionHistoryModel.TransactionFeeRole);
+            var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
+            var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
+            var timestamp = new Date(date + " " + time).getTime() / 1000;
+            var dateHuman = Utils.ago(timestamp);
+
+            var _amount = amount;
+            if(_amount === 0){
+                // *sometimes* amount is 0, while the 'destinations string'
+                // has the correct amount, so we try to fetch it from that instead.
+                _amount = TxUtils.destinationsToAmount(destinations);
+                _amount = Number(_amount *1);
+            }
+
+            var tx_note = currentWallet.getUserNote(hash);
+            var address = "";
+            if(isout) {
+                address = TxUtils.destinationsToAddress(destinations);
+            }
+
+            if (isout)
+                total = walletManager.subi(total, amount)
+            else
+                total = walletManager.addi(total, amount)
+
+            root.txModelData.push({
+                "i": i,
+                "isout": isout,
+                "amount": Number(amount),
+                "_amount": _amount,
+                "hash": hash,
+                "paymentId": paymentId,
+                "address": address,
+                "destinations": destinations,
+                "tx_note": tx_note,
+                "time": time,
+                "date": date,
+                "dateHuman": dateHuman,
+                "blockheight": blockheight,
+                "address": address,
+                "timestamp": timestamp,
+                "fee": fee,
+                "confirmations": confirmations,
+                "confirmationsRequired": confirmationsRequired,
+                "subaddrAccount": subaddrAccount,
+                "subaddrIndex": subaddrIndex
+            });
+        }
+
+        root.txData = JSON.parse(JSON.stringify(root.txModelData)); // deepcopy
+        root.txCount = root.txData.length;
+    }
+
+    function update() {
+        // handle outside mutation of tx model; incoming/outgoing funds or new blocks. Update table.
+        currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
+
+        root.updateTransactionsFromModel();
+        root.updateFilter();
+    }
+
+    function editDescription(_hash){
+        inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
+        inputDialog.onAcceptedCallback = function() {
+            appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
+            appWindow.showStatusMessage(qsTr("Updated description."),3);
+            root.update();
+        }
+        inputDialog.onRejectedCallback = null;
+        inputDialog.open();
+    }
+
+    function paginationPrevClicked(){
+        root.txOffset -= root.txMax;
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function paginationNextClicked(){
+        root.txOffset += root.txMax;
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function paginationJump(pageNumber){
+        root.txOffset = root.txMax * Math.ceil(pageNumber - 1 || 0);
+        updateDisplay(root.txOffset, root.txMax);
+    }
+
+    function removeFromCollapsedList(hash){
+        root.txDataCollapsed = root.txDataCollapsed.filter(function(item) {
+            return item !== hash
+        });
+    }
+
+    function updateHistoryStatusMessage(){
+        if(root.txModelData.length <= 0){
+            root.historyStatusMessage = qsTr("No transaction history yet.");
+        } else if (root.txData.length <= 0){
+            root.historyStatusMessage = qsTr("No results.");
+        } else {
+            root.historyStatusMessage = qsTr("%1 transactions total, showing %2.").arg(root.txData.length).arg(txListViewModel.count) + translationManager.emptyString;
+        }
+    }
+
+    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
+        var tx_key = currentWallet.getTxKey(hash)
+        var tx_note = currentWallet.getUserNote(hash)
+        var rings = currentWallet.getRings(hash)
+        var address_label = subaddrIndex == 0 ? qsTr("Primary address") : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
+        var address = currentWallet.address(subaddrAccount, subaddrIndex)
+        if (rings)
+            rings = rings.replace(/\|/g, '\n')
+
+        informationPopup.title = qsTr("Transaction details");
+        informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label);
+        informationPopup.onCloseCallback = null
+        informationPopup.open();
+    }
+
+    function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
+        var address = TxUtils.destinationsToAddress(destinations);
+        if(address === undefined){
+            console.log('getProof: Error fetching address')
+            return;
+        }
+
+        var checked = (TxUtils.checkTxID(hash) && TxUtils.checkAddress(address, appWindow.persistentSettings.nettype));
+        if(!checked){
+            console.log('getProof: Error checking TxId and/or address');
+        }
+
+        console.log("getProof: Generate clicked: txid " + hash + ", address " + address);
+        middlePanel.getProofClicked(hash, address, '');
+    }
+
+    function toClipboard(text){
+        console.log("Copied to clipboard");
+        clipboard.setText(text);
+        appWindow.showStatusMessage(qsTr("Copied to clipboard"),3);
+    }
+
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label) {
+        var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
+            trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
+            trEnd = "</td></tr>";
+
+        return '<table border="0">'
+            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
+            + (address_label ? trStart + qsTr("Address label:") + trMiddle + address_label + trEnd : "")
+            + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
+            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
+            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
+            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
+            + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
+            + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
+            + "</table>"
+            + translationManager.emptyString;
+    }
+
+    function lookupPaymentID(paymentId) {
+        if (!addressBookModel)
+            return ""
+        var idx = addressBookModel.lookupPaymentID(paymentId)
+        if (idx < 0)
+            return ""
+        idx = addressBookModel.index(idx, 0)
+        return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
+    }
+
     FileDialog {
         id: writeCSVFileDialog
-        title: "Please choose a folder"
+        title: qsTr("Please choose a folder")
         selectFolder: true
         onRejected: {
             console.log("csv write canceled")
@@ -410,18 +1600,21 @@ Rectangle {
     }
 
     function onPageCompleted() {
-        if(currentWallet != null && typeof currentWallet.history !== "undefined" ) {
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
-            table.addressBookModel = currentWallet ? currentWallet.addressBookModel : null
-            //transactionTypeDropdown.update()
+        // setup date filter scope according to real transactions
+        if(appWindow.currentWallet != null){
+            root.model = appWindow.currentWallet.historyModel;
+            root.model.sortRole = TransactionHistoryModel.TransactionBlockHeightRole
+            root.model.sort(0, Qt.DescendingOrder);
+            fromDatePicker.currentDate = model.transactionHistory.firstDateTime
         }
 
-        priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.currentIndex = 0;
-        priorityDropdown.update();
+        root.reset();
+        root.refresh();
+        root.initialized = true;
     }
 
-    function update() {
-            currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
+    function onPageClosed(){
+        root.initialized = false;
+        root.reset();
     }
 }
