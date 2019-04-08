@@ -150,17 +150,8 @@ Rectangle {
                     color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
                     border.color: MoneroComponents.Style.grey
                 }
-            }
 
-            Timer {
-                // @TODO: Slider.onMoved{} is available in Qt > 5.9, use a hacky timer for now
-                id: userInactivitySliderTimer
-                interval: 1000; running: false; repeat: true
-                onTriggered: {
-                    if(persistentSettings.lockOnUserInActivityInterval != userInactivitySlider.value) {
-                        persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
-                    }
-                }
+                onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
             }
         }
 
