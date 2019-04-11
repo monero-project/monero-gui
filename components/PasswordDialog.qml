@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -63,7 +63,6 @@ Item {
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.enabled = false
-        show()
         root.visible = true;
         passwordInput.forceActiveFocus();
         passwordInput.text = ""

@@ -59,7 +59,6 @@ Item {
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.enabled = false
-        show();
         root.visible = true;
         passphaseInput1.text = "";
         passphaseInput2.text = "";
