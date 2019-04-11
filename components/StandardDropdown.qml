@@ -26,9 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
+import QtGraphicalEffects 1.0
 
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
 
 Item {
     id: dropdown
@@ -36,9 +38,9 @@ Item {
     property alias dataModel: repeater.model
     property string shadowPressedColor
     property string shadowReleasedColor
-    property string pressedColor
-    property string releasedColor
-    property string textColor: "#FFFFFF"
+    property string pressedColor: MoneroComponents.Style.appWindowBorderColor
+    property string releasedColor: MoneroComponents.Style.titleBarButtonHoverColor
+    property string textColor: MoneroComponents.Style.defaultFontColor
     property alias currentIndex: columnid.currentIndex
     property bool expanded: false
     property int dropdownHeight: 42
@@ -81,14 +83,14 @@ Item {
         height: dropdown.dropdownHeight
 
         Rectangle {
-            color: dropdown.colorHeaderBackground
+            color: "transparent"
             border.width: dropdown.headerBorder ? 1 : 0
             border.color: dropdown.colorBorder
             radius: 4
             anchors.fill: parent
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
@@ -97,7 +99,7 @@ Item {
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
-            color: "#FFFFFF"
+            color: dropdown.textColor
         }
 
         Item {
@@ -108,9 +110,18 @@ Item {
             width: 32 * scaleRatio
 
             Image {
+                id: dropdownIcon
                 anchors.centerIn: parent
-                source: "../images/whiteDropIndicator.png"
+                source: "qrc:///images/whiteDropIndicator.png"
+                visible: false
+            }
+
+            ColorOverlay {
+                source: dropdownIcon
+                anchors.fill: dropdownIcon
+                color: MoneroComponents.Style.defaultFontColor
                 rotation: dropdown.expanded ? 180  * scaleRatio : 0
+                opacity: 1
             }
         }
 
@@ -131,7 +142,6 @@ Item {
         clip: true
         height: dropdown.expanded ? columnid.height : 0
         color: dropdown.pressedColor
-        //radius: 4
 
         Rectangle {
             anchors.left: parent.left
@@ -180,7 +190,7 @@ Item {
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: col1Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
@@ -194,7 +204,7 @@ Item {
                         text: qsTr(column1) + translationManager.emptyString
                     }
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: col2Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right

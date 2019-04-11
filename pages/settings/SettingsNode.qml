@@ -26,10 +26,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
+
 import "../../components" as MoneroComponents
+import "../../components/effects" as MoneroEffects
 
 Rectangle{
     color: "transparent"
@@ -73,7 +76,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: "white"
+                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
                 width: 2
             }
 
@@ -93,21 +96,27 @@ Rectangle{
                     anchors.leftMargin: 16 * scaleRatio
                     anchors.verticalCenter: parent.verticalCenter
 
-                    Image{
+                    MoneroEffects.ImageMask {
                         height: 27
                         width: 27
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        source: "../../images/settings_local.png"
+                        fontAwesomeFallbackIcon: FontAwesome.shield
+                        fontAwesomeFallbackSize: 26
+                        image: "qrc:///images/settings_local.svg"
+
+                        color: MoneroComponents.Style.defaultFontColor
+                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     }
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     id: localNodeHeader
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     anchors.top: parent.top
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -173,7 +182,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: "white"
+                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
                 width: 2
             }
 
@@ -193,21 +202,26 @@ Rectangle{
                     anchors.leftMargin: 16 * scaleRatio
                     anchors.verticalCenter: parent.verticalCenter
 
-                    Image{
-                        height: 27
+                    MoneroEffects.ImageMask {
+                        height: 29
                         width: 22
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        source: "../../images/settings_remote.png"
+                        fontAwesomeFallbackIcon: FontAwesome.cloudDownload
+                        fontAwesomeFallbackSize: 26
+                        image: "qrc:///images/settings_remote.svg"
+                        color: MoneroComponents.Style.defaultFontColor
+                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     }
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     id: remoteNodeHeader
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14 * scaleRatio
                     anchors.top: parent.top
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
@@ -282,12 +296,6 @@ Rectangle{
             MoneroComponents.RemoteNodeEdit {
                 id: remoteNodeEdit
                 Layout.minimumWidth: 100 * scaleRatio
-
-                lineEditBackgroundColor: "transparent"
-                lineEditFontColor: "white"
-                lineEditFontBold: false
-                lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
-                labelFontSize: 14 * scaleRatio
                 placeholderFontSize: 15 * scaleRatio
 
                 daemonAddrLabelText: qsTr("Address")
@@ -436,14 +444,6 @@ Rectangle{
                         id: bootstrapNodeEdit
                         Layout.minimumWidth: 100 * scaleRatio
                         Layout.bottomMargin: 20 * scaleRatio
-    
-                        lineEditBackgroundColor: "transparent"
-                        lineEditFontColor: "white"
-                        lineEditBorderColor: MoneroComponents.Style.inputBorderColorActive
-                        placeholderFontSize: 15 * scaleRatio
-                        labelFontSize: 14 * scaleRatio
-                        lineEditFontBold: false
-                        lineEditFontSize: 15 * scaleRatio
 
                         daemonAddrLabelText: qsTr("Bootstrap Address")
                         daemonPortLabelText: qsTr("Bootstrap Port")

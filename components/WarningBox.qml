@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
@@ -13,7 +13,7 @@ Rectangle {
     Layout.fillWidth: true
     Layout.preferredHeight: warningLayout.height
 
-    color: "#09FFFFFF"
+    color: MoneroComponents.Style.titleBarButtonHoverColor
     radius: 4
     border.color: MoneroComponents.Style.inputBorderColorInActive
     border.width: 1
@@ -34,7 +34,7 @@ Rectangle {
             Layout.leftMargin: 18 * scaleRatio
             Layout.topMargin: 12 * scaleRatio
             Layout.bottomMargin: 12 * scaleRatio
-            source: "../images/warning.png"
+            source: "qrc:///images/warning.png"
         }
 
         TextArea {
@@ -55,8 +55,8 @@ Rectangle {
             readOnly: true
             onLinkActivated: root.linkActivated();
 
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectedTextColor: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
         }
     }
 }

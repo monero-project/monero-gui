@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
@@ -49,7 +49,7 @@ Item {
         inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
-        titleBar.enabled = false
+        titleBar.state = "essentials"
         show()
         root.visible = true;
         input.focus = true;
@@ -60,7 +60,7 @@ Item {
         inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
-        titleBar.enabled = true
+        titleBar.state = "default"
         root.visible = false;
     }
 
@@ -101,14 +101,14 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.color: MoneroComponents.Style.inputBorderColorActive
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
                 }
 
                 Keys.onReturnPressed: {

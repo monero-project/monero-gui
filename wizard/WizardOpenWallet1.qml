@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
@@ -92,7 +92,7 @@ Rectangle {
                 columnSpacing: 20 * scaleRatio
                 columns: 2
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("Most recent wallets") + translationManager.emptyString
                     font.family: MoneroComponents.Style.fontLight.name
                     font.pixelSize: 16 * scaleRatio
@@ -145,7 +145,7 @@ Rectangle {
                                     anchors.horizontalCenter: parent.horizontalCenter
                                     anchors.verticalCenter: parent.verticalCenter
                                     fillMode: Image.PreserveAspectFit
-                                    source: "../images/open-wallet-from-file.png"
+                                    source: "qrc:///images/open-wallet-from-file.png"
                                 }
                             }
 
@@ -161,8 +161,8 @@ Rectangle {
                                     color: MoneroComponents.Style.defaultFontColor
                                     font.pixelSize: 18 * scaleRatio
 
-                                    selectionColor: MoneroComponents.Style.dimmedFontColor
-                                    selectedTextColor: MoneroComponents.Style.defaultFontColor
+                                    selectionColor: MoneroComponents.Style.textSelectionColor
+                                    selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                                     selectByMouse: false
                                     wrapMode: Text.WordWrap

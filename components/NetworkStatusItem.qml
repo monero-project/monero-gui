@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import moneroComponents.Wallet 1.0
@@ -79,11 +79,11 @@ Rectangle {
                 anchors.rightMargin: !appWindow.isMining ? 11 * scaleRatio : 0
                 source: {
                     if(appWindow.isMining) {
-                       return "../images/miningxmr.png"
+                       return "qrc:///images/miningxmr.png"
                     } else if(item.connected == Wallet.ConnectionStatus_Connected) {
-                        return "../images/lightning.png"
+                        return "qrc:///images/lightning.png"
                     } else {
-                        return "../images/lightning-white.png"
+                        return "qrc:///images/lightning-white.png"
                     }
                 }
                 MouseArea {
@@ -105,7 +105,7 @@ Rectangle {
             height: 40 * scaleRatio
             width: 260 * scaleRatio
 
-            Text {
+            MoneroComponents.TextPlain {
                 id: statusText
                 anchors.left: parent.left
                 anchors.top: parent.top
@@ -113,20 +113,24 @@ Rectangle {
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.bold: true
                 font.pixelSize: 13 * scaleRatio
-                color: "white"
-                opacity: 0.5
+                color: MoneroComponents.Style.dimmedFontColor
+                opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.5
                 text: qsTr("Network status") + translationManager.emptyString
+                themeTransition: false
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 id: statusTextVal
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 14
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.pixelSize: 20 * scaleRatio
-                color: "white"
+                color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
+                opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.7
+                themeTransition: false
+
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor

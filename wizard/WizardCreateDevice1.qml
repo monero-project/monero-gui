@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
@@ -156,8 +156,6 @@ Rectangle {
                         dataModel: deviceNameModel
                         Layout.fillWidth: true
                         Layout.topMargin: 6 * scaleRatio
-                        releasedColor: "#363636"
-                        pressedColor: "#202020"
                     }
                 }
             }
@@ -171,8 +169,8 @@ Rectangle {
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16 * scaleRatio
 
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 selectByMouse: true
                 wrapMode: Text.WordWrap

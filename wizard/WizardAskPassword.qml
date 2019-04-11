@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
@@ -113,7 +113,7 @@ ColumnLayout {
             font.pixelSize: 13 * scaleRatio
             font.bold: true
             color: MoneroComponents.Style.defaultFontColor
-            height:18 * scaleRatio
+            height: 18 * scaleRatio
             passwordCharacter: "*"
         }
 
@@ -123,7 +123,7 @@ ColumnLayout {
             Layout.preferredHeight: 8
 
             radius: 8 * scaleRatio
-            color: "#333333" // progressbar bg
+            color: MoneroComponents.Style.progressBarBackgroundColor
 
             Rectangle {
                 id: fillRect
@@ -134,17 +134,16 @@ ColumnLayout {
                 property int maxWidth: bar.width * scaleRatio
                 width: (maxWidth * root.passwordFill) / 100
                 radius: 8
-                color: "#FA6800"
+                color: MoneroComponents.Style.orange
             }
 
             Rectangle {
-                color:"#333"
+                color: MoneroComponents.Style.defaultFontColor
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.leftMargin: 8 * scaleRatio
             }
         }
-
     }
 
     ColumnLayout {
@@ -179,21 +178,21 @@ ColumnLayout {
             font.family: MoneroComponents.Style.fontLight.name
             font.pixelSize: 15 * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectedTextColor: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             text: walletOptionsPassword
 
             background: Rectangle {
                 radius: 4
-                border.color: Qt.rgba(255, 255, 255, 0.35)
+                border.color: MoneroComponents.Style.inputBorderColorActive
                 border.width: 1
                 color: "transparent"
 
                 Image {
                     width: 12 * scaleRatio
                     height: 16 * scaleRatio
-                    source: "../images/lockIcon.png"
+                    source: "qrc:///images/lockIcon.png"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
                     anchors.rightMargin: 20
@@ -234,21 +233,21 @@ ColumnLayout {
             font.family: MoneroComponents.Style.fontLight.name
             font.pixelSize: 15 * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectedTextColor: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             text: walletOptionsPassword
 
             background: Rectangle {
                 radius: 4
-                border.color: Qt.rgba(255, 255, 255, 0.35)
+                border.color: MoneroComponents.Style.inputBorderColorActive
                 border.width: 1
                 color: "transparent"
 
                 Image {
                     width: 12
                     height: 16
-                    source: "../images/lockIcon.png"
+                    source: "qrc:///images/lockIcon.png"
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
                     anchors.rightMargin: 20

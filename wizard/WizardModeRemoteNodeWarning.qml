@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
@@ -66,8 +66,10 @@ Rectangle {
                 Layout.topMargin: 10 * scaleRatio
                 Layout.fillWidth: true
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.") + translationManager.emptyString
+                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
+                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14 * scaleRatio
                     Layout.fillWidth: true
@@ -77,8 +79,10 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("Remote nodes are useful if you are not able/don't want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
+                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
+                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8 * scaleRatio
                     Layout.fillWidth: true
@@ -88,13 +92,13 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                MoneroComponents.WarningBox{
+                MoneroComponents.WarningBox {
                     Layout.topMargin: 14 * scaleRatio
                     Layout.bottomMargin: 6 * scaleRatio
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("For enhanced node performance you may specify your region:") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8 * scaleRatio
@@ -117,10 +121,6 @@ Rectangle {
                             id: regionDropdown
                             Layout.fillWidth: true
                             dataModel: regionModel
-                            shadowReleasedColor: "#FF4304"
-                            shadowPressedColor: "#B32D00"
-                            releasedColor: "#363636"
-                            pressedColor: "#202020"
                             currentIndex: 0
 
                             onChanged: {

@@ -26,13 +26,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
+
 import moneroComponents.Clipboard 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
@@ -113,8 +115,14 @@ Rectangle {
                             anchors.left: parent.left
                             anchors.top: parent.top
                             height: 1
-                            color: "#404040"
+                            color: MoneroComponents.Style.appWindowBorderColor
                             visible: index !== 0
+
+                            MoneroEffects.ColorTransition {
+                                targetObj: parent
+                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                            }
                         }
 
                         Rectangle {
@@ -125,18 +133,19 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === appWindow.current_subaddress_table_index ? "white" : "#757575"
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6 * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
                                 text: "#" + index
+                                themeTransition: false
                             }
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: "#a5a5a5"
+                                color: MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6 * scaleRatio
@@ -145,42 +154,42 @@ Rectangle {
                                 text: label
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - nameLabel.x - 1
+                                themeTransition: false
                             }
 
                             MoneroComponents.Label {
                                 id: addressLabel
-                                color: "white"
+                                color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
                                 anchors.leftMargin: (mainLayout.width < 510 ? -130 : -190) * scaleRatio
                                 fontSize: 14 * scaleRatio
                                 fontBold: true
                                 text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 6 : 10)
+                                themeTransition: false
                             }
 
                             MouseArea {
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onEntered: {
-                                    tableItem2.color = "#26FFFFFF"
-                                }
-                                onExited: {
-                                    tableItem2.color = "transparent"
-                                }
-                                onClicked: {
-                                    subaddressListView.currentIndex = index;
-                                }
+                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
+                                onExited: tableItem2.color = "transparent"
+                                onClicked: subaddressListView.currentIndex = index;
                             }
                         }
 
                         MoneroComponents.IconButton {
                             id: renameButton
-                            imageSource: "../images/editIcon.png"
+                            image: "qrc:///images/edit.svg"
+                            color: MoneroComponents.Style.defaultFontColor
+                            opacity: 0.5
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
                             anchors.rightMargin: 30 * scaleRatio
                             anchors.topMargin: 1 * scaleRatio
+                            width: 23
+                            height: 21
                             visible: index !== 0
 
                             onClicked: {
@@ -190,10 +199,13 @@ Rectangle {
 
                         MoneroComponents.IconButton {
                             id: copyButton
-                            imageSource: "../images/dropdownCopy.png"
+                            image: "qrc:///images/copy.svg"
+                            color: MoneroComponents.Style.defaultFontColor
+                            opacity: 0.5
                             anchors.verticalCenter: parent.verticalCenter
-                            anchors.top: undefined
                             anchors.right: parent.right
+                            width: 16
+                            height: 21
 
                             onClicked: {
                                 console.log("Address copied to clipboard");
@@ -214,9 +226,15 @@ Rectangle {
             }
 
             Rectangle {
-                color: "#404040"
+                color: MoneroComponents.Style.appWindowBorderColor
                 Layout.fillWidth: true
                 height: 1
+
+                MoneroEffects.ColorTransition {
+                    targetObj: parent
+                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                }
             }
 
             MoneroComponents.CheckBox {
@@ -249,7 +267,7 @@ Rectangle {
 
             Rectangle {
                 id: qrContainer
-                color: "white"
+                color: MoneroComponents.Style.blackTheme ? "white" : "transparent"
                 Layout.fillWidth: true
                 Layout.maximumWidth: parent.qrSize
                 Layout.preferredHeight: width
@@ -276,12 +294,12 @@ Rectangle {
                 spacing: parent.spacing
 
                 MoneroComponents.StandardButton {
-                    rightIcon: "../images/download-white.png"
+                    rightIcon: "qrc:///images/download-white.png"
                     onClicked: qrFileDialog.open()
                 }
 
                 MoneroComponents.StandardButton {
-                    rightIcon: "../images/external-link-white.png"
+                    rightIcon: "qrc:///images/external-link-white.png"
                     onClicked: {
                         clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
                         appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);

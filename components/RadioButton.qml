@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -41,8 +41,8 @@ Item {
     height: 26 * scaleRatio
     width: layout.width
     // legacy properties
-    property var checkedColor: "white"
-    property var borderColor: checked ? Qt.rgba(1, 1, 1, 0.35) : Qt.rgba(1, 1, 1, 0.25)
+    property var checkedColor: MoneroComponents.Style.blackTheme ? "white" : "#666666"
+    property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
 
     function toggle(){
         radioButton.checked = !radioButton.checked
@@ -72,7 +72,7 @@ Item {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: label
             Layout.leftMargin: (!isMobile ? 10 : 8) * scaleRatio
             color: MoneroComponents.Style.defaultFontColor

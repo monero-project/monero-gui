@@ -27,18 +27,20 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQml 2.0
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.2
+import QtQuick.Dialogs 1.2
 import moneroComponents.Wallet 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Windows.js" as Windows
 import "../js/Utils.js" as Utils
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
 import "../pages"
 
 Rectangle {
@@ -119,11 +121,6 @@ Rectangle {
         }
     }
 
-    Image {
-        opacity: 1.0
-        anchors.fill: parent
-        source: "../images/middlePanelBg.jpg"
-    }
 
     Rectangle {
         id: wizardStateView
@@ -246,6 +243,19 @@ Rectangle {
                 PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.childrenRect.height + wizardController.flickableHeightMargin }
             }
         ]
+
+        MoneroEffects.GradientBackground {
+            anchors.fill: parent
+            fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+            initialStartColor: MoneroComponents.Style.wizardBackgroundGradientStart
+            initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+            blackColorStart: MoneroComponents.Style._b_wizardBackgroundGradientStart
+            blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+            whiteColorStart: MoneroComponents.Style._w_wizardBackgroundGradientStart
+            whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+            start: Qt.point(0, 0)
+            end: Qt.point(height, width)
+        }
 
         Flickable {
             id: wizardFlickable

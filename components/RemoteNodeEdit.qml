@@ -28,7 +28,7 @@
 
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
-import QtQuick 2.2
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../js/Utils.js" as Utils
@@ -47,16 +47,16 @@ GridLayout {
     // the wizards get redesigned to the black-theme
     property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
-    property int placeholderFontSize: 18 * scaleRatio
+    property int placeholderFontSize: 15 * scaleRatio
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
+    property int labelFontSize: 14 * scaleRatio
 
-    property string lineEditBorderColor: Qt.rgba(0, 0, 0, 0.15)
-    property string lineEditBackgroundColor: "white"
-    property string lineEditFontColor: "black"
-    property int lineEditFontSize: 18 * scaleRatio
-    property int labelFontSize: 16 * scaleRatio
-    property bool lineEditFontBold: true
+    property string lineEditBackgroundColor: "transparent"
+    property string lineEditBorderColor: MoneroComponents.Style.inputBorderColorInActive
+    property string lineEditFontColor: MoneroComponents.Style.defaultFontColor
+    property bool lineEditFontBold: false
+    property int lineEditFontSize: 15 * scaleRatio
 
     signal editingFinished()
     signal textChanged()

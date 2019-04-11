@@ -26,10 +26,12 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 
-import "../components" as MoneroComponents
+import "." as MoneroComponents
+import "./effects/" as MoneroEffects
 
 Item {
     id: inlineButton
@@ -43,9 +45,9 @@ Item {
     property string pressedColor: "#FF4304"
     property string releasedColor: "#FF6C3C"
     property string icon: ""
-    property string textColor: "black"
+    property string textColor: MoneroComponents.Style.inlineButtonTextColor
     property int fontSize: small ? 14 * scaleRatio : 16 * scaleRatio
-    property int rectHeight: small ? 24 * scaleRatio : 28 * scaleRatio
+    property int rectHeight: small ? 24 * scaleRatio : 24 * scaleRatio
     property int rectHMargin: small ? 16 * scaleRatio : 22 * scaleRatio
     property alias text: inlineText.text
     property alias fontPixelSize: inlineText.font.pixelSize
@@ -61,16 +63,16 @@ Item {
 
     Rectangle{
         id: rect
-        color: MoneroComponents.Style.buttonBackgroundColorDisabled
-        border.color: "black"
-        height: 28 * scaleRatio
-        width: inlineText.text ? (inlineText.width + 22) * scaleRatio : inlineButton.icon ? (inlineImage.width + 16) * scaleRatio : rect.height
+        color: MoneroComponents.Style.buttonInlineBackgroundColor
+        height: 24 * scaleRatio
+        width: inlineText.text ? (inlineText.width + 16) * scaleRatio : inlineButton.icon ? (inlineImage.width + 16) * scaleRatio : rect.height
         radius: 4
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
+        anchors.rightMargin: 4 * scaleRatio
 
-        Text {
+        MoneroComponents.TextPlain {
             id: inlineText
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
@@ -78,6 +80,13 @@ Item {
             color: inlineButton.textColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
+            themeTransition: false
+
+            MoneroEffects.ColorTransition {
+                targetObj: inlineText
+                blackColor: MoneroComponents.Style._b_inlineButtonTextColor
+                whiteColor: MoneroComponents.Style._w_inlineButtonTextColor
+            }
         }
 
         Image {
@@ -102,6 +111,18 @@ Item {
                 rect.color = buttonColor ? buttonColor : "#808080";
             }
         }
+    }
+
+    DropShadow {
+        visible: !MoneroComponents.Style.blackTheme
+        anchors.fill: rect
+        horizontalOffset: 2
+        verticalOffset: 2
+        radius: 7.0
+        samples: 10
+        color: "#1B000000"
+        cached: true
+        source: rect
     }
 
     Keys.onSpacePressed: doClick()

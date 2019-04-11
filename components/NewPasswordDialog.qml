@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
@@ -52,7 +52,9 @@ Item {
         inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
-        titleBar.enabled = false
+        titleBar.state = "essentials"
+
+        show();
         root.visible = true;
         passwordInput1.text = "";
         passwordInput2.text = "";
@@ -63,7 +65,7 @@ Item {
         inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
-        titleBar.enabled = true
+        titleBar.state = "default"
         root.visible = false;
         closeCallback();
     }
@@ -123,22 +125,22 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
                 KeyNavigation.tab: passwordInput2
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
                         width: 26 * scaleRatio
                         height: 26 * scaleRatio
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
+                        source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 20
@@ -202,24 +204,25 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
                         width: 26 * scaleRatio
                         height: 26 * scaleRatio
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
+                        source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 20
+
                         MouseArea {
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor

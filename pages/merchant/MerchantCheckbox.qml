@@ -1,7 +1,8 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
+import "../../components" as MoneroComponents
 
 RowLayout {
     id: root
@@ -22,16 +23,17 @@ RowLayout {
             id: imageChecked
             visible: root.checked
             anchors.centerIn: parent
-            source: "../../images/uncheckedIcon.png"
+            source: "qrc:///images/uncheckedIcon.png"
         }
     }
 
-    Text {
+    MoneroComponents.TextPlain {
         id: content
         font.pixelSize: 14 * scaleRatio
         font.bold: false
         color: "white"
         text: ""
+        themeTransition: false
     }
 
     MouseArea {

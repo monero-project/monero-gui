@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -50,8 +50,7 @@ Item {
     implicitHeight: height
     implicitWidth: width
 
-    function doClick() {
-        // Android workaround
+    function doClick(){
         releaseFocus();
         clicked();
     }
@@ -64,6 +63,7 @@ Item {
 
         state: button.enabled ? "active" : "disabled"
         Component.onCompleted: state = state
+
         states: [
             State {
                 name: "hover"
@@ -90,7 +90,9 @@ Item {
                 }
             }
         ]
+
         transitions: Transition {
+            enabled: appWindow.themeTransition
             ColorAnimation { duration: 100 }
         }
     }
@@ -101,15 +103,16 @@ Item {
         spacing: 11 * scaleRatio
         anchors.centerIn: parent
 
-        Text {
+        MoneroComponents.TextPlain {
             id: label
             font.family: MoneroComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
+            themeTransition: false
 
-            Text {
+            MoneroComponents.TextPlain {
                 anchors.centerIn: parent
                 color: button.textColor
                 font.bold: label.font.bold
@@ -117,6 +120,7 @@ Item {
                 font.pixelSize: label.font.pixelSize - 1
                 text: label.text
                 opacity: buttonArea.pressed ? 1 : 0
+                themeTransition: false
             }
         }
 

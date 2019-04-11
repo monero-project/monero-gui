@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -100,7 +100,7 @@ Rectangle {
             text: qsTr("Shared RingDB") + translationManager.emptyString
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             text: qsTr("This page allows you to interact with the shared ring database. " +
                        "This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.") + translationManager.emptyString
             wrapMode: Text.Wrap
@@ -134,7 +134,7 @@ Rectangle {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             textFormat: Text.RichText
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
@@ -272,7 +272,7 @@ Rectangle {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             textFormat: Text.RichText
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 14 * scaleRatio
@@ -374,8 +374,6 @@ Rectangle {
                 id: segregatePreForkOutputs
                 checked: persistentSettings.segregatePreForkOutputs
                 text: qsTr("I intend to spend on key-reusing fork(s)") + translationManager.emptyString
-                checkedIcon: "../images/checkedIcon-black.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 onClicked: {
                     persistentSettings.segregatePreForkOutputs = segregatePreForkOutputs.checked
                     if (appWindow.currentWallet) {
@@ -388,8 +386,6 @@ Rectangle {
                 id: keyReuseMitigation2
                 checked: persistentSettings.keyReuseMitigation2
                 text: qsTr("I might want to spend on key-reusing fork(s)") + translationManager.emptyString
-                checkedIcon: "../images/checkedIcon-black.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
                 onClicked: {
                     persistentSettings.keyReuseMitigation2 = keyReuseMitigation2.checked
                     if (appWindow.currentWallet) {
@@ -402,23 +398,24 @@ Rectangle {
                 id: setRingRelative
                 checked: true
                 text: qsTr("Relative") + translationManager.emptyString
-                checkedIcon: "../images/checkedIcon-black.png"
-                uncheckedIcon: "../images/uncheckedIcon.png"
             }
         }
 
-        RowLayout {
+        GridLayout {
             id: segregationHeightRow
-            Layout.topMargin: 17 * scaleRatio
             Layout.fillWidth: true
+            Layout.topMargin: 17 * scaleRatio
+            columns: (isMobile) ?  1 : 2
+            columnSpacing: 32 * scaleRatio
 
             MoneroComponents.LineEdit {
                 id: segregationHeightLine
+                property bool edited: false
                 Layout.fillWidth: true
 
                 placeholderFontSize: 16 * scaleRatio
                 labelFontSize: 14 * scaleRatio
-                labelText: qsTr("Segregation height:") + translationManager.emptyString
+                labelText: qsTr("Set segregation height:") + translationManager.emptyString
                 validator: IntValidator { bottom: 0 }
                 readOnly: false
                 onEditingFinished: {
@@ -426,7 +423,14 @@ Rectangle {
                     if (appWindow.currentWallet) {
                         appWindow.currentWallet.segregationHeight(segregationHeightLine.text)
                     }
+
+                    // @TODO: LineEdit should visually be able show that an action
+                    // has been completed due to modification of the text
                 }
+            }
+
+            Item {
+                Layout.fillWidth: true
             }
         }
     }

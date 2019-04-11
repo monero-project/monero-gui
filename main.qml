@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.2
+import QtQuick 2.9
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
@@ -39,6 +39,8 @@ import moneroComponents.NetworkType 1.0
 
 import "components"
 import "components" as MoneroComponents
+import "components/effects" as MoneroEffects
+import "pages/merchant" as MoneroMerchant
 import "wizard"
 import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
@@ -87,6 +89,8 @@ ApplicationWindow {
     property alias viewState: rootItem.state
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
+    property int appEpoch: Math.floor((new Date).getTime() / 1000)
+    property bool themeTransition: false
 
     property string remoteNodeService: {
         // support user-defined remote node aggregators
@@ -1019,12 +1023,22 @@ ApplicationWindow {
             splash.messageText = message
             splash.heightProgressText = ""
         }
-        splash.show()
+
+        leftPanel.enabled = false;
+        middlePanel.enabled = false;
+        titleBar.enabled = false;
+        inactiveOverlay.visible = true;
+        splash.show();
     }
 
     function hideProcessingSplash() {
         console.log("Hiding processing splash")
-        splash.close()
+        splash.close();
+
+        leftPanel.enabled = true
+        middlePanel.enabled = true
+        titleBar.enabled = true
+        inactiveOverlay.visible = false;
     }
 
     // close wallet and show wizard
@@ -1056,9 +1070,9 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-//    width: screenWidth //rightPanelExpanded ? 1269 : 1269 - 300
-//    height: 900 //300//maxWindowHeight;
-    color: "#FFFFFF"
+    width: screenWidth > 980 ? 980 : 800
+    height: screenHeight > maxWindowHeight ? maxWindowHeight : 700
+    color: MoneroComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
 
@@ -1163,6 +1177,11 @@ ApplicationWindow {
         property string remoteNodeService: ""
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool showPid: false
+        property bool blackTheme: false
+
+        Component.onCompleted: {
+            MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+        }
     }
 
     // Information dialog
@@ -1371,15 +1390,9 @@ ApplicationWindow {
                 PropertyChanges { target: rightPanel; visible: false }
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: wizard; visible: true }
-                PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
-                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-//                PropertyChanges { target: frameArea; blocked: true }
                 PropertyChanges { target: mobileHeader; visible: false }
-                PropertyChanges { target: titleBar; basicButtonVisible: false }
-                PropertyChanges { target: titleBar; showMaximizeButton: true }
-                PropertyChanges { target: titleBar; visible: true }
-                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; state: "essentials" }
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
@@ -1387,14 +1400,8 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
-                PropertyChanges { target: appWindow; width: (screenWidth < 969 || isAndroid || isIOS)? screenWidth : 969 } //rightPanelExpanded ? 1269 : 1269 - 300;
-                PropertyChanges { target: appWindow; height: maxWindowHeight; }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: titleBar; showMaximizeButton: true }
-//                PropertyChanges { target: frameArea; blocked: true }
-                PropertyChanges { target: titleBar; visible: true }
-//                PropertyChanges { target: titleBar; y: 0 }
-                PropertyChanges { target: titleBar; title: qsTr("Monero") + translationManager.emptyString }
+                PropertyChanges { target: titleBar; state: "default" }
                 PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
@@ -1552,12 +1559,6 @@ ApplicationWindow {
             state: "Transfer"
         }
 
-        TipItem {
-            id: tipItem
-            text: qsTr("send to the same destination") + translationManager.emptyString
-            visible: false
-        }
-
         SequentialAnimation {
             id: goToBasicAnimation
 //            PropertyAction {
@@ -1674,21 +1675,20 @@ ApplicationWindow {
             id: resizeArea
             enabled: persistentSettings.customDecorations
             hoverEnabled: true
+            cursorShape: persistentSettings.customDecorations ? Qt.PointingHandCursor : Qt.ArrowCursor
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            height: 30
-            width: 30
+            height: 34
+            width: 34
 
-            Rectangle {
-                anchors.fill: parent
-                color: parent.containsMouse || parent.pressed ? "#111111" : "transparent"
-            }
-
-            Image {
+            MoneroEffects.ImageMask {
                 anchors.centerIn: parent
                 visible: persistentSettings.customDecorations
-                source: parent.containsMouse || parent.pressed ? "images/resizeHovered.png" :
-                                                                 "images/resize.png"
+                image: "qrc:///images/resize.png"
+                color: MoneroComponents.Style.defaultFontColor
+                width: 12
+                height: 12
+                opacity: (parent.containsMouse || parent.pressed) ? 0.5 : 1.0
             }
 
             property var previousPosition
@@ -1717,19 +1717,12 @@ ApplicationWindow {
 
         TitleBar {
             id: titleBar
-            x: 0
-            y: 0
+            visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
             anchors.left: parent.left
             anchors.right: parent.right
-            showMinimizeButton: true
-            showMaximizeButton: true
-            showWhatIsButton: false
-            showMoneroLogo: true
             onCloseClicked: appWindow.close();
-            onMaximizeClicked: {
-                appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized :
-                                                                                    Window.Windowed
-            }
+            onLanguageClicked: appWindow.toggleLanguageView();
+            onMaximizeClicked: appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized : Window.Windowed
             onMinimizeClicked: appWindow.visibility = Window.Minimized
             onGoToBasicVersion: {
                 if (yes) {
@@ -1740,25 +1733,16 @@ ApplicationWindow {
                     goToProAnimation.start()
                 }
             }
+        }
 
-            MouseArea {
-                enabled: persistentSettings.customDecorations
-                property var previousPosition
-                anchors.fill: parent
-                propagateComposedEvents: true
-                onPressed: previousPosition = globalCursor.getPosition()
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var pos = globalCursor.getPosition()
-                        var dx = pos.x - previousPosition.x
-                        var dy = pos.y - previousPosition.y
-
-                        appWindow.x += dx
-                        appWindow.y += dy
-                        previousPosition = pos
-                    }
-                }
-            }
+        MoneroMerchant.MerchantTitlebar {
+            id: titleBarOrange
+            visible: middlePanel.state === "Merchant"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            onCloseClicked: appWindow.close();
+            onMaximizeClicked: appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized : Window.Windowed
+            onMinimizeClicked: appWindow.visibility = Window.Minimized
         }
 
         // new ToolTip
@@ -1776,10 +1760,10 @@ ApplicationWindow {
                 anchors.top: parent.bottom
                 anchors.right: parent.right
                 anchors.rightMargin: 5
-                source: "../images/tip.png"
+                source: "qrc:///images/tip.png"
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 id: content
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 6
@@ -1821,6 +1805,15 @@ ApplicationWindow {
         id: userInActivityTimer
         interval: 2000; running: false; repeat: true
         onTriggered: checkInUserActivity()
+    }
+
+    Timer {
+        // enables theme transition animations after 500ms
+        id: appThemeTransition
+        running: true
+        repeat: false
+        interval: 500
+        onTriggered: appWindow.themeTransition = true;
     }
 
     function checkSimpleModeConnection(){
@@ -1875,14 +1868,15 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         width: statusMessageText.contentWidth + 20 * scaleRatio
         anchors.horizontalCenter: parent.horizontalCenter
-        color: "black"
+        color: MoneroComponents.Style.blackTheme ? "black" : "white"
         height: 40 * scaleRatio
-        Text {
+        MoneroComponents.TextPlain {
             id: statusMessageText
             anchors.fill: parent
             anchors.margins: 10 * scaleRatio
             font.pixelSize: 14 * scaleRatio
-            color: "white"
+            color: MoneroComponents.Style.defaultFontColor
+            themeTransition: false
         }
     }
 
@@ -1979,15 +1973,6 @@ ApplicationWindow {
         onTriggered: checkUpdates()
     }
 
-    function titlebarToggleOrange(flag){
-        // toggle titlebar orange style
-        if(flag !== undefined){
-            titleBar.orange = flag;
-        } else {
-            titleBar.orange = !titleBar.orange;
-        }
-    }
-
     function releaseFocus() {
         // Workaround to release focus from textfield when scrolling (https://bugreports.qt.io/browse/QTBUG-34867)
         if(isAndroid) {
@@ -2066,13 +2051,84 @@ ApplicationWindow {
         }
     }
 
-    // background gradient
     Rectangle {
         id: inactiveOverlay
         visible: false
         anchors.fill: parent
-        color: "black"
-        opacity: 0.8
+        anchors.topMargin: titleBar.height
+        color: MoneroComponents.Style.blackTheme ? "black" : "white"
+        opacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.9
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: "black"
+            whiteColor: "white"
+        }
+    }
+
+    // borders on white theme + linux
+    Rectangle {
+        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        z: parent.z + 1
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 1
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
+    }
+
+    Rectangle {
+        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        z: parent.z + 1
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: 1
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
+    }
+
+    Rectangle {
+        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        z: parent.z + 1
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.left: parent.left
+        height: 1
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
+    }
+
+    Rectangle {
+        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        z: parent.z + 1
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        height: 1
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
     }
 
 // @TODO: QML type 'Drawer' has issues with buildbot; debug after Qt 5.9 migration

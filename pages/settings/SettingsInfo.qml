@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
@@ -71,6 +71,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 font.pixelSize: 14 * scaleRatio
+                color: MoneroComponents.Style.dimmedFontColor
                 text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
             }
 
@@ -100,6 +101,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 font.pixelSize: 14 * scaleRatio
+                color: MoneroComponents.Style.dimmedFontColor
                 text: Version.GUI_MONERO_VERSION + translationManager.emptyString
             }
 
@@ -130,6 +132,7 @@ Rectangle {
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 Layout.maximumWidth: 360 * scaleRatio
+                color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14 * scaleRatio
                 text: {
                     var wallet_path = walletPath();
@@ -168,8 +171,8 @@ Rectangle {
                 id: restoreHeightText
                 Layout.fillWidth: true
                 textFormat: Text.RichText
+                color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14 * scaleRatio
-                font.bold: true
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
                 text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (Click to change)</a>") + translationManager.emptyString
                 onLinkActivated: {
@@ -255,6 +258,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14 * scaleRatio
                 text: walletLogPath
             }
@@ -285,8 +289,40 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14 * scaleRatio
                 text: walletModeString
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2 * scaleRatio
+                Layout.bottomMargin: 2 * scaleRatio
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                height: 1
+                Layout.topMargin: 2 * scaleRatio
+                Layout.bottomMargin: 2 * scaleRatio
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                font.pixelSize: 14 * scaleRatio
+                text: qsTr("Graphics mode: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14 * scaleRatio
+                text: isOpenGL ? "OpenGL" : "Low graphics mode"
             }
         }
 
@@ -311,6 +347,7 @@ Rectangle {
 
                 data += "\nWallet log path: " + walletLogPath;
                 data += "\nWallet mode: " + walletModeString;
+                data += "\nGraphics: " + isOpenGL ? "OpenGL" : "Low graphics mode";
 
                 console.log("Copied to clipboard");
                 clipboard.setText(data);

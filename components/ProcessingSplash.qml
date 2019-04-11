@@ -26,16 +26,18 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 
+import "../components" as MoneroComponents
+
 Rectangle {
     id: root
-    color: "white"
+    color: MoneroComponents.Style.blackTheme ? "white" : "transparent"
     visible: false
-    z:11
+    z: 11
     property alias messageText: messageTitle.text
     property alias heightProgressText : heightProgress.text
 
@@ -61,12 +63,14 @@ Rectangle {
         anchors.leftMargin: 30 * scaleRatio
         anchors.rightMargin: 30 * scaleRatio
 
+        spacing: 12
+
         BusyIndicator {
             running: parent.visible
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: messageTitle
             text: "Please wait..."
             font {
@@ -75,10 +79,12 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             Layout.fillWidth: true
+            themeTransition: false
+            color: "black"
         }
 
 
-        Text {
+        MoneroComponents.TextPlain {
             id: heightProgress
             font {
                 pixelSize: 18 * scaleRatio
@@ -86,6 +92,8 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             Layout.fillWidth: true
+            themeTransition: false
+            color: "black"
         }
     }
 }

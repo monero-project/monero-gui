@@ -29,6 +29,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
@@ -36,6 +37,8 @@ import moneroComponents.TransactionInfo 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import moneroComponents.Clipboard 1.0
 import FontAwesome 1.0
+
+import "../components/effects/" as MoneroEffects
 import "../components" as MoneroComponents
 import "../js/Utils.js" as Utils
 import "../js/TxUtils.js" as TxUtils
@@ -96,7 +99,7 @@ Rectangle {
                 Layout.preferredHeight: 15
                 spacing: 8 * scaleRatio
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.alignment: Qt.AlignVCenter
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
@@ -113,12 +116,16 @@ Rectangle {
                     }
                 }
 
-                Image {
+                MoneroEffects.ImageMask {
+                    id: sortCollapsedIcon
                     Layout.alignment: Qt.AlignVCenter
                     height: 8 * scaleRatio
                     width: 12 * scaleRatio
-                    source: "../images/whiteDropIndicator.png"
-                    rotation: parent.collapsed ? 0 : 180
+                    image: "qrc:///images/whiteDropIndicator.png"
+                    fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                    fontAwesomeFallbackSize: 14
+                    rotation: sortAndFilter.collapsed ? 0 : 180
+                    color: MoneroComponents.Style.defaultFontColor
 
                     MouseArea {
                         anchors.fill: parent
@@ -215,7 +222,7 @@ Rectangle {
                 Layout.preferredWidth: childrenRect.width + 38 * scaleRatio
                 Layout.preferredHeight: 20
 
-                Text {
+                MoneroComponents.TextPlain {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
                     text: qsTr("Sort by") + ":"
@@ -235,21 +242,25 @@ Rectangle {
                     clip: true
                     anchors.fill: parent
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: sortBlockheightText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
                         text: qsTr("Blockheight") + translationManager.emptyString
                         color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
+                        themeTransition: false
                     }
 
-                    Image {
+                    MoneroEffects.ImageMask {
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
                         visible: root.sortBy === "blockheight" ? true : false
-                        opacity: root.sortBy === "blockheight" ? 1 : 0.6
-                        source: "../images/whiteDropIndicator.png"
+                        opacity: root.sortBy === "blockheight" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
                         rotation: {
                             if(root.sortBy === "blockheight"){
                                 return root.sortDirection ? 0 : 180
@@ -291,21 +302,25 @@ Rectangle {
                     clip: true
                     anchors.fill: parent
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: sortDateText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
                         text: qsTr("Date") + translationManager.emptyString
                         color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        themeTransition: false
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
-                    Image {
+                    MoneroEffects.ImageMask {
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
                         visible: root.sortBy === "timestamp" ? true : false
-                        opacity: root.sortBy === "timestamp" ? 1 : 0.6
-                        source: "../images/whiteDropIndicator.png"
+                        opacity: root.sortBy === "timestamp" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
                         rotation: {
                             if(root.sortBy === "timestamp"){
                                 return root.sortDirection ? 0 : 180
@@ -347,21 +362,25 @@ Rectangle {
                     clip: true
                     anchors.fill: parent
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: sortAmountText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
                         text: qsTr("Amount") + translationManager.emptyString
                         color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        themeTransition: false
                         anchors.verticalCenter: parent.verticalCenter
                     }
 
-                    Image {
+                    MoneroEffects.ImageMask {
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
                         visible: root.sortBy === "amount" ? true : false
-                        opacity: root.sortBy === "amount" ? 1 : 0.6
-                        source: "../images/whiteDropIndicator.png"
+                        opacity: root.sortBy === "amount" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
                         rotation: {
                             if(root.sortBy === "amount"){
                                 return root.sortDirection ? 0 : 180
@@ -397,7 +416,7 @@ Rectangle {
                 visible: !sortAndFilter.collapsed
                 Layout.preferredHeight: 20
 
-                Text {
+                MoneroComponents.TextPlain {
                     // status message
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
@@ -424,7 +443,7 @@ Rectangle {
                     Layout.preferredWidth: childrenRect.width + 2 * scaleRatio
                     Layout.preferredHeight: 20
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
                         text: qsTr("Page") + ":"
@@ -439,10 +458,10 @@ Rectangle {
                     Layout.leftMargin: 4 * scaleRatio
                     Layout.preferredHeight: 20 * scaleRatio
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: paginationText
                         text: root.txPage + "/" + Math.ceil(root.txCount / root.txMax)
-                        color: "white"
+                        color: MoneroComponents.Style.defaultFontColor
                         anchors.verticalCenter: parent.verticalCenter
 
                         MouseArea {
@@ -480,15 +499,19 @@ Rectangle {
                     Layout.preferredWidth: 18 * scaleRatio
                     Layout.preferredHeight: 20 * scaleRatio
                     color: "transparent"
-                    opacity: enabled ? 1.0 : 0.6
+                    opacity: enabled ? 1.0 : 0.2
                     enabled: false
 
-                    Image {
+                    MoneroEffects.ImageMask {
+                        id: prevIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
-                        source: "../images/whiteDropIndicator.png"
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
                         rotation: 90
                     }
 
@@ -508,16 +531,20 @@ Rectangle {
                     Layout.preferredWidth: 18 * scaleRatio
                     Layout.preferredHeight: 20 * scaleRatio
                     color: "transparent"
-                    opacity: enabled ? 1.0 : 0.6
+                    opacity: enabled ? 1.0 : 0.2
                     enabled: false
 
-                    Image {
+                    MoneroEffects.ImageMask {
+                        id: nextIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
-                        source: "../images/whiteDropIndicator.png"
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
                         rotation: 270
+                        color: MoneroComponents.Style.defaultFontColor
                     }
 
                     MouseArea {
@@ -550,7 +577,10 @@ Rectangle {
                     if(isout && delegate.address !== "") return 320;
                     return 220;
                 }
-                color: collapsed ? "#06FFFFFF" : "transparent"
+                color: {
+                    if(!collapsed) return "transparent"
+                    return MoneroComponents.Style.blackTheme ? "#06FFFFFF" : "#04000000"
+                }
 
                 Rectangle {
                     anchors.top: parent.top
@@ -601,12 +631,14 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + translationManager.emptyString
-                                    color: "#C0C0C0"
+                                    text: isout ? qsTr("Sent") : qsTr("Received") + translationManager.emptyString
+                                    color: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
+                                    themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 }
                             }
 
@@ -615,7 +647,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: _amount + " XMR"
@@ -649,11 +681,13 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: (isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee")) + translationManager.emptyString
-                                    color: "#C0C0C0"
+                                    text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee") + translationManager.emptyString
+                                    color: MoneroComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -663,7 +697,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: {
@@ -708,11 +742,13 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: qsTr("Blockheight") + translationManager.emptyString
-                                    color: "#C0C0C0"
+                                    color: MoneroComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -722,7 +758,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 14 * scaleRatio
                                     text: blockheight > 0 ? blockheight : qsTr('Pending') + translationManager.emptyString;
@@ -757,11 +793,13 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: qsTr("Confirmations") + translationManager.emptyString
-                                    color: "#C0C0C0"
+                                    color: MoneroComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -771,7 +809,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     property bool confirmed: confirmations < confirmationsRequired ? false : true
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
@@ -812,11 +850,13 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: qsTr("Date") + translationManager.emptyString
-                                    color: "#C0C0C0"
+                                    text: qsTr("Date")
+                                    color: MoneroComponents.Style.historyHeaderTextColor
+                                    themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                    themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -826,7 +866,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 20
 
-                                Text {
+                                MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: persistentSettings.historyHumanDates ? dateHuman : date + "  " + time
@@ -867,6 +907,9 @@ Rectangle {
                                         anchors.fill: parent
                                         hoverEnabled: true
                                         z: parent.z + 1
+
+                                        onEntered: parent.opacity = 0.8;
+                                        onExited: parent.opacity = 1.0;
                                     }
                                 }
 
@@ -894,6 +937,9 @@ Rectangle {
                                         anchors.fill: parent
                                         hoverEnabled: true
                                         z: parent.z + 1
+
+                                        onEntered: parent.opacity = 0.8;
+                                        onExited: parent.opacity = 1.0;
                                     }
                                 }
                             }
@@ -910,11 +956,13 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: qsTr("Description") + translationManager.emptyString
-                                color: "#C0C0C0"
+                                color: MoneroComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -924,7 +972,7 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 id: txNoteText
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
@@ -941,26 +989,25 @@ Rectangle {
                                 }
                             }
 
-                            Image {
+                            MoneroEffects.ImageMask {
                                 anchors.top: parent.top
                                 anchors.left: txNoteText.right
                                 anchors.leftMargin: 12 * scaleRatio
-                                source: "../images/editIcon.png"
-                                opacity: 1
-                                width: 18
-                                height: 18
+                                image: "qrc:///images/edit.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.pencilSquare
+                                fontAwesomeFallbackSize: 22
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.75
+                                width: 23
+                                height: 21
 
                                 MouseArea {
                                     id: txNoteArea
                                     state: "set_tx_note"
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    onEntered: {
-                                        parent.opacity = 0.7;
-                                    }
-                                    onExited: {
-                                        parent.opacity = 1.0;
-                                    }
+                                    onEntered: parent.opacity = 0.4;
+                                    onExited: parent.opacity = 0.75;
                                     cursorShape: Qt.PointingHandCursor
                                 }
                             }
@@ -977,11 +1024,13 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: qsTr("Transaction ID") + translationManager.emptyString
-                                color: "#C0C0C0"
+                                color: MoneroComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -991,7 +1040,7 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: hash
@@ -1019,11 +1068,13 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: qsTr("Transaction key") + translationManager.emptyString
-                                color: "#C0C0C0"
+                                color: MoneroComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -1033,7 +1084,7 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: {
@@ -1067,11 +1118,13 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: qsTr("Address sent to") + translationManager.emptyString
-                                color: "#C0C0C0"
+                                color: MoneroComponents.Style.historyHeaderTextColor
+                                themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
+                                themeTransitionWhiteColor: MoneroComponents.Style._w_historyHeaderTextColor
                                 anchors.verticalCenter: parent.verticalCenter
                             }
                         }
@@ -1082,7 +1135,7 @@ Rectangle {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
                                 text: {
@@ -1164,15 +1217,16 @@ Rectangle {
 
                     color: "transparent"
 
-                    Image {
+                    MoneroEffects.ImageMask {
+                        id: collapsedIcon
                         anchors.top: parent.top
                         anchors.topMargin: 24 * scaleRatio
                         anchors.horizontalCenter: parent.horizontalCenter
-
                         height: 8 * scaleRatio
                         width: 12 * scaleRatio
-                        source: "../images/whiteDropIndicator.png"
+                        image: "qrc:///images/whiteDropIndicator.png"
                         rotation: delegate.collapsed ? 180 : 0
+                        color: MoneroComponents.Style.defaultFontColor
                     }
                 }
 
@@ -1181,7 +1235,13 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     height: 1
-                    color: "#2b2b2b"
+                    color: MoneroComponents.Style.appWindowBorderColor
+
+                    MoneroEffects.ColorTransition {
+                        targetObj: parent
+                        blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                        whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                    }
                 }
 
                 Rectangle {
@@ -1189,7 +1249,13 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.top: parent.bottom
                     height: 1
-                    color: "#2b2b2b"
+                    color: MoneroComponents.Style.appWindowBorderColor
+
+                    MoneroEffects.ColorTransition {
+                        targetObj: parent
+                        blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                        whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                    }
                 }
             }
         }
@@ -1201,7 +1267,7 @@ Rectangle {
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
 
-            Text {
+            MoneroComponents.TextPlain {
                 // status message
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
@@ -1209,6 +1275,8 @@ Rectangle {
                 font.pixelSize: 15 * scaleRatio
                 text: root.historyStatusMessage;
                 color: MoneroComponents.Style.dimmedFontColor
+                themeTransitionBlackColor: MoneroComponents.Style._b_dimmedFontColor
+                themeTransitionWhiteColor: MoneroComponents.Style._w_dimmedFontColor
             }
         }
 

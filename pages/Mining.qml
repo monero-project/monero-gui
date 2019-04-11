@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import "../components" as MoneroComponents
@@ -65,7 +65,7 @@ Rectangle {
             visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: soloMainLabel
             text: qsTr("Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.<br> <br>Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!") + translationManager.emptyString
             wrapMode: Text.Wrap
@@ -112,7 +112,7 @@ Rectangle {
                     validator: IntValidator { bottom: 1; top: idealThreadCount }
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     id: numAvailableThreadsText
                     text: qsTr("Max # of CPU threads available for mining: ") + idealThreadCount + translationManager.emptyString
                     wrapMode: Text.WordWrap

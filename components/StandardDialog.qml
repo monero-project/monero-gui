@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
@@ -34,6 +34,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
+import "effects/" as MoneroEffects
 
 Rectangle {
     id: root
@@ -56,12 +57,18 @@ Rectangle {
     signal rejected()
     signal closeCallback();
 
-    Image {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        source: "../images/middlePanelBg.jpg"
+    // background
+    MoneroEffects.GradientBackground {
+        anchors.fill: parent
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
     }
 
     // Make window draggable
@@ -188,11 +195,13 @@ Rectangle {
         height: 48 * scaleRatio
         color: "transparent"
 
-        Image {
+        MoneroEffects.ImageMask {
             anchors.centerIn: parent
             width: 16 * scaleRatio
             height: 16 * scaleRatio
-            source: "../images/close.png"
+            image: MoneroComponents.Style.titleBarCloseSource
+            color: MoneroComponents.Style.defaultFontColor
+            opacity: 0.75
         }
 
         MouseArea {

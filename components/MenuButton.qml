@@ -26,9 +26,11 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.5
+import QtQuick 2.9
+import QtGraphicalEffects 1.0
 
 import "../components" as MoneroComponents
+import "effects/" as MoneroEffects
 
 Rectangle {
     id: button
@@ -46,7 +48,6 @@ Rectangle {
         clicked();
     }
 
-
     function getOffset() {
         var offset = 0
         var item = button
@@ -61,16 +62,27 @@ Rectangle {
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
     height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
 
-    // button gradient while checked
-    Image {
+    LinearGradient {
+        visible: isOpenGL && button.checked
         height: parent.height
         width: 260
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: -20
         anchors.leftMargin: parent.getOffset()
-        source: "../images/menuButtonGradient.png"
-        visible: button.checked
+        start: Qt.point(width, 0)
+        end: Qt.point(0, 0)
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: MoneroComponents.Style.menuButtonGradientStart }
+            GradientStop { position: 1.0; color: MoneroComponents.Style.menuButtonGradientStop }
+        }
+    }
+
+    // fallback hover effect when opengl is not available
+    Rectangle {
+        visible: !isOpenGL && button.checked
+        anchors.fill: parent
+        color: MoneroComponents.Style.menuButtonFallbackBackgroundColor
     }
 
     // button decorations that are subject to leftMargin offsets
@@ -79,7 +91,7 @@ Rectangle {
         anchors.leftMargin: parent.getOffset() + 20 * scaleRatio
         height: parent.height
         width: button.checked ? 20: 10
-        color: "#00000000"
+        color: "transparent"
 
         // dot if unchecked
         Rectangle {
@@ -93,43 +105,48 @@ Rectangle {
             Image {
                 anchors.centerIn: parent
                 anchors.left: parent.left
-                source: "../images/arrow-right-medium-white.png"
+                source: MoneroComponents.Style.menuButtonImageDotArrowSource
                 visible: button.checked
             }
         }
 
         // button text
-        Text {
+        MoneroComponents.TextPlain {
             id: label
+            color: MoneroComponents.Style.menuButtonTextColor
+            themeTransitionBlackColor: MoneroComponents.Style._b_menuButtonTextColor
+            themeTransitionWhiteColor: MoneroComponents.Style._w_menuButtonTextColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
             anchors.leftMargin: 8 * scaleRatio
-            font.family: MoneroComponents.Style.fontMedium.name
             font.bold: true
-            font.pixelSize: 16 * scaleRatio
-            color: "#FFFFFF"
+            font.pixelSize: 14 * scaleRatio
         }
     }
 
     // menu button right arrow
-    Image {
+    MoneroEffects.ImageMask {
         anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: parent.getOffset()
         anchors.right: parent.right
         anchors.rightMargin: 20 * scaleRatio
-        anchors.leftMargin: parent.getOffset()
-        source: "../images/right.png"
-        opacity: button.checked ? 1.0 : 0.4
+        height: 14
+        width: 8
+        image: MoneroComponents.Style.menuButtonImageRightSource
+        color: button.checked ? MoneroComponents.Style.menuButtonImageRightColorActive : MoneroComponents.Style.menuButtonImageRightColor
+        opacity: button.checked ? 0.8 : 0.25
     }
 
-    Text {
+    MoneroComponents.TextPlain {
         id: symbolText
         anchors.right: parent.right
         anchors.rightMargin: 44 * scaleRatio
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12 * scaleRatio
         font.bold: true
-        color: button.checked || buttonArea.containsMouse ? "#FFFFFF" : dot.color
+        color: button.checked || buttonArea.containsMouse ? MoneroComponents.Style.menuButtonTextColor : dot.color
         visible: appWindow.ctrlPressed
+        themeTransition: false
     }
 
     MouseArea {

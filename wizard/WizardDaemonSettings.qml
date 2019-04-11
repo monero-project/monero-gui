@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
@@ -105,8 +105,8 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 selectByMouse: true
                 wrapMode: Text.WordWrap
@@ -133,8 +133,8 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
 
                 selectByMouse: true
                 wrapMode: Text.WordWrap
@@ -153,15 +153,7 @@ ColumnLayout {
             MoneroComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
                 Layout.minimumWidth: 300 * scaleRatio
-
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
-
-                lineEditBackgroundColor: "transparent"
-                lineEditFontColor: MoneroComponents.Style.defaultFontColor
-                lineEditFontBold: false
-                lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
-                labelFontSize: 14 * scaleRatio
-                placeholderFontSize: 15 * scaleRatio
 
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
                 daemonPortText: {
@@ -203,13 +195,6 @@ ColumnLayout {
             property var rna: persistentSettings.remoteNodeAddress
             daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
             daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
-
-            lineEditBackgroundColor: "transparent"
-            lineEditFontColor: MoneroComponents.Style.defaultFontColor
-            lineEditFontBold: false
-            lineEditBorderColor: Qt.rgba(255, 255, 255, 0.35)
-            labelFontSize: 14 * scaleRatio
-            placeholderFontSize: 15 * scaleRatio
         }
     }
 }

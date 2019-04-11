@@ -26,11 +26,14 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
+
 import "../js/TxUtils.js" as TxUtils
 import moneroComponents.AddressBook 1.0
 import moneroComponents.AddressBookModel 1.0
@@ -89,7 +92,7 @@ Rectangle {
 
             TextArea {
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.greyFontColor
+                color: MoneroComponents.Style.dimmedFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 16 * scaleRatio
                 horizontalAlignment: TextInput.AlignLeft
@@ -159,11 +162,17 @@ Rectangle {
                         }
 
                         Rectangle {
+                            color: MoneroComponents.Style.appWindowBorderColor
                             anchors.right: parent.right
                             anchors.left: parent.left
                             anchors.top: parent.top
                             height: 1
-                            color: MoneroComponents.Style.grey
+
+                            MoneroEffects.ColorTransition {
+                                targetObj: parent
+                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                            }
                         }
 
                         Rectangle {
@@ -206,41 +215,52 @@ Rectangle {
                             }
                         }
 
-                        MoneroComponents.IconButton {
-                            id: sendToButton
-                            imageSource: "../images/arrow-right-in-circle.png"
-                            image.opacity: 0.5
+                        RowLayout {
+                            anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 63 * scaleRatio
-                            onClicked: {
-                                doSend();
+                            anchors.rightMargin: 6
+                            height: 21
+                            spacing: 10
+
+                            MoneroComponents.IconButton {
+                                id: sendToButton
+                                image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.5
+                                Layout.preferredWidth: 20
+                                Layout.preferredHeight: 20
+                                onClicked: {
+                                    doSend();
+                                }
                             }
-                        }
 
-                        MoneroComponents.IconButton {
-                            id: renameButton
-                            imageSource: "../images/rename.png"
-                            image.opacity: 0.5
-                            anchors.right: parent.right
-                            anchors.rightMargin: 30 * scaleRatio
-                            anchors.topMargin: 1 * scaleRatio
+                            MoneroComponents.IconButton {
+                                id: renameButton
+                                image: "qrc:///images/edit.svg"
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.5
+                                Layout.preferredWidth: 23
+                                Layout.preferredHeight: 21
 
-                            onClicked: {
-                                addressBookListView.currentIndex = index;
-                                root.showEditAddress(address, description);
+                                onClicked: {
+                                    addressBookListView.currentIndex = index;
+                                    root.showEditAddress(address, description);
+                                }
                             }
-                        }
 
-                        MoneroComponents.IconButton {
-                            id: copyButton
-                            imageSource: "../images/clipboard.png"
-                            image.opacity: 0.5
-                            anchors.right: parent.right
+                            MoneroComponents.IconButton {
+                                id: copyButton
+                                image: "qrc:///images/copy.svg"
+                                Layout.preferredWidth: 16
+                                Layout.preferredHeight: 21
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.5
 
-                            onClicked: {
-                                console.log("Address copied to clipboard");
-                                clipboard.setText(address);
-                                appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
+                                onClicked: {
+                                    console.log("Address copied to clipboard");
+                                    clipboard.setText(address);
+                                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"), 3);
+                                }
                             }
                         }
                     }
@@ -248,9 +268,16 @@ Rectangle {
             }
 
             Rectangle {
-                color: MoneroComponents.Style.grey
+                id: border2
+                color: MoneroComponents.Style.appWindowBorderColor
                 Layout.fillWidth: true
                 height: 1
+
+                MoneroEffects.ColorTransition {
+                    targetObj: border2
+                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                }
             }
 
             MoneroComponents.CheckBox {
@@ -306,6 +333,7 @@ Rectangle {
                         addressLine.text = clipboardText;
                     }
                 }
+
                 inlineButton.text: FontAwesome.qrcode
                 inlineButton.fontPixelSize: 22
                 inlineButton.fontFamily: FontAwesome.fontFamily

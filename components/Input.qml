@@ -27,7 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick.Controls 2.0
-import QtQuick 2.7
+import QtQuick 2.9
 
 import "../components" as MoneroComponents
 
@@ -38,8 +38,8 @@ TextField {
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
     color: MoneroComponents.Style.defaultFontColor
-    selectionColor: MoneroComponents.Style.dimmedFontColor
-    selectedTextColor: MoneroComponents.Style.defaultFontColor
+    selectionColor: MoneroComponents.Style.textSelectionColor
+    selectedTextColor: MoneroComponents.Style.textSelectedColor
 
     background: Rectangle {
         color: "transparent"

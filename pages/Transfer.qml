@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 import moneroComponents.Clipboard 1.0
@@ -196,10 +196,6 @@ Rectangle {
                   Layout.fillWidth: true
                   id: priorityDropdown
                   Layout.topMargin: 5 * scaleRatio
-                  shadowReleasedColor: "#FF4304"
-                  shadowPressedColor: "#B32D00"
-                  releasedColor: "#363636"
-                  pressedColor: "#202020"
                   currentIndex: 0
               }
           }
@@ -247,6 +243,7 @@ Rectangle {
                      addressLine.text = clipboardText; 
                   }
               }
+
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
@@ -314,6 +311,8 @@ Rectangle {
               border: false
               checkedIcon: "qrc:///images/minus-white.png"
               uncheckedIcon: "qrc:///images/plus-white.png"
+              imgWidth: 12 * scaleRatio
+              imgHeight: 12 * scaleRatio
               fontSize: paymentIdLine.labelFontSize
               iconOnTheLeft: false
               Layout.fillWidth: true
@@ -343,6 +342,8 @@ Rectangle {
               border: false
               checkedIcon: "qrc:///images/minus-white.png"
               uncheckedIcon: "qrc:///images/plus-white.png"
+              imgWidth: 12 * scaleRatio
+              imgHeight: 12 * scaleRatio
               fontSize: descriptionLine.labelFontSize
               iconOnTheLeft: false
               Layout.fillWidth: true
@@ -381,8 +382,8 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
-              rightIcon: "../images/rightArrow.png"
-              rightIconInactive: "../images/rightArrowInactive.png"
+              rightIcon: "qrc:///images/rightArrow.png"
+              rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4 * scaleRatio
               text: qsTr("Send") + translationManager.emptyString
               enabled: {

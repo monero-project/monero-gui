@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -72,7 +72,7 @@ ColumnLayout {
     property int labelFontSize: 16 * scaleRatio
     property bool labelButtonVisible: false
 
-    property string fontColor: "white"
+    property string fontColor: MoneroComponents.Style.defaultFontColor
     property bool fontBold: false
     property int fontSize: 16 * scaleRatio
 
@@ -103,7 +103,7 @@ ColumnLayout {
         height: (inputLabel.height + 10) * scaleRatio
         visible: showingHeader ? true : false
 
-        Text {
+        MoneroComponents.TextPlain {
             id: inputLabel
             anchors.top: parent.top
             anchors.left: parent.left
@@ -172,7 +172,7 @@ ColumnLayout {
         onEditingFinished: item.editingFinished()
         error: item.error
 
-        Text {
+        MoneroComponents.TextPlain {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
