@@ -1,6 +1,6 @@
 # Monero GUI
 
-Copyright (c) 2014-2018, The Monero Project
+Copyright (c) 2014-2019, The Monero Project
 
 ## Development resources
 
@@ -58,7 +58,7 @@ See [LICENSE](LICENSE).
 
 ## Translations
 
-Do you speak a second language and would like to help translate the Monero GUI? Sign up at [translate.getmonero.org](https://translate.getmonero.org), our localization platform. Navigate to the 'monero-gui' project and find the language you can help with. Suggest changes or add new translated text.
+Do you speak a second language and would like to help translate the Monero GUI? Check out Pootle, our localization platform, at [translate.getmonero.org](https://translate.getmonero.org/projects/monero-gui/). Choose the language and suggest a translation for a string or review an existing one. The Localization Workgroup made [a guide with step-by-step instructions](https://github.com/monero-ecosystem/monero-translations/blob/master/pootle.md) for Pootle.
 &nbsp;
 
 If you need help/support or any info you can contact the localization workgroup on the IRC channel #monero-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getmonero[dot]org. For more info about the Localization workgroup: [github.com/monero-ecosystem/monero-translations](https://github.com/monero-ecosystem/monero-translations)
