@@ -305,20 +305,16 @@ Rectangle {
       ColumnLayout {
           visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked 
 
-          CheckBox {
+          CheckBox2 {
               id: paymentIdCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
+              checked: false
               fontSize: paymentIdLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
               onClicked: {
                   if (!paymentIdCheckbox.checked) {
                     paymentIdLine.text = "";
                   }
-              }
+                }
+                text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
           }
 
           // payment id input
@@ -334,20 +330,16 @@ Rectangle {
       }
 
       ColumnLayout {
-        CheckBox {
+          CheckBox2 {
               id: descriptionCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
+              checked: false
               fontSize: descriptionLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
               onClicked: {
-                  if (!descriptionCheckbox.checked) {
-                    descriptionLine.text = "";
-                  }
-              }
+                    if (!descriptionCheckbox.checked) {
+                      descriptionLine.text = "";
+                    }
+                }
+                text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
           }
 
           LineEditMulti {

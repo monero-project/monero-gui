@@ -29,12 +29,12 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
-import "." 1.0
+import "../components" as MoneroComponents
 
 RowLayout {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon: "../images/checkedIcon-black.png"
+    property string checkedIcon: "qrc:///../images/checkedIcon-black.png"
     property string uncheckedIcon
     property bool checked: false
     property string background: "backgroundRect.color"
@@ -60,9 +60,9 @@ RowLayout {
 
             Text {
                 id: label
-                font.family: Style.fontLight.name
+                font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: checkBox.fontSize
-                color: Style.defaultFontColor
+                color: MoneroComponents.Style.defaultFontColor
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
                 anchors.left: parent.left
@@ -80,7 +80,7 @@ RowLayout {
                 Image {
                     id: indicatorImage
                     anchors.centerIn: parent
-                    source: "../images/whiteDropIndicator.png"
+                    source: "qrc:///../images/whiteDropIndicator.png"
                     visible: !darkDropIndicator
                 }
                 ColorOverlay {
