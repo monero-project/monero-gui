@@ -27,8 +27,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "filter.h"
+#include <QtGlobal>
 #include <QKeyEvent>
 #include <QDebug>
+
+#ifdef QT_DEBUG
+    #include "private/qabstractanimation_p.h"
+#endif
 
 filter::filter(QObject *parent) :
     QObject(parent)
@@ -78,6 +83,21 @@ bool filter::eventFilter(QObject *obj, QEvent *ev) {
     } break;
     case QEvent::KeyRelease: {
         QKeyEvent *ke = static_cast<QKeyEvent*>(ev);
+
+#ifdef QT_DEBUG
+        if(ke->key() == Qt::Key_F9){
+            QUnifiedTimer::instance()->setSlowModeEnabled(true);
+            QUnifiedTimer::instance()->setSlowdownFactor(10);
+            qDebug() << "Slow animations enabled";
+        }
+
+        if(ke->key() == Qt::Key_F10){
+            QUnifiedTimer::instance()->setSlowModeEnabled(false);
+            QUnifiedTimer::instance()->setSlowdownFactor(1);
+
+            qDebug() << "Slow animations disabled";
+        }
+#endif
 
         if(ke->key() == Qt::Key_Backtab)
             m_backtabPressed = false;
