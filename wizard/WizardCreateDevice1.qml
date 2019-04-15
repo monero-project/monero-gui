@@ -227,6 +227,7 @@ Rectangle {
     }
 
     function onCreateWalletFromDeviceCompleted(written){
+        hideProcessingSplash();
         if(written){
             wizardStateView.state = "wizardCreateWallet2";
         } else {
