@@ -76,6 +76,7 @@ Rectangle {
     property var m_wallet;
     property alias wizardState: wizardStateView.state
     property alias wizardStatePrevious: wizardStateView.previousView
+    property alias wizardStackView: stackView
     property int wizardSubViewWidth: 780
     property int wizardSubViewTopMargin: persistentSettings.customDecorations ? 90 : 32
     property bool skipModeSelection: false
@@ -161,9 +162,6 @@ Rectangle {
                if (typeof previousView.onPageClosed === "function") {
                    previousView.onPageClosed();
                }
-
-               // Combined with NumberAnimation to fade out views
-               previousView.opacity = 0;
             }
 
             if (currentView) {
@@ -172,12 +170,13 @@ Rectangle {
                 if (typeof currentView.onPageCompleted === "function") {
                     currentView.onPageCompleted(previousView);
                 }
-
-                // Combined with NumberAnimation to fade in views
-                currentView.opacity = 1;
             }
 
             previousView = currentView;
+
+            // reset push direction
+            if(wizardController.wizardState == "wizardHome")
+                wizardController.wizardStackView.backTransition = false;
         }
 
         states: [
@@ -286,7 +285,7 @@ Rectangle {
                          PropertyAnimation {
                              target: enterItem
                              property: "x"
-                             from: target.width
+                             from: stackView.backTransition ? -target.width : target.width
                              to: 0
                              duration: 300
                              easing.type: Easing.OutCubic
@@ -295,7 +294,7 @@ Rectangle {
                              target: exitItem
                              property: "x"
                              from: 0
-                             to: 0 - target.width
+                             to: stackView.backTransition ? target.width : -target.width
                              duration: 300
                              easing.type: Easing.OutCubic
                          }
