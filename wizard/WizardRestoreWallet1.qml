@@ -37,7 +37,7 @@ Rectangle {
     id: wizardRestoreWallet1
 
     color: "transparent"
-    property string viewName: "wizardCreateWallet1"
+    property string viewName: "wizardRestoreWallet1"
 
     function verify() {
         if (restoreHeight.text.indexOf('-') === 4 && restoreHeight.text.length !== 10) {
@@ -305,7 +305,7 @@ Rectangle {
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
             // cleanup
-            walletInput.reset();
+            wizardWalletInput.reset();
             seedInput.text = "";
             addressLine.text = "";
             spendKeyLine.text = "";
