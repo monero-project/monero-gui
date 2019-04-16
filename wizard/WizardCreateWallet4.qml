@@ -63,7 +63,7 @@ Rectangle {
 
             WizardNav {
                 Layout.topMargin: 24 * scaleRatio
-                btnNextText: qsTr("Open wallet")
+                btnNextText: qsTr("Open wallet") + translationManager.emptyString
                 progressSteps: 4
                 progress: 4
 

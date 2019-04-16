@@ -78,7 +78,7 @@ Rectangle {
                 Layout.topMargin: 20 * scaleRatio
                 id: btnNext
                 small: true
-                text: qsTr("Browse filesystem")
+                text: qsTr("Browse filesystem") + translationManager.emptyString
 
                 onClicked: {
                     wizardController.openWallet();

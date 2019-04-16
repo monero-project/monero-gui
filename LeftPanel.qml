@@ -684,7 +684,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.bottom: daemonProgressBar.top
             height: 48 * scaleRatio
-            syncType: qsTr("Wallet")
+            syncType: qsTr("Wallet") + translationManager.emptyString
             visible: networkStatus.connected
         }
 
@@ -693,7 +693,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            syncType: qsTr("Daemon")
+            syncType: qsTr("Daemon") + translationManager.emptyString
             visible: networkStatus.connected
             height: 62 * scaleRatio
         }

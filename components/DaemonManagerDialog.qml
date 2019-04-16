@@ -90,7 +90,7 @@ Window {
             }
 
             Text {
-                text: qsTr("Starting local node in %1 seconds").arg(countDown);
+                text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
@@ -108,7 +108,7 @@ Window {
                 id: okButton
                 visible:false
                 fontSize: 14
-                text: qsTr("Start daemon (%1)").arg(countDown)
+                text: qsTr("Start daemon (%1)").arg(countDown) + translationManager.emptyString
                 KeyNavigation.tab: cancelButton
                 onClicked: {
                     timer.stop();
@@ -121,7 +121,7 @@ Window {
             MoneroComponents.StandardButton {
                 id: cancelButton
                 fontSize: 14
-                text: qsTr("Use custom settings")
+                text: qsTr("Use custom settings") + translationManager.emptyString
 
                 onClicked: {
                     timer.stop();

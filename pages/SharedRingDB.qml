@@ -128,7 +128,7 @@ Rectangle {
                     "and you can import this list here.<br>" +
                     "Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself " +
                     "using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.<br>"
-                )
+                ) + translationManager.emptyString
                 sharedRingDBDialog.icon = StandardIcon.Information
                 sharedRingDBDialog.open()
             }
@@ -266,7 +266,7 @@ Rectangle {
                     "which allows you to then spend your Monero safely.<br>" +
                     "If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything " +
                     "as it is all automated.<br>"
-                )
+                ) + translationManager.emptyString
                 sharedRingDBDialog.icon = StandardIcon.Information
                 sharedRingDBDialog.open()
             }
@@ -324,7 +324,7 @@ Rectangle {
                         onClicked: {
                             var ring = appWindow.currentWallet.getRing(keyImageLine.text)
                             if (ring === "") {
-                                getRingLine.text = qsTr("No ring found");
+                                getRingLine.text = qsTr("No ring found") + translationManager.emptyString;
                             }
                             else {
                                 getRingLine.text = ring;

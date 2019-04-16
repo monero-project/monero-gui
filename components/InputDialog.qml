@@ -145,7 +145,7 @@ Item {
                     small: true
                     width: 120
                     fontSize: 14
-                    text: qsTr("Ok")
+                    text: qsTr("Ok") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     onClicked: {
                         root.close()

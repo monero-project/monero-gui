@@ -1201,7 +1201,7 @@ ApplicationWindow {
                         handleTransactionConfirmed()
                     }
                 } else {
-                    passwordDialog.showError(qsTr("Wrong password"));
+                    passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
             passwordDialog.onRejectedCallback = null;
@@ -1229,7 +1229,7 @@ ApplicationWindow {
     //Open Wallet from file
     FileDialog {
         id: fileDialog
-        title: qsTr("Please choose a file")
+        title: qsTr("Please choose a file") + translationManager.emptyString
         folder: "file://" + moneroAccountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
@@ -1397,7 +1397,7 @@ ApplicationWindow {
         height: appWindow.height / 2
         x: (appWindow.width - width) / 2
         y: (appWindow.height - height) / 2
-        messageText: qsTr("Please wait...")
+        messageText: qsTr("Please wait...") + translationManager.emptyString
     }
 
     Item {

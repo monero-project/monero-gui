@@ -102,7 +102,7 @@ Item {
             Layout.maximumWidth: 400 * scaleRatio
 
             Label {
-                text: qsTr("Please enter new password")
+                text: qsTr("Please enter new password") + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -180,7 +180,7 @@ Item {
             }
 
             Label {
-                text: qsTr("Please confirm new password")
+                text: qsTr("Please confirm new password") + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -281,7 +281,7 @@ Item {
                 }
                 MoneroComponents.StandardButton {
                     id: okButton
-                    text: qsTr("Continue")
+                    text: qsTr("Continue") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     enabled: passwordInput1.text === passwordInput2.text
                     onClicked: {

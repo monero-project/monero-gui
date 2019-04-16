@@ -83,7 +83,7 @@ Rectangle {
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
-                text: qsTr("Addresses")
+                text: qsTr("Addresses") + translationManager.emptyString
             }
 
             ColumnLayout {
@@ -231,7 +231,7 @@ Rectangle {
                 text: qsTr("Create new address") + translationManager.emptyString;
                 onClicked: {
                     inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
-                    inputDialog.inputText = qsTr("(Untitled)")
+                    inputDialog.inputText = qsTr("(Untitled)") + translationManager.emptyString
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
                         current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
@@ -284,7 +284,7 @@ Rectangle {
                     rightIcon: "../images/external-link-white.png"
                     onClicked: {
                         clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
-                        appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                        appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
                     }
                 }
             }
@@ -297,7 +297,7 @@ Rectangle {
 
         FileDialog {
             id: qrFileDialog
-            title: qsTr("Please choose a name")
+            title: qsTr("Please choose a name") + translationManager.emptyString
             folder: shortcuts.pictures
             selectExisting: false
             nameFilters: ["Image (*.png)"]

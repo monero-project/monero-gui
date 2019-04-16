@@ -140,7 +140,7 @@ Rectangle {
                         enabled: startSoloMinerButton.enabled
                         onClicked: {
                             soloMinerThreadsLine.text = idealThreadCount
-                            appWindow.showStatusMessage(qsTr("Set to use all threads"),3)
+                            appWindow.showStatusMessage(qsTr("Set to use all threads") + translationManager.emptyString,3)
                         }
                     }
                 }
@@ -197,9 +197,9 @@ Rectangle {
                                 update()
                             } else {
                                 errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
-                                errorPopup.text = qsTr("Couldn't start mining.<br>")
+                                errorPopup.text = qsTr("Couldn't start mining.<br>") + translationManager.emptyString
                                 if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
-                                    errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>")
+                                    errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
                                 errorPopup.icon = StandardIcon.Critical
                                 errorPopup.open()
                             }

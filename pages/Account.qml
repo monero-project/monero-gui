@@ -79,13 +79,13 @@ Rectangle {
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
-                text: qsTr("Balance All")
+                text: qsTr("Balance All") + translationManager.emptyString
             }
 
             RowLayout {
                 Layout.topMargin: 22 * scaleRatio
                 Text {
-                    text: qsTr("Total balance: ")
+                    text: qsTr("Total balance: ") + translationManager.emptyString
                     Layout.fillWidth: true
                     color: "#757575"
                     font.pixelSize: 14
@@ -118,7 +118,7 @@ Rectangle {
             RowLayout {
                 Layout.topMargin: 10 * scaleRatio
                 Text {
-                    text: qsTr("Total unlocked balance: ")
+                    text: qsTr("Total unlocked balance: ") + translationManager.emptyString
                     Layout.fillWidth: true
                     color: "#757575"
                     font.pixelSize: 14 
@@ -156,7 +156,7 @@ Rectangle {
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
-                text: qsTr("Accounts")
+                text: qsTr("Accounts") + translationManager.emptyString
             }
 
             ColumnLayout {
@@ -320,7 +320,7 @@ Rectangle {
                 text: qsTr("Create new account") + translationManager.emptyString; 
                 onClicked: { 
                     inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString
-                    inputDialog.inputText = qsTr("(Untitled)")
+                    inputDialog.inputText = qsTr("(Untitled)") + translationManager.emptyString
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
                         appWindow.currentWallet.switchSubaddressAccount(appWindow.currentWallet.numSubaddressAccounts() - 1)

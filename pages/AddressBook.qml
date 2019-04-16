@@ -396,7 +396,7 @@ Rectangle {
                     font.pixelSize: 16 * scaleRatio
                     font.bold: false
                     color: MoneroComponents.Style.defaultFontColor
-                    text: qsTr("Cancel")
+                    text: qsTr("Cancel") + translationManager.emptyString
 
                     MouseArea {
                         anchors.fill: parent
@@ -413,7 +413,7 @@ Rectangle {
                     font.pixelSize: 16 * scaleRatio
                     font.bold: false
                     color: MoneroComponents.Style.defaultFontColor
-                    text: qsTr("Delete")
+                    text: qsTr("Delete") + translationManager.emptyString
 
                     MouseArea {
                         anchors.fill: parent

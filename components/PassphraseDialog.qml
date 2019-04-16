@@ -112,7 +112,7 @@ Item {
             Layout.maximumWidth: 400 * scaleRatio
 
             Label {
-                text: root.walletName.length > 0 ? qsTr("Please enter wallet device passphrase for: ") + root.walletName : qsTr("Please enter wallet device passphrase")
+                text: (root.walletName.length > 0 ? qsTr("Please enter wallet device passphrase for: ") + root.walletName : qsTr("Please enter wallet device passphrase")) + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -122,7 +122,7 @@ Item {
             }
 
             Label {
-                text: qsTr("Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.");
+                text: qsTr("Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.") + translationManager.emptyString
                 Layout.fillWidth: true
                 wrapMode: Text.Wrap
 
@@ -212,7 +212,7 @@ Item {
             }
 
             Label {
-                text: qsTr("Please re-enter")
+                text: qsTr("Please re-enter") + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -313,7 +313,7 @@ Item {
                 }
                 MoneroComponents.StandardButton {
                     id: okButton
-                    text: qsTr("Continue")
+                    text: qsTr("Continue") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     enabled: passphaseInput1.text === passphaseInput2.text
                     onClicked: {
