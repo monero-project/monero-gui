@@ -192,7 +192,7 @@ Rectangle {
                         font.family: grid.fontFamily
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
-                        text: qsTr("Layout") + translationManager.emptyString
+                        text: qsTr("Interface") + translationManager.emptyString
                         color: navUI.isActive ? grid.fontColorActive : grid.fontColorInActive
                         themeTransition: false
                     }
