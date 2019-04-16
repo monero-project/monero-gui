@@ -291,6 +291,7 @@ linux {
         message("using static libraries")
         LIBS+= -Wl,-Bstatic    
         QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+        QMAKE_LIBDIR += /usr/local/ssl/lib
    #     contains(QT_ARCH, x86_64) {
             LIBS+= -lunbound \
                    -lusb-1.0 \
