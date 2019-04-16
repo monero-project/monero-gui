@@ -48,6 +48,7 @@ ColumnLayout {
 
     MoneroComponents.RadioButton {
         id: localNode
+        Layout.fillWidth: true
         text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
         fontSize: 16 * scaleRatio
         checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
@@ -59,8 +60,8 @@ ColumnLayout {
     }
 
     ColumnLayout {
-        visible: localNode.checked
         id: blockchainFolderRow
+        visible: localNode.checked
         spacing: 20 * scaleRatio
 
         Layout.topMargin: 8 * scaleRatio
@@ -148,7 +149,6 @@ ColumnLayout {
         ColumnLayout {
             spacing: 8
             Layout.fillWidth: true
-            Layout.bottomMargin: 12 * scaleRatio
 
             MoneroComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
@@ -176,25 +176,30 @@ ColumnLayout {
         }
     }
 
-
-    RowLayout {
-        MoneroComponents.RadioButton {
-            id: remoteNode
-            text: qsTr("Connect to a remote node") + translationManager.emptyString
-            fontSize: 16 * scaleRatio
-            checked: appWindow.persistentSettings.useRemoteNode
-            onClicked: {
-                checked = true
-                localNode.checked = false
-            }
+    MoneroComponents.RadioButton {
+        id: remoteNode
+        Layout.fillWidth: true
+        Layout.topMargin: 8 * scaleRatio
+        text: qsTr("Connect to a remote node") + translationManager.emptyString
+        fontSize: 16 * scaleRatio
+        checked: appWindow.persistentSettings.useRemoteNode
+        onClicked: {
+            checked = true
+            localNode.checked = false
         }
     }
 
-    RowLayout {
+    ColumnLayout {
+        visible: remoteNode.checked
+        spacing: 0 * scaleRatio
+
+        Layout.topMargin: 8 * scaleRatio
+        Layout.fillWidth: true
+
         MoneroComponents.RemoteNodeEdit {
-            Layout.minimumWidth: 300 * scaleRatio
-            opacity: remoteNode.checked
             id: remoteNodeEdit
+            Layout.fillWidth: true
+
             property var rna: persistentSettings.remoteNodeAddress
             daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
             daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
