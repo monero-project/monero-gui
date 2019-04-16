@@ -25,15 +25,8 @@
         <file>components/NetworkStatusItem.qml</file>
         <file>components/Input.qml</file>
         <file>components/StandardButton.qml</file>
-        <file>images/dropIndicator.png</file>
         <file>components/LineEdit.qml</file>
         <file>images/backToWindowIcon.png</file>
-        <file>components/TableDropdown.qml</file>
-        <file>images/tableOptions.png</file>
-        <file>images/tableOptions@2x.png</file>
-        <file>images/dropdownAdd.png</file>
-        <file>images/dropdownSearch.png</file>
-        <file>images/dropdownSend.png</file>
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/Scroll.qml</file>
@@ -60,8 +53,6 @@
         <file>images/resizeHovered@2x.png</file>
         <file>images/nextPage.png</file>
         <file>images/nextPage@2x.png</file>
-        <file>images/createWallet.png</file>
-        <file>images/createWalletFromDevice.png</file>
         <file>images/openAccount.png</file>
         <file>images/recoverWallet.png</file>
         <file>images/copyToClipboard.png</file>
@@ -180,10 +171,6 @@
         <file>images/arrow-right-medium-white@2x.png</file>
         <file>images/rightArrow.png</file>
         <file>images/rightArrow@2x.png</file>
-        <file>images/upArrow-green.png</file>
-        <file>images/upArrow-green@2x.png</file>
-        <file>images/downArrow.png</file>
-        <file>images/downArrow@2x.png</file>
         <file>images/historyBorderRadius.png</file>
         <file>components/CheckBox2.qml</file>
         <file>js/TxUtils.js</file>
