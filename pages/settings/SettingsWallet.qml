@@ -403,7 +403,7 @@ Rectangle {
 	                        newPasswordDialog.open()
 	                    } else {
 	                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-	                        informationPopup.text = qsTr("Wrong password");
+                            informationPopup.text = qsTr("Wrong password") + translationManager.emptyString;
 	                        informationPopup.open()
 	                        informationPopup.onCloseCallback = function() {
 	                            passwordDialog.open()

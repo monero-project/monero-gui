@@ -126,7 +126,7 @@ Item {
 
     MoneroComponents.LabelButton {
         id: copyButtonId
-        text: qsTr("Copy")
+        text: qsTr("Copy") + translationManager.emptyString
         anchors.right: parent.right
         onClicked: {
             if (input.text.length > 0) {

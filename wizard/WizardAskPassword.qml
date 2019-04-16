@@ -152,7 +152,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         Label {
-            text: qsTr("Password")
+            text: qsTr("Password") + translationManager.emptyString
             Layout.fillWidth: true
 
             font.pixelSize: 14 * scaleRatio

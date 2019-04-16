@@ -100,7 +100,7 @@ Rectangle {
                     Layout.alignment: Qt.AlignVCenter
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15 * scaleRatio
-                    text: qsTr("Sort & filter")
+                    text: qsTr("Sort & filter") + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
 
                     MouseArea {
@@ -239,7 +239,7 @@ Rectangle {
                         id: sortBlockheightText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
-                        text: qsTr("Blockheight")
+                        text: qsTr("Blockheight") + translationManager.emptyString
                         color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -295,7 +295,7 @@ Rectangle {
                         id: sortDateText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
-                        text: qsTr("Date")
+                        text: qsTr("Date") + translationManager.emptyString
                         color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -351,7 +351,7 @@ Rectangle {
                         id: sortAmountText
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15 * scaleRatio
-                        text: qsTr("Amount")
+                        text: qsTr("Amount") + translationManager.emptyString
                         color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
                     }
@@ -604,7 +604,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: isout ? qsTr("Sent") : qsTr("Received")
+                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + translationManager.emptyString
                                     color: "#C0C0C0"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -652,7 +652,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee")
+                                    text: (isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee")) + translationManager.emptyString
                                     color: "#C0C0C0"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -667,7 +667,7 @@ Rectangle {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
                                     text: {
-                                        if(!isout && confirmationsRequired === 60) return qsTr("Yes");
+                                        if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
                                         if(fee !== "") return fee + " XMR";
                                         return "-";
                                     }
@@ -711,7 +711,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: qsTr("Blockheight")
+                                    text: qsTr("Blockheight") + translationManager.emptyString
                                     color: "#C0C0C0"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -725,7 +725,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 14 * scaleRatio
-                                    text: blockheight > 0 ? blockheight : qsTr('Pending');
+                                    text: blockheight > 0 ? blockheight : qsTr('Pending') + translationManager.emptyString;
 
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -760,7 +760,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: qsTr("Confirmations")
+                                    text: qsTr("Confirmations") + translationManager.emptyString
                                     color: "#C0C0C0"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -815,7 +815,7 @@ Rectangle {
                                 Text {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15 * scaleRatio
-                                    text: qsTr("Date")
+                                    text: qsTr("Date") + translationManager.emptyString
                                     color: "#C0C0C0"
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -913,7 +913,7 @@ Rectangle {
                             Text {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
-                                text: qsTr("Description")
+                                text: qsTr("Description") + translationManager.emptyString
                                 color: "#C0C0C0"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
@@ -980,7 +980,7 @@ Rectangle {
                             Text {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
-                                text: qsTr("Transaction ID")
+                                text: qsTr("Transaction ID") + translationManager.emptyString
                                 color: "#C0C0C0"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
@@ -1022,7 +1022,7 @@ Rectangle {
                             Text {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
-                                text: qsTr("Transaction key")
+                                text: qsTr("Transaction key") + translationManager.emptyString
                                 color: "#C0C0C0"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
@@ -1070,7 +1070,7 @@ Rectangle {
                             Text {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15 * scaleRatio
-                                text: qsTr("Address sent to")
+                                text: qsTr("Address sent to") + translationManager.emptyString
                                 color: "#C0C0C0"
                                 anchors.verticalCenter: parent.verticalCenter
                             }
@@ -1091,9 +1091,9 @@ Rectangle {
                                     }
 
                                     if(isout && blockheight === 0)
-                                        return qsTr("Waiting for transaction to leave txpool.")
+                                        return qsTr("Waiting for transaction to leave txpool.") + translationManager.emptyString
                                     else
-                                        return qsTr("Unknown recipient");
+                                        return qsTr("Unknown recipient") + translationManager.emptyString;
                                 }
 
                                 color: MoneroComponents.Style.defaultFontColor
@@ -1489,9 +1489,9 @@ Rectangle {
 
     function updateHistoryStatusMessage(){
         if(root.txModelData.length <= 0){
-            root.historyStatusMessage = qsTr("No transaction history yet.");
+            root.historyStatusMessage = qsTr("No transaction history yet.") + translationManager.emptyString;
         } else if (root.txData.length <= 0){
-            root.historyStatusMessage = qsTr("No results.");
+            root.historyStatusMessage = qsTr("No results.") + translationManager.emptyString;
         } else {
             root.historyStatusMessage = qsTr("%1 transactions total, showing %2.").arg(root.txData.length).arg(txListViewModel.count) + translationManager.emptyString;
         }
@@ -1501,12 +1501,12 @@ Rectangle {
         var tx_key = currentWallet.getTxKey(hash)
         var tx_note = currentWallet.getUserNote(hash)
         var rings = currentWallet.getRings(hash)
-        var address_label = subaddrIndex == 0 ? qsTr("Primary address") : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
+        var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
         var address = currentWallet.address(subaddrAccount, subaddrIndex)
         if (rings)
             rings = rings.replace(/\|/g, '\n')
 
-        informationPopup.title = qsTr("Transaction details");
+        informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
         informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label);
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -1564,7 +1564,7 @@ Rectangle {
 
     FileDialog {
         id: writeCSVFileDialog
-        title: qsTr("Please choose a folder")
+        title: qsTr("Please choose a folder") + translationManager.emptyString
         selectFolder: true
         onRejected: {
             console.log("csv write canceled")

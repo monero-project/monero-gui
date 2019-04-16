@@ -134,7 +134,7 @@ ColumnLayout {
             MoneroComponents.LabelButton {
                 id: copyButtonId
                 visible: copyButton && input.text !== ""
-                text: qsTr("Copy")
+                text: qsTr("Copy") + translationManager.emptyString
                 onClicked: {
                     if (input.text.length > 0) {
                         console.log("Copied to clipboard");
@@ -147,7 +147,7 @@ ColumnLayout {
             MoneroComponents.LabelButton {
                 id: pasteButtonId
                 onClicked: item.onPaste(clipboard.text())
-                text: qsTr("Paste")
+                text: qsTr("Paste") + translationManager.emptyString
                 visible: pasteButton
             }
         }

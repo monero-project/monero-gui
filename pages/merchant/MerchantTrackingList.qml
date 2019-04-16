@@ -100,7 +100,7 @@ ListView {
                             font.pixelSize: 12 * scaleRatio
                             font.bold: false
                             color: "#707070"
-                            text: hide_amount ? "(" + qsTr("show") + ")" : "(" + qsTr("hide") + ")"
+                            text: (hide_amount ? "(" + qsTr("show") + ")" : "(" + qsTr("hide") + ")") + translationManager.emptyString
                         }
 
                         MouseArea {

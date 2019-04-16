@@ -99,7 +99,7 @@ Item {
             Layout.maximumWidth: 400 * scaleRatio
 
             Label {
-                text: root.walletName.length > 0 ? qsTr("Please enter wallet password for: ") + root.walletName : qsTr("Please enter wallet password")
+                text: (root.walletName.length > 0 ? qsTr("Please enter wallet password for: ") + root.walletName : qsTr("Please enter wallet password")) + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16 * scaleRatio
@@ -232,7 +232,7 @@ Item {
                 MoneroComponents.StandardButton {
                     id: okButton
                     small: true
-                    text: qsTr("Continue")
+                    text: qsTr("Continue") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     onClicked: {
                         root.close()
