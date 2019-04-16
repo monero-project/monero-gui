@@ -404,6 +404,49 @@ ApplicationWindow {
         leftPanel.balanceLabelText = qsTr("Balance (#%1%2)").arg(currentWallet.currentSubaddressAccount).arg(accountLabel === "" ? "" : (" – " + accountLabel));
     }
 
+    function onUriHandler(uri){
+        if(uri.startsWith("monero://")){
+            var address = uri.substring("monero://".length);
+
+            var params = {}
+            if(address.length === 0) return;
+            var spl = address.split("?");
+
+            if(spl.length > 2) return;
+            if(spl.length >= 1) {
+                // parse additional params
+                address = spl[0];
+
+                if(spl.length === 2){
+                    spl.shift();
+                    var item = spl[0];
+
+                    var _spl = item.split("&");
+                    for (var param in _spl){
+                        var _item = _spl[param];
+                        if(!_item.indexOf("=") > 0) continue;
+
+                        var __spl = _item.split("=");
+                        if(__spl.length !== 2) continue;
+
+                        params[__spl[0]] = __spl[1];
+                    }
+                }
+            }
+
+            // Fill fields
+            middlePanel.transferView.sendTo(address, params["tx_payment_id"], params["tx_description"], params["tx_amount"]);
+
+            // Raise window
+            appWindow.raise();
+            appWindow.show();
+
+            // @TODO: remove after paymentID deprecation
+            if(params.hasOwnProperty("tx_payment_id"))
+                persistentSettings.showPid = true;
+        }
+    }
+
     function onWalletConnectionStatusChanged(status){
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
@@ -494,6 +537,12 @@ ApplicationWindow {
 
         // Force switch normal view
         rootItem.state = "normal";
+
+        // Process queued IPC command
+        if(typeof IPC !== "undefined" && IPC.queuedCmd().length > 0){
+            var queuedCmd = IPC.queuedCmd();
+            if(/^\w+:\/\/(.*)$/.test(queuedCmd)) appWindow.onUriHandler(queuedCmd); // uri
+        }
     }
 
     function onWalletClosed(walletAddress) {
@@ -1078,6 +1127,7 @@ ApplicationWindow {
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
+        IPC.uriHandler.connect(onUriHandler);
 
         if(typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);

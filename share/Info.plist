@@ -31,5 +31,25 @@
 
   <key>NSRequiresAquaSystemAppearance</key>
   <string>True</string>
+
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>monero Handler</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>monero</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>moneroseed Handler</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>moneroseed</string>
+      </array>
+    </dict>
+  </array>
 </dict>
 </plist>
