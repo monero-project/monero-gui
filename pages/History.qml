@@ -93,6 +93,7 @@ Rectangle {
 
             RowLayout {
                 id: sortAndFilter
+                visible: root.txCount > 0
                 property bool collapsed: false
                 Layout.alignment: Qt.AlignRight | Qt.AlignBottom
                 Layout.preferredWidth: 100
@@ -433,6 +434,7 @@ Rectangle {
 
             RowLayout {
                 id: pagination
+                visible: root.txCount > 0
                 spacing: 0
                 Layout.alignment: Qt.AlignRight
                 Layout.preferredWidth: childrenRect.width
@@ -1318,7 +1320,7 @@ Rectangle {
             }
 
             MoneroComponents.StandardButton {
-                visible: !isIOS
+                visible: !isIOS && root.txCount > 0
                 small: true
                 text: qsTr("Export all history") + translationManager.emptyString
                 onClicked: {
