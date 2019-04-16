@@ -10,6 +10,12 @@ QT += qml quick widgets
 WALLET_ROOT=$$PWD/monero
 
 CONFIG += c++11 link_pkgconfig
+packagesExist(libusb-1.0) {
+    PKGCONFIG += libusb-1.0
+}
+packagesExist(protobuf) {
+    PKGCONFIG += protobuf
+}
 packagesExist(hidapi-libusb) {
     PKGCONFIG += hidapi-libusb
 }
