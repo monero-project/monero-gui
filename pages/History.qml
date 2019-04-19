@@ -838,8 +838,18 @@ Rectangle {
                                         state: "copyable"
                                         anchors.fill: parent
                                         hoverEnabled: true
-                                        onEntered: parent.color = MoneroComponents.Style.orange
-                                        onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                        onEntered: {
+                                            parent.color = MoneroComponents.Style.orange
+                                            if (persistentSettings.historyHumanDates) {
+                                                parent.text = date + "  " + time;
+                                            }
+                                        }
+                                        onExited: {
+                                            parent.color = MoneroComponents.Style.defaultFontColor
+                                            if (persistentSettings.historyHumanDates) {
+                                                parent.text = dateHuman
+                                            }
+                                        }
                                     }
                                 }
                             }
