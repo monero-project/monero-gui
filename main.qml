@@ -202,15 +202,6 @@ ApplicationWindow {
         leftPanel.selectItem(page);
     }
 
-    function openWalletFromFile(){
-        persistentSettings.restore_height = 0
-        restoreHeight = 0;
-        persistentSettings.is_recovering = false
-        walletPassword = ""
-        fileDialog.folder = "file://" + moneroAccountsDir
-        fileDialog.open();
-    }
-
     function initialize() {
         appWindow.viewState = "normal";
         console.log("initializing..")
@@ -1223,42 +1214,6 @@ ApplicationWindow {
             if (onRejectedCallback)
                 onRejectedCallback();
         }
-    }
-
-
-    //Open Wallet from file
-    FileDialog {
-        id: fileDialog
-        title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + moneroAccountsDir
-        nameFilters: [ "Wallet files (*.keys)"]
-        sidebarVisible: false
-        visible: false
-
-        onAccepted: {
-            persistentSettings.wallet_path = walletManager.urlToLocalPath(fileDialog.fileUrl)
-            if(isIOS)
-                persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir,"")
-            console.log("ÖPPPPNA")
-            console.log(moneroAccountsDir)
-            console.log(fileDialog.fileUrl)
-            console.log(persistentSettings.wallet_path)
-            passwordDialog.onAcceptedCallback = function() {
-                walletPassword = passwordDialog.password;
-                initialize();
-            }
-            passwordDialog.onRejectedCallback = function() {
-                console.log("Canceled");
-                wizard.wizardState = "wizardHome";
-                rootItem.state = "wizard";
-            }
-            passwordDialog.open(usefulName(walletPath()));
-        }
-        onRejected: {
-            console.log("Canceled")
-            rootItem.state = "wizard";
-        }
-
     }
 
     // Choose blockchain folder
