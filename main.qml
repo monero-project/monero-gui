@@ -602,6 +602,9 @@ ApplicationWindow {
             if(persistentSettings.is_recovering) {
                 persistentSettings.is_recovering = false
             }
+            if (persistentSettings.is_recovering_from_device) {
+                persistentSettings.is_recovering_from_device = false;
+            }
         }
 
         // Update history on every refresh if it's empty

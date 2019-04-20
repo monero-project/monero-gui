@@ -507,6 +507,7 @@ Rectangle {
     function openWalletFile(fn) {
         persistentSettings.restore_height = 0;
         persistentSettings.is_recovering = false;
+        persistentSettings.is_recovering_from_device = false;
 
         appWindow.restoreHeight = 0;
         appWindow.walletPassword = "";
