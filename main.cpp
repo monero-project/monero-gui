@@ -77,9 +77,10 @@
 bool isIOS = false;
 bool isAndroid = false;
 bool isWindows = false;
+bool isMac = false;
+bool isLinux = false;
 bool isDesktop = false;
 bool isOpenGL = true;
-bool isLinux = false;
 
 int main(int argc, char *argv[])
 {
@@ -97,6 +98,8 @@ int main(int argc, char *argv[])
     bool isWindows = true;
 #elif defined(Q_OS_LINUX)
     bool isLinux = true;
+#elif defined(Q_OS_MAC)
+    bool isMac = true;
 #endif
 
     // detect low graphics mode (start-low-graphics-mode.bat)
@@ -311,6 +314,8 @@ int main(int argc, char *argv[])
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
+    engine.rootContext()->setContextProperty("isMac", isMac);
+    engine.rootContext()->setContextProperty("isLinux", isLinux);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
     engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
