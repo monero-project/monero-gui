@@ -133,7 +133,7 @@ Item {
                                 font.pixelSize: 16 * scaleRatio
                                 font.bold: true
                                 color: "#767676"
-                                text: qsTr("Sales")
+                                text: qsTr("Sales") + translationManager.emptyString
                             }
 
                             Item {
@@ -297,7 +297,7 @@ Item {
                     font.pixelSize: 12 * scaleRatio
                     font.bold: false
                     color: "white"
-                    text: qsTr("(right-click, save as)")
+                    text: qsTr("(right-click, save as)") + translationManager.emptyString
                 }
             }
         }
@@ -340,7 +340,7 @@ Item {
                                 font.pixelSize: 14 * scaleRatio
                                 font.bold: true
                                 color: "#767676"
-                                text: qsTr("Payment URL")
+                                text: qsTr("Payment URL") + translationManager.emptyString
                             }
 
                             Item {
@@ -529,7 +529,7 @@ Item {
                 MerchantCheckbox {
                     id: trackingCheckbox
                     checked: root.enableTracking
-                    text: qsTr("Enable sales tracker")
+                    text: qsTr("Enable sales tracker") + translationManager.emptyString
 
                     onChanged: {
                         root.enableTracking = this.checked;
@@ -541,7 +541,7 @@ Item {
                     font.pixelSize: 14 * scaleRatio
                     font.bold: false
                     color: "white"
-                    text: qsTr("Leave this page")
+                    text: qsTr("Leave this page") + translationManager.emptyString
 
                     MouseArea {
                         anchors.fill: parent
@@ -570,7 +570,7 @@ Item {
             font.pixelSize: 14 * scaleRatio
             font.bold: true
             color: MoneroComponents.Style.moneroGrey
-            text: qsTr("The merchant page requires a larger window")
+            text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
         }
     }
 
