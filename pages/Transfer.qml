@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -33,6 +33,7 @@ import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
+import FontAwesome 1.0
 import "../components"
 import "../components" as MoneroComponents
 import "." 1.0
@@ -246,7 +247,10 @@ Rectangle {
                      addressLine.text = clipboardText; 
                   }
               }
-              inlineButton.icon: "../images/qr.png"
+              inlineButton.text: FontAwesome.qrcode
+              inlineButton.fontPixelSize: 22
+              inlineButton.fontFamily: FontAwesome.fontFamily
+              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
               inlineButton.buttonColor: MoneroComponents.Style.orange
               inlineButton.onClicked: {
                   cameraUi.state = "Capture"

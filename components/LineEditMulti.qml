@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -201,8 +201,7 @@ ColumnLayout {
             visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
             anchors.right: parent.right
             anchors.rightMargin: 8 * scaleRatio
-            anchors.top: parent.top
-            anchors.topMargin: 4 * scaleRatio
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 }
