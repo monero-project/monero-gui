@@ -76,7 +76,9 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // --max-concurrency based on threads available. max: 6
     int32_t concurrency = qBound(1, QThread::idealThreadCount() / 2, 6);
 
-    arguments << "--max-concurrency" << QString::number(concurrency);
+    if(!flags.contains("--max-concurrency", Qt::CaseSensitive)){
+        arguments << "--max-concurrency" << QString::number(concurrency);
+    }
 
     qDebug() << "starting monerod " + m_monerod;
     qDebug() << "With command line arguments " << arguments;
