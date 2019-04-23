@@ -107,7 +107,7 @@ Rectangle {
     property string walletRestoreMode: 'seed'  // seed, keys, qr
 
     // flickable margin
-    property int flickableHeightMargin
+    property int flickableHeightMargin: 200
 
     property int layoutScale: {
         if(isMobile){
