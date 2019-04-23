@@ -75,6 +75,10 @@ Rectangle {
         viewKeyLine.error = !result[1] && viewKeyLineLength != 0
         spendKeyLine.error = !result[2] && spendKeyLineLength != 0
 
+        // allow valid viewOnly
+        if (spendKeyLine.text.length === 0)
+            return (result[0] && result[1])
+
         return (result[0] && result[1] && result[2])
     }
 
