@@ -49,7 +49,7 @@ Item {
     property int rectHMargin: small ? 16 * scaleRatio : 22 * scaleRatio
     property alias text: inlineText.text
     property alias fontPixelSize: inlineText.font.pixelSize
-    property alias fontFamily: inlineText.font
+    property alias fontFamily: inlineText.font.family
     property alias buttonColor: rect.color
     signal clicked()
 

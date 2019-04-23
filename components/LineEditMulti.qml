@@ -201,7 +201,6 @@ ColumnLayout {
             visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
             anchors.right: parent.right
             anchors.rightMargin: 8 * scaleRatio
-            anchors.verticalCenter: parent.verticalCenter
         }
     }
 }
