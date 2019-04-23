@@ -355,7 +355,17 @@ Rectangle {
               placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
               Layout.fillWidth: true
               visible: descriptionCheckbox.checked
+              onTextChanged: {
+                  paymentIdWarningBox.visible = walletManager.paymentIdValid(text) && !persistentSettings.showPid
+              }
           }
+      }
+
+      MoneroComponents.WarningBox {
+          // @TODO: remove after pid removal hardfork
+          id: paymentIdWarningBox
+          text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
+          visible: false
       }
 
       MoneroComponents.WarningBox {
