@@ -55,6 +55,8 @@ Item {
     signal closeCallback()
 
     function open(walletName, errorText) {
+        isHidden = true
+        passwordInput.echoMode = TextInput.Password
         passwordInput.text = ""
         passwordInput.forceActiveFocus();
         inactiveOverlay.visible = true // draw appwindow inactive

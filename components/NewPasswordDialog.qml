@@ -49,6 +49,9 @@ Item {
     signal closeCallback()
 
     function open() {
+        isHidden = true
+        passwordInput1.echoMode = TextInput.Password;
+        passwordInput2.echoMode = TextInput.Password;
         inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
