@@ -14,7 +14,7 @@ Text {
     property string themeTransitionWhiteColor: ""
     font.family: MoneroComponents.Style.fontMedium.name
     font.bold: false
-    font.pixelSize: 14 * scaleRatio
+    font.pixelSize: 14
     textFormat: Text.PlainText
 
     MoneroEffects.ColorTransition {

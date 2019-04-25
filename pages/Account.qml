@@ -64,14 +64,14 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 20 * scaleRatio
+        spacing: 20
 
         ColumnLayout {
             id: balanceRow
@@ -85,7 +85,7 @@ Rectangle {
             }
 
             RowLayout {
-                Layout.topMargin: 22 * scaleRatio
+                Layout.topMargin: 22
 
                 MoneroComponents.TextPlain {
                     text: qsTr("Total balance: ") + translationManager.emptyString
@@ -118,7 +118,7 @@ Rectangle {
             }
 
             RowLayout {
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
 
                 MoneroComponents.TextPlain {
                     text: qsTr("Total unlocked balance: ") + translationManager.emptyString
@@ -164,8 +164,8 @@ Rectangle {
 
             ColumnLayout {
                 id: subaddressAccountListRow
-                property int subaddressAccountListItemHeight: 50 * scaleRatio
-                Layout.topMargin: 6 * scaleRatio
+                property int subaddressAccountListItemHeight: 50
+                Layout.topMargin: 6
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
                 Layout.preferredHeight: subaddressAccountListItemHeight * subaddressAccountListView.count
@@ -202,8 +202,8 @@ Rectangle {
 
                         Rectangle {
                             anchors.fill: parent
-                            anchors.topMargin: 5 * scaleRatio
-                            anchors.rightMargin: 80 * scaleRatio
+                            anchors.topMargin: 5
+                            anchors.rightMargin: 80
                             color: "transparent"
 
                             MoneroComponents.Label {
@@ -211,8 +211,8 @@ Rectangle {
                                 color: index === appWindow.current_subaddress_account_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.leftMargin: 6 * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: 6
+                                fontSize: 14
                                 fontBold: true
                                 text: "#" + index
                                 themeTransition: false
@@ -223,8 +223,8 @@ Rectangle {
                                 color: MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
-                                anchors.leftMargin: 6 * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: 6
+                                fontSize: 14
                                 fontBold: true
                                 text: label
                                 elide: Text.ElideRight
@@ -237,8 +237,8 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: balanceLabel.left
-                                anchors.leftMargin: (mainLayout.width < 510 ? -70 : -125) * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: (mainLayout.width < 510 ? -70 : -125)
+                                fontSize: 14
                                 fontBold: true
                                 text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 3 : 6)
                                 themeTransition: false
@@ -249,8 +249,8 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: (mainLayout.width < 510 ? -120 : -180) * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: (mainLayout.width < 510 ? -120 : -180)
+                                fontSize: 14
                                 fontBold: true
                                 text: qsTr("Balance: ") + balance
                                 elide: mainLayout.width < 510 ? Text.ElideRight : Text.ElideNone
@@ -339,10 +339,10 @@ Rectangle {
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
-                fontSize: 14 * scaleRatio 
+                fontSize: 14
                 iconOnTheLeft: true
                 Layout.fillWidth: true
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 text: qsTr("Create new account") + translationManager.emptyString; 
                 onClicked: { 
                     inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString

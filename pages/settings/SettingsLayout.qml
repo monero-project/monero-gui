@@ -50,14 +50,14 @@ Rectangle {
 
     ColumnLayout {
         id: settingsUI
-        property int itemHeight: 60 * scaleRatio
+        property int itemHeight: 60
         Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
         anchors.topMargin: 0
-        spacing: 6 * scaleRatio
+        spacing: 6
 
         MoneroComponents.CheckBox {
             visible: !isMobile
@@ -109,12 +109,12 @@ Rectangle {
         ColumnLayout {
             visible: userInActivityCheckbox.checked
             Layout.fillWidth: true
-            Layout.topMargin: 6 * scaleRatio
-            Layout.leftMargin: 42 * scaleRatio
+            Layout.topMargin: 6
+            Layout.leftMargin: 42
             spacing: 0
 
             MoneroComponents.TextBlock {
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 Layout.fillWidth: true
                 text: {
                     var val = userInactivitySlider.value;
@@ -136,8 +136,8 @@ Rectangle {
                 background: Rectangle {
                     x: parent.leftPadding
                     y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 200 * scaleRatio
-                    implicitHeight: 4 * scaleRatio
+                    implicitWidth: 200
+                    implicitHeight: 4
                     width: parent.availableWidth
                     height: implicitHeight
                     radius: 2
@@ -154,8 +154,8 @@ Rectangle {
                 handle: Rectangle {
                     x: parent.leftPadding + parent.visualPosition * (parent.availableWidth - width)
                     y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 18 * scaleRatio
-                    implicitHeight: 18 * scaleRatio
+                    implicitWidth: 18
+                    implicitHeight: 18
                     radius: 8
                     color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
                     border.color: MoneroComponents.Style.grey
@@ -176,7 +176,7 @@ Rectangle {
 
         MoneroComponents.StandardButton {
             visible: !persistentSettings.customDecorations
-            Layout.topMargin: 10 * scaleRatio
+            Layout.topMargin: 10
             small: true
             text: qsTr("Change language") + translationManager.emptyString
 

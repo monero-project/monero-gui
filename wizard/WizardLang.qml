@@ -65,8 +65,8 @@ Rectangle {
 
     ColumnLayout {
         anchors.top: parent.top
-        anchors.topMargin: persistentSettings.customDecorations ? 90 * scaleRatio : 32 * scaleRatio
-        width: parent.width - 100 * scaleRatio
+        anchors.topMargin: persistentSettings.customDecorations ? 90 : 32
+        width: parent.width - 100
         anchors.horizontalCenter: parent.horizontalCenter;
 
         TextArea {
@@ -76,9 +76,9 @@ Rectangle {
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: {
                 if(langScreen.layoutScale === 2 ){
-                    return 34 * scaleRatio;
+                    return 34;
                 } else {
-                    return 28 * scaleRatio;
+                    return 28;
                 }
             }
 
@@ -104,9 +104,9 @@ Rectangle {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(langScreen.layoutScale === 2 ){
-                    return 16 * scaleRatio;
+                    return 16;
                 } else {
-                    return 14 * scaleRatio;
+                    return 14;
                 }
             }
 
@@ -123,11 +123,11 @@ Rectangle {
 
         Flow {
             id: flow
-            height: 800 * scaleRatio
+            height: 800
             Layout.fillWidth: true
-            Layout.topMargin: 20 * scaleRatio
+            Layout.topMargin: 20
 
-            spacing: 5 * scaleRatio
+            spacing: 5
 
             Repeater {
                 model: langModel
@@ -136,25 +136,25 @@ Rectangle {
                     color: "transparent"
                     width: {
                         var minimumWidth = img.width + langRect.width;
-                        if(minimumWidth < 200 * scaleRatio) return 200 * scaleRatio;
+                        if(minimumWidth < 200) return 200;
                         return minimumWidth;
                     }
 
-                    height: 48 * scaleRatio
+                    height: 48
 
                     Rectangle {
                         id: img
                         anchors.top: parent.top
                         color: "transparent"
-                        width: 32 * scaleRatio
+                        width: 32
                         height: parent.height
 
                         Image {
                             source: flag
                             mipmap: true
                             smooth: true
-                            width: 32 * scaleRatio
-                            height: 32 * scaleRatio
+                            width: 32
+                            height: 32
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -166,12 +166,12 @@ Rectangle {
                         anchors.left: img.right
                         color: "transparent"
                         height: parent.height
-                        width: langText.width + 22 * scaleRatio
+                        width: langText.width + 22
 
                         MoneroComponents.TextPlain {
                             id: langText
                             font.bold: true
-                            font.pixelSize: 14 * scaleRatio
+                            font.pixelSize: 14
                             color: MoneroComponents.Style.defaultFontColor
                             text: display_name
                             anchors.verticalCenter: parent.verticalCenter
@@ -211,8 +211,8 @@ Rectangle {
 
         RowLayout {
             Layout.fillWidth: true
-            Layout.topMargin: 32 * scaleRatio
-            spacing: 20 * scaleRatio
+            Layout.topMargin: 32
+            spacing: 20
 
             MoneroComponents.StandardButton {
                 small: true

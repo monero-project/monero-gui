@@ -41,16 +41,16 @@ ColumnLayout {
     property alias labelButtonText: labelButton.text
     property alias placeholderText: placeholderLabel.text
 
-    property int inputPaddingLeft: 10 * scaleRatio
-    property int inputPaddingRight: 10 * scaleRatio
-    property int inputPaddingTop: 10 * scaleRatio
-    property int inputPaddingBottom: 10 * scaleRatio
+    property int inputPaddingLeft: 10
+    property int inputPaddingRight: 10
+    property int inputPaddingTop: 10
+    property int inputPaddingBottom: 10
     property int inputRadius: 4
 
     property bool placeholderCenter: false
     property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
-    property int placeholderFontSize: 18 * scaleRatio
+    property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
@@ -69,12 +69,12 @@ ColumnLayout {
 
     property string labelFontColor: MoneroComponents.Style.defaultFontColor
     property bool labelFontBold: false
-    property int labelFontSize: 16 * scaleRatio
+    property int labelFontSize: 16
     property bool labelButtonVisible: false
 
     property string fontColor: MoneroComponents.Style.defaultFontColor
     property bool fontBold: false
-    property int fontSize: 16 * scaleRatio
+    property int fontSize: 16
 
     property bool mouseSelection: true
     property alias readOnly: input.readOnly
@@ -100,7 +100,7 @@ ColumnLayout {
         id: inputLabelRect
         color: "transparent"
         Layout.fillWidth: true
-        height: (inputLabel.height + 10) * scaleRatio
+        height: (inputLabel.height + 10)
         visible: showingHeader ? true : false
 
         MoneroComponents.TextPlain {
@@ -123,7 +123,7 @@ ColumnLayout {
 
         RowLayout {
             anchors.right: parent.right
-            spacing: 16 * scaleRatio
+            spacing: 16
 
             MoneroComponents.LabelButton {
                 id: labelButton
@@ -177,7 +177,7 @@ ColumnLayout {
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 10 * scaleRatio
+            anchors.leftMargin: 10
             opacity: item.placeholderOpacity
             color: item.placeholderColor
             font.family: item.placeholderFontFamily
@@ -200,7 +200,7 @@ ColumnLayout {
             id: inlineButtonId
             visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
             anchors.right: parent.right
-            anchors.rightMargin: 8 * scaleRatio
+            anchors.rightMargin: 8
         }
     }
 }

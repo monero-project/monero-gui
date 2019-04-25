@@ -75,13 +75,13 @@ Item {
 
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: 400 * scaleRatio
+            Layout.maximumWidth: 400
 
             Label {
                 id: label
                 Layout.fillWidth: true
 
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 font.family: MoneroComponents.Style.fontLight.name
 
                 color: MoneroComponents.Style.defaultFontColor
@@ -95,7 +95,7 @@ Item {
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: MoneroComponents.Style.fontLight.name
-                font.pixelSize: 24 * scaleRatio
+                font.pixelSize: 24
                 KeyNavigation.tab: okButton
                 bottomPadding: 10
                 leftPadding: 10
@@ -124,7 +124,7 @@ Item {
             // Ok/Cancel buttons
             RowLayout {
                 id: buttons
-                spacing: 16 * scaleRatio
+                spacing: 16
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 

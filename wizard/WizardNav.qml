@@ -42,8 +42,8 @@ GridLayout {
     property alias btnNext: btnNext
     property string btnPrevText: qsTr("Previous") + translationManager.emptyString
     property string btnNextText: qsTr("Next") + translationManager.emptyString
-    Layout.topMargin: 20 * scaleRatio
-    Layout.preferredHeight: 70 * scaleRatio
+    Layout.topMargin: 20
+    Layout.preferredHeight: 70
     Layout.preferredWidth: parent.width
     columns: 3
 

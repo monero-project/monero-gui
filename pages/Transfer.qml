@@ -107,14 +107,14 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-      anchors.topMargin: 40 * scaleRatio
+      anchors.margins: (isMobile)? 17 : 20
+      anchors.topMargin: 40
 
       anchors.left: parent.left
       anchors.top: parent.top
       anchors.right: parent.right
 
-      spacing: 30 * scaleRatio
+      spacing: 30
 
       RowLayout {
           visible: root.warningContent !== ""
@@ -134,7 +134,7 @@ Rectangle {
 
           ColumnLayout {
               Layout.fillWidth: true
-              Layout.minimumWidth: 200 * scaleRatio
+              Layout.minimumWidth: 200
 
               // Amount input
               LineEdit {
@@ -149,7 +149,7 @@ Rectangle {
                       appWindow.showPageRequest("Account")
                   }
                   placeholderText: "0.00"
-                  width: 100 * scaleRatio
+                  width: 100
                   fontBold: true
                   inlineButtonText: qsTr("All") + translationManager.emptyString
                   inlineButton.onClicked: amountLine.text = "(all)"
@@ -169,10 +169,10 @@ Rectangle {
               Layout.fillWidth: true
               Label {
                   id: transactionPriority
-                  Layout.topMargin: 12 * scaleRatio
+                  Layout.topMargin: 12
                   text: qsTr("Transaction priority") + translationManager.emptyString
                   fontBold: false
-                  fontSize: 16 * scaleRatio
+                  fontSize: 16
               }
               // Note: workaround for translations in listElements
               // ListElement: cannot use script for property value, so
@@ -195,7 +195,7 @@ Rectangle {
               StandardDropdown {
                   Layout.fillWidth: true
                   id: priorityDropdown
-                  Layout.topMargin: 5 * scaleRatio
+                  Layout.topMargin: 5
                   currentIndex: 0
               }
           }
@@ -259,7 +259,7 @@ Rectangle {
 
       StandardButton {
           id: resolveButton
-          width: 80 * scaleRatio
+          width: 80
           text: qsTr("Resolve") + translationManager.emptyString
           visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
           enabled : visible
@@ -311,8 +311,8 @@ Rectangle {
               border: false
               checkedIcon: "qrc:///images/minus-white.png"
               uncheckedIcon: "qrc:///images/plus-white.png"
-              imgWidth: 12 * scaleRatio
-              imgHeight: 12 * scaleRatio
+              imgWidth: 12
+              imgHeight: 12
               fontSize: paymentIdLine.labelFontSize
               iconOnTheLeft: false
               Layout.fillWidth: true
@@ -342,8 +342,8 @@ Rectangle {
               border: false
               checkedIcon: "qrc:///images/minus-white.png"
               uncheckedIcon: "qrc:///images/plus-white.png"
-              imgWidth: 12 * scaleRatio
-              imgHeight: 12 * scaleRatio
+              imgWidth: 12
+              imgHeight: 12
               fontSize: descriptionLine.labelFontSize
               iconOnTheLeft: false
               Layout.fillWidth: true
@@ -384,7 +384,7 @@ Rectangle {
               id: sendButton
               rightIcon: "qrc:///images/rightArrow.png"
               rightIconInactive: "qrc:///images/rightArrowInactive.png"
-              Layout.topMargin: 4 * scaleRatio
+              Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
               enabled: {
                 updateSendButton()
@@ -433,9 +433,9 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 32 * scaleRatio
-        spacing: 26 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 32
+        spacing: 26
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {

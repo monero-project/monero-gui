@@ -70,7 +70,7 @@ ListView {
     }
 
     footer: Rectangle {
-        height: 127 * scaleRatio
+        height: 127
         width: listView.width
         color: "transparent"
 
@@ -86,12 +86,12 @@ ListView {
     delegate: Rectangle {
         id: delegate
         property bool collapsed: index ? false : true
-        height: collapsed ? 180 * scaleRatio : 70 * scaleRatio
+        height: collapsed ? 180 : 70
         width: listView.width
         color: "transparent"
 
         function collapse(){
-            delegate.height = 180 * scaleRatio;
+            delegate.height = 180;
         }
 
         // borders
@@ -130,29 +130,29 @@ ListView {
         Rectangle {
             id: row1
             anchors.left: parent.left
-            anchors.leftMargin: 20 * scaleRatio
+            anchors.leftMargin: 20
             anchors.right: parent.right
-            anchors.rightMargin: 20 * scaleRatio
+            anchors.rightMargin: 20
             anchors.top: parent.top
-            anchors.topMargin: 15 * scaleRatio
-            height: 40 * scaleRatio
+            anchors.topMargin: 15
+            height: 40
             color: "transparent"
 
             Image {
                 id: arrowImage
                 source: isOut ? "qrc:///images/downArrow.png" : confirmationsRequired === 60  ? "qrc:///images/miningxmr.png" : "qrc:///images/upArrow-green.png"
-                height: 18 * scaleRatio
-                width: (confirmationsRequired === 60  ? 18 : 12) * scaleRatio
+                height: 18
+                width: (confirmationsRequired === 60  ? 18 : 12)
                 anchors.top: parent.top
-                anchors.topMargin: 12 * scaleRatio
+                anchors.topMargin: 12
             }
 
             MoneroComponents.TextPlain {
                 id: txrxLabel
                 anchors.left: arrowImage.right
-                anchors.leftMargin: 18 * scaleRatio
+                anchors.leftMargin: 18
                 font.family: MoneroComponents.Style.fontLight.name
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: isOut ? qsTr("Sent") + translationManager.emptyString : qsTr("Received") + translationManager.emptyString
                 color: "#808080"
             }
@@ -160,11 +160,11 @@ ListView {
             MoneroComponents.TextPlain {
                 id: amountLabel
                 anchors.left: arrowImage.right
-                anchors.leftMargin: 18 * scaleRatio
+                anchors.leftMargin: 18
                 anchors.top: txrxLabel.bottom
-                anchors.topMargin: 0 * scaleRatio
+                anchors.topMargin: 0
                 font.family: MoneroComponents.Style.fontBold.name
-                font.pixelSize: 18 * scaleRatio
+                font.pixelSize: 18
                 font.bold: true
                 text: {
                     var _amount = amount;
@@ -198,7 +198,7 @@ ListView {
 
             Rectangle {
                 anchors.right: parent.right
-                width: 300 * scaleRatio
+                width: 300
                 height: parent.height
                 color: "transparent"
 
@@ -206,7 +206,7 @@ ListView {
                     id: dateLabel
                     anchors.left: parent.left
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                     text: date
                     color: "#808080"
                 }
@@ -214,10 +214,10 @@ ListView {
                 MoneroComponents.TextPlain {
                     id: timeLabel
                     anchors.left: dateLabel.right
-                    anchors.leftMargin: 7 * scaleRatio
+                    anchors.leftMargin: 7
                     anchors.top: parent.top
-                    anchors.topMargin: 1 * scaleRatio
-                    font.pixelSize: 12 * scaleRatio
+                    anchors.topMargin: 1
+                    font.pixelSize: 12
                     text: time
                     color: "#808080"
                 }
@@ -230,7 +230,7 @@ ListView {
                     anchors.top: dateLabel.bottom
                     anchors.topMargin: 0
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: {
                         if(isOut){
                             address = TxUtils.destinationsToAddress(destinations);
@@ -266,16 +266,16 @@ ListView {
                 }
 
                 Rectangle {
-                    height: 24 * scaleRatio
-                    width: 24 * scaleRatio
+                    height: 24
+                    width: 24
                     color: "transparent"
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
 
                     Image {
                         id: dropdownImage
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         source: "qrc:///images/whiteDropIndicator.png"
                         rotation: delegate.collapsed ? 180 : 0
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -297,19 +297,19 @@ ListView {
         Rectangle {
             id: row2
             anchors.left: parent.left
-            anchors.leftMargin: 20 * scaleRatio
+            anchors.leftMargin: 20
             anchors.right: parent.right
-            anchors.rightMargin: 20 * scaleRatio
+            anchors.rightMargin: 20
             anchors.top: row1.bottom
-            anchors.topMargin: 15 * scaleRatio
-            height: 40 * scaleRatio
+            anchors.topMargin: 15
+            height: 40
             color: "transparent"
             visible: delegate.collapsed
 
             // left column
             MoneroComponents.HistoryTableInnerColumn{
                 anchors.left: parent.left
-                anchors.leftMargin: 30 * scaleRatio
+                anchors.leftMargin: 30
 
                 labelHeader: qsTr("Transaction ID") + translationManager.emptyString
                 labelValue: hash.substring(0, 18) + "..."
@@ -319,8 +319,8 @@ ListView {
             // right column
             MoneroComponents.HistoryTableInnerColumn{
                 anchors.right: parent.right
-                anchors.rightMargin: 100 * scaleRatio
-                width: 200 * scaleRatio
+                anchors.rightMargin: 100
+                width: 200
                 height: parent.height
                 color: "transparent"
 
@@ -345,19 +345,19 @@ ListView {
         Rectangle {
             id: row3
             anchors.left: parent.left
-            anchors.leftMargin: 20 * scaleRatio
+            anchors.leftMargin: 20
             anchors.right: parent.right
-            anchors.rightMargin: 20 * scaleRatio
+            anchors.rightMargin: 20
             anchors.top: row2.bottom
-            anchors.topMargin: 15 * scaleRatio
-            height: 40 * scaleRatio
+            anchors.topMargin: 15
+            height: 40
             color: "transparent"
             visible: delegate.collapsed
 
             // left column
             MoneroComponents.HistoryTableInnerColumn{
                 anchors.left: parent.left
-                anchors.leftMargin: 30 * scaleRatio
+                anchors.leftMargin: 30
                 labelHeader: qsTr("Blockheight")
                 labelValue: {
                     if (!isPending)
@@ -377,8 +377,8 @@ ListView {
             // right column
             MoneroComponents.HistoryTableInnerColumn {
                 anchors.right: parent.right
-                anchors.rightMargin: 80 * scaleRatio
-                width: 220 * scaleRatio
+                anchors.rightMargin: 80
+                width: 220
                 height: parent.height
                 color: "transparent"
                 hashValue: hash
@@ -407,12 +407,12 @@ ListView {
                 id: proofButton
                 visible: isOut
                 color: "#404040"
-                height: 24 * scaleRatio
-                width: 24 * scaleRatio
+                height: 24
+                width: 24
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 36
-                radius: 20 * scaleRatio
+                radius: 20
 
                 MouseArea {
                     id: proofButtonMouseArea
@@ -449,19 +449,19 @@ ListView {
                     text: "P"
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                 }
             }
 
             Rectangle {
                 id: detailsButton
                 color: "#404040"
-                height: 24 * scaleRatio
-                width: 24 * scaleRatio
+                height: 24
+                width: 24
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 6
-                radius: 20 * scaleRatio
+                radius: 20
 
                 MouseArea {
                     id: detailsButtonMouseArea
@@ -496,7 +496,7 @@ ListView {
                     text: "?"
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                 }
             }
         }

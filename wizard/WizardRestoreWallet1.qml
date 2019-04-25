@@ -99,7 +99,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             WizardHeader {
                 title: qsTr("Restore wallet") + translationManager.emptyString
@@ -150,14 +150,14 @@ Rectangle {
             ColumnLayout {
                 // seed textarea
                 visible: wizardController.walletRestoreMode === 'seed'
-                Layout.preferredHeight: 100 * scaleRatio
+                Layout.preferredHeight: 100
                 Layout.fillWidth: true
 
                 Rectangle {
                     color: "transparent"
                     radius: 4
 
-                    Layout.preferredHeight: 100 * scaleRatio
+                    Layout.preferredHeight: 100
                     Layout.fillWidth: true
 
                     border.width: 1
@@ -175,14 +175,14 @@ Rectangle {
                         id: seedInput
                         property bool error: false
                         width: parent.width
-                        height: 100 * scaleRatio
+                        height: 100
 
                         color: MoneroComponents.Style.defaultFontColor
-                        textMargin: 2 * scaleRatio
+                        textMargin: 2
                         text: ""
 
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 16 * scaleRatio
+                        font.pixelSize: 16
                         selectionColor: MoneroComponents.Style.textSelectionColor
                         selectedTextColor: MoneroComponents.Style.textSelectedColor
                         wrapMode: TextInput.Wrap
@@ -193,9 +193,9 @@ Rectangle {
                             id: memoTextPlaceholder
                             opacity: 0.35
                             anchors.fill:parent
-                            font.pixelSize: 16 * scaleRatio
-                            anchors.margins: 8 * scaleRatio
-                            anchors.leftMargin: 10 * scaleRatio
+                            font.pixelSize: 16
+                            anchors.margins: 8
+                            anchors.leftMargin: 10
                             font.family: MoneroComponents.Style.fontRegular.name
                             text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
@@ -209,7 +209,7 @@ Rectangle {
                 id: addressLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("Account address (public)") + translationManager.emptyString
 
                 onTextUpdated: {
@@ -221,7 +221,7 @@ Rectangle {
                 id: viewKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("View key (private)") + translationManager.emptyString
 
                 onTextUpdated: {
@@ -233,7 +233,7 @@ Rectangle {
                 id: spendKeyLine
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
 
                 onTextUpdated: {
@@ -246,8 +246,8 @@ Rectangle {
                     id: restoreHeight
                     Layout.fillWidth: true
                     labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
-                    labelFontSize: 14 * scaleRatio
-                    placeholderFontSize: 16 * scaleRatio
+                    labelFontSize: 14
+                    placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
                     validator: RegExpValidator {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/

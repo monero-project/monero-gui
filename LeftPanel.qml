@@ -120,8 +120,8 @@ Rectangle {
                 anchors.topMargin: 20
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                height: 490 * scaleRatio
-                width: 260 * scaleRatio
+                height: 490
+                width: 260
 
                 Image {
                     id: card
@@ -173,8 +173,8 @@ Rectangle {
                 }
 
                 Rectangle {
-                    height: (logoutImage.height + 8) * scaleRatio
-                    width: (logoutImage.width + 8) * scaleRatio
+                    height: (logoutImage.height + 8)
+                    width: (logoutImage.width + 8)
                     color: "transparent"
                     anchors.right: parent.right
                     anchors.rightMargin: 8
@@ -185,8 +185,8 @@ Rectangle {
                         id: logoutImage
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
-                        height: 16 * scaleRatio
-                        width: 13 * scaleRatio
+                        height: 16
+                        width: 13
                         source: "qrc:///images/logout.png"
                     }
 
@@ -210,8 +210,8 @@ Rectangle {
                 anchors.topMargin: 20
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
-                height: 490 * scaleRatio
-                width: 50 * scaleRatio
+                height: 490
+                width: 50
 
                 MoneroComponents.TextPlain {
                     visible: !isMobile
@@ -672,7 +672,7 @@ Rectangle {
             anchors.leftMargin: 0
             anchors.rightMargin: 0
             anchors.bottom: networkStatus.top;
-            height: 10 * scaleRatio
+            height: 10
             color: "transparent"
         }
 
@@ -680,11 +680,11 @@ Rectangle {
             id: networkStatus
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: 5 * scaleRatio
+            anchors.leftMargin: 5
             anchors.rightMargin: 0
             anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
             connected: Wallet.ConnectionStatus_Disconnected
-            height: 48 * scaleRatio
+            height: 48
         }
 
         MoneroComponents.ProgressBar {
@@ -692,7 +692,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: daemonProgressBar.top
-            height: 48 * scaleRatio
+            height: 48
             syncType: qsTr("Wallet") + translationManager.emptyString
             visible: networkStatus.connected
         }
@@ -704,7 +704,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             syncType: qsTr("Daemon") + translationManager.emptyString
             visible: networkStatus.connected
-            height: 62 * scaleRatio
+            height: 62
         }
     }
 }

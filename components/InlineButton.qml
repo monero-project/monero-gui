@@ -46,9 +46,9 @@ Item {
     property string releasedColor: "#FF6C3C"
     property string icon: ""
     property string textColor: MoneroComponents.Style.inlineButtonTextColor
-    property int fontSize: small ? 14 * scaleRatio : 16 * scaleRatio
-    property int rectHeight: small ? 24 * scaleRatio : 24 * scaleRatio
-    property int rectHMargin: small ? 16 * scaleRatio : 22 * scaleRatio
+    property int fontSize: small ? 14 : 16
+    property int rectHeight: small ? 24 : 24
+    property int rectHMargin: small ? 16 : 22
     property alias text: inlineText.text
     property alias fontPixelSize: inlineText.font.pixelSize
     property alias fontFamily: inlineText.font.family
@@ -64,13 +64,13 @@ Item {
     Rectangle{
         id: rect
         color: MoneroComponents.Style.buttonInlineBackgroundColor
-        height: 24 * scaleRatio
-        width: inlineText.text ? (inlineText.width + 16) * scaleRatio : inlineButton.icon ? (inlineImage.width + 16) * scaleRatio : rect.height
+        height: 24
+        width: inlineText.text ? (inlineText.width + 16) : inlineButton.icon ? (inlineImage.width + 16) : rect.height
         radius: 4
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        anchors.rightMargin: 4 * scaleRatio
+        anchors.rightMargin: 4
 
         MoneroComponents.TextPlain {
             id: inlineText

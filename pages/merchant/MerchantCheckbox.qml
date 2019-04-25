@@ -6,7 +6,7 @@ import "../../components" as MoneroComponents
 
 RowLayout {
     id: root
-    spacing: 10 * scaleRatio
+    spacing: 10
     property bool checked: false;
     property alias text: content.text
     signal changed;
@@ -15,8 +15,8 @@ RowLayout {
         id: checkbox
         anchors.left: parent.left
         anchors.top: parent.top
-        implicitHeight: 22 * scaleRatio
-        width: 22 * scaleRatio
+        implicitHeight: 22
+        width: 22
         radius: 5
 
         Image {
@@ -29,7 +29,7 @@ RowLayout {
 
     MoneroComponents.TextPlain {
         id: content
-        font.pixelSize: 14 * scaleRatio
+        font.pixelSize: 14
         font.bold: false
         color: "white"
         text: ""

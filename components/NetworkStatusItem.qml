@@ -58,12 +58,12 @@ Rectangle {
     }
 
     RowLayout {
-        Layout.preferredHeight: 40 * scaleRatio
+        Layout.preferredHeight: 40
 
         Item {
             id: iconItem
-            width: 40 * scaleRatio
-            height: 40 * scaleRatio
+            width: 40
+            height: 40
             opacity: {
                 if(item.connected == Wallet.ConnectionStatus_Connected){
                     return 1
@@ -74,9 +74,9 @@ Rectangle {
 
             Image {
                 anchors.top: parent.top
-                anchors.topMargin: !appWindow.isMining ? 6 * scaleRatio : 4 * scaleRatio
+                anchors.topMargin: !appWindow.isMining ? 6 : 4
                 anchors.right: parent.right
-                anchors.rightMargin: !appWindow.isMining ? 11 * scaleRatio : 0
+                anchors.rightMargin: !appWindow.isMining ? 11 : 0
                 source: {
                     if(appWindow.isMining) {
                        return "qrc:///images/miningxmr.png"
@@ -102,8 +102,8 @@ Rectangle {
         }
 
         Item {
-            height: 40 * scaleRatio
-            width: 260 * scaleRatio
+            height: 40
+            width: 260
 
             MoneroComponents.TextPlain {
                 id: statusText
@@ -112,7 +112,7 @@ Rectangle {
                 anchors.topMargin: 0
                 font.family: MoneroComponents.Style.fontMedium.name
                 font.bold: true
-                font.pixelSize: 13 * scaleRatio
+                font.pixelSize: 13
                 color: MoneroComponents.Style.dimmedFontColor
                 opacity: MoneroComponents.Style.blackTheme ? 0.65 : 0.5
                 text: qsTr("Network status") + translationManager.emptyString
@@ -125,7 +125,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 14
                 font.family: MoneroComponents.Style.fontMedium.name
-                font.pixelSize: 20 * scaleRatio
+                font.pixelSize: 20
                 color: MoneroComponents.Style.defaultFontColor
                 text: getConnectionStatusString(item.connected) + translationManager.emptyString
                 opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.7

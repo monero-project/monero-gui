@@ -38,7 +38,7 @@ import QtQuick.Controls 2.0
 ColumnLayout {
     property string title: ""
     property string subtitle: ""
-    spacing: 4 * scaleRatio
+    spacing: 4
     Layout.maximumWidth: wizardController.wizardSubViewWidth
 
     TextArea {
@@ -49,9 +49,9 @@ ColumnLayout {
         opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
         font.pixelSize: {
             if(wizardController.layoutScale === 2 ){
-                return 34 * scaleRatio;
+                return 34;
             } else {
-                return 28 * scaleRatio;
+                return 28;
             }
         }
 
@@ -78,9 +78,9 @@ ColumnLayout {
         font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: {
             if(wizardController.layoutScale === 2 ){
-                return 16 * scaleRatio;
+                return 16;
             } else {
-                return 14 * scaleRatio;
+                return 14;
             }
         }
 

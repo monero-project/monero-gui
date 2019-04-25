@@ -67,7 +67,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             WizardHeader {
                 title: qsTr("Open a wallet from file") + translationManager.emptyString
@@ -75,7 +75,7 @@ Rectangle {
             }
 
             MoneroComponents.StandardButton {
-                Layout.topMargin: 20 * scaleRatio
+                Layout.topMargin: 20
                 id: btnNext
                 small: true
                 text: qsTr("Browse filesystem") + translationManager.emptyString
@@ -87,15 +87,15 @@ Rectangle {
 
             GridLayout {
                 visible: folderModel.count > 0
-                Layout.topMargin: 30 * scaleRatio
+                Layout.topMargin: 30
                 Layout.fillWidth: true
-                columnSpacing: 20 * scaleRatio
+                columnSpacing: 20
                 columns: 2
 
                 MoneroComponents.TextPlain {
                     text: qsTr("Most recent wallets") + translationManager.emptyString
                     font.family: MoneroComponents.Style.fontLight.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
                     Layout.fillWidth: true
                 }
@@ -107,14 +107,14 @@ Rectangle {
 
             GridLayout {
                 visible: folderModel.count > 0
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
-                columnSpacing: 20 * scaleRatio
+                columnSpacing: 20
                 columns: 2
 
                 ListView {
                     id: recentList
-                    property int itemHeight: 42 * scaleRatio
+                    property int itemHeight: 42
                     property int maxItems: 7
 
                     clip: true
@@ -125,14 +125,14 @@ Rectangle {
 
                     delegate: Rectangle {
                         height: recentList.itemHeight
-                        width: 200 * scaleRatio
+                        width: 200
                         property string activeColor: "#26FFFFFF"
                         color: "transparent"
 
                         RowLayout {
                             height: recentList.itemHeight
                             width: parent.width
-                            spacing: 10 * scaleRatio
+                            spacing: 10
 
                             Rectangle {
                                 Layout.preferredWidth: recentList.itemHeight
@@ -159,7 +159,7 @@ Rectangle {
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     color: MoneroComponents.Style.defaultFontColor
-                                    font.pixelSize: 18 * scaleRatio
+                                    font.pixelSize: 18
 
                                     selectionColor: MoneroComponents.Style.textSelectionColor
                                     selectedTextColor: MoneroComponents.Style.textSelectedColor
@@ -219,9 +219,9 @@ Rectangle {
             WizardNav {
                 Layout.topMargin: {
                     if(folderModel.count > 0){
-                        return 40 * scaleRatio;
+                        return 40;
                     } else {
-                        return 20 * scaleRatio;
+                        return 20;
                     }
                 }
                 progressEnabled: false

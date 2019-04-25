@@ -76,8 +76,8 @@ Rectangle {
     property var m_wallet;
     property alias wizardState: wizardStateView.state
     property alias wizardStatePrevious: wizardStateView.previousView
-    property int wizardSubViewWidth: 780 * scaleRatio
-    property int wizardSubViewTopMargin: persistentSettings.customDecorations ? 90 * scaleRatio : 32 * scaleRatio
+    property int wizardSubViewWidth: 780
+    property int wizardSubViewTopMargin: persistentSettings.customDecorations ? 90 : 32
     property bool skipModeSelection: false
 
     // wallet variables

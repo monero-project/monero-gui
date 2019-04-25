@@ -44,8 +44,8 @@ Item {
     property alias currentIndex: columnid.currentIndex
     property bool expanded: false
     property int dropdownHeight: 42
-    property int fontHeaderSize: 16 * scaleRatio
-    property int fontItemSize: 14 * scaleRatio
+    property int fontHeaderSize: 16
+    property int fontItemSize: 14
     property string colorBorder: MoneroComponents.Style.inputBorderColorInActive
     property string colorHeaderBackground: "transparent"
     property bool headerBorder: true
@@ -94,7 +94,7 @@ Item {
             id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: 12 * scaleRatio
+            anchors.leftMargin: 12
             elide: Text.ElideRight
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
@@ -107,7 +107,7 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32 * scaleRatio
+            width: 32
 
             Image {
                 id: dropdownIcon
@@ -120,7 +120,7 @@ Item {
                 source: dropdownIcon
                 anchors.fill: dropdownIcon
                 color: MoneroComponents.Style.defaultFontColor
-                rotation: dropdown.expanded ? 180  * scaleRatio : 0
+                rotation: dropdown.expanded ? 180  : 0
                 opacity: 1
             }
         }
@@ -146,14 +146,14 @@ Item {
         Rectangle {
             anchors.left: parent.left
             anchors.top: parent.top
-            width: 3 * scaleRatio; height: 3 * scaleRatio
+            width: 3; height: 3
             color: dropdown.pressedColor
         }
 
         Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
-            width: 3 * scaleRatio; height: 3 * scaleRatio
+            width: 3; height: 3
             color: dropdown.pressedColor
         }
 
@@ -186,7 +186,7 @@ Item {
                 delegate: Rectangle {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: (dropdown.dropdownHeight * 0.75) * scaleRatio
+                    height: (dropdown.dropdownHeight * 0.75)
                     //radius: index === repeater.count - 1 ? 4 : 0
                     color: itemArea.containsMouse || index === columnid.currentIndex || itemArea.containsMouse ? dropdown.releasedColor : dropdown.pressedColor
 
@@ -195,7 +195,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: col2Text.left
-                        anchors.leftMargin: 12 * scaleRatio
+                        anchors.leftMargin: 12
                         anchors.rightMargin: 0
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.bold: true
@@ -208,9 +208,9 @@ Item {
                         id: col2Text
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        anchors.rightMargin: 45 * scaleRatio
+                        anchors.rightMargin: 45
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 14 * scaleRatio
+                        font.pixelSize: 14
                         color: "#FFFFFF"
                         text: ""
                     }
@@ -218,14 +218,14 @@ Item {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
-                        width: 3 * scaleRatio; height: 3 * scaleRatio
+                        width: 3; height: 3
                         color: parent.color
                     }
 
                     Rectangle {
                         anchors.right: parent.right
                         anchors.top: parent.top
-                        width: 3 * scaleRatio; height: 3 * scaleRatio
+                        width: 3; height: 3
                         color: parent.color
                     }
 

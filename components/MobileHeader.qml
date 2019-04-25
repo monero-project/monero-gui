@@ -11,16 +11,16 @@ Rectangle {
     anchors.leftMargin: 1
     anchors.rightMargin: 1
     Layout.fillWidth: true
-    Layout.preferredHeight: 64 * scaleRatio
+    Layout.preferredHeight: 64
     color: "#FFFFFF"
 
     Image {
         id: logo
-        visible: appWindow.width > 460 * scaleRatio
+        visible: appWindow.width > 460
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: -5
         anchors.left: parent.left
-        anchors.leftMargin: 50 * scaleRatio
+        anchors.leftMargin: 50
         source: "qrc:///images/moneroLogo2.png"
     }
 
@@ -29,7 +29,7 @@ Rectangle {
         visible: !logo.visible
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        anchors.leftMargin: 40 * scaleRatio 
+        anchors.leftMargin: 40
         source: "qrc:///images/moneroIcon.png"
     }
 
@@ -37,16 +37,16 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: 10 * scaleRatio
-        width: 256 * scaleRatio
+        anchors.topMargin: 10
+        width: 256
         columns: 3
 
         MoneroComponents.TextPlain {
             id: balanceLabel
-            width: 116 * scaleRatio
-            height: 20 * scaleRatio
+            width: 116
+            height: 20
             font.family: "Arial"
-            font.pixelSize: 12 * scaleRatio
+            font.pixelSize: 12
             font.letterSpacing: -1
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -57,10 +57,10 @@ Rectangle {
 
         MoneroComponents.TextPlain {
             id: balanceText
-            width: 110 * scaleRatio
-            height: 20 * scaleRatio
+            width: 110
+            height: 20
             font.family: "Arial"
-            font.pixelSize: 18 * scaleRatio
+            font.pixelSize: 18
             font.letterSpacing: -1
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -70,8 +70,8 @@ Rectangle {
         }
 
         Item {
-            height: 20 * scaleRatio
-            width: 20 * scaleRatio
+            height: 20
+            width: 20
 
             Image {
                 anchors.verticalCenter: parent.verticalCenter
@@ -81,10 +81,10 @@ Rectangle {
         }
 
         MoneroComponents.TextPlain {
-            width: 116 * scaleRatio
-            height: 20 * scaleRatio
+            width: 116
+            height: 20
             font.family: "Arial"
-            font.pixelSize: 12 * scaleRatio
+            font.pixelSize: 12
             font.letterSpacing: -1
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft
@@ -95,10 +95,10 @@ Rectangle {
 
         MoneroComponents.TextPlain {
             id: availableBalanceText
-            width: 110 * scaleRatio
-            height: 20 * scaleRatio
+            width: 110
+            height: 20
             font.family: "Arial"
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             font.letterSpacing: -1
             elide: Text.ElideRight
             horizontalAlignment: Text.AlignLeft

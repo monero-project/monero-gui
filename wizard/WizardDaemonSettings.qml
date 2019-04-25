@@ -38,7 +38,7 @@ ColumnLayout {
     Layout.fillWidth: true
     Layout.maximumWidth: wizardController.wizardSubViewWidth
     Layout.alignment: Qt.AlignHCenter
-    spacing: 10 * scaleRatio
+    spacing: 10
 
     function save(){
         persistentSettings.useRemoteNode = remoteNode.checked
@@ -50,7 +50,7 @@ ColumnLayout {
         id: localNode
         Layout.fillWidth: true
         text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
-        fontSize: 16 * scaleRatio
+        fontSize: 16
         checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
         visible: !isAndroid && !isIOS
         onClicked: {
@@ -62,9 +62,9 @@ ColumnLayout {
     ColumnLayout {
         id: blockchainFolderRow
         visible: localNode.checked
-        spacing: 20 * scaleRatio
+        spacing: 20
 
-        Layout.topMargin: 8 * scaleRatio
+        Layout.topMargin: 8
         Layout.fillWidth: true
 
         MoneroComponents.LineEdit {
@@ -73,9 +73,9 @@ ColumnLayout {
 
             readOnly: true
             labelText: qsTr("Blockchain location (optional)") + translationManager.emptyString
-            labelFontSize: 14 * scaleRatio
+            labelFontSize: 14
             placeholderText: qsTr("Default") + translationManager.emptyString
-            placeholderFontSize: 15 * scaleRatio
+            placeholderFontSize: 15
             text: persistentSettings.blockchainDataDir
             inlineButton.small: true
             inlineButtonText: qsTr("Browse") + translationManager.emptyString
@@ -88,20 +88,20 @@ ColumnLayout {
         }
 
         ColumnLayout{
-            Layout.topMargin: 6 * scaleRatio
+            Layout.topMargin: 6
             spacing: 0
 
             TextArea {
                 text: qsTr("Bootstrap node") + translationManager.emptyString
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
                 font.family: MoneroComponents.Style.fontRegular.name
                 color: MoneroComponents.Style.defaultFontColor
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
-                        return 22 * scaleRatio;
+                        return 22;
                     } else {
-                        return 16 * scaleRatio;
+                        return 16;
                     }
                 }
 
@@ -119,7 +119,7 @@ ColumnLayout {
 
             TextArea {
                 text: qsTr("Additionally, you may specify a bootstrap node to use Monero immediately.") + translationManager.emptyString
-                Layout.topMargin: 4 * scaleRatio
+                Layout.topMargin: 4
                 Layout.fillWidth: true
 
                 font.family: MoneroComponents.Style.fontRegular.name
@@ -127,9 +127,9 @@ ColumnLayout {
 
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
-                        return 16 * scaleRatio;
+                        return 16;
                     } else {
-                        return 14 * scaleRatio;
+                        return 14;
                     }
                 }
 
@@ -152,7 +152,7 @@ ColumnLayout {
 
             MoneroComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
-                Layout.minimumWidth: 300 * scaleRatio
+                Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
 
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
@@ -171,9 +171,9 @@ ColumnLayout {
     MoneroComponents.RadioButton {
         id: remoteNode
         Layout.fillWidth: true
-        Layout.topMargin: 8 * scaleRatio
+        Layout.topMargin: 8
         text: qsTr("Connect to a remote node") + translationManager.emptyString
-        fontSize: 16 * scaleRatio
+        fontSize: 16
         checked: appWindow.persistentSettings.useRemoteNode
         onClicked: {
             checked = true
@@ -183,9 +183,9 @@ ColumnLayout {
 
     ColumnLayout {
         visible: remoteNode.checked
-        spacing: 0 * scaleRatio
+        spacing: 0
 
-        Layout.topMargin: 8 * scaleRatio
+        Layout.topMargin: 8
         Layout.fillWidth: true
 
         MoneroComponents.RemoteNodeEdit {

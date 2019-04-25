@@ -54,7 +54,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             WizardHeader {
                 title: qsTr("Create a new wallet") + translationManager.emptyString
@@ -68,26 +68,26 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
 
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
 
                 MoneroComponents.LineEditMulti {
                     id: seed
 
                     spacing: 0
-                    inputPaddingLeft: 16 * scaleRatio
-                    inputPaddingRight: 16 * scaleRatio
-                    inputPaddingTop: 20 * scaleRatio
-                    inputPaddingBottom: 20 * scaleRatio
+                    inputPaddingLeft: 16
+                    inputPaddingRight: 16
+                    inputPaddingTop: 20
+                    inputPaddingBottom: 20
                     inputRadius: 0
 
-                    fontSize: 18 * scaleRatio
+                    fontSize: 18
                     fontBold: true
                     wrapMode: Text.WordWrap
                     backgroundColor: "red"
                     addressValidation: false
                     labelText: qsTr("Mnemonic seed") + translationManager.emptyString
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     copyButton: false
                     readOnly: true
 

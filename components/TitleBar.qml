@@ -46,7 +46,7 @@ Rectangle {
 
     height: {
         if(!persistentSettings.customDecorations || isMobile) return 0;
-        return 50 * scaleRatio;
+        return 50;
     }
 
     z: 1
@@ -132,7 +132,7 @@ Rectangle {
             Text {
                 text: FontAwesome.globe
                 font.family: FontAwesome.fontFamily
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -158,7 +158,7 @@ Rectangle {
             Text {
                 text: MoneroComponents.Style.blackTheme ? FontAwesome.lightbulbO : FontAwesome.moonO
                 font.family: FontAwesome.fontFamily
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter

@@ -52,7 +52,7 @@ Rectangle {
         var offset = 0
         var item = button
         while (item.under) {
-            offset += 20 * scaleRatio
+            offset += 20
             item = item.under
         }
         return offset
@@ -60,7 +60,7 @@ Rectangle {
 
     color: "transparent"
     property bool present: !under || under.checked || checked || under.numSelectedChildren > 0
-    height: present ? ((appWindow.height >= 800) ? 44 * scaleRatio  : 38 * scaleRatio ) : 0
+    height: present ? ((appWindow.height >= 800) ? 44  : 38 ) : 0
 
     LinearGradient {
         visible: isOpenGL && button.checked
@@ -88,7 +88,7 @@ Rectangle {
     // button decorations that are subject to leftMargin offsets
     Rectangle {
         anchors.left: parent.left
-        anchors.leftMargin: parent.getOffset() + 20 * scaleRatio
+        anchors.leftMargin: parent.getOffset() + 20
         height: parent.height
         width: button.checked ? 20: 10
         color: "transparent"
@@ -97,9 +97,9 @@ Rectangle {
         Rectangle {
             id: dot
             anchors.centerIn: parent
-            width: button.checked ? 20 * scaleRatio : 8 * scaleRatio
-            height: button.checked ? 20 * scaleRatio : 8 * scaleRatio
-            radius: button.checked ? 20 * scaleRatio : 4 * scaleRatio
+            width: button.checked ? 20 : 8
+            height: button.checked ? 20 : 8
+            radius: button.checked ? 20 : 4
             color: button.dotColor
             // arrow if checked
             Image {
@@ -118,9 +118,9 @@ Rectangle {
             themeTransitionWhiteColor: MoneroComponents.Style._w_menuButtonTextColor
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.right
-            anchors.leftMargin: 8 * scaleRatio
+            anchors.leftMargin: 8
             font.bold: true
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
         }
     }
 
@@ -129,7 +129,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: parent.getOffset()
         anchors.right: parent.right
-        anchors.rightMargin: 20 * scaleRatio
+        anchors.rightMargin: 20
         height: 14
         width: 8
         image: MoneroComponents.Style.menuButtonImageRightSource
@@ -140,9 +140,9 @@ Rectangle {
     MoneroComponents.TextPlain {
         id: symbolText
         anchors.right: parent.right
-        anchors.rightMargin: 44 * scaleRatio
+        anchors.rightMargin: 44
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 12 * scaleRatio
+        font.pixelSize: 12
         font.bold: true
         color: button.checked || buttonArea.containsMouse ? MoneroComponents.Style.menuButtonTextColor : dot.color
         visible: appWindow.ctrlPressed

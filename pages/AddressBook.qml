@@ -51,14 +51,14 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 20 * scaleRatio
+        spacing: 20
 
         ColumnLayout {
             id: addressBookEmptyLayout
@@ -71,7 +71,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 32 * scaleRatio
+                font.pixelSize: 32
                 horizontalAlignment: TextInput.AlignLeft
                 selectByMouse: false
                 wrapMode: Text.WordWrap;
@@ -94,7 +94,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 horizontalAlignment: TextInput.AlignLeft
                 selectByMouse: false
                 wrapMode: Text.WordWrap;
@@ -130,13 +130,13 @@ Rectangle {
 
             MoneroComponents.Label {
                 Layout.bottomMargin: 20
-                fontSize: 32 * scaleRatio
+                fontSize: 32
                 text: qsTr("Address book") + translationManager.emptyString
             }
 
             ColumnLayout {
                 id: addressBookListRow
-                property int addressBookListItemHeight: 50 * scaleRatio
+                property int addressBookListItemHeight: 50
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
                 Layout.preferredHeight: addressBookListItemHeight * addressBookListView.count
@@ -177,8 +177,8 @@ Rectangle {
 
                         Rectangle {
                             anchors.fill: parent
-                            anchors.topMargin: 5 * scaleRatio
-                            anchors.rightMargin: 110 * scaleRatio
+                            anchors.topMargin: 5
+                            anchors.rightMargin: 110
                             color: "transparent"
 
                             MoneroComponents.Label {
@@ -186,8 +186,8 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.leftMargin: 6 * scaleRatio
-                                fontSize: 16 * scaleRatio
+                                anchors.leftMargin: 6
+                                fontSize: 16
                                 text: description
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - descriptionLabel.x - 1
@@ -198,9 +198,9 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: -addressLabel.width - 5  * scaleRatio
+                                anchors.leftMargin: -addressLabel.width - 5
 
-                                fontSize: 16 * scaleRatio
+                                fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 540 ? 1 : (mainLayout.width < 700 ? 2 : 3));
                             }
@@ -285,10 +285,10 @@ Rectangle {
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                fontSize: 16 * scaleRatio
+                fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 text: qsTr("Add address") + translationManager.emptyString;
                 onClicked: {
                     root.showAddAddress();
@@ -302,7 +302,7 @@ Rectangle {
             spacing: 0
 
             MoneroComponents.Label {
-                fontSize: 32 * scaleRatio
+                fontSize: 32
                 wrapMode: Text.WordWrap
                 text: (root.editEntry ? qsTr("Edit an address") : qsTr("Add an address")) + translationManager.emptyString
             }
@@ -424,7 +424,7 @@ Rectangle {
                 Text {
                     id: cancelButton
                     Layout.leftMargin: 20
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     font.bold: false
                     color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Cancel") + translationManager.emptyString
@@ -441,7 +441,7 @@ Rectangle {
                     id: deleteButton
                     visible: root.editEntry
                     Layout.leftMargin: 20
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     font.bold: false
                     color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Delete") + translationManager.emptyString

@@ -47,7 +47,7 @@ import "../js/TxUtils.js" as TxUtils
 Rectangle {
     id: root
     property var model
-    property int sideMargin: 50 * scaleRatio
+    property int sideMargin: 50
     property var initialized: false
     property int txMax: 5
     property int txOffset: 0
@@ -69,7 +69,7 @@ Rectangle {
 
     ColumnLayout {
         id: pageRoot
-        anchors.topMargin: 40 * scaleRatio
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
@@ -80,10 +80,10 @@ Rectangle {
             Layout.preferredWidth: parent.width - root.sideMargin
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
-            Layout.bottomMargin: 10 * scaleRatio
+            Layout.bottomMargin: 10
 
             MoneroComponents.Label {
-                fontSize: 24 * scaleRatio
+                fontSize: 24
                 text: qsTr("Transactions") + translationManager.emptyString
             }
 
@@ -97,12 +97,12 @@ Rectangle {
                 Layout.alignment: Qt.AlignRight | Qt.AlignBottom
                 Layout.preferredWidth: 100
                 Layout.preferredHeight: 15
-                spacing: 8 * scaleRatio
+                spacing: 8
 
                 MoneroComponents.TextPlain {
                     Layout.alignment: Qt.AlignVCenter
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 15 * scaleRatio
+                    font.pixelSize: 15
                     text: qsTr("Sort & filter") + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
 
@@ -119,8 +119,8 @@ Rectangle {
                 MoneroEffects.ImageMask {
                     id: sortCollapsedIcon
                     Layout.alignment: Qt.AlignVCenter
-                    height: 8 * scaleRatio
-                    width: 12 * scaleRatio
+                    height: 8
+                    width: 12
                     image: "qrc:///images/whiteDropIndicator.png"
                     fontAwesomeFallbackIcon: FontAwesome.arrowDown
                     fontAwesomeFallbackSize: 14
@@ -141,7 +141,7 @@ Rectangle {
 
         ColumnLayout {
             Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
+            Layout.topMargin: 8
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
             visible: sortAndFilter.collapsed
@@ -149,12 +149,12 @@ Rectangle {
             MoneroComponents.LineEdit {
                 id: searchInput
                 Layout.fillWidth: true
-                input.topPadding: 6 * scaleRatio
-                input.bottomPadding: 6 * scaleRatio
-                fontSize: 16 * scaleRatio
-                labelFontSize: 14 * scaleRatio
+                input.topPadding: 6
+                input.bottomPadding: 6
+                fontSize: 16
+                labelFontSize: 14
                 placeholderText: qsTr("Search...") + translationManager.emptyString
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 inputHeight: 34
                 onTextUpdated: {
                     if(searchInput.text != null && searchInput.text.length >= 3){
@@ -173,19 +173,19 @@ Rectangle {
         GridLayout {
             visible: sortAndFilter.collapsed
             Layout.fillWidth: true
-            Layout.topMargin: 4 * scaleRatio
+            Layout.topMargin: 4
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
             columns: 2
-            columnSpacing: 20 * scaleRatio
+            columnSpacing: 20
             z: 6
 
             MoneroComponents.DatePicker {
                 id: fromDatePicker
                 Layout.fillWidth: true
-                width: 100 * scaleRatio
+                width: 100
                 inputLabel.text: qsTr("Date from") + translationManager.emptyString
-                inputLabel.font.pixelSize: 14 * scaleRatio
+                inputLabel.font.pixelSize: 14
                 onCurrentDateChanged: {
                     if(root.initialized){
                         root.reset();
@@ -197,7 +197,7 @@ Rectangle {
             MoneroComponents.DatePicker {
                 id: toDatePicker
                 Layout.fillWidth: true
-                width: 100 * scaleRatio
+                width: 100
                 inputLabel.text: qsTr("Date to") + translationManager.emptyString
 
                 onCurrentDateChanged: {
@@ -210,8 +210,8 @@ Rectangle {
         }
 
         RowLayout {
-            Layout.topMargin: 20 * scaleRatio
-            Layout.bottomMargin: 20 * scaleRatio
+            Layout.topMargin: 20
+            Layout.bottomMargin: 20
             Layout.fillWidth: true
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
@@ -219,12 +219,12 @@ Rectangle {
             Rectangle {
                 visible: sortAndFilter.collapsed
                 color: "transparent"
-                Layout.preferredWidth: childrenRect.width + 38 * scaleRatio
+                Layout.preferredWidth: childrenRect.width + 38
                 Layout.preferredHeight: 20
 
                 MoneroComponents.TextPlain {
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 15 * scaleRatio
+                    font.pixelSize: 15
                     text: qsTr("Sort by") + ":"
                     color: MoneroComponents.Style.defaultFontColor
                     anchors.verticalCenter: parent.verticalCenter
@@ -235,7 +235,7 @@ Rectangle {
                 visible: sortAndFilter.collapsed
                 id: sortBlockheight
                 color: "transparent"
-                Layout.preferredWidth: sortBlockheightText.width + 42 * scaleRatio
+                Layout.preferredWidth: sortBlockheightText.width + 42
                 Layout.preferredHeight: 20
 
                 RowLayout {
@@ -245,7 +245,7 @@ Rectangle {
                     MoneroComponents.TextPlain {
                         id: sortBlockheightText
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
+                        font.pixelSize: 15
                         text: qsTr("Blockheight") + translationManager.emptyString
                         color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         anchors.verticalCenter: parent.verticalCenter
@@ -253,8 +253,8 @@ Rectangle {
                     }
 
                     MoneroEffects.ImageMask {
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         visible: root.sortBy === "blockheight" ? true : false
                         opacity: root.sortBy === "blockheight" ? 1 : 0.2
                         image: "qrc:///images/whiteDropIndicator.png"
@@ -295,7 +295,7 @@ Rectangle {
             Rectangle {
                 visible: sortAndFilter.collapsed
                 color: "transparent"
-                Layout.preferredWidth: sortDateText.width + 42 * scaleRatio
+                Layout.preferredWidth: sortDateText.width + 42
                 Layout.preferredHeight: 20
 
                 RowLayout {
@@ -305,7 +305,7 @@ Rectangle {
                     MoneroComponents.TextPlain {
                         id: sortDateText
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
+                        font.pixelSize: 15
                         text: qsTr("Date") + translationManager.emptyString
                         color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         themeTransition: false
@@ -313,8 +313,8 @@ Rectangle {
                     }
 
                     MoneroEffects.ImageMask {
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         visible: root.sortBy === "timestamp" ? true : false
                         opacity: root.sortBy === "timestamp" ? 1 : 0.2
                         image: "qrc:///images/whiteDropIndicator.png"
@@ -355,7 +355,7 @@ Rectangle {
             Rectangle {
                 visible: sortAndFilter.collapsed
                 color: "transparent"
-                Layout.preferredWidth: sortAmountText.width + 42 * scaleRatio
+                Layout.preferredWidth: sortAmountText.width + 42
                 Layout.preferredHeight: 20
 
                 RowLayout {
@@ -365,7 +365,7 @@ Rectangle {
                     MoneroComponents.TextPlain {
                         id: sortAmountText
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
+                        font.pixelSize: 15
                         text: qsTr("Amount") + translationManager.emptyString
                         color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         themeTransition: false
@@ -373,8 +373,8 @@ Rectangle {
                     }
 
                     MoneroEffects.ImageMask {
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         visible: root.sortBy === "amount" ? true : false
                         opacity: root.sortBy === "amount" ? 1 : 0.2
                         image: "qrc:///images/whiteDropIndicator.png"
@@ -419,7 +419,7 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     // status message
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 15 * scaleRatio
+                    font.pixelSize: 15
                     text: root.historyStatusMessage
 
                     color: MoneroComponents.Style.defaultFontColor
@@ -440,12 +440,12 @@ Rectangle {
 
                 Rectangle {
                     color: "transparent"
-                    Layout.preferredWidth: childrenRect.width + 2 * scaleRatio
+                    Layout.preferredWidth: childrenRect.width + 2
                     Layout.preferredHeight: 20
 
                     MoneroComponents.TextPlain {
                         font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 15 * scaleRatio
+                        font.pixelSize: 15
                         text: qsTr("Page") + ":"
                         color: MoneroComponents.Style.defaultFontColor
                         anchors.verticalCenter: parent.verticalCenter
@@ -454,9 +454,9 @@ Rectangle {
 
                 Rectangle {
                     color: "transparent"
-                    Layout.preferredWidth: childrenRect.width + 10 * scaleRatio
-                    Layout.leftMargin: 4 * scaleRatio
-                    Layout.preferredHeight: 20 * scaleRatio
+                    Layout.preferredWidth: childrenRect.width + 10
+                    Layout.leftMargin: 4
+                    Layout.preferredHeight: 20
 
                     MoneroComponents.TextPlain {
                         id: paginationText
@@ -496,8 +496,8 @@ Rectangle {
 
                 Rectangle {
                     id: paginationPrev
-                    Layout.preferredWidth: 18 * scaleRatio
-                    Layout.preferredHeight: 20 * scaleRatio
+                    Layout.preferredWidth: 18
+                    Layout.preferredHeight: 20
                     color: "transparent"
                     opacity: enabled ? 1.0 : 0.2
                     enabled: false
@@ -506,8 +506,8 @@ Rectangle {
                         id: prevIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         image: "qrc:///images/whiteDropIndicator.png"
                         fontAwesomeFallbackIcon: FontAwesome.arrowDown
                         fontAwesomeFallbackSize: 14
@@ -528,8 +528,8 @@ Rectangle {
 
                 Rectangle {
                     id: paginationNext
-                    Layout.preferredWidth: 18 * scaleRatio
-                    Layout.preferredHeight: 20 * scaleRatio
+                    Layout.preferredWidth: 18
+                    Layout.preferredHeight: 20
                     color: "transparent"
                     opacity: enabled ? 1.0 : 0.2
                     enabled: false
@@ -538,8 +538,8 @@ Rectangle {
                         id: nextIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         image: "qrc:///images/whiteDropIndicator.png"
                         fontAwesomeFallbackIcon: FontAwesome.arrowDown
                         fontAwesomeFallbackSize: 14
@@ -591,11 +591,11 @@ Rectangle {
 
                     Rectangle {
                         anchors.top: parent.top
-                        anchors.topMargin: 24 * scaleRatio
+                        anchors.topMargin: 24
                         anchors.horizontalCenter: parent.horizontalCenter
-                        width: 10 * scaleRatio
-                        height: 10 * scaleRatio
-                        radius: 8 * scaleRatio
+                        width: 10
+                        height: 10
+                        radius: 8
                         color: isout ? "#d85a00" : "#2eb358"
                     }
                 }
@@ -633,7 +633,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: isout ? qsTr("Sent") : qsTr("Received") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -649,7 +649,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: _amount + " XMR"
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -683,7 +683,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: isout ? qsTr("Fee") : confirmationsRequired === 60 ? qsTr("Mined") : qsTr("Fee") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -699,7 +699,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: {
                                         if(!isout && confirmationsRequired === 60) return qsTr("Yes") + translationManager.emptyString;
                                         if(fee !== "") return fee + " XMR";
@@ -744,7 +744,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: qsTr("Blockheight") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -760,7 +760,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 14 * scaleRatio
+                                    font.pixelSize: 14
                                     text: blockheight > 0 ? blockheight : qsTr('Pending') + translationManager.emptyString;
 
                                     color: MoneroComponents.Style.defaultFontColor
@@ -795,7 +795,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: qsTr("Confirmations") + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -812,7 +812,7 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     property bool confirmed: confirmations < confirmationsRequired ? false : true
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: confirmed ? confirmations : confirmations + "/" + confirmationsRequired
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -852,7 +852,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: qsTr("Date")
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -868,7 +868,7 @@ Rectangle {
 
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
-                                    font.pixelSize: 15 * scaleRatio
+                                    font.pixelSize: 15
                                     text: persistentSettings.historyHumanDates ? dateHuman : date + "  " + time
 
                                     color: MoneroComponents.Style.defaultFontColor
@@ -909,8 +909,8 @@ Rectangle {
                                     text: FontAwesome.info
                                     small: true
                                     label.font.family: FontAwesome.fontFamily
-                                    fontSize: 18 * scaleRatio
-                                    width: 28 * scaleRatio
+                                    fontSize: 18
+                                    width: 28
 
                                     MouseArea {
                                         state: "details"
@@ -926,7 +926,7 @@ Rectangle {
                                 Image {
                                     visible: !isout && confirmationsRequired === 60
                                     anchors.left: btnDetails.right
-                                    anchors.leftMargin: 16 * scaleRatio
+                                    anchors.leftMargin: 16
                                     width: 28
                                     height: 28
                                     source: "qrc:///images/miningxmr.png"
@@ -935,12 +935,12 @@ Rectangle {
                                 MoneroComponents.StandardButton {
                                     visible: isout
                                     anchors.left: btnDetails.right
-                                    anchors.leftMargin: 10 * scaleRatio
+                                    anchors.leftMargin: 10
                                     text: FontAwesome.productHunt
                                     small: true
                                     label.font.family: FontAwesome.fontFamily
-                                    fontSize: 18 * scaleRatio
-                                    width: 36 * scaleRatio
+                                    fontSize: 18
+                                    width: 36
 
                                     MouseArea {
                                         state: "proof"
@@ -968,7 +968,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: qsTr("Description") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -985,7 +985,7 @@ Rectangle {
                             MoneroComponents.TextPlain {
                                 id: txNoteText
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: tx_note !== "" ? tx_note : "-"
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
@@ -1002,7 +1002,7 @@ Rectangle {
                             MoneroEffects.ImageMask {
                                 anchors.top: parent.top
                                 anchors.left: txNoteText.right
-                                anchors.leftMargin: 12 * scaleRatio
+                                anchors.leftMargin: 12
                                 image: "qrc:///images/edit.svg"
                                 fontAwesomeFallbackIcon: FontAwesome.pencilSquare
                                 fontAwesomeFallbackSize: 22
@@ -1036,7 +1036,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: qsTr("Transaction ID") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -1052,7 +1052,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: hash
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
@@ -1080,7 +1080,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: qsTr("Transaction key") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -1096,7 +1096,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: {
                                     var txKey = currentWallet.getTxKey(hash)
                                     if(txKey) return txKey;
@@ -1130,7 +1130,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: qsTr("Address sent to") + translationManager.emptyString
                                 color: MoneroComponents.Style.historyHeaderTextColor
                                 themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -1147,7 +1147,7 @@ Rectangle {
 
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
-                                font.pixelSize: 15 * scaleRatio
+                                font.pixelSize: 15
                                 text: {
                                     if(isout && address !== ""){
                                         return TxUtils.addressTruncate(address, 24);
@@ -1230,10 +1230,10 @@ Rectangle {
                     MoneroEffects.ImageMask {
                         id: collapsedIcon
                         anchors.top: parent.top
-                        anchors.topMargin: 24 * scaleRatio
+                        anchors.topMargin: 24
                         anchors.horizontalCenter: parent.horizontalCenter
-                        height: 8 * scaleRatio
-                        width: 12 * scaleRatio
+                        height: 8
+                        width: 12
                         image: "qrc:///images/whiteDropIndicator.png"
                         rotation: delegate.collapsed ? 180 : 0
                         color: MoneroComponents.Style.defaultFontColor
@@ -1272,8 +1272,8 @@ Rectangle {
 
         Item {
             visible: sortAndFilter.collapsed
-            Layout.topMargin: 10 * scaleRatio
-            Layout.bottomMargin: 10 * scaleRatio
+            Layout.topMargin: 10
+            Layout.bottomMargin: 10
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
 
@@ -1282,7 +1282,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 15 * scaleRatio
+                font.pixelSize: 15
                 text: root.historyStatusMessage;
                 color: MoneroComponents.Style.dimmedFontColor
                 themeTransitionBlackColor: MoneroComponents.Style._b_dimmedFontColor
@@ -1292,8 +1292,8 @@ Rectangle {
 
         MoneroComponents.CheckBox2 {
             id: showAdvancedCheckbox
-            Layout.topMargin: 30 * scaleRatio
-            Layout.bottomMargin: 20 * scaleRatio
+            Layout.topMargin: 30
+            Layout.bottomMargin: 20
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
             checked: persistentSettings.historyShowAdvanced
@@ -1305,7 +1305,7 @@ Rectangle {
             visible: persistentSettings.historyShowAdvanced
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             MoneroComponents.CheckBox {
                 id: humanDatesCheckBox

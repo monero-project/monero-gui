@@ -38,16 +38,16 @@ Item {
     property alias text: label.text
     property string checkedIcon: "qrc:///images/check-white.svg"
     property string uncheckedIcon
-    property int imgWidth: 13 * scaleRatio
-    property int imgHeight: 13 * scaleRatio
+    property int imgWidth: 13
+    property int imgHeight: 13
     property bool checked: false
     property alias background: backgroundRect.color
     property bool border: true
-    property int fontSize: 14 * scaleRatio
+    property int fontSize: 14
     property alias fontColor: label.color
     property bool iconOnTheLeft: true
     signal clicked()
-    height: 25 * scaleRatio
+    height: 25
     width: checkBoxLayout.width
 
     function toggle(){
@@ -58,7 +58,7 @@ Item {
     RowLayout {
         id: checkBoxLayout
         layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
-        spacing: (!isMobile ? 10 : 8) * scaleRatio
+        spacing: (!isMobile ? 10 : 8)
 
         Item {
             id: checkMark

@@ -68,7 +68,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             WizardHeader {
                 title: qsTr("Create a new wallet") + translationManager.emptyString
@@ -82,13 +82,13 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
 
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
 
                 MoneroComponents.RadioButton {
                     id: newDeviceWallet
                     text: qsTr("Create a new wallet from device.") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
+                    fontSize: 16
                     checked: true
                     onClicked: {
                         checked = true;
@@ -99,9 +99,9 @@ Rectangle {
 
                 MoneroComponents.RadioButton {
                     id: restoreDeviceWallet
-                    Layout.topMargin: 10 * scaleRatio
+                    Layout.topMargin: 10
                     text: qsTr("Restore a wallet from device. Use this if you used your hardware wallet before.") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
+                    fontSize: 16
                     checked: false
                     onClicked: {
                         checked = true;
@@ -112,18 +112,18 @@ Rectangle {
             }
 
             ColumnLayout {
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                spacing: 20 * scaleRatio
+                spacing: 20
 
                 MoneroComponents.LineEdit {
                     id: restoreHeight
                     visible: !newDeviceWallet.checked
                     Layout.fillWidth: true
                     labelText: qsTr("Wallet creation date as `YYYY-MM-DD` or restore height") + translationManager.emptyString
-                    labelFontSize: 14 * scaleRatio
-                    placeholderFontSize: 16 * scaleRatio
+                    labelFontSize: 14
+                    placeholderFontSize: 16
                     placeholderText: qsTr("Restore height") + translationManager.emptyString
                     validator: RegExpValidator {
                         regExp: /^(\d+|\d{4}-\d{2}-\d{2})$/
@@ -136,9 +136,9 @@ Rectangle {
                     Layout.fillWidth: true
 
                     labelText: qsTr("Subaddress lookahead (optional)") + translationManager.emptyString
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     placeholderText: "<major>:<minor>"
-                    placeholderFontSize: 16 * scaleRatio
+                    placeholderFontSize: 16
                     validator: RegExpValidator { regExp: /(\d+):(\d+)?$/ }
                 }
             }
@@ -146,7 +146,7 @@ Rectangle {
             ColumnLayout {
                 spacing: 0
 
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
                 z: 3
 
@@ -155,7 +155,7 @@ Rectangle {
                         id: deviceNameDropdown
                         dataModel: deviceNameModel
                         Layout.fillWidth: true
-                        Layout.topMargin: 6 * scaleRatio
+                        Layout.topMargin: 6
                     }
                 }
             }
@@ -167,7 +167,7 @@ Rectangle {
                 Layout.fillWidth: true
                 font.family: MoneroComponents.Style.fontRegular.name
                 color: MoneroComponents.Style.errorColor
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
 
                 selectionColor: MoneroComponents.Style.textSelectionColor
                 selectedTextColor: MoneroComponents.Style.textSelectedColor

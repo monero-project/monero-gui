@@ -46,14 +46,14 @@ Rectangle {
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
 
-        spacing: 10 * scaleRatio
+        spacing: 10
 
         ColumnLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.alignment: Qt.AlignHCenter
-            spacing: 0 * scaleRatio
+            spacing: 0
 
             WizardHeader {
                 title: qsTr("Mode selection.") + translationManager.emptyString
@@ -62,7 +62,7 @@ Rectangle {
 
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                Layout.topMargin: 20 * scaleRatio
+                Layout.topMargin: 20
                 headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
@@ -84,8 +84,8 @@ Rectangle {
 
             Rectangle {
                 Layout.preferredHeight: 1
-                Layout.topMargin: 5 * scaleRatio
-                Layout.bottomMargin: 10 * scaleRatio
+                Layout.topMargin: 5
+                Layout.bottomMargin: 10
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -113,8 +113,8 @@ Rectangle {
 
             Rectangle {
                 Layout.preferredHeight: 1
-                Layout.topMargin: 5 * scaleRatio
-                Layout.bottomMargin: 10 * scaleRatio
+                Layout.topMargin: 5
+                Layout.bottomMargin: 10
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -132,7 +132,7 @@ Rectangle {
             }
 
             WizardNav {
-                Layout.topMargin: 5 * scaleRatio
+                Layout.topMargin: 5
                 btnPrevText: qsTr("Change language") + translationManager.emptyString
                 btnNext.visible: false
                 progressSteps: 0

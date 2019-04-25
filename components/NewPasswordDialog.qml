@@ -96,20 +96,20 @@ Item {
         z: inactiveOverlay.z + 1
         id: mainLayout
         spacing: 10
-        anchors { fill: parent; margins: 35 * scaleRatio }
+        anchors { fill: parent; margins: 35 }
 
         ColumnLayout {
             id: column
 
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
-            Layout.maximumWidth: 400 * scaleRatio
+            Layout.maximumWidth: 400
 
             Label {
                 text: qsTr("Please enter new password") + translationManager.emptyString
                 Layout.fillWidth: true
 
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 font.family: MoneroComponents.Style.fontLight.name
 
                 color: MoneroComponents.Style.defaultFontColor
@@ -122,7 +122,7 @@ Item {
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: MoneroComponents.Style.fontLight.name
-                font.pixelSize: 24 * scaleRatio
+                font.pixelSize: 24
                 echoMode: TextInput.Password
                 bottomPadding: 10
                 leftPadding: 10
@@ -139,8 +139,8 @@ Item {
                     color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
-                        width: 26 * scaleRatio
-                        height: 26 * scaleRatio
+                        width: 26
+                        height: 26
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
                         source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
@@ -156,13 +156,13 @@ Item {
                             }
                             onEntered: {
                                 parent.opacity = 0.9
-                                parent.width = 28 * scaleRatio
-                                parent.height = 28 * scaleRatio
+                                parent.width = 28
+                                parent.height = 28
                             }
                             onExited: {
                                 parent.opacity = 0.7
-                                parent.width = 26 * scaleRatio
-                                parent.height = 26 * scaleRatio
+                                parent.width = 26
+                                parent.height = 26
                             }
                         }
                     }
@@ -187,7 +187,7 @@ Item {
                 text: qsTr("Please confirm new password") + translationManager.emptyString
                 Layout.fillWidth: true
 
-                font.pixelSize: 16 * scaleRatio
+                font.pixelSize: 16
                 font.family: MoneroComponents.Style.fontLight.name
 
                 color: MoneroComponents.Style.defaultFontColor
@@ -200,7 +200,7 @@ Item {
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: MoneroComponents.Style.fontLight.name
-                font.pixelSize: 24 * scaleRatio
+                font.pixelSize: 24
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
                 bottomPadding: 10
@@ -217,8 +217,8 @@ Item {
                     color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
-                        width: 26 * scaleRatio
-                        height: 26 * scaleRatio
+                        width: 26
+                        height: 26
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
                         source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
@@ -235,13 +235,13 @@ Item {
                             }
                             onEntered: {
                                 parent.opacity = 0.9
-                                parent.width = 28 * scaleRatio
-                                parent.height = 28 * scaleRatio
+                                parent.width = 28
+                                parent.height = 28
                             }
                             onExited: {
                                 parent.opacity = 0.7
-                                parent.width = 26 * scaleRatio
-                                parent.height = 26 * scaleRatio
+                                parent.width = 26
+                                parent.height = 26
                             }
                         }
                     }
@@ -271,7 +271,7 @@ Item {
             // Ok/Cancel buttons
             RowLayout {
                 id: buttons
-                spacing: 16 * scaleRatio
+                spacing: 16
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 

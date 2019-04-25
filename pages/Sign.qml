@@ -87,17 +87,17 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         Layout.fillWidth: true
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 20 * scaleRatio
+        spacing: 20
 
         MoneroComponents.Label {
-            fontSize: 24 * scaleRatio
+            fontSize: 24
             text: qsTr("Sign/verify") + translationManager.emptyString
         }
 
@@ -106,7 +106,7 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
         }
 
@@ -117,18 +117,18 @@ Rectangle {
             MoneroComponents.TextPlain {
                 id: modeText
                 Layout.fillWidth: true
-                Layout.topMargin: 12 * scaleRatio
+                Layout.topMargin: 12
                 text: qsTr("Mode") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 20 * scaleRatio
+                font.pixelSize: 20
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.defaultFontColor
             }
 
             RowLayout {
                 id: modeButtonsRow
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
 
                 MoneroComponents.StandardButton {
                     id: handleMessageButton
@@ -154,12 +154,12 @@ Rectangle {
 
         ColumnLayout {
             id: signSection
-            spacing: 10 * scaleRatio
+            spacing: 10
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
-                Layout.topMargin: 12 * scaleRatio
-                Layout.bottomMargin: 24 * scaleRatio
+                Layout.topMargin: 12
+                Layout.bottomMargin: 24
                 textFormat: Text.RichText
                 text: fileMode ? qsTr("Sign file") + translationManager.emptyString : qsTr("Sign message") + translationManager.emptyString
             }
@@ -167,15 +167,15 @@ Rectangle {
             ColumnLayout{
                 id: signMessageRow
                 Layout.fillWidth: true
-                spacing: 10 * scaleRatio
+                spacing: 10
                 visible: messageMode
 
                 MoneroComponents.LineEditMulti{
                     id: signMessageLine
                     Layout.fillWidth: true
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     labelText: qsTr("Message") + translationManager.emptyString;
-                    placeholderFontSize: 16 * scaleRatio
+                    placeholderFontSize: 16
                     placeholderText: qsTr("Enter a message to sign") + translationManager.emptyString;
                     readOnly: false
                     onTextChanged: signSignatureLine.text = ''
@@ -191,9 +191,9 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti {
                     id: signFileLine
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     labelText: qsTr("File") + translationManager.emptyString
-                    placeholderFontSize: 16 * scaleRatio
+                    placeholderFontSize: 16
                     placeholderText: qsTr("Enter path to file") + translationManager.emptyString;
                     readOnly: false
                     Layout.fillWidth: true
@@ -219,9 +219,9 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti {
                     id: signSignatureLine
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     labelText: qsTr("Signature") + translationManager.emptyString
-                    placeholderFontSize: 16 * scaleRatio
+                    placeholderFontSize: 16
                     placeholderText: messageMode ? qsTr("Click [Sign Message] to generate signature") + translationManager.emptyString : qsTr("Click [Sign File] to generate signature") + translationManager.emptyString;
                     readOnly: true
                     Layout.fillWidth: true
@@ -275,11 +275,11 @@ Rectangle {
 
         ColumnLayout {
             id: verifySection
-            spacing: 16 * scaleRatio
+            spacing: 16
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
-                Layout.bottomMargin: 24 * scaleRatio
+                Layout.bottomMargin: 24
                 textFormat: Text.RichText
                 text: fileMode ? qsTr("Verify file") + translationManager.emptyString : qsTr("Verify message") + translationManager.emptyString
             }
@@ -288,9 +288,9 @@ Rectangle {
                 id: verifyMessageLine
                 visible: messageMode
                 Layout.fillWidth: true
-                labelFontSize: 14 * scaleRatio
+                labelFontSize: 14
                 labelText: qsTr("Message") + translationManager.emptyString
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("Enter the message to verify") + translationManager.emptyString
                 readOnly: false
                 wrapMode: Text.WrapAnywhere
@@ -305,9 +305,9 @@ Rectangle {
 
                 MoneroComponents.LineEditMulti {
                     id: verifyFileLine
-                    labelFontSize: 14 * scaleRatio
+                    labelFontSize: 14
                     labelText: qsTr("File") + translationManager.emptyString
-                    placeholderFontSize: 16 * scaleRatio
+                    placeholderFontSize: 16
                     placeholderText: qsTr("Enter path to file") + translationManager.emptyString
                     readOnly: false
                     Layout.fillWidth: true
@@ -330,10 +330,10 @@ Rectangle {
             MoneroComponents.LineEditMulti {
                 id: verifyAddressLine
                 Layout.fillWidth: true
-                labelFontSize: 14 * scaleRatio
+                labelFontSize: 14
                 labelText: qsTr("Address") + translationManager.emptyString
                 addressValidation: true
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("Enter the Monero Address (example: 44AFFq5kSiGBoZ...)") + translationManager.emptyString
                 wrapMode: Text.WrapAnywhere
                 text: ''
@@ -342,9 +342,9 @@ Rectangle {
 
             MoneroComponents.LineEditMulti {
                 id: verifySignatureLine
-                labelFontSize: 14 * scaleRatio
+                labelFontSize: 14
                 labelText: qsTr("Signature") + translationManager.emptyString
-                placeholderFontSize: 16 * scaleRatio
+                placeholderFontSize: 16
                 placeholderText: qsTr("Enter the signature to verify") + translationManager.emptyString
                 Layout.fillWidth: true
                 pasteButton: true
@@ -354,7 +354,7 @@ Rectangle {
 
             RowLayout{
                 Layout.fillWidth: true
-                Layout.topMargin: 12 * scaleRatio
+                Layout.topMargin: 12
                 Layout.alignment: Qt.AlignRight
 
                 MoneroComponents.StandardButton {

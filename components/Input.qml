@@ -33,7 +33,7 @@ import "../components" as MoneroComponents
 
 TextField {
     font.family: MoneroComponents.Style.fontRegular.name
-    font.pixelSize: 18 * scaleRatio
+    font.pixelSize: 18
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
