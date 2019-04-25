@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.5
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -43,15 +43,15 @@ Item {
     property string fontFamily: ""
     property alias wrapMode: label.wrapMode
     property alias horizontalAlignment: label.horizontalAlignment
-    property alias hoveredLink: label.hoveredLink
     property alias elide: label.elide
     property alias textWidth: label.width
+    property alias themeTransition: label.themeTransition
     signal linkActivated()
     height: label.height * scaleRatio
     width: label.width * scaleRatio
     Layout.topMargin: 10 * scaleRatio
 
-    Text {
+    MoneroComponents.TextPlain {
         id: label
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 2 * scaleRatio

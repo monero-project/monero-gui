@@ -26,55 +26,33 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQuick 2.9
+import "../components" as MoneroComponents
+import "../components/effects" as MoneroEffects
 
-import QtQuick 2.0
-
-Item {
-    property alias image : buttonImage
-    property alias imageSource : buttonImage.source
+MoneroEffects.ImageMask {
+    id: button
+    z: 666
+    color: MoneroComponents.Style.defaultFontColor
+    image: ""
 
     signal clicked(var mouse)
 
-    id: button
-    width: parent.height
-    height: parent.height
-    anchors.right: parent.right
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-
-    Image {
-        id: buttonImage
-        source: ""
-        x : (parent.width - width) / 2
-        y : (parent.height - height) / 2
-        z: 100
-    }
-
     MouseArea {
-        id: buttonArea
-        anchors.fill: buttonImage
+        anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
 
-        onPressed: {
-            buttonImage.x = buttonImage.x + 2
-            buttonImage.y = buttonImage.y + 2
-        }
-
-        onReleased: {
-            buttonImage.x = (parent.width - width) / 2
-            buttonImage.y = (parent.height - height) / 2
+        onEntered: {
+            button.width = button.width + 2
+            button.height = button.height + 2
         }
 
         onExited: {
-            if (pressed) {
-                buttonImage.x = (parent.width - width) / 2
-                buttonImage.y = (parent.height - height) / 2
-            }
+            button.width = button.width - 2
+            button.height = button.height - 2
         }
 
-        onClicked: {
-            parent.clicked(mouse)
-        }
+        onClicked: button.clicked(mouse)
     }
 }

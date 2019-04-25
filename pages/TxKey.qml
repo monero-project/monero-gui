@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -63,7 +63,7 @@ Rectangle {
                 text: qsTr("Prove Transaction") + translationManager.emptyString
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 Layout.fillWidth: true
                 text: qsTr("Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. \n" +
                            "For the case of outgoing payments, you can get a 'Spend Proof' that proves the authorship of a transaction. In this case, you don't need to specify the recipient address.") + translationManager.emptyString
@@ -123,7 +123,8 @@ Rectangle {
             // underline
             Rectangle {
                 height: 1
-                color: "#404040"
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 anchors.bottomMargin: 3 * scaleRatio
@@ -135,7 +136,7 @@ Rectangle {
                 text: qsTr("Check Transaction") + translationManager.emptyString
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 text: qsTr("Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.\n" +
                            "For the case with Spend Proof, you don't need to specify the recipient address.") + translationManager.emptyString
                 wrapMode: Text.Wrap
@@ -207,14 +208,14 @@ Rectangle {
             // underline
             Rectangle {
                 height: 1
-                color: "#404040"
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 anchors.bottomMargin: 3 * scaleRatio
-
             }
 
-            Text {
+            MoneroComponents.TextPlain {
                 text: qsTr("If a payment had several transactions then each must be checked and the results combined.") + translationManager.emptyString
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true

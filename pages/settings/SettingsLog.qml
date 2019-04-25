@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 
@@ -60,7 +60,7 @@ Rectangle {
 //            opacity: MoneroComponents.Style.dividerOpacity
 //        }
 
-        Text {
+        MoneroComponents.TextPlain {
             Layout.bottomMargin: 2 * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
             font.pixelSize: 18 * scaleRatio
@@ -102,10 +102,6 @@ Rectangle {
                 }
                 Layout.fillWidth: true
                 Layout.preferredWidth: logColumn.width
-                shadowReleasedColor: "#FF4304"
-                shadowPressedColor: "#B32D00"
-                releasedColor: "#363636"
-                pressedColor: "#202020"
                 z: parent.z + 1
             }
 
@@ -129,7 +125,7 @@ Rectangle {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             Layout.topMargin: 10 * scaleRatio
             Layout.bottomMargin: 2 * scaleRatio
             color: MoneroComponents.Style.defaultFontColor
@@ -146,7 +142,7 @@ Rectangle {
             Rectangle {
                 anchors.fill: parent
                 color: "transparent"
-                border.color: MoneroComponents.Style.inputBorderColorActive
+                border.color: MoneroComponents.Style.inputBorderColorInActive
                 border.width: 1
                 radius: 4
             }
@@ -158,7 +154,7 @@ Rectangle {
                 TextArea.flickable: TextArea {
                     id : consoleArea
                     color: MoneroComponents.Style.defaultFontColor
-                    selectionColor: MoneroComponents.Style.dimmedFontColor
+                    selectionColor: MoneroComponents.Style.textSelectionColor
                     textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
@@ -172,11 +168,11 @@ Rectangle {
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = "white";
+                        var color = MoneroComponents.Style.defaultFontColor;
                         if(msg.toLowerCase().indexOf('error') >= 0){
-                            color = "red";
+                            color = MoneroComponents.Style.errorColor;
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
-                            color = "yellow";
+                            color = MoneroComponents.Style.warningColor;
                         }
 
                         // format multi-lines
@@ -196,7 +192,7 @@ Rectangle {
                             timeZoneName: undefined
                         });
 
-                        var _timestamp = log_color("[" + timestamp + "]", "#FFFFFF");
+                        var _timestamp = log_color("[" + timestamp + "]", MoneroComponents.Style.defaultFontColor);
                         var _msg = log_color(msg, color);
                         consoleArea.append(_timestamp + " " + _msg);
 

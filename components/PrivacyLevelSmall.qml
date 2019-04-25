@@ -28,7 +28,7 @@
 
 // @TODO: Remove component after wizard redesign
 
-import QtQuick 2.0
+import QtQuick 2.9
 
 Item {
     id: item
@@ -89,7 +89,7 @@ Item {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
             font.pixelSize: 15
@@ -98,7 +98,7 @@ Item {
             text: qsTr("Low") + translationManager.emptyString
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
             font.pixelSize: 15
@@ -107,7 +107,7 @@ Item {
             text: qsTr("Medium") + translationManager.emptyString
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             anchors.verticalCenter: parent.verticalCenter
             font.family: "Arial"
             font.pixelSize: 15

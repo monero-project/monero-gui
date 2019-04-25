@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -53,11 +53,12 @@ Rectangle {
             id: grid
             Layout.alignment: Qt.AlignHCenter
             columnSpacing: 0
-            property string fontColor: "white"
-            property int fontSize: 13 * scaleRatio
+            property string fontColorActive: MoneroComponents.Style.blackTheme ? "white" : "white"
+            property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
+            property int fontSize: 15 * scaleRatio
             property bool fontBold: true
             property var fontFamily: MoneroComponents.Style.fontRegular.name
-            property string borderColor: "#808080"
+            property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
             property int textMargin: {
                 // left-right margins for a given cell
                 if(isMobile){
@@ -68,20 +69,54 @@ Rectangle {
                     return 64;
                 }
             }
-            Image {
+
+            Rectangle {
+                // navbar left side border
+                id: navBarLeft
+                property bool isActive: settingsStateView.state === "Wallet"
                 Layout.preferredWidth: 2
                 Layout.preferredHeight: 32
-                source: {
-                    if(settingsStateView.state === "Wallet"){
-                        return "../../images/settings_navbar_side_active.png"
-                    } else {
-                        return "../../images/settings_navbar_side.png"
+                color: "transparent"
+
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 1
+                    height: parent.height - 2
+                    color: grid.borderColor
+                }
+
+                ColumnLayout {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    width: 1
+                    spacing: 0
+
+                    Rectangle {
+                        Layout.preferredHeight: 1
+                        Layout.preferredWidth: 1
+                        color: grid.borderColor
+                    }
+
+                    Rectangle {
+                        Layout.fillHeight: true
+                        width: 1
+                        color: navBarLeft.isActive ? grid.borderColor : "transparent"
+                    }
+
+                    Rectangle {
+                        color: grid.borderColor
+                        Layout.preferredHeight: 1
+                        Layout.preferredWidth: 1
                     }
                 }
             }
+
             ColumnLayout {
                 // WALLET
                 id: navWallet
+                property bool isActive: settingsStateView.state === "Wallet"
                 Layout.preferredWidth: navWalletText.width + grid.textMargin
                 Layout.minimumWidth: 72 * scaleRatio
                 Layout.preferredHeight: 32
@@ -94,11 +129,11 @@ Rectangle {
                 }
 
                 Rectangle {
-                    color: settingsStateView.state === "Wallet" ? grid.borderColor : "transparent"
+                    color: parent.isActive ? grid.borderColor : "transparent"
                     height: 30 * scaleRatio
                     Layout.fillWidth: true
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: navWalletText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -106,7 +141,8 @@ Rectangle {
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
                         text: qsTr("Wallet") + translationManager.emptyString
-                        color: grid.fontColor
+                        color: navWallet.isActive ? grid.fontColorActive : grid.fontColorInActive
+                        themeTransition: false
                     }
 
                     MouseArea {
@@ -132,6 +168,7 @@ Rectangle {
             ColumnLayout {
                 // UI
                 id: navUI
+                property bool isActive: settingsStateView.state === "UI"
                 Layout.preferredWidth: navUIText.width + grid.textMargin
                 Layout.preferredHeight: 32
                 Layout.minimumWidth: 72 * scaleRatio
@@ -144,11 +181,11 @@ Rectangle {
                 }
 
                 Rectangle {
-                    color: settingsStateView.state === "UI" ? grid.borderColor : "transparent"
+                    color: parent.isActive ? grid.borderColor : "transparent"
                     height: 30 * scaleRatio
                     Layout.fillWidth: true
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: navUIText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -156,7 +193,8 @@ Rectangle {
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
                         text: qsTr("Layout") + translationManager.emptyString
-                        color: grid.fontColor
+                        color: navUI.isActive ? grid.fontColorActive : grid.fontColorInActive
+                        themeTransition: false
                     }
 
                     MouseArea {
@@ -182,6 +220,7 @@ Rectangle {
             ColumnLayout {
                 // NODE
                 id: navNode
+                property bool isActive: settingsStateView.state === "Node"
                 visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navNodeText.width + grid.textMargin
                 Layout.preferredHeight: 32
@@ -195,11 +234,11 @@ Rectangle {
                 }
 
                 Rectangle {
-                    color: settingsStateView.state === "Node" ? grid.borderColor : "transparent"
+                    color: parent.isActive ? grid.borderColor : "transparent"
                     height: 30 * scaleRatio
                     Layout.fillWidth: true
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: navNodeText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -207,7 +246,8 @@ Rectangle {
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
                         text: qsTr("Node") + translationManager.emptyString
-                        color: grid.fontColor
+                        color: navNode.isActive ? grid.fontColorActive : grid.fontColorInActive
+                        themeTransition: false
                     }
 
                     MouseArea {
@@ -234,6 +274,7 @@ Rectangle {
             ColumnLayout {
                 // LOG
                 id: navLog
+                property bool isActive: settingsStateView.state === "Log"
                 visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navLogText.width + grid.textMargin
                 Layout.preferredHeight: 32
@@ -247,11 +288,11 @@ Rectangle {
                 }
 
                 Rectangle {
-                    color: settingsStateView.state === "Log" ? grid.borderColor : "transparent"
+                    color: parent.isActive ? grid.borderColor : "transparent"
                     height: 30 * scaleRatio
                     Layout.fillWidth: true
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: navLogText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -259,7 +300,8 @@ Rectangle {
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
                         text: qsTr("Log") + translationManager.emptyString
-                        color: grid.fontColor
+                        color: navLog.isActive ? grid.fontColorActive : grid.fontColorInActive
+                        themeTransition: false
                     }
 
                     MouseArea {
@@ -286,6 +328,7 @@ Rectangle {
             ColumnLayout {
                 // INFO
                 id: navInfo
+                property bool isActive: settingsStateView.state === "Info"
                 Layout.preferredWidth: navInfoText.width + grid.textMargin
                 Layout.preferredHeight: 32
                 Layout.minimumWidth: 72 * scaleRatio
@@ -298,11 +341,11 @@ Rectangle {
                 }
 
                 Rectangle {
-                    color: settingsStateView.state === "Info" ? grid.borderColor : "transparent"
+                    color: parent.isActive ? grid.borderColor : "transparent"
                     height: 30 * scaleRatio
                     Layout.fillWidth: true
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         id: navInfoText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
@@ -310,7 +353,8 @@ Rectangle {
                         font.pixelSize: grid.fontSize
                         font.bold: grid.fontBold
                         text: qsTr("Info") + translationManager.emptyString
-                        color: grid.fontColor
+                        color: navInfo.isActive ? grid.fontColorActive : grid.fontColorInActive
+                        themeTransition: false
                     }
 
                     MouseArea {
@@ -328,19 +372,51 @@ Rectangle {
                     Layout.fillWidth: true
                 }
             }
-            Image {
+
+            Rectangle {
+                // navbar right side border
+                id: navBarRight
+                property bool isActive: settingsStateView.state === "Info"
                 Layout.preferredWidth: 2
                 Layout.preferredHeight: 32
-                source: {
-                    if(settingsStateView.state === "Info"){
-                        return "../../images/settings_navbar_side_active.png"
-                    } else {
-                        return "../../images/settings_navbar_side.png"
-                    }    
-                    
-                }
+                color: "transparent"
                 rotation: 180
+
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 1
+                    height: parent.height - 2
+                    color: grid.borderColor
+                }
+
+                ColumnLayout {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    width: 1
+                    spacing: 0
+
+                    Rectangle {
+                        Layout.preferredHeight: 1
+                        Layout.preferredWidth: 1
+                        color: grid.borderColor
+                    }
+
+                    Rectangle {
+                        Layout.fillHeight: true
+                        width: 1
+                        color: navBarRight.isActive ? grid.borderColor : "transparent"
+                    }
+
+                    Rectangle {
+                        color: grid.borderColor
+                        Layout.preferredHeight: 1
+                        Layout.preferredWidth: 1
+                    }
+                }
             }
+
             Rectangle {
                 color: "transparent"
                 Layout.fillWidth: true

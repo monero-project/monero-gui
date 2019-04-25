@@ -105,6 +105,7 @@ CONFIG(DISABLE_PASS_STRENGTH_METER) {
 lupdate_only {
 SOURCES = *.qml \
           components/*.qml \
+          components/effects/*.qml \
           pages/*.qml \
           pages/settings/*.qml \
           pages/merchant/*.qml \

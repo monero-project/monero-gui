@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
@@ -72,7 +72,7 @@ Rectangle {
                     }
                 }
 
-                imageIcon: "../images/remote-node.png"
+                imageIcon: "qrc:///images/remote-node.png"
 
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
@@ -101,7 +101,7 @@ Rectangle {
                         return "Available on mainnet.";
                     }
                 }
-                imageIcon: "../images/local-node.png"
+                imageIcon: "qrc:///images/local-node.png"
 
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
@@ -123,7 +123,7 @@ Rectangle {
             WizardMenuItem {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
-                imageIcon: "../images/local-node-full.png"
+                imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
                     appWindow.changeWalletMode(2);

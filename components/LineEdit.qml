@@ -26,7 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
+import QtGraphicalEffects 1.0
 
 import "../components" as MoneroComponents
 
@@ -106,7 +107,7 @@ Item {
         }
     }
 
-    Text {
+    MoneroComponents.TextPlain {
         id: inputLabel
         anchors.top: parent.top
         anchors.left: parent.left
@@ -146,7 +147,7 @@ Item {
         width: parent.width
         clip: true
 
-        Text {
+        MoneroComponents.TextPlain {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
@@ -192,7 +193,7 @@ Item {
             anchors.topMargin: 8 * scaleRatio
             anchors.left: parent.left
             anchors.leftMargin: 12 * scaleRatio
-            source: "../images/moneroIcon-28x28.png"
+            source: "qrc:///images/moneroIcon-28x28.png"
             visible: false
         }
 

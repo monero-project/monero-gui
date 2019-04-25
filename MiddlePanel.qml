@@ -28,18 +28,18 @@
 
 
 import QtQml 2.0
-import QtQuick 2.2
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 
-import "components" as MoneroComponents
 import "./pages"
 import "./pages/settings"
 import "./pages/merchant"
-import "components" as MoneroComponents
+import "./components" as MoneroComponents
+import "./components/effects/" as MoneroEffects
 
 Rectangle {
     id: root
@@ -54,7 +54,6 @@ Rectangle {
     property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
     property alias contentHeight: mainFlickable.contentHeight
     property alias flickable: mainFlickable
-//    property int headerHeight: header.height
 
     property Transfer transferView: Transfer { }
     property Receive receiveView: Receive { }
@@ -82,10 +81,18 @@ Rectangle {
         anchors.fill: parent
     }
 
-    Image {
-        anchors.fill: parent
+    MoneroEffects.GradientBackground {
         visible: currentView !== merchantView
-        source: "../images/middlePanelBg.jpg"
+        anchors.fill: parent
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
     }
 
     onCurrentViewChanged: {
@@ -249,11 +256,28 @@ Rectangle {
 
     // border
     Rectangle {
+        id: borderLeft
+        visible: middlePanel.state !== "Merchant"
         anchors.top: styledRow.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: "#313131"
+        color: MoneroComponents.Style.appWindowBorderColor
+
+        MoneroEffects.ColorTransition {
+            targetObj: parent
+            blackColor: MoneroComponents.Style._b_appWindowBorderColor
+            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+        }
+    }
+
+    // border shadow
+    Image {
+        source: "qrc:///images/middlePanelShadow.png"
+        width: 12
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.left: borderLeft.right
     }
 
     /* connect "payment" click */

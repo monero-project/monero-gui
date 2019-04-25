@@ -30,6 +30,7 @@
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/Scroll.qml</file>
+        <file>components/MenuButtonDivider.qml</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
@@ -41,10 +42,7 @@
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TitleBar.qml</file>
-        <file>images/collapseRightPanel.png</file>
         <file>images/expandRightPanel.png</file>
-        <file>images/dropdownCopy.png</file>
-        <file>images/dropdownCopy@2x.png</file>
         <file>images/moneroLogo2.png</file>
         <file>components/PrivacyLevelSmall.qml</file>
         <file>images/resize.png</file>
@@ -55,7 +53,6 @@
         <file>images/nextPage@2x.png</file>
         <file>images/openAccount.png</file>
         <file>images/recoverWallet.png</file>
-        <file>images/copyToClipboard.png</file>
         <file>lang/languages.xml</file>
         <file>lang/flags/bd.png</file>
         <file>lang/flags/bg.png</file>
@@ -103,6 +100,7 @@
         <file>pages/Receive.qml</file>
         <file>pages/TxKey.qml</file>
         <file>pages/SharedRingDB.qml</file>
+        <file>components/effects/ImageMask.qml</file>
         <file>components/IconButton.qml</file>
         <file>components/PassphraseDialog.qml</file>
         <file>components/PasswordDialog.qml</file>
@@ -122,24 +120,14 @@
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
         <file>images/appicon.ico</file>
-        <file>images/right.png</file>
-        <file>images/right@2x.png</file>
         <file>images/card-background.png</file>
         <file>images/card-background@2x.png</file>
-        <file>images/minimize.png</file>
-        <file>images/minimize@2x.png</file>
-        <file>images/fullscreen.png</file>
-        <file>images/fullscreen@2x.png</file>
-        <file>images/close.png</file>
-        <file>images/close@2x.png</file>
         <file>images/moneroLogo_white.png</file>
         <file>images/question.png</file>
         <file>images/question@2x.png</file>
-        <file>images/expand.png</file>
-        <file>images/expand@2x.png</file>
-        <file>images/titlebarGradient.jpg</file>
         <file>images/titlebarLogo.png</file>
         <file>images/titlebarLogo@2x.png</file>
+        <file>pages/merchant/MerchantTitlebar.qml</file>
         <file>images/menuButtonGradient.png</file>
         <file>fonts/Roboto-Medium.ttf</file>
         <file>fonts/Roboto-Regular.ttf</file>
@@ -154,16 +142,13 @@
         <file>components/InlineButton.qml</file>
         <file>images/lightning.png</file>
         <file>images/lightning@2x.png</file>
-        <file>images/leftPanelBg.jpg</file>
         <file>images/logout.png</file>
         <file>images/logout@2x.png</file>
         <file>images/moneroIcon-28x28.png</file>
         <file>images/moneroIcon-28x28@2x.png</file>
         <file>images/lightning-white.png</file>
         <file>images/lightning-white@2x.png</file>
-        <file>images/middlePanelBg.jpg</file>
         <file>components/InputMulti.qml</file>
-        <file>images/checkedIcon-black.png</file>
         <file>components/LineEditMulti.qml</file>
         <file>components/LabelButton.qml</file>
         <file>components/LabelSubheader.qml</file>
@@ -173,6 +158,8 @@
         <file>images/rightArrow@2x.png</file>
         <file>images/historyBorderRadius.png</file>
         <file>components/CheckBox2.qml</file>
+        <file>components/TextPlain.qml</file>
+        <file>components/TextPlainArea.qml</file>
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
         <file>images/warning@2x.png</file>
@@ -181,8 +168,6 @@
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
-        <file>images/editIcon.png</file>
-        <file>images/editIcon@2x.png</file>
         <file>pages/settings/Settings.qml</file>
         <file>pages/settings/SettingsWallet.qml</file>
         <file>pages/settings/SettingsNode.qml</file>
@@ -190,12 +175,8 @@
         <file>pages/settings/SettingsLayout.qml</file>
         <file>pages/settings/SettingsInfo.qml</file>
         <file>pages/settings/Navbar.qml</file>
-        <file>images/settings_remote.png</file>
-        <file>images/settings_remote@2x.png</file>
-        <file>images/settings_navbar_side.png</file>
-        <file>images/settings_navbar_side_active.png</file>
-        <file>images/settings_local.png</file>
-        <file>images/settings_local@2x.png</file>
+        <file>images/settings_local.svg</file>
+        <file>images/settings_remote.svg</file>
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
@@ -261,9 +242,26 @@
         <file>wizard/WizardOpenWallet1.qml</file>
         <file>images/arrow-right-in-circle.png</file>
         <file>images/arrow-right-in-circle@2x.png</file>
-        <file>images/rename.png</file>
-        <file>images/rename@2x.png</file>
-        <file>images/clipboard.png</file>
-        <file>images/clipboard@2x.png</file>
+        <file>images/themes/white/leftPanelBg.jpg</file>
+        <file>images/themes/white/middlePanelBg.jpg</file>
+        <file>images/right.svg</file>
+        <file>images/middlePanelShadow.png</file>
+        <file>images/themes/white/titlebarLogo@2x.png</file>
+        <file>images/themes/white/titlebarLogo.png</file>
+        <file>images/sidebar.svg</file>
+        <file>images/fullscreen.svg</file>
+        <file>images/close.svg</file>
+        <file>images/minimize.svg</file>
+        <file>images/themes/white/close.svg</file>
+        <file>images/themes/white/fullscreen.svg</file>
+        <file>images/themes/white/minimize.svg</file>
+        <file>images/themes/white/question.svg</file>
+        <file>images/themes/white/expand.svg</file>
+        <file>components/effects/ColorTransition.qml</file>
+        <file>components/effects/GradientBackground.qml</file>
+        <file>images/check-white.svg</file>
+        <file>images/copy.svg</file>
+        <file>images/edit.svg</file>
+        <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
     </qresource>
 </RCC>

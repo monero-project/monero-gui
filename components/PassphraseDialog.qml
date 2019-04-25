@@ -58,7 +58,9 @@ Item {
 
         leftPanel.enabled = false
         middlePanel.enabled = false
-        titleBar.enabled = false
+        titleBar.state = "essentials"
+
+        show();
         root.visible = true;
         passphaseInput1.text = "";
         passphaseInput2.text = "";
@@ -69,7 +71,7 @@ Item {
         inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
-        titleBar.enabled = true
+        titleBar.state = "default"
         root.visible = false;
         closeCallback();
     }
@@ -155,22 +157,22 @@ Item {
                 leftPadding: 10
                 topPadding: 10
                 color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.dimmedFontColor
-                selectedTextColor: MoneroComponents.Style.defaultFontColor
+                selectionColor: MoneroComponents.Style.textSelectionColor
+                selectedTextColor: MoneroComponents.Style.textSelectedColor
                 KeyNavigation.tab: passphaseInput2
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
                         width: 26 * scaleRatio
                         height: 26 * scaleRatio
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
+                        source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 20
@@ -207,7 +209,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 height: 10
                 opacity: 0
-                color: "black"
+                color: "transparent"
             }
 
             Label {
@@ -239,16 +241,16 @@ Item {
 
                 background: Rectangle {
                     radius: 2
-                    border.color: Qt.rgba(255, 255, 255, 0.35)
+                    border.color: MoneroComponents.Style.inputBorderColorInActive
                     border.width: 1
-                    color: "black"
+                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
 
                     Image {
                         width: 26 * scaleRatio
                         height: 26 * scaleRatio
                         opacity: 0.7
                         fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "../images/eyeShow.png" : "../images/eyeHide.png"
+                        source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.right: parent.right
                         anchors.rightMargin: 20

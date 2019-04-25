@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.XmlListModel 2.0
@@ -34,6 +34,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
 
 Rectangle {
     id: langScreen
@@ -49,9 +50,17 @@ Rectangle {
         }
     }
 
-    Image {
+    MoneroEffects.GradientBackground {
         anchors.fill: parent
-        source: "../images/middlePanelBg.jpg"
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.wizardBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_wizardBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_wizardBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
     }
 
     ColumnLayout {
@@ -73,8 +82,8 @@ Rectangle {
                 }
             }
 
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectedTextColor: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             selectByMouse: true
             wrapMode: Text.WordWrap
@@ -101,8 +110,8 @@ Rectangle {
                 }
             }
 
-            selectionColor: MoneroComponents.Style.dimmedFontColor
-            selectedTextColor: MoneroComponents.Style.defaultFontColor
+            selectionColor: MoneroComponents.Style.textSelectionColor
+            selectedTextColor: MoneroComponents.Style.textSelectedColor
 
             selectByMouse: true
             wrapMode: Text.WordWrap
@@ -159,7 +168,7 @@ Rectangle {
                         height: parent.height
                         width: langText.width + 22 * scaleRatio
 
-                        Text {
+                        MoneroComponents.TextPlain {
                             id: langText
                             font.bold: true
                             font.pixelSize: 14 * scaleRatio

@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
@@ -33,7 +33,6 @@ Item {
     property var    hiddenAmounts: []
 
     function onPageCompleted() {
-        appWindow.titlebarToggleOrange();
         appWindow.hideMenu();
 
         // prepare tracking
@@ -53,8 +52,6 @@ Item {
     }
 
     function onPageClosed() {
-        appWindow.titlebarToggleOrange();
-
         // reset component objects
         timer.running = false
         root.enableTracking = false
@@ -68,7 +65,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 300 * scaleRatio
-        source: "../../images/merchant/bg.png"
+        source: "qrc:///images/merchant/bg.png"
         smooth: false
     }
 
@@ -129,11 +126,12 @@ Item {
                                 Layout.preferredWidth: 10 * scaleRatio
                             }
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.pixelSize: 16 * scaleRatio
                                 font.bold: true
                                 color: "#767676"
                                 text: qsTr("Sales") + translationManager.emptyString
+                                themeTransition: false
                             }
 
                             Item {
@@ -267,7 +265,7 @@ Item {
                 width: (parent.width - qrImg.width) - (50 * scaleRatio)
                 height: 32 * scaleRatio
 
-                Text {
+                MoneroComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12 * scaleRatio
@@ -275,6 +273,7 @@ Item {
                     color: "white"
                     text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>Currently selected address: " + addressLabel + " <a href='#'>(Change)</a>"
                     textFormat: Text.RichText
+                    themeTransition: false
 
                     MouseArea {
                         anchors.fill: parent
@@ -291,13 +290,14 @@ Item {
                 width: 220 * scaleRatio
                 height: 32 * scaleRatio
 
-                Text {
+                MoneroComponents.TextPlain {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.pixelSize: 12 * scaleRatio
                     font.bold: false
                     color: "white"
                     text: qsTr("(right-click, save as)") + translationManager.emptyString
+                    themeTransition: false
                 }
             }
         }
@@ -336,11 +336,12 @@ Item {
                                 Layout.preferredWidth: 10 * scaleRatio
                             }
 
-                            Text {
+                            MoneroComponents.TextPlain {
                                 font.pixelSize: 14 * scaleRatio
                                 font.bold: true
                                 color: "#767676"
                                 text: qsTr("Payment URL") + translationManager.emptyString
+                                themeTransition: false
                             }
 
                             Item {
@@ -356,7 +357,7 @@ Item {
 //                            Layout.fillHeight: true
 //                            color: "transparent"
 
-//                            Text {
+//                            MoneroComponents.TextPlain {
 //                                anchors.verticalCenter: parent.verticalCenter
 //                                anchors.right: parent.right
 //                                anchors.rightMargin: 20 * scaleRatio
@@ -390,7 +391,7 @@ Item {
                         color: "#d9d9d9"
                     }
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         property string _color: "#767676"
                         Layout.fillWidth: true
                         Layout.margins: 20 * scaleRatio
@@ -403,6 +404,7 @@ Item {
                         font.bold: true
                         color: _color
                         text: TxUtils.makeQRCodeString(appWindow.current_address, amountToReceive.text)
+                        themeTransition: false
 
                         MouseArea {
                             anchors.fill: parent
@@ -446,17 +448,18 @@ Item {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         font.pixelSize: 14 * scaleRatio
                         font.bold: false
                         color: "white"
                         text: qsTr("Amount to receive") + " (XMR)"
+                        themeTransition: false
                     }
 
                     Image {
                         height: 28 * scaleRatio
                         width: 220 * scaleRatio
-                        source: "../../images/merchant/input_box.png"
+                        source: "qrc:///images/merchant/input_box.png"
 
                         TextField {
                             id: amountToReceive
@@ -496,7 +499,7 @@ Item {
                         width: 220 * scaleRatio
                     }
 
-                    Text {
+                    MoneroComponents.TextPlain {
                         // @TODO: When we have XMR/USD rate avi. in the future.
                         visible: false
                         font.pixelSize: 14 * scaleRatio
@@ -504,13 +507,14 @@ Item {
                         color: "white"
                         text: qsTr("Amount to receive") + " (USD)"
                         opacity: 0.2
+                        themeTransition: false
                     }
 
                     Image {
                         visible: false
                         height: 28 * scaleRatio
                         width: 220 * scaleRatio
-                        source: "../../images/merchant/input_box.png"
+                        source: "qrc:///images/merchant/input_box.png"
                         opacity: 0.2
                     }
                 }
@@ -536,12 +540,13 @@ Item {
                     }
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     id: content
                     font.pixelSize: 14 * scaleRatio
                     font.bold: false
                     color: "white"
                     text: qsTr("Leave this page") + translationManager.emptyString
+                    themeTransition: false
 
                     MouseArea {
                         anchors.fill: parent
@@ -564,13 +569,14 @@ Item {
         width: 400 * scaleRatio
         radius: 5
 
-        Text {
+        MoneroComponents.TextPlain {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 14 * scaleRatio
             font.bold: true
             color: MoneroComponents.Style.moneroGrey
             text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
+            themeTransition: false
         }
     }
 

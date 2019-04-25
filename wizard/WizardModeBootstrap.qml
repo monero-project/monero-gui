@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
@@ -66,7 +66,7 @@ Rectangle {
                 Layout.topMargin: 10 * scaleRatio
                 Layout.fillWidth: true
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("This mode will use a remote node whilst also syncing the blockchain. This is different from the first menu option (Simple mode), since it will only use the remote node until the blockchain is fully synced locally. It is a reasonable tradeoff for most people who care about privacy but also want the convenience of an automatic fallback option.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14 * scaleRatio
@@ -77,7 +77,7 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name <i>bootstrap</i>), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8 * scaleRatio
@@ -94,7 +94,7 @@ Rectangle {
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
                 }
 
-                Text {
+                MoneroComponents.TextPlain {
                     text: qsTr("For enhanced node performance you may specify your region:") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8 * scaleRatio
@@ -117,10 +117,6 @@ Rectangle {
                             id: regionDropdown
                             Layout.fillWidth: true
                             dataModel: regionModel
-                            shadowReleasedColor: "#FF4304"
-                            shadowPressedColor: "#B32D00"
-                            releasedColor: "#363636"
-                            pressedColor: "#202020"
                             currentIndex: 0
 
                             onChanged: {

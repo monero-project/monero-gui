@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
@@ -69,39 +69,27 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
                     text: qsTr("Close this wallet") + translationManager.emptyString
                 }
 
-                TextArea {
-                    Layout.fillWidth: true
+                MoneroComponents.TextPlainArea {
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Logs out of this wallet.") + translationManager.emptyString
+                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                     width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
+                    Layout.fillWidth: true
+                    horizontalAlignment: TextInput.AlignLeft
+                    text: qsTr("Logs out of this wallet.") + translationManager.emptyString
+                }
             }
 
             MoneroComponents.StandardButton {
@@ -138,39 +126,27 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
                     text: qsTr("Create a view-only wallet") + translationManager.emptyString
                 }
 
-                TextArea {
-                    Layout.fillWidth: true
+                MoneroComponents.TextPlainArea {
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
+                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                     width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
+                    Layout.fillWidth: true
+                    horizontalAlignment: TextInput.AlignLeft
+                    text: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
+                }
             }
 
             MoneroComponents.StandardButton {
@@ -215,39 +191,27 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
                     text: qsTr("Show seed & keys") + translationManager.emptyString
                 }
 
-                TextArea {
-                    Layout.fillWidth: true
+                MoneroComponents.TextPlainArea {
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0 * scaleRatio
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
+                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                     width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
+                    Layout.fillWidth: true
+                    horizontalAlignment: TextInput.AlignLeft
+                    text: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
+                }
             }
 
             MoneroComponents.StandardButton {
@@ -281,39 +245,27 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
                     text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 }
 
-                TextArea {
-                    Layout.fillWidth: true
+                MoneroComponents.TextPlainArea {
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
+                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                     width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
+                    Layout.fillWidth: true
+                    horizontalAlignment: TextInput.AlignLeft
+                    text: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
+                }
             }
 
             MoneroComponents.StandardButton {
@@ -359,39 +311,27 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                Text {
+                MoneroComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20 * scaleRatio
                     Layout.topMargin: 8 * scaleRatio
-                    color: "white"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16 * scaleRatio
                     text: qsTr("Change wallet password") + translationManager.emptyString
                 }
 
-                TextArea {
-                    Layout.fillWidth: true
+                MoneroComponents.TextPlainArea {
                     color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
-                    horizontalAlignment: TextInput.AlignLeft
-                    selectByMouse: false
-                    wrapMode: Text.WordWrap;
-                    textMargin: 0
-                    leftPadding: 0
-                    topPadding: 0
-                    text: qsTr("Change the password of your wallet.") + translationManager.emptyString
+                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
                     width: parent.width
-                    readOnly: true
-
-                    // @TODO: Legacy. Remove after Qt 5.8.
-                    // https://stackoverflow.com/questions/41990013
-                    MouseArea {
-                        anchors.fill: parent
-                        enabled: false
-                    }
-                } 
+                    Layout.fillWidth: true
+                    horizontalAlignment: TextInput.AlignLeft
+                    text: qsTr("Change the password of your wallet.") + translationManager.emptyString
+                }
             }
 
             MoneroComponents.StandardButton {

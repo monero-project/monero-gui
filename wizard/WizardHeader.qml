@@ -30,7 +30,7 @@ import "../js/Wizard.js" as Wizard
 import "../components"
 import "../components" as MoneroComponents
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
@@ -46,6 +46,7 @@ ColumnLayout {
         Layout.fillWidth: true
         font.family: MoneroComponents.Style.fontRegular.name
         color: MoneroComponents.Style.defaultFontColor
+        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
         font.pixelSize: {
             if(wizardController.layoutScale === 2 ){
                 return 34 * scaleRatio;
@@ -54,8 +55,8 @@ ColumnLayout {
             }
         }
 
-        selectionColor: MoneroComponents.Style.dimmedFontColor
-        selectedTextColor: MoneroComponents.Style.defaultFontColor
+        selectionColor: MoneroComponents.Style.textSelectionColor
+        selectedTextColor: MoneroComponents.Style.textSelectedColor
 
         selectByMouse: true
         wrapMode: Text.WordWrap
@@ -83,8 +84,8 @@ ColumnLayout {
             }
         }
 
-        selectionColor: MoneroComponents.Style.dimmedFontColor
-        selectedTextColor: MoneroComponents.Style.defaultFontColor
+        selectionColor: MoneroComponents.Style.textSelectionColor
+        selectedTextColor: MoneroComponents.Style.textSelectedColor
 
         selectByMouse: true
         wrapMode: Text.WordWrap

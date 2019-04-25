@@ -26,14 +26,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 
-import "../components" as MoneroComponents
+import "." as MoneroComponents
+import "effects/" as MoneroEffects
 import "../js/Windows.js" as Windows
 import "../js/Utils.js" as Utils
 
@@ -64,10 +65,18 @@ Window {
     width:  480
     height: 280
 
-    // background gradient
-    Image {
+    // background
+    MoneroEffects.GradientBackground {
         anchors.fill: parent
-        source: "../images/middlePanelBg.jpg"
+        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
+        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        start: Qt.point(0, 0)
+        end: Qt.point(height, width)
     }
 
     // Make window draggable
@@ -111,20 +120,20 @@ Window {
                     font.family: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 14 * scaleRatio
                     color: MoneroComponents.Style.defaultFontColor
-                    selectionColor: MoneroComponents.Style.dimmedFontColor
+                    selectionColor: MoneroComponents.Style.textSelectionColor
                     wrapMode: TextEdit.Wrap
                     readOnly: true
                     function logCommand(msg){
-                        msg = log_color(msg, "lime");
+                        msg = log_color(msg, MoneroComponents.Style.blackTheme ? "lime" : "#009100");
                         textArea.append(msg);
                     }
                     function logMessage(msg){
                         msg = msg.trim();
-                        var color = "white";
+                        var color = MoneroComponents.Style.defaultFontColor;
                         if(msg.toLowerCase().indexOf('error') >= 0){
-                            color = "red";
+                            color = MoneroComponents.Style.errorColor;
                         } else if (msg.toLowerCase().indexOf('warning') >= 0){
-                            color = "yellow";
+                            color = MoneroComponents.Style.warningColor;
                         }
 
                         // format multi-lines

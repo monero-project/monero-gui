@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.9
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 
@@ -21,7 +21,7 @@ Rectangle {
         anchors.verticalCenterOffset: -5
         anchors.left: parent.left
         anchors.leftMargin: 50 * scaleRatio
-        source: "../images/moneroLogo2.png"
+        source: "qrc:///images/moneroLogo2.png"
     }
 
     Image {
@@ -30,7 +30,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 40 * scaleRatio 
-        source: "../images/moneroIcon.png"
+        source: "qrc:///images/moneroIcon.png"
     }
 
     Grid {
@@ -41,7 +41,7 @@ Rectangle {
         width: 256 * scaleRatio
         columns: 3
 
-        Text {
+        MoneroComponents.TextPlain {
             id: balanceLabel
             width: 116 * scaleRatio
             height: 20 * scaleRatio
@@ -55,7 +55,7 @@ Rectangle {
             text: leftPanel.balanceLabelText + ":"
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: balanceText
             width: 110 * scaleRatio
             height: 20 * scaleRatio
@@ -76,11 +76,11 @@ Rectangle {
             Image {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                source: "../images/lockIcon.png"
+                source: "qrc:///images/lockIcon.png"
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             width: 116 * scaleRatio
             height: 20 * scaleRatio
             font.family: "Arial"
@@ -93,7 +93,7 @@ Rectangle {
             text: qsTr("Unlocked Balance:")
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: availableBalanceText
             width: 110 * scaleRatio
             height: 20 * scaleRatio

@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -101,7 +101,7 @@ Rectangle {
             text: qsTr("Sign/verify") + translationManager.emptyString
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             text: qsTr("This page lets you sign/verify a message (or file contents) with your address.") + translationManager.emptyString
             wrapMode: Text.Wrap
             Layout.fillWidth: true
@@ -114,7 +114,7 @@ Rectangle {
             id: modeRow
             Layout.fillWidth: true
 
-            Text {
+            MoneroComponents.TextPlain {
                 id: modeText
                 Layout.fillWidth: true
                 Layout.topMargin: 12 * scaleRatio

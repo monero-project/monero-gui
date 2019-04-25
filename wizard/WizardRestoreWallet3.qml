@@ -29,7 +29,7 @@
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 

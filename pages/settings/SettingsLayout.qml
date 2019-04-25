@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
@@ -96,6 +96,16 @@ Rectangle {
             text: qsTr("Lock wallet on inactivity") + translationManager.emptyString
         }
 
+        MoneroComponents.CheckBox {
+            id: themeCheckbox
+            checked: !MoneroComponents.Style.blackTheme
+            text: qsTr("Light theme") + translationManager.emptyString
+            onClicked: {
+                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
+            }
+        }
+
         ColumnLayout {
             visible: userInActivityCheckbox.checked
             Layout.fillWidth: true
@@ -131,7 +141,7 @@ Rectangle {
                     width: parent.availableWidth
                     height: implicitHeight
                     radius: 2
-                    color: MoneroComponents.Style.grey
+                    color: MoneroComponents.Style.progressBarBackgroundColor
 
                     Rectangle {
                         width: parent.visualPosition * parent.width

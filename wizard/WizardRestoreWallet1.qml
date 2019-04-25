@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
@@ -183,13 +183,13 @@ Rectangle {
 
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 16 * scaleRatio
-                        selectionColor: MoneroComponents.Style.dimmedFontColor
-                        selectedTextColor: MoneroComponents.Style.defaultFontColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
+                        selectedTextColor: MoneroComponents.Style.textSelectedColor
                         wrapMode: TextInput.Wrap
 
                         selectByMouse: true
 
-                        Text {
+                        MoneroComponents.TextPlain {
                             id: memoTextPlaceholder
                             opacity: 0.35
                             anchors.fill:parent

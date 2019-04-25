@@ -26,9 +26,10 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
+import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.0
 
 import "../components" as MoneroComponents
@@ -49,9 +50,22 @@ RowLayout {
 
         Image {
             id: icon
+            visible: !isOpenGL || MoneroComponents.Style.blackTheme
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             source: ""
+        }
+
+        DropShadow {
+            visible: isOpenGL && !MoneroComponents.Style.blackTheme
+            anchors.fill: icon
+            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 10.0
+            samples: 15
+            color: "#1E000000"
+            source: icon
+            cached: true
         }
 
         MouseArea {
@@ -68,12 +82,13 @@ RowLayout {
         Layout.fillWidth: true
         spacing: 0
 
-        Text {
+        MoneroComponents.TextPlain {
             id: header
             Layout.fillWidth: true
             leftPadding: parent.leftPadding
             topPadding: 0
             color: MoneroComponents.Style.defaultFontColor
+            opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
             font.bold: true
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
@@ -93,7 +108,7 @@ RowLayout {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: body
             Layout.fillWidth: true
             color: MoneroComponents.Style.dimmedFontColor
@@ -106,7 +121,8 @@ RowLayout {
                 }
             }
             topPadding: 4 * scaleRatio
-            wrapMode: Text.WordWrap;
+            wrapMode: Text.WordWrap
+            themeTransition: false
 
             MouseArea {
                 cursorShape: Qt.PointingHandCursor

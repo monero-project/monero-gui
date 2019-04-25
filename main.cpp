@@ -74,6 +74,8 @@ bool isIOS = false;
 bool isAndroid = false;
 bool isWindows = false;
 bool isDesktop = false;
+bool isOpenGL = true;
+bool isLinux = false;
 
 int main(int argc, char *argv[])
 {
@@ -87,7 +89,13 @@ int main(int argc, char *argv[])
 #endif
 #ifdef Q_OS_WIN
     bool isWindows = true;
+#elif defined(Q_OS_LINUX)
+    bool isLinux = true;
 #endif
+
+    // detect low graphics mode (start-low-graphics-mode.bat)
+    if(qgetenv("QMLSCENE_DEVICE") == "softwarecontext")
+        isOpenGL = false;
 
     // disable "QApplication: invalid style override passed" warning
     if (isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
@@ -269,6 +277,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
+    engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
+    engine.rootContext()->setContextProperty("isLinux", isLinux);
 
     engine.rootContext()->setContextProperty("screenWidth", geo.width());
     engine.rootContext()->setContextProperty("screenHeight", geo.height());

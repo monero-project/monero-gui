@@ -26,24 +26,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../components"
 import "../components" as MoneroComponents
+import "../components/effects/" as MoneroEffects
 import "../version.js" as Version
 
 Rectangle {
     Layout.fillWidth: true
-    color: "black"
+    color: "transparent"
 
     property string viewName: "wizardLanguage"
-
-    Image {
-        anchors.fill: parent
-        source: "../images/middlePanelBg.jpg"
-    }
 
     ColumnLayout {
         id: root
@@ -89,7 +85,7 @@ Rectangle {
 
         Image {
             id: globe
-            source: "../images/world-flags-globe.png"
+            source: "qrc:///images/world-flags-globe.png"
             opacity: 0
             property bool small: appWindow.width < 700 ? true : false
             property int size: {
@@ -190,7 +186,7 @@ Rectangle {
             }
         }
 
-        Text {
+        MoneroComponents.TextPlain {
             id: versionText
             opacity: 0
             anchors.horizontalCenter: parent.horizontalCenter

@@ -26,22 +26,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
+import FontAwesome 1.0
+
 import "." 1.0
+import "." as MoneroComponents
+import "effects/" as MoneroEffects
 
 RowLayout {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon: "../images/checkedIcon-black.png"
-    property string uncheckedIcon
     property bool checked: false
-    property string background: "backgroundRect.color"
     property int fontSize: 14 * scaleRatio
     property alias fontColor: label.color
     property int textMargin: 8 * scaleRatio
-    property bool darkDropIndicator: false
     signal clicked()
     height: 25 * scaleRatio
 
@@ -58,7 +58,7 @@ RowLayout {
             width: (label.width + indicatorRect.width + checkBox.textMargin)
             color: "transparent"
 
-            Text {
+            MoneroComponents.TextPlain {
                 id: label
                 font.family: Style.fontLight.name
                 font.pixelSize: checkBox.fontSize
@@ -77,21 +77,27 @@ RowLayout {
                 color: "transparent"
                 rotation: checkBox.checked ? 180  * scaleRatio : 0
 
-                Image {
+                MoneroEffects.ImageMask {
                     id: indicatorImage
                     anchors.centerIn: parent
-                    source: "../images/whiteDropIndicator.png"
-                    visible: !darkDropIndicator
-                }
-                ColorOverlay {
-                    anchors.fill: indicatorImage
-                    source: indicatorImage
-                    color: "#FF000000"
-                    visible: darkDropIndicator
+                    width: 12 * scaleRatio
+                    height: 8 * scaleRatio
+                    image: "qrc:///images/whiteDropIndicator.png"
+                    color: MoneroComponents.Style.defaultFontColor
+                    opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75
+                    fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                    fontAwesomeFallbackSize: 14
+
+                    MoneroEffects.ColorTransition {
+                        targetObj: indicatorImage
+                        blackColor: "white"
+                        whiteColor: "black"
+                        duration: 500
+                    }
                 }
             }
 
-            MouseArea{
+            MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
@@ -100,7 +106,5 @@ RowLayout {
                 }
             }
         }
-
-
     }
 }

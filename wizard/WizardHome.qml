@@ -26,7 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.7
+import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
@@ -64,7 +64,7 @@ Rectangle {
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet") + translationManager.emptyString
                 bodyText: qsTr("Choose this option if this is your first time using Monero.") + translationManager.emptyString
-                imageIcon: "../images/create-wallet.png"
+                imageIcon: "qrc:///images/create-wallet.png"
 
                 onMenuClicked: {
                     wizardController.restart();
@@ -85,7 +85,7 @@ Rectangle {
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet from hardware") + translationManager.emptyString
                 bodyText: qsTr("Connect your hardware wallet to create a new Monero wallet.") + translationManager.emptyString
-                imageIcon: "../images/restore-wallet-from-hardware.png"
+                imageIcon: "qrc:///images/restore-wallet-from-hardware.png"
 
                 onMenuClicked: {
                     wizardController.restart();
@@ -105,7 +105,7 @@ Rectangle {
             WizardMenuItem {
                 headerText: qsTr("Open a wallet from file") + translationManager.emptyString
                 bodyText: qsTr("Import an existing .keys wallet file from your computer.") + translationManager.emptyString
-                imageIcon: "../images/open-wallet-from-file.png"
+                imageIcon: "qrc:///images/open-wallet-from-file.png"
 
                 onMenuClicked: {
                     wizardStateView.state = "wizardOpenWallet1"
@@ -124,7 +124,7 @@ Rectangle {
             WizardMenuItem {
                 headerText: qsTr("Restore wallet from keys or mnemonic seed") + translationManager.emptyString
                 bodyText: qsTr("Enter your private keys or 25-word mnemonic seed to restore your wallet.") + translationManager.emptyString
-                imageIcon: "../images/restore-wallet.png"
+                imageIcon: "qrc:///images/restore-wallet.png"
 
                 onMenuClicked: {
                     wizardController.restart();
@@ -185,10 +185,6 @@ Rectangle {
                     dataModel: networkTypeModel
                     Layout.fillWidth: true
                     Layout.topMargin: 41
-                    shadowReleasedColor: "#FF4304"
-                    shadowPressedColor: "#B32D00"
-                    releasedColor: "#363636"
-                    pressedColor: "#202020"
 
                     onChanged: {
                         var item = dataModel.get(currentIndex).nettype.toLowerCase();

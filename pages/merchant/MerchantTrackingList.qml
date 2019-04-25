@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
@@ -37,7 +37,7 @@ ListView {
         color: "#767676"
         textFormat: Text.RichText
         text: parent.message
-        selectionColor: MoneroComponents.Style.dimmedFontColor
+        selectionColor: MoneroComponents.Style.textSelectionColor
         selectByMouse: true
         readOnly: true
         onFocusChanged: {if(focus === false) deselect() }
@@ -73,11 +73,11 @@ ListView {
                     TextEdit {
                         id: dateString
                         anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: 12 * scaleRatio
+                        font.pixelSize: 13 * scaleRatio
                         font.bold: false
                         color: "#707070"
                         text: time_date + " (" + Utils.ago(time_epoch) + ") "
-                        selectionColor: MoneroComponents.Style.dimmedFontColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }
@@ -126,7 +126,7 @@ ListView {
                         font.bold: true
                         color: hide_amount ? "#707070" : "#009F1E"
                         text: hide_amount ? '-' : '+' + amount
-                        selectionColor: MoneroComponents.Style.dimmedFontColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }
@@ -173,7 +173,7 @@ ListView {
                                 }
                             }
                         }
-                        selectionColor: MoneroComponents.Style.dimmedFontColor
+                        selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
                         onFocusChanged: {if(focus === false) deselect() }
@@ -199,7 +199,7 @@ ListView {
                         anchors.horizontalCenter: parent.horizontalCenter
                         Layout.preferredWidth: 12 * scaleRatio
                         Layout.preferredHeight: 21 * scaleRatio
-                        source: "../../images/merchant/arrow_right.png"
+                        source: "qrc:///images/merchant/arrow_right.png"
                     }
 
                     MouseArea {
