@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -189,13 +190,15 @@ ColumnLayout {
                 border.width: 1
                 color: "transparent"
 
-                Image {
-                    width: 12 * scaleRatio
-                    height: 16 * scaleRatio
-                    source: "qrc:///images/lockIcon.png"
-                    anchors.verticalCenter: parent.verticalCenter
+                MoneroComponents.Label {
+                    fontSize: 20
+                    text: FontAwesome.lock
+                    opacity: 0.5
+                    fontFamily: FontAwesome.fontFamily
                     anchors.right: parent.right
-                    anchors.rightMargin: 20
+                    anchors.rightMargin: 15
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 3
                 }
             }
         }
@@ -244,13 +247,15 @@ ColumnLayout {
                 border.width: 1
                 color: "transparent"
 
-                Image {
-                    width: 12
-                    height: 16
-                    source: "qrc:///images/lockIcon.png"
-                    anchors.verticalCenter: parent.verticalCenter
+                MoneroComponents.Label {
+                    fontSize: 20
+                    text: FontAwesome.lock
+                    opacity: 0.5
+                    fontFamily: FontAwesome.fontFamily
                     anchors.right: parent.right
-                    anchors.rightMargin: 20
+                    anchors.rightMargin: 15
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 3
                 }
             }
         }
