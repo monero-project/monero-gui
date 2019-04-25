@@ -41,7 +41,6 @@ Rectangle {
 
     ColumnLayout {
         id: settingsWallet
-        property int itemHeight: 60
         Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
@@ -61,7 +60,7 @@ Rectangle {
 
         GridLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
+            Layout.preferredHeight: childrenRect.height
             columnSpacing: 0
 
             ColumnLayout {
@@ -117,7 +116,7 @@ Rectangle {
 
         GridLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
+            Layout.preferredHeight: childrenRect.height
             columnSpacing: 0
             visible: !appWindow.viewOnly
 
@@ -183,7 +182,7 @@ Rectangle {
 
         GridLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
+            Layout.preferredHeight: childrenRect.height
             columnSpacing: 0
 
             ColumnLayout {
@@ -237,7 +236,7 @@ Rectangle {
         GridLayout {
             visible: appWindow.walletMode >= 2
             Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
+            Layout.preferredHeight: childrenRect.height
             columnSpacing: 0
 
             ColumnLayout {
@@ -303,7 +302,7 @@ Rectangle {
 
         GridLayout {
             Layout.fillWidth: true
-            Layout.preferredHeight: settingsWallet.itemHeight
+            Layout.preferredHeight: childrenRect.height
             columnSpacing: 0
 
             ColumnLayout {
