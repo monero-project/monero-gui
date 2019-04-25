@@ -56,8 +56,6 @@ Item {
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.state = "essentials"
-
-        show();
         root.visible = true;
         passwordInput1.text = "";
         passwordInput2.text = "";
