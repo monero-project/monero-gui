@@ -50,7 +50,6 @@ Item {
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.state = "essentials"
-        show()
         root.visible = true;
         input.focus = true;
         input.text = "";
