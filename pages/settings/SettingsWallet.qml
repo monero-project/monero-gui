@@ -41,20 +41,20 @@ Rectangle {
 
     ColumnLayout {
         id: settingsWallet
-        property int itemHeight: 60 * scaleRatio
+        property int itemHeight: 60
         Layout.fillWidth: true
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
         anchors.topMargin: 0
         spacing: 0
 
         Rectangle {
             // divider
-            Layout.preferredHeight: 1 * scaleRatio
+            Layout.preferredHeight: 1
             Layout.fillWidth: true
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.bottomMargin: 8
             color: MoneroComponents.Style.dividerColor
             opacity: MoneroComponents.Style.dividerOpacity
         }
@@ -71,13 +71,13 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.preferredHeight: 20
+                    Layout.topMargin: 8
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: qsTr("Close this wallet") + translationManager.emptyString
                 }
 
@@ -101,16 +101,16 @@ Rectangle {
                     middlePanel.receiveView.clearFields();
                     appWindow.showWizard();
                 }
-                width: 135 * scaleRatio
+                width: 135
             }
         }
 
         Rectangle {
             // divider
-            Layout.preferredHeight: 1 * scaleRatio
+            Layout.preferredHeight: 1
             Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.topMargin: 8
+            Layout.bottomMargin: 8
             color: MoneroComponents.Style.dividerColor
             opacity: MoneroComponents.Style.dividerOpacity
         }
@@ -128,13 +128,13 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.preferredHeight: 20
+                    Layout.topMargin: 8
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: qsTr("Create a view-only wallet") + translationManager.emptyString
                 }
 
@@ -166,17 +166,17 @@ Rectangle {
                         informationPopup.open()
                     }
                 }
-                width: 135 * scaleRatio
+                width: 135
             }
         }
 
         Rectangle {
             // divider
             visible: !appWindow.viewOnly
-            Layout.preferredHeight: 1 * scaleRatio
+            Layout.preferredHeight: 1
             Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.topMargin: 8
+            Layout.bottomMargin: 8
             color: MoneroComponents.Style.dividerColor
             opacity: MoneroComponents.Style.dividerOpacity
         }
@@ -193,13 +193,13 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.preferredHeight: 20
+                    Layout.topMargin: 8
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: qsTr("Show seed & keys") + translationManager.emptyString
                 }
 
@@ -220,16 +220,16 @@ Rectangle {
                 onClicked: {
                     Utils.showSeedPage();
                 }
-                width: 135 * scaleRatio
+                width: 135
             }
         }
 
         Rectangle {
             // divider
-            Layout.preferredHeight: 1 * scaleRatio
+            Layout.preferredHeight: 1
             Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.topMargin: 8
+            Layout.bottomMargin: 8
             color: MoneroComponents.Style.dividerColor
             opacity: MoneroComponents.Style.dividerOpacity
         }
@@ -247,13 +247,13 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.preferredHeight: 20
+                    Layout.topMargin: 8
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 }
 
@@ -287,16 +287,16 @@ Rectangle {
                         informationPopup.open();
                     }
                 }
-                width: 135 * scaleRatio
+                width: 135
             }
         }
         Rectangle {
             // divider
             visible: appWindow.walletMode >= 2
-            Layout.preferredHeight: 1 * scaleRatio
+            Layout.preferredHeight: 1
             Layout.fillWidth: true
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.topMargin: 8
+            Layout.bottomMargin: 8
             color: MoneroComponents.Style.dividerColor
             opacity: MoneroComponents.Style.dividerOpacity
         }
@@ -313,13 +313,13 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 20 * scaleRatio
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.preferredHeight: 20
+                    Layout.topMargin: 8
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     text: qsTr("Change wallet password") + translationManager.emptyString
                 }
 
@@ -353,7 +353,7 @@ Rectangle {
                     passwordDialog.onRejectedCallback = null;
                     passwordDialog.open()
                 }
-                width: 135 * scaleRatio
+                width: 135
             }
         }
     }

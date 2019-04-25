@@ -39,14 +39,14 @@ Item {
     property bool small: false
     property alias text: label.text
     property int fontSize: {
-        if(small) return 14 * scaleRatio;
-        else return 16 * scaleRatio;
+        if(small) return 14;
+        else return 16;
     }
     property alias label: label
     signal clicked()
 
-    height: small ?  30 * scaleRatio : 36 * scaleRatio
-    width: buttonLayout.width + 22 * scaleRatio
+    height: small ?  30 : 36
+    width: buttonLayout.width + 22
     implicitHeight: height
     implicitWidth: width
 
@@ -100,7 +100,7 @@ Item {
     RowLayout {
         id: buttonLayout
         height: button.height
-        spacing: 11 * scaleRatio
+        spacing: 11
         anchors.centerIn: parent
 
         MoneroComponents.TextPlain {
@@ -127,8 +127,8 @@ Item {
         Image {
             visible: button.rightIcon !== ""
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-            width: button.small ? 16 * scaleRatio : 20 * scaleRatio
-            height: button.small ? 16 * scaleRatio : 20 * scaleRatio
+            width: button.small ? 16 : 20
+            height: button.small ? 16 : 20
             source: {
                 if(button.rightIconInactive !== "" && !button.enabled) {
                     return button.rightIconInactive;

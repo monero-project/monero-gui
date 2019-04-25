@@ -8,7 +8,7 @@ Rectangle {
     id: root
     property alias text: content.text
     property alias textColor: content.color
-    property int fontSize: 15 * scaleRatio
+    property int fontSize: 15
 
     Layout.fillWidth: true
     Layout.preferredHeight: warningLayout.height
@@ -28,12 +28,12 @@ Rectangle {
 
         Image {
             Layout.alignment: Qt.AlignVCenter
-            Layout.preferredHeight: 33 * scaleRatio
-            Layout.preferredWidth: 33 * scaleRatio
-            Layout.rightMargin: 12 * scaleRatio
-            Layout.leftMargin: 18 * scaleRatio
-            Layout.topMargin: 12 * scaleRatio
-            Layout.bottomMargin: 12 * scaleRatio
+            Layout.preferredHeight: 33
+            Layout.preferredWidth: 33
+            Layout.rightMargin: 12
+            Layout.leftMargin: 18
+            Layout.topMargin: 12
+            Layout.bottomMargin: 12
             source: "qrc:///images/warning.png"
         }
 
@@ -48,10 +48,10 @@ Rectangle {
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             textMargin: 0
-            leftPadding: 4 * scaleRatio
-            rightPadding: 18 * scaleRatio
-            topPadding: 10 * scaleRatio
-            bottomPadding: 10 * scaleRatio
+            leftPadding: 4
+            rightPadding: 18
+            topPadding: 10
+            bottomPadding: 10
             readOnly: true
             onLinkActivated: root.linkActivated();
 

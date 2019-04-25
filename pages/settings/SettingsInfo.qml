@@ -38,7 +38,7 @@ import "../../components" as MoneroComponents
 
 Rectangle {
     color: "transparent"
-    height: 1400 * scaleRatio
+    height: 1400
     Layout.fillWidth: true
     property string walletModeString: {
         if(appWindow.walletMode === 0){
@@ -56,29 +56,29 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
         anchors.topMargin: 0
-        spacing: 30 * scaleRatio
+        spacing: 30
 
         GridLayout {
             columns: 2
             columnSpacing: 0
 
             MoneroComponents.TextBlock {
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("GUI version: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 color: MoneroComponents.Style.dimmedFontColor
                 text: Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")" + translationManager.emptyString
             }
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -86,8 +86,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -95,20 +95,20 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 id: guiMoneroVersion
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("Embedded Monero version: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 color: MoneroComponents.Style.dimmedFontColor
                 text: Version.GUI_MONERO_VERSION + translationManager.emptyString
             }
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -116,8 +116,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -125,15 +125,15 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("Wallet path: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                Layout.maximumWidth: 360 * scaleRatio
+                Layout.maximumWidth: 360
                 color: MoneroComponents.Style.dimmedFontColor
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: {
                     var wallet_path = walletPath();
                     if(isIOS)
@@ -144,8 +144,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -153,8 +153,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -162,7 +162,7 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 id: restoreHeight
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 textFormat: Text.RichText
                 text: (typeof currentWallet == "undefined") ? "" : qsTr("Wallet creation height: ") + translationManager.emptyString
             }
@@ -172,7 +172,7 @@ Rectangle {
                 Layout.fillWidth: true
                 textFormat: Text.RichText
                 color: MoneroComponents.Style.dimmedFontColor
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 property var style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
                 text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (Click to change)</a>") + translationManager.emptyString
                 onLinkActivated: {
@@ -234,8 +234,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -243,8 +243,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -252,21 +252,21 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("Wallet log path: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: walletLogPath
             }
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -274,8 +274,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -283,21 +283,21 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("Wallet mode: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: walletModeString
             }
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -305,8 +305,8 @@ Rectangle {
 
             Rectangle {
                 height: 1
-                Layout.topMargin: 2 * scaleRatio
-                Layout.bottomMargin: 2 * scaleRatio
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dividerColor
                 opacity: MoneroComponents.Style.dividerOpacity
@@ -314,14 +314,14 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: qsTr("Graphics mode: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
-                font.pixelSize: 14 * scaleRatio
+                font.pixelSize: 14
                 text: isOpenGL ? "OpenGL" : "Low graphics mode"
             }
         }

@@ -79,7 +79,7 @@ ColumnLayout {
         progressText.text = passwordStrengthText + strengthString + translationManager.emptyString;
     }
 
-    spacing: 20 * scaleRatio
+    spacing: 20
 
     WizardHeader{
         title: qsTr("Give your wallet a password") + translationManager.emptyString
@@ -100,21 +100,21 @@ ColumnLayout {
             anchors.top: parent.top
             anchors.topMargin: 6
             font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             font.bold: false
             color: MoneroComponents.Style.defaultFontColor
             text: root.passwordStrengthText + '-'
-            height: 18 * scaleRatio
+            height: 18
             passwordCharacter: "*"
         }
 
         TextInput {
             id: progressTextValue
             font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 13 * scaleRatio
+            font.pixelSize: 13
             font.bold: true
             color: MoneroComponents.Style.defaultFontColor
-            height: 18 * scaleRatio
+            height: 18
             passwordCharacter: "*"
         }
 
@@ -123,7 +123,7 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.preferredHeight: 8
 
-            radius: 8 * scaleRatio
+            radius: 8
             color: MoneroComponents.Style.progressBarBackgroundColor
 
             Rectangle {
@@ -132,7 +132,7 @@ ColumnLayout {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 height: bar.height
-                property int maxWidth: bar.width * scaleRatio
+                property int maxWidth: bar.width
                 width: (maxWidth * root.passwordFill) / 100
                 radius: 8
                 color: MoneroComponents.Style.orange
@@ -142,20 +142,20 @@ ColumnLayout {
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
-                anchors.leftMargin: 8 * scaleRatio
+                anchors.leftMargin: 8
             }
         }
     }
 
     ColumnLayout {
-        spacing: 4 * scaleRatio
+        spacing: 4
         Layout.fillWidth: true
 
         Label {
             text: qsTr("Password") + translationManager.emptyString
             Layout.fillWidth: true
 
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             font.family: MoneroComponents.Style.fontLight.name
 
             color: MoneroComponents.Style.defaultFontColor
@@ -164,12 +164,12 @@ ColumnLayout {
         TextField {
             id: passwordInput
 
-            Layout.topMargin: 6 * scaleRatio
+            Layout.topMargin: 6
             Layout.fillWidth: true
 
-            bottomPadding: 10 * scaleRatio
-            leftPadding: 10 * scaleRatio
-            topPadding: 10 * scaleRatio
+            bottomPadding: 10
+            leftPadding: 10
+            topPadding: 10
 
             horizontalAlignment: TextInput.AlignLeft
             verticalAlignment: TextInput.AlignVCenter
@@ -177,7 +177,7 @@ ColumnLayout {
             KeyNavigation.tab: passwordInputConfirm
 
             font.family: MoneroComponents.Style.fontLight.name
-            font.pixelSize: 15 * scaleRatio
+            font.pixelSize: 15
             color: MoneroComponents.Style.defaultFontColor
             selectionColor: MoneroComponents.Style.textSelectionColor
             selectedTextColor: MoneroComponents.Style.textSelectedColor
@@ -212,7 +212,7 @@ ColumnLayout {
             text: qsTr("Password (confirm)") + translationManager.emptyString
             Layout.fillWidth: true
 
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             font.family: MoneroComponents.Style.fontLight.name
 
             color: MoneroComponents.Style.defaultFontColor
@@ -221,12 +221,12 @@ ColumnLayout {
         TextField {
             id : passwordInputConfirm
             
-            Layout.topMargin: 6 * scaleRatio
+            Layout.topMargin: 6
             Layout.fillWidth: true
 
-            bottomPadding: 10 * scaleRatio
-            leftPadding: 10 * scaleRatio
-            topPadding: 10 * scaleRatio
+            bottomPadding: 10
+            leftPadding: 10
+            topPadding: 10
 
             horizontalAlignment: TextInput.AlignLeft
             verticalAlignment: TextInput.AlignVCenter
@@ -234,7 +234,7 @@ ColumnLayout {
             KeyNavigation.tab: passwordInputConfirm
 
             font.family: MoneroComponents.Style.fontLight.name
-            font.pixelSize: 15 * scaleRatio
+            font.pixelSize: 15
             color: MoneroComponents.Style.defaultFontColor
             selectionColor: MoneroComponents.Style.textSelectionColor
             selectedTextColor: MoneroComponents.Style.textSelectedColor

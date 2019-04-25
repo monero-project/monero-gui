@@ -37,7 +37,7 @@ Item {
     property alias color: label.color
     property int textFormat: Text.PlainText
     property string tipText: ""
-    property int fontSize: 16 * scaleRatio
+    property int fontSize: 16
     property bool fontBold: false
     property string fontColor: MoneroComponents.Style.defaultFontColor
     property string fontFamily: ""
@@ -47,14 +47,14 @@ Item {
     property alias textWidth: label.width
     property alias themeTransition: label.themeTransition
     signal linkActivated()
-    height: label.height * scaleRatio
-    width: label.width * scaleRatio
-    Layout.topMargin: 10 * scaleRatio
+    height: label.height
+    width: label.width
+    Layout.topMargin: 10
 
     MoneroComponents.TextPlain {
         id: label
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 2 * scaleRatio
+        anchors.bottomMargin: 2
         anchors.left: parent.left
         font.family: {
             if(fontFamily){

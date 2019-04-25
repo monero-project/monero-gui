@@ -92,9 +92,9 @@ Window {
         id: mainLayout
 
         anchors.fill: parent
-        anchors.topMargin: 20 * scaleRatio
-        anchors.margins: 35 * scaleRatio
-        spacing: 20 * scaleRatio
+        anchors.topMargin: 20
+        anchors.margins: 35
+        spacing: 20
 
         Item {
             Layout.fillHeight: true
@@ -118,7 +118,7 @@ Window {
                     selectByMouse: true
                     selectByKeyboard: true
                     font.family: MoneroComponents.Style.defaultFontColor
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     selectionColor: MoneroComponents.Style.textSelectionColor
                     wrapMode: TextEdit.Wrap

@@ -10,7 +10,7 @@ TextArea {
     property string colorBlackTheme: ""
     color: MoneroComponents.Style.defaultFontColor
     font.family: MoneroComponents.Style.fontRegular.name
-    font.pixelSize: 14 * scaleRatio
+    font.pixelSize: 14
     selectByMouse: false
     wrapMode: Text.WordWrap;
     textMargin: 0

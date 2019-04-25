@@ -52,7 +52,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 20 * scaleRatio
+            spacing: 20
 
             WizardHeader {
                 title: qsTr("You're all set up!") + translationManager.emptyString
@@ -62,7 +62,7 @@ Rectangle {
             WizardSummary {}
 
             WizardNav {
-                Layout.topMargin: 24 * scaleRatio
+                Layout.topMargin: 24
                 btnNextText: "Open wallet"
                 progressSteps: 4
                 progress: 4

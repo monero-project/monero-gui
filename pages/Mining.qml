@@ -40,27 +40,27 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         Layout.fillWidth: true
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 20 * scaleRatio
+        spacing: 20
 
         MoneroComponents.Label {
             id: soloTitleLabel
-            fontSize: 24 * scaleRatio
+            fontSize: 24
             text: qsTr("Solo mining") + translationManager.emptyString
         }
 
         MoneroComponents.WarningBox {
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.bottomMargin: 8
             text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
             visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
         }
 
         MoneroComponents.WarningBox {
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.bottomMargin: 8
             text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
             visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
         }
@@ -71,22 +71,22 @@ Rectangle {
             wrapMode: Text.Wrap
             Layout.fillWidth: true
             font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 14 * scaleRatio
+            font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
         }
 
         MoneroComponents.WarningBox {
             id: warningLabel
-            Layout.topMargin: 8 * scaleRatio
-            Layout.bottomMargin: 8 * scaleRatio
+            Layout.topMargin: 8
+            Layout.bottomMargin: 8
             text: qsTr("Mining may reduce the performance of other running applications and processes.") + translationManager.emptyString
         }
 
         GridLayout {
             columns: 2
             Layout.fillWidth: true
-            columnSpacing: 20 * scaleRatio
-            rowSpacing: 16 * scaleRatio
+            columnSpacing: 20
+            rowSpacing: 16
 
             ColumnLayout {
                 Layout.fillWidth: true
@@ -96,18 +96,18 @@ Rectangle {
                     id: soloMinerThreadsLabel
                     color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("CPU threads") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
+                    fontSize: 16
                     wrapMode: Text.WordWrap
                 }
             }
 
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: 16 * scaleRatio
+                spacing: 16
 
                 MoneroComponents.LineEdit {
                     id: soloMinerThreadsLine
-                    Layout.minimumWidth: 200 * scaleRatio
+                    Layout.minimumWidth: 200
                     text: "1"
                     validator: IntValidator { bottom: 1; top: idealThreadCount }
                 }
@@ -117,7 +117,7 @@ Rectangle {
                     text: qsTr("Max # of CPU threads available for mining: ") + idealThreadCount + translationManager.emptyString
                     wrapMode: Text.WordWrap
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                 }
 
@@ -175,7 +175,7 @@ Rectangle {
                     id: manageSoloMinerLabel
                     color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Manage miner") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
+                    fontSize: 16
                     wrapMode: Text.Wrap
                     Layout.preferredWidth: manageSoloMinerLabel.textWidth
                 }
@@ -183,7 +183,7 @@ Rectangle {
 
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: 16 * scaleRatio
+                spacing: 16
 
                 RowLayout {
                     MoneroComponents.StandardButton {
@@ -227,17 +227,17 @@ Rectangle {
                     id: statusLabel
                     color: MoneroComponents.Style.defaultFontColor
                     text: qsTr("Status") + translationManager.emptyString
-                    fontSize: 16 * scaleRatio
+                    fontSize: 16
                 }
             }
 
             ColumnLayout {
                 Layout.fillWidth: true
-                spacing: 16 * scaleRatio
+                spacing: 16
 
                 MoneroComponents.LineEditMulti {
                     id: statusText
-                    Layout.minimumWidth: 300 * scaleRatio
+                    Layout.minimumWidth: 300
                     text: qsTr("Not mining") + translationManager.emptyString
                     borderDisabled: true
                     readOnly: true

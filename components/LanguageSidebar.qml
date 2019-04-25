@@ -48,7 +48,7 @@ Drawer {
         isOpened = true;
     }
 
-    width: 240 * scaleRatio
+    width: 240
     height: parent.height - (persistentSettings.customDecorations ? 50 : 0)
     y: titleBar.height
 
@@ -77,13 +77,13 @@ Drawer {
                 id: item
                 color: "transparent"
                 width: sideBar.width
-                height: 32 * scaleRatio
+                height: 32
 
                 MoneroComponents.TextPlain {
                     anchors.left: parent.left
-                    anchors.leftMargin: 16 * scaleRatio
+                    anchors.leftMargin: 16
                     font.bold: true
-                    font.pixelSize: 14 * scaleRatio
+                    font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
                     text: display_name
                     anchors.verticalCenter: parent.verticalCenter

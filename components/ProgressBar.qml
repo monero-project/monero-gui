@@ -56,9 +56,9 @@ Rectangle {
 
     Item {
         anchors.top: item.top
-        anchors.topMargin: 10 * scaleRatio
-        anchors.leftMargin: 15 * scaleRatio
-        anchors.rightMargin: 15 * scaleRatio
+        anchors.topMargin: 10
+        anchors.leftMargin: 15
+        anchors.rightMargin: 15
         anchors.fill: parent
 
         MoneroComponents.TextPlain {
@@ -66,11 +66,11 @@ Rectangle {
             anchors.top: parent.top
             anchors.topMargin: 6
             font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 13 * scaleRatio
+            font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor
             text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
-            height: 18 * scaleRatio
+            height: 18
         }
 
         MoneroComponents.TextPlain {
@@ -79,10 +79,10 @@ Rectangle {
             anchors.topMargin: 6
             anchors.right: parent.right
             font.family: MoneroComponents.Style.fontMedium.name
-            font.pixelSize: 13 * scaleRatio
+            font.pixelSize: 13
             font.bold: MoneroComponents.Style.progressBarProgressTextBold
             color: MoneroComponents.Style.defaultFontColor
-            height:18 * scaleRatio
+            height:18
         }
 
         Rectangle {
@@ -91,8 +91,8 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: progressText.bottom
             anchors.topMargin: 4
-            height: 8 * scaleRatio
-            radius: 8 * scaleRatio
+            height: 8
+            radius: 8
             color: MoneroComponents.Style.progressBarBackgroundColor
 
             states: [
@@ -118,7 +118,7 @@ Rectangle {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 height: bar.height
-                property int maxWidth: bar.width * scaleRatio
+                property int maxWidth: bar.width
                 width: (maxWidth * fillLevel) / 100
                 radius: 8
                 color: "#FA6800"
@@ -128,7 +128,7 @@ Rectangle {
                 color:"#333"
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
-                anchors.leftMargin: 8 * scaleRatio
+                anchors.leftMargin: 8
             }
         }
 

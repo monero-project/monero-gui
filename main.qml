@@ -1411,7 +1411,7 @@ ApplicationWindow {
             visible: isMobile
             anchors.left: parent.left
             anchors.right: parent.right
-            height: visible? 65 * scaleRatio : 0
+            height: visible? 65 : 0
 
             MouseArea {
                 enabled: persistentSettings.customDecorations
@@ -1769,7 +1769,7 @@ ApplicationWindow {
                 y: 6
                 lineHeight: 0.7
                 font.family: "Arial"
-                font.pixelSize: 12 * scaleRatio
+                font.pixelSize: 12
                 color: "#FFFFFF"
             }
         }
@@ -1866,15 +1866,15 @@ ApplicationWindow {
         visible: false
         property alias text: statusMessageText.text
         anchors.bottom: parent.bottom
-        width: statusMessageText.contentWidth + 20 * scaleRatio
+        width: statusMessageText.contentWidth + 20
         anchors.horizontalCenter: parent.horizontalCenter
         color: MoneroComponents.Style.blackTheme ? "black" : "white"
-        height: 40 * scaleRatio
+        height: 40
         MoneroComponents.TextPlain {
             id: statusMessageText
             anchors.fill: parent
-            anchors.margins: 10 * scaleRatio
-            font.pixelSize: 14 * scaleRatio
+            anchors.margins: 10
+            font.pixelSize: 14
             color: MoneroComponents.Style.defaultFontColor
             themeTransition: false
         }

@@ -28,11 +28,11 @@ ListView {
         // message box
         visible: parent.message !== ""
         anchors.fill: parent
-        anchors.margins: 20 * scaleRatio
-        anchors.topMargin: 10 * scaleRatio
+        anchors.margins: 20
+        anchors.topMargin: 10
         wrapMode: Text.Wrap
 
-        font.pixelSize: 14 * scaleRatio
+        font.pixelSize: 14
         font.bold: false
         color: "#767676"
         textFormat: Text.RichText
@@ -46,7 +46,7 @@ ListView {
     delegate: Item {
         id: trackingTableItem
         visible: trackingListView.message === ""
-        height: 53 * scaleRatio
+        height: 53
         width: parent.width
         Layout.fillWidth: true
 
@@ -58,22 +58,22 @@ ListView {
 
             Item {
                 Layout.preferredHeight: parent.height
-                Layout.preferredWidth: 20 * scaleRatio
+                Layout.preferredWidth: 20
             }
 
             ColumnLayout {
                 spacing: 0
-                Layout.preferredHeight: 40 * scaleRatio
-                Layout.preferredWidth: 240 * scaleRatio
+                Layout.preferredHeight: 40
+                Layout.preferredWidth: 240
 
                 Item {
                     Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: 18 * scaleRatio
+                    Layout.preferredHeight: 18
 
                     TextEdit {
                         id: dateString
                         anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: 13 * scaleRatio
+                        font.pixelSize: 13
                         font.bold: false
                         color: "#707070"
                         text: time_date + " (" + Utils.ago(time_epoch) + ") "
@@ -93,11 +93,11 @@ ListView {
                         TextEdit {
                             id: hideAmount
                             anchors.top: parent.top
-                            anchors.topMargin: 1 * scaleRatio
+                            anchors.topMargin: 1
                             anchors.left: parent.left
                             anchors.verticalCenter: parent.verticalCenter
                             readOnly: true
-                            font.pixelSize: 12 * scaleRatio
+                            font.pixelSize: 12
                             font.bold: false
                             color: "#707070"
                             text: (hide_amount ? "(" + qsTr("show") + ")" : "(" + qsTr("hide") + ")") + translationManager.emptyString
@@ -117,12 +117,12 @@ ListView {
 
                 Item {
                     Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: 18 * scaleRatio
+                    Layout.preferredHeight: 18
 
                     TextEdit {
                         id: amountText
                         anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: 14 * scaleRatio
+                        font.pixelSize: 14
                         font.bold: true
                         color: hide_amount ? "#707070" : "#009F1E"
                         text: hide_amount ? '-' : '+' + amount
@@ -141,7 +141,7 @@ ListView {
             RowLayout {
                 spacing: 0
                 Layout.preferredHeight: parent.height
-                Layout.preferredWidth: 240 * scaleRatio
+                Layout.preferredWidth: 240
 
                 Item {
                     Layout.fillWidth: true
@@ -149,13 +149,13 @@ ListView {
                 }
 
                 Item {
-                    Layout.preferredWidth: 150 * scaleRatio
+                    Layout.preferredWidth: 150
                     Layout.preferredHeight: parent.height
 
                     TextEdit {
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: 12 * scaleRatio
+                        font.pixelSize: 12
                         font.bold: false
                         color: "#a8a8a8"
                         text: {
@@ -191,14 +191,14 @@ ListView {
                 }
 
                 Item {
-                    Layout.preferredWidth: 30 * scaleRatio
+                    Layout.preferredWidth: 30
                     Layout.preferredHeight: parent.height
 
                     Image {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
-                        Layout.preferredWidth: 12 * scaleRatio
-                        Layout.preferredHeight: 21 * scaleRatio
+                        Layout.preferredWidth: 12
+                        Layout.preferredHeight: 21
                         source: "qrc:///images/merchant/arrow_right.png"
                     }
 
@@ -214,7 +214,7 @@ ListView {
                 }
 
                 Item {
-                    Layout.preferredWidth: 10 * scaleRatio
+                    Layout.preferredWidth: 10
                     Layout.preferredHeight: parent.height
                 }
             }

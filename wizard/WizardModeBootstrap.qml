@@ -46,14 +46,14 @@ Rectangle {
         Layout.fillWidth: true
         anchors.horizontalCenter: parent.horizontalCenter;
 
-        spacing: 10 * scaleRatio
+        spacing: 10
 
         ColumnLayout {
             Layout.fillWidth: true
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.alignment: Qt.AlignHCenter
-            spacing: 0 * scaleRatio
+            spacing: 0
 
             WizardHeader {
                 title: qsTr("About the bootstrap mode") + translationManager.emptyString
@@ -61,47 +61,47 @@ Rectangle {
             }
 
             ColumnLayout {
-                spacing: 20 * scaleRatio
+                spacing: 20
 
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
                     text: qsTr("This mode will use a remote node whilst also syncing the blockchain. This is different from the first menu option (Simple mode), since it will only use the remote node until the blockchain is fully synced locally. It is a reasonable tradeoff for most people who care about privacy but also want the convenience of an automatic fallback option.") + translationManager.emptyString
                     wrapMode: Text.Wrap
-                    Layout.topMargin: 14 * scaleRatio
+                    Layout.topMargin: 14
                     Layout.fillWidth: true
 
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
                 MoneroComponents.TextPlain {
                     text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name <i>bootstrap</i>), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.topMargin: 8
                     Layout.fillWidth: true
 
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
                 MoneroComponents.WarningBox{
-                    Layout.topMargin: 14 * scaleRatio
-                    Layout.bottomMargin: 6 * scaleRatio
+                    Layout.topMargin: 14
+                    Layout.bottomMargin: 6
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
                 }
 
                 MoneroComponents.TextPlain {
                     text: qsTr("For enhanced node performance you may specify your region:") + translationManager.emptyString
                     wrapMode: Text.Wrap
-                    Layout.topMargin: 8 * scaleRatio
+                    Layout.topMargin: 8
                     Layout.fillWidth: true
 
                     font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16 * scaleRatio
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
                 }
 
@@ -139,8 +139,8 @@ Rectangle {
 
                 MoneroComponents.CheckBox {
                     id: understoodCheckbox
-                    Layout.topMargin: 20 * scaleRatio
-                    fontSize: 16 * scaleRatio
+                    Layout.topMargin: 20
+                    fontSize: 16
                     text: qsTr("I understand the privacy implications of using a third-party server.") + translationManager.emptyString
                     onClicked: {
                         wizardModeBootstrapWarning.understood = !wizardModeBootstrapWarning.understood
@@ -148,7 +148,7 @@ Rectangle {
                 }
 
                 WizardNav {
-                    Layout.topMargin: 4 * scaleRatio
+                    Layout.topMargin: 4
                     btnNext.enabled: wizardModeBootstrapWarning.understood
                     progressSteps: 0
 

@@ -55,7 +55,7 @@ Rectangle {
             columnSpacing: 0
             property string fontColorActive: MoneroComponents.Style.blackTheme ? "white" : "white"
             property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
-            property int fontSize: 15 * scaleRatio
+            property int fontSize: 15
             property bool fontBold: true
             property var fontFamily: MoneroComponents.Style.fontRegular.name
             property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
@@ -118,7 +118,7 @@ Rectangle {
                 id: navWallet
                 property bool isActive: settingsStateView.state === "Wallet"
                 Layout.preferredWidth: navWalletText.width + grid.textMargin
-                Layout.minimumWidth: 72 * scaleRatio
+                Layout.minimumWidth: 72
                 Layout.preferredHeight: 32
                 spacing: 0
 
@@ -130,7 +130,7 @@ Rectangle {
 
                 Rectangle {
                     color: parent.isActive ? grid.borderColor : "transparent"
-                    height: 30 * scaleRatio
+                    height: 30
                     Layout.fillWidth: true
 
                     MoneroComponents.TextPlain {
@@ -171,7 +171,7 @@ Rectangle {
                 property bool isActive: settingsStateView.state === "UI"
                 Layout.preferredWidth: navUIText.width + grid.textMargin
                 Layout.preferredHeight: 32
-                Layout.minimumWidth: 72 * scaleRatio
+                Layout.minimumWidth: 72
                 spacing: 0
 
                 Rectangle { 
@@ -182,7 +182,7 @@ Rectangle {
 
                 Rectangle {
                     color: parent.isActive ? grid.borderColor : "transparent"
-                    height: 30 * scaleRatio
+                    height: 30
                     Layout.fillWidth: true
 
                     MoneroComponents.TextPlain {
@@ -224,7 +224,7 @@ Rectangle {
                 visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navNodeText.width + grid.textMargin
                 Layout.preferredHeight: 32
-                Layout.minimumWidth: 72 * scaleRatio
+                Layout.minimumWidth: 72
                 spacing: 0
 
                 Rectangle { 
@@ -235,7 +235,7 @@ Rectangle {
 
                 Rectangle {
                     color: parent.isActive ? grid.borderColor : "transparent"
-                    height: 30 * scaleRatio
+                    height: 30
                     Layout.fillWidth: true
 
                     MoneroComponents.TextPlain {
@@ -278,7 +278,7 @@ Rectangle {
                 visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navLogText.width + grid.textMargin
                 Layout.preferredHeight: 32
-                Layout.minimumWidth: 72 * scaleRatio
+                Layout.minimumWidth: 72
                 spacing: 0
 
                 Rectangle { 
@@ -289,7 +289,7 @@ Rectangle {
 
                 Rectangle {
                     color: parent.isActive ? grid.borderColor : "transparent"
-                    height: 30 * scaleRatio
+                    height: 30
                     Layout.fillWidth: true
 
                     MoneroComponents.TextPlain {
@@ -331,7 +331,7 @@ Rectangle {
                 property bool isActive: settingsStateView.state === "Info"
                 Layout.preferredWidth: navInfoText.width + grid.textMargin
                 Layout.preferredHeight: 32
-                Layout.minimumWidth: 72 * scaleRatio
+                Layout.minimumWidth: 72
                 spacing: 0
 
                 Rectangle { 
@@ -342,7 +342,7 @@ Rectangle {
 
                 Rectangle {
                     color: parent.isActive ? grid.borderColor : "transparent"
-                    height: 30 * scaleRatio
+                    height: 30
                     Layout.fillWidth: true
 
                     MoneroComponents.TextPlain {

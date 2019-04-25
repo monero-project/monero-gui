@@ -282,11 +282,6 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("screenWidth", geo.width());
     engine.rootContext()->setContextProperty("screenHeight", geo.height());
-#ifdef Q_OS_ANDROID
-    engine.rootContext()->setContextProperty("scaleRatio", calculated_ratio);
-#else
-    engine.rootContext()->setContextProperty("scaleRatio", 1);
-#endif
 
 #ifndef Q_OS_IOS
     const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);

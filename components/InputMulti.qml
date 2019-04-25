@@ -33,7 +33,7 @@ import "../js/TxUtils.js" as TxUtils
 import "../components" as MoneroComponents
 
 TextArea {
-    property int fontSize: 18 * scaleRatio
+    property int fontSize: 18
     property bool fontBold: false
     property string fontColor: MoneroComponents.Style.defaultFontColor
 
@@ -51,7 +51,7 @@ TextArea {
     selectionColor: MoneroComponents.Style.textSelectionColor
     selectedTextColor: MoneroComponents.Style.textSelectedColor
 
-    property int minimumHeight: 100 * scaleRatio
+    property int minimumHeight: 100
     height: contentHeight > minimumHeight ? contentHeight : minimumHeight
 
     onTextChanged: {

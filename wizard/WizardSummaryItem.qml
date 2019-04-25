@@ -47,7 +47,7 @@ ColumnLayout {
 
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 20 * scaleRatio
+            Layout.preferredHeight: 20
             color: "transparent"
 
             MoneroComponents.TextBlock {
@@ -61,7 +61,7 @@ ColumnLayout {
 
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 20 * scaleRatio
+            Layout.preferredHeight: 20
             color: "transparent"
 
             MoneroComponents.TextBlock {
@@ -75,9 +75,9 @@ ColumnLayout {
     }
 
     Rectangle {
-        Layout.preferredHeight: 1 * scaleRatio
-        Layout.topMargin: 2 * scaleRatio
-        Layout.bottomMargin: 2 * scaleRatio
+        Layout.preferredHeight: 1
+        Layout.topMargin: 2
+        Layout.bottomMargin: 2
         Layout.fillWidth: true
         color: MoneroComponents.Style.dividerColor
         opacity: MoneroComponents.Style.dividerOpacity

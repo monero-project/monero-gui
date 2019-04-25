@@ -94,7 +94,7 @@ Item {
     Item {
         id: head
         anchors.top: inputLabelRect.bottom
-        anchors.topMargin: 6 * scaleRatio
+        anchors.topMargin: 6
         anchors.left: parent.left
         anchors.right: parent.right
         height: 28
@@ -237,7 +237,7 @@ Item {
                 Image {
                     id: button
                     anchors.right: parent.right
-                    anchors.rightMargin: 10 * scaleRatio
+                    anchors.rightMargin: 10
                     anchors.verticalCenter: parent.verticalCenter
                     source: "qrc:///images/whiteDropIndicator.png"
                     visible: false
@@ -266,7 +266,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: head.bottom
-        anchors.topMargin: 10 * scaleRatio
+        anchors.topMargin: 10
         color: MoneroComponents.Style.middlePanelBackgroundColor
         border.width: 1
         border.color: MoneroComponents.Style.appWindowBorderColor
@@ -293,7 +293,7 @@ Item {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.margins: 1
-            anchors.bottomMargin: 10 * scaleRatio
+            anchors.bottomMargin: 10
             height: 220
             frameVisible: false
 
@@ -396,7 +396,7 @@ Item {
 
                     Item {
                         anchors.left: parent.left
-                        anchors.leftMargin: 4 * scaleRatio
+                        anchors.leftMargin: 4
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: height
@@ -425,7 +425,7 @@ Item {
 
                     Item {
                         anchors.right: parent.right
-                        anchors.rightMargin: 4 * scaleRatio
+                        anchors.rightMargin: 4
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: height

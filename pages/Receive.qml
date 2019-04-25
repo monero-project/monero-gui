@@ -65,18 +65,18 @@ Rectangle {
     /* main layout */
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 * scaleRatio : 20 * scaleRatio
-        anchors.topMargin: 40 * scaleRatio
+        anchors.margins: (isMobile)? 17 : 20
+        anchors.topMargin: 40
 
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
 
-        spacing: 20 * scaleRatio
-        property int labelWidth: 120 * scaleRatio
-        property int editWidth: 400 * scaleRatio
-        property int lineEditFontSize: 12 * scaleRatio
-        property int qrCodeSize: 220 * scaleRatio
+        spacing: 20
+        property int labelWidth: 120
+        property int editWidth: 400
+        property int lineEditFontSize: 12
+        property int qrCodeSize: 220
 
         ColumnLayout {
             id: addressRow
@@ -90,8 +90,8 @@ Rectangle {
 
             ColumnLayout {
                 id: subaddressListRow
-                property int subaddressListItemHeight: 50 * scaleRatio
-                Layout.topMargin: 6 * scaleRatio
+                property int subaddressListItemHeight: 50
+                Layout.topMargin: 6
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
                 Layout.preferredHeight: subaddressListItemHeight * subaddressListView.count
@@ -136,8 +136,8 @@ Rectangle {
                                 color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
-                                anchors.leftMargin: 6 * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: 6
+                                fontSize: 14
                                 fontBold: true
                                 text: "#" + index
                                 themeTransition: false
@@ -148,8 +148,8 @@ Rectangle {
                                 color: MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
-                                anchors.leftMargin: 6 * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: 6
+                                fontSize: 14
                                 fontBold: true
                                 text: label
                                 elide: Text.ElideRight
@@ -162,8 +162,8 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: (mainLayout.width < 510 ? -130 : -190) * scaleRatio
-                                fontSize: 14 * scaleRatio
+                                anchors.leftMargin: (mainLayout.width < 510 ? -130 : -190)
+                                fontSize: 14
                                 fontBold: true
                                 text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 6 : 10)
                                 themeTransition: false
@@ -186,8 +186,8 @@ Rectangle {
                             opacity: 0.5
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 30 * scaleRatio
-                            anchors.topMargin: 1 * scaleRatio
+                            anchors.rightMargin: 30
+                            anchors.topMargin: 1
                             width: 23
                             height: 21
                             visible: index !== 0
@@ -242,10 +242,10 @@ Rectangle {
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                fontSize: 14 * scaleRatio
+                fontSize: 14
                 iconOnTheLeft: true
                 Layout.fillWidth: true
-                Layout.topMargin: 10 * scaleRatio
+                Layout.topMargin: 10
                 text: qsTr("Create new address") + translationManager.emptyString;
                 onClicked: {
                     inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
@@ -262,8 +262,8 @@ Rectangle {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignHCenter
-            spacing: 11 * scaleRatio
-            property int qrSize: 220 * scaleRatio
+            spacing: 11
+            property int qrSize: 220
 
             Rectangle {
                 id: qrContainer
@@ -271,12 +271,12 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.maximumWidth: parent.qrSize
                 Layout.preferredHeight: width
-                radius: 4 * scaleRatio
+                radius: 4
 
                 Image {
                     id: qrCode
                     anchors.fill: parent
-                    anchors.margins: 1 * scaleRatio
+                    anchors.margins: 1
 
                     smooth: false
                     fillMode: Image.PreserveAspectFit

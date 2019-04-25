@@ -51,7 +51,7 @@ Rectangle {
             Layout.topMargin: wizardController.wizardSubViewTopMargin
             Layout.maximumWidth: wizardController.wizardSubViewWidth
             Layout.alignment: Qt.AlignHCenter
-            spacing: 0 * scaleRatio
+            spacing: 0
 
             WizardAskPassword {
                 id: passwordFields

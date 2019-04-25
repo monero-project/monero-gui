@@ -45,7 +45,7 @@ Rectangle {
 
     height: {
         if(!persistentSettings.customDecorations || isMobile) return 0;
-        return 50 * scaleRatio;
+        return 50;
     }
 
     z: 1

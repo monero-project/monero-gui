@@ -41,8 +41,8 @@ Rectangle {
     property alias messageText: messageTitle.text
     property alias heightProgressText : heightProgress.text
 
-    width: 200 * scaleRatio
-    height: 100 * scaleRatio
+    width: 200
+    height: 100
     opacity: 0.7
 
     function show() {
@@ -60,8 +60,8 @@ Rectangle {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
 
-        anchors.leftMargin: 30 * scaleRatio
-        anchors.rightMargin: 30 * scaleRatio
+        anchors.leftMargin: 30
+        anchors.rightMargin: 30
 
         spacing: 12
 
@@ -74,7 +74,7 @@ Rectangle {
             id: messageTitle
             text: "Please wait..."
             font {
-                pixelSize: 22 * scaleRatio
+                pixelSize: 22
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
@@ -87,7 +87,7 @@ Rectangle {
         MoneroComponents.TextPlain {
             id: heightProgress
             font {
-                pixelSize: 18 * scaleRatio
+                pixelSize: 18
             }
             horizontalAlignment: Text.AlignHCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter

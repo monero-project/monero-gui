@@ -39,11 +39,11 @@ RowLayout {
     id: checkBox
     property alias text: label.text
     property bool checked: false
-    property int fontSize: 14 * scaleRatio
+    property int fontSize: 14
     property alias fontColor: label.color
-    property int textMargin: 8 * scaleRatio
+    property int textMargin: 8
     signal clicked()
-    height: 25 * scaleRatio
+    height: 25
 
     function toggle(){
         checkBox.checked = !checkBox.checked
@@ -75,13 +75,13 @@ RowLayout {
                 anchors.left: label.right
                 anchors.leftMargin: textMargin
                 color: "transparent"
-                rotation: checkBox.checked ? 180  * scaleRatio : 0
+                rotation: checkBox.checked ? 180  : 0
 
                 MoneroEffects.ImageMask {
                     id: indicatorImage
                     anchors.centerIn: parent
-                    width: 12 * scaleRatio
-                    height: 8 * scaleRatio
+                    width: 12
+                    height: 8
                     image: "qrc:///images/whiteDropIndicator.png"
                     color: MoneroComponents.Style.defaultFontColor
                     opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75

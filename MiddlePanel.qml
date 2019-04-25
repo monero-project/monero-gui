@@ -51,7 +51,7 @@ Rectangle {
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString
     property string unlockedBalanceText
-    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800 * scaleRatio
+    property int minHeight: (appWindow.height > 800) ? appWindow.height : 800
     property alias contentHeight: mainFlickable.contentHeight
     property alias flickable: mainFlickable
 
@@ -125,11 +125,11 @@ Rectangle {
             State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
-                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 100 * scaleRatio}
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 100}
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 700 * scaleRatio }
+                PropertyChanges { target: mainFlickable; contentHeight: 700 }
             }, State {
                name: "Receive"
                PropertyChanges { target: root; currentView: receiveView }
@@ -141,7 +141,7 @@ Rectangle {
             }, State {
                name: "TxKey"
                PropertyChanges { target: root; currentView: txkeyView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200 * scaleRatio  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1200  }
             }, State {
                name: "SharedRingDB"
                PropertyChanges { target: root; currentView: sharedringdbView }
@@ -153,7 +153,7 @@ Rectangle {
             }, State {
                 name: "Sign"
                PropertyChanges { target: root; currentView: signView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1000 * scaleRatio  }
+               PropertyChanges { target: mainFlickable; contentHeight: 1000  }
             }, State {
                 name: "Settings"
                PropertyChanges { target: root; currentView: settingsView }
@@ -161,7 +161,7 @@ Rectangle {
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: 700 * scaleRatio}
+                PropertyChanges { target: mainFlickable; contentHeight: 700}
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
@@ -196,10 +196,10 @@ Rectangle {
             if(currentView === merchantView || currentView === historyView)
                 return 0;
 
-            return 20 * scaleRatio;
+            return 20;
         }
 
-        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 * scaleRatio : 0
+        anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
         spacing: 0
 
         Flickable {

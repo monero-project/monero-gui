@@ -37,16 +37,16 @@ import "../components" as MoneroComponents
 RowLayout {
     id: rowlayout
     Layout.fillWidth: true
-    Layout.bottomMargin: 10 * scaleRatio
+    Layout.bottomMargin: 10
     property alias imageIcon: icon.source
     property alias headerText: header.text
     property alias bodyText: body.text
     signal menuClicked();
-    spacing: 10 * scaleRatio
+    spacing: 10
 
     Item {
-        Layout.preferredWidth: 70 * scaleRatio
-        Layout.preferredHeight: 70 * scaleRatio
+        Layout.preferredWidth: 70
+        Layout.preferredHeight: 70
 
         Image {
             id: icon
@@ -93,9 +93,9 @@ RowLayout {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(wizardController.layoutScale === 2 ){
-                    return 22 * scaleRatio;
+                    return 22;
                 } else {
-                    return 16 * scaleRatio;
+                    return 16;
                 }
             }
 
@@ -115,12 +115,12 @@ RowLayout {
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: {
                 if(wizardController.layoutScale === 2 ){
-                    return 16 * scaleRatio;
+                    return 16;
                 } else {
-                    return 14 * scaleRatio;
+                    return 14;
                 }
             }
-            topPadding: 4 * scaleRatio
+            topPadding: 4
             wrapMode: Text.WordWrap
             themeTransition: false
 

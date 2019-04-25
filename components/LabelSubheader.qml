@@ -33,7 +33,7 @@ import "../components/effects/" as MoneroEffects
 
 Label {
     id: item
-    fontSize: 18 * scaleRatio
+    fontSize: 18
 
     Rectangle {
         anchors.top: item.bottom
