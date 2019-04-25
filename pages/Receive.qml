@@ -84,6 +84,7 @@ Rectangle {
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
+                fontSize: 24
                 textFormat: Text.RichText
                 text: qsTr("Addresses") + translationManager.emptyString
             }
@@ -103,6 +104,8 @@ Rectangle {
                     anchors.fill: parent
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
+                    interactive: false
+
                     delegate: Rectangle {
                         id: tableItem2
                         height: subaddressListRow.subaddressListItemHeight
@@ -137,8 +140,7 @@ Rectangle {
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
-                                fontSize: 14
-                                fontBold: true
+                                fontSize: 16
                                 text: "#" + index
                                 themeTransition: false
                             }
@@ -149,8 +151,7 @@ Rectangle {
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
-                                fontSize: 14
-                                fontBold: true
+                                fontSize: 16
                                 text: label
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - nameLabel.x - 1
@@ -162,10 +163,10 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: (mainLayout.width < 510 ? -130 : -190)
-                                fontSize: 14
-                                fontBold: true
-                                text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 6 : 10)
+                                anchors.leftMargin: -addressLabel.width - 5
+                                fontSize: 16
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 520 ? 1 : (mainLayout.width < 650 ? 2 : 3))
                                 themeTransition: false
                             }
 
@@ -179,38 +180,40 @@ Rectangle {
                             }
                         }
 
-                        MoneroComponents.IconButton {
-                            id: renameButton
-                            image: "qrc:///images/edit.svg"
-                            color: MoneroComponents.Style.defaultFontColor
-                            opacity: 0.5
+                        RowLayout {
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.right: parent.right
-                            anchors.rightMargin: 30
-                            anchors.topMargin: 1
-                            width: 23
+                            anchors.rightMargin: 6
                             height: 21
-                            visible: index !== 0
+                            spacing: 10
 
-                            onClicked: {
-                                renameSubaddressLabel(index);
+                            MoneroComponents.IconButton {
+                                id: renameButton
+                                image: "qrc:///images/edit.svg"
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.5
+                                Layout.preferredWidth: 23
+                                Layout.preferredHeight: 21
+                                visible: index !== 0
+
+                                onClicked: {
+                                    renameSubaddressLabel(index);
+                                }
                             }
-                        }
 
-                        MoneroComponents.IconButton {
-                            id: copyButton
-                            image: "qrc:///images/copy.svg"
-                            color: MoneroComponents.Style.defaultFontColor
-                            opacity: 0.5
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: parent.right
-                            width: 16
-                            height: 21
+                            MoneroComponents.IconButton {
+                                id: copyButton
+                                image: "qrc:///images/copy.svg"
+                                color: MoneroComponents.Style.defaultFontColor
+                                opacity: 0.5
+                                Layout.preferredWidth: 16
+                                Layout.preferredHeight: 21
 
-                            onClicked: {
-                                console.log("Address copied to clipboard");
-                                clipboard.setText(address);
-                                appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
+                                onClicked: {
+                                    console.log("Address copied to clipboard");
+                                    clipboard.setText(address);
+                                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
+                                }
                             }
                         }
                     }
@@ -242,7 +245,7 @@ Rectangle {
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                fontSize: 14
+                fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true
                 Layout.topMargin: 10

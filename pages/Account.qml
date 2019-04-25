@@ -80,6 +80,7 @@ Rectangle {
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
+                fontSize: 24
                 textFormat: Text.RichText
                 text: qsTr("Balance All") + translationManager.emptyString
             }
@@ -91,14 +92,15 @@ Rectangle {
                     text: qsTr("Total balance: ") + translationManager.emptyString
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
-                    font.pixelSize: 14
+                    font.pixelSize: 16
                     font.family: MoneroComponents.Style.fontRegular.name
+                    themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14 
+                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.dimmedFontColor
                     themeTransition: false
 
@@ -124,15 +126,15 @@ Rectangle {
                     text: qsTr("Total unlocked balance: ") + translationManager.emptyString
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.defaultFontColor
-                    font.pixelSize: 14 
+                    font.pixelSize: 16
                     font.family: MoneroComponents.Style.fontRegular.name
                     themeTransition: false
                 }
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 14
+                    font.family: MoneroComponents.Style.fontMonoRegular.name;
+                    font.pixelSize: 16
                     color: MoneroComponents.Style.dimmedFontColor
                     themeTransition: false
 
@@ -158,6 +160,7 @@ Rectangle {
 
             MoneroComponents.LabelSubheader {
                 Layout.fillWidth: true
+                fontSize: 24
                 textFormat: Text.RichText
                 text: qsTr("Accounts") + translationManager.emptyString
             }
@@ -177,6 +180,7 @@ Rectangle {
                     anchors.fill: parent
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
+                    interactive: false
 
                     delegate: Rectangle {
                         id: tableItem2
@@ -212,8 +216,7 @@ Rectangle {
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
-                                fontSize: 14
-                                fontBold: true
+                                fontSize: 16
                                 text: "#" + index
                                 themeTransition: false
                             }
@@ -224,8 +227,7 @@ Rectangle {
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
-                                fontSize: 14
-                                fontBold: true
+                                fontSize: 16 
                                 text: label
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - nameLabel.x - 1
@@ -236,25 +238,37 @@ Rectangle {
                                 id: addressLabel
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: balanceLabel.left
-                                anchors.leftMargin: (mainLayout.width < 510 ? -70 : -125)
-                                fontSize: 14
-                                fontBold: true
-                                text: TxUtils.addressTruncate(address, mainLayout.width < 510 ? 3 : 6)
+                                anchors.left: mainLayout.width >= 590 ? balanceTextLabel.left : balanceNumberLabel.left
+                                anchors.leftMargin: -addressLabel.width - 30
+                                fontSize: 16
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
                                 themeTransition: false
                             }
 
                             MoneroComponents.Label {
-                                id: balanceLabel
+                                id: balanceTextLabel
+                                visible: mainLayout.width >= 590
+                                color: MoneroComponents.Style.defaultFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: balanceNumberLabel.left
+                                anchors.leftMargin: -balanceTextLabel.width - 5
+                                fontSize: 16
+                                text: qsTr("Balance: ") + translationManager.emptyString
+                                themeTransition: false
+                            }
+
+                            MoneroComponents.Label {
+                                id: balanceNumberLabel
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: (mainLayout.width < 510 ? -120 : -180)
-                                fontSize: 14
-                                fontBold: true
-                                text: qsTr("Balance: ") + balance
-                                elide: mainLayout.width < 510 ? Text.ElideRight : Text.ElideNone
-                                textWidth: 120
+                                anchors.leftMargin: -balanceNumberLabel.width
+                                fontSize: 16
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                text: balance
+                                elide: Text.ElideRight
+                                textWidth: mainLayout.width < 660 ? 70 : 135
                                 themeTransition: false
                             }
 
@@ -339,7 +353,7 @@ Rectangle {
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
                 uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
-                fontSize: 14
+                fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true
                 Layout.topMargin: 10

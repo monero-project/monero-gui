@@ -167,9 +167,9 @@ Rectangle {
                 PropertyChanges { target: root; currentView: keysView }
                 PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight }
             }, State {
-	           name: "Account"
-	           PropertyChanges { target: root; currentView: accountView }
-	           PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+                name: "Account"
+                PropertyChanges { target: root; currentView: accountView }
+                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 100 }
             }	
         ]
 
