@@ -51,6 +51,10 @@ Item {
     signal closeCallback()
 
     function open(walletName, errorText) {
+        isHidden = true
+        passphaseInput1.echoMode = TextInput.Password;
+        passphaseInput2.echoMode = TextInput.Password;
+
         inactiveOverlay.visible = true
 
         root.walletName = walletName ? walletName : ""
