@@ -51,6 +51,9 @@ Rectangle {
     signal walletCreatedFromDevice(bool success)
 
     function restart() {
+        // Clear up any state, including `m_wallet`, which
+        // is the temp. wallet object whilst creating new wallets.
+        // This function is called automatically by navigating to `wizardHome`.
         wizardStateView.state = "wizardHome"
         wizardController.walletOptionsName = defaultAccountName;
         wizardController.walletOptionsLocation = '';
@@ -71,6 +74,11 @@ Rectangle {
         wizardController.walletOptionsSubaddressLookahead = '';
         wizardController.remoteNodes = {};
         disconnect();
+
+        if (typeof wizardController.m_wallet !== 'undefined'){
+            walletManager.closeWallet();
+            wizardController.m_wallet = undefined;
+        }
     }
 
     property var m_wallet;
@@ -165,6 +173,9 @@ Rectangle {
                // Combined with NumberAnimation to fade out views
                previousView.opacity = 0;
             }
+
+            if(previousView !== null && currentView.viewName === "wizardHome")
+                wizardController.restart();
 
             if (currentView) {
                 stackView.replace(currentView)
