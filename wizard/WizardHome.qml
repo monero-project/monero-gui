@@ -195,6 +195,7 @@ Rectangle {
                         } else if(item === "testnet"){
                             persistentSettings.nettype = NetworkType.TESTNET
                         }
+                        appWindow.disconnectRemoteNode()
                     }
                 }
 
