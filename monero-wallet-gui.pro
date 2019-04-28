@@ -5,7 +5,7 @@ lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
 
 TEMPLATE = app
 
-QT += qml gui-private quick widgets
+QT += svg qml gui-private quick widgets
 
 WALLET_ROOT=$$PWD/monero
 
