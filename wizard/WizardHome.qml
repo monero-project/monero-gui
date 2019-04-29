@@ -142,6 +142,7 @@ Rectangle {
                     text: qsTr("Change wallet mode") + translationManager.emptyString
 
                     onClicked: {
+                        wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardModeSelection';
                     }                    
                 }
@@ -152,6 +153,7 @@ Rectangle {
                     text: qsTr("Change language") + translationManager.emptyString
 
                     onClicked: {
+                        wizardController.wizardStackView.backTransition = false;
                         appWindow.toggleLanguageView();
                     }
                 }
@@ -169,7 +171,6 @@ Rectangle {
 
             ListModel {
                 id: networkTypeModel
-                // @TODO: try real enums
                 ListElement {column1: "Mainnet"; column2: ""; nettype: "mainnet"}
                 ListElement {column1: "Testnet"; column2: ""; nettype: "testnet"}
                 ListElement {column1: "Stagenet"; column2: ""; nettype: "stagenet"}

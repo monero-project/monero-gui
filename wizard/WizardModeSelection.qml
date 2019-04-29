@@ -126,6 +126,7 @@ Rectangle {
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
+                    wizardController.wizardStackView.backTransition = false;
                     appWindow.changeWalletMode(2);
                     wizardController.wizardState = 'wizardHome';
                 }
@@ -138,6 +139,7 @@ Rectangle {
                 progressSteps: 0
 
                 onPrevClicked: {
+                    wizardController.wizardStackView.backTransition = true;
                     wizardController.wizardState = 'wizardLanguage';
                 }
             }

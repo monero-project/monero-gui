@@ -170,6 +170,7 @@ Rectangle {
                 text: "Continue"
 
                 onClicked: {
+                    wizardController.wizardStackView.backTransition = false;
                     if(wizardController.skipModeSelection){
                         wizardStateView.state = "wizardHome"
                     } else {

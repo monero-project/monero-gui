@@ -50,6 +50,18 @@ GridLayout {
     signal nextClicked;
     signal prevClicked;
 
+    // internal signals
+    signal m_nextClicked;
+    signal m_prevClicked;
+
+    onM_prevClicked: {
+        wizardController.wizardStackView.backTransition = true;
+    }
+
+    onM_nextClicked: {
+        wizardController.wizardStackView.backTransition = false;
+    }
+
     Rectangle {
         Layout.preferredHeight: parent.height
         Layout.fillWidth: true
@@ -64,6 +76,7 @@ GridLayout {
             anchors.verticalCenter: parent.verticalCenter
 
             onClicked: {
+                menuNav.m_prevClicked();
                 menuNav.prevClicked();
             }
         }
@@ -99,6 +112,7 @@ GridLayout {
             anchors.right: parent.right
 
             onClicked: {
+                menuNav.m_nextClicked();
                 menuNav.nextClicked();
             }
         }
