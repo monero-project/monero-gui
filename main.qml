@@ -53,7 +53,6 @@ ApplicationWindow {
     property bool hideBalanceForced: false
     property bool whatIsEnable: false
     property bool ctrlPressed: false
-    property bool rightPanelExpanded: false
     property bool osx: false
     property alias persistentSettings : persistentSettings
     property var currentWallet;
@@ -1014,7 +1013,6 @@ ApplicationWindow {
     function enableUI(enable) {
         middlePanel.enabled = enable;
         leftPanel.enabled = enable;
-        rightPanel.enabled = enable;
     }
 
     function showProcessingSplash(message) {
@@ -1127,13 +1125,6 @@ ApplicationWindow {
 
         checkUpdates();
     }
-
-    onRightPanelExpandedChanged: {
-        if (rightPanelExpanded) {
-            rightPanel.updateTweets()
-        }
-    }
-
 
     Settings {
         id: persistentSettings
@@ -1387,7 +1378,6 @@ ApplicationWindow {
             State {
                 name: "wizard"
                 PropertyChanges { target: leftPanel; visible: false }
-                PropertyChanges { target: rightPanel; visible: false }
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: wizard; visible: true }
                 PropertyChanges { target: resizeArea; visible: true }
@@ -1396,7 +1386,6 @@ ApplicationWindow {
             }, State {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
-                PropertyChanges { target: rightPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
@@ -1541,14 +1530,6 @@ ApplicationWindow {
             }
         }
 
-        RightPanel {
-            id: rightPanel
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            width: appWindow.rightPanelExpanded ? 300 : 0
-            visible: appWindow.rightPanelExpanded
-        }
-
 
         MiddlePanel {
             id: middlePanel
@@ -1592,7 +1573,7 @@ ApplicationWindow {
 //                value: 326
 //            }
             PropertyAction {
-                targets: [leftPanel, rightPanel]
+                target: leftPanel
                 properties: "visible"
                 value: false
             }
@@ -1610,7 +1591,6 @@ ApplicationWindow {
 
             onStopped: {
                 // middlePanel.visible = false
-                rightPanel.visible = false
                 leftPanel.visible = false
             }
         }
@@ -1628,15 +1608,10 @@ ApplicationWindow {
                 value: false
             }
             PropertyAction {
-                targets: [leftPanel, middlePanel, rightPanel, resizeArea]
+                targets: [leftPanel, middlePanel, resizeArea]
                 properties: "visible"
                 value: true
             }
-//            PropertyAction {
-//                target: appWindow
-//                properties: "width"
-//                value: rightPanelExpanded ? 1269 : 1269 - 300
-//            }
 //            PropertyAction {
 //                target: appWindow
 //                properties: "height"
