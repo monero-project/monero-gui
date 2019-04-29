@@ -140,7 +140,12 @@ int main(int argc, char *argv[])
 
 
     // loglevel is configured in main.qml. Anything lower than
-    // qWarning is not shown here.
+    // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
+    bool logLevelOk;
+    int logLevel = qEnvironmentVariableIntValue("MONERO_LOG_LEVEL", &logLevelOk);
+    if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
+        Monero::WalletManagerFactory::setLogLevel(logLevel);
+    }
     qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
 
     // screen settings
