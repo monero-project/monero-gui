@@ -64,7 +64,6 @@ Item {
         middlePanel.enabled = false
         titleBar.state = "essentials"
 
-        show();
         root.visible = true;
         passphaseInput1.text = "";
         passphaseInput2.text = "";

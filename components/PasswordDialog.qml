@@ -65,12 +65,8 @@ Item {
         errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
         middlePanel.enabled = false
-
         titleBar.state = "essentials"
-        show()
         root.visible = true;
-        passwordInput.forceActiveFocus();
-        passwordInput.text = ""
         appWindow.hideBalanceForced = true;
         appWindow.updateBalance();
     }
