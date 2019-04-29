@@ -40,14 +40,6 @@ Rectangle {
     height: 1400
     Layout.fillWidth: true
 
-    function onPageCompleted() {
-        userInactivitySliderTimer.running = true;
-    }
-
-    function onPageClosed() {
-        userInactivitySliderTimer.running = false;
-    }
-
     ColumnLayout {
         id: settingsUI
         property int itemHeight: 60
