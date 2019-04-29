@@ -32,6 +32,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
+import FontAwesome 1.0
 
 import "." as MoneroComponents
 import "effects/" as MoneroEffects
@@ -161,15 +162,15 @@ Item {
                         whiteColor: "#A9FFFFFF"
                     }
 
-                    Image {
-                        width: 26
-                        height: 26
+                    MoneroComponents.Label {
+                        fontSize: 20
+                        text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
                         opacity: 0.7
-                        fillMode: Image.PreserveAspectFit
-                        source: isHidden ? "qrc:///images/eyeShow.png" : "qrc:///images/eyeHide.png"
-                        anchors.verticalCenter: parent.verticalCenter
+                        fontFamily: FontAwesome.fontFamily
                         anchors.right: parent.right
-                        anchors.rightMargin: 20
+                        anchors.rightMargin: 15
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.verticalCenterOffset: 1
 
                         MouseArea {
                             anchors.fill: parent
@@ -181,13 +182,11 @@ Item {
                             }
                             onEntered: {
                                 parent.opacity = 0.9
-                                parent.width = 28
-                                parent.height = 28
+                                parent.fontSize = 24
                             }
                             onExited: {
                                 parent.opacity = 0.7
-                                parent.width = 26
-                                parent.height = 26
+                                parent.fontSize = 20
                             }
                         }
                     }
