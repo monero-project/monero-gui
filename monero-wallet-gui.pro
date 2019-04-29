@@ -347,7 +347,6 @@ macx {
         -L/usr/local/opt/openssl/lib \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
-        -lhidapi \
         -lboost_thread-mt \
         -lboost_system \
         -lboost_date_time \
@@ -355,6 +354,8 @@ macx {
         -lboost_regex \
         -lboost_chrono \
         -lboost_program_options \
+        -framework CoreFoundation \
+        -lhidapi \
         -lssl \
         -lsodium \
         -lcrypto \
