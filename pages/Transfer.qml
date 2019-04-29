@@ -52,6 +52,9 @@ Rectangle {
     property string sendButtonWarning: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
+    // @TODO: remove after pid removal hardfork
+    property bool warningLongPidTransfer: false
+    property bool warningLongPidDescription: false
 
     Clipboard { id: clipboard }
 
@@ -80,6 +83,17 @@ Rectangle {
     function setPaymentId(value) {
         paymentIdLine.text = value;
         paymentIdCheckbox.checked = paymentIdLine.text != "";
+    }
+
+    function isLongPidService(text) {
+        // @TODO: remove after pid removal hardfork
+        return text.length == 95 &&
+               [ "44tLjmXrQNrWJ5NBsEj2R77ZBEgDa3fEe9GLpSf2FRmhexPvfYDUAB7EXX1Hdb3aMQ9FLqdJ56yaAhiXoRsceGJCRS3Jxkn", // Binance
+                 "4AQ3ZREb53FMYKBmpPn7BD7hphPk6G1ceinQX6gefAvhFJsNbeFsGwebZWCNxoJAbZhD9cjetBAqmLhfXmcNLBpPMsBL6yM", // KuCoin
+                 "47YzEcMrU2S42UitURo7ukUDaSaL485Z1QbmFgq1vSs5g3JesL4rChwWf2uWk1va99JAaRxt65jhX9uAqQnjeFM44ckgZtp", // AnycoinDirect
+                 "4BCeEPhodgPMbPWFN1dPwhWXdRX8q4mhhdZdA1dtSMLTLCEYvAj9QXjXAfF7CugEbmfBhgkqHbdgK9b2wKA6nqRZQCgvCDm", // Bitfinex
+                 "463tWEBn5XZJSxLU6uLQnQ2iY9xuNcDbjLSjkn3XAXHCbLrTTErJrBWYgHJQyrCwkNgYvyV3z8zctJLPCZy24jvb3NiTcTJ"  // Bittrex
+               ].indexOf(text) > -1
     }
 
     function clearFields() {
@@ -243,7 +257,10 @@ Rectangle {
                      addressLine.text = clipboardText; 
                   }
               }
-
+              onTextChanged: {
+                  // @TODO: remove after pid removal hardfork
+                  warningLongPidTransfer = !persistentSettings.showPid && isLongPidService(text)
+              }
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
@@ -367,7 +384,7 @@ Rectangle {
           // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
           text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
-          visible: false
+          visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
       }
 
       MoneroComponents.WarningBox {
