@@ -291,6 +291,8 @@ Rectangle {
                 anchors.fill: parent
                 clip: true
 
+                property bool backTransition: false
+
                 delegate: StackViewDelegate {
                     pushTransition: StackViewTransition {
                          PropertyAnimation {
