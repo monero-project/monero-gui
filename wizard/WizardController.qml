@@ -287,6 +287,7 @@ Rectangle {
 
             StackView {
                 id: stackView
+                property bool backTransition: false
                 initialItem: wizardStateView.wizardLanguageView
                 anchors.fill: parent
                 clip: true
