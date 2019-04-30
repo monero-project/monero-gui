@@ -26,7 +26,6 @@
         <file>components/Input.qml</file>
         <file>components/StandardButton.qml</file>
         <file>components/LineEdit.qml</file>
-        <file>images/backToWindowIcon.png</file>
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/Scroll.qml</file>
@@ -44,15 +43,12 @@
         <file>components/TitleBar.qml</file>
         <file>images/expandRightPanel.png</file>
         <file>images/moneroLogo2.png</file>
-        <file>components/PrivacyLevelSmall.qml</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>
         <file>images/resizeHovered@2x.png</file>
         <file>images/nextPage.png</file>
         <file>images/nextPage@2x.png</file>
-        <file>images/openAccount.png</file>
-        <file>images/recoverWallet.png</file>
         <file>lang/languages.xml</file>
         <file>lang/flags/bd.png</file>
         <file>lang/flags/bg.png</file>
