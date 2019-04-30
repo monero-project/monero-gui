@@ -4,58 +4,58 @@
 <context>
     <name>Account</name>
     <message>
-        <location filename="../pages/Account.qml" line="51"/>
+        <location filename="../pages/Account.qml" line="53"/>
         <source>Set the label of the selected account:</source>
         <translation>Избери наименование на сметката:</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="82"/>
+        <location filename="../pages/Account.qml" line="85"/>
         <source>Balance All</source>
         <translation>Общ Баланс</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="88"/>
+        <location filename="../pages/Account.qml" line="92"/>
         <source>Total balance: </source>
         <translation>Общ баланс: </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="112"/>
-        <location filename="../pages/Account.qml" line="145"/>
+        <location filename="../pages/Account.qml" line="116"/>
+        <location filename="../pages/Account.qml" line="150"/>
         <source>Copied to clipboard</source>
         <translation>Копирано в клипборда</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="121"/>
+        <location filename="../pages/Account.qml" line="126"/>
         <source>Total unlocked balance: </source>
         <translation>Общ отключен баланс: </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="159"/>
+        <location filename="../pages/Account.qml" line="165"/>
         <source>Accounts</source>
         <translation>Сметки</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="241"/>
+        <location filename="../pages/Account.qml" line="257"/>
         <source>Balance: </source>
         <translation>Баланс: </translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="285"/>
+        <location filename="../pages/Account.qml" line="318"/>
         <source>Address copied to clipboard</source>
         <translation>Адресът е копиран в клипборда</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="320"/>
+        <location filename="../pages/Account.qml" line="360"/>
         <source>Create new account</source>
         <translation>Създай нова сметка</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="322"/>
+        <location filename="../pages/Account.qml" line="362"/>
         <source>Set the label of the new account:</source>
         <translation>Наименувай новата сметка:</translation>
     </message>
     <message>
-        <location filename="../pages/Account.qml" line="323"/>
+        <location filename="../pages/Account.qml" line="363"/>
         <source>(Untitled)</source>
         <translation>(Неозаглавен)</translation>
     </message>
@@ -63,109 +63,132 @@
 <context>
     <name>AddressBook</name>
     <message>
-        <location filename="../pages/AddressBook.qml" line="56"/>
-        <source>Address</source>
-        <translation>Адреси</translation>
+        <location filename="../pages/AddressBook.qml" line="81"/>
+        <source>Save your most used addresses here</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="139"/>
-        <source>Payment ID &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Платежно ID &lt;font size=&apos;2&apos;&gt;(по желание)&lt;/font&gt;</translation>
+        <location filename="../pages/AddressBook.qml" line="104"/>
+        <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="93"/>
+        <location filename="../pages/AddressBook.qml" line="119"/>
+        <location filename="../pages/AddressBook.qml" line="307"/>
+        <source>Add an address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="134"/>
+        <source>Address book</source>
+        <translation type="unfinished">Адресна книга</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="262"/>
+        <source>Address copied to clipboard</source>
+        <translation type="unfinished">Адресът е копиран в клипборда</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="292"/>
+        <source>Add address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="307"/>
+        <source>Edit an address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="313"/>
+        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="352"/>
         <source>Resolve</source>
         <translation>Разкрий</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="109"/>
+        <location filename="../pages/AddressBook.qml" line="367"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Не е открит валиден адрес в този OpenAlias адрес</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="114"/>
+        <location filename="../pages/AddressBook.qml" line="372"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Адресът е намерен, но DNSSEC подписите не могат да бъдат потвърдени, следователно този адрес може да е подправен</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="118"/>
+        <location filename="../pages/AddressBook.qml" line="374"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation>Не е открит валиден адрес в този OpenAlias, но DNSSEC подписите не могат да бъдат потвърдени, следователно този адрес може да е подправен</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="122"/>
-        <location filename="../pages/AddressBook.qml" line="126"/>
+        <location filename="../pages/AddressBook.qml" line="377"/>
+        <location filename="../pages/AddressBook.qml" line="380"/>
         <source>Internal error</source>
         <translation>Вътрешна грешка</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="130"/>
+        <location filename="../pages/AddressBook.qml" line="383"/>
         <source>No address found</source>
         <translation>Не е открит адрес</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="140"/>
-        <source>Paste 64 hexadecimal characters</source>
-        <translation>Вмъкни 64 шестнадесетични символа</translation>
+        <location filename="../pages/AddressBook.qml" line="391"/>
+        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Description</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="149"/>
-        <source>Description &lt;font size=&apos;2&apos;&gt;(Optional)&lt;/font&gt;</source>
-        <translation>Описание &lt;font size=&apos;2&apos;&gt;(по желание)&lt;/font&gt;</translation>
+        <location filename="../pages/AddressBook.qml" line="393"/>
+        <source>Add a name...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="150"/>
-        <source>Give this entry a name or description</source>
-        <translation>Задайте име или описание на това вписване</translation>
-    </message>
-    <message>
-        <location filename="../pages/AddressBook.qml" line="158"/>
+        <location filename="../pages/AddressBook.qml" line="399"/>
         <source>Add</source>
         <translation>Добави</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="163"/>
+        <location filename="../pages/AddressBook.qml" line="399"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="404"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="166"/>
+        <location filename="../pages/AddressBook.qml" line="407"/>
         <source>Invalid address</source>
         <translation>Невалиден адрес</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="170"/>
+        <location filename="../pages/AddressBook.qml" line="411"/>
         <source>Can&apos;t create entry</source>
         <translation>Създаването на вписване е невъзможно</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="264"/>
+        <location filename="../pages/AddressBook.qml" line="430"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отказ</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="447"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="507"/>
         <source>OpenAlias error</source>
         <translation>OpenAlias грешка</translation>
     </message>
 </context>
 <context>
-    <name>AddressBookTable</name>
-    <message>
-        <location filename="../components/AddressBookTable.qml" line="49"/>
-        <source>No more results</source>
-        <translation>Няма повече резултати</translation>
-    </message>
-    <message>
-        <location filename="../components/AddressBookTable.qml" line="118"/>
-        <source>Payment ID:</source>
-        <translation>Платежно ID:</translation>
-    </message>
-    <message>
-        <location filename="../components/AddressBookTable.qml" line="170"/>
-        <source>Address copied to clipboard</source>
-        <translation>Адресът е копиран в клипборда</translation>
-    </message>
-</context>
-<context>
     <name>DaemonConsole</name>
     <message>
-        <location filename="../components/DaemonConsole.qml" line="168"/>
+        <location filename="../components/DaemonConsole.qml" line="177"/>
         <source>command + enter (e.g help)</source>
         <translation>command + enter (напр. помощ)</translation>
     </message>
@@ -178,12 +201,12 @@
         <translation>Стартиране на локалния нод след %1 секунди</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="111"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="113"/>
         <source>Start daemon (%1)</source>
         <translation>Стартирай демона (%1)</translation>
     </message>
     <message>
-        <location filename="../components/DaemonManagerDialog.qml" line="124"/>
+        <location filename="../components/DaemonManagerDialog.qml" line="126"/>
         <source>Use custom settings</source>
         <translation>Използване на лични настройки</translation>
     </message>
@@ -191,72 +214,254 @@
 <context>
     <name>History</name>
     <message>
-        <location filename="../pages/History.qml" line="72"/>
-        <source> selected: </source>
-        <translation> избрано: </translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="154"/>
-        <source>Export</source>
-        <translation>Експорт</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="170"/>
-        <source>Search</source>
-        <translation>Търси</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="200"/>
+        <location filename="../pages/History.qml" line="188"/>
         <source>Date from</source>
         <translation>От дата</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="223"/>
+        <location filename="../pages/History.qml" line="202"/>
         <source>Date to</source>
         <translation>До Дата</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="238"/>
-        <source>Sort</source>
-        <translation>Сортиране</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="245"/>
-        <source>Block height</source>
-        <translation>Височина на блока</translation>
-    </message>
-    <message>
-        <location filename="../pages/History.qml" line="246"/>
+        <location filename="../pages/History.qml" line="310"/>
+        <location filename="../pages/History.qml" line="858"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="287"/>
-        <source>No history...</source>
-        <translation>Няма записи...</translation>
+        <location filename="../pages/History.qml" line="87"/>
+        <source>Transactions</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="387"/>
+        <location filename="../pages/History.qml" line="107"/>
+        <source>Sort &amp; filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="157"/>
+        <source>Search...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="229"/>
+        <source>Sort by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="250"/>
+        <location filename="../pages/History.qml" line="750"/>
+        <source>Blockheight</source>
+        <translation type="unfinished">Височина на блока</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="370"/>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="451"/>
+        <source>Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="481"/>
+        <source>Jump to page (1-%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="490"/>
+        <source>Invalid page. Must be a number within the specified range.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="639"/>
+        <source>Sent</source>
+        <translation type="unfinished">Изпратени</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="639"/>
+        <source>Received</source>
+        <translation type="unfinished">Получени</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="689"/>
+        <source>Fee</source>
+        <translation type="unfinished">Такса</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="689"/>
+        <source>Mined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="706"/>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="766"/>
+        <source>Pending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="801"/>
+        <source>Confirmations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="974"/>
+        <source>Description</source>
+        <translation type="unfinished">Описание</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1042"/>
+        <source>Transaction ID</source>
+        <translation type="unfinished">ID на транзакцията</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1086"/>
+        <source>Transaction key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1136"/>
+        <source>Address sent to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1159"/>
+        <source>Waiting for transaction to leave txpool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1161"/>
+        <source>Unknown recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1303"/>
+        <source>Advanced options</source>
+        <translation type="unfinished">Настройки за напреднали</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1319"/>
+        <source>Human readable date format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1325"/>
+        <source>Export all history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1539"/>
+        <source>Set description:</source>
+        <translation type="unfinished">Описание:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1542"/>
+        <source>Updated description.</source>
+        <translation type="unfinished">Описанието е обновено.</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1572"/>
+        <source>No transaction history yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1574"/>
+        <source>No results.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1576"/>
+        <source>%1 transactions total, showing %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1584"/>
+        <source>Primary address</source>
+        <translation type="unfinished">Главен адрес</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1589"/>
+        <source>Transaction details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1614"/>
+        <source>Copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1623"/>
+        <source>Tx ID:</source>
+        <translation type="unfinished">Tx ID:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1624"/>
+        <source>Address label:</source>
+        <translation type="unfinished">Наименование на адреса:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1625"/>
+        <source>Address:</source>
+        <translation type="unfinished">Адрес:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1626"/>
+        <source>Payment ID:</source>
+        <translation type="unfinished">Платежно ID:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1627"/>
+        <source>Tx key:</source>
+        <translation type="unfinished">Tx ключ:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1628"/>
+        <source>Tx note:</source>
+        <translation type="unfinished">Tx бележка:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1629"/>
+        <source>Destinations:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1630"/>
+        <source>Rings:</source>
+        <translation type="unfinished">Пръстени:</translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1647"/>
+        <source>Please choose a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="1657"/>
         <source>Success</source>
         <translation>Успех</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="388"/>
+        <location filename="../pages/History.qml" line="1658"/>
         <source>CSV file written to: %1</source>
         <translation>CSV файл запазен в: %1</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="389"/>
+        <location filename="../pages/History.qml" line="1659"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
         <translation>Подск.: Използвай Ексел да сортираш резултатите.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="393"/>
+        <location filename="../pages/History.qml" line="1663"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="394"/>
+        <location filename="../pages/History.qml" line="1664"/>
         <source>Error exporting transaction data.</source>
         <translation>Грешка при експорт на информацията относно транзакцията.</translation>
     </message>
@@ -385,82 +590,6 @@
     </message>
 </context>
 <context>
-    <name>HistoryTableInnerColumn</name>
-    <message>
-        <location filename="../components/HistoryTableInnerColumn.qml" line="107"/>
-        <source>Copied to clipboard</source>
-        <translation>Копиран в клипборда</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableInnerColumn.qml" line="115"/>
-        <source>Set description:</source>
-        <translation>Описание:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableInnerColumn.qml" line="118"/>
-        <source>Updated description.</source>
-        <translation>Описанието е обновено.</translation>
-    </message>
-</context>
-<context>
-    <name>HistoryTableMobile</name>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="49"/>
-        <source>Tx ID:</source>
-        <translation>Tx ID:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="50"/>
-        <source>Payment ID:</source>
-        <translation>Платежно ID:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="51"/>
-        <source>Tx key:</source>
-        <translation>Tx ключ:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="52"/>
-        <source>Tx note:</source>
-        <translation>Tx бележка:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="53"/>
-        <source>Destinations:</source>
-        <translation>Направление:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="54"/>
-        <source>Rings:</source>
-        <translation>Пръстени:</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="80"/>
-        <source>No more results</source>
-        <translation>Няма повече резултати</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="180"/>
-        <source>(%1/%2 confirmations)</source>
-        <translation>(%1/%2 потвърждения)</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="182"/>
-        <source>UNCONFIRMED</source>
-        <translation>НЕПОТВЪРДЕНИ</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="184"/>
-        <source>FAILED</source>
-        <translation>НЕУСПЕШЕН</translation>
-    </message>
-    <message>
-        <location filename="../components/HistoryTableMobile.qml" line="185"/>
-        <source>PENDING</source>
-        <translation>ПРЕДСТОЯЩ</translation>
-    </message>
-</context>
-<context>
     <name>InputDialog</name>
     <message>
         <location filename="../components/InputDialog.qml" line="136"/>
@@ -546,173 +675,173 @@
 <context>
     <name>LeftPanel</name>
     <message>
-        <location filename="../LeftPanel.qml" line="283"/>
+        <location filename="../LeftPanel.qml" line="310"/>
         <source>Balance</source>
         <translation>Баланс</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="272"/>
+        <location filename="../LeftPanel.qml" line="297"/>
         <source>Unlocked balance</source>
         <translation>Отключен баланс</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="366"/>
+        <location filename="../LeftPanel.qml" line="389"/>
         <source>Send</source>
         <translation>Изпрати</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="416"/>
+        <location filename="../LeftPanel.qml" line="435"/>
         <source>Receive</source>
         <translation>Получи</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="417"/>
+        <location filename="../LeftPanel.qml" line="436"/>
         <source>R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="540"/>
+        <location filename="../LeftPanel.qml" line="552"/>
         <source>Prove/check</source>
         <translation>Доказване/проверка</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="541"/>
+        <location filename="../LeftPanel.qml" line="553"/>
         <source>K</source>
         <translation>K</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="467"/>
-        <source>History</source>
-        <translation>История</translation>
-    </message>
-    <message>
-        <location filename="../LeftPanel.qml" line="142"/>
+        <location filename="../LeftPanel.qml" line="164"/>
         <source>View Only</source>
         <translation>Само за гледане</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="129"/>
+        <location filename="../LeftPanel.qml" line="150"/>
         <source>Testnet</source>
         <translation>Тестова мрежа</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="129"/>
+        <location filename="../LeftPanel.qml" line="150"/>
         <source>Stagenet</source>
         <translation>Стейджнет</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="226"/>
-        <location filename="../LeftPanel.qml" line="264"/>
+        <location filename="../LeftPanel.qml" line="250"/>
+        <location filename="../LeftPanel.qml" line="289"/>
         <source>Copied to clipboard</source>
         <translation>Копирано</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="342"/>
+        <location filename="../LeftPanel.qml" line="367"/>
         <source>Account</source>
         <translation>Сметка</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="343"/>
+        <location filename="../LeftPanel.qml" line="368"/>
         <source>T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="391"/>
+        <location filename="../LeftPanel.qml" line="412"/>
         <source>Address book</source>
         <translation>Адресна книга</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="392"/>
+        <location filename="../LeftPanel.qml" line="413"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="441"/>
+        <location filename="../LeftPanel.qml" line="459"/>
         <source>Merchant</source>
         <translation>Търговец</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="442"/>
+        <location filename="../LeftPanel.qml" line="460"/>
         <source>U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="468"/>
+        <location filename="../LeftPanel.qml" line="483"/>
+        <source>Transactions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../LeftPanel.qml" line="484"/>
         <source>H</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="491"/>
+        <location filename="../LeftPanel.qml" line="506"/>
         <source>Advanced</source>
         <translation>За напреднали</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="492"/>
+        <location filename="../LeftPanel.qml" line="507"/>
         <source>D</source>
         <translation>Д</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="515"/>
+        <location filename="../LeftPanel.qml" line="528"/>
         <source>Mining</source>
         <translation>Копаене</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="516"/>
+        <location filename="../LeftPanel.qml" line="529"/>
         <source>M</source>
         <translation>М</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="564"/>
+        <location filename="../LeftPanel.qml" line="576"/>
         <source>Shared RingDB</source>
         <translation>Споделена БД за пръстени</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="636"/>
+        <location filename="../LeftPanel.qml" line="646"/>
         <source>Seed &amp; Keys</source>
         <translation>Семена &amp; Ключове</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="637"/>
+        <location filename="../LeftPanel.qml" line="647"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="687"/>
+        <location filename="../LeftPanel.qml" line="696"/>
         <source>Wallet</source>
         <translation>Портфейл</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="696"/>
+        <location filename="../LeftPanel.qml" line="705"/>
         <source>Daemon</source>
         <translation>Демон</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="590"/>
+        <location filename="../LeftPanel.qml" line="600"/>
         <source>Sign/verify</source>
         <translation>Подпиши/провери</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="614"/>
+        <location filename="../LeftPanel.qml" line="624"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="367"/>
+        <location filename="../LeftPanel.qml" line="390"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="565"/>
+        <location filename="../LeftPanel.qml" line="577"/>
         <source>G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="591"/>
+        <location filename="../LeftPanel.qml" line="601"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="613"/>
+        <location filename="../LeftPanel.qml" line="623"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
@@ -720,12 +849,12 @@
 <context>
     <name>LineEdit</name>
     <message>
-        <location filename="../components/LineEdit.qml" line="128"/>
+        <location filename="../components/LineEdit.qml" line="130"/>
         <source>Copy</source>
         <translation>Копиране</translation>
     </message>
     <message>
-        <location filename="../components/LineEdit.qml" line="134"/>
+        <location filename="../components/LineEdit.qml" line="136"/>
         <source>Copied to clipboard</source>
         <translation>Копирано в клипборда</translation>
     </message>
@@ -751,28 +880,28 @@
 <context>
     <name>Merchant</name>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="136"/>
+        <location filename="../pages/merchant/Merchant.qml" line="133"/>
         <source>Sales</source>
         <translation>Продажби</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="161"/>
+        <location filename="../pages/merchant/Merchant.qml" line="159"/>
         <source>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
         <translation>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;Тази страница автоматично сканира блокчейна и списъка с непотвърдени транзакции за входящи транзакции посредством QR код.&lt;/p&gt;&lt;p&gt;От вас зависи дали ще приемете непотвърдени транзакции или ще чакате за потвърждение. За по-големи транзакции съветваме да изчакате за едно или повече потвърждения.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="172"/>
-        <location filename="../pages/merchant/Merchant.qml" line="646"/>
+        <location filename="../pages/merchant/Merchant.qml" line="170"/>
+        <location filename="../pages/merchant/Merchant.qml" line="653"/>
         <source>Currently monitoring incoming transactions, none found yet.</source>
         <translation>В режим на търсене за входящи транзакции, засега няма намерени.</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="242"/>
+        <location filename="../pages/merchant/Merchant.qml" line="240"/>
         <source>Save As</source>
         <translation>Запиши като</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="300"/>
+        <location filename="../pages/merchant/Merchant.qml" line="299"/>
         <source>(right-click, save as)</source>
         <translation>(десен бутон, запазване)</translation>
     </message>
@@ -782,43 +911,43 @@
         <translation>URL за плащане</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="420"/>
+        <location filename="../pages/merchant/Merchant.qml" line="422"/>
         <source>Copied to clipboard</source>
         <translation>Копирано</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="453"/>
-        <location filename="../pages/merchant/Merchant.qml" line="504"/>
+        <location filename="../pages/merchant/Merchant.qml" line="455"/>
+        <location filename="../pages/merchant/Merchant.qml" line="508"/>
         <source>Amount to receive</source>
         <translation>Сума за получаване</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="531"/>
+        <location filename="../pages/merchant/Merchant.qml" line="536"/>
         <source>Enable sales tracker</source>
         <translation>Активирай проследяване на продажбите</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="543"/>
+        <location filename="../pages/merchant/Merchant.qml" line="548"/>
         <source>Leave this page</source>
         <translation>Напусни страницата</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="572"/>
+        <location filename="../pages/merchant/Merchant.qml" line="578"/>
         <source>The merchant page requires a larger window</source>
         <translation>Тази страница изисква по-голям прозорец</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="586"/>
+        <location filename="../pages/merchant/Merchant.qml" line="593"/>
         <source>WARNING: no connection to daemon</source>
         <translation>ПРЕДУПРЕЖДЕНИЕ: няма връзка с демона</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="690"/>
+        <location filename="../pages/merchant/Merchant.qml" line="697"/>
         <source>Save QrCode</source>
         <translation>Запиши QR код</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="691"/>
+        <location filename="../pages/merchant/Merchant.qml" line="698"/>
         <source>Failed to save QrCode to </source>
         <translation>Неуспех при записа на QR кода в </translation>
     </message>
@@ -873,17 +1002,12 @@
         <translation>Самостоятелно копаене</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="66"/>
+        <location filename="../pages/Mining.qml" line="64"/>
         <source>Your daemon must be synchronized before you can start mining</source>
         <translation>Вашият демон трябва да бъде синхронизиран преди да започнете копаене</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="72"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.&lt;br&gt; &lt;br&gt;Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Копаенето с компютъра ви помага за заздравяване на мрежата на Монеро. Колкото повече хората копаят, толкова по-трудно е да се атакува мрежата. И най-малката помощ е от значение.&lt;br&gt; &lt;br&gt; Копаенето също ви дава малък шанс да спечелите малко Монеро. Вашият компютър ще създава хашове докато търси решения на блокове. Ако намерите блок, ще получите съответната награда. Късмет!</translation>
-    </message>
-    <message>
-        <location filename="../pages/Mining.qml" line="93"/>
+        <location filename="../pages/Mining.qml" line="98"/>
         <source>CPU threads</source>
         <translation>Процесорни нишки</translation>
     </message>
@@ -893,88 +1017,95 @@
         <translation>Копаенето е достъпно само при използването на собствен демон.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="84"/>
+        <location filename="../pages/Mining.qml" line="70"/>
+        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+
+Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Mining.qml" line="82"/>
         <source>Mining may reduce the performance of other running applications and processes.</source>
         <translation>Копаенето може да забави скоростта на други апликации и процеси.</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="108"/>
+        <location filename="../pages/Mining.qml" line="117"/>
         <source>Max # of CPU threads available for mining: </source>
         <translation>Максимален брой CPU нишки за копаене: </translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="122"/>
+        <location filename="../pages/Mining.qml" line="128"/>
         <source>Use recommended # of threads</source>
         <translation>Използвай препоръчания брой нишки</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="126"/>
+        <location filename="../pages/Mining.qml" line="132"/>
         <source>Set to use recommended # of threads</source>
         <translation>В режим на използване препоръчителния брой нишки</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="133"/>
+        <location filename="../pages/Mining.qml" line="139"/>
         <source>Use all threads</source>
         <translation>Използвай всички нишки</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="137"/>
+        <location filename="../pages/Mining.qml" line="143"/>
         <source>Set to use all threads</source>
         <translation>В режим на използване на всички нишки</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="149"/>
+        <location filename="../pages/Mining.qml" line="154"/>
         <source>Background mining (experimental)</source>
         <translation>Копаене във фонов режим (експериментално)</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="162"/>
+        <location filename="../pages/Mining.qml" line="166"/>
         <source>Enable mining when running on battery</source>
         <translation>Позволи копаене, когато компютърът ви е на батерия</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="170"/>
+        <location filename="../pages/Mining.qml" line="177"/>
         <source>Manage miner</source>
         <translation>Управляване на копача</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="180"/>
+        <location filename="../pages/Mining.qml" line="193"/>
         <source>Start mining</source>
         <translation>Започни копаене</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="186"/>
+        <location filename="../pages/Mining.qml" line="199"/>
         <source>Error starting mining</source>
         <translation>Грешка при стартиране на копаенето</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="187"/>
+        <location filename="../pages/Mining.qml" line="200"/>
         <source>Couldn&apos;t start mining.&lt;br&gt;</source>
         <translation>Започването на копаене е невъзможно</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="189"/>
+        <location filename="../pages/Mining.qml" line="202"/>
         <source>Mining is only available on local daemons. Run a local daemon to be able to mine.&lt;br&gt;</source>
         <translation>Копаенето е възможно само на локален демон. Стартирайте локален демон за да можете да копаете.&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="201"/>
+        <location filename="../pages/Mining.qml" line="213"/>
         <source>Stop mining</source>
         <translation>Спри копаенето</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="215"/>
+        <location filename="../pages/Mining.qml" line="229"/>
         <source>Status</source>
         <translation>Статут</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="232"/>
+        <location filename="../pages/Mining.qml" line="253"/>
         <source>Mining at %1 H/s</source>
         <translation>Копае с %1 H/s</translation>
     </message>
     <message>
-        <location filename="../pages/Mining.qml" line="223"/>
-        <location filename="../pages/Mining.qml" line="235"/>
+        <location filename="../pages/Mining.qml" line="241"/>
+        <location filename="../pages/Mining.qml" line="256"/>
         <source>Not mining</source>
         <translation>Не копае</translation>
     </message>
@@ -990,27 +1121,27 @@
 <context>
     <name>Navbar</name>
     <message>
-        <location filename="../pages/settings/Navbar.qml" line="108"/>
+        <location filename="../pages/settings/Navbar.qml" line="143"/>
         <source>Wallet</source>
         <translation>Портфейл</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Navbar.qml" line="158"/>
-        <source>Layout</source>
-        <translation>Оформление</translation>
+        <location filename="../pages/settings/Navbar.qml" line="195"/>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/Navbar.qml" line="209"/>
+        <location filename="../pages/settings/Navbar.qml" line="248"/>
         <source>Node</source>
         <translation>Възел</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Navbar.qml" line="261"/>
+        <location filename="../pages/settings/Navbar.qml" line="302"/>
         <source>Log</source>
         <translation>Лог</translation>
     </message>
     <message>
-        <location filename="../pages/settings/Navbar.qml" line="312"/>
+        <location filename="../pages/settings/Navbar.qml" line="355"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
@@ -1066,50 +1197,88 @@
 <context>
     <name>NewPasswordDialog</name>
     <message>
-        <location filename="../components/NewPasswordDialog.qml" line="105"/>
+        <location filename="../components/NewPasswordDialog.qml" line="107"/>
         <source>Please enter new password</source>
         <translation>Моля въведете нова парола</translation>
     </message>
     <message>
-        <location filename="../components/NewPasswordDialog.qml" line="183"/>
+        <location filename="../components/NewPasswordDialog.qml" line="185"/>
         <source>Please confirm new password</source>
         <translation>Моля потвърдете новата парола</translation>
     </message>
     <message>
-        <location filename="../components/NewPasswordDialog.qml" line="275"/>
+        <location filename="../components/NewPasswordDialog.qml" line="278"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../components/NewPasswordDialog.qml" line="284"/>
+        <location filename="../components/NewPasswordDialog.qml" line="287"/>
         <source>Continue</source>
         <translation>Продължи</translation>
     </message>
 </context>
 <context>
+    <name>PassphraseDialog</name>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="119"/>
+        <source>Please enter wallet device passphrase for: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="119"/>
+        <source>Please enter wallet device passphrase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="129"/>
+        <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="219"/>
+        <source>Please re-enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="311"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отказ</translation>
+    </message>
+    <message>
+        <location filename="../components/PassphraseDialog.qml" line="320"/>
+        <source>Continue</source>
+        <translation type="unfinished">Продължи</translation>
+    </message>
+</context>
+<context>
     <name>PasswordDialog</name>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="97"/>
+        <location filename="../components/PasswordDialog.qml" line="104"/>
         <source>Please enter wallet password</source>
         <translation>Моля въведете парола на портфейла</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="97"/>
+        <location filename="../components/PasswordDialog.qml" line="104"/>
         <source>Please enter wallet password for: </source>
         <translation>Моля въведете парола на портфейла за: </translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="194"/>
+        <location filename="../components/PasswordDialog.qml" line="145"/>
+        <source>CAPSLOCKS IS ON.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/PasswordDialog.qml" line="233"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="194"/>
+        <location filename="../components/PasswordDialog.qml" line="233"/>
         <source>Change wallet</source>
         <translation>Смени портмонето</translation>
     </message>
     <message>
-        <location filename="../components/PasswordDialog.qml" line="205"/>
+        <location filename="../components/PasswordDialog.qml" line="244"/>
         <source>Continue</source>
         <translation>Продължи</translation>
     </message>
@@ -1140,7 +1309,7 @@
         <translation>%1 блока остават: </translation>
     </message>
     <message>
-        <location filename="../components/ProgressBar.qml" line="70"/>
+        <location filename="../components/ProgressBar.qml" line="72"/>
         <source>Synchronizing %1</source>
         <translation>Синхронизиране %1</translation>
     </message>
@@ -1156,52 +1325,52 @@
 <context>
     <name>Receive</name>
     <message>
-        <location filename="../pages/Receive.qml" line="52"/>
+        <location filename="../pages/Receive.qml" line="54"/>
         <source>Set the label of the selected address:</source>
         <translation>Задайте етикет към избрания адрес:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="86"/>
+        <location filename="../pages/Receive.qml" line="89"/>
         <source>Addresses</source>
         <translation>Адреси</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="287"/>
+        <location filename="../pages/Receive.qml" line="308"/>
         <source>Copied to clipboard</source>
         <translation>Копирано в клипборда</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="300"/>
+        <location filename="../pages/Receive.qml" line="321"/>
         <source>Please choose a name</source>
         <translation>Моля изберете име</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="233"/>
+        <location filename="../pages/Receive.qml" line="254"/>
         <source>Set the label of the new address:</source>
         <translation>Задайте етикет за новият адрес:</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="234"/>
+        <location filename="../pages/Receive.qml" line="255"/>
         <source>(Untitled)</source>
         <translation>(Неозаглавен)</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="201"/>
+        <location filename="../pages/Receive.qml" line="215"/>
         <source>Address copied to clipboard</source>
         <translation>Адресът е копиран в клипборда</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="231"/>
+        <location filename="../pages/Receive.qml" line="252"/>
         <source>Create new address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="307"/>
+        <location filename="../pages/Receive.qml" line="328"/>
         <source>Save QrCode</source>
         <translation>Запиши QR код</translation>
     </message>
     <message>
-        <location filename="../pages/Receive.qml" line="308"/>
+        <location filename="../pages/Receive.qml" line="329"/>
         <source>Failed to save QrCode to </source>
         <translation>Неуспех при записа на QR Code до</translation>
     </message>
@@ -1222,53 +1391,59 @@
 <context>
     <name>SettingsInfo</name>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="44"/>
-        <location filename="../pages/settings/SettingsInfo.qml" line="46"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="45"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="47"/>
         <source>Simple mode</source>
         <translation>Лесен режим</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="48"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="49"/>
         <source>Advanced mode</source>
         <translation>Експертен режим</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="68"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="69"/>
         <source>GUI version: </source>
         <translation>GUI версия: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="97"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="99"/>
         <source>Embedded Monero version: </source>
         <translation>Вградена Монеро версия</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="126"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="129"/>
         <source>Wallet path: </source>
         <translation>Път до портфейла: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="163"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="167"/>
         <source>Wallet creation height: </source>
         <translation>Височина на създаване на портфейла: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="173"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="177"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
         <translation>&lt;a href=&apos;#&apos;&gt; (Щракнете за да промените)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="175"/>
-        <source>Set a new restore height:</source>
-        <translation>Задайте нова височина за възстановяване:</translation>
+        <location filename="../pages/settings/SettingsInfo.qml" line="179"/>
+        <source>Set a new restore height.
+You can enter a block height or a date (YYYY-MM-DD):</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="186"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="222"/>
+        <source>Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsInfo.qml" line="199"/>
         <source>Rescan wallet cache</source>
         <translation>Сканиране на кеша на портфейла</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="187"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="200"/>
         <source>Are you sure you want to rebuild the wallet cache?
 The following information will be deleted
 - Recipient addresses
@@ -1286,32 +1461,32 @@ The old wallet cache file will be renamed and can be restored later.
 Старият файл на кеша ще бъде преименуван и може да бъде възстановен по-късно.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="195"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="208"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="209"/>
-        <source>Invalid restore height specified. Must be a number.</source>
-        <translation> Избрана е невалидна височина на възстановяване. Трябва да е цифра/число</translation>
-    </message>
-    <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="243"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="256"/>
         <source>Wallet log path: </source>
         <translation>Път до лог-а на Портфейла</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="273"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="287"/>
         <source>Wallet mode: </source>
         <translation>Режим на портмонето: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="286"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="318"/>
+        <source>Graphics mode: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsInfo.qml" line="332"/>
         <source>Copy to clipboard</source>
         <translation>Копирай в клипборда</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="307"/>
+        <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Copied to clipboard</source>
         <translation>Копирано в клипборда</translation>
     </message>
@@ -1319,47 +1494,52 @@ The old wallet cache file will be renamed and can be restored later.
 <context>
     <name>SettingsLayout</name>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="67"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="59"/>
         <source>Custom decorations</source>
         <translation>Украса по избор</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="78"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="70"/>
         <source>Hide balance</source>
         <translation>Скрий баланса </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="80"/>
         <source>Enable transfer with payment ID (OBSOLETE)</source>
         <translation>Активирай опция за трансфер с ID за плащане (ИЗВЪН УПОТРЕБА)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="96"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="88"/>
         <source>Lock wallet on inactivity</source>
         <translation>Заключи портмонето при неактивност</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="111"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="94"/>
+        <source>Light theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsLayout.qml" line="113"/>
         <source>minutes</source>
         <translation>минути</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="111"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="113"/>
         <source>minute</source>
         <translation>минута</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="113"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="115"/>
         <source>After </source>
         <translation>След</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="171"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="164"/>
         <source>Change language</source>
         <translation>Смени езика</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLayout.qml" line="183"/>
+        <location filename="../pages/settings/SettingsLayout.qml" line="176"/>
         <source>No Layout options exist yet in mobile mode.</source>
         <translation>Все още няма опции за изгледа в мобилен режим</translation>
     </message>
@@ -1372,12 +1552,12 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>Ниво на системния запис</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLog.qml" line="138"/>
+        <location filename="../pages/settings/SettingsLog.qml" line="134"/>
         <source>Daemon log</source>
         <translation>Системен запис на Демона</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsLog.qml" line="218"/>
+        <location filename="../pages/settings/SettingsLog.qml" line="214"/>
         <source>command + enter (e.g &apos;help&apos; or &apos;status&apos;)</source>
         <translation>Команда + ентер (пр.: &apos;help&apos; или &apos;status&apos;</translation>
     </message>
@@ -1385,103 +1565,103 @@ The old wallet cache file will be renamed and can be restored later.
 <context>
     <name>SettingsNode</name>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="114"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="123"/>
         <source>Local node</source>
         <translation>Локален нод</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="132"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="141"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
         <translation>Блокчейнът е свален на вашия компютър. Това повишава сигурността но заема повече място на диска(ГБ!).</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="214"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="228"/>
         <source>Remote node</source>
         <translation>Отдалечен нод</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="233"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="247"/>
         <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
         <translation>Използва сървър на трети лица за да се свърже към мрежата на Монеро. По-малко сигурно, но изисква по-малко ресурси от компютъра Ви.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="279"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
         <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
         <translation>За да намерите отдалечен нод, напишете &apos;Monero remote node&apos; в любимата си търсачка. Моля уверете се, че нодът се поддържа от сигурни трети лица.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="293"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="301"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="294"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="302"/>
         <source>Port</source>
         <translation>Порт</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="305"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="314"/>
         <source>Remote node updated. Trusted daemon has been reset. Mark again, if desired.</source>
         <translation>Външният сървър е обновен. Нов доверен демон. Маркирайте отново, ако желаете.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="319"/>
-        <location filename="../pages/settings/SettingsNode.qml" line="421"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="328"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="430"/>
         <source>(optional)</source>
         <translation>(по желание)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="330"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="339"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="345"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="354"/>
         <source>Mark as Trusted Daemon</source>
         <translation>Маркирайте демона като Доверен</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="352"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="361"/>
         <source>Connect</source>
         <translation>Свързване</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="375"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="384"/>
         <source>Stop local node</source>
         <translation>Спри локалният нод</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="375"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="384"/>
         <source>Start daemon</source>
         <translation>Стартирай клиента</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="394"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="403"/>
         <source>Blockchain location</source>
         <translation>Местонахождение на Блокчейна</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="394"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="403"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
         <translation>&gt; &lt;a href=&apos;#&apos;&gt; (промяна)&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="395"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="404"/>
         <source>(default)</source>
         <translation>(по подразбиране)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="420"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="429"/>
         <source>Daemon startup flags</source>
         <translation>Флагове за стартиране на Демона</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="447"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="448"/>
         <source>Bootstrap Address</source>
         <translation>Адрес за първоначално стартиране (bootstrap)</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsNode.qml" line="448"/>
+        <location filename="../pages/settings/SettingsNode.qml" line="449"/>
         <source>Bootstrap Port</source>
         <translation>Bootstrap Порт</translation>
     </message>
@@ -1494,111 +1674,111 @@ The old wallet cache file will be renamed and can be restored later.
         <translation>Затоври този портфейл</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="94"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="90"/>
         <source>Logs out of this wallet.</source>
         <translation>Излизане от този портфейл</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="109"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
         <source>Close wallet</source>
         <translation>Затвори портфейла</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="149"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="137"/>
         <source>Create a view-only wallet</source>
         <translation>Създай портфейл само за гледане</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="163"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="147"/>
         <source>Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.</source>
         <translation>Създава ново портмоне с което може да следите входящи транзакции. При изходящи транзакции е нужно да подпишете транзакцията от портмоне с пълен достъп.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="178"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="153"/>
         <source>Create wallet</source>
         <translation>Създай портфейл</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="183"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="158"/>
         <source>Success</source>
         <translation>Успех</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="184"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="159"/>
         <source>The view only wallet has been created with the same password as the current wallet. You can open it by closing this current wallet, clicking the &quot;Open wallet from file&quot; option, and selecting the view wallet in: 
 %1
 You can change the password in the wallet settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="226"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="202"/>
         <source>Show seed &amp; keys</source>
         <translation>Покажи семена &amp; ключове</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="240"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="212"/>
         <source>Store this information safely to recover your wallet in the future.</source>
         <translation>Запазете тази информация на сигурно място за да можете да възстановите портфейла си в бъдеще.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="255"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="218"/>
         <source>Show seed</source>
         <translation>Покажи семената</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="292"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="256"/>
         <source>Rescan wallet balance</source>
         <translation>Сканирай баланса на портфейла повторно</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="306"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="266"/>
         <source>Use this feature if you think the shown balance is not accurate.</source>
         <translation>Използвайте тази опция ако мислите, че показаният баланс не е верен.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="321"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="272"/>
         <source>Rescan</source>
         <translation>Повторно сканиране</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="188"/>
-        <location filename="../pages/settings/SettingsWallet.qml" line="325"/>
-        <location filename="../pages/settings/SettingsWallet.qml" line="405"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="163"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="276"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="344"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="326"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="277"/>
         <source>Error: </source>
         <translation>Грешка: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="331"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="282"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="332"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="283"/>
         <source>Successfully rescanned spent outputs.</source>
         <translation>Повторното сканиране на изходящите плащания е успешно.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="370"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="322"/>
         <source>Change wallet password</source>
         <translation>Смени паролата на портмонето</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="384"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="332"/>
         <source>Change the password of your wallet.</source>
         <translation>Сменете паролата на портмонето си.</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="399"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="338"/>
         <source>Change password</source>
         <translation>Смени парола</translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsWallet.qml" line="406"/>
+        <location filename="../pages/settings/SettingsWallet.qml" line="345"/>
         <source>Wrong password</source>
         <translation>Грешна парола</translation>
     </message>
@@ -1683,6 +1863,11 @@ You can change the password in the wallet settings.</source>
         <translation>За да не отслабвате защитата предоставена от пръстеновите подписи които се използват в Монеро, изходящите заявки не бива да бъдат похарчвани с различни пръстени на различни блокчейни. Това не представлява проблем освен в случаите когато конкурентна мрежа, която е клонирала историята (блокчейна) на Монеро позволява похарчването на съществуващите изходящи заявки. В този случай е нужно да сте сигурни, че всяка изходяща заявка използва същите пръстени на двете мрежи.&lt;br&gt;Това е автоматично при Монеро и всеки друг софтуер (клонинг на Монеро), който не се опитва да разкрие личната ви информация.&lt;br&gt;Ако използвате такъв софтуер, и този софтуер не включва защитата описана тук, е възможно да се защитите като похарчите изходящите си заявки на чуждия софтуер първо, и после ръчно да въведете пръстена на тази страница. Това ще ви позволи да похарчите парите си безопасно.&lt;br&gt;Ако не използвате такъв чужд софтуер, или ако той включва защитата описана тук, няма нужда да правите нищо.&lt;br&gt;</translation>
     </message>
     <message>
+        <location filename="../pages/SharedRingDB.qml" line="418"/>
+        <source>Set segregation height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../pages/SharedRingDB.qml" line="234"/>
         <source>Mark as spent</source>
         <translation>Отбележи заявката като похарчена</translation>
@@ -1749,19 +1934,14 @@ You can change the password in the wallet settings.</source>
         <translation>Възнамерявам да похарча за fork със key-reusing</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="390"/>
+        <location filename="../pages/SharedRingDB.qml" line="388"/>
         <source>I might want to spend on key-reusing fork(s)</source>
         <translation>Може да искам да похарча за fork с key-reusing</translation>
     </message>
     <message>
-        <location filename="../pages/SharedRingDB.qml" line="404"/>
+        <location filename="../pages/SharedRingDB.qml" line="400"/>
         <source>Relative</source>
         <translation>Относително</translation>
-    </message>
-    <message>
-        <location filename="../pages/SharedRingDB.qml" line="421"/>
-        <source>Segregation height:</source>
-        <translation>Височина на отделяне:</translation>
     </message>
 </context>
 <context>
@@ -1928,22 +2108,22 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>StandardDialog</name>
     <message>
-        <location filename="../components/StandardDialog.qml" line="141"/>
+        <location filename="../components/StandardDialog.qml" line="148"/>
         <source>Double tap to copy</source>
         <translation>Двойно чукване за копиране</translation>
     </message>
     <message>
-        <location filename="../components/StandardDialog.qml" line="148"/>
+        <location filename="../components/StandardDialog.qml" line="155"/>
         <source>Content copied to clipboard</source>
         <translation>Съдържанието е копирано в клипборда</translation>
     </message>
     <message>
-        <location filename="../components/StandardDialog.qml" line="163"/>
+        <location filename="../components/StandardDialog.qml" line="170"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../components/StandardDialog.qml" line="172"/>
+        <location filename="../components/StandardDialog.qml" line="179"/>
         <source>OK</source>
         <translation>Добре</translation>
     </message>
@@ -1951,52 +2131,52 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>StandardDropdown</name>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="165"/>
+        <location filename="../components/StandardDropdown.qml" line="175"/>
         <source>Low (x1 fee)</source>
         <translation>Ниска (такса х1)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="166"/>
+        <location filename="../components/StandardDropdown.qml" line="176"/>
         <source>Medium (x20 fee)</source>
         <translation>Средна (такса х20)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="167"/>
+        <location filename="../components/StandardDropdown.qml" line="177"/>
         <source>High (x166 fee)</source>
         <translation>Висока (такса х166)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="168"/>
+        <location filename="../components/StandardDropdown.qml" line="178"/>
         <source>Slow (x0.25 fee)</source>
         <translation>Бавна (такса х0.25)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="169"/>
+        <location filename="../components/StandardDropdown.qml" line="179"/>
         <source>Default (x1 fee)</source>
         <translation>По подразбиране (такса x1)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="170"/>
+        <location filename="../components/StandardDropdown.qml" line="180"/>
         <source>Fast (x5 fee)</source>
         <translation>Бърза (такса Х5)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="171"/>
+        <location filename="../components/StandardDropdown.qml" line="181"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Най-бърза (такса х41.5)</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="172"/>
+        <location filename="../components/StandardDropdown.qml" line="182"/>
         <source>All</source>
         <translation>Всички</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="173"/>
+        <location filename="../components/StandardDropdown.qml" line="183"/>
         <source>Sent</source>
         <translation>Изпратени</translation>
     </message>
     <message>
-        <location filename="../components/StandardDropdown.qml" line="174"/>
+        <location filename="../components/StandardDropdown.qml" line="184"/>
         <source>Received</source>
         <translation>Получени</translation>
     </message>
@@ -2027,227 +2207,247 @@ You can change the password in the wallet settings.</source>
 <context>
     <name>Transfer</name>
     <message>
-        <location filename="../pages/Transfer.qml" line="57"/>
+        <location filename="../pages/Transfer.qml" line="59"/>
         <source>OpenAlias error</source>
         <translation>OpenAlias грешка</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="170"/>
+        <location filename="../pages/Transfer.qml" line="173"/>
         <source>Transaction priority</source>
         <translation>Приоритет на транзакцията</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="151"/>
+        <location filename="../pages/Transfer.qml" line="154"/>
         <source>All</source>
         <translation>Всички</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="219"/>
-        <location filename="../pages/Transfer.qml" line="260"/>
+        <location filename="../pages/Transfer.qml" line="218"/>
+        <location filename="../pages/Transfer.qml" line="263"/>
         <source>Resolve</source>
         <translation>Разкрий</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="185"/>
+        <location filename="../pages/Transfer.qml" line="188"/>
         <source>Automatic</source>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="277"/>
+        <location filename="../pages/Transfer.qml" line="280"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Не е открит валиден адрес в този OpenAlias адрес</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="282"/>
+        <location filename="../pages/Transfer.qml" line="285"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
         <translation>Адресът е намерен, но DNSSEC подписите не могат да бъдат потвърдени, следователно този адрес може да е подправен</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="286"/>
+        <location filename="../pages/Transfer.qml" line="289"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
         <translation> Не е открит валиден адрес в този OpenAlias, но DNSSEC подписите не могат да бъдат потвърдени, следователно този адрес може да е подправен</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="290"/>
-        <location filename="../pages/Transfer.qml" line="294"/>
+        <location filename="../pages/Transfer.qml" line="293"/>
+        <location filename="../pages/Transfer.qml" line="297"/>
         <source>Internal error</source>
         <translation>Вътрешна грешка</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="298"/>
+        <location filename="../pages/Transfer.qml" line="301"/>
         <source>No address found</source>
         <translation>Не е открит адрес</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="343"/>
+        <location filename="../pages/Transfer.qml" line="350"/>
         <source>Description &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Описание &lt;font size=&apos;2&apos;&gt;( По желание )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="353"/>
+        <location filename="../pages/Transfer.qml" line="360"/>
         <source>Saved to local wallet history</source>
         <translation>Запазено в историята на локалният портфейл</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="365"/>
+        <location filename="../pages/Transfer.qml" line="388"/>
         <source>Send</source>
         <translation>Изпрати</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="463"/>
+        <location filename="../pages/Transfer.qml" line="459"/>
         <source>Sweep Unmixable</source>
         <translation>Събери Стотинките</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="474"/>
+        <location filename="../pages/Transfer.qml" line="470"/>
         <source>Create tx file</source>
         <translation>Създай tx файл</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="492"/>
+        <location filename="../pages/Transfer.qml" line="488"/>
         <source>Sign tx file</source>
         <translation>Подпиши tx файл</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="503"/>
+        <location filename="../pages/Transfer.qml" line="499"/>
         <source>Submit tx file</source>
         <translation>Изпрати tx файл</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="553"/>
-        <location filename="../pages/Transfer.qml" line="609"/>
+        <location filename="../pages/Transfer.qml" line="549"/>
+        <location filename="../pages/Transfer.qml" line="605"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="615"/>
+        <location filename="../pages/Transfer.qml" line="611"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="542"/>
-        <location filename="../pages/Transfer.qml" line="603"/>
-        <location filename="../pages/Transfer.qml" line="647"/>
+        <location filename="../pages/Transfer.qml" line="538"/>
+        <location filename="../pages/Transfer.qml" line="599"/>
+        <location filename="../pages/Transfer.qml" line="643"/>
         <source>Please choose a file</source>
         <translation>Моля изберете файл</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="51"/>
+        <location filename="../pages/Transfer.qml" line="53"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
         <translation>&gt;&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Старт демон&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="141"/>
+        <location filename="../pages/Transfer.qml" line="144"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                   Amount &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Change account&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                   Стойност &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Смени акаунта&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="187"/>
+        <location filename="../pages/Transfer.qml" line="190"/>
         <source>Normal (x1 fee)</source>
         <translation>Нормална (такса х1)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="216"/>
+        <location filename="../pages/Transfer.qml" line="215"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
         <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Адрес &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Адресна книга&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="326"/>
+        <location filename="../pages/Transfer.qml" line="331"/>
         <source>64 hexadecimal characters</source>
         <translation>64 шестнадесетични символа</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="453"/>
+        <location filename="../pages/Transfer.qml" line="372"/>
+        <source>You can enable transfers with payment ID on the settings page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="449"/>
         <source>Advanced options</source>
         <translation>Настройки за напреднали</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="515"/>
+        <location filename="../pages/Transfer.qml" line="511"/>
         <source>Export key images</source>
         <translation>Изнасяне на образите на ключове</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="527"/>
+        <location filename="../pages/Transfer.qml" line="523"/>
         <source>Import key images</source>
         <translation>Внасяне образите на ключове</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="554"/>
+        <location filename="../pages/Transfer.qml" line="550"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation> Can&apos;t Зареди неподписана транзакция: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="561"/>
+        <location filename="../pages/Transfer.qml" line="557"/>
         <source>
 Number of transactions: </source>
         <translation>Брой на транзакциите: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="563"/>
+        <location filename="../pages/Transfer.qml" line="559"/>
         <source>
 Transaction #%1</source>
         <translation>Транзакция #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="564"/>
+        <location filename="../pages/Transfer.qml" line="560"/>
         <source>
 Recipient: </source>
         <translation>Получател: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="565"/>
+        <location filename="../pages/Transfer.qml" line="561"/>
         <source>
 payment ID: </source>
         <translation>платежно ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="566"/>
+        <location filename="../pages/Transfer.qml" line="562"/>
         <source>
 Amount: </source>
         <translation>Сума: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
+        <location filename="../pages/Transfer.qml" line="563"/>
         <source>
 Fee: </source>
         <translation>Такса: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="568"/>
+        <location filename="../pages/Transfer.qml" line="564"/>
         <source>
 Ringsize: </source>
         <translation>Размер на пръстен: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="582"/>
+        <location filename="../pages/Transfer.qml" line="578"/>
         <source>Confirmation</source>
         <translation>Потвърждение</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="610"/>
+        <location filename="../pages/Transfer.qml" line="606"/>
         <source>Can&apos;t submit transaction: </source>
         <translation> Не може да изпрати транзация: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="616"/>
+        <location filename="../pages/Transfer.qml" line="612"/>
         <source>Monero sent successfully</source>
         <translation>Монеро изратени успешно</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="680"/>
+        <location filename="../pages/Transfer.qml" line="676"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Портфейлът не е свързан към демон.</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="699"/>
+        <location filename="../pages/Transfer.qml" line="695"/>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>Свързаният демон не е съвместим с версията на граф. интерфейс. Моля обновете го или се свържете към друг демон</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="704"/>
+        <location filename="../pages/Transfer.qml" line="700"/>
         <source>Waiting on daemon synchronization to finish.</source>
         <translation>Изчакване синхронизацията на демона да приключи.</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="723"/>
+        <source>Wallet is view-only and sends are not possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="729"/>
+        <source>Amount is more than unlocked balance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="741"/>
+        <source>Transaction information is incorrect.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="91"/>
@@ -2255,37 +2455,36 @@ Please upgrade or connect to another daemon</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="314"/>
+        <location filename="../pages/Transfer.qml" line="319"/>
         <source>Payment ID &lt;font size=&apos;2&apos;&gt;( Optional )&lt;/font&gt;</source>
         <translation>Платежно ID &lt;font size=&apos;2&apos;&gt;( По желание )&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="186"/>
+        <location filename="../pages/Transfer.qml" line="189"/>
         <source>Slow (x0.25 fee)</source>
         <translation>Бавна (такса х0.25)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="188"/>
+        <location filename="../pages/Transfer.qml" line="191"/>
         <source>Fast (x5 fee)</source>
         <translation>Бърза (такса х5)</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="189"/>
+        <location filename="../pages/Transfer.qml" line="192"/>
         <source>Fastest (x41.5 fee)</source>
         <translation>Най-бърза (такса х41.5)</translation>
     </message>
-<message><source></source><translation></translation>
-    <location filename="../pages/Transfer.qml" line="91"/></message></context>
+</context>
 <context>
     <name>TxKey</name>
     <message>
-        <location filename="../pages/TxKey.qml" line="218"/>
+        <location filename="../pages/TxKey.qml" line="219"/>
         <source>If a payment had several transactions then each must be checked and the results combined.</source>
         <translation>Ако плащане е имало няколко транзакции, тогава всяка трябва да бъде проверена и резултатите – сравнени.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="92"/>
-        <location filename="../pages/TxKey.qml" line="164"/>
+        <location filename="../pages/TxKey.qml" line="165"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
@@ -2296,19 +2495,19 @@ Please upgrade or connect to another daemon</source>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="95"/>
-        <location filename="../pages/TxKey.qml" line="167"/>
+        <location filename="../pages/TxKey.qml" line="168"/>
         <source>Recipient&apos;s wallet address</source>
         <translation>Адрес на портфейла на получателя</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="105"/>
-        <location filename="../pages/TxKey.qml" line="177"/>
+        <location filename="../pages/TxKey.qml" line="178"/>
         <source>Message</source>
         <translation>Съобщение</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="107"/>
-        <location filename="../pages/TxKey.qml" line="179"/>
+        <location filename="../pages/TxKey.qml" line="180"/>
         <source>Optional message against which the signature is signed</source>
         <translation>Съобщение (по желание) срещу което е подписан подписа</translation>
     </message>
@@ -2318,23 +2517,23 @@ Please upgrade or connect to another daemon</source>
         <translation>Генерирай</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="135"/>
+        <location filename="../pages/TxKey.qml" line="136"/>
         <source>Check Transaction</source>
         <translation>Провери Транзакция</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="189"/>
+        <location filename="../pages/TxKey.qml" line="190"/>
         <source>Signature</source>
         <translation>Подпис</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="191"/>
+        <location filename="../pages/TxKey.qml" line="192"/>
         <source>Paste tx proof</source>
         <translation>Вмъкни доказателство за tx</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="80"/>
-        <location filename="../pages/TxKey.qml" line="152"/>
+        <location filename="../pages/TxKey.qml" line="153"/>
         <source>Transaction ID</source>
         <translation>ID на транзакцията</translation>
     </message>
@@ -2347,19 +2546,19 @@ For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that pr
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="83"/>
-        <location filename="../pages/TxKey.qml" line="155"/>
+        <location filename="../pages/TxKey.qml" line="156"/>
         <source>Paste tx ID</source>
         <translation>Вмъкнете ID на tx</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="139"/>
+        <location filename="../pages/TxKey.qml" line="140"/>
         <source>Verify that funds were paid to an address by supplying the transaction ID, the recipient address, the message used for signing and the signature.
 For the case with Spend Proof, you don&apos;t need to specify the recipient address.</source>
         <translation>Потвърдете, че средствата са били платени на адрес, представяйки ID на транзакцията, адреса на получателя, съобщението, използвано за подписване и самият подпис.
 За случай с Доказателство за разход, не е нужно да уточнявате адрес на получателя.</translation>
     </message>
     <message>
-        <location filename="../pages/TxKey.qml" line="199"/>
+        <location filename="../pages/TxKey.qml" line="200"/>
         <source>Check</source>
         <translation>Проверка</translation>
     </message>
@@ -2431,38 +2630,38 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardAskPassword</name>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="41"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="42"/>
         <source>Strength: </source>
         <translation>Сила: </translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="52"/>
-        <location filename="../wizard/WizardAskPassword.qml" line="71"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="53"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="72"/>
         <source>Low</source>
         <translation>Ниско</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="73"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="74"/>
         <source>Medium</source>
         <translation>Средно</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="75"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="76"/>
         <source>High</source>
         <translation>Високо</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="84"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="85"/>
         <source>Give your wallet a password</source>
         <translation>Сложете парола на портфейла си</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="85"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from its 25 word mnemonic seed.</source>
         <translation>Тази парола не може да бъде възстановена. Ако я забравите, портфейлът ви ще трябва да бъде възстановен със специалния код от 25 думи.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="89"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
         <source>&lt;b&gt;Enter a strong password&lt;/b&gt; (Using letters, numbers, and/or symbols).</source>
         <translation>&lt;b&gt;Въведете силна парола&lt;/b&gt; (Използвайки букви, цифри, и/или символи).</translation>
     </message>
@@ -2472,7 +2671,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardAskPassword.qml" line="210"/>
+        <location filename="../wizard/WizardAskPassword.qml" line="212"/>
         <source>Password (confirm)</source>
         <translation>Парола (потвърждение)</translation>
     </message>
@@ -2480,18 +2679,23 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardController</name>
     <message>
-        <location filename="../wizard/WizardController.qml" line="260"/>
+        <location filename="../wizard/WizardController.qml" line="321"/>
         <source>Please choose a file</source>
         <translation>Моля изберете файл</translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardController.qml" line="445"/>
+        <source>Please proceed to the device...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardController.qml" line="449"/>
+        <source>Creating wallet from device...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>WizardCreateDevice1</name>
-    <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="49"/>
-        <source>Ledger</source>
-        <translation>Счетоводна книга</translation>
-    </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="74"/>
         <source>Create a new wallet</source>
@@ -2513,33 +2717,33 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="125"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="124"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>Дата на създаване на портфейла във формат `ГГГГ-ММ-ДД` или височина за възстановяване</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="128"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="127"/>
         <source>Restore height</source>
         <translation>Височина за възстановяване</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="139"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="138"/>
         <source>Subaddress lookahead (optional)</source>
         <translation>Брой събадреси за търсене (по подразбиране 200)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="167"/>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="216"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="165"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="234"/>
         <source>Error writing wallet from hardware device. Check application logs.</source>
         <translation>Грешка при записването на портфейла от хардуерното устройство. Моля проверете логовете на апликацията.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="190"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="188"/>
         <source>Back to menu</source>
         <translation>Обратно към менюто</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardCreateDevice1.qml" line="191"/>
+        <location filename="../wizard/WizardCreateDevice1.qml" line="189"/>
         <source>Create wallet</source>
         <translation>Създай портфейл</translation>
     </message>
@@ -2560,11 +2764,6 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <location filename="../wizard/WizardCreateWallet1.qml" line="89"/>
         <source>Mnemonic seed</source>
         <translation>Семена за запомняне</translation>
-    </message>
-    <message>
-        <location filename="../wizard/WizardCreateWallet1.qml" line="94"/>
-        <source>-</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="127"/>
@@ -2619,37 +2818,37 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardDaemonSettings</name>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="51"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="52"/>
         <source>Start a node automatically in background (recommended)</source>
         <translation>Стартиране на нод автоматично във фонов режим (препоръчително)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="74"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="75"/>
         <source>Blockchain location (optional)</source>
         <translation>Местонахождение на блокчейна (по желание)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="76"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="77"/>
         <source>Default</source>
         <translation>По подразбиране</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="80"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="81"/>
         <source>Browse</source>
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="94"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="95"/>
         <source>Bootstrap node</source>
         <translation>Първоначален нод</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="120"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="121"/>
         <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
         <translation>По желание, може да определите първоначален нод за да използвате Монеро веднага.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardDaemonSettings.qml" line="183"/>
+        <location filename="../wizard/WizardDaemonSettings.qml" line="175"/>
         <source>Connect to a remote node</source>
         <translation>Свържи към отдалечен нод</translation>
     </message>
@@ -2707,17 +2906,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation>Смени режима на портфейла</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="152"/>
+        <location filename="../wizard/WizardHome.qml" line="153"/>
         <source>Change language</source>
         <translation>Смени езика</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="166"/>
+        <location filename="../wizard/WizardHome.qml" line="168"/>
         <source>Advanced options</source>
         <translation>Настройки за напреднали</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardHome.qml" line="209"/>
+        <location filename="../wizard/WizardHome.qml" line="207"/>
         <source>Number of KDF rounds:</source>
         <translation>Брой KDF рундове:</translation>
     </message>
@@ -2725,22 +2924,22 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardLang</name>
     <message>
-        <location filename="../wizard/WizardLang.qml" line="64"/>
+        <location filename="../wizard/WizardLang.qml" line="73"/>
         <source>Language settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardLang.qml" line="93"/>
+        <location filename="../wizard/WizardLang.qml" line="102"/>
         <source>Change the language of the Monero GUI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardLang.qml" line="188"/>
+        <location filename="../wizard/WizardLang.qml" line="197"/>
         <source>Language changed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../wizard/WizardLang.qml" line="210"/>
+        <location filename="../wizard/WizardLang.qml" line="219"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2773,7 +2972,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation>За по-добра връзка с мрежата може да посочите региона си:</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeBootstrap.qml" line="148"/>
+        <location filename="../wizard/WizardModeBootstrap.qml" line="144"/>
         <source>I understand the privacy implications of using a third-party server.</source>
         <translation>Разбирам риска за личните ми данни при ползването на чужд нод.</translation>
     </message>
@@ -2791,17 +2990,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation>Този режим е пригоден за работа с малки суми. Позволява достъп до основните функции за създаване на транзакции. Ще ви свърже с мрежата автоматично за да можете да ползвате Монеро веднага.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="81"/>
+        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="83"/>
         <source>Remote nodes are useful if you are not able/don&apos;t want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
         <translation>Чуждите нодове са полезни ако не сте способни или не желаете да свалите целия блокчейн на компютъра си. Имайте предвид, че злонамерени чужди нодове могат да разкрият част от личната ви информация като IP адресът ви, &quot;височината&quot; от която възстановявате блокчейна (кога е създаден портфейла ви), както и да ви изпращат частична или невярна информация за да научат повече за вас и транзакциите ви.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="94"/>
+        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="98"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
         <translation>Бъдете нащрек за тези ограничения. &lt;b&gt;Потребителите които ценят личната си информация трябва да използват свой личен нод&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="98"/>
+        <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="102"/>
         <source>For enhanced node performance you may specify your region:</source>
         <translation>За по-добра връзка с мрежата може да посочите региона си:</translation>
     </message>
@@ -2850,7 +3049,7 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
         <translation>Включва допълнителни функции като копаене и система за проверка на съобщения. Блокчейнът е свален на вашия компютър.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardModeSelection.qml" line="136"/>
+        <location filename="../wizard/WizardModeSelection.qml" line="137"/>
         <source>Change language</source>
         <translation>Смени езика</translation>
     </message>
@@ -2904,62 +3103,62 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 <context>
     <name>WizardRestoreWallet1</name>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="101"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="105"/>
         <source>Restore wallet</source>
         <translation>Възстанови портфейл</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="102"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="106"/>
         <source>Restore wallet from keys or mnemonic seed.</source>
         <translation>Взъстанови портфейл от ключове или семена.</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="113"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="117"/>
         <source>Restore from seed</source>
         <translation>Възстанови от семена</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="127"/>
         <source>Restore from keys</source>
         <translation>Възстанови от ключове</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="133"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="137"/>
         <source>From QR Code</source>
         <translation>От QR код</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="196"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="200"/>
         <source>Enter your 25 (or 24) word mnemonic seed</source>
         <translation>Въведете вашите мнемонични семена от 25 (или 24) думи</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="209"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="213"/>
         <source>Account address (public)</source>
         <translation>Адрес на сметката (публичен)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="221"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="225"/>
         <source>View key (private)</source>
         <translation>Ключ за преглеждане (таен)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="233"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="237"/>
         <source>Spend key (private)</source>
         <translation>Ключ за харчене (таен)</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="244"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="248"/>
         <source>Wallet creation date as `YYYY-MM-DD` or restore height</source>
         <translation>Дата на създаване на портфейла във формат `ГГГГ-ММ-ДД` или височина за възстановяване</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="247"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="251"/>
         <source>Restore height</source>
         <translation>Височина за възстановяване</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardRestoreWallet1.qml" line="268"/>
+        <location filename="../wizard/WizardRestoreWallet1.qml" line="272"/>
         <source>Back to menu</source>
         <translation>Обратно към менюто</translation>
     </message>
@@ -3044,22 +3243,22 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>WizardWalletInput</name>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="71"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="73"/>
         <source>Wallet name</source>
         <translation>Име на портфейла</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="85"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="87"/>
         <source>Wallet location</source>
         <translation>Път до портфейла</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="91"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="93"/>
         <source>Browse</source>
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="../wizard/WizardWalletInput.qml" line="106"/>
+        <location filename="../wizard/WizardWalletInput.qml" line="108"/>
         <source>Please choose a directory</source>
         <translation>Моля изберете директория</translation>
     </message>
@@ -3067,358 +3266,358 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="315"/>
-        <location filename="../main.qml" line="650"/>
-        <location filename="../main.qml" line="662"/>
-        <location filename="../main.qml" line="715"/>
-        <location filename="../main.qml" line="727"/>
-        <location filename="../main.qml" line="769"/>
-        <location filename="../main.qml" line="778"/>
-        <location filename="../main.qml" line="830"/>
-        <location filename="../main.qml" line="927"/>
-        <location filename="../main.qml" line="1260"/>
+        <location filename="../main.qml" line="316"/>
+        <location filename="../main.qml" line="722"/>
+        <location filename="../main.qml" line="734"/>
+        <location filename="../main.qml" line="787"/>
+        <location filename="../main.qml" line="799"/>
+        <location filename="../main.qml" line="841"/>
+        <location filename="../main.qml" line="850"/>
+        <location filename="../main.qml" line="902"/>
+        <location filename="../main.qml" line="999"/>
+        <location filename="../main.qml" line="1333"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="316"/>
-        <location filename="../main.qml" line="441"/>
+        <location filename="../main.qml" line="317"/>
+        <location filename="../main.qml" line="480"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Не можа да отвори портфейла: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="468"/>
+        <location filename="../main.qml" line="525"/>
         <source>Unlocked balance (waiting for block)</source>
         <translation>Отключен баланс (изчакване на блок)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="468"/>
+        <location filename="../main.qml" line="525"/>
         <source>Unlocked balance (~%1 min)</source>
         <translation>Отключен баланс (~%1 мин)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="468"/>
-        <location filename="../main.qml" line="1947"/>
+        <location filename="../main.qml" line="525"/>
+        <location filename="../main.qml" line="1987"/>
         <source>Unlocked balance</source>
         <translation>Отключен баланс </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="556"/>
+        <location filename="../main.qml" line="619"/>
         <source>Waiting for daemon to start...</source>
         <translation>Изчакване на демона да стартира...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="562"/>
+        <location filename="../main.qml" line="625"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Изчакване на демона да спре...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="589"/>
+        <location filename="../main.qml" line="652"/>
         <source>Daemon failed to start</source>
         <translation>Демонът не успя да стартира</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="590"/>
+        <location filename="../main.qml" line="653"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Моля проверете портфейла и системните записи на демона за грешки. Можете да опитате също и да стартирате %1 ръчно.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="652"/>
+        <location filename="../main.qml" line="724"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Не може да създаде транзакция: Грешна версия на демона: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="654"/>
-        <location filename="../main.qml" line="770"/>
+        <location filename="../main.qml" line="726"/>
+        <location filename="../main.qml" line="842"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Не може да създаде транзакция: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="663"/>
-        <location filename="../main.qml" line="779"/>
+        <location filename="../main.qml" line="735"/>
+        <location filename="../main.qml" line="851"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Няма налични несмесваеми заявки за събиране</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="791"/>
+        <location filename="../main.qml" line="863"/>
         <source>Confirmation</source>
         <translation>Потвърждение</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="674"/>
-        <location filename="../main.qml" line="792"/>
+        <location filename="../main.qml" line="746"/>
+        <location filename="../main.qml" line="864"/>
         <source>Please confirm transaction:
 </source>
         <translation>Моля потвърдете транзакция:</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="677"/>
+        <location filename="../main.qml" line="749"/>
         <source>
 Payment ID: </source>
         <translation>Платежно ID: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="678"/>
-        <location filename="../main.qml" line="793"/>
+        <location filename="../main.qml" line="750"/>
+        <location filename="../main.qml" line="865"/>
         <source>
 
 Amount: </source>
         <translation>Сума: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="679"/>
-        <location filename="../main.qml" line="794"/>
+        <location filename="../main.qml" line="751"/>
+        <location filename="../main.qml" line="866"/>
         <source>
 Fee: </source>
         <translation>Такса: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="511"/>
+        <location filename="../main.qml" line="571"/>
         <source>Waiting for daemon to sync</source>
         <translation>Изчакване на демона да синхронизира</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="396"/>
+        <location filename="../main.qml" line="399"/>
         <source>Balance (#%1%2)</source>
         <translation>Баланс (#%1%2)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="513"/>
+        <location filename="../main.qml" line="431"/>
+        <source>Please proceed to the device...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="443"/>
+        <source>Opening wallet ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="468"/>
+        <location filename="../main.qml" line="475"/>
+        <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="573"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Демонът е синхронизиран (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="515"/>
+        <location filename="../main.qml" line="575"/>
         <source>Wallet is synchronized</source>
         <translation>Демонът е синхронизиран</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="606"/>
+        <location filename="../main.qml" line="669"/>
         <source>Daemon is synchronized</source>
         <translation>Демонът е синхронизиран</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="676"/>
+        <location filename="../main.qml" line="748"/>
         <source>Address: </source>
         <translation>Адрес: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="680"/>
+        <location filename="../main.qml" line="752"/>
         <source>
 Ringsize: </source>
         <translation>Размер на пръстен: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="681"/>
+        <location filename="../main.qml" line="753"/>
         <source>
 
 Number of transactions: </source>
         <translation>Брой транзакции: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="682"/>
+        <location filename="../main.qml" line="754"/>
         <source>
 Description: </source>
         <translation>Описание: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="684"/>
+        <location filename="../main.qml" line="756"/>
         <source>
 Spending address index: </source>
         <translation>Индекс на адреса за харчене: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="912"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Монеро изпратени успешно: %1 транзакция(и)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="870"/>
+        <location filename="../main.qml" line="942"/>
         <source>Payment proof</source>
         <translation>Платежно доказателство</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="873"/>
+        <location filename="../main.qml" line="945"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Не може да генерира доказателство заради следната причина: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="903"/>
-        <location filename="../main.qml" line="922"/>
+        <location filename="../main.qml" line="975"/>
+        <location filename="../main.qml" line="994"/>
         <source>Payment proof check</source>
         <translation>Проверка на платежно доказателство</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="906"/>
-        <location filename="../main.qml" line="924"/>
+        <location filename="../main.qml" line="978"/>
+        <location filename="../main.qml" line="996"/>
         <source>Bad signature</source>
         <translation>Неверен подпис</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="913"/>
+        <location filename="../main.qml" line="985"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Този адрес получи %1 монеро с %2 потвърждение(я).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="924"/>
+        <location filename="../main.qml" line="996"/>
         <source>Good signature</source>
         <translation>Верен подпис</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1125"/>
-        <location filename="../main.qml" line="1970"/>
+        <location filename="../main.qml" line="1217"/>
+        <location filename="../main.qml" line="2016"/>
         <source>Wrong password</source>
         <translation>Грешна парола</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1153"/>
-        <source>Please choose a file</source>
-        <translation>Моля изберете файл</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="1202"/>
+        <location filename="../main.qml" line="1258"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1205"/>
+        <location filename="../main.qml" line="1261"/>
         <source>Error: Filesystem is read only</source>
         <translation>Грешка: Файловата система е само за четене</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1207"/>
+        <location filename="../main.qml" line="1263"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Предупреждение: Има само %1 ГБ свободно място на устройството. Блокчейнът заема ~%2 ГБ.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1209"/>
+        <location filename="../main.qml" line="1265"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Забележка: Има само %1 ГБ свободно място на устройството. Блокчейнът заема ~%2 ГБ.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1211"/>
+        <location filename="../main.qml" line="1267"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Забележка: папката lmdb не е открита. Ще бъде създадена нова папка.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1214"/>
+        <location filename="../main.qml" line="1270"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1257"/>
+        <location filename="../main.qml" line="1330"/>
         <source>Password changed successfully</source>
         <translation>Паролата сменена успешно</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1261"/>
+        <location filename="../main.qml" line="1334"/>
         <source>Error: </source>
         <translation>Грешка: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1803"/>
+        <location filename="../main.qml" line="1851"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
         <translation>Неуспех при намирането на чужди нодове от сървъра.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1858"/>
+        <location filename="../main.qml" line="1907"/>
         <source>Tap again to close...</source>
         <translation>Чукнете веднъж за да затворите...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1871"/>
+        <location filename="../main.qml" line="1920"/>
         <source>Daemon is running</source>
         <translation>Демонът работи</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1872"/>
+        <location filename="../main.qml" line="1921"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
         <translation>Демонът ще остане да работи на фонов режим, когато графичният интерфейс е затворен.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1874"/>
+        <location filename="../main.qml" line="1923"/>
         <source>Stop daemon</source>
         <translation>Спри демона</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1909"/>
+        <location filename="../main.qml" line="1958"/>
         <source>New version of monero-wallet-gui is available: %1&lt;br&gt;%2</source>
         <translation>Има нова версия на monero-wallet-gui: %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2002"/>
+        <location filename="../main.qml" line="2048"/>
         <source>Daemon log</source>
         <translation>Системен запис на демона</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="383"/>
-        <location filename="../main.qml" line="384"/>
+        <location filename="../main.qml" line="386"/>
+        <location filename="../main.qml" line="387"/>
         <source>HIDDEN</source>
         <translation>СКРИТ</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="716"/>
+        <location filename="../main.qml" line="788"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Сумата е грешна: очакваната цифра е от %1 до %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="728"/>
+        <location filename="../main.qml" line="800"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Недостатъчна наличност. Отключен баланс: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="831"/>
+        <location filename="../main.qml" line="903"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Не можа да изпрати парите</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="834"/>
-        <location filename="../main.qml" line="1256"/>
+        <location filename="../main.qml" line="906"/>
+        <location filename="../main.qml" line="1329"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="912"/>
         <source>Transaction saved to file: %1</source>
         <translation>Транзакцията записана във файл: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="910"/>
+        <location filename="../main.qml" line="982"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Този адрес получи %1 монеро, но транзакцията все-още не е изкопана</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="917"/>
+        <location filename="../main.qml" line="989"/>
         <source>This address received nothing</source>
         <translation>Този адрес не е получил нищо</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="936"/>
+        <location filename="../main.qml" line="1008"/>
         <source>Balance (syncing)</source>
         <translation>Баланс (синхронизира се)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="936"/>
-        <location filename="../main.qml" line="1948"/>
+        <location filename="../main.qml" line="1008"/>
+        <location filename="../main.qml" line="1988"/>
         <source>Balance</source>
         <translation>Баланс</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1304"/>
+        <location filename="../main.qml" line="1377"/>
         <source>Please wait...</source>
         <translation>Моля изчакайте...</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="1328"/>
-        <location filename="../main.qml" line="1343"/>
-        <source>Monero</source>
-        <translation>Монеро</translation>
-    </message>
-    <message>
-        <location filename="../main.qml" line="1503"/>
-        <source>send to the same destination</source>
-        <translation>изпрати до същото назначение</translation>
     </message>
 </context>
 </TS>
