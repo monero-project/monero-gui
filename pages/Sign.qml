@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
 //
@@ -126,25 +126,31 @@ Rectangle {
                 color: MoneroComponents.Style.defaultFontColor
             }
 
-            RowLayout {
-                id: modeButtonsRow
+            ColumnLayout {
+                id: modeButtonsColumn
                 Layout.topMargin: 10
 
-                MoneroComponents.StandardButton {
+                MoneroComponents.RadioButton {
                     id: handleMessageButton
                     text: qsTr("Message") + translationManager.emptyString
-                    enabled: fileMode
+                    fontSize: 16
+                    checked: true
                     onClicked: {
+                        checked = true;
+                        handleFileButton.checked = false;
                         messageMode = true;
                         fileMode = false;
                     }
                 }
 
-                MoneroComponents.StandardButton {
+                MoneroComponents.RadioButton {
                     id: handleFileButton
                     text: qsTr("File") + translationManager.emptyString
-                    enabled: messageMode
+                    fontSize: 16
+                    checked: false
                     onClicked: {
+                        checked = true;
+                        handleMessageButton.checked = false;
                         fileMode = true;
                         messageMode = false;
                     }
