@@ -304,64 +304,61 @@ Rectangle {
       }
 
       ColumnLayout {
-          visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked 
+          spacing: 15
 
-          CheckBox {
-              id: paymentIdCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
-              imgWidth: 12
-              imgHeight: 12
-              fontSize: paymentIdLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Payment ID <font size='2'>( Optional )</font>") + translationManager.emptyString
-              onClicked: {
-                  if (!paymentIdCheckbox.checked) {
-                    paymentIdLine.text = "";
+          ColumnLayout {
+              CheckBox {
+                  id: descriptionCheckbox
+                  border: false
+                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  fontSize: descriptionLine.labelFontSize
+                  iconOnTheLeft: true
+                  Layout.fillWidth: true
+                  text: qsTr("Add description") + translationManager.emptyString
+                  onClicked: {
+                      if (!descriptionCheckbox.checked) {
+                        descriptionLine.text = "";
+                      }
                   }
+              }
+
+              LineEditMulti {
+                  id: descriptionLine
+                  placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
+                  Layout.fillWidth: true
+                  visible: descriptionCheckbox.checked
               }
           }
 
-          // payment id input
-          LineEditMulti {
-              id: paymentIdLine
-              fontBold: true
-              placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
-              Layout.fillWidth: true
-              wrapMode: Text.WrapAnywhere
-              addressValidation: false
-              visible: paymentIdCheckbox.checked
-          }
-      }
-
-      ColumnLayout {
-        CheckBox {
-              id: descriptionCheckbox
-              border: false
-              checkedIcon: "qrc:///images/minus-white.png"
-              uncheckedIcon: "qrc:///images/plus-white.png"
-              imgWidth: 12
-              imgHeight: 12
-              fontSize: descriptionLine.labelFontSize
-              iconOnTheLeft: false
-              Layout.fillWidth: true
-              text: qsTr("Description <font size='2'>( Optional )</font>") + translationManager.emptyString
-              onClicked: {
-                  if (!descriptionCheckbox.checked) {
-                    descriptionLine.text = "";
+          ColumnLayout {
+              visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked
+              // @TODO: remove after pid removal hardfork
+              CheckBox {
+                  id: paymentIdCheckbox
+                  border: false
+                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  fontSize: paymentIdLine.labelFontSize
+                  iconOnTheLeft: true
+                  Layout.fillWidth: true
+                  text: qsTr("Add payment ID") + translationManager.emptyString
+                  onClicked: {
+                      if (!paymentIdCheckbox.checked) {
+                        paymentIdLine.text = "";
+                      }
                   }
               }
-          }
 
-          LineEditMulti {
-              id: descriptionLine
-              placeholderText: qsTr("Saved to local wallet history") + translationManager.emptyString
-              Layout.fillWidth: true
-              visible: descriptionCheckbox.checked
-              onTextChanged: {
-                  paymentIdWarningBox.visible = walletManager.paymentIdValid(text) && !persistentSettings.showPid
+              // payment id input
+              LineEditMulti {
+                  id: paymentIdLine
+                  fontBold: true
+                  placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
+                  Layout.fillWidth: true
+                  wrapMode: Text.WrapAnywhere
+                  addressValidation: false
+                  visible: paymentIdCheckbox.checked
               }
           }
       }
