@@ -49,6 +49,7 @@ signals:
     void mousePressed(const QVariant &o, const QVariant &x, const QVariant &y);
     void mouseReleased(const QVariant &o, const QVariant &x, const QVariant &y);
     void userActivity();
+    void uriHandler(const QUrl &url);
 };
 
 #endif // FILTER_H

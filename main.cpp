@@ -32,6 +32,7 @@
 #include <QStandardPaths>
 #include <QIcon>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QObject>
 #include <QDesktopWidget>
 #include <QScreen>
@@ -60,6 +61,9 @@
 #include "wallet/api/wallet2_api.h"
 #include "Logger.h"
 #include "MainApp.h"
+#include "qt/ipc.h"
+#include "qt/utils.h"
+#include "qt/mime.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -82,6 +86,8 @@ int main(int argc, char *argv[])
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     bool isDesktop = true;
+#elif defined(Q_OS_LINUX)
+    bool isLinux = true;
 #elif defined(Q_OS_ANDROID)
     bool isAndroid = true;
 #elif defined(Q_OS_IOS)
@@ -127,6 +133,7 @@ int main(int argc, char *argv[])
     QCommandLineOption logPathOption(QStringList() << "l" << "log-file",
         QCoreApplication::translate("main", "Log to specified file"),
         QCoreApplication::translate("main", "file"));
+
     parser.addOption(logPathOption);
     parser.addHelpOption();
     parser.process(app);
@@ -138,10 +145,32 @@ int main(int argc, char *argv[])
     Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
+    // Get default account name
+    QString accountName = getAccountName();
 
     // loglevel is configured in main.qml. Anything lower than
     // qWarning is not shown here.
     qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
+
+#ifdef Q_OS_LINUX
+    registerXdgMime(app);
+#endif
+
+    IPC *ipc = new IPC(&app);
+    QStringList posArgs = parser.positionalArguments();
+
+    for(int i = 0; i != posArgs.count(); i++){
+        QString arg = QString(posArgs.at(i));
+        if(arg.isEmpty() || arg.length() >= 512) continue;
+        if(arg.contains(reURI)){
+            if(!ipc->saveCommand(arg)){
+                return 0;
+            }
+        }
+    }
+
+    // start listening
+    QTimer::singleShot(0, ipc, SLOT(bind()));
 
     // screen settings
     // Mobile is designed on 128dpi
@@ -252,6 +281,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("mainApp", &app);
 
+    engine.rootContext()->setContextProperty("IPC", ipc);
+
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
 
     engine.rootContext()->setContextProperty("walletLogPath", logPath);
@@ -295,14 +326,6 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
     }
 
-
-    // Get default account name
-    QString accountName = qgetenv("USER"); // mac/linux
-    if (accountName.isEmpty())
-        accountName = qgetenv("USERNAME"); // Windows
-    if (accountName.isEmpty())
-        accountName = "My monero Account";
-
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
@@ -312,7 +335,6 @@ int main(int argc, char *argv[])
     builtWithScanner = true;
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
-
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     if (engine.rootObjects().isEmpty())
@@ -345,5 +367,6 @@ int main(int argc, char *argv[])
     QObject::connect(eventFilter, SIGNAL(mousePressed(QVariant,QVariant,QVariant)), rootObject, SLOT(mousePressed(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(mouseReleased(QVariant,QVariant,QVariant)), rootObject, SLOT(mouseReleased(QVariant,QVariant,QVariant)));
     QObject::connect(eventFilter, SIGNAL(userActivity()), rootObject, SLOT(userActivity()));
+    QObject::connect(eventFilter, SIGNAL(uriHandler(QUrl)), ipc, SLOT(parseCommand(QUrl)));
     return app.exec();
 }
