@@ -1787,7 +1787,7 @@ ApplicationWindow {
 
         MoneroMerchant.MerchantTitlebar {
             id: titleBarOrange
-            visible: middlePanel.state === "Merchant"
+            visible: persistentSettings.customDecorations && middlePanel.state === "Merchant"
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
