@@ -1,5 +1,5 @@
 var flagsCustomDecorations = (Qt.FramelessWindowHint | Qt.CustomizeWindowHint | Qt.WindowSystemMenuHint | Qt.Window);
-var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint);
+var flags = (Qt.WindowSystemMenuHint | Qt.Window | Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowTitleHint | Qt.WindowMaximizeButtonHint | Qt.WindowFullscreenButtonHint);
 
 /**
  * Toggles window decorations

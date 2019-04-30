@@ -86,7 +86,6 @@ Rectangle {
             root.x = parent.width/2 - root.width/2
             root.y = 100
         }
-        show()
         root.z = 11
         root.visible = true;
     }
