@@ -226,6 +226,9 @@ Rectangle {
                     text: "N/A"
                     // dynamically adjust text size
                     font.pixelSize: {
+                        if (persistentSettings.hideBalance) {
+                            return 20;
+                        }
                         var digits = text.split('.')[0].length
                         var defaultSize = 22;
                         if(digits > 2) {
@@ -265,6 +268,9 @@ Rectangle {
                     text: "N/A"
                     // dynamically adjust text size
                     font.pixelSize: {
+                        if (persistentSettings.hideBalance) {
+                            return 20;
+                        }
                         var digits = text.split('.')[0].length
                         var defaultSize = 20;
                         if(digits > 3) {
