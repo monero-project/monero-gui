@@ -32,6 +32,7 @@ import QtGraphicalEffects 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Clipboard 1.0
+import FontAwesome 1.0
 
 import "components" as MoneroComponents
 import "components/effects/" as MoneroEffects
@@ -44,10 +45,13 @@ Rectangle {
     property alias unlockedBalanceLabelVisible: unlockedBalanceLabel.visible
     property alias balanceLabelText: balanceLabel.text
     property alias balanceText: balanceText.text
+    property alias balanceTextFiat: balanceTextFiat.text
+    property alias unlockedBalanceTextFiat: unlockedBalanceTextFiat.text
     property alias networkStatus : networkStatus
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
+    property bool fiatBalance: false
     property int titleBarHeight: 50
     property string copyValue: ""
     Clipboard { id: clipboard }
@@ -202,6 +206,26 @@ Rectangle {
                         }
                     }
                 }
+                MoneroComponents.Label {
+                    fontSize: 20
+                    text: "¥"
+                    color: "white"
+                    visible: persistentSettings.fiatPriceEnabled
+                    anchors.right: parent.right
+                    anchors.rightMargin: 45
+                    anchors.top: parent.top
+                    anchors.topMargin: 28
+                    themeTransition: false
+
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            fiatBalance = !fiatBalance
+                        }
+                    }
+                }
             }
 
             Item {
@@ -214,7 +238,7 @@ Rectangle {
                 width: 50
 
                 MoneroComponents.TextPlain {
-                    visible: !isMobile
+                    visible: !(fiatBalance && persistentSettings.fiatPriceEnabled)
                     id: balanceText
                     themeTransition: false
                     anchors.left: parent.left
@@ -256,8 +280,38 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
+                    visible: !balanceText.visible
+                    id: balanceTextFiat
+                    themeTransition: false
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 76
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    font.pixelSize: balanceText.font.pixelSize
+                    MouseArea {
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: {
+                            parent.color = MoneroComponents.Style.orange
+                        }
+                        onExited: {
+                            parent.color = MoneroComponents.Style.white
+                        }
+                        onClicked: {
+                                console.log("Copied to clipboard");
+                                clipboard.setText(parent.text);
+                                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                        }
+                    }
+                }
+
+                MoneroComponents.TextPlain {
                     id: unlockedBalanceText
-                    visible: true
+                    visible: !(fiatBalance && persistentSettings.fiatPriceEnabled)
                     themeTransition: false
                     anchors.left: parent.left
                     anchors.leftMargin: 20
@@ -279,6 +333,36 @@ Rectangle {
                         return defaultSize;
                     }
 
+                    MouseArea {
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: {
+                            parent.color = MoneroComponents.Style.orange
+                        }
+                        onExited: {
+                            parent.color = MoneroComponents.Style.white
+                        }
+                        onClicked: {
+                                console.log("Copied to clipboard");
+                                clipboard.setText(parent.text);
+                                appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
+                        }
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    id: unlockedBalanceTextFiat
+                    themeTransition: false
+                    visible: !unlockedBalanceText.visible
+                    anchors.left: parent.left
+                    anchors.leftMargin: 20
+                    anchors.top: parent.top
+                    anchors.topMargin: 126
+                    font.family: "Arial"
+                    color: "#FFFFFF"
+                    text: "N/A"
+                    font.pixelSize: unlockedBalanceText.font.pixelSize
                     MouseArea {
                         hoverEnabled: true
                         anchors.fill: parent
