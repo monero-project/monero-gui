@@ -81,14 +81,6 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
-            visible: !isMobile
-            id: userInActivityCheckbox
-            checked: persistentSettings.lockOnUserInActivity
-            onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
-            text: qsTr("Lock wallet on inactivity") + translationManager.emptyString
-        }
-
-        MoneroComponents.CheckBox {
             id: themeCheckbox
             checked: !MoneroComponents.Style.blackTheme
             text: qsTr("Light theme") + translationManager.emptyString
@@ -96,6 +88,14 @@ Rectangle {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
                 persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
             }
+        }
+
+        MoneroComponents.CheckBox {
+            visible: !isMobile
+            id: userInActivityCheckbox
+            checked: persistentSettings.lockOnUserInActivity
+            onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
+            text: qsTr("Lock wallet on inactivity") + translationManager.emptyString
         }
 
         ColumnLayout {
