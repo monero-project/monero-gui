@@ -46,8 +46,9 @@ Rectangle {
 
     ListModel {
         id: deviceNameModel
-        ListElement { column1: "Ledger"; column2: "Ledger"; }
-        ListElement { column1: "Trezor"; column2: "Trezor"; }
+        ListElement { column1: qsTr("Choose your hardware device"); column2: "";}
+        ListElement { column1: "Ledger"; column2: "Ledger";}
+        ListElement { column1: "Trezor"; column2: "Trezor";}
     }
 
     function update(){
@@ -81,7 +82,6 @@ Rectangle {
 
             ColumnLayout {
                 spacing: 0
-
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
@@ -112,9 +112,7 @@ Rectangle {
             }
 
             ColumnLayout {
-                Layout.topMargin: 10
                 Layout.fillWidth: true
-
                 spacing: 20
 
                 MoneroComponents.LineEdit {
@@ -131,32 +129,29 @@ Rectangle {
                     text: "0"
                 }
 
+                MoneroComponents.StandardDropdown {
+                    id: deviceNameDropdown
+                    dataModel: deviceNameModel
+                    Layout.fillWidth: true
+                    Layout.topMargin: 6
+                    z: 3
+                }
+
+                CheckBox2 {
+                    id: showAdvancedCheckbox
+                    checked: false
+                    text: qsTr("Advanced options") + translationManager.emptyString
+                }
+
                 MoneroComponents.LineEdit {
                     id: lookahead
                     Layout.fillWidth: true
-
+                    visible: showAdvancedCheckbox.checked
                     labelText: qsTr("Subaddress lookahead (optional)") + translationManager.emptyString
                     labelFontSize: 14
                     placeholderText: "<major>:<minor>"
                     placeholderFontSize: 16
                     validator: RegExpValidator { regExp: /(\d+):(\d+)?$/ }
-                }
-            }
-
-            ColumnLayout {
-                spacing: 0
-
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-                z: 3
-
-                ColumnLayout{
-                    MoneroComponents.StandardDropdown {
-                        id: deviceNameDropdown
-                        dataModel: deviceNameModel
-                        Layout.fillWidth: true
-                        Layout.topMargin: 6
-                    }
                 }
             }
 
@@ -184,7 +179,7 @@ Rectangle {
             WizardNav {
                 progressSteps: 4
                 progress: 1
-                btnNext.enabled: walletInput.verify();
+                btnNext.enabled: walletInput.verify() && wizardCreateDevice1.deviceName;
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
                 btnNext.text: qsTr("Create wallet") + translationManager.emptyString
                 onPrevClicked: {
