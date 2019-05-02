@@ -213,6 +213,8 @@ public:
     //! Submit a transfer from file
     Q_INVOKABLE bool submitTxFile(const QString &fileName) const;
 
+    //! asynchronous transaction commit
+    Q_INVOKABLE void commitTransactionAsync(PendingTransaction * t);
 
     //! deletes transaction and frees memory
     Q_INVOKABLE void disposeTransaction(PendingTransaction * t);
@@ -324,6 +326,7 @@ signals:
     void walletCreationHeightChanged();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
+    void transactionCommitted(bool status, PendingTransaction *t, QStringList txid);
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);

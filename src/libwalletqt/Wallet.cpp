@@ -496,6 +496,22 @@ bool Wallet::submitTxFile(const QString &fileName) const
     return m_walletImpl->importKeyImages(fileName.toStdString() + "_keyImages");
 }
 
+void Wallet::commitTransactionAsync(PendingTransaction *t)
+{
+  QStringList txid(t->txid());
+  QFuture<bool> future = QtConcurrent::run(t, &PendingTransaction::commit);
+
+  QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+
+  connect(watcher, &QFutureWatcher<bool>::finished,
+          this, [this, watcher, t, txid]() {
+        QFuture<bool> future = watcher->future();
+        watcher->deleteLater();
+        emit transactionCommitted(future.result(), t, txid);
+      });
+  watcher->setFuture(future);
+}
+
 void Wallet::disposeTransaction(PendingTransaction *t)
 {
     m_walletImpl->disposeTransaction(t->m_pimpl);
