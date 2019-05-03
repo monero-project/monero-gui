@@ -722,7 +722,6 @@ ApplicationWindow {
 
     function onWalletMoneyReceived(txId, amount) {
         // refresh transaction history here
-        currentWallet.refresh()
         console.log("Confirmed money found")
         // history refresh is handled by walletUpdated
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount) // this will refresh model
@@ -744,7 +743,6 @@ ApplicationWindow {
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
         console.log("monero sent found")
-        currentWallet.refresh()
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
 
         if(middlePanel.state == "History")
