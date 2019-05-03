@@ -64,6 +64,7 @@ HEADERS += \
     MainApp.h \
     src/qt/ipc.h \
     src/qt/mime.h \
+    src/qt/KeysFiles.h \
     src/qt/utils.h
 
 SOURCES += main.cpp \
@@ -95,6 +96,7 @@ SOURCES += main.cpp \
     MainApp.cpp \
     src/qt/ipc.cpp \
     src/qt/mime.cpp \
+    src/qt/KeysFiles.cpp \
     src/qt/utils.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {

@@ -64,6 +64,7 @@
 #include "qt/ipc.h"
 #include "qt/utils.h"
 #include "qt/mime.h"
+#include "src/qt/KeysFiles.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -116,6 +117,19 @@ int main(int argc, char *argv[])
 //    qDebug() << "High DPI auto scaling - enabled";
 //#endif
 
+    QString moneroAccountsDir;
+    #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
+        QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+    #else
+        QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    #endif
+    if (!moneroAccountsRootDir.empty()) {
+        moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
+    } else {
+        qCritical() << "Error: accounts root directory could not be set";
+        return 1;
+    }
+
     MainApp app(argc, argv);
 
     app.setApplicationName("monero-core");
@@ -144,9 +158,6 @@ int main(int argc, char *argv[])
     const QString logPath = getLogPath(parser.value(logPathOption));
     Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
-
-    // Get default account name
-    QString accountName = getAccountName();
 
     // loglevel is configured in main.qml. Anything lower than
     // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
@@ -223,7 +234,8 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
 
-
+    qmlRegisterUncreatableType<WalletKeysFilesModel>("moneroComponents.walletKeysFilesModel", 1, 0, "WalletKeysFilesModel",
+                                                   "walletKeysFilesModel can't be instantiated directly");
 
     qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
                                                         "TransactionHistoryModel can't be instantiated directly");
@@ -278,7 +290,11 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(":/fonts");
 
-    engine.rootContext()->setContextProperty("walletManager", WalletManager::instance());
+    engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
+
+    WalletManager *walletManager = WalletManager::instance();
+
+    engine.rootContext()->setContextProperty("walletManager", walletManager);
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
@@ -299,17 +315,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
 
-//  export to QML monero accounts root directory
-//  wizard is talking about where
-//  to save the wallet file (.keys, .bin), they have to be user-accessible for
-//  backups - I reckon we save that in My Documents\Monero Accounts\ on
-//  Windows, ~/Monero Accounts/ on nix / osx
-#if defined(Q_OS_WIN) || defined(Q_OS_IOS)
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
-#else
-    QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
-#endif
-
     engine.rootContext()->setContextProperty("isWindows", isWindows);
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
@@ -325,11 +330,17 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty("desktopFolder", desktopFolder);
 #endif
 
-    if (!moneroAccountsRootDir.empty())
-    {
-        QString moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
-        engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
-    }
+    // Wallet .keys files model (wizard -> open wallet)
+    WalletKeysFilesModel walletKeysFilesModel(walletManager);
+    engine.rootContext()->setContextProperty("walletKeysFilesModel", &walletKeysFilesModel);
+    engine.rootContext()->setContextProperty("walletKeysFilesModelProxy", &walletKeysFilesModel.proxyModel());
+
+    // Get default account name
+    QString accountName = qgetenv("USER"); // mac/linux
+    if (accountName.isEmpty())
+        accountName = qgetenv("USERNAME"); // Windows
+    if (accountName.isEmpty())
+        accountName = "My monero Account";
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
