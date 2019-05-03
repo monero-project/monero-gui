@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>LeftPanel.qml</file>
-        <file>RightPanel.qml</file>
         <file>MiddlePanel.qml</file>
         <file>images/download-white.png</file>
         <file>images/download-white@2x.png</file>
@@ -41,7 +40,6 @@
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TitleBar.qml</file>
-        <file>images/expandRightPanel.png</file>
         <file>images/moneroLogo2.png</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
