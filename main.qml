@@ -1227,7 +1227,7 @@ ApplicationWindow {
         property string remoteNodeService: ""
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool showPid: false
-        property bool blackTheme: false
+        property bool blackTheme: true
 
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
