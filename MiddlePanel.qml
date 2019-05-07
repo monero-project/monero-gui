@@ -125,51 +125,51 @@ Rectangle {
             State {
                 name: "History"
                 PropertyChanges { target: root; currentView: historyView }
-                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 100}
+                PropertyChanges { target: mainFlickable; contentHeight: historyView.contentHeight + 80}
             }, State {
                 name: "Transfer"
                 PropertyChanges { target: root; currentView: transferView }
-                PropertyChanges { target: mainFlickable; contentHeight: 700 }
+                PropertyChanges { target: mainFlickable; contentHeight: transferView.transferHeight1 + transferView.transferHeight2 + 80 }
             }, State {
-               name: "Receive"
-               PropertyChanges { target: root; currentView: receiveView }
-               PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 100 }
+                name: "Receive"
+                PropertyChanges { target: root; currentView: receiveView }
+                PropertyChanges { target: mainFlickable; contentHeight: receiveView.receiveHeight + 80 }
             }, State {
                 name: "Merchant"
                 PropertyChanges { target: root; currentView: merchantView }
-                PropertyChanges { target: mainFlickable; contentHeight: merchantView.merchantHeight + 100 }
+                PropertyChanges { target: mainFlickable; contentHeight: merchantView.merchantHeight + 80 }
             }, State {
-               name: "TxKey"
-               PropertyChanges { target: root; currentView: txkeyView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1200  }
+                name: "TxKey"
+                PropertyChanges { target: root; currentView: txkeyView }
+                PropertyChanges { target: mainFlickable; contentHeight: txkeyView.txkeyHeight + 80 }
             }, State {
-               name: "SharedRingDB"
-               PropertyChanges { target: root; currentView: sharedringdbView }
-               PropertyChanges { target: mainFlickable; contentHeight: sharedringdbView.panelHeight + 100  }
+                name: "SharedRingDB"
+                PropertyChanges { target: root; currentView: sharedringdbView }
+                PropertyChanges { target: mainFlickable; contentHeight: sharedringdbView.panelHeight + 80  }
             }, State {
                 name: "AddressBook"
-                PropertyChanges {  target: root; currentView: addressBookView  }
-                PropertyChanges { target: mainFlickable; contentHeight: minHeight }
+                PropertyChanges { target: root; currentView: addressBookView }
+                PropertyChanges { target: mainFlickable; contentHeight: addressBookView.addressbookHeight + 80 }
             }, State {
                 name: "Sign"
-               PropertyChanges { target: root; currentView: signView }
-               PropertyChanges { target: mainFlickable; contentHeight: 1000  }
+                PropertyChanges { target: root; currentView: signView }
+                PropertyChanges { target: mainFlickable; contentHeight: signView.signHeight + 80 }
             }, State {
                 name: "Settings"
-               PropertyChanges { target: root; currentView: settingsView }
-               PropertyChanges { target: mainFlickable; contentHeight: settingsView.settingsHeight }
+                PropertyChanges { target: root; currentView: settingsView }
+                PropertyChanges { target: mainFlickable; contentHeight: settingsView.settingsHeight }
             }, State {
                 name: "Mining"
                 PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: 700}
+                PropertyChanges { target: mainFlickable; contentHeight: miningView.miningHeight + 80 }
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
-                PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight }
+                PropertyChanges { target: mainFlickable; contentHeight: keysView.keysHeight + 80}
             }, State {
                 name: "Account"
                 PropertyChanges { target: root; currentView: accountView }
-                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 100 }
+                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }
             }	
         ]
 

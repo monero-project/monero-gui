@@ -44,6 +44,7 @@ import FontAwesome 1.0
 Rectangle {
     id: root
     color: "transparent"
+    property alias addressbookHeight: mainLayout.height
     property bool selectAndSend: false
     property bool editEntry: false
 

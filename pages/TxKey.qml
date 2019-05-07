@@ -37,8 +37,8 @@ import moneroComponents.Clipboard 1.0
 import "../js/TxUtils.js" as TxUtils
 
 Rectangle {
-
     color: "transparent"
+    property alias txkeyHeight: mainLayout.height
 
     Clipboard { id: clipboard }
 

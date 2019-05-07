@@ -37,6 +37,7 @@ import moneroComponents.WalletManager 1.0
 import "../components" as MoneroComponents
 
 Rectangle {
+    property alias signHeight: mainLayout.height
     property bool messageMode: true
     property bool fileMode: false
 
