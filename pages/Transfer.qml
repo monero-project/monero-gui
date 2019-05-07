@@ -47,6 +47,8 @@ Rectangle {
     signal sweepUnmixableClicked()
 
     color: "transparent"
+    property alias transferHeight1: pageRoot.height
+    property alias transferHeight2: advancedLayout.height
     property int mixin: 10  // (ring size 11)
     property string warningContent: ""
     property string sendButtonWarning: ""
@@ -435,15 +437,8 @@ Rectangle {
 
     } // pageRoot
 
-    Rectangle {
-        id: desaturate
-        color:"black"
-        anchors.fill: parent
-        opacity: 0.1
-        visible: (pageRoot.enabled)? 0 : 1;
-    }
-
     ColumnLayout {
+        id: advancedLayout
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
