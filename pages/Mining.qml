@@ -35,6 +35,7 @@ import moneroComponents.Wallet 1.0
 Rectangle {
     id: root
     color: "transparent"
+    property alias miningHeight: mainLayout.height
     property double currentHashRate: 0
 
     ColumnLayout {
