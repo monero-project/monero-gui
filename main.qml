@@ -306,6 +306,7 @@ ApplicationWindow {
             currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
             currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
             currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
+            currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
             middlePanel.paymentClicked.disconnect(handlePayment);
             middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
             middlePanel.getProofClicked.disconnect(handleGetProof);
@@ -363,6 +364,7 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         currentWallet.deviceButtonRequest.connect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
+        currentWallet.transactionCommitted.connect(onTransactionCommitted);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.getProofClicked.connect(handleGetProof);
@@ -948,16 +950,6 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
-        // grab transaction.txid before commit, since it clears it.
-        // we actually need to copy it, because QML will incredibly
-        // call the function multiple times when the variable is used
-        // after commit, where it returns another result...
-        // Of course, this loop is also calling the function multiple
-        // times, but at least with the same result.
-        var txid = [], txid_org = transaction.txid, txid_text = ""
-        for (var i = 0; i < txid_org.length; ++i)
-          txid[i] = txid_org[i]
-
         // View only wallet - we save the tx
         if(viewOnly && saveTxDialog.fileUrl){
             // No file specified - abort
@@ -972,12 +964,19 @@ ApplicationWindow {
             transaction.setFilename(path);
         }
 
-        if (!transaction.commit()) {
+        appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+        currentWallet.commitTransactionAsync(transaction);
+    }
+
+    function onTransactionCommitted(success, transaction, txid) {
+        hideProcessingSplash();
+        if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
         } else {
+            var txid_text = ""
             informationPopup.title = qsTr("Information") + translationManager.emptyString
             for (var i = 0; i < txid.length; ++i) {
                 if (txid_text.length > 0)
