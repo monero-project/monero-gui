@@ -30,6 +30,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QStandardPaths>
+#include <QNetworkAccessManager>
 #include <QIcon>
 #include <QDebug>
 #include <QDesktopServices>
@@ -65,6 +66,7 @@
 #include "qt/utils.h"
 #include "qt/mime.h"
 #include "src/qt/KeysFiles.h"
+#include "qt/prices.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -356,6 +358,11 @@ int main(int argc, char *argv[])
     builtWithScanner = true;
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager();
+    Prices prices(manager);
+    engine.rootContext()->setContextProperty("Prices", &prices);
+
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
     if (engine.rootObjects().isEmpty())
