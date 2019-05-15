@@ -108,6 +108,10 @@ function epoch(){
     return Math.floor((new Date).getTime()/1000);
 }
 
+function roundDownToNearestThousand(_num){
+    return Math.floor(_num/1000.0)*1000
+}
+
 function isAlpha(letter){ return letter.match(/^[A-Za-z0-9]+$/) !== null; }
 
 function isLowerCaseChar(letter){ return letter === letter.toLowerCase(); }
