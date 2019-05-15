@@ -32,6 +32,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
 import "../../js/Wizard.js" as Wizard
+import "../../js/Utils.js" as Utils
 import "../../version.js" as Version
 import "../../components" as MoneroComponents
 
@@ -184,7 +185,7 @@ Rectangle {
                             var restoreHeightText = inputDialog.inputText;
                             // Parse date string or restore height as integer
                             if(restoreHeightText.indexOf('-') === 4 && restoreHeightText.length === 10) {
-                                _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeightText);
+                                _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeightText, Utils.netTypeToString());
                             } else {
                                 _restoreHeight = parseInt(restoreHeightText)
                             }
