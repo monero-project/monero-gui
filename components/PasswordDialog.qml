@@ -161,33 +161,18 @@ Item {
                         blackColor: "black"
                         whiteColor: "#A9FFFFFF"
                     }
+                }
 
-                    MoneroComponents.Label {
-                        fontSize: 20
+                ColumnLayout {
+                    anchors.fill: parent
+
+                    MoneroComponents.FontAwesomeButton {
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        Layout.rightMargin: 15
                         text: isHidden ? FontAwesome.eye : FontAwesome.eyeSlash
-                        opacity: 0.7
-                        fontFamily: FontAwesome.fontFamily
-                        anchors.right: parent.right
-                        anchors.rightMargin: 15
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.verticalCenterOffset: 1
-
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            hoverEnabled: true
-                            onClicked: {
-                                passwordInput.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
-                                isHidden = !isHidden;
-                            }
-                            onEntered: {
-                                parent.opacity = 0.9
-                                parent.fontSize = 24
-                            }
-                            onExited: {
-                                parent.opacity = 0.7
-                                parent.fontSize = 20
-                            }
+                        onClicked: {
+                            passwordInput.echoMode = isHidden ? TextInput.Normal : TextInput.Password;
+                            isHidden = !isHidden;
                         }
                     }
                 }

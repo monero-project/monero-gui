@@ -43,6 +43,7 @@ import moneroComponents.TransactionHistoryModel 1.0
 import moneroComponents.Subaddress 1.0
 import moneroComponents.SubaddressModel 1.0
 import "../js/TxUtils.js" as TxUtils
+import FontAwesome 1.0
 
 Rectangle {
     id: pageReceive
@@ -187,28 +188,16 @@ Rectangle {
                             height: 21
                             spacing: 10
 
-                            MoneroComponents.IconButton {
-                                id: renameButton
-                                image: "qrc:///images/edit.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 23
-                                Layout.preferredHeight: 21
+                            MoneroComponents.FontAwesomeButton {
+                                id: editButton
+                                text: FontAwesome.edit
                                 visible: index !== 0
-
-                                onClicked: {
-                                    renameSubaddressLabel(index);
-                                }
+                                onClicked: renameSubaddressLabel(index);
                             }
 
-                            MoneroComponents.IconButton {
+                            MoneroComponents.FontAwesomeButton {
                                 id: copyButton
-                                image: "qrc:///images/copy.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 21
-
+                                text: FontAwesome.clipboard
                                 onClicked: {
                                     console.log("Address copied to clipboard");
                                     clipboard.setText(address);
@@ -243,8 +232,8 @@ Rectangle {
             MoneroComponents.CheckBox {
                 id: addNewAddressCheckbox
                 border: false
-                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                checkedIconFontAwesome: FontAwesome.plusCircle
+                uncheckedIconFontAwesome: FontAwesome.plusCircle
                 fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true
@@ -297,12 +286,12 @@ Rectangle {
                 spacing: parent.spacing
 
                 MoneroComponents.StandardButton {
-                    rightIcon: "qrc:///images/download-white.png"
+                    text: FontAwesome.download
                     onClicked: qrFileDialog.open()
                 }
 
                 MoneroComponents.StandardButton {
-                    rightIcon: "qrc:///images/external-link-white.png"
+                    text: FontAwesome.clipboard
                     onClicked: {
                         clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
                         appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);

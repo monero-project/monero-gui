@@ -41,6 +41,7 @@ import moneroComponents.WalletManager 1.0
 import moneroComponents.TransactionHistory 1.0
 import moneroComponents.TransactionHistoryModel 1.0
 import "../js/TxUtils.js" as TxUtils
+import FontAwesome 1.0
 
 Rectangle {
     id: pageAccount
@@ -293,25 +294,16 @@ Rectangle {
                             height: 21
                             spacing: 10
 
-                            MoneroComponents.IconButton {
-                                id: renameButton
-                                image: "qrc:///images/edit.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 23
-                                Layout.preferredHeight: 21
-
-                                onClicked: pageAccount.renameSubaddressAccountLabel(index);
+                            MoneroComponents.FontAwesomeButton {
+                                id: editButton
+                                text: FontAwesome.edit
+                                visible: index !== 0
+                                onClicked: renameSubaddressAccountLabel(index);
                             }
 
-                            MoneroComponents.IconButton {
+                            MoneroComponents.FontAwesomeButton {
                                 id: copyButton
-                                image: "qrc:///images/copy.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 21
-
+                                text: FontAwesome.clipboard
                                 onClicked: {
                                     console.log("Address copied to clipboard");
                                     clipboard.setText(address);
@@ -351,8 +343,8 @@ Rectangle {
                 id: addNewAccountCheckbox 
                 visible: !selectAndSend
                 border: false
-                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
-                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
+                checkedIconFontAwesome: FontAwesome.plusCircle
+                uncheckedIconFontAwesome: FontAwesome.plusCircle
                 fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true

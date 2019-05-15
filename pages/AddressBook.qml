@@ -223,40 +223,24 @@ Rectangle {
                             height: 21
                             spacing: 10
 
-                            MoneroComponents.IconButton {
+                            MoneroComponents.FontAwesomeButton {
                                 id: sendToButton
-                                image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 20
-                                Layout.preferredHeight: 20
-                                onClicked: {
-                                    doSend();
-                                }
+                                text: FontAwesome.send
+                                onClicked: doSend();
                             }
 
-                            MoneroComponents.IconButton {
+                            MoneroComponents.FontAwesomeButton {
                                 id: renameButton
-                                image: "qrc:///images/edit.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 23
-                                Layout.preferredHeight: 21
-
+                                text: FontAwesome.edit
                                 onClicked: {
                                     addressBookListView.currentIndex = index;
                                     root.showEditAddress(address, description);
                                 }
                             }
 
-                            MoneroComponents.IconButton {
+                            MoneroComponents.FontAwesomeButton {
                                 id: copyButton
-                                image: "qrc:///images/copy.svg"
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 21
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-
+                                text: FontAwesome.clipboard
                                 onClicked: {
                                     console.log("Address copied to clipboard");
                                     clipboard.setText(address);
@@ -284,8 +268,8 @@ Rectangle {
             MoneroComponents.CheckBox {
                 id: addNewEntryCheckbox
                 border: false
-                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                checkedIconFontAwesome: FontAwesome.plusCircle
+                uncheckedIconFontAwesome: FontAwesome.plusCircle
                 fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true

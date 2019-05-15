@@ -69,17 +69,6 @@ Rectangle {
             text: leftPanel.balanceText
         }
 
-        Item {
-            height: 20
-            width: 20
-
-            Image {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                source: "qrc:///images/lockIcon.png"
-            }
-        }
-
         MoneroComponents.TextPlain {
             width: 116
             height: 20

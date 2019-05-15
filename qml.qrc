@@ -3,10 +3,6 @@
         <file>main.qml</file>
         <file>LeftPanel.qml</file>
         <file>MiddlePanel.qml</file>
-        <file>images/download-white.png</file>
-        <file>images/download-white@2x.png</file>
-        <file>images/external-link-white.png</file>
-        <file>images/external-link-white@2x.png</file>
         <file>images/minus-white.png</file>
         <file>images/minus-white@2x.png</file>
         <file>images/plus-white.png</file>
@@ -14,7 +10,6 @@
         <file>components/Label.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
-        <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
         <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
@@ -148,8 +143,6 @@
         <file>components/LabelSubheader.qml</file>
         <file>images/arrow-right-medium-white.png</file>
         <file>images/arrow-right-medium-white@2x.png</file>
-        <file>images/rightArrow.png</file>
-        <file>images/rightArrow@2x.png</file>
         <file>images/historyBorderRadius.png</file>
         <file>components/CheckBox2.qml</file>
         <file>components/TextPlain.qml</file>
@@ -157,8 +150,6 @@
         <file>js/TxUtils.js</file>
         <file>images/warning.png</file>
         <file>images/warning@2x.png</file>
-        <file>images/rightArrowInactive.png</file>
-        <file>images/rightArrowInactive@2x.png</file>
         <file>js/Windows.js</file>
         <file>js/Utils.js</file>
         <file>components/RadioButton.qml</file>
@@ -174,8 +165,6 @@
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
-        <file>images/plus-in-circle-medium-white.png</file>
-        <file>images/plus-in-circle-medium-white@2x.png</file>
         <file>pages/merchant/Merchant.qml</file>
         <file>pages/merchant/MerchantCheckbox.qml</file>
         <file>pages/merchant/MerchantTrackingList.qml</file>
@@ -249,9 +238,6 @@
         <file>images/themes/white/expand.svg</file>
         <file>components/effects/ColorTransition.qml</file>
         <file>components/effects/GradientBackground.qml</file>
-        <file>images/check-white.svg</file>
-        <file>images/copy.svg</file>
-        <file>images/edit.svg</file>
-        <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
+        <file>components/FontAwesomeButton.qml</file>
     </qresource>
 </RCC>

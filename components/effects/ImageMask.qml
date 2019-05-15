@@ -40,6 +40,7 @@ Item {
     property string image: ""
     property string color: ""
     property bool fontAwesomeFallbackEnabled: true
+    property bool isFontAwesomeIcon: false
     property var fontAwesomeFallbackIcon: ""
     property int fontAwesomeFallbackSize: 16
     property double fontAwesomeFallbackOpacity: 0.8
@@ -67,13 +68,13 @@ Item {
         anchors.fill: root
         source: svgMask
         color: root.color
-        visible: isOpenGL
+        visible: isOpenGL && !root.isFontAwesomeIcon
     }
 
     Text {
         id: fontAwesomeFallback
-        visible: !isOpenGL && root.fontAwesomeFallback
-        text: !isOpenGL ? root.fontAwesomeFallbackIcon : ""
+        visible: (!isOpenGL && root.fontAwesomeFallback) || root.isFontAwesomeIcon
+        text: (!isOpenGL || root.isFontAwesomeIcon) ? root.fontAwesomeFallbackIcon : ""
         font.family: FontAwesome.fontFamily
         font.pixelSize: root.fontAwesomeFallbackSize
         color: root.fontAwesomeFallbackColor
