@@ -67,13 +67,7 @@ ColumnLayout {
         Layout.fillWidth: true
         header: qsTr("Restore height") + translationManager.emptyString
         value: wizardController.walletOptionsRestoreHeight
-        visible: {
-            if (walletOptionsIsRecoveringFromDevice && !wizardController.walletOptionsDeviceIsRestore) {
-                return false;
-            } else {
-                return (wizardController.walletOptionsRestoreHeight > 0);
-            }
-        }
+        visible: wizardStateView.state === "wizardRestoreWallet4" || wizardController.walletOptionsIsRecoveringFromDevice
     }
 
     WizardSummaryItem {
