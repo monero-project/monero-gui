@@ -255,6 +255,8 @@ win32 {
     LIBS+=-L$$BOOST_PATH/lib
     LIBS+=-L$$BOOST_MINGW_PATH/lib
     
+    QMAKE_LFLAGS += -static-libgcc -static-libstdc++
+
     LIBS+= \
         -Wl,-Bstatic \
         -lboost_serialization-mt \
@@ -272,6 +274,7 @@ win32 {
         -licudt \
         -licutu \
         -liconv \
+        -lpthread \
         -lssl \
         -lsodium \
         -lcrypto \
