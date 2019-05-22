@@ -258,6 +258,14 @@ win32 {
     QMAKE_LFLAGS += -static-libgcc -static-libstdc++
 
     LIBS+= \
+        -Wl,-Bdynamic \
+        -lwinscard \
+        -lws2_32 \
+        -lwsock32 \
+        -lIphlpapi \
+        -lcrypt32 \
+        -lhidapi \
+        -lgdi32 $$TREZOR_LINKER \
         -Wl,-Bstatic \
         -lboost_serialization-mt \
         -lboost_thread-mt \
@@ -275,17 +283,10 @@ win32 {
         -licutu \
         -liconv \
         -lpthread \
+        -lsetupapi \
         -lssl \
         -lsodium \
-        -lcrypto \
-        -Wl,-Bdynamic \
-        -lwinscard \
-        -lws2_32 \
-        -lwsock32 \
-        -lIphlpapi \
-        -lcrypt32 \
-        -lhidapi \
-        -lgdi32 $$TREZOR_LINKER
+        -lcrypto
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
