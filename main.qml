@@ -121,10 +121,7 @@ ApplicationWindow {
         }
 
         // monero-gui workgroup maintained
-        if(isWindows)
-            return "http://autonode.xmr.pm/";
-        else
-            return "https://autonode.xmr.pm/"
+        return "https://autonode.xmr.pm/"
     }
 
     // true if wallet ever synchronized
