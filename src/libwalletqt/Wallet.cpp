@@ -634,6 +634,15 @@ void Wallet::setPaymentId(const QString &paymentId)
     m_paymentId = paymentId;
 }
 
+QString Wallet::getCacheAttribute(const QString &key) const {
+    return QString::fromStdString(m_walletImpl->getCacheAttribute(key.toStdString()));
+}
+
+bool Wallet::setCacheAttribute(const QString &key, const QString &val)
+{
+    return m_walletImpl->setCacheAttribute(key.toStdString(), val.toStdString());
+}
+
 bool Wallet::setUserNote(const QString &txid, const QString &note)
 {
   return m_walletImpl->setUserNote(txid.toStdString(), note.toStdString());
