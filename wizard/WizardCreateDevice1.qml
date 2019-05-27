@@ -33,6 +33,7 @@ import QtQuick.Controls 2.0
 
 import moneroComponents.Wallet 1.0
 import "../js/Wizard.js" as Wizard
+import "../js/Utils.js" as Utils
 import "../components"
 import "../components" as MoneroComponents
 
@@ -195,7 +196,7 @@ Rectangle {
                     if(restoreHeight.text){
                         // Parse date string or restore height as integer
                         if(restoreHeight.text.indexOf('-') === 4 && restoreHeight.text.length === 10){
-                            _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeight.text);
+                            _restoreHeight = Wizard.getApproximateBlockchainHeight(restoreHeight.text, Utils.netTypeToString());
                         } else {
                             _restoreHeight = parseInt(restoreHeight.text)
                         }
