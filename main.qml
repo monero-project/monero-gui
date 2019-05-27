@@ -256,7 +256,7 @@ ApplicationWindow {
         }
 
         // Local daemon settings
-        walletManager.setDaemonAddress(localDaemonAddress)
+        walletManager.setDaemonAddressAsync(localDaemonAddress);
 
         // enable timers
         userInActivityTimer.running = true;
@@ -608,7 +608,7 @@ ApplicationWindow {
         persistentSettings.useRemoteNode = true;
         currentDaemonAddress = persistentSettings.remoteNodeAddress;
         currentWallet.initAsync(currentDaemonAddress);
-        walletManager.setDaemonAddress(currentDaemonAddress);
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
         remoteNodeConnected = true;
     }
 
@@ -620,7 +620,7 @@ ApplicationWindow {
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
         currentWallet.initAsync(currentDaemonAddress);
-        walletManager.setDaemonAddress(currentDaemonAddress);
+        walletManager.setDaemonAddressAsync(currentDaemonAddress);
         remoteNodeConnected = false;
     }
 
