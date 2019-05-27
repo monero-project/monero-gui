@@ -71,6 +71,7 @@ Rectangle {
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
                     Layout.fillWidth: true
+                    textFormat: Text.RichText
 
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
