@@ -209,7 +209,7 @@ private:
     explicit WalletManager(QObject *parent = 0);
     static WalletManager * m_instance;
     Monero::WalletManager * m_pimpl;
-    QMutex m_mutex;
+    mutable QMutex m_mutex;
     QPointer<Wallet> m_currentWallet;
 
     QWaitCondition m_cond_pass;
