@@ -88,8 +88,8 @@ public:
   }
 
 private:
-  Monero::Wallet * m_wallet;
   WalletManager * m_mgr;
+  Monero::Wallet * m_wallet;
 };
 
 WalletManager * WalletManager::m_instance = nullptr;
@@ -281,13 +281,13 @@ QString WalletManager::errorString() const
     return tr("Unknown error");
 }
 
-bool WalletManager::moveWallet(const QString &src, const QString &dst)
+bool WalletManager::moveWallet(const QString &, const QString &)
 {
     return true;
 }
 
 
-QString WalletManager::walletLanguage(const QString &locale)
+QString WalletManager::walletLanguage(const QString &)
 {
     return "English";
 }
@@ -534,7 +534,7 @@ WalletManager::WalletManager(QObject *parent) : QObject(parent)
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
 }
 
-void WalletManager::onWalletPassphraseNeeded(Monero::Wallet * wallet)
+void WalletManager::onWalletPassphraseNeeded(Monero::Wallet *)
 {
     m_mutex_pass.lock();
     m_passphrase_abort = false;
