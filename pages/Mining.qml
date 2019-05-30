@@ -258,12 +258,16 @@ Rectangle {
         }
     }
 
-    function update() {
+    function onMiningStatus(isMining) {
         var daemonReady = walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && appWindow.daemonSynced
-        appWindow.isMining = walletManager.isMining()
+        appWindow.isMining = isMining;
         updateStatusText()
         startSoloMinerButton.enabled = !appWindow.isMining && daemonReady
         stopSoloMinerButton.enabled = !startSoloMinerButton.enabled && daemonReady
+    }
+
+    function update() {
+        walletManager.miningStatusAsync();
     }
 
     MoneroComponents.StandardDialog {
@@ -285,5 +289,9 @@ Rectangle {
 
     function onPageClosed() {
         timer.running = false
+    }
+
+    Component.onCompleted: {
+        walletManager.miningStatus.connect(onMiningStatus);
     }
 }

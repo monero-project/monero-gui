@@ -159,7 +159,7 @@ public:
     Q_INVOKABLE bool localDaemonSynced() const;
     Q_INVOKABLE bool isDaemonLocal(const QString &daemon_address) const;
 
-    Q_INVOKABLE bool isMining() const;
+    Q_INVOKABLE void miningStatusAsync() const;
     Q_INVOKABLE bool startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery);
     Q_INVOKABLE bool stopMining();
 
@@ -201,12 +201,16 @@ signals:
     void deviceButtonPressed();
     void walletClosed(const QString &walletAddress);
     void checkUpdatesComplete(const QString &result) const;
+    void miningStatus(bool isMining) const;
 
 public slots:
 private:
     friend class WalletPassphraseListenerImpl;
 
     explicit WalletManager(QObject *parent = 0);
+
+    bool isMining() const;
+
     static WalletManager * m_instance;
     Monero::WalletManager * m_pimpl;
     QMutex m_mutex;

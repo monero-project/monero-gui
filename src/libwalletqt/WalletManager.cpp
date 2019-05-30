@@ -381,6 +381,13 @@ bool WalletManager::isMining() const
     return m_pimpl->isMining();
 }
 
+void WalletManager::miningStatusAsync() const
+{
+    QtConcurrent::run([this] {
+        emit miningStatus(isMining());
+    });
+}
+
 bool WalletManager::startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery)
 {
     if(threads == 0)
