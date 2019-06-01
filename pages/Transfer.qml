@@ -396,17 +396,34 @@ Rectangle {
       }
 
       RowLayout {
+          Layout.topMargin: 4
           StandardButton {
               id: sendButton
               rightIcon: "qrc:///images/rightArrow.png"
               rightIconInactive: "qrc:///images/rightArrowInactive.png"
-              Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
               enabled: {
                 updateSendButton()
               }
+              visible: !appWindow.viewOnly && (!appWindow.viewOnly === !persistentSettings.doNotRelayMode)
               onClicked: {
                   console.log("Transfer: paymentClicked")
+                  var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
+                  console.log("priority: " + priority)
+                  console.log("amount: " + amountLine.text)
+                  addressLine.text = addressLine.text.trim()
+                  setPaymentId(paymentIdLine.text.trim());
+                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
+              }
+          }
+
+          StandardButton {
+              id: saveTxButton
+              text: qsTr("Create tx file") + translationManager.emptyString
+              visible: appWindow.viewOnly || persistentSettings.doNotRelayMode
+              enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+              onClicked: {
+                  console.log("Transfer: saveTx Clicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                   console.log("priority: " + priority)
                   console.log("amount: " + amountLine.text)
@@ -475,24 +492,6 @@ Rectangle {
             }
 
             StandardButton {
-                id: saveTxButton
-                text: qsTr("Create tx file") + translationManager.emptyString
-                visible: appWindow.viewOnly
-                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
-                small: true
-                onClicked: {
-                    console.log("Transfer: saveTx Clicked")
-                    var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
-                    console.log("priority: " + priority)
-                    console.log("amount: " + amountLine.text)
-                    addressLine.text = addressLine.text.trim()
-                    setPaymentId(paymentIdLine.text.trim());
-                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
-
-                }
-            }
-
-            StandardButton {
                 id: signTxButton
                 text: qsTr("Sign tx file") + translationManager.emptyString
                 small: true
@@ -507,7 +506,7 @@ Rectangle {
                 id: submitTxButton
                 text: qsTr("Submit tx file") + translationManager.emptyString
                 small: true
-                visible: appWindow.viewOnly
+                visible: appWindow.viewOnly || persistentSettings.doNotRelayMode
                 enabled: pageRoot.enabled
                 onClicked: {
                     console.log("Transfer: submit tx clicked")

@@ -1376,6 +1376,7 @@ ApplicationWindow {
         property int segregationHeight: 0
         property int kdfRounds: 1
         property bool hideBalance: false
+        property bool doNotRelayMode: false
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property string remoteNodeService: ""
