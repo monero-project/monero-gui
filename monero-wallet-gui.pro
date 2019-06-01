@@ -13,15 +13,16 @@ CONFIG += c++11 link_pkgconfig
 packagesExist(libusb-1.0) {
     PKGCONFIG += libusb-1.0
 }
-packagesExist(protobuf) {
-    PKGCONFIG += protobuf
-}
 packagesExist(hidapi-libusb) {
     PKGCONFIG += hidapi-libusb
 }
 !win32 {
     QMAKE_CXXFLAGS += -fPIC -fstack-protector -fstack-protector-strong
     QMAKE_LFLAGS += -fstack-protector -fstack-protector-strong
+
+    packagesExist(protobuf) {
+        PKGCONFIG += protobuf
+    }
 }
 
 # cleaning "auto-generated" bitmonero directory on "make distclean"
@@ -260,7 +261,6 @@ win32 {
     LIBS+= \
         -Wl,-Bdynamic \
         -lwinscard \
-        -lws2_32 \
         -lwsock32 \
         -lIphlpapi \
         -lcrypt32 \
@@ -286,7 +286,8 @@ win32 {
         -lsetupapi \
         -lssl \
         -lsodium \
-        -lcrypto
+        -lcrypto \
+        -lws2_32
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
