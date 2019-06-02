@@ -92,162 +92,72 @@ Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversi
 Source: "bin\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
 
-; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
-; Source: "bin\monero-utils-deserialize.exe"; DestDir: "{app}"; Flags: ignoreversion
-
-; Various .qm files for translating the wallet UI "on the fly" into all supported languages
-Source: "bin\translations\*"; DestDir: "{app}\translations"; Flags: recursesubdirs ignoreversion
-
-; Core Qt runtime
-; Use wildcards to deal with differences in those files between Qt version, like
-;  "Qt5MultimediaQuick_p.dll" versus "Qt5MultimediaQuick.dll" and "Qt5RemoteObjects.dll" as new file
-Source: "bin\Qt5*.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Qt QML elements like the local files selector "FolderListModel" and "Settings"
-Source: "bin\Qt\*"; DestDir: "{app}\Qt"; Flags: recursesubdirs ignoreversion
-
-; Qt audio support
-Source: "bin\audio\*"; DestDir: "{app}\audio"; Flags: recursesubdirs ignoreversion
-
-; Qt bearer / network connection management
-Source: "bin\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs ignoreversion
-
-; Qt Windows platform plugins	
-Source: "bin\platforms\*"; DestDir: "{app}\platforms"; Flags: recursesubdirs ignoreversion
-Source: "bin\platforminputcontexts\*"; DestDir: "{app}\platforminputcontexts"; Flags: recursesubdirs ignoreversion
-; No more "styles" subdirectory in 0.12.3.0
-
-; Qt support for SVG icons	
-Source: "bin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: recursesubdirs ignoreversion
-
-; Qt support for various image formats (JPEG, BMP, SVG etc)	
-Source: "bin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: recursesubdirs ignoreversion
-
-; Qt multimedia support	
-Source: "bin\QtMultimedia\*"; DestDir: "{app}\QtMultimedia"; Flags: recursesubdirs ignoreversion
-Source: "bin\mediaservice\*"; DestDir: "{app}\mediaservice"; Flags: recursesubdirs ignoreversion
-
-; Qt support for "m3u" playlists
-; candidate for elimination? Don't think the GUI wallet needs such playlists	
-Source: "bin\playlistformats\*"; DestDir: "{app}\playlistformats"; Flags: recursesubdirs ignoreversion
-
-; Qt graphical effects as part of the core runtime, effects like blurring and blending
-Source: "bin\QtGraphicalEffects\*"; DestDir: "{app}\QtGraphicalEffects"; Flags: recursesubdirs ignoreversion
-
-; Qt "private" directory with "effects"
-Source: "bin\private\*"; DestDir: "{app}\private"; Flags: recursesubdirs ignoreversion
-
-; Qt QML files
-Source: "bin\QtQml\*"; DestDir: "{app}\QtQml"; Flags: recursesubdirs ignoreversion
-
-; Qt Quick files
-Source: "bin\QtQuick\*"; DestDir: "{app}\QtQuick"; Flags: recursesubdirs ignoreversion
-Source: "bin\QtQuick.2\*"; DestDir: "{app}\QtQuick.2"; Flags: recursesubdirs ignoreversion
-
-; Qt Quick Controls 2 modules of the Qt Toolkit
-Source: "bin\Material\*"; DestDir: "{app}\Material"; Flags: recursesubdirs ignoreversion
-Source: "bin\Universal\*"; DestDir: "{app}\Universal"; Flags: recursesubdirs ignoreversion
-
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
-Source: "bin\scenegraph\*"; DestDir: "{app}\scenegraph"; Flags: recursesubdirs ignoreversion
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Mesa, open-source OpenGL implementation; part of "low-level graphics" support
 Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-; Left out subdirectory "qmltooling" with the Qt QML debugger: Probably not relevant in an end-user package
 
-; Microsoft Direct3D runtime
-Source: "bin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Delete any files and directories that were installed by previous installer versions but are not
+; needed anymore, thanks to the static linking of the GUI wallet exe - all those things are now
+; neatly contained in that single exe file;
+; InnoSetup does NOT automatically delete objects not present anymore in a new version.
+; Deleting them is simpler and faster than forcing a full re-install.
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\translations"
+Type: files; Name: "{app}\Qt5*.dll"
+Type: filesandordirs; Name: "{app}\Qt"
+Type: filesandordirs; Name: "{app}\audio"
+Type: filesandordirs; Name: "{app}\bearer"
+Type: filesandordirs; Name: "{app}\platforms"
+Type: filesandordirs; Name: "{app}\platforminputcontexts"
+Type: filesandordirs; Name: "{app}\iconengines"
+Type: filesandordirs; Name: "{app}\imageformats"
+Type: filesandordirs; Name: "{app}\QtMultimedia"
+Type: filesandordirs; Name: "{app}\mediaservice"
+Type: filesandordirs; Name: "{app}\playlistformats"
+Type: filesandordirs; Name: "{app}\QtGraphicalEffects"
+Type: filesandordirs; Name: "{app}\private"
+Type: filesandordirs; Name: "{app}\QtQml"
+Type: filesandordirs; Name: "{app}\QtQuick"
+Type: filesandordirs; Name: "{app}\QtQuick.2"
+Type: filesandordirs; Name: "{app}\Material"
+Type: filesandordirs; Name: "{app}\Universal"
+Type: filesandordirs; Name: "{app}\scenegraph"
+Type: files; Name: "{app}\D3Dcompiler_47.dll"
+Type: files; Name: "{app}\libbz2-1.dll"
+Type: files; Name: "{app}\libEGL.dll"
+Type: files; Name: "{app}\libGLESV2.dll"
+Type: files; Name: "{app}\libfreetype-6.dll"
+Type: files; Name: "{app}\libgcc_s_seh-1.dll"
+Type: files; Name: "{app}\libglib-2.0-0.dll"
+Type: files; Name: "{app}\libgraphite2.dll"
+Type: files; Name: "{app}\libharfbuzz-0.dll"
+Type: files; Name: "{app}\libiconv-2.dll"
+Type: files; Name: "{app}\libicudt??.dll"
+Type: files; Name: "{app}\libicuin??.dll"
+Type: files; Name: "{app}\libicuio??.dll"
+Type: files; Name: "{app}\libicutu??.dll"
+Type: files; Name: "{app}\libicuuc??.dll"
+Type: files; Name: "{app}\libintl-8.dll"
+Type: files; Name: "{app}\libjpeg-8.dll"
+Type: files; Name: "{app}\liblcms2-2.dll"
+Type: files; Name: "{app}\liblzma-5.dll"
+Type: files; Name: "{app}\libmng-2.dll"
+Type: files; Name: "{app}\libpcre-1.dll"
+Type: files; Name: "{app}\libpcre16-0.dll"
+Type: files; Name: "{app}\libpcre2-16-0.dll"
+Type: files; Name: "{app}\libpng16-16.dll"
+Type: files; Name: "{app}\libstdc++-6.dll"
+Type: files; Name: "{app}\libtiff-5.dll"
+Type: files; Name: "{app}\libwinpthread-1.dll"
+Type: files; Name: "{app}\zlib1.dll"
+Type: files; Name: "{app}\libssp-0.dll"
+Type: files; Name: "{app}\libhidapi-0.dll"
+Type: files; Name: "{app}\libeay32.dll"
+Type: files; Name: "{app}\ssleay32.dll"
 
-; bzip2 support
-Source: "bin\libbz2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; ANGLE ("Almost Native Graphics Layer Engine") support, as used by Qt
-Source: "bin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; FreeType font engine, as used by Qt
-Source: "bin\libfreetype-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; GCC runtime, x64 version
-Source: "bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; GLib, low level core library e.g. for GNOME and GTK+
-; Really needed under Windows?
-Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Graphite font support
-; Really needed?
-Source: "bin\libgraphite2.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; HarfBuzz OpenType text shaping engine
-; Really needed?
-Source: "bin\libharfbuzz-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; LibIconv, conversions between character encodings
-Source: "bin\libiconv-2.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; ICU, International Components for Unicode
-; After changes for supporting UTF-8 path and file names by using Boost Locale, all those 5
-; ICU libraries are needed starting from 0.12.0.0
-; Use wildcards instead of specific version number like 61 because that seems to change frequently
-Source: "bin\libicudt??.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuin??.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuio??.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicutu??.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libicuuc??.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Library for native language support, part of GNU gettext
-Source: "bin\libintl-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; JasPer, support for JPEG-2000
-; was present in 0.10.3.1, not present anymore in 0.11.1.0 and after
-; Source: "bin\libjasper-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; libjpeg, C library for reading and writing JPEG image files
-Source: "bin\libjpeg-8.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Little CMS, color management system
-Source: "bin\liblcms2-2.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; XZ Utils, LZMA compression library
-Source: "bin\liblzma-5.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; MNG / Portable Network Graphics ("animated PNG") 
-Source: "bin\libmng-2.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; PCRE, Perl Compatible Regular Expressions
-; "libpcre2-16-0.dll" is new for 0.12.0.0
-; Uclear whether "libpcre16-0.dll" is still needed; some versions of "Qt5Core.dll" seem to reference it, some not
-Source: "bin\libpcre-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libpcre16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\libpcre2-16-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; libpng, the official PNG reference library
-Source: "bin\libpng16-16.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; libstdc++, GNU Standard C++ Library
-Source: "bin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; LibTIFF, TIFF Library and Utilities
-Source: "bin\libtiff-5.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; C++ threading support
-Source: "bin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; zlib compression library
-Source: "bin\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Stack protection
-Source: "bin\libssp-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; HIDAPI, library for communicating with USB and Bluetooth devices, for hardware wallets
-Source: "bin\libhidapi-0.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; OpenSSL shared libraries
-Source: "bin\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Tasks]
 Name: desktopicon; Description: "Create a &desktop icon"; GroupDescription: "Additional icons:";
