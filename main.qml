@@ -157,7 +157,6 @@ ApplicationWindow {
         else if(seq === "Ctrl+I") middlePanel.state = "Sign"
         else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
-        else if(seq === "Ctrl+Y") leftPanel.keysClicked()
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+T") middlePanel.state = "Account"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
@@ -1734,8 +1733,6 @@ ApplicationWindow {
                 }
                 updateBalance();
             }
-
-            onKeysClicked: Utils.showSeedPage();
             
             onAccountClicked: {
                 middlePanel.state = "Account";
