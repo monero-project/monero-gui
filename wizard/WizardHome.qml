@@ -180,23 +180,34 @@ Rectangle {
                 visible: showAdvancedCheckbox.checked && appWindow.walletMode >= 2
                 columns: 4
                 columnSpacing: 20
+                Layout.fillWidth: true
 
-                MoneroComponents.StandardDropdown {
-                    id: networkTypeDropdown
-                    dataModel: networkTypeModel
-                    Layout.fillWidth: true
-                    Layout.topMargin: 41
+                ColumnLayout {
+                    Layout.topMargin: 4
 
-                    onChanged: {
-                        var item = dataModel.get(currentIndex).nettype.toLowerCase();
-                        if(item === "mainnet") {
-                            persistentSettings.nettype = NetworkType.MAINNET
-                        } else if(item === "stagenet"){
-                            persistentSettings.nettype = NetworkType.STAGENET
-                        } else if(item === "testnet"){
-                            persistentSettings.nettype = NetworkType.TESTNET
+                    MoneroComponents.Label {
+                        text: qsTr("Change Network:") + translationManager.emptyString
+                        fontSize: 14
+                    }
+
+                    MoneroComponents.StandardDropdown {
+                        id: networkTypeDropdown
+                        dataModel: networkTypeModel
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: 180
+                        Layout.topMargin: 5
+
+                        onChanged: {
+                            var item = dataModel.get(currentIndex).nettype.toLowerCase();
+                            if(item === "mainnet") {
+                                persistentSettings.nettype = NetworkType.MAINNET
+                            } else if(item === "stagenet"){
+                                persistentSettings.nettype = NetworkType.STAGENET
+                            } else if(item === "testnet"){
+                                persistentSettings.nettype = NetworkType.TESTNET
+                            }
+                            appWindow.disconnectRemoteNode()
                         }
-                        appWindow.disconnectRemoteNode()
                     }
                 }
 
