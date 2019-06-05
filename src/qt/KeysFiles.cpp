@@ -138,7 +138,7 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
 
         this->addWalletKeysFile(WalletKeysFiles(modifiedAt.toSecsSinceEpoch(),
                                                 createdAt.toSecsSinceEpoch(),
-                                                wallet, networkType, address));
+                                                info.absoluteFilePath(), networkType, address));
     }
 }
 
