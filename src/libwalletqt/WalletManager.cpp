@@ -344,9 +344,11 @@ QString WalletManager::paymentIdFromAddress(const QString &address, NetworkType:
     return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), static_cast<Monero::NetworkType>(nettype)));
 }
 
-void WalletManager::setDaemonAddress(const QString &address)
+void WalletManager::setDaemonAddressAsync(const QString &address)
 {
-    m_pimpl->setDaemonAddress(address.toStdString());
+    QtConcurrent::run([this, address] {
+        m_pimpl->setDaemonAddress(address.toStdString());
+    });
 }
 
 bool WalletManager::connected() const

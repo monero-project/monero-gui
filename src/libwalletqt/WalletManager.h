@@ -150,7 +150,7 @@ public:
 
     Q_INVOKABLE QString paymentIdFromAddress(const QString &address, NetworkType::Type nettype) const;
 
-    Q_INVOKABLE void setDaemonAddress(const QString &address);
+    Q_INVOKABLE void setDaemonAddressAsync(const QString &address);
     Q_INVOKABLE bool connected() const;
     Q_INVOKABLE quint64 networkDifficulty() const;
     Q_INVOKABLE quint64 blockchainHeight() const;
