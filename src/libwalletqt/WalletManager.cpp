@@ -378,8 +378,14 @@ double WalletManager::miningHashRate() const
 
 bool WalletManager::isMining() const
 {
-    if(!m_currentWallet->connected())
-        return false;
+    {
+        QMutexLocker locker(&m_mutex);
+        if (m_currentWallet == nullptr || !m_currentWallet->connected())
+        {
+            return false;
+        }
+    }
+
     return m_pimpl->isMining();
 }
 
@@ -414,6 +420,7 @@ QString WalletManager::resolveOpenAlias(const QString &address) const
 }
 bool WalletManager::parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const
 {
+    QMutexLocker locker(&m_mutex);
     if (m_currentWallet)
         return m_currentWallet->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error);
     return false;
