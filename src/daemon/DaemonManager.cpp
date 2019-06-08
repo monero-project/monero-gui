@@ -100,6 +100,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     arguments << "--check-updates" << "disabled";
+    arguments << "--rpc-ssl" << "disabled";
 
     // --max-concurrency based on threads available. max: 6
     int32_t concurrency = qBound(1, QThread::idealThreadCount() / 2, 6);
