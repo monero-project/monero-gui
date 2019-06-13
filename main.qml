@@ -293,6 +293,7 @@ ApplicationWindow {
 
         // Disconnect all listeners
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
+            currentWallet.heightRefreshed.disconnect(onHeightRefreshed);
             currentWallet.refreshed.disconnect(onWalletRefresh)
             currentWallet.updated.disconnect(onWalletUpdate)
             currentWallet.newBlock.disconnect(onWalletNewBlock)
@@ -351,6 +352,7 @@ ApplicationWindow {
         }
 
         // connect handlers
+        currentWallet.heightRefreshed.connect(onHeightRefreshed);
         currentWallet.refreshed.connect(onWalletRefresh)
         currentWallet.updated.connect(onWalletUpdate)
         currentWallet.newBlock.connect(onWalletNewBlock)
@@ -621,18 +623,7 @@ ApplicationWindow {
         remoteNodeConnected = false;
     }
 
-    function onWalletRefresh() {
-        console.log(">>> wallet refreshed")
-
-        // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet.connected()
-
-        // Wallet height
-        var bcHeight = currentWallet.blockChainHeight();
-
-        // Check daemon status
-        var dCurrentBlock = currentWallet.daemonBlockChainHeight();
-        var dTargetBlock = currentWallet.daemonBlockChainTargetHeight();
+    function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
@@ -681,6 +672,15 @@ ApplicationWindow {
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
 
         onWalletUpdate();
+    }
+
+    function onWalletRefresh() {
+        console.log(">>> wallet refreshed")
+
+        // Daemon connected
+        leftPanel.networkStatus.connected = currentWallet.connected()
+
+        currentWallet.refreshHeightAsync();
     }
 
     function startDaemon(flags){
