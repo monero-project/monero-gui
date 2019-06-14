@@ -348,6 +348,19 @@ void Wallet::setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, cons
     m_walletImpl->setSubaddressLabel(accountIndex, addressIndex, label.toStdString());
 }
 
+void Wallet::refreshHeightAsync() const
+{
+    QtConcurrent::run([this] {
+        QFuture<quint64> daemonHeight = QtConcurrent::run([this] {
+            return daemonBlockChainHeight();
+        });
+        QFuture<quint64> targetHeight = QtConcurrent::run([this] {
+            return daemonBlockChainTargetHeight();
+        });
+        emit heightRefreshed(blockChainHeight(), daemonHeight.result(), targetHeight.result());
+    });
+}
+
 quint64 Wallet::blockChainHeight() const
 {
     return m_walletImpl->blockChainHeight();

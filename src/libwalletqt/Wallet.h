@@ -181,15 +181,7 @@ public:
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
 
-    //! returns current wallet's block height
-    //! (can be less than daemon's blockchain height when wallet sync in progress)
-    Q_INVOKABLE quint64 blockChainHeight() const;
-
-    //! returns daemon's blockchain height
-    Q_INVOKABLE quint64 daemonBlockChainHeight() const;
-
-    //! returns daemon's blockchain target height
-    Q_INVOKABLE quint64 daemonBlockChainTargetHeight() const;
+    Q_INVOKABLE void refreshHeightAsync() const;
 
     //! export/import key images
     Q_INVOKABLE bool exportKeyImages(const QString& path);
@@ -355,6 +347,7 @@ signals:
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
     void transactionCommitted(bool status, PendingTransaction *t, QStringList txid);
+    void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
@@ -365,6 +358,17 @@ private:
     Wallet(QObject * parent = nullptr);
     Wallet(Monero::Wallet *w, QObject * parent = 0);
     ~Wallet();
+
+    //! returns current wallet's block height
+    //! (can be less than daemon's blockchain height when wallet sync in progress)
+    quint64 blockChainHeight() const;
+
+    //! returns daemon's blockchain height
+    quint64 daemonBlockChainHeight() const;
+
+    //! returns daemon's blockchain target height
+    quint64 daemonBlockChainTargetHeight() const;
+
 private:
     friend class WalletManager;
     friend class WalletListenerImpl;
