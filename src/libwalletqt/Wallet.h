@@ -179,6 +179,10 @@ public:
     Q_INVOKABLE void addSubaddress(const QString& label);
     Q_INVOKABLE QString getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) const;
     Q_INVOKABLE void setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label);
+    Q_INVOKABLE void deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, const QString &paymentId);
+
+    //! hw-device backed wallets
+    Q_INVOKABLE bool isHwBacked() const;
 
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
@@ -353,6 +357,7 @@ signals:
     void deviceButtonPressed();
     void transactionCommitted(bool status, PendingTransaction *t, QStringList txid);
     void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
+    void deviceShowAddressShowed();
 
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);

@@ -31,6 +31,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -306,6 +307,20 @@ Rectangle {
                     onClicked: {
                         clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
                         appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
+                    }
+                }
+
+                MoneroComponents.StandardButton {
+                    text: FontAwesome.eye
+                    label.font.family: FontAwesome.fontFamily
+                    fontSize: 24
+                    width: 36
+                    visible: appWindow.currentWallet && appWindow.currentWallet.isHwBacked()
+                    onClicked: {
+                        appWindow.currentWallet.deviceShowAddressAsync(
+                            appWindow.currentWallet.currentSubaddressAccount,
+                            appWindow.current_subaddress_table_index,
+                            '');
                     }
                 }
             }

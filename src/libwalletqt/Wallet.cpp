@@ -253,6 +253,11 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
     });
 }
 
+bool Wallet::isHwBacked() const
+{
+    return m_walletImpl->getDeviceType() != Monero::Wallet::Device_Software;
+}
+
 //! create a view only wallet
 bool Wallet::createViewOnly(const QString &path, const QString &password) const
 {
@@ -334,6 +339,13 @@ QString Wallet::getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) c
 void Wallet::setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label)
 {
     m_walletImpl->setSubaddressLabel(accountIndex, addressIndex, label.toStdString());
+}
+void Wallet::deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, const QString &paymentId)
+{
+    m_scheduler.run([this, accountIndex, addressIndex, paymentId] {
+        m_walletImpl->deviceShowAddress(accountIndex, addressIndex, paymentId.toStdString());
+        emit deviceShowAddressShowed();
+    });
 }
 
 void Wallet::refreshHeightAsync()
