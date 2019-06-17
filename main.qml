@@ -1384,6 +1384,7 @@ ApplicationWindow {
         property bool blackTheme: true
 
         property bool fiatPriceEnabled: false
+        property bool fiatPriceToggle: false
         property string fiatPriceProvider: "kraken"
         property string fiatPriceCurrency: "xmrusd"
 
