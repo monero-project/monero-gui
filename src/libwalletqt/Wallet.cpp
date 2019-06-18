@@ -662,6 +662,25 @@ QString Wallet::getTxKey(const QString &txid) const
   return QString::fromStdString(m_walletImpl->getTxKey(txid.toStdString()));
 }
 
+void Wallet::getTxKeyAsync(const QString &txid, const QJSValue &ref)
+{
+    QFuture<QString> future = QtConcurrent::run(this, &Wallet::getTxKey, txid);
+    auto watcher = new QFutureWatcher<QString>(this);
+
+    connect(watcher, &QFutureWatcher<QString>::finished,
+            this, [watcher, txid, ref]() {
+          QFuture<QString> future = watcher->future();
+          watcher->deleteLater();
+
+          auto txKey = future.result();
+          if (ref.isCallable()){
+              QJSValue cb(ref);
+              cb.call(QJSValueList {txid, txKey});
+          }
+        });
+    watcher->setFuture(future);
+}
+
 QString Wallet::checkTxKey(const QString &txid, const QString &tx_key, const QString &address)
 {
     uint64_t received;
@@ -678,6 +697,25 @@ QString Wallet::getTxProof(const QString &txid, const QString &address, const QS
     if (result.empty())
         result = "error|" + m_walletImpl->errorString();
     return QString::fromStdString(result);
+}
+
+void Wallet::getTxProofAsync(const QString &txid, const QString &address, const QString &message, const QJSValue &ref)
+{
+    QFuture<QString> future = QtConcurrent::run(this, &Wallet::getTxProof, txid, address, message);
+    auto watcher = new QFutureWatcher<QString>(this);
+
+    connect(watcher, &QFutureWatcher<QString>::finished,
+            this, [watcher, txid, ref]() {
+          QFuture<QString> future = watcher->future();
+          watcher->deleteLater();
+
+          auto proof = future.result();
+          if (ref.isCallable()){
+            QJSValue cb(ref);
+            cb.call(QJSValueList {txid, proof});
+          }
+        });
+    watcher->setFuture(future);
 }
 
 QString Wallet::checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature)
@@ -697,6 +735,25 @@ Q_INVOKABLE QString Wallet::getSpendProof(const QString &txid, const QString &me
     if (result.empty())
         result = "error|" + m_walletImpl->errorString();
     return QString::fromStdString(result);
+}
+
+void Wallet::getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &ref)
+{
+  QFuture<QString> future = QtConcurrent::run(this, &Wallet::getSpendProof, txid, message);
+  auto watcher = new QFutureWatcher<QString>(this);
+
+  connect(watcher, &QFutureWatcher<QString>::finished,
+          this, [watcher, txid, ref]() {
+        QFuture<QString> future = watcher->future();
+        watcher->deleteLater();
+
+        auto proof = future.result();
+        if (ref.isCallable()){
+          QJSValue cb(ref);
+          cb.call(QJSValueList {txid, proof});
+        }
+      });
+  watcher->setFuture(future);
 }
 
 Q_INVOKABLE QString Wallet::checkSpendProof(const QString &txid, const QString &message, const QString &signature) const
