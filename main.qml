@@ -2106,8 +2106,7 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != "undefined" && daemonManager.running(persistentSettings.nettype)) {
-
+        if(typeof daemonManager != "undefined" && daemonRunning) {
             // Show confirmation dialog
             confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
             confirmationDialog.text  = qsTr("Daemon will still be running in background when GUI is closed.");
