@@ -132,7 +132,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     // Start start watcher
     QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::startWatcher, nettype);
-    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>(this);
     connect(watcher, &QFutureWatcher<bool>::finished,
             this, [this, watcher]() {
         QFuture<bool> future = watcher->future();
@@ -156,7 +156,7 @@ bool DaemonManager::stop(NetworkType::Type nettype)
 
     // Start stop watcher - Will kill if not shutting down
     QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::stopWatcher, nettype);
-    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>(this);
     connect(watcher, &QFutureWatcher<bool>::finished,
             this, [this, watcher]() {
         QFuture<bool> future = watcher->future();

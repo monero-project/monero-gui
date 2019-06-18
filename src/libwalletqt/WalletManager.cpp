@@ -147,7 +147,7 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
 {
     QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
                                         path, password, nettype, kdfRounds);
-    QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
+    QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>(this);
 
     connect(watcher, &QFutureWatcher<Wallet*>::finished,
             this, [this, watcher]() {
@@ -222,7 +222,7 @@ void WalletManager::createWalletFromDeviceAsync(const QString &path, const QStri
 
   QFuture<Wallet *> future = QtConcurrent::run(lmbd);
 
-  QFutureWatcher<Wallet *> * watcher = new QFutureWatcher<Wallet *>();
+  QFutureWatcher<Wallet *> * watcher = new QFutureWatcher<Wallet *>(this);
 
   connect(watcher, &QFutureWatcher<Wallet *>::finished,
           this, [this, watcher]() {
@@ -250,7 +250,7 @@ QString WalletManager::closeWallet()
 void WalletManager::closeWalletAsync()
 {
     QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
-    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
+    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>(this);
 
     connect(watcher, &QFutureWatcher<QString>::finished,
             this, [this, watcher]() {
@@ -346,9 +346,11 @@ QString WalletManager::paymentIdFromAddress(const QString &address, NetworkType:
 
 void WalletManager::setDaemonAddressAsync(const QString &address)
 {
-    QtConcurrent::run([this, address] {
+    auto *watcher = new QFutureWatcher<void>(this);
+    connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+    watcher->setFuture(QtConcurrent::run([this, address] {
         m_pimpl->setDaemonAddress(address.toStdString());
-    });
+    }));
 }
 
 bool WalletManager::connected() const
@@ -389,11 +391,13 @@ bool WalletManager::isMining() const
     return m_pimpl->isMining();
 }
 
-void WalletManager::miningStatusAsync() const
+void WalletManager::miningStatusAsync()
 {
-    QtConcurrent::run([this] {
+    auto *watcher = new QFutureWatcher<void>(this);
+    connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
+    watcher->setFuture(QtConcurrent::run([this] {
         emit miningStatus(isMining());
-    });
+    }));
 }
 
 bool WalletManager::startMining(const QString &address, quint32 threads, bool backgroundMining, bool ignoreBattery)
@@ -501,11 +505,11 @@ bool WalletManager::saveQrCode(const QString &code, const QString &path) const
     return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
-void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir) const
+void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir)
 {
     QFuture<QString> future = QtConcurrent::run(this, &WalletManager::checkUpdates,
                                         software, subdir);
-    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
+    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>(this);
     connect(watcher, &QFutureWatcher<Wallet*>::finished,
             this, [this, watcher]() {
         QFuture<QString> future = watcher->future();

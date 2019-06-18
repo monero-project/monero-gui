@@ -151,7 +151,7 @@ NetworkType::Type Wallet::nettype() const
 void Wallet::updateConnectionStatusAsync()
 {
     QFuture<Monero::Wallet::ConnectionStatus> future = QtConcurrent::run(m_walletImpl, &Monero::Wallet::connected);
-    QFutureWatcher<Monero::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Monero::Wallet::ConnectionStatus>();
+    QFutureWatcher<Monero::Wallet::ConnectionStatus> *connectionWatcher = new QFutureWatcher<Monero::Wallet::ConnectionStatus>(this);
 
     connect(connectionWatcher, &QFutureWatcher<Monero::Wallet::ConnectionStatus>::finished, [=]() {
         QFuture<Monero::Wallet::ConnectionStatus> future = connectionWatcher->future();
@@ -248,7 +248,7 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
 
     QFuture<bool> future = QtConcurrent::run(this, &Wallet::init,
                                   daemonAddress, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
-    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>(this);
 
     connect(watcher, &QFutureWatcher<bool>::finished,
             this, [this, watcher, daemonAddress, upperTransactionLimit, isRecovering, restoreHeight]() {
@@ -447,7 +447,7 @@ void Wallet::createTransactionAsync(const QString &dst_addr, const QString &paym
 {
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransaction,
                                   dst_addr, payment_id,amount, mixin_count, priority);
-    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>(this);
 
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher,dst_addr,payment_id,mixin_count]() {
@@ -475,7 +475,7 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
 {
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createTransactionAll,
                                   dst_addr, payment_id, mixin_count, priority);
-    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>(this);
 
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher,dst_addr,payment_id,mixin_count]() {
@@ -496,7 +496,7 @@ PendingTransaction *Wallet::createSweepUnmixableTransaction()
 void Wallet::createSweepUnmixableTransactionAsync()
 {
     QFuture<PendingTransaction*> future = QtConcurrent::run(this, &Wallet::createSweepUnmixableTransaction);
-    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>();
+    QFutureWatcher<PendingTransaction*> * watcher = new QFutureWatcher<PendingTransaction*>(this);
 
     connect(watcher, &QFutureWatcher<PendingTransaction*>::finished,
             this, [this, watcher]() {
@@ -529,7 +529,7 @@ void Wallet::commitTransactionAsync(PendingTransaction *t)
   QStringList txid(t->txid());
   QFuture<bool> future = QtConcurrent::run(t, &PendingTransaction::commit);
 
-  QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
+  QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>(this);
 
   connect(watcher, &QFutureWatcher<bool>::finished,
           this, [this, watcher, t, txid]() {
