@@ -51,9 +51,7 @@ ApplicationWindow {
 
     property var currentItem
     property bool hideBalanceForced: false
-    property bool whatIsEnable: false
     property bool ctrlPressed: false
-    property bool osx: false
     property alias persistentSettings : persistentSettings
     property var currentWallet;
     property var transaction;
@@ -81,7 +79,6 @@ ApplicationWindow {
     // Default daemon addresses
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
-    property bool startLocalNodeCancelled: false
     property int disconnectedEpoch: 0
     property int estimatedBlockchainSize: 75 // GB
     property alias viewState: rootItem.state
@@ -1570,7 +1567,6 @@ ApplicationWindow {
         onRejected: {
             middlePanel.settingsView.settingsStateViewState = "Node";
             loadPage("Settings");
-            startLocalNodeCancelled = true
         }
 
     }
