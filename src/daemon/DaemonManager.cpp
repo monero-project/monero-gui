@@ -131,19 +131,12 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     // Start start watcher
-    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::startWatcher, nettype);
-    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
-    connect(watcher, &QFutureWatcher<bool>::finished,
-            this, [this, watcher]() {
-        QFuture<bool> future = watcher->future();
-        watcher->deleteLater();
-        if(future.result())
+    m_scheduler.run([this, nettype] {
+        if (startWatcher(nettype))
             emit daemonStarted();
         else
             emit daemonStartFailure();
     });
-    watcher->setFuture(future);
-
 
     return true;
 }
@@ -155,17 +148,12 @@ bool DaemonManager::stop(NetworkType::Type nettype)
     qDebug() << message;
 
     // Start stop watcher - Will kill if not shutting down
-    QFuture<bool> future = QtConcurrent::run(this, &DaemonManager::stopWatcher, nettype);
-    QFutureWatcher<bool> * watcher = new QFutureWatcher<bool>();
-    connect(watcher, &QFutureWatcher<bool>::finished,
-            this, [this, watcher]() {
-        QFuture<bool> future = watcher->future();
-        watcher->deleteLater();
-        if(future.result()) {
+    m_scheduler.run([this, nettype] {
+        if (stopWatcher(nettype))
+        {
             emit daemonStopped();
         }
     });
-    watcher->setFuture(future);
 
     return true;
 }
@@ -330,6 +318,7 @@ QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
 
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
+    , m_scheduler(this)
 {
 
     // Platform depetent path to monerod
@@ -343,4 +332,9 @@ DaemonManager::DaemonManager(QObject *parent)
         qCritical() << "no daemon binary defined for current platform";
         m_has_daemon = false;
     }
+}
+
+DaemonManager::~DaemonManager()
+{
+    m_scheduler.shutdownWaitForFinished();
 }
