@@ -1099,17 +1099,13 @@ Rectangle {
                             MoneroComponents.TextPlain {
                                 font.family: MoneroComponents.Style.fontRegular.name
                                 font.pixelSize: 15
-                                text: {
-                                    var txKey = currentWallet.getTxKey(hash)
-                                    if(txKey) return txKey;
-                                    else return "-"
-                                }
-
+                                text: qsTr("Click to reveal")
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
+                                state: "txkey_hidden"
 
                                 MouseArea {
-                                    state: "copyable"
+                                    state: "copyable_txkey"
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     onEntered: parent.color = MoneroComponents.Style.orange
@@ -1200,6 +1196,7 @@ Rectangle {
                             if(res[i].containsMouse === true){
                                 if(res[i].state === 'copyable' && res[i].parent.hasOwnProperty('text')) toClipboard(res[i].parent.text);
                                 if(res[i].state === 'copyable_address') root.toClipboard(address);
+                                if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
@@ -1577,8 +1574,18 @@ Rectangle {
         }
     }
 
+    function getTxKey(hash, elem){
+        if (elem.parent.state != 'ready'){
+            currentWallet.getTxKeyAsync(hash, function(hash, txKey) {
+                elem.parent.text = txKey ? txKey : '-';
+                elem.parent.state = 'ready';
+            });
+        }
+
+        toClipboard(elem.parent.text);
+    }
+
     function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
-        var tx_key = currentWallet.getTxKey(hash)
         var tx_note = currentWallet.getUserNote(hash)
         var rings = currentWallet.getRings(hash)
         var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
@@ -1586,10 +1593,12 @@ Rectangle {
         if (rings)
             rings = rings.replace(/\|/g, '\n')
 
-        informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
-        informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label);
-        informationPopup.onCloseCallback = null
-        informationPopup.open();
+        currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
+            informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
+            informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label);
+            informationPopup.onCloseCallback = null
+            informationPopup.open();
+        });
     }
 
     function showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex){

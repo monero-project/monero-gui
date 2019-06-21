@@ -33,6 +33,7 @@
 #include <QTime>
 #include <QMutex>
 #include <QList>
+#include <QJSValue>
 #include <QtConcurrent/QtConcurrent>
 
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
@@ -289,10 +290,13 @@ public:
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
+    Q_INVOKABLE void getTxKeyAsync(const QString &txid, const QJSValue &ref);
     Q_INVOKABLE QString checkTxKey(const QString &txid, const QString &tx_key, const QString &address);
     Q_INVOKABLE QString getTxProof(const QString &txid, const QString &address, const QString &message) const;
+    Q_INVOKABLE void getTxProofAsync(const QString &txid, const QString &address, const QString &message, const QJSValue &ref);
     Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
     Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
+    Q_INVOKABLE void getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &ref);
     Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();

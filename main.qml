@@ -1002,11 +1002,21 @@ ApplicationWindow {
                     ", address: ", address,
                     ", message: ", message);
 
-        var result;
+        function spendProofFallback(txid, result){
+            if (!result || result.indexOf("error|") === 0) {
+                currentWallet.getSpendProofAsync(txid, message, txProofComputed);
+            } else {
+                txProofComputed(txid, result);
+            }
+        }
+
         if (address.length > 0)
-            result = currentWallet.getTxProof(txid, address, message);
-        if (!result || result.indexOf("error|") === 0)
-            result = currentWallet.getSpendProof(txid, message);
+            currentWallet.getTxProofAsync(txid, address, message, spendProofFallback);
+        else
+            spendProofFallback(txid, null);
+    }
+
+    function txProofComputed(txid, result){
         informationPopup.title  = qsTr("Payment proof") + translationManager.emptyString;
         if (result.indexOf("error|") === 0) {
             var errorString = result.split("|")[1];
