@@ -76,7 +76,6 @@ ApplicationWindow {
     property bool isMining: false
     property int walletMode: persistentSettings.walletMode
     property var cameraUi
-    property bool remoteNodeConnected: false
     property bool androidCloseTapped: false;
     property int userLastActive;  // epoch
     // Default daemon addresses
@@ -607,7 +606,6 @@ ApplicationWindow {
         currentDaemonAddress = persistentSettings.remoteNodeAddress;
         currentWallet.initAsync(currentDaemonAddress);
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
-        remoteNodeConnected = true;
     }
 
     function disconnectRemoteNode() {
@@ -619,7 +617,6 @@ ApplicationWindow {
         currentDaemonAddress = localDaemonAddress
         currentWallet.initAsync(currentDaemonAddress);
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
-        remoteNodeConnected = false;
     }
 
     function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
