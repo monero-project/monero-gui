@@ -51,9 +51,7 @@ ApplicationWindow {
 
     property var currentItem
     property bool hideBalanceForced: false
-    property bool whatIsEnable: false
     property bool ctrlPressed: false
-    property bool osx: false
     property alias persistentSettings : persistentSettings
     property var currentWallet;
     property var transaction;
@@ -69,7 +67,6 @@ ApplicationWindow {
     property string walletName
     property bool viewOnly: false
     property bool foundNewBlock: false
-    property int timeToUnlock: 0
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
     property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
@@ -81,7 +78,6 @@ ApplicationWindow {
     // Default daemon addresses
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
-    property bool startLocalNodeCancelled: false
     property int disconnectedEpoch: 0
     property int estimatedBlockchainSize: 75 // GB
     property alias viewState: rootItem.state
@@ -592,7 +588,7 @@ ApplicationWindow {
             foundNewBlock = false;
             console.log("New block found - updating history")
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
-            timeToUnlock = currentWallet.history.minutesToUnlock
+            var timeToUnlock = currentWallet.history.minutesToUnlock
             leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
 
             if(middlePanel.state == "History")
@@ -1577,7 +1573,6 @@ ApplicationWindow {
         onRejected: {
             middlePanel.settingsView.settingsStateViewState = "Node";
             loadPage("Settings");
-            startLocalNodeCancelled = true
         }
 
     }
