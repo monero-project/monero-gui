@@ -471,14 +471,14 @@ ApplicationWindow {
         leftPanel.networkStatus.connected = status
 
         // update local daemon status.
-        if(!isMobile && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address))
+        if(!isMobile && walletManager.isDaemonLocal(currentDaemonAddress))
             daemonRunning = status;
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if(!isMobile && appWindow.walletMode >= 2 && walletManager.isDaemonLocal(appWindow.persistentSettings.daemon_address) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.nettype)){
+        if(!isMobile && appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.nettype)){
             daemonManagerDialog.open();
         }
         // initialize transaction history once wallet is initialized first time;
@@ -1359,7 +1359,6 @@ ApplicationWindow {
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string daemon_address: "localhost:" + getDefaultDaemonRpcPort(nettype)
         property string payment_id
         property int    restore_height : 0
         property bool   is_trusted_daemon : false
