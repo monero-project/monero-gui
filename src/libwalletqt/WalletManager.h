@@ -127,14 +127,6 @@ public:
     //! returns error description in human language
     Q_INVOKABLE QString errorString() const;
 
-
-    // wizard: both "create" and "recovery" paths.
-    // TODO: probably move it to "Wallet" interface
-    Q_INVOKABLE bool moveWallet(const QString &src, const QString &dst);
-    //! returns libwallet language name for given locale
-    Q_INVOKABLE QString walletLanguage(const QString &locale);
-
-
     //! since we can't call static method from QML, move it to this class
     Q_INVOKABLE QString displayAmount(quint64 amount) const;
     Q_INVOKABLE quint64 amountFromString(const QString &amount) const;
