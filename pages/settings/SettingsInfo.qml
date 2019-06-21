@@ -165,7 +165,7 @@ Rectangle {
                 id: restoreHeight
                 font.pixelSize: 14
                 textFormat: Text.RichText
-                text: (typeof currentWallet == "undefined") ? "" : qsTr("Wallet creation height: ") + translationManager.emptyString
+                text: (typeof currentWallet == "undefined") ? "" : qsTr("Wallet restore height: ") + translationManager.emptyString
             }
 
             MoneroComponents.TextBlock {

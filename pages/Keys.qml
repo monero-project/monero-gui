@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2019, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -93,6 +93,34 @@ Rectangle {
                 readOnly: true
                 wrapMode: Text.WordWrap
                 fontColor: MoneroComponents.Style.defaultFontColor
+            }
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+
+            MoneroComponents.Label {
+                Layout.fillWidth: true
+                fontSize: 22
+                Layout.topMargin: 10
+                text: qsTr("Wallet restore height") + translationManager.emptyString
+            }
+
+            Rectangle {
+                Layout.fillWidth: true
+                height: 2
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+                Layout.bottomMargin: 10
+            }
+
+            MoneroComponents.LineEdit {
+                Layout.fillWidth: true
+                readOnly: true
+                copyButton: true
+                labelText: qsTr("Block #") + translationManager.emptyString
+                fontSize: 16
+                text: currentWallet.walletCreationHeight
             }
         }
 
