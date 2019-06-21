@@ -323,7 +323,7 @@ Rectangle{
                 MoneroComponents.LineEdit {
                     id: daemonUsername
                     Layout.fillWidth: true
-                    labelText: "Daemon username"
+                    labelText: qsTr("Daemon username") + translationManager.emptyString
                     text: persistentSettings.daemonUsername
                     placeholderText: qsTr("(optional)") + translationManager.emptyString
                     placeholderFontSize: 15
@@ -334,7 +334,7 @@ Rectangle{
                 MoneroComponents.LineEdit {
                     id: daemonPassword
                     Layout.fillWidth: true
-                    labelText: "Daemon password"
+                    labelText: qsTr("Daemon password") + translationManager.emptyString
                     text: persistentSettings.daemonPassword
                     placeholderText: qsTr("Password") + translationManager.emptyString
                     echoMode: TextInput.Password
