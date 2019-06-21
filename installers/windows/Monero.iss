@@ -91,6 +91,9 @@ Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversio
 Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-prune.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-blockchain-stats.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
