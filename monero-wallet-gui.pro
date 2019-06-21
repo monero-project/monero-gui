@@ -385,7 +385,7 @@ TRANSLATIONS = $$files($$PWD/translations/monero-core_*.ts)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
-    LANGUPD_OPTIONS = -locations relative -no-ui-lines
+    LANGUPD_OPTIONS = -locations none -no-ui-lines -no-obsolete
     LANGREL_OPTIONS = -compress -nounfinished -removeidentical
 
 } else {
