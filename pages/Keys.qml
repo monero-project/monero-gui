@@ -244,6 +244,16 @@ Rectangle {
                 text: (viewOnlyQRCode.visible) ? qsTr("View Only Wallet") + translationManager.emptyString : qsTr("Spendable Wallet") + translationManager.emptyString
                 horizontalAlignment: Text.AlignHCenter
             }
+            
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Done") + translationManager.emptyString
+                onClicked: {
+                    loadPage("Settings")
+                }
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: 135
+            }
         }
     }
 
