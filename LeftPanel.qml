@@ -51,7 +51,6 @@ Rectangle {
     property alias progressBar : progressBar
     property alias daemonProgressBar : daemonProgressBar
     property alias minutesToUnlockTxt: unlockedBalanceLabel.text
-    property bool fiatBalance: false
     property int titleBarHeight: 50
     property string copyValue: ""
     Clipboard { id: clipboard }
@@ -220,7 +219,7 @@ Rectangle {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            fiatBalance = !fiatBalance
+                            persistentSettings.fiatPriceToggle = !persistentSettings.fiatPriceToggle
                         }
                     }
                 }
@@ -236,7 +235,7 @@ Rectangle {
                 width: 50
 
                 MoneroComponents.TextPlain {
-                    visible: !(fiatBalance && persistentSettings.fiatPriceEnabled)
+                    visible: !(persistentSettings.fiatPriceToggle && persistentSettings.fiatPriceEnabled)
                     id: balanceText
                     themeTransition: false
                     anchors.left: parent.left
@@ -309,7 +308,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceText
-                    visible: !(fiatBalance && persistentSettings.fiatPriceEnabled)
+                    visible: !(persistentSettings.fiatPriceToggle && persistentSettings.fiatPriceEnabled)
                     themeTransition: false
                     anchors.left: parent.left
                     anchors.leftMargin: 20
