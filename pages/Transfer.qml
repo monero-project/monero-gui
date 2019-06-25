@@ -144,7 +144,7 @@ Rectangle {
       }
 
       GridLayout {
-          columns: (isMobile)? 1 : 2
+          columns: (isMobile || !(appWindow.walletMode >= 2)) ? 1 : 2
           Layout.fillWidth: true
           columnSpacing: 32
 
@@ -182,6 +182,7 @@ Rectangle {
           }
 
           ColumnLayout {
+              visible: appWindow.walletMode >= 2
               Layout.fillWidth: true
               Label {
                   id: transactionPriority
