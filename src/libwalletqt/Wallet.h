@@ -37,6 +37,7 @@
 #include <QtConcurrent/QtConcurrent>
 
 #include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
+#include "qt/FutureScheduler.h"
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
@@ -182,7 +183,7 @@ public:
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
 
-    Q_INVOKABLE void refreshHeightAsync() const;
+    Q_INVOKABLE void refreshHeightAsync();
 
     //! export/import key images
     Q_INVOKABLE bool exportKeyImages(const QString& path);
@@ -290,13 +291,13 @@ public:
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
-    Q_INVOKABLE void getTxKeyAsync(const QString &txid, const QJSValue &ref);
+    Q_INVOKABLE void getTxKeyAsync(const QString &txid, const QJSValue &callback);
     Q_INVOKABLE QString checkTxKey(const QString &txid, const QString &tx_key, const QString &address);
     Q_INVOKABLE QString getTxProof(const QString &txid, const QString &address, const QString &message) const;
-    Q_INVOKABLE void getTxProofAsync(const QString &txid, const QString &address, const QString &message, const QJSValue &ref);
+    Q_INVOKABLE void getTxProofAsync(const QString &txid, const QString &address, const QString &message, const QJSValue &callback);
     Q_INVOKABLE QString checkTxProof(const QString &txid, const QString &address, const QString &message, const QString &signature);
     Q_INVOKABLE QString getSpendProof(const QString &txid, const QString &message) const;
-    Q_INVOKABLE void getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &ref);
+    Q_INVOKABLE void getSpendProofAsync(const QString &txid, const QString &message, const QJSValue &callback);
     Q_INVOKABLE QString checkSpendProof(const QString &txid, const QString &message, const QString &signature) const;
     // Rescan spent outputs
     Q_INVOKABLE bool rescanSpent();
@@ -356,7 +357,7 @@ signals:
     // emitted when transaction is created async
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
-    void connectionStatusChanged(ConnectionStatus status) const;
+    void connectionStatusChanged(int status) const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -406,6 +407,7 @@ private:
     QString m_daemonUsername;
     QString m_daemonPassword;
     Monero::WalletListener *m_walletListener;
+    FutureScheduler m_scheduler;
 };
 
 

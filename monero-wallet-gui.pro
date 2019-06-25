@@ -63,6 +63,7 @@ HEADERS += \
     src/libwalletqt/UnsignedTransaction.h \
     Logger.h \
     MainApp.h \
+    src/qt/FutureScheduler.h \
     src/qt/ipc.h \
     src/qt/mime.h \
     src/qt/KeysFiles.h \
@@ -96,6 +97,7 @@ SOURCES += main.cpp \
     src/libwalletqt/UnsignedTransaction.cpp \
     Logger.cpp \
     MainApp.cpp \
+    src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
     src/qt/mime.cpp \
     src/qt/KeysFiles.cpp \
