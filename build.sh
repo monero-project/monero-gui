@@ -100,7 +100,7 @@ fi
 
 # force version update
 get_tag
-echo "var GUI_VERSION = \"$TAGNAME\"" > version.js
+echo "var GUI_VERSION = \"v0.14.1.0\"" > version.js
 pushd "$MONERO_DIR"
 get_tag
 popd
