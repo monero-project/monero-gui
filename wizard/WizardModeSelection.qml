@@ -121,7 +121,7 @@ Rectangle {
             }
 
             WizardMenuItem {
-                headerText: qsTr("Advanced mode") + " (maximum privacy)" + translationManager.emptyString
+                headerText: qsTr("Advanced mode (maximum privacy)") + translationManager.emptyString
                 bodyText: qsTr("Includes extra features like mining and message verification. By default, the blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
 
