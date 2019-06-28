@@ -93,7 +93,7 @@ Rectangle {
 
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (quick + privacy)" + translationManager.emptyString
+                headerText: qsTr("Simple mode (quick + privacy)") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
                         return qsTr("Basic functionality. You are temporarily connected to a remote node while the blockchain is downloaded in the background. Once the download is complete you will have more privacy.") + translationManager.emptyString;
