@@ -63,7 +63,7 @@ Rectangle {
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
                 Layout.topMargin: 20
-                headerText: qsTr("Simple mode") + ("quick") + translationManager.emptyString
+                headerText: qsTr("Simple mode") + " (quick)" + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
                         return qsTr("Basic functionality. You are connected to a remote node, resulting in reduced privacy.") + translationManager.emptyString;
