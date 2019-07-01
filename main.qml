@@ -2360,6 +2360,8 @@ ApplicationWindow {
         dragMargin: 0
     }
 
+    MoneroComponents.MenuBar { }
+
     Network {
         id: network
         proxyAddress: persistentSettings.getProxyAddress()

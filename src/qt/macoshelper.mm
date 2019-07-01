@@ -41,6 +41,14 @@
 
 #include "ScopeGuard.h"
 
+void MacOSHelper::disableWindowTabbing()
+{
+#ifdef __MAC_10_12
+    if ([NSWindow respondsToSelector:@selector(allowsAutomaticWindowTabbing)])
+        [NSWindow setAllowsAutomaticWindowTabbing: NO];
+#endif
+}
+
 bool MacOSHelper::isCapsLock()
 {
 #ifdef __MAC_10_12
