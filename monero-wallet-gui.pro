@@ -67,7 +67,8 @@ HEADERS += \
     src/qt/mime.h \
     src/qt/KeysFiles.h \
     src/qt/utils.h \
-    src/qt/prices.h
+    src/qt/prices.h \
+    src/qt/macoshelper.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -332,7 +333,8 @@ linux {
         -llmdb \
         -lsodium \
         -lhidapi-libusb \
-        -lcrypto $$TREZOR_LINKER
+        -lcrypto $$TREZOR_LINKER \
+        -lX11
 
     if(!android) {
         LIBS+= \
@@ -357,6 +359,8 @@ macx {
     #     message("using static libraries")
     #     LIBS+= -Wl,-Bstatic
     # }
+    QT += macextras
+    OBJECTIVE_SOURCES += src/qt/macoshelper.mm
     LIBS+= \
         -L/usr/local/lib \
         -L/usr/local/opt/openssl/lib \
@@ -370,6 +374,7 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -framework CoreFoundation \
+        -framework AppKit \
         -lhidapi \
         -lssl \
         -lsodium \

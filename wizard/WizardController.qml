@@ -498,15 +498,15 @@ Rectangle {
         splash.close()
 
         console.log(">>> wallet passphrase needed: ");
-        passphraseDialog.onAcceptedCallback = function() {
-            walletManager.onPassphraseEntered(passphraseDialog.passphrase);
+        passwordDialog.onAcceptedPassphraseCallback = function() {
+            walletManager.onPassphraseEntered(passwordDialog.password);
             creatingWalletDeviceSplash();
         }
-        passphraseDialog.onRejectedCallback = function() {
+        passwordDialog.onRejectedPassphraseCallback = function() {
             walletManager.onPassphraseEntered("", true);
             creatingWalletDeviceSplash();
         }
-        passphraseDialog.open()
+        passwordDialog.openPassphraseDialog()
     }
 
     function onDeviceButtonRequest(code){

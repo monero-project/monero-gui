@@ -569,15 +569,15 @@ ApplicationWindow {
         hideProcessingSplash();
 
         console.log(">>> wallet passphrase needed: ")
-        passphraseDialog.onAcceptedCallback = function() {
-            walletManager.onPassphraseEntered(passphraseDialog.passphrase);
+        passwordDialog.onAcceptedPassphraseCallback = function() {
+            walletManager.onPassphraseEntered(passwordDialog.password);
             this.onWalletOpening();
         }
-        passphraseDialog.onRejectedCallback = function() {
+        passwordDialog.onRejectedPassphraseCallback = function() {
             walletManager.onPassphraseEntered("", true);
             this.onWalletOpening();
         }
-        passphraseDialog.open()
+        passwordDialog.openPassphraseDialog()
     }
 
     function onWalletUpdate() {
@@ -1494,23 +1494,6 @@ ApplicationWindow {
         }
     }
 
-    PassphraseDialog {
-        id: passphraseDialog
-        visible: false
-        z: parent.z + 1
-        anchors.fill: parent
-        property var onAcceptedCallback
-        property var onRejectedCallback
-        onAccepted: {
-            if (onAcceptedCallback)
-                onAcceptedCallback();
-        }
-        onRejected: {
-            if (onRejectedCallback)
-                onRejectedCallback();
-        }
-    }
-
     PasswordDialog {
         id: passwordDialog
         visible: false
@@ -1518,6 +1501,8 @@ ApplicationWindow {
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
+        property var onAcceptedPassphraseCallback
+        property var onRejectedPassphraseCallback
         onAccepted: {
             if (onAcceptedCallback)
                 onAcceptedCallback();
@@ -1526,16 +1511,9 @@ ApplicationWindow {
             if (onRejectedCallback)
                 onRejectedCallback();
         }
-    }
-
-    NewPasswordDialog {
-        id: newPasswordDialog
-        z: parent.z + 1
-        visible:false
-        anchors.fill: parent
-        onAccepted: {
-            if (currentWallet.setPassword(newPasswordDialog.password)) {
-                appWindow.walletPassword = newPasswordDialog.password;
+        onAcceptedNewPassword: {
+            if (currentWallet.setPassword(passwordDialog.password)) {
+                appWindow.walletPassword = passwordDialog.password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
                 informationPopup.icon  = StandardIcon.Information;
@@ -1547,7 +1525,14 @@ ApplicationWindow {
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         }
-        onRejected: {
+        onRejectedNewPassword: {}
+        onAcceptedPassphrase: {
+            if (onAcceptedPassphraseCallback)
+                onAcceptedPassphraseCallback();
+        }
+        onRejectedPassphrase: {
+            if (onRejectedPassphraseCallback)
+                onRejectedPassphraseCallback();
         }
     }
 
