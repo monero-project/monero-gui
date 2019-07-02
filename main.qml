@@ -31,11 +31,11 @@ import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
-import Qt.labs.settings 1.0
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
+import moneroComponents.Settings 1.0
 
 import "components"
 import "components" as MoneroComponents
@@ -1341,7 +1341,7 @@ ApplicationWindow {
         }
     }
 
-    Settings {
+    MoneroSettings {
         id: persistentSettings
         property string language
         property string locale

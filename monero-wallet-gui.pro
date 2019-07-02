@@ -68,7 +68,8 @@ HEADERS += \
     src/qt/mime.h \
     src/qt/KeysFiles.h \
     src/qt/utils.h \
-    src/qt/prices.h
+    src/qt/prices.h \
+    src/qt/MoneroSettings.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -102,7 +103,8 @@ SOURCES += main.cpp \
     src/qt/mime.cpp \
     src/qt/KeysFiles.cpp \
     src/qt/utils.cpp \
-    src/qt/prices.cpp
+    src/qt/prices.cpp \
+    src/qt/MoneroSettings.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
     HEADERS -= src/zxcvbn-c/zxcvbn.h

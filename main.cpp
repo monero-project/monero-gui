@@ -66,6 +66,7 @@
 #include "qt/utils.h"
 #include "qt/mime.h"
 #include "src/qt/KeysFiles.h"
+#include "src/qt/MoneroSettings.h"
 #include "qt/prices.h"
 
 // IOS exclusions
@@ -223,6 +224,8 @@ int main(int argc, char *argv[])
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
+
+    qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
 
     qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
