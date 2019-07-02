@@ -228,11 +228,11 @@ QString WalletManager::closeWallet()
     return result;
 }
 
-void WalletManager::closeWalletAsync()
+void WalletManager::closeWalletAsync(const QJSValue& callback)
 {
     m_scheduler.run([this] {
-        emit walletClosed(closeWallet());
-    });
+        return QJSValueList({closeWallet()});
+    }, callback);
 }
 
 bool WalletManager::walletExists(const QString &path) const

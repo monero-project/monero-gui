@@ -283,7 +283,7 @@ ApplicationWindow {
         titleBar.visible = persistentSettings.customDecorations;
     }
 
-    function closeWallet() {
+    function closeWallet(callback) {
 
         // Disconnect all listeners
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
@@ -306,8 +306,17 @@ ApplicationWindow {
         }
 
         currentWallet = undefined;
-        walletManager.closeWallet();
 
+        appWindow.showProcessingSplash(qsTr("Closing wallet..."));
+        if (callback) {
+            walletManager.closeWalletAsync(function() {
+                hideProcessingSplash();
+                callback();
+            });
+        } else {
+            walletManager.closeWallet();
+            hideProcessingSplash();
+        }
     }
 
     function connectWallet(wallet) {
@@ -556,11 +565,6 @@ ApplicationWindow {
             var queuedCmd = IPC.queuedCmd();
             if(/^\w+:\/\/(.*)$/.test(queuedCmd)) appWindow.onUriHandler(queuedCmd); // uri
         }
-    }
-
-    function onWalletClosed(walletAddress) {
-        hideProcessingSplash();
-        console.log(">>> wallet closed: " + walletAddress)
     }
 
     function onWalletPassphraseNeeded(){
@@ -1115,17 +1119,18 @@ ApplicationWindow {
     function showWizard(){
         clearMoneroCardLabelText();
         walletInitialized = false;
-        closeWallet();
-        currentWallet = undefined;
-        wizard.restart();
-        wizard.wizardState = "wizardHome";
-        rootItem.state = "wizard"
-        // reset balance
-        leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
-        fiatApiUpdateBalance(0, 0);
-        // disable timers
-        userInActivityTimer.running = false;
-        simpleModeConnectionTimer.running = false;
+        closeWallet(function() {
+            currentWallet = undefined;
+            wizard.restart();
+            wizard.wizardState = "wizardHome";
+            rootItem.state = "wizard"
+            // reset balance
+            leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
+            fiatApiUpdateBalance(0, 0);
+            // disable timers
+            userInActivityTimer.running = false;
+            simpleModeConnectionTimer.running = false;
+        });
     }
 
     function hideMenu() {
@@ -1289,7 +1294,6 @@ ApplicationWindow {
         y = (Screen.height - maxWindowHeight) / 2
         //
         walletManager.walletOpened.connect(onWalletOpened);
-        walletManager.walletClosed.connect(onWalletClosed);
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
@@ -2131,8 +2135,8 @@ ApplicationWindow {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
-        walletManager.closeWallet();
-        Qt.quit();
+        
+        closeWallet(Qt.quit);
     }
 
     function onWalletCheckUpdatesComplete(update) {

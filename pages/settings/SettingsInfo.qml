@@ -208,10 +208,11 @@ Rectangle {
                                 confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.cancelText = qsTr("Cancel")
                                 confirmationDialog.onAcceptedCallback = function() {
-                                    walletManager.closeWallet();
-                                    walletManager.clearWalletCache(persistentSettings.wallet_path);
-                                    walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                                      persistentSettings.nettype, persistentSettings.kdfRounds);
+                                    appWindow.closeWallet(function() {
+                                        walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
+                                                                        persistentSettings.nettype, persistentSettings.kdfRounds);
+                                    });
                                 }
 
                                 confirmationDialog.onRejectedCallback = null;
