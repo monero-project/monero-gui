@@ -31,9 +31,14 @@
 
 #include <QtCore>
 #include <QRegExp>
+#include <QApplication>
 
 bool fileExists(QString path);
+QByteArray fileOpen(QString path);
+bool fileWrite(QString path, QString data);
 QString getAccountName();
+QString xdgMime(QApplication &app);
+void registerXdgMime(QApplication &app);
 const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
 QString randomUserAgent();
 

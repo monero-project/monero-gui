@@ -326,6 +326,41 @@ Rectangle {
                 font.pixelSize: 14
                 text: isOpenGL ? "OpenGL" : "Low graphics mode"
             }
+
+            Rectangle {
+                visible: isTails
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                visible: isTails
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            MoneroComponents.TextBlock {
+                visible: isTails
+                Layout.fillWidth: true
+                font.pixelSize: 14
+                text: qsTr("Tails: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                visible: isTails
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
+                text: tailsUsePersistence ? qsTr("persistent") + translationManager.emptyString : qsTr("persistence disabled") + translationManager.emptyString;
+            }
         }
 
         // Copy info to clipboard

@@ -1349,6 +1349,12 @@ ApplicationWindow {
 
     MoneroSettings {
         id: persistentSettings
+        fileName: {
+            if(isTails && tailsUsePersistence)
+                return homePath + "/Persistent/Monero/monero-core.conf";
+            return "";
+        }
+
         property string language
         property string locale
         property string account_name

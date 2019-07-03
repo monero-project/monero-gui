@@ -27,15 +27,35 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QtCore>
+#include <QApplication>
 
+#include "src/qt/TailsOS.h"
 #include "utils.h"
 
 bool fileExists(QString path) {
     QFileInfo check_file(path);
-    if (check_file.exists() && check_file.isFile())
+    return check_file.exists() && check_file.isFile();
+}
+
+QByteArray fileOpen(QString path) {
+    QFile file(path);
+    if(!file.open(QFile::ReadOnly | QFile::Text))
+        return QByteArray();
+
+    QByteArray data = file.readAll();
+    file.close();
+    return data;
+}
+
+bool fileWrite(QString path, QString data) {
+    QFile file(path);
+    if(file.open(QIODevice::WriteOnly)){
+        QTextStream out(&file); out << data << endl;
+        file.close();
         return true;
-    else
-        return false;
+    }
+
+    return false;
 }
 
 QString getAccountName(){
@@ -45,6 +65,53 @@ QString getAccountName(){
     if (accountName.isEmpty())
         accountName = "My monero Account";
     return accountName;
+}
+
+QString xdgMime(QApplication &app){
+    return QString(
+        "[Desktop Entry]\n"
+        "Name=Monero GUI\n"
+        "GenericName=Monero-GUI\n"
+        "X-GNOME-FullName=Monero-GUI\n"
+        "Comment=Monero GUI\n"
+        "Keywords=Monero;\n"
+        "Exec=%1 %u\n"
+        "Terminal=false\n"
+        "Type=Application\n"
+        "Icon=monero\n"
+        "Categories=Network;GNOME;Qt;\n"
+        "MimeType=x-scheme-handler/monero;x-scheme-handler/moneroseed\n"
+        "StartupNotify=true\n"
+        "X-GNOME-Bugzilla-Bugzilla=GNOME\n"
+        "X-GNOME-UsesNotifications=true\n"
+    ).arg(app.applicationFilePath());
+}
+
+void registerXdgMime(QApplication &app){
+#ifdef Q_OS_LINUX
+    // Register desktop entry
+    // - MacOS handled via Info.plist
+    // - Windows handled in the installer by rbrunner7
+    // - Linux written to `QStandardPaths::ApplicationsLocation`
+    // - Tails written to persistent dotfiles
+    QString mime = xdgMime(app);
+    QString appPath = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+    QString filePath = QString("%1/monero-gui.desktop").arg(appPath);
+
+    if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
+        TailsOS::persistXdgMime(filePath, mime);
+        return;
+    }
+
+    QFileInfo file(filePath);
+    QDir().mkpath(file.path()); // ensure directory exists
+
+#ifdef QT_DEBUG
+    qDebug() << "Writing xdg mime: " << filePath;
+#endif
+
+    fileWrite(filePath, mime);
+#endif
 }
 
 QString randomUserAgent(){
