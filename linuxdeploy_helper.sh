@@ -51,4 +51,12 @@ SCRIPT_DIR="\$(dirname "\$(test -L "\${BASH_SOURCE[0]}" && readlink "\${BASH_SOU
 "\$SCRIPT_DIR"/$GUI_EXEC "\$@"
 EOL
 
+# Create start script
+cat > $TARGET/start-tails.AppImage <<EOL
+#!/bin/bash
+# Silly hack to provide a launcher that is double clickable
+bash ./start-gui.sh
+EOL
+
 chmod +x $TARGET/start-gui.sh
+chmod +x $TARGET/start-tails.AppImage
