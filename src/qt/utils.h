@@ -33,6 +33,7 @@
 #include <QRegExp>
 
 bool fileExists(QString path);
+QByteArray fileOpen(QString path);
 QString getAccountName();
 const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
 QString randomUserAgent();

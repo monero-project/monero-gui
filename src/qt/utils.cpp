@@ -32,10 +32,17 @@
 
 bool fileExists(QString path) {
     QFileInfo check_file(path);
-    if (check_file.exists() && check_file.isFile())
-        return true;
-    else
-        return false;
+    return check_file.exists() && check_file.isFile();
+}
+
+QByteArray fileOpen(QString path) {
+    QFile file(path);
+    if(!file.open(QFile::ReadOnly | QFile::Text))
+        return QByteArray();
+
+    QByteArray data = file.readAll();
+    file.close();
+    return data;
 }
 
 QString getAccountName(){

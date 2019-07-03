@@ -65,6 +65,7 @@
 #include "qt/ipc.h"
 #include "qt/utils.h"
 #include "qt/mime.h"
+#include "src/qt/TailsOS.h"
 #include "src/qt/KeysFiles.h"
 #include "src/qt/MoneroSettings.h"
 #include "qt/prices.h"
@@ -83,6 +84,7 @@ bool isAndroid = false;
 bool isWindows = false;
 bool isMac = false;
 bool isLinux = false;
+bool isTails = false;
 bool isDesktop = false;
 bool isOpenGL = true;
 
@@ -102,6 +104,7 @@ int main(int argc, char *argv[])
     bool isWindows = true;
 #elif defined(Q_OS_LINUX)
     bool isLinux = true;
+    bool isTails = TailsOS::detect();
 #elif defined(Q_OS_MAC)
     bool isMac = true;
 #endif
@@ -123,24 +126,39 @@ int main(int argc, char *argv[])
 //    qDebug() << "High DPI auto scaling - enabled";
 //#endif
 
+    MainApp app(argc, argv);
+
+    app.setApplicationName("monero-core");
+    app.setOrganizationDomain("getmonero.org");
+    app.setOrganizationName("monero-project");
+
+    // Ask to enable Tails OS persistence mode, it affects:
+    // - Log file location
+    // - QML Settings file location (monero-core.conf)
+    // - Default wallets path
+    // Target directory is: ~/Persistent/Monero
+    if (isTails) {
+        if (!TailsOS::detectDataPersistence())
+            TailsOS::showDataPersistenceDisabledWarning();
+        else
+            TailsOS::askPersistence();
+    }
+
     QString moneroAccountsDir;
     #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
         QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
     #else
         QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
     #endif
-    if (!moneroAccountsRootDir.empty()) {
+
+    if(isTails && TailsOS::usePersistence){
+        moneroAccountsDir = QDir::homePath() + "/Persistent/Monero/wallets";
+    } else if (!moneroAccountsRootDir.empty()) {
         moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
     } else {
         qCritical() << "Error: accounts root directory could not be set";
         return 1;
     }
-
-    MainApp app(argc, argv);
-
-    app.setApplicationName("monero-core");
-    app.setOrganizationDomain("getmonero.org");
-    app.setOrganizationName("monero-project");
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
@@ -316,6 +334,8 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("walletLogPath", logPath);
 
+    engine.rootContext()->setContextProperty("tailsUsePersistence", TailsOS::usePersistence);
+
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
     const QStringList arguments = (QStringList) QCoreApplication::arguments().at(0);
@@ -329,7 +349,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("isIOS", isIOS);
     engine.rootContext()->setContextProperty("isAndroid", isAndroid);
     engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
-    engine.rootContext()->setContextProperty("isLinux", isLinux);
+    engine.rootContext()->setContextProperty("isTails", isTails);
 
     engine.rootContext()->setContextProperty("screenWidth", geo.width());
     engine.rootContext()->setContextProperty("screenHeight", geo.height());
@@ -353,6 +373,7 @@ int main(int argc, char *argv[])
         accountName = "My monero Account";
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
+    engine.rootContext()->setContextProperty("homePath", QDir::homePath());
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
 

@@ -253,5 +253,6 @@
         <file>images/copy.svg</file>
         <file>images/edit.svg</file>
         <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
+        <file>images/tails-grey.png</file>
     </qresource>
 </RCC>

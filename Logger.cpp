@@ -34,6 +34,7 @@
 #include <QDebug>
 
 #include "Logger.h"
+#include "src/qt/TailsOS.h"
 #include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
@@ -65,6 +66,9 @@ static const QString defaultLogName = "monero-wallet-gui.log";
 const QString getLogPath(const QString logPath)
 {
     const QFileInfo fi(logPath);
+
+    if(TailsOS::detect() && TailsOS::usePersistence)
+        return QDir::homePath() + "/Persistent/Monero/logs/" + defaultLogName;
 
     if(!logPath.isEmpty() && !fi.isDir())
         return fi.absoluteFilePath();
