@@ -1343,13 +1343,15 @@ Rectangle {
         root.updateDisplay(root.txOffset, root.txMax);
     }
 
-    function reset() {
+    function reset(keepDate) {
         root.txOffset = 0;
         root.txMax = 5;
 
         if (typeof root.model !== 'undefined' && root.model != null) {
-            root.model.dateFromFilter = "2014-04-18" // genesis block
-            root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            if (!keepDate) {
+                root.model.dateFromFilter = "2014-04-18" // genesis block
+                root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            }
             // negative values disable filters here;
             root.model.amountFromFilter = -1;
             root.model.amountToFilter = -1;
@@ -1704,6 +1706,6 @@ Rectangle {
 
     function onPageClosed(){
         root.initialized = false;
-        root.reset();
+        root.reset(true);
     }
 }
