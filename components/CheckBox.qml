@@ -36,8 +36,10 @@ import "effects/" as MoneroEffects
 Item {
     id: checkBox
     property alias text: label.text
-    property string checkedIcon: "qrc:///images/check-white.svg"
+    property string checkedIcon
     property string uncheckedIcon
+    property string checkedIconFontAwesome: FontAwesome.check
+    property string uncheckedIconFontAwesome
     property int imgWidth: 13
     property int imgHeight: 13
     property bool checked: false
@@ -81,13 +83,14 @@ Item {
 
             MoneroEffects.ImageMask {
                 id: img
-                visible: checkBox.checked || checkBox.uncheckedIcon != ""
+                visible: checkBox.checked || checkBox.uncheckedIcon != "" || checkBox.checkedIconFontAwesome
                 anchors.centerIn: parent
                 width: checkBox.imgWidth
                 height: checkBox.imgHeight
                 color: MoneroComponents.Style.defaultFontColor
-                fontAwesomeFallbackIcon: FontAwesome.plus
-                fontAwesomeFallbackSize: 14
+                isFontAwesomeIcon: checkBox.checkedIconFontAwesome !== ""
+                fontAwesomeFallbackIcon: (checkBox.checked && checkBox.checkedIconFontAwesome) ? checkBox.checkedIconFontAwesome : (checkBox.uncheckedIconFontAwesome && !checkBox.checked) ? checkBox.uncheckedIconFontAwesome : checkBox.checked ? FontAwesome.check : ""
+                fontAwesomeFallbackSize: 18
                 image: {
                     if (checkBox.checked || checkBox.uncheckedIcon == "")
                         return checkBox.checkedIcon;

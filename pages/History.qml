@@ -979,10 +979,10 @@ Rectangle {
                             }
                         }
 
-                        Rectangle {
-                            color: "transparent"
+                        RowLayout {
                             Layout.fillWidth: true
                             Layout.preferredHeight: 20
+                            spacing: 10
 
                             MoneroComponents.TextPlain {
                                 id: txNoteText
@@ -1001,26 +1001,20 @@ Rectangle {
                                 }
                             }
 
-                            MoneroEffects.ImageMask {
-                                anchors.top: parent.top
-                                anchors.left: txNoteText.right
-                                anchors.leftMargin: 12
-                                image: "qrc:///images/edit.svg"
-                                fontAwesomeFallbackIcon: FontAwesome.pencilSquare
-                                fontAwesomeFallbackSize: 22
+                            MoneroComponents.TextPlain  {
+                                text: FontAwesome.edit
+                                font.family: FontAwesome.fontFamily
+                                font.pixelSize: 20
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.75
-                                width: 23
-                                height: 21
 
                                 MouseArea {
                                     id: txNoteArea
                                     state: "set_tx_note"
                                     anchors.fill: parent
                                     hoverEnabled: true
-                                    onEntered: parent.opacity = 0.4;
-                                    onExited: parent.opacity = 0.75;
                                     cursorShape: Qt.PointingHandCursor
+                                    onEntered: parent.color = MoneroComponents.Style.orange
+                                    onExited: parent.color = MoneroComponents.Style.defaultFontColor
                                 }
                             }
                         }

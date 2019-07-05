@@ -330,8 +330,8 @@ Rectangle {
               CheckBox {
                   id: descriptionCheckbox
                   border: false
-                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  uncheckedIconFontAwesome: FontAwesome.plusCircle
+                  checkedIconFontAwesome: FontAwesome.minusCircle
                   fontSize: descriptionLine.labelFontSize
                   iconOnTheLeft: true
                   Layout.fillWidth: true
@@ -357,8 +357,8 @@ Rectangle {
               CheckBox {
                   id: paymentIdCheckbox
                   border: false
-                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  uncheckedIconFontAwesome: FontAwesome.plusCircle
+                  checkedIconFontAwesome: FontAwesome.minusCircle
                   fontSize: paymentIdLine.labelFontSize
                   iconOnTheLeft: true
                   Layout.fillWidth: true
@@ -399,10 +399,8 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
-              rightIcon: "qrc:///images/rightArrow.png"
-              rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4
-              text: qsTr("Send") + translationManager.emptyString
+              text: qsTr("Send") + translationManager.emptyString + "   " + FontAwesome.arrowCircleRight
               enabled: {
                 updateSendButton()
               }
