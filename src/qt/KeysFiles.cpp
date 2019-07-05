@@ -36,11 +36,11 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
+
 #include "src/libwalletqt/WalletManager.h"
 #include "src/NetworkType.h"
 #include "src/qt/utils.h"
-
-#include "KeysFiles.h"
+#include "src/qt/KeysFiles.h"
 
 
 WalletKeysFiles::WalletKeysFiles(const qint64 &modified, const qint64 &created, const QString &path, const quint8 &networkType, const QString &address)

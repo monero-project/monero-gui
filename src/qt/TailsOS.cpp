@@ -3,8 +3,8 @@
 #include <QPixmap>
 #include <QTranslator>
 
-#include "TailsOS.h"
-#include "utils.h"
+#include "src/qt/TailsOS.h"
+#include "src/qt/utils.h"
 
 bool TailsOS::usePersistence = false;
 

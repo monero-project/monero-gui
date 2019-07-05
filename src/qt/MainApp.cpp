@@ -26,13 +26,19 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "oscursor.h"
-#include <QCursor>
-OSCursor::OSCursor(QObject *parent)
-    : QObject(parent)
+#include <QCloseEvent>
+
+#include "src/qt/MainApp.h"
+
+bool MainApp::event (QEvent *event)
 {
-}
-QPoint OSCursor::getPosition() const
-{
-    return QCursor::pos();
+    // Catch application exit event and signal to qml app to handle exit
+    if(event->type() == QEvent::Close) {
+        event->ignore();
+        emit closing();
+        return true;
+    }
+
+    // Pass unhandled events to base class 
+    return QApplication::event(event);
 }

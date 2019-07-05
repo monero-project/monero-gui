@@ -32,8 +32,8 @@
 #include <QtNetwork>
 #include <QDebug>
 
-#include "ipc.h"
-#include "utils.h"
+#include "src/qt/ipc.h"
+#include "src/qt/utils.h"
 
 // Start listening for incoming IPC commands on UDS (Unix) or named pipe (Windows)
 void IPC::bind(){

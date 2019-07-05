@@ -28,7 +28,7 @@
 
 #include <QtCore>
 
-#include "utils.h"
+#include "src/qt/utils.h"
 
 bool fileExists(QString path) {
     QFileInfo check_file(path);

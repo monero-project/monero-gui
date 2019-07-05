@@ -29,8 +29,8 @@
 #include <QtCore>
 #include <QNetworkAccessManager>
 
-#include "utils.h"
-#include "prices.h"
+#include "src/qt/utils.h"
+#include "src/qt/prices.h"
 
 
 Prices::Prices(QNetworkAccessManager *networkAccessManager, QObject *parent)

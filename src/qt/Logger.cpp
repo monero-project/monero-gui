@@ -33,7 +33,7 @@
 #include <QDir>
 #include <QDebug>
 
-#include "Logger.h"
+#include "src/qt/Logger.h"
 #include "src/qt/TailsOS.h"
 #include "wallet/api/wallet2_api.h"
 

@@ -31,8 +31,8 @@
 #include <QFile>
 #include <QTextStream>
 
-#include "mime.h"
-#include "utils.h"
+#include "src/qt/mime.h"
+#include "src/qt/utils.h"
 
 void registerXdgMime(QApplication &app){
     // MacOS handled via Info.plist

@@ -30,14 +30,16 @@ QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
+								$$PWD/src/qt \
                 $$PWD/src/QR-Code-generator \
                 $$PWD/src \
                 $$WALLET_ROOT/src
 
 HEADERS += \
-    filter.h \
-    clipboardAdapter.h \
-    oscursor.h \
+    src/qt/filter.h \
+    src/qt/clipboardAdapter.h \
+    src/qt/oscursor.h \
+		src/qt/TranslationManager.h \
     src/libwalletqt/WalletManager.h \
     src/libwalletqt/Wallet.h \
     src/libwalletqt/PendingTransaction.h \
@@ -46,8 +48,8 @@ HEADERS += \
     src/libwalletqt/QRCodeImageProvider.h \
     src/libwalletqt/Transfer.h \
     src/NetworkType.h \
-    oshelper.h \
-    TranslationManager.h \
+    src/qt/oshelper.h \
+    src/qt/TranslationManager.h \
     src/model/TransactionHistoryModel.h \
     src/model/TransactionHistorySortFilterModel.h \
     src/QR-Code-generator/BitBuffer.hpp \
@@ -61,8 +63,8 @@ HEADERS += \
     src/libwalletqt/SubaddressAccount.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
-    Logger.h \
-    MainApp.h \
+    src/qt/Logger.h \
+    src/qt/MainApp.h \
     src/qt/FutureScheduler.h \
     src/qt/ipc.h \
     src/qt/mime.h \
@@ -73,17 +75,17 @@ HEADERS += \
     src/qt/TailsOS.h
 
 SOURCES += main.cpp \
-    filter.cpp \
-    clipboardAdapter.cpp \
-    oscursor.cpp \
+    src/qt/filter.cpp \
+    src/qt/clipboardAdapter.cpp \
+    src/qt/oscursor.cpp \
     src/libwalletqt/WalletManager.cpp \
     src/libwalletqt/Wallet.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \
     src/libwalletqt/QRCodeImageProvider.cpp \
-    oshelper.cpp \
-    TranslationManager.cpp \
+    src/qt/oshelper.cpp \
+    src/qt/TranslationManager.cpp \
     src/model/TransactionHistoryModel.cpp \
     src/model/TransactionHistorySortFilterModel.cpp \
     src/QR-Code-generator/BitBuffer.cpp \
@@ -97,8 +99,8 @@ SOURCES += main.cpp \
     src/libwalletqt/SubaddressAccount.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
-    Logger.cpp \
-    MainApp.cpp \
+    src/qt/Logger.cpp \
+    src/qt/MainApp.cpp \
     src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
     src/qt/mime.cpp \

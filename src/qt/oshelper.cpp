@@ -26,18 +26,40 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "MainApp.h"
-#include <QCloseEvent>
+#include <QTemporaryFile>
+#include <QDir>
+#include <QDebug>
+#include <QString>
 
-bool MainApp::event (QEvent *event)
+#include "src/qt/oshelper.h"
+
+OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
-    // Catch application exit event and signal to qml app to handle exit
-    if(event->type() == QEvent::Close) {
-        event->ignore();
-        emit closing();
-        return true;
-    }
 
-    // Pass unhandled events to base class 
-    return QApplication::event(event);
+}
+
+QString OSHelper::temporaryFilename() const
+{
+    QString tempFileName;
+    {
+        QTemporaryFile f;
+        f.open();
+        tempFileName = f.fileName();
+    }
+    return tempFileName;
+}
+
+bool OSHelper::removeTemporaryWallet(const QString &fileName) const
+{
+    // Temporary files should be deleted automatically by default, in case they wouldn't, we delete them manually as well
+    bool cache_deleted = QFile::remove(fileName);
+    bool address_deleted = QFile::remove(fileName + ".address.txt");
+    bool keys_deleted = QFile::remove(fileName +".keys");
+
+    return cache_deleted && address_deleted && keys_deleted;
+}
+
+QString OSHelper::temporaryPath() const
+{
+    return QDir::tempPath();
 }

@@ -1,4 +1,4 @@
-#include "FutureScheduler.h"
+#include "src/qt/FutureScheduler.h"
 
 FutureScheduler::FutureScheduler(QObject *parent)
     : QObject(parent), Alive(0), Stopping(false)

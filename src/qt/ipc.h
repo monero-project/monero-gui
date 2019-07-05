@@ -31,7 +31,8 @@
 
 #include <QtCore>
 #include <QLocalServer>
-#include <qt/utils.h>
+
+#include <src/qt/utils.h>
 
 class IPC : public QObject
 {

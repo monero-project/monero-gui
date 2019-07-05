@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2019, The Monero Project
-//
+// Copyright (c) 2014-2018, The Monero Project
+// 
 // All rights reserved.
-//
+// 
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-//
+// 
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-//
+// 
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-//
+// 
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-//
+// 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,39 +26,19 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "oshelper.h"
-#include <QTemporaryFile>
-#include <QDir>
-#include <QDebug>
-#include <QString>
+#include "src/qt/clipboardAdapter.h"
 
-OSHelper::OSHelper(QObject *parent) : QObject(parent)
+clipboardAdapter::clipboardAdapter(QObject *parent) :
+    QObject(parent)
 {
-
+    m_pClipboard = QGuiApplication::clipboard();
 }
 
-QString OSHelper::temporaryFilename() const
-{
-    QString tempFileName;
-    {
-        QTemporaryFile f;
-        f.open();
-        tempFileName = f.fileName();
-    }
-    return tempFileName;
+void clipboardAdapter::setText(const QString &text) {
+    m_pClipboard->setText(text, QClipboard::Clipboard);
+    m_pClipboard->setText(text, QClipboard::Selection);
 }
 
-bool OSHelper::removeTemporaryWallet(const QString &fileName) const
-{
-    // Temporary files should be deleted automatically by default, in case they wouldn't, we delete them manually as well
-    bool cache_deleted = QFile::remove(fileName);
-    bool address_deleted = QFile::remove(fileName + ".address.txt");
-    bool keys_deleted = QFile::remove(fileName +".keys");
-
-    return cache_deleted && address_deleted && keys_deleted;
-}
-
-QString OSHelper::temporaryPath() const
-{
-    return QDir::tempPath();
+QString clipboardAdapter::text() const {
+    return m_pClipboard->text();
 }

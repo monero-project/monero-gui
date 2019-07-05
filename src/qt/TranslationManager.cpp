@@ -26,13 +26,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "TranslationManager.h"
-
 #include <QApplication>
 #include <QTranslator>
 #include <QDir>
 #include <QDebug>
 #include <QFileInfo>
+
+#include "src/qt/TranslationManager.h"
 
 
 TranslationManager * TranslationManager::m_instance = nullptr;
