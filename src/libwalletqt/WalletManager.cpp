@@ -145,17 +145,9 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
 
 void WalletManager::openWalletAsync(const QString &path, const QString &password, NetworkType::Type nettype, quint64 kdfRounds)
 {
-    QFuture<Wallet*> future = QtConcurrent::run(this, &WalletManager::openWallet,
-                                        path, password, nettype, kdfRounds);
-    QFutureWatcher<Wallet*> * watcher = new QFutureWatcher<Wallet*>();
-
-    connect(watcher, &QFutureWatcher<Wallet*>::finished,
-            this, [this, watcher]() {
-        QFuture<Wallet*> future = watcher->future();
-        watcher->deleteLater();
-        emit walletOpened(future.result());
+    m_scheduler.run([this, path, password, nettype, kdfRounds] {
+        emit walletOpened(openWallet(path, password, nettype, kdfRounds));
     });
-    watcher->setFuture(future);
 }
 
 
@@ -216,21 +208,10 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
 void WalletManager::createWalletFromDeviceAsync(const QString &path, const QString &password, NetworkType::Type nettype,
                                                 const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead)
 {
-  auto lmbd = [=](){
-    return this->createWalletFromDevice(path, password, nettype, deviceName, restoreHeight, subaddressLookahead);
-  };
-
-  QFuture<Wallet *> future = QtConcurrent::run(lmbd);
-
-  QFutureWatcher<Wallet *> * watcher = new QFutureWatcher<Wallet *>();
-
-  connect(watcher, &QFutureWatcher<Wallet *>::finished,
-          this, [this, watcher]() {
-        QFuture<Wallet *> future = watcher->future();
-        watcher->deleteLater();
-        emit walletCreated(future.result());
-      });
-  watcher->setFuture(future);
+    m_scheduler.run([this, path, password, nettype, deviceName, restoreHeight, subaddressLookahead] {
+        Wallet *wallet = createWalletFromDevice(path, password, nettype, deviceName, restoreHeight, subaddressLookahead);
+        emit walletCreated(wallet);
+    });
 }
 
 QString WalletManager::closeWallet()
@@ -249,16 +230,9 @@ QString WalletManager::closeWallet()
 
 void WalletManager::closeWalletAsync()
 {
-    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::closeWallet);
-    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
-
-    connect(watcher, &QFutureWatcher<QString>::finished,
-            this, [this, watcher]() {
-       QFuture<QString> future = watcher->future();
-       watcher->deleteLater();
-       emit walletClosed(future.result());
+    m_scheduler.run([this] {
+        emit walletClosed(closeWallet());
     });
-    watcher->setFuture(future);
 }
 
 bool WalletManager::walletExists(const QString &path) const
@@ -333,7 +307,7 @@ QString WalletManager::paymentIdFromAddress(const QString &address, NetworkType:
 
 void WalletManager::setDaemonAddressAsync(const QString &address)
 {
-    QtConcurrent::run([this, address] {
+    m_scheduler.run([this, address] {
         m_pimpl->setDaemonAddress(address.toStdString());
     });
 }
@@ -376,9 +350,9 @@ bool WalletManager::isMining() const
     return m_pimpl->isMining();
 }
 
-void WalletManager::miningStatusAsync() const
+void WalletManager::miningStatusAsync()
 {
-    QtConcurrent::run([this] {
+    m_scheduler.run([this] {
         emit miningStatus(isMining());
     });
 }
@@ -488,19 +462,11 @@ bool WalletManager::saveQrCode(const QString &code, const QString &path) const
     return QRCodeImageProvider::genQrImage(code, &size).scaled(size.expandedTo(QSize(240, 240)), Qt::KeepAspectRatio).save(path, "PNG", 100);
 }
 
-void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir) const
+void WalletManager::checkUpdatesAsync(const QString &software, const QString &subdir)
 {
-    QFuture<QString> future = QtConcurrent::run(this, &WalletManager::checkUpdates,
-                                        software, subdir);
-    QFutureWatcher<QString> * watcher = new QFutureWatcher<QString>();
-    connect(watcher, &QFutureWatcher<Wallet*>::finished,
-            this, [this, watcher]() {
-        QFuture<QString> future = watcher->future();
-        watcher->deleteLater();
-        qDebug() << "Checking for updates - done";
-        emit checkUpdatesComplete(future.result());
+    m_scheduler.run([this, software, subdir] {
+        emit checkUpdatesComplete(checkUpdates(software, subdir));
     });
-    watcher->setFuture(future);
 }
 
 
@@ -532,9 +498,16 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
     return walletCache.rename(newFileName);
 }
 
-WalletManager::WalletManager(QObject *parent) : QObject(parent)
+WalletManager::WalletManager(QObject *parent)
+    : QObject(parent)
+    , m_scheduler(this)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
+}
+
+WalletManager::~WalletManager()
+{
+    m_scheduler.shutdownWaitForFinished();
 }
 
 void WalletManager::onWalletPassphraseNeeded(Monero::Wallet *)

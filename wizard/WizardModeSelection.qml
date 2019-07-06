@@ -57,16 +57,16 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Mode selection.") + translationManager.emptyString
-                subtitle: qsTr("Please select the statement that best matches you.") + translationManager.emptyString
+                subtitle: qsTr("Please select the statement that best matches your desired setup.") + translationManager.emptyString
             }
 
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
                 Layout.topMargin: 20
-                headerText: qsTr("Simple mode") + translationManager.emptyString
+                headerText: qsTr("Simple mode (quick)") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
+                        return qsTr("Basic functionality. You are connected to a remote node, resulting in reduced privacy.") + translationManager.emptyString;
                     } else {
                         return "Available on mainnet.";
                     }
@@ -93,10 +93,10 @@ Rectangle {
 
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
+                headerText: qsTr("Simple mode (quick + privacy)") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
+                        return qsTr("Basic functionality. You are temporarily connected to a remote node while the blockchain is downloaded in the background. Once the download is complete you will have more privacy.") + translationManager.emptyString;
                     } else {
                         return "Available on mainnet.";
                     }
@@ -121,8 +121,8 @@ Rectangle {
             }
 
             WizardMenuItem {
-                headerText: qsTr("Advanced mode") + translationManager.emptyString
-                bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
+                headerText: qsTr("Advanced mode (maximum privacy)") + translationManager.emptyString
+                bodyText: qsTr("Includes extra features like mining and message verification. By default, the blockchain is downloaded to your computer.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
