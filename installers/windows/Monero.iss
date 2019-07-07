@@ -21,6 +21,8 @@ DisableWelcomePage=no
 LicenseFile=LICENSE
 AppPublisher=The Monero Developer Community
 AppPublisherURL=https://getmonero.org
+TimeStampsInUTC=yes
+CompressionThreads=1
 
 UsedUserAreasWarning=no
 ; The above directive silences the following compiler warning:
@@ -68,7 +70,7 @@ Source: "FinishImage.bmp"; Flags: dontcopy
 
 ; Monero GUI wallet exe and guide
 Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-GUI-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\monero-gui-wallet-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero CLI wallet
 Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
