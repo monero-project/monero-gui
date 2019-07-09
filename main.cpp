@@ -116,11 +116,10 @@ int main(int argc, char *argv[])
     if (isDesktop) putenv((char*)"QT_QPA_PLATFORM=xcb");
 #endif
 
-//    // Enable high DPI scaling on windows & linux
-//#if !defined(Q_OS_ANDROID) && QT_VERSION >= 0x050600
-//    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-//    qDebug() << "High DPI auto scaling - enabled";
-//#endif
+    // Enable high DPI scaling on windows & linux
+#if !defined(Q_OS_ANDROID)
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 
     QString moneroAccountsDir;
     #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
