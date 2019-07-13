@@ -59,12 +59,6 @@ ColumnLayout {
 
     WizardSummaryItem {
         Layout.fillWidth: true
-        header: qsTr("Wallet name") + translationManager.emptyString
-        value: walletOptionsName
-    }
-
-    WizardSummaryItem {
-        Layout.fillWidth: true
         header: qsTr("Restore height") + translationManager.emptyString
         value: wizardController.walletOptionsRestoreHeight
         visible: wizardStateView.state === "wizardRestoreWallet4" || wizardController.walletOptionsIsRecoveringFromDevice
