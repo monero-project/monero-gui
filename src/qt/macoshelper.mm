@@ -26,27 +26,24 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef OSHELPER_H
-#define OSHELPER_H
+#include <QtCore>
+#include <QtGui>
+#include <QtMac>
+#include "macoshelper.h"
 
-#include <QObject>
-/**
- * @brief The OSHelper class - exports to QML some OS-related functions
- */
-class OSHelper : public QObject
+#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#include <CoreFoundation/CoreFoundation.h>
+#include <ApplicationServices/ApplicationServices.h>
+#include <Availability.h>
+
+bool MacOSHelper::isCapsLock()
 {
-    Q_OBJECT
-public:
-    explicit OSHelper(QObject *parent = 0);
-
-    Q_INVOKABLE QString temporaryFilename() const;
-    Q_INVOKABLE QString temporaryPath() const;
-    Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;
-    Q_INVOKABLE bool isCapsLock() const;
-
-signals:
-
-public slots:
-};
-
-#endif // OSHELPER_H
+#ifdef __MAC_10_12
+    NSUInteger flags = [NSEvent modifierFlags] & NSEventModifierFlagDeviceIndependentFlagsMask;
+    return (flags == NSEventModifierFlagCapsLock);
+#else
+    NSUInteger flags = [NSEvent modifierFlags] & NSDeviceIndependentModifierFlagsMask;
+    return (flags & NSAlphaShiftKeyMask);
+#endif
+}

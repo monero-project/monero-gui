@@ -112,25 +112,6 @@ function roundDownToNearestThousand(_num){
     return Math.floor(_num/1000.0)*1000
 }
 
-function isAlpha(letter){ return letter.match(/^[A-Za-z0-9]+$/) !== null; }
-
-function isLowerCaseChar(letter){ return letter === letter.toLowerCase(); }
-
-function isUpperLock(shift, letter){
-    if(!isAlpha((letter))) return false;
-    if(shift) {
-        if(isLowerCaseChar(letter))
-            return true;
-        else
-            return false;
-    } else {
-        if(isLowerCaseChar(letter))
-            return false;
-        else
-            return true;
-    }
-}
-
 function qmlEach(item, properties, ignoredObjectNames, arr){
     // Traverse QML object tree and return components that match
     // via property names. Similar to jQuery("myclass").each(...

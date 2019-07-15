@@ -339,7 +339,7 @@ Rectangle {
                 onClicked: {
                     passwordDialog.onAcceptedCallback = function() {
 	                    if(appWindow.walletPassword === passwordDialog.password){
-	                        newPasswordDialog.open()
+	                        passwordDialog.openNewPasswordDialog()
 	                    } else {
 	                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
                             informationPopup.text = qsTr("Wrong password") + translationManager.emptyString;
