@@ -1109,10 +1109,12 @@ ApplicationWindow {
         console.log("Hiding processing splash")
         splash.close();
 
-        leftPanel.enabled = true
-        middlePanel.enabled = true
-        titleBar.enabled = true
-        inactiveOverlay.visible = false;
+        if (!passwordDialog.visible) {
+            leftPanel.enabled = true
+            middlePanel.enabled = true
+            titleBar.enabled = true
+            inactiveOverlay.visible = false;
+        }
     }
 
     // close wallet and show wizard
