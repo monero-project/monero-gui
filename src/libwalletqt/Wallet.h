@@ -351,7 +351,7 @@ signals:
     void walletCreationHeightChanged();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
-    void transactionCommitted(bool status, PendingTransaction *t, QStringList txid);
+    void transactionCommitted(bool status, PendingTransaction *t, const QStringList& txid);
     void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
 
     // emitted when transaction is created async

@@ -524,7 +524,8 @@ bool Wallet::submitTxFile(const QString &fileName) const
 void Wallet::commitTransactionAsync(PendingTransaction *t)
 {
     m_scheduler.run([this, t] {
-        emit transactionCommitted(t->commit(), t, t->txid());
+        auto txIdList = t->txid();  // retrieve before commit
+        emit transactionCommitted(t->commit(), t, txIdList);
     });
 }
 
