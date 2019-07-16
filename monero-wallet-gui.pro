@@ -69,7 +69,7 @@ HEADERS += \
     src/qt/utils.h \
     src/qt/prices.h \
     src/qt/macoshelper.h \
-    src/qt/MoneroSettings.h
+    src/qt/MoneroSettings.h \
     src/qt/TailsOS.h
 
 SOURCES += main.cpp \
