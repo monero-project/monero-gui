@@ -65,12 +65,12 @@ HEADERS += \
     MainApp.h \
     src/qt/FutureScheduler.h \
     src/qt/ipc.h \
-    src/qt/mime.h \
     src/qt/KeysFiles.h \
     src/qt/utils.h \
     src/qt/prices.h \
     src/qt/macoshelper.h \
     src/qt/MoneroSettings.h
+    src/qt/TailsOS.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -101,11 +101,11 @@ SOURCES += main.cpp \
     MainApp.cpp \
     src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
-    src/qt/mime.cpp \
     src/qt/KeysFiles.cpp \
     src/qt/utils.cpp \
     src/qt/prices.cpp \
-    src/qt/MoneroSettings.cpp
+    src/qt/MoneroSettings.cpp \
+    src/qt/TailsOS.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
     HEADERS -= src/zxcvbn-c/zxcvbn.h
