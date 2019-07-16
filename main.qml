@@ -2192,6 +2192,7 @@ ApplicationWindow {
     function checkInUserActivity() {
         if(rootItem.state !== "normal") return;
         if(!persistentSettings.lockOnUserInActivity) return;
+        if(passwordDialog.visible) return;
 
         // prompt password after X seconds of inactivity
         var epoch = Math.floor((new Date).getTime() / 1000);
