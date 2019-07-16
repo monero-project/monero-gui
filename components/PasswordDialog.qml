@@ -139,10 +139,13 @@ Item {
 
             Label {
                 text: {
-                    var device = passwordDialogMode ? qsTr("wallet password") : qsTr("wallet device passphrase");
-                    (root.walletName.length > 0 ? qsTr("Please enter %1 for: ").arg(device) + root.walletName : qsTr("Please enter %1").arg(device)) + translationManager.emptyString;
+                    if (newPasswordDialogMode) {
+                        return qsTr("Please enter new wallet password") + translationManager.emptyString;
+                    } else {
+                        var device = passwordDialogMode ? qsTr("wallet password") : qsTr("wallet device passphrase");
+                        return (root.walletName.length > 0 ? qsTr("Please enter %1 for: ").arg(device) + root.walletName : qsTr("Please enter %1").arg(device)) + translationManager.emptyString;
+                    }
                 }
-                visible: !newPasswordDialogMode
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
@@ -284,7 +287,7 @@ Item {
 
             Label {
                 visible: !passwordDialogMode
-                text: qsTr("Please confirm new password") + translationManager.emptyString
+                text: newPasswordDialogMode ? qsTr("Please confirm new password") : qsTr("Please confirm wallet device passphrase") + translationManager.emptyString
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
