@@ -99,8 +99,8 @@ bool IPC::saveCommand(QString cmdString){
     return true;
 }
 
-bool IPC::saveCommand(const QUrl &url){;
-    this->saveCommand(url.toString());
+bool IPC::saveCommand(const QUrl &url){
+    return this->saveCommand(url.toString());
 }
 
 void IPC::handleConnection(){
