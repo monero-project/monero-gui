@@ -66,7 +66,7 @@ public:
       }
 
       auto tmpPass = m_mgr->m_passphrase.toStdString();
-      m_mgr->m_passphrase = QString::null;
+      m_mgr->m_passphrase = QString();
 
       return Monero::optional<std::string>(tmpPass);
   }
