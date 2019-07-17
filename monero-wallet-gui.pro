@@ -1,6 +1,6 @@
-# qml components require at least QT 5.7.0
-lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 7) {
-  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.7.0")
+# qml components require at least QT 5.9.0
+lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 9) {
+  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.9.0")
 }
 
 TEMPLATE = app
@@ -65,10 +65,12 @@ HEADERS += \
     MainApp.h \
     src/qt/FutureScheduler.h \
     src/qt/ipc.h \
-    src/qt/mime.h \
     src/qt/KeysFiles.h \
     src/qt/utils.h \
-    src/qt/prices.h
+    src/qt/prices.h \
+    src/qt/macoshelper.h \
+    src/qt/MoneroSettings.h \
+    src/qt/TailsOS.h
 
 SOURCES += main.cpp \
     filter.cpp \
@@ -99,10 +101,11 @@ SOURCES += main.cpp \
     MainApp.cpp \
     src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
-    src/qt/mime.cpp \
     src/qt/KeysFiles.cpp \
     src/qt/utils.cpp \
-    src/qt/prices.cpp
+    src/qt/prices.cpp \
+    src/qt/MoneroSettings.cpp \
+    src/qt/TailsOS.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
     HEADERS -= src/zxcvbn-c/zxcvbn.h
@@ -334,7 +337,8 @@ linux {
         -llmdb \
         -lsodium \
         -lhidapi-libusb \
-        -lcrypto $$TREZOR_LINKER
+        -lcrypto $$TREZOR_LINKER \
+        -lX11
 
     if(!android) {
         LIBS+= \
@@ -359,6 +363,8 @@ macx {
     #     message("using static libraries")
     #     LIBS+= -Wl,-Bstatic
     # }
+    QT += macextras
+    OBJECTIVE_SOURCES += src/qt/macoshelper.mm
     LIBS+= \
         -L/usr/local/lib \
         -L/usr/local/opt/openssl/lib \
@@ -372,6 +378,7 @@ macx {
         -lboost_chrono \
         -lboost_program_options \
         -framework CoreFoundation \
+        -framework AppKit \
         -lhidapi \
         -lssl \
         -lsodium \

@@ -1,3 +1,9 @@
+/****************************************************************************
+**
+** Copyright (C) 2016 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+****************************************************************************/
 // Copyright (c) 2014-2019, The Monero Project
 //
 // All rights reserved.
@@ -26,11 +32,50 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef MIME_H
-#define MIME_H
 
-#include <QApplication>
+#ifndef MONEROSETTINGS_H
+#define MONEROSETTINGS_H
 
-void registerXdgMime(QApplication &app);
+#include <QtQml/qqmlparserstatus.h>
+#include <QGuiApplication>
+#include <QClipboard>
+#include <QObject>
+#include <QDebug>
+#include <qsettings.h>
 
-#endif // MIME_H
+static const int settingsWriteDelay = 500; // ms
+
+class MoneroSettings : public QObject, public QQmlParserStatus
+{
+    Q_OBJECT
+    Q_INTERFACES(QQmlParserStatus)
+    Q_PROPERTY(QString fileName READ fileName WRITE setFileName FINAL)
+public:
+    explicit MoneroSettings(QObject *parent = nullptr);
+
+    QString fileName() const;
+    void setFileName(const QString &fileName);
+
+public slots:
+    void _q_propertyChanged();
+
+protected:
+    void timerEvent(QTimerEvent *event) override;
+    void classBegin() override;
+    void componentComplete() override;
+
+private:
+    QVariant readProperty(const QMetaProperty &property) const;
+    void init();
+    void reset();
+    void load();
+    void store();
+
+    QHash<const char *, QVariant> m_changedProperties;
+    QSettings *m_settings;
+    QString m_fileName = QString("");
+    bool m_initialized = false;
+    int m_timerId = 0;
+};
+
+#endif // MONEROSETTINGS_H

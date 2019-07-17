@@ -208,10 +208,11 @@ Rectangle {
                                 confirmationDialog.icon = StandardIcon.Question
                                 confirmationDialog.cancelText = qsTr("Cancel")
                                 confirmationDialog.onAcceptedCallback = function() {
-                                    walletManager.closeWallet();
-                                    walletManager.clearWalletCache(persistentSettings.wallet_path);
-                                    walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
-                                                                      persistentSettings.nettype, persistentSettings.kdfRounds);
+                                    appWindow.closeWallet(function() {
+                                        walletManager.clearWalletCache(persistentSettings.wallet_path);
+                                        walletManager.openWalletAsync(persistentSettings.wallet_path, appWindow.walletPassword,
+                                                                        persistentSettings.nettype, persistentSettings.kdfRounds);
+                                    });
                                 }
 
                                 confirmationDialog.onRejectedCallback = null;
@@ -324,6 +325,41 @@ Rectangle {
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
                 text: isOpenGL ? "OpenGL" : "Low graphics mode"
+            }
+
+            Rectangle {
+                visible: isTails
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            Rectangle {
+                visible: isTails
+                height: 1
+                Layout.topMargin: 2
+                Layout.bottomMargin: 2
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            MoneroComponents.TextBlock {
+                visible: isTails
+                Layout.fillWidth: true
+                font.pixelSize: 14
+                text: qsTr("Tails: ") + translationManager.emptyString
+            }
+
+            MoneroComponents.TextBlock {
+                visible: isTails
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
+                text: tailsUsePersistence ? qsTr("persistent") + translationManager.emptyString : qsTr("persistence disabled") + translationManager.emptyString;
             }
         }
 

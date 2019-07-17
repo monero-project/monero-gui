@@ -116,11 +116,11 @@ Rectangle {
 
             MoneroComponents.LineEdit {
                 Layout.fillWidth: true
+                id: walletCreationHeight
                 readOnly: true
                 copyButton: true
                 labelText: qsTr("Block #") + translationManager.emptyString
                 fontSize: 16
-                text: currentWallet.walletCreationHeight
             }
         }
 
@@ -261,6 +261,7 @@ Rectangle {
     function onPageCompleted() {
         console.log("keys page loaded");
 
+        walletCreationHeight.text = currentWallet.walletCreationHeight
         secretViewKey.text = currentWallet.secretViewKey
         publicViewKey.text = currentWallet.publicViewKey
         secretSpendKey.text = (!currentWallet.viewOnly) ? currentWallet.secretSpendKey : ""

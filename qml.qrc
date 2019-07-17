@@ -96,9 +96,7 @@
         <file>pages/SharedRingDB.qml</file>
         <file>components/effects/ImageMask.qml</file>
         <file>components/IconButton.qml</file>
-        <file>components/PassphraseDialog.qml</file>
         <file>components/PasswordDialog.qml</file>
-        <file>components/NewPasswordDialog.qml</file>
         <file>components/InputDialog.qml</file>
         <file>components/ProcessingSplash.qml</file>
         <file>components/ProgressBar.qml</file>
@@ -253,5 +251,6 @@
         <file>images/copy.svg</file>
         <file>images/edit.svg</file>
         <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
+        <file>images/tails-grey.png</file>
     </qresource>
 </RCC>

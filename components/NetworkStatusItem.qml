@@ -88,6 +88,7 @@ Rectangle {
                 }
                 MouseArea {
                     anchors.fill: parent
+                    visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if(!appWindow.isMining) {
@@ -133,6 +134,7 @@ Rectangle {
 
                 MouseArea {
                     anchors.fill: parent
+                    visible: appWindow.walletMode >= 2
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if(!appWindow.isMining) {

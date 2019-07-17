@@ -49,9 +49,9 @@ Rectangle {
     property var model
     property int sideMargin: 50
     property var initialized: false
-    property int txMax: 5
+    property int txMax: Math.max(5, ((appWindow.height - 250) / 60))
     property int txOffset: 0
-    property int txPage: (txOffset / 5) + 1
+    property int txPage: (txOffset / txMax) + 1
     property int txCount: 0
     property var sortSearchString: null
     property bool sortDirection: true  // true = desc, false = asc
@@ -66,6 +66,8 @@ Rectangle {
     ListModel { id: txListViewModel }
 
     color: "transparent"
+
+    onTxMaxChanged: root.updateDisplay(root.txOffset, root.txMax);
 
     ColumnLayout {
         id: pageRoot
@@ -1343,13 +1345,14 @@ Rectangle {
         root.updateDisplay(root.txOffset, root.txMax);
     }
 
-    function reset() {
+    function reset(keepDate) {
         root.txOffset = 0;
-        root.txMax = 5;
 
         if (typeof root.model !== 'undefined' && root.model != null) {
-            root.model.dateFromFilter = "2014-04-18" // genesis block
-            root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            if (!keepDate) {
+                root.model.dateFromFilter = "2014-04-18" // genesis block
+                root.model.dateToFilter = "9999-09-09" // fix before september 9999
+            }
             // negative values disable filters here;
             root.model.amountFromFilter = -1;
             root.model.amountToFilter = -1;
@@ -1386,6 +1389,8 @@ Rectangle {
                 } else if(item.address !== "" && item.address.startsWith(root.sortSearchString)){
                     txs.push(item);
                 } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                    txs.push(item);
+                } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
                     txs.push(item);
                 } else if (item.hash.startsWith(root.sortSearchString)){
                     txs.push(item);
@@ -1704,6 +1709,6 @@ Rectangle {
 
     function onPageClosed(){
         root.initialized = false;
-        root.reset();
+        root.reset(true);
     }
 }

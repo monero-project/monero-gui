@@ -26,27 +26,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef OSHELPER_H
-#define OSHELPER_H
+#ifndef MACOSHELPER_H
+#define MACOSHELPER_H
 
-#include <QObject>
-/**
- * @brief The OSHelper class - exports to QML some OS-related functions
- */
-class OSHelper : public QObject
+class MacOSHelper
 {
-    Q_OBJECT
+    MacOSHelper() {}
+
 public:
-    explicit OSHelper(QObject *parent = 0);
-
-    Q_INVOKABLE QString temporaryFilename() const;
-    Q_INVOKABLE QString temporaryPath() const;
-    Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;
-    Q_INVOKABLE bool isCapsLock() const;
-
-signals:
-
-public slots:
+    static bool isCapsLock();
 };
 
-#endif // OSHELPER_H
+#endif //MACOSHELPER_H

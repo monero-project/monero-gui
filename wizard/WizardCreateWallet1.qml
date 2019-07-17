@@ -151,7 +151,7 @@ Rectangle {
                     labelFontSize: 14
                     copyButton: false
                     readOnly: true
-                    text: Utils.roundDownToNearestThousand(wizardController.m_wallet.walletCreationHeight)
+                    text: Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0)
                 }
 
                 MoneroComponents.WarningBox {

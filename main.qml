@@ -31,11 +31,11 @@ import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
-import Qt.labs.settings 1.0
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
+import moneroComponents.Settings 1.0
 
 import "components"
 import "components" as MoneroComponents
@@ -283,7 +283,7 @@ ApplicationWindow {
         titleBar.visible = persistentSettings.customDecorations;
     }
 
-    function closeWallet() {
+    function closeWallet(callback) {
 
         // Disconnect all listeners
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
@@ -306,8 +306,17 @@ ApplicationWindow {
         }
 
         currentWallet = undefined;
-        walletManager.closeWallet();
 
+        appWindow.showProcessingSplash(qsTr("Closing wallet..."));
+        if (callback) {
+            walletManager.closeWalletAsync(function() {
+                hideProcessingSplash();
+                callback();
+            });
+        } else {
+            walletManager.closeWallet();
+            hideProcessingSplash();
+        }
     }
 
     function connectWallet(wallet) {
@@ -558,26 +567,21 @@ ApplicationWindow {
         }
     }
 
-    function onWalletClosed(walletAddress) {
-        hideProcessingSplash();
-        console.log(">>> wallet closed: " + walletAddress)
-    }
-
     function onWalletPassphraseNeeded(){
         if(rootItem.state !== "normal") return;
 
         hideProcessingSplash();
 
         console.log(">>> wallet passphrase needed: ")
-        passphraseDialog.onAcceptedCallback = function() {
-            walletManager.onPassphraseEntered(passphraseDialog.passphrase);
+        passwordDialog.onAcceptedPassphraseCallback = function() {
+            walletManager.onPassphraseEntered(passwordDialog.password);
             this.onWalletOpening();
         }
-        passphraseDialog.onRejectedCallback = function() {
+        passwordDialog.onRejectedPassphraseCallback = function() {
             walletManager.onPassphraseEntered("", true);
             this.onWalletOpening();
         }
-        passphraseDialog.open()
+        passwordDialog.openPassphraseDialog()
     }
 
     function onWalletUpdate() {
@@ -1105,27 +1109,30 @@ ApplicationWindow {
         console.log("Hiding processing splash")
         splash.close();
 
-        leftPanel.enabled = true
-        middlePanel.enabled = true
-        titleBar.enabled = true
-        inactiveOverlay.visible = false;
+        if (!passwordDialog.visible) {
+            leftPanel.enabled = true
+            middlePanel.enabled = true
+            titleBar.enabled = true
+            inactiveOverlay.visible = false;
+        }
     }
 
     // close wallet and show wizard
     function showWizard(){
         clearMoneroCardLabelText();
         walletInitialized = false;
-        closeWallet();
-        currentWallet = undefined;
-        wizard.restart();
-        wizard.wizardState = "wizardHome";
-        rootItem.state = "wizard"
-        // reset balance
-        leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
-        fiatApiUpdateBalance(0, 0);
-        // disable timers
-        userInActivityTimer.running = false;
-        simpleModeConnectionTimer.running = false;
+        closeWallet(function() {
+            currentWallet = undefined;
+            wizard.restart();
+            wizard.wizardState = "wizardHome";
+            rootItem.state = "wizard"
+            // reset balance
+            leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
+            fiatApiUpdateBalance(0, 0);
+            // disable timers
+            userInActivityTimer.running = false;
+            simpleModeConnectionTimer.running = false;
+        });
     }
 
     function hideMenu() {
@@ -1289,7 +1296,6 @@ ApplicationWindow {
         y = (Screen.height - maxWindowHeight) / 2
         //
         walletManager.walletOpened.connect(onWalletOpened);
-        walletManager.walletClosed.connect(onWalletClosed);
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
@@ -1341,8 +1347,14 @@ ApplicationWindow {
         }
     }
 
-    Settings {
+    MoneroSettings {
         id: persistentSettings
+        fileName: {
+            if(isTails && tailsUsePersistence)
+                return homePath + "/Persistent/Monero/monero-core.conf";
+            return "";
+        }
+
         property string language
         property string locale
         property string account_name
@@ -1494,23 +1506,6 @@ ApplicationWindow {
         }
     }
 
-    PassphraseDialog {
-        id: passphraseDialog
-        visible: false
-        z: parent.z + 1
-        anchors.fill: parent
-        property var onAcceptedCallback
-        property var onRejectedCallback
-        onAccepted: {
-            if (onAcceptedCallback)
-                onAcceptedCallback();
-        }
-        onRejected: {
-            if (onRejectedCallback)
-                onRejectedCallback();
-        }
-    }
-
     PasswordDialog {
         id: passwordDialog
         visible: false
@@ -1518,6 +1513,8 @@ ApplicationWindow {
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
+        property var onAcceptedPassphraseCallback
+        property var onRejectedPassphraseCallback
         onAccepted: {
             if (onAcceptedCallback)
                 onAcceptedCallback();
@@ -1526,16 +1523,9 @@ ApplicationWindow {
             if (onRejectedCallback)
                 onRejectedCallback();
         }
-    }
-
-    NewPasswordDialog {
-        id: newPasswordDialog
-        z: parent.z + 1
-        visible:false
-        anchors.fill: parent
-        onAccepted: {
-            if (currentWallet.setPassword(newPasswordDialog.password)) {
-                appWindow.walletPassword = newPasswordDialog.password;
+        onAcceptedNewPassword: {
+            if (currentWallet.setPassword(passwordDialog.password)) {
+                appWindow.walletPassword = passwordDialog.password;
                 informationPopup.title = qsTr("Information") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Password changed successfully") + translationManager.emptyString;
                 informationPopup.icon  = StandardIcon.Information;
@@ -1547,7 +1537,14 @@ ApplicationWindow {
             informationPopup.onCloseCallback = null;
             informationPopup.open();
         }
-        onRejected: {
+        onRejectedNewPassword: {}
+        onAcceptedPassphrase: {
+            if (onAcceptedPassphraseCallback)
+                onAcceptedPassphraseCallback();
+        }
+        onRejectedPassphrase: {
+            if (onRejectedPassphraseCallback)
+                onRejectedPassphraseCallback();
         }
     }
 
@@ -2131,8 +2128,8 @@ ApplicationWindow {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
-        walletManager.closeWallet();
-        Qt.quit();
+        
+        closeWallet(Qt.quit);
     }
 
     function onWalletCheckUpdatesComplete(update) {
@@ -2201,6 +2198,7 @@ ApplicationWindow {
     function checkInUserActivity() {
         if(rootItem.state !== "normal") return;
         if(!persistentSettings.lockOnUserInActivity) return;
+        if(passwordDialog.visible) return;
 
         // prompt password after X seconds of inactivity
         var epoch = Math.floor((new Date).getTime() / 1000);

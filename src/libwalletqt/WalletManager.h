@@ -117,7 +117,7 @@ public:
     /*!
      * \brief closeWalletAsync - asynchronous version of "closeWallet"
      */
-    Q_INVOKABLE void closeWalletAsync();
+    Q_INVOKABLE void closeWalletAsync(const QJSValue& callback);
 
     //! checks is given filename is a wallet;
     Q_INVOKABLE bool walletExists(const QString &path) const;
@@ -192,7 +192,6 @@ signals:
     void walletPassphraseNeeded();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
-    void walletClosed(const QString &walletAddress);
     void checkUpdatesComplete(const QString &result) const;
     void miningStatus(bool isMining) const;
 

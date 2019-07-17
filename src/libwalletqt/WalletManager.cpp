@@ -66,7 +66,7 @@ public:
       }
 
       auto tmpPass = m_mgr->m_passphrase.toStdString();
-      m_mgr->m_passphrase = QString::null;
+      m_mgr->m_passphrase = QString();
 
       return Monero::optional<std::string>(tmpPass);
   }
@@ -228,11 +228,11 @@ QString WalletManager::closeWallet()
     return result;
 }
 
-void WalletManager::closeWalletAsync()
+void WalletManager::closeWalletAsync(const QJSValue& callback)
 {
     m_scheduler.run([this] {
-        emit walletClosed(closeWallet());
-    });
+        return QJSValueList({closeWallet()});
+    }, callback);
 }
 
 bool WalletManager::walletExists(const QString &path) const
