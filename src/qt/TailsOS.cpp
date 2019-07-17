@@ -90,11 +90,7 @@ void TailsOS::persistXdgMime(QString filePath, QString data)
     QDir().mkpath(tailsPath);  // ensure directory exists
     fileWrite(tailsPath + file.fileName(), data);
 
-    // write to current session
-#ifdef QT_DEBUG
-    qDebug() << "Writing xdg mime: " << file.filePath();
-#endif
-
-    QDir().mkpath(file.path());  // ensure directory exists
-    fileWrite(file.filePath(), data);
+    QString tailsIconPath = tailsPathData + "dotfiles/.icons/monero.png";
+    QPixmap appicon(":/images/appicons/64x64.png");
+    pixmapWrite(tailsIconPath, appicon);
 }

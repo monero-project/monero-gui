@@ -28,6 +28,7 @@
 
 #include <QtCore>
 #include <QApplication>
+#include <QPixmap>
 
 #include "src/qt/TailsOS.h"
 #include "utils.h"
@@ -55,6 +56,19 @@ bool fileWrite(QString path, QString data) {
         return true;
     }
 
+    return false;
+}
+
+bool pixmapWrite(QString path, QPixmap pixmap) {
+    QFile file(path);
+    QFileInfo iconInfo(file);
+    QDir().mkpath(iconInfo.path());
+    if(file.open(QIODevice::WriteOnly)){
+        pixmap.save(&file, "PNG");
+        file.close();
+        return true;
+    }
+    
     return false;
 }
 
@@ -100,7 +114,6 @@ void registerXdgMime(QApplication &app){
 
     if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
         TailsOS::persistXdgMime(filePath, mime);
-        return;
     }
 
     QFileInfo file(filePath);
@@ -111,6 +124,9 @@ void registerXdgMime(QApplication &app){
 #endif
 
     fileWrite(filePath, mime);
+
+    QPixmap appicon(":/images/appicons/64x64.png");
+    pixmapWrite(QDir::homePath() + "/.icons/monero.png", appicon);
 #endif
 }
 
