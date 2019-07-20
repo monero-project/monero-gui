@@ -8,7 +8,7 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.14.1.0
+AppVersion=0.14.1.2
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
