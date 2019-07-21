@@ -150,6 +150,18 @@ Rectangle {
 
                 MoneroComponents.StandardButton {
                     small: true
+                    visible: !isTails && I2PZero.available
+                    text: qsTr("Configure I2P") + translationManager.emptyString
+
+                    onClicked: {
+                        wizardController.wizardStackView.backTransition = true;
+                        wizardController.wizardState = 'wizardAnonymityNetworks';
+                    }                    
+                }
+
+                MoneroComponents.StandardButton {
+                    visible: !persistentSettings.customDecorations
+                    small: true
                     text: qsTr("Change language") + translationManager.emptyString
 
                     onClicked: {

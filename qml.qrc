@@ -178,6 +178,7 @@
         <file>fonts/FontAwesome/FontAwesome.qml</file>
         <file>fonts/FontAwesome/Object.qml</file>
         <file>fonts/FontAwesome/qmldir</file>
+        <file>wizard/networks/StatusEntry.qml</file>
         <file>wizard/WizardAskPassword.qml</file>
         <file>wizard/WizardController.qml</file>
         <file>wizard/WizardCreateWallet1.qml</file>
@@ -219,6 +220,7 @@
         <file>images/local-node-full.png</file>
         <file>images/local-node-full@2x.png</file>
         <file>wizard/WizardOpenWallet1.qml</file>
+        <file>wizard/WizardAnonymity.qml</file>
         <file>images/arrow-right-in-circle.png</file>
         <file>images/arrow-right-in-circle@2x.png</file>
         <file>images/right.svg</file>
@@ -241,5 +243,10 @@
         <file>components/AdvancedOptionsItem.qml</file>
         <file>images/busy-indicator.png</file>
         <file>images/busy-indicator@2x.png</file>
+        <file>images/i2p-zero-ti.png</file>
+        <file>images/i2p-zero-t.png</file>
+        <file>images/tor-black.svg</file>
+        <file>images/tor-white.svg</file>
+        <file>images/tor-z.svg</file>
     </qresource>
 </RCC>

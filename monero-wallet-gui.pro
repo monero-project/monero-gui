@@ -85,7 +85,9 @@ HEADERS += \
     src/qt/utils.h \
     src/qt/macoshelper.h \
     src/qt/MoneroSettings.h \
-    src/qt/TailsOS.h
+    src/qt/TailsOS.h \
+	src/qt/I2PZero.h \
+    src/qt/DownloadManager.h
 
 SOURCES += src/main/main.cpp \
     src/main/filter.cpp \
@@ -125,7 +127,9 @@ SOURCES += src/main/main.cpp \
     src/qt/updater.cpp \
     src/qt/utils.cpp \
     src/qt/MoneroSettings.cpp \
-    src/qt/TailsOS.cpp
+    src/qt/TailsOS.cpp \
+	src/qt/I2PZero.cpp \
+    src/qt/DownloadManager.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
     HEADERS -= src/zxcvbn-c/zxcvbn.h

@@ -47,7 +47,7 @@ public:
 
     static DaemonManager * instance(const QStringList *args = nullptr);
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool i2p = false);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;

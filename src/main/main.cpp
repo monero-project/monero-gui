@@ -70,6 +70,7 @@
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#include "qt/I2PZero.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -495,6 +496,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     Network network;
     engine.rootContext()->setContextProperty("Network", &network);
+
+    I2PZero i2pzero("1.13");
+    engine.rootContext()->setContextProperty("I2PZero", &i2pzero);
+    if(!isTails) i2pzero.detect();
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

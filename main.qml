@@ -368,7 +368,6 @@ ApplicationWindow {
         middlePanel.getProofClicked.connect(handleGetProof);
         middlePanel.checkProofClicked.connect(handleCheckProof);
 
-
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
@@ -381,6 +380,11 @@ ApplicationWindow {
             currentDaemonAddress = localDaemonAddress
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
+
+        if(!isTails && I2PZero.available && persistentSettings.isI2P && I2PZero.state == 0) {
+            I2PZero.start();
+        }
+
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -686,10 +690,15 @@ ApplicationWindow {
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
+        // Check i2p settings
+        var i2p = false;
+        if(!isTails && I2PZero.available && persistentSettings.isI2P)
+            i2p = true;
+
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, i2p);
     }
 
     function stopDaemon(callback){
@@ -700,6 +709,9 @@ ApplicationWindow {
             hideProcessingSplash();
             callback(result);
         });
+
+        if(!isTails && I2PZero.available && persistentSettings.isI2P && I2PZero.state > 0)
+            I2PZero.stop();
     }
 
     function onDaemonStarted(){
@@ -1395,6 +1407,7 @@ ApplicationWindow {
         property bool checkForUpdates: true
         property bool autosave: true
         property int autosaveMinutes: 10
+        property bool isI2P: true
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false

@@ -10,7 +10,7 @@ set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
 
-option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
+option(USE_DEVICE_TREZOR "Trezor support compilation" OFF)
 option(ENABLE_PASS_STRENGTH_METER "Disable zxcvbn" OFF)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
@@ -144,14 +144,6 @@ message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
 message(STATUS "OpenSSL: include dir at ${OPENSSL_INCLUDE_DIR}")
 message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARIES}")
 
-# Zbar (for QR scanner)
-if(WITH_SCANNER)
-    add_definitions(-DWITH_SCANNER)
-    find_package(ZBar0)
-    message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
-    message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
-endif()
-
 # Sodium
 find_library(SODIUM_LIBRARY sodium)
 message(STATUS "libsodium: libraries at ${SODIUM_LIBRARY}")
@@ -194,18 +186,14 @@ if(UNIX AND NOT APPLE)
     endif()
 endif()
 
-if(MINGW)
-    string(REGEX MATCH "^[^/]:/[^/]*" msys2_install_path "${CMAKE_C_COMPILER}")
-    message(STATUS "MSYS location: ${msys2_install_path}")
-    set(CMAKE_INCLUDE_PATH "${msys2_install_path}/mingw${ARCH_WIDTH}/include")
-    # This is necessary because otherwise CMake will make Boost libraries -lfoo
-    # rather than a full path. Unfortunately, this makes the shared libraries get
-    # linked due to a bug in CMake which misses putting -static flags around the
-    # -lfoo arguments.
-    set(DEFLIB ${msys2_install_path}/mingw${ARCH_WIDTH}/lib)
-    list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
-    list(REMOVE_ITEM CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
+if(APPLE)
+  set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/5.9.7/clang_64)
+elseif(UNIX)
+  set(CMAKE_PREFIX_PATH $ENV{HOME}/Qt/5.15.0/gcc_64)
 endif()
+
+include_directories($ENV{HOME}/Qt/5.15.0/gcc_64/include)
+include_directories($ENV{HOME}/Qt/5.15.0/gcc_64/include/QtWidgets/)
 
 set(QT5_LIBRARIES
   Qt5Core
@@ -218,9 +206,6 @@ set(QT5_LIBRARIES
   Qt5Xml
 )
 
-if(WITH_SCANNER)
-  list(APPEND QT5_LIBRARIES Qt5Multimedia)
-endif()
 
 # TODO: drop this once we switch to Qt 5.14+
 find_package(Qt5QmlModels QUIET)
@@ -241,6 +226,17 @@ endforeach()
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
 
+#include_directories(
+#        ${Qt5Core_INCLUDE_DIRS}
+#        ${Qt5Quick_INCLUDE_DIRS}
+#        ${Qt5Gui_INCLUDE_DIRS}
+#        ${Qt5Widgets_INCLUDE_DIRS}
+#        ${Qt5Qml_INCLUDE_DIRS}
+#        ${Qt5Svg_INCLUDE_DIRS}
+#        ${Qt5Xml_INCLUDE_DIRS}
+#        ${Qt5Network_INCLUDE_DIRS}
+#)
+
 if(QT5_PKG_CONFIG_FOUND)
   set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
   if(STATIC)
@@ -258,94 +254,6 @@ list(APPEND QT5_LIBRARIES
   ${Qt5Qml_PLUGINS}
   ${Qt5Network_PLUGINS}
 )
-
-if(STATIC)
-  set(QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/folderlistmodel)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/settings)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects/private)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtMultimedia)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs/Private)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Layouts)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/PrivateWidgets)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Templates.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Window.2)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/XmlListModel)
-
-  set(QT5_EXTRA_LIBRARIES_LIST
-    qtquicktemplates2plugin
-    Qt5QuickTemplates2
-    qtquickcontrols2plugin
-    Qt5QuickControls2
-    dialogplugin
-    dialogsprivateplugin
-    qmlfolderlistmodelplugin
-    qmlsettingsplugin
-    qmlxmllistmodelplugin
-    qquicklayoutsplugin
-  )
-
-  if(UNIX AND NOT APPLE)
-    list(APPEND QT5_EXTRA_LIBRARIES_LIST
-      Qt5XcbQpa
-      xcb-static
-      Qt5ServiceSupport
-    )
-  endif()
-
-  if(WITH_SCANNER)
-    list(APPEND QT5_EXTRA_LIBRARIES_LIST
-      declarative_multimedia
-      Qt5MultimediaQuick_p
-    )
-  endif()
-
-  list(APPEND QT5_EXTRA_LIBRARIES_LIST
-    Qt5EventDispatcherSupport
-    Qt5FontDatabaseSupport
-    Qt5PacketProtocol
-    Qt5ThemeSupport
-    qtgraphicaleffectsplugin
-    qtgraphicaleffectsprivate
-    qtquick2plugin
-    qtquickcontrolsplugin
-    widgetsplugin
-    windowplugin
-  )
-
-  set(QT5_EXTRA_LIBRARIES)
-  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
-    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS})
-    list(APPEND QT5_EXTRA_LIBRARIES ${${LIBRARY}_LIBRARY})
-  endforeach()
-
-  if(MINGW)
-    list(APPEND QT5_EXTRA_LIBRARIES qtfreetype)
-
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      list(APPEND QT5_EXTRA_LIBRARIES D3D11 Dwrite D2d1)
-    endif()
-  endif()
-
-  set(QT5_LIBRARIES
-    ${QT5_EXTRA_LIBRARIES}
-    ${QT5_LIBRARIES}
-  )
-
-  if(UNIX AND NOT APPLE)
-    pkg_check_modules(X11_XCB REQUIRED x11-xcb)
-    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
-
-    list(APPEND QT5_LIBRARIES
-      ${FONTCONFIG_STATIC_LIBRARIES}
-      ${X11_XCB_STATIC_LIBRARIES}
-    )
-  endif()
-endif()
 
 message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
 message(STATUS "Using Boost libraries at ${Boost_LIBRARIES}")

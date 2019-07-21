@@ -2,7 +2,9 @@
 *.user.*
 translations/*.qm
 build
+CMakeFiles
 version.js
+*_autogen
 # IOS stuff below
 moc_*
 *.o
