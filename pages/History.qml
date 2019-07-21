@@ -251,7 +251,6 @@ Rectangle {
                         font.pixelSize: 15
                         text: qsTr("Blockheight") + translationManager.emptyString
                         color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
-                        anchors.verticalCenter: parent.verticalCenter
                         themeTransition: false
                     }
 
@@ -312,7 +311,6 @@ Rectangle {
                         text: qsTr("Date") + translationManager.emptyString
                         color: root.sortBy === "timestamp" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         themeTransition: false
-                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     MoneroEffects.ImageMask {
@@ -372,7 +370,6 @@ Rectangle {
                         text: qsTr("Amount") + translationManager.emptyString
                         color: root.sortBy === "amount" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                         themeTransition: false
-                        anchors.verticalCenter: parent.verticalCenter
                     }
 
                     MoneroEffects.ImageMask {
