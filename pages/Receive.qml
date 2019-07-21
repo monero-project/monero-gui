@@ -256,6 +256,7 @@ Rectangle {
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
                         current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
+                        subaddressListView.currentIndex = current_subaddress_table_index
                     }
                     inputDialog.onRejectedCallback = null;
                     inputDialog.open()
