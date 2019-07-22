@@ -627,7 +627,7 @@ Item {
                     in_txpool = true;
                 } else {
                     if (blockchainHeight == null)
-                        blockchainHeight = appWindow.currentWallet.blockChainHeight()
+                        blockchainHeight = walletManager.blockchainHeight()
                     confirmations = blockchainHeight - blockHeight - 1
                     displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
                 }
