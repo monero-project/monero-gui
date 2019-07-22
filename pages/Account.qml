@@ -365,6 +365,7 @@ Rectangle {
                         appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
                         appWindow.currentWallet.switchSubaddressAccount(appWindow.currentWallet.numSubaddressAccounts() - 1)
                         current_subaddress_account_table_index = appWindow.currentWallet.numSubaddressAccounts() - 1
+                        subaddressAccountListView.currentIndex = current_subaddress_account_table_index
                         appWindow.onWalletUpdate();
                     }
                     inputDialog.onRejectedCallback = null;
