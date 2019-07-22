@@ -390,7 +390,7 @@ Item {
                 MoneroComponents.StandardButton {
                     id: cancelButton
                     small: true
-                    text: root.walletName.length > 0 ? qsTr("Change wallet") + translationManager.emptyString : qsTr("Cancel") + translationManager.emptyString
+                    text: qsTr("Cancel") + translationManager.emptyString
                     KeyNavigation.tab: passwordInput1
                     onClicked: {
                         root.close()
@@ -407,7 +407,7 @@ Item {
                 MoneroComponents.StandardButton {
                     id: okButton
                     small: true
-                    text: qsTr("Continue") + translationManager.emptyString
+                    text: qsTr("Ok") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: {
