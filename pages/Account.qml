@@ -101,8 +101,7 @@ Rectangle {
                     id: balanceAll
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
-                    color: MoneroComponents.Style.dimmedFontColor
-                    themeTransition: false
+                    color: MoneroComponents.Style.defaultFontColor
 
                     MouseArea {
                         hoverEnabled: true
@@ -135,8 +134,7 @@ Rectangle {
                     id: unlockedBalanceAll
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
-                    color: MoneroComponents.Style.dimmedFontColor
-                    themeTransition: false
+                    color: MoneroComponents.Style.defaultFontColor
 
                     MouseArea {
                         hoverEnabled: true
