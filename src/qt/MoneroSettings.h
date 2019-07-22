@@ -72,7 +72,7 @@ private:
     void store();
 
     QHash<const char *, QVariant> m_changedProperties;
-    QSettings *m_settings;
+    QSettings *m_settings = NULL;
     QString m_fileName = QString("");
     bool m_initialized = false;
     int m_timerId = 0;
