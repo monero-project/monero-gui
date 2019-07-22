@@ -147,7 +147,8 @@ void MoneroSettings::reset()
 {
     if (this->m_initialized && this->m_settings && !this->m_changedProperties.isEmpty())
         this->store();
-    delete this->m_settings;
+    if (this->m_settings)
+        delete this->m_settings;
 }
 
 void MoneroSettings::store()
