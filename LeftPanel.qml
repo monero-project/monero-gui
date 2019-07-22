@@ -114,13 +114,12 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: (persistentSettings.customDecorations)? 50 : 0
 
-        RowLayout {
+        Item {
             Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.topMargin: 20
                 anchors.leftMargin: 20
-                anchors.verticalCenter: parent.verticalCenter
                 height: 490
                 width: 260
 
@@ -230,7 +229,6 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.topMargin: 20
                 anchors.leftMargin: 20
-                anchors.verticalCenter: parent.verticalCenter
                 height: 490
                 width: 50
 

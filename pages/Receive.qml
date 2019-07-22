@@ -101,7 +101,7 @@ Rectangle {
                 ListView {
                     id: subaddressListView
                     Layout.fillWidth: true
-                    anchors.fill: parent
+                    Layout.fillHeight: true
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false

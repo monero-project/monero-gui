@@ -60,7 +60,7 @@ Rectangle {
             id: textWelcome
             opacity: 0
             Layout.preferredWidth: parent.width / 1.3
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignCenter
             color: MoneroComponents.Style.defaultFontColor
             text: "Welcome - Wilkommen - Bonvenon - Bienvenido - Bienvenue - Välkommen - Selamat datang - Benvenuto - 歡迎 - Welkom - Bem Vindo - добро пожаловать"
 
@@ -97,7 +97,7 @@ Rectangle {
             }
             Layout.preferredWidth: size
             Layout.preferredHeight: size
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignCenter
             mipmap: true
 
             property bool animSlow: false
@@ -149,7 +149,7 @@ Rectangle {
             id: buttonsGrid
             opacity: 0
             columns: isMobile ? 1 : 2
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignCenter
             Layout.topMargin: 20
             Layout.fillWidth: true
             columnSpacing: 20
@@ -190,7 +190,7 @@ Rectangle {
         MoneroComponents.TextPlain {
             id: versionText
             opacity: 0
-            anchors.horizontalCenter: parent.horizontalCenter
+            Layout.alignment: Qt.AlignCenter
             font.bold: true
             font.pixelSize: 12
             font.family: MoneroComponents.Style.fontRegular.name

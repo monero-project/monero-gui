@@ -69,7 +69,7 @@ ColumnLayout {
 
     TextArea {
         Layout.fillWidth: true
-        anchors.horizontalCenter: parent.horizontalCenter
+        Layout.alignment: Qt.AlignCenter
         visible: parent.subtitle !== ""
 
         color: MoneroComponents.Style.dimmedFontColor
