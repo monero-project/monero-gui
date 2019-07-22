@@ -165,9 +165,8 @@ The executable can be found in the build/release/bin folder.
 
 5. Add the Qt bin directory to your path
 
-    Example: `export PATH=$PATH:$HOME/Qt/5.9.7/clang_64/bin`
-
-    This is the directory where Qt 5.x is installed on **your** system
+  - Example for Qt: `export PATH=$PATH:$HOME/Qt/5.9.7/clang_64/bin`
+  - Example for Homebrew: `export PATH=$PATH:/usr/local/opt/qt/bin`
 
 6. Grab an up-to-date copy of the monero-gui repository
 
