@@ -53,7 +53,7 @@ void Prices::getJSON(const QString url) {
 void Prices::gotJSON() {
     // Check connectivity
     if (!m_reply || m_reply->error() != QNetworkReply::NoError){
-        this->gotError();
+        this->gotError("Problem with reply from server. Check connectivity.");
         m_reply->deleteLater();
         return;
     }
@@ -105,6 +105,6 @@ void Prices::gotError() {
 }
 
 void Prices::gotError(const QString &message) {
-    qCritical() << __FUNCTION__ << ": Error: " << message;
+    qCritical() << "[Fiat API] Error:" << message;
     emit priceJsonError(message);
 }
