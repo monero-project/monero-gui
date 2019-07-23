@@ -145,7 +145,7 @@ Rectangle {
                 ListView {
                     id: addressBookListView
                     Layout.fillWidth: true
-                    anchors.fill: parent
+                    Layout.fillHeight: true
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false

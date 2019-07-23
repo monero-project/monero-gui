@@ -209,13 +209,13 @@ Rectangle {
             clip: true
 
             ScrollBar.vertical: ScrollBar {
-                parent: mainFlickable.parent
+                parent: root
                 anchors.left: parent.right
-                anchors.leftMargin: 3
+                anchors.leftMargin: -14 // 10 margin + 4 scrollbar width
                 anchors.top: parent.top
-                anchors.topMargin: 4
+                anchors.topMargin: persistentSettings.customDecorations ? 60 : 10
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: persistentSettings.customDecorations ? 4 : 0 
+                anchors.bottomMargin: persistentSettings.customDecorations ? 15 : 10
             }
 
             onFlickingChanged: {
