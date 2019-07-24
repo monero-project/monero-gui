@@ -38,6 +38,7 @@ Rectangle {
     id: wizardRestoreWallet1
 
     color: "transparent"
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardRestoreWallet1"
 
     function verify() {
@@ -88,6 +89,7 @@ Rectangle {
     }
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true

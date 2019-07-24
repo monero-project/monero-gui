@@ -194,63 +194,63 @@ Rectangle {
             State {
                 name: "wizardLanguage"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardLanguageView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardLanguageView.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardLanguageView.pageHeight + 80 }
             }, State {
                 name: "wizardHome"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardHomeView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardHomeView.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardHomeView.pageHeight + 80 }
             }, State {
                 name: "wizardCreateWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet1View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet1View.pageHeight + 80 }
             }, State {
                 name: "wizardCreateWallet2"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet2View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet2View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet2View.pageHeight + 80 }
             }, State {
                 name: "wizardCreateWallet3"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet3View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet3View.height + wizardController.flickableHeightMargin + 400 }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet3View.pageHeight + 80 }
             }, State {
                 name: "wizardCreateWallet4"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet4View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet4View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateWallet4View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet1View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet1View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet2"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet2View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet2View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet2View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet3"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet3View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet3View.childrenRect.height + wizardController.flickableHeightMargin + 400 }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet3View.pageHeight + 80 }
             }, State {
                 name: "wizardRestoreWallet4"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardRestoreWallet4View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet4View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardRestoreWallet4View.pageHeight + 80 }
             }, State {
                 name: "wizardCreateDevice1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateDevice1View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice1View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardCreateDevice1View.pageHeight + 80 }
             }, State {
                 name: "wizardOpenWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardOpenWallet1View }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardOpenWallet1View.pageHeight + 80 }
             }, State {
                 name: "wizardModeSelection"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeSelectionView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeSelectionView.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeSelectionView.pageHeight + 80 }
             }, State {
                 name: "wizardModeRemoteNodeWarning"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeRemoteNodeWarningView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeRemoteNodeWarningView.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeRemoteNodeWarningView.pageHeight + 80 }
             }, State {
                 name: "wizardModeBootstrap"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.childrenRect.height + wizardController.flickableHeightMargin }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.pageHeight + 80 }
             }
         ]
 

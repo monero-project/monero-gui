@@ -36,9 +36,11 @@ Rectangle {
     id: wizardCreateWallet3
 
     color: "transparent"
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateWallet3"
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true

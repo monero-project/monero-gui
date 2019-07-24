@@ -37,10 +37,12 @@ Rectangle {
     id: wizardModeBootstrapWarning
 
     color: "transparent"
-    property string viewName: "wizardModeRemoteNodeWarning"
+    property alias pageHeight: pageRoot.height
+    property string viewName: "wizardModeBootstrap"
     property bool understood: false
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true
@@ -79,7 +81,7 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name <i>bootstrap</i>), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
+                    text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
                     Layout.fillWidth: true
