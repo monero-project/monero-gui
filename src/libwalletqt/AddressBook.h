@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -34,7 +35,7 @@
 #include <QList>
 #include <QDateTime>
 
-namespace Monero {
+namespace NejCoin {
 class AddressBook;
 }
 class AddressBookRow;
@@ -43,8 +44,8 @@ class AddressBook : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Monero::AddressBookRow*> getAll(bool update = false) const;
-    Q_INVOKABLE Monero::AddressBookRow * getRow(int index) const;
+    Q_INVOKABLE QList<NejCoin::AddressBookRow*> getAll(bool update = false) const;
+    Q_INVOKABLE NejCoin::AddressBookRow * getRow(int index) const;
     Q_INVOKABLE bool addRow(const QString &address, const QString &payment_id, const QString &description) const;
     Q_INVOKABLE bool deleteRow(int rowId) const;
     quint64 count() const;
@@ -70,10 +71,10 @@ signals:
 public slots:
 
 private:
-    explicit AddressBook(Monero::AddressBook * abImpl, QObject *parent);
+    explicit AddressBook(NejCoin::AddressBook * abImpl, QObject *parent);
     friend class Wallet;
-    Monero::AddressBook * m_addressBookImpl;
-    mutable QList<Monero::AddressBookRow*> m_rows;
+    NejCoin::AddressBook * m_addressBookImpl;
+    mutable QList<NejCoin::AddressBookRow*> m_rows;
 };
 
 #endif // ADDRESSBOOK_H

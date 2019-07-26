@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -26,7 +27,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2
@@ -77,7 +78,7 @@ Rectangle {
                 onNextClicked: {
                     wizardController.recoveryWallet();
                     wizardController.writeWallet();
-                    wizardController.useMoneroClicked();
+                    wizardController.useNejCoinClicked();
                 }
             }
         }

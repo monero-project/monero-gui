@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -30,7 +31,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Rectangle {
     id: wizardCreateWallet2

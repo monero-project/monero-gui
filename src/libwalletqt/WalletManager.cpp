@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -41,7 +42,7 @@
 #include <QMutexLocker>
 #include <QString>
 
-class WalletPassphraseListenerImpl : public  Monero::WalletListener
+class WalletPassphraseListenerImpl : public  NejCoin::WalletListener
 {
 public:
   WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_wallet(nullptr) {}
@@ -53,10 +54,10 @@ public:
   virtual void updated() override {};
   virtual void refreshed() override {};
 
-  virtual Monero::optional<std::string> onDevicePassphraseRequest(bool on_device) override
+  virtual NejCoin::optional<std::string> onDevicePassphraseRequest(bool on_device) override
   {
       qDebug() << __FUNCTION__;
-      if (on_device) return Monero::optional<std::string>();
+      if (on_device) return NejCoin::optional<std::string>();
 
       m_mgr->onWalletPassphraseNeeded(m_wallet);
 
@@ -68,7 +69,7 @@ public:
       auto tmpPass = m_mgr->m_passphrase.toStdString();
       m_mgr->m_passphrase = QString();
 
-      return Monero::optional<std::string>(tmpPass);
+      return NejCoin::optional<std::string>(tmpPass);
   }
 
   virtual void onDeviceButtonRequest(uint64_t code) override
@@ -81,7 +82,7 @@ public:
     emit m_mgr->deviceButtonPressed();
   }
 
-  virtual void onSetWallet(Monero::Wallet * wallet) override
+  virtual void onSetWallet(NejCoin::Wallet * wallet) override
   {
       qDebug() << __FUNCTION__;
       m_wallet = wallet;
@@ -89,7 +90,7 @@ public:
 
 private:
   WalletManager * m_mgr;
-  Monero::Wallet * m_wallet;
+  NejCoin::Wallet * m_wallet;
 };
 
 WalletManager * WalletManager::m_instance = nullptr;
@@ -111,8 +112,8 @@ Wallet *WalletManager::createWallet(const QString &path, const QString &password
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
         delete m_currentWallet;
     }
-    Monero::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
-                                                  language.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds);
+    NejCoin::Wallet * w = m_pimpl->createWallet(path.toStdString(), password.toStdString(),
+                                                  language.toStdString(), static_cast<NejCoin::NetworkType>(nettype), kdfRounds);
     m_currentWallet  = new Wallet(w);
     return m_currentWallet;
 }
@@ -129,7 +130,7 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
     qDebug("%s: opening wallet at %s, nettype = %d ",
            __PRETTY_FUNCTION__, qPrintable(path), nettype);
 
-    Monero::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype), kdfRounds, &tmpListener);
+    NejCoin::Wallet * w =  m_pimpl->openWallet(path.toStdString(), password.toStdString(), static_cast<NejCoin::NetworkType>(nettype), kdfRounds, &tmpListener);
     w->setListener(nullptr);
 
     qDebug("%s: opened wallet: %s, status: %d", __PRETTY_FUNCTION__, w->address(0, 0).c_str(), w->status());
@@ -158,7 +159,7 @@ Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, 
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
         delete m_currentWallet;
     }
-    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), "", memo.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds);
+    NejCoin::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), "", memo.toStdString(), static_cast<NejCoin::NetworkType>(nettype), restoreHeight, kdfRounds);
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
 }
@@ -173,7 +174,7 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
         delete m_currentWallet;
         m_currentWallet = NULL;
     }
-    Monero::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), "", language.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight,
+    NejCoin::Wallet * w = m_pimpl->createWalletFromKeys(path.toStdString(), "", language.toStdString(), static_cast<NejCoin::NetworkType>(nettype), restoreHeight,
                                                        address.toStdString(), viewkey.toStdString(), spendkey.toStdString(), kdfRounds);
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
@@ -190,7 +191,7 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
         delete m_currentWallet;
         m_currentWallet = NULL;
     }
-    Monero::Wallet * w = m_pimpl->createWalletFromDevice(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype),
+    NejCoin::Wallet * w = m_pimpl->createWalletFromDevice(path.toStdString(), password.toStdString(), static_cast<NejCoin::NetworkType>(nettype),
                                                          deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString(), 1, &tmpListener);
     w->setListener(nullptr);
 
@@ -257,7 +258,7 @@ QString WalletManager::errorString() const
 
 quint64 WalletManager::maximumAllowedAmount() const
 {
-    return Monero::Wallet::maximumAllowedAmount();
+    return NejCoin::Wallet::maximumAllowedAmount();
 }
 
 QString WalletManager::maximumAllowedAmountAsSting() const
@@ -267,33 +268,33 @@ QString WalletManager::maximumAllowedAmountAsSting() const
 
 QString WalletManager::displayAmount(quint64 amount) const
 {
-    return QString::fromStdString(Monero::Wallet::displayAmount(amount));
+    return QString::fromStdString(NejCoin::Wallet::displayAmount(amount));
 }
 
 quint64 WalletManager::amountFromString(const QString &amount) const
 {
-    return Monero::Wallet::amountFromString(amount.toStdString());
+    return NejCoin::Wallet::amountFromString(amount.toStdString());
 }
 
 quint64 WalletManager::amountFromDouble(double amount) const
 {
-    return Monero::Wallet::amountFromDouble(amount);
+    return NejCoin::Wallet::amountFromDouble(amount);
 }
 
 bool WalletManager::paymentIdValid(const QString &payment_id) const
 {
-    return Monero::Wallet::paymentIdValid(payment_id.toStdString());
+    return NejCoin::Wallet::paymentIdValid(payment_id.toStdString());
 }
 
 bool WalletManager::addressValid(const QString &address, NetworkType::Type nettype) const
 {
-    return Monero::Wallet::addressValid(address.toStdString(), static_cast<Monero::NetworkType>(nettype));
+    return NejCoin::Wallet::addressValid(address.toStdString(), static_cast<NejCoin::NetworkType>(nettype));
 }
 
 bool WalletManager::keyValid(const QString &key, const QString &address, bool isViewKey,  NetworkType::Type nettype) const
 {
     std::string error;
-    if(!Monero::Wallet::keyValid(key.toStdString(), address.toStdString(), isViewKey, static_cast<Monero::NetworkType>(nettype), error)){
+    if(!NejCoin::Wallet::keyValid(key.toStdString(), address.toStdString(), isViewKey, static_cast<NejCoin::NetworkType>(nettype), error)){
         qDebug() << QString::fromStdString(error);
         return false;
     }
@@ -302,7 +303,7 @@ bool WalletManager::keyValid(const QString &key, const QString &address, bool is
 
 QString WalletManager::paymentIdFromAddress(const QString &address, NetworkType::Type nettype) const
 {
-    return QString::fromStdString(Monero::Wallet::paymentIdFromAddress(address.toStdString(), static_cast<Monero::NetworkType>(nettype)));
+    return QString::fromStdString(NejCoin::Wallet::paymentIdFromAddress(address.toStdString(), static_cast<NejCoin::NetworkType>(nettype)));
 }
 
 void WalletManager::setDaemonAddressAsync(const QString &address)
@@ -376,7 +377,7 @@ bool WalletManager::localDaemonSynced() const
 
 bool WalletManager::isDaemonLocal(const QString &daemon_address) const
 {
-    return Monero::Utils::isAddressLocal(daemon_address.toStdString());
+    return NejCoin::Utils::isAddressLocal(daemon_address.toStdString());
 }
 
 QString WalletManager::resolveOpenAlias(const QString &address) const
@@ -420,12 +421,12 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
 
 void WalletManager::setLogLevel(int logLevel)
 {
-    Monero::WalletManagerFactory::setLogLevel(logLevel);
+    NejCoin::WalletManagerFactory::setLogLevel(logLevel);
 }
 
 void WalletManager::setLogCategories(const QString &categories)
 {
-    Monero::WalletManagerFactory::setLogCategories(categories.toStdString());
+    NejCoin::WalletManagerFactory::setLogCategories(categories.toStdString());
 }
 
 QString WalletManager::urlToLocalPath(const QUrl &url) const
@@ -442,7 +443,7 @@ QUrl WalletManager::localPathToUrl(const QString &path) const
 double WalletManager::getPasswordStrength(const QString &password) const
 {
     static const char *local_dict[] = {
-        "monero", "fluffypony", NULL
+        "nejcoin", "fluffypony", NULL
     };
 
     if (!ZxcvbnInit("zxcvbn.dict")) {
@@ -474,7 +475,7 @@ void WalletManager::checkUpdatesAsync(const QString &software, const QString &su
 QString WalletManager::checkUpdates(const QString &software, const QString &subdir) const
 {
   qDebug() << "Checking for updates";
-  const std::tuple<bool, std::string, std::string, std::string, std::string> result = Monero::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
+  const std::tuple<bool, std::string, std::string, std::string, std::string> result = NejCoin::WalletManager::checkUpdates(software.toStdString(), subdir.toStdString());
   if (!std::get<0>(result))
     return QString("");
   return QString::fromStdString(std::get<1>(result) + "|" + std::get<2>(result) + "|" + std::get<3>(result) + "|" + std::get<4>(result));
@@ -502,7 +503,7 @@ WalletManager::WalletManager(QObject *parent)
     : QObject(parent)
     , m_scheduler(this)
 {
-    m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
+    m_pimpl =  NejCoin::WalletManagerFactory::getWalletManager();
 }
 
 WalletManager::~WalletManager()
@@ -510,7 +511,7 @@ WalletManager::~WalletManager()
     m_scheduler.shutdownWaitForFinished();
 }
 
-void WalletManager::onWalletPassphraseNeeded(Monero::Wallet *)
+void WalletManager::onWalletPassphraseNeeded(NejCoin::Wallet *)
 {
     m_mutex_pass.lock();
     m_passphrase_abort = false;

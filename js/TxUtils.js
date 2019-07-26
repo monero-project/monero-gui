@@ -75,12 +75,12 @@ function isValidOpenAliasAddress(address) {
 }
 
 function makeQRCodeString(addr, amount) {
-    var XMR_URI_SCHEME = "monero:"
-    var XMR_AMOUNT = "tx_amount"
+    var NEJC_URI_SCHEME = "nejcoin:"
+    var NEJC_AMOUNT = "tx_amount"
     var qrCodeString =""
-    qrCodeString += (XMR_URI_SCHEME + addr)
+    qrCodeString += (NEJC_URI_SCHEME + addr)
     if (amount !== undefined && amount !== ""){
-      qrCodeString += ("?" + XMR_AMOUNT + "=" + amount)
+      qrCodeString += ("?" + NEJC_AMOUNT + "=" + amount)
     }
     return qrCodeString
 }

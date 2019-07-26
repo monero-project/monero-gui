@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -31,14 +32,14 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
-import "../components" as MoneroComponents
-import "../components/effects/" as MoneroEffects
+import "../components" as NejCoinComponents
+import "../components/effects/" as NejCoinEffects
 
 import "../js/TxUtils.js" as TxUtils
-import moneroComponents.AddressBook 1.0
-import moneroComponents.AddressBookModel 1.0
-import moneroComponents.Clipboard 1.0
-import moneroComponents.NetworkType 1.0
+import nejcoinComponents.AddressBook 1.0
+import nejcoinComponents.AddressBookModel 1.0
+import nejcoinComponents.Clipboard 1.0
+import nejcoinComponents.NetworkType 1.0
 import FontAwesome 1.0
 
 Rectangle {
@@ -70,8 +71,8 @@ Rectangle {
             TextArea {
                 id: titleLabel
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.defaultFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                color: NejCoinComponents.Style.defaultFontColor
+                font.family: NejCoinComponents.Style.fontRegular.name
                 font.pixelSize: 32
                 horizontalAlignment: TextInput.AlignLeft
                 selectByMouse: false
@@ -93,8 +94,8 @@ Rectangle {
 
             TextArea {
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dimmedFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
+                color: NejCoinComponents.Style.dimmedFontColor
+                font.family: NejCoinComponents.Style.fontRegular.name
                 font.pixelSize: 16
                 horizontalAlignment: TextInput.AlignLeft
                 selectByMouse: false
@@ -102,7 +103,7 @@ Rectangle {
                 textMargin: 0
                 leftPadding: 0
                 topPadding: 0
-                text: qsTr("This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.") + translationManager.emptyString
+                text: qsTr("This makes it easier to send or receive NejCoin and reduces errors when typing in addresses manually.") + translationManager.emptyString
                 width: parent.width
                 readOnly: true
 
@@ -114,7 +115,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 id: addFirstEntryButton
                 Layout.topMargin: 20
                 text: qsTr("Add an address") + translationManager.emptyString
@@ -129,7 +130,7 @@ Rectangle {
             visible: addressBookListView.count >= 1
             spacing: 0
 
-            MoneroComponents.Label {
+            NejCoinComponents.Label {
                 Layout.bottomMargin: 20
                 fontSize: 32
                 text: qsTr("Address book") + translationManager.emptyString
@@ -163,16 +164,16 @@ Rectangle {
                         }
 
                         Rectangle {
-                            color: MoneroComponents.Style.appWindowBorderColor
+                            color: NejCoinComponents.Style.appWindowBorderColor
                             anchors.right: parent.right
                             anchors.left: parent.left
                             anchors.top: parent.top
                             height: 1
 
-                            MoneroEffects.ColorTransition {
+                            NejCoinEffects.ColorTransition {
                                 targetObj: parent
-                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                                blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+                                whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
                             }
                         }
 
@@ -182,9 +183,9 @@ Rectangle {
                             anchors.rightMargin: 110
                             color: "transparent"
 
-                            MoneroComponents.Label {
+                            NejCoinComponents.Label {
                                 id: descriptionLabel
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: NejCoinComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -194,15 +195,15 @@ Rectangle {
                                 textWidth: addressLabel.x - descriptionLabel.x - 1
                             }
 
-                            MoneroComponents.Label {
+                            NejCoinComponents.Label {
                                 id: addressLabel
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: NejCoinComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
                                 anchors.leftMargin: -addressLabel.width - 5
 
                                 fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
+                                fontFamily: NejCoinComponents.Style.fontMonoRegular.name;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 540 ? 1 : (mainLayout.width < 700 ? 2 : 3));
                             }
 
@@ -223,10 +224,10 @@ Rectangle {
                             height: 21
                             spacing: 10
 
-                            MoneroComponents.IconButton {
+                            NejCoinComponents.IconButton {
                                 id: sendToButton
                                 image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: NejCoinComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 20
                                 Layout.preferredHeight: 20
@@ -235,10 +236,10 @@ Rectangle {
                                 }
                             }
 
-                            MoneroComponents.IconButton {
+                            NejCoinComponents.IconButton {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: NejCoinComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
@@ -249,12 +250,12 @@ Rectangle {
                                 }
                             }
 
-                            MoneroComponents.IconButton {
+                            NejCoinComponents.IconButton {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
-                                color: MoneroComponents.Style.defaultFontColor
+                                color: NejCoinComponents.Style.defaultFontColor
                                 opacity: 0.5
 
                                 onClicked: {
@@ -270,18 +271,18 @@ Rectangle {
 
             Rectangle {
                 id: border2
-                color: MoneroComponents.Style.appWindowBorderColor
+                color: NejCoinComponents.Style.appWindowBorderColor
                 Layout.fillWidth: true
                 height: 1
 
-                MoneroEffects.ColorTransition {
+                NejCoinEffects.ColorTransition {
                     targetObj: border2
-                    blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                    whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                    blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+                    whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
                 }
             }
 
-            MoneroComponents.CheckBox {
+            NejCoinComponents.CheckBox {
                 id: addNewEntryCheckbox
                 border: false
                 checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
@@ -302,13 +303,13 @@ Rectangle {
             visible: false
             spacing: 0
 
-            MoneroComponents.Label {
+            NejCoinComponents.Label {
                 fontSize: 32
                 wrapMode: Text.WordWrap
                 text: (root.editEntry ? qsTr("Edit an address") : qsTr("Add an address")) + translationManager.emptyString
             }
 
-            MoneroComponents.LineEditMulti {
+            NejCoinComponents.LineEditMulti {
                 id: addressLine
                 Layout.topMargin: 20
                 labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
@@ -338,8 +339,8 @@ Rectangle {
                 inlineButton.text: FontAwesome.qrcode
                 inlineButton.fontPixelSize: 22
                 inlineButton.fontFamily: FontAwesome.fontFamily
-                inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-                inlineButton.buttonColor: MoneroComponents.Style.orange
+                inlineButton.textColor: NejCoinComponents.Style.defaultFontColor
+                inlineButton.buttonColor: NejCoinComponents.Style.orange
                 inlineButton.onClicked: {
                     cameraUi.state = "Capture"
                     cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
@@ -347,7 +348,7 @@ Rectangle {
                 inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 id: resolveButton
                 Layout.topMargin: 10
                 text: qsTr("Resolve") + translationManager.emptyString
@@ -386,7 +387,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEditMulti {
+            NejCoinComponents.LineEditMulti {
                 id: descriptionLine
                 Layout.topMargin: 20
                 labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
@@ -395,7 +396,7 @@ Rectangle {
             }
             RowLayout {
                 Layout.topMargin: 20
-                MoneroComponents.StandardButton {
+                NejCoinComponents.StandardButton {
                     id: addButton
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
@@ -427,7 +428,7 @@ Rectangle {
                     Layout.leftMargin: 20
                     font.pixelSize: 16
                     font.bold: false
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: NejCoinComponents.Style.defaultFontColor
                     text: qsTr("Cancel") + translationManager.emptyString
 
                     MouseArea {
@@ -444,7 +445,7 @@ Rectangle {
                     Layout.leftMargin: 20
                     font.pixelSize: 16
                     font.bold: false
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: NejCoinComponents.Style.defaultFontColor
                     text: qsTr("Delete") + translationManager.emptyString
 
                     MouseArea {
@@ -512,7 +513,7 @@ Rectangle {
       oaPopup.open()
     }
 
-    MoneroComponents.StandardDialog {
+    NejCoinComponents.StandardDialog {
         // dynamically change onclose handler
         property var onCloseCallback
         id: oaPopup

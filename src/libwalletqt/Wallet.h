@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -36,13 +37,13 @@
 #include <QJSValue>
 #include <QtConcurrent/QtConcurrent>
 
-#include "wallet/api/wallet2_api.h" // we need to have an access to the Monero::Wallet::Status enum here;
+#include "wallet/api/wallet2_api.h" // we need to have an access to the NejCoin::Wallet::Status enum here;
 #include "qt/FutureScheduler.h"
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
 
-namespace Monero {
+namespace NejCoin {
     class Wallet; // forward declaration
 }
 
@@ -90,17 +91,17 @@ public:
 
 
     enum Status {
-        Status_Ok       = Monero::Wallet::Status_Ok,
-        Status_Error    = Monero::Wallet::Status_Error,
-        Status_Critical = Monero::Wallet::Status_Critical
+        Status_Ok       = NejCoin::Wallet::Status_Ok,
+        Status_Error    = NejCoin::Wallet::Status_Error,
+        Status_Critical = NejCoin::Wallet::Status_Critical
     };
 
     Q_ENUM(Status)
 
     enum ConnectionStatus {
-        ConnectionStatus_Connected       = Monero::Wallet::ConnectionStatus_Connected,
-        ConnectionStatus_Disconnected    = Monero::Wallet::ConnectionStatus_Disconnected,
-        ConnectionStatus_WrongVersion    = Monero::Wallet::ConnectionStatus_WrongVersion
+        ConnectionStatus_Connected       = NejCoin::Wallet::ConnectionStatus_Connected,
+        ConnectionStatus_Disconnected    = NejCoin::Wallet::ConnectionStatus_Disconnected,
+        ConnectionStatus_WrongVersion    = NejCoin::Wallet::ConnectionStatus_WrongVersion
     };
 
     Q_ENUM(ConnectionStatus)
@@ -361,7 +362,7 @@ signals:
 
 private:
     Wallet(QObject * parent = nullptr);
-    Wallet(Monero::Wallet *w, QObject * parent = 0);
+    Wallet(NejCoin::Wallet *w, QObject * parent = 0);
     ~Wallet();
 
     //! returns current wallet's block height
@@ -378,7 +379,7 @@ private:
     friend class WalletManager;
     friend class WalletListenerImpl;
     //! libwallet's
-    Monero::Wallet * m_walletImpl;
+    NejCoin::Wallet * m_walletImpl;
     // history lifetime managed by wallet;
     TransactionHistory * m_history;
     // Used for UI history view
@@ -406,7 +407,7 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
-    Monero::WalletListener *m_walletListener;
+    NejCoin::WalletListener *m_walletListener;
     FutureScheduler m_scheduler;
 };
 

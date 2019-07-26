@@ -6,7 +6,7 @@ The steps to build the Windows installer deterministically by a group of people 
 
 * Agree on a particular version of Inno Setup, and everybody install that
 * Get the zip file for the Windows GUI wallet and unpack it, plus make sure / check that the file timestamps are preserved, i.e. upacked timestamp = timestamp in zip file
-* Build using Inno Setup and the `Monero.iss` script file
+* Build using Inno Setup and the `NejCoin.iss` script file
 * Success: All people arrive at a bit-for-bit identical installer .exe file, which they can verify by calculating and exchanging SHA256 hashes
 
 Some background info why this process is relatively simple:
@@ -19,11 +19,11 @@ The version of Inno Setup **is** important however: People wanting to reproducib
 
 Also important are the **timestamps** of the source files because they go into the installer file, to be restored at install time.
 
-You would think timestamp preservation is no problem when unpacking the zip archive with the files for the Windows GUI wallet from getmonero.org, but if you use the zip folder unpack functionality of the Windows 7 GUI, the files get the current date, **not** the file recorded in the zip file. (The Windows 10 GUI seems better here, and also the 7zip app.)
+You would think timestamp preservation is no problem when unpacking the zip archive with the files for the Windows GUI wallet from getnejcoin.org, but if you use the zip folder unpack functionality of the Windows 7 GUI, the files get the current date, **not** the file recorded in the zip file. (The Windows 10 GUI seems better here, and also the 7zip app.)
 
 In any case, after unpacking, check the file dates in the `bin` directory where the installer script looks for them with the dates of the files in the zip file: They must be identical.
 
-Note that the the following line in `Monero.iss` is also important regarding file timestamps:
+Note that the the following line in `NejCoin.iss` is also important regarding file timestamps:
 
     TimeStampsInUTC=yes
 

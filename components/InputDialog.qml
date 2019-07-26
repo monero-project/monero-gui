@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -33,7 +34,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Item {
     id: root
@@ -81,9 +82,9 @@ Item {
                 Layout.fillWidth: true
 
                 font.pixelSize: 16
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: NejCoinComponents.Style.fontLight.name
 
-                color: MoneroComponents.Style.defaultFontColor
+                color: NejCoinComponents.Style.defaultFontColor
             }
 
             TextField {
@@ -93,21 +94,21 @@ Item {
                 Layout.fillWidth: true
                 horizontalAlignment: TextInput.AlignLeft
                 verticalAlignment: TextInput.AlignVCenter
-                font.family: MoneroComponents.Style.fontLight.name
+                font.family: NejCoinComponents.Style.fontLight.name
                 font.pixelSize: 24
                 KeyNavigation.tab: okButton
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
-                color: MoneroComponents.Style.defaultFontColor
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
+                color: NejCoinComponents.Style.defaultFontColor
+                selectionColor: NejCoinComponents.Style.textSelectionColor
+                selectedTextColor: NejCoinComponents.Style.textSelectedColor
 
                 background: Rectangle {
                     radius: 2
-                    border.color: MoneroComponents.Style.inputBorderColorActive
+                    border.color: NejCoinComponents.Style.inputBorderColorActive
                     border.width: 1
-                    color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
+                    color: NejCoinComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
                 }
 
                 Keys.onReturnPressed: {
@@ -127,7 +128,7 @@ Item {
                 Layout.topMargin: 16
                 Layout.alignment: Qt.AlignRight
 
-                MoneroComponents.StandardButton {
+                NejCoinComponents.StandardButton {
                     id: cancelButton
                     small: true
                     width: 120
@@ -139,7 +140,7 @@ Item {
                         root.rejected()
                     }
                 }
-                MoneroComponents.StandardButton {
+                NejCoinComponents.StandardButton {
                     id: okButton
                     small: true
                     width: 120

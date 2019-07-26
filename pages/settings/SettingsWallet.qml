@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -32,7 +33,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
 
 import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
+import "../../components" as NejCoinComponents
 
 Rectangle {
     color: "transparent"
@@ -54,8 +55,8 @@ Rectangle {
             Layout.preferredHeight: 1
             Layout.fillWidth: true
             Layout.bottomMargin: 8
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+            color: NejCoinComponents.Style.dividerColor
+            opacity: NejCoinComponents.Style.dividerOpacity
         }
 
         GridLayout {
@@ -68,22 +69,22 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
                     Layout.topMargin: 8
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Close this wallet") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlainArea {
-                    color: MoneroComponents.Style.dimmedFontColor
-                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
-                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
+                NejCoinComponents.TextPlainArea {
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    colorBlackTheme: NejCoinComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: NejCoinComponents.Style._w_dimmedFontColor
                     width: parent.width
                     Layout.fillWidth: true
                     horizontalAlignment: TextInput.AlignLeft
@@ -91,7 +92,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: qsTr("Close wallet") + translationManager.emptyString
                 onClicked: {
@@ -110,8 +111,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 8
             Layout.bottomMargin: 8
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+            color: NejCoinComponents.Style.dividerColor
+            opacity: NejCoinComponents.Style.dividerOpacity
         }
 
         GridLayout {
@@ -125,22 +126,22 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
                     Layout.topMargin: 8
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Create a view-only wallet") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlainArea {
-                    color: MoneroComponents.Style.dimmedFontColor
-                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
-                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
+                NejCoinComponents.TextPlainArea {
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    colorBlackTheme: NejCoinComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: NejCoinComponents.Style._w_dimmedFontColor
                     width: parent.width
                     Layout.fillWidth: true
                     horizontalAlignment: TextInput.AlignLeft
@@ -148,7 +149,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: qsTr("Create wallet") + translationManager.emptyString
                 onClicked: {
@@ -176,8 +177,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 8
             Layout.bottomMargin: 8
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+            color: NejCoinComponents.Style.dividerColor
+            opacity: NejCoinComponents.Style.dividerOpacity
         }
 
         GridLayout {
@@ -190,22 +191,22 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
                     Layout.topMargin: 8
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Show seed & keys") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlainArea {
-                    color: MoneroComponents.Style.dimmedFontColor
-                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
-                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
+                NejCoinComponents.TextPlainArea {
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    colorBlackTheme: NejCoinComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: NejCoinComponents.Style._w_dimmedFontColor
                     width: parent.width
                     Layout.fillWidth: true
                     horizontalAlignment: TextInput.AlignLeft
@@ -213,7 +214,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: qsTr("Show seed") + translationManager.emptyString
                 onClicked: {
@@ -229,8 +230,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 8
             Layout.bottomMargin: 8
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+            color: NejCoinComponents.Style.dividerColor
+            opacity: NejCoinComponents.Style.dividerOpacity
         }
 
         GridLayout {
@@ -244,22 +245,22 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
                     Layout.topMargin: 8
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Rescan wallet balance") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlainArea {
-                    color: MoneroComponents.Style.dimmedFontColor
-                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
-                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
+                NejCoinComponents.TextPlainArea {
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    colorBlackTheme: NejCoinComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: NejCoinComponents.Style._w_dimmedFontColor
                     width: parent.width
                     Layout.fillWidth: true
                     horizontalAlignment: TextInput.AlignLeft
@@ -267,7 +268,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: qsTr("Rescan") + translationManager.emptyString
                 onClicked: {
@@ -296,8 +297,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: 8
             Layout.bottomMargin: 8
-            color: MoneroComponents.Style.dividerColor
-            opacity: MoneroComponents.Style.dividerOpacity
+            color: NejCoinComponents.Style.dividerColor
+            opacity: NejCoinComponents.Style.dividerOpacity
         }
 
         GridLayout {
@@ -310,22 +311,22 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 20
                     Layout.topMargin: 8
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Change wallet password") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlainArea {
-                    color: MoneroComponents.Style.dimmedFontColor
-                    colorBlackTheme: MoneroComponents.Style._b_dimmedFontColor
-                    colorWhiteTheme: MoneroComponents.Style._w_dimmedFontColor
+                NejCoinComponents.TextPlainArea {
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    colorBlackTheme: NejCoinComponents.Style._b_dimmedFontColor
+                    colorWhiteTheme: NejCoinComponents.Style._w_dimmedFontColor
                     width: parent.width
                     Layout.fillWidth: true
                     horizontalAlignment: TextInput.AlignLeft
@@ -333,7 +334,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: qsTr("Change password") + translationManager.emptyString
                 onClicked: {

@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -27,7 +28,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import "." as MoneroComponents
+import "." as NejCoinComponents
 
 Item {
     id: scrollItem
@@ -62,7 +63,7 @@ Item {
             return t < 50 ? 50 : t
         }
         y: 0; x: 0
-        color: MoneroComponents.Style.orange
+        color: NejCoinComponents.Style.orange
         opacity: flickable.moving || handleArea.pressed || scrollArea.containsMouse ? 0.8 : 0
         visible: flickable.contentHeight > flickable.height
 

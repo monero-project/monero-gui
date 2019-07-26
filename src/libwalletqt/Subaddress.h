@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -38,8 +39,8 @@ class Subaddress : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Monero::SubaddressRow*> getAll(bool update = false) const;
-    Q_INVOKABLE Monero::SubaddressRow * getRow(int index) const;
+    Q_INVOKABLE QList<NejCoin::SubaddressRow*> getAll(bool update = false) const;
+    Q_INVOKABLE NejCoin::SubaddressRow * getRow(int index) const;
     Q_INVOKABLE void addRow(quint32 accountIndex, const QString &label) const;
     Q_INVOKABLE void setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const;
     Q_INVOKABLE void refresh(quint32 accountIndex) const;
@@ -52,10 +53,10 @@ signals:
 public slots:
 
 private:
-    explicit Subaddress(Monero::Subaddress * subaddressImpl, QObject *parent);
+    explicit Subaddress(NejCoin::Subaddress * subaddressImpl, QObject *parent);
     friend class Wallet;
-    Monero::Subaddress * m_subaddressImpl;
-    mutable QList<Monero::SubaddressRow*> m_rows;
+    NejCoin::Subaddress * m_subaddressImpl;
+    mutable QList<NejCoin::SubaddressRow*> m_rows;
 };
 
 #endif // SUBADDRESS_H

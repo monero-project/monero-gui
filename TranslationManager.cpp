@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -54,7 +55,7 @@ bool TranslationManager::setLanguage(const QString &language)
     }
 
     QString dir = qApp->applicationDirPath() + "/translations";
-    QString filename = "monero-core_" + language;
+    QString filename = "nejcoin-core_" + language;
 
     qDebug("%s: loading translation file '%s' from '%s'",
            __FUNCTION__, qPrintable(filename), qPrintable(dir));

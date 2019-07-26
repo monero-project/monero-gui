@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -32,22 +33,22 @@ import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 
-import moneroComponents.Wallet 1.0
-import moneroComponents.PendingTransaction 1.0
-import moneroComponents.NetworkType 1.0
-import moneroComponents.Settings 1.0
+import nejcoinComponents.Wallet 1.0
+import nejcoinComponents.PendingTransaction 1.0
+import nejcoinComponents.NetworkType 1.0
+import nejcoinComponents.Settings 1.0
 
 import "components"
-import "components" as MoneroComponents
-import "components/effects" as MoneroEffects
-import "pages/merchant" as MoneroMerchant
+import "components" as NejCoinComponents
+import "components/effects" as NejCoinEffects
+import "pages/merchant" as NejCoinMerchant
 import "wizard"
 import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero"
+    title: "NejCoin"
 
     property var currentItem
     property bool hideBalanceForced: false
@@ -87,21 +88,21 @@ ApplicationWindow {
     property bool themeTransition: false
 
     // fiat price conversion
-    property int fiatPriceXMRUSD: 0
-    property int fiatPriceXMREUR: 0
+    property int fiatPriceNEJCUSD: 0
+    property int fiatPriceNEJCEUR: 0
     property var fiatPriceAPIs: {
         return {
             "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
+                "nejcusd": "https://api.kraken.com/0/public/Ticker?pair=NEJCUSD",
+                "nejceur": "https://api.kraken.com/0/public/Ticker?pair=NEJCEUR"
             },
             "coingecko": {
-                "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
+                "nejcusd": "https://api.coingecko.com/api/v3/simple/price?ids=nejcoin&vs_currencies=usd",
+                "nejceur": "https://api.coingecko.com/api/v3/simple/price?ids=nejcoin&vs_currencies=eur"
             },
             "cryptocompare": {
-                "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
-                "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
+                "nejcusd": "https://min-api.cryptocompare.com/data/price?fsym=NEJC&tsyms=USD",
+                "nejceur": "https://min-api.cryptocompare.com/data/price?fsym=NEJC&tsyms=EUR",
             }
         }
     }
@@ -115,8 +116,8 @@ ApplicationWindow {
             return service;
         }
 
-        // monero-gui workgroup maintained
-        return "https://autonode.xmr.pm/"
+        // nejcoin-gui workgroup maintained
+        return "https://autonode.nejc.pm/"
     }
 
     // true if wallet ever synchronized
@@ -270,7 +271,7 @@ ApplicationWindow {
         }  else {
             var wallet_path = walletPath();
             if(isIOS)
-                wallet_path = moneroAccountsDir + wallet_path;
+                wallet_path = nejcoinAccountsDir + wallet_path;
             // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
             console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
 
@@ -427,8 +428,8 @@ ApplicationWindow {
     }
 
     function onUriHandler(uri){
-        if(uri.startsWith("monero://")){
-            var address = uri.substring("monero://".length);
+        if(uri.startsWith("nejcoin://")){
+            var address = uri.substring("nejcoin://".length);
 
             var params = {}
             if(address.length === 0) return;
@@ -720,7 +721,7 @@ ApplicationWindow {
         currentWallet.startRefresh();
         daemonRunning = false;
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
-        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "nejcoind.exe" : "nejcoind")
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -763,7 +764,7 @@ ApplicationWindow {
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
-        console.log("monero sent found")
+        console.log("nejcoin sent found")
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
 
         if(middlePanel.state == "History")
@@ -773,7 +774,7 @@ ApplicationWindow {
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
             if(isIOS)
-                return walletManager.walletExists(moneroAccountsDir + persistentSettings.wallet_path);
+                return walletManager.walletExists(nejcoinAccountsDir + persistentSettings.wallet_path);
             else
                 return walletManager.walletExists(persistentSettings.wallet_path);
         }
@@ -847,10 +848,10 @@ ApplicationWindow {
 
         // validate amount;
         if (amount !== "(all)") {
-            var amountxmr = walletManager.amountFromString(amount);
-            console.log("integer amount: ", amountxmr);
+            var amountnejc = walletManager.amountFromString(amount);
+            console.log("integer amount: ", amountnejc);
             console.log("integer unlocked",currentWallet.unlockedBalance)
-            if (amountxmr <= 0) {
+            if (amountnejc <= 0) {
                 hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
@@ -862,7 +863,7 @@ ApplicationWindow {
                 informationPopup.onCloseCallback = null
                 informationPopup.open()
                 return;
-            } else if (amountxmr > currentWallet.unlockedBalance) {
+            } else if (amountnejc > currentWallet.unlockedBalance) {
                 hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
@@ -879,14 +880,14 @@ ApplicationWindow {
         if (amount === "(all)")
             currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
         else
-            currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
+            currentWallet.createTransactionAsync(address, paymentId, amountnejc, mixinCount, priority);
     }
 
     //Choose where to save transaction
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" +moneroAccountsDir
+        folder: "file://" +nejcoinAccountsDir
         selectExisting: false;
 
         onAccepted: {
@@ -974,7 +975,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("NejCoin sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -1054,10 +1055,10 @@ ApplicationWindow {
                 informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
+                    informationPopup.text = qsTr("This address received %1 nejcoin, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 nejcoin, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
                 }
             }
             else {
@@ -1119,7 +1120,7 @@ ApplicationWindow {
 
     // close wallet and show wizard
     function showWizard(){
-        clearMoneroCardLabelText();
+        clearNejCoinCardLabelText();
         walletInitialized = false;
         closeWallet(function() {
             currentWallet = undefined;
@@ -1150,7 +1151,7 @@ ApplicationWindow {
     visible: true
     width: screenWidth > 980 ? 980 : 800
     height: screenHeight > maxWindowHeight ? maxWindowHeight : 700
-    color: MoneroComponents.Style.appWindowBackgroundColor
+    color: NejCoinComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
     onWidthChanged: x -= 0
 
@@ -1174,18 +1175,18 @@ ApplicationWindow {
                 return;
             }
 
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
+            var key = currency === "nejceur" ? "XNEJCZEUR" : "XNEJCZUSD";
             var ticker = resp.result[key]["o"];
             return ticker;
         } else if(resp._url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
-            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
+            var key = currency === "nejceur" ? "eur" : "usd";
+            if(!resp.hasOwnProperty("nejcoin") || !resp["nejcoin"].hasOwnProperty(key)){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
-            return resp["monero"][key];
+            return resp["nejcoin"][key];
         } else if(resp._url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
+            var key = currency === "nejceur" ? "EUR" : "USD";
             if(!resp.hasOwnProperty(key)){
                 appWindow.fiatApiError("cryptocompare API has error(s)");
                 return;
@@ -1232,10 +1233,10 @@ ApplicationWindow {
             return;
         }
 
-        if(persistentSettings.fiatPriceCurrency === "xmrusd")
-            appWindow.fiatPriceXMRUSD = ticker;
-        else if(persistentSettings.fiatPriceCurrency === "xmreur")
-            appWindow.fiatPriceXMREUR = ticker;
+        if(persistentSettings.fiatPriceCurrency === "nejcusd")
+            appWindow.fiatPriceNEJCUSD = ticker;
+        else if(persistentSettings.fiatPriceCurrency === "nejceur")
+            appWindow.fiatPriceNEJCEUR = ticker;
 
         appWindow.updateBalance();
     }
@@ -1263,8 +1264,8 @@ ApplicationWindow {
 
     function fiatApiUpdateBalance(balance, unlocked_balance){
         // update balance card
-        var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
-        var symbol = persistentSettings.fiatPriceCurrency === "xmrusd" ? "$" : "€"
+        var ticker = persistentSettings.fiatPriceCurrency === "nejcusd" ? appWindow.fiatPriceNEJCUSD : appWindow.fiatPriceNEJCEUR;
+        var symbol = persistentSettings.fiatPriceCurrency === "nejcusd" ? "$" : "€"
         if(ticker <= 0){
             console.log(fiatApiError("Could not update balance card; invalid ticker value"));
             leftPanel.unlockedBalanceTextFiat = "N/A";
@@ -1347,11 +1348,11 @@ ApplicationWindow {
         }
     }
 
-    MoneroSettings {
+    NejCoinSettings {
         id: persistentSettings
         fileName: {
             if(isTails && tailsUsePersistence)
-                return homePath + "/Persistent/Monero/monero-core.conf";
+                return homePath + "/Persistent/NejCoin/nejcoin-core.conf";
             return "";
         }
 
@@ -1399,10 +1400,10 @@ ApplicationWindow {
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
         property string fiatPriceProvider: "kraken"
-        property string fiatPriceCurrency: "xmrusd"
+        property string fiatPriceCurrency: "nejcusd"
 
         Component.onCompleted: {
-            MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
+            NejCoinComponents.Style.blackTheme = persistentSettings.blackTheme
         }
     }
 
@@ -1845,7 +1846,7 @@ ApplicationWindow {
         WizardController {
             id: wizard
             anchors.fill: parent
-            onUseMoneroClicked: {
+            onUseNejCoinClicked: {
                 rootItem.state = "normal";
                 appWindow.initialize();
             }
@@ -1869,11 +1870,11 @@ ApplicationWindow {
             height: 34
             width: 34
 
-            MoneroEffects.ImageMask {
+            NejCoinEffects.ImageMask {
                 anchors.centerIn: parent
                 visible: persistentSettings.customDecorations
                 image: "qrc:///images/resize.png"
-                color: MoneroComponents.Style.defaultFontColor
+                color: NejCoinComponents.Style.defaultFontColor
                 width: 12
                 height: 12
                 opacity: (parent.containsMouse || parent.pressed) ? 0.5 : 1.0
@@ -1923,7 +1924,7 @@ ApplicationWindow {
             }
         }
 
-        MoneroMerchant.MerchantTitlebar {
+        NejCoinMerchant.MerchantTitlebar {
             id: titleBarOrange
             visible: persistentSettings.customDecorations && middlePanel.state === "Merchant"
             anchors.left: parent.left
@@ -1951,7 +1952,7 @@ ApplicationWindow {
                 source: "qrc:///images/tip.png"
             }
 
-            MoneroComponents.TextPlain {
+            NejCoinComponents.TextPlain {
                 id: content
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: 6
@@ -2056,14 +2057,14 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         width: statusMessageText.contentWidth + 20
         anchors.horizontalCenter: parent.horizontalCenter
-        color: MoneroComponents.Style.blackTheme ? "black" : "white"
+        color: NejCoinComponents.Style.blackTheme ? "black" : "white"
         height: 40
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: statusMessageText
             anchors.fill: parent
             anchors.margins: 10
             font.pixelSize: 14
-            color: MoneroComponents.Style.defaultFontColor
+            color: NejCoinComponents.Style.defaultFontColor
             themeTransition: false
         }
     }
@@ -2144,13 +2145,13 @@ ApplicationWindow {
             //var auto_url = parts[3]
             var osBuildTag = isMac ? "mac-x64" : isWindows ? "win-x64" : isLinux ? "linux-x64" : "unknownBuildTag"
             var extension = isMac || isLinux ? ".tar.bz2" : isWindows ? ".zip" : ".unknownExtension"
-            var base_url = "https://downloads.getmonero.org/gui/monero-gui-"
+            var base_url = "https://downloads.getnejcoin.org/gui/nejcoin-gui-"
             var download_url = base_url + osBuildTag + "-v" + version + extension
             var msg = ""
             if (osBuildTag !== "unknownBuildTag") {
-                msg = qsTr("New version of Monero v.%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(download_url).arg(hash) + translationManager.emptyString
+                msg = qsTr("New version of NejCoin v.%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(download_url).arg(hash) + translationManager.emptyString
             } else {
-                msg = qsTr("New version of Monero is available. Check out getmonero.org") + translationManager.emptyString
+                msg = qsTr("New version of NejCoin is available. Check out getnejcoin.org") + translationManager.emptyString
             }
             notifier.show(msg)
         } else {
@@ -2159,7 +2160,7 @@ ApplicationWindow {
     }
 
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("monero-gui", "gui")
+        walletManager.checkUpdatesAsync("nejcoin-gui", "gui")
     }
 
     Timer {
@@ -2178,14 +2179,14 @@ ApplicationWindow {
     }
 
     // reset label text. othewise potential privacy leak showing unlock time when switching wallets
-    function clearMoneroCardLabelText(){
+    function clearNejCoinCardLabelText(){
         leftPanel.minutesToUnlockTxt = qsTr("Unlocked balance")
         leftPanel.balanceLabelText = qsTr("Balance")
     }
 
     // some fields need an extra nudge when changing languages
     function resetLanguageFields(){
-        clearMoneroCardLabelText()
+        clearNejCoinCardLabelText()
         onWalletRefresh()
     }
 
@@ -2252,10 +2253,10 @@ ApplicationWindow {
         visible: false
         anchors.fill: parent
         anchors.topMargin: titleBar.height
-        color: MoneroComponents.Style.blackTheme ? "black" : "white"
-        opacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.9
+        color: NejCoinComponents.Style.blackTheme ? "black" : "white"
+        opacity: NejCoinComponents.Style.blackTheme ? 0.8 : 0.9
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
             blackColor: "black"
             whiteColor: "white"
@@ -2264,71 +2265,71 @@ ApplicationWindow {
 
     // borders on white theme + linux
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !NejCoinComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: NejCoinComponents.Style.appWindowBorderColor
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+            whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !NejCoinComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: NejCoinComponents.Style.appWindowBorderColor
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+            whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !NejCoinComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.left: parent.left
         height: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: NejCoinComponents.Style.appWindowBorderColor
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+            whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
         }
     }
 
     Rectangle {
-        visible: isLinux && !MoneroComponents.Style.blackTheme && middlePanel.state !== "Merchant"
+        visible: isLinux && !NejCoinComponents.Style.blackTheme && middlePanel.state !== "Merchant"
         z: parent.z + 1
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         height: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: NejCoinComponents.Style.appWindowBorderColor
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+            whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
         }
     }
 
 // @TODO: QML type 'Drawer' has issues with buildbot; debug after Qt 5.9 migration
-//    MoneroComponents.LanguageSidebar {
+//    NejCoinComponents.LanguageSidebar {
 //        id: languageSidebar
 //    }
 }

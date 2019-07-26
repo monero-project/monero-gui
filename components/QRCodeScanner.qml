@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -29,7 +30,7 @@
 import QtQuick 2.9
 import QtMultimedia 5.4
 import QtQuick.Dialogs 1.2
-import moneroComponents.QRCodeScanner 1.0
+import nejcoinComponents.QRCodeScanner 1.0
 
 Rectangle {
     id : root

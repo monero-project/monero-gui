@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -27,9 +28,9 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import moneroComponents.Wallet 1.0
+import nejcoinComponents.Wallet 1.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Rectangle {
     id: item
@@ -61,27 +62,27 @@ Rectangle {
         anchors.rightMargin: 15
         anchors.fill: parent
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: progressText
             anchors.top: parent.top
             anchors.topMargin: 6
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: NejCoinComponents.Style.fontMedium.name
             font.pixelSize: 13
-            font.bold: MoneroComponents.Style.progressBarProgressTextBold
-            color: MoneroComponents.Style.defaultFontColor
+            font.bold: NejCoinComponents.Style.progressBarProgressTextBold
+            color: NejCoinComponents.Style.defaultFontColor
             text: qsTr("Synchronizing %1").arg(syncType) + translationManager.emptyString
             height: 18
         }
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: progressTextValue
             anchors.top: parent.top
             anchors.topMargin: 6
             anchors.right: parent.right
-            font.family: MoneroComponents.Style.fontMedium.name
+            font.family: NejCoinComponents.Style.fontMedium.name
             font.pixelSize: 13
-            font.bold: MoneroComponents.Style.progressBarProgressTextBold
-            color: MoneroComponents.Style.defaultFontColor
+            font.bold: NejCoinComponents.Style.progressBarProgressTextBold
+            color: NejCoinComponents.Style.defaultFontColor
             height:18
         }
 
@@ -93,17 +94,17 @@ Rectangle {
             anchors.topMargin: 4
             height: 8
             radius: 8
-            color: MoneroComponents.Style.progressBarBackgroundColor
+            color: NejCoinComponents.Style.progressBarBackgroundColor
 
             states: [
                 State {
                     name: "black";
-                    when: MoneroComponents.Style.blackTheme
-                    PropertyChanges { target: bar; color: MoneroComponents.Style._b_progressBarBackgroundColor}
+                    when: NejCoinComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: NejCoinComponents.Style._b_progressBarBackgroundColor}
                 }, State {
                     name: "white";
-                    when: !MoneroComponents.Style.blackTheme
-                    PropertyChanges { target: bar; color: MoneroComponents.Style._w_progressBarBackgroundColor}
+                    when: !NejCoinComponents.Style.blackTheme
+                    PropertyChanges { target: bar; color: NejCoinComponents.Style._w_progressBarBackgroundColor}
                 }
             ]
 

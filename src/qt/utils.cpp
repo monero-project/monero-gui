@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -63,24 +64,24 @@ QString getAccountName(){
     if (accountName.isEmpty())
         accountName = qgetenv("USERNAME"); // Windows
     if (accountName.isEmpty())
-        accountName = "My monero Account";
+        accountName = "My nejcoin Account";
     return accountName;
 }
 
 QString xdgMime(QApplication &app){
     return QString(
         "[Desktop Entry]\n"
-        "Name=Monero GUI\n"
-        "GenericName=Monero-GUI\n"
-        "X-GNOME-FullName=Monero-GUI\n"
-        "Comment=Monero GUI\n"
-        "Keywords=Monero;\n"
+        "Name=NejCoin GUI\n"
+        "GenericName=NejCoin-GUI\n"
+        "X-GNOME-FullName=NejCoin-GUI\n"
+        "Comment=NejCoin GUI\n"
+        "Keywords=NejCoin;\n"
         "Exec=%1 %u\n"
         "Terminal=false\n"
         "Type=Application\n"
-        "Icon=monero\n"
+        "Icon=nejcoin\n"
         "Categories=Network;GNOME;Qt;\n"
-        "MimeType=x-scheme-handler/monero;x-scheme-handler/moneroseed\n"
+        "MimeType=x-scheme-handler/nejcoin;x-scheme-handler/nejcoinseed\n"
         "StartupNotify=true\n"
         "X-GNOME-Bugzilla-Bugzilla=GNOME\n"
         "X-GNOME-UsesNotifications=true\n"
@@ -96,7 +97,7 @@ void registerXdgMime(QApplication &app){
     // - Tails written to persistent dotfiles
     QString mime = xdgMime(app);
     QString appPath = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
-    QString filePath = QString("%1/monero-gui.desktop").arg(appPath);
+    QString filePath = QString("%1/nejcoin-gui.desktop").arg(appPath);
 
     if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
         TailsOS::persistXdgMime(filePath, mime);

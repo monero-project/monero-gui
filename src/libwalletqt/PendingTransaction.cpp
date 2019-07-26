@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -93,7 +94,7 @@ void PendingTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
-PendingTransaction::PendingTransaction(Monero::PendingTransaction *pt, QObject *parent)
+PendingTransaction::PendingTransaction(NejCoin::PendingTransaction *pt, QObject *parent)
     : QObject(parent), m_pimpl(pt)
 {
 

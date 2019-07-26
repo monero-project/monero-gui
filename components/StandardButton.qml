@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -29,13 +30,13 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Item {
     id: button
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
+    property string textColor: button.enabled? NejCoinComponents.Style.buttonTextColor: NejCoinComponents.Style.buttonTextColorDisabled
     property bool small: false
     property alias text: label.text
     property int fontSize: {
@@ -70,7 +71,7 @@ Item {
                 when: buttonArea.containsMouse || button.focus
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorHover
+                    color: NejCoinComponents.Style.buttonBackgroundColorHover
                 }
             },
             State {
@@ -78,7 +79,7 @@ Item {
                 when: button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColor
+                    color: NejCoinComponents.Style.buttonBackgroundColor
                 }
             },
             State {
@@ -86,7 +87,7 @@ Item {
                 when: !button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
+                    color: NejCoinComponents.Style.buttonBackgroundColorDisabled
                 }
             }
         ]
@@ -103,16 +104,16 @@ Item {
         spacing: 11
         anchors.centerIn: parent
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: label
-            font.family: MoneroComponents.Style.fontBold.name
+            font.family: NejCoinComponents.Style.fontBold.name
             font.bold: true
             font.pixelSize: button.fontSize
             color: !buttonArea.pressed ? button.textColor : "transparent"
             visible: text !== ""
             themeTransition: false
 
-            MoneroComponents.TextPlain {
+            NejCoinComponents.TextPlain {
                 anchors.centerIn: parent
                 color: button.textColor
                 font.bold: label.font.bold

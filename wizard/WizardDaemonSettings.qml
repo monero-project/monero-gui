@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -32,7 +33,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 ColumnLayout {
     Layout.fillWidth: true
@@ -46,7 +47,7 @@ ColumnLayout {
         persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
     }
 
-    MoneroComponents.RadioButton {
+    NejCoinComponents.RadioButton {
         id: localNode
         Layout.fillWidth: true
         text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
@@ -67,7 +68,7 @@ ColumnLayout {
         Layout.topMargin: 8
         Layout.fillWidth: true
 
-        MoneroComponents.LineEdit {
+        NejCoinComponents.LineEdit {
             id: blockchainFolder
             Layout.fillWidth: true
 
@@ -95,8 +96,8 @@ ColumnLayout {
                 text: qsTr("Bootstrap node") + translationManager.emptyString
                 Layout.topMargin: 10
                 Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.defaultFontColor
+                font.family: NejCoinComponents.Style.fontRegular.name
+                color: NejCoinComponents.Style.defaultFontColor
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
                         return 22;
@@ -105,8 +106,8 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
+                selectionColor: NejCoinComponents.Style.textSelectionColor
+                selectedTextColor: NejCoinComponents.Style.textSelectedColor
 
                 selectByMouse: true
                 wrapMode: Text.WordWrap
@@ -118,12 +119,12 @@ ColumnLayout {
             }
 
             TextArea {
-                text: qsTr("Additionally, you may specify a bootstrap node to use Monero immediately.") + translationManager.emptyString
+                text: qsTr("Additionally, you may specify a bootstrap node to use NejCoin immediately.") + translationManager.emptyString
                 Layout.topMargin: 4
                 Layout.fillWidth: true
 
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.dimmedFontColor
+                font.family: NejCoinComponents.Style.fontRegular.name
+                color: NejCoinComponents.Style.dimmedFontColor
 
                 font.pixelSize: {
                     if(wizardController.layoutScale === 2 ){
@@ -133,8 +134,8 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
+                selectionColor: NejCoinComponents.Style.textSelectionColor
+                selectedTextColor: NejCoinComponents.Style.textSelectedColor
 
                 selectByMouse: true
                 wrapMode: Text.WordWrap
@@ -150,7 +151,7 @@ ColumnLayout {
             spacing: 8
             Layout.fillWidth: true
 
-            MoneroComponents.RemoteNodeEdit {
+            NejCoinComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
                 Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
@@ -168,7 +169,7 @@ ColumnLayout {
         }
     }
 
-    MoneroComponents.RadioButton {
+    NejCoinComponents.RadioButton {
         id: remoteNode
         Layout.fillWidth: true
         Layout.topMargin: 8
@@ -188,7 +189,7 @@ ColumnLayout {
         Layout.topMargin: 8
         Layout.fillWidth: true
 
-        MoneroComponents.RemoteNodeEdit {
+        NejCoinComponents.RemoteNodeEdit {
             id: remoteNodeEdit
             Layout.fillWidth: true
 

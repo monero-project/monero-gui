@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -32,7 +33,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 ColumnLayout {
     property alias header: key.text
@@ -50,7 +51,7 @@ ColumnLayout {
             Layout.preferredHeight: 20
             color: "transparent"
 
-            MoneroComponents.TextBlock {
+            NejCoinComponents.TextBlock {
                 id: key
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -64,7 +65,7 @@ ColumnLayout {
             Layout.preferredHeight: 20
             color: "transparent"
 
-            MoneroComponents.TextBlock {
+            NejCoinComponents.TextBlock {
                 id: val
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -79,7 +80,7 @@ ColumnLayout {
         Layout.topMargin: 2
         Layout.bottomMargin: 2
         Layout.fillWidth: true
-        color: MoneroComponents.Style.dividerColor
-        opacity: MoneroComponents.Style.dividerOpacity
+        color: NejCoinComponents.Style.dividerColor
+        opacity: NejCoinComponents.Style.dividerOpacity
     }
 }

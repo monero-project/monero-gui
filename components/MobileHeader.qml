@@ -2,8 +2,8 @@ import QtQuick 2.9
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.1
 
-import moneroComponents.Wallet 1.0
-import "../components" as MoneroComponents
+import nejcoinComponents.Wallet 1.0
+import "../components" as NejCoinComponents
 
 // BasicPanel header
 Rectangle {
@@ -21,7 +21,7 @@ Rectangle {
         anchors.verticalCenterOffset: -5
         anchors.left: parent.left
         anchors.leftMargin: 50
-        source: "qrc:///images/moneroLogo2.png"
+        source: "qrc:///images/nejcoinLogo2.png"
     }
 
     Image {
@@ -30,7 +30,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 40
-        source: "qrc:///images/moneroIcon.png"
+        source: "qrc:///images/nejcoinIcon.png"
     }
 
     Grid {
@@ -41,7 +41,7 @@ Rectangle {
         width: 256
         columns: 3
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: balanceLabel
             width: 116
             height: 20
@@ -55,7 +55,7 @@ Rectangle {
             text: leftPanel.balanceLabelText + ":"
         }
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: balanceText
             width: 110
             height: 20
@@ -80,7 +80,7 @@ Rectangle {
             }
         }
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             width: 116
             height: 20
             font.family: "Arial"
@@ -93,7 +93,7 @@ Rectangle {
             text: qsTr("Unlocked Balance:")
         }
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: availableBalanceText
             width: 110
             height: 20

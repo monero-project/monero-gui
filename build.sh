@@ -64,8 +64,8 @@ fi
 source ./utils.sh
 pushd $(pwd)
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-MONERO_DIR=monero
-MONEROD_EXEC=monerod
+NEJCOIN_DIR=nejcoin
+NEJCOIND_EXEC=nejcoind
 
 MAKE='make'
 if [[ $platform == *bsd* ]]; then
@@ -93,30 +93,30 @@ if [ "$ANDROID" != true ] && ([ "$platform" == "linux32" ] || [ "$platform" == "
 fi
 
 if [ "$platform" == "darwin" ]; then
-    BIN_PATH=$BIN_PATH/monero-wallet-gui.app/Contents/MacOS/
+    BIN_PATH=$BIN_PATH/nejcoin-wallet-gui.app/Contents/MacOS/
 elif [ "$platform" == "mingw64" ] || [ "$platform" == "mingw32" ]; then
-    MONEROD_EXEC=monerod.exe
+    NEJCOIND_EXEC=nejcoind.exe
 fi
 
 # force version update
 get_tag
 echo "var GUI_VERSION = \"$TAGNAME\"" > version.js
-pushd "$MONERO_DIR"
+pushd "$NEJCOIN_DIR"
 get_tag
 popd
-echo "var GUI_MONERO_VERSION = \"$TAGNAME\"" >> version.js
+echo "var GUI_NEJCOIN_VERSION = \"$TAGNAME\"" >> version.js
 
 cd build
 if ! QMAKE=$(find_command qmake qmake-qt5); then
     echo "Failed to find suitable qmake command."
     exit 1
 fi
-$QMAKE ../monero-wallet-gui.pro "$CONFIG" || exit
+$QMAKE ../nejcoin-wallet-gui.pro "$CONFIG" || exit
 $MAKE || exit 
 
-# Copy monerod to bin folder
+# Copy nejcoind to bin folder
 if [ "$platform" != "mingw32" ] && [ "$ANDROID" != true ]; then
-cp ../$MONERO_DIR/bin/$MONEROD_EXEC $BIN_PATH
+cp ../$NEJCOIN_DIR/bin/$NEJCOIND_EXEC $BIN_PATH
 fi
 
 # make deploy

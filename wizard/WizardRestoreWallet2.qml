@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -27,7 +28,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import "../js/Wizard.js" as Wizard
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 import QtQuick 2.9
 import QtQuick.Layouts 1.2

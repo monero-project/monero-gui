@@ -29,7 +29,7 @@
         <file>images/tip.png</file>
         <file>components/Scroll.qml</file>
         <file>components/MenuButtonDivider.qml</file>
-        <file>images/moneroIcon.png</file>
+        <file>images/nejcoinIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
         <file>images/whiteDropIndicator@2x.png</file>
@@ -40,7 +40,7 @@
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TitleBar.qml</file>
-        <file>images/moneroLogo2.png</file>
+        <file>images/nejcoinLogo2.png</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>
@@ -114,7 +114,7 @@
         <file>images/appicon.ico</file>
         <file>images/card-background.png</file>
         <file>images/card-background@2x.png</file>
-        <file>images/moneroLogo_white.png</file>
+        <file>images/nejcoinLogo_white.png</file>
         <file>images/question.png</file>
         <file>images/question@2x.png</file>
         <file>images/titlebarLogo.png</file>
@@ -136,8 +136,8 @@
         <file>images/lightning@2x.png</file>
         <file>images/logout.png</file>
         <file>images/logout@2x.png</file>
-        <file>images/moneroIcon-28x28.png</file>
-        <file>images/moneroIcon-28x28@2x.png</file>
+        <file>images/nejcoinIcon-28x28.png</file>
+        <file>images/nejcoinIcon-28x28@2x.png</file>
         <file>images/lightning-white.png</file>
         <file>images/lightning-white@2x.png</file>
         <file>components/InputMulti.qml</file>
@@ -170,8 +170,8 @@
         <file>images/settings_local.svg</file>
         <file>images/settings_remote.svg</file>
         <file>components/WarningBox.qml</file>
-        <file>images/miningxmr.png</file>
-        <file>images/miningxmr@2x.png</file>
+        <file>images/miningnejc.png</file>
+        <file>images/miningnejc@2x.png</file>
         <file>images/plus-in-circle-medium-white.png</file>
         <file>images/plus-in-circle-medium-white@2x.png</file>
         <file>pages/merchant/Merchant.qml</file>

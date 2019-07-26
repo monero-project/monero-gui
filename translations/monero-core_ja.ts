@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="105"/>
-        <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
-        <translation>Moneroを送ったり受け取ったりするのが簡単になり、アドレスを手で打ち間違えるのを避けられます。</translation>
+        <source>This makes it easier to send or receive NejCoin and reduces errors when typing in addresses manually.</source>
+        <translation>NejCoinを送ったり受け取ったりするのが簡単になり、アドレスを手で打ち間違えるのを避けられます。</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="120"/>
@@ -616,13 +616,13 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>警告: キーの再利用に関する対策が組み込まれていない限り、Moneroのキーを別のフォークで使い回さないでください。あなたのプライバシーが損なわれます。</translation>
+        <source>WARNING: Do not reuse your NejCoin keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>警告: キーの再利用に関する対策が組み込まれていない限り、NejCoinのキーを別のフォークで使い回さないでください。あなたのプライバシーが損なわれます。</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
-        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation>警告: シードをクリップボードにコピーすると、シードを記録しMoneroを盗む悪意あるソフトウェアに晒される可能性があります。シードは手で書き留めてください。</translation>
+        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your NejCoin. Please write down your seed manually.</source>
+        <translation>警告: シードをクリップボードにコピーすると、シードを記録しNejCoinを盗む悪意あるソフトウェアに晒される可能性があります。シードは手で書き留めてください。</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="159"/>
@@ -1030,12 +1030,12 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+        <source>Mining with your computer helps strengthen the NejCoin network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
-Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>自分のコンピュータでマイニングをすることでMoneroネットワークをより強固にできます。多くの人がマイニングをすればするほど、攻撃はより難しくなります。
+Mining also gives you a small chance to earn some NejCoin. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>自分のコンピュータでマイニングをすることでNejCoinネットワークをより強固にできます。多くの人がマイニングをすればするほど、攻撃はより難しくなります。
 
-マイニングをするとMoneroが手に入ることがあります。コンピュータはブロックの解となるハッシュ値を生成し、もしブロックを見つけたら報酬が手に入ります。グッドラック！</translation>
+マイニングをするとNejCoinが手に入ることがあります。コンピュータはブロックの解となるハッシュ値を生成し、もしブロックを見つけたら報酬が手に入ります。グッドラック！</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1404,8 +1404,8 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="99"/>
-        <source>Embedded Monero version: </source>
-        <translation>組み込まれているMoneroのバージョン: </translation>
+        <source>Embedded NejCoin version: </source>
+        <translation>組み込まれているNejCoinのバージョン: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="129"/>
@@ -1604,13 +1604,13 @@ The old wallet cache file will be renamed and can be restored later.
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="247"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>サードパーティーのサーバを使ってMoneroネットワークに接続します。セキュリティは低くなりますがより簡単です。</translation>
+        <source>Uses a third-party server to connect to the NejCoin network. Less secure, but easier on your computer.</source>
+        <translation>サードパーティーのサーバを使ってNejCoinネットワークに接続します。セキュリティは低くなりますがより簡単です。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>リモートノードを見つけるには、お好きな検索エンジンで&apos;Monero remote node&apos;と検索してください。ノードが信頼できるサードパーティーによって運営されていることを確認してください。</translation>
+        <source>To find a remote node, type &apos;NejCoin remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>リモートノードを見つけるには、お好きな検索エンジンで&apos;NejCoin remote node&apos;と検索してください。ノードが信頼できるサードパーティーによって運営されていることを確認してください。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="301"/>
@@ -1817,8 +1817,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>このページでは共有リングデータベースを操作できます。このデータベースはMoneroウォレットおよびMoneroのキーを再利用するMoneroクローンのウォレットで利用するためのものです。</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by NejCoin wallets as well as wallets from NejCoin clones which reuse the NejCoin keys.</source>
+        <translation>このページでは共有リングデータベースを操作できます。このデータベースはNejCoinウォレットおよびNejCoinのキーを再利用するNejCoinクローンのウォレットで利用するためのものです。</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1834,8 +1834,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>第三者がリング内に既知の使用済みインプットを見つけられないことは、Moneroトランザクションのどのインプットが使用されたのかを隠すために必要です。もし見つけられるとリング署名による保護は弱まります。もし1つのインプットを除いてすべてが使用済みだと知られている場合、実際に使用されたインプットは明らかとなり、Moneroが使っている3つの主要なプライバシー保護レイヤーのうちの1つであるリング署名の効果が失われてしまいます。&lt;br&gt;トランザクションでそれらのインプットを避けるため、既知の使用済みインプットのリストを用いてそれらを新規のトランザクションで使用しないようにできます。このようなリストはMoneroプロジェクトによって保守されgetmonero.orgのウェブサイトで公開されており、ここではこのリストをインポートすることができます。&lt;br&gt;あるいはmonero-blockchain-mark-spent-outputsというツールを使い、Moneroのブロックチェーン(およびキーを再利用するMoneroクローンのブロックチェン)を自分でスキャンして既知の使用済みアウトプットのリストを生成できます。&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a NejCoin transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection NejCoin uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by NejCoin and is available on the getnejcoin.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing NejCoin clones) yourself using the nejcoin-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>第三者がリング内に既知の使用済みインプットを見つけられないことは、NejCoinトランザクションのどのインプットが使用されたのかを隠すために必要です。もし見つけられるとリング署名による保護は弱まります。もし1つのインプットを除いてすべてが使用済みだと知られている場合、実際に使用されたインプットは明らかとなり、NejCoinが使っている3つの主要なプライバシー保護レイヤーのうちの1つであるリング署名の効果が失われてしまいます。&lt;br&gt;トランザクションでそれらのインプットを避けるため、既知の使用済みインプットのリストを用いてそれらを新規のトランザクションで使用しないようにできます。このようなリストはNejCoinプロジェクトによって保守されgetnejcoin.orgのウェブサイトで公開されており、ここではこのリストをインポートすることができます。&lt;br&gt;あるいはnejcoin-blockchain-mark-spent-outputsというツールを使い、NejCoinのブロックチェーン(およびキーを再利用するNejCoinクローンのブロックチェン)を自分でスキャンして既知の使用済みアウトプットのリストを生成できます。&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1905,13 +1905,13 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>Moneroのリング署名による保護を無効化しないため、あるアウトプットを使う際に異なるブロックチェーンで異なるリングを使うことは避けなければなりません。これは通常問題になりませんが、キーを再利用するMoneroクローンが既存のアウトプットの使用を許している場合問題になります。この場合、既存のアウトプットは両方のチェーンで同じリングを使わなくてはなりません。&lt;br&gt;これはキーを再利用するソフトウェアが積極的にプライバシーを侵害しようとしない限り自動的に行われます。&lt;br&gt;もしキーを再利用するMoneroクローンを使っていてそのクローンがこの保護を含んでいない場合も、まずクローンの方でアウトプットを使用しその後リングをこのページに手動で追加することで、トランザクションは保護されMoneroを安全に使用できるようになります。&lt;br&gt;これらの機能を提供しないキーを再利用するMoneroクローンを使用していない場合、すべては自動化されているので何もする必要はありません。&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by NejCoin&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing NejCoin clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by NejCoin and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing NejCoin clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your NejCoin safely.&lt;br&gt;If you do not use a key-reusing NejCoin clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>NejCoinのリング署名による保護を無効化しないため、あるアウトプットを使う際に異なるブロックチェーンで異なるリングを使うことは避けなければなりません。これは通常問題になりませんが、キーを再利用するNejCoinクローンが既存のアウトプットの使用を許している場合問題になります。この場合、既存のアウトプットは両方のチェーンで同じリングを使わなくてはなりません。&lt;br&gt;これはキーを再利用するソフトウェアが積極的にプライバシーを侵害しようとしない限り自動的に行われます。&lt;br&gt;もしキーを再利用するNejCoinクローンを使っていてそのクローンがこの保護を含んでいない場合も、まずクローンの方でアウトプットを使用しその後リングをこのページに手動で追加することで、トランザクションは保護されNejCoinを安全に使用できるようになります。&lt;br&gt;これらの機能を提供しないキーを再利用するNejCoinクローンを使用していない場合、すべては自動化されているので何もする必要はありません。&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>キーを再利用するチェーンでアウトプットに使用されたリングを記録し、プライバシーの問題を避けるためMoneroでも同じリングを使うようにします。</translation>
+        <source>This records rings used by outputs spent on NejCoin on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>キーを再利用するチェーンでアウトプットに使用されたリングを記録し、プライバシーの問題を避けるためNejCoinでも同じリングを使うようにします。</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -2095,8 +2095,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="344"/>
-        <source>Enter the Monero Address (example: 44AFFq5kSiGBoZ...)</source>
-        <translation>Moneroアドレス (例: 44AFFq5kSiGBoZ...)</translation>
+        <source>Enter the NejCoin Address (example: 44AFFq5kSiGBoZ...)</source>
+        <translation>NejCoinアドレス (例: 44AFFq5kSiGBoZ...)</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="355"/>
@@ -2314,8 +2314,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="621"/>
-        <source>Monero sent successfully</source>
-        <translation>Moneroの送金に成功しました</translation>
+        <source>NejCoin sent successfully</source>
+        <translation>NejCoinの送金に成功しました</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="704"/>
@@ -2836,8 +2836,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="58"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>MoneroネットワークとやりとりするにはウォレットをMoneroノードに接続する必要があります。プライバシーのためにはあなた自身がノードを走らせることを推奨します。</translation>
+        <source>To be able to communicate with the NejCoin network your wallet needs to be connected to a NejCoin node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation>NejCoinネットワークとやりとりするにはウォレットをNejCoinノードに接続する必要があります。プライバシーのためにはあなた自身がノードを走らせることを推奨します。</translation>
     </message>
 </context>
 <context>
@@ -2887,8 +2887,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="121"/>
-        <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
-        <translation>Moneroをすぐに使いたい場合ブートストラップノードを指定できます。</translation>
+        <source>Additionally, you may specify a bootstrap node to use NejCoin immediately.</source>
+        <translation>NejCoinをすぐに使いたい場合ブートストラップノードを指定できます。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="175"/>
@@ -2900,8 +2900,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="60"/>
-        <source>Welcome to Monero.</source>
-        <translation>Moneroへようこそ。</translation>
+        <source>Welcome to NejCoin.</source>
+        <translation>NejCoinへようこそ。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="65"/>
@@ -2910,8 +2910,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
-        <source>Choose this option if this is your first time using Monero.</source>
-        <translation>もしMoneroを使うのが初めてならこのオプションを選んでください。</translation>
+        <source>Choose this option if this is your first time using NejCoin.</source>
+        <translation>もしNejCoinを使うのが初めてならこのオプションを選んでください。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="86"/>
@@ -2920,8 +2920,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="87"/>
-        <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>ハードウェアウォレットを接続して新しいMoneroウォレットを作成</translation>
+        <source>Connect your hardware wallet to create a new NejCoin wallet.</source>
+        <translation>ハードウェアウォレットを接続して新しいNejCoinウォレットを作成</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
@@ -2973,8 +2973,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="102"/>
-        <source>Change the language of the Monero GUI.</source>
-        <translation>Monero GUIの言語を変更</translation>
+        <source>Change the language of the NejCoin GUI.</source>
+        <translation>NejCoin GUIの言語を変更</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="197"/>
@@ -3001,8 +3001,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="81"/>
-        <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name &lt;i&gt;bootstrap&lt;/i&gt;), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation>(&lt;i&gt;ブートストラップ&lt;/i&gt;という名前が示すように)リモートノードを一時的に使用することはMoneroをすぐに使うのに便利です。ただしリモートノードを使う場合(ブートストラップ設定時を含む)、ノードはあなたのIPアドレスや&quot;復元を開始するブロック高&quot;とそれに付随するブロック要求データを追跡でき、あなたが送る取引についてより知るために正確でない情報を送ってくる可能性があります。</translation>
+        <source>Temporary use of remote nodes is useful in order to use NejCoin immediately (hence the name &lt;i&gt;bootstrap&lt;/i&gt;), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
+        <translation>(&lt;i&gt;ブートストラップ&lt;/i&gt;という名前が示すように)リモートノードを一時的に使用することはNejCoinをすぐに使うのに便利です。ただしリモートノードを使う場合(ブートストラップ設定時を含む)、ノードはあなたのIPアドレスや&quot;復元を開始するブロック高&quot;とそれに付随するブロック要求データを追跡でき、あなたが送る取引についてより知るために正確でない情報を送ってくる可能性があります。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="94"/>
@@ -3029,8 +3029,8 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="70"/>
-        <source>This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.</source>
-        <translation>このモードは少額のMoneroを扱う場合に適しています。取引を作成したり管理したりする基本的な機能にアクセスできます。Moneroネットワークに自動的に接続するためMoneroをすぐに使い始めることができます。</translation>
+        <source>This mode is ideal for managing small amounts of NejCoin. You have access to basic features for making and managing transactions. It will automatically connect to the NejCoin network so you can start using NejCoin immediately.</source>
+        <translation>このモードは少額のNejCoinを扱う場合に適しています。取引を作成したり管理したりする基本的な機能にアクセスできます。NejCoinネットワークに自動的に接続するためNejCoinをすぐに使い始めることができます。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="83"/>
@@ -3238,10 +3238,10 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="66"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
+        <source>To be able to communicate with the NejCoin network your wallet needs to be connected to a NejCoin node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>MoneroネットワークとやりとりするためウォレットはMoneroノードに接続する必要があります。プライバシーのため自分自身でノードを走らせることを推奨します。
+        <translation>NejCoinネットワークとやりとりするためウォレットはNejCoinノードに接続する必要があります。プライバシーのため自分自身でノードを走らせることを推奨します。
 
 もし自分自身でノードを走らせることができない場合、リモートノードに接続するオプションがあります。</translation>
     </message>
@@ -3508,13 +3508,13 @@ Amount: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1054"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>このアドレスは%1XMRを受け取りましたが、取引はまだ承認されていません。</translation>
+        <source>This address received %1 nejcoin, but the transaction is not yet mined</source>
+        <translation>このアドレスは%1NEJCを受け取りましたが、取引はまだ承認されていません。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1057"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>このアドレスは%1XMRを受け取り、その取引は%2回承認されました。</translation>
+        <source>This address received %1 nejcoin, with %2 confirmation(s).</source>
+        <translation>このアドレスは%1NEJCを受け取り、その取引は%2回承認されました。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1061"/>
@@ -3595,8 +3595,8 @@ Fee: </source>
     </message>
     <message>
         <location filename="../main.qml" line="984"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Moneroの送金に成功しました: %1 トランザクション</translation>
+        <source>NejCoin sent successfully: %1 transaction(s) </source>
+        <translation>NejCoinの送金に成功しました: %1 トランザクション</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1014"/>
@@ -3685,13 +3685,13 @@ Fee: </source>
     </message>
     <message>
         <location filename="../main.qml" line="2159"/>
-        <source>New version of Monero v.%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
-        <translation>新しいバージョンの Monero v.%1 が利用可能です。&lt;br&gt;&lt;br&gt;ダウンロード:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256ハッシュ:&lt;br&gt;%3</translation>
+        <source>New version of NejCoin v.%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
+        <translation>新しいバージョンの NejCoin v.%1 が利用可能です。&lt;br&gt;&lt;br&gt;ダウンロード:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256ハッシュ:&lt;br&gt;%3</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2161"/>
-        <source>New version of Monero is available. Check out getmonero.org</source>
-        <translation>新しいバージョンのMoneroが利用可能です。getmonero.orgをチェックしてください。</translation>
+        <source>New version of NejCoin is available. Check out getnejcoin.org</source>
+        <translation>新しいバージョンのNejCoinが利用可能です。getnejcoin.orgをチェックしてください。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2251"/>

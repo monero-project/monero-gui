@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -59,7 +60,7 @@ QVariant SubaddressAccountModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.row() < 0 || (unsigned)index.row() >= m_subaddressAccount->count())
         return {};
 
-    Monero::SubaddressAccountRow * sr = m_subaddressAccount->getRow(index.row());
+    NejCoin::SubaddressAccountRow * sr = m_subaddressAccount->getRow(index.row());
 
     QVariant result = "";
     switch (role) {

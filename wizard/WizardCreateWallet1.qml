@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -33,7 +34,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../js/Utils.js" as Utils
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Rectangle {
     id: wizardCreateWallet1
@@ -72,7 +73,7 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                MoneroComponents.LineEditMulti {
+                NejCoinComponents.LineEditMulti {
                     id: seed
 
                     spacing: 0
@@ -96,13 +97,13 @@ Rectangle {
                     text: wizardController.walletOptionsSeed
                 }
 
-                MoneroComponents.WarningBox {
+                NejCoinComponents.WarningBox {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -110,7 +111,7 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -118,11 +119,11 @@ Rectangle {
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     radius: 0
-                    border.color: MoneroComponents.Style.inputBorderColorInActive
+                    border.color: NejCoinComponents.Style.inputBorderColorInActive
                     border.width: 0
 
                     text: qsTr("This seed is <b>very</b> important to write down and keep secret. It is all you need to backup and restore your wallet.") + translationManager.emptyString
@@ -135,7 +136,7 @@ Rectangle {
                 Layout.topMargin: 10
                 Layout.fillWidth: true
 
-                MoneroComponents.LineEditMulti {
+                NejCoinComponents.LineEditMulti {
                     id: restoreHeight
 
                     spacing: 0
@@ -154,13 +155,13 @@ Rectangle {
                     text: Utils.roundDownToNearestThousand(wizardController.m_wallet ? wizardController.m_wallet.walletCreationHeight : 0)
                 }
 
-                MoneroComponents.WarningBox {
+                NejCoinComponents.WarningBox {
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -168,7 +169,7 @@ Rectangle {
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         height: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     Rectangle {
@@ -176,11 +177,11 @@ Rectangle {
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         width: 1
-                        color: MoneroComponents.Style.inputBorderColorInActive
+                        color: NejCoinComponents.Style.inputBorderColorInActive
                     }
 
                     radius: 0
-                    border.color: MoneroComponents.Style.inputBorderColorInActive
+                    border.color: NejCoinComponents.Style.inputBorderColorInActive
                     border.width: 0
                     text: qsTr("Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.") + translationManager.emptyString
                 }

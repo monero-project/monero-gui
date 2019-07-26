@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -33,7 +34,7 @@ import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 GridLayout {
     Layout.fillWidth: true
@@ -55,11 +56,11 @@ GridLayout {
     function reset() {
         walletName.error = !walletName.verify();
         walletLocation.error = walletLocation.text === "";
-        walletLocation.text = moneroAccountsDir + "/";
+        walletLocation.text = nejcoinAccountsDir + "/";
         walletName.text = defaultAccountName;
     }
 
-    MoneroComponents.LineEdit {
+    NejCoinComponents.LineEdit {
         id: walletName
         Layout.fillWidth: true
 
@@ -80,7 +81,7 @@ GridLayout {
         Component.onCompleted: walletName.error = !walletName.verify();
     }
 
-    MoneroComponents.LineEdit {
+    NejCoinComponents.LineEdit {
         id: walletLocation
         Layout.fillWidth: true
 
@@ -88,7 +89,7 @@ GridLayout {
         labelFontSize: 14
         placeholderText: "..."
         placeholderFontSize: 16
-        text: moneroAccountsDir + "/"
+        text: nejcoinAccountsDir + "/"
         inlineButton.small: true
         inlineButtonText: qsTr("Browse") + translationManager.emptyString
         inlineButton.onClicked: {

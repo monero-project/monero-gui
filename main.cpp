@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -66,7 +67,7 @@
 #include "qt/utils.h"
 #include "src/qt/TailsOS.h"
 #include "src/qt/KeysFiles.h"
-#include "src/qt/MoneroSettings.h"
+#include "src/qt/NejCoinSettings.h"
 #include "qt/prices.h"
 
 // IOS exclusions
@@ -127,15 +128,15 @@ int main(int argc, char *argv[])
 
     MainApp app(argc, argv);
 
-    app.setApplicationName("monero-core");
-    app.setOrganizationDomain("getmonero.org");
-    app.setOrganizationName("monero-project");
+    app.setApplicationName("nejcoin-core");
+    app.setOrganizationDomain("getnejcoin.org");
+    app.setOrganizationName("nejcoin-project");
 
     // Ask to enable Tails OS persistence mode, it affects:
     // - Log file location
-    // - QML Settings file location (monero-core.conf)
+    // - QML Settings file location (nejcoin-core.conf)
     // - Default wallets path
-    // Target directory is: ~/Persistent/Monero
+    // Target directory is: ~/Persistent/NejCoin
     if (isTails) {
         if (!TailsOS::detectDataPersistence())
             TailsOS::showDataPersistenceDisabledWarning();
@@ -143,17 +144,17 @@ int main(int argc, char *argv[])
             TailsOS::askPersistence();
     }
 
-    QString moneroAccountsDir;
+    QString nejcoinAccountsDir;
     #if defined(Q_OS_WIN) || defined(Q_OS_IOS)
-        QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
+        QStringList nejcoinAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation);
     #else
-        QStringList moneroAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+        QStringList nejcoinAccountsRootDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
     #endif
 
     if(isTails && TailsOS::usePersistence){
-        moneroAccountsDir = QDir::homePath() + "/Persistent/Monero/wallets";
-    } else if (!moneroAccountsRootDir.empty()) {
-        moneroAccountsDir = moneroAccountsRootDir.at(0) + "/Monero/wallets";
+        nejcoinAccountsDir = QDir::homePath() + "/Persistent/NejCoin/wallets";
+    } else if (!nejcoinAccountsRootDir.empty()) {
+        nejcoinAccountsDir = nejcoinAccountsRootDir.at(0) + "/NejCoin/wallets";
     } else {
         qCritical() << "Error: accounts root directory could not be set";
         return 1;
@@ -175,19 +176,19 @@ int main(int argc, char *argv[])
     parser.addHelpOption();
     parser.process(app);
 
-    Monero::Utils::onStartup();
+    NejCoin::Utils::onStartup();
 
     // Log settings
     const QString logPath = getLogPath(parser.value(logPathOption));
-    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
+    NejCoin::Wallet::init(argv[0], "nejcoin-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 
     // loglevel is configured in main.qml. Anything lower than
-    // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
+    // qWarning is not shown here unless NEJCOIN_LOG_LEVEL env var is set
     bool logLevelOk;
-    int logLevel = qEnvironmentVariableIntValue("MONERO_LOG_LEVEL", &logLevelOk);
-    if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
-        Monero::WalletManagerFactory::setLogLevel(logLevel);
+    int logLevel = qEnvironmentVariableIntValue("NEJCOIN_LOG_LEVEL", &logLevelOk);
+    if (logLevelOk && logLevel >= 0 && logLevel <= NejCoin::WalletManagerFactory::LogLevel_Max){
+        NejCoin::WalletManagerFactory::setLogLevel(logLevel);
     }
     qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
 
@@ -239,60 +240,60 @@ int main(int argc, char *argv[])
                                    << " - dpi: " << dpi << " - ratio:" << calculated_ratio;
 
     // registering types for QML
-    qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
+    qmlRegisterType<clipboardAdapter>("nejcoinComponents.Clipboard", 1, 0, "Clipboard");
 
     // Temporary Qt.labs.settings replacement
-    qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
+    qmlRegisterType<NejCoinSettings>("nejcoinComponents.Settings", 1, 0, "NejCoinSettings");
 
-    qmlRegisterUncreatableType<Wallet>("moneroComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
+    qmlRegisterUncreatableType<Wallet>("nejcoinComponents.Wallet", 1, 0, "Wallet", "Wallet can't be instantiated directly");
 
 
-    qmlRegisterUncreatableType<PendingTransaction>("moneroComponents.PendingTransaction", 1, 0, "PendingTransaction",
+    qmlRegisterUncreatableType<PendingTransaction>("nejcoinComponents.PendingTransaction", 1, 0, "PendingTransaction",
                                                    "PendingTransaction can't be instantiated directly");
 
-    qmlRegisterUncreatableType<UnsignedTransaction>("moneroComponents.UnsignedTransaction", 1, 0, "UnsignedTransaction",
+    qmlRegisterUncreatableType<UnsignedTransaction>("nejcoinComponents.UnsignedTransaction", 1, 0, "UnsignedTransaction",
                                                    "UnsignedTransaction can't be instantiated directly");
 
-    qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
+    qmlRegisterUncreatableType<WalletManager>("nejcoinComponents.WalletManager", 1, 0, "WalletManager",
                                                    "WalletManager can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
+    qmlRegisterUncreatableType<TranslationManager>("nejcoinComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
 
-    qmlRegisterUncreatableType<WalletKeysFilesModel>("moneroComponents.walletKeysFilesModel", 1, 0, "WalletKeysFilesModel",
+    qmlRegisterUncreatableType<WalletKeysFilesModel>("nejcoinComponents.walletKeysFilesModel", 1, 0, "WalletKeysFilesModel",
                                                    "walletKeysFilesModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
+    qmlRegisterUncreatableType<TransactionHistoryModel>("nejcoinComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
                                                         "TransactionHistoryModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TransactionHistorySortFilterModel>("moneroComponents.TransactionHistorySortFilterModel", 1, 0, "TransactionHistorySortFilterModel",
+    qmlRegisterUncreatableType<TransactionHistorySortFilterModel>("nejcoinComponents.TransactionHistorySortFilterModel", 1, 0, "TransactionHistorySortFilterModel",
                                                         "TransactionHistorySortFilterModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TransactionHistory>("moneroComponents.TransactionHistory", 1, 0, "TransactionHistory",
+    qmlRegisterUncreatableType<TransactionHistory>("nejcoinComponents.TransactionHistory", 1, 0, "TransactionHistory",
                                                         "TransactionHistory can't be instantiated directly");
 
-    qmlRegisterUncreatableType<TransactionInfo>("moneroComponents.TransactionInfo", 1, 0, "TransactionInfo",
+    qmlRegisterUncreatableType<TransactionInfo>("nejcoinComponents.TransactionInfo", 1, 0, "TransactionInfo",
                                                         "TransactionHistory can't be instantiated directly");
 #ifndef Q_OS_IOS
-    qmlRegisterUncreatableType<DaemonManager>("moneroComponents.DaemonManager", 1, 0, "DaemonManager",
+    qmlRegisterUncreatableType<DaemonManager>("nejcoinComponents.DaemonManager", 1, 0, "DaemonManager",
                                                    "DaemonManager can't be instantiated directly");
 #endif
-    qmlRegisterUncreatableType<AddressBookModel>("moneroComponents.AddressBookModel", 1, 0, "AddressBookModel",
+    qmlRegisterUncreatableType<AddressBookModel>("nejcoinComponents.AddressBookModel", 1, 0, "AddressBookModel",
                                                         "AddressBookModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<AddressBook>("moneroComponents.AddressBook", 1, 0, "AddressBook",
+    qmlRegisterUncreatableType<AddressBook>("nejcoinComponents.AddressBook", 1, 0, "AddressBook",
                                                         "AddressBook can't be instantiated directly");
 
-    qmlRegisterUncreatableType<SubaddressModel>("moneroComponents.SubaddressModel", 1, 0, "SubaddressModel",
+    qmlRegisterUncreatableType<SubaddressModel>("nejcoinComponents.SubaddressModel", 1, 0, "SubaddressModel",
                                                         "SubaddressModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<Subaddress>("moneroComponents.Subaddress", 1, 0, "Subaddress",
+    qmlRegisterUncreatableType<Subaddress>("nejcoinComponents.Subaddress", 1, 0, "Subaddress",
                                                         "Subaddress can't be instantiated directly");
 
-    qmlRegisterUncreatableType<SubaddressAccountModel>("moneroComponents.SubaddressAccountModel", 1, 0, "SubaddressAccountModel",
+    qmlRegisterUncreatableType<SubaddressAccountModel>("nejcoinComponents.SubaddressAccountModel", 1, 0, "SubaddressAccountModel",
                                                         "SubaddressAccountModel can't be instantiated directly");
 
-    qmlRegisterUncreatableType<SubaddressAccount>("moneroComponents.SubaddressAccount", 1, 0, "SubaddressAccount",
+    qmlRegisterUncreatableType<SubaddressAccount>("nejcoinComponents.SubaddressAccount", 1, 0, "SubaddressAccount",
                                                         "SubaddressAccount can't be instantiated directly");
 
     qRegisterMetaType<PendingTransaction::Priority>();
@@ -300,10 +301,10 @@ int main(int argc, char *argv[])
     qRegisterMetaType<TransactionHistoryModel::TransactionInfoRole>();
 
     qRegisterMetaType<NetworkType::Type>();
-    qmlRegisterType<NetworkType>("moneroComponents.NetworkType", 1, 0, "NetworkType");
+    qmlRegisterType<NetworkType>("nejcoinComponents.NetworkType", 1, 0, "NetworkType");
 
 #ifdef WITH_SCANNER
-    qmlRegisterType<QrCodeScanner>("moneroComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
+    qmlRegisterType<QrCodeScanner>("nejcoinComponents.QRCodeScanner", 1, 0, "QRCodeScanner");
 #endif
 
     QQmlApplicationEngine engine;
@@ -315,7 +316,7 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(":/fonts");
 
-    engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
+    engine.rootContext()->setContextProperty("nejcoinAccountsDir", nejcoinAccountsDir);
 
     WalletManager *walletManager = WalletManager::instance();
 
@@ -369,7 +370,7 @@ int main(int argc, char *argv[])
     if (accountName.isEmpty())
         accountName = qgetenv("USERNAME"); // Windows
     if (accountName.isEmpty())
-        accountName = "My monero Account";
+        accountName = "My nejcoin Account";
 
     engine.rootContext()->setContextProperty("defaultAccountName", accountName);
     engine.rootContext()->setContextProperty("homePath", QDir::homePath());

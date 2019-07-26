@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -29,7 +30,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Item {
     id: radioButton
@@ -41,8 +42,8 @@ Item {
     height: 26
     width: layout.width
     // legacy properties
-    property var checkedColor: MoneroComponents.Style.blackTheme ? "white" : "#666666"
-    property var borderColor: checked ? MoneroComponents.Style.inputBorderColorActive : MoneroComponents.Style.inputBorderColorInActive
+    property var checkedColor: NejCoinComponents.Style.blackTheme ? "white" : "#666666"
+    property var borderColor: checked ? NejCoinComponents.Style.inputBorderColorActive : NejCoinComponents.Style.inputBorderColorInActive
 
     function toggle(){
         radioButton.checked = !radioButton.checked
@@ -72,11 +73,11 @@ Item {
             }
         }
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: label
             Layout.leftMargin: (!isMobile ? 10 : 8)
-            color: MoneroComponents.Style.defaultFontColor
-            font.family: MoneroComponents.Style.fontRegular.name
+            color: NejCoinComponents.Style.defaultFontColor
+            font.family: NejCoinComponents.Style.fontRegular.name
             font.pixelSize: radioButton.fontSize
             wrapMode: Text.Wrap
         }

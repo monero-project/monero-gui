@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -29,17 +30,17 @@
 import QtQuick.Controls 2.0
 import QtQuick 2.9
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 TextField {
-    font.family: MoneroComponents.Style.fontRegular.name
+    font.family: NejCoinComponents.Style.fontRegular.name
     font.pixelSize: 18
     font.bold: true
     horizontalAlignment: TextInput.AlignLeft
     selectByMouse: true
-    color: MoneroComponents.Style.defaultFontColor
-    selectionColor: MoneroComponents.Style.textSelectionColor
-    selectedTextColor: MoneroComponents.Style.textSelectedColor
+    color: NejCoinComponents.Style.defaultFontColor
+    selectionColor: NejCoinComponents.Style.textSelectionColor
+    selectedTextColor: NejCoinComponents.Style.textSelectedColor
 
     background: Rectangle {
         color: "transparent"

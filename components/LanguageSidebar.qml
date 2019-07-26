@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -26,7 +27,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 import QtQuick 2.9
 import QtQuick.XmlListModel 2.0
@@ -79,12 +80,12 @@ Drawer {
                 width: sideBar.width
                 height: 32
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     anchors.left: parent.left
                     anchors.leftMargin: 16
                     font.bold: true
                     font.pixelSize: 14
-                    color: MoneroComponents.Style.defaultFontColor
+                    color: NejCoinComponents.Style.defaultFontColor
                     text: display_name
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -93,8 +94,8 @@ Drawer {
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    color: MoneroComponents.Style.dividerColor
-                    opacity: MoneroComponents.Style.dividerOpacity
+                    color: NejCoinComponents.Style.dividerColor
+                    opacity: NejCoinComponents.Style.dividerOpacity
                     height: 1
                 }
 

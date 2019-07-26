@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -108,7 +109,7 @@ void UnsignedTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
-UnsignedTransaction::UnsignedTransaction(Monero::UnsignedTransaction *pt, Monero::Wallet *walletImpl, QObject *parent)
+UnsignedTransaction::UnsignedTransaction(NejCoin::UnsignedTransaction *pt, NejCoin::Wallet *walletImpl, QObject *parent)
     : QObject(parent), m_pimpl(pt), m_walletImpl(walletImpl)
 {
 

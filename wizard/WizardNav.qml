@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -31,7 +32,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
 import "../js/Wizard.js" as Wizard
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 GridLayout {
     id: menuNav
@@ -67,7 +68,7 @@ GridLayout {
         Layout.fillWidth: true
         color: "transparent"
 
-        MoneroComponents.StandardButton {
+        NejCoinComponents.StandardButton {
             id: btnPrev
             small: true
             text: menuNav.btnPrevText
@@ -103,7 +104,7 @@ GridLayout {
         Layout.fillWidth: true
         color: "transparent"
 
-        MoneroComponents.StandardButton {
+        NejCoinComponents.StandardButton {
             id: btnNext
             small: true
             text: menuNav.btnNextText

@@ -9,8 +9,8 @@ moc_*
 *.mak
 *.build
 *.xcodeproj
-monero-wallet-gui_plugin_import.cpp
-monero-wallet-gui_qml_plugin_import.cpp
+nejcoin-wallet-gui_plugin_import.cpp
+nejcoin-wallet-gui_qml_plugin_import.cpp
 *.qmlc
 *.jsc
 

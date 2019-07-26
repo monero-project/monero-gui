@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -33,7 +34,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Window {
     id: root
@@ -89,7 +90,7 @@ Window {
                 }
             }
 
-            MoneroComponents.TextPlain {
+            NejCoinComponents.TextPlain {
                 text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
@@ -106,7 +107,7 @@ Window {
             spacing: 60
             Layout.alignment: Qt.AlignHCenter
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 id: okButton
                 visible:false
                 fontSize: 14
@@ -120,7 +121,7 @@ Window {
                 }
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 id: cancelButton
                 fontSize: 14
                 text: qsTr("Use custom settings") + translationManager.emptyString

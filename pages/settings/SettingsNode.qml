@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -31,8 +32,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import FontAwesome 1.0
 
-import "../../components" as MoneroComponents
-import "../../components/effects" as MoneroEffects
+import "../../components" as NejCoinComponents
+import "../../components/effects" as NejCoinEffects
 
 Rectangle{
     color: "transparent"
@@ -67,8 +68,8 @@ Rectangle{
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 1
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
 
             Rectangle {
@@ -76,7 +77,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
+                color: NejCoinComponents.Style.blackTheme ? "white" : "darkgrey"
                 width: 2
             }
 
@@ -96,7 +97,7 @@ Rectangle{
                     anchors.leftMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
 
-                    MoneroEffects.ImageMask {
+                    NejCoinEffects.ImageMask {
                         height: 27
                         width: 27
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -105,20 +106,20 @@ Rectangle{
                         fontAwesomeFallbackSize: 26
                         image: "qrc:///images/settings_local.svg"
 
-                        color: MoneroComponents.Style.defaultFontColor
-                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                        color: NejCoinComponents.Style.defaultFontColor
+                        opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     }
                 }
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     id: localNodeHeader
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14
                     anchors.top: parent.top
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Local node") + translationManager.emptyString
                 }
@@ -129,8 +130,8 @@ Rectangle{
                     anchors.topMargin: 4
                     anchors.left: localNodeIcon.right
                     anchors.leftMargin: 14
-                    color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 15
                     horizontalAlignment: TextInput.AlignLeft
                     selectByMouse: false
@@ -173,8 +174,8 @@ Rectangle{
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: 1
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
 
             Rectangle {
@@ -182,7 +183,7 @@ Rectangle{
                 Layout.fillHeight: true
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                color: MoneroComponents.Style.blackTheme ? "white" : "darkgrey"
+                color: NejCoinComponents.Style.blackTheme ? "white" : "darkgrey"
                 width: 2
             }
 
@@ -202,7 +203,7 @@ Rectangle{
                     anchors.leftMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
 
-                    MoneroEffects.ImageMask {
+                    NejCoinEffects.ImageMask {
                         height: 29
                         width: 22
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -210,20 +211,20 @@ Rectangle{
                         fontAwesomeFallbackIcon: FontAwesome.cloudDownload
                         fontAwesomeFallbackSize: 26
                         image: "qrc:///images/settings_remote.svg"
-                        color: MoneroComponents.Style.defaultFontColor
-                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                        color: NejCoinComponents.Style.defaultFontColor
+                        opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     }
                 }
 
-                MoneroComponents.TextPlain {
+                NejCoinComponents.TextPlain {
                     id: remoteNodeHeader
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14
                     anchors.top: parent.top
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1.0 : 0.8
                     font.bold: true
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 16
                     text: qsTr("Remote node") + translationManager.emptyString
                 }
@@ -234,8 +235,8 @@ Rectangle{
                     anchors.topMargin: 4
                     anchors.left: remoteNodeIcon.right
                     anchors.leftMargin: 14
-                    color: MoneroComponents.Style.dimmedFontColor
-                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: NejCoinComponents.Style.dimmedFontColor
+                    font.family: NejCoinComponents.Style.fontRegular.name
                     font.pixelSize: 15
                     activeFocusOnPress: false
                     horizontalAlignment: TextInput.AlignLeft
@@ -244,7 +245,7 @@ Rectangle{
                     textMargin: 0
                     leftPadding: 0
                     topPadding: 0
-                    text: qsTr("Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.") + translationManager.emptyString
+                    text: qsTr("Uses a third-party server to connect to the NejCoin network. Less secure, but easier on your computer.") + translationManager.emptyString
                     width: parent.width - (remoteNodeIcon.width + remoteNodeIcon.anchors.leftMargin + anchors.leftMargin)
                     readOnly: true
 
@@ -274,8 +275,8 @@ Rectangle{
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 height: 1
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
         }
 
@@ -287,13 +288,13 @@ Rectangle{
             Layout.topMargin: 20
             visible: !isMobile && persistentSettings.useRemoteNode
 
-            MoneroComponents.WarningBox {
+            NejCoinComponents.WarningBox {
                 Layout.topMargin: 26
                 Layout.bottomMargin: 6
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
+                text: qsTr("To find a remote node, type 'NejCoin remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             }
 
-            MoneroComponents.RemoteNodeEdit {
+            NejCoinComponents.RemoteNodeEdit {
                 id: remoteNodeEdit
                 Layout.minimumWidth: 100
                 placeholderFontSize: 15
@@ -320,7 +321,7 @@ Rectangle{
                 columns: (isMobile) ? 1 : 2
                 columnSpacing: 32
 
-                MoneroComponents.LineEdit {
+                NejCoinComponents.LineEdit {
                     id: daemonUsername
                     Layout.fillWidth: true
                     labelText: qsTr("Daemon username") + translationManager.emptyString
@@ -331,7 +332,7 @@ Rectangle{
                     fontSize: 15
                 }
 
-                MoneroComponents.LineEdit {
+                NejCoinComponents.LineEdit {
                     id: daemonPassword
                     Layout.fillWidth: true
                     labelText: qsTr("Daemon password") + translationManager.emptyString
@@ -344,7 +345,7 @@ Rectangle{
                 }
             }
 
-            MoneroComponents.CheckBox {
+            NejCoinComponents.CheckBox {
                 id: setTrustedDaemonCheckBox
                 checked: persistentSettings.is_trusted_daemon
                 onClicked: {
@@ -354,7 +355,7 @@ Rectangle{
                 text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
             }
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 id: btnConnectRemote
                 enabled: remoteNodeEdit.isValid()
                 small: true
@@ -379,7 +380,7 @@ Rectangle{
             Layout.topMargin: 40
             visible: !isMobile && !persistentSettings.useRemoteNode
 
-            MoneroComponents.StandardButton {
+            NejCoinComponents.StandardButton {
                 small: true
                 text: (appWindow.daemonRunning ? qsTr("Stop local node") : qsTr("Start daemon")) + translationManager.emptyString
                 onClicked: {
@@ -393,7 +394,7 @@ Rectangle{
             }
 
             RowLayout {
-                MoneroComponents.LineEditMulti {
+                NejCoinComponents.LineEditMulti {
                     id: blockchainFolder
                     Layout.preferredWidth: 200
                     Layout.fillWidth: true
@@ -420,7 +421,7 @@ Rectangle{
                 }
             }
 
-            MoneroComponents.LineEditMulti {
+            NejCoinComponents.LineEditMulti {
                 id: daemonFlags
                 Layout.fillWidth: true
                 labelFontSize: 14
@@ -440,7 +441,7 @@ Rectangle{
                 ColumnLayout {
                     Layout.fillWidth: true
 
-                    MoneroComponents.RemoteNodeEdit {
+                    NejCoinComponents.RemoteNodeEdit {
                         id: bootstrapNodeEdit
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20

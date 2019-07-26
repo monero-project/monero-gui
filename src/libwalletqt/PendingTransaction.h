@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -35,7 +36,7 @@
 
 #include <wallet/api/wallet2_api.h>
 
-//namespace Monero {
+//namespace NejCoin {
 //class PendingTransaction;
 //}
 
@@ -53,16 +54,16 @@ class PendingTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Monero::PendingTransaction::Status_Ok,
-        Status_Error    = Monero::PendingTransaction::Status_Error,
-        Status_Critical    = Monero::PendingTransaction::Status_Critical
+        Status_Ok       = NejCoin::PendingTransaction::Status_Ok,
+        Status_Error    = NejCoin::PendingTransaction::Status_Error,
+        Status_Critical    = NejCoin::PendingTransaction::Status_Critical
     };
     Q_ENUM(Status)
 
     enum Priority {
-        Priority_Low    = Monero::PendingTransaction::Priority_Low,
-        Priority_Medium = Monero::PendingTransaction::Priority_Medium,
-        Priority_High   = Monero::PendingTransaction::Priority_High
+        Priority_Low    = NejCoin::PendingTransaction::Priority_Low,
+        Priority_Medium = NejCoin::PendingTransaction::Priority_Medium,
+        Priority_High   = NejCoin::PendingTransaction::Priority_High
     };
     Q_ENUM(Priority)
 
@@ -79,11 +80,11 @@ public:
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
+    explicit PendingTransaction(NejCoin::PendingTransaction * pt, QObject *parent = 0);
 
 private:
     friend class Wallet;
-    Monero::PendingTransaction * m_pimpl;
+    NejCoin::PendingTransaction * m_pimpl;
     QString m_fileName;
 };
 

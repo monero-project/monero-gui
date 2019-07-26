@@ -83,7 +83,7 @@ function walletPathExists(directory, filename, isIOS, walletManager) {
         directory += "/"
 
     if(isIOS)
-        var path = moneroAccountsDir + filename;
+        var path = nejcoinAccountsDir + filename;
     else
         var path = directory + filename + "/" + filename;
 
@@ -135,8 +135,8 @@ function restoreWalletCheckViewSpendAddress(walletmanager, nettype, viewkey, spe
 //usage: getApproximateBlockchainHeight("March 18 2016") or getApproximateBlockchainHeight("2016-11-11")
 //returns estimated block height with 1 month buffer prior to requested date.
 function getApproximateBlockchainHeight(_date, _nettype){
-    // time of monero birth 2014-04-18 10:49:53 (1397818193)
-    var moneroBirthTime = _nettype == "Mainnet" ? 1397818193 : _nettype == "Testnet" ? 1410295020 : 1518932025;
+    // time of nejcoin birth 2014-04-18 10:49:53 (1397818193)
+    var nejcoinBirthTime = _nettype == "Mainnet" ? 1397818193 : _nettype == "Testnet" ? 1410295020 : 1518932025;
     // avg seconds per block in v1
     var secondsPerBlockV1 = 60;
     // time of v2 fork 2016-03-23 15:57:38 (1458748658)
@@ -149,14 +149,14 @@ function getApproximateBlockchainHeight(_date, _nettype){
     var requestedTime = Math.floor(new Date(_date) / 1000);
     var approxBlockchainHeight;
     var secondsPerBlock;
-    // before monero's birth
-    if (requestedTime < moneroBirthTime){
-        console.log("Calculated blockchain height: 0, requestedTime < moneroBirthTime " );
+    // before nejcoin's birth
+    if (requestedTime < nejcoinBirthTime){
+        console.log("Calculated blockchain height: 0, requestedTime < nejcoinBirthTime " );
         return 0;
     }
     // time between during v1
-    if (requestedTime > moneroBirthTime && requestedTime < forkTime){
-        approxBlockchainHeight = Math.floor((requestedTime - moneroBirthTime)/secondsPerBlockV1);
+    if (requestedTime > nejcoinBirthTime && requestedTime < forkTime){
+        approxBlockchainHeight = Math.floor((requestedTime - nejcoinBirthTime)/secondsPerBlockV1);
         console.log("Calculated blockchain height: " + approxBlockchainHeight );
         secondsPerBlock = secondsPerBlockV1;
     }

@@ -69,7 +69,7 @@
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="105"/>
-        <source>This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.</source>
+        <source>This makes it easier to send or receive NejCoin and reduces errors when typing in addresses manually.</source>
         <translation>To omogoča lažje pošiljanje in prejemanje Monera in zmanjša napake pri vpisovanju naslova ročno.</translation>
     </message>
     <message>
@@ -616,13 +616,13 @@
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="62"/>
-        <source>WARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
-        <translation>OPOZORILO: Ne delite Monero ključev z drugimi forki, RAZEN če ta fork sam zagotavlja varnost pri deljeni uporabi ključev. Takšno ravnanje zmanjšuje vašo zasebnost.</translation>
+        <source>WARNING: Do not reuse your NejCoin keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy.</source>
+        <translation>OPOZORILO: Ne delite NejCoin ključev z drugimi forki, RAZEN če ta fork sam zagotavlja varnost pri deljeni uporabi ključev. Takšno ravnanje zmanjšuje vašo zasebnost.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="85"/>
-        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your Monero. Please write down your seed manually.</source>
-        <translation>OPOZORILO: Kopiranje lahko izpostavi vaše mnemonično seme zlonameni programski opremi, ki lahko nato ukrade vaš Monero. Prosimo, da ročno prepišete mnemorično seme na papir.</translation>
+        <source>WARNING: Copying your seed to clipboard can expose you to malicious software, which may record your seed and steal your NejCoin. Please write down your seed manually.</source>
+        <translation>OPOZORILO: Kopiranje lahko izpostavi vaše mnemonično seme zlonameni programski opremi, ki lahko nato ukrade vaš NejCoin. Prosimo, da ročno prepišete mnemorično seme na papir.</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="159"/>
@@ -1030,12 +1030,12 @@
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="71"/>
-        <source>Mining with your computer helps strengthen the Monero network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
+        <source>Mining with your computer helps strengthen the NejCoin network. The more that people mine, the harder it is for the network to be attacked, and every little bit helps.
 
-Mining also gives you a small chance to earn some Monero. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
-        <translation>Rudarjenje na vašem računalniku pomaga varovati Monero omrežje. Več ljudi ki rudari, težje je ogroziti omrežje. Vsak računalnik šteje.
+Mining also gives you a small chance to earn some NejCoin. Your computer will create hashes looking for block solutions. If you find a block, you will get the associated reward. Good luck!</source>
+        <translation>Rudarjenje na vašem računalniku pomaga varovati NejCoin omrežje. Več ljudi ki rudari, težje je ogroziti omrežje. Vsak računalnik šteje.
 
-Z rudarjenjem imate tudi majhno možnost da zaslužite Monero. Vaš računalnik bo računal hashe in s tem reševal bloke. Če najde blok bo nagrada tega bloka vaša. Srečno!</translation>
+Z rudarjenjem imate tudi majhno možnost da zaslužite NejCoin. Vaš računalnik bo računal hashe in s tem reševal bloke. Če najde blok bo nagrada tega bloka vaša. Srečno!</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="83"/>
@@ -1404,8 +1404,8 @@ Z rudarjenjem imate tudi majhno možnost da zaslužite Monero. Vaš računalnik 
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="99"/>
-        <source>Embedded Monero version: </source>
-        <translation>Vgrajena Monero verzija: </translation>
+        <source>Embedded NejCoin version: </source>
+        <translation>Vgrajena NejCoin verzija: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="129"/>
@@ -1603,13 +1603,13 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="247"/>
-        <source>Uses a third-party server to connect to the Monero network. Less secure, but easier on your computer.</source>
-        <translation>Uporablja strežnik tretje osebe za vzpostavitev povezave v Monero omrežje. Je manj varno vendar enostavnejše.</translation>
+        <source>Uses a third-party server to connect to the NejCoin network. Less secure, but easier on your computer.</source>
+        <translation>Uporablja strežnik tretje osebe za vzpostavitev povezave v NejCoin omrežje. Je manj varno vendar enostavnejše.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="293"/>
-        <source>To find a remote node, type &apos;Monero remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
-        <translation>Da poiščete oddaljeno vozlišče, vnesite &apos;Monero remote node&apos; v vaš najljubši brskalnik. Prosim, da se prepričate, da vozlišče poganja zaupanja vredna stranka.</translation>
+        <source>To find a remote node, type &apos;NejCoin remote node&apos; into your favorite search engine. Please ensure the node is run by a trusted third-party.</source>
+        <translation>Da poiščete oddaljeno vozlišče, vnesite &apos;NejCoin remote node&apos; v vaš najljubši brskalnik. Prosim, da se prepričate, da vozlišče poganja zaupanja vredna stranka.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="301"/>
@@ -1814,8 +1814,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
-        <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Ta stran omogoča, da interaktirate z deljeno bazo obročev (RingDB). Ta baza je namenjena Monero denarnicam in prav tako klonom Monera, ki si delijo Monero ključe</translation>
+        <source>This page allows you to interact with the shared ring database. This database is meant for use by NejCoin wallets as well as wallets from NejCoin clones which reuse the NejCoin keys.</source>
+        <translation>Ta stran omogoča, da interaktirate z deljeno bazo obročev (RingDB). Ta baza je namenjena NejCoin denarnicam in prav tako klonom Monera, ki si delijo NejCoin ključe</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1831,8 +1831,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
-        <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Da lahko v Monero transakciji zakrijete kateri inputi so porabljeni, tretja oseba ne sme vedeti, kateri inputi v obroču so že porabljeni. To bi zmanjšalo varnost, ki jo zagotavljajo obročni podpisi. Če je znano, da so vsi inputi razen enega porabljeni, potem je zadnji input, ki se ga porablja očiten. S tem so obročni podpisi, eden izmed treh stebrov varne zasebnosti Monera, neefektivni. Da se transakcije izognejo takšnim inputom, se uporablja lista znano že porabljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja Monero projekt in je dobavljiva na getmonero.org. To listo lahko uvoziš tukaj. &lt;br&gt;Alternativno lahko sam preiščeš blockchain (vključno z Monero kloni, ki si delijo ključe) z uporabo orodja monero-blockchain-mark-spent-outputs, ki ustvari listo znanih, že porabljenih outputov.&lt;br&gt;</translation>
+        <source>In order to obscure which inputs in a NejCoin transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection NejCoin uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by NejCoin and is available on the getnejcoin.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing NejCoin clones) yourself using the nejcoin-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
+        <translation>Da lahko v NejCoin transakciji zakrijete kateri inputi so porabljeni, tretja oseba ne sme vedeti, kateri inputi v obroču so že porabljeni. To bi zmanjšalo varnost, ki jo zagotavljajo obročni podpisi. Če je znano, da so vsi inputi razen enega porabljeni, potem je zadnji input, ki se ga porablja očiten. S tem so obročni podpisi, eden izmed treh stebrov varne zasebnosti Monera, neefektivni. Da se transakcije izognejo takšnim inputom, se uporablja lista znano že porabljenih inputov, ki se jih ne uporablja v novih transakcijah. Takšno listo ureja NejCoin projekt in je dobavljiva na getnejcoin.org. To listo lahko uvoziš tukaj. &lt;br&gt;Alternativno lahko sam preiščeš blockchain (vključno z NejCoin kloni, ki si delijo ključe) z uporabo orodja nejcoin-blockchain-mark-spent-outputs, ki ustvari listo znanih, že porabljenih outputov.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
@@ -1912,13 +1912,13 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="257"/>
-        <source>In order to avoid nullifying the protection afforded by Monero&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing Monero clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by Monero and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing Monero clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your Monero safely.&lt;br&gt;If you do not use a key-reusing Monero clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
-        <translation>V izogib izničenju varnosti s strani Monerovih obročnih podpisov, se outputa ne sme zapraviti z različnimi obroči na različnih blockchainih. To načeloma ni zaskrbljujoče, razen ko vam Monero klon omogoča zapravljanje že obstoječih outputov. V tem primeru je potrebno zagotoviti, da ti, že obsotječi outputi uporabljajo isti obroč na obeh verigah.&lt;br&gt; To bo izvedeno samodejno s strani Monera in vsakega softvera, ki vam ne želi, namerno zmanjšati zasebnost.&lt;br&gt;Če uporabljate Monero klon, ki si deli vaše ključe in ne vključuje te zaščite, lahko še vedno zagotovite, da so vaše transakcije varne. To storite, tako da jih najprej zapravite na klonu in nato ročno dodate obroč na tej strani, ki vam zatem omogoča varno plačevanje z Monerom.&lt;br&gt;V kolikor ne uporabljate takšnih Monero klonov, potem vam ni potrebno storiti ničesar, saj se vse izvede samodejno.&lt;br&gt;</translation>
+        <source>In order to avoid nullifying the protection afforded by NejCoin&apos;s ring signatures, an output should not be spent with different rings on different blockchains. While this is normally not a concern, it can become one when a key-reusing NejCoin clone allows you to spend existing outputs. In this case, you need to ensure this existing outputs uses the same ring on both chains.&lt;br&gt;This will be done automatically by NejCoin and any key-reusing software which is not trying to actively strip you of your privacy.&lt;br&gt;If you are using a key-reusing NejCoin clone too, and this clone does not include this protection, you can still ensure your transactions are protected by spending on the clone first, then manually adding the ring on this page, which allows you to then spend your NejCoin safely.&lt;br&gt;If you do not use a key-reusing NejCoin clone without these safety features, then you do not need to do anything as it is all automated.&lt;br&gt;</source>
+        <translation>V izogib izničenju varnosti s strani NejCoinvih obročnih podpisov, se outputa ne sme zapraviti z različnimi obroči na različnih blockchainih. To načeloma ni zaskrbljujoče, razen ko vam NejCoin klon omogoča zapravljanje že obstoječih outputov. V tem primeru je potrebno zagotoviti, da ti, že obsotječi outputi uporabljajo isti obroč na obeh verigah.&lt;br&gt; To bo izvedeno samodejno s strani Monera in vsakega softvera, ki vam ne želi, namerno zmanjšati zasebnost.&lt;br&gt;Če uporabljate NejCoin klon, ki si deli vaše ključe in ne vključuje te zaščite, lahko še vedno zagotovite, da so vaše transakcije varne. To storite, tako da jih najprej zapravite na klonu in nato ročno dodate obroč na tej strani, ki vam zatem omogoča varno plačevanje z NejCoinm.&lt;br&gt;V kolikor ne uporabljate takšnih NejCoin klonov, potem vam ni potrebno storiti ničesar, saj se vse izvede samodejno.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
-        <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>To shrani obroče tistih outputov, ki so bili zapravljeni na verigi, ki si deli Monero ključe. Tako se lahko isti obroč ponovno uporabi in s tem ohrani zasebnost.</translation>
+        <source>This records rings used by outputs spent on NejCoin on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
+        <translation>To shrani obroče tistih outputov, ki so bili zapravljeni na verigi, ki si deli NejCoin ključe. Tako se lahko isti obroč ponovno uporabi in s tem ohrani zasebnost.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -1953,12 +1953,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="376"/>
         <source>I intend to spend on key-reusing fork(s)</source>
-        <translation>Nameravam plačevati na forku, ki si deli Monero ključe</translation>
+        <translation>Nameravam plačevati na forku, ki si deli NejCoin ključe</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="388"/>
         <source>I might want to spend on key-reusing fork(s)</source>
-        <translation>Morda nameravam plačevati na forku, ki si deli Monero ključe</translation>
+        <translation>Morda nameravam plačevati na forku, ki si deli NejCoin ključe</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="400"/>
@@ -2092,8 +2092,8 @@ You can change the password in the wallet settings.</source>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="344"/>
-        <source>Enter the Monero Address (example: 44AFFq5kSiGBoZ...)</source>
-        <translation>Vnesi Monero naslov (primer: 44AFFq5kSiGBoZ...)</translation>
+        <source>Enter the NejCoin Address (example: 44AFFq5kSiGBoZ...)</source>
+        <translation>Vnesi NejCoin naslov (primer: 44AFFq5kSiGBoZ...)</translation>
     </message>
     <message>
         <location filename="../pages/Sign.qml" line="355"/>
@@ -2449,8 +2449,8 @@ Velikost obroča: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="621"/>
-        <source>Monero sent successfully</source>
-        <translation>Monero uspešno poslan</translation>
+        <source>NejCoin sent successfully</source>
+        <translation>NejCoin uspešno poslan</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="685"/>
@@ -2833,8 +2833,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet3.qml" line="58"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.</source>
-        <translation>Da lahko komunicirate z Monero omrežjem, mora biti vaša denarnica povezana z Monero vozliščem. Za najvišjo stopnjo zasebnosti je priporočljivo, da imate svoje vozlišče.</translation>
+        <source>To be able to communicate with the NejCoin network your wallet needs to be connected to a NejCoin node. For best privacy it&apos;s recommended to run your own node.</source>
+        <translation>Da lahko komunicirate z NejCoin omrežjem, mora biti vaša denarnica povezana z NejCoin vozliščem. Za najvišjo stopnjo zasebnosti je priporočljivo, da imate svoje vozlišče.</translation>
     </message>
 </context>
 <context>
@@ -2884,7 +2884,7 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardDaemonSettings.qml" line="121"/>
-        <source>Additionally, you may specify a bootstrap node to use Monero immediately.</source>
+        <source>Additionally, you may specify a bootstrap node to use NejCoin immediately.</source>
         <translation>Za takojšno uporabo Monera lahko nastavite bootstrap vozlišče.</translation>
     </message>
     <message>
@@ -2897,8 +2897,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="60"/>
-        <source>Welcome to Monero.</source>
-        <translation>Dobrodošli v Monero.</translation>
+        <source>Welcome to NejCoin.</source>
+        <translation>Dobrodošli v NejCoin.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="65"/>
@@ -2907,8 +2907,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="66"/>
-        <source>Choose this option if this is your first time using Monero.</source>
-        <translation>Izberite to opcijo, če prvič uporabljate Monero.</translation>
+        <source>Choose this option if this is your first time using NejCoin.</source>
+        <translation>Izberite to opcijo, če prvič uporabljate NejCoin.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="86"/>
@@ -2917,8 +2917,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="87"/>
-        <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>Za ustvaritev nove Monero denarnice, poveži hardversko denarnico z računalnikom.</translation>
+        <source>Connect your hardware wallet to create a new NejCoin wallet.</source>
+        <translation>Za ustvaritev nove NejCoin denarnice, poveži hardversko denarnico z računalnikom.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="106"/>
@@ -2970,8 +2970,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="102"/>
-        <source>Change the language of the Monero GUI.</source>
-        <translation>Spremeni jezik grafičnemu vmesniku Monero.</translation>
+        <source>Change the language of the NejCoin GUI.</source>
+        <translation>Spremeni jezik grafičnemu vmesniku NejCoin.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="197"/>
@@ -2998,7 +2998,7 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="81"/>
-        <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name &lt;i&gt;bootstrap&lt;/i&gt;), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
+        <source>Temporary use of remote nodes is useful in order to use NejCoin immediately (hence the name &lt;i&gt;bootstrap&lt;/i&gt;), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
         <translation>Začasna uporaba oddaljenih vozlišč je uporabna za takojšno uporabo Monera, vendar pa je pri tem načinu (vključno z &lt;i&gt;bootstrap&lt;/i&gt; nastavitvijo) možno sledenje vašega IP naslova, obnovitvene višine ter zahtevkov povezanih z bločnimi podatki. Oddaljena vozlišča vam lahko posredujejo nenatančne informacije z namenom zbiranja informacij o vaših transakcijah.</translation>
     </message>
     <message>
@@ -3026,8 +3026,8 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="70"/>
-        <source>This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.</source>
-        <translation>Ta način je namenjen za upravljanje manjših zneskov Monera. Avtomatično se poveže v Monero omrežje, da lahko z uporabo Monera začnete takoj.</translation>
+        <source>This mode is ideal for managing small amounts of NejCoin. You have access to basic features for making and managing transactions. It will automatically connect to the NejCoin network so you can start using NejCoin immediately.</source>
+        <translation>Ta način je namenjen za upravljanje manjših zneskov Monera. Avtomatično se poveže v NejCoin omrežje, da lahko z uporabo Monera začnete takoj.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="83"/>
@@ -3235,10 +3235,10 @@ V primeru dokazila o plačilu, naslov prejemnika ni potreben.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet3.qml" line="66"/>
-        <source>To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it&apos;s recommended to run your own node.
+        <source>To be able to communicate with the NejCoin network your wallet needs to be connected to a NejCoin node. For best privacy it&apos;s recommended to run your own node.
 
 If you don&apos;t have the option to run your own node, there&apos;s an option to connect to a remote node.</source>
-        <translation>Da lahko komunicirate z omrežjem Monero, mora biti vaša denarnica povezana z Monero vozliščem. Za najboljšo zasebnost je priporočljiva uporaba lastnega vozlišča.
+        <translation>Da lahko komunicirate z omrežjem NejCoin, mora biti vaša denarnica povezana z NejCoin vozliščem. Za najboljšo zasebnost je priporočljiva uporaba lastnega vozlišča.
 
 Če nimate opcije uporabe lastnega vozlišča, lahko uporabite opcijo oddaljenega vozišča.</translation>
     </message>
@@ -3477,8 +3477,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="984"/>
-        <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero poslan uspešno: %1 transakcij(a) </translation>
+        <source>NejCoin sent successfully: %1 transaction(s) </source>
+        <translation>NejCoin poslan uspešno: %1 transakcij(a) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1014"/>
@@ -3499,8 +3499,8 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="1057"/>
-        <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Ta naslov je prejel %1 monerov, s %2 potrditev.</translation>
+        <source>This address received %1 nejcoin, with %2 confirmation(s).</source>
+        <translation>Ta naslov je prejel %1 nejcoinv, s %2 potrditev.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1068"/>
@@ -3580,13 +3580,13 @@ Spending address index: </source>
     </message>
     <message>
         <location filename="../main.qml" line="2159"/>
-        <source>New version of Monero v.%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
+        <source>New version of NejCoin v.%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
         <translation>Nova verzija Monera v.%1 je pripravljena.&lt;br&gt;&lt;br&gt;Prenesi:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2161"/>
-        <source>New version of Monero is available. Check out getmonero.org</source>
-        <translation>Na voljo je nova različica Monero. Oglejte si getmonero.org</translation>
+        <source>New version of NejCoin is available. Check out getnejcoin.org</source>
+        <translation>Na voljo je nova različica NejCoin. Oglejte si getnejcoin.org</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2251"/>
@@ -3667,7 +3667,7 @@ Provizija: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1054"/>
-        <source>This address received %1 monero, but the transaction is not yet mined</source>
+        <source>This address received %1 nejcoin, but the transaction is not yet mined</source>
         <translation>Ta naslov je prejel %1 monera(ov), ampak transakcija še ni v bloku</translation>
     </message>
     <message>

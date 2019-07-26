@@ -7,7 +7,7 @@ TEMPLATE = app
 
 QT += svg qml gui-private quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/nejcoin
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libusb-1.0) {
@@ -25,7 +25,7 @@ packagesExist(hidapi-libusb) {
     }
 }
 
-# cleaning "auto-generated" bitmonero directory on "make distclean"
+# cleaning "auto-generated" bitnejcoin directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \
@@ -69,7 +69,7 @@ HEADERS += \
     src/qt/utils.h \
     src/qt/prices.h \
     src/qt/macoshelper.h \
-    src/qt/MoneroSettings.h \
+    src/qt/NejCoinSettings.h \
     src/qt/TailsOS.h
 
 SOURCES += main.cpp \
@@ -104,7 +104,7 @@ SOURCES += main.cpp \
     src/qt/KeysFiles.cpp \
     src/qt/utils.cpp \
     src/qt/prices.cpp \
-    src/qt/MoneroSettings.cpp \
+    src/qt/NejCoinSettings.cpp \
     src/qt/TailsOS.cpp
 
 CONFIG(DISABLE_PASS_STRENGTH_METER) {
@@ -345,7 +345,7 @@ linux {
             -Wl,-Bdynamic \
             -lGL
     }
-    # currently monero has an issue with "static" build and linunwind-dev,
+    # currently nejcoin has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
         message(Building without libunwind)
@@ -390,7 +390,7 @@ macx {
 
 
 # translation stuff
-TRANSLATIONS = $$files($$PWD/translations/monero-core_*.ts)
+TRANSLATIONS = $$files($$PWD/translations/nejcoin-core_*.ts)
 
 CONFIG(release, debug|release) {
     DESTDIR = release/bin
@@ -485,7 +485,7 @@ linux:!android {
 }
 
 android{
-    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libmonero-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
+    deploy.commands += make install INSTALL_ROOT=$$DESTDIR && androiddeployqt --input android-libnejcoin-wallet-gui.so-deployment-settings.json --output $$DESTDIR --deployment bundled --android-platform android-21 --jdk /usr/lib/jvm/java-8-openjdk-amd64 -qmldir=$$PWD
 }
 
 
@@ -495,7 +495,7 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    monero/src/wallet/CMakeLists.txt
+    nejcoin/src/wallet/CMakeLists.txt
 
 
 # windows application icon

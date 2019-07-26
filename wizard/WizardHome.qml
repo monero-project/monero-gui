@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -30,9 +31,9 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
-import moneroComponents.NetworkType 1.0
+import nejcoinComponents.NetworkType 1.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Rectangle {
     id: wizardHome
@@ -57,13 +58,13 @@ Rectangle {
 
             WizardHeader {
                 Layout.bottomMargin: 20
-                title: qsTr("Welcome to Monero.") + translationManager.emptyString
+                title: qsTr("Welcome to NejCoin.") + translationManager.emptyString
                 subtitle: ""
             }
 
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet") + translationManager.emptyString
-                bodyText: qsTr("Choose this option if this is your first time using Monero.") + translationManager.emptyString
+                bodyText: qsTr("Choose this option if this is your first time using NejCoin.") + translationManager.emptyString
                 imageIcon: "qrc:///images/create-wallet.png"
 
                 onMenuClicked: {
@@ -78,13 +79,13 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet from hardware") + translationManager.emptyString
-                bodyText: qsTr("Connect your hardware wallet to create a new Monero wallet.") + translationManager.emptyString
+                bodyText: qsTr("Connect your hardware wallet to create a new NejCoin wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet-from-hardware.png"
 
                 onMenuClicked: {
@@ -98,8 +99,8 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -117,8 +118,8 @@ Rectangle {
                 Layout.topMargin: 3
                 Layout.bottomMargin: 3
                 Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
+                color: NejCoinComponents.Style.dividerColor
+                opacity: NejCoinComponents.Style.dividerOpacity
             }
 
             WizardMenuItem {
@@ -137,7 +138,7 @@ Rectangle {
                 Layout.topMargin: 16
                 spacing: 20
 
-                MoneroComponents.StandardButton {
+                NejCoinComponents.StandardButton {
                     small: true
                     text: qsTr("Change wallet mode") + translationManager.emptyString
 
@@ -147,7 +148,7 @@ Rectangle {
                     }                    
                 }
 
-                MoneroComponents.StandardButton {
+                NejCoinComponents.StandardButton {
                     visible: !persistentSettings.customDecorations
                     small: true
                     text: qsTr("Change language") + translationManager.emptyString
@@ -159,7 +160,7 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.CheckBox2 {
+            NejCoinComponents.CheckBox2 {
                 id: showAdvancedCheckbox
                 Layout.topMargin: 30
                 Layout.fillWidth: true
@@ -185,12 +186,12 @@ Rectangle {
                 ColumnLayout {
                     Layout.topMargin: 4
 
-                    MoneroComponents.Label {
+                    NejCoinComponents.Label {
                         text: qsTr("Change Network:") + translationManager.emptyString
                         fontSize: 14
                     }
 
-                    MoneroComponents.StandardDropdown {
+                    NejCoinComponents.StandardDropdown {
                         id: networkTypeDropdown
                         dataModel: networkTypeModel
                         Layout.fillWidth: true
@@ -211,7 +212,7 @@ Rectangle {
                     }
                 }
 
-                MoneroComponents.LineEdit {
+                NejCoinComponents.LineEdit {
                     id: kdfRoundsText
                     Layout.fillWidth: true
 

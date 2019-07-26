@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -48,9 +49,9 @@ class UnsignedTransaction : public QObject
 
 public:
     enum Status {
-        Status_Ok       = Monero::UnsignedTransaction::Status_Ok,
-        Status_Error    = Monero::UnsignedTransaction::Status_Error,
-        Status_Critical    = Monero::UnsignedTransaction::Status_Critical
+        Status_Ok       = NejCoin::UnsignedTransaction::Status_Ok,
+        Status_Error    = NejCoin::UnsignedTransaction::Status_Error,
+        Status_Critical    = NejCoin::UnsignedTransaction::Status_Critical
     };
     Q_ENUM(Status)
 
@@ -68,13 +69,13 @@ public:
     Q_INVOKABLE void setFilename(const QString &fileName);
 
 private:
-    explicit UnsignedTransaction(Monero::UnsignedTransaction * pt, Monero::Wallet *walletImpl, QObject *parent = 0);
+    explicit UnsignedTransaction(NejCoin::UnsignedTransaction * pt, NejCoin::Wallet *walletImpl, QObject *parent = 0);
     ~UnsignedTransaction();
 private:
     friend class Wallet;
-    Monero::UnsignedTransaction * m_pimpl;
+    NejCoin::UnsignedTransaction * m_pimpl;
     QString m_fileName;
-    Monero::Wallet * m_walletImpl;
+    NejCoin::Wallet * m_walletImpl;
 };
 
 #endif // UNSIGNEDTRANSACTION_H

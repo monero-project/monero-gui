@@ -1,11 +1,11 @@
 import QtQuick 2.9
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 TextEdit {
-    color: MoneroComponents.Style.defaultFontColor
-    font.family: MoneroComponents.Style.fontRegular.name
-    selectionColor: MoneroComponents.Style.textSelectionColor
+    color: NejCoinComponents.Style.defaultFontColor
+    font.family: NejCoinComponents.Style.fontRegular.name
+    selectionColor: NejCoinComponents.Style.textSelectionColor
     wrapMode: Text.Wrap
     readOnly: true
     selectByMouse: true

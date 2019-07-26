@@ -18,7 +18,7 @@ QtObject {
     property string orange: "#FF6C3C"
     property string white: "#FFFFFF"
     property string green: "#2EB358"
-    property string moneroGrey: "#4C4C4C"
+    property string nejcoinGrey: "#4C4C4C"
     property string warningColor: "orange"
 
     property string defaultFontColor: blackTheme ? _b_defaultFontColor : _w_defaultFontColor

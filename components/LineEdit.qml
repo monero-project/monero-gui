@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -29,7 +30,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 Item {
     id: item
@@ -38,10 +39,10 @@ Item {
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: NejCoinComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
     property int placeholderFontSize: 18
-    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property string placeholderColor: NejCoinComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
 
     property alias acceptableInput: input.acceptableInput
@@ -57,11 +58,11 @@ Item {
     property bool borderDisabled: false
     property string borderColor: {
         if(error && input.text !== ""){
-            return MoneroComponents.Style.inputBorderColorInvalid;
+            return NejCoinComponents.Style.inputBorderColorInvalid;
         } else if(input.activeFocus){
-            return MoneroComponents.Style.inputBorderColorActive;
+            return NejCoinComponents.Style.inputBorderColorActive;
         } else {
-            return MoneroComponents.Style.inputBorderColorInActive;
+            return NejCoinComponents.Style.inputBorderColorInActive;
         }
     }
 
@@ -107,15 +108,15 @@ Item {
         }
     }
 
-    MoneroComponents.TextPlain {
+    NejCoinComponents.TextPlain {
         id: inputLabel
         anchors.top: parent.top
         anchors.left: parent.left
-        font.family: MoneroComponents.Style.fontRegular.name
+        font.family: NejCoinComponents.Style.fontRegular.name
         font.pixelSize: labelFontSize
         font.bold: labelFontBold
         textFormat: Text.RichText
-        color: MoneroComponents.Style.defaultFontColor
+        color: NejCoinComponents.Style.defaultFontColor
         onLinkActivated: item.labelLinkActivated()
 
         MouseArea {
@@ -125,7 +126,7 @@ Item {
         }
     }
 
-    MoneroComponents.LabelButton {
+    NejCoinComponents.LabelButton {
         id: copyButtonId
         text: qsTr("Copy") + translationManager.emptyString
         anchors.right: parent.right
@@ -147,7 +148,7 @@ Item {
         width: parent.width
         clip: true
 
-        MoneroComponents.TextPlain {
+        NejCoinComponents.TextPlain {
             id: placeholderLabel
             visible: input.text ? false : true
             anchors.verticalCenter: parent.verticalCenter
@@ -193,11 +194,11 @@ Item {
             anchors.topMargin: 8
             anchors.left: parent.left
             anchors.leftMargin: 12
-            source: "qrc:///images/moneroIcon-28x28.png"
+            source: "qrc:///images/nejcoinIcon-28x28.png"
             visible: false
         }
 
-        MoneroComponents.Input {
+        NejCoinComponents.Input {
             id: input
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 44 : 0
@@ -210,7 +211,7 @@ Item {
             bottomPadding: 10
         }
 
-        MoneroComponents.InlineButton {
+        NejCoinComponents.InlineButton {
             id: inlineButtonId
             visible: item.inlineButtonText ? true : false
             anchors.right: parent.right

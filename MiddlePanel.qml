@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -33,13 +34,13 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
-import moneroComponents.Wallet 1.0
+import nejcoinComponents.Wallet 1.0
 
 import "./pages"
 import "./pages/settings"
 import "./pages/merchant"
-import "./components" as MoneroComponents
-import "./components/effects/" as MoneroEffects
+import "./components" as NejCoinComponents
+import "./components/effects/" as NejCoinEffects
 
 Rectangle {
     id: root
@@ -77,20 +78,20 @@ Rectangle {
     Rectangle {
         // grey background on merchantView
         visible: currentView === merchantView
-        color: MoneroComponents.Style.moneroGrey
+        color: NejCoinComponents.Style.nejcoinGrey
         anchors.fill: parent
     }
 
-    MoneroEffects.GradientBackground {
+    NejCoinEffects.GradientBackground {
         visible: currentView !== merchantView
         anchors.fill: parent
-        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
-        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
-        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
-        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
-        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
-        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
+        fallBackColor: NejCoinComponents.Style.middlePanelBackgroundColor
+        initialStartColor: NejCoinComponents.Style.middlePanelBackgroundGradientStart
+        initialStopColor: NejCoinComponents.Style.middlePanelBackgroundGradientStop
+        blackColorStart: NejCoinComponents.Style._b_middlePanelBackgroundGradientStart
+        blackColorStop: NejCoinComponents.Style._b_middlePanelBackgroundGradientStop
+        whiteColorStart: NejCoinComponents.Style._w_middlePanelBackgroundGradientStart
+        whiteColorStop: NejCoinComponents.Style._w_middlePanelBackgroundGradientStop
         start: Qt.point(0, 0)
         end: Qt.point(height, width)
     }
@@ -262,12 +263,12 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         width: 1
-        color: MoneroComponents.Style.appWindowBorderColor
+        color: NejCoinComponents.Style.appWindowBorderColor
 
-        MoneroEffects.ColorTransition {
+        NejCoinEffects.ColorTransition {
             targetObj: parent
-            blackColor: MoneroComponents.Style._b_appWindowBorderColor
-            whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+            blackColor: NejCoinComponents.Style._b_appWindowBorderColor
+            whiteColor: NejCoinComponents.Style._w_appWindowBorderColor
         }
     }
 

@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2015, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2015, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -32,8 +33,8 @@ import QtGraphicalEffects 1.0
 import FontAwesome 1.0
 
 import "." 1.0
-import "." as MoneroComponents
-import "effects/" as MoneroEffects
+import "." as NejCoinComponents
+import "effects/" as NejCoinEffects
 
 RowLayout {
     id: checkBox
@@ -58,7 +59,7 @@ RowLayout {
             width: (label.width + indicatorRect.width + checkBox.textMargin)
             color: "transparent"
 
-            MoneroComponents.TextPlain {
+            NejCoinComponents.TextPlain {
                 id: label
                 font.family: Style.fontLight.name
                 font.pixelSize: checkBox.fontSize
@@ -77,18 +78,18 @@ RowLayout {
                 color: "transparent"
                 rotation: checkBox.checked ? 180  : 0
 
-                MoneroEffects.ImageMask {
+                NejCoinEffects.ImageMask {
                     id: indicatorImage
                     anchors.centerIn: parent
                     width: 12
                     height: 8
                     image: "qrc:///images/whiteDropIndicator.png"
-                    color: MoneroComponents.Style.defaultFontColor
-                    opacity: MoneroComponents.Style.blackTheme ? 1 : 0.75
+                    color: NejCoinComponents.Style.defaultFontColor
+                    opacity: NejCoinComponents.Style.blackTheme ? 1 : 0.75
                     fontAwesomeFallbackIcon: FontAwesome.arrowDown
                     fontAwesomeFallbackSize: 14
 
-                    MoneroEffects.ColorTransition {
+                    NejCoinEffects.ColorTransition {
                         targetObj: indicatorImage
                         blackColor: "white"
                         whiteColor: "black"

@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 // 
 // All rights reserved.
 // 
@@ -32,7 +33,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../js/Utils.js" as Utils
-import "../components" as MoneroComponents
+import "../components" as NejCoinComponents
 
 GridLayout {
     columns: (isMobile) ? 1 : 2
@@ -45,16 +46,16 @@ GridLayout {
 
     // TODO: LEGACY; remove these placeHolder variables when
     // the wizards get redesigned to the black-theme
-    property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
+    property string placeholderFontFamily: NejCoinComponents.Style.fontRegular.name
     property bool placeholderFontBold: false
     property int placeholderFontSize: 15
-    property string placeholderColor: MoneroComponents.Style.defaultFontColor
+    property string placeholderColor: NejCoinComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
     property int labelFontSize: 14
 
     property string lineEditBackgroundColor: "transparent"
-    property string lineEditBorderColor: MoneroComponents.Style.inputBorderColorInActive
-    property string lineEditFontColor: MoneroComponents.Style.defaultFontColor
+    property string lineEditBorderColor: NejCoinComponents.Style.inputBorderColorInActive
+    property string lineEditFontColor: NejCoinComponents.Style.defaultFontColor
     property bool lineEditFontBold: false
     property int lineEditFontSize: 15
 

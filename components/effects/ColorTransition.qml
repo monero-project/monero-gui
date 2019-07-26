@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -29,7 +30,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
-import "../" as MoneroComponents
+import "../" as NejCoinComponents
 
 Item {
     id: root
@@ -42,11 +43,11 @@ Item {
     states: [
         State {
             name: "black";
-            when: MoneroComponents.Style.blackTheme && root.themeTransition
+            when: NejCoinComponents.Style.blackTheme && root.themeTransition
             PropertyChanges { target: root.targetObj; color: root.blackColor}
         }, State {
             name: "white";
-            when: !MoneroComponents.Style.blackTheme && root.themeTransition
+            when: !NejCoinComponents.Style.blackTheme && root.themeTransition
             PropertyChanges { target: root.targetObj; color: root.whiteColor}
         }
     ]

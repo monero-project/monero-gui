@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
-import "../../components" as MoneroComponents
+import "../../components" as NejCoinComponents
 
 RowLayout {
     id: root
@@ -27,7 +27,7 @@ RowLayout {
         }
     }
 
-    MoneroComponents.TextPlain {
+    NejCoinComponents.TextPlain {
         id: content
         font.pixelSize: 14
         font.bold: false

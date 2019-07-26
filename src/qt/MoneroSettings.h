@@ -4,7 +4,8 @@
 ** Contact: https://www.qt.io/licensing/
 **
 ****************************************************************************/
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -33,8 +34,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#ifndef MONEROSETTINGS_H
-#define MONEROSETTINGS_H
+#ifndef NEJCOINSETTINGS_H
+#define NEJCOINSETTINGS_H
 
 #include <QtQml/qqmlparserstatus.h>
 #include <QGuiApplication>
@@ -45,13 +46,13 @@
 
 static const int settingsWriteDelay = 500; // ms
 
-class MoneroSettings : public QObject, public QQmlParserStatus
+class NejCoinSettings : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName FINAL)
 public:
-    explicit MoneroSettings(QObject *parent = nullptr);
+    explicit NejCoinSettings(QObject *parent = nullptr);
 
     QString fileName() const;
     void setFileName(const QString &fileName);
@@ -78,4 +79,4 @@ private:
     int m_timerId = 0;
 };
 
-#endif // MONEROSETTINGS_H
+#endif // NEJCOINSETTINGS_H

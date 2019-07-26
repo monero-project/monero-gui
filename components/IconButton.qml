@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2018, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -27,13 +28,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import "../components" as MoneroComponents
-import "../components/effects" as MoneroEffects
+import "../components" as NejCoinComponents
+import "../components/effects" as NejCoinEffects
 
-MoneroEffects.ImageMask {
+NejCoinEffects.ImageMask {
     id: button
     z: 666
-    color: MoneroComponents.Style.defaultFontColor
+    color: NejCoinComponents.Style.defaultFontColor
     image: ""
 
     signal clicked(var mouse)

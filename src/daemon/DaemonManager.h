@@ -1,4 +1,5 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2019-2019, Nejcraft
+// Copyright (c) 2014-2019, The NejCoin Project
 //
 // All rights reserved.
 //
@@ -78,7 +79,7 @@ private:
     static QStringList m_clArgs;
     QProcess *m_daemon;
     bool initialized = false;
-    QString m_monerod;
+    QString m_nejcoind;
     bool m_has_daemon = true;
     bool m_app_exit = false;
 
