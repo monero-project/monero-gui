@@ -1,5 +1,5 @@
 // Copyright (c) 2019-2019, Nejcraft
-// Copyright (c) 2014-2015, The NejCoin Project
+// Copyright (c) 2014-2015, The Monero Project
 //
 // All rights reserved.
 //

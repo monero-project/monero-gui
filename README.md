@@ -1,6 +1,6 @@
 # NejCoin GUI
 Copyright (c) 2019-2019, Nejcraft
-Copyright (c) 2014-2019, The NejCoin Project
+Copyright (c) 2014-2019, The Monero Project
 
 ## Development resources
 
