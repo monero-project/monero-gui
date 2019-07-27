@@ -167,8 +167,6 @@
         <file>pages/settings/SettingsLayout.qml</file>
         <file>pages/settings/SettingsInfo.qml</file>
         <file>pages/settings/Navbar.qml</file>
-        <file>images/settings_local.svg</file>
-        <file>images/settings_remote.svg</file>
         <file>components/WarningBox.qml</file>
         <file>images/miningxmr.png</file>
         <file>images/miningxmr@2x.png</file>
