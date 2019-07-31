@@ -111,39 +111,50 @@ Rectangle {
                 id: wizardWalletInput
             }
 
-            GridLayout{
-                columns: 3
+            RowLayout {
+                Layout.topMargin: 10
+                spacing: 30
+                Layout.fillWidth: true
 
-                MoneroComponents.StandardButton {
+                MoneroComponents.RadioButton {
+                    id: seedRadioButton
                     text: qsTr("Restore from seed") + translationManager.emptyString
-                    small: true
-                    enabled: wizardController.walletRestoreMode !== 'seed'
-
+                    fontSize: 16
+                    checked: true
                     onClicked: {
+                        checked = true;
+                        keysRadioButton.checked = false;
+                        qrRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'seed';
                     }
                 }
 
-                MoneroComponents.StandardButton {
+                MoneroComponents.RadioButton {
+                    id: keysRadioButton
                     text: qsTr("Restore from keys") + translationManager.emptyString
-                    small: true
-                    enabled: wizardController.walletRestoreMode !== 'keys'
-
+                    fontSize: 16
+                    checked: false
                     onClicked: {
+                        checked = true;
+                        seedRadioButton.checked = false;
+                        qrRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'keys';
                     }
                 }
 
-                MoneroComponents.StandardButton {
-                    text: qsTr("From QR Code") + translationManager.emptyString
-                    small: true
+                MoneroComponents.RadioButton {
+                    id: qrRadioButton
+                    text: qsTr("Restore from QR Code") + translationManager.emptyString
+                    fontSize: 16
                     visible: appWindow.qrScannerEnabled
-                    enabled: wizardController.walletRestoreMode !== 'qr'
-
+                    checked: false
                     onClicked: {
+                        checked = true;
+                        seedRadioButton.checked = false;
+                        keysRadioButton.checked = false;
                         wizardController.walletRestoreMode = 'qr';
-                        cameraUi.state = "Capture"
-                        cameraUi.qrcode_decoded.connect(Wizard.updateFromQrCode)
+                        cameraUi.state = "Capture";
+                        cameraUi.qrcode_decoded.connect(Wizard.updateFromQrCode);
                     }
                 }
             }
