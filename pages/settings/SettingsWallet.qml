@@ -271,6 +271,7 @@ Rectangle {
                 small: true
                 text: qsTr("Rescan") + translationManager.emptyString
                 onClicked: {
+                    currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
                     if (!currentWallet.rescanSpent()) {
                         console.error("Error: ", currentWallet.errorString);
                         informationPopup.title = qsTr("Error") + translationManager.emptyString;
