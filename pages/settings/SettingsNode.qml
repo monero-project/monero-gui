@@ -381,7 +381,7 @@ Rectangle{
 
             MoneroComponents.StandardButton {
                 small: true
-                text: (appWindow.daemonRunning ? qsTr("Stop local node") : qsTr("Start daemon")) + translationManager.emptyString
+                text: (appWindow.daemonRunning ? qsTr("Stop daemon") : qsTr("Start daemon")) + translationManager.emptyString
                 onClicked: {
                     if (appWindow.daemonRunning) {
                         appWindow.stopDaemon();
