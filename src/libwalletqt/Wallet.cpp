@@ -206,7 +206,7 @@ bool Wallet::store(const QString &path)
     return m_walletImpl->store(path.toStdString());
 }
 
-bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
+bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
 {
     qDebug() << "init non async";
     if (isRecovering){
@@ -221,6 +221,7 @@ bool Wallet::init(const QString &daemonAddress, quint64 upperTransactionLimit, b
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
     m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
+    setTrustedDaemon(trustedDaemon);
     return true;
 }
 
@@ -231,7 +232,7 @@ void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemon
     m_daemonPassword = daemonPassword;
 }
 
-void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
+void Wallet::initAsync(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
 {
     qDebug() << "initAsync: " + daemonAddress;
     // Change status to disconnected if connected
@@ -240,15 +241,14 @@ void Wallet::initAsync(const QString &daemonAddress, quint64 upperTransactionLim
         emit connectionStatusChanged(m_connectionStatus);
     }
 
-    m_scheduler.run([this, daemonAddress, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight] {
-        bool success = init(daemonAddress, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
+    m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight] {
+        bool success = init(daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
         if (success)
         {
             emit walletCreationHeightChanged();
             qDebug() << "init async finished - starting refresh";
             connected(true);
             m_walletImpl->startRefresh();
-
         }
     });
 }
