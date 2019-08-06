@@ -43,10 +43,12 @@ Rectangle {
     id: wizardOpenWallet1
 
     color: "transparent"
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardOpenWallet1"
     property int walletCount: walletKeysFilesModel.rowCount()
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true

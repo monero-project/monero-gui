@@ -41,6 +41,7 @@ Rectangle {
     id: wizardCreateDevice1
 
     color: "transparent"
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardCreateDevice1"
 
     property var deviceName: deviceNameModel.get(deviceNameDropdown.currentIndex).column2
@@ -58,6 +59,7 @@ Rectangle {
     }
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true

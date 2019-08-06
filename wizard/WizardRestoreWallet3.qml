@@ -38,6 +38,7 @@ Rectangle {
     id: wizardRestoreWallet3
     
     color: "transparent"
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardRestoreWallet3"
     property int recoveryMode: 1
 
@@ -47,6 +48,7 @@ Rectangle {
     }
 
     ColumnLayout {
+        id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
         width: parent.width - 100
         Layout.fillWidth: true

@@ -39,10 +39,11 @@ Rectangle {
     Layout.fillWidth: true
     color: "transparent"
 
+    property alias pageHeight: pageRoot.height
     property string viewName: "wizardLanguage"
 
     ColumnLayout {
-        id: root
+        id: pageRoot
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
