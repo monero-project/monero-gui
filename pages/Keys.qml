@@ -251,7 +251,7 @@ Rectangle {
                 onClicked: {
                     loadPage("Settings")
                 }
-                anchors.horizontalCenter: parent.horizontalCenter
+                Layout.alignment: Qt.AlignCenter
                 width: 135
             }
         }

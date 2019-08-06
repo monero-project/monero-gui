@@ -376,7 +376,7 @@ bool WalletManager::localDaemonSynced() const
 
 bool WalletManager::isDaemonLocal(const QString &daemon_address) const
 {
-    return Monero::Utils::isAddressLocal(daemon_address.toStdString());
+    return daemon_address.isEmpty() ? false : Monero::Utils::isAddressLocal(daemon_address.toStdString());
 }
 
 QString WalletManager::resolveOpenAlias(const QString &address) const
