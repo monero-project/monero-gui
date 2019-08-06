@@ -239,7 +239,6 @@ ApplicationWindow {
         if (typeof currentWallet !== "undefined" && currentWallet !== null) {
             console.log("Daemon change - closing " + currentWallet)
             closeWallet();
-            currentWallet = undefined
         } else if (!walletInitialized) {
             // set page to transfer if not changing daemon
             middlePanel.state = "Transfer";
@@ -286,24 +285,29 @@ ApplicationWindow {
     function closeWallet(callback) {
 
         // Disconnect all listeners
-        if (typeof currentWallet !== "undefined" && currentWallet !== null) {
-            currentWallet.heightRefreshed.disconnect(onHeightRefreshed);
-            currentWallet.refreshed.disconnect(onWalletRefresh)
-            currentWallet.updated.disconnect(onWalletUpdate)
-            currentWallet.newBlock.disconnect(onWalletNewBlock)
-            currentWallet.moneySpent.disconnect(onWalletMoneySent)
-            currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
-            currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
-            currentWallet.transactionCreated.disconnect(onTransactionCreated)
-            currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
-            currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
-            currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
-            currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
-            middlePanel.paymentClicked.disconnect(handlePayment);
-            middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
-            middlePanel.getProofClicked.disconnect(handleGetProof);
-            middlePanel.checkProofClicked.disconnect(handleCheckProof);
+        if (typeof currentWallet === "undefined" || currentWallet === null) {
+            if (callback) {
+                callback();
+            }
+            return;
         }
+
+        currentWallet.heightRefreshed.disconnect(onHeightRefreshed);
+        currentWallet.refreshed.disconnect(onWalletRefresh)
+        currentWallet.updated.disconnect(onWalletUpdate)
+        currentWallet.newBlock.disconnect(onWalletNewBlock)
+        currentWallet.moneySpent.disconnect(onWalletMoneySent)
+        currentWallet.moneyReceived.disconnect(onWalletMoneyReceived)
+        currentWallet.unconfirmedMoneyReceived.disconnect(onWalletUnconfirmedMoneyReceived)
+        currentWallet.transactionCreated.disconnect(onTransactionCreated)
+        currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
+        currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
+        currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
+        currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
+        middlePanel.paymentClicked.disconnect(handlePayment);
+        middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
+        middlePanel.getProofClicked.disconnect(handleGetProof);
+        middlePanel.checkProofClicked.disconnect(handleCheckProof);
 
         currentWallet = undefined;
 
@@ -1122,7 +1126,6 @@ ApplicationWindow {
         clearMoneroCardLabelText();
         walletInitialized = false;
         closeWallet(function() {
-            currentWallet = undefined;
             wizard.restart();
             wizard.wizardState = "wizardHome";
             rootItem.state = "wizard"
