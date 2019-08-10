@@ -337,13 +337,13 @@ linux {
         -llmdb \
         -lsodium \
         -lhidapi-libusb \
-        -lcrypto $$TREZOR_LINKER \
-        -lX11
+        -lcrypto $$TREZOR_LINKER
 
     if(!android) {
         LIBS+= \
             -Wl,-Bdynamic \
-            -lGL
+            -lGL \
+            -lX11
     }
     # currently monero has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
