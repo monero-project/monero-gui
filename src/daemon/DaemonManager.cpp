@@ -243,6 +243,14 @@ bool DaemonManager::running(NetworkType::Type nettype) const
     }
     return false;
 }
+
+void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& callback) const
+{ 
+    m_scheduler.run([this, nettype] {
+        return QJSValueList({running(nettype)});
+    }, callback);
+}
+
 bool DaemonManager::sendCommand(const QString &cmd, NetworkType::Type nettype) const
 {
     QString message;
