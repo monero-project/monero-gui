@@ -496,8 +496,12 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if(!isMobile && appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected && !daemonManager.running(persistentSettings.nettype)){
-            daemonManagerDialog.open();
+        if (!isMobile && appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected) {
+            daemonManager.runningAsync(persistentSettings.nettype, function(running) {
+                if (!running) {
+                    daemonManagerDialog.open();
+                }
+            });
         }
         // initialize transaction history once wallet is initialized first time;
         if (!walletInitialized) {

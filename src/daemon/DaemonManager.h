@@ -48,7 +48,7 @@ public:
     Q_INVOKABLE bool stop(NetworkType::Type nettype);
 
     // return true if daemon process is started
-    Q_INVOKABLE bool running(NetworkType::Type nettype) const;
+    Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QJSValue& callback) const;
     // Send daemon command from qml and prints output in console window.
     Q_INVOKABLE bool sendCommand(const QString &cmd, NetworkType::Type nettype) const;
     Q_INVOKABLE void exit();
@@ -56,6 +56,7 @@ public:
 
 private:
 
+    bool running(NetworkType::Type nettype) const;
     bool sendCommand(const QString &cmd, NetworkType::Type nettype, QString &message) const;
     bool startWatcher(NetworkType::Type nettype) const;
     bool stopWatcher(NetworkType::Type nettype) const;
@@ -82,7 +83,7 @@ private:
     bool m_has_daemon = true;
     bool m_app_exit = false;
 
-    FutureScheduler m_scheduler;
+    mutable FutureScheduler m_scheduler;
 };
 
 #endif // DAEMONMANAGER_H
