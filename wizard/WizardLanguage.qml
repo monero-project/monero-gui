@@ -158,7 +158,7 @@ Rectangle {
             MoneroComponents.StandardButton {
                 id: idChangeLang
                 Layout.minimumWidth: 150
-                text: "Language"
+                text: qsTr("Language") + translationManager.emptyString
 
                 onClicked: {
                     appWindow.toggleLanguageView();
@@ -168,7 +168,7 @@ Rectangle {
             MoneroComponents.StandardButton {
                 id: btnContinue
                 Layout.minimumWidth: 150
-                text: "Continue"
+                text: qsTr("Continue") + translationManager.emptyString
 
                 onClicked: {
                     wizardController.wizardStackView.backTransition = false;
