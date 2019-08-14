@@ -316,7 +316,7 @@ Rectangle {
                     label.font.family: FontAwesome.fontFamily
                     fontSize: 24
                     width: 36
-                    visible: appWindow.currentWallet && appWindow.currentWallet.isHwBacked()
+                    visible: appWindow.currentWallet ? appWindow.currentWallet.isHwBacked() : false
                     onClicked: {
                         appWindow.currentWallet.deviceShowAddressAsync(
                             appWindow.currentWallet.currentSubaddressAccount,
