@@ -144,11 +144,8 @@ public:
     //! empty path stores in current location
     Q_INVOKABLE bool store(const QString &path = "");
 
-    //! initializes wallet
-    Q_INVOKABLE bool init(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
-
     //! initializes wallet asynchronously
-    Q_INVOKABLE void initAsync(const QString &daemonAddress, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE void initAsync(const QString &daemonAddress, bool trustedDaemon = false, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
 
     // Set daemon rpc user/pass
     Q_INVOKABLE void setDaemonLogin(const QString &daemonUsername = "", const QString &daemonPassword = "");
@@ -378,6 +375,9 @@ private:
 
     //! returns daemon's blockchain target height
     quint64 daemonBlockChainTargetHeight() const;
+
+    //! initializes wallet
+    bool init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight);
 
 private:
     friend class WalletManager;

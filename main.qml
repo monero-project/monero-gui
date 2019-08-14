@@ -389,9 +389,19 @@ ApplicationWindow {
             currentDaemonAddress = localDaemonAddress
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
-        currentWallet.initAsync(currentDaemonAddress, 0, persistentSettings.is_recovering, persistentSettings.is_recovering_from_device, persistentSettings.restore_height);
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            isTrustedDaemon(),
+            0,
+            persistentSettings.is_recovering,
+            persistentSettings.is_recovering_from_device,
+            persistentSettings.restore_height);
         // save wallet keys in case wallet settings have been changed in the init
         currentWallet.setPassword(walletPassword);
+    }
+
+    function isTrustedDaemon() {
+        return !persistentSettings.useRemoteNode || persistentSettings.is_trusted_daemon;
     }
 
     function walletPath() {
@@ -608,7 +618,7 @@ ApplicationWindow {
         console.log("connecting remote node");
         persistentSettings.useRemoteNode = true;
         currentDaemonAddress = persistentSettings.remoteNodeAddress;
-        currentWallet.initAsync(currentDaemonAddress);
+        currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
     }
 
@@ -619,7 +629,7 @@ ApplicationWindow {
         console.log("disconnecting remote node");
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
-        currentWallet.initAsync(currentDaemonAddress);
+        currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
     }
 
