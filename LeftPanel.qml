@@ -204,7 +204,7 @@ Rectangle {
                 }
                 MoneroComponents.Label {
                     fontSize: 20
-                    text: "¥"
+                    text: persistentSettings.fiatPriceCurrency == "xmrusd" ? "$" : "€"
                     color: "white"
                     visible: persistentSettings.fiatPriceEnabled
                     anchors.right: parent.right
