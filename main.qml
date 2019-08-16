@@ -859,7 +859,9 @@ ApplicationWindow {
                     ", priority: ", priority,
                     ", description: ", description);
 
-        showProcessingSplash("Creating transaction");
+        var splashMsg = qsTr("Creating transaction...");
+        splashMsg += appWindow.currentWallet.isLedger() ? qsTr("\n\nPlease check your hardware wallet –\nyour input may be required.") : "";
+        showProcessingSplash(splashMsg);
 
         transactionDescription = description;
 

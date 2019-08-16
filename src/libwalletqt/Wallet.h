@@ -180,6 +180,7 @@ public:
 
     //! hw-device backed wallets
     Q_INVOKABLE bool isHwBacked() const;
+    Q_INVOKABLE bool isLedger() const;
 
     //! returns if view only wallet
     Q_INVOKABLE bool viewOnly() const;
