@@ -1583,9 +1583,9 @@ Rectangle {
                 elem.parent.text = txKey ? txKey : '-';
                 elem.parent.state = 'ready';
             });
+        } else {
+            toClipboard(elem.parent.text);
         }
-
-        toClipboard(elem.parent.text);
     }
 
     function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
