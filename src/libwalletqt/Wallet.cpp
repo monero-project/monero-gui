@@ -258,6 +258,11 @@ bool Wallet::isHwBacked() const
     return m_walletImpl->getDeviceType() != Monero::Wallet::Device_Software;
 }
 
+bool Wallet::isLedger() const
+{
+    return m_walletImpl->getDeviceType() == Monero::Wallet::Device_Ledger;
+}
+
 //! create a view only wallet
 bool Wallet::createViewOnly(const QString &path, const QString &password) const
 {
