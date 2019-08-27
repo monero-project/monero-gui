@@ -83,7 +83,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
   - For Debian distributions (Debian, Ubuntu, Mint, Tails...)
 
-	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev`
+	`sudo apt install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev`
 
   - For Gentoo
 
@@ -236,6 +236,8 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
     ```
     git clone https://github.com/monero-project/monero-gui.git
     ```
+
+    **Note:** Due to some bug in the build process, "monero-gui" repo can't be a top level directory.
 
 7. Build
 
