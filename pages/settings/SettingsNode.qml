@@ -96,17 +96,12 @@ Rectangle{
                     anchors.leftMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
 
-                    MoneroEffects.ImageMask {
-                        height: 27
-                        width: 27
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                        fontAwesomeFallbackIcon: FontAwesome.shield
-                        fontAwesomeFallbackSize: 26
-                        image: "qrc:///images/settings_local.svg"
-
-                        color: MoneroComponents.Style.defaultFontColor
-                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    MoneroComponents.Label {
+                        fontSize: 32
+                        text: FontAwesome.home
+                        fontFamily: FontAwesome.fontFamily
+                        anchors.centerIn: parent
+                        fontColor: MoneroComponents.Style.defaultFontColor
                     }
                 }
 
@@ -202,16 +197,12 @@ Rectangle{
                     anchors.leftMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
 
-                    MoneroEffects.ImageMask {
-                        height: 29
-                        width: 22
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                        fontAwesomeFallbackIcon: FontAwesome.cloudDownload
-                        fontAwesomeFallbackSize: 26
-                        image: "qrc:///images/settings_remote.svg"
-                        color: MoneroComponents.Style.defaultFontColor
-                        opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
+                    MoneroComponents.Label {
+                        fontSize: 28
+                        text: FontAwesome.cloud
+                        fontFamily: FontAwesome.fontFamily
+                        anchors.centerIn: parent
+                        fontColor: MoneroComponents.Style.defaultFontColor
                     }
                 }
 
