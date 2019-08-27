@@ -287,6 +287,7 @@ win32 {
         -licudt \
         -licutu \
         -liconv \
+        -lstdc++ \
         -lpthread \
         -lsetupapi \
         -lssl \
