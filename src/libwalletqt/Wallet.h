@@ -289,6 +289,10 @@ public:
 
     void setPaymentId(const QString &paymentId);
 
+    //! Namespace your cacheAttribute keys to avoid collisions
+    Q_INVOKABLE bool setCacheAttribute(const QString &key, const QString &val);
+    Q_INVOKABLE QString getCacheAttribute(const QString &key) const;
+
     Q_INVOKABLE bool setUserNote(const QString &txid, const QString &note);
     Q_INVOKABLE QString getUserNote(const QString &txid) const;
     Q_INVOKABLE QString getTxKey(const QString &txid) const;
