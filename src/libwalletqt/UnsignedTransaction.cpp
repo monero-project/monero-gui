@@ -40,7 +40,7 @@ QString UnsignedTransaction::errorString() const
     return QString::fromStdString(m_pimpl->errorString());
 }
 
-quint64 UnsignedTransaction::amount(int index) const
+quint64 UnsignedTransaction::amount(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->amount();
     if(index > arr.size() - 1)
@@ -48,7 +48,7 @@ quint64 UnsignedTransaction::amount(int index) const
     return arr[index];
 }
 
-quint64 UnsignedTransaction::fee(int index) const
+quint64 UnsignedTransaction::fee(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->fee();
     if(index > arr.size() - 1)
@@ -56,7 +56,7 @@ quint64 UnsignedTransaction::fee(int index) const
     return arr[index];
 }
 
-quint64 UnsignedTransaction::mixin(int index) const
+quint64 UnsignedTransaction::mixin(size_t index) const
 {
     std::vector<uint64_t> arr = m_pimpl->mixin();
     if(index > arr.size() - 1)

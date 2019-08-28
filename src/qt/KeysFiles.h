@@ -30,8 +30,8 @@
 #define KEYSFILES_H
 
 #include <qqmlcontext.h>
-#include "src/libwalletqt/WalletManager.h"
-#include "src/NetworkType.h"
+#include "libwalletqt/WalletManager.h"
+#include "NetworkType.h"
 #include <QtCore>
 
 class WalletKeysFiles

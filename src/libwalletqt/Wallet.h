@@ -395,6 +395,8 @@ private:
     mutable TransactionHistoryModel * m_historyModel;
     mutable TransactionHistorySortFilterModel * m_historySortFilterModel;
     QString m_paymentId;
+    AddressBook * m_addressBook;
+    mutable AddressBookModel * m_addressBookModel;
     mutable QTime   m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
@@ -406,8 +408,6 @@ private:
     mutable QTime   m_connectionStatusTime;
     mutable bool    m_initialized;
     uint32_t m_currentSubaddressAccount;
-    AddressBook * m_addressBook;
-    mutable AddressBookModel * m_addressBookModel;
     Subaddress * m_subaddress;
     mutable SubaddressModel * m_subaddressModel;
     SubaddressAccount * m_subaddressAccount;

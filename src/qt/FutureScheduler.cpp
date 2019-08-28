@@ -38,7 +38,7 @@ QPair<bool, QFuture<void>> FutureScheduler::run(std::function<void()> function) 
     });
 }
 
-QPair<bool, QFuture<QJSValueList>> FutureScheduler::run(std::function<QJSValueList() noexcept> function, const QJSValue &callback) noexcept
+QPair<bool, QFuture<QJSValueList>> FutureScheduler::run(std::function<QJSValueList() noexcept> function, const QJSValue &callback)
 {
     if (!callback.isCallable())
     {

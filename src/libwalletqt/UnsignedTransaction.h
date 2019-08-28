@@ -56,9 +56,9 @@ public:
 
     Status status() const;
     QString errorString() const;
-    Q_INVOKABLE quint64 amount(int index) const;
-    Q_INVOKABLE quint64 fee(int index) const;
-    Q_INVOKABLE quint64 mixin(int index) const;
+    Q_INVOKABLE quint64 amount(size_t index) const;
+    Q_INVOKABLE quint64 fee(size_t index) const;
+    Q_INVOKABLE quint64 mixin(size_t index) const;
     QStringList recipientAddress() const;
     QStringList paymentId() const;
     quint64 txCount() const;

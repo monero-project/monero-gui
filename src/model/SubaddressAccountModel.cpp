@@ -49,7 +49,7 @@ void SubaddressAccountModel::endReset(){
     endResetModel();
 }
 
-int SubaddressAccountModel::rowCount(const QModelIndex &parent) const
+int SubaddressAccountModel::rowCount(const QModelIndex &) const
 {
     return m_subaddressAccount->count();
 }

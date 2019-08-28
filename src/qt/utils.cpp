@@ -29,7 +29,7 @@
 #include <QtCore>
 #include <QApplication>
 
-#include "src/qt/TailsOS.h"
+#include "TailsOS.h"
 #include "utils.h"
 
 bool fileExists(QString path) {
