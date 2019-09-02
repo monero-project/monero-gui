@@ -106,19 +106,6 @@ ApplicationWindow {
         }
     }
 
-    property string remoteNodeService: {
-        // support user-defined remote node aggregators
-        if(persistentSettings.remoteNodeService){
-            var service = persistentSettings.remoteNodeService;
-            if(service.charAt(service.length-1) !== "/")
-                service += "/";
-            return service;
-        }
-
-        // monero-gui workgroup maintained
-        return "https://autonode.xmr.pm/"
-    }
-
     // true if wallet ever synchronized
     property bool walletInitialized : false
 
@@ -705,7 +692,8 @@ ApplicationWindow {
         simpleModeConnectionTimer.stop();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress);
+        const noSync = appWindow.walletMode === 0;
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync);
         persistentSettings.daemonFlags = flags
     }
 
@@ -1402,7 +1390,6 @@ ApplicationWindow {
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
         property string bootstrapNodeAddress: ""
-        property string remoteNodeRegion: ""
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
@@ -1410,7 +1397,6 @@ ApplicationWindow {
         property bool hideBalance: false
         property bool lockOnUserInActivity: true
         property int walletMode: 2
-        property string remoteNodeService: ""
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool showPid: false
         property bool blackTheme: true
@@ -2023,41 +2009,44 @@ ApplicationWindow {
         onTriggered: appWindow.themeTransition = true;
     }
 
+    function checkNoSyncFlag() {
+        if (!appWindow.daemonRunning) {
+            return true;
+        }
+        if (appWindow.walletMode == 0 && !daemonManager.noSync()) {
+            return false;
+        }
+        if (appWindow.walletMode == 1 && daemonManager.noSync()) {
+            return false;
+        }
+        return true;
+    }
+
     function checkSimpleModeConnection(){
         // auto-connection mechanism for simple mode
-        if(persistentSettings.nettype != NetworkType.MAINNET) return;
         if(appWindow.walletMode >= 2) return;
 
-        var disconnected = leftPanel.networkStatus.connected === Wallet.ConnectionStatus_Disconnected;
-        var disconnectedEpoch = appWindow.disconnectedEpoch;
-        if(disconnectedEpoch === 0){
+        const disconnectedTimeoutSec = 30;
+        const firstCheckDelaySec = 2;
+
+        const connected = leftPanel.networkStatus.connected === Wallet.ConnectionStatus_Connected;
+        const firstRun = appWindow.disconnectedEpoch == 0;
+        if (firstRun) {
+            appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
+        } else if (connected) {
             appWindow.disconnectedEpoch = Utils.epoch();
         }
 
-        // disconnected longer than 5 seconds?
-        if(disconnected && disconnectedEpoch > 0 && (Utils.epoch() - disconnectedEpoch) >= 5){
-            // for bootstrap mode, first wait until daemon is killed
-            if(appWindow.walletMode === 1 && appWindow.daemonRunning) {
-                appWindow.stopDaemon();
-                return;
-            }
-
-            // fetch new node list
-            wizard.fetchRemoteNodes(function() {
-                // fetched node, connect
-                if(appWindow.walletMode === 0){
-                    appWindow.connectRemoteNode();
-                } else if(appWindow.walletMode === 1){
-                    appWindow.startDaemon(persistentSettings.daemonFlags);
-                }
-
-                // reset state
-                appWindow.disconnectedEpoch = 0;
-                return;
-            }, function(){
-                appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), simpleModeConnectionTimer.interval / 1000);
-            });
+        const sinceLastConnect = Utils.epoch() - appWindow.disconnectedEpoch;
+        if (sinceLastConnect < disconnectedTimeoutSec && checkNoSyncFlag()) {
+            return;
         }
+
+        if (appWindow.daemonRunning) {
+            appWindow.stopDaemon();
+        }
+        appWindow.startDaemon(persistentSettings.daemonFlags);
+        appWindow.disconnectedEpoch = Utils.epoch();
     }
 
     Timer {
@@ -2136,7 +2125,12 @@ ApplicationWindow {
                 closeAccepted();
             };
 
-            confirmationDialog.open()
+            if (appWindow.walletMode == 0) {
+                stopDaemon();
+                closeAccepted();
+            } else {
+                confirmationDialog.open();
+            }
 
         } else {
             closeAccepted();
@@ -2248,11 +2242,16 @@ ApplicationWindow {
     }
 
     function changeWalletMode(mode){
+        appWindow.disconnectedEpoch = 0;
         appWindow.walletMode = mode;
         persistentSettings.walletMode = mode;
-        persistentSettings.useRemoteNode = mode === 0 ? true : false;
-        if (mode < 2 && (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log")) {
-            middlePanel.settingsView.settingsStateViewState = "Wallet"
+        if (mode < 2) {
+            persistentSettings.useRemoteNode = false;
+            persistentSettings.bootstrapNodeAddress = "auto";
+
+            if (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log") {
+                middlePanel.settingsView.settingsStateViewState = "Wallet"
+            }
         }
         console.log("walletMode changed: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
     }

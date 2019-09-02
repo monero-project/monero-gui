@@ -73,12 +73,7 @@ Rectangle {
                     wizardController.walletOptionsPassword = passwordFields.password;
 
                     if(appWindow.walletMode === 0 || appWindow.walletMode === 1){
-                        wizardController.fetchRemoteNodes(function(){
-                            wizardStateView.state = "wizardRestoreWallet4";
-                        }, function(){
-                            appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), 5);
-                            wizardStateView.state = "wizardRestoreWallet4";
-                        });
+                        wizardStateView.state = "wizardRestoreWallet4";
                     } else {
                         wizardStateView.state = "wizardRestoreWallet3";
                     }

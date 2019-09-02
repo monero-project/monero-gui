@@ -97,49 +97,6 @@ Rectangle {
                     text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
                 }
 
-                MoneroComponents.TextPlain {
-                    text: qsTr("For enhanced node performance you may specify your region:") + translationManager.emptyString
-                    wrapMode: Text.Wrap
-                    Layout.topMargin: 8
-                    Layout.fillWidth: true
-
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    font.pixelSize: 16
-                    color: MoneroComponents.Style.defaultFontColor
-                }
-
-                GridLayout {
-                    columns: 3
-                    columnSpacing: 20
-
-                    ColumnLayout {
-                        Layout.fillWidth: true
-                        spacing: 0
-
-                        MoneroComponents.StandardDropdown {
-                            id: regionDropdown
-                            Layout.fillWidth: true
-                            dataModel: regionModel
-                            currentIndex: 0
-
-                            onChanged: {
-                                var region = regionModel.get(currentIndex).region;
-                                persistentSettings.remoteNodeRegion = region;
-                            }
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    z: parent.z + 1
-                }
-
                 MoneroComponents.CheckBox {
                     id: understoodCheckbox
                     Layout.topMargin: 20
@@ -183,23 +140,5 @@ Rectangle {
     function onPageCompleted(previousView){
         wizardModeBootstrapWarning.understood = false;
         understoodCheckbox.checked = false;
-    }
-
-    Component.onCompleted: {
-        var region = persistentSettings.remoteNodeRegion;
-
-        if(region){
-            for(var i = 0; i !== regionDropdown.dataModel.count; i++){
-                var item = regionDropdown.dataModel.get(i);
-                if(item['region'] === region){
-                    regionDropdown.currentIndex = i;
-                    break;
-                }
-            }
-        } else {
-            regionDropdown.currentIndex = 0;
-        }
-
-        regionDropdown.update();
     }
 }
