@@ -2251,7 +2251,9 @@ ApplicationWindow {
         appWindow.walletMode = mode;
         persistentSettings.walletMode = mode;
         persistentSettings.useRemoteNode = mode === 0 ? true : false;
-
+        if (mode < 2 && (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log")) {
+            middlePanel.settingsView.settingsStateViewState = "Wallet"
+        }
         console.log("walletMode changed: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
     }
 
