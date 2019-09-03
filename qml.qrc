@@ -180,7 +180,9 @@
         <file>images/merchant/arrow_right.png</file>
         <file>images/merchant/bg.png</file>
         <file>images/merchant/input_box.png</file>
-        <file>fonts/FontAwesome/fontawesome-webfont.ttf</file>
+        <file>fonts/FontAwesome/fa-brands-400.ttf</file>
+        <file>fonts/FontAwesome/fa-regular-400.ttf</file>
+        <file>fonts/FontAwesome/fa-solid-900.ttf</file>
         <file>fonts/FontAwesome/FontAwesome.qml</file>
         <file>fonts/FontAwesome/Object.qml</file>
         <file>fonts/FontAwesome/qmldir</file>

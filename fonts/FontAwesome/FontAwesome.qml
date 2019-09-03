@@ -4,10 +4,22 @@ import QtQuick 2.9
 Object {
 
     FontLoader {
-        source: "./fontawesome-webfont.ttf"
+        source: "./fa-regular-400.ttf"
+    }
+
+    FontLoader {
+        id: brands
+        source: "./fa-brands-400.ttf"
+    }
+
+    FontLoader {
+        id: solid
+        source: "./fa-solid-900.ttf"
     }
 
     property string fontFamily: "FontAwesome"
+    property string fontFamilyBrands: brands.name
+    property string fontFamilySolid: solid.name
 
     // Icons 
     property string addressBook : "\uf2b9"

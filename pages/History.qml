@@ -939,7 +939,7 @@ Rectangle {
                                     anchors.leftMargin: 10
                                     text: FontAwesome.productHunt
                                     small: true
-                                    label.font.family: FontAwesome.fontFamily
+                                    label.font.family: FontAwesome.fontFamilyBrands
                                     fontSize: 18
                                     width: 36
 
