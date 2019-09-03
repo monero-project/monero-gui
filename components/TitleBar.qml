@@ -156,8 +156,8 @@ Rectangle {
             Layout.preferredHeight: parent.height
 
             Text {
-                text: MoneroComponents.Style.blackTheme ? FontAwesome.lightbulbO : FontAwesome.moonO
-                font.family: FontAwesome.fontFamily
+                text: FontAwesome.moonO
+                font.family: MoneroComponents.Style.blackTheme ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
                 font.pixelSize: 16
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
