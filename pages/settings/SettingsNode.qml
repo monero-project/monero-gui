@@ -394,6 +394,7 @@ Rectangle{
                     labelText: qsTr("Blockchain location") + style + qsTr(" <a href='#'> (change)</a>") + translationManager.emptyString
                     placeholderText: qsTr("(default)") + translationManager.emptyString
                     placeholderFontSize: 15
+                    readOnly: true
                     text: {
                         if(persistentSettings.blockchainDataDir.length > 0){
                             return persistentSettings.blockchainDataDir;
