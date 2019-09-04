@@ -40,7 +40,7 @@
 #include <QHash>
 #include <QMetaProperty>
 
-#include "src/qt/MoneroSettings.h"
+#include "qt/MoneroSettings.h"
 
 /*!
     \qmlmodule moneroSettings 1.0

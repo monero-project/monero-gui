@@ -36,9 +36,9 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QString>
-#include "src/libwalletqt/WalletManager.h"
-#include "src/NetworkType.h"
-#include "src/qt/utils.h"
+#include "libwalletqt/WalletManager.h"
+#include "NetworkType.h"
+#include "qt/utils.h"
 
 #include "KeysFiles.h"
 

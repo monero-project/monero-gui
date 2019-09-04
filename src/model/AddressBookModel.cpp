@@ -50,7 +50,7 @@ void AddressBookModel::endReset(){
     endResetModel();
 }
 
-int AddressBookModel::rowCount(const QModelIndex &parent) const
+int AddressBookModel::rowCount(const QModelIndex &) const
 {
     return m_addressBook->count();
 }

@@ -20,9 +20,9 @@ public:
     ~FutureScheduler();
 
     void shutdownWaitForFinished() noexcept;
-    
+
     QPair<bool, QFuture<void>> run(std::function<void()> function) noexcept;
-    QPair<bool, QFuture<QJSValueList>> run(std::function<QJSValueList() noexcept> function, const QJSValue &callback) noexcept;
+    QPair<bool, QFuture<QJSValueList>> run(std::function<QJSValueList() noexcept> function, const QJSValue &callback);
 
 private:
     bool add() noexcept;
@@ -38,7 +38,7 @@ private:
             watcher->moveToThread(schedulerThread);
         }
         watcher->setParent(this);
-        
+
         return watcher;
     }
 

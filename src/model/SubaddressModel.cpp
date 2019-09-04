@@ -50,7 +50,7 @@ void SubaddressModel::endReset(){
     endResetModel();
 }
 
-int SubaddressModel::rowCount(const QModelIndex &parent) const
+int SubaddressModel::rowCount(const QModelIndex &) const
 {
     return m_subaddress->count();
 }
