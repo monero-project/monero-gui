@@ -4,20 +4,24 @@ import QtQuick 2.9
 Object {
 
     FontLoader {
-        source: "./fa-regular-400.ttf"
+        id: regular
+        name: "Font Awesome 5 Free-Regular-400"
+        source: "./Font Awesome 5 Free-Regular-400.otf"
     }
 
     FontLoader {
         id: brands
-        source: "./fa-brands-400.ttf"
+        name: "Font Awesome 5 Brands-Regular-400"
+        source: "./Font Awesome 5 Brands-Regular-400.otf"
     }
 
     FontLoader {
         id: solid
-        source: "./fa-solid-900.ttf"
+        name: "Font Awesome 5 Free-Solid-900"
+        source: "./Font Awesome 5 Free-Solid-900.otf"
     }
 
-    property string fontFamily: "FontAwesome"
+    property string fontFamily: regular.name
     property string fontFamilyBrands: brands.name
     property string fontFamilySolid: solid.name
 
