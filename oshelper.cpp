@@ -37,7 +37,7 @@
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #endif
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include <X11/XKBlib.h>
 #undef KeyPress
 #undef KeyRelease
@@ -78,7 +78,7 @@ bool OSHelper::isCapsLock() const
     // platform dependent method of determining if CAPS LOCK is on
 #if defined(Q_OS_WIN32) // MS Windows version
     return GetKeyState(VK_CAPITAL) == 1;
-#elif defined(Q_OS_LINUX) // X11 version
+#elif defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID) // X11 version
     Display * d = XOpenDisplay((char*)0);
     bool caps_state = false;
     if (d) {
