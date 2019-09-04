@@ -99,9 +99,10 @@ Rectangle{
                     MoneroComponents.Label {
                         fontSize: 32
                         text: FontAwesome.home
-                        fontFamily: FontAwesome.fontFamily
+                        fontFamily: FontAwesome.fontFamilySolid
                         anchors.centerIn: parent
                         fontColor: MoneroComponents.Style.defaultFontColor
+                        styleName: "Solid"
                     }
                 }
 
@@ -200,7 +201,8 @@ Rectangle{
                     MoneroComponents.Label {
                         fontSize: 28
                         text: FontAwesome.cloud
-                        fontFamily: FontAwesome.fontFamily
+                        fontFamily: FontAwesome.fontFamilySolid
+                        styleName: "Solid"
                         anchors.centerIn: parent
                         fontColor: MoneroComponents.Style.defaultFontColor
                     }
