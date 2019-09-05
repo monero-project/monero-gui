@@ -123,7 +123,7 @@ Rectangle {
 
     ColumnLayout {
       id: pageRoot
-      anchors.margins: (isMobile)? 17 : 20
+      anchors.margins: 20
       anchors.topMargin: 40
 
       anchors.left: parent.left
@@ -144,7 +144,7 @@ Rectangle {
       }
 
       GridLayout {
-          columns: (isMobile || !(appWindow.walletMode >= 2)) ? 1 : 2
+          columns: appWindow.walletMode < 2 ? 1 : 2
           Layout.fillWidth: true
           columnSpacing: 32
 
@@ -443,7 +443,7 @@ Rectangle {
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: 20
         anchors.topMargin: 32
         spacing: 26
         enabled: !viewOnly || pageRoot.enabled
@@ -462,7 +462,7 @@ Rectangle {
 
         GridLayout {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            columns: (isMobile) ? 2 : 6
+            columns: 6
 
             StandardButton {
                 id: sweepUnmixableButton

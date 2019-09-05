@@ -69,7 +69,6 @@ ApplicationWindow {
     property bool foundNewBlock: false
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
-    property var isMobile: (appWindow.width > 700 && !isAndroid) ? false : true
     property bool isMining: false
     property int walletMode: persistentSettings.walletMode
     property var cameraUi
@@ -489,14 +488,14 @@ ApplicationWindow {
         leftPanel.networkStatus.connected = status
 
         // update local daemon status.
-        if(!isMobile && walletManager.isDaemonLocal(currentDaemonAddress))
+        if(walletManager.isDaemonLocal(currentDaemonAddress))
             daemonRunning = status;
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if (!isMobile && appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected) {
+        if (appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
@@ -1154,16 +1153,6 @@ ApplicationWindow {
         });
     }
 
-    function hideMenu() {
-        goToBasicAnimation.start();
-        console.log(appWindow.width)
-    }
-
-    function showMenu() {
-        goToProAnimation.start();
-        console.log(appWindow.width)
-    }
-
 
     objectName: "appWindow"
     visible: true
@@ -1615,149 +1604,87 @@ ApplicationWindow {
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: wizard; visible: true }
                 PropertyChanges { target: resizeArea; visible: true }
-                PropertyChanges { target: mobileHeader; visible: false }
                 PropertyChanges { target: titleBar; state: "essentials" }
             }, State {
                 name: "normal"
-                PropertyChanges { target: leftPanel; visible: (isMobile)? false : true }
+                PropertyChanges { target: leftPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; state: "default" }
-                PropertyChanges { target: mobileHeader; visible: isMobile ? true : false }
             }
         ]
 
-        MobileHeader {
-            id: mobileHeader
-            visible: isMobile
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: visible? 65 : 0
-
-            MouseArea {
-                enabled: persistentSettings.customDecorations
-                property var previousPosition
-                anchors.fill: parent
-                propagateComposedEvents: true
-                onPressed: previousPosition = globalCursor.getPosition()
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var pos = globalCursor.getPosition()
-                        var dx = pos.x - previousPosition.x
-                        var dy = pos.y - previousPosition.y
-
-                        appWindow.x += dx
-                        appWindow.y += dy
-                        previousPosition = pos
-                    }
-                }
-            }
-        }
-
         LeftPanel {
             id: leftPanel
-            anchors.top: mobileHeader.bottom
+            anchors.top: parent.top
             anchors.left: parent.left
             anchors.bottom: parent.bottom
 
             onTransferClicked: {
                 middlePanel.state = "Transfer";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onReceiveClicked: {
                 middlePanel.state = "Receive";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onMerchantClicked: {
                 middlePanel.state = "Merchant";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onTxkeyClicked: {
                 middlePanel.state = "TxKey";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onSharedringdbClicked: {
                 middlePanel.state = "SharedRingDB";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onHistoryClicked: {
                 middlePanel.state = "History";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onAddressBookClicked: {
                 middlePanel.state = "AddressBook";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onMiningClicked: {
                 middlePanel.state = "Mining";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onSignClicked: {
                 middlePanel.state = "Sign";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
 
             onSettingsClicked: {
                 middlePanel.state = "Settings";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
             
             onAccountClicked: {
                 middlePanel.state = "Account";
                 middlePanel.flickable.contentY = 0;
-                if(isMobile) {
-                    hideMenu();
-                }
                 updateBalance();
             }
         }
@@ -1765,100 +1692,11 @@ ApplicationWindow {
 
         MiddlePanel {
             id: middlePanel
-            anchors.top: mobileHeader.bottom
+            anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: leftPanel.visible ?  leftPanel.right : parent.left
             anchors.right: parent.right
             state: "Transfer"
-        }
-
-        SequentialAnimation {
-            id: goToBasicAnimation
-//            PropertyAction {
-//                target: appWindow
-//                properties: "visibility"
-//                value: Window.Windowed
-//            }
-//            PropertyAction {
-//                target: titleBar
-//                properties: "maximizeButtonVisible"
-//                value: false
-//            }
-//            PropertyAction {
-//                target: frameArea
-//                properties: "blocked"
-//                value: true
-//            }
-            PropertyAction {
-                target: resizeArea
-                properties: "visible"
-                value: true
-            }
-//            PropertyAction {
-//                target: appWindow
-//                properties: "height"
-//                value: 30
-//            }
-//            PropertyAction {
-//                target: appWindow
-//                properties: "width"
-//                value: 326
-//            }
-            PropertyAction {
-                target: leftPanel
-                properties: "visible"
-                value: false
-            }
-            PropertyAction {
-                target: middlePanel
-                properties: "basicMode"
-                value: true
-            }
-
-//            PropertyAction {
-//                target: appWindow
-//                properties: "height"
-//                value: middlePanel.height
-//            }
-
-            onStopped: {
-                // middlePanel.visible = false
-                leftPanel.visible = false
-            }
-        }
-
-        SequentialAnimation {
-            id: goToProAnimation
-//            PropertyAction {
-//                target: appWindow
-//                properties: "height"
-//                value: 30
-//            }
-            PropertyAction {
-                target: middlePanel
-                properties: "basicMode"
-                value: false
-            }
-            PropertyAction {
-                targets: [leftPanel, middlePanel, resizeArea]
-                properties: "visible"
-                value: true
-            }
-//            PropertyAction {
-//                target: appWindow
-//                properties: "height"
-//                value: maxWindowHeight
-//            }
-//            PropertyAction {
-//                target: frameArea
-//                properties: "blocked"
-//                value: false
-//            }
-//            PropertyAction {
-//                target: titleBar
-//                properties: "maximizeButtonVisible"
-//                value: true
-//            }
         }
 
         WizardController {
@@ -1932,13 +1770,7 @@ ApplicationWindow {
             onMaximizeClicked: appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized : Window.Windowed
             onMinimizeClicked: appWindow.visibility = Window.Minimized
             onGoToBasicVersion: {
-                if (yes) {
-                    // basicPanel.currentView = middlePanel.currentView
-                    goToBasicAnimation.start()
-                } else {
-                    // middlePanel.currentView = basicPanel.currentView
-                    goToProAnimation.start()
-                }
+                //nop
             }
         }
 

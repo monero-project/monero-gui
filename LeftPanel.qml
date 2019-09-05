@@ -84,7 +84,7 @@ Rectangle {
         menuColumn.previousButton.checked = true
     }
 
-    width: (isMobile)? appWindow.width : 300
+    width: 300
     color: "transparent"
     anchors.bottom: parent.bottom
     anchors.top: parent.top
@@ -390,7 +390,6 @@ Rectangle {
                 }
 
                 MoneroComponents.Label {
-                    visible: !isMobile
                     id: balanceLabel
                     text: qsTr("Balance") + translationManager.emptyString
                     color: "white"
@@ -418,7 +417,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.top: (isMobile)? parent.top : column1.bottom
+        anchors.top: column1.bottom
         color: "transparent"
 
         Flickable {

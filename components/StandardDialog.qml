@@ -82,10 +82,8 @@ Rectangle {
 
     function open() {
         // Center
-        if(!isMobile) {
-            root.x = parent.width/2 - root.width/2
-            root.y = 100
-        }
+        root.x = parent.width/2 - root.width/2
+        root.y = 100
         root.z = 11
         root.visible = true;
     }
@@ -96,14 +94,14 @@ Rectangle {
     }
 
     // TODO: implement without hardcoding sizes
-    width: isMobile ? screenWidth : 520
-    height: isMobile ? screenHeight : 380
+    width: 520
+    height: 380
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
         anchors.fill: parent
-        anchors.margins: (isMobile? 17 : 20)
+        anchors.margins: 20
 
         RowLayout {
             id: column

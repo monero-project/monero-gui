@@ -46,7 +46,6 @@ function showSeedPage() {
         leftPanel.selectItem(middlePanel.state);
     }
     passwordDialog.open();
-    if(isMobile) hideMenu();
     updateBalance();
 }
 

@@ -149,7 +149,7 @@ Rectangle {
         GridLayout {
             id: buttonsGrid
             opacity: 0
-            columns: isMobile ? 1 : 2
+            columns: 2
             Layout.alignment: Qt.AlignCenter
             Layout.topMargin: 20
             Layout.fillWidth: true

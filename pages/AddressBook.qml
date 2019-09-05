@@ -52,7 +52,7 @@ Rectangle {
 
     ColumnLayout {
         id: mainLayout
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: 20
         anchors.topMargin: 40
 
         anchors.left: parent.left

@@ -121,9 +121,7 @@ Rectangle {
     property int flickableHeightMargin: 200
 
     property int layoutScale: {
-        if(isMobile){
-            return 0;
-        } else if(appWindow.width < 800){
+        if(appWindow.width < 800){
             return 1;
         } else {
             return 2;

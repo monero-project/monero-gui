@@ -39,10 +39,8 @@ function switchPage(next) {
     console.log("switchpage: currentPage: ", currentPage);
 
     // Update prev/next button positions for mobile/desktop
-    prevButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
-    prevButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
-    nextButton.anchors.verticalCenter = (!isMobile) ? wizard.verticalCenter : undefined
-    nextButton.anchors.bottom = (isMobile) ? wizard.bottom : undefined
+    prevButton.anchors.verticalCenter = wizard.verticalCenter
+    nextButton.anchors.verticalCenter = wizard.verticalCenter
 
     if (currentPage > 0 || currentPage < pages.length - 1) {
         pages[currentPage].opacity = 0

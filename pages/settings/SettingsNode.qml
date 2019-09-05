@@ -42,7 +42,7 @@ Rectangle{
     /* main layout */
     ColumnLayout {
         id: root
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: 20
         anchors.topMargin: 0
 
         anchors.left: parent.left
@@ -276,7 +276,7 @@ Rectangle{
             spacing: 20
             Layout.fillWidth: true
             Layout.topMargin: 20
-            visible: !isMobile && persistentSettings.useRemoteNode
+            visible: persistentSettings.useRemoteNode
 
             MoneroComponents.WarningBox {
                 Layout.topMargin: 26
@@ -308,7 +308,7 @@ Rectangle{
             }
 
             GridLayout {
-                columns: (isMobile) ? 1 : 2
+                columns: 2
                 columnSpacing: 32
 
                 MoneroComponents.LineEdit {
@@ -368,7 +368,7 @@ Rectangle{
             id: localNodeLayout
             spacing: 20
             Layout.topMargin: 40
-            visible: !isMobile && !persistentSettings.useRemoteNode
+            visible: !persistentSettings.useRemoteNode
 
             MoneroComponents.StandardButton {
                 small: true
@@ -427,7 +427,7 @@ Rectangle{
             }
 
             RowLayout {
-                visible: !isMobile && !persistentSettings.useRemoteNode
+                visible: !persistentSettings.useRemoteNode
 
                 ColumnLayout {
                     Layout.fillWidth: true
