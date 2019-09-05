@@ -37,8 +37,10 @@ bool fileExists(QString path);
 QByteArray fileOpen(QString path);
 bool fileWrite(QString path, QString data);
 QString getAccountName();
+#ifdef Q_OS_LINUX
 QString xdgMime(QApplication &app);
 void registerXdgMime(QApplication &app);
+#endif
 const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
 QString randomUserAgent();
 

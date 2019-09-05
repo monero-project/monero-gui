@@ -67,6 +67,7 @@ QString getAccountName(){
     return accountName;
 }
 
+#ifdef Q_OS_LINUX
 QString xdgMime(QApplication &app){
     return QString(
         "[Desktop Entry]\n"
@@ -88,7 +89,6 @@ QString xdgMime(QApplication &app){
 }
 
 void registerXdgMime(QApplication &app){
-#ifdef Q_OS_LINUX
     // Register desktop entry
     // - MacOS handled via Info.plist
     // - Windows handled in the installer by rbrunner7
@@ -111,8 +111,8 @@ void registerXdgMime(QApplication &app){
 #endif
 
     fileWrite(filePath, mime);
-#endif
 }
+#endif
 
 QString randomUserAgent(){
     QStringList urand;
