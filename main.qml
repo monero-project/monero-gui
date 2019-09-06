@@ -335,7 +335,6 @@ ApplicationWindow {
         }
 
         walletName = usefulName(wallet.path)
-        updateSyncing(false)
 
         viewOnly = currentWallet.viewOnly;
 
@@ -407,24 +406,22 @@ ApplicationWindow {
         if (!currentWallet)
             return;
 
-        var balance_unlocked = qsTr("HIDDEN");
-        var balance = qsTr("HIDDEN");
+        var balance = "?.??";
+        var balanceU = "?.??";
         if(!hideBalanceForced && !persistentSettings.hideBalance){
-            balance_unlocked = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
             balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
+            balanceU = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
         }
-
-        middlePanel.unlockedBalanceText = balance_unlocked;
-        leftPanel.unlockedBalanceText = balance_unlocked;
-        middlePanel.balanceText = balance;
-        leftPanel.balanceText = balance;
 
         if (persistentSettings.fiatPriceEnabled) {
-            appWindow.fiatApiUpdateBalance(balance, balance_unlocked);
+            appWindow.fiatApiUpdateBalance(balance);
         }
 
-        var accountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
-        leftPanel.balanceLabelText = qsTr("Balance (#%1%2)").arg(currentWallet.currentSubaddressAccount).arg(accountLabel === "" ? "" : (" – " + accountLabel));
+        leftPanel.minutesToUnlock = (balance !== balanceU) ? currentWallet.history.minutesToUnlock : "";
+        leftPanel.currentAccountIndex = currentWallet.currentSubaddressAccount;
+        leftPanel.currentAccountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+        leftPanel.balanceString = balance
+        leftPanel.balanceUnlockedString = balanceU
     }
 
     function onUriHandler(uri){
@@ -597,8 +594,6 @@ ApplicationWindow {
             foundNewBlock = false;
             console.log("New block found - updating history")
             currentWallet.history.refresh(currentWallet.currentSubaddressAccount)
-            var timeToUnlock = currentWallet.history.minutesToUnlock
-            leftPanel.minutesToUnlockTxt = (timeToUnlock > 0)? (timeToUnlock == 20)? qsTr("Unlocked balance (waiting for block)") : qsTr("Unlocked balance (~%1 min)").arg(timeToUnlock) : qsTr("Unlocked balance");
 
             if(middlePanel.state == "History")
                 middlePanel.historyView.update();
@@ -642,7 +637,7 @@ ApplicationWindow {
         }
 
         // Update wallet sync progress
-        updateSyncing((currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced)
+        leftPanel.isSyncing = (currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced
         // Update transfer page status
         middlePanel.updateStatus();
 
@@ -1087,12 +1082,6 @@ ApplicationWindow {
         informationPopup.open()
     }
 
-    function updateSyncing(syncing) {
-        var text = (syncing ? qsTr("Balance (syncing)") : qsTr("Balance")) + translationManager.emptyString
-        leftPanel.balanceLabelText = text
-        middlePanel.balanceLabelText = text
-    }
-
     // blocks UI if wallet can't be opened or no connection to the daemon
     function enableUI(enable) {
         middlePanel.enabled = enable;
@@ -1127,15 +1116,13 @@ ApplicationWindow {
 
     // close wallet and show wizard
     function showWizard(){
-        clearMoneroCardLabelText();
         walletInitialized = false;
         closeWallet(function() {
             wizard.restart();
             wizard.wizardState = "wizardHome";
             rootItem.state = "wizard"
             // reset balance
-            leftPanel.balanceText = leftPanel.unlockedBalanceText = walletManager.displayAmount(0);
-            fiatApiUpdateBalance(0, 0);
+            clearMoneroCardLabelText();
             // disable timers
             userInActivityTimer.running = false;
             simpleModeConnectionTimer.running = false;
@@ -1258,22 +1245,19 @@ ApplicationWindow {
         Prices.getJSON(url);
     }
 
-    function fiatApiUpdateBalance(balance, unlocked_balance){
+    function fiatApiUpdateBalance(balance){
         // update balance card
         var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
-        var symbol = persistentSettings.fiatPriceCurrency === "xmrusd" ? "$" : "€"
         if(ticker <= 0){
             console.log(fiatApiError("Could not update balance card; invalid ticker value"));
-            leftPanel.unlockedBalanceTextFiat = "N/A";
-            leftPanel.balanceTextFiat = "N/A";
+            leftPanel.balanceFiatString = "?.??";
             return;
         }
-
-        var uFiat = Utils.formatMoney(unlocked_balance * ticker);
-        var bFiat = Utils.formatMoney(balance * ticker);
-
-        leftPanel.unlockedBalanceTextFiat = symbol + uFiat;
-        leftPanel.balanceTextFiat = symbol + bFiat;
+        var bFiat = "?.??"
+        if (!hideBalanceForced && !persistentSettings.hideBalance) {
+            bFiat = (balance * ticker).toFixed(2);
+        }
+        leftPanel.balanceFiatString = bFiat;
     }
 
     function fiatTimerStart(){
@@ -2026,8 +2010,8 @@ ApplicationWindow {
 
     // reset label text. othewise potential privacy leak showing unlock time when switching wallets
     function clearMoneroCardLabelText(){
-        leftPanel.minutesToUnlockTxt = qsTr("Unlocked balance")
-        leftPanel.balanceLabelText = qsTr("Balance")
+        leftPanel.balanceString = "?.??"
+        leftPanel.balanceFiatString = "?.??"
     }
 
     // some fields need an extra nudge when changing languages
