@@ -234,14 +234,9 @@ void DaemonManager::printError()
 bool DaemonManager::running(NetworkType::Type nettype) const
 { 
     QString status;
-    sendCommand("status", nettype, status);
+    sendCommand("sync_info", nettype, status);
     qDebug() << status;
-    // `./monerod status` returns BUSY when syncing.
-    // Treat busy as connected, until fixed upstream.
-    if (status.contains("Height:") || status.contains("BUSY") ) {
-        return true;
-    }
-    return false;
+    return status.contains("Height:");
 }
 
 void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& callback) const
