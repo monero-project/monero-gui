@@ -72,6 +72,14 @@ Rectangle {
 
         MoneroComponents.CheckBox {
             visible: !isMobile
+            id: doNotRelayCheckBox
+            checked: persistentSettings.doNotRelayMode
+            onClicked: persistentSettings.doNotRelayMode = !persistentSettings.doNotRelayMode
+            text: qsTr("Do-not-relay mode: A newly created transaction will not be relayed to the Monero network.") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
+            visible: !isMobile
             id: showPidCheckBox
             checked: persistentSettings.showPid
             onClicked: {

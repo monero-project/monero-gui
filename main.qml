@@ -961,8 +961,8 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
-        // View only wallet - we save the tx
-        if(viewOnly && saveTxDialog.fileUrl){
+        // View only wallet or doNotRelayMode - we save the tx
+        if((viewOnly || persistentSettings.doNotRelayMode) && saveTxDialog.fileUrl){
             // No file specified - abort
             if(!saveTxDialog.fileUrl) {
                 currentWallet.disposeTransaction(transaction)
@@ -974,8 +974,7 @@ ApplicationWindow {
             // Store to file
             transaction.setFilename(path);
         }
-
-        appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
+        appWindow.showProcessingSplash((viewOnly || persistentSettings.doNotRelayMode) ? qsTr("Saving transaction to file ...") : qsTr("Sending transaction ..."));
         currentWallet.commitTransactionAsync(transaction);
     }
 
@@ -994,7 +993,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly || persistentSettings.doNotRelayMode) ? qsTr("Transaction saved to file: %1").arg(transaction.getFilename()) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -1408,6 +1407,7 @@ ApplicationWindow {
         property int segregationHeight: 0
         property int kdfRounds: 1
         property bool hideBalance: false
+        property bool doNotRelayMode: false
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property string remoteNodeService: ""
@@ -1449,7 +1449,7 @@ ApplicationWindow {
             passwordDialog.onAcceptedCallback = function() {
                 if(walletPassword === passwordDialog.password){
                     // Save transaction to file if view only wallet
-                    if(viewOnly) {
+                    if(viewOnly || persistentSettings.doNotRelayMode) {
                         saveTxDialog.open();
                     } else {
                         handleTransactionConfirmed()

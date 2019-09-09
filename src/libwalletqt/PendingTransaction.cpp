@@ -93,6 +93,11 @@ void PendingTransaction::setFilename(const QString &fileName)
     m_fileName = fileName;
 }
 
+QString PendingTransaction::getFilename() const
+{
+    return m_fileName;
+}
+
 PendingTransaction::PendingTransaction(Monero::PendingTransaction *pt, QObject *parent)
     : QObject(parent), m_pimpl(pt)
 {

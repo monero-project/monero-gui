@@ -77,6 +77,7 @@ public:
     quint64 txCount() const;
     QList<QVariant> subaddrIndices() const;
     Q_INVOKABLE void setFilename(const QString &fileName);
+    Q_INVOKABLE QString getFilename() const;
 
 private:
     explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);
