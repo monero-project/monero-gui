@@ -192,7 +192,9 @@ int main(int argc, char *argv[])
     qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
 
     // Desktop entry
+#ifdef Q_OS_LINUX
     registerXdgMime(app);
+#endif
 
     IPC *ipc = new IPC(&app);
     QStringList posArgs = parser.positionalArguments();
