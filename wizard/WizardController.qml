@@ -194,7 +194,7 @@ Rectangle {
             }, State {
                 name: "wizardHome"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardHomeView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardHomeView.pageHeight + 80 }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardHomeView.pageHeight + 100 }
             }, State {
                 name: "wizardCreateWallet1"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardCreateWallet1View }
