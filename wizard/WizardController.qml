@@ -72,7 +72,6 @@ Rectangle {
         wizardController.tmpWalletFilename = '';
         wizardController.walletRestoreMode = 'seed'
         wizardController.walletOptionsSubaddressLookahead = '';
-        wizardController.remoteNodes = {};
         disconnect();
 
         if (typeof wizardController.m_wallet !== 'undefined'){
@@ -107,7 +106,6 @@ Rectangle {
     property string walletOptionsDeviceName: ''
     property bool   walletOptionsDeviceIsRestore: false
     property string tmpWalletFilename: ''
-    property var remoteNodes: ''
 
     // language settings, updated via sidebar
     property string language_locale: 'en_US'
@@ -558,87 +556,6 @@ Rectangle {
         }
 
         passwordDialog.open(appWindow.usefulName(appWindow.walletPath()));
-    }
-
-    function fetchRemoteNodes(cb, cb_err){
-        // Fetch remote nodes, parse JSON, store in result `wizardController.remoteNodes`, call setAutNode(), call callback
-        var url = appWindow.remoteNodeService + 'api/nodes.json';
-        console.log("HTTP request: " + url);
-
-        var xhr = new XMLHttpRequest();
-        xhr.timeout = 3500;
-
-        // Unfortunately we cannot spoof User-Agent since it is hardcoded in Qt
-        //xhr.setRequestHeader("User-Agent", "-");
-
-        xhr.onreadystatechange = function() {
-            var msg;
-            if (xhr.readyState != 4) {
-                return;
-            } else if(xhr.status != 200){
-                msg = "Error fetching remote nodes; status code was not 200";
-                console.log(msg);
-                if(typeof cb_err === 'function')
-                    return cb_err(msg);
-            } else {
-                var body = xhr.responseText;
-                if(typeof body === 'undefined' || body === ''){
-                    msg = "Error fetching remote nodes; response body was empty";
-                    console.log(msg);
-                    if(typeof cb_err === 'function')
-                        return cb_err(msg);
-                }
-
-                var data = JSON.parse(body);
-                wizardController.remoteNodes = data;
-                console.log("node list updated");
-                setAutoNode();
-                return cb();
-            }
-        }
-
-        xhr.open('GET', url, true);
-        xhr.send(null);
-    }
-
-    function setAutoNode(){
-        var node;
-        var nodes;
-        var nodeObject = wizardController.remoteNodes;
-        var region = persistentSettings.remoteNodeRegion;
-
-        if(typeof region !== 'undefined' && region !== ""){
-            if(nodeObject.hasOwnProperty(region) && nodeObject[region].length > 0){
-                nodes = nodeObject[region];
-            } else {
-                console.log("No suitable nodes found for region " + region + ". Defaulting to random node.");
-            }
-        }
-
-        if(typeof nodes === 'undefined'){
-            nodes = [];
-            Object.keys(nodeObject).forEach(function(obj, i){
-                nodes = nodes.concat(nodeObject[obj]);
-            });
-        }
-
-        // 18089 has precedence
-        var filteredNodes = Utils.filterNodes(nodes, "18089");
-        if(filteredNodes.length > 0){
-            node = Utils.randomChoice(filteredNodes);
-            console.log('Choosing remote node \''+ node +'\' from a list of ' + filteredNodes.length);
-        } else if(nodes.length > 0){
-            node = Utils.randomChoice(nodes);
-            console.log('Choosing remote node \''+ node +'\' from a list of ' + nodes.length);
-        } else {
-            console.log("No suitable nodes found.")
-            return ''
-        }
-
-        if(appWindow.walletMode === 0)
-            persistentSettings.remoteNodeAddress = node;
-        else if(appWindow.walletMode === 1)
-            persistentSettings.bootstrapNodeAddress = node;
     }
 
     Component.onCompleted: {

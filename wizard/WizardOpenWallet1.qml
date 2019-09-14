@@ -282,16 +282,7 @@ Rectangle {
                             onClicked: {
                                 persistentSettings.nettype = parseInt(networktype)
 
-                                if(appWindow.walletMode === 0 || appWindow.walletMode === 1){
-                                    wizardController.fetchRemoteNodes(function(){
-                                        wizardController.openWalletFile(item.filePath);
-                                    }, function(){
-                                        appWindow.showStatusMessage(qsTr("Failed to fetch remote nodes from third-party server."), 5);
-                                        wizardController.openWalletFile(item.filePath);
-                                    });
-                                } else {
-                                    wizardController.openWalletFile(item.filePath);
-                                }
+                                wizardController.openWalletFile(item.filePath);
                             }
                         }
                     }

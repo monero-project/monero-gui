@@ -94,16 +94,6 @@ function netTypeToString(){
     return nettype == 1 ? qsTr("Testnet") : nettype == 2 ? qsTr("Stagenet") : qsTr("Mainnet");
 }
 
-function randomChoice(arr){
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function filterNodes(nodes, port) {
-    if(typeof data === 'number')
-        port = port.toString();
-    return nodes.filter(function(_){return _.indexOf(port) !== -1});
-}
-
 function epoch(){
     return Math.floor((new Date).getTime()/1000);
 }

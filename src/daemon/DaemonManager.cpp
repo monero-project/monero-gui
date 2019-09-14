@@ -61,7 +61,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
     return m_instance;
 }
 
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
 {
     // prepare command line arguments and pass to monerod
     QStringList arguments;
@@ -99,6 +99,10 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--bootstrap-daemon-address" << bootstrapNodeAddress;
     }
 
+    if (noSync) {
+        arguments << "--no-sync";
+    }
+
     arguments << "--check-updates" << "disabled";
 
     // --max-concurrency based on threads available. max: 6
@@ -131,11 +135,13 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     // Start start watcher
-    m_scheduler.run([this, nettype] {
-        if (startWatcher(nettype))
+    m_scheduler.run([this, nettype, noSync] {
+        if (startWatcher(nettype)) {
             emit daemonStarted();
-        else
+            m_noSync = noSync;
+        } else {
             emit daemonStartFailure();
+        }
     });
 
     return true;
@@ -242,6 +248,11 @@ bool DaemonManager::running(NetworkType::Type nettype) const
         return true;
     }
     return false;
+}
+
+bool DaemonManager::noSync() const noexcept
+{
+    return m_noSync;
 }
 
 void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& callback) const

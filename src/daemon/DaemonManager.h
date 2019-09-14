@@ -44,9 +44,10 @@ public:
 
     static DaemonManager * instance(const QStringList *args);
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "");
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
     Q_INVOKABLE bool stop(NetworkType::Type nettype);
 
+    Q_INVOKABLE bool noSync() const noexcept;
     // return true if daemon process is started
     Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QJSValue& callback) const;
     // Send daemon command from qml and prints output in console window.
@@ -82,6 +83,7 @@ private:
     QString m_monerod;
     bool m_has_daemon = true;
     bool m_app_exit = false;
+    bool m_noSync = false;
 
     mutable FutureScheduler m_scheduler;
 };
