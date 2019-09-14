@@ -45,6 +45,7 @@ Item {
     property alias horizontalAlignment: label.horizontalAlignment
     property alias elide: label.elide
     property alias textWidth: label.width
+    property alias styleName: label.font.styleName
     property alias themeTransition: label.themeTransition
     signal linkActivated()
     height: label.height

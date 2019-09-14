@@ -107,7 +107,7 @@ Rectangle {
                 image: MoneroComponents.Style.titleBarExpandSource
                 color: MoneroComponents.Style.defaultFontColor
                 fontAwesomeFallbackIcon: FontAwesome.cube
-                fontAwesomeFallbackSize: 14
+                fontAwesomeFallbackSize: 16
                 fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.9
                 opacity: 0.75
             }
@@ -131,9 +131,10 @@ Rectangle {
 
             Text {
                 text: FontAwesome.globe
-                font.family: FontAwesome.fontFamily
+                font.family: FontAwesome.fontFamilySolid
                 font.pixelSize: 16
                 color: MoneroComponents.Style.defaultFontColor
+                font.styleName: "Solid"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 opacity: 0.75
@@ -158,6 +159,7 @@ Rectangle {
             Text {
                 text: FontAwesome.moonO
                 font.family: MoneroComponents.Style.blackTheme ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
+                font.styleName: MoneroComponents.Style.blackTheme ? "Solid" : "Regular"
                 font.pixelSize: 16
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
