@@ -43,6 +43,7 @@ Rectangle {
     property bool showMinimizeButton: true
     property bool showMaximizeButton: true
     property bool showCloseButton: true
+    property string walletName: ""
 
     height: {
         if(!persistentSettings.customDecorations || isMobile) return 0;
@@ -191,6 +192,7 @@ Rectangle {
 
         // monero logo
         Item {
+            visible: walletName.length === 0
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
 
@@ -215,6 +217,22 @@ Rectangle {
                 anchors.fill: imgLogo
                 source: imgLogo
                 saturation: 0.0
+            }
+        }
+
+        Item {
+            visible: walletName.length > 0
+            Layout.fillWidth: true
+            Layout.preferredHeight: parent.height
+
+            MoneroComponents.TextPlain {
+                font.pixelSize: 20
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                width: parent.width
+                height: parent.height
+                elide: Text.ElideRight
+                text: walletName
             }
         }
 

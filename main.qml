@@ -296,6 +296,7 @@ ApplicationWindow {
         middlePanel.getProofClicked.disconnect(handleGetProof);
         middlePanel.checkProofClicked.disconnect(handleCheckProof);
 
+        appWindow.walletName = "";
         currentWallet = undefined;
 
         appWindow.showProcessingSplash(qsTr("Closing wallet..."));
@@ -1911,6 +1912,7 @@ ApplicationWindow {
         TitleBar {
             id: titleBar
             visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
+            walletName: appWindow.walletName
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
