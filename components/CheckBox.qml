@@ -58,7 +58,7 @@ Item {
     RowLayout {
         id: checkBoxLayout
         layoutDirection: iconOnTheLeft ? Qt.LeftToRight : Qt.RightToLeft
-        spacing: (!isMobile ? 10 : 8)
+        spacing: 10
 
         Item {
             id: checkMark

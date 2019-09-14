@@ -46,7 +46,6 @@ Rectangle {
 
     property Item currentView
     property Item previousView
-    property bool basicMode : isMobile
     property string balanceLabelText: qsTr("Balance") + translationManager.emptyString
     property string balanceText
     property string unlockedBalanceLabelText: qsTr("Unlocked Balance") + translationManager.emptyString

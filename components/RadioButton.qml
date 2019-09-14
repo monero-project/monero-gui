@@ -74,7 +74,7 @@ Item {
 
         MoneroComponents.TextPlain {
             id: label
-            Layout.leftMargin: (!isMobile ? 10 : 8)
+            Layout.leftMargin: 10
             color: MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: radioButton.fontSize

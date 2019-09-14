@@ -35,7 +35,7 @@ import "../js/Utils.js" as Utils
 import "../components" as MoneroComponents
 
 GridLayout {
-    columns: (isMobile) ? 1 : 2
+    columns: 2
     columnSpacing: 32
     id: root
     property alias daemonAddrText: daemonAddr.text

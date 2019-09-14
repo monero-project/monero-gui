@@ -46,7 +46,7 @@ Rectangle {
     property string walletName: ""
 
     height: {
-        if(!persistentSettings.customDecorations || isMobile) return 0;
+        if(!persistentSettings.customDecorations) return 0;
         return 50;
     }
 

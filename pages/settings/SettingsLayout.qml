@@ -47,12 +47,11 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: 20
         anchors.topMargin: 0
         spacing: 6
 
         MoneroComponents.CheckBox {
-            visible: !isMobile
             id: customDecorationsCheckBox
             checked: persistentSettings.customDecorations
             onClicked: Windows.setCustomWindowDecorations(checked)
@@ -60,7 +59,6 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
-            visible: !isMobile
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
             onClicked: {
@@ -71,7 +69,6 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
-            visible: !isMobile
             id: showPidCheckBox
             checked: persistentSettings.showPid
             onClicked: {
@@ -91,7 +88,6 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
-            visible: !isMobile
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
@@ -266,14 +262,6 @@ Rectangle {
             onClicked: {
                 appWindow.toggleLanguageView();
             }
-        }
-
-        MoneroComponents.TextBlock {
-            visible: isMobile
-            font.pixelSize: 14
-            textFormat: Text.RichText
-            Layout.fillWidth: true
-            text: qsTr("No Layout options exist yet in mobile mode.") + translationManager.emptyString;
         }
     }
 

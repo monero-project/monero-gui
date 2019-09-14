@@ -61,9 +61,7 @@ Rectangle {
             property string borderColor: MoneroComponents.Style.blackTheme ? "#808080" : "#B9B9B9"
             property int textMargin: {
                 // left-right margins for a given cell
-                if(isMobile){
-                    return 10;
-                } else if(appWindow.width < 890){
+                if(appWindow.width < 890){
                     return 32;
                 } else {
                     return 64;

@@ -80,7 +80,7 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         Layout.fillWidth: true
-        anchors.margins: (isMobile)? 17 : 20
+        anchors.margins: 20
         anchors.topMargin: 40
   
         anchors.left: parent.left
@@ -296,7 +296,7 @@ Rectangle {
 
         GridLayout{
             Layout.topMargin: 12
-            columns: (isMobile) ?  1 : 2
+            columns: 2
             columnSpacing: 32
 
             ColumnLayout {
@@ -368,7 +368,7 @@ Rectangle {
 
         GridLayout {
             columnSpacing: 20
-            columns: (isMobile) ?  1 : 2
+            columns: 2
 
             MoneroComponents.CheckBox {
                 id: segregatePreForkOutputs
@@ -405,7 +405,7 @@ Rectangle {
             id: segregationHeightRow
             Layout.fillWidth: true
             Layout.topMargin: 17
-            columns: (isMobile) ?  1 : 2
+            columns: 2
             columnSpacing: 32
 
             MoneroComponents.LineEdit {
