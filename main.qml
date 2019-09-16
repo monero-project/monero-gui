@@ -1580,7 +1580,6 @@ ApplicationWindow {
                 name: "normal"
                 PropertyChanges { target: leftPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
-                PropertyChanges { target: titleBar; basicButtonVisible: true }
                 PropertyChanges { target: wizard; visible: false }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; state: "default" }
@@ -1739,11 +1738,9 @@ ApplicationWindow {
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
             onLanguageClicked: appWindow.toggleLanguageView();
+            onCloseWalletClicked: appWindow.showWizard();
             onMaximizeClicked: appWindow.visibility = appWindow.visibility !== Window.Maximized ? Window.Maximized : Window.Windowed
             onMinimizeClicked: appWindow.visibility = Window.Minimized
-            onGoToBasicVersion: {
-                //nop
-            }
         }
 
         MoneroMerchant.MerchantTitlebar {

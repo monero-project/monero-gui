@@ -38,7 +38,6 @@ import "effects/" as MoneroEffects
 Rectangle {
     id: root
     property int mouseX: 0
-    property bool basicButtonVisible: false
     property bool customDecorations: persistentSettings.customDecorations
     property bool showMinimizeButton: true
     property bool showMaximizeButton: true
@@ -57,18 +56,18 @@ Rectangle {
     signal maximizeClicked
     signal minimizeClicked
     signal languageClicked
-    signal goToBasicVersion(bool yes)
+    signal closeWalletClicked
 
     state: "default"
     states: [
         State {
             name: "default";
-            PropertyChanges { target: btnSidebarCollapse; visible: true}
+            PropertyChanges { target: btnCloseWallet; visible: true}
             PropertyChanges { target: btnLanguageToggle; visible: true}
         }, State {
             // show only theme switcher and window controls
             name: "essentials";
-            PropertyChanges { target: btnSidebarCollapse; visible: false}
+            PropertyChanges { target: btnCloseWallet; visible: false}
             PropertyChanges { target: btnLanguageToggle; visible: false}
         }
     ]
@@ -94,22 +93,20 @@ Rectangle {
 
         // collapse sidebar
         Rectangle {
-            id: btnSidebarCollapse
-            visible: root.basicButtonVisible
+            id: btnCloseWallet
             color: "transparent"
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
 
-            MoneroEffects.ImageMask {
+
+            Text {
+                text: FontAwesome.signOutAlt
+                font.family: FontAwesome.fontFamilySolid
+                font.pixelSize: 16
+                color: MoneroComponents.Style.defaultFontColor
+                font.styleName: "Solid"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: 14
-                width: 14
-                image: MoneroComponents.Style.titleBarExpandSource
-                color: MoneroComponents.Style.defaultFontColor
-                fontAwesomeFallbackIcon: FontAwesome.cube
-                fontAwesomeFallbackSize: 16
-                fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.9
                 opacity: 0.75
             }
 
@@ -119,7 +116,7 @@ Rectangle {
                 cursorShape: Qt.PointingHandCursor
                 onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
-                onClicked: root.goToBasicVersion(leftPanel.visible)
+                onClicked: root.closeWalletClicked(leftPanel.visible)
             }
         }
 

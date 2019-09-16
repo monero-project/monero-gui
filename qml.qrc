@@ -237,7 +237,6 @@
         <file>images/middlePanelShadow.png</file>
         <file>images/themes/white/titlebarLogo@2x.png</file>
         <file>images/themes/white/titlebarLogo.png</file>
-        <file>images/sidebar.svg</file>
         <file>images/fullscreen.svg</file>
         <file>images/close.svg</file>
         <file>images/minimize.svg</file>
@@ -245,7 +244,6 @@
         <file>images/themes/white/fullscreen.svg</file>
         <file>images/themes/white/minimize.svg</file>
         <file>images/themes/white/question.svg</file>
-        <file>images/themes/white/expand.svg</file>
         <file>components/effects/ColorTransition.qml</file>
         <file>components/effects/GradientBackground.qml</file>
         <file>images/check-white.svg</file>
