@@ -158,7 +158,7 @@ Rectangle {
                 text: FontAwesome.moonO
                 font.family: MoneroComponents.Style.blackTheme ? FontAwesome.fontFamilySolid : FontAwesome.fontFamily
                 font.styleName: MoneroComponents.Style.blackTheme ? "Solid" : "Regular"
-                font.pixelSize: 16
+                font.pixelSize: 15
                 color: MoneroComponents.Style.defaultFontColor
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
