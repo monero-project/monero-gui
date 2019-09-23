@@ -1,6 +1,6 @@
-# qml components require at least QT 5.9.0
+# qml components require at least QT 5.9.7
 lessThan (QT_MAJOR_VERSION, 5) | lessThan (QT_MINOR_VERSION, 9) {
-  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.9.0")
+  error("Can't build with Qt $${QT_VERSION}. Use at least Qt 5.9.7")
 }
 
 TEMPLATE = app

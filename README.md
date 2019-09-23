@@ -75,6 +75,8 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling the Monero GUI from source
 
+*Note*: Qt 5.9.7 is the minimum version required to build the GUI.
+
 ### On Linux:
 
 (Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
@@ -95,7 +97,7 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 2. Install Qt:
 
-  *Note*: Qt 5.9.7 is the minimum version required to build the GUI. This makes **some** distributions (mostly based on debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
+  *Note*: The Qt 5.9.7 or newer requirement makes **some** distributions (mostly based on debian, like Ubuntu 16.x or Linux Mint 18.x) obsolete due to their repositories containing an older Qt version.
 
  The recommended way is to install 5.9.7 from the [official Qt installer](https://www.qt.io/download-qt-installer) or [compiling it yourself](https://wiki.qt.io/Install_Qt_5_on_Ubuntu). This ensures you have the correct version. Higher versions *can* work but as it differs from our production build target, slight differences may occur.
 
