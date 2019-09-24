@@ -689,7 +689,6 @@ ApplicationWindow {
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync);
-        persistentSettings.daemonFlags = flags
     }
 
     function stopDaemon(){
@@ -1863,7 +1862,7 @@ ApplicationWindow {
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon();
         }
-        appWindow.startDaemon(persistentSettings.daemonFlags);
+        appWindow.startDaemon("");
         appWindow.disconnectedEpoch = Utils.epoch();
     }
 
