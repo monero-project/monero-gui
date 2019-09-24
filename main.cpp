@@ -125,6 +125,9 @@ int main(int argc, char *argv[])
 //    qDebug() << "High DPI auto scaling - enabled";
 //#endif
 
+    // Turn off colors in monerod log output.
+    qputenv("TERM", "goaway");
+
     MainApp app(argc, argv);
 
     app.setApplicationName("monero-core");
