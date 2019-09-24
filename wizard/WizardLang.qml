@@ -63,7 +63,7 @@ Rectangle {
 
     ColumnLayout {
         anchors.top: parent.top
-        anchors.topMargin: persistentSettings.customDecorations ? 90 : 32
+        anchors.topMargin: persistentSettings.customDecorations ? 65 : 15
         width: parent.width - 100
         anchors.horizontalCenter: parent.horizontalCenter;
 
