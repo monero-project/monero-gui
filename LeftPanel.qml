@@ -171,44 +171,6 @@ Rectangle {
                     color: "#ff9323"
                     themeTransition: false
                 }
-
-                Rectangle {
-                    height: (logoutImage.height + 8)
-                    width: (logoutImage.width + 8)
-                    color: "transparent"
-                    anchors.right: parent.right
-                    anchors.rightMargin: 8
-                    anchors.top: parent.top
-                    anchors.topMargin: 30
-
-                    Image {
-                        id: logoutImage
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        height: 16
-                        width: 13
-                        source: "qrc:///images/logout.png"
-                    }
-
-                    ColorOverlay {
-                        anchors.fill: logoutImage
-                        source: logoutImage
-                        visible: !MoneroComponents.Style.blackTheme
-                        color: "#000000"
-                    }
-
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            middlePanel.addressBookView.clearFields();
-                            middlePanel.transferView.clearFields();
-                            middlePanel.receiveView.clearFields();
-                            appWindow.showWizard();
-                        }
-                    }
-                }
             }
 
             Item {
