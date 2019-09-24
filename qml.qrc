@@ -111,8 +111,10 @@
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>
         <file>images/appicon.ico</file>
-        <file>images/card-background.png</file>
-        <file>images/card-background@2x.png</file>
+        <file>images/card-background-black.png</file>
+        <file>images/card-background-black@2x.png</file>
+        <file>images/card-background-white.png</file>
+        <file>images/card-background-white@2x.png</file>
         <file>images/moneroLogo_white.png</file>
         <file>images/question.png</file>
         <file>images/question@2x.png</file>
