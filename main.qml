@@ -1843,7 +1843,7 @@ ApplicationWindow {
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
 
-        const connected = leftPanel.networkStatus.connected === Wallet.ConnectionStatus_Connected;
+        const connected = leftPanel.networkStatus.connected !== Wallet.ConnectionStatus_Disconnected;
         const firstRun = appWindow.disconnectedEpoch == 0;
         if (firstRun) {
             appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
