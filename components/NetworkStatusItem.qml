@@ -29,6 +29,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
+import FontAwesome 1.0
 import moneroComponents.Wallet 1.0
 import "../components" as MoneroComponents
 
@@ -143,6 +144,50 @@ Rectangle {
                         } else {
                             appWindow.showPageRequest("Mining")
                         }
+                    }
+                }
+            }
+
+            Text {
+                anchors.left: statusTextVal.right
+                anchors.leftMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                color: refreshMouseArea.containsMouse ?  MoneroComponents.Style.dimmedFontColor : MoneroComponents.Style.defaultFontColor
+                font.family: FontAwesome.fontFamilySolid
+                font.pixelSize: 24
+                font.styleName: "Solid"
+                opacity: iconItem.opacity * (refreshMouseArea.visible ? 1 : 0.5)
+                text: FontAwesome.random
+                visible: (
+                    item.connected != Wallet.ConnectionStatus_Disconnected &&
+                    !persistentSettings.useRemoteNode &&
+                    persistentSettings.bootstrapNodeAddress == "auto"
+                )
+
+                MouseArea {
+                    id: refreshMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    visible: true
+                    onClicked: {
+                        const callback = function(result) {
+                            refreshMouseArea.visible = true;
+                            if (result) {
+                                appWindow.showStatusMessage(qsTr("Successfully switched to another public node"), 3);
+                                appWindow.currentWallet.refreshHeightAsync();
+                            } else {
+                                appWindow.showStatusMessage(qsTr("Failed to switch public node"), 3);
+                            }
+                        };
+
+                        daemonManager.sendCommandAsync(
+                            ["set_bootstrap_daemon", "auto"],
+                            appWindow.currentWallet.nettype,
+                            callback);
+
+                        refreshMouseArea.visible = false;
+                        appWindow.showStatusMessage(qsTr("Switching to another public node"), 3);
                     }
                 }
             }
