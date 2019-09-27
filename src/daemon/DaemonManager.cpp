@@ -150,7 +150,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 bool DaemonManager::stop(NetworkType::Type nettype)
 {
     QString message;
-    sendCommand("exit", nettype, message);
+    sendCommand({"exit"}, nettype, message);
     qDebug() << message;
 
     // Start stop watcher - Will kill if not shutting down
@@ -240,7 +240,7 @@ void DaemonManager::printError()
 bool DaemonManager::running(NetworkType::Type nettype) const
 { 
     QString status;
-    sendCommand("sync_info", nettype, status);
+    sendCommand({"sync_info"}, nettype, status);
     qDebug() << status;
     return status.contains("Height:");
 }
@@ -257,17 +257,10 @@ void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& call
     }, callback);
 }
 
-bool DaemonManager::sendCommand(const QString &cmd, NetworkType::Type nettype) const
-{
-    QString message;
-    return sendCommand(cmd, nettype, message);
-}
-
-bool DaemonManager::sendCommand(const QString &cmd, NetworkType::Type nettype, QString &message) const
+bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, QString &message) const
 {
     QProcess p;
-    QStringList external_cmd;
-    external_cmd << cmd;
+    QStringList external_cmd(cmd);
 
     // Add network type flag if needed
     if (nettype == NetworkType::TESTNET)
@@ -284,6 +277,14 @@ bool DaemonManager::sendCommand(const QString &cmd, NetworkType::Type nettype, Q
     message = p.readAllStandardOutput();
     emit daemonConsoleUpdated(message);
     return started;
+}
+
+void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const
+{
+    m_scheduler.run([this, cmd, nettype] {
+        QString message;
+        return QJSValueList({sendCommand(cmd, nettype, message)});
+    }, callback);
 }
 
 void DaemonManager::exit()

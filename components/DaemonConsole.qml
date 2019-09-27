@@ -178,7 +178,11 @@ Window {
                 onAccepted: {
                     if(text.length > 0) {
                         textArea.logCommand(">>> " + text)
-                        daemonManager.sendCommand(text, currentWallet.nettype);
+                        daemonManager.sendCommandAsync(text.split(" "), currentWallet.nettype, function(result) {
+                            if (!result) {
+                                appWindow.showStatusMessage(qsTr("Failed to send command"), 3);
+                            }
+                        });
                     }
                     text = ""
                 }
