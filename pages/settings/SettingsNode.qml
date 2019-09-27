@@ -451,7 +451,11 @@ Rectangle{
                             }
                         }
                         onEditingFinished: {
-                            persistentSettings.bootstrapNodeAddress = daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+                            if (daemonAddrText == "auto") {
+                                persistentSettings.bootstrapNodeAddress = daemonAddrText;
+                            } else {
+                                persistentSettings.bootstrapNodeAddress = daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+                            }
                             console.log("setting bootstrap node to " + persistentSettings.bootstrapNodeAddress)
                         }
                     }
