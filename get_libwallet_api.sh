@@ -253,4 +253,7 @@ if [ -d $MONERO_DIR/build/$BUILD_TYPE/external/unbound ]; then
     popd
 fi
 
+# install randomx
+eval make -C $MONERO_DIR/build/$BUILD_TYPE/external/randomx all install
+
 popd

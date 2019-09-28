@@ -142,25 +142,25 @@ ios:arm64 {
     LIBS += \
         -L$$PWD/../ofxiOSBoost/build/libs/boost/lib/arm64 \
 }
+
+LIBS_COMMON = \
+    -lwallet_merged \
+    -llmdb \
+    -lepee \
+    -lunbound \
+    -lsodium \
+    -leasylogging \
+    -lrandomx
+
 !ios:!android {
-LIBS += -L$$WALLET_ROOT/lib \
-        -lwallet_merged \
-        -llmdb \
-        -lepee \
-        -lunbound \
-        -lsodium \
-        -leasylogging
+    LIBS += -L$$WALLET_ROOT/lib \
+        $$LIBS_COMMON
 }
 
 android {
     message("Host is Android")
     LIBS += -L$$WALLET_ROOT/lib \
-        -lwallet_merged \
-        -llmdb \
-        -lepee \
-        -lunbound \
-        -lsodium \
-        -leasylogging
+        $$LIBS_COMMON
 }
 
 
@@ -175,12 +175,7 @@ ios {
     QMAKE_IOS_DEVICE_ARCHS = arm64
     CONFIG += arm64
     LIBS += -L$$WALLET_ROOT/lib-ios \
-        -lwallet_merged \
-        -llmdb \
-        -lepee \
-        -lunbound \
-        -lsodium \
-        -leasylogging
+        $$LIBS_COMMON
 
     LIBS+= \
         -L$$PWD/../OpenSSL-for-iPhone/lib \
