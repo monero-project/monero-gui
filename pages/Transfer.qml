@@ -269,8 +269,7 @@ Rectangle {
                   }
               }
               onTextChanged: {
-                  // @TODO: remove after pid removal hardfork
-                  warningLongPidTransfer = !persistentSettings.showPid && isLongPidService(text)
+                  warningLongPidTransfer = isLongPidService(text);
               }
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
@@ -360,7 +359,7 @@ Rectangle {
           }
 
           ColumnLayout {
-              visible: appWindow.persistentSettings.showPid || paymentIdCheckbox.checked
+              visible: paymentIdCheckbox.checked
               // @TODO: remove after pid removal hardfork
               CheckBox {
                   id: paymentIdCheckbox
@@ -383,6 +382,7 @@ Rectangle {
                   id: paymentIdLine
                   fontBold: true
                   placeholderText: qsTr("64 hexadecimal characters") + translationManager.emptyString
+                  readOnly: true
                   Layout.fillWidth: true
                   wrapMode: Text.WrapAnywhere
                   addressValidation: false
@@ -394,8 +394,10 @@ Rectangle {
       MoneroComponents.WarningBox {
           // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
-          text: qsTr("You can enable transfers with payment ID on the settings page.") + translationManager.emptyString;
-          visible: !persistentSettings.showPid && (warningLongPidTransfer || warningLongPidDescription)
+          text: qsTr("Long payment IDs are obsolete. \
+          Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
+          If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
+          visible: warningLongPidTransfer || paymentIdCheckbox.checked
       }
 
       MoneroComponents.WarningBox {
@@ -769,6 +771,11 @@ Rectangle {
                 root.sendButtonWarning = qsTr("Transaction information is incorrect.") + translationManager.emptyString;
             return false;
         }
+
+        if (paymentIdWarningBox.visible) {
+            return false;
+        }
+
         return true;
     }
 }
