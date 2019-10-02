@@ -30,3 +30,8 @@ scanner:
 
 debug-static-win64:
 	mkdir -p $(builddir)/debug && cd $(builddir)/debug && cmake -G "MSYS Makefiles" -D DEV_MODE=ON -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Debug -D BUILD_TAG="win-x64" -D CMAKE_TOOLCHAIN_FILE=$(topdir)/cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=c:/msys64 -D MINGW=ON $(topdir) && $(MAKE)
+
+debug-static-mac64:
+	mkdir -p $(builddir)/debug
+	cd $(builddir)/debug && cmake -D STATIC=ON -D DEV_MODE=ON -D ARCH="x86-64" -D BUILD_64=ON -D CMAKE_BUILD_TYPE=release -D BUILD_TAG="mac-x64" $(topdir) && $(MAKE)
+
