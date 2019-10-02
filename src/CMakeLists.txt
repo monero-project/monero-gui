@@ -48,6 +48,13 @@ file(GLOB SOURCE_FILES
     "qt/*.cpp"
 )
 
+if(ENABLE_PASS_STRENGTH_METER)
+    file(GLOB PASS_STRENGTH_FILES
+        "zxcvbn-c/zxcvbn.h"
+        "zxcvbn-c/zxcvbn.c"
+    )
+endif()
+
 if(WITH_SCANNER)
     file(GLOB QR_CODE_FILES
         "QR-Code-generator/*.h"
@@ -59,10 +66,11 @@ endif()
 
 message(STATUS ${QML_QRC})
 add_executable(monero-gui main/main.cpp
-        ${SOURCE_FILES}
-        ${QR_CODE_FILES}
-        ${QML_QRC}
-        )
+    ${SOURCE_FILES}
+    ${PASS_STRENGTH_FILES}
+    ${QR_CODE_FILES}
+    ${QML_QRC}
+)
 
 # OpenGL
 target_include_directories(monero-gui PUBLIC ${OPENGL_INCLUDE_DIR})
@@ -83,7 +91,7 @@ target_include_directories(monero-gui PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/model
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-generator
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
-	${CMAKE_CURRENT_SOURCE_DIR}/daemon/zxcvbn-c
+	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${LibUSB_INCLUDE_DIRS}
     ${HIDAPI_INCLUDE_DIRS}
     ${X11_INCLUDE_DIR}
@@ -110,31 +118,30 @@ if(DEVICE_TREZOR_READY)
 endif()
 
 target_link_libraries(monero-gui
-        ${ZXCVBN_LIBRARY}
-        ${CMAKE_BINARY_DIR}/lib/libwallet_merged.a
-        ${LMDB_LIBRARY}
-        ${CMAKE_BINARY_DIR}/monero/contrib/epee/src/libepee.a
-        ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a
-        ${SODIUM_LIBRARY}
-        ${CMAKE_BINARY_DIR}/monero/external/easylogging++/libeasylogging.a
-        ${CMAKE_BINARY_DIR}/monero/src/blockchain_db/libblockchain_db.a
-        ${CMAKE_BINARY_DIR}/monero/external/randomx/librandomx.a
-        ${CMAKE_BINARY_DIR}/monero/src/hardforks/libhardforks.a
-        ${Boost_LIBRARIES}
-        ${OPENSSL_LIBRARIES}
-        ${CMAKE_DL_LIBS}
-        ${LibUSB_LIBRARIES}
-        ${HIDAPI_LIBRARIES}
-		Qt5::Core
-		Qt5::Quick
-		Qt5::Widgets
-		Qt5::Gui
-		Qt5::Network
-		Qt5::Qml
-		Qt5::Multimedia
-		Qt5::Xml
-		Qt5::XmlPatterns
-		Qt5::Svg
+    ${CMAKE_BINARY_DIR}/lib/libwallet_merged.a
+    ${LMDB_LIBRARY}
+    ${CMAKE_BINARY_DIR}/monero/contrib/epee/src/libepee.a
+    ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a
+    ${SODIUM_LIBRARY}
+    ${CMAKE_BINARY_DIR}/monero/external/easylogging++/libeasylogging.a
+    ${CMAKE_BINARY_DIR}/monero/src/blockchain_db/libblockchain_db.a
+    ${CMAKE_BINARY_DIR}/monero/external/randomx/librandomx.a
+    ${CMAKE_BINARY_DIR}/monero/src/hardforks/libhardforks.a
+    ${Boost_LIBRARIES}
+    ${OPENSSL_LIBRARIES}
+    ${CMAKE_DL_LIBS}
+    ${LibUSB_LIBRARIES}
+    ${HIDAPI_LIBRARIES}
+    Qt5::Core
+    Qt5::Quick
+    Qt5::Widgets
+    Qt5::Gui
+    Qt5::Network
+    Qt5::Qml
+    Qt5::Multimedia
+    Qt5::Xml
+    Qt5::XmlPatterns
+    Qt5::Svg
 )
 
 if(WITH_SCANNER)
@@ -148,5 +155,5 @@ if(WITH_SCANNER)
 endif()
 
 install(TARGETS monero-gui
-		DESTINATION ${CMAKE_INSTALL_PREFIX}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}
 )
