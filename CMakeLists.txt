@@ -56,6 +56,7 @@ endif()
 
 add_subdirectory(monero)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
+get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 
 if(STATIC)
 	message(STATUS "Initiating static build")
