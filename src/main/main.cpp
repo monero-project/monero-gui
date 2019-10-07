@@ -78,6 +78,54 @@
 #include "QR-Code-scanner/QrCodeScanner.h"
 #endif
 
+#include <QtPlugin>
+#if defined(Q_OS_OSX)
+  Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
+#elif defined(Q_OS_WIN)
+  Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+#elif defined(Q_OS_LINUX)
+  Q_IMPORT_PLUGIN(QXcbIntegrationPlugin);
+#endif
+Q_IMPORT_PLUGIN(QSvgIconPlugin)
+Q_IMPORT_PLUGIN(QGifPlugin)
+Q_IMPORT_PLUGIN(QICNSPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
+Q_IMPORT_PLUGIN(QJp2Plugin)
+Q_IMPORT_PLUGIN(QJpegPlugin)
+Q_IMPORT_PLUGIN(QMngPlugin)
+Q_IMPORT_PLUGIN(QSvgPlugin)
+Q_IMPORT_PLUGIN(QTgaPlugin)
+Q_IMPORT_PLUGIN(QTiffPlugin)
+Q_IMPORT_PLUGIN(QWbmpPlugin)
+Q_IMPORT_PLUGIN(QWebpPlugin)
+Q_IMPORT_PLUGIN(QQmlDebuggerServiceFactory)
+Q_IMPORT_PLUGIN(QQmlInspectorServiceFactory)
+Q_IMPORT_PLUGIN(QLocalClientConnectionFactory)
+Q_IMPORT_PLUGIN(QDebugMessageServiceFactory)
+Q_IMPORT_PLUGIN(QQmlNativeDebugConnectorFactory)
+Q_IMPORT_PLUGIN(QQmlNativeDebugServiceFactory)
+Q_IMPORT_PLUGIN(QQmlProfilerServiceFactory)
+Q_IMPORT_PLUGIN(QQuickProfilerAdapterFactory)
+Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
+Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
+Q_IMPORT_PLUGIN(QGenericEnginePlugin)
+
+Q_IMPORT_PLUGIN(QtQuick2Plugin)
+Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
+Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
+Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
+Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
+Q_IMPORT_PLUGIN(QmlFolderListModelPlugin)
+Q_IMPORT_PLUGIN(QmlSettingsPlugin)
+Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
+Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
+Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
+Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
+Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
+
 bool isIOS = false;
 bool isAndroid = false;
 bool isWindows = false;

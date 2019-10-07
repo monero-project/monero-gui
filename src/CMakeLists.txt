@@ -133,16 +133,9 @@ target_link_libraries(monero-gui
     ${CMAKE_DL_LIBS}
     ${LibUSB_LIBRARIES}
     ${HIDAPI_LIBRARIES}
-    Qt5::Core
-    Qt5::Quick
-    Qt5::Widgets
-    Qt5::Gui
-    Qt5::Network
-    Qt5::Qml
-    Qt5::Multimedia
-    Qt5::Xml
-    Qt5::XmlPatterns
-    Qt5::Svg
+    ${QT5_LIBRARIES}
+    ${EXTRA_LIBRARIES}
+    ${ICU_LIBRARIES}
 )
 
 if(WITH_SCANNER)

@@ -105,17 +105,7 @@ link_directories(${EASYLOGGING_LIBRARY_DIRS})
 include(VersionGui)
 monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Quick REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Qml REQUIRED)
 message(STATUS "${CMAKE_MODULE_PATH}")
-find_package(Qt5Multimedia REQUIRED)
-find_package(Qt5Xml REQUIRED)
-find_package(Qt5XmlPatterns REQUIRED)
-find_package(Qt5Svg REQUIRED)
 
 find_package(X11 REQUIRED)
 
@@ -179,6 +169,21 @@ if(MINGW)
     string(REGEX MATCH "^[^/]:/[^/]*" msys2_install_path "${CMAKE_C_COMPILER}")
     message(STATUS "MSYS location: ${msys2_install_path}")
     set(CMAKE_INCLUDE_PATH "${msys2_install_path}/mingw${ARCH_WIDTH}/include")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/Qt/labs/folderlistmodel")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/Qt/labs/settings")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtGraphicalEffects")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtGraphicalEffects/private")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtMultimedia")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick.2")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Controls")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Controls.2")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Dialogs")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Dialogs/Private")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Layouts")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/PrivateWidgets")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Templates.2")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Window.2")
+    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/XmlListModel")
     # This is necessary because otherwise CMake will make Boost libraries -lfoo
     # rather than a full path. Unfortunately, this makes the shared libraries get
     # linked due to a bug in CMake which misses putting -static flags around the
@@ -186,6 +191,81 @@ if(MINGW)
     set(DEFLIB ${msys2_install_path}/mingw${ARCH_WIDTH}/lib)
     list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
     list(REMOVE_ITEM CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
+endif()
+
+set(QT5_LIBRARIES
+  Qt5Core
+  Qt5Quick
+  Qt5QuickControls2
+  Qt5Widgets
+  Qt5Gui
+  Qt5Network
+  Qt5Qml
+  Qt5Multimedia
+  Qt5Xml
+  Qt5XmlPatterns
+  Qt5Svg
+)
+
+foreach(QT5_MODULE ${QT5_LIBRARIES})
+  find_package(${QT5_MODULE} REQUIRED)
+endforeach()
+
+find_package(PkgConfig)
+if(PKGCONFIG_FOUND)
+  pkg_check_modules(QT5_PKG_CONFIG ${QT5_LIBRARIES})
+
+  if(QT5_PKG_CONFIG_FOUND)
+    set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
+    if(STATIC)
+      set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
+    endif()
+
+    set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
+    include_directories(${${QT5_PKG_CONFIG}_INCLUDE_DIRS})
+    link_directories(${${QT5_PKG_CONFIG}_LIBRARY_DIRS})
+  endif()
+endif()
+
+list(APPEND QT5_LIBRARIES
+  ${Qt5Gui_PLUGINS}
+  ${Qt5Svg_PLUGINS}
+  ${Qt5Qml_PLUGINS}
+  ${Qt5Network_PLUGINS}
+)
+
+if(STATIC)
+  set(QT5_LIBRARIES
+    qtquickcontrols2plugin # has to be the first one, depends on Qt5QuickControls2
+    ${QT5_LIBRARIES}
+    declarative_multimedia
+    dialogplugin
+    dialogsprivateplugin
+    qmlfolderlistmodelplugin
+    qmlsettingsplugin
+    qmlxmllistmodelplugin
+    qquicklayoutsplugin
+    Qt5EventDispatcherSupport
+    Qt5FontDatabaseSupport
+    Qt5MultimediaQuick_p
+    Qt5PacketProtocol
+    Qt5ThemeSupport
+    qtgraphicaleffectsplugin
+    qtgraphicaleffectsprivate
+    qtquick2plugin
+    qtquickcontrolsplugin
+    qtquicktemplates2plugin
+    widgetsplugin
+    windowplugin
+  )
+
+  if(MINGW)
+    list(APPEND QT5_LIBRARIES freetype)
+
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+      list(APPEND QT5_LIBRARIES D3D11 Dwrite D2d1)
+    endif()
+  endif()
 endif()
 
 message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
@@ -244,7 +324,7 @@ if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
     endif()
   endif()
   if (WIN32)
-    list(APPEND EXTRA_LIBRARIES setupapi)
+    list(APPEND EXTRA_LIBRARIES setupapi Version)
   endif()
 endif()
 
