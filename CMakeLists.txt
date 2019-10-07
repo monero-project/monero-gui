@@ -3,10 +3,6 @@ project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
-set(LINUX ON)
-set(DEBUG ON)
-set(CMAKE_BUILD_TYPE Release)
-
 set(VERSION_MAJOR "14")
 set(VERSION_MINOR "0")
 set(VERSION_REVISION "3")
