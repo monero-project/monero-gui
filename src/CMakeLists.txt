@@ -65,7 +65,13 @@ if(WITH_SCANNER)
 endif()
 
 message(STATUS ${QML_QRC})
-add_executable(monero-gui main/main.cpp
+
+set(EXECUTABLE_FLAG)
+if(MINGW)
+    set(EXECUTABLE_FLAG WIN32)
+endif()
+
+add_executable(monero-gui ${EXECUTABLE_FLAG} main/main.cpp
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
     ${QR_CODE_FILES}
