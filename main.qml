@@ -460,10 +460,6 @@ ApplicationWindow {
             // Raise window
             appWindow.raise();
             appWindow.show();
-
-            // @TODO: remove after paymentID deprecation
-            if(params.hasOwnProperty("tx_payment_id"))
-                persistentSettings.showPid = true;
         }
     }
 
@@ -1371,7 +1367,6 @@ ApplicationWindow {
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
-        property bool showPid: false
         property bool blackTheme: true
 
         property bool fiatPriceEnabled: false
