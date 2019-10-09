@@ -700,6 +700,7 @@ ApplicationWindow {
         // resume refresh
         currentWallet.startRefresh();
         // resume simplemode connection timer
+        appWindow.disconnectedEpoch = Utils.epoch();
         simpleModeConnectionTimer.start();
     }
     function onDaemonStopped(){
@@ -1855,7 +1856,6 @@ ApplicationWindow {
             appWindow.stopDaemon();
         }
         appWindow.startDaemon("");
-        appWindow.disconnectedEpoch = Utils.epoch();
     }
 
     Timer {
