@@ -9,7 +9,7 @@ Copyright (c) 2014-2019, The Monero Project
 - Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
 - Github: [https://github.com/monero-project/monero-gui](https://github.com/monero-project/monero-gui)
 - IRC: [#monero-dev on Freenode](irc://chat.freenode.net/#monero-dev)
-- Translation platform (Pootle): [translate.getmonero.org](https://translate.getmonero.org)
+- Translation platform (Weblate): [translate.getmonero.org](https://translate.getmonero.org)
 
 ## Vulnerability response
 
