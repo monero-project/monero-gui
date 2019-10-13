@@ -211,10 +211,10 @@ Rectangle {
                    id: priorityModelV5
 
                    ListElement { column1: qsTr("Automatic") ; column2: ""; priority: 0}
-                   ListElement { column1: qsTr("Slow (x0.25 fee)") ; column2: ""; priority: 1}
+                   ListElement { column1: qsTr("Slow (x0.2 fee)") ; column2: ""; priority: 1}
                    ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
                    ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
-                   ListElement { column1: qsTr("Fastest (x41.5 fee)")  ; column2: "";  priority: 4 }
+                   ListElement { column1: qsTr("Fastest (x200 fee)")  ; column2: "";  priority: 4 }
                }
 
               StandardDropdown {
