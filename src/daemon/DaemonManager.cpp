@@ -43,7 +43,7 @@
 #include <QMap>
 
 namespace {
-    static const int DAEMON_START_TIMEOUT_SECONDS = 30;
+    static const int DAEMON_START_TIMEOUT_SECONDS = 60;
 }
 
 DaemonManager * DaemonManager::m_instance = nullptr;
