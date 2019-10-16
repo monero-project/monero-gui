@@ -1271,6 +1271,9 @@ ApplicationWindow {
     Component.onCompleted: {
         x = (Screen.width - width) / 2
         y = (Screen.height - maxWindowHeight) / 2
+
+        applyWalletMode(persistentSettings.walletMode);
+
         //
         walletManager.walletOpened.connect(onWalletOpened);
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
@@ -2054,6 +2057,10 @@ ApplicationWindow {
         appWindow.disconnectedEpoch = 0;
         appWindow.walletMode = mode;
         persistentSettings.walletMode = mode;
+        applyWalletMode(mode);
+    }
+
+    function applyWalletMode(mode){
         if (mode < 2) {
             persistentSettings.useRemoteNode = false;
             persistentSettings.bootstrapNodeAddress = "auto";
@@ -2062,7 +2069,7 @@ ApplicationWindow {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"
             }
         }
-        console.log("walletMode changed: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
+        console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
     }
 
     // Daemon console
