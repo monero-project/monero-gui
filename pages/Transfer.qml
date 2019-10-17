@@ -756,7 +756,8 @@ Rectangle {
 
         // Currently opened wallet is not view-only
         if(appWindow.viewOnly){
-            root.sendButtonWarning = qsTr("Wallet is view-only and sends are not possible.") + translationManager.emptyString;
+            root.sendButtonWarning = qsTr("Wallet is view-only and sends are not possible. Unless key images are imported, " + 
+                                    "the balance reflects only incoming but not outgoing transactions.") + translationManager.emptyString;
             return false;
         }
 
