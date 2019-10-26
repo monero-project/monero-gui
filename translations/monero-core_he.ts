@@ -1133,7 +1133,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">אנא אשר סיסמה חדשה</translation>
+        <translation>אנא אשר סיסמה חדשה</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1148,7 +1148,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">אישור</translation>
+        <translation>אישור</translation>
     </message>
 </context>
 <context>
@@ -1533,7 +1533,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">עצור דימון</translation>
+        <translation>עצור דימון</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2810,12 +2810,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">שפה</translation>
+        <translation>שפה</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">המשך</translation>
+        <translation>המשך</translation>
     </message>
 </context>
 <context>

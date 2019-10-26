@@ -674,7 +674,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="568"/>
         <source>Transactions</source>
-        <translation type="unfinished">Traducciones</translation>
+        <translation>Traducciones</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="569"/>
@@ -1135,7 +1135,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Confirmar nueva contraseña</translation>
+        <translation>Confirmar nueva contraseña</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1538,7 @@ El archivo de caché anterior del monedero será renombrado y puede ser posterio
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Parar daemon</translation>
+        <translation>Parar daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2825,12 +2825,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Idioma</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Continuar</translation>
+        <translation>Continuar</translation>
     </message>
 </context>
 <context>

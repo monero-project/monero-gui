@@ -1133,7 +1133,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Ulangi kata sandi baru</translation>
+        <translation>Ulangi kata sandi baru</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1148,7 +1148,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1533,7 +1533,7 @@ File cache dompet lama akan diganti namanya dan dapat dikembalikan nanti.</trans
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Berhenti jurik</translation>
+        <translation>Berhenti jurik</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2803,12 +2803,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Bahasa</translation>
+        <translation>Bahasa</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Lanjutkan</translation>
+        <translation>Lanjutkan</translation>
     </message>
 </context>
 <context>

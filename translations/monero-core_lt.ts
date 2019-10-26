@@ -1148,7 +1148,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Gerai</translation>
+        <translation>Gerai</translation>
     </message>
 </context>
 <context>
@@ -1534,7 +1534,7 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Sustabdyti jungtį</translation>
+        <translation>Sustabdyti jungtį</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2814,12 +2814,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Kalba</translation>
+        <translation>Kalba</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Tęsti</translation>
+        <translation>Tęsti</translation>
     </message>
 </context>
 <context>

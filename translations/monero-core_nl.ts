@@ -328,7 +328,7 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om te onthullen</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Portemonnee herstel-hoogte</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>Blok #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
@@ -1110,32 +1110,32 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer een nieuw wachtwoord in</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>wachtwoord van portemonnee</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtzin portemonneetoestel</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Voer %1 in voor:</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer %1 in</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Waarschuwing: het is een beveiligingsrisico om de wachtzin op de computer in te voeren, want dan kan die worden onderschept door malware. Het is veiliger om de wachtzin op het apparaat in te voeren.</translation>
+        <translation>Waarschuwing: het is een beveiligingsrisico om de wachtzin op de computer in te voeren, want dan kan die worden onderschept door malware. Het is veiliger om de wachtzin op het apparaat in te voeren.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1145,12 +1145,12 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Bevestig uw nieuwe wachtwoord</translation>
+        <translation>Bevestig uw nieuwe wachtwoord</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig wachtwoord van uw portemonnee apparaat</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1160,7 +1160,7 @@ Minen geeft u ook een kleine kans om Monero te verdienen. Uw computer zal nameli
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1303,7 +1303,7 @@ U kunt een blokhoogte of datum invoeren (JJJJ-MM-DD):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Herstelpunt (blokhoogte):</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1347,17 +1347,17 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tails:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>persistent</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>persistentie uitgeschakeld</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="369"/>
@@ -1511,7 +1511,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Node gebruikersnaam</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1522,7 +1522,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Node wachtwoord</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1547,7 +1547,7 @@ De naam van het oude cachebestand wordt gewijzigd, zodat het later kan worden he
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Stop node</translation>
+        <translation>Stop node</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2496,17 +2496,17 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit wachtwoord kan niet worden hersteld. Indien u deze vergeet dient de portemonnee te worden hersteld van uw %1.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hersteltekst (25 woorden)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>hardware portemonnee</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2547,7 +2547,10 @@ Voor een betalingsbewijs hoeft u het adres van de ontvanger niet op te geven.</t
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Controleer uw hardware portemonnee –
+invoer is wellicht vereist.</translation>
     </message>
 </context>
 <context>
@@ -2639,12 +2642,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Portemonnee herstelpunt (blokhoogte)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef deze bloknummer in als u in de toekomst uw portemonnee sneller wil herstellen. </translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2794,7 +2797,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander netwerk:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2830,12 +2833,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Taal</translation>
+        <translation>Taal</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Verder</translation>
     </message>
 </context>
 <context>
@@ -2853,7 +2856,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het gebruik van een externe node is een eenvoudige manier om Monero onmiddellijk te gebruiken (vandaar de naam bootstrap), maar wees alert dat het gebruikt van zulke externe nodes (inclusief de bootstrap-instelling) ervoor kan zorgen dan nodes je ip-adres kunnen volgen, je blokhoogte en blokinfo kunnen volgen en je eventueel foutieve informatie kunnen sturen om zo meer te weten te komen over je transacties. </translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3034,7 +3037,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel met QR Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3355,7 +3358,7 @@ Betalings-ID: </translation>
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Portemonee wordt gesloten......</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3389,7 +3392,7 @@ Vergoeding: </translation>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Transactie aanmaken...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3397,7 +3400,10 @@ Vergoeding: </translation>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Raadpleeg je portemonneetoestel
+je invoer is mogelijks vereist. </translation>
     </message>
     <message>
         <location filename="../main.qml" line="888"/>

@@ -328,7 +328,7 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>zum Anzeigen klicken</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungshöhe der Wallet</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>Block #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>fertiggestellt</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
@@ -1100,32 +1100,32 @@ Das Mining bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errec
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte gib ein neues Wallet-Passwort ein</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Wallet Passwort</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Passphrase der Hardware-Wallet</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte gebe %1 ein für: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte gebe %1 ein</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Warnung: Die Eingabe der Passphrase auf dem Host ist ein Sicherheitsrisiko, da es von Malware erfasst werden kann. Es wird empfohlen, die Passphrase auf dem Gerät (Device) einzugeben.</translation>
+        <translation>Warnung: Die Eingabe der Passphrase auf dem Host ist ein Sicherheitsrisiko, da es von Malware erfasst werden kann. Es wird empfohlen, die Passphrase auf dem Gerät (Device) einzugeben.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,12 +1135,12 @@ Das Mining bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errec
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Bitte neues Passwort bestätigen</translation>
+        <translation>Bitte neues Passwort bestätigen</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte bestätige die Passphrase der Hardware-Wallet</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1150,7 +1150,7 @@ Das Mining bietet dir die Möglichkeit, Monero zu verdienen. Dein Computer errec
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1293,7 +1293,7 @@ Du kannst eine Blockhöhe oder ein Datum (JJJJ-MM-TT) eingeben:</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungshöhe der Wallet:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1342,7 +1342,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>persistent</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
@@ -1501,7 +1501,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzername des Hintergrunddienstes</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1512,7 +1512,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Daemon Passwort</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1537,7 +1537,7 @@ Die alte Wallet-Cache-Datei wird umbenannt und kann später wiederhergestellt we
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Hintergrunddienst stoppen</translation>
+        <translation>Hintergrunddienst stoppen</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2487,17 +2487,17 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Passwort ist nicht wiederherstellbar. Falls du es vergisst, muss die Wallet von deinem %1 wiederhergestellt werden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mnemonischer Seed (bestehend aus 25 Wörtern)</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware-Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2538,7 +2538,10 @@ Für einen reinen Sendenachweis muss die Empfängeradresse nicht angegeben werde
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Bitte überprüfe deine Hardware-Wallet –
+deine Eingabe könnte erforderlich sein.</translation>
     </message>
 </context>
 <context>
@@ -2632,12 +2635,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellungshöhe der Wallet</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die zukünftige Wiederherstellung deiner Wallet geschieht schneller, wenn du diese Blocknummer angibst.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2787,7 +2790,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerk ändern:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2823,12 +2826,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Sprache</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Weiter</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -2846,7 +2849,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein temporärer Gebrauch von Drittanbieter-Nodes ist nützlich, um Monero unverzüglich zu verwenden (daher der Name Bootstrap). Beachte jedoch, dass Drittanbieter-Nodes (auch mit der Bootstrap-Einstellung) deine IP-Adresse nachverfolgen-, deine Wiederherstellungshöhe und zugehörige Blockanfragen ermitteln-, sowie dir verfälschte Informationen bereitstellen können, um mehr über deine Transaktionen herauszufinden.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3027,7 +3030,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit QR-Code wiederherstellen</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3321,7 +3324,7 @@ Wenn du keinen eigenen Node betreiben kannst, gibt es die Möglichkeit, sich mit
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wallet wird geschlossen...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3401,7 +3404,7 @@ Indizes der beteiligten Adressen: </translation>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Transaktion wird erstellt...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3409,7 +3412,10 @@ Indizes der beteiligten Adressen: </translation>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Bitte überprüfe deine Hardware-Wallet –
+deine Eingabe könnte erforderlich sein.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="888"/>

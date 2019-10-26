@@ -1133,7 +1133,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">कृपया नए कूटशब्द की पुष्टि करें</translation>
+        <translation>कृपया नए कूटशब्द की पुष्टि करें</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1148,7 +1148,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">ठीक</translation>
+        <translation>ठीक</translation>
     </message>
 </context>
 <context>

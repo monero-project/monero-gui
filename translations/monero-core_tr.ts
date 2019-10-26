@@ -1125,7 +1125,7 @@ Madencilik ayrıca size biraz Monero kazanma şansı veriyor. Bilgisayarınız b
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Uyarı: Ana bilgisayara parola girişi, kötü amaçlı yazılım tarafından yakalanabileceği için bir güvenlik riskidir. Cihaz tabanlı parola girişini tercih etmeniz önerilir.</translation>
+        <translation>Uyarı: Ana bilgisayara parola girişi, kötü amaçlı yazılım tarafından yakalanabileceği için bir güvenlik riskidir. Cihaz tabanlı parola girişini tercih etmeniz önerilir.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,7 +1135,7 @@ Madencilik ayrıca size biraz Monero kazanma şansı veriyor. Bilgisayarınız b
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Lütfen yeni şifreyi onaylayın</translation>
+        <translation>Lütfen yeni şifreyi onaylayın</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Madencilik ayrıca size biraz Monero kazanma şansı veriyor. Bilgisayarınız b
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Tamam</translation>
+        <translation>Tamam</translation>
     </message>
 </context>
 <context>
@@ -1537,7 +1537,7 @@ Aşağıdaki bilgiler silinecek
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Daemon&apos;u durdur</translation>
+        <translation>Daemon&apos;u durdur</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2813,12 +2813,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Dil</translation>
+        <translation>Dil</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Devam et</translation>
+        <translation>Devam et</translation>
     </message>
 </context>
 <context>

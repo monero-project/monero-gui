@@ -1125,7 +1125,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Avertisment: parola introdusă în gazdă este un risc de securitate deoarece poate fi înregistrată de aplicații malware. Este recomandat să introduceți parole de dispozitiv.</translation>
+        <translation>Avertisment: parola introdusă în gazdă este un risc de securitate deoarece poate fi înregistrată de aplicații malware. Este recomandat să introduceți parole de dispozitiv.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,7 +1135,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Confirmă noua parolă</translation>
+        <translation>Confirmă noua parolă</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ De asemenea, minând aveți o mică ocazie să câștigați niște Monero. Compu
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1537,7 +1537,7 @@ Vechiul fișier cache va fi redenumit și va putea fi restaurat mai tâziu.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Oprește serviciul</translation>
+        <translation>Oprește serviciul</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2819,12 +2819,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Limba</translation>
+        <translation>Limba</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Continuă</translation>
+        <translation>Continuă</translation>
     </message>
 </context>
 <context>

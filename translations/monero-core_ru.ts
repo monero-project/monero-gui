@@ -137,8 +137,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="392"/>
         <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Description</source>
-        <translation>
-&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Описание</translation>
+        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Описание</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="394"/>
@@ -329,12 +328,12 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
         <source>Address sent to</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес получателя</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1154"/>
@@ -510,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота восстановления кошелька</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>Блок #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -537,7 +536,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
@@ -605,7 +604,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="521"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="637"/>
@@ -615,7 +614,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="638"/>
         <source>K</source>
-        <translation type="unfinished"></translation>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="164"/>
@@ -648,7 +647,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="453"/>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="497"/>
@@ -658,7 +657,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="498"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="544"/>
@@ -668,7 +667,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="545"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="568"/>
@@ -678,7 +677,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="569"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="591"/>
@@ -688,7 +687,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="592"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="613"/>
@@ -698,7 +697,7 @@
     <message>
         <location filename="../LeftPanel.qml" line="614"/>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="661"/>
@@ -723,12 +722,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="662"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="686"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="708"/>
@@ -738,12 +737,12 @@
     <message>
         <location filename="../LeftPanel.qml" line="709"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="475"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
 </context>
 <context>
@@ -793,7 +792,7 @@
         <location filename="../pages/merchant/Merchant.qml" line="169"/>
         <location filename="../pages/merchant/Merchant.qml" line="650"/>
         <source>Currently monitoring incoming transactions, none found yet.</source>
-        <translation>В настоящее время отслеживаются входящие транзакции, пока таких не найдено</translation>
+        <translation>В настоящее время отслеживаются входящие транзакции, пока таких не найдено.</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="239"/>
@@ -1063,7 +1062,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="43"/>
         <source>Synchronizing</source>
-        <translation>Синхронизация...</translation>
+        <translation>Синхронизация</translation>
     </message>
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="45"/>
@@ -1093,7 +1092,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/NetworkStatusItem.qml" line="57"/>
         <source>Invalid connection status</source>
-        <translation>Недопустимый статус подключения.</translation>
+        <translation>Недопустимый статус подключения</translation>
     </message>
 </context>
 <context>
@@ -1101,32 +1100,32 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, введите новый пароль для кошелька</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>пароль кошелька</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>парольная фраза аппаратного кошелька</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите \ %1 для: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста введите %1</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Внимание: ввод ключевой фразе на компьютере — это риск безопасности, потому что она может быть записана вредоносным ПО. Рекомендуется вводить ключевую фразу на устройстве.</translation>
+        <translation>Внимание: ввод парольной фразы на компьютере представляет угрозу безопасности, поскольку может быть перехвачено вредоносным ПО. Рекомендуется использовать ввод парольной фразы на аппаратном устройстве.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1136,12 +1135,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Пожалуйста, подтвердите пароль</translation>
+        <translation>Пожалуйста, подтвердите новый пароль</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, подтвердите парольную фразу кошелька-устройства</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1151,7 +1150,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
@@ -1294,7 +1293,7 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Высота восстановления кошелька: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1338,17 +1337,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Хвосты: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>постоянный</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>длительное хранение данных отключено</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="369"/>
@@ -1502,7 +1501,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя демона</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1513,7 +1512,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль демона</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1538,7 +1537,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Остановить демон</translation>
+        <translation>Остановить демона</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -1581,7 +1580,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="90"/>
         <source>Logs out of this wallet.</source>
-        <translation>Выходит из текущего кошелька</translation>
+        <translation>Выходит из текущего кошелька.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1722,7 +1721,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Здесь устанавливается, какие из выходов известны как израсходованные, а следовательно, их нельзя использовать в качестве секретных заполнителей в кольцевых подписях.</translation>
+        <translation>Здесь устанавливается, какие из выходов известны как израсходованные, а следовательно, их нельзя использовать в качестве секретных заполнителей в кольцевых подписях. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="142"/>
@@ -2113,7 +2112,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="686"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>Кошелек не подключен к демону</translation>
+        <translation>Кошелек не подключен к демону.</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="64"/>
@@ -2397,8 +2396,7 @@ Ringsize: </source>
         <source>Generate a proof of your incoming/outgoing payment by supplying the transaction ID, the recipient address and an optional message. 
 For the case of outgoing payments, you can get a &apos;Spend Proof&apos; that proves the authorship of a transaction. In this case, you don&apos;t need to specify the recipient address.</source>
         <translation>Сгенерировать доказательство вашего входящего/исходящего платежа, предоставив ID транзакции, адрес получателя и необязательное описание. 
-Для исходящих платежей вы можете получить &apos;Доказательство траты&apos; (&apos;Spend Proof&apos;), которое подтвердит авторство транзакции. В этом случае вам не нужно указывать адрес получателя.
-</translation>
+Для исходящих платежей вы можете получить &apos;Доказательство траты&apos; (&apos;Spend Proof&apos;), которое подтвердит авторство транзакции. В этом случае вам не нужно указывать адрес получателя.</translation>
     </message>
     <message>
         <location filename="../pages/TxKey.qml" line="83"/>
@@ -2487,17 +2485,17 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Данный пароль не может быть восстановлен. Если вы забудете его, вам придется восстанавливать кошелек с помощью %1.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>25 слов мнемонической фразы</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>аппаратного кошелька</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2538,7 +2536,10 @@ For the case with Spend Proof, you don&apos;t need to specify the recipient addr
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Пожалуйста, проверьте свой аппаратный кошелек -
+может требоваться ваше подтсверждение.</translation>
     </message>
 </context>
 <context>
@@ -2630,12 +2631,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота восстановления кошелька</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для быстрого восстановления кошелька в будущем, укажите эту высоту блока перед сканированием.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2785,7 +2786,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить Сеть:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2821,12 +2822,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Язык</translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Продолжить</translation>
+        <translation>Продолжить</translation>
     </message>
 </context>
 <context>
@@ -2844,7 +2845,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Временное использование удаленных нод полезно для немедленного использования Monero (отсюда название &quot;начальной загрузки&quot;), однако помните, что при использовании удаленных узлов (включая настройку ноды начальной загрузки), узлы могут отслеживать ваш IP адрес, отслеживать вашу &quot;высоту восстановления&quot; и соответствующие данные запроса блока, и отправлять вам неточную информацию, чтобы узнать больше о совершаемых вами транзакциях.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3025,7 +3026,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить с помощью QR кода</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3182,7 +3183,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
         <location filename="../main.qml" line="342"/>
         <location filename="../main.qml" line="568"/>
         <source>Couldn&apos;t open wallet: </source>
-        <translation>Невозможно открыть кошелек:</translation>
+        <translation>Невозможно открыть кошелек: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="650"/>
@@ -3217,7 +3218,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="810"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
-        <translation>Невозможно создать транзакцию: Неверная версия демона:</translation>
+        <translation>Невозможно создать транзакцию: Неверная версия демона: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="821"/>
@@ -3266,7 +3267,7 @@ Amount: </source>
     <message>
         <location filename="../main.qml" line="2127"/>
         <source>Daemon will still be running in background when GUI is closed.</source>
-        <translation>Демон будет все еще запущен в фоновом режиме после закрытия GUI</translation>
+        <translation>Демон будет все еще запущен в фоновом режиме после закрытия GUI.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2129"/>
@@ -3326,7 +3327,7 @@ ID платежа: </translation>
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытие кошелька...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3390,7 +3391,7 @@ Spending address index: </source>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Создание транзакции...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3398,7 +3399,10 @@ Spending address index: </source>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Пожалуйста, проверьте ваш аппаратный кошелек –
+может требоваться ваше подтверждение.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="888"/>
@@ -3440,7 +3444,8 @@ your input may be required.</source>
         <location filename="../main.qml" line="1040"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
-        <translation>Невозможно сгенерировать доказательство по следующей причине:</translation>
+        <translation>Невозможно сгенерировать доказательство по следующей причине: 
+</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1070"/>
@@ -3457,7 +3462,7 @@ your input may be required.</source>
     <message>
         <location filename="../main.qml" line="1080"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
-        <translation>Этот адрес получил %1 XMR, с %2 подтверждениями</translation>
+        <translation>Этот адрес получил %1 XMR, с %2 подтверждениями.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1091"/>
@@ -3494,7 +3499,7 @@ your input may be required.</source>
     <message>
         <location filename="../main.qml" line="1504"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
-        <translation>Предупреждение: На устройстве доступно только %1 GB свободного пространства. Для хранения блокчейна требуется как минимум ~%2 GB. </translation>
+        <translation>Предупреждение: На устройстве доступно только %1 GB свободного пространства. Для хранения блокчейна требуется как минимум ~%2 GB.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1506"/>
