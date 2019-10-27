@@ -1125,7 +1125,7 @@ Rudarenje vam takođe omogućava malu šansu da zaradite neki Monero. Vaš raču
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Upozorenje: unos lozinke na hostu predstavlja bezbedonosni rizik kako se može ukrasti zlonamernim softverom. Preporučuje se da preferirate unos lozike na uređajima.</translation>
+        <translation>Upozorenje: unos lozinke na hostu predstavlja bezbedonosni rizik kako se može ukrasti zlonamernim softverom. Preporučuje se da preferirate unos lozike na uređajima.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,7 +1135,7 @@ Rudarenje vam takođe omogućava malu šansu da zaradite neki Monero. Vaš raču
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Potvrdite novu lozinku</translation>
+        <translation>Potvrdite novu lozinku</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Rudarenje vam takođe omogućava malu šansu da zaradite neki Monero. Vaš raču
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1536,7 +1536,7 @@ Stari fajl keša novčanika će biti preimenovan i može se povratiti kasnije.</
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Zaustavi daemon</translation>
+        <translation>Zaustavi daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2818,7 +2818,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Jezik</translation>
+        <translation>Jezik</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>

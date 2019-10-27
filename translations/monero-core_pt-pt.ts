@@ -1127,7 +1127,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Aviso: a inserção da palavra passe no computador é um risco de segurança visto que pode ser capturada por malware. É aconselhável dar preferência a palavras passe baseadas em dispositivos externos.</translation>
+        <translation>Aviso: a inserção da palavra passe no computador é um risco de segurança visto que pode ser capturada por malware. É aconselhável dar preferência a palavras passe baseadas em dispositivos externos.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1137,7 +1137,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Por favor confirme a nova palavra-chave</translation>
+        <translation>Por favor confirme a nova palavra-chave</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1152,7 +1152,7 @@ Minar também dá uma pequena possibilidade de ganhar algum Monero. O seu comput
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1539,7 +1539,7 @@ O ficheiro de cache antigo será renomeado e poderá ser restaurado mais tarde.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Parar daemon</translation>
+        <translation>Parar daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2820,12 +2820,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Idioma</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Continuar</translation>
+        <translation>Continuar</translation>
     </message>
 </context>
 <context>

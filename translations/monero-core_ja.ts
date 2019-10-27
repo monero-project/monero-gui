@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/Account.qml" line="92"/>
         <source>Total balance: </source>
-        <translation>残高合計：</translation>
+        <translation>残高合計： </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="115"/>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="375"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つからず、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
+        <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つからず、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="378"/>
@@ -142,7 +142,7 @@
     <message>
         <location filename="../pages/AddressBook.qml" line="394"/>
         <source>Add a name...</source>
-        <translation>名前を追加</translation>
+        <translation>名前を追加。。。</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="400"/>
@@ -242,7 +242,7 @@
     <message>
         <location filename="../pages/History.qml" line="159"/>
         <source>Search...</source>
-        <translation>検索</translation>
+        <translation>検索。。。</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="231"/>
@@ -328,7 +328,7 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>クリックして見せる</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
@@ -378,12 +378,12 @@
     <message>
         <location filename="../pages/History.qml" line="1574"/>
         <source>No results.</source>
-        <translation>なし</translation>
+        <translation>なし。</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1576"/>
         <source>%1 transactions total, showing %2.</source>
-        <translation>%1 個中 %2 個のトランザクション</translation>
+        <translation>%1 個中 %2 個のトランザクション。</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1594"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットを復元するブロック高</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>ブロック番</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -536,12 +536,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>完了</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
         <source>Mnemonic seed protected by hardware device.</source>
-        <translation>ハードウェアデバイスによって守られたニーモニックシード</translation>
+        <translation>ハードウェアデバイスによってニーモニックシードは守られています。</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="280"/>
@@ -903,7 +903,7 @@
     <message>
         <location filename="../pages/Mining.qml" line="65"/>
         <source>Your daemon must be synchronized before you can start mining</source>
-        <translation>マイニングを始める前にデーモンを同期しなければなりません。</translation>
+        <translation>マイニングを始める前にデーモンを同期しなければなりません</translation>
     </message>
     <message>
         <location filename="../pages/Mining.qml" line="99"/>
@@ -1100,32 +1100,32 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいウォレットのパスワードを入力してください</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットのパスワード</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットデバイスのパスフレーズ</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>これのために%1を入力してください</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1を入力してください</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">警告: ホストで入力したパスフレーズはマルウェアが盗聴する可能性がありセキュリティリスクとなります。デバイスでパスフレーズを入力することをおすすめします。</translation>
+        <translation>警告: ホストで入力したパスフレーズはマルウェアが盗聴する可能性がありセキュリティリスクとなります。デバイスでパスフレーズを入力することをおすすめします。</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,12 +1135,12 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">もう一度新しいパスワードを入力してください</translation>
+        <translation>もう一度新しいパスワードを入力してください</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットデバイスのパスワードを確認してください</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1150,7 +1150,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1283,7 +1283,7 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="224"/>
         <source>Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD</source>
-        <translation>不正なブロック高が指定されました。数値か YYYY-MM-DD という形式の日付でなければなりません。</translation>
+        <translation>不正なブロック高が指定されました。数値か YYYY-MM-DD という形式の日付でなければなりません</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="200"/>
@@ -1293,7 +1293,7 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>復元するブロック高：</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1337,17 +1337,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tails: </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>永続的</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>存続を無効にしました</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="369"/>
@@ -1400,7 +1400,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="115"/>
         <source>After </source>
-        <translation>あと</translation>
+        <translation>あと </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="164"/>
@@ -1501,7 +1501,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンのユーザー名</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1512,7 +1512,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>デーモンのパスワード</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1537,7 +1537,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">デーモンを停止</translation>
+        <translation>デーモンを停止</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -1676,7 +1676,7 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="332"/>
         <source>Change the password of your wallet.</source>
-        <translation>ウォレットのパスワードを変更してください</translation>
+        <translation>ウォレットのパスワードを変更してください。</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="338"/>
@@ -2137,12 +2137,12 @@ You can change the password in the wallet settings.</source>
     <message>
         <location filename="../pages/Transfer.qml" line="305"/>
         <source>Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed</source>
-        <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
+        <translation>アドレスは見つかりましたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="309"/>
         <source>No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed</source>
-        <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりませんでしたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります。</translation>
+        <translation>このOpenAliasアドレスに結びつけられた有効なアドレスが見つかりませんでしたが、DNSSEC署名が検証できませんでした。このアドレスは改ざんされている可能性があります</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="313"/>
@@ -2180,7 +2180,7 @@ You can change the password in the wallet settings.</source>
         <source>Connected daemon is not compatible with GUI. 
 Please upgrade or connect to another daemon</source>
         <translation>接続したデーモンはGUIと互換性がありません。
-アップグレードするか別のデーモンに接続してください。</translation>
+アップグレードするか別のデーモンに接続してください</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="235"/>
@@ -2343,12 +2343,12 @@ Ringsize: </source>
     <message>
         <location filename="../pages/Transfer.qml" line="686"/>
         <source>Wallet is not connected to daemon.</source>
-        <translation>ウォレットがデーモンに接続していません</translation>
+        <translation>ウォレットがデーモンに接続していません。</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="710"/>
         <source>Waiting on daemon synchronization to finish.</source>
-        <translation>デーモンの同期の終了を待っています</translation>
+        <translation>デーモンの同期の終了を待っています。</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="743"/>
@@ -2485,17 +2485,17 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>このパスワードを復元するのが不可能です。忘れてしまう場合は%1からウォレットを復元しなければなりません。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>25語のニーモニックシード</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>ハードウェアウォレット</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2523,12 +2523,12 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
     <message>
         <location filename="../wizard/WizardController.qml" line="447"/>
         <source>Please proceed to the device...</source>
-        <translation>デバイスで続行してください</translation>
+        <translation>デバイスで続行してください。。。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="451"/>
         <source>Creating wallet from device...</source>
-        <translation>デバイスからウォレットを作成しています</translation>
+        <translation>デバイスからウォレットを作成しています。。。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardController.qml" line="452"/>
@@ -2536,7 +2536,10 @@ Spend Proofの場合、宛先アドレスを指定する必要はありません
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+ハードウェアウォレットを確認してください
+入力する必要があるでしょう。</translation>
     </message>
 </context>
 <context>
@@ -2554,12 +2557,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="79"/>
         <source>Using a hardware device.</source>
-        <translation>ハードウェアデバイスを使用</translation>
+        <translation>ハードウェアデバイスを使用。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="93"/>
         <source>Create a new wallet from device.</source>
-        <translation>デバイスを用いて新しいウォレットを作成する</translation>
+        <translation>デバイスを用いて新しいウォレットを作成する。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateDevice1.qml" line="106"/>
@@ -2613,7 +2616,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="64"/>
         <source>Creates a new wallet on this computer.</source>
-        <translation>新しいウォレットをこのコンピュータに作成</translation>
+        <translation>新しいウォレットをこのコンピュータに作成。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="92"/>
@@ -2628,12 +2631,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットの復元するブロック高</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>将来にウォレットを復元する場合は、このブロック番を特定するともっと早く完了できます。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2743,7 +2746,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="88"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>ハードウェアウォレットを接続して新しいMoneroウォレットを作成</translation>
+        <translation>ハードウェアウォレットを接続して新しいMoneroウォレットを作成。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2753,7 +2756,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="108"/>
         <source>Import an existing .keys wallet file from your computer.</source>
-        <translation>コンピュータにある既存の.keysウォレットファイルをインポート</translation>
+        <translation>コンピュータにある既存の.keysウォレットファイルをインポート。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="126"/>
@@ -2763,7 +2766,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="127"/>
         <source>Enter your private keys or 25-word mnemonic seed to restore your wallet.</source>
-        <translation>ウォレットを復元するためのプライベートキーまたは25語のニーモニックシード</translation>
+        <translation>ウォレットを復元するためのプライベートキーまたは25語のニーモニックシード。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="143"/>
@@ -2783,7 +2786,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワークを変更：</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2801,7 +2804,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLang.qml" line="102"/>
         <source>Change the language of the Monero GUI.</source>
-        <translation>Monero GUIの言語を変更</translation>
+        <translation>Monero GUIの言語を変更。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLang.qml" line="197"/>
@@ -2819,12 +2822,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">言語</translation>
+        <translation>言語</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">次へ</translation>
+        <translation>次へ</translation>
     </message>
 </context>
 <context>
@@ -2842,7 +2845,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>Moneroをもうすぐ使いに初めにリモートノードの利用はいいですがリモートノードの使う時に他の人はアドレスを追跡し、復元を開始するブロック高を洞察し、不正確な情報を送信することで、あなたの取引の詳細をもっと洞察できますよ。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -2898,7 +2901,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="61"/>
         <source>Mode selection.</source>
-        <translation>モードの選択</translation>
+        <translation>モードの選択。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="62"/>
@@ -2914,7 +2917,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="71"/>
         <source>Easy access to sending, receiving and basic functionality.</source>
-        <translation>支払いや受け取り、基本的な機能への容易なアクセス</translation>
+        <translation>支払いや受け取り、基本的な機能への容易なアクセス。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="102"/>
@@ -2960,7 +2963,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="68"/>
         <source>Import an existing .keys wallet file from your computer.</source>
-        <translation>コンピュータにある既存の.keysウォレットファイルをインポート</translation>
+        <translation>コンピュータにある既存の.keysウォレットファイルをインポート。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="80"/>
@@ -2990,7 +2993,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="289"/>
         <source>Failed to fetch remote nodes from third-party server.</source>
-        <translation>サードパーティサーバーからのリモードノードの取得に失敗</translation>
+        <translation>サードパーティサーバーからのリモードノードの取得に失敗。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardOpenWallet1.qml" line="308"/>
@@ -3008,7 +3011,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="109"/>
         <source>Restore wallet from keys or mnemonic seed.</source>
-        <translation>キーまたはニーモニックシードからウォレットを復元</translation>
+        <translation>キーまたはニーモニックシードからウォレットを復元。</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="123"/>
@@ -3023,7 +3026,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>QRコードから復元</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3217,12 +3220,12 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="519"/>
         <source>Please proceed to the device...</source>
-        <translation>デバイスで続行してください</translation>
+        <translation>デバイスで続行してください。。。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="531"/>
         <source>Opening wallet ...</source>
-        <translation>ウォレットを開いています</translation>
+        <translation>ウォレットを開いています。。。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="556"/>
@@ -3348,7 +3351,7 @@ Amount: </source>
     <message>
         <location filename="../main.qml" line="1077"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
-        <translation>このアドレスは%1XMRを受け取りましたが、取引はまだ承認されていません。</translation>
+        <translation>このアドレスは%1XMRを受け取りましたが、取引はまだ承認されていません</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1080"/>
@@ -3358,7 +3361,7 @@ Amount: </source>
     <message>
         <location filename="../main.qml" line="1084"/>
         <source>This address received nothing</source>
-        <translation>このアドレスはこの取引において何も受け取っていません。</translation>
+        <translation>このアドレスはこの取引において何も受け取っていません</translation>
     </message>
     <message>
         <location filename="../main.qml" line="1103"/>
@@ -3401,7 +3404,7 @@ Payment ID: </source>
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>ウォレットを閉じています。。。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3419,7 +3422,7 @@ Fee: </source>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>トランザクションを作成しています。。。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3427,7 +3430,10 @@ Fee: </source>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+ハードウェアウォレットを確認してください
+入力する必要があるでしょう。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="888"/>
@@ -3437,7 +3443,7 @@ your input may be required.</source>
     <message>
         <location filename="../main.qml" line="978"/>
         <source>Sending transaction ...</source>
-        <translation>トランザクションを送信しています</translation>
+        <translation>トランザクションを送信しています。。。</translation>
     </message>
     <message>
         <location filename="../main.qml" line="987"/>
@@ -3548,7 +3554,7 @@ your input may be required.</source>
     <message>
         <location filename="../main.qml" line="2172"/>
         <source>New version of Monero is available. Check out getmonero.org</source>
-        <translation>新しいバージョンのMoneroが利用可能です。getmonero.orgをチェックしてください。</translation>
+        <translation>新しいバージョンのMoneroが利用可能です。getmonero.orgをチェックしてください</translation>
     </message>
     <message>
         <location filename="../main.qml" line="2263"/>

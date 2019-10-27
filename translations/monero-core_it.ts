@@ -328,7 +328,7 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca per mostrare</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
@@ -458,7 +458,7 @@
     <message>
         <location filename="../pages/History.qml" line="1671"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
-        <translation>Suggerimento: Utilizza il tuo software preferito per fogli di calcolo elettronici per ordinare in base all&apos; altezza del blocco</translation>
+        <translation>Suggerimento: utilizza il tuo software preferito per fogli di calcolo elettronici per ordinare in base all&apos;altezza del blocco.</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1675"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Altezza di ripristino portafoglio</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>blocco #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Eseguito</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
@@ -786,7 +786,7 @@
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="158"/>
         <source>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation>&lt;style&gt;p{font-size:14px;} &lt;/ style&gt;&lt;p&gt; Questa pagina scansionerà automaticamente la blockchain e il pool tx per le transazioni in entrata usando il codice QR.&lt;/p&gt;&lt;p&gt; Sta a te decidere se accettare transazioni non confermate o meno. È probabile che vengano confermate in breve tempo, ma c&apos;è ancora la possibilità che non lo siano, quindi per somme di valore più grandi sarebbe meglio aspettare una o più conferme.&lt;/p&gt;</translation>
+        <translation>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;Questa pagina scansionerà automaticamente la blockchain e il pool tx per le transazioni in entrata usando il codice QR.&lt;/p&gt;&lt;p&gt; Sta a te decidere se accettare transazioni non confermate o meno. È probabile che vengano confermate in breve tempo, ma c&apos;è anche la possibilità che non lo siano, quindi per somme di valore più elevato sarebbe meglio aspettare una o più conferme prima di accettare la transazione come valida.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../pages/merchant/Merchant.qml" line="169"/>
@@ -1100,32 +1100,32 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci una nuova password per il portafoglio</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>password per il portafoglio</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>passphrase per il dispositivo del portafoglio</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Prego inserire %1 per: </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego inserire %1</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Attenzione: l&apos;immissione della passphrase sull&apos;host costituisce un rischio di sicurezza dal momento che può venire catturata da un malware. Si consiglia di preferire l&apos;immissione della passphrase basata su dispositivo.</translation>
+        <translation>Attenzione: l&apos;immissione della passphrase sull&apos;host costituisce un rischio di sicurezza dal momento che può venire catturata da un malware. Si consiglia di preferire l&apos;immissione della passphrase basata su dispositivo.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,12 +1135,12 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Conferma la nuova password</translation>
+        <translation>Conferma la nuova password</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego confermare passphrase per il dispositivo del portafoglio</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1150,7 +1150,7 @@ Minare ti offre anche una piccola possibilità di guadagnare un po&apos; di Mone
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1293,7 +1293,7 @@ Puoi inserire un&apos;altezza di blocco o una data (AAAA-MM-GG):</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Altezza ripristino portafoglio:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1306,12 +1306,12 @@ The following information will be deleted
 The old wallet cache file will be renamed and can be restored later.
 </source>
         <translation>Sei sicuro di voler ricostruire la cache del portafoglio?
-	    Le seguenti informazioni verranno cancellate
-		- Indirizzo di recezione
-		- Chiavi Tx
-		- Descrizioni Tx
-		
-		La vecchia cache del wallet verrà rinominata e potrà essere ripristinata successivamente.
+Le seguenti informazioni verranno cancellate
+- Indirizzi di ricezione
+- Chiavi Tx
+- Descrizioni Tx
+
+La vecchia cache del wallet verrà rinominata e potrà essere ripristinata successivamente.
 	    </translation>
     </message>
     <message>
@@ -1337,17 +1337,17 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Code:</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>persistenza</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>persistenza disabilitata</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="369"/>
@@ -1400,7 +1400,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="115"/>
         <source>After </source>
-        <translation>Dopo</translation>
+        <translation>Dopo </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="164"/>
@@ -1502,7 +1502,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Username Demone</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1513,7 +1513,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Password per il demone</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1538,7 +1538,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Arresta daemon</translation>
+        <translation>Arresta daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -1548,7 +1548,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
         <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation>&lt;a href=&apos;#&apos;&gt; (cambia)&lt;/a&gt;</translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (cambia)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="395"/>
@@ -1625,7 +1625,7 @@ Puoi cambiare la password nelle impostazioni del portafoglio.</translation>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="212"/>
         <source>Store this information safely to recover your wallet in the future.</source>
-        <translation>Conserva queste informazioni in modo sicuro per recuperare il portafoglio in futuro.
+        <translation>Conserva queste informazioni in modo sicuro per recuperare il tuo portafoglio in futuro.
 </translation>
     </message>
     <message>
@@ -2306,43 +2306,50 @@ Please upgrade or connect to another daemon</source>
         <location filename="../pages/Transfer.qml" line="567"/>
         <source>
 Number of transactions: </source>
-        <translation>Numero di transazioni: </translation>
+        <translation>
+Numero di transazioni: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="569"/>
         <source>
 Transaction #%1</source>
-        <translation>Transazione #%1</translation>
+        <translation>
+Transazione #%1</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="570"/>
         <source>
 Recipient: </source>
-        <translation>Destinatario: </translation>
+        <translation>
+Destinatario: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="571"/>
         <source>
 payment ID: </source>
-        <translation>ID pagamento: </translation>
+        <translation>
+ID pagamento: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="572"/>
         <source>
 Amount: </source>
-        <translation>Ammontare: </translation>
+        <translation>
+Ammontare: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="573"/>
         <source>
 Fee: </source>
-        <translation>Commissione: </translation>
+        <translation>
+Commissione: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="574"/>
         <source>
 Ringsize: </source>
-        <translation>Dimensione anello: </translation>
+        <translation>
+Dimensione anello: </translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="588"/>
@@ -2479,17 +2486,17 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa password non può essere recuperata. Se è andata perduta, il portafoglio dovrà essere ripristinato dal tuo %1.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>Seed mnemonico di 25 parole</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>portafoglio hardware</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2530,7 +2537,10 @@ In caso di prova di spesa, non serve specificare l&apos;indirizzo del ricevente.
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Controlla il tuo portafoglio hardware -
+potrebbe essere richiesta una azione da parte tua.</translation>
     </message>
 </context>
 <context>
@@ -2617,17 +2627,17 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="130"/>
         <source>This seed is &lt;b&gt;very&lt;/b&gt; important to write down and keep secret. It is all you need to backup and restore your wallet.</source>
-        <translation>E&apos; molto importante prendere nota del seed e mantenerlo segreto. E&apos; tutto ciò di cui si ha bisogno per effettuare il backup ed il ripristino del proprio portafoglio.</translation>
+        <translation>È &lt;b&gt;molto importante&lt;/b&gt; prendere nota del seed e mantenerlo segreto. E&apos; tutto ciò di cui si ha bisogno per effettuare il backup ed il ripristino del proprio portafoglio.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Altezza di ripristino del portafoglio</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se dovessi ripristinare il tuo portafoglio in futuro, specificando questo numero di blocco ripristinerai il tuo portafoglio più rapidamente.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2737,7 +2747,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="88"/>
         <source>Connect your hardware wallet to create a new Monero wallet.</source>
-        <translation>Connetti il tuo portafoglio hardware per creare un nuovo portafoglio Monero</translation>
+        <translation>Connetti il tuo portafoglio hardware per creare un nuovo portafoglio Monero.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="107"/>
@@ -2777,7 +2787,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio Rete:</translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2813,12 +2823,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Lingua</translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Continua</translation>
+        <translation>Continua</translation>
     </message>
 </context>
 <context>
@@ -2836,7 +2846,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;utilizzo temporaneo di nodi remoti è utile per iniziare a usare immediatamente Monero (da qui il nome bootstrap), tuttavia tieni presente che quando si usano nodi remoti (incluso con l&apos;impostazione bootstrap), i nodi potrebbero tracciare il tuo indirizzo IP, tracciare la tua &quot;altezza di ripristino&quot; e i dati associati alla richiesta di blocchi, nonché  inviarti informazioni inesatte sulle transazioni effettuate.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -2874,7 +2884,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="100"/>
         <source>Remain aware of these limitations. &lt;b&gt;Users who prioritize privacy and decentralization must use a full node instead&lt;/b&gt;.</source>
-        <translation>Consapevoli di queste limitazioni. &lt;b&gt; Gli utenti che hanno come priorità privacy e decentralizzazione dovrebbero utilizzare un nodo completo&lt;/ b&gt;.</translation>
+        <translation>Consapevoli di queste limitazioni. &lt;b&gt;Gli utenti che hanno come priorità privacy e decentralizzazione dovrebbero utilizzare un nodo completo&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeRemoteNodeWarning.qml" line="104"/>
@@ -3017,7 +3027,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina da QR Code</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3191,7 +3201,7 @@ Se non si ha la possibilità di operare un proprio nodo locale, ci si può conne
         <source>Please confirm transaction:
 </source>
         <translation>Conferma transazione:
-		</translation>
+</translation>
     </message>
     <message>
         <location filename="../main.qml" line="836"/>
@@ -3229,7 +3239,7 @@ Ammontare: </translation>
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiusura portafoglio...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3313,7 +3323,8 @@ Ammontare: </translation>
         <location filename="../main.qml" line="838"/>
         <source>
 Ringsize: </source>
-        <translation>Dimensione anello: </translation>
+        <translation>
+Dimensione anello: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="839"/>
@@ -3341,7 +3352,7 @@ Indice indirizzo di spesa: </translation>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione transazione...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3349,7 +3360,10 @@ Indice indirizzo di spesa: </translation>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Controlla il tuo portafoglio hardware -
+potrebbe essere richiesta una azione da parte tua.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="951"/>
@@ -3493,7 +3507,8 @@ ID pagamento: </translation>
         <location filename="../main.qml" line="954"/>
         <source>
 Fee: </source>
-        <translation>Commissione: </translation>
+        <translation>
+Commissione: </translation>
     </message>
     <message>
         <location filename="../main.qml" line="888"/>
@@ -3514,7 +3529,7 @@ Fee: </source>
     <message>
         <location filename="../main.qml" line="997"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Moneroj inviati con successo: %1 transazione/i</translation>
+        <translation>Moneroj inviati con successo: %1 transazione/i </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1602"/>

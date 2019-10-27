@@ -16,7 +16,7 @@
     <message>
         <location filename="../pages/Account.qml" line="92"/>
         <source>Total balance: </source>
-        <translation>Solde total :</translation>
+        <translation>Solde total : </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="115"/>
@@ -27,7 +27,7 @@
     <message>
         <location filename="../pages/Account.qml" line="125"/>
         <source>Total unlocked balance: </source>
-        <translation>Solde total déverrouillé :</translation>
+        <translation>Solde total déverrouillé : </translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="163"/>
@@ -328,7 +328,7 @@
     <message>
         <location filename="../pages/History.qml" line="1101"/>
         <source>Click to reveal</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour révéler</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="1131"/>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../pages/Keys.qml" line="106"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur de restauration du portefeuille</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="122"/>
         <source>Block #</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloc #</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="187"/>
@@ -536,7 +536,7 @@
     <message>
         <location filename="../pages/Keys.qml" line="250"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fait</translation>
     </message>
     <message>
         <location filename="../pages/Keys.qml" line="270"/>
@@ -1100,32 +1100,32 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/PasswordDialog.qml" line="143"/>
         <source>Please enter new wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrer le mot de passe du nouveau portefeuille</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet password</source>
-        <translation type="unfinished"></translation>
+        <translation>mot de passe du portefeuille</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="145"/>
         <source>wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>mot de passe du portefeuille matériel</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1 for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer %1 pour : </translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="146"/>
         <source>Please enter %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez entrer %1</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Attention : la saisie d&apos;un mot de passe sur un ordinateur est un risque de sécurité car il peut être capturé par un programme malveillant. Il est recommandé de favoriser la saisie d&apos;un mot de passe sur le périphérique.</translation>
+        <translation>Attention : la saisie d&apos;un mot de passe sur un ordinateur est un risque de sécurité car il peut être capturé par un programme malveillant. Il est recommandé de favoriser la saisie d&apos;un mot de passe sur le périphérique.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,12 +1135,12 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Veuillez confirmer votre nouveau mot de passe</translation>
+        <translation>Veuillez confirmer votre nouveau mot de passe</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm wallet device passphrase</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez confirmer le mot de passe du portefeuille matériel</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="393"/>
@@ -1150,7 +1150,7 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1158,7 +1158,7 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../components/ProgressBar.qml" line="38"/>
         <source>%1 blocks remaining: </source>
-        <translation>%1 blocs restants: </translation>
+        <translation>%1 blocs restants : </translation>
     </message>
     <message>
         <location filename="../components/ProgressBar.qml" line="72"/>
@@ -1256,22 +1256,22 @@ L&apos;extraction minière vous offre également une petite chance de gagner que
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="70"/>
         <source>GUI version: </source>
-        <translation>Version de la GUI :</translation>
+        <translation>Version de la GUI : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="100"/>
         <source>Embedded Monero version: </source>
-        <translation>Version embarquée de Monero :</translation>
+        <translation>Version embarquée de Monero : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="130"/>
         <source>Wallet path: </source>
-        <translation>Chemin du portefeuille :</translation>
+        <translation>Chemin du portefeuille : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="178"/>
         <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation>&lt;a href=&apos;#&apos;&gt; (Cliquer pour changer)&lt;/a&gt;</translation>
+        <translation> &lt;a href=&apos;#&apos;&gt; (Cliquer pour changer)&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="180"/>
@@ -1293,7 +1293,7 @@ Vous pouvez entrer une hauteur de bloc ou une date (AAAA-MM-JJ) :</translation>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="168"/>
         <source>Wallet restore height: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur de restauration du portefeuille : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="201"/>
@@ -1322,7 +1322,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="258"/>
         <source>Wallet log path: </source>
-        <translation>Chemin des journaux du portefeuille :</translation>
+        <translation>Chemin des journaux du portefeuille : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="289"/>
@@ -1337,17 +1337,17 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="354"/>
         <source>Tails: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tails : </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistent</source>
-        <translation type="unfinished"></translation>
+        <translation>persistance</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="362"/>
         <source>persistence disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>persistance désactivée</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="369"/>
@@ -1400,7 +1400,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="115"/>
         <source>After </source>
-        <translation>Après</translation>
+        <translation>Après </translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsLayout.qml" line="164"/>
@@ -1466,7 +1466,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="136"/>
         <source>The blockchain is downloaded to your computer. Provides higher security and requires more local storage.</source>
-        <translation>La chaîne de blocs est téléchargée sur votre ordinateur. Assure une sécurité accrue et nécessite plus d&apos;espace de stockage</translation>
+        <translation>La chaîne de blocs est téléchargée sur votre ordinateur. Assure une sécurité accrue et nécessite plus d&apos;espace de stockage.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="219"/>
@@ -1501,7 +1501,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="317"/>
         <source>Daemon username</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d&apos;utilisateur du démon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="319"/>
@@ -1512,7 +1512,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="328"/>
         <source>Daemon password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe du démon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="330"/>
@@ -1537,7 +1537,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Arrêter démon</translation>
+        <translation>Arrêter démon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -1580,7 +1580,7 @@ L&apos;ancien fichier du cache du portefeuille sera renommé et pourra être res
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="90"/>
         <source>Logs out of this wallet.</source>
-        <translation>Déconnexion de ce portefeuille</translation>
+        <translation>Déconnexion de ce portefeuille.</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsWallet.qml" line="96"/>
@@ -1699,7 +1699,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../pages/SharedRingDB.qml" line="104"/>
         <source>This page allows you to interact with the shared ring database. This database is meant for use by Monero wallets as well as wallets from Monero clones which reuse the Monero keys.</source>
-        <translation>Cette page vous permet d&apos;utiliser le base de données partagée de cercles. Cette base de données sert aux portefeuilles Monero et les portefeuilles des clones de Monero qui réutilisent les clés Monero</translation>
+        <translation>Cette page vous permet d&apos;utiliser la base de données partagée de cercles. Cette base de données sert aux portefeuilles Monero et aux portefeuilles des clones de Monero qui réutilisent les clés Monero.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="117"/>
@@ -1716,13 +1716,12 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../pages/SharedRingDB.qml" line="120"/>
         <source>In order to obscure which inputs in a Monero transaction are being spent, a third party should not be able to tell which inputs in a ring are already known to be spent. Being able to do so would weaken the protection afforded by ring signatures. If all but one of the inputs are known to be already spent, then the input being actually spent becomes apparent, thereby nullifying the effect of ring signatures, one of the three main layers of privacy protection Monero uses.&lt;br&gt;To help transactions avoid those inputs, a list of known spent ones can be used to avoid using them in new transactions. Such a list is maintained by the Monero project and is available on the getmonero.org website, and you can import this list here.&lt;br&gt;Alternatively, you can scan the blockchain (and the blockchain of key-reusing Monero clones) yourself using the monero-blockchain-mark-spent-outputs tool to create a list of known spent outputs.&lt;br&gt;</source>
-        <translation>Afin de masquer quelles entrées d&apos;une transaction monero sont dépensées, un tiers ne doit pas pouvoir dire quelles entrées d&apos;un cercle ont déjà été dépensées. En être capable affaiblirait la protection apportée par les signatures de cercle. Si toutes les entrées sauf une sont des dépenses connues, alors l&apos;entrée en cours de dépense devient visible, annulant ainsi les effets des signatures de cercle, l&apos;un des trois piliers de la protection de la confidentialité utilisés pas Monero.&lt;br&gt;Pour permettre aux transactions d&apos;éviter ces entrées, une liste de celles qui sont connues peut être utilisée afin d&apos;éviter de les employer dans de nouvelles transactions. Une telle liste est maintenue par le projet Monero et est disponible sur le site getmonero.org. Vous pouvez importer cette liste ici.&lt;br&gt;Sinon, vous pouvez scanner la chaîne de blocs (et la chaîne de blocs des clones de Monero réutilisant les clefs) vous-même en utilisant l&apos;outil monero-blockchain-mark-spent-outputs pour créer une liste de sorties dépensées connue.</translation>
+        <translation>Afin de masquer quelles entrées d&apos;une transaction monero sont dépensées, un tiers ne doit pas pouvoir dire quelles entrées d&apos;un cercle ont déjà été dépensées. En être capable affaiblirait la protection apportée par les signatures de cercle. Si toutes les entrées sauf une sont des dépenses connues, alors l&apos;entrée en cours de dépense devient visible, annulant ainsi les effets des signatures de cercle, l&apos;un des trois piliers de la protection de la confidentialité utilisés pas Monero.&lt;br&gt;Pour permettre aux transactions d&apos;éviter ces entrées, une liste de celles qui sont connues peut être utilisée afin d&apos;éviter de les employer dans de nouvelles transactions. Une telle liste est maintenue par le projet Monero et est disponible sur le site getmonero.org. Vous pouvez importer cette liste ici.&lt;br&gt;Sinon, vous pouvez scanner la chaîne de blocs (et la chaîne de blocs des clones de Monero réutilisant les clefs) vous-même en utilisant l&apos;outil monero-blockchain-mark-spent-outputs pour créer une liste de sorties dépensées connue.&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="141"/>
         <source>This sets which outputs are known to be spent, and thus not to be used as privacy placeholders in ring signatures. </source>
-        <translation>Cela indique quelles sorties sont des dépenses connues et ne doivent donc pas être utilisées comme substituts de confidentialité dans les signatures de cercle.
-</translation>
+        <translation>Cela indique quelles sorties sont des dépenses connues et ne doivent donc pas être utilisées comme substituts de confidentialité dans les signatures de cercle. </translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="142"/>
@@ -1793,7 +1792,7 @@ Vous pouvez changer le mot de passe dans les réglages du portefeuille.</transla
     <message>
         <location filename="../pages/SharedRingDB.qml" line="279"/>
         <source>This records rings used by outputs spent on Monero on a key reusing chain, so that the same ring may be reused to avoid privacy issues.</source>
-        <translation>Enregistrer des cercles utilisés par des sorties dépensées sur une chaîne qui réutilise des clés Monero pour que le même cercle puisse être utilisé pour éviter des problèmes de confidentialité</translation>
+        <translation>Enregistrer des cercles utilisés par des sorties dépensées sur une chaîne qui réutilise des clés Monero pour que le même cercle puisse être utilisé pour éviter des problèmes de confidentialité.</translation>
     </message>
     <message>
         <location filename="../pages/SharedRingDB.qml" line="290"/>
@@ -2486,17 +2485,17 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>This password cannot be recovered. If you forget it then the wallet will have to be restored from your %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce mot de passe ne peut pas être récupéré. Si vous l&apos;oubliez le portefeuille devra être restauré à partir de votre %1.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>25 word mnemonic seed</source>
-        <translation type="unfinished"></translation>
+        <translation>phrase mnémonique de 25 mots</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="86"/>
         <source>hardware wallet</source>
-        <translation type="unfinished"></translation>
+        <translation>portefeuille matériel</translation>
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
@@ -2537,7 +2536,10 @@ Pour le cas d&apos;une preuve de dépense, il n&apos;est pas nécessaire de spé
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Veuillez vérifier votre portefeuille matériel -
+votre contribution peut être nécessaire.</translation>
     </message>
 </context>
 <context>
@@ -2629,12 +2631,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="152"/>
         <source>Wallet restore height</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur de restauration du portefeuille</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="187"/>
         <source>Should you restore your wallet in the future, specifying this block number will recover your wallet quicker.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous devez restaurer votre portefeuille dans le futur, spécifier ce numéro de bloc permettra de récupérer votre portefeuille plus rapidement.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="195"/>
@@ -2784,7 +2786,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardHome.qml" line="190"/>
         <source>Change Network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le réseau : </translation>
     </message>
     <message>
         <location filename="../wizard/WizardHome.qml" line="219"/>
@@ -2820,12 +2822,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Langue</translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Continuer</translation>
+        <translation>Continuer</translation>
     </message>
 </context>
 <context>
@@ -2843,7 +2845,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="84"/>
         <source>Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your &quot;restore height&quot; and associated block request data, and send you inaccurate information to learn more about transactions you make.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;usage temporaire de noeuds distants est utile pour utiliser Monero immédiatement (d&apos;où le nom amorçage), cependant sachez que lorsque vous utilisez des noeuds distants (y compris avec l&apos;option amorçage), ces noeuds pourront traquer votre adresse IP, votre &quot;hauteur de restauration&quot; et les requêtes de blocs associées, et vous envoyer de mauvaises informations pour en apprendre plus sur les transactions que vous effectuez.</translation>
     </message>
     <message>
         <location filename="../wizard/WizardModeBootstrap.qml" line="97"/>
@@ -3024,7 +3026,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="149"/>
         <source>Restore from QR Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer à partir d&apos;un code QR</translation>
     </message>
     <message>
         <location filename="../wizard/WizardRestoreWallet1.qml" line="214"/>
@@ -3282,7 +3284,7 @@ Frais : </translation>
     <message>
         <location filename="../main.qml" line="314"/>
         <source>Closing wallet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermeture du portefeuille...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="440"/>
@@ -3358,7 +3360,7 @@ Indice d&apos;adresse de dépense : </translation>
     <message>
         <location filename="../main.qml" line="862"/>
         <source>Creating transaction...</source>
-        <translation type="unfinished"></translation>
+        <translation>Création de la transaction...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="863"/>
@@ -3366,7 +3368,10 @@ Indice d&apos;adresse de dépense : </translation>
 
 Please check your hardware wallet –
 your input may be required.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Veuillez vérifier votre portefeuille matériel -
+votre contribution peut être nécessaire.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="978"/>
@@ -3376,7 +3381,7 @@ your input may be required.</source>
     <message>
         <location filename="../main.qml" line="997"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
-        <translation>Monero envoyé avec succès: %1 transaction(s) </translation>
+        <translation>Monero envoyé avec succès : %1 transaction(s) </translation>
     </message>
     <message>
         <location filename="../main.qml" line="1037"/>

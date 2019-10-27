@@ -1135,7 +1135,7 @@ Mining giver dig også en lille chance for at tjene nogen Monero. Din computer v
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Venligst bekræft nye kodeord</translation>
+        <translation>Venligst bekræft nye kodeord</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Mining giver dig også en lille chance for at tjene nogen Monero. Din computer v
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1535,7 +1535,7 @@ The old wallet cache file will be renamed and can be restored later.
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Stop daemon</translation>
+        <translation>Stop daemon</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2597,7 +2597,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="63"/>
         <source>Create a new wallet</source>
-        <translation type="unfinished">Opret ny tegnebog</translation>
+        <translation>Opret ny tegnebog</translation>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet1.qml" line="64"/>
@@ -2808,12 +2808,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Sprog</translation>
+        <translation>Sprog</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Fortsæt</translation>
+        <translation>Fortsæt</translation>
     </message>
 </context>
 <context>
@@ -2923,7 +2923,7 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="141"/>
         <source>Change language</source>
-        <translation type="unfinished">Vælg sprog</translation>
+        <translation>Vælg sprog</translation>
     </message>
 </context>
 <context>

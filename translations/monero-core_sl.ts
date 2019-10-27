@@ -1135,7 +1135,7 @@ Z rudarjenjem imate tudi majhno možnost da zaslužite Monero. Vaš računalnik 
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Potrdi novo geslo</translation>
+        <translation>Potrdi novo geslo</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Z rudarjenjem imate tudi majhno možnost da zaslužite Monero. Vaš računalnik 
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1536,7 +1536,7 @@ Stara datoteka predpomnilnika denarnice bo preimenovana in se jo lahko obnovi po
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Ustavi prikriti proces</translation>
+        <translation>Ustavi prikriti proces</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2816,12 +2816,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Jezik</translation>
+        <translation>Jezik</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Nadaljuj</translation>
+        <translation>Nadaljuj</translation>
     </message>
 </context>
 <context>
@@ -3255,7 +3255,7 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
     <message>
         <location filename="../main.qml" line="519"/>
         <source>Please proceed to the device...</source>
-        <translation type="unfinished">Prosim nadaljujte na napravi...</translation>
+        <translation>Prosim nadaljujte na napravi...</translation>
     </message>
     <message>
         <location filename="../main.qml" line="531"/>

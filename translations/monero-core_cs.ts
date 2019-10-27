@@ -6,12 +6,12 @@
     <message>
         <location filename="../pages/Account.qml" line="53"/>
         <source>Set the label of the selected account:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pojmenujte vybraný účet:</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="85"/>
         <source>Balance All</source>
-        <translation type="unfinished"></translation>
+        <translation>Zůstatky</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="92"/>
@@ -32,7 +32,7 @@
     <message>
         <location filename="../pages/Account.qml" line="163"/>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Účty</translation>
     </message>
     <message>
         <location filename="../pages/Account.qml" line="255"/>
@@ -1133,7 +1133,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Prosím, potvrďte nové heslo</translation>
+        <translation>Prosím, potvrďte nové heslo</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1148,7 +1148,7 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -1534,7 +1534,7 @@ Starý soubor s cache pamětí bude přejmenován a může být následně obnov
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Zastavit démona</translation>
+        <translation>Zastavit démona</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2820,12 +2820,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Jazyk</translation>
+        <translation>Jazyk</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Pokračovat</translation>
+        <translation>Pokračovat</translation>
     </message>
 </context>
 <context>

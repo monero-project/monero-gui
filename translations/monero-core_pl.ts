@@ -1125,7 +1125,7 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/PasswordDialog.qml" line="158"/>
         <source>Warning: passphrase entry on host is a security risk as it can be captured by malware. It is advised to prefer device-based passphrase entry.</source>
-        <translation type="unfinished">Ostrzeżenie: Wpisanie hasła na komputerze jest ryzykiem bezpieczeństwa, ponieważ może zostać przechwycone przez malware. Polecane jest wpisanie hasła na sprzętowym portfelu.</translation>
+        <translation>Ostrzeżenie: Wpisanie hasła na komputerze jest ryzykiem bezpieczeństwa, ponieważ może zostać przechwycone przez malware. Polecane jest wpisanie hasła na sprzętowym portfelu.</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="187"/>
@@ -1135,7 +1135,7 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
         <source>Please confirm new password</source>
-        <translation type="unfinished">Potwierdź nowe hasło</translation>
+        <translation>Potwierdź nowe hasło</translation>
     </message>
     <message>
         <location filename="../components/PasswordDialog.qml" line="290"/>
@@ -1150,7 +1150,7 @@ Kopanie także daje ci małą szansę, zarobić trochę Monero. Twój komputer b
     <message>
         <location filename="../components/PasswordDialog.qml" line="410"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -1536,7 +1536,7 @@ Poprzednia pamięć podręczna portfela zostanie zapisana pod inną nazwą i mo�
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="375"/>
         <source>Stop daemon</source>
-        <translation type="unfinished">Zatrzymaj demona</translation>
+        <translation>Zatrzymaj demona</translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="394"/>
@@ -2818,12 +2818,12 @@ your input may be required.</source>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="161"/>
         <source>Language</source>
-        <translation type="unfinished">Język</translation>
+        <translation>Język</translation>
     </message>
     <message>
         <location filename="../wizard/WizardLanguage.qml" line="171"/>
         <source>Continue</source>
-        <translation type="unfinished">Dalej</translation>
+        <translation>Dalej</translation>
     </message>
 </context>
 <context>
