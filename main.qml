@@ -1569,14 +1569,12 @@ ApplicationWindow {
         states: [
             State {
                 name: "wizard"
-                PropertyChanges { target: leftPanel; visible: false }
                 PropertyChanges { target: middlePanel; visible: false }
                 PropertyChanges { target: wizard; visible: true }
                 PropertyChanges { target: resizeArea; visible: true }
                 PropertyChanges { target: titleBar; state: "essentials" }
             }, State {
                 name: "normal"
-                PropertyChanges { target: leftPanel; visible: true }
                 PropertyChanges { target: middlePanel; visible: true }
                 PropertyChanges { target: wizard; visible: false }
                 PropertyChanges { target: resizeArea; visible: true }
@@ -1589,6 +1587,7 @@ ApplicationWindow {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.bottom: parent.bottom
+            visible: rootItem.state == "normal" && middlePanel.state != "Merchant"
 
             onTransferClicked: {
                 middlePanel.state = "Transfer";
