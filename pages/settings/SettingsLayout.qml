@@ -72,6 +72,7 @@ Rectangle {
             id: themeCheckbox
             checked: !MoneroComponents.Style.blackTheme
             text: qsTr("Light theme") + translationManager.emptyString
+            toggleOnClick: false
             onClicked: {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
                 persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;

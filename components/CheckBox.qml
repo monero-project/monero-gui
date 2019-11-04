@@ -40,6 +40,7 @@ Item {
     property string uncheckedIcon
     property int imgWidth: 13
     property int imgHeight: 13
+    property bool toggleOnClick: true
     property bool checked: false
     property alias background: backgroundRect.color
     property bool border: true
@@ -51,7 +52,9 @@ Item {
     width: checkBoxLayout.width
 
     function toggle(){
-        checkBox.checked = !checkBox.checked
+        if (checkBox.toggleOnClick) {
+            checkBox.checked = !checkBox.checked
+        }
         checkBox.clicked()
     }
 
