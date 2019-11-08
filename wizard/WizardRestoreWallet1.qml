@@ -185,7 +185,7 @@ Rectangle {
                         }
                     }
 
-                    TextArea {
+                    MoneroComponents.InputMulti {
                         id: seedInput
                         property bool error: false
                         width: parent.width

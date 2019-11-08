@@ -455,7 +455,7 @@ Item {
                         width: 220
                         source: "qrc:///images/merchant/input_box.png"
 
-                        TextField {
+                        MoneroComponents.Input {
                             id: amountToReceive
                             topPadding: 0
                             leftPadding: 10

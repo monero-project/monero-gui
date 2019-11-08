@@ -150,7 +150,7 @@ ColumnLayout {
             color: MoneroComponents.Style.defaultFontColor
         }
 
-        TextField {
+        MoneroComponents.Input {
             id: passwordInput
 
             Layout.topMargin: 6
@@ -207,7 +207,7 @@ ColumnLayout {
             color: MoneroComponents.Style.defaultFontColor
         }
 
-        TextField {
+        MoneroComponents.Input {
             id : passwordInputConfirm
             
             Layout.topMargin: 6

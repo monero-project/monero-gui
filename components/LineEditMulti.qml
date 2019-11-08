@@ -80,9 +80,6 @@ ColumnLayout {
     property alias readOnly: input.readOnly
     property bool copyButton: false
     property bool pasteButton: false
-    property var onPaste: function(clipboardText) {
-        item.text = clipboardText;
-    }
     property bool showingHeader: labelText != "" || copyButton || pasteButton
     property var wrapMode: Text.NoWrap
     property alias addressValidation: input.addressValidation
@@ -146,7 +143,10 @@ ColumnLayout {
 
             MoneroComponents.LabelButton {
                 id: pasteButtonId
-                onClicked: item.onPaste(clipboard.text())
+                onClicked: {
+                    input.clear();
+                    input.paste();
+                }
                 text: qsTr("Paste") + translationManager.emptyString
                 visible: pasteButton
             }

@@ -187,7 +187,7 @@ Item {
                 text: qsTr("CAPSLOCKS IS ON.") + translationManager.emptyString;
             }
 
-            TextField {
+            MoneroComponents.Input {
                 id: passwordInput1
                 Layout.topMargin: 6
                 Layout.fillWidth: true
@@ -296,7 +296,7 @@ Item {
                 color: MoneroComponents.Style.defaultFontColor
             }
 
-            TextField {
+            MoneroComponents.Input {
                 id: passwordInput2
                 visible: !passwordDialogMode
                 Layout.topMargin: 6

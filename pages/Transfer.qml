@@ -257,18 +257,14 @@ Rectangle {
                   appWindow.showPageRequest("AddressBook");
               }
               pasteButton: true
-              onPaste: function(clipboardText) {
-                  const parsed = walletManager.parse_uri_to_object(clipboardText);
+              onTextChanged: {
+                  const parsed = walletManager.parse_uri_to_object(text);
                   if (!parsed.error) {
                     addressLine.text = parsed.address;
                     setPaymentId(parsed.payment_id);
                     amountLine.text = parsed.amount;
                     setDescription(parsed.tx_description);
-                  } else {
-                     addressLine.text = clipboardText; 
                   }
-              }
-              onTextChanged: {
                   warningLongPidTransfer = isLongPidService(text);
               }
               inlineButton.text: FontAwesome.qrcode
