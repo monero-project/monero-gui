@@ -12,6 +12,7 @@
         <file>images/plus-white.png</file>
         <file>images/plus-white@2x.png</file>
         <file>components/Label.qml</file>
+        <file>components/SettingsListItem.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
