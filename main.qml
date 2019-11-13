@@ -86,8 +86,8 @@ ApplicationWindow {
     property bool themeTransition: false
 
     // fiat price conversion
-    property int fiatPriceXMRUSD: 0
-    property int fiatPriceXMREUR: 0
+    property real fiatPriceXMRUSD: 0
+    property real fiatPriceXMREUR: 0
     property var fiatPriceAPIs: {
         return {
             "kraken": {
