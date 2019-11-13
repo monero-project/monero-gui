@@ -53,6 +53,8 @@ Item {
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
+    property alias copyButtonText: copyButtonId.text
+    property alias copyButtonEnabled: copyButtonId.enabled
 
     property bool borderDisabled: false
     property string borderColor: {
