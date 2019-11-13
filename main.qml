@@ -1241,17 +1241,32 @@ ApplicationWindow {
         Prices.getJSON(url);
     }
 
-    function fiatApiUpdateBalance(balance){
-        // update balance card
+    function fiatApiCurrencySymbol() {
+        switch (persistentSettings.fiatPriceCurrency) {
+            case "xmrusd":
+                return "USD";
+            case "xmreur":
+                return "EUR";
+            default:
+                console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
+                return "UNSUPPORTED";
+        }
+    }
+
+    function fiatApiConvertToFiat(amount) {
         var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
         if(ticker <= 0){
-            console.log(fiatApiError("Could not update balance card; invalid ticker value"));
-            leftPanel.balanceFiatString = "?.??";
-            return;
+            console.log(fiatApiError("Invalid ticker value: " + ticker));
+            return "?.??";
         }
+        return (amount * ticker).toFixed(2);
+    }
+
+    function fiatApiUpdateBalance(balance){
+        // update balance card
         var bFiat = "?.??"
         if (!hideBalanceForced && !persistentSettings.hideBalance) {
-            bFiat = (balance * ticker).toFixed(2);
+            bFiat = fiatApiConvertToFiat(balance);
         }
         leftPanel.balanceFiatString = bFiat;
     }
