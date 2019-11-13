@@ -57,11 +57,22 @@ TextArea {
     onTextChanged: {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
+            if (textArea.text.startsWith("monero:")) {
+                error = false;
+                return;
+            }
             textArea.text = textArea.text.replace(/[^a-z0-9.@\-]/gi,'');
             var address_ok = TxUtils.checkAddress(textArea.text, appWindow.persistentSettings.nettype) || TxUtils.isValidOpenAliasAddress(textArea.text);
             if(!address_ok) error = true;
             else error = false;
             TextArea.cursorPosition = textArea.text.length;
+        }
+    }
+
+    MoneroComponents.ContextMenu {
+        onPaste: {
+            textArea.clear();
+            textArea.paste();
         }
     }
 }

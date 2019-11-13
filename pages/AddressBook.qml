@@ -325,8 +325,8 @@ Rectangle {
                 wrapMode: Text.WrapAnywhere
                 addressValidation: true
                 pasteButton: true
-                onPaste: function(clipboardText) {
-                    const parsed = walletManager.parse_uri_to_object(clipboardText);
+                onTextChanged: {
+                    const parsed = walletManager.parse_uri_to_object(addressLine.text);
                     if (!parsed.error) {
                         addressLine.text = parsed.address;
                         descriptionLine.text = parsed.tx_description;

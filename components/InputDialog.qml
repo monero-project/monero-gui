@@ -86,7 +86,7 @@ Item {
                 color: MoneroComponents.Style.defaultFontColor
             }
 
-            TextField {
+            MoneroComponents.Input {
                 id : input
                 focus: true
                 Layout.topMargin: 6
