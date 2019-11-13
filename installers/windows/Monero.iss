@@ -1,6 +1,7 @@
 ; Monero Carbon Chamaeleon GUI Wallet Installer for Windows
 ; Copyright (c) 2017-2019, The Monero Project
 ; See LICENSE
+#define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
 
 [Setup]
 AppName=Monero GUI Wallet
@@ -8,7 +9,8 @@ AppName=Monero GUI Wallet
 ; Thus it's important to keep this stable over releases
 ; With a different "AppName" InnoSetup would treat a mere update as a completely new application and thus mess up
 
-AppVersion=0.15.0.0
+AppVersion={#GuiVersion}
+VersionInfoVersion={#GuiVersion}
 DefaultDirName={pf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
@@ -39,6 +41,8 @@ UsedUserAreasWarning=no
 ; play a role in only in few cases as the first standard user in a Windows installation does have admin rights.
 ; So, for the time being, this installer simply disregards this problem.
 
+[Messages]
+SetupWindowTitle=%1 {#GuiVersion} Installer
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
@@ -65,7 +69,7 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; Note that it would be very dangerous to use "ignoreversion" on files that may be shared with other
 ; applications somehow. Luckily this is no issue here because ALL files are "private" to Monero.
 
-Source: "ReadMe.htm"; DestDir: "{app}"; Flags: ignoreversion
+Source: {#file AddBackslash(SourcePath) + "ReadMe.htm"}; DestDir: "{app}"; DestName: "ReadMe.htm"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
 
 ; Monero GUI wallet exe and guide
