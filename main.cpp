@@ -173,7 +173,9 @@ int main(int argc, char *argv[])
     QCommandLineOption logPathOption(QStringList() << "l" << "log-file",
         QCoreApplication::translate("main", "Log to specified file"),
         QCoreApplication::translate("main", "file"));
-
+    logPathOption.setDefaultValue(
+        QStandardPaths::writableLocation(QStandardPaths::CacheLocation)
+        + "/monero-wallet-gui.log");
     parser.addOption(logPathOption);
     parser.addHelpOption();
     parser.process(app);
