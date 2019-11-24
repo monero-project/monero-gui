@@ -374,7 +374,7 @@ macx {
     OBJECTIVE_SOURCES += src/qt/macoshelper.mm
     LIBS+= \
         -L/usr/local/lib \
-        -L/usr/local/opt/openssl/lib \
+        -L/usr/local/opt/openssl@1.1/lib \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
         -lboost_thread-mt \
