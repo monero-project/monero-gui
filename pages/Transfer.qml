@@ -168,7 +168,7 @@ Rectangle {
                   labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                                    Amount <font size='2'>  ( </font> <a href='#'>Change account</a><font size='2'> )</font>")
                              + translationManager.emptyString
-                  copyButton: persistentSettings.fiatPriceEnabled
+                  copyButton: !isNaN(amountLine.text) && persistentSettings.fiatPriceEnabled
                   copyButtonText: fiatApiCurrencySymbol() + " ~" + fiatApiConvertToFiat(amountLine.text)
                   copyButtonEnabled: false
 
