@@ -253,7 +253,6 @@ Rectangle{
                     cursorShape: Qt.PointingHandCursor
                     anchors.fill: parent
                     onClicked: {
-                        persistentSettings.useRemoteNode = true;
                         appWindow.connectRemoteNode();
                     }
                 }
