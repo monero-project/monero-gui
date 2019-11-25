@@ -107,11 +107,6 @@ Rectangle {
     property bool   walletOptionsDeviceIsRestore: false
     property string tmpWalletFilename: ''
 
-    // language settings, updated via sidebar
-    property string language_locale: 'en_US'
-    property string language_wallet: 'English'
-    property string language_language: 'English (US)'
-
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
 
@@ -343,7 +338,7 @@ Rectangle {
         console.log("Creating temporary wallet", tmp_wallet_filename)
         var nettype = appWindow.persistentSettings.nettype;
         var kdfRounds = appWindow.persistentSettings.kdfRounds;
-        var wallet = walletManager.createWallet(tmp_wallet_filename, "", wizardController.language_wallet, nettype, kdfRounds)
+        var wallet = walletManager.createWallet(tmp_wallet_filename, "", appWindow.persistentSettings.language_wallet, nettype, kdfRounds)
 
         wizardController.walletOptionsSeed = wallet.seed
 
@@ -378,10 +373,6 @@ Rectangle {
         // Store password in session to be able to use password protected functions (e.g show seed)
         appWindow.walletPassword = walletOptionsPassword
 
-        // save to persistent settings
-        persistentSettings.language = wizardController.language_language
-        persistentSettings.locale   = wizardController.language_locale
-
         persistentSettings.account_name = wizardController.walletOptionsName
         persistentSettings.wallet_path = new_wallet_filename
         persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
@@ -408,7 +399,7 @@ Rectangle {
         if(wizardController.walletRestoreMode === 'seed')
             wallet = walletManager.recoveryWallet(tmp_wallet_filename, wizardController.walletOptionsSeed, nettype, restoreHeight, kdfRounds)
         else
-            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, wizardController.language_wallet, nettype,
+            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, appWindow.persistentSettings.language_wallet, nettype,
                                                             wizardController.walletOptionsRecoverAddress, wizardController.walletOptionsRecoverViewkey,
                                                             wizardController.walletOptionsRecoverSpendkey, restoreHeight, kdfRounds)
 
@@ -557,6 +548,9 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        //
+        var locale = appWindow.persistentSettings.locale
+        if (locale !== "") {
+            translationManager.setLanguage(locale.split("_")[0]);
+        }
     }
 }

@@ -188,9 +188,9 @@ Rectangle {
                             translationManager.setLanguage(locale_spl[0]);
 
                             // set wizard language settings
-                            wizard.language_locale = locale;
-                            wizard.language_wallet = wallet_language;
-                            wizard.language_language = display_name + " (" + locale_spl[1] + ") ";
+                            appWindow.persistentSettings.locale = locale;
+                            appWindow.persistentSettings.language_wallet = wallet_language;
+                            appWindow.persistentSettings.language = display_name + " (" + locale_spl[1] + ") ";
 
                             appWindow.showStatusMessage(qsTr("Language changed."), 3);
                             appWindow.toggleLanguageView();

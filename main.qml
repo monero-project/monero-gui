@@ -212,12 +212,6 @@ ApplicationWindow {
         else
           walletManager.setLogLevel(persistentSettings.logLevel)
 
-        // setup language
-        var locale = persistentSettings.locale
-        if (locale !== "") {
-            translationManager.setLanguage(locale.split("_")[0]);
-        }
-
         // Reload transfer page with translations enabled
         middlePanel.transferView.onPageCompleted();
 
@@ -1363,8 +1357,9 @@ ApplicationWindow {
             return "";
         }
 
-        property string language
-        property string locale
+        property string language: 'English (US)'
+        property string locale: 'en_US'
+        property string language_wallet: 'English'
         property string account_name
         property string wallet_path
         property bool   auto_donations_enabled : false
@@ -1817,11 +1812,6 @@ ApplicationWindow {
         middlePanel.visible = !middlePanel.visible;
         languageView.visible = !languageView.visible
         resetLanguageFields()
-        // update after changing language from settings page
-        if (persistentSettings.language != wizard.language_language) {
-            persistentSettings.language = wizard.language_language
-            persistentSettings.locale   = wizard.language_locale
-        }
     }
 
     // TODO: Make the callback dynamic

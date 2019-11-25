@@ -54,7 +54,7 @@ ColumnLayout {
     WizardSummaryItem {
         Layout.fillWidth: true
         header: qsTr("Language") + translationManager.emptyString
-        value: wizardController.language_language
+        value: appWindow.persistentSettings.language
     }
 
     WizardSummaryItem {
