@@ -38,6 +38,7 @@ Item {
     property alias text: label.text
     property string checkedIcon: "qrc:///images/check-white.svg"
     property string uncheckedIcon
+    property bool fontAwesomeIcons: false
     property int imgWidth: 13
     property int imgHeight: 13
     property bool toggleOnClick: true
@@ -89,9 +90,11 @@ Item {
                 width: checkBox.imgWidth
                 height: checkBox.imgHeight
                 color: MoneroComponents.Style.defaultFontColor
-                fontAwesomeFallbackIcon: FontAwesome.plus
+                fontAwesomeFallbackIcon: checkBox.fontAwesomeIcons ? getIcon() : FontAwesome.plus
                 fontAwesomeFallbackSize: 14
-                image: {
+                image: checkBox.fontAwesomeIcons ? "" : getIcon()
+
+                function getIcon() {
                     if (checkBox.checked || checkBox.uncheckedIcon == "")
                         return checkBox.checkedIcon;
                     return checkBox.uncheckedIcon;

@@ -31,6 +31,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 import "../components/effects/" as MoneroEffects
@@ -349,8 +350,9 @@ Rectangle {
                 id: addNewAccountCheckbox 
                 visible: !selectAndSend
                 border: false
-                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
-                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png" 
+                uncheckedIcon: FontAwesome.plusCircle
+                toggleOnClick: false
+                fontAwesomeIcons: true
                 fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true

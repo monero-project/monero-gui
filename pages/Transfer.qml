@@ -343,8 +343,9 @@ Rectangle {
               CheckBox {
                   id: descriptionCheckbox
                   border: false
-                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                  checkedIcon: FontAwesome.minusCircle
+                  uncheckedIcon: FontAwesome.plusCircle
+                  fontAwesomeIcons: true
                   fontSize: descriptionLine.labelFontSize
                   iconOnTheLeft: true
                   Layout.fillWidth: true
@@ -370,8 +371,9 @@ Rectangle {
               CheckBox {
                   id: paymentIdCheckbox
                   border: false
-                  checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                  uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                    checkedIcon: FontAwesome.minusCircle
+                    uncheckedIcon: FontAwesome.plusCircle
+                    fontAwesomeIcons: true
                   fontSize: paymentIdLine.labelFontSize
                   iconOnTheLeft: true
                   Layout.fillWidth: true
