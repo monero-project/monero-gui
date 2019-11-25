@@ -469,14 +469,18 @@ ApplicationWindow {
         leftPanel.networkStatus.connected = status
 
         // update local daemon status.
-        if(walletManager.isDaemonLocal(currentDaemonAddress))
-            daemonRunning = status;
+        const isDisconnected = status === Wallet.ConnectionStatus_Disconnected;
+        if (walletManager.isDaemonLocal(currentDaemonAddress)) {
+            daemonRunning = !isDisconnected;
+        } else {
+            daemonRunning = false;
+        }
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if (appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && status === Wallet.ConnectionStatus_Disconnected) {
+        if (appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && isDisconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
@@ -598,10 +602,19 @@ ApplicationWindow {
 
     function connectRemoteNode() {
         console.log("connecting remote node");
-        persistentSettings.useRemoteNode = true;
-        currentDaemonAddress = persistentSettings.remoteNodeAddress;
-        currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
-        walletManager.setDaemonAddressAsync(currentDaemonAddress);
+
+        const callback = function() {
+            persistentSettings.useRemoteNode = true;
+            currentDaemonAddress = persistentSettings.remoteNodeAddress;
+            currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
+            walletManager.setDaemonAddressAsync(currentDaemonAddress);
+        };
+
+        if (typeof daemonManager != "undefined" && daemonRunning) {
+            showDaemonIsRunningDialog(callback);
+        } else {
+            callback();
+        }
     }
 
     function disconnectRemoteNode() {
@@ -1916,6 +1929,23 @@ ApplicationWindow {
         statusMessage.visible = true
     }
 
+    function showDaemonIsRunningDialog(onClose) {
+        // Show confirmation dialog
+        confirmationDialog.title = qsTr("Local node is running") + translationManager.emptyString;
+        confirmationDialog.text  = qsTr("Do you want to stop local node or keep it running in the background?") + translationManager.emptyString;
+        confirmationDialog.icon = StandardIcon.Question;
+        confirmationDialog.cancelText = qsTr("Force stop") + translationManager.emptyString;
+        confirmationDialog.okText = qsTr("Keep it running") + translationManager.emptyString;
+        confirmationDialog.onAcceptedCallback = function() {
+            onClose();
+        }
+        confirmationDialog.onRejectedCallback = function() {
+            daemonManager.stop(persistentSettings.nettype);
+            onClose();
+        };
+        confirmationDialog.open();
+    }
+
     onClosing: {
         close.accepted = false;
         console.log("blocking close event");
@@ -1937,27 +1967,12 @@ ApplicationWindow {
 
         // If daemon is running - prompt user before exiting
         if(typeof daemonManager != "undefined" && daemonRunning) {
-            // Show confirmation dialog
-            confirmationDialog.title = qsTr("Daemon is running") + translationManager.emptyString;
-            confirmationDialog.text  = qsTr("Daemon will still be running in background when GUI is closed.");
-            confirmationDialog.icon = StandardIcon.Question
-            confirmationDialog.cancelText = qsTr("Stop daemon")
-            confirmationDialog.onAcceptedCallback = function() {
-                closeAccepted();
-            }
-
-            confirmationDialog.onRejectedCallback = function() {
-                daemonManager.stop(persistentSettings.nettype);
-                closeAccepted();
-            };
-
             if (appWindow.walletMode == 0) {
                 stopDaemon();
                 closeAccepted();
             } else {
-                confirmationDialog.open();
+                showDaemonIsRunningDialog(closeAccepted);
             }
-
         } else {
             closeAccepted();
         }
