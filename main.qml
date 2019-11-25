@@ -1994,17 +1994,12 @@ ApplicationWindow {
         if (parts.length == 4) {
             var version = parts[0]
             var hash = parts[1]
-            //var user_url = parts[2]
-            //var auto_url = parts[3]
-            var osBuildTag = isMac ? "mac-x64" : isWindows ? "win-x64" : isLinux ? "linux-x64" : "unknownBuildTag"
-            var extension = isMac || isLinux ? ".tar.bz2" : isWindows ? ".zip" : ".unknownExtension"
-            var base_url = "https://downloads.getmonero.org/gui/monero-gui-"
-            var download_url = base_url + osBuildTag + "-v" + version + extension
+            var user_url = parts[2]
             var msg = ""
-            if (osBuildTag !== "unknownBuildTag") {
-                msg = qsTr("New version of Monero v.%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(download_url).arg(hash) + translationManager.emptyString
+            if (isMac || isWindows || isLinux) {
+                msg = qsTr("New version of Monero v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
             } else {
-                msg = qsTr("New version of Monero is available. Check out getmonero.org") + translationManager.emptyString
+                msg = qsTr("New version of Monero v%1 is available. Check out getmonero.org").arg(version) + translationManager.emptyString
             }
             notifier.show(msg)
         } else {
