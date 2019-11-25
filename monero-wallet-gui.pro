@@ -370,11 +370,19 @@ macx {
     #     message("using static libraries")
     #     LIBS+= -Wl,-Bstatic
     # }
+
+    OPENSSL_LIBRARY_DIRS = $$system(brew --prefix openssl, lines, EXIT_CODE)
+    equals(EXIT_CODE, 0) {
+        OPENSSL_LIBRARY_DIRS = $$OPENSSL_LIBRARY_DIRS/lib
+    } else {
+        OPENSSL_LIBRARY_DIRS = /usr/local/ssl/lib
+    }
+
     QT += macextras
     OBJECTIVE_SOURCES += src/qt/macoshelper.mm
     LIBS+= \
         -L/usr/local/lib \
-        -L/usr/local/opt/openssl/lib \
+        -L$$OPENSSL_LIBRARY_DIRS \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
         -lboost_thread-mt \
