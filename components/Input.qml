@@ -47,6 +47,7 @@ TextField {
     }
 
     MoneroComponents.ContextMenu {
+        cursorShape: Qt.IBeamCursor
         onPaste: {
             textField.clear();
             textField.paste();
