@@ -244,8 +244,9 @@ Rectangle {
             MoneroComponents.CheckBox {
                 id: addNewAddressCheckbox
                 border: false
-                checkedIcon: "qrc:///images/plus-in-circle-medium-white.png"
-                uncheckedIcon: "qrc:///images/plus-in-circle-medium-white.png"
+                uncheckedIcon: FontAwesome.plusCircle
+                toggleOnClick: false
+                fontAwesomeIcons: true
                 fontSize: 16
                 iconOnTheLeft: true
                 Layout.fillWidth: true
