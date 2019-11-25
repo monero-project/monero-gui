@@ -70,6 +70,7 @@ TextArea {
     }
 
     MoneroComponents.ContextMenu {
+        cursorShape: Qt.IBeamCursor
         onPaste: {
             textArea.clear();
             textArea.paste();
