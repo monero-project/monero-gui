@@ -47,7 +47,7 @@ import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero"
+    title: "Monero" + (walletName ? " - " + walletName : "")
 
     property var currentItem
     property bool hideBalanceForced: false
