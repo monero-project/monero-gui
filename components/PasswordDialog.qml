@@ -203,6 +203,7 @@ Item {
                         return passwordInput2
                     }
                 }
+                implicitHeight: 50
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
@@ -307,6 +308,7 @@ Item {
                 font.pixelSize: 24
                 echoMode: TextInput.Password
                 KeyNavigation.tab: okButton
+                implicitHeight: 50
                 bottomPadding: 10
                 leftPadding: 10
                 topPadding: 10
