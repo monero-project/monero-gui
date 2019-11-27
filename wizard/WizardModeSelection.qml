@@ -138,13 +138,13 @@ Rectangle {
 
             WizardNav {
                 Layout.topMargin: 5
-                btnPrevText: qsTr("Change language") + translationManager.emptyString
+                btnPrevText: qsTr("Back to menu") + translationManager.emptyString
                 btnNext.visible: false
                 progressSteps: 0
 
                 onPrevClicked: {
-                    wizardController.wizardStackView.backTransition = true;
-                    wizardController.wizardState = 'wizardLanguage';
+                    wizardController.wizardStackView.backTransition = wizardController.wizardStatePrevious.viewName == 'wizardLanguage';
+                    wizardController.wizardState = wizardController.wizardStatePrevious.viewName == 'wizardLanguage' ? 'wizardLanguage' : 'wizardHome';
                 }
             }
         }
