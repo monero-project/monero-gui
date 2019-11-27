@@ -67,21 +67,18 @@ Rectangle {
             spacing: 0
             Layout.fillWidth: true
 
-            TextArea {
+            Text {
                 id: titleLabel
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.defaultFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 32
                 horizontalAlignment: TextInput.AlignLeft
-                selectByMouse: false
                 wrapMode: Text.WordWrap;
-                textMargin: 0
                 leftPadding: 0
                 topPadding: 0
                 text: qsTr("Save your most used addresses here") + translationManager.emptyString
                 width: parent.width
-                readOnly: true
 
                 // @TODO: Legacy. Remove after Qt 5.8.
                 // https://stackoverflow.com/questions/41990013
@@ -91,20 +88,17 @@ Rectangle {
                 }
             }
 
-            TextArea {
+            Text {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.family: MoneroComponents.Style.fontRegular.name
                 font.pixelSize: 16
                 horizontalAlignment: TextInput.AlignLeft
-                selectByMouse: false
                 wrapMode: Text.WordWrap;
-                textMargin: 0
                 leftPadding: 0
                 topPadding: 0
                 text: qsTr("This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.") + translationManager.emptyString
                 width: parent.width
-                readOnly: true
 
                 // @TODO: Legacy. Remove after Qt 5.8.
                 // https://stackoverflow.com/questions/41990013

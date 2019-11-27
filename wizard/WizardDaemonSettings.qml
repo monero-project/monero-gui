@@ -91,7 +91,7 @@ ColumnLayout {
             Layout.topMargin: 6
             spacing: 0
 
-            TextArea {
+            Text {
                 text: qsTr("Bootstrap node") + translationManager.emptyString
                 Layout.topMargin: 10
                 Layout.fillWidth: true
@@ -105,19 +105,13 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-                selectByMouse: true
                 wrapMode: Text.WordWrap
-                textMargin: 0
                 leftPadding: 0
                 topPadding: 0
                 bottomPadding: 0
-                readOnly: true
             }
 
-            TextArea {
+            Text {
                 text: qsTr("Additionally, you may specify a bootstrap node to use Monero immediately.") + translationManager.emptyString
                 Layout.topMargin: 4
                 Layout.fillWidth: true
@@ -133,16 +127,10 @@ ColumnLayout {
                     }
                 }
 
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-                selectByMouse: true
                 wrapMode: Text.WordWrap
-                textMargin: 0
                 leftPadding: 0
                 topPadding: 0
                 bottomPadding: 0
-                readOnly: true
             }
         }
 

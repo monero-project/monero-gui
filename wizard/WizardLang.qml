@@ -67,7 +67,7 @@ Rectangle {
         width: parent.width - 100
         anchors.horizontalCenter: parent.horizontalCenter;
 
-        TextArea {
+        Text {
             text: qsTr("Language settings") + translationManager.emptyString
             Layout.fillWidth: true
             font.family: MoneroComponents.Style.fontRegular.name
@@ -80,19 +80,13 @@ Rectangle {
                 }
             }
 
-            selectionColor: MoneroComponents.Style.textSelectionColor
-            selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-            selectByMouse: true
             wrapMode: Text.WordWrap
-            textMargin: 0
             leftPadding: 0
             topPadding: 0
             bottomPadding: 0
-            readOnly: true
         }
 
-        TextArea {
+        Text {
             Layout.fillWidth: true
             visible: parent.subtitle !== ""
 
@@ -108,15 +102,9 @@ Rectangle {
                 }
             }
 
-            selectionColor: MoneroComponents.Style.textSelectionColor
-            selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-            selectByMouse: true
             wrapMode: Text.WordWrap
-            textMargin: 0
             leftPadding: 0
             topPadding: 0
-            readOnly: true
         }
 
         Flow {

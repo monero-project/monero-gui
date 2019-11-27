@@ -158,7 +158,7 @@ Rectangle {
                 }
             }
 
-            TextArea {
+            Text {
                 id: errorMsg
                 text: qsTr("Error writing wallet from hardware device. Check application logs.") + translationManager.emptyString;
                 visible: errorMsg.text !== ""
@@ -167,16 +167,10 @@ Rectangle {
                 color: MoneroComponents.Style.errorColor
                 font.pixelSize: 16
 
-                selectionColor: MoneroComponents.Style.textSelectionColor
-                selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-                selectByMouse: true
                 wrapMode: Text.WordWrap
-                textMargin: 0
                 leftPadding: 0
                 topPadding: 0
                 bottomPadding: 0
-                readOnly: true
             }
 
             WizardNav {
