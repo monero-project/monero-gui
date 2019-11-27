@@ -13,6 +13,8 @@ jobs:
       run: brew update && brew install boost hidapi zmq libpgm unbound libsodium miniupnpc ldns expat doxygen graphviz libunwind-headers protobuf qt5 
     - name: build
       run: export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh
+    - name: test qml
+      run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
   build-ubuntu:
  
@@ -25,6 +27,8 @@ jobs:
     - name: install monero dependencies
       run: sudo apt -y install build-essential cmake libboost-all-dev miniupnpc libunbound-dev graphviz doxygen libunwind8-dev pkg-config libssl-dev libzmq3-dev libsodium-dev libhidapi-dev libnorm-dev libusb-1.0-0-dev libpgm-dev
     - name: install monero gui dependencies
-      run: sudo apt -y install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev
+      run: sudo apt -y install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev xvfb
     - name: build
       run: ./build.sh
+    - name: test qml
+      run: xvfb-run -a build/release/bin/monero-wallet-gui --test-qml
