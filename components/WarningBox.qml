@@ -37,26 +37,26 @@ Rectangle {
             source: "qrc:///images/warning.png"
         }
 
-        TextArea {
+        Text {
             id: content
             Layout.fillWidth: true
             color: MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: root.fontSize
             horizontalAlignment: TextInput.AlignLeft
-            selectByMouse: true
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
-            textMargin: 0
             leftPadding: 4
             rightPadding: 18
             topPadding: 10
             bottomPadding: 10
-            readOnly: true
             onLinkActivated: root.linkActivated();
 
-            selectionColor: MoneroComponents.Style.textSelectionColor
-            selectedTextColor: MoneroComponents.Style.textSelectedColor
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.NoButton
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+            }
         }
     }
 }
