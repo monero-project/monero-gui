@@ -57,7 +57,7 @@ Rectangle {
             color: "transparent"
         }
 
-        TextArea {
+        Text {
             id: textWelcome
             opacity: 0
             Layout.preferredWidth: parent.width / 1.3
@@ -69,12 +69,9 @@ Rectangle {
             font.bold: true
             font.pixelSize: 18
             horizontalAlignment: TextInput.AlignHCenter
-            selectByMouse: false
             wrapMode: Text.WordWrap
-            textMargin: 0
             leftPadding: 0
             topPadding: 0
-            readOnly: true
 
             Behavior on opacity {
                 NumberAnimation {
