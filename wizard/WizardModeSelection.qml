@@ -143,8 +143,7 @@ Rectangle {
                 progressSteps: 0
 
                 onPrevClicked: {
-                    wizardController.wizardStackView.backTransition = true;
-                    wizardController.wizardState = 'wizardLanguage';
+                    appWindow.toggleLanguageView();
                 }
             }
         }
