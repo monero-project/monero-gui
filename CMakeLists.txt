@@ -57,7 +57,8 @@ get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 if(STATIC)
 	message(STATUS "Initiating static build")
 	set(Boost_USE_STATIC_LIBS ON)
-	set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  add_definitions(-DMONERO_GUI_STATIC)
 endif()
 
 # Include password strength library

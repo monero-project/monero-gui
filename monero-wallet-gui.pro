@@ -46,9 +46,9 @@ INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$WALLET_ROOT/src
 
 HEADERS += \
-    filter.h \
-    clipboardAdapter.h \
-    oscursor.h \
+    src/main/filter.h \
+    src/main/clipboardAdapter.h \
+    src/main/oscursor.h \
     src/libwalletqt/WalletManager.h \
     src/libwalletqt/Wallet.h \
     src/libwalletqt/PendingTransaction.h \
@@ -57,8 +57,8 @@ HEADERS += \
     src/libwalletqt/QRCodeImageProvider.h \
     src/libwalletqt/Transfer.h \
     src/NetworkType.h \
-    oshelper.h \
-    TranslationManager.h \
+    src/main/oshelper.h \
+    src/TranslationManager.h \
     src/model/TransactionHistoryModel.h \
     src/model/TransactionHistorySortFilterModel.h \
     src/QR-Code-generator/BitBuffer.hpp \
@@ -72,8 +72,8 @@ HEADERS += \
     src/libwalletqt/SubaddressAccount.h \
     src/zxcvbn-c/zxcvbn.h \
     src/libwalletqt/UnsignedTransaction.h \
-    Logger.h \
-    MainApp.h \
+    src/main/Logger.h \
+    src/main/MainApp.h \
     src/qt/FutureScheduler.h \
     src/qt/ipc.h \
     src/qt/KeysFiles.h \
@@ -83,18 +83,18 @@ HEADERS += \
     src/qt/MoneroSettings.h \
     src/qt/TailsOS.h
 
-SOURCES += main.cpp \
-    filter.cpp \
-    clipboardAdapter.cpp \
-    oscursor.cpp \
+SOURCES += src/main/main.cpp \
+    src/main/filter.cpp \
+    src/main/clipboardAdapter.cpp \
+    src/main/oscursor.cpp \
     src/libwalletqt/WalletManager.cpp \
     src/libwalletqt/Wallet.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \
     src/libwalletqt/QRCodeImageProvider.cpp \
-    oshelper.cpp \
-    TranslationManager.cpp \
+    src/main/oshelper.cpp \
+    src/TranslationManager.cpp \
     src/model/TransactionHistoryModel.cpp \
     src/model/TransactionHistorySortFilterModel.cpp \
     src/QR-Code-generator/BitBuffer.cpp \
@@ -108,8 +108,8 @@ SOURCES += main.cpp \
     src/libwalletqt/SubaddressAccount.cpp \
     src/zxcvbn-c/zxcvbn.c \
     src/libwalletqt/UnsignedTransaction.cpp \
-    Logger.cpp \
-    MainApp.cpp \
+    src/main/Logger.cpp \
+    src/main/MainApp.cpp \
     src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
     src/qt/KeysFiles.cpp \
