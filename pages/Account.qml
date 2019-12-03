@@ -49,6 +49,7 @@ Rectangle {
     property var model
     property alias accountHeight: mainLayout.height
     property bool selectAndSend: false
+    property int currentAccountIndex
 
     function renameSubaddressAccountLabel(_index){
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
@@ -180,6 +181,7 @@ Rectangle {
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false
+                    currentIndex: currentAccountIndex
 
                     delegate: Rectangle {
                         id: tableItem2
@@ -211,7 +213,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === appWindow.current_subaddress_account_table_index ? MoneroComponents.Style.defaultFontColor : "#757575"
+                                color: index === currentAccountIndex ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -278,9 +280,9 @@ Rectangle {
                                 onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
                                 onExited: tableItem2.color = "transparent"
                                 onClicked: {
-                                    if (index == subaddressAccountListView.currentIndex && selectAndSend)
+                                    appWindow.currentWallet.switchSubaddressAccount(index);
+                                    if (selectAndSend)
                                         appWindow.showPageRequest("Transfer");
-                                    subaddressAccountListView.currentIndex = index;
                                 }
                             }
                         }
@@ -319,17 +321,9 @@ Rectangle {
                             }
                         }
                     }
-                    onCurrentItemChanged: {
-                        // reset global vars
-                        appWindow.current_subaddress_account_table_index = subaddressAccountListView.currentIndex;
-                        appWindow.currentWallet.switchSubaddressAccount(appWindow.current_subaddress_account_table_index);
-                        appWindow.onWalletUpdate();
-                    }
 
                     onCurrentIndexChanged: {
-                        if (selectAndSend) {
-                            appWindow.showPageRequest("Transfer");
-                        }
+                        appWindow.onWalletUpdate();
                     }
                 }
             }
@@ -364,8 +358,6 @@ Rectangle {
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
                         appWindow.currentWallet.switchSubaddressAccount(appWindow.currentWallet.numSubaddressAccounts() - 1)
-                        current_subaddress_account_table_index = appWindow.currentWallet.numSubaddressAccounts() - 1
-                        subaddressAccountListView.currentIndex = current_subaddress_account_table_index
                         appWindow.onWalletUpdate();
                     }
                     inputDialog.onRejectedCallback = null;

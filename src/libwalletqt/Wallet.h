@@ -65,7 +65,7 @@ class Wallet : public QObject
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(NetworkType::Type nettype READ nettype)
 //    Q_PROPERTY(ConnectionStatus connected READ connected)
-    Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount)
+    Q_PROPERTY(quint32 currentSubaddressAccount READ currentSubaddressAccount NOTIFY currentSubaddressAccountChanged)
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(TransactionHistory * history READ history)
@@ -365,6 +365,7 @@ signals:
     void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
 
     void connectionStatusChanged(int status) const;
+    void currentSubaddressAccountChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);
