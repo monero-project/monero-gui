@@ -149,12 +149,10 @@ Rectangle {
                 }
 
                 MoneroComponents.StandardButton {
-                    visible: !persistentSettings.customDecorations
                     small: true
                     text: qsTr("Change language") + translationManager.emptyString
 
                     onClicked: {
-                        wizardController.wizardStackView.backTransition = false;
                         appWindow.toggleLanguageView();
                     }
                 }
