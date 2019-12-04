@@ -180,14 +180,15 @@ ColumnLayout {
                 color: "transparent"
 
                 MoneroComponents.Label {
-                    fontSize: 20
+                    fontSize: 18
                     text: FontAwesome.lock
                     opacity: 0.5
-                    fontFamily: FontAwesome.fontFamily
+                    fontFamily: FontAwesome.fontFamilySolid
+                    styleName: "Solid"
                     anchors.right: parent.right
-                    anchors.rightMargin: 15
+                    anchors.rightMargin: 10
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.verticalCenterOffset: 3
+                    anchors.verticalCenterOffset: 1
                 }
             }
         }
@@ -237,14 +238,15 @@ ColumnLayout {
                 color: "transparent"
 
                 MoneroComponents.Label {
-                    fontSize: 20
+                    fontSize: 18
                     text: FontAwesome.lock
                     opacity: 0.5
-                    fontFamily: FontAwesome.fontFamily
+                    fontFamily: FontAwesome.fontFamilySolid
+                    styleName: "Solid"
                     anchors.right: parent.right
-                    anchors.rightMargin: 15
+                    anchors.rightMargin: 10
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.verticalCenterOffset: 3
+                    anchors.verticalCenterOffset: 1
                 }
             }
         }
