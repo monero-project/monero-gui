@@ -112,7 +112,6 @@ ApplicationWindow {
     property var current_address
     property var current_address_label: "Primary"
     property int current_subaddress_table_index: 0
-    property int current_subaddress_account_table_index: 0
 
     function altKeyReleased() { ctrlPressed = false; }
 
@@ -418,8 +417,6 @@ ApplicationWindow {
         }
 
         leftPanel.minutesToUnlock = (balance !== balanceU) ? currentWallet.history.minutesToUnlock : "";
-        leftPanel.currentAccountIndex = currentWallet.currentSubaddressAccount;
-        leftPanel.currentAccountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
         leftPanel.balanceString = balance
         leftPanel.balanceUnlockedString = balanceU
     }
@@ -1616,6 +1613,13 @@ ApplicationWindow {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
             visible: rootItem.state == "normal" && middlePanel.state != "Merchant"
+            currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
+            currentAccountLabel: {
+                if (currentWallet) {
+                    return currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+                }
+                return qsTr("Primary account") + translationManager.emptyString;
+            }
 
             onTransferClicked: {
                 middlePanel.state = "Transfer";
@@ -1687,6 +1691,7 @@ ApplicationWindow {
 
         MiddlePanel {
             id: middlePanel
+            accountView.currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.left: leftPanel.visible ?  leftPanel.right : parent.left
