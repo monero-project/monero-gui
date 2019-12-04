@@ -69,5 +69,10 @@ Item {
         color: fontColor
         onLinkActivated: item.linkActivated()
         textFormat: parent.textFormat
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.NoButton
+            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+        }
     }
 }
