@@ -178,6 +178,7 @@ Rectangle {
         }
 
         anchors.topMargin: appWindow.persistentSettings.customDecorations ? 50 : 0
+        anchors.bottomMargin: 0
         spacing: 0
 
         Flickable {
