@@ -93,7 +93,8 @@ Rectangle {
             Layout.leftMargin: 42
             spacing: 0
 
-            MoneroComponents.TextBlock {
+            Text {
+                color: MoneroComponents.Style.defaultFontColor
                 font.pixelSize: 14
                 Layout.fillWidth: true
                 text: {
@@ -142,6 +143,12 @@ Rectangle {
                 }
 
                 onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                }
             }
         }
 
