@@ -178,7 +178,7 @@ Rectangle {
                             // set wizard language settings
                             wizard.language_locale = locale;
                             wizard.language_wallet = wallet_language;
-                            wizard.language_language = display_name + " (" + locale_spl[1] + ") ";
+                            wizard.language_language = display_name;
 
                             appWindow.showStatusMessage(qsTr("Language changed."), 3);
                             appWindow.toggleLanguageView();
