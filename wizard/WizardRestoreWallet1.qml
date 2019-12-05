@@ -213,7 +213,7 @@ Rectangle {
                             font.family: MoneroComponents.Style.fontRegular.name
                             text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
-                            visible: !seedInput.text && !parent.focus
+                            visible: !seedInput.text
                         }
                     }
                 }
