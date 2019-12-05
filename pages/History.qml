@@ -227,7 +227,7 @@ Rectangle {
                 MoneroComponents.TextPlain {
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 15
-                    text: qsTr("Sort by") + ":"
+                    text: qsTr("Sort by") + ":" + translationManager.emptyString
                     color: MoneroComponents.Style.defaultFontColor
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -446,7 +446,7 @@ Rectangle {
                     MoneroComponents.TextPlain {
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 15
-                        text: qsTr("Page") + ":"
+                        text: qsTr("Page") + ":" + translationManager.emptyString
                         color: MoneroComponents.Style.defaultFontColor
                         anchors.verticalCenter: parent.verticalCenter
                     }

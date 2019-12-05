@@ -158,7 +158,7 @@ Item {
                                         "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
                                         "confirmed in short order, but there is still a possibility they might not, so for larger " +
                                         "values you may want to wait for one or more confirmation(s).</p>"
-                                    );
+                                    ) + translationManager.emptyString;
                             } else if(root.trackingError !== ""){
                                 return root.trackingError;
                             } else if(trackingModel.count < 1){
@@ -265,7 +265,7 @@ Item {
                     font.pixelSize: 12
                     font.bold: false
                     color: "white"
-                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>Currently selected address: " + addressLabel + " <a href='#'>(Change)</a>"
+                    text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>Currently selected address: ") + addressLabel + qsTr(" <a href='#'>(Change)</a>") + translationManager.emptyString
                     textFormat: Text.RichText
                     themeTransition: false
 
@@ -446,7 +446,7 @@ Item {
                         font.pixelSize: 14
                         font.bold: false
                         color: "white"
-                        text: qsTr("Amount to receive") + " (XMR)"
+                        text: qsTr("Amount to receive") + " (XMR)" + translationManager.emptyString
                         themeTransition: false
                     }
 
