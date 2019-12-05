@@ -1634,11 +1634,11 @@ Rectangle {
 
         return '<table border="0">'
             + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
-            + (dateTime ? trStart + qsTr("Date:") + trMiddle + dateTime + trEnd : "")
-            + (amount ? trStart + qsTr("Amount:") + trMiddle + amount + trEnd : "")
+            + (dateTime ? trStart + qsTr("Date") + ":" + trMiddle + dateTime + trEnd : "")
+            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + amount + trEnd : "")
             + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
             + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
-            + (integratedAddress ? trStart + qsTr("Integrated address:") + trMiddle + integratedAddress + trEnd : "")
+            + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + integratedAddress + trEnd : "")
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
             + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
