@@ -182,9 +182,17 @@ Rectangle {
                   inlineButtonText: qsTr("All") + translationManager.emptyString
                   inlineButton.onClicked: amountLine.text = "(all)"
                   onTextChanged: {
-                      if(amountLine.text.indexOf('.') === 0){
-                          amountLine.text = '0' + amountLine.text;
-                      }
+                        const match = amountLine.text.match(/^0+(\d.*)/);
+                        if (match) {
+                            const cursorPosition = amountLine.cursorPosition;
+                            amountLine.text = match[1];
+                            amountLine.cursorPosition = Math.max(cursorPosition, 1) - 1;
+                        } else if(amountLine.text.indexOf('.') === 0){
+                            amountLine.text = '0' + amountLine.text;
+                            if (amountLine.text.length > 2) {
+                                amountLine.cursorPosition = 1;
+                            }
+                        }
                   }
 
                   validator: RegExpValidator {
