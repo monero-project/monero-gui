@@ -52,7 +52,7 @@ Rectangle {
     property int mixin: 10  // (ring size 11)
     property string warningContent: ""
     property string sendButtonWarning: ""
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> </font><a href='#'>(Start daemon)</a>") + translationManager.emptyString
+    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
     // @TODO: remove after pid removal hardfork
     property bool warningLongPidTransfer: false
@@ -166,7 +166,7 @@ Rectangle {
                   Layout.fillWidth: true
                   inlineIcon: true
                   labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                                   Amount <font size='2'> </font> <a href='#'>(Change account)</a>")
+                                   Amount <font size='2'>  ( </font> <a href='#'>Change account</a><font size='2'> )</font>")
                              + translationManager.emptyString
                   copyButton: !isNaN(amountLine.text) && persistentSettings.fiatPriceEnabled
                   copyButtonText: fiatApiCurrencySymbol() + " ~" + fiatApiConvertToFiat(amountLine.text)
@@ -250,7 +250,7 @@ Rectangle {
               spacing: 0
               fontBold: true
               labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                Address <font size='2'> </font> <a href='#'>(Address book)</a>")
+                Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: {
