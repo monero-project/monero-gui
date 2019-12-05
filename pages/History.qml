@@ -650,7 +650,7 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: _amount + " XMR"
+                                    text: displayAmount
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
 
@@ -869,7 +869,7 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: persistentSettings.historyHumanDates ? dateHuman : date + "  " + time
+                                    text: persistentSettings.historyHumanDates ? dateHuman : dateTime
 
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -881,7 +881,7 @@ Rectangle {
                                         onEntered: {
                                             parent.color = MoneroComponents.Style.orange
                                             if (persistentSettings.historyHumanDates) {
-                                                parent.text = date + "  " + time;
+                                                parent.text = dateTime;
                                             }
                                         }
                                         onExited: {
@@ -1196,7 +1196,7 @@ Rectangle {
                                 if(res[i].state === 'copyable_address') root.toClipboard(address);
                                 if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash);
-                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
                                 doCollapse = false;
                                 break;
@@ -1479,12 +1479,12 @@ Rectangle {
             var timestamp = new Date(date + " " + time).getTime() / 1000;
             var dateHuman = Utils.ago(timestamp);
 
-            var _amount = amount;
-            if(_amount === 0){
+            var displayAmount = amount;
+            if(displayAmount === 0){
                 // *sometimes* amount is 0, while the 'destinations string'
                 // has the correct amount, so we try to fetch it from that instead.
-                _amount = TxUtils.destinationsToAmount(destinations);
-                _amount = Number(_amount *1);
+                displayAmount = TxUtils.destinationsToAmount(destinations);
+                displayAmount = Number(displayAmount *1);
             }
 
             var tx_note = currentWallet.getUserNote(hash);
@@ -1502,15 +1502,14 @@ Rectangle {
                 "i": i,
                 "isout": isout,
                 "amount": Number(amount),
-                "_amount": _amount,
+                "displayAmount": displayAmount + " XMR",
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
                 "destinations": destinations,
                 "tx_note": tx_note,
-                "time": time,
-                "date": date,
                 "dateHuman": dateHuman,
+                "dateTime": date + " " + time,
                 "blockheight": blockheight,
                 "address": address,
                 "timestamp": timestamp,
@@ -1587,17 +1586,20 @@ Rectangle {
         }
     }
 
-    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex){
+    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, amount, isout) {
         var tx_note = currentWallet.getUserNote(hash)
         var rings = currentWallet.getRings(hash)
         var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
         var address = currentWallet.address(subaddrAccount, subaddrIndex)
+        const hasPaymentId = parseInt(paymentId, 16);
+        const integratedAddress = !isout && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
+
         if (rings)
             rings = rings.replace(/\|/g, '\n')
 
         currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
             informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
-            informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label);
+            informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
             informationPopup.onCloseCallback = null
             informationPopup.open();
         });
@@ -1625,16 +1627,18 @@ Rectangle {
         appWindow.showStatusMessage(qsTr("Copied to clipboard"),3);
     }
 
-    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label) {
-        var trStart = '<tr><td width="85" style="padding-top:5px"><b>',
+    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount) {
+        var trStart = '<tr><td style="white-space: nowrap; padding-top:5px"><b>',
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
 
         return '<table border="0">'
             + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
-            + (address_label ? trStart + qsTr("Address label:") + trMiddle + address_label + trEnd : "")
+            + (dateTime ? trStart + qsTr("Date:") + trMiddle + dateTime + trEnd : "")
+            + (amount ? trStart + qsTr("Amount:") + trMiddle + amount + trEnd : "")
             + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
             + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
+            + (integratedAddress ? trStart + qsTr("Integrated address:") + trMiddle + integratedAddress + trEnd : "")
             + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
             + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
             + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
