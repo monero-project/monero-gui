@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export CPU_CORE_COUNT=1
+git checkout f03ea0461c3a
+
 BUILD_TYPE=$1
 BUILD_TREZOR=${BUILD_TREZOR-true}
 source ./utils.sh
