@@ -78,7 +78,7 @@ Rectangle {
 
         return "";
     }
-    property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
+    property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
 
     Clipboard { id: clipboard }
@@ -176,8 +176,8 @@ Rectangle {
                   id: amountLine
                   Layout.fillWidth: true
                   inlineIcon: true
-                  labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                                   Amount <font size='2'>  ( </font> <a href='#'>Change account</a><font size='2'> )</font>")
+                  labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
+                                   %1 <a href='#'>(%2)</a>".arg(qsTr("Amount")).arg(qsTr("Change account"))
                              + translationManager.emptyString
                   copyButton: !isNaN(amountLine.text) && persistentSettings.fiatPriceEnabled
                   copyButtonText: fiatApiCurrencySymbol() + " ~" + fiatApiConvertToFiat(amountLine.text)
@@ -262,7 +262,7 @@ Rectangle {
               spacing: 0
               fontBold: true
               labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
+                %1 <a href='#'>(%2)</a>").arg(qsTr("Address")).arg(qsTr("Address book"))
                 + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: {

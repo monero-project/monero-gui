@@ -87,7 +87,7 @@ ColumnLayout {
     }
 
     MoneroComponents.WarningBox {
-        text: qsTr("<b>Enter a strong password</b> (Using letters, numbers, and/or symbols).") + translationManager.emptyString
+        text: "<b>%1</b> (%2).".arg(qsTr("Enter a strong password")).arg(qsTr("Using letters, numbers, and/or symbols")) + translationManager.emptyString
     }
 
     ColumnLayout {

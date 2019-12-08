@@ -1982,11 +1982,11 @@ ApplicationWindow {
             var version = parts[0]
             var hash = parts[1]
             var user_url = parts[2]
-            var msg = ""
+            var msg = qsTr("New version of Monero v%1 is available.").arg(version)
             if (isMac || isWindows || isLinux) {
-                msg = qsTr("New version of Monero v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
+                msg += "<br><br>%1:<br>%2<br><br>%3:<br>%4".arg(qsTr("Download")).arg(user_url).arg(qsTr("SHA256 Hash")).arg(hash) + translationManager.emptyString
             } else {
-                msg = qsTr("New version of Monero v%1 is available. Check out getmonero.org").arg(version) + translationManager.emptyString
+                msg += " " + qsTr("Check out getmonero.org") + translationManager.emptyString
             }
             notifier.show(msg)
         } else {
