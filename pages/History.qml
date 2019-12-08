@@ -477,7 +477,6 @@ Rectangle {
                                     return;
 
                                 inputDialog.labelText = qsTr("Jump to page (1-%1)").arg(pages) + translationManager.emptyString;
-                                inputDialog.inputText = "1";
                                 inputDialog.onAcceptedCallback = function() {
                                     var pageNumber = parseInt(inputDialog.inputText);
                                     if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= pages) {
@@ -1195,7 +1194,7 @@ Rectangle {
                                 if(res[i].state === 'copyable' && res[i].parent.hasOwnProperty('text')) toClipboard(res[i].parent.text);
                                 if(res[i].state === 'copyable_address') root.toClipboard(address);
                                 if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
-                                if(res[i].state === 'set_tx_note') root.editDescription(hash);
+                                if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
                                 doCollapse = false;
@@ -1533,7 +1532,7 @@ Rectangle {
         root.updateFilter();
     }
 
-    function editDescription(_hash){
+    function editDescription(_hash, _tx_note){
         inputDialog.labelText = qsTr("Set description:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
@@ -1541,7 +1540,7 @@ Rectangle {
             root.update();
         }
         inputDialog.onRejectedCallback = null;
-        inputDialog.open();
+        inputDialog.open(_tx_note);
     }
 
     function paginationPrevClicked(){
