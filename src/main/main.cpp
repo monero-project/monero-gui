@@ -1,21 +1,21 @@
 // Copyright (c) 2014-2018, The Monero Project
-// 
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -64,9 +64,9 @@
 #include "MainApp.h"
 #include "qt/ipc.h"
 #include "qt/utils.h"
-#include "src/qt/TailsOS.h"
-#include "src/qt/KeysFiles.h"
-#include "src/qt/MoneroSettings.h"
+#include "qt/TailsOS.h"
+#include "qt/KeysFiles.h"
+#include "qt/MoneroSettings.h"
 #include "qt/prices.h"
 
 // IOS exclusions
@@ -75,8 +75,56 @@
 #endif
 
 #ifdef WITH_SCANNER
-#include "QrCodeScanner.h"
+#include "QR-Code-scanner/QrCodeScanner.h"
 #endif
+
+#include <QtPlugin>
+#if defined(Q_OS_OSX)
+  Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
+#elif defined(Q_OS_WIN)
+  Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+#elif defined(Q_OS_LINUX)
+  Q_IMPORT_PLUGIN(QXcbIntegrationPlugin);
+#endif
+Q_IMPORT_PLUGIN(QSvgIconPlugin)
+Q_IMPORT_PLUGIN(QGifPlugin)
+Q_IMPORT_PLUGIN(QICNSPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
+Q_IMPORT_PLUGIN(QJp2Plugin)
+Q_IMPORT_PLUGIN(QJpegPlugin)
+Q_IMPORT_PLUGIN(QMngPlugin)
+Q_IMPORT_PLUGIN(QSvgPlugin)
+Q_IMPORT_PLUGIN(QTgaPlugin)
+Q_IMPORT_PLUGIN(QTiffPlugin)
+Q_IMPORT_PLUGIN(QWbmpPlugin)
+Q_IMPORT_PLUGIN(QWebpPlugin)
+Q_IMPORT_PLUGIN(QQmlDebuggerServiceFactory)
+Q_IMPORT_PLUGIN(QQmlInspectorServiceFactory)
+Q_IMPORT_PLUGIN(QLocalClientConnectionFactory)
+Q_IMPORT_PLUGIN(QDebugMessageServiceFactory)
+Q_IMPORT_PLUGIN(QQmlNativeDebugConnectorFactory)
+Q_IMPORT_PLUGIN(QQmlNativeDebugServiceFactory)
+Q_IMPORT_PLUGIN(QQmlProfilerServiceFactory)
+Q_IMPORT_PLUGIN(QQuickProfilerAdapterFactory)
+Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
+Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
+Q_IMPORT_PLUGIN(QGenericEnginePlugin)
+
+Q_IMPORT_PLUGIN(QtQuick2Plugin)
+Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
+Q_IMPORT_PLUGIN(QtGraphicalEffectsPrivatePlugin)
+Q_IMPORT_PLUGIN(QtQuick2WindowPlugin)
+Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
+Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
+Q_IMPORT_PLUGIN(QmlFolderListModelPlugin)
+Q_IMPORT_PLUGIN(QmlSettingsPlugin)
+Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
+Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
+Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
+Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
+Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
+Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
 
 bool isIOS = false;
 bool isAndroid = false;

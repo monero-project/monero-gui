@@ -34,7 +34,7 @@
 #include <QDebug>
 
 #include "Logger.h"
-#include "src/qt/TailsOS.h"
+#include "qt/TailsOS.h"
 #include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
