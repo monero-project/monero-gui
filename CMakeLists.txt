@@ -29,6 +29,31 @@ set(ARCH "x86-64")
 set(BUILD_64 ON)
 set(INSTALL_VENDORED_LIBUNBOUND=ON)
 
+function (add_c_flag_if_supported flag var)
+  string(REPLACE "-" "_" supported ${flag}_c)
+  check_c_compiler_flag(${flag} ${supported})
+  if(${${supported}})
+    set(${var} "${${var}} ${flag}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+function (add_cxx_flag_if_supported flag var)
+  string(REPLACE "-" "_" supported ${flag}_cxx)
+  check_cxx_compiler_flag(${flag} ${supported})
+  if(${${supported}})
+    set(${var} "${${var}} ${flag}" PARENT_SCOPE)
+  endif()
+endfunction()
+
+function (add_linker_flag_if_supported flag var)
+  string(REPLACE "-" "_" supported ${flag}_ld)
+  string(REPLACE "," "_" supported ${flag}_ld)
+  check_linker_flag(${flag} ${supported})
+  if(${${supported}})
+    set(${var} "${${var}} ${flag}" PARENT_SCOPE)
+  endif()
+endfunction()
+
 find_package(Git)
 if(GIT_FOUND)
   if(NOT DEV_MODE)
@@ -57,7 +82,8 @@ get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 if(STATIC)
 	message(STATUS "Initiating static build")
 	set(Boost_USE_STATIC_LIBS ON)
-	set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  add_definitions(-DMONERO_GUI_STATIC)
 endif()
 
 # Include password strength library
@@ -256,7 +282,7 @@ if(STATIC)
   )
 
   if(MINGW)
-    list(APPEND QT5_LIBRARIES freetype)
+    list(APPEND QT5_LIBRARIES qtfreetype)
 
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
       list(APPEND QT5_LIBRARIES D3D11 Dwrite D2d1)
@@ -307,6 +333,59 @@ if(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default -DGTEST_HAS_TR1_TUPLE=0")
 endif()
 
+# warnings
+add_c_flag_if_supported(-Wformat C_SECURITY_FLAGS)
+add_cxx_flag_if_supported(-Wformat CXX_SECURITY_FLAGS)
+add_c_flag_if_supported(-Wformat-security C_SECURITY_FLAGS)
+add_cxx_flag_if_supported(-Wformat-security CXX_SECURITY_FLAGS)
+
+# -fstack-protector
+if (NOT OPENBSD AND NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND CMAKE_C_COMPILER_VERSION VERSION_LESS 9.1)))
+  add_c_flag_if_supported(-fstack-protector C_SECURITY_FLAGS)
+  add_cxx_flag_if_supported(-fstack-protector CXX_SECURITY_FLAGS)
+  add_c_flag_if_supported(-fstack-protector-strong C_SECURITY_FLAGS)
+  add_cxx_flag_if_supported(-fstack-protector-strong CXX_SECURITY_FLAGS)
+endif()
+
+# New in GCC 8.2
+if (NOT OPENBSD AND NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND CMAKE_C_COMPILER_VERSION VERSION_LESS 9.1)))
+  add_c_flag_if_supported(-fcf-protection=full C_SECURITY_FLAGS)
+  add_cxx_flag_if_supported(-fcf-protection=full CXX_SECURITY_FLAGS)
+endif()
+if (NOT WIN32 AND NOT OPENBSD)
+  add_c_flag_if_supported(-fstack-clash-protection C_SECURITY_FLAGS)
+  add_cxx_flag_if_supported(-fstack-clash-protection CXX_SECURITY_FLAGS)
+endif()
+
+# Removed in GCC 9.1 (or before ?), but still accepted, so spams the output
+if (NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_C_COMPILER_VERSION VERSION_LESS 9.1))
+  add_c_flag_if_supported(-mmitigate-rop C_SECURITY_FLAGS)
+  add_cxx_flag_if_supported(-mmitigate-rop CXX_SECURITY_FLAGS)
+endif()
+
+# linker
+if (NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
+  # Windows binaries die on startup with PIE when compiled with GCC
+  add_linker_flag_if_supported(-pie LD_SECURITY_FLAGS)
+endif()
+add_linker_flag_if_supported(-Wl,-z,relro LD_SECURITY_FLAGS)
+add_linker_flag_if_supported(-Wl,-z,now LD_SECURITY_FLAGS)
+add_linker_flag_if_supported(-Wl,-z,noexecstack noexecstack_SUPPORTED)
+if (noexecstack_SUPPORTED)
+  set(LD_SECURITY_FLAGS "${LD_SECURITY_FLAGS} -Wl,-z,noexecstack")
+endif()
+add_linker_flag_if_supported(-Wl,-z,noexecheap noexecheap_SUPPORTED)
+if (noexecheap_SUPPORTED)
+  set(LD_SECURITY_FLAGS "${LD_SECURITY_FLAGS} -Wl,-z,noexecheap")
+endif()
+
+message(STATUS "Using C security hardening flags: ${C_SECURITY_FLAGS}")
+message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")
+message(STATUS "Using linker security hardening flags: ${LD_SECURITY_FLAGS}")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_SECURITY_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_SECURITY_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS}")
 
 if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
   if (APPLE)

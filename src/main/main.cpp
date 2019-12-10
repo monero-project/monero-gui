@@ -78,6 +78,8 @@
 #include "QR-Code-scanner/QrCodeScanner.h"
 #endif
 
+#ifdef MONERO_GUI_STATIC
+
 #include <QtPlugin>
 #if defined(Q_OS_OSX)
   Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
@@ -90,7 +92,6 @@ Q_IMPORT_PLUGIN(QSvgIconPlugin)
 Q_IMPORT_PLUGIN(QGifPlugin)
 Q_IMPORT_PLUGIN(QICNSPlugin)
 Q_IMPORT_PLUGIN(QICOPlugin)
-Q_IMPORT_PLUGIN(QJp2Plugin)
 Q_IMPORT_PLUGIN(QJpegPlugin)
 Q_IMPORT_PLUGIN(QMngPlugin)
 Q_IMPORT_PLUGIN(QSvgPlugin)
@@ -125,6 +126,8 @@ Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
 Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
 Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
 Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
+
+#endif
 
 bool isIOS = false;
 bool isAndroid = false;
