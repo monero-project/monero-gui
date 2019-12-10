@@ -132,14 +132,21 @@ Rectangle {
 
             MoneroComponents.TextBlock {
                 Layout.fillWidth: true
-                Layout.maximumWidth: 360
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: {
-                    var wallet_path = walletPath();
-                    if(isIOS)
-                        wallet_path = moneroAccountsDir + wallet_path;
-                    return wallet_path;
+                property string walletPath: (isIOS ?  moneroAccountsDir : "") + appWindow.walletPath()
+                text: "\
+                    <style type='text/css'>\
+                        a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
+                    </style>\
+                    <a href='#'>%1</a>".arg(walletPath)
+                textFormat: Text.RichText
+                onLinkActivated: oshelper.openContainingFolder(walletPath)
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
             }
 
@@ -262,7 +269,19 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                text: walletLogPath
+                text: "\
+                    <style type='text/css'>\
+                        a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
+                    </style>\
+                    <a href='#'>%1</a>".arg(walletLogPath)
+                textFormat: Text.RichText
+                onLinkActivated: oshelper.openContainingFolder(walletLogPath)
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
 
             Rectangle {

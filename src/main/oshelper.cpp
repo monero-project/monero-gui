@@ -30,7 +30,10 @@
 #include <QTemporaryFile>
 #include <QDir>
 #include <QDebug>
+#include <QDesktopServices>
+#include <QFileInfo>
 #include <QString>
+#include <QUrl>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
@@ -49,6 +52,19 @@
 OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
 
+}
+
+bool OSHelper::openContainingFolder(const QString &filePath) const
+{
+    QUrl prepared;
+    prepared.setScheme("file");
+    prepared.setPath(QFileInfo(filePath).absolutePath());
+    if (!prepared.isValid())
+    {
+        qWarning() << "malformed file path" << filePath << prepared.errorString();
+        return false;
+    }
+    return QDesktopServices::openUrl(prepared);
 }
 
 QString OSHelper::temporaryFilename() const
