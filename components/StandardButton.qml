@@ -146,6 +146,8 @@ Item {
         cursorShape: Qt.PointingHandCursor
     }
 
+    Keys.enabled: button.visible
     Keys.onSpacePressed: doClick()
+    Keys.onEnterPressed: Keys.onReturnPressed(event)
     Keys.onReturnPressed: doClick()
 }

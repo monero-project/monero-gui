@@ -110,6 +110,8 @@ Item {
                     color: MoneroComponents.Style.blackTheme ? "black" : "#A9FFFFFF"
                 }
 
+                Keys.enabled: root.visible
+                Keys.onEnterPressed: Keys.onReturnPressed(event)
                 Keys.onReturnPressed: {
                     root.close()
                     root.accepted()
