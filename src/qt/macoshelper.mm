@@ -47,3 +47,11 @@ bool MacOSHelper::isCapsLock()
     return (flags & NSAlphaShiftKeyMask);
 #endif
 }
+
+bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
+{
+    NSURL *nspath = path.toNSURL();
+    NSArray *fileURLs = [NSArray arrayWithObjects:nspath, nil];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
+    return true;
+}
