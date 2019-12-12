@@ -90,14 +90,25 @@ public:
     //! only applicable for output transactions
     //! used in tx details popup
     QString destinations_formatted() const;
-    //! Could be useful later when addressbook is implemented
-    Q_INVOKABLE QList<Transfer*> transfers() const;
 private:
-    explicit TransactionInfo(Monero::TransactionInfo * pimpl, QObject *parent = 0);
+    explicit TransactionInfo(const Monero::TransactionInfo *pimpl, QObject *parent = 0);
 private:
     friend class TransactionHistory;
-    Monero::TransactionInfo * m_pimpl;
     mutable QList<Transfer*> m_transfers;
+    quint64 m_amount;
+    quint64 m_blockHeight;
+    quint64 m_confirmations;
+    Direction m_direction;
+    bool m_failed;
+    quint64 m_fee;
+    QString m_hash;
+    QString m_label;
+    QString m_paymentId;
+    bool m_pending;
+    quint32 m_subaddrAccount;
+    QSet<quint32> m_subaddrIndex;
+    QDateTime m_timestamp;
+    quint64 m_unlockTime;
 };
 
 // in order to wrap it to QVariant
