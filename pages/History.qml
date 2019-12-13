@@ -1599,7 +1599,7 @@ Rectangle {
 
         currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
             informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
-            informationPopup.content = buildTxDetailsString(hash, paymentId, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
+            informationPopup.content = buildTxDetailsString(hash, hasPaymentId ? paymentId : null, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
             informationPopup.onCloseCallback = null
             informationPopup.open();
         });
