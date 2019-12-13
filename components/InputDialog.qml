@@ -46,7 +46,6 @@ Item {
     signal rejected()
 
     function open(prepopulate) {
-        inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.state = "essentials"
@@ -56,7 +55,6 @@ Item {
     }
 
     function close() {
-        inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
         titleBar.state = "default"

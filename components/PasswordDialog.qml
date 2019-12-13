@@ -68,7 +68,6 @@ Item {
         passwordInput1.text = ""
         passwordInput2.text = ""
         passwordInput1.forceActiveFocus();
-        inactiveOverlay.visible = true // draw appwindow inactive
         root.walletName = walletName ? walletName : ""
         errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
@@ -106,7 +105,6 @@ Item {
     }
 
     function close() {
-        inactiveOverlay.visible = false
         leftPanel.enabled = true
         middlePanel.enabled = true
         wizard.enabled = true
@@ -125,7 +123,6 @@ Item {
     }
 
     ColumnLayout {
-        z: inactiveOverlay.z + 1
         id: mainLayout
         spacing: 10
         anchors { fill: parent; margins: 35 }

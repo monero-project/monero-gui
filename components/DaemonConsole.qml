@@ -53,11 +53,9 @@ Window {
     signal rejected()
 
     onClosing: {
-        inactiveOverlay.visible = false;
     }
 
     function open() {
-        inactiveOverlay.visible = true;
         show();
     }
 
