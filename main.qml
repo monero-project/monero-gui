@@ -57,7 +57,6 @@ ApplicationWindow {
     property var transaction;
     property var transactionDescription;
     property var walletPassword
-    property bool isNewWallet: false
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
@@ -201,8 +200,20 @@ ApplicationWindow {
         leftPanel.selectItem(page);
     }
 
+    function openWallet(prevState) {
+        passwordDialog.onAcceptedCallback = function() {
+            walletPassword = passwordDialog.password;
+            initialize();
+        }
+        passwordDialog.onRejectedCallback = function() {
+            if (prevState) {
+                appWindow.viewState = prevState;
+            }
+        };
+        passwordDialog.open(usefulName(walletPath()));
+    }
+
     function initialize() {
-        appWindow.viewState = "normal";
         console.log("initializing..")
 
         // Use stored log level
@@ -238,30 +249,18 @@ ApplicationWindow {
         simpleModeConnectionTimer.running = true;
 
         // wallet already opened with wizard, we just need to initialize it
-        if (typeof wizard.m_wallet !== 'undefined') {
-            console.log("using wizard wallet")
-            //Set restoreHeight
-            if(persistentSettings.restore_height > 0){
-                // We store restore height in own variable for performance reasons.
-                restoreHeight = persistentSettings.restore_height
-            }
+        var wallet_path = walletPath();
+        if(isIOS)
+            wallet_path = moneroAccountsDir + wallet_path;
+        // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
+        console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
 
-            connectWallet(wizard.m_wallet)
-
-            isNewWallet = true
-            // We don't need the wizard wallet any more - delete to avoid conflict with daemon adress change
-            delete wizard.m_wallet
-        }  else {
-            var wallet_path = walletPath();
-            if(isIOS)
-                wallet_path = moneroAccountsDir + wallet_path;
-            // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
-            console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
-
-            this.onWalletOpening();
-            walletManager.openWalletAsync(wallet_path, walletPassword,
-                                              persistentSettings.nettype, persistentSettings.kdfRounds);
-        }
+        this.onWalletOpening();
+        walletManager.openWalletAsync(
+            wallet_path,
+            walletPassword,
+            persistentSettings.nettype,
+            persistentSettings.kdfRounds);
 
         // Hide titlebar based on persistentSettings.customDecorations
         titleBar.visible = persistentSettings.customDecorations;
@@ -517,16 +516,6 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
         console.log(">>> wallet opened: " + wallet)
         if (wallet.status !== Wallet.Status_Ok) {
-            passwordDialog.onAcceptedCallback = function() {
-                walletPassword = passwordDialog.password;
-                appWindow.initialize();
-            }
-            passwordDialog.onRejectedCallback = function() {
-                walletPassword = "";
-                //appWindow.enableUI(false)
-                wizard.wizardState = "wizardHome";
-                rootItem.state = "wizard";
-            }
             // try to resolve common wallet cache errors automatically
             switch (wallet.errorString) {
                 case "basic_string::_M_replace_aux":
@@ -649,17 +638,6 @@ ApplicationWindow {
 
         // Refresh is succesfull if blockchain height > 1
         if (bcHeight > 1){
-            // Save new wallet after first refresh
-            // Wallet is nomrmally saved to disk on app exit. This prevents rescan from block 0 after app crash
-            if(isNewWallet){
-                console.log("Saving wallet after first refresh");
-                currentWallet.store()
-                isNewWallet = false
-
-                // Update History
-                currentWallet.history.refresh(currentWallet.currentSubaddressAccount);
-            }
-
             // recovering from seed is finished after first refresh
             if(persistentSettings.is_recovering) {
                 persistentSettings.is_recovering = false
@@ -1329,19 +1307,12 @@ ApplicationWindow {
             }
         } else console.log("qrScannerEnabled disabled");
 
+        wizard.wizardState = "wizardHome";
         if(!walletsFound()) {
             rootItem.state = "wizard"
         } else {
             rootItem.state = "normal"
-            passwordDialog.onAcceptedCallback = function() {
-                walletPassword = passwordDialog.password;
-                initialize(persistentSettings);
-            }
-            passwordDialog.onRejectedCallback = function() {
-                wizard.wizardState = "wizardHome";
-                rootItem.state = "wizard"
-            }
-            passwordDialog.open(usefulName(walletPath()))
+            openWallet("wizard");
         }
 
         checkUpdates();
@@ -1704,7 +1675,7 @@ ApplicationWindow {
             anchors.fill: parent
             onUseMoneroClicked: {
                 rootItem.state = "normal";
-                appWindow.initialize();
+                appWindow.openWallet("wizard");
             }
         }
 

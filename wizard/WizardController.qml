@@ -375,8 +375,7 @@ Rectangle {
         // protecting wallet with password
         wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
 
-        // Store password in session to be able to use password protected functions (e.g show seed)
-        appWindow.walletPassword = walletOptionsPassword
+        restart();
 
         // save to persistent settings
         persistentSettings.language = wizardController.language_language
@@ -540,20 +539,7 @@ Rectangle {
         if(isIOS)
             persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir, "");
 
-        console.log(moneroAccountsDir);
-        console.log(fn);
-        console.log(persistentSettings.wallet_path);
-
-        passwordDialog.onAcceptedCallback = function() {
-            walletPassword = passwordDialog.password;
-            appWindow.initialize();
-        }
-        passwordDialog.onRejectedCallback = function() {
-            console.log("Canceled");
-            appWindow.viewState = "wizard";
-        }
-
-        passwordDialog.open(appWindow.usefulName(appWindow.walletPath()));
+        appWindow.openWallet();
     }
 
     Component.onCompleted: {
