@@ -680,7 +680,7 @@ ApplicationWindow {
         console.log(">>> wallet refreshed")
 
         // Daemon connected
-        leftPanel.networkStatus.connected = currentWallet.connected()
+        leftPanel.networkStatus.connected = currentWallet ? currentWallet.connected() : Wallet.ConnectionStatus_Disconnected
 
         currentWallet.refreshHeightAsync();
     }
