@@ -1288,6 +1288,7 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox2 {
+            visible: root.txCount > 0
             id: showAdvancedCheckbox
             Layout.topMargin: 30
             Layout.bottomMargin: 20
@@ -1299,7 +1300,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            visible: persistentSettings.historyShowAdvanced
+            visible: persistentSettings.historyShowAdvanced && root.txCount > 0
             Layout.leftMargin: sideMargin
             Layout.rightMargin: sideMargin
             spacing: 20
