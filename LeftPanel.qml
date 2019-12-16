@@ -350,6 +350,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.bottom: networkStatus.top
             width: parent.width
+            boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
             clip: true
 
         Column {
