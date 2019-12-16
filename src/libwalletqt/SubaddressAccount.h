@@ -38,7 +38,7 @@ class SubaddressAccount : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Monero::SubaddressAccountRow*> getAll(bool update = false) const;
+    Q_INVOKABLE QList<Monero::SubaddressAccountRow *> getAll() const;
     Q_INVOKABLE Monero::SubaddressAccountRow * getRow(int index) const;
     Q_INVOKABLE void addRow(const QString &label) const;
     Q_INVOKABLE void setLabel(quint32 accountIndex, const QString &label) const;

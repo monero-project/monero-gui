@@ -438,7 +438,7 @@ bool Wallet::refresh()
     bool result = m_walletImpl->refresh();
     m_history->refresh(currentSubaddressAccount());
     m_subaddress->refresh(currentSubaddressAccount());
-    m_subaddressAccount->getAll(true);
+    m_subaddressAccount->getAll();
     if (result)
         emit updated();
     return result;
