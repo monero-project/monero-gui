@@ -140,13 +140,42 @@ platform=$(get_platform)
 # default make executable
 make_exec="make"
 
+if [ -z "$ARCH" ]; then
+    if [ "$platform" == "darwin" ]; then
+        if [ "$STATIC" == true ]; then
+            ARCH="x86-64"
+        fi
+    elif [ "$platform" == "linux64" ]; then
+        if [ "$ANDROID" == true ]; then
+            ARCH="armv7-a"
+        elif [ "$STATIC" == true ]; then
+            ARCH="x86-64"
+        fi
+    elif [ "$platform" == "linux32" ]; then
+        if [ "$STATIC" == true ]; then
+            ARCH="i686"
+        fi
+    elif [ "$platform" == "linuxarmv7" ]; then
+        ARCH="armv7-a"
+    elif [ "$platform" == "mingw32" ]; then
+        ARCH="i686"
+    elif [ "$platform" == "mingw64" ]; then
+        ARCH="x86-64"
+    fi
+fi
+
+if [ -n "$ARCH" ]; then
+    echo "Building for ARCH $ARCH"
+    ARCH="-D ARCH=\"$ARCH\""
+fi
+
 ## OS X
 if [ "$platform" == "darwin" ]; then
     echo "Configuring build for MacOS.."
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D BUILD_64=ON -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE  -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE $ARCH -D BUILD_TAG="mac-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## LINUX 64
@@ -154,38 +183,38 @@ elif [ "$platform" == "linux64" ]; then
     echo "Configuring build for Linux x64"
     if [ "$ANDROID" == true ]; then
         echo "Configuring build for Android on Linux host"
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="armv7-a" -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D ANDROID=true -D BUILD_GUI_DEPS=ON -D USE_LTO=OFF -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     elif [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="x86-64" -D BUILD_64=ON -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D BUILD_64=ON -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE $ARCH -D BUILD_TAG="linux-x64" -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## LINUX 32
 elif [ "$platform" == "linux32" ]; then
     echo "Configuring build for Linux i686"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE $ARCH -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## LINUX ARMv7
 elif [ "$platform" == "linuxarmv7" ]; then
     echo "Configuring build for Linux armv7"
     if [ "$STATIC" == true ]; then
-        cmake -D BUILD_TESTS=OFF -D ARCH="armv7-a" -D STATIC=ON -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D BUILD_TESTS=OFF $ARCH -D STATIC=ON -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D BUILD_TESTS=OFF -D ARCH="armv7-a" -D -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D BUILD_TESTS=OFF $ARCH -D -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## LINUX other 
 elif [ "$platform" == "linux" ]; then
     echo "Configuring build for Linux general"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE $ARCH -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## Windows 64
@@ -194,21 +223,21 @@ elif [ "$platform" == "mingw64" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW64.."
     BOOST_ROOT=/mingw64/boost
-    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="x86-64" -D BUILD_TAG="win-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BOOST_ROOT="$BOOST_ROOT" $ARCH -D BUILD_TAG="win-x64" -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/64-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
 
 ## Windows 32
 elif [ "$platform" == "mingw32" ]; then
     # Do something under Windows NT platform
     echo "Configuring build for MINGW32.."
     BOOST_ROOT=/mingw32/boost
-    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" -D ARCH="i686" -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/32-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
+    cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D Boost_DEBUG=ON -D BOOST_ROOT="$BOOST_ROOT" $ARCH -D BUILD_64=OFF -D BUILD_GUI_DEPS=ON -D INSTALL_VENDORED_LIBUNBOUND=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR" -G "MSYS Makefiles" -D CMAKE_TOOLCHAIN_FILE=../../cmake/32-bit-toolchain.cmake -D MSYS2_FOLDER=$(cd $MINGW_PREFIX/.. && pwd -W) ../..
     make_exec="mingw32-make"
 else
     echo "Unknown platform, configuring general build"
     if [ "$STATIC" == true ]; then
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D STATIC=ON $ARCH -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D CMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE $ARCH -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 fi
 
