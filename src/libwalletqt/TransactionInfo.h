@@ -100,8 +100,4 @@ private:
     mutable QList<Transfer*> m_transfers;
 };
 
-// in order to wrap it to QVariant
-Q_DECLARE_METATYPE(TransactionInfo*)
-
-
 #endif // TRANSACTIONINFO_H
