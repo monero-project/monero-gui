@@ -57,13 +57,13 @@ Rectangle {
         MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
             text: qsTr("Mining is only available on local daemons.") + translationManager.emptyString
-            visible: !walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+            visible: persistentSettings.useRemoteNode
         }
 
         MoneroComponents.WarningBox {
             Layout.bottomMargin: 8
             text: qsTr("Your daemon must be synchronized before you can start mining") + translationManager.emptyString
-            visible: walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && !appWindow.daemonSynced
+            visible: !persistentSettings.useRemoteNode && !appWindow.daemonSynced
         }
 
         MoneroComponents.TextPlain {
@@ -199,7 +199,7 @@ Rectangle {
                             } else {
                                 errorPopup.title  = qsTr("Error starting mining") + translationManager.emptyString;
                                 errorPopup.text = qsTr("Couldn't start mining.<br>") + translationManager.emptyString
-                                if (!walletManager.isDaemonLocal(appWindow.currentDaemonAddress))
+                                if (persistentSettings.useRemoteNode)
                                     errorPopup.text += qsTr("Mining is only available on local daemons. Run a local daemon to be able to mine.<br>") + translationManager.emptyString
                                 errorPopup.icon = StandardIcon.Critical
                                 errorPopup.open()
@@ -259,7 +259,7 @@ Rectangle {
     }
 
     function onMiningStatus(isMining) {
-        var daemonReady = walletManager.isDaemonLocal(appWindow.currentDaemonAddress) && appWindow.daemonSynced
+        var daemonReady = !persistentSettings.useRemoteNode && appWindow.daemonSynced
         appWindow.isMining = isMining;
         updateStatusText()
         startSoloMinerButton.enabled = !appWindow.isMining && daemonReady
@@ -284,7 +284,7 @@ Rectangle {
     function onPageCompleted() {
         console.log("Mining page loaded");
         update()
-        timer.running = walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+        timer.running = !persistentSettings.useRemoteNode
     }
 
     function onPageClosed() {
