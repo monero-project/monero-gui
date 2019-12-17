@@ -36,24 +36,34 @@ SubaddressAccount::SubaddressAccount(Monero::SubaddressAccount *subaddressAccoun
     getAll();
 }
 
-QList<Monero::SubaddressAccountRow *> SubaddressAccount::getAll() const
+void SubaddressAccount::getAll() const
 {
     qDebug(__FUNCTION__);
 
     emit refreshStarted();
 
-    m_rows.clear();
-    for (auto &row: m_subaddressAccountImpl->getAll()) {
-        m_rows.append(row);
+    {
+        QWriteLocker locker(&m_lock);
+        m_rows.clear();
+        for (auto &row: m_subaddressAccountImpl->getAll()) {
+            m_rows.append(row);
+        }
     }
 
     emit refreshFinished();
-    return m_rows;
 }
 
-Monero::SubaddressAccountRow * SubaddressAccount::getRow(int index) const
+bool SubaddressAccount::getRow(int index, std::function<void (Monero::SubaddressAccountRow &)> callback) const
 {
-    return m_rows.at(index);
+    QReadLocker locker(&m_lock);
+
+    if (index < 0 || index >= m_rows.size())
+    {
+        return false;
+    }
+
+    callback(*m_rows.value(index));
+    return true;
 }
 
 void SubaddressAccount::addRow(const QString &label) const
@@ -76,5 +86,7 @@ void SubaddressAccount::refresh() const
 
 quint64 SubaddressAccount::count() const
 {
+    QReadLocker locker(&m_lock);
+
     return m_rows.size();
 }
