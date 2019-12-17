@@ -251,6 +251,7 @@ Item {
     QtQuickControls2.Popup {
         id: popup
         padding: 0
+        closePolicy: QtQuickControls2.Popup.CloseOnEscape | QtQuickControls2.Popup.CloseOnPressOutsideParent
 
         Rectangle {
             id: calendarRect

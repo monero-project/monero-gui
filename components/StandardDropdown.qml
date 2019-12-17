@@ -126,6 +126,7 @@ Item {
     Popup {
         id: popup
         padding: 0
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
 
         Rectangle {
             id: droplist
