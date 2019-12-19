@@ -54,8 +54,6 @@ Rectangle {
     property string sendButtonWarning: ""
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool showAdvanced: false
-    // @TODO: remove after pid removal hardfork
-    property bool warningLongPidTransfer: false
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
 
     Clipboard { id: clipboard }
@@ -85,17 +83,6 @@ Rectangle {
     function setPaymentId(value) {
         paymentIdLine.text = value;
         paymentIdCheckbox.checked = paymentIdLine.text != "";
-    }
-
-    function isLongPidService(text) {
-        // @TODO: remove after pid removal hardfork
-        return text.length == 95 &&
-               [ "44tLjmXrQNrWJ5NBsEj2R77ZBEgDa3fEe9GLpSf2FRmhexPvfYDUAB7EXX1Hdb3aMQ9FLqdJ56yaAhiXoRsceGJCRS3Jxkn", // Binance
-                 "4AQ3ZREb53FMYKBmpPn7BD7hphPk6G1ceinQX6gefAvhFJsNbeFsGwebZWCNxoJAbZhD9cjetBAqmLhfXmcNLBpPMsBL6yM", // KuCoin
-                 "47YzEcMrU2S42UitURo7ukUDaSaL485Z1QbmFgq1vSs5g3JesL4rChwWf2uWk1va99JAaRxt65jhX9uAqQnjeFM44ckgZtp", // AnycoinDirect
-                 "4BCeEPhodgPMbPWFN1dPwhWXdRX8q4mhhdZdA1dtSMLTLCEYvAj9QXjXAfF7CugEbmfBhgkqHbdgK9b2wKA6nqRZQCgvCDm", // Bitfinex
-                 "463tWEBn5XZJSxLU6uLQnQ2iY9xuNcDbjLSjkn3XAXHCbLrTTErJrBWYgHJQyrCwkNgYvyV3z8zctJLPCZy24jvb3NiTcTJ"  // Bittrex
-               ].indexOf(text) > -1
     }
 
     function clearFields() {
@@ -277,7 +264,6 @@ Rectangle {
                     amountLine.text = parsed.amount;
                     setDescription(parsed.tx_description);
                   }
-                  warningLongPidTransfer = isLongPidService(text);
               }
               inlineButton.text: FontAwesome.qrcode
               inlineButton.fontPixelSize: 22
@@ -375,7 +361,6 @@ Rectangle {
 
           ColumnLayout {
               visible: paymentIdCheckbox.checked
-              // @TODO: remove after pid removal hardfork
               CheckBox {
                   id: paymentIdCheckbox
                   border: false
@@ -403,17 +388,17 @@ Rectangle {
                   wrapMode: Text.WrapAnywhere
                   addressValidation: false
                   visible: paymentIdCheckbox.checked
+                  error: paymentIdCheckbox.checked
               }
           }
       }
 
       MoneroComponents.WarningBox {
-          // @TODO: remove after pid removal hardfork
           id: paymentIdWarningBox
           text: qsTr("Long payment IDs are obsolete. \
           Long payment IDs were not encrypted on the blockchain and would harm your privacy. \
           If the party you're sending to still requires a long payment ID, please notify them.") + translationManager.emptyString;
-          visible: warningLongPidTransfer || paymentIdCheckbox.checked
+          visible: paymentIdCheckbox.checked || warningLongPidDescription
       }
 
       MoneroComponents.WarningBox {
