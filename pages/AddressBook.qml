@@ -381,9 +381,10 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.LineEditMulti {
+            MoneroComponents.LineEdit {
                 id: descriptionLine
                 Layout.topMargin: 20
+                Layout.fillWidth: true
                 labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
                                  Description") + translationManager.emptyString
                 placeholderText: qsTr("Add a name...") + translationManager.emptyString
