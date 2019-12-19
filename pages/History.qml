@@ -1539,6 +1539,7 @@ Rectangle {
             appWindow.currentWallet.setUserNote(_hash, inputDialog.inputText);
             appWindow.showStatusMessage(qsTr("Updated description."),3);
             root.update();
+            appWindow.currentWallet.store()
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open();

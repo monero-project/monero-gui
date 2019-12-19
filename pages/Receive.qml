@@ -56,6 +56,7 @@ Rectangle {
         inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index);
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, _index, inputDialog.inputText);
+            appWindow.currentWallet.store()
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open()
@@ -259,6 +260,7 @@ Rectangle {
                         appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
                         current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1
                         subaddressListView.currentIndex = current_subaddress_table_index
+                        appWindow.currentWallet.store()
                     }
                     inputDialog.onRejectedCallback = null;
                     inputDialog.open()
