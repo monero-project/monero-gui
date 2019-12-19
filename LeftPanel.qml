@@ -461,7 +461,7 @@ Rectangle {
 
             MoneroComponents.MenuButton {
                 id: merchantButton
-                visible: appWindow.walletMode >= 2
+                visible: persistentSettings.enableMerchantPage
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Merchant") + translationManager.emptyString
@@ -476,7 +476,7 @@ Rectangle {
             }
 
             MoneroComponents.MenuButtonDivider {
-                visible: merchantButton.present && appWindow.walletMode >= 2
+                visible: merchantButton.present && persistentSettings.enableMerchantPage
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 16

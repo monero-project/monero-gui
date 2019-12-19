@@ -80,6 +80,15 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: enableMerchantPageCheckbox
+            checked: persistentSettings.enableMerchantPage
+            onClicked: {
+                persistentSettings.enableMerchantPage = !persistentSettings.enableMerchantPage
+            }
+            text: qsTr("Enable merchant page") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
