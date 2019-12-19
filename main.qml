@@ -401,6 +401,13 @@ ApplicationWindow {
         return path.replace(/.*[\/\\]/, '').replace(/\.keys$/, '')
     }
 
+    function getUnlockedBalance() {
+        if(!currentWallet){
+            return 0
+        }
+        return currentWallet.unlockedBalance()
+    }
+
     function updateBalance() {
         if (!currentWallet)
             return;
@@ -408,8 +415,8 @@ ApplicationWindow {
         var balance = "?.??";
         var balanceU = "?.??";
         if(!hideBalanceForced && !persistentSettings.hideBalance){
-            balance = walletManager.displayAmount(currentWallet.balance(currentWallet.currentSubaddressAccount));
-            balanceU = walletManager.displayAmount(currentWallet.unlockedBalance(currentWallet.currentSubaddressAccount));
+            balance = walletManager.displayAmount(currentWallet.balance());
+            balanceU = walletManager.displayAmount(currentWallet.unlockedBalance());
         }
 
         if (persistentSettings.fiatPriceEnabled) {
@@ -858,24 +865,24 @@ ApplicationWindow {
         if (amount !== "(all)") {
             var amountxmr = walletManager.amountFromString(amount);
             console.log("integer amount: ", amountxmr);
-            console.log("integer unlocked",currentWallet.unlockedBalance)
+            console.log("integer unlocked", currentWallet.unlockedBalance())
             if (amountxmr <= 0) {
                 hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
                         .arg(walletManager.displayAmount(0))
-                        .arg(walletManager.maximumAllowedAmountAsSting())
+                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
                         + translationManager.emptyString
 
                 informationPopup.icon  = StandardIcon.Critical
                 informationPopup.onCloseCallback = null
                 informationPopup.open()
                 return;
-            } else if (amountxmr > currentWallet.unlockedBalance) {
+            } else if (amountxmr > currentWallet.unlockedBalance()) {
                 hideProcessingSplash()
                 informationPopup.title = qsTr("Error") + translationManager.emptyString;
                 informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
-                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance))
+                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
                         + translationManager.emptyString
 
                 informationPopup.icon  = StandardIcon.Critical

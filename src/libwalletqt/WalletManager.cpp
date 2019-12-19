@@ -260,7 +260,7 @@ quint64 WalletManager::maximumAllowedAmount() const
     return Monero::Wallet::maximumAllowedAmount();
 }
 
-QString WalletManager::maximumAllowedAmountAsSting() const
+QString WalletManager::maximumAllowedAmountAsString() const
 {
     return WalletManager::displayAmount(WalletManager::maximumAllowedAmount());
 }

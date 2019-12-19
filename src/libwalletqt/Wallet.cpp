@@ -289,6 +289,11 @@ bool Wallet::viewOnly() const
     return m_walletImpl->watchOnly();
 }
 
+quint64 Wallet::balance() const
+{
+    return balance(m_currentSubaddressAccount);
+}
+
 quint64 Wallet::balance(quint32 accountIndex) const
 {
     return m_walletImpl->balance(accountIndex);
@@ -297,6 +302,11 @@ quint64 Wallet::balance(quint32 accountIndex) const
 quint64 Wallet::balanceAll() const
 {
     return m_walletImpl->balanceAll();
+}
+
+quint64 Wallet::unlockedBalance() const
+{
+    return unlockedBalance(m_currentSubaddressAccount);
 }
 
 quint64 Wallet::unlockedBalance(quint32 accountIndex) const

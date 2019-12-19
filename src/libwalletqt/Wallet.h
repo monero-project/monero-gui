@@ -160,10 +160,12 @@ public:
     Q_INVOKABLE void setTrustedDaemon(bool arg);
 
     //! returns balance
+    Q_INVOKABLE quint64 balance() const;
     Q_INVOKABLE quint64 balance(quint32 accountIndex) const;
     Q_INVOKABLE quint64 balanceAll() const;
 
     //! returns unlocked balance
+    Q_INVOKABLE quint64 unlockedBalance() const;
     Q_INVOKABLE quint64 unlockedBalance(quint32 accountIndex) const;
     Q_INVOKABLE quint64 unlockedBalanceAll() const;
 

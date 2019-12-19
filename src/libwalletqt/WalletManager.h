@@ -135,7 +135,7 @@ public:
     Q_INVOKABLE quint64 maximumAllowedAmount() const;
 
     // QML JS engine doesn't support unsigned integers
-    Q_INVOKABLE QString maximumAllowedAmountAsSting() const;
+    Q_INVOKABLE QString maximumAllowedAmountAsString() const;
 
     Q_INVOKABLE bool paymentIdValid(const QString &payment_id) const;
     Q_INVOKABLE bool addressValid(const QString &address, NetworkType::Type nettype) const;
