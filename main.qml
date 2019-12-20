@@ -2044,6 +2044,7 @@ ApplicationWindow {
         if(rootItem.state !== "normal") return;
         if(!persistentSettings.lockOnUserInActivity) return;
         if(passwordDialog.visible) return;
+        var inputDialogVisible = inputDialog && inputDialog.visible
 
         // prompt password after X seconds of inactivity
         var epoch = Math.floor((new Date).getTime() / 1000);
@@ -2056,9 +2057,11 @@ ApplicationWindow {
             } else {
                 passwordDialog.showError(qsTr("Wrong password"));
             }
+            if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+        if (inputDialogVisible) inputDialog.close()
         passwordDialog.open();
     }
 
