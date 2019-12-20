@@ -115,8 +115,6 @@ Rectangle {
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
 
-    // flickable margin
-    property int flickableHeightMargin: 200
 
     property int layoutScale: {
         if(appWindow.width < 800){
