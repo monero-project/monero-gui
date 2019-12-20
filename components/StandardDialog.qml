@@ -125,6 +125,7 @@ Rectangle {
                 id: flickable
                 anchors.fill: parent
                 ScrollBar.vertical: ScrollBar { }
+                boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
                 TextArea.flickable: TextArea {
                     id: dialogContent

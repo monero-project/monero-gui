@@ -267,6 +267,7 @@ Rectangle {
             id: wizardFlickable
             anchors.fill: parent
             clip: true
+            boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
             ScrollBar.vertical: ScrollBar {
                 parent: wizardController
