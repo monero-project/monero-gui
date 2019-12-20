@@ -79,6 +79,10 @@ add_subdirectory(monero)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 
+if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_definitions(-DQT_NO_DEBUG)
+endif()
+
 if(STATIC)
 	message(STATUS "Initiating static build")
 	set(Boost_USE_STATIC_LIBS ON)
