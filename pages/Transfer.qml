@@ -193,6 +193,7 @@ Rectangle {
                                 amountLine.cursorPosition = 1;
                             }
                         }
+                        amountLine.error = walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()
                   }
 
                   validator: RegExpValidator {
@@ -444,22 +445,8 @@ Rectangle {
           }
       }
 
-      function checkInformation(amount, address, payment_id, nettype) {
-        address = address.trim()
-        payment_id = payment_id.trim()
-
-        var amount_ok = amount.length > 0
-        var address_ok = walletManager.addressValid(address, nettype)
-        var payment_id_ok = payment_id.length == 0 || (payment_id.length == 64 && walletManager.paymentIdValid(payment_id))
-        var ipid = walletManager.paymentIdFromAddress(address, nettype)
-        if (ipid.length > 0 && payment_id.length > 0)
-           payment_id_ok = false
-
-        addressLine.error = !address_ok
-        amountLine.error = !amount_ok
-        paymentIdLine.error = !payment_id_ok
-
-        return amount_ok && address_ok && payment_id_ok
+      function checkInformation(amount, address, nettype) {
+        return amount.length > 0 && walletManager.amountFromString(amountLine.text) <= appWindow.getUnlockedBalance() && TxUtils.checkAddress(address, nettype)
       }
 
     } // pageRoot
@@ -505,7 +492,7 @@ Rectangle {
                 id: saveTxButton
                 text: qsTr("Create tx file") + translationManager.emptyString
                 visible: appWindow.viewOnly
-                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)
+                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)
                 small: true
                 onClicked: {
                     console.log("Transfer: saveTx Clicked")
@@ -772,7 +759,7 @@ Rectangle {
         }
 
         // There are sufficient unlocked funds available
-        if(parseFloat(amountLine.text) > parseFloat(middlePanel.unlockedBalanceText)){
+        if(walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()){
             root.sendButtonWarning = qsTr("Amount is more than unlocked balance.") + translationManager.emptyString;
             return false;
         }
@@ -782,10 +769,19 @@ Rectangle {
             return false;
         }
 
-        // The transactional information is correct
-        if(!pageRoot.checkInformation(amountLine.text, addressLine.text, paymentIdLine.text, appWindow.persistentSettings.nettype)){
-            if(amountLine.text && addressLine.text)
-                root.sendButtonWarning = qsTr("Transaction information is incorrect.") + translationManager.emptyString;
+        if (addressLine.text == "") {
+            return false;
+        }
+
+        // Address is valid
+        if(!TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)){
+            root.sendButtonWarning = qsTr("Address is invalid.") + translationManager.emptyString;
+            return false;
+        }
+
+        // Amount is nonzero
+        if (!amountLine.text || parseFloat(amountLine.text) <= 0) {
+            root.sendButtonWarning = qsTr("Enter an amount.") + translationManager.emptyString;
             return false;
         }
 
