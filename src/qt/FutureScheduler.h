@@ -50,10 +50,10 @@ private:
             try
             {
                 auto *watcher = newWatcher<T>();
-                watcher->setFuture(makeFuture(watcher));
                 connect(watcher, &QFutureWatcher<T>::finished, [this, watcher] {
                     watcher->deleteLater();
                 });
+                watcher->setFuture(makeFuture(watcher));
                 return qMakePair(true, watcher->future());
             }
             catch (const std::exception &exception)
