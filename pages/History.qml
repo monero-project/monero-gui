@@ -1314,7 +1314,7 @@ Rectangle {
             }
 
             MoneroComponents.StandardButton {
-                visible: !isIOS && root.txCount > 0
+                visible: !isIOS
                 small: true
                 text: qsTr("Export all history") + translationManager.emptyString
                 onClicked: {
