@@ -466,7 +466,7 @@ ApplicationWindow {
 
         // update local daemon status.
         const isDisconnected = status === Wallet.ConnectionStatus_Disconnected;
-        if (walletManager.isDaemonLocal(currentDaemonAddress)) {
+        if (!persistentSettings.useRemoteNode) {
             daemonRunning = !isDisconnected;
         } else {
             daemonRunning = false;
@@ -476,7 +476,7 @@ ApplicationWindow {
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if (appWindow.walletMode >= 2 && walletManager.isDaemonLocal(currentDaemonAddress) && !walletInitialized && isDisconnected) {
+        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && isDisconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();

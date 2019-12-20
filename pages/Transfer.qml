@@ -558,7 +558,7 @@ Rectangle {
                 id: importKeyImagesButton
                 text: qsTr("Import key images") + translationManager.emptyString
                 small: true
-                visible: appWindow.viewOnly && walletManager.isDaemonLocal(appWindow.currentDaemonAddress)
+                visible: appWindow.viewOnly && !persistentSettings.useRemoteNode
                 enabled: pageRoot.enabled
                 onClicked: {
                     console.log("Transfer: import key images clicked")
@@ -710,7 +710,7 @@ Rectangle {
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
-        if(appWindow.walletMode >= 2) messageNotConnected += root.startLinkText;
+        if(appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode) messageNotConnected += root.startLinkText;
         pageRoot.enabled = true;
         if(typeof currentWallet === "undefined") {
             root.warningContent = messageNotConnected;
