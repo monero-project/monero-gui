@@ -36,8 +36,8 @@ import "../../components/effects" as MoneroEffects
 
 Rectangle{
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
+    property alias nodeHeight: root.height
 
     /* main layout */
     ColumnLayout {
