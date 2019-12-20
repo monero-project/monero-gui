@@ -36,49 +36,57 @@ SubaddressAccount::SubaddressAccount(Monero::SubaddressAccount *subaddressAccoun
     getAll();
 }
 
-QList<Monero::SubaddressAccountRow*> SubaddressAccount::getAll(bool update) const
+void SubaddressAccount::getAll() const
 {
     qDebug(__FUNCTION__);
 
     emit refreshStarted();
 
-    if(update)
+    {
+        QWriteLocker locker(&m_lock);
         m_rows.clear();
-
-    if (m_rows.empty()){
         for (auto &row: m_subaddressAccountImpl->getAll()) {
             m_rows.append(row);
         }
     }
 
     emit refreshFinished();
-    return m_rows;
 }
 
-Monero::SubaddressAccountRow * SubaddressAccount::getRow(int index) const
+bool SubaddressAccount::getRow(int index, std::function<void (Monero::SubaddressAccountRow &)> callback) const
 {
-    return m_rows.at(index);
+    QReadLocker locker(&m_lock);
+
+    if (index < 0 || index >= m_rows.size())
+    {
+        return false;
+    }
+
+    callback(*m_rows.value(index));
+    return true;
 }
 
 void SubaddressAccount::addRow(const QString &label) const
 {
     m_subaddressAccountImpl->addRow(label.toStdString());
-    getAll(true);
+    getAll();
 }
 
 void SubaddressAccount::setLabel(quint32 accountIndex, const QString &label) const
 {
     m_subaddressAccountImpl->setLabel(accountIndex, label.toStdString());
-    getAll(true);
+    getAll();
 }
 
 void SubaddressAccount::refresh() const
 {
     m_subaddressAccountImpl->refresh();
-    getAll(true);
+    getAll();
 }
 
 quint64 SubaddressAccount::count() const
 {
+    QReadLocker locker(&m_lock);
+
     return m_rows.size();
 }
