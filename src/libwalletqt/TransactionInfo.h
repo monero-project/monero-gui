@@ -111,8 +111,4 @@ private:
     quint64 m_unlockTime;
 };
 
-// in order to wrap it to QVariant
-Q_DECLARE_METATYPE(TransactionInfo*)
-
-
 #endif // TRANSACTIONINFO_H

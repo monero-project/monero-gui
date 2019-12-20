@@ -59,106 +59,90 @@ TransactionHistory *TransactionHistoryModel::transactionHistory() const
     return m_transactionHistory;
 }
 
+QVariant TransactionHistoryModel::parseTransactionInfo(const TransactionInfo &tInfo, int role) const
+{
+    switch (role)
+    {
+    case TransactionDirectionRole:
+        return QVariant::fromValue(tInfo.direction());
+    case TransactionPendingRole:
+        return tInfo.isPending();
+    case TransactionFailedRole:
+        return tInfo.isFailed();
+    case TransactionAmountRole:
+        return tInfo.amount();
+    case TransactionDisplayAmountRole:
+        return tInfo.displayAmount();
+    case TransactionAtomicAmountRole:
+        return tInfo.atomicAmount();
+    case TransactionFeeRole:
+        return tInfo.fee();
+    case TransactionBlockHeightRole:
+    {
+        // Use NULL QVariant for transactions without height.
+        // Forces them to be displayed at top when sorted by blockHeight.
+        if (tInfo.blockHeight() != 0)
+        {
+            return tInfo.blockHeight();
+        }
+        return QVariant();
+    }
+    case TransactionSubaddrIndexRole:
+    {
+        QString str = QString{""};
+        bool first = true;
+        for (quint32 i : tInfo.subaddrIndex())
+        {
+            if (!first)
+                str += QString{","};
+            first = false;
+            str += QString::number(i);
+        }
+        return str;
+    }
+    case TransactionSubaddrAccountRole:
+        return tInfo.subaddrAccount();
+    case TransactionLabelRole:
+        return tInfo.subaddrIndex().size() == 1 && *tInfo.subaddrIndex().begin() == 0 ? tr("Primary address") : tInfo.label();
+    case TransactionConfirmationsRole:
+        return tInfo.confirmations();
+    case TransactionConfirmationsRequiredRole:
+        return (tInfo.blockHeight() < tInfo.unlockTime()) ? tInfo.unlockTime() - tInfo.blockHeight() : 10;
+    case TransactionHashRole:
+        return tInfo.hash();
+    case TransactionTimeStampRole:
+        return tInfo.timestamp();
+    case TransactionPaymentIdRole:
+        return tInfo.paymentId();
+    case TransactionIsOutRole:
+        return tInfo.direction() == TransactionInfo::Direction_Out;
+    case TransactionDateRole:
+        return tInfo.date();
+    case TransactionTimeRole:
+        return tInfo.time();
+    case TransactionDestinationsRole:
+        return tInfo.destinations_formatted();
+    default:
+    {
+        qCritical() << "Unimplemented role" << role;
+        return QVariant();
+    }
+    }
+}
+
 QVariant TransactionHistoryModel::data(const QModelIndex &index, int role) const
 {
     if (!m_transactionHistory) {
         return QVariant();
     }
 
-    if (index.row() < 0 || (unsigned)index.row() >= m_transactionHistory->count()) {
-        return QVariant();
-    }
-
-    TransactionInfo * tInfo = m_transactionHistory->transaction(index.row());
-
-
-    Q_ASSERT(tInfo);
-    if (!tInfo) {
-        qCritical("%s: internal error: no transaction info for index %d", __FUNCTION__, index.row());
-        return QVariant();
-    }
     QVariant result;
-    switch (role) {
-    case TransactionRole:
-        result = QVariant::fromValue(tInfo);
-        break;
-    case TransactionDirectionRole:
-        result = QVariant::fromValue(tInfo->direction());
-        break;
-    case TransactionPendingRole:
-        result = tInfo->isPending();
-        break;
-    case TransactionFailedRole:
-        result = tInfo->isFailed();
-        break;
-    case TransactionAmountRole:
-        result = tInfo->amount();
-        break;
-    case TransactionDisplayAmountRole:
-        result = tInfo->displayAmount();
-        break;
-    case TransactionAtomicAmountRole:
-        result = tInfo->atomicAmount();
-        break;
-    case TransactionFeeRole:
-        result = tInfo->fee();
-        break;
-    case TransactionBlockHeightRole:
-        // Use NULL QVariant for transactions without height.
-        // Forces them to be displayed at top when sorted by blockHeight.
-        if (tInfo->blockHeight() != 0) {
-            result = tInfo->blockHeight();
-        }
-        break;
-
-    case TransactionSubaddrIndexRole:
-        {
-            QString str = QString{""};
-            bool first = true;
-            for (quint32 i : tInfo->subaddrIndex()) {
-                if (!first)
-                    str += QString{","};
-                first = false;
-                str += QString::number(i);
-            }
-            result = str;
-        }
-        break;
-    case TransactionSubaddrAccountRole:
-        result = tInfo->subaddrAccount();
-        break;
-    case TransactionLabelRole:
-        result = tInfo->subaddrIndex().size() == 1 && *tInfo->subaddrIndex().begin() == 0 ? tr("Primary address") : tInfo->label();
-        break;
-    case TransactionConfirmationsRole:
-        result = tInfo->confirmations();
-        break;
-    case TransactionConfirmationsRequiredRole:
-        result = (tInfo->blockHeight() < tInfo->unlockTime()) ? tInfo->unlockTime() - tInfo->blockHeight() : 10;
-        break;
-    case TransactionHashRole:
-        result = tInfo->hash();
-        break;
-    case TransactionTimeStampRole:
-        result = tInfo->timestamp();
-        break;
-    case TransactionPaymentIdRole:
-        result = tInfo->paymentId();
-        break;
-    case TransactionIsOutRole:
-        result = tInfo->direction() == TransactionInfo::Direction_Out;
-        break;
-    case TransactionDateRole:
-        result = tInfo->date();
-        break;
-    case TransactionTimeRole:
-        result = tInfo->time();
-        break;
-    case TransactionDestinationsRole:
-        result = tInfo->destinations_formatted();
-        break;
+    bool found = m_transactionHistory->transaction(index.row(), [this, &result, &role](const TransactionInfo &tInfo) {
+        result = parseTransactionInfo(tInfo, role);
+    });
+    if (!found) {
+        qCritical("%s: internal error: no transaction info for index %d", __FUNCTION__, index.row());
     }
-
     return result;
 }
 
@@ -171,7 +155,6 @@ int TransactionHistoryModel::rowCount(const QModelIndex &parent) const
 QHash<int, QByteArray> TransactionHistoryModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames = QAbstractListModel::roleNames();
-    roleNames.insert(TransactionRole, "transaction");
     roleNames.insert(TransactionDirectionRole, "direction");
     roleNames.insert(TransactionPendingRole, "isPending");
     roleNames.insert(TransactionFailedRole, "isFailed");
