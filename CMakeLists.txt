@@ -129,8 +129,6 @@ monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
-find_package(X11 REQUIRED)
-
 # OpenSSL
 find_package(OpenSSL REQUIRED)
 message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
