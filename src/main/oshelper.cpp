@@ -30,11 +30,15 @@
 #include <QTemporaryFile>
 #include <QDir>
 #include <QDebug>
+#include <QDesktopServices>
+#include <QFileInfo>
 #include <QString>
+#include <QUrl>
 #ifdef Q_OS_MAC
 #include "qt/macoshelper.h"
 #endif
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
+#include <Shlobj.h>
 #include <windows.h>
 #endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
@@ -46,9 +50,59 @@
 // #undef those Xlib #defines that conflict with QEvent::Type enum
 #endif
 
+#if defined(Q_OS_WIN)
+bool openFolderAndSelectItem(const QString &filePath)
+{
+    struct scope {
+        ~scope() { ::CoTaskMemFree(pidl); }
+        PIDLIST_ABSOLUTE pidl = nullptr;
+    } scope;
+
+    SFGAOF flags;
+    HRESULT result = ::SHParseDisplayName(filePath.toStdWString().c_str(), nullptr, &scope.pidl, 0, &flags);
+    if (result != S_OK)
+    {
+        qWarning() << "SHParseDisplayName failed" << result << "file path" << filePath;
+        return false;
+    }
+
+    result = ::SHOpenFolderAndSelectItems(scope.pidl, 0, nullptr, 0);
+    if (result != S_OK)
+    {
+        qWarning() << "SHOpenFolderAndSelectItems failed" << result << "file path" << filePath;
+        return false;
+    }
+
+    return true;
+}
+#endif
+
 OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
 
+}
+
+bool OSHelper::openContainingFolder(const QString &filePath) const
+{
+#if defined(Q_OS_WIN)
+    if (openFolderAndSelectItem(QDir::toNativeSeparators(filePath)))
+    {
+        return true;
+    }
+#elif defined(Q_OS_MAC)
+    if (MacOSHelper::openFolderAndSelectItem(QUrl::fromLocalFile(filePath)))
+    {
+        return true;
+    }
+#endif
+
+    QUrl url = QUrl::fromLocalFile(QFileInfo(filePath).absolutePath());
+    if (!url.isValid())
+    {
+        qWarning() << "Malformed file path" << filePath << url.errorString();
+        return false;
+    }
+    return QDesktopServices::openUrl(url);
 }
 
 QString OSHelper::temporaryFilename() const
@@ -76,7 +130,7 @@ bool OSHelper::removeTemporaryWallet(const QString &fileName) const
 bool OSHelper::isCapsLock() const
 {
     // platform dependent method of determining if CAPS LOCK is on
-#if defined(Q_OS_WIN32) // MS Windows version
+#if defined(Q_OS_WIN) // MS Windows version
     return GetKeyState(VK_CAPITAL) == 1;
 #elif defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID) // X11 version
     Display * d = XOpenDisplay((char*)0);
