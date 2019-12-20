@@ -31,6 +31,7 @@ import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
+import QtGraphicalEffects 1.0
 
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
@@ -1089,7 +1090,6 @@ ApplicationWindow {
         leftPanel.enabled = false;
         middlePanel.enabled = false;
         titleBar.enabled = false;
-        inactiveOverlay.visible = true;
         splash.show();
     }
 
@@ -1101,7 +1101,6 @@ ApplicationWindow {
             leftPanel.enabled = true
             middlePanel.enabled = true
             titleBar.enabled = true
-            inactiveOverlay.visible = false;
         }
     }
 
@@ -1585,96 +1584,108 @@ ApplicationWindow {
             }
         ]
 
-        LeftPanel {
-            id: leftPanel
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            visible: rootItem.state == "normal" && middlePanel.state != "Merchant"
-            currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
-            currentAccountLabel: {
-                if (currentWallet) {
-                    return currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+        Item {
+            id: blurredArea
+            anchors.fill: parent
+
+            LeftPanel {
+                id: leftPanel
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                visible: rootItem.state == "normal" && middlePanel.state != "Merchant"
+                currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
+                currentAccountLabel: {
+                    if (currentWallet) {
+                        return currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
+                    }
+                    return qsTr("Primary account") + translationManager.emptyString;
                 }
-                return qsTr("Primary account") + translationManager.emptyString;
+
+                onTransferClicked: {
+                    middlePanel.state = "Transfer";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onReceiveClicked: {
+                    middlePanel.state = "Receive";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onMerchantClicked: {
+                    middlePanel.state = "Merchant";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onTxkeyClicked: {
+                    middlePanel.state = "TxKey";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onSharedringdbClicked: {
+                    middlePanel.state = "SharedRingDB";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onHistoryClicked: {
+                    middlePanel.state = "History";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onAddressBookClicked: {
+                    middlePanel.state = "AddressBook";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onMiningClicked: {
+                    middlePanel.state = "Mining";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onSignClicked: {
+                    middlePanel.state = "Sign";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onSettingsClicked: {
+                    middlePanel.state = "Settings";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onAccountClicked: {
+                    middlePanel.state = "Account";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
             }
 
-            onTransferClicked: {
-                middlePanel.state = "Transfer";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onReceiveClicked: {
-                middlePanel.state = "Receive";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onMerchantClicked: {
-                middlePanel.state = "Merchant";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onTxkeyClicked: {
-                middlePanel.state = "TxKey";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onSharedringdbClicked: {
-                middlePanel.state = "SharedRingDB";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onHistoryClicked: {
-                middlePanel.state = "History";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onAddressBookClicked: {
-                middlePanel.state = "AddressBook";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onMiningClicked: {
-                middlePanel.state = "Mining";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onSignClicked: {
-                middlePanel.state = "Sign";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-
-            onSettingsClicked: {
-                middlePanel.state = "Settings";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
-            }
-            
-            onAccountClicked: {
-                middlePanel.state = "Account";
-                middlePanel.flickable.contentY = 0;
-                updateBalance();
+            MiddlePanel {
+                id: middlePanel
+                accountView.currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: leftPanel.visible ? leftPanel.right : parent.left
+                anchors.right: parent.right
+                state: "Transfer"
             }
         }
 
-
-        MiddlePanel {
-            id: middlePanel
-            accountView.currentAccountIndex: currentWallet ? currentWallet.currentSubaddressAccount : 0
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: leftPanel.visible ?  leftPanel.right : parent.left
-            anchors.right: parent.right
-            state: "Transfer"
+        FastBlur {
+            id: blur
+            anchors.fill: blurredArea
+            source: blurredArea
+            radius: 64
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible
         }
 
         WizardController {
@@ -2094,11 +2105,11 @@ ApplicationWindow {
 
     Rectangle {
         id: inactiveOverlay
-        visible: false
+        visible: blur.visible
         anchors.fill: parent
         anchors.topMargin: titleBar.height
         color: MoneroComponents.Style.blackTheme ? "black" : "white"
-        opacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.9
+        opacity: isOpenGL ? 0.3 : inputDialog.visible || splash.visible ? 0.7 : 1.0
 
         MoneroEffects.ColorTransition {
             targetObj: parent
