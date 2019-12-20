@@ -82,7 +82,6 @@ Rectangle {
 
     property var m_wallet;
     property alias wizardState: wizardStateView.state
-    property alias wizardStatePrevious: wizardStateView.previousView
     property alias wizardStackView: stackView
     property int wizardSubViewWidth: 780
     property int wizardSubViewTopMargin: persistentSettings.customDecorations ? 90 : 32
@@ -148,18 +147,8 @@ Rectangle {
         property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
         anchors.fill: parent
 
-        signal previousClicked;
-
         color: "transparent"
         state: ''
-
-        onPreviousClicked: {
-            if (previousView && previousView.viewName != null){
-                state = previousView.viewName;
-            } else {
-                state = "wizardHome";
-            }
-        }
 
         onCurrentViewChanged: {
             if (previousView) {

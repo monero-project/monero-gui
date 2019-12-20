@@ -38,6 +38,7 @@ GridLayout {
     property alias progressEnabled: wizardProgress.visible
     property int progressSteps: 0
     property int progress: 0
+    property bool autoTransition: true
     property alias btnPrev: btnPrev
     property alias btnNext: btnNext
     property string btnPrevText: qsTr("Previous") + translationManager.emptyString
@@ -55,11 +56,11 @@ GridLayout {
     signal m_prevClicked;
 
     onM_prevClicked: {
-        wizardController.wizardStackView.backTransition = true;
+        if (autoTransition) wizardController.wizardStackView.backTransition = true;
     }
 
     onM_nextClicked: {
-        wizardController.wizardStackView.backTransition = false;
+        if (autoTransition) wizardController.wizardStackView.backTransition = false;
     }
 
     Rectangle {
