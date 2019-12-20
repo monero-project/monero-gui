@@ -125,6 +125,8 @@ Item {
         source: rect
     }
 
+    Keys.enabled: inlineButton.visible
     Keys.onSpacePressed: doClick()
+    Keys.onEnterPressed: Keys.onReturnPressed(event)
     Keys.onReturnPressed: doClick()
 }

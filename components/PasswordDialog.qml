@@ -254,6 +254,7 @@ Item {
                 }
 
                 Keys.enabled: root.visible
+                Keys.onEnterPressed: Keys.onReturnPressed(event)
                 Keys.onReturnPressed: {
                     root.close()
                     if (passwordDialogMode) {
@@ -352,6 +353,8 @@ Item {
                     }
                 }
 
+                Keys.enabled: root.visible
+                Keys.onEnterPressed: Keys.onReturnPressed(event)
                 Keys.onReturnPressed: {
                     if (passwordInput1.text === passwordInput2.text) {
                         root.close()
