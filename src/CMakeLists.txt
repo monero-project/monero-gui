@@ -5,7 +5,7 @@ add_subdirectory(libwalletqt)
 add_subdirectory(model)
 add_subdirectory(zxcvbn-c)
 
-qt5_add_resources(QML_QRC ../qml.qrc)
+qt5_add_resources(RESOURCES ../qml.qrc)
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
@@ -64,18 +64,23 @@ if(WITH_SCANNER)
     )
 endif()
 
-message(STATUS ${QML_QRC})
-
 set(EXECUTABLE_FLAG)
 if(MINGW)
     set(EXECUTABLE_FLAG WIN32)
+
+    set(ICON ${PROJECT_SOURCE_DIR}/images/appicon.ico)
+    set(ICON_RC ${CMAKE_CURRENT_BINARY_DIR}/icon.rc)
+    set(ICON_RES ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
+    file(WRITE ${ICON_RC} "IDI_ICON1 ICON DISCARDABLE \"${ICON}\"")
+    add_custom_command(OUTPUT ${ICON_RES} COMMAND windres ${ICON_RC} ${ICON_RES} MAIN_DEPENDENCY ${ICON_RC})
+    list(APPEND RESOURCES ${ICON_RES})
 endif()
 
 add_executable(monero-gui ${EXECUTABLE_FLAG} main/main.cpp
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
     ${QR_CODE_FILES}
-    ${QML_QRC}
+    ${RESOURCES}
 )
 set_property(TARGET monero-gui PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
