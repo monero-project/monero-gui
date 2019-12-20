@@ -53,12 +53,11 @@ Rectangle {
 
     function renameSubaddressLabel(_index){
         inputDialog.labelText = qsTr("Set the label of the selected address:") + translationManager.emptyString;
-        inputDialog.inputText = appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index);
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.subaddress.setLabel(appWindow.currentWallet.currentSubaddressAccount, _index, inputDialog.inputText);
         }
         inputDialog.onRejectedCallback = null;
-        inputDialog.open()
+        inputDialog.open(appWindow.currentWallet.getSubaddressLabel(appWindow.currentWallet.currentSubaddressAccount, _index))
     }
 
     Clipboard { id: clipboard }
@@ -254,7 +253,6 @@ Rectangle {
                 text: qsTr("Create new address") + translationManager.emptyString;
                 onClicked: {
                     inputDialog.labelText = qsTr("Set the label of the new address:") + translationManager.emptyString
-                    inputDialog.inputText = qsTr("(Untitled)") + translationManager.emptyString
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddress.addRow(appWindow.currentWallet.currentSubaddressAccount, inputDialog.inputText)
                         current_subaddress_table_index = appWindow.currentWallet.numSubaddresses(appWindow.currentWallet.currentSubaddressAccount) - 1

@@ -45,14 +45,14 @@ Item {
     signal accepted()
     signal rejected()
 
-    function open() {
+    function open(prepopulate) {
         inactiveOverlay.visible = true
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.state = "essentials"
         root.visible = true;
         input.focus = true;
-        input.text = "";
+        input.text = prepopulate ? prepopulate : "";
     }
 
     function close() {

@@ -178,7 +178,6 @@ Rectangle {
                 text: (currentWallet ? currentWallet.walletCreationHeight : "") + style + qsTr(" <a href='#'> (Click to change)</a>") + translationManager.emptyString
                 onLinkActivated: {
                     inputDialog.labelText = qsTr("Set a new restore height.\nYou can enter a block height or a date (YYYY-MM-DD):") + translationManager.emptyString;
-                    inputDialog.inputText = currentWallet ? currentWallet.walletCreationHeight : "0";
                     inputDialog.onAcceptedCallback = function() {
                         var _restoreHeight;
                         if (inputDialog.inputText) {
@@ -224,7 +223,7 @@ Rectangle {
                         appWindow.showStatusMessage(qsTr("Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD"),3);
                     }
                     inputDialog.onRejectedCallback = null;
-                    inputDialog.open()
+                    inputDialog.open(currentWallet ? currentWallet.walletCreationHeight : "0")
                 }
 
                 MouseArea {
