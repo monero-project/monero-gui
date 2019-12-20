@@ -54,12 +54,7 @@ Rectangle {
             description: qsTr("Logs out of this wallet.") + translationManager.emptyString
             title: qsTr("Close this wallet") + translationManager.emptyString
 
-            onClicked: {
-                middlePanel.addressBookView.clearFields();
-                middlePanel.transferView.clearFields();
-                middlePanel.receiveView.clearFields();
-                appWindow.showWizard();
-            }
+            onClicked: appWindow.showWizard()
         }
 
         MoneroComponents.SettingsListItem {

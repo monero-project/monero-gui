@@ -1113,6 +1113,9 @@ ApplicationWindow {
             rootItem.state = "wizard"
             // reset balance
             clearMoneroCardLabelText();
+            middlePanel.addressBookView.clearFields();
+            middlePanel.transferView.clearFields();
+            middlePanel.receiveView.clearFields();
             // disable timers
             userInActivityTimer.running = false;
             simpleModeConnectionTimer.running = false;
