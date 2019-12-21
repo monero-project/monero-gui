@@ -19,10 +19,8 @@ function setCustomWindowDecorations(custom) {
 
     if (custom) {
         appWindow.flags = flagsCustomDecorations;
-        daemonConsolePopup.flags = flagsCustomDecorations;
     } else {
         appWindow.flags = flags;
-        daemonConsolePopup.flags = flags;
     }
 
     // Reset window

@@ -26,7 +26,6 @@
         <file>components/LineEdit.qml</file>
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
-        <file>components/Scroll.qml</file>
         <file>components/MenuButtonDivider.qml</file>
         <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
@@ -103,7 +102,6 @@
         <file>pages/Sign.qml</file>
         <file>components/DaemonManagerDialog.qml</file>
         <file>version.js</file>
-        <file>components/DaemonConsole.qml</file>
         <file>components/QRCodeScanner.qml</file>
         <file>components/Notifier.qml</file>
         <file>components/TextBlock.qml</file>
