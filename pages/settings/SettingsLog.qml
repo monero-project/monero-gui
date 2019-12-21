@@ -37,8 +37,8 @@ import "../../components" as MoneroComponents
 Rectangle {
     property alias consoleArea: consoleArea
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
+    property alias logHeight: settingsLog.height
 
     ColumnLayout {
         id: settingsLog

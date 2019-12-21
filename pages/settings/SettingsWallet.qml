@@ -36,8 +36,8 @@ import "../../components" as MoneroComponents
 
 Rectangle {
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
+    property alias settingsHeight: settingsWallet.height
 
     ColumnLayout {
         id: settingsWallet

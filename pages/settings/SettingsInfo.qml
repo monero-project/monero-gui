@@ -39,8 +39,8 @@ import "../../components" as MoneroComponents
 
 Rectangle {
     color: "transparent"
-    height: 1400
     Layout.fillWidth: true
+    property alias infoHeight: infoLayout.height
     property string walletModeString: {
         if(appWindow.walletMode === 0){
           return qsTr("Simple mode") + translationManager.emptyString;
