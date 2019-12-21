@@ -2092,17 +2092,6 @@ ApplicationWindow {
         console.log("walletMode: " + (mode === 0 ? "simple": mode === 1 ? "simple (bootstrap)" : "Advanced"));
     }
 
-    // Daemon console
-    DaemonConsole {
-        id: daemonConsolePopup
-        height:500
-        width:800
-        title: qsTr("Daemon log") + translationManager.emptyString
-        onAccepted: {
-            close();
-        }
-    }
-
     Rectangle {
         id: inactiveOverlay
         visible: blur.visible
