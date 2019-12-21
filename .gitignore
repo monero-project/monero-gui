@@ -28,6 +28,7 @@ Session.vim
 # Temporary                                                                                                                                                                                             
 .netrwhist
 *~
+*.autosave
 # Auto-generated tag files
 tags
 # Persistent undo
