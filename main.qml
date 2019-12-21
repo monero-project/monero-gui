@@ -1341,12 +1341,9 @@ ApplicationWindow {
         property string locale
         property string account_name
         property string wallet_path
-        property bool   auto_donations_enabled : false
-        property int    auto_donations_amount : 50
         property bool   allow_background_mining : false
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
-        property string payment_id
         property int    restore_height : 0
         property bool   is_trusted_daemon : false
         property bool   is_recovering : false

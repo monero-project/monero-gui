@@ -73,10 +73,6 @@ Rectangle {
         anchors.right: parent.right
 
         spacing: 20
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 12
-        property int qrCodeSize: 220
 
         ColumnLayout {
             id: addressRow

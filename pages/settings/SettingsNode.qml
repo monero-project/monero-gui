@@ -50,10 +50,6 @@ Rectangle{
         anchors.right: parent.right
 
         spacing: 0
-        property int labelWidth: 120
-        property int editWidth: 400
-        property int lineEditFontSize: 14
-        property int buttonWidth: 110
 
         Rectangle {
             Layout.fillWidth: true
