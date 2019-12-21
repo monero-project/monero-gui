@@ -49,6 +49,8 @@ import "js/Windows.js" as Windows
 ApplicationWindow {
     id: appWindow
     title: "Monero" + (walletName ? " - " + walletName : "")
+    minimumWidth: 750
+    minimumHeight: 450
 
     property var currentItem
     property bool hideBalanceForced: false
