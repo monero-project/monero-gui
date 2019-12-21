@@ -361,6 +361,7 @@ QString Wallet::getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) c
 void Wallet::setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label)
 {
     m_walletImpl->setSubaddressLabel(accountIndex, addressIndex, label.toStdString());
+    emit currentSubaddressAccountChanged();
 }
 void Wallet::deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, const QString &paymentId)
 {

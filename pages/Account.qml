@@ -54,7 +54,7 @@ Rectangle {
     function renameSubaddressAccountLabel(_index){
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
-            appWindow.currentWallet.subaddressAccount.setLabel(_index, inputDialog.inputText)
+            appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText)
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open(appWindow.currentWallet.getSubaddressLabel(_index, 0))
