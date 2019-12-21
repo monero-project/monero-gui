@@ -38,6 +38,9 @@ Item {
         root.update();
         timer.running = true;
 
+        if (!appWindow.current_address) {
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
+        }
         // set currently selected account indication
         var _addressLabel = appWindow.currentWallet.getSubaddressLabel(
             appWindow.currentWallet.currentSubaddressAccount,
@@ -47,6 +50,7 @@ Item {
         } else {
             root.addressLabel = _addressLabel;
         }
+
     }
 
     function onPageClosed() {
@@ -544,7 +548,7 @@ Item {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: appWindow.showPageRequest("Receive")
+                        onClicked: appWindow.showPageRequest("Settings")
                     }
                 }
             }

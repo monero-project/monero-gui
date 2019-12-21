@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import QtQuick.Dialogs 1.2
+import FontAwesome 1.0
 
 import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
@@ -47,20 +48,75 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: 20
         anchors.topMargin: 0
-        spacing: 8
+        spacing: 0
 
         MoneroComponents.SettingsListItem {
-            buttonText: qsTr("Close wallet") + translationManager.emptyString
-            description: qsTr("Logs out of this wallet.") + translationManager.emptyString
+            iconText: FontAwesome.signOutAlt
             title: qsTr("Close this wallet") + translationManager.emptyString
+            description: qsTr("Logs out of this wallet.") + translationManager.emptyString
 
             onClicked: appWindow.showWizard()
         }
 
         MoneroComponents.SettingsListItem {
-            buttonText: qsTr("Create wallet") + translationManager.emptyString
-            description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
+            iconText: FontAwesome.lock
+            title: qsTr("Lock this wallet") + translationManager.emptyString
+            description: qsTr("Enter your password to unlock it.") + translationManager.emptyString
+
+            onClicked: {
+                var inputDialogVisible = inputDialog && inputDialog.visible
+                passwordDialog.onAcceptedCallback = function() {
+                    if(walletPassword === passwordDialog.password){
+                        passwordDialog.close();
+                    } else {
+                        passwordDialog.showError(qsTr("Wrong password"));
+                    }
+                    if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
+                }
+
+                passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+                if (inputDialogVisible) inputDialog.close()
+                passwordDialog.open();
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.ellipsisH
+            title: qsTr("Change wallet password") + translationManager.emptyString
+            description: qsTr("Change the password of your wallet.") + translationManager.emptyString
+
+            onClicked: {
+                passwordDialog.onAcceptedCallback = function() {
+                    if(appWindow.walletPassword === passwordDialog.password){
+                        passwordDialog.openNewPasswordDialog()
+                    } else {
+                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
+                        informationPopup.text = qsTr("Wrong password") + translationManager.emptyString;
+                        informationPopup.open()
+                        informationPopup.onCloseCallback = function() {
+                            passwordDialog.open()
+                        }
+                    }
+                }
+                passwordDialog.onRejectedCallback = null;
+                passwordDialog.open()
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.key
+            title: qsTr("Show seed & keys") + translationManager.emptyString
+            description: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
+
+            onClicked: {
+                Utils.showSeedPage();
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.eye
             title: qsTr("Create a view-only wallet") + translationManager.emptyString
+            description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
             visible: !appWindow.viewOnly
 
             onClicked: {
@@ -80,19 +136,9 @@ Rectangle {
         }
 
         MoneroComponents.SettingsListItem {
-            buttonText: qsTr("Show seed") + translationManager.emptyString
-            description: qsTr("Store this information safely to recover your wallet in the future.") + translationManager.emptyString
-            title: qsTr("Show seed & keys") + translationManager.emptyString
-
-            onClicked: {
-                Utils.showSeedPage();
-            }
-        }
-
-        MoneroComponents.SettingsListItem {
-            buttonText: qsTr("Rescan") + translationManager.emptyString
-            description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
+            iconText: FontAwesome.repeat
             title: qsTr("Rescan wallet balance") + translationManager.emptyString
+            description: qsTr("Use this feature if you think the shown balance is not accurate.") + translationManager.emptyString
             visible: appWindow.walletMode >= 2
 
             onClicked: {
@@ -114,25 +160,15 @@ Rectangle {
         }
 
         MoneroComponents.SettingsListItem {
-            buttonText: qsTr("Change password") + translationManager.emptyString
-            description: qsTr("Change the password of your wallet.") + translationManager.emptyString
-            title: qsTr("Change wallet password") + translationManager.emptyString
+            iconText: FontAwesome.cashRegister
+            title: qsTr("Enter merchant mode") + translationManager.emptyString
+            description: qsTr("Receive Monero for your business, easily.") + translationManager.emptyString
+            isLast: true
 
             onClicked: {
-                passwordDialog.onAcceptedCallback = function() {
-                    if(appWindow.walletPassword === passwordDialog.password){
-                        passwordDialog.openNewPasswordDialog()
-                    } else {
-                        informationPopup.title  = qsTr("Error") + translationManager.emptyString;
-                        informationPopup.text = qsTr("Wrong password") + translationManager.emptyString;
-                        informationPopup.open()
-                        informationPopup.onCloseCallback = function() {
-                            passwordDialog.open()
-                        }
-                    }
-                }
-                passwordDialog.onRejectedCallback = null;
-                passwordDialog.open()
+                middlePanel.state = "Merchant";
+                middlePanel.flickable.contentY = 0;
+                updateBalance();
             }
         }
     }

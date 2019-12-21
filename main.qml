@@ -1607,12 +1607,6 @@ ApplicationWindow {
                     updateBalance();
                 }
 
-                onMerchantClicked: {
-                    middlePanel.state = "Merchant";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
                 onTxkeyClicked: {
                     middlePanel.state = "TxKey";
                     middlePanel.flickable.contentY = 0;
@@ -2169,4 +2163,5 @@ ApplicationWindow {
 //    MoneroComponents.LanguageSidebar {
 //        id: languageSidebar
 //    }
+
 }
