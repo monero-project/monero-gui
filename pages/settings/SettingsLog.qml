@@ -150,6 +150,7 @@ Rectangle {
             Flickable {
                 id: flickable
                 anchors.fill: parent
+                boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
                 TextArea.flickable: TextArea {
                     id : consoleArea
@@ -203,7 +204,9 @@ Rectangle {
                     }
                 }
 
-                ScrollBar.vertical: ScrollBar {}
+                ScrollBar.vertical: ScrollBar {
+                    onActiveChanged: if (!active && !isMac) active = true
+                }
             }
         }
 
