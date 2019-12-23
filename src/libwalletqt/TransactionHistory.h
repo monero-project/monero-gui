@@ -29,6 +29,8 @@
 #ifndef TRANSACTIONHISTORY_H
 #define TRANSACTIONHISTORY_H
 
+#include <functional>
+
 #include <QObject>
 #include <QList>
 #include <QReadWriteLock>

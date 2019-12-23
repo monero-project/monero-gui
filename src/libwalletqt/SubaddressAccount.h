@@ -29,6 +29,8 @@
 #ifndef SUBADDRESSACCOUNT_H
 #define SUBADDRESSACCOUNT_H
 
+#include <functional>
+
 #include <wallet/api/wallet2_api.h>
 #include <QObject>
 #include <QReadWriteLock>
