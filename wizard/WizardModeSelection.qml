@@ -141,10 +141,11 @@ Rectangle {
                 btnPrevText: qsTr("Back to menu") + translationManager.emptyString
                 btnNext.visible: false
                 progressSteps: 0
+                autoTransition: false
 
                 onPrevClicked: {
-                    wizardController.wizardStackView.backTransition = wizardController.wizardStatePrevious.viewName == 'wizardLanguage';
-                    wizardController.wizardState = wizardController.wizardStatePrevious.viewName == 'wizardLanguage' ? 'wizardLanguage' : 'wizardHome';
+                    wizardController.wizardStackView.backTransition = !wizardController.wizardStackView.backTransition;
+                    wizardController.wizardState = wizardController.wizardStackView.backTransition ? 'wizardLanguage' : 'wizardHome';
                 }
             }
         }
