@@ -32,12 +32,6 @@ private:
     QFutureWatcher<T> *newWatcher()
     {
         QFutureWatcher<T> *watcher = new QFutureWatcher<T>();
-        QThread *schedulerThread = this->thread();
-        if (watcher->thread() != schedulerThread)
-        {
-            watcher->moveToThread(schedulerThread);
-        }
-        watcher->setParent(this);
 
         return watcher;
     }
