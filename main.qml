@@ -1316,10 +1316,11 @@ ApplicationWindow {
             }
         } else console.log("qrScannerEnabled disabled");
 
-        wizard.wizardState = "wizardHome";
         if(!walletsFound()) {
+            wizard.wizardState = "wizardLanguage";
             rootItem.state = "wizard"
         } else {
+            wizard.wizardState = "wizardHome";
             rootItem.state = "normal"
             openWallet("wizard");
         }
