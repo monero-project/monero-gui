@@ -37,7 +37,8 @@ import "../components" as MoneroComponents
 
 Item {
     id: root
-    visible: false
+    visible: opened
+    property bool opened: false
     property alias labelText: label.text
     property alias inputText: input.text
 
@@ -49,7 +50,7 @@ Item {
         leftPanel.enabled = false
         middlePanel.enabled = false
         titleBar.state = "essentials"
-        root.visible = true;
+        root.opened = true;
         input.focus = true;
         input.text = prepopulate ? prepopulate : "";
     }
@@ -58,7 +59,7 @@ Item {
         leftPanel.enabled = true
         middlePanel.enabled = true
         titleBar.state = "default"
-        root.visible = false;
+        root.opened = false;
     }
 
     ColumnLayout {

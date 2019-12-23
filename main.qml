@@ -1529,7 +1529,7 @@ ApplicationWindow {
 
     InputDialog {
         id: inputDialog
-        visible: false
+        visible: opened && !passwordDialog.visible
         z: parent.z + 1
         anchors.fill: parent
         property var onAcceptedCallback
