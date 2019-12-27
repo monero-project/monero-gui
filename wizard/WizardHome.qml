@@ -58,7 +58,7 @@ Rectangle {
 
             WizardHeader {
                 Layout.bottomMargin: 20
-                title: qsTr("Welcome to Monero.") + translationManager.emptyString
+                title: qsTr("Welcome to Monero") + translationManager.emptyString
                 subtitle: ""
             }
 
