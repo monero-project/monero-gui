@@ -49,8 +49,8 @@ Rectangle {
     ListModel {
         id: deviceNameModel
         ListElement { column1: qsTr("Choose your hardware device"); column2: "";}
-        ListElement { column1: "Ledger"; column2: "Ledger";}
-        ListElement { column1: "Trezor"; column2: "Trezor";}
+        ListElement { column1: "Ledger"; column2: "Ledger Nano S/X";}
+        ListElement { column1: "Trezor"; column2: "Trezor Model T";}
     }
 
     function update(){
