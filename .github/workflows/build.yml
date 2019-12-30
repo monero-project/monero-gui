@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: update brew and install dependencies
-      run: brew update && brew install boost hidapi zmq libpgm unbound libsodium miniupnpc ldns expat doxygen graphviz libunwind-headers protobuf qt5 
+      run: brew update && brew install boost hidapi zmq libpgm unbound libsodium miniupnpc ldns expat libunwind-headers protobuf qt5 
     - name: build
       run: export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh
     - name: test qml
