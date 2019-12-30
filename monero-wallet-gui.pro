@@ -299,7 +299,8 @@ win32 {
         -lssl \
         -lsodium \
         -lcrypto \
-        -lws2_32
+        -lws2_32 \
+        -lole32
     
     !contains(QMAKE_TARGET.arch, x86_64) {
         message("Target is 32bit")
