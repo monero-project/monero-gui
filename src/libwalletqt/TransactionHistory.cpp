@@ -151,7 +151,7 @@ QString TransactionHistory::writeCSV(quint32 accountIndex, QString out)
 {
     // construct filename
     qint64 now = QDateTime::currentDateTime().currentMSecsSinceEpoch();
-    QString fn = QString(QString("%1/monero-txs_%2.csv").arg(out, QString::number(now / 1000)));
+    QString fn = QString(QString("%1/swap-txs_%2.csv").arg(out, QString::number(now / 1000)));
 
     // open file
     QFile data(fn);

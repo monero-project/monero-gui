@@ -18,13 +18,13 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>monero-wallet-gui</string>
+  <string>swap-wallet-gui</string>
   
   <key>CFBundleName</key>
-  <string>Monero GUI</string>
+  <string>Swap GUI</string>
 
   <key>CFBundleIdentifier</key>
-  <string>org.monero-project.monero-wallet-gui</string>
+  <string>one.xwp.swap-wallet-gui</string>
 
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>
@@ -36,18 +36,18 @@
   <array>
     <dict>
       <key>CFBundleURLName</key>
-      <string>monero Handler</string>
+      <string>swap Handler</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>monero</string>
+        <string>swap</string>
       </array>
     </dict>
     <dict>
       <key>CFBundleURLName</key>
-      <string>moneroseed Handler</string>
+      <string>swapseed Handler</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>moneroseed</string>
+        <string>swapseed</string>
       </array>
     </dict>
   </array>

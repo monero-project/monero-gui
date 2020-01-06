@@ -97,7 +97,7 @@ Rectangle {
                 wrapMode: Text.WordWrap;
                 leftPadding: 0
                 topPadding: 0
-                text: qsTr("This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.") + translationManager.emptyString
+                text: qsTr("This makes it easier to send or receive Swap and reduces errors when typing in addresses manually.") + translationManager.emptyString
                 width: parent.width
 
                 // @TODO: Legacy. Remove after Qt 5.8.
@@ -310,11 +310,11 @@ Rectangle {
                                  Address") + translationManager.emptyString
                 placeholderText: {
                     if(persistentSettings.nettype == NetworkType.MAINNET){
-                        return "4.. / 8.. / OpenAlias";
+                        return "fh.. / fs.. / fi..";
                     } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                        return "5.. / 7..";
+                        return "fh..";
                     } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                        return "9.. / B..";
+                        return "TN..";
                     }
                 }
                 wrapMode: Text.WrapAnywhere

@@ -43,9 +43,9 @@ void TailsOS::showDataPersistenceDisabledWarning()
     msgBox.setText(QObject::tr("Warning: persistence disabled"));
     msgBox.setWindowTitle(QObject::tr("Warning: persistence disabled"));
     msgBox.setInformativeText(
-        QObject::tr("Monero GUI has detected that Tails persistence is "
+        QObject::tr("Swap GUI has detected that Tails persistence is "
                      "currently disabled. Any configurations you make inside "
-                     "the Monero GUI will not be saved."
+                     "the Swap GUI will not be saved."
                      "\n\n"
                      "In addition, make sure to not save your wallet on the "
                      "filesystem, as it will be lost at shutdown."
@@ -63,7 +63,7 @@ void TailsOS::showDataPersistenceDisabledWarning()
 void TailsOS::askPersistence()
 {
     QMessageBox msgBox;
-    msgBox.setWindowTitle(QObject::tr("Monero GUI"));
+    msgBox.setWindowTitle(QObject::tr("Swap GUI"));
     msgBox.setText(QObject::tr("Use Tails persistence?"));
     msgBox.setInformativeText(
         QObject::tr("Persist wallet files and configuration on the encrypted volume?"

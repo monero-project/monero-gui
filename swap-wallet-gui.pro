@@ -7,7 +7,7 @@ TEMPLATE = app
 
 QT += svg qml gui-private quick widgets
 
-WALLET_ROOT=$$PWD/monero
+WALLET_ROOT=$$PWD/swap
 
 CONFIG += c++11 link_pkgconfig
 packagesExist(libusb-1.0) {
@@ -36,7 +36,7 @@ greaterThan(GCC_VERSION_MAJOR, 9) | if(equals(GCC_VERSION_MAJOR, 9) : greaterTha
     }
 }
 
-# cleaning "auto-generated" bitmonero directory on "make distclean"
+# cleaning "auto-generated" swap directory on "make distclean"
 QMAKE_DISTCLEAN += -r $$WALLET_ROOT
 
 INCLUDEPATH +=  $$WALLET_ROOT/include \
@@ -352,7 +352,7 @@ linux {
             -lGL \
             -lX11
     }
-    # currently monero has an issue with "static" build and linunwind-dev,
+    # currently swap has an issue with "static" build and linunwind-dev,
     # so we link libunwind-dev only for non-Ubuntu distros
     CONFIG(libunwind_off) {
         message(Building without libunwind)
@@ -510,7 +510,7 @@ OTHER_FILES += \
 
 DISTFILES += \
     notes.txt \
-    monero/src/wallet/CMakeLists.txt
+    swap/src/wallet/CMakeLists.txt
 
 VERSION = $$cat('version.js', lines)
 VERSION = $$find(VERSION, 'GUI_VERSION')

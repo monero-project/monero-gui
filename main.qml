@@ -48,7 +48,7 @@ import "js/Windows.js" as Windows
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero" + (walletName ? " - " + walletName : "")
+    title: "Swap" + (walletName ? " - " + walletName : "")
     minimumWidth: 750
     minimumHeight: 450
 
@@ -92,18 +92,6 @@ ApplicationWindow {
     property real fiatPriceXMREUR: 0
     property var fiatPriceAPIs: {
         return {
-            "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
-            },
-            "coingecko": {
-                "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
-            },
-            "cryptocompare": {
-                "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
-                "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
-            }
         }
     }
 
@@ -431,8 +419,8 @@ ApplicationWindow {
     }
 
     function onUriHandler(uri){
-        if(uri.startsWith("monero://")){
-            var address = uri.substring("monero://".length);
+        if(uri.startsWith("swap://")){
+            var address = uri.substring("swap://".length);
 
             var params = {}
             if(address.length === 0) return;
@@ -715,7 +703,7 @@ ApplicationWindow {
         currentWallet.startRefresh();
         daemonRunning = false;
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
-        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
+        informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "swapd.exe" : "swapd")
         informationPopup.icon  = StandardIcon.Critical
         informationPopup.onCloseCallback = null
         informationPopup.open();
@@ -758,7 +746,7 @@ ApplicationWindow {
 
     function onWalletMoneySent(txId, amount) {
         // refresh transaction history here
-        console.log("monero sent found")
+        console.log("Swap sent found")
         currentWallet.history.refresh(currentWallet.currentSubaddressAccount); // this will refresh model
 
         if(middlePanel.state == "History")
@@ -971,7 +959,7 @@ ApplicationWindow {
                     txid_text += ", "
                 txid_text += txid[i]
             }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
+            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Swap sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
             informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
@@ -1051,10 +1039,10 @@ ApplicationWindow {
                 informationPopup.icon = StandardIcon.Critical;
             } else if (received > 0) {
                 if (in_pool) {
-                    informationPopup.text = qsTr("This address received %1 monero, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
+                    informationPopup.text = qsTr("This address received %1 swap, but the transaction is not yet mined").arg(walletManager.displayAmount(received));
                 }
                 else {
-                    informationPopup.text = qsTr("This address received %1 monero, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
+                    informationPopup.text = qsTr("This address received %1 swap, with %2 confirmation(s).").arg(walletManager.displayAmount(received)).arg(confirmations);
                 }
             }
             else {
@@ -1147,30 +1135,6 @@ ApplicationWindow {
 
     function fiatApiParseTicker(resp, currency){
         // parse & validate incoming JSON
-        if(resp._url.startsWith("https://api.kraken.com/0/")){
-            if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
-                appWindow.fiatApiError("Kraken API has error(s)");
-                return;
-            }
-
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["o"];
-            return ticker;
-        } else if(resp._url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
-            if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
-                appWindow.fiatApiError("Coingecko API has error(s)");
-                return;
-            }
-            return resp["monero"][key];
-        } else if(resp._url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
-            if(!resp.hasOwnProperty(key)){
-                appWindow.fiatApiError("cryptocompare API has error(s)");
-                return;
-            }
-            return resp[key];
-        }
     }
 
     function fiatApiGetCurrency(resp){
@@ -1339,7 +1303,7 @@ ApplicationWindow {
         id: persistentSettings
         fileName: {
             if(isTails && tailsUsePersistence)
-                return homePath + "/Persistent/Monero/monero-core.conf";
+                return homePath + "/Persistent/Swap/swap-core.conf";
             return "";
         }
 
@@ -1994,9 +1958,9 @@ ApplicationWindow {
             var user_url = parts[2]
             var msg = ""
             if (isMac || isWindows || isLinux) {
-                msg = qsTr("New version of Monero v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
+                msg = qsTr("New version of Swap v%1 is available.<br><br>Download:<br>%2<br><br>SHA256 Hash:<br>%3").arg(version).arg(user_url).arg(hash) + translationManager.emptyString
             } else {
-                msg = qsTr("New version of Monero v%1 is available. Check out getmonero.org").arg(version) + translationManager.emptyString
+                msg = qsTr("New version of Swap v%1 is available. Check out xwp.one").arg(version) + translationManager.emptyString
             }
             notifier.show(msg)
         } else {
@@ -2005,7 +1969,7 @@ ApplicationWindow {
     }
 
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("monero-gui", "gui")
+        walletManager.checkUpdatesAsync("swap-gui", "gui")
     }
 
     Timer {
@@ -2071,11 +2035,11 @@ ApplicationWindow {
     function getDefaultDaemonRpcPort(networkType) {
         switch (networkType) {
             case NetworkType.STAGENET:
-                return 38081;
+                return 39950;
             case NetworkType.TESTNET:
-                return 28081;
+                return 29950;
             default:
-                return 18081;
+                return 19950;
         }
     }
 

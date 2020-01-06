@@ -133,7 +133,7 @@ Rectangle {
           visible: leftPanel.minutesToUnlock !== ""
 
           MoneroComponents.WarningBox {
-              text: qsTr("Spendable funds: %1 XMR. Please wait ~%2 minutes for your whole balance to become spendable.").arg(leftPanel.balanceUnlockedString).arg(leftPanel.minutesToUnlock)
+              text: qsTr("Spendable funds: %1 XWP. Please wait ~%2 minutes for your whole balance to become spendable.").arg(leftPanel.balanceUnlockedString).arg(leftPanel.minutesToUnlock)
           }
       }
 
@@ -242,11 +242,11 @@ Rectangle {
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: {
                   if(persistentSettings.nettype == NetworkType.MAINNET){
-                      return "4.. / 8.. / OpenAlias";
+                      return "fh.. / fs.. / fi..";
                   } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                      return "5.. / 7..";
+                      return "fh..";
                   } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                      return "9.. / B..";
+                      return "TN..";
                   }
               }
               wrapMode: Text.WrapAnywhere
@@ -616,7 +616,7 @@ Rectangle {
                 informationPopup.open();
             } else {
                 informationPopup.title = qsTr("Information") + translationManager.emptyString
-                informationPopup.text  = qsTr("Monero sent successfully") + translationManager.emptyString
+                informationPopup.text  = qsTr("Swap sent successfully") + translationManager.emptyString
                 informationPopup.icon  = StandardIcon.Information
                 informationPopup.onCloseCallback = null
                 informationPopup.open();

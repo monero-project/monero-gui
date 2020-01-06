@@ -65,7 +65,7 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Daemon settings") + translationManager.emptyString
-                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.\n\nIf you don't have the option to run your own node, there's an option to connect to a remote node.") + translationManager.emptyString
+                subtitle: qsTr("To be able to communicate with the Swap network your wallet needs to be connected to a Swap node. For best privacy it's recommended to run your own node.\n\nIf you don't have the option to run your own node, there's an option to connect to a remote node.") + translationManager.emptyString
             }
 
             WizardDaemonSettings {

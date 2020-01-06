@@ -57,7 +57,7 @@ TextArea {
     onTextChanged: {
         if(addressValidation){
             // js replacement for `RegExpValidator { regExp: /[0-9A-Fa-f]{95}/g }`
-            if (textArea.text.startsWith("monero:")) {
+            if (textArea.text.startsWith("swap:")) {
                 error = false;
                 return;
             }

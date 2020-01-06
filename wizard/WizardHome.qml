@@ -58,13 +58,13 @@ Rectangle {
 
             WizardHeader {
                 Layout.bottomMargin: 20
-                title: qsTr("Welcome to Monero.") + translationManager.emptyString
+                title: qsTr("Welcome to Swap.") + translationManager.emptyString
                 subtitle: ""
             }
 
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet") + translationManager.emptyString
-                bodyText: qsTr("Choose this option if this is your first time using Monero.") + translationManager.emptyString
+                bodyText: qsTr("Choose this option if this is your first time using Swap.") + translationManager.emptyString
                 imageIcon: "qrc:///images/create-wallet.png"
 
                 onMenuClicked: {
@@ -85,7 +85,7 @@ Rectangle {
 
             WizardMenuItem {
                 headerText: qsTr("Create a new wallet from hardware") + translationManager.emptyString
-                bodyText: qsTr("Connect your hardware wallet to create a new Monero wallet.") + translationManager.emptyString
+                bodyText: qsTr("Connect your hardware wallet to create a new Swap wallet.") + translationManager.emptyString
                 imageIcon: "qrc:///images/restore-wallet-from-hardware.png"
 
                 onMenuClicked: {

@@ -28,7 +28,7 @@
 
 function (write_static_version_header hash)
   set(VERSIONTAG "${hash}")
-  configure_file("${CMAKE_SOURCE_DIR}/monero/src/version.cpp.in" "${CMAKE_BINARY_DIR}/version.cpp")
+  configure_file("${CMAKE_SOURCE_DIR}/swap/src/version.cpp.in" "${CMAKE_BINARY_DIR}/version.cpp")
 endfunction ()
 
 find_package(Git QUIET)
@@ -47,9 +47,9 @@ elseif (GIT_FOUND OR Git_FOUND)
   #message(STATUS "Found Git: ${GIT_EXECUTABLE}")
   #    COMMAND           "${CMAKE_COMMAND}"
   #                    "-D" "GIT=${GIT_EXECUTABLE}"
-  #                    "-D" "TO=${CMAKE_BINARY_DIR}/monero/version.cpp"
+  #                    "-D" "TO=${CMAKE_BINARY_DIR}/swap/version.cpp"
   #                    "-P" "cmake/GenVersion.cmake"
-  #  BYPRODUCTS        "${CMAKE_BINARY_DIR}/monero/version.cpp"
+  #  BYPRODUCTS        "${CMAKE_BINARY_DIR}/swap/version.cpp"
   #  WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 else()
   message(STATUS "WARNING: Git was not found!")

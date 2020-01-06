@@ -17,7 +17,7 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout v0.15.0.1
+git -C $MONERO_DIR checkout master
 
 # get swap core tag
 pushd $MONERO_DIR
