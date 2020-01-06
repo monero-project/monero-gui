@@ -1,4 +1,4 @@
-name: GUI build
+name: continuous-integration/gh-actions/gui
 
 on: [push, pull_request]
 
