@@ -381,7 +381,7 @@ Rectangle{
                     fontSize: 15
                     labelFontSize: 14
                     property string style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
-                    labelText: qsTr("Blockchain location") + style + qsTr(" <a href='#'> (change)</a>") + translationManager.emptyString
+                    labelText: qsTr("Blockchain location") + style + qsTr(" <a href='#'> (Change)</a>") + translationManager.emptyString
                     placeholderText: qsTr("(default)") + translationManager.emptyString
                     placeholderFontSize: 15
                     readOnly: true
