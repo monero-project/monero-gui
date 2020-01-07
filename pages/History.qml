@@ -156,7 +156,7 @@ Rectangle {
                 input.bottomPadding: 6
                 fontSize: 16
                 labelFontSize: 14
-                placeholderText: qsTr("Search...") + translationManager.emptyString
+                placeholderText: qsTr("Search by Transaction ID, Destination address, Description or Amount") + translationManager.emptyString
                 placeholderFontSize: 16
                 inputHeight: 34
                 onTextUpdated: {
