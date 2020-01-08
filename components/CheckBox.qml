@@ -108,7 +108,7 @@ Item {
             font.pixelSize: checkBox.fontSize
             color: MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText
-            wrapMode: Text.Wrap
+            wrapMode: Text.NoWrap
         }
     }
 
