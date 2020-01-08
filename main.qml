@@ -1681,6 +1681,15 @@ ApplicationWindow {
                 anchors.right: parent.right
                 state: "Transfer"
             }
+
+            WizardController {
+                id: wizard
+                anchors.fill: parent
+                onUseMoneroClicked: {
+                    rootItem.state = "normal";
+                    appWindow.openWallet("wizard");
+                }
+            }
         }
 
         FastBlur {
@@ -1691,14 +1700,6 @@ ApplicationWindow {
             visible: passwordDialog.visible || inputDialog.visible || splash.visible
         }
 
-        WizardController {
-            id: wizard
-            anchors.fill: parent
-            onUseMoneroClicked: {
-                rootItem.state = "normal";
-                appWindow.openWallet("wizard");
-            }
-        }
 
         WizardLang {
             id: languageView
