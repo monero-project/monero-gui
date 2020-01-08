@@ -17,13 +17,13 @@ fi
 
 if [[ "$BUILD_TYPE" == "Release" ]]; then
 	echo "Release build"
-	ICU_FILES=(libicudt64.dll libicuin64.dll libicuio64.dll libicutu64.dll libicuuc64.dll)
+	ICU_FILES=(libicudt65.dll libicuin65.dll libicuio65.dll libicutu65.dll libicuuc65.dll)
 else
 	echo "Debug build"
-	ICU_FILES=(libicudtd64.dll libicuind64.dll libicuiod64.dll libicutud64.dll libicuucd64.dll)
+	ICU_FILES=(libicudtd65.dll libicuind65.dll libicuiod65.dll libicutud65.dll libicuucd65.dll)
 fi
 
-FILES=(libprotobuf.dll libusb-1.0.dll zlib1.dll libwinpthread-1.dll libtiff-5.dll libstdc++-6.dll libpng16-16.dll libpcre16-0.dll libpcre-1.dll libmng-2.dll liblzma-5.dll liblcms2-2.dll libjpeg-8.dll libintl-8.dll libiconv-2.dll libharfbuzz-0.dll libgraphite2.dll libglib-2.0-0.dll libfreetype-6.dll libbz2-1.dll libssp-0.dll libpcre2-16-0.dll libhidapi-0.dll libdouble-conversion.dll)
+FILES=(libprotobuf.dll libusb-1.0.dll zlib1.dll libzstd.dll libwinpthread-1.dll libtiff-5.dll libstdc++-6.dll libpng16-16.dll libpcre16-0.dll libpcre-1.dll libmng-2.dll liblzma-5.dll liblcms2-2.dll libjpeg-8.dll libintl-8.dll libiconv-2.dll libharfbuzz-0.dll libgraphite2.dll libglib-2.0-0.dll libfreetype-6.dll libbz2-1.dll libssp-0.dll libpcre2-16-0.dll libhidapi-0.dll libdouble-conversion.dll)
 
 OPENSSL_FILES=(libssl-1_1 libcrypto-1_1)
 
