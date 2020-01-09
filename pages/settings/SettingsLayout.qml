@@ -51,216 +51,237 @@ Rectangle {
         anchors.topMargin: 0
         spacing: 6
 
-        MoneroComponents.CheckBox {
-            id: customDecorationsCheckBox
-            checked: persistentSettings.customDecorations
-            onClicked: Windows.setCustomWindowDecorations(checked)
-            text: qsTr("Custom decorations") + translationManager.emptyString
-        }
-
-        MoneroComponents.CheckBox {
-            id: hideBalanceCheckBox
-            checked: persistentSettings.hideBalance
-            onClicked: {
-                persistentSettings.hideBalance = !persistentSettings.hideBalance
-                appWindow.updateBalance();
-            }
-            text: qsTr("Hide balance") + translationManager.emptyString
-        }
-
-        MoneroComponents.CheckBox {
-            id: themeCheckbox
-            checked: !MoneroComponents.Style.blackTheme
-            text: qsTr("Light theme") + translationManager.emptyString
-            toggleOnClick: false
-            onClicked: {
-                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
-                persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
-            }
-        }
-
-        MoneroComponents.CheckBox {
-            id: userInActivityCheckbox
-            checked: persistentSettings.lockOnUserInActivity
-            onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
-            text: qsTr("Lock wallet on inactivity") + translationManager.emptyString
-        }
-
         ColumnLayout {
-            visible: userInActivityCheckbox.checked
-            Layout.fillWidth: true
-            Layout.topMargin: 6
-            Layout.leftMargin: 42
-            spacing: 0
+             id: securitySection
 
-            Text {
-                color: MoneroComponents.Style.defaultFontColor
-                font.pixelSize: 14
+             MoneroComponents.LabelSubheader {
+                   Layout.fillWidth: true
+                   Layout.topMargin: 16
+                   Layout.bottomMargin: 18
+                   textFormat: Text.RichText
+                   text: qsTr("Security") + translationManager.emptyString
+             }
+
+             MoneroComponents.CheckBox {
+                   id: hideBalanceCheckBox
+                   checked: persistentSettings.hideBalance
+                   onClicked: {
+                        persistentSettings.hideBalance = !persistentSettings.hideBalance
+                        appWindow.updateBalance();
+                   }
+                   text: qsTr("Hide balance") + translationManager.emptyString
+             }
+
+             ColumnLayout {
                 Layout.fillWidth: true
-                text: {
-                    var val = userInactivitySlider.value;
-                    var minutes = val > 1 ? qsTr("minutes") : qsTr("minute");
 
-                    qsTr("After ") + val + " " + minutes + translationManager.emptyString;
+    	          MoneroComponents.CheckBox {
+                    id: userInActivityCheckbox
+                    checked: persistentSettings.lockOnUserInActivity
+                    onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
+                    text: {
+        	                var val = userInactivitySlider.value;
+                	        var minutes = val > 1 ? qsTr("minutes") : qsTr("minute");
+        			            qsTr("Lock wallet on inactivity after ") + val + " " + minutes + translationManager.emptyString;
+        		        }
                 }
-            }
 
-            Slider {
-                id: userInactivitySlider
-                from: 1
-                value: persistentSettings.lockOnUserInActivityInterval
-                to: 60
-                leftPadding: 0
-                stepSize: 1
-                snapMode: Slider.SnapAlways
+                Slider {
+                    id: userInactivitySlider
+                    from: 1
+                    value: persistentSettings.lockOnUserInActivityInterval
+                    to: 60
+                    leftPadding: 36
+                    stepSize: 1
+                    snapMode: Slider.SnapAlways
 
-                background: Rectangle {
-                    x: parent.leftPadding
-                    y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 200
-                    implicitHeight: 4
-                    width: parent.availableWidth
-                    height: implicitHeight
-                    radius: 2
-                    color: MoneroComponents.Style.progressBarBackgroundColor
-
-                    Rectangle {
-                        width: parent.visualPosition * parent.width
-                        height: parent.height
-                        color: MoneroComponents.Style.green
+                    background: Rectangle {
+                        x: parent.leftPadding
+                        y: parent.topPadding + parent.availableHeight / 2 - height / 2
+                        implicitWidth: 200
+                        implicitHeight: 4
+                        width: parent.availableWidth
+                        height: implicitHeight
                         radius: 2
+                        color: MoneroComponents.Style.progressBarBackgroundColor
+
+                        Rectangle {
+                            width: parent.visualPosition * parent.width
+                            height: parent.height
+                            color: MoneroComponents.Style.green
+                            radius: 2
+                        }
+                    }
+
+                    handle: Rectangle {
+                        x: parent.leftPadding + parent.visualPosition * (parent.availableWidth - width)
+                        y: parent.topPadding + parent.availableHeight / 2 - height / 2
+                        implicitWidth: 18
+                        implicitHeight: 18
+                        radius: 8
+                        color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
+                        border.color: MoneroComponents.Style.grey
+                    }
+
+                    onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.NoButton
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
                     }
                 }
-
-                handle: Rectangle {
-                    x: parent.leftPadding + parent.visualPosition * (parent.availableWidth - width)
-                    y: parent.topPadding + parent.availableHeight / 2 - height / 2
-                    implicitWidth: 18
-                    implicitHeight: 18
-                    radius: 8
-                    color: parent.pressed ? "#f0f0f0" : "#f6f6f6"
-                    border.color: MoneroComponents.Style.grey
-                }
-
-                onMoved: persistentSettings.lockOnUserInActivityInterval = userInactivitySlider.value;
-                MouseArea {
-                    anchors.fill: parent
-                    acceptedButtons: Qt.NoButton
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                }
-            }
-        }
-
-        //! Manage pricing
-        RowLayout {
-            MoneroComponents.CheckBox {
-                id: enableConvertCurrency
-                text: qsTr("Enable displaying balance in other currencies") + translationManager.emptyString
-                checked: persistentSettings.fiatPriceEnabled
-                onCheckedChanged: {
-                    if (!checked) {
-                        console.log("Disabled price conversion");
-                        persistentSettings.fiatPriceEnabled = false;
-                        appWindow.fiatTimerStop();
-                    }
-                }
-            }
-        }
-
-        GridLayout {
-            visible: enableConvertCurrency.checked
-            columns: 2
-            Layout.fillWidth: true
-            Layout.leftMargin: 36
-            columnSpacing: 32
-
-            ColumnLayout {
-                spacing: 10
-                Layout.fillWidth: true
-
-                MoneroComponents.Label {
-                    Layout.fillWidth: true
-                    fontSize: 14
-                    text: qsTr("Price source") + translationManager.emptyString
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: fiatPriceProviderDropDown
-                    Layout.fillWidth: true
-                    dataModel: fiatPriceProvidersModel
-                    onChanged: {
-                        var obj = dataModel.get(currentIndex);
-                        persistentSettings.fiatPriceProvider = obj.data;
-
-                        if(persistentSettings.fiatPriceEnabled)
-                            appWindow.fiatApiRefresh();
-                    }
-                }
-            }
-
-            ColumnLayout {
-                spacing: 10
-                Layout.fillWidth: true
-
-                MoneroComponents.Label {
-                    Layout.fillWidth: true
-                    fontSize: 14
-                    text: qsTr("Currency") + translationManager.emptyString
-                }
-
-                MoneroComponents.StandardDropdown {
-                    id: fiatPriceCurrencyDropdown
-                    Layout.fillWidth: true
-                    dataModel: fiatPriceCurrencyModel
-                    onChanged: {
-                        var obj = dataModel.get(currentIndex);
-                        persistentSettings.fiatPriceCurrency = obj.data;
-
-                        if(persistentSettings.fiatPriceEnabled)
-                            appWindow.fiatApiRefresh();
-                    }
-                }
-            }
-
-            z: parent.z + 1
+             }
         }
 
         ColumnLayout {
-            // Feature needs to be double enabled for security purposes (miss-clicks)
-            visible: enableConvertCurrency.checked && !persistentSettings.fiatPriceEnabled
-            spacing: 0
-            Layout.topMargin: 5
-            Layout.leftMargin: 36
+             id: appearanceSection
 
-            MoneroComponents.WarningBox {
-                text: qsTr("Enabling price conversion exposes your IP address to the selected price source.") + translationManager.emptyString;
-            }
+             MoneroComponents.LabelSubheader {
+                   Layout.fillWidth: true
+                   Layout.topMargin: 16
+                   Layout.bottomMargin: 14
+                   textFormat: Text.RichText
+                   text: qsTr("Appearance") + translationManager.emptyString
+             }
 
-            MoneroComponents.StandardButton {
-                Layout.topMargin: 10
-                Layout.bottomMargin: 10
-                small: true
-                text: qsTr("Confirm and enable") + translationManager.emptyString
+             RowLayout {
+                 MoneroComponents.Label {
+                    Layout.preferredWidth: 180
+                    Layout.leftMargin: 36
+                    fontSize: 14
+                    text: {
+        		               var language = persistentSettings.language;
+        		               qsTr("Language: ") + language + translationManager.emptyString;
+        	          }
+                 }
 
+                 MoneroComponents.StandardButton {
+                    small: true
+                    text: qsTr("Change") + translationManager.emptyString
+                    onClicked: {
+                        appWindow.toggleLanguageView();
+                    }
+                 }
+             }
+
+             MoneroComponents.CheckBox {
+                id: themeCheckbox
+                checked: !MoneroComponents.Style.blackTheme
+                text: qsTr("Use light theme") + translationManager.emptyString
+                toggleOnClick: false
                 onClicked: {
-                    console.log("Enabled price conversion");
-                    persistentSettings.fiatPriceEnabled = true;
-                    appWindow.fiatApiRefresh();
-                    appWindow.fiatTimerStart();
+                    MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                    persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
                 }
-            }
-        }
+             }
 
-        MoneroComponents.StandardButton {
-            visible: !persistentSettings.customDecorations
-            Layout.topMargin: 10
-            small: true
-            text: qsTr("Change language") + translationManager.emptyString
+             MoneroComponents.CheckBox {
+                id: customDecorationsCheckBox
+                checked: persistentSettings.customDecorations
+                onClicked: Windows.setCustomWindowDecorations(checked)
+                text: qsTr("Use custom decorations") + translationManager.emptyString
+             }
 
-            onClicked: {
-                appWindow.toggleLanguageView();
-            }
+             //! Manage pricing
+             RowLayout {
+                MoneroComponents.CheckBox {
+                    id: enableConvertCurrency
+                    text: qsTr("Display balance in other currency") + translationManager.emptyString
+                    checked: persistentSettings.fiatPriceEnabled
+                    onCheckedChanged: {
+                        if (!checked) {
+                            console.log("Disabled price conversion");
+                            persistentSettings.fiatPriceEnabled = false;
+                            appWindow.fiatTimerStop();
+                        }
+                    }
+                }
+             }
+
+             GridLayout {
+                visible: enableConvertCurrency.checked
+                columns: 2
+                Layout.fillWidth: true
+                Layout.leftMargin: 36
+                columnSpacing: 32
+
+                ColumnLayout {
+                    spacing: 10
+                    Layout.fillWidth: true
+
+                    MoneroComponents.Label {
+                        Layout.fillWidth: true
+                        fontSize: 14
+                        text: qsTr("Price source") + translationManager.emptyString
+                    }
+
+                    MoneroComponents.StandardDropdown {
+                        id: fiatPriceProviderDropDown
+                        Layout.fillWidth: true
+                        dataModel: fiatPriceProvidersModel
+                        onChanged: {
+                            var obj = dataModel.get(currentIndex);
+                            persistentSettings.fiatPriceProvider = obj.data;
+
+                            if(persistentSettings.fiatPriceEnabled)
+                                appWindow.fiatApiRefresh();
+                        }
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: 10
+                    Layout.fillWidth: true
+
+                    MoneroComponents.Label {
+                        Layout.fillWidth: true
+                        fontSize: 14
+                        text: qsTr("Currency") + translationManager.emptyString
+                    }
+
+                    MoneroComponents.StandardDropdown {
+                        id: fiatPriceCurrencyDropdown
+                        Layout.fillWidth: true
+                        dataModel: fiatPriceCurrencyModel
+                        onChanged: {
+                            var obj = dataModel.get(currentIndex);
+                            persistentSettings.fiatPriceCurrency = obj.data;
+
+                            if(persistentSettings.fiatPriceEnabled)
+                                appWindow.fiatApiRefresh();
+                        }
+                    }
+                }
+
+                z: parent.z + 1
+             }
+
+             ColumnLayout {
+                // Feature needs to be double enabled for security purposes (miss-clicks)
+                visible: enableConvertCurrency.checked && !persistentSettings.fiatPriceEnabled
+                spacing: 0
+                Layout.topMargin: 5
+                Layout.leftMargin: 36
+
+                MoneroComponents.WarningBox {
+                    text: qsTr("Enabling price conversion exposes your IP address to the selected price source.") + translationManager.emptyString;
+                }
+
+                MoneroComponents.StandardButton {
+                    Layout.topMargin: 10
+                    Layout.bottomMargin: 10
+                    small: true
+                    text: qsTr("Confirm and enable") + translationManager.emptyString
+
+                    onClicked: {
+                        console.log("Enabled price conversion");
+                        persistentSettings.fiatPriceEnabled = true;
+                        appWindow.fiatApiRefresh();
+                        appWindow.fiatTimerStart();
+                    }
+                }
+             }
         }
     }
 
@@ -304,4 +325,3 @@ Rectangle {
         console.log('SettingsLayout loaded');
     }
 }
-
