@@ -3,10 +3,6 @@
         <file>main.qml</file>
         <file>LeftPanel.qml</file>
         <file>MiddlePanel.qml</file>
-        <file>images/download-white.png</file>
-        <file>images/download-white@2x.png</file>
-        <file>images/external-link-white.png</file>
-        <file>images/external-link-white@2x.png</file>
         <file>components/Label.qml</file>
         <file>components/SettingsListItem.qml</file>
         <file>images/whatIsIcon.png</file>

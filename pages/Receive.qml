@@ -290,34 +290,39 @@ Rectangle {
                 }
             }
 
-            RowLayout {
-                spacing: parent.spacing
+            MoneroComponents.StandardButton {
+                Layout.preferredWidth: 220
+                small: true
+                text: FontAwesome.save + "  %1".arg(qsTr("Save as image")) + translationManager.emptyString
+                label.font.family: FontAwesome.fontFamily
+                fontSize: 13
+                onClicked: qrFileDialog.open()
+            }
 
-                MoneroComponents.StandardButton {
-                    rightIcon: "qrc:///images/download-white.png"
-                    onClicked: qrFileDialog.open()
+            MoneroComponents.StandardButton {
+                Layout.preferredWidth: 220
+                small: true
+                text: FontAwesome.clipboard + "  %1".arg(qsTr("Copy to clipboard")) + translationManager.emptyString
+                label.font.family: FontAwesome.fontFamily
+                fontSize: 13
+                onClicked: {
+                    clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
+                    appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
                 }
+            }
 
-                MoneroComponents.StandardButton {
-                    rightIcon: "qrc:///images/external-link-white.png"
-                    onClicked: {
-                        clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
-                        appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
-                    }
-                }
-
-                MoneroComponents.StandardButton {
-                    text: FontAwesome.eye
-                    label.font.family: FontAwesome.fontFamily
-                    fontSize: 24
-                    width: 36
-                    visible: appWindow.currentWallet ? appWindow.currentWallet.isHwBacked() : false
-                    onClicked: {
-                        appWindow.currentWallet.deviceShowAddressAsync(
-                            appWindow.currentWallet.currentSubaddressAccount,
-                            appWindow.current_subaddress_table_index,
-                            '');
-                    }
+            MoneroComponents.StandardButton {
+                Layout.preferredWidth: 220
+                small: true
+                text: FontAwesome.eye + "  %1".arg(qsTr("Show on device")) + translationManager.emptyString
+                label.font.family: FontAwesome.fontFamily
+                fontSize: 13
+                visible: appWindow.currentWallet ? appWindow.currentWallet.isHwBacked() : false
+                onClicked: {
+                    appWindow.currentWallet.deviceShowAddressAsync(
+                        appWindow.currentWallet.currentSubaddressAccount,
+                        appWindow.current_subaddress_table_index,
+                        '');
                 }
             }
         }
