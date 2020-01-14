@@ -255,7 +255,6 @@ Rectangle {
                   middlePanel.addressBookView.selectAndSend = true;
                   appWindow.showPageRequest("AddressBook");
               }
-              pasteButton: true
               onTextChanged: {
                   const parsed = walletManager.parse_uri_to_object(text);
                   if (!parsed.error) {
