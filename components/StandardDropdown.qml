@@ -137,20 +137,6 @@ Item {
             height: dropdown.expanded ? columnid.height : 0
             color: dropdown.pressedColor
 
-            Rectangle {
-                anchors.left: parent.left
-                anchors.top: parent.top
-                width: 3; height: 3
-                color: dropdown.pressedColor
-            }
-
-            Rectangle {
-                anchors.right: parent.right
-                anchors.top: parent.top
-                width: 3; height: 3
-                color: dropdown.pressedColor
-            }
-
             Behavior on height {
                 NumberAnimation { duration: 100; easing.type: Easing.InQuad }
             }
