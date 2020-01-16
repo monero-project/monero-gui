@@ -5,7 +5,6 @@ Copyright (c) 2014-2019, The Monero Project
 ## Development resources
 
 - Web: [getmonero.org](https://getmonero.org)
-- Forum: [forum.getmonero.org](https://forum.getmonero.org)
 - Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
 - Github: [https://github.com/monero-project/monero-gui](https://github.com/monero-project/monero-gui)
 - IRC: [#monero-dev on Freenode](irc://chat.freenode.net/#monero-dev)
