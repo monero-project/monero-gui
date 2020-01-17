@@ -177,7 +177,7 @@ find_package(Boost 1.62 REQUIRED COMPONENTS
 		program_options
 		locale)
 
-if(LINUX)
+if(UNIX AND NOT APPLE)
     find_package(X11 REQUIRED)
     message(STATUS "X11_FOUND = ${X11_FOUND}")
     message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
