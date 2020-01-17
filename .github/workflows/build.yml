@@ -8,7 +8,7 @@ jobs:
     runs-on: macOS-latest
     
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: update brew and install dependencies
       run: brew update && brew install boost hidapi zmq libpgm unbound libsodium miniupnpc ldns expat libunwind-headers protobuf qt5 
     - name: build
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: update apt
       run: sudo apt update
     - name: install monero dependencies
@@ -38,7 +38,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: numworks/setup-msys2@v1
     - name: update pacman
       run: msys2do pacman -Syu --noconfirm
