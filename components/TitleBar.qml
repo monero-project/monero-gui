@@ -62,12 +62,14 @@ Rectangle {
     states: [
         State {
             name: "default";
-            PropertyChanges { target: btnCloseWallet; visible: true}
-            PropertyChanges { target: btnLanguageToggle; visible: true}
+            PropertyChanges { target: btnCloseWallet; visible: rootItem.state == "normal" ? true : false}
+            PropertyChanges { target: btnLockWallet; visible: rootItem.state == "normal" ? true : false}
+            PropertyChanges { target: btnLanguageToggle; visible: rootItem.state == "normal" && !blur.visible ? true : false}
         }, State {
             // show only theme switcher and window controls
             name: "essentials";
             PropertyChanges { target: btnCloseWallet; visible: false}
+            PropertyChanges { target: btnLockWallet; visible: false}
             PropertyChanges { target: btnLanguageToggle; visible: false}
         }
     ]
@@ -91,7 +93,7 @@ Rectangle {
         spacing: 0
         anchors.fill: parent
 
-        // collapse sidebar
+        // close wallet
         Rectangle {
             id: btnCloseWallet
             color: "transparent"
@@ -117,6 +119,48 @@ Rectangle {
                 onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
                 onExited: parent.color = "transparent"
                 onClicked: root.closeWalletClicked(leftPanel.visible)
+            }
+        }
+
+        // lock wallet
+        Rectangle {
+            id: btnLockWallet
+            color: "transparent"
+            Layout.preferredWidth: parent.height
+            Layout.preferredHeight: parent.height
+
+            Text {
+                text: blur.visible ? FontAwesome.lock : FontAwesome.unlock
+                font.family: FontAwesome.fontFamilySolid
+                font.pixelSize: 16
+                color: MoneroComponents.Style.defaultFontColor
+                font.styleName: "Solid"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                opacity: 0.75
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
+                onExited: parent.color = "transparent"
+                onClicked: {
+                  var inputDialogVisible = inputDialog && inputDialog.visible
+                  passwordDialog.onAcceptedCallback = function() {
+                      if(walletPassword === passwordDialog.password){
+                        passwordDialog.close();
+                      } else {
+                        passwordDialog.showError(qsTr("Wrong password"));
+                      }
+                      if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
+                 }
+
+                 passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
+                 if (inputDialogVisible) inputDialog.close()
+                 passwordDialog.open();
+              }
             }
         }
 
