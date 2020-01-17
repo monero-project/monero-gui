@@ -22,6 +22,8 @@ jobs:
  
     steps:
     - uses: actions/checkout@v2
+    - name: remove bundled boost
+      run: sudo rm -rf /usr/local/share/boost
     - name: update apt
       run: sudo apt update
     - name: install monero dependencies
