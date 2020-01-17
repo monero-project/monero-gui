@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.5)
 project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
