@@ -67,7 +67,7 @@ If you need help/support or any info you can contact the localization workgroup 
 
 Packages are available for
 
-* Arch Linux via AUR: [monero-wallet-qt](https://aur.archlinux.org/packages/monero-wallet-qt/)
+* Arch Linux: pacman -S monero-gui
 * Void Linux: xbps-install -S monero-core
 * GuixSD: guix package -i monero-core
 
