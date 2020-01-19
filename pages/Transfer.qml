@@ -166,7 +166,7 @@ Rectangle {
                   width: 100
                   fontBold: true
                   inlineButtonText: qsTr("All") + translationManager.emptyString
-                  inlineButton.onClicked: amountLine.text = "(all)"
+                  inlineButton.onClicked: amountLine.text = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll())
                   onTextChanged: {
                         const match = amountLine.text.match(/^0+(\d.*)/);
                         if (match) {

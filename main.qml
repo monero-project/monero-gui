@@ -843,37 +843,35 @@ ApplicationWindow {
         transactionDescription = description;
 
         // validate amount;
-        if (amount !== "(all)") {
-            var amountxmr = walletManager.amountFromString(amount);
-            console.log("integer amount: ", amountxmr);
-            console.log("integer unlocked", currentWallet.unlockedBalance())
-            if (amountxmr <= 0) {
-                hideProcessingSplash()
-                informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
-                        .arg(walletManager.displayAmount(0))
-                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                        + translationManager.emptyString
+        var amountxmr = walletManager.amountFromString(amount);
+        console.log("integer amount: ", amountxmr);
+        console.log("integer unlocked", currentWallet.unlockedBalance())
+        if (amountxmr <= 0) {
+            hideProcessingSplash()
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
+                    .arg(walletManager.displayAmount(0))
+                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                    + translationManager.emptyString
 
-                informationPopup.icon  = StandardIcon.Critical
-                informationPopup.onCloseCallback = null
-                informationPopup.open()
-                return;
-            } else if (amountxmr > currentWallet.unlockedBalance()) {
-                hideProcessingSplash()
-                informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
-                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                        + translationManager.emptyString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            return;
+        } else if (amountxmr > currentWallet.unlockedBalance()) {
+            hideProcessingSplash()
+            informationPopup.title = qsTr("Error") + translationManager.emptyString;
+            informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
+                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                    + translationManager.emptyString
 
-                informationPopup.icon  = StandardIcon.Critical
-                informationPopup.onCloseCallback = null
-                informationPopup.open()
-                return;
-            }
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null
+            informationPopup.open()
+            return;
         }
 
-        if (amount === "(all)")
+        if (amount === currentWallet.unlockedBalance())
             currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
         else
             currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
