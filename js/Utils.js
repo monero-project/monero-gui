@@ -133,3 +133,7 @@ function capitalize(s){
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
+
+function removeTrailingZeros(value) {
+    return (value + '').replace(/(\.\d*[1-9])0+$/, '$1');
+}
