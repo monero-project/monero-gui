@@ -222,8 +222,6 @@
         <file>wizard/WizardOpenWallet1.qml</file>
         <file>images/arrow-right-in-circle.png</file>
         <file>images/arrow-right-in-circle@2x.png</file>
-        <file>images/themes/white/leftPanelBg.jpg</file>
-        <file>images/themes/white/middlePanelBg.jpg</file>
         <file>images/right.svg</file>
         <file>images/middlePanelShadow.png</file>
         <file>images/themes/white/titlebarLogo@2x.png</file>
