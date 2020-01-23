@@ -55,6 +55,7 @@ Rectangle {
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText)
+            appWindow.currentWallet.subaddressAccount.refresh()
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open(appWindow.currentWallet.getSubaddressLabel(_index, 0))
