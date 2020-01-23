@@ -51,7 +51,33 @@ Rectangle {
     property alias transferHeight2: advancedLayout.height
     property int mixin: 10  // (ring size 11)
     property string warningContent: ""
-    property string sendButtonWarning: ""
+    property string sendButtonWarning: {
+        // Currently opened wallet is not view-only
+        if (appWindow.viewOnly) {
+            return qsTr("Wallet is view-only and sends are not possible. Unless key images are imported, " +
+                        "the balance reflects only incoming but not outgoing transactions.") + translationManager.emptyString;
+        }
+
+        // There are sufficient unlocked funds available
+        if (walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()) {
+            return qsTr("Amount is more than unlocked balance.") + translationManager.emptyString;
+        }
+
+        if (addressLine.text)
+        {
+            // Address is valid
+            if (!TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)) {
+                return qsTr("Address is invalid.") + translationManager.emptyString;
+            }
+
+            // Amount is nonzero
+            if (!amountLine.text || parseFloat(amountLine.text) <= 0) {
+                return qsTr("Enter an amount.") + translationManager.emptyString;
+            }
+        }
+
+        return "";
+    }
     property string startLinkText: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><font size='2'> (</font><a href='#'>Start daemon</a><font size='2'>)</font>") + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
 
@@ -88,7 +114,6 @@ Rectangle {
         addressLine.text = ""
         setPaymentId("");
         amountLine.text = ""
-        root.sendButtonWarning = ""
         setDescription("");
         priorityDropdown.currentIndex = 0
         updatePriorityDropdown()
@@ -413,9 +438,7 @@ Rectangle {
               rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: {
-                updateSendButton()
-              }
+              enabled: !sendButtonWarningBox.visible && !warningContent && addressLine.text && !paymentIdWarningBox.visible
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
@@ -728,50 +751,5 @@ Rectangle {
 
         if(typeof amount !== 'undefined')
             amountLine.text = amount;
-    }
-
-    function updateSendButton(){
-        // reset message
-        root.sendButtonWarning = "";
-
-        // Currently opened wallet is not view-only
-        if(appWindow.viewOnly){
-            root.sendButtonWarning = qsTr("Wallet is view-only and sends are not possible. Unless key images are imported, " + 
-                                    "the balance reflects only incoming but not outgoing transactions.") + translationManager.emptyString;
-            return false;
-        }
-
-        // There are sufficient unlocked funds available
-        if(walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()){
-            root.sendButtonWarning = qsTr("Amount is more than unlocked balance.") + translationManager.emptyString;
-            return false;
-        }
-
-        // There is no warning box displayed
-        if(root.warningContent !== ""){
-            return false;
-        }
-
-        if (addressLine.text == "") {
-            return false;
-        }
-
-        // Address is valid
-        if(!TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)){
-            root.sendButtonWarning = qsTr("Address is invalid.") + translationManager.emptyString;
-            return false;
-        }
-
-        // Amount is nonzero
-        if (!amountLine.text || parseFloat(amountLine.text) <= 0) {
-            root.sendButtonWarning = qsTr("Enter an amount.") + translationManager.emptyString;
-            return false;
-        }
-
-        if (paymentIdWarningBox.visible) {
-            return false;
-        }
-
-        return true;
     }
 }
