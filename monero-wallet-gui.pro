@@ -381,6 +381,9 @@ macx {
 
     QT += macextras
     OBJECTIVE_SOURCES += src/qt/macoshelper.mm
+    LIBS+= -Wl,-dead_strip
+    LIBS+= -Wl,-dead_strip_dylibs
+    LIBS+= -Wl,-bind_at_load
     LIBS+= \
         -L/usr/local/lib \
         -L$$OPENSSL_LIBRARY_DIRS \
