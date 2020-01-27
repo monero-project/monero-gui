@@ -1382,7 +1382,7 @@ Rectangle {
             if(root.sortSearchString.length >= 1){
                 if(item.amount && item.amount.toString().startsWith(root.sortSearchString)){
                     txs.push(item);
-                } else if(item.address !== "" && item.address.startsWith(root.sortSearchString)){
+                } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
                 } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
