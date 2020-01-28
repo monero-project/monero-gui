@@ -281,7 +281,7 @@ Rectangle {
                 secretSpendKey.text = qsTr("(View Only Wallet - No secret spend key available)") + translationManager.emptyString
             }
             // hardware device wallet
-            if(currentWallet.seed === "") {
+            if(appWindow.currentWallet.isHwBacked() === true) {
                 showFullQr.visible = false
                 viewOnlyQRCode.visible = true
                 showViewOnlyQr.visible = false
