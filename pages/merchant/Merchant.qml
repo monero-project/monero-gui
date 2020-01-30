@@ -265,7 +265,10 @@ Item {
                     font.pixelSize: 12
                     font.bold: false
                     color: "white"
-                    text: qsTr("<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>Currently selected address: ") + addressLabel + qsTr(" <a href='#'>(Change)</a>") + translationManager.emptyString
+                    text: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 12px;}</style>%1: %2 <a href='#'>(%3)</a>"
+                        .arg(qsTr("Currently selected address"))
+                        .arg(addressLabel)
+                        .arg(qsTr("Change")) + translationManager.emptyString
                     textFormat: Text.RichText
                     themeTransition: false
 
