@@ -57,6 +57,7 @@ ApplicationWindow {
     property bool ctrlPressed: false
     property alias persistentSettings : persistentSettings
     property var currentWallet;
+    property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
     property var transactionDescription;
     property var walletPassword
@@ -64,7 +65,7 @@ ApplicationWindow {
     property bool daemonSynced: false
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
-    property bool daemonRunning: false
+    property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
@@ -474,19 +475,11 @@ ApplicationWindow {
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
 
-        // update local daemon status.
-        const isDisconnected = status === Wallet.ConnectionStatus_Disconnected;
-        if (!persistentSettings.useRemoteNode) {
-            daemonRunning = !isDisconnected;
-        } else {
-            daemonRunning = false;
-        }
-
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
-        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && isDisconnected) {
+        if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
@@ -642,7 +635,7 @@ ApplicationWindow {
         }
 
         // Update wallet sync progress
-        leftPanel.isSyncing = (currentWallet.connected() !== Wallet.ConnectionStatus_Disconnected) && !daemonSynced
+        leftPanel.isSyncing = !disconnected && !daemonSynced;
         // Update transfer page status
         middlePanel.updateStatus();
 
@@ -692,7 +685,6 @@ ApplicationWindow {
 
     function onDaemonStarted(){
         console.log("daemon started");
-        daemonRunning = true;
         hideProcessingSplash();
         currentWallet.connected(true);
         // resume refresh
@@ -704,7 +696,6 @@ ApplicationWindow {
     function onDaemonStopped(){
         console.log("daemon stopped");
         hideProcessingSplash();
-        daemonRunning = false;
         currentWallet.connected(true);
     }
 
@@ -713,7 +704,6 @@ ApplicationWindow {
         hideProcessingSplash();
         // resume refresh
         currentWallet.startRefresh();
-        daemonRunning = false;
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
         informationPopup.text  = qsTr("Please check your wallet and daemon log for errors. You can also try to start %1 manually.").arg((isWindows)? "monerod.exe" : "monerod")
         informationPopup.icon  = StandardIcon.Critical
@@ -1867,11 +1857,10 @@ ApplicationWindow {
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
 
-        const connected = leftPanel.networkStatus.connected !== Wallet.ConnectionStatus_Disconnected;
         const firstRun = appWindow.disconnectedEpoch == 0;
         if (firstRun) {
             appWindow.disconnectedEpoch = Utils.epoch() + firstCheckDelaySec - disconnectedTimeoutSec;
-        } else if (connected) {
+        } else if (!disconnected) {
             appWindow.disconnectedEpoch = Utils.epoch();
         }
 

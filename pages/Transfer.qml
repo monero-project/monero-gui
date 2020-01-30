@@ -717,6 +717,7 @@ Rectangle {
         //pageRoot.enabled = false;
 
         switch (currentWallet.connected()) {
+        case Wallet.ConnectionStatus_Connecting:
         case Wallet.ConnectionStatus_Disconnected:
             root.warningContent = messageNotConnected;
             break

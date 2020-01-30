@@ -153,12 +153,14 @@ NetworkType::Type Wallet::nettype() const
 void Wallet::updateConnectionStatusAsync()
 {
     m_scheduler.run([this] {
+        if (m_connectionStatus == Wallet::ConnectionStatus_Disconnected)
+        {
+            setConnectionStatus(ConnectionStatus_Connecting);
+        }
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
         if (newStatus != m_connectionStatus || !m_initialized) {
             m_initialized = true;
-            m_connectionStatus = newStatus;
-            qDebug() << "NEW STATUS " << newStatus;
-            emit connectionStatusChanged(newStatus);
+            setConnectionStatus(newStatus);
         }
         // Release lock
         m_connectionStatusRunning = false;
@@ -176,6 +178,31 @@ Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
     }
 
     return m_connectionStatus;
+}
+
+bool Wallet::disconnected() const
+{
+    return m_disconnected;
+}
+
+void Wallet::setConnectionStatus(ConnectionStatus value)
+{
+    if (m_connectionStatus == value)
+    {
+        return;
+    }
+
+    m_connectionStatus = value;
+    emit connectionStatusChanged(m_connectionStatus);
+
+    bool disconnected = m_connectionStatus == Wallet::ConnectionStatus_Connecting ||
+        m_connectionStatus == Wallet::ConnectionStatus_Disconnected;
+
+    if (m_disconnected != disconnected)
+    {
+        m_disconnected = disconnected;
+        emit disconnectedChanged();
+    }
 }
 
 bool Wallet::synchronized() const
@@ -237,13 +264,7 @@ void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemon
 void Wallet::initAsync(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
 {
     qDebug() << "initAsync: " + daemonAddress;
-    // Change status to disconnected if connected
-    if(m_connectionStatus != Wallet::ConnectionStatus_Disconnected) {
-        m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
-        emit connectionStatusChanged(m_connectionStatus);
-    }
-
-    m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight] {
+    const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight] {
         bool success = init(daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
         if (success)
         {
@@ -253,6 +274,10 @@ void Wallet::initAsync(const QString &daemonAddress, bool trustedDaemon, quint64
             m_walletImpl->startRefresh();
         }
     });
+    if (future.first)
+    {
+        setConnectionStatus(Wallet::ConnectionStatus_Connecting);
+    }
 }
 
 bool Wallet::isHwBacked() const
@@ -985,7 +1010,9 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
     , m_daemonBlockChainTargetHeight(0)
     , m_daemonBlockChainTargetHeightTtl(DAEMON_BLOCKCHAIN_TARGET_HEIGHT_CACHE_TTL_SECONDS)
+    , m_connectionStatus(Wallet::ConnectionStatus_Disconnected)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
+    , m_disconnected(true)
     , m_currentSubaddressAccount(0)
     , m_subaddress(nullptr)
     , m_subaddressModel(nullptr)
@@ -999,7 +1026,6 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_subaddressAccount = new SubaddressAccount(m_walletImpl->subaddressAccount(), this);
     m_walletListener = new WalletListenerImpl(this);
     m_walletImpl->setListener(m_walletListener);
-    m_connectionStatus = Wallet::ConnectionStatus_Disconnected;
     m_currentSubaddressAccount = getCacheAttribute(ATTRIBUTE_SUBADDRESS_ACCOUNT).toUInt();
     // start cache timers
     m_connectionStatusTime.restart();
