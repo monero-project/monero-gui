@@ -57,30 +57,27 @@ int AddressBookModel::rowCount(const QModelIndex &) const
 
 QVariant AddressBookModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
-        return QVariant();
+    QVariant result;
 
-    if (index.row() < 0 || (unsigned)index.row() >= m_addressBook->count()) {
-        return QVariant();
-    }
-
-    Monero::AddressBookRow * ar = m_addressBook->getRow(index.row());
-
-    QVariant result = "";
-    switch (role) {
-    case AddressBookAddressRole:
-        result = QString::fromStdString(ar->getAddress());
-        break;
-    case AddressBookDescriptionRole:
-        result = QString::fromStdString(ar->getDescription());
-        break;
-    case AddressBookPaymentIdRole:
-        result = QString::fromStdString(ar->getPaymentId());
-        break;
-    case AddressBookRowIdRole:
-        // Qt doesnt support size_t overload type casting
-        result.setValue(ar->getRowId());
-        break;
+    bool found = m_addressBook->getRow(index.row(), [&result, &role](const Monero::AddressBookRow &row) {
+        switch (role) {
+        case AddressBookAddressRole:
+            result = QString::fromStdString(row.getAddress());
+            break;
+        case AddressBookDescriptionRole:
+            result = QString::fromStdString(row.getDescription());
+            break;
+        case AddressBookPaymentIdRole:
+            result = QString::fromStdString(row.getPaymentId());
+            break;
+        case AddressBookRowIdRole:
+            // Qt doesnt support size_t overload type casting
+            result.setValue(row.getRowId());
+            break;
+        }
+    });
+    if (!found) {
+        qCritical("%s: internal error: invalid index %d", __FUNCTION__, index.row());
     }
 
     return result;
