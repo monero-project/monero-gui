@@ -62,7 +62,7 @@ Rectangle {
     height: present ? ((appWindow.height >= 800) ? 44  : 38 ) : 0
 
     LinearGradient {
-        visible: isOpenGL && button.checked || numSelectedChildren > 0
+        visible: isOpenGL && button.checked
         height: parent.height
         width: 260
         anchors.verticalCenter: parent.verticalCenter
