@@ -806,21 +806,30 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
-            transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
-            transactionConfirmationPopup.text = "";
-            transactionConfirmationPopup.text += (address === "" ? "" : (qsTr("Address: ") + address));
-            transactionConfirmationPopup.text += (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId));
-            transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
-            transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
-            transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
-            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
-            for (var i = 0; i < transaction.subaddrIndices.length; ++i){
-                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
-            }
+			var transactionAmount = Number(walletManager.displayAmount(transaction.amount));
+			var transactionFee = Number(walletManager.displayAmount(transaction.fee));
 
-            transactionConfirmationPopup.text += translationManager.emptyString;
-            transactionConfirmationPopup.icon = StandardIcon.Question
+            function showFiatConversion(valueXMR) {
+                return (fiatApiConvertToFiat(valueXMR) === "0.00" ? "&#60;0.01 " + fiatApiCurrencySymbol() : "~" + fiatApiConvertToFiat(valueXMR) + " " + fiatApiCurrencySymbol());
+            }
+			
+            transactionConfirmationPopup.title = qsTr("Confirm send") + translationManager.emptyString
+            transactionConfirmationPopup.text =  "";
+            transactionConfirmationPopup.text += "<style>td{padding:7px;}
+                                                         td.amount{padding:3px; font-size:40px; font-weight:bold; text-align:center;}
+                                                         td.amountfiat{padding:0px; height:70px; font-size:17px; text-align:center; vertical-align:top;}
+                                                         td.bold{font-size:16px; font-weight:bold; width:20%;}
+                                                         td.normal{font-size:15px; width:80%;}
+                                                  </style>"
+                                              +  "<table>"
+                                              +  "<tr><td class='amount' colspan=2>" + transactionAmount + " XMR</td>"
+                                              +  "<tr><td class='amountfiat' colspan=2>" + (persistentSettings.fiatPriceEnabled ? showFiatConversion(transactionAmount) : "") + "</td></tr>"
+                                              +  "<tr><td class='amountfiat' colspan=2></td></tr>"
+                                              +  "<tr><td class='bold'>" + qsTr("From") + ":</td><td class='normal'>" + walletName + " (" + currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0) + ")" + "</td></tr>"
+                                              +  "<tr><td class='bold'>" + qsTr("To") + ":</td><td class='normal'>" + address + "</td></tr>"
+                                              +  "<tr><td class='bold'>" + qsTr("Fee") + ":</td><td class='normal'>" + transactionFee + " XMR " + (persistentSettings.fiatPriceEnabled ? "(" + showFiatConversion(transactionFee) + ")" : "")+ "</td></tr>"
+                                              +  "</table>"
+                                              +  translationManager.emptyString
             transactionConfirmationPopup.open()
         }
     }
@@ -924,13 +933,19 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
+            var transactionAmount = Number(walletManager.displayAmount(transaction.amount));
+            var transactionFee = Number(walletManager.displayAmount(transaction.fee));
 
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
-                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + translationManager.emptyString
-            transactionConfirmationPopup.icon = StandardIcon.Question
+            function showFiatConversion(valueXMR) {
+                return (fiatApiConvertToFiat(valueXMR) === "0.00" ? "(<0.01 " + fiatApiCurrencySymbol() + ")" : "(~" + fiatApiConvertToFiat(valueXMR) + " " + fiatApiCurrencySymbol() + ")");
+            }
+            
+            transactionConfirmationPopup.title = qsTr("Confirm transaction") + translationManager.emptyString
+            transactionConfirmationPopup.text =  "";
+            transactionConfirmationPopup.text += qsTr("Please confirm transaction to sweep unmixable outputs") + ":\n\n"
+                                              +  qsTr("Amount") + ":\n" + transactionAmount + " XMR " + (persistentSettings.fiatPriceEnabled ? showFiatConversion(transactionAmount) : "") + "\n\n"
+                                              +  qsTr("Fee") + ":\n" + transactionFee + " XMR " + (persistentSettings.fiatPriceEnabled ? showFiatConversion(transactionFee) : "")
+                                              +  translationManager.emptyString
             transactionConfirmationPopup.open()
             // committing transaction
         }
@@ -1407,6 +1422,13 @@ ApplicationWindow {
     StandardDialog {
         z: parent.z + 1
         id: transactionConfirmationPopup
+        icon: StandardIcon.Question
+        textArea.textFormat: Text.RichText
+        textArea.wrapMode: Text.Wrap
+        cancelText: qsTr("Back") + translationManager.emptyString
+        cancelButton.width: okButton.width
+        okButton.rightIcon: "qrc:///images/rightArrow.png"
+        okText: qsTr("Confirm") + translationManager.emptyString
         onAccepted: {
             close();
             passwordDialog.onAcceptedCallback = function() {
@@ -1697,7 +1719,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || transactionConfirmationPopup.visible
         }
 
 

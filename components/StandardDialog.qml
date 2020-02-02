@@ -46,7 +46,9 @@ Rectangle {
     property alias cancelVisible: cancelButton.visible
     property alias okVisible: okButton.visible
     property alias textArea: dialogContent
+    property alias okButton: okButton
     property alias okText: okButton.text
+    property alias cancelButton: cancelButton
     property alias cancelText: cancelButton.text
     property alias closeVisible: closeButton.visible
 
