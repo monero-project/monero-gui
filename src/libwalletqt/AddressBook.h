@@ -31,6 +31,7 @@
 
 #include <wallet/api/wallet2_api.h>
 #include <QObject>
+#include <QReadWriteLock>
 #include <QList>
 #include <QDateTime>
 
@@ -43,10 +44,9 @@ class AddressBook : public QObject
 {
     Q_OBJECT
 public:
-    Q_INVOKABLE QList<Monero::AddressBookRow*> getAll(bool update = false) const;
-    Q_INVOKABLE Monero::AddressBookRow * getRow(int index) const;
-    Q_INVOKABLE bool addRow(const QString &address, const QString &payment_id, const QString &description) const;
-    Q_INVOKABLE bool deleteRow(int rowId) const;
+    Q_INVOKABLE bool getRow(int index, std::function<void (Monero::AddressBookRow &)> callback) const;
+    Q_INVOKABLE bool addRow(const QString &address, const QString &payment_id, const QString &description);
+    Q_INVOKABLE bool deleteRow(int rowId);
     quint64 count() const;
     Q_INVOKABLE QString errorString() const;
     Q_INVOKABLE int errorCode() const;
@@ -61,6 +61,8 @@ public:
 
     Q_ENUM(ErrorCode);
 
+private:
+    void getAll();
 
 signals:
     void refreshStarted() const;
@@ -73,6 +75,7 @@ private:
     explicit AddressBook(Monero::AddressBook * abImpl, QObject *parent);
     friend class Wallet;
     Monero::AddressBook * m_addressBookImpl;
+    mutable QReadWriteLock m_lock;
     mutable QList<Monero::AddressBookRow*> m_rows;
 };
 
