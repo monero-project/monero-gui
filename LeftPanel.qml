@@ -348,7 +348,7 @@ Rectangle {
             id:flicker
             contentHeight: menuColumn.height
             anchors.top: parent.top
-            anchors.bottom: networkStatus.top
+            anchors.bottom: progressBar.visible ? progressBar.top : networkStatus.top
             width: parent.width
             boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
             clip: true
@@ -644,20 +644,9 @@ Rectangle {
             anchors.right: parent.right
             anchors.leftMargin: 0
             anchors.rightMargin: 0
-            anchors.bottom: networkStatus.top;
+            anchors.bottom: progressBar.visible ? progressBar.top : networkStatus.top
             height: 10
             color: "transparent"
-        }
-
-        MoneroComponents.NetworkStatusItem {
-            id: networkStatus
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: 5
-            anchors.rightMargin: 0
-            anchors.bottom: (progressBar.visible)? progressBar.top : parent.bottom;
-            connected: Wallet.ConnectionStatus_Disconnected
-            height: 48
         }
 
         MoneroComponents.ProgressBar {
@@ -674,10 +663,22 @@ Rectangle {
             id: daemonProgressBar
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors.bottom: networkStatus.top
             syncType: qsTr("Daemon") + translationManager.emptyString
             visible: !appWindow.disconnected
             height: 62
+        }
+        
+        MoneroComponents.NetworkStatusItem {
+            id: networkStatus
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 5
+            anchors.rightMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            connected: Wallet.ConnectionStatus_Disconnected
+            height: 48
         }
     }
 }
