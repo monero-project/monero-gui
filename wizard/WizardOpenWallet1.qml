@@ -45,7 +45,7 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardOpenWallet1"
-    property int walletCount: walletKeysFilesModel.rowCount()
+    property int walletCount: walletKeysFilesModel ? walletKeysFilesModel.rowCount() : 0
 
     ColumnLayout {
         id: pageRoot
@@ -69,7 +69,7 @@ Rectangle {
             }
 
             GridLayout {
-                visible: walletKeysFilesModel.rowCount() > 0
+                visible: (walletKeysFilesModel ? walletKeysFilesModel.rowCount() : 0) > 0
                 Layout.topMargin: 10
                 Layout.fillWidth: true
                 columnSpacing: 20
