@@ -58,7 +58,7 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
-                title: qsTr("Mode selection.") + translationManager.emptyString
+                title: qsTr("Mode selection") + translationManager.emptyString
                 subtitle: qsTr("Please select the statement that best matches you.") + translationManager.emptyString
             }
 
