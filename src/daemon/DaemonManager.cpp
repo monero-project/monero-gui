@@ -63,6 +63,12 @@ DaemonManager *DaemonManager::instance(const QStringList *args)
 
 bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
 {
+    if (!QFileInfo(m_monerod).isFile())
+    {
+        emit daemonStartFailure("\"" + QDir::toNativeSeparators(m_monerod) + "\" " + tr("executable is missing"));
+        return false;
+    }
+
     // prepare command line arguments and pass to monerod
     QStringList arguments;
 
@@ -130,7 +136,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
-        emit daemonStartFailure();
+        emit daemonStartFailure(m_daemon->errorString());
         return false;
     }
 
@@ -140,7 +146,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
             emit daemonStarted();
             m_noSync = noSync;
         } else {
-            emit daemonStartFailure();
+            emit daemonStartFailure(tr("Timed out, local node is not responding after %1 seconds").arg(DAEMON_START_TIMEOUT_SECONDS));
         }
     });
 
