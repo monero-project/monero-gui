@@ -551,8 +551,7 @@ Rectangle {
                 id: importKeyImagesButton
                 text: qsTr("Import key images") + translationManager.emptyString
                 small: true
-                visible: appWindow.viewOnly && !persistentSettings.useRemoteNode
-                enabled: pageRoot.enabled
+                enabled: appWindow.viewOnly && !persistentSettings.useRemoteNode
                 onClicked: {
                     console.log("Transfer: import key images clicked")
                     importKeyImagesDialog.open();
