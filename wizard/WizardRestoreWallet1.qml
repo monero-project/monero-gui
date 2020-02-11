@@ -193,7 +193,9 @@ Rectangle {
 
                         color: MoneroComponents.Style.defaultFontColor
                         textMargin: 2
-                        text: ""
+                        onTextChanged: {
+                            text = text.replace(/\s+/g, ' ');
+                        }
 
                         font.family: MoneroComponents.Style.fontRegular.name
                         font.pixelSize: 16
