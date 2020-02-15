@@ -633,7 +633,17 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: isout ? qsTr("Sent") : qsTr("Received") + translationManager.emptyString
+                                    text: {
+                                        if (!isout) {
+                                            return qsTr("Received") + translationManager.emptyString;
+                                        }
+                                        const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
+                                        if (!addressBookName)
+                                        {
+                                            return qsTr("Sent") + translationManager.emptyString;
+                                        }
+                                        return addressBookName;
+                                    }
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
