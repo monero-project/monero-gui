@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "DaemonManager.h"
+#include <QElapsedTimer>
 #include <QFile>
 #include <QThread>
 #include <QFileInfo>
@@ -36,7 +37,6 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QApplication>
 #include <QProcess>
-#include <QTime>
 #include <QStorageInfo>
 #include <QVariantMap>
 #include <QVariant>
@@ -173,8 +173,8 @@ bool DaemonManager::stop(NetworkType::Type nettype)
 bool DaemonManager::startWatcher(NetworkType::Type nettype) const
 {
     // Check if daemon is started every 2 seconds
-    QTime timer;
-    timer.restart();
+    QElapsedTimer timer;
+    timer.start();
     while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
         QThread::sleep(2);
         if(!running(nettype)) {

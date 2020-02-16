@@ -32,7 +32,6 @@
 AddressBook::AddressBook(Monero::AddressBook *abImpl,QObject *parent)
   : QObject(parent), m_addressBookImpl(abImpl)
 {
-    qDebug(__FUNCTION__);
     getAll();
 }
 
@@ -48,8 +47,6 @@ int AddressBook::errorCode() const
 
 void AddressBook::getAll()
 {
-    qDebug(__FUNCTION__);
-
     emit refreshStarted();
 
     {

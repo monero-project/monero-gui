@@ -37,17 +37,15 @@
 class WalletKeysFiles
 {
 public:
-    WalletKeysFiles(const qint64 &modified, const qint64 &created, const QString &path, const quint8 &networkType, const QString &address);
+    WalletKeysFiles(const qint64 &modified, const QString &path, const quint8 &networkType, const QString &address);
 
     qint64 modified() const;
-    qint64 created() const;
     QString path() const;
     quint8 networkType() const;
     QString address() const;
 
 private:
     qint64 m_modified;
-    qint64 m_created;
     QString m_path;
     quint8 m_networkType;
     QString m_address;
@@ -61,8 +59,7 @@ public:
         ModifiedRole = Qt::UserRole + 1,
         PathRole,
         NetworkTypeRole,
-        AddressRole,
-        CreatedRole
+        AddressRole
     };
 
     WalletKeysFilesModel(WalletManager *walletManager, QObject *parent = 0);

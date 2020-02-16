@@ -884,7 +884,7 @@ void CreateArrays(NodeSPtr Root, StringIntSet_t & StrSet, StringOfInts & ChildAd
     if (x >= (1 << BITS_CHILD_MAP_INDEX))
     {
         char Tmp[20];
-        snprintf(Tmp, sizeof Tmp, "%lu", x);
+        snprintf(Tmp, sizeof Tmp, "%zu", x);
         throw string("Not enough bits for child map index value of ") + Tmp + " for " +
                 Its->s + " (BITS_CHILD_MAP_INDEX too small)";
     }
@@ -1046,7 +1046,7 @@ static int OutputBinary(ostream *Out, const string & ChkFile, const string & Cha
     Out->write((char *)WordEnds, NumWordEnd);
     h(WordEnds, NumWordEnd);
     OutputSize += NumWordEnd;
-    delete WordEnds;
+    delete[] WordEnds;
 
     StringIntSet_t::iterator Its;
     string Str;

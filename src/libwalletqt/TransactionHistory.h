@@ -37,7 +37,7 @@
 #include <QDateTime>
 
 namespace Monero {
-class TransactionHistory;
+struct TransactionHistory;
 }
 
 class TransactionInfo;

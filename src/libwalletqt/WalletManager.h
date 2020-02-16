@@ -42,7 +42,7 @@
 
 class Wallet;
 namespace Monero {
-    class WalletManager;
+struct WalletManager;
 }
 
 class WalletManager : public QObject

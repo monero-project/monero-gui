@@ -29,8 +29,8 @@
 #ifndef WALLET_H
 #define WALLET_H
 
+#include <QElapsedTimer>
 #include <QObject>
-#include <QTime>
 #include <QMutex>
 #include <QList>
 #include <QJSValue>
@@ -43,7 +43,7 @@
 #include "NetworkType.h"
 
 namespace Monero {
-    class Wallet; // forward declaration
+struct Wallet; // forward declaration
 }
 
 
@@ -406,15 +406,15 @@ private:
     QString m_paymentId;
     AddressBook * m_addressBook;
     mutable AddressBookModel * m_addressBookModel;
-    mutable QTime   m_daemonBlockChainHeightTime;
+    mutable QElapsedTimer m_daemonBlockChainHeightTime;
     mutable quint64 m_daemonBlockChainHeight;
     int     m_daemonBlockChainHeightTtl;
-    mutable QTime   m_daemonBlockChainTargetHeightTime;
+    mutable QElapsedTimer m_daemonBlockChainTargetHeightTime;
     mutable quint64 m_daemonBlockChainTargetHeight;
     int     m_daemonBlockChainTargetHeightTtl;
     mutable ConnectionStatus m_connectionStatus;
     int     m_connectionStatusTtl;
-    mutable QTime   m_connectionStatusTime;
+    mutable QElapsedTimer m_connectionStatusTime;
     bool m_disconnected;
     mutable bool    m_initialized;
     uint32_t m_currentSubaddressAccount;

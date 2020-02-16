@@ -35,18 +35,15 @@
 AddressBookModel::AddressBookModel(QObject *parent, AddressBook *addressBook)
     : QAbstractListModel(parent) , m_addressBook(addressBook)
 {
-    qDebug(__FUNCTION__);
     connect(m_addressBook,SIGNAL(refreshStarted()),this,SLOT(startReset()));
     connect(m_addressBook,SIGNAL(refreshFinished()),this,SLOT(endReset()));
 
 }
 
 void AddressBookModel::startReset(){
-    qDebug(__FUNCTION__);
     beginResetModel();
 }
 void AddressBookModel::endReset(){
-    qDebug(__FUNCTION__);
     endResetModel();
 }
 
