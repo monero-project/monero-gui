@@ -240,5 +240,8 @@
         <file>images/edit.svg</file>
         <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
         <file>images/tails-grey.png</file>
+        <file>images/success.png</file>
+        <file>components/SuccessfulTxDialog.qml</file>
+        <file>components/TxConfirmationDialog.qml</file>
     </qresource>
 </RCC>

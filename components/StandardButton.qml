@@ -37,6 +37,7 @@ Item {
     property string rightIconInactive: ""
     property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
     property bool small: false
+    property bool secondary: false
     property alias text: label.text
     property int fontSize: {
         if(small) return 14;
@@ -61,33 +62,46 @@ Item {
         radius: 3
         border.width: parent.focus ? 1 : 0
 
-        state: button.enabled ? "active" : "disabled"
+        state: {
+                   if(!button.secondary) {
+                       button.enabled ? "active" : "disabled"
+                   } else {
+                       button.enabled ? "active-secondary" : "disabled-secondary"
+                   }
+               }
+
         Component.onCompleted: state = state
 
         states: [
             State {
                 name: "hover"
-                when: buttonArea.containsMouse || button.focus
-                PropertyChanges {
-                    target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorHover
-                }
+                when: (buttonArea.containsMouse || button.focus) && !button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.buttonBackgroundColorHover }
             },
             State {
                 name: "active"
-                when: button.enabled
-                PropertyChanges {
-                    target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColor
-                }
+                when: button.enabled && !button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.buttonBackgroundColor }
             },
             State {
                 name: "disabled"
-                when: !button.enabled
-                PropertyChanges {
-                    target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorDisabled
-                }
+                when: !button.enabled && !button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.buttonBackgroundColorDisabled }
+            },
+            State {
+                name: "hover-secondary"
+                when: (buttonArea.containsMouse || button.focus) && button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.secondaryButtonBackgroundColorHover }
+            },
+            State {
+                name: "active-secondary"
+                when: button.enabled && button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.secondaryButtonBackgroundColor }
+            },
+            State {
+                name: "disabled-secondary"
+                when: !button.enabled && button.secondary
+                PropertyChanges { target: buttonRect; color: MoneroComponents.Style.secondaryButtonBackgroundColorDisabled }
             }
         ]
 

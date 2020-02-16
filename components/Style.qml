@@ -40,6 +40,10 @@ QtObject {
     property string buttonBackgroundColorHover: blackTheme ? _b_buttonBackgroundColorHover : _w_buttonBackgroundColorHover
     property string buttonBackgroundColorDisabled: blackTheme ? _b_buttonBackgroundColorDisabled : _w_buttonBackgroundColorDisabled
     property string buttonBackgroundColorDisabledHover: blackTheme ? _b_buttonBackgroundColorDisabledHover : _w_buttonBackgroundColorDisabledHover
+    property string secondaryButtonBackgroundColor: blackTheme ? _b_secondaryButtonBackgroundColor : _w_secondaryButtonBackgroundColor
+    property string secondaryButtonBackgroundColorHover: blackTheme ? _b_secondaryButtonBackgroundColorHover : _w_secondaryButtonBackgroundColorHover
+    property string secondaryButtonBackgroundColorDisabled: blackTheme ? _b_secondaryButtonBackgroundColorDisabled : _w_secondaryButtonBackgroundColorDisabled
+    property string secondaryButtonBackgroundColorDisabledHover: blackTheme ? _b_secondaryButtonBackgroundColorDisabledHover : _w_secondaryButtonBackgroundColorDisabledHover
     property string buttonInlineBackgroundColor: blackTheme ? _b_buttonInlineBackgroundColor : _w_buttonInlineBackgroundColor
     property string buttonTextColor: blackTheme ? _b_buttonTextColor : _w_buttonTextColor
     property string buttonTextColorDisabled: blackTheme ? _b_buttonTextColorDisabled : _w_buttonTextColorDisabled
@@ -96,6 +100,10 @@ QtObject {
     property string _b_buttonBackgroundColorHover: "#E65E00"
     property string _b_buttonBackgroundColorDisabled: "#707070"
     property string _b_buttonBackgroundColorDisabledHover: "#808080"
+    property string _b_secondaryButtonBackgroundColor: "#2d2d2d"
+    property string _b_secondaryButtonBackgroundColorHover: "#282828"
+    property string _b_secondaryButtonBackgroundColorDisabled: "#2d2d2d"
+    property string _b_secondaryButtonBackgroundColorDisabledHover: "#2d2d2d"
     property string _b_buttonInlineBackgroundColor: "#707070"
     property string _b_buttonTextColor: "white"
     property string _b_buttonTextColorDisabled: "black"
@@ -152,6 +160,10 @@ QtObject {
     property string _w_buttonBackgroundColorHover: "#E65E00"
     property string _w_buttonBackgroundColorDisabled: "#bbbbbb"
     property string _w_buttonBackgroundColorDisabledHover: "#D1D1D1"
+    property string _w_secondaryButtonBackgroundColor: "#8f8f8f"
+    property string _w_secondaryButtonBackgroundColorHover: "#828282"
+    property string _w_secondaryButtonBackgroundColorDisabled: "#bbbbbb"
+    property string _w_secondaryButtonBackgroundColorDisabledHover: "#bbbbbb"
     property string _w_buttonInlineBackgroundColor: "#bbbbbb"
     property string _w_buttonTextColor: "white"
     property string _w_buttonTextColorDisabled: "black"

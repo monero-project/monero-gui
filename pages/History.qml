@@ -1148,10 +1148,11 @@ Rectangle {
                                         return TxUtils.addressTruncate(address, 24);
                                     }
 
-                                    if(isout && blockheight === 0)
-                                        return qsTr("Waiting for transaction to leave txpool.") + translationManager.emptyString
-                                    else
+                                    if(isout && blockheight === 0 && hash == appWindow.lastTransaction[1]) {
+                                        return TxUtils.addressTruncate(appWindow.lastTransaction[0], 24);
+                                    } else {
                                         return qsTr("Unknown recipient") + translationManager.emptyString;
+                                    }
                                 }
 
                                 color: MoneroComponents.Style.defaultFontColor
@@ -1384,7 +1385,7 @@ Rectangle {
                     txs.push(item);
                 } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
-                } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
                 } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
                     txs.push(item);
@@ -1421,8 +1422,12 @@ Rectangle {
         // limit results as per tx_max (root.txMax)
         var txs = root.txData.slice(tx_offset, tx_offset + tx_max);
 
+        // auto collapse if there is a single result
+        if(root.txPage === 1 && txs.length === 1)
+            auto_collapse = true;
+            
         // make first result on the first page collapsed by default
-        if(auto_collapse && root.txPage === 1 && txs.length > 0 && (root.sortSearchString == null || root.sortSearchString === ""))
+        if(auto_collapse && root.txPage === 1 && txs.length > 0)
             root.txDataCollapsed.push(txs[0]['hash']);
 
         // populate listview
@@ -1705,10 +1710,17 @@ Rectangle {
         root.reset();
         root.refresh();
         root.initialized = true;
+        root.updateFilter();
     }
 
     function onPageClosed(){
         root.initialized = false;
         root.reset(true);
+    }
+
+    function searchInHistory(searchTerm){
+        middlePanel.state = 'History';
+        searchInput.text = searchTerm;
+        sortAndFilter.collapsed = true;
     }
 }
