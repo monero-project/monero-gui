@@ -153,21 +153,19 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     return true;
 }
 
-bool DaemonManager::stop(NetworkType::Type nettype)
+void DaemonManager::stopAsync(NetworkType::Type nettype, const QJSValue& callback)
 {
-    QString message;
-    sendCommand({"exit"}, nettype, message);
-    qDebug() << message;
+    const auto feature = m_scheduler.run([this, nettype] {
+        QString message;
+        sendCommand({"exit"}, nettype, message);
 
-    // Start stop watcher - Will kill if not shutting down
-    m_scheduler.run([this, nettype] {
-        if (stopWatcher(nettype))
-        {
-            emit daemonStopped();
-        }
-    });
+        return QJSValueList({stopWatcher(nettype)});
+    }, callback);
 
-    return true;
+    if (!feature.first)
+    {
+        QJSValue(callback).call(QJSValueList({false}));
+    }
 }
 
 bool DaemonManager::startWatcher(NetworkType::Type nettype) const
