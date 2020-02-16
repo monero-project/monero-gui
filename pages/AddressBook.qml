@@ -67,25 +67,11 @@ Rectangle {
             spacing: 0
             Layout.fillWidth: true
 
-            Text {
+            MoneroComponents.Label {
                 id: titleLabel
-                Layout.fillWidth: true
-                color: MoneroComponents.Style.defaultFontColor
-                font.family: MoneroComponents.Style.fontRegular.name
-                font.pixelSize: 32
-                horizontalAlignment: TextInput.AlignLeft
-                wrapMode: Text.WordWrap;
-                leftPadding: 0
-                topPadding: 0
+                Layout.bottomMargin: 20
+                fontSize: 32
                 text: qsTr("Save your most used addresses here") + translationManager.emptyString
-                width: parent.width
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                   anchors.fill: parent
-                   enabled: false
-                }
             }
 
             Text {
@@ -108,12 +94,24 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.StandardButton {
-                id: addFirstEntryButton
-                Layout.topMargin: 20
-                text: qsTr("Add an address") + translationManager.emptyString
-                onClicked: {
-                    root.showAddAddress();
+            RowLayout {
+                MoneroComponents.StandardButton {
+                    id: backButton2
+                    Layout.topMargin: 20
+                    text: qsTr("Back") + translationManager.emptyString
+                    visible: root.selectAndSend
+                    onClicked: {
+                        appWindow.showPageRequest("Transfer");
+                    }
+                }
+
+                MoneroComponents.StandardButton {
+                    id: addFirstEntryButton
+                    Layout.topMargin: 20
+                    text: qsTr("Add an address") + translationManager.emptyString
+                    onClicked: {
+                        root.showAddAddress();
+                    }
                 }
             }
         }
@@ -129,12 +127,34 @@ Rectangle {
                 text: qsTr("Address book") + translationManager.emptyString
             }
 
+            Text {
+                Layout.fillWidth: true
+                visible: root.selectAndSend
+                color: MoneroComponents.Style.dimmedFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
+                font.pixelSize: 16
+                horizontalAlignment: TextInput.AlignLeft
+                wrapMode: Text.WordWrap;
+                leftPadding: 0
+                topPadding: 0
+                text: qsTr("Select an address from your Address Book") + translationManager.emptyString
+                width: parent.width
+
+                // @TODO: Legacy. Remove after Qt 5.8.
+                // https://stackoverflow.com/questions/41990013
+                MouseArea {
+                    anchors.fill: parent
+                    enabled: false
+                }
+            }
+
             ColumnLayout {
                 id: addressBookListRow
                 property int addressBookListItemHeight: 50
                 Layout.fillWidth: true
                 Layout.minimumWidth: 240
                 Layout.preferredHeight: addressBookListItemHeight * addressBookListView.count
+                Layout.topMargin: root.selectAndSend ? 20 : 0
 
                 ListView {
                     id: addressBookListView
@@ -291,7 +311,17 @@ Rectangle {
                 }
             }
 
+            MoneroComponents.StandardButton {
+                id: backButton
+                Layout.topMargin: 20
+                text: qsTr("Back") + translationManager.emptyString
+                visible: root.selectAndSend
+                onClicked: {
+                    appWindow.showPageRequest("Transfer");
+                }
+            }
         }
+        
         ColumnLayout {
             id: addContactLayout
             visible: false
