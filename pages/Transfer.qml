@@ -260,10 +260,9 @@ Rectangle {
           LineEditMulti {
               id: addressLine
               spacing: 0
+              inputPaddingRight: 60
               fontBold: true
-              labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                Address <font size='2'>  ( </font> <a href='#'>Address book</a><font size='2'> )</font>")
-                + translationManager.emptyString
+              labelText: qsTr("Address") + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: {
                   if(persistentSettings.nettype == NetworkType.MAINNET){
@@ -276,10 +275,6 @@ Rectangle {
               }
               wrapMode: Text.WrapAnywhere
               addressValidation: true
-              onInputLabelLinkActivated: {
-                  middlePanel.addressBookView.selectAndSend = true;
-                  appWindow.showPageRequest("AddressBook");
-              }
               onTextChanged: {
                   const parsed = walletManager.parse_uri_to_object(text);
                   if (!parsed.error) {
@@ -289,16 +284,28 @@ Rectangle {
                     setDescription(parsed.tx_description);
                   }
               }
-              inlineButton.text: FontAwesome.qrcode
+              //@TODO: add 2nd inlineButton when adding QR code scanner
+              //inlineButton.text: FontAwesome.qrcode
+              //inlineButton.fontPixelSize: 22
+              //inlineButton.fontFamily: FontAwesome.fontFamily
+              //inlineButton.textColor: MoneroComponents.Style.defaultFontColor
+              //inlineButton.buttonColor: MoneroComponents.Style.orange
+              //inlineButton.onClicked: {
+              //    cameraUi.state = "Capture"
+              //    cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              //}
+              //inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
+
+              inlineButton.text: FontAwesome.addressBook
+              inlineButton.buttonHeight: 30
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
               inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton.buttonColor: MoneroComponents.Style.orange
               inlineButton.onClicked: {
-                  cameraUi.state = "Capture"
-                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                  middlePanel.addressBookView.selectAndSend = true;
+                  appWindow.showPageRequest("AddressBook");
               }
-              inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
+              inlineButtonVisible: true
           }
       }
 
