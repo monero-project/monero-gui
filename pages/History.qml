@@ -1723,4 +1723,8 @@ Rectangle {
         searchInput.text = searchTerm;
         sortAndFilter.collapsed = true;
     }
+    
+    function clearFields() {
+        searchInput.text = "";
+    }
 }
