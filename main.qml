@@ -675,7 +675,8 @@ ApplicationWindow {
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, persistentSettings.bootstrapNodeAddress, noSync);
+        const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
     }
 
     function stopDaemon(){
@@ -2079,7 +2080,6 @@ ApplicationWindow {
     function applyWalletMode(mode){
         if (mode < 2) {
             persistentSettings.useRemoteNode = false;
-            persistentSettings.bootstrapNodeAddress = "auto";
 
             if (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log") {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"

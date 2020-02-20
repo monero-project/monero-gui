@@ -163,7 +163,7 @@ Rectangle {
                 visible: (
                     !appWindow.disconnected &&
                     !persistentSettings.useRemoteNode &&
-                    persistentSettings.bootstrapNodeAddress == "auto"
+                    (persistentSettings.bootstrapNodeAddress == "auto" || persistentSettings.walletMode < 2)
                 )
 
                 MouseArea {
