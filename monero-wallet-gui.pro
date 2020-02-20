@@ -518,6 +518,7 @@ DISTFILES += \
 
 VERSION = $$cat('version.js', lines)
 VERSION = $$find(VERSION, 'GUI_VERSION')
+VERSION_LONG = $$replace(VERSION, '.*\"v(.*)\"', '\1') 
 VERSION = $$replace(VERSION, '.*(\d+\.\d+\.\d+\.\d+).*', '\1')
 
 # windows application icon
@@ -525,4 +526,7 @@ RC_ICONS = images/appicon.ico
 
 # mac Info.plist & application icon
 QMAKE_INFO_PLIST = $$PWD/share/Info.plist
+macx {
+    QMAKE_POST_LINK += sed -i "''" -e "s/@VERSION@/$$VERSION/g" -e "s/@VERSION_LONG@/$$VERSION_LONG/g" "$$sprintf("%1/%2/%3.app", $$OUT_PWD, $$DESTDIR, $$TARGET)/Contents/Info.plist";
+}
 ICON = $$PWD/images/appicon.icns

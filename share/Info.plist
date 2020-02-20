@@ -26,6 +26,12 @@
   <key>CFBundleIdentifier</key>
   <string>org.monero-project.monero-wallet-gui</string>
 
+  <key>CFBundleVersion</key>
+  <string>@VERSION_LONG@</string>
+
+  <key>CFBundleShortVersionString</key>
+  <string>@VERSION@</string>
+
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>
 
