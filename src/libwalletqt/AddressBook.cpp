@@ -55,8 +55,10 @@ void AddressBook::getAll()
     {
         QWriteLocker locker(&m_lock);
 
+        m_addresses.clear();
         m_rows.clear();
         for (auto &abr: m_addressBookImpl->getAll()) {
+            m_addresses.insert(QString::fromStdString(abr->getAddress()), m_rows.size());
             m_rows.append(abr);
         }
     }
@@ -127,4 +129,16 @@ int AddressBook::lookupPaymentID(const QString &payment_id) const
     QReadLocker locker(&m_lock);
 
     return m_addressBookImpl->lookupPaymentID(payment_id.toStdString());
+}
+
+QString AddressBook::getDescription(const QString &address) const
+{
+    QReadLocker locker(&m_lock);
+
+    const QMap<QString, size_t>::const_iterator it = m_addresses.find(address);
+    if (it == m_addresses.end())
+    {
+        return {};
+    }
+    return QString::fromStdString(m_rows.value(*it)->getDescription());
 }

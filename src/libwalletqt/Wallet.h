@@ -74,7 +74,7 @@ class Wallet : public QObject
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
-    Q_PROPERTY(AddressBook * addressBook READ addressBook)
+    Q_PROPERTY(AddressBook * addressBook READ addressBook NOTIFY addressBookChanged)
     Q_PROPERTY(SubaddressModel * subaddressModel READ subaddressModel)
     Q_PROPERTY(Subaddress * subaddress READ subaddress)
     Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
@@ -357,6 +357,7 @@ signals:
     void moneyReceived(const QString &txId, quint64 amount);
     void unconfirmedMoneyReceived(const QString &txId, quint64 amount);
     void newBlock(quint64 height, quint64 targetHeight);
+    void addressBookChanged() const;
     void historyModelChanged() const;
     void walletCreationHeightChanged();
     void deviceButtonRequest(quint64 buttonCode);
