@@ -35,18 +35,15 @@
 SubaddressModel::SubaddressModel(QObject *parent, Subaddress *subaddress)
     : QAbstractListModel(parent), m_subaddress(subaddress)
 {
-    qDebug(__FUNCTION__);
     connect(m_subaddress,SIGNAL(refreshStarted()),this,SLOT(startReset()));
     connect(m_subaddress,SIGNAL(refreshFinished()),this,SLOT(endReset()));
 
 }
 
 void SubaddressModel::startReset(){
-    qDebug(__FUNCTION__);
     beginResetModel();
 }
 void SubaddressModel::endReset(){
-    qDebug(__FUNCTION__);
     endResetModel();
 }
 

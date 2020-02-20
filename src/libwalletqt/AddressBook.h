@@ -37,7 +37,7 @@
 #include <QDateTime>
 
 namespace Monero {
-class AddressBook;
+struct AddressBook;
 }
 class AddressBookRow;
 

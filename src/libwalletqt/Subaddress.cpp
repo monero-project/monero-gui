@@ -32,14 +32,11 @@
 Subaddress::Subaddress(Monero::Subaddress *subaddressImpl, QObject *parent)
   : QObject(parent), m_subaddressImpl(subaddressImpl)
 {
-    qDebug(__FUNCTION__);
     getAll();
 }
 
 void Subaddress::getAll() const
 {
-    qDebug(__FUNCTION__);
-
     emit refreshStarted();
 
     {

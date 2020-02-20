@@ -22,19 +22,11 @@ public:
     void shutdownWaitForFinished() noexcept;
 
     QPair<bool, QFuture<void>> run(std::function<void()> function) noexcept;
-    QPair<bool, QFuture<QJSValueList>> run(std::function<QJSValueList() noexcept> function, const QJSValue &callback);
+    QPair<bool, QFuture<QJSValueList>> run(std::function<QJSValueList()> function, const QJSValue &callback);
 
 private:
     bool add() noexcept;
     void done() noexcept;
-
-    template<typename T>
-    QFutureWatcher<T> *newWatcher()
-    {
-        QFutureWatcher<T> *watcher = new QFutureWatcher<T>();
-
-        return watcher;
-    }
 
     template<typename T>
     QPair<bool, QFuture<T>> execute(std::function<QFuture<T>(QFutureWatcher<T> *)> makeFuture) noexcept
@@ -43,8 +35,8 @@ private:
         {
             try
             {
-                auto *watcher = newWatcher<T>();
-                connect(watcher, &QFutureWatcher<T>::finished, [this, watcher] {
+                auto *watcher = new QFutureWatcher<T>();
+                connect(watcher, &QFutureWatcher<T>::finished, [watcher] {
                     watcher->deleteLater();
                 });
                 watcher->setFuture(makeFuture(watcher));

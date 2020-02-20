@@ -43,8 +43,8 @@
 #include "KeysFiles.h"
 
 
-WalletKeysFiles::WalletKeysFiles(const qint64 &modified, const qint64 &created, const QString &path, const quint8 &networkType, const QString &address)
-    : m_modified(modified), m_created(created), m_path(path), m_networkType(networkType), m_address(address)
+WalletKeysFiles::WalletKeysFiles(const qint64 &modified, const QString &path, const quint8 &networkType, const QString &address)
+    : m_modified(modified), m_path(path), m_networkType(networkType), m_address(address)
 {
 }
 
@@ -56,11 +56,6 @@ qint64 WalletKeysFiles::modified() const
 QString WalletKeysFiles::address() const
 {
     return m_address;
-}
-
-qint64 WalletKeysFiles::created() const
-{
-    return m_created;
 }
 
 QString WalletKeysFiles::path() const
@@ -134,10 +129,8 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
 
         const QFileInfo info(wallet);
         const QDateTime modifiedAt = info.lastModified();
-        const QDateTime createdAt = info.created();  // @TODO: QFileInfo::birthTime() >= Qt 5.10
 
         this->addWalletKeysFile(WalletKeysFiles(modifiedAt.toSecsSinceEpoch(),
-                                                createdAt.toSecsSinceEpoch(),
                                                 info.absoluteFilePath(), networkType, address));
     }
 }
@@ -167,8 +160,6 @@ QVariant WalletKeysFilesModel::data(const QModelIndex & index, int role) const {
         return walletKeyFile.networkType();
     else if (role == AddressRole)
         return walletKeyFile.address();
-    else if (role == CreatedRole)
-        return walletKeyFile.created();
     return QVariant();
 }
 
@@ -178,6 +169,5 @@ QHash<int, QByteArray> WalletKeysFilesModel::roleNames() const {
     roles[PathRole] = "path";
     roles[NetworkTypeRole] = "networktype";
     roles[AddressRole] = "address";
-    roles[CreatedRole] = "created";
     return roles;
 }
