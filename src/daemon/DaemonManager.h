@@ -45,7 +45,7 @@ public:
     static DaemonManager * instance(const QStringList *args);
 
     Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
-    Q_INVOKABLE bool stop(NetworkType::Type nettype);
+    Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
     // return true if daemon process is started

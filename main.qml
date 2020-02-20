@@ -679,9 +679,12 @@ ApplicationWindow {
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
     }
 
-    function stopDaemon(){
+    function stopDaemon(callback){
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
-        daemonManager.stop(persistentSettings.nettype);
+        daemonManager.stopAsync(persistentSettings.nettype, function(result) {
+            hideProcessingSplash();
+            callback(result);
+        });
     }
 
     function onDaemonStarted(){
@@ -695,8 +698,6 @@ ApplicationWindow {
         simpleModeConnectionTimer.start();
     }
     function onDaemonStopped(){
-        console.log("daemon stopped");
-        hideProcessingSplash();
         currentWallet.connected(true);
     }
 
@@ -1928,8 +1929,7 @@ ApplicationWindow {
             onClose();
         }
         confirmationDialog.onRejectedCallback = function() {
-            daemonManager.stop(persistentSettings.nettype);
-            onClose();
+            stopDaemon(onClose);
         };
         confirmationDialog.open();
     }
@@ -1956,8 +1956,7 @@ ApplicationWindow {
         // If daemon is running - prompt user before exiting
         if(typeof daemonManager != "undefined" && daemonRunning) {
             if (appWindow.walletMode == 0) {
-                stopDaemon();
-                closeAccepted();
+                stopDaemon(closeAccepted);
             } else {
                 showDaemonIsRunningDialog(closeAccepted);
             }
