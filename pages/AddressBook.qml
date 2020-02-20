@@ -306,8 +306,8 @@ Rectangle {
             MoneroComponents.LineEditMulti {
                 id: addressLine
                 Layout.topMargin: 20
-                labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                                 Address") + translationManager.emptyString
+                labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style> %1"
+                    .arg(qsTr("Address")) + translationManager.emptyString
                 placeholderText: {
                     if(persistentSettings.nettype == NetworkType.MAINNET){
                         return "4.. / 8.. / OpenAlias";
@@ -384,8 +384,8 @@ Rectangle {
             MoneroComponents.LineEditMulti {
                 id: descriptionLine
                 Layout.topMargin: 20
-                labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                                 Description") + translationManager.emptyString
+                labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style> %1"
+                    .arg(qsTr("Description")) + translationManager.emptyString
                 placeholderText: qsTr("Add a name...") + translationManager.emptyString
             }
             RowLayout {

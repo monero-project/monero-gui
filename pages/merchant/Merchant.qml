@@ -151,14 +151,10 @@ Item {
                         model: trackingModel
                         message: {
                             if(!root.enableTracking){
-                                return qsTr(
-                                        "<style>p{font-size:14px;}</style>" +
-                                        "<p>This page will automatically scan the blockchain and the tx pool " +
-                                        "for incoming transactions using the QR code.</p>" +
-                                        "<p>It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be " +
-                                        "confirmed in short order, but there is still a possibility they might not, so for larger " +
-                                        "values you may want to wait for one or more confirmation(s).</p>"
-                                    ) + translationManager.emptyString;
+                                return "<style>p{font-size:14px;}</style> <p>%1</p> <p>%2</p>"
+                                    .arg(qsTr("This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code."))
+                                    .arg(qsTr("It's up to you whether to accept unconfirmed transactions or not. It is likely they'll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)"))
+                                    + translationManager.emptyString;
                             } else if(root.trackingError !== ""){
                                 return root.trackingError;
                             } else if(trackingModel.count < 1){
