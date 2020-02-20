@@ -166,6 +166,7 @@ Type: files; Name: "{app}\libssp-0.dll"
 Type: files; Name: "{app}\libhidapi-0.dll"
 Type: files; Name: "{app}\libeay32.dll"
 Type: files; Name: "{app}\ssleay32.dll"
+Type: files; Name: "{group}\Utilities\x (Check Blockchain Folder).lnk"
 
 
 [Tasks]
@@ -333,7 +334,7 @@ Name: "{group}\Utilities\Textual (CLI) Wallet"; Filename: "{app}\monero-wallet-c
 ; Icons for troubleshooting problems / testing / debugging
 ; To show that they are in some way different (not for everyday use), make them visually different
 ; from the others by text, and make them sort at the end by the help of "x" in front 
-Name: "{group}\Utilities\x (Check Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
+Name: "{group}\Utilities\x (Check Default Blockchain Folder)"; Filename: "{win}\Explorer.exe"; Parameters: {code:BlockChainDir}
 Name: "{group}\Utilities\x (Check Daemon Log)"; Filename: "Notepad"; Parameters: {code:DaemonLog}
 Name: "{group}\Utilities\x (Check Default Wallet Folder)"; Filename: "{win}\Explorer.exe"; Parameters: """{userdocs}\Monero\wallets"""
 Name: "{group}\Utilities\x (Check GUI Wallet Log)"; Filename: "Notepad"; Parameters: """{userappdata}\monero-wallet-gui\monero-wallet-gui.log"""
