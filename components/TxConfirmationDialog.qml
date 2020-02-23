@@ -70,11 +70,13 @@ Rectangle {
             // waiting for user action, show tx details + back and confirm buttons
             name: "default";
             when: errorText.text =="" && bottomText.text ==""
+            PropertyChanges { target: errorText; visible: false }
             PropertyChanges { target: txAmountText; visible: appWindow.transactionAmount !== "(all)" }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
             PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled }
             PropertyChanges { target: txDetails; visible: true }
-            PropertyChanges { target: bottomRow; visible: false }
+            PropertyChanges { target: bottom; visible: true }
+            PropertyChanges { target: bottomMessage; visible: false }
             PropertyChanges { target: buttons; visible: true }
             PropertyChanges { target: backButton; visible: true; secondary: true }
             PropertyChanges { target: confirmButton; visible: true }
@@ -84,11 +86,13 @@ Rectangle {
             name: "error";
             when: errorText.text !==""
             PropertyChanges { target: dialogTitle; text: "Error" }
+            PropertyChanges { target: errorText; visible: true }
             PropertyChanges { target: txAmountText; visible: false }
             PropertyChanges { target: txAmountBusyIndicator; visible: false }
             PropertyChanges { target: txFiatAmountText; visible: false }
             PropertyChanges { target: txDetails; visible: false }
-            PropertyChanges { target: bottomRow; visible: false }
+            PropertyChanges { target: bottom; visible: true }
+            PropertyChanges { target: bottomMessage; visible: false }
             PropertyChanges { target: buttons; visible: true }
             PropertyChanges { target: backButton; visible: true; secondary: false }
             PropertyChanges { target: confirmButton; visible: false }
@@ -97,11 +101,13 @@ Rectangle {
             // creating or sending transaction, show tx details but don't show any button
             name: "bottomText";
             when: errorText.text =="" && bottomText.text !==""
+            PropertyChanges { target: errorText; visible: false }
             PropertyChanges { target: txAmountText; visible: appWindow.transactionAmount !== "(all)" }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
             PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled }
             PropertyChanges { target: txDetails; visible: true }
-            PropertyChanges { target: bottomRow; visible: true }
+            PropertyChanges { target: bottom; visible: true }
+            PropertyChanges { target: bottomMessage; visible: true }
             PropertyChanges { target: buttons; visible: false }
         }
     ]
@@ -164,7 +170,6 @@ Rectangle {
             id: column
             Layout.topMargin: 10
             Layout.fillWidth: true
-            anchors.top: parent.top
 
             MoneroComponents.Label {
                 id: dialogTitle
@@ -182,57 +187,56 @@ Rectangle {
                         "Confirm send" + translationManager.emptyString                      
                     }
                 }
-
             }
         }
-
+        
         Text {
             id: errorText
-            anchors.top: column.bottom
-            anchors.margins: 20
             Layout.fillWidth: true
+            Layout.fillHeight: true
             color: MoneroComponents.Style.defaultFontColor
             text: ""
             wrapMode: Text.Wrap
             font.pixelSize: 15
         }
-
-        Text {
-            id: txAmountText
-            anchors.bottom: txFiatAmountText.visible ? txFiatAmountText.top : txDetails.top
-            anchors.bottomMargin: txFiatAmountText.visible ? 0 : 40
+        
+        ColumnLayout {
+            id: upperText
+            spacing: 0
             Layout.fillWidth: true
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 42
-            color: MoneroComponents.Style.defaultFontColor
-            text: appWindow.transactionAmount + " XMR " +  translationManager.emptyString
-        }
-
-        BusyIndicator {
-            id: txAmountBusyIndicator
-            anchors.bottom: txDetails.top
-            anchors.bottomMargin: 40
-            running: appWindow.transactionAmount == "(all)"
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        }
-
-        Text {
-            id: txFiatAmountText
-            anchors.bottom: txDetails.top
-            anchors.bottomMargin: 20
-            Layout.fillWidth: true
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 20
-            color: MoneroComponents.Style.lightGreyFontColor
-            text: showFiatConversion(transactionAmount) + translationManager.emptyString
+            Layout.preferredHeight: 71
+        
+            BusyIndicator {
+                  id: txAmountBusyIndicator
+                  Layout.fillWidth: true
+                  Layout.alignment : Qt.AlignTop | Qt.AlignLeft
+                  running: appWindow.transactionAmount == "(all)"
+                  scale: 1
+            }
+        
+            Text {
+                id: txAmountText
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: 42
+                color: MoneroComponents.Style.defaultFontColor
+                text: appWindow.transactionAmount + " XMR " +  translationManager.emptyString
+            }
+    
+            Text {
+                id: txFiatAmountText
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: 20
+                color: MoneroComponents.Style.lightGreyFontColor
+                text: showFiatConversion(transactionAmount) + translationManager.emptyString
+            }
         }
 
         GridLayout {
             columns: 2
             id: txDetails
             Layout.fillWidth: true
-            anchors.bottom: buttons.top
-            anchors.bottomMargin: 35
             columnSpacing: 15
             rowSpacing: 16
 
@@ -361,83 +365,87 @@ Rectangle {
             }
         }
 
-        RowLayout {
-            id: bottomRow
-            Layout.alignment: Qt.AlignHCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: bottomTextAnimation.running ? 21 : 8
+        ColumnLayout {
+            id: bottom
+            Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+            Layout.fillWidth: true
             
-            BusyIndicator {
-                id: busyIndicator
-                visible: bottomTextAnimation.running == false
-                running: !appWindow.transactionFee
-                anchors.right: bottomText.left
-                scale: .5
-            }
-
-            Text {
-                id: bottomText
-                color: MoneroComponents.Style.defaultFontColor
-                text: ""
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.Wrap
-                font.pixelSize: 17
-                opacity: 1
-
-                SequentialAnimation{
-                    id:bottomTextAnimation
-                    running: false
-                    loops: Animation.Infinite
-                    alwaysRunToEnd: true
-                    NumberAnimation { target: bottomText; property: "opacity"; to: 0; duration: 500}
-                    NumberAnimation { target: bottomText; property: "opacity"; to: 1; duration: 500}
+            RowLayout {
+                id: bottomMessage
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
+              
+                BusyIndicator {
+                    id: bottomMessageBusyIndicator
+                    visible: bottomTextAnimation.running == false
+                    running: !appWindow.transactionFee
+                    scale: .5
                 }
-            }
-        }
-
-        RowLayout {
-            id: buttons
-            spacing: 30
-            Layout.alignment: Qt.AlignHCenter
-            anchors.bottom: parent.bottom
-          
-            MoneroComponents.StandardButton {
-                id: backButton
-                text: qsTr("Back") + translationManager.emptyString;
-                width: 200
-                focus: false
-                secondary: true
-                KeyNavigation.tab: confirmButton
-                Keys.enabled: backButton.visible
-                Keys.onReturnPressed: backButton.onClicked
-                Keys.onEnterPressed: backButton.onClicked
-                Keys.onEscapePressed: {
-                    root.close()
-                    root.rejected()
-                } 
-                onClicked: {
-                    root.close()
-                    root.rejected()
+    
+                Text {
+                    id: bottomText
+                    color: MoneroComponents.Style.defaultFontColor
+                    text: ""
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.Wrap
+                    font.pixelSize: 17
+                    opacity: 1
+    
+                    SequentialAnimation{
+                        id:bottomTextAnimation
+                        running: false
+                        loops: Animation.Infinite
+                        alwaysRunToEnd: true
+                        NumberAnimation { target: bottomText; property: "opacity"; to: 0; duration: 500}
+                        NumberAnimation { target: bottomText; property: "opacity"; to: 1; duration: 500}
+                    }
                 }
             }
 
-            MoneroComponents.StandardButton {
-                id: confirmButton
-                text: qsTr("Confirm") + translationManager.emptyString;
-                rightIcon: "qrc:///images/rightArrow.png"
-                width: 200
-                focus: true
-                KeyNavigation.tab: backButton
-                Keys.enabled: confirmButton.visible
-                Keys.onReturnPressed: confirmButton.onClicked
-                Keys.onEnterPressed: confirmButton.onClicked
-                Keys.onEscapePressed: {
-                    root.close()
-                    root.rejected()
-                } 
-                onClicked: {
-                    root.close()
-                    root.accepted()
+            RowLayout {
+                id: buttons
+                spacing: 70
+                Layout.fillWidth: true
+                Layout.preferredHeight: 50
+              
+                MoneroComponents.StandardButton {
+                    id: backButton
+                    text: qsTr("Back") + translationManager.emptyString;
+                    width: 200
+                    focus: false
+                    secondary: true
+                    KeyNavigation.tab: confirmButton
+                    Keys.enabled: backButton.visible
+                    Keys.onReturnPressed: backButton.onClicked
+                    Keys.onEnterPressed: backButton.onClicked
+                    Keys.onEscapePressed: {
+                        root.close()
+                        root.rejected()
+                    }
+                    onClicked: {
+                        root.close()
+                        root.rejected()
+                    }
+                }
+    
+                MoneroComponents.StandardButton {
+                    id: confirmButton
+                    text: qsTr("Confirm") + translationManager.emptyString;
+                    rightIcon: "qrc:///images/rightArrow.png"
+                    width: 200
+                    focus: true
+                    KeyNavigation.tab: backButton
+                    Keys.enabled: confirmButton.visible
+                    Keys.onReturnPressed: confirmButton.onClicked
+                    Keys.onEnterPressed: confirmButton.onClicked
+                    Keys.onEscapePressed: {
+                        root.close()
+                        root.rejected()
+                    }
+                    onClicked: {
+                        root.close()
+                        root.accepted()
+                    }
                 }
             }
         }
