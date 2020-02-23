@@ -377,8 +377,8 @@ Rectangle {
               
                 BusyIndicator {
                     id: bottomMessageBusyIndicator
-                    visible: bottomTextAnimation.running == false
-                    running: !appWindow.transactionFee
+                    visible: !bottomTextAnimation.running
+                    running: !bottomTextAnimation.running
                     scale: .5
                 }
     
