@@ -84,7 +84,7 @@ Rectangle {
 
         doneButton.forceActiveFocus();
 
-        //creating lastTransaction property, which will be used to search txid in History page
+        //creating lastTransaction property, which will be used by View progress button to search txid in History page
         var lastTransaction = new Array (0);
         lastTransaction.push(appWindow.transactionAddress);
         lastTransaction.push(appWindow.transactionID);
@@ -97,21 +97,20 @@ Rectangle {
     }
 
     // TODO: implement without hardcoding sizes
-    width: 520
+    width: 580
     height: 400
 
     ColumnLayout {
         id: mainLayout
         spacing: 10
         anchors.fill: parent
-        anchors.margins: 15
+        anchors.margins: 25
 
         ColumnLayout{
             id: column
             Layout.topMargin: 10
             Layout.leftMargin: 0
             Layout.fillWidth: true
-            anchors.top: parent.top
             Layout.alignment: Qt.AlignCenter
           
                 MoneroComponents.Label {
@@ -142,6 +141,7 @@ Rectangle {
             id: transactionID
             visible: !appWindow.viewOnly
             Layout.leftMargin: 25
+            Layout.rightMargin: 25
             borderDisabled: true
             readOnly: true
             copyButton: true
@@ -166,9 +166,10 @@ Rectangle {
         // view progress / open folder / done buttons
         RowLayout {
             id: buttons
-            spacing: 60
-            Layout.alignment: Qt.AlignHCenter
-            anchors.bottom: parent.bottom
+            spacing: 70
+            Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.preferredHeight: 50
 
             MoneroComponents.StandardButton {
                 id: viewProgressButton
