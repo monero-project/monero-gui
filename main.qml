@@ -559,8 +559,6 @@ ApplicationWindow {
     }
 
     function onWalletPassphraseNeeded(){
-        if(rootItem.state !== "normal") return;
-
         hideProcessingSplash();
 
         console.log(">>> wallet passphrase needed: ")
