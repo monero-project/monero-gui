@@ -364,8 +364,6 @@ Rectangle {
         // protecting wallet with password
         wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
 
-        restart();
-
         // save to persistent settings
         persistentSettings.language = wizardController.language_language
         persistentSettings.locale   = wizardController.language_locale
@@ -377,6 +375,8 @@ Rectangle {
         persistentSettings.allow_background_mining = false
         persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
         persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
+
+        restart();
     }
 
     function recoveryWallet() {
