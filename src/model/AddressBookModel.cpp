@@ -71,6 +71,8 @@ QVariant AddressBookModel::data(const QModelIndex &index, int role) const
             // Qt doesnt support size_t overload type casting
             result.setValue(row.getRowId());
             break;
+        default:
+            qCritical() << "Unimplemented role " << role;
         }
     });
     if (!found) {

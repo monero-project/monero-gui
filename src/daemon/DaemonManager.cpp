@@ -49,13 +49,15 @@ namespace {
 DaemonManager * DaemonManager::m_instance = nullptr;
 QStringList DaemonManager::m_clArgs;
 
-DaemonManager *DaemonManager::instance(const QStringList *args)
+DaemonManager *DaemonManager::instance(const QStringList *args/* = nullptr*/)
 {
     if (!m_instance) {
         m_instance = new DaemonManager;
         // store command line arguments for later use
-        m_clArgs = *args;
-        m_clArgs.removeFirst();
+        if (args != nullptr)
+        {
+            m_clArgs = *args;
+        }
     }
 
     return m_instance;

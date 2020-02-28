@@ -792,7 +792,7 @@ QString Wallet::signMessage(const QString &message, bool filename) const
         file.close();
         return "";
       }
-      std::string signature = m_walletImpl->signMessage(std::string((const char*)data, size));
+      std::string signature = m_walletImpl->signMessage(std::string(reinterpret_cast<const char*>(data), size));
       file.unmap(data);
       file.close();
       return QString::fromStdString(signature);
@@ -828,7 +828,7 @@ bool Wallet::verifySignedMessage(const QString &message, const QString &address,
         file.close();
         return false;
       }
-      bool ret = m_walletImpl->verifySignedMessage(std::string((const char*)data, size), address.toStdString(), signature.toStdString());
+      bool ret = m_walletImpl->verifySignedMessage(std::string(reinterpret_cast<const char*>(data), size), address.toStdString(), signature.toStdString());
       file.unmap(data);
       file.close();
       return ret;

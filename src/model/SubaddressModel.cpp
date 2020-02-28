@@ -54,7 +54,7 @@ int SubaddressModel::rowCount(const QModelIndex &) const
 
 QVariant SubaddressModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() < 0 || (unsigned)index.row() >= m_subaddress->count())
+    if (!index.isValid() || index.row() < 0 || static_cast<quint64>(index.row()) >= m_subaddress->count())
         return {};
 
     QVariant result;
