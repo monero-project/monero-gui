@@ -564,11 +564,11 @@ ApplicationWindow {
         console.log(">>> wallet passphrase needed: ")
         passwordDialog.onAcceptedPassphraseCallback = function() {
             walletManager.onPassphraseEntered(passwordDialog.password);
-            this.onWalletOpening();
+            appWindow.onWalletOpening();
         }
         passwordDialog.onRejectedPassphraseCallback = function() {
             walletManager.onPassphraseEntered("", true);
-            this.onWalletOpening();
+            appWindow.onWalletOpening();
         }
         passwordDialog.openPassphraseDialog()
     }
