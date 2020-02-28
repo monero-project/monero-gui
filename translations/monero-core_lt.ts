@@ -94,11 +94,6 @@
         <translation>Redaguoti adresą</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="309"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../pages/AddressBook.qml" line="348"/>
         <source>Resolve</source>
         <translation>Išspręsti</translation>
@@ -130,9 +125,14 @@
         <translation>Adresas nerastas</translation>
     </message>
     <message>
-        <location filename="../pages/AddressBook.qml" line="387"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                 Description</source>
-        <translation type="unfinished"></translation>
+        <location filename="../pages/AddressBook.qml" line="310"/>
+        <source>Address</source>
+        <translation type="unfinished">Adresas</translation>
+    </message>
+    <message>
+        <location filename="../pages/AddressBook.qml" line="388"/>
+        <source>Description</source>
+        <translation type="unfinished">Aprašymas</translation>
     </message>
     <message>
         <location filename="../pages/AddressBook.qml" line="389"/>
@@ -220,8 +220,8 @@
     </message>
     <message>
         <location filename="../pages/History.qml" line="310"/>
-        <location filename="../pages/History.qml" line="855"/>
-        <location filename="../pages/History.qml" line="1636"/>
+        <location filename="../pages/History.qml" line="865"/>
+        <location filename="../pages/History.qml" line="1646"/>
         <source>Date</source>
         <translation>Data</translation>
     </message>
@@ -236,24 +236,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="159"/>
-        <source>Search...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../pages/History.qml" line="230"/>
         <source>Sort by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="251"/>
-        <location filename="../pages/History.qml" line="747"/>
+        <location filename="../pages/History.qml" line="757"/>
         <source>Blockheight</source>
         <translation>Bloko aukštis</translation>
     </message>
     <message>
         <location filename="../pages/History.qml" line="369"/>
-        <location filename="../pages/History.qml" line="1637"/>
+        <location filename="../pages/History.qml" line="1647"/>
         <source>Amount</source>
         <translation>Suma</translation>
     </message>
@@ -273,197 +268,202 @@
         <translation>Netinkamas puslapis. Skaičius turi būti iš nurodyto diapazono.</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="636"/>
+        <location filename="../pages/History.qml" line="643"/>
         <source>Sent</source>
         <translation>Išsiųsta</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="636"/>
+        <location filename="../pages/History.qml" line="638"/>
         <source>Received</source>
         <translation>Gauta</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="686"/>
+        <location filename="../pages/History.qml" line="159"/>
+        <source>Search by Transaction ID, Address, Description, Amount or Blockheight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/History.qml" line="696"/>
         <source>Fee</source>
         <translation>Rinkliava</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="686"/>
+        <location filename="../pages/History.qml" line="696"/>
         <source>Mined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="703"/>
+        <location filename="../pages/History.qml" line="713"/>
         <source>Yes</source>
         <translation>Taip</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="763"/>
+        <location filename="../pages/History.qml" line="773"/>
         <source>Pending</source>
         <translation>Laukiama</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="798"/>
+        <location filename="../pages/History.qml" line="808"/>
         <source>Confirmations</source>
         <translation>Patvirtinimai</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="971"/>
+        <location filename="../pages/History.qml" line="981"/>
         <source>Description</source>
         <translation>Aprašymas</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1039"/>
+        <location filename="../pages/History.qml" line="1049"/>
         <source>Transaction ID</source>
         <translation>Pavedimo ID</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1083"/>
+        <location filename="../pages/History.qml" line="1093"/>
         <source>Transaction key</source>
         <translation>Pavedimo raktas</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1099"/>
+        <location filename="../pages/History.qml" line="1109"/>
         <source>Click to reveal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1129"/>
+        <location filename="../pages/History.qml" line="1139"/>
         <source>Address sent to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1152"/>
+        <location filename="../pages/History.qml" line="1162"/>
         <source>Waiting for transaction to leave txpool.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1154"/>
+        <location filename="../pages/History.qml" line="1164"/>
         <source>Unknown recipient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1297"/>
+        <location filename="../pages/History.qml" line="1307"/>
         <source>Advanced options</source>
         <translation>Išplėstinės nuostatos</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1313"/>
+        <location filename="../pages/History.qml" line="1323"/>
         <source>Human readable date format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1319"/>
+        <location filename="../pages/History.qml" line="1329"/>
         <source>Export all history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1536"/>
+        <location filename="../pages/History.qml" line="1546"/>
         <source>Set description:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1539"/>
+        <location filename="../pages/History.qml" line="1549"/>
         <source>Updated description.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1569"/>
+        <location filename="../pages/History.qml" line="1579"/>
         <source>No transaction history yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1571"/>
+        <location filename="../pages/History.qml" line="1581"/>
         <source>No results.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1573"/>
+        <location filename="../pages/History.qml" line="1583"/>
         <source>%1 transactions total, showing %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1591"/>
+        <location filename="../pages/History.qml" line="1601"/>
         <source>Primary address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1600"/>
+        <location filename="../pages/History.qml" line="1610"/>
         <source>Transaction details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1626"/>
+        <location filename="../pages/History.qml" line="1636"/>
         <source>Copied to clipboard</source>
         <translation>Nukopijuota į iškarpinę</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1635"/>
+        <location filename="../pages/History.qml" line="1645"/>
         <source>Tx ID:</source>
         <translation>Tx ID:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1638"/>
+        <location filename="../pages/History.qml" line="1648"/>
         <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1639"/>
+        <location filename="../pages/History.qml" line="1649"/>
         <source>Payment ID:</source>
         <translation>Mokėjimo ID:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1640"/>
+        <location filename="../pages/History.qml" line="1650"/>
         <source>Integrated address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1641"/>
+        <location filename="../pages/History.qml" line="1651"/>
         <source>Tx key:</source>
         <translation>Tx raktas:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1642"/>
+        <location filename="../pages/History.qml" line="1652"/>
         <source>Tx note:</source>
         <translation>Tx žinutė:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1643"/>
+        <location filename="../pages/History.qml" line="1653"/>
         <source>Destinations:</source>
         <translation>Gavėjai:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1644"/>
+        <location filename="../pages/History.qml" line="1654"/>
         <source>Rings:</source>
         <translation>Žiedai:</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1661"/>
+        <location filename="../pages/History.qml" line="1671"/>
         <source>Please choose a folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1671"/>
+        <location filename="../pages/History.qml" line="1681"/>
         <source>Success</source>
         <translation>Sėkminga</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1672"/>
+        <location filename="../pages/History.qml" line="1682"/>
         <source>CSV file written to: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1673"/>
+        <location filename="../pages/History.qml" line="1683"/>
         <source>Tip: Use your favorite spreadsheet software to sort on blockheight.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1677"/>
+        <location filename="../pages/History.qml" line="1687"/>
         <source>Error</source>
         <translation>Klaida</translation>
     </message>
     <message>
-        <location filename="../pages/History.qml" line="1678"/>
+        <location filename="../pages/History.qml" line="1688"/>
         <source>Error exporting transaction data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -504,54 +504,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="134"/>
-        <source>Keys</source>
-        <translation>Raktai</translation>
-    </message>
-    <message>
-        <location filename="../pages/Keys.qml" line="187"/>
+        <location filename="../pages/Keys.qml" line="197"/>
         <source>Export wallet</source>
         <translation>Eksportuoti piniginę</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="202"/>
-        <location filename="../pages/Keys.qml" line="244"/>
+        <location filename="../pages/Keys.qml" line="212"/>
+        <location filename="../pages/Keys.qml" line="254"/>
         <source>Spendable Wallet</source>
         <translation>Išleidimo piniginė</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="212"/>
-        <location filename="../pages/Keys.qml" line="244"/>
+        <location filename="../pages/Keys.qml" line="222"/>
+        <location filename="../pages/Keys.qml" line="254"/>
         <source>View Only Wallet</source>
         <translation>Peržiūros piniginė</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="250"/>
+        <location filename="../pages/Keys.qml" line="260"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="270"/>
+        <location filename="../pages/Keys.qml" line="281"/>
         <source>Mnemonic seed protected by hardware device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="280"/>
+        <location filename="../pages/Keys.qml" line="291"/>
         <source>(View Only Wallet - No mnemonic seed available)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="281"/>
+        <location filename="../pages/Keys.qml" line="292"/>
         <source>(View Only Wallet - No secret spend key available)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="288"/>
+        <location filename="../pages/Keys.qml" line="299"/>
         <source>(Hardware Device Wallet - No secret spend key available)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="148"/>
+        <location filename="../pages/Keys.qml" line="158"/>
         <source>Secret view key</source>
         <translation>Slaptas peržiūros raktas</translation>
     </message>
@@ -561,17 +556,27 @@
         <translation>ĮSPĖJIMAS: Pakartotinai nenaudokite savo Monero raktų kitoje atšakoje, NEBENT ši atšaka turi pakartotinio naudojimo švelninimo priemones. Panaudojus jūsų privatumas gali būti pažeistas.</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="157"/>
+        <location filename="../pages/Keys.qml" line="134"/>
+        <source>Primary address &amp; Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="149"/>
+        <source>Primary address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Keys.qml" line="167"/>
         <source>Public view key</source>
         <translation>Viešas peržiūros raktas</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="166"/>
+        <location filename="../pages/Keys.qml" line="176"/>
         <source>Secret spend key</source>
         <translation>Slaptas išleidimo raktas</translation>
     </message>
     <message>
-        <location filename="../pages/Keys.qml" line="175"/>
+        <location filename="../pages/Keys.qml" line="185"/>
         <source>Public spend key</source>
         <translation>Viešas išleidimo raktas</translation>
     </message>
@@ -695,12 +700,12 @@
         <translation>Bendrinama RingDB</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="669"/>
+        <location filename="../LeftPanel.qml" line="658"/>
         <source>Wallet</source>
         <translation>Piniginė</translation>
     </message>
     <message>
-        <location filename="../LeftPanel.qml" line="678"/>
+        <location filename="../LeftPanel.qml" line="667"/>
         <source>Daemon</source>
         <translation>Jungtis</translation>
     </message>
@@ -774,79 +779,84 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="154"/>
-        <source>&lt;style&gt;p{font-size:14px;}&lt;/style&gt;&lt;p&gt;This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.&lt;/p&gt;&lt;p&gt;It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s).&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pages/merchant/Merchant.qml" line="165"/>
-        <location filename="../pages/merchant/Merchant.qml" line="646"/>
+        <location filename="../pages/merchant/Merchant.qml" line="161"/>
+        <location filename="../pages/merchant/Merchant.qml" line="645"/>
         <source>Currently monitoring incoming transactions, none found yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="235"/>
+        <location filename="../pages/merchant/Merchant.qml" line="231"/>
         <source>Save As</source>
         <translation>Išsaugoti kaip</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="268"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 12px;}&lt;/style&gt;Currently selected address: </source>
+        <location filename="../pages/merchant/Merchant.qml" line="155"/>
+        <source>This page will automatically scan the blockchain and the tx pool for incoming transactions using the QR code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="268"/>
-        <source> &lt;a href=&apos;#&apos;&gt;(Change)&lt;/a&gt;</source>
+        <location filename="../pages/merchant/Merchant.qml" line="156"/>
+        <source>It&apos;s up to you whether to accept unconfirmed transactions or not. It is likely they&apos;ll be confirmed in short order, but there is still a possibility they might not, so for larger values you may want to wait for one or more confirmation(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="293"/>
+        <location filename="../pages/merchant/Merchant.qml" line="265"/>
+        <source>Currently selected address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/merchant/Merchant.qml" line="267"/>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/merchant/Merchant.qml" line="292"/>
         <source>(right-click, save as)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="337"/>
+        <location filename="../pages/merchant/Merchant.qml" line="336"/>
         <source>Payment URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="416"/>
+        <location filename="../pages/merchant/Merchant.qml" line="415"/>
         <source>Copied to clipboard</source>
         <translation>Nukopijuota į iškarpinę</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="449"/>
-        <location filename="../pages/merchant/Merchant.qml" line="502"/>
+        <location filename="../pages/merchant/Merchant.qml" line="448"/>
+        <location filename="../pages/merchant/Merchant.qml" line="501"/>
         <source>Amount to receive</source>
         <translation>Gaunama suma</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="529"/>
+        <location filename="../pages/merchant/Merchant.qml" line="528"/>
         <source>Enable sales tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="541"/>
+        <location filename="../pages/merchant/Merchant.qml" line="540"/>
         <source>Leave this page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="571"/>
+        <location filename="../pages/merchant/Merchant.qml" line="570"/>
         <source>The merchant page requires a larger window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="586"/>
+        <location filename="../pages/merchant/Merchant.qml" line="585"/>
         <source>WARNING: no connection to daemon</source>
         <translation>ĮSPĖJIMAS: nėra susijungimo su jungtimi</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="690"/>
+        <location filename="../pages/merchant/Merchant.qml" line="689"/>
         <source>Save QrCode</source>
         <translation>Išsaugoti QR kodą</translation>
     </message>
     <message>
-        <location filename="../pages/merchant/Merchant.qml" line="691"/>
+        <location filename="../pages/merchant/Merchant.qml" line="690"/>
         <source>Failed to save QrCode to </source>
         <translation>Nepavyksta išsaugoti QR kodo į </translation>
     </message>
@@ -1027,22 +1037,22 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
 <context>
     <name>NetworkStatusItem</name>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="44"/>
+        <location filename="../components/NetworkStatusItem.qml" line="45"/>
         <source>Synchronizing</source>
         <translation>Sinchronizuojama</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="46"/>
+        <location filename="../components/NetworkStatusItem.qml" line="47"/>
         <source>Remote node</source>
         <translation>Nutolęs mazgas</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="47"/>
+        <location filename="../components/NetworkStatusItem.qml" line="48"/>
         <source>Connected</source>
         <translation>Prisijungta</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="47"/>
+        <location filename="../components/NetworkStatusItem.qml" line="48"/>
         <source>Mining</source>
         <translation>Kasimas</translation>
     </message>
@@ -1062,27 +1072,32 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Atsijungta</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="58"/>
+        <location filename="../components/NetworkStatusItem.qml" line="57"/>
+        <source>Connecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../components/NetworkStatusItem.qml" line="59"/>
         <source>Invalid connection status</source>
         <translation>Neteisinga prisijungimo būsena</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="120"/>
+        <location filename="../components/NetworkStatusItem.qml" line="122"/>
         <source>Network status</source>
         <translation>Tinklo būsena</translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="177"/>
+        <location filename="../components/NetworkStatusItem.qml" line="179"/>
         <source>Successfully switched to another public node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="180"/>
+        <location filename="../components/NetworkStatusItem.qml" line="182"/>
         <source>Failed to switch public node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../components/NetworkStatusItem.qml" line="190"/>
+        <location filename="../components/NetworkStatusItem.qml" line="192"/>
         <source>Switching to another public node</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1271,11 +1286,6 @@ Mining also gives you a small chance to earn some Monero. Your computer will cre
         <translation>Piniginės kelias: </translation>
     </message>
     <message>
-        <location filename="../pages/settings/SettingsInfo.qml" line="185"/>
-        <source> &lt;a href=&apos;#&apos;&gt; (Click to change)&lt;/a&gt;</source>
-        <translation> &lt;a href=&apos;#&apos;&gt; (Paspauskite, kad pakeisti)&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="187"/>
         <source>Set a new restore height.
 You can enter a block height or a date (YYYY-MM-DD):</source>
@@ -1294,6 +1304,11 @@ You can enter a block height or a date (YYYY-MM-DD):</source>
     <message>
         <location filename="../pages/settings/SettingsInfo.qml" line="175"/>
         <source>Wallet restore height: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/settings/SettingsInfo.qml" line="185"/>
+        <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1542,8 +1557,8 @@ Sena piniginės talpyklos rinkmena bus pervadinta ir vėliau galės būti atstat
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="384"/>
-        <source> &lt;a href=&apos;#&apos;&gt; (change)&lt;/a&gt;</source>
-        <translation> &lt;a href=&apos;#&apos;&gt; (pakeisti)&lt;/a&gt;</translation>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pages/settings/SettingsNode.qml" line="385"/>
@@ -2085,11 +2100,6 @@ You can change the password in the wallet settings.</source>
         <translation>Automatinis</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="179"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                                   Amount &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Change account&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="325"/>
         <source>No valid address found at this OpenAlias address</source>
         <translation>Šiame &quot;OpenAlias&quot; nerasta galiojančio adreso</translation>
@@ -2124,6 +2134,36 @@ You can change the password in the wallet settings.</source>
         <location filename="../pages/Transfer.qml" line="380"/>
         <source>Saved to local wallet history</source>
         <translation>Išsaugoma į vietinės piniginės istoriją</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="81"/>
+        <source>Start daemon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="180"/>
+        <source>Amount</source>
+        <translation type="unfinished">Suma</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="180"/>
+        <source>Change account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="264"/>
+        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                %1 &lt;a href=&apos;#&apos;&gt;(%2)&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="265"/>
+        <source>Address</source>
+        <translation type="unfinished">Adresas</translation>
+    </message>
+    <message>
+        <location filename="../pages/Transfer.qml" line="265"/>
+        <source>Address book</source>
+        <translation type="unfinished">Adresų knyga</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="440"/>
@@ -2161,13 +2201,13 @@ You can change the password in the wallet settings.</source>
         <translation>Importuoti rakto atvaizdus</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="578"/>
-        <location filename="../pages/Transfer.qml" line="634"/>
+        <location filename="../pages/Transfer.qml" line="577"/>
+        <location filename="../pages/Transfer.qml" line="633"/>
         <source>Error</source>
         <translation>Klaida</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="640"/>
+        <location filename="../pages/Transfer.qml" line="639"/>
         <source>Information</source>
         <translation>Informacija</translation>
     </message>
@@ -2182,16 +2222,11 @@ You can change the password in the wallet settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="567"/>
-        <location filename="../pages/Transfer.qml" line="628"/>
-        <location filename="../pages/Transfer.qml" line="672"/>
+        <location filename="../pages/Transfer.qml" line="566"/>
+        <location filename="../pages/Transfer.qml" line="627"/>
+        <location filename="../pages/Transfer.qml" line="671"/>
         <source>Please choose a file</source>
         <translation>Pasirinkite rinkmeną</translation>
-    </message>
-    <message>
-        <location filename="../pages/Transfer.qml" line="81"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Start daemon&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #FF6C3C; font-size: 14px;}&lt;/style&gt;&lt;font size=&apos;2&apos;&gt; (&lt;/font&gt;&lt;a href=&apos;#&apos;&gt;Paleisti jungtį&lt;/a&gt;&lt;font size=&apos;2&apos;&gt;)&lt;/font&gt;</translation>
     </message>
     <message>
         <location filename="../pages/Transfer.qml" line="57"/>
@@ -2229,11 +2264,6 @@ You can change the password in the wallet settings.</source>
         <translation type="unfinished">Greičiausiai (x41.5 rinkliavos) {200 ?}</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="264"/>
-        <source>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Address book&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</source>
-        <translation>&lt;style type=&apos;text/css&apos;&gt;a {text-decoration: none; color: #858585; font-size: 14px;}&lt;/style&gt;                Address &lt;font size=&apos;2&apos;&gt;  ( &lt;/font&gt; &lt;a href=&apos;#&apos;&gt;Adresų knyga&lt;/a&gt;&lt;font size=&apos;2&apos;&gt; )&lt;/font&gt;</translation>
-    </message>
-    <message>
         <location filename="../pages/Transfer.qml" line="352"/>
         <source>Description field contents match long payment ID format.           Please don&apos;t paste long payment ID into description field, your funds might be lost.</source>
         <translation type="unfinished"></translation>
@@ -2259,71 +2289,71 @@ You can change the password in the wallet settings.</source>
         <translation>Išplėstinės nuostatos</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="579"/>
+        <location filename="../pages/Transfer.qml" line="578"/>
         <source>Can&apos;t load unsigned transaction: </source>
         <translation>Nepavyko įkelti nepasirašyto pavedimo: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="586"/>
+        <location filename="../pages/Transfer.qml" line="585"/>
         <source>
 Number of transactions: </source>
         <translation>
 Pavedimų kiekis: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="588"/>
+        <location filename="../pages/Transfer.qml" line="587"/>
         <source>
 Transaction #%1</source>
         <translation>
 Pavedimas #%1</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="589"/>
+        <location filename="../pages/Transfer.qml" line="588"/>
         <source>
 Recipient: </source>
         <translation>
 Gavėjas: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="590"/>
+        <location filename="../pages/Transfer.qml" line="589"/>
         <source>
 payment ID: </source>
         <translation>
 mokėjimo ID: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="591"/>
+        <location filename="../pages/Transfer.qml" line="590"/>
         <source>
 Amount: </source>
         <translation>
 Suma: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="592"/>
+        <location filename="../pages/Transfer.qml" line="591"/>
         <source>
 Fee: </source>
         <translation>
 Rinkliava: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="593"/>
+        <location filename="../pages/Transfer.qml" line="592"/>
         <source>
 Ringsize: </source>
         <translation>
 Žiedų kiekis: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="607"/>
+        <location filename="../pages/Transfer.qml" line="606"/>
         <source>Confirmation</source>
         <translation>Patvirtinimas</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="635"/>
+        <location filename="../pages/Transfer.qml" line="634"/>
         <source>Can&apos;t submit transaction: </source>
         <translation>Nepavyko pateikti pavedimo: </translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="641"/>
+        <location filename="../pages/Transfer.qml" line="640"/>
         <source>Monero sent successfully</source>
         <translation>Monero sėkmingai išsiųsti</translation>
     </message>
@@ -2335,7 +2365,7 @@ Please upgrade or connect to another daemon</source>
 Prašome atnaujinti arba prisijungti prie kitos jungties</translation>
     </message>
     <message>
-        <location filename="../pages/Transfer.qml" line="705"/>
+        <location filename="../pages/Transfer.qml" line="704"/>
         <source>Wallet is not connected to daemon.</source>
         <translation>Piniginė neprijungta prie jungties.</translation>
     </message>
@@ -2547,7 +2577,12 @@ Jei naudojate &quot;Išleidimo įrodymas&quot;, jums nereikia nurodyti gavėjo a
     </message>
     <message>
         <location filename="../wizard/WizardAskPassword.qml" line="90"/>
-        <source>&lt;b&gt;Enter a strong password&lt;/b&gt; (Using letters, numbers, and/or symbols).</source>
+        <source>Enter a strong password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../wizard/WizardAskPassword.qml" line="90"/>
+        <source>Using letters, numbers, and/or symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2716,8 +2751,8 @@ your input may be required.</source>
     </message>
     <message>
         <location filename="../wizard/WizardCreateWallet4.qml" line="68"/>
-        <source>Open wallet</source>
-        <translation type="unfinished"></translation>
+        <source>Create wallet</source>
+        <translation type="unfinished">Sukurti piniginę</translation>
     </message>
 </context>
 <context>
@@ -2762,7 +2797,7 @@ your input may be required.</source>
     <name>WizardHome</name>
     <message>
         <location filename="../wizard/WizardHome.qml" line="61"/>
-        <source>Welcome to Monero.</source>
+        <source>Welcome to Monero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2927,7 +2962,7 @@ your input may be required.</source>
     <name>WizardModeSelection</name>
     <message>
         <location filename="../wizard/WizardModeSelection.qml" line="61"/>
-        <source>Mode selection.</source>
+        <source>Mode selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3178,85 +3213,85 @@ If you don&apos;t have the option to run your own node, there&apos;s an option t
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="329"/>
-        <location filename="../main.qml" line="785"/>
-        <location filename="../main.qml" line="797"/>
-        <location filename="../main.qml" line="852"/>
-        <location filename="../main.qml" line="864"/>
-        <location filename="../main.qml" line="906"/>
-        <location filename="../main.qml" line="915"/>
-        <location filename="../main.qml" line="963"/>
-        <location filename="../main.qml" line="1071"/>
-        <location filename="../main.qml" line="1515"/>
+        <location filename="../main.qml" line="330"/>
+        <location filename="../main.qml" line="775"/>
+        <location filename="../main.qml" line="787"/>
+        <location filename="../main.qml" line="842"/>
+        <location filename="../main.qml" line="854"/>
+        <location filename="../main.qml" line="896"/>
+        <location filename="../main.qml" line="905"/>
+        <location filename="../main.qml" line="953"/>
+        <location filename="../main.qml" line="1061"/>
+        <location filename="../main.qml" line="1505"/>
         <source>Error</source>
         <translation>Klaida</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="330"/>
-        <location filename="../main.qml" line="548"/>
+        <location filename="../main.qml" line="331"/>
+        <location filename="../main.qml" line="541"/>
         <source>Couldn&apos;t open wallet: </source>
         <translation>Nepavyko atidaryti piniginės: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="683"/>
+        <location filename="../main.qml" line="674"/>
         <source>Waiting for daemon to start...</source>
         <translation>Laukiama, kol pasileis jungtis...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="689"/>
+        <location filename="../main.qml" line="681"/>
         <source>Waiting for daemon to stop...</source>
         <translation>Laukiama, kol jungtis bus sustabdyta...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="717"/>
+        <location filename="../main.qml" line="707"/>
         <source>Daemon failed to start</source>
         <translation>Jungties paleisti nepavyko</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="718"/>
+        <location filename="../main.qml" line="708"/>
         <source>Please check your wallet and daemon log for errors. You can also try to start %1 manually.</source>
         <translation>Prašome patikrinti piniginės ir jungties klaidų istoriją. Galite bandyti paleisti %1 rankiniu būdu.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="787"/>
+        <location filename="../main.qml" line="777"/>
         <source>Can&apos;t create transaction: Wrong daemon version: </source>
         <translation>Negalima sukurti pavedimo: Bloga jungties versija: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="789"/>
-        <location filename="../main.qml" line="907"/>
+        <location filename="../main.qml" line="779"/>
+        <location filename="../main.qml" line="897"/>
         <source>Can&apos;t create transaction: </source>
         <translation>Negalima sukurti pavedimo: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="798"/>
-        <location filename="../main.qml" line="916"/>
+        <location filename="../main.qml" line="788"/>
+        <location filename="../main.qml" line="906"/>
         <source>No unmixable outputs to sweep</source>
         <translation>Nera nesumaišomos išvesties ištrinimui</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="928"/>
+        <location filename="../main.qml" line="918"/>
         <source>Confirmation</source>
         <translation>Patvirtinimas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="809"/>
-        <location filename="../main.qml" line="929"/>
+        <location filename="../main.qml" line="799"/>
+        <location filename="../main.qml" line="919"/>
         <source>Please confirm transaction:
 </source>
         <translation>Prašome patvirtinti pavedimą:
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="812"/>
+        <location filename="../main.qml" line="802"/>
         <source>
 Payment ID: </source>
         <translation>
 Mokėjimo ID: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="813"/>
-        <location filename="../main.qml" line="930"/>
+        <location filename="../main.qml" line="803"/>
+        <location filename="../main.qml" line="920"/>
         <source>
 
 Amount: </source>
@@ -3265,73 +3300,73 @@ Amount: </source>
 Suma: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="814"/>
-        <location filename="../main.qml" line="931"/>
+        <location filename="../main.qml" line="804"/>
+        <location filename="../main.qml" line="921"/>
         <source>
 Fee: </source>
         <translation>
 Rinkliava: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1014"/>
+        <location filename="../main.qml" line="1004"/>
         <source>Payment proof</source>
         <translation>Pavedimo patvirtinimas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="637"/>
+        <location filename="../main.qml" line="628"/>
         <source>Waiting for daemon to sync</source>
         <translation>jaukiama jungties sinchronizacijos</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="302"/>
+        <location filename="../main.qml" line="303"/>
         <source>Closing wallet...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="509"/>
+        <location filename="../main.qml" line="502"/>
         <source>Please proceed to the device...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="521"/>
+        <location filename="../main.qml" line="514"/>
         <source>Opening wallet ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../main.qml" line="529"/>
         <location filename="../main.qml" line="536"/>
-        <location filename="../main.qml" line="543"/>
         <source>Repairing incompatible wallet cache. Resyncing wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="639"/>
+        <location filename="../main.qml" line="630"/>
         <source>Daemon is synchronized (%1)</source>
         <translation>Jungtis sinchronizuota (%1)</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="641"/>
+        <location filename="../main.qml" line="632"/>
         <source>Wallet is synchronized</source>
         <translation>Piniginė sinchronizuota</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="734"/>
+        <location filename="../main.qml" line="724"/>
         <source>Daemon is synchronized</source>
         <translation>Jungtis sinchronizuota</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="811"/>
+        <location filename="../main.qml" line="801"/>
         <source>Address: </source>
         <translation>Adresas: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="815"/>
+        <location filename="../main.qml" line="805"/>
         <source>
 Ringsize: </source>
         <translation>
 Žiedų kiekis: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="816"/>
+        <location filename="../main.qml" line="806"/>
         <source>
 
 Number of transactions: </source>
@@ -3340,26 +3375,26 @@ Number of transactions: </source>
 Pavedimų kiekis: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="817"/>
+        <location filename="../main.qml" line="807"/>
         <source>
 Description: </source>
         <translation>
 Aprašymas: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="819"/>
+        <location filename="../main.qml" line="809"/>
         <source>
 Spending address index: </source>
         <translation>
 Išlaidų adreso rodyklė: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="839"/>
+        <location filename="../main.qml" line="829"/>
         <source>Creating transaction...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="840"/>
+        <location filename="../main.qml" line="830"/>
         <source>
 
 Please check your hardware wallet –
@@ -3367,168 +3402,178 @@ your input may be required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="955"/>
+        <location filename="../main.qml" line="945"/>
         <source>Sending transaction ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="974"/>
+        <location filename="../main.qml" line="964"/>
         <source>Monero sent successfully: %1 transaction(s) </source>
         <translation>Monero sėkmingai išsiųsti: %1 operacija (-os) </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1017"/>
+        <location filename="../main.qml" line="1007"/>
         <source>Couldn&apos;t generate a proof because of the following reason: 
 </source>
         <translation>Negalima sugeneruoti patvirtinimo dėl šios priežasties: 
 </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1047"/>
-        <location filename="../main.qml" line="1066"/>
+        <location filename="../main.qml" line="1037"/>
+        <location filename="../main.qml" line="1056"/>
         <source>Payment proof check</source>
         <translation>Pavedimo tikrinimas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1050"/>
-        <location filename="../main.qml" line="1068"/>
+        <location filename="../main.qml" line="1040"/>
+        <location filename="../main.qml" line="1058"/>
         <source>Bad signature</source>
         <translation>Blogas parašas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1057"/>
+        <location filename="../main.qml" line="1047"/>
         <source>This address received %1 monero, with %2 confirmation(s).</source>
         <translation>Šis adresas gavo%1 Monero, su%2 patvirtinimu (-ais).</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1068"/>
+        <location filename="../main.qml" line="1058"/>
         <source>Good signature</source>
         <translation>Geras parašas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1421"/>
-        <location filename="../main.qml" line="2062"/>
+        <location filename="../main.qml" line="1411"/>
+        <location filename="../main.qml" line="2049"/>
         <source>Wrong password</source>
         <translation>Neteisingas slaptažodis</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1462"/>
+        <location filename="../main.qml" line="1452"/>
         <source>Warning</source>
         <translation>Įspėjimas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1465"/>
+        <location filename="../main.qml" line="1455"/>
         <source>Error: Filesystem is read only</source>
         <translation>Klaida: Rinkmenų sistema leidžia tik skaitymą</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1467"/>
+        <location filename="../main.qml" line="1457"/>
         <source>Warning: There&apos;s only %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Įspėjimas: Tik %1 GB liko įrenginyje. Blokų grandinė reikalauja ~%2 GB laisvos vietos.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1469"/>
+        <location filename="../main.qml" line="1459"/>
         <source>Note: There&apos;s %1 GB available on the device. Blockchain requires ~%2 GB of data.</source>
         <translation>Pastaba: Tik %1 GB liko įrenginyje. Blokai reikalauja ~%2 GB laisvos vietos.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1471"/>
+        <location filename="../main.qml" line="1461"/>
         <source>Note: lmdb folder not found. A new folder will be created.</source>
         <translation>Pastaba: lmdb aplankas nerastas. Bus sukurtas naujas aplankas.</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1474"/>
+        <location filename="../main.qml" line="1464"/>
         <source>Cancel</source>
         <translation>Atšaukti</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1512"/>
+        <location filename="../main.qml" line="1502"/>
         <source>Password changed successfully</source>
         <translation>Slaptažodis pakeistas sėkmingai</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1516"/>
+        <location filename="../main.qml" line="1506"/>
         <source>Error: </source>
         <translation>Klaida: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1605"/>
+        <location filename="../main.qml" line="1595"/>
         <source>Primary account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1932"/>
+        <location filename="../main.qml" line="1921"/>
         <source>Local node is running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1933"/>
+        <location filename="../main.qml" line="1922"/>
         <source>Do you want to stop local node or keep it running in the background?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1935"/>
+        <location filename="../main.qml" line="1924"/>
         <source>Force stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1936"/>
+        <location filename="../main.qml" line="1925"/>
         <source>Keep it running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1998"/>
-        <source>New version of Monero v%1 is available.&lt;br&gt;&lt;br&gt;Download:&lt;br&gt;%2&lt;br&gt;&lt;br&gt;SHA256 Hash:&lt;br&gt;%3</source>
+        <location filename="../main.qml" line="1983"/>
+        <source>New version of Monero v%1 is available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="2000"/>
-        <source>New version of Monero v%1 is available. Check out getmonero.org</source>
+        <location filename="../main.qml" line="1985"/>
+        <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1957"/>
+        <location filename="../main.qml" line="1985"/>
+        <source>SHA256 Hash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1987"/>
+        <source>Check out getmonero.org</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.qml" line="1945"/>
         <source>Tap again to close...</source>
         <translation>Spauskite dar kartą, kad išjungti...</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="853"/>
+        <location filename="../main.qml" line="843"/>
         <source>Amount is wrong: expected number from %1 to %2</source>
         <translation>Suma yra bloga: galimos reikšmės nuo %1 iki %2</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="865"/>
+        <location filename="../main.qml" line="855"/>
         <source>Insufficient funds. Unlocked balance: %1</source>
         <translation>Nepakanka lėšų. Leidžiama: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="964"/>
+        <location filename="../main.qml" line="954"/>
         <source>Couldn&apos;t send the money: </source>
         <translation>Nepavyko nusiųsti pinigų: </translation>
     </message>
     <message>
-        <location filename="../main.qml" line="968"/>
-        <location filename="../main.qml" line="1511"/>
+        <location filename="../main.qml" line="958"/>
+        <location filename="../main.qml" line="1501"/>
         <source>Information</source>
         <translation>Informacija</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="974"/>
+        <location filename="../main.qml" line="964"/>
         <source>Transaction saved to file: %1</source>
         <translation>Pavedimas išsaugotas į rinkmeną: %1</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1054"/>
+        <location filename="../main.qml" line="1044"/>
         <source>This address received %1 monero, but the transaction is not yet mined</source>
         <translation>Šis adresas gavo%1 Monero, tačiau pavedimas dar nėra iškastas</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1061"/>
+        <location filename="../main.qml" line="1051"/>
         <source>This address received nothing</source>
         <translation>Šis adresas nieko negavo</translation>
     </message>
     <message>
-        <location filename="../main.qml" line="1565"/>
+        <location filename="../main.qml" line="1555"/>
         <source>Please wait...</source>
         <translation>Prašome palaukti...</translation>
     </message>
