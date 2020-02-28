@@ -55,6 +55,7 @@ Lojban
         <language display_name="Suomi" locale="fi_FI" wallet_language="English" flag="/lang/flags/fi.png" qs="none"/>
         <language display_name="Pirate" locale="prt" wallet_language="English" flag="/lang/flags/pirate.png" qs="none"/>
         <language display_name="Български" locale="bg_BG" wallet_language="English" flag="/lang/flags/bg.png" qs="none"/>
+        <language display_name="Norwegian" locale="nb_NO" wallet_language="English" flag="/lang/flags/nb_NO.png" qs="none"/>
         <!-- <language display_name="اُردُو" locale="ur_UR" wallet_language="English" flag="/lang/flags/pk.png" qs="none"/> -->
         <!-- <language display_name="فارسی" locale="fa_FA" wallet_language="English" flag="/lang/flags/ir.png" qs="none"/> -->
         <!-- <language display_name="Zulu" locale="zu_ZU" wallet_language="English" flag="/lang/flags/za.png" qs="none"/> -->
