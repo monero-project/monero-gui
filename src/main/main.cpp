@@ -164,10 +164,10 @@ int main(int argc, char *argv[])
         isOpenGL = false;
 
     // disable "QApplication: invalid style override passed" warning
-    if (isDesktop) putenv((char*)"QT_STYLE_OVERRIDE=fusion");
+    if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
 #ifdef Q_OS_LINUX
     // force platform xcb
-    if (isDesktop) putenv((char*)"QT_QPA_PLATFORM=xcb");
+    if (isDesktop) qputenv("QT_QPA_PLATFORM", "xcb");
 #endif
 
     // enable High DPI scaling
@@ -393,8 +393,7 @@ int main(int argc, char *argv[])
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
-    const QStringList arguments = (QStringList) QCoreApplication::arguments().at(0);
-    DaemonManager * daemonManager = DaemonManager::instance(&arguments);
+    DaemonManager * daemonManager = DaemonManager::instance();
     engine.rootContext()->setContextProperty("daemonManager", daemonManager);
 #endif
 

@@ -157,7 +157,7 @@ QVariant WalletKeysFilesModel::data(const QModelIndex & index, int role) const {
     else if (role == PathRole)
         return walletKeyFile.path();
     else if (role == NetworkTypeRole)
-        return walletKeyFile.networkType();
+        return static_cast<uint>(walletKeyFile.networkType());
     else if (role == AddressRole)
         return walletKeyFile.address();
     return QVariant();
