@@ -384,13 +384,22 @@ if (noexecheap_SUPPORTED)
   set(LD_SECURITY_FLAGS "${LD_SECURITY_FLAGS} -Wl,-z,noexecheap")
 endif()
 
+if(STATIC)
+  if(MINGW)
+    add_linker_flag_if_supported(-static STATIC_FLAGS)
+  else()
+    add_linker_flag_if_supported(-static-libgcc STATIC_FLAGS)
+    add_linker_flag_if_supported(-static-libstdc++ STATIC_FLAGS)
+  endif()
+endif()
+
 message(STATUS "Using C security hardening flags: ${C_SECURITY_FLAGS}")
 message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")
 message(STATUS "Using linker security hardening flags: ${LD_SECURITY_FLAGS}")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_SECURITY_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_SECURITY_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS} ${STATIC_FLAGS}")
 
 if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
   if (APPLE)
