@@ -144,25 +144,11 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install boost`
-
-  `brew install openssl` - to install openssl headers
-
-  `brew install pkgconfig`
-
-  `brew install cmake`
-
-  `brew install zeromq`
-
-  *Note*: If cmake can not find zmq.hpp file on OS X, installing `zmq.hpp` from https://github.com/zeromq/cppzmq to `/usr/local/include` should fix that error.
+  `brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf`
 
 4. Install Qt:
 
   `brew install qt5`  (or download QT 5.9.7+ from [qt.io](https://www.qt.io/download-open-source/))
-
-  If you have an older version of Qt installed via homebrew, you can force it to use 5.x like so:
-  
-  `brew link --force --overwrite qt5`
 
 5. Add the Qt bin directory to your path
 
@@ -182,19 +168,6 @@ The executable can be found in the build/release/bin folder.
   `./build.sh`
 
 The executable can be found in the `build/release/bin` folder.
-
-**Note:** Workaround for "ERROR: Xcode not set up properly"
-
-Edit `$HOME/Qt/5.9.7/clang_64/mkspecs/features/mac/default_pre.prf`
-
-replace
-`isEmpty($$list($$system("/usr/bin/xcrun -find xcrun 2>/dev/null")))`
-
-with
-`isEmpty($$list($$system("/usr/bin/xcrun -find xcodebuild 2>/dev/null")))`
-
-More info: http://stackoverflow.com/a/35098040/1683164
-
 
 ### On Windows:
 
