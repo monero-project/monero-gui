@@ -97,6 +97,8 @@ file(GLOB_RECURSE SRC_HEADERS *.h)
 target_include_directories(monero-gui PUBLIC
 	${CMAKE_SOURCE_DIR}/monero/include
     ${CMAKE_SOURCE_DIR}/monero/src
+    ${CMAKE_SOURCE_DIR}/monero/external/easylogging++
+    ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt

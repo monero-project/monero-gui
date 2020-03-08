@@ -30,7 +30,6 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include <QStandardPaths>
-#include <QNetworkAccessManager>
 #include <QIcon>
 #include <QDebug>
 #include <QDesktopServices>
@@ -437,8 +436,7 @@ int main(int argc, char *argv[])
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
-    QNetworkAccessManager *manager = new QNetworkAccessManager();
-    Prices prices(manager);
+    Prices prices;
     engine.rootContext()->setContextProperty("Prices", &prices);
 
     // Load main window (context properties needs to be defined obove this line)

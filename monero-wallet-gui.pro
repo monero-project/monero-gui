@@ -43,7 +43,9 @@ INCLUDEPATH +=  $$WALLET_ROOT/include \
                 $$PWD/src/libwalletqt \
                 $$PWD/src/QR-Code-generator \
                 $$PWD/src \
-                $$WALLET_ROOT/src
+                $$WALLET_ROOT/src \
+                $$WALLET_ROOT/external/easylogging++ \
+                $$WALLET_ROOT/contrib/epee/include
 
 HEADERS += \
     src/main/filter.h \
@@ -372,11 +374,18 @@ macx {
     #     LIBS+= -Wl,-Bstatic
     # }
 
-    OPENSSL_LIBRARY_DIRS = $$system(brew --prefix openssl, lines, EXIT_CODE)
+    OPENSSL_DIR = $$system(brew --prefix openssl, lines, EXIT_CODE)
+    !equals(EXIT_CODE, 0) {
+        OPENSSL_DIR = /usr/local/ssl
+    }
+    OPENSSL_LIBRARY_DIR = $$OPENSSL_DIR/lib
+    INCLUDEPATH += $$OPENSSL_DIR/include
+
+    BOOST_DIR = $$system(brew --prefix boost, lines, EXIT_CODE)
     equals(EXIT_CODE, 0) {
-        OPENSSL_LIBRARY_DIRS = $$OPENSSL_LIBRARY_DIRS/lib
+        INCLUDEPATH += $$BOOST_DIR/include
     } else {
-        OPENSSL_LIBRARY_DIRS = /usr/local/ssl/lib
+        INCLUDEPATH += /usr/local/include
     }
 
     QT += macextras
@@ -386,7 +395,7 @@ macx {
     LIBS+= -Wl,-bind_at_load
     LIBS+= \
         -L/usr/local/lib \
-        -L$$OPENSSL_LIBRARY_DIRS \
+        -L$$OPENSSL_LIBRARY_DIR \
         -L/usr/local/opt/boost/lib \
         -lboost_serialization \
         -lboost_thread-mt \
