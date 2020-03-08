@@ -176,8 +176,8 @@ android {
 
 
 
-QMAKE_CXXFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Werror -Wformat -Wformat-security
-QMAKE_CFLAGS += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Werror -Wformat -Wformat-security
+QMAKE_CXXFLAGS += -O0 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Werror -Wformat -Wformat-security
+QMAKE_CFLAGS += -O0 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -Werror -Wformat -Wformat-security
 
 ios {
     message("Host is IOS")
