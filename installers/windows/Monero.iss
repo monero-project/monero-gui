@@ -11,7 +11,7 @@ AppName=Monero GUI Wallet
 
 AppVersion={#GuiVersion}
 VersionInfoVersion={#GuiVersion}
-DefaultDirName={pf}\Monero GUI Wallet
+DefaultDirName={commonpf}\Monero GUI Wallet
 DefaultGroupName=Monero GUI Wallet
 UninstallDisplayIcon={app}\monero-wallet-gui.exe
 PrivilegesRequired=admin
