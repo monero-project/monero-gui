@@ -26,85 +26,85 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <QDebug>
 #include <QtCore>
-#include <QNetworkAccessManager>
+
+// TODO: wallet_merged - epee library triggers the warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wreorder"
+#include <net/http_client.h>
+#pragma GCC diagnostic pop
 
 #include "utils.h"
 #include "prices.h"
 
-
-Prices::Prices(QNetworkAccessManager *networkAccessManager, QObject *parent)
-    : QObject(parent) {
-    this->m_networkAccessManager = networkAccessManager;
+Prices::Prices(QObject *parent)
+    : QObject(parent)
+    , m_scheduler(this)
+{
 }
 
-void Prices::getJSON(const QString url) {
+void Prices::getJSON(const QString url) const
+{
     qDebug() << QString("Fetching: %1").arg(url);
-    QNetworkRequest request;
-    request.setUrl(QUrl(url));
-    request.setRawHeader("User-Agent", randomUserAgent().toUtf8());
-    request.setRawHeader("Content-Type", "application/json");
 
-    m_reply = this->m_networkAccessManager->get(request);
+    m_scheduler.run([this, url] {
+        epee::net_utils::http::http_simple_client http_client;
 
-    connect(m_reply, SIGNAL(finished()), this, SLOT(gotJSON()));
+        const QUrl urlParsed(url);
+        http_client.set_server(urlParsed.host().toStdString(), urlParsed.scheme() == "https" ? "443" : "80", {});
+
+        const QString uri = (urlParsed.hasQuery() ? urlParsed.path() + "?" + urlParsed.query() : urlParsed.path());
+        const epee::net_utils::http::http_response_info* pri = NULL;
+        constexpr std::chrono::milliseconds timeout = std::chrono::seconds(15);
+
+        const bool result = http_client.invoke(
+            uri.toStdString(),
+            "GET",
+            {},
+            timeout,
+            std::addressof(pri),
+            {
+                {"Content-Type", "application/json; charset=utf-8"},
+                {"User-Agent", randomUserAgent().toStdString()}
+            });
+
+        if (!result)
+        {
+            this->gotError("unknown error");
+        }
+        else if (!pri)
+        {
+            this->gotError("internal error (null response ptr)");
+        }
+        else if (pri->m_response_code != 200)
+        {
+            this->gotError(QString("response code: %1").arg(pri->m_response_code));
+        }
+        else
+        {
+            QJsonDocument doc = QJsonDocument::fromJson({&pri->m_body[0], static_cast<int>(pri->m_body.size())});
+            if (doc.isEmpty())
+            {
+                this->gotError("bad JSON");
+            }
+            else
+            {
+                // Insert source url for later reference
+                QJsonObject docobj = doc.object();
+                docobj["_url"] = url;
+                doc.setObject(docobj);
+
+                QVariantMap vMap = doc.object().toVariantMap();
+                emit priceJsonReceived(vMap);
+            }
+        }
+    });
 }
 
-void Prices::gotJSON() {
-    // Check connectivity
-    if (!m_reply || m_reply->error() != QNetworkReply::NoError){
-        this->gotError("Problem with reply from server. Check connectivity.");
-        m_reply->deleteLater();
-        return;
-    }
-
-    // Check json header
-    QList<QByteArray> headerList = m_reply->rawHeaderList();
-    QByteArray headerJson = m_reply->rawHeader("Content-Type");
-    if(headerJson.length() <= 15){
-        this->gotError("Bad Content-Type");
-        m_reply->deleteLater();
-        return;
-    }
-
-    QString headerJsonStr = QTextCodec::codecForMib(106)->toUnicode(headerJson);
-    int _contentType = headerList.indexOf("Content-Type");
-    if (_contentType < 0 || !headerJsonStr.startsWith("application/json")){
-        this->gotError("Bad Content-Type");
-        m_reply->deleteLater();
-        return;
-    }
-
-    // Check valid json document
-    QByteArray data = m_reply->readAll();
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-    QString jsonString = doc.toJson(QJsonDocument::Indented);
-    if (jsonString.isEmpty()){
-        this->gotError("Bad JSON");
-        m_reply->deleteLater();
-        return;
-    }
-
-    // Insert source url for later reference
-    QUrl url = m_reply->url();
-    QJsonObject docobj = doc.object();
-    docobj["_url"] = url.toString();
-    doc.setObject(docobj);
-
-    qDebug() << QString("Fetched: %1").arg(url.toString());
-
-    // Emit signal
-    QVariantMap vMap = doc.object().toVariantMap();
-    emit priceJsonReceived(vMap);
-
-    m_reply->deleteLater();
-}
-
-void Prices::gotError() {
-    this->gotError("Unknown error");
-}
-
-void Prices::gotError(const QString &message) {
+void Prices::gotError(const QString &message) const
+{
     qCritical() << "[Fiat API] Error:" << message;
     emit priceJsonError(message);
 }

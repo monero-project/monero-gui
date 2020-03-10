@@ -3,28 +3,27 @@
 
 #include <QCoreApplication>
 #include <QtNetwork>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QDebug>
+
+#include "FutureScheduler.h"
 
 class Prices : public QObject
 {
 Q_OBJECT
 public:
-    Prices(QNetworkAccessManager *networkAccessManager, QObject *parent = nullptr);
+    Prices(QObject *parent = nullptr);
 
-public slots:
-    Q_INVOKABLE void getJSON(const QString url);
-    void gotJSON();
-    void gotError();
-    void gotError(const QString &message);
-signals:
-    void priceJsonReceived(QVariantMap document);
-    void priceJsonError(QString message);
+public:
+    Q_INVOKABLE void getJSON(const QString url) const;
 
 private:
-    mutable QPointer<QNetworkReply> m_reply;
-    QNetworkAccessManager *m_networkAccessManager;
+    void gotError(const QString &message) const;
+
+signals:
+    void priceJsonReceived(QVariantMap document) const;
+    void priceJsonError(QString message) const;
+
+private:
+    mutable FutureScheduler m_scheduler;
 };
 
 #endif // PRICES_H
