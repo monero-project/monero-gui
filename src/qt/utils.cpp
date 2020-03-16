@@ -28,6 +28,7 @@
 
 #include <QtCore>
 #include <QApplication>
+#include <QPixmap>
 
 #include "TailsOS.h"
 #include "utils.h"
@@ -58,6 +59,19 @@ bool fileWrite(QString path, QString data) {
     return false;
 }
 
+bool pixmapWrite(const QString &path, const QPixmap &pixmap) {
+    QFile file(path);
+    QFileInfo iconInfo(file);
+    QDir().mkpath(iconInfo.path());
+    if(file.open(QIODevice::WriteOnly)){
+        pixmap.save(&file, "PNG");
+        file.close();
+        return true;
+    }
+
+    return false;
+}
+
 QString getAccountName(){
     QString accountName = qgetenv("USER"); // mac/linux
     if (accountName.isEmpty())
@@ -76,7 +90,7 @@ QString xdgMime(QApplication &app){
         "X-GNOME-FullName=Monero-GUI\n"
         "Comment=Monero GUI\n"
         "Keywords=Monero;\n"
-        "Exec=%1 %u\n"
+        "Exec=\"%1\" %u\n"
         "Terminal=false\n"
         "Type=Application\n"
         "Icon=monero\n"
@@ -100,7 +114,6 @@ void registerXdgMime(QApplication &app){
 
     if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
         TailsOS::persistXdgMime(filePath, mime);
-        return;
     }
 
     QFileInfo file(filePath);
@@ -111,6 +124,10 @@ void registerXdgMime(QApplication &app){
 #endif
 
     fileWrite(filePath, mime);
+
+    QString iconPath(QDir::homePath() + "/.local/share/icons/monero.png");
+    if (!fileExists(iconPath))
+        pixmapWrite(iconPath, QPixmap(":/images/appicons/64x64.png"));
 }
 #endif
 

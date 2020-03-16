@@ -236,6 +236,7 @@
         <file>images/themes/white/question.svg</file>
         <file>components/effects/ColorTransition.qml</file>
         <file>components/effects/GradientBackground.qml</file>
+        <file>images/appicons/64x64.png</file>
         <file>images/check-white.svg</file>
         <file>images/copy.svg</file>
         <file>images/edit.svg</file>

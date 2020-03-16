@@ -36,6 +36,7 @@
 bool fileExists(QString path);
 QByteArray fileOpen(QString path);
 bool fileWrite(QString path, QString data);
+bool pixmapWrite(const QString &path, const QPixmap &pixmap);
 QString getAccountName();
 #ifdef Q_OS_LINUX
 QString xdgMime(QApplication &app);
