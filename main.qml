@@ -1135,9 +1135,9 @@ ApplicationWindow {
         triggeredOnStart: false
     }
 
-    function fiatApiParseTicker(resp, currency){
+    function fiatApiParseTicker(url, resp, currency){
         // parse & validate incoming JSON
-        if(resp._url.startsWith("https://api.kraken.com/0/")){
+        if(url.startsWith("https://api.kraken.com/0/")){
             if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
                 appWindow.fiatApiError("Kraken API has error(s)");
                 return;
@@ -1146,14 +1146,14 @@ ApplicationWindow {
             var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
             var ticker = resp.result[key]["o"];
             return ticker;
-        } else if(resp._url.startsWith("https://api.coingecko.com/api/v3/")){
+        } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
             var key = currency === "xmreur" ? "eur" : "usd";
             if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
             }
             return resp["monero"][key];
-        } else if(resp._url.startsWith("https://min-api.cryptocompare.com/data/")){
+        } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
             var key = currency === "xmreur" ? "EUR" : "USD";
             if(!resp.hasOwnProperty(key)){
                 appWindow.fiatApiError("cryptocompare API has error(s)");
@@ -1163,13 +1163,7 @@ ApplicationWindow {
         }
     }
 
-    function fiatApiGetCurrency(resp){
-        // map response to `appWindow.fiatPriceAPIs` object
-        if (!resp.hasOwnProperty('_url')){
-            appWindow.fiatApiError("invalid JSON");
-            return;
-        }
-
+    function fiatApiGetCurrency(url) {
         var apis = appWindow.fiatPriceAPIs;
         for (var api in apis){
             if (!apis.hasOwnProperty(api))
@@ -1179,23 +1173,34 @@ ApplicationWindow {
                 if(!apis[api].hasOwnProperty(cur))
                     continue;
 
-                var url = apis[api][cur];
-                if(url === resp._url){
+                if (apis[api][cur] === url) {
                     return cur;
                 }
             }
         }
     }
 
-    function fiatApiJsonReceived(resp){
+    function fiatApiJsonReceived(url, resp, error) {
+        if (error) {
+            appWindow.fiatApiError(error);
+            return;
+        }
+
+        try {
+            resp = JSON.parse(resp);
+        } catch (e) {
+            appWindow.fiatApiError("bad JSON: " + e);
+            return;
+        }
+
         // handle incoming JSON, set ticker
-        var currency = appWindow.fiatApiGetCurrency(resp);
+        var currency = appWindow.fiatApiGetCurrency(url);
         if(typeof currency == "undefined"){
             appWindow.fiatApiError("could not get currency");
             return;
         }
 
-        var ticker = appWindow.fiatApiParseTicker(resp, currency);
+        var ticker = appWindow.fiatApiParseTicker(url, resp, currency);
         if(ticker <= 0){
             appWindow.fiatApiError("could not get ticker");
             return;
@@ -1227,7 +1232,7 @@ ApplicationWindow {
         }
 
         var url = provider[userCurrency];
-        Prices.getJSON(url);
+        Network.getJSON(url, fiatApiJsonReceived);
     }
 
     function fiatApiCurrencySymbol() {
@@ -1285,7 +1290,6 @@ ApplicationWindow {
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
         walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
         IPC.uriHandler.connect(onUriHandler);
-        Prices.priceJsonReceived.connect(appWindow.fiatApiJsonReceived);
 
         if(typeof daemonManager != "undefined") {
             daemonManager.daemonStarted.connect(onDaemonStarted);

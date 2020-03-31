@@ -62,11 +62,11 @@
 #include "Logger.h"
 #include "MainApp.h"
 #include "qt/ipc.h"
+#include "qt/network.h"
 #include "qt/utils.h"
 #include "qt/TailsOS.h"
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
-#include "qt/prices.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -436,8 +436,8 @@ int main(int argc, char *argv[])
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
-    Prices prices;
-    engine.rootContext()->setContextProperty("Prices", &prices);
+    Network network;
+    engine.rootContext()->setContextProperty("Network", &network);
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
