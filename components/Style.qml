@@ -43,6 +43,9 @@ QtObject {
     property string buttonInlineBackgroundColor: blackTheme ? _b_buttonInlineBackgroundColor : _w_buttonInlineBackgroundColor
     property string buttonTextColor: blackTheme ? _b_buttonTextColor : _w_buttonTextColor
     property string buttonTextColorDisabled: blackTheme ? _b_buttonTextColorDisabled : _w_buttonTextColorDisabled
+    property string buttonSecondaryBackgroundColor: "#d9d9d9"
+    property string buttonSecondaryBackgroundColorHover: "#a6a6a6"
+    property string buttonSecondaryTextColor: "#4d4d4d"
     property string dividerColor: blackTheme ? _b_dividerColor : _w_dividerColor
     property real dividerOpacity: blackTheme ? _b_dividerOpacity : _w_dividerOpacity
 

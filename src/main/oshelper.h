@@ -39,7 +39,9 @@ class OSHelper : public QObject
 public:
     explicit OSHelper(QObject *parent = 0);
 
+    Q_INVOKABLE QString downloadLocation() const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;
+    Q_INVOKABLE QString openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const;
     Q_INVOKABLE QString temporaryFilename() const;
     Q_INVOKABLE QString temporaryPath() const;
     Q_INVOKABLE bool removeTemporaryWallet(const QString &walletName) const;

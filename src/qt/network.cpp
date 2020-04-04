@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -31,14 +31,68 @@
 #include <QDebug>
 #include <QtCore>
 
-// TODO: wallet_merged - epee library triggers the warnings
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-#pragma GCC diagnostic ignored "-Wreorder"
-#include <net/http_client.h>
-#pragma GCC diagnostic pop
-
 #include "utils.h"
+
+using epee::net_utils::http::fields_list;
+using epee::net_utils::http::http_response_info;
+using epee::net_utils::http::http_simple_client;
+
+HttpClient::HttpClient(QObject *parent /* = nullptr */)
+    : QObject(parent)
+    , m_cancel(false)
+    , m_contentLength(0)
+    , m_received(0)
+{
+}
+
+void HttpClient::cancel()
+{
+    m_cancel = true;
+}
+
+quint64 HttpClient::contentLength() const
+{
+    return m_contentLength;
+}
+
+quint64 HttpClient::received() const
+{
+    return m_received;
+}
+
+bool HttpClient::on_header(const http_response_info &headers)
+{
+    if (m_cancel.exchange(false))
+    {
+        return false;
+    }
+
+    size_t contentLength = 0;
+    if (!epee::string_tools::get_xtype_from_string(contentLength, headers.m_header_info.m_content_length))
+    {
+        qWarning() << "Failed to get Content-Length";
+    }
+    m_contentLength = contentLength;
+    emit contentLengthChanged();
+
+    m_received = 0;
+    emit receivedChanged();
+
+    return http_simple_client::on_header(headers);
+}
+
+bool HttpClient::handle_target_data(std::string &piece_of_transfer)
+{
+    if (m_cancel.exchange(false))
+    {
+        return false;
+    }
+
+    m_received += piece_of_transfer.size();
+    emit receivedChanged();
+
+    return http_simple_client::handle_target_data(piece_of_transfer);
+}
 
 Network::Network(QObject *parent)
     : QObject(parent)
@@ -46,42 +100,14 @@ Network::Network(QObject *parent)
 {
 }
 
-void Network::get(const QString &url, const QJSValue &callback, const QString &contentType) const
+void Network::get(const QString &url, const QJSValue &callback, const QString &contentType /* = {} */) const
 {
-    qDebug() << QString("Fetching: %1").arg(url);
-
     m_scheduler.run(
-        [url, contentType] {
-            epee::net_utils::http::http_simple_client httpClient;
-
-            const QUrl urlParsed(url);
-            httpClient.set_server(urlParsed.host().toStdString(), urlParsed.scheme() == "https" ? "443" : "80", {});
-
-            const QString uri = (urlParsed.hasQuery() ? urlParsed.path() + "?" + urlParsed.query() : urlParsed.path());
-            const epee::net_utils::http::http_response_info *pri = NULL;
-            constexpr std::chrono::milliseconds timeout = std::chrono::seconds(15);
-
-            epee::net_utils::http::fields_list headers({{"User-Agent", randomUserAgent().toStdString()}});
-            if (!contentType.isEmpty())
-            {
-                headers.push_back({"Content-Type", contentType.toStdString()});
-            }
-            const bool result = httpClient.invoke(uri.toStdString(), "GET", {}, timeout, std::addressof(pri), headers);
-
-            if (!result)
-            {
-                return QJSValueList({QJSValue(), QJSValue(), "unknown error"});
-            }
-            if (!pri)
-            {
-                return QJSValueList({QJSValue(), QJSValue(), "internal error (null response ptr)"});
-            }
-            if (pri->m_response_code != 200)
-            {
-                return QJSValueList({QJSValue(), QJSValue(), QString("response code: %1").arg(pri->m_response_code)});
-            }
-
-            return QJSValueList({url, QString::fromStdString(pri->m_body)});
+        [this, url, contentType] {
+            std::string response;
+            std::shared_ptr<http_simple_client> httpClient(new http_simple_client());
+            QString error = get(httpClient, url, response, contentType);
+            return QJSValueList({url, QString::fromStdString(response), error});
         },
         callback);
 }
@@ -89,4 +115,40 @@ void Network::get(const QString &url, const QJSValue &callback, const QString &c
 void Network::getJSON(const QString &url, const QJSValue &callback) const
 {
     get(url, callback, "application/json; charset=utf-8");
+}
+
+QString Network::get(
+    std::shared_ptr<http_simple_client> httpClient,
+    const QString &url,
+    std::string &response,
+    const QString &contentType /* = {} */) const
+{
+    const QUrl urlParsed(url);
+    httpClient->set_server(urlParsed.host().toStdString(), urlParsed.scheme() == "https" ? "443" : "80", {});
+
+    const QString uri = (urlParsed.hasQuery() ? urlParsed.path() + "?" + urlParsed.query() : urlParsed.path());
+    const http_response_info *pri = NULL;
+    constexpr std::chrono::milliseconds timeout = std::chrono::seconds(15);
+
+    fields_list headers({{"User-Agent", randomUserAgent().toStdString()}});
+    if (!contentType.isEmpty())
+    {
+        headers.push_back({"Content-Type", contentType.toStdString()});
+    }
+    const bool result = httpClient->invoke(uri.toStdString(), "GET", {}, timeout, std::addressof(pri), headers);
+    if (!result)
+    {
+        return "unknown error";
+    }
+    if (!pri)
+    {
+        return "internal error";
+    }
+    if (pri->m_response_code != 200)
+    {
+        return QString("response code %1").arg(pri->m_response_code);
+    }
+
+    response = std::move(pri->m_body);
+    return {};
 }

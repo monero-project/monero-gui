@@ -5,6 +5,7 @@
         <file>MiddlePanel.qml</file>
         <file>components/Label.qml</file>
         <file>components/SettingsListItem.qml</file>
+        <file>components/UpdateDialog.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
@@ -100,7 +101,6 @@
         <file>components/DaemonManagerDialog.qml</file>
         <file>version.js</file>
         <file>components/QRCodeScanner.qml</file>
-        <file>components/Notifier.qml</file>
         <file>components/TextBlock.qml</file>
         <file>components/RemoteNodeEdit.qml</file>
         <file>pages/Keys.qml</file>

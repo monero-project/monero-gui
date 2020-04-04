@@ -61,6 +61,7 @@
 #include "wallet/api/wallet2_api.h"
 #include "Logger.h"
 #include "MainApp.h"
+#include "qt/downloader.h"
 #include "qt/ipc.h"
 #include "qt/network.h"
 #include "qt/utils.h"
@@ -295,6 +296,7 @@ int main(int argc, char *argv[])
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
+    qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
 
     // Temporary Qt.labs.settings replacement
     qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
