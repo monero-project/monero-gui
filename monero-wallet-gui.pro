@@ -79,8 +79,8 @@ HEADERS += \
     src/qt/FutureScheduler.h \
     src/qt/ipc.h \
     src/qt/KeysFiles.h \
+    src/qt/network.h \
     src/qt/utils.h \
-    src/qt/prices.h \
     src/qt/macoshelper.h \
     src/qt/MoneroSettings.h \
     src/qt/TailsOS.h
@@ -115,8 +115,8 @@ SOURCES += src/main/main.cpp \
     src/qt/FutureScheduler.cpp \
     src/qt/ipc.cpp \
     src/qt/KeysFiles.cpp \
+    src/qt/network.cpp \
     src/qt/utils.cpp \
-    src/qt/prices.cpp \
     src/qt/MoneroSettings.cpp \
     src/qt/TailsOS.cpp
 
