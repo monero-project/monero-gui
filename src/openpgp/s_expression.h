@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,23 +26,53 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
-#include <QtCore>
-#include <QRegExp>
-#include <QApplication>
+#include <algorithm>
+#include <stdexcept>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-#ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app);
-void registerXdgMime(QApplication &app);
-#endif
-const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+#include <gcrypt.h>
 
-#endif // UTILS_H
+namespace openpgp
+{
+
+class s_expression
+{
+public:
+  s_expression(const s_expression &) = delete;
+  s_expression &operator=(const s_expression &) = delete;
+
+  template <typename... Args>
+  s_expression(Args... args)
+  {
+    if (gcry_sexp_build(&data, nullptr, args...) != GPG_ERR_NO_ERROR)
+    {
+      throw std::runtime_error("failed to build S-expression");
+    }
+  }
+
+  s_expression(s_expression &&other)
+  {
+    std::swap(data, other.data);
+  }
+
+  s_expression(gcry_sexp_t data)
+    : data(data)
+  {
+  }
+
+  ~s_expression()
+  {
+    gcry_sexp_release(data);
+  }
+
+  const gcry_sexp_t &get() const
+  {
+    return data;
+  }
+
+private:
+  gcry_sexp_t data = nullptr;
+};
+
+} // namespace openpgp
