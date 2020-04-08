@@ -369,8 +369,8 @@ if (NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_C_COMPILER_VERSION VER
 endif()
 
 # linker
-if (NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
-  # Windows binaries die on startup with PIE when compiled with GCC
+if (NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND CMAKE_C_COMPILER_VERSION VERSION_LESS 9.1)))
+  # Windows binaries die on startup with PIE when compiled with GCC <9.x
   add_linker_flag_if_supported(-pie LD_SECURITY_FLAGS)
 endif()
 add_linker_flag_if_supported(-Wl,-z,relro LD_SECURITY_FLAGS)
@@ -384,6 +384,13 @@ if (noexecheap_SUPPORTED)
   set(LD_SECURITY_FLAGS "${LD_SECURITY_FLAGS} -Wl,-z,noexecheap")
 endif()
 
+# some windows linker bits
+if (WIN32)
+  add_linker_flag_if_supported(-Wl,--dynamicbase LD_SECURITY_FLAGS)
+  add_linker_flag_if_supported(-Wl,--nxcompat LD_SECURITY_FLAGS)
+  add_linker_flag_if_supported(-Wl,--high-entropy-va LD_SECURITY_FLAGS)
+endif()
+
 if(STATIC)
   if(MINGW)
     add_linker_flag_if_supported(-static STATIC_FLAGS)
@@ -393,12 +400,17 @@ if(STATIC)
   endif()
 endif()
 
+# With GCC 6.1.1 the compiled binary malfunctions due to aliasing. Until that
+# is fixed in the code (Issue #847), force compiler to be conservative.
+add_c_flag_if_supported(-fno-strict-aliasing C_SECURITY_FLAGS)
+add_cxx_flag_if_supported(-fno-strict-aliasing CXX_SECURITY_FLAGS)
+
 message(STATUS "Using C security hardening flags: ${C_SECURITY_FLAGS}")
 message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")
 message(STATUS "Using linker security hardening flags: ${LD_SECURITY_FLAGS}")
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_SECURITY_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_SECURITY_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 ${C_SECURITY_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ${CXX_SECURITY_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LD_SECURITY_FLAGS} ${STATIC_FLAGS}")
 
 if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
