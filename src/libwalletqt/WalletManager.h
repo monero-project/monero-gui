@@ -38,13 +38,14 @@
 #include <QWaitCondition>
 #include "qt/FutureScheduler.h"
 #include "NetworkType.h"
+#include "PassphraseHelper.h"
 
 class Wallet;
 namespace Monero {
 struct WalletManager;
 }
 
-class WalletManager : public QObject
+class WalletManager : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ connected)
@@ -185,14 +186,14 @@ public:
     // clear/rename wallet cache
     Q_INVOKABLE bool clearWalletCache(const QString &fileName) const;
 
-    Q_INVOKABLE void onWalletPassphraseNeeded(Monero::Wallet * wallet);
-    Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool entry_abort=false);
+    Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
+    virtual void onWalletPassphraseNeeded(bool on_device) override;
 
 signals:
 
     void walletOpened(Wallet * wallet);
     void walletCreated(Wallet * wallet);
-    void walletPassphraseNeeded();
+    void walletPassphraseNeeded(bool onDevice);
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
     void checkUpdatesComplete(
@@ -216,12 +217,8 @@ private:
     Monero::WalletManager * m_pimpl;
     mutable QMutex m_mutex;
     QPointer<Wallet> m_currentWallet;
-
-    QWaitCondition m_cond_pass;
-    QMutex m_mutex_pass;
-    QString m_passphrase;
-    bool m_passphrase_abort;
-
+    PassphraseReceiver * m_passphraseReceiver;
+    QMutex m_mutex_passphraseReceiver;
     FutureScheduler m_scheduler;
 };
 

@@ -41,6 +41,8 @@
 #include "PendingTransaction.h" // we need to have an access to the PendingTransaction::Priority enum here;
 #include "UnsignedTransaction.h"
 #include "NetworkType.h"
+#include "PassphraseHelper.h"
+#include "WalletListenerImpl.h"
 
 namespace Monero {
 struct Wallet; // forward declaration
@@ -57,7 +59,7 @@ class SubaddressModel;
 class SubaddressAccount;
 class SubaddressAccountModel;
 
-class Wallet : public QObject
+class Wallet : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
@@ -348,6 +350,10 @@ public:
     Q_INVOKABLE void segregationHeight(quint64 height);
     Q_INVOKABLE void keyReuseMitigation2(bool mitigation);
 
+    // Passphrase entry for hardware wallets
+    Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
+    virtual void onWalletPassphraseNeeded(bool on_device) override;
+
     // TODO: setListenter() when it implemented in API
 signals:
     // emitted on every event happened with wallet
@@ -367,6 +373,7 @@ signals:
     void walletCreationHeightChanged();
     void deviceButtonRequest(quint64 buttonCode);
     void deviceButtonPressed();
+    void walletPassphraseNeeded(bool onDevice);
     void transactionCommitted(bool status, PendingTransaction *t, const QStringList& txid);
     void heightRefreshed(quint64 walletHeight, quint64 daemonHeight, quint64 targetHeight) const;
     void deviceShowAddressShowed();
@@ -432,7 +439,7 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
-    Monero::WalletListener *m_walletListener;
+    WalletListenerImpl *m_walletListener;
     FutureScheduler m_scheduler;
     QMutex m_storeMutex;
 };

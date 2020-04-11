@@ -53,6 +53,7 @@ HEADERS += \
     src/main/oscursor.h \
     src/libwalletqt/WalletManager.h \
     src/libwalletqt/Wallet.h \
+    src/libwalletqt/PassphraseHelper.h \
     src/libwalletqt/PendingTransaction.h \
     src/libwalletqt/TransactionHistory.h \
     src/libwalletqt/TransactionInfo.h \
@@ -91,7 +92,9 @@ SOURCES += src/main/main.cpp \
     src/main/clipboardAdapter.cpp \
     src/main/oscursor.cpp \
     src/libwalletqt/WalletManager.cpp \
+    src/libwalletqt/WalletListenerImpl.cpp \
     src/libwalletqt/Wallet.cpp \
+    src/libwalletqt/PassphraseHelper.cpp \
     src/libwalletqt/PendingTransaction.cpp \
     src/libwalletqt/TransactionHistory.cpp \
     src/libwalletqt/TransactionInfo.cpp \

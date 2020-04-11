@@ -293,6 +293,7 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.disconnect(onWalletConnectionStatusChanged)
         currentWallet.deviceButtonRequest.disconnect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.disconnect(onDeviceButtonPressed);
+        currentWallet.walletPassphraseNeeded.disconnect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.disconnect(onTransactionCommitted);
         middlePanel.paymentClicked.disconnect(handlePayment);
         middlePanel.sweepUnmixableClicked.disconnect(handleSweepUnmixable);
@@ -360,6 +361,7 @@ ApplicationWindow {
         currentWallet.connectionStatusChanged.connect(onWalletConnectionStatusChanged)
         currentWallet.deviceButtonRequest.connect(onDeviceButtonRequest);
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
+        currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
@@ -558,19 +560,32 @@ ApplicationWindow {
         }
     }
 
-    function onWalletPassphraseNeeded(){
+    function onWalletPassphraseNeededManager(on_device){
+        onWalletPassphraseNeeded(walletManager, on_device)
+    }
+
+    function onWalletPassphraseNeededWallet(on_device){
+        onWalletPassphraseNeeded(currentWallet, on_device)
+    }
+
+    function onWalletPassphraseNeeded(handler, on_device){
         hideProcessingSplash();
 
         console.log(">>> wallet passphrase needed: ")
-        passwordDialog.onAcceptedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered(passwordDialog.password);
+        devicePassphraseDialog.onAcceptedCallback = function(passphrase) {
+            handler.onPassphraseEntered(passphrase, false, false);
             appWindow.onWalletOpening();
         }
-        passwordDialog.onRejectedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered("", true);
+        devicePassphraseDialog.onWalletEntryCallback = function() {
+            handler.onPassphraseEntered("", true, false);
             appWindow.onWalletOpening();
         }
-        passwordDialog.openPassphraseDialog()
+        devicePassphraseDialog.onRejectedCallback = function() {
+            handler.onPassphraseEntered("", false, true);
+            appWindow.onWalletOpening();
+        }
+
+        devicePassphraseDialog.open(on_device)
     }
 
     function onWalletUpdate() {
@@ -1295,7 +1310,7 @@ ApplicationWindow {
         walletManager.deviceButtonRequest.connect(onDeviceButtonRequest);
         walletManager.deviceButtonPressed.connect(onDeviceButtonPressed);
         walletManager.checkUpdatesComplete.connect(onWalletCheckUpdatesComplete);
-        walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeeded);
+        walletManager.walletPassphraseNeeded.connect(onWalletPassphraseNeededManager);
         IPC.uriHandler.connect(onUriHandler);
 
         if(typeof daemonManager != "undefined") {
@@ -1512,8 +1527,6 @@ ApplicationWindow {
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
-        property var onAcceptedPassphraseCallback
-        property var onRejectedPassphraseCallback
         onAccepted: {
             if (onAcceptedCallback)
                 onAcceptedCallback();
@@ -1537,14 +1550,13 @@ ApplicationWindow {
             informationPopup.open();
         }
         onRejectedNewPassword: {}
-        onAcceptedPassphrase: {
-            if (onAcceptedPassphraseCallback)
-                onAcceptedPassphraseCallback();
-        }
-        onRejectedPassphrase: {
-            if (onRejectedPassphraseCallback)
-                onRejectedPassphraseCallback();
-        }
+    }
+
+    DevicePassphraseDialog {
+        id: devicePassphraseDialog
+        visible: false
+        z: parent.z + 1
+        anchors.fill: parent
     }
 
     InputDialog {
@@ -1708,7 +1720,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible
         }
 
 

@@ -490,19 +490,24 @@ Rectangle {
         walletCreatedFromDevice(success);
     }
 
-    function onWalletPassphraseNeeded(){
+    function onWalletPassphraseNeeded(on_device){
         splash.close()
 
         console.log(">>> wallet passphrase needed: ");
-        passwordDialog.onAcceptedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered(passwordDialog.password);
+        devicePassphraseDialog.onAcceptedCallback = function(passphrase) {
+            walletManager.onPassphraseEntered(passphrase, false, false);
             creatingWalletDeviceSplash();
         }
-        passwordDialog.onRejectedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered("", true);
+        devicePassphraseDialog.onWalletEntryCallback = function() {
+            walletManager.onPassphraseEntered("", true, false);
             creatingWalletDeviceSplash();
         }
-        passwordDialog.openPassphraseDialog()
+        devicePassphraseDialog.onRejectedCallback = function() {
+            walletManager.onPassphraseEntered("", false, true);
+            creatingWalletDeviceSplash();
+        }
+
+        devicePassphraseDialog.open(on_device)
     }
 
     function onDeviceButtonRequest(code){
