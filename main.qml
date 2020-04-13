@@ -1436,6 +1436,14 @@ ApplicationWindow {
         }
     }
 
+    MoneroComponents.UpdateDialog {
+        id: updateDialog
+
+        allowed: !passwordDialog.visible && !inputDialog.visible && !splash.visible
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+    }
+
     // Choose blockchain folder
     FileDialog {
         id: blockchainFileDialog
@@ -1691,7 +1699,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible
         }
 
 
@@ -1797,11 +1805,6 @@ ApplicationWindow {
                 font.pixelSize: 12
                 color: "#FFFFFF"
             }
-        }
-
-        Notifier {
-            visible:false
-            id: notifier
         }
     }
 
@@ -1981,16 +1984,7 @@ ApplicationWindow {
         print("Update found: " + update)
         var parts = update.split("|")
         if (parts.length == 4) {
-            var version = parts[0]
-            var hash = parts[1]
-            var user_url = parts[2]
-            var msg = qsTr("New version of Monero v%1 is available.").arg(version)
-            if (isMac || isWindows || isLinux) {
-                msg += "<br><br>%1:<br>%2<br><br>%3:<br>%4".arg(qsTr("Download")).arg(user_url).arg(qsTr("SHA256 Hash")).arg(hash) + translationManager.emptyString
-            } else {
-                msg += " " + qsTr("Check out getmonero.org") + translationManager.emptyString
-            }
-            notifier.show(msg)
+            updateDialog.show(parts[0], isMac || isWindows || isLinux ? parts[3] : "");
         } else {
             print("Failed to parse update spec")
         }
@@ -2101,6 +2095,11 @@ ApplicationWindow {
             targetObj: parent
             blackColor: "black"
             whiteColor: "white"
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
         }
     }
 

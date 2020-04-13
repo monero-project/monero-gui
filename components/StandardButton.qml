@@ -33,11 +33,17 @@ import "../components" as MoneroComponents
 
 Item {
     id: button
+    property bool primary: true
     property string rightIcon: ""
     property string rightIconInactive: ""
-    property string textColor: button.enabled? MoneroComponents.Style.buttonTextColor: MoneroComponents.Style.buttonTextColorDisabled
+    property color textColor: !button.enabled
+        ? MoneroComponents.Style.buttonTextColorDisabled
+        : primary
+        ? MoneroComponents.Style.buttonTextColor
+        : MoneroComponents.Style.buttonSecondaryTextColor;
     property bool small: false
     property alias text: label.text
+    property alias fontBold: label.font.bold
     property int fontSize: {
         if(small) return 14;
         else return 16;
@@ -70,7 +76,9 @@ Item {
                 when: buttonArea.containsMouse || button.focus
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColorHover
+                    color: primary
+                        ? MoneroComponents.Style.buttonBackgroundColorHover
+                        : MoneroComponents.Style.buttonSecondaryBackgroundColorHover
                 }
             },
             State {
@@ -78,7 +86,9 @@ Item {
                 when: button.enabled
                 PropertyChanges {
                     target: buttonRect
-                    color: MoneroComponents.Style.buttonBackgroundColor
+                    color: primary
+                        ? MoneroComponents.Style.buttonBackgroundColor
+                        : MoneroComponents.Style.buttonSecondaryBackgroundColor
                 }
             },
             State {

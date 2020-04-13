@@ -1,21 +1,21 @@
-// Copyright (c) 2017-2018, The Monero Project
-// 
+// Copyright (c) 2020, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -26,60 +26,42 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import QtQuick 2.9
-import QtQuick.Controls 1.4
-import moneroComponents.Wallet 1.0
-import "." as MoneroComponents
+#pragma once
 
-Item {
-    id: item
-    property string message: ""
-    property bool active: false
-    height: 180
-    width: 320
-    property int margin: 15
-    x: parent.width - width - margin
-    y: parent.height - height * scale.yScale - margin * scale.yScale
+#include <QReadWriteLock>
 
-    Rectangle {
-        color: "#FF6C3C"
-        border.color: "black"
-        anchors.fill: parent
+#include "network.h"
 
-        TextArea {
-            id:versionText
-            readOnly: true
-            backgroundVisible: false
-            textFormat: TextEdit.AutoText
-            anchors.fill: parent
-            font.family: MoneroComponents.Style.fontRegular.name
-            font.pixelSize: 12
-            textMargin: 20
-            textColor: "white"
-            text: item.message
-            wrapMode: Text.WrapAnywhere
-        }
-    }
+class Downloader : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(bool active READ active NOTIFY activeChanged);
+    Q_PROPERTY(quint64 loaded READ loaded NOTIFY loadedChanged);
+    Q_PROPERTY(quint64 total READ total NOTIFY totalChanged);
 
-    transform: Scale {
-        id: scale
-        yScale: item.active ? 1 : 0
+public:
+    Downloader(QObject *parent = nullptr);
+    ~Downloader();
 
-        Behavior on yScale {
-            NumberAnimation { duration: 500; easing.type: Easing.InOutCubic }
-        }
-    }
+    Q_INVOKABLE void cancel();
+    Q_INVOKABLE bool get(const QString &url, const QJSValue &callback);
+    Q_INVOKABLE bool saveToFile(const QString &path) const;
 
-    Timer {
-        id: hider
-        interval: 30000; running: false; repeat: false
-        onTriggered: { item.active = false }
-    }
+signals:
+    void activeChanged() const;
+    void loadedChanged() const;
+    void totalChanged() const;
 
-    function show(message) {
-        item.visible = true
-        item.message = message
-        item.active = true
-        hider.running = true
-    }
-}
+private:
+    bool active() const;
+    quint64 loaded() const;
+    quint64 total() const;
+
+private:
+    bool m_active;
+    std::string m_contents;
+    std::shared_ptr<HttpClient> m_httpClient;
+    mutable QReadWriteLock m_mutex;
+    Network m_network;
+    mutable FutureScheduler m_scheduler;
+};

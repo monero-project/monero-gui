@@ -27,6 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "oshelper.h"
+#include <QFileDialog>
+#include <QStandardPaths>
 #include <QTemporaryFile>
 #include <QDir>
 #include <QDebug>
@@ -82,6 +84,11 @@ OSHelper::OSHelper(QObject *parent) : QObject(parent)
 
 }
 
+QString OSHelper::downloadLocation() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+}
+
 bool OSHelper::openContainingFolder(const QString &filePath) const
 {
 #if defined(Q_OS_WIN)
@@ -103,6 +110,12 @@ bool OSHelper::openContainingFolder(const QString &filePath) const
         return false;
     }
     return QDesktopServices::openUrl(url);
+}
+
+QString OSHelper::openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const
+{
+    const QString hint = (folder.isEmpty() ? "" : folder + QDir::separator()) + filename;
+    return QFileDialog::getSaveFileName(nullptr, title, hint);
 }
 
 QString OSHelper::temporaryFilename() const
