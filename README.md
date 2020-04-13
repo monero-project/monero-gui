@@ -62,6 +62,11 @@ Do you speak a second language and would like to help translate the Monero GUI? 
 
 If you need help/support or any info you can contact the localization workgroup on the IRC channel #monero-translations (relayed on matrix/riot and MatterMost) or by email at translate[at]getmonero[dot]org. For more info about the Localization workgroup: [github.com/monero-ecosystem/monero-translations](https://github.com/monero-ecosystem/monero-translations)
 
+Status of the translations:  
+<a href="https://translate.getmonero.org/engage/monero/?utm_source=widget">
+<img src="https://translate.getmonero.org/widgets/monero/-/gui-wallet/horizontal-auto.svg" alt="Translation status" />
+</a>
+
 ## Installing the Monero GUI from a package
 
 Packages are available for
