@@ -64,7 +64,6 @@ Rectangle {
     signal addressBookClicked()
     signal miningClicked()
     signal signClicked()
-    signal merchantClicked()
     signal accountClicked()
 
     function selectItem(pos) {
@@ -72,7 +71,6 @@ Rectangle {
         if(pos === "History") menuColumn.previousButton = historyButton
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
         else if(pos === "Receive")  menuColumn.previousButton = receiveButton
-        else if(pos === "Merchant")  menuColumn.previousButton = merchantButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
         else if(pos === "Mining") menuColumn.previousButton = miningButton
         else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
@@ -449,30 +447,6 @@ Rectangle {
 
             MoneroComponents.MenuButtonDivider {
                 visible: receiveButton.present
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- Merchant tab ---------------
-
-            MoneroComponents.MenuButton {
-                id: merchantButton
-                visible: appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Merchant") + translationManager.emptyString
-                symbol: qsTr("U") + translationManager.emptyString
-                under: receiveButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = merchantButton
-                    panel.merchantClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: merchantButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20

@@ -149,6 +149,7 @@ Object {
     property string caretUp : "\uf0d8"
     property string cartArrowDown : "\uf218"
     property string cartPlus : "\uf217"
+    property string cashRegister: "\uf788"
     property string cc : "\uf20a"
     property string ccAmex : "\uf1f3"
     property string ccDinersClub : "\uf24c"
