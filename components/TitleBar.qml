@@ -309,8 +309,8 @@ Rectangle {
                 width: 16
                 image: MoneroComponents.Style.titleBarCloseSource
                 color: MoneroComponents.Style.defaultFontColor
-                fontAwesomeFallbackIcon: FontAwesome.timesRectangle
-                fontAwesomeFallbackSize: 18
+                fontAwesomeFallbackIcon: FontAwesome.times
+                fontAwesomeFallbackSize: 21
                 fontAwesomeFallbackOpacity: MoneroComponents.Style.blackTheme ? 0.8 : 0.6
                 opacity: 0.75
             }
