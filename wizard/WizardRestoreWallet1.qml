@@ -164,8 +164,8 @@ Rectangle {
             ColumnLayout {
                 // seed textarea
                 visible: wizardController.walletRestoreMode === 'seed'
-                Layout.preferredHeight: 100
                 Layout.fillWidth: true
+                spacing: 10
 
                 Rectangle {
                     color: "transparent"
@@ -216,6 +216,20 @@ Rectangle {
                             visible: !seedInput.text
                         }
                     }
+                }
+
+                MoneroComponents.CheckBox2 {
+                    id: seedOffsetCheckbox
+                    text: qsTr("Seed offset passphrase (optional)") + translationManager.emptyString
+                }
+
+                MoneroComponents.LineEdit {
+                    id: seedOffset
+                    echoMode: TextInput.Password
+                    Layout.fillWidth: true
+                    placeholderFontSize: 16
+                    placeholderText: qsTr("Passphrase") + translationManager.emptyString
+                    visible: seedOffsetCheckbox.checked
                 }
             }
 
@@ -294,6 +308,7 @@ Rectangle {
                     switch (wizardController.walletRestoreMode) {
                         case 'seed':
                             wizardController.walletOptionsSeed = seedInput.text;
+                            wizardController.walletOptionsSeedOffset = seedOffsetCheckbox.checked ? seedOffset.text : "";
                             break;
                         default: // walletRestoreMode = keys or qr
                             wizardController.walletOptionsRecoverAddress = addressLine.text;
@@ -325,6 +340,8 @@ Rectangle {
             // cleanup
             wizardWalletInput.reset();
             seedInput.text = "";
+            seedOffsetCheckbox.checked = false;
+            seedOffset.text = "";
             addressLine.text = "";
             spendKeyLine.text = "";
             viewKeyLine.text = "";

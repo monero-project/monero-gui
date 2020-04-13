@@ -151,14 +151,14 @@ void WalletManager::openWalletAsync(const QString &path, const QString &password
 }
 
 
-Wallet *WalletManager::recoveryWallet(const QString &path, const QString &memo, NetworkType::Type nettype, quint64 restoreHeight, quint64 kdfRounds)
+Wallet *WalletManager::recoveryWallet(const QString &path, const QString &seed, const QString &seed_offset, NetworkType::Type nettype, quint64 restoreHeight, quint64 kdfRounds)
 {
     QMutexLocker locker(&m_mutex);
     if (m_currentWallet) {
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
         delete m_currentWallet;
     }
-    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), "", memo.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds);
+    Monero::Wallet * w = m_pimpl->recoveryWallet(path.toStdString(), "", seed.toStdString(), static_cast<Monero::NetworkType>(nettype), restoreHeight, kdfRounds, seed_offset.toStdString());
     m_currentWallet = new Wallet(w);
     return m_currentWallet;
 }
