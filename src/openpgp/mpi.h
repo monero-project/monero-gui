@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,23 +26,53 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
-#include <QtCore>
-#include <QRegExp>
-#include <QApplication>
+#include <gcrypt.h>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-#ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app);
-void registerXdgMime(QApplication &app);
-#endif
-const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+namespace openpgp
+{
 
-#endif // UTILS_H
+class mpi
+{
+public:
+  mpi(const mpi &) = delete;
+  mpi &operator=(const mpi &) = delete;
+
+  mpi(mpi &&other)
+    : data(other.data)
+  {
+    other.data = nullptr;
+  }
+
+  template <
+    typename byte_container,
+    typename = typename std::enable_if<(sizeof(typename byte_container::value_type) == 1)>::type>
+  mpi(const byte_container &buffer, gcry_mpi_format format = GCRYMPI_FMT_USG)
+    : mpi(&buffer[0], buffer.size(), format)
+  {
+  }
+
+  mpi(const void *buffer, size_t size, gcry_mpi_format format = GCRYMPI_FMT_USG)
+  {
+    if (gcry_mpi_scan(&data, format, buffer, size, nullptr) != GPG_ERR_NO_ERROR)
+    {
+      throw std::runtime_error("failed to read mpi from buffer");
+    }
+  }
+
+  ~mpi()
+  {
+    gcry_mpi_release(data);
+  }
+
+  const gcry_mpi_t &get() const
+  {
+    return data;
+  }
+
+private:
+  gcry_mpi_t data;
+};
+
+} // namespace openpgp

@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,23 +26,51 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
-#include <QtCore>
-#include <QRegExp>
-#include <QApplication>
+#include <vector>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-#ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app);
-void registerXdgMime(QApplication &app);
-#endif
-const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+#include <span.h>
 
-#endif // UTILS_H
+#include "serialization.h"
+
+namespace openpgp
+{
+
+class packet_stream
+{
+public:
+  packet_stream(const epee::span<const uint8_t> buffer)
+    : packet_stream(deserializer<epee::span<const uint8_t>>(buffer))
+  {
+  }
+
+  template <
+    typename byte_container,
+    typename = typename std::enable_if<(sizeof(typename byte_container::value_type) == 1)>::type>
+  packet_stream(deserializer<byte_container> buffer)
+  {
+    while (!buffer.empty())
+    {
+      packet_tag tag = buffer.read_packet_tag();
+      packets.push_back({std::move(tag), buffer.read(tag.length)});
+    }
+  }
+
+  const std::vector<uint8_t> *find_first(packet_tag::type type) const
+  {
+    for (const auto &packet : packets)
+    {
+      if (packet.first.packet_type == type)
+      {
+        return &packet.second;
+      }
+    }
+    return nullptr;
+  }
+
+private:
+  std::vector<std::pair<packet_tag, std::vector<uint8_t>>> packets;
+};
+
+} // namespace openpgp

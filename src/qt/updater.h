@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,23 +26,30 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
-#include <QtCore>
-#include <QRegExp>
-#include <QApplication>
+#include <QPair>
 
-bool fileExists(QString path);
-QByteArray fileGetContents(QString path);
-QByteArray fileOpen(QString path);
-bool fileWrite(QString path, QString data);
-QString getAccountName();
-#ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app);
-void registerXdgMime(QApplication &app);
-#endif
-const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
-QString randomUserAgent();
+#include <openpgp/openpgp.h>
 
-#endif // UTILS_H
+class Updater
+{
+public:
+    Updater();
+
+    QPair<QString, QString> verifySignaturesAndHashSum(
+        const QByteArray &armoredSignedHashes,
+        const QByteArray &secondDetachedSignature,
+        const QString &binaryFilename,
+        const void *binaryData,
+        size_t binarySize) const;
+
+private:
+    QByteArray getHash(const void *data, size_t size) const;
+    QString verifySignature(const QByteArray &armoredSignedMessage, QString &signer) const;
+    QString verifySignature(const epee::span<const uint8_t> data, const openpgp::signature_rsa &signature) const;
+    QByteArray parseShasumOutput(const QString &message, const QString &filename) const;
+
+private:
+    std::vector<openpgp::public_key_rsa> m_maintainers;
+};

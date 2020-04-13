@@ -10,6 +10,9 @@
         <file>images/whatIsIcon@2x.png</file>
         <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
+        <file>monero/utils/gpg_keys/binaryfate.asc</file>
+        <file>monero/utils/gpg_keys/fluffypony.asc</file>
+        <file>monero/utils/gpg_keys/luigi1111.asc</file>
         <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
         <file>pages/History.qml</file>
