@@ -250,6 +250,11 @@ public:
     //! deletes unsigned transaction and frees memory
     Q_INVOKABLE void disposeTransaction(UnsignedTransaction * t);
 
+    Q_INVOKABLE void estimateTransactionFeeAsync(const QString &destination,
+                                                 quint64 amount,
+                                                 PendingTransaction::Priority priority,
+                                                 const QJSValue &callback);
+
     //! returns transaction history
     TransactionHistory * history() const;
 

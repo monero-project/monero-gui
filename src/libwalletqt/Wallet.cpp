@@ -600,6 +600,19 @@ void Wallet::disposeTransaction(UnsignedTransaction *t)
     delete t;
 }
 
+void Wallet::estimateTransactionFeeAsync(const QString &destination,
+                                         quint64 amount,
+                                         PendingTransaction::Priority priority,
+                                         const QJSValue &callback)
+{
+    m_scheduler.run([this, destination, amount, priority] {
+        const uint64_t fee = m_walletImpl->estimateTransactionFee(
+            {std::make_pair(destination.toStdString(), amount)},
+            static_cast<Monero::PendingTransaction::Priority>(priority));
+        return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
+    }, callback);
+}
+
 TransactionHistory *Wallet::history() const
 {
     return m_history;
