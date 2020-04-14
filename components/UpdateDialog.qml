@@ -37,11 +37,12 @@ import "../components" as MoneroComponents
 Popup {
     id: updateDialog
 
+    property bool active: false
     property bool allowed: true
     property string error: ""
     property string filename: ""
+    property string hash: ""
     property double progress: url && downloader.total > 0 ? downloader.loaded * 100 / downloader.total : 0
-    property bool active: false
     property string url: ""
     property bool valid: false
     property string version: ""
@@ -55,8 +56,9 @@ Popup {
     padding: 20
     visible: active && allowed
 
-    function show(version, url) {
+    function show(version, url, hash) {
         updateDialog.error = "";
+        updateDialog.hash = hash;
         updateDialog.url = url;
         updateDialog.valid = false;
         updateDialog.version = version;
@@ -86,7 +88,7 @@ Popup {
 
         Text {
             id: statusText
-            color: MoneroComponents.Style.defaultFontColor
+            color: updateDialog.valid ? MoneroComponents.Style.green : MoneroComponents.Style.defaultFontColor
             font.family: MoneroComponents.Style.fontRegular.name
             font.pixelSize: 18
             visible: !errorText.visible
@@ -102,9 +104,9 @@ Popup {
                         + translationManager.emptyString;
                 }
                 if (updateDialog.valid) {
-                    return qsTr("Download finished") + translationManager.emptyString;
+                    return qsTr("Update downloaded, signature verified") + translationManager.emptyString;
                 }
-                return qsTr("Do you want to download new version?") + translationManager.emptyString;
+                return qsTr("Do you want to download and verify new version?") + translationManager.emptyString;
             }
         }
 
@@ -156,8 +158,9 @@ Popup {
                 onClicked: {
                     updateDialog.error = "";
                     updateDialog.filename = updateDialog.url.replace(/^.*\//, '');
-                    const downloadingStarted = downloader.get(updateDialog.url, function(error) {
+                    const downloadingStarted = downloader.get(updateDialog.url, updateDialog.hash, function(error) {
                         if (error) {
+                            console.error("Download failed", error);
                             updateDialog.error = qsTr("Download failed") + translationManager.emptyString;
                         } else {
                             updateDialog.valid = true;
