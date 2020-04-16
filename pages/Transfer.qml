@@ -514,10 +514,9 @@ Rectangle {
         id: advancedLayout
         anchors.top: pageRoot.bottom
         anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: 20
         anchors.topMargin: 32
-        spacing: 26
+        spacing: 10
         enabled: !viewOnly || pageRoot.enabled
 
         RowLayout {
@@ -532,84 +531,88 @@ Rectangle {
             }
         }
 
-        GridLayout {
+        AdvancedOptionsItem {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
-            columns: 6
-
-            StandardButton {
-                id: sweepUnmixableButton
-                text: qsTr("Sweep Unmixable") + translationManager.emptyString
-                enabled : pageRoot.enabled
-                small: true
-                onClicked: {
-                    console.log("Transfer: sweepUnmixableClicked")
-                    root.sweepUnmixableClicked()
-                }
+            title: qsTr("Key images") + translationManager.emptyString
+            button1.text: qsTr("Export") + translationManager.emptyString
+            button1.enabled: !appWindow.viewOnly
+            button1.onClicked: {
+                console.log("Transfer: export key images clicked")
+                exportKeyImagesDialog.open();
             }
-
-            StandardButton {
-                id: saveTxButton
-                text: qsTr("Create tx file") + translationManager.emptyString
-                visible: appWindow.viewOnly
-                enabled: pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)
-                small: true
-                onClicked: {
-                    console.log("Transfer: saveTx Clicked")
-                    var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
-                    console.log("priority: " + priority)
-                    console.log("amount: " + amountLine.text)
-                    addressLine.text = addressLine.text.trim()
-                    setPaymentId(paymentIdLine.text.trim());
-                    root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
-
-                }
+            button2.text: qsTr("Import") + translationManager.emptyString
+            button2.enabled: appWindow.viewOnly && appWindow.isTrustedDaemon()
+            button2.onClicked: {
+                console.log("Transfer: import key images clicked")
+                importKeyImagesDialog.open(); 
             }
+            helpTextLarge.text: qsTr("Required for view-only wallets to display the real balance") + translationManager.emptyString
+            helpTextSmall.text: {
+                var errorMessage = "";
+                if (appWindow.viewOnly && !appWindow.isTrustedDaemon()){
+                    errorMessage = "<p class='orange'>" + qsTr("* To import, you must connect to a local node or a trusted remote node") + "</p>";
+                }
+                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:#ffffff;} p.orange{color:#ff9323;}</style>" +
+                       "<p>" + qsTr("1. Using cold wallet, export the key images into a file") + "</p>" +
+                       "<p>" + qsTr("2. Using view-only wallet, import the key images file") + "</p>" +
+                       errorMessage + translationManager.emptyString
+            }
+            helpTextSmall.themeTransition: false
+        }
+        
+        AdvancedOptionsItem {
+            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
+            title: qsTr("Offline transaction signing") + translationManager.emptyString
+            button1.text: qsTr("Create") + translationManager.emptyString
+            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)
+            button1.onClicked: {
+                console.log("Transfer: saveTx Clicked")
+                var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
+                console.log("priority: " + priority)
+                console.log("amount: " + amountLine.text)
+                addressLine.text = addressLine.text.trim()
+                setPaymentId(paymentIdLine.text.trim());
+                root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
+            }
+            button2.text: qsTr("Sign (offline)") + translationManager.emptyString
+            button2.enabled: !appWindow.viewOnly
+            button2.onClicked: {
+                console.log("Transfer: sign tx clicked")
+                signTxDialog.open();
+            }
+            button3.text: qsTr("Submit") + translationManager.emptyString
+            button3.enabled: appWindow.viewOnly
+            button3.onClicked: {
+                console.log("Transfer: submit tx clicked")
+                submitTxDialog.open();
+            }
+            helpTextLarge.text: qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString
+            helpTextSmall.text: {
+                var errorMessage = "";
+                if (appWindow.viewOnly && !pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)){
+                    errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
+                }
+                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:#ffffff;} p.orange{color:#ff9323;}</style>" +
+                       "<p>"  + qsTr("1. Using view-only wallet, export the outputs into a file") +
+                       "<p>" + qsTr("2. Using cold wallet, import the outputs file and export the key images") + "</p>" +
+                       "<p>" + qsTr("3. Using view-only wallet, import the key images file and create a transaction file") + "</p>" +
+                       errorMessage +
+                       "<p>" + qsTr("4. Using cold wallet, sign your transaction file") + "</p>" +
+                       "<p>" + qsTr("5. Using view-only wallet, submit your signed transaction") + "</p>" + translationManager.emptyString
+            }
+            helpTextSmall.themeTransition: false
+        }
 
-            StandardButton {
-                id: signTxButton
-                text: qsTr("Sign tx file") + translationManager.emptyString
-                small: true
-                visible: !appWindow.viewOnly
-                onClicked: {
-                    console.log("Transfer: sign tx clicked")
-                    signTxDialog.open();
-                }
+        AdvancedOptionsItem {
+            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
+            title: qsTr("Unmixable outputs") + translationManager.emptyString
+            button1.text: qsTr("Sweep") + translationManager.emptyString
+            button1.enabled : pageRoot.enabled
+            button1.onClicked: {
+                console.log("Transfer: sweepUnmixableClicked")
+                root.sweepUnmixableClicked()
             }
-
-            StandardButton {
-                id: submitTxButton
-                text: qsTr("Submit tx file") + translationManager.emptyString
-                small: true
-                visible: appWindow.viewOnly
-                enabled: pageRoot.enabled
-                onClicked: {
-                    console.log("Transfer: submit tx clicked")
-                    submitTxDialog.open();
-                }
-            }
-            
-            StandardButton {
-                id: exportKeyImagesButton
-                text: qsTr("Export key images") + translationManager.emptyString
-                small: true
-                visible: !appWindow.viewOnly
-                enabled: pageRoot.enabled
-                onClicked: {
-                    console.log("Transfer: export key images clicked")
-                    exportKeyImagesDialog.open();
-                }
-            }
-
-            StandardButton {
-                id: importKeyImagesButton
-                text: qsTr("Import key images") + translationManager.emptyString
-                small: true
-                enabled: appWindow.viewOnly && appWindow.isTrustedDaemon()
-                onClicked: {
-                    console.log("Transfer: import key images clicked")
-                    importKeyImagesDialog.open();
-                }
-            }
+            helpTextLarge.text: qsTr("Create a transaction that spends old unmovable outputs") + translationManager.emptyString
         }
     }
 
