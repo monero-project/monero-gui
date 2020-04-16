@@ -735,6 +735,8 @@ ApplicationWindow {
 
         if(middlePanel.state == "History")
             middlePanel.historyView.update();
+
+        currentWallet.store();
     }
 
     function onWalletUnconfirmedMoneyReceived(txId, amount) {
