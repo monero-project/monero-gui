@@ -325,8 +325,6 @@ Rectangle {
                     if (!parsed.error) {
                         addressLine.text = parsed.address;
                         descriptionLine.text = parsed.tx_description;
-                    } else {
-                        addressLine.text = clipboardText;
                     }
                 }
 
