@@ -231,6 +231,14 @@ CONFIG(WITH_SCANNER) {
             LIBS += -lzbarjni -liconv
         } else {
             LIBS += -lzbar
+            macx {
+                ZBAR_DIR = $$system(brew --prefix zbar, lines, EXIT_CODE)
+                equals(EXIT_CODE, 0) {
+                    INCLUDEPATH += $$ZBAR_DIR/include
+                } else {
+                    INCLUDEPATH += /usr/local/include
+                }
+            }
         }
     } else {
         message("Skipping camera scanner because of Incompatible Qt Version !")
