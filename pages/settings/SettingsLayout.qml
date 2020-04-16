@@ -78,6 +78,13 @@ Rectangle {
                 persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
             }
         }
+        
+        MoneroComponents.CheckBox {
+            id: askPasswordBeforeSendingCheckbox
+            checked: persistentSettings.askPasswordBeforeSending
+            onClicked: persistentSettings.askPasswordBeforeSending = !persistentSettings.askPasswordBeforeSending
+            text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
+        }
 
         MoneroComponents.CheckBox {
             id: userInActivityCheckbox
