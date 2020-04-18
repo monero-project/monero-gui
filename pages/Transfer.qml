@@ -164,6 +164,108 @@ Rectangle {
           }
       }
 
+      // recipient address input
+      RowLayout {
+          id: addressLineRow
+          Layout.fillWidth: true
+
+          LineEditMulti {
+              id: addressLine
+              spacing: 0
+              inputPaddingRight: inlineButtonVisible && inlineButton2Visible ? 100 : 60
+              fontBold: true
+              labelText: qsTr("Address") + translationManager.emptyString
+              labelButtonText: qsTr("Resolve") + translationManager.emptyString
+              placeholderText: {
+                  if(persistentSettings.nettype == NetworkType.MAINNET){
+                      return "4.. / 8.. / OpenAlias";
+                  } else if (persistentSettings.nettype == NetworkType.STAGENET){
+                      return "5.. / 7..";
+                  } else if(persistentSettings.nettype == NetworkType.TESTNET){
+                      return "9.. / B..";
+                  }
+              }
+              wrapMode: Text.WrapAnywhere
+              addressValidation: true
+              onTextChanged: {
+                  const parsed = walletManager.parse_uri_to_object(text);
+                  if (!parsed.error) {
+                    addressLine.text = parsed.address;
+                    setPaymentId(parsed.payment_id);
+                    amountLine.text = parsed.amount;
+                    setDescription(parsed.tx_description);
+                  }
+              }
+              inlineButton.text: FontAwesome.addressBook
+              inlineButton.buttonHeight: 30
+              inlineButton.fontPixelSize: 22
+              inlineButton.fontFamily: FontAwesome.fontFamily
+              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
+              inlineButton.onClicked: {
+                  middlePanel.addressBookView.selectAndSend = true;
+                  appWindow.showPageRequest("AddressBook");
+              }
+              inlineButtonVisible: true
+              
+              inlineButton2.text: FontAwesome.qrcode
+              inlineButton2.buttonHeight: 30
+              inlineButton2.fontPixelSize: 22
+              inlineButton2.fontFamily: FontAwesome.fontFamily
+              inlineButton2.textColor: MoneroComponents.Style.defaultFontColor
+              inlineButton2.onClicked: {
+                   cameraUi.state = "Capture"
+                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
+              inlineButton2Visible: appWindow.qrScannerEnabled
+          }
+      }
+
+      StandardButton {
+          id: resolveButton
+          width: 80
+          text: qsTr("Resolve") + translationManager.emptyString
+          visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
+          enabled : visible
+          onClicked: {
+              var result = walletManager.resolveOpenAlias(addressLine.text)
+              if (result) {
+                  var parts = result.split("|")
+                  if (parts.length == 2) {
+                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
+                      if (parts[0] === "true") {
+                          if (address_ok) {
+                              // prepend openalias to description
+                              descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
+                              descriptionCheckbox.checked = true
+                              addressLine.text = parts[1]
+                          }
+                          else
+                              oa_message(qsTr("No valid address found at this OpenAlias address"))
+                      }
+                      else if (parts[0] === "false") {
+                            if (address_ok) {
+                                addressLine.text = parts[1]
+                                oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                            }
+                            else
+                            {
+                                oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                            }
+                      }
+                      else {
+                          oa_message(qsTr("Internal error"))
+                      }
+                  }
+                  else {
+                      oa_message(qsTr("Internal error"))
+                  }
+              }
+              else {
+                  oa_message(qsTr("No address found"))
+              }
+          }
+      }
+
       GridLayout {
           columns: appWindow.walletMode < 2 ? 1 : 2
           Layout.fillWidth: true
@@ -295,108 +397,6 @@ Rectangle {
                   id: priorityDropdown
                   Layout.topMargin: 5
                   currentIndex: 0
-              }
-          }
-      }
-
-      // recipient address input
-      RowLayout {
-          id: addressLineRow
-          Layout.fillWidth: true
-
-          LineEditMulti {
-              id: addressLine
-              spacing: 0
-              inputPaddingRight: inlineButtonVisible && inlineButton2Visible ? 100 : 60
-              fontBold: true
-              labelText: qsTr("Address") + translationManager.emptyString
-              labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: {
-                  if(persistentSettings.nettype == NetworkType.MAINNET){
-                      return "4.. / 8.. / OpenAlias";
-                  } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                      return "5.. / 7..";
-                  } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                      return "9.. / B..";
-                  }
-              }
-              wrapMode: Text.WrapAnywhere
-              addressValidation: true
-              onTextChanged: {
-                  const parsed = walletManager.parse_uri_to_object(text);
-                  if (!parsed.error) {
-                    addressLine.text = parsed.address;
-                    setPaymentId(parsed.payment_id);
-                    amountLine.text = parsed.amount;
-                    setDescription(parsed.tx_description);
-                  }
-              }
-              inlineButton.text: FontAwesome.addressBook
-              inlineButton.buttonHeight: 30
-              inlineButton.fontPixelSize: 22
-              inlineButton.fontFamily: FontAwesome.fontFamily
-              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton.onClicked: {
-                  middlePanel.addressBookView.selectAndSend = true;
-                  appWindow.showPageRequest("AddressBook");
-              }
-              inlineButtonVisible: true
-              
-              inlineButton2.text: FontAwesome.qrcode
-              inlineButton2.buttonHeight: 30
-              inlineButton2.fontPixelSize: 22
-              inlineButton2.fontFamily: FontAwesome.fontFamily
-              inlineButton2.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton2.onClicked: {
-                   cameraUi.state = "Capture"
-                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
-              }
-              inlineButton2Visible: appWindow.qrScannerEnabled
-          }
-      }
-
-      StandardButton {
-          id: resolveButton
-          width: 80
-          text: qsTr("Resolve") + translationManager.emptyString
-          visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
-          enabled : visible
-          onClicked: {
-              var result = walletManager.resolveOpenAlias(addressLine.text)
-              if (result) {
-                  var parts = result.split("|")
-                  if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                      if (parts[0] === "true") {
-                          if (address_ok) {
-                              // prepend openalias to description
-                              descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
-                              descriptionCheckbox.checked = true
-                              addressLine.text = parts[1]
-                          }
-                          else
-                              oa_message(qsTr("No valid address found at this OpenAlias address"))
-                      }
-                      else if (parts[0] === "false") {
-                            if (address_ok) {
-                                addressLine.text = parts[1]
-                                oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
-                            }
-                            else
-                            {
-                                oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                            }
-                      }
-                      else {
-                          oa_message(qsTr("Internal error"))
-                      }
-                  }
-                  else {
-                      oa_message(qsTr("Internal error"))
-                  }
-              }
-              else {
-                  oa_message(qsTr("No address found"))
               }
           }
       }
