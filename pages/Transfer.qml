@@ -307,10 +307,9 @@ Rectangle {
           LineEditMulti {
               id: addressLine
               spacing: 0
+              inputPaddingRight: inlineButtonVisible && inlineButton2Visible ? 100 : 60
               fontBold: true
-              labelText: qsTr("<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                %1 <a href='#'>(%2)</a>").arg(qsTr("Address")).arg(qsTr("Address book"))
-                + translationManager.emptyString
+              labelText: qsTr("Address") + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
               placeholderText: {
                   if(persistentSettings.nettype == NetworkType.MAINNET){
@@ -323,10 +322,6 @@ Rectangle {
               }
               wrapMode: Text.WrapAnywhere
               addressValidation: true
-              onInputLabelLinkActivated: {
-                  middlePanel.addressBookView.selectAndSend = true;
-                  appWindow.showPageRequest("AddressBook");
-              }
               onTextChanged: {
                   const parsed = walletManager.parse_uri_to_object(text);
                   if (!parsed.error) {
@@ -336,16 +331,27 @@ Rectangle {
                     setDescription(parsed.tx_description);
                   }
               }
-              inlineButton.text: FontAwesome.qrcode
+              inlineButton.text: FontAwesome.addressBook
+              inlineButton.buttonHeight: 30
               inlineButton.fontPixelSize: 22
               inlineButton.fontFamily: FontAwesome.fontFamily
               inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton.buttonColor: MoneroComponents.Style.orange
               inlineButton.onClicked: {
-                  cameraUi.state = "Capture"
-                  cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                  middlePanel.addressBookView.selectAndSend = true;
+                  appWindow.showPageRequest("AddressBook");
               }
-              inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
+              inlineButtonVisible: true
+              
+              inlineButton2.text: FontAwesome.qrcode
+              inlineButton2.buttonHeight: 30
+              inlineButton2.fontPixelSize: 22
+              inlineButton2.fontFamily: FontAwesome.fontFamily
+              inlineButton2.textColor: MoneroComponents.Style.defaultFontColor
+              inlineButton2.onClicked: {
+                   cameraUi.state = "Capture"
+                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
+              }
+              inlineButton2Visible: appWindow.qrScannerEnabled
           }
       }
 

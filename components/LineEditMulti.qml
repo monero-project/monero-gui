@@ -87,6 +87,8 @@ ColumnLayout {
 
     property alias inlineButton: inlineButtonId
     property bool inlineButtonVisible: false
+    property alias inlineButton2: inlineButton2Id
+    property bool inlineButton2Visible: false
 
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
@@ -201,6 +203,13 @@ ColumnLayout {
             visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
             anchors.right: parent.right
             anchors.rightMargin: 8
+        }
+        
+        MoneroComponents.InlineButton {
+            id: inlineButton2Id
+            visible: (inlineButton2Id.text || inlineButton2Id.icon) && inlineButton2Visible ? true : false
+            anchors.right: parent.right
+            anchors.rightMargin: inlineButtonVisible ? 48 : 8
         }
     }
 }
