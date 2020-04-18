@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2020, The Monero Project
 //
 // All rights reserved.
 //
@@ -53,6 +53,7 @@ Rectangle {
                 script: {
 		    root.visible = true
                     camera.captureMode = Camera.CaptureStillImage
+                    camera.cameraState = Camera.ActiveState
                     camera.start()
                     finder.enabled = true
                 }
@@ -65,6 +66,7 @@ Rectangle {
                     camera.stop()
 		    root.visible = false
                     finder.enabled = false
+                    camera.cameraState = Camera.UnloadedState
                 }
             }
         }
@@ -74,6 +76,7 @@ Rectangle {
         id: camera
         objectName: "qrCameraQML"
         captureMode: Camera.CaptureStillImage
+        cameraState: Camera.UnloadedState
 
         focus {
             focusMode: Camera.FocusContinuous
