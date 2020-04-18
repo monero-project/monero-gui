@@ -116,7 +116,6 @@ Rectangle {
 
         MoneroComponents.SettingsListItem {
             iconText: FontAwesome.ellipsisH
-            isLast: true
             description: qsTr("Change the password of your wallet.") + translationManager.emptyString
             title: qsTr("Change wallet password") + translationManager.emptyString
 
@@ -135,6 +134,19 @@ Rectangle {
                 }
                 passwordDialog.onRejectedCallback = null;
                 passwordDialog.open()
+            }
+        }
+
+        MoneroComponents.SettingsListItem {
+            iconText: FontAwesome.cashRegister
+            isLast: true
+            description: qsTr("Receive Monero for your business, easily.") + translationManager.emptyString
+            title: qsTr("Enter merchant mode") + translationManager.emptyString
+
+            onClicked: {
+                middlePanel.state = "Merchant";
+                middlePanel.flickable.contentY = 0;
+                updateBalance();
             }
         }
     }
