@@ -80,7 +80,11 @@ bool QrScanThread::zimageFromQImage(const QImage &qimg, zbar::Image &dst)
     unsigned int bpl( qimg.bytesPerLine() ), width( bpl / 4), height( qimg.height());
     dst.set_size(width, height);
     dst.set_format("BGR4");
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    unsigned long datalen = qimg.sizeInBytes();
+#else
     unsigned long datalen = qimg.byteCount();
+#endif
     dst.set_data(qimg.bits(), datalen);
     if((width * 4 != bpl) || (width * height * 4 > datalen)){
         emit notifyError(QString("QImage to Zbar::Image failed !"));
