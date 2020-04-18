@@ -31,6 +31,8 @@
 #include <QReadLocker>
 #include <QWriteLocker>
 
+#include "updater.h"
+
 namespace
 {
 
@@ -112,10 +114,10 @@ void Downloader::cancel()
     m_contents.clear();
 }
 
-bool Downloader::get(const QString &url, const QJSValue &callback)
+bool Downloader::get(const QString &url, const QString &hash, const QJSValue &callback)
 {
     auto future = m_scheduler.run(
-        [this, url]() {
+        [this, url, hash]() {
             DownloaderStateGuard stateGuard(m_active, m_mutex, [this]() {
                 emit activeChanged();
             });
@@ -151,6 +153,19 @@ bool Downloader::get(const QString &url, const QJSValue &callback)
             if (response.empty())
             {
                 return QJSValueList({"empty response"});
+            }
+
+            try
+            {
+                const QByteArray calculatedHash = Updater().getHash(&response[0], response.size());
+                if (QByteArray::fromHex(hash.toUtf8()) != calculatedHash)
+                {
+                    return QJSValueList({"hash sum mismatch"});
+                }
+            }
+            catch (const std::exception &e)
+            {
+                return QJSValueList({e.what()});
             }
 
             {

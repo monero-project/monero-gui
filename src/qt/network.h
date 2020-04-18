@@ -77,6 +77,7 @@ public:
     Q_INVOKABLE void get(const QString &url, const QJSValue &callback, const QString &contentType = {}) const;
     Q_INVOKABLE void getJSON(const QString &url, const QJSValue &callback) const;
 
+    std::string get(const QString &url, const QString &contentType = {}) const;
     QString get(
         std::shared_ptr<epee::net_utils::http::http_simple_client> httpClient,
         const QString &url,

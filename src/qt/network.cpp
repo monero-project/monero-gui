@@ -117,6 +117,17 @@ void Network::getJSON(const QString &url, const QJSValue &callback) const
     get(url, callback, "application/json; charset=utf-8");
 }
 
+std::string Network::get(const QString &url, const QString &contentType /* = {} */) const
+{
+    std::string response;
+    QString error = get(std::shared_ptr<http_simple_client>(new http_simple_client()), url, response, contentType);
+    if (!error.isEmpty())
+    {
+        throw std::runtime_error(QString("failed to fetch %1: %2").arg(url).arg(error).toStdString());
+    }
+    return response;
+}
+
 QString Network::get(
     std::shared_ptr<http_simple_client> httpClient,
     const QString &url,

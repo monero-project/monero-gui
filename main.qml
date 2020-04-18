@@ -1972,15 +1972,11 @@ ApplicationWindow {
         closeWallet(Qt.quit);
     }
 
-    function onWalletCheckUpdatesComplete(update) {
-        if (update === "")
-            return
-        print("Update found: " + update)
-        var parts = update.split("|")
-        if (parts.length == 4) {
-            updateDialog.show(parts[0], isMac || isWindows || isLinux ? parts[3] : "");
-        } else {
-            print("Failed to parse update spec")
+    function onWalletCheckUpdatesComplete(version, downloadUrl, hash, firstSigner, secondSigner) {
+        const alreadyAsked = updateDialog.url == downloadUrl && updateDialog.hash == hash;
+        if (!alreadyAsked)
+        {
+            updateDialog.show(version, isMac || isWindows || isLinux ? downloadUrl : "", hash);
         }
     }
 

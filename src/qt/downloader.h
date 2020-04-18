@@ -44,7 +44,7 @@ public:
     ~Downloader();
 
     Q_INVOKABLE void cancel();
-    Q_INVOKABLE bool get(const QString &url, const QJSValue &callback);
+    Q_INVOKABLE bool get(const QString &url, const QString &hash, const QJSValue &callback);
     Q_INVOKABLE bool saveToFile(const QString &path) const;
 
 signals:
