@@ -159,7 +159,7 @@ Rectangle {
                     textFormat: TextEdit.RichText
                     selectByMouse: true
                     selectByKeyboard: true
-                    font.family: MoneroComponents.Style.defaultFontColor
+                    font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
                     wrapMode: TextEdit.Wrap
                     readOnly: true
