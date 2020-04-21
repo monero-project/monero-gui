@@ -56,8 +56,8 @@ Rectangle {
     property string sendButtonWarning: {
         // Currently opened wallet is not view-only
         if (appWindow.viewOnly) {
-            return qsTr("Wallet is view-only and sends are not possible. Unless key images are imported, " +
-                        "the balance reflects only incoming but not outgoing transactions.") + translationManager.emptyString;
+            return qsTr("Wallet is view-only and sends are only possible by using offline transaction signing. " +
+                        "Unless key images are imported, the balance reflects only incoming but not outgoing transactions.") + translationManager.emptyString;
         }
 
         // There are sufficient unlocked funds available
