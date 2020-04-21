@@ -544,7 +544,7 @@ Item {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: appWindow.showPageRequest("Receive")
+                        onClicked: appWindow.showPageRequest("Settings")
                     }
                 }
             }
