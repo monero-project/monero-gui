@@ -593,7 +593,6 @@ Item {
         var model = appWindow.currentWallet.historyModel
         var count = model.rowCount()
         var nTransactions = 0
-        var blockchainHeight = null
         var txs = []
 
         // Currently selected subaddress as per Receive page
@@ -616,15 +615,12 @@ Item {
 
                 var in_txpool = false;
                 var confirmations = 0;
-                var displayAmount = 0;
+                var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
 
-                if (blockHeight == 0) {
+                if (blockHeight === undefined) {
                     in_txpool = true;
                 } else {
-                    if (blockchainHeight == null)
-                        blockchainHeight = walletManager.blockchainHeight()
-                    confirmations = blockchainHeight - blockHeight - 1
-                    displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
+                    confirmations = model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
                 }
 
                 txs.push({
