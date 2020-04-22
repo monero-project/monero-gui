@@ -191,7 +191,6 @@
         <file>wizard/WizardHeader.qml</file>
         <file>wizard/WizardHome.qml</file>
         <file>wizard/WizardLanguage.qml</file>
-        <file>wizard/WizardLang.qml</file>
         <file>wizard/WizardNav.qml</file>
         <file>wizard/WizardWalletInput.qml</file>
         <file>wizard/WizardRestoreWallet1.qml</file>
