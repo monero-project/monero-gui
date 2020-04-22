@@ -592,7 +592,6 @@ Item {
 
         var model = appWindow.currentWallet.historyModel
         var count = model.rowCount()
-        var totalAmount = 0
         var nTransactions = 0
         var blockchainHeight = null
         var txs = []
@@ -610,8 +609,6 @@ Item {
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
 
             if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == current_subaddress_table_index) {
-                var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
-                totalAmount = walletManager.addi(totalAmount, amount)
                 nTransactions += 1
 
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
@@ -633,7 +630,6 @@ Item {
                 txs.push({
                     "amount": displayAmount,
                     "confirmations": confirmations,
-                    "blockheight": blockHeight,
                     "in_txpool": in_txpool,
                     "txid": txid,
                     "time_epoch": timeEpoch,
@@ -653,9 +649,7 @@ Item {
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
-                "blockheight": tx.blockheight,
                 "confirmations": tx.confirmations,
-                "blockheight": tx.blockHeight,
                 "in_txpool": tx.in_txpool,
                 "txid": tx.txid,
                 "time_epoch": tx.time_epoch,
