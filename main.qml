@@ -1367,6 +1367,7 @@ ApplicationWindow {
         property int segregationHeight: 0
         property int kdfRounds: 1
         property bool hideBalance: false
+        property bool askPasswordBeforeSending: true
         property bool lockOnUserInActivity: true
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
@@ -1402,21 +1403,28 @@ ApplicationWindow {
         z: parent.z + 1
         id: transactionConfirmationPopup
         onAccepted: {
+            var handleAccepted = function() {
+                // Save transaction to file if view only wallet
+                if (viewOnly) {
+                    saveTxDialog.open();
+                } else {
+                    handleTransactionConfirmed()
+                }
+            }
             close();
             passwordDialog.onAcceptedCallback = function() {
                 if(walletPassword === passwordDialog.password){
-                    // Save transaction to file if view only wallet
-                    if(viewOnly) {
-                        saveTxDialog.open();
-                    } else {
-                        handleTransactionConfirmed()
-                    }
+                    handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
             passwordDialog.onRejectedCallback = null;
-            passwordDialog.open()
+            if(!persistentSettings.askPasswordBeforeSending) {
+                handleAccepted()
+            } else {
+                passwordDialog.open()  
+            }
         }
     }
 
