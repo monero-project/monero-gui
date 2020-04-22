@@ -33,6 +33,9 @@ Item {
     property var    hiddenAmounts: []
 
     function onPageCompleted() {
+        if (appWindow.currentWallet) {
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
+        }
         // prepare tracking
         trackingCheckbox.checked = root.enableTracking
         root.update();
