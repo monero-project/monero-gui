@@ -216,7 +216,6 @@
         <file>images/local-node@2x.png</file>
         <file>images/local-node-full.png</file>
         <file>images/local-node-full@2x.png</file>
-        <file>wizard/WizardNavProgressDot.qml</file>
         <file>wizard/WizardOpenWallet1.qml</file>
         <file>images/arrow-right-in-circle.png</file>
         <file>images/arrow-right-in-circle@2x.png</file>
