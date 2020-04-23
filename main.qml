@@ -45,6 +45,7 @@ import "pages/merchant" as MoneroMerchant
 import "wizard"
 import "js/Utils.js" as Utils
 import "js/Windows.js" as Windows
+import "version.js" as Version
 
 ApplicationWindow {
     id: appWindow
@@ -1988,8 +1989,26 @@ ApplicationWindow {
         }
     }
 
+    function getBuildTag() {
+        if (isMac) {
+            return "mac-x64";
+        }
+        if (isWindows) {
+            return oshelper.installed ? "install-win-x64" : "win-x64";
+        }
+        if (isLinux) {
+            return "linux-x64";
+        }
+        return "source";
+    }
+
     function checkUpdates() {
-        walletManager.checkUpdatesAsync("monero-gui", "gui")
+        const version = Version.GUI_VERSION.match(/\d+\.\d+\.\d+\.\d+/);
+        if (version) {
+            walletManager.checkUpdatesAsync("monero-gui", "gui", getBuildTag(), version[0]);
+        } else {
+            console.error("failed to parse version number", Version.GUI_VERSION);
+        }
     }
 
     Timer {
