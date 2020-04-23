@@ -28,6 +28,7 @@
 
 #include <QtCore>
 #include <QApplication>
+#include <QtGlobal>
 
 #include "TailsOS.h"
 #include "utils.h"
@@ -68,7 +69,8 @@ QByteArray fileOpen(QString path) {
 bool fileWrite(QString path, QString data) {
     QFile file(path);
     if(file.open(QIODevice::WriteOnly)){
-        QTextStream out(&file); out << data << endl;
+        QTextStream out(&file);
+        out << data << '\n';
         file.close();
         return true;
     }
