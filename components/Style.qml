@@ -29,6 +29,7 @@ QtObject {
     property string textSelectedColor: blackTheme ? _b_textSelectedColor : _w_textSelectedColor
 
     property string inputBoxBackground: blackTheme ? _b_inputBoxBackground : _w_inputBoxBackground
+    property string inputBoxBackgroundDisabled: blackTheme ? _b_inputBoxBackgroundDisabled : _w_inputBoxBackgroundDisabled
     property string inputBoxBackgroundError: blackTheme ? _b_inputBoxBackgroundError : _w_inputBoxBackgroundError
     property string inputBoxColor: blackTheme ? _b_inputBoxColor : _w_inputBoxColor
     property string legacy_placeholderFontColor: blackTheme ? _b_legacy_placeholderFontColor : _w_legacy_placeholderFontColor
@@ -88,6 +89,7 @@ QtObject {
     property string _b_textSelectedColor: "white"
 
     property string _b_inputBoxBackground: "black"
+    property string _b_inputBoxBackgroundDisabled: Qt.rgba(255, 255, 255, 0.10)
     property string _b_inputBoxBackgroundError: "#FFDDDD"
     property string _b_inputBoxColor: "white"
     property string _b_legacy_placeholderFontColor: "#BABABA"
@@ -144,6 +146,7 @@ QtObject {
     property string _w_textSelectedColor: "black"
 
     property string _w_inputBoxBackground: "white"
+    property string _w_inputBoxBackgroundDisabled: Qt.rgba(0, 0, 0, 0.20)
     property string _w_inputBoxBackgroundError: "#FFDDDD"
     property string _w_inputBoxColor: "black"
     property string _w_legacy_placeholderFontColor: "#BABABA"

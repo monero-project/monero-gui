@@ -74,7 +74,7 @@ Item {
                 visible: checkBox.border
                 anchors.fill: parent
                 radius: 3
-                color: "transparent"
+                color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
                 border.color:
                     if(checkBox.checked){
                         return MoneroComponents.Style.inputBorderColorActive;
