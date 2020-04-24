@@ -58,11 +58,6 @@ function switchPage(next) {
 }
 
 function createWalletPath(isIOS, folder_path,account_name){
-    // Remove trailing slash - (default on windows and mac)
-    if (folder_path.substring(folder_path.length -1) === "/"){
-        folder_path = folder_path.substring(0,folder_path.length -1)
-    }
-
     // Store releative path on ios.
     if(isIOS)
         folder_path = "";

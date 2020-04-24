@@ -131,10 +131,11 @@ Rectangle {
             }
 
             MoneroComponents.TextBlock {
+                id: walletLocation
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                property string walletPath: (isIOS ?  moneroAccountsDir : "") + appWindow.walletPath()
+                property string walletPath: (isIOS ?  moneroAccountsDir : "") + persistentSettings.wallet_path
                 text: "\
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
@@ -389,12 +390,7 @@ Rectangle {
                 var data = "";
                 data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
                 data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
-                data += "\nWallet path: ";
-
-                var wallet_path = walletPath();
-                if(isIOS)
-                    wallet_path = moneroAccountsDir + wallet_path;
-                data += wallet_path;
+                data += "\nWallet path: " + walletLocation.walletPath;
 
                 data += "\nWallet creation height: ";
                 if(currentWallet)

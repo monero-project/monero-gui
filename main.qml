@@ -214,7 +214,7 @@ ApplicationWindow {
                 appWindow.viewState = prevState;
             }
         };
-        passwordDialog.open(usefulName(walletPath()));
+        passwordDialog.open(usefulName(persistentSettings.wallet_path));
     }
 
     function initialize() {
@@ -253,7 +253,7 @@ ApplicationWindow {
         simpleModeConnectionTimer.running = true;
 
         // wallet already opened with wizard, we just need to initialize it
-        var wallet_path = walletPath();
+        var wallet_path = persistentSettings.wallet_path;
         if(isIOS)
             wallet_path = moneroAccountsDir + wallet_path;
         // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
@@ -390,11 +390,6 @@ ApplicationWindow {
 
     function isTrustedDaemon() {
         return !persistentSettings.useRemoteNode || persistentSettings.is_trusted_daemon;
-    }
-
-    function walletPath() {
-        var wallet_path = persistentSettings.wallet_path
-        return wallet_path;
     }
 
     function usefulName(path) {

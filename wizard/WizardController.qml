@@ -371,7 +371,7 @@ Rectangle {
         persistentSettings.locale   = wizardController.language_locale
 
         persistentSettings.account_name = wizardController.walletOptionsName
-        persistentSettings.wallet_path = new_wallet_filename
+        persistentSettings.wallet_path = wizardController.m_wallet.path;
         persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
 
         persistentSettings.allow_background_mining = false
