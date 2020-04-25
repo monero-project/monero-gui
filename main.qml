@@ -1481,7 +1481,6 @@ ApplicationWindow {
                     confirmationDialog.text  += qsTr("Note: lmdb folder not found. A new folder will be created.") + "\n\n"
 
                 confirmationDialog.icon = StandardIcon.Question
-                confirmationDialog.cancelText = qsTr("Cancel")
 
                 // Continue
                 confirmationDialog.onAcceptedCallback = function() {
