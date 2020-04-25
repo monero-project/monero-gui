@@ -230,7 +230,7 @@ Rectangle {
                         appWindow.showStatusMessage(qsTr("Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD"),3);
                     }
                     inputDialog.onRejectedCallback = null;
-                    inputDialog.open(currentWallet ? currentWallet.walletCreationHeight : "0")
+                    inputDialog.open(currentWallet ? currentWallet.walletCreationHeight.toFixed(0) : "0")
                 }
 
                 MouseArea {
