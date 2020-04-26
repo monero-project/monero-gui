@@ -48,7 +48,6 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QList>
 #include <QVector>
-#include <QMutex>
 #include <QMutexLocker>
 
 namespace {
@@ -230,9 +229,19 @@ QString Wallet::path() const
     return QDir::toNativeSeparators(QString::fromStdString(m_walletImpl->path()));
 }
 
-bool Wallet::store(const QString &path)
+void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */)
 {
-    return m_walletImpl->store(path.toStdString());
+    const auto future = m_scheduler.run(
+        [this, path] {
+            QMutexLocker locker(&m_storeMutex);
+
+            return QJSValueList({m_walletImpl->store(path.toStdString())});
+        },
+        callback);
+    if (!future.first)
+    {
+        QJSValue(callback).call(QJSValueList({false}));
+    }
 }
 
 bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)

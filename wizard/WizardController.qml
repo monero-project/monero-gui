@@ -344,41 +344,48 @@ Rectangle {
         wizardController.tmpWalletFilename = tmp_wallet_filename
     }
 
-    function writeWallet() {
+    function writeWallet(onSuccess) {
         // Save wallet files in user specified location
         var new_wallet_filename = Wizard.createWalletPath(
             isIOS,
             wizardController.walletOptionsLocation,
             wizardController.walletOptionsName);
 
-        if(isIOS) {
-            console.log("saving in ios: " + moneroAccountsDir + new_wallet_filename)
-            wizardController.m_wallet.store(moneroAccountsDir + new_wallet_filename);
-        } else {
-            console.log("saving in wizard: " + new_wallet_filename)
-            wizardController.m_wallet.store(new_wallet_filename);
+        const handler = function(success) {
+            if (!success) {
+                appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
+                return;
+            }
+
+            // make sure temporary wallet files are deleted
+            console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
+            oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
+
+            // protecting wallet with password
+            wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
+
+            // save to persistent settings
+            persistentSettings.language = wizardController.language_language
+            persistentSettings.locale   = wizardController.language_locale
+
+            persistentSettings.account_name = wizardController.walletOptionsName
+            persistentSettings.wallet_path = wizardController.m_wallet.path;
+            persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
+
+            persistentSettings.allow_background_mining = false
+            persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
+            persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
+
+            restart();
+
+            onSuccess();
+        };
+
+        if (isIOS) {
+            new_wallet_filename = moneroAccountsDir + new_wallet_filename;
         }
-
-        // make sure temporary wallet files are deleted
-        console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
-        oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
-
-        // protecting wallet with password
-        wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
-
-        // save to persistent settings
-        persistentSettings.language = wizardController.language_language
-        persistentSettings.locale   = wizardController.language_locale
-
-        persistentSettings.account_name = wizardController.walletOptionsName
-        persistentSettings.wallet_path = wizardController.m_wallet.path;
-        persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
-
-        persistentSettings.allow_background_mining = false
-        persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
-        persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
-
-        restart();
+        console.log("saving new wallet to", new_wallet_filename);
+        wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
     }
 
     function recoveryWallet() {
