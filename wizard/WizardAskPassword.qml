@@ -47,7 +47,7 @@ ColumnLayout {
     }
 
     function calcPasswordStrength(inp) {
-        if(isAndroid) return;
+        if(!progressLayout.visible) return;
         if(passwordInput.text.length <= 1){
             root.passwordFill = 0;
             progressText.text = passwordStrengthText + qsTr("Low") + translationManager.emptyString;
@@ -91,8 +91,9 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        id: progressLayout
         spacing: 0
-        visible: !isAndroid
+        visible: !isAndroid && walletManager.getPasswordStrength !== undefined
         Layout.fillWidth: true
 
         TextInput {
