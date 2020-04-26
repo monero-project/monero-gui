@@ -59,6 +59,14 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            id: checkForUpdatesCheckBox
+            enabled: !disableCheckUpdatesFlag
+            checked: persistentSettings.checkForUpdates && !disableCheckUpdatesFlag
+            onClicked: persistentSettings.checkForUpdates = !persistentSettings.checkForUpdates
+            text: qsTr("Check for updates periodically") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
             onClicked: {
