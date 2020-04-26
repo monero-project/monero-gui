@@ -43,7 +43,11 @@ ColumnLayout {
     function save(){
         persistentSettings.useRemoteNode = remoteNode.checked
         persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-        persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+        if (bootstrapNodeEdit.daemonAddrText == "auto") {
+            persistentSettings.bootstrapNodeAddress = "auto";
+        } else {
+            persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.getAddress();
+        }
     }
 
     MoneroComponents.RadioButton {
