@@ -127,7 +127,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     QMutexLocker locker(&m_daemonMutex);
 
     m_daemon.reset(new QProcess());
-    initialized = true;
 
     // Connect output slots
     connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
@@ -360,7 +359,6 @@ DaemonManager::DaemonManager(QObject *parent)
 
     if (m_monerod.length() == 0) {
         qCritical() << "no daemon binary defined for current platform";
-        m_has_daemon = false;
     }
 }
 
