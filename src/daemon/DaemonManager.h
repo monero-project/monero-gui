@@ -29,6 +29,9 @@
 #ifndef DAEMONMANAGER_H
 #define DAEMONMANAGER_H
 
+#include <memory>
+
+#include <QMutex>
 #include <QObject>
 #include <QUrl>
 #include <QProcess>
@@ -78,7 +81,8 @@ private:
 
     static DaemonManager * m_instance;
     static QStringList m_clArgs;
-    QProcess *m_daemon;
+    std::unique_ptr<QProcess> m_daemon;
+    QMutex m_daemonMutex;
     bool initialized = false;
     QString m_monerod;
     bool m_has_daemon = true;

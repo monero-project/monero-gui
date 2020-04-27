@@ -29,6 +29,7 @@
 #include "DaemonManager.h"
 #include <QElapsedTimer>
 #include <QFile>
+#include <QMutexLocker>
 #include <QThread>
 #include <QFileInfo>
 #include <QDir>
@@ -123,18 +124,20 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     qDebug() << "starting monerod " + m_monerod;
     qDebug() << "With command line arguments " << arguments;
 
-    m_daemon = new QProcess();
+    QMutexLocker locker(&m_daemonMutex);
+
+    m_daemon.reset(new QProcess());
     initialized = true;
 
     // Connect output slots
-    connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
-    connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
+    connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
+    connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
     bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
-    connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
+    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
@@ -223,7 +226,10 @@ void DaemonManager::stateChanged(QProcess::ProcessState state)
 
 void DaemonManager::printOutput()
 {
-    QByteArray byteArray = m_daemon->readAllStandardOutput();
+    QByteArray byteArray = [this]() {
+        QMutexLocker locker(&m_daemonMutex);
+        return m_daemon->readAllStandardOutput();
+    }();
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
@@ -234,7 +240,10 @@ void DaemonManager::printOutput()
 
 void DaemonManager::printError()
 {
-    QByteArray byteArray = m_daemon->readAllStandardError();
+    QByteArray byteArray = [this]() {
+        QMutexLocker locker(&m_daemonMutex);
+        return m_daemon->readAllStandardError();
+    }();
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
