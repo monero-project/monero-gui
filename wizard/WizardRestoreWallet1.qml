@@ -225,7 +225,7 @@ Rectangle {
 
                 MoneroComponents.LineEdit {
                     id: seedOffset
-                    echoMode: TextInput.Password
+                    password: true
                     Layout.fillWidth: true
                     placeholderFontSize: 16
                     placeholderText: qsTr("Passphrase") + translationManager.emptyString

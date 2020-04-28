@@ -26,6 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import FontAwesome 1.0
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
@@ -35,6 +36,10 @@ Item {
     id: item
     property alias input: input
     property alias text: input.text
+
+    property bool password: false
+    property bool passwordHidden: true
+    property var passwordLinked: null
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
@@ -48,7 +53,6 @@ Item {
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
-    property alias echoMode: input.echoMode
     property alias inlineButton: inlineButtonId
     property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
@@ -106,6 +110,31 @@ Item {
         }
         else {
             return false;
+        }
+    }
+
+    function isPasswordHidden() {
+        if (password) {
+            return passwordHidden;
+        }
+        if (passwordLinked) {
+            return passwordLinked.passwordHidden;
+        }
+        return false;
+    }
+
+    function reset() {
+        text = "";
+        if (!passwordLinked) {
+            passwordHidden = true;
+        }
+    }
+
+    function passwordToggle() {
+        if (passwordLinked) {
+            passwordLinked.passwordHidden = !passwordLinked.passwordHidden;
+        } else {
+            passwordHidden = !passwordHidden;
         }
     }
 
@@ -210,6 +239,27 @@ Item {
             onTextChanged: item.textUpdated()
             topPadding: 10
             bottomPadding: 10
+            echoMode: isPasswordHidden() ? TextInput.Password : TextInput.Normal
+
+            MoneroComponents.Label {
+                visible: password || passwordLinked
+                fontSize: 20
+                text: isPasswordHidden() ? FontAwesome.eye : FontAwesome.eyeSlash
+                opacity: eyeMouseArea.containsMouse ? 0.9 : 0.7
+                fontFamily: FontAwesome.fontFamily
+                anchors.right: parent.right
+                anchors.rightMargin: 15
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: 1
+
+                MouseArea {
+                    id: eyeMouseArea
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: passwordToggle()
+                }
+            }
         }
 
         MoneroComponents.InlineButton {
