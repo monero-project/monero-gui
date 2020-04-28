@@ -398,7 +398,12 @@ Rectangle{
                 placeholderFontSize: 15
                 text: persistentSettings.daemonFlags
                 addressValidation: false
-                onEditingFinished: persistentSettings.daemonFlags = daemonFlags.text;
+                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address)/)
+                onEditingFinished: {
+                    if (!daemonFlags.error) {
+                        persistentSettings.daemonFlags = daemonFlags.text;
+                    }
+                }
             }
 
             RowLayout {
