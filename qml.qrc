@@ -8,7 +8,6 @@
         <file>components/UpdateDialog.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
-        <file>images/lockIcon.png</file>
         <file>components/MenuButton.qml</file>
         <file>monero/utils/gpg_keys/binaryfate.asc</file>
         <file>monero/utils/gpg_keys/fluffypony.asc</file>
@@ -27,7 +26,6 @@
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/MenuButtonDivider.qml</file>
-        <file>images/moneroIcon.png</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
         <file>images/whiteDropIndicator@2x.png</file>
@@ -38,7 +36,6 @@
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TitleBar.qml</file>
-        <file>images/moneroLogo2.png</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>
@@ -113,8 +110,6 @@
         <file>images/card-background-white.png</file>
         <file>images/card-background-white@2x.png</file>
         <file>images/moneroLogo_white.png</file>
-        <file>images/question.png</file>
-        <file>images/question@2x.png</file>
         <file>images/titlebarLogo.png</file>
         <file>images/titlebarLogo@2x.png</file>
         <file>pages/merchant/MerchantTitlebar.qml</file>
@@ -207,7 +202,6 @@
         <file>js/Wizard.js</file>
         <file>components/LanguageSidebar.qml</file>
         <file>images/world-flags-globe.png</file>
-        <file>images/langFlagGrey.png</file>
         <file>images/restore-wallet-from-hardware@2x.png</file>
         <file>images/restore-wallet-from-hardware.png</file>
         <file>images/open-wallet-from-file@2x.png</file>
@@ -236,7 +230,6 @@
         <file>images/themes/white/close.svg</file>
         <file>images/themes/white/fullscreen.svg</file>
         <file>images/themes/white/minimize.svg</file>
-        <file>images/themes/white/question.svg</file>
         <file>components/effects/ColorTransition.qml</file>
         <file>components/effects/GradientBackground.qml</file>
         <file>images/check-white.svg</file>
