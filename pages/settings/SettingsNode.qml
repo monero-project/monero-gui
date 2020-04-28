@@ -332,7 +332,7 @@ Rectangle{
                     persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
                     currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
                 }
-                text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
+                text: qsTr("Mark as trusted daemon") + translationManager.emptyString
             }
 
             MoneroComponents.StandardButton {
@@ -426,8 +426,8 @@ Rectangle{
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20
 
-                        daemonAddrLabelText: qsTr("Bootstrap Address")
-                        daemonPortLabelText: qsTr("Bootstrap Port")
+                        daemonAddrLabelText: qsTr("Bootstrap address")
+                        daemonPortLabelText: qsTr("Bootstrap port")
                         daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
                         daemonPortText: {
                             var node_split = persistentSettings.bootstrapNodeAddress.split(":");
