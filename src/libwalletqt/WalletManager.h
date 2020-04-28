@@ -175,7 +175,11 @@ public:
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error) const;
     Q_INVOKABLE QVariantMap parse_uri_to_object(const QString &uri) const;
     Q_INVOKABLE bool saveQrCode(const QString &, const QString &) const;
-    Q_INVOKABLE void checkUpdatesAsync(const QString &software, const QString &subdir);
+    Q_INVOKABLE void checkUpdatesAsync(
+        const QString &software,
+        const QString &subdir,
+        const QString &buildTag,
+        const QString &version);
     Q_INVOKABLE QString checkUpdates(const QString &software, const QString &subdir) const;
 
     // clear/rename wallet cache

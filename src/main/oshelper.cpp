@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "oshelper.h"
+#include <QCoreApplication>
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QTemporaryFile>
@@ -163,4 +164,48 @@ bool OSHelper::isCapsLock() const
 QString OSHelper::temporaryPath() const
 {
     return QDir::tempPath();
+}
+
+bool OSHelper::installed() const
+{
+#ifdef Q_OS_WIN
+    static constexpr const wchar_t installKey[] =
+        L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Monero GUI Wallet_is1";
+    static constexpr const wchar_t installValue[] = L"InstallLocation";
+
+    DWORD size;
+    LSTATUS status =
+        ::RegGetValueW(HKEY_LOCAL_MACHINE, installKey, installValue, RRF_RT_REG_SZ, nullptr, nullptr, &size);
+    if (status == ERROR_FILE_NOT_FOUND)
+    {
+        return false;
+    }
+    if (status != ERROR_SUCCESS)
+    {
+        qCritical() << "RegGetValueW failed (get size)" << status;
+        return false;
+    }
+
+    std::wstring installLocation;
+    installLocation.resize(size / sizeof(std::wstring::value_type));
+    size = installLocation.size() * sizeof(std::wstring::value_type);
+    status = ::RegGetValueW(
+        HKEY_LOCAL_MACHINE,
+        installKey,
+        installValue,
+        RRF_RT_REG_SZ,
+        nullptr,
+        &installLocation[0],
+        &size);
+    if (status != ERROR_SUCCESS)
+    {
+        qCritical() << "RegGetValueW Failed (read)" << status;
+        return false;
+    }
+
+    const QDir installDir(QString(reinterpret_cast<const QChar *>(&installLocation[0])));
+    return installDir == QDir(QCoreApplication::applicationDirPath());
+#else
+    return false;
+#endif
 }
