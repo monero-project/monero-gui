@@ -43,9 +43,18 @@
 #include "KeysFiles.h"
 
 
-WalletKeysFiles::WalletKeysFiles(const qint64 &modified, const QString &path, const quint8 &networkType, const QString &address)
-    : m_modified(modified), m_path(path), m_networkType(networkType), m_address(address)
+WalletKeysFiles::WalletKeysFiles(const QFileInfo &info, quint8 networkType, QString address)
+    : m_fileName(info.fileName())
+    , m_modified(info.lastModified().toSecsSinceEpoch())
+    , m_path(QDir::toNativeSeparators(info.absoluteFilePath()))
+    , m_networkType(networkType)
+    , m_address(std::move(address))
 {
+}
+
+QString WalletKeysFiles::fileName() const
+{
+    return m_fileName;
 }
 
 qint64 WalletKeysFiles::modified() const
@@ -127,11 +136,7 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
             file.close();
         }
 
-        const QFileInfo info(wallet);
-        const QDateTime modifiedAt = info.lastModified();
-
-        this->addWalletKeysFile(WalletKeysFiles(modifiedAt.toSecsSinceEpoch(),
-                                                info.absoluteFilePath(), networkType, address));
+        this->addWalletKeysFile(WalletKeysFiles(wallet, networkType, std::move(address)));
     }
 }
 
@@ -152,6 +157,8 @@ QVariant WalletKeysFilesModel::data(const QModelIndex & index, int role) const {
         return QVariant();
 
     const WalletKeysFiles &walletKeyFile = m_walletKeyFiles[index.row()];
+    if (role == FileNameRole)
+        return walletKeyFile.fileName();
     if (role == ModifiedRole)
         return walletKeyFile.modified();
     else if (role == PathRole)
@@ -165,6 +172,7 @@ QVariant WalletKeysFilesModel::data(const QModelIndex & index, int role) const {
 
 QHash<int, QByteArray> WalletKeysFilesModel::roleNames() const {
     QHash<int, QByteArray> roles;
+    roles[FileNameRole] = "fileName";
     roles[ModifiedRole] = "modified";
     roles[PathRole] = "path";
     roles[NetworkTypeRole] = "networktype";

@@ -210,6 +210,7 @@ int main(int argc, char *argv[])
         qCritical() << "Error: accounts root directory could not be set";
         return 1;
     }
+    moneroAccountsDir = QDir::toNativeSeparators(moneroAccountsDir);
 
 #if defined(Q_OS_LINUX)
     if (isDesktop) app.setWindowIcon(QIcon(":/images/appicon.ico"));
@@ -241,7 +242,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     Monero::Utils::onStartup();
 
     // Log settings
-    const QString logPath = getLogPath(parser.value(logPathOption));
+    const QString logPath = QDir::toNativeSeparators(getLogPath(parser.value(logPathOption)));
     Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
     qInstallMessageHandler(messageHandler);
 

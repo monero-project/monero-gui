@@ -227,7 +227,7 @@ QString Wallet::address(quint32 accountIndex, quint32 addressIndex) const
 
 QString Wallet::path() const
 {
-    return QString::fromStdString(m_walletImpl->path());
+    return QDir::toNativeSeparators(QString::fromStdString(m_walletImpl->path()));
 }
 
 bool Wallet::store(const QString &path)
