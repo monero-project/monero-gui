@@ -79,13 +79,6 @@ Rectangle {
                 topPadding: 0
                 text: qsTr("Save your most used addresses here") + translationManager.emptyString
                 width: parent.width
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                   anchors.fill: parent
-                   enabled: false
-                }
             }
 
             Text {
@@ -99,13 +92,6 @@ Rectangle {
                 topPadding: 0
                 text: qsTr("This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.") + translationManager.emptyString
                 width: parent.width
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: false
-                }
             }
 
             MoneroComponents.StandardButton {
