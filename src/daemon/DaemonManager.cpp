@@ -200,9 +200,9 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype) const
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill /F /IM monerod.exe");
+                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
 #else
-                QProcess::execute("pkill monerod");
+                QProcess::execute("pkill", {"monerod"});
 #endif
             }
 

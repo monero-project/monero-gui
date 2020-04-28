@@ -34,6 +34,7 @@
 #include <QDebug>
 #include <QReadLocker>
 #include <QWriteLocker>
+#include <QtGlobal>
 
 
 bool TransactionHistory::transaction(int index, std::function<void (TransactionInfo &)> callback)
@@ -58,7 +59,11 @@ bool TransactionHistory::transaction(int index, std::function<void (TransactionI
 
 void TransactionHistory::refresh(quint32 accountIndex)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QDateTime firstDateTime = QDate(2014, 4, 18).startOfDay();
+#else
     QDateTime firstDateTime = QDateTime(QDate(2014, 4, 18)); // the genesis block
+#endif
     QDateTime lastDateTime  = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
 
     emit refreshStarted();
@@ -143,7 +148,11 @@ bool TransactionHistory::TransactionHistory::locked() const
 TransactionHistory::TransactionHistory(Monero::TransactionHistory *pimpl, QObject *parent)
     : QObject(parent), m_pimpl(pimpl), m_minutesToUnlock(0), m_locked(false)
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    m_firstDateTime = QDate(2014, 4, 18).startOfDay();
+#else
     m_firstDateTime  = QDateTime(QDate(2014, 4, 18)); // the genesis block
+#endif
     m_lastDateTime = QDateTime::currentDateTime().addDays(1); // tomorrow (guard against jitter and timezones)
 }
 
