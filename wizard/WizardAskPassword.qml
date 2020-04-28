@@ -137,119 +137,28 @@ ColumnLayout {
         }
     }
 
-    ColumnLayout {
-        spacing: 4
+    MoneroComponents.LineEdit {
+        id: passwordInput
         Layout.fillWidth: true
+        KeyNavigation.tab: passwordInputConfirm
 
-        Label {
-            text: qsTr("Password") + translationManager.emptyString
-            Layout.fillWidth: true
+        labelFontSize: 14
+        password: true
 
-            font.pixelSize: 14
-            font.family: MoneroComponents.Style.fontLight.name
-
-            color: MoneroComponents.Style.defaultFontColor
-        }
-
-        MoneroComponents.Input {
-            id: passwordInput
-
-            Layout.topMargin: 6
-            Layout.fillWidth: true
-
-            bottomPadding: 10
-            leftPadding: 10
-            topPadding: 10
-
-            horizontalAlignment: TextInput.AlignLeft
-            verticalAlignment: TextInput.AlignVCenter
-            echoMode: TextInput.Password
-            KeyNavigation.tab: passwordInputConfirm
-
-            font.family: MoneroComponents.Style.fontLight.name
-            font.pixelSize: 15
-            color: MoneroComponents.Style.defaultFontColor
-            selectionColor: MoneroComponents.Style.textSelectionColor
-            selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-            text: walletOptionsPassword
-
-            background: Rectangle {
-                radius: 4
-                border.color: MoneroComponents.Style.inputBorderColorActive
-                border.width: 1
-                color: "transparent"
-
-                MoneroComponents.Label {
-                    fontSize: 18
-                    text: FontAwesome.lock
-                    opacity: 0.5
-                    fontFamily: FontAwesome.fontFamilySolid
-                    styleName: "Solid"
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.verticalCenterOffset: 1
-                }
-            }
-        }
+        labelText: qsTr("Password") + translationManager.emptyString
+        text: walletOptionsPassword
     }
 
-    ColumnLayout {
-        spacing: 4
+    MoneroComponents.LineEdit {
+        id: passwordInputConfirm
         Layout.fillWidth: true
+        Layout.topMargin: 8
+        KeyNavigation.tab: passwordInputConfirm
 
-        Label {
-            text: qsTr("Password (confirm)") + translationManager.emptyString
-            Layout.fillWidth: true
+        labelFontSize: 14
+        passwordLinked: passwordInput
 
-            font.pixelSize: 14
-            font.family: MoneroComponents.Style.fontLight.name
-
-            color: MoneroComponents.Style.defaultFontColor
-        }
-
-        MoneroComponents.Input {
-            id : passwordInputConfirm
-            
-            Layout.topMargin: 6
-            Layout.fillWidth: true
-
-            bottomPadding: 10
-            leftPadding: 10
-            topPadding: 10
-
-            horizontalAlignment: TextInput.AlignLeft
-            verticalAlignment: TextInput.AlignVCenter
-            echoMode: TextInput.Password
-            KeyNavigation.tab: passwordInputConfirm
-
-            font.family: MoneroComponents.Style.fontLight.name
-            font.pixelSize: 15
-            color: MoneroComponents.Style.defaultFontColor
-            selectionColor: MoneroComponents.Style.textSelectionColor
-            selectedTextColor: MoneroComponents.Style.textSelectedColor
-
-            text: walletOptionsPassword
-
-            background: Rectangle {
-                radius: 4
-                border.color: MoneroComponents.Style.inputBorderColorActive
-                border.width: 1
-                color: "transparent"
-
-                MoneroComponents.Label {
-                    fontSize: 18
-                    text: FontAwesome.lock
-                    opacity: 0.5
-                    fontFamily: FontAwesome.fontFamilySolid
-                    styleName: "Solid"
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.verticalCenterOffset: 1
-                }
-            }
-        }
+        labelText: qsTr("Password (confirm)") + translationManager.emptyString
+        text: walletOptionsPassword
     }
 }
