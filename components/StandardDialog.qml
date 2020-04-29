@@ -90,6 +90,10 @@ Rectangle {
 
     function close() {
         root.visible = false;
+        // reset button text
+        okButton.text = qsTr("OK")
+        cancelButton.text = qsTr("Cancel")
+
         closeCallback();
     }
 
