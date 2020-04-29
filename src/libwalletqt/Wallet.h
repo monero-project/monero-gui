@@ -144,7 +144,7 @@ public:
 
     //! saves wallet to the file by given path
     //! empty path stores in current location
-    Q_INVOKABLE bool store(const QString &path = "");
+    Q_INVOKABLE void storeAsync(const QJSValue &callback, const QString &path = "");
 
     //! initializes wallet asynchronously
     Q_INVOKABLE void initAsync(const QString &daemonAddress, bool trustedDaemon = false, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
@@ -434,6 +434,7 @@ private:
     QString m_daemonPassword;
     Monero::WalletListener *m_walletListener;
     FutureScheduler m_scheduler;
+    QMutex m_storeMutex;
 };
 
 

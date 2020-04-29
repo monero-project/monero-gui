@@ -972,7 +972,11 @@ ApplicationWindow {
         informationPopup.open()
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
-        currentWallet.store();
+        currentWallet.storeAsync(function(success) {
+            if (!success) {
+                appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
+            }
+        });
     }
 
     // called on "getProof"

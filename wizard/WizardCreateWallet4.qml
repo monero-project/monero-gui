@@ -77,9 +77,10 @@ Rectangle {
                     }
                 }
                 onNextClicked: {
-                    wizardController.writeWallet();
-                    wizardController.useMoneroClicked();
-                    wizardController.walletOptionsIsRecoveringFromDevice = false;
+                    wizardController.writeWallet(function() {
+                        wizardController.useMoneroClicked();
+                        wizardController.walletOptionsIsRecoveringFromDevice = false;
+                    });
                 }
             }
         }
