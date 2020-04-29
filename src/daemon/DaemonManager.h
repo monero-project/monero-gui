@@ -83,9 +83,7 @@ private:
     static QStringList m_clArgs;
     std::unique_ptr<QProcess> m_daemon;
     QMutex m_daemonMutex;
-    bool initialized = false;
     QString m_monerod;
-    bool m_has_daemon = true;
     bool m_app_exit = false;
     bool m_noSync = false;
 
