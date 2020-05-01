@@ -1076,7 +1076,6 @@ ApplicationWindow {
         console.log("Displaying processing splash")
         if (typeof message != 'undefined') {
             splash.messageText = message
-            splash.heightProgressText = ""
         }
 
         leftPanel.enabled = false;
@@ -1566,8 +1565,8 @@ ApplicationWindow {
 
     ProcessingSplash {
         id: splash
-        width: appWindow.width / 1.5
-        height: appWindow.height / 2
+        width: appWindow.width / 2
+        height: appWindow.height / 2.66
         x: (appWindow.width - width) / 2
         y: (appWindow.height - height) / 2
         messageText: qsTr("Please wait...") + translationManager.emptyString

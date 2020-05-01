@@ -26,6 +26,7 @@
         <file>components/TipItem.qml</file>
         <file>images/tip.png</file>
         <file>components/MenuButtonDivider.qml</file>
+        <file>images/monero-vector.svg</file>
         <file>components/StandardDropdown.qml</file>
         <file>images/whiteDropIndicator.png</file>
         <file>images/whiteDropIndicator@2x.png</file>
@@ -237,5 +238,7 @@
         <file>images/arrow-right-in-circle-outline-medium-white.svg</file>
         <file>images/tails-grey.png</file>
         <file>components/AdvancedOptionsItem.qml</file>
+        <file>images/busy-indicator.png</file>
+        <file>images/busy-indicator@2x.png</file>
     </qresource>
 </RCC>
