@@ -63,8 +63,8 @@ Rectangle {
             }
 
             WizardNav {
-                progressSteps: 4
-                progress: 2
+                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                progress: 1
                 btnNext.enabled: passwordFields.calcStrengthAndVerify();
                 onPrevClicked: {
                     wizardStateView.state = "wizardRestoreWallet1";
