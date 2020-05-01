@@ -1370,6 +1370,7 @@ ApplicationWindow {
         property int walletMode: 2
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: true
+        property bool checkForUpdates: true
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
@@ -2004,7 +2005,7 @@ ApplicationWindow {
         id: updatesTimer
         interval: 3600 * 1000
         repeat: true
-        running: !disableCheckUpdatesFlag
+        running: !disableCheckUpdatesFlag && persistentSettings.checkForUpdates
         triggeredOnStart: true
         onTriggered: checkUpdates()
     }
