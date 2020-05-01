@@ -53,11 +53,6 @@ Rectangle {
         ListElement { column1: "Trezor Model T"; column2: "Trezor";}
     }
 
-    function update(){
-        // update device dropdown
-        deviceNameDropdown.update();
-    }
-
     ColumnLayout {
         id: pageRoot
         Layout.alignment: Qt.AlignHCenter;
@@ -208,8 +203,6 @@ Rectangle {
 
     Component.onCompleted: {
         errorMsg.text = "";
-        wizardCreateDevice1.update();
-        console.log()
     }
 
     function onPageCompleted(previousView){
