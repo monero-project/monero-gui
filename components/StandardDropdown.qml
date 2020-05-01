@@ -84,6 +84,8 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 12
+            anchors.right: dropIndicator.left
+            anchors.rightMargin: 12
             elide: Text.ElideRight
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
@@ -96,7 +98,8 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32
+            anchors.rightMargin: 12
+            width: dropdownIcon.width
 
             Image {
                 id: dropdownIcon
