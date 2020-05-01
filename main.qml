@@ -1702,12 +1702,6 @@ ApplicationWindow {
         }
 
 
-        WizardLang {
-            id: languageView
-            visible: false
-            anchors.fill: parent
-        }
-
         property int minWidth: 326
         property int minHeight: 400
         MouseArea {
@@ -1808,8 +1802,7 @@ ApplicationWindow {
     }
 
     function toggleLanguageView(){
-        middlePanel.visible = !middlePanel.visible;
-        languageView.visible = !languageView.visible
+        languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
         resetLanguageFields()
         // update after changing language from settings page
         if (persistentSettings.language != wizard.language_language) {
@@ -2184,8 +2177,8 @@ ApplicationWindow {
         }
     }
 
-// @TODO: QML type 'Drawer' has issues with buildbot; debug after Qt 5.9 migration
-//    MoneroComponents.LanguageSidebar {
-//        id: languageSidebar
-//    }
+    MoneroComponents.LanguageSidebar {
+        id: languageSidebar
+        dragMargin: 0
+    }
 }
