@@ -335,7 +335,7 @@ Rectangle {
                     property var fee: {
                         estimatedFee = null;
                         estimating = sendButton.enabled;
-                        if (!sendButton.enabled) {
+                        if (!sendButton.enabled || !currentWallet) {
                             return;
                         }
                         currentWallet.estimateTransactionFeeAsync(
