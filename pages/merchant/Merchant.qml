@@ -33,6 +33,9 @@ Item {
     property var    hiddenAmounts: []
 
     function onPageCompleted() {
+        if (appWindow.currentWallet) {
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
+        }
         // prepare tracking
         trackingCheckbox.checked = root.enableTracking
         root.update();
@@ -589,9 +592,7 @@ Item {
 
         var model = appWindow.currentWallet.historyModel
         var count = model.rowCount()
-        var totalAmount = 0
         var nTransactions = 0
-        var blockchainHeight = null
         var txs = []
 
         // Currently selected subaddress as per Receive page
@@ -607,8 +608,6 @@ Item {
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
 
             if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == current_subaddress_table_index) {
-                var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
-                totalAmount = walletManager.addi(totalAmount, amount)
                 nTransactions += 1
 
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
@@ -616,21 +615,17 @@ Item {
 
                 var in_txpool = false;
                 var confirmations = 0;
-                var displayAmount = 0;
+                var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
 
-                if (blockHeight == 0) {
+                if (blockHeight === undefined) {
                     in_txpool = true;
                 } else {
-                    if (blockchainHeight == null)
-                        blockchainHeight = walletManager.blockchainHeight()
-                    confirmations = blockchainHeight - blockHeight - 1
-                    displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
+                    confirmations = model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
                 }
 
                 txs.push({
                     "amount": displayAmount,
                     "confirmations": confirmations,
-                    "blockheight": blockHeight,
                     "in_txpool": in_txpool,
                     "txid": txid,
                     "time_epoch": timeEpoch,
@@ -650,9 +645,7 @@ Item {
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
-                "blockheight": tx.blockheight,
                 "confirmations": tx.confirmations,
-                "blockheight": tx.blockHeight,
                 "in_txpool": tx.in_txpool,
                 "txid": tx.txid,
                 "time_epoch": tx.time_epoch,

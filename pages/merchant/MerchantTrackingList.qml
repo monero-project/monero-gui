@@ -125,7 +125,7 @@ ListView {
                         font.pixelSize: 14
                         font.bold: true
                         color: hide_amount ? "#707070" : "#009F1E"
-                        text: hide_amount ? '-' : '+' + amount
+                        text: hide_amount ? '-' : '+' + amount + (in_txpool ? ' (%1)'.arg(qsTr('unconfirmed')) : '') 
                         selectionColor: MoneroComponents.Style.textSelectionColor
                         selectByMouse: true
                         readOnly: true
