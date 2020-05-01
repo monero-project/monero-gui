@@ -304,7 +304,7 @@ Rectangle{
                     labelText: qsTr("Daemon password") + translationManager.emptyString
                     text: persistentSettings.daemonPassword
                     placeholderText: qsTr("Password") + translationManager.emptyString
-                    echoMode: TextInput.Password
+                    password: true
                     placeholderFontSize: 15
                     labelFontSize: 14
                     fontSize: 15
