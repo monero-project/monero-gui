@@ -95,6 +95,25 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            checked: persistentSettings.autosave
+            onClicked: persistentSettings.autosave = !persistentSettings.autosave
+            text: qsTr("Autosave") + translationManager.emptyString
+        }
+
+        MoneroComponents.Slider {
+            Layout.fillWidth: true
+            Layout.leftMargin: 35
+            Layout.topMargin: 6
+            visible: persistentSettings.autosave
+            from: 1
+            stepSize: 1
+            to: 60
+            value: persistentSettings.autosaveMinutes
+            text: "%1 %2 %3".arg(qsTr("Every")).arg(value).arg(qsTr("minute(s)")) + translationManager.emptyString
+            onMoved: persistentSettings.autosaveMinutes = value
+        }
+
+        MoneroComponents.CheckBox {
             id: userInActivityCheckbox
             checked: persistentSettings.lockOnUserInActivity
             onClicked: persistentSettings.lockOnUserInActivity = !persistentSettings.lockOnUserInActivity
