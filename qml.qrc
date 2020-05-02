@@ -5,6 +5,7 @@
         <file>MiddlePanel.qml</file>
         <file>components/Label.qml</file>
         <file>components/SettingsListItem.qml</file>
+        <file>components/Slider.qml</file>
         <file>components/UpdateDialog.qml</file>
         <file>images/whatIsIcon.png</file>
         <file>images/whatIsIcon@2x.png</file>
