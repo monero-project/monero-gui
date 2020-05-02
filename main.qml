@@ -72,6 +72,7 @@ ApplicationWindow {
     property bool foundNewBlock: false
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
+    property int firstBlockSeen
     property bool isMining: false
     property int walletMode: persistentSettings.walletMode
     property var cameraUi
@@ -474,6 +475,9 @@ ApplicationWindow {
         console.log("Wallet connection status changed " + status)
         middlePanel.updateStatus();
         leftPanel.networkStatus.connected = status
+        if (status == Wallet.ConnectionStatus_Disconnected) {
+            firstBlockSeen = 0;
+        }
 
         // Update fee multiplier dropdown on transfer page
         middlePanel.transferView.updatePriorityDropdown();
@@ -613,18 +617,22 @@ ApplicationWindow {
         currentDaemonAddress = localDaemonAddress
         currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
+        firstBlockSeen = 0;
     }
 
     function onHeightRefreshed(bcHeight, dCurrentBlock, dTargetBlock) {
         // Daemon fully synced
         // TODO: implement onDaemonSynced or similar in wallet API and don't start refresh thread before daemon is synced
         // targetBlock = currentBlock = 1 before network connection is established.
+        if (firstBlockSeen == 0 && dTargetBlock != 1) {
+            firstBlockSeen = dCurrentBlock;
+        }
         daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
         walletSynced = bcHeight >= dTargetBlock
 
         // Update progress bars
         if(!daemonSynced) {
-            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-dCurrentBlock);
+            leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, dTargetBlock-firstBlockSeen);
             leftPanel.progressBar.updateProgress(0,dTargetBlock, dTargetBlock, qsTr("Waiting for daemon to sync"));
         } else {
             leftPanel.daemonProgressBar.updateProgress(dCurrentBlock,dTargetBlock, 0, qsTr("Daemon is synchronized (%1)").arg(dCurrentBlock.toFixed(0)));
