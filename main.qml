@@ -1951,14 +1951,26 @@ ApplicationWindow {
         }
 
         // If daemon is running - prompt user before exiting
-        if(typeof daemonManager != "undefined" && daemonRunning) {
-            if (appWindow.walletMode == 0) {
-                stopDaemon(closeAccepted);
-            } else {
-                showDaemonIsRunningDialog(closeAccepted);
-            }
-        } else {
+        if(daemonManager == undefined || persistentSettings.useRemoteNode) {
             closeAccepted();
+        } else if (appWindow.walletMode == 0) {
+            stopDaemon(closeAccepted);
+        } else {
+            showProcessingSplash(qsTr("Checking local node status..."));
+            const handler = function(running) {
+                hideProcessingSplash();
+                if (running) {
+                    showDaemonIsRunningDialog(closeAccepted);
+                } else {
+                    closeAccepted();
+                }
+            };
+
+            if (currentWallet) {
+                handler(!currentWallet.disconnected);
+            } else {
+                daemonManager.runningAsync(persistentSettings.nettype, handler);
+            }
         }
     }
 
