@@ -773,6 +773,8 @@ Rectangle {
 
         switch (currentWallet.connected()) {
         case Wallet.ConnectionStatus_Connecting:
+            root.warningContent = qsTr("Wallet is connecting to daemon.")
+            break
         case Wallet.ConnectionStatus_Disconnected:
             root.warningContent = messageNotConnected;
             break
