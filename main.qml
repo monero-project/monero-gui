@@ -1370,6 +1370,8 @@ ApplicationWindow {
         property int lockOnUserInActivityInterval: 10  // minutes
         property bool blackTheme: true
         property bool checkForUpdates: true
+        property bool autosave: true
+        property int autosaveMinutes: 10
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
@@ -1808,6 +1810,24 @@ ApplicationWindow {
         if (persistentSettings.language != wizard.language_language) {
             persistentSettings.language = wizard.language_language
             persistentSettings.locale   = wizard.language_locale
+        }
+    }
+
+    Timer {
+        id: autosaveTimer
+        interval: persistentSettings.autosaveMinutes * 60 * 1000
+        repeat: true
+        running: persistentSettings.autosave
+        onTriggered: {
+            if (currentWallet) {
+                currentWallet.storeAsync(function(success) {
+                    if (success) {
+                        appWindow.showStatusMessage(qsTr("Autosaved the wallet"), 3);
+                    } else {
+                        appWindow.showStatusMessage(qsTr("Failed to autosave the wallet"), 3);
+                    }
+                });
+            }
         }
     }
 
