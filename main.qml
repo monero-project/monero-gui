@@ -67,6 +67,7 @@ ApplicationWindow {
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
+    property bool daemonStartStopInProgress: false
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
@@ -252,7 +253,6 @@ ApplicationWindow {
 
         // enable timers
         userInActivityTimer.running = true;
-        simpleModeConnectionTimer.running = true;
 
         // wallet already opened with wizard, we just need to initialize it
         var wallet_path = persistentSettings.wallet_path;
@@ -475,9 +475,6 @@ ApplicationWindow {
             firstBlockSeen = 0;
         }
 
-        // Update fee multiplier dropdown on transfer page
-        middlePanel.transferView.updatePriorityDropdown();
-
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
         if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
             daemonManager.runningAsync(persistentSettings.nettype, function(running) {
@@ -669,11 +666,10 @@ ApplicationWindow {
     }
 
     function startDaemon(flags){
+        daemonStartStopInProgress = true;
+
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
-
-        // Pause simplemode connection timer
-        simpleModeConnectionTimer.stop();
 
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
@@ -682,8 +678,10 @@ ApplicationWindow {
     }
 
     function stopDaemon(callback){
+        daemonStartStopInProgress = true;
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
         daemonManager.stopAsync(persistentSettings.nettype, function(result) {
+            daemonStartStopInProgress = false;
             hideProcessingSplash();
             callback(result);
         });
@@ -691,13 +689,13 @@ ApplicationWindow {
 
     function onDaemonStarted(){
         console.log("daemon started");
+        daemonStartStopInProgress = false;
         hideProcessingSplash();
         currentWallet.connected(true);
         // resume refresh
         currentWallet.startRefresh();
         // resume simplemode connection timer
         appWindow.disconnectedEpoch = Utils.epoch();
-        simpleModeConnectionTimer.start();
     }
     function onDaemonStopped(){
         currentWallet.connected(true);
@@ -705,6 +703,7 @@ ApplicationWindow {
 
     function onDaemonStartFailure(error) {
         console.log("daemon start failed");
+        daemonStartStopInProgress = false;
         hideProcessingSplash();
         // resume refresh
         currentWallet.startRefresh();
@@ -1117,7 +1116,6 @@ ApplicationWindow {
             middlePanel.receiveView.clearFields();
             // disable timers
             userInActivityTimer.running = false;
-            simpleModeConnectionTimer.running = false;
         });
     }
 
@@ -1878,9 +1876,6 @@ ApplicationWindow {
     }
 
     function checkSimpleModeConnection(){
-        // auto-connection mechanism for simple mode
-        if(appWindow.walletMode >= 2) return;
-
         const disconnectedTimeoutSec = 30;
         const firstCheckDelaySec = 2;
 
@@ -1897,15 +1892,20 @@ ApplicationWindow {
         }
 
         if (appWindow.daemonRunning) {
-            appWindow.stopDaemon();
+            appWindow.stopDaemon(function() {
+                appWindow.startDaemon("")
+            });
+        } else {
+            appWindow.startDaemon("");
         }
-        appWindow.startDaemon("");
     }
 
     Timer {
         // Simple mode connection check timer
         id: simpleModeConnectionTimer
-        interval: 2000; running: false; repeat: true
+        interval: 2000
+        running: appWindow.walletMode < 2 && currentWallet != undefined && !daemonStartStopInProgress
+        repeat: true
         onTriggered: appWindow.checkSimpleModeConnection()
     }
 
