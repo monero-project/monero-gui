@@ -53,7 +53,7 @@ Drawer {
     y: titleBar.height
 
     background: Rectangle {
-        color: "#0d0d0d"
+        color: MoneroComponents.Style.blackTheme ? "#0d0d0d" : "white"
         width: parent.width
     }
 
