@@ -58,66 +58,6 @@ namespace {
     static constexpr char ATTRIBUTE_SUBADDRESS_ACCOUNT[] ="gui.subaddress_account";
 }
 
-class WalletListenerImpl : public  Monero::WalletListener
-{
-public:
-    WalletListenerImpl(Wallet * w)
-        : m_wallet(w)
-    {
-
-    }
-
-    virtual void moneySpent(const std::string &txId, uint64_t amount) override
-    {
-        qDebug() << __FUNCTION__;
-        emit m_wallet->moneySpent(QString::fromStdString(txId), amount);
-    }
-
-
-    virtual void moneyReceived(const std::string &txId, uint64_t amount) override
-    {
-        qDebug() << __FUNCTION__;
-        emit m_wallet->moneyReceived(QString::fromStdString(txId), amount);
-    }
-
-    virtual void unconfirmedMoneyReceived(const std::string &txId, uint64_t amount) override
-    {
-        qDebug() << __FUNCTION__;
-        emit m_wallet->unconfirmedMoneyReceived(QString::fromStdString(txId), amount);
-    }
-
-    virtual void newBlock(uint64_t height) override
-    {
-        // qDebug() << __FUNCTION__;
-        emit m_wallet->newBlock(height, m_wallet->daemonBlockChainTargetHeight());
-    }
-
-    virtual void updated() override
-    {
-        emit m_wallet->updated();
-    }
-
-    // called when wallet refreshed by background thread or explicitly
-    virtual void refreshed() override
-    {
-        qDebug() << __FUNCTION__;
-        emit m_wallet->refreshed();
-    }
-
-    virtual void onDeviceButtonRequest(uint64_t code) override
-    {
-        emit m_wallet->deviceButtonRequest(code);
-    }
-
-    virtual void onDeviceButtonPressed() override
-    {
-        emit m_wallet->deviceButtonPressed();
-    }
-
-private:
-    Wallet * m_wallet;
-};
-
 Wallet::Wallet(QObject * parent)
     : Wallet(nullptr, parent)
 {
@@ -1019,6 +959,19 @@ void Wallet::segregationHeight(quint64 height)
 void Wallet::keyReuseMitigation2(bool mitigation)
 {
     m_walletImpl->keyReuseMitigation2(mitigation);
+}
+
+void Wallet::onWalletPassphraseNeeded(bool on_device)
+{
+    emit this->walletPassphraseNeeded(on_device);
+}
+
+void Wallet::onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort)
+{
+    if (m_walletListener != nullptr)
+    {
+        m_walletListener->onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+    }
 }
 
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)

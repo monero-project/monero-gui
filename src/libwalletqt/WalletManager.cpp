@@ -42,11 +42,12 @@
 #include <QString>
 
 #include "qt/updater.h"
+#include "qt/ScopeGuard.h"
 
-class WalletPassphraseListenerImpl : public  Monero::WalletListener
+class WalletPassphraseListenerImpl : public  Monero::WalletListener, public PassphraseReceiver
 {
 public:
-  WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_wallet(nullptr) {}
+  WalletPassphraseListenerImpl(WalletManager * mgr): m_mgr(mgr), m_phelper(mgr) {}
 
   virtual void moneySpent(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
   virtual void moneyReceived(const std::string &txId, uint64_t amount) override { (void)txId; (void)amount; };
@@ -55,43 +56,33 @@ public:
   virtual void updated() override {};
   virtual void refreshed() override {};
 
-  virtual Monero::optional<std::string> onDevicePassphraseRequest(bool on_device) override
+  virtual void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort) override
   {
       qDebug() << __FUNCTION__;
-      if (on_device) return Monero::optional<std::string>();
+      m_phelper.onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+  }
 
-      m_mgr->onWalletPassphraseNeeded(m_wallet);
-
-      if (m_mgr->m_passphrase_abort)
-      {
-        throw std::runtime_error("Passphrase entry abort");
-      }
-
-      auto tmpPass = m_mgr->m_passphrase.toStdString();
-      m_mgr->m_passphrase = QString();
-
-      return Monero::optional<std::string>(tmpPass);
+  virtual Monero::optional<std::string> onDevicePassphraseRequest(bool & on_device) override
+  {
+      qDebug() << __FUNCTION__;
+      return m_phelper.onDevicePassphraseRequest(on_device);
   }
 
   virtual void onDeviceButtonRequest(uint64_t code) override
   {
-    emit m_mgr->deviceButtonRequest(code);
+      qDebug() << __FUNCTION__;
+      emit m_mgr->deviceButtonRequest(code);
   }
 
   virtual void onDeviceButtonPressed() override
   {
-    emit m_mgr->deviceButtonPressed();
-  }
-
-  virtual void onSetWallet(Monero::Wallet * wallet) override
-  {
       qDebug() << __FUNCTION__;
-      m_wallet = wallet;
+      emit m_mgr->deviceButtonPressed();
   }
 
 private:
   WalletManager * m_mgr;
-  Monero::Wallet * m_wallet;
+  PassphraseHelper m_phelper;
 };
 
 WalletManager * WalletManager::m_instance = nullptr;
@@ -123,6 +114,13 @@ Wallet *WalletManager::openWallet(const QString &path, const QString &password, 
 {
     QMutexLocker locker(&m_mutex);
     WalletPassphraseListenerImpl tmpListener(this);
+    m_mutex_passphraseReceiver.lock();
+    m_passphraseReceiver = &tmpListener;
+    m_mutex_passphraseReceiver.unlock();
+    const auto cleanup = sg::make_scope_guard([this]() noexcept {
+        QMutexLocker passphrase_locker(&m_mutex_passphraseReceiver);
+        this->m_passphraseReceiver = nullptr;
+    });
 
     if (m_currentWallet) {
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
@@ -186,6 +184,13 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
 {
     QMutexLocker locker(&m_mutex);
     WalletPassphraseListenerImpl tmpListener(this);
+    m_mutex_passphraseReceiver.lock();
+    m_passphraseReceiver = &tmpListener;
+    m_mutex_passphraseReceiver.unlock();
+    const auto cleanup = sg::make_scope_guard([this]() noexcept {
+        QMutexLocker passphrase_locker(&m_mutex_passphraseReceiver);
+        this->m_passphraseReceiver = nullptr;
+    });
 
     if (m_currentWallet) {
         qDebug() << "Closing open m_currentWallet" << m_currentWallet;
@@ -529,6 +534,7 @@ bool WalletManager::clearWalletCache(const QString &wallet_path) const
 
 WalletManager::WalletManager(QObject *parent)
     : QObject(parent)
+    , m_passphraseReceiver(nullptr)
     , m_scheduler(this)
 {
     m_pimpl =  Monero::WalletManagerFactory::getWalletManager();
@@ -539,22 +545,16 @@ WalletManager::~WalletManager()
     m_scheduler.shutdownWaitForFinished();
 }
 
-void WalletManager::onWalletPassphraseNeeded(Monero::Wallet *)
+void WalletManager::onWalletPassphraseNeeded(bool on_device)
 {
-    m_mutex_pass.lock();
-    m_passphrase_abort = false;
-    emit this->walletPassphraseNeeded();
-
-    m_cond_pass.wait(&m_mutex_pass);
-    m_mutex_pass.unlock();
+    emit this->walletPassphraseNeeded(on_device);
 }
 
-void WalletManager::onPassphraseEntered(const QString &passphrase, bool entry_abort)
+void WalletManager::onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort)
 {
-    m_mutex_pass.lock();
-    m_passphrase = passphrase;
-    m_passphrase_abort = entry_abort;
-
-    m_cond_pass.wakeAll();
-    m_mutex_pass.unlock();
+    QMutexLocker locker(&m_mutex_passphraseReceiver);
+    if (m_passphraseReceiver != nullptr)
+    {
+        m_passphraseReceiver->onPassphraseEntered(passphrase, enter_on_device, entry_abort);
+    }
 }
