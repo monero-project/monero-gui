@@ -1124,8 +1124,10 @@ ApplicationWindow {
             wizard.restart();
             wizard.wizardState = "wizardHome";
             rootItem.state = "wizard"
-            // reset balance
+            // reset balance, clear spendable funds message
             clearMoneroCardLabelText();
+            leftPanel.minutesToUnlock = "";
+            // reset fields
             middlePanel.addressBookView.clearFields();
             middlePanel.transferView.clearFields();
             middlePanel.receiveView.clearFields();
