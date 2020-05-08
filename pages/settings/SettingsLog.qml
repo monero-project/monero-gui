@@ -231,9 +231,6 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        logLevelDropdown.currentIndex = appWindow.persistentSettings.logLevel;
-        logLevelDropdown.update();
-
         if(typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
     }

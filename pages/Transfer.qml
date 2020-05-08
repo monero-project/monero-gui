@@ -118,7 +118,6 @@ Rectangle {
         amountLine.text = ""
         setDescription("");
         priorityDropdown.currentIndex = 0
-        updatePriorityDropdown()
     }
 
     // Information dialog
@@ -397,6 +396,7 @@ Rectangle {
                   id: priorityDropdown
                   Layout.topMargin: 5
                   currentIndex: 0
+                  dataModel: priorityModelV5
               }
           }
       }
@@ -745,12 +745,6 @@ Rectangle {
     function onPageCompleted() {
         console.log("transfer page loaded")
         updateStatus();
-        updatePriorityDropdown()
-    }
-
-    function updatePriorityDropdown() {
-        priorityDropdown.dataModel = priorityModelV5;
-        priorityDropdown.update()
     }
 
     //TODO: Add daemon sync status

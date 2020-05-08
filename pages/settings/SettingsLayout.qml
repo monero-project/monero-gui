@@ -196,6 +196,7 @@ Rectangle {
                 MoneroComponents.StandardDropdown {
                     id: fiatPriceCurrencyDropdown
                     Layout.fillWidth: true
+                    currentIndex: persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1
                     dataModel: fiatPriceCurrencyModel
                     onChanged: {
                         var obj = dataModel.get(currentIndex);
@@ -280,10 +281,6 @@ Rectangle {
                 fiatPriceProviderDropDown.currentIndex = i;
             i += 1;
         }
-
-        fiatPriceProviderDropDown.update();
-        fiatPriceCurrencyDropdown.currentIndex = persistentSettings.fiatPriceCurrency === "xmrusd" ? 0 : 1;
-        fiatPriceCurrencyDropdown.update();
 
         console.log('SettingsLayout loaded');
     }
