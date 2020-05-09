@@ -109,7 +109,7 @@ Rectangle {
             stepSize: 1
             to: 60
             value: persistentSettings.autosaveMinutes
-            text: "%1 %2 %3".arg(qsTr("Every")).arg(value).arg(qsTr("minute(s)")) + translationManager.emptyString
+            text: qsTr("Every %n minute(s)", "0", value) + translationManager.emptyString
             onMoved: persistentSettings.autosaveMinutes = value
         }
 
@@ -129,10 +129,7 @@ Rectangle {
             stepSize: 1
             to: 60
             value: persistentSettings.lockOnUserInActivityInterval
-            text: {
-                var minutes = value > 1 ? qsTr("minutes") : qsTr("minute");
-                return qsTr("After ") + value + " " + minutes + translationManager.emptyString;
-            }
+            text: qsTr("After %n minute(s)", "0", value) + translationManager.emptyString
             onMoved: persistentSettings.lockOnUserInActivityInterval = value
         }
 
