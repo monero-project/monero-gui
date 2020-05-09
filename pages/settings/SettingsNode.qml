@@ -265,8 +265,8 @@ Rectangle{
                 Layout.minimumWidth: 100
                 placeholderFontSize: 15
 
-                daemonAddrLabelText: qsTr("Address")
-                daemonPortLabelText: qsTr("Port")
+                daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
+                daemonPortLabelText: qsTr("Port") + translationManager.emptyString
 
                 property var rna: persistentSettings.remoteNodeAddress
                 daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
@@ -417,8 +417,8 @@ Rectangle{
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20
 
-                        daemonAddrLabelText: qsTr("Bootstrap Address")
-                        daemonPortLabelText: qsTr("Bootstrap Port")
+                        daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
+                        daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
                         daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
                         daemonPortText: {
                             var node_split = persistentSettings.bootstrapNodeAddress.split(":");
