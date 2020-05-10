@@ -60,7 +60,12 @@ ApplicationWindow {
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
+    property var transactionAmount;
+    property var transactionAddress;
+    property var transactionFee;
+    property var transactionPriority;
     property var transactionDescription;
+    property var transactionID;
     property var walletPassword
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -496,16 +501,30 @@ ApplicationWindow {
     }
 
     function onDeviceButtonRequest(code){
-        prevSplashText = splash.messageText;
-        splashDisplayedBeforeButtonRequest = splash.visible;
-        appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
+        if (txConfirmationPopup.visible) {
+            txConfirmationPopup.bottomTextAnimation.running = true
+            if (!txConfirmationPopup.errorText.visible) {
+                txConfirmationPopup.bottomText.text  = qsTr("Please confirm transaction in the device...") + translationManager.emptyString;
+            } else {
+                txConfirmationPopup.bottomText.text  = qsTr("Please proceed to the device...") + translationManager.emptyString;
+            }
+        } else {
+            prevSplashText = splash.messageText;
+            splashDisplayedBeforeButtonRequest = splash.visible;
+            appWindow.showProcessingSplash(qsTr("Please proceed to the device..."));
+        }
     }
 
     function onDeviceButtonPressed(){
-        if (splashDisplayedBeforeButtonRequest){
-           appWindow.showProcessingSplash(prevSplashText);
+        if (txConfirmationPopup.visible) {
+            txConfirmationPopup.bottomTextAnimation.running = false
+            txConfirmationPopup.bottomText.text  = qsTr("Signing transaction in the device...") + translationManager.emptyString;
         } else {
-           hideProcessingSplash();
+            if (splashDisplayedBeforeButtonRequest){
+                appWindow.showProcessingSplash(prevSplashText);
+            } else {
+                hideProcessingSplash();
+            }
         }
     }
 
@@ -785,28 +804,22 @@ ApplicationWindow {
 
     function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
         console.log("Transaction created");
-        hideProcessingSplash();
+        txConfirmationPopup.bottomText.text  = "";
         transaction = pendingTransaction;
         // validate address;
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
-            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            if (currentWallet.connected() == Wallet.ConnectionStatus_WrongVersion)
-                informationPopup.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
-            else
-                informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open();
+            if (currentWallet.connected() == Wallet.ConnectionStatus_WrongVersion) {
+                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: Wrong daemon version: ") + transaction.errorString
+            } else {
+                txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString
+            }
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("Error") + translationManager.emptyString
-            informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
-            informationPopup.icon = StandardIcon.Information
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
+            console.error("Can't create transaction: ", transaction.errorString);
+            txConfirmationPopup.errorText.text   = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
         } else {
@@ -814,22 +827,12 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
-            transactionConfirmationPopup.title = qsTr("Please confirm transaction:\n") + translationManager.emptyString;
-            transactionConfirmationPopup.text = "";
-            transactionConfirmationPopup.text += (address === "" ? "" : (qsTr("Address: ") + address));
-            transactionConfirmationPopup.text += (paymentId === "" ? "" : (qsTr("\nPayment ID: ") + paymentId));
-            transactionConfirmationPopup.text +=  qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount);
-            transactionConfirmationPopup.text +=  qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee);
-            transactionConfirmationPopup.text +=  qsTr("\nRingsize: ") + (mixinCount + 1);
-            transactionConfirmationPopup.text +=  qsTr("\n\nNumber of transactions: ") + transaction.txCount
-            transactionConfirmationPopup.text +=  (transactionDescription === "" ? "" : (qsTr("\nDescription: ") + transactionDescription))
-            for (var i = 0; i < transaction.subaddrIndices.length; ++i){
-                transactionConfirmationPopup.text += qsTr("\nSpending address index: ") + transaction.subaddrIndices[i];
-            }
-
-            transactionConfirmationPopup.text += translationManager.emptyString;
-            transactionConfirmationPopup.icon = StandardIcon.Question
-            transactionConfirmationPopup.open()
+            var transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
+            var transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
+            appWindow.transactionFee = transactionFee;
+            appWindow.transactionAmount = transactionAmount;
+            txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
+            txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
         }
     }
 
@@ -843,12 +846,19 @@ ApplicationWindow {
                     ", mixins: ", mixinCount,
                     ", priority: ", priority,
                     ", description: ", description);
-
-        var splashMsg = qsTr("Creating transaction...");
-        splashMsg += appWindow.currentWallet.isLedger() ? qsTr("\n\nPlease check your hardware wallet –\nyour input may be required.") : "";
-        showProcessingSplash(splashMsg);
-
-        transactionDescription = description;
+        var transactionDescription = description;
+        var transactionAmount = Utils.removeTrailingZeros(amount);        
+        var transactionAddress = address;
+        var transactionPriority = priority;
+        var transactionFee = ""; //we still don't have the final
+        appWindow.transactionDescription = transactionDescription;
+        appWindow.transactionAmount = transactionAmount;
+        appWindow.transactionAddress = transactionAddress;
+        appWindow.transactionPriority = transactionPriority;
+        appWindow.transactionFee = transactionFee;   
+        txConfirmationPopup.bottomTextAnimation.running = false
+        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
+        txConfirmationPopup.open()
 
         // validate amount;
         if (amount !== "(all)") {
@@ -856,27 +866,15 @@ ApplicationWindow {
             console.log("integer amount: ", amountxmr);
             console.log("integer unlocked", currentWallet.unlockedBalance())
             if (amountxmr <= 0) {
-                hideProcessingSplash()
-                informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text  = qsTr("Amount is wrong: expected number from %1 to %2")
-                        .arg(walletManager.displayAmount(0))
-                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                        + translationManager.emptyString
-
-                informationPopup.icon  = StandardIcon.Critical
-                informationPopup.onCloseCallback = null
-                informationPopup.open()
+                txConfirmationPopup.errorText.text  = qsTr("Amount is wrong: expected number from %1 to %2")
+                                                      .arg(walletManager.displayAmount(0))
+                                                      .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                                                      + translationManager.emptyString;
                 return;
             } else if (amountxmr > currentWallet.unlockedBalance()) {
-                hideProcessingSplash()
-                informationPopup.title = qsTr("Error") + translationManager.emptyString;
-                informationPopup.text  = qsTr("Insufficient funds. Unlocked balance: %1")
-                        .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                        + translationManager.emptyString
-
-                informationPopup.icon  = StandardIcon.Critical
-                informationPopup.onCloseCallback = null
-                informationPopup.open()
+                txConfirmationPopup.errorText.text  = qsTr("Insufficient funds. Unlocked balance: %1")
+                                                     .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                                                     + translationManager.emptyString;
                 return;
             }
         }
@@ -895,6 +893,7 @@ ApplicationWindow {
         selectExisting: false;
 
         onAccepted: {
+            txConfirmationPopup.open();
             handleTransactionConfirmed()
         }
         onRejected: {
@@ -908,38 +907,27 @@ ApplicationWindow {
     function handleSweepUnmixable() {
         console.log("Creating transaction: ")
 
+        var sweepUnmixable = true;
+        txConfirmationPopup.open();
         transaction = currentWallet.createSweepUnmixableTransaction();
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
-            informationPopup.title = qsTr("Error") + translationManager.emptyString;
-            informationPopup.text  = qsTr("Can't create transaction: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
-            informationPopup.onCloseCallback = null
-            informationPopup.open();
+            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString     
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
         } else if (transaction.txCount == 0) {
-            informationPopup.title = qsTr("Error") + translationManager.emptyString
-            informationPopup.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
-            informationPopup.icon = StandardIcon.Information
-            informationPopup.onCloseCallback = null
-            informationPopup.open()
+            console.error("No unmixable outputs to sweep");
+            txConfirmationPopup.errorText.text  = qsTr("No unmixable outputs to sweep") + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
-
-            // here we show confirmation popup;
-
-            transactionConfirmationPopup.title = qsTr("Confirmation") + translationManager.emptyString
-            transactionConfirmationPopup.text  = qsTr("Please confirm transaction:\n")
-                        + qsTr("\n\nAmount: ") + walletManager.displayAmount(transaction.amount)
-                        + qsTr("\nFee: ") + walletManager.displayAmount(transaction.fee)
-                        + translationManager.emptyString
-            transactionConfirmationPopup.icon = StandardIcon.Question
-            transactionConfirmationPopup.open()
+            var transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
+            var transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
+            appWindow.transactionAmount = transactionAmount;
+            appWindow.transactionFee = transactionFee;        
             // committing transaction
         }
     }
@@ -958,40 +946,33 @@ ApplicationWindow {
 
             // Store to file
             transaction.setFilename(path);
+            txConfirmationPopup.bottomText.text  = qsTr("Saving transaction file...") + translationManager.emptyString;
+            txConfirmationPopup.bottomTextAnimation.running = false          
+        } else {
+            txConfirmationPopup.bottomText.text  = qsTr("Sending transaction...") + translationManager.emptyString;
+            txConfirmationPopup.bottomTextAnimation.running = false          
         }
 
-        appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
         currentWallet.commitTransactionAsync(transaction);
     }
 
     function onTransactionCommitted(success, transaction, txid) {
-        hideProcessingSplash();
         if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
-            informationPopup.title = qsTr("Error") + translationManager.emptyString
-            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
-            informationPopup.icon  = StandardIcon.Critical
+            txConfirmationPopup.errorText.text  = qsTr("Couldn't send the money: ") + transaction.errorString
         } else {
-            var txid_text = ""
-            informationPopup.title = qsTr("Information") + translationManager.emptyString
-            for (var i = 0; i < txid.length; ++i) {
-                if (txid_text.length > 0)
-                    txid_text += ", "
-                txid_text += txid[i]
-            }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
-            informationPopup.icon  = StandardIcon.Information
+            appWindow.transactionID = txid;
             if (transactionDescription.length > 0) {
-                for (var i = 0; i < txid.length; ++i)
-                  currentWallet.setUserNote(txid[i], transactionDescription);
+                currentWallet.setUserNote(txid, transactionDescription);
             }
 
             // Clear tx fields
             middlePanel.transferView.clearFields()
+            txConfirmationPopup.close()
+            successfulTxPopup.onCloseCallback = null
+            successfulTxPopup.open()
 
         }
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
         currentWallet.storeAsync(function(success) {
@@ -1421,20 +1402,32 @@ ApplicationWindow {
         }
     }
 
-    // Confrirmation aka question dialog
-    StandardDialog {
+    // Transaction confirmation popup
+    TxConfirmationDialog {
+        // dynamically change onclose handler
+        id: txConfirmationPopup
         z: parent.z + 1
-        id: transactionConfirmationPopup
+        onRejected: {
+            appWindow.transactionAmount = "";
+            appWindow.transactionAddress = "";
+            appWindow.transactionFee = "";
+            appWindow.transactionPriority = "";
+            appWindow.transactionDescription = "";
+            appWindow.transactionID = "";
+        }
         onAccepted: {
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
                 if (viewOnly) {
                     saveTxDialog.open();
+                    passwordDialog.isSendingTransaction = false;
                 } else {
+                    txConfirmationPopup.open();
                     handleTransactionConfirmed()
+                    passwordDialog.isSendingTransaction = false;
                 }
             }
-            close();
+            txConfirmationPopup.close();
             passwordDialog.onAcceptedCallback = function() {
                 if(walletPassword === passwordDialog.password){
                     handleAccepted()
@@ -1442,11 +1435,25 @@ ApplicationWindow {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
                 }
             }
+            passwordDialog.isSendingTransaction = true;
             passwordDialog.onRejectedCallback = null;
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
                 passwordDialog.open()  
+            }
+        }
+    }
+
+    // Transaction successfully sent popup
+    SuccessfulTxDialog {
+        // dynamically change onclose handler
+        property var onCloseCallback
+        id: successfulTxPopup
+        z: parent.z + 1
+        onAccepted:  {
+            if (onCloseCallback) {
+                onCloseCallback()
             }
         }
     }
@@ -1720,7 +1727,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible
         }
 
 

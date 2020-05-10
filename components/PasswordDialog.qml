@@ -49,6 +49,7 @@ Item {
     property bool passwordDialogMode
     property bool passphraseDialogMode
     property bool newPasswordDialogMode
+    property bool isSendingTransaction: false
 
     // same signals as Dialog has
     signal accepted()
@@ -128,6 +129,7 @@ Item {
 
     function onCancel() {
         root.close()
+        root.isSendingTransaction = false;
         if (passwordDialogMode) {
             root.rejected()
         } else if (newPasswordDialogMode) {
@@ -275,6 +277,7 @@ Item {
                 MoneroComponents.StandardButton {
                     id: cancelButton
                     small: true
+                    primary: false
                     text: qsTr("Cancel") + translationManager.emptyString
                     KeyNavigation.tab: passwordInput1
                     onClicked: onCancel()
@@ -283,7 +286,16 @@ Item {
                 MoneroComponents.StandardButton {
                     id: okButton
                     small: true
-                    text: qsTr("Ok") + translationManager.emptyString
+                    text: {
+                        if (isSendingTransaction && !viewOnly) {
+                            qsTr("Send transaction") + translationManager.emptyString
+                        } else if (isSendingTransaction && viewOnly) {
+                            qsTr("Save transaction file") + translationManager.emptyString
+                        } else {
+                            qsTr("Ok") + translationManager.emptyString
+                        }
+                    }
+                    rightIcon: (isSendingTransaction && !viewOnly) ? "qrc:///images/rightArrow.png" : ""
                     KeyNavigation.tab: cancelButton
                     enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: onOk()
