@@ -307,6 +307,42 @@ Rectangle{
                 }
             }
 
+            ColumnLayout {
+                spacing: 10
+                Layout.fillWidth: true
+                id: keepLocalNodeRunningColumn
+                z: parent.z + 1
+                
+                MoneroComponents.Label {
+                    id: keepLocalNodeRunningLabel
+                    Layout.topMargin: 0
+                    text: qsTr("When closing GUI wallet or connecting to a remote node") + translationManager.emptyString
+                    fontBold: false
+                    fontSize: 14
+                }
+                
+                ListModel {
+                     id: keepLocalNodeRunningListModel
+                     ListElement { column1: "Stop local node"; }
+                     ListElement { column1: "Keep local node running (recommended)"; }
+                     ListElement { column1: "Always ask whether the node should be stopped"; }
+                }
+
+                MoneroComponents.StandardDropdown {
+                    id: keepLocalNodeRunningDropDown
+                    dataModel: keepLocalNodeRunningListModel
+                    itemTopMargin: 2
+                    currentIndex: appWindow.persistentSettings.keepLocalNodeRunning;
+                    onChanged: {
+                        console.log("keepLocalNodeRunning changed: ",currentIndex);
+                        appWindow.persistentSettings.keepLocalNodeRunning = currentIndex;
+                    }
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: keepLocalNodeRunningColumn.width
+                    z: parent.z + 1
+                }
+            }
+
             MoneroComponents.LineEditMulti {
                 id: daemonFlags
                 Layout.fillWidth: true
