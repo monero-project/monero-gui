@@ -38,8 +38,11 @@ import "effects/" as MoneroEffects
 
 Rectangle {
     id: root
-    color: "transparent"
+    color: MoneroComponents.Style.blackTheme ? "black" : "white"
     visible: false
+    radius: 10
+    border.color: MoneroComponents.Style.blackTheme ? MoneroComponents.Style.moneroGrey : MoneroComponents.Style._w_appWindowBorderColor
+    border.width: 1
     property alias title: dialogTitle.text
     property alias text: dialogContent.text
     property alias content: root.text
@@ -56,20 +59,6 @@ Rectangle {
     signal accepted()
     signal rejected()
     signal closeCallback();
-
-    // background
-    MoneroEffects.GradientBackground {
-        anchors.fill: parent
-        fallBackColor: MoneroComponents.Style.middlePanelBackgroundColor
-        initialStartColor: MoneroComponents.Style.middlePanelBackgroundGradientStart
-        initialStopColor: MoneroComponents.Style.middlePanelBackgroundGradientStop
-        blackColorStart: MoneroComponents.Style._b_middlePanelBackgroundGradientStart
-        blackColorStop: MoneroComponents.Style._b_middlePanelBackgroundGradientStop
-        whiteColorStart: MoneroComponents.Style._w_middlePanelBackgroundGradientStart
-        whiteColorStop: MoneroComponents.Style._w_middlePanelBackgroundGradientStop
-        start: Qt.point(0, 0)
-        end: Qt.point(height, width)
-    }
 
     // Make window draggable
     MouseArea {
@@ -172,6 +161,7 @@ Rectangle {
             MoneroComponents.StandardButton {
                 id: cancelButton
                 text: qsTr("Cancel") + translationManager.emptyString
+                primary: false
                 onClicked: {
                     root.close()
                     root.rejected()
@@ -218,38 +208,5 @@ Rectangle {
             onEntered: closeButton.color = "#262626";
             onExited: closeButton.color = "transparent";
         }
-    }
-
-    // window borders
-    Rectangle{
-        width: 1
-        color: MoneroComponents.Style.grey
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-    }
-
-    Rectangle{
-        width: 1
-        color: MoneroComponents.Style.grey
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-    }
-
-    Rectangle{
-        height: 1
-        color: MoneroComponents.Style.grey
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
-    }
-
-    Rectangle{
-        height: 1
-        color: MoneroComponents.Style.grey
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
     }
 }
