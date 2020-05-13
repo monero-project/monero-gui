@@ -125,7 +125,6 @@ target_compile_definitions(monero-gui
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 if(X11_FOUND)
     target_link_libraries(monero-gui ${X11_LIBRARIES} pthread dl Xt xcb X11)
