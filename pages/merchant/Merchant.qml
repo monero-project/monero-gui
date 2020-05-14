@@ -25,6 +25,7 @@ Item {
     anchors.margins: 0
 
     property int    minWidth: 900
+    property int    minHeight: 600
     property int    qrCodeSize: 220
     property bool   enableTracking: false
     property string trackingError: ""  // setting this will show a message @ tracking table
@@ -70,7 +71,7 @@ Item {
 
     ColumnLayout {
         id: mainLayout
-        visible: parent.width >= root.minWidth
+        visible: parent.width >= root.minWidth && appWindow.height >= root.minHeight
         spacing: 0
 
         // emulates max-width + center for container
@@ -556,7 +557,7 @@ Item {
 
     Rectangle {
         // Shows when the window is too small
-        visible: parent.width < root.minWidth
+        visible: parent.width < root.minWidth || appWindow.height < root.minHeight
         anchors.top: parent.top
         anchors.topMargin: 100;
         anchors.horizontalCenter: parent.horizontalCenter
