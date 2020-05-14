@@ -593,7 +593,7 @@ Rectangle {
                     errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
                 }
                 return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:#ffffff;} p.orange{color:#ff9323;}</style>" +
-                       "<p>"  + qsTr("1. Using view-only wallet, export the outputs into a file") +
+                       "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
                        "<p>" + qsTr("2. Using cold wallet, import the outputs file and export the key images") + "</p>" +
                        "<p>" + qsTr("3. Using view-only wallet, import the key images file and create a transaction file") + "</p>" +
                        errorMessage +
