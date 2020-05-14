@@ -369,8 +369,8 @@ if (NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_C_COMPILER_VERSION VER
 endif()
 
 # linker
-if (NOT (WIN32 AND (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND CMAKE_C_COMPILER_VERSION VERSION_LESS 9.1)))
-  # Windows binaries die on startup with PIE when compiled with GCC <9.x
+if (NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
+  # Windows binaries die on startup with PIE when compiled with GCC
   add_linker_flag_if_supported(-pie LD_SECURITY_FLAGS)
 endif()
 add_linker_flag_if_supported(-Wl,-z,relro LD_SECURITY_FLAGS)
