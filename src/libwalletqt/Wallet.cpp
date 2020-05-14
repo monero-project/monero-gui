@@ -239,6 +239,11 @@ bool Wallet::isLedger() const
     return m_walletImpl->getDeviceType() == Monero::Wallet::Device_Ledger;
 }
 
+bool Wallet::isTrezor() const
+{
+    return m_walletImpl->getDeviceType() == Monero::Wallet::Device_Trezor;
+}
+
 //! create a view only wallet
 bool Wallet::createViewOnly(const QString &path, const QString &password) const
 {
