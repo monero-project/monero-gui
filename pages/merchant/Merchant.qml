@@ -574,6 +574,13 @@ Item {
             text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
             themeTransition: false
         }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: appWindow.showPageRequest("Settings")
+        }
     }
 
     function update() {
