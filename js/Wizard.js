@@ -97,10 +97,6 @@ function tr(text) {
     return qsTr(text) + translationManager.emptyString
 }
 
-function lineBreaksToSpaces(text) {
-    return text.trim().replace(/(\r\n|\n|\r)/gm, " ");
-}
-
 function usefulName(path) {
     // arbitrary "short enough" limit
     if (path.length < 32)
@@ -110,7 +106,7 @@ function usefulName(path) {
 
 function checkSeed(seed) {
     console.log("Checking seed")
-    var wordsArray = lineBreaksToSpaces(seed).split(" ");
+    var wordsArray = seed.split(/\s+/);
     return wordsArray.length === 25 || wordsArray.length === 24
 }
 
