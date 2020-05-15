@@ -1,5 +1,5 @@
-; Monero Carbon Chamaeleon GUI Wallet Installer for Windows
-; Copyright (c) 2017-2019, The Monero Project
+; Monero Nitrogen Nebula GUI Wallet Installer for Windows
+; Copyright (c) 2017-2020, The Monero Project
 ; See LICENSE
 #define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
 
@@ -62,7 +62,6 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 ; .exe/.dll file possibly with version info).
 ;
 ; This is far more robust than relying on version info or on file dates (flag "comparetimestamp").
-; As of version 0.15.0.0, the Monero .exe files do not carry version info anyway in their .exe headers.
 ; The only small drawback seems to be somewhat longer update times because each and every file is
 ; copied again, even if already present with correct file date and identical content.
 ;
@@ -71,17 +70,18 @@ Name: "en"; MessagesFile: "compiler:Default.isl"
 
 Source: {#file AddBackslash(SourcePath) + "ReadMe.htm"}; DestDir: "{app}"; DestName: "ReadMe.htm"; Flags: ignoreversion
 Source: "FinishImage.bmp"; Flags: dontcopy
+Source: "LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero GUI wallet exe and guide
 Source: "bin\monero-wallet-gui.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\monero-gui-wallet-guide.pdf"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero CLI wallet
-Source: "bin\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-wallet-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-gen-trusted-multisig.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero wallet RPC interface implementation
-Source: "bin\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-wallet-rpc.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Monero daemon
 Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -90,16 +90,17 @@ Source: "bin\monerod.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "monero-daemon.bat"; DestDir: "{app}"; Flags: ignoreversion;
 
 ; Monero blockchain utilities
-Source: "bin\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-prune.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\monero-blockchain-stats.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-export.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-mark-spent-outputs.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-usage.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-import.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-ancestry.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-depth.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-prune-known-spent-data.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-prune.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-blockchain-stats.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\extras\monero-gen-ssl-cert.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
@@ -202,7 +203,7 @@ begin
   // Additional wizard page for entering a special blockchain location
   blockChainDefaultDir := ExpandConstant('{commonappdata}\bitmonero');
   s := 'The default folder to store the Monero blockchain is ' + blockChainDefaultDir;
-  s := s + '. As this will need more than 74 GB of free space, you may want to use a folder on a different drive.';
+  s := s + '. As this will need more than 90 GB of free space, you may want to use a folder on a different drive.';
   s := s + ' If yes, specify that folder here.';
 
   BlockChainDirPage := CreateInputDirPage(wpSelectDir,
