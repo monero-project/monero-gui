@@ -232,6 +232,12 @@ set(QT5_LIBRARIES
   Qt5Svg
 )
 
+# TODO: drop this once we switch to Qt 5.14+
+find_package(Qt5QmlModels QUIET)
+if(Qt5QmlModels_FOUND)
+  list(APPEND QT5_LIBRARIES Qt5QmlModels)
+endif()
+
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} REQUIRED)
 endforeach()
