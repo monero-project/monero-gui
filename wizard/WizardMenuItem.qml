@@ -31,6 +31,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../components" as MoneroComponents
 
@@ -39,6 +40,8 @@ RowLayout {
     Layout.fillWidth: true
     Layout.bottomMargin: 10
     property alias imageIcon: icon.source
+    property alias fontAwesomeIcon: fontAwesomeIcon.text
+    property alias fontAwesomeIconFontSize: fontAwesomeIcon.fontSize
     property alias headerText: header.text
     property alias bodyText: body.text
     signal menuClicked();
@@ -47,6 +50,7 @@ RowLayout {
     Item {
         Layout.preferredWidth: 70
         Layout.preferredHeight: 70
+        visible: icon.source != ""
 
         Image {
             id: icon
@@ -68,6 +72,30 @@ RowLayout {
             cached: true
         }
 
+        MouseArea {
+            cursorShape: Qt.PointingHandCursor
+            anchors.fill: parent
+            onClicked: {
+                rowlayout.menuClicked();
+            }
+        }
+    }
+
+    Item {
+        Layout.preferredWidth: 90
+        Layout.preferredHeight: 70
+        visible: fontAwesomeIcon.text != ""
+
+        MoneroComponents.Label {
+            id: fontAwesomeIcon
+            fontSize: 32
+            text: ""
+            fontFamily: FontAwesome.fontFamilySolid
+            anchors.centerIn: parent
+            fontColor: MoneroComponents.Style.defaultFontColor
+            styleName: "Solid"
+        }
+        
         MouseArea {
             cursorShape: Qt.PointingHandCursor
             anchors.fill: parent

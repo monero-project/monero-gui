@@ -58,7 +58,7 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
-                title: qsTr("About the simple mode") + translationManager.emptyString
+                title: qsTr("Remote node") + translationManager.emptyString
                 subtitle: ""
             }
 
@@ -69,12 +69,11 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("This mode is ideal for managing small amounts of Monero. You have access to basic features for making and managing transactions. It will automatically connect to the Monero network so you can start using Monero immediately.") + translationManager.emptyString
-                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
+                    text: qsTr("You have chosen to use your wallet in <b>simple mode</b> and to connect to the Monero network using a <b>remote node</b>. By using a remote node you will be able to start using Monero immediately and you will not have to download the blockchain.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
                     Layout.fillWidth: true
+                    textFormat: Text.RichText
 
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 16
@@ -82,9 +81,7 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("Remote nodes are useful if you are not able/don't want to download the whole blockchain, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
-                    themeTransitionBlackColor: MoneroComponents.Style._b_lightGreyFontColor
-                    themeTransitionWhiteColor: MoneroComponents.Style._w_lightGreyFontColor
+                    text: qsTr("Remote nodes are useful, but be advised that malicious remote nodes could compromise some privacy. They could track your IP address, your \"restore height\", and associated block request data, as well as send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
                     Layout.fillWidth: true
@@ -97,7 +94,7 @@ Rectangle {
                 MoneroComponents.WarningBox {
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
-                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
+                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use advanced mode and start a local node instead</b>.") + translationManager.emptyString
                 }
 
                 MoneroComponents.CheckBox {
