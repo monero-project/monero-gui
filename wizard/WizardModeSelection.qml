@@ -66,7 +66,7 @@ Rectangle {
             WizardMenuItem {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
                 Layout.topMargin: 20
-                headerText: qsTr("Simple mode") + (appWindow.persistentSettings.nettype == 0 ? " " + qsTr("(recommended)") : "") + translationManager.emptyString
+                headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
                         return qsTr("Easy access to basic functionality like sending, receiving, transactions history, and address book, as well as hardware wallet support.") + translationManager.emptyString;
@@ -89,7 +89,7 @@ Rectangle {
                 opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
                 Layout.topMargin: 5
                 Layout.leftMargin: 80
-                headerText: qsTr("Local node") + " & " + qsTr("Bootstrap node") + " " + qsTr("(recommended)") + translationManager.emptyString
+                headerText: qsTr("Local node") + " & " + qsTr("Bootstrap node") + translationManager.emptyString
                 bodyText: qsTr("Your wallet starts a local node and downloads the blockchain. While the download is not finished, your local node temporarily connects to a third-party remote node.") + translationManager.emptyString
                 fontAwesomeIcon: FontAwesome.home + "+" + FontAwesome.cloud
                 fontAwesomeIconFontSize: 26
