@@ -8,8 +8,7 @@ set(VERSION_MINOR "0")
 set(VERSION_REVISION "3")
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
-# libwallet requires a static build, so we only allow static compilation
-set(STATIC ON)
+option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR ON)
 option(ENABLE_PASS_STRENGTH_METER "Disable zxcvbn" OFF)
@@ -75,7 +74,10 @@ if(GIT_FOUND)
   endif()
 endif()
 
+set(STATIC_OLD ${STATIC})
+set(STATIC ON CACHE BOOL "Link libraries statically" FORCE)
 add_subdirectory(monero)
+set(STATIC ${STATIC_OLD} CACHE BOOL "Link libraries statically" FORCE)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 
