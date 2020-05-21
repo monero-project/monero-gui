@@ -75,6 +75,10 @@
 #include "daemon/DaemonManager.h"
 #endif
 
+#if defined(Q_OS_WIN)
+#include <QOpenGLContext>
+#endif
+
 #ifdef WITH_SCANNER
 #include "QR-Code-scanner/QrCodeScanner.h"
 #endif
@@ -178,6 +182,17 @@ int main(int argc, char *argv[])
     qputenv("TERM", "goaway");
 
     MainApp app(argc, argv);
+
+#if defined(Q_OS_WIN)
+    if (isOpenGL)
+    {
+        QOpenGLContext ctx;
+        isOpenGL = ctx.create() && ctx.format().version() >= qMakePair(2, 1);
+        if (!isOpenGL) {
+            qputenv("QMLSCENE_DEVICE", "softwarecontext");
+        }
+    }
+#endif
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
