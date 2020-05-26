@@ -55,6 +55,7 @@ Rectangle {
         inputDialog.labelText = qsTr("Set the label of the selected account:") + translationManager.emptyString;
         inputDialog.onAcceptedCallback = function() {
             appWindow.currentWallet.setSubaddressLabel(_index, 0, inputDialog.inputText)
+            appWindow.currentWallet.subaddressAccount.refresh()
         }
         inputDialog.onRejectedCallback = null;
         inputDialog.open(appWindow.currentWallet.getSubaddressLabel(_index, 0))
@@ -113,8 +114,8 @@ Rectangle {
                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
                         onClicked: {
                             console.log("Copied to clipboard");
-                            var balanceAllnumberonly = parent.text.slice(0, -4);
-                            clipboard.setText(balanceAllnumberonly);
+                            var balanceAllNumberOnly = parent.text.slice(0, -4);
+                            clipboard.setText(balanceAllNumberOnly);
                             appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
                         }
                     }
@@ -148,8 +149,8 @@ Rectangle {
                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
                         onClicked: {
                             console.log("Copied to clipboard");
-                            var unlockedBalanceAllnumberonly = parent.text.slice(0, -4);
-                            clipboard.setText(unlockedBalanceAllnumberonly);
+                            var unlockedBalanceAllNumberOnly = parent.text.slice(0, -4);
+                            clipboard.setText(unlockedBalanceAllNumberOnly);
                             appWindow.showStatusMessage(qsTr("Copied to clipboard"),3)
                         }
                     }
@@ -234,19 +235,7 @@ Rectangle {
                                 fontSize: 16 
                                 text: label
                                 elide: Text.ElideRight
-                                textWidth: addressLabel.x - nameLabel.x - 1
-                                themeTransition: false
-                            }
-
-                            MoneroComponents.Label {
-                                id: addressLabel
-                                color: MoneroComponents.Style.defaultFontColor
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: balanceNumberLabel.left
-                                anchors.leftMargin: -addressLabel.width - 30
-                                fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
+                                textWidth: balanceNumberLabel.x - nameLabel.x - 1
                                 themeTransition: false
                             }
 
@@ -255,12 +244,13 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: -balanceNumberLabel.width
+                                anchors.leftMargin: -balanceNumberLabel.width + 7
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: balance + " XMR"
                                 elide: Text.ElideRight
-                                textWidth: mainLayout.width < 660 ? 70 : 180
+                                //textWidth: mainLayout.width < 500 ? 80 : 180
+                                textWidth: 180
                                 themeTransition: false
                             }
 
