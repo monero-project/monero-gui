@@ -249,7 +249,6 @@ Rectangle {
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: balance + " XMR"
                                 elide: Text.ElideRight
-                                //textWidth: mainLayout.width < 500 ? 80 : 180
                                 textWidth: 180
                                 themeTransition: false
                             }
