@@ -16,6 +16,11 @@ option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_SOURCE_DIR}/cmake")
+include(CheckCCompilerFlag)
+include(CheckCXXCompilerFlag)
+include(CheckLinkerFlag)
+include(FindCcache)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -26,7 +31,7 @@ endif()
 set(BUILD_GUI_DEPS ON)
 set(ARCH "x86-64")
 set(BUILD_64 ON)
-set(INSTALL_VENDORED_LIBUNBOUND=ON)
+set(INSTALL_VENDORED_LIBUNBOUND ${STATIC})
 
 function (add_c_flag_if_supported flag var)
   string(REPLACE "-" "_" supported ${flag}_c)
@@ -74,10 +79,7 @@ if(GIT_FOUND)
   endif()
 endif()
 
-set(STATIC_OLD ${STATIC})
-set(STATIC ON CACHE BOOL "Link libraries statically" FORCE)
 add_subdirectory(monero)
-set(STATIC ${STATIC_OLD} CACHE BOOL "Link libraries statically" FORCE)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 
@@ -223,16 +225,16 @@ endif()
 set(QT5_LIBRARIES
   Qt5Core
   Qt5Quick
-  Qt5QuickControls2
   Qt5Widgets
   Qt5Gui
   Qt5Network
   Qt5Qml
-  Qt5Multimedia
-  Qt5Xml
-  Qt5XmlPatterns
   Qt5Svg
 )
+
+if(WITH_SCANNER)
+  list(APPEND QT5_LIBRARIES Qt5Multimedia)
+endif()
 
 # TODO: drop this once we switch to Qt 5.14+
 find_package(Qt5QmlModels QUIET)
@@ -399,9 +401,9 @@ if (WIN32)
   add_linker_flag_if_supported(-Wl,--high-entropy-va LD_SECURITY_FLAGS)
 endif()
 
-add_linker_flag_if_supported(-static-libgcc STATIC_FLAGS)
-add_linker_flag_if_supported(-static-libstdc++ STATIC_FLAGS)
 if(STATIC)
+  add_linker_flag_if_supported(-static-libgcc STATIC_FLAGS)
+  add_linker_flag_if_supported(-static-libstdc++ STATIC_FLAGS)
   if(MINGW)
     add_linker_flag_if_supported(-static STATIC_FLAGS)
   endif()
@@ -411,6 +413,9 @@ endif()
 # is fixed in the code (Issue #847), force compiler to be conservative.
 add_c_flag_if_supported(-fno-strict-aliasing C_SECURITY_FLAGS)
 add_cxx_flag_if_supported(-fno-strict-aliasing CXX_SECURITY_FLAGS)
+
+add_c_flag_if_supported(-fPIC C_SECURITY_FLAGS)
+add_cxx_flag_if_supported(-fPIC CXX_SECURITY_FLAGS)
 
 message(STATUS "Using C security hardening flags: ${C_SECURITY_FLAGS}")
 message(STATUS "Using C++ security hardening flags: ${CXX_SECURITY_FLAGS}")

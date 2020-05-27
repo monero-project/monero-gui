@@ -6,7 +6,7 @@ jobs:
   build-macos:
 
     runs-on: macOS-latest
-    
+
     steps:
     - uses: actions/checkout@v1
     - name: update brew and install dependencies
@@ -17,11 +17,22 @@ jobs:
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
   build-ubuntu:
- 
+
     runs-on: ubuntu-latest
- 
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - name: "qmake"
+            cmd: "./build.sh"
+          - name: "cmake"
+            cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release"
+    name: build-ubuntu-${{ matrix.toolchain.name }}
+
     steps:
     - uses: actions/checkout@v1
+      with:
+        submodules: recursive
     - name: remove bundled boost
       run: sudo rm -rf /usr/local/share/boost
     - name: set apt conf
@@ -36,7 +47,7 @@ jobs:
     - name: install monero gui dependencies
       run: sudo apt -y install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev libgcrypt20-dev xvfb
     - name: build
-      run: ./build.sh
+      run: ${{ matrix.toolchain.cmd }}
     - name: test qml
       run: xvfb-run -a build/release/bin/monero-wallet-gui --test-qml
 
