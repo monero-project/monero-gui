@@ -26,7 +26,7 @@ jobs:
           - name: "qmake"
             cmd: "./build.sh"
           - name: "cmake"
-            cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release"
+            cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release -j3"
     name: build-ubuntu-${{ matrix.toolchain.name }}
 
     steps:
@@ -54,9 +54,20 @@ jobs:
   build-windows:
 
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - name: "qmake"
+            cmd: "./build.sh release"
+          - name: "cmake"
+            cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release-win64 -j2"
+    name: build-windows-${{ matrix.toolchain.name }}
 
     steps:
     - uses: actions/checkout@v1
+      with:
+        submodules: recursive
     - uses: eine/setup-msys2@v0
       with:
         update: true
@@ -65,6 +76,6 @@ jobs:
     - name: disable qtquickcompiler
       run: msys2do sed -i s/CONFIG\ +=\ qtquickcompiler// monero-wallet-gui.pro
     - name: build
-      run: msys2do ./build.sh release
+      run: msys2do ${{ matrix.toolchain.cmd }}
     - name: test qml
       run: msys2do build/release/bin/monero-wallet-gui --test-qml
