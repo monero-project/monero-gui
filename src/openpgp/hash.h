@@ -48,10 +48,10 @@ public:
   hash &operator=(const hash &) = delete;
 
   hash(uint8_t algorithm)
-    : algorithm(algorithm)
+    : algo(algorithm)
     , consumed(0)
   {
-    if (gcry_md_open(&md, algorithm, 0) != GPG_ERR_NO_ERROR)
+    if (gcry_md_open(&md, algo, 0) != GPG_ERR_NO_ERROR)
     {
       throw std::runtime_error("failed to create message digest object");
     }
@@ -83,8 +83,8 @@ public:
 
   std::vector<uint8_t> finish() const
   {
-    std::vector<uint8_t> result(gcry_md_get_algo_dlen(algorithm));
-    const void *digest = gcry_md_read(md, algorithm);
+    std::vector<uint8_t> result(gcry_md_get_algo_dlen(algo));
+    const void *digest = gcry_md_read(md, algo);
     if (digest == nullptr)
     {
       throw std::runtime_error("failed to read the digest");
@@ -99,7 +99,7 @@ public:
   }
 
 private:
-  const uint8_t algorithm;
+  const uint8_t algo;
   gcry_md_hd_t md;
   size_t consumed;
 };
