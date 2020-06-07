@@ -288,11 +288,11 @@ Item {
                     small: true
                     text: {
                         if (isSendingTransaction && !viewOnly) {
-                            qsTr("Send transaction") + translationManager.emptyString
+                            return qsTr("Send transaction") + translationManager.emptyString;
                         } else if (isSendingTransaction && viewOnly) {
-                            qsTr("Save transaction file") + translationManager.emptyString
+                            return qsTr("Save transaction file") + translationManager.emptyString;
                         } else {
-                            qsTr("Ok") + translationManager.emptyString
+                            return qsTr("Ok") + translationManager.emptyString;
                         }
                     }
                     rightIcon: (isSendingTransaction && !viewOnly) ? "qrc:///images/rightArrow.png" : ""
