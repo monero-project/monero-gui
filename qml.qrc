@@ -242,6 +242,7 @@
         <file>images/busy-indicator.png</file>
         <file>images/busy-indicator@2x.png</file>
         <file>images/success.png</file>
+        <file>images/success@2x.png</file>
         <file>components/SuccessfulTxDialog.qml</file>
         <file>components/TxConfirmationDialog.qml</file>
     </qresource>
