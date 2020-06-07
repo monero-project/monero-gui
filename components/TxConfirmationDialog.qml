@@ -260,9 +260,9 @@ Rectangle {
                     text: {
                         if (currentWallet) {
                             var walletTitle = function() {
-                                if (currentWallet.isHwBacked() === true && currentWallet.isLedger() === true) {
+                                if (currentWallet.isLedger()) {
                                     return "Ledger";
-                                } else if (currentWallet.isHwBacked() === true && currentWallet.isLedger() === false) {
+                                } else if (currentWallet.isTrezor()) {
                                     return "Trezor";
                                 } else {
                                     return qsTr("My wallet");
