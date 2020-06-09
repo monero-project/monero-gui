@@ -59,6 +59,12 @@ Rectangle {
     Clipboard { id: clipboard }
 
     property var icon
+    property var transactionAmount;
+    property var transactionAddress;
+    property var transactionDescription;
+    property var transactionFee;
+    property var transactionPriority;
+    property var transactionID;
     property alias dialogTitle: dialogTitle
     property alias errorText: errorText
     property alias confirmButton: confirmButton
@@ -74,9 +80,9 @@ Rectangle {
             name: "default";
             when: errorText.text =="" && bottomText.text ==""
             PropertyChanges { target: errorText; visible: false }
-            PropertyChanges { target: txAmountText; visible: appWindow.transactionAmount !== "(all)" || (appWindow.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
+            PropertyChanges { target: txAmountText; visible: root.transactionAmount !== "(all)" || (root.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
-            PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled && appWindow.transactionAmount !== "(all)" }
+            PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled && root.transactionAmount !== "(all)" }
             PropertyChanges { target: txDetails; visible: true }
             PropertyChanges { target: bottom; visible: true }
             PropertyChanges { target: bottomMessage; visible: false }
@@ -105,9 +111,9 @@ Rectangle {
             name: "bottomText";
             when: errorText.text =="" && bottomText.text !==""
             PropertyChanges { target: errorText; visible: false }
-            PropertyChanges { target: txAmountText; visible: appWindow.transactionAmount !== "(all)" || (appWindow.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
+            PropertyChanges { target: txAmountText; visible: root.transactionAmount !== "(all)" || (root.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
-            PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled && appWindow.transactionAmount !== "(all)" }
+            PropertyChanges { target: txFiatAmountText; visible: txAmountText.visible && persistentSettings.fiatPriceEnabled && root.transactionAmount !== "(all)" }
             PropertyChanges { target: txDetails; visible: true }
             PropertyChanges { target: bottom; visible: true }
             PropertyChanges { target: bottomMessage; visible: true }
@@ -120,7 +126,13 @@ Rectangle {
     signal rejected()
     signal closeCallback();
 
-    function open() {
+    function open(description, amount, address, priority) {
+        root.transactionDescription = description;
+        root.transactionAmount = amount;
+        root.transactionAddress = address;
+        root.transactionPriority = priority;
+        root.transactionFee = "";
+
         // Center
         root.x = parent.width/2 - root.width/2
         root.y = 100
@@ -133,6 +145,11 @@ Rectangle {
     
     function close() {
         root.visible = false;
+        root.transactionAmount = "";
+        root.transactionAddress = "";
+        root.transactionFee = "";
+        root.transactionPriority = "";
+        root.transactionID = "";
         closeCallback();
     }
 
@@ -190,7 +207,7 @@ Rectangle {
                   id: txAmountBusyIndicator
                   Layout.fillWidth: true
                   Layout.alignment : Qt.AlignTop | Qt.AlignLeft
-                  running: appWindow.transactionAmount == "(all)"
+                  running: root.transactionAmount == "(all)"
                   scale: 1
             }
         
@@ -198,13 +215,13 @@ Rectangle {
                 id: txAmountText
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: appWindow.transactionAmount == "(all)" && currentWallet.isHwBacked() === true ? 32 : 42
+                font.pixelSize: root.transactionAmount == "(all)" && currentWallet.isHwBacked() === true ? 32 : 42
                 color: MoneroComponents.Style.defaultFontColor
                 text: {
-                    if (appWindow.transactionAmount == "(all)" && currentWallet.isHwBacked() === true) {
+                    if (root.transactionAmount == "(all)" && currentWallet.isHwBacked() === true) {
                         "All unlocked balance" +  translationManager.emptyString  
                     } else {
-                        appWindow.transactionAmount + " XMR " +  translationManager.emptyString  
+                        root.transactionAmount + " XMR " +  translationManager.emptyString  
                     }
                 }
             }
@@ -300,9 +317,9 @@ Rectangle {
                     wrapMode: Text.Wrap
                     color: MoneroComponents.Style.defaultFontColor
                     text: {
-                        if (appWindow.transactionAddress) {
-                            const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(appWindow.transactionAddress) : null;
-                            var fulladdress = appWindow.transactionAddress;
+                        if (root.transactionAddress) {
+                            const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(root.transactionAddress) : null;
+                            var fulladdress = root.transactionAddress;
                             var spacedaddress = fulladdress.match(/.{1,4}/g);
                             var spacedaddress = spacedaddress.join(' ');
                             if (!addressBookName) {
@@ -340,14 +357,14 @@ Rectangle {
                     font.pixelSize: 15
                     text: {
                         if (currentWallet) {
-                            if (!appWindow.transactionFee) {
+                            if (!root.transactionFee) {
                                 if (currentWallet.isHwBacked() === true) {
                                     return "See on device" +  translationManager.emptyString;
                                 } else {
                                     return "Calculating fee..." +  translationManager.emptyString;
                                 }
                             } else {
-                                return appWindow.transactionFee + " XMR"
+                                return root.transactionFee + " XMR"
                             }
                         } else {
                             return "";
@@ -360,9 +377,9 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.leftMargin: 8
                     color: MoneroComponents.Style.buttonSecondaryTextColor
-                    visible: persistentSettings.fiatPriceEnabled && appWindow.transactionFee
+                    visible: persistentSettings.fiatPriceEnabled && root.transactionFee
                     font.pixelSize: 15
-                    text: showFiatConversion(appWindow.transactionFee)
+                    text: showFiatConversion(root.transactionFee)
                 }
             }
         }
