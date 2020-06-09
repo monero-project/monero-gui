@@ -54,15 +54,6 @@ Rectangle {
     signal rejected()
     signal closeCallback();
 
-    // Make window draggable
-    MouseArea {
-        anchors.fill: parent
-        property point lastMousePos: Qt.point(0, 0)
-        onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
-        onMouseXChanged: root.x += (mouseX - lastMousePos.x)
-        onMouseYChanged: root.y += (mouseY - lastMousePos.y)
-    }
-
     function open() {
         // Center
         root.x = parent.width/2 - root.width/2
