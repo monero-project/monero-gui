@@ -60,12 +60,6 @@ ApplicationWindow {
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
-    property var transactionAmount;
-    property var transactionAddress;
-    property var transactionFee;
-    property var transactionPriority;
-    property var transactionDescription;
-    property var transactionID;
     property var walletPassword
     property int restoreHeight:0
     property bool daemonSynced: false
@@ -827,10 +821,8 @@ ApplicationWindow {
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
             // here we show confirmation popup;
-            var transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            var transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
-            appWindow.transactionFee = transactionFee;
-            appWindow.transactionAmount = transactionAmount;
+            txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
+            txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
             txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
         }
@@ -846,19 +838,10 @@ ApplicationWindow {
                     ", mixins: ", mixinCount,
                     ", priority: ", priority,
                     ", description: ", description);
-        var transactionDescription = description;
-        var transactionAmount = Utils.removeTrailingZeros(amount);        
-        var transactionAddress = address;
-        var transactionPriority = priority;
-        var transactionFee = ""; //we still don't have the final
-        appWindow.transactionDescription = transactionDescription;
-        appWindow.transactionAmount = transactionAmount;
-        appWindow.transactionAddress = transactionAddress;
-        appWindow.transactionPriority = transactionPriority;
-        appWindow.transactionFee = transactionFee;   
+        txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.bottomTextAnimation.running = false
         txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
-        txConfirmationPopup.open()
+        txConfirmationPopup.open(description, Utils.removeTrailingZeros(amount), address, priority)
 
         // validate amount;
         if (amount !== "(all)") {
@@ -924,10 +907,8 @@ ApplicationWindow {
         } else {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
-            var transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            var transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
-            appWindow.transactionAmount = transactionAmount;
-            appWindow.transactionFee = transactionFee;        
+            txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
+            txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));      
             // committing transaction
         }
     }
@@ -961,16 +942,15 @@ ApplicationWindow {
             console.log("Error committing transaction: " + transaction.errorString);
             txConfirmationPopup.errorText.text  = qsTr("Couldn't send the money: ") + transaction.errorString
         } else {
-            appWindow.transactionID = txid;
-            if (transactionDescription.length > 0) {
-                currentWallet.setUserNote(txid, transactionDescription);
+            if (txConfirmationPopup.transactionDescription.length > 0) {
+                currentWallet.setUserNote(txid, txConfirmationPopup.transactionDescription);
             }
 
             // Clear tx fields
             middlePanel.transferView.clearFields()
             txConfirmationPopup.close()
             successfulTxPopup.onCloseCallback = null
-            successfulTxPopup.open()
+            successfulTxPopup.open(txid)
 
         }
         currentWallet.refresh()
@@ -1407,14 +1387,6 @@ ApplicationWindow {
         // dynamically change onclose handler
         id: txConfirmationPopup
         z: parent.z + 1
-        onRejected: {
-            appWindow.transactionAmount = "";
-            appWindow.transactionAddress = "";
-            appWindow.transactionFee = "";
-            appWindow.transactionPriority = "";
-            appWindow.transactionDescription = "";
-            appWindow.transactionID = "";
-        }
         onAccepted: {
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
