@@ -291,7 +291,7 @@ Item {
                             return (appWindow.viewOnly ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString;
                         } else {
                             return qsTr("Ok") + translationManager.emptyString;
-                        }        
+                        }
                     }
                     rightIcon: (isSendingTransaction && !appWindow.viewOnly) ? "qrc:///images/rightArrow.png" : ""
                     KeyNavigation.tab: cancelButton
