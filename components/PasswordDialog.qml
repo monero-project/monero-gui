@@ -287,15 +287,13 @@ Item {
                     id: okButton
                     small: true
                     text: {
-                        if (isSendingTransaction && !viewOnly) {
-                            return qsTr("Send transaction") + translationManager.emptyString;
-                        } else if (isSendingTransaction && viewOnly) {
-                            return qsTr("Save transaction file") + translationManager.emptyString;
+                        if (isSendingTransaction) {
+                            return (appWindow.viewOnly ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString;
                         } else {
                             return qsTr("Ok") + translationManager.emptyString;
-                        }
+                        }        
                     }
-                    rightIcon: (isSendingTransaction && !viewOnly) ? "qrc:///images/rightArrow.png" : ""
+                    rightIcon: (isSendingTransaction && !appWindow.viewOnly) ? "qrc:///images/rightArrow.png" : ""
                     KeyNavigation.tab: cancelButton
                     enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: onOk()
