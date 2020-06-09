@@ -48,13 +48,16 @@ Rectangle {
     Clipboard { id: clipboard }
 
     property var icon;
+    property var transactionID;
 
     // same signals as Dialog has
     signal accepted()
     signal rejected()
     signal closeCallback();
 
-    function open() {
+    function open(txid) {
+        root.transactionID = txid;
+
         // Center
         root.x = parent.width/2 - root.width/2
         root.y = 100
@@ -65,6 +68,7 @@ Rectangle {
 
     function close() {
         root.visible = false;
+        txConfirmationPopup.transactionDescription = "";
         closeCallback();
     }
 
@@ -104,8 +108,8 @@ Rectangle {
         Image {
             id: successImage
             Layout.alignment: Qt.AlignCenter
-            width: 260
-            height: 135
+            width: 140
+            height: 140
             source: "qrc:///images/success.png"
 
             SequentialAnimation{
@@ -125,7 +129,7 @@ Rectangle {
             copyButton: true
             wrapMode: Text.Wrap
             labelText: qsTr("Transaction ID:") + translationManager.emptyString
-            text: appWindow.transactionID ? appWindow.transactionID : "";
+            text: root.transactionID ? root.transactionID : "";
             fontSize: 16
         }
         
