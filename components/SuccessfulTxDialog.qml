@@ -68,7 +68,6 @@ Rectangle {
 
     function close() {
         root.visible = false;
-        txConfirmationPopup.transactionDescription = "";
         closeCallback();
     }
 
