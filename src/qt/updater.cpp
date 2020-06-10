@@ -157,9 +157,12 @@ QString Updater::verifySignature(const epee::span<const uint8_t> data, const ope
 {
     for (const auto &maintainer : m_maintainers)
     {
-        if (signature.verify(data, maintainer))
+        for (const auto &public_key : maintainer)
         {
-            return QString::fromStdString(maintainer.user_id());
+            if (signature.verify(data, public_key))
+            {
+                return QString::fromStdString(maintainer.user_id());
+            }
         }
     }
 
