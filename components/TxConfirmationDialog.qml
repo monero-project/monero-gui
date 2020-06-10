@@ -59,12 +59,12 @@ Rectangle {
     Clipboard { id: clipboard }
 
     property var icon
-    property var transactionAmount;
-    property var transactionAddress;
-    property var transactionDescription;
-    property var transactionFee;
-    property var transactionPriority;
-    property var transactionID;
+    property var transactionAmount: ""
+    property var transactionAddress: ""
+    property var transactionDescription: ""
+    property var transactionFee: ""
+    property var transactionPriority: ""
+    property var transactionID: ""
     property alias dialogTitle: dialogTitle
     property alias errorText: errorText
     property alias confirmButton: confirmButton
@@ -127,11 +127,18 @@ Rectangle {
     signal closeCallback();
 
     function open(description, amount, address, priority) {
-        root.transactionDescription = description;
-        root.transactionAmount = amount;
-        root.transactionAddress = address;
-        root.transactionPriority = priority;
-        root.transactionFee = "";
+        if (description) {
+            root.transactionDescription = description;  
+        }
+        if (amount) {
+            root.transactionAmount = amount;  
+        }
+        if (address) {
+            root.transactionAddress = address;  
+        }
+        if (priority) {
+            root.transactionPriority = priority;  
+        }
 
         // Center
         root.x = parent.width/2 - root.width/2
@@ -145,12 +152,16 @@ Rectangle {
     
     function close() {
         root.visible = false;
+        closeCallback();
+    }
+
+    function clearFields() {
         root.transactionAmount = "";
         root.transactionAddress = "";
+        root.transactionDescription = "";
         root.transactionFee = "";
         root.transactionPriority = "";
         root.transactionID = "";
-        closeCallback();
     }
 
     // TODO: implement without hardcoding sizes
@@ -439,10 +450,12 @@ Rectangle {
                     Keys.onEnterPressed: backButton.onClicked
                     Keys.onEscapePressed: {
                         root.close()
+                        root.clearFields()
                         root.rejected()
                     }
                     onClicked: {
                         root.close()
+                        root.clearFields()
                         root.rejected()
                     }
                 }
@@ -459,6 +472,7 @@ Rectangle {
                     Keys.onEnterPressed: confirmButton.onClicked
                     Keys.onEscapePressed: {
                         root.close()
+                        root.clearFields()
                         root.rejected()
                     }
                     onClicked: {
