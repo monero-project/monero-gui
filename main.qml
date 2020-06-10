@@ -949,6 +949,7 @@ ApplicationWindow {
             // Clear tx fields
             middlePanel.transferView.clearFields()
             txConfirmationPopup.close()
+            txConfirmationPopup.clearFields()
             successfulTxPopup.onCloseCallback = null
             successfulTxPopup.open(txid)
 
