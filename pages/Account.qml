@@ -48,6 +48,8 @@ Rectangle {
     color: "transparent"
     property var model
     property alias accountHeight: mainLayout.height
+    property alias balanceAllText: balanceAll.text
+    property alias unlockedBalanceAllText: unlockedBalanceAll.text
     property bool selectAndSend: false
     property int currentAccountIndex
 
