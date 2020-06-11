@@ -416,7 +416,7 @@ ApplicationWindow {
 
         var balance = "?.??";
         var balanceU = "?.??";
-        if(!hideBalanceForced && !persistentSettings.hideBalance){
+        if(!hideBalanceForced && !persistentSettings.hideBalance && appWindow.daemonSynced){
             balance = walletManager.displayAmount(currentWallet.balance());
             balanceU = walletManager.displayAmount(currentWallet.unlockedBalance());
         }
