@@ -569,8 +569,8 @@ Rectangle {
             delegate: Rectangle {
                 id: delegate
                 property bool collapsed: root.txDataCollapsed.indexOf(hash) >= 0 ? true : false
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.left: parent ? parent.left : undefined
+                anchors.right: parent ? parent.right : undefined
                 height: {
                     if(!collapsed) return 60;
                     if(isout && delegate.address !== "") return 320;
