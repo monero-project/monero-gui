@@ -39,6 +39,12 @@ import "effects/" as MoneroEffects
 
 Rectangle {
     id: root
+    x: parent.width/2 - root.width/2
+    y: parent.height/2 - root.height/2
+    z: parent.z + 1
+    // TODO: implement without hardcoding sizes
+    width: 580
+    height: 400
     color: MoneroComponents.Style.blackTheme ? "black" : "white"
     visible: false
     radius: 10
@@ -47,7 +53,6 @@ Rectangle {
 
     Clipboard { id: clipboard }
 
-    property var icon;
     property var transactionID;
 
     // same signals as Dialog has
@@ -57,11 +62,6 @@ Rectangle {
 
     function open(txid) {
         root.transactionID = txid;
-
-        // Center
-        root.x = parent.width/2 - root.width/2
-        root.y = 100
-        root.z = 11
         root.visible = true;
         doneButton.forceActiveFocus();
     }
@@ -70,10 +70,6 @@ Rectangle {
         root.visible = false;
         closeCallback();
     }
-
-    // TODO: implement without hardcoding sizes
-    width: 580
-    height: 400
 
     ColumnLayout {
         id: mainLayout
@@ -88,20 +84,19 @@ Rectangle {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
           
-                MoneroComponents.Label {
-                    id: dialogTitle
-                    fontSize: 18
-                    fontFamily: "Arial"
-                    horizontalAlignment: Text.AlignHCenter
-                    text: {
-                        if (appWindow.viewOnly){
-                            return qsTr("Transaction file successfully saved!") + translationManager.emptyString;;
-                        } else {
-                            return  qsTr("Transaction successfully sent!") + translationManager.emptyString;
-                        }
+            MoneroComponents.Label {
+                id: dialogTitle
+                fontSize: 18
+                fontFamily: "Arial"
+                horizontalAlignment: Text.AlignHCenter
+                text: {
+                    if (appWindow.viewOnly){
+                        return qsTr("Transaction file successfully saved!") + translationManager.emptyString;;
+                    } else {
+                        return  qsTr("Transaction successfully sent!") + translationManager.emptyString;
                     }
-                    color: MoneroComponents.Style.defaultFontColor
-                }  
+                }
+            }  
         }
 
         Image {
@@ -119,7 +114,7 @@ Rectangle {
         }
 
         MoneroComponents.LineEditMulti {
-            id: transactionID
+            id: transactionIDLabel
             visible: !appWindow.viewOnly
             Layout.leftMargin: 25
             Layout.rightMargin: 25
