@@ -50,15 +50,18 @@ import "../js/Windows.js" as Windows
 
 Rectangle {
     id: root
+    x: parent.width/2 - root.width/2
+    y: parent.height/2 - root.height/2
+    z: parent.z + 1
+    // TODO: implement without hardcoding sizes
+    width: 580
+    height: 400
     color: MoneroComponents.Style.blackTheme ? "black" : "white"
     visible: false
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
     border.width: 1
 
-    Clipboard { id: clipboard }
-
-    property var icon
     property var transactionAmount: ""
     property var transactionAddress: ""
     property var transactionDescription: ""
@@ -140,10 +143,6 @@ Rectangle {
             root.transactionPriority = priority;  
         }
 
-        // Center
-        root.x = parent.width/2 - root.width/2
-        root.y = 100
-        root.z = 11
         root.visible = true;
         
         //clean previous error message
@@ -164,9 +163,9 @@ Rectangle {
         root.transactionID = "";
     }
 
-    // TODO: implement without hardcoding sizes
-    width: 580
-    height: 400
+    function showFiatConversion(valueXMR) {
+        return (fiatApiConvertToFiat(valueXMR) === "0.00" ? "<0.01 " + fiatApiCurrencySymbol() : "~" + fiatApiConvertToFiat(valueXMR) + " " + fiatApiCurrencySymbol());
+    }
 
     ColumnLayout {
         id: mainLayout
@@ -185,7 +184,6 @@ Rectangle {
                 fontSize: 18
                 fontFamily: "Arial"
                 horizontalAlignment: Text.AlignHCenter
-                color: MoneroComponents.Style.defaultFontColor
                 text: {
                     if (appWindow.viewOnly) {
                         "Create transaction file" + translationManager.emptyString
@@ -482,9 +480,5 @@ Rectangle {
                 }
             }
         }
-    }
-
-    function showFiatConversion(valueXMR) {
-        return (fiatApiConvertToFiat(valueXMR) === "0.00" ? "<0.01 " + fiatApiCurrencySymbol() : "~" + fiatApiConvertToFiat(valueXMR) + " " + fiatApiCurrencySymbol());
     }
 }
