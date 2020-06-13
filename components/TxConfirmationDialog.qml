@@ -33,7 +33,6 @@ import QtQuick.Layouts 1.1
 import "../components" as MoneroComponents
 import FontAwesome 1.0
 
-
 Rectangle {
     id: root
     x: parent.width/2 - root.width/2
@@ -154,13 +153,11 @@ Rectangle {
     }
 
     ColumnLayout {
-        id: mainLayout
         spacing: 10
         anchors.fill: parent
         anchors.margins: 25
 
         RowLayout {
-            id: column
             Layout.topMargin: 10
             Layout.fillWidth: true
 
@@ -193,7 +190,6 @@ Rectangle {
         }
         
         ColumnLayout {
-            id: upperText
             spacing: 0
             Layout.fillWidth: true
             Layout.preferredHeight: 71
@@ -243,7 +239,6 @@ Rectangle {
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
                 Text {
-                    id: fromLabel
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.dimmedFontColor
                     text: qsTr("From:") + translationManager.emptyString
@@ -256,7 +251,6 @@ Rectangle {
                 spacing: 16
 
                 Text {
-                    id: fromText
                     Layout.fillWidth: true
                     font.pixelSize: 15
                     color: MoneroComponents.Style.defaultFontColor
@@ -291,7 +285,6 @@ Rectangle {
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
                 Text {
-                    id: toLabel
                     Layout.fillWidth: true
                     font.pixelSize: 15
                     color: MoneroComponents.Style.dimmedFontColor
@@ -304,7 +297,6 @@ Rectangle {
                 spacing: 16
 
                 Text {
-                    id: toText
                     Layout.fillWidth: true
                     font.pixelSize: 15
                     font.family: MoneroComponents.Style.fontRegular.name
@@ -334,7 +326,6 @@ Rectangle {
                 Layout.alignment : Qt.AlignTop | Qt.AlignLeft
 
                 Text {
-                    id: feeLabel
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.dimmedFontColor
                     text: qsTr("Fee:") + translationManager.emptyString
@@ -347,7 +338,6 @@ Rectangle {
                 spacing: 16
 
                 Text {
-                    id: feeText
                     color: MoneroComponents.Style.defaultFontColor
                     font.pixelSize: 15
                     text: {
@@ -368,7 +358,6 @@ Rectangle {
                 }
                 
                 Text {
-                    id: feeTextFiat
                     Layout.fillWidth: true
                     Layout.leftMargin: 8
                     color: MoneroComponents.Style.buttonSecondaryTextColor
@@ -390,7 +379,6 @@ Rectangle {
                 Layout.preferredHeight: 50
               
                 BusyIndicator {
-                    id: bottomMessageBusyIndicator
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5
