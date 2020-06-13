@@ -1393,9 +1393,11 @@ ApplicationWindow {
                 // Save transaction to file if view only wallet
                 if (viewOnly) {
                     saveTxDialog.open();
+                    passwordDialog.isSendingTransaction = false;
                 } else {
                     txConfirmationPopup.open();
                     handleTransactionConfirmed()
+                    passwordDialog.isSendingTransaction = false;
                 }
             }
             txConfirmationPopup.close();
