@@ -770,7 +770,7 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 14
-                                    text: blockheight > 0 ? blockheight : qsTr('Pending') + translationManager.emptyString;
+                                    text: blockheight > 0 ? blockheight : (failed ? qsTr('Failed') : qsTr('Pending')) + translationManager.emptyString;
 
                                     color: MoneroComponents.Style.defaultFontColor
                                     anchors.verticalCenter: parent.verticalCenter
@@ -1482,6 +1482,7 @@ Rectangle {
             var blockheight = _model.data(idx, TransactionHistoryModel.TransactionBlockHeightRole);
             var confirmations = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
             var confirmationsRequired = _model.data(idx, TransactionHistoryModel.TransactionConfirmationsRequiredRole);
+            var failed = _model.data(idx, TransactionHistoryModel.TransactionFailedRole);
             var fee = _model.data(idx, TransactionHistoryModel.TransactionFeeRole);
             var subaddrAccount = model.data(idx, TransactionHistoryModel.TransactionSubaddrAccountRole);
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
@@ -1522,6 +1523,7 @@ Rectangle {
                 "blockheight": blockheight,
                 "address": address,
                 "timestamp": timestamp,
+                "failed": failed,
                 "fee": fee,
                 "confirmations": confirmations,
                 "confirmationsRequired": confirmationsRequired,
