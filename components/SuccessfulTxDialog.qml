@@ -28,14 +28,10 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
-import moneroComponents.Clipboard 1.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.0
 
+import moneroComponents.Clipboard 1.0
 import "../components" as MoneroComponents
-import "effects/" as MoneroEffects
 
 Rectangle {
     id: root
