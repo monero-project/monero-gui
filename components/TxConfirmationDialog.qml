@@ -28,24 +28,10 @@
 
 import QtQuick 2.9
 import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import moneroComponents.Clipboard 1.0
-
-import QtQuick.Window 2.0
 
 import "../components" as MoneroComponents
-import "." 1.0
-import "effects/" as MoneroEffects
-import moneroComponents.Wallet 1.0
-import moneroComponents.PendingTransaction 1.0
-import moneroComponents.NetworkType 1.0
-import moneroComponents.Settings 1.0
 import FontAwesome 1.0
-
-import "../js/Utils.js" as Utils
-import "../js/Windows.js" as Windows
 
 
 Rectangle {
