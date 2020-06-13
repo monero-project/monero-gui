@@ -68,20 +68,17 @@ Rectangle {
     }
 
     ColumnLayout {
-        id: mainLayout
         spacing: 10
         anchors.fill: parent
         anchors.margins: 25
 
         ColumnLayout{
-            id: column
             Layout.topMargin: 10
             Layout.leftMargin: 0
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
           
             MoneroComponents.Label {
-                id: dialogTitle
                 fontSize: 18
                 fontFamily: "Arial"
                 horizontalAlignment: Text.AlignHCenter
@@ -110,7 +107,6 @@ Rectangle {
         }
 
         MoneroComponents.LineEditMulti {
-            id: transactionIDLabel
             visible: !appWindow.viewOnly
             Layout.leftMargin: 25
             Layout.rightMargin: 25
@@ -124,7 +120,6 @@ Rectangle {
         }
         
         MoneroComponents.LineEditMulti {
-            id: transactionFilePath
             visible: appWindow.viewOnly
             Layout.leftMargin: 25
             borderDisabled: true
