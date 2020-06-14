@@ -890,7 +890,7 @@ ApplicationWindow {
     function handleSweepUnmixable() {
         console.log("Creating transaction: ")
 
-        var sweepUnmixable = true;
+        txConfirmationPopup.sweepUnmixable = true;
         txConfirmationPopup.open();
         transaction = currentWallet.createSweepUnmixableTransaction();
         if (transaction.status !== PendingTransaction.Status_Ok) {
