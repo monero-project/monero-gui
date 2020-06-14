@@ -52,13 +52,11 @@ Rectangle {
     property var transactionDescription: ""
     property var transactionFee: ""
     property var transactionPriority: ""
-    property var transactionID: ""
-    property alias dialogTitle: dialogTitle
+    property bool sweepUnmixable: false
     property alias errorText: errorText
     property alias confirmButton: confirmButton
     property alias backButton: backButton
     property alias bottomText: bottomText
-    property alias buttons: buttons
     property alias bottomTextAnimation: bottomTextAnimation
 
     state: "default"
@@ -145,7 +143,7 @@ Rectangle {
         root.transactionDescription = "";
         root.transactionFee = "";
         root.transactionPriority = "";
-        root.transactionID = "";
+        root.sweepUnmixable = false;
     }
 
     function showFiatConversion(valueXMR) {
@@ -170,7 +168,7 @@ Rectangle {
                 text: {
                     if (appWindow.viewOnly) {
                         "Create transaction file" + translationManager.emptyString
-                    } else if (appWindow.sweepUnmixable) {
+                    } else if (root.sweepUnmixable) {
                         "Sweep unmixable outputs" + translationManager.emptyString
                     } else {
                         "Confirm send" + translationManager.emptyString                      
@@ -184,7 +182,6 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             color: MoneroComponents.Style.defaultFontColor
-            text: ""
             wrapMode: Text.Wrap
             font.pixelSize: 15
         }
@@ -199,7 +196,6 @@ Rectangle {
                   Layout.fillWidth: true
                   Layout.alignment : Qt.AlignTop | Qt.AlignLeft
                   running: root.transactionAmount == "(all)"
-                  scale: 1
             }
         
             Text {
