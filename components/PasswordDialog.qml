@@ -107,6 +107,7 @@ Item {
         wizard.enabled = true
         titleBar.state = "default"
 
+        root.isSendingTransaction = false;
         root.visible = false;
         appWindow.hideBalanceForced = false;
         appWindow.updateBalance();
@@ -129,7 +130,6 @@ Item {
 
     function onCancel() {
         root.close()
-        root.isSendingTransaction = false;
         if (passwordDialogMode) {
             root.rejected()
         } else if (newPasswordDialogMode) {
