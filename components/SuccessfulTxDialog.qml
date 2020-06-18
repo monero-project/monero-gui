@@ -46,6 +46,21 @@ Rectangle {
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
     border.width: 1
+    focus: true
+    Keys.enabled: true
+    Keys.onEscapePressed: {
+        root.close()
+        root.rejected()
+    }
+    Keys.onEnterPressed: {
+        root.close()
+        root.accepted()
+    }
+    Keys.onReturnPressed: {
+        root.close()
+        root.accepted()
+    }
+    KeyNavigation.tab: doneButton
 
     Clipboard { id: clipboard }
 
@@ -58,7 +73,7 @@ Rectangle {
     function open(txid) {
         root.transactionID = txid;
         root.visible = true;
-        doneButton.forceActiveFocus();
+        root.forceActiveFocus();
     }
 
     function close() {
