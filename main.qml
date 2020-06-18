@@ -841,7 +841,11 @@ ApplicationWindow {
         txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.bottomTextAnimation.running = false
         txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
-        txConfirmationPopup.open(description, Utils.removeTrailingZeros(amount), address, priority)
+        txConfirmationPopup.transactionDescription = description;
+        txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
+        txConfirmationPopup.transactionAddress = address;
+        txConfirmationPopup.transactionPriority = priority;
+        txConfirmationPopup.open()
 
         // validate amount;
         if (amount !== "(all)") {
@@ -895,7 +899,7 @@ ApplicationWindow {
         transaction = currentWallet.createSweepUnmixableTransaction();
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
-            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString     
+            txConfirmationPopup.errorText.text  = qsTr("Can't create transaction: ") + transaction.errorString + translationManager.emptyString
             // deleting transaction object, we don't want memleaks
             currentWallet.disposeTransaction(transaction);
 
@@ -908,7 +912,7 @@ ApplicationWindow {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
-            txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));      
+            txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             // committing transaction
         }
     }
@@ -928,10 +932,10 @@ ApplicationWindow {
             // Store to file
             transaction.setFilename(path);
             txConfirmationPopup.bottomText.text  = qsTr("Saving transaction file...") + translationManager.emptyString;
-            txConfirmationPopup.bottomTextAnimation.running = false          
+            txConfirmationPopup.bottomTextAnimation.running = false
         } else {
             txConfirmationPopup.bottomText.text  = qsTr("Sending transaction...") + translationManager.emptyString;
-            txConfirmationPopup.bottomTextAnimation.running = false          
+            txConfirmationPopup.bottomTextAnimation.running = false
         }
 
         currentWallet.commitTransactionAsync(transaction);
@@ -1412,7 +1416,7 @@ ApplicationWindow {
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
-                passwordDialog.open()  
+                passwordDialog.open()
             }
         }
     }
@@ -1999,7 +2003,7 @@ ApplicationWindow {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
-        
+
         closeWallet(Qt.quit);
     }
 
