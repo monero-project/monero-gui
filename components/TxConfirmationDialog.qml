@@ -110,31 +110,16 @@ Rectangle {
     // same signals as Dialog has
     signal accepted()
     signal rejected()
-    signal closeCallback();
 
-    function open(description, amount, address, priority) {
-        if (description) {
-            root.transactionDescription = description;  
-        }
-        if (amount) {
-            root.transactionAmount = amount;  
-        }
-        if (address) {
-            root.transactionAddress = address;  
-        }
-        if (priority) {
-            root.transactionPriority = priority;  
-        }
-
+    function open() {
         root.visible = true;
-        
+
         //clean previous error message
-        errorText.text = "";        
+        errorText.text = "";
     }
-    
+
     function close() {
         root.visible = false;
-        closeCallback();
     }
 
     function clearFields() {
@@ -171,12 +156,12 @@ Rectangle {
                     } else if (root.sweepUnmixable) {
                         "Sweep unmixable outputs" + translationManager.emptyString
                     } else {
-                        "Confirm send" + translationManager.emptyString                      
+                        "Confirm send" + translationManager.emptyString
                     }
                 }
             }
         }
-        
+
         Text {
             id: errorText
             Layout.fillWidth: true
@@ -185,19 +170,19 @@ Rectangle {
             wrapMode: Text.Wrap
             font.pixelSize: 15
         }
-        
+
         ColumnLayout {
             spacing: 0
             Layout.fillWidth: true
             Layout.preferredHeight: 71
-        
+
             BusyIndicator {
                   id: txAmountBusyIndicator
                   Layout.fillWidth: true
                   Layout.alignment : Qt.AlignTop | Qt.AlignLeft
                   running: root.transactionAmount == "(all)"
             }
-        
+
             Text {
                 id: txAmountText
                 Layout.fillWidth: true
@@ -206,13 +191,13 @@ Rectangle {
                 color: MoneroComponents.Style.defaultFontColor
                 text: {
                     if (root.transactionAmount == "(all)" && currentWallet.isHwBacked() === true) {
-                        "All unlocked balance" +  translationManager.emptyString  
+                        "All unlocked balance" +  translationManager.emptyString
                     } else {
-                        root.transactionAmount + " XMR " +  translationManager.emptyString  
+                        root.transactionAmount + " XMR " +  translationManager.emptyString
                     }
                 }
             }
-    
+
             Text {
                 id: txFiatAmountText
                 Layout.fillWidth: true
@@ -311,7 +296,7 @@ Rectangle {
                                 return FontAwesome.addressBook + " " + addressBookName + "<br>" + spacedaddress;
                             }
                         } else {
-                            return "";                        
+                            return "";
                         }
                     }
                 }
@@ -352,7 +337,7 @@ Rectangle {
                         }
                     }
                 }
-                
+
                 Text {
                     Layout.fillWidth: true
                     Layout.leftMargin: 8
@@ -368,18 +353,18 @@ Rectangle {
             id: bottom
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
             Layout.fillWidth: true
-            
+
             RowLayout {
                 id: bottomMessage
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
-              
+
                 BusyIndicator {
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5
                 }
-    
+
                 Text {
                     id: bottomText
                     color: MoneroComponents.Style.defaultFontColor
@@ -388,7 +373,7 @@ Rectangle {
                     wrapMode: Text.Wrap
                     font.pixelSize: 17
                     opacity: 1
-    
+
                     SequentialAnimation{
                         id:bottomTextAnimation
                         running: false
@@ -405,7 +390,7 @@ Rectangle {
                 spacing: 70
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
-              
+
                 MoneroComponents.StandardButton {
                     id: backButton
                     text: qsTr("Back") + translationManager.emptyString;
@@ -427,7 +412,7 @@ Rectangle {
                         root.rejected()
                     }
                 }
-    
+
                 MoneroComponents.StandardButton {
                     id: confirmButton
                     text: qsTr("Confirm") + translationManager.emptyString;
