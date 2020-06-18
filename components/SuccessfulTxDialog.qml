@@ -45,7 +45,7 @@ Rectangle {
     visible: false
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
-    border.width: 1    
+    border.width: 1
 
     Clipboard { id: clipboard }
 
@@ -54,7 +54,6 @@ Rectangle {
     // same signals as Dialog has
     signal accepted()
     signal rejected()
-    signal closeCallback();
 
     function open(txid) {
         root.transactionID = txid;
@@ -64,7 +63,6 @@ Rectangle {
 
     function close() {
         root.visible = false;
-        closeCallback();
     }
 
     ColumnLayout {
@@ -77,7 +75,7 @@ Rectangle {
             Layout.leftMargin: 0
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
-          
+
             MoneroComponents.Label {
                 fontSize: 18
                 fontFamily: "Arial"
@@ -89,7 +87,7 @@ Rectangle {
                         return  qsTr("Transaction successfully sent!") + translationManager.emptyString;
                     }
                 }
-            }  
+            }
         }
 
         Image {
@@ -118,7 +116,7 @@ Rectangle {
             text: root.transactionID ? root.transactionID : "";
             fontSize: 16
         }
-        
+
         MoneroComponents.LineEditMulti {
             visible: appWindow.viewOnly
             Layout.leftMargin: 25
@@ -150,7 +148,7 @@ Rectangle {
                 Keys.onEscapePressed: {
                     root.close()
                     root.rejected()
-                } 
+                }
                 onClicked: {
                     oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.fileUrl))
                     root.rejected()
@@ -169,7 +167,7 @@ Rectangle {
                 Keys.onEscapePressed: {
                     root.close()
                     root.rejected()
-                } 
+                }
                 onClicked: {
                     root.close()
                     root.accepted()
