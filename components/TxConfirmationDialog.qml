@@ -46,6 +46,34 @@ Rectangle {
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
     border.width: 1
+    focus: true
+    Keys.enabled: true
+    Keys.onEscapePressed: {
+        root.close()
+        root.clearFields()
+        root.rejected()
+    }
+    Keys.onEnterPressed: {
+         if (root.state == "default") {
+             root.close()
+             root.accepted()
+         } else if (root.state == "error") {
+             root.close()
+             root.clearFields()
+             root.rejected()
+         }
+    }
+    Keys.onReturnPressed: {
+         if (root.state == "default") {
+             root.close()
+             root.accepted()
+         } else if (root.state == "error") {
+             root.close()
+             root.clearFields()
+             root.rejected()
+         }
+    }
+    KeyNavigation.tab: confirmButton
 
     property var transactionAmount: ""
     property var transactionAddress: ""
@@ -75,7 +103,6 @@ Rectangle {
             PropertyChanges { target: buttons; visible: true }
             PropertyChanges { target: backButton; visible: true; primary: false }
             PropertyChanges { target: confirmButton; visible: true }
-            StateChangeScript { script: confirmButton.forceActiveFocus() }
         }, State {
             // error message being displayed, show only back button
             name: "error";
@@ -91,7 +118,6 @@ Rectangle {
             PropertyChanges { target: buttons; visible: true }
             PropertyChanges { target: backButton; visible: true; primary: true }
             PropertyChanges { target: confirmButton; visible: false }
-            StateChangeScript { script: backButton.forceActiveFocus() }
         }, State {
             // creating or sending transaction, show tx details and don't show any button
             name: "bottomText";
@@ -116,6 +142,7 @@ Rectangle {
 
         //clean previous error message
         errorText.text = "";
+        root.forceActiveFocus()
     }
 
     function close() {
@@ -418,7 +445,7 @@ Rectangle {
                     text: qsTr("Confirm") + translationManager.emptyString;
                     rightIcon: "qrc:///images/rightArrow.png"
                     width: 200
-                    focus: true
+                    focus: false
                     KeyNavigation.tab: backButton
                     Keys.enabled: confirmButton.visible
                     Keys.onReturnPressed: confirmButton.onClicked
