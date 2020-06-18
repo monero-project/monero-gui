@@ -152,11 +152,11 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: {
                     if (appWindow.viewOnly) {
-                        "Create transaction file" + translationManager.emptyString
+                        return "Create transaction file" + translationManager.emptyString;
                     } else if (root.sweepUnmixable) {
-                        "Sweep unmixable outputs" + translationManager.emptyString
+                        return "Sweep unmixable outputs" + translationManager.emptyString;
                     } else {
-                        "Confirm send" + translationManager.emptyString
+                        return "Confirm send" + translationManager.emptyString;
                     }
                 }
             }
@@ -191,9 +191,9 @@ Rectangle {
                 color: MoneroComponents.Style.defaultFontColor
                 text: {
                     if (root.transactionAmount == "(all)" && currentWallet.isHwBacked() === true) {
-                        "All unlocked balance" +  translationManager.emptyString
+                        return "All unlocked balance" +  translationManager.emptyString;
                     } else {
-                        root.transactionAmount + " XMR " +  translationManager.emptyString
+                        return root.transactionAmount + " XMR " +  translationManager.emptyString;
                     }
                 }
             }
@@ -250,9 +250,9 @@ Rectangle {
                             if (appWindow.currentWallet.numSubaddressAccounts() > 1) {
                                 var currentSubaddressAccount = currentWallet.currentSubaddressAccount;
                                 var currentAccountLabel =  currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
-                                walletTitle() + " (" + walletName + ")" + "<br>" + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + currentAccountLabel + ")" : "") + translationManager.emptyString;
+                                return walletTitle() + " (" + walletName + ")" + "<br>" + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + currentAccountLabel + ")" : "") + translationManager.emptyString;
                             } else {
-                                walletTitle() + " (" + walletName + ")" + translationManager.emptyString;
+                                return walletTitle() + " (" + walletName + ")" + translationManager.emptyString;
                             }
                         } else {
                             return "";
