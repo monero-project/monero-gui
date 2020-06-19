@@ -126,11 +126,6 @@ target_compile_definitions(monero-wallet-gui
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-if(X11_FOUND)
-    target_link_libraries(monero-wallet-gui ${X11_LIBRARIES} pthread dl xcb X11)
-endif()
-
-
 if(INSTALL_VENDORED_LIBUNBOUND)
   set(UNBOUND_LIBRARY ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a)
 else()
@@ -160,6 +155,10 @@ target_link_libraries(monero-wallet-gui
 
 if(DEVICE_TREZOR_READY)
     target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
+endif()
+
+if(X11_FOUND)
+    target_link_libraries(monero-wallet-gui ${X11_LIBRARIES})
 endif()
 
 if(WITH_SCANNER)
