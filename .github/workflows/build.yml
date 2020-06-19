@@ -63,19 +63,21 @@ jobs:
           - name: "cmake"
             cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release-win64 -j2"
     name: build-windows-${{ matrix.toolchain.name }}
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - uses: eine/setup-msys2@v0
+    - uses: eine/setup-msys2@v1
       with:
         update: true
-    - name: install monero dependencies
-      run: msys2do pacman -S --noconfirm mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
-    - name: disable qtquickcompiler
-      run: msys2do sed -i s/CONFIG\ +=\ qtquickcompiler// monero-wallet-gui.pro
+        install: mingw-w64-x86_64-toolchain make mingw-w64-x86_64-cmake mingw-w64-x86_64-boost mingw-w64-x86_64-openssl mingw-w64-x86_64-zeromq mingw-w64-x86_64-libsodium mingw-w64-x86_64-hidapi mingw-w64-x86_64-protobuf-c mingw-w64-x86_64-libusb git mingw-w64-x86_64-qt5 mingw-w64-x86_64-libgcrypt
     - name: build
-      run: msys2do ${{ matrix.toolchain.cmd }}
+      run: |
+        sed -i 's/CONFIG\ +=\ qtquickcompiler//' monero-wallet-gui.pro
+        ${{ matrix.toolchain.cmd }}
     - name: test qml
-      run: msys2do build/release/bin/monero-wallet-gui --test-qml
+      run: build/release/bin/monero-wallet-gui --test-qml
