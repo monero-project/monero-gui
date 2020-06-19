@@ -130,9 +130,6 @@ if(X11_FOUND)
     target_link_libraries(monero-wallet-gui ${X11_LIBRARIES} pthread dl xcb X11)
 endif()
 
-if(DEVICE_TREZOR_READY)
-    target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
-endif()
 
 if(INSTALL_VENDORED_LIBUNBOUND)
   set(UNBOUND_LIBRARY ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a)
@@ -160,6 +157,10 @@ target_link_libraries(monero-wallet-gui
     ${ICU_LIBRARIES}
     openpgp
 )
+
+if(DEVICE_TREZOR_READY)
+    target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
+endif()
 
 if(WITH_SCANNER)
     target_link_libraries(monero-wallet-gui
