@@ -170,7 +170,7 @@ message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
 if(DEBUG)
     set(Boost_DEBUG ON)
 endif()
-find_package(Boost 1.62 REQUIRED COMPONENTS
+find_package(Boost 1.58 REQUIRED COMPONENTS
 		system
 		filesystem
 		thread
