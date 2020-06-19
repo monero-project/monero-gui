@@ -88,10 +88,24 @@ Rectangle {
         }
         
         MoneroComponents.CheckBox {
-            id: askPasswordBeforeSendingCheckbox
             checked: persistentSettings.askPasswordBeforeSending
-            onClicked: persistentSettings.askPasswordBeforeSending = !persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
+            toggleOnClick: false
+            onClicked: {
+                if (persistentSettings.askPasswordBeforeSending) {
+                    passwordDialog.onAcceptedCallback = function() {
+                        if (appWindow.walletPassword === passwordDialog.password){
+                            persistentSettings.askPasswordBeforeSending = false;
+                        } else {
+                            passwordDialog.showError(qsTr("Wrong password"));
+                        }
+                    }
+                    passwordDialog.onRejectedCallback = null;
+                    passwordDialog.open()
+                } else {
+                    persistentSettings.askPasswordBeforeSending = true;
+                }
+            }
         }
 
         MoneroComponents.CheckBox {
