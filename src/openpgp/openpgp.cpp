@@ -139,7 +139,7 @@ public_key_block::public_key_block(const epee::span<const uint8_t> buffer)
     /* const auto timestamp  = */ serialized.read_big_endian<uint32_t>();
 
     const auto algorithm = serialized.read_big_endian<uint8_t>();
-    if (algorithm != algorithm::rsa)
+    if (algorithm != openpgp::algorithm::rsa)
     {
       throw std::runtime_error("unsupported public key algorithm");
     }
@@ -219,7 +219,7 @@ signature_rsa signature_rsa::from_buffer(const epee::span<const uint8_t> input)
   const auto signature_type = static_cast<type>(buffer.read_big_endian<uint8_t>());
 
   const auto algorithm = buffer.read_big_endian<uint8_t>();
-  if (algorithm != algorithm::rsa)
+  if (algorithm != openpgp::algorithm::rsa)
   {
     throw std::runtime_error("unsupported signature algorithm");
   }
