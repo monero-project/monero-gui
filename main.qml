@@ -838,13 +838,12 @@ ApplicationWindow {
                     ", mixins: ", mixinCount,
                     ", priority: ", priority,
                     ", description: ", description);
-        txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.bottomTextAnimation.running = false
         txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
-        txConfirmationPopup.transactionDescription = description;
-        txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
         txConfirmationPopup.transactionAddress = address;
+        txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
         txConfirmationPopup.transactionPriority = priority;
+        txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.open()
 
         // validate amount;
