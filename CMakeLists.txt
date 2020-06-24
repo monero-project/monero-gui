@@ -198,21 +198,6 @@ if(MINGW)
     string(REGEX MATCH "^[^/]:/[^/]*" msys2_install_path "${CMAKE_C_COMPILER}")
     message(STATUS "MSYS location: ${msys2_install_path}")
     set(CMAKE_INCLUDE_PATH "${msys2_install_path}/mingw${ARCH_WIDTH}/include")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/Qt/labs/folderlistmodel")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/Qt/labs/settings")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtGraphicalEffects")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtGraphicalEffects/private")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtMultimedia")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick.2")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Controls")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Controls.2")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Dialogs")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Dialogs/Private")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Layouts")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/PrivateWidgets")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Templates.2")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/Window.2")
-    link_directories("${msys2_install_path}/mingw${ARCH_WIDTH}/qml/QtQuick/XmlListModel")
     # This is necessary because otherwise CMake will make Boost libraries -lfoo
     # rather than a full path. Unfortunately, this makes the shared libraries get
     # linked due to a bug in CMake which misses putting -static flags around the
@@ -230,6 +215,7 @@ set(QT5_LIBRARIES
   Qt5Network
   Qt5Qml
   Qt5Svg
+  Qt5Xml
 )
 
 if(WITH_SCANNER)
@@ -242,24 +228,28 @@ if(Qt5QmlModels_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
+# TODO: drop this once we switch to Qt 5.12+
+find_package(Qt5XmlPatterns QUIET)
+if(Qt5XmlPatterns_FOUND)
+  list(APPEND QT5_LIBRARIES Qt5XmlPatterns)
+endif()
+
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} REQUIRED)
 endforeach()
 
-find_package(PkgConfig)
-if(PKGCONFIG_FOUND)
-  pkg_check_modules(QT5_PKG_CONFIG ${QT5_LIBRARIES})
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
 
-  if(QT5_PKG_CONFIG_FOUND)
-    set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
-    if(STATIC)
-      set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
-    endif()
-
-    set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
-    include_directories(${${QT5_PKG_CONFIG}_INCLUDE_DIRS})
-    link_directories(${${QT5_PKG_CONFIG}_LIBRARY_DIRS})
+if(QT5_PKG_CONFIG_FOUND)
+  set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
+  if(STATIC)
+    set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
   endif()
+
+  set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
+  include_directories(${${QT5_PKG_CONFIG}_INCLUDE_DIRS})
+  link_directories(${${QT5_PKG_CONFIG}_LIBRARY_DIRS})
 endif()
 
 list(APPEND QT5_LIBRARIES
@@ -270,36 +260,90 @@ list(APPEND QT5_LIBRARIES
 )
 
 if(STATIC)
-  set(QT5_LIBRARIES
-    qtquickcontrols2plugin # has to be the first one, depends on Qt5QuickControls2
-    ${QT5_LIBRARIES}
-    declarative_multimedia
+  set(QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/folderlistmodel)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/Qt/labs/settings)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects/private)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtMultimedia)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick.2)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls.2)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Dialogs/Private)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Layouts)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/PrivateWidgets)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Templates.2)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Window.2)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/XmlListModel)
+
+  set(QT5_EXTRA_LIBRARIES_LIST
+    qtquicktemplates2plugin
+    Qt5QuickTemplates2
+    qtquickcontrols2plugin
+    Qt5QuickControls2
     dialogplugin
     dialogsprivateplugin
     qmlfolderlistmodelplugin
     qmlsettingsplugin
     qmlxmllistmodelplugin
     qquicklayoutsplugin
+  )
+
+  if(UNIX AND NOT APPLE)
+    list(APPEND QT5_EXTRA_LIBRARIES_LIST
+      Qt5XcbQpa
+      xcb-static
+      Qt5ServiceSupport
+    )
+  endif()
+
+  if(WITH_SCANNER)
+    list(APPEND QT5_EXTRA_LIBRARIES_LIST
+      declarative_multimedia
+      Qt5MultimediaQuick_p
+    )
+  endif()
+
+  list(APPEND QT5_EXTRA_LIBRARIES_LIST
     Qt5EventDispatcherSupport
     Qt5FontDatabaseSupport
-    Qt5MultimediaQuick_p
     Qt5PacketProtocol
     Qt5ThemeSupport
     qtgraphicaleffectsplugin
     qtgraphicaleffectsprivate
     qtquick2plugin
     qtquickcontrolsplugin
-    qtquicktemplates2plugin
     widgetsplugin
     windowplugin
   )
 
+  set(QT5_EXTRA_LIBRARIES)
+  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS})
+    list(APPEND QT5_EXTRA_LIBRARIES ${${LIBRARY}_LIBRARY})
+  endforeach()
+
   if(MINGW)
-    list(APPEND QT5_LIBRARIES qtfreetype)
+    list(APPEND QT5_EXTRA_LIBRARIES qtfreetype)
 
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-      list(APPEND QT5_LIBRARIES D3D11 Dwrite D2d1)
+      list(APPEND QT5_EXTRA_LIBRARIES D3D11 Dwrite D2d1)
     endif()
+  endif()
+
+  set(QT5_LIBRARIES
+    ${QT5_EXTRA_LIBRARIES}
+    ${QT5_LIBRARIES}
+  )
+
+  if(UNIX AND NOT APPLE)
+    pkg_check_modules(X11_XCB REQUIRED x11-xcb)
+    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+
+    list(APPEND QT5_LIBRARIES
+      ${FONTCONFIG_STATIC_LIBRARIES}
+      ${X11_XCB_STATIC_LIBRARIES}
+    )
   endif()
 endif()
 
