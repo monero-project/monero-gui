@@ -273,7 +273,6 @@ Rectangle {
                 // LOG
                 id: navLog
                 property bool isActive: settingsStateView.state === "Log"
-                visible: appWindow.walletMode >= 2
                 Layout.preferredWidth: navLogText.width + grid.textMargin
                 Layout.preferredHeight: 32
                 Layout.minimumWidth: 72

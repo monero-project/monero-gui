@@ -2139,7 +2139,7 @@ ApplicationWindow {
         if (mode < 2) {
             persistentSettings.useRemoteNode = false;
 
-            if (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log") {
+            if (middlePanel.settingsView.settingsStateViewState === "Node") {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"
             }
         }
