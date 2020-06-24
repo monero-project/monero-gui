@@ -69,6 +69,7 @@
 #include "qt/TailsOS.h"
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
+#include "qt/NetworkAccessBlockingFactory.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -418,6 +419,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QQmlApplicationEngine engine;
 
+    engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
