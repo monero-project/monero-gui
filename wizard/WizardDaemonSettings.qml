@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -49,102 +50,256 @@ ColumnLayout {
             persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.getAddress();
         }
     }
-
-    MoneroComponents.RadioButton {
-        id: localNode
+            
+    ColumnLayout {
         Layout.fillWidth: true
-        text: qsTr("Start a node automatically in background (recommended)") + translationManager.emptyString
-        fontSize: 16
-        checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
-        visible: !isAndroid && !isIOS
-        onClicked: {
-            checked = true;
-            remoteNode.checked = false;
+
+        RowLayout {
+            MoneroComponents.RadioButton {
+                id: localNode
+                text: qsTr("Start a local node") + translationManager.emptyString
+                fontSize: 16
+                checked: !appWindow.persistentSettings.useRemoteNode && !isAndroid && !isIOS
+                visible: !isAndroid && !isIOS
+            }
+            
+            MoneroComponents.Label {
+                Layout.fillWidth: true
+                Layout.topMargin: 4
+                fontSize: 16
+                text: FontAwesome.home
+                fontFamily: FontAwesome.fontFamilySolid
+                fontColor: MoneroComponents.Style.defaultFontColor
+                styleName: "Solid"
+            }
+        }
+        
+        Text {
+            text: qsTr("Start a local server in your computer, which will download and synchronize the blockchain. Provides higher security, but requires more local storage.") + translationManager.emptyString
+            Layout.leftMargin: 42
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.dimmedFontColor
+            font.pixelSize: 15
+            wrapMode: Text.WordWrap
+            leftPadding: 0
+            topPadding: 0
+            bottomPadding: 0
+        }
+
+        MouseArea {
+            cursorShape: Qt.PointingHandCursor
+            anchors.fill: parent
+            onClicked: {
+                localNode.checked = true;
+                remoteNode.checked = false;
+            }
         }
     }
 
     ColumnLayout {
-        id: blockchainFolderRow
-        visible: localNode.checked
-        spacing: 20
-
-        Layout.topMargin: 8
         Layout.fillWidth: true
-
-        MoneroComponents.LineEdit {
-            id: blockchainFolder
-            Layout.fillWidth: true
-
-            readOnly: true
-            labelText: qsTr("Blockchain location (optional)") + translationManager.emptyString
-            labelFontSize: 14
-            placeholderText: qsTr("Default") + translationManager.emptyString
-            placeholderFontSize: 15
-            text: persistentSettings.blockchainDataDir
-            inlineButton.small: true
-            inlineButtonText: qsTr("Browse") + translationManager.emptyString
-            inlineButton.onClicked: {
-                if(persistentSettings.blockchainDataDir != "");
-                    blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
-                blockchainFileDialog.open();
-                blockchainFolder.focus = true;
+            
+        RowLayout {
+            Layout.topMargin: 3
+            
+            MoneroComponents.RadioButton {
+                id: remoteNode
+                text: qsTr("Connect to a remote node") + translationManager.emptyString
+                fontSize: 16
+                checked: appWindow.persistentSettings.useRemoteNode
+            }
+            
+            MoneroComponents.Label {
+                Layout.fillWidth: true
+                Layout.topMargin: 6
+                fontSize: 16
+                text: FontAwesome.cloud
+                fontFamily: FontAwesome.fontFamilySolid
+                fontColor: MoneroComponents.Style.defaultFontColor
+                styleName: "Solid"
             }
         }
+        
+        Text {
+            text: qsTr("Connect to a remote server that contains a synchronized blockchain. Less secure if you connect to a third-party server.") + translationManager.emptyString
+            Layout.leftMargin: 42
+            Layout.fillWidth: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            color: MoneroComponents.Style.dimmedFontColor
+            font.pixelSize: 15
+            wrapMode: Text.WordWrap
+            leftPadding: 0
+            topPadding: 0
+            bottomPadding: 0
+        }
 
-        ColumnLayout{
+        MouseArea {
+            cursorShape: Qt.PointingHandCursor
+            anchors.fill: parent
+            onClicked: {
+              remoteNode.checked = true
+              localNode.checked = false
+            }
+        }
+    }
+    
+    ColumnLayout {
+        id: localNodeSettingsColumn
+        visible: localNode.checked
+        Layout.fillWidth: true
+
+        MoneroComponents.LabelSubheader {
+            Layout.fillWidth: true
+            Layout.topMargin: 10
+            textFormat: Text.RichText
+            text: qsTr("Local node settings") + translationManager.emptyString
+        }
+        
+        ColumnLayout {
             Layout.topMargin: 6
-            spacing: 0
-
-            Text {
-                text: qsTr("Bootstrap node") + translationManager.emptyString
-                Layout.topMargin: 10
-                Layout.fillWidth: true
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.defaultFontColor
-                font.pixelSize: {
-                    if(wizardController.layoutScale === 2 ){
-                        return 22;
-                    } else {
-                        return 16;
+            Layout.bottomMargin: 0
+        
+            RowLayout {
+                Layout.topMargin: 4
+                
+                Text {
+                    text: qsTr("Change blockchain location (optional)") + translationManager.emptyString
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: 15
+                    wrapMode: Text.WordWrap
+                    leftPadding: 0
+                    topPadding: 0
+                    bottomPadding: 0
+                }        
+    
+                MoneroComponents.Label {
+                    id: iconLabel
+                    Layout.topMargin: 0
+                    fontSize: 12
+                    text: FontAwesome.questionCircle
+                    fontFamily: FontAwesome.fontFamily
+                    opacity: 0.3
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: helpText1.visible = !helpText1.visible
+                        onEntered: parent.opacity = 0.4
+                        onExited: parent.opacity = 0.3
                     }
                 }
-
+            }
+            
+            Text {
+                id: helpText1
+                text: qsTr("Downloading the blockchain requires at least 90 GB of disk space.<br>Syncing the blockchain is significantly faster with a SSD (solid state drive) instead of a regular hard disk drive (HDD).") + translationManager.emptyString
+                visible: false
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
                 wrapMode: Text.WordWrap
                 leftPadding: 0
                 topPadding: 0
                 bottomPadding: 0
             }
-
-            Text {
-                text: qsTr("Additionally, you may specify a bootstrap node to use Monero immediately.") + translationManager.emptyString
-                Layout.topMargin: 4
+    
+            MoneroComponents.LineEdit {
+                id: blockchainFolder
                 Layout.fillWidth: true
-
-                font.family: MoneroComponents.Style.fontRegular.name
-                color: MoneroComponents.Style.dimmedFontColor
-
-                font.pixelSize: {
-                    if(wizardController.layoutScale === 2 ){
-                        return 16;
-                    } else {
-                        return 14;
-                    }
+                readOnly: true
+                labelText: ""
+                labelFontSize: 14
+                placeholderText: qsTr("Default") + translationManager.emptyString
+                placeholderFontSize: 15
+                text: persistentSettings.blockchainDataDir
+                inlineButton.small: true
+                inlineButtonText: qsTr("Browse") + translationManager.emptyString
+                inlineButton.onClicked: {
+                    if(persistentSettings.blockchainDataDir != "");
+                        blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                    blockchainFileDialog.open();
+                    blockchainFolder.focus = true;
                 }
-
-                wrapMode: Text.WordWrap
-                leftPadding: 0
-                topPadding: 0
-                bottomPadding: 0
             }
         }
 
         ColumnLayout {
-            spacing: 8
-            Layout.fillWidth: true
+            Layout.topMargin: 6
+            Layout.bottomMargin: 0
 
+            RowLayout {
+                Layout.topMargin: 4
+                
+                Text {
+                    text: qsTr("Add bootstrap node") + translationManager.emptyString
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: 15
+                    wrapMode: Text.WordWrap
+                    leftPadding: 0
+                    topPadding: 0
+                    bottomPadding: 0
+                }
+                
+                MoneroComponents.Label {
+                    Layout.topMargin: 0
+                    fontSize: 14
+                    text: FontAwesome.cloud
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontColor: MoneroComponents.Style.defaultFontColor
+                    styleName: "Solid"
+                }
+                
+                Text {
+                    text: qsTr("(optional)") + translationManager.emptyString
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: 15
+                    wrapMode: Text.WordWrap
+                    leftPadding: 0
+                    topPadding: 0
+                    bottomPadding: 0
+                }
+                
+                MoneroComponents.Label {
+                    id: iconLabel2
+                    Layout.topMargin: 0
+                    fontSize: 12
+                    text: FontAwesome.questionCircle
+                    fontFamily: FontAwesome.fontFamily
+                    opacity: 0.3
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: helpText2.visible = !helpText2.visible
+                        onEntered: parent.opacity = 0.4
+                        onExited: parent.opacity = 0.3
+                    }
+                }
+            }
+
+            Text {
+                id: helpText2
+                text: qsTr("By setting a bootstrap node, your local node will temporarily connect to a remote node while the blockchain is still being downloaded, allowing you to use Monero immediately.") + translationManager.emptyString
+                visible: false
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
+                wrapMode: Text.WordWrap
+                leftPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+            }
+            
             MoneroComponents.RemoteNodeEdit {
                 id: bootstrapNodeEdit
                 Layout.minimumWidth: 300
+                Layout.topMargin: 0
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
 
                 daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
@@ -158,35 +313,77 @@ ColumnLayout {
                 }
             }
         }
-    }
-
-    MoneroComponents.RadioButton {
-        id: remoteNode
-        Layout.fillWidth: true
-        Layout.topMargin: 8
-        text: qsTr("Connect to a remote node") + translationManager.emptyString
-        fontSize: 16
-        checked: appWindow.persistentSettings.useRemoteNode
-        onClicked: {
-            checked = true
-            localNode.checked = false
-        }
-    }
-
+    }    
+  
     ColumnLayout {
+        id: remoteNodeSettingsColumn
         visible: remoteNode.checked
-        spacing: 0
-
-        Layout.topMargin: 8
         Layout.fillWidth: true
-
-        MoneroComponents.RemoteNodeEdit {
-            id: remoteNodeEdit
+    
+        MoneroComponents.LabelSubheader {
             Layout.fillWidth: true
-
-            property var rna: persistentSettings.remoteNodeAddress
-            daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-            daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+            Layout.topMargin: 10
+            textFormat: Text.RichText
+            text: qsTr("Remote node settings") + translationManager.emptyString
+        }
+        
+        ColumnLayout {
+            Layout.topMargin: 6
+            Layout.bottomMargin: 0
+            
+            RowLayout {
+                Layout.topMargin: 4
+                
+                Text {
+                    text: qsTr("Remote node address and port") + translationManager.emptyString
+                    font.family: MoneroComponents.Style.fontRegular.name
+                    color: MoneroComponents.Style.defaultFontColor
+                    font.pixelSize: 15
+                    wrapMode: Text.WordWrap
+                    leftPadding: 0
+                    topPadding: 0
+                    bottomPadding: 0
+                }
+                
+                MoneroComponents.Label {
+                    id: iconLabel3
+                    Layout.topMargin: 0
+                    fontSize: 12
+                    text: FontAwesome.questionCircle
+                    fontFamily: FontAwesome.fontFamily
+                    opacity: 0.3
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: helpText3.visible = !helpText3.visible
+                        onEntered: parent.opacity = 0.4
+                        onExited: parent.opacity = 0.3
+                    }
+                }
+            }
+            
+            Text {
+                id: helpText3
+                text: qsTr("To find a third-party remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
+                visible: false
+                Layout.fillWidth: true
+                font.family: MoneroComponents.Style.fontRegular.name
+                color: MoneroComponents.Style.dimmedFontColor
+                font.pixelSize: 14
+                wrapMode: Text.WordWrap
+                leftPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+            }
+            
+            MoneroComponents.RemoteNodeEdit {
+                id: remoteNodeEdit
+                Layout.fillWidth: true
+                property var rna: persistentSettings.remoteNodeAddress
+                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
+                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+            }
         }
     }
 }

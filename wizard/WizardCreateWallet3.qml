@@ -56,8 +56,8 @@ Rectangle {
             spacing: 20
 
             WizardHeader {
-                title: qsTr("Daemon settings") + translationManager.emptyString
-                subtitle: qsTr("To be able to communicate with the Monero network your wallet needs to be connected to a Monero node. For best privacy it's recommended to run your own node.") + translationManager.emptyString
+                title: qsTr("Node settings") + translationManager.emptyString
+                subtitle: qsTr("To be able to communicate with the Monero network, your wallet needs to be connected to a node with a synchronized blockchain. If you want to protect your privacy, avoid using third-party remote nodes and run your own node.") + translationManager.emptyString
             }
 
             WizardDaemonSettings {
