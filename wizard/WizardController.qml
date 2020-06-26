@@ -145,6 +145,7 @@ Rectangle {
         property WizardModeSelection wizardModeSelectionView: WizardModeSelection { }
         property WizardModeRemoteNodeWarning wizardModeRemoteNodeWarningView: WizardModeRemoteNodeWarning { }
         property WizardModeBootstrap wizardModeBootstrapView: WizardModeBootstrap {}
+        property WizardAnonymity wizardAnonymityView: WizardAnonymity {}
         anchors.fill: parent
 
         color: "transparent"
@@ -235,7 +236,11 @@ Rectangle {
             }, State {
                 name: "wizardModeBootstrap"
                 PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardModeBootstrapView }
-                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.pageHeight + 80 }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardModeBootstrapView.childrenRect.height + wizardController.flickableHeightMargin }
+            }, State {
+                name: "wizardAnonymityNetworks"
+                PropertyChanges { target: wizardStateView; currentView: wizardStateView.wizardAnonymityView }
+                PropertyChanges { target: wizardFlickable; contentHeight: wizardStateView.wizardAnonymityView.childrenRect.height + wizardController.flickableHeightMargin }
             }
         ]
 
@@ -276,7 +281,7 @@ Rectangle {
             StackView {
                 id: stackView
                 property bool backTransition: false
-                initialItem: wizardStateView.wizardLanguageView
+                initialItem: wizardStateView.wizardLanguageView                
                 anchors.fill: parent
                 clip: true
 

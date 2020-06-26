@@ -64,7 +64,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args/* = nullptr*/)
     return m_instance;
 }
 
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool i2p /* = false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
     {
@@ -110,6 +110,11 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     if (noSync) {
         arguments << "--no-sync";
+    }
+
+    if(i2p) {
+        arguments << "--proxy i2p,127.0.0.1:31338";
+        arguments << "--add-peer zovfq7lvc3hqx7ub42z3pwvqdypcypxvawmoddi2b32gnsgd7kpq.b32.i2p:18080";
     }
 
     arguments << "--check-updates" << "disabled";
