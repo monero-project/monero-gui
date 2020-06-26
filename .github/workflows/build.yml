@@ -6,15 +6,31 @@ jobs:
   build-macos:
 
     runs-on: macOS-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - name: "qmake"
+            cmd: "export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh"
+            experimental: false
+          - name: "cmake"
+            cmd: "CMAKE_PREFIX_PATH=/usr/local/opt/qt USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release -j3"
+            experimental: true
+    name: build-macos-${{ matrix.toolchain.name }}
+    continue-on-error: ${{ matrix.toolchain.experimental }}
 
     steps:
     - uses: actions/checkout@v1
+      with:
+        submodules: recursive
     - name: update brew and install dependencies
-      run: brew update && brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf qt5 libgcrypt
+      run: brew update && brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf qt5 libgcrypt pkg-config
     - name: build
-      run: export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh
+      run: ${{ matrix.toolchain.cmd }}
     - name: test qml
       run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
+    - name: dummy success step
+      run: echo
 
   build-ubuntu:
 
