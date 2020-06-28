@@ -73,6 +73,12 @@ GridLayout {
         if(addr === "" || addr.length < 2) return "";
         if(!Utils.isNumeric(port)) return "";
 
+        // IPv6 addresses get special treatment, they're enclosed in square
+        // brackets, e.g.: [fe80:cafe::1]: 18081.
+        if (Utils.isIPv6(addr)) {
+            return "[" + addr + "]:" + port;
+        }
+
         return addr + ":" + port;
     }
 

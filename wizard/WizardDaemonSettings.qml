@@ -31,6 +31,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
 
+import "../js/Utils.js" as Utils
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
@@ -147,14 +148,14 @@ ColumnLayout {
                 Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
 
-                daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
+                daemonAddrText: Utils.getAddressParts(persistentSettings.bootstrapNodeAddress).host
                 daemonPortText: {
-                    var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                    if(node_split.length == 2){
-                        (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                    } else {
-                        return ""
+                    var parts = Utils.getAddressParts(persistentSettings.bootstrapNodeAddress);
+                    if(parts.port != ""){
+                        return parts.port;
                     }
+
+                    return appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype);
                 }
             }
         }
@@ -185,8 +186,15 @@ ColumnLayout {
             Layout.fillWidth: true
 
             property var rna: persistentSettings.remoteNodeAddress
-            daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-            daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+            daemonAddrText: Utils.getAddressParts(rna).host
+            daemonPortText: {
+                var parts = Utils.getAddressParts(rna);
+                if(parts.port != ""){
+                    return parts.port;
+                }
+
+                return appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype);
+            }
         }
     }
 }

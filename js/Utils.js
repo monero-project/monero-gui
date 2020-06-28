@@ -137,3 +137,69 @@ function capitalize(s){
 function removeTrailingZeros(value) {
     return (value + '').replace(/(\.\d*[1-9])0+$/, '$1');
 }
+
+function ipv6Regexes(){
+    return {
+        common: /^(::)?((?:[0-9a-f]+::?)+)?([0-9a-f]+)?(::)?(%[0-9a-z]{1,})?$/i,
+        transitional: /^((?:(0?\d+|0x[a-f0-9]+))|(?:::)(?:(?:[0-9a-f]+::?)+)?)(0?\d+|0x[a-f0-9]+)\.(0?\d+|0x[a-f0-9]+)\.(0?\d+|0x[a-f0-9]+)\.(0?\d+|0x[a-f0-9]+)(%[0-9a-z]{1,})?$/i
+    };
+}
+
+function isIPv6(value){
+    // Matches an IPv6 address, 2001:db8::1 and fe80:200::1%en0 are valid (last
+    // one with a zone identifier on a LL address). Also IPv4 transitional
+    // mapped addresses are identified (::ffff:192.186.0.1)
+    return ipv6Regexes().common.test(value) || ipv6Regexes().transitional.test(value);
+}
+
+function getAddressParts(value){
+    var start_pos = value.indexOf("[");
+    if(start_pos != -1){
+        start_pos += 1;
+        var end_pos = value.lastIndexOf("]");
+        // Unclosed bracket? return value as is, it's invalid.
+        if(end_pos == -1){
+            return { host: value.trim(), port: "" };
+        }
+
+        // User gave us ]craziness[, it's invalid.
+        if(start_pos > end_pos){
+            return { host: value.trim(), port: "" };
+        }
+
+        var slice = value.slice(start_pos, end_pos);
+        if(isIPv6(slice)){
+            var maybe_port = "";
+            if(end_pos + 1 < value.length){
+                maybe_port = value.slice(end_pos + 1, value.length).split(":").pop();
+            }
+
+            return { host: slice.trim(), port: maybe_port.trim() };
+        } else {
+            // Not valid IPv6 address ;)
+            return { host: value.trim(), port: "" };
+        }
+    }
+
+    // Previous if didn't match an [ipv6 addr]:port, check if the input is just
+    // an IPv6 address.
+    if(isIPv6(value)) {
+        return { host: value.trim(), port: "" };
+    }
+
+    // Okay, not an IPv6 address, this is for sure ;). Start parsing a common
+    // DNS or IPv4 <host>:<port> host.
+    if (value.search(":") != -1) {
+        var split = value.split(":");
+        var host = split[0].trim();
+        var maybe_port = "";
+        if (split.length > 1) {
+            maybe_port = split.pop().trim();
+        }
+
+        return { host: host, port: maybe_port };
+    } else {
+        // Value is just the host, doens't have a port.
+        return { host: value.trim(), port: "" };
+    }
+}

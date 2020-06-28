@@ -31,6 +31,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import FontAwesome 1.0
 
+import "../../js/Utils.js" as Utils
 import "../../components" as MoneroComponents
 import "../../components/effects" as MoneroEffects
 
@@ -269,8 +270,15 @@ Rectangle{
                 daemonPortLabelText: qsTr("Port") + translationManager.emptyString
 
                 property var rna: persistentSettings.remoteNodeAddress
-                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : rna.split(":")[1] : ""
+                daemonAddrText: Utils.getAddressParts(rna).host
+                daemonPortText: {
+                    var parts = Utils.getAddressParts(rna);
+                    if(parts.port != ""){
+                        return parts.port;
+                    }
+
+                    return appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype);
+                }
                 onEditingFinished: {
                     persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                     console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
@@ -419,14 +427,14 @@ Rectangle{
 
                         daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
                         daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
-                        daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
+                        daemonAddrText: Utils.getAddressParts(persistentSettings.bootstrapNodeAddress).host
                         daemonPortText: {
-                            var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                            if(node_split.length == 2){
-                                (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                            } else {
-                                return ""
+                            var parts = Utils.getAddressParts(persistentSettings.bootstrapNodeAddress);
+                            if(parts.port != ""){
+                                return parts.port;
                             }
+
+                            return appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype);
                         }
                         onEditingFinished: {
                             if (daemonAddrText == "auto") {
