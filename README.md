@@ -81,6 +81,28 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
+### Building Linux static binaries with Docker (any OS)
+
+1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+2. Clone the repository
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   ```
+3. Prepare build environment
+   ```
+   cd monero-gui
+   docker build --tag monero:build-env-gui --build-arg THREADS=4 .
+   ```
+   \* `4` - number of CPU threads to use
+
+4. Build
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-gui sh -c 'USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release-static -j4'
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `4` - number of CPU threads to use
+5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
+
 ### On Linux:
 
 (Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
