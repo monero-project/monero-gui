@@ -418,7 +418,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QQmlApplicationEngine engine;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
+#endif
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
