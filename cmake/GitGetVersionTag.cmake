@@ -28,37 +28,40 @@
 # 
 # Parts of this file are originally copyright (c) 2012-2013 The Cryptonote developers
 
-# Check what commit we're on
-execute_process(COMMAND "${GIT}" rev-parse --short=9 HEAD RESULT_VARIABLE RET OUTPUT_VARIABLE COMMIT OUTPUT_STRIP_TRAILING_WHITESPACE)
+function (git_get_version_tag git directory result_var)
+  execute_process(COMMAND "${git}" rev-parse --short HEAD
+    WORKING_DIRECTORY ${directory}
+    OUTPUT_VARIABLE COMMIT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  if(NOT COMMIT)
+    message(WARNING "${directory}: cannot determine current commit. Make sure that you are building from a Git working tree")
+    set(${result_var} "unknown" PARENT_SCOPE)
+    return()
+  endif()
 
-if(RET)
-	# Something went wrong, set the version tag to -unknown
-	
-    message(WARNING "Cannot determine current commit. Make sure that you are building either from a Git working tree or from a source archive.")
-    set(VERSIONTAG "unknown")
-    configure_file("src/version.js.in" "${TO}")
-else()
-	string(SUBSTRING ${COMMIT} 0 9 COMMIT)
-	message(STATUS "You are currently on commit ${COMMIT}")
-	
-	# Get all the tags
-	execute_process(COMMAND "${GIT}" rev-list --tags --max-count=1 --abbrev-commit RESULT_VARIABLE RET OUTPUT_VARIABLE TAGGEDCOMMIT OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-    if(NOT TAGGEDCOMMIT)
-        message(WARNING "Cannot determine most recent tag. Make sure that you are building either from a Git working tree or from a source archive.")
-        set(VERSIONTAG "${COMMIT}")
-    else()
-        message(STATUS "The most recent tag was at ${TAGGEDCOMMIT}")
-        
-        # Check if we're building that tagged commit or a different one
-        if(COMMIT STREQUAL TAGGEDCOMMIT)
-            message(STATUS "You are building a tagged release")
-            set(VERSIONTAG "release")
-        else()
-            message(STATUS "You are ahead of or behind a tagged release")
-            set(VERSIONTAG "${COMMIT}")
-        endif()
-    endif()	    
+  execute_process(COMMAND "${git}" describe --tags --exact-match
+    WORKING_DIRECTORY ${directory}
+    OUTPUT_VARIABLE TAG
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  if(TAG)
+    message(STATUS "${directory}: building tagged release ${TAG}-${COMMIT}")
+    set(${result_var} "${TAG}-${COMMIT}" PARENT_SCOPE)
+    return()
+  endif()
 
-    configure_file("src/version.js.in" "${TO}")
-endif()
+  execute_process(COMMAND "${git}" describe --tags --long
+    WORKING_DIRECTORY ${directory}
+    OUTPUT_VARIABLE MOST_RECENT_TAG
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  if(MOST_RECENT_TAG)
+    message(STATUS "${directory}: ahead of or behind a tagged release, building ${MOST_RECENT_TAG}")
+    set(${result_var} "${MOST_RECENT_TAG}" PARENT_SCOPE)
+    return()
+  endif()
+
+  message(STATUS "${directory}: building ${COMMIT} commit")
+  set(${result_var} "${COMMIT}" PARENT_SCOPE)
+endfunction()
