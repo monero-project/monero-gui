@@ -126,22 +126,16 @@ target_compile_definitions(monero-wallet-gui
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
-if(INSTALL_VENDORED_LIBUNBOUND)
-  set(UNBOUND_LIBRARY ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a)
-else()
-  set(UNBOUND_LIBRARY unbound)
-endif()
-
 target_link_libraries(monero-wallet-gui
-    ${CMAKE_BINARY_DIR}/lib/libwallet_merged.a
+    wallet_merged
     ${LMDB_LIBRARY}
-    ${CMAKE_BINARY_DIR}/monero/contrib/epee/src/libepee.a
-    ${UNBOUND_LIBRARY}
+    epee
+    unbound
     ${SODIUM_LIBRARY}
-    ${CMAKE_BINARY_DIR}/monero/external/easylogging++/libeasylogging.a
-    ${CMAKE_BINARY_DIR}/monero/src/blockchain_db/libblockchain_db.a
-    ${CMAKE_BINARY_DIR}/monero/external/randomx/librandomx.a
-    ${CMAKE_BINARY_DIR}/monero/src/hardforks/libhardforks.a
+    easylogging
+    blockchain_db
+    randomx
+    hardforks
     ${Boost_LIBRARIES}
     ${OPENSSL_LIBRARIES}
     ${CMAKE_DL_LIBS}
