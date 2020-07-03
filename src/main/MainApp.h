@@ -35,6 +35,9 @@ class MainApp : public QApplication
     Q_OBJECT
 public:
     MainApp(int &argc, char** argv) : QApplication(argc, argv) {};
+#ifdef Q_OS_LINUX
+    Q_INVOKABLE bool xdgDesktopEntryRegister() const;
+#endif
 private:
     bool event(QEvent *e);
 signals:

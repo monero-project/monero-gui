@@ -298,11 +298,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         return 1;
     }
 
-    // Desktop entry
-#ifdef Q_OS_LINUX
-    registerXdgMime(app);
-#endif
-
     IPC *ipc = new IPC(&app);
     QStringList posArgs = parser.positionalArguments();
 
@@ -346,6 +341,21 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qWarning().nospace().noquote() << "Qt:" << QT_VERSION_STR << " GUI:" << GUI_VERSION
                                    << " | screen: " << rect.width() << "x" << rect.height()
                                    << " - dpi: " << dpi << " - ratio:" << calculated_ratio;
+
+#ifdef Q_OS_LINUX
+    // xdg desktop entry
+    bool tails = (isTails && TailsOS::detectDotPersistence() && TailsOS::usePersistence);
+    QString xdgDesktopEntryPath = tails ? xdgPaths.pathAppTails : xdgPaths.pathApp;
+    bool xdgDesktopEntryPathExists = QFile::exists(xdgDesktopEntryPath);
+
+    if (xdgDesktopEntryPathExists) {
+        // keep it updated
+        xdgDesktopEntryWrite(xdgDesktopEntryPath);
+        if (tails)
+            xdgDesktopEntryWrite(xdgPaths.pathApp);
+        xdgRefreshApplications();
+    }
+#endif
 
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
@@ -467,6 +477,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
     if (!desktopFolder.isEmpty())
         engine.rootContext()->setContextProperty("desktopFolder", desktopFolder);
+#endif
+
+#ifdef Q_OS_LINUX
+    engine.rootContext()->setContextProperty("xdgDesktopEntryExists", xdgDesktopEntryPathExists);
 #endif
 
     // Wallet .keys files model (wizard -> open wallet)

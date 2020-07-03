@@ -29,9 +29,11 @@
 #include <QtCore>
 #include <QApplication>
 #include <QtGlobal>
+#include <QMessageBox>
+#include <QCheckBox>
 
-#include "TailsOS.h"
 #include "utils.h"
+#include "TailsOS.h"
 
 bool fileExists(QString path) {
     QFileInfo check_file(path);
@@ -88,7 +90,7 @@ QString getAccountName(){
 }
 
 #ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app){
+QString xdgDesktopEntry(){
     return QString(
         "[Desktop Entry]\n"
         "Name=Monero GUI\n"
@@ -96,7 +98,7 @@ QString xdgMime(QApplication &app){
         "X-GNOME-FullName=Monero-GUI\n"
         "Comment=Monero GUI\n"
         "Keywords=Monero;\n"
-        "Exec=%1 %u\n"
+        "Exec=\"%1\" %u\n"
         "Terminal=false\n"
         "Type=Application\n"
         "Icon=monero\n"
@@ -105,32 +107,89 @@ QString xdgMime(QApplication &app){
         "StartupNotify=true\n"
         "X-GNOME-Bugzilla-Bugzilla=GNOME\n"
         "X-GNOME-UsesNotifications=true\n"
-    ).arg(app.applicationFilePath());
+    ).arg(QApplication::applicationFilePath());
 }
 
-void registerXdgMime(QApplication &app){
-    // Register desktop entry
+bool xdgDesktopEntryWrite(const QString &path){
+    QString mime = xdgDesktopEntry();
+    QFileInfo file(path);
+    QDir().mkpath(file.path());
+#ifdef QT_DEBUG
+    qDebug() << "Writing xdg desktop entry: " << path;
+#endif
+    return fileWrite(path, mime);
+}
+
+void xdgRefreshApplications(){
+    QStringList args = {QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation)};
+    QProcess process;
+    process.start("update-desktop-database", args);
+    process.waitForFinished(2500);
+    process.close();
+}
+
+bool _xdgDesktopEntryRegister(){
+    // Ask to create a desktop entry on Linux
     // - MacOS handled via Info.plist
     // - Windows handled in the installer by rbrunner7
     // - Linux written to `QStandardPaths::ApplicationsLocation`
     // - Tails written to persistent dotfiles
-    QString mime = xdgMime(app);
-    QString appPath = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
-    QString filePath = QString("%1/monero-gui.desktop").arg(appPath);
+    bool tails = (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence);
+    QString writeLocations = "Write locations:\n";
+    writeLocations += QString("- %1\n").arg(tails ? xdgPaths.pathAppTails: xdgPaths.pathApp);
+    writeLocations += QString("- %1\n").arg(tails ? xdgPaths.PathIconTails: xdgPaths.pathIcon);
 
-    if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
-        TailsOS::persistXdgMime(filePath, mime);
-        return;
+    // ask
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Create a desktop entry");
+    msgBox.setText("Would you like to add the Monero-GUI to your startup items? "
+                   "In addition, this will register the monero:// mime handler. "
+                   "\n\n" + writeLocations);
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Question);
+
+    int ret = msgBox.exec();
+    switch (ret) {
+        case QMessageBox::Ok: {
+            QPixmap appIcon(":/images/appicons/64x64.png");
+            if (tails) {
+                if (!fileExists(xdgPaths.PathIconTails))
+                    pixmapWrite(xdgPaths.PathIconTails, appIcon);
+
+                xdgDesktopEntryWrite(xdgPaths.pathAppTails);
+            }
+
+            if (!fileExists(xdgPaths.pathIcon))
+                pixmapWrite(xdgPaths.pathIcon, appIcon);
+
+            xdgDesktopEntryWrite(xdgPaths.pathApp);
+            xdgRefreshApplications();
+            return true;
+        }
+        case QMessageBox::No: {
+            break;
+        }
+        default: {
+            break;
+        }
     }
+    return false;
+}
 
-    QFileInfo file(filePath);
-    QDir().mkpath(file.path()); // ensure directory exists
-
+bool pixmapWrite(const QString &path, const QPixmap &pixmap) {
 #ifdef QT_DEBUG
-    qDebug() << "Writing xdg mime: " << filePath;
+    qDebug() << "Writing xdg icon: " << path;
 #endif
-
-    fileWrite(filePath, mime);
+    QFile file(path);
+    QFileInfo iconInfo(file);
+    QDir().mkpath(iconInfo.path());
+    if(file.open(QIODevice::WriteOnly)){
+        pixmap.save(&file, "PNG");
+        file.close();
+        return true;
+    }
+    return false;
 }
 #endif
 

@@ -251,14 +251,29 @@ Rectangle {
             }
         }
 
-        MoneroComponents.StandardButton {
-            visible: !persistentSettings.customDecorations
-            Layout.topMargin: 10
-            small: true
-            text: qsTr("Change language") + translationManager.emptyString
+        RowLayout{
+            spacing: 20
 
-            onClicked: {
-                appWindow.toggleLanguageView();
+            MoneroComponents.StandardButton {
+                visible: !persistentSettings.customDecorations
+                Layout.topMargin: 10
+                small: true
+                text: qsTr("Change language") + translationManager.emptyString
+
+                onClicked: {
+                    appWindow.toggleLanguageView();
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                Layout.topMargin: 10
+                visible: (isLinux || isTails) && !xdgDesktopEntryExists
+                small: true
+                text: qsTr("Create desktop entry") + translationManager.emptyString
+                onClicked: {
+                    if(mainApp.xdgDesktopEntryRegister())
+                        visible = false;
+                }
             }
         }
     }

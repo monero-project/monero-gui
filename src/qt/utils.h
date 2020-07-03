@@ -39,8 +39,26 @@ QByteArray fileOpen(QString path);
 bool fileWrite(QString path, QString data);
 QString getAccountName();
 #ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app);
-void registerXdgMime(QApplication &app);
+struct xdgDesktopEntryPaths {
+    QString pathApp;
+    QString pathIcon;
+    QString pathAppTails;
+    QString PathIconTails;
+    QString PathMime;
+};
+const xdgDesktopEntryPaths xdgPaths = {
+        QString("%1/monero-gui.desktop").arg(QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation)),
+        QString("%1/.local/share/icons/monero.png").arg(QDir::homePath()),
+        QString("/live/persistence/TailsData_unlocked/dotfiles/.local/share/applications/monero-gui.desktop"),
+        QString("/live/persistence/TailsData_unlocked/dotfiles/.local/share/icons/monero.png"),
+        QString("/")
+};
+bool pixmapWrite(const QString &path, const QPixmap &pixmap);
+QString xdgDesktopEntry();
+bool xdgDesktopEntryWrite(const QString &path);
+QString xdgDesktopEntryPath();
+bool _xdgDesktopEntryRegister();
+void xdgRefreshApplications();
 #endif
 const static QRegExp reURI = QRegExp("^\\w+:\\/\\/([\\w+\\-?\\-_\\-=\\-&]+)");
 QString randomUserAgent();

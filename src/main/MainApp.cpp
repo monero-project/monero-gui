@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "MainApp.h"
+#include "qt/utils.h"
 #include <QCloseEvent>
 
 bool MainApp::event (QEvent *event)
@@ -41,3 +42,10 @@ bool MainApp::event (QEvent *event)
     // Pass unhandled events to base class 
     return QApplication::event(event);
 }
+
+#ifdef Q_OS_LINUX
+bool MainApp::xdgDesktopEntryRegister() const {
+    // @TODO: Utils:: class would be nice for namespacing/scoping
+    return _xdgDesktopEntryRegister();
+}
+#endif
