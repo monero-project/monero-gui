@@ -260,93 +260,24 @@ Rectangle {
             }
         }
 
-        ColumnLayout {
+        MoneroComponents.QRComponent {
+            id: qrContainer
             Layout.alignment: Qt.AlignHCenter
             spacing: 11
-            property int qrSize: 220
-
-            Rectangle {
-                id: qrContainer
-                color: MoneroComponents.Style.blackTheme ? "white" : "transparent"
-                Layout.fillWidth: true
-                Layout.maximumWidth: parent.qrSize
-                Layout.preferredHeight: width
-                radius: 4
-
-                Image {
-                    id: qrCode
-                    anchors.fill: parent
-                    anchors.margins: 1
-
-                    smooth: false
-                    fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + TxUtils.makeQRCodeString(appWindow.current_address)
-
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.RightButton
-                        onPressAndHold: qrFileDialog.open()
-                    }
-                }
-            }
-
-            MoneroComponents.StandardButton {
-                Layout.preferredWidth: 220
-                small: true
-                text: FontAwesome.save + "  %1".arg(qsTr("Save as image")) + translationManager.emptyString
-                label.font.family: FontAwesome.fontFamily
-                fontSize: 13
-                onClicked: qrFileDialog.open()
-            }
-
-            MoneroComponents.StandardButton {
-                Layout.preferredWidth: 220
-                small: true
-                text: FontAwesome.clipboard + "  %1".arg(qsTr("Copy to clipboard")) + translationManager.emptyString
-                label.font.family: FontAwesome.fontFamily
-                fontSize: 13
-                onClicked: {
-                    clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
-                    appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
-                }
-            }
-
-            MoneroComponents.StandardButton {
-                Layout.preferredWidth: 220
-                small: true
-                text: FontAwesome.eye + "  %1".arg(qsTr("Show on device")) + translationManager.emptyString
-                label.font.family: FontAwesome.fontFamily
-                fontSize: 13
-                visible: appWindow.currentWallet ? appWindow.currentWallet.isHwBacked() : false
-                onClicked: {
-                    appWindow.currentWallet.deviceShowAddressAsync(
-                        appWindow.currentWallet.currentSubaddressAccount,
-                        appWindow.current_subaddress_table_index,
-                        '');
-                }
+            visible: appWindow.current_address !== undefined
+            address: appWindow.current_address !== undefined ? appWindow.current_address : ""
+            deviceButtonVisible: true
+            onShowOnDeviceClicked: {
+                appWindow.currentWallet.deviceShowAddressAsync(
+                    appWindow.currentWallet.currentSubaddressAccount,
+                    appWindow.current_subaddress_table_index,
+                    '');
             }
         }
 
         MessageDialog {
             id: receivePageDialog
             standardButtons: StandardButton.Ok
-        }
-
-        FileDialog {
-            id: qrFileDialog
-            title: qsTr("Please choose a name") + translationManager.emptyString
-            folder: shortcuts.pictures
-            selectExisting: false
-            nameFilters: ["Image (*.png)"]
-            onAccepted: {
-                if(!walletManager.saveQrCode(TxUtils.makeQRCodeString(appWindow.current_address), walletManager.urlToLocalPath(fileUrl))) {
-                    console.log("Failed to save QrCode to file " + walletManager.urlToLocalPath(fileUrl) )
-                    receivePageDialog.title = qsTr("Save QrCode") + translationManager.emptyString;
-                    receivePageDialog.text = qsTr("Failed to save QrCode to ") + walletManager.urlToLocalPath(fileUrl) + translationManager.emptyString;
-                    receivePageDialog.icon = StandardIcon.Error
-                    receivePageDialog.open()
-                }
-            }
         }
     }
 

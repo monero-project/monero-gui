@@ -129,6 +129,11 @@ Rectangle {
                     clip: true
                     boundsBehavior: ListView.StopAtBounds
                     interactive: false
+
+                    Component.onCompleted: {
+                        currentIndex = 0;
+                    }
+
                     delegate: Rectangle {
                         id: tableItem2
                         height: addressBookListRow.addressBookListItemHeight
@@ -136,18 +141,24 @@ Rectangle {
                         Layout.fillWidth: true
                         color: "transparent"
 
+                        Component.onCompleted: {
+                            if(index === addressBookListView.currentIndex){
+                                qrContainer.address = address;
+                            }
+                        }
                         function doSend() {
                             console.log("Sending to: ", address +" "+ paymentId);
                             middlePanel.sendTo(address, paymentId, description);
                             leftPanel.selectItem(middlePanel.state)
                         }
 
-                        Rectangle {
-                            color: MoneroComponents.Style.appWindowBorderColor
+                        Rectangle{
                             anchors.right: parent.right
                             anchors.left: parent.left
                             anchors.top: parent.top
                             height: 1
+                            color: MoneroComponents.Style.appWindowBorderColor
+                            visible: index !== 0
 
                             MoneroEffects.ColorTransition {
                                 targetObj: parent
@@ -163,15 +174,27 @@ Rectangle {
                             color: "transparent"
 
                             MoneroComponents.Label {
-                                id: descriptionLabel
-                                color: MoneroComponents.Style.defaultFontColor
+                                id: idLabel
+                                color: index === addressBookListView.currentIndex ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
                                 fontSize: 16
+                                text: "#" + index
+                                themeTransition: false
+                            }
+
+                            MoneroComponents.Label {
+                                id: descriptionLabel
+                                color: MoneroComponents.Style.dimmedFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: idLabel.left
+                                anchors.leftMargin: 26
+                                fontSize: 16
                                 text: description
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - descriptionLabel.x - 1
+                                themeTransition: false
                             }
 
                             MoneroComponents.Label {
@@ -184,14 +207,18 @@ Rectangle {
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: TxUtils.addressTruncatePretty(address, mainLayout.width < 540 ? 1 : (mainLayout.width < 700 ? 2 : 3));
+                                themeTransition: false
                             }
 
                             MouseArea {
-                                anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
-                                visible: root.selectAndSend
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
+                                onExited: tableItem2.color = "transparent"
                                 onClicked: {
-                                    doSend();
+                                    addressBookListView.currentIndex = index;
+                                    qrContainer.address = address;
                                 }
                             }
                         }
@@ -277,6 +304,15 @@ Rectangle {
                 }
             }
 
+            MoneroComponents.QRComponent {
+                id: qrContainer
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: 30
+                visible: false
+                spacing: 11
+                deviceButtonVisible: false
+                address: ""
+            }
         }
         ColumnLayout {
             id: addContactLayout
@@ -379,8 +415,9 @@ Rectangle {
                     text: (root.editEntry ? qsTr("Save") : qsTr("Add")) + translationManager.emptyString
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
                     onClicked: {
+                        var address = addressLine.text.trim();
                         console.log("Add")
-                        if (!currentWallet.addressBook.addRow(addressLine.text.trim(),"", descriptionLine.text)) {
+                        if (!currentWallet.addressBook.addRow(address,"", descriptionLine.text)) {
                             informationPopup.title = qsTr("Error") + translationManager.emptyString;
                             // TODO: check currentWallet.addressBook.errorString() instead.
                             if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
@@ -396,6 +433,8 @@ Rectangle {
                             if (root.editEntry) {
                                 currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
                             }
+                            qrContainer.address = address;
+                            addressBookListView.currentIndex = addressBookListView.count - 1
                             root.showAddressBook();
                         }
                     }
@@ -455,6 +494,7 @@ Rectangle {
     function showAddressBook() {
         addressBookEmptyLayout.visible = addressBookListView.count == 0
         addressBookLayout.visible = addressBookListView.count >= 1;
+        qrContainer.visible = addressBookListView.count >= 1;
         addContactLayout.visible = false;
         clearFields();
     }
