@@ -44,13 +44,16 @@ file(GLOB SOURCE_FILES
     "libwalletqt/Subaddress.h"
     "libwalletqt/SubaddressAccount.h"
     "libwalletqt/UnsignedTransaction.h"
-	"daemon/*.h"
-	"daemon/*.cpp"
-	"model/*.h"
-	"model/*.cpp"
-	"qt/*.h"
+    "daemon/*.h"
+    "daemon/*.cpp"
+    "model/*.h"
+    "model/*.cpp"
+    "qt/*.h"
     "qt/*.cpp"
 )
+if(APPLE)
+    list(APPEND SOURCE_FILES "qt/macoshelper.mm")
+endif()
 
 if(ENABLE_PASS_STRENGTH_METER)
     file(GLOB PASS_STRENGTH_FILES
@@ -130,7 +133,7 @@ target_link_libraries(monero-wallet-gui
     wallet_merged
     ${LMDB_LIBRARY}
     epee
-    unbound
+    ${UNBOUND_LIBRARY}
     ${SODIUM_LIBRARY}
     easylogging
     blockchain_db
