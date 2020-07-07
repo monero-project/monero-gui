@@ -63,7 +63,8 @@ Item {
         capsLockTextLabel.visible = oshelper.isCapsLock();
         passwordInput1.reset();
         passwordInput2.reset();
-        passwordInput1.input.forceActiveFocus();
+        if(appWindow.active)
+            passwordInput1.input.forceActiveFocus();
         root.walletName = walletName ? walletName : ""
         errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
