@@ -147,15 +147,7 @@ ColumnLayout {
                 Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
 
-                daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                daemonPortText: {
-                    var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                    if(node_split.length == 2){
-                        (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                    } else {
-                        return ""
-                    }
-                }
+                initialAddress: persistentSettings.bootstrapNodeAddress
             }
         }
     }
@@ -184,9 +176,7 @@ ColumnLayout {
             id: remoteNodeEdit
             Layout.fillWidth: true
 
-            property var rna: persistentSettings.remoteNodeAddress
-            daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-            daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
+            initialAddress: persistentSettings.remoteNodeAddress
         }
     }
 }
