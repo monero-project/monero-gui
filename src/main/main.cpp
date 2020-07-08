@@ -93,9 +93,11 @@
   Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
 #elif defined(Q_OS_LINUX)
   Q_IMPORT_PLUGIN(QXcbIntegrationPlugin);
+  Q_IMPORT_PLUGIN(QXcbGlxIntegrationPlugin);
 #endif
 Q_IMPORT_PLUGIN(QSvgIconPlugin)
 Q_IMPORT_PLUGIN(QICNSPlugin)
+Q_IMPORT_PLUGIN(QICOPlugin)
 Q_IMPORT_PLUGIN(QJpegPlugin)
 Q_IMPORT_PLUGIN(QSvgPlugin)
 Q_IMPORT_PLUGIN(QTgaPlugin)

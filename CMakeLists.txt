@@ -294,6 +294,8 @@ if(STATIC)
       Qt5XcbQpa
       xcb-static
       Qt5ServiceSupport
+      xcb-glx
+      Qt5GlxSupport
     )
   endif()
 
