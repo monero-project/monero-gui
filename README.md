@@ -174,6 +174,8 @@ The executable can be found in the build/release/bin folder.
 
 The executable can be found in the `build/release/bin` folder.
 
+For building an application bundle see `DEPLOY.md`.
+
 ### On Windows:
 
 The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not officially supported anymore.
