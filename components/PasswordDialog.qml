@@ -41,7 +41,6 @@ import "../js/Utils.js" as Utils
 Item {
     id: root
     visible: false
-    z: parent.z + 2
 
     property alias password: passwordInput1.text
     property string walletName

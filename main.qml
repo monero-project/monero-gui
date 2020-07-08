@@ -1523,7 +1523,7 @@ ApplicationWindow {
     PasswordDialog {
         id: passwordDialog
         visible: false
-        z: parent.z + 1
+        z: parent.z + 2
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
