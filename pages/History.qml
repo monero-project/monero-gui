@@ -1511,7 +1511,7 @@ Rectangle {
                 "i": i,
                 "isout": isout,
                 "amount": Number(amount),
-                "displayAmount": displayAmount + " XMR",
+                "displayAmount": Utils.removeTrailingZeros(displayAmount.toFixed(12)) + " XMR",
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
