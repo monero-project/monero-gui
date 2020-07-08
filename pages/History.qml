@@ -1394,7 +1394,7 @@ Rectangle {
                     txs.push(item);
                 } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
-                } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
                 } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
                     txs.push(item);
