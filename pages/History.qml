@@ -595,7 +595,7 @@ Rectangle {
                         width: 10
                         height: 10
                         radius: 8
-                        color: isout ? "#d85a00" : "#2eb358"
+                        color: isout ? "#b30000" : "#2eb358"
                     }
                 }
 
