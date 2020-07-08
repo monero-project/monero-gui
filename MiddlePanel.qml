@@ -265,11 +265,11 @@ Rectangle {
     Connections {
         ignoreUnknownSignals: false
         target: transferView
-        onPaymentClicked : {
+        function paymentClicked(address, paymentId, amount, mixinCount, priority, description) {
             console.log("MiddlePanel: paymentClicked")
             paymentClicked(address, paymentId, amount, mixinCount, priority, description)
         }
-        onSweepUnmixableClicked : {
+        function onSweepUnmixableClicked() {
             console.log("MiddlePanel: sweepUnmixableClicked")
             sweepUnmixableClicked()
         }

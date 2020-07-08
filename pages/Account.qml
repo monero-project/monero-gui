@@ -186,7 +186,7 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: subaddressAccountListRow.subaddressAccountListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
                         color: "transparent"
 
