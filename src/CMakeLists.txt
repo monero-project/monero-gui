@@ -6,7 +6,7 @@ add_subdirectory(model)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
-qt5_add_resources(RESOURCES ../qml.qrc)
+qt5_add_resources(RESOURCES ../qml.qrc ${TRANSLATIONS_QRC})
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
