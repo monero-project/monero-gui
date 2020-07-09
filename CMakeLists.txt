@@ -514,6 +514,5 @@ if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
 endif()
 
 add_subdirectory(translations)
-get_directory_property(TRANSLATIONS_QRC DIRECTORY translations DEFINITION TRANSLATIONS_QRC)
 
 add_subdirectory(src)

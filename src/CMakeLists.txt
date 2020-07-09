@@ -6,7 +6,7 @@ add_subdirectory(model)
 add_subdirectory(openpgp)
 add_subdirectory(zxcvbn-c)
 
-qt5_add_resources(RESOURCES ../qml.qrc ${TRANSLATIONS_QRC})
+qt5_add_resources(RESOURCES ../qml.qrc)
 
 # Compile source files (.h/.cpp)
 file(GLOB SOURCE_FILES
@@ -148,6 +148,7 @@ target_link_libraries(monero-wallet-gui
     ${EXTRA_LIBRARIES}
     ${ICU_LIBRARIES}
     openpgp
+    translations
 )
 
 if(DEVICE_TREZOR_READY)

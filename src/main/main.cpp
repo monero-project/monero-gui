@@ -147,6 +147,8 @@ bool isOpenGL = true;
 
 int main(int argc, char *argv[])
 {
+    Q_INIT_RESOURCE(translations);
+
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     bool isDesktop = true;
