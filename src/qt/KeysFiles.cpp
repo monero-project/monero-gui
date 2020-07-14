@@ -78,10 +78,9 @@ quint8 WalletKeysFiles::networkType() const
 }
 
 
-WalletKeysFilesModel::WalletKeysFilesModel(WalletManager *walletManager, QObject *parent)
+WalletKeysFilesModel::WalletKeysFilesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    this->m_walletManager = walletManager;
     this->m_walletKeysFilesItemModel = qobject_cast<QAbstractItemModel *>(this);
 
     this->m_walletKeysFilesModelProxy.setSourceModel(this->m_walletKeysFilesItemModel);
@@ -110,11 +109,18 @@ void WalletKeysFilesModel::refresh(const QString &moneroAccountsDir)
 
 void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
 {
-    QStringList walletDir = this->m_walletManager->findWallets(moneroAccountsDir);
-    foreach(QString wallet, walletDir){
-        if(!fileExists(wallet + ".keys"))
-            continue;
+    QDirIterator it(moneroAccountsDir, QDirIterator::Subdirectories);
+    for (; it.hasNext(); it.next())
+    {
+        QFileInfo keysFileinfo = it.fileInfo();
 
+        constexpr const char keysFileExtension[] = "keys";
+        if (!keysFileinfo.isFile() || keysFileinfo.completeSuffix() != keysFileExtension)
+        {
+            continue;
+        }
+
+        QString wallet(keysFileinfo.absolutePath() + QDir::separator() + keysFileinfo.baseName());
         quint8 networkType = NetworkType::MAINNET;
         QString address = QString("");
 

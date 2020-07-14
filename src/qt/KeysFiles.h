@@ -65,7 +65,7 @@ public:
         AddressRole
     };
 
-    WalletKeysFilesModel(WalletManager *walletManager, QObject *parent = 0);
+    WalletKeysFilesModel(QObject *parent = 0);
 
     Q_INVOKABLE void refresh(const QString &moneroAccountsDir);
     Q_INVOKABLE void clear();
@@ -82,7 +82,6 @@ protected:
 
 private:
     QList<WalletKeysFiles> m_walletKeyFiles;
-    WalletManager *m_walletManager;
 
     QAbstractItemModel *m_walletKeysFilesItemModel;
     QSortFilterProxyModel m_walletKeysFilesModelProxy;

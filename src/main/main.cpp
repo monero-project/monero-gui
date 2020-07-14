@@ -474,7 +474,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #endif
 
     // Wallet .keys files model (wizard -> open wallet)
-    WalletKeysFilesModel walletKeysFilesModel(walletManager);
+    WalletKeysFilesModel walletKeysFilesModel;
     engine.rootContext()->setContextProperty("walletKeysFilesModel", &walletKeysFilesModel);
     engine.rootContext()->setContextProperty("walletKeysFilesModelProxy", &walletKeysFilesModel.proxyModel());
 
