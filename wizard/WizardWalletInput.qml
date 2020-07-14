@@ -64,7 +64,7 @@ GridLayout {
         Layout.fillWidth: true
 
         function verify(){
-            if(walletLocation === "") return false;
+            if(walletLocation === "" || /[\\\/]/.test(walletName.text)) return false;
 
             var exists = Wizard.walletPathExists(walletLocation.text, walletName.text, isIOS, walletManager);
             return !exists && walletLocation.error === false;
