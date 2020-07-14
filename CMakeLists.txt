@@ -31,7 +31,6 @@ endif()
 set(BUILD_GUI_DEPS ON)
 set(ARCH "x86-64")
 set(BUILD_64 ON)
-set(INSTALL_VENDORED_LIBUNBOUND ${STATIC})
 
 function (add_c_flag_if_supported flag var)
   string(REPLACE "-" "_" supported ${flag}_c)
@@ -82,6 +81,7 @@ endif()
 add_subdirectory(monero)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
+get_directory_property(UNBOUND_LIBRARY DIRECTORY "monero" DEFINITION UNBOUND_LIBRARY)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DQT_NO_DEBUG)
@@ -139,6 +139,9 @@ monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 message(STATUS "${CMAKE_MODULE_PATH}")
 
 # OpenSSL
+if(APPLE AND NOT OPENSSL_ROOT_DIR)
+  execute_process(COMMAND brew --prefix openssl OUTPUT_VARIABLE OPENSSL_ROOT_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+endif()
 find_package(OpenSSL REQUIRED)
 message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
 message(STATUS "OpenSSL: include dir at ${OPENSSL_INCLUDE_DIR}")
@@ -169,6 +172,9 @@ message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
 # Boost
 if(DEBUG)
     set(Boost_DEBUG ON)
+endif()
+if(APPLE AND NOT BOOST_ROOT)
+  execute_process(COMMAND brew --prefix boost OUTPUT_VARIABLE BOOST_ROOT OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 find_package(Boost 1.58 REQUIRED COMPONENTS
 		system
@@ -222,6 +228,19 @@ if(WITH_SCANNER)
   list(APPEND QT5_LIBRARIES Qt5Multimedia)
 endif()
 
+if(APPLE)
+  list(APPEND QT5_LIBRARIES Qt5MacExtras)
+
+  if(NOT CMAKE_PREFIX_PATH)
+    execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QT5_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+    list(APPEND CMAKE_PREFIX_PATH ${QT5_DIR})
+  endif()
+
+  if(CMAKE_PREFIX_PATH)
+    include_directories(${CMAKE_PREFIX_PATH}/include)
+  endif()
+endif()
+
 # TODO: drop this once we switch to Qt 5.14+
 find_package(Qt5QmlModels QUIET)
 if(Qt5QmlModels_FOUND)
@@ -245,6 +264,11 @@ if(QT5_PKG_CONFIG_FOUND)
   set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
   if(STATIC)
     set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
+  endif()
+
+  if(APPLE)
+    list(JOIN ${QT5_PKG_CONFIG}_LDFLAGS_OTHER " " ${QT5_PKG_CONFIG}_LDFLAGS_OTHER)
+    list(JOIN ${QT5_PKG_CONFIG}_LIBRARIES " " ${QT5_PKG_CONFIG}_LIBRARIES)
   endif()
 
   set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
@@ -361,7 +385,9 @@ if(MINGW)
   else()
     set(ICU_LIBRARIES icuio icuin icuuc icudt icutu iconv)
   endif()
-elseif(APPLE OR OPENBSD OR ANDROID)
+elseif(APPLE)
+  set(EXTRA_LIBRARIES "-framework AppKit")
+elseif(OPENBSD OR ANDROID)
   set(EXTRA_LIBRARIES "")
 elseif(FREEBSD)
   set(EXTRA_LIBRARIES execinfo)
@@ -425,7 +451,7 @@ if (NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_C_COMPILER_VERSION VER
 endif()
 
 # linker
-if (NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
+if (NOT APPLE AND NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
   # Windows binaries die on startup with PIE when compiled with GCC
   add_linker_flag_if_supported(-pie LD_SECURITY_FLAGS)
 endif()
@@ -488,6 +514,5 @@ if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
 endif()
 
 add_subdirectory(translations)
-get_directory_property(TRANSLATIONS_QRC DIRECTORY translations DEFINITION TRANSLATIONS_QRC)
 
 add_subdirectory(src)
