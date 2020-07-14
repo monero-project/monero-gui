@@ -75,7 +75,7 @@ void QrCodeScanner::processCode(int type, const QString &data)
         emit notifyError(error, true);
     }
     qDebug() << "Parsed URI : " << address << " " << payment_id << " " << amount << " " << tx_description << " " << recipient_name << " " << error;
-    QString s_amount = WalletManager::instance()->displayAmount(amount);
+    QString s_amount = WalletManager::displayAmount(amount);
     qDebug() << "Amount passed " << s_amount ;
     emit decoded(address, payment_id, s_amount, tx_description, recipient_name, parsed_unknown_parameters);
 }
