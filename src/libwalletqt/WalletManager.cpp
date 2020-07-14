@@ -272,7 +272,7 @@ QString WalletManager::maximumAllowedAmountAsString() const
     return WalletManager::displayAmount(WalletManager::maximumAllowedAmount());
 }
 
-QString WalletManager::displayAmount(quint64 amount) const
+QString WalletManager::displayAmount(quint64 amount)
 {
     return QString::fromStdString(Monero::Wallet::displayAmount(amount));
 }
@@ -415,7 +415,7 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
     if (this->parse_uri(uri, address, payment_id, amount, tx_description, recipient_name, unknown_parameters, error)) {
         result.insert("address", address);
         result.insert("payment_id", payment_id);
-        result.insert("amount", amount > 0 ? this->displayAmount(amount) : "");
+        result.insert("amount", amount > 0 ? displayAmount(amount) : "");
         result.insert("tx_description", tx_description);
         result.insert("recipient_name", recipient_name);
     } else {
