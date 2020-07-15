@@ -313,16 +313,6 @@ if(STATIC)
     qquicklayoutsplugin
   )
 
-  if(UNIX AND NOT APPLE)
-    list(APPEND QT5_EXTRA_LIBRARIES_LIST
-      Qt5XcbQpa
-      xcb-static
-      Qt5ServiceSupport
-      xcb-glx
-      Qt5GlxSupport
-    )
-  endif()
-
   if(WITH_SCANNER)
     list(APPEND QT5_EXTRA_LIBRARIES_LIST
       declarative_multimedia
@@ -331,10 +321,6 @@ if(STATIC)
   endif()
 
   list(APPEND QT5_EXTRA_LIBRARIES_LIST
-    Qt5EventDispatcherSupport
-    Qt5FontDatabaseSupport
-    Qt5PacketProtocol
-    Qt5ThemeSupport
     qtgraphicaleffectsplugin
     qtgraphicaleffectsprivate
     qtquick2plugin
@@ -345,7 +331,7 @@ if(STATIC)
 
   set(QT5_EXTRA_LIBRARIES)
   foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
-    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
     list(APPEND QT5_EXTRA_LIBRARIES ${${LIBRARY}_LIBRARY})
   endforeach()
 
@@ -362,14 +348,30 @@ if(STATIC)
     ${QT5_LIBRARIES}
   )
 
-  if(UNIX AND NOT APPLE)
-    pkg_check_modules(X11_XCB REQUIRED x11-xcb)
-    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+  set(QT5_INTEGRATION_LIBRARIES_LIST
+    Qt5EventDispatcherSupport
+    Qt5PacketProtocol
+    Qt5ThemeSupport
+    Qt5FontDatabaseSupport
+  )
 
-    list(APPEND QT5_LIBRARIES
-      ${FONTCONFIG_STATIC_LIBRARIES}
-      ${X11_XCB_STATIC_LIBRARIES}
+  if(UNIX AND NOT APPLE)
+    list(APPEND QT5_INTEGRATION_LIBRARIES_LIST
+      Qt5XcbQpa
+      xcb-static
+      Qt5ServiceSupport
+      Qt5GlxSupport
     )
+  endif()
+
+  foreach(LIBRARY ${QT5_INTEGRATION_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
+    list(APPEND QT5_LIBRARIES ${${LIBRARY}_LIBRARY})
+  endforeach()
+
+  if(UNIX AND NOT APPLE)
+    pkg_check_modules(X11XCB_XCBGLX_FONTCONFIG REQUIRED x11-xcb xcb-glx fontconfig)
+    list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_FONTCONFIG_STATIC_LIBRARIES})
   endif()
 endif()
 
