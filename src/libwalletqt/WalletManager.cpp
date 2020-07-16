@@ -418,10 +418,24 @@ QVariantMap WalletManager::parse_uri_to_object(const QString &uri) const
         result.insert("amount", amount > 0 ? displayAmount(amount) : "");
         result.insert("tx_description", tx_description);
         result.insert("recipient_name", recipient_name);
+
+        QVariantMap extra_parameters;
+        if (unknown_parameters.size() > 0)
+        {
+            for (const QString &item : unknown_parameters)
+            {
+                const auto parsed_item = item.splitRef("=");
+                if (parsed_item.size() == 2)
+                {
+                    extra_parameters.insert(parsed_item[0].toString(), parsed_item[1].toString());
+                }
+            }
+        }
+        result.insert("extra_parameters", extra_parameters);
     } else {
-        result.insert("error", error);
+        result.insert("error", !error.isEmpty() ? error : tr("Unknown error"));
     }
-    
+
     return result;
 }
 
