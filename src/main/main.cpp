@@ -202,6 +202,12 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("getmonero.org");
     app.setOrganizationName("monero-project");
 
+    if (isTails && !(qgetenv("LD_PRELOAD").indexOf("libtorsocks") >= 0)) {
+        qCritical() << "Torsocks not loaded, restarting";
+        QProcess::startDetached("torsocks", qApp->arguments());
+        exit(EXIT_FAILURE);
+    }
+
     // Ask to enable Tails OS persistence mode, it affects:
     // - Log file location
     // - QML Settings file location (monero-core.conf)
