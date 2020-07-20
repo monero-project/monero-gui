@@ -51,6 +51,9 @@ class WalletManager : public QObject, public PassprasePrompter
     Q_PROPERTY(bool connected READ connected)
 
 public:
+    explicit WalletManager(QObject *parent = 0);
+    ~WalletManager();
+
     enum LogLevel {
         LogLevel_Silent = Monero::WalletManagerFactory::LogLevel_Silent,
         LogLevel_0 = Monero::WalletManagerFactory::LogLevel_0,
@@ -62,7 +65,6 @@ public:
         LogLevel_Max = Monero::WalletManagerFactory::LogLevel_Max,
     };
 
-    static WalletManager * instance();
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
                                       const QString &language, NetworkType::Type nettype = NetworkType::MAINNET, quint64 kdfRounds = 1);
@@ -207,9 +209,6 @@ signals:
 public slots:
 private:
     friend class WalletPassphraseListenerImpl;
-
-    explicit WalletManager(QObject *parent = 0);
-    ~WalletManager();
 
     bool isMining() const;
 

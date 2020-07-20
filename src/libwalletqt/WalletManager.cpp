@@ -85,17 +85,6 @@ private:
   PassphraseHelper m_phelper;
 };
 
-WalletManager * WalletManager::m_instance = nullptr;
-
-WalletManager *WalletManager::instance()
-{
-    if (!m_instance) {
-        m_instance = new WalletManager;
-    }
-
-    return m_instance;
-}
-
 Wallet *WalletManager::createWallet(const QString &path, const QString &password,
                                     const QString &language, NetworkType::Type nettype, quint64 kdfRounds)
 {
