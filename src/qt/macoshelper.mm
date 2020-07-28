@@ -55,3 +55,18 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
     return true;
 }
+
+QString MacOSHelper::bundlePath()
+{
+    NSBundle *main = [NSBundle mainBundle];
+    if (!main)
+    {
+        return {};
+    }
+    NSString *bundlePathString = [main bundlePath];
+    if (!bundlePathString)
+    {
+        return {};
+    }
+    return QString::fromCFString(reinterpret_cast<const CFStringRef>(bundlePathString));
+}

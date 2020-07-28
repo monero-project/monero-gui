@@ -245,4 +245,8 @@ Rectangle {
     Timer {
         id: versionTimer
     }
+
+    function onPageCompleted() {
+        persistentSettings.setWritable(false);
+    }
 }

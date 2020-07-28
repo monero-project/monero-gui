@@ -78,6 +78,8 @@
 
 #if defined(Q_OS_WIN)
 #include <QOpenGLContext>
+#elif defined(Q_OS_MACOS)
+#include "qt/macoshelper.h"
 #endif
 
 #ifdef WITH_SCANNER
@@ -322,6 +324,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     // start listening
     QTimer::singleShot(0, ipc, SLOT(bind()));
+
+#if defined(Q_OS_MACOS)
+    QDir::setCurrent(QDir(MacOSHelper::bundlePath() + QDir::separator() + "..").canonicalPath());
+#endif
 
     // screen settings
     // Mobile is designed on 128dpi
