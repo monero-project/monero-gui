@@ -57,6 +57,7 @@ ApplicationWindow {
     property bool hideBalanceForced: false
     property bool ctrlPressed: false
     property alias persistentSettings : persistentSettings
+    property string accountsDir: !persistentSettings.portable ? moneroAccountsDir : persistentSettings.portableFolderName + "/wallets"
     property var currentWallet;
     property bool disconnected: currentWallet ? currentWallet.disconnected : false
     property var transaction;
@@ -257,7 +258,7 @@ ApplicationWindow {
         // wallet already opened with wizard, we just need to initialize it
         var wallet_path = persistentSettings.wallet_path;
         if(isIOS)
-            wallet_path = moneroAccountsDir + wallet_path;
+            wallet_path = appWindow.accountsDir + wallet_path;
         // console.log("opening wallet at: ", wallet_path, "with password: ", appWindow.walletPassword);
         console.log("opening wallet at: ", wallet_path, ", network type: ", persistentSettings.nettype == NetworkType.MAINNET ? "mainnet" : persistentSettings.nettype == NetworkType.TESTNET ? "testnet" : "stagenet");
 
@@ -776,7 +777,7 @@ ApplicationWindow {
     function walletsFound() {
         if (persistentSettings.wallet_path.length > 0) {
             if(isIOS)
-                return walletManager.walletExists(moneroAccountsDir + persistentSettings.wallet_path);
+                return walletManager.walletExists(appWindow.accountsDir + persistentSettings.wallet_path);
             else
                 return walletManager.walletExists(persistentSettings.wallet_path);
         }
@@ -891,7 +892,7 @@ ApplicationWindow {
     FileDialog {
         id: saveTxDialog
         title: "Please choose a location"
-        folder: "file://" +moneroAccountsDir
+        folder: "file://" + appWindow.accountsDir
         selectExisting: false;
 
         onAccepted: {
