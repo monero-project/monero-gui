@@ -33,6 +33,7 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
+import moneroComponents.Network 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.WalletManager 1.0
 import moneroComponents.PendingTransaction 1.0
@@ -1255,7 +1256,7 @@ ApplicationWindow {
         }
 
         var url = provider[userCurrency];
-        Network.getJSON(url, fiatApiJsonReceived);
+        network.getJSON(url, fiatApiJsonReceived);
     }
 
     function fiatApiCurrencySymbol() {
@@ -2235,6 +2236,10 @@ ApplicationWindow {
     MoneroComponents.LanguageSidebar {
         id: languageSidebar
         dragMargin: 0
+    }
+
+    Network {
+        id: network
     }
 
     WalletManager {
