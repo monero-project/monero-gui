@@ -12,10 +12,8 @@ jobs:
         toolchain:
           - name: "qmake"
             cmd: "export PATH=$PATH:/usr/local/opt/qt/bin && ./build.sh"
-            output: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui
           - name: "cmake"
             cmd: "USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release -j3"
-            output: build/release/bin/monero-wallet-gui
     name: build-macos-${{ matrix.toolchain.name }}
 
     steps:
@@ -27,7 +25,7 @@ jobs:
     - name: build
       run: ${{ matrix.toolchain.cmd }}
     - name: test qml
-      run: ${{ matrix.toolchain.output }} --test-qml
+      run: build/release/bin/monero-wallet-gui.app/Contents/MacOS/monero-wallet-gui --test-qml
 
   build-ubuntu:
 
