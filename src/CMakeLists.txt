@@ -83,13 +83,24 @@ if(MINGW)
     list(APPEND RESOURCES ${ICON_RES})
 endif()
 
+if(APPLE)
+    set(ICON ${PROJECT_SOURCE_DIR}/images/appicon.icns)
+    set_source_files_properties(${ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    list(APPEND RESOURCES ${ICON})
+endif()
+
 add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} main/main.cpp
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
     ${QR_CODE_FILES}
     ${RESOURCES}
 )
-set_property(TARGET monero-wallet-gui PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+set_target_properties(monero-wallet-gui PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/share/Info.plist"
+)
 
 # OpenGL
 target_include_directories(monero-wallet-gui PUBLIC ${OPENGL_INCLUDE_DIR})
