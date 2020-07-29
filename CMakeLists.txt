@@ -241,9 +241,11 @@ if(APPLE)
   endif()
 endif()
 
+find_package(PkgConfig REQUIRED)
+
 # TODO: drop this once we switch to Qt 5.14+
-find_package(Qt5QmlModels QUIET)
-if(Qt5QmlModels_FOUND)
+pkg_check_modules(Qt5QmlModels_PKG_CONFIG QUIET Qt5QmlModels)
+if(Qt5QmlModels_PKG_CONFIG_FOUND)
   list(APPEND QT5_LIBRARIES Qt5QmlModels)
 endif()
 
@@ -255,9 +257,9 @@ endif()
 
 foreach(QT5_MODULE ${QT5_LIBRARIES})
   find_package(${QT5_MODULE} REQUIRED)
+  include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
 endforeach()
 
-find_package(PkgConfig REQUIRED)
 pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
 
 if(QT5_PKG_CONFIG_FOUND)
