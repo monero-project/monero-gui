@@ -34,6 +34,7 @@ import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
 import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Settings 1.0
@@ -2234,5 +2235,9 @@ ApplicationWindow {
     MoneroComponents.LanguageSidebar {
         id: languageSidebar
         dragMargin: 0
+    }
+
+    WalletManager {
+        id: walletManager
     }
 }

@@ -358,6 +358,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
     qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
     qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
+    qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
 
     // Temporary Qt.labs.settings replacement
     qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
@@ -370,9 +371,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     qmlRegisterUncreatableType<UnsignedTransaction>("moneroComponents.UnsignedTransaction", 1, 0, "UnsignedTransaction",
                                                    "UnsignedTransaction can't be instantiated directly");
-
-    qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
-                                                   "WalletManager can't be instantiated directly");
 
     qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
@@ -434,10 +432,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.addImportPath(":/fonts");
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
-
-    WalletManager *walletManager = WalletManager::instance();
-
-    engine.rootContext()->setContextProperty("walletManager", walletManager);
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
