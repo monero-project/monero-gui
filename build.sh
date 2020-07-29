@@ -100,11 +100,8 @@ fi
 
 # force version update
 get_tag
-echo "var GUI_VERSION = \"$TAGNAME\"" > version.js
-pushd "$MONERO_DIR"
-get_tag
-popd
-echo "var GUI_MONERO_VERSION = \"$TAGNAME\"" >> version.js
+GUI_VERSION=$(echo "$TAGNAME" | sed 's/^v\([[:digit:]]\)/\1/')
+echo "var GUI_VERSION = \"$GUI_VERSION\"" > version.js
 
 cd build
 if ! QMAKE=$(find_command qmake qmake-qt5); then

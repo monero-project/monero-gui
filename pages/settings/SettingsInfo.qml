@@ -103,7 +103,7 @@ Rectangle {
             MoneroComponents.TextBlock {
                 font.pixelSize: 14
                 color: MoneroComponents.Style.dimmedFontColor
-                text: Version.GUI_MONERO_VERSION + translationManager.emptyString
+                text: moneroVersion
             }
 
             Rectangle {
@@ -390,7 +390,7 @@ Rectangle {
                 onClicked: {
                     var data = "";
                     data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
-                    data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
+                    data += "\nEmbedded Monero version: " + moneroVersion;
                     data += "\nWallet path: " + walletLocation.walletPath;
 
                     data += "\nWallet creation height: ";

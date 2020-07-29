@@ -26,24 +26,24 @@
 # STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 # THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-function (write_static_version_header VERSION_TAG_GUI VERSION_TAG_CORE)
+function (write_static_version_header VERSION_TAG_GUI)
   configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/version.js.in" "${CMAKE_CURRENT_SOURCE_DIR}/version.js")
 endfunction ()
 
 find_package(Git QUIET)
 if ("$Format:$" STREQUAL "")
   # We're in a tarball; use hard-coded variables.
-  write_static_version_header("release" "release")
+  write_static_version_header("release")
 elseif (GIT_FOUND OR Git_FOUND)
   message(STATUS "Found Git: ${GIT_EXECUTABLE}")
 
   include(GitGetVersionTag)
   git_get_version_tag(${GIT_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR} VERSION_TAG_GUI)
-  git_get_version_tag(${GIT_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/monero VERSION_TAG_CORE)
-  write_static_version_header(${VERSION_TAG_GUI} ${VERSION_TAG_CORE})
+  STRING(REGEX REPLACE "^v([0-9])" "\\1" VERSION_TAG_GUI ${VERSION_TAG_GUI})
+  write_static_version_header(${VERSION_TAG_GUI})
 else()
   message(STATUS "WARNING: Git was not found!")
-  write_static_version_header("unknown" "unknown")
+  write_static_version_header("unknown")
 endif ()
 add_custom_target(genversiongui ALL
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/version.js")

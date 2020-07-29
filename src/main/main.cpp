@@ -38,6 +38,9 @@
 #include <QScreen>
 #include <QRegExp>
 #include <QThread>
+
+#include <version.h>
+
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -498,6 +501,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     builtWithScanner = true;
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
+
+    engine.rootContext()->setContextProperty("moneroVersion", MONERO_VERSION_FULL);
 
     Network network;
     engine.rootContext()->setContextProperty("Network", &network);
