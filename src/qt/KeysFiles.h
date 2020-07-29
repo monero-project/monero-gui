@@ -56,6 +56,8 @@ private:
 class WalletKeysFilesModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(QSortFilterProxyModel *proxyModel READ proxyModel NOTIFY proxyModelChanged)
+
 public:
     enum KeysFilesRoles {
         FileNameRole = Qt::UserRole + 1,
@@ -74,16 +76,20 @@ public:
     void addWalletKeysFile(const WalletKeysFiles &walletKeysFile);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-    QSortFilterProxyModel &proxyModel();
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+private:
+    QSortFilterProxyModel *proxyModel();
+
 protected:
+
+signals:
+    void proxyModelChanged() const;
 
 private:
     QList<WalletKeysFiles> m_walletKeyFiles;
 
-    QAbstractItemModel *m_walletKeysFilesItemModel;
     QSortFilterProxyModel m_walletKeysFilesModelProxy;
 };
 

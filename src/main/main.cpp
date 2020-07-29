@@ -357,6 +357,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
     qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
+    qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
 
     // Temporary Qt.labs.settings replacement
     qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
@@ -375,9 +376,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
-
-    qmlRegisterUncreatableType<WalletKeysFilesModel>("moneroComponents.walletKeysFilesModel", 1, 0, "WalletKeysFilesModel",
-                                                   "walletKeysFilesModel can't be instantiated directly");
 
     qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
                                                         "TransactionHistoryModel can't be instantiated directly");
@@ -477,11 +475,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     if (!desktopFolder.isEmpty())
         engine.rootContext()->setContextProperty("desktopFolder", desktopFolder);
 #endif
-
-    // Wallet .keys files model (wizard -> open wallet)
-    WalletKeysFilesModel walletKeysFilesModel;
-    engine.rootContext()->setContextProperty("walletKeysFilesModel", &walletKeysFilesModel);
-    engine.rootContext()->setContextProperty("walletKeysFilesModelProxy", &walletKeysFilesModel.proxyModel());
 
     // Get default account name
     QString accountName = qgetenv("USER"); // mac/linux

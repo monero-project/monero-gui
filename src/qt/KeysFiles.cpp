@@ -81,17 +81,15 @@ quint8 WalletKeysFiles::networkType() const
 WalletKeysFilesModel::WalletKeysFilesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    this->m_walletKeysFilesItemModel = qobject_cast<QAbstractItemModel *>(this);
-
-    this->m_walletKeysFilesModelProxy.setSourceModel(this->m_walletKeysFilesItemModel);
+    this->m_walletKeysFilesModelProxy.setSourceModel(this);
     this->m_walletKeysFilesModelProxy.setSortRole(WalletKeysFilesModel::ModifiedRole);
     this->m_walletKeysFilesModelProxy.setDynamicSortFilter(true);
     this->m_walletKeysFilesModelProxy.sort(0, Qt::DescendingOrder);
 }
 
-QSortFilterProxyModel &WalletKeysFilesModel::proxyModel()
+QSortFilterProxyModel *WalletKeysFilesModel::proxyModel()
 {
-    return m_walletKeysFilesModelProxy;
+    return &m_walletKeysFilesModelProxy;
 }
 
 void WalletKeysFilesModel::clear()

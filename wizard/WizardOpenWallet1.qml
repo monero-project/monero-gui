@@ -33,6 +33,7 @@ import QtQuick.Controls 2.0
 import QtGraphicalEffects 1.0
 import Qt.labs.folderlistmodel 2.1
 import moneroComponents.NetworkType 1.0
+import moneroComponents.WalletKeysFilesModel 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components"
@@ -45,7 +46,11 @@ Rectangle {
     color: "transparent"
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardOpenWallet1"
-    property int walletCount: walletKeysFilesModel ? walletKeysFilesModel.rowCount() : 0
+    property int walletCount: walletKeysFilesModel.rowCount()
+
+    WalletKeysFilesModel {
+        id: walletKeysFilesModel
+    }
 
     ColumnLayout {
         id: pageRoot
@@ -112,7 +117,7 @@ Rectangle {
                 Repeater {
                     id: recentList
                     clip: true
-                    model: walletKeysFilesModelProxy
+                    model: walletKeysFilesModel.proxyModel
                     Layout.fillWidth: true
                     Layout.minimumWidth: flow.itemHeight
                     Layout.preferredHeight: parent.height
