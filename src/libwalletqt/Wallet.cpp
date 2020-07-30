@@ -144,6 +144,29 @@ void Wallet::setConnectionStatus(ConnectionStatus value)
     }
 }
 
+QString Wallet::getProxyAddress() const
+{
+    QMutexLocker locker(&m_proxyMutex);
+    return m_proxyAddress;
+}
+
+void Wallet::setProxyAddress(QString address)
+{
+    m_scheduler.run([this, address] {
+        {
+            QMutexLocker locker(&m_proxyMutex);
+
+            if (!m_walletImpl->setProxy(address.toStdString()))
+            {
+                qCritical() << "failed to set proxy" << address;
+            }
+
+            m_proxyAddress = address;
+        }
+        emit proxyAddressChanged();
+    });
+}
+
 bool Wallet::synchronized() const
 {
     return m_walletImpl->synchronized();
@@ -184,7 +207,7 @@ void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */
     }
 }
 
-bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
+bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight, const QString& proxyAddress)
 {
     qDebug() << "init non async";
     if (isRecovering){
@@ -198,7 +221,20 @@ bool Wallet::init(const QString &daemonAddress, bool trustedDaemon, quint64 uppe
     if (isRecovering || isRecoveringFromDevice) {
         m_walletImpl->setRefreshFromBlockHeight(restoreHeight);
     }
-    m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString());
+
+    {
+        QMutexLocker locker(&m_proxyMutex);
+
+        if (!m_walletImpl->init(daemonAddress.toStdString(), upperTransactionLimit, m_daemonUsername.toStdString(), m_daemonPassword.toStdString(), false, false, proxyAddress.toStdString()))
+        {
+            return false;
+        }
+
+
+        m_proxyAddress = proxyAddress;
+    }
+    emit proxyAddressChanged();
+
     setTrustedDaemon(trustedDaemon);
     return true;
 }
@@ -210,11 +246,18 @@ void Wallet::setDaemonLogin(const QString &daemonUsername, const QString &daemon
     m_daemonPassword = daemonPassword;
 }
 
-void Wallet::initAsync(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight)
+void Wallet::initAsync(
+    const QString &daemonAddress,
+    bool trustedDaemon /* = false */,
+    quint64 upperTransactionLimit /* = 0 */,
+    bool isRecovering /* = false */,
+    bool isRecoveringFromDevice /* = false */,
+    quint64 restoreHeight /* = 0 */,
+    const QString &proxyAddress /* = "" */)
 {
     qDebug() << "initAsync: " + daemonAddress;
-    const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight] {
-        bool success = init(daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight);
+    const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
+        bool success = init(daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress);
         if (success)
         {
             emit walletCreationHeightChanged();
