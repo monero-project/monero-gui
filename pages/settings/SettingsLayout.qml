@@ -251,6 +251,35 @@ Rectangle {
             }
         }
 
+        MoneroComponents.CheckBox {
+            id: proxyCheckbox
+            Layout.topMargin: 6
+            checked: persistentSettings.proxyEnabled
+            onClicked: {
+                persistentSettings.proxyEnabled = !persistentSettings.proxyEnabled;
+            }
+            text: qsTr("Socks5 proxy (%1%2)")
+                .arg(appWindow.walletMode >= 2 ? qsTr("remote node connections, ") : "")
+                .arg(qsTr("updates downloading, fetching price sources")) + translationManager.emptyString
+        }
+
+        MoneroComponents.RemoteNodeEdit {
+            id: proxyEdit
+            Layout.leftMargin: 36
+            Layout.topMargin: 6
+            Layout.minimumWidth: 100
+            placeholderFontSize: 15
+            visible: persistentSettings.proxyEnabled
+
+            daemonAddrLabelText: qsTr("IP address") + translationManager.emptyString
+            daemonPortLabelText: qsTr("Port") + translationManager.emptyString
+
+            initialAddress: persistentSettings.proxyAddress
+            onEditingFinished: {
+                persistentSettings.proxyAddress = proxyEdit.getAddress();
+            }
+        }
+
         MoneroComponents.StandardButton {
             visible: !persistentSettings.customDecorations
             Layout.topMargin: 10
