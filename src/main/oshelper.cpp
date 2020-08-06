@@ -92,22 +92,23 @@ QString OSHelper::downloadLocation() const
 
 bool OSHelper::openContainingFolder(const QString &filePath) const
 {
+    QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();
 #if defined(Q_OS_WIN)
-    if (openFolderAndSelectItem(QDir::toNativeSeparators(filePath)))
+    if (openFolderAndSelectItem(QDir::toNativeSeparators(canonicalFilePath)))
     {
         return true;
     }
 #elif defined(Q_OS_MAC)
-    if (MacOSHelper::openFolderAndSelectItem(QUrl::fromLocalFile(filePath)))
+    if (MacOSHelper::openFolderAndSelectItem(QUrl::fromLocalFile(canonicalFilePath)))
     {
         return true;
     }
 #endif
 
-    QUrl url = QUrl::fromLocalFile(QFileInfo(filePath).absolutePath());
+    QUrl url = QUrl::fromLocalFile(canonicalFilePath);
     if (!url.isValid())
     {
-        qWarning() << "Malformed file path" << filePath << url.errorString();
+        qWarning() << "Malformed file path" << canonicalFilePath << url.errorString();
         return false;
     }
     return QDesktopServices::openUrl(url);
