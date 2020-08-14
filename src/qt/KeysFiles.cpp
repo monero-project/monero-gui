@@ -46,7 +46,7 @@
 WalletKeysFiles::WalletKeysFiles(const QFileInfo &info, quint8 networkType, QString address)
     : m_fileName(info.fileName())
     , m_modified(info.lastModified().toSecsSinceEpoch())
-    , m_path(QDir::toNativeSeparators(info.absoluteFilePath()))
+    , m_path(QDir::toNativeSeparators(info.filePath()))
     , m_networkType(networkType)
     , m_address(std::move(address))
 {
@@ -118,7 +118,7 @@ void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
             continue;
         }
 
-        QString wallet(keysFileinfo.absolutePath() + QDir::separator() + keysFileinfo.baseName());
+        QString wallet(keysFileinfo.path() + QDir::separator() + keysFileinfo.baseName());
         quint8 networkType = NetworkType::MAINNET;
         QString address = QString("");
 
