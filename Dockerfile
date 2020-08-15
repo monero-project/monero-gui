@@ -91,13 +91,13 @@ RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
     make -j$THREADS && \
     make -j$THREADS install
 
-RUN wget https://download.qt.io/archive/qt/5.9/5.9.7/single/qt-everywhere-opensource-src-5.9.7.tar.xz && \
-    echo "1c3852aa48b5a1310108382fb8f6185560cefc3802e81ecc099f4e62ee38516c qt-everywhere-opensource-src-5.9.7.tar.xz"  > hashsum.txt && \
+RUN wget https://download.qt.io/archive/qt/5.9/5.9.9/single/qt-everywhere-opensource-src-5.9.9.tar.xz && \
+    echo "5ce285209290a157d7f42ec8eb22bf3f1d76f2e03a95fc0b99b553391be01642 qt-everywhere-opensource-src-5.9.9.tar.xz"  > hashsum.txt && \
     sha256sum -c hashsum.txt && \
-    tar -xf qt-everywhere-opensource-src-5.9.7.tar.xz
+    tar -xf qt-everywhere-opensource-src-5.9.9.tar.xz
 
 RUN apt install -y libgl1-mesa-dev libglib2.0-dev libxkbcommon-dev && \
-    cd qt-everywhere-opensource-src-5.9.7 && \
+    cd qt-everywhere-opensource-src-5.9.9 && \
     sed -ri s/\(Libs:.*\)/\\1\ -lexpat/ /usr/local/lib/pkgconfig/fontconfig.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
@@ -114,7 +114,7 @@ RUN apt install -y libgl1-mesa-dev libglib2.0-dev libxkbcommon-dev && \
     make -j$THREADS && \
     make -j$THREADS install
 
-RUN cd qt-everywhere-opensource-src-5.9.7/qttools/src/linguist/lrelease && \
+RUN cd qt-everywhere-opensource-src-5.9.9/qttools/src/linguist/lrelease && \
     qmake && \
     make -j$THREADS && \
     make -j$THREADS install
