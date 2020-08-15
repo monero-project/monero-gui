@@ -70,10 +70,11 @@ Status of the translations:
 ## Installing the Monero GUI from a package
 
 Packages are available for
-
-* Arch Linux: pacman -S monero-gui
-* Void Linux: xbps-install -S monero-core
-* GuixSD: guix package -i monero-core
+* Arch Linux: [monero-gui](https://www.archlinux.org/packages/community/x86_64/monero-gui/)
+* Debian: See the [whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
+* Void Linux: `xbps-install -S monero-gui`
+* GuixSD: `guix package -i monero-gui`
+* macOS (homebrew): `brew cask install monero-wallet`
 
 Packaging for your favorite distribution would be a welcome contribution!
 
