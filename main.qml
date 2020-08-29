@@ -1423,13 +1423,14 @@ ApplicationWindow {
         property string proxyAddress: "127.0.0.1:9050"
         property bool proxyEnabled: false
         function getProxyAddress() {
-            if (!proxyEnabled) {
+            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
                 return "";
             }
-            if (proxyAddress == "") {
+            var proxyAddressSetOrForced = socksProxyFlagSet ? socksProxyFlag : proxyAddress;
+            if (proxyAddressSetOrForced == "") {
                 return "127.0.0.1:0";
             }
-            return proxyAddress;
+            return proxyAddressSetOrForced;
         }
         function getWalletProxyAddress() {
             if (!useRemoteNode) {

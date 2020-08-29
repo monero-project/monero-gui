@@ -254,7 +254,8 @@ Rectangle {
         MoneroComponents.CheckBox {
             id: proxyCheckbox
             Layout.topMargin: 6
-            checked: persistentSettings.proxyEnabled
+            enabled: !socksProxyFlagSet
+            checked: socksProxyFlagSet ? socksProxyFlag : persistentSettings.proxyEnabled
             onClicked: {
                 persistentSettings.proxyEnabled = !persistentSettings.proxyEnabled;
             }
@@ -265,16 +266,17 @@ Rectangle {
 
         MoneroComponents.RemoteNodeEdit {
             id: proxyEdit
+            enabled: proxyCheckbox.enabled
             Layout.leftMargin: 36
             Layout.topMargin: 6
             Layout.minimumWidth: 100
             placeholderFontSize: 15
-            visible: persistentSettings.proxyEnabled
+            visible: proxyCheckbox.checked
 
             daemonAddrLabelText: qsTr("IP address") + translationManager.emptyString
             daemonPortLabelText: qsTr("Port") + translationManager.emptyString
 
-            initialAddress: persistentSettings.proxyAddress
+            initialAddress: socksProxyFlagSet ? socksProxyFlag : persistentSettings.proxyAddress
             onEditingFinished: {
                 persistentSettings.proxyAddress = proxyEdit.getAddress();
             }
