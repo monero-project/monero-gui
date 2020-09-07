@@ -38,6 +38,7 @@ class Downloader : public QObject
     Q_PROPERTY(bool active READ active NOTIFY activeChanged);
     Q_PROPERTY(quint64 loaded READ loaded NOTIFY loadedChanged);
     Q_PROPERTY(quint64 total READ total NOTIFY totalChanged);
+    Q_PROPERTY(QString proxyAddress READ proxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
 
 public:
     Downloader(QObject *parent = nullptr);
@@ -51,11 +52,14 @@ signals:
     void activeChanged() const;
     void loadedChanged() const;
     void totalChanged() const;
+    void proxyAddressChanged() const;
 
 private:
     bool active() const;
     quint64 loaded() const;
     quint64 total() const;
+    QString proxyAddress() const;
+    void setProxyAddress(QString address);
 
 private:
     bool m_active;
@@ -63,5 +67,7 @@ private:
     std::shared_ptr<HttpClient> m_httpClient;
     mutable QReadWriteLock m_mutex;
     Network m_network;
+    QString m_proxyAddress;
+    mutable QMutex m_proxyMutex;
     mutable FutureScheduler m_scheduler;
 };
