@@ -561,3 +561,26 @@ void WalletManager::onPassphraseEntered(const QString &passphrase, bool enter_on
         m_passphraseReceiver->onPassphraseEntered(passphrase, enter_on_device, entry_abort);
     }
 }
+
+QString WalletManager::proxyAddress() const
+{
+    QMutexLocker locker(&m_proxyMutex);
+    return m_proxyAddress;
+}
+
+void WalletManager::setProxyAddress(QString address)
+{
+    m_scheduler.run([this, address] {
+        {
+            QMutexLocker locker(&m_proxyMutex);
+
+            if (!m_pimpl->setProxy(address.toStdString()))
+            {
+                qCritical() << "Failed to set proxy address" << address;
+            }
+
+            m_proxyAddress = std::move(address);
+        }
+        emit proxyAddressChanged();
+    });
+}

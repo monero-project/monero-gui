@@ -49,6 +49,7 @@ class WalletManager : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ connected)
+    Q_PROPERTY(QString proxyAddress READ proxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
 
 public:
     explicit WalletManager(QObject *parent = 0);
@@ -191,6 +192,9 @@ public:
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
 
+    QString proxyAddress() const;
+    void setProxyAddress(QString address);
+
 signals:
 
     void walletOpened(Wallet * wallet);
@@ -205,6 +209,7 @@ signals:
         const QString &firstSigner,
         const QString &secondSigner) const;
     void miningStatus(bool isMining) const;
+    void proxyAddressChanged() const;
 
 public slots:
 private:
@@ -218,6 +223,8 @@ private:
     QPointer<Wallet> m_currentWallet;
     PassphraseReceiver * m_passphraseReceiver;
     QMutex m_mutex_passphraseReceiver;
+    QString m_proxyAddress;
+    mutable QMutex m_proxyMutex;
     FutureScheduler m_scheduler;
 };
 
