@@ -204,7 +204,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             anchors.topMargin: 1
-            color: "transparent"
+            color: item.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
         }
 
         Rectangle {
