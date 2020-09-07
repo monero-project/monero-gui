@@ -241,6 +241,7 @@ if(APPLE)
 
   if(CMAKE_PREFIX_PATH)
     include_directories(${CMAKE_PREFIX_PATH}/include)
+    set(CMAKE_BUILD_RPATH "${CMAKE_PREFIX_PATH}/lib")
   endif()
 endif()
 
@@ -464,6 +465,11 @@ if (NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" AND NOT CMAKE_C_COMPILER_VERSION VER
 endif()
 
 # linker
+if (APPLE)
+  add_linker_flag_if_supported(-Wl,-bind_at_load LD_SECURITY_FLAGS)
+  add_linker_flag_if_supported(-Wl,-dead_strip LD_SECURITY_FLAGS)
+  add_linker_flag_if_supported(-Wl,-dead_strip_dylibs LD_SECURITY_FLAGS)
+endif()
 if (NOT APPLE AND NOT (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "GNU"))
   # Windows binaries die on startup with PIE when compiled with GCC
   add_linker_flag_if_supported(-pie LD_SECURITY_FLAGS)
