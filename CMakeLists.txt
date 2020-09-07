@@ -11,7 +11,7 @@ set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 option(STATIC "Link libraries statically, requires static Qt")
 
 option(USE_DEVICE_TREZOR "Trezor support compilation" ON)
-option(ENABLE_PASS_STRENGTH_METER "Disable zxcvbn" OFF)
+option(ENABLE_PASS_STRENGTH_METER "Enable zxcvbn library for password strength" OFF)
 option(WITH_SCANNER "Enable webcam QR scanner" OFF)
 option(DEV_MODE "Checkout latest monero master on build" OFF)
 
@@ -97,7 +97,7 @@ endif()
 
 # Include password strength library
 if(ENABLE_PASS_STRENGTH_METER)
-    message(STATUS "Buildin with pass strength meter support.")
+    message(STATUS "Building with pass strength meter support.")
 else()
     add_definitions(-DDISABLE_PASS_STRENGTH_METER)
 endif()
