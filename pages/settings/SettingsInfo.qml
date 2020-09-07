@@ -393,13 +393,13 @@ Rectangle {
                     data += "\nEmbedded Monero version: " + moneroVersion;
                     data += "\nWallet path: " + walletLocation.walletPath;
 
-                    data += "\nWallet creation height: ";
+                    data += "\nWallet restore height: ";
                     if(currentWallet)
                         data += currentWallet.walletCreationHeight;
 
                     data += "\nWallet log path: " + walletLogPath;
                     data += "\nWallet mode: " + walletModeString;
-                    data += "\nGraphics: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    data += "\nGraphics mode: " + isOpenGL ? "OpenGL" : "Low graphics mode";
 
                     console.log("Copied to clipboard");
                     clipboard.setText(data);
