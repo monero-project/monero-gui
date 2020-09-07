@@ -357,6 +357,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
     qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
+    qmlRegisterType<Network>("moneroComponents.Network", 1, 0, "Network");
     qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
     qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
 
@@ -490,9 +491,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
     engine.rootContext()->setContextProperty("moneroVersion", MONERO_VERSION_FULL);
-
-    Network network;
-    engine.rootContext()->setContextProperty("Network", &network);
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
