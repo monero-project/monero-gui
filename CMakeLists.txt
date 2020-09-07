@@ -21,9 +21,6 @@ include(CheckCXXCompilerFlag)
 include(CheckLinkerFlag)
 include(FindCcache)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
 if(DEBUG)
 	set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
@@ -78,6 +75,11 @@ if(GIT_FOUND)
 endif()
 
 add_subdirectory(monero)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 get_directory_property(UNBOUND_LIBRARY DIRECTORY "monero" DEFINITION UNBOUND_LIBRARY)
