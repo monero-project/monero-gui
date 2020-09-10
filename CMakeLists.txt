@@ -58,6 +58,8 @@ set(CMAKE_AUTOUIC ON)
 set_property(TARGET wallet_merged PROPERTY FOLDER "monero")
 get_directory_property(ARCH_WIDTH DIRECTORY "monero" DEFINITION ARCH_WIDTH)
 get_directory_property(UNBOUND_LIBRARY DIRECTORY "monero" DEFINITION UNBOUND_LIBRARY)
+get_directory_property(DEVICE_TREZOR_READY DIRECTORY "monero" DEFINITION DEVICE_TREZOR_READY)
+get_directory_property(TREZOR_DEP_LIBS DIRECTORY "monero" DEFINITION TREZOR_DEP_LIBS)
 
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DQT_NO_DEBUG)
@@ -78,7 +80,6 @@ else()
     add_definitions(-DDISABLE_PASS_STRENGTH_METER)
 endif()
 
-include(CheckTrezor)  # Trezor support check
 include(CMakePackageConfigHelpers)
 
 # force version update
