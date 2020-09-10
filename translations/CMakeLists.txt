@@ -2,7 +2,7 @@ find_package(Qt5Core REQUIRED)
 
 find_package(Qt5LinguistTools QUIET)
 if(NOT Qt5_LRELEASE_EXECUTABLE)
-  find_program(Qt5_LRELEASE_EXECUTABLE lrelease REQUIRED)
+  find_program(Qt5_LRELEASE_EXECUTABLE lrelease REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
 endif()
 
 file(GLOB TS_FILES *.ts)
