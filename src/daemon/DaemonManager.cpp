@@ -64,7 +64,7 @@ DaemonManager *DaemonManager::instance(const QStringList *args/* = nullptr*/)
     return m_instance;
 }
 
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, int rpcPort, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool torsocks /*= false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
     {
@@ -74,6 +74,10 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     // prepare command line arguments and pass to monerod
     QStringList arguments;
+
+    if(torsocks) {
+        arguments << m_monerod << "--p2p-bind-ip" << "127.0.0.1";
+    }
 
     // Start daemon with --detach flag on non-windows platforms
 #ifndef Q_OS_WIN
@@ -112,6 +116,10 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--no-sync";
     }
 
+    if (rpcPort) {
+        arguments << "--rpc-bind-port" << QString::number(rpcPort);
+    }
+
     arguments << "--check-updates" << "disabled";
 
     // --max-concurrency based on threads available. max: 6
@@ -133,7 +141,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
-    bool started = m_daemon->startDetached(m_monerod, arguments);
+    bool started = m_daemon->startDetached(torsocks ? "torsocks" : m_monerod, arguments);
 
     // add state changed listener
     connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
@@ -145,8 +153,8 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     // Start start watcher
-    m_scheduler.run([this, nettype, noSync] {
-        if (startWatcher(nettype)) {
+    m_scheduler.run([this, nettype, rpcPort, noSync] {
+        if (startWatcher(nettype, rpcPort)) {
             emit daemonStarted();
             m_noSync = noSync;
         } else {
@@ -157,13 +165,13 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     return true;
 }
 
-void DaemonManager::stopAsync(NetworkType::Type nettype, const QJSValue& callback)
+void DaemonManager::stopAsync(NetworkType::Type nettype, int rpcPort, const QJSValue& callback)
 {
-    const auto feature = m_scheduler.run([this, nettype] {
+    const auto feature = m_scheduler.run([this, nettype, rpcPort] {
         QString message;
-        sendCommand({"exit"}, nettype, message);
+        sendCommand({"exit"}, nettype, rpcPort, message);
 
-        return QJSValueList({stopWatcher(nettype)});
+        return QJSValueList({stopWatcher(nettype, rpcPort)});
     }, callback);
 
     if (!feature.first)
@@ -172,14 +180,14 @@ void DaemonManager::stopAsync(NetworkType::Type nettype, const QJSValue& callbac
     }
 }
 
-bool DaemonManager::startWatcher(NetworkType::Type nettype) const
+bool DaemonManager::startWatcher(NetworkType::Type nettype, int rpcPort) const
 {
     // Check if daemon is started every 2 seconds
     QElapsedTimer timer;
     timer.start();
     while(true && !m_app_exit && timer.elapsed() / 1000 < DAEMON_START_TIMEOUT_SECONDS  ) {
         QThread::sleep(2);
-        if(!running(nettype)) {
+        if(!running(nettype, rpcPort)) {
             qDebug() << "daemon not running. checking again in 2 seconds.";
         } else {
             qDebug() << "daemon is started. Waiting 5 seconds to let daemon catch up";
@@ -190,21 +198,21 @@ bool DaemonManager::startWatcher(NetworkType::Type nettype) const
     return false;
 }
 
-bool DaemonManager::stopWatcher(NetworkType::Type nettype) const
+bool DaemonManager::stopWatcher(NetworkType::Type nettype, int rpcPort) const
 {
     // Check if daemon is running every 2 seconds. Kill if still running after 10 seconds
     int counter = 0;
     while(true && !m_app_exit) {
         QThread::sleep(2);
         counter++;
-        if(running(nettype)) {
+        if(running(nettype, rpcPort)) {
             qDebug() << "Daemon still running.  " << counter;
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
 #ifdef Q_OS_WIN
                 QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
 #else
-                QProcess::execute("pkill", {"monerod"});
+                QProcess::execute("pkill", {"--signal", "SIGKILL", "monerod"});
 #endif
             }
 
@@ -251,10 +259,10 @@ void DaemonManager::printError()
     }
 }
 
-bool DaemonManager::running(NetworkType::Type nettype) const
+bool DaemonManager::running(NetworkType::Type nettype, int rpcPort) const
 { 
     QString status;
-    sendCommand({"sync_info"}, nettype, status);
+    sendCommand({"sync_info"}, nettype, rpcPort, status);
     qDebug() << status;
     return status.contains("Height:");
 }
@@ -264,14 +272,14 @@ bool DaemonManager::noSync() const noexcept
     return m_noSync;
 }
 
-void DaemonManager::runningAsync(NetworkType::Type nettype, const QJSValue& callback) const
+void DaemonManager::runningAsync(NetworkType::Type nettype, int rpcPort, const QJSValue& callback) const
 { 
-    m_scheduler.run([this, nettype] {
-        return QJSValueList({running(nettype)});
+    m_scheduler.run([this, nettype, rpcPort] {
+        return QJSValueList({running(nettype, rpcPort)});
     }, callback);
 }
 
-bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, QString &message) const
+bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettype, int rpcPort, QString &message) const
 {
     QProcess p;
     QStringList external_cmd(cmd);
@@ -282,8 +290,11 @@ bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettyp
     else if (nettype == NetworkType::STAGENET)
         external_cmd << "--stagenet";
 
-    qDebug() << "sending external cmd: " << external_cmd;
+    if (rpcPort){
+        external_cmd << "--rpc-bind-port" << QString::number(rpcPort);
+    }
 
+    qDebug() << "sending external cmd: " << external_cmd;
 
     p.start(m_monerod, external_cmd);
 
@@ -293,11 +304,11 @@ bool DaemonManager::sendCommand(const QStringList &cmd, NetworkType::Type nettyp
     return started;
 }
 
-void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const
+void DaemonManager::sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, int rpcPort, const QJSValue& callback) const
 {
-    m_scheduler.run([this, cmd, nettype] {
+    m_scheduler.run([this, cmd, nettype, rpcPort] {
         QString message;
-        return QJSValueList({sendCommand(cmd, nettype, message)});
+        return QJSValueList({sendCommand(cmd, nettype, rpcPort, message)});
     }, callback);
 }
 

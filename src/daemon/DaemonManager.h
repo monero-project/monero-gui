@@ -47,23 +47,23 @@ public:
 
     static DaemonManager * instance(const QStringList *args = nullptr);
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
-    Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, int rpcPort, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool torsocks = false);
+    Q_INVOKABLE void stopAsync(NetworkType::Type nettype, int rpcPort, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
     // return true if daemon process is started
-    Q_INVOKABLE void runningAsync(NetworkType::Type nettype, const QJSValue& callback) const;
+    Q_INVOKABLE void runningAsync(NetworkType::Type nettype, int rpcPort, const QJSValue& callback) const;
     // Send daemon command from qml and prints output in console window.
-    Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const;
+    Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, int rpcPort, const QJSValue& callback) const;
     Q_INVOKABLE void exit();
     Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
 
 private:
 
-    bool running(NetworkType::Type nettype) const;
-    bool sendCommand(const QStringList &cmd, NetworkType::Type nettype, QString &message) const;
-    bool startWatcher(NetworkType::Type nettype) const;
-    bool stopWatcher(NetworkType::Type nettype) const;
+    bool running(NetworkType::Type nettype, int rpcPort) const;
+    bool sendCommand(const QStringList &cmd, NetworkType::Type nettype, int rpcPort, QString &message) const;
+    bool startWatcher(NetworkType::Type nettype, int rpcPort) const;
+    bool stopWatcher(NetworkType::Type nettype, int rpcPort) const;
 signals:
     void daemonStarted() const;
     void daemonStopped() const;

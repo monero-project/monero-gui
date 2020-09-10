@@ -81,7 +81,7 @@ ApplicationWindow {
     property bool androidCloseTapped: false;
     property int userLastActive;  // epoch
     // Default daemon addresses
-    readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
+    readonly property string localDaemonAddress : "localhost:" + (persistentSettings.rpcPort || getDefaultDaemonRpcPort(persistentSettings.nettype))
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
     property int estimatedBlockchainSize: 75 // GB
@@ -479,7 +479,7 @@ ApplicationWindow {
 
         // If wallet isnt connected, advanced wallet mode and no daemon is running - Ask
         if (appWindow.walletMode >= 2 && !persistentSettings.useRemoteNode && !walletInitialized && disconnected) {
-            daemonManager.runningAsync(persistentSettings.nettype, function(running) {
+            daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.rpcPort, function(running) {
                 if (!running) {
                     daemonManagerDialog.open();
                 }
@@ -689,13 +689,13 @@ ApplicationWindow {
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.rpcPort, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, isTails);
     }
 
     function stopDaemon(callback){
         daemonStartStopInProgress = true;
         appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
-        daemonManager.stopAsync(persistentSettings.nettype, function(result) {
+        daemonManager.stopAsync(persistentSettings.nettype, persistentSettings.rpcPort, function(result) {
             daemonStartStopInProgress = false;
             hideProcessingSplash();
             callback(result);
@@ -1374,11 +1374,16 @@ ApplicationWindow {
         property string logCategories: ""
         property string daemonUsername: ""
         property string daemonPassword: ""
+        property int    rpcPort: isTails ? getDefaultDaemonRpcPort(NetworkType.MAINNET) : 0
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
         property bool historyShowAdvanced: false
         property bool historyHumanDates: true
-        property string blockchainDataDir: ""
+        property string blockchainDataDir: {
+            if(isTails && tailsUsePersistence)
+                return homePath + "/Persistent/Monero/.bitmonero";
+            return "";
+        }
         property bool useRemoteNode: false
         property string remoteNodeAddress: ""
         property string bootstrapNodeAddress: ""
@@ -2011,7 +2016,7 @@ ApplicationWindow {
             if (currentWallet) {
                 handler(!currentWallet.disconnected);
             } else {
-                daemonManager.runningAsync(persistentSettings.nettype, handler);
+                daemonManager.runningAsync(persistentSettings.nettype, persistentSettings.rpcPort, handler);
             }
         }
     }
@@ -2118,6 +2123,9 @@ ApplicationWindow {
     }
 
     function getDefaultDaemonRpcPort(networkType) {
+        if (isTails) {
+            return 17600; // Firewall permits ports 17600 - 17650
+        }
         switch (networkType) {
             case NetworkType.STAGENET:
                 return 38081;

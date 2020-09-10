@@ -186,6 +186,7 @@ Rectangle {
                         daemonManager.sendCommandAsync(
                             ["set_bootstrap_daemon", "auto"],
                             appWindow.currentWallet.nettype,
+                            persistentSettings.rpcPort,
                             callback);
 
                         refreshMouseArea.visible = false;

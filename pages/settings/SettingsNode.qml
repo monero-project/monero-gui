@@ -347,6 +347,7 @@ Rectangle{
             visible: !persistentSettings.useRemoteNode
 
             MoneroComponents.StandardButton {
+                id: toggleDaemon
                 small: true
                 text: (appWindow.daemonRunning ? qsTr("Stop daemon") : qsTr("Start daemon")) + translationManager.emptyString
                 onClicked: {
@@ -385,6 +386,53 @@ Rectangle{
                     }
                     onLabelButtonClicked: persistentSettings.blockchainDataDir = ""
                 }
+            }
+
+            MoneroComponents.LineEditMulti {
+                id: daemonPort
+                Layout.preferredWidth: 200
+                Layout.fillWidth: true
+                fontSize: 15
+                labelFontSize: 14
+                property string style: "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>"
+                labelText: qsTr("Daemon port") + style + " <a href='#'> (%1)</a>".arg(qsTr("Change")) + translationManager.emptyString
+                labelButtonText: qsTr("Reset") + translationManager.emptyString
+                labelButtonVisible: text
+                placeholderText: qsTr("(default)") + translationManager.emptyString
+                placeholderFontSize: 15
+                readOnly: true
+                text: persistentSettings.rpcPort
+                addressValidation: false
+                onInputLabelLinkActivated: {
+                    inputDialog.labelText = qsTr("Set a port:") + translationManager.emptyString;
+                    inputDialog.onAcceptedCallback = function() {
+                        var _port = parseInt(inputDialog.inputText)
+                        if (!isNaN(_port)) {
+                            if(_port >= 0 && _port < 65535) {
+                                if (appWindow.daemonRunning) {
+                                    appWindow.stopDaemon()
+                                }
+                                persistentSettings.rpcPort = _port;
+                                toggleDaemon.enabled = false;
+                                appWindow.showStatusMessage(qsTr("Wallet restart required."),60);
+                                return;
+                            }
+                        }
+
+                        appWindow.showStatusMessage(qsTr("Invalid port specified."),3);
+                    }
+                    inputDialog.onRejectedCallback = null;
+                    inputDialog.open(persistentSettings.rpcPort ? persistentSettings.rpcPort : getDefaultDaemonRpcPort(persistentSettings.nettype))
+                }
+                onLabelButtonClicked: {
+                    if (appWindow.daemonRunning) {
+                        appWindow.stopDaemon()
+                    }
+                    persistentSettings.rpcPort = getDefaultDaemonRpcPort(persistentSettings.nettype)
+                    toggleDaemon.enabled = false;
+                    appWindow.showStatusMessage(qsTr("Wallet restart required."),60);
+                }
+                visible: isTails
             }
 
             MoneroComponents.LineEditMulti {

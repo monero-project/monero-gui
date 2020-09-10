@@ -202,6 +202,7 @@ int main(int argc, char *argv[])
     // - Log file location
     // - QML Settings file location (monero-core.conf)
     // - Default wallets path
+    // - Blockchain data dir
     // Target directory is: ~/Persistent/Monero
     if (isTails) {
         if (!TailsOS::detectDataPersistence())

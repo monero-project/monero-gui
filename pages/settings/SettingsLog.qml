@@ -219,7 +219,7 @@ Rectangle {
             onAccepted: {
                 if(text.length > 0) {
                     consoleArea.logCommand(">>> " + text)
-                    daemonManager.sendCommandAsync(text.split(" "), currentWallet.nettype, function(result) {
+                    daemonManager.sendCommandAsync(text.split(" "), currentWallet.nettype, persistentSettings.rpcPort, function(result) {
                         if (!result) {
                             appWindow.showStatusMessage(qsTr("Failed to send command"), 3);
                         }
