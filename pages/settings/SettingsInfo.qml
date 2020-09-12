@@ -400,6 +400,8 @@ Rectangle {
                     data += "\nWallet log path: " + walletLogPath;
                     data += "\nWallet mode: " + walletModeString;
                     data += "\nGraphics mode: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    if (isTails)
+                        data += "\nTails: " + tailsUsePersistence ? "persistent" : "persistence disabled";
 
                     console.log("Copied to clipboard");
                     clipboard.setText(data);
