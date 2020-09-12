@@ -41,7 +41,7 @@
 #include "qt/macoshelper.h"
 #endif
 #ifdef Q_OS_WIN
-#include <Shlobj.h>
+#include <shlobj.h>
 #include <windows.h>
 #endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
