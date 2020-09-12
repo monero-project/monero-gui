@@ -157,6 +157,9 @@ endif()
 if(APPLE AND NOT BOOST_ROOT)
   execute_process(COMMAND brew --prefix boost OUTPUT_VARIABLE BOOST_ROOT OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
+if(MINGW)
+  set(Boost_THREADAPI win32)
+endif()
 find_package(Boost 1.58 REQUIRED COMPONENTS
 		system
 		filesystem
