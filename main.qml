@@ -1630,7 +1630,7 @@ ApplicationWindow {
                 currentAccountLabel: {
                     if (currentWallet) {
                         var accountLabel = currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0);
-                        if (accountLabel === "Primary account") {
+                        if (accountLabel === "Primary account" && currentWallet.currentSubaddressAccount == 0) {
                             //add translation
                             return qsTr("Primary account") + translationManager.emptyString;
                         } else {
