@@ -71,7 +71,6 @@ Rectangle {
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
         wizardController.tmpWalletFilename = '';
-        wizardController.walletRestoreMode = 'seed'
         wizardController.walletOptionsSubaddressLookahead = '';
         disconnect();
 
