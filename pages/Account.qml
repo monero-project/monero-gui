@@ -229,7 +229,14 @@ Rectangle {
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
                                 fontSize: 16 
-                                text: label
+                                text: {
+                                    if (label === "Primary account" && index === 0) {
+                                        //add translation
+                                        return qsTr("Primary account") + translationManager.emptyString;
+                                    } else {
+                                        return label;
+                                    }
+                                }
                                 elide: Text.ElideRight
                                 textWidth: addressLabel.x - nameLabel.x - 1
                                 themeTransition: false
