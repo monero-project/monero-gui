@@ -339,6 +339,9 @@ Rectangle {
         if(previousView.viewName == "wizardHome"){
             // cleanup
             wizardWalletInput.reset();
+            seedRadioButton.checked = true;
+            keysRadioButton.checked = false;
+            qrRadioButton.checked = false;
             seedInput.text = "";
             seedOffsetCheckbox.checked = false;
             seedOffset.text = "";
