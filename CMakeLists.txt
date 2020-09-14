@@ -334,8 +334,6 @@ if(STATIC)
   endforeach()
 
   if(MINGW)
-    list(APPEND QT5_EXTRA_LIBRARIES qtfreetype)
-
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
       list(APPEND QT5_EXTRA_LIBRARIES D3D11 Dwrite D2d1)
     endif()
@@ -360,6 +358,8 @@ if(STATIC)
       Qt5ServiceSupport
       Qt5GlxSupport
     )
+  elseif(MINGW)
+    list(APPEND QT5_INTEGRATION_LIBRARIES_LIST qtfreetype)
   endif()
 
   foreach(LIBRARY ${QT5_INTEGRATION_LIBRARIES_LIST})
