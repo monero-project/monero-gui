@@ -1,4 +1,4 @@
-; Monero Nitrogen Nebula GUI Wallet Installer for Windows
+; Monero Oxygen Orion GUI Wallet Installer for Windows
 ; Copyright (c) 2017-2020, The Monero Project
 ; See LICENSE
 #define GuiVersion GetFileVersion("bin\monero-wallet-gui.exe")
@@ -104,6 +104,9 @@ Source: "bin\extras\monero-gen-ssl-cert.exe"; DestDir: "{app}"; Flags: ignorever
 
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
+
+; Use a scale factor of 2 for Qt for high-DPI systems, as long as Qt does not handle some such systems adequately
+Source: "bin\start-high-dpi.bat"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Mesa, open-source OpenGL implementation; part of "low-level graphics" support
 Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
