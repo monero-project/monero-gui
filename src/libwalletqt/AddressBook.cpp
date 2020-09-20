@@ -139,3 +139,19 @@ QString AddressBook::getDescription(const QString &address) const
     }
     return QString::fromStdString(m_rows.value(*it)->getDescription());
 }
+
+void AddressBook::setDescription(int index, const QString &description)
+{
+     bool result;
+
+     {
+         QWriteLocker locker(&m_lock);
+
+         result = m_addressBookImpl->setDescription(index, description.toStdString());
+     }
+
+     if (result)
+     {
+         getAll();
+     }
+ }

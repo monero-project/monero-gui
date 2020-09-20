@@ -53,6 +53,7 @@ public:
     Q_INVOKABLE int errorCode() const;
     Q_INVOKABLE int lookupPaymentID(const QString &payment_id) const;
     Q_INVOKABLE QString getDescription(const QString &address) const;
+    Q_INVOKABLE void setDescription(int index, const QString &label);
 
     enum ErrorCode {
         Status_Ok,

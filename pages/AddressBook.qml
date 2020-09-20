@@ -286,11 +286,12 @@ Rectangle {
             MoneroComponents.Label {
                 fontSize: 32
                 wrapMode: Text.WordWrap
-                text: (root.editEntry ? qsTr("Edit an address") : qsTr("Add an address")) + translationManager.emptyString
+                text: (root.editEntry ? qsTr("Edit entry") : qsTr("Add an address")) + translationManager.emptyString
             }
 
             MoneroComponents.LineEditMulti {
                 id: addressLine
+                visible: !root.editEntry
                 Layout.topMargin: 20
                 labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style> %1"
                     .arg(qsTr("Address")) + translationManager.emptyString
@@ -380,7 +381,7 @@ Rectangle {
                     enabled: root.checkInformation(addressLine.text, appWindow.persistentSettings.nettype)
                     onClicked: {
                         console.log("Add")
-                        if (!currentWallet.addressBook.addRow(addressLine.text.trim(),"", descriptionLine.text)) {
+                        if (!root.editEntry && !currentWallet.addressBook.addRow(addressLine.text.trim(),"", descriptionLine.text)) {
                             informationPopup.title = qsTr("Error") + translationManager.emptyString;
                             // TODO: check currentWallet.addressBook.errorString() instead.
                             if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
@@ -393,11 +394,9 @@ Rectangle {
                             informationPopup.onCloseCallback = null
                             informationPopup.open();
                         } else {
-                            if (root.editEntry) {
-                                currentWallet.addressBook.deleteRow(addressBookListView.currentIndex);
-                            }
-                            root.showAddressBook();
+                            currentWallet.addressBook.setDescription(addressBookListView.currentIndex, descriptionLine.text);
                         }
+                        root.showAddressBook()
                     }
                 }
 
