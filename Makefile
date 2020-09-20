@@ -21,6 +21,11 @@ default:
 	mkdir -p build && cd build && cmake -D ARCH="x86-64" -D DEV_MODE=$(or ${DEV_MODE},OFF) -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Release .. && $(MAKE)
 debug:
 	mkdir -p build && cd build && cmake -D DEV_MODE=$(or ${DEV_MODE},ON) .. && $(MAKE) VERBOSE=1
+
+depends:
+	mkdir -p build/$(target)/release
+	cd build/$(target)/release && cmake -D STATIC=ON -D DEV_MODE=$(or ${DEV_MODE},OFF) -D BUILD_TAG=$(tag) -D CMAKE_BUILD_TYPE=Release -D CMAKE_TOOLCHAIN_FILE=$(root)/$(target)/share/toolchain.cmake ../../.. && $(MAKE)
+
 devmode:
 	mkdir -p build && cd build && cmake -D ARCH="x86-64" -D DEV_MODE=$(or ${DEV_MODE},ON) -D BUILD_64=ON -D CMAKE_BUILD_TYPE=Release .. && $(MAKE)
 clean:

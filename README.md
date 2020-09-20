@@ -82,6 +82,28 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
+### Building Windows static binaries with Docker (any OS)
+
+1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+2. Clone the repository
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   ```
+3. Prepare build environment
+   ```
+   cd monero-gui
+   docker build --tag monero:build-env-windows --build-arg THREADS=4 --file Dockerfile.windows .
+   ```
+   \* `4` - number of CPU threads to use
+
+4. Build
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j4'
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `4` - number of CPU threads to use
+5. Monero GUI Windows static binaries will be placed in  `monero-gui/build/x86_64-w64-mingw32/release/bin` directory
+
 ### Building Linux static binaries with Docker (any OS)
 
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
@@ -92,13 +114,13 @@ Packaging for your favorite distribution would be a welcome contribution!
 3. Prepare build environment
    ```
    cd monero-gui
-   docker build --tag monero:build-env-gui --build-arg THREADS=4 .
+   docker build --tag monero:build-env-linux --build-arg THREADS=4 --file Dockerfile.linux .
    ```
    \* `4` - number of CPU threads to use
 
 4. Build
    ```
-   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-gui sh -c 'USE_SINGLE_BUILDDIR=ON DEV_MODE=ON make release-static -j4'
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'USE_SINGLE_BUILDDIR=ON make release-static -j4'
    ```
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* `4` - number of CPU threads to use
