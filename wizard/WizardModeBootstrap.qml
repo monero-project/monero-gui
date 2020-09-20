@@ -58,7 +58,7 @@ Rectangle {
             spacing: 0
 
             WizardHeader {
-                title: qsTr("About the bootstrap mode") + translationManager.emptyString
+                title: qsTr("Local node & Bootstrap node") + translationManager.emptyString
                 subtitle: ""
             }
 
@@ -69,7 +69,7 @@ Rectangle {
                 Layout.fillWidth: true
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("This mode will use a remote node whilst also syncing the blockchain. This is different from the first menu option (Simple mode), since it will only use the remote node until the blockchain is fully synced locally. It is a reasonable tradeoff for most people who care about privacy but also want the convenience of an automatic fallback option.") + translationManager.emptyString
+                    text: qsTr("You have chosen to use your wallet in <b>simple mode</b> and to connect to the Monero network using a <b>local node</b>. However, in simple mode, in order to allow you to start using Monero immediately, your local node will temporarily connect to a <b>remote node (bootstrap node)</b> until the blockchain is fully downloaded and synced.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 14
                     Layout.fillWidth: true
@@ -81,7 +81,7 @@ Rectangle {
                 }
 
                 MoneroComponents.TextPlain {
-                    text: qsTr("Temporary use of remote nodes is useful in order to use Monero immediately (hence the name bootstrap), however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, track your \"restore height\" and associated block request data, and send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
+                    text: qsTr("Temporary use of remote nodes is useful, however be aware that when using remote nodes (including with the bootstrap setting), nodes could track your IP address, your \"restore height\", and associated block request data, as well as send you inaccurate information to learn more about transactions you make.") + translationManager.emptyString
                     wrapMode: Text.Wrap
                     Layout.topMargin: 8
                     Layout.fillWidth: true
@@ -91,17 +91,17 @@ Rectangle {
                     color: MoneroComponents.Style.lightGreyFontColor
                 }
 
-                MoneroComponents.WarningBox{
+                MoneroComponents.WarningBox {
                     Layout.topMargin: 14
                     Layout.bottomMargin: 6
-                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use a full node instead</b>.") + translationManager.emptyString
+                    text: qsTr("Remain aware of these limitations. <b>Users who prioritize privacy and decentralization must use advanced mode and start a local node without setting a bootstrap node</b>.") + translationManager.emptyString
                 }
 
                 MoneroComponents.CheckBox {
                     id: understoodCheckbox
                     Layout.topMargin: 20
                     fontSize: 16
-                    text: qsTr("I understand the privacy implications of using a third-party server.") + translationManager.emptyString
+                    text: qsTr("I understand the privacy implications of temporarily using a third-party server.") + translationManager.emptyString
                     onClicked: {
                         wizardModeBootstrapWarning.understood = !wizardModeBootstrapWarning.understood
                     }

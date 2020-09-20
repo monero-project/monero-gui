@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
@@ -68,14 +69,59 @@ Rectangle {
                 headerText: qsTr("Simple mode") + translationManager.emptyString
                 bodyText: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality.") + translationManager.emptyString;
+                        return qsTr("Easy access to basic functionality like sending, receiving, transactions history, and address book, as well as hardware wallet support.") + translationManager.emptyString;
                     } else {
-                        return "Available on mainnet.";
+                        return "Only available on mainnet.";
                     }
                 }
+                imageIcon: "qrc:///images/local-node.png"
+                onMenuClicked: {
+                    if(appWindow.persistentSettings.nettype == 0){
+                        item1.visible = !item1.visible;
+                        item2.visible = !item2.visible;
+                    }
+                }
+            }
 
-                imageIcon: "qrc:///images/remote-node.png"
+            WizardMenuItem {
+                id: item1
+                visible: false
+                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
+                Layout.topMargin: 5
+                Layout.leftMargin: 80
+                headerText: qsTr("Local node") + " & " + qsTr("Bootstrap node") + translationManager.emptyString
+                bodyText: qsTr("Your wallet starts a local node and downloads the blockchain. While the download is not finished, your local node temporarily connects to a third-party remote node.") + translationManager.emptyString
+                fontAwesomeIcon: FontAwesome.home + "+" + FontAwesome.cloud
+                fontAwesomeIconFontSize: 26
+                onMenuClicked: {
+                    if(appWindow.persistentSettings.nettype == 0){
+                        appWindow.changeWalletMode(1);
+                        wizardController.wizardStackView.backTransition = false;
+                        wizardController.wizardState = 'wizardModeBootstrap';
+                    }
+                }
+            }
 
+            Rectangle {
+                visible: item1.visible
+                Layout.preferredHeight: 1
+                Layout.topMargin: 5
+                Layout.bottomMargin: 5
+                Layout.leftMargin: 80
+                Layout.fillWidth: true
+                color: MoneroComponents.Style.dividerColor
+                opacity: MoneroComponents.Style.dividerOpacity
+            }
+
+            WizardMenuItem {
+                id: item2
+                visible: false
+                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
+                Layout.topMargin: 4
+                Layout.leftMargin: 80
+                headerText: qsTr("Remote node") + translationManager.emptyString
+                bodyText: qsTr("Your wallet connects to a third-party remote node and doesn't download the blockchain.") + translationManager.emptyString
+                fontAwesomeIcon: FontAwesome.cloud
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
                         appWindow.changeWalletMode(0);
@@ -95,38 +141,8 @@ Rectangle {
             }
 
             WizardMenuItem {
-                opacity: appWindow.persistentSettings.nettype == 0 ? 1.0 : 0.5
-                headerText: qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString
-                bodyText: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        return qsTr("Easy access to sending, receiving and basic functionality. The blockchain is downloaded to your computer.") + translationManager.emptyString;
-                    } else {
-                        return "Available on mainnet.";
-                    }
-                }
-                imageIcon: "qrc:///images/local-node.png"
-
-                onMenuClicked: {
-                    if(appWindow.persistentSettings.nettype == 0){
-                        appWindow.changeWalletMode(1);
-                        wizardController.wizardStackView.backTransition = false;
-                        wizardController.wizardState = 'wizardModeBootstrap';
-                    }
-                }
-            }
-
-            Rectangle {
-                Layout.preferredHeight: 1
-                Layout.topMargin: 5
-                Layout.bottomMargin: 10
-                Layout.fillWidth: true
-                color: MoneroComponents.Style.dividerColor
-                opacity: MoneroComponents.Style.dividerOpacity
-            }
-
-            WizardMenuItem {
                 headerText: qsTr("Advanced mode") + translationManager.emptyString
-                bodyText: qsTr("Includes extra features like mining and message verification. The blockchain is downloaded to your computer.") + translationManager.emptyString
+                bodyText: qsTr("Includes extra features like changing fees/transaction priority, solo mining, message verification, transaction proof/check, offline transaction signing, key images importing, custom remote node, starting a local node without a bootstrap node, changing blockchain location, and daemon log.") + translationManager.emptyString
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
