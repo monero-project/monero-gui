@@ -132,7 +132,7 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: addressBookListRow.addressBookListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
                         color: "transparent"
 
