@@ -26,8 +26,8 @@ if(DEBUG)
 endif()
 
 set(BUILD_GUI_DEPS ON)
-set(ARCH "x86-64")
-set(BUILD_64 ON)
+set(ARCH "x86-64" CACHE STRING "Target architecture")
+set(BUILD_64 ON CACHE BOOL "Build 64-bit binaries")
 
 if(NOT MANUAL_SUBMODULES)
   find_package(Git)
