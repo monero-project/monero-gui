@@ -59,11 +59,17 @@ jobs:
       run: build/release/bin/monero-wallet-gui --test-qml
 
   docker-linux-static:
-    runs-on: ubuntu-20.04 
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
+    - uses: satackey/action-docker-layer-caching@v0.0.8
+      continue-on-error: true
+      with:
+        key: docker-linux-static-{hash}
+        restore-keys: |
+          docker-linux-static-
     - name: preprare build enviroment
       run: docker build --tag monero:build-env-linux --build-arg THREADS=3 --file Dockerfile.linux .
     - name: build
@@ -75,6 +81,12 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
+    - uses: satackey/action-docker-layer-caching@v0.0.8
+      continue-on-error: true
+      with:
+        key: docker-windows-static-{hash}
+        restore-keys: |
+          docker-windows-static-
     - name: preprare build enviroment
       run: docker build --tag monero:build-env-windows --build-arg THREADS=3 --file Dockerfile.windows .
     - name: build
