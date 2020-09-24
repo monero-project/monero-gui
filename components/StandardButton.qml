@@ -29,10 +29,13 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
+import FontAwesome 1.0
+
 import "../components" as MoneroComponents
 
 Item {
     id: button
+    property bool fontAwesomeIcon: false
     property bool primary: true
     property string rightIcon: ""
     property string rightIconInactive: ""
@@ -135,7 +138,7 @@ Item {
         }
 
         Image {
-            visible: button.rightIcon !== ""
+            visible: !fontAwesomeIcon && button.rightIcon !== ""
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
             width: button.small ? 16 : 20
             height: button.small ? 16 : 20
@@ -145,6 +148,16 @@ Item {
                 }
                 return button.rightIcon;
             }
+        }
+
+        Text {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            color: MoneroComponents.Style.defaultFontColor
+            font.family: FontAwesome.fontFamilySolid
+            font.pixelSize: button.small ? 16 : 20
+            font.styleName: "Solid"
+            text: button.rightIcon
+            visible: fontAwesomeIcon && button.rightIcon !== ""
         }
     }
 
