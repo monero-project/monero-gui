@@ -1,4 +1,3 @@
-add_subdirectory(QR-Code-generator)
 add_subdirectory(QR-Code-scanner)
 add_subdirectory(daemon)
 add_subdirectory(libwalletqt)
@@ -22,9 +21,6 @@ file(GLOB SOURCE_FILES
     "libwalletqt/TransactionHistory.cpp"
     "libwalletqt/TransactionInfo.cpp"
     "libwalletqt/QRCodeImageProvider.cpp" QR
-    "QR-Code-generator/BitBuffer.cpp"
-    "QR-Code-generator/QrCode.cpp"
-    "QR-Code-generator/QrSegment.cpp"
     "libwalletqt/AddressBook.cpp"
     "libwalletqt/Subaddress.cpp"
     "libwalletqt/SubaddressAccount.cpp"
@@ -36,9 +32,6 @@ file(GLOB SOURCE_FILES
     "libwalletqt/TransactionHistory.h"
     "libwalletqt/TransactionInfo.h"
     "libwalletqt/QRCodeImageProvider.h"
-    "QR-Code-generator/BitBuffer.h"
-    "QR-Code-generator/QrCode.h"
-    "QR-Code-generator/QrSegment.h"
     "libwalletqt/Transfer.h"
     "libwalletqt/AddressBook.h"
     "libwalletqt/Subaddress.h"
@@ -64,8 +57,6 @@ endif()
 
 if(WITH_SCANNER)
     file(GLOB QR_CODE_FILES
-        "QR-Code-generator/*.h"
-    	"QR-Code-generator/*.cpp"
     	"QR-Code-scanner/*.h"
     	"QR-Code-scanner/*.cpp"
     )
@@ -118,11 +109,11 @@ target_include_directories(monero-wallet-gui PUBLIC
     ${CMAKE_SOURCE_DIR}/monero/src
     ${CMAKE_SOURCE_DIR}/monero/external/easylogging++
     ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include
+    ${CMAKE_SOURCE_DIR}/monero/external/qrcodegen
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
-	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-generator
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
 	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${LibUSB_INCLUDE_DIRS}
@@ -145,6 +136,7 @@ target_link_libraries(monero-wallet-gui
     wallet_merged
     ${LMDB_LIBRARY}
     epee
+    qrcodegen
     ${UNBOUND_LIBRARY}
     ${SODIUM_LIBRARY}
     easylogging
