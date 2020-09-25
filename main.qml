@@ -1425,7 +1425,7 @@ ApplicationWindow {
         property string fiatPriceCurrency: "xmrusd"
 
         property string proxyAddress: "127.0.0.1:9050"
-        property bool proxyEnabled: false
+        property bool proxyEnabled: isTails
         function getProxyAddress() {
             if (!proxyEnabled) {
                 return "";
