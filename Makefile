@@ -6,7 +6,7 @@ ifneq ($(dotgit), .git/config)
 endif
 
 subbuilddir:=$(shell echo  `uname | sed -e 's|[:/\\ \(\)]|_|g'`/`git branch | grep '\* ' | cut -f2- -d' '| sed -e 's|[:/\\ \(\)]|_|g'`)
-ifeq ($(USE_SINGLE_BUILDDIR),)
+ifeq ($(USE_SINGLE_BUILDDIR), OFF)
   builddir := build/"$(subbuilddir)"
   topdir   := ../../../..
   deldirs  := $(builddir)
