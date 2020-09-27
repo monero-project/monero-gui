@@ -8,33 +8,13 @@ Use macOS 10.12 - 10.13 for better backwards compability.
 
 3. Get the latest LTS from here: https://www.qt.io/offline-installers and install
 
-4. `export PATH=$PATH:$HOME/Qt5.12.8/5.12.8/clang_64/bin`
+4. `git clone --recursive -b v0.X.Y.Z --depth 1 https://github.com/monero-project/monero-gui` 
 
-5. `git clone https://github.com/monero-project/monero-gui` 
+5. `CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 make release`
 
-6. `git checkout v0.X.Y.Z`
+6. `cd build/release && make deploy`
 
-7. `sed -i '' s/ARCH=\"native\"/ARCH=\"x86-64\"/g get_libwallet_api.sh`
-
-8. `sed -i '' s/-O2/-O0/g monero-wallet-gui.pro`
-
-9. `./build.sh`
-
-10. `cd build && make deploy`
-
-11. `cd release/bin/monero-wallet-gui.app/Contents/PlugIns/imageformats/`
-
-12. `cp ~/Qt5.12.8/5.12.8/clang_64/plugins/imageformats/libqsvg.dylib .`
-
-13. `install_name_tool -change ~/Qt5.12.8/5.12.8/clang_64/clang_64/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui libqsvg.dylib`
-
-14. `install_name_tool -change ~/Qt5.12.8/5.12.8/clang_64/clang_64/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui libqsvg.dylib`
-
-15. `install_name_tool -change ~/Qt5.12.8/5.12.8/clang_64/lib/QtSvg.framework/Versions/5/QtSvg @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui libqsvg.dylib`
- 
-16. `install_name_tool -change ~/Qt5.12.8/5.12.8/clang_64/clang_64/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui libqsvg.dylib`
-
-17. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
+7. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
 
 ## Codesigning and notarizing
 
