@@ -96,7 +96,7 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
                 text: {
                     if (appWindow.viewOnly){
-                        return qsTr("Transaction file successfully saved!") + translationManager.emptyString;;
+                        return qsTr("Transaction file successfully saved!") + translationManager.emptyString;
                     } else {
                         return  qsTr("Transaction successfully sent!") + translationManager.emptyString;
                     }
