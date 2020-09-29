@@ -221,7 +221,7 @@ Rectangle {
                 MoneroComponents.Label {
                     fontSize: 16
                     visible: isSyncing
-                    text: qsTr("Syncing...")
+                    text: qsTr("Syncing...") + translationManager.emptyString
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
                     anchors.left: parent.left
                     anchors.leftMargin: 20
