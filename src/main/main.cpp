@@ -256,6 +256,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QCommandLineOption disableCheckUpdatesOption("disable-check-updates", "Disable automatic check for updates.");
     parser.addOption(disableCheckUpdatesOption);
+    QCommandLineOption socksProxyOption("socks5-proxy", "Enable socks5 proxy. Used for remote node connection (advanced mode), updates downloading and fetching price sources.", "address:port");
+    parser.addOption(socksProxyOption);
     QCommandLineOption testQmlOption("test-qml");
     testQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser.addOption(logPathOption);
@@ -483,6 +485,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
     engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", parser.isSet(disableCheckUpdatesOption));
+    engine.rootContext()->setContextProperty("socksProxyFlag", parser.value(socksProxyOption));
+    engine.rootContext()->setContextProperty("socksProxyFlagSet", parser.isSet(socksProxyOption));
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
