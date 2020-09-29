@@ -978,9 +978,6 @@ ApplicationWindow {
             middlePanel.transferView.clearFields()
             txConfirmationPopup.close()
             txConfirmationPopup.clearFields()
-            successfulTxPopup.onCloseCallback = null
-            successfulTxPopup.open(txid)
-
         }
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
@@ -1466,19 +1463,6 @@ ApplicationWindow {
         }
     }
 
-    // Transaction successfully sent popup
-    SuccessfulTxDialog {
-        // dynamically change onclose handler
-        property var onCloseCallback
-        id: successfulTxPopup
-        z: parent.z + 1
-        onAccepted:  {
-            if (onCloseCallback) {
-                onCloseCallback()
-            }
-        }
-    }
-
     StandardDialog {
         z: parent.z + 1
         id: confirmationDialog
@@ -1748,7 +1732,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || txConfirmationPopup.visible
         }
 
 
