@@ -37,7 +37,6 @@ Rectangle {
     id: root
     x: parent.width/2 - root.width/2
     y: parent.height/2 - root.height/2
-    z: parent.z + 1
     // TODO: implement without hardcoding sizes
     width: 580
     height: 400
@@ -166,7 +165,6 @@ Rectangle {
                 }
                 onClicked: {
                     oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.fileUrl))
-                    root.rejected()
                 }
             }
 
