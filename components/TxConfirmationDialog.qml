@@ -37,7 +37,6 @@ Rectangle {
     id: root
     x: parent.width/2 - root.width/2
     y: parent.height/2 - root.height/2
-    z: parent.z + 1
     // TODO: implement without hardcoding sizes
     width: 580
     height: 400
@@ -92,7 +91,7 @@ Rectangle {
         State {
             // waiting for user action, show tx details + back and confirm buttons
             name: "default";
-            when: errorText.text =="" && bottomText.text ==""
+            when: errorText.text == "" && bottomText.text == ""
             PropertyChanges { target: errorText; visible: false }
             PropertyChanges { target: txAmountText; visible: root.transactionAmount !== "(all)" || (root.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
@@ -106,7 +105,7 @@ Rectangle {
         }, State {
             // error message being displayed, show only back button
             name: "error";
-            when: errorText.text !==""
+            when: errorText.text !== ""
             PropertyChanges { target: dialogTitle; text: "Error" }
             PropertyChanges { target: errorText; visible: true }
             PropertyChanges { target: txAmountText; visible: false }
@@ -121,7 +120,7 @@ Rectangle {
         }, State {
             // creating or sending transaction, show tx details and don't show any button
             name: "bottomText";
-            when: errorText.text =="" && bottomText.text !==""
+            when: errorText.text == "" && bottomText.text !== ""
             PropertyChanges { target: errorText; visible: false }
             PropertyChanges { target: txAmountText; visible: root.transactionAmount !== "(all)" || (root.transactionAmount === "(all)" && currentWallet.isHwBacked() === true) }
             PropertyChanges { target: txAmountBusyIndicator; visible: !txAmountText.visible }
