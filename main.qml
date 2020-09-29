@@ -2032,7 +2032,7 @@ ApplicationWindow {
         console.log("close accepted");
         // Close wallet non async on exit
         daemonManager.exit();
-
+        
         closeWallet(Qt.quit);
     }
 
