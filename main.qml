@@ -1451,10 +1451,8 @@ ApplicationWindow {
                     handleAccepted()
                 } else {
                     passwordDialog.showError(qsTr("Wrong password") + translationManager.emptyString);
-                    passwordDialog.isSendingTransaction = true;
                 }
             }
-            passwordDialog.isSendingTransaction = true;
             passwordDialog.onRejectedCallback = null;
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
