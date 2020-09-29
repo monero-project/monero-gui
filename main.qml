@@ -33,6 +33,8 @@ import QtQuick.Controls.Styles 1.1
 import QtQuick.Dialogs 1.2
 import QtGraphicalEffects 1.0
 
+import FontAwesome 1.0
+
 import moneroComponents.Wallet 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
@@ -1415,7 +1417,11 @@ ApplicationWindow {
             if(!persistentSettings.askPasswordBeforeSending) {
                 handleAccepted()
             } else {
-                passwordDialog.open()
+                passwordDialog.open(
+                    "",
+                    "",
+                    (appWindow.viewOnly ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString,
+                    appWindow.viewOnly ? "" : FontAwesome.arrowCircleRight);
             }
         }
     }
