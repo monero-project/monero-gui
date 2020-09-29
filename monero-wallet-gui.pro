@@ -421,6 +421,13 @@ macx {
         INCLUDEPATH += /usr/local/include
     }
 
+    SODIUM_DIR = $$system(brew --prefix libsodium, lines, EXIT_CODE)
+    equals(EXIT_CODE, 0) {
+        INCLUDEPATH += $$SODIUM_DIR/include
+    } else {
+        INCLUDEPATH += /usr/local/include
+    }
+
     QT += macextras
     OBJECTIVE_SOURCES += src/qt/macoshelper.mm
     LIBS+= -Wl,-dead_strip
@@ -534,7 +541,7 @@ macx {
 }
 
 win32 {
-    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -release -no-translations -qmldir=$$PWD
+    deploy.commands += windeployqt $$sprintf("%1/%2/%3.exe", $$OUT_PWD, $$DESTDIR, $$TARGET) -no-translations -qmldir=$$PWD
     # Win64 msys2 deploy settings
     contains(QMAKE_HOST.arch, x86_64) {
         deploy.commands += $$escape_expand(\n\t) $$PWD/windeploy_helper.sh $$DESTDIR
@@ -560,7 +567,7 @@ DISTFILES += \
 
 VERSION = $$cat('version.js', lines)
 VERSION = $$find(VERSION, 'GUI_VERSION')
-VERSION_LONG = $$replace(VERSION, '.*\"v(.*)\"', '\1') 
+VERSION_LONG = $$replace(VERSION, '.*\"(.*)\"', '\1')
 VERSION = $$replace(VERSION, '.*(\d+\.\d+\.\d+\.\d+).*', '\1')
 
 # windows application icon

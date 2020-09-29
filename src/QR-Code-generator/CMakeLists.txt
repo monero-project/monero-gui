@@ -1,4 +1,0 @@
-file(GLOB_RECURSE SRC_SOURCES *.cpp)
-file(GLOB_RECURSE SRC_HEADERS *.h)
-
-

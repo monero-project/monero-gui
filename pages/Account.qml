@@ -48,6 +48,8 @@ Rectangle {
     color: "transparent"
     property var model
     property alias accountHeight: mainLayout.height
+    property alias balanceAllText: balanceAll.text
+    property alias unlockedBalanceAllText: unlockedBalanceAll.text
     property bool selectAndSend: false
     property int currentAccountIndex
 
@@ -186,7 +188,7 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: subaddressAccountListRow.subaddressAccountListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
                         color: "transparent"
 

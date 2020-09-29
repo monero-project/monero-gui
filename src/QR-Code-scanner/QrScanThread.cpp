@@ -30,13 +30,8 @@
 #include <QtGlobal>
 #include <QDebug>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
 extern QImage qt_imageFromVideoFrame(const QVideoFrame &f);
-#else
-QImage qt_imageFromVideoFrame(const QVideoFrame &f){
-    Q_ASSERT_X(0 != 0, "qt_imageFromVideoFrame", "Should have been managed in .pro");
-    return QImage();
-}
 #endif
 
 QrScanThread::QrScanThread(QObject *parent)
@@ -108,7 +103,11 @@ void QrScanThread::processQImage(const QImage &qimg)
 
 void QrScanThread::processVideoFrame(const QVideoFrame &frame)
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     processQImage( qt_imageFromVideoFrame(frame) );
+#else
+    processQImage(frame.image());
+#endif
 }
 
 void QrScanThread::stop()

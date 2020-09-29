@@ -265,12 +265,10 @@ Rectangle{
                 Layout.minimumWidth: 100
                 placeholderFontSize: 15
 
-                daemonAddrLabelText: qsTr("Address")
-                daemonPortLabelText: qsTr("Port")
+                daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
+                daemonPortLabelText: qsTr("Port") + translationManager.emptyString
 
-                property var rna: persistentSettings.remoteNodeAddress
-                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : rna.split(":")[1] : ""
+                initialAddress: persistentSettings.remoteNodeAddress
                 onEditingFinished: {
                     persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                     console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
@@ -417,17 +415,9 @@ Rectangle{
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20
 
-                        daemonAddrLabelText: qsTr("Bootstrap Address")
-                        daemonPortLabelText: qsTr("Bootstrap Port")
-                        daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                        daemonPortText: {
-                            var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                            if(node_split.length == 2){
-                                (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                            } else {
-                                return ""
-                            }
-                        }
+                        daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
+                        daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
+                        initialAddress: persistentSettings.bootstrapNodeAddress
                         onEditingFinished: {
                             if (daemonAddrText == "auto") {
                                 persistentSettings.bootstrapNodeAddress = daemonAddrText;

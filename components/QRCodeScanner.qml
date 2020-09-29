@@ -86,9 +86,14 @@ Rectangle {
         id : finder
         objectName: "QrFinder"
         onDecoded : {
-            root.qrcode_decoded(address, payment_id, amount, tx_description, recipient_name, extra_parameters)
-            root.state = "Stopped"
-	}
+            const parsed = walletManager.parse_uri_to_object(data);
+            if (!parsed.error) {
+                root.qrcode_decoded(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name, parsed.extra_parameters);
+                root.state = "Stopped";
+            } else {
+                onNotifyError(parsed.error);
+            }
+        }
         onNotifyError : {
             if( warning )
                 messageDialog.icon = StandardIcon.Critical

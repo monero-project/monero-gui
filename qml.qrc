@@ -87,7 +87,6 @@
         <file>lang/flags/ua.png</file>
         <file>lang/flags/gb.png</file>
         <file>lang/flags/us.png</file>
-        <file>lang/flags/pirate.png</file>
         <file>lang/flags/nb_NO.png</file>
         <file>pages/Receive.qml</file>
         <file>pages/TxKey.qml</file>

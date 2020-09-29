@@ -117,7 +117,7 @@ Item {
 
             Connections {
                 target: datePicker
-                onCurrentDateChanged: {
+                function onCurrentDateChanged() {
                     dateInput.setDate(datePicker.currentDate)
                 }
             }

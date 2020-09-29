@@ -1,4 +1,3 @@
-add_subdirectory(QR-Code-generator)
 add_subdirectory(QR-Code-scanner)
 add_subdirectory(daemon)
 add_subdirectory(libwalletqt)
@@ -22,9 +21,6 @@ file(GLOB SOURCE_FILES
     "libwalletqt/TransactionHistory.cpp"
     "libwalletqt/TransactionInfo.cpp"
     "libwalletqt/QRCodeImageProvider.cpp" QR
-    "QR-Code-generator/BitBuffer.cpp"
-    "QR-Code-generator/QrCode.cpp"
-    "QR-Code-generator/QrSegment.cpp"
     "libwalletqt/AddressBook.cpp"
     "libwalletqt/Subaddress.cpp"
     "libwalletqt/SubaddressAccount.cpp"
@@ -36,21 +32,21 @@ file(GLOB SOURCE_FILES
     "libwalletqt/TransactionHistory.h"
     "libwalletqt/TransactionInfo.h"
     "libwalletqt/QRCodeImageProvider.h"
-    "QR-Code-generator/BitBuffer.h"
-    "QR-Code-generator/QrCode.h"
-    "QR-Code-generator/QrSegment.h"
     "libwalletqt/Transfer.h"
     "libwalletqt/AddressBook.h"
     "libwalletqt/Subaddress.h"
     "libwalletqt/SubaddressAccount.h"
     "libwalletqt/UnsignedTransaction.h"
-	"daemon/*.h"
-	"daemon/*.cpp"
-	"model/*.h"
-	"model/*.cpp"
-	"qt/*.h"
+    "daemon/*.h"
+    "daemon/*.cpp"
+    "model/*.h"
+    "model/*.cpp"
+    "qt/*.h"
     "qt/*.cpp"
 )
+if(APPLE)
+    list(APPEND SOURCE_FILES "qt/macoshelper.mm")
+endif()
 
 if(ENABLE_PASS_STRENGTH_METER)
     file(GLOB PASS_STRENGTH_FILES
@@ -61,8 +57,6 @@ endif()
 
 if(WITH_SCANNER)
     file(GLOB QR_CODE_FILES
-        "QR-Code-generator/*.h"
-    	"QR-Code-generator/*.cpp"
     	"QR-Code-scanner/*.h"
     	"QR-Code-scanner/*.cpp"
     )
@@ -76,38 +70,50 @@ if(MINGW)
     set(ICON_RC ${CMAKE_CURRENT_BINARY_DIR}/icon.rc)
     set(ICON_RES ${CMAKE_CURRENT_BINARY_DIR}/icon.o)
     file(WRITE ${ICON_RC} "IDI_ICON1 ICON DISCARDABLE \"${ICON}\"")
-    add_custom_command(OUTPUT ${ICON_RES} COMMAND windres ${ICON_RC} ${ICON_RES} MAIN_DEPENDENCY ${ICON_RC})
+    find_program(Qt5_WINDRES_EXECUTABLE NAMES windres x86_64-w64-mingw32-windres REQUIRED CMAKE_FIND_ROOT_PATH_BOTH)
+    add_custom_command(OUTPUT ${ICON_RES} COMMAND ${Qt5_WINDRES_EXECUTABLE} ${ICON_RC} ${ICON_RES} MAIN_DEPENDENCY ${ICON_RC})
     list(APPEND RESOURCES ${ICON_RES})
 endif()
 
-add_executable(monero-gui ${EXECUTABLE_FLAG} main/main.cpp
+if(APPLE)
+    set(ICON ${PROJECT_SOURCE_DIR}/images/appicon.icns)
+    set_source_files_properties(${ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    list(APPEND RESOURCES ${ICON})
+endif()
+
+add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} main/main.cpp
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
     ${QR_CODE_FILES}
     ${RESOURCES}
 )
-set_property(TARGET monero-gui PROPERTY RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+set_target_properties(monero-wallet-gui PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/share/Info.plist"
+)
 
 # OpenGL
-target_include_directories(monero-gui PUBLIC ${OPENGL_INCLUDE_DIR})
+target_include_directories(monero-wallet-gui PUBLIC ${OPENGL_INCLUDE_DIR})
 message(STATUS "OpenGL: include dir at ${OPENGL_INCLUDE_DIR}")
 message(STATUS "OpenGL: libraries at ${OPENGL_LIBRARIES}")
 
-target_include_directories(monero-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
+target_include_directories(monero-wallet-gui PUBLIC ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SRC_SOURCES *.cpp)
 file(GLOB_RECURSE SRC_HEADERS *.h)
 
-target_include_directories(monero-gui PUBLIC
+target_include_directories(monero-wallet-gui PUBLIC
 	${CMAKE_SOURCE_DIR}/monero/include
     ${CMAKE_SOURCE_DIR}/monero/src
     ${CMAKE_SOURCE_DIR}/monero/external/easylogging++
     ${CMAKE_SOURCE_DIR}/monero/contrib/epee/include
+    ${CMAKE_SOURCE_DIR}/monero/external/qrcodegen
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/daemon
 	${CMAKE_CURRENT_SOURCE_DIR}/libwalletqt
 	${CMAKE_CURRENT_SOURCE_DIR}/model
-	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-generator
 	${CMAKE_CURRENT_SOURCE_DIR}/QR-Code-scanner
 	${CMAKE_CURRENT_SOURCE_DIR}/zxcvbn-c
     ${LibUSB_INCLUDE_DIRS}
@@ -118,33 +124,25 @@ target_include_directories(monero-gui PUBLIC
     ${ZBAR_INCLUDE_DIR}
 )
 
-target_compile_definitions(monero-gui
+target_compile_definitions(monero-wallet-gui
 	PUBLIC
 	${Qt5Widgets_DEFINITIONS}
     ${Qt5Qml_DEFINITIONS}
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
-if(X11_FOUND)
-    target_link_libraries(monero-gui ${X11_LIBRARIES} pthread dl Xt xcb X11)
-endif()
-
-if(DEVICE_TREZOR_READY)
-    target_link_libraries(monero-gui ${TREZOR_DEP_LIBS})
-endif()
-
-target_link_libraries(monero-gui
-    ${CMAKE_BINARY_DIR}/lib/libwallet_merged.a
+target_link_libraries(monero-wallet-gui
+    wallet_merged
     ${LMDB_LIBRARY}
-    ${CMAKE_BINARY_DIR}/monero/contrib/epee/src/libepee.a
-    ${CMAKE_BINARY_DIR}/monero/external/unbound/libunbound.a
+    epee
+    qrcodegen
+    ${UNBOUND_LIBRARY}
     ${SODIUM_LIBRARY}
-    ${CMAKE_BINARY_DIR}/monero/external/easylogging++/libeasylogging.a
-    ${CMAKE_BINARY_DIR}/monero/src/blockchain_db/libblockchain_db.a
-    ${CMAKE_BINARY_DIR}/monero/external/randomx/librandomx.a
-    ${CMAKE_BINARY_DIR}/monero/src/hardforks/libhardforks.a
+    easylogging
+    blockchain_db
+    randomx
+    hardforks
     ${Boost_LIBRARIES}
     ${OPENSSL_LIBRARIES}
     ${CMAKE_DL_LIBS}
@@ -154,10 +152,19 @@ target_link_libraries(monero-gui
     ${EXTRA_LIBRARIES}
     ${ICU_LIBRARIES}
     openpgp
+    translations
 )
 
+if(DEVICE_TREZOR_READY)
+    target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
+endif()
+
+if(X11_FOUND)
+    target_link_libraries(monero-wallet-gui ${X11_LIBRARIES})
+endif()
+
 if(WITH_SCANNER)
-    target_link_libraries(monero-gui 
+    target_link_libraries(monero-wallet-gui
         ${ZBAR_LIBRARIES}
         jpeg
         v4l2
@@ -166,6 +173,10 @@ if(WITH_SCANNER)
     )
 endif()
 
-install(TARGETS monero-gui
+add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
+
+include(Deploy)
+
+install(TARGETS monero-wallet-gui
     DESTINATION ${CMAKE_INSTALL_PREFIX}
 )

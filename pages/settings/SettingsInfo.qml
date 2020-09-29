@@ -103,7 +103,7 @@ Rectangle {
             MoneroComponents.TextBlock {
                 font.pixelSize: 14
                 color: MoneroComponents.Style.dimmedFontColor
-                text: Version.GUI_MONERO_VERSION + translationManager.emptyString
+                text: moneroVersion
             }
 
             Rectangle {
@@ -381,27 +381,40 @@ Rectangle {
             }
         }
 
-        // Copy info to clipboard
-        MoneroComponents.StandardButton {
-            small: true
-            text: qsTr("Copy to clipboard") + translationManager.emptyString
-            onClicked: {
-                var data = "";
-                data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
-                data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
-                data += "\nWallet path: " + walletLocation.walletPath;
+        RowLayout {
+            spacing: 20;
 
-                data += "\nWallet creation height: ";
-                if(currentWallet)
-                    data += currentWallet.walletCreationHeight;
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Copy to clipboard") + translationManager.emptyString
+                onClicked: {
+                    var data = "";
+                    data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
+                    data += "\nEmbedded Monero version: " + moneroVersion;
+                    data += "\nWallet path: " + walletLocation.walletPath;
 
-                data += "\nWallet log path: " + walletLogPath;
-                data += "\nWallet mode: " + walletModeString;
-                data += "\nGraphics: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    data += "\nWallet restore height: ";
+                    if(currentWallet)
+                        data += currentWallet.walletCreationHeight;
 
-                console.log("Copied to clipboard");
-                clipboard.setText(data);
-                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                    data += "\nWallet log path: " + walletLogPath;
+                    data += "\nWallet mode: " + walletModeString;
+                    data += "\nGraphics mode: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    if (isTails)
+                        data += "\nTails: " + tailsUsePersistence ? "persistent" : "persistence disabled";
+
+                    console.log("Copied to clipboard");
+                    clipboard.setText(data);
+                    appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Donate to Monero") + translationManager.emptyString
+                onClicked: {
+                    middlePanel.sendTo("888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H", "", "Donation to Monero Core Team");
+                }
             }
         }
     }

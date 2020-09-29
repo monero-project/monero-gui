@@ -17,7 +17,7 @@ if [ ! -d $MONERO_DIR/src ]; then
 fi
 git submodule update --remote
 git -C $MONERO_DIR fetch
-git -C $MONERO_DIR checkout origin/master
+git -C $MONERO_DIR checkout v0.17.0.1
 
 # get monero core tag
 pushd $MONERO_DIR
@@ -203,7 +203,7 @@ elif [ "$platform" == "linuxarmv7" ]; then
     if [ "$STATIC" == true ]; then
         cmake -D BUILD_TESTS=OFF -D ARCH="$ARCH" -D STATIC=ON -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     else
-        cmake -D BUILD_TESTS=OFF -D ARCH="$ARCH" -D -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
+        cmake -D BUILD_TESTS=OFF -D ARCH="$ARCH" -D BUILD_64=OFF  -D BUILD_GUI_DEPS=ON $BUILD_TREZOR_FLAGS -D CMAKE_INSTALL_PREFIX="$MONERO_DIR"  ../..
     fi
 
 ## LINUX other 

@@ -36,19 +36,17 @@ As with many development projects, the repository on Github is considered to be 
 
 Monero is a 100% community-sponsored endeavor. If you want to join our efforts, the easiest thing you can do is support the project financially. Both Monero and Bitcoin donations can be made to **donate.getmonero.org** if using a client that supports the [OpenAlias](https://openalias.org) standard.
 
-The Monero donation address is: `44AFFq5kSiGBoZ4NMDwYtN18obc8AemS33DBLWs3H7otXft3XjrpDtQGv7SqSsaBYBb98uNbr2VBBEt7f2wfn3RVGQBEP3A` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
+The Monero donation address is: `888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H` (viewkey: `f359631075708155cc3d92a32b75a7d02a5dcf27756707b47a2b31b21c389501`)
 
 The Bitcoin donation address is: `1KTexdemPdxSBcG55heUuTjDRYqbC5ZL8H`
 
-GUI development funding and/or some supporting services are also graciously provided by sponsors:
+GUI development funding and/or some supporting services are also graciously provided by [sponsors](https://www.getmonero.org/community/sponsorships/):
 
-[<img width="80" src="https://static.getmonero.org/images/sponsors/mymonero.png"/>](https://mymonero.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/kitware.png?1"/>](http://kitware.com)
-[<img width="100" src="https://static.getmonero.org/images/sponsors/dome9.png"/>](http://dome9.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/araxis.png"/>](http://araxis.com)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/jetbrains.png"/>](http://www.jetbrains.com/)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/navicat.png"/>](http://www.navicat.com/)
-[<img width="150" src="https://static.getmonero.org/images/sponsors/symas.png"/>](http://www.symas.com/)
+[<img width="150" src="https://www.getmonero.org/img/sponsors/tarilabs.png"/>](https://tarilabs.com/)
+[<img width="150" src="https://www.getmonero.org/img/sponsors/globee.png"/>](https://globee.com/)
+[<img width="150" src="https://www.getmonero.org/img/sponsors/symas.png"/>](https://www.symas.com/)
+[<img width="150" src="https://www.getmonero.org/img/sponsors/forked_logo.png"/>](https://www.forked.net/)
+[<img width="150" src="https://www.getmonero.org/img/sponsors/macstadium.png"/>](https://www.macstadium.com/)
 
 There are also several mining pools that kindly donate a portion of their fees, [a list of them can be found on our Bitcointalk post](https://bitcointalk.org/index.php?topic=583449.0).
 
@@ -70,16 +68,61 @@ Status of the translations:
 ## Installing the Monero GUI from a package
 
 Packages are available for
-
-* Arch Linux: pacman -S monero-gui
-* Void Linux: xbps-install -S monero-core
-* GuixSD: guix package -i monero-core
+* Arch Linux: [monero-gui](https://www.archlinux.org/packages/community/x86_64/monero-gui/)
+* Debian: See the [whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
+* Void Linux: `xbps-install -S monero-gui`
+* GuixSD: `guix package -i monero-gui`
+* macOS (homebrew): `brew cask install monero-wallet`
 
 Packaging for your favorite distribution would be a welcome contribution!
 
 ## Compiling the Monero GUI from source
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
+
+### Building Windows static binaries with Docker (any OS)
+
+1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+2. Clone the repository
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   ```
+3. Prepare build environment
+   ```
+   cd monero-gui
+   docker build --tag monero:build-env-windows --build-arg THREADS=4 --file Dockerfile.windows .
+   ```
+   \* `4` - number of CPU threads to use
+
+4. Build
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-windows sh -c 'make depends root=/depends target=x86_64-w64-mingw32 tag=win-x64 -j4'
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `4` - number of CPU threads to use
+5. Monero GUI Windows static binaries will be placed in  `monero-gui/build/x86_64-w64-mingw32/release/bin` directory
+
+### Building Linux static binaries with Docker (any OS)
+
+1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+2. Clone the repository
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   ```
+3. Prepare build environment
+   ```
+   cd monero-gui
+   docker build --tag monero:build-env-linux --build-arg THREADS=4 --file Dockerfile.linux .
+   ```
+   \* `4` - number of CPU threads to use
+
+4. Build
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'make release-static -j4'
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `4` - number of CPU threads to use
+5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
 
 ### On Linux:
 
@@ -173,6 +216,8 @@ The executable can be found in the build/release/bin folder.
   `./build.sh`
 
 The executable can be found in the `build/release/bin` folder.
+
+For building an application bundle see `DEPLOY.md`.
 
 ### On Windows:
 

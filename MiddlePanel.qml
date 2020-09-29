@@ -50,7 +50,10 @@ Rectangle {
     property alias contentHeight: mainFlickable.contentHeight
     property alias flickable: mainFlickable
 
-    property Transfer transferView: Transfer { }
+    property Transfer transferView: Transfer {
+        onPaymentClicked: root.paymentClicked(address, paymentId, amount, mixinCount, priority, description)
+        onSweepUnmixableClicked: root.sweepUnmixableClicked()
+    }
     property Receive receiveView: Receive { }
     property Merchant merchantView: Merchant { }
     property TxKey txkeyView: TxKey { }
@@ -259,19 +262,5 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: borderLeft.right
-    }
-
-    /* connect "payment" click */
-    Connections {
-        ignoreUnknownSignals: false
-        target: transferView
-        onPaymentClicked : {
-            console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority, description)
-        }
-        onSweepUnmixableClicked : {
-            console.log("MiddlePanel: sweepUnmixableClicked")
-            sweepUnmixableClicked()
-        }
     }
 }

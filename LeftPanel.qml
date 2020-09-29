@@ -263,6 +263,10 @@ Rectangle {
                     anchors.leftMargin: 58
                     anchors.baseline: currencyLabel.baseline
                     color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    Binding on color {
+                        when: balancePart1MouseArea.containsMouse || balancePart2MouseArea.containsMouse
+                        value: MoneroComponents.Style.orange
+                    }
                     text: {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[0] + "."
@@ -284,14 +288,6 @@ Rectangle {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onEntered: {
-                            balancePart1.color = MoneroComponents.Style.orange
-                            balancePart2.color = MoneroComponents.Style.orange
-                        }
-                        onExited: {
-                            balancePart1.color = Qt.binding(function() { return MoneroComponents.Style.blackTheme ? "white" : "black" })
-                            balancePart2.color = Qt.binding(function() { return MoneroComponents.Style.blackTheme ? "white" : "black" })
-                        }
                         onClicked: {
                                 console.log("Copied to clipboard");
                                 clipboard.setText(balancePart1.text + balancePart2.text);
@@ -305,7 +301,7 @@ Rectangle {
                     anchors.left: balancePart1.right
                     anchors.leftMargin: 2
                     anchors.baseline: currencyLabel.baseline
-                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    color: balancePart1.color
                     text: {
                         if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[1]
@@ -315,11 +311,10 @@ Rectangle {
                     }
                     font.pixelSize: 16
                     MouseArea {
+                        id: balancePart2MouseArea
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onEntered: balancePart1MouseArea.entered()
-                        onExited: balancePart1MouseArea.exited()
                         onClicked: balancePart1MouseArea.clicked(mouse)
                     }
                 }

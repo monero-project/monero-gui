@@ -49,8 +49,12 @@ class WalletManager : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ connected)
+    Q_PROPERTY(QString proxyAddress READ proxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
 
 public:
+    explicit WalletManager(QObject *parent = 0);
+    ~WalletManager();
+
     enum LogLevel {
         LogLevel_Silent = Monero::WalletManagerFactory::LogLevel_Silent,
         LogLevel_0 = Monero::WalletManagerFactory::LogLevel_0,
@@ -62,7 +66,6 @@ public:
         LogLevel_Max = Monero::WalletManagerFactory::LogLevel_Max,
     };
 
-    static WalletManager * instance();
     // wizard: createWallet path;
     Q_INVOKABLE Wallet * createWallet(const QString &path, const QString &password,
                                       const QString &language, NetworkType::Type nettype = NetworkType::MAINNET, quint64 kdfRounds = 1);
@@ -129,7 +132,7 @@ public:
     Q_INVOKABLE QString errorString() const;
 
     //! since we can't call static method from QML, move it to this class
-    Q_INVOKABLE QString displayAmount(quint64 amount) const;
+    Q_INVOKABLE static QString displayAmount(quint64 amount);
     Q_INVOKABLE quint64 amountFromString(const QString &amount) const;
     Q_INVOKABLE quint64 amountFromDouble(double amount) const;
     Q_INVOKABLE quint64 maximumAllowedAmount() const;
@@ -189,6 +192,9 @@ public:
     Q_INVOKABLE void onPassphraseEntered(const QString &passphrase, bool enter_on_device, bool entry_abort=false);
     virtual void onWalletPassphraseNeeded(bool on_device) override;
 
+    QString proxyAddress() const;
+    void setProxyAddress(QString address);
+
 signals:
 
     void walletOpened(Wallet * wallet);
@@ -203,13 +209,11 @@ signals:
         const QString &firstSigner,
         const QString &secondSigner) const;
     void miningStatus(bool isMining) const;
+    void proxyAddressChanged() const;
 
 public slots:
 private:
     friend class WalletPassphraseListenerImpl;
-
-    explicit WalletManager(QObject *parent = 0);
-    ~WalletManager();
 
     bool isMining() const;
 
@@ -219,6 +223,8 @@ private:
     QPointer<Wallet> m_currentWallet;
     PassphraseReceiver * m_passphraseReceiver;
     QMutex m_mutex_passphraseReceiver;
+    QString m_proxyAddress;
+    mutable QMutex m_proxyMutex;
     FutureScheduler m_scheduler;
 };
 

@@ -38,6 +38,9 @@
 #include <QScreen>
 #include <QRegExp>
 #include <QThread>
+
+#include <version.h>
+
 #include "clipboardAdapter.h"
 #include "filter.h"
 #include "oscursor.h"
@@ -69,10 +72,15 @@
 #include "qt/TailsOS.h"
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
+#include "qt/NetworkAccessBlockingFactory.h"
 
 // IOS exclusions
 #ifndef Q_OS_IOS
 #include "daemon/DaemonManager.h"
+#endif
+
+#if defined(Q_OS_WIN)
+#include <QOpenGLContext>
 #endif
 
 #ifdef WITH_SCANNER
@@ -88,13 +96,12 @@
   Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
 #elif defined(Q_OS_LINUX)
   Q_IMPORT_PLUGIN(QXcbIntegrationPlugin);
+  Q_IMPORT_PLUGIN(QXcbGlxIntegrationPlugin);
 #endif
 Q_IMPORT_PLUGIN(QSvgIconPlugin)
-Q_IMPORT_PLUGIN(QGifPlugin)
 Q_IMPORT_PLUGIN(QICNSPlugin)
 Q_IMPORT_PLUGIN(QICOPlugin)
 Q_IMPORT_PLUGIN(QJpegPlugin)
-Q_IMPORT_PLUGIN(QMngPlugin)
 Q_IMPORT_PLUGIN(QSvgPlugin)
 Q_IMPORT_PLUGIN(QTgaPlugin)
 Q_IMPORT_PLUGIN(QTiffPlugin)
@@ -126,7 +133,9 @@ Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
 Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
 Q_IMPORT_PLUGIN(QtQuickTemplates2Plugin)
 Q_IMPORT_PLUGIN(QmlXmlListModelPlugin)
+#ifdef WITH_SCANNER
 Q_IMPORT_PLUGIN(QMultimediaDeclarativeModule)
+#endif
 
 #endif
 
@@ -141,6 +150,8 @@ bool isOpenGL = true;
 
 int main(int argc, char *argv[])
 {
+    Q_INIT_RESOURCE(translations);
+
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     bool isDesktop = true;
@@ -178,6 +189,17 @@ int main(int argc, char *argv[])
     qputenv("TERM", "goaway");
 
     MainApp app(argc, argv);
+
+#if defined(Q_OS_WIN)
+    if (isOpenGL)
+    {
+        QOpenGLContext ctx;
+        isOpenGL = ctx.create() && ctx.format().version() >= qMakePair(2, 1);
+        if (!isOpenGL) {
+            qputenv("QMLSCENE_DEVICE", "softwarecontext");
+        }
+    }
+#endif
 
     app.setApplicationName("monero-core");
     app.setOrganizationDomain("getmonero.org");
@@ -234,6 +256,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QCommandLineOption disableCheckUpdatesOption("disable-check-updates", "Disable automatic check for updates.");
     parser.addOption(disableCheckUpdatesOption);
+    QCommandLineOption socksProxyOption("socks5-proxy", "Enable socks5 proxy. Used for remote node connection (advanced mode), updates downloading and fetching price sources.", "address:port");
+    parser.addOption(socksProxyOption);
     QCommandLineOption testQmlOption("test-qml");
     testQmlOption.setFlags(QCommandLineOption::HiddenFromHelp);
     parser.addOption(logPathOption);
@@ -335,6 +359,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // registering types for QML
     qmlRegisterType<clipboardAdapter>("moneroComponents.Clipboard", 1, 0, "Clipboard");
     qmlRegisterType<Downloader>("moneroComponents.Downloader", 1, 0, "Downloader");
+    qmlRegisterType<Network>("moneroComponents.Network", 1, 0, "Network");
+    qmlRegisterType<WalletKeysFilesModel>("moneroComponents.WalletKeysFilesModel", 1, 0, "WalletKeysFilesModel");
+    qmlRegisterType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager");
 
     // Temporary Qt.labs.settings replacement
     qmlRegisterType<MoneroSettings>("moneroComponents.Settings", 1, 0, "MoneroSettings");
@@ -348,14 +375,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     qmlRegisterUncreatableType<UnsignedTransaction>("moneroComponents.UnsignedTransaction", 1, 0, "UnsignedTransaction",
                                                    "UnsignedTransaction can't be instantiated directly");
 
-    qmlRegisterUncreatableType<WalletManager>("moneroComponents.WalletManager", 1, 0, "WalletManager",
-                                                   "WalletManager can't be instantiated directly");
-
     qmlRegisterUncreatableType<TranslationManager>("moneroComponents.TranslationManager", 1, 0, "TranslationManager",
                                                    "TranslationManager can't be instantiated directly");
-
-    qmlRegisterUncreatableType<WalletKeysFilesModel>("moneroComponents.walletKeysFilesModel", 1, 0, "WalletKeysFilesModel",
-                                                   "walletKeysFilesModel can't be instantiated directly");
 
     qmlRegisterUncreatableType<TransactionHistoryModel>("moneroComponents.TransactionHistoryModel", 1, 0, "TransactionHistoryModel",
                                                         "TransactionHistoryModel can't be instantiated directly");
@@ -403,6 +424,9 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     QQmlApplicationEngine engine;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+    engine.setNetworkAccessManagerFactory(new NetworkAccessBlockingFactory);
+#endif
     OSCursor cursor;
     engine.rootContext()->setContextProperty("globalCursor", &cursor);
     OSHelper osHelper;
@@ -411,10 +435,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.addImportPath(":/fonts");
 
     engine.rootContext()->setContextProperty("moneroAccountsDir", moneroAccountsDir);
-
-    WalletManager *walletManager = WalletManager::instance();
-
-    engine.rootContext()->setContextProperty("walletManager", walletManager);
 
     engine.rootContext()->setContextProperty("translationManager", TranslationManager::instance());
 
@@ -453,11 +473,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         engine.rootContext()->setContextProperty("desktopFolder", desktopFolder);
 #endif
 
-    // Wallet .keys files model (wizard -> open wallet)
-    WalletKeysFilesModel walletKeysFilesModel(walletManager);
-    engine.rootContext()->setContextProperty("walletKeysFilesModel", &walletKeysFilesModel);
-    engine.rootContext()->setContextProperty("walletKeysFilesModelProxy", &walletKeysFilesModel.proxyModel());
-
     // Get default account name
     QString accountName = qgetenv("USER"); // mac/linux
     if (accountName.isEmpty())
@@ -470,6 +485,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("applicationDirectory", QApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("idealThreadCount", QThread::idealThreadCount());
     engine.rootContext()->setContextProperty("disableCheckUpdatesFlag", parser.isSet(disableCheckUpdatesOption));
+    engine.rootContext()->setContextProperty("socksProxyFlag", parser.value(socksProxyOption));
+    engine.rootContext()->setContextProperty("socksProxyFlagSet", parser.isSet(socksProxyOption));
 
     bool builtWithScanner = false;
 #ifdef WITH_SCANNER
@@ -477,8 +494,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 #endif
     engine.rootContext()->setContextProperty("builtWithScanner", builtWithScanner);
 
-    Network network;
-    engine.rootContext()->setContextProperty("Network", &network);
+    engine.rootContext()->setContextProperty("moneroVersion", MONERO_VERSION_FULL);
 
     // Load main window (context properties needs to be defined obove this line)
     engine.load(QUrl(QStringLiteral("qrc:///main.qml")));

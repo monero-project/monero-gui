@@ -35,7 +35,9 @@ import QtGraphicalEffects 1.0
 
 import FontAwesome 1.0
 
+import moneroComponents.Network 1.0
 import moneroComponents.Wallet 1.0
+import moneroComponents.WalletManager 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.NetworkType 1.0
 import moneroComponents.Settings 1.0
@@ -364,6 +366,7 @@ ApplicationWindow {
         currentWallet.deviceButtonPressed.connect(onDeviceButtonPressed);
         currentWallet.walletPassphraseNeeded.connect(onWalletPassphraseNeededWallet);
         currentWallet.transactionCommitted.connect(onTransactionCommitted);
+        currentWallet.proxyAddress = Qt.binding(persistentSettings.getWalletProxyAddress);
         middlePanel.paymentClicked.connect(handlePayment);
         middlePanel.sweepUnmixableClicked.connect(handleSweepUnmixable);
         middlePanel.getProofClicked.connect(handleGetProof);
@@ -388,7 +391,9 @@ ApplicationWindow {
             0,
             persistentSettings.is_recovering,
             persistentSettings.is_recovering_from_device,
-            persistentSettings.restore_height);
+            persistentSettings.restore_height,
+            persistentSettings.getWalletProxyAddress());
+
         // save wallet keys in case wallet settings have been changed in the init
         currentWallet.setPassword(walletPassword);
     }
@@ -429,6 +434,10 @@ ApplicationWindow {
         leftPanel.minutesToUnlock = (balance !== balanceU) ? currentWallet.history.minutesToUnlock : "";
         leftPanel.balanceString = balance
         leftPanel.balanceUnlockedString = balanceU
+        if (middlePanel.state === "Account") {
+            middlePanel.accountView.balanceAllText = walletManager.displayAmount(appWindow.currentWallet.balanceAll());
+            middlePanel.accountView.unlockedBalanceAllText = walletManager.displayAmount(appWindow.currentWallet.unlockedBalanceAll());
+        }
     }
 
     function onUriHandler(uri){
@@ -620,7 +629,14 @@ ApplicationWindow {
         const callback = function() {
             persistentSettings.useRemoteNode = true;
             currentDaemonAddress = persistentSettings.remoteNodeAddress;
-            currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
+            currentWallet.initAsync(
+                currentDaemonAddress,
+                isTrustedDaemon(),
+                0,
+                false,
+                false,
+                0,
+                persistentSettings.getWalletProxyAddress());
             walletManager.setDaemonAddressAsync(currentDaemonAddress);
         };
 
@@ -638,7 +654,14 @@ ApplicationWindow {
         console.log("disconnecting remote node");
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
-        currentWallet.initAsync(currentDaemonAddress, isTrustedDaemon());
+        currentWallet.initAsync(
+            currentDaemonAddress,
+            isTrustedDaemon(),
+            0,
+            false,
+            false,
+            0,
+            persistentSettings.getWalletProxyAddress());
         walletManager.setDaemonAddressAsync(currentDaemonAddress);
         firstBlockSeen = 0;
     }
@@ -1221,7 +1244,7 @@ ApplicationWindow {
         }
 
         var url = provider[userCurrency];
-        Network.getJSON(url, fiatApiJsonReceived);
+        network.getJSON(url, fiatApiJsonReceived);
     }
 
     function fiatApiCurrencySymbol() {
@@ -1368,6 +1391,25 @@ ApplicationWindow {
         property string fiatPriceProvider: "kraken"
         property string fiatPriceCurrency: "xmrusd"
 
+        property string proxyAddress: "127.0.0.1:9050"
+        property bool proxyEnabled: isTails
+        function getProxyAddress() {
+            if ((socksProxyFlagSet && socksProxyFlag == "") || !proxyEnabled) {
+                return "";
+            }
+            var proxyAddressSetOrForced = socksProxyFlagSet ? socksProxyFlag : proxyAddress;
+            if (proxyAddressSetOrForced == "") {
+                return "127.0.0.1:0";
+            }
+            return proxyAddressSetOrForced;
+        }
+        function getWalletProxyAddress() {
+            if (!useRemoteNode) {
+                return "";
+            }
+            return getProxyAddress();
+        }
+
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }
@@ -1511,7 +1553,7 @@ ApplicationWindow {
     PasswordDialog {
         id: passwordDialog
         visible: false
-        z: parent.z + 1
+        z: parent.z + 2
         anchors.fill: parent
         property var onAcceptedCallback
         property var onRejectedCallback
@@ -2127,7 +2169,7 @@ ApplicationWindow {
         if (mode < 2) {
             persistentSettings.useRemoteNode = false;
 
-            if (middlePanel.settingsView.settingsStateViewState === "Node" || middlePanel.settingsView.settingsStateViewState === "Log") {
+            if (middlePanel.settingsView.settingsStateViewState === "Node") {
                 middlePanel.settingsView.settingsStateViewState = "Wallet"
             }
         }
@@ -2222,5 +2264,15 @@ ApplicationWindow {
     MoneroComponents.LanguageSidebar {
         id: languageSidebar
         dragMargin: 0
+    }
+
+    Network {
+        id: network
+        proxyAddress: persistentSettings.getProxyAddress()
+    }
+
+    WalletManager {
+        id: walletManager
+        proxyAddress: persistentSettings.getProxyAddress()
     }
 }

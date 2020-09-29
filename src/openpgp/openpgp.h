@@ -47,20 +47,25 @@ enum algorithm : uint8_t
 class public_key_rsa
 {
 public:
-  public_key_rsa(const std::string &armored);
-  public_key_rsa(std::tuple<std::string, s_expression, size_t> params);
+  public_key_rsa(s_expression expression, size_t bits);
 
   size_t bits() const;
   const gcry_sexp_t &get() const;
-  std::string user_id() const;
-
-private:
-  static std::tuple<std::string, s_expression, size_t> decode(const std::string &armored);
-  static std::tuple<std::string, s_expression, size_t> decode(const epee::span<const uint8_t> buffer);
 
 private:
   s_expression m_expression;
   size_t m_bits;
+};
+
+class public_key_block : public std::vector<public_key_rsa>
+{
+public:
+  public_key_block(const std::string &armored);
+  public_key_block(const epee::span<const uint8_t> buffer);
+
+  std::string user_id() const;
+
+private:
   std::string m_user_id;
 };
 
