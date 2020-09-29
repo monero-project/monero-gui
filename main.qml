@@ -823,7 +823,7 @@ ApplicationWindow {
 
     function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
         console.log("Transaction created");
-        txConfirmationPopup.bottomText.text  = "";
+        txConfirmationPopup.bottomText.text = "";
         transaction = pendingTransaction;
         // validate address;
         if (transaction.status !== PendingTransaction.Status_Ok) {
