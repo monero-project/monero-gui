@@ -50,7 +50,6 @@ Item {
     property bool passwordDialogMode
     property bool passphraseDialogMode
     property bool newPasswordDialogMode
-    property bool isSendingTransaction: false
 
     // same signals as Dialog has
     signal accepted()
@@ -111,7 +110,6 @@ Item {
         wizard.enabled = true
         titleBar.state = "default"
 
-        root.isSendingTransaction = false;
         root.visible = false;
         appWindow.hideBalanceForced = false;
         appWindow.updateBalance();
