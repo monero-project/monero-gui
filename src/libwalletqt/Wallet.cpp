@@ -967,15 +967,21 @@ QString Wallet::getRings(const QString &txid)
     {
         if (!ring.isEmpty())
             ring = ring + "|";
-        ring = ring + QString::fromStdString(cring.first) + " absolute";
+        ring = ring + "keyimagestart" + QString::fromStdString(cring.first) + "keyimageend";
+
+        ring = ring + "ringstart";
+
         for (uint64_t out: cring.second)
         {
-            ring = ring + " ";
+
 	    QString s;
 	    s.setNum(out);
             ring = ring + s;
+            ring = ring + ", ";
         }
+        ring = ring + "ringend";
     }
+    ring = ring + "final";
     return ring;
 }
 

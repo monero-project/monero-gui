@@ -1205,7 +1205,7 @@ Rectangle {
                                 if(res[i].state === 'copyable_address') root.toClipboard(address);
                                 if(res[i].state === 'copyable_txkey') root.getTxKey(hash, res[i]);
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note);
-                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
+                                if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, (amount == 0 ? null : displayAmount), isout, fee, blockheight, confirmations, confirmationsRequired);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
                                 doCollapse = false;
                                 break;
@@ -1488,13 +1488,12 @@ Rectangle {
             var timestamp = new Date(date + " " + time).getTime() / 1000;
             var dateHuman = Utils.ago(timestamp);
 
-            var displayAmount = amount;
-            if(displayAmount === 0){
-                // *sometimes* amount is 0, while the 'destinations string'
-                // has the correct amount, so we try to fetch it from that instead.
-                displayAmount = TxUtils.destinationsToAmount(destinations);
-                displayAmount = Number(displayAmount *1);
-            }
+            if (amount === 0) {
+                      // transactions to the same account have amount === 0, while the 'destinations string'
+                      // has the correct amount, so we try to fetch it from that instead.
+                      amount = Number(TxUtils.destinationsToAmount(destinations));
+                  }
+            var displayAmount = Utils.removeTrailingZeros(amount.toFixed(12)) + " XMR";
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
@@ -1510,8 +1509,8 @@ Rectangle {
             root.txModelData.push({
                 "i": i,
                 "isout": isout,
-                "amount": Number(amount),
-                "displayAmount": Utils.removeTrailingZeros(displayAmount.toFixed(12)) + " XMR",
+                "amount": amount,
+                "displayAmount": displayAmount,
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
@@ -1595,20 +1594,37 @@ Rectangle {
         }
     }
 
-    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, amount, isout) {
+    function showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, amount, isout, fee, blockheight, confirmations, confirmationsRequired) {
         var tx_note = currentWallet.getUserNote(hash)
         var rings = currentWallet.getRings(hash)
         var address_label = subaddrIndex == 0 ? (qsTr("Primary address") + translationManager.emptyString) : currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex)
         var address = currentWallet.address(subaddrAccount, subaddrIndex)
+        var destinationsAddress = TxUtils.destinationsToAddress(destinations)
         const hasPaymentId = parseInt(paymentId, 16);
         const integratedAddress = !isout && hasPaymentId ? currentWallet.integratedAddress(paymentId) : null;
 
-        if (rings)
-            rings = rings.replace(/\|/g, '\n')
+        if (rings) {
+            rings = rings.replace(/\|/g, '\n');
+            var ringsCount = (rings.match(/keyimagestart/g)).length;
+            var keyimage = rings.substring(
+                rings.lastIndexOf("keyimagestart") +14,
+                rings.lastIndexOf("keyimageend") -2
+            );
+            var members = rings.substring(
+                rings.lastIndexOf("ringstart") +10,
+                rings.lastIndexOf("ringend") -2
+            );
+            var membersCount = members.split(',').length;
+            rings = rings.replace(/keyimagestart/g, 'Key image: ')
+            rings = rings.replace(/keyimageend/g, '<br>Ring members (' + membersCount + '): <br>')
+            rings = rings.replace(/ringstart/g, '')
+            rings = rings.replace(/, ringendfinal/g, '')
+            rings = rings.replace(/, ringend/g, '<br><br>')
+        }
 
         currentWallet.getTxKeyAsync(hash, function(hash, tx_key) {
             informationPopup.title = qsTr("Transaction details") + translationManager.emptyString;
-            informationPopup.content = buildTxDetailsString(hash, hasPaymentId ? paymentId : null, tx_key, tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount);
+            informationPopup.content = buildTxDetailsString(hash, hasPaymentId ? paymentId : null, tx_key, tx_note, destinations, destinationsAddress, rings, ringsCount, address, address_label, integratedAddress, dateTime, amount, isout, fee, subaddrAccount, subaddrIndex, blockheight, confirmations, confirmationsRequired);
             informationPopup.onCloseCallback = null
             informationPopup.open();
         });
@@ -1636,22 +1652,49 @@ Rectangle {
         appWindow.showStatusMessage(qsTr("Copied to clipboard"),3);
     }
 
-    function buildTxDetailsString(tx_id, paymentId, tx_key,tx_note, destinations, rings, address, address_label, integratedAddress, dateTime, amount) {
+    function buildTxDetailsString(tx_id, paymentId, tx_key, tx_note, destinations, destinationsAddress, rings, ringsCount, address, address_label, integratedAddress, dateTime, amount, isout, fee, subaddrAccount, subaddrIndex, blockheight, confirmations, confirmationsRequired) {
         var trStart = '<tr><td style="white-space: nowrap; padding-top:5px"><b>',
             trMiddle = '</b></td><td style="padding-left:10px;padding-top:5px;">',
             trEnd = "</td></tr>";
 
+
+        if (currentWallet) {
+            var walletTitle = function() {
+                if (currentWallet.isLedger()) {
+                    return "Ledger";
+                } else if (currentWallet.isTrezor()) {
+                    return "Trezor";
+                } else {
+                    return qsTr("My wallet");
+                }
+            }
+        }
+        var walletName = appWindow.walletName;
+        var currentSubaddressAccount = currentWallet ? currentWallet.currentSubaddressAccount : null;
+        var currentAccountLabel =  currentWallet ? currentWallet.getSubaddressLabel(currentWallet.currentSubaddressAccount, 0) : null;
+        const receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
+        const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(destinationsAddress) : null;
+
         return '<table border="0">'
-            + (tx_id ? trStart + qsTr("Tx ID:") + trMiddle + tx_id + trEnd : "")
-            + (dateTime ? trStart + qsTr("Date") + ":" + trMiddle + dateTime + trEnd : "")
-            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + amount + trEnd : "")
-            + (address ? trStart + qsTr("Address:") + trMiddle + address + trEnd : "")
-            + (paymentId ? trStart + qsTr("Payment ID:") + trMiddle + paymentId + trEnd : "")
+            + trStart + qsTr("Transaction ID") + ":" + trMiddle + (tx_id ? tx_id : qsTr("Unknown")) + trEnd
+            + trStart + qsTr("Transaction key") + ":" + trMiddle + (tx_key ? tx_key : qsTr("Unknown")) + trEnd
+            + trStart + qsTr("Date") + ":" + trMiddle + (dateTime ? dateTime : qsTr("Unknown")) + trEnd
+            + trStart + qsTr("Status") + ":" + trMiddle + (blockheight ? (confirmations > confirmationsRequired ? qsTr("Finished") : qsTr("Confirmed. ") + (confirmationsRequired - confirmations) + (isout ?  qsTr(" confirmations remaining to unlock change output...") : qsTr(" confirmations remaining to unlock incoming output(s)..."))) : qsTr("Waiting for confirmation...")) + trEnd
+            + (blockheight ? trStart + qsTr("") + trMiddle + "Blockheight" + ": " + blockheight + trEnd : "")
+            + trStart + qsTr("") + trMiddle + qsTr("Confirmations") + ": " + (confirmations > confirmationsRequired ? confirmations : confirmations + "/" + confirmationsRequired) + trEnd
+            + (amount ? trStart + qsTr("Amount") + ":" + trMiddle + amount + trEnd : trStart + qsTr("Amount") + ":" + trMiddle + qsTr("Unknown (restored wallet)") + trEnd)
+            + trStart + qsTr("Fee") + ":" + trMiddle + (isout ? Utils.removeTrailingZeros(fee) + " XMR" : qsTr("Unknown")) + trEnd
+            + trStart + qsTr("From") + ":" + trMiddle + (isout ? walletTitle() + " (" + walletName + ")" : (amount ? qsTr("Unknown sender") : walletTitle() + " (" + walletName + ")")) + trEnd
+            + (isout ? trStart + qsTr("") + trMiddle + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + currentAccountLabel + ")" : "") + trEnd : "")
+            + (rings ? trStart + qsTr("Inputs") + " (" + ringsCount + ")" + ":" + trMiddle + rings + trEnd : "")
+            + (destinations ? "" : trStart + qsTr("To") + ":" + trMiddle + (isout ? (amount ? (blockheight ? qsTr("External address") : qsTr("Monero address")) : walletTitle() + " (" + walletName + ")") : walletTitle() + " (" + walletName + ")") + trEnd)
+            + (isout && amount && blockheight ? trStart + qsTr("To") + ":" + trMiddle + (addressBookName ? FontAwesome.addressBook + " " + addressBookName : qsTr("Monero address")) + trEnd : "")
+            + (isout ? "" : trStart + qsTr("") + trMiddle + qsTr("Account #") + currentSubaddressAccount + (currentAccountLabel !== "" ? " (" + currentAccountLabel + ")" : "") + trEnd)
+            + (isout ? "" : trStart + qsTr("") + trMiddle + qsTr("Address #") + subaddrIndex + (receivingAddressLabel !== "" && subaddrIndex !== "0" ? " (" + receivingAddressLabel + ")" : "") + trEnd)
+            + trStart + qsTr("Destination address") + ":" + trMiddle + (destinations ? destinationsAddress : (isout ? (amount ?  qsTr("Unknown (waiting for confirmation)") : qsTr("Unknown (restored wallet)")) : address)) + trEnd
+            + (paymentId ? trStart + qsTr("Payment ID") + ":" + trMiddle + paymentId + trEnd : "")
             + (integratedAddress ? trStart + qsTr("Integrated address") + ":" + trMiddle + integratedAddress + trEnd : "")
-            + (tx_key ? trStart + qsTr("Tx key:") + trMiddle + tx_key + trEnd : "")
-            + (tx_note ? trStart + qsTr("Tx note:") + trMiddle + tx_note + trEnd : "")
-            + (destinations ? trStart + qsTr("Destinations:") + trMiddle + destinations + trEnd : "")
-            + (rings ? trStart + qsTr("Rings:") + trMiddle + rings + trEnd : "")
+            + (tx_note ? trStart + qsTr("Note (description)") + ":" + trMiddle + tx_note + trEnd : "")
             + "</table>"
             + translationManager.emptyString;
     }
