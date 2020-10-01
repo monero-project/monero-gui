@@ -1438,11 +1438,11 @@ ApplicationWindow {
                 if (viewOnly) {
                     saveTxDialog.open();
                 } else {
-                    txConfirmationPopup.open();
+                    open();
                     handleTransactionConfirmed()
                 }
             }
-            txConfirmationPopup.close();
+            close();
             passwordDialog.onAcceptedCallback = function() {
                 if(walletPassword === passwordDialog.password){
                     handleAccepted()
