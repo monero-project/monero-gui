@@ -103,7 +103,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
-                    Layout.rightMargin: 80
+                    Layout.rightMargin: 60
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
@@ -138,7 +138,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
-                    Layout.rightMargin: 80
+                    Layout.rightMargin: 60
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
@@ -194,7 +194,15 @@ Rectangle {
                         height: subaddressAccountListRow.subaddressAccountListItemHeight
                         width: parent ? parent.width : undefined
                         Layout.fillWidth: true
-                        color: "transparent"
+                        color: index == currentAccountIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+
+                        Rectangle {
+                            visible: itemMouseArea.containsMouse
+                            height: subaddressAccountListRow.subaddressAccountListItemHeight
+                            width: parent ? parent.width : undefined
+                            Layout.fillWidth: true
+                            color: MoneroComponents.Style.titleBarButtonHoverColor
+                        }
 
                         Rectangle {
                             color: MoneroComponents.Style.appWindowBorderColor
@@ -219,7 +227,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: idLabel
-                                color: index === currentAccountIndex ? MoneroComponents.Style.defaultFontColor : "#757575"
+                                color: index == currentAccountIndex ? MoneroComponents.Style.defaultFontColor : "#757575"
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.leftMargin: 6
@@ -230,11 +238,11 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: MoneroComponents.Style.dimmedFontColor
+                                color: index == currentAccountIndex ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
-                                fontSize: 16 
+                                fontSize: 16
                                 text: label
                                 elide: Text.ElideRight
                                 textWidth: balanceNumberLabel.x - nameLabel.x - 1
@@ -246,7 +254,7 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: -balanceNumberLabel.width + 7
+                                anchors.leftMargin: -balanceNumberLabel.width + 27
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: balance + " XMR"
@@ -256,11 +264,10 @@ Rectangle {
                             }
 
                             MouseArea {
+                                id: itemMouseArea
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
-                                onExited: tableItem2.color = "transparent"
                                 onClicked: {
                                     appWindow.currentWallet.switchSubaddressAccount(index);
                                     if (selectAndSend)
@@ -286,26 +293,13 @@ Rectangle {
 
                                 onClicked: pageAccount.renameSubaddressAccountLabel(index);
                             }
-
-                            MoneroComponents.IconButton {
-                                id: copyButton
-                                image: "qrc:///images/copy.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 21
-
-                                onClicked: {
-                                    console.log("Address copied to clipboard");
-                                    clipboard.setText(address);
-                                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
-                                }
-                            }
                         }
                     }
 
                     onCurrentIndexChanged: {
                         appWindow.onWalletUpdate();
+                        console.log("new currentIndex:" + subaddressAccountListView.currentIndex);
+                        console.log("new currentAccountIndex:" + currentAccountIndex);
                     }
                 }
             }
@@ -322,8 +316,8 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.CheckBox { 
-                id: addNewAccountCheckbox 
+            MoneroComponents.CheckBox {
+                id: addNewAccountCheckbox
                 visible: !selectAndSend
                 border: false
                 uncheckedIcon: FontAwesome.plusCircle
@@ -333,8 +327,8 @@ Rectangle {
                 iconOnTheLeft: true
                 Layout.fillWidth: true
                 Layout.topMargin: 10
-                text: qsTr("Create new account") + translationManager.emptyString; 
-                onClicked: { 
+                text: qsTr("Create new account") + translationManager.emptyString;
+                onClicked: {
                     inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
