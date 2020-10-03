@@ -103,6 +103,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: balanceAll
+                    Layout.rightMargin: 60
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
@@ -136,6 +137,7 @@ Rectangle {
 
                 MoneroComponents.TextPlain {
                     id: unlockedBalanceAll
+                    Layout.rightMargin: 60
                     font.family: MoneroComponents.Style.fontMonoRegular.name;
                     font.pixelSize: 16
                     color: MoneroComponents.Style.defaultFontColor
@@ -233,31 +235,7 @@ Rectangle {
                                 fontSize: 16 
                                 text: label
                                 elide: Text.ElideRight
-                                textWidth: addressLabel.x - nameLabel.x - 1
-                                themeTransition: false
-                            }
-
-                            MoneroComponents.Label {
-                                id: addressLabel
-                                color: MoneroComponents.Style.defaultFontColor
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: mainLayout.width >= 590 ? balanceTextLabel.left : balanceNumberLabel.left
-                                anchors.leftMargin: -addressLabel.width - 30
-                                fontSize: 16
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name;
-                                text: TxUtils.addressTruncatePretty(address, mainLayout.width < 740 ? 1 : (mainLayout.width < 900 ? 2 : 3))
-                                themeTransition: false
-                            }
-
-                            MoneroComponents.Label {
-                                id: balanceTextLabel
-                                visible: mainLayout.width >= 590
-                                color: MoneroComponents.Style.defaultFontColor
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: balanceNumberLabel.left
-                                anchors.leftMargin: -balanceTextLabel.width - 5
-                                fontSize: 16
-                                text: qsTr("Balance: ") + translationManager.emptyString
+                                textWidth: balanceNumberLabel.x - nameLabel.x - 1
                                 themeTransition: false
                             }
 
@@ -266,12 +244,12 @@ Rectangle {
                                 color: MoneroComponents.Style.defaultFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.right
-                                anchors.leftMargin: -balanceNumberLabel.width
+                                anchors.leftMargin: -balanceNumberLabel.width + 27
                                 fontSize: 16
                                 fontFamily: MoneroComponents.Style.fontMonoRegular.name;
                                 text: balance
                                 elide: Text.ElideRight
-                                textWidth: mainLayout.width < 660 ? 70 : 135
+                                textWidth: 180
                                 themeTransition: false
                             }
 
@@ -305,21 +283,6 @@ Rectangle {
                                 Layout.preferredHeight: 21
 
                                 onClicked: pageAccount.renameSubaddressAccountLabel(index);
-                            }
-
-                            MoneroComponents.IconButton {
-                                id: copyButton
-                                image: "qrc:///images/copy.svg"
-                                color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
-                                Layout.preferredWidth: 16
-                                Layout.preferredHeight: 21
-
-                                onClicked: {
-                                    console.log("Address copied to clipboard");
-                                    clipboard.setText(address);
-                                    appWindow.showStatusMessage(qsTr("Address copied to clipboard"),3);
-                                }
                             }
                         }
                     }
