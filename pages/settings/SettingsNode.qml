@@ -268,9 +268,7 @@ Rectangle{
                 daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
                 daemonPortLabelText: qsTr("Port") + translationManager.emptyString
 
-                property var rna: persistentSettings.remoteNodeAddress
-                daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-                daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : rna.split(":")[1] : ""
+                initialAddress: persistentSettings.remoteNodeAddress
                 onEditingFinished: {
                     persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
                     console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
@@ -419,15 +417,7 @@ Rectangle{
 
                         daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
                         daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
-                        daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                        daemonPortText: {
-                            var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                            if(node_split.length == 2){
-                                (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                            } else {
-                                return ""
-                            }
-                        }
+                        initialAddress: persistentSettings.bootstrapNodeAddress
                         onEditingFinished: {
                             if (daemonAddrText == "auto") {
                                 persistentSettings.bootstrapNodeAddress = daemonAddrText;

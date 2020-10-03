@@ -47,7 +47,7 @@ ListView {
         id: trackingTableItem
         visible: trackingListView.message === ""
         height: 53
-        width: parent.width
+        width: parent ? parent.width : undefined
         Layout.fillWidth: true
 
         RowLayout {

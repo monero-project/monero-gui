@@ -569,8 +569,8 @@ Rectangle {
             delegate: Rectangle {
                 id: delegate
                 property bool collapsed: root.txDataCollapsed.indexOf(hash) >= 0 ? true : false
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.left: parent ? parent.left : undefined
+                anchors.right: parent ? parent.right : undefined
                 height: {
                     if(!collapsed) return 60;
                     if(isout && delegate.address !== "") return 320;
@@ -1394,7 +1394,7 @@ Rectangle {
                     txs.push(item);
                 } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
-                } else if(item.blockheight.toString().startsWith(root.sortSearchString)) {
+                } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
                 } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
                     txs.push(item);
@@ -1511,7 +1511,7 @@ Rectangle {
                 "i": i,
                 "isout": isout,
                 "amount": Number(amount),
-                "displayAmount": displayAmount + " XMR",
+                "displayAmount": Utils.removeTrailingZeros(displayAmount.toFixed(12)) + " XMR",
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,

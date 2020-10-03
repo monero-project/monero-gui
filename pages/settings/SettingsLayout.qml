@@ -88,10 +88,24 @@ Rectangle {
         }
         
         MoneroComponents.CheckBox {
-            id: askPasswordBeforeSendingCheckbox
             checked: persistentSettings.askPasswordBeforeSending
-            onClicked: persistentSettings.askPasswordBeforeSending = !persistentSettings.askPasswordBeforeSending
             text: qsTr("Ask for password before sending a transaction") + translationManager.emptyString
+            toggleOnClick: false
+            onClicked: {
+                if (persistentSettings.askPasswordBeforeSending) {
+                    passwordDialog.onAcceptedCallback = function() {
+                        if (appWindow.walletPassword === passwordDialog.password){
+                            persistentSettings.askPasswordBeforeSending = false;
+                        } else {
+                            passwordDialog.showError(qsTr("Wrong password"));
+                        }
+                    }
+                    passwordDialog.onRejectedCallback = null;
+                    passwordDialog.open()
+                } else {
+                    persistentSettings.askPasswordBeforeSending = true;
+                }
+            }
         }
 
         MoneroComponents.CheckBox {
@@ -234,6 +248,37 @@ Rectangle {
                     appWindow.fiatApiRefresh();
                     appWindow.fiatTimerStart();
                 }
+            }
+        }
+
+        MoneroComponents.CheckBox {
+            id: proxyCheckbox
+            Layout.topMargin: 6
+            enabled: !socksProxyFlagSet
+            checked: socksProxyFlagSet ? socksProxyFlag : persistentSettings.proxyEnabled
+            onClicked: {
+                persistentSettings.proxyEnabled = !persistentSettings.proxyEnabled;
+            }
+            text: qsTr("Socks5 proxy (%1%2)")
+                .arg(appWindow.walletMode >= 2 ? qsTr("remote node connections, ") : "")
+                .arg(qsTr("updates downloading, fetching price sources")) + translationManager.emptyString
+        }
+
+        MoneroComponents.RemoteNodeEdit {
+            id: proxyEdit
+            enabled: proxyCheckbox.enabled
+            Layout.leftMargin: 36
+            Layout.topMargin: 6
+            Layout.minimumWidth: 100
+            placeholderFontSize: 15
+            visible: proxyCheckbox.checked
+
+            daemonAddrLabelText: qsTr("IP address") + translationManager.emptyString
+            daemonPortLabelText: qsTr("Port") + translationManager.emptyString
+
+            initialAddress: socksProxyFlagSet ? socksProxyFlag : persistentSettings.proxyAddress
+            onEditingFinished: {
+                persistentSettings.proxyAddress = proxyEdit.getAddress();
             }
         }
 

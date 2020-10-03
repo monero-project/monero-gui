@@ -69,6 +69,18 @@ public:
     return nullptr;
   }
 
+  template <typename Callback>
+  void for_each(packet_tag::type type, Callback &callback) const
+  {
+    for (const auto &packet : packets)
+    {
+      if (packet.first.packet_type == type)
+      {
+        callback(packet.second);
+      }
+    }
+  }
+
 private:
   std::vector<std::pair<packet_tag, std::vector<uint8_t>>> packets;
 };

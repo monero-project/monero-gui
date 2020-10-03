@@ -114,8 +114,8 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
 
     arguments << "--check-updates" << "disabled";
 
-    // --max-concurrency based on threads available. max: 6
-    int32_t concurrency = qBound(1, QThread::idealThreadCount() / 2, 6);
+    // --max-concurrency based on threads available.
+    int32_t concurrency = qMax(1, QThread::idealThreadCount() / 2);
 
     if(!flags.contains("--max-concurrency", Qt::CaseSensitive)){
         arguments << "--max-concurrency" << QString::number(concurrency);

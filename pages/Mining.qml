@@ -251,7 +251,19 @@ Rectangle {
 
     function updateStatusText() {
         if (appWindow.isMining) {
-            statusText.text = qsTr("Mining at %1 H/s").arg(walletManager.miningHashRate()) + translationManager.emptyString;
+            var userHashRate = walletManager.miningHashRate();
+            if (userHashRate === 0) {
+                statusText.text = qsTr("Mining temporarily suspended.") + translationManager.emptyString;
+            }
+            else {
+                var blockTime = 120;
+                var blocksPerDay = 86400 / blockTime;
+                var globalHashRate = walletManager.networkDifficulty() / blockTime;
+                var probabilityFindNextBlock = userHashRate / globalHashRate;
+                var probabilityFindBlockDay = 1 - Math.pow(1 - probabilityFindNextBlock, blocksPerDay);
+                var chanceFindBlockDay = Math.round(1 / probabilityFindBlockDay);
+                statusText.text = qsTr("Mining at %1 H/s. It gives you a 1 in %2 daily chance of finding a block.").arg(userHashRate).arg(chanceFindBlockDay) + translationManager.emptyString;
+            }
         }
         else {
             statusText.text = qsTr("Not mining") + translationManager.emptyString;

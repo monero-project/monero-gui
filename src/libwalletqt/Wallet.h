@@ -87,6 +87,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
     Q_PROPERTY(QString publicSpendKey READ getPublicSpendKey)
     Q_PROPERTY(QString daemonLogPath READ getDaemonLogPath CONSTANT)
+    Q_PROPERTY(QString proxyAddress READ getProxyAddress WRITE setProxyAddress NOTIFY proxyAddressChanged)
     Q_PROPERTY(quint64 walletCreationHeight READ getWalletCreationHeight WRITE setWalletCreationHeight NOTIFY walletCreationHeightChanged)
 
 public:
@@ -149,7 +150,14 @@ public:
     Q_INVOKABLE void storeAsync(const QJSValue &callback, const QString &path = "");
 
     //! initializes wallet asynchronously
-    Q_INVOKABLE void initAsync(const QString &daemonAddress, bool trustedDaemon = false, quint64 upperTransactionLimit = 0, bool isRecovering = false, bool isRecoveringFromDevice = false, quint64 restoreHeight = 0);
+    Q_INVOKABLE void initAsync(
+        const QString &daemonAddress,
+        bool trustedDaemon = false,
+        quint64 upperTransactionLimit = 0,
+        bool isRecovering = false,
+        bool isRecoveringFromDevice = false,
+        quint64 restoreHeight = 0,
+        const QString &proxyAddress = "");
 
     // Set daemon rpc user/pass
     Q_INVOKABLE void setDaemonLogin(const QString &daemonUsername = "", const QString &daemonPassword = "");
@@ -385,6 +393,7 @@ signals:
     void connectionStatusChanged(int status) const;
     void currentSubaddressAccountChanged() const;
     void disconnectedChanged() const;
+    void proxyAddressChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -402,10 +411,19 @@ private:
     quint64 daemonBlockChainTargetHeight() const;
 
     //! initializes wallet
-    bool init(const QString &daemonAddress, bool trustedDaemon, quint64 upperTransactionLimit, bool isRecovering, bool isRecoveringFromDevice, quint64 restoreHeight);
+    bool init(
+        const QString &daemonAddress,
+        bool trustedDaemon,
+        quint64 upperTransactionLimit,
+        bool isRecovering,
+        bool isRecoveringFromDevice,
+        quint64 restoreHeight,
+        const QString& proxyAddress);
 
     bool disconnected() const;
     void setConnectionStatus(ConnectionStatus value);
+    QString getProxyAddress() const;
+    void setProxyAddress(QString address);
 
 private:
     friend class WalletManager;
@@ -440,6 +458,8 @@ private:
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
+    QString m_proxyAddress;
+    mutable QMutex m_proxyMutex;
     WalletListenerImpl *m_walletListener;
     FutureScheduler m_scheduler;
     QMutex m_storeMutex;

@@ -93,15 +93,9 @@ std::string get_armored_block_contents(const std::string &text, const std::strin
 
 } // namespace
 
-public_key_rsa::public_key_rsa(const std::string &armored)
-  : public_key_rsa(decode(armored))
-{
-}
-
-public_key_rsa::public_key_rsa(std::tuple<std::string, s_expression, size_t> params)
-  : m_expression(std::move(std::get<1>(params)))
-  , m_bits(std::get<2>(params))
-  , m_user_id(std::move(std::get<0>(params)))
+public_key_rsa::public_key_rsa(s_expression expression, size_t bits)
+  : m_expression(std::move(expression))
+  , m_bits(bits)
 {
 }
 
@@ -115,19 +109,14 @@ size_t public_key_rsa::bits() const
   return m_bits;
 }
 
-std::string public_key_rsa::user_id() const
+public_key_block::public_key_block(const std::string &armored)
+  : public_key_block(epee::to_byte_span(epee::to_span(epee::string_encoding::base64_decode(
+      strip_line_breaks(get_armored_block_contents(armored, "BEGIN PGP PUBLIC KEY BLOCK"))))))
 {
-  return m_user_id;
 }
 
-std::tuple<std::string, s_expression, size_t> public_key_rsa::decode(const std::string &armored)
-{
-  const std::string buffer = epee::string_encoding::base64_decode(
-    strip_line_breaks(get_armored_block_contents(armored, "BEGIN PGP PUBLIC KEY BLOCK")));
-  return decode(epee::to_byte_span(epee::to_span(buffer)));
-}
-
-std::tuple<std::string, s_expression, size_t> public_key_rsa::decode(const epee::span<const uint8_t> buffer)
+// TODO: Public-Key expiration, User ID and Public-Key certification, Subkey binding checks
+public_key_block::public_key_block(const epee::span<const uint8_t> buffer)
 {
   packet_stream packets(buffer);
 
@@ -136,38 +125,51 @@ std::tuple<std::string, s_expression, size_t> public_key_rsa::decode(const epee:
   {
     throw std::runtime_error("user id is missing");
   }
-  std::string user_id(data->begin(), data->end());
+  m_user_id.assign(data->begin(), data->end());
+
+  const auto append_public_key = [this](const std::vector<uint8_t> &data) {
+    deserializer<std::vector<uint8_t>> serialized(data);
+
+    const auto version = serialized.read_big_endian<uint8_t>();
+    if (version != 4)
+    {
+      throw std::runtime_error("unsupported public key version");
+    }
+
+    /* const auto timestamp  = */ serialized.read_big_endian<uint32_t>();
+
+    const auto algorithm = serialized.read_big_endian<uint8_t>();
+    if (algorithm != openpgp::algorithm::rsa)
+    {
+      throw std::runtime_error("unsupported public key algorithm");
+    }
+
+    {
+      const mpi public_key_n = serialized.read_mpi();
+      const mpi public_key_e = serialized.read_mpi();
+
+      emplace_back(
+        s_expression("(public-key (rsa (n %m) (e %m)))", public_key_n.get(), public_key_e.get()),
+        gcry_mpi_get_nbits(public_key_n.get()));
+    }
+  };
 
   data = packets.find_first(packet_tag::type::public_key);
   if (data == nullptr)
   {
     throw std::runtime_error("public key is missing");
   }
+  append_public_key(*data);
 
-  deserializer<std::vector<uint8_t>> serialized(*data);
-
-  const auto version = serialized.read_big_endian<uint8_t>();
-  if (version != 4)
-  {
-    throw std::runtime_error("unsupported public key version");
-  }
-
-  /* const auto timestamp  = */ serialized.read_big_endian<uint32_t>();
-
-  const auto algorithm = serialized.read_big_endian<uint8_t>();
-  if (algorithm != algorithm::rsa)
-  {
-    throw std::runtime_error("unsupported public key algorithm");
-  }
-
-  const mpi public_key_n = serialized.read_mpi();
-  const mpi public_key_e = serialized.read_mpi();
-
-  s_expression expression("(public-key (rsa (n %m) (e %m)))", public_key_n.get(), public_key_e.get());
-
-  return {std::move(user_id), std::move(expression), gcry_mpi_get_nbits(public_key_n.get())};
+  packets.for_each(packet_tag::type::public_subkey, append_public_key);
 }
 
+std::string public_key_block::user_id() const
+{
+  return m_user_id;
+}
+
+// TODO: Signature expiration check
 signature_rsa::signature_rsa(
   uint8_t algorithm,
   std::pair<uint8_t, uint8_t> hash_leftmost_bytes,
@@ -217,7 +219,7 @@ signature_rsa signature_rsa::from_buffer(const epee::span<const uint8_t> input)
   const auto signature_type = static_cast<type>(buffer.read_big_endian<uint8_t>());
 
   const auto algorithm = buffer.read_big_endian<uint8_t>();
-  if (algorithm != algorithm::rsa)
+  if (algorithm != openpgp::algorithm::rsa)
   {
     throw std::runtime_error("unsupported signature algorithm");
   }

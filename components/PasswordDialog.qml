@@ -41,10 +41,11 @@ import "../js/Utils.js" as Utils
 Item {
     id: root
     visible: false
-    z: parent.z + 2
 
     property alias password: passwordInput1.text
     property string walletName
+    property var okButtonText
+    property string okButtonIcon
     property string errorText
     property bool passwordDialogMode
     property bool passphraseDialogMode
@@ -63,7 +64,8 @@ Item {
         capsLockTextLabel.visible = oshelper.isCapsLock();
         passwordInput1.reset();
         passwordInput2.reset();
-        passwordInput1.input.forceActiveFocus();
+        if(!appWindow.currentWallet || appWindow.active)
+            passwordInput1.input.forceActiveFocus();
         root.walletName = walletName ? walletName : ""
         errorTextLabel.text = errorText ? errorText : "";
         leftPanel.enabled = false
@@ -75,10 +77,12 @@ Item {
         appWindow.updateBalance();
     }
 
-    function open(walletName, errorText) {
+    function open(walletName, errorText, okButtonText, okButtonIcon) {
         passwordDialogMode = true;
         passphraseDialogMode = false;
         newPasswordDialogMode = false;
+        root.okButtonText = okButtonText;
+        root.okButtonIcon = okButtonIcon ? okButtonIcon : "";
         _openInit(walletName, errorText);
     }
 
@@ -274,6 +278,7 @@ Item {
 
                 MoneroComponents.StandardButton {
                     id: cancelButton
+                    primary: false
                     small: true
                     text: qsTr("Cancel") + translationManager.emptyString
                     KeyNavigation.tab: passwordInput1
@@ -282,8 +287,10 @@ Item {
 
                 MoneroComponents.StandardButton {
                     id: okButton
+                    fontAwesomeIcon: true
+                    rightIcon: okButtonIcon
                     small: true
-                    text: qsTr("Ok") + translationManager.emptyString
+                    text: okButtonText ? okButtonText : qsTr("Ok") + translationManager.emptyString
                     KeyNavigation.tab: cancelButton
                     enabled: (passwordDialogMode == true) ? true : passwordInput1.text === passwordInput2.text
                     onClicked: onOk()

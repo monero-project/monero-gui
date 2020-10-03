@@ -199,5 +199,6 @@ Popup {
 
     Downloader {
         id: downloader
+        proxyAddress: persistentSettings.getProxyAddress()
     }
 }
