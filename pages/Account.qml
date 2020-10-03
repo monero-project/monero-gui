@@ -314,8 +314,8 @@ Rectangle {
                 }
             }
 
-            MoneroComponents.CheckBox {
-                id: addNewAccountCheckbox
+            MoneroComponents.CheckBox { 
+                id: addNewAccountCheckbox 
                 visible: !selectAndSend
                 border: false
                 uncheckedIcon: FontAwesome.plusCircle
@@ -325,8 +325,8 @@ Rectangle {
                 iconOnTheLeft: true
                 Layout.fillWidth: true
                 Layout.topMargin: 10
-                text: qsTr("Create new account") + translationManager.emptyString;
-                onClicked: {
+                text: qsTr("Create new account") + translationManager.emptyString; 
+                onClicked: { 
                     inputDialog.labelText = qsTr("Set the label of the new account:") + translationManager.emptyString
                     inputDialog.onAcceptedCallback = function() {
                         appWindow.currentWallet.subaddressAccount.addRow(inputDialog.inputText)
