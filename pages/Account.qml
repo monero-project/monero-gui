@@ -242,7 +242,7 @@ Rectangle {
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
-                                fontSize: 16
+                                fontSize: 16 
                                 text: label
                                 elide: Text.ElideRight
                                 textWidth: balanceNumberLabel.x - nameLabel.x - 1
