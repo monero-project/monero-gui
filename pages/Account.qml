@@ -298,8 +298,6 @@ Rectangle {
 
                     onCurrentIndexChanged: {
                         appWindow.onWalletUpdate();
-                        console.log("new currentIndex:" + subaddressAccountListView.currentIndex);
-                        console.log("new currentAccountIndex:" + currentAccountIndex);
                     }
                 }
             }
