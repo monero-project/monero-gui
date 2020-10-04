@@ -36,6 +36,8 @@
 #ifndef MONEROSETTINGS_H
 #define MONEROSETTINGS_H
 
+#include <memory>
+
 #include <QtQml/qqmlparserstatus.h>
 #include <QGuiApplication>
 #include <QClipboard>
@@ -50,14 +52,22 @@ class MoneroSettings : public QObject, public QQmlParserStatus
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
     Q_PROPERTY(QString fileName READ fileName WRITE setFileName FINAL)
+    Q_PROPERTY(bool portable READ portable NOTIFY portableChanged)
+    Q_PROPERTY(QString portableFolderName READ portableFolderName CONSTANT)
+
 public:
     explicit MoneroSettings(QObject *parent = nullptr);
 
     QString fileName() const;
     void setFileName(const QString &fileName);
+    Q_INVOKABLE bool setPortable(bool enabled);
+    Q_INVOKABLE void setWritable(bool enabled);
 
 public slots:
     void _q_propertyChanged();
+
+signals:
+    void portableChanged() const;
 
 protected:
     void timerEvent(QTimerEvent *event) override;
@@ -71,10 +81,19 @@ private:
     void load();
     void store();
 
+    bool portable() const;
+    bool portableConfigExists() const;
+    QString portableFilePath() const;
+    QString portableFolderName() const;
+    std::unique_ptr<QSettings> portableSettings() const;
+    std::unique_ptr<QSettings> unportableSettings() const;
+    void swap(std::unique_ptr<QSettings> newSettings);
+
     QHash<const char *, QVariant> m_changedProperties;
-    QSettings *m_settings = NULL;
+    std::unique_ptr<QSettings> m_settings;
     QString m_fileName = QString("");
     bool m_initialized = false;
+    bool m_writable = true;
     int m_timerId = 0;
 };
 
