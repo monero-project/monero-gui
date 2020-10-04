@@ -299,7 +299,7 @@ Rectangle {
 
     function onPageCompleted(previousView){
         if(previousView.viewName == "wizardHome"){
-            walletKeysFilesModel.refresh(moneroAccountsDir);
+            walletKeysFilesModel.refresh(appWindow.accountsDir);
             wizardOpenWallet1.walletCount = walletKeysFilesModel.rowCount();
             flow._height = flow.calcHeight();
         }

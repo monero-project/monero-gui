@@ -1709,7 +1709,7 @@ Rectangle {
             informationPopup.open();
         }
         Component.onCompleted: {
-            var _folder = 'file://' + moneroAccountsDir;
+            var _folder = 'file://' + appWindow.accountsDir;
             try {
                 _folder = 'file://' + desktopFolder;
             }

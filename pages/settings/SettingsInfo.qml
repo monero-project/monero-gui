@@ -135,7 +135,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                property string walletPath: (isIOS ?  moneroAccountsDir : "") + persistentSettings.wallet_path
+                property string walletPath: (isIOS ?  appWindow.accountsDir : "") + persistentSettings.wallet_path
                 text: "\
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
