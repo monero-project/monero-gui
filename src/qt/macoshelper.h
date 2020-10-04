@@ -36,6 +36,7 @@ class MacOSHelper
 public:
     static bool isCapsLock();
     static bool openFolderAndSelectItem(const QUrl &path);
+    static QString bundlePath();
 };
 
 #endif //MACOSHELPER_H
