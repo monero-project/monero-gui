@@ -1505,13 +1505,12 @@ Rectangle {
             var timestamp = new Date(date + " " + time).getTime() / 1000;
             var dateHuman = Utils.ago(timestamp);
 
-            var displayAmount = amount;
-            if(displayAmount === 0){
-                // *sometimes* amount is 0, while the 'destinations string'
+            if (amount === 0) {
+                // transactions to the same account have amount === 0, while the 'destinations string'
                 // has the correct amount, so we try to fetch it from that instead.
-                displayAmount = TxUtils.destinationsToAmount(destinations);
-                displayAmount = Number(displayAmount *1);
+                amount = Number(TxUtils.destinationsToAmount(destinations));
             }
+            var displayAmount = Utils.removeTrailingZeros(amount.toFixed(12)) + " XMR";
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
@@ -1527,8 +1526,8 @@ Rectangle {
             root.txModelData.push({
                 "i": i,
                 "isout": isout,
-                "amount": Number(amount),
-                "displayAmount": Utils.removeTrailingZeros(displayAmount.toFixed(12)) + " XMR",
+                "amount": amount,
+                "displayAmount": displayAmount,
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
