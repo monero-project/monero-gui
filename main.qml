@@ -1014,6 +1014,7 @@ ApplicationWindow {
 
             // Clear tx fields
             middlePanel.transferView.clearFields()
+            successfulTxPopup.open(txid)
 
         }
         informationPopup.onCloseCallback = null
@@ -1500,6 +1501,12 @@ ApplicationWindow {
         }
     }
 
+    // Transaction successfully sent popup
+    SuccessfulTxDialog {
+        id: successfulTxPopup
+        z: parent.z + 1
+    }
+
     StandardDialog {
         z: parent.z + 1
         id: confirmationDialog
@@ -1769,7 +1776,7 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || successfulTxPopup.visible
         }
 
 
