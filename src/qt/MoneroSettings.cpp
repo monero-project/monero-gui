@@ -134,12 +134,13 @@ QVariant MoneroSettings::readProperty(const QMetaProperty &property) const
 void MoneroSettings::init()
 {
     if (!this->m_initialized) {
-        this->m_settings = this->m_fileName.isEmpty() ? new QSettings() : new QSettings(this->m_fileName, QSettings::IniFormat);
+        this->m_settings = portableConfigExists() ? portableSettings() : unportableSettings();
 #ifdef QT_DEBUG
         qDebug() << "QQmlSettings: stored at" << this->m_settings->fileName();
 #endif
         this->load();
         this->m_initialized = true;
+        emit portableChanged();
     }
 }
 
@@ -148,11 +149,16 @@ void MoneroSettings::reset()
     if (this->m_initialized && this->m_settings && !this->m_changedProperties.isEmpty())
         this->store();
     if (this->m_settings)
-        delete this->m_settings;
+        this->m_settings.reset();
 }
 
 void MoneroSettings::store()
 {
+    if (!m_writable)
+    {
+        return;
+    }
+
     QHash<const char *, QVariant>::const_iterator it = this->m_changedProperties.constBegin();
 
     while (it != this->m_changedProperties.constEnd()) {
@@ -168,6 +174,58 @@ void MoneroSettings::store()
     this->m_changedProperties.clear();
 }
 
+bool MoneroSettings::portable() const
+{
+    return this->m_settings && this->m_settings->fileName() == portableFilePath();
+}
+
+bool MoneroSettings::portableConfigExists() const
+{
+    QFileInfo info(portableFilePath());
+    return info.exists() && info.isFile();
+}
+
+QString MoneroSettings::portableFilePath() const
+{
+    static QString filename(QDir(portableFolderName()).absoluteFilePath("settings.ini"));
+    return filename;
+}
+
+QString MoneroSettings::portableFolderName() const
+{
+    return "monero-storage";
+}
+
+std::unique_ptr<QSettings> MoneroSettings::portableSettings() const
+{
+    return std::unique_ptr<QSettings>(new QSettings(portableFilePath(), QSettings::IniFormat));
+}
+
+std::unique_ptr<QSettings> MoneroSettings::unportableSettings() const
+{
+    if (this->m_fileName.isEmpty())
+    {
+        return std::unique_ptr<QSettings>(new QSettings());
+    }
+    return std::unique_ptr<QSettings>(new QSettings(this->m_fileName, QSettings::IniFormat));
+}
+
+void MoneroSettings::swap(std::unique_ptr<QSettings> newSettings)
+{
+    const QMetaObject *mo = this->metaObject();
+    const int count = mo->propertyCount();
+    for (int offset = mo->propertyOffset(); offset < count; ++offset)
+    {
+        const QMetaProperty &property = mo->property(offset);
+        const QVariant value = readProperty(property);
+        newSettings->setValue(property.name(), value);
+    }
+
+    this->m_settings.swap(newSettings);
+    this->m_settings->sync();
+    emit portableChanged();
+}
+
 void MoneroSettings::setFileName(const QString &fileName)
 {
     if (fileName != this->m_fileName) {
@@ -181,6 +239,30 @@ void MoneroSettings::setFileName(const QString &fileName)
 QString MoneroSettings::fileName() const
 {
     return this->m_fileName;
+}
+
+bool MoneroSettings::setPortable(bool enabled)
+{
+    std::unique_ptr<QSettings> newSettings = enabled ? portableSettings() : unportableSettings();
+    if (newSettings->status() != QSettings::NoError)
+    {
+        return false;
+    }
+
+    setWritable(true);
+    swap(std::move(newSettings));
+
+    if (!enabled)
+    {
+        QFile::remove(portableFilePath());
+    }
+
+    return true;
+}
+
+void MoneroSettings::setWritable(bool enabled)
+{
+    m_writable = enabled;
 }
 
 void MoneroSettings::timerEvent(QTimerEvent *event)

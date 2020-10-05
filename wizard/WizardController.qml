@@ -307,7 +307,7 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + moneroAccountsDir
+        folder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 
@@ -381,7 +381,7 @@ Rectangle {
         };
 
         if (isIOS) {
-            new_wallet_filename = moneroAccountsDir + new_wallet_filename;
+            new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
         }
         console.log("saving new wallet to", new_wallet_filename);
         wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
@@ -539,7 +539,7 @@ Rectangle {
             persistentSettings.wallet_path = fn;
 
         if(isIOS)
-            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir, "");
+            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(appWindow.accountsDir, "");
 
         appWindow.openWallet();
     }

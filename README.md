@@ -173,14 +173,18 @@ The following instructions will fetch Qt from your distribution's repositories i
 
 3. Clone repository
 
-    `git clone https://github.com/monero-project/monero-gui.git`
+    ```
+    git clone --recursive https://github.com/monero-project/monero-gui.git
+    cd monero-gui
+    ```
 
 4. Build
 
     ```
-    cd monero-gui
-    QT_SELECT=5 ./build.sh
+    make release -j4
     ```
+    \* `4` - number of CPU threads to use  
+    \* Add `CMAKE_PREFIX_PATH` enviroment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/gcc_64 make release -j4`
 
 The executable can be found in the build/release/bin folder.
 
@@ -198,22 +202,20 @@ The executable can be found in the build/release/bin folder.
 
   `brew install qt5`  (or download QT 5.9.7+ from [qt.io](https://www.qt.io/download-open-source/))
 
-5. Add the Qt bin directory to your path
+5. Grab an up-to-date copy of the monero-gui repository
 
-  - Example for Qt: `export PATH=$PATH:$HOME/Qt/5.9.7/clang_64/bin`
-  - Example for Homebrew: `export PATH=$PATH:/usr/local/opt/qt/bin`
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   cd monero-gui
+   ```
 
-6. Grab an up-to-date copy of the monero-gui repository
+6. Start the build
 
-  `git clone https://github.com/monero-project/monero-gui.git`
-
-7. Go into the repository
-
-  `cd monero-gui`
-
-8. Start the build
-
-  `./build.sh`
+    ```
+    make release -j4
+    ```
+    \* `4` - number of CPU threads to use  
+    \* Add `CMAKE_PREFIX_PATH` enviroment variable to set a custom Qt install directory, e.g. `CMAKE_PREFIX_PATH=$HOME/Qt/5.9.7/clang_64 make release -j4`
 
 The executable can be found in the `build/release/bin` folder.
 
@@ -258,18 +260,17 @@ The Monero GUI on Windows is 64 bits only; 32-bit Windows GUI builds are not off
 6. Clone repository
 
     ```
-    git clone https://github.com/monero-project/monero-gui.git
+    git clone --recursive https://github.com/monero-project/monero-gui.git
+    cd monero-gui
     ```
 
 7. Build
 
     ```
-    cd monero-gui
-    source ./build.sh release-static
-    cd build
+    make release-win64 -j4
+    cd build/release
     make deploy
     ```
+    \* `4` - number of CPU threads to use
 
-    **Note:** The use of `source` above is a dirty workaround for a suspected bug in the current QT version 5.11.2-3 available in the MSYS2 packaging system, see https://github.com/monero-project/monero-gui/issues/1559 for more info.
-
-The executable can be found in the `.\release\bin` directory.
+The executable can be found in the `.\bin` directory.

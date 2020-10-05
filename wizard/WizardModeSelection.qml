@@ -40,6 +40,18 @@ Rectangle {
 
     property alias pageHeight: pageRoot.height
     property string viewName: "wizardModeSelection1"
+    property bool portable: persistentSettings.portable
+
+    function applyWalletMode(mode, wizardState) {
+        if (!persistentSettings.setPortable(portable)) {
+            appWindow.showStatusMessage(qsTr("Failed to configure portable mode"), 3);
+            return;
+        }
+
+        appWindow.changeWalletMode(mode);
+        wizardController.wizardStackView.backTransition = false;
+        wizardController.wizardState = wizardState;
+    }
 
     ColumnLayout {
         id: pageRoot
@@ -78,9 +90,7 @@ Rectangle {
 
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        appWindow.changeWalletMode(0);
-                        wizardController.wizardStackView.backTransition = false;
-                        wizardController.wizardState = 'wizardModeRemoteNodeWarning';
+                        applyWalletMode(0, 'wizardModeRemoteNodeWarning');
                     }
                 }
             }
@@ -108,9 +118,7 @@ Rectangle {
 
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
-                        appWindow.changeWalletMode(1);
-                        wizardController.wizardStackView.backTransition = false;
-                        wizardController.wizardState = 'wizardModeBootstrap';
+                        applyWalletMode(1, 'wizardModeBootstrap');
                     }
                 }
             }
@@ -130,10 +138,24 @@ Rectangle {
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
-                    wizardController.wizardStackView.backTransition = false;
-                    appWindow.changeWalletMode(2);
-                    wizardController.wizardState = 'wizardHome';
+                    applyWalletMode(2, 'wizardHome');
                 }
+            }
+
+            WizardHeader {
+                Layout.topMargin: 20
+                title: qsTr("Optional features") + translationManager.emptyString
+                subtitle: qsTr("Select enhanced functionality you would like to enable.") + translationManager.emptyString
+            }
+
+            WizardMenuItem {
+                Layout.topMargin: 20
+                headerText: qsTr("Portable mode") + translationManager.emptyString
+                bodyText: qsTr("Create portable wallets and use them on any PC. Enable if you installed Monero on a USB stick, an external drive, or any other portable storage medium.") + translationManager.emptyString
+                checkbox: true
+                checked: wizardModeSelection1.portable
+
+                onMenuClicked: wizardModeSelection1.portable = !wizardModeSelection1.portable
             }
 
             WizardNav {
@@ -144,8 +166,12 @@ Rectangle {
                 autoTransition: false
 
                 onPrevClicked: {
-                    wizardController.wizardStackView.backTransition = !wizardController.wizardStackView.backTransition;
-                    wizardController.wizardState = wizardController.wizardStackView.backTransition ? 'wizardLanguage' : 'wizardHome';
+                    if (wizardController.wizardStackView.backTransition) {
+                        applyWalletMode(persistentSettings.walletMode, 'wizardHome');
+                    } else {
+                        wizardController.wizardStackView.backTransition = true;
+                        wizardController.wizardState = 'wizardLanguage';
+                    }
                 }
             }
         }
