@@ -955,20 +955,13 @@ ApplicationWindow {
 
             // Store to file
             transaction.setFilename(path);
-            txConfirmationPopup.bottomText.text  = qsTr("Saving transaction file...") + translationManager.emptyString;
-            txConfirmationPopup.bottomTextAnimation.running = false
-        } else {
-            txConfirmationPopup.bottomText.text  = qsTr("Sending transaction...") + translationManager.emptyString;
-            txConfirmationPopup.bottomTextAnimation.running = false
         }
-
         currentWallet.commitTransactionAsync(transaction);
     }
 
     function onTransactionCommitted(success, transaction, txid) {
         if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
-            txConfirmationPopup.errorText.text  = qsTr("Couldn't send the money: ") + transaction.errorString
         } else {
             if (txConfirmationPopup.transactionDescription.length > 0) {
                 currentWallet.setUserNote(txid, txConfirmationPopup.transactionDescription);
@@ -976,7 +969,6 @@ ApplicationWindow {
 
             // Clear tx fields
             middlePanel.transferView.clearFields()
-            txConfirmationPopup.close()
             txConfirmationPopup.clearFields()
         }
         currentWallet.refresh()
@@ -1438,7 +1430,6 @@ ApplicationWindow {
                 if (viewOnly) {
                     saveTxDialog.open();
                 } else {
-                    open();
                     handleTransactionConfirmed()
                 }
             }
