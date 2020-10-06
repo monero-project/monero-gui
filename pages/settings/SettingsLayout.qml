@@ -69,6 +69,7 @@ Rectangle {
         MoneroComponents.CheckBox {
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
+            toggleOnClick: false
             onClicked: {
                 persistentSettings.hideBalance = !persistentSettings.hideBalance
                 appWindow.updateBalance();

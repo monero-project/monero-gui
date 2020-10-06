@@ -268,7 +268,9 @@ Rectangle {
                         value: MoneroComponents.Style.orange
                     }
                     text: {
-                        if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                        if (persistentSettings.hideBalance) {
+                            return qsTr("HIDDEN") + translationManager.emptyString
+                        } else if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
                             return balanceFiatString.split('.')[0] + "."
                         } else {
                             return balanceString.split('.')[0] + "."
@@ -277,7 +279,9 @@ Rectangle {
                     font.pixelSize: {
                         var defaultSize = 29;
                         var digits = (balancePart1.text.length - 1)
-                        if (digits > 2 && !(persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle)) {
+                        if (persistentSettings.hideBalance) {
+                           return 26
+                        } else if (digits > 2 && !(persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle)) {
                             return defaultSize - 1.1 * digits
                         } else {
                             return defaultSize
@@ -303,9 +307,13 @@ Rectangle {
                     anchors.baseline: currencyLabel.baseline
                     color: balancePart1.color
                     text: {
-                        if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                        if (persistentSettings.hideBalance) {
+                            balancePart2.visible = false;
+                        } else if (persistentSettings.fiatPriceEnabled && persistentSettings.fiatPriceToggle) {
+                            balancePart2.visible = true;
                             return balanceFiatString.split('.')[1]
                         } else {
+                            balancePart2.visible = true;
                             return balanceString.split('.')[1]
                         }
                     }
@@ -316,6 +324,27 @@ Rectangle {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: balancePart1MouseArea.clicked(mouse)
+                    }
+                }
+
+                MoneroComponents.TextPlain {
+                    id: hideBalance
+                    themeTransition: false
+                    anchors.left: parent.left
+                    anchors.leftMargin: persistentSettings.hideBalance ? 230 : 231
+                    anchors.baseline: currencyLabel.baseline
+                    color: MoneroComponents.Style.blackTheme ? "white" : "black"
+                    text: persistentSettings.hideBalance ? FontAwesome.eyeSlash : FontAwesome.eye
+                    font.pixelSize: 16
+                    MouseArea {
+                        id: hideBalanceMouseArea
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            persistentSettings.hideBalance = !persistentSettings.hideBalance
+                            appWindow.updateBalance();
+                        }
                     }
                 }
 
