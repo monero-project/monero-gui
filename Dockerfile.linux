@@ -47,7 +47,7 @@ RUN git clone -b v1.2.11 --depth 1 https://github.com/madler/zlib && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b VER-2-10-2 --depth 1 https://git.sv.nongnu.org/r/freetype/freetype2.git && \
+RUN git clone -b VER-2-10-2 --depth 1 https://git.savannah.gnu.org/git/freetype/freetype2.git && \
     cd freetype2 && \
     git reset --hard 132f19b779828b194b3fede187cee719785db4d8 && \
     ./autogen.sh && \
