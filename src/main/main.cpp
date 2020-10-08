@@ -61,7 +61,6 @@
 #include "model/SubaddressModel.h"
 #include "SubaddressAccount.h"
 #include "model/SubaddressAccountModel.h"
-#include "wallet/api/wallet2_api.h"
 #include "Logger.h"
 #include "MainApp.h"
 #include "qt/downloader.h"
@@ -269,10 +268,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     Monero::Utils::onStartup();
 
-    // Log settings
-    const QString logPath = QDir::toNativeSeparators(getLogPath(parser.value(logPathOption)));
-    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
-    qInstallMessageHandler(messageHandler);
+    Logger logger(app, parser.value(logPathOption));
 
     // loglevel is configured in main.qml. Anything lower than
     // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
@@ -281,7 +277,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
         Monero::WalletManagerFactory::setLogLevel(logLevel);
     }
-    qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
+    qWarning().noquote() << "app startd" << "(log: " + logger.logFilePath() + ")";
 
     if (parser.isSet(verifyUpdateOption))
     {
@@ -446,13 +442,13 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
 
+    engine.rootContext()->setContextProperty("logger", &logger);
+
     engine.rootContext()->setContextProperty("mainApp", &app);
 
     engine.rootContext()->setContextProperty("IPC", ipc);
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
-
-    engine.rootContext()->setContextProperty("walletLogPath", logPath);
 
     engine.rootContext()->setContextProperty("tailsUsePersistence", TailsOS::usePersistence);
 

@@ -191,7 +191,7 @@ QString MoneroSettings::portableFilePath() const
     return filename;
 }
 
-QString MoneroSettings::portableFolderName() const
+QString MoneroSettings::portableFolderName()
 {
     return "monero-storage";
 }
