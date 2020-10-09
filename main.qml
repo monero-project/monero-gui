@@ -1895,7 +1895,7 @@ ApplicationWindow {
         repeat: true
         running: persistentSettings.autosave
         onTriggered: {
-            if (currentWallet) {
+            if (currentWallet && !currentWallet.refreshing) {
                 currentWallet.storeAsync(function(success) {
                     if (success) {
                         appWindow.showStatusMessage(qsTr("Autosaved the wallet"), 3);

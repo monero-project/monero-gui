@@ -27,6 +27,11 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Wallet.h"
+
+#include <chrono>
+#include <stdexcept>
+#include <thread>
+
 #include "PendingTransaction.h"
 #include "UnsignedTransaction.h"
 #include "TransactionHistory.h"
@@ -49,6 +54,8 @@
 #include <QList>
 #include <QVector>
 #include <QMutexLocker>
+
+#include "qt/ScopeGuard.h"
 
 namespace {
     static const int DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS = 5;
@@ -124,6 +131,19 @@ bool Wallet::disconnected() const
     return m_disconnected;
 }
 
+bool Wallet::refreshing() const
+{
+    return m_refreshing;
+}
+
+void Wallet::refreshingSet(bool value)
+{
+    if (m_refreshing.exchange(value) != value)
+    {
+        emit refreshingChanged();
+    }
+}
+
 void Wallet::setConnectionStatus(ConnectionStatus value)
 {
     if (m_connectionStatus == value)
@@ -196,7 +216,7 @@ void Wallet::storeAsync(const QJSValue &callback, const QString &path /* = "" */
 {
     const auto future = m_scheduler.run(
         [this, path] {
-            QMutexLocker locker(&m_storeMutex);
+            QMutexLocker locker(&m_asyncMutex);
 
             return QJSValueList({m_walletImpl->store(path.toStdString())});
         },
@@ -263,7 +283,7 @@ void Wallet::initAsync(
             emit walletCreationHeightChanged();
             qDebug() << "init async finished - starting refresh";
             connected(true);
-            m_walletImpl->startRefresh();
+            startRefresh();
         }
     });
     if (future.first)
@@ -466,41 +486,37 @@ bool Wallet::importKeyImages(const QString& path)
     return m_walletImpl->importKeyImages(path.toStdString());
 }
 
-bool Wallet::refresh()
+bool Wallet::refresh(bool historyAndSubaddresses /* = true */)
 {
-    bool result = m_walletImpl->refresh();
-    m_history->refresh(currentSubaddressAccount());
-    m_subaddress->refresh(currentSubaddressAccount());
-    m_subaddressAccount->getAll();
-    if (result)
-        emit updated();
-    return result;
+    refreshingSet(true);
+    const auto cleanup = sg::make_scope_guard([this]() noexcept {
+        refreshingSet(false);
+    });
+
+    {
+        QMutexLocker locker(&m_asyncMutex);
+
+        bool result = m_walletImpl->refresh();
+        if (historyAndSubaddresses)
+        {
+            m_history->refresh(currentSubaddressAccount());
+            m_subaddress->refresh(currentSubaddressAccount());
+            m_subaddressAccount->getAll();
+        }
+        if (result)
+            emit updated();
+        return result;
+    }
 }
 
-void Wallet::refreshAsync()
+void Wallet::startRefresh()
 {
-    qDebug() << "refresh async";
-    m_walletImpl->refreshAsync();
+    m_refreshEnabled = true;
 }
 
-void Wallet::setAutoRefreshInterval(int seconds)
+void Wallet::pauseRefresh()
 {
-    m_walletImpl->setAutoRefreshInterval(seconds);
-}
-
-int Wallet::autoRefreshInterval() const
-{
-    return m_walletImpl->autoRefreshInterval();
-}
-
-void Wallet::startRefresh() const
-{
-    m_walletImpl->startRefresh();
-}
-
-void Wallet::pauseRefresh() const
-{
-    m_walletImpl->pauseRefresh();
+    m_refreshEnabled = false;
 }
 
 PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
@@ -874,6 +890,8 @@ bool Wallet::parse_uri(const QString &uri, QString &address, QString &payment_id
 
 bool Wallet::rescanSpent()
 {
+    QMutexLocker locker(&m_asyncMutex);
+
     return m_walletImpl->rescanSpent();
 }
 
@@ -1041,6 +1059,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_subaddressModel(nullptr)
     , m_subaddressAccount(nullptr)
     , m_subaddressAccountModel(nullptr)
+    , m_refreshEnabled(false)
+    , m_refreshing(false)
     , m_scheduler(this)
 {
     m_history = new TransactionHistory(m_walletImpl->history(), this);
@@ -1058,6 +1078,8 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_connectionStatusRunning = false;
     m_daemonUsername = "";
     m_daemonPassword = "";
+
+    startRefreshThread();
 }
 
 Wallet::~Wallet()
@@ -1089,4 +1111,33 @@ Wallet::~Wallet()
     delete m_walletListener;
     m_walletListener = NULL;
     qDebug("m_walletImpl deleted");
+}
+
+void Wallet::startRefreshThread()
+{
+    const auto future = m_scheduler.run([this] {
+        static constexpr const size_t refreshIntervalSec = 10;
+        static constexpr const size_t intervalResolutionMs = 100;
+
+        auto last = std::chrono::steady_clock::now();
+        while (!m_scheduler.stopping())
+        {
+            if (m_refreshEnabled)
+            {
+                const auto now = std::chrono::steady_clock::now();
+                const auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last).count();
+                if (elapsed >= refreshIntervalSec)
+                {
+                    refresh(false);
+                    last = std::chrono::steady_clock::now();
+                }
+            }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(intervalResolutionMs));
+        }
+    });
+    if (!future.first)
+    {
+        throw std::runtime_error("failed to start auto refresh thread");
+    }
 }
