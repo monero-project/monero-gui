@@ -997,16 +997,9 @@ ApplicationWindow {
             informationPopup.title = qsTr("Error") + translationManager.emptyString
             informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
             informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
         } else {
-            var txid_text = ""
-            informationPopup.title = qsTr("Information") + translationManager.emptyString
-            for (var i = 0; i < txid.length; ++i) {
-                if (txid_text.length > 0)
-                    txid_text += ", "
-                txid_text += txid[i]
-            }
-            informationPopup.text  = (viewOnly)? qsTr("Transaction saved to file: %1").arg(path) : qsTr("Monero sent successfully: %1 transaction(s) ").arg(txid.length) + txid_text + translationManager.emptyString
-            informationPopup.icon  = StandardIcon.Information
             if (transactionDescription.length > 0) {
                 for (var i = 0; i < txid.length; ++i)
                   currentWallet.setUserNote(txid[i], transactionDescription);
@@ -1015,10 +1008,7 @@ ApplicationWindow {
             // Clear tx fields
             middlePanel.transferView.clearFields()
             successfulTxPopup.open(txid)
-
         }
-        informationPopup.onCloseCallback = null
-        informationPopup.open()
         currentWallet.refresh()
         currentWallet.disposeTransaction(transaction)
         currentWallet.storeAsync(function(success) {
