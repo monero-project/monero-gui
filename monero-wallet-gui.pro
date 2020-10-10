@@ -64,9 +64,6 @@ HEADERS += \
     src/TranslationManager.h \
     src/model/TransactionHistoryModel.h \
     src/model/TransactionHistorySortFilterModel.h \
-    src/QR-Code-generator/BitBuffer.hpp \
-    src/QR-Code-generator/QrCode.hpp \
-    src/QR-Code-generator/QrSegment.hpp \
     src/model/AddressBookModel.h \
     src/libwalletqt/AddressBook.h \
     src/model/SubaddressModel.h \
@@ -104,9 +101,6 @@ SOURCES += src/main/main.cpp \
     src/TranslationManager.cpp \
     src/model/TransactionHistoryModel.cpp \
     src/model/TransactionHistorySortFilterModel.cpp \
-    src/QR-Code-generator/BitBuffer.cpp \
-    src/QR-Code-generator/QrCode.cpp \
-    src/QR-Code-generator/QrSegment.cpp \
     src/model/AddressBookModel.cpp \
     src/libwalletqt/AddressBook.cpp \
     src/model/SubaddressModel.cpp \
