@@ -919,7 +919,6 @@ ApplicationWindow {
         console.log("Creating transaction: ")
 
         txConfirmationPopup.sweepUnmixable = true;
-        txConfirmationPopup.open();
         transaction = currentWallet.createSweepUnmixableTransaction();
         if (transaction.status !== PendingTransaction.Status_Ok) {
             console.error("Can't create transaction: ", transaction.errorString);
@@ -939,6 +938,7 @@ ApplicationWindow {
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             // committing transaction
         }
+        txConfirmationPopup.open();
     }
 
     // called after user confirms transaction
