@@ -4,8 +4,8 @@ project(monero-gui)
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
 set(VERSION_MAJOR "17")
-set(VERSION_MINOR "0")
-set(VERSION_REVISION "1")
+set(VERSION_MINOR "1")
+set(VERSION_REVISION "0")
 set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
