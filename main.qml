@@ -1367,6 +1367,7 @@ ApplicationWindow {
         } else {
             wizard.wizardState = "wizardHome";
             rootItem.state = "normal"
+            logger.resetLogFilePath(persistentSettings.portable);
             openWallet("wizard");
         }
 

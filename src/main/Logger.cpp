@@ -26,6 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "Logger.h"
+
 #include <QCoreApplication>
 #include <QStandardPaths>
 #include <QFileInfo>
@@ -33,9 +35,11 @@
 #include <QDir>
 #include <QDebug>
 
-#include "Logger.h"
+#include <easylogging++.h>
+#include <wallet/api/wallet2_api.h>
+
+#include "qt/MoneroSettings.h"
 #include "qt/TailsOS.h"
-#include "wallet/api/wallet2_api.h"
 
 // default log path by OS (should be writable)
 static const QString defaultLogName = "monero-wallet-gui.log";
@@ -63,15 +67,21 @@ static const QString defaultLogName = "monero-wallet-gui.log";
 
 
 // return the absolute path of the logfile and ensure path folder exists
-const QString getLogPath(const QString logPath)
+const QString getLogPath(const QString &userDefinedLogFilePath, bool portable)
 {
-    const QFileInfo fi(logPath);
+    const QFileInfo fi(userDefinedLogFilePath);
+    if (!userDefinedLogFilePath.isEmpty() && !fi.isDir())
+    {
+        return fi.absoluteFilePath();
+    }
+
+    if (portable)
+    {
+        return QDir(MoneroSettings::portableFolderName()).filePath(defaultLogName);
+    }
 
     if(TailsOS::detect() && TailsOS::usePersistence)
         return QDir::homePath() + "/Persistent/Monero/logs/" + defaultLogName;
-
-    if(!logPath.isEmpty() && !fi.isDir())
-        return fi.absoluteFilePath();
     else {
         QDir appDir(osPath + "/" + appFolder);
         if(!appDir.exists())
@@ -98,3 +108,26 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     }
 }
 
+Logger::Logger(QCoreApplication &parent, QString userDefinedLogFilePath)
+    : QObject(&parent)
+    , m_applicationFilePath(parent.applicationFilePath().toStdString())
+    , m_userDefinedLogFilePath(std::move(userDefinedLogFilePath))
+{
+    el::Configurations c;
+    c.setGlobally(el::ConfigurationType::ToFile, "false");
+    c.setGlobally(el::ConfigurationType::ToStandardOutput, "true");
+    el::Loggers::setDefaultConfigurations(c, true);
+}
+
+void Logger::resetLogFilePath(bool portable)
+{
+    m_logFilePath = QDir::toNativeSeparators(getLogPath(m_userDefinedLogFilePath, portable));
+    Monero::Wallet::init(m_applicationFilePath.c_str(), "monero-wallet-gui", m_logFilePath.toStdString(), true);
+    qInstallMessageHandler(messageHandler);
+    emit logFilePathChanged();
+}
+
+QString Logger::logFilePath() const
+{
+    return m_logFilePath;
+}
