@@ -905,7 +905,6 @@ ApplicationWindow {
         selectExisting: false;
 
         onAccepted: {
-            txConfirmationPopup.open();
             handleTransactionConfirmed()
         }
         onRejected: {
