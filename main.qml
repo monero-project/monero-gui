@@ -523,7 +523,7 @@ ApplicationWindow {
 
     function onDeviceButtonPressed(){
         if (txConfirmationPopup.visible) {
-            txConfirmationPopup.bottomTextAnimation.running = false
+            txConfirmationPopup.bottomTextAnimation.running = false;
             txConfirmationPopup.bottomText.text  = qsTr("Signing transaction in the device...") + translationManager.emptyString;
         } else {
             if (splashDisplayedBeforeButtonRequest){
