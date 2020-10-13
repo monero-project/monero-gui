@@ -1299,7 +1299,7 @@ ApplicationWindow {
     function fiatApiConvertToFiat(amount) {
         var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
         if(ticker <= 0){
-            console.log(fiatApiError("Invalid ticker value: " + ticker));
+            fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
         }
         return (amount * ticker).toFixed(2);
