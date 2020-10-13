@@ -23,6 +23,7 @@ public:
 
     QPair<bool, QFuture<void>> run(std::function<void()> function) noexcept;
     QPair<bool, QFuture<QJSValueList>> run(std::function<QJSValueList()> function, const QJSValue &callback);
+    bool stopping() const noexcept;
 
 private:
     bool add() noexcept;
@@ -59,7 +60,7 @@ private:
     size_t Alive;
     QWaitCondition Condition;
     QMutex Mutex;
-    bool Stopping;
+    std::atomic<bool> Stopping;
 };
 
 #endif // FUTURE_SCHEDULER_H

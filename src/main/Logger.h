@@ -26,11 +26,28 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#pragma once
 
-const QString getLogPath(const QString logPath);
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message);
+#include <QCoreApplication>
+#include <QObject>
+#include <QString>
 
-#endif // LOGGER_H
+class Logger : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QString logFilePath READ logFilePath NOTIFY logFilePathChanged)
 
+public:
+    Logger(QCoreApplication &parent, QString userDefinedLogFilePath);
+
+    Q_INVOKABLE void resetLogFilePath(bool portable);
+    QString logFilePath() const;
+
+signals:
+    void logFilePathChanged() const;
+
+private:
+    const std::string m_applicationFilePath;
+    QString m_logFilePath;
+    const QString m_userDefinedLogFilePath;
+};

@@ -4,8 +4,8 @@ project(monero-gui)
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
 set(VERSION_MAJOR "17")
-set(VERSION_MINOR "0")
-set(VERSION_REVISION "1")
+set(VERSION_MINOR "1")
+set(VERSION_REVISION "0")
 set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
@@ -175,6 +175,7 @@ find_package(Boost 1.58 REQUIRED COMPONENTS
 		locale)
 
 if(UNIX AND NOT APPLE)
+    set(CMAKE_SKIP_RPATH ON)
     find_package(X11 REQUIRED)
     message(STATUS "X11_FOUND = ${X11_FOUND}")
     message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")

@@ -48,6 +48,7 @@ Rectangle {
             return;
         }
 
+        logger.resetLogFilePath(portable);
         appWindow.changeWalletMode(mode);
         wizardController.wizardStackView.backTransition = false;
         wizardController.wizardState = wizardState;

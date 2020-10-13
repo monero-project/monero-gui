@@ -963,6 +963,11 @@ ApplicationWindow {
     function onTransactionCommitted(success, transaction, txid) {
         if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
+            informationPopup.title = qsTr("Error") + translationManager.emptyString
+            informationPopup.text  = qsTr("Couldn't send the money: ") + transaction.errorString
+            informationPopup.icon  = StandardIcon.Critical
+            informationPopup.onCloseCallback = null;
+            informationPopup.open();
         } else {
             if (txConfirmationPopup.transactionDescription.length > 0) {
                 currentWallet.setUserNote(txid, txConfirmationPopup.transactionDescription);
@@ -1253,7 +1258,7 @@ ApplicationWindow {
     function fiatApiConvertToFiat(amount) {
         var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
         if(ticker <= 0){
-            console.log(fiatApiError("Invalid ticker value: " + ticker));
+            fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
         }
         return (amount * ticker).toFixed(2);
@@ -1321,6 +1326,7 @@ ApplicationWindow {
         } else {
             wizard.wizardState = "wizardHome";
             rootItem.state = "normal"
+            logger.resetLogFilePath(persistentSettings.portable);
             openWallet("wizard");
         }
 
@@ -1850,7 +1856,7 @@ ApplicationWindow {
         repeat: true
         running: persistentSettings.autosave
         onTriggered: {
-            if (currentWallet) {
+            if (currentWallet && !currentWallet.refreshing) {
                 currentWallet.storeAsync(function(success) {
                     if (success) {
                         appWindow.showStatusMessage(qsTr("Autosaved the wallet"), 3);
