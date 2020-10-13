@@ -878,15 +878,15 @@ ApplicationWindow {
             console.log("integer amount: ", amountxmr);
             console.log("integer unlocked", currentWallet.unlockedBalance())
             if (amountxmr <= 0) {
-                txConfirmationPopup.errorText.text  = qsTr("Amount is wrong: expected number from %1 to %2")
-                                                      .arg(walletManager.displayAmount(0))
-                                                      .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                                                      + translationManager.emptyString;
+                txConfirmationPopup.errorText.text = qsTr("Amount is wrong: expected number from %1 to %2")
+                    .arg(walletManager.displayAmount(0))
+                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                    + translationManager.emptyString;
                 return;
             } else if (amountxmr > currentWallet.unlockedBalance()) {
-                txConfirmationPopup.errorText.text  = qsTr("Insufficient funds. Unlocked balance: %1")
-                                                     .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                                                     + translationManager.emptyString;
+                txConfirmationPopup.errorText.text = qsTr("Insufficient funds. Unlocked balance: %1")
+                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
+                    + translationManager.emptyString;
                 return;
             }
         }
