@@ -72,7 +72,7 @@ ApplicationWindow {
     property bool walletSynced: false
     property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
-    property bool daemonStartStopInProgress: false
+    property int daemonStartStopInProgress: 0
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
@@ -707,31 +707,33 @@ ApplicationWindow {
     }
 
     function startDaemon(flags){
-        daemonStartStopInProgress = true;
+        daemonStartStopInProgress = 1;
 
         // Pause refresh while starting daemon
         currentWallet.pauseRefresh();
 
-        appWindow.showProcessingSplash(qsTr("Waiting for daemon to start..."))
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
         daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
     }
 
-    function stopDaemon(callback){
-        daemonStartStopInProgress = true;
-        appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."))
+    function stopDaemon(callback, splash){
+        daemonStartStopInProgress = 2;
+        if (splash) {
+            appWindow.showProcessingSplash(qsTr("Waiting for daemon to stop..."));
+        }
         daemonManager.stopAsync(persistentSettings.nettype, function(result) {
-            daemonStartStopInProgress = false;
-            hideProcessingSplash();
+            daemonStartStopInProgress = 0;
+            if (splash) {
+                hideProcessingSplash();
+            }
             callback(result);
         });
     }
 
     function onDaemonStarted(){
         console.log("daemon started");
-        daemonStartStopInProgress = false;
-        hideProcessingSplash();
+        daemonStartStopInProgress = 0;
         currentWallet.connected(true);
         // resume refresh
         currentWallet.startRefresh();
@@ -744,8 +746,7 @@ ApplicationWindow {
 
     function onDaemonStartFailure(error) {
         console.log("daemon start failed");
-        daemonStartStopInProgress = false;
-        hideProcessingSplash();
+        daemonStartStopInProgress = 0;
         // resume refresh
         currentWallet.startRefresh();
         informationPopup.title = qsTr("Daemon failed to start") + translationManager.emptyString;
@@ -1965,7 +1966,7 @@ ApplicationWindow {
         // Simple mode connection check timer
         id: simpleModeConnectionTimer
         interval: 2000
-        running: appWindow.walletMode < 2 && currentWallet != undefined && !daemonStartStopInProgress
+        running: appWindow.walletMode < 2 && currentWallet != undefined && daemonStartStopInProgress == 0
         repeat: true
         onTriggered: appWindow.checkSimpleModeConnection()
     }
@@ -2043,7 +2044,7 @@ ApplicationWindow {
         if(daemonManager == undefined || persistentSettings.useRemoteNode) {
             closeAccepted();
         } else if (appWindow.walletMode == 0) {
-            stopDaemon(closeAccepted);
+            stopDaemon(closeAccepted, true);
         } else {
             showProcessingSplash(qsTr("Checking local node status..."));
             const handler = function(running) {
