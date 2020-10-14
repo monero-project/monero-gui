@@ -846,7 +846,7 @@ ApplicationWindow {
             console.log("Transaction created, amount: " + walletManager.displayAmount(transaction.amount)
                     + ", fee: " + walletManager.displayAmount(transaction.fee));
 
-            // here we show confirmation popup;
+            // here we update txConfirmationPopup
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
             txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
@@ -870,7 +870,6 @@ ApplicationWindow {
         txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
         txConfirmationPopup.transactionPriority = priority;
         txConfirmationPopup.transactionDescription = description;
-        txConfirmationPopup.open()
 
         // validate amount;
         if (amount !== "(all)") {
@@ -890,6 +889,8 @@ ApplicationWindow {
                 return;
             }
         }
+
+        txConfirmationPopup.open();
 
         if (amount === "(all)")
             currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
