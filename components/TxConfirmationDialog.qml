@@ -335,7 +335,7 @@ Rectangle {
                 Text {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("Fee:") + translationManager.emptyString
+                    text: qsTr("Fee") + ":" + translationManager.emptyString
                     font.pixelSize: 15
                 }
             }
@@ -351,9 +351,9 @@ Rectangle {
                         if (currentWallet) {
                             if (!root.transactionFee) {
                                 if (currentWallet.isHwBacked() === true) {
-                                    return "See on device" +  translationManager.emptyString;
+                                    return qsTr("See on device") +  translationManager.emptyString;
                                 } else {
-                                    return "Calculating fee..." +  translationManager.emptyString;
+                                    return qsTr("Calculating fee") + "..." +  translationManager.emptyString;
                                 }
                             } else {
                                 return root.transactionFee + " XMR"
