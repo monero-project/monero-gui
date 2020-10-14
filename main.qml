@@ -510,7 +510,7 @@ ApplicationWindow {
         if (txConfirmationPopup.visible) {
             txConfirmationPopup.bottomTextAnimation.running = true
             if (!txConfirmationPopup.errorText.visible) {
-                txConfirmationPopup.bottomText.text  = qsTr("Please confirm transaction in the device...") + translationManager.emptyString;
+                txConfirmationPopup.bottomText.text  = qsTr("Please confirm transaction on the device...") + translationManager.emptyString;
             } else {
                 txConfirmationPopup.bottomText.text  = qsTr("Please proceed to the device...") + translationManager.emptyString;
             }
