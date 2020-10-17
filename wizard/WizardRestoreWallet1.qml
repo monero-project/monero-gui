@@ -106,7 +106,7 @@ Rectangle {
 
             WizardHeader {
                 title: qsTr("Restore wallet") + translationManager.emptyString
-                subtitle: qsTr("Restore wallet from keys or mnemonic seed.") + translationManager.emptyString
+                subtitle: qsTr("Restore wallet from mnemonic seed or private keys.") + translationManager.emptyString
             }
 
             WizardWalletInput{
