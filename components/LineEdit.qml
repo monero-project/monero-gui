@@ -62,7 +62,7 @@ Item {
 
     property bool borderDisabled: false
     property string borderColor: {
-        if(error && input.text !== ""){
+        if(error){
             return MoneroComponents.Style.inputBorderColorInvalid;
         } else if(input.activeFocus){
             return MoneroComponents.Style.inputBorderColorActive;
