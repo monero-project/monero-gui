@@ -158,7 +158,8 @@ Rectangle {
     }
 
     function showFiatConversion(valueXMR) {
-        return (fiatApiConvertToFiat(valueXMR) === "0.00" ? "<0.01 " + fiatApiCurrencySymbol() : "~" + fiatApiConvertToFiat(valueXMR) + " " + fiatApiCurrencySymbol());
+        const fiatFee = fiatApiConvertToFiat(valueXMR);
+        return "%1 %2".arg(fiatFee < 0.01 ? "<0.01" : "~" + fiatFee).arg(fiatApiCurrencySymbol());
     }
 
     ColumnLayout {
