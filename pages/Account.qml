@@ -190,7 +190,7 @@ Rectangle {
                         height: subaddressAccountListRow.subaddressAccountListItemHeight
                         width: parent ? parent.width : undefined
                         Layout.fillWidth: true
-                        color: "transparent"
+                        color: itemMouseArea.containsMouse || index === currentAccountIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle {
                             color: MoneroComponents.Style.appWindowBorderColor
@@ -226,7 +226,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: MoneroComponents.Style.dimmedFontColor
+                                color: index === currentAccountIndex ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
@@ -276,11 +276,10 @@ Rectangle {
                             }
 
                             MouseArea {
+                                id: itemMouseArea
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
-                                onExited: tableItem2.color = "transparent"
                                 onClicked: {
                                     appWindow.currentWallet.switchSubaddressAccount(index);
                                     if (selectAndSend)
