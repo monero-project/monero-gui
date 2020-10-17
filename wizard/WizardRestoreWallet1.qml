@@ -262,7 +262,7 @@ Rectangle {
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
                 placeholderFontSize: 16
-                placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
+                placeholderText: qsTr("Spend key (private)") + " / " + qsTr("Leave blank to create a view-only wallet") + translationManager.emptyString
 
                 onTextUpdated: {
                     wizardRestoreWallet1.verifyFromKeys();
