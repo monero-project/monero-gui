@@ -1086,6 +1086,8 @@ Wallet::~Wallet()
 {
     qDebug("~Wallet: Closing wallet");
 
+    pauseRefresh();
+    m_walletImpl->stop();
     m_scheduler.shutdownWaitForFinished();
 
     delete m_addressBook;
