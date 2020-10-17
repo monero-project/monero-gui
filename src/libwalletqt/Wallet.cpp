@@ -1125,7 +1125,7 @@ void Wallet::startRefreshThread()
             if (m_refreshEnabled)
             {
                 const auto now = std::chrono::steady_clock::now();
-                const auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last).count();
+                const size_t elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last).count();
                 if (elapsed >= refreshIntervalSec)
                 {
                     refresh(false);
