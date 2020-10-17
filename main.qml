@@ -970,7 +970,8 @@ ApplicationWindow {
             informationPopup.open();
         } else {
             if (txConfirmationPopup.transactionDescription.length > 0) {
-                currentWallet.setUserNote(txid, txConfirmationPopup.transactionDescription);
+                for (var i = 0; i < txid.length; ++i)
+                    currentWallet.setUserNote(txid[i], txConfirmationPopup.transactionDescription);
             }
 
             // Clear tx fields
