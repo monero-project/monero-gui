@@ -248,7 +248,7 @@ Rectangle {
                 Text {
                     Layout.fillWidth: true
                     color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("From:") + translationManager.emptyString
+                    text: qsTr("From") + ":" + translationManager.emptyString
                     font.pixelSize: 15
                 }
             }
@@ -295,7 +295,7 @@ Rectangle {
                     Layout.fillWidth: true
                     font.pixelSize: 15
                     color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("To:") + translationManager.emptyString
+                    text: qsTr("To") + ":" + translationManager.emptyString
                 }
             }
 
