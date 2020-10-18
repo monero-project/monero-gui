@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.0
+import FontAwesome 1.0
 import moneroComponents.NetworkType 1.0
 
 import "../components" as MoneroComponents
@@ -56,10 +57,46 @@ Rectangle {
             Layout.alignment: Qt.AlignHCenter
             spacing: 0
 
-            WizardHeader {
-                Layout.bottomMargin: 20
-                title: qsTr("Welcome to Monero") + translationManager.emptyString
-                subtitle: ""
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 10
+
+                WizardHeader {
+                    Layout.bottomMargin: 7
+                    title: qsTr("Welcome to Monero") + translationManager.emptyString
+                    subtitle: ""
+                }
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    height: 10
+                    color: "transparent"
+                }
+
+                MoneroComponents.Label {
+                    Layout.bottomMargin: 13
+                    fontSize: 26
+                    text: FontAwesome.language
+                    fontFamily: FontAwesome.fontFamilySolid
+                    fontColor: MoneroComponents.Style.defaultFontColor
+                    styleName: "Solid"
+                    opacity: 0.85
+                }
+
+                MoneroComponents.TextPlain {
+                    Layout.bottomMargin: 8
+                    font.pixelSize: 14
+                    text: wizard.language_language
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onClicked: appWindow.toggleLanguageView();
+                        onEntered: parent.opacity = 1
+                        onExited: parent.opacity = 0.85
+                    }
+                }
             }
 
             WizardMenuItem {
@@ -146,15 +183,6 @@ Rectangle {
                         wizardController.wizardStackView.backTransition = true;
                         wizardController.wizardState = 'wizardModeSelection';
                     }                    
-                }
-
-                MoneroComponents.StandardButton {
-                    small: true
-                    text: qsTr("Change language") + translationManager.emptyString
-
-                    onClicked: {
-                        appWindow.toggleLanguageView();
-                    }
                 }
             }
 
