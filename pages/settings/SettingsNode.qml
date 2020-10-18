@@ -136,6 +136,7 @@ Rectangle{
             MouseArea {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
+                enabled: persistentSettings.useRemoteNode
                 onClicked: {
                     persistentSettings.useRemoteNode = false;
                     appWindow.disconnectRemoteNode();
@@ -227,6 +228,7 @@ Rectangle{
                 MouseArea {
                     cursorShape: Qt.PointingHandCursor
                     anchors.fill: parent
+                    enabled: !persistentSettings.useRemoteNode
                     onClicked: {
                         appWindow.connectRemoteNode();
                     }
