@@ -1118,8 +1118,8 @@ Wallet::~Wallet()
 void Wallet::startRefreshThread()
 {
     const auto future = m_scheduler.run([this] {
-        static constexpr const size_t refreshIntervalSec = 10;
-        static constexpr const size_t intervalResolutionMs = 100;
+        constexpr const std::chrono::seconds refreshInterval{10};
+        constexpr const std::chrono::milliseconds intervalResolution{100};
 
         auto last = std::chrono::steady_clock::now();
         while (!m_scheduler.stopping())
@@ -1127,15 +1127,15 @@ void Wallet::startRefreshThread()
             if (m_refreshEnabled)
             {
                 const auto now = std::chrono::steady_clock::now();
-                const auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - last).count();
-                if (elapsed >= refreshIntervalSec)
+                const auto elapsed = now - last;
+                if (elapsed >= refreshInterval)
                 {
                     refresh(false);
                     last = std::chrono::steady_clock::now();
                 }
             }
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(intervalResolutionMs));
+            std::this_thread::sleep_for(intervalResolution);
         }
     });
     if (!future.first)
