@@ -764,12 +764,18 @@ Rectangle {
                                     font.pixelSize: 15
                                     text: {
                                         if (isout) {
+                                            if (isFailed) {
+                                                return qsTr("Failed") + translationManager.emptyString;
+                                            }
+                                            if (isPending) {
+                                                return qsTr("Waiting confirmation...") + translationManager.emptyString;
+                                            }
                                             if (address) {
                                                 const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
                                                 return (addressBookName ? FontAwesome.addressBook + " " + addressBookName : TxUtils.addressTruncate(address, 8));
                                             }
                                             if (amount != 0) {
-                                                return (blockheight ? qsTr("Unknown recipient") : qsTr("Waiting confirmation...")) + translationManager.emptyString;
+                                                return qsTr("Unknown recipient") + translationManager.emptyString;
                                             } else {
                                                 return qsTr("My wallet") + translationManager.emptyString;
                                             }
@@ -1489,6 +1495,8 @@ Rectangle {
 
         for (var i = 0; i < count; ++i) {
             var idx = _model.index(i, 0);
+            var isPending = model.data(idx, TransactionHistoryModel.TransactionPendingRole);
+            var isFailed = model.data(idx, TransactionHistoryModel.TransactionFailedRole);
             var isout = _model.data(idx, TransactionHistoryModel.TransactionIsOutRole);
             var amount = _model.data(idx, TransactionHistoryModel.TransactionAmountRole);
             var hash = _model.data(idx, TransactionHistoryModel.TransactionHashRole);
@@ -1525,6 +1533,8 @@ Rectangle {
 
             root.txModelData.push({
                 "i": i,
+                "isPending": isPending,
+                "isFailed": isFailed,
                 "isout": isout,
                 "amount": amount,
                 "displayAmount": displayAmount,
