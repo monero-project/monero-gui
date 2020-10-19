@@ -39,6 +39,15 @@ Rectangle {
     property var connected: Wallet.ConnectionStatus_Disconnected
 
     function getConnectionStatusString(status) {
+        switch (appWindow.daemonStartStopInProgress)
+        {
+            case 1:
+                return qsTr("Starting the node");
+            case 2:
+                return qsTr("Stopping the node");
+            default:
+                break;
+        }
         switch (status) {
             case Wallet.ConnectionStatus_Connected:
                 if (!appWindow.daemonSynced)
