@@ -87,6 +87,7 @@ Rectangle {
                     Layout.bottomMargin: 8
                     font.pixelSize: 14
                     text: wizard.language_language
+                    opacity: 0.85
 
                     MouseArea {
                         anchors.fill: parent
