@@ -149,9 +149,11 @@ message(STATUS "libusb: include dir at ${LibUSB_INCLUDE_DIRS}")
 message(STATUS "libusb: libraries at ${LibUSB_LIBRARIES}")
 
 # HIDApi
-find_package(HIDAPI REQUIRED)
-message(STATUS "libhidapi: include dir at ${HIDAPI_INCLUDE_DIRS}")
-message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
+if(NOT ANDROID)
+  find_package(HIDAPI REQUIRED)
+  message(STATUS "libhidapi: include dir at ${HIDAPI_INCLUDE_DIRS}")
+  message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
+endif()
 
 # Boost
 if(DEBUG)
@@ -174,7 +176,7 @@ find_package(Boost 1.58 REQUIRED COMPONENTS
 		program_options
 		locale)
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
     set(CMAKE_SKIP_RPATH ON)
     find_package(X11 REQUIRED)
     message(STATUS "X11_FOUND = ${X11_FOUND}")
@@ -253,7 +255,15 @@ foreach(QT5_MODULE ${QT5_LIBRARIES})
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
 endforeach()
 
-pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
+if(NOT (CMAKE_CROSSCOMPILING AND ANDROID))
+  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
+else()
+  set(QT5_LIBRARIES_ABI)
+  foreach(QT5_MODULE ${QT5_LIBRARIES})
+    list(APPEND QT5_LIBRARIES_ABI "${QT5_MODULE}_${CMAKE_ANDROID_ARCH_ABI}")
+  endforeach()
+  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES_ABI})
+endif()
 
 if(QT5_PKG_CONFIG_FOUND)
   set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
@@ -374,6 +384,23 @@ if(STATIC)
     pkg_check_modules(X11XCB_XCBGLX_FONTCONFIG REQUIRED x11-xcb xcb-glx fontconfig)
     list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_FONTCONFIG_STATIC_LIBRARIES})
   endif()
+endif()
+
+if(ANDROID)
+  set(QT5_EXTRA_LIBRARIES_LIST
+    GLESv2
+    log
+    z
+    jnigraphics
+    android
+    EGL
+    Qt5VirtualKeyboard_${CMAKE_ANDROID_ARCH_ABI}
+    c++_shared
+  )
+  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS "${ANDROID_TOOLCHAIN_ROOT}/sysroot/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/${ANDROID_PLATFORM_LEVEL}" REQUIRED)
+    list(APPEND QT5_LIBRARIES ${${LIBRARY}_LIBRARY})
+  endforeach()
 endif()
 
 message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
