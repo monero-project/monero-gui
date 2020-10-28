@@ -156,8 +156,6 @@ int main(int argc, char *argv[])
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     bool isDesktop = true;
-#elif defined(Q_OS_LINUX)
-    bool isLinux = true;
 #elif defined(Q_OS_ANDROID)
     bool isAndroid = true;
 #elif defined(Q_OS_IOS)

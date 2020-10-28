@@ -124,6 +124,55 @@ Packaging for your favorite distribution would be a welcome contribution!
    \* `4` - number of CPU threads to use
 5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
 
+### Building Android APK with Docker (any OS) *Experimental*
+ - Minimum Android 9 Pie (API 28)
+ - ARMv8-A 64-bit CPU
+1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+2. Clone the repository
+   ```
+   git clone --recursive https://github.com/monero-project/monero-gui.git
+   ```
+3. Prepare build environment
+   ```
+   cd monero-gui
+   docker build --tag monero:build-env-android --build-arg THREADS=4 --file Dockerfile.android .
+   ```
+   \* `4` - number of CPU threads to use
+
+4. Build
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -e THREADS=4 monero:build-env-android
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
+   \* `4` - number of CPU threads to use
+5. Monero GUI APK will be placed in  `monero-gui/build/Android/release/android-build` directory
+6. Deploy
+   * Using ADB (Android debugger bridge)
+     - [Enable adb debugging on your device](https://developer.android.com/studio/command-line/adb.html#Enabling)
+      * Connect your device with USB and install Monero GUI APK with adb:
+      ```
+      adb install build/Android/release/android-build/monero-gui.apk
+      ```
+      * Troubleshooting:
+      ```
+      adb devices -l
+      adb logcat
+      ```
+      * If using adb inside docker, make sure you did
+      ```
+      docker run -v /dev/bus/usb:/dev/bus/usb --privileged
+      ```
+   * Using a web server
+      ```
+      mkdir /usr/tmp
+      cp build/Android/release/android-build/monero-gui.apk /usr/tmp
+      docker run -d -v /usr/tmp:/usr/share/nginx/html:ro -p 8080:80 nginx
+      ```
+      Now it should be accessible through a web browser at
+      ```
+      http://<your.local.ip>:8080/QtApp-debug.apk
+      ```
+
 ### On Linux:
 
 (Tested on Ubuntu 17.10 x64, Ubuntu 18.04 x64 and Gentoo x64)
