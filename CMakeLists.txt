@@ -134,7 +134,7 @@ message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARI
 # Zbar (for QR scanner)
 if(WITH_SCANNER)
     add_definitions(-DWITH_SCANNER)
-    find_package(ZBar0)
+    find_package(ZBar0 REQUIRED)
     message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
     message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
 endif()
