@@ -206,9 +206,7 @@ endif()
 set(QT5_LIBRARIES
   Qt5Core
   Qt5Quick
-  Qt5Widgets
   Qt5Gui
-  Qt5Network
   Qt5Qml
   Qt5Svg
   Qt5Xml
