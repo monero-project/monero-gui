@@ -62,7 +62,7 @@ Rectangle {
             iconText: FontAwesome.eye
             description: qsTr("Creates a new wallet that can only view and initiate transactions, but requires a spendable wallet to sign transactions before sending.") + translationManager.emptyString
             title: qsTr("Create a view-only wallet") + translationManager.emptyString
-            visible: !appWindow.viewOnly
+            visible: !appWindow.viewOnly && !currentWallet.isLedger()
 
             onClicked: {
                 var newPath = currentWallet.path + "_viewonly";
