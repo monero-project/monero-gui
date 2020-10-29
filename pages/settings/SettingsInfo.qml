@@ -135,7 +135,7 @@ Rectangle {
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                property string walletPath: (isIOS ?  moneroAccountsDir : "") + persistentSettings.wallet_path
+                property string walletPath: (isIOS ?  appWindow.accountsDir : "") + persistentSettings.wallet_path
                 text: "\
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
@@ -272,9 +272,9 @@ Rectangle {
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
                     </style>\
-                    <a href='#'>%1</a>".arg(walletLogPath)
+                    <a href='#'>%1</a>".arg(logger.logFilePath)
                 textFormat: Text.RichText
-                onLinkActivated: oshelper.openContainingFolder(walletLogPath)
+                onLinkActivated: oshelper.openContainingFolder(logger.logFilePath)
 
                 MouseArea {
                     anchors.fill: parent
@@ -397,7 +397,7 @@ Rectangle {
                     if(currentWallet)
                         data += currentWallet.walletCreationHeight;
 
-                    data += "\nWallet log path: " + walletLogPath;
+                    data += "\nWallet log path: " + logger.logFilePath;
                     data += "\nWallet mode: " + walletModeString;
                     data += "\nGraphics mode: " + isOpenGL ? "OpenGL" : "Low graphics mode";
                     if (isTails)

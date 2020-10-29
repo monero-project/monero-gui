@@ -108,8 +108,10 @@ void WalletKeysFilesModel::refresh(const QString &moneroAccountsDir)
 void WalletKeysFilesModel::findWallets(const QString &moneroAccountsDir)
 {
     QDirIterator it(moneroAccountsDir, QDirIterator::Subdirectories);
-    for (; it.hasNext(); it.next())
+    while (it.hasNext())
     {
+        it.next();
+
         QFileInfo keysFileinfo = it.fileInfo();
 
         constexpr const char keysFileExtension[] = "keys";

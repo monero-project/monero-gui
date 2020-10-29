@@ -63,6 +63,7 @@ class Wallet : public QObject, public PassprasePrompter
 {
     Q_OBJECT
     Q_PROPERTY(bool disconnected READ disconnected NOTIFY disconnectedChanged)
+    Q_PROPERTY(bool refreshing READ refreshing NOTIFY refreshingChanged)
     Q_PROPERTY(QString seed READ getSeed)
     Q_PROPERTY(QString seedLanguage READ getSeedLanguage)
     Q_PROPERTY(Status status READ status)
@@ -207,20 +208,11 @@ public:
     Q_INVOKABLE bool importKeyImages(const QString& path);
 
     //! refreshes the wallet
-    Q_INVOKABLE bool refresh();
-
-    //! refreshes the wallet asynchronously
-    Q_INVOKABLE void refreshAsync();
-
-    //! setup auto-refresh interval in seconds
-    Q_INVOKABLE void setAutoRefreshInterval(int seconds);
-
-    //! return auto-refresh interval in seconds
-    Q_INVOKABLE int autoRefreshInterval() const;
+    Q_INVOKABLE bool refresh(bool historyAndSubaddresses = true);
 
     // pause/resume refresh
-    Q_INVOKABLE void startRefresh() const;
-    Q_INVOKABLE void pauseRefresh() const;
+    Q_INVOKABLE void startRefresh();
+    Q_INVOKABLE void pauseRefresh();
 
     //! creates transaction
     Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
@@ -394,6 +386,7 @@ signals:
     void currentSubaddressAccountChanged() const;
     void disconnectedChanged() const;
     void proxyAddressChanged() const;
+    void refreshingChanged() const;
 
 private:
     Wallet(QObject * parent = nullptr);
@@ -421,9 +414,12 @@ private:
         const QString& proxyAddress);
 
     bool disconnected() const;
+    bool refreshing() const;
+    void refreshingSet(bool value);
     void setConnectionStatus(ConnectionStatus value);
     QString getProxyAddress() const;
     void setProxyAddress(QString address);
+    void startRefreshThread();
 
 private:
     friend class WalletManager;
@@ -454,15 +450,17 @@ private:
     mutable SubaddressModel * m_subaddressModel;
     SubaddressAccount * m_subaddressAccount;
     mutable SubaddressAccountModel * m_subaddressAccountModel;
+    QMutex m_asyncMutex;
     QMutex m_connectionStatusMutex;
     bool m_connectionStatusRunning;
     QString m_daemonUsername;
     QString m_daemonPassword;
     QString m_proxyAddress;
     mutable QMutex m_proxyMutex;
+    std::atomic<bool> m_refreshEnabled;
+    std::atomic<bool> m_refreshing;
     WalletListenerImpl *m_walletListener;
     FutureScheduler m_scheduler;
-    QMutex m_storeMutex;
 };
 
 

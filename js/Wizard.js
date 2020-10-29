@@ -65,7 +65,7 @@ function createWalletPath(isIOS, folder_path,account_name){
     return folder_path + "/" + account_name + "/" + account_name
 }
 
-function walletPathExists(directory, filename, isIOS, walletManager) {
+function walletPathExists(accountsDir, directory, filename, isIOS, walletManager) {
     if(!filename || filename === "") return false;
     if(!directory || directory === "") return false;
 
@@ -76,7 +76,7 @@ function walletPathExists(directory, filename, isIOS, walletManager) {
         directory += "/"
 
     if(isIOS)
-        var path = moneroAccountsDir + filename;
+        var path = accountsDir + filename;
     else
         var path = directory + filename + "/" + filename;
 

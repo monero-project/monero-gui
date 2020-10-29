@@ -55,7 +55,7 @@ GridLayout {
     function reset() {
         walletName.error = !walletName.verify();
         walletLocation.error = walletLocation.text === "";
-        walletLocation.text = moneroAccountsDir;
+        walletLocation.text = appWindow.accountsDir;
         walletName.text = defaultAccountName;
     }
 
@@ -66,7 +66,7 @@ GridLayout {
         function verify(){
             if(walletLocation === "" || /[\\\/]/.test(walletName.text)) return false;
 
-            var exists = Wizard.walletPathExists(walletLocation.text, walletName.text, isIOS, walletManager);
+            var exists = Wizard.walletPathExists(appWindow.accountsDir, walletLocation.text, walletName.text, isIOS, walletManager);
             return !exists && walletLocation.error === false;
         }
 
@@ -88,7 +88,7 @@ GridLayout {
         labelFontSize: 14
         placeholderText: "..."
         placeholderFontSize: 16
-        text: moneroAccountsDir + "/"
+        text: appWindow.accountsDir + "/"
         inlineButton.small: true
         inlineButtonText: qsTr("Browse") + translationManager.emptyString
         inlineButton.onClicked: {

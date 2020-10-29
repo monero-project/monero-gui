@@ -61,7 +61,6 @@
 #include "model/SubaddressModel.h"
 #include "SubaddressAccount.h"
 #include "model/SubaddressAccountModel.h"
-#include "wallet/api/wallet2_api.h"
 #include "Logger.h"
 #include "MainApp.h"
 #include "qt/downloader.h"
@@ -81,6 +80,8 @@
 
 #if defined(Q_OS_WIN)
 #include <QOpenGLContext>
+#elif defined(Q_OS_MACOS)
+#include "qt/macoshelper.h"
 #endif
 
 #ifdef WITH_SCANNER
@@ -155,8 +156,6 @@ int main(int argc, char *argv[])
     // platform dependant settings
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     bool isDesktop = true;
-#elif defined(Q_OS_LINUX)
-    bool isLinux = true;
 #elif defined(Q_OS_ANDROID)
     bool isAndroid = true;
 #elif defined(Q_OS_IOS)
@@ -178,8 +177,8 @@ int main(int argc, char *argv[])
     // disable "QApplication: invalid style override passed" warning
     if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
 #ifdef Q_OS_LINUX
-    // force platform xcb
-    if (isDesktop) qputenv("QT_QPA_PLATFORM", "xcb");
+    // platform xcb by default
+    if (isDesktop && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) qputenv("QT_QPA_PLATFORM", "xcb");
 #endif
 
     // enable High DPI scaling
@@ -267,10 +266,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     Monero::Utils::onStartup();
 
-    // Log settings
-    const QString logPath = QDir::toNativeSeparators(getLogPath(parser.value(logPathOption)));
-    Monero::Wallet::init(argv[0], "monero-wallet-gui", logPath.toStdString().c_str(), true);
-    qInstallMessageHandler(messageHandler);
+    Logger logger(app, parser.value(logPathOption));
 
     // loglevel is configured in main.qml. Anything lower than
     // qWarning is not shown here unless MONERO_LOG_LEVEL env var is set
@@ -279,7 +275,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
         Monero::WalletManagerFactory::setLogLevel(logLevel);
     }
-    qWarning().noquote() << "app startd" << "(log: " + logPath + ")";
+    qWarning().noquote() << "app startd" << "(log: " + logger.logFilePath() + ")";
 
     if (parser.isSet(verifyUpdateOption))
     {
@@ -327,6 +323,10 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     // start listening
     QTimer::singleShot(0, ipc, SLOT(bind()));
+
+#if defined(Q_OS_MACOS)
+    QDir::setCurrent(QDir(MacOSHelper::bundlePath() + QDir::separator() + "..").canonicalPath());
+#endif
 
     // screen settings
     // Mobile is designed on 128dpi
@@ -440,13 +440,13 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     engine.addImageProvider(QLatin1String("qrcode"), new QRCodeImageProvider());
 
+    engine.rootContext()->setContextProperty("logger", &logger);
+
     engine.rootContext()->setContextProperty("mainApp", &app);
 
     engine.rootContext()->setContextProperty("IPC", ipc);
 
     engine.rootContext()->setContextProperty("qtRuntimeVersion", qVersion());
-
-    engine.rootContext()->setContextProperty("walletLogPath", logPath);
 
     engine.rootContext()->setContextProperty("tailsUsePersistence", TailsOS::usePersistence);
 

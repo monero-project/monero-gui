@@ -109,6 +109,7 @@ Item {
             color: MoneroComponents.Style.defaultFontColor
             textFormat: Text.RichText
             wrapMode: Text.NoWrap
+            visible: text != ""
         }
     }
 

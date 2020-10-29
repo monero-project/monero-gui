@@ -81,12 +81,19 @@ if(APPLE)
     list(APPEND RESOURCES ${ICON})
 endif()
 
-add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} main/main.cpp
+set(monero_wallet_gui_sources
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
     ${QR_CODE_FILES}
     ${RESOURCES}
 )
+
+if(NOT ANDROID)
+    add_executable(monero-wallet-gui ${EXECUTABLE_FLAG} ${monero_wallet_gui_sources})
+else()
+    add_library(monero-wallet-gui SHARED ${monero_wallet_gui_sources})
+    set_target_properties(monero-wallet-gui PROPERTIES COMPILE_DEFINITIONS "ANDROID")
+endif()
 
 set_target_properties(monero-wallet-gui PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
@@ -164,13 +171,17 @@ if(X11_FOUND)
 endif()
 
 if(WITH_SCANNER)
-    target_link_libraries(monero-wallet-gui
-        ${ZBAR_LIBRARIES}
-        jpeg
-        v4l2
-        v4lconvert
-        rt
-    )
+    if(NOT ANDROID)
+        target_link_libraries(monero-wallet-gui
+            ${ZBAR_LIBRARIES}
+            jpeg
+            v4l2
+            v4lconvert
+            rt
+        )
+    else()
+        target_link_libraries(monero-wallet-gui ${ZBAR_LIBRARIES})
+    endif()
 endif()
 
 add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:daemon> $<TARGET_FILE_DIR:monero-wallet-gui>)
@@ -178,5 +189,5 @@ add_custom_command(TARGET monero-wallet-gui POST_BUILD COMMAND ${CMAKE_COMMAND} 
 include(Deploy)
 
 install(TARGETS monero-wallet-gui
-    DESTINATION ${CMAKE_INSTALL_PREFIX}
+    DESTINATION bin
 )

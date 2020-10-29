@@ -65,6 +65,11 @@ QPair<bool, QFuture<QJSValueList>> FutureScheduler::run(std::function<QJSValueLi
     });
 }
 
+bool FutureScheduler::stopping() const noexcept
+{
+    return Stopping;
+}
+
 bool FutureScheduler::add() noexcept
 {
     QMutexLocker locker(&Mutex);

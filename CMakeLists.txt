@@ -3,9 +3,9 @@ project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
 
-set(VERSION_MAJOR "16")
-set(VERSION_MINOR "0")
-set(VERSION_REVISION "3")
+set(VERSION_MAJOR "17")
+set(VERSION_MINOR "1")
+set(VERSION_REVISION "1")
 set(VERSION "0.${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}")
 
 option(STATIC "Link libraries statically, requires static Qt")
@@ -134,7 +134,7 @@ message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARI
 # Zbar (for QR scanner)
 if(WITH_SCANNER)
     add_definitions(-DWITH_SCANNER)
-    find_package(ZBar0)
+    find_package(ZBar0 REQUIRED)
     message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
     message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
 endif()
@@ -149,9 +149,11 @@ message(STATUS "libusb: include dir at ${LibUSB_INCLUDE_DIRS}")
 message(STATUS "libusb: libraries at ${LibUSB_LIBRARIES}")
 
 # HIDApi
-find_package(HIDAPI REQUIRED)
-message(STATUS "libhidapi: include dir at ${HIDAPI_INCLUDE_DIRS}")
-message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
+if(NOT ANDROID)
+  find_package(HIDAPI REQUIRED)
+  message(STATUS "libhidapi: include dir at ${HIDAPI_INCLUDE_DIRS}")
+  message(STATUS "libhidapi: libraries at ${HIDAPI_LIBRARIES}")
+endif()
 
 # Boost
 if(DEBUG)
@@ -174,7 +176,8 @@ find_package(Boost 1.58 REQUIRED COMPONENTS
 		program_options
 		locale)
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+    set(CMAKE_SKIP_RPATH ON)
     find_package(X11 REQUIRED)
     message(STATUS "X11_FOUND = ${X11_FOUND}")
     message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
@@ -203,9 +206,7 @@ endif()
 set(QT5_LIBRARIES
   Qt5Core
   Qt5Quick
-  Qt5Widgets
   Qt5Gui
-  Qt5Network
   Qt5Qml
   Qt5Svg
   Qt5Xml
@@ -217,12 +218,14 @@ endif()
 
 if(APPLE)
   list(APPEND QT5_LIBRARIES Qt5MacExtras)
+endif()
 
+if(UNIX)
   if(NOT CMAKE_PREFIX_PATH AND DEFINED ENV{CMAKE_PREFIX_PATH})
     message(STATUS "Using CMAKE_PREFIX_PATH environment variable: '$ENV{CMAKE_PREFIX_PATH}'")
     set(CMAKE_PREFIX_PATH $ENV{CMAKE_PREFIX_PATH})
   endif()
-  if(NOT CMAKE_PREFIX_PATH)
+  if(APPLE AND NOT CMAKE_PREFIX_PATH)
     execute_process(COMMAND brew --prefix qt5 OUTPUT_VARIABLE QT5_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
     list(APPEND CMAKE_PREFIX_PATH ${QT5_DIR})
   endif()
@@ -252,7 +255,15 @@ foreach(QT5_MODULE ${QT5_LIBRARIES})
   include_directories(${${QT5_MODULE}_INCLUDE_DIRS})
 endforeach()
 
-pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
+if(NOT (CMAKE_CROSSCOMPILING AND ANDROID))
+  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES})
+else()
+  set(QT5_LIBRARIES_ABI)
+  foreach(QT5_MODULE ${QT5_LIBRARIES})
+    list(APPEND QT5_LIBRARIES_ABI "${QT5_MODULE}_${CMAKE_ANDROID_ARCH_ABI}")
+  endforeach()
+  pkg_check_modules(QT5_PKG_CONFIG REQUIRED ${QT5_LIBRARIES_ABI})
+endif()
 
 if(QT5_PKG_CONFIG_FOUND)
   set(QT5_PKG_CONFIG "QT5_PKG_CONFIG")
@@ -260,15 +271,12 @@ if(QT5_PKG_CONFIG_FOUND)
     set(QT5_PKG_CONFIG "${QT5_PKG_CONFIG}_STATIC")
   endif()
 
-  if(APPLE)
-    list(JOIN ${QT5_PKG_CONFIG}_LDFLAGS_OTHER " " ${QT5_PKG_CONFIG}_LDFLAGS_OTHER)
-    list(JOIN ${QT5_PKG_CONFIG}_LIBRARIES " " ${QT5_PKG_CONFIG}_LIBRARIES)
-    list(JOIN ${QT5_PKG_CONFIG}_INCLUDE_DIRS " " ${QT5_PKG_CONFIG}_INCLUDE_DIRS)
-
+  if(UNIX)
     # temporal workaround for https://bugreports.qt.io/browse/QTBUG-80922
     STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${CMAKE_PREFIX_PATH}" ${QT5_PKG_CONFIG}_LDFLAGS_OTHER "${${QT5_PKG_CONFIG}_LDFLAGS_OTHER}")
     STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${CMAKE_PREFIX_PATH}" ${QT5_PKG_CONFIG}_LIBRARIES "${${QT5_PKG_CONFIG}_LIBRARIES}")
     STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${CMAKE_PREFIX_PATH}" ${QT5_PKG_CONFIG}_INCLUDE_DIRS "${${QT5_PKG_CONFIG}_INCLUDE_DIRS}")
+    STRING(REPLACE "${QT5_PKG_CONFIG_Qt5Core_PREFIX}" "${CMAKE_PREFIX_PATH}" ${QT5_PKG_CONFIG}_LIBRARY_DIRS "${${QT5_PKG_CONFIG}_LIBRARY_DIRS}")
   endif()
 
   set(QT5_LIBRARIES ${${QT5_PKG_CONFIG}_LIBRARIES} ${${QT5_PKG_CONFIG}_LDFLAGS_OTHER})
@@ -373,6 +381,23 @@ if(STATIC)
     pkg_check_modules(X11XCB_XCBGLX_FONTCONFIG REQUIRED x11-xcb xcb-glx fontconfig)
     list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_FONTCONFIG_STATIC_LIBRARIES})
   endif()
+endif()
+
+if(ANDROID)
+  set(QT5_EXTRA_LIBRARIES_LIST
+    GLESv2
+    log
+    z
+    jnigraphics
+    android
+    EGL
+    Qt5VirtualKeyboard_${CMAKE_ANDROID_ARCH_ABI}
+    c++_shared
+  )
+  foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
+    find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS "${ANDROID_TOOLCHAIN_ROOT}/sysroot/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}/${ANDROID_PLATFORM_LEVEL}" REQUIRED)
+    list(APPEND QT5_LIBRARIES ${${LIBRARY}_LIBRARY})
+  endforeach()
 endif()
 
 message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
