@@ -2,19 +2,17 @@
 
 Use macOS 10.12 - 10.13 for better backwards compability.
 
-1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm miniupnpc libsodium expat libunwind-headers protobuf libgcrypt`
+1. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install boost zmq libpgm miniupnpc libsodium expat libunwind-headers protobuf libgcrypt hidapi`
 
-2. `HOMEBREW_OPTFLAGS="-march=core2" HOMEBREW_OPTIMIZATION_LEVEL="O0" brew install --HEAD hidapi`
+2. Get the latest LTS from here: https://www.qt.io/offline-installers and install
 
-3. Get the latest LTS from here: https://www.qt.io/offline-installers and install
+3. `git clone --recursive -b v0.X.Y.Z --depth 1 https://github.com/monero-project/monero-gui` 
 
-4. `git clone --recursive -b v0.X.Y.Z --depth 1 https://github.com/monero-project/monero-gui` 
+4. `CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 make release`
 
-5. `CMAKE_PREFIX_PATH=~/Qt5.12.8/5.12.8/clang_64 make release`
+5. `cd build/release && make deploy`
 
-6. `cd build/release && make deploy`
-
-7. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
+6. Replace the `monerod` binary inside `monero-wallet-gui.app/Contents/MacOS/` with one built using deterministic builds / gitian.
 
 ## Codesigning and notarizing
 
