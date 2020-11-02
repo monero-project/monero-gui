@@ -47,7 +47,7 @@ Rectangle {
         } else if(appWindow.walletMode === 1){
           return qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
         } else if(appWindow.walletMode === 2){
-          return qsTr("Advanced mode") + translationManager.emptyString;
+          return "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
         }
     }
 
