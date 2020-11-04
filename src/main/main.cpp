@@ -275,7 +275,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     if (logLevelOk && logLevel >= 0 && logLevel <= Monero::WalletManagerFactory::LogLevel_Max){
         Monero::WalletManagerFactory::setLogLevel(logLevel);
     }
-    qWarning().noquote() << "app startd" << "(log: " + logger.logFilePath() + ")";
 
     if (parser.isSet(verifyUpdateOption))
     {
