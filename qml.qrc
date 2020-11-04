@@ -4,6 +4,7 @@
         <file>LeftPanel.qml</file>
         <file>MiddlePanel.qml</file>
         <file>components/Label.qml</file>
+        <file>components/LanguageButton.qml</file>
         <file>components/SettingsListItem.qml</file>
         <file>components/Slider.qml</file>
         <file>components/UpdateDialog.qml</file>
