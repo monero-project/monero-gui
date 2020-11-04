@@ -588,6 +588,7 @@ Rectangle {
                     color: "transparent"
 
                     Rectangle {
+                        visible: !isFailed && !isPending
                         anchors.top: parent.top
                         anchors.topMargin: 24
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -595,6 +596,19 @@ Rectangle {
                         height: 10
                         radius: 8
                         color: isout ? "#d85a00" : "#2eb358"
+                    }
+
+                    MoneroComponents.TextPlain {
+                        visible: isFailed || isPending
+                        anchors.top: parent.top
+                        anchors.topMargin: 24
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.family: FontAwesome.fontFamilySolid
+                        font.styleName: isFailed ? "Solid" : ""
+                        font.pixelSize: 15
+                        text: isFailed ? FontAwesome.times : FontAwesome.clockO
+                        color: isFailed ? "#FF0000" : MoneroComponents.Style.defaultFontColor
+                        themeTransition: false
                     }
                 }
 
@@ -633,7 +647,7 @@ Rectangle {
                                 MoneroComponents.TextPlain {
                                     font.family: MoneroComponents.Style.fontRegular.name
                                     font.pixelSize: 15
-                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + translationManager.emptyString
+                                    text: (isout ? qsTr("Sent") : qsTr("Received")) + (isFailed ? " (" + qsTr("Failed") + ")" : (isPending ? " (" + qsTr("Pending") + ")" : "")) + translationManager.emptyString
                                     color: MoneroComponents.Style.historyHeaderTextColor
                                     anchors.verticalCenter: parent.verticalCenter
                                     themeTransitionBlackColor: MoneroComponents.Style._b_historyHeaderTextColor
@@ -764,12 +778,6 @@ Rectangle {
                                     font.pixelSize: 15
                                     text: {
                                         if (isout) {
-                                            if (isFailed) {
-                                                return qsTr("Failed") + translationManager.emptyString;
-                                            }
-                                            if (isPending) {
-                                                return qsTr("Waiting confirmation...") + translationManager.emptyString;
-                                            }
                                             if (address) {
                                                 const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
                                                 return (addressBookName ? FontAwesome.addressBook + " " + addressBookName : TxUtils.addressTruncate(address, 8));
@@ -1341,7 +1349,7 @@ Rectangle {
                 checked: persistentSettings.historyHumanDates
                 onClicked: {
                     persistentSettings.historyHumanDates = !persistentSettings.historyHumanDates
-                    root.updateDisplay(root.txOffset, root.txMax, false);
+                    root.updateDisplay(root.txOffset, root.txMax);
                 }
                 text: qsTr("Human readable date format") + translationManager.emptyString
             }
@@ -1447,15 +1455,14 @@ Rectangle {
         root.updateDisplay(root.txOffset, root.txMax);
     }
 
-    function updateDisplay(tx_offset, tx_max, auto_collapse) {
-        if(typeof auto_collapse === 'undefined') auto_collapse = false;
+    function updateDisplay(tx_offset, tx_max) {
         txListViewModel.clear();
 
         // limit results as per tx_max (root.txMax)
         var txs = root.txData.slice(tx_offset, tx_offset + tx_max);
 
-        // make first result on the first page collapsed by default
-        if(auto_collapse && root.txPage === 1 && txs.length > 0 && (root.sortSearchString == null || root.sortSearchString === ""))
+        // collapse tx if there is a single result
+        if(root.txPage === 1 && txs.length === 1)
             root.txDataCollapsed.push(txs[0]['hash']);
 
         // populate listview
@@ -1741,10 +1748,22 @@ Rectangle {
         root.reset();
         root.refresh();
         root.initialized = true;
+        root.updateFilter();
     }
 
     function onPageClosed(){
         root.initialized = false;
         root.reset(true);
+        root.clearFields();
+    }
+
+    function searchInHistory(searchTerm){
+        searchInput.text = searchTerm;
+        sortAndFilter.collapsed = true;
+    }
+
+    function clearFields() {
+        searchInput.text = "";
+        root.txDataCollapsed = [];
     }
 }

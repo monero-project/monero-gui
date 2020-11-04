@@ -983,6 +983,11 @@ ApplicationWindow {
         });
     }
 
+    function doSearchInHistory(searchTerm) {
+        middlePanel.searchInHistory(searchTerm);
+        leftPanel.selectItem(middlePanel.state)
+    }
+
     // called on "getProof"
     function handleGetProof(txid, address, message) {
         console.log("Getting payment proof: ")
@@ -1113,6 +1118,7 @@ ApplicationWindow {
             middlePanel.addressBookView.clearFields();
             middlePanel.transferView.clearFields();
             middlePanel.receiveView.clearFields();
+            middlePanel.historyView.clearFields();
             // disable timers
             userInActivityTimer.running = false;
         });

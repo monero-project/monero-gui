@@ -132,13 +132,27 @@ Rectangle {
             fontSize: 16
         }
 
-        // open folder / done buttons
+        // view progress / open folder / done buttons
         RowLayout {
             id: buttons
             spacing: 70
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
             Layout.fillWidth: true
             Layout.preferredHeight: 50
+
+            MoneroComponents.StandardButton {
+                id: viewProgressButton
+                visible: !appWindow.viewOnly
+                text: qsTr("View progress") + translationManager.emptyString;
+                width: 200
+                primary: false
+                KeyNavigation.tab: doneButton
+                onClicked: {
+                    doSearchInHistory(root.transactionID);
+                    root.close()
+                    root.rejected()
+                }
+            }
 
             MoneroComponents.StandardButton {
                 id: openFolderButton
@@ -156,7 +170,7 @@ Rectangle {
                 text: qsTr("Done") + translationManager.emptyString;
                 width: 200
                 focus: root.visible
-                KeyNavigation.tab: openFolderButton
+                KeyNavigation.tab: appWindow.viewOnly ? openFolderButton : viewProgressButton
                 onClicked: {
                     root.close()
                     root.accepted()
