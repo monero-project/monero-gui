@@ -117,13 +117,14 @@ Logger::Logger(QCoreApplication &parent, QString userDefinedLogFilePath)
     c.setGlobally(el::ConfigurationType::ToFile, "false");
     c.setGlobally(el::ConfigurationType::ToStandardOutput, "true");
     el::Loggers::setDefaultConfigurations(c, true);
+    qInstallMessageHandler(messageHandler);
 }
 
 void Logger::resetLogFilePath(bool portable)
 {
     m_logFilePath = QDir::toNativeSeparators(getLogPath(m_userDefinedLogFilePath, portable));
     Monero::Wallet::init(m_applicationFilePath.c_str(), "monero-wallet-gui", m_logFilePath.toStdString(), true);
-    qInstallMessageHandler(messageHandler);
+    qWarning() << "Logging to" << m_logFilePath;
     emit logFilePathChanged();
 }
 
