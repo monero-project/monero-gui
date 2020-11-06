@@ -108,6 +108,10 @@ Q_IMPORT_PLUGIN(QTgaPlugin)
 Q_IMPORT_PLUGIN(QTiffPlugin)
 Q_IMPORT_PLUGIN(QWbmpPlugin)
 Q_IMPORT_PLUGIN(QWebpPlugin)
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+Q_IMPORT_PLUGIN(QtQmlPlugin)
+#endif
 Q_IMPORT_PLUGIN(QQmlDebuggerServiceFactory)
 Q_IMPORT_PLUGIN(QQmlInspectorServiceFactory)
 Q_IMPORT_PLUGIN(QLocalClientConnectionFactory)
