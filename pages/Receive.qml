@@ -127,7 +127,7 @@ Rectangle {
                         Rectangle {
                             anchors.fill: parent
                             anchors.topMargin: 5
-                            anchors.rightMargin: 80
+                            anchors.rightMargin: 90
                             color: "transparent"
 
                             MoneroComponents.Label {
@@ -181,6 +181,17 @@ Rectangle {
                             anchors.rightMargin: 6
                             height: 21
                             spacing: 10
+
+                            MoneroComponents.IconButton {
+                                fontAwesomeFallbackIcon: FontAwesome.searchPlus
+                                fontAwesomeFallbackSize: 22
+                                color: MoneroComponents.Style.defaultFontColor
+                                fontAwesomeFallbackOpacity: 0.5
+                                Layout.preferredWidth: 23
+                                Layout.preferredHeight: 21
+
+                                onClicked: doSearchInHistory(address)
+                            }
 
                             MoneroComponents.IconButton {
                                 id: renameButton
