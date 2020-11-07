@@ -771,7 +771,6 @@ Rectangle {
                                                 return qsTr("Waiting confirmation...") + translationManager.emptyString;
                                             }
                                             if (address) {
-                                                const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
                                                 return (addressBookName ? FontAwesome.addressBook + " " + addressBookName : TxUtils.addressTruncate(address, 8));
                                             }
                                             if (amount != 0) {
@@ -780,8 +779,6 @@ Rectangle {
                                                 return qsTr("My wallet") + translationManager.emptyString;
                                             }
                                         } else {
-                                            const receivingAddress = currentWallet ? currentWallet.address(subaddrAccount, subaddrIndex) : null;
-                                            const receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
                                             if (receivingAddress) {
                                                 if (subaddrIndex == 0) {
                                                     return qsTr("Address") + " #0" + " (" + qsTr("Primary address") + ")" + translationManager.emptyString;
@@ -1417,6 +1414,12 @@ Rectangle {
                     txs.push(item);
                 } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
+                } else if(item.receivingAddress !== "" && item.receivingAddress.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
+                } else if(item.receivingAddressLabel !== "" && item.receivingAddressLabel.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
+                } else if(item.addressBookName !== "" && item.addressBookName.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
                 } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
                 } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
@@ -1522,8 +1525,16 @@ Rectangle {
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
-            if(isout) {
+            var addressBookName = "";
+            var receivingAddress = "";
+            var receivingAddressLabel = "";
+
+            if (isout) {
                 address = TxUtils.destinationsToAddress(destinations);
+                addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
+            } else {
+                receivingAddress = currentWallet ? currentWallet.address(subaddrAccount, subaddrIndex) : null;
+                receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
             }
 
             if (isout)
@@ -1541,6 +1552,7 @@ Rectangle {
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
+                "addressBookName": addressBookName,
                 "destinations": destinations,
                 "tx_note": tx_note,
                 "dateHuman": dateHuman,
@@ -1551,6 +1563,8 @@ Rectangle {
                 "fee": fee,
                 "confirmations": confirmations,
                 "confirmationsRequired": confirmationsRequired,
+                "receivingAddress": receivingAddress,
+                "receivingAddressLabel": receivingAddressLabel,
                 "subaddrAccount": subaddrAccount,
                 "subaddrIndex": subaddrIndex
             });
