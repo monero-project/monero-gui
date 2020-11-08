@@ -18,9 +18,9 @@ RUN apt install -y automake git pkg-config python xutils-dev && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xcbproto && \
+RUN git clone -b xcb-proto-1.14.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xcbproto && \
     cd xcbproto && \
-    git reset --hard 6398e42131eedddde0d98759067dde933191f049 && \
+    git reset --hard 496e3ce329c3cc9b32af4054c30fa0f306deb007 && \
     ./autogen.sh && \
     make -j$THREADS && \
     make -j$THREADS install && \
@@ -36,9 +36,9 @@ RUN apt install -y libtool-bin && \
     rm -rf $(pwd)
 
 RUN apt install -y libpthread-stubs0-dev && \
-    git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
+    git clone -b libxcb-1.14 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
     cd libxcb && \
-    git reset --hard d34785a34f28fa6a00f8ce00d87e3132ff0f6467 && \
+    git reset --hard 4b40b44cb6d088b6ffa2fb5cf3ad8f12da588cef && \
     ./autogen.sh --disable-shared --enable-static && \
     make -j$THREADS && \
     make -j$THREADS install && \
