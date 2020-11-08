@@ -55,7 +55,7 @@ Rectangle {
     property int txCount: 0
     property var sortSearchString: null
     property bool sortDirection: true  // true = desc, false = asc
-    property string sortBy: "blockheight"
+    property string sortBy: "timestamp"
     property var txModelData: []  // representation of transaction data (appWindow.currentWallet.historyModel)
     property var txData: []  // representation of FILTERED transation data
     property var txDataCollapsed: []  // keep track of which txs are collapsed
@@ -235,66 +235,6 @@ Rectangle {
 
             Rectangle {
                 visible: sortAndFilter.collapsed
-                id: sortBlockheight
-                color: "transparent"
-                Layout.preferredWidth: sortBlockheightText.width + 42
-                Layout.preferredHeight: 20
-
-                RowLayout {
-                    clip: true
-                    anchors.fill: parent
-
-                    MoneroComponents.TextPlain {
-                        id: sortBlockheightText
-                        font.family: MoneroComponents.Style.fontRegular.name
-                        font.pixelSize: 15
-                        text: qsTr("Blockheight") + translationManager.emptyString
-                        color: root.sortBy === "blockheight" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
-                        themeTransition: false
-                    }
-
-                    MoneroEffects.ImageMask {
-                        height: 8
-                        width: 12
-                        visible: root.sortBy === "blockheight" ? true : false
-                        opacity: root.sortBy === "blockheight" ? 1 : 0.2
-                        image: "qrc:///images/whiteDropIndicator.png"
-                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
-                        fontAwesomeFallbackSize: 14
-                        color: MoneroComponents.Style.defaultFontColor
-                        rotation: {
-                            if(root.sortBy === "blockheight"){
-                                return root.sortDirection ? 0 : 180
-                            } else {
-                                return 0;
-                            }
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    hoverEnabled: true
-                    onClicked: {
-                        if(root.sortBy !== "blockheight") {
-                            root.sortDirection = true;
-                        } else {
-                            root.sortDirection = !root.sortDirection
-                        }
-
-                        root.sortBy = "blockheight";
-                        root.updateSort();
-                    }
-                }
-            }
-
-            Rectangle {
-                visible: sortAndFilter.collapsed
                 color: "transparent"
                 Layout.preferredWidth: sortDateText.width + 42
                 Layout.preferredHeight: 20
@@ -406,6 +346,65 @@ Rectangle {
                         }
 
                         root.sortBy = "amount";
+                        root.updateSort();
+                    }
+                }
+            }
+
+            Rectangle {
+                visible: sortAndFilter.collapsed
+                color: "transparent"
+                Layout.preferredWidth: sortTypeText.width + 42
+                Layout.preferredHeight: 20
+
+                RowLayout {
+                    clip: true
+                    anchors.fill: parent
+
+                    MoneroComponents.TextPlain {
+                        id: sortTypeText
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 15
+                        text: qsTr("Type") + translationManager.emptyString
+                        color: root.sortBy === "isout" ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                        themeTransition: false
+                    }
+
+                    MoneroEffects.ImageMask {
+                        height: 8
+                        width: 12
+                        visible: root.sortBy === "isout" ? true : false
+                        opacity: root.sortBy === "isout" ? 1 : 0.2
+                        image: "qrc:///images/whiteDropIndicator.png"
+                        fontAwesomeFallbackIcon: FontAwesome.arrowDown
+                        fontAwesomeFallbackSize: 14
+                        color: MoneroComponents.Style.defaultFontColor
+                        rotation: {
+                            if(root.sortBy === "isout"){
+                                return root.sortDirection ? 0 : 180
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: {
+                        if(root.sortBy !== "isout") {
+                            root.sortDirection = true;
+                        } else {
+                            root.sortDirection = !root.sortDirection
+                        }
+
+                        root.sortBy = "isout";
                         root.updateSort();
                     }
                 }
