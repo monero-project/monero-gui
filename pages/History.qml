@@ -771,7 +771,6 @@ Rectangle {
                                                 return qsTr("Waiting confirmation...") + translationManager.emptyString;
                                             }
                                             if (address) {
-                                                const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
                                                 return (addressBookName ? FontAwesome.addressBook + " " + addressBookName : TxUtils.addressTruncate(address, 8));
                                             }
                                             if (amount != 0) {
@@ -780,8 +779,6 @@ Rectangle {
                                                 return qsTr("My wallet") + translationManager.emptyString;
                                             }
                                         } else {
-                                            const receivingAddress = currentWallet ? currentWallet.address(subaddrAccount, subaddrIndex) : null;
-                                            const receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
                                             if (receivingAddress) {
                                                 if (subaddrIndex == 0) {
                                                     return qsTr("Address") + " #0" + " (" + qsTr("Primary address") + ")" + translationManager.emptyString;
@@ -807,6 +804,25 @@ Rectangle {
                                         hoverEnabled: true
                                         onEntered: parent.color = MoneroComponents.Style.orange
                                         onExited: parent.color = MoneroComponents.Style.defaultFontColor
+                                    }
+                                }
+
+                                MoneroComponents.TextPlain {
+                                    visible: isout && address && !addressBookName
+                                    anchors.left: addressField.right
+                                    font.family: MoneroComponents.Style.fontRegular.name
+                                    font.pixelSize: 16
+                                    color: MoneroComponents.Style.defaultFontColor
+                                    text: "  " + FontAwesome.addressBook + "+" + "  ";
+                                    themeTransition: false
+
+                                    MouseArea {
+                                        state: "add_to_addressbook"
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        onEntered: parent.opacity = 0.4
+                                        onExited: parent.opacity = 0.75
+                                        cursorShape: Qt.PointingHandCursor
                                     }
                                 }
                             }
@@ -1230,6 +1246,27 @@ Rectangle {
                                 if(res[i].state === 'set_tx_note') root.editDescription(hash, tx_note);
                                 if(res[i].state === 'details') root.showTxDetails(hash, paymentId, destinations, subaddrAccount, subaddrIndex, dateTime, displayAmount, isout);
                                 if(res[i].state === 'proof') root.showTxProof(hash, paymentId, destinations, subaddrAccount, subaddrIndex);
+                                if(res[i].state === 'add_to_addressbook') {
+                                        inputDialog.labelText = qsTr("Add %1 to Address Book").arg(TxUtils.addressTruncate(address, 8)) + ":" + translationManager.emptyString;
+                                        inputDialog.onAcceptedCallback = function() {
+                                            if (!currentWallet.addressBook.addRow(address.trim(),"", inputDialog.inputText)) {
+                                                informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                                                // TODO: check currentWallet.addressBook.errorString() instead.
+                                                if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Address)
+                                                     informationPopup.text  = qsTr("Invalid address") + translationManager.emptyString
+                                                else if(currentWallet.addressBook.errorCode() === AddressBook.Invalid_Payment_Id)
+                                                     informationPopup.text  = currentWallet.addressBook.errorString()
+                                                else
+                                                     informationPopup.text  = qsTr("Can't create entry") + translationManager.emptyString
+
+                                                informationPopup.onCloseCallback = null
+                                                informationPopup.open();
+                                            }
+                                            root.refresh();
+                                        }
+                                        inputDialog.onRejectedCallback = null;
+                                        inputDialog.open();
+                                }
                                 doCollapse = false;
                                 break;
                             }
@@ -1417,6 +1454,12 @@ Rectangle {
                     txs.push(item);
                 } else if(item.address !== "" && item.address.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
                     txs.push(item);
+                } else if(item.receivingAddress !== "" && item.receivingAddress.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
+                } else if(item.receivingAddressLabel !== "" && item.receivingAddressLabel.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
+                } else if(item.addressBookName !== "" && item.addressBookName.toLowerCase().startsWith(root.sortSearchString.toLowerCase())){
+                    txs.push(item);
                 } else if(typeof item.blockheight !== "undefined" && item.blockheight.toString().startsWith(root.sortSearchString)) {
                     txs.push(item);
                 } else if(item.tx_note.toLowerCase().indexOf(root.sortSearchString.toLowerCase()) !== -1) {
@@ -1522,8 +1565,16 @@ Rectangle {
 
             var tx_note = currentWallet.getUserNote(hash);
             var address = "";
-            if(isout) {
+            var addressBookName = "";
+            var receivingAddress = "";
+            var receivingAddressLabel = "";
+
+            if (isout) {
                 address = TxUtils.destinationsToAddress(destinations);
+                addressBookName = currentWallet ? currentWallet.addressBook.getDescription(address) : null;
+            } else {
+                receivingAddress = currentWallet ? currentWallet.address(subaddrAccount, subaddrIndex) : null;
+                receivingAddressLabel = currentWallet ? appWindow.currentWallet.getSubaddressLabel(subaddrAccount, subaddrIndex) : null;
             }
 
             if (isout)
@@ -1541,6 +1592,7 @@ Rectangle {
                 "hash": hash,
                 "paymentId": paymentId,
                 "address": address,
+                "addressBookName": addressBookName,
                 "destinations": destinations,
                 "tx_note": tx_note,
                 "dateHuman": dateHuman,
@@ -1551,6 +1603,8 @@ Rectangle {
                 "fee": fee,
                 "confirmations": confirmations,
                 "confirmationsRequired": confirmationsRequired,
+                "receivingAddress": receivingAddress,
+                "receivingAddressLabel": receivingAddressLabel,
                 "subaddrAccount": subaddrAccount,
                 "subaddrIndex": subaddrIndex
             });
