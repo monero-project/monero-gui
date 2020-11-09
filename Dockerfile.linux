@@ -1,7 +1,6 @@
 FROM ubuntu:16.04
 
 ARG THREADS=1
-ARG QT_VERSION=5.15.2
 
 ENV CFLAGS="-fPIC"
 ENV CXXFLAGS="-fPIC"
@@ -40,70 +39,6 @@ RUN apt install -y libpthread-stubs0-dev && \
     cd libxcb && \
     git reset --hard d34785a34f28fa6a00f8ce00d87e3132ff0f6467 && \
     ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-util && \
-    cd libxcb-util && \
-    git reset --hard acf790d7752f36e450d476ad79807d4012ec863b && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
-    ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-image && \
-    cd libxcb-image && \
-    git reset --hard d882052fb2ce439c6483fce944ba8f16f7294639 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
-    ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN git clone -b 0.4.0 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-keysyms && \
-    cd libxcb-keysyms && \
-    git reset --hard 0e51ee5570a6a80bdf98770b975dfe8a57f4eeb1 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
-    ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN git clone -b 0.3.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-render-util && \
-    cd libxcb-render-util && \
-    git reset --hard 0317caf63de532fd7a0493ed6afa871a67253747 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
-    ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-wm && \
-    cd libxcb-wm && \
-    git reset --hard 24eb17df2e1245885e72c9d4bbb0a0f69f0700f2 && \
-    git submodule init && \
-    git clone --depth 1 https://gitlab.freedesktop.org/xorg/util/xcb-util-m4 m4 && \
-    git -C m4 reset --hard f662e3a93ebdec3d1c9374382dcc070093a42fed && \
-    ./autogen.sh --disable-shared --enable-static && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN apt install -y bison &&\
-    git clone -b xkbcommon-0.5.0 --depth 1 https://github.com/xkbcommon/libxkbcommon && \
-    cd libxkbcommon && \
-    git reset --hard c43c3c866eb9d52cd8f61e75cbef1c30d07f3a28 && \
-    ./autogen.sh --prefix=/usr --disable-shared --enable-static --enable-x11 --disable-docs && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
@@ -171,28 +106,18 @@ RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y libgl1-mesa-dev libglib2.0-dev mesa-common-dev && \
-    git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
-    cd qt5 && \
-    git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtgraphicaleffects.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtquickcontrols2.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtx11extras.git -b ${QT_VERSION} --depth 1 && \
-    git clone git://code.qt.io/qt/qtxmlpatterns.git -b ${QT_VERSION} --depth 1 && \
+RUN apt install -y libgl1-mesa-dev libglib2.0-dev libxkbcommon-dev && \
+    wget https://download.qt.io/archive/qt/5.9/5.9.9/single/qt-everywhere-opensource-src-5.9.9.tar.xz && \
+    echo "5ce285209290a157d7f42ec8eb22bf3f1d76f2e03a95fc0b99b553391be01642 qt-everywhere-opensource-src-5.9.9.tar.xz" | sha256sum -c && \
+    tar -xf qt-everywhere-opensource-src-5.9.9.tar.xz && \
+    rm qt-everywhere-opensource-src-5.9.9.tar.xz && \
+    cd qt-everywhere-opensource-src-5.9.9 && \
     sed -ri s/\(Libs:.*\)/\\1\ -lexpat/ /usr/local/lib/pkgconfig/fontconfig.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lz/ /usr/local/lib/pkgconfig/freetype2.pc && \
     sed -ri s/\(Libs:.*\)/\\1\ -lXau/ /usr/local/lib/pkgconfig/xcb.pc && \
-    sed -i s/\\/usr\\/X11R6\\/lib64/\\/usr\\/local\\/lib/ qtbase/mkspecs/linux-g++-64/qmake.conf && \
     ./configure --prefix=/usr -platform linux-g++-64 -opensource -confirm-license -release -static -no-avx \
-    -opengl desktop -qpa xcb -xcb -xcb-xlib -feature-xlib -system-freetype -fontconfig -glib \
-    -no-dbus -no-feature-qml-worker-script -no-linuxfb -no-openssl -no-sql-sqlite -no-kms -no-use-gold-linker \
+    -opengl desktop -qpa xcb -system-freetype -fontconfig -glib \
+    -no-dbus -no-openssl -no-sql-sqlite -no-use-gold-linker \
     -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
     -skip qt3d -skip qtandroidextras -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d \
     -skip qtdoc -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
@@ -280,12 +205,4 @@ RUN git clone -b v3.10.0 --depth 1 https://github.com/protocolbuffers/protobuf &
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN git clone -b v3.18.4 --depth 1 https://github.com/Kitware/CMake && \
-    cd CMake && \
-    git reset --hard 3cc3d42aba879fff5e85b363ae8f21386a3f9f9b && \
-    ./bootstrap && \
-    make -j$THREADS && \
-    make -j$THREADS install && \
-    rm -rf $(pwd)
-
-RUN apt install -y libusb-1.0-0-dev
+RUN apt install -y cmake libusb-1.0-0-dev
