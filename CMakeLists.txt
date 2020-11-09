@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.5)
 project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
@@ -76,7 +76,7 @@ if(STATIC)
   message(STATUS "Initiating static build")
   set(Boost_USE_STATIC_LIBS ON)
   set(Boost_USE_STATIC_RUNTIME ON)
-  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ${CMAKE_FIND_LIBRARY_SUFFIXES})
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
   add_definitions(-DMONERO_GUI_STATIC)
 endif()
 
@@ -300,7 +300,6 @@ if(STATIC)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects/private)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtMultimedia)
-  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQml)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick.2)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls.2)
@@ -341,10 +340,6 @@ if(STATIC)
     windowplugin
   )
 
-  if(NOT ${Qt5Core_VERSION} VERSION_LESS 5.14)
-     list(APPEND QT5_EXTRA_LIBRARIES_LIST qmlplugin)
-  endif()
-
   set(QT5_EXTRA_LIBRARIES)
   foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
     find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
@@ -372,6 +367,7 @@ if(STATIC)
   if(UNIX AND NOT APPLE)
     list(APPEND QT5_INTEGRATION_LIBRARIES_LIST
       Qt5XcbQpa
+      xcb-static
       Qt5ServiceSupport
       Qt5GlxSupport
     )
@@ -413,7 +409,7 @@ message(STATUS "Using Boost libraries at ${Boost_LIBRARIES}")
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 if(MINGW)
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wa,-mbig-obj")
-  set(EXTRA_LIBRARIES mswsock;ws2_32;iphlpapi;crypt32;bcrypt;winmm)
+  set(EXTRA_LIBRARIES mswsock;ws2_32;iphlpapi;crypt32;bcrypt)
   if(DEPENDS)
     set(ICU_LIBRARIES icuio icui18n icuuc icudata icutu iconv)
   else()
