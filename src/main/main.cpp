@@ -120,6 +120,9 @@ Q_IMPORT_PLUGIN(QQmlDebugServerFactory)
 Q_IMPORT_PLUGIN(QTcpServerConnectionFactory)
 Q_IMPORT_PLUGIN(QGenericEnginePlugin)
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+Q_IMPORT_PLUGIN(QtQmlPlugin)
+#endif
 Q_IMPORT_PLUGIN(QtQuick2Plugin)
 Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
 Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
