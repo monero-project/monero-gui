@@ -58,6 +58,35 @@ jobs:
     - name: test qml
       run: build/release/bin/monero-wallet-gui --test-qml
 
+  macos-bundle:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: recursive
+    - name: install dependencies
+      run: HOMEBREW_NO_AUTO_UPDATE=1 brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf pkg-config python3 p7zip
+    - name: install dependencies
+      run: pip3 install requests semantic_version lxml
+    - name: download qt
+      run: |
+          curl -O https://raw.githubusercontent.com/engnr/qt-downloader/master/qt-downloader
+          chmod +x qt-downloader
+          ./qt-downloader macos desktop 5.15.2 clang_64
+      working-directory: ../
+    - name: build
+      run: CMAKE_PREFIX_PATH=/Users/runner/work/monero-gui/5.15.2/clang_64 make release -j3
+    - name: deploy
+      run: make deploy
+      working-directory: build/release
+    - name: create .tar
+      run: tar -cf monero-wallet-gui.tar monero-wallet-gui.app
+      working-directory: build/release/bin
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ github.job }}
+        path: build/release/bin/monero-wallet-gui.tar
+
   docker-linux-static:
     runs-on: ubuntu-20.04
     steps:
