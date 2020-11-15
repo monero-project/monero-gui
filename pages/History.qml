@@ -127,7 +127,7 @@ Rectangle {
                     image: "qrc:///images/whiteDropIndicator.png"
                     fontAwesomeFallbackIcon: FontAwesome.arrowDown
                     fontAwesomeFallbackSize: 14
-                    rotation: sortAndFilter.collapsed ? 0 : 180
+                    rotation: sortAndFilter.collapsed ? 180 : 0
                     color: MoneroComponents.Style.defaultFontColor
 
                     MouseArea {
