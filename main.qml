@@ -233,12 +233,6 @@ ApplicationWindow {
         else
           walletManager.setLogLevel(persistentSettings.logLevel)
 
-        // setup language
-        var locale = persistentSettings.locale
-        if (locale !== "") {
-            translationManager.setLanguage(locale.split("_")[0]);
-        }
-
         // Reload transfer page with translations enabled
         middlePanel.transferView.onPageCompleted();
 
@@ -1291,6 +1285,8 @@ ApplicationWindow {
         x = (Screen.width - width) / 2
         y = (Screen.height - maxWindowHeight) / 2
 
+        translationManager.setLanguage(persistentSettings.locale.split("_")[0]);
+
         applyWalletMode(persistentSettings.walletMode);
 
         //
@@ -1346,8 +1342,9 @@ ApplicationWindow {
             return "";
         }
 
-        property string language
-        property string locale
+        property string language: 'English (US)'
+        property string language_wallet: 'English'
+        property string locale: 'en_US'
         property string account_name
         property string wallet_path
         property bool   allow_background_mining : false
@@ -1845,11 +1842,6 @@ ApplicationWindow {
     function toggleLanguageView(){
         languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
         resetLanguageFields()
-        // update after changing language from settings page
-        if (persistentSettings.language != wizard.language_language) {
-            persistentSettings.language = wizard.language_language
-            persistentSettings.locale   = wizard.language_locale
-        }
     }
 
     Timer {
