@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.12)
 project(monero-gui)
 
 message(STATUS "Initiating compile using CMake ${CMAKE_VERSION}")
@@ -76,7 +76,7 @@ if(STATIC)
   message(STATUS "Initiating static build")
   set(Boost_USE_STATIC_LIBS ON)
   set(Boost_USE_STATIC_RUNTIME ON)
-  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+  set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ${CMAKE_FIND_LIBRARY_SUFFIXES})
   add_definitions(-DMONERO_GUI_STATIC)
 endif()
 
@@ -178,7 +178,10 @@ find_package(Boost 1.58 REQUIRED COMPONENTS
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     set(CMAKE_SKIP_RPATH ON)
+    set(CMAKE_FIND_LIBRARY_SUFFIXES_PREV ${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(CMAKE_FIND_LIBRARY_SUFFIXES ".so")
     find_package(X11 REQUIRED)
+    set(CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES_PREV})
     message(STATUS "X11_FOUND = ${X11_FOUND}")
     message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
     message(STATUS "X11_LIBRARIES = ${X11_LIBRARIES}")
@@ -302,6 +305,7 @@ if(STATIC)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtGraphicalEffects/private)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtMultimedia)
+  list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQml)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick.2)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls)
   list(APPEND QT5_EXTRA_PATHS ${QT5_PKG_CONFIG_Qt5Qml_PREFIX}/qml/QtQuick/Controls.2)
@@ -342,6 +346,10 @@ if(STATIC)
     windowplugin
   )
 
+  if(NOT ${Qt5Core_VERSION} VERSION_LESS 5.14)
+     list(APPEND QT5_EXTRA_LIBRARIES_LIST qmlplugin)
+  endif()
+
   set(QT5_EXTRA_LIBRARIES)
   foreach(LIBRARY ${QT5_EXTRA_LIBRARIES_LIST})
     find_library(${LIBRARY}_LIBRARY ${LIBRARY} PATHS ${QT5_EXTRA_PATHS} REQUIRED)
@@ -369,7 +377,6 @@ if(STATIC)
   if(UNIX AND NOT APPLE)
     list(APPEND QT5_INTEGRATION_LIBRARIES_LIST
       Qt5XcbQpa
-      xcb-static
       Qt5ServiceSupport
       Qt5GlxSupport
     )
@@ -383,8 +390,10 @@ if(STATIC)
   endforeach()
 
   if(UNIX AND NOT APPLE)
-    pkg_check_modules(X11XCB_XCBGLX_FONTCONFIG REQUIRED x11-xcb xcb-glx fontconfig)
-    list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_FONTCONFIG_STATIC_LIBRARIES})
+    pkg_check_modules(X11XCB_XCBGLX REQUIRED x11-xcb xcb-glx)
+    list(APPEND QT5_LIBRARIES ${X11XCB_XCBGLX_LIBRARIES})
+    pkg_check_modules(FONTCONFIG REQUIRED fontconfig)
+    list(APPEND QT5_LIBRARIES ${FONTCONFIG_STATIC_LIBRARIES})
   endif()
 endif()
 
