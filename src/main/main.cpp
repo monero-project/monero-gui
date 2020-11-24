@@ -190,6 +190,20 @@ int main(int argc, char *argv[])
     // Turn off colors in monerod log output.
     qputenv("TERM", "goaway");
 
+#if defined(Q_OS_MACOS)
+    QDir::setCurrent(QDir(MacOSHelper::bundlePath() + QDir::separator() + "..").canonicalPath());
+#endif
+
+    if (MoneroSettings::portableConfigExists())
+    {
+        const QString cacheDir(MoneroSettings::portableFolderName() + QDir::separator() + ".cache");
+        if (!qputenv("QML_DISK_CACHE_PATH", cacheDir.toUtf8()))
+        {
+            qCritical() << "Error: failed to set QML disk cache path";
+            return 1;
+        }
+    }
+
     MainApp app(argc, argv);
 
 #if defined(Q_OS_WIN)
@@ -325,10 +339,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     // start listening
     QTimer::singleShot(0, ipc, SLOT(bind()));
-
-#if defined(Q_OS_MACOS)
-    QDir::setCurrent(QDir(MacOSHelper::bundlePath() + QDir::separator() + "..").canonicalPath());
-#endif
 
     // screen settings
     // Mobile is designed on 128dpi

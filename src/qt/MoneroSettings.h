@@ -64,6 +64,7 @@ public:
     Q_INVOKABLE void setWritable(bool enabled);
 
     static QString portableFolderName();
+    static bool portableConfigExists();
 
 public slots:
     void _q_propertyChanged();
@@ -84,8 +85,7 @@ private:
     void store();
 
     bool portable() const;
-    bool portableConfigExists() const;
-    QString portableFilePath() const;
+    static QString portableFilePath();
     std::unique_ptr<QSettings> portableSettings() const;
     std::unique_ptr<QSettings> unportableSettings() const;
     void swap(std::unique_ptr<QSettings> newSettings);
