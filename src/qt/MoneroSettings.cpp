@@ -179,13 +179,13 @@ bool MoneroSettings::portable() const
     return this->m_settings && this->m_settings->fileName() == portableFilePath();
 }
 
-bool MoneroSettings::portableConfigExists() const
+bool MoneroSettings::portableConfigExists()
 {
     QFileInfo info(portableFilePath());
     return info.exists() && info.isFile();
 }
 
-QString MoneroSettings::portableFilePath() const
+QString MoneroSettings::portableFilePath()
 {
     static QString filename(QDir(portableFolderName()).absoluteFilePath("settings.ini"));
     return filename;
