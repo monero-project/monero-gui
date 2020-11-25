@@ -147,3 +147,21 @@ jobs:
       with:
         name: ${{ github.job }}
         path: /home/runner/work/monero-gui/monero-gui/build/Android/release/android-build/monero-gui.apk
+
+  source-archive:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: recursive
+    - name: archive
+      run: |
+        pip install git-archive-all
+        export VERSION="monero-gui-$(git describe)"
+        export OUTPUT="$VERSION.tar"
+        echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
+        /home/runner/.local/bin/git-archive-all --prefix "$VERSION/" --force-submodules "$OUTPUT"
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.OUTPUT }}
+        path: /home/runner/work/monero-gui/monero-gui/${{ env.OUTPUT }}
