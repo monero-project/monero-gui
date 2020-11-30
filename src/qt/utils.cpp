@@ -27,7 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QtCore>
-#include <QApplication>
+#include <QCoreApplication>
+#include <QMessageBox>
 #include <QtGlobal>
 
 #include "TailsOS.h"
@@ -88,7 +89,18 @@ QString getAccountName(){
 }
 
 #ifdef Q_OS_LINUX
-QString xdgMime(QApplication &app){
+bool askInstallDesktopEntry()
+{
+    QMessageBox msgBox(
+        QMessageBox::Question,
+        QObject::tr("Monero GUI"),
+        QObject::tr("Would you like to register Monero GUI Desktop entry?"),
+        QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+    return msgBox.exec() == QMessageBox::Yes;
+}
+
+QString xdgMime(){
     return QString(
         "[Desktop Entry]\n"
         "Name=Monero GUI\n"
@@ -105,32 +117,34 @@ QString xdgMime(QApplication &app){
         "StartupNotify=true\n"
         "X-GNOME-Bugzilla-Bugzilla=GNOME\n"
         "X-GNOME-UsesNotifications=true\n"
-    ).arg(app.applicationFilePath());
+    ).arg(QCoreApplication::applicationFilePath());
 }
 
-void registerXdgMime(QApplication &app){
+void registerXdgMime(){
     // Register desktop entry
     // - MacOS handled via Info.plist
     // - Windows handled in the installer by rbrunner7
     // - Linux written to `QStandardPaths::ApplicationsLocation`
     // - Tails written to persistent dotfiles
-    QString mime = xdgMime(app);
+    QString mime = xdgMime();
     QString appPath = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
     QString filePath = QString("%1/monero-gui.desktop").arg(appPath);
 
-    if (TailsOS::detect() && TailsOS::detectDotPersistence() && TailsOS::usePersistence) {
-        TailsOS::persistXdgMime(filePath, mime);
-        return;
+    if (TailsOS::detect())
+    {
+        if (TailsOS::detectDotPersistence() && TailsOS::usePersistence)
+        {
+            TailsOS::persistXdgMime(filePath, mime);
+        }
     }
-
-    QFileInfo file(filePath);
-    QDir().mkpath(file.path()); // ensure directory exists
-
-#ifdef QT_DEBUG
-    qDebug() << "Writing xdg mime: " << filePath;
-#endif
-
-    fileWrite(filePath, mime);
+    else
+    {
+        if (askInstallDesktopEntry())
+        {
+            QDir().mkpath(QFileInfo(filePath).path());
+            fileWrite(filePath, mime);
+        }
+    }
 }
 #endif
 

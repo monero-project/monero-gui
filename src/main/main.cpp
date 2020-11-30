@@ -319,11 +319,6 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
         return 1;
     }
 
-    // Desktop entry
-#ifdef Q_OS_LINUX
-    registerXdgMime(app);
-#endif
-
     IPC *ipc = new IPC(&app);
     QStringList posArgs = parser.positionalArguments();
 

@@ -1332,6 +1332,11 @@ ApplicationWindow {
             appWindow.fiatApiRefresh();
             appWindow.fiatTimerStart();
         }
+
+        if (persistentSettings.askDesktopShortcut && !persistentSettings.portable) {
+            persistentSettings.askDesktopShortcut = false;
+            oshelper.createDesktopEntry();
+        }
     }
 
     MoneroSettings {

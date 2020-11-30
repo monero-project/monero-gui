@@ -46,11 +46,13 @@
 #endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include <X11/XKBlib.h>
+#undef Bool
 #undef KeyPress
 #undef KeyRelease
 #undef FocusIn
 #undef FocusOut
 // #undef those Xlib #defines that conflict with QEvent::Type enum
+#include "qt/utils.h"
 #endif
 
 #if defined(Q_OS_WIN)
@@ -83,6 +85,13 @@ bool openFolderAndSelectItem(const QString &filePath)
 OSHelper::OSHelper(QObject *parent) : QObject(parent)
 {
 
+}
+
+void OSHelper::createDesktopEntry() const
+{
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    registerXdgMime();
+#endif
 }
 
 QString OSHelper::downloadLocation() const
