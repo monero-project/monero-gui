@@ -45,19 +45,10 @@ Rectangle {
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
     border.width: 1
-    focus: true
     Keys.enabled: true
     Keys.onEscapePressed: {
         root.close()
         root.rejected()
-    }
-    Keys.onEnterPressed: {
-        root.close()
-        root.accepted()
-    }
-    Keys.onReturnPressed: {
-        root.close()
-        root.accepted()
     }
     KeyNavigation.tab: doneButton
 
@@ -72,7 +63,6 @@ Rectangle {
     function open(txid) {
         root.transactionID = txid;
         root.visible = true;
-        root.forceActiveFocus();
     }
 
     function close() {
@@ -156,13 +146,6 @@ Rectangle {
                 text: qsTr("Open folder") + translationManager.emptyString;
                 width: 200
                 KeyNavigation.tab: doneButton
-                Keys.enabled: openFolderButton.visible
-                Keys.onReturnPressed: openFolderButton.onClicked
-                Keys.onEnterPressed: openFolderButton.onClicked
-                Keys.onEscapePressed: {
-                    root.close()
-                    root.rejected()
-                }
                 onClicked: {
                     oshelper.openContainingFolder(walletManager.urlToLocalPath(saveTxDialog.fileUrl))
                 }
@@ -172,15 +155,8 @@ Rectangle {
                 id: doneButton
                 text: qsTr("Done") + translationManager.emptyString;
                 width: 200
-                focus: true
+                focus: root.visible
                 KeyNavigation.tab: openFolderButton
-                Keys.enabled: doneButton.visible
-                Keys.onReturnPressed: doneButton.onClicked
-                Keys.onEnterPressed: doneButton.onClicked
-                Keys.onEscapePressed: {
-                    root.close()
-                    root.rejected()
-                }
                 onClicked: {
                     root.close()
                     root.accepted()
