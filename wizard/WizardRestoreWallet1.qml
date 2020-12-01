@@ -50,10 +50,8 @@ Rectangle {
         if(wizardController.walletRestoreMode === "keys") {
             return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
         } else if(wizardController.walletRestoreMode === "seed") {
-            valid = wizardWalletInput.verify();
-            if(!valid) return false;
-            valid = Wizard.checkSeed(seedInput.text);
-            return valid;
+            seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text);
+            return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text);
         }
 
         return false;
