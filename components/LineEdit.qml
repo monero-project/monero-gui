@@ -94,6 +94,7 @@ Item {
 
     height: showingHeader ? (inputLabel.height + inputItem.height + 2) : 42
 
+    onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
         // check to remove placeholder text when there is content
         if(item.isEmpty()){
@@ -234,6 +235,7 @@ Item {
             anchors.leftMargin: inlineIcon.visible ? 44 : 0
             font.pixelSize: item.fontSize
             font.bold: item.fontBold
+            KeyNavigation.tab: item.KeyNavigation.tab
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()

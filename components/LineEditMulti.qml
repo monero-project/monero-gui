@@ -94,6 +94,8 @@ ColumnLayout {
     signal inputLabelLinkActivated();
     signal editingFinished();
 
+    onActiveFocusChanged: activeFocus && input.forceActiveFocus()
+
     spacing: 0
     Rectangle {
         id: inputLabelRect
@@ -159,8 +161,10 @@ ColumnLayout {
         id: input
         readOnly: false
         addressValidation: false
+        KeyNavigation.priority: KeyNavigation.BeforeItem
+        KeyNavigation.tab: item.KeyNavigation.tab
         Layout.fillWidth: true
-        
+
         leftPadding: item.inputPaddingLeft
         rightPadding: item.inputPaddingRight
         topPadding: item.inputPaddingTop
