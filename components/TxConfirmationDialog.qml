@@ -45,32 +45,11 @@ Rectangle {
     radius: 10
     border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
     border.width: 1
-    focus: true
     Keys.enabled: true
     Keys.onEscapePressed: {
         root.close()
         root.clearFields()
         root.rejected()
-    }
-    Keys.onEnterPressed: {
-         if (root.state == "default") {
-             root.close()
-             root.accepted()
-         } else if (root.state == "error") {
-             root.close()
-             root.clearFields()
-             root.rejected()
-         }
-    }
-    Keys.onReturnPressed: {
-         if (root.state == "default") {
-             root.close()
-             root.accepted()
-         } else if (root.state == "error") {
-             root.close()
-             root.clearFields()
-             root.rejected()
-         }
     }
     KeyNavigation.tab: confirmButton
 
@@ -101,7 +80,7 @@ Rectangle {
             PropertyChanges { target: bottomMessage; visible: false }
             PropertyChanges { target: buttons; visible: true }
             PropertyChanges { target: backButton; visible: true; primary: false }
-            PropertyChanges { target: confirmButton; visible: true }
+            PropertyChanges { target: confirmButton; visible: true; focus: true }
         }, State {
             // error message being displayed, show only back button
             name: "error";
@@ -115,7 +94,7 @@ Rectangle {
             PropertyChanges { target: bottom; visible: true }
             PropertyChanges { target: bottomMessage; visible: false }
             PropertyChanges { target: buttons; visible: true }
-            PropertyChanges { target: backButton; visible: true; primary: true }
+            PropertyChanges { target: backButton; visible: true; primary: true; focus: true }
             PropertyChanges { target: confirmButton; visible: false }
         }, State {
             // creating or sending transaction, show tx details and don't show any button
@@ -141,7 +120,6 @@ Rectangle {
 
         //clean previous error message
         errorText.text = "";
-        root.forceActiveFocus()
     }
 
     function close() {
@@ -422,17 +400,8 @@ Rectangle {
                     id: backButton
                     text: qsTr("Back") + translationManager.emptyString;
                     width: 200
-                    focus: false
                     primary: false
                     KeyNavigation.tab: confirmButton
-                    Keys.enabled: backButton.visible
-                    Keys.onReturnPressed: backButton.onClicked
-                    Keys.onEnterPressed: backButton.onClicked
-                    Keys.onEscapePressed: {
-                        root.close()
-                        root.clearFields()
-                        root.rejected()
-                    }
                     onClicked: {
                         root.close()
                         root.clearFields()
@@ -445,16 +414,7 @@ Rectangle {
                     text: qsTr("Confirm") + translationManager.emptyString;
                     rightIcon: "qrc:///images/rightArrow.png"
                     width: 200
-                    focus: false
                     KeyNavigation.tab: backButton
-                    Keys.enabled: confirmButton.visible
-                    Keys.onReturnPressed: confirmButton.onClicked
-                    Keys.onEnterPressed: confirmButton.onClicked
-                    Keys.onEscapePressed: {
-                        root.close()
-                        root.clearFields()
-                        root.rejected()
-                    }
                     onClicked: {
                         root.close()
                         root.accepted()
