@@ -170,6 +170,7 @@ Rectangle {
 
           LineEditMulti {
               id: addressLine
+              KeyNavigation.tab: amountLine
               spacing: 0
               inputPaddingRight: inlineButtonVisible && inlineButton2Visible ? 100 : 60
               fontBold: true
@@ -277,6 +278,7 @@ Rectangle {
               // Amount input
               LineEdit {
                   id: amountLine
+                  KeyNavigation.tab: sendButton
                   Layout.fillWidth: true
                   inlineIcon: true
                   labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
@@ -488,6 +490,7 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
+              KeyNavigation.tab: addressLine
               rightIcon: "qrc:///images/rightArrow.png"
               rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4

@@ -68,7 +68,7 @@ Item {
         id: buttonRect
         anchors.fill: parent
         radius: 3
-        border.width: parent.focus ? 1 : 0
+        border.width: parent.focus && parent.enabled ? 1 : 0
 
         state: button.enabled ? "active" : "disabled"
         Component.onCompleted: state = state
@@ -76,7 +76,7 @@ Item {
         states: [
             State {
                 name: "hover"
-                when: buttonArea.containsMouse || button.focus
+                when: button.enabled && (buttonArea.containsMouse || button.focus)
                 PropertyChanges {
                     target: buttonRect
                     color: primary
