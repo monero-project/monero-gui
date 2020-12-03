@@ -102,13 +102,14 @@ Packaging for your favorite distribution would be a welcome contribution!
    \* `4` - number of CPU threads to use
 5. Monero GUI Windows static binaries will be placed in  `monero-gui/build/x86_64-w64-mingw32/release/bin` directory
 
-### Building Linux static binaries with Docker (any OS)
+### Building Reproducible Linux static binaries with Docker (any OS)
 
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 2. Clone the repository
    ```
-   git clone --recursive https://github.com/monero-project/monero-gui.git
+   git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
+   \* `master` - replace with the desired version tag (e.g. `v0.17.1.5`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -123,6 +124,11 @@ Packaging for your favorite distribution would be a welcome contribution!
    \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
    \* `4` - number of CPU threads to use
 5. Monero GUI Linux static binaries will be placed in  `monero-gui/build/release/bin` directory
+6. (*Optional*) Compare `monero-wallet-gui` SHA-256 hash to the one obtained from a trusted source
+   ```
+   docker run --rm -it -v <MONERO_GUI_DIR_FULL_PATH>:/monero-gui -w /monero-gui monero:build-env-linux sh -c 'shasum -a 256 /monero-gui/build/release/bin/monero-wallet-gui'
+   ```
+   \* `<MONERO_GUI_DIR_FULL_PATH>` - absolute path to `monero-gui` directory  
 
 ### Building Android APK with Docker (any OS) *Experimental*
  - Minimum Android 9 Pie (API 28)
