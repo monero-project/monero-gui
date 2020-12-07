@@ -28,7 +28,6 @@
 
 #include <QtCore>
 #include <QCoreApplication>
-#include <QMessageBox>
 #include <QtGlobal>
 
 #include "TailsOS.h"
@@ -89,17 +88,6 @@ QString getAccountName(){
 }
 
 #ifdef Q_OS_LINUX
-bool askInstallDesktopEntry()
-{
-    QMessageBox msgBox(
-        QMessageBox::Question,
-        QObject::tr("Monero GUI"),
-        QObject::tr("Would you like to register Monero GUI Desktop entry?"),
-        QMessageBox::Yes | QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::Yes);
-    return msgBox.exec() == QMessageBox::Yes;
-}
-
 QString xdgMime(){
     return QString(
         "[Desktop Entry]\n"
@@ -139,11 +127,8 @@ void registerXdgMime(){
     }
     else
     {
-        if (askInstallDesktopEntry())
-        {
-            QDir().mkpath(QFileInfo(filePath).path());
-            fileWrite(filePath, mime);
-        }
+        QDir().mkpath(QFileInfo(filePath).path());
+        fileWrite(filePath, mime);
     }
 }
 #endif
