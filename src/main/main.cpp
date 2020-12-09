@@ -194,15 +194,7 @@ int main(int argc, char *argv[])
     QDir::setCurrent(QDir(MacOSHelper::bundlePath() + QDir::separator() + "..").canonicalPath());
 #endif
 
-    if (MoneroSettings::portableConfigExists())
-    {
-        const QString cacheDir(MoneroSettings::portableFolderName() + QDir::separator() + ".cache");
-        if (!qputenv("QML_DISK_CACHE_PATH", cacheDir.toUtf8()))
-        {
-            qCritical() << "Error: failed to set QML disk cache path";
-            return 1;
-        }
-    }
+    qputenv("QML_DISABLE_DISK_CACHE", "1");
 
     MainApp app(argc, argv);
 
