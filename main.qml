@@ -952,10 +952,12 @@ ApplicationWindow {
             // Store to file
             transaction.setFilename(path);
         }
+        appWindow.showProcessingSplash(qsTr("Sending transaction ..."));
         currentWallet.commitTransactionAsync(transaction);
     }
 
     function onTransactionCommitted(success, transaction, txid) {
+        hideProcessingSplash();
         if (!success) {
             console.log("Error committing transaction: " + transaction.errorString);
             informationPopup.title = qsTr("Error") + translationManager.emptyString
