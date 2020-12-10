@@ -113,5 +113,5 @@ function capitalize(s){
 }
 
 function removeTrailingZeros(value) {
-    return (value + '').replace(/(\.\d*[1-9])0+$/, '$1');
+    return (value + '').replace(/\.?0*$/, '');
 }
