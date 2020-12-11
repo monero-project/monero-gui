@@ -1335,7 +1335,21 @@ ApplicationWindow {
 
         if (persistentSettings.askDesktopShortcut && !persistentSettings.portable) {
             persistentSettings.askDesktopShortcut = false;
-            oshelper.createDesktopEntry();
+
+            if (isTails) {
+                oshelper.createDesktopEntry();
+            } else if (isLinux) {
+                confirmationDialog.title = qsTr("Desktop entry") + translationManager.emptyString;
+                confirmationDialog.text  = qsTr("Would you like to register Monero GUI Desktop entry?") + translationManager.emptyString;
+                confirmationDialog.icon = StandardIcon.Question;
+                confirmationDialog.cancelText = qsTr("No") + translationManager.emptyString;
+                confirmationDialog.okText = qsTr("Yes") + translationManager.emptyString;
+                confirmationDialog.onAcceptedCallback = function() {
+                    oshelper.createDesktopEntry();
+                };
+                confirmationDialog.onRejectedCallback = null;
+                confirmationDialog.open();
+            }
         }
     }
 
@@ -1347,6 +1361,7 @@ ApplicationWindow {
             return "";
         }
 
+        property bool askDesktopShortcut: isLinux
         property string language: 'English (US)'
         property string language_wallet: 'English'
         property string locale: 'en_US'
