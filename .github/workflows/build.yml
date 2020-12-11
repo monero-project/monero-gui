@@ -93,7 +93,7 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - uses: satackey/action-docker-layer-caching@v0.0.8
+    - uses: satackey/action-docker-layer-caching@v0.0.10
       continue-on-error: true
       with:
         key: docker-linux-static-{hash}
@@ -118,7 +118,7 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - uses: satackey/action-docker-layer-caching@v0.0.8
+    - uses: satackey/action-docker-layer-caching@v0.0.10
       continue-on-error: true
       with:
         key: docker-windows-static-{hash}
