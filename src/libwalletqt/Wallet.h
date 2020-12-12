@@ -29,6 +29,8 @@
 #ifndef WALLET_H
 #define WALLET_H
 
+#include <atomic>
+
 #include <QElapsedTimer>
 #include <QObject>
 #include <QMutex>
@@ -444,7 +446,7 @@ private:
     int     m_connectionStatusTtl;
     mutable QElapsedTimer m_connectionStatusTime;
     bool m_disconnected;
-    mutable bool    m_initialized;
+    std::atomic<bool> m_initialized;
     uint32_t m_currentSubaddressAccount;
     Subaddress * m_subaddress;
     mutable SubaddressModel * m_subaddressModel;
