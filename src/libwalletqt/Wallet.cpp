@@ -104,10 +104,7 @@ void Wallet::updateConnectionStatusAsync()
             setConnectionStatus(ConnectionStatus_Connecting);
         }
         ConnectionStatus newStatus = static_cast<ConnectionStatus>(m_walletImpl->connected());
-        if (newStatus != m_connectionStatus || !m_initialized) {
-            m_initialized = true;
-            setConnectionStatus(newStatus);
-        }
+        setConnectionStatus(newStatus);
         // Release lock
         m_connectionStatusRunning = false;
     });
@@ -115,8 +112,13 @@ void Wallet::updateConnectionStatusAsync()
 
 Wallet::ConnectionStatus Wallet::connected(bool forceCheck)
 {
+    if (!m_initialized)
+    {
+        return ConnectionStatus_Connecting;
+    }
+
     // cache connection status
-    if (forceCheck || !m_initialized || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
+    if (forceCheck || (m_connectionStatusTime.elapsed() / 1000 > m_connectionStatusTtl && !m_connectionStatusRunning) || m_connectionStatusTime.elapsed() > 30000) {
         qDebug() << "Checking connection status";
         m_connectionStatusRunning = true;
         m_connectionStatusTime.restart();
@@ -277,13 +279,24 @@ void Wallet::initAsync(
 {
     qDebug() << "initAsync: " + daemonAddress;
     const auto future = m_scheduler.run([this, daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress] {
-        bool success = init(daemonAddress, trustedDaemon, upperTransactionLimit, isRecovering, isRecoveringFromDevice, restoreHeight, proxyAddress);
-        if (success)
+        m_initialized = init(
+            daemonAddress,
+            trustedDaemon,
+            upperTransactionLimit,
+            isRecovering,
+            isRecoveringFromDevice,
+            restoreHeight,
+            proxyAddress);
+        if (m_initialized)
         {
             emit walletCreationHeightChanged();
             qDebug() << "init async finished - starting refresh";
             connected(true);
             startRefresh();
+        }
+        else
+        {
+            qCritical() << "Failed to initialize the wallet";
         }
     });
     if (future.first)
@@ -1054,6 +1067,7 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_connectionStatus(Wallet::ConnectionStatus_Disconnected)
     , m_connectionStatusTtl(WALLET_CONNECTION_STATUS_CACHE_TTL_SECONDS)
     , m_disconnected(true)
+    , m_initialized(false)
     , m_currentSubaddressAccount(0)
     , m_subaddress(nullptr)
     , m_subaddressModel(nullptr)
@@ -1074,7 +1088,6 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     m_connectionStatusTime.start();
     m_daemonBlockChainHeightTime.start();
     m_daemonBlockChainTargetHeightTime.start();
-    m_initialized = false;
     m_connectionStatusRunning = false;
     m_daemonUsername = "";
     m_daemonPassword = "";
