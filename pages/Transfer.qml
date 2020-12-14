@@ -298,7 +298,7 @@ Rectangle {
                   inlineButtonText: qsTr("All") + translationManager.emptyString
                   inlineButton.onClicked: amountLine.text = "(all)"
                   onTextChanged: {
-                        amountLine.text = amountLine.text.replace(",", ".");
+                        amountLine.text = amountLine.text.trim().replace(",", ".");
                         const match = amountLine.text.match(/^0+(\d.*)/);
                         if (match) {
                             const cursorPosition = amountLine.cursorPosition;
@@ -314,7 +314,7 @@ Rectangle {
                   }
 
                   validator: RegExpValidator {
-                      regExp: /^(\d{1,8})?([\.,]\d{1,12})?$/
+                      regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                   }
               }
 
