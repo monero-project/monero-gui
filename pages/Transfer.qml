@@ -783,8 +783,8 @@ Rectangle {
                                    "Please upgrade or connect to another daemon")
             break
         default:
-            if(!appWindow.daemonSynced){
-                root.warningContent = qsTr("Waiting on daemon synchronization to finish.")
+            if(!appWindow.walletSynced){
+                root.warningContent = qsTr("Waiting on wallet synchronization to finish.")
             } else {
                 // everything OK, enable transfer page
                 // Light wallet is always ready

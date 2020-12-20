@@ -669,7 +669,7 @@ ApplicationWindow {
             firstBlockSeen = dCurrentBlock;
         }
         daemonSynced = dCurrentBlock >= dTargetBlock && dTargetBlock != 1
-        walletSynced = bcHeight >= dTargetBlock
+        walletSynced = bcHeight >= dCurrentBlock
 
         // Update progress bars
         if(!daemonSynced) {
