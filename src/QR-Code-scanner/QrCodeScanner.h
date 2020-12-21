@@ -56,8 +56,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void enabledChanged();
 
-    void decoded(int type, const QString &data);
-    void decode(int type, const QString &data);
+    void decoded(const QString &data);
     void notifyError(const QString &error, bool warning = false);
 
 protected:

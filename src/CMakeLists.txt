@@ -55,13 +55,6 @@ if(ENABLE_PASS_STRENGTH_METER)
     )
 endif()
 
-if(WITH_SCANNER)
-    file(GLOB QR_CODE_FILES
-    	"QR-Code-scanner/*.h"
-    	"QR-Code-scanner/*.cpp"
-    )
-endif()
-
 set(EXECUTABLE_FLAG)
 if(MINGW)
     set(EXECUTABLE_FLAG WIN32)
@@ -84,7 +77,6 @@ endif()
 set(monero_wallet_gui_sources
     ${SOURCE_FILES}
     ${PASS_STRENGTH_FILES}
-    ${QR_CODE_FILES}
     ${RESOURCES}
 )
 
@@ -128,7 +120,6 @@ target_include_directories(monero-wallet-gui PUBLIC
     ${X11_INCLUDE_DIR}
     ${Boost_INCLUDE_DIRS}
     ${OPENSSL_INCLUDE_DIR}
-    ${ZBAR_INCLUDE_DIR}
 )
 
 target_compile_definitions(monero-wallet-gui
@@ -159,6 +150,7 @@ target_link_libraries(monero-wallet-gui
     ${EXTRA_LIBRARIES}
     ${ICU_LIBRARIES}
     openpgp
+    qrdecoder
     translations
 )
 
@@ -171,16 +163,14 @@ if(X11_FOUND)
 endif()
 
 if(WITH_SCANNER)
-    if(NOT ANDROID)
+    target_link_libraries(monero-wallet-gui qrscanner)
+    if(LINUX AND NOT ANDROID)
         target_link_libraries(monero-wallet-gui
-            ${ZBAR_LIBRARIES}
             jpeg
             v4l2
             v4lconvert
             rt
         )
-    else()
-        target_link_libraries(monero-wallet-gui ${ZBAR_LIBRARIES})
     endif()
 endif()
 

@@ -35,9 +35,10 @@
 #include <QEvent>
 #include <QVideoFrame>
 #include <QCamera>
-#include <zbar.h>
 
-class QrScanThread : public QThread, public zbar::Image::Handler
+#include "Decoder.h"
+
+class QrScanThread : public QThread
 {
     Q_OBJECT
 
@@ -47,20 +48,16 @@ public:
     virtual void stop();
 
 Q_SIGNALS:
-    void decoded(int type, const QString &data);
+    void decoded(const QString &data);
     void notifyError(const QString &error, bool warning = false);
 
 protected:
     virtual void run();
     void processVideoFrame(const QVideoFrame &);
     void processQImage(const QImage &);
-    void processZImage(zbar::Image &image);
-    virtual void image_callback(zbar::Image &image);
-    bool zimageFromQImage(const QImage&, zbar::Image &);
 
 private:
-    zbar::ImageScanner m_scanner;
-    QSharedPointer<zbar::Image> m_image;
+    QrDecoder m_decoder;
     bool m_running;
     QMutex m_mutex;
     QWaitCondition m_waitCondition;
