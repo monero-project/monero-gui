@@ -98,7 +98,7 @@ Rectangle {
         addressLine.text = address
         setPaymentId(payment_id);
         amountLine.text = amount
-        setDescription(recipient_name + " " + tx_description);
+        setDescription((recipient_name ? recipient_name + " " : "") + tx_description);
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
