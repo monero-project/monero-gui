@@ -29,11 +29,15 @@
 import FontAwesome 1.0
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
 
 Item {
     id: item
+
+    default property alias content: inlineButtons.children
+
     property alias input: input
     property alias text: input.text
 
@@ -53,8 +57,6 @@ Item {
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
-    property alias inlineButton: inlineButtonId
-    property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
     property alias copyButtonText: copyButtonId.text
@@ -239,6 +241,7 @@ Item {
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()
+            rightPadding: inlineButtons.width + 14
             topPadding: 10
             bottomPadding: 10
             echoMode: isPasswordHidden() ? TextInput.Password : TextInput.Normal
@@ -262,13 +265,15 @@ Item {
                     onClicked: passwordToggle()
                 }
             }
-        }
 
-        MoneroComponents.InlineButton {
-            id: inlineButtonId
-            visible: item.inlineButtonText ? true : false
-            anchors.right: parent.right
-            anchors.rightMargin: 8
+            RowLayout {
+                id: inlineButtons
+                anchors.bottom: parent.bottom
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: 4
+                spacing: 4
+            }
         }
     }
 }

@@ -81,13 +81,16 @@ ColumnLayout {
             placeholderText: qsTr("Default") + translationManager.emptyString
             placeholderFontSize: 15
             text: persistentSettings.blockchainDataDir
-            inlineButton.small: true
-            inlineButtonText: qsTr("Browse") + translationManager.emptyString
-            inlineButton.onClicked: {
-                if(persistentSettings.blockchainDataDir != "");
-                    blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
-                blockchainFileDialog.open();
-                blockchainFolder.focus = true;
+
+            MoneroComponents.InlineButton {
+                small: true
+                text: qsTr("Browse") + translationManager.emptyString
+                onClicked: {
+                    if(persistentSettings.blockchainDataDir != "");
+                        blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                    blockchainFileDialog.open();
+                    blockchainFolder.focus = true;
+                }
             }
         }
 

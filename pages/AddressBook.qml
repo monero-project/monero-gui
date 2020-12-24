@@ -314,16 +314,16 @@ Rectangle {
                     }
                 }
 
-                inlineButton.text: FontAwesome.qrcode
-                inlineButton.fontPixelSize: 22
-                inlineButton.fontFamily: FontAwesome.fontFamily
-                inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-                inlineButton.buttonColor: MoneroComponents.Style.orange
-                inlineButton.onClicked: {
-                    cameraUi.state = "Capture"
-                    cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
+                MoneroComponents.InlineButton {
+                    buttonColor: MoneroComponents.Style.orange
+                    fontFamily: FontAwesome.fontFamily
+                    text: FontAwesome.qrcode
+                    visible : appWindow.qrScannerEnabled && !addressLine.text
+                    onClicked: {
+                        cameraUi.state = "Capture"
+                        cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
+                    }
                 }
-                inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
             }
 
             MoneroComponents.StandardButton {

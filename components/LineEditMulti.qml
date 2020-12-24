@@ -36,13 +36,15 @@ ColumnLayout {
 
     Layout.fillWidth: true
 
+    default property alias content: inlineButtons.children
+
     property alias text: input.text
     property alias labelText: inputLabel.text
     property alias labelButtonText: labelButton.text
     property alias placeholderText: placeholderLabel.text
 
     property int inputPaddingLeft: 10
-    property int inputPaddingRight: 10
+    property alias inputPaddingRight: input.rightPadding
     property int inputPaddingTop: 10
     property int inputPaddingBottom: 10
     property int inputRadius: 4
@@ -84,11 +86,6 @@ ColumnLayout {
     property var wrapMode: Text.NoWrap
     property alias addressValidation: input.addressValidation
     property string backgroundColor: "" // mock
-
-    property alias inlineButton: inlineButtonId
-    property bool inlineButtonVisible: false
-    property alias inlineButton2: inlineButton2Id
-    property bool inlineButton2Visible: false
 
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
@@ -166,7 +163,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         leftPadding: item.inputPaddingLeft
-        rightPadding: item.inputPaddingRight
+        rightPadding: inlineButtons.width + 14
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
@@ -202,18 +199,12 @@ ColumnLayout {
             visible: !item.borderDisabled
         }
 
-        MoneroComponents.InlineButton {
-            id: inlineButtonId
-            visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
+        RowLayout {
+            id: inlineButtons
+            anchors.top: parent.top
             anchors.right: parent.right
-            anchors.rightMargin: 8
-        }
-        
-        MoneroComponents.InlineButton {
-            id: inlineButton2Id
-            visible: (inlineButton2Id.text || inlineButton2Id.icon) && inlineButton2Visible ? true : false
-            anchors.right: parent.right
-            anchors.rightMargin: inlineButtonVisible ? 48 : 8
+            anchors.margins: 4
+            spacing: 4
         }
     }
 }
