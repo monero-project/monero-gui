@@ -718,7 +718,7 @@ Rectangle {
         selectExisting: false
         onAccepted: {
             console.log(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl))
-            currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl));
+            currentWallet.exportKeyImages(walletManager.urlToLocalPath(exportKeyImagesDialog.fileUrl), true);
         }
         onRejected: {
             console.log("Canceled");
