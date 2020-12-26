@@ -137,6 +137,14 @@ target_compile_definitions(monero-wallet-gui
     ${Qt5Qml_DEFINITIONS}
 )
 
+if(APPLE)
+    if(NOT ICU_ROOT)
+        execute_process(COMMAND brew --prefix icu4c OUTPUT_VARIABLE ICU_ROOT OUTPUT_STRIP_TRAILING_WHITESPACE)
+    endif()
+    find_package(ICU REQUIRED COMPONENTS data i18n uc)
+    target_link_directories(monero-wallet-gui PRIVATE ${ICU_ROOT}/lib)
+endif()
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 target_link_libraries(monero-wallet-gui
