@@ -172,7 +172,6 @@ Rectangle {
               id: addressLine
               KeyNavigation.tab: amountLine
               spacing: 0
-              inputPaddingRight: inlineButtonVisible && inlineButton2Visible ? 100 : 60
               fontBold: true
               labelText: qsTr("Address") + translationManager.emptyString
               labelButtonText: qsTr("Resolve") + translationManager.emptyString
@@ -196,27 +195,25 @@ Rectangle {
                     setDescription(parsed.tx_description);
                   }
               }
-              inlineButton.text: FontAwesome.addressBook
-              inlineButton.buttonHeight: 30
-              inlineButton.fontPixelSize: 22
-              inlineButton.fontFamily: FontAwesome.fontFamily
-              inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton.onClicked: {
-                  middlePanel.addressBookView.selectAndSend = true;
-                  appWindow.showPageRequest("AddressBook");
-              }
-              inlineButtonVisible: true
-              
-              inlineButton2.text: FontAwesome.qrcode
-              inlineButton2.buttonHeight: 30
-              inlineButton2.fontPixelSize: 22
-              inlineButton2.fontFamily: FontAwesome.fontFamily
-              inlineButton2.textColor: MoneroComponents.Style.defaultFontColor
-              inlineButton2.onClicked: {
-                   cameraUi.state = "Capture"
-                   cameraUi.qrcode_decoded.connect(updateFromQrCode)
-              }
-              inlineButton2Visible: appWindow.qrScannerEnabled
+
+                MoneroComponents.InlineButton {
+                    fontFamily: FontAwesome.fontFamily
+                    text: FontAwesome.addressBook
+                    onClicked: {
+                        middlePanel.addressBookView.selectAndSend = true;
+                        appWindow.showPageRequest("AddressBook");
+                    }
+                }
+
+                MoneroComponents.InlineButton {
+                    fontFamily: FontAwesome.fontFamily
+                    text: FontAwesome.qrcode
+                    visible: appWindow.qrScannerEnabled
+                    onClicked: {
+                        cameraUi.state = "Capture"
+                        cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                    }
+                }
           }
       }
 
@@ -295,8 +292,6 @@ Rectangle {
                   placeholderText: "0.00"
                   width: 100
                   fontBold: true
-                  inlineButtonText: qsTr("All") + translationManager.emptyString
-                  inlineButton.onClicked: amountLine.text = "(all)"
                   onTextChanged: {
                         amountLine.text = amountLine.text.trim().replace(",", ".");
                         const match = amountLine.text.match(/^0+(\d.*)/);
@@ -312,10 +307,14 @@ Rectangle {
                         }
                         amountLine.error = walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()
                   }
-
                   validator: RegExpValidator {
                       regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
                   }
+
+                    MoneroComponents.InlineButton {
+                        text: qsTr("All") + translationManager.emptyString
+                        onClicked: amountLine.text = "(all)"
+                    }
               }
 
                 MoneroComponents.TextPlain {

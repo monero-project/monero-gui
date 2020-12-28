@@ -89,15 +89,18 @@ GridLayout {
         placeholderText: "..."
         placeholderFontSize: 16
         text: appWindow.accountsDir + "/"
-        inlineButton.small: true
-        inlineButtonText: qsTr("Browse") + translationManager.emptyString
-        inlineButton.onClicked: {
-            fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
-            fileWalletDialog.open()
-            walletLocation.focus = true
-        }
         onTextChanged: {
             walletLocation.error = walletLocation.text === "";
+        }
+
+        MoneroComponents.InlineButton {
+            small: true
+            text: qsTr("Browse") + translationManager.emptyString
+            onClicked: {
+                fileWalletDialog.folder = walletManager.localPathToUrl(walletLocation.text)
+                fileWalletDialog.open()
+                walletLocation.focus = true
+            }
         }
     }
 
