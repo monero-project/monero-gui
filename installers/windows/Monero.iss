@@ -105,9 +105,6 @@ Source: "bin\extras\monero-gen-ssl-cert.exe"; DestDir: "{app}"; Flags: ignorever
 ; Qt Quick 2D Renderer fallback for systems / environments with "low-level graphics" i.e. without 3D support
 Source: "bin\start-low-graphics-mode.bat"; DestDir: "{app}"; Flags: ignoreversion
 
-; Use a scale factor of 2 for Qt for high-DPI systems, as long as Qt does not handle some such systems adequately
-Source: "bin\start-high-dpi.bat"; DestDir: "{app}"; Flags: ignoreversion
-
 ; Mesa, open-source OpenGL implementation; part of "low-level graphics" support
 Source: "bin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 
@@ -170,6 +167,7 @@ Type: files; Name: "{app}\libssp-0.dll"
 Type: files; Name: "{app}\libhidapi-0.dll"
 Type: files; Name: "{app}\libeay32.dll"
 Type: files; Name: "{app}\ssleay32.dll"
+Type: files; Name: "{app}\start-high-dpi.bat"
 Type: files; Name: "{group}\Utilities\x (Check Blockchain Folder).lnk"
 
 
