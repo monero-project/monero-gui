@@ -151,25 +151,6 @@ RUN set -ex \
     && make -j${THREADS} install \
     && rm -rf $(pwd)
 
-RUN git clone https://github.com/ZBar/ZBar.git --depth 1 \
-    && cd ZBar \
-    && git reset --hard 854a5d97059e395807091ac4d80c53f7968abb8f \
-    && sed -i 's/SHARED/STATIC/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CPP_FEATURES := exceptions rtti features\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS := -Wno-multichar\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -D_ANDROID\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -DLIBDIR="\\".\\""\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -DBUILDING_LIBICONV\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -DBUILDING_LIBCHARSET\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -DIN_LIBRARY\n\0/' android/jni/Android.mk \
-    && sed -i -E 's/(.*BUILD_STATIC_LIBRARY.*)/LOCAL_CFLAGS += -fno-stack-protector\n\0/' android/jni/Android.mk \
-    && echo "APP_ABI := arm64-v8a \nAPP_STL := c++_shared \nTARGET_PLATFORM := ${ANDROID_API} \nTARGET_ARCH_ABI := arm64-v8a \nAPP_CFLAGS +=  -target aarch64-none-linux-android -fexceptions -fstack-protector-strong -fno-limit-debug-info -mfloat-abi=softfp -fno-builtin-memmove -fno-omit-frame-pointer -fno-stack-protector\n" \
-       >> android/jni/Application.mk \
-    && cd android \
-    && CC=${ANDROID_CLANG} CXX=${ANDROID_CLANGPP} ${ANDROID_NDK_ROOT}/ndk-build ICONV_SRC=${WORKDIR}/libiconv-${ICONV_VERSION} -B V=1 NDK_APPLICATION_MK=jni/Application.mk \
-    && cp obj/local/arm64-v8a/lib* ${PREFIX}/lib \
-    && cp -r ../include/* ${PREFIX}/include
-
 RUN git clone -b libgpg-error-1.38 --depth 1 git://git.gnupg.org/libgpg-error.git \
     && cd libgpg-error \
     && git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 \

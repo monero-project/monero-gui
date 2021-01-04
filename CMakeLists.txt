@@ -131,12 +131,8 @@ message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
 message(STATUS "OpenSSL: include dir at ${OPENSSL_INCLUDE_DIR}")
 message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARIES}")
 
-# Zbar (for QR scanner)
 if(WITH_SCANNER)
     add_definitions(-DWITH_SCANNER)
-    find_package(ZBar0 REQUIRED)
-    message(STATUS "libzbar: include dir at ${ZBAR_INCLUDE_DIR}")
-    message(STATUS "libzbar: libraries at ${ZBAR_LIBRARIES}")
 endif()
 
 # Sodium
@@ -563,6 +559,6 @@ if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
   endif()
 endif()
 
+add_subdirectory(external)
 add_subdirectory(translations)
-
 add_subdirectory(src)

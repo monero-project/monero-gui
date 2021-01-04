@@ -27,7 +27,6 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "QrCodeScanner.h"
-#include <WalletManager.h>
 #include <QVideoProbe>
 #include <QCamera>
 
@@ -40,7 +39,7 @@ QrCodeScanner::QrCodeScanner(QObject *parent)
     m_probe = new QVideoProbe(this);
     m_thread = new QrScanThread(this);
     m_thread->start();
-    QObject::connect(m_thread, SIGNAL(decoded(int, QString)), this, SIGNAL(decoded(int, QString)));
+    QObject::connect(m_thread, SIGNAL(decoded(QString)), this, SIGNAL(decoded(QString)));
     QObject::connect(m_thread, SIGNAL(notifyError(const QString &, bool)), this, SIGNAL(notifyError(const QString &, bool)));
     connect(m_probe, SIGNAL(videoFrameProbed(QVideoFrame)), this, SLOT(processFrame(QVideoFrame)));
 }

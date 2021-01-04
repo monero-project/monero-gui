@@ -2,3 +2,6 @@
 	path = monero
 	url = https://github.com/monero-project/monero
 	ignore = all
+[submodule "external/quirc"]
+	path = external/quirc
+	url = https://github.com/dlbeer/quirc/
