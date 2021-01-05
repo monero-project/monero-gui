@@ -39,6 +39,7 @@ Rectangle {
     property alias symbol: symbolText.text
     property int numSelectedChildren: 0
     property var under: null
+    property bool reclickable: false
     signal clicked()
 
     function doClick() {
@@ -139,7 +140,7 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            if(parent.checked)
+            if(parent.checked && !reclickable)
                 return
             button.doClick()
             parent.checked = true

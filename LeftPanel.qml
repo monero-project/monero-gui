@@ -477,9 +477,18 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Advanced") + translationManager.emptyString
                 symbol: qsTr("D") + translationManager.emptyString
+                reclickable: true
+                property bool collapsed: false
                 onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = advancedButton
+                    if (parent.previousButton != advancedButton || (parent.previousButton == advancedButton && this.collapsed)) {
+                        parent.previousButton.checked = false
+                        parent.previousButton = advancedButton
+                        this.collapsed = false
+                    }
+                    else {
+                        console.log("collapsing advanced tab")
+                        this.collapsed = true
+                    }
                 }
             }
 
@@ -493,7 +502,7 @@ Rectangle {
             // ------------- Mining tab ---------------
             MoneroComponents.MenuButton {
                 id: miningButton
-                visible: !isAndroid && !isIOS && appWindow.walletMode >= 2
+                visible: !isAndroid && !isIOS && appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Mining") + translationManager.emptyString
@@ -507,7 +516,7 @@ Rectangle {
             }
 
             MoneroComponents.MenuButtonDivider {
-                visible: miningButton.present && appWindow.walletMode >= 2
+                visible: miningButton.present && appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
@@ -516,7 +525,7 @@ Rectangle {
             // ------------- TxKey tab ---------------
             MoneroComponents.MenuButton {
                 id: txkeyButton
-                visible: appWindow.walletMode >= 2
+                visible: appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Prove/check") + translationManager.emptyString
@@ -530,7 +539,7 @@ Rectangle {
             }
 
             MoneroComponents.MenuButtonDivider {
-                visible: txkeyButton.present && appWindow.walletMode >= 2
+                visible: txkeyButton.present && appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
@@ -539,7 +548,7 @@ Rectangle {
             // ------------- Shared RingDB tab ---------------
             MoneroComponents.MenuButton {
                 id: sharedringdbButton
-                visible: appWindow.walletMode >= 2
+                visible: appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Shared RingDB") + translationManager.emptyString
@@ -553,7 +562,7 @@ Rectangle {
             }
 
             MoneroComponents.MenuButtonDivider {
-                visible: sharedringdbButton.present && appWindow.walletMode >= 2
+                visible: sharedringdbButton.present && appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
@@ -562,7 +571,7 @@ Rectangle {
             // ------------- Sign/verify tab ---------------
             MoneroComponents.MenuButton {
                 id: signButton
-                visible: appWindow.walletMode >= 2
+                visible: appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 text: qsTr("Sign/verify") + translationManager.emptyString
@@ -576,7 +585,7 @@ Rectangle {
             }
 
             MoneroComponents.MenuButtonDivider {
-                visible: signButton.present && appWindow.walletMode >= 2
+                visible: signButton.present && appWindow.walletMode >= 2 && !advancedButton.collapsed
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
