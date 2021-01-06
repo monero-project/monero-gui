@@ -27,10 +27,16 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "oshelper.h"
+
+#include <unordered_set>
+
 #include <QCoreApplication>
+#include <QGuiApplication>
 #include <QFileDialog>
+#include <QScreen>
 #include <QStandardPaths>
 #include <QTemporaryFile>
+#include <QWindow>
 #include <QDir>
 #include <QDebug>
 #include <QDesktopServices>
@@ -54,6 +60,40 @@
 // #undef those Xlib #defines that conflict with QEvent::Type enum
 #include "qt/utils.h"
 #endif
+
+#include "QR-Code-scanner/Decoder.h"
+#include "qt/ScopeGuard.h"
+
+namespace
+{
+
+QPixmap screenshot()
+{
+#ifdef Q_OS_MAC
+    return MacOSHelper::screenshot();
+#else
+    std::unordered_set<QWindow *> hidden;
+    const QWindowList windows = QGuiApplication::allWindows();
+    for (QWindow *window : windows)
+    {
+        if (window->isVisible())
+        {
+            hidden.emplace(window);
+            window->hide();
+        }
+    }
+    const auto unhide = sg::make_scope_guard([&hidden]() {
+        for (QWindow *window : hidden)
+        {
+            window->show();
+        }
+    });
+
+    return QGuiApplication::primaryScreen()->grabWindow(0);
+#endif
+}
+
+} // namespace
 
 #if defined(Q_OS_WIN)
 bool openFolderAndSelectItem(const QString &filePath)
@@ -97,6 +137,26 @@ void OSHelper::createDesktopEntry() const
 QString OSHelper::downloadLocation() const
 {
     return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+}
+
+QList<QString> OSHelper::grabQrCodesFromScreen() const
+{
+    QList<QString> codes;
+
+    try
+    {
+        const QImage image = screenshot().toImage();
+        const std::vector<std::string> decoded = QrDecoder().decode(image);
+        std::for_each(decoded.begin(), decoded.end(), [&codes](const std::string &code) {
+            codes.push_back(QString::fromStdString(code));
+        });
+    }
+    catch (const std::exception &e)
+    {
+        qWarning() << e.what();
+    }
+
+    return codes;
 }
 
 bool OSHelper::openContainingFolder(const QString &filePath) const
