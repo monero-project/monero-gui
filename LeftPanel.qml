@@ -169,6 +169,20 @@ Rectangle {
                     color: "#ff9323"
                     themeTransition: false
                 }
+
+                MoneroComponents.TextPlain {
+                    id: multisigLabel
+                    visible: isMultisig
+                    text: qsTr("Multisg 2/2") + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 8
+                    anchors.right: multisigLabel.visible ? multisigLabel.left : parent.right
+                    anchors.rightMargin: 8
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#4823ff"
+                    themeTransition: false
+                }
             }
 
             Item {

@@ -30,6 +30,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
+import moneroComponents.Clipboard 1.0
 
 ColumnLayout {
     id: item
@@ -92,6 +93,8 @@ ColumnLayout {
     signal editingFinished();
 
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
+
+    Clipboard { id: clipboard }
 
     spacing: 0
     Rectangle {

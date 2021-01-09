@@ -85,6 +85,7 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(SubaddressAccountModel * subaddressAccountModel READ subaddressAccountModel)
     Q_PROPERTY(SubaddressAccount * subaddressAccount READ subaddressAccount)
     Q_PROPERTY(bool viewOnly READ viewOnly)
+    Q_PROPERTY(bool isMultisig READ isMultisig)
     Q_PROPERTY(QString secretViewKey READ getSecretViewKey)
     Q_PROPERTY(QString publicViewKey READ getPublicViewKey)
     Q_PROPERTY(QString secretSpendKey READ getSecretSpendKey)
@@ -194,6 +195,12 @@ public:
     Q_INVOKABLE QString getSubaddressLabel(quint32 accountIndex, quint32 addressIndex) const;
     Q_INVOKABLE void setSubaddressLabel(quint32 accountIndex, quint32 addressIndex, const QString &label);
     Q_INVOKABLE void deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, const QString &paymentId);
+
+    // multisig
+    Q_INVOKABLE Monero::MultisigState getMultisigState();
+    Q_INVOKABLE bool isMultisig();
+    Q_INVOKABLE QString getMultisigInfo();
+    Q_INVOKABLE QString makeMultisig(QString info);
 
     //! hw-device backed wallets
     Q_INVOKABLE bool isHwBacked() const;

@@ -75,6 +75,7 @@ ApplicationWindow {
     property alias toolTip: toolTip
     property string walletName
     property bool viewOnly: false
+    property bool isMultisig: false
     property bool foundNewBlock: false
     property bool qrScannerEnabled: (typeof builtWithScanner != "undefined") && builtWithScanner
     property int blocksToSync: 1
@@ -340,6 +341,7 @@ ApplicationWindow {
         walletName = usefulName(wallet.path)
 
         viewOnly = currentWallet.viewOnly;
+        isMultisig = currentWallet.isMultisig;
 
         // New wallets saves the testnet flag in keys file.
         if(persistentSettings.nettype != currentWallet.nettype) {

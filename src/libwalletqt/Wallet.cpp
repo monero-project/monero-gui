@@ -426,6 +426,27 @@ void Wallet::deviceShowAddressAsync(quint32 accountIndex, quint32 addressIndex, 
     });
 }
 
+Monero::MultisigState Wallet::getMultisigState()
+{
+    return m_walletImpl->multisig();
+}
+
+bool Wallet::isMultisig()
+{
+    return getMultisigState().isMultisig;
+}
+
+QString Wallet::getMultisigInfo()
+{
+    return QString::fromStdString(m_walletImpl->getMultisigInfo());
+}
+
+QString Wallet::makeMultisig(QString info)
+{
+    const std::vector<std::string> infoVector = { info.toStdString() };
+    return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, 2));
+}
+
 void Wallet::refreshHeightAsync()
 {
     m_scheduler.run([this] {

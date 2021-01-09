@@ -70,7 +70,7 @@ Rectangle {
                 progress: appWindow.walletMode <= 1 ? 2 : 3
 
                 onPrevClicked: {
-                    if (appWindow.walletMode <= 1){
+                    if (appWindow.walletMode <= 1 && wizardController.m_wallet.isMultisig()){
                         wizardStateView.state = "wizardCreateWallet1";
                     } else {
                         wizardStateView.state = "wizardCreateWallet3";
