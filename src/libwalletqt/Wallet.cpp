@@ -447,6 +447,22 @@ QString Wallet::makeMultisig(QString info)
     return QString::fromStdString(m_walletImpl->makeMultisig(infoVector, 2));
 }
 
+bool Wallet::hasMultisigPartialKeyImages()
+{
+    return m_walletImpl->hasMultisigPartialKeyImages();
+}
+
+bool Wallet::exportMultisigImages(QString filename)
+{
+    std::string images;
+    return m_walletImpl->exportMultisigImages(images, filename.toStdString());
+}
+
+void Wallet::importMultisigImages(QString filename)
+{
+    m_walletImpl->importMultisigImages(filename.toStdString());
+}
+
 void Wallet::refreshHeightAsync()
 {
     m_scheduler.run([this] {

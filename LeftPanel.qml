@@ -175,9 +175,9 @@ Rectangle {
                     visible: isMultisig
                     text: qsTr("Multisg 2/2") + translationManager.emptyString
                     anchors.top: parent.top
-                    anchors.topMargin: 8
-                    anchors.right: multisigLabel.visible ? multisigLabel.left : parent.right
-                    anchors.rightMargin: 8
+                    anchors.topMargin: 4
+                    anchors.left: multisigLabel.visible ? multisigLabel.right : parent.left
+                    anchors.leftMargin: 8
                     font.pixelSize: 12
                     font.bold: true
                     color: "#4823ff"

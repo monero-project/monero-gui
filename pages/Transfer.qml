@@ -163,6 +163,14 @@ Rectangle {
           }
       }
 
+      RowLayout {
+          visible: currentWallet.hasMultisigPartialKeyImages()
+
+          MoneroComponents.WarningBox {
+              text: qsTr("Partial key images found. Import key images before spending") + translationManager.emptyString
+          }
+      }
+
       // recipient address input
       RowLayout {
           id: addressLineRow
@@ -522,8 +530,34 @@ Rectangle {
         spacing: 10
         enabled: !viewOnly || pageRoot.enabled
 
+        AdvancedOptionsItem {
+            visible: isMultisig
+            title: qsTr("Partial key images") + translationManager.emptyString
+            button1.text: qsTr("Export") + translationManager.emptyString
+            button1.enabled: isMultisig
+            button1.onClicked: {
+                console.log("Transfer: export partial key images clicked")
+                exportMultisigKeyImagesDialog.open();
+            }
+            button2.text: qsTr("Import") + translationManager.emptyString
+            button2.enabled: isMultisig && appWindow.isTrustedDaemon()
+            button2.onClicked: {
+                console.log("Transfer: import partial key images clicked")
+                importMultisigKeyImagesDialog.open(); 
+            }
+            helpTextLarge.text: qsTr("Required to sync multisig wallets to view true balance and create transactions") + translationManager.emptyString
+            helpTextSmall.text: {
+                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor +
+                       ";} p.orange{color:#ff9323;}</style>" +
+                       "<p>" + qsTr("1. Export key images from each wallet into two seperate files") + "</p>" +
+                       "<p>" + qsTr("2. Import the images into opposite wallets") + "</p>" +
+                       errorMessage + translationManager.emptyString
+            }
+            helpTextSmall.themeTransition: false
+        }
+
         RowLayout {
-            visible: appWindow.walletMode >= 2
+            visible: appWindow.walletMode >= 2 && !isMultisig
             CheckBox2 {
                 id: showAdvancedCheckbox
                 checked: persistentSettings.transferShowAdvanced
@@ -733,6 +767,35 @@ Rectangle {
         onAccepted: {
             console.log(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl))
             currentWallet.importKeyImages(walletManager.urlToLocalPath(importKeyImagesDialog.fileUrl));
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
+    //ExportMultisigKeyImagesDialog
+    FileDialog {
+        id: exportMultisigKeyImagesDialog
+        selectMultiple: false
+        selectExisting: false
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(exportMultisigKeyImagesDialog.fileUrl))
+            currentWallet.exportMultisigImages(walletManager.urlToLocalPath(exportMultisigKeyImagesDialog.fileUrl));
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
+    //ImportMultisigKeyImagesDialog
+    FileDialog {
+        id: importMultisigKeyImagesDialog
+        selectMultiple: false
+        selectExisting: true
+        title: qsTr("Please choose a file") + translationManager.emptyString
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(importMultisigKeyImagesDialog.fileUrl))
+            currentWallet.importMultisigImages(walletManager.urlToLocalPath(importMultisigKeyImagesDialog.fileUrl));
         }
         onRejected: {
             console.log("Canceled");
