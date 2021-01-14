@@ -78,7 +78,14 @@ void Subaddress::setLabel(quint32 accountIndex, quint32 addressIndex, const QStr
 
 void Subaddress::refresh(quint32 accountIndex) const
 {
-    m_subaddressImpl->refresh(accountIndex);
+    try
+    {
+        m_subaddressImpl->refresh(accountIndex);
+    }
+    catch (const std::exception &e)
+    {
+        qCritical() << "Failed to refresh account" << accountIndex << "subaddresses:" << e.what();
+    }
     getAll();
 }
 
