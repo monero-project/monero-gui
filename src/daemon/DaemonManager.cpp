@@ -47,23 +47,6 @@ namespace {
     static const int DAEMON_START_TIMEOUT_SECONDS = 120;
 }
 
-DaemonManager * DaemonManager::m_instance = nullptr;
-QStringList DaemonManager::m_clArgs;
-
-DaemonManager *DaemonManager::instance(const QStringList *args/* = nullptr*/)
-{
-    if (!m_instance) {
-        m_instance = new DaemonManager;
-        // store command line arguments for later use
-        if (args != nullptr)
-        {
-            m_clArgs = *args;
-        }
-    }
-
-    return m_instance;
-}
-
 bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
@@ -84,12 +67,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--testnet";
     else if (nettype == NetworkType::STAGENET)
         arguments << "--stagenet";
-
-    foreach (const QString &str, m_clArgs) {
-          qDebug() << QString(" [%1] ").arg(str);
-          if (!str.isEmpty())
-            arguments << str;
-    }
 
     // Custom startup flags for daemon
     foreach (const QString &str, flags.split(" ")) {

@@ -44,8 +44,8 @@ class DaemonManager : public QObject
     Q_OBJECT
 
 public:
-
-    static DaemonManager * instance(const QStringList *args = nullptr);
+    explicit DaemonManager(QObject *parent = 0);
+    ~DaemonManager();
 
     Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
@@ -76,11 +76,6 @@ public slots:
     void stateChanged(QProcess::ProcessState state);
 
 private:
-    explicit DaemonManager(QObject *parent = 0);
-    ~DaemonManager();
-
-    static DaemonManager * m_instance;
-    static QStringList m_clArgs;
     std::unique_ptr<QProcess> m_daemon;
     QMutex m_daemonMutex;
     QString m_monerod;
