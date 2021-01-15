@@ -39,19 +39,14 @@ import "."
 import moneroComponents.Clipboard 1.0
 
 Rectangle {
-    Layout.fillWidth: true
-    Layout.preferredHeight: 96
     color: "transparent"
-
-    ColumnLayout {
-        spacing: 0
-        Layout.preferredHeight: 32
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+    height: grid.height
+    width: grid.width
 
         GridLayout {
             id: grid
-            Layout.alignment: Qt.AlignHCenter
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             columnSpacing: 0
             property string fontColorActive: MoneroComponents.Style.blackTheme ? "white" : "white"
             property string fontColorInActive: MoneroComponents.Style.blackTheme ? "white" : MoneroComponents.Style.dimmedFontColor
@@ -413,11 +408,5 @@ Rectangle {
                     }
                 }
             }
-
-            Rectangle {
-                color: "transparent"
-                Layout.fillWidth: true
-            }
         }
-    }
 }
