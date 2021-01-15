@@ -80,13 +80,14 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
-### Building Windows static binaries with Docker (any OS)
+### Building Reproducible Windows static binaries with Docker (any OS)
 
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 2. Clone the repository
    ```
-   git clone --recursive https://github.com/monero-project/monero-gui.git
+   git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
+   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -109,7 +110,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.17.1.5`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
