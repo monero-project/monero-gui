@@ -251,7 +251,7 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf libgcrypt`
+  `brew install boost hidapi zmq libpgm libsodium miniupnpc ldns expat libunwind-headers protobuf libgcrypt`
 
 4. Install Qt:
 
