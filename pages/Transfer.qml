@@ -93,12 +93,16 @@ Rectangle {
       oaPopup.open()
     }
 
-    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
-        console.log("updateFromQrCode")
+    function fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name) {
         addressLine.text = address
         setPaymentId(payment_id);
         amountLine.text = amount
         setDescription((recipient_name ? recipient_name + " " : "") + tx_description);
+    }
+
+    function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
+        console.log("updateFromQrCode")
+        fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name);
         cameraUi.qrcode_decoded.disconnect(updateFromQrCode)
     }
 
@@ -195,6 +199,23 @@ Rectangle {
                     setDescription(parsed.tx_description);
                   }
               }
+
+                MoneroComponents.InlineButton {
+                    fontFamily: FontAwesome.fontFamily
+                    fontPixelSize: 18
+                    text: FontAwesome.desktop
+                    onClicked: {
+                        clearFields();
+                        const codes = oshelper.grabQrCodesFromScreen();
+                        for (var index = 0; index < codes.length; ++index) {
+                            const parsed = walletManager.parse_uri_to_object(codes[index]);
+                            if (!parsed.error) {
+                                fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name);
+                                break;
+                            }
+                        }
+                    }
+                }
 
                 MoneroComponents.InlineButton {
                     fontFamily: FontAwesome.fontFamily

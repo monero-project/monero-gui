@@ -29,7 +29,9 @@
 #ifndef OSHELPER_H
 #define OSHELPER_H
 
+#include <QList>
 #include <QObject>
+#include <QString>
 /**
  * @brief The OSHelper class - exports to QML some OS-related functions
  */
@@ -43,6 +45,7 @@ public:
 
     Q_INVOKABLE void createDesktopEntry() const;
     Q_INVOKABLE QString downloadLocation() const;
+    Q_INVOKABLE QList<QString> grabQrCodesFromScreen() const;
     Q_INVOKABLE bool openContainingFolder(const QString &filePath) const;
     Q_INVOKABLE QString openSaveFileDialog(const QString &title, const QString &folder, const QString &filename) const;
     Q_INVOKABLE QString temporaryFilename() const;
