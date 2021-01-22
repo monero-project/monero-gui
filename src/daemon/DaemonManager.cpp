@@ -112,10 +112,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--no-sync";
     }
 
-    if (!flags.contains("--out-peers", Qt::CaseSensitive) && bootstrapNodeAddress == "auto") {
-        arguments << "--out-peers" << "16";
-    }
-
     arguments << "--check-updates" << "disabled";
 
     // --max-concurrency based on threads available.
