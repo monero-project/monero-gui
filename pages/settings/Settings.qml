@@ -48,7 +48,11 @@ ColumnLayout {
     property int settingsHeight: 900
     property alias settingsStateViewState: settingsStateView.state
 
-    Navbar{}
+    Navbar {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.topMargin: height
+        Layout.bottomMargin: height
+    }
 
     Rectangle{
         id: settingsStateView
