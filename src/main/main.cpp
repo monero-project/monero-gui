@@ -451,8 +451,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
-    DaemonManager * daemonManager = DaemonManager::instance();
-    engine.rootContext()->setContextProperty("daemonManager", daemonManager);
+    DaemonManager daemonManager;
+    engine.rootContext()->setContextProperty("daemonManager", &daemonManager);
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);
