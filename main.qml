@@ -1126,11 +1126,14 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-    width: screenWidth > 980 ? 980 : 800
-    height: screenHeight > maxWindowHeight ? maxWindowHeight : 700
+    width: Screen.desktopAvailableWidth > 980
+        ? 980
+        : Math.min(Screen.desktopAvailableWidth, 800)
+    height: Screen.desktopAvailableHeight > maxWindowHeight
+        ? maxWindowHeight
+        : Math.min(Screen.desktopAvailableHeight, 700)
     color: MoneroComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
-    onWidthChanged: x -= 0
 
     Timer {
         id: fiatPriceTimer
@@ -1287,8 +1290,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        x = (Screen.width - width) / 2
-        y = (Screen.height - maxWindowHeight) / 2
+        x = (Screen.desktopAvailableWidth - width) / 2;
+        y = (Screen.desktopAvailableHeight - height) / 2;
 
         translationManager.setLanguage(persistentSettings.locale.split("_")[0]);
 
