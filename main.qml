@@ -53,7 +53,10 @@ import "version.js" as Version
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero" + (walletName ? " - " + walletName : "")
+    title: "Monero" +
+        (persistentSettings.displayWalletNameInTitleBar && walletName
+        ? " - " + walletName
+        : "")
     minimumWidth: 750
     minimumHeight: 450
 
@@ -1394,6 +1397,7 @@ ApplicationWindow {
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
         property int kdfRounds: 1
+        property bool displayWalletNameInTitleBar: true
         property bool hideBalance: false
         property bool askPasswordBeforeSending: true
         property bool lockOnUserInActivity: true
@@ -1811,7 +1815,7 @@ ApplicationWindow {
         TitleBar {
             id: titleBar
             visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
-            walletName: appWindow.walletName
+            walletName: persistentSettings.displayWalletNameInTitleBar ? appWindow.walletName : ""
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();

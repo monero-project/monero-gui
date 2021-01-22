@@ -67,6 +67,12 @@ Rectangle {
         }
 
         MoneroComponents.CheckBox {
+            checked: persistentSettings.displayWalletNameInTitleBar
+            onClicked: persistentSettings.displayWalletNameInTitleBar = !persistentSettings.displayWalletNameInTitleBar
+            text: qsTr("Display wallet name in title bar") + translationManager.emptyString
+        }
+
+        MoneroComponents.CheckBox {
             id: hideBalanceCheckBox
             checked: persistentSettings.hideBalance
             onClicked: {
