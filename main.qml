@@ -820,7 +820,7 @@ ApplicationWindow {
         return false;
     }
 
-    function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
+    function onTransactionCreated(pendingTransaction, addresses, paymentId, mixinCount) {
         console.log("Transaction created");
         txConfirmationPopup.bottomText.text = "";
         transaction = pendingTransaction;
@@ -893,7 +893,7 @@ ApplicationWindow {
         if (amount === "(all)")
             currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
         else
-            currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
+            currentWallet.createTransactionAsync([address], paymentId, [amountxmr], mixinCount, priority);
     }
 
     //Choose where to save transaction
