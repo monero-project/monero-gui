@@ -84,3 +84,7 @@ function makeQRCodeString(addr, amount) {
     }
     return qrCodeString
 }
+
+function printMoney(amount) {
+     return amount / 1000000000000 // 1e12 for atomic units
+}

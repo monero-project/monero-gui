@@ -463,6 +463,12 @@ void Wallet::importMultisigImages(QString filename)
     m_walletImpl->importMultisigImages(filename.toStdString());
 }
 
+PendingTransaction* Wallet::loadMultisigTxFromFile(QString filename)
+{
+    Monero::PendingTransaction* txptr = m_walletImpl->loadMultisigTxFromFile(filename.toStdString());
+    return new PendingTransaction(txptr,this);
+}
+
 void Wallet::refreshHeightAsync()
 {
     m_scheduler.run([this] {

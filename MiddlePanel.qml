@@ -65,6 +65,7 @@ Rectangle {
     property AddressBook addressBookView: AddressBook { }
     property Keys keysView: Keys { }
     property Account accountView: Account { }
+    property SignMultisig signMultisigView: SignMultisig { }
 
     signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
@@ -167,7 +168,11 @@ Rectangle {
             }, State {
                 name: "Account"
                 PropertyChanges { target: root; currentView: accountView }
-                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }
+                PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }	
+            }, State {
+                name: "SignMultisig"
+                PropertyChanges { target: root; currentView: signMultisigView }
+                PropertyChanges { target: mainFlickable; contentHeight: signMultisigView.signMultisigHeight + 80 }
             }	
         ]
 

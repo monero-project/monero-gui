@@ -16,6 +16,7 @@
         <file>monero/utils/gpg_keys/luigi1111.asc</file>
         <file>pages/Account.qml</file>
         <file>pages/Transfer.qml</file>
+        <file>pages/SignMultisig.qml</file>
         <file>pages/History.qml</file>
         <file>pages/AddressBook.qml</file>
         <file>pages/Mining.qml</file>

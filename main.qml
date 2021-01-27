@@ -150,6 +150,7 @@ ApplicationWindow {
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+T") middlePanel.state = "Account"
+        else if(seq === "Ctrl+Q") middlePanel.state = "SignMultisig"
         else if(seq === "Ctrl+Tab" || seq === "Alt+Tab") {
             /*
             if(middlePanel.state === "Transfer") middlePanel.state = "Receive"
@@ -171,6 +172,7 @@ ApplicationWindow {
             else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
+            else if(middlePanel.state === "SignMultisig") middlePanel.state = "SignMultisig"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
@@ -192,6 +194,7 @@ ApplicationWindow {
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
             else if(middlePanel.state === "Transfer") middlePanel.state = "Account"
             else if(middlePanel.state === "Account") middlePanel.state = "Settings"
+            else if (middlePanel.state === "SignMultisig") middlePanel.state = "SignMultisig"
         }
 
         if (middlePanel.state !== "Advanced") updateBalance();
@@ -846,8 +849,8 @@ ApplicationWindow {
             // here we update txConfirmationPopup
             txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.amount));
             txConfirmationPopup.transactionFee = Utils.removeTrailingZeros(walletManager.displayAmount(transaction.fee));
-            txConfirmationPopup.confirmButton.text = viewOnly ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
-            txConfirmationPopup.confirmButton.rightIcon = viewOnly ? "" : "qrc:///images/rightArrow.png"
+            txConfirmationPopup.confirmButton.text = isMultisig ? qsTr("Save as file") : qsTr("Confirm") + translationManager.emptyString;
+            txConfirmationPopup.confirmButton.rightIcon = isMultisig ? "" : "qrc:///images/rightArrow.png"
         }
     }
 
@@ -941,6 +944,8 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
+        if (isMultisig)
+            return;
         // View only wallet - we save the tx
         if(viewOnly && saveTxDialog.fileUrl){
             // No file specified - abort
@@ -1456,11 +1461,16 @@ ApplicationWindow {
         id: txConfirmationPopup
         z: parent.z + 1
         onAccepted: {
+            if (isMultisig) {
+                close();
+                return;
+            }
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
                 if (viewOnly) {
                     saveTxDialog.open();
-                } else {
+                }
+                else {
                     handleTransactionConfirmed()
                 }
             }
@@ -1730,6 +1740,12 @@ ApplicationWindow {
 
                 onAccountClicked: {
                     middlePanel.state = "Account";
+                    middlePanel.flickable.contentY = 0;
+                    updateBalance();
+                }
+
+                onSignMultisigClicked: {
+                    middlePanel.state = "SignMultisig";
                     middlePanel.flickable.contentY = 0;
                     updateBalance();
                 }
