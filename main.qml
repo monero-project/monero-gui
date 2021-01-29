@@ -1945,12 +1945,13 @@ ApplicationWindow {
             return;
         }
 
+        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16";
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon(function() {
-                appWindow.startDaemon("")
+                appWindow.startDaemon(simpleModeFlags)
             });
         } else {
-            appWindow.startDaemon("");
+            appWindow.startDaemon(simpleModeFlags);
         }
     }
 
