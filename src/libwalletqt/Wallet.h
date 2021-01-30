@@ -205,6 +205,7 @@ public:
     Q_INVOKABLE bool exportMultisigImages(QString filename);
     Q_INVOKABLE void importMultisigImages(QString filename);
     Q_INVOKABLE PendingTransaction* loadMultisigTxFromFile(QString filename);
+    Q_INVOKABLE bool signMultisigTxFromFile(QString filename);
 
     //! hw-device backed wallets
     Q_INVOKABLE bool isHwBacked() const;

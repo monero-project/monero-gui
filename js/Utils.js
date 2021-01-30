@@ -115,3 +115,7 @@ function capitalize(s){
 function removeTrailingZeros(value) {
     return (value + '').replace(/\.?0*$/, '');
 }
+
+function printMoney(amount) {
+     return amount / 1000000000000 // 1e12 for atomic units
+}

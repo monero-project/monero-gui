@@ -469,6 +469,11 @@ PendingTransaction* Wallet::loadMultisigTxFromFile(QString filename)
     return new PendingTransaction(txptr,this);
 }
 
+bool Wallet::signMultisigTxFromFile(QString filename)
+{
+    return m_walletImpl->signMultisigTxFromFile(filename.toStdString());
+}
+
 void Wallet::refreshHeightAsync()
 {
     m_scheduler.run([this] {

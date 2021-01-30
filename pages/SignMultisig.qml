@@ -42,7 +42,9 @@ import "../js/TxUtils.js" as TxUtils
 import "../js/Utils.js" as Utils
 
 Rectangle {
+    id: pageRoot
     color: "transparent"
+    property string txFilename: ""
 
     ColumnLayout {
         id: advancedLayout
@@ -113,6 +115,26 @@ Rectangle {
                 placeholderText: "----"
             }
         }
+
+        RowLayout {
+            Layout.topMargin: 20
+            StandardButton {
+                id: signTransaction
+                text: "Sign Transaction"
+                onClicked: {
+                    console.log("Trying to sign tx");
+                    currentWallet.signMultisigTxFromFile(txFilename);
+                }
+            }
+            StandardButton {
+                id: broadcastTransaction
+                text: "Broadcast Transaction"
+                onClicked: {
+                    console.log("Trying to submit multisig tx");
+                    currentWallet.commitTransactionAsync(currentWallet.loadMultisigTxFromFile(txFilename));
+                }
+            }
+        }
     }
 
     //Same as Transfer page
@@ -150,11 +172,12 @@ Rectangle {
         selectExisting: true
         title: qsTr("Please choose a file") + translationManager.emptyString
         onAccepted: {
-            console.log(walletManager.urlToLocalPath(loadMultisigTxDialog.fileUrl));
-            var transaction = currentWallet.loadMultisigTxFromFile(walletManager.urlToLocalPath(loadMultisigTxDialog.fileUrl));
+            txFilename = walletManager.urlToLocalPath(loadMultisigTxDialog.fileUrl);
+            console.log(txFilename);
+            var transaction = currentWallet.loadMultisigTxFromFile(txFilename);
             addressLine.text = transaction.address;
-            amountLine.text = TxUtils.printMoney(transaction.amount);
-            feeLine.text = TxUtils.printMoney(transaction.fee);
+            amountLine.text = Utils.printMoney(transaction.amount);
+            feeLine.text = Utils.printMoney(transaction.fee);
         }
         onRejected: {
             console.log("Canceled");
