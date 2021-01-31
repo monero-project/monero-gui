@@ -59,10 +59,16 @@ Rectangle {
             StandardButton {
                 id: exportMultisigImages
                 text: "Export Key Images"
+                onClicked: {
+                    exportMultisigKeyImagesDialog.open();
+                }
             }
             StandardButton {
                 id: importMultisigImages
                 text: "Import Key Images"
+                onClicked: {
+                    importMultisigKeyImagesDialog.open();
+                }
             }
             StandardButton {
                 id: loadMultisigTxButton
