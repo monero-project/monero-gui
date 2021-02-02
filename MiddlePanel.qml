@@ -51,7 +51,7 @@ Rectangle {
     property alias flickable: mainFlickable
 
     property Transfer transferView: Transfer {
-        onPaymentClicked: root.paymentClicked(address, paymentId, amount, mixinCount, priority, description)
+        onPaymentClicked: root.paymentClicked(recipients, paymentId, mixinCount, priority, description)
         onSweepUnmixableClicked: root.sweepUnmixableClicked()
     }
     property Receive receiveView: Receive { }
@@ -66,7 +66,7 @@ Rectangle {
     property Keys keysView: Keys { }
     property Account accountView: Account { }
 
-    signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
+    signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
     signal getProofClicked(string txid, string address, string message);

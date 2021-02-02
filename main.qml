@@ -852,48 +852,49 @@ ApplicationWindow {
         }
     }
 
+    function getDisplayAmountTotal(recipients) {
+        const amounts = recipients.map(function (recipient) {
+            return recipient.amount;
+        });
+        const total = walletManager.amountsSumFromStrings(amounts);
+        return Utils.removeTrailingZeros(walletManager.displayAmount(total));
+    }
 
     // called on "transfer"
-    function handlePayment(address, paymentId, amount, mixinCount, priority, description, createFile) {
+    function handlePayment(recipients, paymentId, mixinCount, priority, description, createFile) {
         console.log("Creating transaction: ")
-        console.log("\taddress: ", address,
+        console.log("\trecipients: ", recipients,
                     ", payment_id: ", paymentId,
-                    ", amount: ", amount,
                     ", mixins: ", mixinCount,
                     ", priority: ", priority,
                     ", description: ", description);
-        txConfirmationPopup.bottomTextAnimation.running = false
-        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
-        txConfirmationPopup.transactionAddress = address;
-        txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
-        txConfirmationPopup.transactionPriority = priority;
-        txConfirmationPopup.transactionDescription = description;
 
-        // validate amount;
-        if (amount !== "(all)") {
-            var amountxmr = walletManager.amountFromString(amount);
-            console.log("integer amount: ", amountxmr);
-            console.log("integer unlocked", currentWallet.unlockedBalance())
-            if (amountxmr <= 0) {
-                txConfirmationPopup.errorText.text = qsTr("Amount is wrong: expected number from %1 to %2")
-                    .arg(walletManager.displayAmount(0))
-                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                    + translationManager.emptyString;
-                return;
-            } else if (amountxmr > currentWallet.unlockedBalance()) {
-                txConfirmationPopup.errorText.text = qsTr("Insufficient funds. Unlocked balance: %1")
-                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                    + translationManager.emptyString;
-                return;
-            }
+        const recipientAll = recipients.find(function (recipient) {
+            return recipient.amount == "(all)";
+        });
+        if (recipientAll && recipients.length > 1) {
+            throw "Sending all requires one destination address";
         }
 
+        txConfirmationPopup.bottomTextAnimation.running = false;
+        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
+        txConfirmationPopup.recipients = recipients;
+        txConfirmationPopup.transactionAmount = recipientAll ? "(all)" : getDisplayAmountTotal(recipients);
+        txConfirmationPopup.transactionPriority = priority;
+        txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.open();
 
-        if (amount === "(all)")
-            currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
-        else
-            currentWallet.createTransactionAsync([address], paymentId, [amountxmr], mixinCount, priority);
+        if (recipientAll) {
+            currentWallet.createTransactionAllAsync(recipientAll.address, paymentId, mixinCount, priority);
+        } else {
+            const addresses = recipients.map(function (recipient) {
+                return recipient.address;
+            });
+            const amountsxmr = recipients.map(function (recipient) {
+                return walletManager.amountFromString(recipient.amount);
+            });
+            currentWallet.createTransactionAsync(addresses, paymentId, amountsxmr, mixinCount, priority);
+        }
     }
 
     //Choose where to save transaction

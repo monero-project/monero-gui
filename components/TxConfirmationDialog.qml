@@ -27,7 +27,8 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.9
-import QtQuick.Controls 1.4
+import QtQuick.Controls 1.4 as QtQuickControls1
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
@@ -35,11 +36,14 @@ import FontAwesome 1.0
 
 Rectangle {
     id: root
+
+    property int margins: 25
+
     x: parent.width/2 - root.width/2
     y: parent.height/2 - root.height/2
     // TODO: implement without hardcoding sizes
-    width: 580
-    height: 400
+    width: 590
+    height: layout.height + layout.anchors.margins * 2
     color: MoneroComponents.Style.blackTheme ? "black" : "white"
     visible: false
     radius: 10
@@ -53,8 +57,8 @@ Rectangle {
     }
     KeyNavigation.tab: confirmButton
 
+    property var recipients: []
     property var transactionAmount: ""
-    property var transactionAddress: ""
     property var transactionDescription: ""
     property var transactionFee: ""
     property var transactionPriority: ""
@@ -127,8 +131,8 @@ Rectangle {
     }
 
     function clearFields() {
+        root.recipients = [];
         root.transactionAmount = "";
-        root.transactionAddress = "";
         root.transactionDescription = "";
         root.transactionFee = "";
         root.transactionPriority = "";
@@ -141,9 +145,12 @@ Rectangle {
     }
 
     ColumnLayout {
+        id: layout
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: parent.margins
         spacing: 10
-        anchors.fill: parent
-        anchors.margins: 25
 
         RowLayout {
             Layout.topMargin: 10
@@ -181,11 +188,11 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 71
 
-            BusyIndicator {
-                  id: txAmountBusyIndicator
-                  Layout.fillWidth: true
-                  Layout.alignment : Qt.AlignTop | Qt.AlignLeft
-                  running: root.transactionAmount == "(all)"
+            QtQuickControls1.BusyIndicator {
+                id: txAmountBusyIndicator
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                running: root.transactionAmount == "(all)"
             }
 
             Text {
@@ -220,16 +227,10 @@ Rectangle {
             columnSpacing: 15
             rowSpacing: 16
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
-
-                Text {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("From") + ":" + translationManager.emptyString
-                    font.pixelSize: 15
-                }
+            Text {
+                color: MoneroComponents.Style.dimmedFontColor
+                text: qsTr("From") + ":" + translationManager.emptyString
+                font.pixelSize: 15
             }
 
             ColumnLayout {
@@ -266,57 +267,70 @@ Rectangle {
                 }
             }
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
-
-                Text {
-                    Layout.fillWidth: true
-                    font.pixelSize: 15
-                    color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("To") + ":" + translationManager.emptyString
-                }
+            Text {
+                font.pixelSize: 15
+                color: MoneroComponents.Style.dimmedFontColor
+                text: qsTr("To") + ":" + translationManager.emptyString
             }
 
-            ColumnLayout {
+            Flickable {
+                id: flickable
+                property int linesInMultipleRecipientsMode: 7
                 Layout.fillWidth: true
-                spacing: 16
+                Layout.preferredHeight: recipients.length > 1
+                    ? linesInMultipleRecipientsMode * (recipientsArea.contentHeight / recipientsArea.lineCount)
+                    : recipientsArea.contentHeight
+                boundsBehavior: isMac ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+                clip: true
 
-                Text {
-                    Layout.fillWidth: true
-                    font.pixelSize: 15
-                    font.family: MoneroComponents.Style.fontRegular.name
-                    textFormat: Text.RichText
-                    wrapMode: Text.Wrap
+                TextArea.flickable: TextArea {
+                    id : recipientsArea
                     color: MoneroComponents.Style.defaultFontColor
+                    font.family: MoneroComponents.Style.fontMonoRegular.name
+                    font.pixelSize: 14
+                    topPadding: 0
+                    bottomPadding: 0
+                    leftPadding: 0
+                    textMargin: 0
+                    readOnly: true
+                    selectByKeyboard: true
+                    selectByMouse: true
+                    selectionColor: MoneroComponents.Style.textSelectionColor
+                    textFormat: TextEdit.RichText
+                    wrapMode: TextEdit.Wrap
                     text: {
-                        if (root.transactionAddress) {
-                            const addressBookName = currentWallet ? currentWallet.addressBook.getDescription(root.transactionAddress) : null;
-                            var fulladdress = root.transactionAddress;
-                            var spacedaddress = fulladdress.match(/.{1,4}/g);
-                            var spacedaddress = spacedaddress.join(' ');
-                            if (!addressBookName) {
-                                return qsTr("Monero address") + "<br>" + spacedaddress + translationManager.emptyString; 
-                            } else {
-                                return FontAwesome.addressBook + " " + addressBookName + "<br>" + spacedaddress;
+                        return recipients.map(function (recipient, index) {
+                            var addressBookName = null;
+                            if (currentWallet) {
+                                addressBookName = currentWallet.addressBook.getDescription(recipient.address);
                             }
-                        } else {
-                            return "";
-                        }
+                            var title;
+                            if (addressBookName) {
+                                title = FontAwesome.addressBook + " " + addressBookName;
+                            } else {
+                                title = qsTr("Monero address") + translationManager.emptyString;
+                            }
+                            if (recipients.length > 1) {
+                                title = "%1. %2 - %3 XMR".arg(index + 1).arg(title).arg(recipient.amount);
+                                if (persistentSettings.fiatPriceEnabled) {
+                                    title += " (%1)".arg(showFiatConversion(recipient.amount));
+                                }
+                            }
+                            const spacedaddress = recipient.address.match(/.{1,4}/g).join(' ');
+                            return title + "<br>" + spacedaddress;
+                        }).join("<br><br>");
                     }
                 }
+
+                ScrollBar.vertical: ScrollBar {
+                    policy: recipientsArea.contentHeight > flickable.height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
+                }
             }
 
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment : Qt.AlignTop | Qt.AlignLeft
-
-                Text {
-                    Layout.fillWidth: true
-                    color: MoneroComponents.Style.dimmedFontColor
-                    text: qsTr("Fee") + ":" + translationManager.emptyString
-                    font.pixelSize: 15
-                }
+            Text {
+                color: MoneroComponents.Style.dimmedFontColor
+                text: qsTr("Fee") + ":" + translationManager.emptyString
+                font.pixelSize: 15
             }
 
             RowLayout {
@@ -364,7 +378,7 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 50
 
-                BusyIndicator {
+                QtQuickControls1.BusyIndicator {
                     visible: !bottomTextAnimation.running
                     running: !bottomTextAnimation.running
                     scale: .5
