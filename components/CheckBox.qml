@@ -49,8 +49,10 @@ Item {
     property alias fontColor: label.color
     property bool iconOnTheLeft: true
     signal clicked()
+
     height: 25
     width: checkBoxLayout.width
+    opacity: enabled ? 1 : 0.7
 
     function toggle(){
         if (checkBox.toggleOnClick) {
