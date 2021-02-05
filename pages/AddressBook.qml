@@ -138,7 +138,7 @@ Rectangle {
 
                         function doSend() {
                             console.log("Sending to: ", address +" "+ paymentId);
-                            middlePanel.sendTo(address, paymentId, description);
+                            middlePanel.sendTo(address, paymentId);
                             leftPanel.selectItem(middlePanel.state)
                         }
 
