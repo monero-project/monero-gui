@@ -216,15 +216,13 @@ public:
     Q_INVOKABLE void startRefresh();
     Q_INVOKABLE void pauseRefresh();
 
-    //! creates transaction
-    Q_INVOKABLE PendingTransaction * createTransaction(const QString &dst_addr, const QString &payment_id,
-                                                       quint64 amount, quint32 mixin_count,
-                                                       PendingTransaction::Priority priority);
-
     //! creates async transaction
-    Q_INVOKABLE void createTransactionAsync(const QString &dst_addr, const QString &payment_id,
-                                            quint64 amount, quint32 mixin_count,
-                                            PendingTransaction::Priority priority);
+    Q_INVOKABLE void createTransactionAsync(
+        const QVector<QString> &destinationAddresses,
+        const QString &payment_id,
+        const QVector<quint64> &amounts,
+        quint32 mixin_count,
+        PendingTransaction::Priority priority);
 
     //! creates transaction with all outputs
     Q_INVOKABLE PendingTransaction * createTransactionAll(const QString &dst_addr, const QString &payment_id,
@@ -382,7 +380,11 @@ signals:
     void deviceShowAddressShowed();
 
     // emitted when transaction is created async
-    void transactionCreated(PendingTransaction * transaction, QString address, QString paymentId, quint32 mixinCount);
+    void transactionCreated(
+        PendingTransaction *transaction,
+        const QVector<QString> &addresses,
+        const QString &paymentId,
+        quint32 mixinCount);
 
     void connectionStatusChanged(int status) const;
     void currentSubaddressAccountChanged() const;
@@ -414,6 +416,13 @@ private:
         bool isRecoveringFromDevice,
         quint64 restoreHeight,
         const QString& proxyAddress);
+
+    PendingTransaction *createTransaction(
+        const QVector<QString> &destinationAddresses,
+        const QString &payment_id,
+        const QVector<quint64> &amounts,
+        quint32 mixin_count,
+        PendingTransaction::Priority priority);
 
     bool disconnected() const;
     bool refreshing() const;
