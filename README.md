@@ -72,7 +72,7 @@ Packages are available for
 * Debian: See the [whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
 * Void Linux: `xbps-install -S monero-gui`
 * GuixSD: `guix package -i monero-gui`
-* macOS (homebrew): `brew cask install monero-wallet`
+* macOS (homebrew): `brew install --cask monero-wallet`
 
 Packaging for your favorite distribution would be a welcome contribution!
 
