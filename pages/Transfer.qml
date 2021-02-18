@@ -361,8 +361,8 @@ Rectangle {
                             return;
                         }
                         currentWallet.estimateTransactionFeeAsync(
-                            addressLine.text,
-                            walletManager.amountFromString(amountLine.text),
+                            [addressLine.text],
+                            [walletManager.amountFromString(amountLine.text)],
                             priorityModelV5.get(priorityDropdown.currentIndex).priority,
                             function (amount) {
                                 estimatedFee = Utils.removeTrailingZeros(amount);

@@ -641,17 +641,32 @@ void Wallet::disposeTransaction(UnsignedTransaction *t)
     delete t;
 }
 
-void Wallet::estimateTransactionFeeAsync(const QString &destination,
-                                         quint64 amount,
-                                         PendingTransaction::Priority priority,
-                                         const QJSValue &callback)
+void Wallet::estimateTransactionFeeAsync(
+    const QVector<QString> &destinationAddresses,
+    const QVector<quint64> &amounts,
+    PendingTransaction::Priority priority,
+    const QJSValue &callback)
 {
-    m_scheduler.run([this, destination, amount, priority] {
-        const uint64_t fee = m_walletImpl->estimateTransactionFee(
-            {std::make_pair(destination.toStdString(), amount)},
-            static_cast<Monero::PendingTransaction::Priority>(priority));
-        return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
-    }, callback);
+    m_scheduler.run(
+        [this, destinationAddresses, amounts, priority] {
+            if (destinationAddresses.size() != amounts.size())
+            {
+                return QJSValueList({""});
+            }
+
+            std::vector<std::pair<std::string, uint64_t>> destinations;
+            destinations.reserve(destinationAddresses.size());
+            for (size_t index = 0; index < destinationAddresses.size(); ++index)
+            {
+                destinations.emplace_back(std::make_pair(destinationAddresses[index].toStdString(), amounts[index]));
+            }
+
+            const uint64_t fee = m_walletImpl->estimateTransactionFee(
+                destinations,
+                static_cast<Monero::PendingTransaction::Priority>(priority));
+            return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
+        },
+        callback);
 }
 
 TransactionHistory *Wallet::history() const
