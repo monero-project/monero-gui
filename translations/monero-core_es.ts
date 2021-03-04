@@ -691,7 +691,7 @@ It is recommended to enter passphrase on the hardware wallet for better security
     <message>
         <location filename="../LeftPanel.qml" line="456"/>
         <source>Transactions</source>
-        <translation>Traducciones</translation>
+        <translation>Transacciones</translation>
     </message>
     <message>
         <location filename="../LeftPanel.qml" line="457"/>
