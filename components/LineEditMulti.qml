@@ -44,7 +44,7 @@ ColumnLayout {
     property alias placeholderText: placeholderLabel.text
 
     property int inputPaddingLeft: 10
-    property alias inputPaddingRight: input.rightPadding
+    property int inputPaddingRight: 10
     property int inputPaddingTop: 10
     property int inputPaddingBottom: 10
     property int inputRadius: 4
@@ -75,6 +75,7 @@ ColumnLayout {
     property bool labelButtonVisible: false
 
     property string fontColor: MoneroComponents.Style.defaultFontColor
+    property string fontFamily: MoneroComponents.Style.fontRegular.name
     property bool fontBold: false
     property int fontSize: 16
 
@@ -158,16 +159,18 @@ ColumnLayout {
         id: input
         readOnly: false
         addressValidation: false
+        KeyNavigation.backtab: item.KeyNavigation.backtab
         KeyNavigation.priority: KeyNavigation.BeforeItem
         KeyNavigation.tab: item.KeyNavigation.tab
         Layout.fillWidth: true
 
         leftPadding: item.inputPaddingLeft
-        rightPadding: inlineButtons.width + 14
+        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
         wrapMode: item.wrapMode
+        font.family: item.fontFamily
         fontSize: item.fontSize
         fontBold: item.fontBold
         fontColor: item.fontColor
@@ -201,9 +204,9 @@ ColumnLayout {
 
         RowLayout {
             id: inlineButtons
-            anchors.top: parent.top
+            anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.margins: 4
+            anchors.rightMargin: inputPaddingRight
             spacing: 4
         }
     }
