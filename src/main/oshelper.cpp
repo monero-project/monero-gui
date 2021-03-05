@@ -223,6 +223,7 @@ bool OSHelper::isCapsLock() const
         unsigned n;
         XkbGetIndicatorState(d, XkbUseCoreKbd, &n);
         caps_state = (n & 0x01) == 1;
+        XCloseDisplay(d);
     }
     return caps_state;
 #elif defined(Q_OS_MAC)
