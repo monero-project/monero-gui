@@ -52,6 +52,15 @@ Item {
     property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
+    property real placeholderLeftMargin: {
+        if (placeholderCenter) {
+            return undefined;
+        } else if (inlineIcon.visible) {
+            return inlineIcon.width + inlineIcon.anchors.leftMargin + inputPadding;
+        } else {
+            return inputPadding;
+        }
+    }
 
     property alias acceptableInput: input.acceptableInput
     property alias validator: input.validator
@@ -73,6 +82,7 @@ Item {
         }
     }
 
+    property string fontFamily: MoneroComponents.Style.fontRegular.name
     property int fontSize: 18
     property bool fontBold: false
     property alias fontColor: input.color
@@ -88,13 +98,14 @@ Item {
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
     property int inputHeight: 42
+    property int inputPadding: 10
 
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();
     signal textUpdated();
 
-    height: showingHeader ? (inputLabel.height + inputItem.height + 2) : 42
+    height: showingHeader ? (inputLabel.height + inputItem.height + 2) : inputHeight
 
     onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
@@ -177,7 +188,7 @@ Item {
         id: inputItem
         height: inputHeight
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
-        anchors.topMargin: showingHeader ? 12 : 2
+        anchors.topMargin: showingHeader ? 12 : 0
         width: parent.width
         clip: true
 
@@ -187,13 +198,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: placeholderCenter ? parent.horizontalCenter : undefined
             anchors.left: placeholderCenter ? undefined : parent.left
-            anchors.leftMargin: {
-                if(placeholderCenter){
-                    return undefined;
-                }
-                else if(inlineIcon.visible){ return 50; }
-                else { return 10; }
-            }
+            anchors.leftMargin: placeholderLeftMargin
 
             opacity: item.placeholderOpacity
             color: item.placeholderColor
@@ -235,15 +240,18 @@ Item {
             id: input
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 44 : 0
+            font.family: item.fontFamily
             font.pixelSize: item.fontSize
             font.bold: item.fontBold
+            KeyNavigation.backtab: item.KeyNavigation.backtab
             KeyNavigation.tab: item.KeyNavigation.tab
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()
-            rightPadding: inlineButtons.width + 14
-            topPadding: 10
-            bottomPadding: 10
+            leftPadding: inputPadding
+            rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPadding
+            topPadding: inputPadding
+            bottomPadding: inputPadding
             echoMode: isPasswordHidden() ? TextInput.Password : TextInput.Normal
 
             MoneroComponents.Label {
@@ -271,7 +279,9 @@ Item {
                 anchors.bottom: parent.bottom
                 anchors.top: parent.top
                 anchors.right: parent.right
-                anchors.margins: 4
+                anchors.topMargin: inputPadding
+                anchors.bottomMargin: inputPadding
+                anchors.rightMargin: inputPadding
                 spacing: 4
             }
         }
