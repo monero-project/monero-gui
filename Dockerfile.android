@@ -1,4 +1,4 @@
-FROM debian:unstable
+FROM debian:stretch
 
 ARG THREADS=1
 ARG ANDROID_NDK_REVISION=21d
@@ -22,8 +22,9 @@ ENV PREFIX=${WORKDIR}/prefix
 ENV TOOLCHAIN_DIR=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64
 
 RUN apt-get update \
-    && apt-get install -y ant automake build-essential ca-certificates-java cmake file gettext git libc6 libncurses5 \
-    libstdc++6 libtinfo5 libtool libz1 openjdk-8-jdk-headless openjdk-8-jre-headless pkg-config python3 unzip wget
+    && apt-get install -y ant automake build-essential ca-certificates-java file gettext git libc6 libncurses5 \
+    libssl-dev libstdc++6 libtinfo5 libtool libz1 openjdk-8-jdk-headless openjdk-8-jre-headless pkg-config python3 \
+    unzip wget
 
 RUN wget -q https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_REVISION}.zip \
     && unzip -q sdk-tools-linux-${ANDROID_SDK_REVISION}.zip \
@@ -77,11 +78,11 @@ RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 \
     && sed -i '213,215d' qtbase/src/3rdparty/pcre2/src/sljit/sljitConfigInternal.h \
     && PATH=${HOST_PATH} make -j${THREADS} \
     && PATH=${HOST_PATH} make -j${THREADS} install \
-    && cd qttools/src/linguist/lrelease && \
-    ../../../../qtbase/bin/qmake && \
-    PATH=${HOST_PATH} make -j$THREADS install && \
-    cd ../../../.. && \
-    rm -rf $(pwd)
+    && cd qttools/src/linguist/lrelease \
+    && ../../../../qtbase/bin/qmake \
+    && PATH=${HOST_PATH} make -j${THREADS} install \
+    && cd ../../../.. \
+    && rm -rf $(pwd)
 
 ARG ICONV_VERSION=1.16
 ARG ICONV_HASH=e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04
@@ -174,6 +175,14 @@ RUN cd tools \
     && unzip -q tools_r25.2.5-linux.zip \
     && rm -f tools_r25.2.5-linux.zip \
     && echo y | ${ANDROID_SDK_ROOT}/tools/android update sdk --no-ui --all --filter build-tools-28.0.3
+
+RUN git clone -b v3.19.7 --depth 1 https://github.com/Kitware/CMake \
+    && cd CMake \
+    && git reset --hard 22612dd53a46c7f9b4c3f4b7dbe5c78f9afd9581 \
+    && PATH=${HOST_PATH} ./bootstrap \
+    && PATH=${HOST_PATH} make -j${THREADS} \
+    && PATH=${HOST_PATH} make -j${THREADS} install \
+    && rm -rf $(pwd)
 
 CMD set -ex \
     && cd /monero-gui \
