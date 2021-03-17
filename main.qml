@@ -101,19 +101,142 @@ ApplicationWindow {
     // fiat price conversion
     property real fiatPriceXMRUSD: 0
     property real fiatPriceXMREUR: 0
+    property real fiatPriceXMRAED: 0
+    property real fiatPriceXMRARS: 0
+    property real fiatPriceXMRAUD: 0
+    property real fiatPriceXMRBDT: 0
+    property real fiatPriceXMRBHD: 0
+    property real fiatPriceXMRBRL: 0
+    property real fiatPriceXMRCAD: 0
+    property real fiatPriceXMRCHF: 0
+    property real fiatPriceXMRCLP: 0
+    property real fiatPriceXMRCNY: 0
+    property real fiatPriceXMRCZK: 0
+    property real fiatPriceXMRGBP: 0
+    property real fiatPriceXMRHKD: 0
+    property real fiatPriceXMRHUF: 0
+    property real fiatPriceXMRIDR: 0
+    property real fiatPriceXMRILS: 0
+    property real fiatPriceXMRINR: 0
+    property real fiatPriceXMRJPY: 0
+    property real fiatPriceXMRKRW: 0
+    property real fiatPriceXMRKWD: 0
+    property real fiatPriceXMRLKR: 0
+    property real fiatPriceXMRMMK: 0
+    property real fiatPriceXMRMXN: 0
+    property real fiatPriceXMRMYR: 0
+    property real fiatPriceXMRNGN: 0
+    property real fiatPriceXMRNOK: 0
+    property real fiatPriceXMRNZD: 0
+    property real fiatPriceXMRPHP: 0
+    property real fiatPriceXMRPKR: 0
+    property real fiatPriceXMRPLN: 0
+    property real fiatPriceXMRRUB: 0
+    property real fiatPriceXMRSAR: 0
+    property real fiatPriceXMRSEK: 0
+    property real fiatPriceXMRSGD: 0
+    property real fiatPriceXMRTHB: 0
+    property real fiatPriceXMRTRY: 0
+    property real fiatPriceXMRTWD: 0
+    property real fiatPriceXMRUAH: 0
+    property real fiatPriceXMRVEF: 0
+    property real fiatPriceXMRVND: 0
+    property real fiatPriceXMRZAR: 0
+    property real fiatPriceXMRXAU: 0
+
     property var fiatPriceAPIs: {
         return {
-            "kraken": {
-                "xmrusd": "https://api.kraken.com/0/public/Ticker?pair=XMRUSD",
-                "xmreur": "https://api.kraken.com/0/public/Ticker?pair=XMREUR"
-            },
             "coingecko": {
                 "xmrusd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd",
-                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur"
+                "xmreur": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=eur",
+				"xmraed": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=aed",
+				"xmrars": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=ars",
+				"xmraud": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=aud",
+				"xmrbdt": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=bdt",
+				"xmrbhd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=bhd",
+				"xmrbrl": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=brl",
+				"xmrcad": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=cad",
+				"xmrchf": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=chf",
+				"xmrclp": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=clp",
+				"xmrcny": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=cny",
+				"xmrczk": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=czk",
+				"xmrgbp": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=gbp",
+				"xmrhkd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=hkd",
+				"xmrhuf": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=huf",
+				"xmridr": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=idr",
+				"xmrils": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=ils",
+				"xmrinr": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=inr",
+				"xmrjpy": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=jpy",
+				"xmrkrw": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=krw",
+				"xmrkwd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=kwd",
+				"xmrlkr": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=lkr",
+				"xmrmmk": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=mmk",
+				"xmrmxn": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=mxn",
+				"xmrmyr": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=myr",
+				"xmrngn": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=ngn",
+				"xmrnok": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=nok",
+				"xmrnzd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=nzd",
+				"xmrphp": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=php",
+				"xmrpkr": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=pkr",
+				"xmrpln": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=pln",
+				"xmrrub": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=rub",
+				"xmrsar": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=sar",
+				"xmrsek": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=sek",
+				"xmrsgd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=sgd",
+				"xmrthb": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=thb",
+				"xmrtry": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=try",
+				"xmrtwd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=twd",
+				"xmruah": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=uah",
+				"xmrvef": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=vef",
+				"xmrvnd": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=vnd",
+				"xmrzar": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=zar",
+				"xmrxau": "https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=xau",
             },
             "cryptocompare": {
                 "xmrusd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD",
                 "xmreur": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=EUR",
+				"xmraed": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=AED",
+				"xmrars": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=ARS",
+				"xmraud": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=AUD",
+				"xmrbdt": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=BDT",
+				"xmrbhd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=BHD",
+				"xmrbrl": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=BRL",
+				"xmrcad": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CAD",
+				"xmrchf": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CHF",
+				"xmrclp": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CLP",
+				"xmrcny": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CNY",
+				"xmrczk": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=CZK",
+				"xmrgbp": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=GBP",
+				"xmrhkd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=HKD",
+				"xmrhuf": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=HUF",
+				"xmridr": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=IDR",
+				"xmrils": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=ILS",
+				"xmrinr": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=INR",
+				"xmrjpy": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=JPY",
+				"xmrkrw": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=KRW",
+				"xmrkwd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=KWD",
+				"xmrlkr": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=LKR",
+				"xmrmmk": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=MMK",
+				"xmrmxn": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=MXN",
+				"xmrmyr": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=MYR",
+				"xmrngn": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=NGN",
+				"xmrnok": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=NOK",
+				"xmrnzd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=NZD",
+				"xmrphp": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=PHP",
+				"xmrpkr": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=PKR",
+				"xmrpln": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=PLN",
+				"xmrrub": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=RUB",
+				"xmrsar": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=SAR",
+				"xmrsek": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=SEK",
+				"xmrsgd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=SGD",
+				"xmrthb": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=THB",
+				"xmrtry": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=TRY",
+				"xmrtwd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=TWD",
+				"xmruah": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=UAH",
+				"xmrvef": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=VEF",
+				"xmrvnd": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=VND",
+				"xmrzar": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=ZAR",
+				"xmrxau": "https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=XAU",
             }
         }
     }
@@ -1149,17 +1272,9 @@ ApplicationWindow {
 
     function fiatApiParseTicker(url, resp, currency){
         // parse & validate incoming JSON
-        if(url.startsWith("https://api.kraken.com/0/")){
-            if(resp.hasOwnProperty("error") && resp.error.length > 0 || !resp.hasOwnProperty("result")){
-                appWindow.fiatApiError("Kraken API has error(s)");
-                return;
-            }
+        if(url.startsWith("https://api.coingecko.com/api/v3/")){
+			var key = currency.substring(3);
 
-            var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["c"][0];
-            return ticker;
-        } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
-            var key = currency === "xmreur" ? "eur" : "usd";
             if(!resp.hasOwnProperty("monero") || !resp["monero"].hasOwnProperty(key)){
                 appWindow.fiatApiError("Coingecko API has error(s)");
                 return;
@@ -1218,10 +1333,141 @@ ApplicationWindow {
             return;
         }
 
-        if(persistentSettings.fiatPriceCurrency === "xmrusd")
-            appWindow.fiatPriceXMRUSD = ticker;
-        else if(persistentSettings.fiatPriceCurrency === "xmreur")
-            appWindow.fiatPriceXMREUR = ticker;
+		switch(persistentSettings.fiatPriceCurrency)
+		{
+			case "xmrusd":
+	            appWindow.fiatPriceXMRUSD = ticker;
+				break;
+			case "xmreur":
+	            appWindow.fiatPriceXMREUR = ticker;
+				break;
+			case "xmraed":
+				appWindow.fiatPriceXMRAED = ticker;
+				break;
+			case "xmrars":
+				appWindow.fiatPriceXMRARS = ticker;
+				break;
+			case "xmraud":
+				appWindow.fiatPriceXMRAUD = ticker;
+				break;
+			case "xmrbdt":
+				appWindow.fiatPriceXMRBDT = ticker;
+				break;
+			case "xmrbhd":
+				appWindow.fiatPriceXMRBHD = ticker;
+				break;
+			case "xmrbrl":
+				appWindow.fiatPriceXMRBRL = ticker;
+				break;
+			case "xmrcad":
+				appWindow.fiatPriceXMRCAD = ticker;
+				break;
+			case "xmrchf":
+				appWindow.fiatPriceXMRCHF = ticker;
+				break;
+			case "xmrclp":
+				appWindow.fiatPriceXMRCLP = ticker;
+				break;
+			case "xmrcny":
+				appWindow.fiatPriceXMRCNY = ticker;
+				break;
+			case "xmrczk":
+				appWindow.fiatPriceXMRCZK = ticker;
+				break;
+			case "xmrgbp":
+				appWindow.fiatPriceXMRGBP = ticker;
+				break;
+			case "xmrhkd":
+				appWindow.fiatPriceXMRHKD = ticker;
+				break;
+			case "xmrhuf":
+				appWindow.fiatPriceXMRHUF = ticker;
+				break;
+			case "xmridr":
+				appWindow.fiatPriceXMRIDR = ticker;
+				break;
+			case "xmrils":
+				appWindow.fiatPriceXMRILS = ticker;
+				break;
+			case "xmrinr":
+				appWindow.fiatPriceXMRINR = ticker;
+				break;
+			case "xmrjpy":
+				appWindow.fiatPriceXMRJPY = ticker;
+				break;
+			case "xmrkrw":
+				appWindow.fiatPriceXMRKRW = ticker;
+				break;
+			case "xmrkwd":
+				appWindow.fiatPriceXMRKWD = ticker;
+				break;
+			case "xmrlkr":
+				appWindow.fiatPriceXMRLKR = ticker;
+				break;
+			case "xmrmmk":
+				appWindow.fiatPriceXMRMMK = ticker;
+				break;
+			case "xmrmxn":
+				appWindow.fiatPriceXMRMXN = ticker;
+				break;
+			case "xmrmyr":
+				appWindow.fiatPriceXMRMYR = ticker;
+				break;
+			case "xmrngn":
+				appWindow.fiatPriceXMRNGN = ticker;
+				break;
+			case "xmrnok":
+				appWindow.fiatPriceXMRNOK = ticker;
+				break;
+			case "xmrnzd":
+				appWindow.fiatPriceXMRNZD = ticker;
+				break;
+			case "xmrphp":
+				appWindow.fiatPriceXMRPHP = ticker;
+				break;
+			case "xmrpkr":
+				appWindow.fiatPriceXMRPKR = ticker;
+				break;
+			case "xmrpln":
+				appWindow.fiatPriceXMRPLN = ticker;
+				break;
+			case "xmrrub":
+				appWindow.fiatPriceXMRRUB = ticker;
+				break;
+			case "xmrsar":
+				appWindow.fiatPriceXMRSAR = ticker;
+				break;
+			case "xmrsek":
+				appWindow.fiatPriceXMRSEK = ticker;
+				break;
+			case "xmrsgd":
+				appWindow.fiatPriceXMRSGD = ticker;
+				break;
+			case "xmrthb":
+				appWindow.fiatPriceXMRTHB = ticker;
+				break;
+			case "xmrtry":
+				appWindow.fiatPriceXMRTRY = ticker;
+				break;
+			case "xmrtwd":
+				appWindow.fiatPriceXMRTWD = ticker;
+				break;
+			case "xmruah":
+				appWindow.fiatPriceXMRUAH = ticker;
+				break;
+			case "xmrvef":
+				appWindow.fiatPriceXMRVEF = ticker;
+				break;
+			case "xmrvnd":
+				appWindow.fiatPriceXMRVND = ticker;
+				break;
+			case "xmrzar":
+				appWindow.fiatPriceXMRZAR = ticker;
+				break;
+			case "xmrxau":
+				appWindow.fiatPriceXMRXAU = ticker;
+				break;
+		}
 
         appWindow.updateBalance();
     }
@@ -1248,19 +1494,148 @@ ApplicationWindow {
     }
 
     function fiatApiCurrencySymbol() {
-        switch (persistentSettings.fiatPriceCurrency) {
-            case "xmrusd":
-                return "USD";
-            case "xmreur":
-                return "EUR";
-            default:
-                console.error("unsupported currency", persistentSettings.fiatPriceCurrency);
-                return "UNSUPPORTED";
-        }
+
+		return persistentSettings.fiatPriceCurrency.substring(3).toUpperCase();
     }
 
     function fiatApiConvertToFiat(amount) {
-        var ticker = persistentSettings.fiatPriceCurrency === "xmrusd" ? appWindow.fiatPriceXMRUSD : appWindow.fiatPriceXMREUR;
+		var ticker;
+		switch(persistentSettings.fiatPriceCurrency)
+		{
+			case "xmrusd":
+				ticker = fiatPriceXMRUSD;
+				break;
+			case "xmreur":
+				ticker = fiatPriceXMREUR;
+				break;
+			case "xmraed":
+				ticker = fiatPriceXMRAED;
+				break;
+			case "xmrars":
+				ticker = fiatPriceXMRARS;
+				break;
+			case "xmraud":
+				ticker = fiatPriceXMRAUD;
+				break;
+			case "xmrbdt":
+				ticker = fiatPriceXMRBDT;
+				break;
+			case "xmrbhd":
+				ticker = fiatPriceXMRBHD;
+				break;
+			case "xmrbrl":
+				ticker = fiatPriceXMRBRL;
+				break;
+			case "xmrcad":
+				ticker = fiatPriceXMRCAD;
+				break;
+			case "xmrchf":
+				ticker = fiatPriceXMRCHF;
+				break;
+			case "xmrclp":
+				ticker = fiatPriceXMRCLP;
+				break;
+			case "xmrcny":
+				ticker = fiatPriceXMRCNY;
+				break;
+			case "xmrczk":
+				ticker = fiatPriceXMRCZK;
+				break;
+			case "xmrgbp":
+				ticker = fiatPriceXMRGBP;
+				break;
+			case "xmrhkd":
+				ticker = fiatPriceXMRHKD;
+				break;
+			case "xmrhuf":
+				ticker = fiatPriceXMRHUF;
+				break;
+			case "xmridr":
+				ticker = fiatPriceXMRIDR;
+				break;
+			case "xmrils":
+				ticker = fiatPriceXMRILS;
+				break;
+			case "xmrinr":
+				ticker = fiatPriceXMRINR;
+				break;
+			case "xmrjpy":
+				ticker = fiatPriceXMRJPY;
+				break;
+			case "xmrkrw":
+				ticker = fiatPriceXMRKRW;
+				break;
+			case "xmrkwd":
+				ticker = fiatPriceXMRKWD;
+				break;
+			case "xmrlkr":
+				ticker = fiatPriceXMRLKR;
+				break;
+			case "xmrmmk":
+				ticker = fiatPriceXMRMMK;
+				break;
+			case "xmrmxn":
+				ticker = fiatPriceXMRMXN;
+				break;
+			case "xmrmyr":
+				ticker = fiatPriceXMRMYR;
+				break;
+			case "xmrngn":
+				ticker = fiatPriceXMRNGN;
+				break;
+			case "xmrnok":
+				ticker = fiatPriceXMRNOK;
+				break;
+			case "xmrnzd":
+				ticker = fiatPriceXMRNZD;
+				break;
+			case "xmrphp":
+				ticker = fiatPriceXMRPHP;
+				break;
+			case "xmrpkr":
+				ticker = fiatPriceXMRPKR;
+				break;
+			case "xmrpln":
+				ticker = fiatPriceXMRPLN;
+				break;
+			case "xmrrub":
+				ticker = fiatPriceXMRRUB;
+				break;
+			case "xmrsar":
+				ticker = fiatPriceXMRSAR;
+				break;
+			case "xmrsek":
+				ticker = fiatPriceXMRSEK;
+				break;
+			case "xmrsgd":
+				ticker = fiatPriceXMRSGD;
+				break;
+			case "xmrthb":
+				ticker = fiatPriceXMRTHB;
+				break;
+			case "xmrtry":
+				ticker = fiatPriceXMRTRY;
+				break;
+			case "xmrtwd":
+				ticker = fiatPriceXMRTWD;
+				break;
+			case "xmruah":
+				ticker = fiatPriceXMRUAH;
+				break;
+			case "xmrvef":
+				ticker = fiatPriceXMRVEF;
+				break;
+			case "xmrvnd":
+				ticker = fiatPriceXMRVND;
+				break;
+			case "xmrzar":
+				ticker = fiatPriceXMRZAR;
+				break;
+			case "xmrxau":
+				ticker = fiatPriceXMRXAU;
+				break;
+		}
+
         if(ticker <= 0){
             fiatApiError("Invalid ticker value: " + ticker);
             return "?.??";
@@ -1413,7 +1788,7 @@ ApplicationWindow {
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
-        property string fiatPriceProvider: "kraken"
+        property string fiatPriceProvider: "coingecko"
         property string fiatPriceCurrency: "xmrusd"
 
         property string proxyAddress: "127.0.0.1:9050"

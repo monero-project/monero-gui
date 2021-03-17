@@ -314,6 +314,178 @@ Rectangle {
             data: "xmreur"
             column1: "EUR"
         }
+        ListElement {
+            data: "xmrgbp"
+            column1: "GBP"
+        }
+		ListElement {
+			data: "xmraed"
+			column1: "AED"
+		}
+		ListElement {
+			data: "xmrars"
+			column1: "ARS"
+		}
+		ListElement {
+			data: "xmraud"
+			column1: "AUD"
+		}
+		ListElement {
+			data: "xmrbdt"
+			column1: "BDT"
+		}
+		ListElement {
+			data: "xmrbhd"
+			column1: "BHD"
+		}
+		ListElement {
+			data: "xmrbrl"
+			column1: "BRL"
+		}
+		ListElement {
+			data: "xmrcad"
+			column1: "CAD"
+		}
+		ListElement {
+			data: "xmrchf"
+			column1: "CHF"
+		}
+		ListElement {
+			data: "xmrclp"
+			column1: "CLP"
+		}
+		ListElement {
+			data: "xmrcny"
+			column1: "CNY"
+		}
+		ListElement {
+			data: "xmrczk"
+			column1: "CZK"
+		}
+		ListElement {
+			data: "xmrgbp"
+			column1: "GBP"
+		}
+		ListElement {
+			data: "xmrhkd"
+			column1: "HKD"
+		}
+		ListElement {
+			data: "xmrhuf"
+			column1: "HUF"
+		}
+		ListElement {
+			data: "xmridr"
+			column1: "IDR"
+		}
+		ListElement {
+			data: "xmrils"
+			column1: "ILS"
+		}
+		ListElement {
+			data: "xmrinr"
+			column1: "INR"
+		}
+		ListElement {
+			data: "xmrjpy"
+			column1: "JPY"
+		}
+		ListElement {
+			data: "xmrkrw"
+			column1: "KRW"
+		}
+		ListElement {
+			data: "xmrkwd"
+			column1: "KWD"
+		}
+		ListElement {
+			data: "xmrlkr"
+			column1: "LKR"
+		}
+		ListElement {
+			data: "xmrmmk"
+			column1: "MMK"
+		}
+		ListElement {
+			data: "xmrmxn"
+			column1: "MXN"
+		}
+		ListElement {
+			data: "xmrmyr"
+			column1: "MYR"
+		}
+		ListElement {
+			data: "xmrngn"
+			column1: "NGN"
+		}
+		ListElement {
+			data: "xmrnok"
+			column1: "NOK"
+		}
+		ListElement {
+			data: "xmrnzd"
+			column1: "NZD"
+		}
+		ListElement {
+			data: "xmrphp"
+			column1: "PHP"
+		}
+		ListElement {
+			data: "xmrpkr"
+			column1: "PKR"
+		}
+		ListElement {
+			data: "xmrpln"
+			column1: "PLN"
+		}
+		ListElement {
+			data: "xmrrub"
+			column1: "RUB"
+		}
+		ListElement {
+			data: "xmrsar"
+			column1: "SAR"
+		}
+		ListElement {
+			data: "xmrsek"
+			column1: "SEK"
+		}
+		ListElement {
+			data: "xmrsgd"
+			column1: "SGD"
+		}
+		ListElement {
+			data: "xmrthb"
+			column1: "THB"
+		}
+		ListElement {
+			data: "xmrtry"
+			column1: "TRY"
+		}
+		ListElement {
+			data: "xmrtwd"
+			column1: "TWD"
+		}
+		ListElement {
+			data: "xmruah"
+			column1: "UAH"
+		}
+		ListElement {
+			data: "xmrvef"
+			column1: "VEF"
+		}
+		ListElement {
+			data: "xmrvnd"
+			column1: "VND"
+		}
+		ListElement {
+			data: "xmrzar"
+			column1: "ZAR"
+		}
+		ListElement {
+			data: "xmrxau"
+			column1: "XAU"
+		}
     }
 
     Component.onCompleted: {
