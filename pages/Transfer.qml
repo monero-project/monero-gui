@@ -44,8 +44,7 @@ import "../js/Utils.js" as Utils
 
 Rectangle {
     id: root
-    signal paymentClicked(string address, string paymentId, string amount, int mixinCount,
-                          int priority, string description)
+    signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
 
     color: "transparent"
@@ -122,6 +121,10 @@ Rectangle {
         amountLine.text = ""
         setDescription("");
         priorityDropdown.currentIndex = 0
+    }
+
+    function getRecipients() {
+        return [{address: addressLine.text, amount: amountLine.text}];
     }
 
     // Information dialog
@@ -523,7 +526,7 @@ Rectangle {
                   console.log("amount: " + amountLine.text)
                   addressLine.text = addressLine.text.trim()
                   setPaymentId(paymentIdLine.text.trim());
-                  root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
+                  root.paymentClicked(getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
       }
@@ -597,7 +600,7 @@ Rectangle {
                 console.log("amount: " + amountLine.text)
                 addressLine.text = addressLine.text.trim()
                 setPaymentId(paymentIdLine.text.trim());
-                root.paymentClicked(addressLine.text, paymentIdLine.text, amountLine.text, root.mixin, priority, descriptionLine.text)
+                root.paymentClicked(getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
             }
             button2.text: qsTr("Sign (offline)") + translationManager.emptyString
             button2.enabled: !appWindow.viewOnly

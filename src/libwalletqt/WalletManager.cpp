@@ -251,7 +251,7 @@ QString WalletManager::errorString() const
     return tr("Unknown error");
 }
 
-quint64 WalletManager::maximumAllowedAmount() const
+quint64 WalletManager::maximumAllowedAmount()
 {
     return Monero::Wallet::maximumAllowedAmount();
 }
@@ -266,7 +266,7 @@ QString WalletManager::displayAmount(quint64 amount)
     return QString::fromStdString(Monero::Wallet::displayAmount(amount));
 }
 
-quint64 WalletManager::amountFromString(const QString &amount) const
+quint64 WalletManager::amountFromString(const QString &amount)
 {
     return Monero::Wallet::amountFromString(amount.toStdString());
 }
@@ -274,6 +274,17 @@ quint64 WalletManager::amountFromString(const QString &amount) const
 quint64 WalletManager::amountFromDouble(double amount) const
 {
     return Monero::Wallet::amountFromDouble(amount);
+}
+
+QString WalletManager::amountsSumFromStrings(const QVector<QString> &amounts)
+{
+    quint64 sum = 0;
+    for (const auto &amountString : amounts)
+    {
+        const quint64 amount = amountFromString(amountString);
+        sum = sum + std::min(maximumAllowedAmount() - sum, amount);
+    }
+    return QString::number(sum);
 }
 
 bool WalletManager::paymentIdValid(const QString &payment_id) const
