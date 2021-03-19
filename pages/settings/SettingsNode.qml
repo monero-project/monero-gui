@@ -398,7 +398,7 @@ Rectangle{
                 placeholderFontSize: 15
                 text: persistentSettings.daemonFlags
                 addressValidation: false
-                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address)/)
+                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address|non-interactive)/)
                 onEditingFinished: {
                     if (!daemonFlags.error) {
                         persistentSettings.daemonFlags = daemonFlags.text;
