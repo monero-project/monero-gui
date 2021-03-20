@@ -1281,7 +1281,8 @@ ApplicationWindow {
             }
             return resp["monero"][key];
         } else if(url.startsWith("https://min-api.cryptocompare.com/data/")){
-            var key = currency === "xmreur" ? "EUR" : "USD";
+			var key = currency.substring(3);
+
             if(!resp.hasOwnProperty(key)){
                 appWindow.fiatApiError("cryptocompare API has error(s)");
                 return;
