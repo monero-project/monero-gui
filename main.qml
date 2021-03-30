@@ -143,12 +143,8 @@ ApplicationWindow {
 
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
-        else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
-        else if(seq === "Ctrl+M") middlePanel.state = "Mining"
-        else if(seq === "Ctrl+I") middlePanel.state = "Sign"
-        else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+T") middlePanel.state = "Account"
@@ -168,11 +164,8 @@ ApplicationWindow {
             else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "Mining"
-            else if(middlePanel.state === "Mining") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
-            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
-            else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
+            else if(middlePanel.state === "History") middlePanel.state = "Advanced"
+            else if(middlePanel.state === "Advanced") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
@@ -184,11 +177,8 @@ ApplicationWindow {
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Sign"
-            else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
-            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "Mining"
-            else if(middlePanel.state === "Mining") middlePanel.state = "History"
+            if(middlePanel.state === "Settings") middlePanel.state = "Advanced"
+            else if(middlePanel.state === "Advanced") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
@@ -499,7 +489,7 @@ ApplicationWindow {
             walletInitialized = true
 
             // check if daemon was already mining and add mining logo if true
-            middlePanel.miningView.update();
+            middlePanel.advancedView.miningView.update();
         }
     }
 
@@ -1692,18 +1682,6 @@ ApplicationWindow {
                     updateBalance();
                 }
 
-                onTxkeyClicked: {
-                    middlePanel.state = "TxKey";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
-                onSharedringdbClicked: {
-                    middlePanel.state = "SharedRingDB";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
                 onHistoryClicked: {
                     middlePanel.state = "History";
                     middlePanel.flickable.contentY = 0;
@@ -1716,14 +1694,8 @@ ApplicationWindow {
                     updateBalance();
                 }
 
-                onMiningClicked: {
-                    middlePanel.state = "Mining";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
-                onSignClicked: {
-                    middlePanel.state = "Sign";
+                onAdvancedClicked: {
+                    middlePanel.state = "Advanced";
                     middlePanel.flickable.contentY = 0;
                     updateBalance();
                 }
