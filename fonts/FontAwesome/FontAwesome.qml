@@ -403,6 +403,7 @@ Object {
     property string inbox : "\uf01c"
     property string indent : "\uf03c"
     property string industry : "\uf275"
+    property string infinity : "\uf534"
     property string info : "\uf129"
     property string infoCircle : "\uf05a"
     property string inr : "\uf156"

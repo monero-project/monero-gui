@@ -26,6 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQml.Models 2.2
 import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
@@ -60,19 +61,18 @@ Rectangle {
         }
 
         // There are sufficient unlocked funds available
-        if (walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()) {
+        if (recipientModel.getAmountTotal() > appWindow.getUnlockedBalance()) {
             return qsTr("Amount is more than unlocked balance.") + translationManager.emptyString;
         }
 
-        if (addressLine.text)
-        {
+        if (!recipientModel.hasEmptyAddress()) {
             // Address is valid
-            if (!TxUtils.checkAddress(addressLine.text, appWindow.persistentSettings.nettype)) {
+            if (recipientModel.hasInvalidAddress()) {
                 return qsTr("Address is invalid.") + translationManager.emptyString;
             }
 
             // Amount is nonzero
-            if (!amountLine.text || parseFloat(amountLine.text) <= 0) {
+            if (recipientModel.hasEmptyAmount()) {
                 return qsTr("Enter an amount.") + translationManager.emptyString;
             }
         }
@@ -93,10 +93,16 @@ Rectangle {
     }
 
     function fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name) {
-        addressLine.text = address
-        setPaymentId(payment_id);
-        amountLine.text = amount
-        setDescription((recipient_name ? recipient_name + " " : "") + tx_description);
+        if (recipientModel.count > 0) {
+            const last = recipientModel.count - 1;
+            if (recipientModel.get(recipientModel.count - 1).address == "") {
+                recipientModel.remove(last);
+            }
+        }
+
+        recipientModel.newRecipient(address, Utils.removeTrailingZeros(amount || ""));
+        setPaymentId(payment_id || "");
+        setDescription((recipient_name ? recipient_name + " " : "") + (tx_description || ""));
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
@@ -116,15 +122,9 @@ Rectangle {
     }
 
     function clearFields() {
-        addressLine.text = ""
-        setPaymentId("");
-        amountLine.text = ""
-        setDescription("");
+        recipientModel.clear();
+        fillPaymentDetails("", "", "", "", "");
         priorityDropdown.currentIndex = 0
-    }
-
-    function getRecipients() {
-        return [{address: addressLine.text, amount: amountLine.text}];
     }
 
     // Information dialog
@@ -170,184 +170,496 @@ Rectangle {
           }
       }
 
-      // recipient address input
-      RowLayout {
-          id: addressLineRow
-          Layout.fillWidth: true
+        ListModel {
+            id: recipientModel
 
-          LineEditMulti {
-              id: addressLine
-              KeyNavigation.tab: amountLine
-              spacing: 0
-              fontBold: true
-              labelText: qsTr("Address") + translationManager.emptyString
-              labelButtonText: qsTr("Resolve") + translationManager.emptyString
-              placeholderText: {
-                  if(persistentSettings.nettype == NetworkType.MAINNET){
-                      return "4.. / 8.. / OpenAlias";
-                  } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                      return "5.. / 7..";
-                  } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                      return "9.. / B..";
-                  }
-              }
-              wrapMode: Text.WrapAnywhere
-              addressValidation: true
-              onTextChanged: {
-                  const parsed = walletManager.parse_uri_to_object(text);
-                  if (!parsed.error) {
-                    addressLine.text = parsed.address;
-                    setPaymentId(parsed.payment_id);
-                    amountLine.text = parsed.amount;
-                    setDescription(parsed.tx_description);
-                  }
-              }
+            readonly property int maxRecipients: 16
 
-                MoneroComponents.InlineButton {
-                    fontFamily: FontAwesome.fontFamily
-                    fontPixelSize: 18
-                    text: FontAwesome.desktop
-                    onClicked: {
-                        clearFields();
-                        const codes = oshelper.grabQrCodesFromScreen();
-                        for (var index = 0; index < codes.length; ++index) {
-                            const parsed = walletManager.parse_uri_to_object(codes[index]);
-                            if (!parsed.error) {
-                                fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name);
-                                break;
+            ListElement {
+                address: ""
+                amount: ""
+            }
+
+            function newRecipient(address, amount) {
+                if (recipientModel.count < maxRecipients) {
+                    recipientModel.append({address: address, amount: amount});
+                    return true;
+                }
+                return false;
+            }
+
+            function getRecipients() {
+                var recipients = [];
+                for (var index = 0; index < recipientModel.count; ++index) {
+                    const recipient = recipientModel.get(index);
+                    recipients.push({
+                        address: recipient.address,
+                        amount: recipient.amount,
+                    });
+                }
+                return recipients;
+            }
+
+            function getAmountTotal() {
+                var sum = [];
+                for (var index = 0; index < recipientModel.count; ++index) {
+                    const amount = recipientModel.get(index).amount;
+                    if (amount == "(all)") {
+                        return appWindow.getUnlockedBalance();
+                    }
+                    sum.push(amount || "0");
+                }
+                return walletManager.amountsSumFromStrings(sum);
+            }
+
+            function hasEmptyAmount() {
+                for (var index = 0; index < recipientModel.count; ++index) {
+                    if (recipientModel.get(index).amount === "") {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function hasEmptyAddress() {
+                for (var index = 0; index < recipientModel.count; ++index) {
+                    if (recipientModel.get(index).address === "") {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function hasInvalidAddress() {
+                for (var index = 0; index < recipientModel.count; ++index) {
+                    if (!TxUtils.checkAddress(recipientModel.get(index).address, appWindow.persistentSettings.nettype)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        Item {
+            Layout.fillWidth: true
+            implicitHeight: recipientLayout.height
+
+            ColumnLayout {
+                id: recipientLayout
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: 0
+
+                readonly property int colSpacing: 10
+                readonly property int rowSpacing: 10
+                readonly property int secondRowWidth: 125
+                readonly property int thirdRowWidth: 50
+
+                RowLayout {
+                    Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                    spacing: recipientLayout.colSpacing
+
+                    RowLayout {
+                        id: addressLabel
+                        spacing: 6
+                        Layout.fillWidth: true
+
+                        MoneroComponents.TextPlain {
+                            Layout.leftMargin: 10
+                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.pixelSize: 16
+                            color: MoneroComponents.Style.defaultFontColor
+                            text: qsTr("Address") + translationManager.emptyString
+                        }
+
+                        MoneroComponents.InlineButton {
+                            fontFamily: FontAwesome.fontFamily
+                            fontPixelSize: 18
+                            text: FontAwesome.desktop
+                            onClicked: {
+                                clearFields();
+                                const codes = oshelper.grabQrCodesFromScreen();
+                                for (var index = 0; index < codes.length; ++index) {
+                                    const parsed = walletManager.parse_uri_to_object(codes[index]);
+                                    if (!parsed.error) {
+                                        fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description, parsed.recipient_name);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        MoneroComponents.InlineButton {
+                            fontFamily: FontAwesome.fontFamily
+                            text: FontAwesome.qrcode
+                            visible: appWindow.qrScannerEnabled
+                            onClicked: {
+                                cameraUi.state = "Capture"
+                                cameraUi.qrcode_decoded.connect(updateFromQrCode)
+                            }
+                        }
+
+                        MoneroComponents.InlineButton {
+                            fontFamily: FontAwesome.fontFamily
+                            text: FontAwesome.addressBook
+                            onClicked: {
+                                middlePanel.addressBookView.selectAndSend = true;
+                                appWindow.showPageRequest("AddressBook");
+                            }
+                        }
+
+                        Item {
+                            Layout.fillWidth: true
+                        }
+                    }
+
+                    MoneroComponents.TextPlain {
+                        Layout.preferredWidth: recipientLayout.secondRowWidth
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        font.pixelSize: 16
+                        color: MoneroComponents.Style.defaultFontColor
+                        text: qsTr("Amount") + translationManager.emptyString
+                    }
+
+                    Item {
+                        Layout.preferredWidth: recipientLayout.thirdRowWidth
+                    }
+                }
+
+                Repeater {
+                    id: recipientRepeater
+                    model: recipientModel
+
+                    ColumnLayout {
+                        spacing: 0
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            Layout.rightMargin: recipientLayout.thirdRowWidth
+                            color: MoneroComponents.Style.inputBorderColorInActive
+                            height: 1
+                            visible: index > 0
+                        }
+
+                        RowLayout {
+                            spacing: 0
+
+                            MoneroComponents.LineEditMulti {
+                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
+                                KeyNavigation.tab: parent.children[2]
+                                Layout.alignment: Qt.AlignVCenter
+                                Layout.topMargin: index > 0 ? recipientLayout.rowSpacing / 2 : 0
+                                Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                                Layout.fillWidth: true
+                                addressValidation: true
+                                borderDisabled: true
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontSize: 14
+                                inputPaddingBottom: 0
+                                inputPaddingTop: 0
+                                inputPaddingRight: 0
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontSize: 14
+                                spacing: 0
+                                wrapMode: Text.WrapAnywhere
+                                placeholderText: {
+                                    if(persistentSettings.nettype == NetworkType.MAINNET){
+                                        return "4.. / 8.. / OpenAlias";
+                                    } else if (persistentSettings.nettype == NetworkType.STAGENET){
+                                        return "5.. / 7..";
+                                    } else if(persistentSettings.nettype == NetworkType.TESTNET){
+                                        return "9.. / B..";
+                                    }
+                                }
+                                onTextChanged: {
+                                    const parsed = walletManager.parse_uri_to_object(text);
+                                    if (!parsed.error) {
+                                        fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
+                                    }
+                                    address = text;
+                                }
+                                text: address
+
+                                MoneroComponents.InlineButton {
+                                    small: true
+                                    text: qsTr("Resolve") + translationManager.emptyString
+                                    visible: TxUtils.isValidOpenAliasAddress(address)
+                                    onClicked: {
+                                        var result = walletManager.resolveOpenAlias(address)
+                                        if (result) {
+                                            var parts = result.split("|")
+                                            if (parts.length == 2) {
+                                                var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
+                                                if (parts[0] === "true") {
+                                                    if (address_ok) {
+                                                        // prepend openalias to description
+                                                        descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
+                                                        descriptionCheckbox.checked = true
+                                                        recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                                    }
+                                                    else
+                                                        oa_message(qsTr("No valid address found at this OpenAlias address"))
+                                                }
+                                                else if (parts[0] === "false") {
+                                                        if (address_ok) {
+                                                            recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                                            oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                                                        }
+                                                        else
+                                                        {
+                                                            oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                                                        }
+                                                }
+                                                else {
+                                                    oa_message(qsTr("Internal error"))
+                                                }
+                                            }
+                                            else {
+                                                oa_message(qsTr("Internal error"))
+                                            }
+                                        }
+                                        else {
+                                            oa_message(qsTr("No address found"))
+                                        }
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                Layout.fillHeight: true
+                                Layout.leftMargin: recipientLayout.colSpacing / 2 - width
+                                Layout.rightMargin: recipientLayout.colSpacing / 2
+                                color: MoneroComponents.Style.inputBorderColorInActive
+                                width: 1
+                            }
+
+                            MoneroComponents.LineEdit {
+                                KeyNavigation.backtab: parent.children[0]
+                                KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
+                                Layout.alignment: Qt.AlignVCenter
+                                Layout.topMargin: recipientLayout.rowSpacing / 2
+                                Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                                Layout.rightMargin: recipientLayout.colSpacing / 2
+                                Layout.preferredWidth: 125
+                                borderDisabled: true
+                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                fontSize: 14
+                                inputPadding: 0
+                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                placeholderFontSize: 14
+                                placeholderLeftMargin: 0
+                                placeholderText: "0.00"
+                                text: amount
+                                onTextChanged: {
+                                    text = text.trim().replace(",", ".");
+                                    const match = text.match(/^0+(\d.*)/);
+                                    if (match) {
+                                        const cursorPosition = cursorPosition;
+                                        text = match[1];
+                                        cursorPosition = Math.max(cursorPosition, 1) - 1;
+                                    } else if(text.indexOf('.') === 0){
+                                        text = '0' + text;
+                                        if (text.length > 2) {
+                                            cursorPosition = 1;
+                                        }
+                                    }
+                                    error = walletManager.amountFromString(text) > appWindow.getUnlockedBalance();
+
+                                    amount = text;
+                                }
+                                validator: RegExpValidator {
+                                    regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
+                                }
+                            }
+
+                            MoneroComponents.TextPlain {
+                                Layout.leftMargin: recipientLayout.colSpacing / 2
+                                Layout.preferredWidth: recipientLayout.thirdRowWidth
+                                font.family: FontAwesome.fontFamilySolid
+                                font.styleName: "Solid"
+                                horizontalAlignment: Text.AlignHCenter
+                                opacity: mouseArea.containsMouse ? 1 : 0.85
+                                text: recipientModel.count == 1 ? FontAwesome.infinity : FontAwesome.times
+
+                                MouseArea {
+                                    id: mouseArea
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    hoverEnabled: true
+                                    onClicked: {
+                                        if (recipientModel.count == 1) {
+                                            parent.parent.children[2].text = "(all)";
+                                        } else {
+                                            recipientModel.remove(index);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
 
-                MoneroComponents.InlineButton {
-                    fontFamily: FontAwesome.fontFamily
-                    text: FontAwesome.addressBook
-                    onClicked: {
-                        middlePanel.addressBookView.selectAndSend = true;
-                        appWindow.showPageRequest("AddressBook");
-                    }
-                }
+                GridLayout {
+                    id: totalLayout
+                    Layout.topMargin: recipientLayout.rowSpacing / 2
+                    Layout.fillWidth: true
+                    columns: 3
+                    columnSpacing: recipientLayout.colSpacing
+                    rowSpacing: 0
 
-                MoneroComponents.InlineButton {
-                    fontFamily: FontAwesome.fontFamily
-                    text: FontAwesome.qrcode
-                    visible: appWindow.qrScannerEnabled
-                    onClicked: {
-                        cameraUi.state = "Capture"
-                        cameraUi.qrcode_decoded.connect(updateFromQrCode)
-                    }
-                }
-          }
-      }
+                    RowLayout {
+                        Layout.column: 0
+                        Layout.row: 0
+                        Layout.fillWidth: true
+                        spacing: 0
 
-      StandardButton {
-          id: resolveButton
-          width: 80
-          text: qsTr("Resolve") + translationManager.emptyString
-          visible: TxUtils.isValidOpenAliasAddress(addressLine.text)
-          enabled : visible
-          onClicked: {
-              var result = walletManager.resolveOpenAlias(addressLine.text)
-              if (result) {
-                  var parts = result.split("|")
-                  if (parts.length == 2) {
-                      var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                      if (parts[0] === "true") {
-                          if (address_ok) {
-                              // prepend openalias to description
-                              descriptionLine.text = descriptionLine.text ? addressLine.text + " " + descriptionLine.text : addressLine.text
-                              descriptionCheckbox.checked = true
-                              addressLine.text = parts[1]
-                          }
-                          else
-                              oa_message(qsTr("No valid address found at this OpenAlias address"))
-                      }
-                      else if (parts[0] === "false") {
-                            if (address_ok) {
-                                addressLine.text = parts[1]
-                                oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                        CheckBox {
+                            border: false
+                            checked: false
+                            enabled: {
+                                if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
+                                    return false;
+                                }
+                                if (recipientModel.count >= recipientModel.maxRecipients) {
+                                    return false;
+                                }
+                                return true;
                             }
-                            else
-                            {
-                                oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                            }
-                      }
-                      else {
-                          oa_message(qsTr("Internal error"))
-                      }
-                  }
-                  else {
-                      oa_message(qsTr("Internal error"))
-                  }
-              }
-              else {
-                  oa_message(qsTr("No address found"))
-              }
-          }
-      }
-
-      GridLayout {
-          columns: appWindow.walletMode < 2 ? 1 : 2
-          Layout.fillWidth: true
-          columnSpacing: 32
-
-          ColumnLayout {
-              Layout.fillWidth: true
-              Layout.minimumWidth: 200
-
-              // Amount input
-              LineEdit {
-                  id: amountLine
-                  KeyNavigation.tab: sendButton
-                  Layout.fillWidth: true
-                  inlineIcon: true
-                  labelText: "<style type='text/css'>a {text-decoration: none; color: #858585; font-size: 14px;}</style>\
-                                   %1 <a href='#'>(%2)</a>".arg(qsTr("Amount")).arg(qsTr("Change account"))
-                             + translationManager.emptyString
-                  copyButton: !isNaN(amountLine.text) && persistentSettings.fiatPriceEnabled
-                  copyButtonText: "~%1 %2".arg(fiatApiConvertToFiat(amountLine.text)).arg(fiatApiCurrencySymbol())
-                  copyButtonEnabled: false
-
-                  onLabelLinkActivated: {
-                      middlePanel.accountView.selectAndSend = true;
-                      appWindow.showPageRequest("Account")
-                  }
-                  placeholderText: "0.00"
-                  width: 100
-                  fontBold: true
-                  onTextChanged: {
-                        amountLine.text = amountLine.text.trim().replace(",", ".");
-                        const match = amountLine.text.match(/^0+(\d.*)/);
-                        if (match) {
-                            const cursorPosition = amountLine.cursorPosition;
-                            amountLine.text = match[1];
-                            amountLine.cursorPosition = Math.max(cursorPosition, 1) - 1;
-                        } else if(amountLine.text.indexOf('.') === 0){
-                            amountLine.text = '0' + amountLine.text;
-                            if (amountLine.text.length > 2) {
-                                amountLine.cursorPosition = 1;
+                            fontAwesomeIcons: true
+                            fontSize: descriptionLine.labelFontSize
+                            iconOnTheLeft: true
+                            text: qsTr("Add recipient") + translationManager.emptyString
+                            toggleOnClick: false
+                            uncheckedIcon: FontAwesome.plusCircle
+                            onClicked: {
+                                recipientModel.newRecipient("", "");
                             }
                         }
-                        amountLine.error = walletManager.amountFromString(amountLine.text) > appWindow.getUnlockedBalance()
-                  }
-                  validator: RegExpValidator {
-                      regExp: /^\s*(\d{1,8})?([\.,]\d{1,12})?\s*$/
-                  }
 
-                    MoneroComponents.InlineButton {
-                        text: qsTr("All") + translationManager.emptyString
-                        onClicked: amountLine.text = "(all)"
+                        MoneroComponents.TextPlain {
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignRight
+                            font.family: MoneroComponents.Style.fontRegular.name
+                            font.pixelSize: 16
+                            text: recipientModel.count > 1 ? qsTr("Total") + translationManager.emptyString : ""
+                        }
                     }
-              }
+
+                    MoneroComponents.LineEdit {
+                        id: totalValue
+                        Layout.column: 1
+                        Layout.row: 0
+                        Layout.preferredWidth: recipientLayout.secondRowWidth
+                        borderDisabled: true
+                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontSize: 14
+                        inputHeight: 30
+                        inputPadding: 0
+                        readOnly: true
+                        text: Utils.removeTrailingZeros(walletManager.displayAmount(recipientModel.getAmountTotal()))
+                        visible: recipientModel.count > 1
+                    }
+
+                    MoneroComponents.TextPlain {
+                        Layout.column: 2
+                        Layout.row: 0
+                        Layout.preferredWidth: recipientLayout.thirdRowWidth
+                        horizontalAlignment: Text.AlignHCenter
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        text: "XMR"
+                        visible: recipientModel.count > 1
+                    }
+
+                    MoneroComponents.LineEdit {
+                        Layout.column: 1
+                        Layout.row: recipientModel.count > 1 ? 1 : 0
+                        Layout.preferredWidth: recipientLayout.secondRowWidth
+                        borderDisabled: true
+                        fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                        fontSize: 14
+                        inputHeight: 30
+                        inputPadding: 0
+                        opacity: 0.7
+                        readOnly: true
+                        text: fiatApiConvertToFiat(walletManager.displayAmount(recipientModel.getAmountTotal()))
+                        visible: persistentSettings.fiatPriceEnabled
+                    }
+
+                    MoneroComponents.TextPlain {
+                        Layout.column: 2
+                        Layout.row: recipientModel.count > 1 ? 1 : 0
+                        Layout.preferredWidth: recipientLayout.thirdRowWidth
+                        font.family: MoneroComponents.Style.fontRegular.name
+                        horizontalAlignment: Text.AlignHCenter
+                        opacity: 0.7
+                        text: fiatApiCurrencySymbol()
+                        visible: persistentSettings.fiatPriceEnabled
+                    }
+                }
+            }
+
+            Rectangle {
+                anchors.top: recipientLayout.top
+                anchors.topMargin: addressLabel.height + recipientLayout.rowSpacing / 2
+                anchors.bottom: recipientLayout.bottom
+                anchors.bottomMargin: totalLayout.height + recipientLayout.rowSpacing / 2
+                anchors.left: recipientLayout.left
+                anchors.right: recipientLayout.right
+                anchors.rightMargin: recipientLayout.thirdRowWidth
+                color: "transparent"
+                border.color: MoneroComponents.Style.inputBorderColorInActive
+                border.width: 1
+                radius: 4
+            }
+        }
+
+        ColumnLayout {
+            spacing: 0
+            visible: appWindow.walletMode >= 2
+
+            Label {
+                id: transactionPriority
+                Layout.topMargin: 0
+                text: qsTr("Transaction priority") + translationManager.emptyString
+                fontBold: false
+                fontSize: 16
+            }
+            // Note: workaround for translations in listElements
+            // ListElement: cannot use script for property value, so
+            // code like this wont work:
+            // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
+            // For translations to work, the strings need to be listed in
+            // the file components/StandardDropdown.qml too.
+
+            // Priorites after v5
+            ListModel {
+                id: priorityModelV5
+
+                ListElement { column1: qsTr("Automatic") ; column2: ""; priority: 0}
+                ListElement { column1: qsTr("Slow (x0.2 fee)") ; column2: ""; priority: 1}
+                ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
+                ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
+                ListElement { column1: qsTr("Fastest (x200 fee)")  ; column2: "";  priority: 4 }
+            }
+
+            RowLayout {
+                Layout.topMargin: 5
+                spacing: 10
+
+                StandardDropdown {
+                    Layout.preferredWidth: 200
+                    id: priorityDropdown
+                    currentIndex: 0
+                    dataModel: priorityModelV5
+                }
 
                 MoneroComponents.TextPlain {
                     id: feeLabel
-                    Layout.alignment: Qt.AlignRight
-                    Layout.topMargin: 12
+                    Layout.alignment: Qt.AlignVCenter
                     font.family: MoneroComponents.Style.fontRegular.name
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
+                    opacity: 0.7
                     property bool estimating: false
                     property var estimatedFee: null
                     property string estimatedFeeFiat: {
@@ -363,12 +675,21 @@ Rectangle {
                         if (!sendButton.enabled || !currentWallet) {
                             return;
                         }
+                        var addresses = [];
+                        var amounts = [];
+                        for (var index = 0; index < recipientModel.count; ++index) {
+                            const recipient = recipientModel.get(index);
+                            addresses.push(recipient.address);
+                            amounts.push(walletManager.amountFromString(recipient.amount));
+                        }
                         currentWallet.estimateTransactionFeeAsync(
-                            [addressLine.text],
-                            [walletManager.amountFromString(amountLine.text)],
+                            addresses,
+                            amounts,
                             priorityModelV5.get(priorityDropdown.currentIndex).priority,
                             function (amount) {
-                                estimatedFee = Utils.removeTrailingZeros(amount);
+                                if (amount) {
+                                    estimatedFee = Utils.removeTrailingZeros(amount);
+                                }
                                 estimating = false;
                             });
                     }
@@ -376,56 +697,20 @@ Rectangle {
                         if (!sendButton.enabled || estimatedFee == null) {
                             return ""
                         }
-                        return "%1: ~%2 XMR".arg(qsTr("Fee")).arg(estimatedFee) +
-                            estimatedFeeFiat +
-                            translationManager.emptyString;
+                        return "~%1 XMR%2 %3".arg(estimatedFee)
+                            .arg(estimatedFeeFiat)
+                            .arg(qsTr("fee") + translationManager.emptyString);
                     }
 
                     BusyIndicator {
-                        anchors.right: parent.right
+                        anchors.left: parent.left
                         running: feeLabel.estimating
                         height: parent.height
+                        width: height
                     }
                 }
-          }
-
-          ColumnLayout {
-              visible: appWindow.walletMode >= 2
-              Layout.alignment: Qt.AlignTop
-              Label {
-                  id: transactionPriority
-                  Layout.topMargin: 0
-                  text: qsTr("Transaction priority") + translationManager.emptyString
-                  fontBold: false
-                  fontSize: 16
-              }
-              // Note: workaround for translations in listElements
-              // ListElement: cannot use script for property value, so
-              // code like this wont work:
-              // ListElement { column1: qsTr("LOW") + translationManager.emptyString ; column2: ""; priority: PendingTransaction.Priority_Low }
-              // For translations to work, the strings need to be listed in
-              // the file components/StandardDropdown.qml too.
-
-              // Priorites after v5
-              ListModel {
-                   id: priorityModelV5
-
-                   ListElement { column1: qsTr("Automatic") ; column2: ""; priority: 0}
-                   ListElement { column1: qsTr("Slow (x0.2 fee)") ; column2: ""; priority: 1}
-                   ListElement { column1: qsTr("Normal (x1 fee)") ; column2: ""; priority: 2 }
-                   ListElement { column1: qsTr("Fast (x5 fee)") ; column2: ""; priority: 3 }
-                   ListElement { column1: qsTr("Fastest (x200 fee)")  ; column2: "";  priority: 4 }
-               }
-
-              StandardDropdown {
-                  Layout.preferredWidth: 200
-                  id: priorityDropdown
-                  Layout.topMargin: 5
-                  currentIndex: 0
-                  dataModel: priorityModelV5
-              }
-          }
-      }
+            }
+        }
 
       MoneroComponents.WarningBox {
           text: qsTr("Description field contents match long payment ID format. \
@@ -513,26 +798,25 @@ Rectangle {
       RowLayout {
           StandardButton {
               id: sendButton
-              KeyNavigation.tab: addressLine
               rightIcon: "qrc:///images/rightArrow.png"
               rightIconInactive: "qrc:///images/rightArrowInactive.png"
               Layout.topMargin: 4
               text: qsTr("Send") + translationManager.emptyString
-              enabled: !sendButtonWarningBox.visible && !warningContent && addressLine.text && !paymentIdWarningBox.visible
+              enabled: !sendButtonWarningBox.visible && !warningContent && !recipientModel.hasEmptyAddress() && !paymentIdWarningBox.visible
               onClicked: {
                   console.log("Transfer: paymentClicked")
                   var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                   console.log("priority: " + priority)
-                  console.log("amount: " + amountLine.text)
-                  addressLine.text = addressLine.text.trim()
                   setPaymentId(paymentIdLine.text.trim());
-                  root.paymentClicked(getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
+                  root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
               }
           }
       }
 
-      function checkInformation(amount, address, nettype) {
-        return amount.length > 0 && walletManager.amountFromString(amountLine.text) <= appWindow.getUnlockedBalance() && TxUtils.checkAddress(address, nettype)
+      function checkInformation() {
+        return !recipientModel.hasEmptyAmount() &&
+            recipientModel.getAmountTotal() <= appWindow.getUnlockedBalance() &&
+            !recipientModel.hasInvalidAddress();
       }
 
     } // pageRoot
@@ -592,15 +876,13 @@ Rectangle {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
             button1.text: qsTr("Create") + translationManager.emptyString
-            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)
+            button1.enabled: appWindow.viewOnly && pageRoot.checkInformation()
             button1.onClicked: {
                 console.log("Transfer: saveTx Clicked")
                 var priority = priorityModelV5.get(priorityDropdown.currentIndex).priority
                 console.log("priority: " + priority)
-                console.log("amount: " + amountLine.text)
-                addressLine.text = addressLine.text.trim()
                 setPaymentId(paymentIdLine.text.trim());
-                root.paymentClicked(getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
+                root.paymentClicked(recipientModel.getRecipients(), paymentIdLine.text, root.mixin, priority, descriptionLine.text)
             }
             button2.text: qsTr("Sign (offline)") + translationManager.emptyString
             button2.enabled: !appWindow.viewOnly
@@ -617,7 +899,7 @@ Rectangle {
             helpTextLarge.text: qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString
             helpTextSmall.text: {
                 var errorMessage = "";
-                if (appWindow.viewOnly && !pageRoot.checkInformation(amountLine.text, addressLine.text, appWindow.persistentSettings.nettype)){
+                if (appWindow.viewOnly && !pageRoot.checkInformation()) {
                     errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
                 }
                 return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor + 
@@ -818,19 +1100,9 @@ Rectangle {
     }
 
     // Popuplate fields from addressbook.
-    function sendTo(address, paymentId, description, amount){
+    function sendTo(address, paymentId, description, amount) {
         middlePanel.state = 'Transfer';
 
-        if(typeof address !== 'undefined')
-            addressLine.text = address
-
-        if(typeof paymentId !== 'undefined')
-            setPaymentId(paymentId);
-
-        if(typeof description !== 'undefined')
-            setDescription(description);
-
-        if(typeof amount !== 'undefined')
-            amountLine.text = amount;
+        fillPaymentDetails(address, paymentId, amount, description);
     }
 }
