@@ -90,6 +90,7 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     }
 
     arguments << "--check-updates" << "disabled";
+    arguments << "--non-interactive";
 
     // --max-concurrency based on threads available.
     int32_t concurrency = qMax(1, QThread::idealThreadCount() / 2);
