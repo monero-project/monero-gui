@@ -65,10 +65,10 @@ ColumnLayout {
     }
 
     WizardSummaryItem {
-        visible: persistentSettings.remoteNodeAddress !== "" && appWindow.walletMode == 0
+        visible: remoteNodesModel.currentRemoteNode().address !== "" && appWindow.walletMode == 0
         Layout.fillWidth: true
         header: qsTr("Daemon address") + translationManager.emptyString
-        value: persistentSettings.remoteNodeAddress
+        value: remoteNodesModel.currentRemoteNode().address
     }
 
     WizardSummaryItem {
