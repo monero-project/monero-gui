@@ -40,8 +40,10 @@ Window {
     modality: Qt.ApplicationModal
     flags: Qt.Window | Qt.FramelessWindowHint
     property int countDown: 10;
-    signal rejected()
     signal started();
+    signal remoteChose();
+    signal offlineChose();
+    signal rejected();
 
     function open() {
         show()
@@ -91,7 +93,7 @@ Window {
             }
 
             MoneroComponents.TextPlain {
-                text: qsTr("Starting local node in %1 seconds").arg(countDown) + translationManager.emptyString;
+                text: qsTr("Starting local node in %1 seconds\n or").arg(countDown) + translationManager.emptyString;
                 font.pixelSize: 18
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
@@ -104,7 +106,7 @@ Window {
 
         RowLayout {
             id: buttons
-            spacing: 60
+            spacing: 20
             Layout.alignment: Qt.AlignHCenter
 
             MoneroComponents.StandardButton {
@@ -112,7 +114,7 @@ Window {
                 visible:false
                 fontSize: 14
                 text: qsTr("Start daemon (%1)").arg(countDown) + translationManager.emptyString
-                KeyNavigation.tab: cancelButton
+                KeyNavigation.tab: buttonsRow
                 onClicked: {
                     timer.stop();
                     root.close()
@@ -121,15 +123,42 @@ Window {
                 }
             }
 
-            MoneroComponents.StandardButton {
-                id: cancelButton
-                fontSize: 14
-                text: qsTr("Use custom settings") + translationManager.emptyString
+            RowLayout {
+                id: buttonsRow
+                MoneroComponents.StandardButton {
+                    id: remoteNodeButton
+                    fontSize: 14
+                    text: qsTr("Remote Node") + translationManager.emptyString
 
-                onClicked: {
-                    timer.stop();
-                    root.close()
-                    root.rejected()
+                    onClicked: {
+                        timer.stop();
+                        root.close()
+                        root.remoteChose();
+                    }
+                }
+
+                MoneroComponents.StandardButton {
+                    id: offlineButton
+                    fontSize: 14
+                    text: qsTr("Offline") + translationManager.emptyString
+
+                    onClicked: {
+                        timer.stop();
+                        root.close();
+                        root.offlineChose();
+                    }
+                }
+
+                MoneroComponents.StandardButton {
+                    id: cancelButton
+                    fontSize: 14
+                    text: qsTr("Custom") + translationManager.emptyString
+
+                    onClicked: {
+                        timer.stop();
+                        root.close()
+                        root.rejected()
+                    }
                 }
             }
         }

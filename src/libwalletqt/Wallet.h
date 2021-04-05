@@ -336,6 +336,9 @@ public:
     QString getDaemonLogPath() const;
     QString getWalletLogPath() const;
 
+    // toggle offline = true, offline = false
+    Q_INVOKABLE void setOffline(bool offline);
+
     // Blackalled outputs
     Q_INVOKABLE bool blackballOutput(const QString &amount, const QString &offset);
     Q_INVOKABLE bool blackballOutputs(const QList<QString> &outputs, bool add);

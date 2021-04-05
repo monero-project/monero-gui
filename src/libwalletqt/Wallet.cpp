@@ -961,6 +961,11 @@ QString Wallet::getDaemonLogPath() const
     return QString::fromStdString(m_walletImpl->getDefaultDataDir()) + "/bitmonero.log";
 }
 
+void Wallet::setOffline(bool offline) 
+{
+    m_walletImpl->setOffline(offline);
+}
+
 bool Wallet::blackballOutput(const QString &amount, const QString &offset)
 {
     return m_walletImpl->blackballOutput(amount.toStdString(), offset.toStdString());

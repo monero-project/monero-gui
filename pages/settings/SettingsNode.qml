@@ -138,6 +138,7 @@ Rectangle{
                 anchors.fill: parent
                 enabled: persistentSettings.useRemoteNode
                 onClicked: {
+                    appWindow.currentWallet.setOffline(false); // make sure wallet will connect
                     persistentSettings.useRemoteNode = false;
                     appWindow.disconnectRemoteNode();
                 }
