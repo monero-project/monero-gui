@@ -94,6 +94,28 @@ ColumnLayout {
             }
         }
 
+        RowLayout {
+            id: pruningOptionRow
+            MoneroComponents.CheckBox {
+                id: pruneBlockchainCheckBox
+                checked: !existingDbWarning.visible ? persistentSettings.pruneBlockchain : false
+                enabled: !existingDbWarning.visible
+                onClicked: {
+                    persistentSettings.pruneBlockchain =  !persistentSettings.pruneBlockchain
+                    this.checked = persistentSettings.pruneBlockchain
+                }
+                text: qsTr("Prune blockchain") + translationManager.emptyString
+            }
+
+            Text {
+                id: existingDbWarning
+                text: "A blockchain database already exists here. Select a new location to start a pruned node"
+                visible: daemonManager ? daemonManager.checkLmdbExists(blockchainFolder.text) : false
+                color: MoneroComponents.Style.defaultFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
+            }
+        }
+
         ColumnLayout{
             Layout.topMargin: 6
             spacing: 0
