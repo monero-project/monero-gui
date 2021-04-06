@@ -56,7 +56,6 @@ GridLayout {
     property int labelFontSize: 14
 
     property string lineEditBackgroundColor: "transparent"
-    property string lineEditBorderColor: MoneroComponents.Style.inputBorderColorInActive
     property string lineEditFontColor: MoneroComponents.Style.defaultFontColor
     property bool lineEditFontBold: false
     property int lineEditFontSize: 15
@@ -66,6 +65,8 @@ GridLayout {
 
     signal editingFinished()
     signal textChanged()
+
+    onActiveFocusChanged: activeFocus && daemonAddr.forceActiveFocus()
 
     function isValid() {
         return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
@@ -92,7 +93,6 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
@@ -115,7 +115,6 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
