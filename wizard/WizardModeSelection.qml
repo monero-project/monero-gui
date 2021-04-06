@@ -119,6 +119,7 @@ Rectangle {
 
                 onMenuClicked: {
                     if(appWindow.persistentSettings.nettype == 0){
+                        appWindow.persistentSettings.pruneBlockchain = true;
                         applyWalletMode(1, 'wizardModeBootstrap');
                     }
                 }
@@ -139,6 +140,7 @@ Rectangle {
                 imageIcon: "qrc:///images/local-node-full.png"
 
                 onMenuClicked: {
+                    appWindow.persistentSettings.pruneBlockchain = false; // can be toggled on next page
                     applyWalletMode(2, 'wizardHome');
                 }
             }

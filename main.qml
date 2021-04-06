@@ -714,7 +714,7 @@ ApplicationWindow {
 
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -1401,6 +1401,7 @@ ApplicationWindow {
         property bool checkForUpdates: true
         property bool autosave: true
         property int autosaveMinutes: 10
+        property bool pruneBlockchain: false
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false

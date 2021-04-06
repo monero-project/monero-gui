@@ -27,6 +27,7 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "DaemonManager.h"
+#include "common/util.h"
 #include <QElapsedTimer>
 #include <QFile>
 #include <QMutexLocker>
@@ -47,7 +48,7 @@ namespace {
     static const int DAEMON_START_TIMEOUT_SECONDS = 120;
 }
 
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
     {
@@ -83,6 +84,12 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     // Bootstrap node address
     if(!bootstrapNodeAddress.isEmpty()) {
         arguments << "--bootstrap-daemon-address" << bootstrapNodeAddress;
+    }
+
+    if (pruneBlockchain) {
+        if (!checkLmdbExists(dataDir)) { // check that DB has not already been created
+            arguments << "--prune-blockchain";
+        }
     }
 
     if (noSync) {
@@ -321,6 +328,13 @@ QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
     result.insert("storageAvailable", storageAvailable);
 
     return result;
+}
+
+bool DaemonManager::checkLmdbExists(QString datadir) {
+    if (datadir.isEmpty() || datadir.isNull()) {
+        datadir = QString::fromStdString(tools::get_default_data_dir());
+    }
+    return validateDataDir(datadir).value("lmdbExists").value<bool>();
 }
 
 DaemonManager::DaemonManager(QObject *parent)

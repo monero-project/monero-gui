@@ -47,7 +47,7 @@ public:
     explicit DaemonManager(QObject *parent = 0);
     ~DaemonManager();
 
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const;
     Q_INVOKABLE void exit();
     Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
+    Q_INVOKABLE bool checkLmdbExists(QString datadir);
 
 private:
 
