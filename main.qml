@@ -26,6 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQml.Models 2.12
 import QtQuick 2.9
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
@@ -364,13 +365,13 @@ ApplicationWindow {
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
-        // Use saved daemon rpc login settings
-        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
-
-        if(persistentSettings.useRemoteNode)
-            currentDaemonAddress = persistentSettings.remoteNodeAddress
-        else
-            currentDaemonAddress = localDaemonAddress
+        if (persistentSettings.useRemoteNode) {
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            currentDaemonAddress = remoteNode.address;
+            currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
+        } else {
+            currentDaemonAddress = localDaemonAddress;
+        }
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
         currentWallet.initAsync(
@@ -387,7 +388,7 @@ ApplicationWindow {
     }
 
     function isTrustedDaemon() {
-        return !persistentSettings.useRemoteNode || persistentSettings.is_trusted_daemon;
+        return !persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted;
     }
 
     function usefulName(path) {
@@ -616,7 +617,9 @@ ApplicationWindow {
 
         const callback = function() {
             persistentSettings.useRemoteNode = true;
-            currentDaemonAddress = persistentSettings.remoteNodeAddress;
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            currentDaemonAddress = remoteNode.address;
+            currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
             currentWallet.initAsync(
                 currentDaemonAddress,
                 isTrustedDaemon(),
@@ -642,6 +645,7 @@ ApplicationWindow {
         console.log("disconnecting remote node");
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
+        currentWallet.setDaemonLogin("", "");
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -1350,6 +1354,8 @@ ApplicationWindow {
                 confirmationDialog.open();
             }
         }
+
+        remoteNodesModel.initialize();
     }
 
     MoneroSettings {
@@ -1370,22 +1376,33 @@ ApplicationWindow {
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
-        property bool   is_trusted_daemon : false
+        property bool   is_trusted_daemon : false  // TODO: drop after v0.17.2.0 release
         property bool   is_recovering : false
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
-        property string daemonUsername: ""
-        property string daemonPassword: ""
+        property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
+        property string daemonPassword: "" // TODO: drop after v0.17.2.0 release
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
         property bool historyShowAdvanced: false
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
-        property string remoteNodeAddress: ""
+        property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
+        property string remoteNodesSerialized: JSON.stringify({
+                selected: 0,
+                nodes: remoteNodeAddress != ""
+                    ? [{
+                        address: remoteNodeAddress,
+                        username: daemonUsername,
+                        password: daemonPassword,
+                        trusted: is_trusted_daemon,
+                    }]
+                    : [],
+            })
         property string bootstrapNodeAddress: ""
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
@@ -1430,6 +1447,88 @@ ApplicationWindow {
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }
+    }
+
+    ListModel {
+        id: remoteNodesModel
+
+        property int selected: 0
+
+        signal store()
+
+        function initialize() {
+            try {
+                const remoteNodes = JSON.parse(persistentSettings.remoteNodesSerialized);
+                for (var index = 0; index < remoteNodes.nodes.length; ++index) {
+                    const remoteNode = remoteNodes.nodes[index];
+                    remoteNodesModel.append(remoteNode);
+                }
+                selected = remoteNodes.selected % remoteNodesModel.count || 0;
+            } catch (e) {
+                console.error('failed to parse remoteNodesSerialized', e);
+            }
+
+            store.connect(function() {
+                var remoteNodes = [];
+                for (var index = 0; index < remoteNodesModel.count; ++index) {
+                    remoteNodes.push(remoteNodesModel.get(index));
+                }
+                persistentSettings.remoteNodesSerialized = JSON.stringify({
+                    selected: selected,
+                    nodes: remoteNodes
+                });
+            });
+        }
+
+        function appendIfNotExists(newRemoteNode) {
+            for (var index = 0; index < remoteNodesModel.count; ++index) {
+                const remoteNode = remoteNodesModel.get(index);
+                if (remoteNode.address == newRemoteNode.address &&
+                    remoteNode.username == newRemoteNode.username &&
+                    remoteNode.password == newRemoteNode.password &&
+                    remoteNode.trusted == newRemoteNode.trusted) {
+                        return index;
+                }
+            }
+            remoteNodesModel.append(newRemoteNode);
+            return remoteNodesModel.count - 1;
+        }
+
+        function applyRemoteNode(index) {
+            selected = index;
+            const remoteNode = currentRemoteNode();
+            persistentSettings.useRemoteNode = true;
+            if (currentWallet) {
+                currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
+                currentWallet.setTrustedDaemon(remoteNode.trusted);
+                appWindow.connectRemoteNode();
+            }
+        }
+
+        function currentRemoteNode() {
+            if (selected < remoteNodesModel.count) {
+                return remoteNodesModel.get(selected);
+            }
+            return {
+                address: "",
+                username: "",
+                password: "",
+                trusted: false,
+            };
+        }
+
+        function removeSelectNextIfNeeded(index) {
+            remoteNodesModel.remove(index);
+            if (selected == index) {
+                applyRemoteNode(selected % remoteNodesModel.count || 0);
+            } else if (selected > index) {
+                selected = selected - 1;
+            }
+        }
+
+        onCountChanged: store()
+        onDataChanged: store()
+        onSelectedChanged: store()
     }
 
     // Information dialog
@@ -1510,6 +1609,10 @@ ApplicationWindow {
         allowed: !passwordDialog.visible && !inputDialog.visible && !splash.visible
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
+    }
+
+    MoneroComponents.RemoteNodeDialog {
+        id: remoteNodeDialog
     }
 
     // Choose blockchain folder
@@ -1739,7 +1842,9 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
+                devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
+                remoteNodeDialog.visible
         }
 
 
@@ -2129,6 +2234,7 @@ ApplicationWindow {
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         if (inputDialogVisible) inputDialog.close()
+        remoteNodeDialog.close();
         passwordDialog.open();
     }
 

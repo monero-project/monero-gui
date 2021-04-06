@@ -42,7 +42,13 @@ ColumnLayout {
 
     function save(){
         persistentSettings.useRemoteNode = remoteNode.checked
-        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+        const index = remoteNodesModel.appendIfNotExists({
+            address: remoteNodeEdit.getAddress(),
+            username: "",
+            password: "",
+            trusted: false,
+        });
+        remoteNodesModel.applyRemoteNode(index);
         if (bootstrapNodeEdit.daemonAddrText == "auto") {
             persistentSettings.bootstrapNodeAddress = "auto";
         } else {
@@ -201,7 +207,7 @@ ColumnLayout {
             id: remoteNodeEdit
             Layout.fillWidth: true
 
-            initialAddress: persistentSettings.remoteNodeAddress
+            initialAddress: remoteNodesModel.currentRemoteNode().address
         }
     }
 }
