@@ -105,6 +105,7 @@ QString xdgMime(){
         "StartupNotify=true\n"
         "X-GNOME-Bugzilla-Bugzilla=GNOME\n"
         "X-GNOME-UsesNotifications=true\n"
+        "StartupWMClass=monero-wallet-gui\n"
     ).arg(QCoreApplication::applicationFilePath());
 }
 
