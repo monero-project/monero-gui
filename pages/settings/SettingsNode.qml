@@ -334,6 +334,7 @@ Rectangle{
                             MoneroComponents.InlineButton {
                                 buttonColor: "transparent"
                                 fontFamily: FontAwesome.fontFamily
+                                fontPixelSize: 18
                                 text: FontAwesome.edit
                                 onClicked: remoteNodeDialog.edit(remoteNodesModel.get(index), function (remoteNode) {
                                     remoteNodesModel.set(index, remoteNode)
