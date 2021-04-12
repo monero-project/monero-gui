@@ -944,10 +944,8 @@ ApplicationWindow {
 
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
-        if (isMultisig)
-            return;
         // View only wallet - we save the tx
-        if(viewOnly && saveTxDialog.fileUrl){
+        if((viewOnly || isMultisig) && saveTxDialog.fileUrl){
             // No file specified - abort
             if(!saveTxDialog.fileUrl) {
                 currentWallet.disposeTransaction(transaction)
@@ -1461,13 +1459,9 @@ ApplicationWindow {
         id: txConfirmationPopup
         z: parent.z + 1
         onAccepted: {
-            if (isMultisig) {
-                close();
-                return;
-            }
             var handleAccepted = function() {
                 // Save transaction to file if view only wallet
-                if (viewOnly) {
+                if (viewOnly || isMultisig) {
                     saveTxDialog.open();
                 }
                 else {
@@ -1489,8 +1483,8 @@ ApplicationWindow {
                 passwordDialog.open(
                     "",
                     "",
-                    (appWindow.viewOnly ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString,
-                    appWindow.viewOnly ? "" : FontAwesome.arrowCircleRight);
+                    ((appWindow.viewOnly || appWindow.isMultisig) ? qsTr("Save transaction file") : qsTr("Send transaction")) + translationManager.emptyString,
+                    (appWindow.viewOnly || appWindow.isMultisig) ? "" : FontAwesome.arrowCircleRight);
             }
         }
     }
