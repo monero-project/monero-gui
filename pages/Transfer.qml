@@ -82,6 +82,7 @@ Rectangle {
     }
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property bool hasMultisigPartialKeyImages: appWindow.isMultisig ? currentWallet.hasMultisigPartialKeyImages() : false;
 
     Clipboard { id: clipboard }
 
@@ -164,7 +165,7 @@ Rectangle {
       }
 
       RowLayout {
-          visible: currentWallet.hasMultisigPartialKeyImages()
+          visible: hasMultisigPartialKeyImages
 
           MoneroComponents.WarningBox {
               text: qsTr("Partial key images found. Import key images before spending") + translationManager.emptyString
@@ -796,6 +797,7 @@ Rectangle {
         onAccepted: {
             console.log(walletManager.urlToLocalPath(importMultisigKeyImagesDialog.fileUrl))
             currentWallet.importMultisigImages(walletManager.urlToLocalPath(importMultisigKeyImagesDialog.fileUrl));
+            hasMultisigPartialKeyImages = currentWallet.hasMultisigPartialKeyImages();
         }
         onRejected: {
             console.log("Canceled");
