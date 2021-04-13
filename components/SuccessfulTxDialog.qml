@@ -87,6 +87,8 @@ Rectangle {
                 text: {
                     if (appWindow.viewOnly){
                         return qsTr("Transaction file successfully saved!") + translationManager.emptyString;
+                    } else if (appWindow.isMultisig) {
+                        return qsTr("Transaction file successfully signed!") + translationManager.emptyString;
                     } else {
                         return  qsTr("Transaction successfully sent!") + translationManager.emptyString;
                     }

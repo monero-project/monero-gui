@@ -127,14 +127,20 @@ Rectangle {
             StandardButton {
                 id: signTransaction
                 text: "Sign Transaction"
+                enabled: txFilename != ""
                 onClicked: {
                     console.log("Trying to sign tx");
-                    currentWallet.signMultisigTxFromFile(txFilename);
+                    if (!currentWallet.signMultisigTxFromFile(txFilename)) {
+                        console.log("Failed to sign tx");
+                        return;
+                    }
+                    successfulSigningDialog.open();
                 }
             }
             StandardButton {
                 id: broadcastTransaction
                 text: "Broadcast Transaction"
+                enabled: txFilename != ""
                 onClicked: {
                     console.log("Trying to submit multisig tx");
                     currentWallet.commitTransactionAsync(currentWallet.loadMultisigTxFromFile(txFilename));
@@ -188,5 +194,10 @@ Rectangle {
         onRejected: {
             console.log("Canceled");
         }
+    }
+
+    SuccessfulTxDialog {
+        id: successfulSigningDialog
+        z: parent.z + 1
     }
 }
