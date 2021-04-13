@@ -92,6 +92,7 @@ Rectangle {
             WizardNav {
                 progressSteps: 4
                 progress: 1
+                btnNext.enabled: multisigKey2Input.text != "" // TODO: some sort of validation on this
                 onPrevClicked: {
                     wizardStateView.state = "wizardCreateMultisig1";
                 }
