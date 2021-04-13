@@ -885,7 +885,7 @@ ApplicationWindow {
                 return recipient.address;
             });
             const amountsxmr = recipients.map(function (recipient) {
-                return walletManager.amountFromString(recipient.amount);
+                return recipient.amount;
             });
             currentWallet.createTransactionAsync(addresses, paymentId, amountsxmr, mixinCount, priority);
         }
