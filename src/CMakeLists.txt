@@ -20,7 +20,7 @@ file(GLOB SOURCE_FILES
     "libwalletqt/PendingTransaction.cpp"
     "libwalletqt/TransactionHistory.cpp"
     "libwalletqt/TransactionInfo.cpp"
-    "libwalletqt/QRCodeImageProvider.cpp" QR
+    "libwalletqt/QRCodeImageProvider.cpp"
     "libwalletqt/AddressBook.cpp"
     "libwalletqt/Subaddress.cpp"
     "libwalletqt/SubaddressAccount.cpp"
