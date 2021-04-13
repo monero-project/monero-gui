@@ -535,7 +535,7 @@ void Wallet::pauseRefresh()
 PendingTransaction *Wallet::createTransaction(
     const QVector<QString> &destinationAddresses,
     const QString &payment_id,
-    const QVector<quint64> &amounts,
+    const QVector<QString> &destinationAmounts,
     quint32 mixin_count,
     PendingTransaction::Priority priority)
 {
@@ -543,11 +543,15 @@ PendingTransaction *Wallet::createTransaction(
     for (const auto &address : destinationAddresses) {
         destinations.push_back(address.toStdString());
     }
+    std::vector<uint64_t> amounts;
+    for (const auto &amount : destinationAmounts) {
+        amounts.push_back(Monero::Wallet::amountFromString(amount.toStdString()));
+    }
     std::set<uint32_t> subaddr_indices;
     Monero::PendingTransaction *ptImpl = m_walletImpl->createTransactionMultDest(
         destinations,
         payment_id.toStdString(),
-        std::vector<uint64_t>(amounts.begin(), amounts.end()),
+        amounts,
         mixin_count,
         static_cast<Monero::PendingTransaction::Priority>(priority),
         currentSubaddressAccount(),
@@ -559,12 +563,12 @@ PendingTransaction *Wallet::createTransaction(
 void Wallet::createTransactionAsync(
     const QVector<QString> &destinationAddresses,
     const QString &payment_id,
-    const QVector<quint64> &amounts,
+    const QVector<QString> &destinationAmounts,
     quint32 mixin_count,
     PendingTransaction::Priority priority)
 {
-    m_scheduler.run([this, destinationAddresses, payment_id, amounts, mixin_count, priority] {
-        PendingTransaction *tx = createTransaction(destinationAddresses, payment_id, amounts, mixin_count, priority);
+    m_scheduler.run([this, destinationAddresses, payment_id, destinationAmounts, mixin_count, priority] {
+        PendingTransaction *tx = createTransaction(destinationAddresses, payment_id, destinationAmounts, mixin_count, priority);
         emit transactionCreated(tx, destinationAddresses, payment_id, mixin_count);
     });
 }

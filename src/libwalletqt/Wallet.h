@@ -220,7 +220,7 @@ public:
     Q_INVOKABLE void createTransactionAsync(
         const QVector<QString> &destinationAddresses,
         const QString &payment_id,
-        const QVector<quint64> &amounts,
+        const QVector<QString> &destinationAmounts,
         quint32 mixin_count,
         PendingTransaction::Priority priority);
 
@@ -421,7 +421,7 @@ private:
     PendingTransaction *createTransaction(
         const QVector<QString> &destinationAddresses,
         const QString &payment_id,
-        const QVector<quint64> &amounts,
+        const QVector<QString> &destinationAmounts,
         quint32 mixin_count,
         PendingTransaction::Priority priority);
 
