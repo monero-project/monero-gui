@@ -1948,7 +1948,7 @@ ApplicationWindow {
     }
 
     function toggleLanguageView(){
-        languageSidebar.isOpened ? languageSidebar.close() : languageSidebar.open();
+        languageSidebar.visible ? languageSidebar.close() : languageSidebar.open();
         resetLanguageFields()
     }
 

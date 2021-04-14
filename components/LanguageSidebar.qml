@@ -37,17 +37,6 @@ import QtQuick.Controls 2.0
 Drawer {
     id: sideBar
 
-    // @TODO: Qt 5.10 introduces `opened` built-in for Drawer
-    property bool isOpened: false
-
-    onClosed: {
-        isOpened = false;
-    }
-
-    onOpened: {
-        isOpened = true;
-    }
-
     width: 240
     height: parent.height - (persistentSettings.customDecorations ? 50 : 0)
     y: titleBar.height
