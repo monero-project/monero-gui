@@ -123,6 +123,7 @@ Q_IMPORT_PLUGIN(QGenericEnginePlugin)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 Q_IMPORT_PLUGIN(QtQmlPlugin)
 #endif
+Q_IMPORT_PLUGIN(QtQmlModelsPlugin)
 Q_IMPORT_PLUGIN(QtQuick2Plugin)
 Q_IMPORT_PLUGIN(QtQuickLayoutsPlugin)
 Q_IMPORT_PLUGIN(QtGraphicalEffectsPlugin)
@@ -451,8 +452,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
 // Exclude daemon manager from IOS
 #ifndef Q_OS_IOS
-    DaemonManager * daemonManager = DaemonManager::instance();
-    engine.rootContext()->setContextProperty("daemonManager", daemonManager);
+    DaemonManager daemonManager;
+    engine.rootContext()->setContextProperty("daemonManager", &daemonManager);
 #endif
 
     engine.rootContext()->setContextProperty("isWindows", isWindows);

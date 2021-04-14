@@ -26,6 +26,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import QtQml.Models 2.12
 import QtQuick 2.9
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.1
@@ -53,7 +54,10 @@ import "version.js" as Version
 
 ApplicationWindow {
     id: appWindow
-    title: "Monero" + (walletName ? " - " + walletName : "")
+    title: "Monero" +
+        (persistentSettings.displayWalletNameInTitleBar && walletName
+        ? " - " + walletName
+        : "")
     minimumWidth: 750
     minimumHeight: 450
 
@@ -141,12 +145,8 @@ ApplicationWindow {
 
         if(seq === "Ctrl+S") middlePanel.state = "Transfer"
         else if(seq === "Ctrl+R") middlePanel.state = "Receive"
-        else if(seq === "Ctrl+K") middlePanel.state = "TxKey"
         else if(seq === "Ctrl+H") middlePanel.state = "History"
         else if(seq === "Ctrl+B") middlePanel.state = "AddressBook"
-        else if(seq === "Ctrl+M") middlePanel.state = "Mining"
-        else if(seq === "Ctrl+I") middlePanel.state = "Sign"
-        else if(seq === "Ctrl+G") middlePanel.state = "SharedRingDB"
         else if(seq === "Ctrl+E") middlePanel.state = "Settings"
         else if(seq === "Ctrl+D") middlePanel.state = "Advanced"
         else if(seq === "Ctrl+T") middlePanel.state = "Account"
@@ -167,12 +167,13 @@ ApplicationWindow {
             else if(middlePanel.state === "Transfer") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "History"
-            else if(middlePanel.state === "History") middlePanel.state = "Mining"
             else if(middlePanel.state === "Mining") middlePanel.state = "TxKey"
             else if(middlePanel.state === "TxKey") middlePanel.state = "SharedRingDB"
             else if(middlePanel.state === "SharedRingDB") middlePanel.state = "Sign"
             else if(middlePanel.state === "Sign") middlePanel.state = "Settings"
             else if(middlePanel.state === "SignMultisig") middlePanel.state = "SignMultisig"
+            else if(middlePanel.state === "History") middlePanel.state = "Advanced"
+            else if(middlePanel.state === "Advanced") middlePanel.state = "Settings"
         } else if(seq === "Ctrl+Shift+Backtab" || seq === "Alt+Shift+Backtab") {
             /*
             if(middlePanel.state === "Settings") middlePanel.state = "Sign"
@@ -184,11 +185,8 @@ ApplicationWindow {
             else if(middlePanel.state === "TxKey") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "Transfer"
             */
-            if(middlePanel.state === "Settings") middlePanel.state = "Sign"
-            else if(middlePanel.state === "Sign") middlePanel.state = "SharedRingDB"
-            else if(middlePanel.state === "SharedRingDB") middlePanel.state = "TxKey"
-            else if(middlePanel.state === "TxKey") middlePanel.state = "Mining"
-            else if(middlePanel.state === "Mining") middlePanel.state = "History"
+            if(middlePanel.state === "Settings") middlePanel.state = "Advanced"
+            else if(middlePanel.state === "Advanced") middlePanel.state = "History"
             else if(middlePanel.state === "History") middlePanel.state = "Receive"
             else if(middlePanel.state === "Receive") middlePanel.state = "AddressBook"
             else if(middlePanel.state === "AddressBook") middlePanel.state = "Transfer"
@@ -376,13 +374,13 @@ ApplicationWindow {
         console.log("Recovering from seed: ", persistentSettings.is_recovering)
         console.log("restore Height", persistentSettings.restore_height)
 
-        // Use saved daemon rpc login settings
-        currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword)
-
-        if(persistentSettings.useRemoteNode)
-            currentDaemonAddress = persistentSettings.remoteNodeAddress
-        else
-            currentDaemonAddress = localDaemonAddress
+        if (persistentSettings.useRemoteNode) {
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            currentDaemonAddress = remoteNode.address;
+            currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
+        } else {
+            currentDaemonAddress = localDaemonAddress;
+        }
 
         console.log("initializing with daemon address: ", currentDaemonAddress)
         currentWallet.initAsync(
@@ -399,7 +397,7 @@ ApplicationWindow {
     }
 
     function isTrustedDaemon() {
-        return !persistentSettings.useRemoteNode || persistentSettings.is_trusted_daemon;
+        return !persistentSettings.useRemoteNode || remoteNodesModel.currentRemoteNode().trusted;
     }
 
     function usefulName(path) {
@@ -501,7 +499,7 @@ ApplicationWindow {
             walletInitialized = true
 
             // check if daemon was already mining and add mining logo if true
-            middlePanel.miningView.update();
+            middlePanel.advancedView.miningView.update();
         }
     }
 
@@ -628,7 +626,9 @@ ApplicationWindow {
 
         const callback = function() {
             persistentSettings.useRemoteNode = true;
-            currentDaemonAddress = persistentSettings.remoteNodeAddress;
+            const remoteNode = remoteNodesModel.currentRemoteNode();
+            currentDaemonAddress = remoteNode.address;
+            currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
             currentWallet.initAsync(
                 currentDaemonAddress,
                 isTrustedDaemon(),
@@ -654,6 +654,7 @@ ApplicationWindow {
         console.log("disconnecting remote node");
         persistentSettings.useRemoteNode = false;
         currentDaemonAddress = localDaemonAddress
+        currentWallet.setDaemonLogin("", "");
         currentWallet.initAsync(
             currentDaemonAddress,
             isTrustedDaemon(),
@@ -726,7 +727,7 @@ ApplicationWindow {
 
         const noSync = appWindow.walletMode === 0;
         const bootstrapNodeAddress = persistentSettings.walletMode < 2 ? "auto" : persistentSettings.bootstrapNodeAddress
-        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync);
+        daemonManager.start(flags, persistentSettings.nettype, persistentSettings.blockchainDataDir, bootstrapNodeAddress, noSync, persistentSettings.pruneBlockchain);
     }
 
     function stopDaemon(callback, splash){
@@ -822,7 +823,7 @@ ApplicationWindow {
         return false;
     }
 
-    function onTransactionCreated(pendingTransaction,address,paymentId,mixinCount){
+    function onTransactionCreated(pendingTransaction, addresses, paymentId, mixinCount) {
         console.log("Transaction created");
         txConfirmationPopup.bottomText.text = "";
         transaction = pendingTransaction;
@@ -854,48 +855,49 @@ ApplicationWindow {
         }
     }
 
+    function getDisplayAmountTotal(recipients) {
+        const amounts = recipients.map(function (recipient) {
+            return recipient.amount;
+        });
+        const total = walletManager.amountsSumFromStrings(amounts);
+        return Utils.removeTrailingZeros(walletManager.displayAmount(total));
+    }
 
     // called on "transfer"
-    function handlePayment(address, paymentId, amount, mixinCount, priority, description, createFile) {
+    function handlePayment(recipients, paymentId, mixinCount, priority, description, createFile) {
         console.log("Creating transaction: ")
-        console.log("\taddress: ", address,
+        console.log("\trecipients: ", recipients,
                     ", payment_id: ", paymentId,
-                    ", amount: ", amount,
                     ", mixins: ", mixinCount,
                     ", priority: ", priority,
                     ", description: ", description);
-        txConfirmationPopup.bottomTextAnimation.running = false
-        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
-        txConfirmationPopup.transactionAddress = address;
-        txConfirmationPopup.transactionAmount = Utils.removeTrailingZeros(amount);
-        txConfirmationPopup.transactionPriority = priority;
-        txConfirmationPopup.transactionDescription = description;
 
-        // validate amount;
-        if (amount !== "(all)") {
-            var amountxmr = walletManager.amountFromString(amount);
-            console.log("integer amount: ", amountxmr);
-            console.log("integer unlocked", currentWallet.unlockedBalance())
-            if (amountxmr <= 0) {
-                txConfirmationPopup.errorText.text = qsTr("Amount is wrong: expected number from %1 to %2")
-                    .arg(walletManager.displayAmount(0))
-                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                    + translationManager.emptyString;
-                return;
-            } else if (amountxmr > currentWallet.unlockedBalance()) {
-                txConfirmationPopup.errorText.text = qsTr("Insufficient funds. Unlocked balance: %1")
-                    .arg(walletManager.displayAmount(currentWallet.unlockedBalance()))
-                    + translationManager.emptyString;
-                return;
-            }
+        const recipientAll = recipients.find(function (recipient) {
+            return recipient.amount == "(all)";
+        });
+        if (recipientAll && recipients.length > 1) {
+            throw "Sending all requires one destination address";
         }
 
+        txConfirmationPopup.bottomTextAnimation.running = false;
+        txConfirmationPopup.bottomText.text  = qsTr("Creating transaction...") + translationManager.emptyString;
+        txConfirmationPopup.recipients = recipients;
+        txConfirmationPopup.transactionAmount = recipientAll ? "(all)" : getDisplayAmountTotal(recipients);
+        txConfirmationPopup.transactionPriority = priority;
+        txConfirmationPopup.transactionDescription = description;
         txConfirmationPopup.open();
 
-        if (amount === "(all)")
-            currentWallet.createTransactionAllAsync(address, paymentId, mixinCount, priority);
-        else
-            currentWallet.createTransactionAsync(address, paymentId, amountxmr, mixinCount, priority);
+        if (recipientAll) {
+            currentWallet.createTransactionAllAsync(recipientAll.address, paymentId, mixinCount, priority);
+        } else {
+            const addresses = recipients.map(function (recipient) {
+                return recipient.address;
+            });
+            const amountsxmr = recipients.map(function (recipient) {
+                return recipient.amount;
+            });
+            currentWallet.createTransactionAsync(addresses, paymentId, amountsxmr, mixinCount, priority);
+        }
     }
 
     //Choose where to save transaction
@@ -1128,11 +1130,14 @@ ApplicationWindow {
 
     objectName: "appWindow"
     visible: true
-    width: screenWidth > 980 ? 980 : 800
-    height: screenHeight > maxWindowHeight ? maxWindowHeight : 700
+    width: Screen.desktopAvailableWidth > 980
+        ? 980
+        : Math.min(Screen.desktopAvailableWidth, 800)
+    height: Screen.desktopAvailableHeight > maxWindowHeight
+        ? maxWindowHeight
+        : Math.min(Screen.desktopAvailableHeight, 700)
     color: MoneroComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
-    onWidthChanged: x -= 0
 
     Timer {
         id: fiatPriceTimer
@@ -1155,7 +1160,7 @@ ApplicationWindow {
             }
 
             var key = currency === "xmreur" ? "XXMRZEUR" : "XXMRZUSD";
-            var ticker = resp.result[key]["o"];
+            var ticker = resp.result[key]["c"][0];
             return ticker;
         } else if(url.startsWith("https://api.coingecko.com/api/v3/")){
             var key = currency === "xmreur" ? "eur" : "usd";
@@ -1289,8 +1294,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        x = (Screen.width - width) / 2
-        y = (Screen.height - maxWindowHeight) / 2
+        x = (Screen.desktopAvailableWidth - width) / 2;
+        y = (Screen.desktopAvailableHeight - height) / 2;
 
         translationManager.setLanguage(persistentSettings.locale.split("_")[0]);
 
@@ -1358,6 +1363,8 @@ ApplicationWindow {
                 confirmationDialog.open();
             }
         }
+
+        remoteNodesModel.initialize();
     }
 
     MoneroSettings {
@@ -1378,27 +1385,39 @@ ApplicationWindow {
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
-        property bool   is_trusted_daemon : false
+        property bool   is_trusted_daemon : false  // TODO: drop after v0.17.2.0 release
         property bool   is_recovering : false
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
-        property string daemonUsername: ""
-        property string daemonPassword: ""
+        property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
+        property string daemonPassword: "" // TODO: drop after v0.17.2.0 release
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
         property bool historyShowAdvanced: false
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
-        property string remoteNodeAddress: ""
+        property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
+        property string remoteNodesSerialized: JSON.stringify({
+                selected: 0,
+                nodes: remoteNodeAddress != ""
+                    ? [{
+                        address: remoteNodeAddress,
+                        username: daemonUsername,
+                        password: daemonPassword,
+                        trusted: is_trusted_daemon,
+                    }]
+                    : [],
+            })
         property string bootstrapNodeAddress: ""
         property bool segregatePreForkOutputs: true
         property bool keyReuseMitigation2: true
         property int segregationHeight: 0
         property int kdfRounds: 1
+        property bool displayWalletNameInTitleBar: true
         property bool hideBalance: false
         property bool askPasswordBeforeSending: true
         property bool lockOnUserInActivity: true
@@ -1408,6 +1427,7 @@ ApplicationWindow {
         property bool checkForUpdates: true
         property bool autosave: true
         property int autosaveMinutes: 10
+        property bool pruneBlockchain: false
 
         property bool fiatPriceEnabled: false
         property bool fiatPriceToggle: false
@@ -1436,6 +1456,88 @@ ApplicationWindow {
         Component.onCompleted: {
             MoneroComponents.Style.blackTheme = persistentSettings.blackTheme
         }
+    }
+
+    ListModel {
+        id: remoteNodesModel
+
+        property int selected: 0
+
+        signal store()
+
+        function initialize() {
+            try {
+                const remoteNodes = JSON.parse(persistentSettings.remoteNodesSerialized);
+                for (var index = 0; index < remoteNodes.nodes.length; ++index) {
+                    const remoteNode = remoteNodes.nodes[index];
+                    remoteNodesModel.append(remoteNode);
+                }
+                selected = remoteNodes.selected % remoteNodesModel.count || 0;
+            } catch (e) {
+                console.error('failed to parse remoteNodesSerialized', e);
+            }
+
+            store.connect(function() {
+                var remoteNodes = [];
+                for (var index = 0; index < remoteNodesModel.count; ++index) {
+                    remoteNodes.push(remoteNodesModel.get(index));
+                }
+                persistentSettings.remoteNodesSerialized = JSON.stringify({
+                    selected: selected,
+                    nodes: remoteNodes
+                });
+            });
+        }
+
+        function appendIfNotExists(newRemoteNode) {
+            for (var index = 0; index < remoteNodesModel.count; ++index) {
+                const remoteNode = remoteNodesModel.get(index);
+                if (remoteNode.address == newRemoteNode.address &&
+                    remoteNode.username == newRemoteNode.username &&
+                    remoteNode.password == newRemoteNode.password &&
+                    remoteNode.trusted == newRemoteNode.trusted) {
+                        return index;
+                }
+            }
+            remoteNodesModel.append(newRemoteNode);
+            return remoteNodesModel.count - 1;
+        }
+
+        function applyRemoteNode(index) {
+            selected = index;
+            const remoteNode = currentRemoteNode();
+            persistentSettings.useRemoteNode = true;
+            if (currentWallet) {
+                currentWallet.setDaemonLogin(remoteNode.username, remoteNode.password);
+                currentWallet.setTrustedDaemon(remoteNode.trusted);
+                appWindow.connectRemoteNode();
+            }
+        }
+
+        function currentRemoteNode() {
+            if (selected < remoteNodesModel.count) {
+                return remoteNodesModel.get(selected);
+            }
+            return {
+                address: "",
+                username: "",
+                password: "",
+                trusted: false,
+            };
+        }
+
+        function removeSelectNextIfNeeded(index) {
+            remoteNodesModel.remove(index);
+            if (selected == index) {
+                applyRemoteNode(selected % remoteNodesModel.count || 0);
+            } else if (selected > index) {
+                selected = selected - 1;
+            }
+        }
+
+        onCountChanged: store()
+        onDataChanged: store()
+        onSelectedChanged: store()
     }
 
     // Information dialog
@@ -1517,6 +1619,10 @@ ApplicationWindow {
         allowed: !passwordDialog.visible && !inputDialog.visible && !splash.visible
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
+    }
+
+    MoneroComponents.RemoteNodeDialog {
+        id: remoteNodeDialog
     }
 
     // Choose blockchain folder
@@ -1690,18 +1796,6 @@ ApplicationWindow {
                     updateBalance();
                 }
 
-                onTxkeyClicked: {
-                    middlePanel.state = "TxKey";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
-                onSharedringdbClicked: {
-                    middlePanel.state = "SharedRingDB";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
                 onHistoryClicked: {
                     middlePanel.state = "History";
                     middlePanel.flickable.contentY = 0;
@@ -1714,14 +1808,8 @@ ApplicationWindow {
                     updateBalance();
                 }
 
-                onMiningClicked: {
-                    middlePanel.state = "Mining";
-                    middlePanel.flickable.contentY = 0;
-                    updateBalance();
-                }
-
-                onSignClicked: {
-                    middlePanel.state = "Sign";
+                onAdvancedClicked: {
+                    middlePanel.state = "Advanced";
                     middlePanel.flickable.contentY = 0;
                     updateBalance();
                 }
@@ -1770,7 +1858,9 @@ ApplicationWindow {
             anchors.fill: blurredArea
             source: blurredArea
             radius: 64
-            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible || devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible
+            visible: passwordDialog.visible || inputDialog.visible || splash.visible || updateDialog.visible ||
+                devicePassphraseDialog.visible || txConfirmationPopup.visible || successfulTxPopup.visible ||
+                remoteNodeDialog.visible
         }
 
 
@@ -1823,7 +1913,7 @@ ApplicationWindow {
         TitleBar {
             id: titleBar
             visible: persistentSettings.customDecorations && middlePanel.state !== "Merchant"
-            walletName: appWindow.walletName
+            walletName: persistentSettings.displayWalletNameInTitleBar ? appWindow.walletName : ""
             anchors.left: parent.left
             anchors.right: parent.right
             onCloseClicked: appWindow.close();
@@ -1950,12 +2040,13 @@ ApplicationWindow {
             return;
         }
 
+        const simpleModeFlags = "--enable-dns-blocklist --out-peers 16";
         if (appWindow.daemonRunning) {
             appWindow.stopDaemon(function() {
-                appWindow.startDaemon("")
+                appWindow.startDaemon(simpleModeFlags)
             });
         } else {
-            appWindow.startDaemon("");
+            appWindow.startDaemon(simpleModeFlags);
         }
     }
 
@@ -2159,6 +2250,7 @@ ApplicationWindow {
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         if (inputDialogVisible) inputDialog.close()
+        remoteNodeDialog.close();
         passwordDialog.open();
     }
 

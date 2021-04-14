@@ -52,6 +52,7 @@ Window {
     // TODO: implement without hardcoding sizes
     width: 480
     height: 200
+    color: MoneroComponents.Style.middlePanelBackgroundColor
 
     // Make window draggable
     MouseArea {
@@ -96,7 +97,7 @@ Window {
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
                 themeTransition: false
-                color: "black"
+                color: MoneroComponents.Style.defaultFontColor
             }
 
         }

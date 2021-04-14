@@ -46,7 +46,7 @@ Rectangle {
     ColumnLayout {
         id: mainLayout
         anchors.margins: 20
-        anchors.topMargin: 40
+        anchors.topMargin: 0
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right

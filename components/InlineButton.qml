@@ -46,7 +46,6 @@ Item {
     property bool isFontAwesomeIcon: fontFamily == FontAwesome.fontFamily || fontFamily == FontAwesome.fontFamilySolid
     property alias buttonColor: rect.color
 
-    Layout.rightMargin: isFontAwesomeIcon ? 0 : 4
     height: isFontAwesomeIcon ? 30 : 24
     width: isFontAwesomeIcon ? height : inlineText.width + 16
 

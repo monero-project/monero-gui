@@ -1,21 +1,21 @@
-// Copyright (c) 2014-2018, The Monero Project
-// 
+// Copyright (c) 2021, The Monero Project
+//
 // All rights reserved.
-// 
+//
 // Redistribution and use in source and binary forms, with or without modification, are
 // permitted provided that the following conditions are met:
-// 
+//
 // 1. Redistributions of source code must retain the above copyright notice, this list of
 //    conditions and the following disclaimer.
-// 
+//
 // 2. Redistributions in binary form must reproduce the above copyright notice, this list
 //    of conditions and the following disclaimer in the documentation and/or other
 //    materials provided with the distribution.
-// 
+//
 // 3. Neither the name of the copyright holder nor the names of its contributors may be
 //    used to endorse or promote products derived from this software without specific
 //    prior written permission.
-// 
+//
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 // EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -30,23 +30,17 @@ import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
-import "../../js/Windows.js" as Windows
-import "../../js/Utils.js" as Utils
-import "../../components" as MoneroComponents
-import "../../pages"
+import "../components" as MoneroComponents
 import "."
-import moneroComponents.Clipboard 1.0
 
 ColumnLayout {
-    id: settingsPage
+    id: root
     Layout.fillWidth: true
     Layout.preferredHeight: 900
     spacing: 0
-    Clipboard { id: clipboard }
-    property bool viewOnly: false
-    property int settingsHeight: 900
-    property alias settingsStateViewState: settingsStateView.state
+    property int panelHeight: 900
+    property alias miningView: stateView.miningView
+    property alias state: stateView.state
 
     MoneroComponents.Navbar {
         Layout.alignment: Qt.AlignHCenter
@@ -54,46 +48,39 @@ ColumnLayout {
         Layout.bottomMargin: height
 
         MoneroComponents.NavbarItem {
-            active: settingsStateView.state == "Wallet"
-            text: qsTr("Wallet") + translationManager.emptyString
-            onSelected: settingsStateView.state = "Wallet"
+            active: state == "Mining"
+            text: qsTr("Mining") + translationManager.emptyString
+            onSelected: state = "Mining"
         }
         MoneroComponents.NavbarItem {
-            active: settingsStateView.state == "UI"
-            text: qsTr("Interface") + translationManager.emptyString
-            onSelected: settingsStateView.state = "UI"
+            active: state == "Prove"
+            text: qsTr("Prove/check") + translationManager.emptyString
+            onSelected: state = "Prove"
         }
         MoneroComponents.NavbarItem {
-            active: settingsStateView.state == "Node"
-            text: qsTr("Node") + translationManager.emptyString
-            visible: appWindow.walletMode >= 2
-            onSelected: settingsStateView.state = "Node"
+            active: state == "SharedRingDB"
+            text: qsTr("Shared RingDB") + translationManager.emptyString
+            onSelected: state = "SharedRingDB"
         }
         MoneroComponents.NavbarItem {
-            active: settingsStateView.state == "Log"
-            text: qsTr("Log") + translationManager.emptyString
-            onSelected: settingsStateView.state = "Log"
-        }
-        MoneroComponents.NavbarItem {
-            active: settingsStateView.state == "Info"
-            text: qsTr("Info") + translationManager.emptyString
-            onSelected: settingsStateView.state = "Info"
+            active: state == "Sign"
+            text: qsTr("Sign/verify") + translationManager.emptyString
+            onSelected: state = "Sign"
         }
     }
 
     Rectangle{
-        id: settingsStateView
+        id: stateView
         property Item currentView
         property Item previousView
-        property SettingsWallet settingsWalletView: SettingsWallet { }
-        property SettingsLayout settingsLayoutView: SettingsLayout { }
-        property SettingsNode settingsNodeView: SettingsNode { }
-        property SettingsLog settingsLogView: SettingsLog { }
-        property SettingsInfo settingsInfoView: SettingsInfo { }
+        property Mining miningView: Mining { }
+        property TxKey prooveView: TxKey { }
+        property SharedRingDB sharedRingDBView: SharedRingDB { }
+        property Sign signView: Sign { }
         Layout.fillWidth: true
-        Layout.preferredHeight: settingsHeight
+        Layout.preferredHeight: panelHeight
         color: "transparent"
-        state: "Wallet"
+        state: "Mining"
 
         onCurrentViewChanged: {
             if (previousView) {
@@ -112,31 +99,27 @@ ColumnLayout {
 
         states: [
             State {
-                name: "Wallet"
-                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsWalletView }
-                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsWalletView.settingsHeight + 140 }
+                name: "Mining"
+                PropertyChanges { target: stateView; currentView: stateView.miningView }
+                PropertyChanges { target: root; panelHeight: stateView.miningView.miningHeight + 140 }
             }, State {
-                name: "UI"
-                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsLayoutView }
-                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsLayoutView.layoutHeight + 140 }
+                name: "Prove"
+                PropertyChanges { target: stateView; currentView: stateView.prooveView }
+                PropertyChanges { target: root; panelHeight: stateView.prooveView.txkeyHeight + 140 }
             }, State {
-                name: "Node"
-                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsNodeView }
-                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsNodeView.nodeHeight + 140 }
+                name: "SharedRingDB"
+                PropertyChanges { target: stateView; currentView: stateView.sharedRingDBView }
+                PropertyChanges { target: root; panelHeight: stateView.sharedRingDBView.panelHeight + 140 }
             }, State {
-                name: "Log"
-                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsLogView }
-                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsLogView.logHeight + 140 }
-            }, State {
-                name: "Info"
-                PropertyChanges { target: settingsStateView; currentView: settingsStateView.settingsInfoView }
-                PropertyChanges { target: settingsPage; settingsHeight: settingsStateView.settingsInfoView.infoHeight + 140 }
+                name: "Sign"
+                PropertyChanges { target: stateView; currentView: stateView.signView }
+                PropertyChanges { target: root; panelHeight: stateView.signView.signHeight + 140 }
             }
         ]
 
         StackView {
             id: stackView
-            initialItem: settingsStateView.settingsWalletView
+            initialItem: stateView.miningView
             anchors.fill: parent
             clip: false // otherwise animation will affect left panel
 
@@ -161,15 +144,5 @@ ColumnLayout {
                 }
             }
         }
-    }
-
-    function onDaemonConsoleUpdated(message){
-        // Update daemon console
-        settingsStateView.settingsLogView.consoleArea.logMessage(message)
-    }
-
-    // fires on every page load
-    function onPageCompleted() {
-        console.log("Settings page loaded");
     }
 }

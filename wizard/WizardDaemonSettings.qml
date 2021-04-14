@@ -42,7 +42,13 @@ ColumnLayout {
 
     function save(){
         persistentSettings.useRemoteNode = remoteNode.checked
-        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
+        const index = remoteNodesModel.appendIfNotExists({
+            address: remoteNodeEdit.getAddress(),
+            username: "",
+            password: "",
+            trusted: false,
+        });
+        remoteNodesModel.applyRemoteNode(index);
         if (bootstrapNodeEdit.daemonAddrText == "auto") {
             persistentSettings.bootstrapNodeAddress = "auto";
         } else {
@@ -91,6 +97,28 @@ ColumnLayout {
                     blockchainFileDialog.open();
                     blockchainFolder.focus = true;
                 }
+            }
+        }
+
+        RowLayout {
+            id: pruningOptionRow
+            MoneroComponents.CheckBox {
+                id: pruneBlockchainCheckBox
+                checked: !existingDbWarning.visible ? persistentSettings.pruneBlockchain : false
+                enabled: !existingDbWarning.visible
+                onClicked: {
+                    persistentSettings.pruneBlockchain =  !persistentSettings.pruneBlockchain
+                    this.checked = persistentSettings.pruneBlockchain
+                }
+                text: qsTr("Prune blockchain") + translationManager.emptyString
+            }
+
+            Text {
+                id: existingDbWarning
+                text: "A blockchain database already exists here. Select a new location to start a pruned node"
+                visible: daemonManager ? daemonManager.checkLmdbExists(blockchainFolder.text) : false
+                color: MoneroComponents.Style.defaultFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
             }
         }
 
@@ -179,7 +207,7 @@ ColumnLayout {
             id: remoteNodeEdit
             Layout.fillWidth: true
 
-            initialAddress: persistentSettings.remoteNodeAddress
+            initialAddress: remoteNodesModel.currentRemoteNode().address
         }
     }
 }

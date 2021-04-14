@@ -44,10 +44,10 @@ class DaemonManager : public QObject
     Q_OBJECT
 
 public:
+    explicit DaemonManager(QObject *parent = 0);
+    ~DaemonManager();
 
-    static DaemonManager * instance(const QStringList *args = nullptr);
-
-    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false);
+    Q_INVOKABLE bool start(const QString &flags, NetworkType::Type nettype, const QString &dataDir = "", const QString &bootstrapNodeAddress = "", bool noSync = false, bool pruneBlockchain = false);
     Q_INVOKABLE void stopAsync(NetworkType::Type nettype, const QJSValue& callback);
 
     Q_INVOKABLE bool noSync() const noexcept;
@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void sendCommandAsync(const QStringList &cmd, NetworkType::Type nettype, const QJSValue& callback) const;
     Q_INVOKABLE void exit();
     Q_INVOKABLE QVariantMap validateDataDir(const QString &dataDir) const;
+    Q_INVOKABLE bool checkLmdbExists(QString datadir);
 
 private:
 
@@ -76,11 +77,6 @@ public slots:
     void stateChanged(QProcess::ProcessState state);
 
 private:
-    explicit DaemonManager(QObject *parent = 0);
-    ~DaemonManager();
-
-    static DaemonManager * m_instance;
-    static QStringList m_clArgs;
     std::unique_ptr<QProcess> m_daemon;
     QMutex m_daemonMutex;
     QString m_monerod;

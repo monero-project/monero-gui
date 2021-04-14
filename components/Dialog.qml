@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2021, The Monero Project
 //
 // All rights reserved.
 //
@@ -26,72 +26,41 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "Subaddress.h"
-#include <QDebug>
+import QtQuick 2.9
+import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.1
 
-Subaddress::Subaddress(Monero::Subaddress *subaddressImpl, QObject *parent)
-  : QObject(parent), m_subaddressImpl(subaddressImpl)
-{
-    getAll();
-}
+import "." as MoneroComponents
 
-void Subaddress::getAll() const
-{
-    emit refreshStarted();
+Popup {
+    id: dialog
 
-    {
-        QWriteLocker locker(&m_lock);
+    default property alias content: mainLayout.children
+    property alias title: header.text
 
-        m_rows.clear();
-        for (auto &row: m_subaddressImpl->getAll()) {
-            m_rows.append(row);
+    background: Rectangle {
+        border.color: MoneroComponents.Style.blackTheme ? Qt.rgba(255, 255, 255, 0.25) : Qt.rgba(0, 0, 0, 0.25)
+        border.width: 1
+        color: MoneroComponents.Style.blackTheme ? "black" : "white"
+        radius: 10
+    }
+    closePolicy: Popup.CloseOnEscape
+    focus: true
+    padding: 20
+    x: (appWindow.width - width) / 2
+    y: (appWindow.height - height) / 2
+
+    ColumnLayout {
+        id: mainLayout
+        spacing: dialog.padding
+
+        Text {
+            id: header
+            color: MoneroComponents.Style.defaultFontColor
+            font.bold: true
+            font.family: MoneroComponents.Style.fontRegular.name
+            font.pixelSize: 18
+            visible: text != ""
         }
     }
-
-    emit refreshFinished();
-}
-
-bool Subaddress::getRow(int index, std::function<void (Monero::SubaddressRow &row)> callback) const
-{
-    QReadLocker locker(&m_lock);
-
-    if (index < 0 || index >= m_rows.size())
-    {
-        return false;
-    }
-
-    callback(*m_rows.value(index));
-    return true;
-}
-
-void Subaddress::addRow(quint32 accountIndex, const QString &label) const
-{
-    m_subaddressImpl->addRow(accountIndex, label.toStdString());
-    getAll();
-}
-
-void Subaddress::setLabel(quint32 accountIndex, quint32 addressIndex, const QString &label) const
-{
-    m_subaddressImpl->setLabel(accountIndex, addressIndex, label.toStdString());
-    getAll();
-}
-
-void Subaddress::refresh(quint32 accountIndex) const
-{
-    try
-    {
-        m_subaddressImpl->refresh(accountIndex);
-    }
-    catch (const std::exception &e)
-    {
-        qCritical() << "Failed to refresh account" << accountIndex << "subaddresses:" << e.what();
-    }
-    getAll();
-}
-
-quint64 Subaddress::count() const
-{
-    QReadLocker locker(&m_lock);
-
-    return m_rows.size();
 }

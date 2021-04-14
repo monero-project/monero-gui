@@ -49,8 +49,14 @@ Item {
     property alias fontColor: label.color
     property bool iconOnTheLeft: true
     signal clicked()
+
     height: 25
     width: checkBoxLayout.width
+    opacity: enabled ? 1 : 0.7
+
+    Keys.onEnterPressed: toggle()
+    Keys.onReturnPressed: Keys.onEnterPressed(event)
+    Keys.onSpacePressed: Keys.onEnterPressed(event)
 
     function toggle(){
         if (checkBox.toggleOnClick) {
@@ -76,7 +82,7 @@ Item {
                 radius: 3
                 color: checkBox.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
                 border.color:
-                    if(checkBox.checked){
+                    if (checkBox.activeFocus) {
                         return MoneroComponents.Style.inputBorderColorActive;
                     } else {
                         return MoneroComponents.Style.inputBorderColorInActive;

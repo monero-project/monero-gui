@@ -215,6 +215,7 @@ Rectangle {
             Layout.fillWidth: true
             property var lastCommands: []
             property int currentCommandIndex
+            enabled: !persistentSettings.useRemoteNode
             fontBold: false
             placeholderText: qsTr("command + enter (e.g 'help' or 'status')") + translationManager.emptyString
             placeholderFontSize: 16

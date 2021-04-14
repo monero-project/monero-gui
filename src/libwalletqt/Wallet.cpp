@@ -580,25 +580,44 @@ void Wallet::pauseRefresh()
     m_refreshEnabled = false;
 }
 
-PendingTransaction *Wallet::createTransaction(const QString &dst_addr, const QString &payment_id,
-                                              quint64 amount, quint32 mixin_count,
-                                              PendingTransaction::Priority priority)
+PendingTransaction *Wallet::createTransaction(
+    const QVector<QString> &destinationAddresses,
+    const QString &payment_id,
+    const QVector<QString> &destinationAmounts,
+    quint32 mixin_count,
+    PendingTransaction::Priority priority)
 {
+    std::vector<std::string> destinations;
+    for (const auto &address : destinationAddresses) {
+        destinations.push_back(address.toStdString());
+    }
+    std::vector<uint64_t> amounts;
+    for (const auto &amount : destinationAmounts) {
+        amounts.push_back(Monero::Wallet::amountFromString(amount.toStdString()));
+    }
     std::set<uint32_t> subaddr_indices;
-    Monero::PendingTransaction * ptImpl = m_walletImpl->createTransaction(
-                dst_addr.toStdString(), payment_id.toStdString(), amount, mixin_count,
-                static_cast<Monero::PendingTransaction::Priority>(priority), currentSubaddressAccount(), subaddr_indices);
-    PendingTransaction * result = new PendingTransaction(ptImpl,0);
+    Monero::PendingTransaction *ptImpl = m_walletImpl->createTransactionMultDest(
+        destinations,
+        payment_id.toStdString(),
+        amounts,
+        mixin_count,
+        static_cast<Monero::PendingTransaction::Priority>(priority),
+        currentSubaddressAccount(),
+        subaddr_indices);
+    PendingTransaction *result = new PendingTransaction(ptImpl, 0);
     return result;
 }
 
-void Wallet::createTransactionAsync(const QString &dst_addr, const QString &payment_id,
-                               quint64 amount, quint32 mixin_count,
-                               PendingTransaction::Priority priority)
+void Wallet::createTransactionAsync(
+    const QVector<QString> &destinationAddresses,
+    const QString &payment_id,
+    const QVector<QString> &destinationAmounts,
+    quint32 mixin_count,
+    PendingTransaction::Priority priority)
 {
-    m_scheduler.run([this, dst_addr, payment_id, amount, mixin_count, priority] {
-        PendingTransaction *tx = createTransaction(dst_addr, payment_id, amount, mixin_count, priority);
-        emit transactionCreated(tx, dst_addr, payment_id, mixin_count);
+    m_scheduler.run([this, destinationAddresses, payment_id, destinationAmounts, mixin_count, priority] {
+        PendingTransaction *tx = createTransaction(destinationAddresses, payment_id, destinationAmounts, mixin_count, priority);
+        emit transactionCreated(tx, destinationAddresses, payment_id, mixin_count);
     });
 }
 
@@ -619,7 +638,7 @@ void Wallet::createTransactionAllAsync(const QString &dst_addr, const QString &p
 {
     m_scheduler.run([this, dst_addr, payment_id, mixin_count, priority] {
         PendingTransaction *tx = createTransactionAll(dst_addr, payment_id, mixin_count, priority);
-        emit transactionCreated(tx, dst_addr, payment_id, mixin_count);
+        emit transactionCreated(tx, {dst_addr}, payment_id, mixin_count);
     });
 }
 
@@ -634,7 +653,7 @@ void Wallet::createSweepUnmixableTransactionAsync()
 {
     m_scheduler.run([this] {
         PendingTransaction *tx = createSweepUnmixableTransaction();
-        emit transactionCreated(tx, "", "", 0);
+        emit transactionCreated(tx, {""}, "", 0);
     });
 }
 
@@ -674,17 +693,32 @@ void Wallet::disposeTransaction(UnsignedTransaction *t)
     delete t;
 }
 
-void Wallet::estimateTransactionFeeAsync(const QString &destination,
-                                         quint64 amount,
-                                         PendingTransaction::Priority priority,
-                                         const QJSValue &callback)
+void Wallet::estimateTransactionFeeAsync(
+    const QVector<QString> &destinationAddresses,
+    const QVector<quint64> &amounts,
+    PendingTransaction::Priority priority,
+    const QJSValue &callback)
 {
-    m_scheduler.run([this, destination, amount, priority] {
-        const uint64_t fee = m_walletImpl->estimateTransactionFee(
-            {std::make_pair(destination.toStdString(), amount)},
-            static_cast<Monero::PendingTransaction::Priority>(priority));
-        return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
-    }, callback);
+    m_scheduler.run(
+        [this, destinationAddresses, amounts, priority] {
+            if (destinationAddresses.size() != amounts.size())
+            {
+                return QJSValueList({""});
+            }
+
+            std::vector<std::pair<std::string, uint64_t>> destinations;
+            destinations.reserve(destinationAddresses.size());
+            for (size_t index = 0; index < destinationAddresses.size(); ++index)
+            {
+                destinations.emplace_back(std::make_pair(destinationAddresses[index].toStdString(), amounts[index]));
+            }
+
+            const uint64_t fee = m_walletImpl->estimateTransactionFee(
+                destinations,
+                static_cast<Monero::PendingTransaction::Priority>(priority));
+            return QJSValueList({QString::fromStdString(Monero::Wallet::displayAmount(fee))});
+        },
+        callback);
 }
 
 TransactionHistory *Wallet::history() const

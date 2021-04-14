@@ -58,12 +58,9 @@ Rectangle {
     signal historyClicked()
     signal transferClicked()
     signal receiveClicked()
-    signal txkeyClicked()
-    signal sharedringdbClicked()
+    signal advancedClicked()
     signal settingsClicked()
     signal addressBookClicked()
-    signal miningClicked()
-    signal signClicked()
     signal accountClicked()
     signal signMultisigClicked()
 
@@ -73,10 +70,6 @@ Rectangle {
         else if(pos === "Transfer") menuColumn.previousButton = transferButton
         else if(pos === "Receive")  menuColumn.previousButton = receiveButton
         else if(pos === "AddressBook") menuColumn.previousButton = addressBookButton
-        else if(pos === "Mining") menuColumn.previousButton = miningButton
-        else if(pos === "TxKey")  menuColumn.previousButton = txkeyButton
-        else if(pos === "SharedRingDB")  menuColumn.previousButton = sharedringdbButton
-        else if(pos === "Sign") menuColumn.previousButton = signButton
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
         else if(pos === "Account") menuColumn.previousButton = accountButton
@@ -517,103 +510,12 @@ Rectangle {
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
+                    panel.advancedClicked()
                 }
             }
 
             MoneroComponents.MenuButtonDivider {
                 visible: advancedButton.present && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- Mining tab ---------------
-            MoneroComponents.MenuButton {
-                id: miningButton
-                visible: !isAndroid && !isIOS && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Mining") + translationManager.emptyString
-                symbol: qsTr("M") + translationManager.emptyString
-                under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = miningButton
-                    panel.miningClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: miningButton.present && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- TxKey tab ---------------
-            MoneroComponents.MenuButton {
-                id: txkeyButton
-                visible: appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Prove/check") + translationManager.emptyString
-                symbol: qsTr("K") + translationManager.emptyString
-                under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = txkeyButton
-                    panel.txkeyClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: txkeyButton.present && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- Shared RingDB tab ---------------
-            MoneroComponents.MenuButton {
-                id: sharedringdbButton
-                visible: appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Shared RingDB") + translationManager.emptyString
-                symbol: qsTr("G") + translationManager.emptyString
-                under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = sharedringdbButton
-                    panel.sharedringdbClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: sharedringdbButton.present && appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.leftMargin: 20
-            }
-
-            // ------------- Sign/verify tab ---------------
-            MoneroComponents.MenuButton {
-                id: signButton
-                visible: appWindow.walletMode >= 2
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: qsTr("Sign/verify") + translationManager.emptyString
-                symbol: qsTr("I") + translationManager.emptyString
-                under: advancedButton
-                onClicked: {
-                    parent.previousButton.checked = false
-                    parent.previousButton = signButton
-                    panel.signClicked()
-                }
-            }
-
-            MoneroComponents.MenuButtonDivider {
-                visible: signButton.present && appWindow.walletMode >= 2
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20

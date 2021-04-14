@@ -113,7 +113,7 @@ function capitalize(s){
 }
 
 function removeTrailingZeros(value) {
-    return (value + '').replace(/\.?0*$/, '');
+    return (value + '').replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
 }
 
 function printMoney(amount) {

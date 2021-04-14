@@ -72,7 +72,7 @@ Packages are available for
 * Debian: See the [whonix/monero-gui repository](https://gitlab.com/whonix/monero-gui#how-to-install-monero-using-apt-get)
 * Void Linux: `xbps-install -S monero-gui`
 * GuixSD: `guix package -i monero-gui`
-* macOS (homebrew): `brew cask install monero-wallet`
+* macOS (homebrew): `brew install --cask monero-wallet`
 
 Packaging for your favorite distribution would be a welcome contribution!
 
@@ -80,13 +80,14 @@ Packaging for your favorite distribution would be a welcome contribution!
 
 *Note*: Qt 5.9.7 is the minimum version required to build the GUI.
 
-### Building Windows static binaries with Docker (any OS)
+### Building Reproducible Windows static binaries with Docker (any OS)
 
 1. Install Docker [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 2. Clone the repository
    ```
-   git clone --recursive https://github.com/monero-project/monero-gui.git
+   git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
+   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -109,7 +110,7 @@ Packaging for your favorite distribution would be a welcome contribution!
    ```
    git clone --branch master --recursive https://github.com/monero-project/monero-gui.git
    ```
-   \* `master` - replace with the desired version tag (e.g. `v0.17.1.5`) to build the release binaries.
+   \* `master` - replace with the desired version tag (e.g. `v0.17.1.9`) to build the release binaries.
 3. Prepare build environment
    ```
    cd monero-gui
@@ -207,7 +208,7 @@ The following instructions will fetch Qt from your distribution's repositories i
 
   - For Ubuntu 17.10+
 
-    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
 
   - For Gentoo
 
@@ -251,7 +252,7 @@ The executable can be found in the build/release/bin folder.
 
 3. Install [monero](https://github.com/monero-project/monero) dependencies:
 
-  `brew install boost hidapi zmq libpgm miniupnpc ldns expat libunwind-headers protobuf libgcrypt`
+  `brew install boost hidapi zmq libpgm libsodium miniupnpc ldns expat libunwind-headers protobuf libgcrypt`
 
 4. Install Qt:
 

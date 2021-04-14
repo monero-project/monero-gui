@@ -130,7 +130,7 @@ Rectangle{
                     topPadding: 0
                     text: qsTr("The blockchain is downloaded to your computer. Provides higher security and requires more local storage.") + translationManager.emptyString
                     width: parent.width - (localNodeIcon.width + localNodeIcon.anchors.leftMargin + anchors.leftMargin)
-                }   
+                }
             }
 
             MouseArea {
@@ -262,80 +262,94 @@ Rectangle{
                 text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             }
 
-            MoneroComponents.RemoteNodeEdit {
-                id: remoteNodeEdit
-                Layout.minimumWidth: 100
-                placeholderFontSize: 15
-
-                daemonAddrLabelText: qsTr("Address") + translationManager.emptyString
-                daemonPortLabelText: qsTr("Port") + translationManager.emptyString
-
-                initialAddress: persistentSettings.remoteNodeAddress
-                onEditingFinished: {
-                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                    console.log("setting remote node to " + persistentSettings.remoteNodeAddress);
-                    if (persistentSettings.is_trusted_daemon) {
-                        persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
-                        currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
-                        setTrustedDaemonCheckBox.checked = !setTrustedDaemonCheckBox.checked
-                        appWindow.showStatusMessage(qsTr("Remote node updated. Trusted daemon has been reset. Mark again, if desired."), 8);
-                    }
-                }
-            }
-
-            GridLayout {
-                columns: 2
-                columnSpacing: 32
-
-                MoneroComponents.LineEdit {
-                    id: daemonUsername
-                    Layout.fillWidth: true
-                    labelText: qsTr("Daemon username") + translationManager.emptyString
-                    text: persistentSettings.daemonUsername
-                    placeholderText: qsTr("(optional)") + translationManager.emptyString
-                    placeholderFontSize: 15
-                    labelFontSize: 14
-                    fontSize: 15
-                }
-
-                MoneroComponents.LineEdit {
-                    id: daemonPassword
-                    Layout.fillWidth: true
-                    labelText: qsTr("Daemon password") + translationManager.emptyString
-                    text: persistentSettings.daemonPassword
-                    placeholderText: qsTr("Password") + translationManager.emptyString
-                    password: true
-                    placeholderFontSize: 15
-                    labelFontSize: 14
-                    fontSize: 15
-                }
-            }
-
             MoneroComponents.CheckBox {
-                id: setTrustedDaemonCheckBox
-                checked: persistentSettings.is_trusted_daemon
-                onClicked: {
-                    persistentSettings.is_trusted_daemon = !persistentSettings.is_trusted_daemon
-                    currentWallet.setTrustedDaemon(persistentSettings.is_trusted_daemon)
-                }
-                text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
+                border: false
+                checkedIcon: FontAwesome.minusCircle
+                uncheckedIcon: FontAwesome.plusCircle
+                fontAwesomeIcons: true
+                fontSize: 16
+                iconOnTheLeft: true
+                text: qsTr("Add remote node") + translationManager.emptyString
+                toggleOnClick: false
+                onClicked: remoteNodeDialog.add(remoteNodesModel.append)
             }
 
-            MoneroComponents.StandardButton {
-                id: btnConnectRemote
-                enabled: remoteNodeEdit.isValid()
-                small: true
-                text: qsTr("Connect") + translationManager.emptyString
-                onClicked: {
-                    // Update daemon login
-                    persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-                    persistentSettings.daemonUsername = daemonUsername.text;
-                    persistentSettings.daemonPassword = daemonPassword.text;
-                    persistentSettings.useRemoteNode = true
+            ColumnLayout {
+                spacing: 0
 
-                    currentWallet.setDaemonLogin(persistentSettings.daemonUsername, persistentSettings.daemonPassword);
+                Repeater {
+                    model: remoteNodesModel
 
-                    appWindow.connectRemoteNode()
+                    Rectangle {
+                        height: 30
+                        Layout.fillWidth: true
+                        color: itemMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
+
+                        Rectangle {
+                            color: MoneroComponents.Style.appWindowBorderColor
+                            anchors.right: parent.right
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            height: 1
+                            visible: index > 0
+
+                            MoneroEffects.ColorTransition {
+                                targetObj: parent
+                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
+                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
+                            }
+                        }
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.rightMargin: 80
+                            color: "transparent"
+
+                            MoneroComponents.TextPlain {
+                                color: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 6
+                                font.pixelSize: 16
+                                text: address
+                                themeTransition: false
+                            }
+
+                            MouseArea {
+                                id: itemMouseArea
+                                cursorShape: Qt.PointingHandCursor
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onClicked: remoteNodesModel.applyRemoteNode(index)
+                            }
+                        }
+
+                        RowLayout {
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: 6
+                            height: 30
+                            spacing: 10
+
+                            MoneroComponents.InlineButton {
+                                buttonColor: "transparent"
+                                fontFamily: FontAwesome.fontFamily
+                                fontPixelSize: 18
+                                text: FontAwesome.edit
+                                onClicked: remoteNodeDialog.edit(remoteNodesModel.get(index), function (remoteNode) {
+                                    remoteNodesModel.set(index, remoteNode)
+                                })
+                            }
+
+                            MoneroComponents.InlineButton {
+                                buttonColor: "transparent"
+                                fontFamily: FontAwesome.fontFamily
+                                text: FontAwesome.times
+                                visible: remoteNodesModel.count > 1
+                                onClicked: remoteNodesModel.removeSelectNextIfNeeded(index)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -398,7 +412,7 @@ Rectangle{
                 placeholderFontSize: 15
                 text: persistentSettings.daemonFlags
                 addressValidation: false
-                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address)/)
+                error: text.match(/(^|\s)--(data-dir|bootstrap-daemon-address|non-interactive)/)
                 onEditingFinished: {
                     if (!daemonFlags.error) {
                         persistentSettings.daemonFlags = daemonFlags.text;
@@ -431,7 +445,7 @@ Rectangle{
                     }
                 }
             }
-        } 
+        }
     }
 }
 

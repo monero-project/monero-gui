@@ -2,8 +2,12 @@ ANDROID_STANDALONE_TOOLCHAIN_PATH ?= /usr/local/toolchain
 MANUAL_SUBMODULES ?= OFF
 
 dotgit=$(shell ls -d .git/config)
-ifneq ($(dotgit), .git/config)
-  USE_SINGLE_BUILDDIR=1
+ifeq ($(dotgit), .git/config)
+  ifeq ($(shell git --version > /dev/null 2>&1 ; echo $$?), 0)
+	git = yes
+  else
+    $(warning git command not found)
+  endif
 endif
 
 builddir := build
@@ -13,9 +17,11 @@ ifeq ($(USE_SINGLE_BUILDDIR), OFF)
   builddir := $(builddir)/$(os)
   topdir := $(topdir)/..
 
-  branch:=$(shell git branch | grep '\* ' | cut -f2- -d' '| sed -e 's|[:/\\ \(\)]|_|g')
-  builddir := $(builddir)/$(branch)
-  topdir := $(topdir)/..
+  ifdef git
+    branch := $(shell git branch | grep '\* ' | cut -f2- -d' '| sed -e 's|[:/\\ \(\)]|_|g')
+    builddir := $(builddir)/$(branch)
+    topdir := $(topdir)/..
+  endif
 
   deldirs := $(builddir)
 else
