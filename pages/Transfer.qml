@@ -273,7 +273,8 @@ Rectangle {
                         }
 
                         MoneroComponents.InlineButton {
-                            fontFamily: FontAwesome.fontFamily
+                            fontFamily: FontAwesome.fontFamilySolid
+                            fontStyleName: "Solid"
                             fontPixelSize: 18
                             text: FontAwesome.desktop
                             onClicked: {

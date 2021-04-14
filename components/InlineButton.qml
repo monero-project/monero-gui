@@ -43,6 +43,7 @@ Item {
     property alias text: inlineText.text
     property alias fontPixelSize: inlineText.font.pixelSize
     property alias fontFamily: inlineText.font.family
+    property alias fontStyleName: inlineText.font.styleName
     property bool isFontAwesomeIcon: fontFamily == FontAwesome.fontFamily || fontFamily == FontAwesome.fontFamilySolid
     property alias buttonColor: rect.color
 
