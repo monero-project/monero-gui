@@ -1376,32 +1376,21 @@ ApplicationWindow {
         property bool   miningIgnoreBattery : true
         property var    nettype: NetworkType.MAINNET
         property int    restore_height : 0
-        property bool   is_trusted_daemon : false  // TODO: drop after v0.17.2.0 release
         property bool   is_recovering : false
         property bool   is_recovering_from_device : false
         property bool   customDecorations : true
         property string daemonFlags
         property int logLevel: 0
         property string logCategories: ""
-        property string daemonUsername: "" // TODO: drop after v0.17.2.0 release
-        property string daemonPassword: "" // TODO: drop after v0.17.2.0 release
         property bool transferShowAdvanced: false
         property bool receiveShowAdvanced: false
         property bool historyShowAdvanced: false
         property bool historyHumanDates: true
         property string blockchainDataDir: ""
         property bool useRemoteNode: false
-        property string remoteNodeAddress: "" // TODO: drop after v0.17.2.0 release
         property string remoteNodesSerialized: JSON.stringify({
                 selected: 0,
-                nodes: remoteNodeAddress != ""
-                    ? [{
-                        address: remoteNodeAddress,
-                        username: daemonUsername,
-                        password: daemonPassword,
-                        trusted: is_trusted_daemon,
-                    }]
-                    : [],
+                nodes: [],
             })
         property string bootstrapNodeAddress: ""
         property bool segregatePreForkOutputs: true
