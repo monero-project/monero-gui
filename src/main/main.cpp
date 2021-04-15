@@ -331,7 +331,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // screen settings
     // Mobile is designed on 128dpi
     qreal ref_dpi = 128;
-    QRect geo = QGuiApplication::primaryScreen()->availableGeometry();
+    QSize screenAvailableSize = QGuiApplication::primaryScreen()->availableVirtualSize();
     QRect rect = QGuiApplication::primaryScreen()->geometry();
     qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
     qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
@@ -354,6 +354,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
 
     qWarning().nospace().noquote() << "Qt:" << QT_VERSION_STR << " GUI:" << GUI_VERSION
                                    << " | screen: " << rect.width() << "x" << rect.height()
+                                   << " - available: " << screenAvailableSize
                                    << " - dpi: " << dpi << " - ratio:" << calculated_ratio;
 
     // registering types for QML
@@ -464,8 +465,8 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     engine.rootContext()->setContextProperty("isOpenGL", isOpenGL);
     engine.rootContext()->setContextProperty("isTails", isTails);
 
-    engine.rootContext()->setContextProperty("screenWidth", geo.width());
-    engine.rootContext()->setContextProperty("screenHeight", geo.height());
+    engine.rootContext()->setContextProperty("screenAvailableWidth", screenAvailableSize.width());
+    engine.rootContext()->setContextProperty("screenAvailableHeight", screenAvailableSize.height());
 
 #ifndef Q_OS_IOS
     const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
