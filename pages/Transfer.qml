@@ -858,21 +858,21 @@ Rectangle {
                 console.log("Transfer: import key images clicked")
                 importKeyImagesDialog.open(); 
             }
-            helpTextLarge.text: qsTr("Required for view-only wallets to display the real balance") + translationManager.emptyString
-            helpTextSmall.text: {
+            tooltip: {
                 var errorMessage = "";
                 if (appWindow.viewOnly && !appWindow.isTrustedDaemon()){
                     errorMessage = "<p class='orange'>" + qsTr("* To import, you must connect to a local node or a trusted remote node") + "</p>";
                 }
-                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor +
+                var header = qsTr("Required for view-only wallets to display the real balance") + translationManager.emptyString;
+                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
                        ";} p.orange{color:#ff9323;}</style>" +
+                       "<div class='header'>" + header + "</div>" +
                        "<p>" + qsTr("1. Using cold wallet, export the key images into a file") + "</p>" +
                        "<p>" + qsTr("2. Using view-only wallet, import the key images file") + "</p>" +
                        errorMessage + translationManager.emptyString
             }
-            helpTextSmall.themeTransition: false
         }
-        
+
         AdvancedOptionsItem {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Offline transaction signing") + translationManager.emptyString
@@ -897,14 +897,15 @@ Rectangle {
                 console.log("Transfer: submit tx clicked")
                 submitTxDialog.open();
             }
-            helpTextLarge.text: qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString
-            helpTextSmall.text: {
+            tooltip: {
                 var errorMessage = "";
                 if (appWindow.viewOnly && !pageRoot.checkInformation()) {
                     errorMessage = "<p class='orange'>" + qsTr("* To create a transaction file, please enter address and amount above") + "</p>";
                 }
-                return "<style type='text/css'>p{line-height:20px; margin-top:0px; margin-bottom:0px; color:" + MoneroComponents.Style.defaultFontColor + 
+                var header = qsTr("Spend XMR from a cold (offline) wallet") + translationManager.emptyString;
+                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
                        ";} p.orange{color:#ff9323;}</style>" +
+                       "<div class='header'>" + header + "</div>" +
                        "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
                        "<p>" + qsTr("2. Using cold wallet, import the outputs file and export the key images") + "</p>" +
                        "<p>" + qsTr("3. Using view-only wallet, import the key images file and create a transaction file") + "</p>" +
@@ -912,7 +913,6 @@ Rectangle {
                        "<p>" + qsTr("4. Using cold wallet, sign your transaction file") + "</p>" +
                        "<p>" + qsTr("5. Using view-only wallet, submit your signed transaction") + "</p>" + translationManager.emptyString
             }
-            helpTextSmall.themeTransition: false
         }
 
         AdvancedOptionsItem {
@@ -924,7 +924,7 @@ Rectangle {
                 console.log("Transfer: sweepUnmixableClicked")
                 root.sweepUnmixableClicked()
             }
-            helpTextLarge.text: qsTr("Create a transaction that spends old unmovable outputs") + translationManager.emptyString
+            tooltip: qsTr("Create a transaction that spends old unmovable outputs") + translationManager.emptyString
         }
     }
 

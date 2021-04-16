@@ -34,6 +34,7 @@ import "../components" as MoneroComponents
 Item {
     id: item
     property alias text: label.text
+    property alias tooltip: label.tooltip
     property alias color: label.color
     property int textFormat: Text.PlainText
     property string tipText: ""
