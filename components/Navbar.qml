@@ -127,6 +127,7 @@ Rectangle {
 
                     Rectangle {
                         Layout.minimumHeight: 30
+                        Layout.fillWidth: true
                         color: items[index].active ? grid.borderColor : "transparent"
                         height: children[0].height
                         width: children[0].width
