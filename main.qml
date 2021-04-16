@@ -73,7 +73,7 @@ ApplicationWindow {
     property int restoreHeight:0
     property bool daemonSynced: false
     property bool walletSynced: false
-    property int maxWindowHeight: (isAndroid || isIOS)? screenHeight : (screenHeight < 900)? 720 : 800;
+    property int maxWindowHeight: (isAndroid || isIOS)? screenAvailableHeight : (screenAvailableHeight < 900)? 720 : 800;
     property bool daemonRunning: !persistentSettings.useRemoteNode && !disconnected
     property int daemonStartStopInProgress: 0
     property alias toolTip: toolTip
@@ -1118,15 +1118,14 @@ ApplicationWindow {
         });
     }
 
-
     objectName: "appWindow"
     visible: true
-    width: Screen.desktopAvailableWidth > 980
+    width: screenAvailableWidth > 980
         ? 980
-        : Math.min(Screen.desktopAvailableWidth, 800)
-    height: Screen.desktopAvailableHeight > maxWindowHeight
+        : Math.min(screenAvailableWidth, 800)
+    height: screenAvailableHeight > maxWindowHeight
         ? maxWindowHeight
-        : Math.min(Screen.desktopAvailableHeight, 700)
+        : Math.min(screenAvailableHeight, 700)
     color: MoneroComponents.Style.appWindowBackgroundColor
     flags: persistentSettings.customDecorations ? Windows.flagsCustomDecorations : Windows.flags
 
@@ -1285,8 +1284,12 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        x = (Screen.desktopAvailableWidth - width) / 2;
-        y = (Screen.desktopAvailableHeight - height) / 2;
+        if (screenAvailableWidth > width) {
+            x = (screenAvailableWidth - width) / 2;
+        }
+        if (screenAvailableHeight > height) {
+            y = (screenAvailableHeight - height) / 2;
+        }
 
         translationManager.setLanguage(persistentSettings.locale.split("_")[0]);
 
