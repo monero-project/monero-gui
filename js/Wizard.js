@@ -69,10 +69,7 @@ function walletPathExists(accountsDir, directory, filename, isIOS, walletManager
     if(!filename || filename === "") return false;
     if(!directory || directory === "") return false;
 
-    // make sure directory endswith path seperator
-    // @TODO: use .endswith() after Qt 5.8
-    var trailing_path_sep = directory[directory.length-1];
-    if(trailing_path_sep !== "/" && trailing_path_sep !== "\\")
+    if (!directory.endsWith("/") && !directory.endsWith("\\"))
         directory += "/"
 
     if(isIOS)
