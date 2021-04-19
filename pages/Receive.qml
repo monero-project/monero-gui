@@ -305,7 +305,7 @@ Rectangle {
                 label.font.family: FontAwesome.fontFamily
                 fontSize: 13
                 onClicked: {
-                    clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
+                    clipboard.setText(appWindow.current_address);
                     appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
                 }
             }
