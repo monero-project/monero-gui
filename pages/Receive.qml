@@ -301,6 +301,18 @@ Rectangle {
             MoneroComponents.StandardButton {
                 Layout.preferredWidth: 220
                 small: true
+                text: FontAwesome.clipboard + "  %1".arg(qsTr("Copy to clipboard")) + translationManager.emptyString
+                label.font.family: FontAwesome.fontFamily
+                fontSize: 13
+                onClicked: {
+                    clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
+                    appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                Layout.preferredWidth: 220
+                small: true
                 text: FontAwesome.eye + "  %1".arg(qsTr("Show on device")) + translationManager.emptyString
                 label.font.family: FontAwesome.fontFamily
                 fontSize: 13
