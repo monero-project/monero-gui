@@ -450,12 +450,13 @@ Rectangle {
         tmpWalletFilename = oshelper.temporaryFilename();
         console.log("Creating temporary wallet", tmpWalletFilename)
         var nettype = persistentSettings.nettype;
+        var kdfRounds = persistentSettings.kdfRounds;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
         var subaddressLookahead = wizardController.walletOptionsSubaddressLookahead;
         var deviceName = wizardController.walletOptionsDeviceName;
 
         connect();
-        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, "", nettype, deviceName, restoreHeight, subaddressLookahead);
+        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, "", nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
         creatingWalletDeviceSplash();
     }
 

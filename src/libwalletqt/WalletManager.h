@@ -103,14 +103,16 @@ public:
                                                 NetworkType::Type nettype,
                                                 const QString &deviceName,
                                                 quint64 restoreHeight = 0,
-                                                const QString &subaddressLookahead = "");
+                                                const QString &subaddressLookahead = "",
+                                                quint64 kdfRounds = 1);
 
     Q_INVOKABLE void createWalletFromDeviceAsync(const QString &path,
                                                 const QString &password,
                                                 NetworkType::Type nettype,
                                                 const QString &deviceName,
                                                 quint64 restoreHeight = 0,
-                                                const QString &subaddressLookahead = "");
+                                                const QString &subaddressLookahead = "",
+                                                quint64 kdfRounds = 1);
     /*!
      * \brief closeWallet - closes current open wallet and frees memory
      * \return wallet address
