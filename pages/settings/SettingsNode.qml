@@ -248,110 +248,16 @@ Rectangle{
             }
         }
 
-        ColumnLayout {
-            id: remoteNodeLayout
-            anchors.margins: 0
-            spacing: 20
-            Layout.fillWidth: true
-            Layout.topMargin: 20
+        MoneroComponents.WarningBox {
+            Layout.topMargin: 46
+            text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
             visible: persistentSettings.useRemoteNode
+        }
 
-            MoneroComponents.WarningBox {
-                Layout.topMargin: 26
-                Layout.bottomMargin: 6
-                text: qsTr("To find a remote node, type 'Monero remote node' into your favorite search engine. Please ensure the node is run by a trusted third-party.") + translationManager.emptyString
-            }
-
-            MoneroComponents.CheckBox {
-                border: false
-                checkedIcon: FontAwesome.minusCircle
-                uncheckedIcon: FontAwesome.plusCircle
-                fontAwesomeIcons: true
-                fontSize: 16
-                iconOnTheLeft: true
-                text: qsTr("Add remote node") + translationManager.emptyString
-                toggleOnClick: false
-                onClicked: remoteNodeDialog.add(remoteNodesModel.append)
-            }
-
-            ColumnLayout {
-                spacing: 0
-
-                Repeater {
-                    model: remoteNodesModel
-
-                    Rectangle {
-                        height: 30
-                        Layout.fillWidth: true
-                        color: itemMouseArea.containsMouse || index === remoteNodesModel.selected ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
-
-                        Rectangle {
-                            color: MoneroComponents.Style.appWindowBorderColor
-                            anchors.right: parent.right
-                            anchors.left: parent.left
-                            anchors.top: parent.top
-                            height: 1
-                            visible: index > 0
-
-                            MoneroEffects.ColorTransition {
-                                targetObj: parent
-                                blackColor: MoneroComponents.Style._b_appWindowBorderColor
-                                whiteColor: MoneroComponents.Style._w_appWindowBorderColor
-                            }
-                        }
-
-                        Rectangle {
-                            anchors.fill: parent
-                            anchors.rightMargin: 80
-                            color: "transparent"
-
-                            MoneroComponents.TextPlain {
-                                color: index === remoteNodesModel.selected ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: parent.left
-                                anchors.leftMargin: 6
-                                font.pixelSize: 16
-                                text: address
-                                themeTransition: false
-                            }
-
-                            MouseArea {
-                                id: itemMouseArea
-                                cursorShape: Qt.PointingHandCursor
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                onClicked: remoteNodesModel.applyRemoteNode(index)
-                            }
-                        }
-
-                        RowLayout {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.right: parent.right
-                            anchors.rightMargin: 6
-                            height: 30
-                            spacing: 10
-
-                            MoneroComponents.InlineButton {
-                                buttonColor: "transparent"
-                                fontFamily: FontAwesome.fontFamily
-                                fontPixelSize: 18
-                                text: FontAwesome.edit
-                                onClicked: remoteNodeDialog.edit(remoteNodesModel.get(index), function (remoteNode) {
-                                    remoteNodesModel.set(index, remoteNode)
-                                })
-                            }
-
-                            MoneroComponents.InlineButton {
-                                buttonColor: "transparent"
-                                fontFamily: FontAwesome.fontFamily
-                                text: FontAwesome.times
-                                visible: remoteNodesModel.count > 1
-                                onClicked: remoteNodesModel.removeSelectNextIfNeeded(index)
-                            }
-                        }
-                    }
-                }
-            }
+        MoneroComponents.RemoteNodeList {
+            Layout.fillWidth: true
+            Layout.topMargin: 26
+            visible: persistentSettings.useRemoteNode
         }
 
         ColumnLayout {

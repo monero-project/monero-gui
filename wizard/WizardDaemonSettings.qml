@@ -41,14 +41,7 @@ ColumnLayout {
     spacing: 10
 
     function save(){
-        persistentSettings.useRemoteNode = remoteNode.checked
-        const index = remoteNodesModel.appendIfNotExists({
-            address: remoteNodeEdit.getAddress(),
-            username: "",
-            password: "",
-            trusted: false,
-        });
-        remoteNodesModel.applyRemoteNode(index);
+        persistentSettings.useRemoteNode = remoteNode.checked;
         if (bootstrapNodeEdit.daemonAddrText == "auto") {
             persistentSettings.bootstrapNodeAddress = "auto";
         } else {
@@ -196,18 +189,9 @@ ColumnLayout {
         }
     }
 
-    ColumnLayout {
-        visible: remoteNode.checked
-        spacing: 0
-
-        Layout.topMargin: 8
+    MoneroComponents.RemoteNodeList {
         Layout.fillWidth: true
-
-        MoneroComponents.RemoteNodeEdit {
-            id: remoteNodeEdit
-            Layout.fillWidth: true
-
-            initialAddress: remoteNodesModel.currentRemoteNode().address
-        }
+        Layout.topMargin: 8
+        visible: remoteNode.checked
     }
 }
