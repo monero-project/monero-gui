@@ -185,6 +185,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.edit
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
@@ -199,6 +201,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.clipboard
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 16
