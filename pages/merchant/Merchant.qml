@@ -35,7 +35,7 @@ Item {
 
     function onPageCompleted() {
         if (appWindow.currentWallet) {
-            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, 0)
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
         }
         // prepare tracking
         trackingCheckbox.checked = root.enableTracking
