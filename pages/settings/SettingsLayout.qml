@@ -89,7 +89,6 @@ Rectangle {
             toggleOnClick: false
             onClicked: {
                 MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
-                persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
             }
         }
         
