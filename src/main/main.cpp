@@ -72,6 +72,9 @@
 #include "qt/KeysFiles.h"
 #include "qt/MoneroSettings.h"
 #include "qt/NetworkAccessBlockingFactory.h"
+#ifdef Q_OS_MAC
+#include "qt/macoshelper.h"
+#endif
 
 // IOS exclusions
 #ifndef Q_OS_IOS
@@ -133,6 +136,7 @@ Q_IMPORT_PLUGIN(QtQuickControls1Plugin)
 Q_IMPORT_PLUGIN(QtQuick2DialogsPlugin)
 Q_IMPORT_PLUGIN(QmlFolderListModelPlugin)
 Q_IMPORT_PLUGIN(QmlSettingsPlugin)
+Q_IMPORT_PLUGIN(QtLabsPlatformPlugin)
 Q_IMPORT_PLUGIN(QtQuick2DialogsPrivatePlugin)
 Q_IMPORT_PLUGIN(QtQuick2PrivateWidgetsPlugin)
 Q_IMPORT_PLUGIN(QtQuickControls2Plugin)
@@ -178,6 +182,10 @@ int main(int argc, char *argv[])
     if(qgetenv("QMLSCENE_DEVICE") == "softwarecontext")
         isOpenGL = false;
 
+#ifdef Q_OS_MAC
+    // macOS window tabbing is not supported
+    MacOSHelper::disableWindowTabbing();
+#endif
     // disable "QApplication: invalid style override passed" warning
     if (isDesktop) qputenv("QT_STYLE_OVERRIDE", "fusion");
 #ifdef Q_OS_LINUX

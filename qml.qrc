@@ -45,6 +45,7 @@
         <file>images/prevMonth.png</file>
         <file>images/prevMonth@2x.png</file>
         <file>components/TitleBar.qml</file>
+        <file>components/MenuBar.qml</file>
         <file>images/resize.png</file>
         <file>images/resize@2x.png</file>
         <file>images/resizeHovered.png</file>

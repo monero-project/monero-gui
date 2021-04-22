@@ -26,21 +26,31 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef MACOSHELPER_H
-#define MACOSHELPER_H
+import Qt.labs.platform 1.0 as PlatformLabs
+import "." as MoneroComponents
 
-#include <QPixmap>
+PlatformLabs.MenuBar {
+    PlatformLabs.Menu {
+        title: qsTr("File")
+        PlatformLabs.MenuItem {
+            enabled: appWindow.viewState === "normal"
+            text: qsTr("Close Wallet")
+            onTriggered: appWindow.showWizard()
+        }
+    }
+    PlatformLabs.Menu {
+        title: qsTr("View")
+        PlatformLabs.MenuItem {
+            text: MoneroComponents.Style.blackTheme ? qsTr("Light Theme") : qsTr("Dark Theme")
+            onTriggered: {
+                MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
+                persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
+            }
+        }
+        PlatformLabs.MenuItem {
+            text: qsTr("Change Language")
+            onTriggered: appWindow.toggleLanguageView();
+        }
+    }
+}
 
-class MacOSHelper
-{
-    MacOSHelper() {}
-
-public:
-    static bool isCapsLock();
-    static bool openFolderAndSelectItem(const QUrl &path);
-    static QPixmap screenshot();
-    static QString bundlePath();
-    static void disableWindowTabbing();
-};
-
-#endif //MACOSHELPER_H
