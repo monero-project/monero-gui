@@ -223,7 +223,7 @@ Rectangle {
                     validator: IntValidator { bottom: 1 }
                     text: persistentSettings.kdfRounds ? persistentSettings.kdfRounds : "1"
                     onTextChanged: {
-                        kdfRoundsText.text = persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
+                        persistentSettings.kdfRounds = parseInt(kdfRoundsText.text) >= 1 ? parseInt(kdfRoundsText.text) : 1;
                     }
                 }
 
