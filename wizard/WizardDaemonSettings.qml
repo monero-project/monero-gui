@@ -82,11 +82,20 @@ ColumnLayout {
             Layout.fillWidth: true
 
             readOnly: true
-            labelText: qsTr("Blockchain location (optional)") + translationManager.emptyString
+            labelText: {
+                const label = qsTr("Blockchain location (optional)");
+                if (persistentSettings.blockchainDataDir) {
+                    const style = "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>";
+                    return label + style + "<a href='#'> (%1)</a>".arg(qsTr("Reset")) + translationManager.emptyString;
+                } else {
+                    return label + translationManager.emptyString;
+                }
+            }
             labelFontSize: 14
             placeholderText: qsTr("Default") + translationManager.emptyString
             placeholderFontSize: 15
             text: persistentSettings.blockchainDataDir
+            onLabelLinkActivated: persistentSettings.blockchainDataDir = ""
 
             MoneroComponents.InlineButton {
                 small: true
