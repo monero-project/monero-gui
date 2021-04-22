@@ -138,6 +138,7 @@ Rectangle {
                 CheckBox2 {
                     id: showAdvancedCheckbox
                     checked: false
+                    visible: !newDeviceWallet.checked
                     text: qsTr("Advanced options") + translationManager.emptyString
                 }
 
