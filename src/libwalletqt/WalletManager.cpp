@@ -169,7 +169,7 @@ Wallet *WalletManager::createWalletFromKeys(const QString &path, const QString &
 }
 
 Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString &password, NetworkType::Type nettype,
-                                              const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead)
+                                              const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead, quint64 kdfRounds)
 {
     QMutexLocker locker(&m_mutex);
     WalletPassphraseListenerImpl tmpListener(this);
@@ -187,7 +187,7 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
         m_currentWallet = NULL;
     }
     Monero::Wallet * w = m_pimpl->createWalletFromDevice(path.toStdString(), password.toStdString(), static_cast<Monero::NetworkType>(nettype),
-                                                         deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString(), 1, &tmpListener);
+                                                         deviceName.toStdString(), restoreHeight, subaddressLookahead.toStdString(), kdfRounds, &tmpListener);
     w->setListener(nullptr);
 
     m_currentWallet = new Wallet(w);
@@ -202,10 +202,10 @@ Wallet *WalletManager::createWalletFromDevice(const QString &path, const QString
 
 
 void WalletManager::createWalletFromDeviceAsync(const QString &path, const QString &password, NetworkType::Type nettype,
-                                                const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead)
+                                                const QString &deviceName, quint64 restoreHeight, const QString &subaddressLookahead, quint64 kdfRounds)
 {
-    m_scheduler.run([this, path, password, nettype, deviceName, restoreHeight, subaddressLookahead] {
-        Wallet *wallet = createWalletFromDevice(path, password, nettype, deviceName, restoreHeight, subaddressLookahead);
+    m_scheduler.run([this, path, password, nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds] {
+        Wallet *wallet = createWalletFromDevice(path, password, nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
         emit walletCreated(wallet);
     });
 }
