@@ -116,6 +116,12 @@ Rectangle {
         transferView.sendTo(address, paymentId, description);
     }
 
+    // open Transactions page with search term in search field
+    function searchInHistory(searchTerm){
+        root.state = "History";
+        historyView.searchInHistory(searchTerm);
+    }
+
         states: [
             State {
                 name: "History"
