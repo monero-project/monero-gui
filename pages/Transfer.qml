@@ -900,6 +900,32 @@ Rectangle {
 
         AdvancedOptionsItem {
             visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
+            title: qsTr("Outputs") + translationManager.emptyString
+            button1.text: qsTr("Export") + translationManager.emptyString
+            button1.enabled: appWindow.viewOnly
+            button1.onClicked: {
+                console.log("Transfer: export outputs clicked")
+                exportOutputsDialog.open();
+            }
+            button2.text: qsTr("Import") + translationManager.emptyString
+            button2.enabled: !appWindow.viewOnly
+            button2.onClicked: {
+                console.log("Transfer: import outputs clicked")
+                importOutputsDialog.open();
+            }
+            tooltip: {
+                var header = qsTr("Required for cold wallets to sign their corresponding key images") + translationManager.emptyString;
+                return "<style type='text/css'>.header{ font-size: 13px; } p{line-height:20px; margin-top:0px; margin-bottom:0px; " +
+                       ";} p.orange{color:#ff9323;}</style>" +
+                       "<div class='header'>" + header + "</div>" +
+                       "<p>" + qsTr("1. Using view-only wallet, export the outputs into a file") + "</p>" +
+                       "<p>" + qsTr("2. Using cold wallet, import the outputs file") + "</p>" +
+                       translationManager.emptyString
+            }
+        }
+
+        AdvancedOptionsItem {
+            visible: persistentSettings.transferShowAdvanced && appWindow.walletMode >= 2
             title: qsTr("Key images") + translationManager.emptyString
             button1.text: qsTr("Export") + translationManager.emptyString
             button1.enabled: !appWindow.viewOnly
@@ -1072,6 +1098,41 @@ Rectangle {
 
     }
     
+    FileDialog {
+        id: exportOutputsDialog
+        selectMultiple: false
+        selectExisting: false
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl))
+            if (currentWallet.exportOutputs(walletManager.urlToLocalPath(exportOutputsDialog.fileUrl), true)) {
+                appWindow.showStatusMessage(qsTr("Outputs successfully exported to file") + translationManager.emptyString, 3);
+            } else {
+                appWindow.showStatusMessage(currentWallet.errorString, 5);
+            }
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
+    FileDialog {
+        id: importOutputsDialog
+        selectMultiple: false
+        selectExisting: true
+        title: qsTr("Please choose a file") + translationManager.emptyString
+        onAccepted: {
+            console.log(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))
+            if (currentWallet.importOutputs(walletManager.urlToLocalPath(importOutputsDialog.fileUrl))) {
+                appWindow.showStatusMessage(qsTr("Outputs successfully imported to wallet") + translationManager.emptyString, 3);
+            } else {
+                appWindow.showStatusMessage(currentWallet.errorString, 5);
+            }
+        }
+        onRejected: {
+            console.log("Canceled");
+        }
+    }
+
     //ExportKeyImagesDialog
     FileDialog {
         id: exportKeyImagesDialog
