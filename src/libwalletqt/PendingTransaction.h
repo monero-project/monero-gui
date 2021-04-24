@@ -50,6 +50,8 @@ class PendingTransaction : public QObject
     Q_PROPERTY(QStringList txid READ txid)
     Q_PROPERTY(quint64 txCount READ txCount)
     Q_PROPERTY(QList<QVariant> subaddrIndices READ subaddrIndices)
+    Q_PROPERTY(QString address READ address)
+    Q_PROPERTY(quint32 signerCount READ signerCount)
 
 public:
     enum Status {
@@ -77,6 +79,8 @@ public:
     quint64 txCount() const;
     QList<QVariant> subaddrIndices() const;
     Q_INVOKABLE void setFilename(const QString &fileName);
+    QString address() const;
+    quint32 signerCount() const;
 
 private:
     explicit PendingTransaction(Monero::PendingTransaction * pt, QObject *parent = 0);

@@ -62,6 +62,7 @@ Rectangle {
     signal settingsClicked()
     signal addressBookClicked()
     signal accountClicked()
+    signal signMultisigClicked()
 
     function selectItem(pos) {
         menuColumn.previousButton.checked = false
@@ -72,6 +73,7 @@ Rectangle {
         else if(pos === "Settings") menuColumn.previousButton = settingsButton
         else if(pos === "Advanced") menuColumn.previousButton = advancedButton
         else if(pos === "Account") menuColumn.previousButton = accountButton
+        else if (pos === "Sign Multisig") menuColum.previousButton = signMultisigButton
         menuColumn.previousButton.checked = true
     }
 
@@ -160,6 +162,20 @@ Rectangle {
                     font.pixelSize: 12
                     font.bold: true
                     color: "#ff9323"
+                    themeTransition: false
+                }
+
+                MoneroComponents.TextPlain {
+                    id: multisigLabel
+                    visible: isMultisig
+                    text: qsTr("Multisg 2/2") + translationManager.emptyString
+                    anchors.top: parent.top
+                    anchors.topMargin: 4
+                    anchors.left: multisigLabel.visible ? multisigLabel.right : parent.left
+                    anchors.leftMargin: 8
+                    font.pixelSize: 12
+                    font.bold: true
+                    color: "#4823ff"
                     themeTransition: false
                 }
             }
@@ -380,7 +396,7 @@ Rectangle {
                 id: transferButton
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: qsTr("Send") + translationManager.emptyString
+                text: isMultisig ? qsTr("Create Transaction") + translationManager.emptyString : qsTr("Send") + translationManager.emptyString
                 symbol: qsTr("S") + translationManager.emptyString
                 onClicked: {
                     parent.previousButton.checked = false
@@ -396,6 +412,28 @@ Rectangle {
                 anchors.leftMargin: 20
             }
 
+            // ------------- Sign Multisig Tx tab ---------------
+            MoneroComponents.MenuButton {
+                id: signMultisigButton
+                visible: isMultisig
+                anchors.left: parent.left
+                anchors.right: parent.right
+                text: qsTr("Sign Transaction") + translationManager.emptyString
+                symbol: qsTr("Q") + translationManager.emptyString
+                onClicked: {
+                    parent.previousButton.checked = false
+                    parent.previousButton = signMultisigButton
+                    panel.signMultisigClicked()
+                }
+            }
+
+            MoneroComponents.MenuButtonDivider {
+                visible: accountButton.present
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+            }
+
             // ------------- AddressBook tab ---------------
 
             MoneroComponents.MenuButton {
@@ -404,7 +442,6 @@ Rectangle {
                 anchors.right: parent.right
                 text: qsTr("Address book") + translationManager.emptyString
                 symbol: qsTr("B") + translationManager.emptyString
-                under: transferButton
                 onClicked: {
                     parent.previousButton.checked = false
                     parent.previousButton = addressBookButton
