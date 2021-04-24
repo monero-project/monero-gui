@@ -73,13 +73,12 @@ GridLayout {
     }
 
     function getAddress() {
+        if (!isValid()) {
+            return "";
+        }
+
         var addr = daemonAddr.text.trim();
         var port = daemonPort.text.trim();
-
-        // validation
-        if(addr === "" || addr.length < 2) return "";
-        if(!Utils.isNumeric(port)) return "";
-
         return addr + ":" + port;
     }
 
