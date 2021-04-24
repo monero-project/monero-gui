@@ -1090,9 +1090,9 @@ void Wallet::onPassphraseEntered(const QString &passphrase, bool enter_on_device
 Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     : QObject(parent)
     , m_walletImpl(w)
-    , m_history(nullptr)
+    , m_history(new TransactionHistory(m_walletImpl->history(), this))
     , m_historyModel(nullptr)
-    , m_addressBook(nullptr)
+    , m_addressBook(new AddressBook(m_walletImpl->addressBook(), this))
     , m_addressBookModel(nullptr)
     , m_daemonBlockChainHeight(0)
     , m_daemonBlockChainHeightTtl(DAEMON_BLOCKCHAIN_HEIGHT_CACHE_TTL_SECONDS)
@@ -1103,18 +1103,14 @@ Wallet::Wallet(Monero::Wallet *w, QObject *parent)
     , m_disconnected(true)
     , m_initialized(false)
     , m_currentSubaddressAccount(0)
-    , m_subaddress(nullptr)
+    , m_subaddress(new Subaddress(m_walletImpl->subaddress(), this))
     , m_subaddressModel(nullptr)
-    , m_subaddressAccount(nullptr)
+    , m_subaddressAccount(new SubaddressAccount(m_walletImpl->subaddressAccount(), this))
     , m_subaddressAccountModel(nullptr)
     , m_refreshEnabled(false)
     , m_refreshing(false)
     , m_scheduler(this)
 {
-    m_history = new TransactionHistory(m_walletImpl->history(), this);
-    m_addressBook = new AddressBook(m_walletImpl->addressBook(), this);
-    m_subaddress = new Subaddress(m_walletImpl->subaddress(), this);
-    m_subaddressAccount = new SubaddressAccount(m_walletImpl->subaddressAccount(), this);
     m_walletListener = new WalletListenerImpl(this);
     m_walletImpl->setListener(m_walletListener);
     m_currentSubaddressAccount = getCacheAttribute(ATTRIBUTE_SUBADDRESS_ACCOUNT).toUInt();
@@ -1137,17 +1133,6 @@ Wallet::~Wallet()
     m_walletImpl->stop();
     m_scheduler.shutdownWaitForFinished();
 
-    delete m_addressBook;
-    m_addressBook = NULL;
-
-    delete m_history;
-    m_history = NULL;
-    delete m_addressBook;
-    m_addressBook = NULL;
-    delete m_subaddress;
-    m_subaddress = NULL;
-    delete m_subaddressAccount;
-    m_subaddressAccount = NULL;
     //Monero::WalletManagerFactory::getWalletManager()->closeWallet(m_walletImpl);
     if(status() == Status_Critical)
         qDebug("Not storing wallet cache");
