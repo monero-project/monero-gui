@@ -129,8 +129,8 @@ Rectangle {
                         Layout.minimumHeight: 30
                         Layout.fillWidth: true
                         color: items[index].active ? grid.borderColor : "transparent"
-                        height: children[0].height
-                        width: children[0].width
+                        implicitHeight: children[0].implicitHeight
+                        implicitWidth: children[0].implicitWidth
 
                         MoneroComponents.TextPlain {
                             anchors.verticalCenter: parent.verticalCenter
