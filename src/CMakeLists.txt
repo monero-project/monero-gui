@@ -162,6 +162,10 @@ target_link_libraries(monero-wallet-gui
     translations
 )
 
+if(DEBUG)
+    target_link_libraries(monero-wallet-gui Qt5::GuiPrivate)
+endif()
+
 if(DEVICE_TREZOR_READY)
     target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
 endif()
