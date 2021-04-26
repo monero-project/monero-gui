@@ -127,8 +127,6 @@ ApplicationWindow {
     property var current_address_label: "Primary"
     property int current_subaddress_table_index: 0
 
-    function altKeyReleased() { ctrlPressed = false; }
-
     function showPageRequest(page) {
         middlePanel.state = page
         leftPanel.selectItem(page)
