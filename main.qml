@@ -1070,12 +1070,6 @@ ApplicationWindow {
         informationPopup.open()
     }
 
-    // blocks UI if wallet can't be opened or no connection to the daemon
-    function enableUI(enable) {
-        middlePanel.enabled = enable;
-        leftPanel.enabled = enable;
-    }
-
     function showProcessingSplash(message) {
         console.log("Displaying processing splash")
         if (typeof message != 'undefined') {
