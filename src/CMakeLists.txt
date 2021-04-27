@@ -139,21 +139,11 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 target_link_libraries(monero-wallet-gui
-    wallet_merged
-    ${LMDB_LIBRARY}
     epee
+    wallet_api
     qrcodegen
-    ${UNBOUND_LIBRARY}
-    ${SODIUM_LIBRARY}
     easylogging
-    blockchain_db
-    randomx
-    hardforks
     ${Boost_LIBRARIES}
-    ${OPENSSL_LIBRARIES}
-    ${CMAKE_DL_LIBS}
-    ${LibUSB_LIBRARIES}
-    ${HIDAPI_LIBRARIES}
     ${QT5_LIBRARIES}
     ${EXTRA_LIBRARIES}
     ${ICU_LIBRARIES}
@@ -161,10 +151,6 @@ target_link_libraries(monero-wallet-gui
     qrdecoder
     translations
 )
-
-if(DEVICE_TREZOR_READY)
-    target_link_libraries(monero-wallet-gui ${TREZOR_DEP_LIBS})
-endif()
 
 if(X11_FOUND)
     target_link_libraries(monero-wallet-gui ${X11_LIBRARIES})
