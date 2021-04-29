@@ -133,7 +133,7 @@ Rectangle {
                         width: children[0].width
 
                         MoneroComponents.TextPlain {
-                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.centerIn: parent
                             font.family: grid.fontFamily
                             font.pixelSize: grid.fontSize
                             font.bold: grid.fontBold
