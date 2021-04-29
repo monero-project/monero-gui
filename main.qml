@@ -534,12 +534,6 @@ ApplicationWindow {
             // try to resolve common wallet cache errors automatically
             switch (wallet.errorString) {
                 case "basic_string::_M_replace_aux":
-                    walletManager.clearWalletCache(wallet.path);
-                    walletPassword = passwordDialog.password;
-                    appWindow.initialize();
-                    console.error("Repairing wallet cache with error: ", wallet.errorString);
-                    appWindow.showStatusMessage(qsTr("Repairing incompatible wallet cache. Resyncing wallet."),6);
-                    return;
                 case "std::bad_alloc":
                     walletManager.clearWalletCache(wallet.path);
                     walletPassword = passwordDialog.password;
