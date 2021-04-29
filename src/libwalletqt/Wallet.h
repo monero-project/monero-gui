@@ -75,7 +75,6 @@ class Wallet : public QObject, public PassprasePrompter
     Q_PROPERTY(bool synchronized READ synchronized)
     Q_PROPERTY(QString errorString READ errorString)
     Q_PROPERTY(TransactionHistory * history READ history)
-    Q_PROPERTY(QString paymentId READ paymentId WRITE setPaymentId)
     Q_PROPERTY(TransactionHistorySortFilterModel * historyModel READ historyModel NOTIFY historyModelChanged)
     Q_PROPERTY(QString path READ path)
     Q_PROPERTY(AddressBookModel * addressBookModel READ addressBookModel)
@@ -298,11 +297,6 @@ public:
     //! Parse URI
     Q_INVOKABLE bool parse_uri(const QString &uri, QString &address, QString &payment_id, uint64_t &amount, QString &tx_description, QString &recipient_name, QVector<QString> &unknown_parameters, QString &error);
 
-    //! saved payment id
-    QString paymentId() const;
-
-    void setPaymentId(const QString &paymentId);
-
     //! Namespace your cacheAttribute keys to avoid collisions
     Q_INVOKABLE bool setCacheAttribute(const QString &key, const QString &val);
     Q_INVOKABLE QString getCacheAttribute(const QString &key) const;
@@ -443,7 +437,6 @@ private:
     // Used for UI history view
     mutable TransactionHistoryModel * m_historyModel;
     mutable TransactionHistorySortFilterModel * m_historySortFilterModel;
-    QString m_paymentId;
     AddressBook * m_addressBook;
     mutable AddressBookModel * m_addressBookModel;
     mutable QElapsedTimer m_daemonBlockChainHeightTime;

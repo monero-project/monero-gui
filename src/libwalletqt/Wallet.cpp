@@ -746,16 +746,6 @@ QString Wallet::integratedAddress(const QString &paymentId) const
     return QString::fromStdString(m_walletImpl->integratedAddress(paymentId.toStdString()));
 }
 
-QString Wallet::paymentId() const
-{
-    return m_paymentId;
-}
-
-void Wallet::setPaymentId(const QString &paymentId)
-{
-    m_paymentId = paymentId;
-}
-
 QString Wallet::getCacheAttribute(const QString &key) const {
     return QString::fromStdString(m_walletImpl->getCacheAttribute(key.toStdString()));
 }
