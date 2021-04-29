@@ -339,7 +339,7 @@ Verify update binary using 'shasum'-compatible (SHA256 algo) output signed by tw
     // screen settings
     // Mobile is designed on 128dpi
     qreal ref_dpi = 128;
-    QSize screenAvailableSize = QGuiApplication::primaryScreen()->availableVirtualSize();
+    QSize screenAvailableSize = QGuiApplication::primaryScreen()->availableSize();
     QRect rect = QGuiApplication::primaryScreen()->geometry();
     qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
     qreal physicalDpi = QGuiApplication::primaryScreen()->physicalDotsPerInch();
