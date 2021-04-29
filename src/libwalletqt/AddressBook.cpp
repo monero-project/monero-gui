@@ -121,13 +121,6 @@ quint64 AddressBook::count() const
     return m_rows.size();
 }
 
-int AddressBook::lookupPaymentID(const QString &payment_id) const
-{
-    QReadLocker locker(&m_lock);
-
-    return m_addressBookImpl->lookupPaymentID(payment_id.toStdString());
-}
-
 QString AddressBook::getDescription(const QString &address) const
 {
     QReadLocker locker(&m_lock);

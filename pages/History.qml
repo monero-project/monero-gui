@@ -1703,16 +1703,6 @@ Rectangle {
             + translationManager.emptyString;
     }
 
-    function lookupPaymentID(paymentId) {
-        if (!addressBookModel)
-            return ""
-        var idx = addressBookModel.lookupPaymentID(paymentId)
-        if (idx < 0)
-            return ""
-        idx = addressBookModel.index(idx, 0)
-        return addressBookModel.data(idx, AddressBookModel.AddressBookDescriptionRole)
-    }
-
     FileDialog {
         id: writeCSVFileDialog
         title: qsTr("Please choose a folder") + translationManager.emptyString
