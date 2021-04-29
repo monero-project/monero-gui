@@ -932,7 +932,7 @@ ApplicationWindow {
     // called after user confirms transaction
     function handleTransactionConfirmed(fileName) {
         // View only wallet - we save the tx
-        if(viewOnly && saveTxDialog.fileUrl){
+        if(viewOnly){
             // No file specified - abort
             if(!saveTxDialog.fileUrl) {
                 currentWallet.disposeTransaction(transaction)
