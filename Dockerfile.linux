@@ -8,10 +8,12 @@ ENV CPPFLAGS="-fPIC"
 ENV CXXFLAGS="-fPIC"
 ENV SOURCE_DATE_EPOCH=1397818193
 
-RUN apt update
+RUN apt update && \
+    apt install -y automake autopoint bison gettext git gperf libgl1-mesa-dev libglib2.0-dev \
+    libpng12-dev libpthread-stubs0-dev libsodium-dev libtool-bin libudev-dev libusb-1.0-0-dev mesa-common-dev \
+    pkg-config python wget xutils-dev
 
-RUN apt install -y automake git pkg-config python xutils-dev && \
-    git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
+RUN git clone -b xorgproto-2020.1 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xorgproto && \
     cd xorgproto && \
     git reset --hard c62e8203402cafafa5ba0357b6d1c019156c9f36 && \
     ./autogen.sh && \
@@ -27,8 +29,7 @@ RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/proto/xcbpro
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y libtool-bin && \
-    git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxau && \
+RUN git clone -b libXau-1.0.9 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxau && \
     cd libxau && \
     git reset --hard d9443b2c57b512cfb250b35707378654d86c7dea && \
     ./autogen.sh --enable-shared --disable-static && \
@@ -36,8 +37,7 @@ RUN apt install -y libtool-bin && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y libpthread-stubs0-dev && \
-    git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
+RUN git clone -b 1.12 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb && \
     cd libxcb && \
     git reset --hard d34785a34f28fa6a00f8ce00d87e3132ff0f6467 && \
     ./autogen.sh --enable-shared --disable-static && \
@@ -105,8 +105,7 @@ RUN git clone -b 0.4.1 --depth 1 https://gitlab.freedesktop.org/xorg/lib/libxcb-
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y bison && \
-    git clone -b xkbcommon-0.5.0 --depth 1 https://github.com/xkbcommon/libxkbcommon && \
+RUN git clone -b xkbcommon-0.5.0 --depth 1 https://github.com/xkbcommon/libxkbcommon && \
     cd libxkbcommon && \
     git reset --hard c43c3c866eb9d52cd8f61e75cbef1c30d07f3a28 && \
     ./autogen.sh --prefix=/usr --enable-shared --disable-static --enable-x11 --disable-docs && \
@@ -140,8 +139,7 @@ RUN git clone -b R_2_2_9 --depth 1 https://github.com/libexpat/libexpat && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y autopoint gettext gperf libpng12-dev && \
-    git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fontconfig && \
+RUN git clone -b 2.13.92 --depth 1 https://gitlab.freedesktop.org/fontconfig/fontconfig && \
     cd fontconfig && \
     git reset --hard b1df1101a643ae16cdfa1d83b939de2497b1bf27 && \
     ./autogen.sh --disable-shared --enable-static --sysconfdir=/etc --localstatedir=/var && \
@@ -157,8 +155,7 @@ RUN git clone -b release-64-2 --depth 1 https://github.com/unicode-org/icu && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y wget && \
-    wget https://downloads.sourceforge.net/project/boost/boost/1.73.0/boost_1_73_0.tar.gz && \
+RUN wget https://downloads.sourceforge.net/project/boost/boost/1.73.0/boost_1_73_0.tar.gz && \
     echo "9995e192e68528793755692917f9eb6422f3052a53c5e13ba278a228af6c7acf boost_1_73_0.tar.gz" | sha256sum -c && \
     tar -xzf boost_1_73_0.tar.gz && \
     rm boost_1_73_0.tar.gz && \
@@ -177,8 +174,7 @@ RUN wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y libgl1-mesa-dev libglib2.0-dev mesa-common-dev && \
-    rm /usr/lib/x86_64-linux-gnu/libX11.a && \
+RUN rm /usr/lib/x86_64-linux-gnu/libX11.a && \
     rm /usr/lib/x86_64-linux-gnu/libXext.a && \
     rm /usr/lib/x86_64-linux-gnu/libX11-xcb.a && \
     git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
@@ -218,8 +214,7 @@ RUN apt install -y libgl1-mesa-dev libglib2.0-dev mesa-common-dev && \
     cd ../../../.. && \
     rm -rf $(pwd)
 
-RUN apt install -y libudev-dev && \
-    git clone -b v1.0.23 --depth 1 https://github.com/libusb/libusb && \
+RUN git clone -b v1.0.23 --depth 1 https://github.com/libusb/libusb && \
     cd libusb && \
     git reset --hard e782eeb2514266f6738e242cdcb18e3ae1ed06fa && \
     ./autogen.sh --disable-shared --enable-static && \
@@ -236,8 +231,7 @@ RUN git clone -b hidapi-0.9.0 --depth 1 https://github.com/libusb/hidapi && \
     make -j$THREADS install && \
     rm -rf $(pwd)
 
-RUN apt install -y libsodium-dev && \
-    git clone -b v4.3.2 --depth 1 https://github.com/zeromq/libzmq && \
+RUN git clone -b v4.3.2 --depth 1 https://github.com/zeromq/libzmq && \
     cd libzmq && \
     git reset --hard a84ffa12b2eb3569ced199660bac5ad128bff1f0 && \
     ./autogen.sh && \
@@ -280,5 +274,3 @@ RUN git clone -b v3.18.4 --depth 1 https://github.com/Kitware/CMake && \
     make -j$THREADS && \
     make -j$THREADS install && \
     rm -rf $(pwd)
-
-RUN apt install -y libusb-1.0-0-dev
