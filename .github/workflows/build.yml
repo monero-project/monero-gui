@@ -70,7 +70,7 @@ jobs:
       run: pip3 install requests semantic_version lxml py7zr
     - name: download qt
       run: |
-          curl -O https://raw.githubusercontent.com/engnr/qt-downloader/master/qt-downloader
+          curl -O https://raw.githubusercontent.com/engnr/qt-downloader/19f1ef960c8cd74dcd6d2b21bca88c4e55ee9b8c/qt-downloader
           chmod +x qt-downloader
           ./qt-downloader macos desktop 5.15.2 clang_64
       working-directory: ../
