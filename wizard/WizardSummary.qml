@@ -72,7 +72,7 @@ ColumnLayout {
     }
 
     WizardSummaryItem {
-        visible: persistentSettings.bootstrapNodeAddress !== "" && appWindow.walletMode == 2
+        visible: !persistentSettings.useRemoteNode && persistentSettings.bootstrapNodeAddress !== "" && appWindow.walletMode == 2
         Layout.fillWidth: true
         header: qsTr("Bootstrap address") + translationManager.emptyString
         value: persistentSettings.bootstrapNodeAddress
