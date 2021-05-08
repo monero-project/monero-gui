@@ -291,7 +291,8 @@ Rectangle {
                         }
 
                         MoneroComponents.InlineButton {
-                            fontFamily: FontAwesome.fontFamily
+                            fontFamily: FontAwesome.fontFamilySolid
+                            fontStyleName: "Solid"
                             text: FontAwesome.qrcode
                             visible: appWindow.qrScannerEnabled
                             onClicked: {
