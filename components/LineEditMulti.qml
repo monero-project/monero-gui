@@ -67,7 +67,7 @@ ColumnLayout {
         }
     }
 
-    property bool error: false
+    property alias error: input.error
 
     property string labelFontColor: MoneroComponents.Style.defaultFontColor
     property bool labelFontBold: false
@@ -176,7 +176,6 @@ ColumnLayout {
         fontColor: item.fontColor
         mouseSelection: item.mouseSelection
         onEditingFinished: item.editingFinished()
-        error: item.error
 
         MoneroComponents.TextPlain {
             id: placeholderLabel
