@@ -208,24 +208,13 @@ The following instructions will fetch Qt from your distribution's repositories i
 
   - For Ubuntu 17.10+
 
-    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
+    `sudo apt install qtbase5-dev qt5-default qtdeclarative5-dev qtmultimedia5-dev qml-module-qtmultimedia qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-dialogs qml-module-qtquick-xmllistmodel qml-module-qt-labs-settings qml-module-qt-labs-platform qml-module-qt-labs-folderlistmodel qttools5-dev-tools qml-module-qtquick-templates2 libqt5svg5-dev`
 
   - For Gentoo
 
-    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtquickcontrols:5 dev-qt/qtquickcontrols2:5 dev-qt/qtgraphicaleffects:5`
+    The *qml* USE flag must be enabled.
 
-  - Optional : To build the flag `WITH_SCANNER`
-
-    - For Ubuntu
-
-      `sudo apt install qtmultimedia5-dev qml-module-qtmultimedia`
-
-    - For Gentoo
-
-      The *qml* USE flag must be enabled.
-
-      `emerge dev-qt/qtmultimedia:5`
-
+    `sudo emerge dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtmultimedia:5 dev-qt/qtquickcontrols:5 dev-qt/qtquickcontrols2:5 dev-qt/qtgraphicaleffects:5`
 
 3. Clone repository
 
