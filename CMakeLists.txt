@@ -58,6 +58,7 @@ if(NOT MANUAL_SUBMODULES)
 endif()
 
 add_subdirectory(monero)
+add_subdirectory(external)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -560,6 +561,5 @@ if (HIDAPI_FOUND OR LibUSB_COMPILE_TEST_PASSED)
   endif()
 endif()
 
-add_subdirectory(external)
 add_subdirectory(translations)
 add_subdirectory(src)
