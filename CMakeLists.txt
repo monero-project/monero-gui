@@ -109,15 +109,6 @@ monero_gui_add_library(gui_version SOURCES version.js DEPENDS genversiongui)
 
 message(STATUS "${CMAKE_MODULE_PATH}")
 
-# OpenSSL
-if(APPLE AND NOT OPENSSL_ROOT_DIR)
-  execute_process(COMMAND brew --prefix openssl OUTPUT_VARIABLE OPENSSL_ROOT_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
-find_package(OpenSSL REQUIRED)
-message(STATUS "OpenSSL: Version ${OPENSSL_VERSION}")
-message(STATUS "OpenSSL: include dir at ${OPENSSL_INCLUDE_DIR}")
-message(STATUS "OpenSSL: libraries at ${OPENSSL_LIBRARIES} ${OPENSSL_SSL_LIBRARIES}")
-
 if(WITH_SCANNER)
     add_definitions(-DWITH_SCANNER)
 endif()
