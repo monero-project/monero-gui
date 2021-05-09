@@ -71,8 +71,6 @@ endif()
 
 if(STATIC)
   message(STATUS "Initiating static build")
-  set(Boost_USE_STATIC_LIBS ON)
-  set(Boost_USE_STATIC_RUNTIME ON)
   set(CMAKE_FIND_LIBRARY_SUFFIXES ".a" ${CMAKE_FIND_LIBRARY_SUFFIXES})
   add_definitions(-DMONERO_GUI_STATIC)
 endif()
@@ -129,27 +127,6 @@ endif()
 find_library(SODIUM_LIBRARY sodium)
 message(STATUS "libsodium: libraries at ${SODIUM_LIBRARY}")
 
-# Boost
-if(DEBUG)
-    set(Boost_DEBUG ON)
-endif()
-if(APPLE AND NOT BOOST_ROOT)
-  execute_process(COMMAND brew --prefix boost OUTPUT_VARIABLE BOOST_ROOT OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
-if(MINGW)
-  set(Boost_THREADAPI win32)
-endif()
-find_package(Boost 1.58 REQUIRED COMPONENTS
-		system
-		filesystem
-		thread
-		date_time
-		chrono
-		regex
-		serialization
-		program_options
-		locale)
-
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     set(CMAKE_SKIP_RPATH ON)
     set(CMAKE_FIND_LIBRARY_SUFFIXES_PREV ${CMAKE_FIND_LIBRARY_SUFFIXES})
@@ -165,19 +142,6 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
         find_library(XCB_LIBRARY xcb)
         message(STATUS "Found xcb library: ${XCB_LIBRARY}")
     endif()
-endif()
-
-if(MINGW)
-    string(REGEX MATCH "^[^/]:/[^/]*" msys2_install_path "${CMAKE_C_COMPILER}")
-    message(STATUS "MSYS location: ${msys2_install_path}")
-    set(CMAKE_INCLUDE_PATH "${msys2_install_path}/mingw${ARCH_WIDTH}/include")
-    # This is necessary because otherwise CMake will make Boost libraries -lfoo
-    # rather than a full path. Unfortunately, this makes the shared libraries get
-    # linked due to a bug in CMake which misses putting -static flags around the
-    # -lfoo arguments.
-    set(DEFLIB ${msys2_install_path}/mingw${ARCH_WIDTH}/lib)
-    list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
-    list(REMOVE_ITEM CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES ${DEFLIB})
 endif()
 
 set(QT5_LIBRARIES
@@ -392,10 +356,6 @@ if(ANDROID)
   endforeach()
 endif()
 
-message(STATUS "Using Boost include dir at ${Boost_INCLUDE_DIRS}")
-message(STATUS "Using Boost libraries at ${Boost_LIBRARIES}")
-
-include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 if(MINGW)
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wa,-mbig-obj")
   set(EXTRA_LIBRARIES mswsock;ws2_32;iphlpapi;crypt32;bcrypt)
