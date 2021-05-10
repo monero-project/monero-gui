@@ -140,6 +140,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 
 target_link_libraries(monero-wallet-gui
     epee
+    common
+    net
     wallet_api
     qrcodegen
     easylogging
