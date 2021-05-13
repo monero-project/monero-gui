@@ -349,7 +349,7 @@ Rectangle {
                                 KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
                                 KeyNavigation.tab: parent.children[2]
                                 Layout.alignment: Qt.AlignVCenter
-                                Layout.topMargin: index > 0 ? recipientLayout.rowSpacing / 2 : 0
+                                Layout.topMargin: recipientLayout.rowSpacing / 2
                                 Layout.bottomMargin: recipientLayout.rowSpacing / 2
                                 Layout.fillWidth: true
                                 addressValidation: true
