@@ -330,7 +330,7 @@ if(STATIC)
   if(WITH_SCANNER)
     list(APPEND QT5_EXTRA_LIBRARIES_LIST
       declarative_multimedia
-      Qt5MultimediaQuick_p
+      Qt5MultimediaQuick
     )
   endif()
 
