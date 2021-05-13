@@ -155,7 +155,7 @@ function getApproximateBlockchainHeight(_date, _nettype){
 
     if(_nettype == "Testnet"){
         // testnet got some huge rollbacks, so the estimation is way off
-        var approximateTestnetRolledBackBlocks = 303967;
+        var approximateTestnetRolledBackBlocks = 342100;
         if(approxBlockchainHeight > approximateTestnetRolledBackBlocks)
             approxBlockchainHeight -= approximateTestnetRolledBackBlocks
     }
