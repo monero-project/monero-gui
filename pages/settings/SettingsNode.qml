@@ -337,8 +337,8 @@ Rectangle{
                         Layout.minimumWidth: 100
                         Layout.bottomMargin: 20
 
-                        daemonAddrLabelText: qsTr("Bootstrap Address") + translationManager.emptyString
-                        daemonPortLabelText: qsTr("Bootstrap Port") + translationManager.emptyString
+                        daemonAddrLabelText: qsTr("Bootstrap address") + translationManager.emptyString
+                        daemonPortLabelText: qsTr("Bootstrap port") + translationManager.emptyString
                         initialAddress: persistentSettings.bootstrapNodeAddress
                         onEditingFinished: {
                             if (daemonAddrText == "auto") {
