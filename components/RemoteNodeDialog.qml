@@ -122,7 +122,7 @@ MoneroComponents.Dialog {
     MoneroComponents.CheckBox {
         id: setTrustedDaemonCheckBox
         activeFocusOnTab: true
-        text: qsTr("Mark as Trusted Daemon") + translationManager.emptyString
+        text: qsTr("Mark as trusted daemon") + translationManager.emptyString
     }
 
     RowLayout {
