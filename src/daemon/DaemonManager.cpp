@@ -27,8 +27,10 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "DaemonManager.h"
+#include "common/util.h"
 #include <QElapsedTimer>
 #include <QFile>
+#include <QMutexLocker>
 #include <QThread>
 #include <QFileInfo>
 #include <QDir>
@@ -46,24 +48,7 @@ namespace {
     static const int DAEMON_START_TIMEOUT_SECONDS = 120;
 }
 
-DaemonManager * DaemonManager::m_instance = nullptr;
-QStringList DaemonManager::m_clArgs;
-
-DaemonManager *DaemonManager::instance(const QStringList *args/* = nullptr*/)
-{
-    if (!m_instance) {
-        m_instance = new DaemonManager;
-        // store command line arguments for later use
-        if (args != nullptr)
-        {
-            m_clArgs = *args;
-        }
-    }
-
-    return m_instance;
-}
-
-bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/)
+bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const QString &dataDir, const QString &bootstrapNodeAddress, bool noSync /* = false*/, bool pruneBlockchain /* = false*/)
 {
     if (!QFileInfo(m_monerod).isFile())
     {
@@ -84,12 +69,6 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     else if (nettype == NetworkType::STAGENET)
         arguments << "--stagenet";
 
-    foreach (const QString &str, m_clArgs) {
-          qDebug() << QString(" [%1] ").arg(str);
-          if (!str.isEmpty())
-            arguments << str;
-    }
-
     // Custom startup flags for daemon
     foreach (const QString &str, flags.split(" ")) {
           qDebug() << QString(" [%1] ").arg(str);
@@ -107,14 +86,21 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
         arguments << "--bootstrap-daemon-address" << bootstrapNodeAddress;
     }
 
+    if (pruneBlockchain) {
+        if (!checkLmdbExists(dataDir)) { // check that DB has not already been created
+            arguments << "--prune-blockchain";
+        }
+    }
+
     if (noSync) {
         arguments << "--no-sync";
     }
 
     arguments << "--check-updates" << "disabled";
+    arguments << "--non-interactive";
 
-    // --max-concurrency based on threads available. max: 6
-    int32_t concurrency = qBound(1, QThread::idealThreadCount() / 2, 6);
+    // --max-concurrency based on threads available.
+    int32_t concurrency = qMax(1, QThread::idealThreadCount() / 2);
 
     if(!flags.contains("--max-concurrency", Qt::CaseSensitive)){
         arguments << "--max-concurrency" << QString::number(concurrency);
@@ -123,18 +109,19 @@ bool DaemonManager::start(const QString &flags, NetworkType::Type nettype, const
     qDebug() << "starting monerod " + m_monerod;
     qDebug() << "With command line arguments " << arguments;
 
-    m_daemon = new QProcess();
-    initialized = true;
+    QMutexLocker locker(&m_daemonMutex);
+
+    m_daemon.reset(new QProcess());
 
     // Connect output slots
-    connect (m_daemon, SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
-    connect (m_daemon, SIGNAL(readyReadStandardError()), this, SLOT(printError()));
+    connect(m_daemon.get(), SIGNAL(readyReadStandardOutput()), this, SLOT(printOutput()));
+    connect(m_daemon.get(), SIGNAL(readyReadStandardError()), this, SLOT(printError()));
 
     // Start monerod
     bool started = m_daemon->startDetached(m_monerod, arguments);
 
     // add state changed listener
-    connect(m_daemon,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(stateChanged(QProcess::ProcessState)));
+    connect(m_daemon.get(), SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(stateChanged(QProcess::ProcessState)));
 
     if (!started) {
         qDebug() << "Daemon start error: " + m_daemon->errorString();
@@ -200,9 +187,9 @@ bool DaemonManager::stopWatcher(NetworkType::Type nettype) const
             if(counter >= 5) {
                 qDebug() << "Killing it! ";
 #ifdef Q_OS_WIN
-                QProcess::execute("taskkill /F /IM monerod.exe");
+                QProcess::execute("taskkill",  {"/F", "/IM", "monerod.exe"});
 #else
-                QProcess::execute("pkill monerod");
+                QProcess::execute("pkill", {"monerod"});
 #endif
             }
 
@@ -223,7 +210,10 @@ void DaemonManager::stateChanged(QProcess::ProcessState state)
 
 void DaemonManager::printOutput()
 {
-    QByteArray byteArray = m_daemon->readAllStandardOutput();
+    QByteArray byteArray = [this]() {
+        QMutexLocker locker(&m_daemonMutex);
+        return m_daemon->readAllStandardOutput();
+    }();
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
@@ -234,7 +224,10 @@ void DaemonManager::printOutput()
 
 void DaemonManager::printError()
 {
-    QByteArray byteArray = m_daemon->readAllStandardError();
+    QByteArray byteArray = [this]() {
+        QMutexLocker locker(&m_daemonMutex);
+        return m_daemon->readAllStandardError();
+    }();
     QStringList strLines = QString(byteArray).split("\n");
 
     foreach (QString line, strLines) {
@@ -337,6 +330,13 @@ QVariantMap DaemonManager::validateDataDir(const QString &dataDir) const
     return result;
 }
 
+bool DaemonManager::checkLmdbExists(QString datadir) {
+    if (datadir.isEmpty() || datadir.isNull()) {
+        datadir = QString::fromStdString(tools::get_default_data_dir());
+    }
+    return validateDataDir(datadir).value("lmdbExists").value<bool>();
+}
+
 DaemonManager::DaemonManager(QObject *parent)
     : QObject(parent)
     , m_scheduler(this)
@@ -351,7 +351,6 @@ DaemonManager::DaemonManager(QObject *parent)
 
     if (m_monerod.length() == 0) {
         qCritical() << "no daemon binary defined for current platform";
-        m_has_daemon = false;
     }
 }
 

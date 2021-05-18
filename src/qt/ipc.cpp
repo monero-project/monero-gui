@@ -76,7 +76,7 @@ bool IPC::saveCommand(QString cmdString){
 
     QLocalSocket ls;
     QByteArray buffer;
-    buffer = buffer.append(cmdString);
+    buffer = buffer.append(cmdString.toUtf8());
     QString socketFilePath = this->socketFile().filePath();
 
     ls.connectToServer(socketFilePath, QIODevice::WriteOnly);

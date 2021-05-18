@@ -66,8 +66,8 @@ Rectangle {
             WizardNav {
                 Layout.topMargin: 24
                 btnNextText: "Open wallet"
-                progressSteps: 4
-                progress: 4
+                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                progress: appWindow.walletMode <= 1 ? 2 : 3
 
                 onPrevClicked: {
                     if (appWindow.walletMode <= 1){
@@ -78,8 +78,9 @@ Rectangle {
                 }
                 onNextClicked: {
                     wizardController.recoveryWallet();
-                    wizardController.writeWallet();
-                    wizardController.useMoneroClicked();
+                    wizardController.writeWallet(function() {
+                        wizardController.useMoneroClicked();
+                    });
                 }
             }
         }

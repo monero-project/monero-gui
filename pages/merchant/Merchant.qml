@@ -25,6 +25,7 @@ Item {
     anchors.margins: 0
 
     property int    minWidth: 900
+    property int    minHeight: 600
     property int    qrCodeSize: 220
     property bool   enableTracking: false
     property string trackingError: ""  // setting this will show a message @ tracking table
@@ -33,6 +34,9 @@ Item {
     property var    hiddenAmounts: []
 
     function onPageCompleted() {
+        if (appWindow.currentWallet) {
+            appWindow.current_address = appWindow.currentWallet.address(appWindow.currentWallet.currentSubaddressAccount, appWindow.current_subaddress_table_index);
+        }
         // prepare tracking
         trackingCheckbox.checked = root.enableTracking
         root.update();
@@ -67,7 +71,7 @@ Item {
 
     ColumnLayout {
         id: mainLayout
-        visible: parent.width >= root.minWidth
+        visible: parent.width >= root.minWidth && appWindow.height >= root.minHeight
         spacing: 0
 
         // emulates max-width + center for container
@@ -553,7 +557,7 @@ Item {
 
     Rectangle {
         // Shows when the window is too small
-        visible: parent.width < root.minWidth
+        visible: parent.width < root.minWidth || appWindow.height < root.minHeight
         anchors.top: parent.top
         anchors.topMargin: 100;
         anchors.horizontalCenter: parent.horizontalCenter
@@ -569,6 +573,13 @@ Item {
             color: MoneroComponents.Style.moneroGrey
             text: qsTr("The merchant page requires a larger window") + translationManager.emptyString
             themeTransition: false
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: appWindow.showPageRequest("Settings")
         }
     }
 
@@ -589,9 +600,7 @@ Item {
 
         var model = appWindow.currentWallet.historyModel
         var count = model.rowCount()
-        var totalAmount = 0
         var nTransactions = 0
-        var blockchainHeight = null
         var txs = []
 
         // Currently selected subaddress as per Receive page
@@ -607,8 +616,6 @@ Item {
             var subaddrIndex = model.data(idx, TransactionHistoryModel.TransactionSubaddrIndexRole);
 
             if (!isout && subaddrAccount == appWindow.currentWallet.currentSubaddressAccount && subaddrIndex == current_subaddress_table_index) {
-                var amount = model.data(idx, TransactionHistoryModel.TransactionAtomicAmountRole);
-                totalAmount = walletManager.addi(totalAmount, amount)
                 nTransactions += 1
 
                 var txid = model.data(idx, TransactionHistoryModel.TransactionHashRole);
@@ -616,21 +623,17 @@ Item {
 
                 var in_txpool = false;
                 var confirmations = 0;
-                var displayAmount = 0;
+                var displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
 
-                if (blockHeight == 0) {
+                if (blockHeight === undefined) {
                     in_txpool = true;
                 } else {
-                    if (blockchainHeight == null)
-                        blockchainHeight = walletManager.blockchainHeight()
-                    confirmations = blockchainHeight - blockHeight - 1
-                    displayAmount = model.data(idx, TransactionHistoryModel.TransactionDisplayAmountRole);
+                    confirmations = model.data(idx, TransactionHistoryModel.TransactionConfirmationsRole);
                 }
 
                 txs.push({
                     "amount": displayAmount,
                     "confirmations": confirmations,
-                    "blockheight": blockHeight,
                     "in_txpool": in_txpool,
                     "txid": txid,
                     "time_epoch": timeEpoch,
@@ -650,9 +653,7 @@ Item {
         txs.forEach(function(tx){
             trackingModel.append({
                 "amount": tx.amount,
-                "blockheight": tx.blockheight,
                 "confirmations": tx.confirmations,
-                "blockheight": tx.blockHeight,
                 "in_txpool": tx.in_txpool,
                 "txid": tx.txid,
                 "time_epoch": tx.time_epoch,

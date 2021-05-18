@@ -220,3 +220,23 @@ quint64 Downloader::total() const
 {
     return m_httpClient->contentLength();
 }
+
+QString Downloader::proxyAddress() const
+{
+    QMutexLocker locker(&m_proxyMutex);
+    return m_proxyAddress;
+}
+
+void Downloader::setProxyAddress(QString address)
+{
+    m_scheduler.run([this, address] {
+        if (!m_httpClient->set_proxy(address.toStdString()))
+        {
+            qCritical() << "Failed to set proxy address" << address;
+        }
+
+        QMutexLocker locker(&m_proxyMutex);
+        m_proxyAddress = address;
+        emit proxyAddressChanged();
+    });
+}

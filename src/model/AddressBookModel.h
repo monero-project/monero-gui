@@ -52,7 +52,6 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     Q_INVOKABLE bool deleteRow(int row);
-    Q_INVOKABLE int lookupPaymentID(const QString &payment_id) const;
     virtual QHash<int, QByteArray> roleNames() const  override;
 
 public slots:

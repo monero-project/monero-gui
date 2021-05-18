@@ -26,6 +26,8 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <unordered_set>
+
 #include <QtCore>
 #include <QtGui>
 #include <QtMac>
@@ -36,6 +38,16 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include <Availability.h>
+
+#include "ScopeGuard.h"
+
+void MacOSHelper::disableWindowTabbing()
+{
+#ifdef __MAC_10_12
+    if ([NSWindow respondsToSelector:@selector(allowsAutomaticWindowTabbing)])
+        [NSWindow setAllowsAutomaticWindowTabbing: NO];
+#endif
+}
 
 bool MacOSHelper::isCapsLock()
 {
@@ -54,4 +66,54 @@ bool MacOSHelper::openFolderAndSelectItem(const QUrl &path)
     NSArray *fileURLs = [NSArray arrayWithObjects:nspath, nil];
     [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
     return true;
+}
+
+QPixmap MacOSHelper::screenshot()
+{
+    std::unordered_set<uintptr_t> appWindowIds;
+    for (NSWindow *window in [NSApp windows])
+    {
+        appWindowIds.insert((uintptr_t)[window windowNumber]);
+    }
+
+    CFArrayRef onScreenWindows = CGWindowListCreate(kCGWindowListOptionOnScreenOnly, kCGNullWindowID);
+    const auto onScreenWindowsClenaup = sg::make_scope_guard([&onScreenWindows]() {
+        CFRelease(onScreenWindows);
+    });
+
+    CFMutableArrayRef foreignWindows = CFArrayCreateMutable(NULL, CFArrayGetCount(onScreenWindows), NULL);
+    const auto foreignWindowsClenaup = sg::make_scope_guard([&foreignWindows]() {
+        CFRelease(foreignWindows);
+    });
+
+    for (CFIndex index = 0, count = CFArrayGetCount(onScreenWindows); index < count; ++index)
+    {
+        const uintptr_t windowId = reinterpret_cast<const uintptr_t>(CFArrayGetValueAtIndex(onScreenWindows, index));
+        if (appWindowIds.find(windowId) == appWindowIds.end())
+        {
+            CFArrayAppendValue(foreignWindows, reinterpret_cast<const void *>(windowId));
+        }
+    }
+
+    CGImageRef image = CGWindowListCreateImageFromArray(CGRectInfinite, foreignWindows, kCGWindowListOptionAll);
+    const auto imageClenaup = sg::make_scope_guard([&image]() {
+        CFRelease(image);
+    });
+
+    return QtMac::fromCGImageRef(image);
+}
+
+QString MacOSHelper::bundlePath()
+{
+    NSBundle *main = [NSBundle mainBundle];
+    if (!main)
+    {
+        return {};
+    }
+    NSString *bundlePathString = [main bundlePath];
+    if (!bundlePathString)
+    {
+        return {};
+    }
+    return QString::fromCFString(reinterpret_cast<const CFStringRef>(bundlePathString));
 }

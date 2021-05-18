@@ -38,7 +38,7 @@ QImage QRCodeImageProvider::genQrImage(const QString &id, QSize *size)
   unsigned int black = 0;
   unsigned int white = 1;
   unsigned int borderSize = 4;
-  unsigned int imageSize = qrcode.size + (2 * borderSize);
+  unsigned int imageSize = qrcode.getSize() + (2 * borderSize);
   QImage img = QImage(imageSize, imageSize, QImage::Format_Mono);
 
   for (unsigned int y = 0; y < imageSize; ++y)

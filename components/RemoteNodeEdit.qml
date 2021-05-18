@@ -43,6 +43,9 @@ GridLayout {
     property alias daemonAddrLabelText: daemonAddr.labelText
     property alias daemonPortLabelText: daemonPort.labelText
 
+    property string initialAddress: ""
+    property var initialHostPort: initialAddress.match(/^(.*?)(?:\:?(\d*))$/)
+
     // TODO: LEGACY; remove these placeHolder variables when
     // the wizards get redesigned to the black-theme
     property string placeholderFontFamily: MoneroComponents.Style.fontRegular.name
@@ -53,26 +56,29 @@ GridLayout {
     property int labelFontSize: 14
 
     property string lineEditBackgroundColor: "transparent"
-    property string lineEditBorderColor: MoneroComponents.Style.inputBorderColorInActive
     property string lineEditFontColor: MoneroComponents.Style.defaultFontColor
     property bool lineEditFontBold: false
     property int lineEditFontSize: 15
 
+    // Author: David M. Syzdek https://github.com/syzdek https://gist.github.com/syzdek/6086792
+    readonly property var ipv6Regex: /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe08:(:[0-9a-fA-F]{1,4}){2,2}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/
+
     signal editingFinished()
     signal textChanged()
+
+    onActiveFocusChanged: activeFocus && daemonAddr.forceActiveFocus()
 
     function isValid() {
         return daemonAddr.text.trim().length > 0 && daemonPort.acceptableInput
     }
 
     function getAddress() {
+        if (!isValid()) {
+            return "";
+        }
+
         var addr = daemonAddr.text.trim();
         var port = daemonPort.text.trim();
-
-        // validation
-        if(addr === "" || addr.length < 2) return "";
-        if(!Utils.isNumeric(port)) return "";
-
         return addr + ":" + port;
     }
 
@@ -86,13 +92,16 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
         fontSize: lineEditFontSize
-        onEditingFinished: root.editingFinished()
+        onEditingFinished: {
+            text = text.replace(ipv6Regex, "[$1]");
+            root.editingFinished();
+        }
         onTextChanged: root.textChanged()
+        text: initialHostPort[1]
     }
 
     LineEdit {
@@ -105,7 +114,6 @@ GridLayout {
         placeholderColor: root.placeholderColor
         placeholderOpacity: root.placeholderOpacity
         labelFontSize: root.labelFontSize
-        borderColor: lineEditBorderColor
         backgroundColor: lineEditBackgroundColor
         fontColor: lineEditFontColor
         fontBold: lineEditFontBold
@@ -114,5 +122,6 @@ GridLayout {
 
         onEditingFinished: root.editingFinished()
         onTextChanged: root.textChanged()
+        text: initialHostPort[2]
     }
 }

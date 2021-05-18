@@ -60,6 +60,7 @@ struct packet_tag
     signature = 2,
     public_key = 6,
     user_id = 13,
+    public_subkey = 14,
   };
 
   const type packet_type;

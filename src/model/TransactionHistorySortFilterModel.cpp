@@ -30,6 +30,7 @@
 #include "TransactionHistoryModel.h"
 
 #include <QDebug>
+#include <QtGlobal>
 
 namespace {
     /**
@@ -204,9 +205,14 @@ bool TransactionHistorySortFilterModel::filterAcceptsRow(int source_row, const Q
                 break;
             case TransactionHistoryModel::TransactionTimeStampRole:
             {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                QDateTime from = dateFromFilter().startOfDay();
+                QDateTime to = dateToFilter().endOfDay();
+#else
                 QDateTime from = QDateTime(dateFromFilter());
                 QDateTime to   = QDateTime(dateToFilter());
                 to = to.addDays(1); // including upperbound
+#endif
                 QDateTime timestamp = data.toDateTime();
                 bool matchFrom = from.isNull() || timestamp.isNull() || timestamp >= from;
                 bool matchTo = to.isNull() || timestamp.isNull() || timestamp <= to;

@@ -27,9 +27,16 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "oshelper.h"
+
+#include <unordered_set>
+
+#include <QCoreApplication>
+#include <QGuiApplication>
 #include <QFileDialog>
+#include <QScreen>
 #include <QStandardPaths>
 #include <QTemporaryFile>
+#include <QWindow>
 #include <QDir>
 #include <QDebug>
 #include <QDesktopServices>
@@ -40,17 +47,53 @@
 #include "qt/macoshelper.h"
 #endif
 #ifdef Q_OS_WIN
-#include <Shlobj.h>
+#include <shlobj.h>
 #include <windows.h>
 #endif
 #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
 #include <X11/XKBlib.h>
+#undef Bool
 #undef KeyPress
 #undef KeyRelease
 #undef FocusIn
 #undef FocusOut
 // #undef those Xlib #defines that conflict with QEvent::Type enum
+#include "qt/utils.h"
 #endif
+
+#include "QR-Code-scanner/Decoder.h"
+#include "qt/ScopeGuard.h"
+
+namespace
+{
+
+QPixmap screenshot()
+{
+#ifdef Q_OS_MAC
+    return MacOSHelper::screenshot();
+#else
+    std::unordered_set<QWindow *> hidden;
+    const QWindowList windows = QGuiApplication::allWindows();
+    for (QWindow *window : windows)
+    {
+        if (window->isVisible())
+        {
+            hidden.emplace(window);
+            window->hide();
+        }
+    }
+    const auto unhide = sg::make_scope_guard([&hidden]() {
+        for (QWindow *window : hidden)
+        {
+            window->show();
+        }
+    });
+
+    return QGuiApplication::primaryScreen()->grabWindow(0);
+#endif
+}
+
+} // namespace
 
 #if defined(Q_OS_WIN)
 bool openFolderAndSelectItem(const QString &filePath)
@@ -84,29 +127,57 @@ OSHelper::OSHelper(QObject *parent) : QObject(parent)
 
 }
 
+void OSHelper::createDesktopEntry() const
+{
+#if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
+    registerXdgMime();
+#endif
+}
+
 QString OSHelper::downloadLocation() const
 {
     return QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
 }
 
+QList<QString> OSHelper::grabQrCodesFromScreen() const
+{
+    QList<QString> codes;
+
+    try
+    {
+        const QImage image = screenshot().toImage();
+        const std::vector<std::string> decoded = QrDecoder().decode(image);
+        std::for_each(decoded.begin(), decoded.end(), [&codes](const std::string &code) {
+            codes.push_back(QString::fromStdString(code));
+        });
+    }
+    catch (const std::exception &e)
+    {
+        qWarning() << e.what();
+    }
+
+    return codes;
+}
+
 bool OSHelper::openContainingFolder(const QString &filePath) const
 {
+    QString canonicalFilePath = QFileInfo(filePath).canonicalFilePath();
 #if defined(Q_OS_WIN)
-    if (openFolderAndSelectItem(QDir::toNativeSeparators(filePath)))
+    if (openFolderAndSelectItem(QDir::toNativeSeparators(canonicalFilePath)))
     {
         return true;
     }
 #elif defined(Q_OS_MAC)
-    if (MacOSHelper::openFolderAndSelectItem(QUrl::fromLocalFile(filePath)))
+    if (MacOSHelper::openFolderAndSelectItem(QUrl::fromLocalFile(canonicalFilePath)))
     {
         return true;
     }
 #endif
 
-    QUrl url = QUrl::fromLocalFile(QFileInfo(filePath).absolutePath());
+    QUrl url = QUrl::fromLocalFile(canonicalFilePath);
     if (!url.isValid())
     {
-        qWarning() << "Malformed file path" << filePath << url.errorString();
+        qWarning() << "Malformed file path" << canonicalFilePath << url.errorString();
         return false;
     }
     return QDesktopServices::openUrl(url);
@@ -152,6 +223,7 @@ bool OSHelper::isCapsLock() const
         unsigned n;
         XkbGetIndicatorState(d, XkbUseCoreKbd, &n);
         caps_state = (n & 0x01) == 1;
+        XCloseDisplay(d);
     }
     return caps_state;
 #elif defined(Q_OS_MAC)
@@ -163,4 +235,48 @@ bool OSHelper::isCapsLock() const
 QString OSHelper::temporaryPath() const
 {
     return QDir::tempPath();
+}
+
+bool OSHelper::installed() const
+{
+#ifdef Q_OS_WIN
+    static constexpr const wchar_t installKey[] =
+        L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Monero GUI Wallet_is1";
+    static constexpr const wchar_t installValue[] = L"InstallLocation";
+
+    DWORD size;
+    LSTATUS status =
+        ::RegGetValueW(HKEY_LOCAL_MACHINE, installKey, installValue, RRF_RT_REG_SZ, nullptr, nullptr, &size);
+    if (status == ERROR_FILE_NOT_FOUND)
+    {
+        return false;
+    }
+    if (status != ERROR_SUCCESS)
+    {
+        qCritical() << "RegGetValueW failed (get size)" << status;
+        return false;
+    }
+
+    std::wstring installLocation;
+    installLocation.resize(size / sizeof(std::wstring::value_type));
+    size = installLocation.size() * sizeof(std::wstring::value_type);
+    status = ::RegGetValueW(
+        HKEY_LOCAL_MACHINE,
+        installKey,
+        installValue,
+        RRF_RT_REG_SZ,
+        nullptr,
+        &installLocation[0],
+        &size);
+    if (status != ERROR_SUCCESS)
+    {
+        qCritical() << "RegGetValueW Failed (read)" << status;
+        return false;
+    }
+
+    const QDir installDir(QString(reinterpret_cast<const QChar *>(&installLocation[0])));
+    return installDir == QDir(QCoreApplication::applicationDirPath());
+#else
+    return false;
+#endif
 }

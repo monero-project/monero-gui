@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, The Monero Project
+// Copyright (c) 2014-2020, The Monero Project
 // 
 // All rights reserved.
 // 
@@ -37,23 +37,12 @@ import QtQuick.Controls 2.0
 Drawer {
     id: sideBar
 
-    // @TODO: Qt 5.10 introduces `opened` built-in for Drawer
-    property bool isOpened: false
-
-    onClosed: {
-        isOpened = false;
-    }
-
-    onOpened: {
-        isOpened = true;
-    }
-
     width: 240
     height: parent.height - (persistentSettings.customDecorations ? 50 : 0)
     y: titleBar.height
 
     background: Rectangle {
-        color: "#0d0d0d"
+        color: MoneroComponents.Style.blackTheme ? "#0d0d0d" : "white"
         width: parent.width
     }
 
@@ -79,9 +68,24 @@ Drawer {
                 width: sideBar.width
                 height: 32
 
+                Rectangle {
+                    id: flagRect
+                    height: 24
+                    width: 24
+                    anchors.left: parent.left
+                    anchors.leftMargin: 4
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "transparent"
+
+                    Image {
+                        anchors.fill: parent
+                        source: flag
+                    }
+                }
+
                 MoneroComponents.TextPlain {
                     anchors.left: parent.left
-                    anchors.leftMargin: 16
+                    anchors.leftMargin: 30
                     font.bold: true
                     font.pixelSize: 14
                     color: MoneroComponents.Style.defaultFontColor
@@ -116,10 +120,12 @@ Drawer {
                             translationManager.setLanguage(locale_spl[0]);
 
                             // set wizard language settings
-                            wizard.language_locale = locale;
-                            wizard.language_wallet = wallet_language;
-                            wizard.language_language = display_name + " (" + locale_spl[1] + ") ";
-                            sideBar.close()
+                            persistentSettings.locale = locale;
+                            persistentSettings.language = display_name;
+                            persistentSettings.language_wallet = wallet_language;
+
+                            appWindow.showStatusMessage(qsTr("Language changed."), 3);
+                            appWindow.toggleLanguageView();
                         }
                         hoverEnabled: true
                         onEntered: {
@@ -134,15 +140,8 @@ Drawer {
                 }
             }
 
-            ScrollIndicator.vertical: ScrollIndicator {
-                // @TODO: QT 5.9 introduces `policy: ScrollBar.AlwaysOn`
-                active: true
-                contentItem.opacity: 0.7
-                onActiveChanged: {
-                    if (!active) {
-                        active = true;
-                    }
-                }
+            ScrollBar.vertical: ScrollBar {
+                onActiveChanged: if (!active && !isMac) active = true
             }
         }
     }

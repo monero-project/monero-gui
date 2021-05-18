@@ -66,7 +66,7 @@ Rectangle {
 
             WizardNav {
                 progressSteps: 4
-                progress: 3
+                progress: 2
                 onPrevClicked: {
                     wizardStateView.state = "wizardCreateWallet2";
                 }

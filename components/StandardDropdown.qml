@@ -58,11 +58,6 @@ Item {
 
     onExpandedChanged: if(expanded) appWindow.currentItem = dropdown
 
-    // Workaroud for suspected memory leak in 5.8 causing malloc crash on app exit
-    function update() {
-        firstColText.text = columnid.currentIndex < repeater.model.rowCount() ? qsTr(repeater.model.get(columnid.currentIndex).column1) + translationManager.emptyString : ""
-    }
-
     Item {
         id: head
         anchors.left: parent.left
@@ -80,15 +75,17 @@ Item {
         }
 
         MoneroComponents.TextPlain {
-            id: firstColText
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 12
+            anchors.right: dropIndicator.left
+            anchors.rightMargin: 12
             elide: Text.ElideRight
             font.family: MoneroComponents.Style.fontRegular.name
             font.bold: dropdown.headerFontBold
             font.pixelSize: dropdown.fontHeaderSize
             color: dropdown.textColor
+            text: columnid.currentIndex < repeater.model.count ? qsTr(repeater.model.get(columnid.currentIndex).column1) + translationManager.emptyString : ""
         }
 
         Item {
@@ -96,7 +93,8 @@ Item {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            width: 32
+            anchors.rightMargin: 12
+            width: dropdownIcon.width
 
             Image {
                 id: dropdownIcon
@@ -214,7 +212,6 @@ Item {
                                 popup.close()
                                 columnid.currentIndex = index
                                 changed();
-                                dropdown.update()
                             }
                         }
                     }

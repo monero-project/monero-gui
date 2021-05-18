@@ -173,7 +173,6 @@ Rectangle {
                 onExited: parent.color = "transparent"
                 onClicked: {
                     MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
-                    persistentSettings.blackTheme = MoneroComponents.Style.blackTheme;
                 }
             }
         }

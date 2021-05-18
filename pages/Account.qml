@@ -48,6 +48,8 @@ Rectangle {
     color: "transparent"
     property var model
     property alias accountHeight: mainLayout.height
+    property alias balanceAllText: balanceAll.text
+    property alias unlockedBalanceAllText: unlockedBalanceAll.text
     property bool selectAndSend: false
     property int currentAccountIndex
 
@@ -186,9 +188,9 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: subaddressAccountListRow.subaddressAccountListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
-                        color: "transparent"
+                        color: itemMouseArea.containsMouse || index === currentAccountIndex ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle {
                             color: MoneroComponents.Style.appWindowBorderColor
@@ -224,7 +226,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: MoneroComponents.Style.dimmedFontColor
+                                color: index === currentAccountIndex ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
@@ -274,11 +276,10 @@ Rectangle {
                             }
 
                             MouseArea {
+                                id: itemMouseArea
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
-                                onExited: tableItem2.color = "transparent"
                                 onClicked: {
                                     appWindow.currentWallet.switchSubaddressAccount(index);
                                     if (selectAndSend)
@@ -297,6 +298,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.edit
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
@@ -308,6 +311,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.clipboard
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 16

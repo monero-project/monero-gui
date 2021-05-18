@@ -48,7 +48,38 @@ ColumnLayout {
     property int settingsHeight: 900
     property alias settingsStateViewState: settingsStateView.state
 
-    Navbar{}
+    MoneroComponents.Navbar {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.topMargin: height
+        Layout.bottomMargin: height
+
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "Wallet"
+            text: qsTr("Wallet") + translationManager.emptyString
+            onSelected: settingsStateView.state = "Wallet"
+        }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "UI"
+            text: qsTr("Interface") + translationManager.emptyString
+            onSelected: settingsStateView.state = "UI"
+        }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "Node"
+            text: qsTr("Node") + translationManager.emptyString
+            visible: appWindow.walletMode >= 2
+            onSelected: settingsStateView.state = "Node"
+        }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "Log"
+            text: qsTr("Log") + translationManager.emptyString
+            onSelected: settingsStateView.state = "Log"
+        }
+        MoneroComponents.NavbarItem {
+            active: settingsStateView.state == "Info"
+            text: qsTr("Info") + translationManager.emptyString
+            onSelected: settingsStateView.state = "Info"
+        }
+    }
 
     Rectangle{
         id: settingsStateView

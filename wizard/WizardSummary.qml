@@ -54,7 +54,7 @@ ColumnLayout {
     WizardSummaryItem {
         Layout.fillWidth: true
         header: qsTr("Language") + translationManager.emptyString
-        value: wizardController.language_language
+        value: persistentSettings.language
     }
 
     WizardSummaryItem {
@@ -65,14 +65,14 @@ ColumnLayout {
     }
 
     WizardSummaryItem {
-        visible: persistentSettings.remoteNodeAddress !== "" && appWindow.walletMode == 0
+        visible: persistentSettings.useRemoteNode && remoteNodesModel.currentRemoteNode().address !== "" && appWindow.walletMode == 2
         Layout.fillWidth: true
         header: qsTr("Daemon address") + translationManager.emptyString
-        value: persistentSettings.remoteNodeAddress
+        value: remoteNodesModel.currentRemoteNode().address
     }
 
     WizardSummaryItem {
-        visible: persistentSettings.bootstrapNodeAddress !== "" && appWindow.walletMode == 1
+        visible: !persistentSettings.useRemoteNode && persistentSettings.bootstrapNodeAddress !== "" && appWindow.walletMode == 2
         Layout.fillWidth: true
         header: qsTr("Bootstrap address") + translationManager.emptyString
         value: persistentSettings.bootstrapNodeAddress

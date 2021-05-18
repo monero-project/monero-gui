@@ -37,14 +37,16 @@
 class WalletKeysFiles
 {
 public:
-    WalletKeysFiles(const qint64 &modified, const QString &path, const quint8 &networkType, const QString &address);
+    WalletKeysFiles(const QFileInfo &info, quint8 networkType, QString address);
 
+    QString fileName() const;
     qint64 modified() const;
     QString path() const;
     quint8 networkType() const;
     QString address() const;
 
 private:
+    QString m_fileName;
     qint64 m_modified;
     QString m_path;
     quint8 m_networkType;
@@ -54,15 +56,18 @@ private:
 class WalletKeysFilesModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(QSortFilterProxyModel *proxyModel READ proxyModel NOTIFY proxyModelChanged)
+
 public:
     enum KeysFilesRoles {
-        ModifiedRole = Qt::UserRole + 1,
+        FileNameRole = Qt::UserRole + 1,
+        ModifiedRole,
         PathRole,
         NetworkTypeRole,
         AddressRole
     };
 
-    WalletKeysFilesModel(WalletManager *walletManager, QObject *parent = 0);
+    WalletKeysFilesModel(QObject *parent = 0);
 
     Q_INVOKABLE void refresh(const QString &moneroAccountsDir);
     Q_INVOKABLE void clear();
@@ -71,17 +76,20 @@ public:
     void addWalletKeysFile(const WalletKeysFiles &walletKeysFile);
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-    QSortFilterProxyModel &proxyModel();
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+private:
+    QSortFilterProxyModel *proxyModel();
+
 protected:
+
+signals:
+    void proxyModelChanged() const;
 
 private:
     QList<WalletKeysFiles> m_walletKeyFiles;
-    WalletManager *m_walletManager;
 
-    QAbstractItemModel *m_walletKeysFilesItemModel;
     QSortFilterProxyModel m_walletKeysFilesModelProxy;
 };
 

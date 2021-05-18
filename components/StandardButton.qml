@@ -29,10 +29,13 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.1
 
+import FontAwesome 1.0
+
 import "../components" as MoneroComponents
 
 Item {
     id: button
+    property bool fontAwesomeIcon: false
     property bool primary: true
     property string rightIcon: ""
     property string rightIconInactive: ""
@@ -65,7 +68,7 @@ Item {
         id: buttonRect
         anchors.fill: parent
         radius: 3
-        border.width: parent.focus ? 1 : 0
+        border.width: parent.focus && parent.enabled ? 1 : 0
 
         state: button.enabled ? "active" : "disabled"
         Component.onCompleted: state = state
@@ -73,7 +76,7 @@ Item {
         states: [
             State {
                 name: "hover"
-                when: buttonArea.containsMouse || button.focus
+                when: button.enabled && (buttonArea.containsMouse || button.focus)
                 PropertyChanges {
                     target: buttonRect
                     color: primary
@@ -135,7 +138,7 @@ Item {
         }
 
         Image {
-            visible: button.rightIcon !== ""
+            visible: !fontAwesomeIcon && button.rightIcon !== ""
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
             width: button.small ? 16 : 20
             height: button.small ? 16 : 20
@@ -145,6 +148,16 @@ Item {
                 }
                 return button.rightIcon;
             }
+        }
+
+        Text {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            color: MoneroComponents.Style.defaultFontColor
+            font.family: FontAwesome.fontFamilySolid
+            font.pixelSize: button.small ? 16 : 20
+            font.styleName: "Solid"
+            text: button.rightIcon
+            visible: fontAwesomeIcon && button.rightIcon !== ""
         }
     }
 

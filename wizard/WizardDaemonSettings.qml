@@ -41,9 +41,12 @@ ColumnLayout {
     spacing: 10
 
     function save(){
-        persistentSettings.useRemoteNode = remoteNode.checked
-        persistentSettings.remoteNodeAddress = remoteNodeEdit.getAddress();
-        persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.daemonAddrText ? bootstrapNodeEdit.getAddress() : "";
+        persistentSettings.useRemoteNode = remoteNode.checked;
+        if (bootstrapNodeEdit.daemonAddrText == "auto") {
+            persistentSettings.bootstrapNodeAddress = "auto";
+        } else {
+            persistentSettings.bootstrapNodeAddress = bootstrapNodeEdit.getAddress();
+        }
     }
 
     MoneroComponents.RadioButton {
@@ -72,18 +75,52 @@ ColumnLayout {
             Layout.fillWidth: true
 
             readOnly: true
-            labelText: qsTr("Blockchain location (optional)") + translationManager.emptyString
+            labelText: {
+                const label = qsTr("Blockchain location (optional)");
+                if (persistentSettings.blockchainDataDir) {
+                    const style = "<style type='text/css'>a {cursor:pointer;text-decoration: none; color: #FF6C3C}</style>";
+                    return label + style + "<a href='#'> (%1)</a>".arg(qsTr("Reset")) + translationManager.emptyString;
+                } else {
+                    return label + translationManager.emptyString;
+                }
+            }
             labelFontSize: 14
             placeholderText: qsTr("Default") + translationManager.emptyString
             placeholderFontSize: 15
             text: persistentSettings.blockchainDataDir
-            inlineButton.small: true
-            inlineButtonText: qsTr("Browse") + translationManager.emptyString
-            inlineButton.onClicked: {
-                if(persistentSettings.blockchainDataDir != "");
-                    blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
-                blockchainFileDialog.open();
-                blockchainFolder.focus = true;
+            onLabelLinkActivated: persistentSettings.blockchainDataDir = ""
+
+            MoneroComponents.InlineButton {
+                small: true
+                text: qsTr("Browse") + translationManager.emptyString
+                onClicked: {
+                    if(persistentSettings.blockchainDataDir != "");
+                        blockchainFileDialog.folder = "file://" + persistentSettings.blockchainDataDir;
+                    blockchainFileDialog.open();
+                    blockchainFolder.focus = true;
+                }
+            }
+        }
+
+        RowLayout {
+            id: pruningOptionRow
+            MoneroComponents.CheckBox {
+                id: pruneBlockchainCheckBox
+                checked: !existingDbWarning.visible ? persistentSettings.pruneBlockchain : false
+                enabled: !existingDbWarning.visible
+                onClicked: {
+                    persistentSettings.pruneBlockchain =  !persistentSettings.pruneBlockchain
+                    this.checked = persistentSettings.pruneBlockchain
+                }
+                text: qsTr("Prune blockchain") + translationManager.emptyString
+            }
+
+            Text {
+                id: existingDbWarning
+                text: "A blockchain database already exists here. Select a new location to start a pruned node"
+                visible: daemonManager ? daemonManager.checkLmdbExists(blockchainFolder.text) : false
+                color: MoneroComponents.Style.defaultFontColor
+                font.family: MoneroComponents.Style.fontRegular.name
             }
         }
 
@@ -143,15 +180,7 @@ ColumnLayout {
                 Layout.minimumWidth: 300
                 //labelText: qsTr("Bootstrap node (leave blank if not wanted)") + translationManager.emptyString
 
-                daemonAddrText: persistentSettings.bootstrapNodeAddress.split(":")[0].trim()
-                daemonPortText: {
-                    var node_split = persistentSettings.bootstrapNodeAddress.split(":");
-                    if(node_split.length == 2){
-                        (node_split[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : node_split[1];
-                    } else {
-                        return ""
-                    }
-                }
+                initialAddress: persistentSettings.bootstrapNodeAddress
             }
         }
     }
@@ -169,20 +198,9 @@ ColumnLayout {
         }
     }
 
-    ColumnLayout {
-        visible: remoteNode.checked
-        spacing: 0
-
-        Layout.topMargin: 8
+    MoneroComponents.RemoteNodeList {
         Layout.fillWidth: true
-
-        MoneroComponents.RemoteNodeEdit {
-            id: remoteNodeEdit
-            Layout.fillWidth: true
-
-            property var rna: persistentSettings.remoteNodeAddress
-            daemonAddrText: rna.search(":") != -1 ? rna.split(":")[0].trim() : ""
-            daemonPortText: rna.search(":") != -1 ? (rna.split(":")[1].trim() == "") ? appWindow.getDefaultDaemonRpcPort(persistentSettings.nettype) : persistentSettings.remoteNodeAddress.split(":")[1] : ""
-        }
+        Layout.topMargin: 8
+        visible: remoteNode.checked
     }
 }

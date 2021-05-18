@@ -105,9 +105,9 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: subaddressListRow.subaddressListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
-                        color: "transparent"
+                        color: itemMouseArea.containsMouse || index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         Rectangle{
                             anchors.right: parent.right
@@ -143,7 +143,7 @@ Rectangle {
 
                             MoneroComponents.Label {
                                 id: nameLabel
-                                color: MoneroComponents.Style.dimmedFontColor
+                                color: index === appWindow.current_subaddress_table_index ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.dimmedFontColor
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: idLabel.right
                                 anchors.leftMargin: 6
@@ -167,11 +167,10 @@ Rectangle {
                             }
 
                             MouseArea {
+                                id: itemMouseArea
                                 cursorShape: Qt.PointingHandCursor
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onEntered: tableItem2.color = MoneroComponents.Style.titleBarButtonHoverColor
-                                onExited: tableItem2.color = "transparent"
                                 onClicked: subaddressListView.currentIndex = index;
                             }
                         }
@@ -186,6 +185,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.edit
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
@@ -200,6 +201,8 @@ Rectangle {
                             MoneroComponents.IconButton {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
+                                fontAwesomeFallbackIcon: FontAwesome.clipboard
+                                fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
                                 Layout.preferredWidth: 16
@@ -297,18 +300,6 @@ Rectangle {
                 label.font.family: FontAwesome.fontFamily
                 fontSize: 13
                 onClicked: qrFileDialog.open()
-            }
-
-            MoneroComponents.StandardButton {
-                Layout.preferredWidth: 220
-                small: true
-                text: FontAwesome.clipboard + "  %1".arg(qsTr("Copy to clipboard")) + translationManager.emptyString
-                label.font.family: FontAwesome.fontFamily
-                fontSize: 13
-                onClicked: {
-                    clipboard.setText(TxUtils.makeQRCodeString(appWindow.current_address));
-                    appWindow.showStatusMessage(qsTr("Copied to clipboard") + translationManager.emptyString, 3);
-                }
             }
 
             MoneroComponents.StandardButton {

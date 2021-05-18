@@ -1,0 +1,82 @@
+FROM ubuntu:20.04
+
+ARG THREADS=1
+ARG QT_VERSION=5.15.2
+ENV SOURCE_DATE_EPOCH=1397818193
+
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y build-essential cmake g++-mingw-w64 gettext git libtool pkg-config \
+    python && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --set x86_64-w64-mingw32-g++ $(which x86_64-w64-mingw32-g++-posix) && \
+    update-alternatives --set x86_64-w64-mingw32-gcc $(which x86_64-w64-mingw32-gcc-posix)
+
+RUN git clone -b v0.17.0.0 --depth 1 https://github.com/monero-project/monero && \
+    cd monero && \
+    git reset --hard d27d4526fe89b7cdeb4b296280c4a6cf7efe21f8 && \
+    cp -a contrib/depends / && \
+    cd .. && \
+    rm -rf monero
+
+RUN make -j$THREADS -C /depends HOST=x86_64-w64-mingw32 NO_QT=1
+
+RUN git clone git://code.qt.io/qt/qt5.git -b ${QT_VERSION} --depth 1 && \
+    cd qt5 && \
+    git clone git://code.qt.io/qt/qtbase.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtdeclarative.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtgraphicaleffects.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtimageformats.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtmultimedia.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquickcontrols.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtquickcontrols2.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtsvg.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qttools.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qttranslations.git -b ${QT_VERSION} --depth 1 && \
+    git clone git://code.qt.io/qt/qtxmlpatterns.git -b ${QT_VERSION} --depth 1 && \
+    ./configure --prefix=/depends/x86_64-w64-mingw32 -xplatform win32-g++ \
+    -device-option CROSS_COMPILE=/usr/bin/x86_64-w64-mingw32- \
+    -I $(pwd)/qtbase/src/3rdparty/angle/include \
+    -opensource -confirm-license -release -static -static-runtime -opengl dynamic -no-angle \
+    -no-avx -no-openssl -no-sql-sqlite \
+    -no-feature-qml-worker-script -no-openssl -no-sql-sqlite \
+    -qt-freetype -qt-harfbuzz -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib \
+    -skip gamepad -skip location -skip qt3d -skip qtactiveqt -skip qtandroidextras \
+    -skip qtcanvas3d -skip qtcharts -skip qtconnectivity -skip qtdatavis3d -skip qtdoc \
+    -skip qtgamepad -skip qtlocation -skip qtmacextras -skip qtnetworkauth -skip qtpurchasing \
+    -skip qtscript -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport \
+    -skip qtspeech -skip qttools -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel \
+    -skip qtwebengine -skip qtwebsockets -skip qtwebview -skip qtwinextras -skip qtx11extras \
+    -skip serialbus -skip webengine \
+    -nomake examples -nomake tests -nomake tools && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    cd qttools/src/linguist/lrelease && \
+    ../../../../qtbase/bin/qmake && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    cd ../../../.. && \
+    rm -rf $(pwd)
+
+RUN git clone -b libgpg-error-1.38 --depth 1 git://git.gnupg.org/libgpg-error.git && \
+    cd libgpg-error && \
+    git reset --hard 71d278824c5fe61865f7927a2ed1aa3115f9e439 && \
+    ./autogen.sh && \
+    ./configure --disable-shared --enable-static --disable-doc --disable-tests \
+    --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    cd .. && \
+    rm -rf libgpg-error
+
+RUN git clone -b libgcrypt-1.8.5 --depth 1 git://git.gnupg.org/libgcrypt.git && \
+    cd libgcrypt && \
+    git reset --hard 56606331bc2a80536db9fc11ad53695126007298 && \
+    ./autogen.sh && \
+    ./configure --disable-shared --enable-static --disable-doc \
+    --host=x86_64-w64-mingw32 --prefix=/depends/x86_64-w64-mingw32 \
+    --with-gpg-error-prefix=/depends/x86_64-w64-mingw32 && \
+    make -j$THREADS && \
+    make -j$THREADS install && \
+    cd .. && \
+    rm -rf libgcrypt

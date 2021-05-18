@@ -79,13 +79,6 @@ Rectangle {
                 topPadding: 0
                 text: qsTr("Save your most used addresses here") + translationManager.emptyString
                 width: parent.width
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                   anchors.fill: parent
-                   enabled: false
-                }
             }
 
             Text {
@@ -99,13 +92,6 @@ Rectangle {
                 topPadding: 0
                 text: qsTr("This makes it easier to send or receive Monero and reduces errors when typing in addresses manually.") + translationManager.emptyString
                 width: parent.width
-
-                // @TODO: Legacy. Remove after Qt 5.8.
-                // https://stackoverflow.com/questions/41990013
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: false
-                }
             }
 
             MoneroComponents.StandardButton {
@@ -146,13 +132,13 @@ Rectangle {
                     delegate: Rectangle {
                         id: tableItem2
                         height: addressBookListRow.addressBookListItemHeight
-                        width: parent.width
+                        width: parent ? parent.width : undefined
                         Layout.fillWidth: true
                         color: "transparent"
 
                         function doSend() {
                             console.log("Sending to: ", address +" "+ paymentId);
-                            middlePanel.sendTo(address, paymentId, description);
+                            middlePanel.sendTo(address, paymentId);
                             leftPanel.selectItem(middlePanel.state)
                         }
 
@@ -328,16 +314,16 @@ Rectangle {
                     }
                 }
 
-                inlineButton.text: FontAwesome.qrcode
-                inlineButton.fontPixelSize: 22
-                inlineButton.fontFamily: FontAwesome.fontFamily
-                inlineButton.textColor: MoneroComponents.Style.defaultFontColor
-                inlineButton.buttonColor: MoneroComponents.Style.orange
-                inlineButton.onClicked: {
-                    cameraUi.state = "Capture"
-                    cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
+                MoneroComponents.InlineButton {
+                    buttonColor: MoneroComponents.Style.orange
+                    fontFamily: FontAwesome.fontFamily
+                    text: FontAwesome.qrcode
+                    visible : appWindow.qrScannerEnabled && !addressLine.text
+                    onClicked: {
+                        cameraUi.state = "Capture"
+                        cameraUi.qrcode_decoded.connect(root.updateFromQrCode)
+                    }
                 }
-                inlineButtonVisible : appWindow.qrScannerEnabled && !addressLine.text
             }
 
             MoneroComponents.StandardButton {

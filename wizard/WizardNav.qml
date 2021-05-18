@@ -33,7 +33,7 @@ import QtQuick.Controls 2.0
 import "../js/Wizard.js" as Wizard
 import "../components" as MoneroComponents
 
-GridLayout {
+RowLayout {
     id: menuNav
     property alias progressEnabled: wizardProgress.visible
     property int progressSteps: 0
@@ -46,7 +46,6 @@ GridLayout {
     Layout.topMargin: 20
     Layout.preferredHeight: 70
     Layout.preferredWidth: parent.width
-    columns: 3
 
     signal nextClicked;
     signal prevClicked;
@@ -65,7 +64,6 @@ GridLayout {
 
     Rectangle {
         Layout.preferredHeight: parent.height
-        Layout.fillWidth: true
         color: "transparent"
 
         MoneroComponents.StandardButton {
@@ -89,19 +87,25 @@ GridLayout {
         Layout.fillWidth: true
         color: "transparent"
 
-        RowLayout {
+        PageIndicator {
             id: wizardProgress
-            spacing: 0
-            width: 100  // default, dynamically set later
-            height: 30
+            currentIndex: menuNav.progress
+            count: menuNav.progressSteps
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
+            spacing: 25
+            delegate: Rectangle {
+                implicitWidth: 10
+                implicitHeight: 10
+                radius: 10
+                // @TODO: Qt 5.10+ replace === with <=
+                color: index === menuNav.progress ? MoneroComponents.Style.defaultFontColor : MoneroComponents.Style.progressBarBackgroundColor
+            }
         }
     }
 
     Rectangle {
         Layout.preferredHeight: parent.height
-        Layout.fillWidth: true
         color: "transparent"
 
         MoneroComponents.StandardButton {
@@ -117,15 +121,5 @@ GridLayout {
                 menuNav.nextClicked();
             }
         }
-    }
-
-    Component.onCompleted: {
-        for(var i =0; i < menuNav.progressSteps; i++) {
-            var active = i < menuNav.progress ? 'true' : 'false';
-            Qt.createQmlObject("WizardNavProgressDot { active: " + active + " }", wizardProgress, 'dynamicWizardNavDot');
-        }
-
-        // Set `wizardProgress` width based on amount of progress dots
-        wizardProgress.width = 30 * menuNav.progressSteps;
     }
 }

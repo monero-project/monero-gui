@@ -26,15 +26,24 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import FontAwesome 1.0
 import QtQuick 2.9
 import QtGraphicalEffects 1.0
+import QtQuick.Layouts 1.1
 
 import "../components" as MoneroComponents
 
 Item {
     id: item
+
+    default property alias content: inlineButtons.children
+
     property alias input: input
     property alias text: input.text
+
+    property bool password: false
+    property bool passwordHidden: true
+    property var passwordLinked: null
 
     property alias placeholderText: placeholderLabel.text
     property bool placeholderCenter: false
@@ -43,14 +52,20 @@ Item {
     property int placeholderFontSize: 18
     property string placeholderColor: MoneroComponents.Style.defaultFontColor
     property real placeholderOpacity: 0.35
+    property real placeholderLeftMargin: {
+        if (placeholderCenter) {
+            return undefined;
+        } else if (inlineIcon.visible) {
+            return inlineIcon.width + inlineIcon.anchors.leftMargin + inputPadding;
+        } else {
+            return inputPadding;
+        }
+    }
 
     property alias acceptableInput: input.acceptableInput
     property alias validator: input.validator
     property alias readOnly : input.readOnly
     property alias cursorPosition: input.cursorPosition
-    property alias echoMode: input.echoMode
-    property alias inlineButton: inlineButtonId
-    property alias inlineButtonText: inlineButtonId.text
     property alias inlineIcon: inlineIcon.visible
     property bool copyButton: false
     property alias copyButtonText: copyButtonId.text
@@ -67,6 +82,7 @@ Item {
         }
     }
 
+    property string fontFamily: MoneroComponents.Style.fontRegular.name
     property int fontSize: 18
     property bool fontBold: false
     property alias fontColor: input.color
@@ -82,14 +98,16 @@ Item {
     property alias labelHorizontalAlignment: inputLabel.horizontalAlignment
     property bool showingHeader: inputLabel.text !== "" || copyButton
     property int inputHeight: 42
+    property int inputPadding: 10
 
     signal labelLinkActivated(); // input label, rich text <a> signal
     signal editingFinished();
     signal accepted();
     signal textUpdated();
 
-    height: showingHeader ? (inputLabel.height + inputItem.height + 2) : 42
+    height: showingHeader ? (inputLabel.height + inputItem.height + 2) : inputHeight
 
+    onActiveFocusChanged: activeFocus && input.forceActiveFocus()
     onTextUpdated: {
         // check to remove placeholder text when there is content
         if(item.isEmpty()){
@@ -106,6 +124,31 @@ Item {
         }
         else {
             return false;
+        }
+    }
+
+    function isPasswordHidden() {
+        if (password) {
+            return passwordHidden;
+        }
+        if (passwordLinked) {
+            return passwordLinked.passwordHidden;
+        }
+        return false;
+    }
+
+    function reset() {
+        text = "";
+        if (!passwordLinked) {
+            passwordHidden = true;
+        }
+    }
+
+    function passwordToggle() {
+        if (passwordLinked) {
+            passwordLinked.passwordHidden = !passwordLinked.passwordHidden;
+        } else {
+            passwordHidden = !passwordHidden;
         }
     }
 
@@ -145,7 +188,7 @@ Item {
         id: inputItem
         height: inputHeight
         anchors.top: showingHeader ? inputLabel.bottom : parent.top
-        anchors.topMargin: showingHeader ? 12 : 2
+        anchors.topMargin: showingHeader ? 12 : 0
         width: parent.width
         clip: true
 
@@ -155,13 +198,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: placeholderCenter ? parent.horizontalCenter : undefined
             anchors.left: placeholderCenter ? undefined : parent.left
-            anchors.leftMargin: {
-                if(placeholderCenter){
-                    return undefined;
-                }
-                else if(inlineIcon.visible){ return 50; }
-                else { return 10; }
-            }
+            anchors.leftMargin: placeholderLeftMargin
 
             opacity: item.placeholderOpacity
             color: item.placeholderColor
@@ -175,7 +212,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             anchors.topMargin: 1
-            color: "transparent"
+            color: item.enabled ? "transparent" : MoneroComponents.Style.inputBoxBackgroundDisabled
         }
 
         Rectangle {
@@ -203,20 +240,50 @@ Item {
             id: input
             anchors.fill: parent
             anchors.leftMargin: inlineIcon.visible ? 44 : 0
+            font.family: item.fontFamily
             font.pixelSize: item.fontSize
             font.bold: item.fontBold
+            KeyNavigation.backtab: item.KeyNavigation.backtab
+            KeyNavigation.tab: item.KeyNavigation.tab
             onEditingFinished: item.editingFinished()
             onAccepted: item.accepted();
             onTextChanged: item.textUpdated()
-            topPadding: 10
-            bottomPadding: 10
-        }
+            leftPadding: inputPadding
+            rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPadding
+            topPadding: inputPadding
+            bottomPadding: inputPadding
+            echoMode: isPasswordHidden() ? TextInput.Password : TextInput.Normal
 
-        MoneroComponents.InlineButton {
-            id: inlineButtonId
-            visible: item.inlineButtonText ? true : false
-            anchors.right: parent.right
-            anchors.rightMargin: 8
+            MoneroComponents.Label {
+                visible: password || passwordLinked
+                fontSize: 20
+                text: isPasswordHidden() ? FontAwesome.eye : FontAwesome.eyeSlash
+                opacity: eyeMouseArea.containsMouse ? 0.9 : 0.7
+                fontFamily: FontAwesome.fontFamily
+                anchors.right: parent.right
+                anchors.rightMargin: 15
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: 1
+
+                MouseArea {
+                    id: eyeMouseArea
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onClicked: passwordToggle()
+                }
+            }
+
+            RowLayout {
+                id: inlineButtons
+                anchors.bottom: parent.bottom
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.topMargin: inputPadding
+                anchors.bottomMargin: inputPadding
+                anchors.rightMargin: inputPadding
+                spacing: 4
+            }
         }
     }
 }

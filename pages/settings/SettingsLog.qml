@@ -213,9 +213,28 @@ Rectangle {
         MoneroComponents.LineEdit {
             id: sendCommandText
             Layout.fillWidth: true
+            property var lastCommands: []
+            property int currentCommandIndex
+            enabled: !persistentSettings.useRemoteNode
             fontBold: false
             placeholderText: qsTr("command + enter (e.g 'help' or 'status')") + translationManager.emptyString
             placeholderFontSize: 16
+            Keys.onUpPressed: {
+                if (currentCommandIndex != 0) {
+                    sendCommandText.text = lastCommands[currentCommandIndex - 1]
+                    currentCommandIndex = currentCommandIndex - 1
+                }
+            }
+            Keys.onDownPressed: {
+                if (currentCommandIndex == lastCommands.length - 1) {
+                    currentCommandIndex = lastCommands.length;
+                    return text = "";
+                }
+                if (currentCommandIndex != lastCommands.length) {
+                    sendCommandText.text = lastCommands[currentCommandIndex + 1]
+                    currentCommandIndex = currentCommandIndex + 1
+                }
+            }
             onAccepted: {
                 if(text.length > 0) {
                     consoleArea.logCommand(">>> " + text)
@@ -225,15 +244,14 @@ Rectangle {
                         }
                     });
                 }
+                lastCommands.push(text);
+                currentCommandIndex = lastCommands.length;
                 text = ""
             }
         }
     }
 
     Component.onCompleted: {
-        logLevelDropdown.currentIndex = appWindow.persistentSettings.logLevel;
-        logLevelDropdown.update();
-
         if(typeof daemonManager != "undefined")
             daemonManager.daemonConsoleUpdated.connect(onDaemonConsoleUpdated)
     }

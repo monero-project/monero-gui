@@ -71,7 +71,6 @@ Rectangle {
         wizardController.walletOptionsDeviceName = '';
         wizardController.walletOptionsDeviceIsRestore = false;
         wizardController.tmpWalletFilename = '';
-        wizardController.walletRestoreMode = 'seed'
         wizardController.walletOptionsSubaddressLookahead = '';
         disconnect();
 
@@ -107,11 +106,6 @@ Rectangle {
     property string walletOptionsDeviceName: ''
     property bool   walletOptionsDeviceIsRestore: false
     property string tmpWalletFilename: ''
-
-    // language settings, updated via sidebar
-    property string language_locale: 'en_US'
-    property string language_wallet: 'English'
-    property string language_language: 'English (US)'
 
     // recovery made (restore wallet)
     property string walletRestoreMode: 'seed'  // seed, keys, qr
@@ -308,7 +302,7 @@ Rectangle {
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a file") + translationManager.emptyString
-        folder: "file://" + moneroAccountsDir
+        folder: "file://" + appWindow.accountsDir
         nameFilters: [ "Wallet files (*.keys)"]
         sidebarVisible: false
 
@@ -334,7 +328,7 @@ Rectangle {
         console.log("Creating temporary wallet", tmp_wallet_filename)
         var nettype = appWindow.persistentSettings.nettype;
         var kdfRounds = appWindow.persistentSettings.kdfRounds;
-        var wallet = walletManager.createWallet(tmp_wallet_filename, "", wizardController.language_wallet, nettype, kdfRounds)
+        var wallet = walletManager.createWallet(tmp_wallet_filename, "", persistentSettings.language_wallet, nettype, kdfRounds)
 
         wizardController.walletOptionsSeed = wallet.seed
 
@@ -344,41 +338,45 @@ Rectangle {
         wizardController.tmpWalletFilename = tmp_wallet_filename
     }
 
-    function writeWallet() {
+    function writeWallet(onSuccess) {
         // Save wallet files in user specified location
         var new_wallet_filename = Wizard.createWalletPath(
             isIOS,
             wizardController.walletOptionsLocation,
             wizardController.walletOptionsName);
 
-        if(isIOS) {
-            console.log("saving in ios: " + moneroAccountsDir + new_wallet_filename)
-            wizardController.m_wallet.store(moneroAccountsDir + new_wallet_filename);
-        } else {
-            console.log("saving in wizard: " + new_wallet_filename)
-            wizardController.m_wallet.store(new_wallet_filename);
+        const handler = function(success) {
+            if (!success) {
+                appWindow.showStatusMessage(qsTr("Failed to store the wallet"), 3);
+                return;
+            }
+
+            // make sure temporary wallet files are deleted
+            console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
+            oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
+
+            // protecting wallet with password
+            wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
+
+            // save to persistent settings
+            persistentSettings.account_name = wizardController.walletOptionsName
+            persistentSettings.wallet_path = wizardController.m_wallet.path;
+            persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
+
+            persistentSettings.allow_background_mining = false
+            persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
+            persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
+
+            restart();
+
+            onSuccess();
+        };
+
+        if (isIOS) {
+            new_wallet_filename = appWindow.accountsDir + new_wallet_filename;
         }
-
-        // make sure temporary wallet files are deleted
-        console.log("Removing temporary wallet: " + wizardController.tmpWalletFilename)
-        oshelper.removeTemporaryWallet(wizardController.tmpWalletFilename)
-
-        // protecting wallet with password
-        wizardController.m_wallet.setPassword(wizardController.walletOptionsPassword);
-
-        // save to persistent settings
-        persistentSettings.language = wizardController.language_language
-        persistentSettings.locale   = wizardController.language_locale
-
-        persistentSettings.account_name = wizardController.walletOptionsName
-        persistentSettings.wallet_path = new_wallet_filename
-        persistentSettings.restore_height = (isNaN(walletOptionsRestoreHeight))? 0 : walletOptionsRestoreHeight
-
-        persistentSettings.allow_background_mining = false
-        persistentSettings.is_recovering = (wizardController.walletOptionsIsRecovering === undefined) ? false : wizardController.walletOptionsIsRecovering
-        persistentSettings.is_recovering_from_device = (wizardController.walletOptionsIsRecoveringFromDevice === undefined) ? false : wizardController.walletOptionsIsRecoveringFromDevice
-
-        restart();
+        console.log("saving new wallet to", new_wallet_filename);
+        wizardController.m_wallet.storeAsync(handler, new_wallet_filename);
     }
 
     function recoveryWallet() {
@@ -398,7 +396,7 @@ Rectangle {
         if(wizardController.walletRestoreMode === 'seed')
             wallet = walletManager.recoveryWallet(tmp_wallet_filename, wizardController.walletOptionsSeed, wizardController.walletOptionsSeedOffset, nettype, restoreHeight, kdfRounds);
         else
-            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, wizardController.language_wallet, nettype,
+            wallet = walletManager.createWalletFromKeys(tmp_wallet_filename, persistentSettings.language_wallet, nettype,
                                                             wizardController.walletOptionsRecoverAddress, wizardController.walletOptionsRecoverViewkey,
                                                             wizardController.walletOptionsRecoverSpendkey, restoreHeight, kdfRounds)
 
@@ -452,12 +450,13 @@ Rectangle {
         tmpWalletFilename = oshelper.temporaryFilename();
         console.log("Creating temporary wallet", tmpWalletFilename)
         var nettype = persistentSettings.nettype;
+        var kdfRounds = persistentSettings.kdfRounds;
         var restoreHeight = wizardController.walletOptionsRestoreHeight;
         var subaddressLookahead = wizardController.walletOptionsSubaddressLookahead;
         var deviceName = wizardController.walletOptionsDeviceName;
 
         connect();
-        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, "", nettype, deviceName, restoreHeight, subaddressLookahead);
+        walletManager.createWalletFromDeviceAsync(tmpWalletFilename, "", nettype, deviceName, restoreHeight, subaddressLookahead, kdfRounds);
         creatingWalletDeviceSplash();
     }
 
@@ -483,19 +482,24 @@ Rectangle {
         walletCreatedFromDevice(success);
     }
 
-    function onWalletPassphraseNeeded(){
+    function onWalletPassphraseNeeded(on_device){
         splash.close()
 
         console.log(">>> wallet passphrase needed: ");
-        passwordDialog.onAcceptedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered(passwordDialog.password);
+        devicePassphraseDialog.onAcceptedCallback = function(passphrase) {
+            walletManager.onPassphraseEntered(passphrase, false, false);
             creatingWalletDeviceSplash();
         }
-        passwordDialog.onRejectedPassphraseCallback = function() {
-            walletManager.onPassphraseEntered("", true);
+        devicePassphraseDialog.onWalletEntryCallback = function() {
+            walletManager.onPassphraseEntered("", true, false);
             creatingWalletDeviceSplash();
         }
-        passwordDialog.openPassphraseDialog()
+        devicePassphraseDialog.onRejectedCallback = function() {
+            walletManager.onPassphraseEntered("", false, true);
+            creatingWalletDeviceSplash();
+        }
+
+        devicePassphraseDialog.open(on_device)
     }
 
     function onDeviceButtonRequest(code){
@@ -528,7 +532,7 @@ Rectangle {
             persistentSettings.wallet_path = fn;
 
         if(isIOS)
-            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(moneroAccountsDir, "");
+            persistentSettings.wallet_path = persistentSettings.wallet_path.replace(appWindow.accountsDir, "");
 
         appWindow.openWallet();
     }

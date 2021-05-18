@@ -60,5 +60,5 @@ private:
     QByteArray parseShasumOutput(const QString &message, const QString &filename) const;
 
 private:
-    std::vector<openpgp::public_key_rsa> m_maintainers;
+    std::vector<openpgp::public_key_block> m_maintainers;
 };

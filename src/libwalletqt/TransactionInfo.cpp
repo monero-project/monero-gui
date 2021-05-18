@@ -61,14 +61,14 @@ quint64 TransactionInfo::atomicAmount() const
 
 QString TransactionInfo::displayAmount() const
 {
-    return WalletManager::instance()->displayAmount(m_amount);
+    return WalletManager::displayAmount(m_amount);
 }
 
 QString TransactionInfo::fee() const
 {
     if(m_fee == 0)
         return "";
-    return WalletManager::instance()->displayAmount(m_fee);
+    return WalletManager::displayAmount(m_fee);
 }
 
 quint64 TransactionInfo::blockHeight() const
@@ -132,7 +132,7 @@ QString TransactionInfo::destinations_formatted() const
     for (auto const& t: m_transfers) {
         if (!destinations.isEmpty())
           destinations += "<br> ";
-        destinations +=  WalletManager::instance()->displayAmount(t->amount()) + ": " + t->address();
+        destinations +=  WalletManager::displayAmount(t->amount()) + ": " + t->address();
     }
     return destinations;
 }

@@ -47,7 +47,7 @@ Rectangle {
         } else if(appWindow.walletMode === 1){
           return qsTr("Simple mode") + " (bootstrap)" + translationManager.emptyString;
         } else if(appWindow.walletMode === 2){
-          return qsTr("Advanced mode") + translationManager.emptyString;
+          return "%1 (%2)".arg(qsTr("Advanced mode")).arg(persistentSettings.useRemoteNode ? qsTr("Remote node") : qsTr("Local node")) + translationManager.emptyString;
         }
     }
 
@@ -103,7 +103,7 @@ Rectangle {
             MoneroComponents.TextBlock {
                 font.pixelSize: 14
                 color: MoneroComponents.Style.dimmedFontColor
-                text: Version.GUI_MONERO_VERSION + translationManager.emptyString
+                text: moneroVersion
             }
 
             Rectangle {
@@ -131,10 +131,11 @@ Rectangle {
             }
 
             MoneroComponents.TextBlock {
+                id: walletLocation
                 Layout.fillWidth: true
                 color: MoneroComponents.Style.dimmedFontColor
                 font.pixelSize: 14
-                property string walletPath: (isIOS ?  moneroAccountsDir : "") + appWindow.walletPath()
+                property string walletPath: (isIOS ?  appWindow.accountsDir : "") + persistentSettings.wallet_path
                 text: "\
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
@@ -212,7 +213,6 @@ Rectangle {
                                                                 + "The old wallet cache file will be renamed and can be restored later.\n"
                                                                 );
                                 confirmationDialog.icon = StandardIcon.Question
-                                confirmationDialog.cancelText = qsTr("Cancel")
                                 confirmationDialog.onAcceptedCallback = function() {
                                     appWindow.closeWallet(function() {
                                         walletManager.clearWalletCache(persistentSettings.wallet_path);
@@ -230,7 +230,7 @@ Rectangle {
                         appWindow.showStatusMessage(qsTr("Invalid restore height specified. Must be a number or a date formatted YYYY-MM-DD"),3);
                     }
                     inputDialog.onRejectedCallback = null;
-                    inputDialog.open(currentWallet ? currentWallet.walletCreationHeight : "0")
+                    inputDialog.open(currentWallet ? currentWallet.walletCreationHeight.toFixed(0) : "0")
                 }
 
                 MouseArea {
@@ -272,9 +272,9 @@ Rectangle {
                     <style type='text/css'>\
                         a {cursor:pointer;text-decoration: none; color: #FF6C3C}\
                     </style>\
-                    <a href='#'>%1</a>".arg(walletLogPath)
+                    <a href='#'>%1</a>".arg(logger.logFilePath)
                 textFormat: Text.RichText
-                onLinkActivated: oshelper.openContainingFolder(walletLogPath)
+                onLinkActivated: oshelper.openContainingFolder(logger.logFilePath)
 
                 MouseArea {
                     anchors.fill: parent
@@ -381,32 +381,40 @@ Rectangle {
             }
         }
 
-        // Copy info to clipboard
-        MoneroComponents.StandardButton {
-            small: true
-            text: qsTr("Copy to clipboard") + translationManager.emptyString
-            onClicked: {
-                var data = "";
-                data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
-                data += "\nEmbedded Monero version: " + Version.GUI_MONERO_VERSION;
-                data += "\nWallet path: ";
+        RowLayout {
+            spacing: 20;
 
-                var wallet_path = walletPath();
-                if(isIOS)
-                    wallet_path = moneroAccountsDir + wallet_path;
-                data += wallet_path;
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Copy to clipboard") + translationManager.emptyString
+                onClicked: {
+                    var data = "";
+                    data += "GUI version: " + Version.GUI_VERSION + " (Qt " + qtRuntimeVersion + ")";
+                    data += "\nEmbedded Monero version: " + moneroVersion;
+                    data += "\nWallet path: " + walletLocation.walletPath;
 
-                data += "\nWallet creation height: ";
-                if(currentWallet)
-                    data += currentWallet.walletCreationHeight;
+                    data += "\nWallet restore height: ";
+                    if(currentWallet)
+                        data += currentWallet.walletCreationHeight;
 
-                data += "\nWallet log path: " + walletLogPath;
-                data += "\nWallet mode: " + walletModeString;
-                data += "\nGraphics: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    data += "\nWallet log path: " + logger.logFilePath;
+                    data += "\nWallet mode: " + walletModeString;
+                    data += "\nGraphics mode: " + isOpenGL ? "OpenGL" : "Low graphics mode";
+                    if (isTails)
+                        data += "\nTails: " + tailsUsePersistence ? "persistent" : "persistence disabled";
 
-                console.log("Copied to clipboard");
-                clipboard.setText(data);
-                appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                    console.log("Copied to clipboard");
+                    clipboard.setText(data);
+                    appWindow.showStatusMessage(qsTr("Copied to clipboard"), 3);
+                }
+            }
+
+            MoneroComponents.StandardButton {
+                small: true
+                text: qsTr("Donate to Monero") + translationManager.emptyString
+                onClicked: {
+                    middlePanel.sendTo("888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H", "", "Donation to Monero Core Team");
+                }
             }
         }
     }

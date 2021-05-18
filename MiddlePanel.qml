@@ -50,20 +50,20 @@ Rectangle {
     property alias contentHeight: mainFlickable.contentHeight
     property alias flickable: mainFlickable
 
-    property Transfer transferView: Transfer { }
+    property Transfer transferView: Transfer {
+        onPaymentClicked: root.paymentClicked(recipients, paymentId, mixinCount, priority, description)
+        onSweepUnmixableClicked: root.sweepUnmixableClicked()
+    }
     property Receive receiveView: Receive { }
     property Merchant merchantView: Merchant { }
-    property TxKey txkeyView: TxKey { }
-    property SharedRingDB sharedringdbView: SharedRingDB { }
     property History historyView: History { }
-    property Sign signView: Sign { }
+    property Advanced advancedView: Advanced { }
     property Settings settingsView: Settings { }
-    property Mining miningView: Mining { }
     property AddressBook addressBookView: AddressBook { }
     property Keys keysView: Keys { }
     property Account accountView: Account { }
 
-    signal paymentClicked(string address, string paymentId, string amount, int mixinCount, int priority, string description)
+    signal paymentClicked(var recipients, string paymentId, int mixinCount, int priority, string description)
     signal sweepUnmixableClicked()
     signal generatePaymentIdInvoked()
     signal getProofClicked(string txid, string address, string message);
@@ -116,6 +116,12 @@ Rectangle {
         transferView.sendTo(address, paymentId, description);
     }
 
+    // open Transactions page with search term in search field
+    function searchInHistory(searchTerm){
+        root.state = "History";
+        historyView.searchInHistory(searchTerm);
+    }
+
         states: [
             State {
                 name: "History"
@@ -134,29 +140,17 @@ Rectangle {
                 PropertyChanges { target: root; currentView: merchantView }
                 PropertyChanges { target: mainFlickable; contentHeight: merchantView.merchantHeight + 80 }
             }, State {
-                name: "TxKey"
-                PropertyChanges { target: root; currentView: txkeyView }
-                PropertyChanges { target: mainFlickable; contentHeight: txkeyView.txkeyHeight + 80 }
-            }, State {
-                name: "SharedRingDB"
-                PropertyChanges { target: root; currentView: sharedringdbView }
-                PropertyChanges { target: mainFlickable; contentHeight: sharedringdbView.panelHeight + 80  }
-            }, State {
                 name: "AddressBook"
                 PropertyChanges { target: root; currentView: addressBookView }
                 PropertyChanges { target: mainFlickable; contentHeight: addressBookView.addressbookHeight + 80 }
             }, State {
-                name: "Sign"
-                PropertyChanges { target: root; currentView: signView }
-                PropertyChanges { target: mainFlickable; contentHeight: signView.signHeight + 80 }
+                name: "Advanced"
+                PropertyChanges { target: root; currentView: advancedView }
+                PropertyChanges { target: mainFlickable; contentHeight: advancedView.panelHeight }
             }, State {
                 name: "Settings"
                 PropertyChanges { target: root; currentView: settingsView }
                 PropertyChanges { target: mainFlickable; contentHeight: settingsView.settingsHeight }
-            }, State {
-                name: "Mining"
-                PropertyChanges { target: root; currentView: miningView }
-                PropertyChanges { target: mainFlickable; contentHeight: miningView.miningHeight + 80 }
             }, State {
                 name: "Keys"
                 PropertyChanges { target: root; currentView: keysView }
@@ -165,7 +159,7 @@ Rectangle {
                 name: "Account"
                 PropertyChanges { target: root; currentView: accountView }
                 PropertyChanges { target: mainFlickable; contentHeight: accountView.accountHeight + 80 }
-            }	
+            }
         ]
 
     ColumnLayout {
@@ -259,19 +253,5 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: borderLeft.right
-    }
-
-    /* connect "payment" click */
-    Connections {
-        ignoreUnknownSignals: false
-        target: transferView
-        onPaymentClicked : {
-            console.log("MiddlePanel: paymentClicked")
-            paymentClicked(address, paymentId, amount, mixinCount, priority, description)
-        }
-        onSweepUnmixableClicked : {
-            console.log("MiddlePanel: sweepUnmixableClicked")
-            sweepUnmixableClicked()
-        }
     }
 }

@@ -48,13 +48,10 @@ Rectangle {
 
         var valid = false;
         if(wizardController.walletRestoreMode === "keys") {
-            valid = wizardRestoreWallet1.verifyFromKeys();
-            return valid;
+            return wizardWalletInput.verify() && wizardRestoreWallet1.verifyFromKeys();
         } else if(wizardController.walletRestoreMode === "seed") {
-            valid = wizardWalletInput.verify();
-            if(!valid) return false;
-            valid = Wizard.checkSeed(seedInput.text);
-            return valid;
+            seedInput.error = seedInput.text && !Wizard.checkSeed(seedInput.text);
+            return wizardWalletInput.verify() && seedInput.text && Wizard.checkSeed(seedInput.text);
         }
 
         return false;
@@ -211,7 +208,7 @@ Rectangle {
                             anchors.margins: 8
                             anchors.leftMargin: 10
                             font.family: MoneroComponents.Style.fontRegular.name
-                            text: qsTr("Enter your 25 (or 24) word mnemonic seed") + translationManager.emptyString
+                            text: qsTr("Enter your 25 word mnemonic seed") + translationManager.emptyString
                             color: MoneroComponents.Style.defaultFontColor
                             visible: !seedInput.text
                         }
@@ -225,7 +222,7 @@ Rectangle {
 
                 MoneroComponents.LineEdit {
                     id: seedOffset
-                    echoMode: TextInput.Password
+                    password: true
                     Layout.fillWidth: true
                     placeholderFontSize: 16
                     placeholderText: qsTr("Passphrase") + translationManager.emptyString
@@ -262,7 +259,7 @@ Rectangle {
                 visible: wizardController.walletRestoreMode === 'keys'
                 Layout.fillWidth: true
                 placeholderFontSize: 16
-                placeholderText: qsTr("Spend key (private)") + translationManager.emptyString
+                placeholderText: qsTr("Spend key (private)") + " / " + qsTr("Leave blank to create a view-only wallet") + translationManager.emptyString
 
                 onTextUpdated: {
                     wizardRestoreWallet1.verifyFromKeys();
@@ -294,8 +291,8 @@ Rectangle {
 
             WizardNav {
                 id: nav
-                progressSteps: 4
-                progress: 1
+                progressSteps: appWindow.walletMode <= 1 ? 3 : 4
+                progress: 0
                 btnNext.enabled: wizardRestoreWallet1.verify();
                 btnPrev.text: qsTr("Back to menu") + translationManager.emptyString
                 onPrevClicked: {
@@ -339,6 +336,9 @@ Rectangle {
         if(previousView.viewName == "wizardHome"){
             // cleanup
             wizardWalletInput.reset();
+            seedRadioButton.checked = true;
+            keysRadioButton.checked = false;
+            qrRadioButton.checked = false;
             seedInput.text = "";
             seedOffsetCheckbox.checked = false;
             seedOffset.text = "";

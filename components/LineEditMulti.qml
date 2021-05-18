@@ -36,6 +36,8 @@ ColumnLayout {
 
     Layout.fillWidth: true
 
+    default property alias content: inlineButtons.children
+
     property alias text: input.text
     property alias labelText: inputLabel.text
     property alias labelButtonText: labelButton.text
@@ -65,7 +67,7 @@ ColumnLayout {
         }
     }
 
-    property bool error: false
+    property alias error: input.error
 
     property string labelFontColor: MoneroComponents.Style.defaultFontColor
     property bool labelFontBold: false
@@ -73,6 +75,7 @@ ColumnLayout {
     property bool labelButtonVisible: false
 
     property string fontColor: MoneroComponents.Style.defaultFontColor
+    property string fontFamily: MoneroComponents.Style.fontRegular.name
     property bool fontBold: false
     property int fontSize: 16
 
@@ -85,14 +88,11 @@ ColumnLayout {
     property alias addressValidation: input.addressValidation
     property string backgroundColor: "" // mock
 
-    property alias inlineButton: inlineButtonId
-    property bool inlineButtonVisible: false
-    property alias inlineButton2: inlineButton2Id
-    property bool inlineButton2Visible: false
-
     signal labelButtonClicked();
     signal inputLabelLinkActivated();
     signal editingFinished();
+
+    onActiveFocusChanged: activeFocus && input.forceActiveFocus()
 
     spacing: 0
     Rectangle {
@@ -159,20 +159,23 @@ ColumnLayout {
         id: input
         readOnly: false
         addressValidation: false
+        KeyNavigation.backtab: item.KeyNavigation.backtab
+        KeyNavigation.priority: KeyNavigation.BeforeItem
+        KeyNavigation.tab: item.KeyNavigation.tab
         Layout.fillWidth: true
-        
+
         leftPadding: item.inputPaddingLeft
-        rightPadding: item.inputPaddingRight
+        rightPadding: (inlineButtons.width > 0 ? inlineButtons.width + inlineButtons.spacing : 0) + inputPaddingRight
         topPadding: item.inputPaddingTop
         bottomPadding: item.inputPaddingBottom
 
         wrapMode: item.wrapMode
+        font.family: item.fontFamily
         fontSize: item.fontSize
         fontBold: item.fontBold
         fontColor: item.fontColor
         mouseSelection: item.mouseSelection
         onEditingFinished: item.editingFinished()
-        error: item.error
 
         MoneroComponents.TextPlain {
             id: placeholderLabel
@@ -198,18 +201,12 @@ ColumnLayout {
             visible: !item.borderDisabled
         }
 
-        MoneroComponents.InlineButton {
-            id: inlineButtonId
-            visible: (inlineButtonId.text || inlineButtonId.icon) && inlineButtonVisible ? true : false
+        RowLayout {
+            id: inlineButtons
+            anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: 8
-        }
-        
-        MoneroComponents.InlineButton {
-            id: inlineButton2Id
-            visible: (inlineButton2Id.text || inlineButton2Id.icon) && inlineButton2Visible ? true : false
-            anchors.right: parent.right
-            anchors.rightMargin: inlineButtonVisible ? 48 : 8
+            anchors.rightMargin: inputPaddingRight
+            spacing: 4
         }
     }
 }

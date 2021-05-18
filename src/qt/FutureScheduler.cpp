@@ -1,8 +1,16 @@
 #include "FutureScheduler.h"
 
+#include <mutex>
+
+#include <QThreadPool>
+
 FutureScheduler::FutureScheduler(QObject *parent)
     : QObject(parent), Alive(0), Stopping(false)
 {
+    static std::once_flag once;
+    std::call_once(once, []() {
+        QThreadPool::globalInstance()->setMaxThreadCount(4);
+    });
 }
 
 FutureScheduler::~FutureScheduler()
@@ -63,6 +71,11 @@ QPair<bool, QFuture<QJSValueList>> FutureScheduler::run(std::function<QJSValueLi
             return result;
         });
     });
+}
+
+bool FutureScheduler::stopping() const noexcept
+{
+    return Stopping;
 }
 
 bool FutureScheduler::add() noexcept
