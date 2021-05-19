@@ -48,6 +48,8 @@ Item {
     property int fontSize: 14
     property alias fontColor: label.color
     property bool iconOnTheLeft: true
+    property alias tooltipIconVisible: label.tooltipIconVisible
+    property alias tooltip: label.tooltip
     signal clicked()
 
     height: 25
@@ -121,7 +123,10 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
+        onEntered: !label.tooltipIconVisible && label.tooltip ? label.tooltipPopup.open() : ""
+        onExited:  !label.tooltipIconVisible && label.tooltip ? label.tooltipPopup.close() : ""
         onClicked: {
             toggle()
         }

@@ -13,6 +13,9 @@ Text {
     property string themeTransitionBlackColor: ""
     property string themeTransitionWhiteColor: ""
     property alias tooltip: tooltip.text
+    property alias tooltipLeft: tooltip.tooltipLeft
+    property alias tooltipIconVisible: tooltip.tooltipIconVisible
+    property alias tooltipPopup: tooltip.tooltipPopup
     font.family: MoneroComponents.Style.fontMedium.name
     font.bold: false
     font.pixelSize: 14
@@ -30,6 +33,6 @@ Text {
     MoneroComponents.Tooltip {
         id: tooltip
         anchors.top: parent.top
-        anchors.left: parent.right
+        anchors.left: tooltipIconVisible ? parent.right : parent.left
     }
 }

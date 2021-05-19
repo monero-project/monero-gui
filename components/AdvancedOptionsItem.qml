@@ -22,6 +22,7 @@ RowLayout {
         MoneroComponents.Label {
             id: title
             fontSize: 14
+            tooltipIconVisible: true
         }
 
         Rectangle {

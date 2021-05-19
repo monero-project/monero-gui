@@ -110,12 +110,24 @@ Rectangle {
                 opacity: 0.75
             }
 
+            MoneroComponents.Tooltip {
+                id: btnCloseWalletTooltip
+                anchors.fill: parent
+                text: qsTr("Close this wallet and return to main menu") + translationManager.emptyString
+            }
+
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: {
+                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
+                    btnCloseWalletTooltip.tooltipPopup.open()
+                }
+                onExited: {
+                    parent.color = "transparent"
+                    btnCloseWalletTooltip.tooltipPopup.close()
+                }
                 onClicked: root.closeWalletClicked(leftPanel.visible)
             }
         }
@@ -138,12 +150,24 @@ Rectangle {
                 opacity: 0.75
             }
 
+            MoneroComponents.Tooltip {
+                id: btnLanguageToggleTooltip
+                anchors.fill: parent
+                text: qsTr("Change language") + translationManager.emptyString
+            }
+
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: {
+                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
+                    btnLanguageToggleTooltip.tooltipPopup.open()
+                }
+                onExited: {
+                    parent.color = "transparent"
+                    btnLanguageToggleTooltip.tooltipPopup.close()
+                }
                 onClicked: root.languageClicked()
             }
         }
@@ -165,12 +189,24 @@ Rectangle {
                 opacity: 0.75
             }
 
+            MoneroComponents.Tooltip {
+                id: btnSwitchThemeTooltip
+                anchors.fill: parent
+                text: MoneroComponents.Style.blackTheme ? qsTr("Switch to light theme") : qsTr("Switch to dark theme") + translationManager.emptyString
+            }
+
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: parent.color = MoneroComponents.Style.titleBarButtonHoverColor
-                onExited: parent.color = "transparent"
+                onEntered: {
+                    parent.color = MoneroComponents.Style.titleBarButtonHoverColor
+                    btnSwitchThemeTooltip.tooltipPopup.open()
+                }
+                onExited: {
+                    parent.color = "transparent"
+                    btnSwitchThemeTooltip.tooltipPopup.close()
+                }
                 onClicked: {
                     MoneroComponents.Style.blackTheme = !MoneroComponents.Style.blackTheme;
                 }

@@ -46,6 +46,9 @@ Item {
     property alias fontStyleName: inlineText.font.styleName
     property bool isFontAwesomeIcon: fontFamily == FontAwesome.fontFamily || fontFamily == FontAwesome.fontFamilySolid
     property alias buttonColor: rect.color
+    property alias tooltip: tooltip.text
+    property alias tooltipLeft: tooltip.tooltipLeft
+    property alias tooltipBottom: tooltip.tooltipBottom
 
     height: isFontAwesomeIcon ? 30 : 24
     width: isFontAwesomeIcon ? height : inlineText.width + 16
@@ -82,6 +85,11 @@ Item {
             }
         }
 
+        MoneroComponents.Tooltip {
+            id: tooltip
+            anchors.fill: parent
+        }
+
         MouseArea {
             id: buttonArea
             cursorShape: rect.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
@@ -89,10 +97,12 @@ Item {
             anchors.fill: parent
             onClicked: doClick()
             onEntered: {
+                tooltip.text ? tooltip.tooltipPopup.open() : ""
                 rect.color = buttonColor ? buttonColor : "#707070";
                 rect.opacity = 0.8;
             }
             onExited: {
+                tooltip.text ? tooltip.tooltipPopup.close() : ""
                 rect.opacity = 1.0;
                 rect.color = buttonColor ? buttonColor : "#808080";
             }
