@@ -209,7 +209,7 @@ Rectangle {
                                 id: sendToButton
                                 image: "qrc:///images/arrow-right-in-circle-outline-medium-white.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                opacity: isOpenGL ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.arrowRight
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5
@@ -238,7 +238,7 @@ Rectangle {
                                 id: renameButton
                                 image: "qrc:///images/edit.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                opacity: isOpenGL ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5
@@ -256,7 +256,7 @@ Rectangle {
                                 id: copyButton
                                 image: "qrc:///images/copy.svg"
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                opacity: isOpenGL ? 0.5 : 1
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 fontAwesomeFallbackOpacity: 0.5

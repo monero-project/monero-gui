@@ -301,7 +301,8 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.edit
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                opacity: isOpenGL ? 0.5 : 1
+                                fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
                                 tooltip: qsTr("Edit account label") + translationManager.emptyString
@@ -315,7 +316,8 @@ Rectangle {
                                 fontAwesomeFallbackIcon: FontAwesome.clipboard
                                 fontAwesomeFallbackSize: 22
                                 color: MoneroComponents.Style.defaultFontColor
-                                opacity: 0.5
+                                opacity: isOpenGL ? 0.5 : 1
+                                fontAwesomeFallbackOpacity: 0.5
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
                                 tooltip: qsTr("Copy address to clipboard") + translationManager.emptyString
