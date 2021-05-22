@@ -134,7 +134,7 @@ Rectangle {
                         height: addressBookListRow.addressBookListItemHeight
                         width: parent ? parent.width : undefined
                         Layout.fillWidth: true
-                        color: "transparent"
+                        color: itemMouseArea.containsMouse ? MoneroComponents.Style.titleBarButtonHoverColor : "transparent"
 
                         function doSend() {
                             console.log("Sending to: ", address +" "+ paymentId);
@@ -187,8 +187,10 @@ Rectangle {
                             }
 
                             MouseArea {
+                                id: itemMouseArea
                                 anchors.fill: parent
                                 cursorShape: Qt.PointingHandCursor
+                                hoverEnabled: true
                                 visible: root.selectAndSend
                                 onClicked: {
                                     doSend();
