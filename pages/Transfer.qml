@@ -92,17 +92,51 @@ Rectangle {
       oaPopup.open()
     }
 
-    function fillPaymentDetails(address, payment_id, amount, tx_description, recipient_name) {
+    function fillPaymentDetails(address, payment_id, amount_request, tx_description, recipient_name) {
         if (recipientModel.count > 0) {
             const last = recipientModel.count - 1;
-            if (recipientModel.get(recipientModel.count - 1).address == "") {
-                recipientModel.remove(last);
+            if (recipientModel.get(last).address == "") {
+                if (recipientModel.get(0).amount == "(all)") {
+                    // CASE 1: last recipient address = ""; first recipient amount = (all); importing address from QR code or address book
+                    // Action: import address in the same recipient line
+                    recipientModel.remove(last);
+                    if (amount_request) {
+                        // CASE 1A: last recipient address = ""; first recipient amount = (all); importing address + amount_request from QR code
+                        // Action: import address + amount_request in new recipient line + erase (all) amount from the first recipient line (this line now has blank address and amount)
+                        recipientModel.newRecipient("", "");
+                    }
+                    recipientModel.newRecipient(address, (amount_request ? Utils.removeTrailingZeros(amount_request) : "(all)"));
+                } else {
+                    // CASE 2: last recipient address = ""; last recipient amount = number; importing address + amount_request from QR code
+                    // Action: import address + amount_request in a new recipient line
+                    if (!amount_request) {
+                        // CASE 2A: last recipient address = ""; last recipient amount = number or ""; importing address from QR code or address book
+                        // Action: import address in the same (last) recipient line
+                        var deletedAmount = recipientModel.get(last).amount;
+                        recipientModel.remove(last);
+                    }
+                    if (amount_request && recipientModel.get(last).amount == "") {
+                        // CASE 2B: last recipient address = ""; last recipient amount = ""; importing address + amount_request from QR code
+                        // Action: import address + amount_request in the same (last) recipient line
+                        recipientModel.remove(last);
+                    }
+                    recipientModel.newRecipient(address, Utils.removeTrailingZeros((amount_request ? amount_request : deletedAmount)));
+                }
+            } else {
+                // CASE 3: last recipient address != ""; importing address + amount_request (from QR code) or address only (QR code or address book)
+                // Action: import address (+ amount_request if available) in a new recipient line
+                if (recipientModel.get(0).amount == "(all)") {
+                    // CASE 3A: last recipient address != ""; first recipient amount = (all); importing address + amount_request (from QR code) or address only (QR code or address book)
+                    // Action: import address (+ amount_request if available) in a new recipient line + erase (all) amount from first recipient line
+                    var deletedAddress = recipientModel.get(0).address;
+                    recipientModel.remove(0);
+                    recipientModel.newRecipient(deletedAddress, "");
+                }
+                recipientModel.newRecipient(address, Utils.removeTrailingZeros(amount_request || ""));
             }
+            setPaymentId(payment_id || "");
+            setDescription((recipient_name ? recipient_name + " " : "") + (tx_description || ""));
         }
-
-        recipientModel.newRecipient(address, Utils.removeTrailingZeros(amount || ""));
-        setPaymentId(payment_id || "");
-        setDescription((recipient_name ? recipient_name + " " : "") + (tx_description || ""));
     }
 
     function updateFromQrCode(address, payment_id, amount, tx_description, recipient_name) {
@@ -184,8 +218,13 @@ Rectangle {
                 if (recipientModel.count < maxRecipients) {
                     recipientModel.append({address: address, amount: amount});
                     return true;
+                } else {
+                    informationPopup.title = qsTr("Error") + translationManager.emptyString;
+                    informationPopup.text  = qsTr("Can't add new recipient. Transaction has maximum number of recipients allowed") + " (" + maxRecipients + ")." + translationManager.emptyString;
+                    informationPopup.onCloseCallback = null
+                    informationPopup.open();
+                    return false;
                 }
-                return false;
             }
 
             function getRecipients() {
@@ -279,7 +318,6 @@ Rectangle {
                             text: FontAwesome.desktop
                             tooltip: qsTr("Grab QR code from screen") + translationManager.emptyString
                             onClicked: {
-                                clearFields();
                                 const codes = oshelper.grabQrCodesFromScreen();
                                 for (var index = 0; index < codes.length; ++index) {
                                     const parsed = walletManager.parse_uri_to_object(codes[index]);
@@ -526,15 +564,7 @@ Rectangle {
                         CheckBox {
                             border: false
                             checked: false
-                            enabled: {
-                                if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
-                                    return false;
-                                }
-                                if (recipientModel.count >= recipientModel.maxRecipients) {
-                                    return false;
-                                }
-                                return true;
-                            }
+                            enabled: recipientModel.count < recipientModel.maxRecipients
                             fontAwesomeIcons: true
                             fontSize: descriptionLine.labelFontSize
                             iconOnTheLeft: true
@@ -542,6 +572,11 @@ Rectangle {
                             toggleOnClick: false
                             uncheckedIcon: FontAwesome.plusCircle
                             onClicked: {
+                                if (recipientModel.count > 0 && recipientModel.get(0).amount == "(all)") {
+                                    var removedAddress = recipientModel.get(0).address;
+                                    recipientModel.remove(0);
+                                    recipientModel.newRecipient(removedAddress, "");
+                                }
                                 recipientModel.newRecipient("", "");
                             }
                         }
