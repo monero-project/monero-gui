@@ -34,8 +34,10 @@ Rectangle {
     default property list<MoneroComponents.NavbarItem> items
 
     color: "transparent"
-    height: grid.height
-    width: grid.width
+    Layout.preferredHeight: grid.height
+    Layout.minimumHeight: grid.height
+    Layout.fillWidth: true
+    Layout.minimumWidth: grid.width
 
     GridLayout {
         id: grid
@@ -51,7 +53,7 @@ Rectangle {
         property int textMargin: {
             // left-right margins for a given cell
             if(appWindow.width < 890){
-                return 32;
+                return 10;
             } else {
                 return 64;
             }

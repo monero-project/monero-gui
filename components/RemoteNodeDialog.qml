@@ -91,9 +91,9 @@ MoneroComponents.Dialog {
         daemonPortLabelText: qsTr("Port") + translationManager.emptyString
     }
 
-    RowLayout {
+    ColumnLayout {
         Layout.fillWidth: true
-        spacing: 32
+        spacing: 20
 
         MoneroComponents.LineEdit {
             id: daemonUsername
@@ -130,6 +130,7 @@ MoneroComponents.Dialog {
         spacing: parent.spacing
 
         MoneroComponents.StandardButton {
+            Layout.minimumWidth: 75
             activeFocusOnTab: true
             fontBold: false
             primary: false
@@ -139,6 +140,7 @@ MoneroComponents.Dialog {
         }
 
         MoneroComponents.StandardButton {
+            Layout.minimumWidth: 75
             activeFocusOnTab: true
             fontBold: false
             enabled: remoteNodeAddress.getAddress() != ""

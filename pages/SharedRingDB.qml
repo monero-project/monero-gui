@@ -195,9 +195,9 @@ Rectangle {
             }
         }
 
-        GridLayout {
+        ColumnLayout {
             Layout.fillWidth: true
-            columnSpacing: 20
+            spacing: 20
 
             MoneroComponents.LineEdit {
                 id: blackballOutputAmountLine
@@ -293,81 +293,56 @@ Rectangle {
             copyButton: true
         }
 
-        GridLayout{
+        ColumnLayout {
             Layout.topMargin: 12
-            columns: 2
-            columnSpacing: 32
+            spacing: 32
 
-            ColumnLayout {
-                RowLayout {
-                    MoneroComponents.LineEdit {
-                        id: getRingLine
-                        Layout.fillWidth: true
-                        fontSize: 16
-                        labelFontSize: 14
-                        labelText: qsTr("Get ring") + ":" + translationManager.emptyString
-                        readOnly: true
-                        copyButton: true
-                    }
-                }
-
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.topMargin: 18
-
-                    MoneroComponents.StandardButton {
-                        id: getRingButton
-                        text: qsTr("Get Ring") + translationManager.emptyString
-                        small: true
-                        enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text)
-                        onClicked: {
-                            var ring = appWindow.currentWallet.getRing(keyImageLine.text)
-                            if (ring === "") {
-                                getRingLine.text = qsTr("No ring found") + translationManager.emptyString;
-                            }
-                            else {
-                                getRingLine.text = ring;
-                            }
-                        }
-                    }
-                }
+            MoneroComponents.LineEdit {
+                id: getRingLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                labelText: qsTr("Get ring") + ":" + translationManager.emptyString
+                readOnly: true
+                copyButton: true
             }
 
-            ColumnLayout {
-                RowLayout {
-                    MoneroComponents.LineEdit {
-                        id: setRingLine
-                        Layout.fillWidth: true
-                        fontSize: 16
-                        labelFontSize: 14
-                        placeholderFontSize: 16
-                        labelText: qsTr("Set ring") + ":" + translationManager.emptyString
-                        readOnly: false
-                        copyButton: true
+            MoneroComponents.StandardButton {
+                id: getRingButton
+                text: qsTr("Get Ring") + translationManager.emptyString
+                small: true
+                enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text)
+                onClicked: {
+                    var ring = appWindow.currentWallet.getRing(keyImageLine.text)
+                    if (ring === "") {
+                        getRingLine.text = qsTr("No ring found") + translationManager.emptyString;
+                    } else {
+                          getRingLine.text = ring;
                     }
-                }
+               }
+            }
 
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.topMargin: 18
+            MoneroComponents.LineEdit {
+                id: setRingLine
+                Layout.fillWidth: true
+                fontSize: 16
+                labelFontSize: 14
+                placeholderFontSize: 16
+                labelText: qsTr("Set ring") + ":" + translationManager.emptyString
+                readOnly: false
+                copyButton: true
+            }
 
-                    MoneroComponents.StandardButton {
-                        id: setRingButton
-                        text: qsTr("Set Ring") + translationManager.emptyString
-                        small: true
-                        enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text) && validRing(setRingLine.text.trim(), setRingRelative.checked)
-                        onClicked: {
-                            var outs = setRingLine.text.trim()
-                            appWindow.currentWallet.setRing(keyImageLine.text, outs, setRingRelative.checked)
-                        }
-                    }
+            MoneroComponents.StandardButton {
+                id: setRingButton
+                text: qsTr("Set Ring") + translationManager.emptyString
+                small: true
+                enabled: !!appWindow.currentWallet && validHex32(keyImageLine.text) && validRing(setRingLine.text.trim(), setRingRelative.checked)
+                onClicked: {
+                    var outs = setRingLine.text.trim()
+                    appWindow.currentWallet.setRing(keyImageLine.text, outs, setRingRelative.checked)
                 }
             }
-        }
-
-        GridLayout {
-            columnSpacing: 20
-            columns: 2
 
             MoneroComponents.CheckBox {
                 id: segregatePreForkOutputs
@@ -398,14 +373,6 @@ Rectangle {
                 checked: true
                 text: qsTr("Relative") + translationManager.emptyString
             }
-        }
-
-        GridLayout {
-            id: segregationHeightRow
-            Layout.fillWidth: true
-            Layout.topMargin: 17
-            columns: 2
-            columnSpacing: 32
 
             MoneroComponents.LineEdit {
                 id: segregationHeightLine
@@ -426,10 +393,6 @@ Rectangle {
                     // @TODO: LineEdit should visually be able show that an action
                     // has been completed due to modification of the text
                 }
-            }
-
-            Item {
-                Layout.fillWidth: true
             }
         }
     }

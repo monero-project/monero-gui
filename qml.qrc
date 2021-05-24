@@ -3,6 +3,7 @@
         <file>main.qml</file>
         <file>LeftPanel.qml</file>
         <file>MiddlePanel.qml</file>
+        <file>UpperPanel.qml</file>
         <file>components/Dialog.qml</file>
         <file>components/Label.qml</file>
         <file>components/LanguageButton.qml</file>

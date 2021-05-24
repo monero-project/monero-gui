@@ -75,7 +75,7 @@ Rectangle {
         menuColumn.previousButton.checked = true
     }
 
-    width: 300
+    width: isAndroid ? upperPanel.width : 300
     color: "transparent"
     anchors.bottom: parent.bottom
     anchors.top: parent.top
@@ -365,6 +365,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = accountButton
                     panel.accountClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -386,6 +387,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = transferButton
                     panel.transferClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -409,6 +411,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = addressBookButton
                     panel.addressBookClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -430,6 +433,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = receiveButton
                     panel.receiveClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -452,6 +456,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = historyButton
                     panel.historyClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -474,6 +479,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = advancedButton
                     panel.advancedClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 
@@ -495,6 +501,7 @@ Rectangle {
                     parent.previousButton.checked = false
                     parent.previousButton = settingsButton
                     panel.settingsClicked()
+                    isAndroid ? leftPanel.visible = false : ""
                 }
             }
 

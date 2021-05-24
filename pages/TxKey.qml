@@ -79,7 +79,7 @@ Rectangle {
                 labelFontSize: 14
                 labelText: qsTr("Transaction ID") + translationManager.emptyString
                 fontSize: 16
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
                 readOnly: false
                 copyButton: true
@@ -91,7 +91,7 @@ Rectangle {
                 labelFontSize: 14
                 labelText: qsTr("Address") + translationManager.emptyString
                 fontSize: 16
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true
@@ -103,7 +103,7 @@ Rectangle {
                 fontSize: 16
                 labelFontSize: 14
                 labelText: qsTr("Message") + translationManager.emptyString
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true
@@ -152,7 +152,7 @@ Rectangle {
                 labelFontSize: 14
                 labelText: qsTr("Transaction ID") + translationManager.emptyString
                 fontSize: 16
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Paste tx ID") + translationManager.emptyString
                 readOnly: false
                 copyButton: true
@@ -164,7 +164,7 @@ Rectangle {
                 labelFontSize: 14
                 labelText: qsTr("Address") + translationManager.emptyString
                 fontSize: 16
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Recipient's wallet address") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true
@@ -176,7 +176,7 @@ Rectangle {
                 fontSize: 16
                 labelFontSize: 14
                 labelText: qsTr("Message") + translationManager.emptyString
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Optional message against which the signature is signed") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true
@@ -188,7 +188,7 @@ Rectangle {
                 fontSize: 16
                 labelFontSize: 14
                 labelText: qsTr("Signature") + translationManager.emptyString
-                placeholderFontSize: 16
+                placeholderFontSize: isAndroid ? 14 : 16
                 placeholderText: qsTr("Paste tx proof") + translationManager.emptyString;
                 readOnly: false
                 copyButton: true

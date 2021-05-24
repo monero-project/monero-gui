@@ -165,7 +165,7 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: {
-            if(currentView === merchantView || currentView === historyView)
+            if(isAndroid || currentView === merchantView || currentView === historyView)
                 return 0;
 
             return 20;
