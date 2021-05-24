@@ -62,6 +62,8 @@ Rectangle {
             }
 
             RowLayout {
+                id: firstKeyRow
+                property var firstMultisigKey: wizardController.m_wallet.getMultisigInfo()
 
                 MoneroComponents.LineEditMulti {
                     id: multisigKey
@@ -79,7 +81,7 @@ Rectangle {
                     labelFontSize: 14
                     copyButton: true
                     readOnly: true
-                    text: wizardController.m_wallet.getMultisigInfo()
+                    text: parent.firstMultisigKey
                 }
                 MoneroComponents.StandardButton {
                     id: showQR
@@ -103,10 +105,12 @@ Rectangle {
                     id: qrCode
                     anchors.fill: parent
                     anchors.margins: 1
+
                     smooth: false
                     fillMode: Image.PreserveAspectFit
-                    source: "image://qrcode/" + wizardController.m_wallet.getMultisigInfo()
+                    source: "image://qrcode/" + firstKeyRow.firstMultisigKey
                 }
+
                 closePolicy: Popup.CloseOnPressOutside
             }
 
