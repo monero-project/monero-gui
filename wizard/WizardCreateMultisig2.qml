@@ -61,23 +61,53 @@ Rectangle {
                 subtitle: qsTr("In order to initalize a multisig wallet both wallet managers must exchange this information") + translationManager.emptyString
             }
 
-            MoneroComponents.LineEditMulti {
-                id: multisigKey
+            RowLayout {
 
-                spacing: 0
-                inputPaddingLeft: 16
-                inputPaddingRight: 16
-                inputPaddingTop: 20
-                inputPaddingBottom: 20
-                inputRadius: 0
-                fontSize: 18
-                fontBold: true
-                wrapMode: Text.WordWrap
-                labelText: qsTr("Send this to information to other wallet managers") + translationManager.emptyString
-                labelFontSize: 14
-                copyButton: true
-                readOnly: true
-                text: wizardController.m_wallet.getMultisigInfo()
+                MoneroComponents.LineEditMulti {
+                    id: multisigKey
+
+                    spacing: 0
+                    inputPaddingLeft: 16
+                    inputPaddingRight: 16
+                    inputPaddingTop: 20
+                    inputPaddingBottom: 20
+                    inputRadius: 0
+                    fontSize: 18
+                    fontBold: true
+                    wrapMode: Text.WordWrap
+                    labelText: qsTr("Send this to information to other wallet managers") + translationManager.emptyString
+                    labelFontSize: 14
+                    copyButton: true
+                    readOnly: true
+                    text: wizardController.m_wallet.getMultisigInfo()
+                }
+                MoneroComponents.StandardButton {
+                    id: showQR
+                    text: "Show QR Code"
+
+                    onClicked: {
+                        qrPopup.open()
+                    }
+                }
+            }
+
+            Popup {
+                id: qrPopup
+                anchors.centerIn: parent
+                width: 200
+                height: 200
+                modal: true
+                focus: true
+
+                Image {
+                    id: qrCode
+                    anchors.fill: parent
+                    anchors.margins: 1
+                    smooth: false
+                    fillMode: Image.PreserveAspectFit
+                    source: "image://qrcode/" + wizardController.m_wallet.getMultisigInfo()
+                }
+                closePolicy: Popup.CloseOnPressOutside
             }
 
             MoneroComponents.LineEdit {
