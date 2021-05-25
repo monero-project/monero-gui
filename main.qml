@@ -2246,7 +2246,6 @@ ApplicationWindow {
 
     function changeWalletMode(mode){
         appWindow.disconnectedEpoch = 0;
-        appWindow.walletMode = mode;
         persistentSettings.walletMode = mode;
         applyWalletMode(mode);
     }
