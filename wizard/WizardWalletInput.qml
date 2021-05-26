@@ -83,6 +83,7 @@ GridLayout {
     MoneroComponents.LineEdit {
         id: walletLocation
         Layout.fillWidth: true
+        visible: appWindow.walletMode >= 2
 
         labelText: qsTr("Wallet location") + translationManager.emptyString
         labelFontSize: 14
