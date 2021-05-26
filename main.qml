@@ -92,7 +92,7 @@ ApplicationWindow {
     readonly property string localDaemonAddress : "localhost:" + getDefaultDaemonRpcPort(persistentSettings.nettype)
     property string currentDaemonAddress;
     property int disconnectedEpoch: 0
-    property int estimatedBlockchainSize: 105 // GB
+    property int estimatedBlockchainSize: persistentSettings.pruneBlockchain ? 40 : 105 // GB
     property alias viewState: rootItem.state
     property string prevSplashText;
     property bool splashDisplayedBeforeButtonRequest;
