@@ -2212,6 +2212,8 @@ ApplicationWindow {
         if(!persistentSettings.lockOnUserInActivity) return;
         if(passwordDialog.visible) return;
         var inputDialogVisible = inputDialog && inputDialog.visible
+        var successfulTxPopupVisible = successfulTxPopup && successfulTxPopup.visible
+        var informationPopupVisible = informationPopup && informationPopup.visible
 
         // prompt password after X seconds of inactivity
         var epoch = Math.floor((new Date).getTime() / 1000);
@@ -2221,15 +2223,22 @@ ApplicationWindow {
         passwordDialog.onAcceptedCallback = function() {
             if(walletPassword === passwordDialog.password){
                 passwordDialog.close();
+                if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
+                if (successfulTxPopupVisible) successfulTxPopup.open(successfulTxPopup.transactionID)
+                if (informationPopupVisible) informationPopup.open()
             } else {
                 passwordDialog.showError(qsTr("Wrong password"));
             }
-            if (inputDialogVisible) inputDialog.open(inputDialog.inputText)
         }
 
         passwordDialog.onRejectedCallback = function() { appWindow.showWizard(); }
         if (inputDialogVisible) inputDialog.close()
         remoteNodeDialog.close();
+        informationPopup.close()
+        txConfirmationPopup.close()
+        txConfirmationPopup.clearFields()
+        txConfirmationPopup.rejected()
+        successfulTxPopup.close();
         passwordDialog.open();
     }
 
