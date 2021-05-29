@@ -7,7 +7,7 @@ Copyright (c) 2014-2019, The Monero Project
 - Web: [getmonero.org](https://getmonero.org)
 - Mail: [dev@getmonero.org](mailto:dev@getmonero.org)
 - Github: [https://github.com/monero-project/monero-gui](https://github.com/monero-project/monero-gui)
-- IRC: [#monero-dev on Freenode](irc://chat.freenode.net/#monero-dev)
+- IRC: [#monero-gui on Libera](irc://irc.libera.chat/#monero-gui)
 - Translation platform (Weblate): [translate.getmonero.org](https://translate.getmonero.org)
 - UI Design: [Monero-GUI on Figma](https://www.figma.com/file/DplJ2DDQfIKiuRvolHX2hN/Monero-GUI)
 
