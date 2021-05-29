@@ -16,11 +16,11 @@ ColumnLayout {
 
     spacing: 0
 
-    Text {
+    MoneroComponents.TextPlain {
         id: label
-        color: MoneroComponents.Style.defaultFontColor
+        font.family: MoneroComponents.Style.fontRegular.name
         font.pixelSize: 14
-        Layout.fillWidth: true
+        color: MoneroComponents.Style.defaultFontColor
     }
 
     QtQuickControls.Slider {
