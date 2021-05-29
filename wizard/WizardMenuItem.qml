@@ -97,6 +97,7 @@ RowLayout {
             Layout.fillWidth: true
             leftPadding: parent.leftPadding
             topPadding: 0
+            wrapMode: Text.WordWrap
             color: MoneroComponents.Style.defaultFontColor
             opacity: MoneroComponents.Style.blackTheme ? 1.0 : 0.8
             font.bold: true

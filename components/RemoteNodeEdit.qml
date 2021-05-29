@@ -36,7 +36,7 @@ import "../components" as MoneroComponents
 
 GridLayout {
     columns: 2
-    columnSpacing: 32
+    columnSpacing: 20
     id: root
     property alias daemonAddrText: daemonAddr.text
     property alias daemonPortText: daemonPort.text
@@ -85,6 +85,7 @@ GridLayout {
     LineEdit {
         id: daemonAddr
         Layout.fillWidth: true
+        Layout.minimumWidth: 250
         placeholderText: qsTr("Remote Node Hostname / IP") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
@@ -107,6 +108,7 @@ GridLayout {
     LineEdit {
         id: daemonPort
         Layout.fillWidth: true
+        Layout.preferredWidth: 70
         placeholderText: qsTr("Port") + translationManager.emptyString
         placeholderFontFamily: root.placeholderFontFamily
         placeholderFontBold: root.placeholderFontBold
