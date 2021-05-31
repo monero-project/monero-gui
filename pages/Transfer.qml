@@ -35,6 +35,7 @@ import moneroComponents.Clipboard 1.0
 import moneroComponents.PendingTransaction 1.0
 import moneroComponents.Wallet 1.0
 import moneroComponents.NetworkType 1.0
+import moneroComponents.AddressBookModel 1.0
 import FontAwesome 1.0
 import "../components"
 import "../components" as MoneroComponents
@@ -81,6 +82,8 @@ Rectangle {
     }
     property string startLinkText: "<style type='text/css'>a {text-decoration: none; color: #FF6C3C; font-size: 14px;}</style><a href='#'>(%1)</a>".arg(qsTr("Start daemon")) + translationManager.emptyString
     property bool warningLongPidDescription: descriptionLine.text.match(/^[0-9a-f]{64}$/i)
+    property int addressBookModelCount: 0
+    property var addressBookModelData: []  // representation of address book data (appWindow.currentWallet.addressBookModel)
 
     Clipboard { id: clipboard }
 
@@ -346,83 +349,161 @@ Rectangle {
                         RowLayout {
                             spacing: 0
 
-                            MoneroComponents.LineEditMulti {
-                                KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
-                                KeyNavigation.tab: parent.children[2]
-                                Layout.alignment: Qt.AlignVCenter
-                                Layout.topMargin: recipientLayout.rowSpacing / 2
-                                Layout.bottomMargin: recipientLayout.rowSpacing / 2
-                                Layout.fillWidth: true
-                                addressValidation: true
-                                borderDisabled: true
-                                fontColor: error ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
-                                fontFamily: MoneroComponents.Style.fontMonoRegular.name
-                                fontSize: 14
-                                inputPaddingBottom: 0
-                                inputPaddingTop: 0
-                                inputPaddingRight: 0
-                                placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
-                                placeholderFontSize: 14
-                                spacing: 0
-                                wrapMode: Text.WrapAnywhere
-                                placeholderText: {
-                                    if(persistentSettings.nettype == NetworkType.MAINNET){
-                                        return "4.. / 8.. / OpenAlias";
-                                    } else if (persistentSettings.nettype == NetworkType.STAGENET){
-                                        return "5.. / 7..";
-                                    } else if(persistentSettings.nettype == NetworkType.TESTNET){
-                                        return "9.. / B..";
-                                    }
-                                }
-                                onTextChanged: {
-                                    const parsed = walletManager.parse_uri_to_object(text);
-                                    if (!parsed.error) {
-                                        fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
-                                    }
-                                    address = text;
-                                }
-                                text: address
+                            ColumnLayout {
 
-                                MoneroComponents.InlineButton {
-                                    small: true
-                                    text: qsTr("Resolve") + translationManager.emptyString
-                                    visible: TxUtils.isValidOpenAliasAddress(address)
-                                    onClicked: {
-                                        var result = walletManager.resolveOpenAlias(address)
-                                        if (result) {
-                                            var parts = result.split("|")
-                                            if (parts.length == 2) {
-                                                var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
-                                                if (parts[0] === "true") {
-                                                    if (address_ok) {
-                                                        // prepend openalias to description
-                                                        descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
-                                                        descriptionCheckbox.checked = true
-                                                        recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                Rectangle {
+                                    id: contactRectangle
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: true
+                                    Layout.margins: 5
+                                    color: "transparent"
+                                    visible: contactName.text != ""
+
+                                    RowLayout {
+                                        Layout.topMargin: 8
+
+                                        MoneroComponents.TextPlain {
+                                            id: inlineText1
+                                            Layout.topMargin: 8
+                                            Layout.leftMargin: 5
+                                            Layout.fillWidth: false
+                                            font.family: FontAwesome.fontFamily
+                                            font.bold: true
+                                            font.pixelSize: 18
+                                            color: MoneroComponents.Style.defaultFontColor
+                                            themeTransition: false
+                                            text: FontAwesome.addressBook
+                                        }
+
+                                        MoneroComponents.Label {
+                                            id: contactName
+                                            Layout.fillWidth: true
+                                            Layout.topMargin: 14
+                                            fontSize:16
+                                            color: MoneroComponents.Style.inlineButtonTextColor
+                                            text: addressInput.text == "" ? "" : (contactName.getMatches() ? contactName.getMatches() + " (" + TxUtils.addressTruncate(addressInput.text, 4) + ")" : "")
+                                            visible: contactName.text != ""
+
+                                            function getMatches() {
+                                                var returnText = "";
+                                                for (var i = 0; i < root.addressBookModelCount; i+=1){
+                                                    var item = root.addressBookModelData[i];
+                                                    if (item.address == addressInput.text) {
+                                                        if (returnText == "") {
+                                                            returnText = item.description;
+                                                        } else {
+                                                            returnText += ", " + item.description;
+                                                        }
                                                     }
-                                                    else
-                                                        oa_message(qsTr("No valid address found at this OpenAlias address"))
                                                 }
-                                                else if (parts[0] === "false") {
+                                                return returnText;
+                                            }
+                                        }
+
+                                        MoneroComponents.TextPlain {
+                                            id: inlineText2
+                                            Layout.fillWidth: false
+                                            Layout.topMargin: 8
+                                            Layout.leftMargin: 10
+                                            font.family: FontAwesome.fontFamily
+                                            font.bold: true
+                                            font.pixelSize: 18
+                                            color: MoneroComponents.Style.defaultFontColor
+                                            themeTransition: false
+                                            text: FontAwesome.times
+
+                                            MouseArea {
+                                                anchors.fill: parent
+                                                cursorShape: Qt.PointingHandCursor
+                                                hoverEnabled: true
+                                                onClicked: {
+                                                    addressInput.text = "";
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                MoneroComponents.LineEditMulti {
+                                    id: addressInput
+                                    KeyNavigation.backtab: index > 0 ? recipientRepeater.itemAt(index - 1).children[1].children[2] : sendButton
+                                    KeyNavigation.tab: parent.parent.children[2]
+                                    Layout.alignment: Qt.AlignVCenter
+                                    Layout.topMargin: recipientLayout.rowSpacing / 2
+                                    Layout.bottomMargin: recipientLayout.rowSpacing / 2
+                                    Layout.fillWidth: true
+                                    addressValidation: true
+                                    borderDisabled: true
+                                    fontColor: error ? MoneroComponents.Style.errorColor : MoneroComponents.Style.defaultFontColor
+                                    fontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                    fontSize: 14
+                                    inputPaddingBottom: 0
+                                    inputPaddingTop: 0
+                                    inputPaddingRight: 0
+                                    placeholderFontFamily: MoneroComponents.Style.fontMonoRegular.name
+                                    placeholderFontSize: 14
+                                    spacing: 0
+                                    wrapMode: Text.WrapAnywhere
+                                    visible: !contactRectangle.visible
+                                    placeholderText: {
+                                        if(persistentSettings.nettype == NetworkType.MAINNET){
+                                            return "4.. / 8.. / OpenAlias";
+                                        } else if (persistentSettings.nettype == NetworkType.STAGENET){
+                                            return "5.. / 7..";
+                                        } else if(persistentSettings.nettype == NetworkType.TESTNET){
+                                            return "9.. / B..";
+                                        }
+                                    }
+                                    onTextChanged: {
+                                        const parsed = walletManager.parse_uri_to_object(text);
+                                        if (!parsed.error) {
+                                            fillPaymentDetails(parsed.address, parsed.payment_id, parsed.amount, parsed.tx_description);
+                                        }
+                                        address = text;
+                                    }
+                                    text: address
+
+                                    MoneroComponents.InlineButton {
+                                        small: true
+                                        text: qsTr("Resolve") + translationManager.emptyString
+                                        visible: TxUtils.isValidOpenAliasAddress(address)
+                                        onClicked: {
+                                            var result = walletManager.resolveOpenAlias(address)
+                                            if (result) {
+                                                var parts = result.split("|")
+                                                if (parts.length == 2) {
+                                                    var address_ok = walletManager.addressValid(parts[1], appWindow.persistentSettings.nettype)
+                                                    if (parts[0] === "true") {
                                                         if (address_ok) {
+                                                            // prepend openalias to description
+                                                            descriptionLine.text = descriptionLine.text ? address + " " + descriptionLine.text : address
+                                                            descriptionCheckbox.checked = true
                                                             recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
-                                                            oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
                                                         }
                                                         else
-                                                        {
-                                                            oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
-                                                        }
+                                                            oa_message(qsTr("No valid address found at this OpenAlias address"))
+                                                    }
+                                                    else if (parts[0] === "false") {
+                                                            if (address_ok) {
+                                                                recipientRepeater.itemAt(index).children[1].children[0].text = parts[1];
+                                                                oa_message(qsTr("Address found, but the DNSSEC signatures could not be verified, so this address may be spoofed"))
+                                                            }
+                                                            else
+                                                            {
+                                                                oa_message(qsTr("No valid address found at this OpenAlias address, but the DNSSEC signatures could not be verified, so this may be spoofed"))
+                                                            }
+                                                    }
+                                                    else {
+                                                        oa_message(qsTr("Internal error"))
+                                                    }
                                                 }
                                                 else {
                                                     oa_message(qsTr("Internal error"))
                                                 }
                                             }
                                             else {
-                                                oa_message(qsTr("Internal error"))
+                                                oa_message(qsTr("No address found"))
                                             }
-                                        }
-                                        else {
-                                            oa_message(qsTr("No address found"))
                                         }
                                     }
                                 }
@@ -437,8 +518,8 @@ Rectangle {
                             }
 
                             MoneroComponents.LineEdit {
-                                KeyNavigation.backtab: parent.children[0]
-                                KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0] : sendButton
+                                KeyNavigation.backtab: parent.children[0].children[1]
+                                KeyNavigation.tab: index + 1 < recipientRepeater.count ? recipientRepeater.itemAt(index + 1).children[1].children[0].children[1] : sendButton
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.topMargin: recipientLayout.rowSpacing / 2
                                 Layout.bottomMargin: recipientLayout.rowSpacing / 2
@@ -1058,11 +1139,35 @@ Rectangle {
     // fires on every page load
     function onPageCompleted() {
         console.log("transfer page loaded")
+        root.updateAddressBookFromModel()
         updateStatus();
     }
 
     //TODO: Add daemon sync status
     //TODO: enable send page when we're connected and daemon is synced
+
+    function updateAddressBookFromModel() {
+        // This function copies the items of `appWindow.currentWallet.addressBookModel` to `root.addressBookModelData`, as a list of javascript objects
+        if(currentWallet == null || typeof currentWallet.history === "undefined" ) return;
+
+        var _model = appWindow.currentWallet.addressBookModel;
+        var total = 0
+        var count = _model.rowCount()
+        root.addressBookModelData = [];
+
+        for (var i = 0; i < count; ++i) {
+            var idx = _model.index(i, 0);
+            var address = _model.data(idx, AddressBookModel.AddressBookAddressRole);
+            var description = _model.data(idx, AddressBookModel.AddressBookDescriptionRole);
+
+            root.addressBookModelData.push({
+                "i": i,
+                "address": address,
+                "description": description
+            });
+        }
+        root.addressBookModelCount = root.addressBookModelData.length;
+    }
 
     function updateStatus() {
         var messageNotConnected = qsTr("Wallet is not connected to daemon.");
