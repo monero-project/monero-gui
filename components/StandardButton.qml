@@ -52,6 +52,9 @@ Item {
         else return 16;
     }
     property alias label: label
+    property alias tooltip: tooltip.text
+    property alias tooltipLeft: tooltip.tooltipLeft
+    property alias tooltipPopup: tooltip.tooltipPopup
     signal clicked()
 
     height: small ?  30 : 36
@@ -161,11 +164,18 @@ Item {
         }
     }
 
+    MoneroComponents.Tooltip {
+        id: tooltip
+        anchors.fill: parent
+    }
+
     MouseArea {
         id: buttonArea
         anchors.fill: parent
         hoverEnabled: true
         onClicked: doClick()
+        onEntered: tooltip.text ? tooltip.tooltipPopup.open() : ""
+        onExited: tooltip.text ? tooltip.tooltipPopup.close() : ""
         cursorShape: Qt.PointingHandCursor
     }
 

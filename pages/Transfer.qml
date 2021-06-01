@@ -277,6 +277,7 @@ Rectangle {
                             fontStyleName: "Solid"
                             fontPixelSize: 18
                             text: FontAwesome.desktop
+                            tooltip: qsTr("Grab QR code from screen") + translationManager.emptyString
                             onClicked: {
                                 clearFields();
                                 const codes = oshelper.grabQrCodesFromScreen();
@@ -295,6 +296,7 @@ Rectangle {
                             fontStyleName: "Solid"
                             text: FontAwesome.qrcode
                             visible: appWindow.qrScannerEnabled
+                            tooltip: qsTr("Scan QR code") + translationManager.emptyString
                             onClicked: {
                                 cameraUi.state = "Capture"
                                 cameraUi.qrcode_decoded.connect(updateFromQrCode)
@@ -304,6 +306,7 @@ Rectangle {
                         MoneroComponents.InlineButton {
                             fontFamily: FontAwesome.fontFamily
                             text: FontAwesome.addressBook
+                            tooltip: qsTr("Import from address book") + translationManager.emptyString
                             onClicked: {
                                 middlePanel.addressBookView.selectAndSend = true;
                                 appWindow.showPageRequest("AddressBook");
@@ -483,12 +486,16 @@ Rectangle {
                                 horizontalAlignment: Text.AlignHCenter
                                 opacity: mouseArea.containsMouse ? 1 : 0.85
                                 text: recipientModel.count == 1 ? FontAwesome.infinity : FontAwesome.times
+                                tooltip: recipientModel.count == 1 ? qsTr("Send all unlocked balance of this account") : qsTr("Remove recipient")  + translationManager.emptyString
+                                tooltipLeft: true
 
                                 MouseArea {
                                     id: mouseArea
                                     anchors.fill: parent
                                     cursorShape: Qt.PointingHandCursor
                                     hoverEnabled: true
+                                    onEntered: parent.tooltipPopup.open()
+                                    onExited: parent.tooltipPopup.close()
                                     onClicked: {
                                         if (recipientModel.count == 1) {
                                             parent.parent.children[2].text = "(all)";

@@ -35,14 +35,19 @@ import "." as MoneroComponents
 
 Rectangle {
     property alias text: tooltip.text
+    property alias tooltipPopup: popup
+    property bool tooltipIconVisible: false
+    property bool tooltipLeft: false
+    property bool tooltipBottom: tooltipIconVisible ? false : true
 
     color: "transparent"
-    height: icon.height
-    width: icon.width
+    height: tooltipIconVisible ? icon.height : parent.height
+    width: tooltipIconVisible ? icon.width : parent.width
     visible: text != ""
 
     Text {
         id: icon
+        visible: tooltipIconVisible
         color: MoneroComponents.Style.orange
         font.family: FontAwesome.fontFamily
         font.pixelSize: 10
@@ -62,8 +67,9 @@ Rectangle {
         }
     }
 
-    Popup {
+    ToolTip {
         id: popup
+        height: tooltip.height + 20
 
         background: Rectangle {
             border.color: MoneroComponents.Style.buttonInlineBackgroundColor
@@ -73,8 +79,20 @@ Rectangle {
         }
         closePolicy: Popup.NoAutoClose
         padding: 10
-        x: icon.x + icon.width
-        y: icon.y - height
+        x: tooltipLeft
+            ? (tooltipIconVisible ? icon.x - icon.width : parent.x - tooltip.width - 20 + parent.width/2)
+            : (tooltipIconVisible ? icon.x + icon.width : parent.x + parent.width/2)
+        y: tooltipBottom
+            ? (tooltipIconVisible ? icon.y + height : parent.y + parent.height + 2)
+            : (tooltipIconVisible ? icon.y - height : parent.y - tooltip.height - 20)
+        enter: Transition {
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 150 }
+        }
+
+        exit: Transition {
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 150 }
+        }
+        delay: 200
 
         RowLayout {
             Text {

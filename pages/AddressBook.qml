@@ -210,6 +210,7 @@ Rectangle {
                                 opacity: 0.5
                                 Layout.preferredWidth: 20
                                 Layout.preferredHeight: 20
+                                tooltip: qsTr("Send to this address") + translationManager.emptyString
                                 onClicked: {
                                     doSend();
                                 }
@@ -222,6 +223,7 @@ Rectangle {
                                 opacity: 0.5
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
+                                tooltip: qsTr("Edit address label") + translationManager.emptyString
 
                                 onClicked: {
                                     addressBookListView.currentIndex = index;
@@ -236,6 +238,7 @@ Rectangle {
                                 Layout.preferredHeight: 21
                                 color: MoneroComponents.Style.defaultFontColor
                                 opacity: 0.5
+                                tooltip: qsTr("Copy address to clipboard") + translationManager.emptyString
 
                                 onClicked: {
                                     console.log("Address copied to clipboard");

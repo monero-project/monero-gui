@@ -203,6 +203,7 @@ Rectangle {
                                 Layout.preferredWidth: 23
                                 Layout.preferredHeight: 21
                                 visible: index !== 0
+                                tooltip: qsTr("Edit address label") + translationManager.emptyString
 
                                 onClicked: {
                                     renameSubaddressLabel(index);
@@ -218,6 +219,7 @@ Rectangle {
                                 opacity: 0.5
                                 Layout.preferredWidth: 16
                                 Layout.preferredHeight: 21
+                                tooltip: qsTr("Copy address to clipboard") + translationManager.emptyString
 
                                 onClicked: {
                                     console.log("Address copied to clipboard");

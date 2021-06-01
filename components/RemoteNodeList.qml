@@ -112,6 +112,8 @@ ColumnLayout {
                         fontFamily: FontAwesome.fontFamily
                         fontPixelSize: 18
                         text: FontAwesome.edit
+                        tooltip: qsTr("Edit remote node") + translationManager.emptyString
+                        tooltipLeft: true
                         onClicked: remoteNodeDialog.edit(remoteNodesModel.get(index), function (remoteNode) {
                             remoteNodesModel.set(index, remoteNode)
                         })
@@ -122,6 +124,8 @@ ColumnLayout {
                         fontFamily: FontAwesome.fontFamily
                         text: FontAwesome.times
                         visible: remoteNodesModel.count > 1
+                        tooltip: qsTr("Remove remote node") + translationManager.emptyString
+                        tooltipLeft: true
                         onClicked: remoteNodesModel.removeSelectNextIfNeeded(index)
                     }
                 }

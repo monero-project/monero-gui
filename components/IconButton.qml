@@ -36,7 +36,14 @@ MoneroEffects.ImageMask {
     color: MoneroComponents.Style.defaultFontColor
     image: ""
 
+    property alias tooltip: tooltip.text
     signal clicked(var mouse)
+
+    MoneroComponents.Tooltip {
+        id: tooltip
+        anchors.fill: parent
+        tooltipLeft: true
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -44,11 +51,13 @@ MoneroEffects.ImageMask {
         cursorShape: Qt.PointingHandCursor
 
         onEntered: {
+            tooltip.text ? tooltip.tooltipPopup.open() : ""
             button.width = button.width + 2
             button.height = button.height + 2
         }
 
         onExited: {
+            tooltip.text ? tooltip.tooltipPopup.close() : ""
             button.width = button.width - 2
             button.height = button.height - 2
         }

@@ -958,6 +958,8 @@ Rectangle {
                                     label.font.family: FontAwesome.fontFamily
                                     fontSize: 18
                                     width: 34
+                                    tooltip: qsTr("Transaction details") + translationManager.emptyString
+                                    tooltipLeft: true
 
                                     MouseArea {
                                         state: "details"
@@ -965,8 +967,14 @@ Rectangle {
                                         hoverEnabled: true
                                         z: parent.z + 1
 
-                                        onEntered: parent.opacity = 0.8;
-                                        onExited: parent.opacity = 1.0;
+                                        onEntered: {
+                                            parent.opacity = 0.8;
+                                            parent.tooltipPopup.open()
+                                        }
+                                        onExited: {
+                                            parent.opacity = 1.0;
+                                            parent.tooltipPopup.close()
+                                        }
                                     }
                                 }
 
@@ -988,6 +996,8 @@ Rectangle {
                                     label.font.family: FontAwesome.fontFamilyBrands
                                     fontSize: 18
                                     width: 34
+                                    tooltip: qsTr("Generate payment proof") + translationManager.emptyString
+                                    tooltipLeft: true
 
                                     MouseArea {
                                         state: "proof"
@@ -995,8 +1005,14 @@ Rectangle {
                                         hoverEnabled: true
                                         z: parent.z + 1
 
-                                        onEntered: parent.opacity = 0.8;
-                                        onExited: parent.opacity = 1.0;
+                                        onEntered: {
+                                            parent.opacity = 0.8;
+                                            parent.tooltipPopup.open()
+                                        }
+                                        onExited: {
+                                            parent.opacity = 1.0;
+                                            parent.tooltipPopup.close()
+                                        }
                                     }
                                 }
                             }
